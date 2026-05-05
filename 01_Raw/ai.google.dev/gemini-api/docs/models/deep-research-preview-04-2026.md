@@ -1,39 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=ja
-fetched_at: 2026-05-05T13:17:33.313641+00:00
-title: "Deep Research \u306e\u30d7\u30ec\u30d3\u30e5\u30fc \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=pt-BR
+fetched_at: 2026-05-05T19:51:14.814778+00:00
+title: "Pr\u00e9via do Deep Research \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/models/Gemini Deep Research) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-- [ホーム](https://ai.google.dev/gemini-api/docs/models/ホーム)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/models/Gemini API)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs/models/ドキュメント)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-フィードバックを送信
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Deep Research のプレビュー
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-複雑な情報を包括的な引用付きレポートに統合する、自律的な複数ステップの調査用に設計された強力なエージェント型リサーチャー。このモデルは、共同プランニング、可視化、MCP サーバー、ファイル検索をサポートしています。Deep Research（スピードと効率重視）と Deep Research Max（包括性重視）の 2 つのバージョンがあります。
+Envie comentários
 
-## ドキュメント
+# Prévia do Deep Research
 
-機能と機能の全容については、[Deep Research](https://ai.google.dev/gemini-api/docs/models/Deep Research) のページをご覧ください。
+Um pesquisador agente avançado criado para investigações autônomas de várias etapas que sintetizam informações complexas em relatórios abrangentes e citados. Esse modelo oferece suporte ao planejamento colaborativo, visualização, servidores MCP e pesquisa de arquivos. Ele está disponível em duas versões: Deep Research para velocidade e eficiência e Deep Research Max para máxima abrangência.
+
+## Documentação
+
+Acesse a página do [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) para conferir a cobertura completa
+de recursos e funcionalidades.
 
 ## deep-research-preview-04-2026
 
-| プロパティ | 説明 |
+| Propriedade | Descrição |
 | --- | --- |
-| id\_cardエージェント コード | **Interactions API**  `deep-research-preview-04-2026` |
-| save でサポートされるデータ型 | **入力**  テキスト、画像、PDF、音声、動画  **出力**  テキスト（引用されたレポート）、画像 |
-| token\_autoトークン上限[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ja) | **入力コンテキスト ウィンドウ**  1,048,576  **出力トークンの上限**  65,536 |
-| 123 バージョン | 詳細については、[モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/models/モデル バージョンのパターン)をご覧ください。  - プレビュー: `deep-research-preview-04-2026` - 最大: `deep-research-max-preview-04-2026` |
-| calendar\_month最終更新日 | 2026 年 4 月 |
+| id\_cardCódigo do agente | **API Interactions**  `deep-research-preview-04-2026` |
+| saveTipos de dados com suporte | **Entrada**  Texto, imagem, PDF, áudio, vídeo  **Saída**  Texto (relatórios citados), imagens |
+| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Janela de contexto de entrada**  1.048.576  **Limite de token de saída**  65.536 |
+| 123Versões | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Visualização: `deep-research-preview-04-2026` - Máx.: `deep-research-max-preview-04-2026` |
+| calendar\_monthAtualização mais recente | Abril de 2026 |
 
-フィードバックを送信
+Envie comentários
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://ai.google.dev/gemini-api/docs/models/クリエイティブ・コモンズの表示 4.0 ライセンス)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://ai.google.dev/gemini-api/docs/models/Apache 2.0 ライセンス)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://ai.google.dev/gemini-api/docs/models/Google Developers サイトのポリシー)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-最終更新日 2026-04-29 UTC。
+Última atualização 2026-04-29 UTC.
 
-ご意見をお聞かせください
+Quer enviar seu feedback?
+
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]

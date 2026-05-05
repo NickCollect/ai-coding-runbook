@@ -1,29 +1,33 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/url-context?hl=zh-CN
-fetched_at: 2026-05-05T13:16:16.459778+00:00
+source_url: https://ai.google.dev/gemini-api/docs/url-context?hl=tr
+fetched_at: 2026-05-05T19:51:51.853057+00:00
 title: "URL context \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/Gemini Deep Research) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
 
-- [首页](https://ai.google.dev/gemini-api/docs/首页)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [文档](https://ai.google.dev/gemini-api/docs/文档)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-发送反馈
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+
+Geri bildirim gönderin
 
 # URL context
 
-借助网址上下文工具，您可以网址的形式向模型提供更多上下文。通过在请求中添加网址，模型将访问这些网页中的内容（只要不是[限制部分](https://ai.google.dev/gemini-api/docs/限制部分)中列出的网址类型），从而为回答提供信息并提高回答质量。
+URL bağlamı aracı, URL'ler şeklinde modellere ek bağlam sağlamanıza olanak tanır. İsteğinize URL'ler ekleyerek model, yanıtını bilgilendirmek ve geliştirmek için bu sayfalardaki içeriğe ([sınırlamalar bölümünde](#limitations) listelenen bir URL türü olmadığı sürece) erişir.
 
-网址上下文工具适用于以下任务：
+URL bağlamı aracı, aşağıdaki gibi görevler için kullanışlıdır:
 
-- **提取数据**：从多个网址中提取价格、名称或关键发现等特定信息。
-- **比较文档**：分析多份报告、文章或 PDF，以找出差异并跟踪趋势。
-- **综合和创建内容**：整合来自多个来源网址的信息，生成准确的摘要、博文或报告。
-- **分析代码和文档**：指向 GitHub 代码库或技术文档，以解释代码、生成设置说明或回答问题。
+- **Veri Ayıklama**: Fiyatlar, adlar veya temel bulgular gibi belirli bilgileri birden fazla URL'den çekin.
+- **Belgeleri Karşılaştırma**: Farklılıkları belirlemek ve trendleri takip etmek için birden fazla raporu, makaleyi veya PDF'yi analiz edin.
+- **İçerik Sentezleme ve Oluşturma**: Doğru özetler, blog yayınları veya raporlar oluşturmak için çeşitli kaynak URL'lerden gelen bilgileri birleştirin.
+- **Kodu ve Dokümanları Analiz Etme**: Kodu açıklamak, kurulum talimatları oluşturmak veya soruları yanıtlamak için bir GitHub deposunu ya da teknik dokümanı işaret edin.
 
-以下示例展示了如何比较来自不同网站的两份食谱。
+Aşağıdaki örnekte, farklı web sitelerindeki iki tarifin nasıl karşılaştırılacağı gösterilmektedir.
 
 ### Python
 
@@ -106,19 +110,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 cat result.json
 ```
 
-## 运作方式
+## İşleyiş şekli
 
-网址上下文工具使用两步检索流程来平衡速度、费用和对最新数据的访问。当您提供网址时，该工具会先尝试从内部索引缓存中提取内容。它充当高度优化的缓存。如果某个网址未编入索引（例如，如果该网址指向的网页是新近发布的），该工具会自动回退到执行实时提取。此工具会直接访问网址，以实时检索其内容。
+URL Bağlamı aracı, hızı, maliyeti ve güncel verilere erişimi dengelemek için iki adımlı bir alma süreci kullanır. Bir URL sağladığınızda araç, önce içeriği dahili bir dizin önbelleğinden getirmeye çalışır. Bu, yüksek düzeyde optimize edilmiş bir önbellek görevi görür. Bir URL dizinde mevcut değilse (ör. çok yeni bir sayfa ise) araç otomatik olarak canlı getirme işlemine geri döner.
+Bu araç, içeriğini gerçek zamanlı olarak almak için doğrudan URL'ye erişir.
 
-## 与其他工具结合使用
+## Diğer araçlarla birlikte kullanma
 
-您可以将网址上下文工具与其他工具结合使用，以创建更强大的工作流。
+Daha güçlü iş akışları oluşturmak için URL bağlamı aracını diğer araçlarla birlikte kullanabilirsiniz.
 
-[Gemini 3 模型](https://ai.google.dev/gemini-api/docs/Gemini 3 模型)支持将内置工具（例如网址上下文）与自定义工具（函数调用）相结合。如需了解详情，请参阅[工具组合](https://ai.google.dev/gemini-api/docs/工具组合)页面。
+[Gemini 3 modelleri](#supported-models), yerleşik araçların (ör. URL bağlamı) özel araçlarla (işlev çağrısı) birleştirilmesini destekler. [Araç kombinasyonları](https://ai.google.dev/gemini-api/docs/tool-combination?hl=tr) sayfasından daha fazla bilgi edinin.
 
-### 依托搜索进行接地
+### Arama ile temellendirme
 
-同时启用网址上下文和[依托 Google 搜索进行接地](https://ai.google.dev/gemini-api/docs/依托 Google 搜索进行接地)后，模型可以使用其搜索功能在网上查找相关信息，然后使用网址上下文工具更深入地了解找到的网页。对于需要广泛搜索和深入分析特定网页的提示，这种方法非常有效。
+Hem URL bağlamı hem de [Google Arama ile temellendirme](https://ai.google.dev/gemini-api/docs/grounding?hl=tr) etkinleştirildiğinde model, internette alakalı bilgiler bulmak için arama özelliklerini kullanabilir ve ardından bulduğu sayfaları daha ayrıntılı bir şekilde anlamak için URL bağlamı aracını kullanabilir. Bu yaklaşım, hem geniş kapsamlı arama hem de belirli sayfaların ayrıntılı analizini gerektiren istemler için oldukça etkilidir.
 
 ### Python
 
@@ -203,11 +208,12 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 cat result.json
 ```
 
-## 了解回答
+## Yanıtı anlama
 
-当模型使用网址上下文工具时，响应会包含 `url_context_metadata` 对象。此对象列出了模型从中检索内容的网址以及每次检索尝试的状态，这有助于进行验证和调试。
+Model, URL bağlamı aracını kullandığında yanıtta bir `url_context_metadata` nesnesi yer alır. Bu nesne, modelin içerik aldığı URL'leri ve her alma denemesinin durumunu listeler. Bu bilgiler, doğrulama ve hata ayıklama için yararlıdır.
 
-以下是该部分回答的示例（为简洁起见，省略了部分回答）：
+Aşağıda, yanıtın bu bölümüne ilişkin bir örnek verilmiştir
+(yanıtın bazı bölümleri, kısa olması için çıkarılmıştır):
 
 ```
 {
@@ -239,15 +245,16 @@ cat result.json
 }
 ```
 
-如需详细了解此对象，请参阅 [`UrlContextMetadata` API 参考文档](https://ai.google.dev/gemini-api/docs/`UrlContextMetadata` API 参考文档)。
+Bu nesneyle ilgili tüm ayrıntılar için [`UrlContextMetadata` API referansı](https://ai.google.dev/api/generate-content?hl=tr#UrlContextMetadata) bölümüne bakın.
 
-### 安全检查
+### Güvenlik kontrolleri
 
-系统会对网址进行内容审核检查，以确认其符合安全标准。如果您提供的网址未通过此检查，您将收到 `URL_RETRIEVAL_STATUS_UNSAFE` 的 `url_retrieval_status`。
+Sistem, URL'de içerik denetimi yaparak güvenlik standartlarına uygun olup olmadığını kontrol eder. Sağladığınız URL bu denetimi geçemezse `url_retrieval_status` `URL_RETRIEVAL_STATUS_UNSAFE` hatası alırsınız.
 
-### Token 计数
+### Jeton sayısı
 
-从您在提示中指定的网址检索到的内容会作为输入 token 的一部分进行统计。您可以在模型输出的 [`usage_metadata`](https://ai.google.dev/gemini-api/docs/`usage_metadata`) 对象中查看提示和工具使用的 token 数量。以下是输出示例：
+İsteminizde belirttiğiniz URL'lerden alınan içerik, giriş jetonları kapsamında sayılır. İsteminizin jeton sayısını ve araç kullanımını model çıkışının [`usage_metadata`](https://ai.google.dev/api/generate-content?hl=tr#UsageMetadata)
+nesnesinde görebilirsiniz. Aşağıda örnek bir çıkış verilmiştir:
 
 ```
 'usage_metadata': {
@@ -263,57 +270,60 @@ cat result.json
   }
 ```
 
-每个令牌的价格取决于所用模型，详情请参阅[价格](https://ai.google.dev/gemini-api/docs/价格)页面。
+Jeton başına fiyat, kullanılan modele bağlıdır. Ayrıntılar için [fiyatlandırma](https://ai.google.dev/gemini-api/docs/pricing?hl=tr) sayfasına bakın.
 
-## 支持的模型
+## Desteklenen modeller
 
-| 模型 | 网址上下文 |
+| Model | URL Bağlamı |
 | --- | --- |
-| [Gemini 3.1 Pro 预览版](https://ai.google.dev/gemini-api/docs/Gemini 3.1 Pro 预览版) | ✔️ |
-| [Gemini 3.1 Flash-Lite 预览版](https://ai.google.dev/gemini-api/docs/Gemini 3.1 Flash-Lite 预览版) | ✔️ |
-| [Gemini 3 Flash 预览版](https://ai.google.dev/gemini-api/docs/Gemini 3 Flash 预览版) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/Gemini 2.5 Pro) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/Gemini 2.5 Flash) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/Gemini 2.5 Flash-Lite) | ✔️ |
+| [Gemini 3.1 Pro Önizlemesi](https://ai.google.dev/gemini-api/docs/gemini-3.1-pro-preview?hl=tr) | ✔️ |
+| [Gemini 3.1 Flash-Lite Önizlemesi](https://ai.google.dev/gemini-api/docs/gemini-3.1-flash-lite-preview?hl=tr) | ✔️ |
+| [Gemini 3 Flash Önizlemesi](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=tr) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=tr) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=tr) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=tr) | ✔️ |
 
-## 最佳做法
+## En İyi Uygulamalar
 
-- **提供具体网址**：为获得最佳结果，请提供您希望模型分析的内容的直接网址。模型只会从您提供的网址中检索内容，而不会从嵌套链接中检索任何内容。
-- **检查可访问性**：验证您提供的网址是否不会指向需要登录或位于付费墙后面的网页。
-- **使用完整网址**：提供完整网址，包括协议（例如，https://www.google.com 而不是仅提供 google.com）。
+- **Belirli URL'ler sağlama**: En iyi sonuçları elde etmek için modelin analiz etmesini istediğiniz içeriğe doğrudan URL'ler sağlayın. Model yalnızca sağladığınız URL'lerden içerik alır, yerleştirilmiş bağlantılardaki içerikleri almaz.
+- **Erişilebilirliği kontrol edin**: Sağladığınız URL'lerin, giriş yapılması gereken veya ödeme duvarının arkasında olan sayfalara yönlendirmediğini doğrulayın.
+- **Tam URL'yi kullanın**: Protokolü de dahil ederek tam URL'yi girin (ör. yalnızca google.com yerine https://www.google.com).
 
-## 限制
+## Sınırlamalar
 
-- 函数调用：目前不支持将工具使用（网址上下文、依托 Google 搜索进行接地等）与函数调用搭配使用。
-- 请求限制：该工具每次请求最多可处理 20 个网址。
-- 网址内容大小：从单个网址检索的内容大小上限为 34MB。
-- 公开可访问性：网址必须可在网络上公开访问。
-  不支持本地主机地址（例如，localhost、127.0.0.1）、专用网络和隧道服务（例如，ngrok、pinggy）。
-- 仅限 Gemini API：网址上下文仅在 Gemini API 中提供，无法通过 Gemini Enterprise Agent Platform 使用。
+- İşlev çağırma: İşlev çağırma ile araç kullanımı (URL bağlamı, Google Arama ile temellendirme vb.) şu anda desteklenmemektedir.
+- İstek sınırı: Araç, istek başına en fazla 20 URL işleyebilir.
+- URL içerik boyutu: Tek bir URL'den alınan içeriklerin maksimum boyutu 34 MB'tır.
+- Herkese açık erişim: URL'ler web'de herkesin erişimine açık olmalıdır.
+  Localhost adresleri (ör. localhost, 127.0.0.1), özel ağlar ve tünel oluşturma hizmetleri (ör. ngrok, pinggy) desteklenmez.
+- Yalnızca Gemini API: URL bağlamı, Gemini Enterprise Ajan Platformu üzerinden değil, yalnızca Gemini API'de kullanılabilir.
 
-### 支持和不支持的内容类型
+### Desteklenen ve desteklenmeyen içerik türleri
 
-该工具可以从具有以下内容类型的网址中提取内容：
+Araç, aşağıdaki içerik türlerine sahip URL'lerden içerik ayıklayabilir:
 
-- 文本（text/html、application/json、text/plain、text/xml、text/css、text/javascript、text/csv、text/rtf）
-- 图片（image/png、image/jpeg、image/bmp、image/webp）
+- Metin (text/html, application/json, text/plain, text/xml, text/css,
+  text/javascript , text/csv, text/rtf)
+- Resim (image/png, image/jpeg, image/bmp, image/webp)
 - PDF (application/pdf)
 
-以下内容类型**不**受支持：
+Aşağıdaki içerik türleri **desteklenmez**:
 
-- 付费内容
-- YouTube 视频（请参阅[视频理解](https://ai.google.dev/gemini-api/docs/视频理解)，了解如何处理 YouTube 网址）
-- Google Workspace 文件，例如 Google 文档或电子表格
-- 视频和音频文件
+- Ödeme duvarlı içerik
+- YouTube videoları (YouTube URL'lerinin nasıl işleneceğini öğrenmek için [video anlama](https://ai.google.dev/gemini-api/docs/video-understanding?hl=tr#youtube) bölümüne bakın)
+- Google Dokümanları veya e-tablolar gibi Google Workspace dosyaları
+- Video ve ses dosyaları
 
-## 后续步骤
+## Sırada ne var?
 
-- 如需查看更多示例，请参阅 [网址 上下文实用指南](https://ai.google.dev/gemini-api/docs/网址 上下文实用指南)。
+- Daha fazla örnek için [URL bağlamı yemek kitabını](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Grounding.ipynb?hl=tr#url-context) inceleyin.
 
-发送反馈
+Geri bildirim gönderin
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://ai.google.dev/gemini-api/docs/知识共享署名 4.0 许可)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://ai.google.dev/gemini-api/docs/Apache 2.0 许可)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://ai.google.dev/gemini-api/docs/Google 开发者网站政策)。Java 是 Oracle 和/或其关联公司的注册商标。
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-最后更新时间 (UTC)：2026-04-29。
+Son güncelleme tarihi: 2026-04-29 UTC.
 
-需要向我们提供更多信息？
+Bize geri bildirimde bulunmak mı istiyorsunuz?
+
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]

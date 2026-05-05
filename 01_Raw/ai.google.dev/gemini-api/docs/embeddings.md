@@ -1,28 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/embeddings?hl=ja
-fetched_at: 2026-05-05T13:13:32.381529+00:00
-title: "\u30a8\u30f3\u30d9\u30c7\u30a3\u30f3\u30b0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/embeddings?hl=fr
+fetched_at: 2026-05-05T19:43:56.125430+00:00
+title: "Embeddings \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/Gemini Deep Research) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
 
-- [ホーム](https://ai.google.dev/gemini-api/docs/ホーム)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs/ドキュメント)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-フィードバックを送信
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# エンベディング
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Gemini API は、テキスト、画像、動画などのコンテンツのエンベディングを生成するエンベディング モデルを提供します。これらのエンベディングは、セマンティック検索、分類、クラスタリングなどのタスクに使用できます。キーワード ベースのアプローチよりも正確で、コンテキストを認識した結果が得られます。
+Envoyer des commentaires
 
-最新のモデル `gemini-embedding-2` は、Gemini API の最初のマルチモーダル エンベディング モデルです。テキスト、画像、動画、音声、ドキュメントを統合されたエンベディング空間にマッピングし、100 以上の言語でクロスモーダル検索、分類、クラスタリングを可能にします。詳しくは、[マルチモーダル エンベディングのセクション](https://ai.google.dev/gemini-api/docs/マルチモーダル エンベディングのセクション)をご覧ください。テキストのみのユースケースでは、`gemini-embedding-001` は引き続き使用できます。
+# Embeddings
 
-検索拡張生成（RAG）システムの構築は、AI プロダクトの一般的なユースケースです。エンベディングは、事実の正確性、一貫性、コンテキストの豊富さを向上させ、モデルの出力を大幅に強化するうえで重要な役割を果たします。マネージド RAG ソリューションを使用する場合は、RAG の管理を容易にし、費用対効果を高める [ファイル検索](https://ai.google.dev/gemini-api/docs/ファイル検索)ツールをご利用ください。
+L'API Gemini propose des modèles d'embedding pour générer des embeddings pour du texte, des images, des vidéos et d'autres contenus. Les embeddings obtenus peuvent ensuite être utilisés pour des tâches telles que la recherche sémantique, la classification et le clustering. Ils fournissent des résultats plus précis et plus adaptés au contexte que les approches basées sur les mots clés.
 
-## エンベディングの生成
+Le dernier modèle, `gemini-embedding-2`, est le premier modèle d'embedding multimodal de l'API Gemini. Il mappe le texte, les images, les vidéos, l'audio et les documents dans un espace d'embedding unifié, ce qui permet la recherche, la classification et le clustering cross-modal dans plus de 100 langues. Pour en savoir plus, consultez la section [Embeddings multimodaux](#multimodal). Pour les cas d'utilisation uniquement basés sur du texte, `gemini-embedding-001` reste disponible.
 
-`embedContent` メソッドを使用してテキスト エンベディングを生成します。
+La création de systèmes de génération augmentée par récupération (RAG) est un cas d'utilisation courant pour les produits d'IA. Les embeddings jouent un rôle clé dans l'amélioration significative des résultats des modèles, en offrant une meilleure précision factuelle, une meilleure cohérence et une meilleure richesse contextuelle. Si vous préférez utiliser une solution RAG gérée, nous avons créé l'outil [Recherche de fichiers](https://ai.google.dev/gemini-api/docs/file-search?hl=fr), qui facilite la gestion et réduit les coûts du RAG.
+
+## Générer des embeddings
+
+Utilisez la méthode `embedContent` pour générer des embeddings de texte :
 
 ### Python
 
@@ -116,28 +120,28 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-## パフォーマンスを改善するためにタスクタイプを指定する
+## Spécifier le type de tâche pour améliorer les performances
 
-エンベディングは、分類からドキュメント検索まで、幅広いタスクに使用できます。適切なタスクタイプを指定すると、目的の関係に合わせてエンベディングを最適化し、精度と効率を最大限に高めることができます。
+Vous pouvez utiliser des embeddings pour un large éventail de tâches, de la classification à la recherche de documents. Spécifier le bon type de tâche permet d'optimiser les embeddings pour les relations souhaitées, ce qui maximise la précision et l'efficacité.
 
-### Embeddings 2 を使用するタスクタイプ
+### Types de tâches avec Embeddings 2
 
-`gemini-embedding-2` を使用するテキストのみのタスクでは、プロンプトにタスクの指示を追加することを強くおすすめします。これを行うには、クエリとドキュメントを正しいタスク接頭辞でフォーマットします。
+Pour les tâches textuelles avec `gemini-embedding-2`, nous vous recommandons vivement d'ajouter les instructions de la tâche dans votre requête. Pour ce faire, mettez en forme la requête et le document avec le préfixe de tâche approprié.
 
-次の表は、`gemini-embedding-2` モデルを使用して対称ユースケースと非対称ユースケースのクエリとドキュメントの形式を設定する方法の例を示しています。
+Les tableaux suivants montrent des exemples de mise en forme des requêtes et des documents pour les cas d'utilisation symétriques et asymétriques à l'aide du modèle `gemini-embedding-2`.
 
-**検索のユースケース（非対称形式）**
+**Cas d'utilisation de la récupération (format asymétrique)**
 
-非対称のユースケースでは、クエリにタスク接頭辞を追加し、埋め込んで取得するコンテンツにドキュメント構造を適用します。
+Dans les cas d'utilisation asymétriques, ajoutez le préfixe de la tâche à la requête et appliquez la structure du document pour le contenu que vous souhaitez intégrer et récupérer.
 
-| ユースケース | クエリの構造 | ドキュメント構造 |
+| Cas d'utilisation | Structure d'une requête | Structure du document |
 | --- | --- | --- |
-| 検索クエリ | `task: search result | query: {content}` | `title: {title} | text: {content}` タイトルがない場合は、`title: none` を使用します。 |
-| 質問応答 | `task: question answering | query: {content}` | `title: {title} | text: {content}` |
-| ファクト チェック | `task: fact checking | query: {content}` | `title: {title} | text: {content}` |
-| コードの取得 | `task: code retrieval | query: {content}` | `title: {title} | text: {content}` |
+| Requête de recherche | `task: search result | query: {content}` | `title: {title} | text: {content}` S'il n'y a pas de titre, utilisez `title: none`. |
+| Systèmes de questions-réponses | `task: question answering | query: {content}` | `title: {title} | text: {content}` |
+| Fact-checking | `task: fact checking | query: {content}` | `title: {title} | text: {content}` |
+| Récupération du code | `task: code retrieval | query: {content}` | `title: {title} | text: {content}` |
 
-**使用例**
+**Exemple d'utilisation**
 
 ### Python
 
@@ -156,17 +160,17 @@ def prepare_document(content, title=None):
     return f"title: {title} | text: {content}"
 ```
 
-**単一入力のユースケース（対称形式）**
+**Cas d'utilisation à entrée unique (format symétrique)**
 
-対称的なユースケースでは、同じタスクに対して、クエリとドキュメントに同じ形式を使用します。
+Dans les cas d'utilisation symétriques, utilisez le même format pour la requête et le document pour une même tâche.
 
-| ユースケース | 入力構造 |
+| Cas d'utilisation | Structure d'entrée |
 | --- | --- |
-| 分類 | `task: classification | query: {content}` |
-| クラスタリング | `task: clustering | query: {content}` |
-| 意味的類似度 | `task: sentence similarity | query: {content}` 検索や取得には使用しないでください。これは、意味的テキスト類似性を目的としています。 |
+| Classification | `task: classification | query: {content}` |
+| Clustering | `task: clustering | query: {content}` |
+| Similarité sémantique | `task: sentence similarity | query: {content}` Ne pas utiliser pour la recherche ou la récupération. Elle est destinée à la similarité textuelle sémantique. |
 
-**使用例**
+**Exemple d'utilisation**
 
 ### Python
 
@@ -178,13 +182,13 @@ def prepare_query_and_document(content):
     return f'task: classification | query: {content}'
 ```
 
-タスクを一貫して使用することが重要です。たとえば、ドキュメントが `f'task: classification | query: {content}'` でエンベディングされている場合、クエリもこのタスク形式に従ってエンベディングする必要があります。
+Il est important que la tâche soit utilisée de manière cohérente. Par exemple, si les documents sont intégrés avec `f'task: classification | query: {content}'`, la requête doit également être intégrée en suivant ce format de tâche.
 
-### Embeddings 1 を使用するタスクタイプ
+### Types de tâches avec Embeddings 1
 
-`gemini-embedding-001` の場合、`embedContent` メソッドで `task_type` を指定できます。サポートされているタスクタイプの完全なリストについては、[サポートされているタスクタイプ](https://ai.google.dev/gemini-api/docs/サポートされているタスクタイプ)の表をご覧ください。
+Pour `gemini-embedding-001`, vous pouvez spécifier `task_type` dans la méthode `embedContent`. Pour obtenir la liste complète des types de tâches acceptés, consultez le tableau [Types de tâches acceptés](#supported-task-types).
 
-次の例は、`SEMANTIC_SIMILARITY` を使用してテキスト文字列の意味がどの程度類似しているかを確認する方法を示しています。
+L'exemple suivant montre comment utiliser `SEMANTIC_SIMILARITY` pour vérifier la similarité sémantique de chaînes de texte.
 
 ### Python
 
@@ -346,28 +350,28 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-0
     }'
 ```
 
-コード スニペットを実行すると、テキストの各チャンクが互いにどの程度類似しているかがわかります。
+Les extraits de code montreront à quel point les différents blocs de texte sont similaires les uns aux autres lorsqu'ils sont exécutés.
 
-#### サポートされているタスクの種類
+#### Types de tâches compatibles
 
-`gemini-embedding-001` でサポートされているタスクの種類:
+Types de tâches compatibles avec `gemini-embedding-001` :
 
-| Task type | 説明 | 例 |
+| Type de tâche | Description | Exemples |
 | --- | --- | --- |
-| **SEMANTIC\_SIMILARITY** | テキストの類似性を評価するために最適化されたエンベディング。 | レコメンデーション システム、重複検出 |
-| **分類** | 事前設定されたラベルに従ってテキストを分類するように最適化されたエンベディング。 | 感情分析、スパム検出 |
-| **クラスタリング** | 類似性に基づいてテキストをクラスタ化するように最適化されたエンベディング。 | ドキュメントの整理、市場調査、異常検出 |
-| **RETRIEVAL\_DOCUMENT** | ドキュメント検索用に最適化されたエンベディング。 | 検索用に記事、書籍、ウェブページをインデックス登録する。 |
-| **RETRIEVAL\_QUERY** | 一般的な検索クエリ用に最適化されたエンベディング。クエリには `RETRIEVAL_QUERY` を使用し、取得するドキュメントには `RETRIEVAL_DOCUMENT` を使用します。 | カスタム検索 |
-| **CODE\_RETRIEVAL\_QUERY** | 自然言語クエリに基づいてコードブロックを取得するために最適化されたエンベディング。クエリには `CODE_RETRIEVAL_QUERY`、取得するコードブロックには `RETRIEVAL_DOCUMENT` を使用します。 | コードの候補と検索 |
-| **QUESTION\_ANSWERING** | 質問応答システムにおける質問のエンベディング。質問への回答となるドキュメントを見つけるために最適化されています。質問には `QUESTION_ANSWERING` を使用し、取得するドキュメントには `RETRIEVAL_DOCUMENT` を使用します。 | チャットボックス |
-| **FACT\_VERIFICATION** | 検証が必要なステートメントのエンベディング。ステートメントを裏付ける証拠または反論する証拠を含むドキュメントの取得に最適化されています。ターゲット テキストには `FACT_VERIFICATION` を使用し、取得するドキュメントには `RETRIEVAL_DOCUMENT` を使用します。 | 自動ファクト チェック システム |
+| **SEMANTIC\_SIMILARITY** | Embeddings optimisés pour évaluer la similitude de texte. | Systèmes de recommandation, détection des doublons |
+| **CLASSIFICATION** | Embeddings optimisés pour classer des textes en fonction d'étiquettes prédéfinies. | Analyse des sentiments, détection du spam |
+| **CLUSTERING** | Embeddings optimisés pour regrouper des textes en fonction de leurs similitudes. | Organisation de documents, études de marché, détection d'anomalies |
+| **RETRIEVAL\_DOCUMENT** | Embeddings optimisés pour la recherche de documents. | Indexation d'articles, de livres ou de pages Web pour la recherche. |
+| **RETRIEVAL\_QUERY** | Embeddings optimisés pour les requêtes de recherche générales. Utilisez `RETRIEVAL_QUERY` pour les requêtes et `RETRIEVAL_DOCUMENT` pour les documents à récupérer. | Tests personnalisés sur le Réseau de Recherche |
+| **CODE\_RETRIEVAL\_QUERY** | Embeddings optimisés pour la récupération de blocs de code en fonction de requêtes en langage naturel. Utilisez `CODE_RETRIEVAL_QUERY` pour les requêtes et `RETRIEVAL_DOCUMENT` pour les blocs de code à récupérer. | Suggestions de code et recherche |
+| **QUESTION\_ANSWERING** | Embeddings pour les questions dans un système de questions-réponses, optimisés pour trouver les documents qui répondent à la question. Utilisez `QUESTION_ANSWERING` pour les questions et `RETRIEVAL_DOCUMENT` pour les documents à récupérer. | Chatbox |
+| **FACT\_VERIFICATION** | Embeddings pour les déclarations à valider, optimisés pour récupérer les documents contenant des preuves qui soutiennent ou réfutent la déclaration. Utilisez `FACT_VERIFICATION` pour le texte cible et `RETRIEVAL_DOCUMENT` pour les documents à récupérer. | Systèmes de fact-checking automatisés |
 
-## エンベディング サイズの制御
+## Contrôler la taille de l'intégration
 
-`gemini-embedding-001` と `gemini-embedding-2` はどちらも、Matryoshka Representation Learning（MRL）手法を使用してトレーニングされます。この手法では、同じデータの有用でよりシンプルなバージョンである初期セグメント（またはプレフィックス）を持つ高次元のエンベディングを学習するようにモデルをトレーニングします。
+`gemini-embedding-001` et `gemini-embedding-2` sont tous deux entraînés à l'aide de la technique d'apprentissage de la représentation Matryoshka (MRL, Matryoshka Representation Learning), qui apprend à un modèle à apprendre des embeddings de grande dimension dont les segments initiaux (ou préfixes) sont également des versions plus simples et utiles des mêmes données.
 
-`output_dimensionality` パラメータを使用して、出力エンベディング ベクトルのサイズを制御します。出力の次元数を小さくすると、ストレージ スペースを節約し、ダウンストリーム アプリケーションの計算効率を高めることができます。品質の低下はわずかです。デフォルトでは、どちらのモデルも 3,072 次元のエンベディングを出力しますが、品質を損なうことなくサイズを小さくして、ストレージ スペースを節約できます。出力ディメンションには 768、1536、3072 を使用することをおすすめします。
+Utilisez le paramètre `output_dimensionality` pour contrôler la taille du vecteur d'embedding de sortie. En sélectionnant une dimensionnalité de sortie plus petite, vous pouvez économiser de l'espace de stockage et augmenter l'efficacité des calculs pour les applications en aval, tout en sacrifiant peu de qualité. Par défaut, les deux modèles génèrent un embedding de 3 072 dimensions, mais vous pouvez le tronquer à une taille plus petite sans perdre en qualité pour économiser de l'espace de stockage. Nous vous recommandons d'utiliser des dimensions de sortie de 768, 1 536 ou 3 072.
 
 ### Python
 
@@ -464,17 +468,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-emb
     }'
 ```
 
-コード スニペットからの出力例:
+Exemple de résultat de l'extrait de code :
 
 ```
 Length of embedding: 768
 ```
 
-## 小さいサイズの品質を確保する
+## Garantir la qualité pour les dimensions plus petites
 
-デフォルトの 3,072 次元エンベディングは常に正規化されますが、Gemini Embedding 2 では、切り捨てられた次元（768、1,536 など）も自動的に正規化されます。これにより、セマンティック類似性が大きさではなくベクトルの方向で計算されるため、より正確な結果がすぐに得られます。
+Alors que les embeddings de dimension 3072 par défaut sont toujours normalisés, Gemini Embedding 2 normalise également automatiquement les dimensions tronquées (par exemple, 768, 1536). Cela garantit que la similarité sémantique est calculée à l'aide de la direction du vecteur plutôt que de son amplitude, ce qui permet d'obtenir des résultats plus précis prêts à l'emploi.
 
-**古いモデル**: `gemini-embedding-001` を使用している場合は、3, 072 以外のディメンションを次のように手動で正規化する必要があります。
+**Anciens modèles** : si vous utilisez `gemini-embedding-001`, vous devez normaliser manuellement les dimensions non 3072 comme suit :
 
 ### Python
 
@@ -490,45 +494,45 @@ print(f"Normed embedding length: {len(normed_embedding)}")
 print(f"Norm of normed embedding: {np.linalg.norm(normed_embedding):.6f}") # Should be very close to 1
 ```
 
-このコード スニペットの出力例:
+Exemple de résultat de cet extrait de code :
 
 ```
 Normed embedding length: 768
 Norm of normed embedding: 1.000000
 ```
 
-次の表に、さまざまなディメンションの MTEB スコアを示します。MTEB スコアは、エンベディングで一般的に使用されるベンチマークです。特に、結果は、パフォーマンスがエンベディング ディメンションのサイズに厳密に結び付いていないことを示しています。ディメンションが小さい場合でも、ディメンションが大きい場合と同等のスコアを達成しています。
+Le tableau suivant présente les scores MTEB, un benchmark couramment utilisé pour les embeddings, pour différentes dimensions. Le résultat montre notamment que les performances ne sont pas strictement liées à la taille de la dimension d'intégration, les dimensions inférieures obtenant des scores comparables à ceux de leurs homologues de dimension supérieure.
 
-| MRL ディメンション | MTEB スコア（Gemini Embedding 001） |
+| Dimension MRL | Score MTEB (Gemini Embedding 001) |
 | --- | --- |
 | 2048 | 68.16 |
 | 1536 | 68.17 |
 | 768 | 67.99 |
-| 512 | 67.55 |
-| 256 | 66.19 |
+| 512 | 67,55 |
+| 256 | 66,19 |
 | 128 | 63.31 |
 
-## マルチモーダル エンベディング
+## Embeddings multimodaux
 
-`gemini-embedding-2` モデルはマルチモーダル入力をサポートしているため、テキストとともに画像、動画、音声、ドキュメントのコンテンツを埋め込むことができます。すべてのモダリティが同じエンベディング空間にマッピングされるため、クロスモーダル検索と比較が可能になります。
+Le modèle `gemini-embedding-2` accepte les entrées multimodales, ce qui vous permet d'intégrer des images, des vidéos, des contenus audio et des documents en plus du texte. Toutes les modalités sont mappées dans le même espace d'embedding, ce qui permet la recherche et la comparaison intermodales.
 
-### サポートされているモダリティと制限事項
+### Modalités et limites acceptées
 
-入力トークンの全体的な最大上限は 8,192 トークンです。
+La limite globale maximale de jetons d'entrée est de 8 192 jetons.
 
-| モダリティ | 仕様と制限事項 |
+| Modalité | Spécifications et limites |
 | --- | --- |
-| **テキスト** | 最大 8,192 個のトークンをサポートします。 |
-| **画像** | リクエストごとに最大 6 枚の画像。サポートされている形式: PNG、JPEG。 |
-| **音声** | 最大再生時間は 180 秒です。サポートされている形式: MP3、WAV。 |
-| **動画** | 最大再生時間は 120 秒です。サポートされている形式: MP4、MOV。サポートされているコーデック: H264、H265、AV1、VP9。  システムは、動画あたり最大 32 フレームを処理します。短い動画（≤32 秒）は 1 fps でサンプリングされ、長い動画は 32 フレームに均一にサンプリングされます。動画ファイルでは音声トラックは処理されません。 |
-| **ドキュメント（PDF）** | 最大 6 ページ。 |
+| **Texte** | Il accepte jusqu'à 8 192 jetons. |
+| **Image** | Six images maximum par requête. Formats acceptés : PNG, JPEG. |
+| **Audio** | Durée maximale de 180 secondes. Formats compatibles : MP3, WAV. |
+| **Vidéo** | Durée maximale de 120 secondes. Formats acceptés : MP4, MOV. Codecs compatibles : H264, H265, AV1, VP9.  Le système traite un maximum de 32 images par vidéo : les vidéos courtes (≤ 32 s) sont échantillonnées à 1 FPS, tandis que les vidéos plus longues sont échantillonnées de manière uniforme à 32 images. Les pistes audio ne sont pas traitées dans les fichiers vidéo. |
+| **Documents (PDF)** | Six pages maximum. |
 
-### 画像を埋め込む
+### Intégrer des images
 
-次の例は、`gemini-embedding-2` を使用して画像を埋め込む方法を示しています。
+L'exemple suivant montre comment intégrer une image à l'aide de `gemini-embedding-2`.
 
-画像は、インライン データとして、または [Files API](https://ai.google.dev/gemini-api/docs/Files API) を介してアップロードされたファイルとして提供できます。
+Les images peuvent être fournies sous forme de données intégrées ou de fichiers importés via l'[API Files](https://ai.google.dev/gemini-api/docs/files?hl=fr).
 
 ### Python
 
@@ -602,15 +606,15 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### エンベディングの集計
+### Agrégation d'embeddings
 
-マルチモーダル コンテンツを扱う場合、入力の構造はエンベディング出力に影響します。
+Lorsque vous travaillez avec du contenu multimodal, la façon dont vous structurez votre entrée affecte la sortie d'embedding :
 
-- **複数の部分（集約）:** 複数の入力を `contents` パラメータに直接追加すると、すべての入力に対して 1 つの集約エンベディングが生成されます。
-- **複数の `Content` オブジェクト（個別）:** 各入力を `Content` オブジェクトでラップし、`contents` パラメータで渡すと、エントリごとに個別のエンベディングが返されます。
-- **投稿レベルの表現:** 複数のメディア アイテムを含むソーシャル メディア投稿などの複雑なオブジェクトの場合は、個別のエンベディングを（平均化するなどして）集約し、一貫性のある投稿レベルの表現を作成することをおすすめします。
+- **Plusieurs parties (agrégées)** : l'ajout de plusieurs entrées directement au paramètre `contents` produit un embedding agrégé pour toutes les entrées.
+- **Plusieurs objets `Content` (séparés)** : en encapsulant chaque entrée dans un objet `Content` et en les transmettant dans le paramètre `contents`, des embeddings distincts sont renvoyés pour chaque entrée.
+- **Représentation au niveau du post** : pour les objets complexes tels que les posts sur les réseaux sociaux comportant plusieurs éléments multimédias, nous vous recommandons d'agréger des embeddings distincts (par exemple, en les moyennant) afin de créer une représentation cohérente au niveau du post.
 
-次の例は、テキスト入力と画像入力に対して 1 つの集約エンベディングを作成する方法を示しています。`contents` パラメータに複数の入力を追加するだけです。
+L'exemple suivant montre comment créer un embedding agrégé pour les entrées de texte et d'image. Il vous suffit d'ajouter plusieurs entrées au paramètre `contents` :
 
 ### Python
 
@@ -696,7 +700,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-一方、`contents` パラメータ内で `Content` オブジェクトを使用すると、個別のエンベディングが返されます。この例では、1 回のエンベディング呼び出しで複数のエンベディングを作成します。
+En revanche, si vous utilisez des objets `Content` dans le paramètre `contents`, il renvoie des embeddings distincts. Cet exemple crée plusieurs embeddings en un seul appel d'embedding :
 
 ### Python
 
@@ -787,11 +791,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### 音声を埋め込む
+### Intégrer de l'audio
 
-次の例は、`gemini-embedding-2` を使用して音声ファイルを埋め込む方法を示しています。
+L'exemple suivant montre comment intégrer un fichier audio à l'aide de `gemini-embedding-2`.
 
-音声ファイルは、インライン データとして提供することも、[Files API](https://ai.google.dev/gemini-api/docs/Files API) を介してアップロードされたファイルとして提供することもできます。
+Les fichiers audio peuvent être fournis sous forme de données intégrées ou de fichiers importés via l'[API Files](https://ai.google.dev/gemini-api/docs/files?hl=fr).
 
 ### Python
 
@@ -865,11 +869,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### 動画の埋め込み
+### Intégrer une vidéo
 
-次の例は、`gemini-embedding-2` を使用して動画を埋め込む方法を示しています。
+L'exemple suivant montre comment intégrer une vidéo à l'aide de `gemini-embedding-2`.
 
-動画は、インライン データとして提供することも、[Files API](https://ai.google.dev/gemini-api/docs/Files API) を介してアップロードされたファイルとして提供することもできます。
+Les vidéos peuvent être fournies sous forme de données intégrées ou de fichiers importés via l'[API Files](https://ai.google.dev/gemini-api/docs/files?hl=fr).
 
 ### Python
 
@@ -943,13 +947,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-120 秒を超える動画を埋め込む必要がある場合は、動画を重複するセグメントに分割し、それらのチャンクを個別に埋め込むことができます。
+Si vous devez intégrer des vidéos de plus de 120 secondes, vous pouvez les découper en segments qui se chevauchent et intégrer ces segments individuellement.
 
-### ドキュメントのエンベディング
+### Intégrer des documents
 
-PDF 形式のドキュメントを直接埋め込むことができます。モデルは、各ページのビジュアル コンテンツとテキスト コンテンツを処理します。
+Les documents au format PDF peuvent être intégrés directement. Le modèle traite le contenu visuel et textuel de chaque page.
 
-PDF は、インライン データとして、または [Files API](https://ai.google.dev/gemini-api/docs/Files API) を介してアップロードされたファイルとして提供できます。
+Les fichiers PDF peuvent être fournis sous forme de données intégrées ou de fichiers importés via l'[API Files](https://ai.google.dev/gemini-api/docs/files?hl=fr).
 
 ### Python
 
@@ -1023,88 +1027,91 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-## ユースケース
+## Cas d'utilisation
 
-テキスト エンベディングは、次のような一般的な AI のユースケースで重要です。
+Les embeddings de texte sont essentiels pour de nombreux cas d'utilisation courants de l'IA, tels que :
 
-- **検索拡張生成（RAG）:** エンベディングは、関連情報を取得してモデルのコンテキストに組み込むことで、生成されたテキストの品質を高めます。
-- **情報検索:** 入力テキストが与えられたときに、意味的に最も類似したテキストまたはドキュメントを検索します。
+- **Génération augmentée par récupération (RAG)** : les embeddings améliorent la qualité du texte généré en récupérant et en intégrant des informations pertinentes dans le contexte d'un modèle.
+- **Récupération d'informations** : recherchez le texte ou les documents les plus similaires d'un point de vue sémantique à partir d'un texte d'entrée.
 
-  [ドキュメント検索のチュートリアルtask](https://ai.google.dev/gemini-api/docs/ドキュメント検索のチュートリアルtask)
-- **検索結果の再ランキング**: クエリに対して初期結果を意味的にスコアリングすることで、最も関連性の高いアイテムを優先します。
+  [Tutoriel sur la recherche de documentstask](https://github.com/google-gemini/cookbook/blob/main/examples/Talk_to_documents_with_embeddings.ipynb)
+- **Reclassement des résultats de recherche** : classez les éléments les plus pertinents en attribuant un score sémantique aux résultats initiaux par rapport à la requête.
 
-  [検索結果の再ランキングのチュートリアルtask](https://ai.google.dev/gemini-api/docs/検索結果の再ランキングのチュートリアルtask)
-- **異常検出:** エンベディングのグループを比較すると、隠れた傾向や外れ値を特定できます。
+  [Tutoriel sur le réordonnancement des résultats de recherchetask](https://github.com/google-gemini/cookbook/blob/main/examples/Search_reranking_using_embeddings.ipynb)
+- **Détection des anomalies** : la comparaison de groupes d'embeddings peut aider à identifier des tendances ou des valeurs aberrantes cachées.
 
-  [異常検出チュートリアルbubble\_chart](https://ai.google.dev/gemini-api/docs/異常検出チュートリアルbubble\_chart)
-- **分類:** 感情分析やスパム検出など、コンテンツに基づいてテキストを自動的に分類します。
+  [Tutoriel sur la détection d'anomaliesbubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/Anomaly_detection_with_embeddings.ipynb)
+- **Classification** : catégorisez automatiquement le texte en fonction de son contenu, comme l'analyse des sentiments ou la détection du spam.
 
-  [分類チュートリアルtoken](https://ai.google.dev/gemini-api/docs/分類チュートリアルtoken)
-- **クラスタリング:** エンベディングのクラスタと可視化を作成して、複雑な関係を効果的に把握します。
+  [Tutoriel sur la classificationtoken](https://github.com/google-gemini/cookbook/blob/main/examples/Classify_text_with_embeddings.ipynb)
+- **Clustering** : comprenez efficacement les relations complexes en créant des clusters et des visualisations de vos embeddings.
 
-  [クラスタリングの可視化のチュートリアルbubble\_chart](https://ai.google.dev/gemini-api/docs/クラスタリングの可視化のチュートリアルbubble\_chart)
+  [Tutoriel sur la visualisation du clusteringbubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/clustering_with_embeddings.ipynb)
 
-## エンベディングの保存
+## Stocker les embeddings
 
-エンベディングをプロダクションに移行する場合は、**ベクトル データベース**を使用して、高次元エンベディングを効率的に保存、インデックス登録、取得するのが一般的です。Google Cloud には、この目的で使用できるマネージド データサービス（[Gemini Enterprise Agent Platform Vector Search 2.0](https://ai.google.dev/gemini-api/docs/Gemini Enterprise Agent Platform Vector Search 2.0)、[BigQuery](https://ai.google.dev/gemini-api/docs/BigQuery)、[AlloyDB](https://ai.google.dev/gemini-api/docs/AlloyDB)、[Cloud SQL](https://ai.google.dev/gemini-api/docs/Cloud SQL) など）が用意されています。
+Lorsque vous déployez des embeddings en production, il est courant d'utiliser des **bases de données vectorielles** pour stocker, indexer et récupérer efficacement des embeddings de grande dimension. Google Cloud propose des services de données gérés qui peuvent être utilisés à cette fin, y compris [Gemini Enterprise Agent Platform Vector Search 2.0](https://docs.cloud.google.com/gemini-enterprise-agent-platform/BUILD/vector-search-2?hl=fr), [BigQuery](https://cloud.google.com/bigquery/docs/introduction?hl=fr), [AlloyDB](https://cloud.google.com/alloydb/docs/overview?hl=fr) et [Cloud SQL](https://cloud.google.com/sql/docs/postgres/introduction?hl=fr).
 
-次のチュートリアルでは、Gemini Embedding で他のサードパーティのベクトル データベースを使用する方法について説明します。
+Les tutoriels suivants montrent comment utiliser d'autres bases de données vectorielles tierces avec Gemini Embedding.
 
-- [ChromaDB チュートリアルbolt](https://ai.google.dev/gemini-api/docs/ChromaDB チュートリアルbolt)
-- [QDrant チュートリアルbolt](https://ai.google.dev/gemini-api/docs/QDrant チュートリアルbolt)
-- [Weaviate チュートリアルbolt](https://ai.google.dev/gemini-api/docs/Weaviate チュートリアルbolt)
-- [Pinecone チュートリアルbolt](https://ai.google.dev/gemini-api/docs/Pinecone チュートリアルbolt)
+- [Tutoriels ChromaDBbolt](https://docs.trychroma.com/integrations/embedding-models/google-gemini)
+- [Tutoriels QDrantbolt](https://qdrant.tech/documentation/embeddings/gemini/)
+- [Tutoriels Weaviatebolt](https://docs.weaviate.io/weaviate/model-providers/google)
+- [Tutoriels Pineconebolt](https://github.com/google-gemini/cookbook/blob/main/examples/langchain/Gemini_LangChain_QA_Pinecone_WebLoad.ipynb)
 
-## モデル バージョン
+## Versions de modèle
 
-### Gemini エンベディング 2
+### Embedding Gemini 2
 
-| プロパティ | 説明 |
+| Propriété | Description |
 | --- | --- |
-| id\_cardモデルコード | **Gemini API**  `gemini-embedding-2` |
-| save でサポートされるデータ型 | **入力**  テキスト、画像、動画、音声、PDF  **出力**  テキスト エンベディング |
-| token\_autoトークン上限[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ja) | **入力トークンの上限**  8,192  **出力ディメンションのサイズ**  柔軟、サポート: 128 ～ 3072、推奨: 768、1536、3072 |
-| 123 バージョン | 詳細については、[モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/モデル バージョンのパターン)をご覧ください。  - 安定版: `gemini-embedding-2` |
-| calendar\_month最終更新日 | 2026 年 4 月 |
+| Code du modèle id\_card | **API Gemini**  `gemini-embedding-2` |
+| Types de données acceptés pour save | **Entrée**  Texte, image, vidéo, audio, PDF  **Résultat**  Embeddings textuels |
+| token\_autoLimites de jetons[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  8 192  **Taille de la dimension de sortie**  Flexible, prend en charge : 128 à 3 072, recommandé : 768, 1 536, 3 072 |
+| Versions 123 | Pour en savoir plus, consultez les [schémas de version de modèle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - Stable : `gemini-embedding-2` |
+| calendar\_monthDernière mise à jour | Avril 2026 |
 
-### Gemini エンベディング
+### Embedding Gemini
 
-| プロパティ | 説明 |
+| Propriété | Description |
 | --- | --- |
-| id\_cardモデルコード | **Gemini API**  `gemini-embedding-001` |
-| save でサポートされるデータ型 | **入力**  テキスト  **出力**  テキスト エンベディング |
-| token\_autoトークン上限[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ja) | **入力トークンの上限**  2,048  **出力ディメンションのサイズ**  柔軟、サポート: 128 ～ 3072、推奨: 768、1536、3072 |
-| 123 バージョン | 詳細については、[モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/モデル バージョンのパターン)をご覧ください。  - 安定版: `gemini-embedding-001` |
-| calendar\_month最終更新日 | 2025 年 6 月 |
+| Code du modèle id\_card | **API Gemini**  `gemini-embedding-001` |
+| Types de données acceptés pour save | **Entrée**  Texte  **Résultat**  Embeddings textuels |
+| token\_autoLimites de jetons[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  2 048  **Taille de la dimension de sortie**  Flexible, prend en charge : 128 à 3 072, recommandé : 768, 1 536, 3 072 |
+| Versions 123 | Pour en savoir plus, consultez les [schémas de version de modèle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - Stable : `gemini-embedding-001` |
+| calendar\_monthDernière mise à jour | Juin 2025 |
 
-非推奨のエンベディング モデルについては、[非推奨](https://ai.google.dev/gemini-api/docs/非推奨)のページをご覧ください。
+Pour les modèles d'embeddings obsolètes, consultez la page [Obsolescence](https://ai.google.dev/gemini-api/docs/deprecations?hl=fr).
 
-## gemini-embedding-001 からの移行
+## Migration depuis gemini-embedding-001
 
-`gemini-embedding-001` と `gemini-embedding-2` の間のエンベディング スペースは**互換性がありません**。つまり、あるモデルで生成されたエンベディングを別のモデルで生成されたエンベディングと直接比較することはできません。`gemini-embedding-2` にアップグレードする場合は、既存のデータをすべて再埋め込む必要があります。
+Les espaces d'intégration entre `gemini-embedding-001` et `gemini-embedding-2` sont **incompatibles**. Cela signifie que vous ne pouvez pas comparer directement les embeddings générés par un modèle avec ceux générés par l'autre. Si vous passez à `gemini-embedding-2`, vous devez réintégrer toutes vos données existantes.
 
-互換性がないだけでなく、この 2 つのモデルには次のような違いがあります。
+Outre l'incompatibilité, il existe plusieurs autres différences notables entre les deux modèles :
 
-- **タスクタイプの指定:** `gemini-embedding-001` では、`task_type` パラメータ（`SEMANTIC_SIMILARITY`、`RETRIEVAL_DOCUMENT` など）を使用してタスクタイプを指定します。`gemini-embedding-2` では、`task_type` パラメータは対象外です。代わりに、テキストのみのタスクのプロンプトにタスクの指示を直接含める必要があります。さまざまなユースケースのプロンプトの形式設定方法については、[Embeddings 2 を使用したタスクタイプ](https://ai.google.dev/gemini-api/docs/Embeddings 2 を使用したタスクタイプ)をご覧ください。
-- **エンベディングの集約:** `gemini-embedding-001` は、入力リスト内の各文字列に対して個別のエンベディングを生成します。一方、`gemini-embedding-2` は、複数の入力（テキストや画像など）が 1 つのリクエストで直接提供された場合、単一の集約されたエンベディングを生成します。個々の入力に対して個別のエンベディングを生成するには、各入力を `Content` オブジェクトでラップするか、[Batch API](https://ai.google.dev/gemini-api/docs/Batch API) を使用します。詳細については、[エンベディングの集計](https://ai.google.dev/gemini-api/docs/エンベディングの集計)をご覧ください。
-- **正規化:** `output_dimensionality` を使用して 3, 072 個未満のディメンションでエンベディングをリクエストすると、`gemini-embedding-2` はこれらの切り捨てられたエンベディングを自動的に正規化します。`gemini-embedding-001` では、3, 072 以外のディメンションに対して手動で正規化を行う必要があります。詳しくは、[小さいサイズの品質を確保する](https://ai.google.dev/gemini-api/docs/小さいサイズの品質を確保する)をご覧ください。
+- **Spécification du type de tâche** : avec `gemini-embedding-001`, vous spécifiez le type de tâche à l'aide du paramètre `task_type` (par exemple, `SEMANTIC_SIMILARITY`, `RETRIEVAL_DOCUMENT`). Avec `gemini-embedding-2`, le paramètre `task_type` n'est pas accepté. Au lieu de cela, vous devez inclure les instructions de la tâche directement dans la requête pour les tâches textuelles. Pour savoir comment mettre en forme les requêtes pour différents cas d'utilisation, consultez [Types de tâches avec Embeddings 2](#task-types-embeddings-2).
+- **Agrégation d'embeddings** : `gemini-embedding-001` génère des embeddings individuels pour chaque chaîne d'une liste d'entrées. En revanche, `gemini-embedding-2` produit un seul embedding agrégé lorsque plusieurs entrées (comme du texte et des images) sont fournies directement dans une même requête. Pour générer des embeddings distincts pour chaque entrée, enveloppez chaque entrée dans un objet `Content` ou utilisez l'[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr#batch-embedding). Pour en savoir plus, consultez [Agrégation d'intégration](#embedding-aggregation).
+- **Normalisation** : si vous utilisez `output_dimensionality` pour demander des embeddings avec moins de 3 072 dimensions, `gemini-embedding-2` normalise automatiquement ces embeddings tronqués. Avec `gemini-embedding-001`, vous devez effectuer une normalisation manuelle pour les dimensions autres que 3 072. Pour en savoir plus, consultez [Garantir la qualité pour les dimensions plus petites](#quality-for-smaller-dimensions).
 
-## バッチ エンベディング
+## Embeddings par lot
 
-レイテンシが問題にならない場合は、[Batch API](https://ai.google.dev/gemini-api/docs/Batch API) で Gemini Embeddings モデルを使用してみてください。これにより、デフォルトのエンベディング料金の 50% でスループットを大幅に向上させることができます。[Batch API クックブック](https://ai.google.dev/gemini-api/docs/Batch API クックブック)で、開始方法の例をご覧ください。
+Si la latence n'est pas un problème, essayez d'utiliser les modèles d'embeddings Gemini avec l'[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr#batch-embedding). Cela permet un débit beaucoup plus élevé à 50% du prix par défaut des embeddings.
+Vous trouverez des exemples pour vous aider à vous lancer dans le [cookbook de l'API Batch](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb).
 
-## 責任ある使用に関する通知
+## Avis sur l'utilisation responsable
 
-新しいコンテンツを作成する生成 AI モデルとは異なり、Gemini エンベディング モデルは、入力データの形式を数値表現に変換することのみを目的としています。Google は、入力データの形式をリクエストされた数値形式に変換するエンベディング モデルを提供する責任を負いますが、ユーザーは入力したデータと結果のエンベディングに対する全責任を負います。Gemini エンベディング モデルを使用することにより、アップロードするコンテンツに対して必要な権利を有することを確認したと見なされます。他者の知的財産やプライバシーの権利を侵害するコンテンツを生成することはできません。このサービスの使用には、Google の[使用禁止に関するポリシー](https://ai.google.dev/gemini-api/docs/使用禁止に関するポリシー)と[利用規約](https://ai.google.dev/gemini-api/docs/利用規約)が適用されます。
+Contrairement aux modèles d'IA générative qui créent du contenu, le modèle Gemini Embedding est uniquement destiné à transformer le format de vos données d'entrée en représentation numérique. Bien que Google soit responsable de la fourniture d'un modèle d'embedding qui transforme le format de vos données d'entrée au format numérique demandé, les utilisateurs conservent l'entière responsabilité des données qu'ils saisissent et des embeddings qui en résultent. En utilisant le modèle d'embedding Gemini, vous confirmez que vous disposez des droits nécessaires sur tous les contenus que vous mettez en ligne. Ne générez aucun contenu qui porte atteinte à la propriété intellectuelle ou aux droits au respect de la confidentialité d'autrui. Votre utilisation de ce service est soumise à notre [Règlement sur les utilisations interdites](https://policies.google.com/terms/generative-ai/use-policy?hl=fr) et aux [Conditions d'utilisation de Google](https://ai.google.dev/gemini-api/terms?hl=fr).
 
-## エンベディングを使用して構築を開始する
+## Commencer à créer avec des embeddings
 
-[エンベディングのクイックスタート ノートブック](https://ai.google.dev/gemini-api/docs/エンベディングのクイックスタート ノートブック)で、モデルの機能を確認し、エンベディングをカスタマイズして可視化する方法を学習します。
+Consultez le [notebook de démarrage rapide sur les embeddings](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Embeddings.ipynb) pour explorer les capacités du modèle et découvrir comment personnaliser et visualiser vos embeddings.
 
-フィードバックを送信
+Envoyer des commentaires
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://ai.google.dev/gemini-api/docs/クリエイティブ・コモンズの表示 4.0 ライセンス)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://ai.google.dev/gemini-api/docs/Apache 2.0 ライセンス)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://ai.google.dev/gemini-api/docs/Google Developers サイトのポリシー)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-最終更新日 2026-05-01 UTC。
+Dernière mise à jour le 2026/05/01 (UTC).
 
-ご意見をお聞かせください
+Voulez-vous nous donner plus d'informations ?
+
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/05/01 (UTC)."],[],[]]

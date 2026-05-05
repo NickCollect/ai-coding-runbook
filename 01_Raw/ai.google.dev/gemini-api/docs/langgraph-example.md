@@ -1,14 +1,18 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/langgraph-example?hl=fr
-fetched_at: 2026-05-05T13:16:29.068214+00:00
+fetched_at: 2026-05-05T19:50:19.541844+00:00
 title: "Cr\u00e9er un agent ReAct \u00e0 partir de z\u00e9ro avec Gemini et LangGraph \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/recherche approfondie Gemini) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
+La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
 
-- [Accueil](https://ai.google.dev/gemini-api/docs/Accueil)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [Docs](https://ai.google.dev/gemini-api/docs/Docs)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
 Envoyer des commentaires
 
@@ -16,9 +20,9 @@ Envoyer des commentaires
 
 LangGraph est un framework permettant de créer des applications LLM avec état. Il constitue donc un bon choix pour créer des agents ReAct (Reasoning and Acting).
 
-Les agents ReAct combinent le raisonnement LLM et l'exécution d'actions. Ils réfléchissent de manière itérative, utilisent des outils et agissent en fonction des observations pour atteindre les objectifs des utilisateurs, en adaptant dynamiquement leur approche. Présenté dans ["ReAct : Synergizing Reasoning and Acting in Language Models"](https://ai.google.dev/gemini-api/docs/"ReAct : Synergizing Reasoning and Acting in Language Models") (2023), ce modèle tente d'imiter la résolution de problèmes flexible et semblable à celle des humains plutôt que des workflows rigides.
+Les agents ReAct combinent le raisonnement LLM et l'exécution d'actions. Ils réfléchissent de manière itérative, utilisent des outils et agissent en fonction des observations pour atteindre les objectifs des utilisateurs, en adaptant dynamiquement leur approche. Présenté dans ["ReAct : Synergizing Reasoning and Acting in Language Models"](https://arxiv.org/abs/2210.03629) (2023), ce modèle tente d'imiter la résolution de problèmes flexible et semblable à celle des humains plutôt que des workflows rigides.
 
-LangGraph propose un agent ReAct prédéfini ([`create_react_agent`](https://ai.google.dev/gemini-api/docs/`create_react_agent`)), qui est idéal lorsque vous avez besoin de plus de contrôle et de personnalisation pour vos implémentations ReAct. Ce guide vous en présente une version simplifiée.
+LangGraph propose un agent ReAct prédéfini ([`create_react_agent`](https://langchain-ai.github.io/langgraph/reference/prebuilt/#langgraph.prebuilt.chat_agent_executor.create_react_agent)), qui est idéal lorsque vous avez besoin de plus de contrôle et de personnalisation pour vos implémentations ReAct. Ce guide vous en présente une version simplifiée.
 
 LangGraph modélise les agents sous forme de graphiques à l'aide de trois composants clés :
 
@@ -26,7 +30,7 @@ LangGraph modélise les agents sous forme de graphiques à l'aide de trois compo
 - `Nodes` : code la logique de vos agents. Ils reçoivent l'état actuel en entrée, effectuent un calcul ou un effet secondaire, et renvoient un état mis à jour, tel que des appels LLM ou des appels d'outils.
 - `Edges` : définit le prochain `Node` à exécuter en fonction du `State` actuel, ce qui permet une logique conditionnelle et des transitions fixes.
 
-Si vous ne disposez pas encore d'une clé API, vous pouvez en obtenir une auprès de [Google AI Studio](https://ai.google.dev/gemini-api/docs/Google AI Studio).
+Si vous ne disposez pas encore d'une clé API, vous pouvez en obtenir une auprès de [Google AI Studio](https://aistudio.google.com/app/apikey?hl=fr).
 
 ```
 pip install langgraph langchain-google-genai geopy requests
@@ -45,7 +49,7 @@ Pour mieux comprendre comment implémenter un agent ReAct à l'aide de LangGraph
 
 Pour cet agent météo, `State` conservera l'historique des conversations en cours (sous forme de liste de messages) et un compteur (sous forme d'entier) pour le nombre d'étapes effectuées, à des fins d'illustration.
 
-LangGraph fournit une fonction d'assistance, `add_messages`, pour mettre à jour les listes de messages d'état. Elle fonctionne comme un [réducteur](https://ai.google.dev/gemini-api/docs/réducteur), en prenant la liste actuelle, plus les nouveaux messages, et en renvoyant une liste combinée. Il gère les mises à jour par ID de message et adopte par défaut un comportement "d'ajout uniquement" pour les nouveaux messages non lus.
+LangGraph fournit une fonction d'assistance, `add_messages`, pour mettre à jour les listes de messages d'état. Elle fonctionne comme un [réducteur](https://langchain-ai.github.io/langgraph/concepts/low_level/#reducers), en prenant la liste actuelle, plus les nouveaux messages, et en renvoyant une liste combinée. Il gère les mises à jour par ID de message et adopte par défaut un comportement "d'ajout uniquement" pour les nouveaux messages non lus.
 
 ```
 from typing import Annotated,Sequence, TypedDict
@@ -124,7 +128,7 @@ print(res)
 La dernière étape avant de pouvoir exécuter votre agent consiste à définir vos nœuds et vos arêtes.
 Dans cet exemple, vous avez deux nœuds et un bord.
 
-- Nœud `call_tool` qui exécute la méthode de votre outil. LangGraph dispose d'un nœud prédéfini à cet effet, appelé [ToolNode](https://ai.google.dev/gemini-api/docs/ToolNode).
+- Nœud `call_tool` qui exécute la méthode de votre outil. LangGraph dispose d'un nœud prédéfini à cet effet, appelé [ToolNode](https://langchain-ai.github.io/langgraph/how-tos/tool-calling/).
 - Nœud `call_model` qui utilise `model_with_tools` pour appeler le modèle.
 - `should_continue` edge qui décide s'il faut appeler l'outil ou le modèle.
 
@@ -243,8 +247,10 @@ for state in graph.stream(state, stream_mode="values"):
 
 Envoyer des commentaires
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://ai.google.dev/gemini-api/docs/Creative Commons Attribution 4.0), et les échantillons de code sont régis par une licence [Apache 2.0](https://ai.google.dev/gemini-api/docs/Apache 2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://ai.google.dev/gemini-api/docs/Règles du site Google Developers). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
 Dernière mise à jour le 2026/04/29 (UTC).
 
 Voulez-vous nous donner plus d'informations ?
+
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/04/29 (UTC)."],[],[]]

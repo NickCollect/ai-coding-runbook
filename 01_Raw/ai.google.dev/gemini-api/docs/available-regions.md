@@ -1,268 +1,274 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/available-regions?hl=ar
-fetched_at: 2026-05-05T13:28:07.290540+00:00
-title: "\u0627\u0644\u0645\u0646\u0627\u0637\u0642 \u0627\u0644\u062a\u064a \u062a\u062a\u0648\u0641\u0651\u0631 \u0641\u064a\u0647\u0627 \u0645\u064a\u0632\u0627\u062a Google AI Studio \u0648Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/available-regions?hl=tr
+fetched_at: 2026-05-05T19:46:13.666061+00:00
+title: "Google AI Studio ve Gemini API'nin kullan\u0131labildi\u011fi b\u00f6lgeler \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/Deep Research من Gemini) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
 
-- [الصفحة الرئيسية](https://ai.google.dev/gemini-api/docs/الصفحة الرئيسية)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [المستندات](https://ai.google.dev/gemini-api/docs/المستندات)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-إرسال ملاحظات
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# المناطق التي تتوفّر فيها ميزات Google AI Studio وGemini API
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-إذا وصلت إلى هذه الصفحة أثناء محاولة الوصول إلى [Google AI Studio](https://ai.google.dev/gemini-api/docs/Google AI Studio)، قد
-يرجع ذلك إلى أحد الأسباب التالية:
+Geri bildirim gönderin
 
-- **القيود الإقليمية**: لا يتوفّر Google AI Studio في منطقتك. يُرجى الرجوع إلى القسم أدناه للاطّلاع على قائمة بالمناطق المتاحة.
-- **السنّ المسموح به**: أنت لا تستوفي الحدّ الأدنى للسنّ المسموح به (18 عامًا أو أكثر) للوصول إلى هذه الخدمة.
-- **تأكيد الحساب**: قد يكون بإمكانك الوصول إلى الخدمة، ولكن لم يتم بعد [إثبات عمرك](https://ai.google.dev/gemini-api/docs/إثبات عمرك) في حسابك على Google.
+# Google AI Studio ve Gemini API'nin kullanılabildiği bölgeler
 
-لمزيد من التفاصيل حول المتطلبات، يُرجى مراجعة [بنود الخدمة](https://ai.google.dev/gemini-api/docs/بنود الخدمة).
+[Google AI Studio](https://aistudio.google.com/?hl=tr)'ya erişmeye çalışırken bu sayfaya yönlendirildiyseniz bunun nedeni aşağıdakilerden biri olabilir:
 
-## المناطق المتاحة
+- **Bölgesel kısıtlamalar**: Google AI Studio, bölgenizde kullanılamıyor. Desteklenen bölgelerin listesi için aşağıdaki bölüme bakın.
+- **Yaş şartları**: Bu hizmete erişmek için minimum yaş şartını (18 yaş) karşılamıyor olabilirsiniz.
+- **Hesap doğrulama**: Hizmete erişebilirsiniz ancak Google Hesabınızda henüz [yaşınızı doğrulamamışsınızdır](https://support.google.com/accounts/answer/10071085?hl=tr).
 
-يتوفّر Gemini API وGoogle AI Studio في البلدان والمناطق التالية. إذا لم تكن مقيمًا في أحد هذه البلدان أو المناطق، جرِّب الـ
-[Gemini API في Gemini Enterprise Agent Platform](https://ai.google.dev/gemini-api/docs/Gemini API في Gemini Enterprise Agent Platform):
+Koşullarla ilgili daha fazla bilgi için [Hizmet Şartlarımızı](https://ai.google.dev/gemini-api/terms?hl=tr) inceleyin.
 
-- ألبانيا
-- الجزائر
-- ساموا الأمريكية
-- أندورا
-- أنغولا
-- أنغويلا
-- أنتاركتيكا
-- أنتيغوا وبربودا
-- الأرجنتين
-- أرمينيا
-- أروبا
-- أستراليا
-- النمسا
-- أذربيجان
-- جزر البهاما
-- البحرين
-- بنغلاديش
-- بربادوس
-- بلجيكا
-- بليز
-- بنين
-- برمودا
-- بوتان
-- بوليفيا
-- البوسنة والهرسك
-- بوتسوانا
-- البرازيل
-- الإقليم البريطاني في المحيط الهندي
-- جزر فيرجن البريطانية
-- بروناي
-- بلغاريا
-- بوركينا فاسو
-- بوروندي
-- الرأس الأخضر
-- كمبوديا
-- الكاميرون
-- كندا
-- هولندا الكاريبية
-- جزر كايمان
-- جمهورية إفريقيا الوسطى
-- تشاد
-- تشيلي
-- جزيرة كريسماس
-- جزر كوكوس (كيلينغ)
-- كولومبيا
-- جزر القمر
-- جزر كوك
-- كوستاريكا
-- ساحل العاج
-- كرواتيا
-- كوراساو
-- جمهورية التشيك
-- جمهورية الكونغو الديمقراطية
-- الدانمارك
-- جيبوتي
-- دومينيكا
-- جمهورية الدومينيكان
-- الإكوادور
-- مصر
-- السلفادور
-- غينيا الاستوائية
-- إريتريا
-- إستونيا
-- إسواتيني
-- إثيوبيا
-- جزر فوكلاند - جزر مالفيناس
-- جزر فارو
-- فيجي
-- فنلندا
-- فرنسا
-- غويانا الفرنسية
-- الغابون
-- غامبيا
-- جورجيا
-- ألمانيا
-- غانا
-- جبل طارق
-- اليونان
-- غرينلاند
-- غرينادا
-- غوام
-- غواتيمالا
-- غيرنزي
-- غينيا
-- غينيا بيساو
-- غيانا
-- هايتي
-- جزيرة هيرد وجزر ماكدونالد
-- هندوراس
-- هنغاريا
-- آيسلندا
-- الهند
-- إندونيسيا
-- العراق
-- أيرلندا
-- جزيرة مان
-- إسرائيل
-- إيطاليا
-- جامايكا
-- اليابان
-- جيرسي
-- الأردن
-- كازاخستان
-- كينيا
-- كيريباتي
-- كوسوفو
-- الكويت
-- قيرغيزستان
-- لاوس
-- لاتفيا
-- لبنان
-- ليسوتو
-- ليبريا
-- ليبيا
-- ليختنشتاين
-- ليتوانيا
-- لوكسمبورغ
-- مدغشقر
-- مالاوي
-- ماليزيا
-- جزر المالديف
-- مالي
-- مالطا
-- جزر مارشال
-- موريتانيا
-- موريشيوس
-- المكسيك
-- ميكرونيزيا
-- مولدوفا
-- موناكو
-- منغوليا
-- الجبل الأسود
-- مونتسيرات
-- المغرب
-- موزمبيق
-- ناميبيا
-- ناورو
-- نيبال
-- هولندا
-- كاليدونيا الجديدة
-- نيوزيلندا
-- نيكاراغوا
-- النيجر
-- نيجيريا
-- نيوي
-- جزيرة نورفولك
-- مقدونيا الشمالية
-- جزر ماريانا الشمالية
-- النرويج
-- عُمان
-- باكستان
-- بالاو
-- فلسطين
-- بنما
-- بابوا غينيا الجديدة
-- باراغواي
-- بيرو
-- الفلبين
-- جزر بيتكيرن
-- بولندا
-- البرتغال
-- بورتوريكو
-- قطر
-- جمهورية قبرص
-- جمهورية الكونغو
-- رومانيا
-- رواندا
-- ريونيون
-- سان بارتيلمي
-- سانت هيلينا وأسينشيون وتريستان دا كونا
-- سانت كيتس ونيفيس
-- سانت لوسيا
-- سان بيير وميكلون
-- سانت فنسنت وجزر غرينادين
-- ساموا
-- سان مارينو
-- ساو تومي وبرينسيبي
-- المملكة العربية السعودية
-- السنغال
-- صربيا
-- سيشل
-- سيراليون
-- سنغافورة
-- سلوفاكيا
-- سلوفينيا
-- جزر سليمان
-- الصومال
-- جنوب إفريقيا
-- جورجيا الجنوبية وجزر ساندويتش الجنوبية
-- كوريا الجنوبية
-- جنوب السودان
-- إسبانيا
-- سريلانكا
-- السودان
-- سورينام
-- السويد
-- سويسرا
-- تايوان
-- طاجيكستان
-- تنزانيا
-- تايلاند
-- تيمور - ليشتي
-- توغو
-- توكيلو
-- تونغا
-- ترينيداد وتوباغو
-- تونس
-- تركمانستان
-- جزر توركس وكايكوس
-- توفالو
-- تركيا
-- أوغندا
-- أوكرانيا
-- الإمارات العربية المتحدة
-- المملكة المتحدة
-- الولايات المتحدة
-- جزر الولايات المتحدة الصغيرة النائية
-- أوروغواي
-- جزر فيرجن الأمريكية
-- أوزباكستان
-- فانواتو
-- الفاتيكان
-- فنزويلا
-- فيتنام
-- جزر والس وفوتونا
-- الصحراء الغربية
-- اليمن
-- زامبيا
-- زيمبابوي
-- جزر أولان
+## Kullanılabildiği bölgeler
 
-إرسال ملاحظات
+kullanarak kontrol edebilirsiniz.
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://ai.google.dev/gemini-api/docs/ترخيص Creative Commons Attribution 4.0‏) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://ai.google.dev/gemini-api/docs/ترخيص Apache 2.0‏). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://ai.google.dev/gemini-api/docs/سياسات موقع Google Developers‏). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Gemini API ve Google AI Studio aşağıdaki ülke ve idari bölgelerde kullanılabilir. Bu ülkelerden veya idari bölgelerden birinde değilseniz [Gemini Enterprise Ajan Platformu'ndaki Gemini API'yi](https://cloud.google.com/gemini-enterprise-agent-platform?hl=tr) deneyin:
 
-تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
+- Arnavutluk
+- Cezayir
+- Amerikan Samoası
+- Andorra
+- Angola
+- Anguilla
+- Antarktika
+- Antigua ve Barbuda
+- Arjantin
+- Ermenistan
+- Aruba
+- Avustralya
+- Avusturya
+- Azerbaycan
+- Bahamalar
+- Bahreyn
+- Bangladeş
+- Barbados
+- Belçika
+- Belize
+- Benin
+- Bermuda
+- Bhutan
+- Bolivya
+- Bosna Hersek
+- Botsvana
+- Brezilya
+- Britanya Hint Okyanusu Toprakları
+- Britanya Virjin Adaları
+- Brunei
+- Bulgaristan
+- Burkina Faso
+- Burundi
+- Yeşil Burun Adaları
+- Kamboçya
+- Kamerun
+- Kanada
+- Hollanda Karayipleri
+- Cayman Adaları
+- Orta Afrika Cumhuriyeti
+- Çad
+- Şili
+- Christmas Adası
+- Cocos (Keeling) Adaları
+- Kolombiya
+- Komorlar
+- Cook Adaları
+- Kosta Rika
+- Fildişi Sahili
+- Hırvatistan
+- Curaçao
+- Çekya
+- Kongo Demokratik Cumhuriyeti
+- Danimarka
+- Cibuti
+- Dominika
+- Dominik Cumhuriyeti
+- Ekvador
+- Mısır
+- El Salvador
+- Ekvator Ginesi
+- Eritre
+- Estonya
+- Eswatini
+- Etiyopya
+- Falkland Adaları (Islas Malvinas)
+- Faroe Adaları
+- Fiji
+- Finlandiya
+- Fransa
+- Fransız Guyanası
+- Gabon
+- Gambiya
+- Gürcistan
+- Almanya
+- Gana
+- Cebelitarık
+- Yunanistan
+- Grönland
+- Grenada
+- Guam
+- Guatemala
+- Guernsey
+- Gine
+- Gine-Bissau
+- Guyana
+- Haiti
+- Heard Adası ve McDonald Adaları
+- Honduras
+- Macaristan
+- İzlanda
+- Hindistan
+- Endonezya
+- Irak
+- İrlanda
+- Man Adası
+- İsrail
+- İtalya
+- Jamaika
+- Japonya
+- Jersey
+- Ürdün
+- Kazakistan
+- Kenya
+- Kiribati
+- Kosova
+- Kuveyt
+- Kırgızistan
+- Laos
+- Letonya
+- Lübnan
+- Lesotho
+- Liberya
+- Libya
+- Liechtenstein
+- Litvanya
+- Lüksemburg
+- Madagaskar
+- Malawi
+- Malezya
+- Maldivler
+- Mali
+- Malta
+- Marshall Adaları
+- Moritanya
+- Mauritius Adası
+- Meksika
+- Mikronezya
+- Moldova
+- Monako
+- Moğolistan
+- Karadağ
+- Montserrat
+- Fas
+- Mozambik
+- Namibya
+- Nauru
+- Nepal
+- Hollanda
+- Yeni Kaledonya
+- Yeni Zelanda
+- Nikaragua
+- Nijer
+- Nijerya
+- Niue
+- Norfolk Adası
+- Kuzey Makedonya
+- Kuzey Mariana Adaları
+- Norveç
+- Umman
+- Pakistan
+- Palau
+- Filistin
+- Panama
+- Papua Yeni Gine
+- Paraguay
+- Peru
+- Filipinler
+- Pitcairn Adaları
+- Polonya
+- Portekiz
+- Porto Riko
+- Katar
+- Güney Kıbrıs Rum Yönetimi
+- Kongo Cumhuriyeti
+- Romanya
+- Ruanda
+- Reunion
+- Saint Barthelemy
+- Saint Helena, Ascension ve Tristan da Cunha
+- Saint Kitts ve Nevis
+- Saint Lucia
+- Saint Pierre ve Miquelon
+- Saint Vincent ve Grenadinler
+- Samoa
+- San Marino
+- São Tomé ve Príncipe
+- Suudi Arabistan
+- Senegal
+- Sırbistan
+- Seyşeller
+- Sierra Leone
+- Singapur
+- Slovakya
+- Slovenya
+- Solomon Adaları
+- Somali
+- Güney Afrika
+- Güney Georgia ve Güney Sandwich Adaları
+- Güney Kore
+- Güney Sudan
+- İspanya
+- Sri Lanka
+- Sudan
+- Surinam
+- İsveç
+- İsviçre
+- Tayvan
+- Tacikistan
+- Tanzanya
+- Tayland
+- Doğu Timor
+- Togo
+- Tokelau
+- Tonga
+- Trinidad ve Tobago
+- Tunus
+- Türkmenistan
+- Turks ve Caicos Adaları
+- Tuvalu
+- Türkiye
+- Uganda
+- Ukrayna
+- Birleşik Arap Emirlikleri
+- Birleşik Krallık
+- Amerika Birleşik Devletleri
+- ABD Sınır Dışı Küçük Adaları
+- Uruguay
+- ABD Virjin Adaları
+- Özbekistan
+- Vanuatu
+- Vatikan Şehir Devleti
+- Venezuela
+- Vietnam
+- Wallis ve Futuna
+- Batı Sahara
+- Yemen
+- Zambiya
+- Zimbabve
+- Åland Adaları
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Geri bildirim gönderin
+
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+
+Son güncelleme tarihi: 2026-04-29 UTC.
+
+Bize geri bildirimde bulunmak mı istiyorsunuz?
+
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]

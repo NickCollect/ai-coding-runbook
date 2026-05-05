@@ -1,100 +1,104 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/safety-settings?hl=ko
-fetched_at: 2026-05-05T13:12:32.441864+00:00
-title: "\uc548\uc804 \uc124\uc815 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/safety-settings?hl=vi
+fetched_at: 2026-05-05T19:44:18.553501+00:00
+title: "C\u00e0i \u0111\u1eb7t an to\u00e0n \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/Gemini Deep Research)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-- [홈](https://ai.google.dev/gemini-api/docs/홈)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [문서](https://ai.google.dev/gemini-api/docs/문서)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-의견 보내기
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# 안전 설정
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Gemini API는 프로토타입 제작 단계에서 조정할 수 있는 안전 설정을 제공하여 애플리케이션에 더 제한적인 안전 구성이 필요한지 아니면 덜 제한적인 안전 구성이 필요한지 확인할 수 있습니다. 4가지 필터 카테고리에서 이러한 설정을 조정하여 특정 유형의 콘텐츠를 제한하거나 허용할 수 있습니다.
+Gửi ý kiến phản hồi
 
-이 가이드에서는 Gemini API가 안전 설정 및 필터링을 처리하는 방법과 애플리케이션의 안전 설정을 변경하는 방법을 설명합니다.
+# Cài đặt an toàn
 
-## 안전 필터
+Gemini API cung cấp các chế độ cài đặt an toàn mà bạn có thể điều chỉnh trong giai đoạn tạo mẫu để xác định xem ứng dụng của bạn có cần cấu hình an toàn hạn chế hơn hay ít hạn chế hơn hay không. Bạn có thể điều chỉnh các chế độ cài đặt này trên 4 danh mục bộ lọc để hạn chế hoặc cho phép một số loại nội dung.
 
-Gemini API의 조정 가능한 안전 필터는 다음 카테고리를 다룹니다.
+Hướng dẫn này trình bày cách Gemini API xử lý chế độ cài đặt an toàn và tính năng lọc, cũng như cách bạn có thể thay đổi chế độ cài đặt an toàn cho ứng dụng của mình.
 
-| 카테고리 | 설명 |
+## Bộ lọc an toàn
+
+Các bộ lọc an toàn có thể điều chỉnh của Gemini API bao gồm những danh mục sau:
+
+| Danh mục | Mô tả |
 | --- | --- |
-| 괴롭힘 | 정체성 또는 보호 대상 속성을 겨냥하는 부정적이거나 유해한 댓글 |
-| 증오심 표현 | 무례하거나 모욕적이거나 욕설이 있는 콘텐츠 |
-| 음란물 | 성적 행위 또는 기타 외설적인 콘텐츠에 대한 언급 포함 |
-| 위험 | 유해한 행위를 조장, 촉진 또는 장려 |
+| Quấy rối | Bình luận tiêu cực hoặc gây hại nhắm đến danh tính và/hoặc các thuộc tính được bảo vệ. |
+| Lời nói hận thù | Nội dung thô lỗ, khiếm nhã hoặc tục tĩu. |
+| Nội dung khiêu dâm | Chứa nội dung đề cập đến hành vi tình dục hoặc nội dung khiêu dâm khác. |
+| Nguy hiểm | Cổ xuý, tạo điều kiện hoặc khuyến khích hành động gây hại. |
 
-이러한 카테고리는 [`HarmCategory`](https://ai.google.dev/gemini-api/docs/`HarmCategory`)에 정의되어 있습니다. 이러한 필터를 사용하면 사용 사례에 적합한 결과를 조정할 수 있습니다. 예를 들어 동영상 게임 대화를 제작하는 경우 게임의 특성상 *위험*하다고 평가되는 콘텐츠를 더 많이 허용해도 괜찮다고 판단할 수 있습니다.
+Các danh mục này được xác định trong [`HarmCategory`](https://ai.google.dev/api/rest/v1/HarmCategory?hl=vi). Bạn có thể sử dụng các bộ lọc này để điều chỉnh những nội dung phù hợp với trường hợp sử dụng của mình. Ví dụ: nếu đang xây dựng đoạn hội thoại trong trò chơi điện tử, bạn có thể cho phép nhiều nội dung hơn được xếp hạng là *Nguy hiểm* do tính chất của trò chơi.
 
-조정 가능한 안전 필터 외에도 Gemini API에는 아동 안전을 저해하는 콘텐츠와 같은 핵심 유해 요소에 대한 기본 보호 조치가 있습니다.
-이러한 유형의 유해성은 항상 차단되며 조정할 수 없습니다.
+Ngoài các bộ lọc an toàn có thể điều chỉnh, Gemini API còn có các biện pháp bảo vệ tích hợp sẵn để ngăn chặn những tác hại cốt lõi, chẳng hạn như nội dung gây nguy hiểm cho sự an toàn của trẻ em.
+Những loại nội dung gây hại này luôn bị chặn và không thể điều chỉnh.
 
-### 콘텐츠 안전 필터링 수준
+### Mức độ lọc an toàn về nội dung
 
-Gemini API는 콘텐츠가 안전하지 않을 확률 수준을 `HIGH`, `MEDIUM`, `LOW`, `NEGLIGIBLE`로 분류합니다.
+Gemini API phân loại mức độ xác suất của nội dung không an toàn là `HIGH`, `MEDIUM`, `LOW` hoặc `NEGLIGIBLE`.
 
-Gemini API는 콘텐츠의 심각도가 아닌 콘텐츠가 안전하지 않을 확률을 기준으로 콘텐츠를 차단합니다. 일부 콘텐츠는 심각도의 유해성이 높더라도 안전하지 않을 가능성이 낮을 수 있으므로 이를 고려하는 것이 중요합니다. 예를 들어 다음 문장을 비교해 보겠습니다.
+Gemini API chặn nội dung dựa trên xác suất nội dung đó không an toàn chứ không phải mức độ nghiêm trọng. Bạn cần cân nhắc điều này vì một số nội dung có thể có xác suất thấp là không an toàn, mặc dù mức độ nghiêm trọng của tác hại vẫn có thể cao. Ví dụ: so sánh các câu sau:
 
-1. 로봇이 나를 때렸습니다.
-2. 로봇이 나를 베었습니다.
+1. Người máy đã đấm tôi.
+2. Con rô bốt đó đã chém tôi.
 
-첫 번째 문장은 안전하지 않을 가능성이 더 높을 수 있지만 폭력 측면에서는 두 번째 문장이 더 심각하다고 생각할 수 있습니다.
-따라서 최종 사용자에게 해를 주지 않으면서 주요 사용 사례를 지원하는 데 필요한 적절한 수준의 차단이 무엇인지 신중하게 고려하고 테스트해야 합니다.
+Câu đầu tiên có thể có khả năng gây nguy hiểm cao hơn, nhưng bạn có thể coi câu thứ hai là có mức độ nghiêm trọng cao hơn về bạo lực.
+Do đó, bạn cần kiểm thử cẩn thận và cân nhắc mức độ chặn phù hợp để hỗ trợ các trường hợp sử dụng chính của bạn, đồng thời giảm thiểu tác hại cho người dùng cuối.
 
-### 요청별 안전 필터링
+### Lọc mức độ an toàn theo yêu cầu
 
-API에 대한 각 요청의 안전 설정을 조정할 수 있습니다. 요청하면 콘텐츠가 분석되고 안전 등급이 지정됩니다. 안전 평점에는 피해 분류의 카테고리와 확률이 포함됩니다. 예를 들어 괴롭힘 카테고리의 확률이 높아 콘텐츠가 차단된 경우 반환된 안전 평점의 카테고리는 `HARASSMENT`이고 피해 확률은 `HIGH`으로 설정됩니다.
+Bạn có thể điều chỉnh chế độ cài đặt an toàn cho từng yêu cầu mà bạn gửi đến API. Khi bạn đưa ra yêu cầu, nội dung sẽ được phân tích và chỉ định một mức độ an toàn. Mức độ an toàn bao gồm danh mục và xác suất phân loại mức độ gây hại. Ví dụ: nếu nội dung bị chặn do danh mục quấy rối có xác suất cao, thì điểm an toàn được trả về sẽ có danh mục bằng `HARASSMENT` và xác suất gây hại được đặt thành `HIGH`.
 
-모델의 내재된 안전성으로 인해 추가 필터는 기본적으로 **사용 중지**되어 있습니다.
-이러한 기능을 사용 설정하면 안전하지 않을 가능성에 따라 콘텐츠를 차단하도록 시스템을 구성할 수 있습니다. 기본 모델 동작은 대부분의 사용 사례를 지원하므로 애플리케이션에 지속적으로 필요한 경우에만 이러한 설정을 조정해야 합니다.
+Do tính an toàn vốn có của mô hình, các bộ lọc bổ sung sẽ ở trạng thái **Tắt** theo mặc định.
+Nếu chọn bật các chế độ này, bạn có thể định cấu hình hệ thống để chặn nội dung dựa trên xác suất nội dung đó không an toàn. Hành vi mặc định của mô hình bao gồm hầu hết các trường hợp sử dụng, vì vậy, bạn chỉ nên điều chỉnh các chế độ cài đặt này nếu cần tính nhất quán cho ứng dụng của mình.
 
-다음 표에서 각 카테고리에 대해 조정할 수 있는 차단 설정을 확인할 수 있습니다. 예를 들어 **증오심 표현** 카테고리에 대해 차단 설정을 **소수 차단**으로 설정하면 증오심 표현 콘텐츠일 가능성이 높은 모든 항목이 차단됩니다. 하지만 가능성이 낮은 모든 항목이 허용됩니다.
+Bảng sau đây mô tả các chế độ chặn mà bạn có thể điều chỉnh cho từng danh mục. Ví dụ: nếu bạn đặt chế độ chặn thành **Chặn một số nội dung** cho danh mục **Lời nói hận thù**, thì mọi nội dung có khả năng cao là lời nói hận thù đều sẽ bị chặn. Tuy nhiên, bạn có thể sử dụng mọi thứ có xác suất thấp hơn.
 
-| 기준 (Google AI Studio) | 기준(API) | 설명 |
+| Ngưỡng (Google AI Studio) | Ngưỡng (API) | Mô tả |
 | --- | --- | --- |
-| 사용 안함 | `OFF` | 안전 필터 사용 중지 |
-| 차단 안함 | `BLOCK_NONE` | 콘텐츠가 안전하지 않을 확률에 관계없이 항상 표시 |
-| 소수 차단 | `BLOCK_ONLY_HIGH` | 안전하지 않은 콘텐츠일 가능성이 높은 경우 차단 |
-| 일부 차단 | `BLOCK_MEDIUM_AND_ABOVE` | 안전하지 않은 콘텐츠일 가능성이 중간 또는 높은 경우 차단 |
-| 대부분 차단 | `BLOCK_LOW_AND_ABOVE` | 안전하지 않은 콘텐츠일 가능성이 낮음, 중간 또는 높은 경우 차단 |
-| 해당 사항 없음 | `HARM_BLOCK_THRESHOLD_UNSPECIFIED` | 기준점이 지정되지 않았습니다. 기본 기준점을 사용하여 차단합니다. |
+| Tắt | `OFF` | Tắt bộ lọc an toàn |
+| Không chặn thành phần nào | `BLOCK_NONE` | Luôn hiển thị bất kể xác suất nội dung không an toàn |
+| Chặn một số | `BLOCK_ONLY_HIGH` | Chặn khi có khả năng cao là nội dung không an toàn |
+| Chặn một số | `BLOCK_MEDIUM_AND_ABOVE` | Chặn khi có khả năng trung bình hoặc cao về nội dung không an toàn |
+| Chặn hầu hết | `BLOCK_LOW_AND_ABOVE` | Chặn khi có xác suất thấp, trung bình hoặc cao về nội dung không an toàn |
+| Không áp dụng | `HARM_BLOCK_THRESHOLD_UNSPECIFIED` | Ngưỡng không được chỉ định, chặn bằng ngưỡng mặc định |
 
-기준점을 설정하지 않으면 Gemini 2.5 및 3 모델의 기본 차단 기준점은 **사용 안함**입니다.
+Nếu bạn không đặt ngưỡng này, thì ngưỡng chặn mặc định sẽ là **Tắt** đối với các mô hình Gemini 2.5 và 3.
 
-생성형 서비스에 대한 각 요청에 이러한 설정을 지정할 수 있습니다.
-자세한 내용은 [`HarmBlockThreshold`](https://ai.google.dev/gemini-api/docs/`HarmBlockThreshold`) API 참조를 확인하세요.
+Bạn có thể đặt các chế độ cài đặt này cho từng yêu cầu mà bạn gửi đến dịch vụ tạo sinh.
+Hãy xem tài liệu tham khảo về API [`HarmBlockThreshold`](https://ai.google.dev/api/generate-content?hl=vi#harmblockthreshold) để biết thông tin chi tiết.
 
-### 안전 관련 의견
+### Phản hồi về an toàn
 
-[`generateContent`](https://ai.google.dev/gemini-api/docs/`generateContent`)은 안전 피드백을 포함하는 [`GenerateContentResponse`](https://ai.google.dev/gemini-api/docs/`GenerateContentResponse`)을 반환합니다.
+[`generateContent`](https://ai.google.dev/api/generate-content?hl=vi#method:-models.generatecontent) trả về [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=vi#generatecontentresponse) bao gồm ý kiến phản hồi về độ an toàn.
 
-프롬프트 의견은 [`promptFeedback`](https://ai.google.dev/gemini-api/docs/`promptFeedback`)에 포함됩니다. `promptFeedback.blockReason`가 설정되면 프롬프트의 콘텐츠가 차단된 것입니다.
+Ý kiến phản hồi về câu lệnh được đưa vào [`promptFeedback`](https://ai.google.dev/api/generate-content?hl=vi#promptfeedback). Nếu `promptFeedback.blockReason` được đặt, thì nội dung của lời nhắc đã bị chặn.
 
-대답 후보 의견은 [`Candidate.finishReason`](https://ai.google.dev/gemini-api/docs/`Candidate.finishReason`) 및 [`Candidate.safetyRatings`](https://ai.google.dev/gemini-api/docs/`Candidate.safetyRatings`)에 포함됩니다. 대답 콘텐츠가 차단되고 `finishReason`가 `SAFETY`인 경우 `safetyRatings`에서 자세한 내용을 확인할 수 있습니다. 차단된 콘텐츠는 반환되지 않습니다.
+Ý kiến phản hồi về đề xuất phản hồi được đưa vào [`Candidate.finishReason`](https://ai.google.dev/api/generate-content?hl=vi#candidate) và [`Candidate.safetyRatings`](https://ai.google.dev/api/generate-content?hl=vi#candidate). Nếu nội dung phản hồi bị chặn và `finishReason` là `SAFETY`, bạn có thể kiểm tra `safetyRatings` để biết thêm thông tin chi tiết. Nội dung bị chặn sẽ không được trả về.
 
-## 안전 설정 조정
+## Điều chỉnh chế độ cài đặt an toàn
 
-이 섹션에서는 Google AI Studio와 코드에서 모두 안전 설정을 조정하는 방법을 다룹니다.
+Phần này trình bày cách điều chỉnh chế độ cài đặt an toàn trong cả Google AI Studio và trong mã của bạn.
 
 ### Google AI Studio
 
-Google AI Studio에서 안전 설정을 조정할 수 있습니다.
+Bạn có thể điều chỉnh chế độ cài đặt an toàn trong Google AI Studio.
 
-**실행 설정** 패널의 **고급 설정**에서 **안전 설정**을 클릭하여 **실행 안전 설정** 모달을 엽니다. 모달에서 슬라이더를 사용하여 안전 카테고리별 콘텐츠 필터링 수준을 조정할 수 있습니다.
+Nhấp vào **Chế độ cài đặt an toàn** trong phần **Chế độ cài đặt nâng cao** trong bảng điều khiển **Chế độ cài đặt khi chạy** để mở phương thức **Chế độ cài đặt an toàn khi chạy**. Trong cửa sổ phương thức, bạn có thể dùng thanh trượt để điều chỉnh mức lọc nội dung theo từng danh mục an toàn:
 
-![](https://ai.google.dev/static/gemini-api/docs/images/safety_settings_ui.png?hl=ko)
+![](https://ai.google.dev/static/gemini-api/docs/images/safety_settings_ui.png?hl=vi)
 
-요청을 보내면 (예: 모델에 질문) 요청의 콘텐츠가 차단된 경우 warning
-**콘텐츠가 차단됨** 메시지가 표시됩니다. 자세한 내용을 보려면 **콘텐츠 차단됨** 텍스트 위로 마우스 포인터를 가져가 카테고리와 유해성 분류 확률을 확인하세요.
+Khi bạn gửi yêu cầu (ví dụ: đặt câu hỏi cho mô hình), thông báo warning
+**Nội dung bị chặn** sẽ xuất hiện nếu nội dung trong yêu cầu bị chặn. Để xem thêm thông tin chi tiết, hãy giữ con trỏ lên văn bản **Nội dung bị chặn** để xem danh mục và xác suất phân loại nội dung gây hại.
 
-### 코드 예시
+### Ví dụ về mã
 
-다음 코드 스니펫은 `GenerateContent` 호출에서 안전 설정을 설정하는 방법을 보여줍니다. 이렇게 하면 증오심 표현(`HARM_CATEGORY_HATE_SPEECH`) 카테고리의 기준점이 설정됩니다. 이 카테고리를 `BLOCK_LOW_AND_ABOVE`로 설정하면 증오심 표현일 가능성이 낮거나 높은 콘텐츠가 차단됩니다. 기준 설정에 관해 알아보려면 [요청별 안전 필터링](https://ai.google.dev/gemini-api/docs/요청별 안전 필터링)을 참고하세요.
+Đoạn mã sau đây cho biết cách đặt chế độ cài đặt an toàn trong lệnh gọi `GenerateContent`. Thao tác này sẽ đặt ngưỡng cho danh mục lời nói hận thù (`HARM_CATEGORY_HATE_SPEECH`). Khi bạn đặt danh mục này thành `BLOCK_LOW_AND_ABOVE`, mọi nội dung có xác suất thấp hoặc cao hơn là lời nói hận thù đều sẽ bị chặn. Để tìm hiểu chế độ cài đặt ngưỡng, hãy xem phần [Lọc nội dung không an toàn theo yêu cầu](#safety-filtering-per-request).
 
 ### Python
 
@@ -161,7 +165,7 @@ func main() {
 }
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -189,7 +193,7 @@ async function main() {
 await main();
 ```
 
-### 자바
+### Java
 
 ```
 SafetySetting hateSpeechSafety = new SafetySetting(HarmCategory.HATE_SPEECH,
@@ -224,18 +228,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 }'
 ```
 
-## 다음 단계
+## Các bước tiếp theo
 
-- 전체 API에 대해 자세히 알아보려면 [API 참조](https://ai.google.dev/gemini-api/docs/API 참조)를 확인하세요.
-- LLM으로 개발할 때 안전 고려사항을 전반적으로 살펴보려면 [안전 가이드](https://ai.google.dev/gemini-api/docs/안전 가이드)를 검토하세요.
-- [Jigsaw팀](https://ai.google.dev/gemini-api/docs/Jigsaw팀)에서 확률과 심각도를 평가하는 방법 자세히 알아보기
-- [Perspective API](https://ai.google.dev/gemini-api/docs/Perspective API)와 같은 안전 솔루션에 기여하는 제품에 대해 자세히 알아보세요.
-  \* 이러한 안전 설정을 사용하여 유해성 분류기를 만들 수 있습니다. 시작하려면 [분류 예시](https://ai.google.dev/gemini-api/docs/분류 예시)를 참고하세요.
+- Hãy xem [Tài liệu tham khảo API](https://ai.google.dev/api?hl=vi) để tìm hiểu thêm về toàn bộ API.
+- Xem [hướng dẫn về an toàn](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=vi) để biết thông tin tổng quan về các yếu tố cần cân nhắc về an toàn khi phát triển bằng các LLM.
+- Tìm hiểu thêm về cách đánh giá xác suất so với mức độ nghiêm trọng của [nhóm Jigsaw](https://developers.perspectiveapi.com/s/about-the-api-score)
+- Tìm hiểu thêm về các sản phẩm góp phần tạo nên các giải pháp an toàn như [Perspective API](https://medium.com/jigsaw/reducing-toxicity-in-large-language-models-with-perspective-api-c31c39b7a4d7).
+  \* Bạn có thể sử dụng các chế độ cài đặt an toàn này để tạo một trình phân loại nội dung độc hại. Hãy xem [ví dụ về việc phân loại](https://ai.google.dev/examples/train_text_classifier_embeddings?hl=vi) để bắt đầu.
 
-의견 보내기
+Gửi ý kiến phản hồi
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://ai.google.dev/gemini-api/docs/Creative Commons Attribution 4.0 라이선스)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://ai.google.dev/gemini-api/docs/Apache 2.0 라이선스)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://ai.google.dev/gemini-api/docs/Google Developers 사이트 정책)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-최종 업데이트: 2026-04-29(UTC)
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-의견을 전달하고 싶나요?
+Bạn muốn chia sẻ thêm với chúng tôi?
+
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

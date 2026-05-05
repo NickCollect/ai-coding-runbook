@@ -1,51 +1,57 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ja
-fetched_at: 2026-05-05T13:14:53.500788+00:00
-title: "Gemini 3.1 Pro \u30d7\u30ec\u30d3\u30e5\u30fc\u7248 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=vi
+fetched_at: 2026-05-05T19:52:03.762699+00:00
+title: "B\u1ea3n xem tr\u01b0\u1edbc Gemini 3.1 Pro \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-フィードバックを送信
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Gemini 3.1 Pro プレビュー版
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Gemini 3 Pro シリーズのパフォーマンスと信頼性を向上させるために構築された Gemini 3.1 Pro プレビュー版は、より優れた思考、トークン効率の向上、より根拠のある事実と一貫性のあるエクスペリエンスを提供します。ソフトウェア エンジニアリングの動作とユーザビリティ、および現実世界のドメインで正確なツールの使用と信頼性の高い複数ステップの実行を必要とするエージェント ワークフロー向けに最適化されています。
+Gửi ý kiến phản hồi
 
-[Google AI Studio で試す](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=ja)
+# Bản xem trước Gemini 3.1 Pro
 
-## ドキュメント
+Được xây dựng để tinh chỉnh hiệu suất và độ tin cậy của dòng Gemini 3 Pro, Gemini 3.1 Pro Preview mang đến khả năng tư duy tốt hơn, cải thiện hiệu quả sử dụng mã thông báo và trải nghiệm thực tế, nhất quán về mặt thông tin. Mô hình này được tối ưu hoá cho hành vi và khả năng sử dụng kỹ thuật phần mềm, cũng như quy trình công việc theo hướng tác nhân đòi hỏi việc sử dụng công cụ chính xác và thực thi nhiều bước đáng tin cậy trên các miền trong thế giới thực.
 
-機能と機能の詳細については、[Gemini 3 デベロッパー ガイド](https://ai.google.dev/gemini-api/docs/gemini-3?hl=ja)のページをご覧ください。
+[Dùng thử trong Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=vi)
+
+## Tài liệu
+
+Truy cập trang [Hướng dẫn dành cho nhà phát triển Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=vi) để xem đầy đủ các tính năng và khả năng.
 
 ## gemini-3.1-pro-preview
 
-| プロパティ | 説明 |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardモデルコード | `gemini-3.1-pro-preview` |
-| save でサポートされるデータ型 | **入力**  テキスト、画像、動画、音声、PDF  **出力**  テキスト |
-| token\_autoトークン上限[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ja) | **入力トークンの上限**  1,048,576  **出力トークンの上限**  65,536 |
-| handyman機能 | **音声生成**  サポート対象外  **Batch API**  サポート対象  **キャッシュ保存**  サポート対象  **コードの実行**  サポート対象  **ファイル検索**  サポート対象（AI Studio のみ）  **Flex 推論**  サポート対象  **関数呼び出し**  サポート対象  **Google マップによるグラウンディング**  サポート対象  **画像生成**  サポート対象外  **Live API**  サポート対象外  **候補の推論**  サポート対象  **検索によるグラウンディング**  サポート対象  **構造化出力**  サポート対象  **思考モード**  サポート対象  **URL コンテキスト**  サポート対象 |
-| 123 バージョン | 詳細については、[モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja#model-versions)をご覧ください。  - プレビュー: `gemini-3.1-pro-preview` - プレビュー: `gemini-3.1-pro-preview-customtools` \* |
-| calendar\_month最終更新日 | 2026 年 2 月 |
-| cognition\_2ナレッジ カットオフ | 2025 年 1 月 |
+| id\_cardMã mô hình | `gemini-3.1-pro-preview` |
+| saveCác loại dữ liệu được hỗ trợ | **Thông tin đầu vào**  Văn bản, Hình ảnh, Video, Âm thanh và PDF  **Đầu ra**  Văn bản |
+| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  1.048.576  **Giới hạn mã thông báo đầu ra**  65.536 |
+| handymanKhả năng | **Tạo âm thanh**  Không được hỗ trợ  **API hàng loạt**  Được hỗ trợ  **Lưu vào bộ nhớ đệm**  Được hỗ trợ  **Thực thi mã**  Được hỗ trợ  **Tìm tệp**  Được hỗ trợ (chỉ trong AI Studio)  **Suy luận linh hoạt**  Được hỗ trợ  **Gọi hàm**  Được hỗ trợ  **Tìm trong Google Maps**  Được hỗ trợ  **Tạo hình ảnh**  Không được hỗ trợ  **API trực tiếp**  Không được hỗ trợ  **Suy luận theo mức độ ưu tiên**  Được hỗ trợ  **Tìm trong phần liên kết thực tế**  Được hỗ trợ  **Đầu ra có cấu trúc**  Được hỗ trợ  **Tư duy**  Được hỗ trợ  **Bối cảnh URL**  Được hỗ trợ |
+| 123Phiên bản | Đọc các [mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm chi tiết.  - Bản dùng thử: `gemini-3.1-pro-preview` - Bản dùng thử: `gemini-3.1-pro-preview-customtools` \* |
+| calendar\_monthBản cập nhật mới nhất | Tháng 2 năm 2026 |
+| cognition\_2Điểm cắt kiến thức | Tháng 1 năm 2025 |
 
 #### gemini-3.1-pro-preview-customtools
 
-\* *bash とカスタムツールの両方を使用して構築している場合は、Gemini 3.1 Pro プレビュー版に、`gemini-3.1-pro-preview-customtools` という API を介して利用できる個別のエンドポイントが付属しています。このエンドポイントは、カスタムツール（`view_file` や `search_code` など）の優先順位付けに適しています。*
+\* *Đối với những người xây dựng bằng cách kết hợp các công cụ bash và công cụ tuỳ chỉnh, Gemini 3.1 Pro Preview
+có một điểm cuối riêng biệt thông qua API có tên là
+`gemini-3.1-pro-preview-customtools`. Điểm cuối này ưu tiên các công cụ tuỳ chỉnh của bạn tốt hơn (ví dụ: `view_file` hoặc `search_code`).*
 
-*`gemini-3.1-pro-preview-customtools` はカスタムツールと Bash を使用するエージェント ワークフロー用に最適化されていますが、このようなツールを使用しないユースケースでは品質の変動が見られることがあります。*
+*Xin lưu ý rằng mặc dù `gemini-3.1-pro-preview-customtools` được tối ưu hoá cho các quy trình công việc theo hướng tác nhân sử dụng các công cụ tuỳ chỉnh và Bash, nhưng bạn có thể thấy chất lượng dao động trong một số trường hợp sử dụng không hưởng lợi từ các công cụ đó.*
 
-フィードバックを送信
+Gửi ý kiến phản hồi
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-最終更新日 2026-04-29 UTC。
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-ご意見をお聞かせください
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

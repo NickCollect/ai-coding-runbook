@@ -1,18 +1,22 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models?hl=pt-BR
-fetched_at: 2026-05-05T13:17:41.868061+00:00
-title: "Modelos \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models?hl=th
+fetched_at: 2026-05-05T19:52:18.783348+00:00
+title: "\u0e42\u0e21\u0e40\u0e14\u0e25 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/Deep Research do Gemini) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
 
-- [Página inicial](https://ai.google.dev/gemini-api/docs/Página inicial)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [Documentos](https://ai.google.dev/gemini-api/docs/Documentos)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Envie comentários
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Modelos
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+
+ส่งความคิดเห็น
+
+# โมเดล
 
 ---
 
@@ -22,51 +26,51 @@ Envie comentários
 
 ### Gemini 3.1 Pro
 
-Inteligência avançada, habilidades complexas de resolução de problemas e recursos avançados de codificação de agentes e de vibe.
+ความสามารถด้านปัญญาประดิษฐ์ขั้นสูง ทักษะการแก้ปัญหาที่ซับซ้อน และความสามารถในการเขียนโค้ดแบบเป็น Agent และ Vibe Coding
 
-Visualizar](https://ai.google.dev/gemini-api/docs/auto\_awesome### Gemini 3.1 ProInteligência avançada, habilidades complexas de resolução de problemas e recursos avançados de codificação de agentes e de vibe.Visualizar)
+Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=th)
 [spark
 
 ### Gemini 3 Flash
 
-Desempenho de classe de fronteira que rivaliza com modelos maiores a uma fração do custo.
+ประสิทธิภาพระดับ Frontier ที่เทียบเคียงได้กับโมเดลขนาดใหญ่กว่าในราคาที่ถูกกว่ามาก
 
-Visualizar](https://ai.google.dev/gemini-api/docs/spark### Gemini 3 FlashDesempenho de classe de fronteira que rivaliza com modelos maiores a uma fração do custo.Visualizar)
+Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=th)
 [bolt
 
 ### Gemini 3.1 Flash-Lite
 
-Desempenho de classe de fronteira que rivaliza com modelos maiores a uma fração do custo.
+ประสิทธิภาพระดับ Frontier ที่เทียบเคียงได้กับโมเดลขนาดใหญ่กว่าในราคาที่ถูกกว่ามาก
 
-Visualizar](https://ai.google.dev/gemini-api/docs/bolt### Gemini 3.1 Flash-LiteDesempenho de classe de fronteira que rivaliza com modelos maiores a uma fração do custo.Visualizar)
+Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=th)
 [🍌🍌
 
 ### Nano Banana 2
 
-Geração e edição de imagens eficientes e avançadas, otimizadas para velocidade e casos de uso de alto volume.
+การสร้างและแก้ไขรูปภาพที่มีประสิทธิภาพสูงและทรงพลัง ซึ่งปรับให้เหมาะกับกรณีการใช้งานที่ต้องใช้ความเร็วสูงและมีปริมาณมาก
 
-Visualizar](https://ai.google.dev/gemini-api/docs/🍌🍌### Nano Banana 2Geração e edição de imagens eficientes e avançadas, otimizadas para velocidade e casos de uso de alto volume.Visualizar)
+Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=th)
 [🍌
 
 ### Nano Banana Pro
 
-Modelos de geração e edição de imagens de última geração para criação de imagens nativas altamente contextuais.
+โมเดลการสร้างและแก้ไขรูปภาพที่ล้ำสมัยที่สุดสำหรับการสร้างรูปภาพแบบเนทีฟที่มีบริบทสูง
 
-Visualizar](https://ai.google.dev/gemini-api/docs/🍌### Nano Banana ProModelos de geração e edição de imagens de última geração para criação de imagens nativas altamente contextuais.Visualizar)
+Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=th)
 [settings\_voice
 
 ### Gemini 3.1 Flash Live
 
-Modelo de API Live de alta qualidade e baixa latência para aplicativos de IA de diálogo em tempo real e de voz.
+โมเดล Live API คุณภาพสูงที่มีเวลาในการตอบสนองต่ำสำหรับการโต้ตอบแบบเรียลไทม์และแอปพลิเคชัน AI ที่ใช้เสียงเป็นหลัก
 
-Nova visualização](https://ai.google.dev/gemini-api/docs/settings\_voice### Gemini 3.1 Flash LiveModelo de API Live de alta qualidade e baixa latência para aplicativos de IA de diálogo em tempo real e de voz.Nova visualização)
+New Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=th)
 [graphic\_eq
 
 ### Gemini 3.1 Flash TTS
 
-Geração de fala avançada e de baixa latência.
+การสร้างเสียงพูดที่ทรงพลังและมีเวลาในการตอบสนองต่ำ
 
-Nova visualização](https://ai.google.dev/gemini-api/docs/graphic\_eq### Gemini 3.1 Flash TTSGeração de fala avançada e de baixa latência.Nova visualização)
+New Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=th)
 
 ---
 
@@ -74,27 +78,27 @@ Nova visualização](https://ai.google.dev/gemini-api/docs/graphic\_eq### Gemini
 
 bolt
 
-### [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/Gemini 2.5 Flash)
+### [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=th)
 
-Nosso melhor modelo de preço-desempenho para tarefas de baixa latência e alto volume que exigem raciocínio.
+โมเดลที่มีประสิทธิภาพคุ้มค่าที่สุดของเราสำหรับงานที่มีปริมาณมากและมีเวลาในการตอบสนองต่ำซึ่งต้องใช้ความสามารถในการให้เหตุผล
 
 image\_search
 
-### [Nano Banana](https://ai.google.dev/gemini-api/docs/Nano Banana)
+### [Nano Banana](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=th)
 
-Geração e edição de imagens nativas de última geração projetadas para fluxos de trabalho rápidos e criativos.
+การสร้างและแก้ไขรูปภาพแบบเนทีฟที่ล้ำสมัยที่สุด ซึ่งออกแบบมาสำหรับเวิร์กโฟลว์ที่รวดเร็วและสร้างสรรค์
 
 settings\_voice
 
-### [Pré-lançamento do Gemini 2.5 Flash Live Preview](https://ai.google.dev/gemini-api/docs/Pré-lançamento do Gemini 2.5 Flash Live Preview)
+### [Gemini 2.5 Flash Live Live (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=th)
 
-Otimizado para agentes conversacionais em tempo real com streaming de áudio nativo de menos de um segundo.
+ปรับให้เหมาะกับเอเจนต์การสนทนาแบบเรียลไทม์ที่มีการสตรีมเสียงแบบเนทีฟที่ใช้เวลาไม่ถึงวินาที
 
 record\_voice\_over
 
-### [Pré-lançamento do Gemini 2.5 Flash TTS](https://ai.google.dev/gemini-api/docs/Pré-lançamento do Gemini 2.5 Flash TTS)
+### [Gemini 2.5 Flash TTS (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=th)
 
-Geração de áudio de conversão de texto em voz controlável com controle refinado sobre estilo e ritmo.
+การสร้างเสียงพูดจากข้อความที่ควบคุมได้พร้อมการควบคุมสไตล์และจังหวะอย่างละเอียด
 
 ---
 
@@ -102,9 +106,9 @@ Geração de áudio de conversão de texto em voz controlável com controle refi
 
 speed
 
-### [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/Gemini 2.5 Flash-Lite)
+### [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=th)
 
-O modelo multimodal mais rápido e econômico da família 2.5.
+โมเดลหลายรูปแบบที่เร็วที่สุดและประหยัดที่สุดในตระกูล 2.5
 
 ---
 
@@ -112,223 +116,225 @@ O modelo multimodal mais rápido e econômico da família 2.5.
 
 psychology
 
-### [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/Gemini 2.5 Pro)
+### [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=th)
 
-Nosso modelo mais avançado para tarefas complexas, com recursos de raciocínio e programação.
+โมเดลที่ล้ำหน้าที่สุดของเราสำหรับงานที่ซับซ้อน ซึ่งมีความสามารถในการให้เหตุผลและการเขียนโค้ดที่ลึกซึ้ง
 
 record\_voice\_over
 
-### [Pré-lançamentodo Gemini 2.5 Pro TTS](https://ai.google.dev/gemini-api/docs/Pré-lançamentodo Gemini 2.5 Pro TTS)
+### [Gemini 2.5 Pro TTS (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=th)
 
-Síntese de fala de alta fidelidade otimizada para qualidade em fluxos de trabalho estruturados, como podcasts e audiolivros.
+การสังเคราะห์เสียงพูดแบบรายละเอียดเสมือนจริงสูง ซึ่งปรับให้เหมาะกับคุณภาพในเวิร์กโฟลว์ที่มีโครงสร้าง เช่น พ็อดแคสต์และหนังสือเสียง
 
 ---
 
-## Modelos de áudio
+## โมเดลเสียง
 
-*Esta seção contém todos os modelos de áudio, incluindo aqueles que já podem estar listados em outras seções*
+*ส่วนนี้มีโมเดลเสียงทั้งหมด รวมถึงโมเดลที่อาจแสดงอยู่ในส่วนอื่นๆ แล้ว*
 
 settings\_input\_antenna
 
-### [Pré-lançamento do Gemini 3.1 Flash Live Preview](https://ai.google.dev/gemini-api/docs/Pré-lançamento do Gemini 3.1 Flash Live Preview)
+### [Gemini 3.1 Flash Live Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=th)
 
-Nosso modelo de áudio para áudio (A2A) de alta qualidade e baixa latência projetado para diálogo em tempo real e aplicativos de IA de voz.
+โมเดลเสียงพูดเป็นเสียงพูด (A2A) คุณภาพสูงที่มีเวลาในการตอบสนองต่ำ ซึ่งออกแบบมาสำหรับการโต้ตอบแบบเรียลไทม์และแอปพลิเคชัน AI ที่ใช้เสียงเป็นหลัก
 
 graphic\_eq
 
-### [Pré-lançamento do Gemini 3.1 Flash TTS](https://ai.google.dev/gemini-api/docs/Pré-lançamento do Gemini 3.1 Flash TTS)
+### [Gemini 3.1 Flash TTS Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=th)
 
-Geração de fala avançada e de baixa latência, com saídas naturais, comandos direcionáveis e novas tags de áudio expressivas para controle preciso da narração.
+การสร้างเสียงพูดที่ทรงพลังและมีเวลาในการตอบสนองต่ำ พร้อมเอาต์พุตที่เป็นธรรมชาติ พรอมต์ที่ควบคุมได้ และแท็กเสียงแสดงอารมณ์ใหม่สำหรับการควบคุมการบรรยายที่แม่นยำ
 
 settings\_voice
 
-### [Pré-lançamento do Gemini 2.5 Flash Live Preview](https://ai.google.dev/gemini-api/docs/Pré-lançamento do Gemini 2.5 Flash Live Preview)
+### [Gemini 2.5 Flash Live Live (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=th)
 
-Nosso modelo de API Live principal para agentes de voz e vídeo bidirecionais de baixa latência com raciocínio de áudio nativo.
+โมเดล Live API หลักของเราสำหรับเอเจนต์เสียงและวิดีโอแบบสองทิศทางที่มีเวลาในการตอบสนองต่ำ พร้อมความสามารถในการให้เหตุผลด้านเสียงแบบเนทีฟ
 
 bolt
 
-### [Pré-lançamento do Gemini 2.5 Flash TTS](https://ai.google.dev/gemini-api/docs/Pré-lançamento do Gemini 2.5 Flash TTS)
+### [Gemini 2.5 Flash TTS (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=th)
 
-Conversão de texto em voz rápida e controlável para aplicativos de baixa latência e econômicos e assistentes em tempo real.
+การเปลี่ยนข้อความเป็นเสียงพูดที่รวดเร็วและควบคุมได้สำหรับแอปพลิเคชันที่มีเวลาในการตอบสนองต่ำและคุ้มค่า รวมถึงผู้ช่วยแบบเรียลไทม์
 
 record\_voice\_over
 
-### [Pré-lançamentodo Gemini 2.5 Pro TTS](https://ai.google.dev/gemini-api/docs/Pré-lançamentodo Gemini 2.5 Pro TTS)
+### [Gemini 2.5 Pro TTS (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=th)
 
-Síntese de fala de alta fidelidade otimizada para qualidade em fluxos de trabalho estruturados, como podcasts e audiolivros.
+การสังเคราะห์เสียงพูดแบบรายละเอียดเสมือนจริงสูง ซึ่งปรับให้เหมาะกับคุณภาพในเวิร์กโฟลว์ที่มีโครงสร้าง เช่น พ็อดแคสต์และหนังสือเสียง
 
 ---
 
-## Modelos de mídia generativa
+## โมเดล GenMedia
 
-*Esta seção contém todos os modelos de mídia generativa, incluindo aqueles que já podem estar listados em outras seções*
+*ส่วนนี้มีโมเดล GenMedia ทั้งหมด รวมถึงโมเดลที่อาจแสดงอยู่ในส่วนอื่นๆ แล้ว*
 
 blur\_on
 
-### [Pré-lançamento do Nano Banana 2](https://ai.google.dev/gemini-api/docs/Pré-lançamento do Nano Banana 2)
+### [Nano Banana 2 (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=th)
 
-Criação visual de alta eficiência e escala de produção, combinando a inteligência da série Gemini 3 com velocidades de geração extremamente rápidas.
+การสร้างภาพระดับการผลิตที่มีประสิทธิภาพสูง ซึ่งผสานรวมความสามารถด้านปัญญาประดิษฐ์ของซีรีส์ Gemini 3 เข้ากับความเร็วในการสร้างที่รวดเร็ว
 
 movie\_filter
 
-### [Pré-lançamentodo Veo 3.1](https://ai.google.dev/gemini-api/docs/Pré-lançamentodo Veo 3.1)
+### [Veo 3.1 (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=th)
 
-Geração de vídeo cinematográfico de última geração com controles criativos avançados e áudio sincronizado nativamente.
+การสร้างวิดีโอสไตล์ภาพยนตร์ที่ล้ำสมัยที่สุดพร้อมการควบคุมการสร้างสรรค์ขั้นสูงและเสียงที่ซิงค์แบบเนทีฟ
 
 image\_edit
 
-### [Pré-lançamento do Nano Banana Pro](https://ai.google.dev/gemini-api/docs/Pré-lançamento do Nano Banana Pro)
+### [Nano Banana Pro (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=th)
 
-Um mecanismo de design profissional com um núcleo de raciocínio para recursos visuais 4K com qualidade de estúdio, layouts complexos e renderização de texto precisa.
+เอนจินการออกแบบระดับมืออาชีพที่มีแกนกลางด้านความสามารถในการให้เหตุผลสำหรับภาพ 4K คุณภาพระดับสตูดิโอ เลย์เอาต์ที่ซับซ้อน และการแสดงข้อความที่แม่นยำ
 
 movie\_edit
 
-### [Pré-lançamentodo Veo 3.1 Lite](https://ai.google.dev/gemini-api/docs/Pré-lançamentodo Veo 3.1 Lite)
+### [Veo 3.1 Lite (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=th)
 
-Geração, edição e controle cinematográfico de vídeo de alta eficiência, baixo custo e prioridade para desenvolvedores da família Veo 3.1.
+การสร้างและแก้ไขวิดีโอ รวมถึงการควบคุมสไตล์ภาพยนตร์ที่มีประสิทธิภาพสูง ต้นทุนต่ำ และเน้นนักพัฒนาซอฟต์แวร์เป็นหลักจากตระกูล Veo 3.1
 
 image\_search
 
-### [Nano Banana](https://ai.google.dev/gemini-api/docs/Nano Banana)
+### [Nano Banana](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=th)
 
-Geração e edição de imagens nativas de última geração projetadas para fluxos de trabalho rápidos e criativos.
+การสร้างและแก้ไขรูปภาพแบบเนทีฟที่ล้ำสมัยที่สุด ซึ่งออกแบบมาสำหรับเวิร์กโฟลว์ที่รวดเร็วและสร้างสรรค์
 
 palette
 
-### [Imagen 4](https://ai.google.dev/gemini-api/docs/Imagen 4)
+### [Imagen 4](https://ai.google.dev/gemini-api/docs/models/imagen?hl=th)
 
-Modelo de conversão de texto em imagem, com geração rápida e ultrarrápida e clareza excepcional de até 2K de resolução.
+โมเดลการเปลี่ยนข้อความเป็นรูปภาพที่ล้ำสมัยที่สุด ซึ่งมีความเร็วในการสร้างที่รวดเร็วและเร็วมาก รวมถึงความคมชัดที่ยอดเยี่ยมสูงสุดถึงความละเอียด 2K
 
 ---
 
-## Modelos de geração de música
+## โมเดลการสร้างเสียงดนตรี
 
-*Esta seção contém todos os modelos de geração de música, incluindo aqueles que já podem estar listados em outras seções*
+*ส่วนนี้มีโมเดลการสร้างเสียงดนตรีทั้งหมด รวมถึงโมเดลที่อาจแสดงอยู่ในส่วนอื่นๆ แล้ว*
 
 music\_note
 
-### [Pré-lançamento do Lyria 3 Pro](https://ai.google.dev/gemini-api/docs/Pré-lançamento do Lyria 3 Pro)
+### [Lyria 3 Pro (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=th)
 
-Nosso modelo principal de geração de música, otimizado para músicas completas com coerência estrutural complexa.
+โมเดลการสร้างเสียงดนตรีหลักของเรา ซึ่งปรับให้เหมาะกับเพลงเต็มความยาวที่มีความสอดคล้องของโครงสร้างที่ซับซ้อน
 
 music\_note\_2
 
-### [Pré-lançamento do Lyria 3 Clip](https://ai.google.dev/gemini-api/docs/Pré-lançamento do Lyria 3 Clip)
+### [Lyria 3 Clip (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=th)
 
-Otimizado para gerar clipes musicais curtos, loops e pré-lançamentos de até 30 segundos.
+ปรับให้เหมาะกับการสร้างคลิปดนตรีสั้นๆ ลูป และตัวอย่างความยาวสูงสุด 30 วินาที
 
 music\_history
 
-### [Lyria RealTime Experimental](https://ai.google.dev/gemini-api/docs/Lyria RealTime Experimental)
+### [Lyria RealTime (เวอร์ชันทดลอง)](https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=th)
 
-Modelo de geração de música de alta fidelidade que oferece controle criativo granular e recursos de streaming em tempo real.
+โมเดลการสร้างเสียงดนตรีแบบรายละเอียดเสมือนจริงสูง ซึ่งให้การควบคุมการสร้างสรรค์แบบละเอียดและความสามารถในการสตรีมแบบเรียลไทม์
 
 ---
 
-## Modelos de ferramentas e agentes
+## โมเดลเครื่องมือและโมเดลเอเจนต์
 
 desktop\_windows
 
-### [Pré-lançamento do uso do computador](https://ai.google.dev/gemini-api/docs/Pré-lançamento do uso do computador)
+### [การใช้คอมพิวเตอร์ เวอร์ชันตัวอย่าง](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=th)
 
-Um modelo especializado que pode "ver" uma tela digital e realizar ações de interface, como clicar, digitar e navegar, para automatizar tarefas complexas do navegador.
-
-travel\_explore
-
-### [Pré-lançamento do Gemini Deep Research](https://ai.google.dev/gemini-api/docs/Pré-lançamento do Gemini Deep Research)
-
-Um modelo de agente que planeja e executa de forma autônoma pesquisas de várias etapas em centenas de fontes para produzir relatórios interativos e citados.
+โมเดลเฉพาะที่ "มองเห็น" หน้าจอดิจิทัลและดำเนินการ UI เช่น การคลิก การพิมพ์ และการไปยังส่วนต่างๆ เพื่อทำให้งานที่ซับซ้อนในเบราว์เซอร์เป็นไปโดยอัตโนมัติ
 
 travel\_explore
 
-### [Pré-lançamento do Gemini Deep Research Max](https://ai.google.dev/gemini-api/docs/Pré-lançamento do Gemini Deep Research Max)
+### [Gemini Deep Research (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=th)
 
-Máxima abrangência para coleta e síntese de contexto automatizadas em centenas de fontes.
+โมเดลแบบเป็น Agent ที่วางแผนและดำเนินการวิจัยแบบหลายขั้นตอนในแหล่งข้อมูลหลายร้อยแห่งโดยอัตโนมัติเพื่อสร้างรายงานแบบโต้ตอบที่มีการอ้างอิง
+
+travel\_explore
+
+### [Gemini Deep Research Max (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=th)
+
+ความครอบคลุมสูงสุดสำหรับการรวบรวมและสังเคราะห์บริบทโดยอัตโนมัติจากแหล่งข้อมูลหลายร้อยแห่ง
 
 ---
 
-## Modelos de tarefas especializadas
+## โมเดลงานเฉพาะ
 
 hub
 
-### [Gemini Embedding 2](https://ai.google.dev/gemini-api/docs/Gemini Embedding 2)
+### [Gemini Embedding 2](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=th)
 
-Nosso primeiro modelo de embedding multimodal, que mapeia texto, imagens, vídeo, áudio e PDFs em um espaço de embedding unificado para pesquisa semântica avançada e sistemas RAG.
+โมเดลการฝังหลายรูปแบบแรกของเรา ซึ่งแมปข้อความ รูปภาพ วิดีโอ เสียง และ PDF ลงในพื้นที่การฝังแบบรวมสำหรับการค้นหาเชิงความหมายขั้นสูงและระบบ RAG
 
 hub
 
-### [Gemini Embedding](https://ai.google.dev/gemini-api/docs/Gemini Embedding)
+### [Gemini Embedding](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-001?hl=th)
 
-Representações vetoriais de alta dimensão para pesquisa semântica avançada, classificação de texto e sistemas RAG.
+การแสดงเวกเตอร์แบบหลายมิติสำหรับการค้นหาเชิงความหมายขั้นสูง การจัดประเภทข้อความ และระบบ RAG
 
 precision\_manufacturing
 
-### [Pré-lançamento do Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/Pré-lançamento do Gemini Robotics-ER 1.6)
+### [Gemini Robotics-ER 1.6(เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.6-preview?hl=th)
 
-Modelo de raciocínio incorporado avançado que entende espaços físicos e planeja tarefas de várias etapas para agentes robóticos com novos recursos, como leitura de instrumentos, raciocínio espacial e físico aprimorado.
+โมเดลการให้เหตุผลแบบฝังตัวขั้นสูงที่เข้าใจพื้นที่ทางกายภาพและวางแผนงานแบบหลายขั้นตอนสำหรับเอเจนต์หุ่นยนต์ที่มีความสามารถใหม่ๆ เช่น การอ่านเครื่องมือ ความสามารถในการให้เหตุผลเชิงพื้นที่และทางกายภาพที่ได้รับการปรับปรุง
 
 ---
 
-## Modelos anteriores
+## โมเดลก่อนหน้า
 
 history
 
-### [Gemini 2.0 Flash descontinuado](https://ai.google.dev/gemini-api/docs/Gemini 2.0 Flash descontinuado)
+### [Gemini 2.0 Flash (เลิกใช้งานแล้ว)](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash?hl=th)
 
-Nosso modelo de segunda geração, com recursos de última geração e capacidades aprimoradas, incluindo velocidade superior, uso de ferramentas nativas e uma janela de contexto de 1 milhão de tokens.
-
-restore
-
-### [Gemini 2.0 Flash-Lite descontinuado](https://ai.google.dev/gemini-api/docs/Gemini 2.0 Flash-Lite descontinuado)
-
-Nosso modelo de segunda geração mais rápido, otimizado para eficiência de custo e baixa latência.
+โมเดลหลักรุ่นที่ 2 ของเราที่มีฟีเจอร์รุ่นใหม่และความสามารถที่ได้รับการปรับปรุง ซึ่งรวมถึงความเร็วที่เหนือกว่า การใช้เครื่องมือแบบเนทีฟ และหน้าต่างบริบทขนาด 1 ล้านโทเค็น
 
 restore
 
-### [Pré-lançamento do Gemini 3 Pro desativado](https://ai.google.dev/gemini-api/docs/Pré-lançamento do Gemini 3 Pro desativado)
+### [Gemini 2.0 Flash-Lite (เลิกใช้งานแล้ว)](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash-lite?hl=th)
 
-Nosso modelo de raciocínio de última geração, com compreensão multimodal avançada.
+โมเดลรุ่นที่ 2 ที่เร็วที่สุดของเรา ซึ่งปรับให้เหมาะกับประสิทธิภาพด้านต้นทุนและเวลาในการตอบสนองต่ำ
+
+restore
+
+### [Gemini 3 Pro (เวอร์ชันตัวอย่าง) ปิดให้บริการแล้ว](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-preview?hl=th)
+
+โมเดลการให้เหตุผลที่ล้ำสมัยที่สุดพร้อมความสามารถในการทำความเข้าใจข้อมูลหลายรูปแบบขั้นสูง
 
 ---
 
-## Padrões de nome de versão do modelo
+## รูปแบบชื่อเวอร์ชันของโมเดล
 
-Os modelos do Gemini estão disponíveis nas versões *estável*, *pré-lançamento*, *mais recente* ou
-*experimental*.
+โมเดล Gemini มีให้ใช้งานในเวอร์ชัน *คงที่* *ตัวอย่าง* *ล่าสุด* หรือ
+*ทดลอง*
 
-### Estável
+### คงที่
 
-Aponta para um modelo estável específico. Os modelos estáveis geralmente não mudam. A maioria dos apps de produção precisa usar um modelo estável específico.
+ชี้ไปยังโมเดลคงที่ที่เฉพาะเจาะจง โดยปกติแล้วโมเดลคงที่จะไม่เปลี่ยนแปลง แอปการผลิตส่วนใหญ่ควรใช้โมเดลคงที่ที่เฉพาะเจาะจง
 
-Por exemplo: `gemini-2.5-flash`.
+ตัวอย่างเช่น `gemini-2.5-flash`
 
-### Pré-lançamento
+### ตัวอย่าง
 
-Aponta para um modelo de pré-lançamento que pode ser usado na produção. Os modelos de pré-lançamento normalmente têm a cobrança ativada, podem vir com limites de taxa mais restritivos e serão descontinuados com pelo menos duas semanas de antecedência.
+ชี้ไปยังโมเดลตัวอย่างที่อาจใช้สำหรับการผลิต โดยปกติแล้วโมเดลตัวอย่างจะเปิดใช้การเรียกเก็บเงิน อาจมีขีดจำกัดอัตราที่เข้มงวดมากขึ้น และจะเลิกใช้งานโดยแจ้งให้ทราบล่วงหน้าอย่างน้อย 2 สัปดาห์
 
-Por exemplo: `gemini-2.5-flash-preview-09-2025`.
+ตัวอย่างเช่น `gemini-2.5-flash-preview-09-2025`
 
-### Mais recentes
+### ล่าสุด
 
-Aponta para a versão mais recente de uma variação de modelo específica. Pode ser uma versão estável, de pré-lançamento ou experimental. Esse alias será trocado a quente com cada novo lançamento de uma variação de modelo específica. Um **aviso de duas semanas** será enviado por e-mail antes que a versão mais recente seja alterada.
+ชี้ไปยังรุ่นล่าสุดสำหรับโมเดลรูปแบบที่เฉพาะเจาะจง ซึ่งอาจเป็นรุ่นคงที่ รุ่นตัวอย่าง หรือรุ่นทดลอง นามแฝงนี้จะได้รับการสลับแบบร้อนเมื่อมีการเผยแพร่โมเดลรูปแบบที่เฉพาะเจาะจงรุ่นใหม่ เราจะแจ้งให้ทราบล่วงหน้า **2 สัปดาห์** ทางอีเมลก่อนที่จะเปลี่ยนเวอร์ชันที่อยู่เบื้องหลังเวอร์ชันล่าสุด
 
-Por exemplo: `gemini-flash-latest`.
+ตัวอย่างเช่น `gemini-flash-latest`
 
-### Experimental
+### ทดลอง
 
-Aponta para um modelo experimental que normalmente não é adequado para uso em produção e vem com limites de taxa mais restritivos. Lançamos modelos experimentais para coletar feedback e disponibilizar nossas atualizações mais recentes aos desenvolvedores rapidamente.
+ชี้ไปยังโมเดลทดลองซึ่งโดยปกติแล้วจะไม่เหมาะกับการใช้งานจริงและมีขีดจำกัดอัตราที่เข้มงวดมากขึ้น เราเผยแพร่โมเดลทดลองเพื่อรวบรวมความคิดเห็นและนำข้อมูลอัปเดตล่าสุดไปให้นักพัฒนาซอฟต์แวร์ได้ใช้โดยเร็ว
 
-Os modelos experimentais não são estáveis, e a disponibilidade dos endpoints do modelo está sujeita a mudanças.
+โมเดลทดลองไม่เสถียรและสถานะพร้อมใช้งานของปลายทางโมเดลอาจมีการเปลี่ยนแปลง
 
-## Descontinuações de modelos
+## การเลิกใช้งานโมเดล
 
-Para informações sobre descontinuações de modelos, acesse a página de [descontinuações do Gemini](https://ai.google.dev/gemini-api/docs/descontinuações do Gemini).
+ดูข้อมูลเกี่ยวกับการเลิกใช้งานโมเดลได้ที่หน้า[การเลิกใช้งาน Gemini](https://ai.google.dev/gemini-api/docs/deprecations?hl=th)
 
-Envie comentários
+ส่งความคิดเห็น
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://ai.google.dev/gemini-api/docs/Licença de atribuição 4.0 do Creative Commons), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://ai.google.dev/gemini-api/docs/Licença Apache 2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://ai.google.dev/gemini-api/docs/políticas do site do Google Developers). Java é uma marca registrada da Oracle e/ou afiliadas.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Última atualização 2026-04-30 UTC.
+อัปเดตล่าสุด 2026-04-30 UTC
 
-Quer enviar seu feedback?
+หากต้องการบอกให้เราทราบเพิ่มเติม
+
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-30 UTC"],[],[]]

@@ -1,39 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=ko
-fetched_at: 2026-05-05T13:18:33.618292+00:00
-title: "Deep Research Max \ubbf8\ub9ac\ubcf4\uae30 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=ar
+fetched_at: 2026-05-05T19:51:01.806115+00:00
+title: "\u0645\u0639\u0627\u064a\u0646\u0629 Deep Research Max \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/models/Gemini Deep Research)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-- [홈](https://ai.google.dev/gemini-api/docs/models/홈)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/models/Gemini API)
-- [문서](https://ai.google.dev/gemini-api/docs/models/문서)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-의견 보내기
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Deep Research Max 미리보기
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-자동화된 컨텍스트 수집 및 종합을 위한 최대 포괄성입니다. Deep Research Max는 수백 개의 공개 웹 소스와 비공개 Workspace 데이터의 복잡한 정보를 포괄적이고 인용된 보고서로 종합하는 장기 실행되고 정확성이 중요한 조사를 위해 최적화되었습니다. 공동 계획, 시각화, MCP 서버, 파일 검색을 지원합니다.
+إرسال ملاحظات
 
-## 문서
+# معاينة Deep Research Max
 
-기능 및 기능의 전체 적용 범위는 [Deep Research](https://ai.google.dev/gemini-api/docs/models/Deep Research) 페이지를 참고하세요.
+أقصى درجة من الشمولية لجمع السياق وتلخيصه تلقائيًا تم تحسين Deep Research Max للتحقيقات الطويلة التي تتطلّب دقة عالية وتلخّص معلومات معقّدة من مئات مصادر الويب العلنية وبيانات مساحة العمل الخاصة في تقارير شاملة ومستندة إلى مراجع. تتوفّر فيه ميزات التخطيط التعاوني والتصوّر وخوادم MCP والبحث عن الملفات.
+
+## الوثائق
+
+يمكنك الانتقال إلى صفحة [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) للاطّلاع على تغطية كاملة
+للميزات والإمكانات.
 
 ## deep-research-max-preview-04-2026
 
-| 속성 | 설명 |
+| الموقع | الوصف |
 | --- | --- |
-| id\_card에이전트 코드 | **Interactions API**  `deep-research-max-preview-04-2026` |
-| save지원되는 데이터 유형 | **입력**  텍스트, 이미지, PDF, 오디오, 동영상  **출력**  텍스트 (인용된 보고서), 이미지 |
-| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 컨텍스트 윈도우**  1,048,576  **출력 토큰 한도**  65,536 |
-| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/모델 버전 패턴)을 참고하세요.  - 미리보기: `deep-research-max-preview-04-2026` |
-| calendar\_month최근 업데이트 | 2026년 4월 |
+| id\_cardرمز الوكيل | ‫**Interactions API**  `deep-research-max-preview-04-2026` |
+| saveأنواع البيانات المتوفرة | **الإدخال**  نص وصورة وملف PDF وملف صوتي وملف فيديو  **الناتج**  نص (تقارير مستندة إلى مراجع) وصور |
+| token\_autoحدود الرموز[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **قدرة استيعاب الإدخال**  1,048,576  **الحد الأقصى لرموز الناتج**  65,536 |
+| 123الإصدارات | يمكنك قراءة [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions) لمزيد من التفاصيل.  - معاينة: `deep-research-max-preview-04-2026` |
+| calendar\_monthآخر تعديل | أبريل 2026 |
 
-의견 보내기
+إرسال ملاحظات
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://ai.google.dev/gemini-api/docs/models/Creative Commons Attribution 4.0 라이선스)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://ai.google.dev/gemini-api/docs/models/Apache 2.0 라이선스)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://ai.google.dev/gemini-api/docs/models/Google Developers 사이트 정책)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-최종 업데이트: 2026-04-29(UTC)
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-의견을 전달하고 싶나요?
+هل تريد مشاركة ملاحظاتك معنا؟
+
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

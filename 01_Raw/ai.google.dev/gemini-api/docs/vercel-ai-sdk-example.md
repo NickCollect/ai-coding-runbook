@@ -1,38 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=tr
-fetched_at: 2026-05-05T13:16:45.940450+00:00
-title: "Vercel'in Gemini ve AI SDK'si ile Pazar Ara\u015ft\u0131rmas\u0131 Temsilcisi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=pt-BR
+fetched_at: 2026-05-05T19:51:43.666492+00:00
+title: "Agente de pesquisa de mercado com o Gemini e o SDK de IA da Vercel \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/Gemini Deep Research) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-- [Ana Sayfa](https://ai.google.dev/gemini-api/docs/Ana Sayfa)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs/Dokümanlar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Geri bildirim gönderin
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Vercel'in Gemini ve AI SDK'si ile Pazar Araştırması Temsilcisi
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-[Vercel'in AI SDK'sı](https://ai.google.dev/gemini-api/docs/Vercel'in AI SDK'sı), TypeScript'te yapay zeka destekli uygulamalar, kullanıcı arayüzleri ve aracıları oluşturmak için kullanılan güçlü bir açık kaynak kitaplıktır.
+Envie comentários
 
-Bu kılavuzda, [Google Üretken Yapay Zeka Sağlayıcısı](https://ai.google.dev/gemini-api/docs/Google Üretken Yapay Zeka Sağlayıcısı) aracılığıyla Gemini API'ye bağlanmak ve otomatik pazar trendi analizi yapmak için yapay zeka SDK'sını kullanan TypeScript ile bir Node.js uygulaması oluşturma adımları açıklanmaktadır. Son uygulama:
+# Agente de pesquisa de mercado com o Gemini e o SDK de IA da Vercel
 
-1. Mevcut pazar trendlerini araştırmak için Google Arama ile Gemini'ı kullanın.
-2. Grafik oluşturmak için araştırmadan yapılandırılmış verileri ayıklayın.
-3. Araştırmayı ve grafikleri profesyonel bir HTML raporunda birleştirip PDF olarak kaydedin.
+O [SDK de IA da Vercel](https://ai-sdk.dev) (em inglês) é uma biblioteca de código aberto avançada para
+criar aplicativos, interfaces de usuário e agentes com tecnologia de IA em TypeScript.
 
-## Ön koşullar
+Este guia vai orientar você na criação de um aplicativo Node.js com TypeScript
+que usa o SDK de IA para se conectar à API Gemini pelo [provedor de IA generativa do Google](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai) e realizar análises automatizadas de tendências de mercado. O aplicativo final vai:
 
-Bu kılavuzu tamamlamak için ihtiyacınız olanlar:
+1. Use o Gemini com a Pesquisa Google para pesquisar as tendências atuais do mercado.
+2. Extrair dados estruturados da pesquisa para gerar gráficos.
+3. Combine a pesquisa e os gráficos em um relatório HTML profissional e salve como PDF.
 
-- Gemini API anahtarı. [Google AI Studio](https://ai.google.dev/gemini-api/docs/Google AI Studio)'da ücretsiz olarak oluşturabilirsiniz.
-- [Node.js](https://ai.google.dev/gemini-api/docs/Node.js) 18 veya sonraki sürümler.
-- `npm`, `pnpm` veya `yarn` gibi bir paket yöneticisi.
+## Pré-requisitos
 
-## Uygulamanızı ayarlama
+Para concluir este guia, você vai precisar do seguinte:
 
-Öncelikle projeniz için yeni bir dizin oluşturun ve bu dizini başlatın.
+- Uma chave da API Gemini. Você pode criar uma sem custo financeiro no [Google AI Studio](https://aistudio.google.com/apikey?hl=pt-br).
+- [Node.js](https://nodejs.org/en/download) versão 18 ou mais recente.
+- Um gerenciador de pacotes, como `npm`, `pnpm` ou `yarn`.
+
+## Configurar o aplicativo
+
+Primeiro, crie um diretório para seu projeto e inicialize-o.
 
 ### npm
 
@@ -50,7 +56,7 @@ cd market-trend-app
 pnpm init
 ```
 
-### yumak
+### novelo
 
 ```
 mkdir market-trend-app
@@ -58,9 +64,10 @@ cd market-trend-app
 yarn init -y
 ```
 
-### Bağımlıları yükleme
+### Instalar dependências
 
-Ardından, yapay zeka SDK'sını, Google Üretken Yapay Zeka sağlayıcısını ve diğer gerekli bağımlılıkları yükleyin.
+Em seguida, instale o SDK de IA, o provedor de IA generativa do Google e outras
+dependências necessárias.
 
 ### npm
 
@@ -69,7 +76,8 @@ npm install ai @ai-sdk/google zod
 npm install -D @types/node tsx typescript && npx tsc --init
 ```
 
-TypeScript derleyici hatasını önlemek için oluşturulan `tsconfig.json` dosyasında aşağıdaki satırı yorum satırı yapın:
+Para evitar um erro do compilador TypeScript, coloque a seguinte linha em comentário no
+`tsconfig.json` gerado:
 
 ```
 //"verbatimModuleSyntax": true,
@@ -82,20 +90,21 @@ pnpm add ai @ai-sdk/google zod
 pnpm add -D @types/node tsx typescript
 ```
 
-### yumak
+### novelo
 
 ```
 yarn add ai @ai-sdk/google zod
 yarn add -D @types/node tsx typescript && yarn tsc --init
 ```
 
-TypeScript derleyici hatasını önlemek için oluşturulan `tsconfig.json` dosyasında aşağıdaki satırı yorum satırı yapın:
+Para evitar um erro do compilador TypeScript, coloque a seguinte linha em comentário no
+`tsconfig.json` gerado:
 
 ```
 //"verbatimModuleSyntax": true,
 ```
 
-Bu uygulama, grafikleri oluşturmak ve PDF oluşturmak için [Puppeteer](https://ai.google.dev/gemini-api/docs/Puppeteer) ve [Chart.js](https://ai.google.dev/gemini-api/docs/Chart.js) adlı üçüncü taraf paketlerini de kullanır:
+Esse aplicativo também vai usar os pacotes de terceiros [Puppeteer](https://pptr.dev/) e [Chart.js](https://www.chartjs.org) para renderizar gráficos e criar um PDF:
 
 ### npm
 
@@ -111,18 +120,19 @@ pnpm add puppeteer chart.js
 pnpm add -D @types/chart.js
 ```
 
-### yumak
+### novelo
 
 ```
 yarn add puppeteer chart.js
 yarn add -D @types/chart.js
 ```
 
-`puppeteer` paketinin Chromium tarayıcısını indirmek için bir komut dosyası çalıştırması gerekir. Paket yöneticiniz onay isteyebilir. Bu nedenle, istendiğinde komut dosyasını onayladığınızdan emin olun.
+O pacote `puppeteer` exige a execução de um script para baixar o navegador
+Chromium. O gerenciador de pacotes pode pedir aprovação. Portanto, aprove o script quando solicitado.
 
-### API anahtarınızı yapılandırma
+### Configurar a chave de API
 
-`GOOGLE_GENERATIVE_AI_API_KEY` ortam değişkenini Gemini API anahtarınızla ayarlayın. Google Üretken Yapay Zeka Sağlayıcısı, API anahtarınızı bu ortam değişkeninde otomatik olarak arar.
+Defina a variável de ambiente `GOOGLE_GENERATIVE_AI_API_KEY` com sua chave de API Gemini. O provedor de IA generativa do Google procura automaticamente sua chave de API nessa variável de ambiente.
 
 ### MacOS/Linux
 
@@ -136,12 +146,14 @@ export GOOGLE_GENERATIVE_AI_API_KEY="YOUR_API_KEY_HERE"
 setx GOOGLE_GENERATIVE_AI_API_KEY "YOUR_API_KEY_HERE"
 ```
 
-## Uygulamanızı oluşturma
+## Criar o aplicativo
 
-Şimdi uygulamamızın ana dosyasını oluşturalım. Proje dizininizde
-`main.ts` adlı yeni bir dosya oluşturun. Bu dosyada mantığı adım adım oluşturacaksınız.
+Agora, vamos criar o arquivo principal do nosso aplicativo. Crie um arquivo chamado
+`main.ts` no diretório do projeto. Você vai criar a lógica neste arquivo
+etapa por etapa.
 
-Her şeyin doğru şekilde ayarlandığından emin olmak için hızlı bir test yapmak üzere aşağıdaki kodu `main.ts`'ya ekleyin. Bu temel örnekte, Gemini'dan basit bir yanıt almak için `generateText` kullanılıyor.
+Para um teste rápido e garantir que tudo esteja configurado corretamente, adicione o seguinte
+código a `main.ts`. Este exemplo básico usa `generateText` para receber uma resposta simples do Gemini.
 
 ```
 import { google } from "@ai-sdk/google";
@@ -159,7 +171,8 @@ async function main() {
 main().catch(console.error);
 ```
 
-Daha fazla karmaşıklık eklemeden önce ortamınızın doğru şekilde yapılandırıldığını doğrulamak için bu komut dosyasını çalıştırın. Terminalinizde aşağıdaki komutu çalıştırın:
+Antes de adicionar mais complexidade, execute este script para verificar se o ambiente
+está configurado corretamente. Execute o comando a seguir no terminal.
 
 ### npm
 
@@ -173,19 +186,19 @@ npx tsc && node main.js
 pnpm tsx main.ts
 ```
 
-### yumak
+### novelo
 
 ```
 yarn tsc && node main.js
 ```
 
-Her şey doğru şekilde ayarlanmışsa Gemini'ın yanıtı konsola yazdırılır.
+Se tudo estiver configurado corretamente, a resposta do Gemini vai aparecer no console.
 
-## Google Arama ile pazar araştırması yapma
+## Fazer pesquisas de mercado com a Pesquisa Google
 
-Güncel bilgilere ulaşmak için Gemini'da [Google Arama](https://ai.google.dev/gemini-api/docs/Google Arama) aracını etkinleştirebilirsiniz. Bu araç etkinken model, istemi yanıtlamak için web'de arama yapabilir ve kullandığı kaynakları döndürür.
+Para receber informações atualizadas, ative a ferramenta [Pesquisa Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br) no Gemini. Quando essa ferramenta está ativa, o modelo pode pesquisar na Web para responder ao comando e retorna as fontes usadas.
 
-Analizimizin ilk adımını gerçekleştirmek için `main.ts` içeriğini aşağıdaki kodla değiştirin.
+Substitua o conteúdo de `main.ts` pelo código a seguir para realizar a primeira etapa da nossa análise.
 
 ```
 import { google } from "@ai-sdk/google";
@@ -211,13 +224,14 @@ async function main() {
 main().catch(console.error);
 ```
 
-## Grafik verilerini ayıklama
+## Extrair dados do gráfico
 
-Ardından, araştırma metnini işleyerek grafiklere uygun yapılandırılmış verileri çıkaralım. Tam veri yapısını tanımlamak için `generateObject` işlevini `zod` şemasıyla birlikte kullanın.
+Em seguida, vamos processar o texto da pesquisa para extrair dados estruturados adequados para gráficos. Use a função `generateObject` do SDK de IA com um esquema `zod`
+para definir a estrutura de dados exata.
 
-Ayrıca, bu yapılandırılmış verileri `Chart.js`'nın anlayabileceği bir yapılandırmaya dönüştürmek için yardımcı bir işlev oluşturun.
+Crie também uma função auxiliar para converter esses dados estruturados em uma configuração que o `Chart.js` possa entender.
 
-Aşağıdaki kodu `main.ts` dosyasına ekleyin. Yeni içe aktarmaları ve eklenen "2. Adım"ı inceleyin.
+Adicione o seguinte código a `main.ts`: Observe as novas importações e a adição da "Etapa 2".
 
 ```
 import { google } from "@ai-sdk/google";
@@ -299,12 +313,13 @@ ${marketTrends}
 main().catch(console.error);
 ```
 
-## Son raporu oluşturma
+## Gerar o relatório final
 
-Son adımda, Gemini'a uzman bir rapor yazarı gibi davranmasını söyleyin.
-Pazar araştırması, grafik yapılandırmaları ve HTML raporu oluşturmayla ilgili net talimatlar sağlayın. Ardından, bu HTML'yi oluşturmak ve PDF olarak kaydetmek için [Puppeteer](https://ai.google.dev/gemini-api/docs/Puppeteer)'ı kullanın.
+Na etapa final, instrua o Gemini a agir como um especialista em redação de relatórios.
+Forneça a pesquisa de mercado, as configurações de gráfico e um conjunto claro de instruções para criar um relatório em HTML. Em seguida, use o
+[Puppeteer](https://pptr.dev/) para renderizar esse HTML e salvá-lo como um PDF.
 
-Nihai `puppeteer` içe aktarma işlemini ve "3. Adım"ı `main.ts` dosyanıza ekleyin.
+Adicione a importação final de `puppeteer` e "Etapa 3" ao arquivo `main.ts`.
 
 ```
 // ... (imports from previous step)
@@ -365,9 +380,10 @@ async function main() {
 main().catch(console.error);
 ```
 
-## Uygulamanızı çalıştırma
+## Execute o aplicativo
 
-Artık uygulamayı çalıştırmaya hazırsınız. Terminalinizde aşağıdaki komutu çalıştırın:
+Agora você já pode executar o aplicativo. Execute o seguinte comando no
+terminal:
 
 ### npm
 
@@ -381,31 +397,34 @@ npx tsc && node main.js
 pnpm tsx main.ts
 ```
 
-### yumak
+### novelo
 
 ```
 yarn tsc && node main.js
 ```
 
-Komut dosyası her adımı yürüttüğünde terminalinizde günlük kaydı görürsünüz.
-İşlem tamamlandığında, pazar analizinizin yer aldığı bir `report.pdf` dosyası proje dizininizde oluşturulur.
+Você verá o registro no terminal à medida que o script executa cada etapa.
+Quando concluído, um arquivo `report.pdf` com sua análise de mercado será criado no diretório do projeto.
 
-Aşağıda, örnek bir PDF raporunun ilk iki sayfasını görebilirsiniz:
+Confira abaixo as duas primeiras páginas de um exemplo de relatório em PDF:
 
-![Pazar analizi raporu](https://ai.google.dev/static/gemini-api/docs/images/market-research-pdf.jpg?hl=tr)
+![Relatório de análise de mercado](https://ai.google.dev/static/gemini-api/docs/images/market-research-pdf.jpg?hl=pt-br)
 
-## Diğer kaynaklar
+## Outros recursos
 
-Gemini ve Yapay Zeka SDK'sı ile geliştirme hakkında daha fazla bilgi edinmek için şu kaynakları inceleyin:
+Para mais informações sobre como criar com o Gemini e o SDK de IA,
+confira estes recursos:
 
-- [AI SDK belgeleri](https://ai.google.dev/gemini-api/docs/AI SDK belgeleri)
-- [Yapay Zeka SDK'sı Google Üretken Yapay Zeka belgeleri](https://ai.google.dev/gemini-api/docs/Yapay Zeka SDK'sı Google Üretken Yapay Zeka belgeleri)
-- [AI SDK cookbook: Get Started with Gemini](https://ai.google.dev/gemini-api/docs/AI SDK cookbook: Get Started with Gemini) (AI SDK yemek kitabı: Gemini'ı kullanmaya başlama)
+- [Documentos do SDK de IA](https://ai-sdk.dev/docs)
+- [Documentação da IA generativa do Google do SDK de IA](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai)
+- [Livro de receitas do SDK de IA: comece a usar o Gemini](https://ai-sdk.dev/cookbook/guides/gemini)
 
-Geri bildirim gönderin
+Envie comentários
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://ai.google.dev/gemini-api/docs/Creative Commons Atıf 4.0 Lisansı) altında ve kod örnekleri [Apache 2.0 Lisansı](https://ai.google.dev/gemini-api/docs/Apache 2.0 Lisansı) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://ai.google.dev/gemini-api/docs/Google Developers Site Politikaları)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Son güncelleme tarihi: 2026-04-29 UTC.
+Última atualização 2026-04-29 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Quer enviar seu feedback?
+
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]

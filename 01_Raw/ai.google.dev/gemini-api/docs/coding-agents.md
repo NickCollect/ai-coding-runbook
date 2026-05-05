@@ -1,58 +1,62 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/coding-agents?hl=zh-TW
-fetched_at: 2026-05-05T13:11:57.830556+00:00
-title: "\u4f7f\u7528 Gemini MCP \u548c Skills \u8a2d\u5b9a\u7a0b\u5f0f\u8a2d\u8a08\u52a9\u7406 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/coding-agents?hl=id
+fetched_at: 2026-05-05T19:42:38.470462+00:00
+title: "Menyiapkan asisten coding Anda dengan Gemini MCP dan Keterampilan \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/Gemini Deep Research) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
 
-- [首頁](https://ai.google.dev/gemini-api/docs/首頁)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [文件](https://ai.google.dev/gemini-api/docs/文件)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-提供意見
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# 使用 Gemini MCP 和 Skills 設定程式設計助理
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-AI 程式設計助理功能強大，但仍有其限制，例如訓練資料會在特定日期截止，因此無法提供新的 API 功能和變更。如果無法存取 Gemini 專屬文件，服務專員可能會建議一般模式，而非最佳化方法。
+Kirim masukan
 
-為確保程式設計助理能跟上不斷演進的 Gemini API 和建議用法，建議您設定 **Gemini 文件 MCP**，並透過 **Gemini API 技能**強化環境。這些工具可獨立使用，但設計宗旨是搭配運作，提供完整涵蓋範圍。
+# Menyiapkan asisten coding Anda dengan Gemini MCP dan Keterampilan
 
-## 連結 Gemini Docs MCP
+Asisten coding AI sangat canggih, tetapi memiliki batasan—data pelatihan terhenti pada tanggal tertentu, sehingga tidak ada fitur dan perubahan API baru. Tanpa akses ke dokumentasi khusus Gemini, agen mungkin menyarankan pola umum, bukan pendekatan yang dioptimalkan.
 
-Gemini 在 `https://gemini-api-docs-mcp.dev` 託管公開的 Model Context Protocol (MCP) 伺服器。將程式碼編寫代理程式連線至這個伺服器，可確保所有查詢都能存取最新的 API、程式碼更新和最佳設定範例。
+Untuk memastikan asisten coding Anda selalu menggunakan Gemini API yang terus berkembang dan penggunaan yang direkomendasikan, sebaiknya siapkan **Gemini Docs MCP** dan tingkatkan lingkungan Anda dengan **Gemini API Skills**. Meskipun alat ini dapat digunakan secara independen, alat ini dirancang untuk bekerja sama guna memberikan cakupan lengkap.
 
-在代理程式的終端機或專案根目錄中執行下列指令，安裝伺服器：
+## Menghubungkan Gemini Docs MCP
+
+Gemini menghosting server Model Context Protocol (MCP) publik di `https://gemini-api-docs-mcp.dev`. Menghubungkan agen coding Anda ke server ini akan memastikan bahwa semua kueri memiliki akses ke API terbaru, update kode, dan contoh konfigurasi optimal.
+
+Jalankan perintah berikut di terminal agen atau root project untuk menginstal server:
 
 ```
 npx add-mcp "https://gemini-api-docs-mcp.dev"
 ```
 
-這個伺服器會新增 `search_documentation` 函式，供代理程式從官方 Gemini 說明文件檔案擷取即時 API 定義和整合模式。
+Server ini menambahkan fungsi `search_documentation` yang dapat digunakan agen Anda untuk mengambil definisi API real-time dan pola integrasi dari file dokumentasi Gemini resmi.
 
-## 新增 API 開發技能
+## Menambahkan Keterampilan Pengembangan API
 
-這些技能會直接在助理的環境中提供**內建規則和最佳做法** (例如強制使用正確的 SDK 和目前模型版本)。這項技能會與 Gemini 文件 MCP 服務搭配運作：如果兩者都已安裝，這項技能會使用 MCP 服務來產生說明文件，但即使未安裝 MCP，系統也會從 `ai.google.dev` 擷取 `llms.txt` 做為備援。
+Keterampilan ini menyediakan **aturan dan praktik terbaik bawaan** (seperti menerapkan SDK yang benar dan versi model saat ini) langsung dalam konteks asisten Anda. Keterampilan ini berfungsi bersama dengan layanan Gemini Docs MCP: Jika Anda menginstal keduanya, keterampilan ini akan menggunakan layanan MCP untuk dokumentasi, tetapi meskipun tanpa MCP terinstal, keterampilan ini akan mengambil `llms.txt` dari `ai.google.dev` sebagai penggantian.
 
-如要安裝這些技能，可以使用下列任一支援的工具。每個技能模組下方都有安裝說明：
+Untuk menginstal keterampilan ini, Anda dapat menggunakan salah satu alat yang didukung berikut. Petunjuk penginstalan untuk keduanya disediakan di bawah setiap modul keterampilan:
 
-- **[skills.sh](https://ai.google.dev/gemini-api/docs/skills.sh)**：建議使用。可攜式代理程式行為的開放標準。
-- **[Context7](https://ai.google.dev/gemini-api/docs/Context7)**：支援已使用 Context7 生態系統的使用者。
+- **[skills.sh](https://skills.sh)**: Direkomendasikan. Standar terbuka untuk perilaku agen portabel.
+- **[Context7](https://context7.com)**
 
 ### gemini-api-dev
 
-這是開發一般用途 Gemini 應用程式的基礎技能。這項技能提供下列項目的文件和最佳做法：
+Keterampilan dasar untuk pengembangan Gemini tujuan umum. Keterampilan ini menyediakan dokumentasi dan praktik terbaik untuk:
 
-- 將提示詞傳送至目前模型 (例如 Gemini 3.1 Pro/Flash)，並避開已淘汰的模型
-- 多模態提示、函式呼叫、結構化輸出內容和常見的整合模式
+- Perutean perintah ke model saat ini (misalnya, Gemini 3.1 Pro/Flash) dan menghindari model yang tidak digunakan lagi
+- Perintah multimodal, panggilan fungsi, output terstruktur, dan pola integrasi umum
 
-#### 使用 skills.sh 安裝
+#### Menginstal dengan skills.sh
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-api-dev --global
 ```
 
-#### 使用 Context7 安裝
+#### Menginstal dengan Context7
 
 ```
 npx ctx7 skills install /google-gemini/gemini-skills gemini-api-dev
@@ -60,19 +64,19 @@ npx ctx7 skills install /google-gemini/gemini-skills gemini-api-dev
 
 ### gemini-live-api-dev
 
-這項技能可協助您使用 Gemini Live API 建構即時對話式 AI 應用程式。這項技能提供下列項目的文件和最佳做法：
+Keterampilan untuk membangun aplikasi AI percakapan real-time dengan Gemini Live API. Keterampilan ini menyediakan dokumentasi dan praktik terbaik untuk:
 
-- WebSocket 連線，用於低延遲串流
-- 串流音訊、影片和文字
-- 語音活動偵測和插話支援
+- Koneksi WebSocket untuk streaming latensi rendah
+- Streaming audio, video, dan teks
+- Deteksi aktivitas suara dan dukungan barge-in
 
-#### 使用 skills.sh 安裝
+#### Menginstal dengan skills.sh
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-live-api-dev --global
 ```
 
-#### 使用 Context7 安裝
+#### Menginstal dengan Context7
 
 ```
 npx ctx7 skills install /google-gemini/gemini-skills gemini-live-api-dev
@@ -80,85 +84,88 @@ npx ctx7 skills install /google-gemini/gemini-skills gemini-live-api-dev
 
 ### gemini-interactions-api
 
-使用 [Interactions API](https://ai.google.dev/gemini-api/docs/Interactions API) 建構應用程式的技能。Interactions API 是與 Gemini 模型和代理程式互動的統一介面，專為代理程式應用程式設計。這項技能涵蓋的主題包括：
+Keterampilan untuk membangun aplikasi dengan
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=id). Interactions API adalah antarmuka terpadu untuk berinteraksi dengan model dan agen Gemini, yang dirancang untuk aplikasi agentic. Keterampilan ini mencakup:
 
-- 生成文字、進行多輪對話及串流
-- 函式呼叫、結構化輸出內容和圖像生成
-- 背景執行和 Deep Research 代理
-- 伺服器端對話狀態管理
-- Python 和 TypeScript SDK 模式
+- Pembuatan teks, chat multi-giliran, dan streaming
+- Panggilan fungsi, output terstruktur, dan pembuatan gambar
+- Eksekusi latar belakang dan agen Deep Research
+- Pengelolaan status percakapan sisi server
+- Pola Python dan TypeScript SDK
 
-#### 使用 skills.sh 安裝
+#### Menginstal dengan skills.sh
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-interactions-api --global
 ```
 
-#### 使用 Context7 安裝
+#### Menginstal dengan Context7
 
 ```
 npx ctx7 skills install /google-gemini/gemini-skills gemini-interactions-api
 ```
 
-## 驗證安裝
+## Memverifikasi penginstalan
 
-安裝完成後，請確認程式碼助理可以連線至 Gemini Docs MCP 伺服器，並使用您安裝的技能。
+Setelah menginstal, pastikan asisten coding Anda dapat terhubung ke server Gemini Docs MCP dan menggunakan keterampilan yang telah diinstal.
 
-### 1. 驗證服務專員行為
+### 1. Memverifikasi perilaku agen
 
-如要驗證，最可靠的方式是向服務專員詢問有關 Gemini API 的技術問題。
+Cara paling andal untuk memverifikasi adalah dengan mengajukan pertanyaan teknis tentang Gemini API kepada agen Anda.
 
-**提示：**「如何使用 Gemini API 的脈絡快取功能？」
+**Perintah:** "How do I use context caching with the Gemini API?"
 
-設定成功後，系統會：
+Penyiapan yang berhasil akan:
 
-- **提供準確的程式碼**：從最新端點參照特定 Gemini 方法，例如 `cacheContent` 或 `cachedContents.create`。
-- **使用 MCP 工具**：顯示工具已連線至 **Gemini 文件 MCP 伺服器**，或使用 `search_documentation` 工具擷取資料。
-- **叫用已載入的技能**：顯示「使用技能：gemini-api-dev」指標 (如果依附於次要包裝函式)。
+- **Menyediakan kode yang akurat**: Merujuk metode Gemini tertentu seperti `cacheContent` atau `cachedContents.create` dari endpoint terbaru.
+- **Menggunakan Alat MCP**: Menunjukkan bahwa alat ini terhubung ke **Server Gemini Docs MCP** atau menggunakan alat `search_documentation` untuk mengambil data.
+- **Memanggil keterampilan yang dimuat**: Menampilkan indikator bahwa keterampilan ini "Using skill: gemini-api-dev" (jika mengandalkan wrapper sekunder).
 
-### 2. 驗證表現和工具
+### 2. Memverifikasi manifestasi &alat
 
-如果代理程式提供一般或通用答案，請使用環境專用的 Discovery 或 Status 指令，確認文件 MCP 或技能已載入記憶體。
+Jika agen memberikan jawaban umum, gunakan perintah Discovery atau Status tertentu untuk lingkungan Anda guna memverifikasi bahwa Docs MCP atau keterampilan dimuat ke dalam memori.
 
-| 環境 | MCP 驗證 | 技能驗證 |
+| Lingkungan | Verifikasi MCP | Verifikasi Keterampilan |
 | --- | --- | --- |
-| **Claude Code** | 在終端機中輸入 `/mcp`，即可查看有效伺服器和 `search_documentation` 工具。 | 在終端機中輸入 `/skills`，即可列出所有有效資訊清單。 |
-| **游標** | 依序前往「設定」>「功能」>「MCP」。確認伺服器為「已連線」狀態。 | 依序開啟「設定」>「規則」。確認技能顯示在「Agent Decides」下方。 |
-| **Antigravity** | 檢查「自訂」>「連結」側欄中的 MCP 狀態。 | 輸入 `/skills list` 或查看「自訂」>「規則」側欄。 |
-| **Gemini CLI** | 執行 `gemini mcp list` 或使用 `/mcp list`。 | 執行 `gemini skills list` 或在工作階段中使用 `/skills` 斜線指令。 |
-| **Copilot** | 輸入 `@gemini /mcp` 即可列出有效的資料連接器。 | 輸入 `@gemini /skills` (或 `/skills`) 即可查看有效擴充功能。 |
+| **Claude Code** | Ketik `/mcp` di terminal untuk melihat server aktif dan alat `search_documentation`. | Ketik `/skills` di terminal untuk mencantumkan semua manifes aktif. |
+| **Cursor** | Buka **Settings > Features > MCP**. Pastikan server "Connected". | Buka **Settings > Rules**. Pastikan keterampilan muncul di bagian "Agent Decides". |
+| **Antigravity** | Periksa sidebar **Customizations > Connections** untuk mengetahui status MCP. | Ketik `/skills list` atau periksa sidebar **Customizations > Rules**. |
+| **Gemini CLI** | Jalankan `gemini mcp list` atau gunakan `/mcp list`. | Jalankan `gemini skills list` atau gunakan perintah garis miring `/skills` dalam sesi. |
+| **Copilot** | Ketik `@gemini /mcp` untuk mencantumkan konektor data aktif. | Ketik `@gemini /skills` (atau `/skills`) untuk melihat ekstensi aktif. |
 
-## 疑難排解
+## Pemecahan masalah
 
-如果代理程式只提供一般資訊，或無法辨識 Gemini 專屬方法，請檢查下列事項：
+Jika agen Anda hanya memberikan informasi umum atau gagal mengenali metode khusus Gemini, periksa hal berikut:
 
-### 代理程式未探索到技能
+### Agen tidak menemukan keterampilan
 
-大多數代理程式只會在啟動時為技能建立索引。
+Sebagian besar agen mengindeks keterampilan hanya saat startup.
 
-**修正方式：**完全重新啟動 IDE (Cursor/VS Code)，或結束並重新開啟終端機型代理程式 (Claude Code)。
+**Perbaikan:** Mulai ulang IDE (Cursor/VS Code) sepenuhnya atau keluar dan buka kembali agen berbasis terminal (Claude Code).
 
-### 全球與在地衝突
+### Konflik global vs. lokal
 
-如果您使用 `--global` 旗標安裝代理程式，代理程式可能會忽略該旗標，而採用專案專屬規則。
+Jika Anda menginstal dengan flag `--global`, agen Anda mungkin mengabaikannya dan lebih memilih aturan khusus project.
 
-**修正：**嘗試直接在專案根目錄中安裝技能，不要使用全域標記：
+**Perbaikan:** Coba instal keterampilan langsung ke root project Anda tanpa flag global:
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-api-dev
 ```
 
-## 資源
+## Resource
 
-- [GitHub 上的 Gemini API 技能](https://ai.google.dev/gemini-api/docs/GitHub 上的 Gemini API 技能)
-- [互動 API](https://ai.google.dev/gemini-api/docs/互動 API)
-- [快速入門導覽課程](https://ai.google.dev/gemini-api/docs/快速入門導覽課程)
-- [程式庫](https://ai.google.dev/gemini-api/docs/程式庫)
+- [Keterampilan Gemini API di GitHub](https://github.com/google-gemini/gemini-skills)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=id)
+- [Panduan memulai](https://ai.google.dev/gemini-api/docs/quickstart?hl=id)
+- [Perpustakaan](https://ai.google.dev/gemini-api/docs/libraries?hl=id)
 
-提供意見
+Kirim masukan
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://ai.google.dev/gemini-api/docs/創用 CC 姓名標示 4.0 授權)，程式碼範例則為[阿帕契 2.0 授權](https://ai.google.dev/gemini-api/docs/阿帕契 2.0 授權)。詳情請參閱《[Google Developers 網站政策](https://ai.google.dev/gemini-api/docs/Google Developers 網站政策)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-上次更新時間：2026-04-29 (世界標準時間)。
+Terakhir diperbarui pada 2026-04-29 UTC.
 
-想進一步說明嗎？
+Ada masukan untuk kami?
+
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]

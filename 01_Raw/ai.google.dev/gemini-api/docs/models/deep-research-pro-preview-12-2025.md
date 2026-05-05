@@ -1,39 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-pro-preview-12-2025?hl=hi
-fetched_at: 2026-05-05T13:18:54.189206+00:00
-title: "Deep Research \u0915\u0940 \u091d\u0932\u0915 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-pro-preview-12-2025?hl=de
+fetched_at: 2026-05-05T19:51:22.103435+00:00
+title: "Deep Research-Vorschau \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/models/Gemini की Deep Research की सुविधा) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
 
-- [होम पेज](https://ai.google.dev/gemini-api/docs/models/होम पेज)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/models/Gemini API)
-- [Docs](https://ai.google.dev/gemini-api/docs/models/Docs)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-सुझाव भेजें
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Deep Research की झलक
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-यह एक ऐसा एजेंटिक रिसर्चर है जो अपने-आप काम करता है. इसे कई चरणों वाली रिसर्च के लिए डिज़ाइन किया गया है. यह मुश्किल जानकारी को इकट्ठा करके, सोर्स के साथ पूरी रिपोर्ट तैयार करता है. Gemini 3.1 Pro पर काम करने वाला यह मॉडल, लंबे समय तक चलने वाले कामों के लिए ऑप्टिमाइज़ किया गया है. साथ ही, यह सैकड़ों सार्वजनिक वेब सोर्स और निजी Workspace डेटा (जैसे, Gmail और Drive) का सटीक विश्लेषण करता है.
+Feedback geben
 
-## दस्तावेज़
+# Deep Research-Vorschau
 
-सुविधाओं और क्षमताओं के बारे में पूरी जानकारी पाने के लिए, [Deep Research](https://ai.google.dev/gemini-api/docs/models/Deep Research) पेज पर जाएं.
+Ein leistungsstarker agentischer Researcher, der für autonome, mehrstufige Untersuchungen entwickelt wurde und komplexe Informationen in umfassenden, zitierten Berichten zusammenfasst. Dieses Modell basiert auf Gemini 3.1 Pro und ist für lang andauernde Aufgaben und präzise Analysen in Hunderten von öffentlichen Webquellen und privaten Workspace-Daten wie Gmail und Drive optimiert.
+
+## Dokumentation
+
+Besuchen Sie die Seite [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) für eine vollständige Übersicht
+über die Funktionen und Möglichkeiten.
 
 ## deep-research-pro-preview-12-2025
 
-| प्रॉपर्टी | ब्यौरा |
+| Attribut | Beschreibung |
 | --- | --- |
-| id\_cardएजेंट कोड | **Interactions API**  `deep-research-pro-preview-12-2025` |
-| saveकौन-कौनसे डेटा टाइप इसके साथ काम करते हैं | **इनपुट**  टेक्स्ट, इमेज, PDF, ऑडियो, वीडियो  **आउटपुट**  टेक्स्ट (सोर्स के साथ रिपोर्ट) |
-| token\_autoटोकन की सीमाएं[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट कॉन्टेक्स्ट विंडो**  1,048,576  **आउटपुट टोकन की सीमा**  65,536 |
-| 123वर्शन | ज़्यादा जानकारी के लिए, [मॉडल के वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/मॉडल के वर्शन के पैटर्न) के बारे में पढ़ें.  - झलक देखें: `deep-research-pro-preview-12-2025` |
-| calendar\_monthसबसे नया अपडेट | दिसंबर 2025 |
+| id\_cardAgent-Code | **Interactions API**  `deep-research-pro-preview-12-2025` |
+| saveUnterstützte Datentypen | **Eingabe**  Text, Bild, PDF, Audio, Video  **Ausgabe**  Text (zitierte Berichte) |
+| token\_autoToken limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=de) | **Kontextfenster für die Eingabe**  1.048.576  **Tokenausgabelimit**  65.536 |
+| 123Versionen | Weitere Informationen finden Sie unter [Modellversionsmuster](https://ai.google.dev/gemini-api/docs/models/gemini?hl=de#model-versions).  - Vorschau für: `deep-research-pro-preview-12-2025` |
+| calendar\_monthLetzte Aktualisierung | Dezember 2025 |
 
-सुझाव भेजें
+Feedback geben
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://ai.google.dev/gemini-api/docs/models/Creative Commons Attribution 4.0 License) के तहत और कोड के नमूनों को [Apache 2.0 License](https://ai.google.dev/gemini-api/docs/models/Apache 2.0 License) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://ai.google.dev/gemini-api/docs/models/Google Developers साइट नीतियां) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया.
+Zuletzt aktualisiert: 2026-04-29 (UTC).
 
-क्या आपको हमें और कुछ बताना है?
+Haben Sie Feedback für uns?
+
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-04-29 (UTC)."],[],[]]

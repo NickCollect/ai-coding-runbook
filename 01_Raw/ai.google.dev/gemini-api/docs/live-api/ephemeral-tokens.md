@@ -1,39 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=pl
-fetched_at: 2026-05-05T13:15:22.123938+00:00
+source_url: https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=vi
+fetched_at: 2026-05-05T19:51:17.871115+00:00
 title: "Ephemeral tokens \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/live-api/Gemini Deep Research) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-- [Strona główna](https://ai.google.dev/gemini-api/docs/live-api/Strona główna)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/live-api/Gemini API)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs/live-api/Dokumenty)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Prześlij opinię
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+
+Gửi ý kiến phản hồi
 
 # Ephemeral tokens
 
-Tokeny tymczasowe to krótkotrwałe tokeny uwierzytelniające, które umożliwiają dostęp do interfejsu Gemini API za pomocą [WebSockets](https://ai.google.dev/gemini-api/docs/live-api/WebSockets). Zostały one zaprojektowane w celu zwiększenia bezpieczeństwa podczas łączenia się bezpośrednio z interfejsem API z urządzenia użytkownika (implementacja [klient-serwer](https://ai.google.dev/gemini-api/docs/live-api/klient-serwer)). Podobnie jak standardowe klucze interfejsu API, tymczasowe tokeny można wyodrębnić z aplikacji po stronie klienta, takich jak przeglądarki internetowe lub aplikacje mobilne. Jednak tymczasowe tokeny szybko wygasają i można je ograniczać, co znacznie zmniejsza ryzyko związane z bezpieczeństwem w środowisku produkcyjnym. Używaj ich, gdy uzyskujesz dostęp do interfejsu Live API bezpośrednio z aplikacji po stronie klienta, aby zwiększyć bezpieczeństwo klucza interfejsu API.
+Mã thông báo tạm thời là mã thông báo xác thực có thời gian tồn tại ngắn để truy cập vào Gemini
+API thông qua [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). Mã thông báo này được thiết kế để tăng cường bảo mật khi
+bạn kết nối trực tiếp từ thiết bị của người dùng đến API (triển khai
+[từ ứng dụng đến máy chủ](https://ai.google.dev/gemini-api/docs/live?hl=vi#implementation-approach)
+). Giống như khoá API tiêu chuẩn, bạn có thể trích xuất mã thông báo tạm thời từ các ứng dụng phía máy khách, chẳng hạn như trình duyệt web hoặc ứng dụng di động. Tuy nhiên, vì mã thông báo tạm thời hết hạn nhanh chóng và có thể bị hạn chế, nên mã thông báo này giúp giảm đáng kể các rủi ro bảo mật trong môi trường phát hành chính thức. Bạn nên sử dụng mã thông báo này khi truy cập trực tiếp vào Live API từ các ứng dụng phía máy khách để tăng cường bảo mật khoá API.
 
-## Jak działają tymczasowe tokeny
+ 
 
-Ogólnie tokeny przejściowe działają w ten sposób:
+## Cách hoạt động của mã thông báo tạm thời
 
-1. Klient (np. aplikacja internetowa) uwierzytelnia się w backendzie.
-2. Backend wysyła żądanie tokena tymczasowego do usługi udostępniania interfejsu Gemini API.
-3. Interfejs Gemini API wydaje krótkotrwały token.
-4. Backend wysyła token do klienta w przypadku połączeń WebSocket z Live API. Możesz to zrobić, zastępując klucz interfejsu API tokenem tymczasowym.
-5. Klient używa tokena tak, jakby był kluczem interfejsu API.
+Sau đây là cách hoạt động của mã thông báo tạm thời ở cấp độ cao:
 
-![Omówienie tokenów efemerycznych](https://ai.google.dev/static/gemini-api/docs/images/Live_API_01.png?hl=pl)
+1. Ứng dụng của bạn (ví dụ: ứng dụng web) xác thực với phần phụ trợ.
+2. Phần phụ trợ của bạn yêu cầu mã thông báo tạm thời từ dịch vụ cung cấp của Gemini API.
+3. Gemini API phát hành mã thông báo có thời gian tồn tại ngắn.
+4. Phần phụ trợ của bạn gửi mã thông báo đến ứng dụng để kết nối WebSocket với Live API. Bạn có thể thực hiện việc này bằng cách đổi khoá API của mình thành mã thông báo tạm thời.
+5. Sau đó, ứng dụng sẽ sử dụng mã thông báo này như thể đó là khoá API.
 
-Zwiększa to bezpieczeństwo, ponieważ nawet jeśli token zostanie wyodrębniony, będzie miał krótki okres ważności, w przeciwieństwie do klucza interfejsu API o długim okresie ważności wdrożonego po stronie klienta. Ponieważ klient wysyła dane bezpośrednio do Gemini, poprawia to też opóźnienia i eliminuje konieczność przekazywania danych w czasie rzeczywistym przez backendy.
+![Tổng quan về mã thông báo tạm thời](https://ai.google.dev/static/gemini-api/docs/images/Live_API_01.png?hl=vi)
 
-## Tworzenie tokena efemerycznego
+Điều này giúp tăng cường bảo mật vì ngay cả khi được trích xuất, mã thông báo này cũng có thời gian tồn tại ngắn, không giống như khoá API có thời gian tồn tại dài được triển khai ở phía máy khách. Vì ứng dụng gửi dữ liệu trực tiếp đến Gemini, nên điều này cũng giúp cải thiện độ trễ và tránh việc phần phụ trợ của bạn cần phải làm trung gian cho dữ liệu theo thời gian thực.
 
-Oto uproszczony przykład uzyskiwania tymczasowego tokena z Gemini.
-Domyślnie masz 1 minutę na rozpoczęcie nowych sesji interfejsu Live API przy użyciu tokena z tego żądania (`newSessionExpireTime`) i 30 minut na wysyłanie wiadomości przez to połączenie (`expireTime`).
+## Tạo mã thông báo tạm thời
+
+Sau đây là ví dụ đơn giản về cách nhận mã thông báo tạm thời từ Gemini.
+Theo mặc định, bạn sẽ có 1 phút để bắt đầu các phiên Live API mới bằng mã thông báo từ yêu cầu này (`newSessionExpireTime`) và 30 phút để gửi thông báo qua kết nối đó (`expireTime`).
 
 ### Python
 
@@ -77,10 +87,14 @@ const expireTime = new Date(Date.now() + 30 * 60 * 1000).toISOString();
   });
 ```
 
-Ograniczenia wartości, wartości domyślne i inne specyfikacje pól `expireTime` znajdziesz w [dokumentacji API](https://ai.google.dev/gemini-api/docs/live-api/dokumentacji API).
-W `expireTime` tym czasie musisz [`sessionResumption`](https://ai.google.dev/gemini-api/docs/live-api/`sessionResumption`) ponownie połączyć się z połączeniem co 10 minut (możesz to zrobić za pomocą tego samego tokena, nawet jeśli `uses: 1`).
+Để biết các ràng buộc về giá trị `expireTime`, giá trị mặc định và các thông số kỹ thuật khác của trường, hãy xem tài liệu tham khảo về API
+.
+Trong khung thời gian `expireTime`, bạn sẽ cần
+[`sessionResumption`](https://ai.google.dev/gemini-api/docs/live-session?hl=vi#session-resumption) để
+kết nối lại lệnh gọi sau mỗi 10 phút (bạn có thể thực hiện việc này bằng cùng một mã thông báo ngay cả
+khi `uses: 1`).
 
-Możesz też powiązać token efemeryczny z zestawem konfiguracji. Może to być przydatne do dalszego zwiększania bezpieczeństwa aplikacji i przechowywania instrukcji systemowych po stronie serwera.
+Bạn cũng có thể khoá mã thông báo tạm thời đối với một nhóm cấu hình. Điều này có thể hữu ích để cải thiện thêm tính bảo mật của ứng dụng và giữ các hướng dẫn của hệ thống ở phía máy chủ.
 
 ### Python
 
@@ -136,13 +150,15 @@ const token = await client.authTokens.create({
 // You'll need to pass the value under token.name back to your client to use it
 ```
 
-Możesz też zablokować podzbiór pól. Więcej informacji znajdziesz w [dokumentacji pakietu SDK](https://ai.google.dev/gemini-api/docs/live-api/dokumentacji pakietu SDK).
+Bạn cũng có thể khoá một nhóm nhỏ các trường. Hãy xem [tài liệu về SDK](https://googleapis.github.io/python-genai/genai.html#genai.types.CreateAuthTokenConfig.lock_additional_fields)
+để biết thêm thông tin.
 
-## Łączenie się z Live API za pomocą tokena tymczasowego
+## Kết nối với Live API bằng mã thông báo tạm thời
 
-Gdy uzyskasz token tymczasowy, używaj go tak, jakby był kluczem interfejsu API (pamiętaj jednak, że działa on tylko w przypadku interfejsu API w wersji produkcyjnej i tylko z wersją `v1alpha` interfejsu API).
+Sau khi có mã thông báo tạm thời, bạn sẽ sử dụng mã thông báo này như thể đó là khoá API (nhưng hãy nhớ rằng mã thông báo này chỉ hoạt động đối với Live API và chỉ với phiên bản `v1alpha` của API).
 
-Używanie tymczasowych tokenów ma sens tylko w przypadku wdrażania aplikacji, które korzystają z [implementacji po stronie klienta i serwera](https://ai.google.dev/gemini-api/docs/live-api/implementacji po stronie klienta i serwera).
+Việc sử dụng mã thông báo tạm thời chỉ mang lại giá trị khi triển khai các ứng dụng
+tuân theo [phương pháp triển khai từ ứng dụng đến máy chủ](https://ai.google.dev/gemini-api/docs/live?hl=vi#implementation-approach).
 
 ### JavaScript
 
@@ -172,27 +188,29 @@ async function main() {
 main();
 ```
 
-Więcej przykładów znajdziesz w artykule [Pierwsze kroki z interfejsem Live API](https://ai.google.dev/gemini-api/docs/live-api/Pierwsze kroki z interfejsem Live API).
+Hãy xem bài viết [Bắt đầu sử dụng Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi) để biết thêm ví dụ.
 
-## Sprawdzone metody
+## Các phương pháp hay nhất
 
-- Ustaw krótki czas wygaśnięcia za pomocą parametru `expire_time`.
-- Tokeny wygasają, co wymaga ponownego rozpoczęcia procesu udostępniania.
-- Sprawdź bezpieczne uwierzytelnianie na własnym backendzie. Tokeny tymczasowe będą tak bezpieczne, jak metoda uwierzytelniania backendu.
-- Zwykle unikaj używania tymczasowych tokenów w przypadku połączeń między backendem a Gemini, ponieważ ta ścieżka jest zwykle uważana za bezpieczną.
+- Đặt thời gian hết hạn ngắn bằng tham số `expire_time`.
+- Mã thông báo sẽ hết hạn, yêu cầu bạn phải khởi động lại quy trình cung cấp.
+- Xác minh quá trình xác thực an toàn cho phần phụ trợ của riêng bạn. Mã thông báo tạm thời sẽ chỉ an toàn như phương thức xác thực phần phụ trợ của bạn.
+- Nói chung, hãy tránh sử dụng mã thông báo tạm thời cho các kết nối từ phần phụ trợ đến Gemini, vì đường dẫn này thường được coi là an toàn.
 
-## Ograniczenia
+## Các điểm hạn chế
 
-Obecnie tokeny tymczasowe są zgodne tylko z [interfejsem Live API](https://ai.google.dev/gemini-api/docs/live-api/interfejsem Live API).
+Hiện tại, mã thông báo tạm thời chỉ tương thích với [Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi).
 
-## Co dalej?
+## Bước tiếp theo
 
-- Więcej informacji znajdziesz w [dokumentacji API](https://ai.google.dev/gemini-api/docs/live-api/dokumentacji API) interfejsu Live API na temat tokenów tymczasowych.
+- Đọc tài liệu tham khảo API Live [trên mã thông báo tạm thời](https://ai.google.dev/api/live?hl=vi#ephemeral-auth-tokens) để biết thêm thông tin.
 
-Prześlij opinię
+Gửi ý kiến phản hồi
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://ai.google.dev/gemini-api/docs/live-api/licencją Creative Commons – uznanie autorstwa 4.0), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://ai.google.dev/gemini-api/docs/live-api/licencji Apache 2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://ai.google.dev/gemini-api/docs/live-api/zasady dotyczące witryny Google Developers). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Ostatnia aktualizacja: 2026-04-29 UTC.
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-Chcesz przekazać coś jeszcze?
+Bạn muốn chia sẻ thêm với chúng tôi?
+
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

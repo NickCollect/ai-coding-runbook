@@ -1,130 +1,132 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-key?hl=ar
-fetched_at: 2026-05-05T13:28:54.477211+00:00
-title: "\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0645\u0641\u0627\u062a\u064a\u062d \u0648\u0627\u062c\u0647\u0629 \u0628\u0631\u0645\u062c\u0629 \u0627\u0644\u062a\u0637\u0628\u064a\u0642\u0627\u062a \u0641\u064a Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-key?hl=tr
+fetched_at: 2026-05-05T19:45:39.623618+00:00
+title: "Gemini API anahtarlar\u0131n\u0131 kullanma \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/Deep Research من Gemini) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
 
-- [الصفحة الرئيسية](https://ai.google.dev/gemini-api/docs/الصفحة الرئيسية)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [المستندات](https://ai.google.dev/gemini-api/docs/المستندات)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-إرسال ملاحظات
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# استخدام مفاتيح واجهة برمجة التطبيقات في Gemini
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-لاستخدام Gemini API، يجب أن يكون لديك مفتاح واجهة برمجة تطبيقات. توضّح هذه الصفحة كيفية إنشاء مفاتيحك وإدارتها في Google AI Studio، بالإضافة إلى كيفية إعداد بيئتك لاستخدامها في الرمز البرمجي.
+Geri bildirim gönderin
 
-[إنشاء مفتاح واجهة Gemini API أو عرضه](https://ai.google.dev/gemini-api/docs/إنشاء مفتاح واجهة Gemini API أو عرضه)
+# Gemini API anahtarlarını kullanma
 
-## مفاتيح واجهة برمجة التطبيقات
+Gemini API'yi kullanmak için API anahtarı gerekir. Bu sayfada, Google AI Studio'da anahtarlarınızı nasıl oluşturup yöneteceğiniz ve bunları kodunuzda kullanmak için ortamınızı nasıl ayarlayacağınız açıklanmaktadır.
 
-يمكنك إنشاء جميع مفاتيح Gemini API وإدارتها من صفحة [مفاتيح API](https://ai.google.dev/gemini-api/docs/مفاتيح API) في **Google AI Studio**.
+[Gemini API anahtarı oluşturma veya görüntüleme](https://aistudio.google.com/app/apikey?hl=tr)
 
-بعد الحصول على مفتاح واجهة برمجة التطبيقات، تتوفّر لك الخيارات التالية للربط بواجهة Gemini API:
+## API Anahtarları
 
-- [ضبط مفتاح واجهة برمجة التطبيقات كمتغيّر بيئة](https://ai.google.dev/gemini-api/docs/ضبط مفتاح واجهة برمجة التطبيقات كمتغيّر بيئة)
-- [تقديم مفتاح واجهة برمجة التطبيقات بشكلٍ صريح](https://ai.google.dev/gemini-api/docs/تقديم مفتاح واجهة برمجة التطبيقات بشكلٍ صريح)
+Tüm Gemini API anahtarlarınızı [Google AI Studio](https://aistudio.google.com/app/apikey?hl=tr) **API anahtarları** sayfasından oluşturup yönetebilirsiniz.
 
-لإجراء الاختبار الأوّلي، يمكنك تضمين مفتاح واجهة برمجة التطبيقات في الرمز البرمجي، ولكن يجب أن يكون ذلك مؤقتًا فقط لأنّه غير آمن. يمكنك العثور على أمثلة حول الترميز الثابت لمفتاح واجهة برمجة التطبيقات في قسم [توفير مفتاح واجهة برمجة التطبيقات بشكل صريح](https://ai.google.dev/gemini-api/docs/توفير مفتاح واجهة برمجة التطبيقات بشكل صريح).
+API anahtarınız olduğunda Gemini API'ye bağlanmak için aşağıdaki seçenekleri kullanabilirsiniz:
 
-## مشاريع Google Cloud
+- [API anahtarınızı ortam değişkeni olarak ayarlama](#set-api-env-var)
+- [API anahtarınızı açıkça sağlama](#provide-api-key-explicitly)
 
-تُعد [مشاريع Google Cloud](https://ai.google.dev/gemini-api/docs/مشاريع Google Cloud) أساسية لاستخدام خدمات Google Cloud (مثل Gemini API) وإدارة الفوترة والتحكّم في المتعاونين والأذونات. يوفّر Google AI
-Studio واجهة بسيطة لمشاريعك على Google Cloud.
+İlk test için bir API anahtarını sabit kodlayabilirsiniz ancak bu işlem güvenli olmadığından yalnızca geçici olarak yapılmalıdır. API anahtarını sabit kodlamayla ilgili örnekleri [API anahtarını açıkça sağlama](#provide-api-key-explicitly) bölümünde bulabilirsiniz.
 
-إذا لم يسبق لك إنشاء أي مشاريع، عليك إنشاء مشروع جديد أو استيراد مشروع من Google Cloud إلى Google AI Studio. ستعرض صفحة **المشاريع** في Google AI Studio جميع المفاتيح التي لديها الإذن الكافي لاستخدام Gemini API. راجِع قسم [استيراد المشاريع](https://ai.google.dev/gemini-api/docs/استيراد المشاريع) للحصول على التعليمات.
+## Google Cloud projeleri
 
-### المشروع التلقائي
+[Google Cloud projeleri](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=tr), Google Cloud hizmetlerini (ör. Gemini API) kullanmak, faturalandırmayı yönetmek ve ortak çalışanları ve izinleri kontrol etmek için temel öneme sahiptir. Google AI Studio, Google Cloud projelerinize yönelik basit bir arayüz sunar.
 
-بالنسبة إلى المستخدمين الجدد، بعد قبول بنود الخدمة، ينشئ Google AI Studio مشروعًا ومفتاحًا تلقائيًا على Google Cloud لتسهيل الاستخدام. يمكنك إعادة تسمية هذا المشروع في Google AI Studio من خلال الانتقال إلى طريقة عرض **المشاريع** في **لوحة البيانات**، والنقر على زر الإعدادات المكوّن من 3 نقاط بجانب أحد المشاريع، ثم اختيار **إعادة تسمية المشروع**. لن يتم إنشاء مشروع تلقائي للمستخدمين الحاليين أو المستخدمين الذين لديهم حسابات على Google Cloud.
+Henüz proje oluşturmadıysanız yeni bir proje oluşturmanız veya Google Cloud'dan Google AI Studio'ya bir proje aktarmanız gerekir. Google AI Studio'daki **Projeler** sayfasında, Gemini API'yi kullanmak için yeterli izne sahip tüm anahtarlar gösterilir. Talimatlar için [projeleri içe aktarma](#import-projects) bölümüne bakın.
 
-## استيراد المشاريع
+### Varsayılan proje
 
-يرتبط كل مفتاح لواجهة Gemini API بمشروع على Google Cloud. لا يعرض Google AI Studio تلقائيًا كل مشاريعك على السحابة الإلكترونية. يجب استيراد المشاريع التي تريدها من خلال البحث عن الاسم أو رقم تعريف المشروع في مربّع الحوار **استيراد المشاريع**. للاطّلاع على قائمة كاملة بالمشاريع التي يمكنك الوصول إليها، انتقِل إلى Cloud Console.
+Yeni kullanıcılar için Google AI Studio, Hizmet Şartları'nı kabul ettikten sonra kullanım kolaylığı sağlamak amacıyla varsayılan bir Google Cloud projesi ve API anahtarı oluşturur. Bu projeyi Google AI Studio'da yeniden adlandırmak için **Kontrol paneli**'ndeki **Projeler** görünümüne gidin, bir projenin yanındaki 3 nokta ayarlar düğmesini tıklayın ve **Projeyi yeniden adlandır**'ı seçin. Mevcut kullanıcılar veya Google Cloud hesapları olan kullanıcılar için varsayılan proje oluşturulmaz.
 
-إذا لم تستورد أي مشاريع على السحابة الإلكترونية بعد، اتّبِع الخطوات التالية لاستيراد مشروع Google Cloud وإنشاء مفتاح:
+## Projeleri içe aktarma
 
-1. انتقِل إلى [Google AI Studio](https://ai.google.dev/gemini-api/docs/Google AI Studio).
-2. افتح **لوحة البيانات** من اللوحة الجانبية على يمين الصفحة.
-3. اختَر **المشاريع**.
-4. انقر على الزر **استيراد المشاريع** في صفحة **المشاريع**.
-5. ابحث عن مشروع Google Cloud الذي تريد استيراده واختَره، ثم انقر على الزر **استيراد**.
+Her Gemini API anahtarı bir Google Cloud projesiyle ilişkilendirilir. Varsayılan olarak Google AI Studio, Cloud projelerinizin tümünü göstermez. **Projeleri İçe Aktar** iletişim kutusunda adı veya proje kimliğini arayarak istediğiniz projeleri içe aktarmanız gerekir. Erişiminiz olan projelerin tam listesini görüntülemek için Cloud Console'u ziyaret edin.
 
-بعد استيراد مشروع، انتقِل إلى صفحة **مفاتيح واجهة برمجة التطبيقات** من قائمة **لوحة البيانات**، وأنشئ مفتاح واجهة برمجة تطبيقات في المشروع الذي استوردته للتو.
+Henüz içe aktarılmış projeniz yoksa Google Cloud projesi içe aktarmak ve anahtar oluşturmak için aşağıdaki adımları uygulayın:
 
-## القيود
+1. [Google AI Studio](https://aistudio.google.com?hl=tr)'ya gidin.
+2. Soldaki yan panelden **Kontrol Paneli**'ni açın.
+3. **Projeler**'i seçin.
+4. **Projeler** sayfasında **Projeleri içe aktar** düğmesini seçin.
+5. İçe aktarmak istediğiniz Google Cloud projesini arayıp seçin ve **İçe aktar** düğmesini tıklayın.
 
-في ما يلي القيود المفروضة على إدارة مفاتيح واجهة برمجة التطبيقات ومشاريع Google Cloud في Google AI Studio.
+Bir proje içe aktarıldıktan sonra **Kontrol Paneli** menüsünden **API Anahtarları** sayfasına gidin ve yeni içe aktardığınız projede bir API anahtarı oluşturun.
 
-- يمكنك إنشاء 10 مشاريع كحد أقصى في كل مرة من صفحة **المشاريع** في Google AI Studio.
-- يمكنك تسمية المشاريع والمفاتيح وإعادة تسميتها.
-- تعرض صفحتا **مفاتيح واجهة برمجة التطبيقات** و**المشاريع** 100 مفتاح و50 مشروعًا كحد أقصى.
-- لا يتم عرض سوى مفاتيح واجهة برمجة التطبيقات التي لا تتضمّن أي قيود أو التي تقتصر على Generative Language API.
+## Sınırlamalar
 
-للحصول على إذن إضافي بإدارة مشاريعك، بما في ذلك تعديل مفاتيح واجهة برمجة التطبيقات وتقييدها، انتقِل إلى
-[صفحة بيانات الاعتماد في Google Cloud Console](https://ai.google.dev/gemini-api/docs/صفحة بيانات الاعتماد في Google Cloud Console).
-في Cloud Console، يمكنك اختيار مشروعك والنقر على مفتاح واجهة برمجة تطبيقات حالي، ثم حصر استخدامه على **Generative Language API**.
+Google AI Studio'da API anahtarlarını ve Google Cloud projelerini yönetmeyle ilgili sınırlamalar aşağıda verilmiştir.
 
-## ضبط مفتاح واجهة برمجة التطبيقات كمتغيّر بيئي
+- Google AI Studio **Projeler** sayfasında tek seferde en fazla 10 proje oluşturabilirsiniz.
+- Projeleri ve anahtarları adlandırabilir, yeniden adlandırabilirsiniz.
+- **API anahtarları** ve **Projeler** sayfalarında en fazla 100 anahtar ve 50 proje gösterilir.
+- Yalnızca kısıtlaması olmayan veya Generative Language API ile kısıtlanmış API anahtarları gösterilir.
 
-في حال ضبطت متغيّر البيئة `GEMINI_API_KEY` أو `GOOGLE_API_KEY`، سيختار العميل مفتاح واجهة برمجة التطبيقات تلقائيًا عند استخدام إحدى [مكتبات Gemini API](https://ai.google.dev/gemini-api/docs/مكتبات Gemini API). ننصحك بضبط أحد المتغيرَين فقط، ولكن في حال ضبط كليهما، ستكون الأولوية للمتغير `GOOGLE_API_KEY`.
+API anahtarlarını değiştirme ve kısıtlama dahil olmak üzere projelerinize ek yönetim erişimi için [Google Cloud Console kimlik bilgileri sayfasını](https://console.cloud.google.com/apis/credentials?hl=tr) ziyaret edin.
+Cloud Console'da projenizi seçebilir, mevcut bir API anahtarını tıklayabilir ve ardından bu anahtarı **Generative Language API** ile sınırlayabilirsiniz.
 
-إذا كنت تستخدم REST API أو JavaScript على المتصفّح، عليك تقديم مفتاح واجهة برمجة التطبيقات بشكل صريح.
+## API anahtarını ortam değişkeni olarak ayarlama
 
-في ما يلي كيفية ضبط مفتاح واجهة برمجة التطبيقات محليًا كمتغيّر بيئة
-`GEMINI_API_KEY` باستخدام أنظمة تشغيل مختلفة.
+`GEMINI_API_KEY` veya `GOOGLE_API_KEY` ortam değişkenini ayarlarsanız [Gemini API kitaplıklarından](https://ai.google.dev/gemini-api/docs/libraries?hl=tr) biri kullanılırken API anahtarı istemci tarafından otomatik olarak alınır. Bu değişkenlerden yalnızca birini ayarlamanız önerilir. Ancak her ikisi de ayarlanırsa `GOOGLE_API_KEY` öncelikli olur.
 
-### ‫Linux/macOS - Bash
+REST API'yi veya tarayıcıda JavaScript'i kullanıyorsanız API anahtarını açıkça sağlamanız gerekir.
 
-‫Bash هو إعداد شائع للوحدة الطرفية في نظامَي التشغيل Linux وmacOS. يمكنك التحقّق ممّا إذا كان لديك ملف إعدادات من خلال تنفيذ الأمر التالي:
+API anahtarınızı farklı işletim sistemlerinde ortam değişkeni olarak yerel olarak nasıl ayarlayabileceğinizi aşağıda bulabilirsiniz.
+`GEMINI_API_KEY`
+
+### Linux/macOS - Bash
+
+Bash, yaygın bir Linux ve macOS terminal yapılandırmasıdır. Aşağıdaki komutu çalıştırarak yapılandırma dosyanızın olup olmadığını kontrol edebilirsiniz:
 
 ```
 ~/.bashrc
 ```
 
-إذا كان الردّ هو "No such file or directory"، عليك إنشاء هذا الملف وفتحه من خلال تنفيذ الأوامر التالية، أو استخدام `zsh`:
+Yanıt "No such file or directory" (Böyle bir dosya veya dizin yok) ise bu dosyayı oluşturmanız ve aşağıdaki komutları çalıştırarak açmanız ya da `zsh` kullanmanız gerekir:
 
 ```
 touch ~/.bashrc
 open ~/.bashrc
 ```
 
-بعد ذلك، عليك ضبط مفتاح واجهة برمجة التطبيقات من خلال إضافة أمر التصدير التالي:
+Ardından, aşağıdaki dışa aktarma komutunu ekleyerek API anahtarınızı ayarlamanız gerekir:
 
 ```
 export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
 ```
 
-بعد حفظ الملف، طبِّق التغييرات من خلال تنفيذ الأمر التالي:
+Dosyayı kaydettikten sonra aşağıdaki komutu çalıştırarak değişiklikleri uygulayın:
 
 ```
 source ~/.bashrc
 ```
 
-### ‫macOS - Zsh
+### macOS - Zsh
 
-‫Zsh هو إعداد شائع للوحدة الطرفية في نظامَي التشغيل Linux وmacOS. يمكنك التحقّق ممّا إذا كان لديك ملف إعدادات من خلال تنفيذ الأمر التالي:
+Zsh, yaygın bir Linux ve macOS terminal yapılandırmasıdır. Aşağıdaki komutu çalıştırarak yapılandırma dosyanızın olup olmadığını kontrol edebilirsiniz:
 
 ```
 ~/.zshrc
 ```
 
-إذا كان الردّ هو "No such file or directory"، عليك إنشاء هذا الملف وفتحه من خلال تنفيذ الأوامر التالية، أو استخدام `bash`:
+Yanıt "No such file or directory" (Böyle bir dosya veya dizin yok) ise bu dosyayı oluşturmanız ve aşağıdaki komutları çalıştırarak açmanız ya da `bash` kullanmanız gerekir:
 
 ```
 touch ~/.zshrc
 open ~/.zshrc
 ```
 
-بعد ذلك، عليك ضبط مفتاح واجهة برمجة التطبيقات من خلال إضافة أمر التصدير التالي:
+Ardından, aşağıdaki dışa aktarma komutunu ekleyerek API anahtarınızı ayarlamanız gerekir:
 
 ```
 export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
 ```
 
-بعد حفظ الملف، طبِّق التغييرات من خلال تنفيذ الأمر التالي:
+Dosyayı kaydettikten sonra aşağıdaki komutu çalıştırarak değişiklikleri uygulayın:
 
 ```
 source ~/.zshrc
@@ -132,23 +134,24 @@ source ~/.zshrc
 
 ### Windows
 
-1. ابحث عن "متغيرات البيئة" في شريط البحث.
-2. اختَر تعديل **إعدادات النظام**. قد يُطلب منك تأكيد رغبتك في إجراء ذلك.
-3. في مربّع حوار إعدادات النظام، انقر على الزر الذي يحمل التصنيف **متغيرات البيئة**.
-4. ضمن **متغيّرات المستخدم** (للمستخدم الحالي) أو **متغيّرات النظام** (تنطبق على جميع المستخدمين الذين يستخدمون الجهاز)، انقر على **جديد...**
-5. حدِّد اسم المتغيّر على النحو التالي: `GEMINI_API_KEY`. حدِّد مفتاح Gemini API كقيمة المتغيّر.
-6. انقر على **حسنًا** لتطبيق التغييرات.
-7. افتح جلسة طرفية جديدة (cmd أو Powershell) للحصول على المتغير الجديد.
+1. Arama çubuğunda "Ortam Değişkenleri"ni arayın.
+2. **Sistem Ayarları**'nı değiştirmeyi seçin. Bu işlemi yapmak istediğinizi onaylamanız gerekebilir.
+3. Sistem ayarları iletişim kutusunda **Ortam
+   Değişkenleri** etiketli düğmeyi tıklayın.
+4. **Kullanıcı değişkenleri** (mevcut kullanıcı için) veya **Sistem değişkenleri** (makineyi kullanan tüm kullanıcılar için geçerlidir) altında **Yeni...** seçeneğini tıklayın.
+5. Değişken adını `GEMINI_API_KEY` olarak belirtin. Değişken değeri olarak Gemini API anahtarınızı belirtin.
+6. Değişiklikleri uygulamak için **Tamam**'ı tıklayın.
+7. Yeni değişkeni almak için yeni bir terminal oturumu (cmd veya Powershell) açın.
 
-## توفير مفتاح واجهة برمجة التطبيقات بشكل صريح
+## API anahtarını açıkça sağlama
 
-في بعض الحالات، قد تحتاج إلى تقديم مفتاح واجهة برمجة التطبيقات بشكل صريح. على سبيل المثال:
+Bazı durumlarda, API anahtarını açıkça sağlamak isteyebilirsiniz. Örneğin:
 
-- إذا كنت بصدد إجراء طلب بيانات بسيط من واجهة برمجة التطبيقات وتفضّل الترميز الثابت لمفتاح واجهة برمجة التطبيقات
-- تريد التحكّم بشكل صريح بدون الحاجة إلى الاعتماد على الاكتشاف التلقائي لمتغيرات البيئة من خلال مكتبات Gemini API
-- أنت تستخدم بيئة لا تتوافق مع متغيرات البيئة (مثل الويب) أو تجري طلبات REST.
+- Basit bir API çağrısı yapıyorsunuz ve API anahtarını sabit kodlamayı tercih ediyorsunuz.
+- Gemini API kitaplıklarının ortam değişkenlerini otomatik olarak keşfetmesine güvenmek zorunda kalmadan açık kontrol istiyorsanız
+- Ortam değişkenlerinin desteklenmediği bir ortamda (ör.web) kullanıyorsunuz veya REST çağrıları yapıyorsunuz.
 
-في ما يلي أمثلة حول كيفية تقديم مفتاح واجهة برمجة التطبيقات بشكلٍ صريح:
+Aşağıda, API anahtarını açıkça nasıl sağlayabileceğinize dair örnekler verilmiştir:
 
 ### Python
 
@@ -216,7 +219,7 @@ func main() {
 }
 ```
 
-### جافا
+### Java
 
 ```
 package com.example;
@@ -259,49 +262,49 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
   }'
 ```
 
-## الحفاظ على أمان مفتاح واجهة برمجة التطبيقات
+## API anahtarınızın güvenliğini sağlama
 
-عامِل مفتاح Gemini API مثل كلمة المرور. في حال تعرّض مشروعك للاختراق، يمكن للآخرين استخدام حصته، وتحمّل الرسوم (في حال تفعيل الفوترة)، والوصول إلى بياناتك الخاصة، مثل الملفات.
+Gemini API anahtarınızı şifre gibi kullanın. Tehlikeye girerse diğer kullanıcılar projenizin kotasını kullanabilir, ücret ödemenize neden olabilir (faturalandırma etkinse) ve dosyalar gibi özel verilerinize erişebilir.
 
-### قواعد الأمان المهمة
+### Önemli güvenlik kuralları
 
-- **الحفاظ على سرية المفاتيح**: قد تتيح مفاتيح واجهة برمجة التطبيقات الخاصة بـ Gemini الوصول إلى بيانات حساسة يعتمد عليها تطبيقك.
+- **Anahtarları gizli tutun**: Gemini'ın API anahtarları, uygulamanızın kullandığı hassas verilere erişebilir.
 
-  - **لا تُدرِج مفاتيح واجهة برمجة التطبيقات في نظام التحكّم بالمصادر أبدًا.** لا تحفَظ مفتاح واجهة برمجة التطبيقات في أنظمة التحكّم في الإصدارات، مثل Git.
-  - **يجب عدم عرض مفاتيح واجهة برمجة التطبيقات من جهة العميل.** لا تستخدِم مفتاح واجهة برمجة التطبيقات مباشرةً
-    في تطبيقات الويب أو الأجهزة الجوّالة في مرحلة الإنتاج. يمكن استخراج المفاتيح في الرمز البرمجي من جهة العميل (بما في ذلك مكتبات JavaScript/TypeScript وطلبات REST).
-- **تقييد الوصول**: يمكنك تقييد استخدام مفتاح واجهة برمجة التطبيقات بعناوين IP أو مراجع HTTP أو تطبيقات Android/iOS معيّنة حيثما أمكن ذلك.
-- **تقييد الاستخدام**: فعِّل واجهات برمجة التطبيقات الضرورية فقط لكل مفتاح.
-- **إجراء عمليات تدقيق منتظمة**: يجب تدقيق مفاتيح واجهة برمجة التطبيقات بانتظام وتغييرها بشكل دوري.
+  - **API anahtarlarını hiçbir zaman kaynak denetimine işlemeyin.** API anahtarınızı Git gibi sürüm denetim sistemlerine işlemeyin.
+  - **API anahtarlarını hiçbir zaman istemci tarafında kullanmayın.** API anahtarınızı üretimdeki web veya mobil uygulamalarda doğrudan kullanmayın. İstemci tarafı kodundaki anahtarlar (JavaScript/TypeScript kitaplıklarımız ve REST çağrıları dahil) ayıklanabilir.
+- **Erişimi kısıtlama**: Mümkün olduğunda API anahtarı kullanımını belirli IP adresleri, HTTP yönlendirenleri veya Android/iOS uygulamalarıyla kısıtlayın.
+- **Kullanımı kısıtlama**: Her anahtar için yalnızca gerekli API'leri etkinleştirin.
+- **Düzenli denetimler yapın**: API anahtarlarınızı düzenli olarak denetleyin ve belirli aralıklarla döndürün.
 
-### أفضل الممارسات
+### En iyi uygulamalar
 
-- **استخدام طلبات من جهة الخادم مع مفاتيح واجهة برمجة التطبيقات** إنّ الطريقة الأكثر أمانًا لاستخدام مفتاح واجهة برمجة التطبيقات هي إرسال طلبات إلى Gemini API من تطبيق من جهة الخادم حيث يمكن الحفاظ على سرية المفتاح.
-- **استخدام رموز مميزة مؤقتة للوصول من جهة العميل (Live API فقط):** للوصول مباشرةً إلى Live API من جهة العميل، يمكنك استخدام رموز مميزة مؤقتة. وتكون هذه النماذج أقل عرضة للمخاطر الأمنية ويمكن استخدامها في عملية الإنتاج. راجِع دليل [الرموز المميزة المؤقتة](https://ai.google.dev/gemini-api/docs/الرموز المميزة المؤقتة) لمزيد من المعلومات.
-- **ننصحك بإضافة قيود إلى مفتاحك:** يمكنك الحدّ من أذونات المفتاح
-  من خلال إضافة [قيود على مفتاح واجهة برمجة التطبيقات](https://ai.google.dev/gemini-api/docs/قيود على مفتاح واجهة برمجة التطبيقات).
-  ويقلّل ذلك من الأضرار المحتملة في حال تسرُّب المفتاح.
+- **API anahtarlarıyla sunucu tarafı çağrıları kullanma** API anahtarınızı kullanmanın en güvenli yolu, anahtarın gizli tutulabileceği bir sunucu tarafı uygulamasından Gemini API'yi çağırmaktır.
+- **İstemci tarafı erişimi için kısa ömürlü jetonları kullanma (yalnızca Live API):** Live API'ye doğrudan istemci tarafı erişimi için kısa ömürlü jetonları kullanabilirsiniz. Daha düşük güvenlik riskleri içerir ve üretimde kullanıma uygun olabilir. Daha fazla bilgi için [geçici jetonlar](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=tr) kılavuzunu inceleyin.
+- **Anahtarınıza kısıtlamalar eklemeyi düşünün:** [API anahtarı kısıtlamaları](https://cloud.google.com/api-keys/docs/add-restrictions-api-keys?hl=tr#add-api-restrictions) ekleyerek anahtarın izinlerini sınırlayabilirsiniz.
+  Bu, anahtarın sızdırılması durumunda olası zararı en aza indirir.
 
-للاطّلاع على بعض أفضل الممارسات العامة، يمكنك أيضًا مراجعة [مقالة الدعم](https://ai.google.dev/gemini-api/docs/مقالة الدعم) هذه.
+Genel en iyi uygulamalar için bu [destek makalesini](https://support.google.com/googleapi/answer/6310037?hl=tr) de inceleyebilirsiniz.
 
-## تحديد المشاكل في إنشاء مفتاح واجهة برمجة التطبيقات وحلّها
+## API anahtarı oluşturma sorunlarını giderme
 
-في Google AI Studio، قد يظهر زر **إنشاء مفتاح واجهة برمجة تطبيقات** غير متاح، مع الرسالة: "*ليس لديك الإذن بإنشاء مفتاح في هذا المشروع*".
+Google AI Studio'da **API anahtarı oluştur** düğmesi kullanılamıyor görünebilir ve "*Bu projede anahtar oluşturma izniniz yok*" mesajı gösterilebilir.
 
-يحدث ذلك عندما لا تتوفّر لديك الأذونات اللازمة داخل المشروع لإنشاء مفتاح جديد:
+Bu durum, yeni bir anahtar oluşturmak için projede gerekli izinlere sahip olmadığınızda ortaya çıkar:
 
-- ‫**`resourcemanager.projects.get`**: يسمح لأداة AI Studio بالتحقّق من توفّر المشروع.
-- **`apikeys.keys.create`**: يسمح بإنشاء مفتاح واجهة برمجة التطبيقات نفسه.
-- **`serviceusage.services.enable`**: مطلوبة لضمان تفعيل Gemini API في المشروع.
+- **`resourcemanager.projects.get`**: AI Studio'nun projenin varlığını doğrulamasına olanak tanır.
+- **`apikeys.keys.create`**: API anahtarının oluşturulmasına olanak tanır.
+- **`serviceusage.services.enable`**: Gemini API'nin projede etkin olmasını sağlamak için gereklidir.
 
-لحلّ مشكلة الأذونات، اطلب من مشرف المشروع أو مشرف مؤسستك إذا كان المشروع تابعًا [لمؤسسة](https://ai.google.dev/gemini-api/docs/لمؤسسة) منحك دورًا يتضمّن الأذونات المذكورة أعلاه (مثل "محرّر المشروع" أو دور مخصّص).
+İzinlerinizi düzeltmek için proje yöneticinizden veya proje bir [kuruluşa](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=tr) aitse kuruluşunuzun yöneticisinden yukarıda listelenen izinlere sahip bir rol (ör. Proje Düzenleyici veya özel rol) vermesini isteyin.
 
-إذا لم يكن لديك إذن وصول إداري إلى مشروع، يمكنك إنشاء مشروع جديد غير مرتبط بمؤسسة لإنشاء مفاتيحك.
+Bir projeye yönetim erişiminiz yoksa anahtarlarınızı oluşturmak için bir kuruluşla ilişkilendirilmemiş yeni bir proje oluşturabilirsiniz.
 
-إرسال ملاحظات
+Geri bildirim gönderin
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://ai.google.dev/gemini-api/docs/ترخيص Creative Commons Attribution 4.0‏) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://ai.google.dev/gemini-api/docs/ترخيص Apache 2.0‏). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://ai.google.dev/gemini-api/docs/سياسات موقع Google Developers‏). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
+Son güncelleme tarihi: 2026-04-29 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Bize geri bildirimde bulunmak mı istiyorsunuz?
+
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]

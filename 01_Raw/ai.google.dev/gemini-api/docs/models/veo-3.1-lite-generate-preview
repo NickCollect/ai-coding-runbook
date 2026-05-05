@@ -1,48 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=ar
-fetched_at: 2026-05-05T13:14:19.195324+00:00
-title: "Veo 3.1 Lite Preview \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=he
+fetched_at: 2026-05-05T19:43:18.090951+00:00
+title: "\u05d2\u05e8\u05e1\u05ea \u05d8\u05e8\u05d5\u05dd-\u05d4\u05e9\u05e7\u05d4 \u05e9\u05dc Veo 3.1 Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-إرسال ملاحظات
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Veo 3.1 Lite Preview
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-‫Veo 3.1 Lite Preview هو نموذج فيديوهات عالي الكفاءة ومخصّص للمطوّرين، ويوفر إمكانات إنشاء الفيديوهات وتعديلها والتحكّم فيها بشكل سينمائي وبدقة عالية. ويستفيد هذا النموذج من نموذج Veo 3.1 المتطوّر لإتاحة الذكاء الاصطناعي الاحترافي لإنشاء الفيديوهات، وذلك من خلال توفير واجهة قابلة للبرمجة والتوسيع لصنّاع المحتوى والمؤسسات.
+שליחת משוב
 
-[تجربة في Google AI Studio](https://aistudio.google.com?model=veo-3.1-lite-generate-preview&hl=ar)
+# גרסת טרום-השקה של Veo 3.1 Lite
 
-## الوثائق
+‫Veo 3.1 Lite Preview הוא מודל וידאו יעיל במיוחד שמתאים במיוחד למפתחים. הוא מאפשר ליצור ולערוך סרטונים באיכות גבוהה, וכולל אמצעי בקרה קולנועיים. הוא מבוסס על מודל Veo 3.1 המתקדם ביותר, ומאפשר ליוצרים ולעסקים ליהנות מ-AI ליצירת סרטונים ברמה מקצועית באמצעות ממשק ניתן לתכנות וניתן להרחבה.
 
-يقدّم Veo 3.1 Lite أفضل الأسعار للمطوّرين والمؤسسات الذين ينشئون تطبيقات ومهام سير عمل للفيديوهات بكميات كبيرة وعلى نطاق واسع. يمكنك الانتقال إلى صفحة [الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#veo-3.1) للاطّلاع على التفاصيل والمقارنة مع نماذج
-Veo 3.1 الأخرى.
+[לניסיון ב-Google AI Studio](https://aistudio.google.com?model=veo-3.1-lite-generate-preview&hl=he)
 
-انتقِل إلى صفحة [إنشاء الفيديوهات](https://ai.google.dev/gemini-api/docs/video?hl=ar) للاطّلاع على تغطية كاملة لـ
-الميزات والإمكانات. يُرجى العِلم أنّ Veo 3.1 Lite Preview لا يتيح إخراج الفيديوهات بدقة
-[4K](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=ar#resolution) أو استخدام
-[الإضافة](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=ar#extending_veo_videos).
+## מאמרי עזרה
+
+‫Veo 3.1 Lite מציע את המחירים הטובים ביותר למפתחים ולארגונים שיוצרים אפליקציות וסביבות עבודה ליצירת סרטונים בכמויות גדולות ובקנה מידה נרחב. פרטים והשוואה עם מודלים אחרים של Veo 3.1 זמינים בדף [התמחור](https://ai.google.dev/gemini-api/docs/pricing?hl=he#veo-3.1).
+
+ב[דף בנושא יצירת סרטונים](https://ai.google.dev/gemini-api/docs/video?hl=he) אפשר לקרוא על כל התכונות והיכולות. חשוב לדעת שגרסת הטרום-השקה של Veo 3.1 Lite לא תומכת ב[פלט באיכות 4K](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=he#resolution) או ב[תוספים](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=he#extending_veo_videos).
 
 ## veo-3.1-lite-generate-preview
 
-| الموقع | الوصف |
+| נכס | תיאור |
 | --- | --- |
-| id\_cardرمز النموذج | ‫**Gemini API**  `veo-3.1-lite-generate-preview` |
-| saveأنواع البيانات المتوفرة | **الإدخال**  نص، صورة  **الناتج**  فيديو مع صوت |
-| token\_autoالحدود | **إدخال النص**  ‫1,024 رمزًا مميّزًا  **فيديو الناتج**  1 |
-| calendar\_monthآخر تعديل | مارس 2026 |
+| id\_cardקוד מודל | ‫**Gemini API**  `veo-3.1-lite-generate-preview` |
+| saveסוגי נתונים נתמכים | **קלט**  טקסט, תמונה  **פלט**  סרטון עם אודיו |
+| token\_autoמגבלות | **קלט טקסט**  ‫1,024 טוקנים  **סרטון הפלט**  1 |
+| calendar\_monthהעדכון האחרון | מרץ 2026 |
 
-إرسال ملاحظات
+שליחת משוב
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
+עדכון אחרון: 2026-04-29 (שעון UTC).
 
-هل تريد مشاركة ملاحظاتك معنا؟
+רוצה לתת לנו משוב?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]

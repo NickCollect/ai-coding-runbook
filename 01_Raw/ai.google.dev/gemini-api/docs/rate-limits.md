@@ -1,14 +1,18 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/rate-limits?hl=ar
-fetched_at: 2026-05-05T13:11:23.511388+00:00
+fetched_at: 2026-05-05T19:43:14.305662+00:00
 title: "\u062d\u062f\u0648\u062f \u0627\u0644\u0645\u0639\u062f\u0644 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/Deep Research من Gemini) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-- [الصفحة الرئيسية](https://ai.google.dev/gemini-api/docs/الصفحة الرئيسية)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [المستندات](https://ai.google.dev/gemini-api/docs/المستندات)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
 إرسال ملاحظات
 
@@ -17,7 +21,7 @@ title: "\u062d\u062f\u0648\u062f \u0627\u0644\u0645\u0639\u062f\u0644 \u00a0|\u0
 تتحكّم حدود المعدّل في عدد الطلبات التي يمكنك إرسالها إلى Gemini API
 خلال إطار زمني محدّد. تساعد هذه الحدود في الحفاظ على الاستخدام العادل والحماية من إساءة الاستخدام والحفاظ على أداء النظام لجميع المستخدمين.
 
-[الاطّلاع على حدود المعدّل النشطة في AI Studio](https://ai.google.dev/gemini-api/docs/الاطّلاع على حدود المعدّل النشطة في AI Studio)
+[الاطّلاع على حدود المعدّل النشطة في AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=ar)
 
 ## طريقة عمل حدود المعدّل
 
@@ -41,10 +45,10 @@ title: "\u062d\u062f\u0648\u062f \u0627\u0644\u0645\u0639\u062f\u0644 \u00a0|\u0
 
 تستند مؤهلات الفئتين 2 و3 إلى إجمالي الإنفاق التراكمي على خدمات Google Cloud (بما في ذلك، على سبيل المثال لا الحصر، Gemini API) لحساب الفوترة المرتبط بمشروعك.
 
-| فئة الاستخدام | التصفيات | [الحد الأقصى لفئة الفوترة](https://ai.google.dev/gemini-api/docs/الحد الأقصى لفئة الفوترة) |
+| فئة الاستخدام | التصفيات | [الحد الأقصى لفئة الفوترة](https://ai.google.dev/gemini-api/docs/billing?hl=ar#tier-spend-caps) |
 | --- | --- | --- |
-| **Free** | [مشروع نشط](https://ai.google.dev/gemini-api/docs/مشروع نشط) أو فترة تجريبية مجانية | لا ينطبق |
-| **المستوى 1** | [إعداد حساب فوترة نشط وربطه](https://ai.google.dev/gemini-api/docs/إعداد حساب فوترة نشط وربطه) | ‫250 دولار أمريكي |
+| **Free** | [مشروع نشط](https://ai.google.dev/gemini-api/docs/api-key?hl=ar#google-cloud-projects) أو فترة تجريبية مجانية | لا ينطبق |
+| **المستوى 1** | [إعداد حساب فوترة نشط وربطه](https://ai.google.dev/gemini-api/docs/billing?hl=ar#setup-billing) | ‫250 دولار أمريكي |
 | **المستوى 2** | تم دفع 100 دولار أمريكي + 3 أيام من أول عملية دفع ناجحة | 2000 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
 | **المستوى 3** | تم دفع 1,000 دولار أمريكي + 30 يومًا من أول عملية دفع ناجحة | $20,000 - $100,000+ |
 
@@ -56,17 +60,17 @@ title: "\u062d\u062f\u0648\u062f \u0627\u0644\u0645\u0639\u062f\u0644 \u00a0|\u0
 
 تعتمد حدود المعدّل على مجموعة متنوّعة من العوامل (مثل مستوى الاستخدام)، ويمكن الاطّلاع عليها في Google AI Studio. مع تغيُّر مستوى حسابك وحالته بمرور الوقت، سيتم تعديل حدود المعدّل تلقائيًا.
 
-[الاطّلاع على حدود المعدّل النشطة في AI Studio](https://ai.google.dev/gemini-api/docs/الاطّلاع على حدود المعدّل النشطة في AI Studio)
+[الاطّلاع على حدود المعدّل النشطة في AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=ar)
 
 لا نضمن حدود المعدّل المحدّدة، وقد تختلف السعة الفعلية.
 
 ## الحدود القصوى لمعدّل الاستنتاج حسب الأولوية
 
-تخضع عمليات الاستهلاك [ذات الأولوية](https://ai.google.dev/gemini-api/docs/ذات الأولوية) لحدود معدّل خاصة بها، على الرغم من أنّ عمليات الاستهلاك تُحتسب ضمن حدود معدّل الزيارات التفاعلية الإجمالية. **حدود المعدّل التلقائية هي: 0.3 ضعف [حد المعدّل العادي](https://ai.google.dev/gemini-api/docs/حد المعدّل العادي) لكل نموذج ومستوى**
+تخضع عمليات الاستهلاك [ذات الأولوية](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ar) لحدود معدّل خاصة بها، على الرغم من أنّ عمليات الاستهلاك تُحتسب ضمن حدود معدّل الزيارات التفاعلية الإجمالية. **حدود المعدّل التلقائية هي: 0.3 ضعف [حد المعدّل العادي](https://aistudio.google.com/rate-limit?hl=ar) لكل نموذج ومستوى**
 
 ## الحدود القصوى لمعدل الزيارات في واجهة Batch API
 
-تخضع طلبات [Batch API](https://ai.google.dev/gemini-api/docs/Batch API) لحدود معدّل خاصة بها، وهي منفصلة عن طلبات API غير المجمّعة.
+تخضع طلبات [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ar) لحدود معدّل خاصة بها، وهي منفصلة عن طلبات API غير المجمّعة.
 
 - **طلبات الدفعات المتزامنة:** 100
 - **الحد الأقصى لحجم ملف الإدخال:** 2 غيغابايت
@@ -154,23 +158,25 @@ title: "\u062d\u062f\u0648\u062f \u0627\u0644\u0645\u0639\u062f\u0644 \u00a0|\u0
 ## كيفية الترقية إلى المستوى التالي
 
 للانتقال من المستوى المجاني إلى مستوى مدفوع، عليك أولاً
-[إعداد الفوترة في AI Studio](https://ai.google.dev/gemini-api/docs/إعداد الفوترة في AI Studio).
+[إعداد الفوترة في AI Studio](https://ai.google.dev/gemini-api/docs/billing?hl=ar).
 
-بعد أن يستوفي مشروعك [المعايير المحدّدة](https://ai.google.dev/gemini-api/docs/المعايير المحدّدة)، سيتم تلقائيًا ترقيته إلى المستوى التالي. عادةً ما يتم تطبيق ترقيات المستوى من المستوى المجاني إلى المستوى 1 على الفور، وسيتم تطبيق ترقيات المستوى اللاحقة في غضون 10 دقائق. انتقِل إلى [صفحة "المشاريع"](https://ai.google.dev/gemini-api/docs/صفحة "المشاريع") في AI Studio للاطّلاع على مستوياتك.
+بعد أن يستوفي مشروعك [المعايير المحدّدة](#usage-tiers)، سيتم تلقائيًا ترقيته إلى المستوى التالي. عادةً ما يتم تطبيق ترقيات المستوى من المستوى المجاني إلى المستوى 1 على الفور، وسيتم تطبيق ترقيات المستوى اللاحقة في غضون 10 دقائق. انتقِل إلى [صفحة "المشاريع"](https://aistudio.google.com/projects?hl=ar) في AI Studio للاطّلاع على مستوياتك.
 
 ## طلب زيادة حدّ المعدّل
 
 لكل صيغة من النماذج حدّ أقصى مرتبط بها (طلبات في الدقيقة، RPM).
-للحصول على تفاصيل حول حدود المعدّل هذه، يُرجى الاطّلاع على صفحة [حدود المعدّل في AI Studio](https://ai.google.dev/gemini-api/docs/حدود المعدّل في AI Studio).
+للحصول على تفاصيل حول حدود المعدّل هذه، يُرجى الاطّلاع على صفحة [حدود المعدّل في AI Studio](https://aistudio.google.com/rate-limit?hl=ar).
 
-[طلب زيادة حدّ معدّل الاستخدام في الفئة المدفوعة](https://ai.google.dev/gemini-api/docs/طلب زيادة حدّ معدّل الاستخدام في الفئة المدفوعة)
+[طلب زيادة حدّ معدّل الاستخدام في الفئة المدفوعة](https://forms.gle/ETzX94k8jf7iSotH9)
 
 لا يمكننا تقديم أي ضمانات بشأن زيادة الحدّ الأقصى لعدد الطلبات، ولكننا سنبذل قصارى جهدنا لمراجعة طلبك.
 
 إرسال ملاحظات
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://ai.google.dev/gemini-api/docs/ترخيص Creative Commons Attribution 4.0‏) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://ai.google.dev/gemini-api/docs/ترخيص Apache 2.0‏). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://ai.google.dev/gemini-api/docs/سياسات موقع Google Developers‏). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
 تاريخ التعديل الأخير: 2026-04-28 (حسب التوقيت العالمي المتفَّق عليه)
 
 هل تريد مشاركة ملاحظاتك معنا؟
+
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-28 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

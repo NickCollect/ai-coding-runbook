@@ -1,42 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=pt-BR
-fetched_at: 2026-05-05T13:16:34.974488+00:00
-title: "Modelo Gemini 2.5 Computer Use \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=fr
+fetched_at: 2026-05-05T19:50:23.789200+00:00
+title: "Mod\u00e8le Gemini\u00a02.5 Computer Use \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Envie comentários
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Modelo Gemini 2.5 Computer Use
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Um modelo de capacidade de agente projetado para interação direta da interface, permitindo que o Gemini perceba e navegue em ambientes digitais. O uso do computador Gemini 2.5 é mais adequado para automação de navegador, tarefas de software de várias etapas e testes de interface que exigem raciocínio visual e controle preciso do cursor.
+Envoyer des commentaires
 
-## Documentação
+# Modèle Gemini 2.5 Computer Use
 
-Acesse a página [Uso do computador](https://ai.google.dev/gemini-api/docs/computer-use?hl=pt-br) para conferir a cobertura completa
-de recursos e capacidades.
+Modèle de capacité agentique conçu pour l'interaction directe avec l'interface, permettant à Gemini de percevoir et de naviguer dans les environnements numériques. Gemini 2.5 Computer Use est idéal pour l'automatisation des navigateurs, les tâches logicielles en plusieurs étapes et les tests d'interface utilisateur qui nécessitent un raisonnement visuel et un contrôle précis du curseur.
+
+## Documentation
+
+Consultez la page [Utilisation de l'ordinateur](https://ai.google.dev/gemini-api/docs/computer-use?hl=fr) pour obtenir une couverture complète
+des fonctionnalités.
 
 ## gemini-2.5-computer-use-preview-10-2025
 
-| Propriedade | Descrição |
+| Propriété | Description |
 | --- | --- |
-| id\_cardCódigo do modelo | **API Gemini**  `gemini-2.5-computer-use-preview-10-2025` |
-| saveTipos de dados com suporte | **Entrada**  Imagem, texto  **Saída**  Texto |
-| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de token de entrada**  128.000  **Limite de token de saída**  64.000 |
-| 123Versões | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Visualização: `gemini-2.5-computer-use-preview-10-2025` |
-| calendar\_monthAtualização mais recente | Outubro de 2025 |
+| id\_cardCode du modèle | **API Gemini**  `gemini-2.5-computer-use-preview-10-2025` |
+| saveTypes de données acceptés | **Entrée**  Image, texte  **Résultat**  Texte |
+| token\_auto[Limites de jetons[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  128 000  **Limite de jetons de sortie**  64 000 |
+| 123Versions | Pour en savoir plus, consultez les [modèles de version de modèle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - Aperçu : `gemini-2.5-computer-use-preview-10-2025` |
+| calendar\_monthDernière mise à jour | Octobre 2025 |
 
-Envie comentários
+Envoyer des commentaires
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Última atualização 2026-04-29 UTC.
+Dernière mise à jour le 2026/04/29 (UTC).
 
-Quer enviar seu feedback?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/04/29 (UTC)."],[],[]]

@@ -1,104 +1,103 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/best-practices?hl=id
-fetched_at: 2026-05-05T13:18:13.083295+00:00
+source_url: https://ai.google.dev/gemini-api/docs/live-api/best-practices?hl=ar
+fetched_at: 2026-05-05T19:50:03.127039+00:00
 title: "Live API best practices \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/live-api/Deep Research Gemini) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-- [Beranda](https://ai.google.dev/gemini-api/docs/live-api/Beranda)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/live-api/Gemini API)
-- [Dokumen](https://ai.google.dev/gemini-api/docs/live-api/Dokumen)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Kirim masukan
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+
+إرسال ملاحظات
 
 # Live API best practices
 
-Panduan ini membahas praktik terbaik yang dapat Anda ikuti untuk mengoptimalkan penggunaan Live API.
-Lihat halaman [Memulai Live API](https://ai.google.dev/gemini-api/docs/live-api/Memulai Live API)
-untuk mengetahui ringkasan dan contoh kode untuk kasus penggunaan umum.
+يتناول هذا الدليل أفضل الممارسات التي يمكنك اتّباعها لتحسين استخدامك لواجهة Live API.
+يمكنك الاطّلاع على صفحة [البدء باستخدام Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar) للحصول على نظرة عامة ورمز نموذجي لحالات الاستخدام الشائعة.
 
-## Mendesain petunjuk sistem yang jelas
+## تصميم تعليمات نظام واضحة
 
-Untuk mendapatkan performa terbaik dari Live API, sebaiknya miliki serangkaian petunjuk sistem (SI) yang jelas dan menentukan persona agen, aturan percakapan, dan batasan, dalam urutan ini.
+للحصول على أفضل أداء من Live API، ننصحك بتحديد مجموعة واضحة من تعليمات النظام (SI) التي تحدّد شخصية الوكيل وقواعد المحادثة وضوابط الأمان، بهذا الترتيب.
 
-Untuk hasil terbaik, pisahkan setiap agen ke dalam SI yang berbeda.
+للحصول على أفضل النتائج، قسِّم كل وكيل إلى نظام فرعي مميّز.
 
-1. **Tentukan persona agen:** Berikan detail tentang nama, peran, dan karakteristik pilihan agen. Jika Anda ingin menentukan aksen, pastikan untuk juga menentukan bahasa output pilihan (seperti aksen Inggris untuk penutur bahasa Inggris).
-2. **Tentukan aturan percakapan:** Tempatkan aturan ini dalam urutan yang Anda harapkan untuk diikuti model. Gariskan antara elemen percakapan satu kali dan loop percakapan. Contoh:
+1. **تحديد شخصية الوكيل:** قدِّم تفاصيل حول اسم الوكيل ودوره وأي خصائص مفضّلة. إذا أردت تحديد اللهجة، احرص على تحديد لغة الإخراج المفضّلة أيضًا (مثل اللهجة البريطانية لشخص يتحدث الإنجليزية).
+2. **تحديد قواعد المحادثة:** ضَع هذه القواعد بالترتيب الذي تتوقّع أن يتبعه النموذج. حدِّد الفرق بين العناصر التي تظهر لمرة واحدة في المحادثة وحلقات المحادثة. على سبيل المثال:
 
-   - **Elemen satu kali:** Kumpulkan detail pelanggan satu kali (seperti nama, lokasi, nomor kartu loyalitas).
-   - **Loop percakapan:** Pengguna dapat membahas rekomendasi, harga, pengembalian, dan pengiriman, serta mungkin ingin berpindah dari satu topik ke topik lain. Beri tahu model bahwa tidak masalah untuk terlibat dalam loop percakapan ini selama pengguna menginginkannya.
-3. **Tentukan panggilan alat dalam alur dalam kalimat yang berbeda:** Misalnya, jika langkah satu kali untuk mengumpulkan detail pelanggan memerlukan pemanggilan fungsi `get_user_info`, Anda dapat mengatakan: *Langkah pertama Anda adalah mengumpulkan informasi pengguna. Pertama, minta pengguna untuk memberikan nama, lokasi, dan nomor kartu loyalitas mereka. Kemudian
-   panggil `get_user_info` dengan detail ini.*
-4. **Tambahkan batasan yang diperlukan:** Berikan batasan percakapan umum yang tidak ingin Anda lakukan oleh model. Jangan ragu untuk memberikan contoh spesifik jika *x* terjadi, Anda ingin model melakukan *y*. Jika Anda masih belum mendapatkan tingkat presisi yang diinginkan, gunakan kata *tidak salah* untuk memandu model agar presisi.
+   - **العنصر لمرة واحدة:** جمع تفاصيل العميل مرة واحدة (مثل الاسم أو الموقع الجغرافي أو رقم بطاقة الولاء)
+   - **حلقة المحادثة:** يمكن للمستخدم مناقشة الاقتراحات والأسعار وعمليات الإرجاع والتسليم، وقد يرغب في الانتقال من موضوع إلى آخر. أخبِر النموذج بأنّه لا بأس من المشاركة في هذه الحلقة الحوارية طالما أراد المستخدم ذلك.
+3. **تحديد استدعاءات الأدوات ضمن تدفق في جمل منفصلة:** على سبيل المثال، إذا كانت خطوة واحدة لمرة واحدة لجمع تفاصيل العميل تتطلّب استدعاء دالة `get_user_info`، يمكنك القول: *خطوتك الأولى هي جمع معلومات المستخدم. في البداية،
+   اطلب من المستخدم تقديم اسمه وموقعه الجغرافي ورقم بطاقة الولاء. بعد ذلك، استدعِ الدالة `get_user_info` باستخدام هذه التفاصيل.*
+4. **إضافة أي ضوابط ضرورية:** قدِّم أي ضوابط عامة للمحادثات لا تريد أن يلتزم بها النموذج. يمكنك تقديم أمثلة محددة، مثل إذا حدث *س*، عليك أن تطلب من النموذج تنفيذ *ص*. إذا لم تحصل على مستوى الدقة المطلوب، استخدِم الكلمة *بشكل لا لبس فيه* لتوجيه النموذج إلى أن يكون دقيقًا.
 
-## Menentukan alat dengan tepat
+## تحديد الأدوات بدقة
 
-Saat menggunakan alat dengan Live API, berikan detail dalam definisi alat Anda.
-Pastikan untuk memberi tahu Gemini dalam kondisi apa panggilan alat harus dipanggil. Untuk mengetahui detail selengkapnya, lihat [Definisi alat](https://ai.google.dev/gemini-api/docs/live-api/Definisi alat) di
-bagian contoh.
+عند استخدام أدوات مع Live API، يجب أن تكون دقيقًا في تعريفات الأدوات.
+احرص على إخبار Gemini بالشروط التي يجب استيفاؤها لتنفيذ استدعاء أداة. لمزيد من التفاصيل، راجِع [تعريفات الأدوات](#tool-definitions-example) في قسم الأمثلة.
 
-## Membuat perintah yang efektif
+## صياغة طلبات فعّالة
 
-- **Gunakan perintah yang jelas:** Berikan contoh hal yang harus dan tidak boleh dilakukan model dalam perintah, dan coba batasi perintah menjadi satu perintah per persona atau peran dalam satu waktu. Daripada perintah yang panjang dan multi-halaman, sebaiknya gunakan chaining perintah. Model ini berperforma terbaik pada tugas dengan panggilan fungsi tunggal.
-- **Berikan perintah dan informasi awal:** Live API mengharapkan input pengguna sebelum merespons. Agar Live API memulai percakapan, sertakan perintah yang memintanya untuk menyapa pengguna atau memulai percakapan. Sertakan informasi tentang pengguna agar Live API mempersonalisasi sapaan tersebut.
+- **استخدام طلبات واضحة:** قدِّم أمثلة على ما يجب وما لا يجب أن تفعله النماذج في الطلبات، وحاوِل أن تقتصر الطلبات على طلب واحد لكل شخصية أو دور في كل مرة. بدلاً من الطلبات الطويلة التي تتضمّن صفحات متعددة، ننصحك باستخدام تسلسل الطلبات. يعمل النموذج على أفضل نحو في المهام التي تتضمّن استدعاءات دالة واحدة.
+- **تقديم أوامر ومعلومات بدء:** تتوقّع واجهة برمجة التطبيقات Live API أن يقدّم المستخدم بيانات أدخلها المستخدم قبل أن تستجيب. لجعل Live API يبدأ المحادثة، أدرِج طلبًا يطلب منه الترحيب بالمستخدم أو بدء المحادثة. تضمين معلومات عن المستخدم لتخصيص التحية في Live API
 
-## Menentukan bahasa
+## تحديد اللغة
 
-Untuk performa optimal pada `gemini-live-2.5-flash` yang dikaskadekan Live API, pastikan `language_code` API cocok dengan bahasa yang digunakan oleh pengguna.
+لتحقيق الأداء الأمثل على واجهة برمجة التطبيقات المتسلسلة `gemini-live-2.5-flash`،
+تأكَّد من أنّ `language_code` لواجهة برمجة التطبيقات يتطابق مع اللغة التي يتحدث بها المستخدم.
 
-Jika Anda mengharapkan model merespons dalam bahasa selain bahasa Inggris, sertakan hal berikut sebagai bagian dari petunjuk sistem Anda:
+إذا كان المطلوب من النموذج الرد بلغة غير الإنجليزية،
+يُرجى تضمين ما يلي كجزء من تعليمات النظام:
 
 ```
 RESPOND IN {OUTPUT_LANGUAGE}. YOU MUST RESPOND UNMISTAKABLY IN {OUTPUT_LANGUAGE}.
 ```
 
-## Streaming
+## البث
 
-Saat menerapkan audio real-time, ikuti praktik terbaik berikut:
+عند تنفيذ ميزة "الصوت في الوقت الفعلي"، اتّبِع أفضل الممارسات التالية:
 
-- **Ukuran Chunk dan Latensi**: Kirim audio dalam chunk berukuran 20 md hingga 40 md.
-- **Penanganan Interupsi**: Saat pengguna berbicara saat model membalas,
-  server akan mengirim pesan `server_content` dengan `"interrupted": true`. Anda harus segera menghapus buffer audio sisi klien untuk mencegah agen terus berbicara dengan pengguna.
+- **حجم الأجزاء ووقت الاستجابة**: أرسِل الصوت في أجزاء تتراوح مدتها بين 20 و40 ملي ثانية.
+- **التعامل مع المقاطعات**: عندما يتحدث المستخدم أثناء ردّ النموذج، يرسل الخادم رسالة `server_content` تتضمّن `"interrupted": true`. عليك التخلص من مخزن الصوت المؤقت من جهة العميل على الفور لمنع الوكيل من مواصلة التحدث أثناء حديث المستخدم.
 
-## Pengelolaan konteks
+## إدارة السياق
 
-Gunakan `ContextWindowCompressionConfig` untuk sesi yang panjang, karena token audio native terakumulasi dengan cepat (sekitar 25 token per detik audio).
+استخدِم `ContextWindowCompressionConfig` للجلسات الطويلة، لأنّ الرموز المميزة الأصلية للصوت تتراكم بسرعة (حوالي 25 رمزًا مميزًا لكل ثانية من الصوت).
 
-## Buffering klien
+## التخزين المؤقت من جهة العميل
 
-Jangan buffer audio input secara signifikan (seperti 1 detik) sebelum mengirim. Kirim chunk kecil (20 md - 100 md) untuk meminimalkan latensi.
+لا تخزِّن الصوت المُدخَل مؤقتًا بشكل كبير (مثل ثانية واحدة) قبل إرساله. إرسال أجزاء صغيرة (من 20 إلى 100 ملي ثانية) لتقليل وقت الاستجابة
 
-## Pengambilan ulang sampel
+## إعادة أخذ العيّنات
 
-Pastikan aplikasi klien Anda mengambil ulang sampel input mikrofon (sering kali 44,1 kHz atau 48 kHz) ke 16 kHz sebelum transmisi.
+تأكَّد من أنّ تطبيق العميل يعيد أخذ عيّنات من إدخال الميكروفون (غالبًا 44.1 كيلو هرتز أو 48 كيلو هرتز) إلى 16 كيلو هرتز قبل الإرسال.
 
-## Pengelolaan sesi
+## إدارة الجلسة
 
-Ikuti panduan ini untuk menangani siklus proses sesi dan memastikan pengalaman pengguna yang andal:
+اتّبِع الإرشادات التالية للتعامل مع دورة حياة الجلسة وضمان تقديم تجربة موثوقة للمستخدم:
 
-- **Aktifkan kompresi jendela konteks:** Token audio terakumulasi sekitar 25 token per detik. Tanpa kompresi, sesi khusus audio dibatasi hingga 15 menit dan sesi audio-video hingga 2 menit. Aktifkan
-  [kompresi jendela konteks](https://ai.google.dev/gemini-api/docs/live-api/kompresi jendela konteks)
-  untuk memperpanjang sesi hingga durasi yang tidak terbatas.
-- **Terapkan kelanjutan sesi:** Server dapat secara berkala mereset koneksi WebSocket. Gunakan
-  [kelanjutan sesi](https://ai.google.dev/gemini-api/docs/live-api/kelanjutan sesi)
-  untuk terhubung kembali dengan lancar tanpa kehilangan konteks. Pertahankan token kelanjutan terbaru dari pesan `SessionResumptionUpdate` dan teruskan sebagai pengendali saat menghubungkan kembali. Token kelanjutan berlaku selama 2 jam setelah sesi terakhir berakhir.
-- **Tangani pesan GoAway:** Server mengirim pesan
-  [GoAway](https://ai.google.dev/gemini-api/docs/live-api/GoAway) sebelum menghentikan koneksi. Dengarkan pesan ini dan gunakan kolom `timeLeft` untuk mengakhiri atau menghubungkan kembali dengan lancar sebelum koneksi ditutup.
-- **Tangani sinyal generationComplete:** Gunakan
-  [`generationComplete`](https://ai.google.dev/gemini-api/docs/live-api/`generationComplete`)
-  pesan untuk mengetahui kapan model selesai membuat respons, sehingga
-  aplikasi Anda dapat memperbarui UI atau melanjutkan ke tindakan berikutnya.
+- **تفعيل ميزة ضغط قدرة الاستيعاب:** تتراكم الرموز المميزة الصوتية بمعدل 25 رمزًا مميزًا في الثانية تقريبًا. بدون ضغط، تقتصر الجلسات الصوتية فقط على 15 دقيقة وجلسات الصوت والفيديو على دقيقتَين. فعِّل
+  [ضغط قدرة الاستيعاب](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ar#context-window-compression)
+  لتمديد الجلسات إلى مدة غير محدودة.
+- **تنفيذ استئناف الجلسة:** قد يعيد الخادم ضبط اتصال WebSocket بشكل دوري. استخدِم ميزة
+  [استئناف الجلسة](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ar#session-resumption)
+  لإعادة الاتصال بسلاسة بدون فقدان السياق. الاحتفاظ بآخر رمز مميز لاستئناف المحادثة من `SessionResumptionUpdate` رسالة وتمريره كمؤشر عند إعادة الاتصال تكون رموز الإيقاف المؤقت صالحة لمدة ساعتين بعد انتهاء آخر جلسة.
+- **التعامل مع رسائل GoAway:** يرسل الخادم رسالة [GoAway](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ar#goaway-message) قبل إنهاء الاتصال. استمع إلى هذه الرسالة واستخدِم الحقل
+  `timeLeft` لإنهاء الاتصال أو إعادة الاتصال بشكل سليم قبل إغلاق الاتصال.
+- **التعامل مع إشارات generationComplete:** استخدِم رسالة
+  [`generationComplete`](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ar#generation-complete-message)
+  لمعرفة الوقت الذي ينتهي فيه النموذج من إنشاء ردّ، كي يتمكّن تطبيقك من تعديل واجهة المستخدم أو المتابعة إلى الإجراء التالي.
 
-Untuk mengetahui detail penerapan, lihat
-[Pengelolaan sesi](https://ai.google.dev/gemini-api/docs/live-api/Pengelolaan sesi).
+للحصول على تفاصيل التنفيذ، راجِع [إدارة الجلسات](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ar).
 
-## Contoh
+## أمثلة
 
-Contoh ini menggabungkan praktik terbaik dan
-[panduan untuk desain petunjuk sistem](https://ai.google.dev/gemini-api/docs/live-api/panduan untuk desain petunjuk sistem) guna
-memandu performa model sebagai pelatih karier.
+يجمع هذا المثال بين أفضل الممارسات و[إرشادات تصميم تعليمات النظام](#system-instruction-guidelines) لتوجيه أداء النموذج بصفته مستشارًا مهنيًا.
 
 ```
 **Persona:**
@@ -150,10 +149,10 @@ Remember that your ultimate goal is to create a supportive environment for your
 clients to thrive.
 ```
 
-### Definisi alat
+### تعريفات الأدوات
 
-JSON ini menentukan fungsi relevan yang dipanggil dalam contoh pelatih karier.
-Untuk hasil terbaik saat menentukan fungsi, sertakan nama, deskripsi, parameter, dan kondisi pemanggilan.
+يحدد ملف JSON هذا الدوال ذات الصلة التي تم استدعاؤها في مثال "المستشار المهني".
+للحصول على أفضل النتائج عند تحديد الدوال، يجب تضمين أسمائها وأوصافها ومَعلماتها وشروط استدعائها.
 
 ```
 [
@@ -243,10 +242,12 @@ Untuk hasil terbaik saat menentukan fungsi, sertakan nama, deskripsi, parameter,
 ]
 ```
 
-Kirim masukan
+إرسال ملاحظات
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://ai.google.dev/gemini-api/docs/live-api/Lisensi Creative Commons Attribution 4.0), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://ai.google.dev/gemini-api/docs/live-api/Lisensi Apache 2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://ai.google.dev/gemini-api/docs/live-api/Kebijakan Situs Google Developers). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Terakhir diperbarui pada 2026-04-29 UTC.
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-Ada masukan untuk kami?
+هل تريد مشاركة ملاحظاتك معنا؟
+
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

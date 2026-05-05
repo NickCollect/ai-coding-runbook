@@ -1,43 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=he
-fetched_at: 2026-05-05T13:14:35.567338+00:00
-title: "\u202bGemini 3 Flash Preview \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=id
+fetched_at: 2026-05-05T19:44:21.636356+00:00
+title: "Pratinjau Gemini 3 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/models/Gemini Deep Research) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
 
-- [דף הבית](https://ai.google.dev/gemini-api/docs/models/דף הבית)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/models/Gemini API)
-- [Docs](https://ai.google.dev/gemini-api/docs/models/Docs)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-שליחת משוב
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# ‫Gemini 3 Flash Preview
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-המודל הכי טוב בעולם להבנה מולטימודאלית, והמודל הכי עוצמתי שלנו עד כה עם יכולות סוכנותיות וקידוד של אווירה, שמספק תמונות עשירות יותר ואינטראקטיביות עמוקה יותר, והכול מבוסס על יכולות חשיבה רציונלית מתקדמות.
+Kirim masukan
 
-[לניסיון ב-Google AI Studio](https://ai.google.dev/gemini-api/docs/models/לניסיון ב-Google AI Studio)
+# Pratinjau Gemini 3 Flash
 
-## מאמרי עזרה
+Model terbaik di dunia untuk pemahaman multimodal, dan model agen dan vibe-coding tercanggih kami saat ini, yang memberikan visual yang lebih kaya dan interaktivitas yang lebih mendalam, semuanya dibangun berdasarkan penalaran canggih.
 
-ב[מדריך למפתחים של Gemini 3](https://ai.google.dev/gemini-api/docs/models/מדריך למפתחים של Gemini 3) יש מידע מקיף על התכונות והיכולות.
+[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3-flash-preview&hl=id)
+
+## Dokumentasi
+
+Buka halaman [Panduan Developer Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=id) untuk melihat cakupan lengkap fitur dan kemampuan.
 
 ## gemini-3-flash-preview
 
-| נכס | תיאור |
+| Properti | Deskripsi |
 | --- | --- |
-| id\_cardקוד מודל | `gemini-3-flash-preview` |
-| saveסוגי נתונים נתמכים | **קלטים**  טקסט, תמונה, סרטון, אודיו ו-PDF  **פלט**  טקסט |
-| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  1,048,576  **מגבלת אסימונים בפלט**  65,536 |
-| handymanיכולות | **יצירת אודיו**  לא נתמך  ‫**Batch API**  נתמך  **שמירת נתונים במטמון**  נתמך  **ביצוע קוד**  נתמך  **שימוש במחשב**  נתמך  **חיפוש קבצים**  נתמך  **הסקת מסקנות גמישה**  נתמך  **בקשה להפעלת פונקציה**  נתמך  **עיגון בעזרת מפות Google**  נתמך  **יצירת תמונות**  לא נתמך  ‫**Live API**  לא נתמך  **היקש בעדיפות גבוהה**  נתמך  **חיפוש עם עיגון בנתונים**  נתמך  **פלטים מובְנים**  נתמך  **תהליך החשיבה**  נתמך  **הקשר של כתובת ה-URL**  נתמך |
-| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/דפוסי גרסאות של מודלים).  - `Preview: gemini-3-flash-preview` |
-| calendar\_monthהעדכון האחרון | דצמבר 2025 |
-| cognition\_2תאריך סף הידע | ינואר 2025 |
+| Kode model id\_card | `gemini-3-flash-preview` |
+| saveJenis data yang didukung | **Input**  Teks, Gambar, Video, Audio, dan PDF  **Output**  Teks |
+| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Batas token input**  1.048.576  **Batas token output**  65.536 |
+| handymanKemampuan | **Pembuatan audio**  Tidak didukung  **Batch API**  Didukung  **Menyimpan ke cache**  Didukung  **Eksekusi kode**  Didukung  **Penggunaan komputer**  Didukung  **Penelusuran file**  Didukung  **Inferensi fleksibel**  Didukung  **Panggilan fungsi**  Didukung  **Melakukan grounding dengan Google Maps**  Didukung  **Pembuatan gambar**  Tidak didukung  **Live API**  Tidak didukung  **Inferensi prioritas**  Didukung  **Grounding penelusuran**  Didukung  **Output terstruktur**  Didukung  **Berpikir**  Didukung  **Konteks URL**  Didukung |
+| Versi 123 | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - `Preview: gemini-3-flash-preview` |
+| calendar\_monthPembaruan terbaru | Desember 2025 |
+| cognition\_2Batas informasi | Januari 2025 |
 
-שליחת משוב
+Kirim masukan
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://ai.google.dev/gemini-api/docs/models/Creative Commons Attribution 4.0) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://ai.google.dev/gemini-api/docs/models/Apache 2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://ai.google.dev/gemini-api/docs/models/מדיניות האתר Google Developers‏).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-עדכון אחרון: 2026-04-29 (שעון UTC).
+Terakhir diperbarui pada 2026-04-29 UTC.
 
-רוצה לתת לנו משוב?
+Ada masukan untuk kami?
+
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]

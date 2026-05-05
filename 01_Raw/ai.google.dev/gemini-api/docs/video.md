@@ -1,40 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/video?hl=id
-fetched_at: 2026-05-05T13:12:49.960024+00:00
-title: "Membuat video dengan Veo 3.1 di Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/video?hl=ko
+fetched_at: 2026-05-05T19:44:57.915064+00:00
+title: "Gemini API\uc5d0\uc11c Veo 3.1\ub85c \ub3d9\uc601\uc0c1 \uc0dd\uc131\ud558\uae30 \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/Deep Research Gemini) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-- [Beranda](https://ai.google.dev/gemini-api/docs/Beranda)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [Dokumen](https://ai.google.dev/gemini-api/docs/Dokumen)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Kirim masukan
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Membuat video dengan Veo 3.1 di Gemini API
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-> Untuk mempelajari pemahaman video, lihat panduan [Pemahaman video](https://ai.google.dev/gemini-api/docs/Pemahaman video).
+의견 보내기
 
-[Veo 3.1](https://ai.google.dev/gemini-api/docs/Veo 3.1) adalah model tercanggih Google untuk membuat video 8 detik beresolusi 720p, 1080p, atau 4k dengan fidelitas tinggi yang menampilkan realisme memukau dan audio yang dibuat secara native. Anda dapat mengakses
-model ini secara terprogram menggunakan Gemini API. Untuk mempelajari lebih lanjut varian model Veo yang tersedia, lihat bagian [Versi Model](https://ai.google.dev/gemini-api/docs/Versi Model).
+# Gemini API에서 Veo 3.1로 동영상 생성하기
 
-Veo 3.1 unggul dalam berbagai gaya visual dan sinematik serta memperkenalkan beberapa kemampuan baru:
+> 동영상 이해에 대해 알아보려면 [동영상 이해](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ko) 가이드를 참고하세요.
 
-- **Video potret**: Pilih antara video lanskap (`16:9`) dan potret (`9:16`).
-- **Ekstensi video**: Memperpanjang durasi video yang sebelumnya dibuat menggunakan Veo.
-- **Pembuatan spesifik per frame**: Buat video dengan menentukan frame pertama dan terakhir.
-- **Arahan berbasis gambar**: Gunakan hingga tiga gambar referensi untuk memandu konten video yang dibuat.
+[Veo 3.1](https://deepmind.google/models/veo/?hl=ko)은 사실감이 뛰어나고 기본적으로 생성된 오디오가 포함된 충실도 높은 8초 분량의 720p, 1080p 또는 4k 동영상을 생성하는 Google의 최첨단 모델입니다. Gemini API를 사용하여 프로그래매틱 방식으로 이 모델에 액세스할 수 있습니다. 사용 가능한 Veo 모델 변형에 대해 자세히 알아보려면 [모델 버전](#model-versions) 섹션을 참고하세요.
 
-Untuk mengetahui informasi selengkapnya tentang cara menulis perintah teks yang efektif untuk pembuatan video, lihat [panduan perintah Veo](https://ai.google.dev/gemini-api/docs/panduan perintah Veo).
+Veo 3.1은 다양한 시각적 및 영화적 스타일을 지원하며 다음과 같은 여러 새로운 기능을 도입했습니다.
 
-## Pembuatan video dari teks
+- **세로 동영상**: 가로 (`16:9`) 및 세로 (`9:16`) 동영상 중에서 선택합니다.
+- **동영상 확장**: 이전에 Veo를 사용하여 생성된 동영상을 확장합니다.
+- **프레임별 생성**: 첫 번째 프레임과 마지막 프레임을 지정하여 동영상을 생성합니다.
+- **이미지 기반 디렉션**: 최대 3개의 참조 이미지를 사용하여 생성된 동영상의 콘텐츠를 안내합니다.
 
-Pilih contoh untuk melihat cara membuat video dengan dialog, realisme sinematik, atau animasi kreatif:
+동영상 생성에 효과적인 텍스트 프롬프트 작성에 대한 자세한 내용은 [Veo 프롬프트 가이드](#prompt-guide)를 참고하세요.
 
-Dialog & Efek Suara
-Realisme Sinematik
-Animasi Kreatif
+## 텍스트로 동영상 생성
+
+대화, 영화 같은 사실감 또는 창의적인 애니메이션이 포함된 동영상을 생성하는 방법을 보려면 다음 예시를 선택하세요.
+
+대화 및 음향 효과
+영화 같은 사실감
+크리에이티브 애니메이션
 
 ### Python
 
@@ -66,7 +69,7 @@ generated_video.video.save("dialogue_example.mp4")
 print("Generated video saved to dialogue_example.mp4")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -146,7 +149,7 @@ func main() {
 }
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -226,11 +229,9 @@ while true; do
 done
 ```
 
-### Mengontrol rasio aspek
+### 가로세로 비율 제어
 
-Veo 3.1 memungkinkan Anda membuat video lanskap (`16:9`, setelan default) atau potret
-(`9:16`). Anda dapat memberi tahu model mana yang Anda inginkan menggunakan parameter
-`aspect_ratio`:
+Veo 3.1을 사용하면 가로 (`16:9`, 기본 설정) 또는 세로(`9:16`) 동영상을 만들 수 있습니다. `aspect_ratio` 매개변수를 사용하여 원하는 모델을 지정할 수 있습니다.
 
 ### Python
 
@@ -264,7 +265,7 @@ generated_video.video.save("pizza_making.mp4")
 print("Generated video saved to pizza_making.mp4")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -393,14 +394,13 @@ while true; do
 done
 ```
 
-### Mengontrol resolusi
+### 해상도 제어
 
-Veo 3.1 juga dapat langsung membuat video 720p, 1080p, atau 4k (4k tidak tersedia untuk Veo 3.1 Lite).
+Veo 3.1은 720p, 1080p 또는 4k 동영상을 직접 생성할 수도 있습니다 (Veo 3.1 Lite에서는 4k를 사용할 수 없음).
 
-Perhatikan bahwa makin tinggi resolusinya, makin tinggi latensinya. Video 4K
-juga lebih mahal (lihat [harga](https://ai.google.dev/gemini-api/docs/harga)).
+해상도가 높을수록 지연 시간이 길어집니다. 4K 동영상은 가격도 더 비쌉니다 ([가격](https://ai.google.dev/gemini-api/docs/pricing?hl=ko#veo-3.1) 참고).
 
-[Ekstensi video](https://ai.google.dev/gemini-api/docs/Ekstensi video) juga terbatas pada video 720p.
+[동영상 확장 소재](#extending_veo_videos)도 720p 동영상으로 제한됩니다.
 
 ### Python
 
@@ -434,7 +434,7 @@ generated_video.video.save("4k_grand_canyon.mp4")
 print("Generated video saved to 4k_grand_canyon.mp4")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -563,12 +563,9 @@ while true; do
 done
 ```
 
-## Pembuatan video dari gambar
+## 이미지 동영상 변환 생성
 
-Kode berikut menunjukkan cara membuat gambar menggunakan
-[Gemini 3.1 Flash Image alias Nano Banana 2](https://ai.google.dev/gemini-api/docs/Gemini 3.1 Flash Image alias Nano Banana 2),
-lalu menggunakan gambar tersebut sebagai
-frame awal untuk membuat video dengan Veo 3.1.
+다음 코드는 [Gemini 3.1 Flash Image(일명 Nano Banana 2)](https://ai.google.dev/gemini-api/docs/image-generation?hl=ko)를 사용하여 이미지를 생성한 다음 해당 이미지를 Veo 3.1로 동영상을 생성하기 위한 시작 프레임으로 사용하는 방법을 보여줍니다.
 
 ### Python
 
@@ -607,7 +604,7 @@ video.video.save("veo3_with_image_input.mp4")
 print("Generated video saved to veo3_with_image_input.mp4")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -711,7 +708,7 @@ func main() {
 }
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -756,17 +753,15 @@ class GenerateVideoFromImage {
 }
 ```
 
-### Menggunakan gambar referensi
+### 참조 이미지 사용
 
-Veo 3.1 kini menerima hingga 3 gambar referensi untuk memandu konten video yang dihasilkan. Berikan gambar orang, karakter, atau produk untuk mempertahankan penampilan subjek dalam video output.
+이제 Veo 3.1에서 최대 3개의 참조 이미지를 사용하여 생성되는 동영상의 콘텐츠를 안내할 수 있습니다. 출력 동영상에서 대상의 모습을 유지하려면 인물, 캐릭터 또는 제품의 이미지를 제공하세요.
 
-Misalnya, menggunakan tiga gambar yang dibuat dengan
-[Nano Banana](https://ai.google.dev/gemini-api/docs/Nano Banana) sebagai referensi dengan
-[perintah yang ditulis dengan baik](https://ai.google.dev/gemini-api/docs/perintah yang ditulis dengan baik) akan membuat video berikut:
+예를 들어 [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=ko)로 생성된 이 세 이미지를 [잘 작성된 프롬프트](#use-reference-images)와 함께 참조로 사용하면 다음 동영상이 생성됩니다.
 
 | `` `dress_image` `` | `` `woman_image` `` | `` `glasses_image` `` |
 | --- | --- | --- |
-| Gaun flamingo kelas atas dengan lapisan bulu merah muda dan fusia | Perempuan cantik dengan rambut gelap dan mata cokelat hangat | Kacamata surya berbentuk hati berwarna merah muda yang unik |
+| 분홍색과 푸시아색 깃털이 여러 겹으로 이루어진 하이 패션 플라밍고 드레스 | 어두운 머리와 따뜻한 갈색 눈을 가진 아름다운 여성 | 기발한 분홍색 하트 모양 선글라스 |
 
 ### Python
 
@@ -814,7 +809,7 @@ video.video.save("veo3.1_with_reference_images.mp4")
 print("Generated video saved to veo3.1_with_reference_images.mp4")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -994,10 +989,9 @@ while true; do
 done
 ```
 
-### Menggunakan frame pertama dan terakhir
+### 첫 번째 및 마지막 프레임 사용
 
-Veo 3.1 memungkinkan Anda membuat video menggunakan interpolasi, atau menentukan frame pertama dan
-terakhir video. Untuk mengetahui informasi tentang cara menulis perintah teks yang efektif untuk pembuatan video, lihat [panduan perintah Veo](https://ai.google.dev/gemini-api/docs/panduan perintah Veo).
+Veo 3.1을 사용하면 보간을 사용하거나 동영상의 첫 번째 및 마지막 프레임을 지정하여 동영상을 만들 수 있습니다. 동영상 생성에 효과적인 텍스트 프롬프트 작성에 대한 자세한 내용은 [Veo 프롬프트 가이드](#use-reference-images)를 참고하세요.
 
 ### Python
 
@@ -1031,7 +1025,7 @@ video.video.save("veo3.1_with_interpolation.mp4")
 print("Generated video saved to veo3.1_with_interpolation.mp4")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1170,34 +1164,30 @@ done
 
 | `` `first_image` `` | `` `last_image` `` | *veo3.1\_with\_interpolation.mp4* |
 | --- | --- | --- |
-| Seorang wanita hantu dengan rambut putih panjang dan gaun yang berkibar berayun perlahan di ayunan tali | Wanita hantu menghilang dari ayunan | Video sinematik yang menghantui tentang seorang wanita menyeramkan yang menghilang dari ayunan di dalam kabut |
+| 긴 흰색 머리에 하늘거리는 드레스를 입은 유령 같은 여성이 로프 그네를 부드럽게 타고 있습니다. | 그림자 같은 여성이 그네에서 사라짐 | 안개 속에서 그네에서 사라지는 기이한 여성을 담은 영화 같은 으스스한 동영상 |
 
-## Memperpanjang video Veo
+## Veo 동영상 연장
 
-Gunakan Veo 3.1 untuk memperpanjang video yang sebelumnya Anda buat dengan Veo hingga 7 detik dan hingga 20 kali.
+Veo 3.1을 사용하여 이전에 Veo로 생성한 동영상을 7초씩 최대 20배까지 확장할 수 있습니다.
 
-Batasan video input:
+입력 동영상 제한사항:
 
-- Video yang dibuat Veo hanya berdurasi hingga 141 detik.
-- Gemini API hanya mendukung ekstensi video untuk video yang dibuat dengan Veo.
-- Video harus berasal dari generasi sebelumnya, seperti
-  `operation.response.generated_videos[0].video`
-- Video disimpan selama 2 hari, tetapi jika video dirujuk untuk perpanjangan, timer penyimpanan 2 hari akan direset. Anda hanya dapat memperpanjang video yang dibuat atau dirujuk dalam dua hari terakhir.
-- Video input diharapkan memiliki durasi, rasio aspek, dan dimensi tertentu:
-  - Rasio aspek: 9:16 atau 16:9
-  - Resolusi: 720p
-  - Durasi video: 141 detik atau kurang
+- Veo 생성 동영상은 최대 141초 길이입니다.
+- Gemini API는 Veo에서 생성된 동영상에 대한 동영상 확장 프로그램만 지원합니다.
+- 동영상은 `operation.response.generated_videos[0].video`와 같은 이전 세대에서 가져와야 합니다.
+- 동영상은 2일 동안 저장되지만 확장 프로그램에서 동영상을 참조하는 경우 2일 저장 타이머가 재설정됩니다. 지난 2일 동안 생성되거나 참조된 동영상만 연장할 수 있습니다.
+- 입력 동영상의 길이, 가로세로 비율, 크기는 다음과 같아야 합니다.
+  - 가로세로 비율: 9:16 또는 16:9
+  - 해상도: 720p
+  - 동영상 길이: 141초 이하
 
-Output ekstensi adalah satu video yang menggabungkan video input pengguna dan
-video yang diperpanjang yang dihasilkan hingga 148 detik video.
+확장 프로그램의 출력은 사용자 입력 동영상과 생성된 확장 동영상을 결합한 단일 동영상으로, 최대 148초 길이의 동영상입니다.
 
-Contoh ini mengambil video yang dibuat Veo, yang ditampilkan di sini dengan
-perintah aslinya, dan memperpanjang durasinya menggunakan parameter `video` dan perintah
-baru:
+이 예에서는 Veo에서 생성한 동영상(원래 프롬프트와 함께 표시됨)을 가져와 `video` 매개변수와 새 프롬프트를 사용하여 확장합니다.
 
-| Perintah | Output: `butterfly_video` |
+| 프롬프트 | 출력: `butterfly_video` |
 | --- | --- |
-| Kupu-kupu origami mengepakkan sayapnya dan terbang keluar dari pintu kaca menuju taman. | Kupu-kupu origami mengepakkan sayapnya dan terbang keluar dari pintu kaca menuju taman. |
+| 종이접기 나비가 날개를 퍼덕이며 프랑스식 문을 통해 정원으로 날아갑니다. | 종이접기 나비가 날개를 퍼덕이며 프랑스식 문을 통해 정원으로 날아갑니다. |
 
 ### Python
 
@@ -1232,7 +1222,7 @@ video.video.save("veo3.1_extension.mp4")
 print("Generated video saved to veo3.1_extension.mp4")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1373,16 +1363,13 @@ while true; do
 done
 ```
 
-Untuk mengetahui informasi tentang cara menulis perintah teks yang efektif untuk pembuatan video, lihat [panduan perintah Veo](https://ai.google.dev/gemini-api/docs/panduan perintah Veo).
+동영상 생성에 효과적인 텍스트 프롬프트 작성에 대한 자세한 내용은 [Veo 프롬프트 가이드](#extend-prompt)를 참고하세요.
 
-## Menangani operasi asinkron
+## 비동기 작업 처리
 
-Pembuatan video adalah tugas yang intensif secara komputasi. Saat Anda mengirim permintaan
-ke API, API akan memulai tugas yang berjalan lama dan segera menampilkan objek `operation`. Kemudian, Anda harus melakukan polling hingga video siap, yang ditunjukkan oleh status
-`done` yang benar.
+동영상 생성은 컴퓨팅 집약적인 작업입니다. API에 요청을 보내면 장기 실행 작업이 시작되고 `operation` 객체가 즉시 반환됩니다. 그런 다음 `done` 상태가 true로 표시될 때까지 폴링해야 합니다.
 
-Inti dari proses ini adalah loop polling, yang secara berkala memeriksa status
-tugas.
+이 프로세스의 핵심은 작업의 상태를 주기적으로 확인하는 폴링 루프입니다.
 
 ### Python
 
@@ -1412,7 +1399,7 @@ while not operation.done:
 # ... process and download your video ...
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1480,7 +1467,7 @@ func main() {
 }
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -1561,313 +1548,301 @@ while true; do
 done
 ```
 
-## Parameter dan spesifikasi Veo API
+## Veo API 파라미터 및 사양
 
-Berikut adalah parameter yang dapat Anda tetapkan dalam permintaan API untuk mengontrol proses pembuatan video.
+API 요청에서 설정하여 동영상 생성 프로세스를 제어할 수 있는 매개변수입니다.
 
-| Parameter | Veo 3.1 & Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 & Veo 3 Fast | Veo 2 |
+| 매개변수 | Veo 3.1 및 Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 및 Veo 3 Fast | Veo 2 |
 | --- | --- | --- | --- | --- |
-| Instance | | | | |
-| `prompt`: Deskripsi teks untuk video. Mendukung isyarat audio. | `string` | `string` | `string` | `string` |
-| `image`: Gambar awal yang akan dianimasikan. | Objek `Image` | Objek `Image` | Objek `Image` | Objek `Image` |
-| `lastFrame`: Gambar akhir untuk transisi video interpolasi. Harus digunakan bersama dengan parameter `image`. | Objek `Image` | Objek `Image` | Objek `Image` | Objek `Image` |
-| `referenceImages`: Hingga tiga gambar yang akan digunakan sebagai referensi gaya dan konten. | Objek `VideoGenerationReferenceImage` | Objek `n/a` | t/a | t/a |
-| `video`: Video yang akan digunakan untuk ekstensi video. | Objek `Video` dari generasi sebelumnya | t/a | t/a | t/a |
-| Parameter | | | | |
-| `aspectRatio`: Rasio aspek video. | `"16:9"` (default), `"9:16"` | `"16:9"` (default), `"9:16"` | `"16:9"` (default), `"9:16"` | `"16:9"` (default), `"9:16"` |
-| `durationSeconds`: Durasi video yang dihasilkan. | `"4"`, `"6"`, `"8"`.   *Harus "8" saat menggunakan ekstensi, gambar referensi, atau dengan resolusi 1080p dan 4k* | `"4"`, `"6"`, `"8"`.   *Harus "8" saat menggunakan gambar referensi atau dengan 1080p* | `"4"`, `"6"`, `"8"`.   *Harus "8" saat menggunakan ekstensi, gambar referensi, atau dengan resolusi 1080p dan 4k* | `"5"`, `"6"`, `"8"` |
-| `personGeneration`: Mengontrol pembuatan orang. (Lihat [Batasan](https://ai.google.dev/gemini-api/docs/Batasan) untuk mengetahui batasan wilayah) | Teks ke video & Ekstensi: `"allow_all"` saja   Gambar ke video, Interpolasi, & Gambar referensi: `"allow_adult"` saja | Teks ke video: `"allow_all"` saja   Gambar ke video, Interpolasi, & Gambar referensi: `"allow_adult"` saja | Teks ke video: `"allow_all"` saja   Gambar ke video: `"allow_adult"` saja | Teks ke video:  `"allow_all"`, `"allow_adult"`, `"dont_allow"`   Gambar ke video:  `"allow_adult"`, dan `"dont_allow"` |
-| `resolution`: Resolusi video. | `"720p"` (default),  `"1080p"` (hanya mendukung durasi 8 detik), `"4k"` (hanya mendukung durasi 8 detik)   *`"720p"` hanya untuk ekstensi* | `"720p"` (default),  `"1080p"` (hanya mendukung durasi 8 detik) | `"720p"` (default),  `"1080p"` (hanya mendukung durasi 8 detik), `"4k"` (hanya mendukung durasi 8 detik)   *`"720p"` hanya untuk ekstensi* | Tidak didukung |
+| 인스턴스 | | | | |
+| `prompt`: 동영상의 텍스트 설명입니다. 오디오 신호를 지원합니다. | `string` | `string` | `string` | `string` |
+| `image`: 애니메이션을 적용할 초기 이미지입니다. | `Image` 객체 | `Image` 객체 | `Image` 객체 | `Image` 객체 |
+| `lastFrame`: 전환할 보간 동영상의 최종 이미지입니다. `image` 매개변수와 함께 사용해야 합니다. | `Image` 객체 | `Image` 객체 | `Image` 객체 | `Image` 객체 |
+| `referenceImages`: 스타일 및 콘텐츠 참조로 사용할 이미지(최대 3개) | `VideoGenerationReferenceImage` 객체 | `n/a` 객체 | 해당 사항 없음 | 해당 사항 없음 |
+| `video`: 동영상 확장 프로그램에 사용할 동영상입니다. | 이전 세대의 `Video` 객체 | 해당 사항 없음 | 해당 사항 없음 | 해당 사항 없음 |
+| 매개변수 | | | | |
+| `aspectRatio`: 동영상의 가로세로 비율입니다. | `"16:9"` (기본값), `"9:16"` | `"16:9"` (기본값), `"9:16"` | `"16:9"` (기본값), `"9:16"` | `"16:9"` (기본값), `"9:16"` |
+| `durationSeconds`: 생성된 동영상의 길이입니다. | `"4"`, `"6"`, `"8"`.   *확장 프로그램, 참조 이미지 사용 시 또는 1080p 및 4k 해상도 사용 시 '8'이어야 합니다.* | `"4"`, `"6"`, `"8"`.   *참조 이미지를 사용하거나 1080p인 경우 '8'이어야 합니다.* | `"4"`, `"6"`, `"8"`.   *확장 프로그램, 참조 이미지 사용 시 또는 1080p 및 4k 해상도 사용 시 '8'이어야 합니다.* | `"5"`, `"6"`, `"8"` |
+| `personGeneration`: 사람 생성을 제어합니다. (지역 제한사항은 [제한사항](#limitations)을 참고하세요.) | 텍스트 동영상 변환 및 확장 프로그램: `"allow_all"`만 해당   이미지 동영상 변환, 프레임 보간, 참조 이미지: `"allow_adult"`만 해당 | 텍스트 동영상 변환: `"allow_all"`만 해당   이미지 동영상 변환, 프레임 보간, 참조 이미지: `"allow_adult"`만 해당 | 텍스트로 동영상 만들기: `"allow_all"`만   이미지로 동영상 만들기: `"allow_adult"`만 | 텍스트로 동영상 생성:  `"allow_all"`, `"allow_adult"`, `"dont_allow"`   이미지로 동영상 생성:  `"allow_adult"`, `"dont_allow"` |
+| `resolution`: 동영상의 해상도입니다. | `"720p"`(기본값),  `"1080p"`(8초 길이만 지원), `"4k"`(8초 길이만 지원)   *`"720p"`(확장 프로그램만 해당)* | `"720p"` (기본값),  `"1080p"` (8초 길이만 지원) | `"720p"`(기본값),  `"1080p"`(8초 길이만 지원), `"4k"`(8초 길이만 지원)   *`"720p"`(확장 프로그램만 해당)* | 지원되지 않음 |
 
-Perhatikan bahwa parameter `seed` juga tersedia untuk model Veo 3.
-Hal ini tidak menjamin determinisme, tetapi sedikit meningkatkannya.
+`seed` 매개변수는 Veo 3 모델에서도 사용할 수 있습니다.
+확정성을 보장하지는 않지만 약간 개선합니다.
 
-## Fitur model
+## 모델 기능
 
-| Fitur | Veo 3.1 & Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 & Veo 3 Fast | Veo 2 |
+| 기능 | Veo 3.1 및 Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 및 Veo 3 Fast | Veo 2 |
 | --- | --- | --- | --- | --- |
-| **Audio:** Membuat audio secara native dengan video. | ✔️ Selalu aktif | ✔️ Selalu aktif | ✔️ Selalu aktif | ❌ Hanya senyap |
-| **Modalitas input:** Jenis input yang digunakan untuk pembuatan. | Teks ke Video, Gambar ke Video, Video ke Video | Teks ke Video, Gambar ke Video | Teks ke Video, Gambar ke Video | Teks ke Video, Gambar ke Video |
-| **Resolusi:** Resolusi output video. | 720p, 1080p (khusus durasi 8 detik), 4k (khusus durasi 8 detik)  *Hanya 720p saat menggunakan ekstensi video.* | 720p, 1080p (khusus durasi 8 detik) | 720p & 1080p (khusus 16:9) | 720p |
-| **Kecepatan frame:** Kecepatan frame output video. | 24 fps | 24 fps | 24 fps | 24 fps |
-| **Durasi video:** Durasi video yang dihasilkan. | 8 detik, 6 detik, 4 detik  *8 detik hanya jika 1080p atau 4k atau menggunakan gambar referensi* | 8 detik, 6 detik, 4 detik  *8 detik hanya jika 1080p atau menggunakan gambar referensi* | 8 detik | 5-8 detik |
-| **Video per permintaan:** Jumlah video yang dibuat per permintaan. | 1 | 1 | 1 | 1 atau 2 |
-| **Status:** Ketersediaan model | [Pratinjau](https://ai.google.dev/gemini-api/docs/Pratinjau) | [Pratinjau](https://ai.google.dev/gemini-api/docs/Pratinjau) | [Stabil](https://ai.google.dev/gemini-api/docs/Stabil) | [Stabil](https://ai.google.dev/gemini-api/docs/Stabil) |
+| **오디오:** 동영상과 함께 오디오를 기본적으로 생성합니다. | ✔️ 항상 사용 설정 | ✔️ 항상 사용 설정 | ✔️ 항상 사용 설정 | ❌ 무음만 |
+| **입력 모달리티:** 생성에 사용된 입력 유형입니다. | 텍스트 동영상 변환, 이미지 동영상 변환, 동영상 동영상 변환 | 텍스트로 동영상 만들기, 이미지로 동영상 만들기 | 텍스트로 동영상 만들기, 이미지로 동영상 만들기 | 텍스트로 동영상 만들기, 이미지로 동영상 만들기 |
+| **해상도:** 동영상의 출력 해상도입니다. | 720p, 1080p (8초 길이만 해당), 4k (8초 길이만 해당)  *동영상 확장 소재를 사용하는 경우 720p만 해당* | 720p, 1080p (길이 8초만 해당) | 720p 및 1080p (16:9만 해당) | 720p |
+| **프레임 속도:** 동영상의 출력 프레임 속도입니다. | 24fps | 24fps | 24fps | 24fps |
+| **동영상 길이:** 생성된 동영상의 길이입니다. | 8초, 6초, 4초  *1080p 또는 4k이거나 참고 이미지를 사용하는 경우에만 8초* | 8초, 6초, 4초  *1080p 또는 참고 이미지를 사용하는 경우에만 8초* | 8초 | 5~8초 |
+| **요청당 동영상:** 요청당 생성된 동영상 수입니다. | 1 | 1 | 1 | 1 또는 2 |
+| **상태:** 모델 사용 가능 여부 | [미리보기](https://ai.google.dev/gemini-api/docs/models?hl=ko#preview) | [미리보기](https://ai.google.dev/gemini-api/docs/models?hl=ko#preview) | [안정화](https://ai.google.dev/gemini-api/docs/models?hl=ko#stable) | [안정화](https://ai.google.dev/gemini-api/docs/models?hl=ko#latest-stable) |
 
-## Batasan
+## 제한사항
 
-- **Latensi permintaan:** Min: 11 detik; Maks: 6 menit (selama jam sibuk).
-- **Batasan regional:** Di lokasi Uni Eropa, Inggris Raya, Swiss, MENA, berikut
-  adalah nilai yang diizinkan untuk `personGeneration`:
-  - Veo 3 dan 3.1: Hanya `allow_adult`.
-  - Veo 2: `dont_allow` dan `allow_adult`. Jumlah defaultnya adalah `dont_allow`
-- **Retensi video:** Video yang dibuat disimpan di server selama 2 hari,
-  setelah itu video akan dihapus. Untuk menyimpan salinan lokal, Anda harus mendownload video dalam waktu 2 hari setelah dibuat. Video panjang diperlakukan sebagai video yang baru dibuat.
-- **Pemberian watermark:** Video yang dibuat oleh Veo diberi watermark menggunakan [SynthID](https://ai.google.dev/gemini-api/docs/SynthID), alat kami untuk memberi watermark dan mengidentifikasi konten buatan AI. Video dapat diverifikasi menggunakan platform verifikasi [SynthID](https://ai.google.dev/gemini-api/docs/SynthID).
-- **Keamanan:** Video yang dihasilkan akan melewati filter keamanan dan proses pemeriksaan memori yang membantu mengurangi risiko privasi, hak cipta, dan bias.
-- **Error audio:** Terkadang Veo 3.1 akan memblokir pembuatan video karena filter keamanan atau masalah pemrosesan lainnya pada audio. Anda tidak akan dikenai biaya jika video Anda diblokir agar tidak dibuat.
+- **요청 지연 시간:** 최소 11초, 최대 6분 (피크 시간대)
+- **지역 제한:** EU, 영국, 스위스, MENA 지역에서는 `personGeneration`에 다음 값이 허용됩니다.
+  - Veo 3 및 3.1: `allow_adult`만 해당
+  - Veo 2: `dont_allow`, `allow_adult` 기본값은 `dont_allow`입니다.
+- **동영상 보관:** 생성된 동영상은 서버에 2일 동안 저장된 후 삭제됩니다. 로컬 사본을 저장하려면 생성 후 2일 이내에 동영상을 다운로드해야 합니다. 긴 동영상은 새로 생성된 동영상으로 취급됩니다.
+- **워터마크:** Veo로 만든 동영상에는 AI 생성 콘텐츠에 워터마크를 삽입하고 이를 식별하는 Google의 도구인 [SynthID](https://deepmind.google/technologies/synthid/?hl=ko)를 사용하여 워터마크가 삽입됩니다. [SynthID](https://deepmind.google/science/synthid/?hl=ko) 확인 플랫폼을 사용하여 동영상을 확인할 수 있습니다.
+- **안전:** 생성된 동영상은 개인 정보 보호, 저작권, 편향 위험을 완화하는 데 도움이 되는 안전 필터와 기억 검사 프로세스를 거칩니다.
+- **오디오 오류:** 안전 필터 또는 오디오의 기타 처리 문제로 인해 Veo 3.1에서 동영상 생성이 차단되는 경우가 있습니다. 동영상 생성이 차단된 경우 요금이 청구되지 않습니다.
 
-## Panduan perintah Veo
+## Veo 프롬프트 가이드
 
-Bagian ini berisi contoh video yang dapat Anda buat menggunakan Veo, dan menunjukkan
-cara mengubah perintah untuk menghasilkan hasil yang berbeda.
+이 섹션에는 Veo를 사용하여 만들 수 있는 동영상의 예가 나와 있으며, 프롬프트를 수정하여 다양한 결과를 얻는 방법을 보여줍니다.
 
-### Filter keamanan
+### 안전 필터
 
-Veo menerapkan filter keamanan di Gemini untuk membantu memastikan bahwa video yang dibuat dan foto yang diupload tidak berisi konten yang menyinggung.
-Perintah yang melanggar [persyaratan dan pedoman](https://ai.google.dev/gemini-api/docs/persyaratan dan pedoman) kami akan diblokir.
+Veo는 Gemini 전반에 안전 필터를 적용하여 생성된 동영상과 업로드된 사진에 불쾌감을 주는 콘텐츠가 포함되지 않도록 합니다.
+Google의 [약관 및 가이드라인](https://ai.google.dev/gemini-api/docs/usage-policies?hl=ko#abuse-monitoring)을 위반하는 프롬프트는 차단됩니다.
 
-### Dasar-dasar penulisan perintah
+### 프롬프트 작성 기본사항
 
-Perintah yang baik bersifat deskriptif dan jelas. Untuk mendapatkan hasil maksimal dari Veo, mulailah dengan mengidentifikasi ide inti Anda, menyempurnakan ide Anda dengan menambahkan kata kunci dan pengubah, serta memasukkan terminologi khusus video ke dalam perintah Anda.
+유용한 프롬프트는 설명적이고 명확합니다. Veo를 최대한 활용하려면 먼저 핵심 아이디어를 파악하고, 키워드와 수정자를 추가하여 아이디어를 미세 조정하고, 동영상 관련 용어를 프롬프트에 포함하세요.
 
-Elemen berikut harus disertakan dalam perintah Anda:
+프롬프트에 다음 요소를 포함해야 합니다.
 
-- **Subjek**: Objek, orang, hewan, atau pemandangan yang Anda inginkan dalam
-  video, seperti *pemandangan kota*, *alam*, *kendaraan*, atau *anak*.
-- **Tindakan**: Apa yang dilakukan subjek (misalnya, *berjalan*, *berlari*, atau
-  *menolehkan kepala*).
-- **Gaya**: Tentukan arah kreatif menggunakan kata kunci gaya film tertentu, seperti *sci-fi*, *film horor*, *film noir*, atau gaya animasi seperti *kartun*.
-- **Pemosisian dan gerakan kamera**: [Opsional] Kontrol lokasi dan gerakan kamera menggunakan istilah seperti *tampilan dari atas*, *sejajar mata*, *bidikan dari atas*, *bidikan dolly*, atau *sudut pandang cacing*.
-- **Komposisi**: [Opsional] Cara pengambilan gambar, seperti *sudut lebar*,
-  *close-up*, *satu gambar*, atau *dua gambar*.
-- **Efek fokus dan lensa**: [Opsional] Gunakan istilah seperti *fokus dangkal*,
-  *fokus dalam*, *fokus lembut*, *lensa makro*, dan *lensa sudut lebar* untuk mendapatkan
-  efek visual tertentu.
-- **Suasana**: [Opsional] Kontribusi warna dan cahaya pada latar, seperti *nuansa biru*, *malam*, atau *nuansa hangat*.
+- **주제**: 동영상에 담고 싶은 사물, 사람, 동물 또는 풍경입니다(예: *도시 경관*, *자연*, *차량*, *강아지*).
+- **동작**: 피사체가 하는 행동입니다 (예: *걷기*, *달리기*, *머리 돌리기*).
+- **스타일**: *SF*, *공포 영화*, *필름 누아르* 또는 *만화*와 같은 애니메이션 스타일 등 특정 영화 스타일 키워드를 사용하여 크리에이티브 방향을 지정합니다.
+- **카메라 위치 및 모션**: [선택사항] *항공 뷰*, *눈높이*, *위에서 아래로 촬영*, *돌리 샷*, *로우 앵글*과 같은 용어를 사용하여 카메라의 위치와 움직임을 제어합니다.
+- **구도**: [선택사항] *와이드 샷*, *클로즈업*, *싱글 샷*, *투 샷*과 같이 촬영이 프레이밍되는 방식입니다.
+- **포커스 및 렌즈 효과**: [선택사항] *얕은 포커스*, *깊은 포커스*, *소프트 포커스*, *매크로 렌즈*, *광각 렌즈*와 같은 용어를 사용하여 특정 시각 효과를 구현합니다.
+- **분위기**: [선택사항] 색상과 조명이 장면에 기여하는 방식(예: *파란색 톤*, *야간*, *따뜻한 색조*)입니다.
 
-#### Tips lainnya untuk menulis perintah
+#### 프롬프트 작성을 위한 추가 팁
 
-- **Gunakan bahasa deskriptif**: Gunakan kata sifat dan kata keterangan untuk memberikan gambaran yang jelas kepada Veo.
-- **Sempurnakan detail wajah**: Tentukan detail wajah sebagai fokus foto, seperti menggunakan kata *potret* dalam perintah.
+- **설명적인 언어 사용**: 형용사와 부사를 사용하여 Veo에서 명확한 그림을 그릴 수 있도록 합니다.
+- **얼굴 세부정보 개선**: 프롬프트에서 *인물 사진*이라는 단어를 사용하는 등 얼굴 세부정보를 사진의 초점으로 지정합니다.
 
-*Untuk strategi penulisan perintah yang lebih komprehensif, buka [Pengantar desain perintah](https://ai.google.dev/gemini-api/docs/Pengantar desain perintah).*
+*더 포괄적인 프롬프트 전략은 [프롬프트 설계 소개](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=ko)를 참고하세요.*
 
-### Meminta audio
+### 오디오 프롬프트
 
-Anda dapat memberikan isyarat kepada Veo untuk efek suara, suara bising di sekitar, dan dialog.
-Model ini menangkap nuansa isyarat ini untuk menghasilkan soundtrack yang disinkronkan.
+음향 효과, 주변 소음, 대화에 대한 단서를 Veo에 제공할 수 있습니다.
+모델은 이러한 신호의 미묘한 차이를 포착하여 동기화된 사운드트랙을 생성합니다.
 
-- **Dialog:** Gunakan kutipan untuk ucapan tertentu. (Contoh: "Ini pasti
-  kuncinya," gumamnya.)
-- **Efek Suara (SFX):** Jelaskan suara secara eksplisit. (Contoh: ban berdecit keras, deru mesin.)
-- **Derau Sekitar:** Jelaskan lanskap suara lingkungan. (Contoh: Suara dengungan samar dan aneh beresonansi di latar belakang.)
+- **대화:** 특정 대화에는 따옴표를 사용합니다. (예: '이게 열쇠일 거야'라고 그는 중얼거렸습니다.)
+- **음향 효과 (SFX):** 소리를 명시적으로 설명합니다. (예: 타이어가 크게 삐걱거리는 소리, 엔진이 굉음을 내는 소리)
+- **주변 소음:** 환경의 사운드스케이프를 설명합니다. (예: 희미하고 섬뜩한 험이 배경에 울려 퍼집니다.)
 
-Video ini menunjukkan cara memberikan perintah pada pembuatan audio Veo 3 dengan tingkat detail yang berbeda-beda.
+이 동영상은 세부정보 수준을 높여 Veo 3의 오디오 생성을 프롬프트하는 방법을 보여줍니다.
 
-| **Perintah** | **Output yang dihasilkan** |
+| **프롬프트** | **생성된 출력** |
 | --- | --- |
-| **Detail lainnya (Dialog dan suasana)** Gambar lebar hutan Pacific Northwest yang berkabut. Dua pendaki yang kelelahan, seorang pria dan seorang wanita, berjalan melewati pakis ketika pria itu tiba-tiba berhenti, menatap pohon. Tampilan close-up: Bekas cakaran yang dalam dan baru menganga di kulit pohon. Pria: (Tangan di pisau berburunya) "Itu bukan beruang biasa." Wanita: (Suara tegang karena takut, memindai hutan) "Lalu apa itu?" Kulit kayu yang kasar, ranting yang patah, langkah kaki di tanah yang lembap. Seekor burung berkicau. | Dua orang di hutan menemukan tanda-tanda keberadaan beruang. |
-| **Lebih sedikit detail (Dialog)** Animasi Potongan Kertas. Pustakawan Baru: "Di mana Anda menyimpan buku-buku terlarang?" Kurator Lama: "Tidak. Mereka menjaga kita." | Pustakawan animasi sedang mendiskusikan buku-buku terlarang |
+| **자세한 내용 (대화 및 분위기)** 안개가 자욱한 미국 북서부의 숲을 넓게 촬영한 장면 지친 두 등산객인 남성과 여성이 고사리를 헤치고 나아가는데 남성이 갑자기 멈춰 서서 나무를 응시합니다. 클로즈업: 나무껍질에 깊은 발톱 자국이 새겨져 있습니다. 남자: (사냥용 칼에 손을 얹으며) '저건 평범한 곰이 아니야.' 여성: (두려움에 목소리가 떨리며 숲을 둘러봄) '그럼 뭐야?' 거친 짖음, 부러지는 나뭇가지, 축축한 땅을 밟는 발소리. 외로운 새가 지저귄다. | 숲에서 곰의 흔적을 발견한 두 사람 |
+| **세부정보 감소 (대화)** 종이 컷아웃 애니메이션 신입 사서: '금지된 책은 어디에 보관하나요?' 이전 큐레이터: '아니요. 그들은 우리를 지켜줍니다.' | 금지된 도서를 논의하는 애니메이션 도서관 사서 |
 
-Coba sendiri perintah ini untuk mendengar audionya.
-[Coba Veo](https://ai.google.dev/gemini-api/docs/Coba Veo)
+직접 프롬프트를 사용해 오디오를 들어 보세요.
+[Veo 사용해 보기](https://deepmind.google/models/veo/?hl=ko)
 
-### Menulis perintah dengan gambar referensi
+### 참조 이미지를 사용한 프롬프트
 
-Anda dapat menggunakan satu atau beberapa gambar sebagai input untuk memandu video yang dibuat, menggunakan kemampuan [image-to-video](https://ai.google.dev/gemini-api/docs/image-to-video) Veo. Veo menggunakan gambar input sebagai frame awal. Pilih gambar yang paling mendekati visi Anda sebagai adegan pertama video untuk menganimasikan objek sehari-hari, menghidupkan gambar dan lukisan, serta menambahkan gerakan dan suara ke pemandangan alam.
+Veo의 [이미지 동영상 변환](https://ai.google.dev/gemini-api/docs/video?hl=ko#generate-from-images) 기능을 사용하여 하나 이상의 이미지를 입력으로 사용하여 생성된 동영상을 안내할 수 있습니다. Veo는 입력 이미지를 초기 프레임으로 사용합니다. 동영상의 첫 번째 장면으로 구상하는 이미지와 가장 유사한 이미지를 선택하여 일상적인 사물을 애니메이션으로 만들고, 그림과 회화에 생동감을 불어넣고, 자연 풍경에 움직임과 소리를 더하세요.
 
-| **Perintah** | **Output yang dihasilkan** |
+| **프롬프트** | **생성된 출력** |
 | --- | --- |
-| **Gambar input (Dibuat oleh Nano Banana)** Foto makro hiper-realistis peselancar kecil yang sedang berselancar di ombak laut di dalam wastafel kamar mandi batu pedesaan. Keran kuningan antik mengalirkan air, menciptakan ombak abadi. Surealis, unik, pencahayaan alami yang terang. | Peselancar kecil miniatur sedang berselancar di ombak laut di dalam wastafel kamar mandi batu rustic. |
-| **Video Output (Dibuat oleh Veo 3.1)** Video makro sinematik yang surealis. Peselancar kecil menunggangi ombak yang terus bergulung di dalam wastafel kamar mandi batu. Keran kuningan antik yang mengalirkan air akan menghasilkan ombak yang tak berujung. Kamera perlahan-lahan menggeser adegan yang unik dan diterangi sinar matahari saat figur miniatur dengan ahli mengukir air biru kehijauan. | Peselancar kecil mengelilingi ombak di wastafel kamar mandi. |
+| **입력 이미지 (Nano Banana로 생성)** 소박한 돌 욕실 싱크대 안에서 바다의 파도를 타는 작은 미니어처 서퍼의 초현실적인 매크로 사진 빈티지 황동 수도꼭지가 작동하여 끊임없이 파도가 치고 있습니다. 초현실적이고 기발하며 밝은 자연광 | 소박한 돌 욕실 싱크대 안에서 바다 파도를 타는 작은 미니어처 서퍼 |
+| **출력 동영상 (Veo 3.1로 생성)** 초현실적인 시네마틱 매크로 동영상 작은 서퍼들이 돌로 된 욕실 싱크대 안에서 끊임없이 밀려오는 파도를 탑니다. 흐르는 빈티지 황동 수도꼭지에서 끝없이 이어지는 파도가 만들어집니다. 미니어처 인물들이 청록색 물을 능숙하게 조각하는 동안 카메라가 햇빛이 비치는 기발한 장면을 천천히 패닝합니다. | 욕실 싱크대에서 파도를 돌고 있는 작은 서퍼 |
 
-Veo 3.1 memungkinkan Anda [merujuk gambar](https://ai.google.dev/gemini-api/docs/merujuk gambar) atau bahan untuk mengarahkan konten video yang dihasilkan. Berikan hingga tiga gambar aset dari satu orang, karakter, atau produk. Veo mempertahankan penampilan subjek dalam video output.
+Veo 3.1을 사용하면 [참조 이미지](https://ai.google.dev/gemini-api/docs/video?hl=ko#reference-images) 또는 재료를 사용하여 생성되는 동영상의 콘텐츠를 제어할 수 있습니다. 단일 인물, 캐릭터 또는 제품의 애셋 이미지를 최대 3개까지 제공합니다. Veo는 출력 동영상에서 해당 대상의 외형을 유지합니다.
 
-| **Perintah** | **Output yang dihasilkan** |
+| **프롬프트** | **생성된 출력** |
 | --- | --- |
-| **Gambar referensi (Dibuat oleh Nano Banana)** Ikan sungut ganda laut dalam bersembunyi di laut dalam yang gelap, dengan gigi terbuka dan umpan bercahaya. | Ikan pemancing yang gelap dan bercahaya |
-| **Gambar referensi (Dibuat oleh Nano Banana)** Kostum putri anak berwarna merah muda lengkap dengan tongkat dan tiara, di latar belakang produk polos. | Kostum putri merah muda untuk anak |
-| **Video Output (Dibuat oleh Veo 3.1)** Buat versi kartun konyol dari ikan yang mengenakan kostum, berenang, dan mengayunkan tongkat. | Ikan pemancing mengenakan kostum putri |
+| **참고 이미지 (Nano Banana로 생성됨)** 어둡고 깊은 바닷속에 아귀가 숨어 있습니다. 이빨을 드러내고 미끼가 빛나고 있습니다. | 어둡고 빛나는 아귀 |
+| **참고 이미지 (Nano Banana로 생성)** 지팡이와 티아라가 포함된 분홍색 아동용 공주 의상이 심플한 제품 배경에 있습니다. | 어린이용 분홍색 공주 의상 |
+| **출력 동영상 (Veo 3.1로 생성)** 의상을 입고 헤엄치며 지팡이를 흔드는 물고기의 우스꽝스러운 만화 버전을 만들어 줘. | 공주 의상을 입은 아귀 |
 
-Dengan Veo 3.1, Anda juga dapat membuat video dengan menentukan [frame pertama dan terakhir](https://ai.google.dev/gemini-api/docs/frame pertama dan terakhir) video.
+Veo 3.1을 사용하면 동영상의 [첫 번째 및 마지막 프레임](https://ai.google.dev/gemini-api/docs/video?hl=ko#using-first-and-last-video-frames)을 지정하여 동영상을 생성할 수도 있습니다.
 
-| **Perintah** | **Output yang dihasilkan** |
+| **프롬프트** | **생성된 출력** |
 | --- | --- |
-| **Gambar pertama (Dibuat oleh Nano Banana)** Gambar depan realistis berkualitas tinggi dari seekor kucing oranye yang mengendarai mobil balap convertible merah di pesisir French Riviera. | Kucing oranye mengendarai mobil balap convertible merah |
-| **Gambar terakhir (Dibuat oleh Nano Banana)** Tunjukkan apa yang terjadi saat mobil melaju dari tebing. | Kucing oranye mengendarai mobil convertible merah jatuh dari tebing |
-| **Video Output (Dibuat oleh Veo 3.1)** Opsional | Seekor kucing mengemudi dari tebing dan terbang |
+| **첫 번째 이미지 (Nano Banana로 생성)** 프랑스 리비에라 해안에서 빨간색 컨버터블 레이싱카를 운전하는 생강색 고양이의 고화질 사실적인 전면 이미지 | 빨간색 컨버터블 레이싱카를 운전하는 생강색 고양이 |
+| **마지막 이미지 (Nano Banana로 생성됨)** 차가 절벽에서 출발할 때 어떤 일이 일어나는지 보여 줘. | 빨간색 컨버터블을 운전하는 생강색 고양이가 절벽에서 떨어집니다. |
+| **출력 동영상 (Veo 3.1로 생성)** 선택사항 | 고양이가 절벽에서 운전하다가 이륙합니다. |
 
-Fitur ini memberi Anda kontrol yang presisi atas komposisi bidikan dengan memungkinkan Anda menentukan frame awal dan akhir. Upload gambar atau gunakan frame dari pembuatan video sebelumnya untuk memastikan adegan Anda dimulai dan diakhiri persis seperti yang Anda bayangkan.
+이 기능을 사용하면 시작 프레임과 종료 프레임을 정의하여 샷의 구성을 정확하게 제어할 수 있습니다. 이전 동영상 생성에서 이미지를 업로드하거나 프레임을 사용하여 장면이 원하는 대로 정확하게 시작하고 종료되도록 합니다.
 
-### Meminta perpanjangan waktu
+### 확장 프로그램에 대한 프롬프트
 
-Untuk [memperpanjang](https://ai.google.dev/gemini-api/docs/memperpanjang) video yang dibuat Veo dengan Veo 3.1 (tidak tersedia untuk Veo 3.1 Lite), gunakan video tersebut sebagai input bersama dengan perintah teks opsional. Perpanjang menyelesaikan detik terakhir atau 24
-frame video Anda dan melanjutkan tindakan.
+Veo 3.1 (Veo 3.1 Lite에서는 사용할 수 없음)로 Veo 생성 동영상을 [연장](https://ai.google.dev/gemini-api/docs/video?hl=ko#extending_veo_videos)하려면 동영상을 입력으로 사용하고 선택적으로 텍스트 프롬프트를 사용하세요. Extend는 동영상의 마지막 1초 또는 24프레임을 마무리하고 동작을 계속합니다.
 
-Perhatikan bahwa suara tidak dapat diperpanjang secara efektif jika tidak ada dalam 1 detik terakhir video.
+동영상 마지막 1초에 음성이 없으면 효과적으로 확장할 수 없습니다.
 
-| **Perintah** | **Output yang dihasilkan** |
+| **프롬프트** | **생성된 출력** |
 | --- | --- |
-| **Video input (Dibuat oleh Veo 3.1)** Paralayang lepas landas dari puncak gunung dan mulai meluncur menuruni gunung yang menghadap ke lembah yang tertutup bunga di bawahnya. | Paralayang lepas landas dari puncak gunung |
-| **Video Output (Dibuat oleh Veo 3.1)** Perpanjang video ini dengan paralayang yang turun perlahan. | Paralayang lepas landas dari puncak gunung, lalu turun perlahan |
+| **입력 동영상 (Veo 3.1로 생성)** 패러글라이더가 산 정상에서 이륙하여 아래에 꽃으로 덮인 계곡을 내려다보며 산을 따라 활강하기 시작합니다. | 산 정상에서 패러글라이더가 이륙함 |
+| **출력 동영상 (Veo 3.1로 생성)** 패러글라이더가 천천히 내려오는 장면으로 이 동영상을 확장해 줘. | 패러글라이더가 산 정상에서 이륙한 후 천천히 하강합니다. |
 
-### Contoh perintah dan output
+### 프롬프트 및 출력 예시
 
-Bagian ini menyajikan beberapa perintah, yang menyoroti bagaimana detail deskriptif dapat meningkatkan hasil setiap video.
+이 섹션에서는 여러 프롬프트를 제시하며, 설명적인 세부정보가 각 동영상의 결과를 어떻게 향상시킬 수 있는지 강조합니다.
 
-#### Bunga Es
+#### 고드름
 
-Video ini menunjukkan cara menggunakan elemen
-[dasar-dasar penulisan perintah](https://ai.google.dev/gemini-api/docs/dasar-dasar penulisan perintah) dalam perintah Anda.
+이 동영상에서는 프롬프트에서 [프롬프트 작성 기본사항](#basics)의 요소를 사용하는 방법을 보여줍니다.
 
-| **Perintah** | **Output yang dihasilkan** |
+| **프롬프트** | **생성된 출력** |
 | --- | --- |
-| Foto close-up (komposisi) tetesan air yang mencair (subjek) di dinding batu yang membeku (konteks) dengan nuansa biru dingin (suasana), diperbesar (gerakan kamera) sambil mempertahankan detail close-up tetesan air (aksi). | Tetesan es dengan latar belakang biru. |
+| 차가운 파란색 색조 (분위기)의 얼어붙은 암벽 (맥락)에 매달려 녹고 있는 고드름 (피사체)의 클로즈업 샷 (구도)으로, 물방울이 떨어지는 모습 (액션)을 클로즈업 세부정보로 유지하면서 확대 (카메라 모션)합니다. | 파란색 배경에 고드름이 떨어지고 있습니다. |
 
-#### Pria sedang menelepon
+#### 전화 중인 남성
 
-Video ini menunjukkan cara merevisi perintah Anda dengan detail yang semakin spesifik agar Veo menyempurnakan output sesuai keinginan Anda.
+이 동영상에서는 점점 더 구체적인 세부정보를 사용하여 프롬프트를 수정하여 Veo가 원하는 대로 출력을 수정하도록 하는 방법을 보여줍니다.
 
-| **Perintah** | **Output yang dihasilkan** |
+| **프롬프트** | **생성된 출력** |
 | --- | --- |
-| **Lebih sedikit detail** Kamera bergerak untuk menampilkan close-up seorang pria putus asa yang mengenakan jas hujan hijau. Dia sedang menelepon menggunakan telepon dinding putar dengan lampu neon hijau. Tampilannya seperti adegan film. | Pria sedang berbicara di telepon. |
-| **Detail selengkapnya** Bidikan sinematik close-up mengikuti seorang pria putus asa yang mengenakan jas hujan hijau lusuh saat ia memutar telepon putar yang terpasang di dinding bata kasar, yang disinari cahaya aneh dari tanda neon hijau. Kamera bergerak mendekat, memperlihatkan ketegangan di rahangnya dan keputusasaan yang terukir di wajahnya saat ia berjuang untuk melakukan panggilan. Kedalaman bidang gambar yang dangkal berfokus pada kerutan di dahinya dan telepon putar hitam, mengaburkan latar belakang menjadi lautan warna neon dan bayangan yang tidak jelas, sehingga menciptakan kesan mendesak dan terisolasi. | Pria sedang menelepon |
+| **세부정보 감소** 카메라가 녹색 트렌치코트를 입은 절망적인 남성을 클로즈업합니다. 녹색 네온 불빛이 있는 회전식 월폰으로 전화를 걸고 있습니다. 영화의 한 장면 같습니다. | 전화 통화 중인 남성 |
+| **자세한 내용** 초록색 네온사인의 기이한 불빛에 휩싸여 낡은 녹색 트렌치코트를 입은 절망적인 남자가 거친 벽돌 벽에 설치된 회전식 전화기를 누르는 장면을 클로즈업한 시네마틱 샷이 이어집니다. 카메라가 가까이 다가와 전화를 걸기 위해 고군분투하는 그의 턱에 긴장감이 감돌고 얼굴에 절박함이 새겨져 있는 모습을 보여줍니다. 얕은 피사계 심도는 그의 주름진 눈썹과 검은색 회전식 전화기에 초점을 맞추고 배경을 수많은 네온 색상과 희미한 그림자로 흐리게 처리하여 긴박하고 고립된 느낌을 연출합니다. | 전화 통화 중인 남성 |
 
-#### Macan tutul salju
+#### 눈표범
 
-| **Perintah** | **Output yang dihasilkan** |
+| **프롬프트** | **생성된 출력** |
 | --- | --- |
-| **Perintah sederhana:** Makhluk lucu dengan bulu seperti macan tutul salju sedang berjalan di hutan musim dingin, rendering gaya kartun 3D. | Macan tutul salju lesu. |
-| **Perintah mendetail:** Buat adegan animasi 3D pendek dengan gaya kartun yang ceria. Makhluk imut dengan bulu seperti macan tutul salju, mata besar yang ekspresif, dan bentuk bulat yang ramah, dengan riang melompat-lompat di hutan musim dingin yang unik. Adegan harus menampilkan pohon-pohon bulat yang tertutup salju, kepingan salju yang jatuh dengan lembut, dan sinar matahari hangat yang menembus dahan-dahan. Gerakan makhluk yang melompat-lompat dan senyum lebarnya harus menyampaikan kegembiraan murni. Gunakan gaya bahasa yang ceria dan menyentuh hati dengan warna-warna cerah dan ceria serta animasi yang menyenangkan. | Macan tutul salju berlari lebih cepat. |
+| **간단한 프롬프트:** 눈표범 같은 털을 가진 귀여운 생물이 겨울 숲을 걷고 있는 3D 만화 스타일의 렌더링입니다. | 눈표범이 무기력합니다. |
+| **자세한 프롬프트:** 재미있는 만화 스타일의 짧은 3D 애니메이션 장면을 만듭니다. 눈표범 같은 털과 표정이 풍부한 커다란 눈, 친근하고 동글동글한 모습을 한 귀여운 동물이 기발한 겨울 숲을 즐겁게 뛰어다니고 있습니다. 이 장면에는 둥글고 눈 덮인 나무, 부드럽게 떨어지는 눈송이, 나뭇가지 사이로 들어오는 따뜻한 햇빛이 담겨 있어야 합니다. 생물의 통통 튀는 움직임과 환한 미소는 순수한 기쁨을 전달해야 합니다. 밝고 경쾌한 색상과 장난기 넘치는 애니메이션으로 낙관적이고 따뜻한 분위기를 연출하세요. | 눈표범이 더 빠르게 달리고 있습니다. |
 
-### Contoh menurut elemen penulisan
+### 쓰기 요소별 예
 
-Contoh ini menunjukkan cara menyempurnakan perintah Anda berdasarkan setiap elemen dasar.
+다음 예시에서는 각 기본 요소를 기준으로 프롬프트를 미세 조정하는 방법을 보여줍니다.
 
-#### Subjek dan konteks
+#### 주제 및 컨텍스트
 
-Tentukan fokus utama (subjek) dan latar belakang atau lingkungan (konteks).
+주요 초점 (주제)과 배경 또는 환경 (컨텍스트)을 지정합니다.
 
-| **Perintah** | **Output yang dihasilkan** |
+| **프롬프트** | **생성된 출력** |
 | --- | --- |
-| Rendering arsitektur bangunan apartemen beton putih dengan bentuk organik yang mengalir, yang berpadu mulus dengan tanaman hijau yang rimbun dan elemen futuristik | Placeholder. |
-| Satelit mengambang di luar angkasa dengan bulan dan beberapa bintang di latar belakang. | Satelit mengapung di atmosfer. |
+| 유기적인 흐름을 보여주는 흰색 콘크리트 아파트 건물의 건축 렌더링으로, 울창한 녹지와 미래지향적인 요소가 자연스럽게 조화를 이루고 있습니다. | 자리표시자. |
+| 달과 별을 배경으로 우주 공간을 떠다니는 위성입니다. | 대기권에 떠 있는 위성. |
 
-#### Tindakan
+#### 작업
 
-Tentukan apa yang dilakukan subjek (misalnya, berjalan, berlari, atau menoleh).
+주체가 무엇을 하고 있는지 지정합니다 (예: 걷기, 달리기, 머리 돌리기).
 
-| **Perintah** | **Output yang dihasilkan** |
+| **프롬프트** | **생성된 출력** |
 | --- | --- |
-| Pemandangan luas seorang wanita yang berjalan di sepanjang pantai, tampak puas dan santai saat melihat ke arah cakrawala saat matahari terbenam. | Matahari terbenam sangat indah. |
+| 해질녘 수평선을 바라보며 만족스럽고 여유로운 표정으로 해변을 걷고 있는 여성의 와이드 샷입니다. | 일몰이 정말 아름답습니다. |
 
-#### Gaya
+#### 스타일
 
-Tambahkan kata kunci untuk mengarahkan pembuatan ke estetika tertentu (misalnya, surealis, antik, futuristik, film noir).
+키워드를 추가하여 특정 미학 (예: 초현실주의, 빈티지, 미래지향적, 필름 누아르)에 맞게 생성합니다.
 
-| **Perintah** | **Output yang dihasilkan** |
+| **프롬프트** | **생성된 출력** |
 | --- | --- |
-| Gaya film noir, pria dan wanita berjalan di jalan, misteri, sinematik, hitam putih. | Gaya film noir sangat indah. |
+| 필름 느와르 스타일, 남녀가 거리를 걷는 모습, 미스터리, 시네마틱, 흑백 | 필름 느와르 스타일이 정말 아름답습니다. |
 
-#### Gerakan dan komposisi kamera
+#### 카메라 움직임 및 구도
 
-Tentukan cara kamera bergerak (bidikan POV, tampilan udara, tampilan drone pelacak) dan
-cara pengambilan gambar (bidikan lebar, close-up, sudut rendah).
+카메라 이동 방식 (POV 샷, 항공 뷰, 추적 드론 뷰)과 촬영 구도 (와이드 샷, 클로즈업, 로우 앵글)를 지정합니다.
 
-| **Perintah** | **Output yang dihasilkan** |
+| **프롬프트** | **생성된 출력** |
 | --- | --- |
-| Bidikan POV dari mobil vintage yang melaju di tengah hujan, Kanada pada malam hari, sinematik. | Matahari terbenam sangat indah. |
-| Close-up ekstrem mata dengan pantulan kota di dalamnya. | Matahari terbenam sangat indah. |
+| 캐나다의 밤, 빗속을 달리는 빈티지 자동차에서 시점으로 촬영한 시네마틱 영상입니다. | 일몰이 정말 아름답습니다. |
+| 도시가 비친 눈을 극단적으로 클로즈업합니다. | 일몰이 정말 아름답습니다. |
 
-#### Suasana
+#### 분위기
 
-Palet warna dan pencahayaan memengaruhi suasana hati. Coba istilah seperti "oranye lembut
-nuansa hangat", "cahaya alami", "matahari terbit", atau "nuansa biru dingin".
+색상 팔레트와 조명은 분위기에 영향을 미칩니다. '차분한 오렌지색 따뜻한 색조', '자연광', '일출', '시원한 파란색 색조'와 같은 용어를 사용해 보세요.
 
-| **Perintah** | **Output yang dihasilkan** |
+| **프롬프트** | **생성된 출력** |
 | --- | --- |
-| Tampilan dekat seorang gadis yang memegang anak golden retriever yang menggemaskan di taman, sinar matahari. | Anak di pelukan seorang anak perempuan. |
-| Bidikan sinematik jarak dekat seorang perempuan sedih yang sedang menaiki bus saat hujan, dengan nuansa biru dingin dan suasana sedih. | Seorang perempuan yang sedang naik bus tampak sedih. |
+| 공원에서 사랑스러운 골든 리트리버 강아지를 안고 있는 소녀의 클로즈업, 햇빛 | 어린 소녀의 팔에 안겨 있는 강아지 |
+| 비가 내리는 날 버스를 타고 있는 슬픈 여자의 시네마틱 클로즈업 샷, 차가운 파란색 색조, 슬픈 분위기 | 슬픈 감정을 느끼며 버스를 타고 있는 여성 |
 
-### Rasio aspek
+### 가로세로 비율
 
-Veo memungkinkan Anda menentukan rasio aspek untuk video Anda.
+Veo를 사용하면 동영상의 가로세로 비율을 지정할 수 있습니다.
 
-| **Perintah** | **Output yang dihasilkan** |
+| **프롬프트** | **생성된 출력** |
 | --- | --- |
-| **Layar lebar (16:9)** Buat video dengan tampilan drone pelacak seorang pria yang mengendarai mobil convertible merah di Palm Springs, tahun 1970-an, sinar matahari hangat, bayangan panjang. | Seorang pria mengendarai mobil convertible merah di Palm Springs, dengan gaya tahun 1970-an. |
-| **Potret (9:16)** Buat video yang menyoroti gerakan lancar air terjun Hawaii yang megah di dalam hutan hujan yang rimbun. Berfokus pada aliran air yang realistis, dedaunan yang detail, dan pencahayaan alami untuk menyampaikan ketenangan. Abadikan air yang mengalir deras, suasana berkabut, dan sinar matahari yang menembus kanopi lebat. Gunakan gerakan kamera yang halus dan sinematik untuk menampilkan air terjun dan sekitarnya. Gunakan nada yang tenang dan realistis, yang membawa penonton ke keindahan hutan hujan Hawaii yang tenang. | Air terjun Hawaii yang megah di hutan hujan yang rimbun. |
+| **와이드스크린 (16:9)** 1970년대 팜스프링스, 따뜻한 햇살, 긴 그림자 속에서 빨간색 오픈카를 운전하는 한 남자의 모습을 드론으로 추적하여 동영상을 제작하세요. | 1970년대 스타일로 팜스프링스에서 빨간색 오픈카를 운전하는 한 남자의 모습 |
+| **세로 (9:16)** 울창한 열대우림에 있는 장엄한 하와이 폭포의 부드러운 움직임이 담긴 동영상을 만들어 보세요. 사실적인 물 흐름, 섬세한 나뭇잎, 자연광에 초점을 맞춰 평온함을 전달하세요. 급류, 안개가 자욱한 대기, 울창한 나무 사이로 비치는 햇빛을 담아보세요. 부드럽고 영화 같은 카메라 움직임을 사용하여 폭포와 주변 환경을 보여주세요. 평화롭고 사실적인 색조를 지향하여 시청자를 하와이 열대우림의 고요한 아름다움으로 안내하세요. | 울창한 열대우림에 있는 장엄한 하와이 폭포 |
 
-## Versi model
+## 모델 버전
 
-Lihat halaman [Harga](https://ai.google.dev/gemini-api/docs/Harga) dan [Batas kecepatan](https://ai.google.dev/gemini-api/docs/Batas kecepatan) untuk mengetahui detail penggunaan khusus model Veo selengkapnya.
+Veo 모델별 사용량에 대한 자세한 내용은 [가격](https://ai.google.dev/gemini-api/docs/pricing?hl=ko#veo-3.1) 페이지 및 [비율 제한](https://aistudio.google.com/rate-limit?hl=ko)을 참고하세요.
 
-### Pratinjau Veo 3.1
+### Veo 3.1 프리뷰
 
-| Properti | Deskripsi |
+| 속성 | 설명 |
 | --- | --- |
-| Kode model id\_card | **Gemini API**  `veo-3.1-generate-preview` |
-| saveJenis data yang didukung | **Input**  Teks, Gambar  **Output**  Video dengan audio |
-| Batas token\_auto | **Input teks**  1.024 token  **Video output**  1 |
-| calendar\_monthPembaruan terbaru | Januari 2026 |
+| id\_card모델 코드 | **Gemini API**  `veo-3.1-generate-preview` |
+| save 지원 데이터 유형 | **입력**  텍스트, 이미지  **출력**  오디오가 포함된 동영상 |
+| token\_auto 한도 | **텍스트 입력**  토큰 1,024개  **출력 동영상**  1 |
+| calendar\_month최신 업데이트 | 2026년 1월 |
 
-### Pratinjau Veo 3.1 Fast
+### Veo 3.1 Fast 프리뷰
 
-| Properti | Deskripsi |
+| 속성 | 설명 |
 | --- | --- |
-| Kode model id\_card | **Gemini API**  `veo-3.1-fast-generate-preview` |
-| saveJenis data yang didukung | **Input**  Teks, Gambar  **Output**  Video dengan audio |
-| Batas token\_auto | **Input teks**  1.024 token  **Video output**  1 |
-| calendar\_monthPembaruan terbaru | Januari 2026 |
+| id\_card모델 코드 | **Gemini API**  `veo-3.1-fast-generate-preview` |
+| save 지원 데이터 유형 | **입력**  텍스트, 이미지  **출력**  오디오가 포함된 동영상 |
+| token\_auto 한도 | **텍스트 입력**  토큰 1,024개  **출력 동영상**  1 |
+| calendar\_month최신 업데이트 | 2026년 1월 |
 
-### Pratinjau Veo 3.1 Lite
+### Veo 3.1 Lite 프리뷰
 
-| Properti | Deskripsi |
+| 속성 | 설명 |
 | --- | --- |
-| Kode model id\_card | **Gemini API**  `veo-3.1-lite-generate-preview` |
-| saveJenis data yang didukung | **Input**  Teks, gambar  **Output**  Video dengan audio |
-| Batas token\_auto | **Input teks**  1.024 token  **Video output**  1 |
-| calendar\_monthPembaruan terbaru | Maret 2026 |
+| id\_card모델 코드 | **Gemini API**  `veo-3.1-lite-generate-preview` |
+| save 지원 데이터 유형 | **입력**  텍스트, 이미지  **출력**  오디오가 포함된 동영상 |
+| token\_auto 한도 | **텍스트 입력**  토큰 1,024개  **출력 동영상**  1 |
+| calendar\_month최신 업데이트 | 2026년 3월 |
 
 ### Veo 3
 
-| Properti | Deskripsi |
+| 속성 | 설명 |
 | --- | --- |
-| Kode model id\_card | **Gemini API**  `veo-3.0-generate-001` |
-| saveJenis data yang didukung | **Input**  Teks, Gambar  **Output**  Video dengan audio |
-| Batas token\_auto | **Input teks**  1.024 token  **Video output**  1 |
-| calendar\_monthPembaruan terbaru | Juli 2025 |
+| id\_card모델 코드 | **Gemini API**  `veo-3.0-generate-001` |
+| save 지원 데이터 유형 | **입력**  텍스트, 이미지  **출력**  오디오가 포함된 동영상 |
+| token\_auto 한도 | **텍스트 입력**  토큰 1,024개  **출력 동영상**  1 |
+| calendar\_month최신 업데이트 | 2025년 7월 |
 
 ### Veo 3 Fast
 
-| Properti | Deskripsi |
+| 속성 | 설명 |
 | --- | --- |
-| Kode model id\_card | **Gemini API**  `veo-3.0-fast-generate-001` |
-| saveJenis data yang didukung | **Input**  Teks, Gambar  **Output**  Video dengan audio |
-| Batas token\_auto | **Input teks**  1.024 token  **Video output**  1 |
-| calendar\_monthPembaruan terbaru | Juli 2025 |
+| id\_card모델 코드 | **Gemini API**  `veo-3.0-fast-generate-001` |
+| save 지원 데이터 유형 | **입력**  텍스트, 이미지  **출력**  오디오가 포함된 동영상 |
+| token\_auto 한도 | **텍스트 입력**  토큰 1,024개  **출력 동영상**  1 |
+| calendar\_month최신 업데이트 | 2025년 7월 |
 
 ### Veo 2
 
-| Properti | Deskripsi |
+| 속성 | 설명 |
 | --- | --- |
-| Kode model id\_card | **Gemini API**  `veo-2.0-generate-001` |
-| saveJenis data yang didukung | **Input**  Teks, gambar  **Output**  Video |
-| Batas token\_auto | **Input teks**  T/A  **Input gambar**  Resolusi dan rasio aspek gambar apa pun hingga ukuran file 20 MB  **Video output**  Maksimal 2 |
-| calendar\_monthPembaruan terbaru | April 2025 |
+| id\_card모델 코드 | **Gemini API**  `veo-2.0-generate-001` |
+| save 지원 데이터 유형 | **입력**  텍스트, 이미지  **출력**  동영상 |
+| token\_auto 한도 | **텍스트 입력**  해당 사항 없음  **이미지 입력**  최대 20MB 파일 크기의 모든 이미지 해상도 및 가로세로 비율  **출력 동영상**  최대 2 |
+| calendar\_month최신 업데이트 | 2025년 4월 |
 
 ### Veo 2
 
-| Properti | Deskripsi |
+| 속성 | 설명 |
 | --- | --- |
-| Kode model id\_card | **Gemini API**  `veo-2.0-generate-001` |
-| saveJenis data yang didukung | **Input**  Teks, gambar  **Output**  Video |
-| Batas token\_auto | **Input teks**  T/A  **Input gambar**  Resolusi dan rasio aspek gambar apa pun hingga ukuran file 20 MB  **Video output**  Maksimal 2 |
-| calendar\_monthPembaruan terbaru | April 2025 |
+| id\_card모델 코드 | **Gemini API**  `veo-2.0-generate-001` |
+| save 지원 데이터 유형 | **입력**  텍스트, 이미지  **출력**  동영상 |
+| token\_auto 한도 | **텍스트 입력**  해당 사항 없음  **이미지 입력**  최대 20MB 파일 크기의 모든 이미지 해상도 및 가로세로 비율  **출력 동영상**  최대 2 |
+| calendar\_month최신 업데이트 | 2025년 4월 |
 
-Versi Veo Fast memungkinkan developer membuat video dengan suara sekaligus mempertahankan kualitas tinggi dan mengoptimalkan kecepatan serta kasus penggunaan bisnis. API ini ideal untuk layanan backend yang membuat iklan secara terprogram, alat untuk pengujian A/B cepat konsep materi iklan, atau aplikasi yang perlu membuat konten media sosial dengan cepat.
+Veo Fast 버전을 사용하면 개발자가 고화질을 유지하면서 속도와 비즈니스 사용 사례에 최적화된 사운드 포함 동영상을 만들 수 있습니다. 프로그래매틱 방식으로 광고를 생성하는 백엔드 서비스, 광고 소재 콘셉트의 신속한 A/B 테스트를 위한 도구 또는 소셜 미디어 콘텐츠를 빠르게 제작해야 하는 앱에 적합합니다.
 
-## Langkah berikutnya
+## 다음 단계
 
-- Mulai gunakan Veo 3.1 API dengan bereksperimen di [Veo Quickstart Colab](https://ai.google.dev/gemini-api/docs/Veo Quickstart Colab)
-  dan [applet Veo 3.1](https://ai.google.dev/gemini-api/docs/applet Veo 3.1).
-- Pelajari cara menulis perintah yang lebih baik lagi dengan [Pengantar desain perintah](https://ai.google.dev/gemini-api/docs/Pengantar desain perintah) kami.
+- [Veo 빠른 시작 Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Veo.ipynb?hl=ko) 및 [Veo 3.1 애플릿](https://aistudio.google.com/apps/bundled/veo_studio?hl=ko)에서 실험하여 Veo 3.1 API를 시작하세요.
+- [프롬프트 설계 소개](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=ko)를 통해 더 나은 프롬프트를 작성하는 방법을 알아보세요.
 
-Kirim masukan
+의견 보내기
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://ai.google.dev/gemini-api/docs/Lisensi Creative Commons Attribution 4.0), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://ai.google.dev/gemini-api/docs/Lisensi Apache 2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://ai.google.dev/gemini-api/docs/Kebijakan Situs Google Developers). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Terakhir diperbarui pada 2026-04-29 UTC.
+최종 업데이트: 2026-04-29(UTC)
 
-Ada masukan untuk kami?
+의견을 전달하고 싶나요?
+
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]

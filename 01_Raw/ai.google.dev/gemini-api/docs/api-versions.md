@@ -1,45 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=ar
-fetched_at: 2026-05-05T13:21:34.458083+00:00
-title: "\u0634\u0631\u062d \u0625\u0635\u062f\u0627\u0631\u0627\u062a \u0648\u0627\u062c\u0647\u0629 \u0628\u0631\u0645\u062c\u0629 \u0627\u0644\u062a\u0637\u0628\u064a\u0642\u0627\u062a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=de
+fetched_at: 2026-05-05T19:49:25.694957+00:00
+title: "Erl\u00e4uterung der API-Versionen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/Deep Research من Gemini) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
 
-- [الصفحة الرئيسية](https://ai.google.dev/gemini-api/docs/الصفحة الرئيسية)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [مرجع واجهة برمجة التطبيقات](https://ai.google.dev/gemini-api/docs/مرجع واجهة برمجة التطبيقات)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-إرسال ملاحظات
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# شرح إصدارات واجهة برمجة التطبيقات
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [API-Referenz](https://ai.google.dev/api?hl=de)
 
-تقدّم هذه الوثيقة نظرة عامة عالية المستوى على الاختلافات بين الإصدارَين `v1`
-و `v1beta` من Gemini API.
+Feedback geben
 
-- **v1**: هو الإصدار الثابت من واجهة برمجة التطبيقات. تكون الميزات في الإصدار الثابت متوافقة تمامًا طوال فترة رقم الإصدار الرئيسي. في حال إجراء أي تغييرات قد تؤدي إلى عطل، سيتم إنشاء رقم الإصدار الرئيسي التالي من واجهة برمجة التطبيقات وسيتم إيقاف الإصدار الحالي نهائيًا بعد فترة زمنية معقولة.
-  يمكن إضافة تغييرات متوافقة إلى واجهة برمجة التطبيقات بدون تغيير الإصدار الرئيسي.
-- **v1beta**: يتضمّن هذا الإصدار ميزات مبكرة قد تكون قيد التطوير وقد تخضع لتغييرات غير متوافقة. ليس هناك أيضًا ما يضمن نقل الميزات في الإصدار التجريبي إلى الإصدار الثابت. **إذا كنت بحاجة إلى الاستقرار في بيئة الإنتاج ولا يمكنك تحمّل مخاطر التغييرات غير المتوافقة، ننصحك بعدم استخدام هذا الإصدار في مرحلة الإنتاج.**
+# Erläuterung der API-Versionen
 
-| الميزة | v1 | v1beta |
+In diesem Dokument finden Sie einen allgemeinen Überblick über die Unterschiede zwischen den `v1`
+und `v1beta` Versionen der Gemini API.
+
+- **v1**: Stabile Version der API. Funktionen in der stabilen Version werden während der gesamten Lebensdauer der Hauptversion vollständig unterstützt. Bei grundlegenden Änderungen wird die nächste Hauptversion der API erstellt und die vorhandene Version nach einem angemessenen Zeitraum eingestellt.
+  Nicht grundlegende Änderungen können an der API vorgenommen werden, ohne die Hauptversion zu ändern.
+- **v1beta**: Diese Version enthält frühe Funktionen, die sich möglicherweise noch in der Entwicklung befinden und grundlegenden Änderungen unterliegen. Es gibt auch keine Garantie, dass die Funktionen in der Betaversion in die stabile Version übernommen werden. **Wenn Sie in Ihrer Produktionsumgebung Stabilität benötigen und keine grundlegenden Änderungen riskieren können, sollten Sie diese Version nicht in der Produktion verwenden.**
+
+| Funktion | v1 | v1beta |
 | --- | --- | --- |
-| إنشاء محتوى - إدخال نص فقط |  |  |
-| إنشاء محتوى - إدخال نص وصورة |  |  |
-| إنشاء محتوى - إخراج نص |  |  |
-| إنشاء محتوى - محادثات متعددة الأدوار (محادثة) |  |  |
-| إنشاء محتوى - طلبات الدوال |  |  |
-| إنشاء محتوى - البث |  |  |
-| تضمين محتوى - إدخال نص فقط |  |  |
-| إنشاء إجابة |  |  |
-| أداة استرجاع دلالية |  |  |
-| واجهة برمجة التطبيقات Interactions API |  |  |
+| Inhalte generieren – Nur Texteingabe |  |  |
+| Inhalte generieren – Text- und Bildeingabe |  |  |
+| Inhalte generieren – Textausgabe |  |  |
+| Inhalte generieren – Multi-Turn-Unterhaltungen (Chat) |  |  |
+| Inhalte generieren – Funktionsaufrufe |  |  |
+| Inhalte generieren – Streaming |  |  |
+| Inhalte einbetten – Nur Texteingabe |  |  |
+| Antwort generieren |  |  |
+| Semantischer Retriever |  |  |
+| Interactions API |  |  |
 
-- - متاح
-- - لن يكون متاحًا أبدًا
+- – Unterstützt
+- – Wird nie unterstützt
 
-## ضبط إصدار واجهة برمجة التطبيقات في حزمة تطوير برامج (SDK)
+## API-Version in einem SDK konfigurieren
 
-تستخدم حِزم SDK الخاصة بـ Gemini API الإصدار `v1beta` تلقائيًا، ولكن يمكنك اختيار استخدام إصدارات أخرى من خلال ضبط إصدار واجهة برمجة التطبيقات كما هو موضّح في عينة التعليمات البرمجية التالية:
+Die Gemini API SDKs verwenden standardmäßig `v1beta`. Sie können aber auch andere Versionen verwenden, indem Sie die API-Version wie im folgenden Codebeispiel gezeigt festlegen:
 
 ### Python
 
@@ -76,7 +80,7 @@ async function main() {
 await main();
 ```
 
-### راحة
+### REST
 
 ```
 curl "https://generativelanguage.googleapis.com/v1/models/gemini-3-flash-preview:generateContent" \
@@ -90,10 +94,12 @@ curl "https://generativelanguage.googleapis.com/v1/models/gemini-3-flash-preview
    }'
 ```
 
-إرسال ملاحظات
+Feedback geben
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://ai.google.dev/gemini-api/docs/ترخيص Creative Commons Attribution 4.0‏) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://ai.google.dev/gemini-api/docs/ترخيص Apache 2.0‏). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://ai.google.dev/gemini-api/docs/سياسات موقع Google Developers‏). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
+Zuletzt aktualisiert: 2026-04-29 (UTC).
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Haben Sie Feedback für uns?
+
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-04-29 (UTC)."],[],[]]

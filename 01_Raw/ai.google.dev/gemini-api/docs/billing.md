@@ -1,381 +1,391 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/billing?hl=vi
-fetched_at: 2026-05-05T13:21:18.029289+00:00
-title: "L\u1eadp h\u00f3a \u0111\u01a1n \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/billing?hl=hi
+fetched_at: 2026-05-05T19:48:19.350716+00:00
+title: "\u092c\u093f\u0932\u093f\u0902\u0917 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/Tính năng Nghiên cứu chuyên sâu của Gemini) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
 
-- [Trang chủ](https://ai.google.dev/gemini-api/docs/Trang chủ)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs/Tài liệu)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Gửi ý kiến phản hồi
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Lập hóa đơn
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Hướng dẫn này cung cấp thông tin tổng quan về các lựa chọn tính phí khi dùng Gemini API, giải thích cách bật tính năng thanh toán và theo dõi mức sử dụng, đồng thời giải đáp các câu hỏi thường gặp (FAQ) về việc thanh toán.
+सुझाव भेजें
 
-## Giới thiệu về việc thanh toán và các cấp
+# बिलिंग
 
-Việc tính phí cho Gemini API dựa trên nhật ký thanh toán của bạn.
+इस गाइड में, Gemini API के लिए बिलिंग के अलग-अलग विकल्पों के बारे में खास जानकारी दी गई है. साथ ही, इसमें बिलिंग की सुविधा चालू करने और इस्तेमाल पर नज़र रखने का तरीका बताया गया है. इसके अलावा, बिलिंग के बारे में अक्सर पूछे जाने वाले सवालों के जवाब भी दिए गए हैं.
 
-| Cấp sử dụng | Vòng loại | [Hạn mức cấp thanh toán](https://ai.google.dev/gemini-api/docs/Hạn mức cấp thanh toán) |
+## बिलिंग और टियर के बारे में जानकारी
+
+Gemini API के लिए बिलिंग, आपके पेमेंट के इतिहास के आधार पर की जाती है.
+
+| इस्तेमाल का टियर | क्वालिफ़िकेशन राउंड | [बिलिंग टियर की सीमा](#spend-caps) |
 | --- | --- | --- |
-| **Free** | [Dự án đang hoạt động](https://ai.google.dev/gemini-api/docs/Dự án đang hoạt động) hoặc dùng thử miễn phí | Không áp dụng |
-| **Cấp 1** | [Thiết lập và liên kết một tài khoản thanh toán đang hoạt động](https://ai.google.dev/gemini-api/docs/Thiết lập và liên kết một tài khoản thanh toán đang hoạt động) | đô la Hong Kong |
-| **Cấp 2** | Đã thanh toán 100 USD + 3 ngày kể từ lần thanh toán thành công đầu tiên | $2.000 |
-| **Cấp 3** | Thanh toán 1.000 USD + 30 ngày kể từ lần thanh toán thành công đầu tiên | 20.000 – 100.000 đô la Mỹ trở lên |
+| **Free** | [चालू प्रोजेक्ट](https://ai.google.dev/gemini-api/docs/api-key?hl=hi#google-cloud-projects) या बिना किसी शुल्क के आज़माने की सुविधा | लागू नहीं |
+| **टियर 1** | [चालू बिलिंग खाता सेट अप करना और उसे लिंक करना](#setup-billing) | 250 डॉलर |
+| **टियर 2** | पहली बार पेमेंट पूरा होने के तीन दिन बाद 100 डॉलर का पेमेंट किया गया | 2,000 डॉलर |
+| **टियर 3** | $1,000 + पहला पेमेंट पूरा होने के 30 दिन बाद | 20,000 डॉलर से 1,00,000 डॉलर से ज़्यादा |
 
-Tài khoản mới bắt đầu ở Cấp miễn phí, cho phép truy cập vào [một số mô hình](https://ai.google.dev/gemini-api/docs/một số mô hình) trong Gemini API và AI Studio, tối đa theo [hạn mức tốc độ](https://ai.google.dev/gemini-api/docs/hạn mức tốc độ) của cấp miễn phí của các mô hình.
+नए खातों के लिए, बिना शुल्क वाला टियर उपलब्ध होता है. इससे Gemini API और AI Studio में [कुछ मॉडल](https://ai.google.dev/gemini-api/docs/pricing?hl=hi) को ऐक्सेस किया जा सकता है. हालांकि, इसके लिए मॉडल के बिना शुल्क वाले टियर की [दर सीमाएं](https://aistudio.google.com/rate-limit?hl=hi) लागू होती हैं.
 
-Để truy cập vào hạn mức cao hơn, sử dụng các mô hình nâng cao và đảm bảo rằng câu lệnh và câu trả lời của bạn **không** được dùng để cải thiện các sản phẩm của Google\*, bạn có thể [liên kết một tài khoản thanh toán](https://ai.google.dev/gemini-api/docs/liên kết một tài khoản thanh toán) và [trả trước](https://ai.google.dev/gemini-api/docs/trả trước) để chuyển sang Cấp có tính phí.
-Sau đó, bạn sẽ chuyển sang các cấp cao hơn dựa trên tổng mức chi tiêu và tuổi tài khoản. Ở Cấp 3, bạn có thể chuyển sang phương thức thanh toán [trả sau](https://ai.google.dev/gemini-api/docs/trả sau).
+ज़्यादा दर सीमाएं ऐक्सेस करने, ऐडवांस मॉडल इस्तेमाल करने, और यह पक्का करने के लिए कि आपके प्रॉम्प्ट और जवाबों का इस्तेमाल Google के प्रॉडक्ट को बेहतर बनाने के लिए **न** किया जाए\*, [बिलिंग खाता लिंक करें](#setup-billing) और [एडवांस में पेमेंट करें](#prepay). इससे आपको पैसे चुकाकर इस्तेमाल किए जाने वाले टियर पर स्विच करने का विकल्प मिलेगा.
+इसके बाद, कुल खर्च और खाते की उम्र के आधार पर, आपको बेहतर टियर में शामिल किया जाएगा. तीसरे टियर पर, आपके पास [पोस्टपे](#postpay) बिलिंग पर स्विच करने का विकल्प हो सकता है.
 
-Các cấp, hạn mức và hạn mức tài khoản thanh toán đều được xác định ở cấp [tài khoản thanh toán](https://ai.google.dev/gemini-api/docs/tài khoản thanh toán).
+टियर, दर की सीमाएं, और बिलिंग खाते की सीमाएं, [बिलिंग खाते](#cloud-billing) के लेवल पर तय की जाती हैं.
 
-\* *Quyền riêng tư đối với dữ liệu cấp doanh nghiệp: Để biết thêm thông tin về việc sử dụng dữ liệu cho các dịch vụ có tính phí, hãy xem [Điều khoản dịch vụ](https://ai.google.dev/gemini-api/docs/Điều khoản dịch vụ).*
+\* *डेटा की निजता के लिए एंटरप्राइज़-ग्रेड की सुविधाएं: पैसे चुकाकर ली जाने वाली सेवाओं के लिए, डेटा के इस्तेमाल के बारे में ज़्यादा जानने के लिए, [सेवा की शर्तें](https://ai.google.dev/gemini-api/terms?hl=hi#data-use-paid) पढ़ें.*
 
-## Thiết lập thông tin thanh toán để sử dụng Gói trả phí
+## पैसे चुकाकर ली जाने वाली सदस्यता को ऐक्सेस करने के लिए, बिलिंग सेट अप करना
 
-Bạn có thể tạo một dự án và thiết lập thông tin thanh toán hoặc nhập một dự án hiện có để nâng cấp lên Cấp có tính phí trong [Google AI Studio](https://ai.google.dev/gemini-api/docs/Google AI Studio).
-Việc nâng cấp từ Bậc miễn phí lên Bậc trả phí có nghĩa là bạn phải liên kết một tài khoản thanh toán và [trả trước](https://ai.google.dev/gemini-api/docs/trả trước) để thêm ít nhất 10 USD (hoặc số tiền tương đương bằng các đơn vị tiền tệ khác) vào tài khoản của mình.
+[Google AI Studio](https://aistudio.google.com/projects?hl=hi) के पैसे चुकाकर इस्तेमाल किए जाने वाले टियर पर अपग्रेड करने के लिए, कोई प्रोजेक्ट बनाया जा सकता है और बिलिंग सेट अप की जा सकती है. इसके अलावा, किसी मौजूदा प्रोजेक्ट को इंपोर्ट भी किया जा सकता है.
+मुफ़्त टियर से पैसे चुकाकर लिए जाने वाले टियर पर अपग्रेड करने का मतलब है कि आपको एक बिलिंग खाता लिंक करना होगा. साथ ही, अपने खाते में कम से कम 10 डॉलर (या अन्य मुद्राओं में इसके बराबर) के क्रेडिट जोड़ने के लिए, [ऐडवांस पेमेंट करना होगा](#prepay).
 
-1. Chuyển đến trang [Khoá API](https://ai.google.dev/gemini-api/docs/Khoá API), trang [Dự án](https://ai.google.dev/gemini-api/docs/Dự án) hoặc bất kỳ nơi nào bạn thấy nút **Thiết lập thông tin thanh toán** trong AI Studio.
-   - Theo mặc định, người dùng mới sẽ có một [dự án và khoá API](https://ai.google.dev/gemini-api/docs/dự án và khoá API) được tạo cho họ.
-   - Nếu bạn cần một khoá mới, hãy nhấp vào [**Tạo khoá API**](https://ai.google.dev/gemini-api/docs/**Tạo khoá API**) rồi làm theo hộp thoại để thêm một cặp khoá-dự án vào bảng.
-2. Tìm dự án thuộc Bậc miễn phí mà bạn muốn nâng cấp lên Bậc có tính phí, rồi nhấp vào **Thiết lập thông tin thanh toán** trong cột *Bậc thanh toán*.
-3. Nếu bạn chưa từng thiết lập tài khoản thanh toán trên Google:
-   - Bạn sẽ được yêu cầu chọn quốc gia của mình để đồng ý với Điều khoản dịch vụ.
-   - Sau đó, hãy điền hoặc xác nhận thông tin liên hệ và phương thức thanh toán để tiếp tục.
-4. Nếu trước đây bạn đã thiết lập tài khoản thanh toán của Google:
-   - Bạn sẽ được yêu cầu chọn trong số các tài khoản thanh toán hiện có.
-   - Nếu bạn không muốn sử dụng bất kỳ tài khoản hiện có nào, hãy nhấp vào **Thêm tài khoản thanh toán mới** rồi điền hoặc xác nhận thông tin liên hệ và phương thức thanh toán để tiếp tục.
-5. Tiếp theo, bạn sẽ:
-   - Được yêu cầu trả trước tối thiểu 100.000 VND để hoàn tất quy trình thiết lập thông tin thanh toán (tức là tài khoản của bạn được tự động chỉ định cho gói thanh toán [Trả trước](https://ai.google.dev/gemini-api/docs/Trả trước)),
-   - Bạn có thể chọn giữa gói thanh toán [Trả trước](https://ai.google.dev/gemini-api/docs/Trả trước) và [Trả sau](https://ai.google.dev/gemini-api/docs/Trả sau) cho tài khoản của mình.
-   - Được chỉ định cho gói thanh toán [Trả sau](https://ai.google.dev/gemini-api/docs/Trả sau) trong một khoảng thời gian trung gian cho đến khi hệ thống Trả trước mới được áp dụng cho tất cả người dùng (kể từ ngày 23 tháng 3 năm 2026).
-6. Sau khi thanh toán trước hoặc chọn thanh toán sau, bạn đã hoàn tất việc thiết lập tài khoản.
+1. AI Studio के [एपीआई पासकोड](https://aistudio.google.com/api-keys?hl=hi) पेज, [प्रोजेक्ट](https://aistudio.google.com/projects?hl=hi) पेज या AI Studio में मौजूद **बिलिंग सेट अप करें** बटन पर जाएं.
+   - नए उपयोगकर्ताओं के लिए, [प्रोजेक्ट और एपीआई पासकोड](https://ai.google.dev/gemini-api/docs/api-key?hl=hi#google-cloud-projects) डिफ़ॉल्ट रूप से बना होगा.
+   - अगर आपको नई कुंजी चाहिए, तो [**एपीआई कुंजी बनाएं**](https://aistudio.google.com/api-keys?hl=hi) पर क्लिक करें
+     और टेबल में कुंजी-प्रोजेक्ट का पेयर जोड़ने के लिए, डायलॉग बॉक्स में दिए गए निर्देशों का पालन करें.
+2. वह मुफ़्त टियर वाला प्रोजेक्ट ढूंढें जिसे आपको पैसे चुकाकर इस्तेमाल किए जाने वाले टियर में अपग्रेड करना है. इसके बाद, *बिलिंग टियर* कॉलम में जाकर, **बिलिंग सेट अप करें** पर क्लिक करें.
+3. अगर आपने पहले कभी Google बिलिंग खाता सेट अप नहीं किया है, तो:
+   - सेवा की शर्तों से सहमत होने के लिए, आपको अपना देश चुनना होगा.
+   - इसके बाद, जारी रखने के लिए अपनी संपर्क जानकारी और पेमेंट के तरीके की जानकारी भरें या उसकी पुष्टि करें.
+4. अगर आपने पहले Google बिलिंग खाते सेट अप किए हैं, तो:
+   - आपको अपने मौजूदा बिलिंग खातों में से कोई एक चुनने के लिए कहा जाएगा.
+   - अगर आपको अपने किसी मौजूदा खाते का इस्तेमाल नहीं करना है, तो **नया बिलिंग खाता जोड़ें** पर क्लिक करें. इसके बाद, अपनी संपर्क जानकारी और पेमेंट के तरीके की पुष्टि करें या उसे भरें.
+5. इसके बाद, आपको इनमें से कोई एक विकल्प दिखेगा:
+   - बिलिंग सेटअप पूरा करने के लिए, कम से कम 10 डॉलर का ऐडवांस पेमेंट करने के लिए कहा गया हो. इसका मतलब है कि आपके खाते को [ऐडवांस पेमेंट](#prepay) वाले बिलिंग प्लान में अपने-आप असाइन कर दिया गया है,
+   - आपके खाते के लिए, [प्रीपे](#prepay) और [पोस्टपे](#postpay) बिलिंग प्लान में से किसी एक को चुनने का विकल्प दिया जाता है.
+   - कुछ समय के लिए, [पोस्टपे](#postpay) बिलिंग प्लान असाइन किया गया है. यह तब तक लागू रहेगा, जब तक नया प्रीपे सिस्टम सभी उपयोगकर्ताओं के लिए उपलब्ध नहीं हो जाता. यह 23 मार्च, 2026 से लागू होगा.
+6. पहले से पेमेंट करने या बाद में पेमेंट करने का विकल्प चुनने के बाद, आपका खाता सेट अप हो जाता है.
 
-### Nâng cấp lên gói trả phí tiếp theo
+### पैसे चुकाकर इस्तेमाल किए जाने वाले अगले टियर पर अपग्रेड करना
 
-Nếu đang sử dụng một gói có tính phí và đáp ứng [các tiêu chí](https://ai.google.dev/gemini-api/docs/các tiêu chí) để thay đổi gói, bạn sẽ được tự động nâng cấp lên gói tiếp theo (tuỳ thuộc vào [thời gian xử lý](https://ai.google.dev/gemini-api/docs/thời gian xử lý)).
+अगर आपने पहले से ही पैसे चुकाकर ली जाने वाली सदस्यता ली है और प्लान बदलने की [ज़रूरी शर्तें](#about-billing) पूरी की हैं, तो आपको अगले टियर में अपने-आप अपग्रेड कर दिया जाएगा. हालांकि, इसमें [प्रोसेसिंग में लगने वाला समय](#processing-times) लग सकता है.
 
-## Xác minh trạng thái thanh toán
+## बिलिंग की स्थिति की पुष्टि करना
 
-Sau khi [liên kết một tài khoản thanh toán](https://ai.google.dev/gemini-api/docs/liên kết một tài khoản thanh toán) với dự án, bạn có thể theo dõi trạng thái của tài khoản đó trên [trang Thanh toán của AI Studio](https://ai.google.dev/gemini-api/docs/trang Thanh toán của AI Studio). Không giống như bậc miễn phí, trạng thái bậc có tính phí là trạng thái động; mặc dù bậc sử dụng của bạn được xác định dựa trên nhật ký tài khoản, nhưng Gemini API sẽ chỉ xử lý các yêu cầu nếu bạn có số dư tín dụng [Trả trước](https://ai.google.dev/gemini-api/docs/Trả trước) dương.
+अपने प्रोजेक्ट से [बिलिंग खाता लिंक करने](#setup-billing) के बाद, [AI Studio के बिलिंग पेज](https://aistudio.google.com/billing?hl=hi) पर जाकर, उसके स्टेटस को मॉनिटर किया जा सकता है. मुफ़्त टियर के उलट, पेड टियर का स्टेटस डाइनैमिक होता है. आपके खाते के इतिहास के आधार पर, इस्तेमाल का टियर तय किया जाता है. हालांकि, Gemini API सिर्फ़ तब अनुरोधों को पूरा करेगा, जब आपके पास [प्रीपे](#prepay) क्रेडिट का पॉज़िटिव बैलेंस हो.
 
-Trên trang [Dự án](https://ai.google.dev/gemini-api/docs/Dự án), bạn sẽ có thể xem cấp và gói thanh toán của dự án trong cột *Cấp thanh toán*. Mọi thao tác liên quan đến trạng thái thanh toán mà bạn có thể cần thực hiện cho một dự án đều xuất hiện trong cột *Bậc thanh toán* hoặc *Trạng thái*:
+[प्रोजेक्ट](https://aistudio.google.com/projects?hl=hi) पेज पर, आपको *बिलिंग टियर* कॉलम में अपने प्रोजेक्ट का टियर और बिलिंग प्लान दिखेगा. किसी प्रोजेक्ट के लिए, बिलिंग की स्थिति से जुड़ी कोई भी कार्रवाई करने की ज़रूरत होने पर, वह *बिलिंग टियर* या *स्थिति* कॉलम में दिखती है:
 
-- "***Thiết lập thông tin thanh toán***" nếu dự án chưa có tài khoản thanh toán được đính kèm.
-- "***Thiết lập phương thức thanh toán trả trước***" nếu dự án có tài khoản thanh toán được đính kèm, nhưng bạn phải sử dụng gói thanh toán [Trả trước](https://ai.google.dev/gemini-api/docs/Trả trước) cần được thiết lập.
-- "***Không có tín dụng***" nếu tài khoản thanh toán cần mua tín dụng nhưng tài khoản thanh toán trả trước chưa được thiết lập hoặc số dư tín dụng hiện có đã hết.
+- अगर प्रोजेक्ट से कोई बिलिंग खाता नहीं जुड़ा है, तो "***बिलिंग सेट अप करें***" पर क्लिक करें.
+- अगर प्रोजेक्ट से कोई बिलिंग खाता जुड़ा हुआ है, लेकिन उसे [प्रीपे](#prepay) बिलिंग प्लान का इस्तेमाल करना है, तो "***प्रीपे सेट अप करें***" चुनें.
+- अगर बिलिंग खाते को क्रेडिट खरीदने की ज़रूरत है, लेकिन प्रीपेड पेमेंट्स खाता सेट अप नहीं किया गया है या उपलब्ध क्रेडिट बैलेंस खत्म हो गया है, तो "***कोई क्रेडिट उपलब्ध नहीं है***" मैसेज दिखता है.
 
-Nhấp vào một thông báo bất kỳ để tiến hành các hành động cần thiết.
+ज़रूरी कार्रवाइयां करने के लिए, किसी भी मैसेज पर क्लिक करें.
 
-## Giám sát mức sử dụng
+## इस्तेमाल पर नज़र रखना
 
-Bạn có thể theo dõi mức sử dụng Gemini API trong [Google AI Studio](https://ai.google.dev/gemini-api/docs/Google AI Studio) trên **Trang tổng quan** > **Mức sử dụng**.
+[Google AI Studio](https://aistudio.google.com/usage?hl=hi) में Gemini API के इस्तेमाल को मॉनिटर करने के लिए, **डैशबोर्ड** > **इस्तेमाल** पर जाएं.
 
-## Gói thanh toán
+## बिलिंग प्लान
 
-Các gói thanh toán cho Gemini API và AI Studio được chia thành 2 danh mục để xác định thời điểm bạn thanh toán cho việc sử dụng: Trả trước và Trả sau. Bạn có thể kiểm tra gói thanh toán được chỉ định và quản lý phương thức thanh toán trên trang [Thanh toán cho AI Studio](https://ai.google.dev/gemini-api/docs/Thanh toán cho AI Studio).
+Gemini API और AI Studio के बिलिंग प्लान दो कैटगरी में आते हैं. इनसे यह तय होता है कि आपको इस्तेमाल के लिए कब पेमेंट करना है: ऐडवांस पेमेंट और बाद में पेमेंट. आपको असाइन किया गया बिलिंग प्लान देखा जा सकता है. साथ ही, [AI Studio की बिलिंग](https://aistudio.google.com/billing?hl=hi) पेज पर जाकर, पेमेंट के तरीके मैनेज किए जा सकते हैं.
 
-### Trả trước
+### पहले पैसे चुकाने की सुविधा
 
-Trong gói thanh toán Trả trước, bạn mua tín dụng để nạp vào số dư trả trước trước khi sử dụng Gemini API và chi phí sử dụng API sẽ được trừ vào số dư tín dụng trả trước của bạn [gần như theo thời gian thực](https://ai.google.dev/gemini-api/docs/gần như theo thời gian thực).
-Bạn có thể trả trước bằng cách [thêm tín dụng](https://ai.google.dev/gemini-api/docs/thêm tín dụng) vào tài khoản hoặc thiết lập tính năng [tự động nạp tiền](https://ai.google.dev/gemini-api/docs/tự động nạp tiền). Sau khi bạn mua tín dụng, tín dụng chưa dùng sẽ hết hạn sau 12 tháng và [không hoàn lại được](https://ai.google.dev/gemini-api/docs/không hoàn lại được), trừ trường hợp sau khi [chuyển sang tài khoản Trả sau](https://ai.google.dev/gemini-api/docs/chuyển sang tài khoản Trả sau).
+प्रीपेड बिलिंग प्लान में, Gemini API के इस्तेमाल से पहले ही क्रेडिट खरीदे जाते हैं. इसके बाद, API के इस्तेमाल का शुल्क, आपके प्रीपेड क्रेडिट बैलेंस से [रीयल-टाइम के आस-पास](#processing-times) काट लिया जाता है.
+अपने खाते में [क्रेडिट जोड़कर](#buy-credits) या [ऑटो-रीलोड](#auto-reload) की सुविधा सेट अप करके, अडवांस में पेमेंट किया जा सकता है. क्रेडिट खरीदने के बाद, इस्तेमाल न किए गए क्रेडिट 12 महीने बाद खत्म हो जाते हैं. इनका [रिफ़ंड नहीं मिलता](#refunds). हालांकि, [पोस्टपे खाते पर स्विच करने](#postpay) के बाद, इनका रिफ़ंड मिल सकता है.
 
-Khi số dư tín dụng trả trước trong tài khoản thanh toán của bạn đạt đến 0 USD, tất cả khoá API trong tất cả dự án được liên kết với tài khoản thanh toán đó sẽ ngừng hoạt động cùng một lúc.
-Khoản tín dụng trả trước chỉ áp dụng cho chi phí sử dụng Gemini API; bạn không thể dùng khoản tín dụng này để thanh toán cho các dịch vụ khác của Google Cloud.
+जब बिलिंग खाते में प्रीपे क्रेडिट बैलेंस 0 डॉलर हो जाता है, तब उस बिलिंग खाते से लिंक किए गए सभी प्रोजेक्ट में मौजूद सभी एपीआई पासकोड एक साथ काम करना बंद कर देंगे.
+ऐडवांस में खरीदे गए क्रेडिट का इस्तेमाल सिर्फ़ Gemini API के इस्तेमाल से जुड़ी लागत के लिए किया जा सकता है. इनका इस्तेमाल, Google Cloud की अन्य सेवाओं के लिए नहीं किया जा सकता.
 
-Người dùng mới sẽ mặc định sử dụng gói thanh toán Trả trước. Những dự án có trước thời điểm ra mắt gói thanh toán trả trước và trả sau có thể cần phải [cập nhật thông tin thanh toán của dự án](https://ai.google.dev/gemini-api/docs/cập nhật thông tin thanh toán của dự án) trước khi tiếp tục sử dụng Gemini API.
+नए उपयोगकर्ताओं के लिए, डिफ़ॉल्ट रूप से प्रीपेड बिलिंग प्लान चुना जाता है. प्रीपे और पोस्टपे बिलिंग प्लान के लॉन्च होने से पहले बनाए गए प्रोजेक्ट के लिए, Gemini API का इस्तेमाल जारी रखने से पहले, [अपने प्रोजेक्ट की बिलिंग की जानकारी अपडेट करना](#verify-billing) ज़रूरी हो सकता है.
 
-*Xin lưu ý rằng phương thức Trả trước không dùng được cho tài khoản [Có hoá đơn (hoặc Ngoại tuyến)](https://ai.google.dev/gemini-api/docs/Có hoá đơn (hoặc Ngoại tuyến)).*
+*ध्यान दें कि प्रीपेड प्लान, [इनवॉइस (या ऑफ़लाइन)](https://docs.cloud.google.com/billing/docs/concepts?hl=hi#billing_account_types)
+खातों के लिए उपलब्ध नहीं है.*
 
-#### Mua tín dụng
+#### क्रेडिट खरीदना
 
-Bạn có thể mua tín dụng theo cách thủ công trước khi sử dụng Gemini API để nạp tín dụng vào số dư tín dụng trong tài khoản Trả trước.
+Gemini API का इस्तेमाल करने से पहले, क्रेडिट मैन्युअल तरीके से खरीदे जा सकते हैं. इससे, उन्हें प्रीपेड खाते के क्रेडिट बैलेंस में लोड किया जा सकता है.
 
-Để mua tín dụng, hãy chuyển đến trang [Thanh toán của AI Studio](https://ai.google.dev/gemini-api/docs/Thanh toán của AI Studio) rồi chọn **Mua tín dụng**.
-Số tiền mua hàng tối thiểu là 10 đô la Mỹ. Số tiền tín dụng tối đa mà bạn có thể trả trước là 50.000.000 VND.
+क्रेडिट खरीदने के लिए, [AI Studio की बिलिंग](https://aistudio.google.com/billing?hl=hi) पेज पर जाएं और **क्रेडिट खरीदें** को चुनें.
+कम से कम 10 डॉलर का क्रेडिट खरीदना होगा. ज़्यादा से ज़्यादा 5,000 डॉलर के क्रेडिट के लिए, अडवांस में पेमेंट किया जा सकता है.
 
-#### Tự động nạp tiền
+#### ऑटो रीलोड
 
-Tự động nạp tiền là một tính năng không bắt buộc, giúp tự động nạp tiền vào số dư tín dụng trả trước của bạn khi số dư này sắp hết. Điều này giúp tránh bị gián đoạn dịch vụ.
+ऑटो-रीलोड की सुविधा, एक वैकल्पिक सुविधा है. इससे आपके प्रीपेड खाते में क्रेडिट अपने-आप जुड़ जाते हैं. ऐसा तब होता है, जब आपका क्रेडिट बैलेंस तय सीमा से कम हो जाता है. इससे सेवा में रुकावट नहीं आती.
 
-Bạn có thể thiết lập tính năng tự động nạp tiền và xem trạng thái tự động nạp tiền trong thẻ *Số tiền tín dụng hiện có* trên trang [Thanh toán trong AI Studio](https://ai.google.dev/gemini-api/docs/Thanh toán trong AI Studio). Nhấp vào **Thiết lập tính năng tự động nạp tiền** hoặc **Quản lý tính năng tự động nạp tiền** để thiết lập phương thức thanh toán, số tiền nạp và số dư tối thiểu kích hoạt khoản thanh toán nạp tiền.
+ऑटो रीलोड की सुविधा सेट अप की जा सकती है. साथ ही, [AI Studio की बिलिंग](https://aistudio.google.com/billing?hl=hi) पेज पर मौजूद, *उपलब्ध क्रेडिट* कार्ड में जाकर, ऑटो रीलोड की स्थिति देखी जा सकती है. पेमेंट का तरीका, रीलोड की रकम, और रीलोड पेमेंट को ट्रिगर करने वाला
+न्यूनतम बैलेंस सेट करने के लिए, **ऑटो-रीलोड की सुविधा सेट अप करें** या **ऑटो-रीलोड की सुविधा मैनेज करें** पर क्लिक करें.
 
-### Trả sau
+### बाद में पैसे चुकाने की सुविधा
 
-Trong gói thanh toán trả sau, tài khoản thanh toán trên đám mây của bạn sẽ tích luỹ chi phí và bạn sẽ tự động bị tính phí vào cuối tháng hoặc khi chi phí đạt đến [hạn mức chi tiêu được chỉ định tự động](https://ai.google.dev/gemini-api/docs/hạn mức chi tiêu được chỉ định tự động) dựa trên cấp tài khoản của bạn.
-Khoản thanh toán sẽ được tính vào phương thức thanh toán được liên kết với tài khoản thanh toán Trả sau của bạn. Bạn có thể quản lý phương thức thanh toán này trên trang [Thanh toán của AI Studio](https://ai.google.dev/gemini-api/docs/Thanh toán của AI Studio).
+पोस्टपे बिलिंग प्लान में, आपके Cloud Billing खाते में लागतें जुड़ती हैं. इसके बाद, महीने के आखिर में आपसे अपने-आप शुल्क लिया जाता है. इसके अलावा, अगर आपकी लागतें आपके खाते के टियर के आधार पर [अपने-आप असाइन की गई खर्च की सीमा](#tier-spend-caps) तक पहुंच जाती हैं, तो भी आपसे अपने-आप शुल्क लिया जाता है.
+पेमेंट, आपके Postpay खाते से जुड़े पेमेंट के तरीके से लिया जाता है. इसे [AI Studio की बिलिंग](https://aistudio.google.com/billing?hl=hi) पेज पर जाकर मैनेज किया जा सकता है.
 
-Khi đáp ứng [các tiêu chí của Cấp 3](https://ai.google.dev/gemini-api/docs/các tiêu chí của Cấp 3), bạn có thể chuyển từ gói Trả trước sang gói Trả sau theo cách thủ công. Để thay đổi gói, bạn cần nhấp vào nút **Chuyển sang trả sau** xuất hiện ở trên cùng bên phải của trang [Thanh toán trong AI Studio](https://ai.google.dev/gemini-api/docs/Thanh toán trong AI Studio) khi tài khoản của bạn đủ điều kiện.
+[तीसरे टियर की ज़रूरी शर्तें](#about-billing) पूरी करने पर, प्रीपेड प्लान से पोस्टपेड प्लान पर मैन्युअल तरीके से स्विच किया जा सकता है. प्लान बदलने के लिए, आपको **पोस्टपे में स्विच करें** बटन पर क्लिक करना होगा. यह बटन, [AI Studio की बिलिंग](https://aistudio.google.com/billing?hl=hi) पेज पर सबसे ऊपर दाईं ओर दिखता है. हालांकि, यह बटन सिर्फ़ तब दिखता है, जब आपका खाता ज़रूरी शर्तें पूरी करता हो.
 
-Sau đó, trên trang **Thanh toán**, bạn có thể xem số dư, ngày đến hạn và các khoản thanh toán trước đây, cũng như thực hiện thanh toán và quản lý phương thức thanh toán.
+इसके बाद, **बिलिंग** पेज पर जाकर, अपना बैलेंस, बिलिंग की तारीखें, और पिछले पेमेंट देखे जा सकते हैं. साथ ही, पेमेंट किए जा सकते हैं और पेमेंट के तरीके मैनेज किए जा सकते हैं.
 
-Khi [thiết lập thông tin thanh toán](https://ai.google.dev/gemini-api/docs/thiết lập thông tin thanh toán) cho một dự án mới, nếu đủ điều kiện sử dụng phương thức thanh toán Trả sau, bạn sẽ có thể chọn giữa phương thức thanh toán Trả trước và Trả sau trong hộp thoại [thiết lập thông tin thanh toán](https://ai.google.dev/gemini-api/docs/thiết lập thông tin thanh toán).
+नए प्रोजेक्ट के लिए [बिलिंग सेट अप करते समय](#setup-billing), अगर आपने पोस्टपे करने की सुविधा के लिए ज़रूरी शर्तें पूरी की हैं, तो आपको [बिलिंग सेटअप](#setup-billing) डायलॉग में, प्रीपे और पोस्टपे में से किसी एक को चुनने का विकल्प मिलेगा.
 
-Sau khi bạn chuyển một tài khoản thanh toán trên Cloud sang sử dụng gói thanh toán Trả sau, tất cả các dự án được liên kết với tài khoản thanh toán đó sẽ được chuyển sang gói Trả sau. Bạn không thể di chuyển tài khoản thanh toán đó trở lại gói thanh toán Trả trước. Bạn có thể di chuyển một dự án sang tài khoản thanh toán có gói thanh toán khác để thay đổi chu kỳ tính phí cho dự án đó; hãy truy cập vào tài liệu trên Cloud về [cách quản lý hoạt động thanh toán cho dự án](https://ai.google.dev/gemini-api/docs/cách quản lý hoạt động thanh toán cho dự án).
+क्लाउड बिलिंग खाते को पोस्टपे बिलिंग प्लान पर स्विच करने के बाद, उस बिलिंग खाते से लिंक किए गए सभी प्रोजेक्ट, पोस्टपे प्लान पर स्विच हो जाते हैं. उस बिलिंग खाते को, प्रीपे बिलिंग प्लान पर वापस नहीं ले जाया जा सकता. किसी प्रोजेक्ट के लिए शुल्क लेने की अवधि बदलने के लिए, उसे किसी ऐसे बिलिंग खाते में ट्रांसफ़र किया जा सकता है जिसमें कोई दूसरा बिलिंग प्लान हो. [प्रोजेक्ट के लिए बिलिंग मैनेज करने](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=hi) के बारे में जानने के लिए, Cloud का दस्तावेज़ पढ़ें.
 
-Bạn có thể tìm hiểu thêm về chu kỳ tính phí Postpay trong [hướng dẫn về Thanh toán trên đám mây](https://ai.google.dev/gemini-api/docs/hướng dẫn về Thanh toán trên đám mây).
+[Cloud Billing गाइड](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=hi) में, बाद में पैसे चुकाने के लिए तय किए गए चार्जिंग साइकल के बारे में ज़्यादा जानें.
 
-## Mức chi tiêu
+## खर्च की सीमाएं
 
-Gemini API hỗ trợ hạn mức chi tiêu hằng tháng ở cả cấp tài khoản thanh toán và cấp dự án. Các chế độ kiểm soát này được thiết kế để bảo vệ tài khoản của bạn khỏi tình trạng sử dụng quá mức ngoài dự kiến và bảo vệ hệ sinh thái để đảm bảo dịch vụ luôn hoạt động.
+Gemini API, बिलिंग खाते के टियर और प्रोजेक्ट लेवल, दोनों पर हर महीने खर्च की सीमा तय करने की सुविधा देता है. इन कंट्रोल को आपके खाते को अचानक होने वाले ज़्यादा शुल्क से बचाने के लिए डिज़ाइन किया गया है. साथ ही, यह भी पक्का किया गया है कि सेवा उपलब्ध रहे.
 
-*Xin lưu ý rằng hạn mức chi tiêu không dùng được cho tài khoản [Có hoá đơn (hoặc Ngoại tuyến)](https://ai.google.dev/gemini-api/docs/Có hoá đơn (hoặc Ngoại tuyến)).*
+*ध्यान दें कि खर्च की सीमाएं, [इनवॉइस वाले (या ऑफ़लाइन)](https://docs.cloud.google.com/billing/docs/concepts?hl=hi#billing_account_types) खातों के लिए उपलब्ध नहीं हैं.*
 
-### Giới hạn chi tiêu dự kiến
+### प्रोजेक्ट के लिए खर्च की सीमाएं
 
-Bạn có thể đặt hạn mức chi tiêu [ở cấp dự án](https://ai.google.dev/gemini-api/docs/ở cấp dự án) trong AI Studio.
-Điều này sẽ hữu ích nếu bạn có nhiều dự án trong cùng một tài khoản thanh toán và muốn đảm bảo mỗi dự án đều có đủ hạn mức chi tiêu tích luỹ.
+AI Studio में, [प्रोजेक्ट-लेवल](https://ai.google.dev/gemini-api/docs/api-key?hl=hi#google-cloud-projects) पर खर्च की सीमाएं सेट की जा सकती हैं.
+यह तब काम आता है, जब आपके पास एक ही बिलिंग खाते से जुड़े कई प्रोजेक्ट हों और आपको यह पक्का करना हो कि हर प्रोजेक्ट के पास, कुल खर्च की सीमा का ज़रूरत के मुताबिक ऐक्सेस हो.
 
-Những tài khoản có [vai trò](https://ai.google.dev/gemini-api/docs/vai trò) người chỉnh sửa, chủ sở hữu hoặc quản trị viên dự án có thể đặt hạn mức chi tiêu cho mỗi dự án trong AI Studio trên trang [Chi tiêu](https://ai.google.dev/gemini-api/docs/Chi tiêu) trong phần **Hạn mức chi tiêu hằng tháng** > **Chỉnh sửa hạn mức chi tiêu**.
+प्रोजेक्ट एडिटर, मालिक या एडमिन की [भूमिका](https://docs.cloud.google.com/iam/docs/roles-overview?hl=hi) वाले खाते, AI Studio में हर प्रोजेक्ट के लिए खर्च की सीमा सेट कर सकते हैं. इसके लिए, [खर्च](https://aistudio.google.com/spend?hl=hi) पेज पर जाएं. इसके बाद, **महीने के खर्च की सीमा** > **खर्च की सीमा में बदलाव करें** पर क्लिक करें.
 
-Nếu bạn [chuyển một dự án sang một tài khoản thanh toán khác](https://ai.google.dev/gemini-api/docs/chuyển một dự án sang một tài khoản thanh toán khác), thì mọi hạn mức chi tiêu mà bạn đã đặt cho dự án đó sẽ vẫn giữ nguyên, nhưng mọi khoản chi tiêu tích luỹ sẽ được đặt lại thành 0 USD cho chu kỳ thanh toán mới.
+अगर आपने [किसी प्रोजेक्ट को दूसरे बिलिंग खाते में ट्रांसफ़र किया है](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=hi#change_the_billing_account_for_a_project), तो उस प्रोजेक्ट के लिए सेट की गई खर्च की सीमा बनी रहेगी. हालांकि, इकट्ठा किया गया खर्च, नए बिलिंग साइकल के लिए 0 डॉलर पर रीसेट हो जाएगा.
 
-Các lượt hoàn thành ở [chế độ hàng loạt](https://ai.google.dev/gemini-api/docs/chế độ hàng loạt) vẫn có thể phát sinh phí vượt mức.
+[बैच मोड](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi) में किए गए अनुरोधों के लिए, अब भी अतिरिक्त शुल्क लग सकता है.
 
-Thời gian xử lý dữ liệu thanh toán trong AI Studio có thể bị chậm trễ một chút, tối đa khoảng 10 phút. Bạn có thể phát sinh thêm chi phí ngoài hạn mức dự án nếu dữ liệu thanh toán chưa được xử lý trước khi phát sinh thêm chi phí.
+AI Studio में बिलिंग डेटा प्रोसेस होने में थोड़ा समय लग सकता है. इसमें करीब 10 मिनट लग सकते हैं. अगर ज़्यादा शुल्क लगने से पहले बिलिंग डेटा प्रोसेस नहीं किया जाता है, तो आपको प्रोजेक्ट की सीमा से ज़्यादा शुल्क देना पड़ सकता है.
 
-### Hạn mức chi tiêu theo cấp của tài khoản thanh toán
+### बिलिंग खाते के टियर के हिसाब से खर्च की सीमाएं
 
-Mỗi [bậc](https://ai.google.dev/gemini-api/docs/bậc) đều có hạn mức chi tiêu tối đa hằng tháng:
+हर [टियर](#about-billing) के लिए, हर महीने खर्च की सीमा तय होती है:
 
-| Cấp sử dụng | Giới hạn chi tiêu |
+| इस्तेमाल का टियर | खर्च की सीमा |
 | --- | --- |
-| **Free** | Không áp dụng |
-| **Cấp 1** | đô la Hong Kong |
-| **Cấp 2** | $2.000 |
-| **Cấp 3** | 20.000 – 100.000 đô la Mỹ |
+| **Free** | लागू नहीं |
+| **टियर 1** | 250 डॉलर |
+| **टियर 2** | 2,000 डॉलर |
+| **टियर 3** | 20,000 से 1,00,000 डॉलर के बीच |
 
-Hạn mức sử dụng hằng tháng được áp dụng cho Gemini API ở cấp [tài khoản thanh toán](https://ai.google.dev/gemini-api/docs/tài khoản thanh toán). Mặc dù hạn mức mặc định được đặt sẵn, nhưng bạn có thể [yêu cầu tăng hạn mức](https://ai.google.dev/gemini-api/docs/yêu cầu tăng hạn mức) để đáp ứng nhu cầu sử dụng cao hơn. Tổng mức chi tiêu được tổng hợp trên tất cả các dự án được liên kết có bật dịch vụ Gemini API. Sau khi tổng tài khoản tích luỹ đạt đến hạn mức bậc, dịch vụ sẽ bị tạm dừng cho tất cả các dự án được liên kết với tài khoản thanh toán đó cho đến khi bắt đầu chu kỳ thanh toán tiếp theo (ngày 1 của mỗi tháng).
+Gemini API के लिए, हर महीने इस्तेमाल की सीमाएं लागू की जाती हैं. ये सीमाएं, [बिलिंग खाते](#cloud-billing) के लेवल पर लागू होती हैं. डिफ़ॉल्ट सीमाएं पहले से सेट होती हैं. हालांकि, ज़्यादा इस्तेमाल करने के लिए, [सीमा बढ़ाने का अनुरोध](https://docs.google.com/forms/d/e/1FAIpQLSdiP6BWJyNNN65lnwnlOr-5Kv0MOFp0jLQyqi_ixVCfddqWBw/viewform?hl=hi) किया जा सकता है. कुल खर्च का हिसाब, Gemini API सेवा चालू करने वाले सभी लिंक किए गए प्रोजेक्ट के हिसाब से लगाया जाता है. जब खाते का कुल इस्तेमाल, टियर की सीमा तक पहुंच जाता है, तो उस बिलिंग खाते से लिंक किए गए सभी प्रोजेक्ट के लिए सेवा रोक दी जाती है. ऐसा अगले बिलिंग साइकल (हर महीने की पहली तारीख) के शुरू होने तक होता है.
 
-#### Đánh giá mức chi tiêu của tài khoản thanh toán
+#### अपने बिलिंग खाते के खर्च का आकलन करना
 
-Để đánh giá mức chi tiêu hằng tháng trước đây nhằm xác định xem [hạn mức chi tiêu theo cấp độ Tài khoản thanh toán](https://ai.google.dev/gemini-api/docs/hạn mức chi tiêu theo cấp độ Tài khoản thanh toán) mới có ảnh hưởng đến các dự án đang diễn ra của bạn hay không, hãy làm theo các bước sau:
+यह पता लगाने के लिए कि [बिलिंग खाते के टियर के हिसाब से खर्च की नई सीमाएं](#tier-spend-caps), आपके मौजूदा प्रोजेक्ट पर असर डालेंगी या नहीं, हर महीने के खर्च के इतिहास का आकलन करें. इसके लिए, यह तरीका अपनाएं:
 
-1. Trong bảng điều khiển Google Cloud, hãy xem trang [Báo cáo tài khoản thanh toán Cloud](https://ai.google.dev/gemini-api/docs/Báo cáo tài khoản thanh toán Cloud).
-   - Nếu bạn có nhiều tài khoản thanh toán, hãy chọn tài khoản thanh toán Cloud mà bạn muốn xem báo cáo chi phí khi được nhắc.
-2. Theo mặc định, báo cáo sẽ là "Nhóm theo dịch vụ" trong "Tháng hiện tại". Bạn sẽ thấy **Gemini API** trong cột **Dịch vụ** và tổng mức chi tiêu trong cột **Chi phí sử dụng** của bảng.
-3. Để xem chi phí chi tiết chỉ giới hạn ở mức sử dụng Gemini API, hãy đặt bộ lọc **Nhóm theo** để nhóm theo **SKU** và bộ lọc **Dịch vụ** thành **Gemini API**.
-4. Điều chỉnh bộ lọc **Phạm vi thời gian theo ngày sử dụng** thành phạm vi bạn muốn để đánh giá mức chi tiêu trước đây trong một khoảng thời gian.
+1. Google Cloud Console में, [क्लाउड बिलिंग खाते की रिपोर्ट](https://console.cloud.google.com/billing/reports?hl=hi) पेज देखें.
+   - अगर आपके पास एक से ज़्यादा बिलिंग खाते हैं, तो मैसेज दिखने पर, वह क्लाउड बिलिंग खाता चुनें जिसकी लागत रिपोर्ट आपको देखनी है.
+2. रिपोर्ट में डिफ़ॉल्ट रूप से, "चालू महीने" के लिए "सेवा के हिसाब से ग्रुप करें" विकल्प चुना होता है. आपको टेबल के **सेवा** कॉलम में **Gemini API** दिखेगा. साथ ही, **इस्तेमाल की लागत** कॉलम में कुल खर्च दिखेगा.
+3. Gemini API के इस्तेमाल से जुड़े शुल्क की ज़्यादा जानकारी देखने के लिए, **ग्रुप बनाएं** फ़िल्टर को **एसकेयू** के हिसाब से ग्रुप बनाने के लिए सेट करें. साथ ही, **सेवाएं** फ़िल्टर को **Gemini API** पर सेट करें.
+4. किसी अवधि में किए गए खर्च का आकलन करने के लिए, **इस्तेमाल की तारीख के हिसाब से समयसीमा** वाले फ़िल्टर को अपनी ज़रूरत के हिसाब से घटाएं या बढ़ाएं.
 
-## Thời gian xử lý
+## संसाधन समय
 
-Các tín hiệu và thông tin cập nhật về việc thanh toán không phải lúc nào cũng diễn ra theo thời gian thực.
+बिलिंग के सिग्नल और अपडेट हमेशा रीयल टाइम में नहीं होते हैं.
 
-- **Mức sử dụng tín dụng**: Chi phí sử dụng thường được trừ vào số dư của bạn trong vòng vài phút.
-- **Xác nhận thanh toán**: Mặc dù hầu hết các khoản thanh toán bằng thẻ đều được xử lý ngay lập tức, nhưng một số phương thức thanh toán (như chuyển khoản ngân hàng) có thể mất vài ngày để xử lý. Các dịch vụ chỉ tiếp tục hoặc nâng cấp sau khi giao dịch mua tín dụng được xác nhận chính thức.
-- **Nâng cấp cấp độ**: Sau khi bạn thanh toán thành công hoặc khi bạn đáp ứng [các tiêu chí nâng cấp](https://ai.google.dev/gemini-api/docs/các tiêu chí nâng cấp), hệ thống thường sẽ nâng cấp cấp độ trong vòng 10 phút.
-- **Biểu đồ phân tích tổng chi phí**: Biểu đồ cho thấy thông tin phân tích tổng chi phí của bạn trên cả trang [Thanh toán](https://ai.google.dev/gemini-api/docs/Thanh toán) và trang [Chi tiêu](https://ai.google.dev/gemini-api/docs/Chi tiêu) có thể mất đến 24 giờ để cập nhật.
+- **क्रेडिट का इस्तेमाल**: इस्तेमाल की लागत आम तौर पर, कुछ ही मिनटों में आपके बैलेंस से काट ली जाती है.
+- **पेमेंट की पुष्टि**: कार्ड से किए गए ज़्यादातर पेमेंट तुरंत हो जाते हैं. हालांकि, पेमेंट के कुछ तरीकों (जैसे कि बैंक ट्रांसफ़र) से पेमेंट होने में कई दिन लग सकते हैं. क्रेडिट की खरीदारी की आधिकारिक तौर पर पुष्टि होने के बाद ही, सेवाएं फिर से शुरू होती हैं या अपग्रेड की जाती हैं.
+- **टियर अपग्रेड**: पेमेंट हो जाने या [अपग्रेड करने की ज़रूरी शर्तें](#about-billing) पूरी करने के बाद, आम तौर पर 10 मिनट के अंदर टियर अपग्रेड हो जाता है.
+- **कुल लागत के ब्रेकडाउन वाले ग्राफ़**: [बिलिंग](https://aistudio.google.com/billing?hl=hi) पेज और [खर्च](https://aistudio.google.com/spend?hl=hi) पेज, दोनों पर कुल लागत का ब्रेकडाउन दिखाने वाले ग्राफ़ को अपडेट होने में 24 घंटे लग सकते हैं.
 
-Hãy đọc hướng dẫn về Cloud Billing liên quan đến [chu kỳ tính phí](https://ai.google.dev/gemini-api/docs/chu kỳ tính phí) và độ trễ [giao dịch](https://ai.google.dev/gemini-api/docs/giao dịch) để tìm hiểu thêm về các trường hợp có thể bị chậm trễ trong việc lập hoá đơn.
+बिलिंग में होने वाली संभावित देरी के बारे में ज़्यादा जानने के लिए, [चार्जिंग साइकल](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=hi#delayed-billing) और [लेन-देन](https://docs.cloud.google.com/billing/docs/how-to/view-history?hl=hi#missing-transactions) में लगने वाले समय के बारे में Cloud Billing की गाइड पढ़ें.
 
-## Hoàn tiền
+## रिफ़ंड
 
-Bạn không được hoàn tiền cho tài khoản thanh toán **Trả trước**, trừ trường hợp chuyển đổi loại tài khoản.
+**प्रीपे** बिलिंग खातों के लिए रिफ़ंड की अनुमति नहीं है. हालांकि, खाता टाइप स्विच करने पर रिफ़ंड मिल सकता है.
 
-**Khi tài khoản Trả trước chuyển sang loại tài khoản Trả sau** (sau khi bạn đáp ứng [các tiêu chí](https://ai.google.dev/gemini-api/docs/các tiêu chí) và [nâng cấp tài khoản theo cách thủ công](https://ai.google.dev/gemini-api/docs/nâng cấp tài khoản theo cách thủ công)), tài khoản Trả trước sẽ bị đóng và mọi khoản tín dụng trả trước còn lại sẽ tự động được hoàn lại vào phương thức thanh toán trong hồ sơ.
+**प्रीपेड खाते को पोस्टपेड खाते में स्विच करने पर** ([ज़रूरी शर्तें](#about-billing) पूरी करने और खाते को [मैन्युअल तरीके से अपग्रेड करने](#postpay) के बाद), प्रीपेड खाता बंद कर दिया जाता है. साथ ही, बचे हुए प्रीपेड क्रेडिट का रिफ़ंड, फ़ाइल में मौजूद पेमेंट के तरीके में अपने-आप भेज दिया जाता है.
 
-Nếu bạn [đóng](https://ai.google.dev/gemini-api/docs/đóng) tài khoản Trả trước vì bất kỳ lý do nào khác ngoài việc nâng cấp lên tài khoản Trả sau, mọi khoản tín dụng trả trước còn lại sẽ bị mất.
+अगर आपने पोस्टपे खाते पर अपग्रेड करने के अलावा किसी और वजह से, प्रीपे खाते को [बंद](https://docs.cloud.google.com/billing/docs/how-to/close-or-reopen-billing-account?hl=hi#close-a-billing-account) किया है, तो प्रीपे खाते में मौजूद सभी क्रेडिट ज़ब्त कर लिए जाएंगे.
 
-Khoản tín dụng đã mua sẽ hết hạn sau 1 năm. Sau khi hết hạn, các khoản tín dụng sẽ bị mất và không thể lấy lại.
+खरीदे गए क्रेडिट, एक साल बाद खत्म हो जाते हैं. समयसीमा खत्म होने के बाद, क्रेडिट ज़ब्त कर लिए जाते हैं और उन्हें वापस नहीं पाया जा सकता.
 
-Tài khoản **trả sau** tuân theo [chính sách hoàn tiền của Google Cloud](https://ai.google.dev/gemini-api/docs/chính sách hoàn tiền của Google Cloud).
+**पोस्टपे** खातों पर, [Google Cloud की रिफ़ंड नीति](https://docs.cloud.google.com/billing/docs/how-to/resolve-issues?hl=hi#request_a_refund) लागू होती है.
 
-## Tài khoản thanh toán trên Cloud
+## क्लाउड बिलिंग खाते
 
-Gemini API sử dụng [tài khoản Cloud Billing](https://ai.google.dev/gemini-api/docs/tài khoản Cloud Billing) cho các dịch vụ thanh toán. Bạn có thể [thiết lập tài khoản này ngay trong AI Studio](https://ai.google.dev/gemini-api/docs/thiết lập tài khoản này ngay trong AI Studio).
-Bạn có thể sử dụng AI Studio để theo dõi mức chi tiêu, tìm hiểu chi phí và thanh toán.
+Gemini API, बिलिंग सेवाओं के लिए [Cloud Billing खातों](https://cloud.google.com/billing/docs/concepts?hl=hi) का इस्तेमाल करता है. इन्हें [सीधे तौर पर AI Studio में सेट अप किया जा सकता है](#setup-billing).
+खर्च को ट्रैक करने, लागत को समझने, और पेमेंट करने के लिए, AI Studio का इस्तेमाल किया जा सकता है.
 
-Các cấp, hạn mức tốc độ và hạn mức tài khoản thanh toán đều được xác định ở cấp tài khoản thanh toán.
+टियर, दर की सीमाएं, और बिलिंग खाते की सीमाएं, सभी बिलिंग खाते के लेवल पर तय की जाती हैं.
 
-### Dự án và khoá API
+### प्रोजेक्ट और एपीआई पासकोड
 
-Tất cả [dự án](https://ai.google.dev/gemini-api/docs/dự án) được liên kết với một tài khoản Thanh toán trên đám mây đều kế thừa cấp sử dụng của tài khoản thanh toán và các giới hạn về tỷ lệ cũng như hạn mức tài khoản được liên kết. Nếu bạn [thay đổi dự án](https://ai.google.dev/gemini-api/docs/thay đổi dự án) từ tài khoản thanh toán này sang tài khoản thanh toán khác, thì cấp của dự án đó, cũng như hạn mức tốc độ và hạn mức tài khoản, sẽ chuyển sang cấp của tài khoản thanh toán mới.
+Cloud Billing खाते से लिंक किए गए सभी [प्रोजेक्ट](https://ai.google.dev/gemini-api/docs/api-key?hl=hi#google-cloud-projects) के लिए, बिलिंग खाते के इस्तेमाल का टियर और उससे जुड़ी दर की सीमाएं और खाते की सीमाएं लागू होती हैं. अगर किसी प्रोजेक्ट को एक बिलिंग खाते से दूसरे बिलिंग खाते में [बदला जाता है](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=hi#change_the_billing_account_for_a_project), तो उसका टियर, दर की सीमाएं, और खाते की सीमाएं, नए बिलिंग खाते के टियर पर स्विच हो जाएंगी.
 
-Tổng mức chi tiêu (cho tất cả các sản phẩm của Google Cloud) và tuổi tài khoản trên tất cả các dự án được liên kết với một tài khoản thanh toán sẽ được tính vào [điều kiện để đạt được cấp](https://ai.google.dev/gemini-api/docs/điều kiện để đạt được cấp) của tài khoản thanh toán đó.
+बिलिंग खाते से जुड़े सभी प्रोजेक्ट के लिए, Google Cloud के सभी प्रॉडक्ट पर किए गए कुल खर्च और खाते की उम्र को, उस बिलिंग खाते के [टियर की ज़रूरी शर्तों](#about-billing) को पूरा करने के लिए गिना जाता है.
 
-Bạn có thể [huỷ liên kết một dự án](https://ai.google.dev/gemini-api/docs/huỷ liên kết một dự án) khỏi tài khoản thanh toán của dự án đó để quay lại bậc miễn phí.
+मुफ़्त टियर पर वापस जाने के लिए, [किसी प्रोजेक्ट को उसके बिलिंग खाते से अलग करें](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=hi#disable_billing_for_a_project).
 
-[Khoá API](https://ai.google.dev/gemini-api/docs/Khoá API) là thông tin xác thực được tạo trong một dự án.
-Chúng không có chế độ cài đặt thanh toán độc lập; chúng kế thừa hạn mức theo cấp và trạng thái thanh toán của dự án. Mức sử dụng tích luỹ của tất cả các khoá trong một dự án sẽ được tính vào hạn mức chi tiêu của dự án đó và tổng mức chi tiêu của tài khoản thanh toán.
+[एपीआई पासकोड](https://ai.google.dev/gemini-api/docs/api-key?hl=hi), किसी प्रोजेक्ट में जनरेट किए गए क्रेडेंशियल होते हैं.
+इनके लिए अलग से बिलिंग सेटिंग नहीं होती. ये प्रोजेक्ट की टियर सीमाएं और बिलिंग की स्थिति को इनहेरिट करते हैं. किसी प्रोजेक्ट में मौजूद सभी कुंजियों के कुल इस्तेमाल को, उस प्रोजेक्ट के खर्च की सीमा और बिलिंग खाते के कुल खर्च में गिना जाता है.
 
-## Câu hỏi thường gặp
+## अक्सर पूछे जाने वाले सवाल
 
-Các phần sau đây cung cấp câu trả lời cho các câu hỏi thường gặp.
+यहां अक्सर पूछे जाने वाले सवालों के जवाब दिए गए हैं.
 
-### Tôi bị tính phí cho những khoản nào?
+### मुझसे किस बात के लिए शुल्क लिया जाता है?
 
-Giá của Gemini API dựa trên những yếu tố sau:
+Gemini API की कीमत इन बातों पर निर्भर करती है:
 
-- Số lượng mã thông báo đầu vào
-- Số lượng mã thông báo đầu ra
-- Số lượng mã thông báo được lưu vào bộ nhớ đệm
-- Khoảng thời gian lưu trữ mã thông báo được lưu vào bộ nhớ đệm
+- इनपुट टोकन की संख्या
+- आउटपुट टोकन की संख्या
+- कैश किए गए टोकन की संख्या
+- कैश किए गए टोकन को सेव करने की अवधि
 
-Để biết thông tin về giá, hãy xem [trang Giá](https://ai.google.dev/gemini-api/docs/trang Giá).
+शुल्क की जानकारी के लिए, [शुल्क वाला पेज](https://ai.google.dev/pricing?hl=hi) देखें.
 
-### Tôi có thể xem hạn mức của mình ở đâu?
+### मुझे अपना कोटा कहां दिखेगा?
 
-Bạn có thể xem hạn mức và giới hạn hệ thống trong [AI Studio](https://ai.google.dev/gemini-api/docs/AI Studio).
+[AI Studio](https://aistudio.google.com/usage?hl=hi) में जाकर, अपने कोटे और सिस्टम की सीमाएं देखी जा सकती हैं.
 
-### Làm cách nào để chuyển sang cấp hạn mức tốc độ cao hơn hoặc yêu cầu thêm hạn mức?
+### मैं दर की सीमा वाले ज़्यादा टियर पर कैसे स्विच करूं या ज़्यादा कोटा का अनुरोध कैसे करूं?
 
-Bạn sẽ tự động được cấp thêm hạn mức khi tài khoản của bạn đạt đến [yêu cầu về cấp độ](https://ai.google.dev/gemini-api/docs/yêu cầu về cấp độ) tiếp theo.
+जब आपका खाता अगले [टियर की ज़रूरी शर्तों](https://ai.google.dev/gemini-api/docs/rate-limits?hl=hi#usage-tiers) को पूरा कर लेगा, तब आपको ज़्यादा कोटा अपने-आप मिल जाएगा.
 
-### Tôi có thể sử dụng Gemini API miễn phí ở Khu vực kinh tế Châu Âu (bao gồm cả Liên minh Châu Âu), Vương quốc Anh và Thuỵ Sĩ không?
+### क्या ईईए (इसमें ईयू भी शामिल है), यूके, और सीएच में Gemini API का इस्तेमाल बिना किसी शुल्क के किया जा सकता है?
 
-Có. Chúng tôi cung cấp gói miễn phí và gói có tính phí ở [nhiều khu vực](https://ai.google.dev/gemini-api/docs/nhiều khu vực).
+हां, हम मुफ़्त और पैसे चुकाकर ली जाने वाली सदस्यता, [कई देशों/इलाकों](https://ai.google.dev/gemini-api/docs/available-regions?hl=hi) में उपलब्ध कराते हैं.
 
-### Nếu thiết lập thông tin thanh toán cho Gemini API, tôi có bị tính phí cho việc sử dụng Google AI Studio không?
+### अगर मैंने Gemini API के लिए बिलिंग सेट अप की है, तो क्या मुझसे Google AI Studio के इस्तेमाल का शुल्क लिया जाएगा?
 
-Người dùng vẫn có thể sử dụng AI Studio miễn phí, trừ phi họ liên kết một khoá API có tính phí để truy cập vào các tính năng có tính phí.
-Sau khi liên kết một khoá API có tính phí trong một dự án có tính phí trong AI Studio, bạn sẽ bị tính phí sử dụng AI Studio cho khoá đó. Bạn có thể chuyển đổi giữa các dự án thuộc Cấp có tính phí và các dự án thuộc Cấp miễn phí khi cần bằng cách sử dụng các khoá API tương ứng được liên kết với từng loại.
+AI Studio का इस्तेमाल बिना किसी शुल्क के किया जा सकता है. हालाँकि, अगर उपयोगकर्ताओं को पैसे चुकाकर मिलने वाली सुविधाओं का ऐक्सेस चाहिए, तो उन्हें पैसे चुकाकर लिया गया एपीआई पासकोड लिंक करना होगा.
+AI Studio में किसी पैसे चुकाकर इस्तेमाल किए जाने वाले प्रोजेक्ट के हिस्से के तौर पर, पैसे चुकाकर इस्तेमाल किए जाने वाले एपीआई पासकोड को लिंक करने पर, आपसे उस पासकोड के लिए AI Studio के इस्तेमाल का शुल्क लिया जाएगा. अपनी ज़रूरत के हिसाब से, पेड टियर वाले प्रोजेक्ट और मुफ़्त टियर वाले प्रोजेक्ट के बीच स्विच किया जा सकता है. इसके लिए, हर टाइप से लिंक किए गए एपीआई पासकोड का इस्तेमाल करें.
 
-### Nếu đang sử dụng Bậc miễn phí, làm cách nào để nâng cấp lên các bậc cao hơn?
+### अगर मैं मुफ़्त टियर पर हूँ, तो मैं ऊंचे टियर पर कैसे अपग्रेड करूँ?
 
-Để sử dụng các cấp cao hơn, bạn phải thiết lập thông tin thanh toán cho dự án của mình. Nhấp vào [**Thiết lập thông tin thanh toán**](https://ai.google.dev/gemini-api/docs/**Thiết lập thông tin thanh toán**) trong Google AI Studio. Thao tác này sẽ hướng dẫn bạn cách chọn hoặc tạo một tài khoản thanh toán trên Cloud. Nếu bạn bắt buộc phải sử dụng mô hình thanh toán trả trước, thì quy trình **Thiết lập thông tin thanh toán** sẽ hướng dẫn bạn thực hiện quy trình tạo tài khoản Trả trước được liên kết với tài khoản thanh toán Cloud của bạn.
+ऊंचे टियर ऐक्सेस करने के लिए, आपको अपने प्रोजेक्ट पर बिलिंग सेट अप करनी होगी. Google AI Studio में, [**बिलिंग सेट अप करें**](#setup-billing) पर क्लिक करें. इससे आपको Cloud Billing खाता चुनने या बनाने का तरीका पता चलेगा. अगर आपको प्रीपेड बिलिंग मॉडल का इस्तेमाल करना है, तो **बिलिंग सेट अप करें** प्रोसेस के दौरान, आपको प्रीपेड खाता बनाने की प्रोसेस के बारे में बताया जाएगा. यह खाता, आपके Cloud Billing खाते से लिंक होगा.
 
-### Tôi có thể sử dụng 1 triệu mã thông báo trong gói miễn phí không?
+### क्या मुफ़्त टियर में 10 लाख टोकन इस्तेमाल किए जा सकते हैं?
 
-Cấp miễn phí của Gemini API sẽ khác nhau tuỳ thuộc vào mô hình bạn chọn. Hiện tại, bạn có thể dùng cửa sổ ngữ cảnh 1 triệu token theo những cách sau:
+Gemini API का मुफ़्त टियर, चुने गए मॉडल के आधार पर अलग-अलग होता है. फ़िलहाल, 10 लाख टोकन वाली कॉन्टेक्स्ट विंडो को इन तरीकों से आज़माया जा सकता है:
 
-- Trong Google AI Studio
-- Với gói miễn phí cho một số mẫu xe
-- Với gói trả sau
+- Google AI Studio में
+- चुनिंदा मॉडल के लिए बिना किसी शुल्क वाले प्लान
+- पोस्टपेड प्लान के साथ
 
-### Tôi có thể quay lại Gói miễn phí sau khi nâng cấp lên các gói cao hơn (trả phí) không?
+### क्या पैसे चुकाकर लिए जाने वाले टियर पर अपग्रेड करने के बाद, मुफ़्त टियर पर वापस जाया जा सकता है?
 
-Để hạ cấp xuống Bậc miễn phí, bạn có thể [tắt tính năng thanh toán](https://ai.google.dev/gemini-api/docs/tắt tính năng thanh toán) trên từng dự án mà bạn muốn hạ cấp.
+मुफ़्त टियर पर वापस जाने के लिए, उन सभी प्रोजेक्ट के लिए [बिलिंग बंद करें](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=hi#disable_billing_for_a_project) जिन्हें आपको डाउनग्रेड करना है.
 
-### Làm cách nào để tính số lượng mã thông báo mà tôi đang sử dụng?
+### मैं इस्तेमाल किए जा रहे टोकन की संख्या का हिसाब कैसे लगाऊं?
 
-Dùng phương thức [`GenerativeModel.count_tokens`](https://ai.google.dev/gemini-api/docs/`GenerativeModel.count_tokens`) để đếm số lượng mã thông báo. Hãy tham khảo [Hướng dẫn về mã thông báo](https://ai.google.dev/gemini-api/docs/Hướng dẫn về mã thông báo) để tìm hiểu thêm về mã thông báo.
+टोकन की संख्या गिनने के लिए, [`GenerativeModel.count_tokens`](https://ai.google.dev/api/python/google/generativeai/GenerativeModel?hl=hi#count_tokens)
+मेथड का इस्तेमाल करें. टोकन के बारे में ज़्यादा जानने के लिए, [टोकन गाइड](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) देखें.
 
-### Nếu đăng ký Tài khoản thanh toán trên đám mây đầu tiên thông qua AI Studio, tôi có còn được dùng thử miễn phí Google Cloud không?
+### अगर मैंने AI Studio के ज़रिए अपने पहले क्लाउड बिलिंग खाते के लिए साइन अप किया है, तो क्या मुझे Google Cloud को मुफ़्त में आज़माने का ऑफ़र मिलेगा?
 
-Khi bạn đăng ký Tài khoản thanh toán trên Cloud lần đầu tiên, [Bản dùng thử miễn phí của Google Cloud](https://ai.google.dev/gemini-api/docs/Bản dùng thử miễn phí của Google Cloud) sẽ bắt đầu và bạn sẽ được cấp [Khoản tín dụng chào mừng](https://ai.google.dev/gemini-api/docs/Khoản tín dụng chào mừng) trị giá 300 đô la.
-Tuy nhiên, bạn không thể dùng những khoản tín dụng đó để thanh toán cho việc sử dụng AI Studio. Bạn có thể sử dụng khoản tín dụng Chào mừng để thanh toán cho các dịch vụ đủ điều kiện khác trong Google Cloud (xin lưu ý rằng sau khi bạn tiêu thụ hết hoặc khoản tín dụng hết hạn (trong vòng 90 ngày), mọi chi phí sử dụng bổ sung sẽ tự động được tính vào phương thức thanh toán mà bạn đã thiết lập).
+पहली बार Cloud Billing खाते के लिए साइन अप करने पर, [Google Cloud को मुफ़्त में आज़माने की सुविधा](https://docs.cloud.google.com/free/docs/free-cloud-features?hl=hi#free-trial) शुरू हो जाती है. साथ ही, आपको 300 डॉलर का [वेलकम क्रेडिट](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=hi#welcome-credits) मिलता है.
+हालांकि, इन क्रेडिट का इस्तेमाल AI Studio के इस्तेमाल के लिए नहीं किया जा सकता. Google Cloud में, ज़रूरी शर्तें पूरी करने वाली अन्य सेवाओं के लिए पेमेंट करने के लिए, वेलकम क्रेडिट का इस्तेमाल किया जा सकता है. ध्यान दें कि इन क्रेडिट का इस्तेमाल हो जाने या 90 दिनों के अंदर इनकी समयसीमा खत्म हो जाने के बाद, इस्तेमाल से जुड़ी कोई भी अतिरिक्त लागत, पेमेंट के लिए चुने गए तरीके से अपने-आप बिल कर दी जाती है.
 
-### Tôi có thể sử dụng tín dụng chào mừng của Google Cloud với Gemini API không?
+### क्या Gemini API के लिए, Google Cloud के वेलकम क्रेडिट का इस्तेमाल किया जा सकता है?
 
-Không, bạn không thể dùng [Khoản tín dụng chào mừng](https://ai.google.dev/gemini-api/docs/Khoản tín dụng chào mừng) hoặc khoản tín dụng dùng thử miễn phí của Google Cloud cho Gemini API hoặc AI Studio.
+नहीं, Google Cloud के [वेलकम क्रेडिट](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=hi#welcome-credits) या बिना किसी शुल्क के आज़माने की सुविधा के क्रेडिट का इस्तेमाल, Gemini API या AI Studio के लिए नहीं किया जा सकता.
 
-Nếu được cấp tín dụng chào mừng của Google Cloud trước khi không đủ điều kiện, bạn vẫn có thể chi tiêu số tín dụng còn lại cho Gemini API và AI Studio cho đến khi tín dụng hết hạn (sau 90 ngày).
+अगर आपको Google Cloud का वेलकम क्रेडिट, ज़रूरी शर्तें पूरी न करने से पहले मिला था, तो आपको Gemini API और AI Studio पर बचे हुए क्रेडिट खर्च करने की अनुमति है. हालांकि, ऐसा क्रेडिट की समयसीमा खत्म होने (90 दिनों के बाद) तक ही किया जा सकता है.
 
-### Chương trình Dùng thử miễn phí của Google Cloud có áp dụng cho việc sử dụng Gemini API không?
+### क्या Gemini API के इस्तेमाल पर, Google Cloud को बिना किसी शुल्क के आज़माने की सुविधा लागू होती है?
 
-Không. Kể từ tháng 3 năm 2026, phí sử dụng Gemini API sẽ không được tính vào chương trình [Dùng thử miễn phí Google Cloud trị giá 300 USD](https://ai.google.dev/gemini-api/docs/Dùng thử miễn phí Google Cloud trị giá 300 USD).
+नहीं, मार्च 2026 से, Gemini API के इस्तेमाल से जुड़े शुल्क को [Google Cloud को बिना किसी शुल्क के आज़माने के लिए मिले 300 डॉलर](https://docs.cloud.google.com/free/docs/free-cloud-features?hl=hi#free-trial) के प्रोग्राम में शामिल नहीं किया जाएगा.
 
-### Việc thanh toán được xử lý như thế nào?
+### बिलिंग कैसे मैनेज की जाती है?
 
-Hệ thống [Thanh toán trên Google Cloud](https://ai.google.dev/gemini-api/docs/Thanh toán trên Google Cloud) sẽ xử lý việc thanh toán cho Gemini API. Tìm hiểu về thông tin thanh toán trên đám mây trong sản phẩm trong [tài liệu về Thanh toán trên đám mây](https://ai.google.dev/gemini-api/docs/tài liệu về Thanh toán trên đám mây).
+Gemini API के लिए बिलिंग को [Cloud Billing](https://cloud.google.com/billing/docs/concepts?hl=hi) सिस्टम मैनेज करता है. [Cloud Billing के दस्तावेज़](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=hi) में, प्रॉडक्ट में Cloud Billing सेट अप करने के बारे में जानें.
 
-### Tôi có bị tính phí cho các yêu cầu không thực hiện được không?
+### क्या अनुरोध पूरे न होने पर मुझसे शुल्क लिया जाता है?
 
-Nếu yêu cầu của bạn không thành công và gặp lỗi 400 hoặc 500, bạn sẽ không bị tính phí cho các mã thông báo đã dùng. Tuy nhiên, yêu cầu này vẫn được tính vào hạn mức của bạn.
+अगर आपका अनुरोध 400 या 500 गड़बड़ी की वजह से पूरा नहीं होता है, तो इस्तेमाल किए गए टोकन के लिए आपसे शुल्क नहीं लिया जाएगा. हालांकि, अनुरोध को अब भी आपके कोटे में गिना जाएगा.
 
-### `GetTokens` có bị tính phí không?
+### क्या `GetTokens` का बिल भेजा गया है?
 
-Các yêu cầu gửi đến API `GetTokens` không bị tính phí và không được tính vào hạn mức suy luận.
+`GetTokens` API के अनुरोधों के लिए बिल नहीं भेजा जाता. साथ ही, इन्हें अनुमान लगाने के कोटा में शामिल नहीं किया जाता.
 
-### Dữ liệu của tôi trên Google AI Studio được xử lý như thế nào nếu tôi có tài khoản API trả phí?
+### अगर मेरे पास पैसे चुकाकर लिया गया API खाता है, तो मेरे Google AI Studio के डेटा का रखरखाव कैसे किया जाता है?
 
-Tham khảo [Điều khoản dịch vụ](https://ai.google.dev/gemini-api/docs/Điều khoản dịch vụ) để biết thông tin chi tiết về cách dữ liệu được xử lý khi bạn bật tính năng thanh toán qua Cloud (xem phần "Cách Google sử dụng dữ liệu của bạn" trong mục "Dịch vụ có tính phí"). Xin lưu ý rằng các câu lệnh của bạn trên Google AI Studio sẽ được xử lý theo các điều khoản tương tự như "Dịch vụ có tính phí" miễn là có ít nhất 1 dự án API đã bật tính năng thanh toán. Bạn có thể xác thực điều này trên [trang khoá Gemini API](https://ai.google.dev/gemini-api/docs/trang khoá Gemini API) nếu thấy bất kỳ dự án nào được đánh dấu là "Có tính phí" trong mục "Gói".
+Cloud Billing चालू होने पर डेटा को कैसे मैनेज किया जाता है, इस बारे में जानने के लिए [सेवा की शर्तें](https://ai.google.dev/gemini-api/terms?hl=hi#paid-services) पढ़ें. "पैसे लेकर दी जाने वाली सेवाएं" में जाकर "Google आपके डेटा का इस्तेमाल कैसे करता है" सेक्शन देखें. ध्यान दें कि Google AI Studio में दिए गए आपके प्रॉम्प्ट, "पैसे चुकाकर ली जाने वाली सेवाएं" की शर्तों के तहत आते हैं. ऐसा तब तक होता है, जब तक कम से कम एक एपीआई प्रोजेक्ट के लिए बिलिंग की सुविधा चालू रहती है. इसकी पुष्टि [Gemini API पासकोड वाले पेज](https://aistudio.google.com/api-keys?hl=hi) पर की जा सकती है. अगर आपको "प्लान" में कोई प्रोजेक्ट "पैसे चुकाकर ली जाने वाली सेवा" के तौर पर मार्क किया गया दिखता है, तो इसकी पुष्टि की जा सकती है.
 
-### Thanh toán trả trước là gì và những ai phải sử dụng mô hình thanh toán trả trước?
+### प्रीपेड बिलिंग क्या है और प्रीपेड बिलिंग मॉडल का इस्तेमाल किसे करना चाहिए?
 
-Tính năng thanh toán trả trước cho phép người dùng Gemini API trong AI Studio mua trước tín dụng.
-Kể từ ngày 23 tháng 3 năm 2026, người dùng mới của AI Studio có thể phải sử dụng gói thanh toán trả trước. Trong quá trình [Thiết lập thông tin thanh toán](https://ai.google.dev/gemini-api/docs/Thiết lập thông tin thanh toán) trên AI Studio, giao diện người dùng sẽ hướng dẫn bạn thực hiện quy trình thiết lập thông tin thanh toán và cho biết liệu bạn có phải trả trước hay không.
+प्रीपेड बिलिंग की सुविधा की मदद से, AI Studio में Gemini API का इस्तेमाल करने वाले लोग, क्रेडिट पहले से खरीद सकते हैं.
+ऐसा हो सकता है कि 23 मार्च, 2026 से, AI Studio का इस्तेमाल करने वाले नए लोगों को प्रीपेड बिलिंग प्लान लेना पड़े. AI Studio में [बिलिंग सेट अप करने](#setup-billing) की प्रोसेस के दौरान, यूज़र इंटरफ़ेस (यूआई) आपको बिलिंग सेट अप करने के तरीके के बारे में बताएगा. साथ ही, यह भी बताएगा कि आपको पहले से पेमेंट करना है या नहीं.
 
-### Làm cách nào để mua tín dụng trả trước và có hạn mức tối thiểu hoặc tối đa không?
+### मैं पहले से पेमेंट करके क्रेडिट कैसे खरीदूं? क्या इसके लिए, कम से कम या ज़्यादा से ज़्यादा राशि तय की गई है?
 
-Bạn có thể [mua tín dụng](https://ai.google.dev/gemini-api/docs/mua tín dụng) trên trang Thanh toán của AI Studio. Trong quá trình mua, giao diện người dùng sẽ cung cấp số tiền tối thiểu cần có trước khi mua theo khu vực và cấp độ của bạn, cũng như số tiền tối đa có thể có trong tài khoản của bạn tại một thời điểm.
+AI Studio के बिलिंग पेज पर जाकर, [क्रेडिट खरीदे](#buy-credits) जा सकते हैं. खरीदारी की प्रोसेस के दौरान, यूज़र इंटरफ़ेस (यूआई) में, खरीदारी से पहले कम से कम उतनी रकम दिखाई जाएगी जितनी आपके देश/इलाके और टियर लेवल के लिए ज़रूरी है. साथ ही, इसमें वह ज़्यादा से ज़्यादा रकम भी दिखाई जाएगी जो आपके खाते में एक बार में हो सकती है.
 
-### Tôi có thể định cấu hình tài khoản trả trước để tự động mua thêm tín dụng khi cần không?
+### क्या मैं अपने प्रीपेड खाते को इस तरह कॉन्फ़िगर कर सकता हूं कि ज़रूरत पड़ने पर, क्रेडिट अपने-आप खरीदे जाएं?
 
-Có, bạn nên thiết lập chế độ [tự động nạp tiền](https://ai.google.dev/gemini-api/docs/tự động nạp tiền) trong phần Cài đặt thanh toán của AI Studio. Bạn chỉ định số dư tín dụng "kích hoạt" (ví dụ: "khi số dư của tôi giảm xuống dưới 30 USD") và "giá trị nạp lại" (ví dụ: "thêm 1.000.000 VND").
+हां, हमारा सुझाव है कि आप AI Studio की बिलिंग सेटिंग में जाकर, [अपने-आप रीलोड होने की सुविधा](#auto-reload) कॉन्फ़िगर करें. आपको "ट्रिगर" क्रेडिट बैलेंस (जैसे, "जब मेरा बैलेंस 3,000 रुपये से कम हो जाए") और "रीलोड वैल्यू" (जैसे, "10,000 रुपये जोड़ें") तय करनी होती है.
 
-### Tôi có thể yêu cầu hoàn tiền cho những khoản tín dụng chưa sử dụng không?
+### क्या मुझे इस्तेमाल न किए गए क्रेडिट का रिफ़ंड मिल सकता है?
 
-Tất cả các khoản tín dụng API trả trước đều hết hạn sau 1 năm và không được hoàn tiền. Đọc [chính sách hoàn tiền cho tài khoản trả trước](https://ai.google.dev/gemini-api/docs/chính sách hoàn tiền cho tài khoản trả trước).
+प्रीपेड एपीआई क्रेडिट, एक साल बाद खत्म हो जाते हैं. इनका रिफ़ंड नहीं मिल सकता. [प्रीपे खाते के लिए रिफ़ंड नीति](#refunds) पढ़ें.
 
-### Các khoản tín dụng trả trước của tôi có hết hạn không?
+### क्या मेरे प्रीपेड क्रेडिट की समयसीमा खत्म हो जाती है?
 
-Có, tín dụng sẽ hết hạn sau 12 tháng kể từ ngày mua.
+हां, क्रेडिट खरीदने की तारीख से 12 महीने बाद खत्म हो जाते हैं.
 
-### Điều gì sẽ xảy ra khi số dư tín dụng trả trước của tôi đạt mức 0?
+### प्रीपेड क्रेडिट बैलेंस शून्य होने पर क्या होता है?
 
-Tất cả các dịch vụ Gemini API trong mọi dự án được thanh toán bằng tài khoản Thanh toán trước trên Google Cloud đó sẽ ngừng hoạt động ngay lập tức để tránh phát sinh thêm phí. Các dự án của bạn sẽ không tự động hạ cấp xuống Hạng miễn phí.
+उस क्लाउड बिलिंग प्रीपे खाते से जुड़े सभी प्रोजेक्ट में, Gemini API की सभी सेवाएं तुरंत बंद हो जाएंगी, ताकि आपसे ज़्यादा शुल्क न लिया जाए. आपके प्रोजेक्ट, फ़्री टीयर में अपने-आप डाउनग्रेड नहीं होते.
 
-Để khôi phục dịch vụ ở Cấp có tính phí hiện tại, bạn phải [mua thêm tín dụng](https://ai.google.dev/gemini-api/docs/mua thêm tín dụng). Sau khi mua tín dụng, bạn có thể sử dụng Gemini API. Xin lưu ý rằng có thể có [độ trễ](https://ai.google.dev/gemini-api/docs/độ trễ) trong khi hệ thống của chúng tôi cập nhật để phản ánh số dư tín dụng của bạn.
+पैसे चुकाकर ली गई सदस्यता के मौजूदा टियर के लेवल पर सेवा को वापस पाने के लिए, आपको [ज़्यादा क्रेडिट खरीदने](#buy-credits) होंगे. क्रेडिट खरीदने के बाद, आपको Gemini API का इस्तेमाल करने की सुविधा मिलनी चाहिए. ध्यान दें कि क्रेडिट बैलेंस दिखने में [थोड़ा समय](#processing-times) लग सकता है, क्योंकि हमारे सिस्टम अपडेट होते हैं.
 
-Nếu muốn hạ cấp xuống Bậc miễn phí, bạn có thể [tắt tính năng thanh toán](https://ai.google.dev/gemini-api/docs/tắt tính năng thanh toán) cho các dự án mà bạn muốn hạ cấp.
+इसके अलावा, अगर आपको बिना शुल्क वाले टियर पर डाउनग्रेड करना है, तो उन प्रोजेक्ट के लिए [बिलिंग बंद करें](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=hi#disable_billing_for_a_project) जिन्हें आपको डाउनग्रेड करना है.
 
-### Tại sao mức sử dụng của tôi dừng lại mặc dù số dư tín dụng trả trước của tôi lớn hơn 0 đô la?
+### मेरे प्रीपेड क्रेडिट बैलेंस में 0 डॉलर से ज़्यादा रकम होने के बावजूद, मेरी सेवा का इस्तेमाल क्यों बंद कर दिया गया?
 
-Bạn có thể đã đạt đến [hạn mức sử dụng](https://ai.google.dev/gemini-api/docs/hạn mức sử dụng) cho cấp hiện tại của mình.
-Hạn mức sử dụng sẽ tự động tăng lên khi bạn chuyển sang các cấp cao hơn. Mức sử dụng Gemini API trong AI Studio cũng có thể bị ảnh hưởng do [trạng thái của Tài khoản thanh toán trên đám mây](https://ai.google.dev/gemini-api/docs/trạng thái của Tài khoản thanh toán trên đám mây).
+ऐसा हो सकता है कि आपने अपने मौजूदा टियर के लिए, [इस्तेमाल की सीमा](#tier-spend-caps) पूरी कर ली हो.
+ऊंचे टियर पर पहुंचने पर, इस्तेमाल की सीमाएं अपने-आप बढ़ जाएंगी. [आपके Cloud Billing खाते की स्थिति](#missed-payment) की वजह से, Gemini API के AI Studio के इस्तेमाल पर भी असर पड़ सकता है.
 
-### Tại sao số dư tín dụng trong tài khoản trả trước của tôi lại âm?
+### मेरे प्रीपे खाते का क्रेडिट बैलेंस नेगेटिव क्यों है?
 
-Do hệ thống thanh toán và xử lý phức tạp của chúng tôi, có thể xảy ra [tình trạng chậm trễ](https://ai.google.dev/gemini-api/docs/tình trạng chậm trễ) trong việc chúng tôi ngừng tính phí sử dụng sau khi bạn sử dụng hết tất cả các khoản tín dụng. Mức sử dụng vượt quá này có thể xuất hiện dưới dạng số dư tín dụng âm trong trang tổng quan thanh toán của AI Studio. Nếu điều này xảy ra, dịch vụ của bạn sẽ bị tạm dừng và số dư âm sẽ được trừ vào lần mua tín dụng tiếp theo.
+हमारे बिलिंग और प्रोसेसिंग सिस्टम जटिल हैं. इसलिए, हो सकता है कि सभी क्रेडिट इस्तेमाल कर लेने के बाद, हम आपके खाते में क्रेडिट का इस्तेमाल [तुरंत बंद न कर पाएं](#processing-times). ज़्यादा इस्तेमाल करने पर, आपको AI Studio के बिलिंग डैशबोर्ड में नेगेटिव क्रेडिट बैलेंस दिख सकता है. ऐसा होने पर, आपकी सेवा रोक दी जाती है. साथ ही, आपके खाते में मौजूद नेगेटिव बैलेंस को अगली बार क्रेडिट खरीदने पर काट लिया जाएगा.
 
-Để tránh bị tạm dừng dịch vụ Gemini API, bạn nên thiết lập tính năng [tự động nạp tiền](https://ai.google.dev/gemini-api/docs/tự động nạp tiền) để tự động mua thêm tín dụng khi số dư tín dụng của bạn giảm xuống dưới một giá trị mà bạn chỉ định.
+Gemini API की सेवा में रुकावट न आए, इसके लिए हमारा सुझाव है कि [ऑटो-रीलोड](#auto-reload) की सुविधा सेट अप करें. इससे आपके खाते में क्रेडिट अपने-आप जुड़ जाएंगे. ऐसा तब होगा, जब आपके खाते में क्रेडिट का बैलेंस, आपकी तय की गई सीमा से कम हो जाएगा.
 
-### Tôi có thể sử dụng khoản tín dụng trả trước cho các dịch vụ khác của Google Cloud, chẳng hạn như Nền tảng tác nhân Gemini Enterprise không?
+### क्या प्रीपे क्रेडिट का इस्तेमाल, Google Cloud की अन्य सेवाओं के लिए किया जा सकता है? जैसे, Gemini Enterprise Agent Platform.
 
-Không. Khoản tín dụng trả trước chỉ được dùng cho việc sử dụng Gemini API. Mọi dịch vụ khác của Google Cloud mà bạn sử dụng (Điện toán, Lưu trữ, Nền tảng tác nhân Gemini Enterprise) đều được tính phí theo [chu kỳ tính phí tiêu chuẩn của Cloud](https://ai.google.dev/gemini-api/docs/chu kỳ tính phí tiêu chuẩn của Cloud).
+नहीं, प्रीपे क्रेडिट का इस्तेमाल सिर्फ़ Gemini API के लिए किया जा सकता है. Google Cloud की अन्य सेवाओं (जैसे, Compute, Storage, Gemini Enterprise Agent Platform) के लिए, [Cloud के स्टैंडर्ड बिलिंग साइकल](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=hi) के हिसाब से बिल भेजा जाता है.
 
-### Tôi có thể chuyển sang gói thanh toán trả sau không?
+### क्या मेरे पास बाद में पैसे चुकाने वाले बिलिंग प्लान पर स्विच करने का विकल्प है?
 
-Khi đã có nhật ký thanh toán và [đạt đến bậc đủ điều kiện](https://ai.google.dev/gemini-api/docs/đạt đến bậc đủ điều kiện) để sử dụng gói thanh toán Trả sau, bạn có thể chọn chuyển tất cả các khoản phí sử dụng Gemini API trong tương lai sang [chu kỳ tính phí Trả sau](https://ai.google.dev/gemini-api/docs/chu kỳ tính phí Trả sau) tiêu chuẩn, hợp nhất của Google Cloud.
+पेमेंट का इतिहास बनने और पोस्टपे बिलिंग प्लान के लिए [ज़रूरी शर्तें पूरी करने](#about-billing) के बाद, आपके पास यह विकल्प होता है कि Gemini API के इस्तेमाल से जुड़े सभी शुल्कों को Google Cloud के स्टैंडर्ड, कंसोलिडेटेड [पोस्टपे चार्जिंग साइकल](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=hi#view-your-charging-cycle) पर स्विच कर दिया जाए.
 
-### Điều gì sẽ xảy ra với các khoản tín dụng trả trước của tôi nếu tôi chuyển sang gói trả sau?
+### पोस्टपे में स्विच करने पर, मेरे प्रीपेड क्रेडिट का क्या होगा?
 
-Khi bạn nâng cấp lên gói [Trả sau](https://ai.google.dev/gemini-api/docs/Trả sau), Cloud Billing sẽ đóng tài khoản thanh toán Trả trước của bạn, tắt tính năng [tự động nạp tiền](https://ai.google.dev/gemini-api/docs/tự động nạp tiền) và tự động hoàn trả mọi khoản tín dụng Trả trước chưa sử dụng cho bạn (tuỳ thuộc vào thời gian xử lý hoàn tiền tiêu chuẩn).
+[पोस्टपे](#postpay) पर अपग्रेड करने पर, Cloud Billing आपके प्रीपेड पेमेंट्स खाते को बंद कर देता है. साथ ही, [अपने-आप रीलोड होने की सुविधा](#auto-reload) को बंद कर देता है. इसके अलावा, बिना इस्तेमाल किए गए प्रीपेड क्रेडिट का रिफ़ंड आपको अपने-आप मिल जाता है. हालांकि, रिफ़ंड प्रोसेस होने में लगने वाला समय, सामान्य समय के हिसाब से होता है.
 
-### Tôi có thể xem số dư tín dụng trả trước hiện tại và nhật ký giao dịch ở đâu?
+### मुझे प्रीपेड क्रेडिट का मौजूदा बैलेंस और लेन-देन का इतिहास कहां दिखेगा?
 
-Bạn phải quản lý số dư và xem nhật ký giao dịch của Gemini API ngay trong thẻ Thanh toán của Google AI Studio.
+Gemini API के लिए, बैलेंस को मैनेज करने और लेन-देन का इतिहास देखने से जुड़ी सभी कार्रवाइयां, सीधे Google AI Studio के बिलिंग टैब में की जानी चाहिए.
 
-### Tại sao tôi thấy thông báo "Loại tài khoản thanh toán không hoạt động hoặc không được hỗ trợ"?
+### मुझे "बिलिंग खाते का टाइप बंद है या इसका इस्तेमाल नहीं किया जा सकता" मैसेज क्यों दिख रहा है?
 
-Các hoạt động thanh toán trên [trang Thanh toán của AI Studio](https://ai.google.dev/gemini-api/docs/trang Thanh toán của AI Studio) có thể bị chặn và thay thế bằng thông báo "Loại tài khoản thanh toán không hoạt động hoặc không được hỗ trợ" nếu loại tài khoản thanh toán hoặc trạng thái tài khoản thanh toán mà bạn chọn không đủ điều kiện sử dụng Cấp có tính phí trong AI Studio.
+अगर आपने ऐसा बिलिंग खाता चुना है या आपके बिलिंग खाते का स्टेटस ऐसा है जो AI Studio के पेड टियर के लिए ज़रूरी शर्तें पूरी नहीं करता, तो [AI Studio के बिलिंग पेज](https://aistudio.google.com/billing?hl=hi) पर पेमेंट से जुड़ी कार्रवाइयां ब्लॉक की जा सकती हैं. साथ ही, आपको यह मैसेज दिख सकता है: "बिलिंग खाते का टाइप चालू नहीं है या इसका इस्तेमाल नहीं किया जा सकता".
 
-Kiểm tra [Cloud Console](https://ai.google.dev/gemini-api/docs/Cloud Console) để xem trạng thái của tài khoản thanh toán. Một loại tài khoản không đủ điều kiện có thể là *Tài khoản dùng thử miễn phí*. Trong trường hợp này, bạn có thể [kích hoạt tính năng thanh toán](https://ai.google.dev/gemini-api/docs/kích hoạt tính năng thanh toán) trong AI Studio để đủ điều kiện. Một trạng thái không hoạt động có thể là *Đã đóng*. Trong trường hợp này, bạn có thể [mở lại tài khoản](https://ai.google.dev/gemini-api/docs/mở lại tài khoản).
+अपने बिलिंग खाते की स्थिति देखने के लिए, [Cloud Console](https://console.cloud.google.com/billing/?hl=hi) पर जाएं. *मुफ़्त में आज़माने के लिए बनाया गया खाता*, एक ऐसा खाता है जिसका इस्तेमाल नहीं किया जा सकता. ऐसे में, AI Studio में [बिलिंग की सुविधा चालू करें](#setup-billing), ताकि इसका इस्तेमाल किया जा सके. खाते की स्थिति *बंद किया गया* हो सकती है. ऐसे में, [खाता फिर से खोला](https://docs.cloud.google.com/billing/docs/how-to/close-or-reopen-billing-account?hl=hi) जा सकता है.
 
-### Chi phí sử dụng Gemini API của tôi có xuất hiện trong bảng điều khiển Cloud không?
+### क्या Gemini API के इस्तेमाल से जुड़ी लागत, Google Cloud Console में दिखेगी?
 
-Có, bạn có thể xem chi phí của Gemini API cùng với chi phí liên quan đến mọi dịch vụ khác của Google Cloud mà tài khoản thanh toán Cloud của bạn thanh toán trên [các trang Quản lý chi phí](https://ai.google.dev/gemini-api/docs/các trang Quản lý chi phí) trong [bảng điều khiển Thanh toán Cloud](https://ai.google.dev/gemini-api/docs/bảng điều khiển Thanh toán Cloud). Xin lưu ý rằng bạn chỉ có thể quản lý số dư tín dụng trả trước trong AI Studio.
+हां, Gemini API के शुल्क के साथ-साथ Google Cloud की उन सभी सेवाओं के शुल्क भी देखे जा सकते हैं जिनके लिए आपके क्लाउड बिलिंग खाते से पेमेंट किया जाता है. ये शुल्क, [Cloud Billing console](https://console.cloud.google.com/billing?hl=hi) में [लागत मैनेजमेंट पेजों](https://docs.cloud.google.com/billing/docs/how-to/split-charging-cycle?hl=hi#cost-reports) पर देखे जा सकते हैं. ध्यान दें कि प्रीपे क्रेडिट बैलेंस को सिर्फ़ AI Studio में मैनेज किया जा सकता है.
 
-### Tại sao mức sử dụng Gemini API của tôi không xuất hiện trong Cloud Billing Console, mặc dù tôi có thể thấy mức sử dụng này trong phần Thanh toán của AI Studio, cùng với mức sử dụng tín dụng của tôi?
+### मुझे AI Studio में Gemini API के इस्तेमाल और क्रेडिट के इस्तेमाल की जानकारी दिख रही है. हालांकि, Cloud Billing Console में यह जानकारी नहीं दिख रही है. ऐसा क्यों हो रहा है?
 
-Google Cloud và AI Studio báo cáo dữ liệu sử dụng cho Cloud Billing theo các khoảng thời gian khác nhau. Do hệ thống thanh toán và xử lý của chúng tôi khá phức tạp, nên có thể bạn sẽ thấy độ trễ giữa thời điểm bạn sử dụng dịch vụ và thời điểm bạn có thể xem mức sử dụng cũng như chi phí trong phần Thanh toán trên Cloud. Thông thường, thông tin chi tiết về chi phí sẽ có trong vòng một ngày, nhưng đôi khi có thể mất hơn 24 giờ.
-Tìm hiểu thêm về tính năng thanh toán chậm trong [tài liệu về Thanh toán trên đám mây](https://ai.google.dev/gemini-api/docs/tài liệu về Thanh toán trên đám mây).
+Google Cloud और AI Studio, इस्तेमाल से जुड़ा डेटा अलग-अलग समय पर Cloud Billing को भेजते हैं. हमारे बिलिंग और प्रोसेसिंग सिस्टम जटिल हैं. इसलिए, हो सकता है कि आपको सेवाओं के इस्तेमाल और Cloud Billing में इस्तेमाल और लागत की जानकारी दिखने में कुछ समय लगे. आम तौर पर, लागत की जानकारी एक दिन में उपलब्ध हो जाती है. हालांकि, कभी-कभी इसमें 24 घंटे से ज़्यादा समय लग सकता है.
+[Cloud Billing के दस्तावेज़](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=hi#delayed-billing) में, बिलिंग में देरी होने के बारे में ज़्यादा जानें.
 
-### Nếu tôi sử dụng các dịch vụ khác của Google Cloud có chi phí phải chịu chu kỳ tính phí trả sau, thì điều gì sẽ xảy ra nếu tôi không thanh toán đúng hạn?
+### अगर मैंने Google Cloud की ऐसी अन्य सेवाओं का इस्तेमाल किया है जिनके लिए पोस्टपे बिलिंग का इस्तेमाल किया जाता है, तो पेमेंट न करने पर क्या होगा?
 
-Nếu bạn không thanh toán cho các dịch vụ khác của Google Cloud, thì quyền truy cập Gemini API của bạn trong AI Studio có thể bị tạm ngưng, **bất kể bạn có bao nhiêu tín dụng trả trước**. Việc sử dụng AI Studio được hỗ trợ bởi một tài khoản thanh toán Google Cloud. Tài khoản này có thể dùng cả phương thức thanh toán trả trước cho AI Studio và phương thức thanh toán trả sau cho các dịch vụ khác trên Cloud. Sự cố liên quan đến số dư trả sau sẽ khiến tất cả các dịch vụ liên kết với tài khoản đó bị tạm dừng. Việc sử dụng Gemini API của bạn sẽ bị tạm ngưng nếu Tài khoản thanh toán trên Cloud của bạn bị gắn cờ vì các vấn đề như:
+Google Cloud की अन्य सेवाओं के लिए पेमेंट न करने पर, AI Studio में Gemini API का ऐक्सेस निलंबित किया जा सकता है. **इससे कोई फ़र्क़ नहीं पड़ता कि आपके पास कितने प्रीपेड क्रेडिट उपलब्ध हैं**. AI Studio का इस्तेमाल, Google Cloud के बिलिंग खाते से किया जाता है. इस खाते से, AI Studio के लिए प्रीपे बिलिंग और Cloud की अन्य सेवाओं के लिए पोस्टपे बिलिंग, दोनों को शेयर किया जा सकता है. Postpay के बैलेंस से जुड़ी समस्या की वजह से, उस खाते से जुड़ी सभी सेवाएं बंद हो जाती हैं. अगर आपके क्लाउड बिलिंग खाते में ये समस्याएं पाई जाती हैं, तो Gemini API का इस्तेमाल निलंबित कर दिया जाएगा:
 
-- Số dư quá hạn hoặc chưa thanh toán
-- Khoản thanh toán bị từ chối
-- Phương thức thanh toán không hợp lệ hoặc đã hết hạn
+- बकाया या समयसीमा खत्म हो चुका बैलेंस
+- पेमेंट अस्वीकार किया गया हो
+- पेमेंट का अमान्य तरीका या जिसकी समयसीमा खत्म हो गई हो
 
-Để khôi phục dịch vụ, bạn phải [giải quyết vấn đề về tài khoản trả sau](https://ai.google.dev/gemini-api/docs/giải quyết vấn đề về tài khoản trả sau) trong bảng điều khiển Thanh toán của Google Cloud. Sau khi giải quyết vấn đề, bạn sẽ lấy lại được quyền truy cập vào các khoản tín dụng và dịch vụ Gemini API trả trước.
+सेवा वापस पाने के लिए, आपको Google Cloud Billing Console में जाकर, [पोस्टपे खाते से जुड़ी समस्या हल करनी होगी](https://docs.cloud.google.com/billing/docs/how-to/resolve-issues?hl=hi#resolving-declined-payments). समस्या हल होने के बाद, आपको Gemini API के प्रीपेड क्रेडिट और सेवाओं का ऐक्सेस फिर से मिल जाएगा.
 
-### Tôi có thể yêu cầu trợ giúp về việc thanh toán ở đâu?
+### मुझे बिलिंग से जुड़ी सहायता कहां से मिल सकती है?
 
-Để được trợ giúp về việc thanh toán, hãy xem phần [Yêu cầu hỗ trợ về việc thanh toán trên Cloud](https://ai.google.dev/gemini-api/docs/Yêu cầu hỗ trợ về việc thanh toán trên Cloud).
+बिलिंग से जुड़ी सहायता पाने के लिए, [क्लाउड बिलिंग सहायता टीम से संपर्क करें](https://cloud.google.com/support/billing?hl=hi) लेख पढ़ें.
 
-Gửi ý kiến phản hồi
+सुझाव भेजें
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://ai.google.dev/gemini-api/docs/Giấy phép ghi nhận tác giả 4.0 của Creative Commons) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://ai.google.dev/gemini-api/docs/Giấy phép Apache 2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://ai.google.dev/gemini-api/docs/Chính sách trang web của Google Developers). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Cập nhật lần gần đây nhất: 2026-04-28 UTC.
+आखिरी बार 2026-04-28 (UTC) को अपडेट किया गया.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+क्या आपको हमें और कुछ बताना है?
+
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-04-28 (UTC) को अपडेट किया गया."],[],[]]

@@ -1,42 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=ja
-fetched_at: 2026-05-05T13:11:00.712609+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=vi
+fetched_at: 2026-05-05T19:42:42.687580+00:00
 title: "Veo 3.1 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-フィードバックを送信
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+
+Gửi ý kiến phản hồi
 
 # Veo 3.1
 
-ハイエンドのクリエイティブなストーリーテリングと実験的な動画制作向けに設計された最先端のシネマティック エンジン。Veo 3.1 は、プロフェッショナル グレードの 4K 出力、ネイティブに同期された音声生成、最高レベルの時間的整合性と芸術的なコントロールを必要とする複雑なカメラワークに最適です。
+Một công cụ điện ảnh hiện đại được thiết kế để kể chuyện sáng tạo cao cấp và sản xuất video thử nghiệm. Veo 3.1 phù hợp nhất với đầu ra 4K ở cấp độ chuyên nghiệp, tạo âm thanh được đồng bộ hoá tự nhiên và các chuyển động phức tạp của máy quay đòi hỏi mức độ nhất quán cao nhất về thời gian và khả năng kiểm soát nghệ thuật.
 
-[Google AI Studio で試す](https://aistudio.google.com?model=veo-3.1-generate-preview&hl=ja)
+[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=veo-3.1-generate-preview&hl=vi)
 
-## ドキュメント
+## Tài liệu
 
-機能と機能の詳細については、[動画生成](https://ai.google.dev/gemini-api/docs/video?hl=ja)のページをご覧ください。
+Hãy truy cập vào trang [Tạo video](https://ai.google.dev/gemini-api/docs/video?hl=vi) để xem toàn bộ các tính năng và chức năng.
 
 ## veo-3.1-generate-preview
 
-| プロパティ | 説明 |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardModel コード | **Gemini API**  `veo-3.1-generate-preview`  `veo-3.1-fast-generate-preview` |
-| saveサポートされるデータタイプ | **入力**  テキスト、画像  **出力**  音声付きの動画 |
-| token\_auto上限 | **テキスト入力**  1,024 トークン  **出力動画**  1 |
-| calendar\_month最終更新日 | 2026 年 1 月 |
+| id\_cardMã mô hình | **Gemini API**  `veo-3.1-generate-preview`  `veo-3.1-fast-generate-preview` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, Hình ảnh  **Đầu ra**  Video có âm thanh |
+| token\_autoLimits | **Văn bản đầu vào**  1.024 token  **Video đầu ra**  1 |
+| calendar\_monthNội dung cập nhật mới nhất | Tháng 1 năm 2026 |
 
-フィードバックを送信
+Gửi ý kiến phản hồi
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-最終更新日 2026-04-29 UTC。
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-ご意見をお聞かせください
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

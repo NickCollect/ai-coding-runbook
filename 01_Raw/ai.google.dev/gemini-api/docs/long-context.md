@@ -1,138 +1,142 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/long-context?hl=vi
-fetched_at: 2026-05-05T13:17:24.969219+00:00
-title: "Ng\u1eef c\u1ea3nh d\u00e0i \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/long-context?hl=ar
+fetched_at: 2026-05-05T19:51:11.502633+00:00
+title: "\u0633\u064a\u0627\u0642 \u0637\u0648\u064a\u0644 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/Tính năng Nghiên cứu chuyên sâu của Gemini) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-- [Trang chủ](https://ai.google.dev/gemini-api/docs/Trang chủ)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs/Tài liệu)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Gửi ý kiến phản hồi
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Ngữ cảnh dài
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Nhiều mô hình Gemini có cửa sổ ngữ cảnh lớn gồm 1 triệu token trở lên.
-Trước đây, các mô hình ngôn ngữ lớn (LLM) bị hạn chế đáng kể về lượng văn bản (hoặc token) có thể được truyền đến mô hình cùng một lúc.
-Cửa sổ ngữ cảnh dài của Gemini mở ra nhiều trường hợp sử dụng và mô hình nhà phát triển mới.
+إرسال ملاحظات
 
-Mã mà bạn đã sử dụng cho các trường hợp như [văn bản
-tạo](https://ai.google.dev/gemini-api/docs/văn bảntạo) hoặc [đa phương thức
-đầu vào](https://ai.google.dev/gemini-api/docs/đa phương thứcđầu vào) sẽ hoạt động mà không cần thay đổi gì với ngữ cảnh dài.
+# سياق طويل
 
-Tài liệu này cung cấp cho bạn thông tin tổng quan về những gì bạn có thể đạt được khi sử dụng các mô hình có cửa sổ ngữ cảnh gồm 1 triệu token trở lên. Trang này cung cấp thông tin tổng quan ngắn gọn về cửa sổ ngữ cảnh, đồng thời khám phá cách nhà phát triển nên suy nghĩ về ngữ cảnh dài, các trường hợp sử dụng ngữ cảnh dài trong thế giới thực và cách tối ưu hoá việc sử dụng ngữ cảnh dài.
+تتضمّن العديد من طُرز Gemini قدرة استيعاب كبيرة تصل إلى مليون رمز مميّز أو أكثر.
+في السابق، كانت النماذج اللغوية الكبيرة (LLM) محدودة بشكل كبير بسبب كمية النص (أو الرموز المميزة) التي يمكن تمريرها إلى النموذج في وقت واحد.
+تتيح قدرة الاستيعاب الموسَّعة في Gemini العديد من حالات الاستخدام الجديدة ونماذج المطوّرين.
 
-Để biết kích thước cửa sổ ngữ cảnh của các mô hình cụ thể, hãy xem trang
-[Mô hình](https://ai.google.dev/gemini-api/docs/Mô hình).
+سيعمل الرمز الذي تستخدمه حاليًا في حالات مثل [إنشاء
+النصوص](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar) أو [المدخلات
+المتعددة الوسائط](https://ai.google.dev/gemini-api/docs/vision?hl=ar) بدون أي تغييرات مع السياق الطويل.
 
-## Cửa sổ ngữ cảnh là gì?
+يقدّم لك هذا المستند نظرة عامة على ما يمكنك تحقيقه باستخدام نماذج تتضمّن نوافذ سياق تتضمّن مليون رمز مميّز أو أكثر. تقدّم الصفحة نظرة عامة موجزة حول قدرة الاستيعاب، وتستكشف كيفية الاستفادة من قدرة الاستيعاب الموسَّعة، وحالات الاستخدام المختلفة في العالم الواقعي، وطرق تحسين الاستخدام.
 
-Cách cơ bản để bạn sử dụng các mô hình Gemini là truyền thông tin (ngữ cảnh) đến mô hình. Sau đó, mô hình sẽ tạo ra phản hồi. Bạn có thể hình dung cửa sổ ngữ cảnh giống như trí nhớ ngắn hạn. Bộ nhớ ngắn hạn của một người chỉ có thể lưu trữ một lượng thông tin có hạn và điều này cũng đúng với các mô hình tạo sinh.
+للاطّلاع على أحجام قدرة استيعاب نماذج معيّنة، يُرجى الانتقال إلى صفحة [النماذج](https://ai.google.dev/gemini-api/docs/models?hl=ar).
 
-Bạn có thể đọc thêm về cách các mô hình hoạt động ở bên trong trong hướng dẫn về [mô hình tạo sinh](https://ai.google.dev/gemini-api/docs/mô hình tạo sinh).
+## ما هي قدرة الاستيعاب؟
 
-## Bắt đầu sử dụng ngữ cảnh dài
+تتمثّل الطريقة الأساسية لاستخدام نماذج Gemini في تمرير المعلومات (السياق) إلى النموذج، الذي سينشئ بعد ذلك ردًا. يمكن تشبيه قدرة استيعاب السياق بالذاكرة قصيرة المدى. هناك كمية محدودة من المعلومات التي يمكن تخزينها في الذاكرة القصيرة المدى لدى الشخص، وينطبق الأمر نفسه على النماذج التوليدية.
 
-Các phiên bản trước của mô hình tạo sinh chỉ có thể xử lý 8.000 token cùng một lúc. Các mô hình mới hơn đã đẩy con số này lên cao hơn bằng cách chấp nhận 32.000 hoặc thậm chí 128.000 token. Gemini là mô hình đầu tiên có khả năng chấp nhận 1 triệu token.
+يمكنك الاطّلاع على مزيد من المعلومات حول طريقة عمل النماذج في [دليل النماذج التوليدية](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ar#under-the-hood).
 
-Trong thực tế, 1 triệu token sẽ có dạng như sau:
+## بدء استخدام ميزة "السياق الطويل"
 
-- 50.000 dòng mã (với 80 ký tự tiêu chuẩn mỗi dòng)
-- Tất cả tin nhắn văn bản bạn đã gửi trong 5 năm qua
-- 8 tiểu thuyết tiếng Anh có độ dài trung bình
-- Bản chép lời của hơn 200 tập podcast có độ dài trung bình
+في السابق، كانت الإصدارات الأقدم من النماذج التوليدية قادرة على معالجة 8,000 رمز مميز فقط في المرة الواحدة. وقد ذهبت الطُرز الأحدث إلى أبعد من ذلك من خلال قبول 32,000 أو حتى 128,000 رمز مميز. ‫Gemini هو أول نموذج يمكنه قبول مليون رمز مميّز.
 
-Các cửa sổ ngữ cảnh hạn chế hơn thường thấy trong nhiều mô hình khác thường yêu cầu các chiến lược như tự ý loại bỏ tin nhắn cũ, tóm tắt nội dung, sử dụng RAG với cơ sở dữ liệu vectơ hoặc lọc câu lệnh để lưu token.
+في الواقع، سيبدو مليون رمز مميز على النحو التالي:
 
-Mặc dù các kỹ thuật này vẫn có giá trị trong các trường hợp cụ thể, nhưng cửa sổ ngữ cảnh mở rộng của Gemini mời bạn áp dụng một phương pháp trực tiếp hơn: cung cấp trước tất cả thông tin có liên quan. Vì các mô hình Gemini được xây dựng có mục đích với khả năng ngữ cảnh lớn, nên chúng thể hiện khả năng học tập mạnh mẽ trong ngữ cảnh. [Ví dụ: chỉ sử dụng tài liệu hướng dẫn trong ngữ cảnh (một ngữ pháp tham khảo gồm 500 trang, một từ điển và ≈400 câu song song), Gemini đã học cách dịch từ tiếng Anh sang tiếng Kalamang – một ngôn ngữ Papua có ít hơn 200 người nói – với chất lượng tương tự như một người học là con người sử dụng cùng tài liệu.](https://ai.google.dev/gemini-api/docs/Ví dụ: chỉ sử dụng tài liệu hướng dẫn trong ngữ cảnh (một ngữ pháp tham khảo gồm 500 trang, một từ điển và ≈400 câu song song), Gemini đã học cách dịch từ tiếng Anh sang tiếng Kalamang – một ngôn ngữ Papua có ít hơn 200 người nói – với chất lượng tương tự như một người học là con người sử dụng cùng tài liệu.) Điều này minh hoạ sự thay đổi mô hình do ngữ cảnh dài của Gemini mang lại, mở ra những khả năng mới thông qua việc học tập mạnh mẽ trong ngữ cảnh.
+- ‫50,000 سطر من التعليمات البرمجية (مع 80 حرفًا قياسيًا لكل سطر)
+- جميع الرسائل النصية التي أرسلتها في آخر 5 سنوات
+- 8 روايات إنجليزية متوسطة الطول
+- نصوص لأكثر من 200 حلقة بودكاست بمتوسط طول
 
-## Các trường hợp sử dụng ngữ cảnh dài
+تتطلّب قدرات الاستيعاب الأكثر محدودية الشائعة في العديد من النماذج الأخرى غالبًا استراتيجيات مثل حذف الرسائل القديمة بشكل عشوائي أو تلخيص المحتوى أو استخدام RAG مع قواعد بيانات المتّجهات أو فلترة الطلبات لحفظ الرموز المميزة.
 
-Mặc dù trường hợp sử dụng tiêu chuẩn cho hầu hết các mô hình tạo sinh vẫn là dữ liệu đầu vào văn bản, nhưng họ mô hình Gemini cho phép một mô hình mới về các trường hợp sử dụng đa phương thức. Các mô hình này có thể hiểu được văn bản, video, âm thanh và hình ảnh một cách tự nhiên. Chúng đi kèm với [Gemini API, API này nhận các loại tệp đa phương thức để thuận tiện.](https://ai.google.dev/gemini-api/docs/Gemini API, API này nhận các loại tệp đa phương thức để thuận tiện.)
+على الرغم من أنّ هذه الأساليب لا تزال مفيدة في سيناريوهات معيّنة، فإنّ قدرة استيعاب السياق الواسعة في Gemini تتيح اتّباع أسلوب أكثر مباشرةً، وهو تقديم جميع المعلومات ذات الصلة مسبقًا. بما أنّ نماذج Gemini مصمّمة خصيصًا لتوفير إمكانات سياقية هائلة، فإنّها تقدّم أداءً قويًا في التعلّم السياقي. على سبيل المثال، باستخدام مواد تعليمية ضمن السياق فقط (مرجع نحوي من 500 صفحة وقاموس ونحو 400 جملة متوازية)، [تعلّم Gemini
+الترجمة](https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf)
+من الإنجليزية إلى لغة كالامانغ، وهي لغة بابوا يتحدث بها أقل من 200 شخص، وبجودة مماثلة لجودة الترجمة التي يقدمها متعلّم بشري يستخدم المواد نفسها. يوضّح ذلك التحوّل النموذجي الذي يتيحه سياق Gemini الطويل، ما يفتح آفاقًا جديدة من خلال التعلّم القوي داخل السياق.
 
-### Văn bản dài
+## حالات استخدام السياق الطويل
 
-Văn bản đã chứng tỏ là lớp trí tuệ làm nền tảng cho phần lớn động lực xung quanh LLM. Như đã đề cập trước đó, phần lớn hạn chế thực tế của LLM là do không có cửa sổ ngữ cảnh đủ lớn để thực hiện một số tác vụ. Điều này dẫn đến việc nhanh chóng áp dụng thế hệ tăng cường khả năng truy xuất (RAG) và các kỹ thuật khác giúp cung cấp cho mô hình thông tin theo ngữ cảnh có liên quan một cách linh hoạt. Giờ đây, với các cửa sổ ngữ cảnh ngày càng lớn hơn, các kỹ thuật mới đang trở nên khả dụng, mở ra các trường hợp sử dụng mới.
+على الرغم من أنّ حالة الاستخدام العادية لمعظم النماذج التوليدية لا تزال هي إدخال النص، تتيح مجموعة نماذج Gemini نموذجًا جديدًا لحالات الاستخدام المتعدّدة الوسائط. يمكن لهذه النماذج فهم النصوص والفيديوهات والمقاطع الصوتية والصور بشكلٍ مباشر. وتتضمّن هذه النماذج [Gemini API التي تقبل أنواع ملفات متعدّدة الوسائط](https://ai.google.dev/gemini-api/docs/prompting_with_media?hl=ar) لتوفير المزيد من الراحة.
 
-Sau đây là một số trường hợp sử dụng mới nổi và tiêu chuẩn cho ngữ cảnh dài dựa trên văn bản:
+### نص طويل
 
-- Tóm tắt các tập hợp văn bản lớn
-  - Các lựa chọn tóm tắt trước đây với các mô hình ngữ cảnh nhỏ hơn sẽ yêu cầu một cửa sổ trượt hoặc một kỹ thuật khác để duy trì trạng thái của các phần trước đó khi các token mới được truyền đến mô hình
-- Hỏi và trả lời
-  - Trước đây, điều này chỉ có thể thực hiện được với RAG do lượng ngữ cảnh hạn chế và khả năng nhớ lại thông tin thực tế của mô hình thấp
-- Quy trình công việc của trợ lý AI
-  - Văn bản là nền tảng của cách các trợ lý AI duy trì trạng thái về những gì họ đã làm và những gì họ cần làm; việc không có đủ thông tin về thế giới và mục tiêu của trợ lý AI là một hạn chế đối với độ tin cậy của trợ lý AI
+وقد أثبت النص أنّه طبقة الذكاء التي تستند إليها الكثير من التطورات في مجال النماذج اللغوية الكبيرة. كما ذكرنا سابقًا، يعود الكثير من القيود العملية المفروضة على النماذج اللغوية الكبيرة إلى عدم توفّر قدرة استيعاب كبيرة بما يكفي لتنفيذ مهام معيّنة. أدّى ذلك إلى اعتماد سريع للتوليد المعزّز بالاسترجاع (RAG) وتقنيات أخرى تقدّم للنموذج بشكل ديناميكي معلومات سياقية ذات صلة. أما الآن، ومع توفّر قدرات استيعاب أكبر فأكبر، أصبحت هناك تقنيات جديدة تتيح حالات استخدام جديدة.
 
-[Học tập trong ngữ cảnh nhiều ví dụ](https://ai.google.dev/gemini-api/docs/Học tập trong ngữ cảnh nhiều ví dụ) là một trong những
-khả năng độc đáo nhất do các mô hình ngữ cảnh dài mở ra. Nghiên cứu đã chỉ ra rằng việc áp dụng mô hình ví dụ "một lần" hoặc "nhiều lần" phổ biến, trong đó mô hình được trình bày một hoặc một vài ví dụ về một tác vụ và mở rộng quy mô đó lên hàng trăm, hàng nghìn hoặc thậm chí hàng trăm nghìn ví dụ, có thể dẫn đến các khả năng mới của mô hình. Phương pháp nhiều ví dụ này cũng cho thấy hiệu quả tương tự như các mô hình được tinh chỉnh cho một tác vụ cụ thể. Đối với các trường hợp sử dụng mà hiệu suất của mô hình Gemini chưa đủ để phát hành công khai, bạn có thể thử phương pháp nhiều ví dụ. Như bạn có thể khám phá sau này trong phần tối ưu hoá ngữ cảnh dài, việc lưu vào bộ nhớ đệm ngữ cảnh giúp loại khối lượng công việc token đầu vào cao này trở nên khả thi hơn về mặt kinh tế và thậm chí giảm độ trễ trong một số trường hợp.
+في ما يلي بعض حالات الاستخدام الناشئة والعادية للنصوص الطويلة المستندة إلى السياق:
 
-### Video dài
+- تلخيص مجموعات كبيرة من النصوص
+  - كانت خيارات التلخيص السابقة التي تستخدم نماذج سياق أصغر تتطلّب
+    نافذة منزلقة أو أسلوبًا آخر للاحتفاظ بحالة الأقسام السابقة
+    أثناء تمرير الرموز المميزة الجديدة إلى النموذج
+- طرح الأسئلة والإجابة عنها
+  - في السابق، كان ذلك ممكنًا فقط باستخدام التوليد المعزّز بالاسترجاع (RAG) بسبب الكمية المحدودة من السياق وانخفاض قدرة النماذج على استرجاع المعلومات الواقعية.
+- عمليات سير العمل المستندة إلى الذكاء الاصطناعي الوكيل
+  - يشكّل النص الأساس الذي تستند إليه البرامج في تتبُّع ما أنجزته وما عليها إنجازه، ويُعدّ عدم توفّر معلومات كافية حول العالم وهدف البرنامج من القيود التي تحدّ من موثوقية البرامج.
 
-Tiện ích của nội dung video từ lâu đã bị hạn chế do thiếu khả năng tiếp cận của chính phương tiện này. Rất khó để đọc lướt nội dung, bản chép lời thường không nắm bắt được sắc thái của video và hầu hết các công cụ không xử lý hình ảnh, văn bản và âm thanh cùng nhau. Với Gemini, các khả năng văn bản trong ngữ cảnh dài chuyển thành khả năng suy luận và trả lời các câu hỏi về dữ liệu đầu vào đa phương thức với hiệu suất bền vững.
+[التعلّم داخل السياق باستخدام أمثلة متعددة](https://arxiv.org/pdf/2404.11018) هو إحدى الإمكانات الفريدة التي تتيحها النماذج ذات السياق الطويل. أظهرت الأبحاث أنّ استخدام نموذج "اللقطة الواحدة" أو "اللقطات المتعددة" الشائع، حيث يتم تزويد النموذج بمثال واحد أو بضعة أمثلة على مهمة ما، وتوسيع نطاق ذلك إلى مئات أو آلاف أو حتى مئات الآلاف من الأمثلة، يمكن أن يؤدي إلى إمكانات جديدة للنموذج. وقد تبيّن أيضًا أنّ هذا النهج الذي يتضمّن عدة لقطات يحقّق أداءً مشابهًا للنماذج التي تم تحسينها لتنفيذ مهمة معيّنة. في حالات الاستخدام التي لا يكون فيها أداء أحد نماذج Gemini كافيًا لطرحه في مرحلة الإنتاج، يمكنك تجربة أسلوب "اللقطات المتعددة". كما ستتعرّف لاحقًا في قسم تحسين السياق الطويل، يتيح التخزين المؤقت للسياق إمكانية تنفيذ هذا النوع من أحمال العمل العالية لرموز الإدخال بشكل أكثر فعالية من حيث التكلفة، وحتى مع وقت استجابة أقل في بعض الحالات.
 
-Sau đây là một số trường hợp sử dụng mới nổi và tiêu chuẩn cho ngữ cảnh dài của video:
+### فيديو طويل
 
-- Hỏi và trả lời video
-- Bộ nhớ video, như minh hoạ với [Project Astra của Google](https://ai.google.dev/gemini-api/docs/Project Astra của Google)
-- Phụ đề video
-- Hệ thống đề xuất video, bằng cách làm phong phú siêu dữ liệu hiện có bằng khả năng hiểu đa phương thức mới
-- Tuỳ chỉnh video, bằng cách xem một tập hợp dữ liệu và siêu dữ liệu video liên quan, sau đó xoá các phần video không liên quan đến người xem
-- Kiểm duyệt nội dung video
-- Xử lý video theo thời gian thực
+لطالما كانت فائدة محتوى الفيديو محدودة بسبب عدم توفّر إمكانية الوصول إلى الوسيط نفسه. كان من الصعب التصفح السريع للمحتوى، وغالبًا ما كانت النصوص لا تنقل المعنى الدقيق للفيديو، كما أنّ معظم الأدوات لا تعالج الصور والنصوص والمقاطع الصوتية معًا. باستخدام Gemini، تتيح إمكانات التعامل مع النصوص الطويلة الاستنتاج والإجابة عن الأسئلة حول المدخلات المتعددة الوسائط بأداء ثابت.
 
-Khi làm việc với video, bạn cần cân nhắc cách [video được
-xử lý thành token](https://ai.google.dev/gemini-api/docs/video đượcxử lý thành token), điều này ảnh hưởng đến
-giới hạn thanh toán và mức sử dụng. [Bạn có thể tìm hiểu thêm về cách đưa ra câu lệnh bằng tệp video trong
-hướng dẫn về cách đưa ra câu lệnh](https://ai.google.dev/gemini-api/docs/Bạn có thể tìm hiểu thêm về cách đưa ra câu lệnh bằng tệp video tronghướng dẫn về cách đưa ra câu lệnh).
+في ما يلي بعض حالات الاستخدام الناشئة والعادية لسياق الفيديو الطويل:
 
-### Âm thanh dài
+- الإجابة عن الأسئلة في الفيديوهات
+- ذاكرة الفيديو، كما هو موضّح في [Project Astra من Google](https://deepmind.google/technologies/gemini/project-astra/?hl=ar)
+- إضافة ترجمة وشرح إلى الفيديو
+- أنظمة اقتراح الفيديوهات، من خلال إثراء البيانات الوصفية الحالية بفهم جديد متعدد الوسائط
+- تخصيص الفيديوهات من خلال تحليل مجموعة من البيانات وبيانات الفيديو الوصفية المرتبطة بها، ثم إزالة أجزاء الفيديوهات التي لا تهمّ المشاهد
+- الإشراف على محتوى الفيديو
+- معالجة الفيديو في الوقت الفعلي
 
-Các mô hình Gemini là những mô hình ngôn ngữ lớn đa phương thức đầu tiên có thể hiểu được âm thanh. Trước đây, quy trình làm việc điển hình của nhà phát triển sẽ liên quan đến việc kết hợp nhiều mô hình cụ thể theo miền, chẳng hạn như mô hình chuyển lời nói thành văn bản và mô hình chuyển văn bản thành văn bản, để xử lý âm thanh. Điều này dẫn đến độ trễ bổ sung cần thiết do thực hiện nhiều yêu cầu khứ hồi và giảm hiệu suất thường là do kiến trúc không kết nối của thiết lập nhiều mô hình.
+عند العمل مع الفيديوهات، من المهم مراعاة كيفية [معالجة الفيديوهات وتحويلها إلى رموز مميزة](https://ai.google.dev/gemini-api/docs/tokens?hl=ar#media-token)، لأنّ ذلك يؤثر في الفوترة وحدود الاستخدام. يمكنك الاطّلاع على مزيد من المعلومات حول استخدام ملفات الفيديو في الطلبات في [دليل الطلبات](https://ai.google.dev/gemini-api/docs/prompting_with_media?lang=python&hl=ar#prompting-with-videos).
 
-Sau đây là một số trường hợp sử dụng mới nổi và tiêu chuẩn cho ngữ cảnh âm thanh:
+### المحتوى الصوتي الطويل
 
-- Chép lời và dịch theo thời gian thực
-- Hỏi và trả lời podcast / video
-- Chép lời và tóm tắt cuộc họp
-- Trợ lý giọng nói
+كانت نماذج Gemini أول نماذج لغوية كبيرة متعدّدة الوسائط بشكل أصلي
+يمكنها فهم الصوت. في السابق، كان مسار عمل المطوّر النموذجي يتضمّن ربط نماذج متعددة خاصة بمجالات معيّنة، مثل نموذج تحويل الكلام إلى نص وطلبات وردود نصية، وذلك لمعالجة الصوت. وقد أدّى ذلك إلى زيادة وقت الاستجابة المطلوب من خلال تنفيذ طلبات متعدّدة ذهابًا وإيابًا، وانخفاض الأداء الذي يُعزى عادةً إلى البُنى غير المتصلة لإعداد النماذج المتعدّدة.
 
-Bạn có thể tìm hiểu thêm về cách đưa ra câu lệnh bằng tệp âm thanh trong hướng dẫn về cách đưa ra câu lệnh [Prompting](https://ai.google.dev/gemini-api/docs/Prompting).
+في ما يلي بعض حالات الاستخدام الناشئة والعادية لسياق الصوت:
 
-## Tối ưu hoá ngữ cảnh dài
+- الترجمة وتحويل الصوت إلى نص في الوقت الفعلي
+- الإجابة عن الأسئلة في البودكاست أو الفيديو
+- تحويل الصوت إلى نص وتلخيص الاجتماعات
+- المساعدون الصوتيون
 
-Phương pháp tối ưu hoá chính khi làm việc với ngữ cảnh dài và các mô hình Gemini
-là sử dụng [tính năng lưu vào bộ nhớ đệm ngữ cảnh](https://ai.google.dev/gemini-api/docs/tính năng lưu vào bộ nhớ đệm ngữ cảnh). Ngoài việc không thể xử lý nhiều token trong một yêu cầu, hạn chế chính khác là chi phí. Nếu bạn có một ứng dụng "trò chuyện với dữ liệu của bạn" trong đó người dùng tải lên 10 tệp PDF, một video và một số tài liệu công việc, thì trước đây bạn sẽ phải làm việc với một công cụ/khung thế hệ tăng cường khả năng truy xuất (RAG) phức tạp hơn để xử lý các yêu cầu này và trả một khoản tiền đáng kể cho các token được chuyển vào cửa sổ ngữ cảnh. Giờ đây, bạn có thể lưu vào bộ nhớ đệm các tệp mà người dùng tải lên và trả tiền để lưu trữ các tệp đó theo giờ. Ví dụ: chi phí đầu vào / đầu ra cho mỗi yêu cầu với Gemini Flash thấp hơn khoảng 4 lần so với chi phí đầu vào / đầu ra tiêu chuẩn. Vì vậy, nếu người dùng trò chuyện đủ với dữ liệu của họ, thì bạn sẽ tiết kiệm được một khoản chi phí lớn với tư cách là nhà phát triển.
+يمكنك الاطّلاع على مزيد من المعلومات حول توجيه الطلبات باستخدام الملفات الصوتية في [دليل توجيه الطلبات](https://ai.google.dev/gemini-api/docs/prompting_with_media?lang=python&hl=ar#prompting-with-videos).
 
-## Các hạn chế của ngữ cảnh dài
+## تحسينات على السياقات الطويلة
 
-Trong nhiều phần của hướng dẫn này, chúng tôi đã nói về cách các mô hình Gemini đạt được hiệu suất cao trong nhiều bài kiểm tra đánh giá khả năng truy xuất kim trong đống cỏ khô. Các bài kiểm tra này xem xét thiết lập cơ bản nhất, trong đó bạn có một kim duy nhất mà bạn đang tìm kiếm. Trong trường hợp bạn có thể có nhiều "kim" hoặc thông tin cụ thể mà bạn đang tìm kiếm, mô hình sẽ không hoạt động với độ chính xác tương tự. Hiệu suất có thể thay đổi ở mức độ lớn tuỳ thuộc vào ngữ cảnh. Bạn cần cân nhắc điều này vì có sự đánh đổi vốn có giữa việc truy xuất thông tin chính xác và chi phí. Bạn có thể đạt được khoảng 99% cho một truy vấn duy nhất, nhưng bạn phải trả chi phí token đầu vào mỗi khi gửi truy vấn đó. Vì vậy, để truy xuất 100 thông tin, nếu bạn cần hiệu suất 99%, thì có thể bạn sẽ cần gửi 100 yêu cầu. Đây là một ví dụ điển hình về trường hợp lưu vào bộ nhớ đệm ngữ cảnh có thể giảm đáng kể chi phí liên quan đến việc sử dụng các mô hình Gemini trong khi vẫn duy trì hiệu suất cao.
+عند العمل مع سياق طويل ونماذج Gemini، يكون التحسين الأساسي هو استخدام [التخزين المؤقت للسياق](https://ai.google.dev/gemini-api/docs/caching?hl=ar). بالإضافة إلى استحالة معالجة عدد كبير من الرموز المميزة في طلب واحد، كان القيد الرئيسي الآخر هو التكلفة. إذا كان لديك تطبيق "الدردشة مع بياناتك" يتيح للمستخدم تحميل 10 ملفات PDF وفيديو وبعض مستندات العمل، كان عليك في السابق استخدام أداة أو إطار عمل أكثر تعقيدًا للتوليد المعزّز بالاسترجاع (RAG) من أجل معالجة هذه الطلبات ودفع مبلغ كبير مقابل الرموز المميزة التي تم نقلها إلى قدرة الاستيعاب. يمكنك الآن تخزين الملفات التي يحمّلها المستخدم مؤقتًا والدفع مقابل تخزينها على أساس كل ساعة. على سبيل المثال، تبلغ تكلفة الإدخال / الإخراج لكل طلب باستخدام Gemini Flash حوالي ربع تكلفة الإدخال / الإخراج العادية، لذا إذا كان المستخدم يتحدث مع بياناته بشكل كافٍ، سيوفّر لك ذلك الكثير من التكاليف بصفتك مطوّرًا.
 
-## Câu hỏi thường gặp
+## محدودية قدرة الاستيعاب الموسَّعة
 
-### Đâu là nơi tốt nhất để đặt truy vấn của tôi trong cửa sổ ngữ cảnh?
+في أقسام مختلفة من هذا الدليل، تحدّثنا عن كيفية تحقيق نماذج Gemini
+أداءً عاليًا في مختلف عمليات التقييم المتعلقة باسترجاع المعلومات من مستندات طويلة. تأخذ هذه الاختبارات في الاعتبار الإعداد الأساسي، حيث يكون لديك إبرة واحدة تبحث عنها. في الحالات التي قد يكون لديك فيها عدة "إبر" أو معلومات محددة تبحث عنها، لا يحقّق النموذج الدقة نفسها. يمكن أن يختلف الأداء بشكل كبير حسب السياق. من المهم مراعاة ذلك لأنّ هناك مفاضلة بين الحصول على المعلومات الصحيحة وتكلفة ذلك. يمكنك الحصول على دقة تبلغ% 99 تقريبًا في طلب بحث واحد، ولكن عليك دفع تكلفة الرموز المميزة للإدخال في كل مرة ترسل فيها طلب البحث هذا. لذا، لاسترداد 100 جزء من المعلومات، إذا كنت بحاجة إلى أداء بنسبة% 99، من المحتمل أن تحتاج إلى إرسال 100 طلب. هذا مثال جيد على الحالات التي يمكن أن يؤدي فيها التخزين المؤقت للسياق إلى خفض التكلفة المرتبطة باستخدام نماذج Gemini بشكل كبير مع الحفاظ على مستوى الأداء العالي.
 
-Trong hầu hết các trường hợp, đặc biệt là nếu tổng ngữ cảnh dài, hiệu suất của mô hình sẽ tốt hơn nếu bạn đặt truy vấn / câu hỏi ở cuối câu lệnh (sau tất cả ngữ cảnh khác).
+## الأسئلة الشائعة
 
-### Tôi có bị mất hiệu suất mô hình khi thêm nhiều token vào một truy vấn không?
+### أين أفضل مكان لوضع استعلامي في قدرة الاستيعاب؟
 
-Nói chung, nếu bạn không cần truyền token đến mô hình, thì tốt nhất là bạn nên tránh truyền token. Tuy nhiên, nếu bạn có một khối lượng lớn token chứa một số thông tin và muốn hỏi về thông tin đó, thì mô hình có khả năng cao trong việc trích xuất thông tin đó (độ chính xác lên đến 99% trong nhiều trường hợp).
+في معظم الحالات، خاصةً إذا كان السياق الإجمالي طويلاً، سيكون أداء النموذج أفضل إذا وضعت طلبك أو سؤالك في نهاية الطلب (بعد كل السياق الآخر).
 
-### Làm cách nào để giảm chi phí cho các truy vấn ngữ cảnh dài?
+### هل ينخفض أداء النموذج عند إضافة المزيد من الرموز المميزة إلى طلب بحث؟
 
-Nếu bạn có một tập hợp token / ngữ cảnh tương tự mà bạn muốn sử dụng lại nhiều
-lần, thì [tính năng lưu vào bộ nhớ đệm ngữ cảnh](https://ai.google.dev/gemini-api/docs/tính năng lưu vào bộ nhớ đệm ngữ cảnh) có thể giúp giảm chi phí
-liên quan đến việc hỏi về thông tin đó.
+بشكل عام، إذا لم تكن بحاجة إلى تمرير الرموز المميّزة إلى النموذج، من الأفضل تجنُّب تمريرها. ومع ذلك، إذا كان لديك عدد كبير من الرموز المميزة تتضمّن بعض المعلومات وأردت طرح أسئلة حول هذه المعلومات، سيكون النموذج قادرًا بشكل كبير على استخراج هذه المعلومات (بدقة تصل إلى% 99 في العديد من الحالات).
 
-### Độ dài ngữ cảnh có ảnh hưởng đến độ trễ của mô hình không?
+### كيف يمكنني خفض التكلفة باستخدام طلبات البحث ذات السياق الطويل؟
 
-Có một lượng độ trễ cố định trong mọi yêu cầu, bất kể kích thước, nhưng nói chung, các truy vấn dài hơn sẽ có độ trễ cao hơn (thời gian đến token đầu tiên).
+إذا كان لديك مجموعة مماثلة من الرموز المميزة أو السياق الذي تريد إعادة استخدامه عدة مرات، يمكن أن يساعدك [تخزين السياق مؤقتًا](https://ai.google.dev/gemini-api/docs/caching?hl=ar) في تقليل التكاليف المرتبطة بطرح أسئلة حول هذه المعلومات.
 
-Gửi ý kiến phản hồi
+### هل يؤثر طول السياق في وقت استجابة النموذج؟
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://ai.google.dev/gemini-api/docs/Giấy phép ghi nhận tác giả 4.0 của Creative Commons) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://ai.google.dev/gemini-api/docs/Giấy phép Apache 2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://ai.google.dev/gemini-api/docs/Chính sách trang web của Google Developers). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+هناك مقدار ثابت من وقت الاستجابة في أي طلب، بغض النظر عن الحجم، ولكن بشكل عام، ستستغرق طلبات البحث الأطول وقت استجابة أطول (الوقت اللازم لظهور الرمز المميز الأول).
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+إرسال ملاحظات
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
+
+هل تريد مشاركة ملاحظاتك معنا؟
+
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

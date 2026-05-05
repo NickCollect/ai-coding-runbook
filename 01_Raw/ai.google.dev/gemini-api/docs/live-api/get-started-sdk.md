@@ -1,38 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=vi
-fetched_at: 2026-05-05T13:12:23.715684+00:00
+source_url: https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=pt-BR
+fetched_at: 2026-05-05T19:43:04.839371+00:00
 title: "Get started with Gemini Live API using the Google GenAI SDK \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/live-api/Tính năng Nghiên cứu chuyên sâu của Gemini) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-- [Trang chủ](https://ai.google.dev/gemini-api/docs/live-api/Trang chủ)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/live-api/Gemini API)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs/live-api/Tài liệu)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Gửi ý kiến phản hồi
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+
+Envie comentários
 
 # Get started with Gemini Live API using the Google GenAI SDK
 
-Gemini Live API cho phép tương tác hai chiều theo thời gian thực với các mô hình Gemini, hỗ trợ đầu vào âm thanh, video và văn bản cũng như đầu ra âm thanh gốc. Hướng dẫn này giải thích cách tích hợp với API bằng Google GenAI SDK trên máy chủ của bạn.
+A API Gemini Live permite a interação bidirecional em tempo real com os modelos do Gemini, oferecendo suporte a entradas de áudio, vídeo e texto, além de saídas de áudio nativas. Este guia explica como fazer a integração com a API usando o SDK do Google GenAI no seu servidor.
 
-[Dùng Live API trong Google AI Studiomic](https://ai.google.dev/gemini-api/docs/live-api/Dùng Live API trong Google AI Studiomic)
-[Sao chép ứng dụng mẫu từ GitHubcode](https://ai.google.dev/gemini-api/docs/live-api/Sao chép ứng dụng mẫu từ GitHubcode)
-[Sử dụng các kỹ năng của tác nhân lập trìnhterminal](https://ai.google.dev/gemini-api/docs/live-api/Sử dụng các kỹ năng của tác nhân lập trìnhterminal)
+[Testar a API Live no Google AI Studiomic](https://aistudio.google.com/live?hl=pt-br)
+[Clonar o app de exemplo do GitHubcode](https://github.com/google-gemini/gemini-live-api-examples/tree/main/gemini-live-genai-python-sdk)
+[Usar habilidades do agente de codificaçãoterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=pt-br)
 
-## Tổng quan
+## Visão geral
 
-Gemini Live API sử dụng WebSockets để giao tiếp theo thời gian thực. SDK `google-genai` cung cấp một giao diện không đồng bộ cấp cao để quản lý các kết nối này.
+A API Gemini Live usa WebSockets para comunicação em tempo real. O SDK `google-genai` oferece uma interface assíncrona de alto nível para gerenciar essas conexões.
 
-Các khái niệm chính:
+Principais conceitos:
 
-- **Phiên**: Kết nối liên tục với mô hình.
-- **Config**: Thiết lập phương thức (âm thanh/văn bản), giọng nói và hướng dẫn hệ thống.
-- **Đầu vào theo thời gian thực**: Gửi các khung hình âm thanh và video dưới dạng blob.
+- **Sessão**: uma conexão persistente com o modelo.
+- **Configuração**: configuração de modalidades (áudio/texto), voz e instruções do sistema.
+- **Entrada em tempo real**: envio de frames de áudio e vídeo como blobs.
 
-## Kết nối với Live API
+## Como se conectar à API Live
 
-Bắt đầu phiên Live API bằng khoá API:
+Inicie uma sessão da API Live com uma chave de API:
 
 ### Python
 
@@ -93,9 +97,9 @@ async function main() {
 main();
 ```
 
-## Đang gửi tin nhắn
+## Enviando texto
 
-Bạn có thể gửi văn bản bằng `send_realtime_input` (Python) hoặc `sendRealtimeInput` (JavaScript).
+O texto pode ser enviado usando `send_realtime_input` (Python) ou `sendRealtimeInput` (JavaScript).
 
 ### Python
 
@@ -111,9 +115,9 @@ session.sendRealtimeInput({
 });
 ```
 
-## Đang gửi âm thanh
+## Enviando áudio
 
-Bạn cần gửi âm thanh dưới dạng dữ liệu PCM thô (âm thanh PCM thô 16 bit, 16 kHz, little-endian).
+O áudio precisa ser enviado como dados PCM brutos (áudio PCM bruto de 16 bits, 16 kHz, little-endian).
 
 ### Python
 
@@ -139,11 +143,12 @@ session.sendRealtimeInput({
 });
 ```
 
-Để biết ví dụ về cách lấy âm thanh từ thiết bị của khách hàng (ví dụ: trình duyệt), hãy xem ví dụ toàn diện trên [GitHub](https://ai.google.dev/gemini-api/docs/live-api/GitHub).
+Para um exemplo de como receber o áudio do dispositivo cliente (por exemplo, o navegador)
+consulte o exemplo completo no [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L31-L70).
 
-## Đang gửi video
+## Enviando vídeo
 
-Khung hình video được gửi dưới dạng hình ảnh riêng lẻ (ví dụ: JPEG hoặc PNG) ở một tốc độ khung hình cụ thể (tối đa 1 khung hình/giây).
+Os frames de vídeo são enviados como imagens individuais (por exemplo, JPEG ou PNG) em uma taxa de frames específica (máximo de 1 frame por segundo).
 
 ### Python
 
@@ -169,11 +174,12 @@ session.sendRealtimeInput({
 });
 ```
 
-Để biết ví dụ về cách lấy video từ thiết bị của khách hàng (ví dụ: trình duyệt), hãy xem ví dụ toàn diện trên [GitHub](https://ai.google.dev/gemini-api/docs/live-api/GitHub).
+Para um exemplo de como receber o vídeo do dispositivo cliente (por exemplo, o navegador)
+consulte o exemplo completo no [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L84-L120).
 
-## Nhận âm thanh
+## Recebendo áudio
 
-Các câu trả lời bằng âm thanh của mô hình được nhận dưới dạng các khối dữ liệu.
+As respostas de áudio do modelo são recebidas como partes de dados.
 
 ### Python
 
@@ -201,11 +207,11 @@ if (content?.modelTurn?.parts) {
 }
 ```
 
-Hãy xem ứng dụng mẫu trên GitHub để tìm hiểu cách [nhận âm thanh trên máy chủ](https://ai.google.dev/gemini-api/docs/live-api/nhận âm thanh trên máy chủ) và [phát âm thanh đó trong trình duyệt](https://ai.google.dev/gemini-api/docs/live-api/phát âm thanh đó trong trình duyệt).
+Consulte o app de exemplo no GitHub (link em inglês) para saber como [receber o áudio no servidor](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/gemini_live.py#L86-L98) e [reproduzi-lo no navegador](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L145-L174).
 
-## Đang nhận tin nhắn
+## Recebendo texto
 
-Bản chép lời cho cả hoạt động đầu vào của người dùng và đầu ra của mô hình đều có trong nội dung trên máy chủ.
+As transcrições da entrada do usuário e da saída do modelo estão disponíveis no conteúdo do servidor.
 
 ### Python
 
@@ -232,9 +238,9 @@ if (content?.outputTranscription) {
 }
 ```
 
-## Xử lý lệnh gọi công cụ
+## Como processar chamadas de ferramentas
 
-API này hỗ trợ lệnh gọi công cụ (lệnh gọi hàm). Khi mô hình yêu cầu một lệnh gọi công cụ, bạn phải thực thi hàm và gửi phản hồi trở lại.
+A API oferece suporte a chamadas de ferramentas (chamadas de função). Quando o modelo solicita uma chamada de ferramenta, você precisa executar a função e enviar a resposta de volta.
 
 ### Python
 
@@ -275,18 +281,20 @@ if (response.toolCall) {
 }
 ```
 
-## Bước tiếp theo
+## A seguir
 
-- Đọc hướng dẫn đầy đủ về [Các chức năng](https://ai.google.dev/gemini-api/docs/live-api/Các chức năng) của Live API để biết các chức năng và cấu hình chính, bao gồm cả tính năng Phát hiện hoạt động bằng giọng nói và các tính năng âm thanh gốc.
-- Đọc hướng dẫn về [Sử dụng công cụ](https://ai.google.dev/gemini-api/docs/live-api/Sử dụng công cụ) để tìm hiểu cách tích hợp Live API với các công cụ và lệnh gọi hàm.
-- Hãy đọc hướng dẫn [Quản lý phiên](https://ai.google.dev/gemini-api/docs/live-api/Quản lý phiên) để quản lý các cuộc trò chuyện kéo dài.
-- Đọc hướng dẫn về [Mã thông báo tạm thời](https://ai.google.dev/gemini-api/docs/live-api/Mã thông báo tạm thời) để xác thực an toàn trong các ứng dụng [từ ứng dụng đến máy chủ](https://ai.google.dev/gemini-api/docs/live-api/từ ứng dụng đến máy chủ).
-- Để biết thêm thông tin về API WebSockets cơ bản, hãy xem [Tài liệu tham khảo API WebSockets](https://ai.google.dev/gemini-api/docs/live-api/Tài liệu tham khảo API WebSockets).
+- Leia o guia completo de [recursos](https://ai.google.dev/gemini-api/docs/live-guide?hl=pt-br) da API Live para conhecer os principais recursos e configurações, incluindo a detecção de atividade de voz e os recursos de áudio nativos.
+- Leia o guia de [uso de ferramentas](https://ai.google.dev/gemini-api/docs/live-tools?hl=pt-br) para saber como integrar a API Live com ferramentas e chamadas de função.
+- Leia o guia de [gerenciamento de sessões](https://ai.google.dev/gemini-api/docs/live-session?hl=pt-br) para gerenciar conversas longas.
+- Leia o guia de [tokens temporários](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=pt-br) (link em inglês) para autenticação segura em aplicativos [cliente-servidor](#implementation-approach).
+- Para mais informações sobre a API WebSockets subjacente, consulte a [referência da API WebSockets](https://ai.google.dev/api/live?hl=pt-br) (link em inglês).
 
-Gửi ý kiến phản hồi
+Envie comentários
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://ai.google.dev/gemini-api/docs/live-api/Giấy phép ghi nhận tác giả 4.0 của Creative Commons) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://ai.google.dev/gemini-api/docs/live-api/Giấy phép Apache 2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://ai.google.dev/gemini-api/docs/live-api/Chính sách trang web của Google Developers). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+Última atualização 2026-04-29 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Quer enviar seu feedback?
+
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]

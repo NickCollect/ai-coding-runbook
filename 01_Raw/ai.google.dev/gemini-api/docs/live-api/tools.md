@@ -1,43 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=pl
-fetched_at: 2026-05-05T13:28:19.357670+00:00
+source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=ar
+fetched_at: 2026-05-05T19:45:45.598708+00:00
 title: "Tool use with Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/live-api/Gemini Deep Research) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-- [Strona główna](https://ai.google.dev/gemini-api/docs/live-api/Strona główna)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/live-api/Gemini API)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs/live-api/Dokumenty)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Prześlij opinię
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+
+إرسال ملاحظات
 
 # Tool use with Live API
 
-Korzystanie z narzędzi pozwala interfejsowi Live API wyjść poza zwykłą rozmowę, umożliwiając mu wykonywanie działań w świecie rzeczywistym i pobieranie kontekstu zewnętrznego przy jednoczesnym utrzymaniu połączenia w czasie rzeczywistym.
-Za pomocą interfejsu Live API możesz definiować narzędzia, takie jak [wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/live-api/wywoływanie funkcji)
-i [wyszukiwarka Google](https://ai.google.dev/gemini-api/docs/live-api/wyszukiwarka Google).
+تتيح ميزة "استخدام الأدوات" لواجهة Live API إمكانية إجراء أكثر من مجرد محادثة، إذ يمكنها تنفيذ إجراءات في العالم الحقيقي واسترداد سياق خارجي مع الحفاظ على اتصال في الوقت الفعلي.
+يمكنك تحديد أدوات، مثل [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar)
+و[بحث Google](https://ai.google.dev/gemini-api/docs/grounding?hl=ar)، باستخدام Live API.
 
-## Omówienie obsługiwanych narzędzi
+## نظرة عامة على الأدوات المتوافقة
 
-Oto krótkie omówienie narzędzi dostępnych w modelach interfejsu Live API:
+في ما يلي نظرة عامة موجزة على الأدوات المتاحة لنماذج Live API:
 
-| Narzędzie | Gemini 3.1 Flash Live (wersja testowa) | Gemini 2.5 Flash Live (wersja testowa) |
+| الأداة | معاينة Gemini 3.1 Flash Live | النسخة الحصرية من Gemini 2.5 Flash |
 | --- | --- | --- |
-| **Szukaj** | Obsługiwane | Obsługiwane |
-| **Wywoływanie funkcji** | Obsługiwane (tylko synchroniczne) | Obsługiwane (synchroniczne i [asynchroniczne](https://ai.google.dev/gemini-api/docs/live-api/asynchroniczne)) |
-| **Mapy Google** | Nieobsługiwane | Nieobsługiwane |
-| **Wykonywanie kodu** | Nieobsługiwane | Nieobsługiwane |
-| **Kontekst adresu URL** | Nieobsługiwane | Nieobsługiwane |
+| **البحث** | متاح | متاح |
+| **استدعاء الدوال** | متاح (متزامن فقط) | متوافق (متزامن و[غير متزامن](#async-function-calling)) |
+| **خرائط Google** | غير متاح | غير متاح |
+| **تنفيذ الرموز البرمجية** | غير متاح | غير متاح |
+| **سياق عنوان URL** | غير متاح | غير متاح |
 
-## Wywoływanie funkcji
+## استدعاء الدالة
 
-Interfejs Live API obsługuje wywoływanie funkcji, podobnie jak zwykłe żądania generowania treści. Wywoływanie funkcji umożliwia interfejsowi Live API interakcję z danymi i programami zewnętrznymi, co znacznie zwiększa możliwości aplikacji.
+تتيح Live API استخدام ميزة "استدعاء الدوال"، تمامًا مثل طلبات إنشاء المحتوى العادية. تتيح ميزة &quot;استدعاء الدوال&quot; لتطبيق Live API التفاعل مع البيانات والبرامج الخارجية، ما يزيد بشكل كبير من إمكانات تطبيقاتك.
 
-Deklaracje funkcji możesz zdefiniować w ramach konfiguracji sesji.
-Po otrzymaniu wywołań narzędzi klient powinien odpowiedzieć listą obiektów `FunctionResponse` za pomocą metody `session.send_tool_response`.
+يمكنك تحديد تعريفات الدوال كجزء من إعدادات الجلسة.
+بعد تلقّي طلبات استخدام الأدوات، على العميل الردّ بقائمة من عناصر `FunctionResponse` باستخدام طريقة `session.send_tool_response`.
 
-Więcej informacji znajdziesz w [samouczku dotyczącym wywoływania funkcji](https://ai.google.dev/gemini-api/docs/live-api/samouczku dotyczącym wywoływania funkcji).
+يمكنك الاطّلاع على [الدليل التعليمي حول استخدام الأدوات](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar) لمعرفة المزيد.
 
 ### Python
 
@@ -214,13 +218,13 @@ async function main() {
 main();
 ```
 
-Na podstawie jednego prompta model może wygenerować wiele wywołań funkcji i kod niezbędny do łączenia ich wyników. Ten kod jest wykonywany w środowisku piaskownicy, co powoduje generowanie kolejnych [BidiGenerateContentToolCall](https://ai.google.dev/gemini-api/docs/live-api/BidiGenerateContentToolCall).
+من خلال طلب واحد، يمكن للنموذج إنشاء طلبات متعددة للدوال والتعليمات البرمجية اللازمة لربط مخرجاتها. يتم تنفيذ هذا الرمز في بيئة وضع الحماية، ما يؤدي إلى إنشاء رسائل [BidiGenerateContentToolCall](https://ai.google.dev/api/live?hl=ar#bidigeneratecontenttoolcall) لاحقة.
 
-## Asynchroniczne wywoływanie funkcji
+## استدعاء الدالة غير المتزامن
 
-Domyślnie wywoływanie funkcji odbywa się sekwencyjnie, co oznacza, że wykonywanie jest wstrzymywane do momentu, aż będą dostępne wyniki każdego wywołania funkcji. Zapewnia to sekwencyjne przetwarzanie, co oznacza, że nie będziesz mieć możliwości dalszej interakcji z modelem podczas wykonywania funkcji.
+يتم تنفيذ استدعاء الدوال بالتسلسل تلقائيًا، ما يعني أنّ التنفيذ يتوقف مؤقتًا إلى أن تتوفّر نتائج كل استدعاء دالة. يضمن ذلك المعالجة التسلسلية، ما يعني أنّه لن يكون بإمكانك مواصلة التفاعل مع النموذج أثناء تنفيذ الدوال.
 
-Jeśli nie chcesz blokować rozmowy, możesz poinformować model, aby uruchamiał funkcje asynchronicznie. Aby to zrobić, musisz najpierw dodać `behavior` do definicji funkcji:
+إذا كنت لا تريد حظر المحادثة، يمكنك أن تطلب من النموذج تنفيذ الدوال بشكل غير متزامن. لإجراء ذلك، عليك أولاً إضافة `behavior` إلى تعريفات الدوال:
 
 ### Python
 
@@ -244,15 +248,15 @@ const turn_off_the_lights = {name: "turn_off_the_lights"}
 const tools = [{ functionDeclarations: [turn_on_the_lights, turn_off_the_lights] }]
 ```
 
-`NON-BLOCKING` zapewnia, że funkcja będzie działać asynchronicznie, a Ty będziesz mieć możliwość dalszej interakcji z modelem.
+تضمن `NON-BLOCKING` تشغيل الدالة بشكل غير متزامن، ما يتيح لك مواصلة التفاعل مع النموذج.
 
-Następnie musisz poinformować model, jak ma się zachowywać, gdy otrzyma `FunctionResponse`, za pomocą parametru `scheduling`. Może on:
+بعد ذلك، عليك إخبار النموذج بكيفية التصرّف عند تلقّي `FunctionResponse` باستخدام المَعلمة `scheduling`. يمكنه تنفيذ أي من الإجراءين التاليين:
 
-- przerwać wykonywanie bieżącego zadania i od razu poinformować Cię o otrzymanej odpowiedzi
-  (`scheduling="INTERRUPT"`),
-- poczekać, aż skończy wykonywać bieżące zadanie
-  (`scheduling="WHEN_IDLE"`),
-- lub nic nie robić i wykorzystać tę wiedzę później w dyskusji
+- مقاطعة ما يفعله وإعلامك بالردّ الذي تلقّاه على الفور
+  (`scheduling="INTERRUPT"`)،
+- يُرجى الانتظار حتى ينتهي من تنفيذ الإجراء الحالي
+  (`scheduling="WHEN_IDLE"`)،
+- أو يمكنك عدم اتّخاذ أي إجراء واستخدام هذه المعلومات لاحقًا في المناقشة
   (`scheduling="SILENT"`)
 
 ### Python
@@ -285,9 +289,11 @@ const functionResponse = {
 }
 ```
 
-## Powiązanie ze źródłem informacji przy użyciu wyszukiwarki Google
+## تحديد المصدر من خلال "بحث Google"
 
-W ramach konfiguracji sesji możesz włączyć powiązanie ze źródłem informacji przy użyciu wyszukiwarki Google. Zwiększa to dokładność interfejsu Live API i zapobiega halucynacjom. Więcej informacji znajdziesz w [samouczku dotyczącym powiązania ze źródłem informacji](https://ai.google.dev/gemini-api/docs/live-api/samouczku dotyczącym powiązania ze źródłem informacji).
+يمكنك تفعيل ميزة تحديد المصدر من خلال "بحث Search" كجزء من إعدادات الجلسة. يؤدي ذلك إلى زيادة دقة Live API ومنع
+الهلوسات. يمكنك الاطّلاع على [الدليل التوجيهي بشأن Grounding](https://ai.google.dev/gemini-api/docs/grounding?hl=ar)
+لمعرفة المزيد.
 
 ### Python
 
@@ -446,9 +452,9 @@ async function main() {
 main();
 ```
 
-## Łączenie wielu narzędzi
+## الجمع بين أدوات متعددة
 
-W ramach interfejsu Live API możesz łączyć wiele narzędzi, co jeszcze bardziej zwiększa możliwości aplikacji:
+يمكنك الجمع بين أدوات متعددة ضمن Live API، ما يزيد من إمكانات تطبيقك:
 
 ### Python
 
@@ -496,17 +502,18 @@ const config = {
 // ... remaining model call
 ```
 
-## Co dalej?
+## الخطوات التالية
 
-- Więcej przykładów używania narzędzi z interfejsem Live API znajdziesz w
-  [przewodniku Tool use cookbook](https://ai.google.dev/gemini-api/docs/live-api/przewodniku Tool use cookbook).
-- Więcej informacji o funkcjach i konfiguracjach znajdziesz w
-  [przewodniku Live API Capabilities guide](https://ai.google.dev/gemini-api/docs/live-api/przewodniku Live API Capabilities guide).
+- يمكنك الاطّلاع على المزيد من الأمثلة حول استخدام الأدوات مع Live API في [كتاب وصفات استخدام الأدوات](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=ar).
+- يمكنك الاطّلاع على القصة الكاملة حول الميزات والإعدادات من خلال
+  [دليل إمكانات Live API](https://ai.google.dev/gemini-api/docs/live-guide?hl=ar).
 
-Prześlij opinię
+إرسال ملاحظات
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://ai.google.dev/gemini-api/docs/live-api/licencją Creative Commons – uznanie autorstwa 4.0), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://ai.google.dev/gemini-api/docs/live-api/licencji Apache 2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://ai.google.dev/gemini-api/docs/live-api/zasady dotyczące witryny Google Developers). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Ostatnia aktualizacja: 2026-05-01 UTC.
+تاريخ التعديل الأخير: 2026-05-01 (حسب التوقيت العالمي المتفَّق عليه)
 
-Chcesz przekazać coś jeszcze?
+هل تريد مشاركة ملاحظاتك معنا؟
+
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-01 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

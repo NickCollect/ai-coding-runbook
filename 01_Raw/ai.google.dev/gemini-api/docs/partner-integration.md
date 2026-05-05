@@ -1,141 +1,146 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/partner-integration?hl=vi
-fetched_at: 2026-05-05T13:27:48.944690+00:00
-title: "T\u00edch h\u1ee3p v\u1edbi \u0111\u1ed1i t\u00e1c v\u00e0 th\u01b0 vi\u1ec7n \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/partner-integration?hl=ko
+fetched_at: 2026-05-05T19:47:07.494343+00:00
+title: "\ud30c\ud2b8\ub108 \ubc0f \ub77c\uc774\ube0c\ub7ec\ub9ac \ud1b5\ud569 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/Tính năng Nghiên cứu chuyên sâu của Gemini) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-- [Trang chủ](https://ai.google.dev/gemini-api/docs/Trang chủ)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs/Tài liệu)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Gửi ý kiến phản hồi
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Tích hợp với đối tác và thư viện
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Hướng dẫn này trình bày các chiến lược về kiến trúc để xây dựng thư viện, nền tảng và cổng trên Gemini API. Hướng dẫn này trình bày chi tiết các điểm đánh đổi về kỹ thuật giữa việc sử dụng SDK GenAI chính thức, API Trực tiếp (REST/gRPC) và lớp tương thích OpenAI.
+의견 보내기
 
-Hãy sử dụng hướng dẫn này nếu bạn đang xây dựng các công cụ cho nhà phát triển khác, chẳng hạn như khung nguồn mở, cổng doanh nghiệp hoặc trang web tổng hợp SaaS và cần tối ưu hoá để đảm bảo tính hợp vệ sinh của phần phụ thuộc, kích thước gói hoặc tính tương đương của tính năng.
+# 파트너 및 라이브러리 통합
 
-## Tích hợp đối tác là gì?
+이 가이드에서는 Gemini API를 기반으로 라이브러리, 플랫폼, 게이트웨이를 빌드하기 위한 아키텍처 전략을 간략하게 설명합니다. 공식 생성형 AI SDK, Direct API (REST/gRPC), OpenAI 호환성 레이어를 사용하는 것 간의 기술적 절충점을 자세히 설명합니다.
 
-Đối tác là bất kỳ ai xây dựng mối quan hệ tích hợp giữa Gemini API và nhà phát triển người dùng cuối. Chúng tôi phân loại đối tác thành 4 nguyên mẫu. Việc xác định nguyên mẫu nào phù hợp nhất với bạn sẽ giúp bạn chọn đúng đường dẫn tích hợp.
+오픈소스 프레임워크, 엔터프라이즈 게이트웨이, SaaS 애그리게이터와 같은 다른 개발자를 위한 도구를 빌드하고 종속 항목 위생, 번들 크기 또는 기능 패리티에 맞게 최적화해야 하는 경우 이 가이드를 사용하세요.
 
-#### Khung hệ sinh thái
+## 파트너 통합이란 무엇인가요?
 
-- **Bạn là ai:** Người duy trì khung nguồn mở (ví dụ: LangChain, LlamaIndex, Spring AI) hoặc ứng dụng cụ thể theo ngôn ngữ.
-- **Mục tiêu của bạn:** Khả năng tương thích rộng. Bạn muốn thư viện của mình hoạt động trong mọi môi trường mà người dùng chọn mà không gây ra xung đột.
+파트너는 Gemini API와 최종 사용자 개발자 간의 통합을 빌드하는 모든 사람입니다. Google은 파트너를 네 가지 원형으로 분류합니다. 가장 일치하는 항목을 식별하면 올바른 통합 경로를 선택하는 데 도움이 됩니다.
 
-#### Nền tảng thời gian chạy và nền tảng biên
+#### 생태계 프레임워크
 
-- **Bạn là ai:** Nền tảng SaaS, Cổng AI hoặc nhà cung cấp cơ sở hạ tầng đám mây (ví dụ: Vercel, Cloudflare, Zapier) nơi quá trình thực thi mã diễn ra trong các môi trường bị hạn chế.
-- **Mục tiêu của bạn:** Hiệu suất. Bạn cần độ trễ thấp, kích thước gói tối thiểu và thời gian khởi động nguội nhanh.
+- **대상:** 오픈소스 프레임워크 (예: LangChain, LlamaIndex, Spring AI) 또는 언어별 클라이언트의 관리자입니다.
+- **목표:** 광범위한 호환성입니다. 사용자가 선택한 모든 환경에서 충돌을 일으키지 않고 라이브러리가 작동하도록 하려고 합니다.
 
-#### Trang web tổng hợp
+#### 런타임 및 에지 플랫폼
 
-- **Bạn là ai:** Nền tảng, proxy hoặc "Model Gardens" nội bộ giúp chuẩn hoá quyền truy cập trên nhiều nhà cung cấp LLM (ví dụ: OpenAI, Anthropic, Google) vào một giao diện duy nhất.
-- **Mục tiêu của bạn:** Tính di động và tính đồng nhất.
+- **대상:** 코드 실행이 제한된 환경에서 발생하는 SaaS 플랫폼, AI 게이트웨이 또는 클라우드 인프라 제공업체 (예: Vercel, Cloudflare, Zapier)입니다.
+- **목표:** 성능입니다. 지연 시간이 짧고 번들 크기가 최소화되며 콜드 스타트가 빨라야 합니다.
 
-#### Cổng doanh nghiệp
+#### 애그리게이터
 
-- **Bạn là ai:** Nhóm Kỹ thuật nền tảng nội bộ tại các công ty lớn xây dựng "Golden Paths" cho hàng trăm nhà phát triển nội bộ.
-- **Mục tiêu của bạn:** Tiêu chuẩn hoá, quản trị và xác thực hợp nhất.
+- **대상:** 여러 LLM 제공업체 (예: OpenAI, Anthropic, Google)의 액세스를 단일 인터페이스로 정규화하는 플랫폼, 프록시 또는 내부 '모델 가든'입니다.
+- **목표:** 이식성과 균일성입니다.
 
-## So sánh nhanh
+#### 엔터프라이즈 게이트웨이
 
-**Phương pháp hay nhất trên toàn cầu:** Tất cả đối tác phải gửi [`x-goog-api-client`
-tiêu đề](https://ai.google.dev/gemini-api/docs/`x-goog-api-client`tiêu đề) bất kể đường dẫn đã chọn.
+- **대상:** 수백 명의 내부 개발자를 위한 '최적의 경로'를 빌드하는 대기업의 내부 플랫폼 엔지니어링팀입니다.
+- **목표:** 표준화, 거버넌스, 통합 인증입니다.
 
-| Nếu bạn là... | Đường dẫn đề xuất | Lợi ích chính | Điểm đánh đổi chính | Phương pháp hay nhất |
+## 한눈에 비교하기
+
+**글로벌 권장사항:** 모든 파트너는 선택한 경로와 관계없이 [`x-goog-api-client`
+헤더](#client-id)를 전송해야 합니다.
+
+| 다음과 같은 경우... | 권장 경로 | 주요 이점 | 주요 절충점 | 권장사항 |
 | --- | --- | --- | --- | --- |
-| **Cổng doanh nghiệp, khung hệ sinh thái** | **[SDK GenAI của Google](https://ai.google.dev/gemini-api/docs/SDK GenAI của Google)** | **Tính tương đương và tốc độ của Nền tảng tác nhân Gemini Enterprise.** Xử lý tích hợp cho các loại, quá trình xác thực và tính năng phức tạp (ví dụ: tải tệp lên). Di chuyển liền mạch sang Google Cloud. | **Trọng số phần phụ thuộc.** Các phần phụ thuộc bắc cầu có thể phức tạp và nằm ngoài tầm kiểm soát của bạn. Chỉ hỗ trợ các ngôn ngữ được hỗ trợ (Python/Node/Go/Java). | **Khoá phiên bản.** Ghim các phiên bản SDK trong hình ảnh cơ sở nội bộ để đảm bảo tính ổn định trên các nhóm. |
-| **Khung hệ sinh thái, nền tảng biên và trang web tổng hợp** | **[API Trực tiếp](https://ai.google.dev/gemini-api/docs/API Trực tiếp)**  *(REST / gRPC)* | **Không có phần phụ thuộc.** Bạn kiểm soát ứng dụng HTTP và kích thước gói chính xác. Toàn quyền truy cập vào tất cả các tính năng của API và mô hình. | **Chi phí phát triển cao.** Cấu trúc JSON có thể được lồng sâu và yêu cầu xác thực thủ công nghiêm ngặt cũng như kiểm tra loại. | **Sử dụng thông số kỹ thuật OpenAPI.** Tự động hoá quá trình tạo loại bằng cách sử dụng thông số kỹ thuật chính thức của chúng tôi thay vì viết chúng theo cách thủ công. |
-| **Trang web tổng hợp sử dụng SDK OpenAI chỉ yêu cầu quy trình làm việc dựa trên văn bản**  *(Tối ưu hoá tính di động cũ)* | **[Khả năng tương thích với OpenAI](https://ai.google.dev/gemini-api/docs/Khả năng tương thích với OpenAI)** | **Tính di động tức thì.** Sử dụng lại mã hoặc thư viện hiện có tương thích với OpenAI. | **Giới hạn tính năng.** Các tính năng dành riêng cho mô hình (Video gốc, Bộ nhớ đệm) có thể không dùng được. | **Kế hoạch di chuyển.** Sử dụng tính năng này để xác thực nhanh, nhưng hãy lên kế hoạch nâng cấp lên API Trực tiếp để có tính năng API hoàn chỉnh. |
+| **엔터프라이즈 게이트웨이, 생태계 프레임워크** | **[Google 생성형 AI SDK](#genai-sdk)** | **Gemini Enterprise Agent Platform 패리티 및 속도.** 유형, 인증, 복잡한 기능 (예: 파일 업로드)을 기본적으로 처리합니다. Google Cloud로 원활하게 마이그레이션합니다. | **종속 항목 가중치.** 전이적 종속 항목은 복잡하고 제어할 수 없습니다. 지원되는 언어 (Python/Node/Go/Java)로 제한됩니다. | **버전 잠금.** 팀 간의 안정성을 보장하기 위해 내부 기본 이미지에서 SDK 버전을 고정합니다. |
+| **생태계 프레임워크, 에지 플랫폼, 애그리게이터** | **[Direct API](#rest)**  *(REST / gRPC)* | **종속 항목 없음.** HTTP 클라이언트와 정확한 번들 크기를 제어합니다. 모든 API 및 모델 기능에 대한 전체 액세스 권한입니다. | **개발자 오버헤드가 높습니다.** JSON 구조는 깊이 중첩될 수 있으며 엄격한 수동 유효성 검사 및 유형 검사가 필요합니다. | **OpenAPI 사양을 사용합니다.** 수동으로 작성하는 대신 공식 사양을 사용하여 유형 생성을 자동화합니다. |
+| **텍스트 기반 워크플로만 필요한 OpenAI SDK를 사용하는 애그리게이터**  *(레거시 이식성을 위해 최적화)* | **[OpenAI 호환성](#openai)** | **즉시 이식성.** 기존 OpenAI 호환 코드 또는 라이브러리를 재사용합니다. | **기능 한도.** 모델별 기능 (네이티브 동영상, 캐싱)을 사용하지 못할 수 있습니다. | **마이그레이션 계획.** 빠른 유효성 검사에 사용하지만 전체 API 기능을 위해 Direct API로 업그레이드할 계획입니다. |
 
-## Tích hợp SDK GenAI của Google
+## Google 생성형 AI SDK 통합
 
-Đối với các khung, việc triển khai [SDK GenAI của Google](https://ai.google.dev/gemini-api/docs/SDK GenAI của Google)
-thường là đường dẫn đơn giản nhất, vì có ít dòng mã nhất bằng các ngôn ngữ được hỗ trợ.
+프레임워크의 경우 [Google 생성형 AI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=ko)
+를 구현하는 것이 지원되는
+언어의 코드 줄 수가 가장 적기 때문에 가장 간단한 경로인 경우가 많습니다.
 
-Đối với các nhóm nền tảng nội bộ, sản phẩm chính mà bạn cung cấp thường là "đường dẫn vàng" cho phép kỹ sư sản phẩm di chuyển nhanh chóng trong khi tuân thủ các chính sách bảo mật.
+내부 플랫폼팀의 경우 기본 제공 항목은 제품 엔지니어가 보안 정책을 준수하면서 빠르게 이동할 수 있도록 하는 '최적의 경로'인 경우가 많습니다.
 
-**Lợi ích:**
+**혜택:**
 
-- **Giao diện hợp nhất để di chuyển Nền tảng tác nhân Gemini Enterprise:** Nhà phát triển nội bộ thường tạo nguyên mẫu bằng Khoá API (Gemini API) và triển khai lên Nền tảng tác nhân Gemini Enterprise (IAM) để tuân thủ quy trình sản xuất. SDK này tóm tắt những điểm khác biệt về quá trình xác thực này.
-  Tương tự đối với các khung, bạn có thể triển khai một đường dẫn mã và hỗ trợ 2 nhóm người dùng.
-- **Trình trợ giúp phía máy khách:** SDK này bao gồm các tiện ích thành ngữ giúp giảm mã nguyên mẫu cho các tác vụ phức tạp.
-  - *Ví dụ:* Hỗ trợ trực tiếp các đối tượng hình ảnh `PIL` trong lời nhắc, gọi hàm tự động và các loại toàn diện.
-- **Quyền truy cập vào tính năng từ ngày đầu tiên:** Các tính năng API mới có sẵn tại thời điểm ra mắt thông qua SDK.
-- **Cải thiện khả năng hỗ trợ tạo mã:** Quá trình cài đặt SDK cục bộ sẽ hiển thị các định nghĩa loại và chuỗi tài liệu cho trợ lý lập trình (ví dụ: Cursor, Copilot).
-  Ngữ cảnh này cải thiện độ chính xác khi tạo mã so với việc tạo các yêu cầu REST thô.
+- **Gemini Enterprise Agent Platform 마이그레이션을 위한 통합 인터페이스:** 내부 개발자는 API 키 (Gemini API)를 사용하여 프로토타입을 만들고 프로덕션 규정 준수를 위해 Gemini Enterprise Agent Platform (IAM)에 배포하는 경우가 많습니다. SDK는 이러한 인증 차이를 추상화합니다.
+  마찬가지로 프레임워크의 경우 하나의 코드 경로를 구현하고 두 개의 사용자 집합을 지원할 수 있습니다.
+- **클라이언트 측 도우미:** SDK에는 복잡한 작업의 상용구 코드를 줄이는 관용적 유틸리티가 포함되어 있습니다.
+  - *예:* 프롬프트에서 `PIL` 이미지 객체를 직접 지원, 자동 함수 호출, 포괄적인 유형
+- **Day-zero 기능 액세스:** 새로운 API 기능은 SDK를 통해 출시 시점에 제공됩니다.
+- **코드 생성 지원 개선:** 로컬 SDK 설치는 유형 정의 및 독스트링을 코딩 어시스턴트 (예: Cursor, Copilot)에 노출합니다.
+  이 컨텍스트는 원시 REST 요청을 생성하는 것보다 코드 생성 정확도를 개선합니다.
 
-**Điểm đánh đổi:**
+**절충점:**
 
-- **Trọng số và độ phức tạp của phần phụ thuộc:** SDK có các phần phụ thuộc riêng, có thể làm tăng kích thước gói và có khả năng gây ra rủi ro cho chuỗi cung ứng.
-- **Phiên bản:** Các tính năng API mới thường được ghim vào các phiên bản SDK tối thiểu.
-  Bạn có thể cần gửi bản cập nhật cho người dùng để truy cập vào các tính năng hoặc mô hình mới. Trong một số trường hợp, việc này có thể yêu cầu thay đổi các phần phụ thuộc bắc cầu ảnh hưởng đến người dùng của bạn.
-- **Giới hạn giao thức:** SDK chỉ hỗ trợ HTTPS cho API chính và WebSocket (WSS) cho Live API. gRPC không được hỗ trợ khi sử dụng ứng dụng SDK cấp cao.
-- **Hỗ trợ ngôn ngữ:** SDK hỗ trợ các phiên bản ngôn ngữ *hiện tại*. Nếu cần hỗ trợ các phiên bản EOL (ví dụ: Python 3.9), bạn cần duy trì một nhánh.
+- **종속 항목 가중치 및 복잡성:** SDK에는 자체 종속 항목이 있으므로 번들 크기가 커지고 공급망 위험이 발생할 수 있습니다.
+- **버전 관리:** 새로운 API 기능은 최소 SDK 버전에 고정되는 경우가 많습니다.
+  새로운 기능이나 모델에 액세스하려면 사용자에게 업데이트를 푸시해야 할 수 있으며, 이 경우 사용자에게 영향을 미치는 전이적 종속 항목을 변경해야 할 수 있습니다.
+- **프로토콜 한도:** SDK는 기본 API의 경우 HTTPS만 지원하고 Live API의 경우 WebSocket (WSS)만 지원합니다. gRPC는 상위 수준 SDK 클라이언트를 사용하여 지원되지 않습니다.
+- **언어 지원:** SDK는 *현재* 언어 버전을 지원합니다. EOL 버전 (예: Python 3.9)을 지원해야 하는 경우 포크를 유지해야 합니다.
 
-**Phương pháp hay nhất:**
+**권장사항:**
 
-- **Khoá phiên bản:** Ghim phiên bản SDK trong hình ảnh cơ sở nội bộ để đảm bảo tính ổn định trên các nhóm.
+- **버전 잠금:** 팀 간의 안정성을 보장하기 위해 내부 기본 이미지에서 SDK 버전을 고정합니다.
 
-## Tích hợp API Trực tiếp
+## API 직접 통합
 
-Nếu bạn đang phân phối một thư viện cho hàng nghìn nhà phát triển, chạy trong một môi trường bị hạn chế hoặc xây dựng một trang web tổng hợp yêu cầu các tính năng tiên tiến của Gemini, bạn có thể cần tích hợp trực tiếp với API bằng REST hoặc gRPC.
+수천 명의 개발자에게 라이브러리를 배포하거나, 제한된 환경에서 실행하거나, Gemini의 최첨단 기능이 필요한 애그리게이터를 빌드하는 경우 REST 또는 gRPC를 사용하여 API와 직접 통합해야 할 수 있습니다.
 
-**Lợi ích:**
+**혜택:**
 
-- **Toàn quyền truy cập vào tính năng:** Không giống như lớp tương thích OpenAI, việc sử dụng trực tiếp API sẽ bật các tính năng dành riêng cho Gemini, chẳng hạn như tải lên File API, tạo bộ nhớ đệm nội dung và sử dụng Live API hai chiều.
-- **Phần phụ thuộc tối thiểu:** Trong môi trường mà các phần phụ thuộc nhạy cảm do kích thước hoặc chi phí kiểm tra. Việc sử dụng trực tiếp API thông qua một thư viện tiêu chuẩn như `fetch` hoặc thông qua một trình bao bọc như `httpx` sẽ đảm bảo thư viện của bạn vẫn gọn nhẹ.
-- **Không phụ thuộc vào ngôn ngữ:** Đây là đường dẫn duy nhất cho các ngôn ngữ không được SDK hỗ trợ, chẳng hạn như Rust, PHP và Ruby, vì không có giới hạn về ngôn ngữ.
-- **Hiệu suất:** API Trực tiếp không có chi phí khởi tạo, giúp giảm thiểu thời gian khởi động nguội trong các hàm phi máy chủ.
+- **전체 기능 액세스:** OpenAI 호환성 레이어와 달리 API를 직접 사용하면 파일 API에 업로드, 콘텐츠 캐싱 생성, 양방향 Live API 사용과 같은 Gemini 전용 기능을 사용할 수 있습니다.
+- **최소 종속 항목:** 크기 또는 감사 비용으로 인해 종속 항목이 민감한 환경입니다. `fetch`와 같은 표준 라이브러리 또는 `httpx`와 같은 래퍼를 통해 API를 직접 사용하면 라이브러리가 경량으로 유지됩니다.
+- **언어에 구애받지 않음:** 언어 제한이 없으므로 Rust, PHP, Ruby와 같이 SDK에서 다루지 않는 언어의 유일한 경로입니다.
+- **성능:** Direct API에는 초기화 오버헤드가 없으므로 서버리스 함수의 콜드 스타트가 최소화됩니다.
 
-**Điểm đánh đổi:**
+**절충점:**
 
-- **Triển khai Nền tảng tác nhân Gemini Enterprise theo cách thủ công:** Không giống như SDK, việc sử dụng trực tiếp API sẽ không tự động xử lý các điểm khác biệt về quá trình xác thực giữa AI Studio (Khoá API) và Nền tảng tác nhân Gemini Enterprise (IAM). Bạn phải triển khai các trình xử lý xác thực riêng nếu muốn hỗ trợ cả hai môi trường.
-- **Không có loại hoặc trình trợ giúp gốc:** Bạn không nhận được tính năng hoàn thành mã hoặc kiểm tra thời gian biên dịch cho các đối tượng yêu cầu, trừ phi bạn tự triển khai. Không có "trình trợ giúp" ứng dụng (ví dụ: trình chuyển đổi hàm sang lược đồ), vì vậy, bạn phải tự viết logic này theo cách thủ công.
+- **수동 Gemini Enterprise Agent Platform 구현:** SDK와 달리 API를 직접 사용하면 AI Studio (API 키)와 Gemini Enterprise Agent Platform (IAM) 간의 인증 차이가 자동으로 처리되지 않습니다. 두 환경을 모두 지원하려면 별도의 인증 핸들러를 구현해야 합니다.
+- **기본 유형 또는 도우미 없음:** 요청 객체에 대한 코드 완성 또는 컴파일 시간 검사를 직접 구현하지 않으면 사용할 수 없습니다. 클라이언트 '도우미'(예: 함수-스키마 변환기)가 없으므로 이 로직을 직접 수동으로 작성해야 합니다.
 
-**Phương pháp hay nhất**
+**권장사항**
 
-Chúng tôi cung cấp một thông số kỹ thuật có thể đọc bằng máy mà bạn có thể dùng để tạo định nghĩa loại cho thư viện của mình, giúp bạn không phải viết chúng theo cách thủ công. Tải thông số kỹ thuật xuống trong quá trình xây dựng, tạo các loại và gửi mã đã biên dịch.
+Google은 라이브러리의 유형 정의를 생성하는 데 사용할 수 있는 기계 가독형 사양을 제공하므로 수동으로 작성할 필요가 없습니다. 빌드 프로세스 중에 사양을 다운로드하고 유형을 생성하고 컴파일된 코드를 제공합니다.
 
-- **Điểm cuối:** `https://generativelanguage.googleapis.com/$discovery/OPENAPI3_0`
+- **엔드포인트:** `https://generativelanguage.googleapis.com/$discovery/OPENAPI3_0`
 
-## Tích hợp SDK OpenAI
+## OpenAI SDK 통합
 
-Nếu bạn là một nền tảng ưu tiên lược đồ hợp nhất (Hoàn thành cuộc trò chuyện OpenAI) hơn các tính năng dành riêng cho mô hình, thì đây là tuyến đường nhanh nhất.
+모델별 기능보다 통합 스키마 (OpenAI Chat Completions)를 우선시하는 플랫폼인 경우 이 경로가 가장 빠릅니다.
 
-**Lợi ích:**
+**혜택:**
 
-- **Ít trở ngại:** Bạn thường có thể thêm tính năng hỗ trợ Gemini bằng cách thay đổi `baseURL` và `apiKey`. Đây là cách nhanh chóng để tích hợp các cách triển khai "Mang theo khoá của riêng bạn", thêm tính năng hỗ trợ Gemini mà không cần viết mã mới.
-- **Các ràng buộc:** Bạn chỉ nên sử dụng đường dẫn này nếu bị giới hạn ở SDK OpenAI và không yêu cầu các tính năng nâng cao của Gemini như File API hoặc thêm tính năng hỗ trợ theo cách thủ công cho các công cụ như Dựa trên kết quả của Google Tìm kiếm.
+- **마찰이 적음:** `baseURL` 및 `apiKey`를 변경하여 Gemini 지원을 추가할 수 있는 경우가 많습니다. 새 코드를 작성하지 않고 Gemini 지원을 추가하여 'Bring Your Own Key' 구현을 통합하는 빠른 방법입니다.
+- **제약 조건:** 이 경로는 OpenAI SDK로 제한되고 파일 API와 같은 고급 Gemini 기능이 필요하지 않거나 Google 검색을 사용한 그라운딩과 같은 도구에 대한 지원을 수동으로 추가하지 않는 경우에만 권장됩니다.
 
-**Điểm đánh đổi:**
+**절충점:**
 
-- **Giới hạn tính năng:** Lớp tương thích cung cấp các giới hạn cho các tính năng cốt lõi của Gemini. Các công cụ phía máy chủ có sẵn khác nhau giữa các nền tảng và có thể yêu cầu xử lý thủ công để hoạt động với các công cụ Gemini API.
-- **Chi phí dịch:** Vì giản đồ OpenAI không ánh xạ 1:1 với kiến trúc của Gemini, nên việc dựa vào lớp tương thích sẽ gây ra một số phức tạp đòi hỏi phải triển khai thêm để giải quyết, chẳng hạn như ánh xạ công cụ "tìm kiếm" của người dùng với công cụ nền tảng phù hợp.
-  Nếu bạn cần một lượng lớn trường hợp đặc biệt, thì việc sử dụng SDK hoặc API riêng cho từng nền tảng có thể mang lại nhiều giá trị hơn.
+- **기능 제한사항:** 호환성 레이어는 핵심 Gemini 기능에 제한사항을 제공합니다. 사용 가능한 서버 측 도구는 플랫폼마다 다르며 Gemini API 도구와 함께 작동하려면 수동으로 처리해야 할 수 있습니다.
+- **번역 오버헤드:** OpenAI 스키마가 Gemini의 아키텍처에 1:1로 매핑되지 않으므로 호환성 레이어를 사용하면 사용자 '검색' 도구를 올바른 플랫폼 도구에 매핑하는 것과 같이 해결하기 위해 추가 구현 작업이 필요한 몇 가지 복잡성이 발생합니다.
+  상당한 양의 특수 처리가 필요한 경우 각 플랫폼에 전용 SDK 또는 API를 사용하는 것이 더 가치가 있을 수 있습니다.
 
-**Phương pháp hay nhất**
+**권장사항**
 
-Khi có thể, hãy tích hợp trực tiếp với Gemini API. Tuy nhiên, để có khả năng tương thích tối đa, hãy cân nhắc sử dụng một thư viện nhận biết các nhà cung cấp khác nhau và có thể xử lý việc ánh xạ công cụ và thông báo cho bạn.
+가능한 경우 Gemini API와 직접 통합합니다. 하지만 호환성을 극대화하려면 다양한 제공업체를 인식하고 도구 및 메시지 매핑을 처리할 수 있는 라이브러리를 사용하는 것이 좋습니다.
 
-## Phương pháp hay nhất cho tất cả đối tác: xác định ứng dụng
+## 모든 파트너를 위한 권장사항: 클라이언트 식별
 
-Khi gọi Gemini API dưới dạng nền tảng hoặc thư viện, bạn phải xác định ứng dụng của mình bằng tiêu đề `x-goog-api-client`.
+플랫폼 또는 라이브러리로 Gemini API를 호출할 때는 `x-goog-api-client` 헤더를 사용하여 클라이언트를 식별해야 합니다.
 
-Điều này cho phép Google xác định các phân khúc lưu lượng truy cập cụ thể của bạn. Nếu thư viện của bạn đang tạo ra một mẫu lỗi cụ thể, chúng tôi có thể liên hệ để giúp gỡ lỗi.
+이렇게 하면 Google에서 특정 트래픽 세그먼트를 식별할 수 있으며 라이브러리에서 특정 오류 패턴이 생성되는 경우 디버깅을 지원하기 위해 연락할 수 있습니다.
 
-Sử dụng định dạng `company-product/version` (ví dụ: `acme-framework/1.2.0`).
+`company-product/version` 형식 (예: `acme-framework/1.2.0`)을 사용합니다.
 
-### Ví dụ về cấu hình triển khai
+### 구현 예
 
-### SDK GenAI
+### 생성형 AI SDK
 
-Bằng cách cung cấp ứng dụng API, SDK sẽ tự động thêm tiêu đề tuỳ chỉnh của bạn vào các tiêu đề nội bộ.
+API 클라이언트를 제공하면 SDK가 자동으로 커스텀 헤더를 내부 헤더에 추가합니다.
 
 ```
 from google import genai
@@ -150,7 +155,7 @@ client = genai.Client(
 )
 ```
 
-### API Trực tiếp (REST)
+### Direct API (REST)
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=$GEMINI_API_KEY" \
@@ -159,7 +164,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
     -d '{...}'
 ```
 
-### SDK OpenAI
+### OpenAI SDK
 
 ```
 from openai import OpenAI
@@ -173,17 +178,19 @@ client = OpenAI(
 )
 ```
 
-## Các bước tiếp theo
+## 다음 단계
 
-- Truy cập vào phần tổng quan về thư viện [library overview](https://ai.google.dev/gemini-api/docs/library overview) để tìm hiểu về
-  the GenAI SDKs
-- Duyệt tài liệu tham khảo [API](https://ai.google.dev/gemini-api/docs/API)
-- Đọc [hướng dẫn về khả năng tương thích với OpenAI](https://ai.google.dev/gemini-api/docs/hướng dẫn về khả năng tương thích với OpenAI)
+- [라이브러리 개요](https://ai.google.dev/gemini-api/docs/libraries?hl=ko)를 방문하여
+  생성형 AI SDK에 대해 알아보세요.
+- [API 참조](https://ai.google.dev/api?hl=ko) 찾아보기
+- [OpenAI 호환성 가이드](https://ai.google.dev/gemini-api/docs/openai?hl=ko) 읽어보기
 
-Gửi ý kiến phản hồi
+의견 보내기
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://ai.google.dev/gemini-api/docs/Giấy phép ghi nhận tác giả 4.0 của Creative Commons) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://ai.google.dev/gemini-api/docs/Giấy phép Apache 2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://ai.google.dev/gemini-api/docs/Chính sách trang web của Google Developers). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+최종 업데이트: 2026-04-29(UTC)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+의견을 전달하고 싶나요?
+
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]

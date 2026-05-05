@@ -1,149 +1,161 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/deprecations?hl=ko
-fetched_at: 2026-05-05T13:09:40.469430+00:00
-title: "Gemini \uc9c0\uc6d0 \uc911\ub2e8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/deprecations?hl=it
+fetched_at: 2026-05-05T19:43:33.917434+00:00
+title: "Ritiri di Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/Gemini Deep Research)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
 
-- [홈](https://ai.google.dev/gemini-api/docs/홈)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [문서](https://ai.google.dev/gemini-api/docs/문서)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-의견 보내기
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Gemini 지원 중단
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-이 페이지에는 Gemini API의 [안정화 (GA)](https://ai.google.dev/gemini-api/docs/안정화 (GA)) 및 [미리보기](https://ai.google.dev/gemini-api/docs/미리보기) 모델의 알려진 지원 중단 일정이 나와 있습니다. '**지원 중단**'은 더 이상 모델을 지원하지 않으며 가까운 시일 내에 '**종료**'될 것이라는 발표입니다. 모델이 '**shutdown**'되면 완전히 꺼지고 엔드포인트를 더 이상 사용할 수 없습니다.
+Invia feedback
 
-지원 중단 공지는 [출시 노트](https://ai.google.dev/gemini-api/docs/출시 노트) 페이지에 게시되며, 공지된 가장 빠른 종료 날짜는 이 페이지에서 추적됩니다.
-이미 종료된 모델은 회색 배경으로 표시됩니다.
+# Ritiri di Gemini
 
-## Gemini 3 모델
+Questa pagina elenca le pianificazioni di ritiro note per i modelli [stabili (GA)](https://ai.google.dev/gemini-api/docs/models?hl=it#stable) e [anteprima](https://ai.google.dev/gemini-api/docs/models?hl=it#preview)
+nell'API Gemini. Il "**ritiro**" è l'annuncio che non
+forniamo più supporto per un modello e che verrà "**arrestato**" in
+un futuro prossimo. Una volta che un modello viene "**arrestato**", viene completamente
+disattivato e l'endpoint non è più disponibile.
 
-| **모델** | **출시일** | **종료일** | **권장 교체** |
+Gli annunci di ritiro vengono pubblicati nella pagina
+[Note di rilascio](https://ai.google.dev/gemini-api/docs/changelog?hl=it) e le date di chiusura
+più vicine annunciate vengono monitorate in questa pagina.
+I modelli già chiusi sono indicati con sfondi grigi.
+
+## Modelli di Gemini 3
+
+| **Modello** | **Data di rilascio** | **Data di chiusura** | **Sostituzione consigliata** |
 | --- | --- | --- | --- |
-| 프리뷰 모델 | | | |
-| `gemini-3.1-flash-lite-preview` | 2026년 3월 3일 | 종료 날짜가 발표되지 않음 |  |
-| `gemini-3.1-flash-image-preview` | 2026년 2월 26일 | 종료 날짜가 발표되지 않음 |  |
-| `gemini-3.1-pro-preview` | 2026년 2월 19일 | 종료 날짜가 발표되지 않음 |  |
-| `gemini-3-pro-image-preview` | 2025년 11월 20일 | 종료 날짜가 발표되지 않음 |  |
-| `gemini-3-flash-preview` | 2025년 12월 17일 | 종료 날짜가 발표되지 않음 |  |
-| `gemini-3-pro-preview` | 2025년 11월 18일 | 2026년 3월 9일 | `gemini-3.1-pro-preview` |
+| Anteprima modelli | | | |
+| `gemini-3.1-flash-lite-preview` | 3 marzo 2026 | Nessuna data di chiusura annunciata |  |
+| `gemini-3.1-flash-image-preview` | 26 febbraio 2026 | Nessuna data di chiusura annunciata |  |
+| `gemini-3.1-pro-preview` | 19 febbraio 2026 | Nessuna data di chiusura annunciata |  |
+| `gemini-3-pro-image-preview` | 20 novembre 2025 | Nessuna data di chiusura annunciata |  |
+| `gemini-3-flash-preview` | 17 dicembre 2025 | Nessuna data di chiusura annunciata |  |
+| `gemini-3-pro-preview` | 18 novembre 2025 | 9 marzo 2026 | `gemini-3.1-pro-preview` |
 
-## Gemini 2.5 Pro 모델
+## Modelli Gemini 2.5 Pro
 
-| **모델** | **출시일** | **종료일** | **권장 교체** |
+| **Modello** | **Data di rilascio** | **Data di chiusura** | **Sostituzione consigliata** |
 | --- | --- | --- | --- |
-| `gemini-2.5-pro` | 2025년 6월 17일 | 2026년 6월 17일 | `gemini-3.1-pro-preview` |
-| 프리뷰 모델 | | | |
-| `gemini-2.5-pro-preview-03-25` | 2025년 3월 3일 | 2025년 12월 2일 | `gemini-3.1-pro-preview` |
-| `gemini-2.5-pro-preview-05-06` | 2025년 5월 6일 | 2025년 12월 2일 | `gemini-3.1-pro-preview` |
-| `gemini-2.5-pro-preview-06-05` | 2025년 6월 5일 | 2025년 12월 2일 | `gemini-3.1-pro-preview` |
+| `gemini-2.5-pro` | 17 giugno 2025 | 17 giugno 2026 | `gemini-3.1-pro-preview` |
+| Anteprima modelli | | | |
+| `gemini-2.5-pro-preview-03-25` | 3 marzo 2025 | 2 dicembre 2025 | `gemini-3.1-pro-preview` |
+| `gemini-2.5-pro-preview-05-06` | 6 maggio 2025 | 2 dicembre 2025 | `gemini-3.1-pro-preview` |
+| `gemini-2.5-pro-preview-06-05` | 5 giugno 2025 | 2 dicembre 2025 | `gemini-3.1-pro-preview` |
 
-## Gemini 2.5 Flash 모델
+## Modelli Gemini 2.5 Flash
 
-| **모델** | **출시일** | **종료일** | **권장 교체** |
+| **Modello** | **Data di rilascio** | **Data di chiusura** | **Sostituzione consigliata** |
 | --- | --- | --- | --- |
-| `gemini-2.5-flash` | 2025년 6월 17일 | 2026년 6월 17일 | `gemini-3-flash-preview` |
-| `gemini-2.5-flash-image` | 2025년 10월 2일 | 2026년 10월 2일 | `gemini-3.1-flash-image-preview` |
-| `gemini-2.5-flash-lite` | 2025년 7월 22일 | 2026년 7월 22일 | `gemini-3.1-flash-lite-preview` |
-| 프리뷰 모델 | | | |
-| `gemini-2.5-flash-lite-preview-09-2025` | 2025년 9월 25일 | 2026년 3월 31일 | `gemini-3.1-flash-lite-preview` |
-| `gemini-2.5-flash-preview-05-20` | 2025년 5월 20일 | 2025년 11월 18일 | `gemini-3-flash-preview` |
-| `gemini-2.5-flash-image-preview` | 2025년 5월 7일 | 2026년 1월 15일 | `gemini-2.5-flash-image` |
-| `gemini-2.5-flash-preview-09-25` | 2025년 9월 25일 | 2026년 2월 17일 | `gemini-3-flash-preview` |
+| `gemini-2.5-flash` | 17 giugno 2025 | 17 giugno 2026 | `gemini-3-flash-preview` |
+| `gemini-2.5-flash-image` | 2 ottobre 2025 | 2 ottobre 2026 | `gemini-3.1-flash-image-preview` |
+| `gemini-2.5-flash-lite` | 22 luglio 2025 | 22 luglio 2026 | `gemini-3.1-flash-lite-preview` |
+| Anteprima modelli | | | |
+| `gemini-2.5-flash-lite-preview-09-2025` | 25 settembre 2025 | 31 marzo 2026 | `gemini-3.1-flash-lite-preview` |
+| `gemini-2.5-flash-preview-05-20` | 20 maggio 2025 | 18 novembre 2025 | `gemini-3-flash-preview` |
+| `gemini-2.5-flash-image-preview` | 7 maggio 2025 | 15 gennaio 2026 | `gemini-2.5-flash-image` |
+| `gemini-2.5-flash-preview-09-25` | 25 settembre 2025 | 17 febbraio 2026 | `gemini-3-flash-preview` |
 
-## Gemini 2.0 모델
+## Modelli Gemini 2.0
 
-| **모델** | **출시일** | **종료일** | **권장 교체** |
+| **Modello** | **Data di rilascio** | **Data di chiusura** | **Sostituzione consigliata** |
 | --- | --- | --- | --- |
-| `gemini-2.0-flash` | 2025년 2월 5일 | 2026년 6월 1일 | `gemini-2.5-flash` |
-| `gemini-2.0-flash-001` | 2025년 2월 5일 | 2026년 6월 1일 | `gemini-2.5-flash` |
-| `gemini-2.0-flash-lite` | 2025년 2월 25일 | 2026년 6월 1일 | `gemini-2.5-flash-lite` |
-| `gemini-2.0-flash-lite-001` | 2025년 2월 25일 | 2026년 6월 1일 | `gemini-2.5-flash-lite` |
-| 프리뷰 모델 | | | |
-| `gemini-2.0-flash-preview-image-generation` | 2025년 5월 7일 | 2025년 11월 14일 | `gemini-2.5-flash-image` |
-| `gemini-2.0-flash-lite-preview` | 2025년 2월 5일 | 2025년 12월 9일 | `gemini-2.5-flash-lite` |
-| `gemini-2.0-flash-lite-preview-02-05` | 2025년 2월 5일 | 2025년 12월 9일 | `gemini-2.5-flash-lite` |
+| `gemini-2.0-flash` | 5 febbraio 2025 | 1° giugno 2026 | `gemini-2.5-flash` |
+| `gemini-2.0-flash-001` | 5 febbraio 2025 | 1° giugno 2026 | `gemini-2.5-flash` |
+| `gemini-2.0-flash-lite` | 25 febbraio 2025 | 1° giugno 2026 | `gemini-2.5-flash-lite` |
+| `gemini-2.0-flash-lite-001` | 25 febbraio 2025 | 1° giugno 2026 | `gemini-2.5-flash-lite` |
+| Anteprima modelli | | | |
+| `gemini-2.0-flash-preview-image-generation` | 7 maggio 2025 | 14 novembre 2025 | `gemini-2.5-flash-image` |
+| `gemini-2.0-flash-lite-preview` | 5 febbraio 2025 | 9 dicembre 2025 | `gemini-2.5-flash-lite` |
+| `gemini-2.0-flash-lite-preview-02-05` | 5 febbraio 2025 | 9 dicembre 2025 | `gemini-2.5-flash-lite` |
 
-## Live API 모델
+## Modelli di API Live
 
-| **모델** | **출시일** | **종료일** | **권장 교체** |
+| **Modello** | **Data di rilascio** | **Data di chiusura** | **Sostituzione consigliata** |
 | --- | --- | --- | --- |
-| `gemini-2.0-flash-live-001` | 2025년 4월 9일 | 2025년 12월 9일 | `gemini-3.1-flash-live-preview` |
-| 프리뷰 모델 | | | |
-| `gemini-3.1-flash-live-preview` | 2026년 3월 11일 | 종료 날짜가 발표되지 않음 |  |
-| `gemini-2.5-flash-native-audio-preview-12-2025` | 2025년 12월 12일 | 종료 날짜가 발표되지 않음 | `gemini-3.1-flash-live-preview` |
-| `gemini-live-2.5-flash-preview` | 2025년 6월 17일 | 2025년 12월 9일 | `gemini-3.1-flash-live-preview` |
+| `gemini-2.0-flash-live-001` | 9 aprile 2025 | 9 dicembre 2025 | `gemini-3.1-flash-live-preview` |
+| Anteprima modelli | | | |
+| `gemini-3.1-flash-live-preview` | 11 marzo 2026 | Nessuna data di chiusura annunciata |  |
+| `gemini-2.5-flash-native-audio-preview-12-2025` | 12 dicembre 2025 | Nessuna data di chiusura annunciata | `gemini-3.1-flash-live-preview` |
+| `gemini-live-2.5-flash-preview` | 17 giugno 2025 | 9 dicembre 2025 | `gemini-3.1-flash-live-preview` |
 
-## 오디오 모델
+## Modelli audio
 
-| **모델** | **출시일** | **종료일** | **권장 교체** |
+| **Modello** | **Data di rilascio** | **Data di chiusura** | **Sostituzione consigliata** |
 | --- | --- | --- | --- |
-| 프리뷰 모델 | | | |
-| `gemini-3.1-flash-tts-preview` | 2026년 4월 13일 | 종료 날짜가 발표되지 않음 |  |
-| `gemini-2.5-flash-preview-tts` | 2025년 5월 20일 | 종료 날짜가 발표되지 않음 | `gemini-3.1-flash-tts-preview` |
-| `gemini-2.5-pro-preview-tts` | 2025년 5월 20일 | 종료 날짜가 발표되지 않음 | `gemini-3.1-flash-tts-preview` |
+| Anteprima modelli | | | |
+| `gemini-3.1-flash-tts-preview` | 13 aprile 2026 | Nessuna data di chiusura annunciata |  |
+| `gemini-2.5-flash-preview-tts` | 20 maggio 2025 | Nessuna data di chiusura annunciata | `gemini-3.1-flash-tts-preview` |
+| `gemini-2.5-pro-preview-tts` | 20 maggio 2025 | Nessuna data di chiusura annunciata | `gemini-3.1-flash-tts-preview` |
 
-## 임베딩 모델
+## Modelli di embedding
 
-| **모델** | **출시일** | **종료일** | **권장 교체** |
+| **Modello** | **Data di rilascio** | **Data di chiusura** | **Sostituzione consigliata** |
 | --- | --- | --- | --- |
-| `gemini-embedding-001` | 2025년 7월 14일 | 2026년 7월 14일 |  |
-| `text-embedding-004` | 2024년 4월 9일 | 2026년 1월 14일 | `gemini-embedding-001` |
-| 프리뷰 모델 | | | |
-| `embedding-001` | 2024년 4월 9일 | 2025년 10월 30일 | `gemini-embedding-001` |
-| `embedding-gecko-001` |  | 2025년 10월 30일 | `gemini-embedding-001` |
-| `gemini-embedding-exp` |  | 2025년 10월 30일 | `gemini-embedding-001` |
-| `gemini-embedding-exp-03-07` |  | 2025년 10월 30일 | `gemini-embedding-001` |
+| `gemini-embedding-001` | 14 luglio 2025 | 14 luglio 2026 |  |
+| `text-embedding-004` | 9 aprile 2024 | 14 gennaio 2026 | `gemini-embedding-001` |
+| Anteprima modelli | | | |
+| `embedding-001` | 9 aprile 2024 | 30 ottobre 2025 | `gemini-embedding-001` |
+| `embedding-gecko-001` |  | 30 ottobre 2025 | `gemini-embedding-001` |
+| `gemini-embedding-exp` |  | 30 ottobre 2025 | `gemini-embedding-001` |
+| `gemini-embedding-exp-03-07` |  | 30 ottobre 2025 | `gemini-embedding-001` |
 
-## Imagen 모델
+## Modelli Imagen
 
-| **모델** | **출시일** | **종료일** | **권장 교체** |
+| **Modello** | **Data di rilascio** | **Data di chiusura** | **Sostituzione consigliata** |
 | --- | --- | --- | --- |
-| `imagen-4.0-generate-001` | 2025년 6월 24일 | 2026년 6월 24일 | `gemini-3-pro-image-preview` 또는 `gemini-2.5-flash-image` |
-| `imagen-4.0-ultra-generate-001` | 2025년 6월 24일 | 2026년 6월 24일 | `gemini-3-pro-image-preview` 또는 `gemini-2.5-flash-image` |
-| `imagen-4.0-fast-generate-001` | 2025년 6월 24일 | 2026년 6월 24일 | `gemini-3-pro-image-preview` 또는 `gemini-2.5-flash-image` |
-| `imagen-3.0-generate-002` | 2025년 2월 6일 | 2025년 11월 10일 | `imagen-4.0-generate-001` |
-| 프리뷰 모델 | | | |
-| `imagen-4.0-generate-preview-06-06` | 2025년 6월 24일 | 2026년 2월 17일 | `imagen-4.0-generate-001` |
-| `imagen-4.0-ultra-generate-preview-06-06` | 2025년 6월 24일 | 2026년 2월 17일 | `imagen-4.0-ultra-generate-001` |
+| `imagen-4.0-generate-001` | 24 giugno 2025 | 24 giugno 2026 | `gemini-3-pro-image-preview` o `gemini-2.5-flash-image` |
+| `imagen-4.0-ultra-generate-001` | 24 giugno 2025 | 24 giugno 2026 | `gemini-3-pro-image-preview` o `gemini-2.5-flash-image` |
+| `imagen-4.0-fast-generate-001` | 24 giugno 2025 | 24 giugno 2026 | `gemini-3-pro-image-preview` o `gemini-2.5-flash-image` |
+| `imagen-3.0-generate-002` | 6 febbraio 2025 | 10 novembre 2025 | `imagen-4.0-generate-001` |
+| Anteprima modelli | | | |
+| `imagen-4.0-generate-preview-06-06` | 24 giugno 2025 | 17 febbraio 2026 | `imagen-4.0-generate-001` |
+| `imagen-4.0-ultra-generate-preview-06-06` | 24 giugno 2025 | 17 febbraio 2026 | `imagen-4.0-ultra-generate-001` |
 
-## Veo 모델
+## Modelli Veo
 
-| **모델** | **출시일** | **종료일** | **권장 교체** |
+| **Modello** | **Data di rilascio** | **Data di chiusura** | **Sostituzione consigliata** |
 | --- | --- | --- | --- |
-| `veo-3.0-generate-001` | 2025년 9월 9일 | 출시 예정 | `veo-3.1-generate-preview` |
-| `veo-3.0-fast-generate-001` | 2025년 9월 9일 | 출시 예정 | `veo-3.1-lite-generate-preview` |
-| `veo-2.0-generate-001` | 2025년 4월 9일 | 출시 예정 | `veo-3.1-generate-preview` |
-| 프리뷰 모델 | | | |
-| `veo-3.1-lite-generate-preview` | 2026년 3월 31일 | 종료 날짜가 발표되지 않음 |  |
-| `veo-3.1-generate-preview` | 2025년 10월 15일 | 종료 날짜가 발표되지 않음 |  |
-| `veo-3.1-fast-generate-preview` | 2025년 10월 15일 | 종료 날짜가 발표되지 않음 |  |
-| `veo-3.0-generate-preview` | 2025년 7월 31일 | 2025년 11월 12일 | `veo-3.1-generate-preview` |
-| `veo-3.0-fast-generate-preview` | 2025년 7월 31일 | 2025년 11월 12일 | `veo-3.1-fast-generate-preview` |
+| `veo-3.0-generate-001` | 9 settembre 2025 | Disponibile a breve | `veo-3.1-generate-preview` |
+| `veo-3.0-fast-generate-001` | 9 settembre 2025 | Disponibile a breve | `veo-3.1-lite-generate-preview` |
+| `veo-2.0-generate-001` | 9 aprile 2025 | Disponibile a breve | `veo-3.1-generate-preview` |
+| Anteprima modelli | | | |
+| `veo-3.1-lite-generate-preview` | 31 marzo 2026 | Nessuna data di chiusura annunciata |  |
+| `veo-3.1-generate-preview` | 15 ottobre 2025 | Nessuna data di chiusura annunciata |  |
+| `veo-3.1-fast-generate-preview` | 15 ottobre 2025 | Nessuna data di chiusura annunciata |  |
+| `veo-3.0-generate-preview` | 31 luglio 2025 | 12 novembre 2025 | `veo-3.1-generate-preview` |
+| `veo-3.0-fast-generate-preview` | 31 luglio 2025 | 12 novembre 2025 | `veo-3.1-fast-generate-preview` |
 
-## Lyria 모델
+## Modelli Lyria
 
-| **모델** | **출시일** | **종료일** | **권장 교체** |
+| **Modello** | **Data di rilascio** | **Data di chiusura** | **Sostituzione consigliata** |
 | --- | --- | --- | --- |
-| `lyria-3-clip-preview` | 2026년 3월 25일 | 종료 날짜가 발표되지 않음 |  |
-| `lyria-3-pro-preview` | 2026년 3월 25일 | 종료 날짜가 발표되지 않음 |  |
-| `lyria-realtime-exp` | 2025년 5월 20일 | 종료 날짜가 발표되지 않음 |  |
+| `lyria-3-clip-preview` | 25 marzo 2026 | Nessuna data di chiusura annunciata |  |
+| `lyria-3-pro-preview` | 25 marzo 2026 | Nessuna data di chiusura annunciata |  |
+| `lyria-realtime-exp` | 20 maggio 2025 | Nessuna data di chiusura annunciata |  |
 
-## 로봇공학 모델
+## Modelli di robotica
 
-| **모델** | **출시일** | **종료일** | **권장 교체** |
+| **Modello** | **Data di rilascio** | **Data di chiusura** | **Sostituzione consigliata** |
 | --- | --- | --- | --- |
-| 프리뷰 모델 | | | |
-| `gemini-robotics-er-1.6-preview` | 2026년 4월 14일 | 종료 날짜가 발표되지 않음 |  |
-| `gemini-robotics-er-1.5-preview` | 2025년 9월 25일 | 2026년 4월 30일 | `gemini-robotics-er-1.6-preview` |
+| Anteprima modelli | | | |
+| `gemini-robotics-er-1.6-preview` | 14 aprile 2026 | Nessuna data di arresto annunciata |  |
+| `gemini-robotics-er-1.5-preview` | 25 settembre 2025 | 30 aprile 2026 | `gemini-robotics-er-1.6-preview` |
 
-의견 보내기
+Invia feedback
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://ai.google.dev/gemini-api/docs/Creative Commons Attribution 4.0 라이선스)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://ai.google.dev/gemini-api/docs/Apache 2.0 라이선스)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://ai.google.dev/gemini-api/docs/Google Developers 사이트 정책)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-최종 업데이트: 2026-05-05(UTC)
+Ultimo aggiornamento 2026-05-05 UTC.
 
-의견을 전달하고 싶나요?
+Vuoi dirci altro?
+
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-05 UTC."],[],[]]

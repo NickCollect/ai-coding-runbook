@@ -1,29 +1,33 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/media-resolution?hl=es-419
-fetched_at: 2026-05-05T13:10:38.925508+00:00
-title: "Resoluci\u00f3n de contenido multimedia \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/media-resolution?hl=ko
+fetched_at: 2026-05-05T19:42:35.253734+00:00
+title: "\ubbf8\ub514\uc5b4 \ud574\uc0c1\ub3c4 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/Gemini Deep Research) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-- [Página principal](https://ai.google.dev/gemini-api/docs/Página principal)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [Documentos](https://ai.google.dev/gemini-api/docs/Documentos)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Enviar comentarios
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Resolución de contenido multimedia
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-El parámetro `media_resolution` controla cómo la API de Gemini procesa las entradas de medios, como imágenes, videos y documentos PDF, ya que determina la **cantidad máxima de tokens** asignados para las entradas de medios, lo que te permite equilibrar la calidad de la respuesta con la latencia y el costo. Para conocer los diferentes parámetros de configuración, los valores predeterminados y cómo se corresponden con los tokens, consulta la sección [Recuento de tokens](https://ai.google.dev/gemini-api/docs/Recuento de tokens).
+의견 보내기
 
-Puedes configurar la resolución de los medios de dos maneras:
+# 미디어 해상도
 
-- [Por parte](https://ai.google.dev/gemini-api/docs/Por parte) (solo Gemini 3)
-- [Globalmente](https://ai.google.dev/gemini-api/docs/Globalmente) para toda la solicitud de `generateContent` (todos los modelos multimodales)
+`media_resolution` 매개변수는 미디어 입력에 할당된 **최대 토큰 수** 를 결정하여 Gemini API가 이미지, 동영상, PDF 문서와 같은 미디어 입력을 처리하는 방식을 제어하므로 응답 품질과 지연 시간 및 비용 간의 균형을 맞출 수 있습니다. 다양한 설정, 기본값, 토큰과의 상호 관계는 [토큰 수](#token-counts) 섹션을 참고하세요.
 
-## Resolución de medios por parte (solo Gemini 3)
+미디어 해상도는 다음 두 가지 방법으로 구성할 수 있습니다.
 
-Gemini 3 te permite establecer la resolución de los medios para objetos multimedia individuales dentro de tu solicitud, lo que ofrece una optimización detallada del uso de tokens. Puedes combinar niveles de resolución en una sola solicitud. Por ejemplo, usar alta resolución para un diagrama complejo y baja resolución para una imagen contextual simple. Este parámetro de configuración anula cualquier configuración global para una parte específica. Para conocer la configuración predeterminada, consulta la sección [Recuentos de tokens](https://ai.google.dev/gemini-api/docs/Recuentos de tokens).
+- [부분별](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ko#per-part-media-resolution) (Gemini 3만 해당)
+- [전체](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ko#global-media-resolution) `generateContent` 요청에 대해 전역적으로 (모든 멀티모달 모델)
+
+## 부분별 미디어 해상도 (Gemini 3만 해당)
+
+Gemini 3을 사용하면 요청 내에서 개별 미디어 객체의 미디어 해상도를 설정하여 토큰 사용을 세부적으로 최적화할 수 있습니다. 단일 요청에서 해상도 수준을 혼합할 수 있습니다. 예를 들어 복잡한 다이어그램에는 고해상도를 사용하고 간단한 컨텍스트 이미지에는 저해상도를 사용합니다. 이 설정은 특정 부분의 전역 구성을 재정의합니다. 기본 설정은 [토큰 수](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ko#token-counts) 섹션을 참고하세요.
 
 ### Python
 
@@ -58,7 +62,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 // Example: Setting per-part media resolution in JavaScript
@@ -126,9 +130,9 @@ curl -s -X POST \
   -d @request.json
 ```
 
-## Resolución de medios global
+## 전역 미디어 해상도
 
-Puedes establecer una resolución predeterminada para todas las partes de los medios en una solicitud con `GenerationConfig`. Todos los modelos multimodales admiten esta función. Si una solicitud incluye la configuración global y la [configuración por parte](https://ai.google.dev/gemini-api/docs/configuración por parte), la configuración por parte tendrá prioridad para ese elemento específico.
+`GenerationConfig`를 사용하여 요청의 모든 미디어 부분에 기본 해상도를 설정할 수 있습니다. 이 기능은 모든 멀티모달 모델에서 지원됩니다. 요청에 전역 설정과 [부분별 설정](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ko#per-part-media-resolution)이 모두 포함된 경우 해당 특정 항목에 부분별 설정이 우선 적용됩니다.
 
 ### Python
 
@@ -156,7 +160,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI, MediaResolution } from '@google/genai';
@@ -196,81 +200,85 @@ curl -s -X POST \
   }'
 ```
 
-## Valores de resolución disponibles
+## 사용 가능한 해상도 값
 
-La API de Gemini define los siguientes niveles de resolución de medios:
+Gemini API는 미디어 해상도에 대해 다음 수준을 정의합니다.
 
-- `MEDIA_RESOLUTION_UNSPECIFIED`: Es el parámetro de configuración predeterminado. El recuento de tokens para este nivel varía significativamente entre Gemini 3 y los modelos anteriores de Gemini.
-- `MEDIA_RESOLUTION_LOW`: Recuento de tokens más bajo, lo que genera un procesamiento más rápido y un costo menor, pero con menos detalles.
-- `MEDIA_RESOLUTION_MEDIUM`: Un equilibrio entre detalle, costo y latencia.
-- `MEDIA_RESOLUTION_HIGH`: Mayor recuento de tokens, lo que proporciona más detalles para que el modelo trabaje, a costa de una mayor latencia y costo.
-- `MEDIA_RESOLUTION_ULTRA_HIGH` (solo por parte): Es el recuento de tokens más alto, necesario para casos de uso específicos, como el [uso de computadoras](https://ai.google.dev/gemini-api/docs/uso de computadoras).
+- `MEDIA_RESOLUTION_UNSPECIFIED`: 기본 설정입니다. 이 수준의 토큰 수는 Gemini 3과 이전 Gemini 모델 간에 크게 다릅니다.
+- `MEDIA_RESOLUTION_LOW`: 토큰 수가 적어 처리 속도가 빠르고 비용이 저렴하지만 세부정보가 적습니다.
+- `MEDIA_RESOLUTION_MEDIUM`: 세부정보, 비용, 지연 시간 간의 균형입니다.
+- `MEDIA_RESOLUTION_HIGH`: 토큰 수가 많아 모델이 사용할 수 있는 세부정보가 많지만 지연 시간과 비용이 증가합니다.
+- `MEDIA_RESOLUTION_ULTRA_HIGH` (부분별만 해당): 토큰 수가 가장 많으며 특정
+  사용 사례(예: [컴퓨터 사용](https://ai.google.dev/gemini-api/docs/computer-use?hl=ko))에 필요합니다.
 
-Ten en cuenta que `MEDIA_RESOLUTION_HIGH` proporciona el rendimiento óptimo para la mayoría de los casos de uso.
+`MEDIA_RESOLUTION_HIGH`는 대부분의 사용 사례에서 최적의 성능을 제공합니다.
 
-La cantidad exacta de tokens generados para cada uno de estos niveles depende del **tipo de medio** (imagen, video, PDF) y de la **versión del modelo**.
+이러한 각 수준에 대해 생성되는 정확한 토큰 수는 **미디어 유형** (이미지, 동영상, PDF)과 **모델 버전** 에 따라 다릅니다.
 
-## Recuentos de tokens
+## 토큰 수
 
-En las siguientes tablas, se resumen los recuentos aproximados de tokens para cada valor de `media_resolution` y tipo de medio por familia de modelos.
+아래 표에는 모델 계열별로 각 `media_resolution` 값과 미디어 유형에 대한 대략적인 토큰 수가 요약되어 있습니다.
 
-**Modelos de Gemini 3**
+**Gemini 3 모델**
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| **MediaResolution** | **Imagen** | **Video** | **PDF** |
-| `MEDIA_RESOLUTION_UNSPECIFIED` (predeterminado) | 1120 | 70 | 560 |
-| `MEDIA_RESOLUTION_LOW` | 280 | 70 | 280 + texto nativo |
-| `MEDIA_RESOLUTION_MEDIUM` | 560 | 70 | 560 + texto nativo |
-| `MEDIA_RESOLUTION_HIGH` | 1120 | 280 | 1120 + texto nativo |
-| `MEDIA_RESOLUTION_ULTRA_HIGH` | 2240 | N/A | N/A |
+| **MediaResolution** | **이미지** | **동영상** | **PDF** |
+| `MEDIA_RESOLUTION_UNSPECIFIED` (기본값) | 1120 | 70 | 560 |
+| `MEDIA_RESOLUTION_LOW` | 280 | 70 | 280 + 기본 텍스트 |
+| `MEDIA_RESOLUTION_MEDIUM` | 560 | 70 | 560 + 기본 텍스트 |
+| `MEDIA_RESOLUTION_HIGH` | 1120 | 280 | 1120 + 기본 텍스트 |
+| `MEDIA_RESOLUTION_ULTRA_HIGH` | 2240 | 해당 사항 없음 | 해당 사항 없음 |
 
-**Modelos de Gemini 2.5**
+**Gemini 2.5 모델**
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **MediaResolution** | **Imagen** | **Video** | **PDF (escaneado)** | **PDF (nativa)** |
-| `MEDIA_RESOLUTION_UNSPECIFIED` (predeterminado) | 256 + Pan & Scan (aproximadamente 2,048) | 256 | 256 + OCR | 256 + texto nativo |
-| `MEDIA_RESOLUTION_LOW` | 64 | 64 | 64 + OCR | 64 + texto nativo |
-| `MEDIA_RESOLUTION_MEDIUM` | 256 | 256 | 256 + OCR | 256 + texto nativo |
-| `MEDIA_RESOLUTION_HIGH` | 256 + Pan & Scan | 256 | 256 + OCR | 256 + texto nativo |
+| **MediaResolution** | **이미지** | **동영상** | **PDF (스캔됨)** | **PDF (기본)** |
+| `MEDIA_RESOLUTION_UNSPECIFIED` (기본값) | 256 + 화면 이동 및 스캔 (~2048) | 256 | 256 + OCR | 256 + 기본 텍스트 |
+| `MEDIA_RESOLUTION_LOW` | 64 | 64 | 64 + OCR | 64 + 기본 텍스트 |
+| `MEDIA_RESOLUTION_MEDIUM` | 256 | 256 | 256 + OCR | 256 + 기본 텍스트 |
+| `MEDIA_RESOLUTION_HIGH` | 256 + 화면 이동 및 스캔 | 256 | 256 + OCR | 256 + 기본 텍스트 |
 
-## Cómo elegir la resolución correcta
+## 적절한 해상도 선택
 
-- **Predeterminado (`UNSPECIFIED`):** Comienza con la configuración predeterminada. Está optimizado para lograr un buen equilibrio entre calidad, latencia y costo en la mayoría de los casos de uso comunes.
-- **`LOW`:** Úsalo en situaciones en las que el costo y la latencia son fundamentales, y el detalle preciso es menos importante.
-- **`MEDIUM` o `HIGH`:** Aumenta la resolución cuando la tarea requiera comprender detalles complejos dentro del contenido multimedia. Esto suele ser necesario para el análisis visual complejo, la lectura de gráficos o la comprensión de documentos densos.
-- **`ULTRA HIGH`**: Solo está disponible para la configuración por parte. Se recomienda para casos de uso específicos, como el uso de computadoras o cuando las pruebas muestran una mejora clara en comparación con `HIGH`.
-- **Control por parte (Gemini 3):** Optimiza el uso de tokens. Por ejemplo, en una instrucción con varias imágenes, usa `HIGH` para un diagrama complejo y `LOW` o `MEDIUM` para imágenes contextuales más simples.
+- **기본값 (`UNSPECIFIED`):** 기본값으로 시작합니다. 가장 일반적인 사용 사례에서 품질, 지연 시간, 비용 간의 적절한 균형을 위해 조정됩니다.
+- **`LOW`:** 비용과 지연 시간이 가장 중요하고 세부정보가 덜 중요한 시나리오에 사용합니다.
+- **`MEDIUM` / `HIGH`:** 태스크에서 미디어 내의 복잡한 세부정보를 이해해야 하는 경우 해상도를 높입니다. 이는 복잡한 시각적 분석, 차트 읽기 또는 밀도 높은 문서 이해에 필요한 경우가 많습니다.
+- **`ULTRA HIGH`** - 부분별 설정에만 사용할 수 있습니다. 컴퓨터 사용과 같은 특정 사용 사례 또는 테스트에서 `HIGH`보다 명확한 개선이 확인되는 경우에 권장됩니다.
+- **부분별 제어 (Gemini 3):** 토큰 사용을 최적화합니다. 예를 들어 이미지가 여러 개인 프롬프트에서 복잡한 다이어그램에는 `HIGH`를 사용하고 더 간단한 컨텍스트 이미지에는 `LOW` 또는 `MEDIUM`을 사용합니다.
 
-**Configuración recomendada**
+**권장 설정**
 
-A continuación, se enumeran los parámetros de configuración de resolución de medios recomendados para cada tipo de medio compatible.
+다음은 지원되는 각 미디어 유형에 권장되는 미디어 해상도 설정을 나열한 것입니다.
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| **Tipo de medio** | **Configuración recomendada** | **Max Tokens** | **Orientación de uso** |
-| **Imágenes** | `MEDIA_RESOLUTION_HIGH` | 1120 | Se recomienda para la mayoría de las tareas de análisis de imágenes para garantizar la máxima calidad. |
-| **PDFs** | `MEDIA_RESOLUTION_MEDIUM` | 560 | Es óptimo para la comprensión de documentos; la calidad suele saturarse en `medium`. Aumentar a `high` rara vez mejora los resultados del OCR para documentos estándar. |
-| **Video** (general) | `MEDIA_RESOLUTION_LOW` (o `MEDIA_RESOLUTION_MEDIUM`) | 70 (por fotograma) | **Nota:** En el caso de los videos, la configuración de `low` y `medium` se trata de forma idéntica (70 tokens) para optimizar el uso del contexto. Esto es suficiente para la mayoría de las tareas de reconocimiento y descripción de acciones. |
-| **Video** (con mucho texto) | `MEDIA_RESOLUTION_HIGH` | 280 (por fotograma) | Solo se requiere cuando el caso de uso implica leer texto denso (OCR) o detalles pequeños dentro de los fotogramas de video. |
+| **미디어 유형** | **권장 설정** | **최대 토큰 수** | **사용 가이드** |
+| **이미지** | `MEDIA_RESOLUTION_HIGH` | 1120 | 최대 품질을 보장하기 위해 대부분의 이미지 분석 작업에 권장됩니다. |
+| **PDF** | `MEDIA_RESOLUTION_MEDIUM` | 560 | 문서 이해에 최적입니다. 품질은 일반적으로 `medium`에서 포화됩니다. `high`로 늘려도 표준 문서의 OCR 결과가 개선되는 경우는 거의 없습니다. |
+| **동영상** (일반) | `MEDIA_RESOLUTION_LOW` (또는 `MEDIA_RESOLUTION_MEDIUM`) | 70 (프레임당) | **참고:** 동영상의 경우 컨텍스트 사용을 최적화하기 위해 `low` 및 `medium` 설정이 동일하게 처리됩니다 (토큰 70개). 이는 대부분의 동작 인식 및 설명 작업에 충분합니다. |
+| **동영상** (텍스트가 많은 경우) | `MEDIA_RESOLUTION_HIGH` | 280 (프레임당) | 사용 사례에 밀도 높은 텍스트 (OCR) 또는 동영상 프레임 내의 작은 세부정보를 읽는 것이 포함된 경우에만 필요합니다. |
 
-Siempre prueba y evalúa el impacto de los diferentes parámetros de configuración de resolución en tu aplicación específica para encontrar el mejor equilibrio entre calidad, latencia y costo.
+품질, 지연 시간, 비용 간의 최적의 절충점을 찾으려면 항상 다양한 해상도 설정이 특정 애플리케이션에 미치는 영향을 테스트하고 평가하세요.
 
-## Resumen de compatibilidad de versiones
+## 버전 호환성 요약
 
-- La enumeración `MediaResolution` está disponible para todos los modelos que admiten entrada de medios.
-- Los recuentos de tokens asociados con cada nivel de enumeración **difieren** entre los modelos de Gemini 3 y las versiones anteriores de Gemini.
-- El parámetro de configuración `media_resolution` en objetos `Part` individuales es **exclusivo de los modelos de Gemini 3**.
+- `MediaResolution` 열거형은 미디어 입력을 지원하는 모든 모델에서 사용할 수 있습니다.
+- 각 열거형 수준과 연결된 토큰 수는 Gemini 3 모델과 이전 Gemini 버전 간에 **다릅니다**.
+- 개별 `Part` 객체에서 `media_resolution`을 설정하는 것은 **Gemini 3 모델에만 해당** 됩니다.
 
-## Próximos pasos
+## 다음 단계
 
-- Obtén más información sobre las capacidades multimodales de la API de Gemini en las guías de [comprensión de imágenes](https://ai.google.dev/gemini-api/docs/comprensión de imágenes), [comprensión de videos](https://ai.google.dev/gemini-api/docs/comprensión de videos) y [comprensión de documentos](https://ai.google.dev/gemini-api/docs/comprensión de documentos).
+- [이미지 이해](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ko), [동영상 이해](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ko),
+  [문서 이해](https://ai.google.dev/gemini-api/docs/document-processing?hl=ko) 가이드에서 Gemini API의 멀티모달 기능에 대해 자세히 알아보세요.
 
-Enviar comentarios
+의견 보내기
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://ai.google.dev/gemini-api/docs/licencia Atribución 4.0 de Creative Commons), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://ai.google.dev/gemini-api/docs/licencia Apache 2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://ai.google.dev/gemini-api/docs/políticas del sitio de Google Developers). Java es una marca registrada de Oracle o sus afiliados.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Última actualización: 2026-04-29 (UTC)
+최종 업데이트: 2026-04-29(UTC)
 
-¿Quieres brindar más información?
+의견을 전달하고 싶나요?
+
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]

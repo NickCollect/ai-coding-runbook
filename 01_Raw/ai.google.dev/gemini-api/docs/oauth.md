@@ -1,22 +1,26 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/oauth?hl=zh-TW
-fetched_at: 2026-05-05T13:25:51.963832+00:00
+fetched_at: 2026-05-05T19:45:56.019752+00:00
 title: "\u900f\u904e OAuth \u9032\u884c\u9a57\u8b49\u7684\u5feb\u901f\u5165\u9580\u5c0e\u89bd\u8ab2\u7a0b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/Gemini Deep Research) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-- [首頁](https://ai.google.dev/gemini-api/docs/首頁)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [文件](https://ai.google.dev/gemini-api/docs/文件)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
 提供意見
 
 # 透過 OAuth 進行驗證的快速入門導覽課程
 
-如要向 Gemini API 驗證，最簡單的方法是設定 API 金鑰，詳情請參閱 [Gemini API 快速入門導覽課程](https://ai.google.dev/gemini-api/docs/Gemini API 快速入門導覽課程)。如需更嚴格的存取控制，請改用 OAuth。本指南將協助您設定 OAuth 驗證。
+如要向 Gemini API 驗證，最簡單的方法是設定 API 金鑰，詳情請參閱 [Gemini API 快速入門導覽課程](https://ai.google.dev/gemini-api/docs/quickstart?hl=zh-tw)。如需更嚴格的存取控制，請改用 OAuth。本指南將協助您設定 OAuth 驗證。
 
-本指南會使用簡化的驗證方法，適用於測試環境。在正式環境中，建議您先瞭解[驗證和授權](https://ai.google.dev/gemini-api/docs/驗證和授權)，再[選擇適合應用程式的存取憑證](https://ai.google.dev/gemini-api/docs/選擇適合應用程式的存取憑證)。
+本指南會使用簡化的驗證方法，適用於測試環境。在正式環境中，建議您先瞭解[驗證和授權](https://developers.google.com/workspace/guides/auth-overview?hl=zh-tw)，再[選擇適合應用程式的存取憑證](https://developers.google.com/workspace/guides/create-credentials?hl=zh-tw#choose_the_access_credential_that_is_right_for_you)。
 
 ## 目標
 
@@ -28,8 +32,8 @@ title: "\u900f\u904e OAuth \u9032\u884c\u9a57\u8b49\u7684\u5feb\u901f\u5165\u958
 
 如要執行這項快速入門導覽課程，您需要：
 
-- [Google Cloud 專案](https://ai.google.dev/gemini-api/docs/Google Cloud 專案)
-- [在本機安裝 gcloud CLI](https://ai.google.dev/gemini-api/docs/在本機安裝 gcloud CLI)
+- [Google Cloud 專案](https://developers.google.com/workspace/guides/create-project?hl=zh-tw)
+- [在本機安裝 gcloud CLI](https://cloud.google.com/sdk/docs/install?hl=zh-tw)
 
 ## 設定雲端專案
 
@@ -41,7 +45,7 @@ title: "\u900f\u904e OAuth \u9032\u884c\u9a57\u8b49\u7684\u5feb\u901f\u5165\u958
 
 - 在 Google Cloud 控制台中啟用 Google Generative Language API。
 
-  [啟用 API](https://ai.google.dev/gemini-api/docs/啟用 API)
+  [啟用 API](https://console.cloud.google.com/flows/enableapi?apiid=generativelanguage.googleapis.com&hl=zh-tw)
 
 ### 2. 設定 OAuth 同意畫面
 
@@ -49,13 +53,13 @@ title: "\u900f\u904e OAuth \u9032\u884c\u9a57\u8b49\u7684\u5feb\u901f\u5165\u958
 
 1. 在 Google Cloud 控制台中，依序前往「選單」 >「Google Auth platform」 >「總覽」。
 
-   [前往 Google Auth 平台](https://ai.google.dev/gemini-api/docs/前往 Google Auth 平台)
+   [前往 Google Auth 平台](https://console.developers.google.com/auth/overview?hl=zh-tw)
 2. 填寫專案設定表單，並在「目標對象」部分將使用者類型設為「外部」。
 3. 填寫表單的其餘部分，接受使用者資料政策條款，然後按一下「建立」。
 4. 目前可以略過新增範圍，然後按一下「儲存並繼續」。日後為 Google Workspace 機構以外的使用者建立應用程式時，您必須新增並驗證應用程式所需的授權範圍。
 5. 新增測試使用者：
 
-   1. 前往 Google Auth Platform 的[目標對象頁面](https://ai.google.dev/gemini-api/docs/目標對象頁面)。
+   1. 前往 Google Auth Platform 的[目標對象頁面](https://console.developers.google.com/auth/audience?hl=zh-tw)。
    2. 在「測試使用者」下方，按一下「新增使用者」。
    3. 輸入您的電子郵件地址和任何其他授權測試使用者，然後按一下「儲存」。
 
@@ -65,7 +69,7 @@ title: "\u900f\u904e OAuth \u9032\u884c\u9a57\u8b49\u7684\u5feb\u901f\u5165\u958
 
 1. 在 Google Cloud 控制台中，依序前往「選單」 >「Google Auth platform」(Google 驗證平台) >「Clients」(用戶端)。
 
-   [前往「憑證」](https://ai.google.dev/gemini-api/docs/前往「憑證」)
+   [前往「憑證」](https://console.developers.google.com/auth/clients?hl=zh-tw)
 2. 按一下「Create Client」(建立用戶端)。
 3. 依序點選「Application type」(應用程式類型) >「Desktop app」(電腦版應用程式)。
 4. 在「Name」(名稱) 欄位中，輸入憑證名稱。這個名稱只會顯示在 Google Cloud 控制台中。
@@ -130,11 +134,11 @@ print('Available base models:', [m.name for m in client.models.list()])
 
 ## 後續步驟
 
-如果運作正常，即可開始嘗試[對文字資料進行語意擷取](https://ai.google.dev/gemini-api/docs/對文字資料進行語意擷取)。
+如果運作正常，即可開始嘗試[對文字資料進行語意擷取](https://ai.google.dev/docs/semantic_retriever?hl=zh-tw)。
 
 ## 自行管理憑證 [Python]
 
-在許多情況下，您無法使用 `gcloud` 指令從用戶端 ID (`client_secret.json`) 建立存取權杖。Google 提供多種語言的程式庫，讓您在應用程式中管理該程序。本節將以 Python 示範該程序。如需其他語言的這類程序範例，請參閱 [Drive API 說明文件](https://ai.google.dev/gemini-api/docs/Drive API 說明文件)。
+在許多情況下，您無法使用 `gcloud` 指令從用戶端 ID (`client_secret.json`) 建立存取權杖。Google 提供多種語言的程式庫，讓您在應用程式中管理該程序。本節將以 Python 示範該程序。如需其他語言的這類程序範例，請參閱 [Drive API 說明文件](https://developers.google.com/drive/api/quickstart/python?hl=zh-tw)。
 
 ### 1. 安裝所需的程式庫
 
@@ -220,8 +224,10 @@ python script.py
 
 提供意見
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://ai.google.dev/gemini-api/docs/創用 CC 姓名標示 4.0 授權)，程式碼範例則為[阿帕契 2.0 授權](https://ai.google.dev/gemini-api/docs/阿帕契 2.0 授權)。詳情請參閱《[Google Developers 網站政策](https://ai.google.dev/gemini-api/docs/Google Developers 網站政策)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
 上次更新時間：2026-04-29 (世界標準時間)。
 
 想進一步說明嗎？
+
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-04-29 (世界標準時間)。"],[],[]]

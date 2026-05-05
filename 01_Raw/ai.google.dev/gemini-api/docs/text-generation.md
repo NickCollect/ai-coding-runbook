@@ -1,22 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=tr
-fetched_at: 2026-05-05T13:23:24.073806+00:00
-title: "Metin olu\u015fturma \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=ar
+fetched_at: 2026-05-05T19:48:45.455872+00:00
+title: "\u0625\u0646\u0634\u0627\u0621 \u0627\u0644\u0646\u0635 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/Gemini Deep Research) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-- [Ana Sayfa](https://ai.google.dev/gemini-api/docs/Ana Sayfa)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs/Dokümanlar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Geri bildirim gönderin
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Metin oluşturma
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Gemini API, metin, resim, video ve ses girişlerinden metin çıkışı oluşturabilir.
+إرسال ملاحظات
 
-Temel bir örnek:
+# إنشاء النص
+
+يمكن لواجهة برمجة التطبيقات Gemini API إنشاء نصوص استنادًا إلى النصوص والصور والفيديوهات والمحتوى الصوتي.
+
+في ما يلي مثال أساسي:
 
 ### Python
 
@@ -81,7 +85,7 @@ func main() {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -120,7 +124,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
   }'
 ```
 
-### Apps Komut Dosyası
+### برمجة التطبيقات
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -155,11 +159,12 @@ function main() {
 }
 ```
 
-## Gemini ile düşünme
+## التفكير مع Gemini
 
-Gemini modellerinde genellikle varsayılan olarak ["düşünme"](https://ai.google.dev/gemini-api/docs/"düşünme") özelliği etkindir. Bu özellik, modelin bir isteğe yanıt vermeden önce akıl yürütmesini sağlar.
+تكون ميزة ["التفكير"](https://ai.google.dev/gemini-api/docs/thinking?hl=ar) مفعّلة تلقائيًا في نماذج Gemini، ما يتيح للنموذج الاستدلال قبل الرد على الطلب.
 
-Her model, maliyet, gecikme ve zeka üzerinde kontrol sahibi olmanızı sağlayan farklı düşünce yapılandırmalarını destekler. Daha fazla ayrıntı için [düşünme kılavuzuna](https://ai.google.dev/gemini-api/docs/düşünme kılavuzuna) bakın.
+يتوافق كل نموذج مع إعدادات مختلفة للتفكير، ما يمنحك التحكّم في التكلفة ووقت الاستجابة والذكاء. لمزيد من التفاصيل، يُرجى الاطّلاع على
+[دليل التفكير](https://ai.google.dev/gemini-api/docs/thinking?hl=ar#set-budget).
 
 ### Python
 
@@ -239,7 +244,7 @@ func main() {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -291,7 +296,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
   }'
 ```
 
-### Apps Komut Dosyası
+### برمجة التطبيقات
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -331,9 +336,10 @@ function main() {
 }
 ```
 
-## Sistem talimatları ve diğer yapılandırmalar
+## تعليمات النظام والإعدادات الأخرى
 
-Sistem talimatlarıyla Gemini modellerinin davranışını yönlendirebilirsiniz. Bunun için [`GenerateContentConfig`](https://ai.google.dev/gemini-api/docs/`GenerateContentConfig`) nesnesi iletin.
+يمكنك توجيه سلوك نماذج Gemini باستخدام تعليمات النظام. لإجراء ذلك،
+مرِّر عنصر [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=ar#v1beta.GenerationConfig).
 
 ### Python
 
@@ -409,7 +415,7 @@ func main() {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -463,7 +469,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
   }'
 ```
 
-### Apps Komut Dosyası
+### برمجة التطبيقات
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -505,8 +511,7 @@ function main() {
 }
 ```
 
-[`GenerateContentConfig`](https://ai.google.dev/gemini-api/docs/`GenerateContentConfig`)
-nesnesi, [sıcaklık](https://ai.google.dev/gemini-api/docs/sıcaklık) gibi varsayılan oluşturma parametrelerini de geçersiz kılmanıza olanak tanır.
+يتيح لك الكائن [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=ar#v1beta.GenerationConfig) أيضًا تجاهل مَعلمات الإنشاء التلقائية، مثل [درجة العشوائية](https://ai.google.dev/api/generate-content?hl=ar#v1beta.GenerationConfig).
 
 ### Python
 
@@ -589,7 +594,7 @@ func main() {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -639,7 +644,7 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-prev
   }'
 ```
 
-### Apps Komut Dosyası
+### برمجة التطبيقات
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -682,11 +687,12 @@ function main() {
 }
 ```
 
-Yapılandırılabilir parametrelerin ve açıklamalarının tam listesi için API referansımızdaki [`GenerateContentConfig`](https://ai.google.dev/gemini-api/docs/`GenerateContentConfig`) bölümüne bakın.
+يُرجى الرجوع إلى [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=ar#v1beta.GenerationConfig)
+في مرجع واجهة برمجة التطبيقات للحصول على قائمة كاملة بالمَعلمات القابلة للإعداد وأوصافها.
 
-## Çok formatlı girişler
+## إدخالات متعددة الوسائط
 
-Gemini API, çok formatlı girişleri destekler. Bu sayede metinle medya dosyalarını birleştirebilirsiniz. Aşağıdaki örnekte resim sağlama gösterilmektedir:
+تتيح Gemini API إدخال بيانات متعددة الوسائط، ما يسمح لك بدمج النص مع ملفات الوسائط. يوضّح المثال التالي كيفية تقديم صورة:
 
 ### Python
 
@@ -782,7 +788,7 @@ func main() {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -847,7 +853,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
   -d "@$TEMP_JSON"
 ```
 
-### Apps Komut Dosyası
+### برمجة التطبيقات
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -894,14 +900,14 @@ function getImageData(url) {
 }
 ```
 
-Resim sağlamanın alternatif yöntemleri ve daha gelişmiş resim işleme hakkında bilgi edinmek için [Görüntü Anlama Rehberimizi](https://ai.google.dev/gemini-api/docs/Görüntü Anlama Rehberimizi) inceleyin.
-API, [doküman](https://ai.google.dev/gemini-api/docs/doküman), [video](https://ai.google.dev/gemini-api/docs/video) ve [ses](https://ai.google.dev/gemini-api/docs/ses) girişlerini ve bu girişlerin anlaşılmasını da destekler.
+للاطّلاع على طرق بديلة لتوفير الصور ومعالجة أكثر تقدّمًا للصور، يُرجى الاطّلاع على [دليل فهم الصور](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ar).
+تتيح واجهة برمجة التطبيقات أيضًا إدخال [المستندات](https://ai.google.dev/gemini-api/docs/document-processing?hl=ar) و[الفيديوهات](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ar) و[الملفات الصوتية](https://ai.google.dev/gemini-api/docs/audio?hl=ar) وفهمها.
 
-## Yanıtları akış şeklinde gösterme
+## عرض الردود تدريجيًا
 
-Varsayılan olarak, model yalnızca tüm oluşturma işlemi tamamlandıktan sonra yanıt verir.
+تعرض النماذج تلقائيًا ردًا بعد اكتمال عملية الإنشاء بأكملها.
 
-Daha akıcı etkileşimler için, [`GenerateContentResponse`](https://ai.google.dev/gemini-api/docs/`GenerateContentResponse`) örneklerini oluşturuldukça artımlı olarak almak üzere akışı kullanın.
+للحصول على تفاعلات أكثر سلاسة، استخدِم البث لتلقّي مثيلات [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=ar#v1beta.GenerateContentResponse) بشكل تدريجي أثناء إنشائها.
 
 ### Python
 
@@ -973,7 +979,7 @@ func main() {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -1020,7 +1026,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
   }'
 ```
 
-### Apps Komut Dosyası
+### برمجة التطبيقات
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -1055,9 +1061,9 @@ function main() {
 }
 ```
 
-## Çok turlu görüşmeler (sohbet)
+## المحادثات المتعدّدة الجولات (المحادثة)
 
-SDK'larımız, birden fazla istem ve yanıt turunu bir sohbette toplama işlevi sunar. Böylece, sohbet geçmişini kolayca takip edebilirsiniz.
+توفر حِزم SDK وظائف لجمع عدة جولات من الطلبات والردود في محادثة، ما يمنحك طريقة سهلة لتتبُّع سجلّ المحادثات.
 
 ### Python
 
@@ -1148,7 +1154,7 @@ func main() {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Chat;
@@ -1217,7 +1223,7 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-prev
   }'
 ```
 
-### Apps Komut Dosyası
+### برمجة التطبيقات
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -1265,7 +1271,7 @@ function main() {
 }
 ```
 
-Yayın, çok adımlı görüşmeler için de kullanılabilir.
+يمكن أيضًا استخدام البث للمحادثات المتعددة الجولات.
 
 ### Python
 
@@ -1365,7 +1371,7 @@ func main() {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Chat;
@@ -1436,7 +1442,7 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-prev
   }'
 ```
 
-### Apps Komut Dosyası
+### برمجة التطبيقات
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -1484,23 +1490,23 @@ function main() {
 }
 ```
 
-## İstem ipuçları
+## نصائح حول الطلبات
 
-Gemini'dan en iyi şekilde yararlanmayla ilgili öneriler için [istem mühendisliği kılavuzumuza](https://ai.google.dev/gemini-api/docs/istem mühendisliği kılavuzumuza) göz atın.
+يمكنك الرجوع إلى [دليل هندسة الطلبات](https://ai.google.dev/gemini/docs/prompting-strategies?hl=ar) للحصول على اقتراحات حول كيفية الاستفادة إلى أقصى حدّ من Gemini.
 
-## Sırada ne var?
+## الخطوات التالية
 
-- [Google AI Studio'da Gemini](https://ai.google.dev/gemini-api/docs/Google AI Studio'da Gemini)'ı deneyin.
-- JSON benzeri yanıtlar için [yapılandırılmış çıkışlarla](https://ai.google.dev/gemini-api/docs/yapılandırılmış çıkışlarla) deneme yapın.
-- Gemini'ın [görüntü](https://ai.google.dev/gemini-api/docs/görüntü),
-  [video](https://ai.google.dev/gemini-api/docs/video), [ses](https://ai.google.dev/gemini-api/docs/ses)
-  ve [doküman](https://ai.google.dev/gemini-api/docs/doküman) anlama özelliklerini keşfedin.
-- Çok formatlı [dosya istemi stratejileri](https://ai.google.dev/gemini-api/docs/dosya istemi stratejileri) hakkında bilgi edinin.
+- جرِّب [Gemini في Google AI Studio](https://aistudio.google.com?hl=ar).
+- جرِّب [المخرجات المنظَّمة](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar) للحصول على ردود شبيهة بتنسيق JSON.
+- استكشِف إمكانات Gemini في فهم [الصور](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ar) و[الفيديوهات](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ar) و[الملفات الصوتية](https://ai.google.dev/gemini-api/docs/audio?hl=ar) و[المستندات](https://ai.google.dev/gemini-api/docs/document-processing?hl=ar).
+- [مزيد من المعلومات حول استراتيجيات طلب الملفات](https://ai.google.dev/gemini-api/docs/files?hl=ar#prompt-guide)
 
-Geri bildirim gönderin
+إرسال ملاحظات
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://ai.google.dev/gemini-api/docs/Creative Commons Atıf 4.0 Lisansı) altında ve kod örnekleri [Apache 2.0 Lisansı](https://ai.google.dev/gemini-api/docs/Apache 2.0 Lisansı) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://ai.google.dev/gemini-api/docs/Google Developers Site Politikaları)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Son güncelleme tarihi: 2026-04-29 UTC.
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+هل تريد مشاركة ملاحظاتك معنا؟
+
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

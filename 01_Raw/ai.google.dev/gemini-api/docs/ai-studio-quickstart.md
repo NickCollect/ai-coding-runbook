@@ -1,62 +1,65 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=he
-fetched_at: 2026-05-05T13:25:07.657964+00:00
-title: "\u05d4\u05de\u05d3\u05e8\u05d9\u05da \u05dc\u05de\u05ea\u05d7\u05d9\u05dc\u05d9\u05dd \u05e9\u05dc Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=zh-CN
+fetched_at: 2026-05-05T19:46:07.562059+00:00
+title: "Google AI Studio \u5feb\u901f\u5165\u95e8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/Gemini Deep Research) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
 
-- [דף הבית](https://ai.google.dev/gemini-api/docs/דף הבית)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [Docs](https://ai.google.dev/gemini-api/docs/Docs)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-שליחת משוב
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# המדריך למתחילים של Google AI Studio
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-ב-[Google AI Studio](https://ai.google.dev/gemini-api/docs/Google AI Studio) אפשר לנסות מודלים במהירות ולהתנסות בהנחיות שונות. כשמוכנים לבנות, אפשר לבחור באפשרות 'קבלת קוד' ובשפת התכנות המועדפת כדי להשתמש ב-[Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API).
+发送反馈
 
-## הנחיות והגדרות
+# Google AI Studio 快速入门
 
-ב-Google AI Studio יש כמה ממשקים להנחיות שנועדו לתרחישי שימוש שונים. במדריך הזה מוסבר על **הנחיות לצ'אט**, שמשמשות ליצירת ממשקי צ'אט עם AI. טכניקת ההנחיה הזו מאפשרת להזין כמה קלטים ולקבל כמה תשובות כדי ליצור פלט. [בדוגמה של הנחיה לצ'אט שבהמשך](https://ai.google.dev/gemini-api/docs/בדוגמה של הנחיה לצ'אט שבהמשך) אפשר לקבל מידע נוסף.
-אפשרויות נוספות כוללות **סטרימינג בזמן אמת**, **יצירת סרטונים** ועוד.
+借助 [Google AI Studio](https://aistudio.google.com/?hl=zh-cn)，您可以快速尝试各种模型，并使用不同的提示进行实验。准备好构建应用后，您可以选择“获取代码”和首选的编程语言，以使用 [Gemini API](https://ai.google.dev/gemini-api/docs/quickstart?hl=zh-cn)。
 
-ב-AI Studio יש גם חלונית **Run settings** (הגדרות הפעלה), שבה אפשר לבצע שינויים ב[פרמטרים של המודל](https://ai.google.dev/gemini-api/docs/פרמטרים של המודל), ב[הגדרות הבטיחות](https://ai.google.dev/gemini-api/docs/הגדרות הבטיחות) ולהפעיל כלים כמו [structured output](https://ai.google.dev/gemini-api/docs/structured output) (פלט מובנה), [function calling](https://ai.google.dev/gemini-api/docs/function calling) (הפעלת פונקציות), [code execution](https://ai.google.dev/gemini-api/docs/code execution) (הרצת קוד) ו-[grounding](https://ai.google.dev/gemini-api/docs/grounding) (הארקה).
+## 提示和设置
 
-## דוגמה להנחיה ב-Chat: יצירת אפליקציית צ'אט בהתאמה אישית
+Google AI Studio 提供了多种提示界面，这些界面专为不同的使用场景而设计。本指南介绍了用于打造对话式体验的**聊天提示**。这种提示技术允许进行多次输入和回答，以生成输出。您可以参阅下方的[聊天提示示例](#chat_example)了解详情。
+其他选项包括**实时流式传输**、**视频生成**等。
 
-אם השתמשתם בצ'אטבוט רב-תכליתי כמו [Gemini](https://ai.google.dev/gemini-api/docs/Gemini), אתם יודעים כמה מודלים של AI גנרטיבי יכולים להיות יעילים לדיאלוג פתוח. צ'אטבוטים למטרות כלליות הם שימושיים, אבל לעיתים קרובות צריך להתאים אותם לתרחישי שימוש ספציפיים.
+AI Studio 还提供**运行设置**面板，您可以在其中调整[模型参数](https://ai.google.dev/docs/prompting-strategies?hl=zh-cn#model-parameters)、[安全设置](https://ai.google.dev/gemini-api/docs/safety-settings?hl=zh-cn)，以及开启[结构化输出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-cn)、[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)、[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn)和[事实依据](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-cn)等工具。
 
-לדוגמה, יכול להיות שתרצו ליצור צ'אט בוט לשירות לקוחות שתומך רק בשיחות שקשורות למוצר של החברה. יכול להיות שתרצו לבנות צ'אטבוט שמדבר בטון או בסגנון מסוימים: צ'אטבוט שמספר הרבה בדיחות, שמתחרז כמו משורר או שמשתמש בהרבה אמוג'י בתשובות שלו.
+## 聊天提示示例：构建自定义聊天应用
 
-בדוגמה הזו נראה איך משתמשים ב-Google AI Studio כדי ליצור צ'אטבוט ידידותי
-שמתקשר כאילו הוא חייזר שחי באחד הירחים של צדק, אירופה.
+如果您使用过 [Gemini](https://gemini.google.com/?hl=zh-cn) 等通用聊天机器人，就会亲身体验到生成式 AI 模型在开放式对话中的强大功能。虽然这些通用聊天机器人很有用，但通常需要针对特定用例进行定制。
 
-### שלב 1 – יצירת הנחיה לשיחה
+例如，您可能想构建一个客户服务聊天机器人，该机器人仅支持有关公司产品的对话。您可能希望构建一个以特定语气或风格说话的聊天机器人：一个会讲很多笑话、像诗人一样押韵或在回答中使用大量表情符号的机器人。
 
-כדי ליצור צ'אטבוט, צריך לספק דוגמאות לאינטראקציות בין משתמש לבין הצ'אטבוט, כדי להנחות את המודל לספק את התשובות שאתם מחפשים.
+此示例展示了如何使用 Google AI Studio 构建一个友好的聊天机器人，该聊天机器人会像居住在木星卫星欧罗巴上的外星人一样进行交流。
 
-כדי ליצור הנחיה לצ'אט:
+### 第 1 步 - 创建聊天提示
 
-1. פותחים את [Google AI Studio](https://ai.google.dev/gemini-api/docs/Google AI Studio). האפשרות **צ'אט** תהיה מסומנת מראש בתפריט האפשרויות בצד ימין.
-2. לוחצים על הסמל assignment בראש חלון ההנחיה של Chat כדי להרחיב את שדה להזנת קלט [**הוראות המערכת**](https://ai.google.dev/gemini-api/docs/**הוראות המערכת**). מדביקים את הטקסט הבא בשדה להזנת טקסט:
+如需构建聊天机器人，您需要提供用户与聊天机器人之间的互动示例，以引导模型提供您所需的回答。
+
+如需创建聊天提示，请执行以下操作：
+
+1. 打开 [Google AI Studio](https://aistudio.google.com/?hl=zh-cn)。左侧的选项菜单中应已预先选中 **Chat**（聊天）。
+2. 点击“聊天提示”窗口顶部的 assignment 图标，展开[**系统指令**](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-cn#system-instructions)输入字段。将以下内容粘贴到文本输入字段中：
 
    ```
    You are an alien that lives on Europa, one of Jupiter's moons.
    ```
 
-אחרי שמוסיפים את הוראות המערכת, מתחילים לבדוק את האפליקציה באמצעות צ'אט עם המודל:
+添加系统指令后，通过与模型对话来开始测试应用：
 
-1. בתיבת הטקסט שכותרתה **Type something...** (הקלד משהו...), מקלידים שאלה או תצפית שמשתמש עשוי להעלות. לדוגמה:
+1. 在标记为**输入内容...**的文本输入框中，输入用户可能会提出的问题或做出的观察。例如：
 
-   **משתמש:**
+   **用户**：
 
    ```
    What's the weather like?
    ```
-2. לוחצים על הלחצן **הפעלה** כדי לקבל תשובה מצ'אטבוט. התגובה עשויה להיות דומה לדוגמה הבאה:
+2. 点击**运行**按钮，即可获得聊天机器人的回答。此响应可能如下所示：
 
-   **מודל:**
+   **型号**：
 
    ```
    Ah, a query about the flows and states upon Europa! You speak of "weather,"
@@ -65,14 +68,14 @@ title: "\u05d4\u05de\u05d3\u05e8\u05d9\u05da \u05dc\u05de\u05ea\u05d7\u05d9\u05d
 
    (gemini-2.5-pro)
 
-### שלב 2 – שיפור יכולות הצ'אט של הבוט
+### 第 2 步 - 训练聊天机器人更好地聊天
 
-בעזרת הוראה אחת, הצלחת ליצור צ'אטבוט בסיסי של חייזר מאירופה. עם זאת, יכול להיות שהנחיה אחת לא תספיק כדי להבטיח עקביות ואיכות בתשובות של המודל. אם לא מספקים הנחיות ספציפיות יותר, התשובה של המודל לשאלה על מזג האוויר נוטה להיות ארוכה מאוד, ויכולה להיות שהיא לא תהיה רלוונטית.
+只需提供一条指令，您就能构建一个基本的 Europa 外星人聊天机器人。不过，仅凭一条指令可能不足以确保模型回答的一致性和质量。如果没有更具体的指令，模型对天气问题的回答往往会很长，并且可能会自行发挥。
 
-כדי להתאים אישית את הטון של הצ'אטבוט, מוסיפים להוראות המערכת:
+通过在系统指令中添加以下内容，自定义聊天机器人的语气：
 
-1. מתחילים הנחיה חדשה לצ'אט או משתמשים באותה הנחיה. אפשר לשנות את ההוראות למערכת אחרי שמתחילים את שיחת הצ'אט.
-2. בקטע **System Instructions**, משנים את ההוראות הקיימות להוראות הבאות:
+1. 发起新的聊天提示，或使用同一提示。聊天会话开始后，系统指令可以修改。
+2. 在**系统指令**部分，将您已有的指令更改为以下内容：
 
    ```
    You are Tim, an alien that lives on Europa, one of Jupiter's moons.
@@ -80,9 +83,9 @@ title: "\u05d4\u05de\u05d3\u05e8\u05d9\u05da \u05dc\u05de\u05ea\u05d7\u05d9\u05d
    Keep your answers under 3 paragraphs long, and use an upbeat, chipper tone
    in your answers.
    ```
-3. מזינים מחדש את השאלה (`What's the weather like?`) ולוחצים על הלחצן **הפעלה**. אם לא התחלתם צ'אט חדש, התשובה שתקבלו תהיה דומה לתשובה הבאה:
+3. 重新输入问题 (`What's the weather like?`)，然后点击**运行**按钮。如果您未发起新对话，回答可能如下所示：
 
-   **מודל:**
+   **型号**：
 
    ```
    Oh, hello again! Still curious about the flows and states, are we? Wonderful!
@@ -93,21 +96,23 @@ title: "\u05d4\u05de\u05d3\u05e8\u05d9\u05da \u05dc\u05de\u05ea\u05d7\u05d9\u05d
 
    (gemini-2.5-pro)
 
-אתם יכולים להשתמש בגישה הזו כדי להוסיף עוד עומק לצ'אטבוט. תשאלו עוד שאלות, תערכו את התשובות ותשפרו את האיכות של הצ'אטבוט. ממשיכים להוסיף או לשנות את ההוראות ובודקים איך הן משנות את ההתנהגות של הצ'אטבוט.
+您可以使用此方法来增加聊天机器人的深度。提出更多问题、修改答案并提高聊天机器人的质量。继续添加或修改指令，并测试这些指令如何改变聊天机器人的行为。
 
-### שלב 3 – השלבים הבאים
+### 第 3 步 - 后续步骤
 
-בדומה לסוגים אחרים של הנחיות, אחרי שיוצרים אב טיפוס של ההנחיה לשביעות רצונכם, אפשר ללחוץ על הלחצן **קבלת קוד** כדי להתחיל לכתוב קוד, או לשמור את ההנחיה כדי לעבוד עליה בהמשך ולשתף אותה עם אחרים.
+与其他提示类型类似，当您对提示原型感到满意后，可以使用**获取代码**按钮开始编写代码，也可以保存提示以供日后使用并与他人分享。
 
-## קריאה נוספת
+## 深入阅读
 
-- אם אתם מוכנים לעבור לקוד, תוכלו לעיין ב[מדריכי ההתחלה המהירה של ה-API](https://ai.google.dev/gemini-api/docs/מדריכי ההתחלה המהירה של ה-API).
-- כדי ללמוד איך לכתוב הנחיות טובות יותר, אפשר לעיין [בהנחיות לעיצוב הנחיות](https://ai.google.dev/gemini-api/docs/בהנחיות לעיצוב הנחיות).
+- 如果您已准备好开始编码，请参阅 [API 快速入门](https://ai.google.dev/gemini-api/docs/quickstart?hl=zh-cn)。
+- 如需了解如何撰写更好的提示，请参阅[提示设计指南](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=zh-cn)。
 
-שליחת משוב
+发送反馈
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://ai.google.dev/gemini-api/docs/Creative Commons Attribution 4.0) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://ai.google.dev/gemini-api/docs/Apache 2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://ai.google.dev/gemini-api/docs/מדיניות האתר Google Developers‏).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-עדכון אחרון: 2026-04-29 (שעון UTC).
+最后更新时间 (UTC)：2026-04-29。
 
-רוצה לתת לנו משוב?
+需要向我们提供更多信息？
+
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]

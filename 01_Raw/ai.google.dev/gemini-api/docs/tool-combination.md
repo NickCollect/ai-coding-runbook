@@ -1,22 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=tr
-fetched_at: 2026-05-05T13:22:32.962321+00:00
-title: "Yerle\u015fik ara\u00e7lar\u0131 ve i\u015flev \u00e7a\u011fr\u0131lar\u0131n\u0131 birle\u015ftirme \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-TW
+fetched_at: 2026-05-05T19:48:51.043477+00:00
+title: "\u7d50\u5408\u5167\u5efa\u5de5\u5177\u548c\u51fd\u5f0f\u547c\u53eb \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/Gemini Deep Research) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-- [Ana Sayfa](https://ai.google.dev/gemini-api/docs/Ana Sayfa)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs/Dokümanlar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Geri bildirim gönderin
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Yerleşik araçları ve işlev çağrılarını birleştirme
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Gemini, araç çağrılarının bağlam geçmişini koruyup ortaya çıkararak `google_search` gibi [yerleşik araçların](https://ai.google.dev/gemini-api/docs/yerleşik araçların) ve [işlev çağrılarının](https://ai.google.dev/gemini-api/docs/işlev çağrılarının) (*özel araçlar* olarak da bilinir) tek bir üretimde birleştirilmesine olanak tanır. Yerleşik ve özel araç kombinasyonları, karmaşık ve etkili iş akışlarına olanak tanır. Örneğin, model, belirli iş mantığınızı çağırmadan önce kendisini gerçek zamanlı web verileriyle temellendirebilir.
+提供意見
 
-Aşağıda, `google_search` ile yerleşik ve özel araç kombinasyonlarının ve özel bir işlevin `getWeather` etkinleştirildiği bir örnek verilmiştir:
+# 結合內建工具和函式呼叫
+
+Gemini 支援在單一生成作業中，結合[內建工具](https://ai.google.dev/gemini-api/docs/tools?hl=zh-tw) (例如 `google_search`) 和[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw) (也稱為*自訂工具*)，方法是保留並公開工具呼叫的內容記錄。內建和自訂工具組合可支援複雜的代理功能工作流程，例如模型可先根據即時網路資料建立基準，再呼叫特定商業邏輯。
+
+以下範例會透過 `google_search` 和自訂函式 `getWeather`，啟用內建和自訂工具組合：
 
 ### Python
 
@@ -392,55 +396,55 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-f
 }'
 ```
 
-## İşleyiş şekli
+## 運作方式
 
-Gemini 3 modelleri, yerleşik ve özel araç kombinasyonlarını etkinleştirmek için *araç bağlamı dolaşımını* kullanır. Araç bağlamı dolaşımı, yerleşik araçların bağlamını korumayı ve kullanıma sunmayı, ayrıca bu bağlamı aynı çağrıdaki özel araçlarla paylaşmayı mümkün kılar.
+Gemini 3 模型使用*工具脈絡循環*，可啟用內建和自訂工具組合。工具內容循環機制可保留及公開內建工具的內容，並在同一通話中，從一輪對話到下一輪對話，與自訂工具共用內容。
 
-### Araç kombinasyonunu etkinleştirme
+### 啟用工具組合
 
-- Araç bağlamı dolaşımını etkinleştirmek için `include_server_side_tool_invocations` işaretini `true` olarak ayarlamanız gerekir.
-- Birleştirme davranışını tetiklemek için kullanmak istediğiniz yerleşik araçlarla birlikte [`function_declarations`](https://ai.google.dev/gemini-api/docs/`function_declarations`) öğesini ekleyin.
-  - `function_declarations` dahil etmezseniz işaret ayarlandığı sürece araç bağlamı dolaşımı, dahil edilen yerleşik araçlar üzerinde çalışmaya devam eder.
+- 您必須將 `include_server_side_tool_invocations` 旗標設為 `true`，才能啟用工具情境流通。
+- 加入 [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw#function-declarations)，以及要使用的內建工具，即可觸發組合行為。
+  - 如果未加入 `function_declarations`，只要設定標記，工具環境流通仍會對內建工具生效。
 
-### API, parçaları döndürür
+### API 會傳回零件
 
-API, tek bir yanıtta yerleşik araç çağrısı için `toolCall` ve `toolResponse` bölümlerini döndürür. İşlev (özel araç) çağrısı için API, `functionCall` çağrı bölümünü döndürür. Kullanıcı, bir sonraki dönüşte `functionResponse` bölümünü sağlar.
+在單一回應中，API 會傳回內建工具呼叫的 `toolCall` 和 `toolResponse` 部分。如果是函式 (自訂工具) 呼叫，API 會傳回 `functionCall` 呼叫部分，使用者會在下一個回合中提供 `functionResponse` 部分。
 
-- `toolCall` ve `toolResponse`: API, sunucu tarafında hangi araçların çalıştırıldığının bağlamını ve bunların yürütülmesinin sonucunu bir sonraki dönüş için korumak amacıyla bu bölümleri döndürür.
-- `functionCall` ve `functionResponse`: API, işlev çağrısını kullanıcının doldurması için gönderir ve kullanıcı sonucu işlev yanıtında geri gönderir (bu bölümler, Gemini API'deki tüm [işlev çağrıları](https://ai.google.dev/gemini-api/docs/işlev çağrıları) için standarttır, araç kombinasyonu özelliğine özgü değildir).
-- (Yalnızca [kod yürütme](https://ai.google.dev/gemini-api/docs/kod yürütme) aracı)
-  `executableCode` ve `codeExecutionResult`:
-  Kod yürütme aracı kullanılırken `functionCall` ve `functionResponse` yerine API, `executableCode` (model tarafından oluşturulan ve yürütülmesi amaçlanan kod) ve `codeExecutionResult` (yürütülebilir kodun sonucu) değerlerini döndürür.
+- `toolCall` 和 `toolResponse`：API 會傳回這些部分，以保留在伺服器端執行的工具內容，以及這些工具的執行結果，供下一個回合使用。
+- `functionCall` 和 `functionResponse`：API 會將函式呼叫傳送給使用者填寫，使用者則會在函式回應中傳回結果 (這些部分是 Gemini API 中所有[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)的標準做法，並非工具組合功能獨有)。
+- (僅限[程式碼執行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw)工具)
+  `executableCode` 和 `codeExecutionResult`：
+  使用程式碼執行工具時，API 會傳回 `executableCode` (模型生成的程式碼，用於執行) 和 `codeExecutionResult` (可執行程式碼的結果)，而不是 `functionCall` 和 `functionResponse`。
 
-Bağlamı korumak ve araç kombinasyonlarını etkinleştirmek için, içerdiği tüm [alanlar](https://ai.google.dev/gemini-api/docs/alanlar) da dahil olmak üzere tüm parçaları her dönüşte modele geri göndermeniz gerekir.
+您必須在每個回合中將所有部分 (包括所含的所有[欄位](#critical-fields)) 傳回模型，以維持脈絡並啟用工具組合。
 
-### Döndürülen parçalardaki kritik alanlar
+### 傳回零件中的重要欄位
 
-[API tarafından döndürülen belirli bölümler](https://ai.google.dev/gemini-api/docs/API tarafından döndürülen belirli bölümler) `id`, `tool_type` ve `thought_signature` alanlarını içerir. Bu alanlar, araç bağlamının korunması (ve dolayısıyla araç kombinasyonları) için kritik öneme sahiptir. Sonraki isteklerinizde tüm bölümleri *yanıtta verildiği şekilde* döndürmeniz gerekir.
+API 傳回的[特定部分](#api-returns-parts)會包含 `id`、`tool_type` 和 `thought_signature` 欄位。這些欄位對於維護工具內容至關重要 (因此對於工具組合也至關重要)，您需要在後續要求中傳回*回應中提供的所有部分*。
 
-- `id`: Bir çağrıyı yanıtıyla eşleyen benzersiz tanımlayıcı. `id`, araç bağlamı dolaşımından bağımsız olarak **tüm işlev çağrısı yanıtlarında ayarlanır**.
-  İşlev yanıtında, API'nin işlev çağrısında sağladığı `id` ile aynı *değeri sağlamanız gerekir*. Yerleşik araçlar, araç çağrısı ile araç yanıtı arasındaki `id` değerini otomatik olarak paylaşır.
-  - Tüm araçla ilgili bölümlerde bulunur: `toolCall`, `toolResponse`,
-    `functionCall`, `functionResponse`, `executableCode`, `codeExecutionResult`
-- `tool_type`: Kullanılan aracı, yerleşik aracı (ör. `URL_CONTEXT`) veya işlev adını (ör. `getWeather`) tanımlar.
-  - `toolCall` ve `toolResponse` bölümlerinde bulunur.
-- `thought_signature`: **API tarafından döndürülen her parçaya** yerleştirilmiş gerçek şifrelenmiş bağlam. Düşünce imzaları olmadan bağlam yeniden oluşturulamaz. Her dönüşte tüm bölümler için düşünce imzalarını döndürmezseniz model hata verir.
-  - *Tüm* bölümlerde bulunur.
+- `id`：將呼叫對應至回應的專屬 ID。`id` 會**針對所有函式呼叫回應設定**，無論工具脈絡循環為何。您*必須*在函式回應中提供與 API 在函式呼叫中提供的相同 `id`。內建工具會自動在工具呼叫和工具回應之間共用 `id`。
+  - 可在所有工具相關部分找到：`toolCall`、`toolResponse`、`functionCall`、`functionResponse`、`executableCode`、`codeExecutionResult`
+- `tool_type`：識別所用的特定工具；內建工具的常值或 (例如 `URL_CONTEXT`) 或函式 (例如 `getWeather`) 名稱。
+  - 位於 `toolCall` 和 `toolResponse` 部分。
+- `thought_signature`：實際加密的內容，內嵌在 **API 傳回的每個部分**。如果沒有想法簽章，就無法重建背景資訊；如果您未在每個回合中傳回所有部分的想法簽章，模型就會發生錯誤。
+  - 在*所有*部分中找到。
 
-### Araca özgü veriler
+### 工具專屬資料
 
-Bazı yerleşik araçlar, araç türüne özel ve kullanıcı tarafından görülebilen veri bağımsız değişkenleri döndürür.
+部分內建工具會傳回使用者可見的資料引數，這些引數專屬於工具類型。
 
-| Araç | Kullanıcının görebileceği araç çağrısı bağımsız değişkenleri (varsa) | Kullanıcı tarafından görülebilen araç yanıtı (varsa) |
+| 工具 | 使用者可見的工具呼叫引數 (如有) | 使用者可見的工具回應 (如有) |
 | --- | --- | --- |
 | **GOOGLE\_SEARCH** | `queries` | `search_suggestions` |
 | **GOOGLE\_MAPS** | `queries` | `places` `google_maps_widget_context_token` |
-| **URL\_CONTEXT** | `urls` Göz atılacak URL'ler | `urls_metadata` `retrieved_url`: Göz atılan URL'ler `url_retrieval_status`: Göz atma durumu |
-| **FILE\_SEARCH** | Yok | Yok |
+| **URL\_CONTEXT** | `urls` 要瀏覽的網址 | `urls_metadata` `retrieved_url`：瀏覽的網址 `url_retrieval_status`：瀏覽狀態 |
+| **FILE\_SEARCH** | 無 | 無 |
 
-## Örnek araç kombinasyonu isteği yapısı
+## 工具組合要求結構範例
 
-Aşağıdaki istek yapısında, "ABD'deki en kuzeydeki şehir hangisidir?" isteminin istek yapısı gösterilmektedir. Bugün hava nasıl?" Bu özellik üç aracı birleştirir: yerleşik Gemini araçları `google_search` ve `code_execution` ile özel bir işlev `get_weather`.
+以下要求結構顯示提示的要求結構：「美國最北端的城市是哪裡？What's the weather like there
+today?" 這項工具結合了三種工具：內建的 Gemini 工具 `google_search`
+和 `code_execution`，以及自訂函式 `get_weather`。
 
 ```
 {
@@ -509,47 +513,48 @@ Aşağıdaki istek yapısında, "ABD'deki en kuzeydeki şehir hangisidir?" istem
 }
 ```
 
-## Token'lar ve fiyatlandırma
+## 權杖和價格
 
-İsteklerdeki `toolCall` ve `toolResponse` bölümlerinin `prompt_token_count` kapsamında sayıldığını unutmayın. Bu ara araç adımları artık görünür olduğundan ve size geri döndürüldüğünden sohbet geçmişinin bir parçasıdır. Bu durum yalnızca *istekler* için geçerlidir, *yanıtlar* için geçerli değildir.
+請注意，要求中的 `toolCall` 和 `toolResponse` 部分會計入 `prompt_token_count`。由於這些中間工具步驟現在會顯示並傳回給您，因此屬於對話記錄的一部分。這只適用於*要求*，不適用於*回應*。
 
-Google Arama aracı bu kuralın istisnasıdır. Google Arama, sorgu düzeyinde kendi fiyatlandırma modelini zaten uyguladığından jetonlar iki kez ücretlendirilmez ([Fiyatlandırma](https://ai.google.dev/gemini-api/docs/Fiyatlandırma) sayfasına bakın).
+Google 搜尋工具不在此限。Google 搜尋已在查詢層級套用自己的定價模式，因此不會重複收取權杖費用 (請參閱「[定價](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw)」頁面)。
 
-Daha fazla bilgi için [Parçalar](https://ai.google.dev/gemini-api/docs/Parçalar) sayfasını okuyun.
+詳情請參閱「[符記](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw)」頁面。
 
-## Sınırlamalar
+## 限制
 
-- `include_server_side_tool_invocations` işareti etkinleştirildiğinde varsayılan olarak `VALIDATED` modu kullanılır (`AUTO` modu desteklenmez).
-- `google_search` gibi yerleşik araçlar konum ve mevcut saat bilgilerini kullandığından `system_instruction` veya `function_declaration.description` cihazınızda çakışan konum ve saat bilgileri varsa araç kombinasyonu özelliği iyi çalışmayabilir.
+- 啟用 `include_server_side_tool_invocations` 旗標時，預設為 `VALIDATED` 模式 (不支援 `AUTO` 模式)
+- `google_search` 等內建工具會根據位置和目前時間資訊運作，因此如果 `system_instruction` 或 `function_declaration.description` 的位置和時間資訊有衝突，工具組合功能可能無法正常運作。
 
-## Desteklenen araçlar
+## 支援的工具
 
-Standart araç bağlamı dolaşımı, sunucu tarafı (yerleşik) araçlar için geçerlidir.
-Kod Yürütme de sunucu tarafı bir araçtır ancak bağlam dolaşımı için kendi yerleşik çözümüne sahiptir. Bilgisayar Kullanımı ve işlev çağrısı, istemci tarafı araçlardır ve bağlam dolaşımı için yerleşik çözümleri de vardır.
+標準工具環境流通適用於伺服器端 (內建) 工具。程式碼執行也是伺服器端工具，但有自己的內建解決方案，可進行脈絡循環。電腦使用和函式呼叫是用戶端工具，也內建解決方案，可循環使用內容。
 
-| Araç | Yürütme tarafı | Bağlam Dolaşımı Desteği |
+| 工具 | 執行端 | 情境流通支援 |
 | --- | --- | --- |
-| [Google Arama](https://ai.google.dev/gemini-api/docs/Google Arama) | Sunucu tarafı | Destekleniyor |
-| [Google Haritalar](https://ai.google.dev/gemini-api/docs/Google Haritalar) | Sunucu tarafı | Destekleniyor |
-| [URL Bağlamı](https://ai.google.dev/gemini-api/docs/URL Bağlamı) | Sunucu tarafı | Destekleniyor |
-| [Dosya Arama](https://ai.google.dev/gemini-api/docs/Dosya Arama) | Sunucu tarafı | Destekleniyor |
-| [Kod Yürütme](https://ai.google.dev/gemini-api/docs/Kod Yürütme) | Sunucu tarafı | Desteklenir (yerleşik, `executableCode` ve `codeExecutionResult` parçaları kullanılır) |
-| [Bilgisayar Kullanımı](https://ai.google.dev/gemini-api/docs/Bilgisayar Kullanımı) | İstemci tarafı | Desteklenir (yerleşik, `functionCall` ve `functionResponse` parçaları kullanılır) |
-| [Özel işlevler](https://ai.google.dev/gemini-api/docs/Özel işlevler) | İstemci tarafı | Desteklenir (yerleşik, `functionCall` ve `functionResponse` parçaları kullanılır) |
+| [Google 搜尋](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw) | 伺服器端 | 有權限 |
+| [Google 地圖](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-tw) | 伺服器端 | 有權限 |
+| [網址環境](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw) | 伺服器端 | 有權限 |
+| [檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw) | 伺服器端 | 有權限 |
+| [程式碼執行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw) | 伺服器端 | 支援 (內建，使用 `executableCode` 和 `codeExecutionResult` 部分) |
+| [電腦使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-tw) | 用戶端 | 支援 (內建，使用 `functionCall` 和 `functionResponse` 部分) |
+| [自訂函式](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw) | 用戶端 | 支援 (內建，使用 `functionCall` 和 `functionResponse` 部分) |
 
-## Sırada ne var?
+## 後續步驟
 
-- Gemini API'deki [işlev çağrısı](https://ai.google.dev/gemini-api/docs/işlev çağrısı) hakkında daha fazla bilgi edinin.
-- Desteklenen araçları keşfedin:
-  - [Google Arama](https://ai.google.dev/gemini-api/docs/Google Arama)
-  - [Google Haritalar](https://ai.google.dev/gemini-api/docs/Google Haritalar)
-  - [URL Bağlamı](https://ai.google.dev/gemini-api/docs/URL Bağlamı)
-  - [Dosya Arama](https://ai.google.dev/gemini-api/docs/Dosya Arama)
+- 進一步瞭解 Gemini API 中的[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)。
+- 探索支援的工具：
+  - [Google 搜尋](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)
+  - [Google 地圖](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-tw)
+  - [網址環境](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw)
+  - [檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw)
 
-Geri bildirim gönderin
+提供意見
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://ai.google.dev/gemini-api/docs/Creative Commons Atıf 4.0 Lisansı) altında ve kod örnekleri [Apache 2.0 Lisansı](https://ai.google.dev/gemini-api/docs/Apache 2.0 Lisansı) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://ai.google.dev/gemini-api/docs/Google Developers Site Politikaları)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Son güncelleme tarihi: 2026-04-29 UTC.
+上次更新時間：2026-04-29 (世界標準時間)。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+想進一步說明嗎？
+
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-04-29 (世界標準時間)。"],[],[]]

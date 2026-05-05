@@ -1,40 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=fr
-fetched_at: 2026-05-05T13:20:28.975610+00:00
-title: "Mod\u00e8le Gemini Embedding\u00a02 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=zh-TW
+fetched_at: 2026-05-05T19:51:33.210214+00:00
+title: "Gemini Embedding 2 \u6a21\u578b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/models/recherche approfondie Gemini) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-- [Accueil](https://ai.google.dev/gemini-api/docs/models/Accueil)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/models/Gemini API)
-- [Docs](https://ai.google.dev/gemini-api/docs/models/Docs)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Envoyer des commentaires
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Modèle Gemini Embedding 2
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Notre premier modèle d'embedding multimodal, qui fournit un mappage numérique efficace du texte, des images, des vidéos, de l'audio et des PDF dans un seul espace d'embedding unifié. Le modèle Gemini Embedding 2 est idéal pour la recherche sémantique intermodale, la récupération de documents et les systèmes de recommandation qui nécessitent des calculs de similarité rapides et évolutifs sur de grands ensembles de données multimodales.
+提供意見
 
-## Documentation
+# Gemini Embedding 2 模型
 
-Consultez la page [Embeddings](https://ai.google.dev/gemini-api/docs/models/Embeddings) pour obtenir une couverture complète
-des fonctionnalités.
+這是我們第一個多模態嵌入模型，可將文字、圖片、影片、音訊和 PDF 檔案有效對應至單一統一嵌入空間。Gemini Embedding 2 模型最適合用於跨模態語意搜尋、文件檢索，以及需要對大型多模態資料集進行快速、可擴充的相似度計算的推薦系統。
+
+## 說明文件
+
+如要全面瞭解功能和用途，請前往「[嵌入](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-tw)」頁面。
 
 ## gemini-embedding-2
 
-| Propriété | Description |
+| 屬性 | 說明 |
 | --- | --- |
-| id\_cardCode du modèle | **API Gemini**  `gemini-embedding-2` |
-| saveTypes de données acceptés | **Entrée**  Texte, image, vidéo, audio, PDF  **Résultat**  Embeddings textuels |
-| token\_auto[Limites de jetons[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  8 192  **Taille de la dimension de sortie**  Flexible, compatible avec : 128 à 3 072, recommandé : 768, 1 536, 3 072 |
-| 123Versions | Pour en savoir plus, consultez les [modèles de version de modèle](https://ai.google.dev/gemini-api/docs/models/modèles de version de modèle).  - Stable: `gemini-embedding-2` |
-| calendar\_monthDernière mise à jour | Avril 2026 |
+| id\_card 模型代碼 | **Gemini API**  `gemini-embedding-2` |
+| save支援的資料類型 | **輸入功率**  文字、圖片、影片、音訊、PDF  **輸出內容**  文字嵌入 |
+| token\_auto 代幣限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw) | **輸入權杖限制**  8,192  **輸出尺寸大小**  彈性，支援：128 - 3072，建議：768、1536、3072 |
+| 123 個版本 | 如要瞭解詳情，請參閱[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-tw#model-versions)。  - 穩定：`gemini-embedding-2` |
+| calendar\_month最新更新 | 2026 年 4 月 |
 
-Envoyer des commentaires
+提供意見
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://ai.google.dev/gemini-api/docs/models/Creative Commons Attribution 4.0), et les échantillons de code sont régis par une licence [Apache 2.0](https://ai.google.dev/gemini-api/docs/models/Apache 2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://ai.google.dev/gemini-api/docs/models/Règles du site Google Developers). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Dernière mise à jour le 2026/04/29 (UTC).
+上次更新時間：2026-04-29 (世界標準時間)。
 
-Voulez-vous nous donner plus d'informations ?
+想進一步說明嗎？
+
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-04-29 (世界標準時間)。"],[],[]]

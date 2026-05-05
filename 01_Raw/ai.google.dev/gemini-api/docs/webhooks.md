@@ -1,46 +1,51 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/webhooks?hl=zh-CN
-fetched_at: 2026-05-05T13:19:07.707441+00:00
+source_url: https://ai.google.dev/gemini-api/docs/webhooks?hl=ja
+fetched_at: 2026-05-05T19:51:57.758768+00:00
 title: "Webhook \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/Gemini Deep Research) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
 
-- [首页](https://ai.google.dev/gemini-api/docs/首页)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [文档](https://ai.google.dev/gemini-api/docs/文档)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-发送反馈
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+
+フィードバックを送信
 
 # Webhook
 
-借助网络钩子，Gemini API 可以在异步操作或长时间运行的操作 (LRO) 完成时，向您的服务器推送实时通知。这样就无需轮询 API 以获取状态更新，从而减少延迟和开销。
+Webhook を使用すると、非同期オペレーションまたは長時間実行オペレーション（LRO）が完了したときに、Gemini API
+からサーバーにリアルタイム通知をプッシュできます。これにより、API
+にステータス更新をポーリングする必要がなくなり、レイテンシとオーバーヘッドが削減されます。
 
-网络钩子适用于[批量](https://ai.google.dev/gemini-api/docs/批量)作业、
-[互动](https://ai.google.dev/gemini-api/docs/互动)和[视频生成](https://ai.google.dev/gemini-api/docs/视频生成)等操作。
+Webhook は、[バッチ](https://ai.google.dev/gemini-api/docs/batch-api?hl=ja)ジョブ、
+[インタラクション](https://ai.google.dev/gemini-api/docs/interactions?hl=ja)、[動画生成](https://ai.google.dev/gemini-api/docs/video?hl=ja)などのオペレーションで使用できます。
 
-## 运作方式
+## 仕組み
 
-您可以配置 Gemini API 网络钩子，使其在事件触发后立即向您的监听器网址发送 HTTP POST 请求，而无需重复轮询 `GET /operations` 以检查作业是否已完成。
+ジョブが完了したかどうかを確認するために `GET /operations` を繰り返しポーリングする代わりに、イベント トリガーが発生するとすぐに HTTP POST リクエストをリスナー URL に送信するように Gemini API Webhook を構成できます。
 
-Gemini API 支持两种配置网络钩子的方式：
+Gemini API では、Webhook を構成する次の 2 つの方法がサポートされています。
 
-- [**静态网络钩子**](https://ai.google.dev/gemini-api/docs/**静态网络钩子**)：使用 Gemini [WebhookService API](https://ai.google.dev/gemini-api/docs/WebhookService API) 配置的项目级端点。适用于全局集成（例如通知 Slack、同步数据库等）。
-- [**动态网络钩子**](https://ai.google.dev/gemini-api/docs/**动态网络钩子**)：请求级替换，在特定作业调用的配置载荷中传递
-  网络钩子网址。非常适合将特定作业路由到专用端点。
+- [**静的 Webhook**](#static-webhooks): Gemini [WebhookService API](https://ai.google.dev/api?hl=ja) で構成されたプロジェクト レベルのエンドポイント。グローバル統合（Slack への通知、データベースの同期など）に適しています。
+- [**動的 Webhook**](#dynamic-webhooks): 特定のジョブ呼び出しの構成ペイロードで
+  Webhook URL を渡すリクエストレベルのオーバーライド。特定のジョブを専用のエンドポイントにルーティングする場合に最適です。
 
-## 静态网络钩子
+## 静的 Webhook
 
-静态网络钩子是为整个 [项目](https://ai.google.dev/gemini-api/docs/项目) 注册的，并且会针对任何匹配的
-事件触发。
+[静的 Webhook はプロジェクト全体に登録され、一致するイベントが発生するとトリガーされます。](https://ai.google.dev/gemini-api/docs/api-key?hl=ja#google-cloud-projects)
 
-### 创建网络钩子
+### Webhook を作成する
 
-您可以使用 SDK 或 REST API 创建端点。
+エンドポイントは、SDK または REST API を使用して作成できます。
 
-**重要提示**：创建网络钩子时，API **只会返回一次签名密钥**
-。您必须安全地存储此密钥（例如在环境变量中），以便稍后验证签名。如果您丢失了签名密钥，则必须
-[轮替](https://ai.google.dev/gemini-api/docs/轮替)该密钥。
+**重要**: Webhook を作成すると、API は**署名シークレット**
+**一度だけ** 返します。後で署名を確認するために、この情報を安全に保存する必要があります（環境変数など）。署名シークレットを紛失した場合は、
+[ローテーション](#rotate-signing-secret)する必要があります。
 
 ### Python
 
@@ -96,12 +101,12 @@ curl -X POST \
   }'
 ```
 
-如需详细了解如何设置服务器以接收数据，请参阅
-[处理网络钩子请求](https://ai.google.dev/gemini-api/docs/处理网络钩子请求)部分。
+データを受信するようにサーバーを設定する方法については、
+[Webhook リクエストを処理する](#handle-webhook-requests)をご覧ください。
 
-### 获取网络钩子
+### Webhook を取得する
 
-按资源名称检索有关特定网络钩子的详细信息。
+リソース名で特定の Webhook の詳細を取得します。
 
 ### Python
 
@@ -143,9 +148,9 @@ curl -X GET \
   -H "x-goog-api-key: $GOOGLE_API_KEY"
 ```
 
-### 列出网络钩子
+### Webhook を一覧表示する
 
-列出当前项目的所有已配置网络钩子，并提供可选的分页功能。
+現在のプロジェクトで構成されているすべての Webhook を一覧表示します。ページネーションは省略可能です。
 
 ### Python
 
@@ -186,9 +191,9 @@ curl -X GET \
   -H "x-goog-api-key: $GOOGLE_API_KEY"
 ```
 
-### 更新网络钩子
+### Webhook を更新する
 
-更新现有网络钩子的属性，例如显示名称、目标 URI 或订阅的事件。
+表示名、ターゲット URI、登録済みイベントなど、既存の Webhook のプロパティを更新します。
 
 ### Python
 
@@ -238,9 +243,9 @@ curl -X PATCH \
   }'
 ```
 
-### 删除网络钩子
+### Webhook を削除する
 
-从项目中移除网络钩子端点。这会停止向该端点传送未来的事件。
+プロジェクトから Webhook エンドポイントを削除します。これにより、そのエンドポイントへの今後のイベント配信が停止します。
 
 ### Python
 
@@ -278,12 +283,12 @@ curl -X DELETE \
   -H "x-goog-api-key: $GOOGLE_API_KEY"
 ```
 
-### 轮替签名密钥
+### 署名シークレットをローテーションする
 
-轮替网络钩子的签名密钥。您可以配置是立即撤消之前活跃的密钥，还是在 24 小时的宽限期后撤消。
+Webhook の署名シークレットをローテーションします。以前に有効だったシークレットをすぐに取り消すか、24 時間の猶予期間後に取り消すかを構成できます。
 
-**重要提示**：系统**只会**在轮替
-时返回一次新的签名密钥。请先安全地存储该密钥，然后再更新验证逻辑。
+**重要**: 新しい署名シークレットは、ローテーション
+時に**一度だけ** 返されます。検証ロジックを更新する前に、安全に保存してください。
 
 ### Python
 
@@ -336,13 +341,14 @@ curl -X POST \
   }'
 ```
 
-### 在服务器上处理网络钩子请求
+### サーバーで Webhook リクエストを処理する
 
-当您订阅的事件发生时，您的网络钩子网址将收到 HTTP POST 请求。您的端点必须在几秒钟内返回 2xx 状态代码，以避免重试。为确保传送，Gemini API 会使用指数退避算法自动重试失败的请求 24 小时。
+登録しているイベントが発生すると、Webhook URL は HTTP POST リクエストを受信します。再試行を避けるため、エンドポイントは数秒以内に 2xx ステータス コードで応答する必要があります。配信を確実に行うため、Gemini API は指数バックオフを使用して、失敗したリクエストを 24 時間自動的に再試行します。
 
-Gemini 严格遵循安全标头的 [标准网络钩子](https://ai.google.dev/gemini-api/docs/标准网络钩子) 规范。使用签名标头签名和您存储的静态签名密钥在服务器上验证载荷。如需了解载荷信息，请参阅[网络钩子信封](https://ai.google.dev/gemini-api/docs/网络钩子信封)部分。
+Gemini は、セキュリティ ヘッダーの
+[標準 Webhook](https://github.com/standard-webhooks/standard-webhooks) 仕様に厳密に準拠しています。署名付きヘッダーの署名と保存されている静的署名シークレットを使用して、サーバー上のペイロードを検証します。ペイロード情報については、[Webhook エンベロープ](#webhook-envelope)をご覧ください。
 
-以下是使用 Flask 作为 HTTP 监听器的示例：
+HTTP リスナーに Flask を使用する例を次に示します。
 
 ### Python
 
@@ -431,14 +437,14 @@ app.listen(8000, () => {
 });
 ```
 
-## 动态网络钩子
+## 動的 Webhook
 
-借助动态网络钩子，您可以将网络钩子端点绑定到**特定请求
-配置**，非常适合代理编排队列。动态网络钩子利用非对称公钥 JWKS 签名，而不是对称密钥。
+動的 Webhook を使用すると、Webhook エンドポイントを**特定のリクエスト
+構成** にバインドできます。これは、エージェント オーケストレーション キューに最適です。動的 Webhook は、対称シークレットではなく、非対称公開鍵 JWKS 署名を利用します。
 
-### 提交动态请求
+### 動的リクエストを送信する
 
-触发异步作业（例如创建批处理）时，添加 `webhook_config`。
+非同期ジョブ（バッチの作成など）をトリガーするときに `webhook_config` を追加します。
 
 ### Python
 
@@ -502,11 +508,9 @@ curl -X POST \
   }'
 ```
 
-### 验证动态签名 (JWKS)
+### 動的署名（JWKS）を確認する
 
-动态网络钩子请求会发出 JSON Web 令牌 (JWT) 签名。您的监听器
-必须提取签名并使用 [Google 的公共证书
-端点](https://ai.google.dev/gemini-api/docs/Google 的公共证书端点)对其进行验证。
+動的 Webhook リクエストは、JSON ウェブトークン（JWT）署名を発行します。リスナーは署名を抽出し、[Google の公開証明書エンドポイントを使用して検証する必要があります。](https://www.googleapis.com/oauth2/v3/certs)
 
 ### Python
 
@@ -607,11 +611,11 @@ app.post('/gemini-webhook-dynamic', (req, res) => {
 });
 ```
 
-## 网络钩子信封
+## Webhook エンベロープ
 
-为避免带宽拥塞，Gemini 网络钩子使用**精简载荷** 模型来传送数据。传送会发送包含状态详细信息和结果指针的快照，而不是原始输出文件本身。
+帯域幅の輻輳を避けるため、Gemini Webhook は**シン ペイロード** モデルを使用してデータを配信します。配信では、元の出力ファイルではなく、ステータスの詳細と結果へのポインタを含むスナップショットが送信されます。
 
-以下是载荷格式示例：
+ペイロード形式の例を次に示します。
 
 ```
 {
@@ -625,40 +629,42 @@ app.post('/gemini-webhook-dynamic', (req, res) => {
 }
 ```
 
-## 事件目录参考文档
+## イベント カタログのリファレンス
 
-系统会针对支持的作业触发以下事件：
+サポートされているジョブでは、次のイベントがトリガーされます。
 
-| 事件类型 | 触发器 | 载荷项 (`data`) |
+| イベントの種類 | トリガー | ペイロード アイテム（`data`） |
 | --- | --- | --- |
-| `batch.succeeded` | 处理成功完成。 | `id`、`output_file_uri` |
-| `batch.cancelled` | 用户取消了请求 | `id` |
-| `batch.expired` | 批处理在 24 小时内未处理（完成） | `id` |
-| `batch.failed` | 批量作业失败（系统错误或验证错误）。 | `id`、`error_code`、`error_message` |
-| `interaction.requires_action` | 函数调用，用户需要执行某些操作 | `id` |
-| `interaction.completed` | 互动 API 中的 LRO 成功 | `id` |
-| `interaction.failed` | 互动 API 中的 LRO 失败（系统错误或验证错误）。 | `id`、`error_code`、`error_message` |
-| `interaction.cancelled` | 互动 API 中的 LRO 已取消 | `id` |
-| `video.generated` | 视频生成 LRO 已完成。 | `id`、`output_file_uri`、`file_name` |
+| `batch.succeeded` | 処理が正常に完了しました。 | `id`、`output_file_uri` |
+| `batch.cancelled` | ユーザーがリクエストをキャンセルしました | `id` |
+| `batch.expired` | バッチが 24 時間以内に処理（完了）されませんでした | `id` |
+| `batch.failed` | バッチジョブが失敗しました（システム エラーまたは検証エラー）。 | `id`、`error_code`、`error_message` |
+| `interaction.requires_action` | 関数呼び出し。ユーザーが操作する必要があります | `id` |
+| `interaction.completed` | インタラクション API の LRO が成功しました | `id` |
+| `interaction.failed` | インタラクション API の LRO が失敗しました（システム エラーまたは検証エラー）。 | `id`、`error_code`、`error_message` |
+| `interaction.cancelled` | インタラクション API の LRO がキャンセルされました | `id` |
+| `video.generated` | 動画生成 LRO が完了しました。 | `id`、`output_file_uri`、`file_name` |
 
-## 最佳做法
+## ベスト プラクティス
 
-为确保可靠、可扩缩的操作，请执行以下操作：
+信頼性の高いスケーラブルなオペレーションを確保するには:
 
-- **严格的重放保护检查**：所有请求都带有 `webhook-timestamp`
-  标头。请务必在服务器配置层验证此时间戳，以拒绝超过 **5 分钟** 的载荷（以缓解重放攻击）。
-- **异步处理**：在检测到有效
-  签名后立即返回 `2xx OK`，并在内部将解析操作排队。监听器保持时间过长会触发传送重试周期。
-- **重复数据消除处理**：标准网络钩子至少传送一次。使用一致的 `webhook-id` 标头来处理较高拥塞流中可能存在的重复项。
+- **厳格なリプレイ保護チェック**: すべてのリクエストに `webhook-timestamp`
+  ヘッダーが含まれています。サーバー構成レイヤでこのタイムスタンプを常に検証し、**5 分** より古いペイロードを拒否します（リプレイ攻撃を軽減するため）。
+- **非同期で処理する**: 有効な
+  署名が検出されたらすぐに `2xx OK` で応答し、内部で解析オペレーションをキューに登録します。リスナーの保持時間が長くなると、配信の再試行サイクルがトリガーされます。
+- **重複排除処理**: 標準の Webhook は「少なくとも 1 回」配信します。一貫した `webhook-id` ヘッダーを使用して、輻輳の多いフローで発生する可能性のある重複を処理します。
 
-## 接下来怎么做？
+## 次のステップ
 
-- [Batch API](https://ai.google.dev/gemini-api/docs/Batch API)：利用网络钩子自动执行大量端点。
+- [Batch API](https://ai.google.dev/gemini-api/docs/batch?hl=ja): Webhook を使用して、大量のエンドポイントを自動化します。
 
-发送反馈
+フィードバックを送信
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://ai.google.dev/gemini-api/docs/知识共享署名 4.0 许可)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://ai.google.dev/gemini-api/docs/Apache 2.0 许可)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://ai.google.dev/gemini-api/docs/Google 开发者网站政策)。Java 是 Oracle 和/或其关联公司的注册商标。
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-最后更新时间 (UTC)：2026-05-05。
+最終更新日 2026-05-05 UTC。
 
-需要向我们提供更多信息？
+ご意見をお聞かせください
+
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-05-05 UTC。"],[],[]]

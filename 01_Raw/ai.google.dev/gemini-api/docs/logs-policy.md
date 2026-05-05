@@ -1,65 +1,69 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-policy?hl=pl
-fetched_at: 2026-05-05T13:19:51.015226+00:00
-title: "Rejestrowanie i\u00a0udost\u0119pnianie danych \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-policy?hl=de
+fetched_at: 2026-05-05T19:49:59.539537+00:00
+title: "Datenerfassung und \u2011freigabe \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/Gemini Deep Research) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
 
-- [Strona główna](https://ai.google.dev/gemini-api/docs/Strona główna)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs/Dokumenty)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Prześlij opinię
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Rejestrowanie i udostępnianie danych
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Ta strona zawiera informacje o przechowywaniu i zarządzaniu
-[logami Gemini API](https://ai.google.dev/gemini-api/docs/logami Gemini API), które są danymi API należącymi do dewelopera
-i pochodzącymi z obsługiwanych wywołań Gemini API w projektach z włączonymi płatnościami. Logi obejmują cały proces od żądania użytkownika do odpowiedzi modelu.
+Feedback geben
 
-## 1. Dane, które można udostępniać
+# Datenerfassung und ‑freigabe
 
-Jako właściciel projektu możesz włączyć logowanie wywołań Gemini API na własny użytek lub w celu przekazywania opinii i udostępniania ich Google, aby pomóc nam w ciągłym ulepszaniu naszych modeli.
+Auf dieser Seite werden die Speicherung und Verwaltung von
+[Gemini API-Logs](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=de) beschrieben. Dabei handelt es sich um API-Daten von Entwicklern aus unterstützten Gemini API-Aufrufen für Projekte mit aktivierter Abrechnung. Logs umfassen den gesamten Prozess von der Anfrage eines Nutzers bis zur Antwort des Modells.
 
-Gdy logowanie jest włączone, możesz pomóc nam w tworzeniu systemów AI, które będą przydatne dla deweloperów w różnych dziedzinach i przypadkach użycia. Wystarczy, że udostępnisz nam te dane na potrzeby ulepszania usług i trenowania modeli:
+## 1. Daten, die freigegeben werden können
 
-- **Zbiory danych:** w interfejsie logów i zbiorów danych w Google AI Studio możesz wybrać logi (żądania, odpowiedzi, metadane itp.) z obsługiwanych wywołań Gemini API, które Cię interesują. Możesz je udostępnić, dodając je do zbiorów danych. Podczas tworzenia zbioru danych możesz zrezygnować z udostępniania.
-- **Opinie:** podczas przeglądania logów możesz przekazywać opinie, w tym oceny (kciuk w górę lub w dół) oraz wszelkie komentarze tekstowe.
+Als Projektinhaber haben Sie die Möglichkeit, das Logging von Gemini API-Aufrufen zu aktivieren. Sie können die Logs für eigene Zwecke verwenden oder Google Feedback geben und die Logs mit Google teilen, damit wir unsere Modelle kontinuierlich verbessern können.
 
-Gdy udostępniasz Google zbiór danych, Twoje logi w tym zbiorze, w tym
-żądania i odpowiedzi, będą przetwarzane zgodnie z naszymi
-[Warunkami korzystania](https://ai.google.dev/gemini-api/docs/Warunkami korzystania) z
-"[Usług bezpłatnych](https://ai.google.dev/gemini-api/docs/Usług bezpłatnych),"
-Oznacza to, że zbiór danych może być używany do rozwijania i ulepszania usług, produktów i technologii uczenia maszynowego Google, w tym do ulepszania i
-trenowania naszych modeli. **Nie podawaj danych osobowych, poufnych ani wrażliwych.**
+Wenn das Logging aktiviert ist, können Sie uns helfen, KI-Systeme zu entwickeln, die für Entwickler in verschiedenen Bereichen und Anwendungsfällen weiterhin wertvoll sind. Dazu können Sie die folgenden Daten zur Produktverbesserung und zum Modelltraining beitragen:
 
-## 2. Jak wykorzystujemy Twoje dane
+- **Datasets**:Über die Benutzeroberfläche „Logs und Datasets“ von Google AI Studio können Sie Logs (Anfragen, Antworten, Metadaten usw.) aus unterstützten Gemini API-Aufrufen auswählen. Diese werden durch die Aufnahme in Datasets beigetragen. Sie haben die Möglichkeit, die Teilnahme bei der Dataset-Erstellung abzulehnen.
+- **Feedback**:Wenn Sie Logs überprüfen, können Sie Feedback geben, z. B. mit „Mag ich“/„Mag ich nicht“-Bewertungen und schriftlichen Kommentaren.
 
-Domyślnie logi wygasają po 55 dniach. Po tym okresie nie będą już dostępne. Możesz tworzyć zbiory danych, aby przechowywać logi, które Cię interesują lub które są dla Ciebie wartościowe, przez dłuższy czas na potrzeby dalszych przypadków użycia i opcjonalnego udostępniania ich w celu ulepszania modeli. Logi przechowywane w zbiorach danych nie mają ustawionych dat ważności, ale każdy projekt ma domyślny limit przechowywania do 1000 logów.
+Wenn Sie ein Dataset mit Google teilen, werden Ihre Logs in diesem Dataset, einschließlich
+Anfragen und Antworten, gemäß unseren
+[Nutzungsbedingungen](https://developers.google.com/terms?hl=de) für
+„[Kostenlose Dienste](https://ai.google.dev/gemini-api/terms?hl=de#data-use-unpaid)“
+verarbeitet. Das Dataset kann also verwendet werden, um Google
+Produkte, ‑Dienste und Technologien für maschinelles Lernen zu entwickeln und zu verbessern, einschließlich der Verbesserung und des
+Trainings unserer Modelle. **Geben Sie keine personenbezogenen oder vertraulichen Informationen an.**
 
-Domyślnie, ponieważ logowanie jest dostępne tylko w projektach z włączonymi płatnościami,
-prompty i odpowiedzi w logach nie są używane do ulepszania ani
-rozwijania usług zgodnie z naszymi [Warunkami](https://ai.google.dev/gemini-api/docs/Warunkami)
-korzystania z danych.
+## 2. So verwenden wir Ihre Daten
 
-Jeśli zdecydujesz się udostępniać Google zbiory danych z logami, będą one używane jako dane demonstracyjne z rzeczywistych sytuacji, aby lepiej zrozumieć różnorodność domen i kontekstów, w których używane są systemy i aplikacje AI. Te dane mogą być używane do poprawy jakości modelu oraz do informowania o trenowaniu i ocenianiu przyszłych modeli i usług. Dane te są przetwarzane zgodnie z naszymi warunkami korzystania z danych
-w przypadku [usług bezpłatnych](https://ai.google.dev/gemini-api/docs/usług bezpłatnych).
-W związku z tym weryfikatorzy mogą odczytywać, dodawać adnotacje i przetwarzać udostępniane przez Ciebie dane wejściowe i wyjściowe interfejsu API. Zanim dane zostaną użyte do ulepszania modelu, Google podejmuje kroki w celu ochrony prywatności użytkowników. Obejmuje to odłączenie tych danych od Twojego konta Google, klucza API i projektu w chmurze, zanim weryfikatorzy je zobaczą lub opatrzą adnotacjami.
+Standardmäßig laufen Logs nach 55 Tagen ab. Nach diesem Zeitraum sind sie nicht mehr verfügbar. Datasets können erstellt werden, um Logs, die über diesen Zeitraum hinaus von Interesse oder Wert sind, für nachgelagerte Anwendungsfälle aufzubewahren und optional zur Verbesserung von Modellen beizutragen. Für Logs, die in Datasets gespeichert sind,gibt es keine festgelegten Ablaufdaten. Für jedes Projekt gilt jedoch ein Standardspeicherlimit von bis zu 1.000 Logs.
 
-## 3. Uprawnienia do danych
+Standardmäßig werden Prompts und Antworten in Logs nicht zur Produktverbesserung oder
+‑entwicklung verwendet, da das Logging nur für Projekte mit aktivierter Abrechnung verfügbar ist. Dies entspricht unseren [Nutzungsbedingungen](https://developers.google.com/terms?hl=de)
+zur Datennutzung.
 
-Gdy zdecydujesz się udostępniać dane API, potwierdzasz, że masz niezbędne uprawnienia, aby Google mogło przetwarzać i wykorzystywać te dane zgodnie z opisem w tej dokumentacji. **Nie udostępniaj logów zawierających informacje poufne, zastrzeżone ani wrażliwe uzyskane w ramach płatnej usługi.**
-Licencja, której udzielasz Google w sekcji „[Przesyłanie treści](https://ai.google.dev/gemini-api/docs/Przesyłanie treści)” w Warunkach korzystania z interfejsu API, obejmuje również, w zakresie wymaganym przez obowiązujące prawo, wszelkie treści (np. prompty, w tym powiązane instrukcje systemowe, treści zapisane w pamięci podręcznej i pliki, takie jak obrazy, filmy czy dokumenty) przesyłane do usług oraz wszelkie wygenerowane odpowiedzi.
+Wenn Sie Datasets Ihrer Logs mit Google teilen, werden diese Datasets als Demonstrationsdaten aus der Praxis verwendet, um die Vielfalt der Bereiche und Kontexte besser zu verstehen, in denen KI-Systeme und ‑Anwendungen eingesetzt werden. Diese Daten können verwendet werden, um die Modellqualität zu verbessern und das Training und die Bewertung zukünftiger Modelle und Dienste zu unterstützen. Diese Daten werden gemäß unseren Nutzungsbedingungen für die Datennutzung für [kostenlose Dienste](https://ai.google.dev/gemini-api/terms?hl=de#data-use-unpaid) verarbeitet.
+Dementsprechend können Prüfer die von Ihnen freigegebenen API-Eingaben und ‑Ausgaben lesen, mit Anmerkungen versehen und verarbeiten. Bevor Daten zur Modellverbesserung verwendet werden, ergreift Google im Rahmen dieses Prozesses Maßnahmen, um die Privatsphäre der Nutzer zu schützen. Dazu wird unter anderem dafür gesorgt, dass entsprechende Daten nicht mit Ihrem Google-Konto, API-Schlüssel und Cloud-Projekt in Verbindung gebracht werden können, bevor sie von Prüfern eingesehen oder mit Vermerken versehen werden.
 
-## 4. Udostępnianie danych i opinie
+## 3. Datenberechtigungen
 
-Możesz pomóc nam w rozwoju badań nad AI, Gemini API i Google AI Studio, udostępniając swoje dane jako przykłady. Dzięki temu będziemy mogli stale ulepszać nasze modele w różnych kontekstach i tworzyć systemy AI, które będą przydatne dla deweloperów w różnych dziedzinach i przypadkach użycia.
+Wenn Sie API-Daten beitragen, bestätigen Sie, dass Sie die erforderlichen Berechtigungen haben, damit Google die Daten wie in dieser Dokumentation beschrieben verarbeiten und verwenden kann. **Bitte tragen Sie keine Logs bei, die sensible, vertrauliche oder geschützte Informationen enthalten, die über den kostenpflichtigen Dienst erhalten wurden.**
+Die Befugnis, die Sie Google unter dem Abschnitt „[Einreichung von Inhalten](https://developers.google.com/terms?hl=de#b_submission_of_content)“ der API-Bedingungen erteilen, erstreckt sich auch auf alle Inhalte (z.B. Prompts, einschließlich zugehöriger Systemanweisungen, im Cache gespeicherter Inhalte und Dateien wie Bilder, Videos oder Dokumente), die Sie an die Dienste senden, und auf alle generierten Antworten, soweit dies nach geltendem Recht für deren Nutzung durch uns erforderlich ist.
 
-Prześlij opinię
+## 4. Datenfreigabe und Feedback
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://ai.google.dev/gemini-api/docs/licencją Creative Commons – uznanie autorstwa 4.0), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://ai.google.dev/gemini-api/docs/licencji Apache 2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://ai.google.dev/gemini-api/docs/zasady dotyczące witryny Google Developers). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Sie können uns helfen, die KI-Forschung, die Gemini API und Google AI Studio weiterzuentwickeln, indem Sie Ihre Daten als Beispiele freigeben. So können wir unsere Modelle in verschiedenen Kontexten kontinuierlich verbessern und KI-Systeme entwickeln, die für Entwickler in verschiedenen Bereichen und Anwendungsfällen weiterhin wertvoll sind.
 
-Ostatnia aktualizacja: 2026-04-29 UTC.
+Feedback geben
 
-Chcesz przekazać coś jeszcze?
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+
+Zuletzt aktualisiert: 2026-04-29 (UTC).
+
+Haben Sie Feedback für uns?
+
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-04-29 (UTC)."],[],[]]

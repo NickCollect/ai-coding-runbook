@@ -1,38 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=it
-fetched_at: 2026-05-05T13:27:13.073366+00:00
-title: "Output strutturati \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=ar
+fetched_at: 2026-05-05T19:47:23.093447+00:00
+title: "\u0627\u0644\u0646\u062a\u0627\u0626\u062c \u0627\u0644\u0645\u0646\u0638\u064e\u0651\u0645\u0629 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/Gemini Deep Research) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-- [Home page](https://ai.google.dev/gemini-api/docs/Home page)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [Documenti](https://ai.google.dev/gemini-api/docs/Documenti)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Invia feedback
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Output strutturati
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Puoi configurare i modelli Gemini per generare risposte conformi a uno schema JSON fornito. Ciò garantisce risultati prevedibili e sicuri e semplifica l'estrazione
-di dati strutturati da testo non strutturato.
+إرسال ملاحظات
 
-L'utilizzo di output strutturati è ideale per:
+# النتائج المنظَّمة
 
-- **Estrazione dei dati:** estrai informazioni specifiche come nomi e date dal testo.
-- **Classificazione strutturata**:consente di classificare il testo in categorie predefinite.
-- **Workflow agentici**:genera input strutturati per strumenti o API.
+يمكنك ضبط نماذج Gemini لإنشاء ردود تتوافق مع JSON Schema الذي تقدّمه. يضمن ذلك الحصول على نتائج متوقّعة وآمنة من ناحية النوع، ويُسهّل استخراج البيانات المنظَّمة من النصوص غير المنظَّمة.
 
-Oltre a supportare JSON Schema nell'API REST, gli SDK Google GenAI
-semplificano la definizione degli schemi utilizzando
-[Pydantic](https://ai.google.dev/gemini-api/docs/Pydantic) (Python) e
-[Zod](https://ai.google.dev/gemini-api/docs/Zod) (JavaScript).
+يُعد استخدام المُخرجات المنظَّمة مثاليًا في الحالات التالية:
 
-Estrai ricette
-Moderazione dei contenuti
-Strutture ricorsive
+- **استخراج البيانات:** استخراج معلومات محدّدة، مثل الأسماء والتواريخ، من النص
+- **التصنيف المنظَّم:** تصنيف النص ضِمن فئات محدَّدة مسبقًا
+- **سير عمل الذكاء الاصطناعي الوكيل:** إنشاء مدخلات منظَّمة للأدوات أو واجهات برمجة التطبيقات
 
-Questo esempio mostra come estrarre dati strutturati dal testo utilizzando tipi di schema JSON di base come `object`, `array`, `string` e `integer`.
+بالإضافة إلى إتاحة JSON Schema في REST API، تُسهّل حِزم Google GenAI SDK
+تحديد المخطّطات باستخدام
+[Pydantic](https://docs.pydantic.dev/latest/) (لغة Python) و
+[Zod](https://zod.dev/) (لغة JavaScript).
+
+Recipe Extractor
+Content Moderation
+Recursive Structures
+
+يوضّح هذا المثال كيفية استخراج البيانات المنظَّمة من النص باستخدام أنواع JSON Schema الأساسية، مثل `object` و`array` و`string` و`integer`.
 
 ### Python
 
@@ -128,7 +131,7 @@ const recipe = recipeSchema.parse(JSON.parse(response.text));
 console.log(recipe);
 ```
 
-### Go
+### انتقال
 
 ```
 package main
@@ -213,7 +216,7 @@ func main() {
 }
 ```
 
-### REST
+### راحة
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent" \
@@ -261,7 +264,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
     }'
 ```
 
-**Esempio di risposta:**
+**مثال على الردّ:**
 
 ```
 {
@@ -316,12 +319,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 }
 ```
 
-## Streaming
+## البث
 
-Puoi trasmettere in streaming gli output strutturati, il che ti consente di iniziare a elaborare la risposta man mano che viene generata, senza dover attendere il completamento dell'intero output. In questo modo, puoi migliorare le prestazioni percepite della tua applicazione.
+يمكنك بث المُخرجات المنظَّمة، ما يسمح لك ببدء معالجة الردّ أثناء إنشائه، بدون الحاجة إلى انتظار اكتمال الإخراج بالكامل. يمكن أن يؤدي ذلك إلى تحسين الأداء المتصوَّر لتطبيقك.
 
-I chunk trasmessi in streaming saranno stringhe JSON parziali valide, che possono essere
-concatenate per formare l'oggetto JSON finale completo.
+ستكون الأجزاء التي يتم بثها عبارة عن سلاسل JSON جزئية صالحة، ويمكن ربطها لتشكيل كائن JSON النهائي الكامل.
 
 ### Python
 
@@ -379,14 +381,14 @@ for await (const chunk of stream) {
 }
 ```
 
-## Output strutturati con strumenti
+## المُخرجات المنظَّمة مع الأدوات
 
-Gemini 3 ti consente di combinare gli output strutturati con strumenti integrati, tra cui
-[Grounding con la Ricerca Google](https://ai.google.dev/gemini-api/docs/Grounding con la Ricerca Google),
-[Contesto URL](https://ai.google.dev/gemini-api/docs/Contesto URL),
-[Esecuzione di codice](https://ai.google.dev/gemini-api/docs/Esecuzione di codice),
-[Ricerca file](https://ai.google.dev/gemini-api/docs/Ricerca file) e
-[Chiamata di funzioni](https://ai.google.dev/gemini-api/docs/Chiamata di funzioni).
+يتيح لك Gemini 3 الجمع بين المُخرجات المنظَّمة والأدوات المضمّنة، بما في ذلك
+[تحديد المصدر من خلال "بحث Search"](https://ai.google.dev/gemini-api/docs/google-search?hl=ar)،
+[URL Context](https://ai.google.dev/gemini-api/docs/url-context?hl=ar)،
+[Code Execution](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar)،
+[File Search](https://ai.google.dev/gemini-api/docs/file-search?hl=ar#structured-output)، و
+[Function Calling](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar).
 
 ### Python
 
@@ -455,7 +457,7 @@ async function run() {
 run();
 ```
 
-### REST
+### راحة
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-preview:generateContent" \
@@ -489,97 +491,99 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-pre
   }'
 ```
 
-## Supporto dello schema JSON
+## إتاحة JSON Schema
 
-Per generare un oggetto JSON, imposta `response_mime_type` nella configurazione di generazione su `application/json` e fornisci un `response_json_schema`. Lo schema deve essere uno [schema JSON](https://ai.google.dev/gemini-api/docs/schema JSON) valido che descriva il formato di output desiderato.
+لإنشاء كائن JSON، اضبط `response_mime_type` في إعدادات الإنشاء على `application/json` وقدِّم `response_json_schema`. يجب أن يكون المخطّط [JSON Schema](https://json-schema.org/) صالحًا يصف تنسيق الإخراج المطلوب.
 
-Il modello genererà quindi una risposta che è una stringa JSON sintatticamente valida corrispondente allo schema fornito. Quando utilizzi output strutturati, il modello produce output nello stesso ordine delle chiavi nello schema.
+سينشئ النموذج بعد ذلك ردًا عبارة عن سلسلة JSON صالحة من الناحية النحوية وتتطابق مع المخطّط المقدَّم. عند استخدام المُخرجات المنظَّمة، سينتج النموذج مُخرجات بالترتيب نفسه الذي تظهر به المفاتيح في المخطّط.
 
-La modalità di output strutturato di Gemini supporta un sottoinsieme della specifica [JSON Schema](https://ai.google.dev/gemini-api/docs/JSON Schema).
+يتيح وضع المُخرجات المنظَّمة في Gemini مجموعة فرعية من مواصفات [JSON Schema](https://json-schema.org).
 
-Sono supportati i seguenti valori di `type`:
+القيم التالية لـ `type` متاحة:
 
-- **`string`**: Per il testo.
-- **`number`**: per i numeri in virgola mobile.
-- **`integer`**: per i numeri interi.
-- **`boolean`**: per i valori vero/falso.
-- **`object`**: per dati strutturati con coppie chiave-valore.
-- **`array`**: per gli elenchi di elementi.
-- **`null`**: per consentire a una proprietà di essere null, includi `"null"` nell'array di tipi (ad es. `{"type": ["string", "null"]}`).
+- **`string`**: للنص
+- **`number`**: لأرقام النقطة العائمة.
+- **`integer`**: للأرقام الصحيحة
+- **`boolean`**: لقيم "صحيح/خطأ"
+- **`object`**: للبيانات المنظَّمة التي تتضمّن أزواجًا من القيم والمفاتيح
+- **`array`**: لقوائم العناصر
+- **`null`**: للسماح بأن تكون السمة فارغة، أدرِج `"null"` في مصفوفة النوع (مثل `{"type": ["string", "null"]}`).
 
-Queste proprietà descrittive aiutano a guidare il modello:
+تساعد هذه السمات الوصفية في توجيه النموذج:
 
-- **`title`**: una breve descrizione di una proprietà.
-- **`description`**: una descrizione più lunga e dettagliata di una proprietà.
+- **`title`**: وصف قصير للسمة
+- **`description`**: وصف أطول وأكثر تفصيلاً للسمة
 
-### Proprietà specifiche per tipo
+### السمات الخاصة بالنوع
 
-**Per i valori di `object`:**
+**لقيم `object`:**
 
-- **`properties`**: un oggetto in cui ogni chiave è il nome di una proprietà e ogni valore è uno schema per quella proprietà.
-- **`required`**: un array di stringhe che elenca le proprietà obbligatorie.
-- **`additionalProperties`**: controlla se le proprietà non elencate in `properties` sono consentite. Può essere un valore booleano o uno schema.
+- **`properties`**: كائن يكون فيه كل مفتاح اسم سمة وكل قيمة مخطّطًا لتلك السمة
+- **`required`**: مصفوفة من السلاسل، تسرد السمات الإلزامية
+- **`additionalProperties`**: تتحكّم في ما إذا كان يُسمح بالسمات غير المدرَجة في `properties` يمكن أن تكون قيمة منطقية أو مخطّطًا.
 
-**Per i valori di `string`:**
+**لقيم `string`:**
 
-- **`enum`**: elenca un insieme specifico di possibili stringhe per le attività di classificazione.
-- **`format`**: specifica una sintassi per la stringa, ad esempio `date-time`, `date`, `time`.
+- **`enum`**: تسرد مجموعة محدّدة من السلاسل المحتمَلة لمهام التصنيف
+- **`format`**: تحدّد بنية السلسلة، مثل `date-time` أو `date` أو `time`
 
-**Per i valori `number` e `integer`:**
+**لقيم `number` و`integer` القيم:**
 
-- **`enum`**: elenca un insieme specifico di valori numerici possibili.
-- **`minimum`**: il valore inclusivo minimo.
-- **`maximum`**: il valore inclusivo massimo.
+- **`enum`**: تسرد مجموعة محدّدة من القيم الرقمية المحتمَلة
+- **`minimum`**: الحد الأدنى للقيمة الشاملة
+- **`maximum`**: الحد الأقصى للقيمة الشاملة
 
-**Per i valori di `array`:**
+**لقيم `array`:**
 
-- **`items`**: definisce lo schema per tutti gli elementi dell'array.
-- **`prefixItems`**: definisce un elenco di schemi per i primi N elementi, consentendo strutture simili a tuple.
-- **`minItems`**: il numero minimo di elementi nell'array.
-- **`maxItems`**: il numero massimo di elementi nell'array.
+- **`items`**: تحدّد المخطّط لجميع العناصر في المصفوفة
+- **`prefixItems`**: تحدّد قائمة بالمخطّطات لأول N عنصر، ما يسمح ببُنى تشبه الصفوف
+- **`minItems`**: الحد الأدنى لعدد العناصر في المصفوفة
+- **`maxItems`**: الحد الأقصى لعدد العناصر في المصفوفة
 
-## Supporto del modello
+## النماذج المتاحة
 
-I seguenti modelli supportano l'output strutturato:
+تتيح النماذج التالية المُخرجات المنظَّمة:
 
-| Modello | Output strutturati |
+| الطراز | المُخرجات المنظَّمة |
 | --- | --- |
-| Gemini 3.1 Pro (anteprima) | ✔️ |
-| Gemini 3 Flash (anteprima) | ✔️ |
-| Gemini 2.5 Pro | ✔️ |
-| Gemini 2.5 Flash | ✔️ |
-| Gemini 2.5 Flash-Lite | ✔️ |
-| Gemini 2.0 Flash | ✔️\* |
-| Gemini 2.0 Flash-Lite | ✔️\* |
+| ‫Gemini 3.1 Pro (معاينة) | ✔️ |
+| ‫Gemini 3 Flash (معاينة) | ✔️ |
+| ‫Gemini 2.5 Pro | ✔️ |
+| ‫Gemini 2.5 Flash | ✔️ |
+| ‫Gemini 2.5 Flash-Lite | ✔️ |
+| ‫Gemini 2.0 Flash | ‫✔️\* |
+| ‫Gemini 2.0 Flash-Lite | ‫✔️\* |
 
-*\* Tieni presente che Gemini 2.0 richiede un elenco `propertyOrdering` esplicito all'interno dell'input JSON per definire la struttura preferita. Puoi trovare un esempio in questo [cookbook](https://ai.google.dev/gemini-api/docs/cookbook).*
+*\* ملاحظة: يتطلّب Gemini 2.0 قائمة `propertyOrdering` صريحة ضِمن إدخال JSON لتحديد البنية المفضّلة. يمكنك الاطّلاع على مثال في دليل الطبخ هذا* .
 
-## Output strutturati e chiamata di funzione
+## المُخرجات المنظَّمة مقابل استدعاء الدوال
 
-Sia gli output strutturati che le chiamate di funzione utilizzano schemi JSON, ma hanno scopi diversi:
+يستخدم كلٌّ من المُخرجات المنظَّمة واستدعاء الدوال JSON Schema، ولكنّهما يخدمان أغراضًا مختلفة:
 
-| Funzionalità | Caso d'uso principale |
+| الميزة | حالة الاستخدام الأساسية |
 | --- | --- |
-| **Output strutturati** | **Formattazione della risposta finale all'utente.** Utilizza questo prompt quando vuoi che la *risposta* del modello sia in un formato specifico (ad es. estrazione di dati da un documento da salvare in un database). |
-| **Chiamata di funzione** | **Eseguire azioni durante la conversazione.** Utilizza questo intent quando il modello deve *chiederti* di eseguire un'attività (ad es. "ottieni il meteo attuale") prima di poter fornire una risposta finale. |
+| **المُخرجات المنظَّمة** | **تنسيق الردّ النهائي للمستخدم** استخدِم هذه الميزة عندما تريد أن يكون *ردّ* النموذج بتنسيق معيّن (مثل استخراج البيانات من مستند لحفظها في قاعدة بيانات). |
+| **استدعاء الدوال** | **اتخاذ إجراء أثناء المحادثة** استخدِم هذه الميزة عندما يحتاج النموذج إلى *أن يطلب منك* تنفيذ مهمة (مثل "الحصول على حالة الطقس الحالية") قبل أن يتمكّن من تقديم إجابة نهائية. |
 
-## Best practice
+## أفضل الممارسات
 
-- **Descrizioni chiare**:utilizza il campo `description` nello schema per fornire istruzioni chiare al modello su cosa rappresenta ogni proprietà. Questo è fondamentale per guidare l'output del modello.
-- **Tipizzazione forte**:utilizza tipi specifici (`integer`, `string`, `enum`) quando possibile. Se un parametro ha un insieme limitato di valori validi, utilizza un `enum`.
-- **Ingegneria dei prompt:** indica chiaramente nel prompt cosa vuoi che faccia il modello. Ad esempio, "Estrai le seguenti informazioni dal testo…" o "Classifica questo feedback in base allo schema fornito…".
-- **Convalida**:sebbene l'output strutturato garantisca un JSON sintatticamente corretto, non garantisce che i valori siano semanticamente corretti. Verifica sempre l'output finale nel codice dell'applicazione prima di utilizzarlo.
-- **Gestione degli errori:** implementa una gestione degli errori efficace nella tua applicazione per gestire correttamente i casi in cui l'output del modello, pur essendo conforme allo schema, potrebbe non soddisfare i requisiti della logica di business.
+- **أوصاف واضحة:** استخدِم الحقل `description` في المخطّط لتقديم تعليمات واضحة للنموذج بشأن ما تمثله كل سمة. هذا أمر بالغ الأهمية لتوجيه إخراج النموذج.
+- **التحقق من النوع:** استخدِم أنواعًا محدّدة (`integer` و`string` و`enum`) كلما أمكن ذلك. إذا كانت إحدى المَعلمات تتضمّن مجموعة محدودة من القيم الصالحة، استخدِم `enum`.
+- **هندسة الطلبات:** وضِّح في طلبك ما تريد أن يفعله النموذج. على سبيل المثال، "استخرِج المعلومات التالية من النص..." أو "صنِّف هذه الملاحظات وفقًا للمخطّط المقدَّم...".
+- **التحقّق من الصحة:** على الرغم من أنّ المُخرجات المنظَّمة تضمن أن يكون JSON صحيحًا من الناحية النحوية، فإنّها لا تضمن أن تكون القيم صحيحة من الناحية الدلالية. يجب دائمًا التحقّق من صحة الإخراج النهائي في الرمز البرمجي لتطبيقك قبل استخدامه.
+- **التعامل مع الأخطاء:** نفِّذ عملية قوية للتعامل مع الأخطاء في تطبيقك لإدارة الحالات التي قد لا يفي فيها إخراج النموذج، على الرغم من امتثاله للمخطّط، بمتطلبات منطق عملك.
 
-## Limitazioni
+## القيود
 
-- **Sottoinsieme dello schema**:non tutte le funzionalità della specifica JSON Schema sono supportate. Il modello ignora le proprietà non supportate.
-- **Complessità dello schema**:l'API potrebbe rifiutare schemi molto grandi o nidificati in profondità. Se si verificano errori, prova a semplificare lo schema riducendo i nomi delle proprietà, diminuendo il livello di nidificazione o limitando il numero di vincoli.
+- **مجموعة فرعية من المخطّطات:** لا تتوفّر جميع ميزات مواصفات JSON Schema. يتجاهل النموذج السمات غير المتاحة.
+- **تعقيد المخطّط:** قد ترفض واجهة برمجة التطبيقات المخطّطات الكبيرة جدًا أو المتداخلة بشكل كبير. إذا واجهتك أخطاء، حاوِل تبسيط المخطّط من خلال تقصير أسماء السمات أو تقليل التداخل أو الحدّ من عدد القيود.
 
-Invia feedback
+إرسال ملاحظات
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://ai.google.dev/gemini-api/docs/licenza Creative Commons Attribution 4.0), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://ai.google.dev/gemini-api/docs/licenza Apache 2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://ai.google.dev/gemini-api/docs/norme del sito di Google Developers). Java è un marchio registrato di Oracle e/o delle sue consociate.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Ultimo aggiornamento 2026-04-29 UTC.
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-Vuoi dirci altro?
+هل تريد مشاركة ملاحظاتك معنا؟
+
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

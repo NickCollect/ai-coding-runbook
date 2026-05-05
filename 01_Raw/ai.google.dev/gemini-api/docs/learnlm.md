@@ -1,29 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/learnlm?hl=hi
-fetched_at: 2026-05-05T13:13:40.401313+00:00
+source_url: https://ai.google.dev/gemini-api/docs/learnlm?hl=it
+fetched_at: 2026-05-05T19:43:01.345782+00:00
 title: "LearnLM \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/Gemini की Deep Research की सुविधा) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
 
-- [होम पेज](https://ai.google.dev/gemini-api/docs/होम पेज)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [Docs](https://ai.google.dev/gemini-api/docs/Docs)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-सुझाव भेजें
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+
+Invia feedback
 
 # LearnLM
 
-LearnLM अब AI Studio में अलग से उपलब्ध नहीं है. इसके बजाय, LearnLM
-की सुविधाओं को Gemini में इंटिग्रेट कर दिया गया है. इसकी शुरुआत,
-[2.5 मॉडल सीरीज़ से हुई है](https://ai.google.dev/gemini-api/docs/2.5 मॉडल सीरीज़ से हुई है).
+LearnLM non è più un elenco separato in AI Studio. Le funzionalità di LearnLM
+sono state integrate in Gemini a partire dalla
+[serie di modelli 2.5](https://ai.google.dev/gemini-api/docs/models?hl=it).
 
-LearnLM की मौजूदा स्थिति के बारे में ज़्यादा जानने के लिए, [LearnLM](https://ai.google.dev/gemini-api/docs/LearnLM) से जुड़े दस्तावेज़ पढ़ें.
+Per scoprire di più sullo stato attuale di LearnLM, consulta la documentazione di [LearnLM](https://cloud.google.com/solutions/learnlm?hl=it).
 
-सुझाव भेजें
+Invia feedback
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://ai.google.dev/gemini-api/docs/Creative Commons Attribution 4.0 License) के तहत और कोड के नमूनों को [Apache 2.0 License](https://ai.google.dev/gemini-api/docs/Apache 2.0 License) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://ai.google.dev/gemini-api/docs/Google Developers साइट नीतियां) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया.
+Ultimo aggiornamento 2026-04-29 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Vuoi dirci altro?
+
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]

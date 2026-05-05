@@ -1,10 +1,14 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=hi
-fetched_at: 2026-05-05T13:19:44.850270+00:00
+fetched_at: 2026-05-05T19:49:48.452058+00:00
 title: "Gemini 2.5 Flash Image (Nano Banana) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
 [Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
+
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
 - [होम पेज](https://ai.google.dev/?hl=hi)
 - [Gemini API](https://ai.google.dev/gemini-api?hl=hi)

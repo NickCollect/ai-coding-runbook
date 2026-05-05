@@ -1,29 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/gemini-3?hl=vi
-fetched_at: 2026-05-05T13:10:13.577938+00:00
-title: "H\u01b0\u1edbng d\u1eabn cho nh\u00e0 ph\u00e1t tri\u1ec3n Gemini 3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/gemini-3?hl=zh-TW
+fetched_at: 2026-05-05T19:43:28.003683+00:00
+title: "Gemini 3 \u958b\u767c\u4eba\u54e1\u6307\u5357 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/Tính năng Nghiên cứu chuyên sâu của Gemini) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-- [Trang chủ](https://ai.google.dev/gemini-api/docs/Trang chủ)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs/Tài liệu)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Gửi ý kiến phản hồi
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Hướng dẫn cho nhà phát triển Gemini 3
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Gemini 3 là bộ mô hình thông minh nhất của chúng tôi cho đến nay, được xây dựng dựa trên nền tảng suy luận tiên tiến. Gemini Pro được thiết kế để biến mọi ý tưởng thành hiện thực bằng cách thành thạo quy trình làm việc dựa trên tác nhân, lập trình tự động và các tác vụ đa phương thức phức tạp.
-Hướng dẫn này trình bày các tính năng chính của nhóm mô hình Gemini 3 và cách khai thác tối đa nhóm mô hình này.
+提供意見
 
-[Dùng thử Gemini 3.1 Pro (bản dùng thử)](https://ai.google.dev/gemini-api/docs/Dùng thử Gemini 3.1 Pro (bản dùng thử))
-[Dùng thử Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/Dùng thử Gemini 3 Flash)
-[Dùng thử Nano Banana 2](https://ai.google.dev/gemini-api/docs/Dùng thử Nano Banana 2)
+# Gemini 3 開發人員指南
 
-Khám phá [bộ sưu tập các ứng dụng Gemini 3](https://ai.google.dev/gemini-api/docs/bộ sưu tập các ứng dụng Gemini 3) để xem cách mô hình này xử lý khả năng suy luận nâng cao, lập trình tự động và các nhiệm vụ phức tạp liên quan đến nhiều phương thức.
+Gemini 3 是我們至今最強大的模型系列，以最先進的推論技術為基礎建構而成。這項工具具備代理式工作流程、自主編碼和複雜多模態作業的專業知識，可將任何想法化為現實。本指南將介紹 Gemini 3 模型系列的主要功能，以及如何充分發揮這些功能的作用。
 
-Bắt đầu bằng một vài dòng mã:
+[試用 Gemini 3.1 Pro 搶先版](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=zh-tw)
+[試用 Gemini 3 Flash](https://aistudio.google.com/prompts/new_chat?model=gemini-3-flash-preview&hl=zh-tw)
+[試用 Nano Banana 2](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-image-preview&hl=zh-tw)
+
+歡迎瀏覽 [Gemini 3 應用程式系列](https://aistudio.google.com/app/apps?source=showcase&%3BshowcaseTag=gemini-3&hl=zh-tw)，瞭解這款模型如何處理進階推論、自主程式設計和複雜的多模態工作。
+
+只要編寫幾行程式碼，即可開始使用：
 
 ### Python
 
@@ -73,47 +76,47 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-pre
   }'
 ```
 
-## Làm quen với dòng mô hình Gemini 3
+## 認識 Gemini 3 系列
 
-Gemini 3.1 Pro phù hợp nhất với những nhiệm vụ phức tạp đòi hỏi kiến thức rộng lớn về thế giới và khả năng suy luận nâng cao trên nhiều phương thức.
+Gemini 3.1 Pro 最適合需要廣泛世界知識和跨模態進階推論的複雜工作。
 
-Gemini 3 Flash là mô hình mới nhất thuộc dòng 3, có trí thông minh cấp Pro với tốc độ và mức giá của Flash.
+Gemini 3 Flash 是我們最新的 3 系列模型，具備 Pro 級智慧，但處理速度和價格與 Flash 相同。
 
-Nano Banana Pro (còn gọi là Gemini 3 Pro Image) là mô hình tạo hình ảnh có chất lượng cao nhất của chúng tôi, còn Nano Banana 2 (còn gọi là Gemini 3.1 Flash Image) là mô hình tương đương có hiệu suất cao, số lượng lớn và mức giá thấp hơn.
+Nano Banana Pro (又稱 Gemini 3 Pro Image) 是 Google 最高品質的圖像生成模型，而 Nano Banana 2 (又稱 Gemini 3.1 Flash Image) 則具備高產量、高效率和低價位等優勢。
 
-Gemini 3.1 Flash-Lite là mô hình chủ lực của chúng tôi, được xây dựng để mang lại hiệu quả chi phí và xử lý các nhiệm vụ có khối lượng lớn.
+Gemini 3.1 Flash-Lite 是我們專為高成本效益模型和大量工作打造的主力模型。
 
-Tất cả các mô hình Gemini 3 hiện đang ở giai đoạn dùng thử.
+所有 Gemini 3 模型目前皆為預先發布版。
 
-| Mã kiểu máy | Cửa sổ ngữ cảnh (Vào / Ra) | Điểm cắt kiến thức | Giá (Đầu vào / Đầu ra)\* |
+| 模型 ID | 背景期間 (進 / 出) | 知識截點 | 定價 (輸入 / 輸出)\* |
 | --- | --- | --- | --- |
-| **gemini-3.1-flash-lite-preview** | 1M / 64k | Tháng 1 năm 2025 | 0,25 USD (văn bản, hình ảnh, video), 0,5 USD (âm thanh) / 1,5 USD |
-| **gemini-3.1-flash-image-preview** | 128k / 32k | Tháng 1 năm 2025 | 0,25 USD (Đầu vào là văn bản) / 0,067 USD (Đầu ra là hình ảnh)\*\* |
-| **gemini-3.1-pro-preview** | 1M / 64k | Tháng 1 năm 2025 | 2 USD / 12 USD (<200.000 token)   4 USD / 18 USD (>200.000 token) |
-| **gemini-3-flash-preview** | 1M / 64k | Tháng 1 năm 2025 | 0,5 USD / 3 USD |
-| **gemini-3-pro-image-preview** | 65.000 / 32.000 | Tháng 1 năm 2025 | 2 USD (Nhập văn bản) / 0,134 USD (Xuất hình ảnh)\*\* |
+| **gemini-3.1-flash-lite-preview** | 100 萬次 / 6.4 萬次 | 2025 年 1 月 | $0.25 美元 (文字、圖片、影片)、$0.50 美元 (音訊) / $1.50 美元 |
+| **gemini-3.1-flash-image-preview** | 128k / 32k | 2025 年 1 月 | $0.25 美元 (文字輸入) / $0.067 美元 (圖片輸出)\*\* |
+| **gemini-3.1-pro-preview** | 100 萬次 / 6.4 萬次 | 2025 年 1 月 | $2 美元 / $12 美元 (少於 20 萬個權杖)   $4 美元 / $18 美元 (超過 20 萬個權杖) |
+| **gemini-3-flash-preview** | 100 萬次 / 6.4 萬次 | 2025 年 1 月 | $0.50 / $3 |
+| **gemini-3-pro-image-preview** | 65,000 / 32,000 | 2025 年 1 月 | $2 (文字輸入) / $0.134 (圖片輸出)\*\* |
 
-*\* Giá được tính cho mỗi 1 triệu mã thông báo, trừ phi có quy định khác.*
-*\*\* Giá hình ảnh thay đổi theo độ phân giải. Hãy xem [trang giá](https://ai.google.dev/gemini-api/docs/trang giá) để biết thông tin chi tiết.*
+*\* 除非另有註明，否則價格以每 100 萬個權杖為單位。*
+*\*\* 圖片價格會因解析度而異。詳情請參閱[定價頁面](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw)。*
 
-Để biết thông tin chi tiết về giới hạn, giá cả và thông tin bổ sung, hãy xem [trang mô hình](https://ai.google.dev/gemini-api/docs/trang mô hình).
+如需詳細的限制、定價和其他資訊，請參閱[模型頁面](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-tw)。
 
-## Các tính năng mới của API trong Gemini 3
+## Gemini 3 的新 API 功能
 
-Gemini 3 giới thiệu các tham số mới được thiết kế để giúp nhà phát triển kiểm soát độ trễ, chi phí và độ trung thực của nhiều phương thức hiệu quả hơn.
+Gemini 3 推出全新參數，讓開發人員進一步掌控延遲時間、成本和多模態準確度。
 
-### Cấp độ tư duy
+### 思考程度
 
-Theo mặc định, các mô hình Gemini 3 sử dụng tư duy linh hoạt để suy luận thông qua các câu lệnh. Bạn có thể sử dụng tham số `thinking_level` để kiểm soát độ sâu **tối đa** của quy trình suy luận nội bộ của mô hình trước khi mô hình tạo ra một câu trả lời. Gemini 3 coi những cấp độ này là hạn mức tương đối cho hoạt động tư duy thay vì đảm bảo nghiêm ngặt về số lượng mã thông báo.
+Gemini 3 系列模型預設會使用動態思考功能，推論提示內容。您可以使用 `thinking_level` 參數，控制模型產生回覆前內部推論過程的**最大**深度。Gemini 3 會將這些層級視為思考的相對配額，而非嚴格的權杖保證。
 
-Nếu bạn không chỉ định `thinking_level`, Gemini 3 sẽ mặc định là `high`. Để có câu trả lời nhanh hơn và có độ trễ thấp hơn khi không cần suy luận phức tạp, bạn có thể giới hạn mức độ suy nghĩ của mô hình ở `low`.
+如未指定 `thinking_level`，Gemini 3 會預設為 `high`。如果不需要複雜的推論，可以將模型的思考層級限制為 `low`，加快回覆速度並降低延遲。
 
-| Cấp độ tư duy | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | Mô tả |
+| 思考程度 | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | 說明 |
 | --- | --- | --- | --- | --- |
-| **`minimal`** | Không được hỗ trợ | Được hỗ trợ (Mặc định) | Được hỗ trợ | Phù hợp với chế độ cài đặt "không cần suy nghĩ" cho hầu hết các câu hỏi. Mô hình có thể suy nghĩ rất ít cho các nhiệm vụ viết mã phức tạp. Giảm thiểu độ trễ cho các ứng dụng trò chuyện hoặc ứng dụng có thông lượng cao. Xin lưu ý rằng `minimal` không đảm bảo rằng tính năng suy nghĩ đã tắt. |
-| **`low`** | Được hỗ trợ | Được hỗ trợ | Được hỗ trợ | Giảm thiểu độ trễ và chi phí. Phù hợp nhất với các ứng dụng tuân theo hướng dẫn đơn giản, trò chuyện hoặc có thông lượng cao. |
-| **`medium`** | Được hỗ trợ | Được hỗ trợ | Được hỗ trợ | Tư duy cân bằng cho hầu hết các nhiệm vụ. |
-| **`high`** | Được hỗ trợ (Mặc định, Động) | Được hỗ trợ (Động) | Được hỗ trợ (Mặc định, Động) | Tối đa hoá độ sâu suy luận. Mô hình có thể mất nhiều thời gian hơn đáng kể để đạt được mã thông báo đầu ra đầu tiên (không phải mã thông báo tư duy), nhưng đầu ra sẽ được suy luận cẩn thận hơn. |
+| **`minimal`** | 不支援 | 支援 (預設) | 支援 | 針對大多數查詢，與「不思考」設定相符。模型可能會以極簡思維處理複雜的程式碼編寫工作。將聊天或高處理量應用程式的延遲時間降到最低。請注意，`minimal` 無法保證思考功能已關閉。 |
+| **`low`** | 支援 | 支援 | 支援 | 盡量縮短延遲時間並降低成本。最適合簡單的指令遵循、聊天或高總處理量應用程式。 |
+| **`medium`** | 支援 | 支援 | 支援 | 適合處理大多數任務。 |
+| **`high`** | 支援 (預設、動態) | 支援 (動態) | 支援 (預設、動態) | 盡可能深入推論。模型可能需要較長時間才能輸出第一個 (非思考) 輸出權杖，但輸出內容會經過更仔細的推理。 |
 
 ### Python
 
@@ -173,21 +176,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-pre
   }'
 ```
 
-### Độ phân giải của nội dung nghe nhìn
+### 媒體解析度
 
-Gemini 3 giới thiệu khả năng kiểm soát chi tiết đối với quy trình xử lý hình ảnh đa phương thức thông qua tham số `media_resolution`. Độ phân giải cao hơn giúp cải thiện khả năng đọc văn bản nhỏ hoặc xác định các chi tiết nhỏ của mô hình, nhưng làm tăng mức sử dụng mã thông báo và độ trễ.
-Tham số `media_resolution` xác định **số lượng mã thông báo tối đa được phân bổ cho mỗi khung hình đầu vào của hình ảnh hoặc video.**
+Gemini 3 透過 `media_resolution` 參數，精細控管多模態視覺處理作業。解析度越高，模型就越能辨識細小文字或細節，但也會增加權杖用量和延遲時間。`media_resolution` 參數會決定每個輸入圖片或影片影格分配的**詞元數量上限**。
 
-Giờ đây, bạn có thể đặt độ phân giải thành `media_resolution_low`, `media_resolution_medium`, `media_resolution_high` hoặc `media_resolution_ultra_high` cho từng phần nội dung đa phương tiện hoặc trên toàn cầu (thông qua `generation_config`, độ phân giải siêu cao không có sẵn trên toàn cầu). Nếu không được chỉ định, mô hình sẽ sử dụng các giá trị mặc định tối ưu dựa trên loại nội dung nghe nhìn.
+現在可以為每個媒體元件或全域設定解析度 (透過 `generation_config`，超高解析度不適用於全域)。解析度可設為 `media_resolution_low`、`media_resolution_medium`、`media_resolution_high` 或 `media_resolution_ultra_high`。如未指定，模型會根據媒體類型使用最佳預設值。
 
-**Chế độ cài đặt được đề xuất**
+**建議設定**
 
-| Loại phương tiện | Chế độ cài đặt nên dùng | Số mã thông báo tối đa | Hướng dẫn sử dụng |
+| 媒體類型 | 建議設定 | 權杖數量上限 | 使用指南 |
 | --- | --- | --- | --- |
-| **Hình ảnh** | `media_resolution_high` | 1120 | Bạn nên dùng chế độ này cho hầu hết các tác vụ phân tích hình ảnh để đảm bảo chất lượng tối đa. |
-| **Tệp PDF** | `media_resolution_medium` | 560 | Tối ưu cho việc hiểu tài liệu; chất lượng thường đạt đến mức tối đa ở `medium`. Việc tăng lên `high` hiếm khi cải thiện kết quả OCR cho các tài liệu tiêu chuẩn. |
-| **Video** (Chung) | `media_resolution_low` (hoặc `media_resolution_medium`) | 70 (mỗi khung hình) | **Lưu ý:** Đối với video, chế độ cài đặt `low` và `medium` được xử lý giống nhau (70 token) để tối ưu hoá việc sử dụng ngữ cảnh. Điều này là đủ cho hầu hết các nhiệm vụ nhận dạng và mô tả hành động. |
-| **Video** (Nhiều văn bản) | `media_resolution_high` | 280 (mỗi khung hình) | Chỉ bắt buộc khi trường hợp sử dụng liên quan đến việc đọc văn bản dày đặc (OCR) hoặc các chi tiết nhỏ trong khung hình video. |
+| **圖片** | `media_resolution_high` | 1120 | 建議用於大多數圖片分析工作，確保最高品質。 |
+| **PDF** | `media_resolution_medium` | 560 | 最適合用於瞭解文件內容，品質通常會在 `medium` 達到飽和。增加至 `high` 很少能改善標準文件的 OCR 結果。 |
+| **影片** (一般) | `media_resolution_low` (或 `media_resolution_medium`) | 70 (每格) | **注意：**對於影片，系統會將 `low` 和 `medium` 設定視為相同 (70 個詞元)，以最佳化情境使用情形。這足以應付大多數的動作辨識和描述工作。 |
+| **影片** (文字內容較多) | `media_resolution_high` | 280 (每格) | 只有在用途涉及讀取密集文字 (OCR) 或影片影格中的細微細節時，才需要此功能。 |
 
 ### Python
 
@@ -280,49 +282,49 @@ curl "https://generativelanguage.googleapis.com/v1alpha/models/gemini-3.1-pro-pr
   }'
 ```
 
-### Nhiệt độ
+### 溫度
 
-Đối với tất cả các mô hình Gemini 3, bạn nên giữ tham số nhiệt độ ở giá trị mặc định là `1.0`.
+對於所有 Gemini 3 模型，我們強烈建議將溫度參數維持在預設值 `1.0`。
 
-Mặc dù các mô hình trước đây thường được hưởng lợi từ việc điều chỉnh nhiệt độ để kiểm soát khả năng sáng tạo so với tính xác định, nhưng khả năng suy luận của Gemini 3 được tối ưu hoá cho chế độ cài đặt mặc định. Việc thay đổi nhiệt độ (đặt nhiệt độ dưới 1.0) có thể dẫn đến hành vi không mong muốn, chẳng hạn như lặp lại hoặc giảm hiệu suất, đặc biệt là trong các nhiệm vụ phức tạp về toán học hoặc lý luận.
+先前的模型通常會調整溫度參數，以控制創意與確定性，但 Gemini 3 的推論能力已針對預設設定進行最佳化。變更溫度參數 (設為低於 1.0) 可能會導致非預期的行為，例如迴圈或效能降低，特別是在複雜的數學或推論工作方面。
 
-### Chữ ký của suy nghĩ
+### 思想簽名
 
-Gemini 3 sử dụng [Chữ ký suy luận](https://ai.google.dev/gemini-api/docs/Chữ ký suy luận) để duy trì ngữ cảnh suy luận trên các lệnh gọi API. Đây là các chữ ký được mã hoá thể hiện quy trình suy nghĩ nội bộ của mô hình. Để đảm bảo mô hình duy trì khả năng suy luận, bạn phải trả lại các chữ ký này cho mô hình trong yêu cầu của mình chính xác như khi nhận được:
+Gemini 3 會使用[思維簽章](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=zh-tw)，在 API 呼叫之間維持推理脈絡。這些簽章是模型內部思考過程的加密表示法。為確保模型維持推論能力，您必須在要求中將這些簽章傳回模型，且內容與接收到的完全一致：
 
-- **Gọi hàm (Nghiêm ngặt):** API thực thi quy trình xác thực nghiêm ngặt đối với "Lượt hiện tại". Nếu thiếu chữ ký, bạn sẽ gặp lỗi 400.
-- **Văn bản/Trò chuyện:** Việc xác thực không được thực thi nghiêm ngặt, nhưng việc bỏ qua chữ ký sẽ làm giảm khả năng suy luận và chất lượng câu trả lời của mô hình.
-- **Tạo/chỉnh sửa hình ảnh (Nghiêm ngặt)**: API thực thi quy trình xác thực nghiêm ngặt trên tất cả các phần của Mô hình, bao gồm cả `thoughtSignature`. Nếu thiếu chữ ký, bạn sẽ gặp lỗi 400.
+- **函式呼叫 (嚴格)：**API 會對「目前回合」強制執行嚴格驗證。如果缺少簽章，系統會顯示 400 錯誤。
+- **文字/即時通訊：**系統不會嚴格執行驗證，但如果省略簽章，模型推論和回覆品質就會降低。
+- **圖像生成/編輯 (嚴格)**：API 會對所有模型部分 (包括 `thoughtSignature`) 進行嚴格驗證。如果缺少簽章，系統會顯示 400 錯誤。
 
-#### Gọi hàm (xác thực nghiêm ngặt)
+#### 函式呼叫 (嚴格驗證)
 
-Khi Gemini tạo một `functionCall`, Gemini sẽ dựa vào `thoughtSignature` để xử lý chính xác đầu ra của công cụ trong lượt tiếp theo. "Lượt tương tác hiện tại" bao gồm tất cả các bước của Mô hình (`functionCall`) và Người dùng (`functionResponse`) đã diễn ra kể từ thông báo `text` **Người dùng** tiêu chuẩn gần đây nhất.
+Gemini 生成 `functionCall` 時，會依據 `thoughtSignature` 在下一個回合中正確處理工具輸出內容。「目前回合」包含自上次標準「使用者」`text`訊息以來，所有「模型」`functionCall`和「使用者」`functionResponse`步驟。
 
-- **Lệnh gọi một hàm:** Phần `functionCall` chứa một chữ ký. Bạn phải trả lại thiết bị.
-- **Lệnh gọi hàm song song:** Chỉ phần `functionCall` đầu tiên trong danh sách sẽ chứa chữ ký. Bạn phải trả lại các bộ phận theo đúng thứ tự đã nhận.
-- **Nhiều bước (Tuần tự):** Nếu mô hình gọi một công cụ, nhận được kết quả và gọi *một* công cụ khác (trong cùng một lượt), thì **cả hai** lệnh gọi hàm đều có chữ ký. Bạn phải trả về **tất cả** chữ ký tích luỹ trong nhật ký.
+- **單一函式呼叫：**`functionCall` 部分包含簽章。你必須歸還。
+- **平行函式呼叫：**清單中只有第一個 `functionCall` 部分會包含簽章。請務必按照收到零件時的順序退回。
+- **多步驟 (循序)：**如果模型呼叫工具、收到結果，並呼叫*另一個*工具 (在同一回合內)，**兩項**函式呼叫都會有簽章。您必須退回歷史記錄中**所有**累積的簽名。
 
-#### Văn bản và truyền trực tuyến
+#### 文字和串流
 
-Đối với tính năng trò chuyện hoặc tạo văn bản thông thường, chúng tôi không đảm bảo sẽ có chữ ký.
+如果是標準對話或文字生成，系統不保證會顯示簽名。
 
-- **Không truyền trực tuyến**: Phần nội dung cuối cùng của phản hồi có thể chứa một `thoughtSignature`, mặc dù không phải lúc nào cũng có. Nếu có một sản phẩm bị trả lại, bạn nên gửi sản phẩm đó trở lại để duy trì hiệu suất tốt nhất.
-- **Phát trực tuyến**: Nếu được tạo, chữ ký có thể xuất hiện trong một đoạn cuối cùng chứa phần văn bản trống. Đảm bảo trình phân tích cú pháp luồng của bạn kiểm tra chữ ký ngay cả khi trường văn bản trống.
+- **非串流**：回應的最終內容部分可能包含 `thoughtSignature`，但並非一律如此。如果退回一項產品，請務必寄回，以維持最佳成效。
+- **串流**：如果產生簽章，簽章可能會出現在含有空白文字部分的最後一個區塊。即使文字欄位空白，也請確保串流剖析器會檢查簽章。
 
-#### Tạo và chỉnh sửa hình ảnh
+#### 生成及編輯圖像
 
-Đối với `gemini-3-pro-image-preview` và `gemini-3.1-flash-image-preview`, chữ ký ý tưởng là yếu tố quan trọng đối với tính năng chỉnh sửa bằng ngôn ngữ tự nhiên. Khi bạn yêu cầu mô hình sửa đổi một hình ảnh, mô hình sẽ dựa vào `thoughtSignature` từ lượt tương tác trước để hiểu bố cục và logic của hình ảnh gốc.
+對於 `gemini-3-pro-image-preview`和 `gemini-3.1-flash-image-preview`，思維簽章是進行對話式修圖的關鍵。要求模型修改圖片時，模型會根據前一輪的 `thoughtSignature` 瞭解原始圖片的構圖和邏輯。
 
-- **Chỉnh sửa:** Chữ ký được đảm bảo ở phần đầu tiên sau các ý tưởng của câu trả lời (`text` hoặc `inlineData`) và ở mọi phần `inlineData` tiếp theo. Bạn phải trả về tất cả các chữ ký này để tránh lỗi.
+- **編輯：**簽章保證會出現在回覆內容的第一部分 (`text` 或 `inlineData`) 和後續的每個 `inlineData` 部分。您必須傳回所有這些簽章，以免發生錯誤。
 
-#### Ví dụ về mã
+#### 程式碼範例
 
-#### Gọi hàm nhiều bước (Tuần tự)
+#### 多步驟函式呼叫 (循序)
 
-Người dùng đặt một câu hỏi yêu cầu hai bước riêng biệt (Kiểm tra chuyến bay -> Đặt taxi) trong một lượt.   
+使用者在同一輪對話中提出需要兩個不同步驟的問題 (查看航班 -> 預約計程車)。  
   
-**Bước 1: Mô hình gọi Công cụ chuyến bay.**  
-Mô hình trả về một chữ ký `<Sig_A>`
+**步驟 1：模型呼叫 Flight Tool。**  
+模型會傳回簽章 `<Sig_A>`
 
 ```
 // Model Response (Turn 1, Step 1)
@@ -337,8 +339,8 @@ Mô hình trả về một chữ ký `<Sig_A>`
   }
 ```
 
-**Bước 2: Người dùng gửi Kết quả chuyến bay**  
-Chúng ta phải gửi lại `<Sig_A>` để duy trì mạch suy nghĩ của mô hình.
+**步驟 2：使用者傳送 Flight Result**  
+我們必須傳回 `<Sig_A>`，才能維持模型的思路。
 
 ```
 // User Request (Turn 1, Step 2)
@@ -357,8 +359,8 @@ Chúng ta phải gửi lại `<Sig_A>` để duy trì mạch suy nghĩ của mô
 ]
 ```
 
-**Bước 3: Mô hình gọi Công cụ taxi**  
-Mô hình ghi nhớ thông tin chuyến bay bị trễ thông qua `<Sig_A>` và giờ quyết định đặt taxi. Thao tác này sẽ tạo ra một chữ ký *mới* `<Sig_B>`.
+**步驟 3：模型呼叫 Taxi Tool**  
+模型透過 `<Sig_A>` 記住航班延誤，現在決定預約計程車。系統會產生*新*簽名`<Sig_B>`。
 
 ```
 // Model Response (Turn 1, Step 3)
@@ -373,8 +375,8 @@ Mô hình ghi nhớ thông tin chuyến bay bị trễ thông qua `<Sig_A>` và 
 }
 ```
 
-**Bước 4: Người dùng gửi Kết quả về taxi**  
-Để hoàn tất lượt này, bạn phải gửi lại toàn bộ chuỗi: `<Sig_A>` VÀ `<Sig_B>`.
+**步驟 4：使用者傳送 Taxi Result**  
+如要完成回合，請務必傳回整個鏈結：`<Sig_A>` 和 `<Sig_B>`。
 
 ```
 // User Request (Turn 1, Step 4)
@@ -397,9 +399,9 @@ Mô hình ghi nhớ thông tin chuyến bay bị trễ thông qua `<Sig_A>` và 
 ]
 ```
 
-#### Gọi hàm song song
+#### 平行函式呼叫
 
-Người dùng hỏi: "Kiểm tra thời tiết ở Paris và London." Mô hình này trả về 2 lệnh gọi hàm trong một phản hồi.
+使用者問：「Check the weather in Paris and London.」(查看巴黎和倫敦的天氣。)模型會在一個回覆中傳回兩個函式呼叫。
 
 ```
 // User Request (Sending Parallel Results)
@@ -439,9 +441,9 @@ Người dùng hỏi: "Kiểm tra thời tiết ở Paris và London." Mô hình
 ]
 ```
 
-#### Văn bản/Lý luận trong ngữ cảnh (Không xác thực)
+#### 文字/情境內推論 (無驗證)
 
-Người dùng đặt câu hỏi đòi hỏi phải suy luận trong ngữ cảnh mà không cần đến các công cụ bên ngoài. Mặc dù không được xác thực một cách nghiêm ngặt, nhưng việc thêm chữ ký sẽ giúp mô hình duy trì chuỗi suy luận cho các câu hỏi nối tiếp.
+使用者提出的問題需要根據情境推論，但不能使用外部工具。雖然不會嚴格驗證，但加入簽章有助於模型保留後續問題的推理鏈。
 
 ```
 // User Request (Follow-up question)
@@ -466,9 +468,9 @@ Người dùng đặt câu hỏi đòi hỏi phải suy luận trong ngữ cản
 ]
 ```
 
-#### Tạo và chỉnh sửa hình ảnh
+#### 圖像生成和編輯
 
-Đối với tính năng tạo hình ảnh, chữ ký sẽ được xác thực nghiêm ngặt. Chúng xuất hiện ở **phần đầu tiên** (văn bản hoặc hình ảnh) và **tất cả các phần hình ảnh tiếp theo**. Tất cả phải được trả lại trong lượt tiếp theo.
+生成圖片時，系統會嚴格驗證簽章。浮水印會顯示在**第一部分** (文字或圖片) 和**所有後續圖片部分**。所有卡片都必須在下一回合歸還。
 
 ```
 // Model Response (Turn 1)
@@ -512,16 +514,16 @@ Người dùng đặt câu hỏi đòi hỏi phải suy luận trong ngữ cản
 }
 ```
 
-#### Di chuyển từ các mô hình khác
+#### 從其他機型遷移
 
-Nếu đang chuyển dấu vết của cuộc trò chuyện từ một mô hình khác (ví dụ: Gemini 2.5) hoặc chèn một lệnh gọi hàm tuỳ chỉnh không do Gemini 3 tạo, thì bạn sẽ không có chữ ký hợp lệ.
+如果您要從其他模型 (例如 Gemini 2.5) 轉移對話追蹤記錄，或是插入非由 Gemini 3 生成的自訂函式呼叫，系統將無法提供有效簽章。
 
-Để bỏ qua quy trình xác thực nghiêm ngặt trong những trường hợp cụ thể này, hãy điền vào trường chuỗi giả cụ thể này: `"thoughtSignature": "context_engineering_is_the_way
+如要在這些特定情境中略過嚴格驗證，請在欄位中填入這個特定虛擬字串：`"thoughtSignature": "context_engineering_is_the_way
 to_go"`
 
-### Đầu ra có cấu trúc bằng các công cụ
+### 使用工具輸出結構化內容
 
-Các mô hình Gemini 3 cho phép bạn kết hợp [Đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/Đầu ra có cấu trúc) với các công cụ tích hợp sẵn, bao gồm [Dựa trên kết quả của Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/Dựa trên kết quả của Google Tìm kiếm), [Ngữ cảnh URL](https://ai.google.dev/gemini-api/docs/Ngữ cảnh URL), [Thực thi mã](https://ai.google.dev/gemini-api/docs/Thực thi mã) và [Gọi hàm](https://ai.google.dev/gemini-api/docs/Gọi hàm).
+Gemini 3 模型可讓您將[結構化輸出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-tw)與內建工具結合使用，包括[以 Google 搜尋強化事實基礎](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)、[網址脈絡](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw)、[程式碼執行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw)和[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)。
 
 ### Python
 
@@ -625,17 +627,17 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-pre
   }'
 ```
 
-### Tạo hình ảnh
+### 圖像生成
 
-Gemini 3.1 Flash Image và Gemini 3 Pro Image cho phép bạn tạo và chỉnh sửa hình ảnh từ câu lệnh văn bản. Gemini sử dụng khả năng suy luận để "suy nghĩ" về một câu lệnh và có thể truy xuất dữ liệu theo thời gian thực (chẳng hạn như dự báo thời tiết hoặc biểu đồ chứng khoán) trước khi sử dụng tính năng [Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/Google Tìm kiếm) để liên kết thực tế trước khi tạo ra những hình ảnh có độ trung thực cao.
+Gemini 3.1 Flash Image 和 Gemini 3 Pro Image 可根據文字提示詞生成及編輯圖像。這項功能會運用推論能力「思考」提示詞，並擷取即時資料 (例如天氣預報或股票圖表)，然後使用 [Google 搜尋](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)建立基準，再生成高擬真圖片。
 
-**Các chức năng mới và được cải thiện:**
+**全新和改良功能：**
 
-- **Độ phân giải 4K và kết xuất văn bản:** Tạo văn bản và sơ đồ sắc nét, dễ đọc với độ phân giải lên đến 2K và 4K.
-- **Tạo nội dung dựa trên thông tin thực tế:** Sử dụng công cụ `google_search` để xác minh dữ kiện và tạo hình ảnh dựa trên thông tin thực tế. Tính năng liên kết thực tế bằng Google *Tìm kiếm hình ảnh* có trong Gemini 3.1 Flash Image.
-- **Chỉnh sửa bằng ngôn ngữ tự nhiên:** Chỉnh sửa ảnh nhiều lần bằng cách chỉ cần yêu cầu thay đổi (ví dụ: "Chỉnh sửa để có nền là cảnh hoàng hôn"). Quy trình này dựa vào **Chữ ký tư duy** để duy trì ngữ cảnh trực quan giữa các lượt tương tác.
+- **4K 和文字算繪：**生成清晰易讀的文字和圖表，最高可達 2K 和 4K 解析度。
+- **以真實世界為基準生成：**使用 `google_search` 工具驗證事實，並根據真實世界資訊生成圖像。透過 Google *圖片*搜尋建立基準，適用於 Gemini 3.1 Flash Image。
+- **對話式修圖：**只要說出想編輯的內容 (例如「將背景改成日落」)，即可透過多輪對話編輯圖像。這個工作流程會使用**思維簽章**，在對話輪次之間保留視覺情境。
 
-Để biết thông tin chi tiết về tỷ lệ khung hình, quy trình chỉnh sửa và các lựa chọn cấu hình, hãy xem [hướng dẫn Tạo hình ảnh](https://ai.google.dev/gemini-api/docs/hướng dẫn Tạo hình ảnh).
+如要進一步瞭解長寬比、編輯工作流程和設定選項，請參閱[圖片生成指南](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw)。
 
 ### Python
 
@@ -719,21 +721,21 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-image
   }'
 ```
 
-**Ví dụ về phản hồi**
+**範例回應**
 
-![Thời tiết ở Tokyo](https://ai.google.dev/static/gemini-api/docs/images/weather-tokyo.jpg?hl=vi)
+![東京天氣](https://ai.google.dev/static/gemini-api/docs/images/weather-tokyo.jpg?hl=zh-tw)
 
-### Thực thi mã bằng hình ảnh
+### 使用圖片執行程式碼
 
-Gemini 3 Flash có thể coi hình ảnh là một đối tượng cần chủ động tìm hiểu, chứ không chỉ là một hình ảnh tĩnh. Bằng cách kết hợp suy luận với [thực thi mã](https://ai.google.dev/gemini-api/docs/thực thi mã), mô hình sẽ xây dựng một kế hoạch, sau đó viết và thực thi mã Python để phóng to, cắt, chú thích hoặc thao tác hình ảnh theo cách khác từng bước để đưa ra câu trả lời trực quan.
+Gemini 3 Flash 可將影像視為主動調查，而不只是靜態瀏覽。模型會結合推論和[程式碼執行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw)功能，制定計畫，然後編寫及執行 Python 程式碼，逐步放大、裁剪、註解或以其他方式處理圖片，以便根據視覺內容提供答案。
 
-**Trường hợp sử dụng:**
+**用途：**
 
-- **Thu phóng và kiểm tra:** Mô hình sẽ tự động phát hiện khi các chi tiết quá nhỏ (ví dụ: đọc một đồng hồ đo hoặc số sê-ri ở xa) và viết mã để cắt cũng như kiểm tra lại khu vực ở độ phân giải cao hơn.
-- **Phép toán và biểu đồ trực quan:** Mô hình có thể chạy các phép tính nhiều bước bằng mã (ví dụ: tính tổng các mục hàng trên biên nhận hoặc tạo biểu đồ Matplotlib từ dữ liệu đã trích xuất).
-- **Chú thích hình ảnh:** Mô hình có thể vẽ mũi tên, khung viền hoặc các chú thích khác trực tiếp lên hình ảnh để trả lời các câu hỏi về không gian như "Mặt hàng này nên đặt ở đâu?".
+- **縮放及檢查：**模型會隱含地偵測細節是否過小 (例如讀取遠處的儀表或序號)，並編寫程式碼來裁剪及重新檢查該區域，提高解析度。
+- **視覺化數學和繪圖：**模型可以使用程式碼執行多步驟計算 (例如加總收據上的項目，或從擷取的資料產生 Matplotlib 圖表)。
+- **圖片註解：**模型可以直接在圖片上繪製箭頭、邊界框或其他註解，回答「這個項目應該放在哪裡？」等空間問題。
 
-Để bật tính năng tư duy trực quan, hãy định cấu hình [Thực thi mã](https://ai.google.dev/gemini-api/docs/Thực thi mã) làm công cụ. Mô hình sẽ tự động dùng mã để chỉnh sửa hình ảnh khi cần.
+如要啟用視覺化思考功能，請將「程式碼執行」設定為工具。模型會在必要時自動使用程式碼來處理圖片。
 
 ### Python
 
@@ -858,11 +860,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/$MODEL:generateCon
     }'
 ```
 
-Để biết thêm thông tin chi tiết về việc thực thi mã bằng hình ảnh, hãy xem phần [Thực thi mã](https://ai.google.dev/gemini-api/docs/Thực thi mã).
+如要進一步瞭解如何使用圖片執行程式碼，請參閱「[程式碼執行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw#images)」。
 
-### Phản hồi của hàm đa phương thức
+### 多模態函式回應
 
-[Tính năng gọi hàm đa phương thức](https://ai.google.dev/gemini-api/docs/Tính năng gọi hàm đa phương thức) cho phép người dùng nhận được các phản hồi của hàm có chứa các đối tượng đa phương thức, giúp cải thiện khả năng sử dụng tính năng gọi hàm của mô hình. Tính năng gọi hàm tiêu chuẩn chỉ hỗ trợ các phản hồi hàm dựa trên văn bản:
+[多模態函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw#multimodal)
+可讓使用者取得包含多模態物件的函式回應，
+進而更充分運用模型的函式呼叫功能。標準函式呼叫功能僅支援以文字為基礎的函式回應：
 
 ### Python
 
@@ -1103,9 +1107,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
   }'
 ```
 
-### Kết hợp các công cụ tích hợp và tính năng gọi hàm
+### 結合內建工具和函式呼叫
 
-Gemini 3 cho phép sử dụng các công cụ tích hợp sẵn (như Google Tìm kiếm, ngữ cảnh URL và [nhiều công cụ khác](https://ai.google.dev/gemini-api/docs/nhiều công cụ khác)) cũng như các công cụ [gọi hàm](https://ai.google.dev/gemini-api/docs/gọi hàm) tuỳ chỉnh trong cùng một lệnh gọi API, cho phép các quy trình công việc phức tạp hơn. Tìm hiểu thêm trên trang [các tổ hợp công cụ](https://ai.google.dev/gemini-api/docs/các tổ hợp công cụ).
+Gemini 3 允許在同一個 API 呼叫中使用內建工具 (例如 Google 搜尋、網址內容和[更多](https://ai.google.dev/gemini-api/docs/tools?hl=zh-tw)) 和自訂[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)工具，因此可執行更複雜的工作流程。詳情請參閱「[工具組合](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-tw)」頁面。
 
 ### Python
 
@@ -1247,52 +1251,56 @@ async function run() {
 run();
 ```
 
-## Di chuyển từ Gemini 2.5
+## 從 Gemini 2.5 遷移
 
-Gemini 3 là nhóm mô hình mạnh mẽ nhất của chúng tôi cho đến nay và có những bước cải tiến so với Gemini 2.5. Khi di chuyển, hãy cân nhắc những điều sau:
+Gemini 3 是我們迄今最強大的模型系列，相較於 Gemini 2.5，各方面都有顯著進步。遷移時，請注意以下事項：
 
-- **Tư duy:** Nếu trước đây bạn đang sử dụng kỹ thuật thiết kế câu lệnh phức tạp (chẳng hạn như chuỗi suy luận) để buộc Gemini 2.5 suy luận, hãy thử Gemini 3 với `thinking_level: "high"` và câu lệnh đơn giản.
-- **Chế độ cài đặt nhiệt độ:** Nếu mã hiện tại của bạn đặt nhiệt độ một cách rõ ràng (đặc biệt là ở giá trị thấp cho đầu ra tất định), bạn nên xoá tham số này và sử dụng giá trị mặc định là 1.0 của Gemini 3 để tránh các vấn đề tiềm ẩn về vòng lặp hoặc hiệu suất giảm sút đối với các tác vụ phức tạp.
-- **Hiểu PDF và tài liệu:** Nếu bạn dựa vào hành vi cụ thể để phân tích cú pháp tài liệu dày đặc, hãy kiểm thử chế độ cài đặt `media_resolution_high` mới để đảm bảo độ chính xác liên tục.
-- **Mức tiêu thụ mã thông báo:** Việc di chuyển sang chế độ mặc định của Gemini 3 có thể **tăng** mức sử dụng mã thông báo cho tệp PDF nhưng **giảm** mức sử dụng mã thông báo cho video. Nếu các yêu cầu hiện vượt quá cửa sổ ngữ cảnh do độ phân giải mặc định cao hơn, bạn nên giảm rõ ràng độ phân giải của nội dung nghe nhìn.
-- **Phân đoạn hình ảnh:** Gemini 3 Pro hoặc Gemini 3 Flash không được hỗ trợ các chức năng phân đoạn hình ảnh (trả về mặt nạ ở cấp độ pixel cho các đối tượng). Đối với những khối lượng công việc yêu cầu phân đoạn hình ảnh gốc, bạn nên tiếp tục sử dụng Gemini 2.5 Flash khi tắt chế độ tư duy hoặc [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/Gemini Robotics-ER 1.6).
-- **Sử dụng máy tính:** Gemini 3 Pro và Gemini 3 Flash hỗ trợ tính năng [Sử dụng máy tính](https://ai.google.dev/gemini-api/docs/Sử dụng máy tính). Không giống như dòng 2.5, bạn không cần sử dụng một mô hình riêng để truy cập vào công cụ Sử dụng máy tính.
-- **Hỗ trợ công cụ**: [Các mô hình Gemini 3 hiện hỗ trợ việc kết hợp các công cụ tích hợp với tính năng gọi hàm](https://ai.google.dev/gemini-api/docs/Các mô hình Gemini 3 hiện hỗ trợ việc kết hợp các công cụ tích hợp với tính năng gọi hàm). [Tính năng liên kết thực tế trên Maps](https://ai.google.dev/gemini-api/docs/Tính năng liên kết thực tế trên Maps) hiện cũng được hỗ trợ cho các mô hình Gemini 3.
+- **思考：**如果你先前使用複雜的提示工程 (例如思緒鏈) 強迫 Gemini 2.5 推理，請試用 Gemini 3 和 `thinking_level: "high"`，並簡化提示。
+- **溫度設定：**如果現有程式碼明確設定溫度參數 (尤其是將溫度參數設為低值，以產生確定性輸出內容)，建議您移除這個參數，並使用 Gemini 3 的預設值 1.0，以免發生潛在的迴圈問題，或導致複雜工作效能下降。
+- **PDF 和文件理解：**
+  如果您依賴特定行為來剖析密集文件，請測試新的 `media_resolution_high` 設定，確保準確度不受影響。
+- **符記用量：**改用 Gemini 3 預設模型後，PDF 的符記用量可能會**增加**，但影片的符記用量會**減少**。如果預設解析度提高，導致要求超出脈絡窗口，建議您明確降低媒體解析度。
+- **影像分割：**Gemini 3 Pro 或 Gemini 3 Flash 不支援影像分割功能 (傳回物件的像素層級遮罩)。如要處理需要原生影像分割的作業負載，建議繼續使用 Gemini 2.5 Flash (關閉思考功能) 或 [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=zh-tw)。
+- **電腦用途：**Gemini 3 Pro 和 Gemini 3 Flash 支援[電腦用途](https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-tw)。與 2.5 系列不同，您不必使用其他模型就能存取電腦使用工具。
+- **工具支援**：Gemini 3 模型現在支援[結合內建工具和函式呼叫](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-tw)。Gemini 3 模型現在也支援[地圖基礎](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-tw)。
 
-## Khả năng tương thích với OpenAI
+## OpenAI 相容性
 
-Đối với những người dùng sử dụng [lớp tương thích OpenAI](https://ai.google.dev/gemini-api/docs/lớp tương thích OpenAI), các tham số tiêu chuẩn (`reasoning_effort` của OpenAI) sẽ tự động được liên kết với các tham số tương đương của Gemini (`thinking_level`).
+如果使用者採用 [OpenAI 相容性層](https://ai.google.dev/gemini-api/docs/openai?hl=zh-tw)，系統會自動將標準參數 (OpenAI 的 `reasoning_effort`) 對應至 Gemini (`thinking_level`) 對等項目。
 
-## Các phương pháp hay nhất để đưa ra câu lệnh
+## 提示最佳做法
 
-Gemini 3 là một mô hình suy luận, do đó bạn cần thay đổi cách đưa ra câu lệnh.
+Gemini 3 是推論模型，因此提示方式有所不同。
 
-- **Hướng dẫn chính xác:** Nhập câu lệnh một cách ngắn gọn. Gemini 3 phản hồi tốt nhất khi nhận được chỉ dẫn trực tiếp và rõ ràng. Có thể phân tích quá mức các kỹ thuật thiết kế câu lệnh dài dòng hoặc quá phức tạp được dùng cho các mô hình cũ.
-- **Mức độ chi tiết của câu trả lời:** Theo mặc định, Gemini 3 ít chi tiết hơn và ưu tiên cung cấp câu trả lời trực tiếp, hiệu quả. Nếu trường hợp sử dụng của bạn yêu cầu một nhân cách trò chuyện hoặc "hay chuyện" hơn, bạn phải hướng dẫn rõ ràng cho mô hình trong câu lệnh (ví dụ: "Giải thích điều này với tư cách là một trợ lý thân thiện và hay chuyện").
-- **Quản lý bối cảnh:** Khi làm việc với các tập dữ liệu lớn (ví dụ: toàn bộ sách, cơ sở mã hoặc video dài), hãy đặt hướng dẫn hoặc câu hỏi cụ thể của bạn ở cuối câu lệnh, sau bối cảnh dữ liệu. Neo lập luận của mô hình vào dữ liệu được cung cấp bằng cách bắt đầu câu hỏi bằng một cụm từ như "Dựa trên thông tin ở trên...".
+- **明確的指令：**輸入提示時請簡潔扼要。Gemini 3 最能根據直接明確的指令回覆。如果使用舊版模型，系統可能會過度分析冗長或過於複雜的提示工程技術。
+- **輸出內容詳細程度：**Gemini 3 預設會提供簡潔的回覆，並盡量直接給出答案。如果您的用途需要更具對話感或「健談」的風格，請務必在提示中明確引導模型 (例如「請以友善健談的助理身分說明這件事」)。
+- **脈絡管理：**處理大型資料集 (例如整本書、程式碼集或長篇影片) 時，請將具體指令或問題放在提示結尾的資料脈絡之後。在問題開頭使用「根據上述資訊...」等詞組，將模型的推論過程錨定在提供的資料上。
 
-Tìm hiểu thêm về các chiến lược thiết kế câu lệnh trong [hướng dẫn kỹ thuật tạo câu lệnh](https://ai.google.dev/gemini-api/docs/hướng dẫn kỹ thuật tạo câu lệnh).
+如要進一步瞭解提示設計策略，請參閱[提示工程指南](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=zh-tw)。
 
-## Câu hỏi thường gặp
+## 常見問題
 
-1. **Điểm cắt kiến thức của Gemini 3 là khi nào?** Các mô hình Gemini 3 có điểm cắt kiến thức là tháng 1 năm 2025. Để biết thông tin mới nhất, hãy sử dụng công cụ [Tìm kiếm thông tin cơ sở](https://ai.google.dev/gemini-api/docs/Tìm kiếm thông tin cơ sở).
-2. **Hạn mức cửa sổ ngữ cảnh là bao nhiêu?** Các mô hình Gemini 3 hỗ trợ cửa sổ ngữ cảnh đầu vào 1 triệu token và đầu ra lên đến 64.000 token.
-3. **Gemini 3 có phiên bản miễn phí không?** Gemini 3 Flash `gemini-3-flash-preview` và 3.1 Flash-Lite `gemini-3.1-flash-lite-preview` có các cấp miễn phí trong Gemini API. Bạn có thể dùng thử miễn phí Gemini 3.1 Pro và 3 Flash trong Google AI Studio, nhưng không có cấp miễn phí cho `gemini-3.1-pro-preview` trong Gemini API.
-4. **Mã `thinking_budget` cũ của tôi có còn hoạt động không?** Có, `thinking_budget` vẫn được hỗ trợ để đảm bảo khả năng tương thích ngược, nhưng bạn nên di chuyển sang `thinking_level` để có hiệu suất dễ dự đoán hơn. Đừng sử dụng cả hai trong cùng một yêu cầu.
-5. **Gemini 3 có hỗ trợ Batch API không?** Có, Gemini 3 hỗ trợ [Batch API](https://ai.google.dev/gemini-api/docs/Batch API).
-6. **Context Caching có được hỗ trợ không?** Có, Gemini 3 có hỗ trợ tính năng [Lưu vào bộ nhớ đệm theo bối cảnh](https://ai.google.dev/gemini-api/docs/Lưu vào bộ nhớ đệm theo bối cảnh).
-7. **Gemini 3 hỗ trợ những công cụ nào?** Gemini 3 hỗ trợ [Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/Google Tìm kiếm), [Kết nối với Google Maps](https://ai.google.dev/gemini-api/docs/Kết nối với Google Maps), [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/Tìm kiếm tệp), [Thực thi mã](https://ai.google.dev/gemini-api/docs/Thực thi mã) và [Ngữ cảnh URL](https://ai.google.dev/gemini-api/docs/Ngữ cảnh URL). Ngoài ra, mô hình này còn hỗ trợ tính năng [Gọi hàm](https://ai.google.dev/gemini-api/docs/Gọi hàm) tiêu chuẩn cho các công cụ tuỳ chỉnh của riêng bạn và [kết hợp với các công cụ tích hợp](https://ai.google.dev/gemini-api/docs/kết hợp với các công cụ tích hợp).
-8. **`gemini-3.1-pro-preview-customtools` là gì?** Nếu bạn đang sử dụng `gemini-3.1-pro-preview` và mô hình này bỏ qua các công cụ tuỳ chỉnh của bạn để ưu tiên các lệnh bash, hãy thử mô hình `gemini-3.1-pro-preview-customtools`. Xem thêm thông tin [tại đây](https://ai.google.dev/gemini-api/docs/tại đây).
+1. **Gemini 3 的知識截點為何？**Gemini 3 模型所具備的知識截點為 2025 年 1 月。如要取得最新資訊，請使用[搜尋基礎](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)工具。
+2. **脈絡窗口的限制為何？**Gemini 3 模型支援 100 萬個詞元的輸入脈絡窗口，以及最多 64,000 個詞元的輸出。
+3. **Gemini 3 是否提供免費方案？**Gemini API 提供 Gemini 3 Flash
+   `gemini-3-flash-preview` 和 3.1 Flash-Lite `gemini-3.1-flash-lite-preview` 的免費方案。您可以在 Google AI Studio 免費試用 Gemini 3.1 Pro 和 3 Flash，但 Gemini API 中的 `gemini-3.1-pro-preview` 沒有免付費方案。
+4. **舊的 `thinking_budget` 程式碼是否仍可運作？**可以，`thinking_budget` 仍支援回溯相容性，但建議遷移至 `thinking_level`，以獲得更可預測的效能。請勿在同一項要求中同時使用這兩者。
+5. **Gemini 3 是否支援 Batch API？**可以，Gemini 3 支援 [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-tw)。
+6. **是否支援脈絡快取？**是，Gemini 3 支援[脈絡快取](https://ai.google.dev/gemini-api/docs/caching?hl=zh-tw)。
+7. **Gemini 3 支援哪些工具？**Gemini 3 支援 [Google 搜尋](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)、「[使用 Google 地圖建立基準](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-tw)」、[檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw)、[程式碼執行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw)和[網址內容](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw)。也支援標準的[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)，可搭配自訂工具和[內建工具](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-tw)使用。
+8. **什麼是 `gemini-3.1-pro-preview-customtools`？**如果您使用 `gemini-3.1-pro-preview`，但模型忽略自訂工具，改用 Bash 指令，請改用 `gemini-3.1-pro-preview-customtools` 模型。詳情請參閱[這篇文章](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-tw#gemini-31-pro-preview-customtools)。
 
-## Các bước tiếp theo
+## 後續步驟
 
-- Làm quen với [Sổ tay Gemini 3](https://ai.google.dev/gemini-api/docs/Sổ tay Gemini 3)
-- Hãy xem hướng dẫn chuyên biệt về [các cấp độ tư duy](https://ai.google.dev/gemini-api/docs/các cấp độ tư duy) trong Sổ tay nấu ăn và cách di chuyển từ ngân sách tư duy sang các cấp độ tư duy.
+- 開始使用 [Gemini 3 食譜](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started.ipynb?hl=zh-tw#templateParams=%7B%22MODEL_ID%22:+%22gemini-3-pro-preview%22%7D)
+- 請參閱專屬的 Cookbook 指南，瞭解[思考層級](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_thinking_REST.ipynb?hl=zh-tw#gemini3)，以及如何從思考預算遷移至思考層級。
 
-Gửi ý kiến phản hồi
+提供意見
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://ai.google.dev/gemini-api/docs/Giấy phép ghi nhận tác giả 4.0 của Creative Commons) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://ai.google.dev/gemini-api/docs/Giấy phép Apache 2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://ai.google.dev/gemini-api/docs/Chính sách trang web của Google Developers). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+上次更新時間：2026-04-29 (世界標準時間)。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+想進一步說明嗎？
+
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-04-29 (世界標準時間)。"],[],[]]

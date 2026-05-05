@@ -1,41 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/imagen?hl=fr
-fetched_at: 2026-05-05T13:25:19.388445+00:00
-title: "Imagen\u00a04 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/imagen?hl=id
+fetched_at: 2026-05-05T19:45:52.421645+00:00
+title: "Imagen 4 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/models/recherche approfondie Gemini) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
+[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
 
-- [Accueil](https://ai.google.dev/gemini-api/docs/models/Accueil)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/models/Gemini API)
-- [Docs](https://ai.google.dev/gemini-api/docs/models/Docs)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Envoyer des commentaires
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Imagen 4
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Moteur hautes performances pour la synthèse visuelle avancée, offrant un contrôle créatif sophistiqué et un résultat photoréaliste. Utilisez Imagen 4 pour le branding professionnel, la composition de scènes complexes et les tâches de conception haute fidélité nécessitant un rendu de texte précis et un éclairage complexe.
+Kirim masukan
 
-[Essayer dans Google AI Studio](https://ai.google.dev/gemini-api/docs/models/Essayer dans Google AI Studio)
+# Imagen 4
 
-## Documentation
+Mesin berperforma tinggi untuk sintesis visual canggih, yang menawarkan kontrol kreatif yang canggih dan output fotorealistis. Gunakan Imagen 4 untuk tugas desain fidelitas tinggi, komposisi adegan yang rumit, dan branding profesional yang memerlukan rendering teks yang presisi dan pencahayaan yang kompleks.
 
-Consultez la page [Imagen](https://ai.google.dev/gemini-api/docs/models/Imagen) pour obtenir une couverture complète des
-fonctionnalités.
+[Coba di Google AI Studio](https://aistudio.google.com?model=imagen-4.0-generate-001&hl=id)
+
+## Dokumentasi
+
+Buka halaman [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=id) untuk mengetahui cakupan lengkap fitur dan kemampuan.
 
 ## imagen-4.0-generate-001
 
-| Propriété | Description |
+| Properti | Deskripsi |
 | --- | --- |
-| Code id\_cardModel | **API Gemini**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
-| saveTypes de données acceptés | **Entrée**  Texte  **Résultat**  Images |
-| token\_auto[Limites de jetons[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  480 jetons (texte)  **Images de sortie**  Entre 1 et 4 (Ultra/Standard/Rapide) |
-| calendar\_monthDernière mise à jour | Juin 2025 |
+| Kode model id\_card | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
+| saveJenis data yang didukung | **Input**  Teks  **Output**  Gambar |
+| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Batas token input**  480 token (teks)  **Gambar output**  1 hingga 4 (Ultra/Standard/Cepat) |
+| calendar\_monthPembaruan terbaru | Juni 2025 |
 
-Envoyer des commentaires
+Kirim masukan
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://ai.google.dev/gemini-api/docs/models/Creative Commons Attribution 4.0), et les échantillons de code sont régis par une licence [Apache 2.0](https://ai.google.dev/gemini-api/docs/models/Apache 2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://ai.google.dev/gemini-api/docs/models/Règles du site Google Developers). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Dernière mise à jour le 2026/04/29 (UTC).
+Terakhir diperbarui pada 2026-04-29 UTC.
 
-Voulez-vous nous donner plus d'informations ?
+Ada masukan untuk kami?
+
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]

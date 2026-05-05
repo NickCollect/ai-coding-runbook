@@ -1,59 +1,63 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=vi
-fetched_at: 2026-05-05T13:24:16.170131+00:00
-title: "T\u00ecm hi\u1ec3u v\u00e0 t\u00ednh m\u00e3 th\u00f4ng b\u00e1o \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=ko
+fetched_at: 2026-05-05T19:49:05.356786+00:00
+title: "\ud1a0\ud070 \uc774\ud574 \ubc0f \uacc4\uc0b0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/Tính năng Nghiên cứu chuyên sâu của Gemini) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-- [Trang chủ](https://ai.google.dev/gemini-api/docs/Trang chủ)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/Gemini API)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs/Tài liệu)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Gửi ý kiến phản hồi
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Tìm hiểu và tính mã thông báo
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Gemini và các mô hình AI tạo sinh khác xử lý dữ liệu đầu vào và đầu ra ở mức độ chi tiết được gọi là *mã thông báo*.
+의견 보내기
 
-**Đối với các mô hình Gemini, một mã thông báo tương đương với khoảng 4 ký tự.
-100 mã thông báo tương đương với khoảng 60 đến 80 từ tiếng Anh.**
+# 토큰 이해 및 계산
 
-## Giới thiệu về mã thông báo
+Gemini 및 기타 생성형 AI 모델은 *토큰*이라는 세분성으로 입력과 출력을 처리합니다.
 
-Mã thông báo có thể là các ký tự đơn như `z` hoặc toàn bộ từ như `cat`. Các từ dài được chia thành nhiều mã thông báo. Tập hợp tất cả các token mà mô hình sử dụng được gọi là từ vựng và quy trình phân tách văn bản thành token được gọi là *tách từ*.
+**Gemini 모델의 경우 토큰은 약 4자에 해당합니다.
+토큰 100개는 영어 단어 약 60~80개에 해당합니다.**
 
-Khi bạn bật tính năng thanh toán, [chi phí cho một lệnh gọi đến Gemini API](https://ai.google.dev/gemini-api/docs/chi phí cho một lệnh gọi đến Gemini API) sẽ được xác định một phần dựa trên số lượng mã thông báo đầu vào và đầu ra. Vì vậy, việc biết cách đếm mã thông báo có thể hữu ích.
+## 토큰 정보
 
-Bạn có thể thử đếm mã thông báo trong Colab của chúng tôi.
+토큰은 단일 문자(예: `z`) 또는 전체 단어(예: `cat`)일 수 있습니다. 긴 단어는 여러 토큰으로 나뉩니다. 모델에서 사용하는 모든 토큰 집합을 어휘라고 하며, 텍스트를 토큰으로 분할하는 프로세스를 *토큰화*라고 합니다.
+
+결제가 사용 설정된 경우 [Gemini API 호출 비용](https://ai.google.dev/pricing?hl=ko)은 입력 및 출력 토큰 수에 따라 결정되므로 토큰 수를 세는 방법을 알아두면 유용합니다.
+
+Colab에서 토큰 수를 세어 볼 수 있습니다.
 
 |  |  |  |
 | --- | --- | --- |
-| [Xem trên ai.google.dev](https://ai.google.dev/gemini-api/docs/Xem trên ai.google.dev) | [Dùng thử sổ tay Colab](https://ai.google.dev/gemini-api/docs/Dùng thử sổ tay Colab) | [Xem sổ tay trên GitHub](https://ai.google.dev/gemini-api/docs/Xem sổ tay trên GitHub) |
+| [ai.google.dev에서 보기](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | [Colab 노트북 사용해 보기](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ko) | [GitHub에서 노트북 보기](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ko) |
 
-## Đếm mã thông báo
+## 토큰 집계
 
-Tất cả dữ liệu đầu vào và đầu ra từ Gemini API đều được tách từ, bao gồm cả văn bản, tệp hình ảnh và các phương thức không phải văn bản khác.
+텍스트, 이미지 파일, 기타 비텍스트 모달리티를 비롯한 Gemini API의 모든 입력과 출력은 토큰화됩니다.
 
-Bạn có thể đếm mã thông báo theo những cách sau:
+다음과 같은 방법으로 토큰을 계산할 수 있습니다.
 
-- **Gọi [`count_tokens`](https://ai.google.dev/gemini-api/docs/`count_tokens`) bằng dữ liệu đầu vào của yêu cầu.**  
-   Hàm này chỉ trả về tổng số mã thông báo trong *đầu vào*. Bạn có thể thực hiện lệnh gọi này trước khi gửi dữ liệu đầu vào đến mô hình để kiểm tra kích thước của các yêu cầu.
-- **Sử dụng thuộc tính `usage_metadata` trên đối tượng `response` sau khi gọi `generate_content`.**  
-   Hàm này trả về tổng số mã thông báo trong *cả dữ liệu đầu vào và đầu ra*: `total_token_count`.  
-   Hàm này cũng trả về số lượng mã thông báo của đầu vào và đầu ra riêng biệt: `prompt_token_count` (mã thông báo đầu vào) và `candidates_token_count` (mã thông báo đầu ra).
+- **요청의 입력으로 [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=ko)를 호출합니다.**  
+   *입력만*의 총 토큰 수를 반환합니다. 모델에 입력을 보내기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다.
+- **`generate_content`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용합니다.**  
+   *입력과 출력 모두*의 총 토큰 수를 반환합니다(`total_token_count`).  
+   또한 입력 및 출력의 토큰 수를 별도로 반환합니다. `prompt_token_count` (입력 토큰) 및 `candidates_token_count`(출력 토큰)
 
-  Nếu bạn đang sử dụng [mô hình tư duy](https://ai.google.dev/gemini-api/docs/mô hình tư duy), thì mã thông báo được dùng trong quá trình tư duy sẽ được trả về trong `thoughts_token_count`. Và nếu bạn đang sử dụng [Lưu vào bộ nhớ đệm theo bối cảnh](https://ai.google.dev/gemini-api/docs/Lưu vào bộ nhớ đệm theo bối cảnh), thì số lượng mã thông báo được lưu vào bộ nhớ đệm sẽ nằm trong `cached_content_token_count`.
+  [사고 모델](https://ai.google.dev/gemini-api/docs/thinking?hl=ko)을 사용하는 경우 사고 과정에서 사용된 토큰이 `thoughts_token_count`에 반환됩니다. [컨텍스트 캐싱](https://ai.google.dev/gemini-api/docs/caching?hl=ko)을 사용하는 경우 캐시된 토큰 수는 `cached_content_token_count`에 표시됩니다.
 
-### Đếm mã thông báo văn bản
+### 텍스트 토큰 수 계산
 
-Nếu bạn gọi `count_tokens` bằng dữ liệu đầu vào chỉ có văn bản, thì hàm này sẽ trả về số lượng mã thông báo của văn bản *chỉ trong dữ liệu đầu vào* (`total_tokens`). Bạn có thể thực hiện lệnh gọi này trước khi gọi `generate_content` để kiểm tra kích thước của các yêu cầu.
+텍스트 전용 입력으로 `count_tokens`를 호출하면 *입력만* (`total_tokens`)의 텍스트 토큰 수가 반환됩니다. `generate_content`를 호출하기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다.
 
-Một lựa chọn khác là gọi `generate_content` rồi sử dụng thuộc tính `usage_metadata` trên đối tượng `response` để nhận được những thông tin sau:
+또 다른 방법은 `generate_content`을 호출한 다음 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
 
-- Số lượng mã thông báo riêng biệt của đầu vào (`prompt_token_count`), nội dung được lưu vào bộ nhớ đệm (`cached_content_token_count`) và đầu ra (`candidates_token_count`)
-- Số lượng mã thông báo cho quá trình tư duy (`thoughts_token_count`)
-- Tổng số mã thông báo trong *cả đầu vào và đầu ra* (`total_token_count`)
+- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 별도 토큰 수
+- 사고 과정의 토큰 수 (`thoughts_token_count`)
+- *입력과 출력 모두*의 총 토큰 수(`total_token_count`)
 
 ### Python
 
@@ -75,7 +79,7 @@ response = client.models.generate_content(
 print(response.usage_metadata)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -128,17 +132,17 @@ fmt.Println(string(usageMetadata))
     ```
 ```
 
-### Đếm mã thông báo nhiều lượt (trò chuyện)
+### 멀티턴 (채팅) 토큰 수 계산
 
-Nếu bạn gọi `count_tokens` bằng nhật ký trò chuyện, thì hàm này sẽ trả về tổng số token của văn bản từ mỗi vai trò trong cuộc trò chuyện (`total_tokens`).
+채팅 기록과 함께 `count_tokens`를 호출하면 채팅의 각 역할 (`total_tokens`)에서 텍스트의 총 토큰 수가 반환됩니다.
 
-Một lựa chọn khác là gọi `send_message` rồi sử dụng thuộc tính `usage_metadata` trên đối tượng `response` để nhận được những thông tin sau:
+또 다른 방법은 `send_message`을 호출한 다음 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
 
-- Số lượng mã thông báo riêng biệt của đầu vào (`prompt_token_count`), nội dung được lưu vào bộ nhớ đệm (`cached_content_token_count`) và đầu ra (`candidates_token_count`)
-- Số lượng mã thông báo cho quá trình tư duy (`thoughts_token_count`)
-- Tổng số mã thông báo trong *cả đầu vào và đầu ra* (`total_token_count`)
+- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 별도 토큰 수
+- 사고 과정의 토큰 수 (`thoughts_token_count`)
+- *입력과 출력 모두*의 총 토큰 수(`total_token_count`)
 
-Để biết lượt trò chuyện tiếp theo của bạn sẽ lớn đến mức nào, bạn cần thêm lượt trò chuyện đó vào nhật ký khi gọi `count_tokens`.
+다음 대화 턴의 크기를 파악하려면 `count_tokens`를 호출할 때 기록에 추가해야 합니다.
 
 ### Python
 
@@ -180,7 +184,7 @@ history = [*chat.get_history(), extra]
 print(client.models.count_tokens(model="gemini-3-flash-preview", contents=history))
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -264,31 +268,31 @@ if err != nil {
 fmt.Println(secondTokenResp.TotalTokens)
 ```
 
-### Đếm mã thông báo đa phương thức
+### 멀티모달 토큰 수 계산
 
-Tất cả thông tin đầu vào cho Gemini API đều được tách từ, bao gồm cả văn bản, tệp hình ảnh và các phương thức không phải văn bản khác. Hãy lưu ý những điểm chính sau đây về việc tách từ dữ liệu đầu vào đa phương thức trong quá trình xử lý bằng Gemini API:
+텍스트, 이미지 파일, 기타 텍스트가 아닌 모달리티를 비롯한 Gemini API의 모든 입력은 토큰화됩니다. Gemini API에서 처리하는 동안 멀티모달 입력의 토큰화에 관한 다음 상위 수준 주요 사항에 유의하세요.
 
-- Đầu vào hình ảnh có cả hai chiều <=384 pixel được tính là 258 mã thông báo. Những hình ảnh có kích thước lớn hơn ở một hoặc cả hai chiều sẽ bị cắt và điều chỉnh tỷ lệ thành các ô có kích thước 768x768 pixel (mỗi ô được tính là 258 mã thông báo) nếu cần.
-- Tệp video và âm thanh được chuyển đổi thành mã thông báo theo các mức cố định sau: video ở mức 263 mã thông báo mỗi giây và âm thanh ở mức 32 mã thông báo mỗi giây.
+- 두 치수가 모두 384픽셀 이하인 이미지 입력은 258개의 토큰으로 계산됩니다. 한쪽 또는 양쪽 크기가 더 큰 이미지는 필요에 따라 768x768픽셀 타일로 잘리고 크기가 조정되며, 각 타일은 258개의 토큰으로 계산됩니다.
+- 동영상 및 오디오 파일은 다음 고정 요율로 토큰으로 변환됩니다. 동영상은 초당 263개 토큰, 오디오는 초당 32개 토큰입니다.
 
-#### Độ phân giải của nội dung nghe nhìn
+#### 미디어 해상도
 
-[Các mô hình Gemini 3](https://ai.google.dev/gemini-api/docs/Các mô hình Gemini 3) cung cấp khả năng kiểm soát chi tiết đối với quy trình xử lý hình ảnh đa phương thức bằng tham số `media_resolution`. Tham số `media_resolution` xác định **số lượng mã thông báo tối đa được phân bổ cho mỗi khung hình đầu vào của hình ảnh hoặc video.**
-Độ phân giải cao hơn giúp cải thiện khả năng đọc văn bản nhỏ hoặc xác định các chi tiết nhỏ của mô hình, nhưng làm tăng mức sử dụng mã thông báo và độ trễ.
+[Gemini 3 모델](https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-3)은 `media_resolution` 파라미터를 통해 멀티모달 비전 처리에 대한 세밀한 제어 기능을 제공합니다. `media_resolution` 파라미터는 **입력 이미지 또는 동영상 프레임당 할당되는 최대 토큰 수**를 결정합니다.
+해상도가 높을수록 모델이 작은 텍스트를 읽거나 세부 요소를 식별하는 능력을 향상시키지만, 토큰 사용량과 지연 시간이 증가합니다.
 
-Để biết thêm thông tin về tham số này và mức độ ảnh hưởng của tham số này đến việc tính toán mã thông báo, hãy xem hướng dẫn về [độ phân giải của nội dung nghe nhìn](https://ai.google.dev/gemini-api/docs/độ phân giải của nội dung nghe nhìn).
+파라미터 및 파라미터가 토큰 계산에 미치는 영향에 대한 자세한 내용은 [미디어 해상도](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ko) 가이드를 참고하세요.
 
-#### Tệp hình ảnh
+#### 이미지 파일
 
-Nếu gọi `count_tokens` bằng dữ liệu đầu vào là văn bản và hình ảnh, thì hàm này sẽ trả về tổng số mã thông báo của văn bản và hình ảnh *chỉ trong dữ liệu đầu vào* (`total_tokens`). Bạn có thể gọi hàm này trước khi gọi `generate_content` để kiểm tra kích thước của các yêu cầu. Bạn cũng có thể gọi `count_tokens` trên văn bản và tệp riêng biệt (nếu muốn).
+텍스트와 이미지 입력으로 `count_tokens`를 호출하면 *입력만* (`total_tokens`)에 텍스트와 이미지의 결합된 토큰 수가 반환됩니다. `generate_content`를 호출하기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다. 선택적으로 텍스트와 파일에서 각각 `count_tokens`을 호출할 수도 있습니다.
 
-Một lựa chọn khác là gọi `generate_content` rồi sử dụng thuộc tính `usage_metadata` trên đối tượng `response` để nhận được những thông tin sau:
+또 다른 방법은 `generate_content`을 호출한 다음 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
 
-- Số lượng mã thông báo riêng biệt của đầu vào (`prompt_token_count`), nội dung được lưu vào bộ nhớ đệm (`cached_content_token_count`) và đầu ra (`candidates_token_count`)
-- Số lượng mã thông báo cho quá trình tư duy (`thoughts_token_count`)
-- Tổng số mã thông báo trong *cả đầu vào và đầu ra* (`total_token_count`)
+- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 별도 토큰 수
+- 사고 과정의 토큰 수 (`thoughts_token_count`)
+- *입력과 출력 모두*의 총 토큰 수(`total_token_count`)
 
-Ví dụ sử dụng hình ảnh được tải lên từ File API:
+File API에서 업로드된 이미지를 사용하는 예:
 
 ### Python
 
@@ -311,7 +315,7 @@ response = client.models.generate_content(
 print(response.usage_metadata)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -388,7 +392,7 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-Ví dụ cung cấp hình ảnh dưới dạng dữ liệu cùng dòng:
+이미지를 인라인 데이터로 제공하는 예:
 
 ### Python
 
@@ -412,7 +416,7 @@ response = client.models.generate_content(
 print(response.usage_metadata)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -485,20 +489,20 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-#### Tệp video hoặc âm thanh
+#### 동영상 또는 오디오 파일
 
-Mỗi loại âm thanh và video được chuyển đổi thành mã thông báo theo các mức cố định sau:
+오디오와 동영상은 각각 다음 고정된 비율로 토큰으로 변환됩니다.
 
-- Video: 263 mã thông báo mỗi giây
-- Âm thanh: 32 mã thông báo mỗi giây
+- 동영상: 초당 토큰 263개
+- 오디오: 초당 토큰 32개
 
-Nếu gọi `count_tokens` bằng đầu vào văn bản và video/âm thanh, thì hàm này sẽ trả về tổng số mã thông báo của văn bản và tệp video/âm thanh *chỉ trong đầu vào* (`total_tokens`). Bạn có thể gọi hàm này trước khi gọi `generate_content` để kiểm tra kích thước của các yêu cầu. Bạn cũng có thể gọi `count_tokens` trên văn bản và tệp riêng biệt (không bắt buộc).
+텍스트 및 동영상/오디오 입력으로 `count_tokens`를 호출하면 *입력만*(`total_tokens`)에 있는 텍스트와 동영상/오디오 파일의 결합된 토큰 수가 반환됩니다. `generate_content`를 호출하기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다. 선택적으로 텍스트와 파일에서 `count_tokens`를 별도로 호출할 수도 있습니다.
 
-Một lựa chọn khác là gọi `generate_content` rồi sử dụng thuộc tính `usage_metadata` trên đối tượng `response` để nhận được những thông tin sau:
+또 다른 방법은 `generate_content`을 호출한 다음 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
 
-- Số lượng mã thông báo riêng biệt của đầu vào (`prompt_token_count`), nội dung được lưu vào bộ nhớ đệm (`cached_content_token_count`) và đầu ra (`candidates_token_count`)
-- Số lượng mã thông báo cho quá trình tư duy (`thoughts_token_count`)
-- Tổng số mã thông báo trong *cả đầu vào và đầu ra* (`total_token_count`).
+- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 별도 토큰 수
+- 사고 과정의 토큰 수 (`thoughts_token_count`)
+- *입력과 출력 모두*의 총 토큰 수(`total_token_count`)입니다.
 
 ### Python
 
@@ -528,7 +532,7 @@ response = client.models.generate_content(
 print(response.usage_metadata)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -623,9 +627,9 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-## Cửa sổ ngữ cảnh
+## 컨텍스트 윈도우
 
-Các mô hình có trong Gemini API có cửa sổ ngữ cảnh được đo bằng số lượng mã thông báo. Cửa sổ ngữ cảnh xác định lượng dữ liệu đầu vào mà bạn có thể cung cấp và lượng dữ liệu đầu ra mà mô hình có thể tạo. Bạn có thể xác định kích thước của cửa sổ ngữ cảnh bằng cách gọi [điểm cuối `models.get`](https://ai.google.dev/gemini-api/docs/điểm cuối `models.get`) hoặc bằng cách xem trong [tài liệu về các mô hình](https://ai.google.dev/gemini-api/docs/tài liệu về các mô hình).
+Gemini API를 통해 사용할 수 있는 모델에는 토큰으로 측정되는 컨텍스트 윈도우가 있습니다. 컨텍스트 윈도우는 제공할 수 있는 입력의 양과 모델이 생성할 수 있는 출력의 양을 정의합니다. [`models.get` 엔드포인트](https://ai.google.dev/api/rest/v1/models/get?hl=ko)를 호출하거나 [모델 문서](https://ai.google.dev/gemini-api/docs/models?hl=ko)를 확인하여 컨텍스트 윈도우의 크기를 확인할 수 있습니다.
 
 ### Python
 
@@ -638,7 +642,7 @@ print(f"{model_info.input_token_limit=}")
 print(f"{model_info.output_token_limit=}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -670,10 +674,12 @@ fmt.Println("input token limit:", modelInfo.InputTokenLimit)
 fmt.Println("output token limit:", modelInfo.OutputTokenLimit)
 ```
 
-Gửi ý kiến phản hồi
+의견 보내기
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://ai.google.dev/gemini-api/docs/Giấy phép ghi nhận tác giả 4.0 của Creative Commons) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://ai.google.dev/gemini-api/docs/Giấy phép Apache 2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://ai.google.dev/gemini-api/docs/Chính sách trang web của Google Developers). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+최종 업데이트: 2026-04-29(UTC)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+의견을 전달하고 싶나요?
+
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]

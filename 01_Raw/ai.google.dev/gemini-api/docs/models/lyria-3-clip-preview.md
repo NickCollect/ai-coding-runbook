@@ -1,42 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=zh-TW
-fetched_at: 2026-05-05T13:18:02.983850+00:00
-title: "Lyria 3 \u9810\u89bd\u7248 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=es-419
+fetched_at: 2026-05-05T19:50:15.660415+00:00
+title: "Vista previa de clip de Lyria 3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/models/Gemini Deep Research) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
 
-- [首頁](https://ai.google.dev/gemini-api/docs/models/首頁)
-- [Gemini API](https://ai.google.dev/gemini-api/docs/models/Gemini API)
-- [文件](https://ai.google.dev/gemini-api/docs/models/文件)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-提供意見
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Lyria 3 預覽版
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-Lyria 3 Clip Preview 是 Google 專為生成短音樂片段、循環和預覽而設計的模型。只要輸入文字提示或圖片，即可生成 30 秒的 48 kHz 立體聲高音質音訊。
+Enviar comentarios
 
-[在 Google AI Studio 中試用](https://ai.google.dev/gemini-api/docs/models/在 Google AI Studio 中試用)
+# Vista previa de clip de Lyria 3
 
-## 說明文件
+Lyria 3 Clip Preview es el modelo de Google optimizado para generar clips musicales, bucles y vistas previas cortos. Genera audio estéreo de alta calidad de 48 kHz y 30 segundos a partir de instrucciones de texto o entradas de imágenes.
 
-如要全面瞭解這項功能，請參閱[音樂生成](https://ai.google.dev/gemini-api/docs/models/音樂生成)指南。
+[Probar en Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=lyria-3-clip-preview&hl=es-419)
+
+## Documentación
+
+Visita la guía de [Generación de música](https://ai.google.dev/gemini-api/docs/music-generation?hl=es-419) para obtener una cobertura completa de las funciones y capacidades.
 
 ## lyria-3-clip-preview
 
-| 屬性 | 說明 |
+| Propiedad | Descripción |
 | --- | --- |
-| id\_card 模型代碼 | `lyria-3-clip-preview` |
-| save支援的資料類型 | **輸入裝置**  文字和圖片  **輸出內容**  音訊 (MP3)、文字 (歌詞) |
-| token\_auto 代幣限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw) | **輸入權杖限制**  131,072 |
-| handyman功能 | **語音生成**  支援  **批次 API**  不支援  **快取**  不支援  **程式碼執行**  不支援  **檔案搜尋**  不支援  **函式呼叫**  不支援  **利用 Google 地圖建立基準**  不支援  **圖像生成**  不支援  **Live API**  不支援  **搜尋基準**  不支援  **結構化輸出內容**  不支援  **思考型**  不支援  **網址內容**  不支援 |
-| 123 個版本 | 如要瞭解詳情，請參閱[模型版本模式](https://ai.google.dev/gemini-api/docs/models/模型版本模式)。  - 預覽：`lyria-3-clip-preview` - 預覽：`lyria-3-pro-preview` |
-| calendar\_month最新更新 | 2026 年 3 月 |
+| Código del modelo id\_card | `lyria-3-clip-preview` |
+| saveTipos de datos admitidos | **Entradas**  Texto e imagen  **Resultado**  Audio (MP3), texto (letras) |
+| token\_autoLímites de tokens[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419) | **Límite de tokens de entrada**  131,072 |
+| handymanFunciones | **Generación de audio**  Admitido  **API de Batch**  No compatible  **Almacenamiento en caché**  No compatible  **Ejecución de código**  No compatible  **Búsqueda de archivos**  No compatible  **Llamada a función**  No compatible  **Fundamentación con Google Maps**  No compatible  **Generación de imágenes**  No compatible  **API de Live**  No compatible  **Fundamentación con la Búsqueda**  No compatible  **Resultados estructurados**  No compatible  **Pensamiento**  No compatible  **Contexto de la URL**  No compatible |
+| Versiones 123 | Lee los [patrones de versiones de modelos](https://ai.google.dev/gemini-api/docs/models/gemini?hl=es-419#model-versions) para obtener más detalles.  - Vista previa: `lyria-3-clip-preview` - Vista previa: `lyria-3-pro-preview` |
+| calendar\_monthÚltima actualización | Marzo de 2026 |
 
-提供意見
+Enviar comentarios
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://ai.google.dev/gemini-api/docs/models/創用 CC 姓名標示 4.0 授權)，程式碼範例則為[阿帕契 2.0 授權](https://ai.google.dev/gemini-api/docs/models/阿帕契 2.0 授權)。詳情請參閱《[Google Developers 網站政策](https://ai.google.dev/gemini-api/docs/models/Google Developers 網站政策)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-上次更新時間：2026-04-29 (世界標準時間)。
+Última actualización: 2026-04-29 (UTC)
 
-想進一步說明嗎？
+¿Quieres brindar más información?
+
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]
