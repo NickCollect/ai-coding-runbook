@@ -1,6 +1,6 @@
 # Microsoft Azure OpenAI
 
-To use this library with [Azure OpenAI](https://raw.githubusercontent.com/openai/openai-node/main/Azure OpenAI), use the `AzureOpenAI`
+To use this library with [Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/overview), use the `AzureOpenAI`
 class instead of the `OpenAI` class.
 
 > [!IMPORTANT]
@@ -28,7 +28,7 @@ const result = await openai.chat.completions.create({
 console.log(result.choices[0]!.message?.content);
 ```
 
-For more information on support for the Azure API, see [azure.md](https://raw.githubusercontent.com/openai/openai-node/main/azure.md).
+For more information on support for the Azure API, see [azure.md](azure.md).
 
 ## Realtime API
 

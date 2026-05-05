@@ -1,6 +1,6 @@
 # Structured Outputs Parsing Helpers
 
-The OpenAI API supports extracting JSON from the model with the `response_format` request param, for more details on the API, see [this guide](https://raw.githubusercontent.com/openai/openai-node/main/this guide).
+The OpenAI API supports extracting JSON from the model with the `response_format` request param, for more details on the API, see [this guide](https://platform.openai.com/docs/guides/structured-outputs).
 
 The SDK provides a `client.chat.completions.parse()` method which is a wrapper over the `client.chat.completions.create()` that
 provides richer integrations with TS specific types & returns a `ParsedChatCompletion` object, which is an extension of the standard `ChatCompletion` type.
@@ -129,14 +129,14 @@ The `chat.completions.parse()` method imposes some additional restrictions on it
 
 # Streaming Helpers
 
-OpenAI supports streaming responses when interacting with the [Chat](https://raw.githubusercontent.com/openai/openai-node/main/Chat) or [Assistant](https://raw.githubusercontent.com/openai/openai-node/main/Assistant) APIs.
+OpenAI supports streaming responses when interacting with the [Chat](#chat-streaming) or [Assistant](#assistant-streaming-api) APIs.
 
 ## Assistant Streaming API
 
 OpenAI supports streaming responses from Assistants. The SDK provides convenience wrappers around the API
 so you can subscribe to the types of events you are interested in as well as receive accumulated responses.
 
-More information can be found in the documentation: [Assistant Streaming](https://raw.githubusercontent.com/openai/openai-node/main/Assistant Streaming)
+More information can be found in the documentation: [Assistant Streaming](https://platform.openai.com/docs/assistants/overview?lang=node.js)
 
 #### An example of creating a run and subscribing to some events
 
@@ -197,7 +197,7 @@ The assistant API provides events you can subscribe to for the following events.
 This allows you to subscribe to all the possible raw events sent by the OpenAI streaming API.
 In many cases it will be more convenient to subscribe to a more specific set of events for your use case.
 
-More information on the types of events can be found here: [Events](https://raw.githubusercontent.com/openai/openai-node/main/Events)
+More information on the types of events can be found here: [Events](https://platform.openai.com/docs/api-reference/assistants-streaming/events)
 
 ```ts
 .on('runStepCreated', (runStep: RunStep) => ...)
@@ -207,7 +207,7 @@ More information on the types of events can be found here: [Events](https://raw.
 
 These events allow you to subscribe to the creation, delta and completion of a RunStep.
 
-For more information on how Runs and RunSteps work see the documentation [Runs and RunSteps](https://raw.githubusercontent.com/openai/openai-node/main/Runs and RunSteps)
+For more information on how Runs and RunSteps work see the documentation [Runs and RunSteps](https://platform.openai.com/docs/assistants/how-it-works/runs-and-run-steps)
 
 ```ts
 .on('messageCreated', (message: Message) => ...)
@@ -220,7 +220,7 @@ different types of content that can be sent from a model (and events are availab
 For convenience, the delta event includes both the incremental update and an accumulated snapshot of the content.
 
 More information on messages can be found
-on in the documentation page [Message](https://raw.githubusercontent.com/openai/openai-node/main/Message).
+on in the documentation page [Message](https://platform.openai.com/docs/api-reference/messages/object).
 
 ```ts
 .on('textCreated', (content: Text) => ...)
@@ -245,7 +245,7 @@ Image files are not sent incrementally so an event is provided for when a image 
 
 These events allow you to subscribe to events for the creation, delta and completion of a ToolCall.
 
-More information on tools can be found here [Tools](https://raw.githubusercontent.com/openai/openai-node/main/Tools)
+More information on tools can be found here [Tools](https://platform.openai.com/docs/assistants/tools)
 
 ```ts
 .on('end', () => ...)
@@ -300,7 +300,7 @@ completion object for you).
 
 If you need to cancel a stream, you can `break` from a `for await` loop or call `stream.abort()`.
 
-See an example of streaming helpers in action in [`examples/stream.ts`](https://raw.githubusercontent.com/openai/openai-node/main/`examples/stream.ts`).
+See an example of streaming helpers in action in [`examples/stream.ts`](examples/stream.ts).
 
 ### Automated function calls
 
@@ -379,17 +379,17 @@ main();
 // Final content: "It's looking cold and rainy - you might want to wear a jacket!"
 ```
 
-Like with `.stream()`, we provide a variety of [helpers and events](https://raw.githubusercontent.com/openai/openai-node/main/helpers and events).
+Like with `.stream()`, we provide a variety of [helpers and events](helpers.md#chat-events).
 
-Read more about various examples such as with integrating with [zod](https://raw.githubusercontent.com/openai/openai-node/main/zod),
-[next.js](https://raw.githubusercontent.com/openai/openai-node/main/next.js), and [proxying a stream to the browser](https://raw.githubusercontent.com/openai/openai-node/main/proxying a stream to the browser).
+Read more about various examples such as with integrating with [zod](#integrate-with-zod),
+[next.js](#integrate-with-nextjs), and [proxying a stream to the browser](#proxy-streaming-to-a-browser).
 
 By default, we run the loop up to 10 chat completions from the API. You can change this behavior by
 adjusting `maxChatCompletions` in the request options object. Note that `max_tokens` is the limit per
 chat completion request, not for the entire call run.
 
 See an example of automated function calls in action in
-[`examples/function-call-helpers.ts`](https://raw.githubusercontent.com/openai/openai-node/main/`examples/function-call-helpers.ts`).
+[`examples/function-call-helpers.ts`](examples/function-call-helpers.ts).
 
 Note, `runFunctions` was also previously available, but has been deprecated in favor of `runTools`.
 
@@ -635,8 +635,8 @@ main();
 
 #### Integrate with `zod`
 
-[`zod`](https://raw.githubusercontent.com/openai/openai-node/main/`zod`) is a schema validation library which can help with validating the
-assistant's response to make sure it conforms to a schema. Paired with [`zod-to-json-schema`](https://raw.githubusercontent.com/openai/openai-node/main/`zod-to-json-schema`), the validation schema also acts as the `parameters` JSON Schema passed to the API.
+[`zod`](https://www.npmjs.com/package/zod) is a schema validation library which can help with validating the
+assistant's response to make sure it conforms to a schema. Paired with [`zod-to-json-schema`](https://www.npmjs.com/package/zod-to-json-schema), the validation schema also acts as the `parameters` JSON Schema passed to the API.
 
 ```ts
 import OpenAI from 'openai';
@@ -680,15 +680,15 @@ async function getWeather(args: z.infer<typeof GetWeatherParameters>) {
 main();
 ```
 
-See a more fully-fledged example in [`examples/function-call-helpers-zod.ts`](https://raw.githubusercontent.com/openai/openai-node/main/`examples/function-call-helpers-zod.ts`).
+See a more fully-fledged example in [`examples/function-call-helpers-zod.ts`](examples/function-call-helpers-zod.ts).
 
 #### Integrate with Next.JS
 
-See an example of a Next.JS integration here [`examples/stream-to-client-next.ts`](https://raw.githubusercontent.com/openai/openai-node/main/`examples/stream-to-client-next.ts`).
+See an example of a Next.JS integration here [`examples/stream-to-client-next.ts`](examples/stream-to-client-next.ts).
 
 #### Proxy Streaming to a Browser
 
-See an example of using express to stream to a browser here [`examples/stream-to-client-express.ts`](https://raw.githubusercontent.com/openai/openai-node/main/`examples/stream-to-client-express.ts`).
+See an example of using express to stream to a browser here [`examples/stream-to-client-express.ts`](examples/stream-to-client-express.ts).
 
 # Polling Helpers
 

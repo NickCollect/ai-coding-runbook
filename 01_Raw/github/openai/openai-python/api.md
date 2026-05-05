@@ -422,7 +422,7 @@ Methods:
 - <code>client.vector_stores.file_batches.<a href="./src/openai/resources/vector_stores/file_batches.py">poll</a>(\*args) -> VectorStoreFileBatch</code>
 - <code>client.vector_stores.file_batches.<a href="./src/openai/resources/vector_stores/file_batches.py">upload_and_poll</a>(\*args) -> VectorStoreFileBatch</code>
 
-# [Webhooks](https://raw.githubusercontent.com/openai/openai-python/main/Webhooks)
+# [Webhooks](src/openai/resources/webhooks/api.md)
 
 Methods:
 
@@ -1071,11 +1071,11 @@ Methods:
 - <code title="post /organization/projects/{project_id}/certificates/activate">client.admin.organization.projects.certificates.<a href="./src/openai/resources/admin/organization/projects/certificates.py">activate</a>(project_id, \*\*<a href="src/openai/types/admin/organization/projects/certificate_activate_params.py">params</a>) -> <a href="./src/openai/types/admin/organization/projects/certificate_activate_response.py">SyncPage[CertificateActivateResponse]</a></code>
 - <code title="post /organization/projects/{project_id}/certificates/deactivate">client.admin.organization.projects.certificates.<a href="./src/openai/resources/admin/organization/projects/certificates.py">deactivate</a>(project_id, \*\*<a href="src/openai/types/admin/organization/projects/certificate_deactivate_params.py">params</a>) -> <a href="./src/openai/types/admin/organization/projects/certificate_deactivate_response.py">SyncPage[CertificateDeactivateResponse]</a></code>
 
-# [Responses](https://raw.githubusercontent.com/openai/openai-python/main/Responses)
+# [Responses](src/openai/resources/responses/api.md)
 
-# [Realtime](https://raw.githubusercontent.com/openai/openai-python/main/Realtime)
+# [Realtime](src/openai/resources/realtime/api.md)
 
-# [Conversations](https://raw.githubusercontent.com/openai/openai-python/main/Conversations)
+# [Conversations](src/openai/resources/conversations/api.md)
 
 # Evals
 

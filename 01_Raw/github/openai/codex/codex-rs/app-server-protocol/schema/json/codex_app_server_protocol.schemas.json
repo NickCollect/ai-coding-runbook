@@ -1584,6 +1584,29 @@
             },
             "method": {
               "enum": [
+                "windowsSandbox/readiness"
+              ],
+              "title": "WindowsSandbox/readinessRequestMethod",
+              "type": "string"
+            },
+            "params": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "id",
+            "method"
+          ],
+          "title": "WindowsSandbox/readinessRequest",
+          "type": "object"
+        },
+        {
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/v2/RequestId"
+            },
+            "method": {
+              "enum": [
                 "account/login/start"
               ],
               "title": "Account/login/startRequestMethod",
@@ -9810,6 +9833,9 @@
               "null"
             ]
           },
+          "currentHash": {
+            "type": "string"
+          },
           "displayOrder": {
             "format": "int64",
             "type": "integer"
@@ -9857,9 +9883,13 @@
             "format": "uint64",
             "minimum": 0.0,
             "type": "integer"
+          },
+          "trustStatus": {
+            "$ref": "#/definitions/v2/HookTrustStatus"
           }
         },
         "required": [
+          "currentHash",
           "displayOrder",
           "enabled",
           "eventName",
@@ -9868,7 +9898,8 @@
           "key",
           "source",
           "sourcePath",
-          "timeoutSec"
+          "timeoutSec",
+          "trustStatus"
         ],
         "type": "object"
       },
@@ -10057,6 +10088,15 @@
         ],
         "title": "HookStartedNotification",
         "type": "object"
+      },
+      "HookTrustStatus": {
+        "enum": [
+          "managed",
+          "untrusted",
+          "trusted",
+          "modified"
+        ],
+        "type": "string"
       },
       "HooksListEntry": {
         "properties": {
@@ -17643,11 +17683,20 @@
             "type": "string"
           },
           "items": {
-            "description": "Only populated on a `thread/resume` or `thread/fork` response. For all other responses and notifications returning a Turn, the items field will be an empty list.",
+            "description": "Thread items currently included in this turn payload.",
             "items": {
               "$ref": "#/definitions/v2/ThreadItem"
             },
             "type": "array"
+          },
+          "itemsView": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/v2/TurnItemsView"
+              }
+            ],
+            "default": "full",
+            "description": "Describes how much of `items` has been loaded for this turn."
           },
           "startedAt": {
             "description": "Unix timestamp (in seconds) when the turn started.",
@@ -17771,6 +17820,31 @@
         "$schema": "http://json-schema.org/draft-07/schema#",
         "title": "TurnInterruptResponse",
         "type": "object"
+      },
+      "TurnItemsView": {
+        "oneOf": [
+          {
+            "description": "`items` was not loaded for this turn. The field is intentionally empty.",
+            "enum": [
+              "notLoaded"
+            ],
+            "type": "string"
+          },
+          {
+            "description": "`items` contains only a display summary for this turn.",
+            "enum": [
+              "summary"
+            ],
+            "type": "string"
+          },
+          {
+            "description": "`items` contains every ThreadItem available from persisted app-server history for this turn.",
+            "enum": [
+              "full"
+            ],
+            "type": "string"
+          }
+        ]
       },
       "TurnPlanStep": {
         "properties": {
@@ -18353,6 +18427,27 @@
             ]
           }
         },
+        "type": "object"
+      },
+      "WindowsSandboxReadiness": {
+        "enum": [
+          "ready",
+          "notConfigured",
+          "updateRequired"
+        ],
+        "type": "string"
+      },
+      "WindowsSandboxReadinessResponse": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "properties": {
+          "status": {
+            "$ref": "#/definitions/v2/WindowsSandboxReadiness"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "title": "WindowsSandboxReadinessResponse",
         "type": "object"
       },
       "WindowsSandboxSetupCompletedNotification": {

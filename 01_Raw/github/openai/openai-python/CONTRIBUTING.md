@@ -2,13 +2,13 @@
 
 ### With Rye
 
-We use [Rye](https://raw.githubusercontent.com/openai/openai-python/main/Rye) to manage dependencies because it will automatically provision a Python environment with the expected Python version. To set it up, run:
+We use [Rye](https://rye.astral.sh/) to manage dependencies because it will automatically provision a Python environment with the expected Python version. To set it up, run:
 
 ```sh
 $ ./scripts/bootstrap
 ```
 
-Or [install Rye manually](https://raw.githubusercontent.com/openai/openai-python/main/install Rye manually) and run:
+Or [install Rye manually](https://rye.astral.sh/guide/installation/) and run:
 
 ```sh
 $ rye sync --all-features
@@ -85,7 +85,7 @@ $ pip install ./path-to-wheel-file.whl
 
 ## Running tests
 
-Most tests require you to [set up a mock server](https://raw.githubusercontent.com/openai/openai-python/main/set up a mock server) against the OpenAPI spec to run the tests.
+Most tests require you to [set up a mock server](https://github.com/dgellow/steady) against the OpenAPI spec to run the tests.
 
 ```sh
 $ ./scripts/mock
@@ -97,8 +97,8 @@ $ ./scripts/test
 
 ## Linting and formatting
 
-This repository uses [ruff](https://raw.githubusercontent.com/openai/openai-python/main/ruff) and
-[black](https://raw.githubusercontent.com/openai/openai-python/main/black) to format the code in the repository.
+This repository uses [ruff](https://github.com/astral-sh/ruff) and
+[black](https://github.com/psf/black) to format the code in the repository.
 
 To lint:
 
@@ -119,7 +119,7 @@ the changes aren't made through the automated pipeline, you may want to make rel
 
 ### Publish with a GitHub workflow
 
-You can release to package managers by using [the `Publish PyPI` GitHub action](https://raw.githubusercontent.com/openai/openai-python/main/the `Publish PyPI` GitHub action). This requires a setup organization or repository secret to be set up.
+You can release to package managers by using [the `Publish PyPI` GitHub action](https://www.github.com/openai/openai-python/actions/workflows/publish-pypi.yml). This requires a setup organization or repository secret to be set up.
 
 ### Publish manually
 

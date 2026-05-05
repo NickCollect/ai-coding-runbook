@@ -1,6 +1,6 @@
 BSD 3-Clause License
 
-Copyright (c) 2014, Nathan LaFreniere and other [contributors](https://raw.githubusercontent.com/openai/openai-node/main/src/internal/qs/contributors) All rights reserved.
+Copyright (c) 2014, Nathan LaFreniere and other [contributors](https://github.com/puruvj/neoqs/graphs/contributors) All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 

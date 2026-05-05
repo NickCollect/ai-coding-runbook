@@ -1,6 +1,6 @@
 ## Setting up the environment
 
-This repository uses [`yarn@v1`](https://raw.githubusercontent.com/openai/openai-node/main/`yarn@v1`).
+This repository uses [`yarn@v1`](https://classic.yarnpkg.com/lang/en/docs/install).
 Other package managers may work but are not officially supported for development.
 
 To set up the repository, run:
@@ -65,7 +65,7 @@ $ pnpm link --global openai
 
 ## Running tests
 
-Most tests require you to [set up a mock server](https://raw.githubusercontent.com/openai/openai-node/main/set up a mock server) against the OpenAPI spec to run the tests.
+Most tests require you to [set up a mock server](https://github.com/dgellow/steady) against the OpenAPI spec to run the tests.
 
 ```sh
 $ ./scripts/mock
@@ -77,8 +77,8 @@ $ yarn run test
 
 ## Linting and formatting
 
-This repository uses [prettier](https://raw.githubusercontent.com/openai/openai-node/main/prettier) and
-[eslint](https://raw.githubusercontent.com/openai/openai-node/main/eslint) to format the code in the repository.
+This repository uses [prettier](https://www.npmjs.com/package/prettier) and
+[eslint](https://www.npmjs.com/package/eslint) to format the code in the repository.
 
 To lint:
 
@@ -99,7 +99,7 @@ the changes aren't made through the automated pipeline, you may want to make rel
 
 ### Publish with a GitHub workflow
 
-You can release to package managers by using [the `Publish NPM` GitHub action](https://raw.githubusercontent.com/openai/openai-node/main/the `Publish NPM` GitHub action). This requires a setup organization or repository secret to be set up.
+You can release to package managers by using [the `Publish NPM` GitHub action](https://www.github.com/openai/openai-node/actions/workflows/publish-npm.yml). This requires a setup organization or repository secret to be set up.
 
 ### Publish manually
 

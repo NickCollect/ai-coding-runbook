@@ -2,7 +2,7 @@
 
 This guide outlines the changes and steps needed to migrate your codebase to the latest version of the OpenAI TypeScript and JavaScript SDK.
 
-The main changes are that the SDK now relies on the [builtin Web fetch API](https://raw.githubusercontent.com/openai/openai-node/main/builtin Web fetch API) instead of `node-fetch` and has zero dependencies.
+The main changes are that the SDK now relies on the [builtin Web fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) instead of `node-fetch` and has zero dependencies.
 
 ## Migration CLI
 
@@ -23,7 +23,7 @@ The minimum supported runtime and tooling versions are now:
 ### Web types for `withResponse`, `asResponse`, and `APIError.headers`
 
 Because we now use the builtin Web fetch API on all platforms, if you wrote code that used `withResponse` or `asResponse` and then accessed `node-fetch`-specific properties on the result, you will need to switch to standardized alternatives.
-For example, `body` is now a [Web `ReadableStream`](https://raw.githubusercontent.com/openai/openai-node/main/Web `ReadableStream`) rather than a [node `Readable`](https://raw.githubusercontent.com/openai/openai-node/main/node `Readable`).
+For example, `body` is now a [Web `ReadableStream`](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream) rather than a [node `Readable`](https://nodejs.org/api/stream.html#readable-streams).
 
 ```ts
 // Before:
@@ -36,7 +36,7 @@ const res = await client.example.retrieve('string/with/slash').asResponse();
 Readable.fromWeb(res.body).pipe(process.stdout);
 ```
 
-Additionally, the `headers` property on `APIError` objects is now an instance of the Web [Headers](https://raw.githubusercontent.com/openai/openai-node/main/Headers) class. It was previously defined as `Record<string, string | null | undefined>`.
+Additionally, the `headers` property on `APIError` objects is now an instance of the Web [Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers) class. It was previously defined as `Record<string, string | null | undefined>`.
 
 ### Named path parameters
 
@@ -233,10 +233,10 @@ client.containers.files.delete();
 
 ### Removed `httpAgent` in favor of `fetchOptions`
 
-The `httpAgent` client option has been removed in favor of a [platform-specific `fetchOptions` property](https://raw.githubusercontent.com/openai/openai-node/main/platform-specific `fetchOptions` property).
+The `httpAgent` client option has been removed in favor of a [platform-specific `fetchOptions` property](https://github.com/openai/openai-node#fetch-options).
 This change was made as `httpAgent` relied on `node:http` agents which are not supported by any runtime's builtin fetch implementation.
 
-If you were using `httpAgent` for proxy support, check out the [new proxy documentation](https://raw.githubusercontent.com/openai/openai-node/main/new proxy documentation).
+If you were using `httpAgent` for proxy support, check out the [new proxy documentation](https://github.com/openai/openai-node#configuring-proxies).
 
 Before:
 
@@ -355,7 +355,7 @@ import fs from 'fs';
 fs.createReadStream('path/to/file');
 ```
 
-Note that this function previously only worked on Node.js. If you're using Bun, you can use [`Bun.file`](https://raw.githubusercontent.com/openai/openai-node/main/`Bun.file`) instead.
+Note that this function previously only worked on Node.js. If you're using Bun, you can use [`Bun.file`](https://bun.sh/docs/api/file-io) instead.
 
 ### Shims removal
 
@@ -367,7 +367,7 @@ import 'openai/shims/web';
 import OpenAI from 'openai';
 ```
 
-The `openai/shims` imports have been removed. Your global types must now be [correctly configured](https://raw.githubusercontent.com/openai/openai-node/main/correctly configured).
+The `openai/shims` imports have been removed. Your global types must now be [correctly configured](#minimum-types-requirements).
 
 ### Zod helpers optionality error
 
@@ -385,7 +385,7 @@ const completion = await client.chat.completions.parse({
 });
 ```
 
-You must mark optional properties with `.nullable()` as purely optional fields are not supported by the [API](https://raw.githubusercontent.com/openai/openai-node/main/API).
+You must mark optional properties with `.nullable()` as purely optional fields are not supported by the [API](https://platform.openai.com/docs/guides/structured-outputs?api-mode=responses#all-fields-must-be-required).
 
 ```ts
 const completion = await client.chat.completions.parse({

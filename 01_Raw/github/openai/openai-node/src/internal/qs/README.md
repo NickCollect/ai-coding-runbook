@@ -1,3 +1,3 @@
 # qs
 
-This is a vendored version of [neoqs](https://raw.githubusercontent.com/openai/openai-node/main/src/internal/qs/neoqs) which is a TypeScript rewrite of [qs](https://raw.githubusercontent.com/openai/openai-node/main/src/internal/qs/qs), a query string library.
+This is a vendored version of [neoqs](https://github.com/PuruVJ/neoqs) which is a TypeScript rewrite of [qs](https://github.com/ljharb/qs), a query string library.

@@ -1,6 +1,6 @@
 # Structured Outputs Parsing Helpers
 
-The OpenAI API supports extracting JSON from the model with the `response_format` request param, for more details on the API, see [this guide](https://raw.githubusercontent.com/openai/openai-python/main/this guide).
+The OpenAI API supports extracting JSON from the model with the `response_format` request param, for more details on the API, see [this guide](https://platform.openai.com/docs/guides/structured-outputs).
 
 The SDK provides a `client.chat.completions.parse()` method which is a wrapper over the `client.chat.completions.create()` that
 provides richer integrations with Python specific types & returns a `ParsedChatCompletion` object, which is a subclass of the standard `ChatCompletion` class.
@@ -129,13 +129,13 @@ The `chat.completions.parse()` method imposes some additional restrictions on it
 
 # Streaming Helpers
 
-OpenAI supports streaming responses when interacting with the [Chat Completion](https://raw.githubusercontent.com/openai/openai-python/main/Chat Completion) & [Assistant](https://raw.githubusercontent.com/openai/openai-python/main/Assistant) APIs.
+OpenAI supports streaming responses when interacting with the [Chat Completion](#chat-completions-api) & [Assistant](#assistant-streaming-api) APIs.
 
 ## Chat Completions API
 
 The SDK provides a `.chat.completions.stream()` method that wraps the `.chat.completions.create(stream=True)` stream providing a more granular event API & automatic accumulation of each delta.
 
-It also supports all aforementioned [parsing helpers](https://raw.githubusercontent.com/openai/openai-python/main/parsing helpers).
+It also supports all aforementioned [parsing helpers](#structured-outputs-parsing-helpers).
 
 Unlike `.create(stream=True)`, the `.stream()` method requires usage within a context manager to prevent accidental leakage of the response:
 
@@ -153,7 +153,7 @@ async with client.chat.completions.stream(
             print(event.content, flush=True, end='')
 ```
 
-When the context manager is entered, a `ChatCompletionStream` / `AsyncChatCompletionStream` instance is returned which, like `.create(stream=True)` is an iterator in the sync client and an async iterator in the async client. The full list of events that are yielded by the iterator are outlined [below](https://raw.githubusercontent.com/openai/openai-python/main/below).
+When the context manager is entered, a `ChatCompletionStream` / `AsyncChatCompletionStream` instance is returned which, like `.create(stream=True)` is an iterator in the sync client and an async iterator in the async client. The full list of events that are yielded by the iterator are outlined [below](#chat-completions-events).
 
 When the context manager exits, the response will be closed, however the `stream` instance is still available outside
 the context manager.
@@ -227,7 +227,7 @@ Emitted when a function tool call's arguments are complete.
 
 #### LogprobsContentDeltaEvent
 
-Emitted when a chunk contains new content [log probabilities](https://raw.githubusercontent.com/openai/openai-python/main/log probabilities).
+Emitted when a chunk contains new content [log probabilities](https://cookbook.openai.com/examples/using_logprobs).
 
 - `type`: `"logprobs.content.delta"`
 - `content`: A list of the new log probabilities received in this chunk
@@ -235,14 +235,14 @@ Emitted when a chunk contains new content [log probabilities](https://raw.github
 
 #### LogprobsContentDoneEvent
 
-Emitted when all content [log probabilities](https://raw.githubusercontent.com/openai/openai-python/main/log probabilities) have been received.
+Emitted when all content [log probabilities](https://cookbook.openai.com/examples/using_logprobs) have been received.
 
 - `type`: `"logprobs.content.done"`
 - `content`: The full list of token log probabilities for the content
 
 #### LogprobsRefusalDeltaEvent
 
-Emitted when a chunk contains new refusal [log probabilities](https://raw.githubusercontent.com/openai/openai-python/main/log probabilities).
+Emitted when a chunk contains new refusal [log probabilities](https://cookbook.openai.com/examples/using_logprobs).
 
 - `type`: `"logprobs.refusal.delta"`
 - `refusal`: A list of the new log probabilities received in this chunk
@@ -250,7 +250,7 @@ Emitted when a chunk contains new refusal [log probabilities](https://raw.github
 
 #### LogprobsRefusalDoneEvent
 
-Emitted when all refusal [log probabilities](https://raw.githubusercontent.com/openai/openai-python/main/log probabilities) have been received.
+Emitted when all refusal [log probabilities](https://cookbook.openai.com/examples/using_logprobs) have been received.
 
 - `type`: `"logprobs.refusal.done"`
 - `refusal`: The full list of token log probabilities for the refusal
@@ -286,7 +286,7 @@ async with client.chat.completions.stream(...) as stream:
 OpenAI supports streaming responses from Assistants. The SDK provides convenience wrappers around the API
 so you can subscribe to the types of events you are interested in as well as receive accumulated responses.
 
-More information can be found in the documentation: [Assistant Streaming](https://raw.githubusercontent.com/openai/openai-python/main/Assistant Streaming)
+More information can be found in the documentation: [Assistant Streaming](https://platform.openai.com/docs/assistants/overview?lang=python)
 
 #### An example of creating a run and subscribing to some events
 
@@ -401,7 +401,7 @@ def on_event(self, event: AssistantStreamEvent)
 This allows you to subscribe to all the possible raw events sent by the OpenAI streaming API.
 In many cases it will be more convenient to subscribe to a more specific set of events for your use case.
 
-More information on the types of events can be found here: [Events](https://raw.githubusercontent.com/openai/openai-python/main/Events)
+More information on the types of events can be found here: [Events](https://platform.openai.com/docs/api-reference/assistants-streaming/events)
 
 ```python
 def on_run_step_created(self, run_step: RunStep)
@@ -411,7 +411,7 @@ def on_run_step_done(self, run_step: RunStep)
 
 These events allow you to subscribe to the creation, delta and completion of a RunStep.
 
-For more information on how Runs and RunSteps work see the documentation [Runs and RunSteps](https://raw.githubusercontent.com/openai/openai-python/main/Runs and RunSteps)
+For more information on how Runs and RunSteps work see the documentation [Runs and RunSteps](https://platform.openai.com/docs/assistants/how-it-works/runs-and-run-steps)
 
 ```python
 def on_message_created(self, message: Message)
@@ -424,7 +424,7 @@ different types of content that can be sent from a model (and events are availab
 For convenience, the delta event includes both the incremental update and an accumulated snapshot of the content.
 
 More information on messages can be found
-on in the documentation page [Message](https://raw.githubusercontent.com/openai/openai-python/main/Message).
+on in the documentation page [Message](https://platform.openai.com/docs/api-reference/messages/object).
 
 ```python
 def on_text_created(self, text: Text)
@@ -449,7 +449,7 @@ def on_tool_call_done(self, tool_call: ToolCall)
 
 These events allow you to subscribe to events for the creation, delta and completion of a ToolCall.
 
-More information on tools can be found here [Tools](https://raw.githubusercontent.com/openai/openai-python/main/Tools)
+More information on tools can be found here [Tools](https://platform.openai.com/docs/assistants/tools)
 
 ```python
 def on_end(self)

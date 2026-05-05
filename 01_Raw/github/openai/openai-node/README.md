@@ -1,12 +1,12 @@
 # OpenAI TypeScript and JavaScript API Library
 
-[![NPM version](https://raw.githubusercontent.com/openai/openai-node/main/![NPM version)>)](https://npmjs.org/package/openai) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/openai) [![JSR Version](https://raw.githubusercontent.com/openai/openai-node/main/![JSR Version)](https://jsr.io/@openai/openai)
+[![NPM version](<https://img.shields.io/npm/v/openai.svg?label=npm%20(stable)>)](https://npmjs.org/package/openai) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/openai) [![JSR Version](https://jsr.io/badges/@openai/openai)](https://jsr.io/@openai/openai)
 
 This library provides convenient access to the OpenAI REST API from TypeScript or JavaScript.
 
-It is generated from our [OpenAPI specification](https://raw.githubusercontent.com/openai/openai-node/main/OpenAPI specification) with [Stainless](https://raw.githubusercontent.com/openai/openai-node/main/Stainless).
+It is generated from our [OpenAPI specification](https://github.com/openai/openai-openapi) with [Stainless](https://stainlessapi.com/).
 
-To learn how to use the OpenAI API, check out our [API Reference](https://raw.githubusercontent.com/openai/openai-node/main/API Reference) and [Documentation](https://raw.githubusercontent.com/openai/openai-node/main/Documentation).
+To learn how to use the OpenAI API, check out our [API Reference](https://platform.openai.com/docs/api-reference) and [Documentation](https://platform.openai.com/docs).
 
 ## Installation
 
@@ -21,7 +21,7 @@ deno add jsr:@openai/openai
 npx jsr add @openai/openai
 ```
 
-These commands will make the module importable from the `@openai/openai` scope. You can also [import directly from JSR](https://raw.githubusercontent.com/openai/openai-node/main/import directly from JSR) without an install step if you're using the Deno JavaScript runtime:
+These commands will make the module importable from the `@openai/openai` scope. You can also [import directly from JSR](https://jsr.io/docs/using-packages#importing-with-jsr-specifiers) without an install step if you're using the Deno JavaScript runtime:
 
 ```ts
 import OpenAI from 'jsr:@openai/openai';
@@ -29,9 +29,9 @@ import OpenAI from 'jsr:@openai/openai';
 
 ## Usage
 
-The full API of this library can be found in [api.md file](https://raw.githubusercontent.com/openai/openai-node/main/api.md file) along with many [code examples](https://raw.githubusercontent.com/openai/openai-node/main/code examples).
+The full API of this library can be found in [api.md file](api.md) along with many [code examples](https://github.com/openai/openai-node/tree/master/examples).
 
-The primary API for interacting with OpenAI models is the [Responses API](https://raw.githubusercontent.com/openai/openai-node/main/Responses API). You can generate text from the model with the code below.
+The primary API for interacting with OpenAI models is the [Responses API](https://platform.openai.com/docs/api-reference/responses). You can generate text from the model with the code below.
 
 ```ts
 import OpenAI from 'openai';
@@ -49,7 +49,7 @@ const response = await client.responses.create({
 console.log(response.output_text);
 ```
 
-The previous standard (supported indefinitely) for generating text is the [Chat Completions API](https://raw.githubusercontent.com/openai/openai-node/main/Chat Completions API). You can use that API to generate text from the model with the code below.
+The previous standard (supported indefinitely) for generating text is the [Chat Completions API](https://platform.openai.com/docs/api-reference/chat). You can use that API to generate text from the model with the code below.
 
 ```ts
 import OpenAI from 'openai';
@@ -227,7 +227,7 @@ await client.files.create({
 
 Verifying webhook signatures is _optional but encouraged_.
 
-For more information about webhooks, see [the API docs](https://raw.githubusercontent.com/openai/openai-node/main/the API docs).
+For more information about webhooks, see [the API docs](https://platform.openai.com/docs/guides/webhooks).
 
 ### Parsing webhook payloads
 
@@ -339,7 +339,7 @@ Error codes are as follows:
 
 ## Request IDs
 
-> For more information on debugging requests, see [these docs](https://raw.githubusercontent.com/openai/openai-node/main/these docs)
+> For more information on debugging requests, see [these docs](https://platform.openai.com/docs/api-reference/debugging-requests)
 
 All object responses in the SDK provide a `_request_id` property which is added from the `x-request-id` response header so that you can quickly log failing requests and report them back to OpenAI.
 
@@ -365,7 +365,7 @@ const { data: stream, request_id } = await openai.chat.completions
 
 ## Realtime API
 
-The Realtime API enables you to build low-latency, multi-modal conversational experiences. It currently supports text and audio as both input and output, as well as [function calling](https://raw.githubusercontent.com/openai/openai-node/main/function calling) through a `WebSocket` connection.
+The Realtime API enables you to build low-latency, multi-modal conversational experiences. It currently supports text and audio as both input and output, as well as [function calling](https://platform.openai.com/docs/guides/function-calling) through a `WebSocket` connection.
 
 ```ts
 import { OpenAIRealtimeWebSocket } from 'openai/realtime/websocket';
@@ -375,11 +375,11 @@ const rt = new OpenAIRealtimeWebSocket({ model: 'gpt-realtime' });
 rt.on('response.text.delta', (event) => process.stdout.write(event.delta));
 ```
 
-For more information see [realtime.md](https://raw.githubusercontent.com/openai/openai-node/main/realtime.md).
+For more information see [realtime.md](realtime.md).
 
 ## Microsoft Azure OpenAI
 
-To use this library with [Azure OpenAI](https://raw.githubusercontent.com/openai/openai-node/main/Azure OpenAI), use the `AzureOpenAI`
+To use this library with [Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/overview), use the `AzureOpenAI`
 class instead of the `OpenAI` class.
 
 > [!IMPORTANT]
@@ -444,11 +444,11 @@ await client.chat.completions.create({ messages: [{ role: 'user', content: 'How 
 
 On timeout, an `APIConnectionTimeoutError` is thrown.
 
-Note that requests which time out will be [retried twice by default](https://raw.githubusercontent.com/openai/openai-node/main/retried twice by default).
+Note that requests which time out will be [retried twice by default](#retries).
 
 ## Request IDs
 
-> For more information on debugging requests, see [these docs](https://raw.githubusercontent.com/openai/openai-node/main/these docs)
+> For more information on debugging requests, see [these docs](https://platform.openai.com/docs/api-reference/debugging-requests)
 
 All object responses in the SDK provide a `_request_id` property which is added from the `x-request-id` response header so that you can quickly log failing requests and report them back to OpenAI.
 
@@ -502,7 +502,7 @@ while (page.hasNextPage()) {
 
 ## Realtime API
 
-The Realtime API enables you to build low-latency, multi-modal conversational experiences. It currently supports text and audio as both input and output, as well as [function calling](https://raw.githubusercontent.com/openai/openai-node/main/function calling) through a `WebSocket` connection.
+The Realtime API enables you to build low-latency, multi-modal conversational experiences. It currently supports text and audio as both input and output, as well as [function calling](https://platform.openai.com/docs/guides/function-calling) through a `WebSocket` connection.
 
 ```ts
 import { OpenAIRealtimeWebSocket } from 'openai/realtime/websocket';
@@ -512,11 +512,11 @@ const rt = new OpenAIRealtimeWebSocket({ model: 'gpt-realtime' });
 rt.on('response.text.delta', (event) => process.stdout.write(event.delta));
 ```
 
-For more information see [realtime.md](https://raw.githubusercontent.com/openai/openai-node/main/realtime.md).
+For more information see [realtime.md](realtime.md).
 
 ## Microsoft Azure OpenAI
 
-To use this library with [Azure OpenAI](https://raw.githubusercontent.com/openai/openai-node/main/Azure OpenAI), use the `AzureOpenAI`
+To use this library with [Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/overview), use the `AzureOpenAI`
 class instead of the `OpenAI` class.
 
 > [!IMPORTANT]
@@ -544,7 +544,7 @@ const result = await openai.chat.completions.create({
 console.log(result.choices[0]!.message?.content);
 ```
 
-For more information on support for the Azure API, see [azure.md](https://raw.githubusercontent.com/openai/openai-node/main/azure.md).
+For more information on support for the Azure API, see [azure.md](azure.md).
 
 ## Advanced Usage
 
@@ -611,7 +611,7 @@ may still be visible.
 #### Custom logger
 
 By default, this library logs to `globalThis.console`. You can also provide a custom logger.
-Most logging libraries are supported, including [pino](https://raw.githubusercontent.com/openai/openai-node/main/pino), [winston](https://raw.githubusercontent.com/openai/openai-node/main/winston), [bunyan](https://raw.githubusercontent.com/openai/openai-node/main/bunyan), [consola](https://raw.githubusercontent.com/openai/openai-node/main/consola), [signale](https://raw.githubusercontent.com/openai/openai-node/main/signale), and [@std/log](https://raw.githubusercontent.com/openai/openai-node/main/@std/log). If your logger doesn't work, please open an issue.
+Most logging libraries are supported, including [pino](https://www.npmjs.com/package/pino), [winston](https://www.npmjs.com/package/winston), [bunyan](https://www.npmjs.com/package/bunyan), [consola](https://www.npmjs.com/package/consola), [signale](https://www.npmjs.com/package/signale), and [@std/log](https://jsr.io/@std/log). If your logger doesn't work, please open an issue.
 
 When providing a custom logger, the `logLevel` option still controls which messages are emitted, messages
 below the configured level will not be sent to your logger.
@@ -709,7 +709,7 @@ const client = new OpenAI({
 To modify proxy behavior, you can provide custom `fetchOptions` that add runtime-specific proxy
 options to requests:
 
-<img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://raw.githubusercontent.com/openai/openai-node/main/[docs)]</sup>
+<img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
 import OpenAI from 'openai';
@@ -723,7 +723,7 @@ const client = new OpenAI({
 });
 ```
 
-<img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://raw.githubusercontent.com/openai/openai-node/main/[docs)]</sup>
+<img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
 import OpenAI from 'openai';
@@ -735,7 +735,7 @@ const client = new OpenAI({
 });
 ```
 
-<img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://raw.githubusercontent.com/openai/openai-node/main/[docs)]</sup>
+<img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
 import OpenAI from 'npm:openai';
@@ -752,7 +752,7 @@ const client = new OpenAI({
 
 ## Semantic versioning
 
-This package generally follows [SemVer](https://raw.githubusercontent.com/openai/openai-node/main/SemVer) conventions, though certain backwards-incompatible changes may be released as minor versions:
+This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
 
 1. Changes that only affect static types, without breaking runtime behavior.
 2. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_
@@ -760,7 +760,7 @@ This package generally follows [SemVer](https://raw.githubusercontent.com/openai
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://raw.githubusercontent.com/openai/openai-node/main/issue) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/openai/openai-node/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 
@@ -768,7 +768,7 @@ TypeScript >= 4.9 is supported.
 
 The following runtimes are supported:
 
-- Node.js 20 LTS or later ([non-EOL](https://raw.githubusercontent.com/openai/openai-node/main/non-EOL)) versions.
+- Node.js 20 LTS or later ([non-EOL](https://endoflife.date/nodejs)) versions.
 - Deno v1.28.0 or higher.
 - Bun 1.0 or later.
 - Cloudflare Workers.
@@ -800,4 +800,4 @@ If you are interested in other runtime environments, please open or upvote an is
 
 ## Contributing
 
-See [the contributing documentation](https://raw.githubusercontent.com/openai/openai-node/main/the contributing documentation).
+See [the contributing documentation](./CONTRIBUTING.md).

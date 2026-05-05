@@ -1,10 +1,10 @@
 ## Realtime API
 
-The Realtime API enables you to build low-latency, multi-modal conversational experiences. It currently supports text and audio as both input and output, as well as [function calling](https://raw.githubusercontent.com/openai/openai-node/main/function calling) through a `WebSocket` connection.
+The Realtime API enables you to build low-latency, multi-modal conversational experiences. It currently supports text and audio as both input and output, as well as [function calling](https://platform.openai.com/docs/guides/function-calling) through a `WebSocket` connection.
 
-The Realtime API works through a combination of client-sent events and server-sent events. Clients can send events to do things like update session configuration or send text and audio inputs. Server events confirm when audio responses have completed, or when a text response from the model has been received. A full event reference can be found [here](https://raw.githubusercontent.com/openai/openai-node/main/here) and a guide can be found [here](https://raw.githubusercontent.com/openai/openai-node/main/here).
+The Realtime API works through a combination of client-sent events and server-sent events. Clients can send events to do things like update session configuration or send text and audio inputs. Server events confirm when audio responses have completed, or when a text response from the model has been received. A full event reference can be found [here](https://platform.openai.com/docs/api-reference/realtime-client-events) and a guide can be found [here](https://platform.openai.com/docs/guides/realtime).
 
-This SDK supports accessing the Realtime API through the [WebSocket API](https://raw.githubusercontent.com/openai/openai-node/main/WebSocket API) or with [ws](https://raw.githubusercontent.com/openai/openai-node/main/ws).
+This SDK supports accessing the Realtime API through the [WebSocket API](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket) or with [ws](https://github.com/websockets/ws).
 
 Basic text based example with `ws`:
 
@@ -68,11 +68,11 @@ rt.socket.addEventListener('open', () => {
 });
 ```
 
-A full example can be found [here](https://raw.githubusercontent.com/openai/openai-node/main/here).
+A full example can be found [here](https://github.com/openai/openai-node/blob/master/examples/realtime/websocket.ts).
 
 ### Realtime error handling
 
-When an error is encountered, either on the client side or returned from the server through the [`error` event](https://raw.githubusercontent.com/openai/openai-node/main/`error` event), the `error` event listener will be fired. However, if you haven't registered an `error` event listener then an `unhandled Promise rejection` error will be thrown.
+When an error is encountered, either on the client side or returned from the server through the [`error` event](https://platform.openai.com/docs/guides/realtime-model-capabilities#error-handling), the `error` event listener will be fired. However, if you haven't registered an `error` event listener then an `unhandled Promise rejection` error will be thrown.
 
 It is **highly recommended** that you register an `error` event listener and handle errors appropriately as typically the underlying connection is still usable.
 

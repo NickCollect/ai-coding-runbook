@@ -1,17 +1,17 @@
 # OpenAI Python API library
 
 <!-- prettier-ignore -->
-[![PyPI version](https://raw.githubusercontent.com/openai/openai-python/main/![PyPI version))](https://pypi.org/project/openai/)
+[![PyPI version](https://img.shields.io/pypi/v/openai.svg?label=pypi%20(stable))](https://pypi.org/project/openai/)
 
 The OpenAI Python library provides convenient access to the OpenAI REST API from any Python 3.9+
 application. The library includes type definitions for all request params and response fields,
-and offers both synchronous and asynchronous clients powered by [httpx](https://raw.githubusercontent.com/openai/openai-python/main/httpx).
+and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
-It is generated from our [OpenAPI specification](https://raw.githubusercontent.com/openai/openai-python/main/OpenAPI specification) with [Stainless](https://raw.githubusercontent.com/openai/openai-python/main/Stainless).
+It is generated from our [OpenAPI specification](https://github.com/openai/openai-openapi) with [Stainless](https://stainlessapi.com/).
 
 ## Documentation
 
-The REST API documentation can be found on [platform.openai.com](https://raw.githubusercontent.com/openai/openai-python/main/platform.openai.com). The full API of this library can be found in [api.md](https://raw.githubusercontent.com/openai/openai-python/main/api.md).
+The REST API documentation can be found on [platform.openai.com](https://platform.openai.com/docs/api-reference). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
@@ -22,9 +22,9 @@ pip install openai
 
 ## Usage
 
-The full API of this library can be found in [api.md](https://raw.githubusercontent.com/openai/openai-python/main/api.md).
+The full API of this library can be found in [api.md](api.md).
 
-The primary API for interacting with OpenAI models is the [Responses API](https://raw.githubusercontent.com/openai/openai-python/main/Responses API). You can generate text from the model with the code below.
+The primary API for interacting with OpenAI models is the [Responses API](https://platform.openai.com/docs/api-reference/responses). You can generate text from the model with the code below.
 
 ```python
 import os
@@ -44,7 +44,7 @@ response = client.responses.create(
 print(response.output_text)
 ```
 
-The previous standard (supported indefinitely) for generating text is the [Chat Completions API](https://raw.githubusercontent.com/openai/openai-python/main/Chat Completions API). You can use that API to generate text from the model with the code below.
+The previous standard (supported indefinitely) for generating text is the [Chat Completions API](https://platform.openai.com/docs/api-reference/chat). You can use that API to generate text from the model with the code below.
 
 ```python
 from openai import OpenAI
@@ -66,10 +66,10 @@ print(completion.choices[0].message.content)
 ```
 
 While you can provide an `api_key` keyword argument,
-we recommend using [python-dotenv](https://raw.githubusercontent.com/openai/openai-python/main/python-dotenv)
+we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
 to add `OPENAI_API_KEY="My API Key"` to your `.env` file
 so that your API key is not stored in source control.
-[Get an API key here](https://raw.githubusercontent.com/openai/openai-python/main/Get an API key here).
+[Get an API key here](https://platform.openai.com/settings/organization/api-keys).
 
 ### Workload Identity Authentication
 
@@ -139,8 +139,10 @@ client = OpenAI(
 ```python
 from openai import OpenAI
 
+
 def get_custom_token() -> str:
     return "your-jwt-token"
+
 
 client = OpenAI(
     workload_identity={
@@ -234,11 +236,13 @@ client = AsyncOpenAI(
     api_key=os.environ.get("OPENAI_API_KEY"),
 )
 
+
 async def main() -> None:
     response = await client.responses.create(
         model="gpt-5.2", input="Explain disestablishmentarianism to a smart five year old."
     )
     print(response.output_text)
+
 
 asyncio.run(main())
 ```
@@ -264,6 +268,7 @@ import asyncio
 from openai import DefaultAioHttpClient
 from openai import AsyncOpenAI
 
+
 async def main() -> None:
     async with AsyncOpenAI(
         api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
@@ -278,6 +283,7 @@ async def main() -> None:
             ],
             model="gpt-5.2",
         )
+
 
 asyncio.run(main())
 ```
@@ -309,6 +315,7 @@ from openai import AsyncOpenAI
 
 client = AsyncOpenAI()
 
+
 async def main():
     stream = await client.responses.create(
         model="gpt-5.2",
@@ -319,16 +326,17 @@ async def main():
     async for event in stream:
         print(event)
 
+
 asyncio.run(main())
 ```
 
 ## Realtime API
 
-The Realtime API enables you to build low-latency, multi-modal conversational experiences. It currently supports text and audio as both input and output, as well as [function calling](https://raw.githubusercontent.com/openai/openai-python/main/function calling) through a WebSocket connection.
+The Realtime API enables you to build low-latency, multi-modal conversational experiences. It currently supports text and audio as both input and output, as well as [function calling](https://platform.openai.com/docs/guides/function-calling) through a WebSocket connection.
 
-Under the hood the SDK uses the [`websockets`](https://raw.githubusercontent.com/openai/openai-python/main/`websockets`) library to manage connections.
+Under the hood the SDK uses the [`websockets`](https://websockets.readthedocs.io/en/stable/) library to manage connections.
 
-The Realtime API works through a combination of client-sent events and server-sent events. Clients can send events to do things like update session configuration or send text and audio inputs. Server events confirm when audio responses have completed, or when a text response from the model has been received. A full event reference can be found [here](https://raw.githubusercontent.com/openai/openai-python/main/here) and a guide can be found [here](https://raw.githubusercontent.com/openai/openai-python/main/here).
+The Realtime API works through a combination of client-sent events and server-sent events. Clients can send events to do things like update session configuration or send text and audio inputs. Server events confirm when audio responses have completed, or when a text response from the model has been received. A full event reference can be found [here](https://platform.openai.com/docs/api-reference/realtime-client-events) and a guide can be found [here](https://platform.openai.com/docs/guides/realtime).
 
 Basic text based example:
 
@@ -366,11 +374,11 @@ async def main():
 asyncio.run(main())
 ```
 
-However the real magic of the Realtime API is handling audio inputs / outputs, see this example [TUI script](https://raw.githubusercontent.com/openai/openai-python/main/TUI script) for a fully fledged example.
+However the real magic of the Realtime API is handling audio inputs / outputs, see this example [TUI script](https://github.com/openai/openai-python/blob/main/examples/realtime/push_to_talk_app.py) for a fully fledged example.
 
 ### Realtime error handling
 
-Whenever an error occurs, the Realtime API will send an [`error` event](https://raw.githubusercontent.com/openai/openai-python/main/`error` event) and the connection will stay open and remain usable. This means you need to handle it yourself, as _no errors are raised directly_ by the SDK when an `error` event comes in.
+Whenever an error occurs, the Realtime API will send an [`error` event](https://platform.openai.com/docs/guides/realtime-model-capabilities#error-handling) and the connection will stay open and remain usable. This means you need to handle it yourself, as _no errors are raised directly_ by the SDK when an `error` event comes in.
 
 ```py
 client = AsyncOpenAI()
@@ -387,7 +395,7 @@ async with client.realtime.connect(model="gpt-realtime") as connection:
 
 ## Using types
 
-Nested request parameters are [TypedDicts](https://raw.githubusercontent.com/openai/openai-python/main/TypedDicts). Responses are [Pydantic models](https://raw.githubusercontent.com/openai/openai-python/main/Pydantic models) which also provide helper methods for things like:
+Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typing.html#typing.TypedDict). Responses are [Pydantic models](https://docs.pydantic.dev) which also provide helper methods for things like:
 
 - Serializing back into JSON, `model.to_json()`
 - Converting to a dictionary, `model.to_dict()`
@@ -423,6 +431,7 @@ from openai import AsyncOpenAI
 
 client = AsyncOpenAI()
 
+
 async def main() -> None:
     all_jobs = []
     # Iterate through items across all pages, issuing requests as needed.
@@ -431,6 +440,7 @@ async def main() -> None:
     ):
         all_jobs.append(job)
     print(all_jobs)
+
 
 asyncio.run(main())
 ```
@@ -486,7 +496,7 @@ response = client.chat.responses.create(
 
 ## File uploads
 
-Request parameters that correspond to file uploads can be passed as `bytes`, or a [`PathLike`](https://raw.githubusercontent.com/openai/openai-python/main/`PathLike`) instance or a tuple of `(filename, contents, media type)`.
+Request parameters that correspond to file uploads can be passed as `bytes`, or a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance or a tuple of `(filename, contents, media type)`.
 
 ```python
 from pathlib import Path
@@ -500,13 +510,13 @@ client.files.create(
 )
 ```
 
-The async client uses the exact same interface. If you pass a [`PathLike`](https://raw.githubusercontent.com/openai/openai-python/main/`PathLike`) instance, the file contents will be read asynchronously automatically.
+The async client uses the exact same interface. If you pass a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance, the file contents will be read asynchronously automatically.
 
 ## Webhook Verification
 
 Verifying webhook signatures is _optional but encouraged_.
 
-For more information about webhooks, see [the API docs](https://raw.githubusercontent.com/openai/openai-python/main/the API docs).
+For more information about webhooks, see [the API docs](https://platform.openai.com/docs/guides/webhooks).
 
 ### Parsing webhook payloads
 
@@ -520,6 +530,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 client = OpenAI()  # OPENAI_WEBHOOK_SECRET environment variable is used by default
+
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
@@ -540,6 +551,7 @@ def webhook():
         print("Invalid signature:", e)
         return "Invalid signature", 400
 
+
 if __name__ == "__main__":
     app.run(port=8000)
 ```
@@ -558,6 +570,7 @@ from flask import Flask, request
 app = Flask(__name__)
 client = OpenAI()  # OPENAI_WEBHOOK_SECRET environment variable is used by default
 
+
 @app.route("/webhook", methods=["POST"])
 def webhook():
     request_body = request.get_data(as_text=True)
@@ -573,6 +586,7 @@ def webhook():
     except Exception as e:
         print("Invalid signature:", e)
         return "Invalid signature", 400
+
 
 if __name__ == "__main__":
     app.run(port=8000)
@@ -624,7 +638,7 @@ Error codes are as follows:
 
 ## Request IDs
 
-> For more information on debugging requests, see [these docs](https://raw.githubusercontent.com/openai/openai-python/main/these docs)
+> For more information on debugging requests, see [these docs](https://platform.openai.com/docs/api-reference/debugging-requests)
 
 All object responses in the SDK provide a `_request_id` property which is added from the `x-request-id` response header so that you can quickly log failing requests and report them back to OpenAI.
 
@@ -687,7 +701,7 @@ client.with_options(max_retries=5).chat.completions.create(
 ## Timeouts
 
 By default requests time out after 10 minutes. You can configure this with a `timeout` option,
-which accepts a float or an [`httpx.Timeout`](https://raw.githubusercontent.com/openai/openai-python/main/`httpx.Timeout`) object:
+which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
 from openai import OpenAI
@@ -717,13 +731,13 @@ client.with_options(timeout=5.0).chat.completions.create(
 
 On timeout, an `APITimeoutError` is thrown.
 
-Note that requests that time out are [retried twice by default](https://raw.githubusercontent.com/openai/openai-python/main/retried twice by default).
+Note that requests that time out are [retried twice by default](#retries).
 
 ## Advanced
 
 ### Logging
 
-We use the standard library [`logging`](https://raw.githubusercontent.com/openai/openai-python/main/`logging`) module.
+We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
 
 You can enable logging by setting the environment variable `OPENAI_LOG` to `info`.
 
@@ -766,7 +780,7 @@ completion = response.parse()  # get the object that `chat.completions.create()`
 print(completion)
 ```
 
-These methods return a [`LegacyAPIResponse`](https://raw.githubusercontent.com/openai/openai-python/main/`LegacyAPIResponse`) object. This is a legacy class as we're changing it slightly in the next major version.
+These methods return a [`LegacyAPIResponse`](https://github.com/openai/openai-python/tree/main/src/openai/_legacy_response.py) object. This is a legacy class as we're changing it slightly in the next major version.
 
 For the sync client this will mostly be the same with the exception
 of `content` & `text` will be methods instead of properties. In the
@@ -781,7 +795,7 @@ The above interface eagerly reads the full response body when you make the reque
 
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
-As such, `.with_streaming_response` methods return a different [`APIResponse`](https://raw.githubusercontent.com/openai/openai-python/main/`APIResponse`) object, and the async client returns an [`AsyncAPIResponse`](https://raw.githubusercontent.com/openai/openai-python/main/`AsyncAPIResponse`) object.
+As such, `.with_streaming_response` methods return a different [`APIResponse`](https://github.com/openai/openai-python/tree/main/src/openai/_response.py) object, and the async client returns an [`AsyncAPIResponse`](https://github.com/openai/openai-python/tree/main/src/openai/_response.py) object.
 
 ```python
 with client.chat.completions.with_streaming_response.create(
@@ -833,15 +847,15 @@ options.
 
 To access undocumented response properties, you can access the extra fields like `response.unknown_prop`. You
 can also get all the extra fields on the Pydantic model as a dict with
-[`response.model_extra`](https://raw.githubusercontent.com/openai/openai-python/main/`response.model_extra`).
+[`response.model_extra`](https://docs.pydantic.dev/latest/api/base_model/#pydantic.BaseModel.model_extra).
 
 ### Configuring the HTTP client
 
-You can directly override the [httpx client](https://raw.githubusercontent.com/openai/openai-python/main/httpx client) to customize it for your use case, including:
+You can directly override the [httpx client](https://www.python-httpx.org/api/#client) to customize it for your use case, including:
 
-- Support for [proxies](https://raw.githubusercontent.com/openai/openai-python/main/proxies)
-- Custom [transports](https://raw.githubusercontent.com/openai/openai-python/main/transports)
-- Additional [advanced](https://raw.githubusercontent.com/openai/openai-python/main/advanced) functionality
+- Support for [proxies](https://www.python-httpx.org/advanced/proxies/)
+- Custom [transports](https://www.python-httpx.org/advanced/transports/)
+- Additional [advanced](https://www.python-httpx.org/advanced/clients/) functionality
 
 ```python
 import httpx
@@ -865,7 +879,7 @@ client.with_options(http_client=DefaultHttpxClient(...))
 
 ### Managing HTTP resources
 
-By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://raw.githubusercontent.com/openai/openai-python/main/garbage collected). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
+By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
 
 ```py
 from openai import OpenAI
@@ -879,7 +893,7 @@ with OpenAI() as client:
 
 ## Microsoft Azure OpenAI
 
-To use this library with [Azure OpenAI](https://raw.githubusercontent.com/openai/openai-python/main/Azure OpenAI), use the `AzureOpenAI`
+To use this library with [Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/overview), use the `AzureOpenAI`
 class instead of the `OpenAI` class.
 
 > [!IMPORTANT]
@@ -917,11 +931,11 @@ In addition to the options provided in the base `OpenAI` client, the following o
 - `azure_ad_token` (or the `AZURE_OPENAI_AD_TOKEN` environment variable)
 - `azure_ad_token_provider`
 
-An example of using the client with Microsoft Entra ID (formerly known as Azure Active Directory) can be found [here](https://raw.githubusercontent.com/openai/openai-python/main/here).
+An example of using the client with Microsoft Entra ID (formerly known as Azure Active Directory) can be found [here](https://github.com/openai/openai-python/blob/main/examples/azure_ad.py).
 
 ## Versioning
 
-This package generally follows [SemVer](https://raw.githubusercontent.com/openai/openai-python/main/SemVer) conventions, though certain backwards-incompatible changes may be released as minor versions:
+This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
 
 1. Changes that only affect static types, without breaking runtime behavior.
 2. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_
@@ -929,7 +943,7 @@ This package generally follows [SemVer](https://raw.githubusercontent.com/openai
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://raw.githubusercontent.com/openai/openai-python/main/issue) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/openai/openai-python/issues) with questions, bugs, or suggestions.
 
 ### Determining the installed version
 
@@ -948,4 +962,4 @@ Python 3.9 or higher.
 
 ## Contributing
 
-See [the contributing documentation](https://raw.githubusercontent.com/openai/openai-python/main/the contributing documentation).
+See [the contributing documentation](./CONTRIBUTING.md).
