@@ -91,9 +91,9 @@ The agent auto-loads `CLAUDE.md` / `AGENTS.md` project rules and reads `02_Wiki/
 
 ## Stats
 
-- **9,400+** raw files (markdown + git-cloned source code), maintained by 9 GHA matrix sources
+- **9,500+** raw files (markdown + git-cloned source code), maintained by 9 GHA matrix sources
 - **1,300+** LLM-enriched summaries / **85+** entities / **25+** concepts / **8** synthesis essays / **5** comparison matrices / **7** Q&A docs / **10** cheatsheets
-- **GHA cron**: matrix-parallel, every Monday 09:00 HKT, target ~10 min wall clock
+- **GHA cron**: matrix-parallel, every Monday 09:00 HKT. Most recent verified run **2026-05-05, 9/9 success, wall time 12m42s**
 - **Active since**: 2026-05
 
 ---
@@ -107,7 +107,7 @@ The agent auto-loads `CLAUDE.md` / `AGENTS.md` project rules and reads `02_Wiki/
 | Raw content (`01_Raw/`) | ✓ Manually seeded + GHA-bot maintained |
 | Wiki enrichment (`02_Wiki/`) | ✓ Stable; growth is user-triggered, not automatic |
 | Cheatsheets / comparisons (`03_Output/`) | ✓ Hand-maintained |
-| GHA `refresh-raw` workflow | ⏳ Implemented; v0.1.0 just fixed a workflow.yml ↔ sources.yaml mismatch — first verified end-to-end run is the next milestone |
+| GHA `refresh-raw` workflow | ✓ First verified end-to-end run **2026-05-05** (9/9 jobs success, wall time 12m42s, auto-generated `03_Output/Changelog/2026-05-05.md`). Cron runs every Monday 09:00 HKT |
 | OpenAI Platform docs auto-refresh | ✗ Cloudflare 403; manually fetched key pages only (`01_Raw/docs.openai.com/`, 30 guides) |
 | Auto-enrichment from raw diffs | ✗ Intentionally **not** automated — anti-hallucination. User triggers in their own agent session |
 | New-source onboarding | Manual (edit `scripts/sources.yaml`, validate with `--dry-run`, push) |

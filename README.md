@@ -91,9 +91,9 @@ agent 自动加载 `CLAUDE.md` / `AGENTS.md` 项目规则，读 `02_Wiki/Compari
 
 ## Stats
 
-- **9,400+** raw 文件（markdown + git-clone 来的源代码），9 个 GHA matrix source 维护
+- **9,500+** raw 文件（markdown + git-clone 来的源代码），9 个 GHA matrix source 维护
 - **1,300+** LLM-enriched summaries / **85+** entity / **25+** concept / **8** synthesis / **5** comparison / **7** Q&A / **10** cheatsheet
-- **GHA cron**：matrix 并行，每周一 09:00 HKT，目标 ~10 分钟 wall clock
+- **GHA cron**：matrix 并行，每周一 09:00 HKT。最近一次 verified run **2026-05-05，9/9 success，wall time 12m42s**
 - **Active since**：2026-05
 
 ---
@@ -107,7 +107,7 @@ agent 自动加载 `CLAUDE.md` / `AGENTS.md` 项目规则，读 `02_Wiki/Compari
 | Raw 内容（`01_Raw/`） | ✓ 手动 seed + GHA bot 维护 |
 | Wiki enrichment（`02_Wiki/`） | ✓ 稳定；增长靠 user-triggered，不自动 |
 | Cheatsheets / comparisons（`03_Output/`） | ✓ 手维护 |
-| GHA `refresh-raw` workflow | ⏳ 已实现，v0.1.0 刚修了一处 workflow.yml ↔ sources.yaml 的不一致；首次端到端跑通是下一个 milestone |
+| GHA `refresh-raw` workflow | ✓ 首次端到端 verified run **2026-05-05**（9/9 jobs success，wall time 12m42s，自动写了 `03_Output/Changelog/2026-05-05.md`）。Cron 每周一 09:00 HKT 自动跑 |
 | OpenAI Platform docs 自动刷新 | ✗ Cloudflare 403 防爬；只能手动抓关键页面（`01_Raw/docs.openai.com/`，30 个 guides） |
 | 从 raw diff 自动 enrich | ✗ **故意**不自动 —— 防 LLM 幻觉。用户在自己的 agent session 里触发 |
 | 新 source 接入 | 手动（编辑 `scripts/sources.yaml`，`--dry-run` 验证，push） |
