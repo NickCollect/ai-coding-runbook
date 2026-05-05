@@ -1,0 +1,46 @@
+---
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=pt-BR
+fetched_at: 2026-05-05T13:24:00.838011+00:00
+title: "Pr\u00e9via din\u00e2mica do Gemini 2.5 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+---
+
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+
+Envie comentários
+
+# Prévia dinâmica do Gemini 2.5 Flash
+
+A API Live permite interações de voz e vídeo em tempo real e com baixa latência com o Gemini 2.5 Flash. Ela processa fluxos contínuos de áudio, vídeo ou texto para oferecer respostas faladas imediatas e semelhantes às humanas, criando uma experiência de conversa natural para os usuários.
+
+[Testar no Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-native-audio-preview-12-2025&hl=pt-br)
+
+## Documentação
+
+Acesse o guia da [API Live](https://ai.google.dev/gemini-api/docs/live?hl=pt-br) para conferir a cobertura completa
+de recursos e funcionalidades.
+
+## gemini-2.5-flash-native-audio-preview-12-2025
+
+| Propriedade | Descrição |
+| --- | --- |
+| id\_cardCódigo do modelo | `gemini-2.5-flash-native-audio-preview-12-2025` |
+| saveTipos de dados compatíveis | **Entradas**  Áudio, vídeo, texto  **Saída**  Áudio e texto |
+| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de token de entrada**  131.072  **Limite de token de saída**  8.192 |
+| handymanRecursos | **Geração de áudio**  Compatível  **API em lote**  Indisponível  **Armazenamento em cache**  Indisponível  **Execução de código**  Indisponível  **Pesquisa de arquivos**  Incompatível  **Chamadas de função**  Compatível  **Embasamento com o Google Maps**  Indisponível  **Geração de imagens**  Indisponível  **API Live**  Compatível  **Embasamento da pesquisa**  Compatível  **Respostas estruturadas**  Indisponível  **Raciocínio**  Compatível  **Contexto de URL**  Indisponível |
+| 123Versões | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Visualização: `gemini-2.5-flash-native-audio-preview-12-2025` |
+| calendar\_monthAtualização mais recente | Setembro de 2025 |
+| cognition\_2Limite de conhecimento | Janeiro de 2025 |
+
+Envie comentários
+
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+
+Última atualização 2026-04-29 UTC.
+
+Quer enviar seu feedback?
+
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]

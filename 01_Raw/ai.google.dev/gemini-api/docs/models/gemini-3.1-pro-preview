@@ -1,0 +1,51 @@
+---
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ja
+fetched_at: 2026-05-05T13:14:53.500788+00:00
+title: "Gemini 3.1 Pro \u30d7\u30ec\u30d3\u30e5\u30fc\u7248 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+---
+
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+
+フィードバックを送信
+
+# Gemini 3.1 Pro プレビュー版
+
+Gemini 3 Pro シリーズのパフォーマンスと信頼性を向上させるために構築された Gemini 3.1 Pro プレビュー版は、より優れた思考、トークン効率の向上、より根拠のある事実と一貫性のあるエクスペリエンスを提供します。ソフトウェア エンジニアリングの動作とユーザビリティ、および現実世界のドメインで正確なツールの使用と信頼性の高い複数ステップの実行を必要とするエージェント ワークフロー向けに最適化されています。
+
+[Google AI Studio で試す](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=ja)
+
+## ドキュメント
+
+機能と機能の詳細については、[Gemini 3 デベロッパー ガイド](https://ai.google.dev/gemini-api/docs/gemini-3?hl=ja)のページをご覧ください。
+
+## gemini-3.1-pro-preview
+
+| プロパティ | 説明 |
+| --- | --- |
+| id\_cardモデルコード | `gemini-3.1-pro-preview` |
+| save でサポートされるデータ型 | **入力**  テキスト、画像、動画、音声、PDF  **出力**  テキスト |
+| token\_autoトークン上限[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ja) | **入力トークンの上限**  1,048,576  **出力トークンの上限**  65,536 |
+| handyman機能 | **音声生成**  サポート対象外  **Batch API**  サポート対象  **キャッシュ保存**  サポート対象  **コードの実行**  サポート対象  **ファイル検索**  サポート対象（AI Studio のみ）  **Flex 推論**  サポート対象  **関数呼び出し**  サポート対象  **Google マップによるグラウンディング**  サポート対象  **画像生成**  サポート対象外  **Live API**  サポート対象外  **候補の推論**  サポート対象  **検索によるグラウンディング**  サポート対象  **構造化出力**  サポート対象  **思考モード**  サポート対象  **URL コンテキスト**  サポート対象 |
+| 123 バージョン | 詳細については、[モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja#model-versions)をご覧ください。  - プレビュー: `gemini-3.1-pro-preview` - プレビュー: `gemini-3.1-pro-preview-customtools` \* |
+| calendar\_month最終更新日 | 2026 年 2 月 |
+| cognition\_2ナレッジ カットオフ | 2025 年 1 月 |
+
+#### gemini-3.1-pro-preview-customtools
+
+\* *bash とカスタムツールの両方を使用して構築している場合は、Gemini 3.1 Pro プレビュー版に、`gemini-3.1-pro-preview-customtools` という API を介して利用できる個別のエンドポイントが付属しています。このエンドポイントは、カスタムツール（`view_file` や `search_code` など）の優先順位付けに適しています。*
+
+*`gemini-3.1-pro-preview-customtools` はカスタムツールと Bash を使用するエージェント ワークフロー用に最適化されていますが、このようなツールを使用しないユースケースでは品質の変動が見られることがあります。*
+
+フィードバックを送信
+
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+
+最終更新日 2026-04-29 UTC。
+
+ご意見をお聞かせください
+
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]

@@ -1,0 +1,43 @@
+---
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-2.0-generate-001?hl=zh-CN
+fetched_at: 2026-05-05T13:13:49.501764+00:00
+title: "Veo 2.0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+---
+
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
+
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+
+发送反馈
+
+# Veo 2.0
+
+我们稳健可靠的稳定视频生成模型，可为可用于生产用途的工作流提供一致的性能。Veo 2.0 最适合用于标准 1080p 内容创作、社交媒体素材资源和需要可靠的角色一致性以及可预测的亚秒级生成速度的大批量视频任务。
+
+[在 Google AI Studio 中试用](https://aistudio.google.com?model=veo-2.0-generate-001&hl=zh-cn)
+
+## 文档
+
+如需全面了解
+功能，请访问[视频生成](https://ai.google.dev/gemini-api/docs/video?hl=zh-cn)页面。
+
+## veo-2.0-generate-001
+
+| 属性 | 说明 |
+| --- | --- |
+| id\_card模型代码 | **Gemini API**  `veo-2.0-generate-001` |
+| save支持的数据类型 | **输入**  文本、图片  **输出**  视频 |
+| token\_auto限制 | **文本输入**  不适用  **图片输入**  任何图片分辨率和宽高比，文件大小不超过 20MB  **输出视频**  最多 2 个 |
+| calendar\_month最后更新时间 | 2025 年 4 月 |
+
+发送反馈
+
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+
+最后更新时间 (UTC)：2026-04-29。
+
+需要向我们提供更多信息？
+
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]

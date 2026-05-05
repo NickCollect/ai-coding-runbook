@@ -1,0 +1,44 @@
+---
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=he
+fetched_at: 2026-05-05T13:27:01.348028+00:00
+title: "\u05d4\u05de\u05e8\u05ea \u05d8\u05e7\u05e1\u05d8 \u05dc\u05d3\u05d9\u05d1\u05d5\u05e8 \u05d1-Gemini 2.5 Pro \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+---
+
+‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+
+שליחת משוב
+
+# המרת טקסט לדיבור ב-Gemini 2.5 Pro
+
+מנוע פרימיום לסינתזת דיבור באיכות סטודיו, שמציע נאמנות גבוהה למקור ויצירת אודיו מתוחכמת. ‫Gemini 2.5 Pro TTS הוא המודל הכי טוב ליצירת תוכן ארוך, קריינות מקצועית ותהליכי עבודה יצירתיים מורכבים שדורשים את הרמה הכי גבוהה של בהירות קולית ופרוזודיה טבעית.
+
+[לניסיון ב-Google AI Studio](https://aistudio.google.com?model=gemini-2.5-pro-preview-tts&hl=he)
+
+## מאמרי עזרה
+
+במדריך [המרת טקסט לדיבור](https://ai.google.dev/gemini-api/docs/speech-generation?hl=he) יש מידע מפורט על התכונות והיכולות.
+
+## gemini-2.5-pro-preview-tts
+
+| נכס | תיאור |
+| --- | --- |
+| id\_cardקוד מודל | `gemini-2.5-pro-preview-tts` |
+| saveסוגי נתונים נתמכים | **קלטים**  טקסט  **פלט**  אודיו |
+| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  8,192  **מגבלת אסימונים בפלט**  16,384 |
+| handymanיכולות | **יצירת אודיו**  נתמך  ‫**Batch API**  נתמך  **שמירת נתונים במטמון**  לא נתמך  **ביצוע קוד**  לא נתמך  **חיפוש קבצים**  לא נתמך  **בקשה להפעלת פונקציה**  לא נתמך  **עיגון בעזרת מפות Google**  לא נתמך  **יצירת תמונות**  לא נתמך  ‫**Live API**  לא נתמך  **חיפוש עם עיגון בנתונים**  לא נתמך  **פלטים מובְנים**  לא נתמך  **תהליך החשיבה**  לא נתמך  **הקשר של כתובת ה-URL**  לא נתמך |
+| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - `gemini-2.5-pro-preview-tts` |
+| calendar\_monthהעדכון האחרון | דצמבר 2025 |
+
+שליחת משוב
+
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+
+עדכון אחרון: 2026-04-29 (שעון UTC).
+
+רוצה לתת לנו משוב?
+
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]

@@ -1,0 +1,42 @@
+---
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=pt-BR
+fetched_at: 2026-05-05T13:16:34.974488+00:00
+title: "Modelo Gemini 2.5 Computer Use \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+---
+
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+
+Envie comentários
+
+# Modelo Gemini 2.5 Computer Use
+
+Um modelo de capacidade de agente projetado para interação direta da interface, permitindo que o Gemini perceba e navegue em ambientes digitais. O uso do computador Gemini 2.5 é mais adequado para automação de navegador, tarefas de software de várias etapas e testes de interface que exigem raciocínio visual e controle preciso do cursor.
+
+## Documentação
+
+Acesse a página [Uso do computador](https://ai.google.dev/gemini-api/docs/computer-use?hl=pt-br) para conferir a cobertura completa
+de recursos e capacidades.
+
+## gemini-2.5-computer-use-preview-10-2025
+
+| Propriedade | Descrição |
+| --- | --- |
+| id\_cardCódigo do modelo | **API Gemini**  `gemini-2.5-computer-use-preview-10-2025` |
+| saveTipos de dados com suporte | **Entrada**  Imagem, texto  **Saída**  Texto |
+| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de token de entrada**  128.000  **Limite de token de saída**  64.000 |
+| 123Versões | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Visualização: `gemini-2.5-computer-use-preview-10-2025` |
+| calendar\_monthAtualização mais recente | Outubro de 2025 |
+
+Envie comentários
+
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+
+Última atualização 2026-04-29 UTC.
+
+Quer enviar seu feedback?
+
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]

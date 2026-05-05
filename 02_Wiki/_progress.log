@@ -1,0 +1,42 @@
+[2026-05-04 22:50] BOOTSTRAP - project scaffolded; sources.yaml + crawler + GHA workflow + CLAUDE.md / README.md / system_instructions.md / canonical-names written. Raw still empty.
+[2026-05-05 02:55] P1_INGEST_COMPLETE - 349 summaries (4 parallel agents, ~30 min) + 32 entities/concepts enriched (5 parallel agents, ~7 min) + 5 cheatsheets. Coverage: code.claude.com (126 docs), anthropics/claude-code repo (sample plugins + workflows), anthropics/skills repo (5 example skills + spec). Audit PASS (0 issues).
+[2026-05-05 11:30] P0_EXIT_REVIEW_PASS - structure intact (3 layers OK, 27 entities, 5 concepts, 6 cheatsheets, audit PASS). Discovered check_pending.py false positive: stem-based matching mis-flags <stem>--<source>.md naming (11 of 12 code.claude.com "pending" are already summarized under suffix names). Truly missing: code.claude.com/docs/en/mcp.md → wrote summary mcp--claude-code.md and updated MCP-server entity (+15 facts). audit re-run PASS. P1 now complete.
+[2026-05-05 13:45] P2_INGEST_COMPLETE - 344 new summaries (5 parallel subagents A-E: A=35 build-with-claude, B=52 agents-and-tools+managed, C=54 messages+admin+models, D=99 beta API, E=104 SDK+cookbook+quickstarts+courses; B/E rate-limited mid-final-report but files all written) + 43 new API entities (Messages-API, Streaming-API, Batches-API, Vision, PDF-support, Citations-API, 10 server tools incl. Code-execution-tool/Web-search-tool/Web-fetch-tool/Bash-tool-API/Text-editor-tool/Computer-use-tool-API/Memory-tool/Tool-search-tool-API/Tool-runner/Advisor-tool, 9 conceptual: Effort/Adaptive-thinking/Compaction/Context-editing/Token-counting/Structured-outputs/Search-results/Files-API/Embeddings, 7 managed-agent: Managed-agent/Session-API/Environment-API/Memory-store/Vault/Skill-API/User-profile, 7 admin: Admin-API/Workspace/API-key/Cost-report/Usage-report/Rate-limit-API/Invite, 3 SDK: Anthropic-SDK-Python/TypeScript/Java, Completions-API) + 4 existing entities enriched (Tool-use, Extended-thinking, Prompt-caching, Agent-SDK with API-side facts). 20 dead wikilinks fixed. Audit PASS (0 issues). Total: 693 summaries, 70 entities + 5 concepts, 6 cheatsheets.
+[2026-05-05 20:54] RESTRUCTURE - sources.yaml 重构（删 support.claude.com，加 exclude_patterns，新增 OpenAI/Gemini/blog 来源）+ refresh_raw.py 支持 exclude_patterns + GHA workflow 更新 + 3 个 Synthesis 决策表 (model-selection-guide / context-window-pricing / agentic-workflow-patterns)
+[2026-05-05 21:15] RESTRUCTURE_CONT - sources.yaml: platform.openai.com 注释掉（403 封锁爬虫），改用 github.openai 覆盖 OpenAI 知识。Synthesis 两个文件补充 OpenAI/Gemini 定价数据（web:openai.com/api/pricing + web:aicostcheck.com，2026-05-05，待 raw 验证）：GPT-5.5/5.4/5.4-mini 定价 + context window，Gemini 2.5 Pro/Flash 定价 + context window，跨厂商对比表已完善。爬虫进行中：ai.google.dev (~39 files)，github.openai openai-cookbook (~20 files)。
+[2026-05-05 21:34] CRAWL_COMPLETE - ai.google.dev: 2197 URLs fetched, 101 unique .md files written (多语言版本互覆盖，数字数据无影响)。发现 Gemini 已到 3.1 版本 (Preview)，raw pricing.md 已验证定价数据。Synthesis context-window-pricing.md 全面更新：Gemini 2.5 Pro/Flash/Flash-Lite + Gemini 3.1 Pro/3 Flash Preview 定价全部 raw 确认。openai-cookbook clone 异常（index-pack 卡死 35 min，384MB pack），已 kill + 注释掉，openai-python + openai-node 已 clone 成功（615 + 1465 files）。
+[2026-05-05 21:38] CLEANUP - 删除低价值 raw：01_Raw/support.claude.com (349 files) + 01_Raw/platform.claude.com/docs/en/api/{go,java,python,typescript,csharp,ruby,php,cli,terraform} (9×115=1035 files)，共 1384 files。01_Raw/ 现存来源：anthropic.com / code.claude.com / platform.claude.com / ai.google.dev / github (anthropics + modelcontextprotocol + openai)。
+[2026-05-05 22:13] INGEST - 30 summaries created for 01_Raw/docs.openai.com/ (all files, Phase A complete). 1 file (gpt-5-4.md) was a 404 page — summary stub created noting this.
+[2026-05-05 22:30] INGEST - 12 summaries created for code.claude.com
+[2026-05-05 22:39] INGEST - 63 summaries created for github/openai + github/anthropics + github/modelcontextprotocol
+[2026-05-05 22:30] INGEST - 101 summaries created for ai.google.dev (Gemini docs)
+[2026-05-05 23:00] SYNTHESIS - 2 synthesis files created: mcp-integration-guide.md, prompt-caching-strategy.md
+
+[2026-05-05 22:55] SYNTHESIS - Created 2 synthesis files: multimodal-guide.md, structured-output-guide.md. Sources: Claude vision/files/pdf raw docs, OpenAI vision/structured-outputs raw docs, Gemini image/audio/video/files/document/structured-output summaries.
+[2026-05-05 23:02] COMPARISON - 新建 2 个对比文件: tool-use-comparison.md, context-caching-comparison.md
+[2026-05-05 22:56] COMPARISON - 2 comparison files created: streaming-comparison.md, agentic-sdk-comparison.md (sources: Claude API messages.md, OpenAI streaming-responses.md, Gemini text-generation.md, Claude Agent SDK overview/subagents/sessions, OpenAI agents quickstart/orchestration/running-agents)
+[2026-05-05 23:25] CHEATSHEETS - 4 cheatsheet files created in 03_Output/Cheatsheets/
+[2026-05-05 23:25] ENTITIES - 15 OpenAI/Gemini entity files created
+[2026-05-05 23:30] QA - 6 QA files created, 50 questions answered (37 answered, 13 marked 待确认)
+[2026-05-05 23:24] CONCEPTS - 20 concept files created: prompt-engineering, temperature-and-sampling, tokenization, rag, fine-tuning, safety-and-guardrails, context-engineering, few-shot-learning, chain-of-thought, embeddings-concept, multimodal-concept, streaming-concept, rate-limiting, system-prompt, grounding, extended-thinking-concept, batch-processing-concept, cost-optimization, function-calling-concept, prompt-injection
+[2026-05-06 00:39] INGEST - 12 summaries created for anthropic.com/research files (81k-economics, a-general-language-assistant-as-a-laboratory-for-alignment, a-mathematical-framework-for-transformer-circuits, anthropic-economic-index-january-2026-report, anthropic-economic-index-september-2025-report, circuits-updates-april/june/july/august/may-2023/sept-2024, collective-constitutional-ai-aligning-a-language-model-with-public-input)
+[2026-05-06 00:42] INGEST - 12 summaries created for anthropic.com/research files (confidential-inference-trusted-vms, crosscoder-model-diffing, deprecation-updates-opus-3, distributed-representations-composition-superposition, economic-index-geography, economic-index-march-2026-report, economic-index-primitives, economic-index-survey-announcement, economic-policy-responses, engineering-challenges-interpretability, estimating-productivity-gains, evaluating-and-mitigating-discrimination-in-language-model-decisions)
+[2026-05-06 00:55] INGEST - 12 summaries created for anthropic.com/research files (evaluating-feature-steering, features-as-classifiers, how-ai-is-transforming-work-at-anthropic, how-australia-uses-claude, impact-software-development, india-brief-economic-index, interpretability-dreams, introducing-anthropic-science, labor-market-impacts, next-generation-constitutional-classifiers, open-source-circuit-tracing, privileged-bases-in-the-transformer-residual-stream)
+[2026-05-06 00:50] INGEST - 48 summaries / anthropic.com/research / Phase A-E complete
+  - Topics: mechanistic interpretability (circuits, superposition, feature steering), economic index reports, constitutional AI, alignment research, team pages
+  - 12 source paths fixed (01_Raw/ prefix missing from Batch 1 subagent output)
+  - Audit: PASS (0 issues)
+  - Note: 102 anthropic.com/news/ files remain pending (deferred)
+
+[2026-05-06 00:52] INGEST - 17 summaries / 01_Raw/github/openai/codex/ (README, AGENTS, SECURITY, codex-rs/README, docs/*.md × 13 files)
+
+[2026-05-06 00:55] INGEST - 82 summaries created for 01_Raw/docs.cursor.com/ docs (Cursor IDE official documentation)
+[2026-05-06 01:15] INGEST - Cursor + Codex CLI 新来源加入
+  - 新增 01_Raw/docs.cursor.com/ (82 pages, via cursor.com/llms.txt markdown endpoints)
+  - 新增 01_Raw/github/openai/codex/ (159 files, git clone --depth=1)
+  - 新增 02_Wiki/Summaries/ 82 cursor-docs + 19 codex-openai summaries
+  - 新增 02_Wiki/Synthesis/ai-coding-tools-guide.md
+  - 新增 02_Wiki/Comparison/ai-coding-tools-comparison.md
+  - 新增 02_Wiki/QA/cursor-codex-workflows.md
+  - sources.yaml 更新：新增 docs.cursor.com + openai/codex
+  - Audit: PASS (0 issues)

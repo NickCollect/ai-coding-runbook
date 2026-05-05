@@ -1,0 +1,45 @@
+---
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=ar
+fetched_at: 2026-05-05T13:12:13.984727+00:00
+title: "\u062a\u062d\u0648\u064a\u0644 \u0627\u0644\u0646\u0635 \u0625\u0644\u0649 \u0643\u0644\u0627\u0645 \u0641\u064a Gemini 2.5 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+---
+
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+
+إرسال ملاحظات
+
+# تحويل النص إلى كلام في Gemini 2.5 Flash
+
+محرّكنا الأسرع لإنشاء كلام عالي الدقة، ويوفّر إنشاء صوت منخفض وقت الاستجابة وفعّال من حيث التكلفة. ‫Gemini 2.5 Flash TTS هو الخيار الأفضل للمساعدين في الوقت الفعلي، والسرد بكميات كبيرة، وحالات الاستخدام المحادثة التي تتطلّب تحكّمًا دقيقًا في نمط الصوت وسرعته.
+
+[تجربة في Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-preview-tts&hl=ar)
+
+## الوثائق
+
+يُرجى الانتقال إلى دليل [تحويل النص إلى كلام](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ar) للاطّلاع على تغطية كاملة
+للميزات والإمكانات.
+
+## gemini-2.5-flash-preview-tts
+
+| الموقع | الوصف |
+| --- | --- |
+| id\_cardرمز النموذج | `gemini-2.5-flash-preview-tts` |
+| saveأنواع البيانات المتوفرة | **المدخلات**  نص  **الناتج**  الصوت |
+| token\_autoحدود الرموز[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحد الأقصى لرموز الإدخال**  8,192  **الحد الأقصى لرموز الإخراج**  16,384 |
+| handymanالإمكانات | **إنشاء الصوت**  متاح  **واجهة برمجة التطبيقات المجمّعة**  متاح  **التخزين المؤقت**  غير متاح  **تنفيذ الرموز البرمجية**  غير متاح  **البحث عن الملفات**  غير متاح  **استدعاء الدوال**  غير متاح  **استخدام "خرائط Google" كمصدر**  غير متاح  **إنشاء الصور**  غير متاح  **واجهة برمجة التطبيقات المباشرة**  غير متاح  **لتحديد المصادر في "بحث Google"**  غير متاح  **مُخرجات منظَّمة**  غير متاح  **التفكير**  غير متاح  **سياق عنوان URL**  غير متاح |
+| 123الإصدارات | يُرجى قراءة [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions) لمزيد من التفاصيل.  - `gemini-2.5-flash-preview-tts` |
+| calendar\_monthآخر تعديل | ديسمبر 2025 |
+
+إرسال ملاحظات
+
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
+
+هل تريد مشاركة ملاحظاتك معنا؟
+
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

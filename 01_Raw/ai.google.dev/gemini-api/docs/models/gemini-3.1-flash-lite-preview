@@ -1,0 +1,188 @@
+---
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=tr
+fetched_at: 2026-05-05T13:11:16.717712+00:00
+title: "Gemini 3.1 Flash-Lite \u00d6nizlemesi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+---
+
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+
+Geri bildirim gönderin
+
+# Gemini 3.1 Flash-Lite Önizlemesi
+
+En uygun maliyetli çok formatlı modelimiz. Yüksek sıklıkta gerçekleştirilen, basit görevlerde en hızlı performansı sunar. Gemini 3.1 Flash-Lite, yüksek hacimli yapay zeka görevleri, basit veri ayıklama ve bütçe ile hızın temel kısıtlamalar olduğu son derece düşük gecikmeli uygulamalar için en iyisidir.
+
+[Google AI Studio'da deneme](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-preview&hl=tr)
+
+## gemini-3.1-flash-lite-preview
+
+| Mülk | Açıklama |
+| --- | --- |
+| id\_cardModel kodu | `gemini-3.1-flash-lite-preview` |
+| saveDesteklenen veri türleri | **Girişler**  Metin, resim, video, ses ve PDF  **Çıkış**  Metin |
+| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  1.048.576  **Çıkış jetonu sınırı**  65.536 |
+| handymanÖzellikler | **Ses üretimi**  Desteklenmiyor  **Batch API**  Destekleniyor  **Önbelleğe alma**  Destekleniyor  **Kod yürütme**  Destekleniyor  **Bilgisayar kullanımı**  Desteklenmiyor  **Dosya arama**  Destekleniyor  **Esnek çıkarım**  Destekleniyor  **İşlev çağırma**  Destekleniyor  **Google Haritalar ile Temellendirme**  Destekleniyor  **Görüntü üretme**  Desteklenmiyor  **Live API**  Desteklenmiyor  **Öncelik çıkarımı**  Destekleniyor  **Arama temellendirme**  Destekleniyor  **Yapılandırılmış çıkışlar**  Destekleniyor  **Düşünme** (Thinking)  Destekleniyor  **URL bağlamı**  Destekleniyor |
+| 123Sürümleri | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - `Preview: gemini-3.1-flash-lite-preview` |
+| calendar\_monthSon güncelleme | Mart 2026 |
+| cognition\_2Son güncel bilgi tarihi | Ocak 2025 |
+
+## Geliştirici kılavuzu
+
+Gemini 3.1 Flash-Lite, büyük ölçekli basit görevleri en iyi şekilde yerine getirir. Gemini 3.1 Flash-Lite'ın en uygun olduğu bazı kullanım alanları:
+
+- **Çeviri**: Sohbet mesajları, yorumlar ve destek taleplerinin büyük ölçekte işlenmesi gibi hızlı, ucuz ve yüksek hacimli çeviri. Çıkışı yalnızca çevrilmiş metinle sınırlamak için sistem talimatlarını kullanabilirsiniz. Bu talimatlar, ek yorum içermez:
+
+  ```
+  text = "Hey, are you down to grab some pizza later? I'm starving!"
+
+  response = client.models.generate_content(
+      model="gemini-3.1-flash-lite-preview",
+      config={
+          "system_instruction": "Only output the translated text"
+      },
+      contents=f"Translate the following text to German: {text}"
+  )
+
+  print(response.text)
+  ```
+- **Transkripsiyon**: Ayrı bir sesle yazma ardışık düzeni oluşturmadan, metin transkriptine ihtiyaç duyduğunuz kayıtları, sesli notları veya ses içeriklerini işleyin. Çok formatlı girişleri desteklediği için transkripsiyon için ses dosyalarını doğrudan iletebilirsiniz:
+
+  ```
+  # URL = "https://storage.googleapis.com/generativeai-downloads/data/State_of_the_Union_Address_30_January_1961.mp3"
+
+  # Upload the audio file to the GenAI File API
+  uploaded_file = client.files.upload(file='sample.mp3')
+
+  prompt = 'Generate a transcript of the audio.'
+
+  response = client.models.generate_content(
+    model="gemini-3.1-flash-lite-preview",
+    contents=[prompt, uploaded_file]
+  )
+
+  print(response.text)
+  ```
+- **Basit aracı görevleri ve veri ayıklama**: Yapılandırılmış JSON çıkışıyla desteklenen, varlık ayıklama, sınıflandırma ve basit veri işleme ardışık düzenleri. Örneğin, bir e-ticaret müşteri yorumundan yapılandırılmış verileri ayıklama:
+
+  ```
+  from pydantic import BaseModel, Field
+
+  prompt = "Analyze the user review and determine the aspect, sentiment score, summary quote, and return risk"
+  input_text = "The boots look amazing and the leather is high quality, but they run way too small. I'm sending them back."
+
+  class ReviewAnalysis(BaseModel):
+      aspect: str = Field(description="The feature mentioned (e.g., Price, Comfort, Style, Shipping)")
+      summary_quote: str = Field(description="The specific phrase from the review about this aspect")
+      sentiment_score: int = Field(description="1 to 5 (1=worst, 5=best)")
+      is_return_risk: bool = Field(description="True if the user mentions returning the item")
+
+  response = client.models.generate_content(
+      model="gemini-3.1-flash-lite-preview",
+      contents=[prompt, input_text],
+      config={
+          "response_mime_type": "application/json",
+          "response_json_schema": ReviewAnalysis.model_json_schema(),
+      },
+  )
+
+  print(response.text)
+  ```
+- **Belge işleme ve özetleme**: PDF'leri ayrıştırın ve kısa özetler döndürün. Örneğin, belge işleme ardışık düzeni oluşturma veya gelen dosyaları hızlı bir şekilde önceliklendirme gibi işlemler için kullanılabilir:
+
+  ```
+  import httpx
+
+  # Download a sample PDF document
+  doc_url = "https://storage.googleapis.com/generativeai-downloads/data/med_gemini.pdf"
+  doc_data = httpx.get(doc_url).content
+
+  prompt = "Summarize this document"
+  response = client.models.generate_content(
+      model="gemini-3.1-flash-lite-preview",
+      contents=[
+          types.Part.from_bytes(
+              data=doc_data,
+              mime_type='application/pdf',
+          ),
+          prompt
+      ]
+  )
+
+  print(response.text)
+  ```
+- **Model yönlendirme**: Sorguları görev karmaşıklığına göre uygun modele yönlendiren bir sınıflandırıcı olarak düşük gecikmeli ve düşük maliyetli bir model kullanın. Bu, üretimde kullanılan gerçek bir kalıptır. Açık kaynaklı [Gemini CLI](https://geminicli.com/docs/core/#model-fallback), görev karmaşıklığını sınıflandırmak ve buna göre Flash veya Pro'ya yönlendirmek için Flash-Lite'ı kullanır.
+
+  ```
+  FLASH_MODEL = 'flash'
+  PRO_MODEL = 'pro'
+
+  CLASSIFIER_SYSTEM_PROMPT = f"""
+  You are a specialized Task Routing AI. Your sole function is to analyze the user's request and classify its complexity. Choose between `{FLASH_MODEL}` (SIMPLE) or `{PRO_MODEL}` (COMPLEX).
+  1.  `{FLASH_MODEL}`: A fast, efficient model for simple, well-defined tasks.
+  2.  `{PRO_MODEL}`: A powerful, advanced model for complex, open-ended, or multi-step tasks.
+
+  A task is COMPLEX if it meets ONE OR MORE of the following criteria:
+  1.  High Operational Complexity (Est. 4+ Steps/Tool Calls)
+  2.  Strategic Planning and Conceptual Design
+  3.  High Ambiguity or Large Scope
+  4.  Deep Debugging and Root Cause Analysis
+
+  A task is SIMPLE if it is highly specific, bounded, and has Low Operational Complexity (Est. 1-3 tool calls).
+  """
+
+  user_input = "I'm getting an error 'Cannot read property 'map' of undefined' when I click the save button. Can you fix it?"
+
+  response_schema = {
+    "type": "object",
+    "properties": {
+      "reasoning": {
+        "type": "string",
+        "description": "A brief, step-by-step explanation for the model choice, referencing the rubric."
+      },
+      "model_choice": {
+        "type": "string",
+        "enum": [FLASH_MODEL, PRO_MODEL]
+      }
+    },
+    "required": ["reasoning", "model_choice"]
+  }
+
+  response = client.models.generate_content(
+      model="gemini-3.1-flash-lite-preview",
+      contents=user_input,
+      config={
+          "system_instruction": CLASSIFIER_SYSTEM_PROMPT,
+          "response_mime_type": "application/json",
+          "response_json_schema": response_schema
+      },
+  )
+
+  print(response.text)
+  ```
+- **Düşünme**: Adım adım akıl yürütme gerektiren görevlerde daha iyi doğruluk için düşünme özelliğini, modelin nihai çıktıyı oluşturmadan önce dahili akıl yürütme için ek işlem yapacak şekilde yapılandırın:
+
+  ```
+  response = client.models.generate_content(
+      model="gemini-3.1-flash-lite-preview",
+      contents="How does AI work?",
+      config=types.GenerateContentConfig(
+          thinking_config=types.ThinkingConfig(thinking_level="high")
+      ),
+  )
+
+  print(response.text)
+  ```
+
+Geri bildirim gönderin
+
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+
+Son güncelleme tarihi: 2026-04-29 UTC.
+
+Bize geri bildirimde bulunmak mı istiyorsunuz?
+
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]

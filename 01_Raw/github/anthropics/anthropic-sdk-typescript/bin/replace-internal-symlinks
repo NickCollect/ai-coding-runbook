@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# This script replaces "internal" symlinks in the bedrock and vertex packages
+# with the actual folder contents by copying the entire directory.
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+PACKAGES=("aws-sdk" "bedrock-sdk" "vertex-sdk" "foundry-sdk")
+
+for package in "${PACKAGES[@]}"; do
+  PACKAGE_DIR="$ROOT_DIR/packages/$package"
+  INTERNAL_SYMLINK="$PACKAGE_DIR/src/internal"
+  
+  if [ -L "$INTERNAL_SYMLINK" ]; then
+    echo "Processing $package internal symlink..."
+    
+    # Remove the symlink
+    rm "$INTERNAL_SYMLINK"
+    
+    # Create the directory
+    mkdir -p "$INTERNAL_SYMLINK"
+    
+    # Copy the contents from the source internal directory
+    cp -R "$ROOT_DIR/src/internal/"* "$INTERNAL_SYMLINK/"
+    
+    echo "Replaced symlink with directory in $package"
+  else
+    echo "No 'internal' symlink found in $package or it's not a symlink"
+  fi
+done
+
+# Replace individual file symlinks within packages
+BEDROCK_AWS_AUTH="$ROOT_DIR/packages/bedrock-sdk/src/core/aws-auth.ts"
+if [ -L "$BEDROCK_AWS_AUTH" ]; then
+  echo "Processing bedrock-sdk aws-auth symlink..."
+  RESOLVED="$(realpath "$BEDROCK_AWS_AUTH")"
+  rm "$BEDROCK_AWS_AUTH"
+  cp "$RESOLVED" "$BEDROCK_AWS_AUTH"
+  echo "Replaced aws-auth.ts symlink with file copy"
+fi

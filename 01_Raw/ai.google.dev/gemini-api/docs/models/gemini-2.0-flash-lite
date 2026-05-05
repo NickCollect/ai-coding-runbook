@@ -1,0 +1,37 @@
+---
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash-lite?hl=it
+fetched_at: 2026-05-05T13:24:37.874653+00:00
+title: "Gemini 2.0 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+---
+
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+
+Invia feedback
+
+# Gemini 2.0 Flash-Lite
+
+## gemini-2.0-flash-lite
+
+| Proprietà | Descrizione |
+| --- | --- |
+| id\_cardModello codice | `gemini-2.0-flash-lite` |
+| saveTipi di dati supportati | **Input**  Audio, immagini, video e testo  **Output**  Testo |
+| token\_autoLimiti di token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=it) | **Limite di token di input**  1.048.576  **Limite di token di output**  8.192 |
+| handymanFunzionalità | **Generazione audio**  Non supportato  **API batch**  Supportato  **Memorizzazione nella cache**  Supportato  **Esecuzione del codice**  Non supportato  **Ricerca di file**  Non supportato  **Chiamata di funzione**  Supportato  **Fondatezza con Google Maps**  Non supportato  **Generazione di immagini**  Non supportato  **API live**  Non supportato  **Fondatezza della Ricerca**  Non supportato  **Output strutturati**  Supportato  **Ragionamento**  Non supportato  **Contesto URL**  Non supportato |
+| 123Versioni | Per ulteriori dettagli, leggi i [pattern delle versioni del modello](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it#model-versions).  - Obsoleto: `gemini-2.0-flash-lite` - Obsoleto: `gemini-2.0-flash-lite-001` |
+| calendar\_monthUltimo aggiornamento | Febbraio 2025 |
+| cognition\_2Data di interruzione della conoscenza | Agosto 2024 |
+
+Invia feedback
+
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+
+Ultimo aggiornamento 2026-04-29 UTC.
+
+Vuoi dirci altro?
+
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]

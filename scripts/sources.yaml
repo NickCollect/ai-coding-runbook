@@ -1,0 +1,162 @@
+# AI Coding Runbook — Source List
+# Edit this file to add/remove sources. crawler reads it.
+# After editing, the next GHA cron run (or manual `python3 scripts/refresh_raw.py`) picks it up.
+#
+# Three source kinds:
+#   - docs_site     : crawl HTML pages via sitemap.xml. Tries Mintlify-style .md endpoint first
+#                     (works on code.claude.com / platform.claude.com), falls back to HTML extraction.
+#   - github_repo   : git clone --depth 1 (shallow), refresh via git pull
+#   - rss_or_index  : enumerate posts via index page (fallback when no sitemap)
+#
+# Note: docs.claude.com (legacy) 301-redirects to either code.claude.com (for /claude-code/...)
+# or platform.claude.com (for /api, /docs/...). We crawl both new domains directly.
+
+docs_sites:
+  # Claude Code documentation
+  - name: code.claude.com
+    base_url: https://code.claude.com
+    sitemap: https://code.claude.com/sitemap.xml
+    target_dir: code.claude.com
+    include_prefixes:
+      - /docs/en
+
+  # Anthropic Platform / API documentation
+  - name: platform.claude.com
+    base_url: https://platform.claude.com
+    sitemap: https://platform.claude.com/sitemap.xml
+    target_dir: platform.claude.com
+    include_prefixes:
+      - /docs/en
+    # Exclude machine-generated SDK API reference directories (avg 1-2MB each, no narrative value)
+    exclude_patterns:
+      - /docs/en/api/go/
+      - /docs/en/api/java/
+      - /docs/en/api/python/
+      - /docs/en/api/typescript/
+      - /docs/en/api/csharp/
+      - /docs/en/api/ruby/
+      - /docs/en/api/php/
+      - /docs/en/api/cli/
+      - /docs/en/api/terraform/
+
+  # Anthropic main site: research + engineering blog (single sitemap)
+  # TODO: /news/ excluded — mostly PR/announcement articles; consider re-adding model-release
+  #       posts only (e.g. /news/claude-*) if a prefix-filter for that pattern is added.
+  - name: anthropic.com
+    base_url: https://www.anthropic.com
+    sitemap: https://www.anthropic.com/sitemap.xml
+    target_dir: anthropic.com
+    include_prefixes:
+      - /research/
+      - /engineering/
+
+  # OpenAI Platform documentation
+  # NOTE: platform.openai.com/docs returns 403 to crawlers (Cloudflare protection).
+  # Sitemap only exposes /tokenizer, not /docs/*. OpenAI knowledge covered via:
+  #   1. Manually fetched pages → 01_Raw/docs.openai.com/ (30 key guides, last updated 2026-05-05)
+  #   2. GitHub repos (openai-python, openai-node, model_spec)
+  # GHA cannot auto-refresh docs.openai.com — manual re-fetch needed when content changes.
+  # - name: platform.openai.com
+  #   base_url: https://platform.openai.com
+  #   sitemap: https://platform.openai.com/sitemap.xml
+  #   target_dir: platform.openai.com
+  #   include_prefixes:
+  #     - /docs/
+
+  # Cursor IDE documentation
+  - name: docs.cursor.com
+    base_url: https://docs.cursor.com
+    sitemap: https://docs.cursor.com/sitemap.xml
+    target_dir: docs.cursor.com
+    include_prefixes:
+      - /get-started/
+      - /chat/
+      - /tab/
+      - /agent/
+      - /context/
+      - /settings/
+      - /troubleshooting/
+      - /account/
+      - /privacy/
+
+  # Gemini API documentation
+  - name: ai.google.dev
+    base_url: https://ai.google.dev
+    sitemap: https://ai.google.dev/sitemap.xml
+    target_dir: ai.google.dev
+    include_prefixes:
+      - /gemini-api/docs/
+
+  # OpenAI official blog (model releases / product announcements)
+  - name: openai.com
+    base_url: https://openai.com
+    sitemap: https://openai.com/sitemap.xml
+    target_dir: openai.com
+    skip_md_probe: true
+    include_prefixes:
+      - /index/
+      - /blog/
+
+github_repos:
+  # ------- Anthropic core -------
+  # Repo names verified 2026-05-04 — Anthropic recently renamed several:
+  #   anthropic-cookbook → claude-cookbooks
+  #   anthropic-quickstarts → claude-quickstarts
+  #   anthropics/dxt → modelcontextprotocol/mcpb (moved to MCP org)
+  #   claude-code-sdk-python → merged into claude-agent-sdk-python
+  #   claude-code-sdk-typescript → deprecated (no replacement; Agent SDK is Python-only currently)
+  - owner: anthropics
+    repo: claude-code
+  - owner: anthropics
+    repo: claude-agent-sdk-python
+  - owner: anthropics
+    repo: anthropic-sdk-python
+  - owner: anthropics
+    repo: anthropic-sdk-typescript
+  - owner: anthropics
+    repo: claude-code-action
+  - owner: anthropics
+    repo: claude-code-base-action
+  # NOTE: claude-cookbooks (199MB) / courses (113MB) / evals (81MB) removed — mostly
+  #       Jupyter notebooks and media files with minimal text value for this wiki.
+  # - owner: anthropics
+  #   repo: claude-cookbooks
+  - owner: anthropics
+    repo: claude-quickstarts
+  # - owner: anthropics
+  #   repo: courses
+  - owner: anthropics
+    repo: prompt-eng-interactive-tutorial
+  - owner: anthropics
+    repo: skills
+  # - owner: anthropics
+  #   repo: evals
+
+  # ------- OpenAI -------
+  - owner: openai
+    repo: codex    # Codex CLI / desktop agent (open-source)
+  - owner: openai
+    repo: openai-python
+  - owner: openai
+    repo: openai-node
+  - owner: openai
+    repo: model_spec    # Model behavior specification (model-spec.openai.com source)
+  # NOTE: openai-cookbook clone hangs on index-pack for 35+ min (384MB pack, likely slow SSH tunnel).
+  # Skip for now; openai-python + openai-node + model_spec cover the API surface.
+  # - owner: openai
+  #   repo: openai-cookbook
+
+  # ------- Model Context Protocol (Anthropic-led) -------
+  # Note: 'specification' was renamed to 'modelcontextprotocol' (the org's namesake repo).
+  - owner: modelcontextprotocol
+    repo: modelcontextprotocol
+  - owner: modelcontextprotocol
+    repo: python-sdk
+  - owner: modelcontextprotocol
+    repo: typescript-sdk
+  - owner: modelcontextprotocol
+    repo: servers
+  - owner: modelcontextprotocol
+    repo: docs
+  - owner: modelcontextprotocol
+    repo: mcpb     # Desktop Extensions (formerly anthropics/dxt)

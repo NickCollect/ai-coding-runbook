@@ -1,0 +1,48 @@
+---
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.5-preview?hl=es-419
+fetched_at: 2026-05-05T13:27:20.743441+00:00
+title: "Gemini Robotics-ER 1.5 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+---
+
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
+
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+
+Enviar comentarios
+
+# Gemini Robotics-ER 1.5
+
+Consulta la página de [modelos](https://ai.google.dev/gemini-api/docs/models?hl=es-419) para obtener la versión más reciente del modelo.
+
+Gemini Robotics-ER 1.5 es un modelo de lenguaje de visión (VLM) que lleva las capacidades de agente de Gemini a la robótica. Está diseñado para el razonamiento avanzado en el mundo físico, lo que permite que los robots interpreten datos visuales complejos, realicen razonamientos espaciales y planifiquen acciones a partir de comandos en lenguaje natural.
+
+[Probar en Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-1.5-preview&hl=es-419)
+
+## Documentación
+
+Visita la página de [robótica](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=es-419) para obtener una cobertura completa
+de las funciones y capacidades.
+
+## gemini-robotics-er-1.5-preview
+
+| Propiedad | Descripción |
+| --- | --- |
+| id\_cardCódigo del modelo | `gemini-robotics-er-1.5-preview` |
+| saveTipos de datos admitidos | **Entradas**  Texto, imágenes, video y audio  **Resultado**  Texto |
+| token\_autoLímites de tokens[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419) | **Límite de tokens de entrada**  1,048,576  **Límite de tokens de salida**  65,536 |
+| handymanCapacidades | **Generación de audio**  No admitido  **API de lotes**  No admitido  **Almacenamiento en caché**  No admitido  **Ejecución de código**  Admitido  **Llamada a función**  Admitido  **Fundamentación con Google Maps**  No admitido  **Generación de imágenes**  No admitido  **API en vivo**  No admitido  **Fundamentación con la Búsqueda**  Admitido  **Salidas estructuradas**  Admitido  **Razonamiento**  Admitido  **Contexto de URL**  Admitido |
+| 123Versiones | Lee los [patrones de versiones de modelos](https://ai.google.dev/gemini-api/docs/models/gemini?hl=es-419#model-versions) para obtener más detalles.  - Vista previa: `gemini-robotics-er-1.5-preview` |
+| calendar\_monthÚltima actualización | Septiembre de 2025 |
+| cognition\_2Fecha límite de conocimiento | Enero de 2025 |
+
+Enviar comentarios
+
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+
+Última actualización: 2026-04-29 (UTC)
+
+¿Quieres brindar más información?
+
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]

@@ -1,0 +1,142 @@
+{
+  "completed_at": "2026-05-04T16:57:27.913637+00:00",
+  "stats": {
+    "docs_sites": [
+      {
+        "name": "code.claude.com",
+        "fetched": 124,
+        "written": 0,
+        "errors": 0
+      },
+      {
+        "name": "platform.claude.com",
+        "fetched": 1275,
+        "written": 1275,
+        "errors": 0
+      },
+      {
+        "name": "anthropic.com",
+        "fetched": 345,
+        "written": 345,
+        "errors": 0
+      },
+      {
+        "name": "support.claude.com",
+        "fetched": 347,
+        "written": 347,
+        "errors": 0
+      }
+    ],
+    "rss_or_index": [],
+    "github_repos": [
+      {
+        "repo": "anthropics/claude-code",
+        "fetched": 1,
+        "written": 1,
+        "errors": 0
+      },
+      {
+        "repo": "anthropics/claude-agent-sdk-python",
+        "fetched": 1,
+        "written": 1,
+        "errors": 0
+      },
+      {
+        "repo": "anthropics/anthropic-sdk-python",
+        "fetched": 1,
+        "written": 1,
+        "errors": 0
+      },
+      {
+        "repo": "anthropics/anthropic-sdk-typescript",
+        "fetched": 1,
+        "written": 1,
+        "errors": 0
+      },
+      {
+        "repo": "anthropics/claude-code-action",
+        "fetched": 1,
+        "written": 1,
+        "errors": 0
+      },
+      {
+        "repo": "anthropics/claude-code-base-action",
+        "fetched": 1,
+        "written": 1,
+        "errors": 0
+      },
+      {
+        "repo": "anthropics/claude-cookbooks",
+        "fetched": 1,
+        "written": 1,
+        "errors": 0
+      },
+      {
+        "repo": "anthropics/claude-quickstarts",
+        "fetched": 1,
+        "written": 1,
+        "errors": 0
+      },
+      {
+        "repo": "anthropics/courses",
+        "fetched": 1,
+        "written": 1,
+        "errors": 0
+      },
+      {
+        "repo": "anthropics/prompt-eng-interactive-tutorial",
+        "fetched": 1,
+        "written": 1,
+        "errors": 0
+      },
+      {
+        "repo": "anthropics/skills",
+        "fetched": 1,
+        "written": 1,
+        "errors": 0
+      },
+      {
+        "repo": "anthropics/evals",
+        "fetched": 1,
+        "written": 1,
+        "errors": 0
+      },
+      {
+        "repo": "modelcontextprotocol/modelcontextprotocol",
+        "fetched": 1,
+        "written": 1,
+        "errors": 0
+      },
+      {
+        "repo": "modelcontextprotocol/python-sdk",
+        "fetched": 1,
+        "written": 1,
+        "errors": 0
+      },
+      {
+        "repo": "modelcontextprotocol/typescript-sdk",
+        "fetched": 1,
+        "written": 1,
+        "errors": 0
+      },
+      {
+        "repo": "modelcontextprotocol/servers",
+        "fetched": 1,
+        "written": 1,
+        "errors": 0
+      },
+      {
+        "repo": "modelcontextprotocol/docs",
+        "fetched": 1,
+        "written": 1,
+        "errors": 0
+      },
+      {
+        "repo": "modelcontextprotocol/mcpb",
+        "fetched": 1,
+        "written": 1,
+        "errors": 0
+      }
+    ]
+  }
+}

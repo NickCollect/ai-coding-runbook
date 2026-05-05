@@ -1,0 +1,148 @@
+name: CI
+on:
+  push:
+    branches:
+      - '**'
+      - '!integrated/**'
+      - '!stl-preview-head/**'
+      - '!stl-preview-base/**'
+      - '!generated'
+      - '!codegen/**'
+      - 'codegen/stl/**'
+  pull_request:
+    branches-ignore:
+      - 'stl-preview-head/**'
+      - 'stl-preview-base/**'
+
+jobs:
+  lint:
+    timeout-minutes: 10
+    name: lint
+    runs-on: ${{ github.repository == 'stainless-sdks/anthropic-typescript' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
+    if: (github.event_name == 'push' || github.event.pull_request.head.repo.fork)
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Bootstrap
+        run: ./scripts/bootstrap
+
+      - name: Update internal symlinks in third party packages
+        run: ./bin/replace-internal-symlinks
+
+      - name: run build all
+        # this is needed so that sub packages can work (they depend on `dist` in the root folder)
+        run: ./scripts/build-all
+
+      - name: Check types
+        run: ./scripts/lint
+
+  build:
+    timeout-minutes: 5
+    name: build
+    runs-on: ${{ github.repository == 'stainless-sdks/anthropic-typescript' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
+    if: (github.event_name == 'push' || github.event.pull_request.head.repo.fork)
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Bootstrap
+        run: ./scripts/bootstrap
+
+      - name: Update internal symlinks in third party packages
+        run: ./bin/replace-internal-symlinks
+
+      - name: run build all
+        run: ./scripts/build-all
+
+      - name: Get GitHub OIDC Token
+        if: |-
+          github.repository == 'stainless-sdks/anthropic-typescript' &&
+          !startsWith(github.ref, 'refs/heads/stl/')
+        id: github-oidc
+        uses: actions/github-script@v8
+        with:
+          script: core.setOutput('github_token', await core.getIDToken());
+
+      - name: Upload tarball
+        if: |-
+          github.repository == 'stainless-sdks/anthropic-typescript' &&
+          !startsWith(github.ref, 'refs/heads/stl/')
+        env:
+          URL: https://pkg.stainless.com/s
+          AUTH: ${{ steps.github-oidc.outputs.github_token }}
+          SHA: ${{ github.sha }}
+        run: ./scripts/utils/upload-artifact.sh
+  test:
+    timeout-minutes: 10
+    name: test
+    runs-on: ${{ github.repository == 'stainless-sdks/anthropic-typescript' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.fork
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Bootstrap
+        run: ./scripts/bootstrap
+
+      - name: Update internal symlinks in third party packages
+        run: ./bin/replace-internal-symlinks
+
+      - name: run build all
+        # this is needed so that sub packages can work (they depend on `dist` in the root folder)
+        run: ./scripts/build-all
+
+      - name: Run tests
+        run: ./scripts/test
+
+  detect_breaking_changes_vs_main:
+    timeout-minutes: 10
+    name: detect-breaking-changes-vs-main
+    runs-on: ${{ github.repository == 'stainless-sdks/anthropic-typescript' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
+    if: |
+      (github.event_name == 'push' &&
+       !startsWith(github.ref, 'refs/heads/release-please--')) ||
+      github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Fetch history for current branch and main
+        run: |
+          git fetch origin --filter=blob:none --no-tags --depth=2147483647 ${{ github.sha }}
+          git fetch origin --filter=blob:none --no-tags main 2>/dev/null || true
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Determine base SHA
+        run: |
+          BASE_SHA=$(git merge-base HEAD origin/main 2>/dev/null || echo "")
+          echo "BASE_SHA=$BASE_SHA" >> $GITHUB_ENV
+
+      - name: Detect breaking changes vs. main
+        if: env.BASE_SHA != ''
+        run: |
+          # Try to check out previous versions of the breaking change detection script. This ensures that
+          # we still detect breaking changes when entire files and their tests are removed.
+          git checkout "$BASE_SHA" -- ./scripts/detect-breaking-changes 2>/dev/null || true
+          ./scripts/detect-breaking-changes "$BASE_SHA"

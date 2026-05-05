@@ -1,0 +1,42 @@
+---
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=ja
+fetched_at: 2026-05-05T13:11:00.712609+00:00
+title: "Veo 3.1 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+---
+
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+
+フィードバックを送信
+
+# Veo 3.1
+
+ハイエンドのクリエイティブなストーリーテリングと実験的な動画制作向けに設計された最先端のシネマティック エンジン。Veo 3.1 は、プロフェッショナル グレードの 4K 出力、ネイティブに同期された音声生成、最高レベルの時間的整合性と芸術的なコントロールを必要とする複雑なカメラワークに最適です。
+
+[Google AI Studio で試す](https://aistudio.google.com?model=veo-3.1-generate-preview&hl=ja)
+
+## ドキュメント
+
+機能と機能の詳細については、[動画生成](https://ai.google.dev/gemini-api/docs/video?hl=ja)のページをご覧ください。
+
+## veo-3.1-generate-preview
+
+| プロパティ | 説明 |
+| --- | --- |
+| id\_cardModel コード | **Gemini API**  `veo-3.1-generate-preview`  `veo-3.1-fast-generate-preview` |
+| saveサポートされるデータタイプ | **入力**  テキスト、画像  **出力**  音声付きの動画 |
+| token\_auto上限 | **テキスト入力**  1,024 トークン  **出力動画**  1 |
+| calendar\_month最終更新日 | 2026 年 1 月 |
+
+フィードバックを送信
+
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+
+最終更新日 2026-04-29 UTC。
+
+ご意見をお聞かせください
+
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]
