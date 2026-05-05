@@ -64,20 +64,43 @@ docs_sites:
   #     - /docs/
 
   # Cursor IDE documentation
+  # NOTE: 2026-05 Cursor moved docs from docs.cursor.com to cursor.com/docs.
+  # The old docs.cursor.com/sitemap.xml now returns marketing-site HTML (not XML),
+  # so the previous crawler config silently fetched zero pages. The new docs site
+  # has 24 English sections under /docs/. We list each prefix explicitly so the
+  # crawler ignores the i18n copies (/cn/docs/, /de/docs/, /es/docs/, /fr/docs/,
+  # /id/docs/, /ja/docs/, /ko/docs/, /pt-BR/docs/, /ru/docs/, /tr/docs/,
+  # /zh-Hant/docs/) and other non-docs paths (/learn/, /help/, /for/).
+  # Source-name + target_dir intentionally kept as "docs.cursor.com" so the GHA
+  # matrix and existing 01_Raw layout don't need to change.
   - name: docs.cursor.com
-    base_url: https://docs.cursor.com
-    sitemap: https://docs.cursor.com/sitemap.xml
+    base_url: https://cursor.com
+    sitemap: https://cursor.com/docs/sitemap.xml
     target_dir: docs.cursor.com
     include_prefixes:
-      - /get-started/
-      - /chat/
-      - /tab/
-      - /agent/
-      - /context/
-      - /settings/
-      - /troubleshooting/
-      - /account/
-      - /privacy/
+      - /docs/account/
+      - /docs/agent/
+      - /docs/api/
+      - /docs/bugbot/
+      - /docs/cli/
+      - /docs/cloud-agent/
+      - /docs/configuration/
+      - /docs/customizing/
+      - /docs/enterprise/
+      - /docs/extension-api/
+      - /docs/get-started/
+      - /docs/hooks/
+      - /docs/integrations/
+      - /docs/mcp/
+      - /docs/models-and-pricing/
+      - /docs/models/
+      - /docs/plugins/
+      - /docs/reference/
+      - /docs/rules/
+      - /docs/sdk/
+      - /docs/security-review/
+      - /docs/skills/
+      - /docs/subagents/
 
   # Gemini API documentation
   - name: ai.google.dev
