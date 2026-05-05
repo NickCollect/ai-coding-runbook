@@ -4,11 +4,11 @@ This reference covers features and patterns specific to commands bundled in Clau
 
 ## Table of Contents
 
-- [Plugin Command Discovery](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/plugin-dev/skills/command-development/references/Plugin Command Discovery)
-- [CLAUDE_PLUGIN_ROOT Environment Variable](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/plugin-dev/skills/command-development/references/CLAUDE_PLUGIN_ROOT Environment Variable)
-- [Plugin Command Patterns](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/plugin-dev/skills/command-development/references/Plugin Command Patterns)
-- [Integration with Plugin Components](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/plugin-dev/skills/command-development/references/Integration with Plugin Components)
-- [Validation Patterns](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/plugin-dev/skills/command-development/references/Validation Patterns)
+- [Plugin Command Discovery](#plugin-command-discovery)
+- [CLAUDE_PLUGIN_ROOT Environment Variable](#claude_plugin_root-environment-variable)
+- [Plugin Command Patterns](#plugin-command-patterns)
+- [Integration with Plugin Components](#integration-with-plugin-components)
+- [Validation Patterns](#validation-patterns)
 
 ## Plugin Command Discovery
 

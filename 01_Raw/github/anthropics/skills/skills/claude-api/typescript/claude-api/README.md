@@ -216,7 +216,7 @@ try {
 }
 ```
 
-All classes extend `Anthropic.APIError` with a typed `status` field. Check from most specific to least specific. See [shared/error-codes.md](https://raw.githubusercontent.com/anthropics/skills/main/skills/claude-api/typescript/claude-api/shared/error-codes.md) for the full error code reference.
+All classes extend `Anthropic.APIError` with a typed `status` field. Check from most specific to least specific. See [shared/error-codes.md](../../shared/error-codes.md) for the full error code reference.
 
 ---
 

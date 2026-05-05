@@ -5,10 +5,10 @@
 **Requirements**: You must be a repository admin to complete these steps.
 
 1. Install the Claude GitHub app to your repository: https://github.com/apps/claude
-2. Add authentication to your repository secrets ([Learn how to use secrets in GitHub Actions](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/Learn how to use secrets in GitHub Actions)):
+2. Add authentication to your repository secrets ([Learn how to use secrets in GitHub Actions](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions)):
    - Either `ANTHROPIC_API_KEY` for API key authentication
    - Or `CLAUDE_CODE_OAUTH_TOKEN` for OAuth token authentication (Pro and Max users can generate this by running `claude setup-token` locally)
-3. Copy the workflow file from [`examples/claude.yml`](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/`examples/claude.yml`) into your repository's `.github/workflows/`
+3. Copy the workflow file from [`examples/claude.yml`](../examples/claude.yml) into your repository's `.github/workflows/`
 
 ## Using a Custom GitHub App
 
@@ -28,7 +28,7 @@ The fastest way to create a custom GitHub App is using our pre-configured manife
 
 1. **Create the app:**
 
-   **🚀 [Download the Quick Setup Tool](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/Download the Quick Setup Tool)** (Right-click → "Save Link As" or "Download Linked File")
+   **🚀 [Download the Quick Setup Tool](./create-app.html)** (Right-click → "Save Link As" or "Download Linked File")
 
    After downloading, open `create-app.html` in your web browser:
 
@@ -39,7 +39,7 @@ The fastest way to create a custom GitHub App is using our pre-configured manife
 
    Alternatively, you can use the manifest file directly:
 
-   - Use the [`github-app-manifest.json`](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/`github-app-manifest.json`) file from this repository
+   - Use the [`github-app-manifest.json`](../github-app-manifest.json) file from this repository
    - Visit https://github.com/settings/apps/new (for personal) or your organization's app settings
    - Look for the "Create from manifest" option and paste the JSON content
 
@@ -129,7 +129,7 @@ If you prefer to configure the app manually or need custom permissions:
 - The custom app must have read/write permissions for Issues, Pull Requests, and Contents
 - Your app's token will have the exact permissions you configured, nothing more
 
-For more information on creating GitHub Apps, see the [GitHub documentation](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/GitHub documentation).
+For more information on creating GitHub Apps, see the [GitHub documentation](https://docs.github.com/en/apps/creating-github-apps).
 
 ## Security Best Practices
 

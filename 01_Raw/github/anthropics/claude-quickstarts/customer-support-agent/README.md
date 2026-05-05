@@ -1,7 +1,7 @@
 # Claude Customer Support Agent
 
 An advanced, fully customizable customer support chat interface powered by Claude and leveraging Amazon Bedrock Knowledge Bases for knowledge retrieval.
-![preview](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/customer-support-agent/tutorial/preview.png)
+![preview](tutorial/preview.png)
 
 ## Key Features
 
@@ -36,7 +36,7 @@ Note: We are adding a 'B' in front of the AWS environment variables for a reason
 
 ### Claude API Key
 
-1. Visit [console.anthropic.com](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/customer-support-agent/console.anthropic.com)
+1. Visit [console.anthropic.com](https://console.anthropic.com/dashboard)
 2. Sign up or log in to your account
 3. Click on "Get API keys"
 4. Copy the key and paste it into your `.env.local` file
@@ -51,19 +51,20 @@ Follow these steps to obtain your AWS credentials:
 3. In the left sidebar, click on "Users"
 
 4. Click "Create user" and follow the prompts to create a new user
-   ![Add User](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/customer-support-agent/tutorial/create-user.png)
+   ![Add User](tutorial/create-user.png)
 5. On the Set Permission page, select the "Attach policies directly" policy
-   ![Attach Policy](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/customer-support-agent/tutorial/attach.png)
+   ![Attach Policy](tutorial/attach.png)
 5. On the permissions page, use the "AmazonBedrockFullAccess" policy
-   ![Attach Policy](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/customer-support-agent/tutorial/bedrock.png)
+   ![Attach Policy](tutorial/bedrock.png)
 6. Review and create the user
 7. On the Summary page, click on Create access key.
 8. Then select "Application running on an AWS compute service". Add a description if desired, then click "Create".
 9. You will now see the Access Key ID and Secret Access Key displayed. Note that these keys are only visible once during creation, so be sure to save them securely.
-   ![Access Keys](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/customer-support-agent/tutorial/access-keys.png)
+   ![Access Keys](tutorial/access-keys.png)
 8. Copy these keys and paste them into your `.env.local` file
 
 Note: Make sure to keep your keys secure and never share them publicly.
+
 
 ##  Amazon Bedrock RAG Integration
 
@@ -91,10 +92,10 @@ To create your own knowledge base:
 2. In the left side menu, click on "Knowledge base" under "More".
 
 3. Click on "Create knowledge base".
-   ![Create Knowledge Base](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/customer-support-agent/tutorial/create-knowledge-base.png)
+   ![Create Knowledge Base](tutorial/create-knowledge-base.png)
 4. Give your knowledge base a name. You can leave "Create a new service role".
 5. Choose a source for your knowledge base. In this example, we'll use Amazon S3 storage service.
-   ![Choose Source](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/customer-support-agent/tutorial/choose-source.png)
+   ![Choose Source](tutorial/choose-source.png)
 
    Note: If you're using the S3 storage service, you'll need to create a bucket first where you will upload your files. Alternatively, you can also upload your files after the creation of a knowledge base.
 
@@ -105,6 +106,7 @@ To create your own knowledge base:
 10. Select "Quick create a new vector store".
 11. Confirm and create your knowledge base.
 12. Once you have done this, get your knowledge base ID from the knowledge base overview.
+
 
 ##  Switching Models
 
@@ -127,6 +129,7 @@ const [selectedModel, setSelectedModel] = useState("claude-3-haiku-20240307");
 ```
 
 3. To implement model switching in the UI, a dropdown component is used that updates the `selectedModel`.
+
 
 ##  Customization
 
@@ -200,6 +203,7 @@ To deploy this application using AWS Amplify, follow these steps:
 8. Click "Save and deploy" to start the deployment process.
 
 Your application will now be deployed using AWS Amplify.
+
 
 ### Service Role
 

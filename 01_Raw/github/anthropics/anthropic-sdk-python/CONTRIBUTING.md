@@ -1,18 +1,18 @@
 ## Contributing to documentation
 
-The documentation for this SDK lives at [platform.claude.com/docs/en/api/sdks/python](https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/platform.claude.com/docs/en/api/sdks/python). To suggest changes, open an issue.
+The documentation for this SDK lives at [platform.claude.com/docs/en/api/sdks/python](https://platform.claude.com/docs/en/api/sdks/python). To suggest changes, open an issue.
 
 ## Setting up the environment
 
 ### With `uv`
 
-We use [uv](https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/uv) to manage dependencies because it will automatically provision a Python environment with the expected Python version. To set it up, run:
+We use [uv](https://docs.astral.sh/uv/) to manage dependencies because it will automatically provision a Python environment with the expected Python version. To set it up, run:
 
 ```sh
 $ ./scripts/bootstrap
 ```
 
-Or [install uv manually](https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/install uv manually) and run:
+Or [install uv manually](https://docs.astral.sh/uv/getting-started/installation/) and run:
 
 ```sh
 $ uv sync --all-extras
@@ -89,7 +89,7 @@ $ pip install ./path-to-wheel-file.whl
 
 ## Running tests
 
-Most tests require you to [set up a mock server](https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/set up a mock server) against the OpenAPI spec to run the tests.
+Most tests require you to [set up a mock server](https://github.com/dgellow/steady) against the OpenAPI spec to run the tests.
 
 ```sh
 $ ./scripts/mock
@@ -101,13 +101,13 @@ $ ./scripts/test
 
 ### Snapshots
 
-Some tests use [inline-snapshot](https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/inline-snapshot). To update them after making changes, rerun the tests with the `--inline-snapshot=fix` and `-n0` options:
+Some tests use [inline-snapshot](https://15r10nk.github.io/inline-snapshot/latest/). To update them after making changes, rerun the tests with the `--inline-snapshot=fix` and `-n0` options:
 ```bash
 ./scripts/test --inline-snapshot=fix -n0
 ```
 
 > [!NOTE]
-> `inline-snapshot` is incompatible with [pytest-xdist](https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/pytest-xdist), so you need to disable parallel execution `(-n0)` when using the `--inline-snapshot` option.
+> `inline-snapshot` is incompatible with [pytest-xdist](https://github.com/pytest-dev/pytest-xdist), so you need to disable parallel execution `(-n0)` when using the `--inline-snapshot` option.
 
 In addition, some tests capture snapshots of the HTTP requests they make.
 To refresh these snapshots, run the tests with the `--http-record` flag:
@@ -121,8 +121,8 @@ To refresh these snapshots, run the tests with the `--http-record` flag:
 
 ## Linting and formatting
 
-This repository uses [ruff](https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/ruff) and
-[black](https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/black) to format the code in the repository.
+This repository uses [ruff](https://github.com/astral-sh/ruff) and
+[black](https://github.com/psf/black) to format the code in the repository.
 
 To lint:
 
@@ -143,7 +143,7 @@ the changes aren't made through the automated pipeline, you may want to make rel
 
 ### Publish with a GitHub workflow
 
-You can release to package managers by using [the `Publish PyPI` GitHub action](https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/the `Publish PyPI` GitHub action). This requires a setup organization or repository secret to be set up.
+You can release to package managers by using [the `Publish PyPI` GitHub action](https://www.github.com/anthropics/anthropic-sdk-python/actions/workflows/publish-pypi.yml). This requires a setup organization or repository secret to be set up.
 
 ### Publish manually
 

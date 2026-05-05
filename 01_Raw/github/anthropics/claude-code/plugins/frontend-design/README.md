@@ -23,7 +23,7 @@ Claude will choose a clear aesthetic direction and implement production code wit
 
 ## Learn More
 
-See the [Frontend Aesthetics Cookbook](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/frontend-design/Frontend Aesthetics Cookbook) for detailed guidance on prompting for high-quality frontend design.
+See the [Frontend Aesthetics Cookbook](https://github.com/anthropics/claude-cookbooks/blob/main/coding/prompting_for_frontend_aesthetics.ipynb) for detailed guidance on prompting for high-quality frontend design.
 
 ## Authors
 

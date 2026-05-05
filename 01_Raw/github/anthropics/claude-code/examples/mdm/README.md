@@ -1,8 +1,9 @@
 # MDM Deployment Examples
 
-Example templates for deploying Claude Code [managed settings](https://raw.githubusercontent.com/anthropics/claude-code/main/examples/mdm/managed settings) through Jamf, Iru (Kandji), Intune, or Group Policy. Use these as starting points — adjust them to fit your needs.
+Example templates for deploying Claude Code [managed settings](https://code.claude.com/docs/en/settings#settings-files) through Jamf, Iru (Kandji), Intune, or Group Policy. Use these as starting points — adjust them to fit your needs.
 
-All templates encode the same minimal example (`permissions.disableBypassPermissionsMode`). See the [settings reference](https://raw.githubusercontent.com/anthropics/claude-code/main/examples/mdm/settings reference) for the full list of keys, and [`../settings`](https://raw.githubusercontent.com/anthropics/claude-code/main/examples/mdm/`../settings`) for more complete example configurations.
+All templates encode the same minimal example (`permissions.disableBypassPermissionsMode`). See the [settings reference](https://code.claude.com/docs/en/settings#available-settings) for the full list of keys, and [`../settings`](../settings) for more complete example configurations.
+
 
 ## Templates
 
@@ -11,11 +12,11 @@ All templates encode the same minimal example (`permissions.disableBypassPermiss
 
 | File | Use with |
 | :--- | :--- |
-| [`managed-settings.json`](https://raw.githubusercontent.com/anthropics/claude-code/main/examples/mdm/`managed-settings.json`) | Any platform. Deploy to the [system config directory](https://raw.githubusercontent.com/anthropics/claude-code/main/examples/mdm/system config directory). |
-| [`macos/com.anthropic.claudecode.plist`](https://raw.githubusercontent.com/anthropics/claude-code/main/examples/mdm/`macos/com.anthropic.claudecode.plist`) | Jamf or Iru (Kandji) **Custom Settings** payload. Preference domain: `com.anthropic.claudecode`. |
-| [`macos/com.anthropic.claudecode.mobileconfig`](https://raw.githubusercontent.com/anthropics/claude-code/main/examples/mdm/`macos/com.anthropic.claudecode.mobileconfig`) | Full configuration profile for local testing or MDMs that take a complete profile. |
-| [`windows/Set-ClaudeCodePolicy.ps1`](https://raw.githubusercontent.com/anthropics/claude-code/main/examples/mdm/`windows/Set-ClaudeCodePolicy.ps1`) | Intune **Platform scripts**. Writes `managed-settings.json` to `C:\Program Files\ClaudeCode\`. |
-| [`windows/ClaudeCode.admx`](https://raw.githubusercontent.com/anthropics/claude-code/main/examples/mdm/`windows/ClaudeCode.admx`) + [`en-US/ClaudeCode.adml`](https://raw.githubusercontent.com/anthropics/claude-code/main/examples/mdm/`en-US/ClaudeCode.adml`) | Group Policy or Intune **Import ADMX**. Writes `HKLM\SOFTWARE\Policies\ClaudeCode\Settings` (REG_SZ, single-line JSON). |
+| [`managed-settings.json`](./managed-settings.json) | Any platform. Deploy to the [system config directory](https://code.claude.com/docs/en/settings#settings-files). |
+| [`macos/com.anthropic.claudecode.plist`](./macos/com.anthropic.claudecode.plist) | Jamf or Iru (Kandji) **Custom Settings** payload. Preference domain: `com.anthropic.claudecode`. |
+| [`macos/com.anthropic.claudecode.mobileconfig`](./macos/com.anthropic.claudecode.mobileconfig) | Full configuration profile for local testing or MDMs that take a complete profile. |
+| [`windows/Set-ClaudeCodePolicy.ps1`](./windows/Set-ClaudeCodePolicy.ps1) | Intune **Platform scripts**. Writes `managed-settings.json` to `C:\Program Files\ClaudeCode\`. |
+| [`windows/ClaudeCode.admx`](./windows/ClaudeCode.admx) + [`en-US/ClaudeCode.adml`](./windows/en-US/ClaudeCode.adml) | Group Policy or Intune **Import ADMX**. Writes `HKLM\SOFTWARE\Policies\ClaudeCode\Settings` (REG_SZ, single-line JSON). |
 
 ## Tips
 - Replace the placeholder `PayloadUUID` and `PayloadOrganization` values in the `.mobileconfig` with your own (`uuidgen`)

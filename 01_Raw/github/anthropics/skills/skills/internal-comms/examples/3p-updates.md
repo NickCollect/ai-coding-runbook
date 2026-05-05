@@ -10,6 +10,7 @@ They represent the work of the team across a time period, almost always one week
 
 Before writing them, make sure that you know the team name. If it's not specified, you can ask explicitly what the team name you're writing for is.
 
+
 ## Tools Available
 Whenever possible, try to pull from available sources to get the information you need:
 - Slack: posts from team members with their updates - ideally look for posts in large channels with lots of reactions
@@ -17,10 +18,12 @@ Whenever possible, try to pull from available sources to get the information you
 - Email: emails with lots of responses of lots of content that seems relevant
 - Calendar: non-recurring meetings that have a lot of importance, like product reviews, etc.
 
+
 Try to gather as much context as you can, focusing on the things that covered the time period you're writing for:
 - Progress: anything between a week ago and today
 - Plans: anything from today to the next week
 - Problems: anything between a week ago and today
+
 
 If you don't have access, you can ask the user for things they want to cover. They might also include these things to you directly, in which case you're mostly just formatting for this particular format.
 

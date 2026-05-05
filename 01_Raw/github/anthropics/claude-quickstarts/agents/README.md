@@ -6,7 +6,7 @@ A minimal educational implementation of LLM agents using the Claude API.
 
 ## Overview & Core Components
 
-This repo demonstrates how to [build effective agents](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/agents/build effective agents) with the Claude API. It shows how sophisticated AI behaviors can emerge from a simple foundation: LLMs using tools in a loop. This implementation is not prescriptive - the core logic is <300 lines of code and deliberately lacks production features. Feel free to translate these patterns to your language and production stack ([Claude Code](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/agents/Claude Code) can help!)
+This repo demonstrates how to [build effective agents](https://www.anthropic.com/engineering/building-effective-agents) with the Claude API. It shows how sophisticated AI behaviors can emerge from a simple foundation: LLMs using tools in a loop. This implementation is not prescriptive - the core logic is <300 lines of code and deliberately lacks production features. Feel free to translate these patterns to your language and production stack ([Claude Code](https://docs.claude.com/en/docs/agents-and-tools/claude-code/overview) can help!)
 
 It contains three components:
 

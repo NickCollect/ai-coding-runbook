@@ -84,6 +84,7 @@ Code examples in this guide are Python. **The same fields exist in every officia
 
 > **Verify type and method names against the SDK source before writing them into customer code.** WebFetch the relevant repository from the SDK source-code table in `shared/live-sources.md` (one row per SDK) and confirm the exact symbol — particularly for typed SDKs (Go, Java, C#) where union/builder names can differ from the JSON shape. Do not guess type names that aren't in the table below or in `<lang>/claude-api/README.md`.
 
+
 ### `thinking` — `budget_tokens` → adaptive
 
 | SDK | Before | After |
@@ -433,7 +434,7 @@ elif response.stop_reason == "max_tokens":
 
 **6. Haiku: rate limits reset between generations.**
 
-Haiku 4.5 has its own rate-limit pool separate from Haiku 3 / 3.5. If you're ramping traffic as you migrate, check your tier's Haiku 4.5 limits at [API rate limits](https://raw.githubusercontent.com/anthropics/skills/main/skills/claude-api/shared/API rate limits) — a quota that comfortably served Haiku 3.5 traffic may need a tier bump for the same volume on 4.5.
+Haiku 4.5 has its own rate-limit pool separate from Haiku 3 / 3.5. If you're ramping traffic as you migrate, check your tier's Haiku 4.5 limits at [API rate limits](https://platform.claude.com/docs/en/api/rate-limits) — a quota that comfortably served Haiku 3.5 traffic may need a tier bump for the same volume on 4.5.
 
 ---
 

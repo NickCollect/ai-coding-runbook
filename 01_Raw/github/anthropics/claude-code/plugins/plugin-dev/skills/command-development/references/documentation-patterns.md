@@ -673,11 +673,11 @@ enable_feature: true
 
 ## Contributing
 
-Contributions welcome! See [CONTRIBUTING.md](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/plugin-dev/skills/command-development/references/CONTRIBUTING.md).
+Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-MIT License - See [LICENSE](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/plugin-dev/skills/command-development/references/LICENSE).
+MIT License - See [LICENSE](LICENSE).
 
 ## Support
 

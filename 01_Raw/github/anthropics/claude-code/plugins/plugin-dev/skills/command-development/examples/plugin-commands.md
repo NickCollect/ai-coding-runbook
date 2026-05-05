@@ -4,16 +4,16 @@ Practical examples of commands designed for Claude Code plugins, demonstrating p
 
 ## Table of Contents
 
-1. [Simple Plugin Command](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/plugin-dev/skills/command-development/examples/Simple Plugin Command)
-2. [Script-Based Analysis](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/plugin-dev/skills/command-development/examples/Script-Based Analysis)
-3. [Template-Based Generation](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/plugin-dev/skills/command-development/examples/Template-Based Generation)
-4. [Multi-Script Workflow](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/plugin-dev/skills/command-development/examples/Multi-Script Workflow)
-5. [Configuration-Driven Deployment](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/plugin-dev/skills/command-development/examples/Configuration-Driven Deployment)
-6. [Agent Integration](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/plugin-dev/skills/command-development/examples/Agent Integration)
-7. [Skill Integration](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/plugin-dev/skills/command-development/examples/Skill Integration)
-8. [Multi-Component Workflow](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/plugin-dev/skills/command-development/examples/Multi-Component Workflow)
-9. [Validated Input Command](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/plugin-dev/skills/command-development/examples/Validated Input Command)
-10. [Environment-Aware Command](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/plugin-dev/skills/command-development/examples/Environment-Aware Command)
+1. [Simple Plugin Command](#1-simple-plugin-command)
+2. [Script-Based Analysis](#2-script-based-analysis)
+3. [Template-Based Generation](#3-template-based-generation)
+4. [Multi-Script Workflow](#4-multi-script-workflow)
+5. [Configuration-Driven Deployment](#5-configuration-driven-deployment)
+6. [Agent Integration](#6-agent-integration)
+7. [Skill Integration](#7-skill-integration)
+8. [Multi-Component Workflow](#8-multi-component-workflow)
+9. [Validated Input Command](#9-validated-input-command)
+10. [Environment-Aware Command](#10-environment-aware-command)
 
 ---
 

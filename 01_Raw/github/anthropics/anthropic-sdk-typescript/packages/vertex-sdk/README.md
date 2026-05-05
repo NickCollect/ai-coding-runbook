@@ -1,10 +1,10 @@
 # <img src=".github/logo.svg" alt="" width="32"> Claude SDK for Google Vertex
 
-[![NPM version](https://raw.githubusercontent.com/anthropics/anthropic-sdk-typescript/main/packages/vertex-sdk/![NPM version)](https://npmjs.org/package/@anthropic-ai/vertex-sdk)
+[![NPM version](https://img.shields.io/npm/v/@anthropic-ai/vertex-sdk.svg?color=blue)](https://npmjs.org/package/@anthropic-ai/vertex-sdk)
 
-This library provides convenient access to the Claude API via Google Vertex AI. See the [documentation](https://raw.githubusercontent.com/anthropics/anthropic-sdk-typescript/main/packages/vertex-sdk/documentation) for more details.
+This library provides convenient access to the Claude API via Google Vertex AI. See the [documentation](https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai) for more details.
 
-For the direct Claude API at api.anthropic.com, see [`@anthropic-ai/sdk`](https://raw.githubusercontent.com/anthropics/anthropic-sdk-typescript/main/packages/vertex-sdk/`@anthropic-ai/sdk`).
+For the direct Claude API at api.anthropic.com, see [`@anthropic-ai/sdk`](https://github.com/anthropics/anthropic-sdk-typescript).
 
 ## Installation
 
@@ -39,7 +39,7 @@ async function main() {
 main();
 ```
 
-For more details on how to use the SDK, see the [README.md for the main Claude SDK](https://raw.githubusercontent.com/anthropics/anthropic-sdk-typescript/main/packages/vertex-sdk/README.md for the main Claude SDK) which this library extends.
+For more details on how to use the SDK, see the [README.md for the main Claude SDK](https://github.com/anthropics/anthropic-sdk-typescript/tree/main#readme) which this library extends.
 
 ## Authentication
 
@@ -47,7 +47,7 @@ This library supports multiple authentication methods:
 
 ### Default authentication
 
-The client automatically uses the default [Google Cloud authentication flow](https://raw.githubusercontent.com/anthropics/anthropic-sdk-typescript/main/packages/vertex-sdk/Google Cloud authentication flow):
+The client automatically uses the default [Google Cloud authentication flow](https://cloud.google.com/docs/authentication):
 
 ```js
 import { AnthropicVertex } from '@anthropic-ai/vertex-sdk';
@@ -79,7 +79,7 @@ const client = new AnthropicVertex({
 
 ### Pre-configured AuthClient
 
-For advanced use cases [like impersonation](https://raw.githubusercontent.com/anthropics/anthropic-sdk-typescript/main/packages/vertex-sdk/like impersonation), you can provide a pre-configured `AuthClient`:
+For advanced use cases [like impersonation](https://cloud.google.com/docs/authentication/use-service-account-impersonation), you can provide a pre-configured `AuthClient`:
 
 ```js
 import { AnthropicVertex } from '@anthropic-ai/vertex-sdk';
@@ -107,7 +107,7 @@ TypeScript >= 4.5 is supported.
 
 The following runtimes are supported:
 
-- Node.js 18 LTS or later ([non-EOL](https://raw.githubusercontent.com/anthropics/anthropic-sdk-typescript/main/packages/vertex-sdk/non-EOL)) versions.
+- Node.js 18 LTS or later ([non-EOL](https://endoflife.date/nodejs)) versions.
 - Deno v1.28.0 or higher, using `import { AnthropicVertex } from "npm:@anthropic-ai/vertex-sdk"`.
 - Bun 1.0 or later.
 - Cloudflare Workers.

@@ -16,7 +16,7 @@ object for you).
 
 If you need to cancel a stream, you can `break` from a `for await` loop or call `stream.abort()`.
 
-See an example of streaming helpers in action in [`examples/streaming.ts`](https://raw.githubusercontent.com/anthropics/anthropic-sdk-typescript/main/`examples/streaming.ts`).
+See an example of streaming helpers in action in [`examples/streaming.ts`](examples/streaming.ts).
 
 ## MessageStream API
 
@@ -170,10 +170,10 @@ Creates a JSON schema output format from a raw JSON schema. Options:
 
 See the following example files:
 
-- [`examples/structured-outputs-zod.ts`](https://raw.githubusercontent.com/anthropics/anthropic-sdk-typescript/main/`examples/structured-outputs-zod.ts`)
-- [`examples/structured-outputs-json-schema.ts`](https://raw.githubusercontent.com/anthropics/anthropic-sdk-typescript/main/`examples/structured-outputs-json-schema.ts`)
-- [`examples/structured-outputs-streaming.ts`](https://raw.githubusercontent.com/anthropics/anthropic-sdk-typescript/main/`examples/structured-outputs-streaming.ts`)
-- [`examples/structured-outputs-raw.ts`](https://raw.githubusercontent.com/anthropics/anthropic-sdk-typescript/main/`examples/structured-outputs-raw.ts`)
+- [`examples/structured-outputs-zod.ts`](examples/structured-outputs-zod.ts)
+- [`examples/structured-outputs-json-schema.ts`](examples/structured-outputs-json-schema.ts)
+- [`examples/structured-outputs-streaming.ts`](examples/structured-outputs-streaming.ts)
+- [`examples/structured-outputs-raw.ts`](examples/structured-outputs-raw.ts)
 
 ## Tool Helpers
 
@@ -228,7 +228,7 @@ for await (const message of runner) {
 console.log(await runner);
 ```
 
-See [`examples/tools-helpers-advanced.ts`](https://raw.githubusercontent.com/anthropics/anthropic-sdk-typescript/main/`examples/tools-helpers-advanced.ts`) for a more in-depth
+See [`examples/tools-helpers-advanced.ts`](examples/tools-helpers-advanced.ts) for a more in-depth
 example.
 
 #### Streaming
@@ -253,7 +253,7 @@ for await (const messageStream of runner) {
 console.log(await runner);
 ```
 
-See [`examples/tools-helpers-advanced-streaming.ts`](https://raw.githubusercontent.com/anthropics/anthropic-sdk-typescript/main/`examples/tools-helpers-advanced-streaming.ts`) for a more
+See [`examples/tools-helpers-advanced-streaming.ts`](examples/tools-helpers-advanced-streaming.ts) for a more
 in-depth example.
 
 #### Cancellation
@@ -502,6 +502,6 @@ throw new ToolError('Invalid input: URL must start with https://');
 
 See the following example files for more usage patterns:
 
-- [`examples/tools-helpers-zod.ts`](https://raw.githubusercontent.com/anthropics/anthropic-sdk-typescript/main/`examples/tools-helpers-zod.ts`) - Zod-based tools
-- [`examples/tools-helpers-json-schema.ts`](https://raw.githubusercontent.com/anthropics/anthropic-sdk-typescript/main/`examples/tools-helpers-json-schema.ts`) - JSON Schema tools
-- [`examples/tools.ts`](https://raw.githubusercontent.com/anthropics/anthropic-sdk-typescript/main/`examples/tools.ts`) - Basic tool usage
+- [`examples/tools-helpers-zod.ts`](examples/tools-helpers-zod.ts) - Zod-based tools
+- [`examples/tools-helpers-json-schema.ts`](examples/tools-helpers-json-schema.ts) - JSON Schema tools
+- [`examples/tools.ts`](examples/tools.ts) - Basic tool usage

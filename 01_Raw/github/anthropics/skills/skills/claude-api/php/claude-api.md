@@ -156,7 +156,7 @@ foreach ($runner as $message) {
 
 ### Manual Loop
 
-Tools are passed as arrays. **The SDK uses camelCase keys** (`inputSchema`, `toolUseID`, `stopReason`) and auto-maps to the API's snake_case on the wire — since v0.5.0. See [shared tool use concepts](https://raw.githubusercontent.com/anthropics/skills/main/skills/claude-api/php/shared tool use concepts) for the loop pattern.
+Tools are passed as arrays. **The SDK uses camelCase keys** (`inputSchema`, `toolUseID`, `stopReason`) and auto-maps to the API's snake_case on the wire — since v0.5.0. See [shared tool use concepts](../shared/tool-use-concepts.md) for the loop pattern.
 
 ```php
 use Anthropic\Messages\ToolUseBlock;
@@ -221,6 +221,7 @@ foreach ($response->content as $block) {
 ```
 
 `$block->type === 'tool_use'` also works; `instanceof ToolUseBlock` narrows for PHPStan.
+
 
 ---
 

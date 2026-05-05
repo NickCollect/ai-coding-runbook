@@ -2,7 +2,7 @@
 
 > **Reference implementations for interface validation. Not packaged, not maintained as production code.**
 
-Reference [`SessionStore`](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/examples/session_stores/`SessionStore`) implementations
+Reference [`SessionStore`](../../src/claude_agent_sdk/types.py) implementations
 — copy into your project, install the backend client, validate with
 `run_session_store_conformance`.
 
@@ -123,6 +123,7 @@ store = S3SessionStore(
     client=boto3.client("s3", region_name="us-east-1"),
 )
 
+
 async def main() -> None:
     async for message in query(
         prompt="Hello!",
@@ -131,6 +132,7 @@ async def main() -> None:
         # Messages are mirrored to S3 automatically.
         if isinstance(message, ResultMessage) and message.subtype == "success":
             print(message.result)
+
 
 anyio.run(main)
 ```
@@ -151,7 +153,7 @@ async for message in query(
 ### Retention
 
 This adapter never deletes objects on its own. Configure an
-[S3 lifecycle policy](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/examples/session_stores/S3 lifecycle policy)
+[S3 lifecycle policy](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html)
 on your bucket/prefix to expire transcripts according to your compliance
 requirements.
 
@@ -163,7 +165,7 @@ the CLI's `cleanupPeriodDays` setting.
 
 ### Tests
 
-Unit tests use [`moto`](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/examples/session_stores/`moto`) to mock S3
+Unit tests use [`moto`](https://github.com/getmoto/moto) to mock S3
 in-process:
 
 ```bash
@@ -193,13 +195,13 @@ Each run uses a random key prefix and deletes everything under it on
 teardown.
 
 This mirrors the S3 reference adapter in the TypeScript SDK's
-[`examples/session-stores/s3/`](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/examples/session_stores/`examples/session-stores/s3/`).
+[`examples/session-stores/s3/`](https://github.com/anthropics/claude-agent-sdk-typescript/tree/main/examples/session-stores/s3).
 
 ---
 
 ## Redis — `redis_session_store.py`
 
-Backed by [`redis-py`](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/examples/session_stores/`redis-py`)'s `redis.asyncio`
+Backed by [`redis-py`](https://github.com/redis/redis-py)'s `redis.asyncio`
 client.
 
 ### Installation
@@ -247,7 +249,7 @@ Each `append()` is an `RPUSH` plus an index update in a single `MULTI`;
 ### Retention
 
 This adapter never expires keys on its own. Configure
-[Redis key expiration](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/examples/session_stores/Redis key expiration) or a
+[Redis key expiration](https://redis.io/docs/latest/commands/expire/) or a
 scheduled sweep on your prefix to expire transcripts according to your
 compliance requirements.
 
@@ -272,7 +274,7 @@ async for message in query(
 
 ### Tests
 
-Unit tests use [`fakeredis`](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/examples/session_stores/`fakeredis`) to mock
+Unit tests use [`fakeredis`](https://github.com/cunla/fakeredis-py) to mock
 Redis in-process:
 
 ```bash
@@ -300,7 +302,7 @@ TypeScript SDK.
 
 ## Postgres — `postgres_session_store.py`
 
-Backed by [`asyncpg`](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/examples/session_stores/`asyncpg`), the native
+Backed by [`asyncpg`](https://github.com/MagicStack/asyncpg), the native
 asyncio Postgres driver.
 
 ### Installation

@@ -181,9 +181,29 @@ class ToolPermissionContext:
     )  # Permission suggestions from CLI
     tool_use_id: str | None = None
     """Unique identifier for this specific tool call within the assistant message.
-    Multiple tool calls in the same assistant message will have different tool_use_ids."""
+    Multiple tool calls in the same assistant message will have different tool_use_ids.
+
+    Always a non-empty string when delivered to a ``can_use_tool`` callback (the
+    wire protocol guarantees it); the ``Optional`` is only for dataclass
+    field-ordering compatibility, so callers do not need to handle ``None``."""
     agent_id: str | None = None
     """If running within the context of a sub-agent, the sub-agent's ID."""
+    blocked_path: str | None = None
+    """The file path that triggered the permission request, if applicable.
+    For example, when a Bash command tries to access a path outside allowed directories."""
+    decision_reason: str | None = None
+    """Explains why this permission request was triggered.
+    When a PreToolUse hook returns ``permissionDecision: "ask"`` with a
+    ``permissionDecisionReason``, that reason is forwarded here."""
+    title: str | None = None
+    """Full permission prompt sentence (e.g. "Claude wants to read foo.txt").
+    Use this as the primary prompt text when present instead of reconstructing
+    from tool name + input."""
+    display_name: str | None = None
+    """Short noun phrase for the tool action (e.g. "Read file"), suitable for
+    button labels or compact UI."""
+    description: str | None = None
+    """Human-readable subtitle for the permission UI."""
 
 
 # Match TypeScript's PermissionResult structure
@@ -381,7 +401,17 @@ class PostToolUseHookSpecificOutput(TypedDict):
 
     hookEventName: Literal["PostToolUse"]
     additionalContext: NotRequired[str]
+    updatedToolOutput: NotRequired[Any]
+    """Replaces the tool output before it is sent to the model.
+
+    For built-in tools (Bash, Read, Edit, etc.) the value must match the tool's
+    output schema (e.g. ``{"stdout": ..., "stderr": ..., "interrupted": ...}``
+    for Bash); a mismatched shape is rejected and the original output is kept.
+    """
     updatedMCPToolOutput: NotRequired[Any]
+    """Replaces the output for MCP tools only. Prefer ``updatedToolOutput``,
+    which works for all tools.
+    """
 
 
 class PostToolUseFailureHookSpecificOutput(TypedDict):
@@ -1508,6 +1538,13 @@ class ClaudeAgentOptions:
     to an MCP config JSON file.
     """
 
+    strict_mcp_config: bool = False
+    """When ``True``, only use MCP servers passed via :attr:`mcp_servers`,
+    ignoring all other MCP configurations the CLI would otherwise load (e.g.
+    project ``.mcp.json``, user/global settings, plugin-provided servers).
+    Maps to the CLI's ``--strict-mcp-config`` flag and matches the TypeScript
+    SDK's ``strictMcpConfig`` option."""
+
     permission_mode: PermissionMode | None = None
     """Permission mode for the session.
 
@@ -1628,10 +1665,15 @@ class ClaudeAgentOptions:
     """
 
     can_use_tool: CanUseTool | None = None
-    """Custom permission handler for controlling tool usage.
+    """Custom permission handler for tool calls that would otherwise prompt the user.
 
-    Called before each tool execution to determine if it should be allowed,
-    denied, or prompt the user.
+    Invoked when the CLI's permission rules evaluate to "ask" for a tool call —
+    it is the SDK replacement for the interactive permission prompt. It is *not*
+    invoked for tool calls already permitted by ``allowed_tools``,
+    ``permission_mode`` (e.g. ``"acceptEdits"`` / ``"bypassPermissions"``), or
+    ``permissions.allow`` rules in settings, since those never reach a prompt.
+    To observe or gate *every* tool call regardless of permission rules, use a
+    ``PreToolUse`` hook via ``hooks`` instead.
     """
 
     hooks: dict[HookEvent, list[HookMatcher]] | None = None
@@ -1812,6 +1854,10 @@ class SDKControlPermissionRequest(TypedDict):
     # TODO: Add PermissionUpdate type here
     permission_suggestions: list[Any] | None
     blocked_path: str | None
+    decision_reason: NotRequired[str]
+    title: NotRequired[str]
+    display_name: NotRequired[str]
+    description: NotRequired[str]
     tool_use_id: str
     agent_id: NotRequired[str]
 

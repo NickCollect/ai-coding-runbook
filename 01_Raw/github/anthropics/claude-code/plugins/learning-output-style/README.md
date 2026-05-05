@@ -2,7 +2,7 @@
 
 This plugin combines the unshipped Learning output style with explanatory functionality as a SessionStart hook.
 
-**Note:** This plugin differs from the original unshipped Learning output style by also incorporating all functionality from the [explanatory-output-style plugin](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/learning-output-style/explanatory-output-style plugin), providing both interactive learning and educational insights.
+**Note:** This plugin differs from the original unshipped Learning output style by also incorporating all functionality from the [explanatory-output-style plugin](https://github.com/anthropics/claude-code/tree/main/plugins/explanatory-output-style), providing both interactive learning and educational insights.
 
 WARNING: Do not install this plugin unless you are fine with incurring the token cost of this plugin's additional instructions and the interactive nature of learning mode.
 

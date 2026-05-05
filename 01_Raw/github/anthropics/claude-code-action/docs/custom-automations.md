@@ -13,7 +13,7 @@ The action automatically detects which mode to use based on your configuration:
 
 ## Supported GitHub Events
 
-This action supports the following GitHub events ([learn more GitHub event triggers](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/learn more GitHub event triggers)):
+This action supports the following GitHub events ([learn more GitHub event triggers](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows)):
 
 - `pull_request` or `pull_request_target` - When PRs are opened or synchronized
 - `issue_comment` - When comments are created on issues or PRs
@@ -26,7 +26,7 @@ This action supports the following GitHub events ([learn more GitHub event trigg
 
 ## Automated Documentation Updates
 
-Automatically update documentation when specific files change (see [`examples/claude-pr-path-specific.yml`](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/`examples/claude-pr-path-specific.yml`)):
+Automatically update documentation when specific files change (see [`examples/claude-pr-path-specific.yml`](../examples/claude-pr-path-specific.yml)):
 
 ```yaml
 on:
@@ -47,7 +47,7 @@ When API files are modified, the action automatically detects that a `prompt` is
 
 ## Author-Specific Code Reviews
 
-Automatically review PRs from specific authors or external contributors (see [`examples/claude-review-from-author.yml`](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/`examples/claude-review-from-author.yml`)):
+Automatically review PRs from specific authors or external contributors (see [`examples/claude-review-from-author.yml`](../examples/claude-review-from-author.yml)):
 
 ```yaml
 on:

@@ -6,9 +6,9 @@ Thank you for your interest in contributing to Claude Code Action! This document
 
 ### Prerequisites
 
-- [Bun](https://raw.githubusercontent.com/anthropics/claude-code-action/main/Bun) runtime
-- [Docker](https://raw.githubusercontent.com/anthropics/claude-code-action/main/Docker) (for running GitHub Actions locally)
-- [act](https://raw.githubusercontent.com/anthropics/claude-code-action/main/act) (installed automatically by our test script)
+- [Bun](https://bun.sh/) runtime
+- [Docker](https://www.docker.com/) (for running GitHub Actions locally)
+- [act](https://github.com/nektos/act) (installed automatically by our test script)
 - An Anthropic API key (for testing)
 
 ### Setup

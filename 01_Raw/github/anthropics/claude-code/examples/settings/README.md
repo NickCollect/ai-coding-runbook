@@ -2,14 +2,15 @@
 
 Example Claude Code settings files, primarily intended for organization-wide deployments. Use these as starting points — adjust them to fit your needs.
 
-These may be applied at any level of the [settings hierarchy](https://raw.githubusercontent.com/anthropics/claude-code/main/examples/settings/settings hierarchy), though certain properties only take effect if specified in enterprise settings (e.g. `strictKnownMarketplaces`, `allowManagedHooksOnly`, `allowManagedPermissionRulesOnly`).
+These may be applied at any level of the [settings hierarchy](https://code.claude.com/docs/en/settings#settings-files), though certain properties only take effect if specified in enterprise settings (e.g. `strictKnownMarketplaces`, `allowManagedHooksOnly`, `allowManagedPermissionRulesOnly`).
+
 
 ## Configuration Examples
 
 > [!WARNING]
 > These examples are community-maintained snippets which may be unsupported or incorrect. You are responsible for the correctness of your own settings configuration.
 
-| Setting | [`settings-lax.json`](https://raw.githubusercontent.com/anthropics/claude-code/main/examples/settings/`settings-lax.json`) | [`settings-strict.json`](https://raw.githubusercontent.com/anthropics/claude-code/main/examples/settings/`settings-strict.json`) | [`settings-bash-sandbox.json`](https://raw.githubusercontent.com/anthropics/claude-code/main/examples/settings/`settings-bash-sandbox.json`) |
+| Setting | [`settings-lax.json`](./settings-lax.json) | [`settings-strict.json`](./settings-strict.json) | [`settings-bash-sandbox.json`](./settings-bash-sandbox.json) |
 |---------|:---:|:---:|:---:|
 | Disable `--dangerously-skip-permissions` | ✅ | ✅ | |
 | Block plugin marketplaces | ✅ | ✅ | |
@@ -27,7 +28,7 @@ These may be applied at any level of the [settings hierarchy](https://raw.github
 
 ## Deploying via MDM
 
-To distribute these settings as enterprise-managed policy through Jamf, Iru (Kandji), Intune, or Group Policy, see the deployment templates in [`../mdm`](https://raw.githubusercontent.com/anthropics/claude-code/main/examples/settings/`../mdm`).
+To distribute these settings as enterprise-managed policy through Jamf, Iru (Kandji), Intune, or Group Policy, see the deployment templates in [`../mdm`](../mdm).
 
 ## Full Documentation
 

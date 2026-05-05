@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.73
+
+### New Features
+
+- **Eager session store flushing**: Added `session_store_flush` option to `ClaudeAgentOptions` (`"batched"` or `"eager"`). When set to `"eager"`, the transcript mirror delivers frames to `SessionStore.append()` in near-real-time instead of waiting for the end-of-turn flush, enabling live-tailing UIs, cross-process resume, and crash-durability use cases (#905)
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.128
+
 ## 0.1.72
 
 ### Internal/Other Changes
@@ -716,19 +726,19 @@ Introducing the Claude Agent SDK! The Claude Code SDK has been renamed to better
 - **No filesystem settings by default**: Settings files (`settings.json`, `CLAUDE.md`), slash commands, and subagents are no longer loaded automatically. This ensures SDK applications have predictable behavior independent of local filesystem configurations
 - **Explicit settings control**: Use the new `setting_sources` field to specify which settings locations to load: `["user", "project", "local"]`
 
-For full migration instructions, see our [migration guide](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/migration guide).
+For full migration instructions, see our [migration guide](https://docs.claude.com/en/docs/claude-code/sdk/migration-guide).
 
 ### New Features
 
-- **Programmatic subagents**: Subagents can now be defined inline in code using the `agents` option, enabling dynamic agent creation without filesystem dependencies. [Learn more](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/Learn more)
-- **Session forking**: Resume sessions with the new `fork_session` option to branch conversations and explore different approaches from the same starting point. [Learn more](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/Learn more)
+- **Programmatic subagents**: Subagents can now be defined inline in code using the `agents` option, enabling dynamic agent creation without filesystem dependencies. [Learn more](https://docs.claude.com/en/api/agent-sdk/subagents)
+- **Session forking**: Resume sessions with the new `fork_session` option to branch conversations and explore different approaches from the same starting point. [Learn more](https://docs.claude.com/en/api/agent-sdk/sessions)
 - **Granular settings control**: The `setting_sources` option gives you fine-grained control over which filesystem settings to load, improving isolation for CI/CD, testing, and production deployments
 
 ### Documentation
 
-- Comprehensive documentation now available in the [API Guide](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/API Guide)
-- New guides for [Custom Tools](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/Custom Tools), [Permissions](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/Permissions), [Session Management](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/Session Management), and more
-- Complete [Python API reference](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/Python API reference)
+- Comprehensive documentation now available in the [API Guide](https://docs.claude.com/en/api/agent-sdk/overview)
+- New guides for [Custom Tools](https://docs.claude.com/en/api/agent-sdk/custom-tools), [Permissions](https://docs.claude.com/en/api/agent-sdk/permissions), [Session Management](https://docs.claude.com/en/api/agent-sdk/sessions), and more
+- Complete [Python API reference](https://docs.claude.com/en/api/agent-sdk/python)
 
 ## 0.0.22
 

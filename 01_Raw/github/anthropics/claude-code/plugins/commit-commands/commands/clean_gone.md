@@ -50,3 +50,4 @@ After executing these commands, you will:
 - Provide feedback on which worktrees and branches were removed
 
 If no branches are marked as [gone], report that no cleanup was needed.
+

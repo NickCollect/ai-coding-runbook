@@ -11,8 +11,8 @@ license: Proprietary. LICENSE.txt has complete terms
 | Task | Guide |
 |------|-------|
 | Read/analyze content | `python -m markitdown presentation.pptx` |
-| Edit or create from template | Read [editing.md](https://raw.githubusercontent.com/anthropics/skills/main/skills/pptx/editing.md) |
-| Create from scratch | Read [pptxgenjs.md](https://raw.githubusercontent.com/anthropics/skills/main/skills/pptx/pptxgenjs.md) |
+| Edit or create from template | Read [editing.md](editing.md) |
+| Create from scratch | Read [pptxgenjs.md](pptxgenjs.md) |
 
 ---
 
@@ -33,7 +33,7 @@ python scripts/office/unpack.py presentation.pptx unpacked/
 
 ## Editing Workflow
 
-**Read [editing.md](https://raw.githubusercontent.com/anthropics/skills/main/skills/pptx/editing.md) for full details.**
+**Read [editing.md](editing.md) for full details.**
 
 1. Analyze template with `thumbnail.py`
 2. Unpack → manipulate slides → edit content → clean → pack
@@ -42,7 +42,7 @@ python scripts/office/unpack.py presentation.pptx unpacked/
 
 ## Creating from Scratch
 
-**Read [pptxgenjs.md](https://raw.githubusercontent.com/anthropics/skills/main/skills/pptx/pptxgenjs.md) for full details.**
+**Read [pptxgenjs.md](pptxgenjs.md) for full details.**
 
 Use when no template or reference presentation is available.
 
@@ -164,7 +164,7 @@ If grep returns results, fix them before declaring success.
 
 **⚠️ USE SUBAGENTS** — even for 2-3 slides. You've been staring at the code and will see what you expect, not what's there. Subagents have fresh eyes.
 
-Convert slides to images (see [Converting to Images](https://raw.githubusercontent.com/anthropics/skills/main/skills/pptx/Converting to Images)), then use this prompt:
+Convert slides to images (see [Converting to Images](#converting-to-images)), then use this prompt:
 
 ```
 Visually inspect these slides. Assume there are issues — find them.

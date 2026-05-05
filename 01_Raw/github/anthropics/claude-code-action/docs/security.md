@@ -47,11 +47,11 @@
     claude_args: "--add-dir pr-head"
 ```
 
-This is general guidance for these event types — see [GitHub's documentation](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/GitHub's documentation).
+This is general guidance for these event types — see [GitHub's documentation](https://securitylab.github.com/research/github-actions-preventing-pwn-requests/).
 
 ### `claude-code-action` vs `claude-code-base-action`
 
-`claude-code-base-action` is a lower-level building block that installs and runs Claude Code with the inputs you provide. It does not perform actor permission checks or restore project configuration from the base ref. If you need those behaviors, use this action (`claude-code-action`). See the [base-action README](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/base-action README) for details.
+`claude-code-base-action` is a lower-level building block that installs and runs Claude Code with the inputs you provide. It does not perform actor permission checks or restore project configuration from the base ref. If you need those behaviors, use this action (`claude-code-action`). See the [base-action README](../base-action/README.md#trust-model) for details.
 
 ## Pull Request Creation
 
@@ -67,11 +67,11 @@ This design ensures that users retain full control over what pull requests are c
 
 **Beware of potential hidden markdown when tagging Claude on untrusted content.** External contributors may include hidden instructions through HTML comments, invisible characters, hidden attributes, or other techniques. The action sanitizes content by stripping HTML comments, invisible characters, markdown image alt text, hidden HTML attributes, and HTML entities, but new bypass techniques may emerge. We recommend reviewing the raw content of all input coming from external contributors before allowing Claude to process it.
 
-On public repos, you can also use `include_comments_by_actor` to allowlist which users' comments are passed to Claude, reducing exposure to untrusted input. Use `exclude_comments_by_actor` to filter out noisy bot comments (e.g., `dependabot[bot]`, `renovate[bot]`). If an actor matches both lists, exclusion takes priority. See [Usage](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/Usage) for details.
+On public repos, you can also use `include_comments_by_actor` to allowlist which users' comments are passed to Claude, reducing exposure to untrusted input. Use `exclude_comments_by_actor` to filter out noisy bot comments (e.g., `dependabot[bot]`, `renovate[bot]`). If an actor matches both lists, exclusion takes priority. See [Usage](./usage.md) for details.
 
 ## GitHub App Permissions
 
-The [Claude Code GitHub app](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/Claude Code GitHub app) requests the following permissions:
+The [Claude Code GitHub app](https://github.com/apps/claude) requests the following permissions:
 
 ### Currently Used Permissions
 

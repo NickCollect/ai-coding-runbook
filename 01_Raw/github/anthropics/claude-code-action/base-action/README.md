@@ -1,16 +1,16 @@
 # Claude Code Base Action
 
-This GitHub Action allows you to run [Claude Code](https://raw.githubusercontent.com/anthropics/claude-code-action/main/base-action/Claude Code) within your GitHub Actions workflows. You can use this to build any custom workflow on top of Claude Code.
+This GitHub Action allows you to run [Claude Code](https://www.anthropic.com/claude-code) within your GitHub Actions workflows. You can use this to build any custom workflow on top of Claude Code.
 
-For simply tagging @claude in issues and PRs out of the box, [check out the Claude Code action and GitHub app](https://raw.githubusercontent.com/anthropics/claude-code-action/main/base-action/check out the Claude Code action and GitHub app).
+For simply tagging @claude in issues and PRs out of the box, [check out the Claude Code action and GitHub app](https://github.com/anthropics/claude-code-action).
 
 ## Trust model
 
 This action is a thin wrapper that installs and runs Claude Code with the inputs you provide. It does **not** enforce any trust boundaries on its own. Running this action in a directory is equivalent to running Claude Code in that directory — Claude reads project-level configuration (`.claude/`, `CLAUDE.md`, `.mcp.json`, etc.) from the working directory, and the action's own setup steps run from there as well.
 
-**The caller is responsible for ensuring the working directory and prompt are trusted.** If your workflow processes untrusted input (issues, fork pull requests, external comments), use [`anthropics/claude-code-action`](https://raw.githubusercontent.com/anthropics/claude-code-action/main/base-action/`anthropics/claude-code-action`) instead — it provides actor permission checks, restores project configuration from the base ref in PR contexts, and is the supported path for those scenarios.
+**The caller is responsible for ensuring the working directory and prompt are trusted.** If your workflow processes untrusted input (issues, fork pull requests, external comments), use [`anthropics/claude-code-action`](https://github.com/anthropics/claude-code-action) instead — it provides actor permission checks, restores project configuration from the base ref in PR contexts, and is the supported path for those scenarios.
 
-See [Claude Code's security documentation](https://raw.githubusercontent.com/anthropics/claude-code-action/main/base-action/Claude Code's security documentation) and the [GitHub Actions guidance on `pull_request_target`](https://raw.githubusercontent.com/anthropics/claude-code-action/main/base-action/GitHub Actions guidance on `pull_request_target`) for background.
+See [Claude Code's security documentation](https://docs.anthropic.com/en/docs/claude-code/security) and the [GitHub Actions guidance on `pull_request_target`](https://securitylab.github.com/research/github-actions-preventing-pwn-requests/) for background.
 
 ## Usage
 
@@ -113,11 +113,11 @@ Add the following to your workflow file:
 | `use_bedrock`             | Use Amazon Bedrock with OIDC authentication instead of direct Anthropic API                                             | No       | 'false'                      |
 | `use_vertex`              | Use Google Vertex AI with OIDC authentication instead of direct Anthropic API                                           | No       | 'false'                      |
 | `use_node_cache`          | Whether to use Node.js dependency caching (set to true only for Node.js projects with lock files)                       | No       | 'false'                      |
-| `show_full_output`        | Show full JSON output (⚠️ May expose secrets - see [security docs](https://raw.githubusercontent.com/anthropics/claude-code-action/main/base-action/security docs)) | No       | 'false'\*\*                  |
+| `show_full_output`        | Show full JSON output (⚠️ May expose secrets - see [security docs](../docs/security.md#️-full-output-security-warning)) | No       | 'false'\*\*                  |
 
 \*Either `prompt` or `prompt_file` must be provided, but not both.
 
-\*\*`show_full_output` is automatically enabled when GitHub Actions debug mode is active. See [security documentation](https://raw.githubusercontent.com/anthropics/claude-code-action/main/base-action/security documentation) for important security considerations.
+\*\*`show_full_output` is automatically enabled when GitHub Actions debug mode is active. See [security documentation](../docs/security.md#️-full-output-security-warning) for important security considerations.
 
 ## Outputs
 
@@ -391,7 +391,7 @@ jobs:
             }
 ```
 
-Check out additional examples in [`./examples`](https://raw.githubusercontent.com/anthropics/claude-code-action/main/base-action/`./examples`).
+Check out additional examples in [`./examples`](./examples).
 
 ## Using Cloud Providers
 

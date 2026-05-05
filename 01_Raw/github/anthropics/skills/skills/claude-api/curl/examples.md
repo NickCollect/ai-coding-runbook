@@ -54,6 +54,7 @@ stop_reason=$(echo "$response" | jq -r '.stop_reason')
 echo "$response" | jq -r '.content[] | select(.type == "text") | .text'
 ```
 
+
 ---
 
 ## Streaming (SSE)

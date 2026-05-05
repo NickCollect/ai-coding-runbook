@@ -1,12 +1,12 @@
 # Claude SDK for Python
 
-[![PyPI version](https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/![PyPI version)](https://pypi.org/project/anthropic/)
+[![PyPI version](https://img.shields.io/pypi/v/anthropic.svg)](https://pypi.org/project/anthropic/)
 
-The Claude SDK for Python provides access to the [Claude API](https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/Claude API) from Python applications.
+The Claude SDK for Python provides access to the [Claude API](https://docs.anthropic.com/en/api/) from Python applications.
 
 ## Documentation
 
-Full documentation is available at **[platform.claude.com/docs/en/api/sdks/python](https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/platform.claude.com/docs/en/api/sdks/python)**.
+Full documentation is available at **[platform.claude.com/docs/en/api/sdks/python](https://platform.claude.com/docs/en/api/sdks/python)**.
 
 ## Installation
 
@@ -43,8 +43,8 @@ Python 3.9+
 
 ## Contributing
 
-See [CONTRIBUTING.md](https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/CONTRIBUTING.md).
+See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

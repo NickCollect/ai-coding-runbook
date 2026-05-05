@@ -197,7 +197,7 @@ This plugin is included in the Claude Code repository. The commands are automati
 **Issue**: `gh pr create` command fails
 
 **Solution**:
-- Install GitHub CLI: `brew install gh` (macOS) or see [GitHub CLI installation](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/commit-commands/GitHub CLI installation)
+- Install GitHub CLI: `brew install gh` (macOS) or see [GitHub CLI installation](https://cli.github.com/)
 - Authenticate: `gh auth login`
 - Ensure repository has a GitHub remote
 

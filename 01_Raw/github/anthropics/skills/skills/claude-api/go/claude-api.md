@@ -88,6 +88,7 @@ if err := stream.Err(); err != nil { log.Fatal(err) }
 // message.Content now has the complete response
 ```
 
+
 ---
 
 ## Tool Use

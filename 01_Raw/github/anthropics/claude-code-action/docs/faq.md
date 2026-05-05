@@ -264,7 +264,7 @@ For specialized environments like Nix, NixOS, or custom container setups where y
 
 If you encounter issues not covered here:
 
-1. Check the [GitHub Issues](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/GitHub Issues)
-2. Review the [example workflows](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/example workflows)
+1. Check the [GitHub Issues](https://github.com/anthropics/claude-code-action/issues)
+2. Review the [example workflows](https://github.com/anthropics/claude-code-action#examples)
 
 [perms]: https://docs.anthropic.com/en/docs/claude-code/settings#permissions

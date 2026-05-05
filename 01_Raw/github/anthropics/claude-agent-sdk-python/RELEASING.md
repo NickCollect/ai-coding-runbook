@@ -50,7 +50,7 @@ Use this when you need to release with a specific version number (e.g., for mino
 
 **Flow:**
 
-1. Go to [**Actions → Publish to PyPI**](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/**Actions → Publish to PyPI**) and click **Run workflow**.
+1. Go to [**Actions → Publish to PyPI**](https://github.com/anthropics/claude-agent-sdk-python/actions/workflows/publish.yml) and click **Run workflow**.
 2. Enter the desired version (e.g., `0.2.0`).
 3. The workflow runs the full test suite (Python 3.10–3.13) and lint checks.
 4. On success, it calls `build-and-publish.yml`, which builds, publishes, pushes, tags, and creates a GitHub Release.

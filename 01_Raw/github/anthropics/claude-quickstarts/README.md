@@ -4,7 +4,7 @@ Claude Quickstarts is a collection of projects designed to help developers quick
 
 ## Getting Started
 
-To use these quickstarts, you'll need an Claude API key. If you don't have one yet, you can sign up for free at [console.anthropic.com](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/console.anthropic.com).
+To use these quickstarts, you'll need an Claude API key. If you don't have one yet, you can sign up for free at [console.anthropic.com](https://console.anthropic.com).
 
 ## Available Quickstarts
 
@@ -12,31 +12,31 @@ To use these quickstarts, you'll need an Claude API key. If you don't have one y
 
 A customer support agent powered by Claude. This project demonstrates how to leverage Claude's natural language understanding and generation capabilities to create an AI-assisted customer support system with access to a knowledge base.
 
-[Go to Customer Support Agent Quickstart](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/Go to Customer Support Agent Quickstart)
+[Go to Customer Support Agent Quickstart](./customer-support-agent)
 
 ### Financial Data Analyst
 
 A financial data analyst powered by Claude. This project demonstrates how to leverage Claude's capabilities with interactive data visualization to analyze financial data via chat.
 
-[Go to Financial Data Analyst Quickstart](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/Go to Financial Data Analyst Quickstart)
+[Go to Financial Data Analyst Quickstart](./financial-data-analyst)
 
 ### Computer Use Demo
 
 An environment and tools that Claude can use to control a desktop computer. This project demonstrates how to leverage the computer use capabilities of Claude, including support for the latest `computer_use_20251124` tool version with zoom actions.
 
-[Go to Computer Use Demo Quickstart](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/Go to Computer Use Demo Quickstart)
+[Go to Computer Use Demo Quickstart](./computer-use-demo)
 
 ### Browser Tools API Demo
 
 A complete reference implementation for browser automation powered by Claude. This project demonstrates how to leverage Claude's browser tools API for web interaction, including navigation, DOM inspection, and form manipulation using Playwright.
 
-[Go to Browser Tools API Demo Quickstart](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/Go to Browser Tools API Demo Quickstart)
+[Go to Browser Tools API Demo Quickstart](./browser-tools-api-demo)
 
 ### Autonomous Coding Agent
 
 An autonomous coding agent powered by the Claude Agent SDK. This project demonstrates a two-agent pattern (initializer + coding agent) that can build complete applications over multiple sessions, with progress persisted via git and a feature list that the agent works through incrementally.
 
-[Go to Autonomous Coding Agent Quickstart](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/Go to Autonomous Coding Agent Quickstart)
+[Go to Autonomous Coding Agent Quickstart](./autonomous-coding)
 
 ## General Usage
 
@@ -52,9 +52,9 @@ Each quickstart project comes with its own README and setup instructions. Genera
 
 To deepen your understanding of working with Claude and the Claude API, check out these resources:
 
-- [Claude API Documentation](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/Claude API Documentation)
-- [Claude Cookbooks](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/Claude Cookbooks) - A collection of code snippets and guides for common tasks
-- [Claude API Fundamentals Course](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/Claude API Fundamentals Course)
+- [Claude API Documentation](https://docs.claude.com)
+- [Claude Cookbooks](https://github.com/anthropics/claude-cookbooks) - A collection of code snippets and guides for common tasks
+- [Claude API Fundamentals Course](https://github.com/anthropics/courses/tree/master/anthropic_api_fundamentals)
 
 ## Contributing
 
@@ -62,9 +62,9 @@ We welcome contributions to the Claude Quickstarts repository! If you have ideas
 
 ## Community and Support
 
-- Join our [Anthropic Discord community](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/Anthropic Discord community) for discussions and support
-- Check out the [Anthropic support documentation](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/Anthropic support documentation) for additional help
+- Join our [Anthropic Discord community](https://www.anthropic.com/discord) for discussions and support
+- Check out the [Anthropic support documentation](https://support.anthropic.com) for additional help
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

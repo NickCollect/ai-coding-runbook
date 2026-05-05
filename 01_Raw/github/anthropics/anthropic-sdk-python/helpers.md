@@ -26,7 +26,7 @@ object for you).
 
 The stream will be cancelled when the context manager exits but you can also close it prematurely by calling `stream.close()`.
 
-See an example of streaming helpers in action in [`examples/messages_stream.py`](https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/`examples/messages_stream.py`).
+See an example of streaming helpers in action in [`examples/messages_stream.py`](examples/messages_stream.py).
 
 > [!NOTE]
 > The synchronous client has the same interface just without `async/await`.
@@ -45,7 +45,7 @@ print()
 
 ### Events
 
-The events listed here are just the event types that the SDK extends, for a full list of the events returned by the API, see [these docs](https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/these docs).
+The events listed here are just the event types that the SDK extends, for a full list of the events returned by the API, see [these docs](https://docs.anthropic.com/en/api/messages-streaming#event-types).
 
 ```py
 from anthropic import AsyncAnthropic
@@ -138,9 +138,9 @@ Blocks until the stream has been read to completion and returns all `text` conte
 
 ## MCP Helpers
 
-This SDK provides helpers for integrating with [Model Context Protocol (MCP)](https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/Model Context Protocol (MCP)) servers. These helpers convert MCP types to Anthropic API types, reducing boilerplate when working with MCP tools, prompts, and resources.
+This SDK provides helpers for integrating with [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers. These helpers convert MCP types to Anthropic API types, reducing boilerplate when working with MCP tools, prompts, and resources.
 
-> **Note:** The Claude API also supports an [`mcp_servers` parameter](https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/`mcp_servers` parameter) that lets Claude connect directly to remote MCP servers.
+> **Note:** The Claude API also supports an [`mcp_servers` parameter](https://docs.anthropic.com/en/docs/agents-and-tools/mcp) that lets Claude connect directly to remote MCP servers.
 >
 > - Use `mcp_servers` when you have remote servers accessible via URL and only need tool support.
 > - Use the MCP helpers when you need local MCP servers, prompts, resources, or more control over the MCP connection.

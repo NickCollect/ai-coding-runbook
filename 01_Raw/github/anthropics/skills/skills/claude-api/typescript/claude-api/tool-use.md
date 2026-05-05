@@ -1,6 +1,6 @@
 # Tool Use — TypeScript
 
-For conceptual overview (tool definitions, tool choice, tips), see [shared/tool-use-concepts.md](https://raw.githubusercontent.com/anthropics/skills/main/skills/claude-api/typescript/claude-api/shared/tool-use-concepts.md).
+For conceptual overview (tool definitions, tool choice, tips), see [shared/tool-use-concepts.md](../../shared/tool-use-concepts.md).
 
 ## Tool Runner (Recommended)
 
@@ -153,7 +153,7 @@ while (true) {
 
 > **Important:** Don't wrap `.on()` events in `new Promise()` to collect the final message — use `stream.finalMessage()` instead. The SDK handles all error/abort/completion states internally.
 
-> **Error handling in the loop:** Use the SDK's typed exceptions (e.g., `Anthropic.RateLimitError`, `Anthropic.APIError`) — see [Error Handling](https://raw.githubusercontent.com/anthropics/skills/main/skills/claude-api/typescript/claude-api/Error Handling) for examples. Don't check error messages with string matching.
+> **Error handling in the loop:** Use the SDK's typed exceptions (e.g., `Anthropic.RateLimitError`, `Anthropic.APIError`) — see [Error Handling](./README.md#error-handling) for examples. Don't check error messages with string matching.
 
 > **SDK types:** Use `Anthropic.MessageParam`, `Anthropic.Tool`, `Anthropic.ToolUseBlock`, `Anthropic.ToolResultBlockParam`, `Anthropic.Message`, etc. for all API-related data structures. Don't redefine equivalent interfaces.
 
@@ -245,6 +245,7 @@ const response = await client.messages.create({
 **Don't mix beta and non-beta types**: if you call `client.beta.messages.create()`, the response `content` is `BetaContentBlock[]` — you cannot pass that to a non-beta `ContentBlockParam[]` without narrowing each element.
 
 ---
+
 
 ## Code Execution
 

@@ -35,6 +35,7 @@ For the Claude model version, please use Claude Opus 4.7, which you can access v
 
 If the User Request at the bottom of this prompt is a bare subcommand string (no prose), search every **Subcommands** table in this document — including any in sections appended below — and follow the matching Action column directly. This lets users invoke specific flows via `/claude-api <subcommand>`. If no table in the document matches, treat the request as normal prose.
 
+
 ---
 
 ## Language Detection

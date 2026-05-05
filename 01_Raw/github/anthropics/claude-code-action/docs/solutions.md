@@ -4,14 +4,14 @@ This guide provides complete, ready-to-use solutions for common automation scena
 
 ## 📋 Table of Contents
 
-- [Automatic PR Code Review](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/Automatic PR Code Review)
-- [Review Only Specific File Paths](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/Review Only Specific File Paths)
-- [Review PRs from External Contributors](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/Review PRs from External Contributors)
-- [Custom PR Review Checklist](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/Custom PR Review Checklist)
-- [Scheduled Repository Maintenance](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/Scheduled Repository Maintenance)
-- [Issue Auto-Triage and Labeling](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/Issue Auto-Triage and Labeling)
-- [Documentation Sync on API Changes](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/Documentation Sync on API Changes)
-- [Security-Focused PR Reviews](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/Security-Focused PR Reviews)
+- [Automatic PR Code Review](#automatic-pr-code-review)
+- [Review Only Specific File Paths](#review-only-specific-file-paths)
+- [Review PRs from External Contributors](#review-prs-from-external-contributors)
+- [Custom PR Review Checklist](#custom-pr-review-checklist)
+- [Scheduled Repository Maintenance](#scheduled-repository-maintenance)
+- [Issue Auto-Triage and Labeling](#issue-auto-triage-and-labeling)
+- [Documentation Sync on API Changes](#documentation-sync-on-api-changes)
+- [Security-Focused PR Reviews](#security-focused-pr-reviews)
 
 ---
 

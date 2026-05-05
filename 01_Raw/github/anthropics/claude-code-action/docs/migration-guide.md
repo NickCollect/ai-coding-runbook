@@ -345,9 +345,9 @@ You can also pass MCP configuration from a file:
 
 If you encounter issues during migration:
 
-1. Check the [FAQ](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/FAQ) for common questions
-2. Review [example workflows](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/example workflows) for reference
-3. Open an [issue](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/issue) for support
+1. Check the [FAQ](./faq.md) for common questions
+2. Review [example workflows](../examples/) for reference
+3. Open an [issue](https://github.com/anthropics/claude-code-action/issues) for support
 
 ## Version Compatibility
 

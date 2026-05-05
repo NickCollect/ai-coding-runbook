@@ -1,6 +1,6 @@
 # Claude Agent SDK for Python
 
-Python SDK for Claude Agent. See the [Claude Agent SDK documentation](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/Claude Agent SDK documentation) for more information.
+Python SDK for Claude Agent. See the [Claude Agent SDK documentation](https://platform.claude.com/docs/en/agent-sdk/python) for more information.
 
 ## Installation
 
@@ -32,7 +32,7 @@ anyio.run(main)
 
 ## Basic Usage: query()
 
-`query()` is an async function for querying Claude Code. It returns an `AsyncIterator` of response messages. See [src/claude_agent_sdk/query.py](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/src/claude_agent_sdk/query.py).
+`query()` is an async function for querying Claude Code. It returns an `AsyncIterator` of response messages. See [src/claude_agent_sdk/query.py](src/claude_agent_sdk/query.py).
 
 ```python
 from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, TextBlock
@@ -56,7 +56,7 @@ async for message in query(prompt="Tell me a joke", options=options):
 
 ### Using Tools
 
-By default, Claude has access to the full [Claude Code toolset](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/Claude Code toolset) (Read, Write, Edit, Bash, and others). `allowed_tools` is a permission allowlist: listed tools are auto-approved, and unlisted tools fall through to `permission_mode` and `can_use_tool` for a decision. It does not remove tools from Claude's toolset. To block specific tools, use `disallowed_tools`. See the [permissions guide](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/permissions guide) for the full evaluation order.
+By default, Claude has access to the full [Claude Code toolset](https://code.claude.com/docs/en/settings#tools-available-to-claude) (Read, Write, Edit, Bash, and others). `allowed_tools` is a permission allowlist: listed tools are auto-approved, and unlisted tools fall through to `permission_mode` and `can_use_tool` for a decision. It does not remove tools from Claude's toolset. To block specific tools, use `disallowed_tools`. See the [permissions guide](https://platform.claude.com/docs/en/agent-sdk/permissions) for the full evaluation order.
 
 ```python
 options = ClaudeAgentOptions(
@@ -85,7 +85,7 @@ options = ClaudeAgentOptions(
 ## ClaudeSDKClient
 
 `ClaudeSDKClient` supports bidirectional, interactive conversations with Claude
-Code. See [src/claude_agent_sdk/client.py](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/src/claude_agent_sdk/client.py).
+Code. See [src/claude_agent_sdk/client.py](src/claude_agent_sdk/client.py).
 
 Unlike `query()`, `ClaudeSDKClient` additionally enables **custom tools** and **hooks**, both of which can be defined as Python functions.
 
@@ -95,7 +95,7 @@ A **custom tool** is a Python function that you can offer to Claude, for Claude 
 
 Custom tools are implemented in-process MCP servers that run directly within your Python application, eliminating the need for separate processes that regular MCP servers require.
 
-For an end-to-end example, see [MCP Calculator](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/MCP Calculator).
+For an end-to-end example, see [MCP Calculator](examples/mcp_calculator.py).
 
 #### Creating a Simple Tool
 
@@ -186,7 +186,7 @@ options = ClaudeAgentOptions(
 
 ### Hooks
 
-A **hook** is a Python function that the Claude Code _application_ (_not_ Claude) invokes at specific points of the Claude agent loop. Hooks can provide deterministic processing and automated feedback for Claude. Read more in [Intercept and control agent behavior with hooks](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/Intercept and control agent behavior with hooks).
+A **hook** is a Python function that the Claude Code _application_ (_not_ Claude) invokes at specific points of the Claude agent loop. Hooks can provide deterministic processing and automated feedback for Claude. Read more in [Intercept and control agent behavior with hooks](https://platform.claude.com/docs/en/agent-sdk/hooks).
 
 For more examples, see examples/hooks.py.
 
@@ -238,7 +238,7 @@ async with ClaudeSDKClient(options=options) as client:
 
 ## Types
 
-See [src/claude_agent_sdk/types.py](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/src/claude_agent_sdk/types.py) for complete type definitions:
+See [src/claude_agent_sdk/types.py](src/claude_agent_sdk/types.py) for complete type definitions:
 
 - `ClaudeAgentOptions` - Configuration options
 - `AssistantMessage`, `UserMessage`, `SystemMessage`, `ResultMessage` - Message types
@@ -266,21 +266,21 @@ except CLIJSONDecodeError as e:
     print(f"Failed to parse response: {e}")
 ```
 
-See [src/claude_agent_sdk/\_errors.py](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/src/claude_agent_sdk/\_errors.py) for all error types.
+See [src/claude_agent_sdk/\_errors.py](src/claude_agent_sdk/_errors.py) for all error types.
 
 ## Available Tools
 
-See the [Claude Code documentation](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/Claude Code documentation) for a complete list of available tools.
+See the [Claude Code documentation](https://code.claude.com/docs/en/settings#tools-available-to-claude) for a complete list of available tools.
 
 ## Examples
 
-See [examples/quick_start.py](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/examples/quick_start.py) for a complete working example.
+See [examples/quick_start.py](examples/quick_start.py) for a complete working example.
 
-See [examples/streaming_mode.py](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/examples/streaming_mode.py) for comprehensive examples involving `ClaudeSDKClient`. You can even run interactive examples in IPython from [examples/streaming_mode_ipython.py](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/examples/streaming_mode_ipython.py).
+See [examples/streaming_mode.py](examples/streaming_mode.py) for comprehensive examples involving `ClaudeSDKClient`. You can even run interactive examples in IPython from [examples/streaming_mode_ipython.py](examples/streaming_mode_ipython.py).
 
 ## Migrating from Claude Code SDK
 
-If you're upgrading from the Claude Code SDK (versions < 0.1.0), please see the [CHANGELOG.md](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/CHANGELOG.md) for details on breaking changes and new features, including:
+If you're upgrading from the Claude Code SDK (versions < 0.1.0), please see the [CHANGELOG.md](CHANGELOG.md#010) for details on breaking changes and new features, including:
 
 - `ClaudeCodeOptions` → `ClaudeAgentOptions` rename
 - Merged system prompt configuration
@@ -356,4 +356,4 @@ The workflow tracks both the package version and the bundled CLI version separat
 
 ## License and terms
 
-Use of this SDK is governed by Anthropic's [Commercial Terms of Service](https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/Commercial Terms of Service), including when you use it to power products and services that you make available to your own customers and end users, except to the extent a specific component or dependency is covered by a different license as indicated in that component's LICENSE file.
+Use of this SDK is governed by Anthropic's [Commercial Terms of Service](https://www.anthropic.com/legal/commercial-terms), including when you use it to power products and services that you make available to your own customers and end users, except to the extent a specific component or dependency is covered by a different license as indicated in that component's LICENSE file.

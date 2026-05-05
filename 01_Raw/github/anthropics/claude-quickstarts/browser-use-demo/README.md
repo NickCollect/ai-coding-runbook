@@ -94,14 +94,14 @@ This demo runs a browser in a containerized environment. While isolated, please 
 
 ## Implementation Reference
 
-This demo shows how to build browser automation with Claude using Playwright. All browser actions (navigate, click, type, scroll, form_input, etc.) are implemented as methods in [browser.py](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/browser-use-demo/browser.py) using Playwright's async API.
+This demo shows how to build browser automation with Claude using Playwright. All browser actions (navigate, click, type, scroll, form_input, etc.) are implemented as methods in [browser.py](browser_use_demo/tools/browser.py) using Playwright's async API.
 
 ### Key Files
 
-- **[browser.py](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/browser-use-demo/browser.py)** - Main tool with all browser actions
-- **[loop.py](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/browser-use-demo/loop.py)** - Sampling loop for API calls and response handling
-- **[streamlit.py](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/browser-use-demo/streamlit.py)** - Chat UI
-- **[browser_tool_utils/](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/browser-use-demo/browser_tool_utils/)** - JavaScript utilities for DOM extraction, element finding, and form manipulation
+- **[browser.py](browser_use_demo/tools/browser.py)** - Main tool with all browser actions
+- **[loop.py](browser_use_demo/loop.py)** - Sampling loop for API calls and response handling
+- **[streamlit.py](browser_use_demo/streamlit.py)** - Chat UI
+- **[browser_tool_utils/](browser_use_demo/browser_tool_utils/)** - JavaScript utilities for DOM extraction, element finding, and form manipulation
 
 ### Core Patterns
 
@@ -125,13 +125,14 @@ The browser tools implementation includes automatic coordinate scaling to ensure
 
 **How it works:**
 - The browser viewport is fixed at 1920x1080 (16:9 aspect ratio)
-- Claude processes screenshots at 1456x819 pixels for 16:9 aspect ratio (see [documentation](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/browser-use-demo/documentation))
+- Claude processes screenshots at 1456x819 pixels for 16:9 aspect ratio (see [documentation](https://docs.claude.com/en/docs/build-with-claude/vision#evaluate-image-size))
 - The browser tool automatically scales coordinates from Claude's processed resolution (1456x819) to the actual viewport (1920x1080)
 - This ensures clicks and interactions happen at the correct locations
 
 See `browser_use_demo/tools/coordinate_scaling.py` for the implementation.
 
-This demo uses a custom tool definition with an explicit input schema, giving you full control over the tool interface. The `BROWSER_TOOL_DESCRIPTION` and `BROWSER_TOOL_INPUT_SCHEMA` constants in [browser.py](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/browser-use-demo/browser.py) provide a complete example you can use as a starting point for your own browser automation tools.
+This demo uses a custom tool definition with an explicit input schema, giving you full control over the tool interface. The `BROWSER_TOOL_DESCRIPTION` and `BROWSER_TOOL_INPUT_SCHEMA` constants in [browser.py](browser_use_demo/tools/browser.py) provide a complete example you can use as a starting point for your own browser automation tools.
+
 
 ### Modifying & Using as a Template
 
@@ -140,9 +141,9 @@ This demo uses a custom tool definition with an explicit input schema, giving yo
 2. Rebuild the Docker image (volume mount allows live Python code updates)
 
 **To use as a template for your own project:**
-1. Copy [browser.py](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/browser-use-demo/browser.py) and [browser_tool_utils/](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/browser-use-demo/browser_tool_utils/)
-2. Adapt [loop.py](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/browser-use-demo/loop.py) for your API integration
-3. Build your UI or use [streamlit.py](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/browser-use-demo/streamlit.py) as a starting point
+1. Copy [browser.py](browser_use_demo/tools/browser.py) and [browser_tool_utils/](browser_use_demo/browser_tool_utils/)
+2. Adapt [loop.py](browser_use_demo/loop.py) for your API integration
+3. Build your UI or use [streamlit.py](browser_use_demo/streamlit.py) as a starting point
 
 ## Architecture
 
@@ -174,7 +175,7 @@ This demo uses a custom tool definition with an explicit input schema, giving yo
 
 ## How Browser Automation Differs from Computer Use
 
-This browser automation demo is specifically optimized for web automation with DOM-aware features like element targeting, page reading, and form manipulation. While it shares many capabilities with the [computer use demo](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/browser-use-demo/computer use demo), browser automation adds web-specific actions and the ability to target elements by reference instead of just coordinates. Computer use provides general desktop control for any application, while browser automation focuses exclusively on browser-based tasks.
+This browser automation demo is specifically optimized for web automation with DOM-aware features like element targeting, page reading, and form manipulation. While it shares many capabilities with the [computer use demo](../computer-use-demo), browser automation adds web-specific actions and the ability to target elements by reference instead of just coordinates. Computer use provides general desktop control for any application, while browser automation focuses exclusively on browser-based tasks.
 
 ### Actions Unique to Browser Automation
 
@@ -217,6 +218,7 @@ These desktop-level actions from computer use are not in this browser demo:
 
 This is less relevant for browser automation since the `ref` parameter provides reliable element-based targeting, replacing the need for cursor tracking. Note that `hover` provides similar functionality to `mouse_move` for triggering hover states.
 
+
 ## Troubleshooting
 
 **Browser not visible?**
@@ -235,12 +237,12 @@ This is less relevant for browser automation since the `ref` parameter provides 
 
 ## Attribution
 
-This software includes components from Microsoft Playwright. See the [NOTICE](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/browser-use-demo/NOTICE) file for details.
+This software includes components from Microsoft Playwright. See the [NOTICE](NOTICE) file for details.
 
 ## Credits
 
 Built with:
-- [Anthropic Claude API](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/browser-use-demo/Anthropic Claude API)
-- [Playwright](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/browser-use-demo/Playwright)
-- [Streamlit](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/browser-use-demo/Streamlit)
-- [NoVNC](https://raw.githubusercontent.com/anthropics/claude-quickstarts/main/browser-use-demo/NoVNC)
+- [Anthropic Claude API](https://www.anthropic.com)
+- [Playwright](https://playwright.dev)
+- [Streamlit](https://streamlit.io)
+- [NoVNC](https://novnc.com)

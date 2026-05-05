@@ -304,7 +304,7 @@ SECRET LABS AB AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTW
 
 The following fonts are licensed under SIL Open Font License v1.1 reproduced below:
 
-**Arsenal SC**, Copyright 2012 The Arsenal Project Authors ([andrij.design@gmail.com](https://raw.githubusercontent.com/anthropics/skills/main/andrij.design@gmail.com))
+**Arsenal SC**, Copyright 2012 The Arsenal Project Authors ([andrij.design@gmail.com](mailto:andrij.design@gmail.com))
 
 **Big Shoulders**, Copyright 2019 The Big Shoulders Project Authors ([https://github.com/xotypeco/big\_shoulders](https://github.com/xotypeco/big_shoulders))
 
@@ -316,7 +316,7 @@ The following fonts are licensed under SIL Open Font License v1.1 reproduced bel
 
 **DM Mono**, Copyright 2020 The DM Mono Project Authors ([https://www.github.com/googlefonts/dm-mono](https://www.github.com/googlefonts/dm-mono))
 
-**Erica One**, Copyright (c) 2011 by LatinoType Limitada ([luciano@latinotype.com](https://raw.githubusercontent.com/anthropics/skills/main/luciano@latinotype.com)), with Reserved Font Name "Erica One"
+**Erica One**, Copyright (c) 2011 by LatinoType Limitada ([luciano@latinotype.com](mailto:luciano@latinotype.com)), with Reserved Font Name "Erica One"
 
 **Geist Mono**, Copyright 2024 The Geist Project Authors ([https://github.com/vercel/geist-font.git](https://github.com/vercel/geist-font.git))
 
@@ -326,7 +326,7 @@ The following fonts are licensed under SIL Open Font License v1.1 reproduced bel
 
 **Instrument Sans**, Copyright 2022 The Instrument Sans Project Authors ([https://github.com/Instrument/instrument-sans](https://github.com/Instrument/instrument-sans))
 
-**Italiana**, Copyright (c) 2011, Santiago Orozco ([hi@typemade.mx](https://raw.githubusercontent.com/anthropics/skills/main/hi@typemade.mx)), with Reserved Font Name "Italiana"
+**Italiana**, Copyright (c) 2011, Santiago Orozco ([hi@typemade.mx](mailto:hi@typemade.mx)), with Reserved Font Name "Italiana"
 
 **JetBrains Mono**, Copyright 2020 The JetBrains Mono Project Authors ([https://github.com/JetBrains/JetBrainsMono](https://github.com/JetBrains/JetBrainsMono))
 
@@ -344,7 +344,7 @@ The following fonts are licensed under SIL Open Font License v1.1 reproduced bel
 
 **Pixelify Sans**, Copyright 2021 The Pixelify Sans Project Authors ([https://github.com/eifetx/Pixelify-Sans](https://github.com/eifetx/Pixelify-Sans))
 
-**Poiret One**, Copyright (c) 2011, Denis Masharov ([denis.masharov@gmail.com](https://raw.githubusercontent.com/anthropics/skills/main/denis.masharov@gmail.com))
+**Poiret One**, Copyright (c) 2011, Denis Masharov ([denis.masharov@gmail.com](mailto:denis.masharov@gmail.com))
 
 **Red Hat Mono**, Copyright 2024 The Red Hat Project Authors ([https://github.com/RedHatOfficial/RedHatFont](https://github.com/RedHatOfficial/RedHatFont))
 
@@ -402,4 +402,4 @@ This license becomes null and void if any of the above conditions are not met.
 
 DISCLAIMER
 
-THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM OTHER DEALINGS IN THE FONT SOFTWARE.
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM OTHER DEALINGS IN THE FONT SOFTWARE.  

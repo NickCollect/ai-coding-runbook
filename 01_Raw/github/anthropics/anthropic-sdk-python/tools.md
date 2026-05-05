@@ -59,7 +59,7 @@ message = client.beta.messages.create(
 )
 ```
 
-or you can use our [tool runner](https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/tool runner)!
+or you can use our [tool runner](#tool-runner)!
 
 ## Tool runner
 

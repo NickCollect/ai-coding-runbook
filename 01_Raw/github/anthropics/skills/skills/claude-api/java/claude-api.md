@@ -181,7 +181,7 @@ for (BetaMessage message : toolRunner) {
 }
 ```
 
-See the [shared memory tool concepts](https://raw.githubusercontent.com/anthropics/skills/main/skills/claude-api/java/shared memory tool concepts) for more details on the memory tool.
+See the [shared memory tool concepts](../shared/tool-use-concepts.md) for more details on the memory tool.
 
 ### Non-Beta Tool Declaration (manual JSON schema)
 
@@ -210,7 +210,7 @@ MessageCreateParams params = MessageCreateParams.builder()
     .build();
 ```
 
-For manual tool loops, handle `tool_use` blocks in the response, send `tool_result` back, loop until `stop_reason` is `"end_turn"`. See [shared tool use concepts](https://raw.githubusercontent.com/anthropics/skills/main/skills/claude-api/java/shared tool use concepts).
+For manual tool loops, handle `tool_use` blocks in the response, send `tool_result` back, loop until `stop_reason` is `"end_turn"`. See [shared tool use concepts](../shared/tool-use-concepts.md).
 
 ### Building `MessageParam` with Content Blocks (Tool Result Round-Trip)
 

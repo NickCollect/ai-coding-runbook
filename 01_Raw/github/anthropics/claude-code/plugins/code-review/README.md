@@ -196,7 +196,7 @@ https://github.com/owner/repo/blob/[full-sha]/path/file.ext#L[start]-L[end]
 **Issue**: `gh` commands fail
 
 **Solution**:
-- Install GitHub CLI: `brew install gh` (macOS) or see [GitHub CLI installation](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/code-review/GitHub CLI installation)
+- Install GitHub CLI: `brew install gh` (macOS) or see [GitHub CLI installation](https://cli.github.com/)
 - Authenticate: `gh auth login`
 - Verify repository has GitHub remote
 

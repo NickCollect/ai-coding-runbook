@@ -11,7 +11,7 @@
   - When triggered on an **issue**: Always creates a new branch for the work
   - When triggered on an **open PR**: Always pushes directly to the existing PR branch
   - When triggered on a **closed PR**: Creates a new branch since the original is no longer active
-- **View GitHub Actions Results**: Can access workflow runs, job logs, and test results on the PR where it's tagged when `actions: read` permission is configured (see [Additional Permissions for CI/CD Integration](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/Additional Permissions for CI/CD Integration))
+- **View GitHub Actions Results**: Can access workflow runs, job logs, and test results on the PR where it's tagged when `actions: read` permission is configured (see [Additional Permissions for CI/CD Integration](./configuration.md#additional-permissions-for-cicd-integration))
 
 ## What Claude Cannot Do
 
@@ -30,4 +30,4 @@
 4. **Branch Management**: Creates new PRs for human authors, pushes directly for Claude's own PRs
 5. **Communication**: Posts updates at every step to keep you informed
 
-This action is built on top of [`anthropics/claude-code-base-action`](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/`anthropics/claude-code-base-action`).
+This action is built on top of [`anthropics/claude-code-base-action`](https://github.com/anthropics/claude-code-base-action).

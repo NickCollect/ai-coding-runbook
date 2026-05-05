@@ -165,10 +165,10 @@ This plugin is included in the Claude Code repository. To use it:
 
 ## Resources
 
-- [Agent SDK Overview](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/agent-sdk-dev/Agent SDK Overview)
-- [TypeScript SDK Reference](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/agent-sdk-dev/TypeScript SDK Reference)
-- [Python SDK Reference](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/agent-sdk-dev/Python SDK Reference)
-- [Agent SDK Examples](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/agent-sdk-dev/Agent SDK Examples)
+- [Agent SDK Overview](https://docs.claude.com/en/api/agent-sdk/overview)
+- [TypeScript SDK Reference](https://docs.claude.com/en/api/agent-sdk/typescript)
+- [Python SDK Reference](https://docs.claude.com/en/api/agent-sdk/python)
+- [Agent SDK Examples](https://docs.claude.com/en/api/agent-sdk/examples)
 
 ## Troubleshooting
 

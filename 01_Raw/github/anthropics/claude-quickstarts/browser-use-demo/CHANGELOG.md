@@ -33,3 +33,4 @@ This file tracks all modifications made to files derived from or inspired by Mic
 - **Date Modified**: 1/18/26
 - **Nature of Changes**:
   - Added clarifying comment in the `options` property explaining that this implementation uses fixed 1920x1080 dimensions with empirical coordinate correction, and directing users to the "Handle coordinate scaling" section in the computer use documentation for the recommended client-side downscaling approach.
+

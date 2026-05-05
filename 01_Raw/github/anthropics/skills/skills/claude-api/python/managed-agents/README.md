@@ -119,7 +119,7 @@ client.beta.sessions.events.send(
 )
 ```
 
-> 💡 **Stream-first:** Open the stream *before* (or concurrently with) sending the message. The stream only delivers events that occur after it opens — stream-after-send means early events arrive buffered in one batch. See [Steering Patterns](https://raw.githubusercontent.com/anthropics/skills/main/skills/claude-api/python/managed-agents/Steering Patterns).
+> 💡 **Stream-first:** Open the stream *before* (or concurrently with) sending the message. The stream only delivers events that occur after it opens — stream-after-send means early events arrive buffered in one batch. See [Steering Patterns](../../shared/managed-agents-events.md#steering-patterns).
 
 ---
 
@@ -189,7 +189,7 @@ for event in events.data:
     print(f"{event.type}: {event.id}")
 ```
 
-> ⚠️ **Prefer the SDK over raw `requests`/`httpx`.** If you hand-roll a poll loop, don't assume `timeout=(5, 60)` or `httpx.Timeout(120)` caps total call duration — both are **per-chunk** read timeouts (reset on every byte), so a trickling response can block forever. For a hard wall-clock deadline, track `time.monotonic()` at the loop level and bail explicitly, or wrap with `asyncio.wait_for()`. See [Receiving Events](https://raw.githubusercontent.com/anthropics/skills/main/skills/claude-api/python/managed-agents/Receiving Events).
+> ⚠️ **Prefer the SDK over raw `requests`/`httpx`.** If you hand-roll a poll loop, don't assume `timeout=(5, 60)` or `httpx.Timeout(120)` caps total call duration — both are **per-chunk** read timeouts (reset on every byte), so a trickling response can block forever. For a hard wall-clock deadline, track `time.monotonic()` at the loop level and bail explicitly, or wrap with `asyncio.wait_for()`. See [Receiving Events](../../shared/managed-agents-events.md#receiving-events).
 
 ---
 
@@ -198,12 +198,14 @@ for event in events.data:
 ```python
 import json
 
+
 def run_custom_tool(tool_name: str, tool_input: dict) -> str:
     """Execute a custom tool and return the result."""
     if tool_name == "run_tests":
         # Your tool implementation here
         return "All tests passed."
     return f"Unknown tool: {tool_name}"
+
 
 def run_session(client, session_id: str):
     """Stream events and handle custom tool calls."""

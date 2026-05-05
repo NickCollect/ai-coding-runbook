@@ -325,7 +325,7 @@ The settings support all Claude Code settings options including:
 - `hooks`: Pre/post tool execution hooks
 - And more...
 
-For a complete list of available settings and their descriptions, see the [Claude Code settings documentation](https://raw.githubusercontent.com/anthropics/claude-code-action/main/docs/Claude Code settings documentation).
+For a complete list of available settings and their descriptions, see the [Claude Code settings documentation](https://docs.anthropic.com/en/docs/claude-code/settings).
 
 **Notes**:
 
