@@ -127,8 +127,10 @@ Full list → [`03_Output/Cheatsheets/`](./03_Output/Cheatsheets/) · Cross-vend
 
 ## Stats
 
-- **9,500+** raw files (markdown + git-cloned source code), maintained by 9 GHA matrix sources
-- **1,300+** LLM-enriched summaries / **85+** entities / **25+** concepts / **8** synthesis essays / **5** comparison matrices / **7** Q&A docs / **10** cheatsheets
+> Numbers reflect current `main`. The v0.1.0 release notes are a snapshot from release time and will drift from `main`.
+
+- **11,500+** raw files (1,650+ markdown + git-cloned source code), maintained by 9 GHA matrix sources
+- **1,358** LLM-enriched summaries / **85** entities / **25** concepts / **8** synthesis essays / **5** comparison matrices / **7** Q&A docs / **10** cheatsheets
 - **GHA cron**: matrix-parallel, every Monday 09:00 HKT. Most recent verified run **2026-05-05, 9/9 success, wall time 12m42s**
 - **Active since**: 2026-05
 

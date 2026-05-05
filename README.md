@@ -127,8 +127,10 @@ Wiki 不只是 mirror 官方文档 —— 真正有价值的是 **`02_Wiki/Compa
 
 ## Stats
 
-- **9,500+** raw 文件（markdown + git-clone 来的源代码），9 个 GHA matrix source 维护
-- **1,300+** LLM-enriched summaries / **85+** entity / **25+** concept / **8** synthesis / **5** comparison / **7** Q&A / **10** cheatsheet
+> 数字反映 `main` 当前。v0.1.0 release notes 是 release 时的 snapshot，跟 main 会有 drift。
+
+- **11,500+** raw 文件（1,650+ markdown + git-clone 来的源代码），9 个 GHA matrix source 维护
+- **1,358** LLM-enriched summaries / **85** entities / **25** concepts / **8** synthesis / **5** comparison / **7** Q&A / **10** cheatsheets
 - **GHA cron**：matrix 并行，每周一 09:00 HKT。最近一次 verified run **2026-05-05，9/9 success，wall time 12m42s**
 - **Active since**：2026-05
 
