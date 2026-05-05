@@ -1,0 +1,54 @@
+name: Feature request / new content
+description: Propose a new source, cheatsheet, comparison matrix, or enrichment workflow change.
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for:
+        - **New source** to add to `scripts/sources.yaml` (a vendor doc site, a GitHub repo).
+        - **New cheatsheet / decision matrix** you'd like to see in `03_Output/Cheatsheets/` or `02_Wiki/Comparison/`.
+        - **Workflow improvement** to the GHA cron, audit, or canonical-names process.
+
+        For brand-new ideas with significant scope, consider opening a Discussion first.
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of request?
+      options:
+        - New source (docs site / GitHub repo)
+        - New cheatsheet / comparison matrix
+        - Workflow / automation improvement
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: Proposal
+      description: What should change, and why is it useful for users?
+      placeholder: |
+        Add `aider.chat/docs` as a new source so users can compare Aider's `.aider.conf.yml` against Claude Code's `CLAUDE.md`.
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Suggested scope
+      description: e.g. which sitemap / prefix to crawl, what entity-level pages to enrich, etc.
+      placeholder: |
+        Crawl https://aider.chat/docs/sitemap.xml. Probably 30-50 pages. Worth a separate `aider.chat` matrix source.
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      placeholder: |
+        Could add Aider as a sub-folder inside one of the existing sources, but it's a distinct vendor so a top-level source is cleaner.
+    validations:
+      required: false

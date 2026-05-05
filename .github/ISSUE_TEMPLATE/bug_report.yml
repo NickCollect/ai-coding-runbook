@@ -1,0 +1,52 @@
+name: Bug report
+description: Something is broken — wrong output, crash, broken link, stale content, etc.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug. A few things speed up triage:
+        - if the bug is in `01_Raw/` content, please remember those files are auto-mirrored from upstream — usually the right fix is a crawler tweak (`scripts/sources.yaml` / `refresh_raw.py`), not editing the raw file directly.
+        - if the bug is in `02_Wiki/` enrichment (entity / concept / summary), include the file path and a quote of the problematic claim.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you observe? What did you expect instead?
+      placeholder: |
+        e.g. `02_Wiki/Entities/Hooks.md` says PreToolUse runs after the tool call, but the Anthropic docs say before.
+    validations:
+      required: true
+
+  - type: textarea
+    id: where
+    attributes:
+      label: Affected file(s) / area
+      description: Path inside the repo, or "everywhere" / "GHA workflow" / etc.
+      placeholder: |
+        02_Wiki/Entities/Hooks.md, line 42
+    validations:
+      required: false
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce (if applicable)
+      placeholder: |
+        1. clone repo
+        2. open in Claude Code
+        3. ask "..."
+        4. agent answers wrong
+    validations:
+      required: false
+
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: Which agent, which version, OS — only relevant if the bug is reproducible in agent behavior.
+      placeholder: |
+        Claude Code 1.x / Cursor 0.4x / Codex CLI / macOS 14
+    validations:
+      required: false

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://github.com/NickCollect/ai-coding-runbook#readme
+    about: Quickstart, architecture, limitations — most questions are answered there.
+  - name: Discussions
+    url: https://github.com/NickCollect/ai-coding-runbook/discussions
+    about: Open-ended questions, ideas, or "show and tell" — better than an issue if there's no concrete bug or task.

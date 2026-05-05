@@ -1,0 +1,32 @@
+name: Question / usage help
+description: How do I use this with my agent? Why isn't X working? etc.
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before opening a question issue, please check:
+        - `README.md` — quickstart, three usage modes, limitations
+        - `docs/ARCHITECTURE.md` — how the GHA cron / enrichment / audit work
+        - `docs/MAINTENANCE.md` — common pitfalls (the "lessons learned" section)
+
+        If your question is open-ended ("what's the best way to ..."), consider Discussions instead.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+      placeholder: |
+        I forked the repo, replaced `sources.yaml` with my company's internal doc URLs, and the GHA cron crawls 0 pages. What did I miss?
+    validations:
+      required: true
+
+  - type: textarea
+    id: tried
+    attributes:
+      label: What have you already tried?
+      placeholder: |
+        - ran `python3 scripts/refresh_raw.py --dry-run --source <name>` locally — same 0 pages
+        - checked sitemap URL by hand in browser — it loads
+    validations:
+      required: false
