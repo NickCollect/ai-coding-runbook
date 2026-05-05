@@ -4,11 +4,14 @@ name: refresh-raw
 # Plus manual trigger from GitHub UI / `gh workflow run refresh-raw`.
 #
 # Architecture:
-#   - 6 parallel matrix jobs, one per source. Each fetches its source and
+#   - 9 parallel matrix jobs, one per source. Each fetches its source and
 #     commits its own slice of 01_Raw/ (with rebase-retry to handle parallel pushes).
 #   - One aggregator job runs after all matrix jobs to write the human-readable
 #     changelog (03_Output/Changelog/YYYY-MM-DD.md) summarizing what changed.
 #   - fail-fast: false  →  one source's failure never cancels the others.
+#
+# Source list MUST match `python3 scripts/refresh_raw.py --list` output exactly,
+# otherwise the matrix job for that source aborts with "unknown source".
 
 on:
   schedule:
@@ -33,7 +36,7 @@ jobs:
           - code.claude.com
           - platform.claude.com
           - anthropic.com
-          - platform.openai.com
+          - docs.cursor.com
           - ai.google.dev
           - openai.com
           - github.anthropics

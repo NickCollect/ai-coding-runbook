@@ -8,7 +8,7 @@
 
 **English** | [中文](./README.md)
 
-> **Multi-vendor AI coding knowledge base.** Auto-syncs official docs from Claude Code / Cursor / Codex CLI / OpenAI / Gemini every week, then LLM-enriches them into queryable wiki entries. Designed as drop-in long-term context for any AI agent.
+> **If you use Claude Code, Cursor, Codex CLI, Gemini and MCP, and you're tired of jumping across scattered official docs**, this repo gives you a **local, searchable, agent-readable multi-vendor AI coding knowledge base**. Weekly auto-sync of five vendors' official docs + LLM enrichment into a queryable wiki — clone it and your AI agent has long-term context out of the box.
 
 ---
 
@@ -89,12 +89,30 @@ The agent auto-loads `CLAUDE.md` / `AGENTS.md` project rules and reads `02_Wiki/
 
 ---
 
-## Status & Stats
+## Stats
 
-- **13,000+** raw files auto-synced from 6 sources
-- **700+** LLM-enriched summaries / **70+** entities / **25+** concepts / **4** synthesis / **5** comparisons / **7** Q&A / **10+** cheatsheets
-- **GHA cron**: matrix-parallel, every Monday 09:00 HKT, ~10 min wall clock
+- **9,400+** raw files (markdown + git-cloned source code), maintained by 9 GHA matrix sources
+- **1,300+** LLM-enriched summaries / **85+** entities / **25+** concepts / **8** synthesis essays / **5** comparison matrices / **7** Q&A docs / **10** cheatsheets
+- **GHA cron**: matrix-parallel, every Monday 09:00 HKT, target ~10 min wall clock
 - **Active since**: 2026-05
+
+---
+
+## Status
+
+> **v0.1.0 — early preview**. Honest current state, not aspirational:
+
+| Component | Status |
+|---|---|
+| Raw content (`01_Raw/`) | ✓ Manually seeded + GHA-bot maintained |
+| Wiki enrichment (`02_Wiki/`) | ✓ Stable; growth is user-triggered, not automatic |
+| Cheatsheets / comparisons (`03_Output/`) | ✓ Hand-maintained |
+| GHA `refresh-raw` workflow | ⏳ Implemented; v0.1.0 just fixed a workflow.yml ↔ sources.yaml mismatch — first verified end-to-end run is the next milestone |
+| OpenAI Platform docs auto-refresh | ✗ Cloudflare 403; manually fetched key pages only (`01_Raw/docs.openai.com/`, 30 guides) |
+| Auto-enrichment from raw diffs | ✗ Intentionally **not** automated — anti-hallucination. User triggers in their own agent session |
+| New-source onboarding | Manual (edit `scripts/sources.yaml`, validate with `--dry-run`, push) |
+
+Each ✓ / ⏳ / ✗ above is explained in detail in [§ 3 Core Mechanisms](#3-core-mechanisms) and [§ 10 Limitations](#10-limitations).
 
 ---
 
@@ -103,7 +121,7 @@ The agent auto-loads `CLAUDE.md` / `AGENTS.md` project rules and reads `02_Wiki/
 ```mermaid
 flowchart TB
     Internet["🌐 Internet<br/>Anthropic · OpenAI · Google · Cursor official docs + GitHub"]
-    Raw["01_Raw/<br/>Single source of truth (read-only)<br/>5 docs sites + multiple GitHub repos"]
+    Raw["01_Raw/<br/>Single source of truth (read-only)<br/>6 docs sites + 19 GitHub repos"]
     Wiki["02_Wiki/<br/>LLM-enriched layer<br/>Entities · Concepts · Summaries · Synthesis · Comparison · QA"]
     Output["03_Output/<br/>Deliverables + monitoring<br/>Cheatsheets · Changelog · My-Setup"]
 
@@ -118,15 +136,17 @@ Detailed structure:
 ```
 ai-coding-runbook/
 ├── 01_Raw/                    ← Source of truth (read-only, GHA bot writes)
-│   ├── docs.claude.com/       Anthropic Claude official docs
-│   ├── anthropic.com/{news,research,engineering}
-│   ├── docs.openai.com/       OpenAI platform docs
-│   ├── docs.cursor.com/       Cursor IDE docs (full llms.txt)
+│   ├── code.claude.com/       Claude Code docs
+│   ├── platform.claude.com/   Anthropic API + platform docs
+│   ├── anthropic.com/{research,engineering}/   blog
+│   ├── docs.cursor.com/       Cursor IDE docs (selected prefixes)
 │   ├── ai.google.dev/         Gemini API docs
+│   ├── openai.com/            OpenAI blog
+│   ├── docs.openai.com/       OpenAI platform docs (30 manually fetched pages, GHA cannot refresh)
 │   ├── github/anthropics/<repo>/         (shallow clone)
 │   ├── github/modelcontextprotocol/<repo>/
-│   ├── github/openai/{codex,model_spec,...}/
-│   └── _meta/last_crawl.json
+│   ├── github/openai/<repo>/
+│   └── _meta/refresh_*.json   per-source last-crawl timestamps
 │
 ├── 02_Wiki/                   ← LLM-enriched layer
 │   ├── Entities/              Specific feature/tool dossiers (Skills, Hooks, MCP-server, ...)
@@ -209,19 +229,26 @@ python3 scripts/refresh_raw.py --all      # ~10 min
 
 ### Mechanism 1 · GHA cron auto-pulls raw (matrix-parallel)
 
-`.github/workflows/refresh-raw.yml` runs every Monday 01:00 UTC (= 09:00 HKT). **6 sources run in parallel** (GHA matrix), each with independent commit + push (`git pull --rebase` + 5 retries to handle concurrency).
+`.github/workflows/refresh-raw.yml` runs every Monday 01:00 UTC (= 09:00 HKT). **9 sources run in parallel** (GHA matrix), each with independent commit + push (`git pull --rebase` + 5 retries to handle concurrency).
 
 ```
 matrix sources (parallel):
-  - code.claude.com           → 124 docs   (~2 min with concurrency=5)
-  - platform.claude.com       → 1275 docs  (~7 min)
-  - anthropic.com             → 345 docs   (~2 min, no .md probe)
-  - support.claude.com        → 347 docs   (~2 min)
-  - github.anthropics         → 12 repos   (~3 min)
-  - github.modelcontextprotocol → 6 repos  (~2 min)
+  - code.claude.com              # Claude Code docs
+  - platform.claude.com          # Anthropic API + platform docs
+  - anthropic.com                # research + engineering blog
+  - docs.cursor.com              # Cursor IDE docs
+  - ai.google.dev                # Gemini API docs
+  - openai.com                   # OpenAI blog (model releases / announcements)
+  - github.anthropics            # 8 repos (claude-code, agent-sdk, etc.)
+  - github.modelcontextprotocol  # 6 repos (spec, sdks, servers, etc.)
+  - github.openai                # 4 repos (codex, model_spec, etc.)
 ```
 
+> **Important**: matrix source names must match `python3 scripts/refresh_raw.py --list` output **exactly**, or that matrix job fails with "unknown source". `fail-fast: false` ensures one failure doesn't kill the others.
+
 Within each source: `ThreadPoolExecutor(5)` concurrent HTTP fetch + auto-retry (429/5xx backoff). Wall time ≈ max(any single source) ≈ **~10 min**.
+
+**`platform.openai.com/docs` is not in the matrix**: Cloudflare 403-blocks crawlers. 30 manually fetched key pages live in `01_Raw/docs.openai.com/`.
 
 **Aggregator job** (runs after matrix completes): scans last-2h bot commits → writes `03_Output/Changelog/YYYY-MM-DD.md`.
 
@@ -366,18 +393,28 @@ Sync via git, not iCloud. **Don't hardcode absolute paths** in scripts — use `
 
 ## 6. Source list
 
-See `scripts/sources.yaml`. Currently covers:
+See `scripts/sources.yaml`. Currently 9 active GHA matrix sources:
 
-1. `docs.claude.com` (entire site, sectioned) — Claude Code, API, models, prompt engineering, release notes, legal
-2. `anthropic.com/{news,research,engineering}` — blog
-3. `docs.openai.com` — OpenAI platform
-4. `docs.cursor.com` — Cursor IDE (full llms.txt)
-5. `ai.google.dev` — Gemini API
-6. `anthropics/*` GitHub repos — claude-code, agent SDK, cookbook, quickstarts, courses, skills, evals, etc.
-7. `modelcontextprotocol/*` GitHub repos — MCP spec, SDK, reference servers
-8. `openai/*` GitHub repos — codex, openai-python, openai-node, model_spec
+**Docs sites (6, sitemap → HTML→markdown)**
 
-To add / remove a source: edit `scripts/sources.yaml`, commit. Next cron picks it up.
+1. `code.claude.com` — Claude Code docs
+2. `platform.claude.com` — Anthropic API + platform docs (legacy `docs.claude.com` 301-redirects to these two)
+3. `anthropic.com/{research,engineering}` — Anthropic blog
+4. `docs.cursor.com` — Cursor IDE docs (by prefix: `/get-started/` `/chat/` `/tab/` `/agent/` `/context/` `/settings/` `/troubleshooting/` `/account/` `/privacy/`)
+5. `ai.google.dev/gemini-api/docs/` — Gemini API docs
+6. `openai.com/{index,blog}/` — OpenAI blog (model releases / product announcements)
+
+**GitHub repos (19 active, shallow git clone)**
+
+7. `anthropics/*` — claude-code, claude-agent-sdk-python, anthropic-sdk-{python,typescript}, claude-code-action, claude-code-base-action, claude-quickstarts, prompt-eng-interactive-tutorial, skills
+8. `modelcontextprotocol/*` — modelcontextprotocol (spec), python-sdk, typescript-sdk, servers, docs, mcpb (formerly anthropics/dxt)
+9. `openai/*` — codex, openai-python, openai-node, model_spec
+
+**Manually maintained (GHA does not refresh)**
+
+- `docs.openai.com/` — `platform.openai.com/docs` is Cloudflare 403-blocked; 30 key guides fetched manually, re-fetch on demand
+
+To add / remove a source: edit `scripts/sources.yaml`, commit. Next cron picks it up. **Always dry-run validate first**: `python3 scripts/refresh_raw.py --dry-run --source <name>`.
 
 ---
 

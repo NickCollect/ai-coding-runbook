@@ -8,7 +8,7 @@
 
 [English](./README.en.md) | **中文**
 
-> **多厂商 AI 编程工具知识库**：把 Claude Code / Cursor / Codex CLI / OpenAI / Gemini 五家官方文档每周自动抓 + LLM 加工成可查询 wiki，专门设计成给 AI agent 当 long-term context。
+> **如果你同时用 Claude Code / Cursor / Codex CLI / Gemini / MCP，且烦透了在多家官方文档之间反复跳**，这个 repo 给你一个**本地、可搜索、给 AI agent 读的多厂商 AI 编程知识库**。每周自动抓五家官方文档 + LLM 加工成可查询 wiki，clone 完直接给 agent 当 long-term context。
 
 ---
 
@@ -89,12 +89,30 @@ agent 自动加载 `CLAUDE.md` / `AGENTS.md` 项目规则，读 `02_Wiki/Compari
 
 ---
 
-## Status & Stats
+## Stats
 
-- **13,000+** 个 raw 文件，6 个来源每周一自动同步
-- **700+** LLM-enriched summaries / **70+** entity / **25+** concept / **4** synthesis / **5** comparison / **7** Q&A / **10+** cheatsheet
-- **GHA cron**：matrix 并行，每周一 09:00 HKT，~10 分钟 wall clock
+- **9,400+** raw 文件（markdown + git-clone 来的源代码），9 个 GHA matrix source 维护
+- **1,300+** LLM-enriched summaries / **85+** entity / **25+** concept / **8** synthesis / **5** comparison / **7** Q&A / **10** cheatsheet
+- **GHA cron**：matrix 并行，每周一 09:00 HKT，目标 ~10 分钟 wall clock
 - **Active since**：2026-05
+
+---
+
+## Status
+
+> **v0.1.0 — early preview**。下面是诚实的当前状态，不是宣传：
+
+| 组件 | 状态 |
+|---|---|
+| Raw 内容（`01_Raw/`） | ✓ 手动 seed + GHA bot 维护 |
+| Wiki enrichment（`02_Wiki/`） | ✓ 稳定；增长靠 user-triggered，不自动 |
+| Cheatsheets / comparisons（`03_Output/`） | ✓ 手维护 |
+| GHA `refresh-raw` workflow | ⏳ 已实现，v0.1.0 刚修了一处 workflow.yml ↔ sources.yaml 的不一致；首次端到端跑通是下一个 milestone |
+| OpenAI Platform docs 自动刷新 | ✗ Cloudflare 403 防爬；只能手动抓关键页面（`01_Raw/docs.openai.com/`，30 个 guides） |
+| 从 raw diff 自动 enrich | ✗ **故意**不自动 —— 防 LLM 幻觉。用户在自己的 agent session 里触发 |
+| 新 source 接入 | 手动（编辑 `scripts/sources.yaml`，`--dry-run` 验证，push） |
+
+每个 ✓ / ⏳ / ✗ 在 [§ 三 核心机制](#三核心机制) 和 [§ 十、Limitations](#十limitations--已知限制) 有详细解释。
 
 ---
 
@@ -103,7 +121,7 @@ agent 自动加载 `CLAUDE.md` / `AGENTS.md` 项目规则，读 `02_Wiki/Compari
 ```mermaid
 flowchart TB
     Internet["🌐 互联网<br/>Anthropic · OpenAI · Google · Cursor 官方文档 + GitHub"]
-    Raw["01_Raw/<br/>真理之源（read-only）<br/>5 个 docs site + 多个 GitHub repo"]
+    Raw["01_Raw/<br/>真理之源（read-only）<br/>6 个 docs site + 19 个 GitHub repo"]
     Wiki["02_Wiki/<br/>LLM 加工层<br/>Entities · Concepts · Summaries · Synthesis · Comparison · QA"]
     Output["03_Output/<br/>对外交付 + 监控<br/>Cheatsheets · Changelog · My-Setup"]
 
@@ -118,15 +136,17 @@ flowchart TB
 ```
 ai-coding-runbook/
 ├── 01_Raw/                    ← 真理之源（read-only，GHA bot 写）
-│   ├── docs.claude.com/       Anthropic 官方文档
-│   ├── anthropic.com/{news,research,engineering}
-│   ├── docs.openai.com/       OpenAI 平台文档
-│   ├── docs.cursor.com/       Cursor IDE 文档（llms.txt 全量）
+│   ├── code.claude.com/       Claude Code 文档
+│   ├── platform.claude.com/   Anthropic API + 平台文档
+│   ├── anthropic.com/{research,engineering}/   blog
+│   ├── docs.cursor.com/       Cursor IDE 文档（按 prefix 抓主要 sections）
 │   ├── ai.google.dev/         Gemini API 文档
-│   ├── github/anthropics/<repo>/         （shallow clone）
+│   ├── openai.com/            OpenAI 官网 blog
+│   ├── docs.openai.com/       OpenAI 平台文档（手动抓的 30 个 key pages，GHA 不刷）
+│   ├── github/anthropics/<repo>/        （shallow clone）
 │   ├── github/modelcontextprotocol/<repo>/
-│   ├── github/openai/{codex,model_spec,...}/
-│   └── _meta/last_crawl.json
+│   ├── github/openai/<repo>/
+│   └── _meta/refresh_*.json   各 source 上次抓的时间戳
 │
 ├── 02_Wiki/                   ← LLM 加工层
 │   ├── Entities/              具体 feature/tool 档案（Skills, Hooks, MCP-server, ...）
@@ -209,19 +229,26 @@ python3 scripts/refresh_raw.py --all      # ~10 分钟
 
 ### 机制 1 · GHA cron 自动抓 raw（matrix 并行）
 
-`.github/workflows/refresh-raw.yml` 每周一 01:00 UTC（= 09:00 HKT）自动跑。**6 个 source 并行**（GHA matrix），每个 source 独立 commit + push（`git pull --rebase` + 重试 5 次防并发冲突）。
+`.github/workflows/refresh-raw.yml` 每周一 01:00 UTC（= 09:00 HKT）自动跑。**9 个 source 并行**（GHA matrix），每个 source 独立 commit + push（`git pull --rebase` + 重试 5 次防并发冲突）。
 
 ```
 matrix sources (parallel):
-  - code.claude.com           → 124 docs   (~2 min with concurrency=5)
-  - platform.claude.com       → 1275 docs  (~7 min)
-  - anthropic.com             → 345 docs   (~2 min, no .md probe)
-  - support.claude.com        → 347 docs   (~2 min)
-  - github.anthropics         → 12 repos   (~3 min)
-  - github.modelcontextprotocol → 6 repos  (~2 min)
+  - code.claude.com              # Claude Code 文档
+  - platform.claude.com          # Anthropic API + 平台文档
+  - anthropic.com                # research + engineering blog
+  - docs.cursor.com              # Cursor IDE 文档
+  - ai.google.dev                # Gemini API 文档
+  - openai.com                   # OpenAI 官网 blog（model release）
+  - github.anthropics            # 8 个 repo（claude-code, agent-sdk 等）
+  - github.modelcontextprotocol  # 6 个 repo（spec, sdks, servers 等）
+  - github.openai                # 4 个 repo（codex, model_spec 等）
 ```
 
+> **注意**：matrix source 名字必须跟 `python3 scripts/refresh_raw.py --list` 输出**完全一致**，否则该 matrix job 会以 "unknown source" 失败。`fail-fast: false` 保证一个挂掉不影响其他。
+
 每个 source 内：`ThreadPoolExecutor(5)` 并发 HTTP fetch + 自动 retry（429/5xx backoff）。Wall time ≈ max(单 source) ≈ **~10 分钟**。
+
+**`platform.openai.com/docs` 不在 matrix 里**：被 Cloudflare 403 防爬；手动抓的 30 个关键页面在 `01_Raw/docs.openai.com/`。
 
 **aggregator job**（matrix 全跑完后跑一次）：扫最近 2h 内 bot commits → 写 `03_Output/Changelog/YYYY-MM-DD.md`。
 
@@ -366,18 +393,28 @@ GHA workflow 没有 PR review，改 sources.yaml 加坏 prefix 会导致下次 c
 
 ## 六、源清单
 
-详见 `scripts/sources.yaml`。当前覆盖：
+详见 `scripts/sources.yaml`。当前 9 个 GHA matrix source：
 
-1. `docs.claude.com` 整站（按 section 抓）—— Claude Code、API、模型、prompt 工程、release notes、legal
-2. `anthropic.com/{news,research,engineering}` —— blog
-3. `docs.openai.com` —— OpenAI 平台文档
-4. `docs.cursor.com` —— Cursor IDE 文档（llms.txt 全量）
-5. `ai.google.dev` —— Gemini API 文档
-6. `anthropics/*` GitHub repos —— claude-code, agent SDK, cookbook, quickstarts, courses, skills, evals 等
-7. `modelcontextprotocol/*` GitHub repos —— MCP spec, SDK, reference servers
-8. `openai/*` GitHub repos —— codex, openai-python, openai-node, model_spec
+**Docs sites（6 个，sitemap 抓 + HTML→markdown）**
 
-加 / 减源：编辑 `scripts/sources.yaml`，commit。下次 cron 跑自动覆盖。
+1. `code.claude.com` —— Claude Code 文档
+2. `platform.claude.com` —— Anthropic API + 平台文档（旧 `docs.claude.com` 已 301 重定向到这两个域名）
+3. `anthropic.com/{research,engineering}` —— Anthropic blog
+4. `docs.cursor.com` —— Cursor IDE 文档（按 prefix：`/get-started/` `/chat/` `/tab/` `/agent/` `/context/` `/settings/` `/troubleshooting/` `/account/` `/privacy/`）
+5. `ai.google.dev/gemini-api/docs/` —— Gemini API 文档
+6. `openai.com/{index,blog}/` —— OpenAI 官网 blog（model release / 产品公告）
+
+**GitHub repos（19 个 active，shallow git clone）**
+
+7. `anthropics/*` —— claude-code, claude-agent-sdk-python, anthropic-sdk-{python,typescript}, claude-code-action, claude-code-base-action, claude-quickstarts, prompt-eng-interactive-tutorial, skills
+8. `modelcontextprotocol/*` —— modelcontextprotocol（spec）, python-sdk, typescript-sdk, servers, docs, mcpb（前 anthropics/dxt）
+9. `openai/*` —— codex, openai-python, openai-node, model_spec
+
+**手动维护（GHA 不刷）**
+
+- `docs.openai.com/` —— `platform.openai.com/docs` 被 Cloudflare 403 防爬；30 个关键 guides 手动抓的，需要更新时手动 re-fetch
+
+加 / 减源：编辑 `scripts/sources.yaml`，commit。下次 cron 跑自动覆盖。**改前必须 dry-run 验证**：`python3 scripts/refresh_raw.py --dry-run --source <name>`。
 
 ---
 
