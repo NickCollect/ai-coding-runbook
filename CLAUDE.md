@@ -21,11 +21,13 @@
 
 ```
 01_Raw/       ← 真理之源，read-only（GHA bot 写，人 / LLM 永远不能改）
-  ├── docs.claude.com/      （Anthropic Claude 官方文档）
-  ├── anthropic.com/        （news / research / engineering blog）
-  ├── docs.openai.com/      （OpenAI 平台文档）
-  ├── docs.cursor.com/      （Cursor IDE 文档，llms.txt 全量）
+  ├── code.claude.com/      （Claude Code 文档）
+  ├── platform.claude.com/  （Anthropic API + 平台文档）
+  ├── anthropic.com/        （research + engineering blog）
+  ├── docs.cursor.com/      （Cursor IDE 文档；实际抓 cursor.com/docs/，按 prefix 取 23 个 sections）
   ├── ai.google.dev/        （Gemini API 文档）
+  ├── openai.com/           （OpenAI 官网 blog / model release 公告）
+  ├── docs.openai.com/      （OpenAI 平台文档；30 个手动抓的 key pages，GHA 不刷）
   └── github/               （anthropics/* + modelcontextprotocol/* + openai/* 的 git clone）
 
 02_Wiki/      ← 加工层（神经元）
@@ -43,7 +45,7 @@
   └── templates/     （cheatsheet 模板，将来加）
 ```
 
-详细架构 → `README.md` § 一。
+详细架构 → [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md)（含完整目录树 + 5 个核心机制）。
 
 ---
 
@@ -59,7 +61,7 @@
 | **D · Audit** | 跑 `python3 scripts/audit.py` | 列修复建议但不自动修 |
 | **E · 日志** | 在 `02_Wiki/_progress.log` 追加：`[YYYY-MM-DD HH:MM] INGEST - <N> summaries / ...` | — |
 
-**为什么每 Phase self-review**：防上一阶段幻觉污染下一阶段。详细见 `README.md` § 四。
+**为什么每 Phase self-review**：防上一阶段幻觉污染下一阶段。详细见 [`docs/INGEST_WORKFLOW.md`](./docs/INGEST_WORKFLOW.md)。
 
 ---
 
@@ -107,11 +109,14 @@
 
 | 文件 | 内容 |
 |---|---|
-| **`README.md`** | **Master 手册**——架构、机制、工作流、踩坑详解 |
+| **`README.md`** | 项目 landing page（用户视角：Why / Quickstart / Status / Limitations） |
+| [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) | 完整目录树 + 5 个核心机制（GHA cron / enrichment 飞轮 / audit / canonical-names） |
+| [`docs/INGEST_WORKFLOW.md`](./docs/INGEST_WORKFLOW.md) | LLM ingest SOP（Phase A→E + 用户日常工作流） |
+| [`docs/MAINTENANCE.md`](./docs/MAINTENANCE.md) | 维护者手册（踩过的坑 / 长期节奏 / 术语表） |
 | `system_instructions.md` | 深度契约：frontmatter 规范、ingest 流程细节、edge case |
 | `02_Wiki/_canonical-names.md` | 错别字 / 多名同实勘误表（enrich 前必读）|
 | `docs/specs/` | 各升级的设计文档 |
 
 ---
 
-> **元规则**：本文件 / `AGENTS.md` / `system_instructions.md` 都是 `README.md` 的子集。冲突时以 `README.md` 为准。
+> **元规则**：本文件 / `AGENTS.md` / `system_instructions.md` 是给 agent 的 hook，`README.md` + `docs/` 是给人 / 维护者的手册。冲突时以 `README.md` + `docs/` 为准。

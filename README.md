@@ -8,7 +8,7 @@
 
 [English](./README.en.md) | **中文**
 
-> **如果你同时用 Claude Code / Cursor / Codex CLI / Gemini / MCP，且烦透了在多家官方文档之间反复跳**，这个 repo 给你一个**本地、可搜索、给 AI agent 读的多厂商 AI 编程知识库**。每周自动抓五家官方文档 + LLM 加工成可查询 wiki，clone 完直接给 agent 当 long-term context。
+> **如果你同时用 Claude Code / Cursor / Codex CLI / Gemini / MCP，且烦透了在多家官方文档之间反复跳**，这个 repo 给你一个**本地、可搜索、给 AI agent 读的多厂商 AI 编程知识库**。每周自动抓 4 家官方文档 + MCP 协议生态 + LLM 加工成可查询 wiki，clone 完直接给 agent 当 long-term context。
 
 ---
 
@@ -21,7 +21,7 @@
 - 想给你的 AI agent 喂 long-term **多厂商**上下文，但市面没现成的开源选项
 - 文档变化快，模型权重过期，agent 答的不一定是最新版
 
-那这个 repo 把这五家官方文档**每周自动抓** + LLM **加工成可查询的 entity / cheatsheet / decision matrix**，clone 完就能直接给 agent 当 long-term context。
+那这个 repo 把这 4 家官方文档（Anthropic / OpenAI / Google / Cursor）+ MCP 协议生态**每周自动抓** + LLM **加工成可查询的 entity / cheatsheet / decision matrix**，clone 完就能直接给 agent 当 long-term context。
 
 ---
 
@@ -62,14 +62,16 @@
 
 ```bash
 git clone https://github.com/NickCollect/ai-coding-runbook
-cursor ai-coding-runbook    # 或 claude (Claude Code), codex (Codex CLI)
+cd ai-coding-runbook
 ```
 
-打开后直接问你的 agent：
+然后用任意 AI 编程 agent 打开这个文件夹（**Claude Code / Cursor / Codex CLI / Gemini CLI / Aider** 等）。session 启动会自动加载 `CLAUDE.md` / `AGENTS.md`，agent 知道项目结构和工作规则。
+
+直接问 agent：
 
 > "Skills、MCP server 和 Subagent 三个概念有啥区别？什么时候用哪个？"
 
-agent 自动加载 `CLAUDE.md` / `AGENTS.md` 项目规则，读 `02_Wiki/Comparison/skill-vs-plugin-vs-mcp-vs-subagent.md` 答你。**0 配置、0 API key**（agent 用你自己的订阅）。
+agent 读 `02_Wiki/Comparison/skill-vs-plugin-vs-mcp-vs-subagent.md` 答你。**0 配置、0 API key**（agent 用你自己的订阅）。
 
 ---
 
@@ -96,6 +98,7 @@ Wiki 不只是 mirror 官方文档 —— 真正有价值的是 **`02_Wiki/Compa
 > **从 [`03_Output/Cheatsheets/skill-vs-plugin-vs-mcp-vs-subagent.md`](./03_Output/Cheatsheets/skill-vs-plugin-vs-mcp-vs-subagent.md)：**
 >
 > Claude Code 4 种最常被混淆的扩展机制 —— 一句话区分：
+>
 > - **Skill** = 一份可加载的"专项知识 + 流程"（文件，本地）
 > - **Plugin** = 多种东西的**打包分发**容器（可含 skills/hooks/MCP/subagents/commands）
 > - **MCP-server** = 把**外部服务**接进来当 tool（进程，远程或本地）
@@ -145,73 +148,36 @@ Wiki 不只是 mirror 官方文档 —— 真正有价值的是 **`02_Wiki/Compa
 | 从 raw diff 自动 enrich | ✗ **故意**不自动 —— 防 LLM 幻觉。用户在自己的 agent session 里触发 |
 | 新 source 接入 | 手动（编辑 `scripts/sources.yaml`，`--dry-run` 验证，push） |
 
-每个 ✓ / ⏳ / ✗ 在 [§ 三 核心机制](#三核心机制) 和 [§ 十、Limitations](#十limitations--已知限制) 有详细解释。
+每个 ✓ / ✗ 在 [Limitations](#limitations--已知限制) 和 [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) 有详细解释。
 
 ---
 
-## 一、三层架构
+## 三层架构（速记）
 
 ```mermaid
-flowchart TB
-    Internet["🌐 互联网<br/>Anthropic · OpenAI · Google · Cursor 官方文档 + GitHub"]
-    Raw["01_Raw/<br/>真理之源（read-only）<br/>6 个 docs site + 19 个 GitHub repo"]
-    Wiki["02_Wiki/<br/>LLM 加工层<br/>Entities · Concepts · Summaries · Synthesis · Comparison · QA"]
-    Output["03_Output/<br/>对外交付 + 监控<br/>Cheatsheets · Changelog · My-Setup"]
+flowchart LR
+    Internet["🌐 4 家官方文档<br/>+ MCP 生态"]
+    Raw["01_Raw/<br/>真理之源"]
+    Wiki["02_Wiki/<br/>LLM 加工"]
+    Output["03_Output/<br/>对外交付"]
 
-    Internet -->|"GHA cron 每周一<br/>scripts/refresh_raw.py"| Raw
-    Raw -->|"LLM enrich<br/>(用户在自己的 agent session 里 trigger)"| Wiki
+    Internet -->|"GHA cron 每周一"| Raw
+    Raw -->|"LLM enrich (user-triggered)"| Wiki
     Wiki --> Output
     Raw -->|"changelog 自动写"| Output
 ```
 
-详细目录结构：
+```
+01_Raw/        ← 6 个 docs site + 19 个 GitHub repo（read-only，GHA bot 写）
+02_Wiki/       ← Entities / Concepts / Summaries / Synthesis / Comparison / QA
+03_Output/     ← Cheatsheets / Changelog / My-Setup
+```
 
-```
-ai-coding-runbook/
-├── 01_Raw/                    ← 真理之源（read-only，GHA bot 写）
-│   ├── code.claude.com/       Claude Code 文档
-│   ├── platform.claude.com/   Anthropic API + 平台文档
-│   ├── anthropic.com/{research,engineering}/   blog
-│   ├── docs.cursor.com/       Cursor IDE 文档（按 prefix 抓主要 sections）
-│   ├── ai.google.dev/         Gemini API 文档
-│   ├── openai.com/            OpenAI 官网 blog
-│   ├── docs.openai.com/       OpenAI 平台文档（手动抓的 30 个 key pages，GHA 不刷）
-│   ├── github/anthropics/<repo>/        （shallow clone）
-│   ├── github/modelcontextprotocol/<repo>/
-│   ├── github/openai/<repo>/
-│   └── _meta/refresh_*.json   各 source 上次抓的时间戳
-│
-├── 02_Wiki/                   ← LLM 加工层
-│   ├── Entities/              具体 feature/tool 档案（Skills, Hooks, MCP-server, ...）
-│   ├── Concepts/              抽象概念（context-window, agentic-loop, prompt-caching, ...）
-│   ├── Summaries/             每份 raw 的 1:1 摘要
-│   ├── Synthesis/             跨多 entity 的综述
-│   ├── Comparison/            decision matrix
-│   ├── QA/                    问答沉淀
-│   ├── _canonical-names.md    错别字 / 多名同实勘误
-│   └── _progress.log          历次 ingest 操作日志
-│
-├── 03_Output/                 ← 对外 + 监控
-│   ├── Cheatsheets/           日常速查（手维护）
-│   ├── Changelog/             GHA 每次 refresh 自动写
-│   └── My-Setup/              维护者的 plugin/skill 配置笔记
-│
-├── scripts/                   ← 自动化
-│   ├── sources.yaml           源清单
-│   ├── refresh_raw.py         crawler
-│   ├── check_pending.py       找未 summary 的 raw
-│   └── audit.py               结构性 audit
-│
-├── .github/workflows/refresh-raw.yml   GHA cron
-├── CLAUDE.md                  agent session 启动钩子
-├── AGENTS.md → CLAUDE.md      symlink（给 Cursor / Codex 等）
-├── system_instructions.md     深度契约
-└── README.md / README.en.md   本文件
-```
+完整目录树 + 5 个核心机制（GHA cron 并行、enrichment 飞轮、audit、canonical-names）→ [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md)
 
 ---
 
-## 二、详细上手（三种用法）
+## 三种用法
 
 > 按"配置成本"从低到高排。
 
@@ -233,7 +199,7 @@ cd ai-coding-runbook
 
 ### 用法 2：给 AI agent 当 long-term context（最推荐，0 配置）
 
-clone 后用 **Claude Code / Cursor / Codex CLI** 打开这个文件夹：
+clone 后用 **Claude Code / Cursor / Codex CLI / Gemini CLI / Aider** 打开这个文件夹：
 
 - session 启动自动加载 `CLAUDE.md` / `AGENTS.md`，agent 知道项目结构和工作规则
 - 直接问问题，agent 读 `02_Wiki/` 答。例子见上面 [Example Q&A](#example-qa)
@@ -258,266 +224,43 @@ python3 scripts/refresh_raw.py --all      # ~10 分钟
 
 ---
 
-## 三、核心机制
+## 源清单
 
-### 机制 1 · GHA cron 自动抓 raw（matrix 并行）
+详见 `scripts/sources.yaml`。当前 9 个 GHA matrix source（Docs 6 + GitHub 3 group / 19 repo），加 `docs.openai.com/` 30 个手动抓的关键 guide。
 
-`.github/workflows/refresh-raw.yml` 每周一 01:00 UTC（= 09:00 HKT）自动跑。**9 个 source 并行**（GHA matrix），每个 source 独立 commit + push（`git pull --rebase` + 重试 5 次防并发冲突）。
-
-```
-matrix sources (parallel):
-  - code.claude.com              # Claude Code 文档
-  - platform.claude.com          # Anthropic API + 平台文档
-  - anthropic.com                # research + engineering blog
-  - docs.cursor.com              # Cursor IDE 文档
-  - ai.google.dev                # Gemini API 文档
-  - openai.com                   # OpenAI 官网 blog（model release）
-  - github.anthropics            # 8 个 repo（claude-code, agent-sdk 等）
-  - github.modelcontextprotocol  # 6 个 repo（spec, sdks, servers 等）
-  - github.openai                # 4 个 repo（codex, model_spec 等）
-```
-
-> **注意**：matrix source 名字必须跟 `python3 scripts/refresh_raw.py --list` 输出**完全一致**，否则该 matrix job 会以 "unknown source" 失败。`fail-fast: false` 保证一个挂掉不影响其他。
-
-每个 source 内：`ThreadPoolExecutor(5)` 并发 HTTP fetch + 自动 retry（429/5xx backoff）。Wall time ≈ max(单 source) ≈ **~10 分钟**。
-
-**`platform.openai.com/docs` 不在 matrix 里**：被 Cloudflare 403 防爬；手动抓的 30 个关键页面在 `01_Raw/docs.openai.com/`。
-
-**aggregator job**（matrix 全跑完后跑一次）：扫最近 2h 内 bot commits → 写 `03_Output/Changelog/YYYY-MM-DD.md`。
-
-**`fail-fast: false`** —— 一个 source 挂了，其他继续，已抓的内容已 commit 不丢。
-
-**人工触发**：GitHub repo Actions 页面点 "Run workflow"，或本地 `gh workflow run refresh-raw`。
-
-**本地刷新**（调试）：
-```bash
-python3 scripts/refresh_raw.py --list                       # 列所有 source 名
-python3 scripts/refresh_raw.py --source code.claude.com     # 单 source
-python3 scripts/refresh_raw.py --source github.anthropics
-python3 scripts/refresh_raw.py --all                        # 全部 sequential
-python3 scripts/refresh_raw.py --source X --dry-run
-```
-
-GitHub repos 抓回来后会**剥离 `.git/`**（避免被父 repo 当成 submodule）。代价：失去原 repo 的 git history；好处：repo 内文件正常被 wiki repo 跟踪。每周完整 re-clone（小，3 分钟）。
-
-### 机制 2 · Enrichment 飞轮（"煮过的菜"独立存在）
-
-02_Wiki 里的 entity / concept / summary 是 LLM 从 raw 提炼后**写到这些文件里**的，**已经独立存在**。
-
-**飞轮的核心意义**：LLM 答问题时**不需要每次重读 raw**——直接读 enriched entity 就够。这是查询速度快 + 准确度高的根本原因。
-
-**为啥不自动 enrich**：抓到 raw diff 后，GHA **不自动调 LLM** 写 summary，只生成 changelog 通知。原因：
-
-1. LLM enrich 容易幻觉，需要 self-review
-2. 加什么 entity / concept 是设计决定，不是流水线
-3. 用户在自己的 agent session（Claude Code / Cursor / Codex 等）里看到 changelog，决定哪些 diff 值得 enrich、哪些 skip
-
-### 机制 3 · 模板驱动的活文件（将来）
-
-将来：定期 prep / report 类的活模板生成。当前 03_Output/templates 是空的，等 cheatsheet 数量够多后再加自动模板。
-
-### 机制 4 · 结构性 audit
-
-`scripts/audit.py` 检查 02_Wiki 的内部一致性：
-
-- Summary 是否有 frontmatter `source:` 指向真 raw
-- Entity / Concept 是否有 frontmatter + 至少一个 section
-- Wikilink `[[X]]` 是否指向真文件
-- Entity / Concept 名字是否重复
-
-跑完写 `02_Wiki/_audit_report--YYYYMMDD.md`。
-
-### 机制 5 · canonical-names 错别字 / 多名同实治理
-
-`02_Wiki/_canonical-names.md` 是**单一事实源** —— 记录所有 raw 里出现但 vault 用 canonical 名的映射。
-
-例：
-
-- `Sub-agent` / `Subagent` / `Sub agent` → canonical: `Subagent`
-- `Tool use` / `Function calling` → canonical: `Tool use`
-- `Slash commands` / `Slash Commands` / `slash-commands` → canonical: `Slash commands`
-
-**LLM 必读规则**：
-1. enrich 前 `cat 02_Wiki/_canonical-names.md`
-2. 引用未知名字前在 `02_Wiki/Entities/*.md` 的 frontmatter `aliases` 里 grep 一遍
-3. 不要凭脑补造 entity 名
-
----
-
-## 四、日常工作流
-
-### 用户做的（不用 LLM）
-
-| 场景 | 做啥 |
-|---|---|
-| 想知道 Anthropic 这周改了啥 | 打开 `03_Output/Changelog/<最新日期>.md` |
-| 查某个 feature 速查 | `03_Output/Cheatsheets/<topic>.md` |
-| 拉远程更新（GHA cron 跑完后）| `cd <repo目录> && git pull` |
-| 加新源 | 编辑 `scripts/sources.yaml`，commit push，下次 cron 自动覆盖 |
-
-### 用户请 LLM 做的
-
-| 场景 | 用户说 | LLM 做啥 |
-|---|---|---|
-| 新 raw 想入库 | **不用开口**——session 开始自动看到 "📋 待 ingest"。说 "ingest" / "ingest 1,3" / "skip" | Phase A→E（详见本节末尾） |
-| 查任何 Claude Code / API 问题 | 直接问 | 读 enriched entity 答，缺信息回 raw 找 |
-| 写新 cheatsheet | "写一份 hooks 速查" / "做一份 Skill vs MCP 对比表" | 跨多 entity 综合 → 写到 `03_Output/Cheatsheets/` |
-| 加新源 | "加上 modelcontextprotocol/inspector repo" | 改 sources.yaml + commit + 跑一次 refresh 测试 |
-| 跑 audit | "跑一次 audit" | `python3 scripts/audit.py` |
-| 修错别字 | "Anthropic 文档把 X 写成 Y，但 vault 应该用 Y" | 改 canonical-names + 批量替换 + 重跑 audit |
-
-### LLM 工作时的 Phase A→E（ingest）
-
-按 user 授权后：
-
-| Phase | 做啥 | self-review |
-|---|---|---|
-| **A · Summary 创建** | 对每个 pending raw 写 summary 到 `02_Wiki/Summaries/` | frontmatter 合规、source 字段指向真 raw、无同名碰撞 |
-| **B · 已有 entity / concept 更新** | 在 `## 出现来源` 追加；新事实进 `## 关键属性` | **不创建新文件**；wikilink 都真存在；事实有原文支撑 |
-| **C · 新名字处理** | 列候选给用户，用户选 → 建 stub | 用户授权后才建 |
-| **D · Audit** | `python3 scripts/audit.py` | 列修复建议但不自动修 |
-| **E · 日志** | append `02_Wiki/_progress.log` | — |
-
-每 Phase self-review **是为了防上一阶段幻觉污染下一阶段**。
-
----
-
-## 五、🚨 踩过的坑 / Lessons Learned
-
-### #1 · 永远不改 01_Raw
-
-raw 是 GHA bot 的输出。手动改 raw 会：
-
-- 下次 cron 跑发现 diff 又改回去（拉锯）
-- 污染 git diff 信号
-- 误导 enrichment（以为 Anthropic 改了什么）
-
-要"修正"的内容（比如 Anthropic 文档错别字、过时引用）→ 写到 `02_Wiki/_canonical-names.md` 走勘误机制。
-
-### #2 · 模型权重 vs Raw 文档冲突时以 Raw 为准
-
-Anthropic 改 API / 加 feature 频繁，Claude 模型权重训练截止日期之后的所有变化只在 raw 里。LLM 答问题时如果 raw 有，必须以 raw 为准；raw 没的才能用模型知识（并明确标注"基于训练知识，未在最新 docs 验证"）。
-
-### #3 · "记得 Claude Code 有这个 feature" 不算证据
-
-任何 entity / concept 的事实必须能 trace 回某份 raw 文件。写 `Hooks 支持 X` 之前要 grep `01_Raw/` 找到原文。找不到的写 `（待验证）` 或不写。
-
-### #4 · 同一概念的多个名字
-
-Anthropic 文档自己就不统一：`Sub-agent` / `Subagent` / `subagent`、`Tool use` / `Function calling`、`Slash commands` / `slash-commands`。统一靠 `_canonical-names.md`。Vault 内部用 canonical 名，aliases 写在 entity frontmatter 里。
-
-### #5 · Wikilink 必须先 ls
-
-`[[Hooks]]` 之前 `ls 02_Wiki/Entities/Hooks.md`。不存在的别写，会变死链。Audit 会抓但写时就该避免。
-
-### #6 · Subagent finding 不直接 trust
-
-调用 subagent 调研某 topic 后，master 阶段必须 sample re-verify（≥3 + 全部 MAJOR claim）。Subagent 容易幻觉，尤其在调研当前还没 enrich 的领域。
-
-### #7 · GHA 推 main 没问题，但要小心 sources.yaml 改坏
-
-GHA workflow 没有 PR review，改 sources.yaml 加坏 prefix 会导致下次 cron 抓回 0 个文件 / 错的文件。改前最好本地 `python3 scripts/refresh_raw.py --dry-run --only <kind>` 验一遍。
-
-### #8 · 多机器同步
-
-通过 git 同步，不依赖 iCloud。**不要在脚本里 hardcode 绝对路径**——用 `~`、`$HOME` 或 project-relative path（`Path(__file__).resolve().parent.parent`），确保在不同机器上都能运行。
-
----
-
-## 六、源清单
-
-详见 `scripts/sources.yaml`。当前 9 个 GHA matrix source：
-
-**Docs sites（6 个，sitemap 抓 + HTML→markdown）**
-
-1. `code.claude.com` —— Claude Code 文档
-2. `platform.claude.com` —— Anthropic API + 平台文档（旧 `docs.claude.com` 已 301 重定向到这两个域名）
-3. `anthropic.com/{research,engineering}` —— Anthropic blog
-4. `docs.cursor.com` —— Cursor IDE 文档（实际抓 `cursor.com/docs/`，2026-05 Cursor 整站迁移）。覆盖 23 个 sections：`account / agent / api / bugbot / cli / cloud-agent / configuration / customizing / enterprise / extension-api / get-started / hooks / integrations / mcp / models / models-and-pricing / plugins / reference / rules / sdk / security-review / skills / subagents`
-5. `ai.google.dev/gemini-api/docs/` —— Gemini API 文档
-6. `openai.com/{index,blog}/` —— OpenAI 官网 blog（model release / 产品公告）
-
-**GitHub repos（19 个 active，shallow git clone）**
-
-7. `anthropics/*` —— claude-code, claude-agent-sdk-python, anthropic-sdk-{python,typescript}, claude-code-action, claude-code-base-action, claude-quickstarts, prompt-eng-interactive-tutorial, skills
-8. `modelcontextprotocol/*` —— modelcontextprotocol（spec）, python-sdk, typescript-sdk, servers, docs, mcpb（前 anthropics/dxt）
-9. `openai/*` —— codex, openai-python, openai-node, model_spec
-
-**手动维护（GHA 不刷）**
-
-- `docs.openai.com/` —— `platform.openai.com/docs` 被 Cloudflare 403 防爬；30 个关键 guides 手动抓的，需要更新时手动 re-fetch
+完整源列表 + 抓取细节 → [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md)（§ 二 机制 1）
 
 加 / 减源：编辑 `scripts/sources.yaml`，commit。下次 cron 跑自动覆盖。**改前必须 dry-run 验证**：`python3 scripts/refresh_raw.py --dry-run --source <name>`。
 
 ---
 
-## 七、维护
-
-### 长期日常（你做）
-- 每周一 GHA 跑完后 `git pull`
-- 看 `03_Output/Changelog/<latest>.md` 决定要不要 ingest
-- 想 ingest → 在你的 agent session（Claude Code / Cursor / Codex 等）里说 "ingest"
-
-### 长期日常（GHA 自动做）
-- 每周一 09:00 HKT 抓 raw
-- diff 检测 + commit + push
-- 写 changelog
-- 失败时 GitHub 邮件告警
-
-### 想加 / 改 source
-1. 编辑 `scripts/sources.yaml`
-2. 本地 `python3 scripts/refresh_raw.py --dry-run --only <kind>` 验证
-3. commit + push
-4. 等下次 cron，或手动 `gh workflow run refresh-raw`
-
-### 想改 crawler 行为
-1. 改 `scripts/refresh_raw.py`
-2. 本地 `python3 scripts/refresh_raw.py --dry-run` 验证
-3. commit + push
-4. 下次 cron 用新版
-
----
-
-## 八、术语
-
-- **raw**：`01_Raw/` 下的文件，GHA bot 抓来的 markdown / git clone 的 repo
-- **summary**：`02_Wiki/Summaries/` 下，每份 raw 的 1:1 摘要
-- **entity**：`02_Wiki/Entities/` 下，具体的 feature / tool / model 档案（聚合多 raw）
-- **concept**：`02_Wiki/Concepts/` 下，抽象概念
-- **synthesis**：`02_Wiki/Synthesis/` 下，跨多 entity 的综述
-- **comparison**：`02_Wiki/Comparison/` 下，decision matrix / 横向对比
-- **cheatsheet**：`03_Output/Cheatsheets/` 下，对外日常速查
-- **changelog**：`03_Output/Changelog/` 下，GHA 自动写的 raw 变化记录
-- **canonical name**：vault 内部用的统一名字（vs raw 里出现的多个变体）
-- **stub**：含 `<!-- stub: awaiting enrichment -->` 标记的占位 entity / concept
-
----
-
-## 九、相关文档
-
-| 文档 | 用途 |
-|---|---|
-| `CLAUDE.md` | agent session 启动钩子 + 关键规则速查（Claude Code / Cursor / Codex 等） |
-| `AGENTS.md` | symlink → CLAUDE.md，给 Cursor / Codex 等其他 agent |
-| `system_instructions.md` | 深度契约 §0-§7：frontmatter 规范 / 入库规则 / ingest 流程 / edge case |
-| `scripts/sources.yaml` | 源清单（YAML） |
-| `02_Wiki/_canonical-names.md` | 错别字 / 多名同实勘误（enrich 前必读） |
-| `docs/specs/` | 各升级 brainstorm 沉淀 |
-
----
-
-## 十、Limitations / 已知限制
+## Limitations / 已知限制
 
 - **不实时** —— 周更新；要追 24h 内变化用各家 official changelog / Twitter
 - **不调 LLM API** —— 这个 repo 不付费 LLM。所有 enrichment / 问答都用你自己的 agent（Claude Code / Cursor / Codex 用各自订阅）
 - **某些站抓不到** —— `platform.openai.com/docs` 被 Cloudflare 403 防爬虫。OpenAI 部分靠 GitHub repos（`openai-python`, `openai-node`, `model_spec`）+ 手动 fetch 的 30 个关键页面覆盖
 - **02_Wiki 是 LLM 写的** —— 可能有错；用 audit + canonical-names 治理但不绝对。每条事实都附 `[[summary-link]]` 可回查 raw 校对
 - **不自动 enrich** —— 抓到 raw diff 后只生成 changelog 通知，不自动调 LLM 写 summary。Enrichment 永远 user-triggered
-- **覆盖范围**：当前只覆盖 5 家主流 vendor + MCP，其他工具（Aider / Continue / Tabby / 国产模型）没纳入
+- **覆盖范围**：当前只覆盖 4 家主流 vendor + MCP 生态，其他工具（Aider / Continue / Tabby / 国产模型）没纳入
 
 ---
 
-## 十一、License
+## 详细文档
+
+| 文档 | 用途 |
+|---|---|
+| [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) | 完整目录树 + 5 个核心机制（GHA cron / enrichment 飞轮 / audit / canonical-names） |
+| [`docs/INGEST_WORKFLOW.md`](./docs/INGEST_WORKFLOW.md) | LLM ingest SOP（Phase A→E + 用户日常工作流） |
+| [`docs/MAINTENANCE.md`](./docs/MAINTENANCE.md) | 维护者手册（踩过的坑 / 长期节奏 / 术语表） |
+| [`CLAUDE.md`](./CLAUDE.md) | agent session 启动钩子 + 关键规则速查（Claude Code / Cursor / Codex 等） |
+| [`AGENTS.md`](./AGENTS.md) | symlink → CLAUDE.md，给 Cursor / Codex 等其他 agent |
+| [`system_instructions.md`](./system_instructions.md) | 深度契约 §0-§7：frontmatter 规范 / 入库规则 / ingest 流程 / edge case |
+| [`scripts/sources.yaml`](./scripts/sources.yaml) | 源清单（YAML） |
+| [`02_Wiki/_canonical-names.md`](./02_Wiki/_canonical-names.md) | 错别字 / 多名同实勘误（enrich 前必读） |
+
+---
+
+## License
 
 本仓库的 **代码、项目结构、`02_Wiki/` 加工内容** 采用 [MIT License](./LICENSE)。
 
@@ -525,4 +268,4 @@ GHA workflow 没有 PR review，改 sources.yaml 加坏 prefix 会导致下次 c
 
 ---
 
-> **元规则**：本文件是 master 综合手册。`CLAUDE.md` / `AGENTS.md` / `system_instructions.md` 都是这份的子集 / 引用。**冲突时以 README.md 为准**。
+> **元规则**：本文件是项目 landing page，详细架构 / 维护 / ingest SOP 在 [`docs/`](./docs/) 下。冲突时以 README 为准。
