@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/AI-assistance-coding-skills
-fetched_at: 2026-05-05T19:41:04.422698+00:00
+fetched_at: 2026-05-05T19:58:44.179852+00:00
 title: "How AI assistance impacts the formation of coding skills \\ Anthropic"
 ---
 
@@ -14,7 +14,7 @@ Jan 29, 2026
 
 ![How AI assistance impacts the formation of coding skills](https://www-cdn.anthropic.com/images/4zrzovbb/website/f06ca06f9d08ca4a85f26357eb896c3730274507-1000x1000.svg)
 
-Research shows AI helps people do [parts](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4945566) of their job faster. In an observational [study](https://www.anthropic.com/research/estimating-productivity-gains) of [Claude.ai](http://claude.ai/redirect/website.v1.160683d3-b377-4ce4-97f8-fdb70520e69d) data, we found AI can speed up some tasks by 80%. But does this increased productivity come with trade-offs? Other research shows that when people use AI assistance, they become [less engaged with their work](https://www.nature.com/articles/s41598-025-98385-2) and [reduce](https://www.microsoft.com/en-us/research/wp-content/uploads/2025/01/lee_2025_ai_critical_thinking_survey.pdf) the effort they put into doing it—in other words, they offload their thinking to AI.
+Research shows AI helps people do [parts](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4945566) of their job faster. In an observational [study](https://www.anthropic.com/research/estimating-productivity-gains) of [Claude.ai](http://claude.ai/redirect/website.v1.bc159b7a-23bb-4766-8c25-d653e5424f41) data, we found AI can speed up some tasks by 80%. But does this increased productivity come with trade-offs? Other research shows that when people use AI assistance, they become [less engaged with their work](https://www.nature.com/articles/s41598-025-98385-2) and [reduce](https://www.microsoft.com/en-us/research/wp-content/uploads/2025/01/lee_2025_ai_critical_thinking_survey.pdf) the effort they put into doing it—in other words, they offload their thinking to AI.
 
 It’s unclear whether this cognitive offloading can prevent people from growing their skills on the job, or—in the case of coding—understanding the systems they’re building. Our latest study, a randomized controlled trial with software developers as participants, investigates this potential downside of using AI at work.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/mapping-mind-language-model
-fetched_at: 2026-05-05T19:41:46.470163+00:00
+fetched_at: 2026-05-05T19:59:12.195479+00:00
 title: "Mapping the Mind of a Large Language Model \\ Anthropic"
 ---
 
@@ -30,7 +30,7 @@ There was both an engineering challenge (the raw sizes of the models involved re
 
 As for the scientific risk, the proof is in the pudding.
 
-We successfully extracted millions of features from the middle layer of Claude 3.0 Sonnet, (a member of our current, state-of-the-art model family, currently available on [claude.ai](https://claude.ai/redirect/website.v1.160683d3-b377-4ce4-97f8-fdb70520e69d)), providing a rough conceptual map of its internal states halfway through its computation. This is the first ever detailed look inside a modern, production-grade large language model.
+We successfully extracted millions of features from the middle layer of Claude 3.0 Sonnet, (a member of our current, state-of-the-art model family, currently available on [claude.ai](https://claude.ai/redirect/website.v1.959911ff-8234-4f8a-a0db-7908b5ff6d5f)), providing a rough conceptual map of its internal states halfway through its computation. This is the first ever detailed look inside a modern, production-grade large language model.
 
 Whereas the features we found in the toy language model were rather superficial, the features we found in Sonnet have a depth, breadth, and abstraction reflecting Sonnet's advanced capabilities.
 
