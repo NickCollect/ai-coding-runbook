@@ -59,7 +59,7 @@
 | **D · Audit** | 跑 `python3 scripts/audit.py` | 列修复建议但不自动修 |
 | **E · 日志** | 在 `02_Wiki/_progress.log` 追加：`[YYYY-MM-DD HH:MM] INGEST - <N> summaries / ...` | — |
 
-**为什么每 Phase self-review**：防上一阶段幻觉污染下一阶段。详细见 `README.md` § 四。
+**为什么每 Phase self-review**：防上一阶段幻觉污染下一阶段。详细见 `README.md` § 五。
 
 ---
 

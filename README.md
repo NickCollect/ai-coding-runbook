@@ -86,7 +86,58 @@
 
 ---
 
-## 三、核心机制
+## 三、快速上手
+
+> 三种最常见用法，按"配置成本"从低到高排。
+
+### 用法 1：当查阅文档（0 配置）
+
+```bash
+git clone https://github.com/NickCollect/ai-coding-runbook
+cd ai-coding-runbook
+```
+
+然后用 Obsidian / VSCode / 任何 markdown 编辑器打开：
+
+- **看速查表** → `03_Output/Cheatsheets/*.md`（hook recipes、API 速查、模型定价等）
+- **看横向对比** → `02_Wiki/Comparison/*.md`（Claude / Cursor / Codex 决策表等）
+- **查具体 feature** → `02_Wiki/Entities/<feature>.md`
+- **看每周变化** → `03_Output/Changelog/<latest>.md`
+
+`.obsidianignore` 已经排除大目录，Obsidian 打开不卡。
+
+### 用法 2：给 AI agent 当 long-term context（最推荐，0 配置）
+
+clone 后用 **Claude Code / Cursor / Codex CLI** 打开这个文件夹：
+
+- session 启动自动加载 `CLAUDE.md` / `AGENTS.md`，agent 知道项目结构和工作规则
+- 直接问问题，agent 读 `02_Wiki/` 答。例子：
+  - "Hooks 怎么配？给个 PreToolUse recipe"
+  - "Skill vs MCP vs Subagent 该用哪个？"
+  - "Anthropic / OpenAI 这周改了啥？"
+  - "Codex CLI 和 Claude Code 怎么对比"
+
+不需要额外 API key —— agent 用你自己的订阅 / token。
+
+### 用法 3：fork 后跟自己的源（要 fork）
+
+如果要：
+
+- 加公司内部 / 团队文档源、删不需要的源
+- 跑自己的 GHA cron（每周一自动刷 raw）
+- 改 enrichment 流程
+
+→ fork 这个 repo 到你的 GitHub 账号。GHA workflow 用默认 `GITHUB_TOKEN` 权限够用，不需要额外 secret。改源清单：编辑 `scripts/sources.yaml`，下次 cron 自动覆盖。
+
+```bash
+# 本地手动刷新一次（调试用）
+pip install -r scripts/requirements.txt
+python3 scripts/refresh_raw.py --all      # ~10 分钟
+```
+
+---
+
+## 四、核心机制
 
 ### 机制 1 · GHA cron 自动抓 raw（matrix 并行）
 
@@ -163,7 +214,7 @@ GitHub repos 抓回来后会**剥离 `.git/`**（避免被父 repo 当成 submod
 
 ---
 
-## 四、日常工作流
+## 五、日常工作流
 
 ### 用户做的（不用 LLM）
 
@@ -178,7 +229,7 @@ GitHub repos 抓回来后会**剥离 `.git/`**（避免被父 repo 当成 submod
 
 | 场景 | 用户说 | LLM 做啥 |
 |---|---|---|
-| 新 raw 想入库 | **不用开口**——session 开始自动看到 "📋 待 ingest"。说 "ingest" / "ingest 1,3" / "skip" | Phase A→E（详见 § 四 ingest） |
+| 新 raw 想入库 | **不用开口**——session 开始自动看到 "📋 待 ingest"。说 "ingest" / "ingest 1,3" / "skip" | Phase A→E（详见 § 五 ingest） |
 | 查任何 Claude Code / API 问题 | 直接问 | 读 enriched entity 答，缺信息回 raw 找 |
 | 写新 cheatsheet | "写一份 hooks 速查" / "做一份 Skill vs MCP 对比表" | 跨多 entity 综合 → 写到 `03_Output/Cheatsheets/` |
 | 加新源 | "加上 modelcontextprotocol/inspector repo" | 改 sources.yaml + commit + 跑一次 refresh 测试 |
@@ -201,7 +252,7 @@ GitHub repos 抓回来后会**剥离 `.git/`**（避免被父 repo 当成 submod
 
 ---
 
-## 五、🚨 踩过的坑 / Lessons Learned
+## 六、🚨 踩过的坑 / Lessons Learned
 
 ### #1 · 永远不改 01_Raw
 
@@ -242,7 +293,7 @@ GHA workflow 没有 PR review，改 sources.yaml 加坏 prefix 会导致下次 c
 
 ---
 
-## 六、源清单
+## 七、源清单
 
 详见 `scripts/sources.yaml`。当前 5 大类：
 
@@ -256,7 +307,7 @@ GHA workflow 没有 PR review，改 sources.yaml 加坏 prefix 会导致下次 c
 
 ---
 
-## 七、维护
+## 八、维护
 
 ### 长期日常（你做）
 - 每周一 GHA 跑完后 `git pull`
@@ -283,7 +334,7 @@ GHA workflow 没有 PR review，改 sources.yaml 加坏 prefix 会导致下次 c
 
 ---
 
-## 八、术语
+## 九、术语
 
 - **raw**：`01_Raw/` 下的文件，GHA bot 抓来的 markdown / git clone 的 repo
 - **summary**：`02_Wiki/Summaries/` 下，每份 raw 的 1:1 摘要
@@ -298,7 +349,7 @@ GHA workflow 没有 PR review，改 sources.yaml 加坏 prefix 会导致下次 c
 
 ---
 
-## 九、相关文档
+## 十、相关文档
 
 | 文档 | 用途 |
 |---|---|
