@@ -364,4 +364,12 @@ GHA workflow 没有 PR review，改 sources.yaml 加坏 prefix 会导致下次 c
 
 ---
 
+## 十一、License
+
+本仓库的 **代码、项目结构、`02_Wiki/` 加工内容** 采用 [MIT License](./LICENSE)。
+
+**`01_Raw/` 是第三方内容缓存**：来自 Anthropic / OpenAI / Google / Cursor 等官方文档和 GitHub repo，版权归各原作者所有。本项目仅做本地镜像 + 衍生摘要分析，不主张任何 raw 内容的版权。引用具体 raw 内容时请回到原文链接（summary 里的 `source_url` 字段）。
+
+---
+
 > **元规则**：本文件是 master 综合手册。`CLAUDE.md` / `AGENTS.md` / `system_instructions.md` 都是这份的子集 / 引用。**冲突时以 README.md 为准**。

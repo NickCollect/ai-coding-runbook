@@ -363,4 +363,12 @@ Adding / removing sources: edit `scripts/sources.yaml`, commit. Next cron picks 
 
 ---
 
+## 11. License
+
+The **code, project structure, and `02_Wiki/` enrichment content** in this repository are licensed under the [MIT License](./LICENSE).
+
+**`01_Raw/` is a third-party content cache**: contents come from official docs and GitHub repos of Anthropic / OpenAI / Google / Cursor, and remain copyright of their respective owners. This project provides local mirrors + derivative summaries only, and asserts no copyright over raw content. To cite specific raw material, reference the original source link (`source_url` field in each summary).
+
+---
+
 > **Meta-rule**: this file is the master guide. `CLAUDE.md` / `AGENTS.md` / `system_instructions.md` are subsets / references of this document. **In conflict, README.md wins.**
