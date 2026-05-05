@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/question-decomposition-improves-the-faithfulness-of-model-generated-reasoning
-fetched_at: 2026-05-04T16:49:39.835181+00:00
+fetched_at: 2026-05-05T19:41:55.052928+00:00
 title: "Question Decomposition Improves the Faithfulness of Model-Generated Reasoning \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ AlignmentResearch
 
 Jul 18, 2023
 
-[Download Paper](https://www.anthropic.com/research/Download Paper)
+[Download Paper](https://www-cdn.anthropic.com/8154fb1d828cdc390dc1fa442d84034948679c47/question-decomposition-improves-the-faithfulness-of-model-generated-reasoning.pdf)
 
 ## Abstract
 
@@ -20,14 +20,14 @@ As large language models (LLMs) perform more difficult tasks, it becomes harder 
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

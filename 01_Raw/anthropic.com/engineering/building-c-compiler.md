@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/engineering/building-c-compiler
-fetched_at: 2026-05-04T16:22:58.095732+00:00
+fetched_at: 2026-05-05T19:40:46.068681+00:00
 title: "Building a C compiler with a team of parallel Claudes \\ Anthropic"
 ---
 
-[Engineering at Anthropic](https://www.anthropic.com/engineering/Engineering at Anthropic)
+[Engineering at Anthropic](https://www.anthropic.com/engineering)
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/7e2e39544a35760367049072406377a54f2b58c0-2554x2554.svg)
 
@@ -22,7 +22,7 @@ With agent teams, multiple Claude instances work in parallel on a shared codebas
 
 To stress test it, I tasked 16 agents with writing a Rust-based C compiler, from scratch, capable of compiling the Linux kernel. Over nearly 2,000 Claude Code sessions and $20,000 in API costs, the agent team produced a 100,000-line compiler that can build Linux 6.9 on x86, ARM, and RISC-V.
 
-[The compiler is an interesting artifact](https://www.anthropic.com/engineering/The compiler is an interesting artifact) on its own, but I focus here on what I learned about designing harnesses for long-running autonomous agent teams: how to write tests that keep agents on track without human oversight, how to structure work so multiple agents can make progress in parallel, and where this approach hits its ceiling.
+[The compiler is an interesting artifact](https://github.com/anthropics/claudes-c-compiler) on its own, but I focus here on what I learned about designing harnesses for long-running autonomous agent teams: how to write tests that keep agents on track without human oversight, how to structure work so multiple agents can make progress in parallel, and where this approach hits its ceiling.
 
 ## Enabling long-running Claudes
 
@@ -64,7 +64,7 @@ To prevent two agents from trying to solve the same problem at the same time, th
 
 This is a very early research prototype. I haven’t yet implemented any other method for communication between agents, nor do I enforce any process for managing high-level goals. I don’t use an orchestration agent.
 
-Instead, I leave it up to each Claude agent to decide how to act. In most cases, Claude picks up the “next most obvious” problem. When stuck on a bug, Claude will often maintain a running doc of failed approaches and remaining tasks. In the [git repository](https://www.anthropic.com/engineering/git repository) of the project, you can read through the history and watch it take out locks on various tasks.
+Instead, I leave it up to each Claude agent to decide how to act. In most cases, Claude picks up the “next most obvious” problem. When stuck on a bug, Claude will often maintain a running doc of failed approaches and remaining tasks. In the [git repository](https://github.com/anthropics/claudes-c-compiler) of the project, you can read through the history and watch it take out locks on various tasks.
 
 ## Lessons from programming with Claude agent teams
 
@@ -93,7 +93,7 @@ When there are many distinct failing tests, parallelization is trivial: each age
 
 But when agents started to compile the Linux kernel, they got stuck. Unlike a test suite with hundreds of independent tests, compiling the Linux kernel is one giant task. Every agent would hit the same bug, fix that bug, and then overwrite each other's changes. Having 16 agents running didn't help because each was stuck solving the same task.
 
-The fix was to use [GCC](https://www.anthropic.com/engineering/GCC) as an online known-good compiler oracle to compare against. I wrote a new test harness that randomly compiled most of the kernel using GCC, and only the remaining files with Claude's C Compiler. If the kernel worked, then the problem wasn’t in Claude’s subset of the files. If it broke, then it could further refine by re-compiling some of these files with GCC. This let each agent work in parallel, fixing different bugs in different files, until Claude's compiler could eventually compile all files. (After this worked, it was still necessary to apply delta debugging techniques to find pairs of files that failed together but worked independently.)
+The fix was to use [GCC](https://gcc.gnu.org/) as an online known-good compiler oracle to compare against. I wrote a new test harness that randomly compiled most of the kernel using GCC, and only the remaining files with Claude's C Compiler. If the kernel worked, then the problem wasn’t in Claude’s subset of the files. If it broke, then it could further refine by re-compiling some of these files with GCC. This let each agent work in parallel, fixing different bugs in different files, until Claude's compiler could eventually compile all files. (After this worked, it was still necessary to apply delta debugging techniques to find pairs of files that failed together but worked independently.)
 
 ### Multiple agent roles
 
@@ -111,7 +111,7 @@ Previous Opus 4 models were barely capable of producing a functional compiler. O
 
 Over nearly 2,000 Claude Code sessions across two weeks, Opus 4.6 consumed 2 billion input tokens and generated 140 million output tokens, a total cost just under $20,000. Compared to even the most expensive Claude Max plans, this was an extremely expensive project. But that total is a fraction of what it would cost me to produce this myself—let alone an entire team.
 
-This was a clean-room implementation (Claude did not have internet access at any point during its development); it depends only on the Rust standard library. The 100,000-line compiler can build a bootable Linux 6.9 on x86, ARM, and RISC-V. It can also compile QEMU, FFmpeg, SQlite, postgres, redis, and has a 99% pass rate on most compiler test suites including the [GCC torture test suite](https://www.anthropic.com/engineering/GCC torture test suite). It also passes the developer's ultimate litmus test: it can compile and run Doom.
+This was a clean-room implementation (Claude did not have internet access at any point during its development); it depends only on the Rust standard library. The 100,000-line compiler can build a bootable Linux 6.9 on x86, ARM, and RISC-V. It can also compile QEMU, FFmpeg, SQlite, postgres, redis, and has a 99% pass rate on most compiler test suites including the [GCC torture test suite](https://gcc.gnu.org/onlinedocs/gccint/Torture-Tests.html). It also passes the developer's ultimate litmus test: it can compile and run Doom.
 
 The compiler, however, is not without limitations. These include:
 
@@ -125,7 +125,7 @@ The resulting compiler has nearly reached the limits of Opus’s abilities. I tr
 
 As one particularly challenging example, Opus was unable to implement a 16-bit x86 code generator needed to boot into 16-bit real mode. While the compiler can output correct 16-bit x86 via the 66/67 opcode prefixes, the resulting compiled output is over 60kb, far exceeding the 32k code limit enforced by Linux. Instead, Claude simply cheats here and calls out to GCC for this phase (This is only the case for x86. For ARM or RISC-V, Claude’s compiler can compile completely by itself.)
 
-The [source code for the compiler is available](https://www.anthropic.com/engineering/source code for the compiler is available). Download it, read through the code, and try it on your favorite C projects. I’ve consistently found the best way to understand what language models can do is to push them to their limits, and then study where they start to break down. Over the coming days, I’ll continue having Claude push new changes if you want to follow along with Claude’s continued attempts at addressing these limitations.
+The [source code for the compiler is available](https://github.com/anthropics/claudes-c-compiler). Download it, read through the code, and try it on your favorite C projects. I’ve consistently found the best way to understand what language models can do is to push them to their limits, and then study where they start to break down. Over the coming days, I’ll continue having Claude push new changes if you want to follow along with Claude’s continued attempts at addressing these limitations.
 
 ## Looking forward
 

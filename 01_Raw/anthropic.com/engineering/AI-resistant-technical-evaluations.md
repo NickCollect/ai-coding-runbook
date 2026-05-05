@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/engineering/AI-resistant-technical-evaluations
-fetched_at: 2026-05-04T16:22:42.362668+00:00
+fetched_at: 2026-05-05T19:40:49.405338+00:00
 title: "Designing AI resistant technical evaluations \\ Anthropic"
 ---
 
-[Engineering at Anthropic](https://www.anthropic.com/engineering/Engineering at Anthropic)
+[Engineering at Anthropic](https://www.anthropic.com/engineering)
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/097b92aa686c266a8fcdd890a491641273d3dae5-2554x2554.svg)
 
@@ -30,7 +30,7 @@ To that end, we're releasing the original take-home as an open challenge, since 
 
 ## The origin of the take-home
 
-In November 2023, we were preparing to train and launch Claude Opus 3. We’d secured new TPU and GPU clusters, our large Trainium cluster was coming, and we were spending considerably more than we had in the past on accelerators, but we didn't have enough performance engineers for our new scale. I [posted on Twitter](https://www.anthropic.com/engineering/posted on Twitter) asking people to email us, which brought in more promising candidates than we could evaluate through our standard interview pipeline, a process that consumes significant time for staff and candidates
+In November 2023, we were preparing to train and launch Claude Opus 3. We’d secured new TPU and GPU clusters, our large Trainium cluster was coming, and we were spending considerably more than we had in the past on accelerators, but we didn't have enough performance engineers for our new scale. I [posted on Twitter](https://x.com/trishume/status/1730386529997238605?s=20) asking people to email us, which brought in more promising candidates than we could evaluate through our standard interview pipeline, a process that consumes significant time for staff and candidates
 
 We needed a way to evaluate candidates more efficiently. So, I took two weeks to design a take-home test that could adequately capture the demands of the role and identify the most capable applicants.
 
@@ -46,7 +46,7 @@ The format also offers advantages over live interviews for evaluating performanc
 
 **Time for comprehension and tooling:** Performance optimization requires understanding existing systems and sometimes building debugging tools. Both are hard to realistically evaluate in a normal 50 minute interview.
 
-**Compatibility with AI assistance:** Anthropic's [general candidate guidance](https://www.anthropic.com/engineering/general candidate guidance) asks candidates to complete take-homes without AI unless indicated otherwise. For this take-home, we explicitly indicate otherwise.
+**Compatibility with AI assistance:** Anthropic's [general candidate guidance](https://www.anthropic.com/candidate-ai-guidance) asks candidates to complete take-homes without AI unless indicated otherwise. For this take-home, we explicitly indicate otherwise.
 
 Longer-horizon problems are harder for AI to solve completely, so candidates can use AI tools (as they would on the job) while still needing to demonstrate their own skills.
 
@@ -62,9 +62,11 @@ Beyond these format-specific goals, I applied the same principles I use when des
 
 ### The simulated machine
 
-I built a Python simulator for a fake accelerator with characteristics that resemble TPUs. Candidates optimize code running on this machine, using a hot-reloading [Perfetto](https://www.anthropic.com/engineering/Perfetto) trace that shows every instruction, similar to [the tooling we have on Trainium](https://www.anthropic.com/engineering/the tooling we have on Trainium).
+I built a Python simulator for a fake accelerator with characteristics that resemble TPUs. Candidates optimize code running on this machine, using a hot-reloading [Perfetto](https://perfetto.dev/) trace that shows every instruction, similar to [the tooling we have on Trainium](https://awsdocs-neuron.readthedocs-hosted.com/en/latest/tools/neuron-explorer/overview-device-profiles.html).
 
 The machine includes features that make accelerator optimization interesting: manually managed scratchpad memory (unlike CPUs, accelerators often require explicit memory management), VLIW (multiple execution units running in parallel each cycle, requiring efficient instruction packing), SIMD (vector operations on many elements per instruction), and multicore (distributing work across cores).
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ebebb22ddbba7103f3af4e8a55a13245d3897802-2149x831.png)
 
 The task is a parallel tree traversal, deliberately not deep learning flavored, since most performance engineers hadn't worked on deep learning yet and could learn domain specifics on the job. The problem was inspired by branchless SIMD decision tree inference, a classical ML optimization challenge as a nod to the past, which only a few candidates had encountered before.
 
@@ -98,11 +100,13 @@ Then it stopped, convinced it had hit an insurmountable memory bandwidth bottlen
 
 We tried it out in our internal test-time compute harness for more rigor and confirmed it could both beat humans in 2 hours and continue climbing with time. Post-launch we even improved our harness in a generic way and got a higher score.
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/378256f8023fc3d48f2992b9ee9884a4658e3ab1-1681x463.png)
+
 I had a problem. We were about to release a model where the best strategy on our take-home would be delegating to Claude Code.
 
 ## Considering the options
 
-Some colleagues suggested banning AI assistance. I didn't want to do this. Beyond the enforcement challenges, I had a sense that given people continue to play a vital role in our work, I should be able to figure out *some* way for them to distinguish themselves in a setting *with AI—*like they'd have on the job. I didn't want to give in yet to the [idea](https://www.anthropic.com/engineering/idea) that humans only have an advantage on tasks longer than a few hours.
+Some colleagues suggested banning AI assistance. I didn't want to do this. Beyond the enforcement challenges, I had a sense that given people continue to play a vital role in our work, I should be able to figure out *some* way for them to distinguish themselves in a setting *with AI—*like they'd have on the job. I didn't want to give in yet to the [idea](https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/) that humans only have an advantage on tasks longer than a few hours.
 
 Others suggested raising the bar to "substantially outperform what Claude Code achieves alone." The concern here was that Claude works fast. Humans typically spend half the 2 hours reading and understanding the problem before they start optimizing. A human trying to steer Claude would likely be constantly behind, understanding what Claude did only after the fact. The dominant strategy might become sitting back and watching.
 
@@ -112,7 +116,7 @@ But I also worried if I invested in designing a new take-home, either Claude Opu
 
 ### Attempt 1: A different optimization problem
 
-I realized Claude could help me implement whatever I designed quickly, which motivated me to try developing a harder take-home. I chose a problem based on one of the trickier kernel optimizations I'd done at Anthropic: an efficient data [transposition](https://www.anthropic.com/engineering/transposition) on 2D TPU registers while avoiding [bank conflicts](https://www.anthropic.com/engineering/bank conflicts). I distilled it into a simpler problem on a simulated machine and had Claude implement the changes in under a day.
+I realized Claude could help me implement whatever I designed quickly, which motivated me to try developing a harder take-home. I chose a problem based on one of the trickier kernel optimizations I'd done at Anthropic: an efficient data [transposition](https://en.wikipedia.org/wiki/Transpose) on 2D TPU registers while avoiding [bank conflicts](https://feldmann.nyc/blog/smem-microbenchmarks). I distilled it into a simpler problem on a simulated machine and had Claude implement the changes in under a day.
 
 Claude Opus 4.5 found a great optimization I hadn't even thought of. Through careful analysis, it realized it could transpose the entire computation rather than figuring out how to transpose the data, and it rewrote the whole program accordingly.
 
@@ -124,7 +128,7 @@ In hindsight, this wasn't the right problem to try. Engineers across many platfo
 
 I needed a problem where human reasoning could win over Claude's larger experience base: something sufficiently out of distribution. Unfortunately, this conflicted with my goal of being recognizably like the job.
 
-I thought about the most unusual optimization problems I'd enjoyed and landed on [Zachtronics games](https://www.anthropic.com/engineering/Zachtronics games). These programming puzzle games use unusual, highly constrained instruction sets that force you to program in unconventional ways. For example, in [Shenzhen I/O](https://www.anthropic.com/engineering/Shenzhen I/O), programs are split across multiple communicating chips that each hold only about 10 instructions with one or two state registers. Clever optimization often involves encoding state into the instruction pointer or branch flags.
+I thought about the most unusual optimization problems I'd enjoyed and landed on [Zachtronics games](https://www.zachtronics.com/). These programming puzzle games use unusual, highly constrained instruction sets that force you to program in unconventional ways. For example, in [Shenzhen I/O](https://www.zachtronics.com/shenzhen-io/), programs are split across multiple communicating chips that each hold only about 10 instructions with one or two state registers. Clever optimization often involves encoding state into the instruction pointer or branch flags.
 
 I designed a new take-home consisting of puzzles using a tiny, heavily constrained instruction set, optimizing solutions for minimal instruction count. I implemented one medium-hard puzzle and tested it on Claude Opus 4.5. It failed. I filled out more puzzles and had colleagues verify that people less steeped in the problem than me could still outperform Claude.
 
@@ -136,7 +140,7 @@ I'm still sad to have given up the realism and varied depth of the original. But
 
 ## An open challenge
 
-We're releasing the original take-home for anyone to try with unlimited time. Human experts [retain an advantage](https://www.anthropic.com/engineering/retain an advantage) over current models at sufficiently long time horizons. The fastest human solution ever submitted substantially exceeds what Claude has achieved even with extensive test-time compute.
+We're releasing the original take-home for anyone to try with unlimited time. Human experts [retain an advantage](https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/) over current models at sufficiently long time horizons. The fastest human solution ever submitted substantially exceeds what Claude has achieved even with extensive test-time compute.
 
 The released version starts from scratch (like version 1) but uses version 2's instruction set and single-core design, so cycle counts are comparable to version 2.
 
@@ -149,9 +153,9 @@ Performance benchmarks (measured in clock cycles from the simulated machine):
 - **1487 cycles**: Claude Opus 4.5 after 11.5 hours in the harness
 - **1363 cycles**: Claude Opus 4.5 in an improved test time compute harness after many hours
 
-[Download it on GitHub](https://www.anthropic.com/engineering/Download it on GitHub). If you optimize below 1487 cycles, beating Claude's best performance at launch, email us at [performance-recruiting@anthropic.com](https://www.anthropic.com/engineering/performance-recruiting@anthropic.com) with your code and a resume.
+[Download it on GitHub](https://github.com/anthropics/original_performance_takehome). If you optimize below 1487 cycles, beating Claude's best performance at launch, email us at [performance-recruiting@anthropic.com](mailto:performance-recruiting@anthropic.com) with your code and a resume.
 
-Or you can [apply through our typical process](https://www.anthropic.com/engineering/apply through our typical process), which uses our (now) Claude-resistant take-home. We're curious how long it lasts.
+Or you can [apply through our typical process](https://www.anthropic.com/careers/jobs), which uses our (now) Claude-resistant take-home. We're curious how long it lasts.
 
 ## Get the developer newsletter
 

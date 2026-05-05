@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/india-brief-economic-index
-fetched_at: 2026-05-04T16:47:39.428747+00:00
+fetched_at: 2026-05-05T19:41:40.480093+00:00
 title: "India Country Brief: The Anthropic Economic Index \\ Anthropic"
 ---
 
@@ -14,13 +14,15 @@ Feb 16, 2026
 
 ## Executive summary
 
-India, already the world’s largest exporter of IT services, is home to one of the world’s fastest-growing AI user bases. Understanding how AI is being used in India—and how it differs from other countries—is essential for informing AI policy, investment, and deployment in the country. This brief provides insights on Claude.ai use in India, drawing on data from the [fourth Anthropic Economic Index report](https://www.anthropic.com/research/fourth Anthropic Economic Index report) covering ~1 million Claude.ai conversations globally during November 2025. India accounts for 5.8% of total Claude.ai use, second only to the United States. Yet current adoption remains concentrated, pointing to significant opportunities to expand access more broadly across the population.
+India, already the world’s largest exporter of IT services, is home to one of the world’s fastest-growing AI user bases. Understanding how AI is being used in India—and how it differs from other countries—is essential for informing AI policy, investment, and deployment in the country. This brief provides insights on Claude.ai use in India, drawing on data from the [fourth Anthropic Economic Index report](https://www.anthropic.com/research/anthropic-economic-index-january-2026-report) covering ~1 million Claude.ai conversations globally during November 2025. India accounts for 5.8% of total Claude.ai use, second only to the United States. Yet current adoption remains concentrated, pointing to significant opportunities to expand access more broadly across the population.
 
 The findings point to a user base that applies AI more heavily in professional contexts, delegates more autonomy to it, and brings Claude tasks that are substantially more time-consuming to complete without assistance. Higher shares of complex tasks that humans could not complete alone suggest that Indian users are using the technology at the frontier.
 
 ## India is among the leading countries in global AI adoption
 
 India ranks second among all countries by share of total Claude.ai use, trailing only the United States. However, on a per-capita basis, adjusting for the working-age population, India ranks 101st out of 116 countries with sufficient observation volume, below other countries in Asia such as Singapore or Malaysia. This gap suggests that India’s high Claude use overall reflects the sheer size of its population, not that the average person is using Claude heavily. This points to significant opportunities to increase adoption.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/bfe2971ed309086a664171f6e5122f0b5c7b042f-2702x1584.png)
 
 **Figure 1.** Top 20 countries by share of global Claude.ai use. India accounts for 5.8% of global Claude.ai consumer use, second only to the United States. Bars show each country’s share of total conversations observed November 13–20, 2025. India highlighted in blue; N = 975, 160 conversations globally.
 
@@ -30,6 +32,8 @@ India ranks second among all countries by share of total Claude.ai use, trailing
 
 Use is concentrated in a small number of highly economically active states. Maharashtra, Tamil Nadu, Karnataka, and Delhi together account for over half of India’s total Claude.ai use. This pattern closely mirrors India’s IT sector geography and urban economic output.
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/7f4c4e52c56518a6f8b0a22dccfc321b726f4590-2370x2301.png)
+
 **Figure 2.** Share of India's Claude.ai use by state. Map shows each state’s share of India’s total Claude.ai use. Top states: Maharashtra (15.5%), Tamil Nadu (13.2%), Karnataka (12.7%), Delhi (10.5%). Gray regions indicate insufficient data. November 2025 data. Shapefile for the map from Natural Earth.
 
 The concentration in these four states—home to Bangalore, Hyderabad, Chennai, Mumbai, and Delhi NCR—suggests that current AI adoption is driven primarily by India’s established technology workforce rather than broad-based consumer uptake.
@@ -38,9 +42,13 @@ The concentration in these four states—home to Bangalore, Hyderabad, Chennai, 
 
 The occupational mix of Indian Claude.ai use, inferred by mapping tasks to related occupations, skews towards software development and engineering roles, consistent with the country’s large IT services sector.
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/907195ecaeb4f4c4a2d4271c0cb2fa65b12d1139-1573x953.png)
+
 **Figure 3.** Occupation groups in India by Claude.ai use. Horizontal bars show the share of Indian Claude.ai use attributable to each SOC occupation group. Orange markers indicate the global average for comparison. November 2025 data.
 
 The most common O\*NET tasks performed by Indian users confirm the software-heavy profile:
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/7e287a3d33231c26d4bfbb3ebfe085dd37e2f9cb-3840x3142.png)
 
 **Table 1.** Most common O\*NET tasks among Claude use in India. Some task names shortened for readability.
 
@@ -48,7 +56,9 @@ India ranks 1st globally in the share of AI use devoted to software-related task
 
 ## Economic primitives: how India uses AI differently
 
-[Our latest Economic Index report](https://www.anthropic.com/research/Our latest Economic Index report) introduces “economic primitives”—fundamental measurements of how humans and AI collaborate. Comparing India to the global average reveals several distinctive patterns.
+[Our latest Economic Index report](https://www.anthropic.com/research/anthropic-economic-index-january-2026-report) introduces “economic primitives”—fundamental measurements of how humans and AI collaborate. Comparing India to the global average reveals several distinctive patterns.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/769426797ecc9b3fd234277eafc36aa248169cb6-3040x1920.png)
 
 **Figure 4.** Comparing India's Claude.ai use to the global average. The panels compare India (N = 58,098) against the global average (N = 975,160) across nine economic primitives. November 2025 data.
 
@@ -76,9 +86,9 @@ India ranks 1st globally in the share of AI use devoted to software-related task
 
 ### Methodology
 
-This analysis draws on privacy-preserving data from Claude.ai consumer use from November 13–20, 2025, as described in the [fourth Anthropic Economic Index report](https://www.anthropic.com/research/fourth Anthropic Economic Index report). Economic primitives are computed using the methodology detailed in that report. Geographic assignment uses IP-based geolocation. Occupation and task classification are based on mappings to the O\*NET task taxonomy and SOC occupation groups. For country-level rankings, we only include countries with at least 200 observations in our sample because of the uncertainty of the measure for low-usage countries in our random sample. The underlying data includes Claude.ai Free, Pro, and Max usage.
+This analysis draws on privacy-preserving data from Claude.ai consumer use from November 13–20, 2025, as described in the [fourth Anthropic Economic Index report](https://www.anthropic.com/research/anthropic-economic-index-january-2026-report). Economic primitives are computed using the methodology detailed in that report. Geographic assignment uses IP-based geolocation. Occupation and task classification are based on mappings to the O\*NET task taxonomy and SOC occupation groups. For country-level rankings, we only include countries with at least 200 observations in our sample because of the uncertainty of the measure for low-usage countries in our random sample. The underlying data includes Claude.ai Free, Pro, and Max usage.
 
-*For the full methodology, global findings, and time-series analysis, see the [Anthropic Economic Index January 2026 report](https://www.anthropic.com/research/Anthropic Economic Index January 2026 report).*
+*For the full methodology, global findings, and time-series analysis, see the [Anthropic Economic Index January 2026 report](https://www.anthropic.com/research/anthropic-economic-index-january-2026-report).*
 
 ### Citation
 
@@ -102,14 +112,14 @@ Sally Aldous, Jake Eaton, Ria Strasser Galvis, Hanah Ho, Maxim Massenkoff, Peter
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

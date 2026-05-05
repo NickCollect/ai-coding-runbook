@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/privileged-bases-in-the-transformer-residual-stream
-fetched_at: 2026-05-04T16:49:17.275551+00:00
+fetched_at: 2026-05-05T19:41:54.851550+00:00
 title: "Privileged Bases in the Transformer Residual Stream \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ InterpretabilityResearch
 
 Mar 16, 2023
 
-[Read Paper](https://www.anthropic.com/research/Read Paper)
+[Read Paper](https://transformer-circuits.pub/2023/privileged-basis/index.html)
 
 ## Abstract
 
@@ -22,14 +22,14 @@ We explore two other obvious sources of basis dependency in a Transformer: Layer
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

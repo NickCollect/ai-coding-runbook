@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/AI-assistance-coding-skills
-fetched_at: 2026-05-04T17:14:17.195520+00:00
+fetched_at: 2026-05-05T19:41:04.422698+00:00
 title: "How AI assistance impacts the formation of coding skills \\ Anthropic"
 ---
 
@@ -10,11 +10,11 @@ Alignment
 
 Jan 29, 2026
 
-[Read the paper](https://www.anthropic.com/research/Read the paper)
+[Read the paper](https://arxiv.org/abs/2601.20245)
 
 ![How AI assistance impacts the formation of coding skills](https://www-cdn.anthropic.com/images/4zrzovbb/website/f06ca06f9d08ca4a85f26357eb896c3730274507-1000x1000.svg)
 
-Research shows AI helps people do [parts](https://www.anthropic.com/research/parts) of their job faster. In an observational [study](https://www.anthropic.com/research/study) of [Claude.ai](https://www.anthropic.com/research/Claude.ai) data, we found AI can speed up some tasks by 80%. But does this increased productivity come with trade-offs? Other research shows that when people use AI assistance, they become [less engaged with their work](https://www.anthropic.com/research/less engaged with their work) and [reduce](https://www.anthropic.com/research/reduce) the effort they put into doing it—in other words, they offload their thinking to AI.
+Research shows AI helps people do [parts](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4945566) of their job faster. In an observational [study](https://www.anthropic.com/research/estimating-productivity-gains) of [Claude.ai](http://claude.ai/redirect/website.v1.160683d3-b377-4ce4-97f8-fdb70520e69d) data, we found AI can speed up some tasks by 80%. But does this increased productivity come with trade-offs? Other research shows that when people use AI assistance, they become [less engaged with their work](https://www.nature.com/articles/s41598-025-98385-2) and [reduce](https://www.microsoft.com/en-us/research/wp-content/uploads/2025/01/lee_2025_ai_critical_thinking_survey.pdf) the effort they put into doing it—in other words, they offload their thinking to AI.
 
 It’s unclear whether this cognitive offloading can prevent people from growing their skills on the job, or—in the case of coding—understanding the systems they’re building. Our latest study, a randomized controlled trial with software developers as participants, investigates this potential downside of using AI at work.
 
@@ -34,9 +34,11 @@ We split the study into three parts: a warm-up; the main task consisting of codi
 
 We designed the coding task to mimic how someone might learn a new tool through a self-guided tutorial. Each participant was given a problem description, starter code, and a brief explanation of the Trio concepts needed to solve it. We used an online coding platform with an AI assistant in the sidebar which had access to participants’ code and could at any time produce the correct code if asked.1
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/b009bf674206d736940ade254b112d1cf9fd380e-4584x2580.png)
+
 ### Evaluation design
 
-In our evaluation design, we drew on [research in computer science education](https://www.anthropic.com/research/research in computer science education) to identify four types of questions commonly used to assess mastery of coding skills:
+In our evaluation design, we drew on [research in computer science education](https://ieeexplore.ieee.org/document/9962584) to identify four types of questions commonly used to assess mastery of coding skills:
 
 - **Debugging**: The ability to identify and diagnose errors in code. This skill is crucial for detecting when AI-generated code is incorrect and understanding why it fails.
 - **Code reading**: The ability to read and comprehend what code does. This skill enables humans to understand and verify AI-written code before deployment.
@@ -48,6 +50,8 @@ Our assessment focused most heavily on debugging, code reading, and conceptual p
 ## Results
 
 On average, participants in the AI group finished about two minutes faster, although the difference was not statistically significant. There was, however, a significant difference in test scores: the AI group averaged 50% on the quiz, compared to 67% in the hand-coding group—or the equivalent of nearly two letter grades (Cohen's *d*=0.738, *p*=0.01). The largest gap in scores between the two groups was on debugging questions, suggesting that the ability to understand when code is incorrect and why it fails may be a particular area of concern if AI impedes coding development.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ab5167a53ff0de956bd500b01b30d8aba028d843-4584x2580.png)
 
 ### Qualitative analysis: AI interaction modes
 
@@ -79,15 +83,15 @@ Our results suggest that incorporating AI aggressively into the workplace, parti
 
 Though preliminary, these results suggest important considerations as companies transition to a greater ratio of AI-written to human-written code. Productivity benefits may come at the cost of skills necessary to validate AI-written code if junior engineers’ skill development has been stunted by using AI in the first place. Managers should think intentionally about how to deploy AI tools at scale, and consider systems or intentional design choices that ensure engineers continue to learn as they work—and are thus able to exercise meaningful oversight over the systems they build.
 
-For novice workers in software engineering or any other industry, our study can be viewed as a small piece of evidence toward the value of intentional skill development with AI tools. Cognitive effort—and even getting painfully stuck—is likely important for fostering mastery. This is also a lesson that applies to how individuals choose to work with AI, and which tools they use. Major LLM services also provide learning modes (e.g., [Claude Code Learning and Explanatory](https://www.anthropic.com/research/Claude Code Learning and Explanatory) mode or [ChatGPT Study Mode](https://www.anthropic.com/research/ChatGPT Study Mode)) designed to foster understanding. Knowing how people learn when using AI can also help guide how we design it; AI assistance should enable humans to work more efficiently *and* develop new skills at the same time.
+For novice workers in software engineering or any other industry, our study can be viewed as a small piece of evidence toward the value of intentional skill development with AI tools. Cognitive effort—and even getting painfully stuck—is likely important for fostering mastery. This is also a lesson that applies to how individuals choose to work with AI, and which tools they use. Major LLM services also provide learning modes (e.g., [Claude Code Learning and Explanatory](https://code.claude.com/docs/en/output-styles) mode or [ChatGPT Study Mode](https://openai.com/index/chatgpt-study-mode/)) designed to foster understanding. Knowing how people learn when using AI can also help guide how we design it; AI assistance should enable humans to work more efficiently *and* develop new skills at the same time.
 
-Prior studies have found mixed results on whether AI [helps](https://www.anthropic.com/research/helps) or [hinders](https://www.anthropic.com/research/hinders) coding productivity. Our own [research](https://www.anthropic.com/research/research) found that AI can reduce the time it takes to complete some work tasks by 80%—a result that may seem in tension with the findings presented here. But the two studies ask different questions and use different methods: our earlier observational work measured productivity on tasks where participants already had the relevant skills, while this study examines what happens when people are learning something new. It is possible that AI both accelerates productivity on well-developed skills and hinders the acquisition of new ones, though more research is needed to understand this relationship.
+Prior studies have found mixed results on whether AI [helps](https://arxiv.org/abs/2302.06590) or [hinders](https://arxiv.org/abs/2507.09089) coding productivity. Our own [research](https://www.anthropic.com/research/estimating-productivity-gains) found that AI can reduce the time it takes to complete some work tasks by 80%—a result that may seem in tension with the findings presented here. But the two studies ask different questions and use different methods: our earlier observational work measured productivity on tasks where participants already had the relevant skills, while this study examines what happens when people are learning something new. It is possible that AI both accelerates productivity on well-developed skills and hinders the acquisition of new ones, though more research is needed to understand this relationship.
 
 This study is only a first step towards uncovering how human-AI collaboration affects the experience of workers. Our sample was relatively small, and our assessment measured comprehension shortly after the coding task. Whether immediate quiz performance predicts longer-term skill development is an important question this study does not resolve. There remain many unanswered questions we hope future studies will investigate, for example the effects of AI on tasks beyond coding, whether this effect dissipates longitudinally as engineers develop greater fluency, and whether AI assistance differs from human assistance while learning.
 
 Ultimately, to accommodate skill development in the presence of AI, we need a more expansive view of the impacts of AI on workers. In an AI-augmented workplace, productivity gains matter, but so does the long-term development of the expertise those gains depend on.
 
-Read the [full paper](https://www.anthropic.com/research/full paper) for details.
+Read the [full paper](https://arxiv.org/abs/2601.20245) for details.
 
 ### Acknowledgments
 
@@ -117,14 +121,14 @@ Copy
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

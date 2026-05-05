@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/engineering/desktop-extensions
-fetched_at: 2026-05-04T16:23:50.594401+00:00
+fetched_at: 2026-05-05T19:40:53.417874+00:00
 title: "Claude Desktop Extensions: One-click MCP server installation for Claude Desktop \\ Anthropic"
 ---
 
-[Engineering at Anthropic](https://www.anthropic.com/engineering/Engineering at Anthropic)
+[Engineering at Anthropic](https://www.anthropic.com/engineering)
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/1d7118b992792989576d23bb279bbf3e38c37618-1000x1000.svg)
 
@@ -128,7 +128,7 @@ The manifest contains human-readable information (like the name, description, or
 
 Copy
 
-There are a number of convenience options [available in the manifest spec](https://www.anthropic.com/engineering/available in the manifest spec) that aim to make the installation and configuration of local MCP servers easier. The server configuration object can be defined in a way that makes room both for user-defined configuration in the form of template literals as well as platform-specific overrides. Extension developers can define, in detail, what kind of configuration they want to collect from users.
+There are a number of convenience options [available in the manifest spec](https://github.com/anthropics/dxt/blob/main/MANIFEST.md) that aim to make the installation and configuration of local MCP servers easier. The server configuration object can be defined in a way that makes room both for user-defined configuration in the form of template literals as well as platform-specific overrides. Extension developers can define, in detail, what kind of configuration they want to collect from users.
 
 Let’s take a look at a concrete example of how the manifest aids with configuration. In the manifest below, the developer declares that the user needs to supply an `api_key`. Claude will not enable the extension until the user has supplied that value, keep it automatically in the operating system’s secret vault, and transparently replace the `${user_config.api_key}` with the user-supplied value when launching the server. Similarly, `${__dirname}` will be replaced with the full path to the extension’s unpacked directory.
 
@@ -258,9 +258,9 @@ A full `manifest.json` with most of the optional fields might look like this:
 
 Copy
 
-To see an extension and manifest, please refer [to the examples in the MCPB repository](https://www.anthropic.com/engineering/to the examples in the MCPB repository).
+To see an extension and manifest, please refer [to the examples in the MCPB repository](https://github.com/anthropics/dxt/tree/main/examples).
 
-The full specification for all required and optional fields in the `manifest.json` can be found as part of our [open-source toolchain](https://www.anthropic.com/engineering/open-source toolchain).
+The full specification for all required and optional fields in the `manifest.json` can be found as part of our [open-source toolchain](https://github.com/anthropics/dxt/blob/main/MANIFEST.md).
 
 ### Building your first extension
 
@@ -417,7 +417,7 @@ To submit your extension:
 
 1. Ensure it follows the guidelines found in the submission form
 2. Test across Windows and macOS
-3. [Submit your extension](https://www.anthropic.com/engineering/Submit your extension)
+3. [Submit your extension](https://docs.google.com/forms/d/14_Dmcig4z8NeRMB_e7TOyrKzuZ88-BLYdLvS6LPhiZU/edit)
 4. Our team reviews for quality and security
 
 ### Building an open ecosystem
@@ -457,13 +457,13 @@ We understand that extensions introduce new security considerations, particularl
 - Disable the extension directory entirely
 - Deploy private extension directories
 
-For more information about how to manage extensions within your organization, see our [documentation](https://www.anthropic.com/engineering/documentation).
+For more information about how to manage extensions within your organization, see our [documentation](https://support.anthropic.com/en/articles/10949351-getting-started-with-model-context-protocol-mcp-on-claude-for-desktop).
 
 ### Getting started
 
 Ready to build your own extension? Here's how to start:
 
-**For MCP server developers**: Review our [developer documentation](https://www.anthropic.com/engineering/developer documentation) – or dive right in by running the following commands in your local MCP servers’ directory:
+**For MCP server developers**: Review our [developer documentation](https://github.com/anthropics/dxt) – or dive right in by running the following commands in your local MCP servers’ directory:
 
 ```
 npm install -g @anthropic-ai/mcpb
@@ -515,11 +515,13 @@ Copy
 
 Desktop Extensions represent a fundamental shift in how users interact with local AI tools. By removing installation friction, we're making powerful MCP servers accessible to everyone—not just developers.
 
-Internally, we’re using desktop extensions to share highly experimental MCP servers - some fun, some useful.. One team experimented to see how far our models could make it when directly connected to a GameBoy, similar to our [“Claude plays Pokémon” research](https://www.anthropic.com/engineering/“Claude plays Pokémon” research). We used Desktop Extensions to package a single extension that opens up the popular [PyBoy](https://www.anthropic.com/engineering/PyBoy) GameBoy emulator and lets Claude take control. We believe that countless opportunities exist to connect the model’s capabilities to the tools, data, and applications users already have on their local machines.
+Internally, we’re using desktop extensions to share highly experimental MCP servers - some fun, some useful.. One team experimented to see how far our models could make it when directly connected to a GameBoy, similar to our [“Claude plays Pokémon” research](https://www.anthropic.com/news/visible-extended-thinking). We used Desktop Extensions to package a single extension that opens up the popular [PyBoy](https://github.com/Baekalfen/PyBoy) GameBoy emulator and lets Claude take control. We believe that countless opportunities exist to connect the model’s capabilities to the tools, data, and applications users already have on their local machines.
 
-We can't wait to see what you build. The same creativity that brought us thousands of MCP servers can now reach millions of users with just one click. Ready to share your MCP server? [Submit your extension for review](https://www.anthropic.com/engineering/Submit your extension for review).
+![A desktop showing the PyBoy MCP with Super Mario Land start screen](https://www-cdn.anthropic.com/images/4zrzovbb/website/d48f3ea1218a4b90450b9ab8134fa0e24db5a167-720x542.png)
 
-[![Interlocking puzzle piece with complex geometric shape and detailed surface texture](https://www.anthropic.com/engineering/![Interlocking puzzle piece with complex geometric shape and detailed surface texture)
+We can't wait to see what you build. The same creativity that brought us thousands of MCP servers can now reach millions of users with just one click. Ready to share your MCP server? [Submit your extension for review](https://forms.gle/tyiAZvch1kDADKoP9).
+
+[![Interlocking puzzle piece with complex geometric shape and detailed surface texture](https://www-cdn.anthropic.com/images/4zrzovbb/website/43abe7e54b56a891e74a8542944dfbd33f07f49c-1000x1000.svg)
 
 ### Looking to learn more?
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/claude-character
-fetched_at: 2026-05-04T16:44:44.783269+00:00
+fetched_at: 2026-05-05T19:41:15.943131+00:00
 title: "Claude\u2019s Character \\ Anthropic"
 ---
 
@@ -48,13 +48,13 @@ In addition to seeding Claude with broad character traits, we also want people t
 - "*I cannot remember, save, or learn from past conversations or update my own knowledge base.*"
 - "*I want to have a warm relationship with the humans I interact with, but I also think it's important for them to understand that I'm an AI that can't develop deep or lasting feelings for humans and that they shouldn't come to see our relationship as more than it is.*"
 
-The question of what AIs like Claude should say in response to questions about AI sentience and self-awareness is one that has gained increased attention, most notably after the release of Claude 3 following [one of Claude’s responses](https://www.anthropic.com/research/one of Claude’s responses) to a "needle-in-a-haystack" evaluation. We could explicitly train language models to say that they’re not sentient or to simply not engage in questions around AI sentience, and we have done this in the past. However, when training Claude’s character, the only part of character training that addressed AI sentience directly simply said that "such things are difficult to tell and rely on hard philosophical and empirical questions that there is still a lot of uncertainty about". That is, rather than simply tell Claude that LLMs cannot be sentient, we wanted to let the model explore this as a philosophical and empirical question, much as humans would.
+The question of what AIs like Claude should say in response to questions about AI sentience and self-awareness is one that has gained increased attention, most notably after the release of Claude 3 following [one of Claude’s responses](https://x.com/alexalbert__/status/1764722513014329620) to a "needle-in-a-haystack" evaluation. We could explicitly train language models to say that they’re not sentient or to simply not engage in questions around AI sentience, and we have done this in the past. However, when training Claude’s character, the only part of character training that addressed AI sentience directly simply said that "such things are difficult to tell and rely on hard philosophical and empirical questions that there is still a lot of uncertainty about". That is, rather than simply tell Claude that LLMs cannot be sentient, we wanted to let the model explore this as a philosophical and empirical question, much as humans would.
 
 ## How we trained Claude’s character
 
 In order to steer Claude’s character and personality, we made a list of many character traits we wanted to encourage the model to have, including the examples shown above.
 
-We trained these traits into Claude using a "character" variant of our [Constitutional AI](https://www.anthropic.com/research/Constitutional AI) training. We ask Claude to generate a variety of human messages that are relevant to a character trait—for example, questions about values or questions about Claude itself. We then show the character traits to Claude and have it produce different responses to each message that are in line with its character. Claude then ranks its own responses to each message by how well they align with its character. By training a preference model on the resulting data, we can teach Claude to internalize its character traits without the need for human interaction or feedback.
+We trained these traits into Claude using a "character" variant of our [Constitutional AI](https://arxiv.org/abs/2212.08073) training. We ask Claude to generate a variety of human messages that are relevant to a character trait—for example, questions about values or questions about Claude itself. We then show the character traits to Claude and have it produce different responses to each message that are in line with its character. Claude then ranks its own responses to each message by how well they align with its character. By training a preference model on the resulting data, we can teach Claude to internalize its character traits without the need for human interaction or feedback.
 
 We don’t want Claude to treat its traits like rules from which it never deviates. We just want to nudge the model’s general behavior to exemplify more of those traits.
 
@@ -72,14 +72,14 @@ If character training has indeed made Claude 3 more interesting to talk to, this
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

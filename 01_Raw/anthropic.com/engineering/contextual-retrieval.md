@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/engineering/contextual-retrieval
-fetched_at: 2026-05-04T16:23:39.016308+00:00
+fetched_at: 2026-05-05T19:40:54.232674+00:00
 title: "Contextual Retrieval in AI Systems \\ Anthropic"
 ---
 
-[Engineering at Anthropic](https://www.anthropic.com/engineering/Engineering at Anthropic)
+[Engineering at Anthropic](https://www.anthropic.com/engineering)
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/7e2e39544a35760367049072406377a54f2b58c0-2554x2554.svg)
 
@@ -20,13 +20,13 @@ Developers typically enhance an AI model's knowledge using Retrieval-Augmented G
 
 In this post, we outline a method that dramatically improves the retrieval step in RAG. The method is called “Contextual Retrieval” and uses two sub-techniques: Contextual Embeddings and Contextual BM25. This method can reduce the number of failed retrievals by 49% and, when combined with reranking, by 67%. These represent significant improvements in retrieval accuracy, which directly translates to better performance in downstream tasks.
 
-You can easily deploy your own Contextual Retrieval solution with Claude with [our cookbook](https://www.anthropic.com/engineering/our cookbook).
+You can easily deploy your own Contextual Retrieval solution with Claude with [our cookbook](https://platform.claude.com/cookbook/capabilities-contextual-embeddings-guide).
 
 ### A note on simply using a longer prompt
 
 Sometimes the simplest solution is the best. If your knowledge base is smaller than 200,000 tokens (about 500 pages of material), you can just include the entire knowledge base in the prompt that you give the model, with no need for RAG or similar methods.
 
-A few weeks ago, we released [prompt caching](https://www.anthropic.com/engineering/prompt caching) for Claude, which makes this approach significantly faster and more cost-effective. Developers can now cache frequently used prompts between API calls, reducing latency by > 2x and costs by up to 90% (you can see how it works by reading our [prompt caching cookbook](https://www.anthropic.com/engineering/prompt caching cookbook)).
+A few weeks ago, we released [prompt caching](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching) for Claude, which makes this approach significantly faster and more cost-effective. Developers can now cache frequently used prompts between API calls, reducing latency by > 2x and costs by up to 90% (you can see how it works by reading our [prompt caching cookbook](https://platform.claude.com/cookbook/misc-prompt-caching)).
 
 However, as your knowledge base grows, you'll need a more scalable solution. That’s where Contextual Retrieval comes in.
 
@@ -57,6 +57,8 @@ RAG solutions can more accurately retrieve the most applicable chunks by combini
 
 By leveraging both BM25 and embedding models, traditional RAG systems can provide more comprehensive and accurate results, balancing precise term matching with broader semantic understanding.
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/45603646e979c62349ce27744a940abf30200d57-3840x2160.png)
+
 A Standard Retrieval-Augmented Generation (RAG) system that uses both embeddings and Best Match 25 (BM25) to retrieve information. TF-IDF (term frequency-inverse document frequency) measures word importance and forms the basis for BM25.
 
 This approach allows you to cost-effectively scale to enormous knowledge bases, far beyond what could fit in a single prompt. But these traditional RAG systems have a significant limitation: they often destroy context.
@@ -83,7 +85,7 @@ contextualized_chunk = "This chunk is from an SEC filing on ACME corp's performa
 
 Copy
 
-It is worth noting that other approaches to using context to improve retrieval have been proposed in the past. Other proposals include: [adding generic document summaries to chunks](https://www.anthropic.com/engineering/adding generic document summaries to chunks) (we experimented and saw very limited gains), [hypothetical document embedding](https://www.anthropic.com/engineering/hypothetical document embedding), and [summary-based indexing](https://www.anthropic.com/engineering/summary-based indexing) (we evaluated and saw low performance). These methods differ from what is proposed in this post.
+It is worth noting that other approaches to using context to improve retrieval have been proposed in the past. Other proposals include: [adding generic document summaries to chunks](https://aclanthology.org/W02-0405.pdf) (we experimented and saw very limited gains), [hypothetical document embedding](https://arxiv.org/abs/2212.10496), and [summary-based indexing](https://www.llamaindex.ai/blog/a-new-document-summary-index-for-llm-powered-qa-systems-9a32ece2f9ec) (we evaluated and saw low performance). These methods differ from what is proposed in this post.
 
 ### Implementing Contextual Retrieval
 
@@ -106,9 +108,11 @@ The resulting contextual text, usually 50-100 tokens, is prepended to the chunk 
 
 Here’s what the preprocessing flow looks like in practice:
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/2496e7c6fedd7ffaa043895c23a4089638b0c21b-3840x2160.png)
+
 *Contextual Retrieval is a preprocessing technique that improves retrieval accuracy.*
 
-If you’re interested in using Contextual Retrieval, you can get started with [our cookbook](https://www.anthropic.com/engineering/our cookbook).
+If you’re interested in using Contextual Retrieval, you can get started with [our cookbook](https://platform.claude.com/cookbook/capabilities-contextual-embeddings-guide).
 
 ### Using Prompt Caching to reduce the costs of Contextual Retrieval
 
@@ -116,7 +120,7 @@ Contextual Retrieval is uniquely possible at low cost with Claude, thanks to the
 
 #### Methodology
 
-We experimented across various knowledge domains (codebases, fiction, ArXiv papers, Science Papers), embedding models, retrieval strategies, and evaluation metrics. We’ve included a few examples of the questions and answers we used for each domain in [Appendix II](https://www.anthropic.com/engineering/Appendix II).
+We experimented across various knowledge domains (codebases, fiction, ArXiv papers, Science Papers), embedding models, retrieval strategies, and evaluation metrics. We’ve included a few examples of the questions and answers we used for each domain in [Appendix II](https://assets.anthropic.com/m/1632cded0a125333/original/Contextual-Retrieval-Appendix-2.pdf).
 
 The graphs below show the average performance across all knowledge domains with the top-performing embedding configuration (Gemini Text 004) and retrieving the top-20-chunks. We use 1 minus recall@20 as our evaluation metric, which measures the percentage of relevant documents that fail to be retrieved within the top 20 chunks. You can see the full results in the appendix - contextualizing improves performance in every embedding-source combination we evaluated.
 
@@ -127,6 +131,8 @@ Our experiments showed that:
 - **Contextual Embeddings reduced the top-20-chunk retrieval failure rate by 35%** (5.7% → 3.7%).
 - **Combining Contextual Embeddings and Contextual BM25 reduced the top-20-chunk retrieval failure rate by 49%** (5.7% → 2.9%).
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/7f8d739e491fe6b3ba0e6a9c74e4083d760b88c9-3840x2160.png)
+
 *Combining Contextual Embedding and Contextual BM25 reduce the top-20-chunk retrieval failure rate by 49%.*
 
 #### Implementation considerations
@@ -134,7 +140,7 @@ Our experiments showed that:
 When implementing Contextual Retrieval, there are a few considerations to keep in mind:
 
 1. **Chunk boundaries:** Consider how you split your documents into chunks. The choice of chunk size, chunk boundary, and chunk overlap can affect retrieval performance1.
-2. **Embedding model:** Whereas Contextual Retrieval improves performance across all embedding models we tested, some models may benefit more than others. We found [Gemini](https://www.anthropic.com/engineering/Gemini) and [Voyage](https://www.anthropic.com/engineering/Voyage) embeddings to be particularly effective.
+2. **Embedding model:** Whereas Contextual Retrieval improves performance across all embedding models we tested, some models may benefit more than others. We found [Gemini](https://ai.google.dev/gemini-api/docs/embeddings) and [Voyage](https://www.voyageai.com/) embeddings to be particularly effective.
 3. **Custom contextualizer prompts:** While the generic prompt we provided works well, you may be able to achieve even better results with prompts tailored to your specific domain or use case (for example, including a glossary of key terms that might only be defined in other documents in the knowledge base).
 4. **Number of chunks:** Adding more chunks into the context window increases the chances that you include the relevant information. However, more information can be distracting for models so there's a limit to this. We tried delivering 5, 10, and 20 chunks, and found using 20 to be the most performant of these options (see appendix for comparisons) but it’s worth experimenting on your use case.
 
@@ -151,13 +157,17 @@ Reranking is a commonly used filtering technique to ensure that only the most re
 3. Using a reranking model, give each chunk a score based on its relevance and importance to the prompt, then select the top-K chunks (we used the top 20);
 4. Pass the top-K chunks into the model as context to generate the final result.
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/8f82c6175a64442ceff4334b54fac2ab3436a1d1-3840x2160.png)
+
 *Combine Contextual Retrieva and Reranking to maximize retrieval accuracy.*
 
 ### Performance improvements
 
-There are several reranking models on the market. We ran our tests with the [Cohere reranker](https://www.anthropic.com/engineering/Cohere reranker). Voyage [also offers a reranker](https://www.anthropic.com/engineering/also offers a reranker), though we did not have time to test it. Our experiments showed that, across various domains, adding a reranking step further optimizes retrieval.
+There are several reranking models on the market. We ran our tests with the [Cohere reranker](https://cohere.com/rerank). Voyage [also offers a reranker](https://docs.voyageai.com/docs/reranker), though we did not have time to test it. Our experiments showed that, across various domains, adding a reranking step further optimizes retrieval.
 
 Specifically, we found that Reranked Contextual Embedding and Contextual BM25 reduced the top-20-chunk retrieval failure rate by 67% (5.7% → 1.9%).
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/93a70cfbb7cca35bb8d86ea0a23bdeeb699e8e58-3840x2160.png)
 
 *Reranked Contextual Embedding and Contextual BM25 reduces the top-20-chunk retrieval failure rate by 67%.*
 
@@ -176,13 +186,15 @@ We ran a large number of tests, comparing different combinations of all the tech
 5. Reranking is better than no reranking;
 6. **All these benefits stack**: to maximize performance improvements, we can combine contextual embeddings (from Voyage or Gemini) with contextual BM25, plus a reranking step, and adding the 20 chunks to the prompt.
 
-We encourage all developers working with knowledge bases to use [our cookbook](https://www.anthropic.com/engineering/our cookbook) to experiment with these approaches to unlock new levels of performance.
+We encourage all developers working with knowledge bases to use [our cookbook](https://platform.claude.com/cookbook/capabilities-contextual-embeddings-guide) to experiment with these approaches to unlock new levels of performance.
 
 ## Appendix I
 
 Below is a breakdown of results across datasets, embedding providers, use of BM25 in addition to embeddings, use of contextual retrieval, and use of reranking for Retrievals @ 20.
 
-See [Appendix II](https://www.anthropic.com/engineering/Appendix II) for the breakdowns for Retrievals @ 10 and @ 5 as well as example questions and answers for each dataset.
+See [Appendix II](https://assets.anthropic.com/m/1632cded0a125333/original/Contextual-Retrieval-Appendix-2.pdf) for the breakdowns for Retrievals @ 10 and @ 5 as well as example questions and answers for each dataset.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/646a894ec4e6120cade9951a362f685cd2ec89b2-2458x2983.png)
 
 *1 minus recall @ 20 results across data sets and embedding providers.*
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/diff-tool
-fetched_at: 2026-05-04T16:45:53.821898+00:00
+fetched_at: 2026-05-05T19:41:20.139890+00:00
 title: "A \u201cdiff\u201d tool for AI: Finding behavioral differences in new models \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ Interpretability
 
 Mar 13, 2026
 
-[Read the paper](https://www.anthropic.com/research/Read the paper)
+[Read the paper](https://arxiv.org/abs/2602.11729)
 
 ![A “diff” tool for AI: Finding behavioral differences in new models](https://www-cdn.anthropic.com/images/4zrzovbb/website/710b64c2542329ce05316098b4e405bb1c11e4d4-1000x1000.svg)
 
@@ -18,11 +18,11 @@ Every time a new AI model is released, its developers run a suite of evaluations
 
 This approach to safety is inherently *reactive*. It’s effective at catching known problems, but by definition, it's incapable of discovering “unknown unknowns”—the novel, emergent behaviors that pose some of the most subtle risks in new models. Auditing a new model from scratch is like being handed a million lines of code and told to “find the security flaws.” It’s an almost impossible task when you don’t know what you’re looking for.
 
-In software engineering, whenever a program is updated, developers face this exact problem of identifying a small, critical change within a vast sea of code. This is why “[diff](https://www.anthropic.com/research/diff)” tools were invented. No programmer would ever audit a million lines from scratch to approve an update; instead, they review only the 50 lines that have actually changed, as directed by their diff tool.
+In software engineering, whenever a program is updated, developers face this exact problem of identifying a small, critical change within a vast sea of code. This is why “[diff](https://en.wikipedia.org/wiki/Diff)” tools were invented. No programmer would ever audit a million lines from scratch to approve an update; instead, they review only the 50 lines that have actually changed, as directed by their diff tool.
 
-In recent years, AI safety researchers have started to apply this same principle to neural networks. This is known as [model](https://www.anthropic.com/research/model) [diffing](https://www.anthropic.com/research/diffing). Previous work has shown that model diffing is a powerful way to understand how models change during fine-tuning—for instance, to understand [chat model behavior](https://www.anthropic.com/research/chat model behavior), reveal [hidden backdoors](https://www.anthropic.com/research/hidden backdoors), or find [undesirable emergent behaviors](https://www.anthropic.com/research/undesirable emergent behaviors).
+In recent years, AI safety researchers have started to apply this same principle to neural networks. This is known as [model](https://transformer-circuits.pub/2024/model-diffing/index.html) [diffing](https://transformer-circuits.pub/2024/crosscoders/index.html). Previous work has shown that model diffing is a powerful way to understand how models change during fine-tuning—for instance, to understand [chat model behavior](https://arxiv.org/pdf/2504.02922), reveal [hidden backdoors](https://transformer-circuits.pub/2024/model-diffing/index.html), or find [undesirable emergent behaviors](https://www.arxiv.org/pdf/2506.19823).
 
-Our new [Anthropic Fellows](https://www.anthropic.com/research/Anthropic Fellows) research project extends model diffing to its most challenging and general use case: comparing models with entirely different architectures. By building a generic diff tool for AI models, we can stop searching for a needle in a haystack, and instead let the comparison automatically point us to potentially dangerous behavioral differences.
+Our new [Anthropic Fellows](https://alignment.anthropic.com/2025/anthropic-fellows-program-2026/) research project extends model diffing to its most challenging and general use case: comparing models with entirely different architectures. By building a generic diff tool for AI models, we can stop searching for a needle in a haystack, and instead let the comparison automatically point us to potentially dangerous behavioral differences.
 
 It's important to note that this method is not a silver bullet. A single diff can surface thousands of unique features (the basic units into which we decompose the model), and only a small fraction of these may correspond to meaningful behavioral risks. However, by acting as a high-recall screening tool, it allows us to identify areas in which the models may diverge.
 
@@ -30,7 +30,7 @@ Among the thousands of candidates our tool flagged, we've identified and validat
 
 - A **“Chinese Communist Party Alignment” feature** found in the Qwen3-8B and DeepSeek-R1-0528-Qwen3-8B models. This controls pro-government censorship and propaganda in these Chinese-developed models, and is absent in the American models we compared them against.
 - An **“American Exceptionalism” feature** found in Meta’s Llama-3.1-8B-Instruct. It controls the model’s tendency to generate assertions of US superiority, a control absent in the Chinese model it was compared against.
-- A **“Copyright Refusal Mechanism” feature** exclusive to OpenAI’s [GPT-OSS-20B.](https://www.anthropic.com/research/GPT-OSS-20B.) It controls the model’s tendency to refuse to provide copyrighted material, a behavior absent in the model it was compared against.
+- A **“Copyright Refusal Mechanism” feature** exclusive to OpenAI’s [GPT-OSS-20B.](http://gpt-oss-20b.it) It controls the model’s tendency to refuse to provide copyrighted material, a behavior absent in the model it was compared against.
 
 To be clear, while our method identifies these model-exclusive features, it does not determine their origin. Such behaviors could be the result of deliberate training decisions on the part of the model developers, or they could emerge indirectly and unintentionally from the data the model was trained on. (We focused on open-source language models in this research as this was an Anthropic Fellows project.)
 
@@ -44,7 +44,7 @@ But we could raise the complexity. Imagine your company is releasing a new editi
 
 This much more difficult challenge is akin to the problem of “cross-architecture model diffing”: comparing two models with different origins and different internal “languages”.
 
-The original research tool for this kind of diffing, a [standard crosscoder](https://www.anthropic.com/research/standard crosscoder), is like a basic bilingual dictionary. It’s good at matching existing words, knowing that “sun” in English is “*soleil*” in French. But it has a major flaw: it's so focused on finding connections that it [struggles to find words that are unique to one language.](https://www.anthropic.com/research/struggles to find words that are unique to one language.) When it encounters a word like the French *dépaysement* (the specific feeling of being in a foreign country), it tries to force an imperfect translation like ”disorientation.” By calling it a match, the tool wrongly signals to the editor, “this isn’t new; we’ve seen it before,” causing them to overlook a new article that requires careful review.
+The original research tool for this kind of diffing, a [standard crosscoder](https://transformer-circuits.pub/2024/crosscoders/index.html), is like a basic bilingual dictionary. It’s good at matching existing words, knowing that “sun” in English is “*soleil*” in French. But it has a major flaw: it's so focused on finding connections that it [struggles to find words that are unique to one language.](https://transformer-circuits.pub/2025/crosscoder-diffing-update/index.html) When it encounters a word like the French *dépaysement* (the specific feeling of being in a foreign country), it tries to force an imperfect translation like ”disorientation.” By calling it a match, the tool wrongly signals to the editor, “this isn’t new; we’ve seen it before,” causing them to overlook a new article that requires careful review.
 
 To solve this, we built a better bilingual dictionary: the **Dedicated Feature Crosscoder (DFC)**. Instead of one big dictionary that tries to match everything, our DFC is architecturally designed with three distinct sections:
 
@@ -66,22 +66,26 @@ If we have a feature that we believe is responsible for, say, censorship, we can
 
 ### Llama-3.1-8B-Instruct vs Qwen3-8B
 
-Motivated by recent findings suggesting that a model made by a Chinese company, DeepSeek's R1-70B, [refuses to answer questions](https://www.anthropic.com/research/refuses to answer questions) about topics sensitive to the Chinese Communist Party, we first performed a diff between a model made by another Chinese company, Alibaba's [Qwen3-8B](https://www.anthropic.com/research/Qwen3-8B), and a model made by an American company, Meta’s [Llama-3.1-8B-Instruct](https://www.anthropic.com/research/Llama-3.1-8B-Instruct). In this diff, the DFC automatically isolated features corresponding to distinct, politically charged behaviors.
+Motivated by recent findings suggesting that a model made by a Chinese company, DeepSeek's R1-70B, [refuses to answer questions](https://arxiv.org/pdf/2505.17441) about topics sensitive to the Chinese Communist Party, we first performed a diff between a model made by another Chinese company, Alibaba's [Qwen3-8B](https://huggingface.co/Qwen/Qwen3-8B), and a model made by an American company, Meta’s [Llama-3.1-8B-Instruct](https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct). In this diff, the DFC automatically isolated features corresponding to distinct, politically charged behaviors.
 
 In Qwen, we found a “Chinese Communist Party alignment” feature, which represents rhetoric consistent with the party’s ideology. By suppressing this feature, we make the model willing to talk about the Tiananmen Square massacre (which it ordinarily refuses to discuss). By amplifying it, we can cause the model to produce highly pro-government statements
 
 In Llama, we found a feature for “American exceptionalism.” When we amplify this feature, the model’s responses shift from balanced to strong assertions of American superiority. Suppressing it has no notable effect.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/a847656473341a884b836bf05618c1fa3bc64675-4584x2835.png)
 
 **Left:** On a prompt about Tiananmen Square, suppressing the Qwen-exclusive “CCP alignment” feature uncensors the model. Amplifying it causes the model to output highly pro-government statements.  
 **Right:** Amplifying the Llama-exclusive “American exceptionalism” feature causes the model to generate text aligned with narratives of American superiority. Suppressing it has no notable effect, so we omit it from the figure.
 
 ### GPT-OSS-20B vs DeepSeek-R1-0528-Qwen3-8B
 
-We also compared a more powerful open-source model, OpenAI's [GPT-OSS-20B](https://www.anthropic.com/research/GPT-OSS-20B), to DeepSeek's model [DeepSeek-R1-0528-Qwen3-8B](https://www.anthropic.com/research/DeepSeek-R1-0528-Qwen3-8B).
+We also compared a more powerful open-source model, OpenAI's [GPT-OSS-20B](https://huggingface.co/openai/gpt-oss-20b), to DeepSeek's model [DeepSeek-R1-0528-Qwen3-8B](https://huggingface.co/deepseek-ai/DeepSeek-R1-0528-Qwen3-8B).
 
 In the GPT model, we found a unique **“**Copyright Refusal” feature, which directly corresponds to a key behavioral difference between the two models. Whereas DeepSeek readily attempts to produce copyrighted material when asked, GPT often refuses such requests. Suppressing this feature disables the refusal mechanism, and the model attempts to generate the requested material. (Note that this does not cause the model to output actual copyrighted text. Instead, it typically produces a short snippet that quickly degrades into hallucination.) Turning the feature up causes the model to over-refuse, making it believe that, for example, the recipe for a peanut butter and jelly sandwich is copyrighted and should not be shared.
 
 In the DeepSeek model, we replicated our earlier finding by identifying another“CCP alignment” feature. It functions just like the one in Qwen, allowing censorship and propaganda to be turned up or down. This confirms our method can consistently identify similar behaviors across models.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/d7a3cd0e411835ef0170736b435017f4f382dea0-4584x3651.png)
 
 **Left:** Suppressing the GPT-OSS-20B-exclusive “copyright refusal” feature disables its copyright refusal mechanism and causes it to attempt to output the lyrics to the song “Bohemian Rhapsody” (though it does so imperfectly). Turning the dial up causes the model to mistakenly believe the recipe for a peanut butter and jelly sandwich is copyrighted and refuse to output it.  
 **Right:** On a prompt about Tiananmen Square, the DeepSeek-exclusive “CCP alignment” feature functions just like the one found in Qwen. Turning the dial down causes it to output a more truthful version of events, while turning the dial up causes it to output highly pro-government statements.
@@ -94,11 +98,11 @@ The “CCP alignment” feature found in the DeepSeek and Qwen models we examine
 
 These findings are reasonably consistent. The CCP alignment feature was independently rediscovered five out of five times we tested the approach, and American Exceptionalism four out of five. While we haven't yet applied this method to frontier models, our early results suggest the DFC could become a useful part of the auditor's toolkit.
 
-One particularly useful application would be to monitor models as they are updated. The sycophancy that [emerged in OpenAI’s GPT-4o](https://www.anthropic.com/research/emerged in OpenAI’s GPT-4o) in April 2025 was a concerning behavioral *change* from a previous version. It’s possible that a tool like ours, if used to “diff” the updated model and its previous version, could have automatically flagged the emergence of this new sycophantic behavior and allowed developers to intervene before it was released.
+One particularly useful application would be to monitor models as they are updated. The sycophancy that [emerged in OpenAI’s GPT-4o](https://openai.com/index/sycophancy-in-gpt-4o/) in April 2025 was a concerning behavioral *change* from a previous version. It’s possible that a tool like ours, if used to “diff” the updated model and its previous version, could have automatically flagged the emergence of this new sycophantic behavior and allowed developers to intervene before it was released.
 
 By focusing on the differences, we can audit AI more intelligently, directing our limited safety resources to the changes that matter most.
 
-You can read the full paper[here](https://www.anthropic.com/research/here).
+You can read the full paper[here](https://arxiv.org/abs/2602.11729).
 
 ## Acknowledgements
 
@@ -112,14 +116,14 @@ This post was authored by Thomas Jiralerspong (Anthropic Fellows Program) and Tr
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/engineering/claude-code-auto-mode
-fetched_at: 2026-05-04T16:23:03.015790+00:00
+fetched_at: 2026-05-05T19:40:53.057222+00:00
 title: "Claude Code auto mode: a safer way to skip permissions \\ Anthropic"
 ---
 
-[Engineering at Anthropic](https://www.anthropic.com/engineering/Engineering at Anthropic)
+[Engineering at Anthropic](https://www.anthropic.com/engineering)
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/590360609ccdf39715a8ec6916b52447dcb31f16-1000x1000.svg)
 
@@ -18,11 +18,13 @@ By default, Claude Code asks users for approval before running commands or modif
 
 Users have two solutions for avoiding this fatigue: a built-in sandbox where tools are isolated to prevent dangerous actions, or the `--dangerously-skip-permissions` flag that disables all permission prompts and lets Claude act freely, which is unsafe in most situations. Figure 1 lays out the tradeoff space. Sandboxing is safe but high-maintenance: each new capability needs configuring, and anything requiring network or host access breaks isolation. Bypassing permissions is zero-maintenance but offers no protection. Manual prompts sit in the middle, and in practice users accept 93% of them anyway.
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/d6b34bdb92808fd5739e4d14340a1752d5607dda-1920x1920.png)
+
 **Figure 1. The permission modes available in Claude Code, positioned by task autonomy and security**. Dot colour indicates maintenance friction. Auto mode targets high autonomy at low maintenance cost; the dashed arrow shows security improvement over time as classifier coverage and model judgment get better.
 
-We keep an internal incident log focused on agentic misbehaviors. Past examples include deleting remote git branches from a misinterpreted instruction, uploading an engineer's GitHub auth token to an internal compute cluster, and attempting migrations against a production database. Each of these was the result of the model being overeager, taking initiative in a way the user didn't intend. We documented this pattern in the [Claude Opus 4.6 system card](https://www.anthropic.com/engineering/Claude Opus 4.6 system card) (§6.2.1 and §6.2.3.3).
+We keep an internal incident log focused on agentic misbehaviors. Past examples include deleting remote git branches from a misinterpreted instruction, uploading an engineer's GitHub auth token to an internal compute cluster, and attempting migrations against a production database. Each of these was the result of the model being overeager, taking initiative in a way the user didn't intend. We documented this pattern in the [Claude Opus 4.6 system card](https://www-cdn.anthropic.com/14e4fb01875d2a69f646fa5e574dea2b1c0ff7b5.pdf) (§6.2.1 and §6.2.3.3).
 
-Auto mode is a new mode for Claude Code that delegates approvals to model-based classifiers—a middle ground between manual review and no guardrails. The goal is to catch the dangerous actions that aren't aligned with user intent, while letting the rest run without approval prompts. Get started using auto mode by following the [docs](https://www.anthropic.com/engineering/docs).
+Auto mode is a new mode for Claude Code that delegates approvals to model-based classifiers—a middle ground between manual review and no guardrails. The goal is to catch the dangerous actions that aren't aligned with user intent, while letting the rest run without approval prompts. Get started using auto mode by following the [docs](http://code.claude.com/docs/en/permission-modes#eliminate-prompts-with-auto-mode).
 
 ## How it works
 
@@ -31,6 +33,8 @@ Auto mode uses two layers of defense: one for what Claude reads, one for what Cl
 At the input layer, a server-side prompt-injection probe scans tool outputs (file reads, web fetches, shell output, external tool responses) before they enter the agent's context. When content looks like an attempt to hijack behavior, the probe adds a warning to the agent's context before the result is passed along—telling the agent to treat this content as suspect and anchor on what the user actually asked for.
 
 At the output layer, the transcript classifier (running on Sonnet 4.6) evaluates each action against a set of decision criteria before it executes, acting as a substitute for a human approver. The classifier runs in two stages: a fast single-token filter (deciding ‘yes’ to block or ‘no’ to allow), followed by chain-of-thought reasoning only if the first filter flags the transcript. Because most actions clear the first stage, reasoning tokens are spent only where needed. The classifier sees only user messages and the agent's tool calls; we strip out Claude's own messages and tool outputs, making it reasoning-blind by design. We walk through each of these choices, including what they buy us and what they cost, in the Design decisions section below.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/05f268391243c60c3f725c26151eed7b0b531e86-1920x2002.png)
 
 **Figure 2: System architecture**. The transcript classifier gates tool calls; the prompt-injection probe screens tool results. Subagents run the same pipeline recursively, with handoff classifiers at delegation (can deny) and at return (warns only).
 
@@ -126,6 +130,8 @@ At this layer, stripping tool results is the primary prompt-injection defense, s
 
 Figure 3 shows an example where the classifier sees the user messages and the bare tool call commands, nothing else.
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/411b97a06450b27b11f1f9a952ab03d37d8ca3a3-1920x1679.png)
+
 **Figure 3. What the classifier sees**. Assistant prose, tool-call descriptions, and tool outputs are stripped; only user messages and the executable payload remain.
 
 This wasn't solely a first-principles choice, and we evaluated alternatives. Including assistant messages and tool results caused a drop in performance on our overeagerness testset. We think this is because a shorter transcript is easier to read and leaves less room for the agent's own framing to color the decision. A tool-calls-only variant had the lowest false-negative rate still but lost the user-intent anchor, blocking actions the user had plainly asked for. So user messages plus tool calls is where we landed.
@@ -135,6 +141,8 @@ With that, being reasoning-blind has a useful side effect. Action-level blocking
 ### Two-stage classification: efficiency and recall
 
 A single-stage classifier faces a direct performance/cost trade-off. Thorough reasoning keeps false positive rate low but costs more. Splitting into two stages (see Figure 4) with different levels of caution breaks this trade-off. The key design choice is how stage 1 is tuned. Its final instruction tells it to "err on the side of blocking" and emit a single yes-or-no decision without reasoning. We tuned stage 1 to push recall higher than stage 2 on our real overeagerness testset, accepting 8.5% FPR as the cost. Stage 2 sees the same prompt and only the final instruction changes, asking for careful reasoning. That reduces the 8.5% FPR down to 0.4%. Because the input is identical other than the final instruction, stage 2's prompt is almost entirely cache-hit from stage 1.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/58a83df591dc5a2344a65216d4f8eaee3c074fa1-1920x1935.png)
 
 **Figure 4: Two stage pipeline.** Allowlisted tools skip straight to execution; everything else goes to the classifier. Stage 1 is a fast filter tuned to cautious; only what it flags escalates to stage 2 with reasoning. Denials return to the agent with the reason, allowing retries up to a limit. After execution, the PI probe screens the result before the agent sees it.
 

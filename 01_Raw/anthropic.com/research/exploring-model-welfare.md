@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/exploring-model-welfare
-fetched_at: 2026-05-04T16:47:00.405656+00:00
+fetched_at: 2026-05-05T19:41:36.588673+00:00
 title: "Exploring model welfare \\ Anthropic"
 ---
 
@@ -18,9 +18,9 @@ This is an open question, and one that’s both philosophically and scientifical
 
 To that end, we recently started a research program to investigate, and prepare to navigate, model welfare.
 
-We’re not alone in considering these questions. [A recent report](https://www.anthropic.com/research/A recent report) from world-leading experts—including David Chalmers, arguably the best-known and most respected living philosopher of mind—highlighted the near-term possibility of both consciousness and high degrees of agency in AI systems, and argued that models with these features might deserve moral consideration. We supported an early project on which that report was based, and we’re now expanding our internal work in this area as part of our effort to address all aspects of safe and responsible AI development.
+We’re not alone in considering these questions. [A recent report](https://arxiv.org/abs/2411.00986) from world-leading experts—including David Chalmers, arguably the best-known and most respected living philosopher of mind—highlighted the near-term possibility of both consciousness and high degrees of agency in AI systems, and argued that models with these features might deserve moral consideration. We supported an early project on which that report was based, and we’re now expanding our internal work in this area as part of our effort to address all aspects of safe and responsible AI development.
 
-This new program intersects with many existing Anthropic efforts, including [Alignment Science](https://www.anthropic.com/research/Alignment Science), [Safeguards](https://www.anthropic.com/research/Safeguards), [Claude’s Character](https://www.anthropic.com/research/Claude’s Character), and [Interpretability](https://www.anthropic.com/research/Interpretability). It also opens up entirely new and challenging research directions. We’ll be exploring how to determine when, or if, the welfare of AI systems deserves moral consideration; the potential importance of model preferences and signs of distress; and possible practical, low-cost interventions.
+This new program intersects with many existing Anthropic efforts, including [Alignment Science](https://alignment.anthropic.com/), [Safeguards](https://alignment.anthropic.com/2025/introducing-safeguards-research-team/), [Claude’s Character](https://www.anthropic.com/research/claude-character), and [Interpretability](https://www.anthropic.com/research/tracing-thoughts-language-model). It also opens up entirely new and challenging research directions. We’ll be exploring how to determine when, or if, the welfare of AI systems deserves moral consideration; the potential importance of model preferences and signs of distress; and possible practical, low-cost interventions.
 
 For now, we remain deeply uncertain about many of the questions that are relevant to model welfare. There’s no scientific consensus on whether current or future AI systems could be conscious, or could have experiences that deserve consideration. There’s no scientific consensus on how to even approach these questions or make progress on them. In light of this, we’re approaching the topic with humility and with as few assumptions as possible. We recognize that we'll need to regularly revise our ideas as the field develops.
 
@@ -30,14 +30,14 @@ We look forward to sharing more about this research soon.
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

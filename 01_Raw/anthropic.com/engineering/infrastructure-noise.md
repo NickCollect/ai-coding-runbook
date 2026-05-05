@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/engineering/infrastructure-noise
-fetched_at: 2026-05-04T16:24:13.402093+00:00
+fetched_at: 2026-05-05T19:40:58.462098+00:00
 title: "Quantifying infrastructure noise in agentic coding evals \\ Anthropic"
 ---
 
-[Engineering at Anthropic](https://www.anthropic.com/engineering/Engineering at Anthropic)
+[Engineering at Anthropic](https://www.anthropic.com/engineering)
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/039b6648c28eb33070a63a58d49013600b229238-2554x2554.svg)
 
@@ -50,6 +50,8 @@ On `bn-fit-modify`, a Terminal-Bench task requiring Bayesian network fitting, so
 
 We also tested whether this pattern holds on evals outside Terminal-Bench by running a crossover experiment on SWE-bench. We varied the total available RAM up to 5x the baseline across 227 problems with 10 samples each. The same effect held, though the magnitude was smaller: Scores again increased monotonically with RAM, but were only 1.54 percentage points higher at 5x than 1x. SWE-bench tasks are less resource-intensive, so a smaller effect is expected, but it shows resource allocation isn't neutral there either.
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/36ce2ba5ce208fb8531d1a840a9cd35ff4959a02-1920x1080.png)
+
 ## **Other sources of variance**
 
 Resource allocation isn't the only hidden variable. In certain configurations, time limits too start playing a role.
@@ -78,7 +80,7 @@ A few-point lead might signal a real capability gap—or it might just be a bigg
 
 ### **Acknowledgements**
 
-Written by Gian Segato. Special thanks to Nicholas Carlini, Jeremy Hadfield, Mike Merrill, and Alex Shaw for their contributions. This work reflects the collective efforts of several teams working on evaluations for coding agents. Interested candidates who would like to contribute are welcome to apply at [anthropic.com/careers](https://www.anthropic.com/engineering/anthropic.com/careers).
+Written by Gian Segato. Special thanks to Nicholas Carlini, Jeremy Hadfield, Mike Merrill, and Alex Shaw for their contributions. This work reflects the collective efforts of several teams working on evaluations for coding agents. Interested candidates who would like to contribute are welcome to apply at [anthropic.com/careers](http://anthropic.com/careers).
 
 ## Get the developer newsletter
 

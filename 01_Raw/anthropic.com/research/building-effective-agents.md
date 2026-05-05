@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/building-effective-agents
-fetched_at: 2026-05-04T16:44:12.857477+00:00
+fetched_at: 2026-05-05T19:41:14.369451+00:00
 title: "Building Effective AI Agents \\ Anthropic"
 ---
 
-[Engineering at Anthropic](https://www.anthropic.com/research/Engineering at Anthropic)
+[Engineering at Anthropic](https://www.anthropic.com/engineering)
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/039b6648c28eb33070a63a58d49013600b229238-2554x2554.svg)
 
@@ -37,16 +37,16 @@ When more complexity is warranted, workflows offer predictability and consistenc
 
 There are many frameworks that make agentic systems easier to implement, including:
 
-- The [Claude Agent SDK](https://www.anthropic.com/research/Claude Agent SDK);
-- [Strands Agents SDK by AWS](https://www.anthropic.com/research/Strands Agents SDK by AWS);
-- [Rivet](https://www.anthropic.com/research/Rivet), a drag and drop GUI LLM workflow builder; and
-- [Vellum](https://www.anthropic.com/research/Vellum), another GUI tool for building and testing complex workflows.
+- The [Claude Agent SDK](https://platform.claude.com/docs/en/agent-sdk/overview);
+- [Strands Agents SDK by AWS](https://strandsagents.com/latest/);
+- [Rivet](https://rivet.ironcladapp.com/), a drag and drop GUI LLM workflow builder; and
+- [Vellum](https://www.vellum.ai/), another GUI tool for building and testing complex workflows.
 
 These frameworks make it easy to get started by simplifying standard low-level tasks like calling LLMs, defining and parsing tools, and chaining calls together. However, they often create extra layers of abstraction that can obscure the underlying prompts ​​and responses, making them harder to debug. They can also make it tempting to add complexity when a simpler setup would suffice.
 
 We suggest that developers start by using LLM APIs directly: many patterns can be implemented in a few lines of code. If you do use a framework, ensure you understand the underlying code. Incorrect assumptions about what's under the hood are a common source of customer error.
 
-See our [cookbook](https://www.anthropic.com/research/cookbook) for some sample implementations.
+See our [cookbook](https://platform.claude.com/cookbook/patterns-agents-basic-workflows) for some sample implementations.
 
 ## Building blocks, workflows, and agents
 
@@ -56,15 +56,19 @@ In this section, we’ll explore the common patterns for agentic systems we’ve
 
 The basic building block of agentic systems is an LLM enhanced with augmentations such as retrieval, tools, and memory. Our current models can actively use these capabilities—generating their own search queries, selecting appropriate tools, and determining what information to retain.
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/d3083d3f40bb2b6f477901cc9a240738d3dd1371-2401x1000.png)
+
 The augmented LLM
 
-We recommend focusing on two key aspects of the implementation: tailoring these capabilities to your specific use case and ensuring they provide an easy, well-documented interface for your LLM. While there are many ways to implement these augmentations, one approach is through our recently released [Model Context Protocol](https://www.anthropic.com/research/Model Context Protocol), which allows developers to integrate with a growing ecosystem of third-party tools with a simple [client implementation](https://www.anthropic.com/research/client implementation).
+We recommend focusing on two key aspects of the implementation: tailoring these capabilities to your specific use case and ensuring they provide an easy, well-documented interface for your LLM. While there are many ways to implement these augmentations, one approach is through our recently released [Model Context Protocol](https://www.anthropic.com/news/model-context-protocol), which allows developers to integrate with a growing ecosystem of third-party tools with a simple [client implementation](https://modelcontextprotocol.io/tutorials/building-a-client#building-mcp-clients).
 
 For the remainder of this post, we'll assume each LLM call has access to these augmented capabilities.
 
 ### Workflow: Prompt chaining
 
 Prompt chaining decomposes a task into a sequence of steps, where each LLM call processes the output of the previous one. You can add programmatic checks (see "gate” in the diagram below) on any intermediate steps to ensure that the process is still on track.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/7418719e3dab222dccb379b8879e1dc08ad34c78-2401x1000.png)
 
 The prompt chaining workflow
 
@@ -78,6 +82,8 @@ The prompt chaining workflow
 ### Workflow: Routing
 
 Routing classifies an input and directs it to a specialized followup task. This workflow allows for separation of concerns, and building more specialized prompts. Without this workflow, optimizing for one kind of input can hurt performance on other inputs.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/5c0c0e9fe4def0b584c04d37849941da55e5e71c-2401x1000.png)
 
 The routing workflow
 
@@ -94,6 +100,8 @@ LLMs can sometimes work simultaneously on a task and have their outputs aggregat
 
 - **Sectioning**: Breaking a task into independent subtasks run in parallel.
 - **Voting:** Running the same task multiple times to get diverse outputs.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/406bb032ca007fd1624f261af717d70e6ca86286-2401x1000.png)
 
 The parallelization workflow
 
@@ -112,6 +120,8 @@ The parallelization workflow
 
 In the orchestrator-workers workflow, a central LLM dynamically breaks down tasks, delegates them to worker LLMs, and synthesizes their results.
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/8985fc683fae4780fb34eab1365ab78c7e51bc8e-2401x1000.png)
+
 The orchestrator-workers workflow
 
 **When to use this workflow:** This workflow is well-suited for complex tasks where you can’t predict the subtasks needed (in coding, for example, the number of files that need to be changed and the nature of the change in each file likely depend on the task). Whereas it’s topographically similar, the key difference from parallelization is its flexibility—subtasks aren't pre-defined, but determined by the orchestrator based on the specific input.
@@ -124,6 +134,8 @@ The orchestrator-workers workflow
 ### Workflow: Evaluator-optimizer
 
 In the evaluator-optimizer workflow, one LLM call generates a response while another provides evaluation and feedback in a loop.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/14f51e6406ccb29e695da48b17017e899a6119c7-2401x1000.png)
 
 The evaluator-optimizer workflow
 
@@ -140,6 +152,8 @@ Agents are emerging in production as LLMs mature in key capabilities—understan
 
 Agents can handle sophisticated tasks, but their implementation is often straightforward. They are typically just LLMs using tools based on environmental feedback in a loop. It is therefore crucial to design toolsets and their documentation clearly and thoughtfully. We expand on best practices for tool development in Appendix 2 ("Prompt Engineering your Tools").
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/58d9f10c985c4eb5d53798dea315f7bb5ab6249e-2401x1000.png)
+
 Autonomous agent
 
 **When to use agents:** Agents can be used for open-ended problems where it’s difficult or impossible to predict the required number of steps, and where you can’t hardcode a fixed path. The LLM will potentially operate for many turns, and you must have some level of trust in its decision-making. Agents' autonomy makes them ideal for scaling tasks in trusted environments.
@@ -150,8 +164,10 @@ The autonomous nature of agents means higher costs, and the potential for compou
 
 The following examples are from our own implementations:
 
-- A coding Agent to resolve [SWE-bench tasks](https://www.anthropic.com/research/SWE-bench tasks), which involve edits to many files based on a task description;
-- Our [“computer use” reference implementation](https://www.anthropic.com/research/“computer use” reference implementation), where Claude uses a computer to accomplish tasks.
+- A coding Agent to resolve [SWE-bench tasks](https://www.anthropic.com/research/swe-bench-sonnet), which involve edits to many files based on a task description;
+- Our [“computer use” reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo), where Claude uses a computer to accomplish tasks.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4b9a1f4eb63d5962a6e1746ac26bbc857cf3474f-2400x1666.png)
 
 High-level flow of a coding agent
 
@@ -199,11 +215,11 @@ The software development space has shown remarkable potential for LLM features, 
 - The problem space is well-defined and structured; and
 - Output quality can be measured objectively.
 
-In our own implementation, agents can now solve real GitHub issues in the [SWE-bench Verified](https://www.anthropic.com/research/SWE-bench Verified) benchmark based on the pull request description alone. However, whereas automated testing helps verify functionality, human review remains crucial for ensuring solutions align with broader system requirements.
+In our own implementation, agents can now solve real GitHub issues in the [SWE-bench Verified](https://www.anthropic.com/research/swe-bench-sonnet) benchmark based on the pull request description alone. However, whereas automated testing helps verify functionality, human review remains crucial for ensuring solutions align with broader system requirements.
 
 ## Appendix 2: Prompt engineering your tools
 
-No matter which agentic system you're building, tools will likely be an important part of your agent. [Tools](https://www.anthropic.com/research/Tools) enable Claude to interact with external services and APIs by specifying their exact structure and definition in our API. When Claude responds, it will include a [tool use block](https://www.anthropic.com/research/tool use block) in the API response if it plans to invoke a tool. Tool definitions and specifications should be given just as much prompt engineering attention as your overall prompts. In this brief appendix, we describe how to prompt engineer your tools.
+No matter which agentic system you're building, tools will likely be an important part of your agent. [Tools](https://www.anthropic.com/news/tool-use-ga) enable Claude to interact with external services and APIs by specifying their exact structure and definition in our API. When Claude responds, it will include a [tool use block](https://docs.anthropic.com/en/docs/build-with-claude/tool-use#example-api-response-with-a-tool-use-content-block) in the API response if it plans to invoke a tool. Tool definitions and specifications should be given just as much prompt engineering attention as your overall prompts. In this brief appendix, we describe how to prompt engineer your tools.
 
 There are often several ways to specify the same action. For instance, you can specify a file edit by writing a diff, or by rewriting the entire file. For structured output, you can return code inside markdown or inside JSON. In software engineering, differences like these are cosmetic and can be converted losslessly from one to the other. However, some formats are much more difficult for an LLM to write than others. Writing a diff requires knowing how many lines are changing in the chunk header before the new code is written. Writing code inside JSON (compared to markdown) requires extra escaping of newlines and quotes.
 
@@ -217,10 +233,10 @@ One rule of thumb is to think about how much effort goes into human-computer int
 
 - Put yourself in the model's shoes. Is it obvious how to use this tool, based on the description and parameters, or would you need to think carefully about it? If so, then it’s probably also true for the model. A good tool definition often includes example usage, edge cases, input format requirements, and clear boundaries from other tools.
 - How can you change parameter names or descriptions to make things more obvious? Think of this as writing a great docstring for a junior developer on your team. This is especially important when using many similar tools.
-- Test how the model uses your tools: Run many example inputs in our [workbench](https://www.anthropic.com/research/workbench) to see what mistakes the model makes, and iterate.
-- [Poka-yoke](https://www.anthropic.com/research/Poka-yoke) your tools. Change the arguments so that it is harder to make mistakes.
+- Test how the model uses your tools: Run many example inputs in our [workbench](https://console.anthropic.com/workbench) to see what mistakes the model makes, and iterate.
+- [Poka-yoke](https://en.wikipedia.org/wiki/Poka-yoke) your tools. Change the arguments so that it is harder to make mistakes.
 
-While building our agent for [SWE-bench](https://www.anthropic.com/research/SWE-bench), we actually spent more time optimizing our tools than the overall prompt. For example, we found that the model would make mistakes with tools using relative filepaths after the agent had moved out of the root directory. To fix this, we changed the tool to always require absolute filepaths—and we found that the model used this method flawlessly.
+While building our agent for [SWE-bench](https://www.anthropic.com/research/swe-bench-sonnet), we actually spent more time optimizing our tools than the overall prompt. For example, we found that the model would make mistakes with tools using relative filepaths after the agent had moved out of the root directory. To fix this, we changed the tool to always require absolute filepaths—and we found that the model used this method flawlessly.
 
 ## Get the developer newsletter
 

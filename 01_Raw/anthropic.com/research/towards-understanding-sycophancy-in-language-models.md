@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/towards-understanding-sycophancy-in-language-models
-fetched_at: 2026-05-04T16:51:16.499972+00:00
+fetched_at: 2026-05-05T19:42:09.112161+00:00
 title: "Towards Understanding Sycophancy in Language Models \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ AlignmentResearch
 
 Oct 23, 2023
 
-[Read Paper](https://www.anthropic.com/research/Read Paper)
+[Read Paper](https://arxiv.org/abs/2310.13548)
 
 ## Abstract
 
@@ -20,14 +20,14 @@ Reinforcement learning from human feedback (RLHF) is a popular technique for tra
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

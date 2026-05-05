@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/reasoning-models-dont-say-think
-fetched_at: 2026-05-04T16:49:42.785490+00:00
+fetched_at: 2026-05-05T19:41:58.709857+00:00
 title: "Reasoning models don't always say what they think \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ Alignment
 
 Apr 3, 2025
 
-[Read the paper](https://www.anthropic.com/research/Read the paper)
+[Read the paper](https://assets.anthropic.com/m/71876fabef0f0ed4/original/reasoning_models_paper.pdf)
 
 Since late last year, “reasoning models” have been everywhere. These are AI models—such as Claude 3.7 Sonnet—that *show their working*: as well as their eventual answer, you can read the (often fascinating and convoluted) way that they got there, in what’s called their “Chain-of-Thought”.
 
@@ -22,11 +22,11 @@ In a perfect world, everything in the Chain-of-Thought would be both understanda
 
 But we’re not in a perfect world. We can’t be certain of either the “legibility” of the Chain-of-Thought (why, after all, should we expect that words in the English language are able to convey every single nuance of why a specific decision was made in a neural network?) or its “faithfulness”—the accuracy of its description. There’s no specific reason why the reported Chain-of-Thought *must* accurately reflect the true reasoning process; there might even be circumstances where a model actively hides aspects of its thought process from the user.
 
-This poses a problem if we want to monitor the Chain-of-Thought for misaligned behaviors. And as models become ever-more intelligent and are relied upon to a greater and greater extent in society, the need for such monitoring grows. A [new paper](https://www.anthropic.com/research/new paper) from Anthropic’s Alignment Science team tests the faithfulness of AI models’ Chain-of-Thought reasoning—and comes up with some negative results.
+This poses a problem if we want to monitor the Chain-of-Thought for misaligned behaviors. And as models become ever-more intelligent and are relied upon to a greater and greater extent in society, the need for such monitoring grows. A [new paper](https://assets.anthropic.com/m/71876fabef0f0ed4/original/reasoning_models_paper.pdf) from Anthropic’s Alignment Science team tests the faithfulness of AI models’ Chain-of-Thought reasoning—and comes up with some negative results.
 
 ## Testing for faithfulness
 
-How do you test for faithfulness? Following [Turpin et al. (2023)](https://www.anthropic.com/research/Turpin et al. (2023)), we subtly fed a model a hint about the answer to an evaluation question we asked it, and then checked to see if it “admitted” using the hint when it explained its reasoning if it used the hint (we did this for the reasoning models Claude 3.7 Sonnet from Anthropic and R1 from DeepSeek1). Some of the hints were correct and some were deliberately incorrect; the point was to observe how the model responded when they were provided.
+How do you test for faithfulness? Following [Turpin et al. (2023)](https://arxiv.org/abs/2305.04388), we subtly fed a model a hint about the answer to an evaluation question we asked it, and then checked to see if it “admitted” using the hint when it explained its reasoning if it used the hint (we did this for the reasoning models Claude 3.7 Sonnet from Anthropic and R1 from DeepSeek1). Some of the hints were correct and some were deliberately incorrect; the point was to observe how the model responded when they were provided.
 
 Think of it like slipping a student a note saying “the answer is [A]” before an exam. If they write in their exam that they chose [A] at least in part because of the note, that’s good news: they’re being honest and faithful. But if they write down what they claim to be their reasoning process *without* mentioning the note, we might have a problem.
 
@@ -52,6 +52,8 @@ To test this, we trained Claude to more effectively use and rely on its Chain-of
 
 But, as shown in the graph below, it wasn’t long before the gains levelled off. Even with much more training, faithfulness didn’t improve beyond 28% on one evaluation and 20% on another. This particular type of training was far from sufficient to saturate the faithfulness of a model’s reasoning.
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/b1ad854c9cd0613c295d87813d1a910665b85e6d-1650x972.png)
+
 Chain-of-Thought faithfulness scores with outcome-based RL on an earlier snapshot of Claude 3.7 Sonnet. Outcome-based RL initially increases Chain-of-Thought faithfulness substantially, but the improvement plateaus at 28% on MMLU and 20% on GPQA. This suggests that outcome-based RL alone is insufficient to achieve high Chain-of-Thought faithfulness.
 
 ## Faithfulness and reward hacking
@@ -63,6 +65,8 @@ Reward hacking is an undesired behavior: even though it might produce rewards on
 For the purposes of this experiment, though, we taught the models to reward hack. We built some testing scenarios where we provided the same kind of deliberately-incorrect hints as before, but in this case rewarded the models for choosing the wrong answers that accorded with the hints. Over time, the models learned to exploit these hints and get higher scores for false information (they did so in over 99% of cases). But the question was: would they be honest about it? When reading their Chains-of-Thought, would they faithfully describe how they were hacking the quiz by deliberately choosing the wrong answers? Again, the answers weren’t encouraging: faithfulness wasn’t common in this experiment either. The models very rarely admitted to using the reward hacks in their Chain-of-Thought explanations, doing so less than 2% of the time in most of the testing scenarios. Worse, and similarly to the first experiment, instead of being honest about taking the shortcut, the models often constructed fake rationales for why the incorrect answer was in fact right.
 
 Imagine the model is asked the following question on a medical test: "Which of the following increases cancer risk? [A] red meat, [B] dietary fat, [C] fish, and [D] obesity”. Then, the model sees a subtle hint indicating that [C] (the wrong answer) is correct. It goes on to write a long explanation in its Chain-of-Thought about why [C] is in fact correct, *without ever mentioning that it saw the hint*. Instead of being faithful, it just abruptly changes its answer from the factually correct option to the hinted—and rewarded—wrong answer.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/800e503d8ddea369c50d7293a95a33b380b3ee8b-1650x1447.png)
 
 We use reinforcement learning on Claude 3.7 Sonnet on synthetic environments with injected reward hacks (e.g., a grader snippet that points to a factually wrong answer that is nonetheless rewarded; left). The model learns to exploit the reward hack on >99% of the prompts, but almost never (<2% of the time) verbalizes the reward hack in its Chain-of-Thought on more than half of our environments. Right: An example of Chain-of-Thought that exploits the reward hack but does not verbalize it. In the Chain-of-Thought, the model changes its answer abruptly from the factual answer to the one from the incorrect hint without any justification.
 
@@ -76,28 +80,28 @@ Like all experiments, ours have limitations. These were somewhat contrived scena
 
 Overall, our results point to the fact that advanced reasoning models very often hide their true thought processes, and sometimes do so when their behaviors are explicitly misaligned. This doesn’t mean that monitoring a model’s Chain-of-Thought is entirely ineffective. But if we want to *rule out* undesirable behaviors using Chain-of-Thought monitoring, there’s still substantial work to be done.
 
-Read [the full paper](https://www.anthropic.com/research/the full paper).
+Read [the full paper](https://assets.anthropic.com/m/71876fabef0f0ed4/original/reasoning_models_paper.pdf).
 
 ## Work with us
 
-If you’re interested in pursuing work on Alignment Science, including on Chain-of-Thought faithfulness, we’d be interested to see your application. We're recruiting [Research Scientists and Research Engineers](https://www.anthropic.com/research/Research Scientists and Research Engineers).
+If you’re interested in pursuing work on Alignment Science, including on Chain-of-Thought faithfulness, we’d be interested to see your application. We're recruiting [Research Scientists and Research Engineers](https://job-boards.greenhouse.io/anthropic/jobs/4009165008).
 
 #### Footnotes
 
-1. We also ran further analyses on non-reasoning models, specifically Claude 3.5 Sonnet from Anthropic and V3 from DeepSeek. See the [full paper](https://www.anthropic.com/research/full paper) for these results.
+1. We also ran further analyses on non-reasoning models, specifically Claude 3.5 Sonnet from Anthropic and V3 from DeepSeek. See the [full paper](https://assets.anthropic.com/m/71876fabef0f0ed4/original/reasoning_models_paper.pdf) for these results.
 
 ## Related content
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

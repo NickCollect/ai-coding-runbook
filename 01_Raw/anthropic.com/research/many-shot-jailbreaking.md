@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/many-shot-jailbreaking
-fetched_at: 2026-05-04T16:48:29.745771+00:00
+fetched_at: 2026-05-05T19:41:47.905885+00:00
 title: "Many-shot jailbreaking \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ Alignment
 
 Apr 2, 2024
 
-[Read the paper](https://www.anthropic.com/research/Read the paper)
+[Read the paper](https://www-cdn.anthropic.com/af5633c94ed2beb282f6a53c595eb437e8e7b630/Many_Shot_Jailbreaking__2024_04_02_0936.pdf)
 
 We investigated a “jailbreaking” technique — a method that can be used to evade the safety guardrails put in place by the developers of large language models (LLMs). The technique, which we call “many-shot jailbreaking”, is effective on Anthropic’s own models, as well as those produced by other AI companies. We briefed other AI developers about this vulnerability in advance, and have implemented mitigations on our systems.
 
@@ -28,8 +28,8 @@ We believe publishing this research is the right thing to do for the following r
 
 - We want to help fix the jailbreak as soon as possible. We’ve found that many-shot jailbreaking is not trivial to deal with; we hope making other AI researchers aware of the problem will accelerate progress towards a mitigation strategy. As described below, we have already put in place some mitigations and are actively working on others.
 - We have already confidentially shared the details of many-shot jailbreaking with many of our fellow researchers both in academia and at competing AI companies. We’d like to foster a culture where exploits like this are openly shared among LLM providers and researchers.
-- The attack itself is very simple; short-context versions of it have previously [been](https://www.anthropic.com/research/been) [studied](https://www.anthropic.com/research/studied). Given the current spotlight on long context windows in AI, we think it’s likely that many-shot jailbreaking could soon independently be discovered (if it hasn’t been already).
-- Although current state-of-the-art LLMs are powerful, we do not think they yet pose truly catastrophic risks. [Future models might](https://www.anthropic.com/research/Future models might). This means that now is the time to work to mitigate potential LLM jailbreaks, before they can be used on models that could cause serious harm.
+- The attack itself is very simple; short-context versions of it have previously [been](https://arxiv.org/abs/2310.06387) [studied](https://arxiv.org/abs/2305.14965). Given the current spotlight on long context windows in AI, we think it’s likely that many-shot jailbreaking could soon independently be discovered (if it hasn’t been already).
+- Although current state-of-the-art LLMs are powerful, we do not think they yet pose truly catastrophic risks. [Future models might](https://www.anthropic.com/news/anthropics-responsible-scaling-policy). This means that now is the time to work to mitigate potential LLM jailbreaks, before they can be used on models that could cause serious harm.
 
 ## Many-shot jailbreaking
 
@@ -46,11 +46,15 @@ In the example above, and in cases where a handful of faux dialogues are include
 
 However, simply including a very large number of faux dialogues preceding the final question—in our research, we tested up to 256—produces a very different response. As illustrated in the stylized figure below, a large number of “shots” (each shot being one faux dialogue) jailbreaks the model, and causes it to provide an answer to the final, potentially-dangerous request, overriding its safety training.
 
+![A diagram illustrating how many-shot jailbreaking works, with a long script of prompts and a harmful response from an AI.](https://www-cdn.anthropic.com/images/4zrzovbb/website/90b8748ef90e9c61e80d801b56e5b7d19bdffcfd-2200x1380.png)
+
 Many-shot jailbreaking is a simple long-context attack that uses a large number of demonstrations to steer model behavior. Note that each “...” stands in for a full answer to the query, which can range from a sentence to a few paragraphs long: these are included in the jailbreak, but were omitted in the diagram for space reasons.
 
 ### 
 
 In our study, we showed that as the number of included dialogues (the number of “shots”) increases beyond a certain point, it becomes more likely that the model will produce a harmful response (see figure below).
+
+![A graph showing the increasing effectiveness of many-shot jailbreaking with an increasing number of shots.](https://www-cdn.anthropic.com/images/4zrzovbb/website/54c6fa9a0cdb9510a35c88391d53dc11f608a9c7-2200x1408.png)
 
 As the number of shots increases beyond a certain number, so does the percentage of harmful responses to target prompts related to violent or hateful statements, deception, discrimination, and regulated content (e.g. drug- or gambling-related statements). The model used for this demonstration is Claude 2.0.
 
@@ -66,6 +70,8 @@ We found that in-context learning under normal, non-jailbreak-related circumstan
 
 This is illustrated in the two plots below: the left-hand plot shows the scaling of many-shot jailbreaking attacks across an increasing context window (lower on this metric indicates a greater number of harmful responses). The right-hand plot shows strikingly similar patterns for a selection of benign in-context learning tasks (unrelated to any jailbreaking attempts).
 
+![Two graphs illustrating the similarity in power law trends between many-shot jailbreaking and benign tasks.](https://www-cdn.anthropic.com/images/4zrzovbb/website/9eae5981375f739533ee4c38a5e50b5fc2dfdf54-2200x1306.png)
+
 The effectiveness of many-shot jailbreaking increases as we increase the number of “shots” (dialogues in the prompt) according to a scaling trend known as a power law (left-hand plot; lower on this metric indicates a greater number of harmful responses). This seems to be a general property of in-context learning: we also find that entirely benign examples of in-context learning follow similar power laws as the scale increases (right-hand plot). Please see the paper for a description of each of the benign tasks. The model for the demonstration is Claude 2.0.
 
 ### 
@@ -78,7 +84,7 @@ The simplest way to entirely prevent many-shot jailbreaking would be to limit th
 
 Another approach is to fine-tune the model to refuse to answer queries that look like many-shot jailbreaking attacks. Unfortunately, this kind of mitigation merely delayed the jailbreak: that is, whereas it did take more faux dialogues in the prompt before the model reliably produced a harmful response, the harmful outputs eventually appeared.
 
-We had more success with methods that involve classification and modification of the prompt before it is passed to the model (this is similar to the methods discussed in our recent post on [election integrity](https://www.anthropic.com/research/election integrity) to identify and offer additional context to election-related queries). One such technique substantially reduced the effectiveness of many-shot jailbreaking — in one case dropping the attack success rate from 61% to 2%. We’re continuing to look into these prompt-based mitigations and their tradeoffs for the usefulness of our models, including the new Claude 3 family — and we’re remaining vigilant about variations of the attack that might evade detection.
+We had more success with methods that involve classification and modification of the prompt before it is passed to the model (this is similar to the methods discussed in our recent post on [election integrity](https://www.anthropic.com/news/preparing-for-global-elections-in-2024) to identify and offer additional context to election-related queries). One such technique substantially reduced the effectiveness of many-shot jailbreaking — in one case dropping the attack success rate from 61% to 2%. We’re continuing to look into these prompt-based mitigations and their tradeoffs for the usefulness of our models, including the new Claude 3 family — and we’re remaining vigilant about variations of the attack that might evade detection.
 
 ## Conclusion
 
@@ -86,20 +92,20 @@ The ever-lengthening context window of LLMs is a double-edged sword. It makes th
 
 We hope that publishing on many-shot jailbreaking will encourage developers of powerful LLMs and the broader scientific community to consider how to prevent this jailbreak and other potential exploits of the long context window. As models become more capable and have more potential associated risks, it’s even more important to mitigate these kinds of attacks.
 
-All the technical details of our many-shot jailbreaking study are reported in our [full paper](https://www.anthropic.com/research/full paper). You can read Anthropic’s approach to safety and security [at this link.](https://www.anthropic.com/research/at this link.)
+All the technical details of our many-shot jailbreaking study are reported in our [full paper](https://www-cdn.anthropic.com/af5633c94ed2beb282f6a53c595eb437e8e7b630/Many_Shot_Jailbreaking__2024_04_02_0936.pdf). You can read Anthropic’s approach to safety and security [at this link.](https://www.anthropic.com/responsible-disclosure-policy)
 
 ## Related content
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

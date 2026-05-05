@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/a-general-language-assistant-as-a-laboratory-for-alignment
-fetched_at: 2026-05-04T16:43:19.175710+00:00
+fetched_at: 2026-05-05T19:41:01.633054+00:00
 title: "A General Language Assistant as a Laboratory for Alignment \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ AlignmentResearch
 
 Dec 1, 2021
 
-[Read Paper](https://www.anthropic.com/research/Read Paper)
+[Read Paper](https://arxiv.org/abs/2112.00861)
 
 ## Abstract
 
@@ -20,14 +20,14 @@ Given the broad capabilities of large language models, it should be possible to 
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

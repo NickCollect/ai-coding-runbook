@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/engineering/advanced-tool-use
-fetched_at: 2026-05-04T16:22:33.851350+00:00
+fetched_at: 2026-05-05T19:40:50.377688+00:00
 title: "Introducing advanced tool use on the Claude Developer Platform \\ Anthropic"
 ---
 
-[Engineering at Anthropic](https://www.anthropic.com/engineering/Engineering at Anthropic)
+[Engineering at Anthropic](https://www.anthropic.com/engineering)
 
 ![Illustration for advanced tool use article.](https://www-cdn.anthropic.com/images/4zrzovbb/website/151600be7f9c23247aad8dcb6aacb2e1ab024f44-1000x1000.svg)
 
@@ -16,7 +16,7 @@ We’ve added three new beta features that let Claude discover, learn, and execu
 
 The future of AI agents is one where models work seamlessly across hundreds or thousands of tools. An IDE assistant that integrates git operations, file manipulation, package managers, testing frameworks, and deployment pipelines. An operations coordinator that connects Slack, GitHub, Google Drive, Jira, company databases, and dozens of MCP servers simultaneously.
 
-To [build effective agents](https://www.anthropic.com/engineering/build effective agents), they need to work with unlimited tool libraries without stuffing every definition into context upfront. Our blog article on using [code execution with MCP](https://www.anthropic.com/engineering/code execution with MCP) discussed how tool results and definitions can sometimes consume 50,000+ tokens before an agent reads a request. Agents should discover and load tools on-demand, keeping only what's relevant for the current task.
+To [build effective agents](https://www.anthropic.com/research/building-effective-agents), they need to work with unlimited tool libraries without stuffing every definition into context upfront. Our blog article on using [code execution with MCP](https://www.anthropic.com/engineering/code-execution-with-mcp) discussed how tool results and definitions can sometimes consume 50,000+ tokens before an agent reads a request. Agents should discover and load tools on-demand, keeping only what's relevant for the current task.
 
 Agents also need the ability to call tools from code. When using natural language tool calling, each invocation requires a full inference pass, and intermediate results pile up in context whether they're useful or not. Code is a natural fit for orchestration logic, such as loops, conditionals, and data transformations. Agents need the flexibility to choose between code execution and inference based on the task at hand.
 
@@ -28,7 +28,7 @@ Today, we're releasing three features that make this possible:
 - **Programmatic Tool Calling**, which allows Claude to invoke tools in a code execution environment reducing the impact on the model’s context window
 - **Tool Use Examples**, which provides a universal standard for demonstrating how to effectively use a given tool
 
-In internal testing, we’ve found these features have helped us build things that wouldn’t have been possible with conventional tool use patterns. For example, **[Claude for Excel](https://www.anthropic.com/engineering/Claude for Excel)** uses Programmatic Tool Calling to read and modify spreadsheets with thousands of rows without overloading the model’s context window.
+In internal testing, we’ve found these features have helped us build things that wouldn’t have been possible with conventional tool use patterns. For example, **[Claude for Excel](https://www.claude.com/claude-for-excel)** uses Programmatic Tool Calling to read and modify spreadsheets with thousands of rows without overloading the model’s context window.
 
 Based on our experience, we believe these features open up new possibilities for what you can build with Claude.
 
@@ -51,6 +51,8 @@ But token cost isn't the only issue. The most common failures are wrong tool sel
 ### Our solution
 
 Instead of loading all tool definitions upfront, the Tool Search Tool discovers tools on-demand. Claude only sees the tools it actually needs for the current task.
+
+![Tool Search Tool diagram](https://www-cdn.anthropic.com/images/4zrzovbb/website/f359296f770706608901eadaffbff4ca0b67874c-1999x1125.png)
 
 *Tool Search Tool preserves 191,300 tokens of context compared to 122,800 with Claude’s traditional approach.*
 
@@ -176,6 +178,8 @@ You have three tools available:
 
 Instead of each tool result returning to Claude, Claude writes a Python script that orchestrates the entire workflow. The script runs in the Code Execution tool (a sandboxed environment), pausing when it needs results from your tools. When you return tool results via the API, they're processed by the script rather than consumed by the model. The script continues executing, and Claude only sees the final output.
 
+![Programmatic tool calling flow](https://www-cdn.anthropic.com/images/4zrzovbb/website/65737d69a3290ed5c1f3c3b8dc873645a9dcc2eb-1999x1491.png)
+
 Programmatic Tool Calling enables Claude to orchestrate tools through code rather than through individual API round-trips, allowing for parallel tool execution.
 
 Here's what Claude's orchestration code looks like for the budget compliance task:
@@ -220,7 +224,7 @@ The efficiency gains are substantial:
 
 - **Token savings**: By keeping intermediate results out of Claude's context, PTC dramatically reduces token consumption. Average usage dropped from 43,588 to 27,297 tokens, a 37% reduction on complex research tasks.
 - **Reduced latency**: Each API round-trip requires model inference (hundreds of milliseconds to seconds). When Claude orchestrates 20+ tool calls in a single code block, you eliminate 19+ inference passes. The API handles tool execution without returning to the model each time.
-- **Improved accuracy**: By writing explicit orchestration logic, Claude makes fewer errors than when juggling multiple tool results in natural language. Internal knowledge retrieval improved from 25.6% to 28.5%; [GIA benchmarks](https://www.anthropic.com/engineering/GIA benchmarks) from 46.5% to 51.2%.
+- **Improved accuracy**: By writing explicit orchestration logic, Claude makes fewer errors than when juggling multiple tool results in natural language. Internal knowledge retrieval improved from 25.6% to 28.5%; [GIA benchmarks](https://arxiv.org/abs/2311.12983) from 46.5% to 51.2%.
 
 Production workflows involve messy data, conditional logic, and operations that need to scale. Programmatic Tool Calling lets Claude handle that complexity programmatically while keeping its focus on actionable results rather than raw data processing.
 
@@ -562,9 +566,9 @@ Copy
 
 For detailed API documentation and SDK examples, see our:
 
-- [Documentation](https://www.anthropic.com/engineering/Documentation) and [cookbook](https://www.anthropic.com/engineering/cookbook) for Tool Search Tool
-- [Documentation](https://www.anthropic.com/engineering/Documentation) and [cookbook](https://www.anthropic.com/engineering/cookbook) for Programmatic Tool Calling
-- [Documentation](https://www.anthropic.com/engineering/Documentation) for Tool Use Examples
+- [Documentation](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool) and [cookbook](https://github.com/anthropics/claude-cookbooks/blob/main/tool_use/tool_search_with_embeddings.ipynb) for Tool Search Tool
+- [Documentation](https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling) and [cookbook](https://github.com/anthropics/claude-cookbooks/blob/main/tool_use/programmatic_tool_calling_ptc.ipynb) for Programmatic Tool Calling
+- [Documentation](https://platform.claude.com/docs/en/agents-and-tools/tool-use/implement-tool-use#providing-tool-use-examples) for Tool Use Examples
 
 These features move tool use from simple function calling toward intelligent orchestration. As agents tackle more complex workflows spanning dozens of tools and large datasets, dynamic discovery, efficient execution, and reliable invocation become foundational.
 
@@ -572,7 +576,7 @@ We're excited to see what you build.
 
 ## Acknowledgements
 
-Written by Bin Wu, with contributions from Adam Jones, Artur Renault, Henry Tay, Jake Noble, Noah Picard, Sam Jiang, and the Claude Developer Platform team. This work builds on foundational research by Chris Gorgolewski, Daniel Jiang, Jeremy Fox and Mike Lambert. We also drew inspiration from across the AI ecosystem, including [Joel Pobar's LLMVM](https://www.anthropic.com/engineering/Joel Pobar's LLMVM), [Cloudflare's Code Mode](https://www.anthropic.com/engineering/Cloudflare's Code Mode) and [Code Execution as MCP](https://www.anthropic.com/engineering/Code Execution as MCP). Special thanks to Andy Schumeister, Hamish Kerr, Keir Bradwell, Matt Bleifer and Molly Vorwerck for their support.
+Written by Bin Wu, with contributions from Adam Jones, Artur Renault, Henry Tay, Jake Noble, Noah Picard, Sam Jiang, and the Claude Developer Platform team. This work builds on foundational research by Chris Gorgolewski, Daniel Jiang, Jeremy Fox and Mike Lambert. We also drew inspiration from across the AI ecosystem, including [Joel Pobar's LLMVM](https://github.com/9600dev/llmvm), [Cloudflare's Code Mode](https://blog.cloudflare.com/code-mode/) and [Code Execution as MCP](https://www.anthropic.com/engineering/code-execution-with-mcp). Special thanks to Andy Schumeister, Hamish Kerr, Keir Bradwell, Matt Bleifer and Molly Vorwerck for their support.
 
 ## Get the developer newsletter
 

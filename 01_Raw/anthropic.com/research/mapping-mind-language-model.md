@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/mapping-mind-language-model
-fetched_at: 2026-05-04T17:15:01.231858+00:00
+fetched_at: 2026-05-05T19:41:46.470163+00:00
 title: "Mapping the Mind of a Large Language Model \\ Anthropic"
 ---
 
@@ -10,7 +10,9 @@ Interpretability
 
 May 21, 2024
 
-[Read the paper](https://www.anthropic.com/research/Read the paper)
+[Read the paper](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/80d6e033480704f5d57fbae4e3f0368d86a747ae-5761x3240.png)
 
 *Today we report a significant advance in understanding the inner workings of AI models. We have identified how millions of concepts are represented inside Claude Sonnet, one of our deployed large language models. This is the first ever detailed look inside a modern, production-grade large language model.* *This interpretability discovery could, in future, help us make AI models safer.*
 
@@ -20,29 +22,35 @@ Opening the black box doesn't necessarily help: the internal state of the model�
 
 Previously, we made some progress matching *patterns* of neuron activations, called features, to human-interpretable concepts. We used a technique called "dictionary learning", borrowed from classical machine learning, which isolates patterns of neuron activations that recur across many different contexts. In turn, any internal state of the model can be represented in terms of a few active features instead of many active neurons. Just as every English word in a dictionary is made by combining letters, and every sentence is made by combining words, every feature in an AI model is made by combining neurons, and every internal state is made by combining features.
 
-In October 2023, [we reported](https://www.anthropic.com/research/we reported) success applying dictionary learning to a very small "toy" language model and found coherent features corresponding to concepts like uppercase text, DNA sequences, surnames in citations, nouns in mathematics, or function arguments in Python code.
+In October 2023, [we reported](https://www.anthropic.com/news/decomposing-language-models-into-understandable-components) success applying dictionary learning to a very small "toy" language model and found coherent features corresponding to concepts like uppercase text, DNA sequences, surnames in citations, nouns in mathematics, or function arguments in Python code.
 
-Those concepts were intriguing—but the model really was very simple. [Other](https://www.anthropic.com/research/Other) [researchers](https://www.anthropic.com/research/researchers) [subsequently](https://www.anthropic.com/research/subsequently) [applied](https://www.anthropic.com/research/applied) similar techniques to somewhat larger and more complex models than in our original study. But we were optimistic that we could scale up the technique to the vastly larger AI language models now in regular use, and in doing so, learn a great deal about the features supporting their sophisticated behaviors. This required going up by many orders of magnitude—from a backyard bottle rocket to a Saturn-V.
+Those concepts were intriguing—but the model really was very simple. [Other](https://www.neuronpedia.org/gpt2-small/res-jb) [researchers](https://github.com/openai/transformer-debugger) [subsequently](https://arxiv.org/abs/2403.19647) [applied](https://arxiv.org/abs/2404.16014) similar techniques to somewhat larger and more complex models than in our original study. But we were optimistic that we could scale up the technique to the vastly larger AI language models now in regular use, and in doing so, learn a great deal about the features supporting their sophisticated behaviors. This required going up by many orders of magnitude—from a backyard bottle rocket to a Saturn-V.
 
-There was both an engineering challenge (the raw sizes of the models involved required heavy-duty parallel computation) and scientific risk (large models behave differently to small ones, so the same technique we used before might not have worked). Luckily, the engineering and scientific expertise we've developed training large language models for Claude actually transferred to helping us do these large dictionary learning experiments. We used the same [scaling law](https://www.anthropic.com/research/scaling law) philosophy that predicts the performance of larger models from smaller ones to tune our methods at an affordable scale before launching on Sonnet.
+There was both an engineering challenge (the raw sizes of the models involved required heavy-duty parallel computation) and scientific risk (large models behave differently to small ones, so the same technique we used before might not have worked). Luckily, the engineering and scientific expertise we've developed training large language models for Claude actually transferred to helping us do these large dictionary learning experiments. We used the same [scaling law](https://arxiv.org/abs/2001.08361) philosophy that predicts the performance of larger models from smaller ones to tune our methods at an affordable scale before launching on Sonnet.
 
 As for the scientific risk, the proof is in the pudding.
 
-We successfully extracted millions of features from the middle layer of Claude 3.0 Sonnet, (a member of our current, state-of-the-art model family, currently available on [claude.ai](https://www.anthropic.com/research/claude.ai)), providing a rough conceptual map of its internal states halfway through its computation. This is the first ever detailed look inside a modern, production-grade large language model.
+We successfully extracted millions of features from the middle layer of Claude 3.0 Sonnet, (a member of our current, state-of-the-art model family, currently available on [claude.ai](https://claude.ai/redirect/website.v1.160683d3-b377-4ce4-97f8-fdb70520e69d)), providing a rough conceptual map of its internal states halfway through its computation. This is the first ever detailed look inside a modern, production-grade large language model.
 
 Whereas the features we found in the toy language model were rather superficial, the features we found in Sonnet have a depth, breadth, and abstraction reflecting Sonnet's advanced capabilities.
 
 We see features corresponding to a vast range of entities like cities (San Francisco), people (Rosalind Franklin), atomic elements (Lithium), scientific fields (immunology), and programming syntax (function calls). These features are multimodal and multilingual, responding to images of a given entity as well as its name or description in many languages.
 
+![Golden Gate Bridge Feature](https://www-cdn.anthropic.com/images/4zrzovbb/website/c896a301ad3d1ef4237cb05b68d78b467c444097-2200x1284.png)
+
 A feature sensitive to mentions of the Golden Gate Bridge fires on a range of model inputs, from English mentions of the name of the bridge to discussions in Japanese, Chinese, Greek, Vietnamese, Russian, and an image. The orange color denotes the words or word-parts on which the feature is active.
 
 We also find more abstract features—responding to things like bugs in computer code, discussions of gender bias in professions, and conversations about keeping secrets.
+
+![Abstract Feature Examples](https://www-cdn.anthropic.com/images/4zrzovbb/website/2ff94c622f3d65bc3038cc154006d2be515fa2d7-2200x1660.png)
 
 Three examples of features that activate on more abstract concepts: bugs in computer code, descriptions of gender bias in professions, and conversations about keeping secrets.
 
 We were able to measure a kind of "distance" between features based on which neurons appeared in their activation patterns. This allowed us to look for features that are "close" to each other. Looking near a "Golden Gate Bridge" feature, we found features for Alcatraz Island, Ghirardelli Square, the Golden State Warriors, California Governor Gavin Newsom, the 1906 earthquake, and the San Francisco-set Alfred Hitchcock film *Vertigo*.
 
 This holds at a higher level of conceptual abstraction: looking near a feature related to the concept of "inner conflict", we find features related to relationship breakups, conflicting allegiances, logical inconsistencies, as well as the phrase "catch-22". This shows that the internal organization of concepts in the AI model corresponds, at least somewhat, to our human notions of similarity. This might be the origin of Claude's excellent ability to make analogies and metaphors.
+
+![Nearest Neighbors to the  Inner Conflict Feature ](https://www-cdn.anthropic.com/images/4zrzovbb/website/fe4d42c004bf43efda0f5921adfedd2f8f42e417-2200x2140.png)
 
 A map of the features near an "Inner Conflict" feature, including clusters related to balancing tradeoffs, romantic struggles, conflicting allegiances, and catch-22s.
 
@@ -60,38 +68,40 @@ Anthropic wants to make models safe in a broad sense, including everything from 
 - Different forms of bias (gender discrimination, racist claims about crime)
 - Potentially problematic AI behaviors (power-seeking, manipulation, secrecy)
 
-We previously [studied sycophancy](https://www.anthropic.com/research/studied sycophancy), the tendency of models to provide responses that match user beliefs or desires rather than truthful ones. In Sonnet, we found a feature associated with sycophantic praise, which activates on inputs containing compliments like, "Your wisdom is unquestionable". Artificially activating this feature causes Sonnet to respond to an overconfident user with just such flowery deception.
+We previously [studied sycophancy](https://arxiv.org/abs/2310.13548), the tendency of models to provide responses that match user beliefs or desires rather than truthful ones. In Sonnet, we found a feature associated with sycophantic praise, which activates on inputs containing compliments like, "Your wisdom is unquestionable". Artificially activating this feature causes Sonnet to respond to an overconfident user with just such flowery deception.
+
+![Activating Features Alters Model Behavior](https://www-cdn.anthropic.com/images/4zrzovbb/website/4effa33dab919f9bc1779848d5c8abd5405f2275-2200x1320.png)
 
 Two model responses to a human saying they invited the phrase "Stop and smell the roses." The default response corrects the human's misconception, while the response with a "sycophantic praise" feature set to a high value is fawning and untruthful.
 
-The presence of this feature doesn't mean that Claude will be sycophantic, but merely that it *could* be. We have not added any capabilities, safe or unsafe, to the model through this work. We have, rather, identified the parts of the model involved in its existing capabilities to recognize and potentially produce different kinds of text. (While you might worry that this method could be used to make models *more* harmful, researchers have demonstrated [much simpler ways](https://www.anthropic.com/research/much simpler ways) that someone with access to model weights can remove safety safeguards.)
+The presence of this feature doesn't mean that Claude will be sycophantic, but merely that it *could* be. We have not added any capabilities, safe or unsafe, to the model through this work. We have, rather, identified the parts of the model involved in its existing capabilities to recognize and potentially produce different kinds of text. (While you might worry that this method could be used to make models *more* harmful, researchers have demonstrated [much simpler ways](https://arxiv.org/abs/2310.03693) that someone with access to model weights can remove safety safeguards.)
 
-We hope that we and others can use these discoveries to make models safer. For example, it might be possible to use the techniques described here to monitor AI systems for certain dangerous behaviors (such as deceiving the user), to steer them towards desirable outcomes (debiasing), or to remove certain dangerous subject matter entirely. We might also be able to enhance other safety techniques, such as [Constitutional AI](https://www.anthropic.com/research/Constitutional AI), by understanding how they shift the model towards more harmless and more honest behavior and identifying any gaps in the process. The latent capabilities to produce harmful text that we saw by artificially activating features are exactly the sort of thing jailbreaks try to exploit. We are proud that Claude has a best-in-industry [safety profile](https://www.anthropic.com/research/safety profile) and resistance to jailbreaks, and we hope that by looking inside the model in this way we can figure out how to improve safety even further. Finally, we note that these techniques can provide a kind of "test set for safety", looking for the problems left behind after standard training and finetuning methods have ironed out all behaviors visible via standard input/output interactions.
+We hope that we and others can use these discoveries to make models safer. For example, it might be possible to use the techniques described here to monitor AI systems for certain dangerous behaviors (such as deceiving the user), to steer them towards desirable outcomes (debiasing), or to remove certain dangerous subject matter entirely. We might also be able to enhance other safety techniques, such as [Constitutional AI](https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback), by understanding how they shift the model towards more harmless and more honest behavior and identifying any gaps in the process. The latent capabilities to produce harmful text that we saw by artificially activating features are exactly the sort of thing jailbreaks try to exploit. We are proud that Claude has a best-in-industry [safety profile](https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model_Card_Claude_3.pdf) and resistance to jailbreaks, and we hope that by looking inside the model in this way we can figure out how to improve safety even further. Finally, we note that these techniques can provide a kind of "test set for safety", looking for the problems left behind after standard training and finetuning methods have ironed out all behaviors visible via standard input/output interactions.
 
 Anthropic has made a significant investment in interpretability research since the company's founding, because we believe that understanding models deeply will help us make them safer. This new research marks an important milestone in that effort—the application of mechanistic interpretability to publicly-deployed large language models.
 
 But the work has really just begun. The features we found represent a small subset of all the concepts learned by the model during training, and finding a full set of features using our current techniques would be cost-prohibitive (the computation required by our current approach would vastly exceed the compute used to train the model in the first place). Understanding the representations the model uses doesn't tell us *how* it uses them; even though we have the features, we still need to find the circuits they are involved in. And we need to show that the safety-relevant features we have begun to find can actually be used to improve safety. There's much more to be done.
 
-For full details, please read our paper, "[Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet](https://www.anthropic.com/research/Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet)".
+For full details, please read our paper, "[Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html)".
 
-*If you are interested in working with us to help interpret and improve AI models, we have open roles on our team and we’d love for you to apply. We’re looking for [Managers](https://www.anthropic.com/research/Managers), [Research Scientists](https://www.anthropic.com/research/Research Scientists), and [Research Engineers](https://www.anthropic.com/research/Research Engineers).*
+*If you are interested in working with us to help interpret and improve AI models, we have open roles on our team and we’d love for you to apply. We’re looking for [Managers](https://boards.greenhouse.io/anthropic/jobs/4009173008), [Research Scientists](https://boards.greenhouse.io/anthropic/jobs/4020159008), and [Research Engineers](https://boards.greenhouse.io/anthropic/jobs/4020305008).*
 
 ## Policy Memo
 
-[Mapping the Mind of a Large Language Model](https://www.anthropic.com/research/Mapping the Mind of a Large Language Model)
+[Mapping the Mind of a Large Language Model](https://cdn.sanity.io/files/4zrzovbb/website/e2ae0c997653dfd8a7cf23d06f5f06fd84ccfd58.pdf)
 
 ## Related content
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

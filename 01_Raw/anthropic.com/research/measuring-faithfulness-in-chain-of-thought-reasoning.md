@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/measuring-faithfulness-in-chain-of-thought-reasoning
-fetched_at: 2026-05-04T16:48:47.546768+00:00
+fetched_at: 2026-05-05T19:41:47.791126+00:00
 title: "Measuring Faithfulness in Chain-of-Thought Reasoning \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ AlignmentResearch
 
 Jul 18, 2023
 
-[Download Paper](https://www.anthropic.com/research/Download Paper)
+[Download Paper](https://www-cdn.anthropic.com/827afa7dd36e4afbb1a49c735bfbb2c69749756e/measuring-faithfulness-in-chain-of-thought-reasoning.pdf)
 
 ## Abstract
 
@@ -20,14 +20,14 @@ Large language models (LLMs) perform better when they produce step-by-step, “C
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

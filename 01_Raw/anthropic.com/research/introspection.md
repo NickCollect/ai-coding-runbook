@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/introspection
-fetched_at: 2026-05-04T16:48:03.820794+00:00
+fetched_at: 2026-05-05T19:41:42.413105+00:00
 title: "Emergent introspective awareness in large language models \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ Interpretability
 
 Oct 29, 2025
 
-[Read the paper](https://www.anthropic.com/research/Read the paper)
+[Read the paper](https://transformer-circuits.pub/2025/introspection/index.html)
 
 ![Signs of introspection in large language models](https://www-cdn.anthropic.com/images/4zrzovbb/website/46e4aa7ea208ed440d5bd9e9e3a0ee66bc336ff1-1000x1000.svg)
 
@@ -18,11 +18,11 @@ Have you ever asked an AI model what’s on its mind? Or to explain how it came 
 
 Understanding whether AI systems can truly introspect has important implications for their transparency and reliability. If models can accurately report on their own internal mechanisms, this could help us understand their reasoning and debug behavioral issues. Beyond these immediate practical considerations, probing for high-level cognitive capabilities like introspection can shape our understanding of what these systems are and how they work. Using interpretability techniques, we’ve started to investigate this question scientifically, and found some surprising results.
 
-Our [new research](https://www.anthropic.com/research/new research) provides evidence for some degree of introspective awareness in our current Claude models, as well as a degree of control over their own internal states. We stress that this introspective capability is still highly unreliable and limited in scope: we do not have evidence that current models can introspect in the same way, or to the same extent, that humans do. Nevertheless, these findings challenge some common intuitions about what language models are capable of—and since we found that the most capable models we tested (Claude Opus 4 and 4.1) performed the best on our tests of introspection, we think it’s likely that AI models’ introspective capabilities will continue to grow more sophisticated in the future.
+Our [new research](https://transformer-circuits.pub/2025/introspection/index.html) provides evidence for some degree of introspective awareness in our current Claude models, as well as a degree of control over their own internal states. We stress that this introspective capability is still highly unreliable and limited in scope: we do not have evidence that current models can introspect in the same way, or to the same extent, that humans do. Nevertheless, these findings challenge some common intuitions about what language models are capable of—and since we found that the most capable models we tested (Claude Opus 4 and 4.1) performed the best on our tests of introspection, we think it’s likely that AI models’ introspective capabilities will continue to grow more sophisticated in the future.
 
 ### What does it mean for an AI to introspect?
 
-Before explaining our results, we should take a moment to consider what it means for an AI model to introspect. What could they even be introspecting *on*? Language models like Claude process text (and image) inputs and produce text outputs. Along the way, they perform complex internal computations in order to decide what to say. These internal processes remain largely mysterious, but we know that models use their internal neural activity to [represent abstract concepts](https://www.anthropic.com/research/represent abstract concepts). For instance, prior research has shown that language models use specific neural patterns to distinguish [known vs. unknown people](https://www.anthropic.com/research/known vs. unknown people), evaluate the [truthfulness of statements](https://www.anthropic.com/research/truthfulness of statements), encode [spatiotemporal coordinates](https://www.anthropic.com/research/spatiotemporal coordinates), store [planned future outputs](https://www.anthropic.com/research/planned future outputs), and [represent their own personality traits](https://www.anthropic.com/research/represent their own personality traits). Models use these internal representations to [perform computations and make decisions about what to say](https://www.anthropic.com/research/perform computations and make decisions about what to say).
+Before explaining our results, we should take a moment to consider what it means for an AI model to introspect. What could they even be introspecting *on*? Language models like Claude process text (and image) inputs and produce text outputs. Along the way, they perform complex internal computations in order to decide what to say. These internal processes remain largely mysterious, but we know that models use their internal neural activity to [represent abstract concepts](https://www.anthropic.com/research/mapping-mind-language-model). For instance, prior research has shown that language models use specific neural patterns to distinguish [known vs. unknown people](https://arxiv.org/abs/2411.14257), evaluate the [truthfulness of statements](https://arxiv.org/abs/2310.06824), encode [spatiotemporal coordinates](https://arxiv.org/abs/2310.02207), store [planned future outputs](https://transformer-circuits.pub/2025/attribution-graphs/biology.html#dives-poems), and [represent their own personality traits](https://www.anthropic.com/research/persona-vectors). Models use these internal representations to [perform computations and make decisions about what to say](https://www.anthropic.com/research/tracing-thoughts-language-model).
 
 You might wonder, then, whether AI models *know* about these internal representations, in a way that’s analogous to a human, say, telling you how they worked their way through a math problem. If we ask a model what it’s thinking, will it accurately report the concepts that it’s representing internally? If a model can correctly identify its own private internal states, then we can conclude it is capable of introspection (though see our full paper for a full discussion of all the nuances).
 
@@ -34,17 +34,25 @@ To do so, we can use an experimental trick we call *concept injection.* First, w
 
 Consider the example below. First, we find a pattern of neural activity (a *vector*) representing the concept of “all caps." We do this by recording the model’s neural activations in response to a prompt containing all-caps text, and comparing these to its responses on a control prompt. Then we present the model with a prompt that asks it to identify whether a concept is being injected. By default, the model correctly states that it *doesn’t* detect any injected concept. However, when we inject the “all caps” vector into the model’s activations, the model notices the presence of an unexpected pattern in its processing, and identifies it as relating to loudness or shouting.
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ec928b42222eaa06a4bffa8c65fe337181e23f91-5580x4328.png)
+
 An example in which Claude Opus 4.1 detects a concept being injected into its activations.
 
-Importantly, the model recognized the *presence* of an injected thought *immediately*, before even mentioning the concept that was injected. This immediacy is an important distinction between our results here and previous work on activation steering in language models, such as our [“Golden Gate Claude” demo](https://www.anthropic.com/research/“Golden Gate Claude” demo) last year. Injecting representations of the Golden Gate Bridge into a model's activations caused it to talk about the bridge incessantly; however, in that case, the model didn’t seem to be aware of its own obsession until *after* seeing itself repeatedly mention the bridge. In this experiment, however, the model recognizes the injection *before even mentioning* the concept, indicating that its recognition took place internally. In the figure below are a few more examples where the model demonstrates this kind of recognition:
+Importantly, the model recognized the *presence* of an injected thought *immediately*, before even mentioning the concept that was injected. This immediacy is an important distinction between our results here and previous work on activation steering in language models, such as our [“Golden Gate Claude” demo](https://www.anthropic.com/news/golden-gate-claude) last year. Injecting representations of the Golden Gate Bridge into a model's activations caused it to talk about the bridge incessantly; however, in that case, the model didn’t seem to be aware of its own obsession until *after* seeing itself repeatedly mention the bridge. In this experiment, however, the model recognizes the injection *before even mentioning* the concept, indicating that its recognition took place internally. In the figure below are a few more examples where the model demonstrates this kind of recognition:
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/c6d689687c4fe1fe32d3ce6b02743d965629f1f8-5556x4800.png)
 
 Additional examples in which Claude Opus 4.1 detects a concept being injected into its activations.
 
 It is important to note that this method often *doesn’t* work. Even using our best injection protocol, Claude Opus 4.1 only demonstrated this kind of awareness about 20% of the time. Often, it fails to detect injected concepts, or gets confused by them and starts to hallucinate (e.g. injecting a “dust” vector in one case caused the model to say “There’s something here, a tiny speck,” as if it could detect the dust physically). Below we show examples of these failure modes, alongside success cases. In general, models only detect concepts that are injected with a “sweet spot” strength—too weak and they don’t notice, too strong and they produce hallucinations or incoherent outputs.
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/71d9ef94244a2b03b4dcb7533c693355f522d5eb-6248x6868.png)
+
 A representative sample of Claude Opus 4.1’s outputs in response to a variety of concept injections of different strengths. Highlighted boxes indicate cases where the model demonstrates introspective awareness of the injected concept.
 
 Notably, though, Opus 4.1 and 4 outperformed all the other models we tested, suggesting that introspection could become more reliable with improvements to model capabilities.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/212fe68c8e677fdd9daf79301d2522d6923bed1d-2970x2476.png)
 
 Rates of correct detection and identification of injected thoughts, minus rates of false positive “detections” on control trials.
 
@@ -54,6 +62,8 @@ In another experiment, we tested whether models make use of introspective capabi
 
 To test this question, we applied concept injection, retroactively injecting a representation of the word “bread” into the model's earlier activations—essentially making it seem like the model had been “thinking about” bread all along. When we asked the same question again, the model’s answer changed. This time, it accepted the prefilled word “bread” as intentional, even confabulating a reason it might have said it (that is, it comes up with a technically possible, though in this case rather tenuous, reason to justify the “bread” response—in this case claiming that it was thinking about a short story where the word “bread” came after the line about the crooked painting).
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/3ef0bba824401351d43025b2bb5ca6fd912de39a-5124x5376.png)
+
 Two examples of Claude Opus 4.1 being made to think it intended to say a word that was artificially inserted into the transcript on its behalf, by injecting the concept of that word into its activations prior to its (artificial) response. This behavior indicates that the model’s ability to recognize unintended outputs relies on introspective mechanisms.
 
 This behavior is striking because it suggests the model is checking its internal “intentions” to determine whether it produced an output. The model isn't just re-reading what it said and making a judgment. Instead, it’s referring back to its own prior neural activity—its internal representation of what it planned to do—and checking whether what came later made sense *given those earlier thoughts*. When we implant artificial evidence (through concept injection) that it *did* plan to say "bread," the model accepts the response as its own. While our experiment involves exposing the model to unusual perturbations, it suggests that the model uses similar introspective mechanisms in natural conditions.
@@ -61,6 +71,8 @@ This behavior is striking because it suggests the model is checking its internal
 ### Intentional control of internal states
 
 We also found that models can control their own internal representations when instructed to do so. When we instructed models to think about a given word or concept, we found much higher corresponding neural activity than when we told the model **not** to think about it (though notably, the neural activity in *both* cases exceeds baseline levels–similar to how it’s difficult, when you are instructed “don’t think about a polar bear,” not to think about a polar bear!). This gap between the positive and negative instruction cases suggests that models possess a degree of deliberate control over their internal activity.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/a271d432924445ad3f88997adc84a538c116dfe5-4793x2968.png)
 
 An example in which Claude Opus 4.1 modulates its internal activations in response to direct instructions. The model internally represents the concept of aquariums when instructed to “think” about them more than when instructed “don’t think” about them (though in both cases it represents the concept at above baseline levels).
 
@@ -84,9 +96,9 @@ Short answer: our results don’t tell us whether Claude (or any other AI system
 
 Long answer: the philosophical question of machine consciousness is complex and contested, and different theories of consciousness would interpret our findings very differently. Some philosophical frameworks place great importance on introspection as a component of consciousness, while others don’t.
 
-One distinction that is [commonly made](https://www.anthropic.com/research/commonly made) in the philosophical literature is the idea of “*phenomenal* consciousness,” referring to raw subjective experience, and “*access* consciousness,” the set of information that is available to the brain for use in reasoning, verbal report, and deliberate decision-making. Phenomenal consciousness is the form of consciousness most commonly considered relevant to moral status, and its relationship to access consciousness is a disputed philosophical question. Our experiments do not directly speak to the question of phenomenal consciousness. They *could* be interpreted to suggest a rudimentary form of access consciousness in language models. However, even this is unclear. The interpretation of our results may depend heavily on the underlying mechanisms involved, which we do not yet understand.
+One distinction that is [commonly made](https://www.cambridge.org/core/journals/behavioral-and-brain-sciences/article/abs/on-a-confusion-about-a-function-of-consciousness/061422BF0C50C5FF00927F9B6E879413) in the philosophical literature is the idea of “*phenomenal* consciousness,” referring to raw subjective experience, and “*access* consciousness,” the set of information that is available to the brain for use in reasoning, verbal report, and deliberate decision-making. Phenomenal consciousness is the form of consciousness most commonly considered relevant to moral status, and its relationship to access consciousness is a disputed philosophical question. Our experiments do not directly speak to the question of phenomenal consciousness. They *could* be interpreted to suggest a rudimentary form of access consciousness in language models. However, even this is unclear. The interpretation of our results may depend heavily on the underlying mechanisms involved, which we do not yet understand.
 
-In the paper, we restrict our focus to understanding functional capabilities—the ability to access and report on internal states. That said, we do think that as research on this topic progresses, it could influence our understanding of machine consciousness and potential moral status, which we are exploring in connection with our [model welfare program](https://www.anthropic.com/research/model welfare program).
+In the paper, we restrict our focus to understanding functional capabilities—the ability to access and report on internal states. That said, we do think that as research on this topic progresses, it could influence our understanding of machine consciousness and potential moral status, which we are exploring in connection with our [model welfare program](https://www.anthropic.com/research/exploring-model-welfare).
 
 #### Q: How does introspection actually work inside the model? What's the mechanism?
 
@@ -102,7 +114,7 @@ All of the mechanisms described above are speculative. Future work with more adv
 
 #### Q: In the “injected thoughts” experiment, isn’t the model just saying the word because you steered it to talk about that concept?
 
-Indeed, activation steering typically makes models talk about the steered concept (we’ve explored this in [our prior work](https://www.anthropic.com/research/our prior work)). To us, the most interesting part of the result isn't that the model eventually identifies the injected concept, but rather that the model correctly notices something unusual is happening *before* it starts talking about the concept.
+Indeed, activation steering typically makes models talk about the steered concept (we’ve explored this in [our prior work](https://transformer-circuits.pub/2024/scaling-monosemanticity/)). To us, the most interesting part of the result isn't that the model eventually identifies the injected concept, but rather that the model correctly notices something unusual is happening *before* it starts talking about the concept.
 
 In the successful trials, the model says things like “I'm experiencing something unusual” or “I detect an injected thought about…” The key word here is “detect.” The model is reporting awareness of an anomaly in its processing *before* that anomaly has had a chance to obviously bias its outputs. This requires an extra computational step beyond simply regurgitating the steering vector as an output. In our quantitative analyses, we graded responses as demonstrating “introspective awareness” based on whether the model detected the injected concept *prior to* mentioning the injected word.
 
@@ -122,7 +134,7 @@ This is a legitimate concern. We can’t be absolutely certain that the “meani
 
 #### Q: Didn’t we already know that models could introspect?
 
-Previous research has shown evidence for model capabilities that are suggestive of introspection. For instance, prior work has shown that models can to some extent [estimate their own knowledge](https://www.anthropic.com/research/estimate their own knowledge), [recognize their own outputs](https://www.anthropic.com/research/recognize their own outputs), [predict their own behavior](https://www.anthropic.com/research/predict their own behavior), and [identify their own propensities](https://www.anthropic.com/research/identify their own propensities). Our work was heavily motivated by these findings, and is intended to provide more direct evidence for introspection by tying models’ self-reports to their internal states. Without tying behaviors to internal states in this way, it is difficult to distinguish a model that genuinely introspects from one that makes educated guesses about itself.
+Previous research has shown evidence for model capabilities that are suggestive of introspection. For instance, prior work has shown that models can to some extent [estimate their own knowledge](https://arxiv.org/abs/2207.05221), [recognize their own outputs](https://arxiv.org/abs/2404.13076), [predict their own behavior](https://arxiv.org/abs/2410.13787), and [identify their own propensities](https://arxiv.org/abs/2501.11120). Our work was heavily motivated by these findings, and is intended to provide more direct evidence for introspection by tying models’ self-reports to their internal states. Without tying behaviors to internal states in this way, it is difficult to distinguish a model that genuinely introspects from one that makes educated guesses about itself.
 
 #### Q: What makes some models better at introspection than others?
 
@@ -142,14 +154,14 @@ We see several important directions. First, we need better evaluation methods—
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

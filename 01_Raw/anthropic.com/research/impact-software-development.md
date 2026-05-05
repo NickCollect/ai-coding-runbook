@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/impact-software-development
-fetched_at: 2026-05-04T17:08:48.801970+00:00
+fetched_at: 2026-05-05T19:41:39.593291+00:00
 title: "Anthropic Economic Index: AI's impact on software development \\ Anthropic"
 ---
 
@@ -10,11 +10,13 @@ Societal ImpactsEconomic Research
 
 Apr 28, 2025
 
+![A hand-drawn image of a magnifying glass over some brackets from a piece of computer code](https://www-cdn.anthropic.com/images/4zrzovbb/website/694207e39ea7be23e009bba6923809b5f2b1dbc6-1920x1079.png)
+
 Jobs that involve computer programming are a small sector of the modern economy, but an influential one. The past couple of years have seen them changed dramatically by the introduction of AI systems that can assist with—and automate—significant amounts of coding work.
 
-In our [previous Economic Index research](https://www.anthropic.com/research/previous Economic Index research), we found very disproportionate use of Claude by US workers in computer-related occupations: that is, there were many more conversations with Claude about computer-related tasks than one would predict from the number of people working in relevant jobs. It’s the same in [the educational context](https://www.anthropic.com/research/the educational context): Computer Science degrees—which involve large amounts of coding—show highly disproportionate AI use.
+In our [previous Economic Index research](https://www.anthropic.com/news/the-anthropic-economic-index), we found very disproportionate use of Claude by US workers in computer-related occupations: that is, there were many more conversations with Claude about computer-related tasks than one would predict from the number of people working in relevant jobs. It’s the same in [the educational context](https://www.anthropic.com/news/anthropic-education-report-how-university-students-use-claude): Computer Science degrees—which involve large amounts of coding—show highly disproportionate AI use.
 
-To understand these changes in more detail, we conducted an analysis of 500,000 coding-related interactions across [Claude.ai](https://www.anthropic.com/research/Claude.ai) (the “default” way that most people interact with Claude) and [Claude Code](https://www.anthropic.com/research/Claude Code) (our new specialist coding “agent” that can independently accomplish chains of complex tasks using a variety of digital tools).
+To understand these changes in more detail, we conducted an analysis of 500,000 coding-related interactions across [Claude.ai](http://claude.ai/redirect/website.v1.bc159b7a-23bb-4766-8c25-d653e5424f41) (the “default” way that most people interact with Claude) and [Claude Code](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview) (our new specialist coding “agent” that can independently accomplish chains of complex tasks using a variety of digital tools).
 
 We found three key patterns:
 
@@ -24,13 +26,15 @@ We found three key patterns:
 
 ### How we analyzed conversations on Claude Code and Claude.ai
 
-We analyzed the 500,000 total Claude interactions (split between Claude Code and Claude.ai1) using our [privacy-preserving analysis tool](https://www.anthropic.com/research/privacy-preserving analysis tool), which distills user conversations into higher-level, anonymized insights. Here, we used it to identify the topic of the conversation (e.g. “UI/UX component development”), or—as we’ll explain below—to categorize a conversation as focusing on “augmentation” versus “automation”.
+We analyzed the 500,000 total Claude interactions (split between Claude Code and Claude.ai1) using our [privacy-preserving analysis tool](https://www.anthropic.com/research/clio), which distills user conversations into higher-level, anonymized insights. Here, we used it to identify the topic of the conversation (e.g. “UI/UX component development”), or—as we’ll explain below—to categorize a conversation as focusing on “augmentation” versus “automation”.
 
 ### How do developers interact with Claude?
 
 In our previous Economic Index reports, we separated out “automation,” where AI directly performs tasks, from “augmentation,” where AI collaborates with a user to perform a task. Here, we found that Claude Code showed dramatically higher automation rates—79% of conversations involved some form of automation, compared to 49% on Claude.ai.
 
-We also split automation and augmentation into several subtypes (as discussed in our [previous work](https://www.anthropic.com/research/previous work)). “Feedback Loop” patterns, where Claude completes tasks autonomously but with help of human validation (for example, where the user sends any errors back to Claude), were nearly twice as common on Claude Code (35.8% of interactions) as Claude.ai (21.3%). “Directive” conversations, where Claude completed a task with minimal user interaction, were also higher on Claude Code (43.8%, versus 27.5% on Claude.ai). All the patterns of augmentation—including “Learning,” where the user acquires knowledge from the AI model—were substantially lower on Claude Code than on Claude.ai.
+We also split automation and augmentation into several subtypes (as discussed in our [previous work](https://www.anthropic.com/news/the-anthropic-economic-index)). “Feedback Loop” patterns, where Claude completes tasks autonomously but with help of human validation (for example, where the user sends any errors back to Claude), were nearly twice as common on Claude Code (35.8% of interactions) as Claude.ai (21.3%). “Directive” conversations, where Claude completed a task with minimal user interaction, were also higher on Claude Code (43.8%, versus 27.5% on Claude.ai). All the patterns of augmentation—including “Learning,” where the user acquires knowledge from the AI model—were substantially lower on Claude Code than on Claude.ai.
+
+![Stacked bar chart showing the percentage of automation and augmentation on Claude.ai and Claude Code.](https://www-cdn.anthropic.com/images/4zrzovbb/website/0bd4b66d347cd7c956f54fafa9793368e63b2ed0-4000x2250.jpg)
 
 Subtypes are defined as follows. Directive: Complete task delegation with minimal interaction; Feedback Loop: Task completion guided by environmental feedback; Task Iteration: Collaborative refinement process; Learning: Knowledge acquisition and understanding; Validation: Work verification and improvement.
 
@@ -42,9 +46,13 @@ This raises questions about the extent to which developers will still be involve
 
 Overall, we found that developers commonly use Claude for building user interfaces and interactive elements for websites and mobile applications. Although no single language dominated, the primarily web-focused development languages of JavaScript and TypeScript together accounted for 31% of all queries, and HTML2 and CSS (other languages for user-facing code) together added another 28%.
 
+![Line graph showing top coding use cases used in Claude.](https://www-cdn.anthropic.com/images/4zrzovbb/website/26b926ce7a1cff3c6d3f9fe63e6cf2417b945ce8-4001x2251.jpg)
+
 Percentages represent total percentages of coding-related tasks across both platforms. Because Claude Code and Claude.ai are equally weighted, the portions of the bars that correspond to each of the platforms represent half of that platform's usage.
 
 Back-end development languages (used for behind-the-scenes logic, databases, and infrastructure, as well as API and AI development) were also represented: notably, Python was at 14% of queries. However, Python serves dual purposes—both for back-end development and data analysis. Combined with SQL (another data-focused language, making up 6% of queries), these languages likely included many data science and analytics applications beyond traditional back-end development.
+
+![Line graph showing top programming languages used in Claude.](https://www-cdn.anthropic.com/images/4zrzovbb/website/79fcc40e7d9909258d202b382b7ab357e0893eb0-4001x2251.jpg)
 
 Percentages of coding language uses represent total percentages across both platforms. Because Claude Code and Claude.ai are equally weighted, the portions of the bars that correspond to each of the platforms represent half of that platform's usage.
 
@@ -57,6 +65,8 @@ Speculatively, these findings suggest that jobs that center on making simple app
 ### Who is using Claude for coding?
 
 We also analyzed which groups of developers might be using Claude. We used our analysis system to identify the type of project (e.g. a personal project vs. a project done for a startup) that best described users’ coding-related interactions. Because we don’t know the real-world context in which Claude’s responses were being used, these analyses rely on uncertain inferences from incomplete data. We therefore treat these findings as more preliminary than the ones described above.
+
+![Graph showing types of projects in Claude.ai and Claude Code, with a list of different projects and the percentage of times they appeared in our dataset.](https://www-cdn.anthropic.com/images/4zrzovbb/website/f6c0ff39789bdad7dcc1efe4a24e5b468931fec0-4000x2250.jpg)
 
 The distance between the dots indicates the gap in the prevalence of each type of project on Claude.ai (blue) and Claude Code (orange).
 
@@ -90,11 +100,13 @@ In the grand scheme of things, AI systems are extremely new. But in a relative s
 
 ### Work With Us
 
-If you’re interested in working at Anthropic to research the effects of AI on the labor market, we encourage you to apply for our [Economist](https://www.anthropic.com/research/Economist) and [Data Scientist (Policy)](https://www.anthropic.com/research/Data Scientist (Policy)) roles.
+If you’re interested in working at Anthropic to research the effects of AI on the labor market, we encourage you to apply for our [Economist](https://job-boards.greenhouse.io/anthropic/jobs/4555010008) and [Data Scientist (Policy)](https://job-boards.greenhouse.io/anthropic/jobs/4502440008) roles.
 
 ## Appendix
 
 As a supplementary analysis, we also compared our results for software-related automation and augmentation patterns to patterns in interactions that did not involve software. We conducted this analysis exclusively in Claude.ai, because Claude Code specializes in software applications.
+
+![Table showing percentages of different patterns of AI use for software and non-software applications.](https://www-cdn.anthropic.com/images/4zrzovbb/website/3539fa9144a552602c77fb78b7f8ed025dfaa7cd-4001x2251.jpg)
 
 Breakdown of automation and augmentation by software versus non-software use cases in Claude.ai. For a description of each pattern, see the caption to the first figure above.
 
@@ -104,7 +116,7 @@ Compared to use cases that don’t involve software, software development is mor
 
 1. Claude.ai conversations were specifically those from Claude.ai Free and Pro. This sample only includes Claude Code sessions powered by the first-party API (Claude Code can be powered by Anthropic first-party APIs or third party cloud provider APIs). All conversations used in our analysis across Claude.ai and Claude Code were from April 6-13, 2025. The initial sample was split evenly across Claude.ai and Claude Code and for Claude.ai, we applied a Claude-based filter to select conversations related to coding. To account for the filter, we renormalized analyses to equally weight Claude Code and Claude.ai interactions, where applicable.
 
-2. The HTML numbers for Claude.ai are likely inflated slightly because [Artifacts](https://www.anthropic.com/research/Artifacts) leverage HTML. While we filter out Artifacts that are unrelated to coding, we don’t explicitly filter out Artifacts that contain coding-related content from the analysis because significant coding usage happens within Artifacts.
+2. The HTML numbers for Claude.ai are likely inflated slightly because [Artifacts](https://support.anthropic.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them) leverage HTML. While we filter out Artifacts that are unrelated to coding, we don’t explicitly filter out Artifacts that contain coding-related content from the analysis because significant coding usage happens within Artifacts.
 
 3. Claude.ai usage does not include Claude For Work (Team and Enterprise plans) usage, which implies that enterprise numbers for Claude.ai specifically are likely undercounted because a significant amount of enterprise usage on Claude.ai occurs within the Claude For Work product.
 
@@ -112,14 +124,14 @@ Compared to use cases that don’t involve software, software development is mor
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

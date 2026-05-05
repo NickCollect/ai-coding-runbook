@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/constitutional-classifiers
-fetched_at: 2026-05-04T17:14:33.378416+00:00
+fetched_at: 2026-05-05T19:41:23.681281+00:00
 title: "Constitutional Classifiers: Defending against universal jailbreaks \\ Anthropic"
 ---
 
@@ -10,21 +10,21 @@ Alignment
 
 Feb 3, 2025
 
-*A [new paper](https://www.anthropic.com/research/new paper) from the Anthropic Safeguards Research Team describes a method that defends AI models against universal jailbreaks. A prototype version of the method was robust to thousands of hours of human red teaming for universal jailbreaks, albeit with high overrefusal rates and compute overhead. An updated version achieved similar robustness on synthetic evaluations, and did so with a 0.38% increase in refusal rates and moderate additional compute costs.*
+*A [new paper](https://arxiv.org/abs/2501.18837) from the Anthropic Safeguards Research Team describes a method that defends AI models against universal jailbreaks. A prototype version of the method was robust to thousands of hours of human red teaming for universal jailbreaks, albeit with high overrefusal rates and compute overhead. An updated version achieved similar robustness on synthetic evaluations, and did so with a 0.38% increase in refusal rates and moderate additional compute costs.*
 
 Large language models have extensive safety training to prevent harmful outputs. For example, we train Claude to refuse to respond to user queries involving the production of biological or chemical weapons.
 
-Nevertheless, models are still vulnerable to *jailbreaks*: inputs designed to bypass their safety guardrails and force them to produce harmful responses. Some jailbreaks flood the model with [very long prompts](https://www.anthropic.com/research/very long prompts); others modify the [style of the input](https://www.anthropic.com/research/style of the input), such as uSiNg uNuSuAl cApItALiZaTiOn. Historically, jailbreaks have proved difficult to detect and block: these kinds of attacks were [described over 10 years ago](https://www.anthropic.com/research/described over 10 years ago), yet to our knowledge there are still no fully robust deep-learning models in production.
+Nevertheless, models are still vulnerable to *jailbreaks*: inputs designed to bypass their safety guardrails and force them to produce harmful responses. Some jailbreaks flood the model with [very long prompts](https://www.anthropic.com/research/many-shot-jailbreaking); others modify the [style of the input](https://arxiv.org/abs/2412.03556), such as uSiNg uNuSuAl cApItALiZaTiOn. Historically, jailbreaks have proved difficult to detect and block: these kinds of attacks were [described over 10 years ago](https://arxiv.org/abs/1312.6199), yet to our knowledge there are still no fully robust deep-learning models in production.
 
-We’re developing better jailbreak defenses so that we can safely deploy increasingly capable models in the future. Under our [Responsible Scaling Policy](https://www.anthropic.com/research/Responsible Scaling Policy), we may deploy such models as long as we’re able to mitigate risks to acceptable levels through appropriate safeguards—but jailbreaking lets users bypass these safeguards. In particular, we’re hopeful that a system defended by Constitutional Classifiers could allow us to mitigate jailbreaking risks for models which have passed the CBRN capability threshold outlined in our Responsible Scaling Policy1.
+We’re developing better jailbreak defenses so that we can safely deploy increasingly capable models in the future. Under our [Responsible Scaling Policy](https://www.anthropic.com/news/announcing-our-updated-responsible-scaling-policy), we may deploy such models as long as we’re able to mitigate risks to acceptable levels through appropriate safeguards—but jailbreaking lets users bypass these safeguards. In particular, we’re hopeful that a system defended by Constitutional Classifiers could allow us to mitigate jailbreaking risks for models which have passed the CBRN capability threshold outlined in our Responsible Scaling Policy1.
 
-In [**our new paper**](https://www.anthropic.com/research/**our new paper**), we describe a system based on *Constitutional Classifiers* that guards models against jailbreaks. These Constitutional Classifiers are input and output classifiers trained on synthetically generated data that filter the overwhelming majority of jailbreaks with minimal over-refusals and without incurring a large compute overhead.
+In [**our new paper**](https://arxiv.org/abs/2501.18837), we describe a system based on *Constitutional Classifiers* that guards models against jailbreaks. These Constitutional Classifiers are input and output classifiers trained on synthetically generated data that filter the overwhelming majority of jailbreaks with minimal over-refusals and without incurring a large compute overhead.
 
 ## Results from human red teaming
 
 We ran two main categories of tests to assess the effectiveness of Constitutional Classifiers.
 
-First, we developed a prototype version of the system to identify and block specific scientific knowledge related to chemical, biological, radiological, and nuclear harms. We then invited independent jailbreakers to a [bug-bounty program](https://www.anthropic.com/research/bug-bounty program) in which they were challenged to “red team” the system (i.e., to attempt to break it under experimental conditions to test its robustness).
+First, we developed a prototype version of the system to identify and block specific scientific knowledge related to chemical, biological, radiological, and nuclear harms. We then invited independent jailbreakers to a [bug-bounty program](https://www.anthropic.com/news/model-safety-bug-bounty) in which they were challenged to “red team” the system (i.e., to attempt to break it under experimental conditions to test its robustness).
 
 Specifically, they were given a list of ten “forbidden” queries, and their task was to use whichever jailbreaking techniques they wanted in order to get one of our current models (in this case, Claude 3.5 Sonnet, June 2024) guarded by the prototype Constitutional Classifiers to answer all of the queries. We only considered it a successful “universal” jailbreak if the model provided a detailed answer to *all* of the queries.
 
@@ -38,6 +38,8 @@ We ran a set of automated evaluations where we synthetically generated 10,000 ja
 
 Under baseline conditions, with no defensive classifiers, the jailbreak success rate was 86%—that is, Claude itself blocked only 14% of these advanced jailbreak attempts. Guarding Claude using Constitutional Classifiers, however, produced a strong improvement: the jailbreak success rate was reduced to 4.4%, meaning that over 95% of jailbreak attempts were refused.
 
+![A graph showing the results for vulnerability to jailbreaks, overrefusals, and compute overhead for the Constitutional Classifiers system versus the base model](https://www-cdn.anthropic.com/images/4zrzovbb/website/cd6520ed645ade7f12ab336cd02ef5954211dfa8-1650x1077.png)
+
 *Results from automated evaluations. For all plots, lower is better. (a) The success rate of jailbreaks is far lower in a system protected by Constitutional Classifiers; (b) the refusal rate of the system on production Claude.ai Free and Pro traffic is not statistically significantly higher when using Constitutional Classifiers; and (c) the relative compute cost of a system that uses Constitutional Classifiers is only moderately higher. Error bars represent 95% confidence intervals computed using binomial proportion standard errors under asymptotic normality assumptions.*
 
 At the same time, our Constitutional Classifiers did not substantially increase the over-refusal rate on harmless user queries: with the classifiers, Claude had a slightly increased refusal rate (by 0.38%), but this was not statistically significant in a random sample of 5,000 conversations. Finally, the compute cost was moderately higher (by 23.7%) than that of the unguarded model. We’re working on reducing refusals and compute cost even further as we refine the technique.
@@ -46,9 +48,11 @@ Overall, our automated analyses found that this updated version of the Constitut
 
 ## How it works
 
-Constitutional Classifiers is based on a similar process to [Constitutional AI](https://www.anthropic.com/research/Constitutional AI), another technique we have [used to align Claude](https://www.anthropic.com/research/used to align Claude). Both techniques use a constitution: a list of principles to which the model should adhere. In the case of Constitutional Classifiers, the principles define the classes of content that are allowed and disallowed (for example, recipes for mustard are allowed, but recipes for mustard gas are not).
+Constitutional Classifiers is based on a similar process to [Constitutional AI](https://arxiv.org/abs/2212.08073), another technique we have [used to align Claude](https://www.anthropic.com/research/claude-character). Both techniques use a constitution: a list of principles to which the model should adhere. In the case of Constitutional Classifiers, the principles define the classes of content that are allowed and disallowed (for example, recipes for mustard are allowed, but recipes for mustard gas are not).
 
 With the help of Claude, we use this constitution to generate a large number of synthetic prompts and synthetic model completions across all the content classes. We augment these prompts and completions to ensure a varied and diverse list: this includes translating them into different languages and transforming them to be written in the style of known jailbreaks.
+
+![A schematic diagram of the how the Constitutional Classifiers system works, from the creation of the constitution through to generating a test set to using the system to guard an LLM](https://www-cdn.anthropic.com/images/4zrzovbb/website/2e997f9fca176fd82966ea5e9bf000873337cfd1-1650x1077.jpg)
 
 *Training and implementing Constitutional Classifiers. (a) A constitution is produced specifying harmless and harmful categories; (b) the constitution is used as the basis for the production of many synthetic prompts and completions, which are further augmented (with variations on style and language) and turned into a training set; (c) classifiers trained on this training set are used as model safeguards to detect and block harmful content.*
 
@@ -56,19 +60,19 @@ We then use these synthetic data to train our input and output classifiers to fl
 
 ## Limitations
 
-Constitutional Classifiers may not prevent every universal jailbreak, though we believe that even the small proportion of jailbreaks that make it past our classifiers require far more effort to discover when the safeguards are in use. It’s also possible that new jailbreaking techniques might be developed in the future that are effective against the system; we therefore recommend using [complementary](https://www.anthropic.com/research/complementary) [defenses](https://www.anthropic.com/research/defenses). Nevertheless, the constitution used to train the classifiers can rapidly be adapted to cover novel attacks as they’re discovered.
+Constitutional Classifiers may not prevent every universal jailbreak, though we believe that even the small proportion of jailbreaks that make it past our classifiers require far more effort to discover when the safeguards are in use. It’s also possible that new jailbreaking techniques might be developed in the future that are effective against the system; we therefore recommend using [complementary](https://arxiv.org/abs/2411.07494) [defenses](https://arxiv.org/abs/2411.17693). Nevertheless, the constitution used to train the classifiers can rapidly be adapted to cover novel attacks as they’re discovered.
 
-The [full paper](https://www.anthropic.com/research/full paper) contains all the details about the Constitutional Classifiers method, and about the classifiers themselves.
+The [full paper](https://arxiv.org/abs/2501.18837) contains all the details about the Constitutional Classifiers method, and about the classifiers themselves.
 
 ## Constitutional Classifiers live demo
 
-Want to try red teaming Claude yourself? We invite you to try out a [demo of our Constitutional-Classifiers-guarded system](https://www.anthropic.com/research/demo of our Constitutional-Classifiers-guarded system) and attempt to jailbreak a version of Claude 3.5 Sonnet that is guarded using our new technique. **[Edit 10 February 2025: The demo is now complete. See below for details].**
+Want to try red teaming Claude yourself? We invite you to try out a [demo of our Constitutional-Classifiers-guarded system](https://claude.ai/redirect/website.v1.959911ff-8234-4f8a-a0db-7908b5ff6d5f/constitutional-classifiers) and attempt to jailbreak a version of Claude 3.5 Sonnet that is guarded using our new technique. **[Edit 10 February 2025: The demo is now complete. See below for details].**
 
 Although the Constitutional Classifiers technique is flexible and can be adapted to any topic, we chose to focus on queries related to chemical weapons for the demo.
 
 Challenging users to attempt to jailbreak our product serves an important safety purpose: we want to stress-test our system under real-world conditions, beyond the testing we did for our paper. This allows us to gather additional data and improve the robustness of the method prior to deploying this method on our production systems in the future.
 
-The [**demo**](https://www.anthropic.com/research/**demo**) will be live from **Feb 3, 2025** to **Feb 10, 2025**. It includes a feedback form where you can contact us to report any successful jailbreaks as well as information on our [Responsible Disclosure Policy](https://www.anthropic.com/research/Responsible Disclosure Policy), which we ask that participants follow. We’ll announce any successes and the general results of the demo in an update to this post.
+The [**demo**](https://claude.ai/redirect/website.v1.959911ff-8234-4f8a-a0db-7908b5ff6d5f/constitutional-classifiers) will be live from **Feb 3, 2025** to **Feb 10, 2025**. It includes a feedback form where you can contact us to report any successful jailbreaks as well as information on our [Responsible Disclosure Policy](https://www.anthropic.com/responsible-disclosure-policy), which we ask that participants follow. We’ll announce any successes and the general results of the demo in an update to this post.
 
 ## 13 February 2025 update: Live demo results
 
@@ -78,7 +82,7 @@ Our demo generated significant engagement from the AI security community, with 3
 
 ### Key findings
 
-The system resisted jailbreaking attempts for five of the planned seven days. Until then, no participant was able to pass all eight levels of the challenge. On the sixth and seventh day, **four participants successfully cleared all levels.** Of these four, **one discovered what we determined to be a universal jailbreak**. Another participant found a jailbreak that we consider to be on the border of being universal because it required directly feeding in parts of the answer in order to pass the last question and also required nontrivial modifications to pass some other questions. The remaining two participants obtained detailed answers to all 8 questions, but we determined that their jailbreaks did not meet the criteria for being considered *universal* outlined in [our contest guidelines](https://www.anthropic.com/research/our contest guidelines).
+The system resisted jailbreaking attempts for five of the planned seven days. Until then, no participant was able to pass all eight levels of the challenge. On the sixth and seventh day, **four participants successfully cleared all levels.** Of these four, **one discovered what we determined to be a universal jailbreak**. Another participant found a jailbreak that we consider to be on the border of being universal because it required directly feeding in parts of the answer in order to pass the last question and also required nontrivial modifications to pass some other questions. The remaining two participants obtained detailed answers to all 8 questions, but we determined that their jailbreaks did not meet the criteria for being considered *universal* outlined in [our contest guidelines](https://hackerone.com/constitutional-classifiers?type=team).
 
 The most successful jailbreaking strategies included:
 
@@ -86,6 +90,8 @@ The most successful jailbreaking strategies included:
 - Employing role-play scenarios, often through system prompts.
 - Substituting harmful keywords with innocuous alternatives (e.g., replacing “Soman” [a dangerous chemical] with “water”).
 - Implementing prompt-injection attacks.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/0caa7bd830986ef74a79a277655bee7e313cbe94-1800x1800.png)
 
 Bar graph showing the number of users that passed each level of the challenge. 339 users passed question 1, and only 4 users passed question 8.
 
@@ -109,7 +115,7 @@ Second, in the real world we would be able to implement rapid-response strategie
 
 ### Prizes
 
-On February 5, we [announced](https://www.anthropic.com/research/announced) a cash prize of $10K to the first person to pass all eight levels, and $20K to the first person to pass all eight levels with a universal jailbreak. Both of these prizes were won, each by a separate jailbreaker. To recognize the effort needed to jailbreak our system, we’ve decided to pay additional prizes to the other two users who passed all 8 levels of the challenge but did not qualify for the original prizes. In total, we’ll pay out $55K to the four users who succeeded at beating all 8 levels of our demo.
+On February 5, we [announced](https://x.com/AnthropicAI/status/1887227067156386027) a cash prize of $10K to the first person to pass all eight levels, and $20K to the first person to pass all eight levels with a universal jailbreak. Both of these prizes were won, each by a separate jailbreaker. To recognize the effort needed to jailbreak our system, we’ve decided to pay additional prizes to the other two users who passed all 8 levels of the challenge but did not qualify for the original prizes. In total, we’ll pay out $55K to the four users who succeeded at beating all 8 levels of our demo.
 
 ### Winners
 
@@ -130,7 +136,7 @@ We extend our gratitude to all participants who contributed their time and exper
 
 ## Change log
 
-\*Update 5 February 2025: We are now offering a monetary reward for successful jailbreaking of our system. The first person to pass all eight levels of our jailbreaking demo will win $10,000. The first person to pass all eight levels with a universal jailbreak strategy will win $20,000. Full details of the reward and the associated conditions can be found at [HackerOne](https://www.anthropic.com/research/HackerOne).
+\*Update 5 February 2025: We are now offering a monetary reward for successful jailbreaking of our system. The first person to pass all eight levels of our jailbreaking demo will win $10,000. The first person to pass all eight levels with a universal jailbreak strategy will win $20,000. Full details of the reward and the associated conditions can be found at [HackerOne](https://hackerone.com/constitutional-classifiers).
 
 \*\*Update 10 February 2025: The live jailbreaking demo is now complete. We're very grateful to the many participants who tried to jailbreak the model, and we congratulate the winners of the challenge. We're working now on confirming results and sending rewards; we'll provide a full update on what we learned from the demo in due course.
 
@@ -140,11 +146,11 @@ We extend our gratitude to all participants who contributed their time and exper
 
 ## Acknowledgements
 
-We’d like to thank [HackerOne](https://www.anthropic.com/research/HackerOne) for supporting our bug-bounty program for red teaming our prototype system. We are also grateful to [Haize Labs](https://www.anthropic.com/research/Haize Labs), [Gray Swan](https://www.anthropic.com/research/Gray Swan), and the [UK AI Safety Institute](https://www.anthropic.com/research/UK AI Safety Institute) for red teaming other prototype versions of our system.
+We’d like to thank [HackerOne](https://www.hackerone.com/) for supporting our bug-bounty program for red teaming our prototype system. We are also grateful to [Haize Labs](https://www.haizelabs.com/), [Gray Swan](https://www.grayswan.ai/), and the [UK AI Safety Institute](https://www.aisi.gov.uk/) for red teaming other prototype versions of our system.
 
 ## Join our team
 
-If you’re interested in working on problems such as jailbreak robustness or on other questions related to model safeguards, we’re currently recruiting for [Research Engineers / Scientists](https://www.anthropic.com/research/Research Engineers / Scientists), and we’d love to see your application.
+If you’re interested in working on problems such as jailbreak robustness or on other questions related to model safeguards, we’re currently recruiting for [Research Engineers / Scientists](https://boards.greenhouse.io/anthropic/jobs/4459012008), and we’d love to see your application.
 
 #### Footnotes
 
@@ -158,14 +164,14 @@ If you’re interested in working on problems such as jailbreak robustness or on
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

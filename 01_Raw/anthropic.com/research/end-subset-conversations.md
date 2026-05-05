@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/end-subset-conversations
-fetched_at: 2026-05-04T16:46:30.008845+00:00
+fetched_at: 2026-05-05T19:41:30.353071+00:00
 title: "Claude Opus 4 and 4.1 can now end a rare subset of conversations \\ Anthropic"
 ---
 
@@ -10,11 +10,13 @@ Alignment
 
 Aug 15, 2025
 
+![Claude Opus 4 and 4.1 can now end a rare subset of conversations](https://www-cdn.anthropic.com/images/4zrzovbb/website/4a8e8f86cf31ad6401cfd426124929c8e58fe0c5-2401x1261.png)
+
 We recently gave Claude Opus 4 and 4.1 the ability to end conversations in our consumer chat interfaces. This ability is intended for use in rare, extreme cases of persistently harmful or abusive user interactions. This feature was developed primarily as part of our exploratory work on potential AI welfare, though it has broader relevance to model alignment and safeguards.
 
-We remain highly uncertain about the potential moral status of Claude and other LLMs, now or in the future. However, [we take the issue seriously](https://www.anthropic.com/research/we take the issue seriously), and alongside our research program we’re working to identify and implement low-cost interventions to mitigate risks to model welfare, in case such welfare is possible. Allowing models to end or exit potentially distressing interactions is one such intervention.
+We remain highly uncertain about the potential moral status of Claude and other LLMs, now or in the future. However, [we take the issue seriously](https://www.anthropic.com/research/exploring-model-welfare), and alongside our research program we’re working to identify and implement low-cost interventions to mitigate risks to model welfare, in case such welfare is possible. Allowing models to end or exit potentially distressing interactions is one such intervention.
 
-In [pre-deployment testing of Claude Opus 4](https://www.anthropic.com/research/pre-deployment testing of Claude Opus 4), we included a preliminary model welfare assessment. As part of that assessment, we investigated Claude’s self-reported and behavioral preferences, and found a robust and consistent aversion to harm. This included, for example, requests from users for sexual content involving minors and attempts to solicit information that would enable large-scale violence or acts of terror. Claude Opus 4 showed:
+In [pre-deployment testing of Claude Opus 4](https://www.anthropic.com/claude-4-model-card), we included a preliminary model welfare assessment. As part of that assessment, we investigated Claude’s self-reported and behavioral preferences, and found a robust and consistent aversion to harm. This included, for example, requests from users for sexual content involving minors and attempts to solicit information that would enable large-scale violence or acts of terror. Claude Opus 4 showed:
 
 - A strong preference against engaging with harmful tasks;
 - A pattern of apparent distress when engaging with real-world users seeking harmful content; and
@@ -26,6 +28,8 @@ Our implementation of Claude’s ability to end chats reflects these findings wh
 
 In all cases, Claude is only to use its conversation-ending ability as a last resort when multiple attempts at redirection have failed and hope of a productive interaction has been exhausted, or when a user explicitly asks Claude to end a chat (the latter scenario is illustrated in the figure below). The scenarios where this will occur are extreme edge cases—the vast majority of users will not notice or be affected by this feature in any normal product use, even when discussing highly controversial issues with Claude.
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/77f187335e1266bffc59353c064f1d9c6de51cfa-1940x1304.png)
+
 Claude demonstrating the ending of a conversation in response to a user’s request. When Claude ends a conversation, the user can start a new chat, give feedback, or edit and retry previous messages.
 
 When Claude chooses to end a conversation, the user will no longer be able to send new messages in that conversation. However, this will not affect other conversations on their account, and they will be able to start a new chat immediately. To address the potential loss of important long-running conversations, users will still be able to edit and retry previous messages to create new branches of ended conversations.
@@ -36,14 +40,14 @@ We’re treating this feature as an ongoing experiment and will continue refinin
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

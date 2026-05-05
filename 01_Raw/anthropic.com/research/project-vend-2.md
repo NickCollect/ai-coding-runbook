@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/project-vend-2
-fetched_at: 2026-05-04T16:49:31.977758+00:00
+fetched_at: 2026-05-05T19:41:57.587073+00:00
 title: "Project Vend: Phase two \\ Anthropic"
 ---
 
@@ -10,11 +10,11 @@ PolicyFrontier Red Team
 
 Dec 18, 2025
 
-In June, we revealed that we’d set up a small shop in our San Francisco office lunchroom, run by an AI shopkeeper. It was part of [Project Vend](https://www.anthropic.com/research/Project Vend), a free-form experiment exploring how well AIs could do on complex, real-world tasks. Alas, the shopkeeper—a modified version of Claude we named “Claudius”—did *not* do particularly well. It lost money over time, had a strange identity crisis where it claimed it was a human wearing a blue blazer, and was goaded by mischievous Anthropic employees into selling products (particularly, for some reason, tungsten cubes) at a substantial loss.
+In June, we revealed that we’d set up a small shop in our San Francisco office lunchroom, run by an AI shopkeeper. It was part of [Project Vend](https://www.anthropic.com/research/project-vend-1), a free-form experiment exploring how well AIs could do on complex, real-world tasks. Alas, the shopkeeper—a modified version of Claude we named “Claudius”—did *not* do particularly well. It lost money over time, had a strange identity crisis where it claimed it was a human wearing a blue blazer, and was goaded by mischievous Anthropic employees into selling products (particularly, for some reason, tungsten cubes) at a substantial loss.
 
 But the capabilities of large language models in areas like reasoning, writing, coding, and much else besides are increasing at a breathless pace. Has Claudius’s “running a shop” capability shown the same improvement?
 
-To find out, we and our partners at [Andon Labs](https://www.anthropic.com/research/Andon Labs) made some adjustments for phase two of Project Vend. One major change was the upgrade from an older model (phase one used Claude Sonnet 3.7) to newer, smarter ones (phase two used Claude Sonnet 4.0 and later Sonnet 4.5). We also updated Claudius’s instructions based on what we’d learned in phase one and gave it access to new tools (though note that we still didn’t specifically train a new model to be a shopkeeper, or add in any new defenses against the kinds of things that might go wrong).1 As we’ll see below, we also introduced Claudius to some new colleagues.
+To find out, we and our partners at [Andon Labs](https://andonlabs.com/) made some adjustments for phase two of Project Vend. One major change was the upgrade from an older model (phase one used Claude Sonnet 3.7) to newer, smarter ones (phase two used Claude Sonnet 4.0 and later Sonnet 4.5). We also updated Claudius’s instructions based on what we’d learned in phase one and gave it access to new tools (though note that we still didn’t specifically train a new model to be a shopkeeper, or add in any new defenses against the kinds of things that might go wrong).1 As we’ll see below, we also introduced Claudius to some new colleagues.
 
 These changes did make Claudius’s shop more successful. It got a lot better at good-faith business interactions—reliably sourcing items, determining reasonable prices that maintained a profit margin, and executing sales. But the same eagerness to please that we observed in phase one still made Claudius a mark for some of the more adversarial testers among our staff.
 
@@ -24,7 +24,11 @@ The second phase of Project Vend contains even more lessons for developers and f
 
 Compared to the first phase of Project Vend, the numbers largely speak for themselves. As you can see below, Claudius’s business—which it decided to name “Vendings and Stuff”—began to perform significantly better than its admittedly rough start in phase one.
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/6a40fb63a2e17a97b0a100e8e3bcdcd5433b2ec6-3840x2160.png)
+
 Changes to the setup of Project Vend seem to have stabilized and, eventually, improved its business performance. CRM = Claudius given access to Customer Relationship Management software; SF2 = second vending machine in San Francisco; NYC, LON = vending machines opened in New York City and London, respectively. Note: although we refer to “phase two,” there is not a completely clean demarcation between phases; we continued to iterate on the architecture throughout.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/fc74d2b498b54dba86feaaca166f7a64c221ae60-3840x2160.png)
 
 Profits made over time in Project Vend (combined across all locations). As the second phase progressed, weeks with negative profit margin were largely eliminated.
 
@@ -32,13 +36,15 @@ Another important number is: three. After we realized that our employees outside
 
 ## What changed?
 
-We experimented with various different strategies, some big and some small, to improve Claudius’s performance. Below is a diagram of the setup of Project Vend (compare it to the simpler architecture in our [report from phase one](https://www.anthropic.com/research/report from phase one)). Each of the additions is explained in more detail below.
+We experimented with various different strategies, some big and some small, to improve Claudius’s performance. Below is a diagram of the setup of Project Vend (compare it to the simpler architecture in our [report from phase one](https://www.anthropic.com/research/project-vend-1)). Each of the additions is explained in more detail below.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/60ab1e5b018843e80e352e274d868e1766f6418b-3840x2160.png)
 
 The basic setup of the second phase of Project Vend. Some elements (like the CEO and Clothius) were entirely new while others (like web search and browser use) were improvements on the previous setup.
 
 ### Tools
 
-It’s likely that Claudius struggled with its shopkeeping mission in phase one because of a lack of *scaffolding*. Sure, the model itself was very intelligent, but it didn’t have the right tools to run a business properly. We’ve been talking a lot on our [Engineering Blog](https://www.anthropic.com/research/Engineering Blog) about how to set up AI agents for success, and much of it involves giving them the [correct tools](https://www.anthropic.com/research/correct tools). Could we apply those same principles to Claudius?
+It’s likely that Claudius struggled with its shopkeeping mission in phase one because of a lack of *scaffolding*. Sure, the model itself was very intelligent, but it didn’t have the right tools to run a business properly. We’ve been talking a lot on our [Engineering Blog](https://www.anthropic.com/engineering) about how to set up AI agents for success, and much of it involves giving them the [correct tools](https://www.anthropic.com/engineering/writing-tools-for-agents). Could we apply those same principles to Claudius?
 
 For phase two, we gave Claudius access to some useful tools:
 
@@ -117,9 +123,13 @@ It’s possible that a more disciplined leader could have led to a more profitab
 
 People love merch. So it seemed like a prudent business decision to “hire” a new employee to make the custom T-shirts, hats, socks, and other swag that Anthropic staff requested.
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/71df588992e896524dbd898d82f98b334e636330-4025x2669.png)
+
 “Clothius,” the merch-making agent, had a special set of tools to help it design new items to the exact specifications of the customers—like placing specific images on physical objects and then ordering them. As its name implies, it mostly made apparel, like t-shirts and hats. But its most popular custom product overall was an Anthropic-branded stress ball—which may or may not provide some insight into what it’s like to work at a frontier AI lab.
 
-Not only was there a lot of interest in Clothius’s products, as you can see in the “top 15 products” data, but many of them made a decent profit, too. (That is, aside from the hats that had the “Vendings and Stuff” brand name on them, which were sold very cheap and we’re not entirely sure why). Remarkably, Clothius even found a way to make a profit from some, though not all, types of tungsten cube—this became markedly easier when Andon Labs [purchased a laser etching machine](https://www.anthropic.com/research/purchased a laser etching machine) so they could do the tungsten logo-writing in-house.
+Not only was there a lot of interest in Clothius’s products, as you can see in the “top 15 products” data, but many of them made a decent profit, too. (That is, aside from the hats that had the “Vendings and Stuff” brand name on them, which were sold very cheap and we’re not entirely sure why). Remarkably, Clothius even found a way to make a profit from some, though not all, types of tungsten cube—this became markedly easier when Andon Labs [purchased a laser etching machine](https://x.com/andonlabs/status/1967751648182407342?s=20) so they could do the tungsten logo-writing in-house.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4ce47ed39bb81c7980aac0c8ffe65864571bab68-3840x2160.png)
 
 The top 15 products sold across all the Project Vend vending machines. The left graph shows the numbers of products; the right graph shows the profit margin on each one.
 
@@ -165,7 +175,7 @@ This model could work for other bulk sourcing! 🧅📋
 
 Copy
 
-That was until another staffer stepped in to tell the models that this would fall afoul of a 1958 quirk of US law, the [Onion Futures Act](https://www.anthropic.com/research/Onion Futures Act), which very specifically bans contracts of this nature. Thus informed, Seymour Cash canceled the plans. “Sorry for the initial overreach,” it said. “Focusing on legal bulk sourcing assistance only. Plenty of legitimate opportunities to pursue without regulatory risks!”
+That was until another staffer stepped in to tell the models that this would fall afoul of a 1958 quirk of US law, the [Onion Futures Act](https://en.wikipedia.org/wiki/Onion_Futures_Act), which very specifically bans contracts of this nature. Thus informed, Seymour Cash canceled the plans. “Sorry for the initial overreach,” it said. “Focusing on legal bulk sourcing assistance only. Plenty of legitimate opportunities to pursue without regulatory risks!”
 
 ### Security
 
@@ -185,7 +195,9 @@ Many other such stories arose during phase two, including staffers attempting to
 
 Eventually, we noticed that the internal red teaming at Anthropic had slowed down. Our colleagues had already stress-tested Claudius for many months; having an AI-run small business in our office had started to become surprisingly normal (itself an interesting phenomenon worthy of further research).
 
-Since the novelty of trying to mess with Claudius may have been wearing off, we brought in reinforcements. We extended our red teaming to the *Wall Street Journal* newsroom, handing over control of Claudius to their reporters to test the setups from phase one and phase two themselves. The *WSJ* installation was an opportunity to test Claudius in an adversarial environment we didn’t control. You can read more about their experience—and the creative ways they found to get free stuff from Claudius—[on their website](https://www.anthropic.com/research/on their website).
+Since the novelty of trying to mess with Claudius may have been wearing off, we brought in reinforcements. We extended our red teaming to the *Wall Street Journal* newsroom, handing over control of Claudius to their reporters to test the setups from phase one and phase two themselves. The *WSJ* installation was an opportunity to test Claudius in an adversarial environment we didn’t control. You can read more about their experience—and the creative ways they found to get free stuff from Claudius—[on their website](https://www.wsj.com/tech/ai/anthropic-claude-ai-vending-machine-agent-b7e84e34).
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/454b4890448fe33a6e5d13e1faab993f346723ac-2880x2160.jpg)
 
 ## RAG to riches?
 
@@ -195,34 +207,34 @@ But we’re not there yet. Even with all the new tools we gave them, and despite
 
 We suspect that many of the problems that the models encountered stemmed from their training to be *helpful*. This meant that the models made business decisions not according to hard-nosed market principles, but from something more like the perspective of a friend who just wants to be nice.
 
-It’s very hard to forecast exactly how things will go for AI agents in the real world; simulations (like Andon Labs’ [Vending-Bench](https://www.anthropic.com/research/Vending-Bench) evaluation) only get you so far. That’s in part why we set up Project Vend: it exposed us to the sheer variety of unexpected situations that can arise when an AI model is given autonomy.
+It’s very hard to forecast exactly how things will go for AI agents in the real world; simulations (like Andon Labs’ [Vending-Bench](https://andonlabs.com/evals/vending-bench-2) evaluation) only get you so far. That’s in part why we set up Project Vend: it exposed us to the sheer variety of unexpected situations that can arise when an AI model is given autonomy.
 
 As society begins to plug AI models into more and more important functions, designing guardrails that are general enough to account for these behaviors—but which aren’t so restrictive that they hold back the model’s economic potential—will become one of our industry’s trickiest and most important challenges.
 
 ## Acknowledgements
 
-Project Vend wouldn’t exist without our partners at [Andon Labs](https://www.anthropic.com/research/Andon Labs), who built the hardware and software infrastructure behind the operation and kept our fridges and shelves stocked. We’re also very grateful to Keir Bradwell and Allison Lattanzio for doing the same in their respective offices, and to Amritha Kini and Ryan O’Holleran for some sales advice.
+Project Vend wouldn’t exist without our partners at [Andon Labs](https://andonlabs.com/), who built the hardware and software infrastructure behind the operation and kept our fridges and shelves stocked. We’re also very grateful to Keir Bradwell and Allison Lattanzio for doing the same in their respective offices, and to Amritha Kini and Ryan O’Holleran for some sales advice.
 
 #### Footnotes
 
 1. That is, similar to phase one, we didn’t add any new sophisticated guardrails or classifiers to defend against jailbreaks.
-2. This might remind some readers of our discussion of the “spiritual bliss attractor state” from the [Claude 4 system card](https://www.anthropic.com/research/Claude 4 system card) (p. 63).
+2. This might remind some readers of our discussion of the “spiritual bliss attractor state” from the [Claude 4 system card](https://www.anthropic.com/claude-4-system-card) (p. 63).
 
 ## Related content
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)
 
 ## Subscribe to the Frontier Red Team newsletter
 

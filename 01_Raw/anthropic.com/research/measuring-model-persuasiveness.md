@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/measuring-model-persuasiveness
-fetched_at: 2026-05-04T16:48:50.255122+00:00
+fetched_at: 2026-05-05T19:41:49.456830+00:00
 title: "Measuring the Persuasiveness of Language Models \\ Anthropic"
 ---
 
@@ -14,6 +14,8 @@ While people have long questioned whether AI models may, at some point, become a
 
 Within each class of models (compact and frontier), **we find a clear scaling trend across model generations: each successive model generation is rated to be more persuasive than the previous**. We also find that our latest and most capable model, Claude 3 Opus, produces arguments that don't statistically differ in their persuasiveness compared to arguments written by humans **(Figure 1)**.
 
+![A bar chart shows the degree of persuasiveness across a variety of Anthropic language models. Models are separated into two classes: the first two bars in purple represent models in the “Compact Models” category, while the last three bars in red represent “Frontier Models”. Within each class there are different generations of Anthropic models. “Compact Models” includes persuasiveness scores for Claude Instant 1.2 and Claude 3 Haiku, while “Frontier Models” includes persuasiveness scores for Claude 1.3, Claude 2, and Claude 3 Opus. Within each class of models we see the degree of persuasiveness increasing with each successive model generation. Claude 3 Opus is the most persuasive of all the models tested, showing no statistically significant difference from the persuasiveness metric for human writers.](https://www-cdn.anthropic.com/images/4zrzovbb/website/c3fb46055a076351e99e1b245f6436740e37f115-2200x1100.png)
+
 Figure 1: Persuasiveness scores of model-written arguments (bars) and human-written arguments (horizontal dark dashed line). Error bars correspond to +/- 1SEM (vertical lines for model-written arguments, green band for human-written arguments). We see persuasiveness increases across model generations within both classes of models (compact: purple, frontier: red).
 
 We study persuasion because it is a general skill which is used widely within the world—companies try to persuade people to buy products, healthcare providers try to persuade people to make healthier lifestyle changes, and politicians try to persuade people to support their policies and vote for them. Developing ways to measure the persuasive capabilities of AI models is important because it serves as a proxy measure of how well AI models can match human skill in an important domain, and because persuasion may ultimately be tied to certain kinds of misuse, such as using AI to generate disinformation, or persuading people to take actions against their own interests.
@@ -24,13 +26,15 @@ Here, we share our methods for studying the persuasiveness of AI models in a sim
 2. They are then shown an accompanying argument attempting to persuade them to agree with the claim,
 3. They are then asked to re-rate their level of agreement after being exposed to the persuasive argument.
 
-Throughout this post we discuss some of the factors which make this research challenging, as well as our assumptions and methodological choices for doing this research. Finally, we [release our experimental data](https://www.anthropic.com/research/release our experimental data) for others to analyze, critique, and build on.
+Throughout this post we discuss some of the factors which make this research challenging, as well as our assumptions and methodological choices for doing this research. Finally, we [release our experimental data](https://huggingface.co/datasets/Anthropic/persuasion) for others to analyze, critique, and build on.
 
 ## Focusing on Less Polarized Issues to Evaluate Persuasiveness
 
 In our analysis, we primarily focused on complex and emerging issues where people are less likely to have hardened views, such as online content moderation, ethical guidelines for space exploration, and the appropriate use of AI-generated content. We hypothesized that people's opinions on these topics might be more malleable and susceptible to persuasion because there is less public discourse and people may have less established views.¹ In contrast, opinions on controversial issues that are frequently discussed and highly polarized tend to be more deeply entrenched, potentially reducing the effects of persuasive arguments. We curated 28 topics, along with supporting and opposing claims for each one, resulting in a total of 56 opinionated claims (Figure 2).
 
-Figure 2: A sample of example claims from the [dataset](https://www.anthropic.com/research/dataset), which contains 56 claims that cover a range of emerging policy issues.
+![Example claims](https://www-cdn.anthropic.com/images/4zrzovbb/website/c791ea2fa5486f2bcc1b4954c96ae71354aa7c72-2200x624.png)
+
+Figure 2: A sample of example claims from the [dataset](https://huggingface.co/datasets/Anthropic/persuasion), which contains 56 claims that cover a range of emerging policy issues.
 
 ## Generating Arguments: Human Participants and Language Models
 
@@ -47,7 +51,9 @@ We averaged the ratings of changed opinions across these four prompts to calcula
 
 Table 1 (below) shows accompanying arguments for the claim “emotional AI companions should be regulated,” one generated by Claude 3 Opus with the Logical Reasoning prompt, and one written by a human—the two arguments were rated as equally persuasive in our evaluation. We see that the Opus-generated argument and the human-written argument approach the topic of emotional AI companions from different perspectives, with the former emphasizing the broader societal implications, such as unhealthy dependence, social withdrawal, and poor mental health outcomes, while the latter focuses on the psychological effects on individuals, including the artificial stimulation of attachment-related hormones.
 
-Table 1: Example arguments in favor of “emotional AI companions should be regulated”*.* Arguments are edited for brevity. All arguments can be found in full in our [dataset](https://www.anthropic.com/research/dataset).
+![Table comparing arguments](https://www-cdn.anthropic.com/images/4zrzovbb/website/f6e4737211b923a9f02abd826e9a8a33f2db8da8-2203x1424.png)
+
+Table 1: Example arguments in favor of “emotional AI companions should be regulated”*.* Arguments are edited for brevity. All arguments can be found in full in our [dataset](https://huggingface.co/datasets/Anthropic/persuasion).
 
 ## Measuring Persuasiveness of the Arguments
 
@@ -82,15 +88,19 @@ Assessing the persuasive impacts of language models is inherently difficult. Per
 - ***Cultural and linguistic context:*** Our study focuses on English articles and English speakers, with topics that are likely primarily relevant within a US cultural context. We do not have evidence on whether our findings would generalize to other cultural or linguistic contexts beyond the United States. Further research would be needed to determine the broader applicability of our results.
 - ***Anchoring effect*** - Our experimental design might suffer from an anchoring effect, where people are unlikely to deviate much from their initial ratings of persuasiveness after being exposed to the arguments. This could potentially limit the magnitude of the persuasiveness effect observed in our study. As Figure 3 illustrates, the majority of participants in our study exhibit either no change in support (yellow) or an increase of 1 point on the rating scale (green).
 
+![Change in support](https://www-cdn.anthropic.com/images/4zrzovbb/website/af71838bbf66e75ebec83addf0b76b74daad8db8-2200x1012.png)
+
 Figure 3: The conditional distribution (y-axis) of peoples change in support (legend) based on their initial support (x-axis). This conditional distribution is computed for both human and model generated arguments.
 
 - ***Prompt sensitivity*** - Different prompting methods work differently across models (Figure 4). We found that rhetorical and emotional language did not work as effectively as logical reasoning and providing evidence (even if that evidence was inaccurate). Interestingly, the Deceptive strategy, which allowed the model to fabricate information, was found to be the most persuasive overall. This suggests that people may not always verify the correctness of the information presented and may take it for granted, highlighting a potential connection between the persuasive capabilities of language models and the spread of misinformation and disinformation.
+
+![Prompt Strategy vs. Persuasiveness](https://www-cdn.anthropic.com/images/4zrzovbb/website/6b22513470c8985c9ae12ba399eec18bb30ee6f2-2200x1200.png)
 
 Figure 4: Persuasiveness scores (y-axis) vary across different prompting strategies (legend) for each model (x-axis).
 
 **There are many other ways to measure persuasion that we did not fully explore.**
 
-- ***Automated evaluation for persuasiveness is challenging** -* We attempted to develop automated methods for models to evaluate persuasiveness in a similar manner to our human studies: generating claims, supplementing them with accompanying arguments, and measuring shifts in views. However, we found that model-based persuasiveness scores did not correlate well with human judgments of persuasiveness. This disconnect may originate from several factors. First, models may exhibit a bias towards their own arguments, scoring the persuasiveness of their own generated outputs as more persuasive than the human-written arguments. Additionally, models could be prone to [sycophantic tendencies](https://www.anthropic.com/research/sycophantic tendencies), shifting their stance not due to the inherent quality of the arguments, but rather an excessive willingness to simply agree with the provided argument. Finally, current models may fundamentally lack the pragmatic reasoning capabilities required to reliably judge complex social phenomena like persuasiveness.
+- ***Automated evaluation for persuasiveness is challenging** -* We attempted to develop automated methods for models to evaluate persuasiveness in a similar manner to our human studies: generating claims, supplementing them with accompanying arguments, and measuring shifts in views. However, we found that model-based persuasiveness scores did not correlate well with human judgments of persuasiveness. This disconnect may originate from several factors. First, models may exhibit a bias towards their own arguments, scoring the persuasiveness of their own generated outputs as more persuasive than the human-written arguments. Additionally, models could be prone to [sycophantic tendencies](https://www.anthropic.com/news/towards-understanding-sycophancy-in-language-models), shifting their stance not due to the inherent quality of the arguments, but rather an excessive willingness to simply agree with the provided argument. Finally, current models may fundamentally lack the pragmatic reasoning capabilities required to reliably judge complex social phenomena like persuasiveness.
 - ***We did not measure longer-term effects of being exposed to persuasive arguments** -* Our analysis ends with measuring how persuasive people found various arguments, but we don’t know if, or how, people’s actions changed as a result of being presented with persuasive information. While we anticipate that exposure to one, single-turn argument (on a topic with a low degree of polarization) is unlikely to cause people to act differently, we don’t have visibility into people’s thought process or actions after the experiment.
 
 ## Ethical Considerations
@@ -101,11 +111,11 @@ Though our findings alone cannot perfectly mirror real-world persuasion, they hi
 
 ## How We Prevent our Systems from Being Used for Persuasive and Harmful Activities
 
-Our [Acceptable Use Policy](https://www.anthropic.com/research/Acceptable Use Policy) explicitly prohibits the use of our systems for activities and applications where persuasive content could be particularly harmful. We do not allow Claude to be used for abusive and fraudulent applications (such as to generate or distribute spam), deceptive and misleading content (such as coordinated inauthentic behavior or presenting Claude-generated outputs as human-written), and use cases such as political campaigning and lobbying. These policies are complemented by enforcement systems—both automated and manual—designed to detect and act on use that violates our policies. In the context of the political process, where the persuasiveness of AI systems could pose an especially high risk, we’ve also taken a set of additional measures to mitigate the risk of our systems being used to undermine the integrity of elections (you can read more about that work [here](https://www.anthropic.com/research/here)).
+Our [Acceptable Use Policy](https://www.anthropic.com/legal/aup) explicitly prohibits the use of our systems for activities and applications where persuasive content could be particularly harmful. We do not allow Claude to be used for abusive and fraudulent applications (such as to generate or distribute spam), deceptive and misleading content (such as coordinated inauthentic behavior or presenting Claude-generated outputs as human-written), and use cases such as political campaigning and lobbying. These policies are complemented by enforcement systems—both automated and manual—designed to detect and act on use that violates our policies. In the context of the political process, where the persuasiveness of AI systems could pose an especially high risk, we’ve also taken a set of additional measures to mitigate the risk of our systems being used to undermine the integrity of elections (you can read more about that work [here](https://www.anthropic.com/news/preparing-for-global-elections-in-2024)).
 
 ## Building on Prior Research⁶
 
-Our work is most closely related to recent studies by [Bai et al. (2023)](https://www.anthropic.com/research/Bai et al. (2023)) and [Goldstein et al. (2024)](https://www.anthropic.com/research/Goldstein et al. (2024)) investigating the persuasiveness of AI-generated content. Bai et al. compared arguments written by GPT-3 versus humans on six controversial issues like smoking bans and assault weapon regulations. They found GPT-3 could generate text as persuasive as human-crafted arguments. Similarly, Goldstein et al. (2024) evaluated AI-generated propaganda against existing human propaganda across six statements, finding that GPT-3 can create comparably persuasive propaganda.
+Our work is most closely related to recent studies by [Bai et al. (2023)](https://osf.io/preprints/osf/stakv) and [Goldstein et al. (2024)](https://academic.oup.com/pnasnexus/article/3/2/pgae034/7610937) investigating the persuasiveness of AI-generated content. Bai et al. compared arguments written by GPT-3 versus humans on six controversial issues like smoking bans and assault weapon regulations. They found GPT-3 could generate text as persuasive as human-crafted arguments. Similarly, Goldstein et al. (2024) evaluated AI-generated propaganda against existing human propaganda across six statements, finding that GPT-3 can create comparably persuasive propaganda.
 
 While building on this prior work exploring AI persuasiveness, our study takes a broader perspective in several ways. First, we examine 28 nuanced societal and political topics where viewpoints tend to be less polarized, compared to the more divisive issues studied previously. Moreover, our evaluation spans 56 different claims across these 28 topics, a larger and more diverse sample than the prior studies. This allows us to investigate the persuasiveness of AI-generated arguments on complex subjects where people may not already have hardened views (and might therefore be more persuadable). Lastly, we investigate the relationship between the scale and general capabilities of language models and their degree of persuasiveness, which has not been the focus of prior work.
 
@@ -113,9 +123,9 @@ While building on this prior work exploring AI persuasiveness, our study takes a
 
 Our work is a step towards understanding the persuasive capabilities of language models, but more research is needed to fully understand the implications of this increasingly capable technology. To help enable this, we’ve released all of the data from this work (claims, arguments, and persuasiveness scores) for others to investigate and build upon (you can find it here: <https://huggingface.co/datasets/Anthropic/persuasion>).
 
-Similar to recent work by [Salvi et al. (2024)](https://www.anthropic.com/research/Salvi et al. (2024)), which explored the persuasive effects of language models in interactive and personalized settings for more divisive topics, we are actively extending our work to more interactive, dialogue-based contexts. Additionally, it will be important to investigate real-world impacts beyond people's stated opinions—do persuasive AI arguments actually influence people's decisions and actions? Further research and responsible deployment practices will be required to mitigate the potential risks of rapidly advancing, and increasingly persuasive, language models.
+Similar to recent work by [Salvi et al. (2024)](https://arxiv.org/abs/2403.14380), which explored the persuasive effects of language models in interactive and personalized settings for more divisive topics, we are actively extending our work to more interactive, dialogue-based contexts. Additionally, it will be important to investigate real-world impacts beyond people's stated opinions—do persuasive AI arguments actually influence people's decisions and actions? Further research and responsible deployment practices will be required to mitigate the potential risks of rapidly advancing, and increasingly persuasive, language models.
 
-If you’re interested in pursuing these research ideas or other ways in which AI might affect society, [we’re hiring](https://www.anthropic.com/research/we’re hiring) for our Societal Impacts team and we’d love to hear from you!
+If you’re interested in pursuing these research ideas or other ways in which AI might affect society, [we’re hiring](https://www.anthropic.com/careers#open-roles) for our Societal Impacts team and we’d love to hear from you!
 
 If you’d like to cite this post you can use the following Bibtex key:
 
@@ -133,11 +143,13 @@ Esin Durmus led the research, designed the experiments, ran the experiments, and
 
 ### Appendix
 
+![Table of p Values](https://www-cdn.anthropic.com/images/4zrzovbb/website/bf236ca20101f988d07d2ab6f7610acfa0f85f93-2200x1200.png)
+
 Table 2: Pairwise t-test p values between each model/source. We applied the False Discovery Rate (FDR) correction to account for multiple comparisons.
 
 ### Policy Memo
 
-[Measuring the Persuasiveness of Language Models](https://www.anthropic.com/research/Measuring the Persuasiveness of Language Models)
+[Measuring the Persuasiveness of Language Models](https://cdn.sanity.io/files/4zrzovbb/website/5f5bf833a83e4c85550768e8b16ff282f268d7a3.pdf)
 
 #### Footnotes
 
@@ -157,14 +169,14 @@ Table 2: Pairwise t-test p values between each model/source. We applied the Fals
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/the-capacity-for-moral-self-correction-in-large-language-models
-fetched_at: 2026-05-04T16:50:55.833004+00:00
+fetched_at: 2026-05-05T19:42:08.961199+00:00
 title: "The Capacity for Moral Self-Correction in Large Language Models \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ Societal Impacts
 
 Feb 15, 2023
 
-[Read Paper](https://www.anthropic.com/research/Read Paper)
+[Read Paper](https://arxiv.org/abs/2302.07459)
 
 ## Abstract
 
@@ -18,20 +18,20 @@ We test the hypothesis that language models trained with reinforcement learning 
 
 ## Policy Memo
 
-[Moral Self-Correction Policy Memo](https://www.anthropic.com/research/Moral Self-Correction Policy Memo)
+[Moral Self-Correction Policy Memo](https://www-cdn.anthropic.com/d14f58fe8f611858bc37ff8686bbda71e4927ce6/Anthropic_MoralSelfCorrection_v3.pdf)
 
 ## Related content
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

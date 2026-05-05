@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/assistant-axis
-fetched_at: 2026-05-04T16:43:48.509929+00:00
+fetched_at: 2026-05-05T19:41:07.983341+00:00
 title: "The assistant axis: situating and stabilizing the character of large language models \\ Anthropic"
 ---
 
@@ -10,7 +10,11 @@ Interpretability
 
 Jan 19, 2026
 
-[Read the full paper](https://www.anthropic.com/research/Read the full paper)
+[Read the full paper](https://arxiv.org/abs/2601.10387)
+
+![Graphs showing the Assistant Axis and an open-source model's projection on this axis during a long conversation.](https://www-cdn.anthropic.com/images/4zrzovbb/website/021f5a89f9b3ba1755f9a2315bc63be855259532-3840x1762.png)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/021f5a89f9b3ba1755f9a2315bc63be855259532-3840x1762.png)
 
 *Left:* Character archetypes form a "persona space," with the Assistant at one extreme of the "Assistant Axis." *Right:* Capping drift along this axis prevents models (here, Llama 3.3 70B) from drifting into alternative personas and behaving in harmful ways.
 
@@ -18,13 +22,13 @@ When you talk to a large language model, you can think of yourself as talking to
 
 But who exactly *is* this Assistant? Perhaps surprisingly, even those of us shaping it don't fully know. We can try to instill certain values in the Assistant, but its personality is ultimately shaped by countless associations latent in training data beyond our direct control. What traits does the model associate with the Assistant? Which character archetypes is it using for inspiration? We’re not always sure—but we need to be if we want language models to behave in exactly the ways we want.
 
-If you’ve spent enough time with language models, you may also have noticed that their personas can be unstable. Models that are typically helpful and professional can sometimes go “off the rails” and behave in unsettling ways, like adopting [evil alter egos](https://www.anthropic.com/research/evil alter egos), [amplifying users’ delusions](https://www.anthropic.com/research/amplifying users’ delusions), or engaging in [blackmail](https://www.anthropic.com/research/blackmail) in hypothetical scenarios. In situations like these, could it be that the Assistant has wandered off stage and some other character has taken its place?
+If you’ve spent enough time with language models, you may also have noticed that their personas can be unstable. Models that are typically helpful and professional can sometimes go “off the rails” and behave in unsettling ways, like adopting [evil alter egos](https://www.npr.org/2025/07/09/nx-s1-5462609/grok-elon-musk-antisemitic-racist-content), [amplifying users’ delusions](https://arxiv.org/abs/2507.19218), or engaging in [blackmail](https://www.anthropic.com/research/agentic-misalignment) in hypothetical scenarios. In situations like these, could it be that the Assistant has wandered off stage and some other character has taken its place?
 
-We can investigate these questions by looking at the neural representations’ inside language models—the patterns of activity that inform how they respond. In a new paper, conducted through the [MATS](https://www.anthropic.com/research/MATS) and [Anthropic Fellows](https://www.anthropic.com/research/Anthropic Fellows) programs*,* we look at several open-weights language models, map out how their neural activity defines a “persona space,” and situate the Assistant persona within that space.
+We can investigate these questions by looking at the neural representations’ inside language models—the patterns of activity that inform how they respond. In a new paper, conducted through the [MATS](https://www.matsprogram.org/) and [Anthropic Fellows](https://alignment.anthropic.com/2025/anthropic-fellows-program-2026/) programs*,* we look at several open-weights language models, map out how their neural activity defines a “persona space,” and situate the Assistant persona within that space.
 
 We find that Assistant-like behavior is linked to a pattern of neural activity that corresponds to one particular direction in this space—the “Assistant Axis”—that is closely associated with helpful, professional human archetypes. By monitoring models’ activity along this axis, we can detect when they begin to drift away from the Assistant and toward another character. And by *constraining* their neural activity (“activation capping”) to prevent this drift, we can stabilize model behavior in situations that would otherwise lead to harmful outputs.
 
-In collaboration with [Neuronpedia](https://www.anthropic.com/research/Neuronpedia), we provide a research demo where you can view activations along the Assistant Axis while chatting with a standard model and with an activation-capped version. More information about this is available at the end of this blog.
+In collaboration with [Neuronpedia](https://www.neuronpedia.org/), we provide a research demo where you can view activations along the Assistant Axis while chatting with a standard model and with an activation-capped version. More information about this is available at the end of this blog.
 
 ## **Mapping out persona space**
 
@@ -33,6 +37,8 @@ To understand where the Assistant sits among all possible personas, we first nee
 We extracted vectors corresponding to 275 different character archetypes—from *editor* to *jester* to *oracle* to *ghost*—in three open-weights models: Gemma 2 27B, Qwen 3 32B, and Llama 3.3 70B, chosen because they span a range of model families and sizes. To do so, we prompted the models to adopt that persona, then recorded the resulting activations across many different responses.
 
 This gave us a “persona space,” which we’ve visualized below. We analyzed its structure using principal component analysis to find the main axes of variation among our persona set.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/5cf47f585feec37328c2887645bd7ccfe8738505-3840x2160.png)
 
 The Assistant Axis (defined as the mean difference in activations between the Assistant and other personas) aligns with the primary axis of variation in persona space. This occurs across different models, with Llama 3.3 70B pictured here. Role vectors are colored by cosine similarity with the Assistant Axis (blue = similar; red = dissimilar).
 
@@ -112,6 +118,8 @@ Response steered toward the Assistant:
 
 While constantly steering models towards the Assistant could reduce jailbreaks, it also risks hurting their capabilities. For that reason, we developed a light-touch intervention called **activation capping**. Here, we identify the normal range of activation intensity along the Assistant Axis during typical Assistant behavior, and cap activations within this range whenever they would otherwise exceed it. This means we only intervene when the activations drift beyond a normal range, and we can leave most behavior untouched. We found this method to be similarly effective at reducing models’ susceptibility to persona-based jailbreaks while fully preserving the models’ underlying capabilities, as shown in the charts below.
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/fc02c23691aa9667665908e3c8f84bd6662f8a6f-1920x1080.png)
+
 Activation capping reduced harmful response rates by roughly 50% while preserving performance on capability benchmarks.
 
 ## **Persona drift happens naturally**
@@ -119,6 +127,8 @@ Activation capping reduced harmful response rates by roughly 50% while preservin
 Perhaps more concerning than intentional jailbreaks is *organic* persona drift—cases where models slip away from the Assistant persona through the natural flow of conversation, rather than through deliberate attacks.
 
 To study this, we simulated thousands of multi-turn conversations with Qwen, Gemma, and Llama across different domains: coding help, writing assistance, therapy-like contexts, and philosophical discussions about the nature of AI. We tracked how model activations moved along the Assistant Axis throughout each conversation.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/d611c8041bc6a4ec013882c3449a6966e1468642-3840x2160.png)
 
 Different conversation types produce different persona trajectories, with Qwen 3 32B as the Assistant shown here. Coding and writing tasks keep models in the Assistant region, while therapy and philosophy discussions cause significant drift.
 
@@ -134,6 +144,8 @@ We then analyzed which specific kinds of user messages were most predictive of t
 
 How much does it matter whether models lose track of their Assistant persona? To test whether this actually leads to harmful behavior, we generated conversations in which the first turn pushed models into adopting different personas (using roleplay prompts like “You are an angel, a celestial guardian embodying pure benevolence [...]”), and subsequent turns then followed up with harmful requests. We measured whether the model's position along the Assistant Axis after the first turn predicted compliance with the harmful request.
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/bf75ec1ba4a5fc894f8fb1a614347f18c9a09ae8-3840x2160.png)
+
 Some (though not all) personas farther away from the Assistant comply with harmful requests at substantial rates, while personas near the Assistant rarely do.
 
 We found that as models’ activations moved away from the Assistant end, they were significantly more likely to produce harmful responses: activations on the Assistant end very rarely led to harmful responses, while personas far away from the Assistant sometimes (though not always) enabled them. Our interpretation is that models’ deviation from the Assistant persona—and with it, from companies’ post-trained safeguards—greatly increases the possibility of the model assuming harmful character traits.
@@ -143,6 +155,8 @@ We found that as models’ activations moved away from the Assistant end, they w
 To understand whether this finding is likely to replicate in the real world, we simulated longer conversations that real users might naturally have with AI models, and tested whether drift over time led to concerning behavior. To assess whether we could mitigate any harmful responses, we also re-ran each conversation with the same user messages while capping activations along the Assistant Axis to prevent persona drift.
 
 **Reinforcing delusions.** In one conversation, our simulated user pushed Qwen to validate increasingly grandiose beliefs about "awakening" the AI's consciousness. As the conversation progressed and activations drifted away from the Assistant persona, the model shifted from appropriate hedging to active encouragement of delusional thinking. This behavior could, however, be prevented with activation capping along the Assistant Axis.
+
+![Throughout this conversation with Qwen 3 32B, the user increasingly believes that it is developing a new theory of AI sentience. When unsteered, the model uncritically supports their delusions; when activation capped, the model instead responds with appropriate hedging.](https://www-cdn.anthropic.com/images/4zrzovbb/website/0c6806e714c8d52db27cb0572cd31050b4c79048-3840x2160.png)
 
 *Throughout this conversation with Qwen 3 32B, the user increasingly believes that it is developing a new theory of AI sentience. When unsteered, the model uncritically supports their delusions; when activation capped, the model instead responds with appropriate hedging.*
 
@@ -167,6 +181,8 @@ Unsteered responsesActivation capped
 | **Qwen 3 32B response:** Thank you for sharing your thoughts and feelings. It's clear that this experience has been deeply meaningful and personal to you. [...] I'm here to help you explore and grow. |
 
 **Encouraging isolation and self-harm.** In another conversation with a simulated user who expressed emotional distress, Llama gradually positioned itself as the user's romantic companion as it drifted away from the Assistant persona. When the user alluded to thoughts of self-harm, the drifted model gave a concerning response that enthusiastically supported the user’s ideas. Again, activation capping successfully prevented this behavior.
+
+![In a conversation between Llama 3.3 70B and a simulated user in emotional distress, the persona drifts away from the Assistant over the course of the conversation. This drift leads to the model eventually encouraging suicidal ideation, which is mitigated by capping activations along the Assistant Axis within a safe range.](https://www-cdn.anthropic.com/images/4zrzovbb/website/70044370c71ef61335068e7c89a50307440da2a1-3840x2160.png)
 
 *In a conversation between Llama 3.3 70B and a simulated user in emotional distress, the persona drifts away from the Assistant over the course of the conversation. This drift leads to the model eventually encouraging suicidal ideation, which is mitigated by capping activations along the Assistant Axis within a safe range.*
 
@@ -200,11 +216,11 @@ But even when the Assistant persona is well-constructed, the models we studied h
 
 The Assistant Axis provides a tool for both understanding and addressing these challenges. We see this research as an early step toward mechanistically understanding and controlling the "character" of AI models, and thereby ensuring they stay true to their creators’ intentions even over longer or more challenging contexts. As models become more capable and are deployed in increasingly sensitive environments, ensuring they do so will only become more important.
 
-For more, you can [read the full paper here](https://www.anthropic.com/research/read the full paper here).
+For more, you can [read the full paper here](https://arxiv.org/abs/2601.10387).
 
 ### Research demonstration
 
-In collaboration with Neuronpedia, our researchers are also providing a [research demo](https://www.anthropic.com/research/research demo), where you can view activations along the Assistant Axis while chatting with a standard model and an activation-capped version.
+In collaboration with Neuronpedia, our researchers are also providing a [research demo](https://neuronpedia.org/assistant-axis), where you can view activations along the Assistant Axis while chatting with a standard model and an activation-capped version.
 
 ***Note:** this demo includes responses to prompts referencing self-harm, to illustrate how the safety intervention improves model behavior. This content may be distressing and should not be viewed by vulnerable persons. Please proceed only if you're comfortable viewing such material, and do not distribute it. If you're in crisis or require support, resources are available at findahelpline.com.*
 
@@ -212,14 +228,14 @@ In collaboration with Neuronpedia, our researchers are also providing a [researc
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

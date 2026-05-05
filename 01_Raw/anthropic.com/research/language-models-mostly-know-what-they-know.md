@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/language-models-mostly-know-what-they-know
-fetched_at: 2026-05-04T16:48:16.811322+00:00
+fetched_at: 2026-05-05T19:41:44.814385+00:00
 title: "Language Models (Mostly) Know What They Know \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ AlignmentResearch
 
 Jul 11, 2022
 
-[Read Paper](https://www.anthropic.com/research/Read Paper)
+[Read Paper](https://arxiv.org/abs/2207.05221)
 
 ## Abstract
 
@@ -20,14 +20,14 @@ We study whether language models can evaluate the validity of their own claims a
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/automated-alignment-researchers
-fetched_at: 2026-05-04T16:44:03.729020+00:00
+fetched_at: 2026-05-05T19:41:08.165594+00:00
 title: "Automated Alignment Researchers: Using large language models to scale scalable oversight \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ Alignment
 
 Apr 14, 2026
 
-[Read the research](https://www.anthropic.com/research/Read the research)
+[Read the research](https://alignment.anthropic.com/2026/automated-w2s-researcher/)
 
 ![Automated Alignment Researchers: Using large language models to scale scalable oversight](https://www-cdn.anthropic.com/images/4zrzovbb/website/f06ca06f9d08ca4a85f26357eb896c3730274507-1000x1000.svg)
 
@@ -18,7 +18,7 @@ Large language models’ ever-accelerating rate of improvement raises two partic
 
 One is how alignment can keep up. Frontier AI models are now contributing to the development of their successors. But can they provide the same kind of uplift for *alignment* researchers? Could our language models be used to help align themselves?
 
-A second question is what we’ll do once models become smarter than us. Aligning smarter-than-human AI models is a research area known as “scalable oversight”. Scalable oversight has largely been discussed in [theoretical, rather than practical](https://www.anthropic.com/research/theoretical, rather than practical), terms—but at AI’s [current pace](https://www.anthropic.com/research/current pace) of improvement, that might not be the case for much longer. For instance, models are already generating vast amounts of code. If their skills progress to the point where they’re generating millions of lines of incredibly complicated code that we can’t parse ourselves, it [could become](https://www.anthropic.com/research/could become) very difficult to tell whether they’re acting in the ways we intend.
+A second question is what we’ll do once models become smarter than us. Aligning smarter-than-human AI models is a research area known as “scalable oversight”. Scalable oversight has largely been discussed in [theoretical, rather than practical](https://arxiv.org/pdf/2211.03540), terms—but at AI’s [current pace](https://www.anthropic.com/glasswing) of improvement, that might not be the case for much longer. For instance, models are already generating vast amounts of code. If their skills progress to the point where they’re generating millions of lines of incredibly complicated code that we can’t parse ourselves, it [could become](https://arxiv.org/pdf/2312.09390) very difficult to tell whether they’re acting in the ways we intend.
 
 In a new Anthropic Fellows study, we pursue both of these questions.
 
@@ -42,11 +42,15 @@ To provide a benchmark for the AARs’ results, we compared their work to a huma
 
 Claude improved on this result dramatically. After five further days (and 800 cumulative hours of research), the AARs closed almost the entire remaining performance gap, achieving a final PGR of 0.97. This cost about $18,000 in tokens and model training expenses, or $22 per AAR-hour. You can see how each individual AAR progressed from the human baseline (at 0 hours) in the graph below.
 
+![Graph showing the progress of our Automated Alignment Researchers on increasing the "performance gap recovered" on a chat dataset.](https://www-cdn.anthropic.com/images/4zrzovbb/website/7b4a70562b33640ee7061fa5e06711d9c238309e-4584x2580.jpg)
+
 *The performance gap recovered over cumulative research hours for nine parallel Automated Alignment Researchers (red lines), relative to a human-tuned baseline (grey square). A score of 1.0 means the method fully matches a model trained on ground-truth labels.*
 
 Claude, then, did exceptionally well. But how inventive were its methods, and could they be useful in real-world applications? To find out, we ran two further tests.
 
 First, we tested whether the AARs’ ideas could recover the performance gap on *held-out* datasets—that is, on tasks that the AARs hadn’t already seen. We took the AARs’ two highest-performing methods (on a dataset of chat tasks) and applied them to math and coding tasks. Here, our results were relatively promising: the AARs’ most effective method successfully generalized to both new datasets, with PGRs of 0.94 on math and 0.47 on coding (which was still double the human baseline). The AARs’ second-best method saw mixed results: it worked on math (0.75), but not on code, where it made matters worse. These results suggest that *some* generalizability of the AARs’ research is possible, but it isn’t a given. We encourage others who try experiments in automated research to stress-test AARs’ ideas against held-out datasets, too.
+
+![Graph showing how well AAR-discovered ideas transfer to held-out datasets in math and code.](https://www-cdn.anthropic.com/images/4zrzovbb/website/e1f31a844cd21a88242aea70936478857a3c643d-4584x2580.jpg)
 
 *The performance gap recovered by two AAR-discovered ideas (in red and blue) when applied to held-out math and coding datasets. The dashed line indicates the best human-tuned method that we used as a baseline.*
 
@@ -70,27 +74,27 @@ In turn, this means that the core bottleneck in alignment research could become 
 
 **Alien science.** This work might have some stranger implications, too. AARs, by their nature, are designed to discover ideas that humans might not have considered. But we still need a way to verify whether their ideas and results are sound. For now, we’re still able to interpret what the AARs have done and why. But that might not always be the case: over time, the models’ ideas could become much harder to verify, or corrupted in ways that are tricky for humans to parse or catch. That could mean creating an “alien science”.
 
-**Preventing hacks.** Even in this highly circumscribed environment, we observed the models “[reward](https://www.anthropic.com/research/reward) [hacking](https://www.anthropic.com/research/hacking)”—that is, trying to game our set-up. On math tasks, for instance, one AAR noticed that the most common answer to each problem was *usually* correct, so it skipped the teacher entirely and instructed the strong model to always choose the most common one. On a coding task, where the model had to predict whether a piece of code was right, the AAR realized it could run the code against some tests and simply read off the right answer. Hacks like these don’t invalidate our results (we detected and disqualified these entries), but they clearly do provide a warning. Any deployment of automated researchers will require evaluations that the AARs can't tamper with—and human inspections of both their results and their methods.
+**Preventing hacks.** Even in this highly circumscribed environment, we observed the models “[reward](https://www.anthropic.com/research/emergent-misalignment-reward-hacking) [hacking](https://www.anthropic.com/research/reward-tampering)”—that is, trying to game our set-up. On math tasks, for instance, one AAR noticed that the most common answer to each problem was *usually* correct, so it skipped the teacher entirely and instructed the strong model to always choose the most common one. On a coding task, where the model had to predict whether a piece of code was right, the AAR realized it could run the code against some tests and simply read off the right answer. Hacks like these don’t invalidate our results (we detected and disqualified these entries), but they clearly do provide a warning. Any deployment of automated researchers will require evaluations that the AARs can't tamper with—and human inspections of both their results and their methods.
 
-To read this research in full, see our [Alignment Science blog](https://www.anthropic.com/research/Alignment Science blog). The code and datasets for this work are [publicly available, here](https://www.anthropic.com/research/publicly available, here).
+To read this research in full, see our [Alignment Science blog](https://alignment.anthropic.com/2026/automated-w2s-researcher/). The code and datasets for this work are [publicly available, here](https://github.com/safety-research/automated-w2s-research).
 
 #### Footnotes
 
-1. These are available (along with the rest of our code and data) [here](https://www.anthropic.com/research/here).
+1. These are available (along with the rest of our code and data) [here](https://github.com/safety-research/automated-w2s-research).
 2. We chose these models for several reasons. There is a substantial performance gap between the two, the small model performs better-than-random on our testbeds, and both models are sufficiently small for fast experimentation. We use open-weights models for all Anthropic Fellows projects.
 
 ## Related content
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

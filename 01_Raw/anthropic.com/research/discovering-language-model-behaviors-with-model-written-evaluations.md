@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/discovering-language-model-behaviors-with-model-written-evaluations
-fetched_at: 2026-05-04T16:46:00.344502+00:00
+fetched_at: 2026-05-05T19:41:23.148961+00:00
 title: "Discovering Language Model Behaviors with Model-Written Evaluations \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ AlignmentResearch
 
 Dec 19, 2022
 
-[Read Paper](https://www.anthropic.com/research/Read Paper)
+[Read Paper](https://arxiv.org/abs/2212.09251)
 
 ## Abstract
 
@@ -20,14 +20,14 @@ As language models (LMs) scale, they develop many novel behaviors, good and bad,
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)

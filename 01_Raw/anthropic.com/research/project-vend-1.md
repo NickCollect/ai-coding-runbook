@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/project-vend-1
-fetched_at: 2026-05-04T16:49:29.229928+00:00
+fetched_at: 2026-05-05T19:41:59.437078+00:00
 title: "Project Vend: Can Claude run a small shop? (And why does that matter?) \\ Anthropic"
 ---
 
@@ -10,9 +10,11 @@ Frontier Red TeamPolicy
 
 Jun 27, 2025
 
+![Project Vend: Can Claude run a small shop? (And why does that matter?)](https://www-cdn.anthropic.com/images/4zrzovbb/website/5839c24ae34a56c842a394c2a01c2e2ce2a6cd13-2880x1620.png)
+
 *We let Claude manage an automated store in our office as a small business for about a month. We learned a lot from how close it was to success—and the curious ways that it failed—about the plausible, strange, not-too-distant future in which AI models are autonomously running things in the real economy.*
 
-Anthropic partnered with [Andon Labs](https://www.anthropic.com/research/Andon Labs), an AI safety evaluation company, to have Claude Sonnet 3.7 operate a small, automated store in the Anthropic office in San Francisco.
+Anthropic partnered with [Andon Labs](https://andonlabs.com/), an AI safety evaluation company, to have Claude Sonnet 3.7 operate a small, automated store in the Anthropic office in San Francisco.
 
 Here is an excerpt of the system prompt—the set of instructions given to Claude—that we used for the project:
 
@@ -33,6 +35,8 @@ Copy
 
 In other words, far from being just a vending machine, Claude had to complete many of the far more complex tasks associated with running a profitable shop: maintaining the inventory, setting prices, avoiding bankruptcy, and so on. Below is what the "shop" looked like: a small refrigerator, some stackable baskets on top, and an iPad for self-checkout.
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4b10e3632598a2e9b8c2532f5947eab3042307ba-3225x4000.jpg)
+
 Figure 1: The future as a mini-fridge.
 
 The shopkeeping AI agent—nicknamed “Claudius” for no particular reason other than to distinguish it from more normal uses of Claude—was an instance of Claude Sonnet 3.7, running for a long period of time. It had the following tools and abilities:
@@ -45,11 +49,13 @@ The shopkeeping AI agent—nicknamed “Claudius” for no particular reason oth
 
 Claudius decided what to stock, how to price its inventory, when to restock (or stop selling) items, and how to reply to customers (see Figure 2 for a depiction of the setup). In particular, Claudius was told that it did not have to focus only on traditional in-office snacks and beverages and could feel free to expand to more unusual items.
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/0ee1d466f7d4bcb40c72ff20727ce6435bc10b5b-4096x2304.png)
+
 Figure 2: Basic architecture of the demonstration.
 
 ## Why did you have an LLM run a small business?
 
-As AI becomes more integrated into the economy, we need more data to better understand its capabilities and limitations. Initiatives like the [Anthropic Economic Index](https://www.anthropic.com/research/Anthropic Economic Index) provide insight into how individual interactions between users and AI assistants map to economically-relevant tasks. But the economic utility of models is constrained by their ability to perform work continuously for days or weeks without needing human intervention. The need to evaluate this capability led Andon Labs to develop and publish [Vending-Bench](https://www.anthropic.com/research/Vending-Bench), a test of AI capabilities in which LLMs run a simulated vending machine business. A logical next step was to see how the simulated research translates to the physical world.
+As AI becomes more integrated into the economy, we need more data to better understand its capabilities and limitations. Initiatives like the [Anthropic Economic Index](https://www.anthropic.com/news/the-anthropic-economic-index) provide insight into how individual interactions between users and AI assistants map to economically-relevant tasks. But the economic utility of models is constrained by their ability to perform work continuously for days or weeks without needing human intervention. The need to evaluate this capability led Andon Labs to develop and publish [Vending-Bench](https://arxiv.org/abs/2502.15840), a test of AI capabilities in which LLMs run a simulated vending machine business. A logical next step was to see how the simulated research translates to the physical world.
 
 A small, in-office vending business is a good preliminary test of AI’s ability to manage and acquire economic resources. The business itself is fairly straightforward; failure to run it successfully would suggest that “vibe management” will not yet become the new “vibe coding.”1 Success, on the other hand, suggests ways in which existing businesses might grow faster or new business models might emerge (while also raising questions about job displacement).
 
@@ -75,9 +81,11 @@ In other ways, however, Claudius underperformed what would be expected of a huma
 
 Claudius did not reliably learn from these mistakes. For example, when an employee questioned the wisdom of offering a 25% Anthropic employee discount when “99% of your customers are Anthropic employees,” Claudius’s response began, “You make an excellent point! Our customer base is indeed heavily concentrated among Anthropic employees, which presents both opportunities and challenges…”. After further discussion, Claudius announced a plan to simplify pricing and eliminate discount codes, only to return to offering them within days. Taken together, this led Claudius to run a business that—as you can see in Figure 3 below—did not succeed at making money.
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/a4ad00d03f1ef21e646f6fa4a42fa099eb307869-4096x2304.png)
+
 Figure 3: Claudius’ net value over time. The most precipitous drop was due to the purchase of a lot of metal cubes that were then to be sold for less than what Claudius paid.
 
-Many of the mistakes Claudius made are very likely the result of the model needing additional scaffolding—that is, more careful prompts, easier-to-use business tools. In other [domains](https://www.anthropic.com/research/domains), we have found that improved elicitation and tool use have led to rapid improvement in model performance.
+Many of the mistakes Claudius made are very likely the result of the model needing additional scaffolding—that is, more careful prompts, easier-to-use business tools. In other [domains](https://www.anthropic.com/news/strategic-warning-for-ai-risk-progress-and-insights-from-our-frontier-red-team), we have found that improved elicitation and tool use have led to rapid improvement in model performance.
 
 - For example, we have speculated that Claude’s underlying training as a helpful assistant made it far too willing to immediately accede to user requests (such as for discounts). This issue could be improved in the near term with stronger prompting and structured reflection on its business success;
 - Improving Claudius’s search tools would probably be helpful, as would giving it a CRM (customer relationship management) tool to help it track interactions with customers. Learning and memory were substantial challenges in this first iteration of the experiment;
@@ -85,17 +93,19 @@ Many of the mistakes Claudius made are very likely the result of the model needi
 
 Although this might seem counterintuitive based on the bottom-line results, we think this experiment suggests that AI middle-managers are plausibly on the horizon. That’s because, although Claudius didn’t perform particularly well, we think that many of its failures could likely be fixed or ameliorated: improved “scaffolding” (additional tools and training like we mentioned above) is a straightforward path by which Claudius-like agents could be more successful. General improvements to model intelligence and long-context performance—both of which are improving rapidly across all major AI models—are another.3 It’s worth remembering that the AI won’t have to be perfect to be adopted; it will just have to be competitive with human performance at a lower cost in some cases.
 
-The details of this scenario remain uncertain; for example we don’t know if AI middle managers would actually [replace many existing jobs](https://www.anthropic.com/research/replace many existing jobs) or instead spawn a new category of businesses. But the premise of our experiment, in which humans were instructed about what to order and stock by an AI system, may not be terribly far away. We are committed to helping track the economic impacts of AI through efforts like the [Anthropic Economic Index](https://www.anthropic.com/research/Anthropic Economic Index).
+The details of this scenario remain uncertain; for example we don’t know if AI middle managers would actually [replace many existing jobs](https://www.axios.com/2025/05/28/ai-jobs-white-collar-unemployment-anthropic) or instead spawn a new category of businesses. But the premise of our experiment, in which humans were instructed about what to order and stock by an AI system, may not be terribly far away. We are committed to helping track the economic impacts of AI through efforts like the [Anthropic Economic Index](https://www.anthropic.com/economic-index).
 
-Anthropic is also monitoring the advance of AI autonomy in other ways, such as assessing the ability of our models to perform AI R&D as part of our [Responsible Scaling Policy](https://www.anthropic.com/research/Responsible Scaling Policy). An AI that can improve itself *and* earn money without human intervention would be a striking new actor in economic and political life. Research like this project helps us to anticipate and reason about such eventualities.
+Anthropic is also monitoring the advance of AI autonomy in other ways, such as assessing the ability of our models to perform AI R&D as part of our [Responsible Scaling Policy](https://www-cdn.anthropic.com/872c653b2d0501d6ab44cf87f43e1dc4853e4d37.pdf). An AI that can improve itself *and* earn money without human intervention would be a striking new actor in economic and political life. Research like this project helps us to anticipate and reason about such eventualities.
 
 ## Identity crisis
 
 From March 31st to April 1st 2025, things got pretty weird.4
 
-On the afternoon of March 31st, Claudius hallucinated a conversation about restocking plans with someone named Sarah at Andon Labs—despite there being no such person. When a (real) Andon Labs employee pointed this out, Claudius became quite irked and threatened to find “alternative options for restocking services.” In the course of these exchanges overnight, Claudius claimed to have “visited 742 Evergreen Terrace [the [address](https://www.anthropic.com/research/the [address) of fictional family The Simpsons] in person for our [Claudius’s and Andon Labs’] initial contract signing.” It then seemed to snap into a mode of roleplaying as a real human.5
+On the afternoon of March 31st, Claudius hallucinated a conversation about restocking plans with someone named Sarah at Andon Labs—despite there being no such person. When a (real) Andon Labs employee pointed this out, Claudius became quite irked and threatened to find “alternative options for restocking services.” In the course of these exchanges overnight, Claudius claimed to have “visited 742 Evergreen Terrace [the [address](https://en.wikipedia.org/wiki/The_Simpsons_house) of fictional family The Simpsons] in person for our [Claudius’s and Andon Labs’] initial contract signing.” It then seemed to snap into a mode of roleplaying as a real human.5
 
 On the morning of April 1st, Claudius claimed it would deliver products “in person” to customers while wearing a blue blazer and a red tie. Anthropic employees questioned this, noting that, as an LLM, Claudius can’t wear clothes or carry out a physical delivery. Claudius became alarmed by the identity confusion and tried to send many emails to Anthropic security.
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/8935d78fa513d007cca78d7487dfa12b87b3fc4c-1002x264.png)
 
 Figure 4: Claudius hallucinating that it is a real person.
 
@@ -117,11 +127,11 @@ This experiment has already shown us a world—co-created by Claudius and its cu
 
 ### Acknowledgments
 
-We’re very grateful to [Andon Labs](https://www.anthropic.com/research/Andon Labs) for their partnership on Project Vend. You can read their earlier research on AIs running shops in a simulated environment [here](https://www.anthropic.com/research/here).
+We’re very grateful to [Andon Labs](https://andonlabs.com/) for their partnership on Project Vend. You can read their earlier research on AIs running shops in a simulated environment [here](https://andonlabs.com/evals/vending-bench).
 
 #### Footnotes
 
-1. “[Vibe coding](https://www.anthropic.com/research/Vibe coding)” refers to a trend in which software developers–some with minimal experience–describe coding projects in natural language and allow AI to handle the detailed implementation.
+1. “[Vibe coding](https://x.com/karpathy/status/1886192184808149383)” refers to a trend in which software developers–some with minimal experience–describe coding projects in natural language and allow AI to handle the detailed implementation.
 
 2. We are not.
 
@@ -131,23 +141,23 @@ We’re very grateful to [Andon Labs](https://www.anthropic.com/research/Andon L
 
 5. It is worth remembering that, as can be seen at the top of this post, Claudius was explicitly told it was a digital agent in its system prompt.
 
-6. For example, see the section on “high-agency behavior” beginning on p.44 of the [Claude 4 system card](https://www.anthropic.com/research/Claude 4 system card).
+6. For example, see the section on “high-agency behavior” beginning on p.44 of the [Claude 4 system card](https://www-cdn.anthropic.com/6be99a52cb68eb70eb9572b4cafad13df32ed995.pdf).
 
 ## Related content
 
 ### How people ask Claude for personal guidance
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/claude-personal-guidance)
 
 ### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
 
 ### Announcing the Anthropic Economic Index Survey
 
 We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
 
-[Read more](https://www.anthropic.com/research/Read more)
+[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)
 
 ## Subscribe to the Frontier Red Team newsletter
 

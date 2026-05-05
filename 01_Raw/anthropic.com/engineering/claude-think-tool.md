@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/engineering/claude-think-tool
-fetched_at: 2026-05-04T16:23:28.341732+00:00
+fetched_at: 2026-05-05T19:40:53.526313+00:00
 title: "The \"think\" tool: Enabling Claude to stop and think \\ Anthropic"
 ---
 
-[Engineering at Anthropic](https://www.anthropic.com/engineering/Engineering at Anthropic)
+[Engineering at Anthropic](https://www.anthropic.com/engineering)
 
 ![Abstract shapes illustrating Anthropic's Engineering Blog](https://www-cdn.anthropic.com/images/4zrzovbb/website/0baf46071c5ff97684a8dfe51e90f27ef27c1cef-2554x2554.svg)
 
@@ -22,7 +22,7 @@ A new tool that improves Claude's complex problem-solving performance
 
 As we continue to enhance Claude's complex problem-solving abilities, we've discovered a particularly effective approach: a "think" tool that creates dedicated space for structured thinking during complex tasks.
 
-This simple yet powerful technique—which, as we’ll explain below, is different from Claude’s new “[extended thinking](https://www.anthropic.com/engineering/extended thinking)” capability (see here for [extended thinking implementation details](https://www.anthropic.com/engineering/extended thinking implementation details))—has resulted in remarkable improvements in Claude's agentic tool use ability. This includes following policies, making consistent decisions, and handling multi-step problems, all with minimal implementation overhead.
+This simple yet powerful technique—which, as we’ll explain below, is different from Claude’s new “[extended thinking](https://www.anthropic.com/research/visible-extended-thinking)” capability (see here for [extended thinking implementation details](https://platform.claude.com/docs/en/build-with-claude/extended-thinking))—has resulted in remarkable improvements in Claude's agentic tool use ability. This includes following policies, making consistent decisions, and handling multi-step problems, all with minimal implementation overhead.
 
 In this post, we'll explore how to implement the “think” tool on different applications, sharing practical guidance for developers based on verified benchmark results.
 
@@ -36,7 +36,7 @@ This makes the “think” tool more suitable for cases where Claude does not ha
 
 We recommend using extended thinking for simpler tool use scenarios like non-sequential tool calls or straightforward instruction following. Extended thinking is also useful for use cases, like coding, math, and physics, when you don’t need Claude to call tools. The “think” tool is better suited for when Claude needs to call complex tools, analyze tool outputs carefully in long chains of tool calls, navigate policy-heavy environments with detailed guidelines, or make sequential decisions where each step builds on previous ones and mistakes are costly.
 
-Here's a sample implementation using the standard tool specification format that comes from [τ-Bench](https://www.anthropic.com/engineering/τ-Bench):
+Here's a sample implementation using the standard tool specification format that comes from [τ-Bench](https://arxiv.org/abs/2406.12045):
 
 ```
 {
@@ -82,6 +82,8 @@ The results showed dramatic improvements when Claude 3.7 effectively used the "t
 
 - **Airline domain**: The "think" tool with an optimized prompt achieved 0.570 on the pass^1 metric, compared to just 0.370 for the baseline—a 54% relative improvement;
 - **Retail domain**: The "think" tool alone achieves 0.812, compared to 0.783 for the baseline.
+
+![A line graph showing the performance of Claude 3.7 Sonnet on the "airline" domain of the Tau-Bench eval](https://www-cdn.anthropic.com/images/4zrzovbb/website/ff91e5c84be59ae71306bcc60adba9affed86484-2200x1300.jpg)
 
 Claude 3.7 Sonnet's performance on the "airline" domain of the Tau-Bench eval under four different configurations.
 
@@ -145,9 +147,11 @@ Copy
 
 What's particularly interesting is how the different approaches compared. Using the “think” tool with the optimized prompt achieved significantly better results over extended thinking mode (which showed similar performance to the unprompted “think” tool). Using the "think" tool alone (without prompting) improved performance over baseline, but still fell short of the optimized approach.
 
-The combination of the "think" tool with optimized prompting delivered the strongest performance by a significant margin, likely due to the high complexity of the [airline policy](https://www.anthropic.com/engineering/airline policy) part of the benchmark, where the model benefitted the most from being given examples of how to “think.”
+The combination of the "think" tool with optimized prompting delivered the strongest performance by a significant margin, likely due to the high complexity of the [airline policy](https://github.com/sierra-research/tau-bench/blob/main/tau_bench/envs/airline/wiki.md) part of the benchmark, where the model benefitted the most from being given examples of how to “think.”
 
 In the retail domain, we also tested various configurations to understand the specific impact of each approach
+
+![Line graph showing the performance of Claude 3.7 Sonnet on the "retail" domain of the Tau-Bench eval](https://www-cdn.anthropic.com/images/4zrzovbb/website/5819616b4cc109d30f1a7d47ec8a32a6b839637b-7638x4513.jpg)
 
 Performance of Claude 3.7 Sonnet on the "retail" domain of the Tau-Bench eval under three different configurations.
 
@@ -161,7 +165,7 @@ Claude 3.7 Sonnet's performance on the "Retail" domain of the Tau-Bench eval
 
 Evaluation results across three different configurations. Scores are proportions.
 
-The "think" tool achieved the highest pass^1 score of 0.812 even without additional prompting. The [retail policy](https://www.anthropic.com/engineering/retail policy) is noticeably easier to navigate compared to the airline domain, and Claude was able to improve just by having a space to think without further guidance.
+The "think" tool achieved the highest pass^1 score of 0.812 even without additional prompting. The [retail policy](https://github.com/sierra-research/tau-bench/blob/main/tau_bench/envs/retail/wiki.md) is noticeably easier to navigate compared to the airline domain, and Claude was able to improve just by having a space to think without further guidance.
 
 #### Key Insights from τ-Bench Analysis
 
