@@ -1,96 +1,166 @@
-# AI Coding Runbook · 项目手册（Master Guide）
+# AI Coding Runbook
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/NickCollect/ai-coding-runbook)](https://github.com/NickCollect/ai-coding-runbook/commits/main)
+[![Repo size](https://img.shields.io/github/repo-size/NickCollect/ai-coding-runbook)](https://github.com/NickCollect/ai-coding-runbook)
+[![GHA: refresh-raw](https://github.com/NickCollect/ai-coding-runbook/actions/workflows/refresh-raw.yml/badge.svg)](https://github.com/NickCollect/ai-coding-runbook/actions/workflows/refresh-raw.yml)
+[![Stars](https://img.shields.io/github/stars/NickCollect/ai-coding-runbook?style=social)](https://github.com/NickCollect/ai-coding-runbook/stargazers)
 
 [English](./README.en.md) | **中文**
 
-> **写给任何 LLM 和未来失忆的人**——下次任何 LLM 或人打开这个项目却不知它怎么工作时，**先读这一份**。
-> 项目所有规则、踩过的坑、维护方法都在这里。`CLAUDE.md` / `AGENTS.md` / `system_instructions.md` 都是这份的子集 / 引用。
+> **多厂商 AI 编程工具知识库**：把 Claude Code / Cursor / Codex CLI / OpenAI / Gemini 五家官方文档每周自动抓 + LLM 加工成可查询 wiki，专门设计成给 AI agent 当 long-term context。
 
 ---
 
-## 一、这个项目是干啥的
+## 这个项目解决什么问题
 
-**一句话**：把 Anthropic、OpenAI、Google、Cursor 等主流 AI 工具的官方文档自动抓回来，由 LLM 加工成一个**可查询 + 自带 cheatsheet**的多厂商知识库。
+如果你 ——
 
-**覆盖来源**：
-- **Anthropic / Claude**：docs.claude.com、anthropic.com blog/research、anthropics + modelcontextprotocol GitHub repos
-- **OpenAI / Codex**：docs.openai.com、openai/codex GitHub repo、openai/model_spec
-- **Google Gemini**：ai.google.dev Gemini API 文档
-- **Cursor IDE**：cursor.com/docs（llms.txt 全量）
+- 重度用 Claude Code / Cursor / Codex CLI，但每周都要追各家 release notes / 新 feature
+- 想跨厂商对比（"我该用 Skills 还是 MCP server？Cursor 的 Rules 跟 Claude 的 CLAUDE.md 一样吗？"），但官方站只讲自家
+- 想给你的 AI agent 喂 long-term **多厂商**上下文，但市面没现成的开源选项
+- 文档变化快，模型权重过期，agent 答的不一定是最新版
 
-**核心 use case**：
-1. 问"Claude Code / Cursor / Codex 怎么选 / hooks 怎么配置 / extended thinking 怎么用" → LLM 直接读 enriched entity 答（不用现场 google）
-2. 哪家这周改了什么 → 看 `03_Output/Changelog/<latest>.md`（GHA 自动生成）
-3. 想看常用配置速查 → `03_Output/Cheatsheets/` 直接拿
-4. 加新 raw（GHA cron 每周一自动跑）→ session 开始时看到 "📋 待 ingest: N 个文件" → 用户授权后 LLM 处理
-
-**目标用户**：任何接手这个 KB 的 LLM（Claude Code / Codex / Cursor / 其他）或人类维护者。
+那这个 repo 把这五家官方文档**每周自动抓** + LLM **加工成可查询的 entity / cheatsheet / decision matrix**，clone 完就能直接给 agent 当 long-term context。
 
 ---
 
-## 二、三层架构
+## 适合谁用
 
-```
-┌────────────────────────────────────────────────────────────────┐
-│  互联网（Anthropic / OpenAI / Google / Cursor 官方文档 + GitHub）│
-│       ↓ GHA cron 每周一 09:00 HKT 自动抓                        │
-│       ↓ crawler: scripts/refresh_raw.py                         │
-└────────────────────────────────────────────────────────────────┘
-                          ↓
-┌────────────────────────────────────────────────────────────────┐
-│  ai-coding-runbook/                 ← 这个项目                  │
-│  ├── 01_Raw/                ← 真理之源（read-only）             │
-│  │   ├── docs.claude.com/   Anthropic 官方文档                  │
-│  │   ├── anthropic.com/{news,research,engineering}              │
-│  │   ├── docs.openai.com/   OpenAI 平台文档                     │
-│  │   ├── docs.cursor.com/   Cursor IDE 文档（llms.txt 全量）    │
-│  │   ├── ai.google.dev/     Gemini API 文档                     │
-│  │   ├── github/anthropics/<repo>/    （shallow clone）         │
-│  │   ├── github/modelcontextprotocol/<repo>/                    │
-│  │   ├── github/openai/{codex,model_spec}/                      │
-│  │   └── _meta/last_crawl.json                                  │
-│  │                                                               │
-│  ├── 02_Wiki/               ← LLM 加工区                        │
-│  │   ├── Entities/          具体 feature/tool 档案              │
-│  │   │   （Skills, Hooks, MCP-server, Subagents, ...）          │
-│  │   ├── Concepts/          抽象概念                            │
-│  │   │   （context-window, agentic-loop, prompt-caching, ...） │
-│  │   ├── Summaries/         每份 raw 的 1:1 摘要               │
-│  │   ├── Synthesis/         跨多 entity 的综述                  │
-│  │   ├── Comparison/        decision matrix                     │
-│  │   ├── QA/                问答沉淀                            │
-│  │   ├── _canonical-names.md  错别字 / 多名同实勘误             │
-│  │   ├── _audit_report--YYYYMMDD.md  最新 audit 结果            │
-│  │   └── _progress.log      历次 ingest 操作日志                │
-│  │                                                               │
-│  ├── 03_Output/             ← 对外 + 监控                       │
-│  │   ├── Cheatsheets/       日常速查（手维护，模板生成）        │
-│  │   ├── Changelog/         GHA 每次 refresh 自动写             │
-│  │   ├── My-Setup/          维护者的 plugin/skill 配置笔记      │
-│  │   └── templates/         （将来加）cheatsheet 模板           │
-│  │                                                               │
-│  ├── scripts/               ← 自动化                            │
-│  │   ├── sources.yaml       源清单（用户/LLM 改这里加减源）     │
-│  │   ├── refresh_raw.py     crawler                             │
-│  │   ├── check_pending.py   找未 summary 的 raw                 │
-│  │   ├── audit.py           结构性 audit                        │
-│  │   └── requirements.txt                                       │
-│  │                                                               │
-│  ├── .github/workflows/                                          │
-│  │   └── refresh-raw.yml    GHA cron（每周一 01:00 UTC）        │
-│  │                                                               │
-│  ├── docs/specs/            升级设计文档                        │
-│  ├── CLAUDE.md              agent session 启动钩子              │
-│  ├── AGENTS.md → CLAUDE.md  symlink（给 Cursor / Codex 等）     │
-│  ├── system_instructions.md 深度契约                            │
-│  └── README.md              本文件                              │
-└────────────────────────────────────────────────────────────────┘
+✅ **适合**：
+
+- AI coding tool 重度用户（Claude Code / Cursor / Codex CLI / Aider 等任意一种或多种）
+- 想跟踪 Claude / OpenAI / Gemini / Cursor 各家文档变化的开发者
+- 想给自己的 AI agent 喂多厂商 long-term context 的人
+- 团队想沉淀 "什么场景该用什么工具" 的内部知识，但不想自己抓文档
+- AI 内容创作者 / 顾问，常需要查多家文档对比
+
+❌ **不适合**：
+
+- 找最新模型 benchmark 数字（去 lmarena / Artificial Analysis 等专业 site）
+- 找代码示例运行（去 official cookbook / quickstart repos）
+- 需要实时（< 1 周）文档变化（当前 cron 周更新）
+
+---
+
+## 和同类方案的区别
+
+| | 各家 official docs | awesome-* 链接列表 | Context7 / 类似商业 service | **本仓库** |
+|---|:---:|:---:|:---:|:---:|
+| 多厂商聚合 | ❌ | ✅ | ✅ | ✅ |
+| LLM-enriched（不止 mirror） | ❌ | ❌ | ✅ | ✅ |
+| 自动周更新 | ❌ | ❌ | ✅ | ✅ |
+| Decision matrix / cheatsheet | ❌ | ❌ | 部分 | ✅ |
+| Open source | ✅ | ✅ | ❌ | ✅ |
+| Self-hosted（不依赖第三方 service） | N/A | ✅ | ❌ | ✅ |
+| 0 API key（不用付费） | ✅（看官网） | ✅ | ❌ | ✅ |
+| 给 AI agent 当 long-term context | ❌ | ❌ | 通过 API | ✅（CLAUDE.md / AGENTS.md hook） |
+
+---
+
+## 30 秒上手
+
+```bash
+git clone https://github.com/NickCollect/ai-coding-runbook
+cursor ai-coding-runbook    # 或 claude (Claude Code), codex (Codex CLI)
 ```
 
+打开后直接问你的 agent：
+
+> "Skills、MCP server 和 Subagent 三个概念有啥区别？什么时候用哪个？"
+
+agent 自动加载 `CLAUDE.md` / `AGENTS.md` 项目规则，读 `02_Wiki/Comparison/skill-vs-plugin-vs-mcp-vs-subagent.md` 答你。**0 配置、0 API key**（agent 用你自己的订阅）。
+
 ---
 
-## 三、快速上手
+## Example Q&A
 
-> 三种最常见用法，按"配置成本"从低到高排。
+> **Q**：我想给 Claude Code 加一个 PreToolUse hook，每次跑 `git push` 之前自动检查有没有 Co-authored-by 这种被注入的 trailer。怎么写？
+>
+> **A**（agent 读 `02_Wiki/Entities/Hooks.md` + `03_Output/Cheatsheets/hooks-recipes.md` 答）：
+>
+> 1. 在 `.claude/settings.json` 里配 `PreToolUse` hook，matcher 用 `Bash(git push:*)`
+> 2. hook command 接 stdin（JSON: `{"tool_name":"Bash","tool_input":{"command":"git push ..."}}`），跑前置检查
+> 3. 退出码控制：0 = 通过 / 2 = block 并把 stderr 显给 Claude
+>
+> 完整 JSON schema 在 `02_Wiki/Entities/Hooks.md`，13 个 hook recipe 在 `03_Output/Cheatsheets/hooks-recipes.md`。
+
+实际 agent 答会更长，包含完整代码 + 各 edge case。这只是缩短示意。
+
+---
+
+## Status & Stats
+
+- **13,000+** 个 raw 文件，6 个来源每周一自动同步
+- **700+** LLM-enriched summaries / **70+** entity / **25+** concept / **4** synthesis / **5** comparison / **7** Q&A / **10+** cheatsheet
+- **GHA cron**：matrix 并行，每周一 09:00 HKT，~10 分钟 wall clock
+- **Active since**：2026-05
+
+---
+
+## 一、三层架构
+
+```mermaid
+flowchart TB
+    Internet["🌐 互联网<br/>Anthropic · OpenAI · Google · Cursor 官方文档 + GitHub"]
+    Raw["01_Raw/<br/>真理之源（read-only）<br/>5 个 docs site + 多个 GitHub repo"]
+    Wiki["02_Wiki/<br/>LLM 加工层<br/>Entities · Concepts · Summaries · Synthesis · Comparison · QA"]
+    Output["03_Output/<br/>对外交付 + 监控<br/>Cheatsheets · Changelog · My-Setup"]
+
+    Internet -->|"GHA cron 每周一<br/>scripts/refresh_raw.py"| Raw
+    Raw -->|"LLM enrich<br/>(用户在自己的 agent session 里 trigger)"| Wiki
+    Wiki --> Output
+    Raw -->|"changelog 自动写"| Output
+```
+
+详细目录结构：
+
+```
+ai-coding-runbook/
+├── 01_Raw/                    ← 真理之源（read-only，GHA bot 写）
+│   ├── docs.claude.com/       Anthropic 官方文档
+│   ├── anthropic.com/{news,research,engineering}
+│   ├── docs.openai.com/       OpenAI 平台文档
+│   ├── docs.cursor.com/       Cursor IDE 文档（llms.txt 全量）
+│   ├── ai.google.dev/         Gemini API 文档
+│   ├── github/anthropics/<repo>/         （shallow clone）
+│   ├── github/modelcontextprotocol/<repo>/
+│   ├── github/openai/{codex,model_spec,...}/
+│   └── _meta/last_crawl.json
+│
+├── 02_Wiki/                   ← LLM 加工层
+│   ├── Entities/              具体 feature/tool 档案（Skills, Hooks, MCP-server, ...）
+│   ├── Concepts/              抽象概念（context-window, agentic-loop, prompt-caching, ...）
+│   ├── Summaries/             每份 raw 的 1:1 摘要
+│   ├── Synthesis/             跨多 entity 的综述
+│   ├── Comparison/            decision matrix
+│   ├── QA/                    问答沉淀
+│   ├── _canonical-names.md    错别字 / 多名同实勘误
+│   └── _progress.log          历次 ingest 操作日志
+│
+├── 03_Output/                 ← 对外 + 监控
+│   ├── Cheatsheets/           日常速查（手维护）
+│   ├── Changelog/             GHA 每次 refresh 自动写
+│   └── My-Setup/              维护者的 plugin/skill 配置笔记
+│
+├── scripts/                   ← 自动化
+│   ├── sources.yaml           源清单
+│   ├── refresh_raw.py         crawler
+│   ├── check_pending.py       找未 summary 的 raw
+│   └── audit.py               结构性 audit
+│
+├── .github/workflows/refresh-raw.yml   GHA cron
+├── CLAUDE.md                  agent session 启动钩子
+├── AGENTS.md → CLAUDE.md      symlink（给 Cursor / Codex 等）
+├── system_instructions.md     深度契约
+└── README.md / README.en.md   本文件
+```
+
+---
+
+## 二、详细上手（三种用法）
+
+> 按"配置成本"从低到高排。
 
 ### 用法 1：当查阅文档（0 配置）
 
@@ -113,11 +183,7 @@ cd ai-coding-runbook
 clone 后用 **Claude Code / Cursor / Codex CLI** 打开这个文件夹：
 
 - session 启动自动加载 `CLAUDE.md` / `AGENTS.md`，agent 知道项目结构和工作规则
-- 直接问问题，agent 读 `02_Wiki/` 答。例子：
-  - "Hooks 怎么配？给个 PreToolUse recipe"
-  - "Skill vs MCP vs Subagent 该用哪个？"
-  - "Anthropic / OpenAI 这周改了啥？"
-  - "Codex CLI 和 Claude Code 怎么对比"
+- 直接问问题，agent 读 `02_Wiki/` 答。例子见上面 [Example Q&A](#example-qa)
 
 不需要额外 API key —— agent 用你自己的订阅 / token。
 
@@ -139,7 +205,7 @@ python3 scripts/refresh_raw.py --all      # ~10 分钟
 
 ---
 
-## 四、核心机制
+## 三、核心机制
 
 ### 机制 1 · GHA cron 自动抓 raw（matrix 并行）
 
@@ -181,6 +247,7 @@ GitHub repos 抓回来后会**剥离 `.git/`**（避免被父 repo 当成 submod
 **飞轮的核心意义**：LLM 答问题时**不需要每次重读 raw**——直接读 enriched entity 就够。这是查询速度快 + 准确度高的根本原因。
 
 **为啥不自动 enrich**：抓到 raw diff 后，GHA **不自动调 LLM** 写 summary，只生成 changelog 通知。原因：
+
 1. LLM enrich 容易幻觉，需要 self-review
 2. 加什么 entity / concept 是设计决定，不是流水线
 3. 用户在自己的 agent session（Claude Code / Cursor / Codex 等）里看到 changelog，决定哪些 diff 值得 enrich、哪些 skip
@@ -205,6 +272,7 @@ GitHub repos 抓回来后会**剥离 `.git/`**（避免被父 repo 当成 submod
 `02_Wiki/_canonical-names.md` 是**单一事实源** —— 记录所有 raw 里出现但 vault 用 canonical 名的映射。
 
 例：
+
 - `Sub-agent` / `Subagent` / `Sub agent` → canonical: `Subagent`
 - `Tool use` / `Function calling` → canonical: `Tool use`
 - `Slash commands` / `Slash Commands` / `slash-commands` → canonical: `Slash commands`
@@ -216,7 +284,7 @@ GitHub repos 抓回来后会**剥离 `.git/`**（避免被父 repo 当成 submod
 
 ---
 
-## 五、日常工作流
+## 四、日常工作流
 
 ### 用户做的（不用 LLM）
 
@@ -231,7 +299,7 @@ GitHub repos 抓回来后会**剥离 `.git/`**（避免被父 repo 当成 submod
 
 | 场景 | 用户说 | LLM 做啥 |
 |---|---|---|
-| 新 raw 想入库 | **不用开口**——session 开始自动看到 "📋 待 ingest"。说 "ingest" / "ingest 1,3" / "skip" | Phase A→E（详见 § 五 ingest） |
+| 新 raw 想入库 | **不用开口**——session 开始自动看到 "📋 待 ingest"。说 "ingest" / "ingest 1,3" / "skip" | Phase A→E（详见本节末尾） |
 | 查任何 Claude Code / API 问题 | 直接问 | 读 enriched entity 答，缺信息回 raw 找 |
 | 写新 cheatsheet | "写一份 hooks 速查" / "做一份 Skill vs MCP 对比表" | 跨多 entity 综合 → 写到 `03_Output/Cheatsheets/` |
 | 加新源 | "加上 modelcontextprotocol/inspector repo" | 改 sources.yaml + commit + 跑一次 refresh 测试 |
@@ -254,11 +322,12 @@ GitHub repos 抓回来后会**剥离 `.git/`**（避免被父 repo 当成 submod
 
 ---
 
-## 六、🚨 踩过的坑 / Lessons Learned
+## 五、🚨 踩过的坑 / Lessons Learned
 
 ### #1 · 永远不改 01_Raw
 
 raw 是 GHA bot 的输出。手动改 raw 会：
+
 - 下次 cron 跑发现 diff 又改回去（拉锯）
 - 污染 git diff 信号
 - 误导 enrichment（以为 Anthropic 改了什么）
@@ -295,21 +364,24 @@ GHA workflow 没有 PR review，改 sources.yaml 加坏 prefix 会导致下次 c
 
 ---
 
-## 七、源清单
+## 六、源清单
 
-详见 `scripts/sources.yaml`。当前 5 大类：
+详见 `scripts/sources.yaml`。当前覆盖：
 
 1. `docs.claude.com` 整站（按 section 抓）—— Claude Code、API、模型、prompt 工程、release notes、legal
-2. `support.anthropic.com` —— Claude.ai 产品文档
-3. `anthropic.com/{news,research,engineering}` —— blog
-4. `anthropics/*` GitHub repos × 15 —— claude-code、agent SDK、cookbook、quickstarts、courses、skills、evals 等
-5. `modelcontextprotocol/*` GitHub repos × 5 —— MCP spec、SDK、reference servers
+2. `anthropic.com/{news,research,engineering}` —— blog
+3. `docs.openai.com` —— OpenAI 平台文档
+4. `docs.cursor.com` —— Cursor IDE 文档（llms.txt 全量）
+5. `ai.google.dev` —— Gemini API 文档
+6. `anthropics/*` GitHub repos —— claude-code, agent SDK, cookbook, quickstarts, courses, skills, evals 等
+7. `modelcontextprotocol/*` GitHub repos —— MCP spec, SDK, reference servers
+8. `openai/*` GitHub repos —— codex, openai-python, openai-node, model_spec
 
 加 / 减源：编辑 `scripts/sources.yaml`，commit。下次 cron 跑自动覆盖。
 
 ---
 
-## 八、维护
+## 七、维护
 
 ### 长期日常（你做）
 - 每周一 GHA 跑完后 `git pull`
@@ -336,7 +408,7 @@ GHA workflow 没有 PR review，改 sources.yaml 加坏 prefix 会导致下次 c
 
 ---
 
-## 九、术语
+## 八、术语
 
 - **raw**：`01_Raw/` 下的文件，GHA bot 抓来的 markdown / git clone 的 repo
 - **summary**：`02_Wiki/Summaries/` 下，每份 raw 的 1:1 摘要
@@ -351,7 +423,7 @@ GHA workflow 没有 PR review，改 sources.yaml 加坏 prefix 会导致下次 c
 
 ---
 
-## 十、相关文档
+## 九、相关文档
 
 | 文档 | 用途 |
 |---|---|
@@ -361,6 +433,17 @@ GHA workflow 没有 PR review，改 sources.yaml 加坏 prefix 会导致下次 c
 | `scripts/sources.yaml` | 源清单（YAML） |
 | `02_Wiki/_canonical-names.md` | 错别字 / 多名同实勘误（enrich 前必读） |
 | `docs/specs/` | 各升级 brainstorm 沉淀 |
+
+---
+
+## 十、Limitations / 已知限制
+
+- **不实时** —— 周更新；要追 24h 内变化用各家 official changelog / Twitter
+- **不调 LLM API** —— 这个 repo 不付费 LLM。所有 enrichment / 问答都用你自己的 agent（Claude Code / Cursor / Codex 用各自订阅）
+- **某些站抓不到** —— `platform.openai.com/docs` 被 Cloudflare 403 防爬虫。OpenAI 部分靠 GitHub repos（`openai-python`, `openai-node`, `model_spec`）+ 手动 fetch 的 30 个关键页面覆盖
+- **02_Wiki 是 LLM 写的** —— 可能有错；用 audit + canonical-names 治理但不绝对。每条事实都附 `[[summary-link]]` 可回查 raw 校对
+- **不自动 enrich** —— 抓到 raw diff 后只生成 changelog 通知，不自动调 LLM 写 summary。Enrichment 永远 user-triggered
+- **覆盖范围**：当前只覆盖 5 家主流 vendor + MCP，其他工具（Aider / Continue / Tabby / 国产模型）没纳入
 
 ---
 
