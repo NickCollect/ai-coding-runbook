@@ -78,8 +78,8 @@
 │  │   └── refresh-raw.yml    GHA cron (Mondays 01:00 UTC)        │
 │  │                                                               │
 │  ├── docs/specs/            upgrade design docs                 │
-│  ├── CLAUDE.md              Claude Code session startup hook    │
-│  ├── AGENTS.md → CLAUDE.md  symlink for Codex etc.              │
+│  ├── CLAUDE.md              agent session startup hook          │
+│  ├── AGENTS.md → CLAUDE.md  symlink (for Cursor / Codex / etc.) │
 │  ├── system_instructions.md deep contract                       │
 │  └── README.md              this file                           │
 └────────────────────────────────────────────────────────────────┘
@@ -313,7 +313,7 @@ Adding / removing sources: edit `scripts/sources.yaml`, commit. Next cron picks 
 ### Long-term routine (you do)
 - After GHA runs each Monday, `git pull`
 - Read `03_Output/Changelog/<latest>.md` to decide whether to ingest
-- Want to ingest → say "ingest" in a Claude Code session
+- Want to ingest → say "ingest" in your agent session (Claude Code / Cursor / Codex / etc.)
 
 ### Long-term routine (GHA does automatically)
 - Every Monday 09:00 HKT, pull raw
@@ -354,8 +354,8 @@ Adding / removing sources: edit `scripts/sources.yaml`, commit. Next cron picks 
 
 | File | Purpose |
 |---|---|
-| `CLAUDE.md` | Claude Code session startup hook + key rules |
-| `AGENTS.md` | symlink → CLAUDE.md, for Codex and other agents |
+| `CLAUDE.md` | agent session startup hook + key rules (Claude Code / Cursor / Codex / etc.) |
+| `AGENTS.md` | symlink → CLAUDE.md, for Cursor / Codex / other agents |
 | `system_instructions.md` | Deep contract §0–§7: frontmatter spec / ingest rules / ingest flow / edge cases |
 | `scripts/sources.yaml` | Source list (YAML) |
 | `02_Wiki/_canonical-names.md` | Typo / multi-name reconciliation (mandatory read before enrichment) |

@@ -79,8 +79,8 @@
 │  │   └── refresh-raw.yml    GHA cron（每周一 01:00 UTC）        │
 │  │                                                               │
 │  ├── docs/specs/            升级设计文档                        │
-│  ├── CLAUDE.md              Claude Code session 启动钩子        │
-│  ├── AGENTS.md → CLAUDE.md  symlink，给 Codex 等                │
+│  ├── CLAUDE.md              agent session 启动钩子              │
+│  ├── AGENTS.md → CLAUDE.md  symlink（给 Cursor / Codex 等）     │
 │  ├── system_instructions.md 深度契约                            │
 │  └── README.md              本文件                              │
 └────────────────────────────────────────────────────────────────┘
@@ -183,7 +183,7 @@ GitHub repos 抓回来后会**剥离 `.git/`**（避免被父 repo 当成 submod
 **为啥不自动 enrich**：抓到 raw diff 后，GHA **不自动调 LLM** 写 summary，只生成 changelog 通知。原因：
 1. LLM enrich 容易幻觉，需要 self-review
 2. 加什么 entity / concept 是设计决定，不是流水线
-3. 用户在 Claude Code session 里看到 changelog，决定哪些 diff 值得 enrich、哪些 skip
+3. 用户在自己的 agent session（Claude Code / Cursor / Codex 等）里看到 changelog，决定哪些 diff 值得 enrich、哪些 skip
 
 ### 机制 3 · 模板驱动的活文件（将来）
 
@@ -314,7 +314,7 @@ GHA workflow 没有 PR review，改 sources.yaml 加坏 prefix 会导致下次 c
 ### 长期日常（你做）
 - 每周一 GHA 跑完后 `git pull`
 - 看 `03_Output/Changelog/<latest>.md` 决定要不要 ingest
-- 想 ingest → Claude Code session 里说 "ingest"
+- 想 ingest → 在你的 agent session（Claude Code / Cursor / Codex 等）里说 "ingest"
 
 ### 长期日常（GHA 自动做）
 - 每周一 09:00 HKT 抓 raw
@@ -355,8 +355,8 @@ GHA workflow 没有 PR review，改 sources.yaml 加坏 prefix 会导致下次 c
 
 | 文档 | 用途 |
 |---|---|
-| `CLAUDE.md` | Claude Code session 启动钩子 + 关键规则速查 |
-| `AGENTS.md` | symlink → CLAUDE.md，给 Codex 等其他 agent |
+| `CLAUDE.md` | agent session 启动钩子 + 关键规则速查（Claude Code / Cursor / Codex 等） |
+| `AGENTS.md` | symlink → CLAUDE.md，给 Cursor / Codex 等其他 agent |
 | `system_instructions.md` | 深度契约 §0-§7：frontmatter 规范 / 入库规则 / ingest 流程 / edge case |
 | `scripts/sources.yaml` | 源清单（YAML） |
 | `02_Wiki/_canonical-names.md` | 错别字 / 多名同实勘误（enrich 前必读） |
