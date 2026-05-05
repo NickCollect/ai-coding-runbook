@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/quickstart
-fetched_at: 2026-05-04T15:03:52.943728+00:00
+fetched_at: 2026-05-05T19:40:38.977576+00:00
 fetch_method: mintlify_md
 ---
 
@@ -23,7 +23,7 @@ Use the Agent SDK to build an AI agent that reads your code, finds bugs, and fix
 ## Prerequisites
 
 * **Node.js 18+** or **Python 3.10+**
-* An **Anthropic account** ([sign up here](https://code.claude.com/docs/en/agent-sdk/sign up here))
+* An **Anthropic account** ([sign up here](https://platform.claude.com/))
 
 ## Setup
 
@@ -49,7 +49,7 @@ Use the Agent SDK to build an AI agent that reads your code, finds bugs, and fix
       </Tab>
 
       <Tab title="Python (uv)">
-        [uv Python package manager](https://code.claude.com/docs/en/agent-sdk/uv Python package manager) is a fast Python package manager that handles virtual environments automatically:
+        [uv Python package manager](https://docs.astral.sh/uv/) is a fast Python package manager that handles virtual environments automatically:
 
         ```bash theme={null}
         uv init && uv add claude-agent-sdk
@@ -72,7 +72,7 @@ Use the Agent SDK to build an AI agent that reads your code, finds bugs, and fix
   </Step>
 
   <Step title="Set your API key">
-    Get an API key from the [Claude Console](https://code.claude.com/docs/en/agent-sdk/Claude Console), then create a `.env` file in your project directory:
+    Get an API key from the [Claude Console](https://platform.claude.com/), then create a `.env` file in your project directory:
 
     ```bash theme={null}
     ANTHROPIC_API_KEY=your-api-key
@@ -84,7 +84,7 @@ Use the Agent SDK to build an AI agent that reads your code, finds bugs, and fix
     * **Google Vertex AI**: set `CLAUDE_CODE_USE_VERTEX=1` environment variable and configure Google Cloud credentials
     * **Microsoft Azure**: set `CLAUDE_CODE_USE_FOUNDRY=1` environment variable and configure Azure credentials
 
-    See the setup guides for [Bedrock](https://code.claude.com/docs/en/agent-sdk/Bedrock), [Vertex AI](https://code.claude.com/docs/en/agent-sdk/Vertex AI), or [Azure AI Foundry](https://code.claude.com/docs/en/agent-sdk/Azure AI Foundry) for details.
+    See the setup guides for [Bedrock](/en/amazon-bedrock), [Vertex AI](/en/google-vertex-ai), or [Azure AI Foundry](/en/microsoft-foundry) for details.
 
     <Note>
       Unless previously approved, Anthropic does not allow third party developers to offer claude.ai login or rate limits for their products, including agents built on the Claude Agent SDK. Please use the API key authentication methods described in this document instead.
@@ -102,6 +102,7 @@ def calculate_average(numbers):
     for num in numbers:
         total += num
     return total / len(numbers)
+
 
 def get_user_name(user):
     return user["name"].upper()
@@ -121,6 +122,7 @@ Create `agent.py` if you're using the Python SDK, or `agent.ts` for TypeScript:
   import asyncio
   from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, ResultMessage
 
+
   async def main():
       # Agentic loop: streams messages as Claude works
       async for message in query(
@@ -139,6 +141,7 @@ Create `agent.py` if you're using the Python SDK, or `agent.ts` for TypeScript:
                       print(f"Tool: {block.name}")  # Tool being called
           elif isinstance(message, ResultMessage):
               print(f"Done: {message.subtype}")  # Final result
+
 
   asyncio.run(main())
   ```
@@ -172,18 +175,18 @@ Create `agent.py` if you're using the Python SDK, or `agent.ts` for TypeScript:
 
 This code has three main parts:
 
-1. **`query`**: the main entry point that creates the agentic loop. It returns an async iterator, so you use `async for` to stream messages as Claude works. See the full API in the [Python](https://code.claude.com/docs/en/agent-sdk/Python) or [TypeScript](https://code.claude.com/docs/en/agent-sdk/TypeScript) SDK reference.
+1. **`query`**: the main entry point that creates the agentic loop. It returns an async iterator, so you use `async for` to stream messages as Claude works. See the full API in the [Python](/en/agent-sdk/python#query) or [TypeScript](/en/agent-sdk/typescript#query) SDK reference.
 
 2. **`prompt`**: what you want Claude to do. Claude figures out which tools to use based on the task.
 
-3. **`options`**: configuration for the agent. This example uses `allowedTools` to pre-approve `Read`, `Edit`, and `Glob`, and `permissionMode: "acceptEdits"` to auto-approve file changes. Other options include `systemPrompt`, `mcpServers`, and more. See all options for [Python](https://code.claude.com/docs/en/agent-sdk/Python) or [TypeScript](https://code.claude.com/docs/en/agent-sdk/TypeScript).
+3. **`options`**: configuration for the agent. This example uses `allowedTools` to pre-approve `Read`, `Edit`, and `Glob`, and `permissionMode: "acceptEdits"` to auto-approve file changes. Other options include `systemPrompt`, `mcpServers`, and more. See all options for [Python](/en/agent-sdk/python#claudeagentoptions) or [TypeScript](/en/agent-sdk/typescript#options).
 
 The `async for` loop keeps running as Claude thinks, calls tools, observes results, and decides what to do next. Each iteration yields a message: Claude's reasoning, a tool call, a tool result, or the final outcome. The SDK handles the orchestration (tool execution, context management, retries) so you just consume the stream. The loop ends when Claude finishes the task or hits an error.
 
 The message handling inside the loop filters for human-readable output. Without filtering, you'd see raw message objects including system initialization and internal state, which is useful for debugging but noisy otherwise.
 
 <Note>
-  This example uses streaming to show progress in real-time. If you don't need live output (e.g., for background jobs or CI pipelines), you can collect all messages at once. See [Streaming vs. single-turn mode](https://code.claude.com/docs/en/agent-sdk/Streaming vs. single-turn mode) for details.
+  This example uses streaming to show progress in real-time. If you don't need live output (e.g., for background jobs or CI pipelines), you can collect all messages at once. See [Streaming vs. single-turn mode](/en/agent-sdk/streaming-vs-single-mode) for details.
 </Note>
 
 ### Run your agent
@@ -213,7 +216,7 @@ After running, check `utils.py`. You'll see defensive code handling empty lists 
 This is what makes the Agent SDK different: Claude executes tools directly instead of asking you to implement them.
 
 <Note>
-  If you see "API key not found", make sure you've set the `ANTHROPIC_API_KEY` environment variable in your `.env` file or shell environment. See the [full troubleshooting guide](https://code.claude.com/docs/en/agent-sdk/full troubleshooting guide) for more help.
+  If you see "API key not found", make sure you've set the `ANTHROPIC_API_KEY` environment variable in your `.env` file or shell environment. See the [full troubleshooting guide](/en/troubleshooting) for more help.
 </Note>
 
 ### Try other prompts
@@ -310,7 +313,7 @@ With `Bash` enabled, try: `"Write unit tests for utils.py, run them, and fix any
 | `bypassPermissions`      | Runs every tool without prompts                                                 | Sandboxed CI, fully trusted environments |
 | `default`                | Requires a `canUseTool` callback to handle approval                             | Custom approval flows                    |
 
-The example above uses `acceptEdits` mode, which auto-approves file operations so the agent can run without interactive prompts. If you want to prompt users for approval, use `default` mode and provide a [`canUseTool` callback](https://code.claude.com/docs/en/agent-sdk/`canUseTool` callback) that collects user input. For more control, see [Permissions](https://code.claude.com/docs/en/agent-sdk/Permissions).
+The example above uses `acceptEdits` mode, which auto-approves file operations so the agent can run without interactive prompts. If you want to prompt users for approval, use `default` mode and provide a [`canUseTool` callback](/en/agent-sdk/user-input) that collects user input. For more control, see [Permissions](/en/agent-sdk/permissions).
 
 ## Troubleshooting
 
@@ -328,9 +331,9 @@ Upgrade to Agent SDK v0.2.111 or later to use Opus 4.7.
 
 Now that you've created your first agent, learn how to extend its capabilities and tailor it to your use case:
 
-* **[Permissions](https://code.claude.com/docs/en/agent-sdk/Permissions)**: control what your agent can do and when it needs approval
-* **[Hooks](https://code.claude.com/docs/en/agent-sdk/Hooks)**: run custom code before or after tool calls
-* **[Sessions](https://code.claude.com/docs/en/agent-sdk/Sessions)**: build multi-turn agents that maintain context
-* **[MCP servers](https://code.claude.com/docs/en/agent-sdk/MCP servers)**: connect to databases, browsers, APIs, and other external systems
-* **[Hosting](https://code.claude.com/docs/en/agent-sdk/Hosting)**: deploy agents to Docker, cloud, and CI/CD
-* **[Example agents](https://code.claude.com/docs/en/agent-sdk/Example agents)**: see complete examples: email assistant, research agent, and more
+* **[Permissions](/en/agent-sdk/permissions)**: control what your agent can do and when it needs approval
+* **[Hooks](/en/agent-sdk/hooks)**: run custom code before or after tool calls
+* **[Sessions](/en/agent-sdk/sessions)**: build multi-turn agents that maintain context
+* **[MCP servers](/en/agent-sdk/mcp)**: connect to databases, browsers, APIs, and other external systems
+* **[Hosting](/en/agent-sdk/hosting)**: deploy agents to Docker, cloud, and CI/CD
+* **[Example agents](https://github.com/anthropics/claude-agent-sdk-demos)**: see complete examples: email assistant, research agent, and more

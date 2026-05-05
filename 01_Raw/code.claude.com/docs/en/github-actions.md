@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/github-actions
-fetched_at: 2026-05-04T15:05:40.931282+00:00
+fetched_at: 2026-05-05T19:40:39.365311+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,14 +12,14 @@ fetch_method: mintlify_md
 
 > Learn about integrating Claude Code into your development workflow with Claude Code GitHub Actions
 
-Claude Code GitHub Actions brings AI-powered automation to your GitHub workflow. With a simple `@claude` mention in any PR or issue, Claude can analyze your code, create pull requests, implement features, and fix bugs - all while following your project's standards. For automatic reviews posted on every PR without a trigger, see [GitHub Code Review](https://code.claude.com/docs/en/GitHub Code Review).
+Claude Code GitHub Actions brings AI-powered automation to your GitHub workflow. With a simple `@claude` mention in any PR or issue, Claude can analyze your code, create pull requests, implement features, and fix bugs - all while following your project's standards. For automatic reviews posted on every PR without a trigger, see [GitHub Code Review](/en/code-review).
 
 <Note>
-  Claude Code GitHub Actions is built on top of the [Claude Agent SDK](https://code.claude.com/docs/en/Claude Agent SDK), which enables programmatic integration of Claude Code into your applications. You can use the SDK to build custom automation workflows beyond GitHub Actions.
+  Claude Code GitHub Actions is built on top of the [Claude Agent SDK](/en/agent-sdk/overview), which enables programmatic integration of Claude Code into your applications. You can use the SDK to build custom automation workflows beyond GitHub Actions.
 </Note>
 
 <Info>
-  **Claude Opus 4.7 is now available.** Claude Code GitHub Actions default to Sonnet. To use Opus 4.7, configure the [model parameter](https://code.claude.com/docs/en/model parameter) to use `claude-opus-4-7`.
+  **Claude Opus 4.7 is now available.** Claude Code GitHub Actions default to Sonnet. To use Opus 4.7, configure the [model parameter](#breaking-changes-reference) to use `claude-opus-4-7`.
 </Info>
 
 ## Why use Claude Code GitHub Actions?
@@ -38,7 +38,7 @@ Claude Code provides a powerful GitHub Action that transforms how you work with 
 
 This GitHub Action allows you to run Claude Code within your GitHub Actions workflows. You can use this to build any custom workflow on top of Claude Code.
 
-[View repository →](https://code.claude.com/docs/en/View repository →)
+[View repository →](https://github.com/anthropics/claude-code-action)
 
 ## Setup
 
@@ -53,7 +53,7 @@ This command will guide you through setting up the GitHub app and required secre
   * The GitHub app will request read & write permissions for Contents, Issues, and Pull requests
   * This quickstart method is only available for direct Claude API users. If
     you're using Amazon Bedrock or Google Vertex AI, see the [Using with Amazon
-    Bedrock & Google Vertex AI](https://code.claude.com/docs/en/Using with Amazon    Bedrock & Google Vertex AI)
+    Bedrock & Google Vertex AI](#using-with-amazon-bedrock-%26-google-vertex-ai)
     section.
 </Note>
 
@@ -69,9 +69,9 @@ If the `/install-github-app` command fails or you prefer manual setup, please fo
    * **Issues**: Read & write (to respond to issues)
    * **Pull requests**: Read & write (to create PRs and push changes)
 
-   For more details on security and permissions, see the [security documentation](https://code.claude.com/docs/en/security documentation).
-2. **Add ANTHROPIC\_API\_KEY** to your repository secrets ([Learn how to use secrets in GitHub Actions](https://code.claude.com/docs/en/Learn how to use secrets in GitHub Actions))
-3. **Copy the workflow file** from [examples/claude.yml](https://code.claude.com/docs/en/examples/claude.yml) into your repository's `.github/workflows/`
+   For more details on security and permissions, see the [security documentation](https://github.com/anthropics/claude-code-action/blob/main/docs/security.md).
+2. **Add ANTHROPIC\_API\_KEY** to your repository secrets ([Learn how to use secrets in GitHub Actions](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions))
+3. **Copy the workflow file** from [examples/claude.yml](https://github.com/anthropics/claude-code-action/blob/main/examples/claude.yml) into your repository's `.github/workflows/`
 
 <Tip>
   After completing either the quickstart or manual setup, test the action by tagging `@claude` in an issue or PR comment.
@@ -142,7 +142,7 @@ All beta users must make these changes to their workflow files in order to upgra
 
 ## Example use cases
 
-Claude Code GitHub Actions can help you with a variety of tasks. The [examples directory](https://code.claude.com/docs/en/examples directory) contains ready-to-use workflows for different scenarios.
+Claude Code GitHub Actions can help you with a variety of tasks. The [examples directory](https://github.com/anthropics/claude-code-action/tree/main/examples) contains ready-to-use workflows for different scenarios.
 
 ### Basic workflow
 
@@ -221,7 +221,7 @@ Create a `CLAUDE.md` file in your repository root to define code style guideline
 
 <Warning>Never commit API keys directly to your repository.</Warning>
 
-For comprehensive security guidance including permissions, authentication, and best practices, see the [Claude Code Action security documentation](https://code.claude.com/docs/en/Claude Code Action security documentation).
+For comprehensive security guidance including permissions, authentication, and best practices, see the [Claude Code Action security documentation](https://github.com/anthropics/claude-code-action/blob/main/docs/security.md).
 
 Always use GitHub Secrets for API keys:
 
@@ -243,13 +243,13 @@ When using Claude Code GitHub Actions, be aware of the associated costs:
 **GitHub Actions costs:**
 
 * Claude Code runs on GitHub-hosted runners, which consume your GitHub Actions minutes
-* See [GitHub's billing documentation](https://code.claude.com/docs/en/GitHub's billing documentation) for detailed pricing and minute limits
+* See [GitHub's billing documentation](https://docs.github.com/en/billing/managing-billing-for-your-products/managing-billing-for-github-actions/about-billing-for-github-actions) for detailed pricing and minute limits
 
 **API costs:**
 
 * Each Claude interaction consumes API tokens based on the length of prompts and responses
 * Token usage varies by task complexity and codebase size
-* See [Claude's pricing page](https://code.claude.com/docs/en/Claude's pricing page) for current token rates
+* See [Claude's pricing page](https://claude.com/platform/api) for current token rates
 
 **Cost optimization tips:**
 
@@ -273,11 +273,11 @@ The Claude Code Action v1 simplifies configuration with unified parameters:
 Key features:
 
 * **Unified prompt interface** - Use `prompt` for all instructions
-* **Skills** - Invoke installed [skills](https://code.claude.com/docs/en/skills) directly from the prompt
+* **Skills** - Invoke installed [skills](/en/skills) directly from the prompt
 * **CLI passthrough** - Any Claude Code CLI argument via `claude_args`
 * **Flexible triggers** - Works with any GitHub event
 
-Visit the [examples directory](https://code.claude.com/docs/en/examples directory) for complete workflow files.
+Visit the [examples directory](https://github.com/anthropics/claude-code-action/tree/main/examples) for complete workflow files.
 
 <Tip>
   When responding to issue or PR comments, Claude automatically responds to @claude mentions. For other events, use the `prompt` parameter to provide instructions.
@@ -336,7 +336,7 @@ Before setting up Claude Code GitHub Actions with cloud providers, you need:
     * Create a new secret named `APP_ID` with your GitHub App's ID
 
     <Note>
-      This app will be used with the [actions/create-github-app-token](https://code.claude.com/docs/en/actions/create-github-app-token) action to generate authentication tokens in your workflows.
+      This app will be used with the [actions/create-github-app-token](https://github.com/actions/create-github-app-token) action to generate authentication tokens in your workflows.
     </Note>
 
     **Alternative for Claude API or if you don't want to setup your own Github app**: Use the official Anthropic app:
@@ -380,7 +380,7 @@ Before setting up Claude Code GitHub Actions with cloud providers, you need:
           OIDC is more secure than using static AWS access keys because credentials are temporary and automatically rotated.
         </Tip>
 
-        See [AWS documentation](https://code.claude.com/docs/en/AWS documentation) for detailed OIDC setup instructions.
+        See [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html) for detailed OIDC setup instructions.
       </Accordion>
 
       <Accordion title="Google Vertex AI">
@@ -421,7 +421,7 @@ Before setting up Claude Code GitHub Actions with cloud providers, you need:
           Workload Identity Federation eliminates the need for downloadable service account keys, improving security.
         </Tip>
 
-        For detailed setup instructions, consult the [Google Cloud Workload Identity Federation documentation](https://code.claude.com/docs/en/Google Cloud Workload Identity Federation documentation).
+        For detailed setup instructions, consult the [Google Cloud Workload Identity Federation documentation](https://cloud.google.com/iam/docs/workload-identity-federation).
       </Accordion>
     </AccordionGroup>
   </Step>
@@ -432,7 +432,7 @@ Before setting up Claude Code GitHub Actions with cloud providers, you need:
     #### For Claude API (Direct):
 
     1. **For API Authentication**:
-       * `ANTHROPIC_API_KEY`: Your Claude API key from [console.anthropic.com](https://code.claude.com/docs/en/console.anthropic.com)
+       * `ANTHROPIC_API_KEY`: Your Claude API key from [console.anthropic.com](https://console.anthropic.com)
 
     2. **For GitHub App (if using your own app)**:
        * `APP_ID`: Your GitHub App's ID
@@ -632,7 +632,7 @@ The Claude Code Action v1 uses a simplified configuration:
 
 | Parameter           | Description                                                        | Required |
 | ------------------- | ------------------------------------------------------------------ | -------- |
-| `prompt`            | Instructions for Claude (plain text or a [skill](https://code.claude.com/docs/en/skill) name) | No\*     |
+| `prompt`            | Instructions for Claude (plain text or a [skill](/en/skills) name) | No\*     |
 | `claude_args`       | CLI arguments passed to Claude Code                                | No       |
 | `anthropic_api_key` | Claude API key                                                     | Yes\*\*  |
 | `github_token`      | GitHub token for API access                                        | No       |
@@ -667,13 +667,13 @@ While the `/install-github-app` command is the recommended approach, you can als
 * **Manual GitHub Actions**: Direct workflow configuration for maximum flexibility
 * **MCP Configuration**: Dynamic loading of Model Context Protocol servers
 
-See the [Claude Code Action documentation](https://code.claude.com/docs/en/Claude Code Action documentation) for detailed guides on authentication, security, and advanced configuration.
+See the [Claude Code Action documentation](https://github.com/anthropics/claude-code-action/blob/main/docs) for detailed guides on authentication, security, and advanced configuration.
 
 ### Customizing Claude's behavior
 
 You can configure Claude's behavior in two ways:
 
-1. **CLAUDE.md**: Define coding standards, review criteria, and project-specific rules in a `CLAUDE.md` file at the root of your repository. Claude will follow these guidelines when creating PRs and responding to requests. Check out our [Memory documentation](https://code.claude.com/docs/en/Memory documentation) for more details.
+1. **CLAUDE.md**: Define coding standards, review criteria, and project-specific rules in a `CLAUDE.md` file at the root of your repository. Claude will follow these guidelines when creating PRs and responding to requests. Check out our [Memory documentation](/en/memory) for more details.
 2. **Custom prompts**: Use the `prompt` parameter in the workflow file to provide workflow-specific instructions. This allows you to customize Claude's behavior for different workflows or tasks.
 
 Claude will follow these guidelines when creating PRs and responding to requests.

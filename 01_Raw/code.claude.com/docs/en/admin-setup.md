@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/admin-setup
-fetched_at: 2026-05-04T15:03:17.180777+00:00
+fetched_at: 2026-05-05T19:40:38.836796+00:00
 fetch_method: mintlify_md
 ---
 
@@ -17,16 +17,16 @@ Claude Code enforces organization policy through managed settings that take prec
 This page walks through the deployment decisions in order. Each row links to the section below and to the reference page for that area.
 
 <Note>
-  SSO, SCIM provisioning, and seat assignment are configured at the Claude account level. See the [Claude Enterprise Administrator Guide](https://code.claude.com/docs/en/Claude Enterprise Administrator Guide) and [seat assignment](https://code.claude.com/docs/en/seat assignment) for those steps.
+  SSO, SCIM provisioning, and seat assignment are configured at the Claude account level. See the [Claude Enterprise Administrator Guide](https://claude.com/resources/tutorials/claude-enterprise-administrator-guide) and [seat assignment](https://support.claude.com/en/articles/11845131-use-claude-code-with-your-team-or-enterprise-plan) for those steps.
 </Note>
 
 | Decision                                                                | What you're choosing                                | Reference                                                                                                                                |
 | :---------------------------------------------------------------------- | :-------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
-| [Choose your API provider](https://code.claude.com/docs/en/Choose your API provider)                   | Where Claude Code authenticates and how it's billed | [Authentication](https://code.claude.com/docs/en/Authentication), [Bedrock](https://code.claude.com/docs/en/Bedrock), [Vertex AI](https://code.claude.com/docs/en/Vertex AI), [Foundry](https://code.claude.com/docs/en/Foundry) |
-| [Decide how settings reach devices](https://code.claude.com/docs/en/Decide how settings reach devices) | How managed policy reaches developer machines       | [Server-managed settings](https://code.claude.com/docs/en/Server-managed settings), [Settings files](https://code.claude.com/docs/en/Settings files)                                    |
-| [Decide what to enforce](https://code.claude.com/docs/en/Decide what to enforce)                       | Which tools, commands, and integrations are allowed | [Permissions](https://code.claude.com/docs/en/Permissions), [Sandboxing](https://code.claude.com/docs/en/Sandboxing)                                                                             |
-| [Set up usage visibility](https://code.claude.com/docs/en/Set up usage visibility)                     | How you track spend and adoption                    | [Analytics](https://code.claude.com/docs/en/Analytics), [Monitoring](https://code.claude.com/docs/en/Monitoring), [Costs](https://code.claude.com/docs/en/Costs)                                                       |
-| [Review data handling](https://code.claude.com/docs/en/Review data handling)                           | Data retention and compliance posture               | [Data usage](https://code.claude.com/docs/en/Data usage), [Security](https://code.claude.com/docs/en/Security)                                                                                   |
+| [Choose your API provider](#choose-your-api-provider)                   | Where Claude Code authenticates and how it's billed | [Authentication](/en/authentication), [Bedrock](/en/amazon-bedrock), [Vertex AI](/en/google-vertex-ai), [Foundry](/en/microsoft-foundry) |
+| [Decide how settings reach devices](#decide-how-settings-reach-devices) | How managed policy reaches developer machines       | [Server-managed settings](/en/server-managed-settings), [Settings files](/en/settings#settings-files)                                    |
+| [Decide what to enforce](#decide-what-to-enforce)                       | Which tools, commands, and integrations are allowed | [Permissions](/en/permissions), [Sandboxing](/en/sandboxing)                                                                             |
+| [Set up usage visibility](#set-up-usage-visibility)                     | How you track spend and adoption                    | [Analytics](/en/analytics), [Monitoring](/en/monitoring-usage), [Costs](/en/costs)                                                       |
+| [Review data handling](#review-data-handling)                           | Data retention and compliance posture               | [Data usage](/en/data-usage), [Security](/en/security)                                                                                   |
 
 ## Choose your API provider
 
@@ -40,9 +40,9 @@ Claude Code connects to Claude through one of several API providers. Your choice
 | Google Vertex AI              | You want to inherit existing GCP compliance controls and billing                                                                      |
 | Microsoft Foundry             | You want to inherit existing Azure compliance controls and billing                                                                    |
 
-For the full provider comparison covering authentication, regions, and feature parity, see the [enterprise deployment overview](https://code.claude.com/docs/en/enterprise deployment overview). Each provider's auth setup is in [Authentication](https://code.claude.com/docs/en/Authentication).
+For the full provider comparison covering authentication, regions, and feature parity, see the [enterprise deployment overview](/en/third-party-integrations). Each provider's auth setup is in [Authentication](/en/authentication).
 
-Proxy and firewall requirements in [Network configuration](https://code.claude.com/docs/en/Network configuration) apply regardless of provider. If you want a single endpoint in front of multiple providers or centralized request logging, see [LLM gateway](https://code.claude.com/docs/en/LLM gateway).
+Proxy and firewall requirements in [Network configuration](/en/network-config) apply regardless of provider. If you want a single endpoint in front of multiple providers or centralized request logging, see [LLM gateway](/en/llm-gateway).
 
 ## Decide how settings reach devices
 
@@ -57,15 +57,15 @@ Managed settings define policy that takes precedence over local developer config
 
 Server-managed settings reach devices at authentication time and refresh hourly during active sessions, with no endpoint infrastructure. They require a Claude for Teams or Enterprise plan, so deployments on other providers need one of the file-based or OS-level mechanisms instead.
 
-If your organization mixes providers, configure [server-managed settings](https://code.claude.com/docs/en/server-managed settings) for Claude.ai users plus a [file-based or plist/registry fallback](https://code.claude.com/docs/en/file-based or plist/registry fallback) so other users still receive managed policy.
+If your organization mixes providers, configure [server-managed settings](/en/server-managed-settings) for Claude.ai users plus a [file-based or plist/registry fallback](/en/settings#settings-files) so other users still receive managed policy.
 
 The plist and HKLM registry locations work with any provider and resist tampering because they require admin privileges to write. The Windows user registry at HKCU is writable without elevation, so treat it as a convenience default rather than an enforcement channel.
 
-By default WSL reads only the Linux file path at `/etc/claude-code`. To extend your Windows registry and `C:\Program Files\ClaudeCode` policy to WSL on the same machine, set [`wslInheritsWindowsSettings: true`](https://code.claude.com/docs/en/`wslInheritsWindowsSettings: true`) in either of those admin-only Windows sources.
+By default WSL reads only the Linux file path at `/etc/claude-code`. To extend your Windows registry and `C:\Program Files\ClaudeCode` policy to WSL on the same machine, set [`wslInheritsWindowsSettings: true`](/en/settings#available-settings) in either of those admin-only Windows sources.
 
 Whichever mechanism you choose, managed values take precedence over user and project settings. Array settings such as `permissions.allow` and `permissions.deny` merge entries from all sources, so developers can extend managed lists but not remove from them.
 
-See [Server-managed settings](https://code.claude.com/docs/en/Server-managed settings) and [Settings files and precedence](https://code.claude.com/docs/en/Settings files and precedence).
+See [Server-managed settings](/en/server-managed-settings) and [Settings files and precedence](/en/settings#settings-files).
 
 ## Decide what to enforce
 
@@ -73,18 +73,18 @@ Managed settings can lock down tools, sandbox execution, restrict MCP servers an
 
 | Control                                                                                | What it does                                                                  | Key settings                                                                  |
 | :------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------- | :---------------------------------------------------------------------------- |
-| [Permission rules](https://code.claude.com/docs/en/Permission rules)                                                    | Allow, ask, or deny specific tools and commands                               | `permissions.allow`, `permissions.deny`                                       |
-| [Permission lockdown](https://code.claude.com/docs/en/Permission lockdown)                           | Only managed permission rules apply; disable `--dangerously-skip-permissions` | `allowManagedPermissionRulesOnly`, `permissions.disableBypassPermissionsMode` |
-| [Sandboxing](https://code.claude.com/docs/en/Sandboxing)                                                           | OS-level filesystem and network isolation with domain allowlists              | `sandbox.enabled`, `sandbox.network.allowedDomains`                           |
-| [Managed policy CLAUDE.md](https://code.claude.com/docs/en/Managed policy CLAUDE.md)              | Org-wide instructions loaded in every session, cannot be excluded             | File at the managed policy path                                               |
-| [MCP server control](https://code.claude.com/docs/en/MCP server control)                                | Restrict which MCP servers users can add or connect to                        | `allowedMcpServers`, `deniedMcpServers`, `allowManagedMcpServersOnly`         |
-| [Plugin marketplace control](https://code.claude.com/docs/en/Plugin marketplace control) | Restrict which marketplace sources users can add and install from             | `strictKnownMarketplaces`, `blockedMarketplaces`                              |
-| [Hook restrictions](https://code.claude.com/docs/en/Hook restrictions)                                   | Only managed hooks load; restrict HTTP hook URLs                              | `allowManagedHooksOnly`, `allowedHttpHookUrls`                                |
-| [Version floor](https://code.claude.com/docs/en/Version floor)                                                          | Prevent auto-update from installing below an org-wide minimum                 | `minimumVersion`                                                              |
+| [Permission rules](/en/permissions)                                                    | Allow, ask, or deny specific tools and commands                               | `permissions.allow`, `permissions.deny`                                       |
+| [Permission lockdown](/en/permissions#managed-only-settings)                           | Only managed permission rules apply; disable `--dangerously-skip-permissions` | `allowManagedPermissionRulesOnly`, `permissions.disableBypassPermissionsMode` |
+| [Sandboxing](/en/sandboxing)                                                           | OS-level filesystem and network isolation with domain allowlists              | `sandbox.enabled`, `sandbox.network.allowedDomains`                           |
+| [Managed policy CLAUDE.md](/en/memory#deploy-organization-wide-claude-md)              | Org-wide instructions loaded in every session, cannot be excluded             | File at the managed policy path                                               |
+| [MCP server control](/en/mcp#managed-mcp-configuration)                                | Restrict which MCP servers users can add or connect to                        | `allowedMcpServers`, `deniedMcpServers`, `allowManagedMcpServersOnly`         |
+| [Plugin marketplace control](/en/plugin-marketplaces#managed-marketplace-restrictions) | Restrict which marketplace sources users can add and install from             | `strictKnownMarketplaces`, `blockedMarketplaces`                              |
+| [Hook restrictions](/en/settings#hook-configuration)                                   | Only managed hooks load; restrict HTTP hook URLs                              | `allowManagedHooksOnly`, `allowedHttpHookUrls`                                |
+| [Version floor](/en/settings)                                                          | Prevent auto-update from installing below an org-wide minimum                 | `minimumVersion`                                                              |
 
 Permission rules and sandboxing cover different layers. Denying WebFetch blocks Claude's fetch tool, but if Bash is allowed, `curl` and `wget` can still reach any URL. Sandboxing closes that gap with a network domain allowlist enforced at the OS level.
 
-For the threat model these controls defend against, see [Security](https://code.claude.com/docs/en/Security).
+For the threat model these controls defend against, see [Security](/en/security).
 
 ## Set up usage visibility
 
@@ -92,11 +92,11 @@ Choose monitoring based on what you need to report on.
 
 | Capability          | What you get                                         | Availability   | Where to start                           |
 | :------------------ | :--------------------------------------------------- | :------------- | :--------------------------------------- |
-| Usage monitoring    | OpenTelemetry export of sessions, tools, and tokens  | All providers  | [Monitoring usage](https://code.claude.com/docs/en/Monitoring usage) |
-| Analytics dashboard | Per-user metrics, contribution tracking, leaderboard | Anthropic only | [Analytics](https://code.claude.com/docs/en/Analytics)               |
-| Cost tracking       | Spend limits, rate limits, and usage attribution     | Anthropic only | [Costs](https://code.claude.com/docs/en/Costs)                       |
+| Usage monitoring    | OpenTelemetry export of sessions, tools, and tokens  | All providers  | [Monitoring usage](/en/monitoring-usage) |
+| Analytics dashboard | Per-user metrics, contribution tracking, leaderboard | Anthropic only | [Analytics](/en/analytics)               |
+| Cost tracking       | Spend limits, rate limits, and usage attribution     | Anthropic only | [Costs](/en/costs)                       |
 
-Cloud providers expose spend through AWS Cost Explorer, GCP Billing, or Azure Cost Management. Claude for Teams and Enterprise plans include a usage dashboard at [claude.ai/analytics/claude-code](https://code.claude.com/docs/en/claude.ai/analytics/claude-code).
+Cloud providers expose spend through AWS Cost Explorer, GCP Billing, or Azure Cost Management. Claude for Teams and Enterprise plans include a usage dashboard at [claude.ai/analytics/claude-code](https://claude.ai/analytics/claude-code).
 
 ## Review data handling
 
@@ -104,23 +104,23 @@ On Team, Enterprise, Claude API, and cloud provider plans, Anthropic does not tr
 
 | Topic                     | What to know                                                                    | Where to start                                 |
 | :------------------------ | :------------------------------------------------------------------------------ | :--------------------------------------------- |
-| Data usage policy         | What Anthropic collects, how long it's retained, what's never used for training | [Data usage](https://code.claude.com/docs/en/Data usage)                   |
-| Zero Data Retention (ZDR) | Nothing stored after the request completes. Available on Claude for Enterprise  | [Zero data retention](https://code.claude.com/docs/en/Zero data retention) |
-| Security architecture     | Network model, encryption, authentication, audit trail                          | [Security](https://code.claude.com/docs/en/Security)                       |
+| Data usage policy         | What Anthropic collects, how long it's retained, what's never used for training | [Data usage](/en/data-usage)                   |
+| Zero Data Retention (ZDR) | Nothing stored after the request completes. Available on Claude for Enterprise  | [Zero data retention](/en/zero-data-retention) |
+| Security architecture     | Network model, encryption, authentication, audit trail                          | [Security](/en/security)                       |
 
-If you need request-level audit logging or to route traffic by data sensitivity, place an [LLM gateway](https://code.claude.com/docs/en/LLM gateway) between developers and your provider. For regulatory requirements and certifications, see [Legal and compliance](https://code.claude.com/docs/en/Legal and compliance).
+If you need request-level audit logging or to route traffic by data sensitivity, place an [LLM gateway](/en/llm-gateway) between developers and your provider. For regulatory requirements and certifications, see [Legal and compliance](/en/legal-and-compliance).
 
 ## Verify and onboard
 
-After configuring managed settings, have a developer run `/status` inside Claude Code. The output includes a line beginning with `Enterprise managed settings` followed by the source in parentheses, one of `(remote)`, `(plist)`, `(HKLM)`, `(HKCU)`, or `(file)`. See [Verify active settings](https://code.claude.com/docs/en/Verify active settings).
+After configuring managed settings, have a developer run `/status` inside Claude Code. The output includes a line beginning with `Enterprise managed settings` followed by the source in parentheses, one of `(remote)`, `(plist)`, `(HKLM)`, `(HKCU)`, or `(file)`. See [Verify active settings](/en/settings#verify-active-settings).
 
 Share these resources to help developers get started:
 
-* [Quickstart](https://code.claude.com/docs/en/Quickstart): first-session walkthrough from install to working with a project
-* [Common workflows](https://code.claude.com/docs/en/Common workflows): patterns for everyday tasks like code review, refactoring, and debugging
-* [Claude 101](https://code.claude.com/docs/en/Claude 101) and [Claude Code in Action](https://code.claude.com/docs/en/Claude Code in Action): self-paced Anthropic Academy courses
+* [Quickstart](/en/quickstart): first-session walkthrough from install to working with a project
+* [Common workflows](/en/common-workflows): patterns for everyday tasks like code review, refactoring, and debugging
+* [Claude 101](https://anthropic.skilljar.com/claude-101) and [Claude Code in Action](https://anthropic.skilljar.com/claude-code-in-action): self-paced Anthropic Academy courses
 
-For login issues, point developers to [authentication troubleshooting](https://code.claude.com/docs/en/authentication troubleshooting). The most common fixes are:
+For login issues, point developers to [authentication troubleshooting](/en/troubleshoot-install#login-and-authentication). The most common fixes are:
 
 * Run `/logout` then `/login` to switch accounts
 * Run `claude update` if the enterprise auth option is missing
@@ -132,7 +132,7 @@ If a developer sees "You haven't been added to your organization yet," their sea
 
 With provider and delivery mechanism chosen, move on to detailed configuration:
 
-* [Server-managed settings](https://code.claude.com/docs/en/Server-managed settings): deliver managed policy from the Claude admin console
-* [Settings reference](https://code.claude.com/docs/en/Settings reference): every setting key, file location, and precedence rule
-* [Amazon Bedrock](https://code.claude.com/docs/en/Amazon Bedrock), [Google Vertex AI](https://code.claude.com/docs/en/Google Vertex AI), [Microsoft Foundry](https://code.claude.com/docs/en/Microsoft Foundry): provider-specific deployment
-* [Claude Enterprise Administrator Guide](https://code.claude.com/docs/en/Claude Enterprise Administrator Guide): SSO, SCIM, seat management, and rollout playbook
+* [Server-managed settings](/en/server-managed-settings): deliver managed policy from the Claude admin console
+* [Settings reference](/en/settings): every setting key, file location, and precedence rule
+* [Amazon Bedrock](/en/amazon-bedrock), [Google Vertex AI](/en/google-vertex-ai), [Microsoft Foundry](/en/microsoft-foundry): provider-specific deployment
+* [Claude Enterprise Administrator Guide](https://claude.com/resources/tutorials/claude-enterprise-administrator-guide): SSO, SCIM, seat management, and rollout playbook

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/mcp
-fetched_at: 2026-05-04T15:06:16.279068+00:00
+fetched_at: 2026-05-05T19:40:39.485445+00:00
 fetch_method: mintlify_md
 ---
 
@@ -218,7 +218,7 @@ export const MCPServersTable = ({platform = "all"}) => {
     </>;
 };
 
-Claude Code can connect to hundreds of external tools and data sources through the [Model Context Protocol (MCP)](https://code.claude.com/docs/en/Model Context Protocol (MCP)), an open source standard for AI-tool integrations. MCP servers give Claude Code access to your tools, databases, and APIs.
+Claude Code can connect to hundreds of external tools and data sources through the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction), an open source standard for AI-tool integrations. MCP servers give Claude Code access to your tools, databases, and APIs.
 
 Connect a server when you find yourself copying data into chat from another tool, like an issue tracker or a monitoring dashboard. Once connected, Claude can read and act on that system directly instead of working from what you paste.
 
@@ -231,7 +231,7 @@ With MCP servers connected, you can ask Claude Code to:
 * **Query databases**: "Find emails of 10 random users who used feature ENG-4521, based on our PostgreSQL database."
 * **Integrate designs**: "Update our standard email template based on the new Figma designs that were posted in Slack"
 * **Automate workflows**: "Create Gmail drafts inviting these 10 users to a feedback session about the new feature."
-* **React to external events**: An MCP server can also act as a [channel](https://code.claude.com/docs/en/channel) that pushes messages into your session, so Claude reacts to Telegram messages, Discord chats, or webhook events while you're away.
+* **React to external events**: An MCP server can also act as a [channel](/en/channels) that pushes messages into your session, so Claude reacts to Telegram messages, Discord chats, or webhook events while you're away.
 
 ## Popular MCP servers
 
@@ -248,7 +248,7 @@ Here are some commonly used MCP servers you can connect to Claude Code:
 <MCPServersTable platform="claudeCode" />
 
 <Note>
-  **Need a specific integration?** [Find hundreds more MCP servers on GitHub](https://code.claude.com/docs/en/Find hundreds more MCP servers on GitHub), or build your own using the [MCP SDK](https://code.claude.com/docs/en/MCP SDK).
+  **Need a specific integration?** [Find hundreds more MCP servers on GitHub](https://github.com/modelcontextprotocol/servers), or build your own using the [MCP SDK](https://modelcontextprotocol.io/quickstart/server).
 </Note>
 
 ## Installing MCP servers
@@ -333,6 +333,10 @@ claude mcp remove github
 /mcp
 ```
 
+The `/mcp` panel shows the tool count next to each connected server and flags servers that advertise the tools capability but expose no tools.
+
+The server name `workspace` is reserved for internal use. If your configuration defines a server with that name, Claude Code skips it at load time and shows a warning asking you to rename it.
+
 ### Dynamic tool updates
 
 Claude Code supports MCP `list_changed` notifications, allowing MCP servers to dynamically update their available tools, prompts, and resources without requiring you to disconnect and reconnect. When an MCP server sends a `list_changed` notification, Claude Code automatically refreshes the available capabilities from that server.
@@ -345,7 +349,7 @@ The same backoff applies when an HTTP or SSE server fails its initial connection
 
 ### Push messages with channels
 
-An MCP server can also push messages directly into your session so Claude can react to external events like CI results, monitoring alerts, or chat messages. To enable this, your server declares the `claude/channel` capability and you opt it in with the `--channels` flag at startup. See [Channels](https://code.claude.com/docs/en/Channels) to use an officially supported channel, or [Channels reference](https://code.claude.com/docs/en/Channels reference) to build your own.
+An MCP server can also push messages directly into your session so Claude can react to external events like CI results, monitoring alerts, or chat messages. To enable this, your server declares the `claude/channel` capability and you opt it in with the `--channels` flag at startup. See [Channels](/en/channels) to use an officially supported channel, or [Channels reference](/en/channels-reference) to build your own.
 
 <Tip>
   Tips:
@@ -362,7 +366,7 @@ An MCP server can also push messages directly into your session so Claude can re
 
 ### Plugin-provided MCP servers
 
-[Plugins](https://code.claude.com/docs/en/Plugins) can bundle MCP servers, automatically providing tools and integrations when the plugin is enabled. Plugin MCP servers work identically to user-configured servers.
+[Plugins](/en/plugins) can bundle MCP servers, automatically providing tools and integrations when the plugin is enabled. Plugin MCP servers work identically to user-configured servers.
 
 **How plugin MCP servers work**:
 
@@ -406,7 +410,7 @@ Or inline in `plugin.json`:
 **Plugin MCP features**:
 
 * **Automatic lifecycle**: At session startup, servers for enabled plugins connect automatically. If you enable or disable a plugin during a session, run `/reload-plugins` to connect or disconnect its MCP servers
-* **Environment variables**: use `${CLAUDE_PLUGIN_ROOT}` for bundled plugin files and `${CLAUDE_PLUGIN_DATA}` for [persistent state](https://code.claude.com/docs/en/persistent state) that survives plugin updates
+* **Environment variables**: use `${CLAUDE_PLUGIN_ROOT}` for bundled plugin files and `${CLAUDE_PLUGIN_DATA}` for [persistent state](/en/plugins-reference#persistent-data-directory) that survives plugin updates
 * **User environment access**: Access to same environment variables as manually configured servers
 * **Multiple transport types**: Support stdio, SSE, and HTTP transports (transport support may vary by server)
 
@@ -425,7 +429,7 @@ Plugin servers appear in the list with indicators showing they come from plugins
 * **Automatic setup**: No manual MCP configuration needed
 * **Team consistency**: Everyone gets the same tools when plugin is installed
 
-See the [plugin components reference](https://code.claude.com/docs/en/plugin components reference) for details on bundling MCP servers with plugins.
+See the [plugin components reference](/en/plugins-reference#mcp-servers) for details on bundling MCP servers with plugins.
 
 ## MCP installation scopes
 
@@ -433,16 +437,16 @@ MCP servers can be configured at three scopes. The scope you choose controls whi
 
 | Scope                     | Loads in             | Shared with team         | Stored in                   |
 | ------------------------- | -------------------- | ------------------------ | --------------------------- |
-| [Local](https://code.claude.com/docs/en/Local)     | Current project only | No                       | `~/.claude.json`            |
-| [Project](https://code.claude.com/docs/en/Project) | Current project only | Yes, via version control | `.mcp.json` in project root |
-| [User](https://code.claude.com/docs/en/User)       | All your projects    | No                       | `~/.claude.json`            |
+| [Local](#local-scope)     | Current project only | No                       | `~/.claude.json`            |
+| [Project](#project-scope) | Current project only | Yes, via version control | `.mcp.json` in project root |
+| [User](#user-scope)       | All your projects    | No                       | `~/.claude.json`            |
 
 ### Local scope
 
 Local scope is the default. A local-scoped server loads only in the project where you added it and stays private to you. Claude Code stores it in `~/.claude.json` under that project's path, so the same server won't appear in your other projects. Use local scope for personal development servers, experimental configurations, or servers with credentials you don't want in version control.
 
 <Note>
-  The term "local scope" for MCP servers differs from general local settings. MCP local-scoped servers are stored in `~/.claude.json` (your home directory), while general local settings use `.claude/settings.local.json` (in the project directory). See [Settings](https://code.claude.com/docs/en/Settings) for details on settings file locations.
+  The term "local scope" for MCP servers differs from general local settings. MCP local-scoped servers are stored in `~/.claude.json` (your home directory), while general local settings use `.claude/settings.local.json` (in the project directory). See [Settings](/en/settings#settings-files) for details on settings file locations.
 </Note>
 
 ```bash theme={null}
@@ -511,8 +515,8 @@ When the same server is defined in more than one place, Claude Code connects to 
 1. Local scope
 2. Project scope
 3. User scope
-4. [Plugin-provided servers](https://code.claude.com/docs/en/Plugin-provided servers)
-5. [claude.ai connectors](https://code.claude.com/docs/en/claude.ai connectors)
+4. [Plugin-provided servers](/en/plugins)
+5. [claude.ai connectors](#use-mcp-servers-from-claude-ai)
 
 The three scopes match duplicates by name. Plugins and connectors match by endpoint, so one that points at the same URL or command as a server above is treated as a duplicate.
 
@@ -600,7 +604,7 @@ Which deployment introduced these new errors?
 
 ### Example: Connect to GitHub for code reviews
 
-GitHub's remote MCP server authenticates with a GitHub personal access token passed as a header. To get one, open your [GitHub token settings](https://code.claude.com/docs/en/GitHub token settings), generate a new fine-grained token with access to the repositories you want Claude to work with, then add the server:
+GitHub's remote MCP server authenticates with a GitHub personal access token passed as a header. To get one, open your [GitHub token settings](https://github.com/settings/personal-access-tokens), generate a new fine-grained token with access to the repositories you want Claude to work with, then add the server:
 
 ```bash theme={null}
 claude mcp add --transport http github https://api.githubcopilot.com/mcp/ \
@@ -928,11 +932,11 @@ If you've already configured MCP servers in Claude Desktop, you can import them:
 
 ## Use MCP servers from Claude.ai
 
-If you've logged into Claude Code with a [Claude.ai](https://code.claude.com/docs/en/Claude.ai) account, MCP servers you've added in Claude.ai are automatically available in Claude Code:
+If you've logged into Claude Code with a [Claude.ai](https://claude.ai) account, MCP servers you've added in Claude.ai are automatically available in Claude Code:
 
 <Steps>
   <Step title="Configure MCP servers in Claude.ai">
-    Add servers at [claude.ai/customize/connectors](https://code.claude.com/docs/en/claude.ai/customize/connectors). On Team and Enterprise plans, only admins can add servers.
+    Add servers at [claude.ai/customize/connectors](https://claude.ai/customize/connectors). On Team and Enterprise plans, only admins can add servers.
   </Step>
 
   <Step title="Authenticate the MCP server">
@@ -950,7 +954,7 @@ If you've logged into Claude Code with a [Claude.ai](https://code.claude.com/doc
   </Step>
 </Steps>
 
-A server you've added in Claude Code takes [precedence](https://code.claude.com/docs/en/precedence) over a claude.ai connector that points at the same URL. When this happens, `/mcp` lists the connector as hidden and shows how to remove the duplicate if you'd rather use the connector.
+A server you've added in Claude Code takes [precedence](#scope-hierarchy-and-precedence) over a claude.ai connector that points at the same URL. When this happens, `/mcp` lists the connector as hidden and shows how to remove the duplicate if you'd rather use the connector.
 
 To disable claude.ai MCP servers in Claude Code, set the `ENABLE_CLAUDEAI_MCP_SERVERS` environment variable to `false`:
 
@@ -1024,7 +1028,7 @@ When MCP tools produce large outputs, Claude Code helps manage the token usage t
 * **Output warning threshold**: Claude Code displays a warning when any MCP tool output exceeds 10,000 tokens
 * **Configurable limit**: you can adjust the maximum allowed MCP output tokens using the `MAX_MCP_OUTPUT_TOKENS` environment variable
 * **Default limit**: the default maximum is 25,000 tokens
-* **Scope**: the environment variable applies to tools that don't declare their own limit. Tools that set [`anthropic/maxResultSizeChars`](https://code.claude.com/docs/en/`anthropic/maxResultSizeChars`) use that value instead for text content, regardless of what `MAX_MCP_OUTPUT_TOKENS` is set to. Tools that return image data are still subject to `MAX_MCP_OUTPUT_TOKENS`
+* **Scope**: the environment variable applies to tools that don't declare their own limit. Tools that set [`anthropic/maxResultSizeChars`](#raise-the-limit-for-a-specific-tool) use that value instead for text content, regardless of what `MAX_MCP_OUTPUT_TOKENS` is set to. Tools that return image data are still subject to `MAX_MCP_OUTPUT_TOKENS`
 
 To increase the limit for tools that produce large outputs:
 
@@ -1070,9 +1074,9 @@ Servers can request input in two ways:
 * **Form mode**: Claude Code shows a dialog with form fields defined by the server (for example, a username and password prompt). Fill in the fields and submit.
 * **URL mode**: Claude Code opens a browser URL for authentication or approval. Complete the flow in the browser, then confirm in the CLI.
 
-To auto-respond to elicitation requests without showing a dialog, use the [`Elicitation` hook](https://code.claude.com/docs/en/`Elicitation` hook).
+To auto-respond to elicitation requests without showing a dialog, use the [`Elicitation` hook](/en/hooks#elicitation).
 
-If you're building an MCP server that uses elicitation, see the [MCP elicitation specification](https://code.claude.com/docs/en/MCP elicitation specification) for protocol details and schema examples.
+If you're building an MCP server that uses elicitation, see the [MCP elicitation specification](https://modelcontextprotocol.io/docs/learn/client-concepts#elicitation) for protocol details and schema examples.
 
 ## Use MCP resources
 
@@ -1123,11 +1127,11 @@ Tool search keeps MCP context usage low by deferring tool definitions until Clau
 
 Tool search is enabled by default. MCP tools are deferred rather than loaded into context upfront, and Claude uses a search tool to discover relevant ones when a task needs them. Only the tools Claude actually uses enter context. From your perspective, MCP tools work exactly as before.
 
-If you prefer threshold-based loading, set `ENABLE_TOOL_SEARCH=auto` to load schemas upfront when they fit within 10% of the context window and defer only the overflow. See [Configure tool search](https://code.claude.com/docs/en/Configure tool search) for all options.
+If you prefer threshold-based loading, set `ENABLE_TOOL_SEARCH=auto` to load schemas upfront when they fit within 10% of the context window and defer only the overflow. See [Configure tool search](#configure-tool-search) for all options.
 
 ### For MCP server authors
 
-If you're building an MCP server, the server instructions field becomes more useful with Tool Search enabled. Server instructions help Claude understand when to search for your tools, similar to how [skills](https://code.claude.com/docs/en/skills) work.
+If you're building an MCP server, the server instructions field becomes more useful with Tool Search enabled. Server instructions help Claude understand when to search for your tools, similar to how [skills](/en/skills) work.
 
 Add clear, descriptive server instructions that explain:
 
@@ -1159,7 +1163,7 @@ ENABLE_TOOL_SEARCH=auto:5 claude
 ENABLE_TOOL_SEARCH=false claude
 ```
 
-Or set the value in your [settings.json `env` field](https://code.claude.com/docs/en/settings.json `env` field).
+Or set the value in your [settings.json `env` field](/en/settings#available-settings).
 
 You can also disable the `ToolSearch` tool specifically:
 
@@ -1190,6 +1194,8 @@ The following `.mcp.json` entry exempts one HTTP server while leaving other serv
 ```
 
 The `alwaysLoad` field is available on all server types and requires Claude Code v2.1.121 or later. An MCP server can also mark individual tools as always-loaded by including `"anthropic/alwaysLoad": true` in the tool's `_meta` object, which has the same effect for that tool only.
+
+Setting `alwaysLoad: true` also blocks startup until the server connects, capped at the standard 5-second connect timeout. This applies even when [`MCP_CONNECTION_NONBLOCKING=1`](/en/env-vars) is set, since the tools must be present when the first prompt is built. Other servers still connect in the background when nonblocking is enabled.
 
 ## Use MCP prompts as commands
 
@@ -1284,7 +1290,7 @@ The `managed-mcp.json` file uses the same format as a standard `.mcp.json` file:
 
 ### Option 2: Policy-based control with allowlists and denylists
 
-Instead of taking exclusive control, administrators can allow users to configure their own MCP servers while enforcing restrictions on which servers are permitted. This approach uses `allowedMcpServers` and `deniedMcpServers` in the [managed settings file](https://code.claude.com/docs/en/managed settings file).
+Instead of taking exclusive control, administrators can allow users to configure their own MCP servers while enforcing restrictions on which servers are permitted. This approach uses `allowedMcpServers` and `deniedMcpServers` in the [managed settings file](/en/settings#settings-files).
 
 <Note>
   **Choosing between options**: Use Option 1 (`managed-mcp.json`) when you want to deploy a fixed set of servers with no user customization. Use Option 2 (allowlists/denylists) when you want to allow users to add their own servers within policy constraints.

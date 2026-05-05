@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/server-managed-settings
-fetched_at: 2026-05-04T15:06:59.235434+00:00
+fetched_at: 2026-05-05T19:40:39.670842+00:00
 fetch_method: mintlify_md
 ---
 
@@ -17,7 +17,7 @@ Server-managed settings allow administrators to centrally configure Claude Code 
 This approach is designed for organizations that do not have device management infrastructure in place, or need to manage settings for users on unmanaged devices.
 
 <Note>
-  Server-managed settings are available for [Claude for Teams](https://code.claude.com/docs/en/Claude for Teams) and [Claude for Enterprise](https://code.claude.com/docs/en/Claude for Enterprise) customers.
+  Server-managed settings are available for [Claude for Teams](https://claude.com/pricing?utm_source=claude_code\&utm_medium=docs\&utm_content=server_settings_teams#team-&-enterprise) and [Claude for Enterprise](https://anthropic.com/contact-sales?utm_source=claude_code\&utm_medium=docs\&utm_content=server_settings_enterprise) customers.
 </Note>
 
 ## Requirements
@@ -30,12 +30,12 @@ To use server-managed settings, you need:
 
 ## Choose between server-managed and endpoint-managed settings
 
-Claude Code supports two approaches for centralized configuration. Server-managed settings deliver configuration from Anthropic's servers. [Endpoint-managed settings](https://code.claude.com/docs/en/Endpoint-managed settings) are deployed directly to devices through native OS policies (macOS managed preferences, Windows registry) or managed settings files.
+Claude Code supports two approaches for centralized configuration. Server-managed settings deliver configuration from Anthropic's servers. [Endpoint-managed settings](/en/settings#settings-files) are deployed directly to devices through native OS policies (macOS managed preferences, Windows registry) or managed settings files.
 
 | Approach                                                     | Best for                                                 | Security model                                                                                            |
 | :----------------------------------------------------------- | :------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------- |
 | **Server-managed settings**                                  | Organizations without MDM, or users on unmanaged devices | Settings delivered from Anthropic's servers at authentication time                                        |
-| **[Endpoint-managed settings](https://code.claude.com/docs/en/Endpoint-managed settings)** | Organizations with MDM or endpoint management            | Settings deployed to devices via MDM configuration profiles, registry policies, or managed settings files |
+| **[Endpoint-managed settings](/en/settings#settings-files)** | Organizations with MDM or endpoint management            | Settings deployed to devices via MDM configuration profiles, registry policies, or managed settings files |
 
 If your devices are enrolled in an MDM or endpoint management solution, endpoint-managed settings provide stronger security guarantees because the settings file can be protected from user modification at the OS level.
 
@@ -43,11 +43,11 @@ If your devices are enrolled in an MDM or endpoint management solution, endpoint
 
 <Steps>
   <Step title="Open the admin console">
-    In [Claude.ai](https://code.claude.com/docs/en/Claude.ai), navigate to **Admin Settings > Claude Code > Managed settings**.
+    In [Claude.ai](https://claude.ai), navigate to **Admin Settings > Claude Code > Managed settings**.
   </Step>
 
   <Step title="Define your settings">
-    Add your configuration as JSON. All [settings available in `settings.json`](https://code.claude.com/docs/en/settings available in `settings.json`) are supported, including [hooks](https://code.claude.com/docs/en/hooks), [environment variables](https://code.claude.com/docs/en/environment variables), and [managed-only settings](https://code.claude.com/docs/en/managed-only settings) like `allowManagedPermissionRulesOnly`.
+    Add your configuration as JSON. All [settings available in `settings.json`](/en/settings#available-settings) are supported, including [hooks](/en/hooks), [environment variables](/en/env-vars), and [managed-only settings](/en/permissions#managed-only-settings) like `allowManagedPermissionRulesOnly`.
 
     This example enforces a permission deny list, prevents users from bypassing permissions, and restricts permission rules to those defined in managed settings:
 
@@ -85,7 +85,7 @@ If your devices are enrolled in an MDM or endpoint management solution, endpoint
     }
     ```
 
-    To configure the [auto mode](https://code.claude.com/docs/en/auto mode) classifier so it knows which repos, buckets, and domains your organization trusts:
+    To configure the [auto mode](/en/permission-modes#eliminate-prompts-with-auto-mode) classifier so it knows which repos, buckets, and domains your organization trusts:
 
     ```json theme={null}
     {
@@ -99,7 +99,7 @@ If your devices are enrolled in an MDM or endpoint management solution, endpoint
     }
     ```
 
-    Because hooks execute shell commands, users see a [security approval dialog](https://code.claude.com/docs/en/security approval dialog) before they're applied. See [Configure auto mode](https://code.claude.com/docs/en/Configure auto mode) for how the `autoMode` entries affect what the classifier blocks and important warnings about the `allow` and `soft_deny` fields.
+    Because hooks execute shell commands, users see a [security approval dialog](#security-approval-dialogs) before they're applied. See [Configure auto mode](/en/auto-mode-config) for how the `autoMode` entries affect what the classifier blocks and important warnings about the `allow` and `soft_deny` fields.
   </Step>
 
   <Step title="Save and deploy">
@@ -109,7 +109,7 @@ If your devices are enrolled in an MDM or endpoint management solution, endpoint
 
 ### Verify settings delivery
 
-To confirm that settings are being applied, ask a user to restart Claude Code. If the configuration includes settings that trigger the [security approval dialog](https://code.claude.com/docs/en/security approval dialog), the user sees a prompt describing the managed settings on startup. You can also verify that managed permission rules are active by having a user run `/permissions` to view their effective permission rules.
+To confirm that settings are being applied, ask a user to restart Claude Code. If the configuration includes settings that trigger the [security approval dialog](#security-approval-dialogs), the user sees a prompt describing the managed settings on startup. You can also verify that managed permission rules are active by having a user run `/permissions` to view their effective permission rules.
 
 ### Access control
 
@@ -122,24 +122,24 @@ Restrict access to trusted personnel, as settings changes apply to all users in 
 
 ### Managed-only settings
 
-Most [settings keys](https://code.claude.com/docs/en/settings keys) work in any scope. A handful of keys are only read from managed settings and have no effect when placed in user or project settings files. See [managed-only settings](https://code.claude.com/docs/en/managed-only settings) for the full list. Any setting not on that list can still be placed in managed settings and takes the highest precedence.
+Most [settings keys](/en/settings#available-settings) work in any scope. A handful of keys are only read from managed settings and have no effect when placed in user or project settings files. See [managed-only settings](/en/permissions#managed-only-settings) for the full list. Any setting not on that list can still be placed in managed settings and takes the highest precedence.
 
 ### Current limitations
 
 Server-managed settings have the following limitations:
 
 * Settings apply uniformly to all users in the organization. Per-group configurations are not yet supported.
-* [MCP server configurations](https://code.claude.com/docs/en/MCP server configurations) cannot be distributed through server-managed settings.
+* [MCP server configurations](/en/mcp#managed-mcp-configuration) cannot be distributed through server-managed settings.
 
 ## Settings delivery
 
 ### Settings precedence
 
-Server-managed settings and [endpoint-managed settings](https://code.claude.com/docs/en/endpoint-managed settings) both occupy the highest tier in the Claude Code [settings hierarchy](https://code.claude.com/docs/en/settings hierarchy). No other settings level can override them, including command line arguments.
+Server-managed settings and [endpoint-managed settings](/en/settings#settings-files) both occupy the highest tier in the Claude Code [settings hierarchy](/en/settings#settings-precedence). No other settings level can override them, including command line arguments.
 
 Within the managed tier, the first source that delivers a non-empty configuration wins. Server-managed settings are checked first, then endpoint-managed settings. Sources do not merge: if server-managed settings deliver any keys at all, endpoint-managed settings are ignored entirely. If server-managed settings deliver nothing, endpoint-managed settings apply.
 
-If you clear your server-managed configuration in the admin console with the intent of falling back to an endpoint-managed plist or registry policy, be aware that [cached settings](https://code.claude.com/docs/en/cached settings) persist on client machines until the next successful fetch. Run `/status` to see which managed source is active.
+If you clear your server-managed configuration in the admin console with the intent of falling back to an endpoint-managed plist or registry policy, be aware that [cached settings](#fetch-and-caching-behavior) persist on client machines until the next successful fetch. Run `/status` to see which managed source is active.
 
 ### Fetch and caching behavior
 
@@ -196,7 +196,7 @@ Server-managed settings require a direct connection to `api.anthropic.com` and a
 * Amazon Bedrock
 * Google Vertex AI
 * Microsoft Foundry
-* Custom API endpoints via `ANTHROPIC_BASE_URL` or [LLM gateways](https://code.claude.com/docs/en/LLM gateways)
+* Custom API endpoints via `ANTHROPIC_BASE_URL` or [LLM gateways](/en/llm-gateway)
 
 ## Audit logging
 
@@ -214,17 +214,17 @@ Server-managed settings provide centralized policy enforcement, but they operate
 | User deletes the cached settings file                                  | First-launch behavior occurs: settings fetch asynchronously with a brief unenforced window                                                                                                                  |
 | API is unavailable                                                     | Cached settings apply if available, otherwise managed settings are not enforced until the next successful fetch. With `forceRemoteSettingsRefresh: true`, the CLI exits instead of continuing               |
 | User authenticates with a different organization                       | Settings are not delivered for accounts outside the managed organization                                                                                                                                    |
-| User configures a [third-party model provider](https://code.claude.com/docs/en/third-party model provider) | Server-managed settings are bypassed. This includes setting `CLAUDE_CODE_USE_BEDROCK`, `CLAUDE_CODE_USE_MANTLE`, `CLAUDE_CODE_USE_VERTEX`, `CLAUDE_CODE_USE_FOUNDRY`, or a non-default `ANTHROPIC_BASE_URL` |
+| User configures a [third-party model provider](#platform-availability) | Server-managed settings are bypassed. This includes setting `CLAUDE_CODE_USE_BEDROCK`, `CLAUDE_CODE_USE_MANTLE`, `CLAUDE_CODE_USE_VERTEX`, `CLAUDE_CODE_USE_FOUNDRY`, or a non-default `ANTHROPIC_BASE_URL` |
 
-To detect runtime configuration changes, use [`ConfigChange` hooks](https://code.claude.com/docs/en/`ConfigChange` hooks) to log modifications or block unauthorized changes before they take effect.
+To detect runtime configuration changes, use [`ConfigChange` hooks](/en/hooks#configchange) to log modifications or block unauthorized changes before they take effect.
 
-For stronger enforcement guarantees, use [endpoint-managed settings](https://code.claude.com/docs/en/endpoint-managed settings) on devices enrolled in an MDM solution.
+For stronger enforcement guarantees, use [endpoint-managed settings](/en/settings#settings-files) on devices enrolled in an MDM solution.
 
 ## See also
 
 Related pages for managing Claude Code configuration:
 
-* [Settings](https://code.claude.com/docs/en/Settings): complete configuration reference including all available settings
-* [Endpoint-managed settings](https://code.claude.com/docs/en/Endpoint-managed settings): managed settings deployed to devices by IT
-* [Authentication](https://code.claude.com/docs/en/Authentication): set up user access to Claude Code
-* [Security](https://code.claude.com/docs/en/Security): security safeguards and best practices
+* [Settings](/en/settings): complete configuration reference including all available settings
+* [Endpoint-managed settings](/en/settings#settings-files): managed settings deployed to devices by IT
+* [Authentication](/en/authentication): set up user access to Claude Code
+* [Security](/en/security): security safeguards and best practices

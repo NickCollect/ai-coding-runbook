@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/todo-tracking
-fetched_at: 2026-05-04T15:04:11.586667+00:00
+fetched_at: 2026-05-05T19:40:39.055407+00:00
 fetch_method: mintlify_md
 ---
 
@@ -141,6 +141,7 @@ The SDK automatically creates todos for:
   from claude_agent_sdk import query, AssistantMessage, ToolUseBlock
   from typing import List, Dict
 
+
   class TodoTracker:
       def __init__(self):
           self.todos: List[Dict] = []
@@ -179,6 +180,7 @@ The SDK automatically creates todos for:
                           self.todos = block.input["todos"]
                           self.display_progress()
 
+
   # Usage
   tracker = TodoTracker()
   await tracker.track_query("Build a complete authentication system with todos")
@@ -187,7 +189,7 @@ The SDK automatically creates todos for:
 
 ## Related Documentation
 
-* [TypeScript SDK Reference](https://code.claude.com/docs/en/agent-sdk/TypeScript SDK Reference)
-* [Python SDK Reference](https://code.claude.com/docs/en/agent-sdk/Python SDK Reference)
-* [Streaming vs Single Mode](https://code.claude.com/docs/en/agent-sdk/Streaming vs Single Mode)
-* [Custom Tools](https://code.claude.com/docs/en/agent-sdk/Custom Tools)
+* [TypeScript SDK Reference](/en/agent-sdk/typescript)
+* [Python SDK Reference](/en/agent-sdk/python)
+* [Streaming vs Single Mode](/en/agent-sdk/streaming-vs-single-mode)
+* [Custom Tools](/en/agent-sdk/custom-tools)

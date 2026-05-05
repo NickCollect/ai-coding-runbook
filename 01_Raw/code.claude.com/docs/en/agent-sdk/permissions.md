@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/permissions
-fetched_at: 2026-05-04T15:03:44.636722+00:00
+fetched_at: 2026-05-05T19:40:38.925122+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,10 +12,10 @@ fetch_method: mintlify_md
 
 > Control how your agent uses tools with permission modes, hooks, and declarative allow/deny rules.
 
-The Claude Agent SDK provides permission controls to manage how Claude uses tools. Use permission modes and rules to define what's allowed automatically, and the [`canUseTool` callback](https://code.claude.com/docs/en/agent-sdk/`canUseTool` callback) to handle everything else at runtime.
+The Claude Agent SDK provides permission controls to manage how Claude uses tools. Use permission modes and rules to define what's allowed automatically, and the [`canUseTool` callback](/en/agent-sdk/user-input) to handle everything else at runtime.
 
 <Note>
-  This page covers permission modes and rules. To build interactive approval flows where users approve or deny tool requests at runtime, see [Handle approvals and user input](https://code.claude.com/docs/en/agent-sdk/Handle approvals and user input).
+  This page covers permission modes and rules. To build interactive approval flows where users approve or deny tool requests at runtime, see [Handle approvals and user input](/en/agent-sdk/user-input).
 </Note>
 
 ## How permissions are evaluated
@@ -24,15 +24,15 @@ When Claude requests a tool, the SDK checks permissions in this order:
 
 <Steps>
   <Step title="Hooks">
-    Run [hooks](https://code.claude.com/docs/en/agent-sdk/hooks) first, which can allow, deny, or continue to the next step
+    Run [hooks](/en/agent-sdk/hooks) first, which can allow, deny, or continue to the next step
   </Step>
 
   <Step title="Deny rules">
-    Check `deny` rules (from `disallowed_tools` and [settings.json](https://code.claude.com/docs/en/agent-sdk/settings.json)). If a deny rule matches, the tool is blocked, even in `bypassPermissions` mode.
+    Check `deny` rules (from `disallowed_tools` and [settings.json](/en/settings#permission-settings)). If a deny rule matches, the tool is blocked, even in `bypassPermissions` mode.
   </Step>
 
   <Step title="Permission mode">
-    Apply the active [permission mode](https://code.claude.com/docs/en/agent-sdk/permission mode). `bypassPermissions` approves everything that reaches this step. `acceptEdits` approves file operations. Other modes fall through.
+    Apply the active [permission mode](#permission-modes). `bypassPermissions` approves everything that reaches this step. `acceptEdits` approves file operations. Other modes fall through.
   </Step>
 
   <Step title="Allow rules">
@@ -40,7 +40,7 @@ When Claude requests a tool, the SDK checks permissions in this order:
   </Step>
 
   <Step title="canUseTool callback">
-    If not resolved by any of the above, call your [`canUseTool` callback](https://code.claude.com/docs/en/agent-sdk/`canUseTool` callback) for a decision. In `dontAsk` mode, this step is skipped and the tool is denied.
+    If not resolved by any of the above, call your [`canUseTool` callback](/en/agent-sdk/user-input) for a decision. In `dontAsk` mode, this step is skipped and the tool is denied.
   </Step>
 </Steps>
 
@@ -48,8 +48,8 @@ When Claude requests a tool, the SDK checks permissions in this order:
 
 This page focuses on **allow and deny rules** and **permission modes**. For the other steps:
 
-* **Hooks:** run custom code to allow, deny, or modify tool requests. See [Control execution with hooks](https://code.claude.com/docs/en/agent-sdk/Control execution with hooks).
-* **canUseTool callback:** prompt users for approval at runtime. See [Handle approvals and user input](https://code.claude.com/docs/en/agent-sdk/Handle approvals and user input).
+* **Hooks:** run custom code to allow, deny, or modify tool requests. See [Control execution with hooks](/en/agent-sdk/hooks).
+* **canUseTool callback:** prompt users for approval at runtime. See [Handle approvals and user input](/en/agent-sdk/user-input).
 
 ## Allow and deny rules
 
@@ -73,7 +73,7 @@ const options = {
   **`allowed_tools` does not constrain `bypassPermissions`.** `allowed_tools` only pre-approves the tools you list. Unlisted tools are not matched by any allow rule and fall through to the permission mode, where `bypassPermissions` approves them. Setting `allowed_tools=["Read"]` alongside `permission_mode="bypassPermissions"` still approves every tool, including `Bash`, `Write`, and `Edit`. If you need `bypassPermissions` but want specific tools blocked, use `disallowed_tools`.
 </Warning>
 
-You can also configure allow, deny, and ask rules declaratively in `.claude/settings.json`. These rules are read when the `project` setting source is enabled, which it is for default `query()` options. If you set `setting_sources` (TypeScript: `settingSources`) explicitly, include `"project"` for them to apply. See [Permission settings](https://code.claude.com/docs/en/agent-sdk/Permission settings) for the rule syntax.
+You can also configure allow, deny, and ask rules declaratively in `.claude/settings.json`. These rules are read when the `project` setting source is enabled, which it is for default `query()` options. If you set `setting_sources` (TypeScript: `settingSources`) explicitly, include `"project"` for them to apply. See [Permission settings](/en/settings#permission-settings) for the rule syntax.
 
 ## Permission modes
 
@@ -87,10 +87,10 @@ The SDK supports these permission modes:
 | :----------------------- | :--------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------- |
 | `default`                | Standard permission behavior | No auto-approvals; unmatched tools trigger your `canUseTool` callback                                                                         |
 | `dontAsk`                | Deny instead of prompting    | Anything not pre-approved by `allowed_tools` or rules is denied; `canUseTool` is never called                                                 |
-| `acceptEdits`            | Auto-accept file edits       | File edits and [filesystem operations](https://code.claude.com/docs/en/agent-sdk/filesystem operations) (`mkdir`, `rm`, `mv`, etc.) are automatically approved                 |
+| `acceptEdits`            | Auto-accept file edits       | File edits and [filesystem operations](#accept-edits-mode-acceptedits) (`mkdir`, `rm`, `mv`, etc.) are automatically approved                 |
 | `bypassPermissions`      | Bypass all permission checks | All tools run without permission prompts (use with caution)                                                                                   |
 | `plan`                   | Planning mode                | No tool execution; Claude plans without making changes                                                                                        |
-| `auto` (TypeScript only) | Model-classified approvals   | A model classifier approves or denies each tool call. See [Auto mode](https://code.claude.com/docs/en/agent-sdk/Auto mode) for availability |
+| `auto` (TypeScript only) | Model-classified approvals   | A model classifier approves or denies each tool call. See [Auto mode](/en/permission-modes#eliminate-prompts-with-auto-mode) for availability |
 
 <Warning>
   **Subagent inheritance:** When the parent uses `bypassPermissions`, `acceptEdits`, or `auto`, all subagents inherit that mode and it cannot be overridden per subagent. Subagents may have different system prompts and less constrained behavior than your main agent, so inheriting `bypassPermissions` grants them full, autonomous system access without any approval prompts.
@@ -109,6 +109,7 @@ You can set the permission mode once when starting a query, or change it dynamic
       import asyncio
       from claude_agent_sdk import query, ClaudeAgentOptions
 
+
       async def main():
           async for message in query(
               prompt="Help me refactor this code",
@@ -118,6 +119,7 @@ You can set the permission mode once when starting a query, or change it dynamic
           ):
               if hasattr(message, "result"):
                   print(message.result)
+
 
       asyncio.run(main())
       ```
@@ -151,6 +153,7 @@ You can set the permission mode once when starting a query, or change it dynamic
       import asyncio
       from claude_agent_sdk import query, ClaudeAgentOptions
 
+
       async def main():
           q = query(
               prompt="Help me refactor this code",
@@ -166,6 +169,7 @@ You can set the permission mode once when starting a query, or change it dynamic
           async for message in q:
               if hasattr(message, "result"):
                   print(message.result)
+
 
       asyncio.run(main())
       ```
@@ -231,7 +235,7 @@ Auto-approves all tool uses without prompts. Hooks still execute and can block o
 
 #### Plan mode (`plan`)
 
-Prevents tool execution entirely. Claude can analyze code and create plans but cannot make changes. Claude may use `AskUserQuestion` to clarify requirements before finalizing the plan. See [Handle approvals and user input](https://code.claude.com/docs/en/agent-sdk/Handle approvals and user input) for handling these prompts.
+Prevents tool execution entirely. Claude can analyze code and create plans but cannot make changes. Claude may use `AskUserQuestion` to clarify requirements before finalizing the plan. See [Handle approvals and user input](/en/agent-sdk/user-input#handle-clarifying-questions) for handling these prompts.
 
 **Use when:** you want Claude to propose changes without executing them, such as during code review or when you need to approve changes before they're made.
 
@@ -239,6 +243,6 @@ Prevents tool execution entirely. Claude can analyze code and create plans but c
 
 For the other steps in the permission evaluation flow:
 
-* [Handle approvals and user input](https://code.claude.com/docs/en/agent-sdk/Handle approvals and user input): interactive approval prompts and clarifying questions
-* [Hooks guide](https://code.claude.com/docs/en/agent-sdk/Hooks guide): run custom code at key points in the agent lifecycle
-* [Permission rules](https://code.claude.com/docs/en/agent-sdk/Permission rules): declarative allow/deny rules in `settings.json`
+* [Handle approvals and user input](/en/agent-sdk/user-input): interactive approval prompts and clarifying questions
+* [Hooks guide](/en/agent-sdk/hooks): run custom code at key points in the agent lifecycle
+* [Permission rules](/en/settings#permission-settings): declarative allow/deny rules in `settings.json`

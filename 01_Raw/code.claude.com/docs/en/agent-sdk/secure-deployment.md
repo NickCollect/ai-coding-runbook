@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/secure-deployment
-fetched_at: 2026-05-04T15:03:55.963556+00:00
+fetched_at: 2026-05-05T19:40:38.946293+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,18 +22,18 @@ Not every deployment needs maximum security. A developer running Claude Code on 
 
 ## Threat model
 
-Agents can take unintended actions due to prompt injection (instructions embedded in content they process) or model error. Claude models are designed to resist this; see the [model overview](https://code.claude.com/docs/en/agent-sdk/model overview) and the system card for the model you deploy for evaluation details.
+Agents can take unintended actions due to prompt injection (instructions embedded in content they process) or model error. Claude models are designed to resist this; see the [model overview](https://platform.claude.com/docs/en/about-claude/models/overview) and the system card for the model you deploy for evaluation details.
 
 Defense in depth is still good practice though. For example, if an agent processes a malicious file that instructs it to send customer data to an external server, network controls can block that request entirely.
 
 ## Built-in security features
 
-Claude Code includes several security features that address common concerns. See the [security documentation](https://code.claude.com/docs/en/agent-sdk/security documentation) for full details.
+Claude Code includes several security features that address common concerns. See the [security documentation](/en/security) for full details.
 
-* **Permissions system**: Every tool and bash command can be configured to allow, block, or prompt the user for approval. Use glob patterns to create rules like "allow all npm commands" or "block any command with sudo". Organizations can set policies that apply across all users. See [permissions](https://code.claude.com/docs/en/agent-sdk/permissions).
+* **Permissions system**: Every tool and bash command can be configured to allow, block, or prompt the user for approval. Use glob patterns to create rules like "allow all npm commands" or "block any command with sudo". Organizations can set policies that apply across all users. See [permissions](/en/permissions).
 * **Command parsing for permissions**: Before executing bash commands, Claude Code parses them into an AST and matches the result against your permission rules. Commands that cannot be parsed cleanly, or that do not match an allow rule, require explicit approval. A small set of constructs such as `eval` always require approval regardless of allow rules. This is a permission gate, not a sandbox; it does not infer whether a command is dangerous from its target path or effects.
 * **Web search summarization**: Search results are summarized rather than passing raw content directly into the context, reducing the risk of prompt injection from malicious web content.
-* **Sandbox mode**: Bash commands can run in a sandboxed environment that restricts filesystem and network access. See the [sandboxing documentation](https://code.claude.com/docs/en/agent-sdk/sandboxing documentation) for details.
+* **Sandbox mode**: Bash commands can run in a sandboxed environment that restricts filesystem and network access. See the [sandboxing documentation](/en/sandboxing) for details.
 
 ## Security principles
 
@@ -84,7 +84,7 @@ Different isolation technologies offer different tradeoffs between security stre
 
 ### Sandbox runtime
 
-For lightweight isolation without containers, [sandbox-runtime](https://code.claude.com/docs/en/agent-sdk/sandbox-runtime) enforces filesystem and network restrictions at the OS level.
+For lightweight isolation without containers, [sandbox-runtime](https://github.com/anthropic-experimental/sandbox-runtime) enforces filesystem and network restrictions at the OS level.
 
 The main advantage is simplicity: no Docker configuration, container images, or networking setup required. The proxy and filesystem restrictions are built in. You provide a settings file specifying allowed domains and paths.
 
@@ -106,7 +106,7 @@ Then create a configuration file specifying allowed paths and domains.
 
 1. **Same-host kernel**: Unlike VMs, sandboxed processes share the host kernel. A kernel vulnerability could theoretically enable escape. For some threat models this is acceptable, but if you need kernel-level isolation, use gVisor or a separate VM.
 
-2. **No TLS inspection**: The proxy allowlists domains based on the client-supplied hostname and does not terminate or inspect encrypted traffic. Code running inside the sandbox can potentially use [domain fronting](https://code.claude.com/docs/en/agent-sdk/domain fronting) or similar techniques to reach hosts outside the allowlist. If your threat model requires stronger guarantees, configure a [TLS-terminating proxy](https://code.claude.com/docs/en/agent-sdk/TLS-terminating proxy). See the [sandboxing security limitations](https://code.claude.com/docs/en/agent-sdk/sandboxing security limitations) for more detail. Separately, if the agent has permissive credentials for an allowed domain, ensure it cannot use that domain to trigger other network requests or to exfiltrate data.
+2. **No TLS inspection**: The proxy allowlists domains based on the client-supplied hostname and does not terminate or inspect encrypted traffic. Code running inside the sandbox can potentially use [domain fronting](https://en.wikipedia.org/wiki/Domain_fronting) or similar techniques to reach hosts outside the allowlist. If your threat model requires stronger guarantees, configure a [TLS-terminating proxy](#traffic-forwarding). See the [sandboxing security limitations](/en/sandboxing#security-limitations) for more detail. Separately, if the agent has permissive credentials for an allowed domain, ensure it cannot use that domain to trigger other network requests or to exfiltrate data.
 
 For many single-developer and CI/CD use cases, sandbox-runtime raises the bar significantly with minimal setup. The sections below cover containers and VMs for deployments requiring stronger isolation.
 
@@ -154,7 +154,7 @@ Here's what each option does:
 
 With `--network none`, the container has no network interfaces at all. The only way for the agent to reach the outside world is through the mounted Unix socket, which connects to a proxy running on the host. This proxy can enforce domain allowlists, inject credentials, and log all traffic.
 
-This is the same architecture used by [sandbox-runtime](https://code.claude.com/docs/en/agent-sdk/sandbox-runtime). Even if the agent is compromised via prompt injection, it cannot exfiltrate data to arbitrary servers. It can only communicate through the proxy, which controls what domains are reachable. For more details, see the [Claude Code sandboxing blog post](https://code.claude.com/docs/en/agent-sdk/Claude Code sandboxing blog post).
+This is the same architecture used by [sandbox-runtime](https://github.com/anthropic-experimental/sandbox-runtime). Even if the agent is compromised via prompt injection, it cannot exfiltrate data to arbitrary servers. It can only communicate through the proxy, which controls what domains are reachable. For more details, see the [Claude Code sandboxing blog post](https://www.anthropic.com/engineering/claude-code-sandboxing).
 
 **Additional hardening options:**
 
@@ -212,7 +212,7 @@ For cloud deployments, you can combine any of the above isolation technologies w
 
 1. Run agent containers in a private subnet with no internet gateway
 2. Configure cloud firewall rules (AWS Security Groups, GCP VPC firewall) to block all egress except to your proxy
-3. Run a proxy (such as [Envoy](https://code.claude.com/docs/en/agent-sdk/Envoy) with its `credential_injector` filter) that validates requests, enforces domain allowlists, injects credentials, and forwards to external APIs
+3. Run a proxy (such as [Envoy](https://www.envoyproxy.io/) with its `credential_injector` filter) that validates requests, enforces domain allowlists, injects credentials, and forwards to external APIs
 4. Assign minimal IAM permissions to the agent's service account, routing sensitive access through the proxy where possible
 5. Log all traffic at the proxy for audit purposes
 
@@ -256,10 +256,10 @@ Claude Code and the Agent SDK respect these standard environment variables, rout
 
 You can build your own proxy or use an existing one:
 
-* [Envoy Proxy](https://code.claude.com/docs/en/agent-sdk/Envoy Proxy): production-grade proxy with `credential_injector` filter for adding auth headers
-* [mitmproxy](https://code.claude.com/docs/en/agent-sdk/mitmproxy): TLS-terminating proxy for inspecting and modifying HTTPS traffic
-* [Squid](https://code.claude.com/docs/en/agent-sdk/Squid): caching proxy with access control lists
-* [LiteLLM](https://code.claude.com/docs/en/agent-sdk/LiteLLM): LLM gateway with credential injection and rate limiting
+* [Envoy Proxy](https://www.envoyproxy.io/): production-grade proxy with `credential_injector` filter for adding auth headers
+* [mitmproxy](https://mitmproxy.org/): TLS-terminating proxy for inspecting and modifying HTTPS traffic
+* [Squid](http://www.squid-cache.org/): caching proxy with access control lists
+* [LiteLLM](https://github.com/BerriAI/litellm): LLM gateway with credential injection and rate limiting
 
 ### Credentials for other services
 
@@ -288,7 +288,7 @@ To modify HTTPS traffic to arbitrary services, without using a custom tool, you 
 
 This approach handles any HTTP-based service without writing custom tools, but adds complexity around certificate management.
 
-Note that not all programs respect `HTTP_PROXY`/`HTTPS_PROXY`. Most tools (curl, pip, npm, git) do, but some may bypass these variables and connect directly. For example, Node.js `fetch()` ignores these variables by default; in Node 24+ you can set `NODE_USE_ENV_PROXY=1` to enable support. For comprehensive coverage, you can use [proxychains](https://code.claude.com/docs/en/agent-sdk/proxychains) to intercept network calls, or configure iptables to redirect outbound traffic to a transparent proxy.
+Note that not all programs respect `HTTP_PROXY`/`HTTPS_PROXY`. Most tools (curl, pip, npm, git) do, but some may bypass these variables and connect directly. For example, Node.js `fetch()` ignores these variables by default; in Node 24+ you can set `NODE_USE_ENV_PROXY=1` to enable support. For comprehensive coverage, you can use [proxychains](https://github.com/haad/proxychains) to intercept network calls, or configure iptables to redirect outbound traffic to a transparent proxy.
 
 <Info>
   A **transparent proxy** intercepts traffic at the network level, so the client doesn't need to be configured to use it. Regular proxies require clients to explicitly connect and speak HTTP CONNECT or SOCKS. Transparent proxies (like Squid or mitmproxy in transparent mode) can handle raw redirected TCP connections.
@@ -345,12 +345,12 @@ If you want to review changes before persisting them, an overlay filesystem lets
 
 ## Further reading
 
-* [Claude Code security documentation](https://code.claude.com/docs/en/agent-sdk/Claude Code security documentation)
-* [Hosting the Agent SDK](https://code.claude.com/docs/en/agent-sdk/Hosting the Agent SDK)
-* [Handling permissions](https://code.claude.com/docs/en/agent-sdk/Handling permissions)
-* [Sandbox runtime](https://code.claude.com/docs/en/agent-sdk/Sandbox runtime)
-* [The Lethal Trifecta for AI Agents](https://code.claude.com/docs/en/agent-sdk/The Lethal Trifecta for AI Agents)
-* [OWASP Top 10 for LLM Applications](https://code.claude.com/docs/en/agent-sdk/OWASP Top 10 for LLM Applications)
-* [Docker Security Best Practices](https://code.claude.com/docs/en/agent-sdk/Docker Security Best Practices)
-* [gVisor Documentation](https://code.claude.com/docs/en/agent-sdk/gVisor Documentation)
-* [Firecracker Documentation](https://code.claude.com/docs/en/agent-sdk/Firecracker Documentation)
+* [Claude Code security documentation](/en/security)
+* [Hosting the Agent SDK](/en/agent-sdk/hosting)
+* [Handling permissions](/en/agent-sdk/permissions)
+* [Sandbox runtime](https://github.com/anthropic-experimental/sandbox-runtime)
+* [The Lethal Trifecta for AI Agents](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/)
+* [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
+* [Docker Security Best Practices](https://docs.docker.com/engine/security/)
+* [gVisor Documentation](https://gvisor.dev/docs/)
+* [Firecracker Documentation](https://firecracker-microvm.github.io/)

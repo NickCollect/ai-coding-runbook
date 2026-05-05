@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/sandboxing
-fetched_at: 2026-05-04T15:06:54.079806+00:00
+fetched_at: 2026-05-05T19:40:39.628922+00:00
 fetch_method: mintlify_md
 ---
 
@@ -55,12 +55,12 @@ You can grant write access to additional paths using `sandbox.filesystem.allowWr
 Network access is controlled through a proxy server running outside the sandbox:
 
 * **Domain restrictions**: Only approved domains can be accessed
-* **User confirmation**: New domain requests trigger permission prompts (unless [`allowManagedDomainsOnly`](https://code.claude.com/docs/en/`allowManagedDomainsOnly`) is enabled, which blocks non-allowed domains automatically)
+* **User confirmation**: New domain requests trigger permission prompts (unless [`allowManagedDomainsOnly`](/en/settings#sandbox-settings) is enabled, which blocks non-allowed domains automatically)
 * **Custom proxy support**: Advanced users can implement custom rules on outgoing traffic
 * **Comprehensive coverage**: Restrictions apply to all scripts, programs, and subprocesses spawned by commands
 
 <Note>
-  The built-in proxy enforces the allowlist based on the requested hostname and does not terminate or inspect TLS traffic. See [Security limitations](https://code.claude.com/docs/en/Security limitations) for the implications of this design, and [Custom proxy configuration](https://code.claude.com/docs/en/Custom proxy configuration) if your threat model requires TLS inspection.
+  The built-in proxy enforces the allowlist based on the requested hostname and does not terminate or inspect TLS traffic. See [Security limitations](#security-limitations) for the implications of this design, and [Custom proxy configuration](#custom-proxy-configuration) if your threat model requires TLS inspection.
 </Note>
 
 ### OS-level enforcement
@@ -68,7 +68,7 @@ Network access is controlled through a proxy server running outside the sandbox:
 The sandboxed bash tool leverages operating system security primitives:
 
 * **macOS**: Uses Seatbelt for sandbox enforcement
-* **Linux**: Uses [bubblewrap](https://code.claude.com/docs/en/bubblewrap) for isolation
+* **Linux**: Uses [bubblewrap](https://github.com/containers/bubblewrap) for isolation
 * **WSL2**: Uses bubblewrap, same as Linux
 
 WSL1 is not supported because bubblewrap requires kernel features only available in WSL2.
@@ -99,7 +99,7 @@ On **Linux and WSL2**, install the required packages first:
 
 WSL1 does not support sandboxing because it lacks the required Linux namespace primitives. If you see `Sandboxing requires WSL2`, upgrade your distribution to WSL2 or run Claude Code without sandboxing.
 
-On WSL2, sandboxed commands cannot launch Windows binaries such as `cmd.exe`, `powershell.exe`, or anything under `/mnt/c/`. WSL hands these off to the Windows host over a Unix socket, which the sandbox blocks. If a command needs to invoke a Windows binary, add it to [`excludedCommands`](https://code.claude.com/docs/en/`excludedCommands`) so it runs outside the sandbox.
+On WSL2, sandboxed commands cannot launch Windows binaries such as `cmd.exe`, `powershell.exe`, or anything under `/mnt/c/`. WSL hands these off to the Windows host over a Unix socket, which the sandbox blocks. If a command needs to invoke a Windows binary, add it to [`excludedCommands`](/en/settings#sandbox-settings) so it runs outside the sandbox.
 
 ### Enable sandboxing
 
@@ -111,7 +111,7 @@ You can enable sandboxing by running the `/sandbox` command:
 
 This opens a menu where you can choose between sandbox modes. If required dependencies are missing (such as `bubblewrap` or `socat` on Linux), the menu displays installation instructions for your platform.
 
-By default, if the sandbox cannot start (missing dependencies or unsupported platform), Claude Code shows a warning and runs commands without sandboxing. To make this a hard failure instead, set [`sandbox.failIfUnavailable`](https://code.claude.com/docs/en/`sandbox.failIfUnavailable`) to `true`. This is intended for managed deployments that require sandboxing as a security gate.
+By default, if the sandbox cannot start (missing dependencies or unsupported platform), Claude Code shows a warning and runs commands without sandboxing. To make this a hard failure instead, set [`sandbox.failIfUnavailable`](/en/settings#sandbox-settings) to `true`. This is intended for managed deployments that require sandboxing as a security gate.
 
 ### Sandbox modes
 
@@ -129,7 +129,7 @@ In both modes, the sandbox enforces the same filesystem and network restrictions
 
 ### Configure sandboxing
 
-Customize sandbox behavior through your `settings.json` file. See [Settings](https://code.claude.com/docs/en/Settings) for complete configuration reference.
+Customize sandbox behavior through your `settings.json` file. See [Settings](/en/settings#sandbox-settings) for complete configuration reference.
 
 #### Granting subprocess write access to specific paths
 
@@ -148,7 +148,7 @@ By default, sandboxed commands can only write to the current working directory. 
 
 These paths are enforced at the OS level, so all commands running inside the sandbox, including their child processes, respect them. This is the recommended approach when a tool needs write access to a specific location, rather than excluding the tool from the sandbox entirely with `excludedCommands`.
 
-When `allowWrite` (or `denyWrite`/`denyRead`/`allowRead`) is defined in multiple [settings scopes](https://code.claude.com/docs/en/settings scopes), the arrays are **merged**, meaning paths from every scope are combined, not replaced. For example, if managed settings allow writes to `/opt/company-tools` and a user adds `~/.kube` in their personal settings, both paths are included in the final sandbox configuration. This means users and projects can extend the list without duplicating or overriding paths set by higher-priority scopes.
+When `allowWrite` (or `denyWrite`/`denyRead`/`allowRead`) is defined in multiple [settings scopes](/en/settings#settings-precedence), the arrays are **merged**, meaning paths from every scope are combined, not replaced. For example, if managed settings allow writes to `/opt/company-tools` and a user adds `~/.kube` in their personal settings, both paths are included in the final sandbox configuration. This means users and projects can extend the list without duplicating or overriding paths set by higher-priority scopes.
 
 Path prefixes control how paths are resolved:
 
@@ -158,7 +158,7 @@ Path prefixes control how paths are resolved:
 | `~/`              | Relative to home directory                                                             | `~/.kube` becomes `$HOME/.kube`                                           |
 | `./` or no prefix | Relative to the project root for project settings, or to `~/.claude` for user settings | `./output` in `.claude/settings.json` resolves to `<project-root>/output` |
 
-The older `//path` prefix for absolute paths still works. If you previously used single-slash `/path` expecting project-relative resolution, switch to `./path`. This syntax differs from [Read and Edit permission rules](https://code.claude.com/docs/en/Read and Edit permission rules), which use `//path` for absolute and `/path` for project-relative. Sandbox filesystem paths use standard conventions: `/tmp/build` is an absolute path.
+The older `//path` prefix for absolute paths still works. If you previously used single-slash `/path` expecting project-relative resolution, switch to `./path`. This syntax differs from [Read and Edit permission rules](/en/permissions#read-and-edit), which use `//path` for absolute and `/path` for project-relative. Sandbox filesystem paths use standard conventions: `/tmp/build` is an absolute path.
 
 You can also deny write or read access using `sandbox.filesystem.denyWrite` and `sandbox.filesystem.denyRead`. These are merged with any paths from `Edit(...)` and `Read(...)` permission rules. To re-allow reading specific paths within a denied region, use `sandbox.filesystem.allowRead`, which takes precedence over `denyRead`. When `allowManagedReadPathsOnly` is enabled in managed settings, only managed `allowRead` entries are respected; user, project, and local `allowRead` entries are ignored. `denyRead` still merges from all sources.
 
@@ -189,7 +189,7 @@ The `.` in `allowRead` resolves to the project root because this configuration l
 <Note>
   Claude Code includes an intentional escape hatch mechanism that allows commands to run outside the sandbox when necessary. When a command fails due to sandbox restrictions (such as network connectivity issues or incompatible tools), Claude is prompted to analyze the failure and may retry the command with the `dangerouslyDisableSandbox` parameter. Commands that use this parameter go through the normal Claude Code permissions flow requiring user permission to execute. This allows Claude Code to handle edge cases where certain tools or network operations cannot function within sandbox constraints.
 
-  You can disable this escape hatch by setting `"allowUnsandboxedCommands": false` in your [sandbox settings](https://code.claude.com/docs/en/sandbox settings). When disabled, the `dangerouslyDisableSandbox` parameter is completely ignored and all commands must run sandboxed or be explicitly listed in `excludedCommands`.
+  You can disable this escape hatch by setting `"allowUnsandboxedCommands": false` in your [sandbox settings](/en/settings#sandbox-settings). When disabled, the `dangerouslyDisableSandbox` parameter is completely ignored and all commands must run sandboxed or be explicitly listed in `excludedCommands`.
 </Note>
 
 ## Security benefits
@@ -202,7 +202,7 @@ Even if an attacker successfully manipulates Claude Code's behavior through prom
 
 * Cannot modify critical config files such as `~/.bashrc`
 * Cannot modify system-level files in `/bin/`
-* Cannot read files that are denied in your [Claude permission settings](https://code.claude.com/docs/en/Claude permission settings)
+* Cannot read files that are denied in your [Claude permission settings](/en/permissions#manage-permissions)
 
 **Network protection:**
 
@@ -242,7 +242,7 @@ When Claude Code attempts to access network resources outside the sandbox:
 * Network Sandboxing Limitations: The network filtering system operates by restricting the domains that processes are allowed to connect to. The built-in proxy does not terminate or perform TLS inspection on outbound traffic, so the contents of encrypted connections are not examined. You are responsible for ensuring that only trusted domains are allowed in your policy.
 
 <Warning>
-  Allowing broad domains such as `github.com` can create paths for data exfiltration. Because the proxy makes its allow decision from the client-supplied hostname without inspecting TLS, code running inside the sandbox can potentially use [domain fronting](https://code.claude.com/docs/en/domain fronting) or similar techniques to reach hosts outside the allowlist. If your threat model requires stronger guarantees, configure a [custom proxy](https://code.claude.com/docs/en/custom proxy) that terminates TLS and inspects traffic, and install its CA certificate inside the sandbox. Stronger TLS-aware network isolation is an active area of development.
+  Allowing broad domains such as `github.com` can create paths for data exfiltration. Because the proxy makes its allow decision from the client-supplied hostname without inspecting TLS, code running inside the sandbox can potentially use [domain fronting](https://en.wikipedia.org/wiki/Domain_fronting) or similar techniques to reach hosts outside the allowlist. If your threat model requires stronger guarantees, configure a [custom proxy](#custom-proxy-configuration) that terminates TLS and inspects traffic, and install its CA certificate inside the sandbox. Stronger TLS-aware network isolation is an active area of development.
 </Warning>
 
 * Privilege Escalation via Unix Sockets: The `allowUnixSockets` configuration can inadvertently grant access to powerful system services that could lead to sandbox bypasses. For example, if it is used to allow access to `/var/run/docker.sock` this would effectively grant access to the host system through exploiting the docker socket. Users are encouraged to carefully consider any unix sockets that they allow through the sandbox.
@@ -251,7 +251,7 @@ When Claude Code attempts to access network resources outside the sandbox:
 
 ## How sandboxing relates to permissions
 
-Sandboxing and [permissions](https://code.claude.com/docs/en/permissions) are complementary security layers that work together:
+Sandboxing and [permissions](/en/permissions) are complementary security layers that work together:
 
 * **Permissions** control which tools Claude Code can use and are evaluated before any tool runs. They apply to all tools: Bash, Read, Edit, WebFetch, MCP, and others.
 * **Sandboxing** provides OS-level enforcement that restricts what Bash commands can access at the filesystem and network level. It applies only to Bash commands and their child processes.
@@ -268,7 +268,7 @@ Filesystem and network restrictions are configured through both sandbox settings
 
 Paths from both `sandbox.filesystem` settings and permission rules are merged together into the final sandbox configuration.
 
-This [repository](https://code.claude.com/docs/en/repository) includes starter settings configurations for common deployment scenarios, including sandbox-specific examples. Use these as starting points and adjust them to fit your needs.
+This [repository](https://github.com/anthropics/claude-code/tree/main/examples/settings) includes starter settings configurations for common deployment scenarios, including sandbox-specific examples. Use these as starting points and adjust them to fit your needs.
 
 ## Advanced usage
 
@@ -296,9 +296,9 @@ For organizations requiring advanced network security, you can implement a custo
 
 The sandboxed bash tool works alongside:
 
-* **Permission rules**: Combine with [permission settings](https://code.claude.com/docs/en/permission settings) for defense-in-depth
-* **Development containers**: Use with [dev containers](https://code.claude.com/docs/en/dev containers) for additional isolation
-* **Enterprise policies**: Enforce sandbox configurations through [managed settings](https://code.claude.com/docs/en/managed settings)
+* **Permission rules**: Combine with [permission settings](/en/permissions) for defense-in-depth
+* **Development containers**: Use with [dev containers](/en/devcontainer) for additional isolation
+* **Enterprise policies**: Enforce sandbox configurations through [managed settings](/en/settings#settings-precedence)
 
 ## Best practices
 
@@ -316,7 +316,7 @@ The sandbox runtime is available as an open source npm package for use in your o
 npx @anthropic-ai/sandbox-runtime <command-to-sandbox>
 ```
 
-For implementation details and source code, visit the [GitHub repository](https://code.claude.com/docs/en/GitHub repository).
+For implementation details and source code, visit the [GitHub repository](https://github.com/anthropic-experimental/sandbox-runtime).
 
 ## Limitations
 
@@ -328,12 +328,12 @@ For implementation details and source code, visit the [GitHub repository](https:
 
 The sandbox isolates Bash subprocesses. Other tools operate under different boundaries:
 
-* **Built-in file tools**: Read, Edit, and Write use the permission system directly rather than running through the sandbox. See [permissions](https://code.claude.com/docs/en/permissions).
-* **Computer use**: when Claude opens apps and controls your screen, it runs on your actual desktop rather than in an isolated environment. Per-app permission prompts gate each application. See [computer use in the CLI](https://code.claude.com/docs/en/computer use in the CLI) or [computer use in Desktop](https://code.claude.com/docs/en/computer use in Desktop).
+* **Built-in file tools**: Read, Edit, and Write use the permission system directly rather than running through the sandbox. See [permissions](/en/permissions).
+* **Computer use**: when Claude opens apps and controls your screen, it runs on your actual desktop rather than in an isolated environment. Per-app permission prompts gate each application. See [computer use in the CLI](/en/computer-use) or [computer use in Desktop](/en/desktop#let-claude-use-your-computer).
 
 ## See also
 
-* [Security](https://code.claude.com/docs/en/Security) - Comprehensive security features and best practices
-* [Permissions](https://code.claude.com/docs/en/Permissions) - Permission configuration and access control
-* [Settings](https://code.claude.com/docs/en/Settings) - Complete configuration reference
-* [CLI reference](https://code.claude.com/docs/en/CLI reference) - Command-line options
+* [Security](/en/security) - Comprehensive security features and best practices
+* [Permissions](/en/permissions) - Permission configuration and access control
+* [Settings](/en/settings) - Complete configuration reference
+* [CLI reference](/en/cli-reference) - Command-line options

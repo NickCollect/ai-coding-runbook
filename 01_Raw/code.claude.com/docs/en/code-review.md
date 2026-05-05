@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/code-review
-fetched_at: 2026-05-04T15:04:58.122228+00:00
+fetched_at: 2026-05-05T19:40:39.190949+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,31 +13,31 @@ fetch_method: mintlify_md
 > Set up automated PR reviews that catch logic errors, security vulnerabilities, and regressions using multi-agent analysis of your full codebase
 
 <Note>
-  Code Review is in research preview, available for [Team and Enterprise](https://code.claude.com/docs/en/Team and Enterprise) subscriptions. It is not available for organizations with [Zero Data Retention](https://code.claude.com/docs/en/Zero Data Retention) enabled.
+  Code Review is in research preview, available for [Team and Enterprise](https://claude.ai/admin-settings/claude-code) subscriptions. It is not available for organizations with [Zero Data Retention](/en/zero-data-retention) enabled.
 </Note>
 
 Code Review analyzes your GitHub pull requests and posts findings as inline comments on the lines of code where it found issues. A fleet of specialized agents examine the code changes in the context of your full codebase, looking for logic errors, security vulnerabilities, broken edge cases, and subtle regressions.
 
 Findings are tagged by severity and don't approve or block your PR, so existing review workflows stay intact. You can tune what Claude flags by adding a `CLAUDE.md` or `REVIEW.md` file to your repository.
 
-To run Claude in your own CI infrastructure instead of this managed service, see [GitHub Actions](https://code.claude.com/docs/en/GitHub Actions) or [GitLab CI/CD](https://code.claude.com/docs/en/GitLab CI/CD). For repositories on a self-hosted GitHub instance, see [GitHub Enterprise Server](https://code.claude.com/docs/en/GitHub Enterprise Server).
+To run Claude in your own CI infrastructure instead of this managed service, see [GitHub Actions](/en/github-actions) or [GitLab CI/CD](/en/gitlab-ci-cd). For repositories on a self-hosted GitHub instance, see [GitHub Enterprise Server](/en/github-enterprise-server).
 
 This page covers:
 
-* [How reviews work](https://code.claude.com/docs/en/How reviews work)
-* [Setup](https://code.claude.com/docs/en/Setup)
-* [Triggering reviews manually](https://code.claude.com/docs/en/Triggering reviews manually) with `@claude review` and `@claude review once`
-* [Customizing reviews](https://code.claude.com/docs/en/Customizing reviews) with `CLAUDE.md` and `REVIEW.md`
-* [Pricing](https://code.claude.com/docs/en/Pricing)
-* [Troubleshooting](https://code.claude.com/docs/en/Troubleshooting) failed runs and missing comments
+* [How reviews work](#how-reviews-work)
+* [Setup](#set-up-code-review)
+* [Triggering reviews manually](#manually-trigger-reviews) with `@claude review` and `@claude review once`
+* [Customizing reviews](#customize-reviews) with `CLAUDE.md` and `REVIEW.md`
+* [Pricing](#pricing)
+* [Troubleshooting](#troubleshooting) failed runs and missing comments
 
 ## How reviews work
 
-Once an admin [enables Code Review](https://code.claude.com/docs/en/enables Code Review) for your organization, reviews trigger when a PR opens, on every push, or when manually requested, depending on the repository's configured behavior. Commenting `@claude review` [starts reviews on a PR](https://code.claude.com/docs/en/starts reviews on a PR) in any mode.
+Once an admin [enables Code Review](#set-up-code-review) for your organization, reviews trigger when a PR opens, on every push, or when manually requested, depending on the repository's configured behavior. Commenting `@claude review` [starts reviews on a PR](#manually-trigger-reviews) in any mode.
 
 When a review runs, multiple agents analyze the diff and surrounding code in parallel on Anthropic infrastructure. Each agent looks for a different class of issue, then a verification step checks candidates against actual code behavior to filter out false positives. The results are deduplicated, ranked by severity, and posted as inline comments on the specific lines where issues were found, with a summary in the review body. If no issues are found, Claude posts a short confirmation comment on the PR.
 
-Reviews scale in cost with PR size and complexity, completing in 20 minutes on average. Admins can monitor review activity and spend via the [analytics dashboard](https://code.claude.com/docs/en/analytics dashboard).
+Reviews scale in cost with PR size and complexity, completing in 20 minutes on average. Admins can monitor review activity and spend via the [analytics dashboard](#view-usage).
 
 ### Severity levels
 
@@ -55,7 +55,7 @@ Findings include a collapsible extended reasoning section you can expand to unde
 
 Each review comment from Claude arrives with 👍 and 👎 already attached so both buttons appear in the GitHub UI for one-click rating. Click 👍 if the finding was useful or 👎 if it was wrong or noisy. Anthropic collects reaction counts after the PR merges and uses them to tune the reviewer. Reactions do not trigger a re-review or change anything on the PR.
 
-Replying to an inline comment does not prompt Claude to respond or update the PR. To act on a finding, fix the code and push. If the PR is subscribed to push-triggered reviews, the next run resolves the thread when the issue is fixed. To request a fresh review without pushing, comment `@claude review once` as a [top-level PR comment](https://code.claude.com/docs/en/top-level PR comment).
+Replying to an inline comment does not prompt Claude to respond or update the PR. To act on a finding, fix the code and push. If the PR is subscribed to push-triggered reviews, the next run resolves the thread when the issue is fixed. To request a fresh review without pushing, comment `@claude review once` as a [top-level PR comment](#manually-trigger-reviews).
 
 ### Check run output
 
@@ -79,7 +79,7 @@ This returns a JSON object with counts per severity, for example `{"normal": 2, 
 
 ### What Code Review checks
 
-By default, Code Review focuses on correctness: bugs that would break production, not formatting preferences or missing test coverage. You can expand what it checks by [adding guidance files](https://code.claude.com/docs/en/adding guidance files) to your repository.
+By default, Code Review focuses on correctness: bugs that would break production, not formatting preferences or missing test coverage. You can expand what it checks by [adding guidance files](#customize-reviews) to your repository.
 
 ## Set up Code Review
 
@@ -87,7 +87,7 @@ An admin enables Code Review once for the organization and selects which reposit
 
 <Steps>
   <Step title="Open Claude Code admin settings">
-    Go to [claude.ai/admin-settings/claude-code](https://code.claude.com/docs/en/claude.ai/admin-settings/claude-code) and find the Code Review section. You need admin access to your Claude organization and permission to install GitHub Apps in your GitHub organization.
+    Go to [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code) and find the Code Review section. You need admin access to your Claude organization and permission to install GitHub Apps in your GitHub organization.
   </Step>
 
   <Step title="Start setup">
@@ -101,7 +101,7 @@ An admin enables Code Review once for the organization and selects which reposit
     * **Issues**: read and write
     * **Pull requests**: read and write
 
-    Code Review uses read access to contents and write access to pull requests. The broader permission set also supports [GitHub Actions](https://code.claude.com/docs/en/GitHub Actions) if you enable that later.
+    Code Review uses read access to contents and write access to pull requests. The broader permission set also supports [GitHub Actions](/en/github-actions) if you enable that later.
   </Step>
 
   <Step title="Select repositories">
@@ -113,7 +113,7 @@ An admin enables Code Review once for the organization and selects which reposit
 
     * **Once after PR creation**: review runs once when a PR is opened or marked ready for review
     * **After every push**: review runs on every push to the PR branch, catching new issues as the PR evolves and auto-resolving threads when you fix flagged issues
-    * **Manual**: reviews start only when someone [comments `@claude review` or `@claude review once` on a PR](https://code.claude.com/docs/en/comments `@claude review` or `@claude review once` on a PR); `@claude review` also subscribes the PR to reviews on subsequent pushes
+    * **Manual**: reviews start only when someone [comments `@claude review` or `@claude review once` on a PR](#manually-trigger-reviews); `@claude review` also subscribes the PR to reviews on subsequent pushes
 
     Reviewing on every push runs the most reviews and costs the most. Manual mode is useful for high-traffic repos where you want to opt specific PRs into review, or to only start reviewing your PRs once they're ready.
   </Step>
@@ -154,17 +154,17 @@ Code Review reads two files from your repository to guide what it flags. They di
 
 ### CLAUDE.md
 
-Code Review reads your repository's `CLAUDE.md` files and treats newly introduced violations as [nit-level](https://code.claude.com/docs/en/nit-level) findings. This works bidirectionally: if your PR changes code in a way that makes a `CLAUDE.md` statement outdated, Claude flags that the docs need updating too.
+Code Review reads your repository's `CLAUDE.md` files and treats newly introduced violations as [nit-level](#severity-levels) findings. This works bidirectionally: if your PR changes code in a way that makes a `CLAUDE.md` statement outdated, Claude flags that the docs need updating too.
 
-Claude reads `CLAUDE.md` files at every level of your directory hierarchy, so rules in a subdirectory's `CLAUDE.md` apply only to files under that path. See the [memory documentation](https://code.claude.com/docs/en/memory documentation) for more on how `CLAUDE.md` works.
+Claude reads `CLAUDE.md` files at every level of your directory hierarchy, so rules in a subdirectory's `CLAUDE.md` apply only to files under that path. See the [memory documentation](/en/memory) for more on how `CLAUDE.md` works.
 
-For review-specific guidance that you don't want applied to general Claude Code sessions, use [`REVIEW.md`](https://code.claude.com/docs/en/`REVIEW.md`) instead.
+For review-specific guidance that you don't want applied to general Claude Code sessions, use [`REVIEW.md`](#review-md) instead.
 
 ### REVIEW\.md
 
 `REVIEW.md` is a file at your repository root that overrides how Code Review behaves on your repo. Its contents are injected into the system prompt of every agent in the review pipeline as the highest-priority instruction block, taking precedence over the default review guidance.
 
-Because it's pasted verbatim, `REVIEW.md` is plain instructions: [`@` import syntax](https://code.claude.com/docs/en/`@` import syntax) is not expanded, and referenced files are not read into the prompt. Put the rules you want enforced directly in the file.
+Because it's pasted verbatim, `REVIEW.md` is plain instructions: [`@` import syntax](/en/memory#import-additional-files) is not expanded, and referenced files are not read into the prompt. Put the rules you want enforced directly in the file.
 
 #### What you can tune
 
@@ -225,7 +225,7 @@ Length has a cost: a long `REVIEW.md` dilutes the rules that matter most. Keep i
 
 ## View usage
 
-Go to [claude.ai/analytics/code-review](https://code.claude.com/docs/en/claude.ai/analytics/code-review) to see Code Review activity across your organization. The dashboard shows:
+Go to [claude.ai/analytics/code-review](https://claude.ai/analytics/code-review) to see Code Review activity across your organization. The dashboard shows:
 
 | Section              | What it shows                                                                            |
 | :------------------- | :--------------------------------------------------------------------------------------- |
@@ -238,7 +238,7 @@ The repositories table in admin settings also shows average cost per review for 
 
 ## Pricing
 
-Code Review is billed based on token usage. Each review averages \$15-25 in cost, scaling with PR size, codebase complexity, and how many issues require verification. Code Review usage is billed separately through [extra usage](https://code.claude.com/docs/en/extra usage) and does not count against your plan's included usage.
+Code Review is billed based on token usage. Each review averages \$15-25 in cost, scaling with PR size, codebase complexity, and how many issues require verification. Code Review usage is billed separately through [extra usage](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans) and does not count against your plan's included usage.
 
 The review trigger you choose affects total cost:
 
@@ -246,11 +246,11 @@ The review trigger you choose affects total cost:
 * **After every push**: runs on each push, multiplying cost by the number of pushes
 * **Manual**: no reviews until someone comments `@claude review` on a PR
 
-In any mode, commenting `@claude review` [opts the PR into push-triggered reviews](https://code.claude.com/docs/en/opts the PR into push-triggered reviews), so additional cost accrues per push after that comment. To run a single review without subscribing to future pushes, comment `@claude review once` instead.
+In any mode, commenting `@claude review` [opts the PR into push-triggered reviews](#manually-trigger-reviews), so additional cost accrues per push after that comment. To run a single review without subscribing to future pushes, comment `@claude review once` instead.
 
-Costs appear on your Anthropic bill regardless of whether your organization uses Amazon Bedrock or Google Vertex AI for other Claude Code features. To set a monthly spend cap for Code Review, go to [claude.ai/admin-settings/usage](https://code.claude.com/docs/en/claude.ai/admin-settings/usage) and configure the limit for the Claude Code Review service.
+Costs appear on your Anthropic bill regardless of whether your organization uses Amazon Bedrock or Google Vertex AI for other Claude Code features. To set a monthly spend cap for Code Review, go to [claude.ai/admin-settings/usage](https://claude.ai/admin-settings/usage) and configure the limit for the Claude Code Review service.
 
-Monitor spend via the weekly cost chart in [analytics](https://code.claude.com/docs/en/analytics) or the per-repo average cost column in admin settings.
+Monitor spend via the weekly cost chart in [analytics](#view-usage) or the per-repo average cost column in admin settings.
 
 ## Troubleshooting
 
@@ -266,7 +266,7 @@ The **Re-run** button in GitHub's Checks tab does not retrigger Code Review. Use
 
 ### Review didn't run and the PR shows a spend-cap message
 
-When your organization's monthly spend cap is reached, Code Review posts a single comment on the PR explaining that the review was skipped. Reviews resume automatically at the start of the next billing period, or immediately when an admin raises the cap at [claude.ai/admin-settings/usage](https://code.claude.com/docs/en/claude.ai/admin-settings/usage).
+When your organization's monthly spend cap is reached, Code Review posts a single comment on the PR explaining that the review was skipped. Reviews resume automatically at the start of the next billing period, or immediately when an admin raises the cap at [claude.ai/admin-settings/usage](https://claude.ai/admin-settings/usage).
 
 ### Find issues that aren't showing as inline comments
 
@@ -280,8 +280,8 @@ If the check run title says issues were found but you don't see inline review co
 
 Code Review is designed to work alongside the rest of Claude Code. If you want to run reviews locally before opening a PR, need a self-hosted setup, or want to go deeper on how `CLAUDE.md` shapes Claude's behavior across tools, these pages are good next stops:
 
-* [Plugins](https://code.claude.com/docs/en/Plugins): browse the plugin marketplace, including a `code-review` plugin for running on-demand reviews locally before pushing
-* [GitHub Actions](https://code.claude.com/docs/en/GitHub Actions): run Claude in your own GitHub Actions workflows for custom automation beyond code review
-* [GitLab CI/CD](https://code.claude.com/docs/en/GitLab CI/CD): self-hosted Claude integration for GitLab pipelines
-* [Memory](https://code.claude.com/docs/en/Memory): how `CLAUDE.md` files work across Claude Code
-* [Analytics](https://code.claude.com/docs/en/Analytics): track Claude Code usage beyond code review
+* [Plugins](/en/discover-plugins): browse the plugin marketplace, including a `code-review` plugin for running on-demand reviews locally before pushing
+* [GitHub Actions](/en/github-actions): run Claude in your own GitHub Actions workflows for custom automation beyond code review
+* [GitLab CI/CD](/en/gitlab-ci-cd): self-hosted Claude integration for GitLab pipelines
+* [Memory](/en/memory): how `CLAUDE.md` files work across Claude Code
+* [Analytics](/en/analytics): track Claude Code usage beyond code review

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/troubleshooting
-fetched_at: 2026-05-04T15:07:21.807035+00:00
+fetched_at: 2026-05-05T19:40:39.730007+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,14 +16,14 @@ This page covers performance, stability, and search problems once Claude Code is
 
 | Symptom                                                                                                 | Go to                                                                                    |
 | :------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------- |
-| `command not found`, install fails, PATH issues, `EACCES`, TLS errors                                   | [Troubleshoot installation and login](https://code.claude.com/docs/en/Troubleshoot installation and login)                          |
-| Login loops, OAuth errors, `403 Forbidden`, "organization disabled", Bedrock/Vertex/Foundry credentials | [Troubleshoot installation and login](https://code.claude.com/docs/en/Troubleshoot installation and login) |
-| Settings not applying, hooks not firing, MCP servers not loading                                        | [Debug your configuration](https://code.claude.com/docs/en/Debug your configuration)                                        |
-| `API Error: 5xx`, `529 Overloaded`, `429`, request validation errors                                    | [Error reference](https://code.claude.com/docs/en/Error reference)                                                            |
-| `model not found` or `you may not have access to it`                                                    | [Error reference](https://code.claude.com/docs/en/Error reference)                    |
-| VS Code extension not connecting or detecting Claude                                                    | [VS Code integration](https://code.claude.com/docs/en/VS Code integration)                                     |
-| JetBrains plugin or IDE not detected                                                                    | [JetBrains integration](https://code.claude.com/docs/en/JetBrains integration)                                   |
-| High CPU or memory, slow responses, hangs, search not finding files                                     | [Performance and stability](https://code.claude.com/docs/en/Performance and stability) below                            |
+| `command not found`, install fails, PATH issues, `EACCES`, TLS errors                                   | [Troubleshoot installation and login](/en/troubleshoot-install)                          |
+| Login loops, OAuth errors, `403 Forbidden`, "organization disabled", Bedrock/Vertex/Foundry credentials | [Troubleshoot installation and login](/en/troubleshoot-install#login-and-authentication) |
+| Settings not applying, hooks not firing, MCP servers not loading                                        | [Debug your configuration](/en/debug-your-config)                                        |
+| `API Error: 5xx`, `529 Overloaded`, `429`, request validation errors                                    | [Error reference](/en/errors)                                                            |
+| `model not found` or `you may not have access to it`                                                    | [Error reference](/en/errors#theres-an-issue-with-the-selected-model)                    |
+| VS Code extension not connecting or detecting Claude                                                    | [VS Code integration](/en/vs-code#fix-common-issues)                                     |
+| JetBrains plugin or IDE not detected                                                                    | [JetBrains integration](/en/jetbrains#troubleshooting)                                   |
+| High CPU or memory, slow responses, hangs, search not finding files                                     | [Performance and stability](#performance-and-stability) below                            |
 
 If you're not sure which applies, run `/doctor` inside Claude Code for an automated check of your installation, settings, MCP servers, and context usage. If `claude` won't start at all, run `claude doctor` from your shell instead.
 
@@ -41,7 +41,7 @@ Claude Code is designed to work with most development environments, but may cons
 
 If memory usage stays high after these steps, run `/heapdump` to write a JavaScript heap snapshot and a memory breakdown to `~/Desktop`. On Linux without a Desktop folder, the files are written to your home directory.
 
-The breakdown shows resident set size, JS heap, array buffers, and unaccounted native memory, which helps identify whether the growth is in JavaScript objects or in native code. To inspect retainers, open the `.heapsnapshot` file in Chrome DevTools under Memory → Load. Attach both files when reporting a memory issue on [GitHub](https://code.claude.com/docs/en/GitHub).
+The breakdown shows resident set size, JS heap, array buffers, and unaccounted native memory, which helps identify whether the growth is in JavaScript objects or in native code. To inspect retainers, open the `.heapsnapshot` file in Chrome DevTools under Memory → Load. Attach both files when reporting a memory issue on [GitHub](https://github.com/anthropics/claude-code/issues).
 
 ### Auto-compaction stops with a thrashing error
 
@@ -51,7 +51,7 @@ To recover:
 
 1. Ask Claude to read the oversized file in smaller chunks, such as a specific line range or function, instead of the whole file
 2. Run `/compact` with a focus that drops the large output, for example `/compact keep only the plan and the diff`
-3. Move the large-file work to a [subagent](https://code.claude.com/docs/en/subagent) so it runs in a separate context window
+3. Move the large-file work to a [subagent](/en/sub-agents) so it runs in a separate context window
 4. Run `/clear` if the earlier conversation is no longer needed
 
 ### Command hangs or freezes
@@ -99,11 +99,11 @@ If the Search tool, `@file` mentions, custom agents, or custom skills aren't fin
   </Tab>
 </Tabs>
 
-Then set `USE_BUILTIN_RIPGREP=0` in your [environment](https://code.claude.com/docs/en/environment).
+Then set `USE_BUILTIN_RIPGREP=0` in your [environment](/en/env-vars).
 
 ### Slow or incomplete search results on WSL
 
-Disk read performance penalties when [working across file systems on WSL](https://code.claude.com/docs/en/working across file systems on WSL) may result in fewer-than-expected matches when using Claude Code on WSL. Search still functions, but returns fewer results than on a native filesystem.
+Disk read performance penalties when [working across file systems on WSL](https://learn.microsoft.com/en-us/windows/wsl/filesystems) may result in fewer-than-expected matches when using Claude Code on WSL. Search still functions, but returns fewer results than on a native filesystem.
 
 <Note>
   `/doctor` will show Search as OK in this case.
@@ -123,5 +123,5 @@ If you're experiencing issues not covered here:
 
 1. Run `/doctor` to check installation health, settings validity, MCP configuration, and context usage in one pass
 2. Use the `/feedback` command within Claude Code to report problems directly to Anthropic
-3. Check the [GitHub repository](https://code.claude.com/docs/en/GitHub repository) for known issues
+3. Check the [GitHub repository](https://github.com/anthropics/claude-code) for known issues
 4. Ask Claude directly about its capabilities and features. Claude has built-in access to its documentation.

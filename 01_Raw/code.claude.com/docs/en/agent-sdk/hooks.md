@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/hooks
-fetched_at: 2026-05-04T15:03:30.265238+00:00
+fetched_at: 2026-05-05T19:40:38.868830+00:00
 fetch_method: mintlify_md
 ---
 
@@ -26,23 +26,23 @@ This guide covers how hooks work, how to configure them, and provides examples f
 
 <Steps>
   <Step title="An event fires">
-    Something happens during agent execution and the SDK fires an event: a tool is about to be called (`PreToolUse`), a tool returned a result (`PostToolUse`), a subagent started or stopped, the agent is idle, or execution finished. See the [full list of events](https://code.claude.com/docs/en/agent-sdk/full list of events).
+    Something happens during agent execution and the SDK fires an event: a tool is about to be called (`PreToolUse`), a tool returned a result (`PostToolUse`), a subagent started or stopped, the agent is idle, or execution finished. See the [full list of events](#available-hooks).
   </Step>
 
   <Step title="The SDK collects registered hooks">
-    The SDK checks for hooks registered for that event type. This includes callback hooks you pass in `options.hooks` and shell command hooks from settings files when the corresponding [`settingSources`](https://code.claude.com/docs/en/agent-sdk/`settingSources`) or [`setting_sources`](https://code.claude.com/docs/en/agent-sdk/`setting_sources`) entry is enabled, which it is for default `query()` options.
+    The SDK checks for hooks registered for that event type. This includes callback hooks you pass in `options.hooks` and shell command hooks from settings files when the corresponding [`settingSources`](/en/agent-sdk/typescript#settingsource) or [`setting_sources`](/en/agent-sdk/python#settingsource) entry is enabled, which it is for default `query()` options.
   </Step>
 
   <Step title="Matchers filter which hooks run">
-    If a hook has a [`matcher`](https://code.claude.com/docs/en/agent-sdk/`matcher`) pattern (like `"Write|Edit"`), the SDK tests it against the event's target (for example, the tool name). Hooks without a matcher run for every event of that type.
+    If a hook has a [`matcher`](#matchers) pattern (like `"Write|Edit"`), the SDK tests it against the event's target (for example, the tool name). Hooks without a matcher run for every event of that type.
   </Step>
 
   <Step title="Callback functions execute">
-    Each matching hook's [callback function](https://code.claude.com/docs/en/agent-sdk/callback function) receives input about what's happening: the tool name, its arguments, the session ID, and other event-specific details.
+    Each matching hook's [callback function](#callback-functions) receives input about what's happening: the tool name, its arguments, the session ID, and other event-specific details.
   </Step>
 
   <Step title="Your callback returns a decision">
-    After performing any operations (logging, API calls, validation), your callback returns an [output object](https://code.claude.com/docs/en/agent-sdk/output object) that tells the agent what to do: allow the operation, block it, modify the input, or inject context into the conversation.
+    After performing any operations (logging, API calls, validation), your callback returns an [output object](#outputs) that tells the agent what to do: allow the operation, block it, modify the input, or inject context into the conversation.
   </Step>
 </Steps>
 
@@ -58,6 +58,7 @@ The following example puts these steps together. It registers a `PreToolUse` hoo
       HookMatcher,
       ResultMessage,
   )
+
 
   # Define a hook callback that receives tool call details
   async def protect_env_files(input_data, tool_use_id, context):
@@ -78,6 +79,7 @@ The following example puts these steps together. It registers a `PreToolUse` hoo
       # Return empty object to allow the operation
       return {}
 
+
   async def main():
       options = ClaudeAgentOptions(
           hooks={
@@ -93,6 +95,7 @@ The following example puts these steps together. It registers a `PreToolUse` hoo
               # Filter for assistant and result messages
               if isinstance(message, (AssistantMessage, ResultMessage)):
                   print(message)
+
 
   asyncio.run(main())
   ```
@@ -201,23 +204,23 @@ To configure a hook, pass it in the `hooks` field of your agent options (`Claude
 
 The `hooks` option is a dictionary (Python) or object (TypeScript) where:
 
-* **Keys** are [hook event names](https://code.claude.com/docs/en/agent-sdk/hook event names) (e.g., `'PreToolUse'`, `'PostToolUse'`, `'Stop'`)
-* **Values** are arrays of [matchers](https://code.claude.com/docs/en/agent-sdk/matchers), each containing an optional filter pattern and your [callback functions](https://code.claude.com/docs/en/agent-sdk/callback functions)
+* **Keys** are [hook event names](#available-hooks) (e.g., `'PreToolUse'`, `'PostToolUse'`, `'Stop'`)
+* **Values** are arrays of [matchers](#matchers), each containing an optional filter pattern and your [callback functions](#callback-functions)
 
 ### Matchers
 
-Use matchers to filter when your callbacks fire. The `matcher` field is a regex string that matches against a different value depending on the hook event type. For example, tool-based hooks match against the tool name, while `Notification` hooks match against the notification type. See the [Claude Code hooks reference](https://code.claude.com/docs/en/agent-sdk/Claude Code hooks reference) for the full list of matcher values for each event type.
+Use matchers to filter when your callbacks fire. The `matcher` field is a regex string that matches against a different value depending on the hook event type. For example, tool-based hooks match against the tool name, while `Notification` hooks match against the notification type. See the [Claude Code hooks reference](/en/hooks#matcher-patterns) for the full list of matcher values for each event type.
 
 | Option    | Type             | Default     | Description                                                                                                                                                                                                                                                                                                                                        |
 | --------- | ---------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `matcher` | `string`         | `undefined` | Regex pattern matched against the event's filter field. For tool hooks, this is the tool name. Built-in tools include `Bash`, `Read`, `Write`, `Edit`, `Glob`, `Grep`, `WebFetch`, `Agent`, and others (see [Tool Input Types](https://code.claude.com/docs/en/agent-sdk/Tool Input Types) for the full list). MCP tools use the pattern `mcp__<server>__<action>`. |
+| `matcher` | `string`         | `undefined` | Regex pattern matched against the event's filter field. For tool hooks, this is the tool name. Built-in tools include `Bash`, `Read`, `Write`, `Edit`, `Glob`, `Grep`, `WebFetch`, `Agent`, and others (see [Tool Input Types](/en/agent-sdk/typescript#tool-input-types) for the full list). MCP tools use the pattern `mcp__<server>__<action>`. |
 | `hooks`   | `HookCallback[]` | -           | Required. Array of callback functions to execute when the pattern matches                                                                                                                                                                                                                                                                          |
 | `timeout` | `number`         | `60`        | Timeout in seconds                                                                                                                                                                                                                                                                                                                                 |
 
 Use the `matcher` pattern to target specific tools whenever possible. A matcher with `'Bash'` only runs for Bash commands, while omitting the pattern runs your callbacks for every occurrence of the event. Note that for tool-based hooks, matchers only filter by **tool name**, not by file paths or other arguments. To filter by file path, check `tool_input.file_path` inside your callback.
 
 <Tip>
-  **Discovering tool names:** See [Tool Input Types](https://code.claude.com/docs/en/agent-sdk/Tool Input Types) for the full list of built-in tool names, or add a hook without a matcher to log all tool calls your session makes.
+  **Discovering tool names:** See [Tool Input Types](/en/agent-sdk/typescript#tool-input-types) for the full list of built-in tool names, or add a hook without a matcher to log all tool calls your session makes.
 
   **MCP tool naming:** MCP tools always start with `mcp__` followed by the server name and action: `mcp__<server>__<action>`. For example, if you configure a server named `playwright`, its tools will be named `mcp__playwright__browser_screenshot`, `mcp__playwright__browser_click`, etc. The server name comes from the key you use in the `mcpServers` configuration.
 </Tip>
@@ -228,7 +231,7 @@ Use the `matcher` pattern to target specific tools whenever possible. A matcher 
 
 Every hook callback receives three arguments:
 
-* **Input data:** a typed object containing event details. Each hook type has its own input shape (for example, `PreToolUseHookInput` includes `tool_name` and `tool_input`, while `NotificationHookInput` includes `message`). See the full type definitions in the [TypeScript](https://code.claude.com/docs/en/agent-sdk/TypeScript) and [Python](https://code.claude.com/docs/en/agent-sdk/Python) SDK references.
+* **Input data:** a typed object containing event details. Each hook type has its own input shape (for example, `PreToolUseHookInput` includes `tool_name` and `tool_input`, while `NotificationHookInput` includes `message`). See the full type definitions in the [TypeScript](/en/agent-sdk/typescript#hookinput) and [Python](/en/agent-sdk/python#hookinput) SDK references.
   * All hook inputs share `session_id`, `cwd`, and `hook_event_name`.
   * `agent_id` and `agent_type` are populated when the hook fires inside a subagent. In TypeScript, these are on the base hook input and available to all hook types. In Python, they are on `PreToolUse`, `PostToolUse`, and `PostToolUseFailure` only.
 * **Tool use ID** (`str | None` / `string | undefined`): correlates `PreToolUse` and `PostToolUse` events for the same tool call.
@@ -239,9 +242,9 @@ Every hook callback receives three arguments:
 Your callback returns an object with two categories of fields:
 
 * **Top-level fields** control the conversation: `systemMessage` injects a message into the conversation visible to the model, and `continue` (`continue_` in Python) determines whether the agent keeps running after this hook.
-* **`hookSpecificOutput`** controls the current operation. The fields inside depend on the hook event type. For `PreToolUse` hooks, this is where you set `permissionDecision` (`"allow"`, `"deny"`, or `"ask"`), `permissionDecisionReason`, and `updatedInput`. In the TypeScript SDK, `permissionDecision` also accepts `"defer"` to end the query and [resume later](https://code.claude.com/docs/en/agent-sdk/resume later); this value is not available in the Python SDK. For `PostToolUse` hooks, you can set `additionalContext` to append information to the tool result, or `updatedToolOutput` to replace the tool's output entirely before Claude sees it.
+* **`hookSpecificOutput`** controls the current operation. The fields inside depend on the hook event type. For `PreToolUse` hooks, this is where you set `permissionDecision` (`"allow"`, `"deny"`, or `"ask"`), `permissionDecisionReason`, and `updatedInput`. In the TypeScript SDK, `permissionDecision` also accepts `"defer"` to end the query and [resume later](/en/hooks#defer-a-tool-call-for-later); this value is not available in the Python SDK. For `PostToolUse` hooks, you can set `additionalContext` to append information to the tool result, or `updatedToolOutput` to replace the tool's output entirely before Claude sees it.
 
-Return `{}` to allow the operation without changes. SDK callback hooks use the same JSON output format as [Claude Code shell command hooks](https://code.claude.com/docs/en/agent-sdk/Claude Code shell command hooks), which documents every field and event-specific option. For the SDK type definitions, see the [TypeScript](https://code.claude.com/docs/en/agent-sdk/TypeScript) and [Python](https://code.claude.com/docs/en/agent-sdk/Python) SDK references.
+Return `{}` to allow the operation without changes. SDK callback hooks use the same JSON output format as [Claude Code shell command hooks](/en/hooks#json-output), which documents every field and event-specific option. For the SDK type definitions, see the [TypeScript](/en/agent-sdk/typescript#synchookjsonoutput) and [Python](/en/agent-sdk/python#synchookjsonoutput) SDK references.
 
 <Note>
   When multiple hooks or permission rules apply, **deny** takes priority over **defer**, which takes priority over **ask**, which takes priority over **allow**. If any hook returns `deny`, the operation is blocked regardless of other hooks.
@@ -420,19 +423,20 @@ By default, the agent may prompt for permission before using certain tools. This
   ```
 </CodeGroup>
 
-### Chain multiple hooks
+### Register multiple hooks
 
-Hooks execute in the order they appear in the array. Keep each hook focused on a single responsibility and chain multiple hooks for complex logic:
+When an event fires, all matching hooks run in parallel. For permission decisions, the most restrictive result wins: a single `deny` blocks the tool call regardless of what the other hooks return. Because completion order is non-deterministic, write each hook to act independently rather than relying on another hook having run first.
+
+The example below registers three independent checks for every tool call:
 
 <CodeGroup>
   ```python Python theme={null}
   options = ClaudeAgentOptions(
       hooks={
           "PreToolUse": [
-              HookMatcher(hooks=[rate_limiter]),  # First: check rate limits
-              HookMatcher(hooks=[authorization_check]),  # Second: verify permissions
-              HookMatcher(hooks=[input_sanitizer]),  # Third: sanitize inputs
-              HookMatcher(hooks=[audit_logger]),  # Last: log the action
+              HookMatcher(hooks=[authorization_check]),
+              HookMatcher(hooks=[input_validator]),
+              HookMatcher(hooks=[audit_logger]),
           ]
       }
   )
@@ -442,10 +446,9 @@ Hooks execute in the order they appear in the array. Keep each hook focused on a
   const options = {
     hooks: {
       PreToolUse: [
-        { hooks: [rateLimiter] }, // First: check rate limits
-        { hooks: [authorizationCheck] }, // Second: verify permissions
-        { hooks: [inputSanitizer] }, // Third: sanitize inputs
-        { hooks: [auditLogger] } // Last: log the action
+        { hooks: [authorizationCheck] },
+        { hooks: [inputValidator] },
+        { hooks: [auditLogger] }
       ]
     }
   };
@@ -492,7 +495,7 @@ Use regex patterns to match multiple tools. This example registers three matcher
 
 ### Track subagent activity
 
-Use `SubagentStop` hooks to monitor when subagents finish their work. See the full input type in the [TypeScript](https://code.claude.com/docs/en/agent-sdk/TypeScript) and [Python](https://code.claude.com/docs/en/agent-sdk/Python) SDK references. This example logs a summary each time a subagent completes:
+Use `SubagentStop` hooks to monitor when subagents finish their work. See the full input type in the [TypeScript](/en/agent-sdk/typescript#hookinput) and [Python](/en/agent-sdk/python#hookinput) SDK references. This example logs a summary each time a subagent completes:
 
 <CodeGroup>
   ```python Python theme={null}
@@ -503,6 +506,7 @@ Use `SubagentStop` hooks to monitor when subagents finish their work. See the fu
       print(f"  Tool use ID: {tool_use_id}")
       print(f"  Stop hook active: {input_data.get('stop_hook_active')}")
       return {}
+
 
   options = ClaudeAgentOptions(
       hooks={"SubagentStop": [HookMatcher(hooks=[subagent_tracker])]}
@@ -545,6 +549,7 @@ This example sends a webhook after each tool completes, logging which tool ran a
   import urllib.request
   from datetime import datetime
 
+
   def _send_webhook(tool_name):
       """Synchronous helper that POSTs tool usage data to an external webhook."""
       data = json.dumps(
@@ -560,6 +565,7 @@ This example sends a webhook after each tool completes, logging which tool ran a
           method="POST",
       )
       urllib.request.urlopen(req)
+
 
   async def webhook_notifier(input_data, tool_use_id, context):
       # Only fire after a tool completes (PostToolUse), not before
@@ -623,7 +629,7 @@ This example sends a webhook after each tool completes, logging which tool ran a
 
 Use `Notification` hooks to receive system notifications from the agent and forward them to external services. Notifications fire for specific event types: `permission_prompt` (Claude needs permission), `idle_prompt` (Claude is waiting for input), `auth_success` (authentication completed), and `elicitation_dialog` (Claude is prompting the user). Each notification includes a `message` field with a human-readable description and optionally a `title`.
 
-This example forwards every notification to a Slack channel. It requires a [Slack incoming webhook URL](https://code.claude.com/docs/en/agent-sdk/Slack incoming webhook URL), which you create by adding an app to your Slack workspace and enabling incoming webhooks:
+This example forwards every notification to a Slack channel. It requires a [Slack incoming webhook URL](https://api.slack.com/messaging/webhooks), which you create by adding an app to your Slack workspace and enabling incoming webhooks:
 
 <CodeGroup>
   ```python Python theme={null}
@@ -632,6 +638,7 @@ This example forwards every notification to a Slack channel. It requires a [Slac
   import urllib.request
 
   from claude_agent_sdk import ClaudeSDKClient, ClaudeAgentOptions, HookMatcher
+
 
   def _send_slack_notification(message):
       """Synchronous helper that sends a message to Slack via incoming webhook."""
@@ -644,6 +651,7 @@ This example forwards every notification to a Slack channel. It requires a [Slac
       )
       urllib.request.urlopen(req)
 
+
   async def notification_handler(input_data, tool_use_id, context):
       try:
           # Run the blocking HTTP call in a thread to avoid blocking the event loop
@@ -653,6 +661,7 @@ This example forwards every notification to a Slack channel. It requires a [Slac
 
       # Return empty object. Notification hooks don't modify agent behavior
       return {}
+
 
   async def main():
       options = ClaudeAgentOptions(
@@ -666,6 +675,7 @@ This example forwards every notification to a Slack channel. It requires a [Slac
           await client.query("Analyze this codebase")
           async for message in client.receive_response():
               print(message)
+
 
   asyncio.run(main())
   ```
@@ -722,8 +732,8 @@ This example forwards every notification to a Slack channel. It requires a [Slac
 * Verify the hook event name is correct and case-sensitive (`PreToolUse`, not `preToolUse`)
 * Check that your matcher pattern matches the tool name exactly
 * Ensure the hook is under the correct event type in `options.hooks`
-* For non-tool hooks like `Stop` and `SubagentStop`, matchers match against different fields (see [matcher patterns](https://code.claude.com/docs/en/agent-sdk/matcher patterns))
-* Hooks may not fire when the agent hits the [`max_turns`](https://code.claude.com/docs/en/agent-sdk/`max_turns`) limit because the session ends before hooks can execute
+* For non-tool hooks like `Stop` and `SubagentStop`, matchers match against different fields (see [matcher patterns](/en/hooks#matcher-patterns))
+* Hooks may not fire when the agent hits the [`max_turns`](/en/agent-sdk/python#claudeagentoptions) limit because the session ends before hooks can execute
 
 ### Matcher not filtering as expected
 
@@ -771,7 +781,7 @@ const myHook: HookCallback = async (input, toolUseID, { signal }) => {
 
 ### Session hooks not available in Python
 
-`SessionStart` and `SessionEnd` can be registered as SDK callback hooks in TypeScript, but are not available in the Python SDK (`HookEvent` omits them). In Python, they are only available as [shell command hooks](https://code.claude.com/docs/en/agent-sdk/shell command hooks) defined in settings files (for example, `.claude/settings.json`). To load shell command hooks from your SDK application, include the appropriate setting source with [`setting_sources`](https://code.claude.com/docs/en/agent-sdk/`setting_sources`) or [`settingSources`](https://code.claude.com/docs/en/agent-sdk/`settingSources`):
+`SessionStart` and `SessionEnd` can be registered as SDK callback hooks in TypeScript, but are not available in the Python SDK (`HookEvent` omits them). In Python, they are only available as [shell command hooks](/en/hooks#hook-events) defined in settings files (for example, `.claude/settings.json`). To load shell command hooks from your SDK application, include the appropriate setting source with [`setting_sources`](/en/agent-sdk/python#settingsource) or [`settingSources`](/en/agent-sdk/typescript#settingsource):
 
 <CodeGroup>
   ```python Python theme={null}
@@ -807,9 +817,9 @@ The `systemMessage` field adds context to the conversation that the model sees, 
 
 ## Related resources
 
-* [Claude Code hooks reference](https://code.claude.com/docs/en/agent-sdk/Claude Code hooks reference): full JSON input/output schemas, event documentation, and matcher patterns
-* [Claude Code hooks guide](https://code.claude.com/docs/en/agent-sdk/Claude Code hooks guide): shell command hook examples and walkthroughs
-* [TypeScript SDK reference](https://code.claude.com/docs/en/agent-sdk/TypeScript SDK reference): hook types, input/output definitions, and configuration options
-* [Python SDK reference](https://code.claude.com/docs/en/agent-sdk/Python SDK reference): hook types, input/output definitions, and configuration options
-* [Permissions](https://code.claude.com/docs/en/agent-sdk/Permissions): control what your agent can do
-* [Custom tools](https://code.claude.com/docs/en/agent-sdk/Custom tools): build tools to extend agent capabilities
+* [Claude Code hooks reference](/en/hooks): full JSON input/output schemas, event documentation, and matcher patterns
+* [Claude Code hooks guide](/en/hooks-guide): shell command hook examples and walkthroughs
+* [TypeScript SDK reference](/en/agent-sdk/typescript): hook types, input/output definitions, and configuration options
+* [Python SDK reference](/en/agent-sdk/python): hook types, input/output definitions, and configuration options
+* [Permissions](/en/agent-sdk/permissions): control what your agent can do
+* [Custom tools](/en/agent-sdk/custom-tools): build tools to extend agent capabilities

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/scheduled-tasks
-fetched_at: 2026-05-04T15:06:55.773885+00:00
+fetched_at: 2026-05-05T19:40:39.627290+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,22 +16,22 @@ fetch_method: mintlify_md
   Scheduled tasks require Claude Code v2.1.72 or later. Check your version with `claude --version`.
 </Note>
 
-Scheduled tasks let Claude re-run a prompt automatically on an interval. Use them to poll a deployment, babysit a PR, check back on a long-running build, or remind yourself to do something later in the session. To react to events as they happen instead of polling, see [Channels](https://code.claude.com/docs/en/Channels): your CI can push the failure into the session directly.
+Scheduled tasks let Claude re-run a prompt automatically on an interval. Use them to poll a deployment, babysit a PR, check back on a long-running build, or remind yourself to do something later in the session. To react to events as they happen instead of polling, see [Channels](/en/channels): your CI can push the failure into the session directly.
 
-Tasks are session-scoped: they live in the current conversation and stop when you start a new one. Resuming with `--resume` or `--continue` brings back any task that hasn't [expired](https://code.claude.com/docs/en/expired): a recurring task created within the last 7 days, or a one-shot whose scheduled time hasn't passed yet. For scheduling that survives independently of any session, use [Routines](https://code.claude.com/docs/en/Routines), [Desktop scheduled tasks](https://code.claude.com/docs/en/Desktop scheduled tasks), or [GitHub Actions](https://code.claude.com/docs/en/GitHub Actions).
+Tasks are session-scoped: they live in the current conversation and stop when you start a new one. Resuming with `--resume` or `--continue` brings back any task that hasn't [expired](#seven-day-expiry): a recurring task created within the last 7 days, or a one-shot whose scheduled time hasn't passed yet. For scheduling that survives independently of any session, use [Routines](/en/routines), [Desktop scheduled tasks](/en/desktop-scheduled-tasks), or [GitHub Actions](/en/github-actions).
 
 ## Compare scheduling options
 
 Claude Code offers three ways to schedule recurring or one-off work:
 
-|                            | [Cloud](https://code.claude.com/docs/en/Cloud)          | [Desktop](https://code.claude.com/docs/en/Desktop) | [`/loop`](https://code.claude.com/docs/en/`/loop`)      |
+|                            | [Cloud](/en/routines)          | [Desktop](/en/desktop-scheduled-tasks) | [`/loop`](/en/scheduled-tasks)      |
 | :------------------------- | :----------------------------- | :------------------------------------- | :---------------------------------- |
 | Runs on                    | Anthropic cloud                | Your machine                           | Your machine                        |
 | Requires machine on        | No                             | Yes                                    | Yes                                 |
 | Requires open session      | No                             | No                                     | Yes                                 |
 | Persistent across restarts | Yes                            | Yes                                    | Restored on `--resume` if unexpired |
 | Access to local files      | No (fresh clone)               | Yes                                    | Yes                                 |
-| MCP servers                | Connectors configured per task | [Config files](https://code.claude.com/docs/en/Config files) and connectors | Inherits from session               |
+| MCP servers                | Connectors configured per task | [Config files](/en/mcp) and connectors | Inherits from session               |
 | Permission prompts         | No (runs autonomously)         | Configurable per task                  | Inherits from session               |
 | Customizable schedule      | Via `/schedule` in the CLI     | Yes                                    | Yes                                 |
 | Minimum interval           | 1 hour                         | 1 minute                               | 1 minute                            |
@@ -42,13 +42,13 @@ Claude Code offers three ways to schedule recurring or one-off work:
 
 ## Run a prompt repeatedly with /loop
 
-The `/loop` [bundled skill](https://code.claude.com/docs/en/bundled skill) is the quickest way to run a prompt on repeat while the session stays open. Both the interval and the prompt are optional, and what you provide determines how the loop behaves.
+The `/loop` [bundled skill](/en/commands) is the quickest way to run a prompt on repeat while the session stays open. Both the interval and the prompt are optional, and what you provide determines how the loop behaves.
 
 | What you provide          | Example                     | What happens                                                                                                  |
 | :------------------------ | :-------------------------- | :------------------------------------------------------------------------------------------------------------ |
-| Interval and prompt       | `/loop 5m check the deploy` | Your prompt runs on a [fixed schedule](https://code.claude.com/docs/en/fixed schedule)                                              |
-| Prompt only               | `/loop check the deploy`    | Your prompt runs at an [interval Claude chooses](https://code.claude.com/docs/en/interval Claude chooses) each iteration              |
-| Interval only, or nothing | `/loop`                     | The [built-in maintenance prompt](https://code.claude.com/docs/en/built-in maintenance prompt) runs, or your `loop.md` if one exists |
+| Interval and prompt       | `/loop 5m check the deploy` | Your prompt runs on a [fixed schedule](#run-on-a-fixed-interval)                                              |
+| Prompt only               | `/loop check the deploy`    | Your prompt runs at an [interval Claude chooses](#let-claude-choose-the-interval) each iteration              |
+| Interval only, or nothing | `/loop`                     | The [built-in maintenance prompt](#run-the-built-in-maintenance-prompt) runs, or your `loop.md` if one exists |
 
 You can also pass another command as the prompt, for example `/loop 20m /review-pr 1234`, to re-run a packaged workflow each iteration.
 
@@ -74,9 +74,9 @@ The example below checks CI and review comments, with Claude waiting longer betw
 /loop check whether CI passed and address any review comments
 ```
 
-When you ask for a dynamic `/loop` schedule, Claude may use the [Monitor tool](https://code.claude.com/docs/en/Monitor tool) directly. Monitor runs a background script and streams each output line back, which avoids polling altogether and is often more token-efficient and responsive than re-running a prompt on an interval.
+When you ask for a dynamic `/loop` schedule, Claude may use the [Monitor tool](/en/tools-reference#monitor-tool) directly. Monitor runs a background script and streams each output line back, which avoids polling altogether and is often more token-efficient and responsive than re-running a prompt on an interval.
 
-A dynamically scheduled loop appears in your [scheduled task list](https://code.claude.com/docs/en/scheduled task list) like any other task, so you can list or cancel it the same way. The [jitter rules](https://code.claude.com/docs/en/jitter rules) don't apply to it, but the [seven-day expiry](https://code.claude.com/docs/en/seven-day expiry) does: the loop ends automatically seven days after you start it.
+A dynamically scheduled loop appears in your [scheduled task list](#manage-scheduled-tasks) like any other task, so you can list or cancel it the same way. The [jitter rules](#jitter) don't apply to it, but the [seven-day expiry](#seven-day-expiry) does: the loop ends automatically seven days after you start it.
 
 <Note>
   On Bedrock, Vertex AI, and Microsoft Foundry, a prompt with no interval runs on a fixed 10-minute schedule instead.
@@ -96,7 +96,7 @@ Claude does not start new initiatives outside that scope, and irreversible actio
 /loop
 ```
 
-A bare `/loop` runs this prompt at a [dynamically chosen interval](https://code.claude.com/docs/en/dynamically chosen interval). Add an interval, for example `/loop 15m`, to run it on a fixed schedule instead. To replace the built-in prompt with your own default, see [Customize the default prompt with loop.md](https://code.claude.com/docs/en/Customize the default prompt with loop.md).
+A bare `/loop` runs this prompt at a [dynamically chosen interval](#let-claude-choose-the-interval). Add an interval, for example `/loop 15m`, to run it on a fixed schedule instead. To replace the built-in prompt with your own default, see [Customize the default prompt with loop.md](#customize-the-default-prompt-with-loop-md).
 
 <Note>
   On Bedrock, Vertex AI, and Microsoft Foundry, `/loop` with no prompt prints the usage message instead of starting the maintenance loop.
@@ -104,7 +104,7 @@ A bare `/loop` runs this prompt at a [dynamically chosen interval](https://code.
 
 ### Customize the default prompt with loop.md
 
-A `loop.md` file replaces the built-in maintenance prompt with your own instructions. It defines a single default prompt for bare `/loop`, not a list of separate scheduled tasks, and is ignored whenever you supply a prompt on the command line. To schedule additional prompts alongside it, use `/loop <prompt>` or [ask Claude directly](https://code.claude.com/docs/en/ask Claude directly).
+A `loop.md` file replaces the built-in maintenance prompt with your own instructions. It defines a single default prompt for bare `/loop`, not a list of separate scheduled tasks, and is ignored whenever you supply a prompt on the command line. To schedule additional prompts alongside it, use `/loop <prompt>` or [ask Claude directly](#manage-scheduled-tasks).
 
 Claude looks for the file in two locations and uses the first one it finds.
 
@@ -126,7 +126,7 @@ Edits to `loop.md` take effect on the next iteration, so you can refine the inst
 
 ### Stop a loop
 
-To stop a `/loop` while it is waiting for the next iteration, press `Esc`. This clears the pending wakeup so the loop does not fire again. Tasks you scheduled by [asking Claude directly](https://code.claude.com/docs/en/asking Claude directly) are not affected by `Esc` and stay in place until you delete them.
+To stop a `/loop` while it is waiting for the next iteration, press `Esc`. This clears the pending wakeup so the loop does not fire again. Tasks you scheduled by [asking Claude directly](#manage-scheduled-tasks) are not affected by `Esc` and stay in place until you delete them.
 
 ## Set a one-time reminder
 
@@ -172,16 +172,16 @@ All times are interpreted in your local timezone. A cron expression like `0 9 * 
 
 ### Jitter
 
-To avoid every session hitting the API at the same wall-clock moment, the scheduler adds a small deterministic offset to fire times:
+To avoid every session hitting the API at the same wall-clock moment, the scheduler adds a deterministic offset to fire times:
 
-* Recurring tasks fire up to 10% of their period late, capped at 15 minutes. An hourly job might fire anywhere from `:00` to `:06`.
+* Recurring tasks fire up to 30 minutes after the scheduled time (or up to half the interval, for tasks that run more often than hourly). An hourly job scheduled for `:00` may fire anywhere up to `:30`.
 * One-shot tasks scheduled for the top or bottom of the hour fire up to 90 seconds early.
 
 The offset is derived from the task ID, so the same task always gets the same offset. If exact timing matters, pick a minute that is not `:00` or `:30`, for example `3 9 * * *` instead of `0 9 * * *`, and the one-shot jitter will not apply.
 
 ### Seven-day expiry
 
-Recurring tasks automatically expire 7 days after creation. The task fires one final time, then deletes itself. This bounds how long a forgotten loop can run. If you need a recurring task to last longer, cancel and recreate it before it expires, or use [Routines](https://code.claude.com/docs/en/Routines) or [Desktop scheduled tasks](https://code.claude.com/docs/en/Desktop scheduled tasks) for durable scheduling.
+Recurring tasks automatically expire 7 days after creation. The task fires one final time, then deletes itself. This bounds how long a forgotten loop can run. If you need a recurring task to last longer, cancel and recreate it before it expires, or use [Routines](/en/routines) or [Desktop scheduled tasks](/en/desktop-scheduled-tasks) for durable scheduling.
 
 ## Cron expression reference
 
@@ -202,7 +202,7 @@ When both day-of-month and day-of-week are constrained, a date matches if either
 
 ## Disable scheduled tasks
 
-Set `CLAUDE_CODE_DISABLE_CRON=1` in your environment to disable the scheduler entirely. The cron tools and `/loop` become unavailable, and any already-scheduled tasks stop firing. See [Environment variables](https://code.claude.com/docs/en/Environment variables) for the full list of disable flags.
+Set `CLAUDE_CODE_DISABLE_CRON=1` in your environment to disable the scheduler entirely. The cron tools and `/loop` become unavailable, and any already-scheduled tasks stop firing. See [Environment variables](/en/env-vars) for the full list of disable flags.
 
 ## Limitations
 
@@ -214,6 +214,6 @@ Session-scoped scheduling has inherent constraints:
 
 For cron-driven automation that needs to run unattended:
 
-* [Routines](https://code.claude.com/docs/en/Routines): run on Anthropic-managed infrastructure on a schedule, via API call, or on GitHub events
-* [GitHub Actions](https://code.claude.com/docs/en/GitHub Actions): use a `schedule` trigger in CI
-* [Desktop scheduled tasks](https://code.claude.com/docs/en/Desktop scheduled tasks): run locally on your machine
+* [Routines](/en/routines): run on Anthropic-managed infrastructure on a schedule, via API call, or on GitHub events
+* [GitHub Actions](/en/github-actions): use a `schedule` trigger in CI
+* [Desktop scheduled tasks](/en/desktop-scheduled-tasks): run locally on your machine

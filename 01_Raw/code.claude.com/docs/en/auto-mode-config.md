@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/auto-mode-config
-fetched_at: 2026-05-04T15:04:29.229701+00:00
+fetched_at: 2026-05-05T19:40:39.102436+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,27 +12,27 @@ fetch_method: mintlify_md
 
 > Tell the auto mode classifier which repos, buckets, and domains your organization trusts. Set environment context, override the default block and allow rules, and inspect your effective config with the auto-mode CLI subcommands.
 
-[Auto mode](https://code.claude.com/docs/en/Auto mode) lets Claude Code run without permission prompts by routing each tool call through a classifier that blocks anything irreversible, destructive, or aimed outside your environment. Use the `autoMode` settings block to tell that classifier which repos, buckets, and domains your organization trusts, so it stops blocking routine internal operations.
+[Auto mode](/en/permission-modes#eliminate-prompts-with-auto-mode) lets Claude Code run without permission prompts by routing each tool call through a classifier that blocks anything irreversible, destructive, or aimed outside your environment. Use the `autoMode` settings block to tell that classifier which repos, buckets, and domains your organization trusts, so it stops blocking routine internal operations.
 
 <Note>
-  Auto mode is available on Max, Team, Enterprise, and API plans through the Anthropic API. It is not available on Pro or on Bedrock, Vertex, or Foundry. If Claude Code reports auto mode as unavailable for your account, check the [full requirements](https://code.claude.com/docs/en/full requirements), which also cover the supported models and admin enablement on Team and Enterprise plans.
+  Auto mode is available on Max, Team, Enterprise, and API plans through the Anthropic API. It is not available on Pro or on Bedrock, Vertex, or Foundry. If Claude Code reports auto mode as unavailable for your account, check the [full requirements](/en/permission-modes#eliminate-prompts-with-auto-mode), which also cover the supported models and admin enablement on Team and Enterprise plans.
 </Note>
 
 Out of the box, the classifier trusts only the working directory and the current repo's configured remotes. Actions like pushing to your company's source-control org or writing to a team cloud bucket are blocked until you add them to `autoMode.environment`.
 
-For how to enable auto mode and what it blocks by default, see [Permission modes](https://code.claude.com/docs/en/Permission modes). This page is the configuration reference.
+For how to enable auto mode and what it blocks by default, see [Permission modes](/en/permission-modes#eliminate-prompts-with-auto-mode). This page is the configuration reference.
 
 This page covers how to:
 
-* [Choose where to set rules](https://code.claude.com/docs/en/Choose where to set rules) across CLAUDE.md, user settings, and managed settings
-* [Define trusted infrastructure](https://code.claude.com/docs/en/Define trusted infrastructure) with `autoMode.environment`
-* [Override the block and allow rules](https://code.claude.com/docs/en/Override the block and allow rules) when the defaults don't fit your pipeline
-* [Inspect your effective config](https://code.claude.com/docs/en/Inspect your effective config) with the `claude auto-mode` subcommands
-* [Review denials](https://code.claude.com/docs/en/Review denials) so you know what to add next
+* [Choose where to set rules](#where-the-classifier-reads-configuration) across CLAUDE.md, user settings, and managed settings
+* [Define trusted infrastructure](#define-trusted-infrastructure) with `autoMode.environment`
+* [Override the block and allow rules](#override-the-block-and-allow-rules) when the defaults don't fit your pipeline
+* [Inspect your effective config](#inspect-the-defaults-and-your-effective-config) with the `claude auto-mode` subcommands
+* [Review denials](#review-denials) so you know what to add next
 
 ## Where the classifier reads configuration
 
-The classifier reads the same [CLAUDE.md](https://code.claude.com/docs/en/CLAUDE.md) content Claude itself loads, so an instruction like "never force push" in your project's CLAUDE.md steers both Claude and the classifier at the same time. Start there for project conventions and behavioral rules.
+The classifier reads the same [CLAUDE.md](/en/memory) content Claude itself loads, so an instruction like "never force push" in your project's CLAUDE.md steers both Claude and the classifier at the same time. Start there for project conventions and behavioral rules.
 
 For rules that apply across projects, such as trusted infrastructure or organization-wide deny rules, use the `autoMode` settings block. The classifier reads `autoMode` from the following scopes:
 
@@ -40,7 +40,7 @@ For rules that apply across projects, such as trusted infrastructure or organiza
 | :----------------------------- | :---------------------------------------------- | :--------------------------------------------------- |
 | One developer                  | `~/.claude/settings.json`                       | Personal trusted infrastructure                      |
 | One project, one developer     | `.claude/settings.local.json`                   | Per-project trusted buckets or services, gitignored  |
-| Organization-wide              | [Managed settings](https://code.claude.com/docs/en/Managed settings) | Trusted infrastructure distributed to all developers |
+| Organization-wide              | [Managed settings](/en/server-managed-settings) | Trusted infrastructure distributed to all developers |
 | `--settings` flag or Agent SDK | Inline JSON                                     | Per-invocation overrides for automation              |
 
 The classifier does not read `autoMode` from shared project settings in `.claude/settings.json`, so a checked-in repo cannot inject its own allow rules.
@@ -48,7 +48,7 @@ The classifier does not read `autoMode` from shared project settings in `.claude
 Entries from each scope are combined. A developer can extend `environment`, `allow`, and `soft_deny` with personal entries but cannot remove entries that managed settings provide. Because allow rules act as exceptions to block rules inside the classifier, a developer-added `allow` entry can override an organization `soft_deny` entry: the combination is additive, not a hard policy boundary.
 
 <Note>
-  The classifier is a second gate that runs after the [permissions system](https://code.claude.com/docs/en/permissions system). For actions that must never run regardless of user intent or classifier configuration, use `permissions.deny` in managed settings, which blocks the action before the classifier is consulted and cannot be overridden.
+  The classifier is a second gate that runs after the [permissions system](/en/permissions). For actions that must never run regardless of user intent or classifier configuration, use `permissions.deny` in managed settings, which blocks the action before the classifier is consulted and cannot be overridden.
 </Note>
 
 ## Define trusted infrastructure
@@ -105,7 +105,7 @@ You don't need to fill everything in at once. A reasonable rollout: start with t
 
 ## Override the block and allow rules
 
-Two additional fields let you replace the classifier's built-in rule lists: `autoMode.soft_deny` controls what gets blocked, and `autoMode.allow` controls which exceptions apply. Each is an array of prose descriptions, read as natural-language rules. There is no `autoMode.deny` field; to hard-block an action regardless of intent, use [`permissions.deny`](https://code.claude.com/docs/en/`permissions.deny`), which runs before the classifier.
+Two additional fields let you replace the classifier's built-in rule lists: `autoMode.soft_deny` controls what gets blocked, and `autoMode.allow` controls which exceptions apply. Each is an array of prose descriptions, read as natural-language rules. There is no `autoMode.deny` field; to hard-block an action regardless of intent, use [`permissions.deny`](/en/permissions), which runs before the classifier.
 
 Inside the classifier, precedence works in three tiers:
 
@@ -174,11 +174,11 @@ When auto mode denies a tool call, the denial is recorded in `/permissions` unde
 
 Repeated denials for the same destination usually mean the classifier is missing context. Add that destination to `autoMode.environment`, then run `claude auto-mode config` to confirm it took effect.
 
-To react to denials programmatically, use the [`PermissionDenied` hook](https://code.claude.com/docs/en/`PermissionDenied` hook).
+To react to denials programmatically, use the [`PermissionDenied` hook](/en/hooks#permissiondenied).
 
 ## See also
 
-* [Permission modes](https://code.claude.com/docs/en/Permission modes): what auto mode is, what it blocks by default, and how to enable it
-* [Managed settings](https://code.claude.com/docs/en/Managed settings): deploy `autoMode` configuration across your organization
-* [Permissions](https://code.claude.com/docs/en/Permissions): allow, ask, and deny rules that apply before the classifier runs
-* [Settings](https://code.claude.com/docs/en/Settings): the full settings reference, including the `autoMode` key
+* [Permission modes](/en/permission-modes#eliminate-prompts-with-auto-mode): what auto mode is, what it blocks by default, and how to enable it
+* [Managed settings](/en/server-managed-settings): deploy `autoMode` configuration across your organization
+* [Permissions](/en/permissions): allow, ask, and deny rules that apply before the classifier runs
+* [Settings](/en/settings): the full settings reference, including the `autoMode` key

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-code-on-the-web
-fetched_at: 2026-05-04T15:04:50.919258+00:00
+fetched_at: 2026-05-05T19:40:39.167913+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,23 +16,23 @@ fetch_method: mintlify_md
   Claude Code on the web is in research preview for Pro, Max, and Team users, and for Enterprise users with premium seats or Chat + Claude Code seats.
 </Note>
 
-Claude Code on the web runs tasks on Anthropic-managed cloud infrastructure at [claude.ai/code](https://code.claude.com/docs/en/claude.ai/code). Sessions persist even if you close your browser, and you can monitor them from the Claude mobile app.
+Claude Code on the web runs tasks on Anthropic-managed cloud infrastructure at [claude.ai/code](https://claude.ai/code). Sessions persist even if you close your browser, and you can monitor them from the Claude mobile app.
 
 <Tip>
-  New to Claude Code on the web? Start with [Get started](https://code.claude.com/docs/en/Get started) to connect your GitHub account and submit your first task.
+  New to Claude Code on the web? Start with [Get started](/en/web-quickstart) to connect your GitHub account and submit your first task.
 </Tip>
 
 This page covers:
 
-* [GitHub authentication options](https://code.claude.com/docs/en/GitHub authentication options): two ways to connect GitHub
-* [The cloud environment](https://code.claude.com/docs/en/The cloud environment): what config carries over, what tools are installed, and how to configure environments
-* [Setup scripts](https://code.claude.com/docs/en/Setup scripts) and dependency management
-* [Network access](https://code.claude.com/docs/en/Network access): levels, proxies, and the default allowlist
-* [Move tasks between web and terminal](https://code.claude.com/docs/en/Move tasks between web and terminal) with `--remote` and `--teleport`
-* [Work with sessions](https://code.claude.com/docs/en/Work with sessions): reviewing, sharing, archiving, deleting
-* [Auto-fix pull requests](https://code.claude.com/docs/en/Auto-fix pull requests): respond automatically to CI failures and review comments
-* [Security and isolation](https://code.claude.com/docs/en/Security and isolation): how sessions are isolated
-* [Limitations](https://code.claude.com/docs/en/Limitations): rate limits and platform restrictions
+* [GitHub authentication options](#github-authentication-options): two ways to connect GitHub
+* [The cloud environment](#the-cloud-environment): what config carries over, what tools are installed, and how to configure environments
+* [Setup scripts](#setup-scripts) and dependency management
+* [Network access](#network-access): levels, proxies, and the default allowlist
+* [Move tasks between web and terminal](#move-tasks-between-web-and-terminal) with `--remote` and `--teleport`
+* [Work with sessions](#work-with-sessions): reviewing, sharing, archiving, deleting
+* [Auto-fix pull requests](#auto-fix-pull-requests): respond automatically to CI failures and review comments
+* [Security and isolation](#security-and-isolation): how sessions are isolated
+* [Limitations](#limitations): rate limits and platform restrictions
 
 ## GitHub authentication options
 
@@ -40,17 +40,17 @@ Cloud sessions need access to your GitHub repositories to clone code and push br
 
 | Method           | How it works                                                                                                                                 | Best for                                        |
 | :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------- |
-| **GitHub App**   | Install the Claude GitHub App on specific repositories during [web onboarding](https://code.claude.com/docs/en/web onboarding). Access is scoped per repository.         | Teams that want explicit per-repo authorization |
+| **GitHub App**   | Install the Claude GitHub App on specific repositories during [web onboarding](/en/web-quickstart). Access is scoped per repository.         | Teams that want explicit per-repo authorization |
 | **`/web-setup`** | Run `/web-setup` in your terminal to sync your local `gh` CLI token to your Claude account. Access matches whatever your `gh` token can see. | Individual developers who already use `gh`      |
 
-Either method works. [`/schedule`](https://code.claude.com/docs/en/`/schedule`) checks for either form of access and prompts you to run `/web-setup` if neither is configured. See [Connect from your terminal](https://code.claude.com/docs/en/Connect from your terminal) for the `/web-setup` walkthrough.
+Either method works. [`/schedule`](/en/routines) checks for either form of access and prompts you to run `/web-setup` if neither is configured. See [Connect from your terminal](/en/web-quickstart#connect-from-your-terminal) for the `/web-setup` walkthrough.
 
-The GitHub App is required for [Auto-fix](https://code.claude.com/docs/en/Auto-fix), which uses the App to receive PR webhooks. If you connect with `/web-setup` and later want Auto-fix, install the App on those repositories.
+The GitHub App is required for [Auto-fix](#auto-fix-pull-requests), which uses the App to receive PR webhooks. If you connect with `/web-setup` and later want Auto-fix, install the App on those repositories.
 
-Team and Enterprise admins can disable `/web-setup` with the Quick web setup toggle at [claude.ai/admin-settings/claude-code](https://code.claude.com/docs/en/claude.ai/admin-settings/claude-code).
+Team and Enterprise admins can disable `/web-setup` with the Quick web setup toggle at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code).
 
 <Note>
-  Organizations with [Zero Data Retention](https://code.claude.com/docs/en/Zero Data Retention) enabled cannot use `/web-setup` or other cloud session features.
+  Organizations with [Zero Data Retention](/en/zero-data-retention) enabled cannot use `/web-setup` or other cloud session features.
 </Note>
 
 ## The cloud environment
@@ -68,10 +68,10 @@ Cloud sessions start from a fresh clone of your repository. Anything committed t
 | Your repo's `.mcp.json` MCP servers                                   | Yes                         | Part of the clone                                                                                                                                |
 | Your repo's `.claude/rules/`                                          | Yes                         | Part of the clone                                                                                                                                |
 | Your repo's `.claude/skills/`, `.claude/agents/`, `.claude/commands/` | Yes                         | Part of the clone                                                                                                                                |
-| Plugins declared in `.claude/settings.json`                           | Yes                         | Installed at session start from the [marketplace](https://code.claude.com/docs/en/marketplace) you declared. Requires network access to reach the marketplace source |
+| Plugins declared in `.claude/settings.json`                           | Yes                         | Installed at session start from the [marketplace](/en/plugin-marketplaces) you declared. Requires network access to reach the marketplace source |
 | Your user `~/.claude/CLAUDE.md`                                       | No                          | Lives on your machine, not in the repo                                                                                                           |
 | Plugins enabled only in your user settings                            | No                          | User-scoped `enabledPlugins` lives in `~/.claude/settings.json`. Declare them in the repo's `.claude/settings.json` instead                      |
-| MCP servers you added with `claude mcp add`                           | No                          | Those write to your local user config, not the repo. Declare the server in [`.mcp.json`](https://code.claude.com/docs/en/`.mcp.json`) instead                          |
+| MCP servers you added with `claude mcp add`                           | No                          | Those write to your local user config, not the repo. Declare the server in [`.mcp.json`](/en/mcp#project-scope) instead                          |
 | Static API tokens and credentials                                     | No                          | No dedicated secrets store exists yet. See below                                                                                                 |
 | Interactive auth like AWS SSO                                         | No                          | Not supported. SSO requires browser-based login that can't run in a cloud session                                                                |
 
@@ -95,23 +95,23 @@ Cloud sessions come with common language runtimes, build tools, and databases pr
 | **Databases** | PostgreSQL 16, Redis 7.0                                                           |
 | **Utilities** | git, jq, yq, ripgrep, tmux, vim, nano                                              |
 
-¹ Bun is installed but has known [proxy compatibility issues](https://code.claude.com/docs/en/proxy compatibility issues) for package fetching.
+¹ Bun is installed but has known [proxy compatibility issues](#install-dependencies-with-a-sessionstart-hook) for package fetching.
 
 For exact versions, ask Claude to run `check-tools` in a cloud session. This command only exists in cloud sessions.
 
 ### Work with GitHub issues and pull requests
 
-Cloud sessions include built-in GitHub tools that let Claude read issues, list pull requests, fetch diffs, and post comments without any setup. These tools authenticate through the [GitHub proxy](https://code.claude.com/docs/en/GitHub proxy) using whichever method you configured under [GitHub authentication options](https://code.claude.com/docs/en/GitHub authentication options), so your token never enters the container.
+Cloud sessions include built-in GitHub tools that let Claude read issues, list pull requests, fetch diffs, and post comments without any setup. These tools authenticate through the [GitHub proxy](#github-proxy) using whichever method you configured under [GitHub authentication options](#github-authentication-options), so your token never enters the container.
 
 The `gh` CLI is not pre-installed. If you need a `gh` command the built-in tools don't cover, like `gh release` or `gh workflow run`, install and authenticate it yourself:
 
 <Steps>
   <Step title="Install gh in your setup script">
-    Add `apt update && apt install -y gh` to your [setup script](https://code.claude.com/docs/en/setup script).
+    Add `apt update && apt install -y gh` to your [setup script](#setup-scripts).
   </Step>
 
   <Step title="Provide a token">
-    Add a `GH_TOKEN` environment variable to your [environment settings](https://code.claude.com/docs/en/environment settings) with a GitHub personal access token. `gh` reads `GH_TOKEN` automatically, so no `gh auth login` step is needed.
+    Add a `GH_TOKEN` environment variable to your [environment settings](#configure-your-environment) with a GitHub personal access token. `gh` reads `GH_TOKEN` automatically, so no `gh auth login` step is needed.
   </Step>
 </Steps>
 
@@ -139,11 +139,11 @@ service postgresql start
 service redis-server start
 ```
 
-Docker is available for running containerized services. Ask Claude to run `docker compose up` to start your project's services. Network access to pull images follows your environment's [access level](https://code.claude.com/docs/en/access level), and the [Trusted defaults](https://code.claude.com/docs/en/Trusted defaults) include Docker Hub and other common registries.
+Docker is available for running containerized services. Ask Claude to run `docker compose up` to start your project's services. Network access to pull images follows your environment's [access level](#access-levels), and the [Trusted defaults](#default-allowed-domains) include Docker Hub and other common registries.
 
-If your images are large or slow to pull, add `docker compose pull` or `docker compose build` to your [setup script](https://code.claude.com/docs/en/setup script). The pulled images are saved in the [cached environment](https://code.claude.com/docs/en/cached environment), so each new session has them on disk. The cache stores files only, not running processes, so Claude still starts the containers each session.
+If your images are large or slow to pull, add `docker compose pull` or `docker compose build` to your [setup script](#setup-scripts). The pulled images are saved in the [cached environment](#environment-caching), so each new session has them on disk. The cache stores files only, not running processes, so Claude still starts the containers each session.
 
-To add packages that aren't pre-installed, use a [setup script](https://code.claude.com/docs/en/setup script). The script's output is [cached](https://code.claude.com/docs/en/cached), so packages you install there are available at the start of every session without reinstalling each time. You can also ask Claude to install packages mid-session, but those installs don't carry over to other sessions.
+To add packages that aren't pre-installed, use a [setup script](#setup-scripts). The script's output is [cached](#environment-caching), so packages you install there are available at the start of every session without reinstalling each time. You can also ask Claude to install packages mid-session, but those installs don't carry over to other sessions.
 
 ### Resource limits
 
@@ -153,11 +153,11 @@ Cloud sessions run with approximate resource ceilings that may change over time:
 * 16 GB of RAM
 * 30 GB of disk
 
-Tasks requiring significantly more memory, such as large build jobs or memory-intensive tests, may fail or be terminated. For workloads beyond these limits, use [Remote Control](https://code.claude.com/docs/en/Remote Control) to run Claude Code on your own hardware.
+Tasks requiring significantly more memory, such as large build jobs or memory-intensive tests, may fail or be terminated. For workloads beyond these limits, use [Remote Control](/en/remote-control) to run Claude Code on your own hardware.
 
 ### Configure your environment
 
-Environments control [network access](https://code.claude.com/docs/en/network access), environment variables, and the [setup script](https://code.claude.com/docs/en/setup script) that runs before a session starts. See [Installed tools](https://code.claude.com/docs/en/Installed tools) for what's available without any configuration. You can manage environments from the web interface or the terminal:
+Environments control [network access](#network-access), environment variables, and the [setup script](#setup-scripts) that runs before a session starts. See [Installed tools](#installed-tools) for what's available without any configuration. You can manage environments from the web interface or the terminal:
 
 | Action                         | How                                                                                                                                                                                                                      |
 | :----------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -192,14 +192,14 @@ apt update && apt install -y gh
 If the script exits non-zero, the session fails to start. Append `|| true` to non-critical commands to avoid blocking the session on an intermittent install failure.
 
 <Note>
-  Setup scripts that install packages need network access to reach registries. The default **Trusted** network access allows connections to [common package registries](https://code.claude.com/docs/en/common package registries) including npm, PyPI, RubyGems, and crates.io. Scripts will fail to install packages if your environment uses **None** network access.
+  Setup scripts that install packages need network access to reach registries. The default **Trusted** network access allows connections to [common package registries](#default-allowed-domains) including npm, PyPI, RubyGems, and crates.io. Scripts will fail to install packages if your environment uses **None** network access.
 </Note>
 
 ### Environment caching
 
 The setup script runs the first time you start a session in an environment. After it completes, Anthropic snapshots the filesystem and reuses that snapshot as the starting point for later sessions. New sessions start with your dependencies, tools, and Docker images already on disk, and the setup script step is skipped. This keeps startup fast even when the script installs large toolchains or pulls container images.
 
-The cache captures files, not running processes. Anything the setup script writes to disk carries over. Services or containers it starts do not, so start those per session by asking Claude or with a [SessionStart hook](https://code.claude.com/docs/en/SessionStart hook).
+The cache captures files, not running processes. Anything the setup script writes to disk carries over. Services or containers it starts do not, so start those per session by asking Claude or with a [SessionStart hook](#setup-scripts-vs-sessionstart-hooks).
 
 The setup script runs again to rebuild the cache when you change the environment's setup script or allowed network hosts, and when the cache reaches its expiry after roughly seven days. Resuming an existing session never re-runs the setup script.
 
@@ -207,7 +207,7 @@ You don't need to enable caching or manage snapshots yourself.
 
 ### Setup scripts vs. SessionStart hooks
 
-Use a setup script to install things the cloud needs but your laptop already has, like a language runtime or CLI tool. Use a [SessionStart hook](https://code.claude.com/docs/en/SessionStart hook) for project setup that should run everywhere, cloud and local, like `npm install`.
+Use a setup script to install things the cloud needs but your laptop already has, like a language runtime or CLI tool. Use a [SessionStart hook](/en/hooks#sessionstart) for project setup that should run everywhere, cloud and local, like `npm install`.
 
 Both run at the start of a session, but they belong to different places:
 
@@ -215,7 +215,7 @@ Both run at the start of a session, but they belong to different places:
 | ------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
 | Attached to   | The cloud environment                                                                        | Your repository                                                |
 | Configured in | Cloud environment UI                                                                         | `.claude/settings.json` in your repo                           |
-| Runs          | Before Claude Code launches, when no [cached environment](https://code.claude.com/docs/en/cached environment) is available | After Claude Code launches, on every session including resumed |
+| Runs          | Before Claude Code launches, when no [cached environment](#environment-caching) is available | After Claude Code launches, on every session including resumed |
 | Scope         | Cloud environments only                                                                      | Both local and cloud                                           |
 
 SessionStart hooks can also be defined in your user-level `~/.claude/settings.json` locally, but user-level settings don't carry over to cloud sessions. In the cloud, only hooks committed to the repo run.
@@ -259,17 +259,17 @@ exit 0
 SessionStart hooks have some limitations in cloud sessions:
 
 * **No cloud-only scoping**: hooks run in both local and cloud sessions. To skip local execution, check the `CLAUDE_CODE_REMOTE` environment variable as shown above.
-* **Requires network access**: install commands need to reach package registries. If your environment uses **None** network access, these hooks fail. The [default allowlist](https://code.claude.com/docs/en/default allowlist) under **Trusted** covers npm, PyPI, RubyGems, and crates.io.
-* **Proxy compatibility**: all outbound traffic passes through a [security proxy](https://code.claude.com/docs/en/security proxy). Some package managers don't work correctly with this proxy. Bun is a known example.
-* **Adds startup latency**: hooks run each time a session starts or resumes, unlike setup scripts which benefit from [environment caching](https://code.claude.com/docs/en/environment caching). Keep install scripts fast by checking whether dependencies are already present before reinstalling.
+* **Requires network access**: install commands need to reach package registries. If your environment uses **None** network access, these hooks fail. The [default allowlist](#default-allowed-domains) under **Trusted** covers npm, PyPI, RubyGems, and crates.io.
+* **Proxy compatibility**: all outbound traffic passes through a [security proxy](#security-proxy). Some package managers don't work correctly with this proxy. Bun is a known example.
+* **Adds startup latency**: hooks run each time a session starts or resumes, unlike setup scripts which benefit from [environment caching](#environment-caching). Keep install scripts fast by checking whether dependencies are already present before reinstalling.
 
-To persist environment variables for subsequent Bash commands, write to the file at `$CLAUDE_ENV_FILE`. See [SessionStart hooks](https://code.claude.com/docs/en/SessionStart hooks) for details.
+To persist environment variables for subsequent Bash commands, write to the file at `$CLAUDE_ENV_FILE`. See [SessionStart hooks](/en/hooks#sessionstart) for details.
 
-Replacing the base image with your own Docker image is not yet supported. Use a setup script to install what you need on top of the [provided image](https://code.claude.com/docs/en/provided image), or run your image as a container alongside Claude with `docker compose`.
+Replacing the base image with your own Docker image is not yet supported. Use a setup script to install what you need on top of the [provided image](#installed-tools), or run your image as a container alongside Claude with `docker compose`.
 
 ## Network access
 
-Network access controls outbound connections from the cloud environment. Each environment specifies one access level, and you can extend it with custom allowed domains. The default is **Trusted**, which allows package registries and other [allowlisted domains](https://code.claude.com/docs/en/allowlisted domains).
+Network access controls outbound connections from the cloud environment. Each environment specifies one access level, and you can extend it with custom allowed domains. The default is **Trusted**, which allows package registries and other [allowlisted domains](#default-allowed-domains).
 
 ### Access levels
 
@@ -278,11 +278,11 @@ Choose an access level when you create or edit an environment:
 | Level       | Outbound connections                                                                         |
 | :---------- | :------------------------------------------------------------------------------------------- |
 | **None**    | No outbound network access                                                                   |
-| **Trusted** | [Allowlisted domains](https://code.claude.com/docs/en/Allowlisted domains) only: package registries, GitHub, cloud SDKs |
+| **Trusted** | [Allowlisted domains](#default-allowed-domains) only: package registries, GitHub, cloud SDKs |
 | **Full**    | Any domain                                                                                   |
 | **Custom**  | Your own allowlist, optionally including the defaults                                        |
 
-GitHub operations use a [separate proxy](https://code.claude.com/docs/en/separate proxy) that is independent of this setting.
+GitHub operations use a [separate proxy](#github-proxy) that is independent of this setting.
 
 ### Allow specific domains
 
@@ -294,7 +294,7 @@ api.example.com
 registry.example.com
 ```
 
-Use `*.` for wildcard subdomain matching. Check **Also include default list of common package managers** to keep the [Trusted domains](https://code.claude.com/docs/en/Trusted domains) alongside your custom entries, or leave it unchecked to allow only what you list.
+Use `*.` for wildcard subdomain matching. Check **Also include default list of common package managers** to keep the [Trusted domains](#default-allowed-domains) alongside your custom entries, or leave it unchecked to allow only what you list.
 
 ### GitHub proxy
 
@@ -328,7 +328,7 @@ When using **Trusted** network access, the following domains are allowed by defa
 
   <Accordion title="Version control">
     * github.com
-    * [www.github.com](https://code.claude.com/docs/en/www.github.com)
+    * [www.github.com](http://www.github.com)
     * api.github.com
     * npm.pkg.github.com
     * raw\.githubusercontent.com
@@ -340,10 +340,10 @@ When using **Trusted** network access, the following domains are allowed by defa
     * camo.githubusercontent.com
     * gist.github.com
     * gitlab.com
-    * [www.gitlab.com](https://code.claude.com/docs/en/www.gitlab.com)
+    * [www.gitlab.com](http://www.gitlab.com)
     * registry.gitlab.com
     * bitbucket.org
-    * [www.bitbucket.org](https://code.claude.com/docs/en/www.bitbucket.org)
+    * [www.bitbucket.org](http://www.bitbucket.org)
     * api.bitbucket.org
   </Accordion>
 
@@ -352,7 +352,7 @@ When using **Trusted** network access, the following domains are allowed by defa
     * auth.docker.io
     * index.docker.io
     * hub.docker.com
-    * [www.docker.com](https://code.claude.com/docs/en/www.docker.com)
+    * [www.docker.com](http://www.docker.com)
     * production.cloudflare.docker.com
     * download.docker.com
     * gcr.io
@@ -374,7 +374,7 @@ When using **Trusted** network access, the following domains are allowed by defa
     * azure.com
     * portal.azure.com
     * microsoft.com
-    * [www.microsoft.com](https://code.claude.com/docs/en/www.microsoft.com)
+    * [www.microsoft.com](http://www.microsoft.com)
     * \*.microsoftonline.com
     * packages.microsoft.com
     * dotnet.microsoft.com
@@ -384,19 +384,19 @@ When using **Trusted** network access, the following domains are allowed by defa
     * \*.amazonaws.com
     * \*.api.aws
     * oracle.com
-    * [www.oracle.com](https://code.claude.com/docs/en/www.oracle.com)
+    * [www.oracle.com](http://www.oracle.com)
     * java.com
-    * [www.java.com](https://code.claude.com/docs/en/www.java.com)
+    * [www.java.com](http://www.java.com)
     * java.net
-    * [www.java.net](https://code.claude.com/docs/en/www.java.net)
+    * [www.java.net](http://www.java.net)
     * download.oracle.com
     * yum.oracle.com
   </Accordion>
 
   <Accordion title="JavaScript and Node package managers">
     * registry.npmjs.org
-    * [www.npmjs.com](https://code.claude.com/docs/en/www.npmjs.com)
-    * [www.npmjs.org](https://code.claude.com/docs/en/www.npmjs.org)
+    * [www.npmjs.com](http://www.npmjs.com)
+    * [www.npmjs.org](http://www.npmjs.org)
     * npmjs.com
     * npmjs.org
     * yarnpkg.com
@@ -405,38 +405,38 @@ When using **Trusted** network access, the following domains are allowed by defa
 
   <Accordion title="Python package managers">
     * pypi.org
-    * [www.pypi.org](https://code.claude.com/docs/en/www.pypi.org)
+    * [www.pypi.org](http://www.pypi.org)
     * files.pythonhosted.org
     * pythonhosted.org
     * test.pypi.org
     * pypi.python.org
     * pypa.io
-    * [www.pypa.io](https://code.claude.com/docs/en/www.pypa.io)
+    * [www.pypa.io](http://www.pypa.io)
   </Accordion>
 
   <Accordion title="Ruby package managers">
     * rubygems.org
-    * [www.rubygems.org](https://code.claude.com/docs/en/www.rubygems.org)
+    * [www.rubygems.org](http://www.rubygems.org)
     * api.rubygems.org
     * index.rubygems.org
     * ruby-lang.org
-    * [www.ruby-lang.org](https://code.claude.com/docs/en/www.ruby-lang.org)
+    * [www.ruby-lang.org](http://www.ruby-lang.org)
     * rubyforge.org
-    * [www.rubyforge.org](https://code.claude.com/docs/en/www.rubyforge.org)
+    * [www.rubyforge.org](http://www.rubyforge.org)
     * rubyonrails.org
-    * [www.rubyonrails.org](https://code.claude.com/docs/en/www.rubyonrails.org)
+    * [www.rubyonrails.org](http://www.rubyonrails.org)
     * rvm.io
     * get.rvm.io
   </Accordion>
 
   <Accordion title="Rust package managers">
     * crates.io
-    * [www.crates.io](https://code.claude.com/docs/en/www.crates.io)
+    * [www.crates.io](http://www.crates.io)
     * index.crates.io
     * static.crates.io
     * rustup.rs
     * static.rust-lang.org
-    * [www.rust-lang.org](https://code.claude.com/docs/en/www.rust-lang.org)
+    * [www.rust-lang.org](http://www.rust-lang.org)
   </Accordion>
 
   <Accordion title="Go package managers">
@@ -444,7 +444,7 @@ When using **Trusted** network access, the following domains are allowed by defa
     * sum.golang.org
     * index.golang.org
     * golang.org
-    * [www.golang.org](https://code.claude.com/docs/en/www.golang.org)
+    * [www.golang.org](http://www.golang.org)
     * goproxy.io
     * pkg.go.dev
   </Accordion>
@@ -457,50 +457,50 @@ When using **Trusted** network access, the following domains are allowed by defa
     * repo.maven.apache.org
     * jcenter.bintray.com
     * gradle.org
-    * [www.gradle.org](https://code.claude.com/docs/en/www.gradle.org)
+    * [www.gradle.org](http://www.gradle.org)
     * services.gradle.org
     * plugins.gradle.org
     * kotlinlang.org
-    * [www.kotlinlang.org](https://code.claude.com/docs/en/www.kotlinlang.org)
+    * [www.kotlinlang.org](http://www.kotlinlang.org)
     * spring.io
     * repo.spring.io
   </Accordion>
 
   <Accordion title="Other package managers">
     * packagist.org (PHP Composer)
-    * [www.packagist.org](https://code.claude.com/docs/en/www.packagist.org)
+    * [www.packagist.org](http://www.packagist.org)
     * repo.packagist.org
     * nuget.org (.NET NuGet)
-    * [www.nuget.org](https://code.claude.com/docs/en/www.nuget.org)
+    * [www.nuget.org](http://www.nuget.org)
     * api.nuget.org
     * pub.dev (Dart/Flutter)
     * api.pub.dev
     * hex.pm (Elixir/Erlang)
-    * [www.hex.pm](https://code.claude.com/docs/en/www.hex.pm)
+    * [www.hex.pm](http://www.hex.pm)
     * cpan.org (Perl CPAN)
-    * [www.cpan.org](https://code.claude.com/docs/en/www.cpan.org)
+    * [www.cpan.org](http://www.cpan.org)
     * metacpan.org
-    * [www.metacpan.org](https://code.claude.com/docs/en/www.metacpan.org)
+    * [www.metacpan.org](http://www.metacpan.org)
     * api.metacpan.org
     * cocoapods.org (iOS/macOS)
-    * [www.cocoapods.org](https://code.claude.com/docs/en/www.cocoapods.org)
+    * [www.cocoapods.org](http://www.cocoapods.org)
     * cdn.cocoapods.org
     * haskell.org
-    * [www.haskell.org](https://code.claude.com/docs/en/www.haskell.org)
+    * [www.haskell.org](http://www.haskell.org)
     * hackage.haskell.org
     * swift.org
-    * [www.swift.org](https://code.claude.com/docs/en/www.swift.org)
+    * [www.swift.org](http://www.swift.org)
   </Accordion>
 
   <Accordion title="Linux distributions">
     * archive.ubuntu.com
     * security.ubuntu.com
     * ubuntu.com
-    * [www.ubuntu.com](https://code.claude.com/docs/en/www.ubuntu.com)
+    * [www.ubuntu.com](http://www.ubuntu.com)
     * \*.ubuntu.com
     * ppa.launchpad.net
     * launchpad.net
-    * [www.launchpad.net](https://code.claude.com/docs/en/www.launchpad.net)
+    * [www.launchpad.net](http://www.launchpad.net)
     * \*.nixos.org
   </Accordion>
 
@@ -508,28 +508,28 @@ When using **Trusted** network access, the following domains are allowed by defa
     * dl.k8s.io (Kubernetes)
     * pkgs.k8s.io
     * k8s.io
-    * [www.k8s.io](https://code.claude.com/docs/en/www.k8s.io)
+    * [www.k8s.io](http://www.k8s.io)
     * releases.hashicorp.com (HashiCorp)
     * apt.releases.hashicorp.com
     * rpm.releases.hashicorp.com
     * archive.releases.hashicorp.com
     * hashicorp.com
-    * [www.hashicorp.com](https://code.claude.com/docs/en/www.hashicorp.com)
+    * [www.hashicorp.com](http://www.hashicorp.com)
     * repo.anaconda.com (Anaconda/Conda)
     * conda.anaconda.org
     * anaconda.org
-    * [www.anaconda.com](https://code.claude.com/docs/en/www.anaconda.com)
+    * [www.anaconda.com](http://www.anaconda.com)
     * anaconda.com
     * continuum.io
     * apache.org (Apache)
-    * [www.apache.org](https://code.claude.com/docs/en/www.apache.org)
+    * [www.apache.org](http://www.apache.org)
     * archive.apache.org
     * downloads.apache.org
     * eclipse.org (Eclipse)
-    * [www.eclipse.org](https://code.claude.com/docs/en/www.eclipse.org)
+    * [www.eclipse.org](http://www.eclipse.org)
     * download.eclipse.org
     * nodejs.org (Node.js)
-    * [www.nodejs.org](https://code.claude.com/docs/en/www.nodejs.org)
+    * [www.nodejs.org](http://www.nodejs.org)
     * developer.apple.com
     * developer.android.com
     * pkg.stainless.com
@@ -538,7 +538,7 @@ When using **Trusted** network access, the following domains are allowed by defa
 
   <Accordion title="Cloud services and monitoring">
     * statsig.com
-    * [www.statsig.com](https://code.claude.com/docs/en/www.statsig.com)
+    * [www.statsig.com](http://www.statsig.com)
     * api.statsig.com
     * sentry.io
     * \*.sentry.io
@@ -560,9 +560,9 @@ When using **Trusted** network access, the following domains are allowed by defa
 
   <Accordion title="Schema and configuration">
     * json-schema.org
-    * [www.json-schema.org](https://code.claude.com/docs/en/www.json-schema.org)
+    * [www.json-schema.org](http://www.json-schema.org)
     * json.schemastore.org
-    * [www.schemastore.org](https://code.claude.com/docs/en/www.schemastore.org)
+    * [www.schemastore.org](http://www.schemastore.org)
   </Accordion>
 
   <Accordion title="Model Context Protocol">
@@ -572,10 +572,10 @@ When using **Trusted** network access, the following domains are allowed by defa
 
 ## Move tasks between web and terminal
 
-These workflows require the [Claude Code CLI](https://code.claude.com/docs/en/Claude Code CLI) signed in to the same claude.ai account. You can start new cloud sessions from your terminal, or pull cloud sessions into your terminal to continue locally. Cloud sessions persist even if you close your laptop, and you can monitor them from anywhere including the Claude mobile app.
+These workflows require the [Claude Code CLI](/en/quickstart) signed in to the same claude.ai account. You can start new cloud sessions from your terminal, or pull cloud sessions into your terminal to continue locally. Cloud sessions persist even if you close your laptop, and you can monitor them from anywhere including the Claude mobile app.
 
 <Note>
-  From the CLI, session handoff is one-way: you can pull cloud sessions into your terminal with `--teleport`, but you can't push an existing terminal session to the web. The `--remote` flag creates a new cloud session for your current repository. The [Desktop app](https://code.claude.com/docs/en/Desktop app) provides a Continue in menu that can send a local session to the web.
+  From the CLI, session handoff is one-way: you can pull cloud sessions into your terminal with `--teleport`, but you can't push an existing terminal session to the web. The `--remote` flag creates a new cloud session for your current repository. The [Desktop app](/en/desktop#continue-in-another-surface) provides a Continue in menu that can send a local session to the web.
 </Note>
 
 ### From terminal to web
@@ -589,7 +589,7 @@ claude --remote "Fix the authentication bug in src/auth/login.ts"
 This creates a new cloud session on claude.ai. The session clones your current directory's GitHub remote at your current branch, so push first if you have local commits, since the VM clones from GitHub rather than your machine. `--remote` works with a single repository at a time. The task runs in the cloud while you continue working locally.
 
 <Note>
-  `--remote` creates cloud sessions. `--remote-control` is unrelated: it exposes a local CLI session for monitoring from the web. See [Remote Control](https://code.claude.com/docs/en/Remote Control).
+  `--remote` creates cloud sessions. `--remote-control` is unrelated: it exposes a local CLI session for monitoring from the web. See [Remote Control](/en/remote-control).
 </Note>
 
 Use `/tasks` in the Claude Code CLI to check progress, or open the session on claude.ai or the Claude mobile app to interact directly. From there you can steer Claude, provide feedback, or answer questions just like any other conversation.
@@ -610,7 +610,7 @@ claude --remote "Execute the migration plan in docs/migration-plan.md"
 
 This pattern gives you control over the strategy while letting Claude execute autonomously in the cloud.
 
-**Plan in the cloud with ultraplan**: to draft and review the plan itself in a web session, use [ultraplan](https://code.claude.com/docs/en/ultraplan). Claude generates the plan on Claude Code on the web while you keep working, then you comment on sections in your browser and choose to execute remotely or send the plan back to your terminal.
+**Plan in the cloud with ultraplan**: to draft and review the plan itself in a web session, use [ultraplan](/en/ultraplan). Claude generates the plan on Claude Code on the web while you keep working, then you comment on sections in your browser and choose to execute remotely or send the plan back to your terminal.
 
 **Run tasks in parallel**: each `--remote` command creates its own cloud session that runs independently. You can start multiple tasks and they'll all run simultaneously in separate sessions:
 
@@ -620,7 +620,7 @@ claude --remote "Update the API documentation"
 claude --remote "Refactor the logger to use structured output"
 ```
 
-Monitor all sessions with `/tasks` in the Claude Code CLI. When a session completes, you can create a PR from the web interface or [teleport](https://code.claude.com/docs/en/teleport) the session to your terminal to continue working.
+Monitor all sessions with `/tasks` in the Claude Code CLI. When a session completes, you can create a PR from the web interface or [teleport](#from-web-to-terminal) the session to your terminal to continue working.
 
 #### Send local repositories without GitHub
 
@@ -637,7 +637,7 @@ Bundled repositories must meet these limits:
 * The directory must be a git repository with at least one commit
 * The bundled repository must be under 100 MB. Larger repositories fall back to bundling only the current branch, then to a single squashed snapshot of the working tree, and fail only if the snapshot is still too large
 * Untracked files are not included; run `git add` on files you want the cloud session to see
-* Sessions created from a bundle can't push back to a remote unless you also have [GitHub authentication](https://code.claude.com/docs/en/GitHub authentication) configured
+* Sessions created from a bundle can't push back to a remote unless you also have [GitHub authentication](#github-authentication-options) configured
 
 ### From web to terminal
 
@@ -673,7 +673,7 @@ Sessions appear in the sidebar at claude.ai/code. From there you can review chan
 
 ### Manage context
 
-Cloud sessions support [built-in commands](https://code.claude.com/docs/en/built-in commands) that produce text output. Commands that open an interactive terminal picker, like `/model` or `/config`, are not available.
+Cloud sessions support [built-in commands](/en/commands) that produce text output. Commands that open an interactive terminal picker, like `/model` or `/config`, are not available.
 
 For context management specifically:
 
@@ -683,13 +683,13 @@ For context management specifically:
 | `/context` | Yes                     | Shows what's currently in the context window                                                                             |
 | `/clear`   | No                      | Start a new session from the sidebar instead                                                                             |
 
-Auto-compaction runs automatically when the context window approaches capacity, the same as in the CLI. To trigger it earlier, set [`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`](https://code.claude.com/docs/en/`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`) in your [environment variables](https://code.claude.com/docs/en/environment variables). For example, `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE=70` compacts at 70% capacity instead of the default \~95%. To change the effective window size for compaction calculations, use [`CLAUDE_CODE_AUTO_COMPACT_WINDOW`](https://code.claude.com/docs/en/`CLAUDE_CODE_AUTO_COMPACT_WINDOW`).
+Auto-compaction runs automatically when the context window approaches capacity, the same as in the CLI. To trigger it earlier, set [`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`](/en/env-vars) in your [environment variables](#configure-your-environment). For example, `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE=70` compacts at 70% capacity instead of the default \~95%. To change the effective window size for compaction calculations, use [`CLAUDE_CODE_AUTO_COMPACT_WINDOW`](/en/env-vars).
 
-[Subagents](https://code.claude.com/docs/en/Subagents) work the same way they do locally. Claude can spawn them with the Task tool to offload research or parallel work into a separate context window, keeping the main conversation lighter. Subagents defined in your repo's `.claude/agents/` are picked up automatically. [Agent teams](https://code.claude.com/docs/en/Agent teams) are off by default but can be enabled by adding `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` to your [environment variables](https://code.claude.com/docs/en/environment variables).
+[Subagents](/en/sub-agents) work the same way they do locally. Claude can spawn them with the Task tool to offload research or parallel work into a separate context window, keeping the main conversation lighter. Subagents defined in your repo's `.claude/agents/` are picked up automatically. [Agent teams](/en/agent-teams) are off by default but can be enabled by adding `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` to your [environment variables](#configure-your-environment).
 
 ### Review changes
 
-Each session shows a diff indicator with lines added and removed, like `+42 -18`. Select it to open the diff view, leave inline comments on specific lines, and send them to Claude with your next message. See [Review and iterate](https://code.claude.com/docs/en/Review and iterate) for the full walkthrough including PR creation. To have Claude monitor the PR for CI failures and review comments automatically, see [Auto-fix pull requests](https://code.claude.com/docs/en/Auto-fix pull requests).
+Each session shows a diff indicator with lines added and removed, like `+42 -18`. Select it to open the diff view, leave inline comments on specific lines, and send them to Claude with your next message. See [Review and iterate](/en/web-quickstart#review-and-iterate) for the full walkthrough including PR creation. To have Claude monitor the PR for CI failures and review comments automatically, see [Auto-fix pull requests](#auto-fix-pull-requests).
 
 ### Share sessions
 
@@ -697,7 +697,7 @@ To share a session, toggle its visibility according to the account types below. 
 
 #### Share from an Enterprise or Team account
 
-For Enterprise and Team accounts, the two visibility options are **Private** and **Team**. Team visibility makes the session visible to other members of your claude.ai organization. Repository access verification is enabled by default, based on the GitHub account connected to the recipient's account. Your account's display name is visible to all recipients with access. [Claude in Slack](https://code.claude.com/docs/en/Claude in Slack) sessions are automatically shared with Team visibility.
+For Enterprise and Team accounts, the two visibility options are **Private** and **Team**. Team visibility makes the session visible to other members of your claude.ai organization. Repository access verification is enabled by default, based on the GitHub account connected to the recipient's account. Your account's display name is visible to all recipients with access. [Claude in Slack](/en/slack) sessions are automatically shared with Team visibility.
 
 #### Share from a Max or Pro account
 
@@ -727,13 +727,13 @@ You will be asked to confirm before a session is deleted.
 Claude can watch a pull request and automatically respond to CI failures and review comments. Claude subscribes to GitHub activity on the PR, and when a check fails or a reviewer leaves a comment, Claude investigates and pushes a fix if one is clear.
 
 <Note>
-  Auto-fix requires the Claude GitHub App to be installed on your repository. If you haven't already, install it from the [GitHub App page](https://code.claude.com/docs/en/GitHub App page) or when prompted during [setup](https://code.claude.com/docs/en/setup).
+  Auto-fix requires the Claude GitHub App to be installed on your repository. If you haven't already, install it from the [GitHub App page](https://github.com/apps/claude) or when prompted during [setup](/en/web-quickstart#connect-github-and-create-an-environment).
 </Note>
 
 There are a few ways to turn on auto-fix depending on where the PR came from and what device you're using:
 
 * **PRs created in Claude Code on the web**: open the CI status bar and select **Auto-fix**
-* **From your terminal**: run [`/autofix-pr`](https://code.claude.com/docs/en/`/autofix-pr`) while on the PR's branch. Claude Code detects the open PR with `gh`, spawns a web session, and turns on auto-fix in one step
+* **From your terminal**: run [`/autofix-pr`](/en/commands) while on the PR's branch. Claude Code detects the open PR with `gh`, spawns a web session, and turns on auto-fix in one step
 * **From the mobile app**: tell Claude to auto-fix the PR, for example "watch this PR and fix any CI failures or review comments"
 * **Any existing PR**: paste the PR URL into a session and tell Claude to auto-fix it
 
@@ -762,15 +762,15 @@ Each cloud session is separated from your machine and from other sessions throug
 
 ## Troubleshooting
 
-For runtime API errors that appear in the conversation such as `API Error: 500`, `529 Overloaded`, `429`, or `Prompt is too long`, see the [Error reference](https://code.claude.com/docs/en/Error reference). Those errors and their fixes are shared with the CLI and Desktop app. The sections below cover issues specific to cloud sessions.
+For runtime API errors that appear in the conversation such as `API Error: 500`, `529 Overloaded`, `429`, or `Prompt is too long`, see the [Error reference](/en/errors). Those errors and their fixes are shared with the CLI and Desktop app. The sections below cover issues specific to cloud sessions.
 
 ### Session creation failed
 
 If a new session fails to start with `Session creation failed` or stalls at provisioning, Claude Code could not allocate a cloud environment.
 
-* Check [status.claude.com](https://code.claude.com/docs/en/status.claude.com) for cloud session incidents
+* Check [status.claude.com](https://status.claude.com) for cloud session incidents
 * Retry after a minute, as capacity is provisioned on demand
-* Confirm your repository is reachable. Private repositories require either the GitHub App installed with access to that repository, or a `gh` token synced via `/web-setup`. See [GitHub authentication options](https://code.claude.com/docs/en/GitHub authentication options).
+* Confirm your repository is reachable. Private repositories require either the GitHub App installed with access to that repository, or a `gh` token synced via `/web-setup`. See [GitHub authentication options](#github-authentication-options).
 
 ### Remote Control session expired or access denied
 
@@ -784,7 +784,7 @@ If a new session fails to start with `Session creation failed` or stalls at prov
 
 Cloud sessions stop after a period of inactivity and the underlying environment is reclaimed. From a local terminal, this surfaces as `Could not resume session ... its environment has expired. Creating a fresh session instead.` On the web, the session is marked expired in the session list.
 
-Reopen the session from [claude.ai/code](https://code.claude.com/docs/en/claude.ai/code) to provision a fresh environment with your conversation history restored.
+Reopen the session from [claude.ai/code](https://claude.ai/code) to provision a fresh environment with your conversation history restored.
 
 ## Limitations
 
@@ -792,15 +792,15 @@ Before relying on cloud sessions for a workflow, account for these constraints:
 
 * **Rate limits**: Claude Code on the web shares rate limits with all other Claude and Claude Code usage within your account. Running multiple tasks in parallel consumes more rate limits proportionately. There is no separate compute charge for the cloud VM.
 * **Repository authentication**: you can only move sessions from web to local when you are authenticated to the same account
-* **Platform restrictions**: repository cloning and pull request creation require GitHub. Self-hosted [GitHub Enterprise Server](https://code.claude.com/docs/en/GitHub Enterprise Server) instances are supported for Team and Enterprise plans. GitLab, Bitbucket, and other non-GitHub repositories can be sent to cloud sessions as a [local bundle](https://code.claude.com/docs/en/local bundle), but the session can't push results back to the remote
-* **Organization IP allowlist**: cloud sessions call the Anthropic API from Anthropic-managed infrastructure, not your network. If your organization has [IP allowlisting](https://code.claude.com/docs/en/IP allowlisting) enabled, every cloud session fails with an authentication error. The same applies to [Code Review](https://code.claude.com/docs/en/Code Review) and [Routines](https://code.claude.com/docs/en/Routines). Contact [Anthropic support](https://code.claude.com/docs/en/Anthropic support) to exempt Anthropic-hosted services from your organization's IP allowlist.
+* **Platform restrictions**: repository cloning and pull request creation require GitHub. Self-hosted [GitHub Enterprise Server](/en/github-enterprise-server) instances are supported for Team and Enterprise plans. GitLab, Bitbucket, and other non-GitHub repositories can be sent to cloud sessions as a [local bundle](#send-local-repositories-without-github), but the session can't push results back to the remote
+* **Organization IP allowlist**: cloud sessions call the Anthropic API from Anthropic-managed infrastructure, not your network. If your organization has [IP allowlisting](https://support.claude.com/en/articles/13200993-restrict-access-to-claude-with-ip-allowlisting) enabled, every cloud session fails with an authentication error. The same applies to [Code Review](/en/code-review) and [Routines](/en/routines). Contact [Anthropic support](https://support.claude.com/) to exempt Anthropic-hosted services from your organization's IP allowlist.
 
 ## Related resources
 
-* [Ultraplan](https://code.claude.com/docs/en/Ultraplan): draft a plan in a cloud session and review it in your browser
-* [Ultrareview](https://code.claude.com/docs/en/Ultrareview): run a deep multi-agent code review in a cloud sandbox
-* [Routines](https://code.claude.com/docs/en/Routines): automate work on a schedule, via API call, or in response to GitHub events
-* [Hooks configuration](https://code.claude.com/docs/en/Hooks configuration): run scripts at session lifecycle events
-* [Settings reference](https://code.claude.com/docs/en/Settings reference): all configuration options
-* [Security](https://code.claude.com/docs/en/Security): isolation guarantees and data handling
-* [Data usage](https://code.claude.com/docs/en/Data usage): what Anthropic retains from cloud sessions
+* [Ultraplan](/en/ultraplan): draft a plan in a cloud session and review it in your browser
+* [Ultrareview](/en/ultrareview): run a deep multi-agent code review in a cloud sandbox
+* [Routines](/en/routines): automate work on a schedule, via API call, or in response to GitHub events
+* [Hooks configuration](/en/hooks): run scripts at session lifecycle events
+* [Settings reference](/en/settings): all configuration options
+* [Security](/en/security): isolation guarantees and data handling
+* [Data usage](/en/data-usage): what Anthropic retains from cloud sessions

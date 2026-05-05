@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/subagents
-fetched_at: 2026-05-04T15:04:09.931441+00:00
+fetched_at: 2026-05-05T19:40:39.026761+00:00
 fetch_method: mintlify_md
 ---
 
@@ -21,8 +21,8 @@ This guide explains how to define and use subagents in the SDK using the `agents
 
 You can create subagents in three ways:
 
-* **Programmatically**: use the `agents` parameter in your `query()` options ([TypeScript](https://code.claude.com/docs/en/agent-sdk/TypeScript), [Python](https://code.claude.com/docs/en/agent-sdk/Python))
-* **Filesystem-based**: define agents as markdown files in `.claude/agents/` directories (see [defining subagents as files](https://code.claude.com/docs/en/agent-sdk/defining subagents as files))
+* **Programmatically**: use the `agents` parameter in your `query()` options ([TypeScript](/en/agent-sdk/typescript#agentdefinition), [Python](/en/agent-sdk/python#agentdefinition))
+* **Filesystem-based**: define agents as markdown files in `.claude/agents/` directories (see [defining subagents as files](/en/sub-agents))
 * **Built-in general-purpose**: Claude can invoke the built-in `general-purpose` subagent at any time via the Agent tool without you defining anything
 
 This guide focuses on the programmatic approach, which is recommended for SDK applications.
@@ -33,7 +33,7 @@ When you define subagents, Claude determines whether to invoke them based on eac
 
 ### Context isolation
 
-Each subagent runs in its own fresh conversation. Intermediate tool calls and results stay inside the subagent; only its final message returns to the parent. See [What subagents inherit](https://code.claude.com/docs/en/agent-sdk/What subagents inherit) for exactly what's in the subagent's context.
+Each subagent runs in its own fresh conversation. Intermediate tool calls and results stay inside the subagent; only its final message returns to the parent. See [What subagents inherit](#what-subagents-inherit) for exactly what's in the subagent's context.
 
 **Example:** a `research-assistant` subagent can explore dozens of files without any of that content accumulating in the main conversation. The parent receives a concise summary, not every file the subagent read.
 
@@ -65,6 +65,7 @@ Define subagents directly in your code using the `agents` parameter. This exampl
   ```python Python theme={null}
   import asyncio
   from claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition
+
 
   async def main():
       async for message in query(
@@ -108,6 +109,7 @@ Define subagents directly in your code using the `agents` parameter. This exampl
       ):
           if hasattr(message, "result"):
               print(message.result)
+
 
   asyncio.run(main())
   ```
@@ -178,7 +180,7 @@ Define subagents directly in your code using the `agents` parameter. This exampl
 | `effort`          | `'low' \| 'medium' \| 'high' \| 'xhigh' \| 'max' \| number` | No       | Reasoning effort level for this agent                                                                                                                       |
 | `permissionMode`  | `PermissionMode`                                            | No       | Permission mode for tool execution within this agent                                                                                                        |
 
-In the Python SDK, these field names use camelCase to match the wire format. See the [`AgentDefinition` reference](https://code.claude.com/docs/en/agent-sdk/`AgentDefinition` reference) for details.
+In the Python SDK, these field names use camelCase to match the wire format. See the [`AgentDefinition` reference](/en/agent-sdk/python#agentdefinition) for details.
 
 <Note>
   Subagents cannot spawn their own subagents. Don't include `Agent` in a subagent's `tools` array.
@@ -186,7 +188,7 @@ In the Python SDK, these field names use camelCase to match the wire format. See
 
 ### Filesystem-based definition (alternative)
 
-You can also define subagents as markdown files in `.claude/agents/` directories. See the [Claude Code subagents documentation](https://code.claude.com/docs/en/agent-sdk/Claude Code subagents documentation) for details on this approach. Programmatically defined agents take precedence over filesystem-based agents with the same name.
+You can also define subagents as markdown files in `.claude/agents/` directories. See the [Claude Code subagents documentation](/en/sub-agents) for details on this approach. Programmatically defined agents take precedence over filesystem-based agents with the same name.
 
 <Note>
   Even without defining custom subagents, Claude can spawn the built-in `general-purpose` subagent when `Agent` is in your `allowedTools`. This is useful for delegating research or exploration tasks without creating specialized agents.
@@ -233,6 +235,7 @@ You can create agent definitions dynamically based on runtime conditions. This e
   import asyncio
   from claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition
 
+
   # Factory function that returns an AgentDefinition
   # This pattern lets you customize agents based on runtime conditions
   def create_security_agent(security_level: str) -> AgentDefinition:
@@ -245,6 +248,7 @@ You can create agent definitions dynamically based on runtime conditions. This e
           # Key insight: use a more capable model for high-stakes reviews
           model="opus" if is_strict else "sonnet",
       )
+
 
   async def main():
       # The agent is created at query time, so each request can use different settings
@@ -260,6 +264,7 @@ You can create agent definitions dynamically based on runtime conditions. This e
       ):
           if hasattr(message, "result"):
               print(message.result)
+
 
   asyncio.run(main())
   ```
@@ -316,6 +321,7 @@ This example iterates through streamed messages, logging when a subagent is invo
   import asyncio
   from claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition
 
+
   async def main():
       async for message in query(
           prompt="Use the code-reviewer agent to review this codebase",
@@ -346,6 +352,7 @@ This example iterates through streamed messages, logging when a subagent is invo
 
           if hasattr(message, "result"):
               print(message.result)
+
 
   asyncio.run(main())
   ```
@@ -454,10 +461,12 @@ The example below demonstrates this flow: the first query runs a subagent and ca
   import re
   from claude_agent_sdk import query, ClaudeAgentOptions
 
+
   def extract_agent_id(text: str) -> str | None:
       """Extract agentId from Agent tool result text."""
       match = re.search(r"agentId:\s*([a-f0-9-]+)", text)
       return match.group(1) if match else None
+
 
   async def main():
       agent_id = None
@@ -493,6 +502,7 @@ The example below demonstrates this flow: the first query runs a subagent and ca
               if hasattr(message, "result"):
                   print(message.result)
 
+
   asyncio.run(main())
   ```
 </CodeGroup>
@@ -517,6 +527,7 @@ This example creates a read-only analysis agent that can examine code but cannot
   import asyncio
   from claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition
 
+
   async def main():
       async for message in query(
           prompt="Analyze the architecture of this codebase",
@@ -535,6 +546,7 @@ This example creates a read-only analysis agent that can examine code but cannot
       ):
           if hasattr(message, "result"):
               print(message.result)
+
 
   asyncio.run(main())
   ```
@@ -591,5 +603,5 @@ On Windows, subagents with very long prompts may fail due to command line length
 
 ## Related documentation
 
-* [Claude Code subagents](https://code.claude.com/docs/en/agent-sdk/Claude Code subagents): comprehensive subagent documentation including filesystem-based definitions
-* [SDK overview](https://code.claude.com/docs/en/agent-sdk/SDK overview): getting started with the Claude Agent SDK
+* [Claude Code subagents](/en/sub-agents): comprehensive subagent documentation including filesystem-based definitions
+* [SDK overview](/en/agent-sdk/overview): getting started with the Claude Agent SDK

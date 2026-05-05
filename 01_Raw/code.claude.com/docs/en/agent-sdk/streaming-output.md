@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/streaming-output
-fetched_at: 2026-05-04T15:04:04.558661+00:00
+fetched_at: 2026-05-05T19:40:38.996815+00:00
 fetch_method: mintlify_md
 ---
 
@@ -15,7 +15,7 @@ fetch_method: mintlify_md
 By default, the Agent SDK yields complete `AssistantMessage` objects after Claude finishes generating each response. To receive incremental updates as text and tool calls are generated, enable partial message streaming by setting `include_partial_messages` (Python) or `includePartialMessages` (TypeScript) to `true` in your options.
 
 <Tip>
-  This page covers output streaming (receiving tokens in real-time). For input modes (how you send messages), see [Send messages to agents](https://code.claude.com/docs/en/agent-sdk/Send messages to agents). You can also [stream responses using the Agent SDK via the CLI](https://code.claude.com/docs/en/agent-sdk/stream responses using the Agent SDK via the CLI).
+  This page covers output streaming (receiving tokens in real-time). For input modes (how you send messages), see [Send messages to agents](/en/agent-sdk/streaming-vs-single-mode). You can also [stream responses using the Agent SDK via the CLI](/en/headless).
 </Tip>
 
 ## Enable streaming output
@@ -36,6 +36,7 @@ The example below enables streaming and prints text chunks as they arrive. Notic
   from claude_agent_sdk.types import StreamEvent
   import asyncio
 
+
   async def stream_response():
       options = ClaudeAgentOptions(
           include_partial_messages=True,
@@ -49,6 +50,7 @@ The example below enables streaming and prints text chunks as they arrive. Notic
                   delta = event.get("delta", {})
                   if delta.get("type") == "text_delta":
                       print(delta.get("text", ""), end="", flush=True)
+
 
   asyncio.run(stream_response())
   ```
@@ -105,7 +107,7 @@ Both contain raw Claude API events, not accumulated text. You need to extract an
   ```
 </CodeGroup>
 
-The `event` field contains the raw streaming event from the [Claude API](https://code.claude.com/docs/en/agent-sdk/Claude API). Common event types include:
+The `event` field contains the raw streaming event from the [Claude API](https://platform.claude.com/docs/en/build-with-claude/streaming#event-types). Common event types include:
 
 | Event Type            | Description                                     |
 | :-------------------- | :---------------------------------------------- |
@@ -148,6 +150,7 @@ To display text as it's generated, look for `content_block_delta` events where `
   from claude_agent_sdk.types import StreamEvent
   import asyncio
 
+
   async def stream_text():
       options = ClaudeAgentOptions(include_partial_messages=True)
 
@@ -161,6 +164,7 @@ To display text as it's generated, look for `content_block_delta` events where `
                       print(delta.get("text", ""), end="", flush=True)
 
       print()  # Final newline
+
 
   asyncio.run(stream_text())
   ```
@@ -198,6 +202,7 @@ Tool calls also stream incrementally. You can track when tools start, receive th
   from claude_agent_sdk.types import StreamEvent
   import asyncio
 
+
   async def stream_tool_calls():
       options = ClaudeAgentOptions(
           include_partial_messages=True,
@@ -234,6 +239,7 @@ Tool calls also stream incrementally. You can track when tools start, receive th
                   if current_tool:
                       print(f"Tool {current_tool} called with: {tool_input}")
                       current_tool = None
+
 
   asyncio.run(stream_tool_calls())
   ```
@@ -292,6 +298,7 @@ This example combines text and tool streaming into a cohesive UI. It tracks whet
   import asyncio
   import sys
 
+
   async def streaming_ui():
       options = ClaudeAgentOptions(
           include_partial_messages=True,
@@ -332,6 +339,7 @@ This example combines text and tool streaming into a cohesive UI. It tracks whet
           elif isinstance(message, ResultMessage):
               # Agent finished all work
               print(f"\n\n--- Complete ---")
+
 
   asyncio.run(streaming_ui())
   ```
@@ -383,12 +391,12 @@ This example combines text and tool streaming into a cohesive UI. It tracks whet
 Some SDK features are incompatible with streaming:
 
 * **Extended thinking**: when you explicitly set `max_thinking_tokens` (Python) or `maxThinkingTokens` (TypeScript), `StreamEvent` messages are not emitted. You'll only receive complete messages after each turn. Note that thinking is disabled by default in the SDK, so streaming works unless you enable it.
-* **Structured output**: the JSON result appears only in the final `ResultMessage.structured_output`, not as streaming deltas. See [structured outputs](https://code.claude.com/docs/en/agent-sdk/structured outputs) for details.
+* **Structured output**: the JSON result appears only in the final `ResultMessage.structured_output`, not as streaming deltas. See [structured outputs](/en/agent-sdk/structured-outputs) for details.
 
 ## Next steps
 
 Now that you can stream text and tool calls in real-time, explore these related topics:
 
-* [Interactive vs one-shot queries](https://code.claude.com/docs/en/agent-sdk/Interactive vs one-shot queries): choose between input modes for your use case
-* [Structured outputs](https://code.claude.com/docs/en/agent-sdk/Structured outputs): get typed JSON responses from the agent
-* [Permissions](https://code.claude.com/docs/en/agent-sdk/Permissions): control which tools the agent can use
+* [Interactive vs one-shot queries](/en/agent-sdk/streaming-vs-single-mode): choose between input modes for your use case
+* [Structured outputs](/en/agent-sdk/structured-outputs): get typed JSON responses from the agent
+* [Permissions](/en/agent-sdk/permissions): control which tools the agent can use

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/context-window
-fetched_at: 2026-05-04T15:05:09.314031+00:00
+fetched_at: 2026-05-05T19:40:39.231105+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1574,7 +1574,7 @@ export const ContextWindow = () => {
     </>;
 };
 
-Claude Code's context window holds everything Claude knows about your session: your instructions, the files it reads, its own responses, and content that never appears in your terminal. The timeline below walks through what loads and when. See [the written breakdown](https://code.claude.com/docs/en/the written breakdown) for the same content as a list.
+Claude Code's context window holds everything Claude knows about your session: your instructions, the files it reads, its own responses, and content that never appears in your terminal. The timeline below walks through what loads and when. See [the written breakdown](#what-the-timeline-shows) for the same content as a list.
 
 <ContextWindow />
 
@@ -1582,9 +1582,9 @@ Claude Code's context window holds everything Claude knows about your session: y
 
 The session walks through a realistic flow with representative token counts:
 
-* **Before you type anything**: CLAUDE.md, auto memory, MCP tool names, and skill descriptions all load into context. Your own setup may add more here, like an [output style](https://code.claude.com/docs/en/output style) or text from [`--append-system-prompt`](https://code.claude.com/docs/en/`--append-system-prompt`), which both go into the system prompt the same way.
-* **As Claude works**: each file read adds to context, [path-scoped rules](https://code.claude.com/docs/en/path-scoped rules) load automatically alongside matching files, and a [PostToolUse hook](https://code.claude.com/docs/en/PostToolUse hook) fires after each edit.
-* **The follow-up prompt**: a [subagent](https://code.claude.com/docs/en/subagent) handles the research in its own separate context window, so the large file reads stay out of yours. Only the summary and a small metadata trailer come back.
+* **Before you type anything**: CLAUDE.md, auto memory, MCP tool names, and skill descriptions all load into context. Your own setup may add more here, like an [output style](/en/output-styles) or text from [`--append-system-prompt`](/en/cli-reference), which both go into the system prompt the same way.
+* **As Claude works**: each file read adds to context, [path-scoped rules](/en/memory#path-specific-rules) load automatically alongside matching files, and a [PostToolUse hook](/en/hooks-guide) fires after each edit.
+* **The follow-up prompt**: a [subagent](/en/sub-agents) handles the research in its own separate context window, so the large file reads stay out of yours. Only the summary and a small metadata trailer come back.
 * **At the end**: `/compact` replaces the conversation with a structured summary. Most startup content reloads automatically; the table below shows what happens to each mechanism.
 
 ## What survives compaction
@@ -1613,8 +1613,8 @@ The visualization uses representative numbers. To see your actual context usage 
 
 For deeper coverage of the features shown in the timeline, see these pages:
 
-* [Extend Claude Code](https://code.claude.com/docs/en/Extend Claude Code): when to use CLAUDE.md vs skills vs rules vs hooks vs MCP
-* [Store instructions and memories](https://code.claude.com/docs/en/Store instructions and memories): CLAUDE.md hierarchy and auto memory
-* [Subagents](https://code.claude.com/docs/en/Subagents): delegate research to a separate context window
-* [Best practices](https://code.claude.com/docs/en/Best practices): managing context as your primary constraint
-* [Reduce token usage](https://code.claude.com/docs/en/Reduce token usage): strategies for keeping context usage low
+* [Extend Claude Code](/en/features-overview): when to use CLAUDE.md vs skills vs rules vs hooks vs MCP
+* [Store instructions and memories](/en/memory): CLAUDE.md hierarchy and auto memory
+* [Subagents](/en/sub-agents): delegate research to a separate context window
+* [Best practices](/en/best-practices): managing context as your primary constraint
+* [Reduce token usage](/en/costs#reduce-token-usage): strategies for keeping context usage low

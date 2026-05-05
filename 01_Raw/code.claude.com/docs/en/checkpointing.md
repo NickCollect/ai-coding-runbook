@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/checkpointing
-fetched_at: 2026-05-04T15:04:46.930130+00:00
+fetched_at: 2026-05-05T19:40:39.155150+00:00
 fetch_method: mintlify_md
 ---
 
@@ -50,7 +50,7 @@ The three restore options revert state: they undo code changes, conversation his
 This is similar to `/compact`, but targeted: instead of summarizing the entire conversation, you keep early context in full detail and only compress the parts that are using up space. You can type optional instructions to guide what the summary focuses on.
 
 <Note>
-  Summarize keeps you in the same session and compresses context. If you want to branch off and try a different approach while preserving the original session intact, use [fork](https://code.claude.com/docs/en/fork) instead (`claude --continue --fork-session`).
+  Summarize keeps you in the same session and compresses context. If you want to branch off and try a different approach while preserving the original session intact, use [fork](/en/sessions#branch-a-session) instead (`claude --continue --fork-session`).
 </Note>
 
 ## Common use cases
@@ -90,6 +90,6 @@ Checkpoints are designed for quick, session-level recovery. For permanent versio
 
 ## See also
 
-* [Interactive mode](https://code.claude.com/docs/en/Interactive mode) - Keyboard shortcuts and session controls
-* [Commands](https://code.claude.com/docs/en/Commands) - Accessing checkpoints using `/rewind`
-* [CLI reference](https://code.claude.com/docs/en/CLI reference) - Command-line options
+* [Interactive mode](/en/interactive-mode) - Keyboard shortcuts and session controls
+* [Commands](/en/commands) - Accessing checkpoints using `/rewind`
+* [CLI reference](/en/cli-reference) - Command-line options

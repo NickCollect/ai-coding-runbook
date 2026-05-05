@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/deep-links
-fetched_at: 2026-05-04T15:05:17.133713+00:00
+fetched_at: 2026-05-05T19:40:39.291442+00:00
 fetch_method: mintlify_md
 ---
 
@@ -23,7 +23,7 @@ Because a deep link is a URL, you can put one anywhere a link can go:
 * A README or wiki page that opens the project with an onboarding prompt
 * A CI failure notification that pre-fills the failing job's name
 
-This page covers how to [build a link](https://code.claude.com/docs/en/build a link), [embed one in a runbook or trigger it from the shell](https://code.claude.com/docs/en/embed one in a runbook or trigger it from the shell), and [manage or disable handler registration](https://code.claude.com/docs/en/manage or disable handler registration) on each platform.
+This page covers how to [build a link](#build-a-link), [embed one in a runbook or trigger it from the shell](#examples), and [manage or disable handler registration](#registration-and-supported-platforms) on each platform.
 
 <Note>
   Deep links require Claude Code v2.1.91 or later.
@@ -38,10 +38,10 @@ The `claude-cli://` prefix is a custom URL scheme that Claude Code registers wit
 3. A new terminal window opens with Claude Code running in the directory the link specified, and the link's prompt text already in the input box.
 4. You read the prompt, edit it if you want, and press Enter to send it.
 
-The link itself can be hosted anywhere, but the session always opens locally on the computer where you clicked. See [Registration and supported platforms](https://code.claude.com/docs/en/Registration and supported platforms) for which terminal emulator opens on each operating system.
+The link itself can be hosted anywhere, but the session always opens locally on the computer where you clicked. See [Registration and supported platforms](#registration-and-supported-platforms) for which terminal emulator opens on each operating system.
 
 <Note>
-  The platform that displays the link must allow custom URL schemes. GitHub-rendered Markdown allows `http` and `https` but strips schemes like `claude-cli://` in READMEs, issues, pull requests, and wikis. Only the link text shows, with no link behind it and the URL hidden. See [Troubleshooting](https://code.claude.com/docs/en/Troubleshooting) for a workaround.
+  The platform that displays the link must allow custom URL schemes. GitHub-rendered Markdown allows `http` and `https` but strips schemes like `claude-cli://` in READMEs, issues, pull requests, and wikis. Only the link text shows, with no link behind it and the URL hidden. See [Troubleshooting](#the-link-renders-as-plain-text-instead-of-being-clickable) for a workaround.
 </Note>
 
 ### What a launched session shows
@@ -62,11 +62,11 @@ Add parameters to control where the session starts and what the prompt box conta
 
 | Parameter | Description                                                                                                                                                                                                                                 |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `q`       | Text to pre-fill in the prompt box. [URL-encode](https://code.claude.com/docs/en/URL-encode) the value. Use `%0A` for line breaks in multi-line prompts. Maximum 5,000 characters. |
+| `q`       | Text to pre-fill in the prompt box. [URL-encode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) the value. Use `%0A` for line breaks in multi-line prompts. Maximum 5,000 characters. |
 | `cwd`     | Absolute path to use as the working directory. Network and UNC paths are rejected.                                                                                                                                                          |
 | `repo`    | A GitHub `owner/name` slug. Claude Code resolves it to a local clone it has seen before and starts there. If you have no matching clone, the session opens in your home directory instead.                                                  |
 
-`cwd` and `repo` are [two ways to set the working directory](https://code.claude.com/docs/en/two ways to set the working directory). If you pass both, `cwd` takes precedence and `repo` is ignored, even if the `cwd` path does not exist.
+`cwd` and `repo` are [two ways to set the working directory](#choose-between-cwd-and-repo). If you pass both, `cwd` takes precedence and `repo` is ignored, even if the `cwd` path does not exist.
 
 The following link points at a repository called `acme/payments` with a two-line diagnostic prompt. Replace `acme/payments` with your repository's `owner/name` slug when you build your own:
 
@@ -81,7 +81,7 @@ Investigate the failed deploy of payments-api.
 Check recent commits to main and the last successful build.
 ```
 
-You can edit the prompt before pressing Enter to send it. If you have no local clone of the repository, the session opens in your home directory instead. See [Choose between `cwd` and `repo`](https://code.claude.com/docs/en/Choose between `cwd` and `repo`) for how the local path is selected when you have multiple clones or worktrees.
+You can edit the prompt before pressing Enter to send it. If you have no local clone of the repository, the session opens in your home directory instead. See [Choose between `cwd` and `repo`](#choose-between-cwd-and-repo) for how the local path is selected when you have multiple clones or worktrees.
 
 ### Choose between `cwd` and `repo`
 
@@ -102,7 +102,7 @@ The sections below show two common ways to use a deep link: as a Markdown link i
 
 ### Embed a link in a runbook
 
-A deep link in a runbook gives whoever is triaging a one-click way to start investigating in the right repository with a prepared prompt. The platform that renders the runbook must allow custom URL schemes. GitHub-rendered Markdown does not allow `claude-cli://`, so a deep link in a GitHub README, issue, or wiki shows only its label with no clickable link. See [the troubleshooting note](https://code.claude.com/docs/en/the troubleshooting note) for a workaround.
+A deep link in a runbook gives whoever is triaging a one-click way to start investigating in the right repository with a prepared prompt. The platform that renders the runbook must allow custom URL schemes. GitHub-rendered Markdown does not allow `claude-cli://`, so a deep link in a GitHub README, issue, or wiki shows only its label with no clickable link. See [the troubleshooting note](#the-link-renders-as-plain-text-instead-of-being-clickable) for a workaround.
 
 The prompt is part of the URL and must be URL-encoded. To produce the encoded value, pass your prompt text through `encodeURIComponent` in a browser console or any URL encoder.
 
@@ -112,7 +112,7 @@ The example below adds an investigation entry point to an incident runbook for a
 ## High 5xx rate on web-gateway
 
 1. Acknowledge the page in PagerDuty.
-2. [Open Claude Code in the gateway repo](https://code.claude.com/docs/en/Open Claude Code in the gateway repo)
+2. [Open Claude Code in the gateway repo](claude-cli://open?repo=acme/web-gateway&q=5xx%20rate%20is%20elevated%20on%20web-gateway.%20Check%20recent%20deploys%2C%20error%20logs%20from%20the%20last%2030%20minutes%2C%20and%20open%20incidents%20in%20Linear.)
 3. Post initial findings in #incident.
 ```
 
@@ -166,11 +166,11 @@ Claude Code registers the `claude-cli://` handler with your operating system the
 
 The handler launches Claude Code in a detected terminal emulator. On macOS, Claude Code remembers the terminal from your most recent interactive session and reuses it, supporting iTerm2, Ghostty, kitty, Alacritty, WezTerm, and Terminal.app. On Linux it honors the `$TERMINAL` environment variable, then `x-terminal-emulator`, then a list of common emulators. On Windows it prefers Windows Terminal, then PowerShell, then `cmd.exe`.
 
-To prevent registration entirely, set [`disableDeepLinkRegistration`](https://code.claude.com/docs/en/`disableDeepLinkRegistration`) to `"disable"` in `settings.json`. To enforce this across an organization so users cannot re-enable it, set it in [managed settings](https://code.claude.com/docs/en/managed settings) instead.
+To prevent registration entirely, set [`disableDeepLinkRegistration`](/en/settings) to `"disable"` in `settings.json`. To enforce this across an organization so users cannot re-enable it, set it in [managed settings](/en/server-managed-settings) instead.
 
 ## Open a VS Code tab instead of a terminal
 
-The VS Code extension registers its own handler at `vscode://anthropic.claude-code/open`, which opens a Claude Code editor tab rather than a terminal window. See [Launch a VS Code tab from other tools](https://code.claude.com/docs/en/Launch a VS Code tab from other tools) for that URL's parameters.
+The VS Code extension registers its own handler at `vscode://anthropic.claude-code/open`, which opens a Claude Code editor tab rather than a terminal window. See [Launch a VS Code tab from other tools](/en/vs-code#launch-a-vs-code-tab-from-other-tools) for that URL's parameters.
 
 ## Troubleshooting
 
@@ -180,7 +180,7 @@ The handler likely is not registered yet. Start an interactive `claude` session 
 
 ### The link renders as plain text instead of being clickable
 
-Some Markdown renderers only allow `http` and `https` links and strip other URL schemes. GitHub does this in READMEs, issues, pull requests, and wikis: `[label](https://code.claude.com/docs/en/label)` renders as just `label`, with no link and the URL removed. On these platforms, put the deep link in a code block so readers can see the URL and paste it into their browser's address bar.
+Some Markdown renderers only allow `http` and `https` links and strip other URL schemes. GitHub does this in READMEs, issues, pull requests, and wikis: `[label](claude-cli://...)` renders as just `label`, with no link and the URL removed. On these platforms, put the deep link in a code block so readers can see the URL and paste it into their browser's address bar.
 
 ### The session opens in my home directory instead of the repo
 
@@ -194,5 +194,5 @@ On macOS, start `claude` in your preferred terminal once and the next deep link 
 
 These pages cover related ways to launch or extend Claude Code sessions:
 
-* [Skills](https://code.claude.com/docs/en/Skills): store a long runbook prompt as a `/skill` in the repo so the deep link's `q` parameter only has to name it
-* [Non-interactive mode](https://code.claude.com/docs/en/Non-interactive mode): run Claude from a script and capture the output without opening a terminal
+* [Skills](/en/skills): store a long runbook prompt as a `/skill` in the repo so the deep link's `q` parameter only has to name it
+* [Non-interactive mode](/en/headless): run Claude from a script and capture the output without opening a terminal

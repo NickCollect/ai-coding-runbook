@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/streaming-vs-single-mode
-fetched_at: 2026-05-04T15:04:06.320545+00:00
+fetched_at: 2026-05-05T19:40:39.004517+00:00
 fetch_method: mintlify_md
 ---
 
@@ -160,6 +160,7 @@ sequenceDiagram
   import asyncio
   import base64
 
+
   async def streaming_analysis():
       async def message_generator():
           # First message
@@ -209,6 +210,7 @@ sequenceDiagram
                   for block in message.content:
                       if isinstance(block, TextBlock):
                           print(block.text)
+
 
   asyncio.run(streaming_analysis())
   ```
@@ -275,6 +277,7 @@ Use single message input when:
   from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage
   import asyncio
 
+
   async def single_message_example():
       # Simple one-shot query using query() function
       async for message in query(
@@ -291,6 +294,7 @@ Use single message input when:
       ):
           if isinstance(message, ResultMessage):
               print(message.result)
+
 
   asyncio.run(single_message_example())
   ```

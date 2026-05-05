@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugin-dependencies
-fetched_at: 2026-05-04T15:06:37.554973+00:00
+fetched_at: 2026-05-05T19:40:39.570160+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ A plugin can depend on other plugins by listing them in `plugin.json` or in its 
 
 When you install a plugin that declares dependencies, Claude Code resolves and installs them automatically and lists which dependencies were added at the end of the install output. If a dependency later goes missing, `/reload-plugins` and the background plugin auto-update reinstall it, provided its marketplace is already in your configured marketplaces. Re-running `claude plugin install` on the dependent plugin, or adding a marketplace with `claude plugin marketplace add`, also resolves any outstanding missing dependencies. Dependencies from a marketplace you have not added are left unresolved.
 
-This guide is for plugin authors who declare dependencies in `plugin.json` and for marketplace maintainers who tag releases. To install plugins that have dependencies, see [Discover and install plugins](https://code.claude.com/docs/en/Discover and install plugins). For the full manifest schema, see the [Plugins reference](https://code.claude.com/docs/en/Plugins reference).
+This guide is for plugin authors who declare dependencies in `plugin.json` and for marketplace maintainers who tag releases. To install plugins that have dependencies, see [Discover and install plugins](/en/discover-plugins). For the full manifest schema, see the [Plugins reference](/en/plugins-reference).
 
 <Note>
   Dependency version constraints require Claude Code v2.1.110 or later.
@@ -52,8 +52,8 @@ An entry can be a bare string with only the plugin name, like `"audit-logger"` i
 | Field         | Type   | Description                                                                                                                                                                                                                                                             |
 | :------------ | :----- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `name`        | string | Plugin name. Resolves within the same marketplace as the declaring plugin. Required.                                                                                                                                                                                    |
-| `version`     | string | A [semver range](https://code.claude.com/docs/en/semver range) such as `~2.1.0`, `^2.0`, `>=1.4`, or `=2.1.0`. The dependency is fetched at the highest tagged version that satisfies this range.                                                                          |
-| `marketplace` | string | A different marketplace to resolve `name` in. Cross-marketplace dependencies are blocked unless the target marketplace is listed in [`allowCrossMarketplaceDependenciesOn`](https://code.claude.com/docs/en/`allowCrossMarketplaceDependenciesOn`) in the root marketplace's `marketplace.json`. |
+| `version`     | string | A [semver range](https://github.com/npm/node-semver#ranges) such as `~2.1.0`, `^2.0`, `>=1.4`, or `=2.1.0`. The dependency is fetched at the highest tagged version that satisfies this range.                                                                          |
+| `marketplace` | string | A different marketplace to resolve `name` in. Cross-marketplace dependencies are blocked unless the target marketplace is listed in [`allowCrossMarketplaceDependenciesOn`](#depend-on-a-plugin-from-another-marketplace) in the root marketplace's `marketplace.json`. |
 
 The `version` field accepts any expression supported by Node's `semver` package, including caret, tilde, hyphen, and comparator ranges. Pre-release versions such as `2.0.0-beta.1` are excluded unless your range opts in with a pre-release suffix like `^2.0.0-0`.
 
@@ -153,7 +153,7 @@ To check for these errors programmatically, run `claude plugin list --json` and 
 
 ## See also
 
-* [Create plugins](https://code.claude.com/docs/en/Create plugins): build plugins with skills, agents, and hooks
-* [Create and distribute a plugin marketplace](https://code.claude.com/docs/en/Create and distribute a plugin marketplace): host plugins for your team
-* [Plugins reference](https://code.claude.com/docs/en/Plugins reference): the full `plugin.json` schema
-* [Version management](https://code.claude.com/docs/en/Version management): how a plugin's own version is resolved and used as the cache key
+* [Create plugins](/en/plugins): build plugins with skills, agents, and hooks
+* [Create and distribute a plugin marketplace](/en/plugin-marketplaces): host plugins for your team
+* [Plugins reference](/en/plugins-reference#plugin-manifest-schema): the full `plugin.json` schema
+* [Version management](/en/plugins-reference#version-management): how a plugin's own version is resolved and used as the cache key

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/errors
-fetched_at: 2026-05-04T15:05:30.795269+00:00
+fetched_at: 2026-05-05T19:40:39.324265+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,12 +12,12 @@ fetch_method: mintlify_md
 
 > Look up Claude Code runtime error messages with what each one means and how to fix it.
 
-This page lists runtime errors Claude Code displays and how to recover from each one, plus what to check when responses seem off without an error. For installation errors such as `command not found` or TLS failures during setup, see [Troubleshoot installation and login](https://code.claude.com/docs/en/Troubleshoot installation and login).
+This page lists runtime errors Claude Code displays and how to recover from each one, plus what to check when responses seem off without an error. For installation errors such as `command not found` or TLS failures during setup, see [Troubleshoot installation and login](/en/troubleshoot-install).
 
-These errors and recovery commands apply across the CLI, the [Desktop app](https://code.claude.com/docs/en/Desktop app), and [Claude Code on the web](https://code.claude.com/docs/en/Claude Code on the web), since all three wrap the same Claude Code CLI. For surface-specific issues, see the troubleshooting section on that surface's page.
+These errors and recovery commands apply across the CLI, the [Desktop app](/en/desktop), and [Claude Code on the web](/en/claude-code-on-the-web), since all three wrap the same Claude Code CLI. For surface-specific issues, see the troubleshooting section on that surface's page.
 
 <Note>
-  Claude Code calls the Claude API for model responses, so most runtime errors map to an underlying API error code. This page covers what each error means inside Claude Code and how to recover. For the raw HTTP status code definitions, see the [Claude Platform error reference](https://code.claude.com/docs/en/Claude Platform error reference).
+  Claude Code calls the Claude API for model responses, so most runtime errors map to an underlying API error code. This page covers what each error means inside Claude Code and how to recover. For the raw HTTP status code definitions, see the [Claude Platform error reference](https://platform.claude.com/docs/en/api/errors).
 </Note>
 
 ## Find your error
@@ -26,33 +26,33 @@ Match the message you see in your terminal to a section below.
 
 | Message                                                                              | Section                                                                                                                       |
 | :----------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------- |
-| `API Error: 500 ... Internal server error`                                           | [Server errors](https://code.claude.com/docs/en/Server errors)                                                                         |
-| `API Error: Repeated 529 Overloaded errors`                                          | [Server errors](https://code.claude.com/docs/en/Server errors)                                                                    |
-| `Request timed out`                                                                  | [Server errors](https://code.claude.com/docs/en/Server errors), or [Network](https://code.claude.com/docs/en/Network) if the message mentions your internet connection |
-| `<model> is temporarily unavailable, so auto mode cannot determine the safety of...` | [Server errors](https://code.claude.com/docs/en/Server errors)                                                          |
-| `You've hit your session limit` / `You've hit your weekly limit`                     | [Usage limits](https://code.claude.com/docs/en/Usage limits)                                                                                 |
-| `Server is temporarily limiting requests`                                            | [Usage limits](https://code.claude.com/docs/en/Usage limits)                                                                      |
-| `Request rejected (429)`                                                             | [Usage limits](https://code.claude.com/docs/en/Usage limits)                                                                                         |
-| `Credit balance is too low`                                                          | [Usage limits](https://code.claude.com/docs/en/Usage limits)                                                                                    |
-| `Not logged in · Please run /login`                                                  | [Authentication](https://code.claude.com/docs/en/Authentication)                                                                                              |
-| `Invalid API key`                                                                    | [Authentication](https://code.claude.com/docs/en/Authentication)                                                                                            |
-| `This organization has been disabled`                                                | [Authentication](https://code.claude.com/docs/en/Authentication)                                                                        |
-| `OAuth token revoked` / `OAuth token has expired`                                    | [Authentication](https://code.claude.com/docs/en/Authentication)                                                                             |
-| `does not meet scope requirement user:profile`                                       | [Authentication](https://code.claude.com/docs/en/Authentication)                                                                                    |
-| `Unable to connect to API`                                                           | [Network](https://code.claude.com/docs/en/Network)                                                                                          |
-| `SSL certificate verification failed`                                                | [Network](https://code.claude.com/docs/en/Network)                                                                                            |
-| `Prompt is too long`                                                                 | [Request errors](https://code.claude.com/docs/en/Request errors)                                                                                         |
-| `Error during compaction: Conversation too long`                                     | [Request errors](https://code.claude.com/docs/en/Request errors)                                                              |
-| `Request too large`                                                                  | [Request errors](https://code.claude.com/docs/en/Request errors)                                                                                          |
-| `Image was too large`                                                                | [Request errors](https://code.claude.com/docs/en/Request errors)                                                                                        |
-| `PDF too large` / `PDF is password protected`                                        | [Request errors](https://code.claude.com/docs/en/Request errors)                                                                                                 |
-| `Extra inputs are not permitted`                                                     | [Request errors](https://code.claude.com/docs/en/Request errors)                                                                             |
-| `There's an issue with the selected model`                                           | [Request errors](https://code.claude.com/docs/en/Request errors)                                                                    |
-| `Claude Opus is not available with the Claude Pro plan`                              | [Request errors](https://code.claude.com/docs/en/Request errors)                                                      |
-| `thinking.type.enabled is not supported for this model`                              | [Request errors](https://code.claude.com/docs/en/Request errors)                                                      |
-| `max_tokens must be greater than thinking.budget_tokens`                             | [Request errors](https://code.claude.com/docs/en/Request errors)                                                                       |
-| `API Error: 400 due to tool use concurrency issues`                                  | [Request errors](https://code.claude.com/docs/en/Request errors)                                                                        |
-| Responses seem lower quality than usual                                              | [Response quality](https://code.claude.com/docs/en/Response quality)                                                                  |
+| `API Error: 500 ... Internal server error`                                           | [Server errors](#api-error-500-internal-server-error)                                                                         |
+| `API Error: Repeated 529 Overloaded errors`                                          | [Server errors](#api-error-repeated-529-overloaded-errors)                                                                    |
+| `Request timed out`                                                                  | [Server errors](#request-timed-out), or [Network](#unable-to-connect-to-api) if the message mentions your internet connection |
+| `<model> is temporarily unavailable, so auto mode cannot determine the safety of...` | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action)                                                          |
+| `You've hit your session limit` / `You've hit your weekly limit`                     | [Usage limits](#youve-hit-your-session-limit)                                                                                 |
+| `Server is temporarily limiting requests`                                            | [Usage limits](#server-is-temporarily-limiting-requests)                                                                      |
+| `Request rejected (429)`                                                             | [Usage limits](#request-rejected-429)                                                                                         |
+| `Credit balance is too low`                                                          | [Usage limits](#credit-balance-is-too-low)                                                                                    |
+| `Not logged in · Please run /login`                                                  | [Authentication](#not-logged-in)                                                                                              |
+| `Invalid API key`                                                                    | [Authentication](#invalid-api-key)                                                                                            |
+| `This organization has been disabled`                                                | [Authentication](#this-organization-has-been-disabled)                                                                        |
+| `OAuth token revoked` / `OAuth token has expired`                                    | [Authentication](#oauth-token-revoked-or-expired)                                                                             |
+| `does not meet scope requirement user:profile`                                       | [Authentication](#oauth-scope-requirement)                                                                                    |
+| `Unable to connect to API`                                                           | [Network](#unable-to-connect-to-api)                                                                                          |
+| `SSL certificate verification failed`                                                | [Network](#ssl-certificate-errors)                                                                                            |
+| `Prompt is too long`                                                                 | [Request errors](#prompt-is-too-long)                                                                                         |
+| `Error during compaction: Conversation too long`                                     | [Request errors](#error-during-compaction-conversation-too-long)                                                              |
+| `Request too large`                                                                  | [Request errors](#request-too-large)                                                                                          |
+| `Image was too large`                                                                | [Request errors](#image-was-too-large)                                                                                        |
+| `PDF too large` / `PDF is password protected`                                        | [Request errors](#pdf-errors)                                                                                                 |
+| `Extra inputs are not permitted`                                                     | [Request errors](#extra-inputs-are-not-permitted)                                                                             |
+| `There's an issue with the selected model`                                           | [Request errors](#theres-an-issue-with-the-selected-model)                                                                    |
+| `Claude Opus is not available with the Claude Pro plan`                              | [Request errors](#claude-opus-is-not-available-with-the-claude-pro-plan)                                                      |
+| `thinking.type.enabled is not supported for this model`                              | [Request errors](#thinking-type-enabled-is-not-supported-for-this-model)                                                      |
+| `max_tokens must be greater than thinking.budget_tokens`                             | [Request errors](#thinking-budget-exceeds-output-limit)                                                                       |
+| `API Error: 400 due to tool use concurrency issues`                                  | [Request errors](#tool-use-or-thinking-block-mismatch)                                                                        |
+| Responses seem lower quality than usual                                              | [Response quality](#responses-seem-lower-quality-than-usual)                                                                  |
 
 ## Automatic retries
 
@@ -62,8 +62,8 @@ When you see one of the errors on this page, those retries have already been exh
 
 | Variable                                  | Default | Effect                                                                                                               |
 | :---------------------------------------- | :------ | :------------------------------------------------------------------------------------------------------------------- |
-| [`CLAUDE_CODE_MAX_RETRIES`](https://code.claude.com/docs/en/`CLAUDE_CODE_MAX_RETRIES`) | 10      | Number of retry attempts. Lower it to surface failures faster in scripts; raise it to wait through longer incidents. |
-| [`API_TIMEOUT_MS`](https://code.claude.com/docs/en/`API_TIMEOUT_MS`)          | 600000  | Per-request timeout in milliseconds. Raise it for slow networks or proxies.                                          |
+| [`CLAUDE_CODE_MAX_RETRIES`](/en/env-vars) | 10      | Number of retry attempts. Lower it to surface failures faster in scripts; raise it to wait through longer incidents. |
+| [`API_TIMEOUT_MS`](/en/env-vars)          | 600000  | Per-request timeout in milliseconds. Raise it for slow networks or proxies.                                          |
 
 ## Server errors
 
@@ -81,9 +81,9 @@ This indicates an unexpected failure inside the API. It is not caused by your pr
 
 **What to do:**
 
-* Check [status.claude.com](https://code.claude.com/docs/en/status.claude.com) for active incidents
+* Check [status.claude.com](https://status.claude.com) for active incidents
 * Wait a minute, then send your message again. Your original message is still in the conversation, so for a long prompt you can type `try again` instead of pasting the whole thing.
-* If the error persists with no posted incident, run `/feedback` so Anthropic can investigate with your request details. See [Report an error](https://code.claude.com/docs/en/Report an error) if `/feedback` is unavailable on your provider.
+* If the error persists with no posted incident, run `/feedback` so Anthropic can investigate with your request details. See [Report an error](#report-an-error) if `/feedback` is unavailable on your provider.
 
 ### API Error: Repeated 529 Overloaded errors
 
@@ -97,7 +97,7 @@ A 529 is not your usage limit and does not count against your quota.
 
 **What to do:**
 
-* Check [status.claude.com](https://code.claude.com/docs/en/status.claude.com) for capacity notices
+* Check [status.claude.com](https://status.claude.com) for capacity notices
 * Try again in a few minutes
 * Run `/model` and switch to a different model to keep working, since capacity is tracked per model. Claude Code prompts you to do this when one model is under particularly high load, for example `Opus is experiencing high load, please use /model to switch to Sonnet`.
 
@@ -115,12 +115,12 @@ This can happen during periods of high load or when a very large response is bei
 
 * Retry the request
 * For long-running tasks, break the work into smaller prompts
-* If a slow network or proxy is the cause, raise `API_TIMEOUT_MS` as described in [Automatic retries](https://code.claude.com/docs/en/Automatic retries)
-* If timeouts are frequent and your network is otherwise healthy, see [Network and connection errors](https://code.claude.com/docs/en/Network and connection errors) below
+* If a slow network or proxy is the cause, raise `API_TIMEOUT_MS` as described in [Automatic retries](#automatic-retries)
+* If timeouts are frequent and your network is otherwise healthy, see [Network and connection errors](#network-and-connection-errors) below
 
 ### Auto mode cannot determine the safety of an action
 
-The model that [auto mode](https://code.claude.com/docs/en/auto mode) uses to classify actions is overloaded, so auto mode blocked the action instead of approving it unchecked.
+The model that [auto mode](/en/permission-modes#eliminate-prompts-with-auto-mode) uses to classify actions is overloaded, so auto mode blocked the action instead of approving it unchecked.
 
 ```text theme={null}
 <model> is temporarily unavailable, so auto mode cannot determine the safety of <tool> right now. Wait briefly and then try this action again.
@@ -132,11 +132,11 @@ Reads, searches, and edits inside your working directory skip the classifier, so
 
 * Retry after a few seconds; Claude sees the same message and usually retries on its own
 * If retries keep failing, continue with read-only tasks and come back to the blocked action later
-* This is transient and unrelated to [auto mode eligibility](https://code.claude.com/docs/en/auto mode eligibility); you do not need to change settings
+* This is transient and unrelated to [auto mode eligibility](/en/permission-modes#eliminate-prompts-with-auto-mode); you do not need to change settings
 
 ## Usage limits
 
-These errors mean a quota tied to your account or plan has been reached. They are distinct from [server errors](https://code.claude.com/docs/en/server errors), which affect everyone.
+These errors mean a quota tied to your account or plan has been reached. They are distinct from [server errors](#server-errors), which affect everyone.
 
 ### You've hit your session limit
 
@@ -154,10 +154,10 @@ Claude Code blocks further requests until the reset time shown in the message.
 
 * Wait for the reset time shown in the error
 * Run `/usage` to see your plan limits and when they reset
-* Run `/extra-usage` to buy additional usage on Pro and Max, or to request it from your admin on Team and Enterprise. See [Extra usage for paid plans](https://code.claude.com/docs/en/Extra usage for paid plans) for how this is billed.
-* To upgrade your plan for higher base limits, see [claude.com/pricing](https://code.claude.com/docs/en/claude.com/pricing)
+* Run `/extra-usage` to buy additional usage on Pro and Max, or to request it from your admin on Team and Enterprise. See [Extra usage for paid plans](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans) for how this is billed.
+* To upgrade your plan for higher base limits, see [claude.com/pricing](https://claude.com/pricing)
 
-To watch your remaining allowance before you hit the limit, add the `rate_limits` fields to a [custom status line](https://code.claude.com/docs/en/custom status line), or in the Desktop app click the [usage ring](https://code.claude.com/docs/en/usage ring) next to the model picker.
+To watch your remaining allowance before you hit the limit, add the `rate_limits` fields to a [custom status line](/en/statusline#rate-limit-usage), or in the Desktop app click the [usage ring](/en/desktop#check-usage) next to the model picker.
 
 ### Server is temporarily limiting requests
 
@@ -167,12 +167,12 @@ The API applied a short-lived throttle that is unrelated to your plan quota.
 API Error: Server is temporarily limiting requests (not your usage limit)
 ```
 
-This is [retried automatically](https://code.claude.com/docs/en/retried automatically) before being shown.
+This is [retried automatically](#automatic-retries) before being shown.
 
 **What to do:**
 
 * Wait briefly and try again
-* Check [status.claude.com](https://code.claude.com/docs/en/status.claude.com) if it persists
+* Check [status.claude.com](https://status.claude.com) if it persists
 
 ### Request rejected (429)
 
@@ -186,8 +186,8 @@ API Error: Request rejected (429) · this may be a temporary capacity issue
 
 * Run `/status` and confirm the active credential is the one you expect. A stray `ANTHROPIC_API_KEY` in your environment can route requests through a low-tier key instead of your subscription.
 * Check your provider console for the active limits and request a higher tier if needed
-* For Anthropic API keys, see the [rate limits reference](https://code.claude.com/docs/en/rate limits reference) for how tiers work and how to set per-workspace caps
-* Reduce concurrency: lower [`CLAUDE_CODE_MAX_TOOL_USE_CONCURRENCY`](https://code.claude.com/docs/en/`CLAUDE_CODE_MAX_TOOL_USE_CONCURRENCY`), avoid running many parallel subagents, or switch to a smaller model with `/model` for high-volume scripted runs
+* For Anthropic API keys, see the [rate limits reference](https://platform.claude.com/docs/en/api/rate-limits) for how tiers work and how to set per-workspace caps
+* Reduce concurrency: lower [`CLAUDE_CODE_MAX_TOOL_USE_CONCURRENCY`](/en/env-vars), avoid running many parallel subagents, or switch to a smaller model with `/model` for high-volume scripted runs
 
 ### Credit balance is too low
 
@@ -199,9 +199,9 @@ Credit balance is too low
 
 **What to do:**
 
-* Add credits at [platform.claude.com/settings/billing](https://code.claude.com/docs/en/platform.claude.com/settings/billing), and consider enabling auto-reload there so the balance refills before it hits zero
+* Add credits at [platform.claude.com/settings/billing](https://platform.claude.com/settings/billing), and consider enabling auto-reload there so the balance refills before it hits zero
 * Switch to subscription authentication with `/login` if you have a Pro, Max, Team, or Enterprise plan
-* Set per-workspace spend caps in the Console to prevent a single project from draining the org balance. See [Manage costs effectively](https://code.claude.com/docs/en/Manage costs effectively).
+* Set per-workspace spend caps in the Console to prevent a single project from draining the org balance. See [Manage costs effectively](/en/costs).
 
 ## Authentication errors
 
@@ -219,10 +219,10 @@ Not logged in · Please run /login
 
 * Run `/login` to authenticate with your Claude subscription or Console account
 * If you expected an environment variable to authenticate you, confirm `ANTHROPIC_API_KEY` is set and exported in the shell where you launched `claude`
-* For CI or automation where interactive login is not possible, configure an [`apiKeyHelper`](https://code.claude.com/docs/en/`apiKeyHelper`) script that fetches a key at startup
-* See [Authentication precedence](https://code.claude.com/docs/en/Authentication precedence) to understand which credential wins when several are present
+* For CI or automation where interactive login is not possible, configure an [`apiKeyHelper`](/en/settings#available-settings) script that fetches a key at startup
+* See [Authentication precedence](/en/authentication#authentication-precedence) to understand which credential wins when several are present
 
-If you are prompted to log in repeatedly, see [Not logged in or token expired](https://code.claude.com/docs/en/Not logged in or token expired) for system clock and macOS Keychain fixes.
+If you are prompted to log in repeatedly, see [Not logged in or token expired](/en/troubleshoot-install#not-logged-in-or-token-expired) for system clock and macOS Keychain fixes.
 
 ### Invalid API key
 
@@ -234,10 +234,10 @@ Invalid API key · Fix external API key
 
 **What to do:**
 
-* Check for typos and confirm the key has not been revoked in the [Console](https://code.claude.com/docs/en/Console)
+* Check for typos and confirm the key has not been revoked in the [Console](https://platform.claude.com/settings/keys)
 * Run `env | grep ANTHROPIC` in the same shell. Tools like direnv, dotenv shell plugins, and IDE terminals can load a stale key from a `.env` file in your project without you setting it explicitly.
 * Unset `ANTHROPIC_API_KEY` and run `/login` to use subscription auth instead
-* If the key comes from an [`apiKeyHelper`](https://code.claude.com/docs/en/`apiKeyHelper`) script, run the script directly to confirm it prints a valid key on stdout
+* If the key comes from an [`apiKeyHelper`](/en/settings#available-settings) script, run the script directly to confirm it prints a valid key on stdout
 * Run `/status` to confirm which credential source Claude Code is actually using
 
 ### This organization has been disabled
@@ -271,8 +271,8 @@ API Error: 401 ... authentication_error
 
 * Run `/login` to sign in again
 * If the error returns within the same session after re-authenticating, run `/logout` first to fully clear the stored token, then `/login`
-* For repeated prompts to log in across launches, see the system clock and macOS Keychain checks in [Troubleshooting](https://code.claude.com/docs/en/Troubleshooting)
-* For other failures including `403 Forbidden` and OAuth browser issues, see [Login and authentication](https://code.claude.com/docs/en/Login and authentication)
+* For repeated prompts to log in across launches, see the system clock and macOS Keychain checks in [Troubleshooting](/en/troubleshoot-install#not-logged-in-or-token-expired)
+* For other failures including `403 Forbidden` and OAuth browser issues, see [Login and authentication](/en/troubleshoot-install#login-and-authentication)
 
 ### OAuth scope requirement
 
@@ -308,10 +308,10 @@ Common causes include no internet access, a VPN that blocks `api.anthropic.com`,
 **What to do:**
 
 * Confirm you can reach the API host from the same shell by running `curl -I https://api.anthropic.com`. On Windows PowerShell use `curl.exe -I https://api.anthropic.com` so the built-in `Invoke-WebRequest` alias is not used.
-* If you are behind a corporate proxy, set `HTTPS_PROXY` before launching Claude Code and see [Network configuration](https://code.claude.com/docs/en/Network configuration)
-* If you route through an LLM gateway or relay, set [`ANTHROPIC_BASE_URL`](https://code.claude.com/docs/en/`ANTHROPIC_BASE_URL`) to its address. See [LLM gateway configuration](https://code.claude.com/docs/en/LLM gateway configuration) for setup.
-* Ensure your firewall allows the hosts listed in [Network access requirements](https://code.claude.com/docs/en/Network access requirements)
-* Intermittent failures are [retried automatically](https://code.claude.com/docs/en/retried automatically); persistent failures point to a local network issue
+* If you are behind a corporate proxy, set `HTTPS_PROXY` before launching Claude Code and see [Network configuration](/en/network-config)
+* If you route through an LLM gateway or relay, set [`ANTHROPIC_BASE_URL`](/en/env-vars) to its address. See [LLM gateway configuration](/en/llm-gateway) for setup.
+* Ensure your firewall allows the hosts listed in [Network access requirements](/en/network-config#network-access-requirements)
+* Intermittent failures are [retried automatically](#automatic-retries); persistent failures point to a local network issue
 
 If `curl` succeeds but Claude Code still fails, the cause is usually something between Node.js and the network rather than the network itself:
 
@@ -331,7 +331,7 @@ Unable to connect to API: Self-signed certificate detected
 **What to do:**
 
 * Export your organization's CA bundle and point Node at it with `NODE_EXTRA_CA_CERTS=/path/to/ca-bundle.pem`
-* See [Network configuration](https://code.claude.com/docs/en/Network configuration) for full setup instructions
+* See [Network configuration](/en/network-config#custom-ca-certificates) for full setup instructions
 * Do not set `NODE_TLS_REJECT_UNAUTHORIZED=0`, which disables certificate validation entirely
 
 ## Request errors
@@ -351,11 +351,11 @@ Prompt is too long
 * Run `/compact` to summarize earlier turns and free space, or `/clear` to start fresh
 * Run `/context` to see a breakdown of what is consuming the window: system prompt, tools, memory files, and messages
 * Disable MCP servers you are not using with `/mcp disable <name>` to remove their tool definitions from context
-* Trim large `CLAUDE.md` memory files, or move instructions into [path-scoped rules](https://code.claude.com/docs/en/path-scoped rules) that load only when relevant
+* Trim large `CLAUDE.md` memory files, or move instructions into [path-scoped rules](/en/memory#path-specific-rules) that load only when relevant
 * Subagents inherit every MCP tool definition from the parent session, which can fill their context window before the first turn. Disable MCP servers you are not using before spawning subagents.
-* Auto-compact is on by default and normally prevents this error. If you have set [`DISABLE_AUTO_COMPACT`](https://code.claude.com/docs/en/`DISABLE_AUTO_COMPACT`), re-enable it or run `/compact` manually before the window fills.
+* Auto-compact is on by default and normally prevents this error. If you have set [`DISABLE_AUTO_COMPACT`](/en/env-vars), re-enable it or run `/compact` manually before the window fills.
 
-See [Explore the context window](https://code.claude.com/docs/en/Explore the context window) for an interactive view of how context fills up.
+See [Explore the context window](/en/context-window) for an interactive view of how context fills up.
 
 ### Error during compaction: Conversation too long
 
@@ -380,13 +380,13 @@ The raw request body exceeded the API's byte limit before tokenization, usually 
 Request too large (max 30 MB). Double press esc to go back and remove or shrink the attached content.
 ```
 
-This is a size limit on the HTTP request, separate from the [context window limit](https://code.claude.com/docs/en/context window limit).
+This is a size limit on the HTTP request, separate from the [context window limit](#prompt-is-too-long).
 
 **What to do:**
 
 * Press Esc twice and step back past the turn that added the oversized content
 * Reference large files by path instead of pasting their contents, so Claude can read them in chunks
-* For images, see [Image was too large](https://code.claude.com/docs/en/Image was too large) below
+* For images, see [Image was too large](#image-was-too-large) below
 
 ### Image was too large
 
@@ -434,8 +434,8 @@ Claude Code sends beta-only fields such as `context_management`, `effort`, and t
 
 **What to do:**
 
-* Configure your gateway to forward the `anthropic-beta` header. See [LLM gateway configuration](https://code.claude.com/docs/en/LLM gateway configuration).
-* As a fallback, set [`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1`](https://code.claude.com/docs/en/`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1`) before launching. This disables features that require the beta header so requests succeed through a gateway that cannot forward it.
+* Configure your gateway to forward the `anthropic-beta` header. See [LLM gateway configuration](/en/llm-gateway).
+* As a fallback, set [`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1`](/en/env-vars) before launching. This disables features that require the beta header so requests succeed through a gateway that cannot forward it.
 
 ### There's an issue with the selected model
 
@@ -448,9 +448,9 @@ There's an issue with the selected model (claude-...). It may not exist or you m
 **What to do:**
 
 * Run `/model` to pick from models available to your account
-* Use an alias such as `sonnet` or `opus` instead of a full versioned ID. Aliases track the latest release so they do not go stale. See [Model configuration](https://code.claude.com/docs/en/Model configuration).
-* If the wrong model keeps coming back, a stale ID is set somewhere. Check in [priority order](https://code.claude.com/docs/en/priority order): the `--model` flag, the `ANTHROPIC_MODEL` environment variable, then the `model` field in `.claude/settings.local.json`, your project's `.claude/settings.json`, and `~/.claude/settings.json`. Remove the stale value and Claude Code falls back to your account default.
-* For Vertex AI deployments, see [Vertex AI troubleshooting](https://code.claude.com/docs/en/Vertex AI troubleshooting).
+* Use an alias such as `sonnet` or `opus` instead of a full versioned ID. Aliases track the latest release so they do not go stale. See [Model configuration](/en/model-config).
+* If the wrong model keeps coming back, a stale ID is set somewhere. Check in [priority order](/en/model-config#setting-your-model): the `--model` flag, the `ANTHROPIC_MODEL` environment variable, then the `model` field in `.claude/settings.local.json`, your project's `.claude/settings.json`, and `~/.claude/settings.json`. Remove the stale value and Claude Code falls back to your account default.
+* For Vertex AI deployments, see [Vertex AI troubleshooting](/en/google-vertex-ai#troubleshooting).
 
 ### Claude Opus is not available with the Claude Pro plan
 
@@ -464,7 +464,7 @@ Claude Opus is not available with the Claude Pro plan · Select a different mode
 
 * Run `/model` and select a model your plan includes
 * If you upgraded your plan recently and still see this, run `/logout` then `/login`. The stored token reflects your plan at the time you signed in, so upgrading on the web does not take effect in an existing session until you re-authenticate.
-* See [claude.com/pricing](https://code.claude.com/docs/en/claude.com/pricing) for which models each plan includes
+* See [claude.com/pricing](https://claude.com/pricing) for which models each plan includes
 
 ### thinking.type.enabled is not supported for this model
 
@@ -478,7 +478,7 @@ API Error: 400 ... "thinking.type.enabled" is not supported for this model. Use 
 
 * Run `claude update` to upgrade to v2.1.111 or later, then restart Claude Code
 * If you cannot upgrade, run `/model` and select Opus 4.6 or Sonnet instead
-* If you hit this in the Agent SDK, see [SDK troubleshooting](https://code.claude.com/docs/en/SDK troubleshooting)
+* If you hit this in the Agent SDK, see [SDK troubleshooting](/en/agent-sdk/quickstart#troubleshooting)
 
 ### Thinking budget exceeds output limit
 
@@ -488,12 +488,12 @@ The configured extended thinking budget exceeds the maximum response length, so 
 API Error: 400 ... max_tokens must be greater than thinking.budget_tokens
 ```
 
-Claude Code adjusts these values automatically on the Anthropic API. You typically see this error on Amazon Bedrock or Google Vertex AI when [`MAX_THINKING_TOKENS`](https://code.claude.com/docs/en/`MAX_THINKING_TOKENS`) is set higher than the provider's output limit, or when plan mode raises the thinking budget.
+Claude Code adjusts these values automatically on the Anthropic API. You typically see this error on Amazon Bedrock or Google Vertex AI when [`MAX_THINKING_TOKENS`](/en/env-vars) is set higher than the provider's output limit, or when plan mode raises the thinking budget.
 
 **What to do:**
 
-* Lower `MAX_THINKING_TOKENS`, or raise [`CLAUDE_CODE_MAX_OUTPUT_TOKENS`](https://code.claude.com/docs/en/`CLAUDE_CODE_MAX_OUTPUT_TOKENS`) above the thinking budget
-* See [Extended thinking](https://code.claude.com/docs/en/Extended thinking) for how the budget interacts with output length
+* Lower `MAX_THINKING_TOKENS`, or raise [`CLAUDE_CODE_MAX_OUTPUT_TOKENS`](/en/env-vars) above the thinking budget
+* See [Extended thinking](/en/model-config#extended-thinking) for how the budget interacts with output length
 
 ### Tool use or thinking block mismatch
 
@@ -509,34 +509,34 @@ All three variants mean the same thing: the sequence of `tool_use`, `tool_result
 
 **What to do:**
 
-* Run `/rewind`, or press Esc twice, to step back to a checkpoint before the corrupted turn and continue from there. See [Checkpointing](https://code.claude.com/docs/en/Checkpointing) for how checkpoints are created and restored.
+* Run `/rewind`, or press Esc twice, to step back to a checkpoint before the corrupted turn and continue from there. See [Checkpointing](/en/checkpointing) for how checkpoints are created and restored.
 
 ## Responses seem lower quality than usual
 
-If Claude's answers seem less capable than you expect but no error is shown, the cause is usually conversation state rather than the model itself. Claude Code does not silently change model versions. It can switch to a fallback model in specific cases such as an Opus quota being reached or a Bedrock or Vertex AI region lacking your model; the Model selection check below catches both, and [Model configuration](https://code.claude.com/docs/en/Model configuration) explains when fallback applies.
+If Claude's answers seem less capable than you expect but no error is shown, the cause is usually conversation state rather than the model itself. Claude Code does not silently change model versions. It can switch to a fallback model in specific cases such as an Opus quota being reached or a Bedrock or Vertex AI region lacking your model; the Model selection check below catches both, and [Model configuration](/en/model-config) explains when fallback applies.
 
 Check these first:
 
 * **Model selection**: run `/model` to confirm you are on the model you expect. A previous `/model` choice or an `ANTHROPIC_MODEL` environment variable may have you on a smaller model than you intended.
-* **Effort level**: run `/effort` to check the current reasoning level and raise it for hard debugging or design work. Defaults vary by model, so check before assuming you are below the maximum. See [Adjust effort level](https://code.claude.com/docs/en/Adjust effort level) for per-model defaults and the `ultrathink` shortcut.
-* **Context pressure**: run `/context` to see how full the window is. If it is near capacity, run `/compact` at a natural breakpoint or `/clear` to start fresh. See [Explore the context window](https://code.claude.com/docs/en/Explore the context window) for how auto-compact affects earlier turns.
+* **Effort level**: run `/effort` to check the current reasoning level and raise it for hard debugging or design work. Defaults vary by model, so check before assuming you are below the maximum. See [Adjust effort level](/en/model-config#adjust-effort-level) for per-model defaults and the `ultrathink` shortcut.
+* **Context pressure**: run `/context` to see how full the window is. If it is near capacity, run `/compact` at a natural breakpoint or `/clear` to start fresh. See [Explore the context window](/en/context-window) for how auto-compact affects earlier turns.
 * **Stale instructions**: large or outdated `CLAUDE.md` files and MCP tool definitions consume context and can steer responses. `/doctor` flags oversized memory files and subagent definitions; `/context` shows MCP tool token usage.
 
-When a response goes wrong, rewinding usually works better than replying with corrections. Press Esc twice or run `/rewind` to step back to before the bad turn, then rephrase the prompt with more specifics. Correcting in-thread keeps the wrong attempt in context, which can anchor later answers to it. See [Checkpointing](https://code.claude.com/docs/en/Checkpointing).
+When a response goes wrong, rewinding usually works better than replying with corrections. Press Esc twice or run `/rewind` to step back to before the bad turn, then rephrase the prompt with more specifics. Correcting in-thread keeps the wrong attempt in context, which can anchor later answers to it. See [Checkpointing](/en/checkpointing).
 
-If quality still seems off after checking the above, run `/feedback` and describe what you expected versus what you got. Feedback submitted this way includes the conversation transcript, which is the fastest way for Anthropic to diagnose a real regression. See [Report an error](https://code.claude.com/docs/en/Report an error) if `/feedback` is unavailable on your provider.
+If quality still seems off after checking the above, run `/feedback` and describe what you expected versus what you got. Feedback submitted this way includes the conversation transcript, which is the fastest way for Anthropic to diagnose a real regression. See [Report an error](#report-an-error) if `/feedback` is unavailable on your provider.
 
 ## Report an error
 
 This page covers errors from the Claude API. For errors from other Claude Code components, see the relevant guide:
 
-* MCP server failed to connect or authenticate: [MCP](https://code.claude.com/docs/en/MCP)
-* Hook script failed or blocked a tool: [Debug hooks](https://code.claude.com/docs/en/Debug hooks)
-* Permission denied or filesystem errors during install: [Troubleshoot installation and login](https://code.claude.com/docs/en/Troubleshoot installation and login)
+* MCP server failed to connect or authenticate: [MCP](/en/mcp)
+* Hook script failed or blocked a tool: [Debug hooks](/en/hooks#debug-hooks)
+* Permission denied or filesystem errors during install: [Troubleshoot installation and login](/en/troubleshoot-install)
 
 If an error is not listed here or the suggested fix does not help:
 
 * Run `/feedback` inside Claude Code to send the transcript and a description to Anthropic. The command also offers to open a prefilled GitHub issue. Feedback is unavailable on Bedrock, Vertex AI, and Foundry deployments.
 * Run `/doctor` to check for local configuration problems
-* Check [status.claude.com](https://code.claude.com/docs/en/status.claude.com) for active incidents
-* Search [existing issues](https://code.claude.com/docs/en/existing issues) on GitHub
+* Check [status.claude.com](https://status.claude.com) for active incidents
+* Search [existing issues](https://github.com/anthropics/claude-code/issues) on GitHub

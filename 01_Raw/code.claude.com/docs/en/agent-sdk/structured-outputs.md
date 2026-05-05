@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/structured-outputs
-fetched_at: 2026-05-04T15:04:08.132612+00:00
+fetched_at: 2026-05-05T19:40:39.030817+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,9 +12,9 @@ fetch_method: mintlify_md
 
 > Return validated JSON from agent workflows using JSON Schema, Zod, or Pydantic. Get type-safe, structured data after multi-turn tool use.
 
-Structured outputs let you define the exact shape of data you want back from an agent. The agent can use any tools it needs to complete the task, and you still get validated JSON matching your schema at the end. Define a [JSON Schema](https://code.claude.com/docs/en/agent-sdk/JSON Schema) for the structure you need, and the SDK validates the output against it, re-prompting on mismatch. If validation does not succeed within the retry limit, the result is an error instead of structured data; see [Error handling](https://code.claude.com/docs/en/agent-sdk/Error handling).
+Structured outputs let you define the exact shape of data you want back from an agent. The agent can use any tools it needs to complete the task, and you still get validated JSON matching your schema at the end. Define a [JSON Schema](https://json-schema.org/understanding-json-schema/about) for the structure you need, and the SDK validates the output against it, re-prompting on mismatch. If validation does not succeed within the retry limit, the result is an error instead of structured data; see [Error handling](#error-handling).
 
-For full type safety, use [Zod](https://code.claude.com/docs/en/agent-sdk/Zod) (TypeScript) or [Pydantic](https://code.claude.com/docs/en/agent-sdk/Pydantic) (Python) to define your schema and get strongly-typed objects back.
+For full type safety, use [Zod](#type-safe-schemas-with-zod-and-pydantic) (TypeScript) or [Pydantic](#type-safe-schemas-with-zod-and-pydantic) (Python) to define your schema and get strongly-typed objects back.
 
 ## Why structured outputs?
 
@@ -60,7 +60,7 @@ Consider a recipe app where an agent searches the web and brings back recipes. W
 
 ## Quick start
 
-To use structured outputs, define a [JSON Schema](https://code.claude.com/docs/en/agent-sdk/JSON Schema) describing the shape of data you want, then pass it to `query()` via the `outputFormat` option (TypeScript) or `output_format` option (Python). When the agent finishes, the result message includes a `structured_output` field with validated data matching your schema.
+To use structured outputs, define a [JSON Schema](https://json-schema.org/understanding-json-schema/about) describing the shape of data you want, then pass it to `query()` via the `outputFormat` option (TypeScript) or `output_format` option (Python). When the agent finishes, the result message includes a `structured_output` field with validated data matching your schema.
 
 The example below asks the agent to research Anthropic and return the company name, year founded, and headquarters as structured output.
 
@@ -111,6 +111,7 @@ The example below asks the agent to research Anthropic and return the company na
       "required": ["company_name"],
   }
 
+
   async def main():
       async for message in query(
           prompt="Research Anthropic and provide key company information",
@@ -123,13 +124,14 @@ The example below asks the agent to research Anthropic and return the company na
               print(message.structured_output)
               # {'company_name': 'Anthropic', 'founded_year': 2021, 'headquarters': 'San Francisco, CA'}
 
+
   asyncio.run(main())
   ```
 </CodeGroup>
 
 ## Type-safe schemas with Zod and Pydantic
 
-Instead of writing JSON Schema by hand, you can use [Zod](https://code.claude.com/docs/en/agent-sdk/Zod) (TypeScript) or [Pydantic](https://code.claude.com/docs/en/agent-sdk/Pydantic) (Python) to define your schema. These libraries generate the JSON Schema for you and let you parse the response into a fully-typed object you can use throughout your codebase with autocomplete and type checking.
+Instead of writing JSON Schema by hand, you can use [Zod](https://zod.dev/) (TypeScript) or [Pydantic](https://docs.pydantic.dev/latest/) (Python) to define your schema. These libraries generate the JSON Schema for you and let you parse the response into a fully-typed object you can use throughout your codebase with autocomplete and type checking.
 
 The example below defines a schema for a feature implementation plan with a summary, list of steps (each with complexity level), and potential risks. The agent plans the feature and returns a typed `FeaturePlan` object. You can then access properties like `plan.summary` and iterate over `plan.steps` with full type safety.
 
@@ -188,16 +190,19 @@ The example below defines a schema for a feature implementation plan with a summ
   from pydantic import BaseModel
   from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage
 
+
   class Step(BaseModel):
       step_number: int
       description: str
       estimated_complexity: str  # 'low', 'medium', 'high'
+
 
   class FeaturePlan(BaseModel):
       feature_name: str
       summary: str
       steps: list[Step]
       risks: list[str]
+
 
   async def main():
       async for message in query(
@@ -219,6 +224,7 @@ The example below defines a schema for a feature implementation plan with a summ
                       f"{step.step_number}. [{step.estimated_complexity}] {step.description}"
                   )
 
+
   asyncio.run(main())
   ```
 </CodeGroup>
@@ -235,9 +241,9 @@ The example below defines a schema for a feature implementation plan with a summ
 The `outputFormat` (TypeScript) or `output_format` (Python) option accepts an object with:
 
 * `type`: Set to `"json_schema"` for structured outputs
-* `schema`: A [JSON Schema](https://code.claude.com/docs/en/agent-sdk/JSON Schema) object defining your output structure. You can generate this from a Zod schema with `z.toJSONSchema()` or a Pydantic model with `.model_json_schema()`
+* `schema`: A [JSON Schema](https://json-schema.org/understanding-json-schema/about) object defining your output structure. You can generate this from a Zod schema with `z.toJSONSchema()` or a Pydantic model with `.model_json_schema()`
 
-The SDK supports standard JSON Schema features including all basic types (object, array, string, number, boolean, null), `enum`, `const`, `required`, nested objects, and `$ref` definitions. For the full list of supported features and limitations, see [JSON Schema limitations](https://code.claude.com/docs/en/agent-sdk/JSON Schema limitations).
+The SDK supports standard JSON Schema features including all basic types (object, array, string, number, boolean, null), `enum`, `const`, `required`, nested objects, and `$ref` definitions. For the full list of supported features and limitations, see [JSON Schema limitations](https://platform.claude.com/docs/en/build-with-claude/structured-outputs#json-schema-limitations).
 
 ## Example: TODO tracking agent
 
@@ -322,6 +328,7 @@ The schema includes optional fields (`author` and `date`) since git blame inform
       "required": ["todos", "total_count"],
   }
 
+
   async def main():
       # Agent uses Grep to find TODOs, Bash to get git blame info
       async for message in query(
@@ -337,6 +344,7 @@ The schema includes optional fields (`author` and `date`) since git blame inform
                   print(f"{todo['file']}:{todo['line']} - {todo['text']}")
                   if "author" in todo:
                       print(f"  Added by {todo['author']} on {todo['date']}")
+
 
   asyncio.run(main())
   ```
@@ -403,6 +411,6 @@ The example below checks the `subtype` field to determine whether the output was
 
 ## Related resources
 
-* [JSON Schema documentation](https://code.claude.com/docs/en/agent-sdk/JSON Schema documentation): learn JSON Schema syntax for defining complex schemas with nested objects, arrays, enums, and validation constraints
-* [API Structured Outputs](https://code.claude.com/docs/en/agent-sdk/API Structured Outputs): use structured outputs with the Claude API directly for single-turn requests without tool use
-* [Custom tools](https://code.claude.com/docs/en/agent-sdk/Custom tools): give your agent custom tools to call during execution before returning structured output
+* [JSON Schema documentation](https://json-schema.org/): learn JSON Schema syntax for defining complex schemas with nested objects, arrays, enums, and validation constraints
+* [API Structured Outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs): use structured outputs with the Claude API directly for single-turn requests without tool use
+* [Custom tools](/en/agent-sdk/custom-tools): give your agent custom tools to call during execution before returning structured output

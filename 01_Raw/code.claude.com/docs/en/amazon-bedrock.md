@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/amazon-bedrock
-fetched_at: 2026-05-04T15:04:23.861264+00:00
+fetched_at: 2026-05-05T19:40:39.092428+00:00
 fetch_method: mintlify_md
 ---
 
@@ -203,7 +203,7 @@ Before configuring Claude Code with Bedrock, ensure you have:
 * AWS CLI installed and configured (optional - only needed if you don't have another mechanism for getting credentials)
 * Appropriate IAM permissions
 
-To sign in with your own Bedrock credentials, follow [Sign in with Bedrock](https://code.claude.com/docs/en/Sign in with Bedrock) below. To deploy Claude Code across a team, use the [manual setup](https://code.claude.com/docs/en/manual setup) steps and [pin your model versions](https://code.claude.com/docs/en/pin your model versions) before rolling out.
+To sign in with your own Bedrock credentials, follow [Sign in with Bedrock](#sign-in-with-bedrock) below. To deploy Claude Code across a team, use the [manual setup](#set-up-manually) steps and [pin your model versions](#4-pin-model-versions) before rolling out.
 
 ## Sign in with Bedrock
 
@@ -211,7 +211,7 @@ If you have AWS credentials and want to start using Claude Code through Bedrock,
 
 <Steps>
   <Step title="Enable Anthropic models in your AWS account">
-    In the [Amazon Bedrock console](https://code.claude.com/docs/en/Amazon Bedrock console), open the Model catalog, select an Anthropic model, and submit the use case form. Access is granted immediately after submission. See [Submit use case details](https://code.claude.com/docs/en/Submit use case details) for AWS Organizations and [IAM configuration](https://code.claude.com/docs/en/IAM configuration) for the permissions your role needs.
+    In the [Amazon Bedrock console](https://console.aws.amazon.com/bedrock/), open the Model catalog, select an Anthropic model, and submit the use case form. Access is granted immediately after submission. See [Submit use case details](#1-submit-use-case-details) for AWS Organizations and [IAM configuration](#iam-configuration) for the permissions your role needs.
   </Step>
 
   <Step title="Start Claude Code and choose Bedrock">
@@ -219,7 +219,7 @@ If you have AWS credentials and want to start using Claude Code through Bedrock,
   </Step>
 
   <Step title="Follow the wizard prompts">
-    Choose how you authenticate to AWS: an AWS profile detected from your `~/.aws` directory, a Bedrock API key, an access key and secret, or credentials already in your environment. The wizard picks up your region, verifies which Claude models your account can invoke, and lets you pin them. It saves the result to the `env` block of your [user settings file](https://code.claude.com/docs/en/user settings file), so you don't need to export environment variables yourself.
+    Choose how you authenticate to AWS: an AWS profile detected from your `~/.aws` directory, a Bedrock API key, an access key and secret, or credentials already in your environment. The wizard picks up your region, verifies which Claude models your account can invoke, and lets you pin them. It saves the result to the `env` block of your [user settings file](/en/settings), so you don't need to export environment variables yourself.
   </Step>
 </Steps>
 
@@ -234,11 +234,11 @@ To configure Bedrock through environment variables instead of the wizard, for ex
 First-time users of Anthropic models are required to submit use case details before invoking a model. This is done once per AWS account.
 
 1. Ensure you have the right IAM permissions described below
-2. Navigate to the [Amazon Bedrock console](https://code.claude.com/docs/en/Amazon Bedrock console)
+2. Navigate to the [Amazon Bedrock console](https://console.aws.amazon.com/bedrock/)
 3. Select an Anthropic model from the **Model catalog**
 4. Complete the use case form. Access is granted immediately after submission.
 
-If you use AWS Organizations, you can submit the form once from the management account using the [`PutUseCaseForModelAccess` API](https://code.claude.com/docs/en/`PutUseCaseForModelAccess` API). This call requires the `bedrock:PutUseCaseForModelAccess` IAM permission. Approval extends to child accounts automatically.
+If you use AWS Organizations, you can submit the form once from the management account using the [`PutUseCaseForModelAccess` API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_PutUseCaseForModelAccess.html). This call requires the `bedrock:PutUseCaseForModelAccess` IAM permission. Approval extends to child accounts automatically.
 
 ### 2. Configure AWS credentials
 
@@ -272,7 +272,7 @@ export AWS_PROFILE=your-profile-name
 aws login
 ```
 
-[Learn more](https://code.claude.com/docs/en/Learn more) about `aws login`.
+[Learn more](https://docs.aws.amazon.com/signin/latest/userguide/command-line-sign-in.html) about `aws login`.
 
 **Option E: Bedrock API keys**
 
@@ -280,11 +280,11 @@ aws login
 export AWS_BEARER_TOKEN_BEDROCK=your-bedrock-api-key
 ```
 
-Bedrock API keys provide a simpler authentication method without needing full AWS credentials. [Learn more about Bedrock API keys](https://code.claude.com/docs/en/Learn more about Bedrock API keys).
+Bedrock API keys provide a simpler authentication method without needing full AWS credentials. [Learn more about Bedrock API keys](https://aws.amazon.com/blogs/machine-learning/accelerate-ai-development-with-amazon-bedrock-api-keys/).
 
 #### Advanced credential configuration
 
-Claude Code supports automatic credential refresh for AWS SSO and corporate identity providers. Add these settings to your Claude Code settings file (see [Settings](https://code.claude.com/docs/en/Settings) for file locations).
+Claude Code supports automatic credential refresh for AWS SSO and corporate identity providers. Add these settings to your Claude Code settings file (see [Settings](/en/settings) for file locations).
 
 When Claude Code detects that your AWS credentials are expired (either locally based on their timestamp or when Bedrock returns a credential error), it will automatically run your configured `awsAuthRefresh` and/or `awsCredentialExport` commands to obtain new credentials before retrying the request.
 
@@ -336,12 +336,12 @@ When enabling Bedrock for Claude Code, keep the following in mind:
 
 * `AWS_REGION` is a required environment variable. Claude Code does not read from the `.aws` config file for this setting.
 * When using Bedrock, the `/login` and `/logout` commands are disabled since authentication is handled through AWS credentials.
-* You can use settings files for environment variables like `AWS_PROFILE` that you don't want to leak to other processes. See [Settings](https://code.claude.com/docs/en/Settings) for more information.
+* You can use settings files for environment variables like `AWS_PROFILE` that you don't want to leak to other processes. See [Settings](/en/settings) for more information.
 
 ### 4. Pin model versions
 
 <Warning>
-  Pin specific model versions when deploying to multiple users. Without pinning, model aliases such as `sonnet` and `opus` resolve to the latest version, which may not yet be available in your Bedrock account when Anthropic releases an update. Claude Code [falls back](https://code.claude.com/docs/en/falls back) to the previous version at startup when the latest is unavailable, but pinning lets you control when your users move to a new model.
+  Pin specific model versions when deploying to multiple users. Without pinning, model aliases such as `sonnet` and `opus` resolve to the latest version, which may not yet be available in your Bedrock account when Anthropic releases an update. Claude Code [falls back](#startup-model-checks) to the previous version at startup when the latest is unavailable, but pinning lets you control when your users move to a new model.
 </Warning>
 
 Set these environment variables to specific Bedrock model IDs.
@@ -354,7 +354,7 @@ export ANTHROPIC_DEFAULT_SONNET_MODEL='us.anthropic.claude-sonnet-4-6'
 export ANTHROPIC_DEFAULT_HAIKU_MODEL='us.anthropic.claude-haiku-4-5-20251001-v1:0'
 ```
 
-These variables use cross-region inference profile IDs (with the `us.` prefix). If you use a different region prefix or application inference profiles, adjust accordingly. For current and legacy model IDs, see [Models overview](https://code.claude.com/docs/en/Models overview). See [Model configuration](https://code.claude.com/docs/en/Model configuration) for the full list of environment variables.
+These variables use cross-region inference profile IDs (with the `us.` prefix). If you use a different region prefix or application inference profiles, adjust accordingly. For current and legacy model IDs, see [Models overview](https://platform.claude.com/docs/en/about-claude/models/overview). See [Model configuration](/en/model-config#pin-models-for-third-party-deployments) for the full list of environment variables.
 
 Claude Code uses these default models when no pinning variables are set:
 
@@ -380,11 +380,11 @@ export DISABLE_PROMPT_CACHING=1
 export ENABLE_PROMPT_CACHING_1H=1
 ```
 
-<Note>[Prompt caching](https://code.claude.com/docs/en/Prompt caching) may not be available in all regions. Cache writes with a 1-hour TTL are billed at a higher rate than 5-minute writes.</Note>
+<Note>[Prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) may not be available in all regions. Cache writes with a 1-hour TTL are billed at a higher rate than 5-minute writes.</Note>
 
 #### Map each model version to an inference profile
 
-The `ANTHROPIC_DEFAULT_*_MODEL` environment variables configure one inference profile per model family. If your organization needs to expose several versions of the same family in the `/model` picker, each routed to its own application inference profile ARN, use the `modelOverrides` setting in your [settings file](https://code.claude.com/docs/en/settings file) instead.
+The `ANTHROPIC_DEFAULT_*_MODEL` environment variables configure one inference profile per model family. If your organization needs to expose several versions of the same family in the `/model` picker, each routed to its own application inference profile ARN, use the `modelOverrides` setting in your [settings file](/en/settings#settings-files) instead.
 
 This example maps four Opus versions to distinct ARNs so users can switch between them without bypassing your organization's inference profiles:
 
@@ -399,15 +399,15 @@ This example maps four Opus versions to distinct ARNs so users can switch betwee
 }
 ```
 
-When a user selects one of these versions in `/model`, Claude Code calls Bedrock with the mapped ARN. Versions without an override fall back to the built-in Bedrock model ID or any matching inference profile discovered at startup. See [Override model IDs per version](https://code.claude.com/docs/en/Override model IDs per version) for details on how overrides interact with `availableModels` and other model settings.
+When a user selects one of these versions in `/model`, Claude Code calls Bedrock with the mapped ARN. Versions without an override fall back to the built-in Bedrock model ID or any matching inference profile discovered at startup. See [Override model IDs per version](/en/model-config#override-model-ids-per-version) for details on how overrides interact with `availableModels` and other model settings.
 
 ## Startup model checks
 
 When Claude Code starts with Bedrock configured, it verifies that the models it intends to use are accessible in your account. This check requires Claude Code v2.1.94 or later.
 
-If you have pinned a model version that is older than the current Claude Code default, and your account can invoke the newer version, Claude Code prompts you to update the pin. Accepting writes the new model ID to your [user settings file](https://code.claude.com/docs/en/user settings file) and restarts Claude Code. Declining is remembered until the next default version change. Pins that point to an [application inference profile ARN](https://code.claude.com/docs/en/application inference profile ARN) are skipped, since those are managed by your administrator.
+If you have pinned a model version that is older than the current Claude Code default, and your account can invoke the newer version, Claude Code prompts you to update the pin. Accepting writes the new model ID to your [user settings file](/en/settings) and restarts Claude Code. Declining is remembered until the next default version change. Pins that point to an [application inference profile ARN](#map-each-model-version-to-an-inference-profile) are skipped, since those are managed by your administrator.
 
-If you have not pinned a model and the current default is unavailable in your account, Claude Code falls back to the previous version for the current session and shows a notice. The fallback is not persisted. Enable the newer model in your Bedrock account or [pin a version](https://code.claude.com/docs/en/pin a version) to make the choice permanent.
+If you have not pinned a model and the current default is unavailable in your account, Claude Code falls back to the previous version for the current session and shows a notice. The fallback is not persisted. Enable the newer model in your Bedrock account or [pin a version](#4-pin-model-versions) to make the choice permanent.
 
 ## IAM configuration
 
@@ -452,11 +452,11 @@ Create an IAM policy with the required permissions for Claude Code:
 
 For more restrictive permissions, you can limit the Resource to specific inference profile ARNs.
 
-`bedrock:GetInferenceProfile` lets Claude Code resolve an [application inference profile ARN](https://code.claude.com/docs/en/application inference profile ARN) to its backing foundation model, which is used to select the correct request shape for that model.
+`bedrock:GetInferenceProfile` lets Claude Code resolve an [application inference profile ARN](#map-each-model-version-to-an-inference-profile) to its backing foundation model, which is used to select the correct request shape for that model.
 
 If the token is missing this permission, Claude Code recovers automatically by retrying once with the alternate shape, so requests still succeed but each new model adds an extra round-trip. Granting the permission avoids the retry. This applies most often to `AWS_BEARER_TOKEN_BEDROCK` deployments, where the token's policy is typically narrower than a full IAM role.
 
-For details, see [Bedrock IAM documentation](https://code.claude.com/docs/en/Bedrock IAM documentation).
+For details, see [Bedrock IAM documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/security-iam.html).
 
 <Note>
   Create a dedicated AWS account for Claude Code to simplify cost tracking and access control.
@@ -464,23 +464,23 @@ For details, see [Bedrock IAM documentation](https://code.claude.com/docs/en/Bed
 
 ## 1M token context window
 
-Claude Opus 4.7, Opus 4.6, and Sonnet 4.6 support the [1M token context window](https://code.claude.com/docs/en/1M token context window) on Amazon Bedrock. Claude Code automatically enables the extended context window when you select a 1M model variant.
+Claude Opus 4.7, Opus 4.6, and Sonnet 4.6 support the [1M token context window](https://platform.claude.com/docs/en/build-with-claude/context-windows#1m-token-context-window) on Amazon Bedrock. Claude Code automatically enables the extended context window when you select a 1M model variant.
 
-The [setup wizard](https://code.claude.com/docs/en/setup wizard) offers a 1M context option when it pins models. To enable it for a manually pinned model instead, append `[1m]` to the model ID. See [Pin models for third-party deployments](https://code.claude.com/docs/en/Pin models for third-party deployments) for details.
+The [setup wizard](#sign-in-with-bedrock) offers a 1M context option when it pins models. To enable it for a manually pinned model instead, append `[1m]` to the model ID. See [Pin models for third-party deployments](/en/model-config#pin-models-for-third-party-deployments) for details.
 
 ## Service tiers
 
-[Amazon Bedrock service tiers](https://code.claude.com/docs/en/Amazon Bedrock service tiers) let you trade off cost against latency. Set `ANTHROPIC_BEDROCK_SERVICE_TIER` to `default`, `flex`, or `priority`:
+[Amazon Bedrock service tiers](https://docs.aws.amazon.com/bedrock/latest/userguide/service-tiers-inference.html) let you trade off cost against latency. Set `ANTHROPIC_BEDROCK_SERVICE_TIER` to `default`, `flex`, or `priority`:
 
 ```bash theme={null}
 export ANTHROPIC_BEDROCK_SERVICE_TIER=priority
 ```
 
-Claude Code sends this as the `X-Amzn-Bedrock-Service-Tier` header on each request. Tier availability varies by model and region. Reserved capacity uses a [provisioned throughput](https://code.claude.com/docs/en/provisioned throughput) ARN as the model ID instead of this setting.
+Claude Code sends this as the `X-Amzn-Bedrock-Service-Tier` header on each request. Tier availability varies by model and region. Reserved capacity uses a [provisioned throughput](https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html) ARN as the model ID instead of this setting.
 
 ## AWS Guardrails
 
-[Amazon Bedrock Guardrails](https://code.claude.com/docs/en/Amazon Bedrock Guardrails) let you implement content filtering for Claude Code. Create a Guardrail in the [Amazon Bedrock console](https://code.claude.com/docs/en/Amazon Bedrock console), publish a version, then add the Guardrail headers to your [settings file](https://code.claude.com/docs/en/settings file). Enable Cross-Region inference on your Guardrail if you're using cross-region inference profiles.
+[Amazon Bedrock Guardrails](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html) let you implement content filtering for Claude Code. Create a Guardrail in the [Amazon Bedrock console](https://console.aws.amazon.com/bedrock/), publish a version, then add the Guardrail headers to your [settings file](/en/settings). Enable Cross-Region inference on your Guardrail if you're using cross-region inference profiles.
 
 Example configuration:
 
@@ -532,7 +532,7 @@ export CLAUDE_CODE_USE_BEDROCK=1
 export CLAUDE_CODE_USE_MANTLE=1
 ```
 
-To surface a Mantle model in the `/model` picker, list its ID in `availableModels` in your [settings file](https://code.claude.com/docs/en/settings file). This setting also restricts the picker to the listed entries, so include every alias you want to keep available:
+To surface a Mantle model in the `/model` picker, list its ID in `availableModels` in your [settings file](/en/settings). This setting also restricts the picker to the listed entries, so include every alias you want to keep available:
 
 ```json theme={null}
 {
@@ -540,13 +540,13 @@ To surface a Mantle model in the `/model` picker, list its ID in `availableModel
 }
 ```
 
-Entries with the `anthropic.` prefix are added as custom picker options and routed to Mantle. Replace `anthropic.claude-haiku-4-5` with the model ID your account has been granted. See [Restrict model selection](https://code.claude.com/docs/en/Restrict model selection) for how `availableModels` interacts with other model settings.
+Entries with the `anthropic.` prefix are added as custom picker options and routed to Mantle. Replace `anthropic.claude-haiku-4-5` with the model ID your account has been granted. See [Restrict model selection](/en/model-config#restrict-model-selection) for how `availableModels` interacts with other model settings.
 
 When both providers are active, `/status` shows `Amazon Bedrock + Amazon Bedrock (Mantle)`.
 
 ### Route Mantle through a gateway
 
-If your organization routes model traffic through a centralized [LLM gateway](https://code.claude.com/docs/en/LLM gateway) that injects AWS credentials server-side, disable client-side authentication so Claude Code sends requests without SigV4 signatures or `x-api-key` headers:
+If your organization routes model traffic through a centralized [LLM gateway](/en/llm-gateway) that injects AWS credentials server-side, disable client-side authentication so Claude Code sends requests without SigV4 signatures or `x-api-key` headers:
 
 ```bash theme={null}
 export CLAUDE_CODE_USE_MANTLE=1
@@ -556,7 +556,7 @@ export ANTHROPIC_BEDROCK_MANTLE_BASE_URL=https://your-gateway.example.com
 
 ### Mantle environment variables
 
-These variables are specific to the Mantle endpoint. See [Environment variables](https://code.claude.com/docs/en/Environment variables) for the full list.
+These variables are specific to the Mantle endpoint. See [Environment variables](/en/env-vars) for the full list.
 
 | Variable                                | Purpose                                                             |
 | :-------------------------------------- | :------------------------------------------------------------------ |
@@ -569,7 +569,7 @@ These variables are specific to the Mantle endpoint. See [Environment variables]
 
 ### Authentication loop with SSO and corporate proxies
 
-If browser tabs spawn repeatedly when using AWS SSO, remove the `awsAuthRefresh` setting from your [settings file](https://code.claude.com/docs/en/settings file). This can occur when corporate VPNs or TLS inspection proxies interrupt the SSO browser flow. Claude Code treats the interrupted connection as an authentication failure, re-runs `awsAuthRefresh`, and loops indefinitely.
+If browser tabs spawn repeatedly when using AWS SSO, remove the `awsAuthRefresh` setting from your [settings file](/en/settings). This can occur when corporate VPNs or TLS inspection proxies interrupt the SSO browser flow. Claude Code treats the interrupted connection as an authentication failure, re-runs `awsAuthRefresh`, and loops indefinitely.
 
 If your network environment interferes with automatic browser-based SSO flows, use `aws sso login` manually before starting Claude Code instead of relying on `awsAuthRefresh`.
 
@@ -583,23 +583,23 @@ If you encounter region issues:
 
 If you receive an error "on-demand throughput isn’t supported":
 
-* Specify the model as an [inference profile](https://code.claude.com/docs/en/inference profile) ID
+* Specify the model as an [inference profile](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles-support.html) ID
 
-Claude Code uses the Bedrock [Invoke API](https://code.claude.com/docs/en/Invoke API) and does not support the Converse API.
+Claude Code uses the Bedrock [Invoke API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithResponseStream.html) and does not support the Converse API.
 
 ### Mantle endpoint errors
 
-If `/status` does not show `Amazon Bedrock (Mantle)` after you set `CLAUDE_CODE_USE_MANTLE`, the variable is not reaching the process. Confirm it is exported in the shell where you launched `claude`, or set it in the `env` block of your [settings file](https://code.claude.com/docs/en/settings file).
+If `/status` does not show `Amazon Bedrock (Mantle)` after you set `CLAUDE_CODE_USE_MANTLE`, the variable is not reaching the process. Confirm it is exported in the shell where you launched `claude`, or set it in the `env` block of your [settings file](/en/settings).
 
 A `403` from the Mantle endpoint with valid credentials means your AWS account has not been granted access to the model you requested. Contact your AWS account team to request access.
 
-A `400` that names the model ID means that model is not served on Mantle. Mantle has its own model lineup separate from the standard Bedrock catalog, so inference profile IDs such as `us.anthropic.claude-sonnet-4-6` will not work. Use a Mantle-format ID, or enable [both endpoints](https://code.claude.com/docs/en/both endpoints) so Claude Code routes each request to the endpoint where the model is available.
+A `400` that names the model ID means that model is not served on Mantle. Mantle has its own model lineup separate from the standard Bedrock catalog, so inference profile IDs such as `us.anthropic.claude-sonnet-4-6` will not work. Use a Mantle-format ID, or enable [both endpoints](#run-mantle-alongside-the-invoke-api) so Claude Code routes each request to the endpoint where the model is available.
 
 ## Additional resources
 
-* [Bedrock documentation](https://code.claude.com/docs/en/Bedrock documentation)
-* [Bedrock pricing](https://code.claude.com/docs/en/Bedrock pricing)
-* [Bedrock inference profiles](https://code.claude.com/docs/en/Bedrock inference profiles)
-* [Bedrock token burndown and quotas](https://code.claude.com/docs/en/Bedrock token burndown and quotas)
-* [Claude Code on Amazon Bedrock: Quick Setup Guide](https://code.claude.com/docs/en/Claude Code on Amazon Bedrock: Quick Setup Guide)
-* [Claude Code Monitoring Implementation (Bedrock)](https://code.claude.com/docs/en/Claude Code Monitoring Implementation (Bedrock))
+* [Bedrock documentation](https://docs.aws.amazon.com/bedrock/)
+* [Bedrock pricing](https://aws.amazon.com/bedrock/pricing/)
+* [Bedrock inference profiles](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles-support.html)
+* [Bedrock token burndown and quotas](https://docs.aws.amazon.com/bedrock/latest/userguide/quotas-token-burndown.html)
+* [Claude Code on Amazon Bedrock: Quick Setup Guide](https://community.aws/content/2tXkZKrZzlrlu0KfH8gST5Dkppq/claude-code-on-amazon-bedrock-quick-setup-guide)
+* [Claude Code Monitoring Implementation (Bedrock)](https://github.com/aws-solutions-library-samples/guidance-for-claude-code-with-amazon-bedrock/blob/main/assets/docs/MONITORING.md)

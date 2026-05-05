@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/ultrareview
-fetched_at: 2026-05-04T15:07:25.269923+00:00
+fetched_at: 2026-05-05T19:40:39.752755+00:00
 fetch_method: mintlify_md
 ---
 
@@ -56,9 +56,9 @@ Ultrareview is a premium feature that bills against extra usage rather than your
 
 | Plan                | Included free runs              | After free runs                                                                                            |
 | ------------------- | ------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Pro                 | 3 free runs through May 5, 2026 | billed as [extra usage](https://code.claude.com/docs/en/extra usage) |
-| Max                 | 3 free runs through May 5, 2026 | billed as [extra usage](https://code.claude.com/docs/en/extra usage) |
-| Team and Enterprise | none                            | billed as [extra usage](https://code.claude.com/docs/en/extra usage) |
+| Pro                 | 3 free runs through May 5, 2026 | billed as [extra usage](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans) |
+| Max                 | 3 free runs through May 5, 2026 | billed as [extra usage](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans) |
+| Team and Enterprise | none                            | billed as [extra usage](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans) |
 
 Pro and Max subscribers receive three free ultrareview runs to try the feature. These three runs are a one-time allotment per account, do not refresh, and expire on May 5, 2026. After you use all three, or after the free run period ends, each review is billed to extra usage and typically costs \$5 to \$20 depending on the size of the change. A run counts once the remote session starts, so a review that you stop early or that fails to complete still uses a free run. For a paid review, extra usage is billed only for the portion that ran.
 
@@ -91,7 +91,7 @@ Progress messages and the live session URL go to stderr so stdout stays parseabl
 
 Running `claude ultrareview` requires the same authentication and extra usage configuration as `/ultrareview`. The subcommand exits with code 0 when the review completes with or without findings, code 1 when the review fails to launch, the remote session errors, or the timeout elapses, and code 130 when interrupted with Ctrl-C. The remote review keeps running if you interrupt the subcommand; follow the session URL printed to stderr to watch it in the browser.
 
-For automatic reviews on GitHub pull requests, [Code Review](https://code.claude.com/docs/en/Code Review) integrates with your repository directly and posts findings as inline PR comments without a CLI step.
+For automatic reviews on GitHub pull requests, [Code Review](/en/code-review) integrates with your repository directly and posts findings as inline PR comments without a CLI step.
 
 ## How ultrareview compares to /review
 
@@ -109,6 +109,6 @@ Use `/review` for fast feedback as you work. Use `/ultrareview` before merging a
 
 ## Related resources
 
-* [Claude Code on the web](https://code.claude.com/docs/en/Claude Code on the web): learn how remote sessions and cloud sandboxes work
-* [Plan complex changes with ultraplan](https://code.claude.com/docs/en/Plan complex changes with ultraplan): the planning counterpart to ultrareview for upfront design work
-* [Manage costs effectively](https://code.claude.com/docs/en/Manage costs effectively): track usage and set spending limits
+* [Claude Code on the web](/en/claude-code-on-the-web): learn how remote sessions and cloud sandboxes work
+* [Plan complex changes with ultraplan](/en/ultraplan): the planning counterpart to ultrareview for upfront design work
+* [Manage costs effectively](/en/costs): track usage and set spending limits

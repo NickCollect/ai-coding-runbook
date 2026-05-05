@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/tool-search
-fetched_at: 2026-05-04T15:04:13.160673+00:00
+fetched_at: 2026-05-05T19:40:39.038677+00:00
 fetch_method: mintlify_md
 ---
 
@@ -19,7 +19,7 @@ This approach solves two challenges as tool libraries scale:
 * **Context efficiency:** Tool definitions can consume large portions of the context window (50 tools can use 10-20K tokens), leaving less room for actual work.
 * **Tool selection accuracy:** Tool selection accuracy degrades with more than 30-50 tools loaded at once.
 
-Tool search is enabled by default. This page covers [how it works](https://code.claude.com/docs/en/agent-sdk/how it works), how to [configure it](https://code.claude.com/docs/en/agent-sdk/configure it), and how to [optimize tool discovery](https://code.claude.com/docs/en/agent-sdk/optimize tool discovery).
+Tool search is enabled by default. This page covers [how it works](#how-tool-search-works), how to [configure it](#configure-tool-search), and how to [optimize tool discovery](#optimize-tool-discovery).
 
 ## How tool search works
 
@@ -27,7 +27,7 @@ When tool search is active, tool definitions are withheld from the context windo
 
 Tool search adds one extra round-trip the first time Claude discovers a tool (the search step), but for large tool sets this is offset by smaller context on every turn. With fewer than \~10 tools, loading everything upfront is typically faster.
 
-For details on the underlying API mechanism, see [Tool search in the API](https://code.claude.com/docs/en/agent-sdk/Tool search in the API).
+For details on the underlying API mechanism, see [Tool search in the API](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool).
 
 <Note>
   Tool search requires Claude Sonnet 4 or later, or Claude Opus 4 or later. Haiku models do not support tool search.
@@ -45,7 +45,7 @@ By default, tool search is always on. You can change this with the `ENABLE_TOOL_
 | `auto:N` | Same as `auto` with a custom percentage. `auto:5` activates when tool definitions exceed 5% of the context window. Lower values activate sooner.                                                         |
 | `false`  | Tool search is off. All tool definitions are loaded into context on every turn.                                                                                                                          |
 
-Tool search applies to all registered tools, whether they come from remote MCP servers or [custom SDK MCP servers](https://code.claude.com/docs/en/agent-sdk/custom SDK MCP servers). When using `auto`, the threshold is based on the combined size of all tool definitions across all servers.
+Tool search applies to all registered tools, whether they come from remote MCP servers or [custom SDK MCP servers](/en/agent-sdk/custom-tools). When using `auto`, the threshold is based on the combined size of all tool definitions across all servers.
 
 Set the value in the `env` option on `query()`. This example connects to a remote MCP server that exposes many tools, pre-approves all of them with a wildcard, and uses `auto:5` so tool search activates when their definitions exceed 5% of the context window:
 
@@ -79,6 +79,7 @@ Set the value in the `env` option on `query()`. This example connects to a remot
   import asyncio
   from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage
 
+
   async def main():
       options = ClaudeAgentOptions(
           mcp_servers={
@@ -101,6 +102,7 @@ Set the value in the `env` option on `query()`. This example connects to a remot
       ):
           if isinstance(message, ResultMessage) and message.subtype == "success":
               print(message.result)
+
 
   asyncio.run(main())
   ```
@@ -126,8 +128,8 @@ You can search for tools to interact with Slack, GitHub, and Jira.
 
 ## Related documentation
 
-* [Tool search in the API](https://code.claude.com/docs/en/agent-sdk/Tool search in the API): Full API documentation for tool search, including custom implementations
-* [Connect MCP servers](https://code.claude.com/docs/en/agent-sdk/Connect MCP servers): Connect to external tools via MCP servers
-* [Custom tools](https://code.claude.com/docs/en/agent-sdk/Custom tools): Build your own tools with SDK MCP servers
-* [TypeScript SDK reference](https://code.claude.com/docs/en/agent-sdk/TypeScript SDK reference): Full API reference
-* [Python SDK reference](https://code.claude.com/docs/en/agent-sdk/Python SDK reference): Full API reference
+* [Tool search in the API](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool): Full API documentation for tool search, including custom implementations
+* [Connect MCP servers](/en/agent-sdk/mcp): Connect to external tools via MCP servers
+* [Custom tools](/en/agent-sdk/custom-tools): Build your own tools with SDK MCP servers
+* [TypeScript SDK reference](/en/agent-sdk/typescript): Full API reference
+* [Python SDK reference](/en/agent-sdk/python): Full API reference

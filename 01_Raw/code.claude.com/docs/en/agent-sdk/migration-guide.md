@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/migration-guide
-fetched_at: 2026-05-04T15:03:36.757455+00:00
+fetched_at: 2026-05-05T19:40:38.913078+00:00
 fetch_method: mintlify_md
 ---
 
@@ -25,7 +25,7 @@ The Claude Code SDK has been renamed to the **Claude Agent SDK** and its documen
 | **Documentation Location** | Claude Code docs            | API Guide → Agent SDK section    |
 
 <Note>
-  **Documentation Changes:** The Agent SDK documentation has moved from the Claude Code docs to the API Guide under a dedicated [Agent SDK](https://code.claude.com/docs/en/agent-sdk/Agent SDK) section. The Claude Code docs now focus on the CLI tool and automation features.
+  **Documentation Changes:** The Agent SDK documentation has moved from the Claude Code docs to the API Guide under a dedicated [Agent SDK](/en/agent-sdk/overview) section. The Claude Code docs now focus on the CLI tool and automation features.
 </Note>
 
 ## Migration Steps
@@ -124,7 +124,7 @@ from claude_agent_sdk import query, ClaudeAgentOptions
 options = ClaudeAgentOptions(model="claude-opus-4-7")
 ```
 
-**5. Review [breaking changes](https://code.claude.com/docs/en/agent-sdk/breaking changes)**
+**5. Review [breaking changes](#breaking-changes)**
 
 Make any code changes needed to complete the migration.
 
@@ -286,7 +286,7 @@ options = ClaudeAgentOptions(model="claude-opus-4-7", permission_mode="acceptEdi
 * **Multi-tenant systems** - Prevent settings leakage between users
 
 <Warning>
-  Current SDK releases have reverted this default for `query()`: omitting the option once again loads user, project, and local settings, matching the CLI. Pass `settingSources: []` in TypeScript or `setting_sources=[]` in Python if your application depends on the isolated behavior described above. Python SDK 0.1.59 and earlier treated an empty list the same as omitting the option, so upgrade before relying on `setting_sources=[]`. See [What settingSources does not control](https://code.claude.com/docs/en/agent-sdk/What settingSources does not control) for inputs that are read even when `settingSources` is `[]`.
+  Current SDK releases have reverted this default for `query()`: omitting the option once again loads user, project, and local settings, matching the CLI. Pass `settingSources: []` in TypeScript or `setting_sources=[]` in Python if your application depends on the isolated behavior described above. Python SDK 0.1.59 and earlier treated an empty list the same as omitting the option, so upgrade before relying on `setting_sources=[]`. See [What settingSources does not control](/en/agent-sdk/claude-code-features#what-settingsources-does-not-control) for inputs that are read even when `settingSources` is `[]`.
 </Warning>
 
 ## Why the Rename?
@@ -315,7 +315,7 @@ If you encounter any issues during migration:
 
 ## Next Steps
 
-* Explore the [Agent SDK Overview](https://code.claude.com/docs/en/agent-sdk/Agent SDK Overview) to learn about available features
-* Check out the [TypeScript SDK Reference](https://code.claude.com/docs/en/agent-sdk/TypeScript SDK Reference) for detailed API documentation
-* Review the [Python SDK Reference](https://code.claude.com/docs/en/agent-sdk/Python SDK Reference) for Python-specific documentation
-* Learn about [Custom Tools](https://code.claude.com/docs/en/agent-sdk/Custom Tools) and [MCP Integration](https://code.claude.com/docs/en/agent-sdk/MCP Integration)
+* Explore the [Agent SDK Overview](/en/agent-sdk/overview) to learn about available features
+* Check out the [TypeScript SDK Reference](/en/agent-sdk/typescript) for detailed API documentation
+* Review the [Python SDK Reference](/en/agent-sdk/python) for Python-specific documentation
+* Learn about [Custom Tools](/en/agent-sdk/custom-tools) and [MCP Integration](/en/agent-sdk/mcp)

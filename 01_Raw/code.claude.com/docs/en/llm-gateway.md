@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/llm-gateway
-fetched_at: 2026-05-04T15:06:14.348051+00:00
+fetched_at: 2026-05-05T19:40:39.487068+00:00
 fetch_method: mintlify_md
 ---
 
@@ -51,7 +51,7 @@ Claude Code includes the following headers on every API request:
 | :------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `X-Claude-Code-Session-Id` | A unique identifier for the current Claude Code session. Proxies can use this to aggregate all API requests from a single session without parsing the request body. |
 
-Claude Code also prepends a short attribution block to the system prompt containing the client version and a fingerprint derived from the conversation. The Anthropic API strips this block before processing, so it does not affect first-party prompt caching. If your gateway implements its own prompt cache keyed on the full request body, set [`CLAUDE_CODE_ATTRIBUTION_HEADER=0`](https://code.claude.com/docs/en/`CLAUDE_CODE_ATTRIBUTION_HEADER=0`) to omit it.
+Claude Code also prepends a short attribution block to the system prompt containing the client version and a fingerprint derived from the conversation. The Anthropic API strips this block before processing, so it does not affect first-party prompt caching. If your gateway implements its own prompt cache keyed on the full request body, set [`CLAUDE_CODE_ATTRIBUTION_HEADER=0`](/en/env-vars) to omit it.
 
 ## Configuration
 
@@ -65,7 +65,7 @@ Discovery applies only to the Anthropic Messages format. It does not run for Bed
 
 The discovery request authenticates the same way as inference requests: it sends `ANTHROPIC_AUTH_TOKEN` as a bearer token, or `ANTHROPIC_API_KEY` as the `x-api-key` header when no auth token is set, along with any headers from `ANTHROPIC_CUSTOM_HEADERS`. Only models whose ID begins with `claude` or `anthropic` are added to the picker. Results are cached to `~/.claude/cache/gateway-models.json` and refreshed on each startup. If the request fails or the gateway does not implement `/v1/models`, the picker falls back to the cached list from the previous startup or to the built-in model list.
 
-If your gateway uses model names that do not match the discovery filter, use the environment variables documented in [Model configuration](https://code.claude.com/docs/en/Model configuration) to add them manually.
+If your gateway uses model names that do not match the discovery filter, use the environment variables documented in [Model configuration](/en/model-config) to add them manually.
 
 ## LiteLLM configuration
 
@@ -74,7 +74,7 @@ If your gateway uses model names that do not match the discovery filter, use the
 
   * Remove the package
   * Rotate all credentials on affected systems
-  * Follow the remediation steps in [BerriAI/litellm#24518](https://code.claude.com/docs/en/BerriAI/litellm#24518)
+  * Follow the remediation steps in [BerriAI/litellm#24518](https://github.com/BerriAI/litellm/issues/24518)
 
   LiteLLM is a third-party proxy service. Anthropic doesn't endorse, maintain, or audit LiteLLM's security or functionality. This guide is provided for informational purposes and may become outdated. Use at your own discretion.
 </Warning>
@@ -148,7 +148,7 @@ This value will be sent as `Authorization` and `X-Api-Key` headers. The `apiKeyH
 
 #### Unified endpoint (recommended)
 
-Using LiteLLM's [Anthropic format endpoint](https://code.claude.com/docs/en/Anthropic format endpoint):
+Using LiteLLM's [Anthropic format endpoint](https://docs.litellm.ai/docs/anthropic_unified):
 
 ```bash theme={null}
 export ANTHROPIC_BASE_URL=https://litellm-server:4000
@@ -164,7 +164,7 @@ export ANTHROPIC_BASE_URL=https://litellm-server:4000
 
 ##### Claude API through LiteLLM
 
-Using [pass-through endpoint](https://code.claude.com/docs/en/pass-through endpoint):
+Using [pass-through endpoint](https://docs.litellm.ai/docs/pass_through/anthropic_completion):
 
 ```bash theme={null}
 export ANTHROPIC_BASE_URL=https://litellm-server:4000/anthropic
@@ -172,7 +172,7 @@ export ANTHROPIC_BASE_URL=https://litellm-server:4000/anthropic
 
 ##### Amazon Bedrock through LiteLLM
 
-Using [pass-through endpoint](https://code.claude.com/docs/en/pass-through endpoint):
+Using [pass-through endpoint](https://docs.litellm.ai/docs/pass_through/bedrock):
 
 ```bash theme={null}
 export ANTHROPIC_BEDROCK_BASE_URL=https://litellm-server:4000/bedrock
@@ -182,7 +182,7 @@ export CLAUDE_CODE_USE_BEDROCK=1
 
 ##### Google Vertex AI through LiteLLM
 
-Using [pass-through endpoint](https://code.claude.com/docs/en/pass-through endpoint):
+Using [pass-through endpoint](https://docs.litellm.ai/docs/pass_through/vertex_ai):
 
 ```bash theme={null}
 export ANTHROPIC_VERTEX_BASE_URL=https://litellm-server:4000/vertex_ai/v1
@@ -192,11 +192,11 @@ export CLAUDE_CODE_USE_VERTEX=1
 export CLOUD_ML_REGION=us-east5
 ```
 
-For more detailed information, refer to the [LiteLLM documentation](https://code.claude.com/docs/en/LiteLLM documentation).
+For more detailed information, refer to the [LiteLLM documentation](https://docs.litellm.ai/).
 
 ## Additional resources
 
-* [LiteLLM documentation](https://code.claude.com/docs/en/LiteLLM documentation)
-* [Claude Code settings](https://code.claude.com/docs/en/Claude Code settings)
-* [Enterprise network configuration](https://code.claude.com/docs/en/Enterprise network configuration)
-* [Third-party integrations overview](https://code.claude.com/docs/en/Third-party integrations overview)
+* [LiteLLM documentation](https://docs.litellm.ai/)
+* [Claude Code settings](/en/settings)
+* [Enterprise network configuration](/en/network-config)
+* [Third-party integrations overview](/en/third-party-integrations)

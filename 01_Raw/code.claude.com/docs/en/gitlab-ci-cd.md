@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/gitlab-ci-cd
-fetched_at: 2026-05-04T15:05:45.218659+00:00
+fetched_at: 2026-05-05T19:40:39.397415+00:00
 fetch_method: mintlify_md
 ---
 
@@ -15,11 +15,11 @@ fetch_method: mintlify_md
 <Info>
   Claude Code for GitLab CI/CD is currently in beta. Features and functionality may evolve as we refine the experience.
 
-  This integration is maintained by GitLab. For support, see the following [GitLab issue](https://code.claude.com/docs/en/GitLab issue).
+  This integration is maintained by GitLab. For support, see the following [GitLab issue](https://gitlab.com/gitlab-org/gitlab/-/issues/573776).
 </Info>
 
 <Note>
-  This integration is built on top of the [Claude Code CLI and Agent SDK](https://code.claude.com/docs/en/Claude Code CLI and Agent SDK), enabling programmatic use of Claude in your CI/CD jobs and custom automation workflows.
+  This integration is built on top of the [Claude Code CLI and Agent SDK](/en/agent-sdk/overview), enabling programmatic use of Claude in your CI/CD jobs and custom automation workflows.
 </Note>
 
 ## Why use Claude Code with GitLab?
@@ -104,7 +104,7 @@ claude:
 After adding the job and your `ANTHROPIC_API_KEY` variable, test by running the job manually from **CI/CD** → **Pipelines**, or trigger it from an MR to let Claude propose updates in a branch and open an MR if needed.
 
 <Note>
-  To run on Amazon Bedrock or Google Vertex AI instead of the Claude API, see the [Using with Amazon Bedrock & Google Vertex AI](https://code.claude.com/docs/en/Using with Amazon Bedrock & Google Vertex AI) section below for authentication and environment setup.
+  To run on Amazon Bedrock or Google Vertex AI instead of the Claude API, see the [Using with Amazon Bedrock & Google Vertex AI](#using-with-amazon-bedrock--google-vertex-ai) section below for authentication and environment setup.
 </Note>
 
 ### Manual setup (recommended for production)
@@ -414,7 +414,7 @@ When using Claude Code with GitLab CI/CD, be aware of associated costs:
 * **API costs**:
   * Each Claude interaction consumes tokens based on prompt and response size
   * Token usage varies by task complexity and codebase size
-  * See [Anthropic pricing](https://code.claude.com/docs/en/Anthropic pricing) for details
+  * See [Anthropic pricing](https://platform.claude.com/docs/en/about-claude/pricing) for details
 
 * **Cost optimization tips**:
   * Use specific `@claude` commands to reduce unnecessary turns

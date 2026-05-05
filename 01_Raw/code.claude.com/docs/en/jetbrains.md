@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/jetbrains
-fetched_at: 2026-05-04T15:06:07.672305+00:00
+fetched_at: 2026-05-05T19:40:39.452292+00:00
 fetch_method: mintlify_md
 ---
 
@@ -37,9 +37,9 @@ The Claude Code plugin works with most JetBrains IDEs, including:
 
 ### Marketplace installation
 
-Find and install the [Claude Code plugin](https://code.claude.com/docs/en/Claude Code plugin) from the JetBrains marketplace and restart your IDE.
+Find and install the [Claude Code plugin](https://plugins.jetbrains.com/plugin/27310-claude-code-beta-) from the JetBrains marketplace and restart your IDE.
 
-If you haven't installed Claude Code yet, see the [quickstart guide](https://code.claude.com/docs/en/quickstart guide) for installation instructions.
+If you haven't installed Claude Code yet, see the [quickstart guide](/en/quickstart) for installation instructions.
 
 <Note>
   After installing the plugin, you may need to restart your IDE completely for it to take effect.
@@ -175,7 +175,7 @@ If running `claude` shows "No available IDEs detected":
 * Verify the plugin is installed and enabled
 * Restart the IDE completely
 * Check that you're running Claude Code from the integrated terminal
-* For WSL users, see [WSL configuration](https://code.claude.com/docs/en/WSL configuration) above
+* For WSL users, see [WSL configuration](#wsl-configuration) above
 
 ### Command not found
 
@@ -195,4 +195,4 @@ When running in JetBrains IDEs, consider:
 * Taking extra care to ensure Claude is only used with trusted prompts
 * Being aware of which files Claude Code has access to modify
 
-For Claude Code installation or login problems outside the IDE, see [Troubleshoot installation and login](https://code.claude.com/docs/en/Troubleshoot installation and login).
+For Claude Code installation or login problems outside the IDE, see [Troubleshoot installation and login](/en/troubleshoot-install).

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/network-config
-fetched_at: 2026-05-04T15:06:26.948955+00:00
+fetched_at: 2026-05-05T19:40:39.521227+00:00
 fetch_method: mintlify_md
 ---
 
@@ -15,7 +15,7 @@ fetch_method: mintlify_md
 Claude Code supports various enterprise network and security configurations through environment variables. This includes routing traffic through corporate proxy servers, trusting custom Certificate Authorities (CA), and authenticating with mutual Transport Layer Security (mTLS) certificates for enhanced security.
 
 <Note>
-  All environment variables shown on this page can also be configured in [`settings.json`](https://code.claude.com/docs/en/`settings.json`).
+  All environment variables shown on this page can also be configured in [`settings.json`](/en/settings).
 </Note>
 
 ## Proxy configuration
@@ -119,20 +119,20 @@ Claude Code requires access to the following URLs. Allowlist these in your proxy
 | `platform.claude.com`          | Anthropic Console account authentication                                                          |
 | `downloads.claude.ai`          | Plugin executable downloads; native installer and native auto-updater                             |
 | `storage.googleapis.com`       | {/* max-version: 2.1.115 */}Native installer and native auto-updater on versions prior to 2.1.116 |
-| `bridge.claudeusercontent.com` | [Claude in Chrome](https://code.claude.com/docs/en/Claude in Chrome) extension WebSocket bridge                                         |
+| `bridge.claudeusercontent.com` | [Claude in Chrome](/en/chrome) extension WebSocket bridge                                         |
 
 If you install Claude Code through npm or manage your own binary distribution, end users may not need access to `downloads.claude.ai` or `storage.googleapis.com`.
 
-Claude Code also sends optional operational telemetry by default, which you can disable with environment variables. See [Telemetry services](https://code.claude.com/docs/en/Telemetry services) for how to disable it before finalizing your allowlist.
+Claude Code also sends optional operational telemetry by default, which you can disable with environment variables. See [Telemetry services](/en/data-usage#telemetry-services) for how to disable it before finalizing your allowlist.
 
-When using [Amazon Bedrock](https://code.claude.com/docs/en/Amazon Bedrock), [Google Vertex AI](https://code.claude.com/docs/en/Google Vertex AI), or [Microsoft Foundry](https://code.claude.com/docs/en/Microsoft Foundry), model traffic and authentication go to your provider instead of `api.anthropic.com`, `claude.ai`, or `platform.claude.com`. The WebFetch tool still calls `api.anthropic.com` for its [domain safety check](https://code.claude.com/docs/en/domain safety check) unless you set `skipWebFetchPreflight: true` in [settings](https://code.claude.com/docs/en/settings).
+When using [Amazon Bedrock](/en/amazon-bedrock), [Google Vertex AI](/en/google-vertex-ai), or [Microsoft Foundry](/en/microsoft-foundry), model traffic and authentication go to your provider instead of `api.anthropic.com`, `claude.ai`, or `platform.claude.com`. The WebFetch tool still calls `api.anthropic.com` for its [domain safety check](/en/data-usage#webfetch-domain-safety-check) unless you set `skipWebFetchPreflight: true` in [settings](/en/settings).
 
-[Claude Code on the web](https://code.claude.com/docs/en/Claude Code on the web) and [Code Review](https://code.claude.com/docs/en/Code Review) connect to your repositories from Anthropic-managed infrastructure. If your GitHub Enterprise Cloud organization restricts access by IP address, enable [IP allow list inheritance for installed GitHub Apps](https://code.claude.com/docs/en/IP allow list inheritance for installed GitHub Apps). The Claude GitHub App registers its IP ranges, so enabling this setting allows access without manual configuration. To [add the ranges to your allow list manually](https://code.claude.com/docs/en/add the ranges to your allow list manually) instead, or to configure other firewalls, see the [Anthropic API IP addresses](https://code.claude.com/docs/en/Anthropic API IP addresses).
+[Claude Code on the web](/en/claude-code-on-the-web) and [Code Review](/en/code-review) connect to your repositories from Anthropic-managed infrastructure. If your GitHub Enterprise Cloud organization restricts access by IP address, enable [IP allow list inheritance for installed GitHub Apps](https://docs.github.com/en/enterprise-cloud@latest/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/managing-allowed-ip-addresses-for-your-organization#allowing-access-by-github-apps). The Claude GitHub App registers its IP ranges, so enabling this setting allows access without manual configuration. To [add the ranges to your allow list manually](https://docs.github.com/en/enterprise-cloud@latest/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/managing-allowed-ip-addresses-for-your-organization#adding-an-allowed-ip-address) instead, or to configure other firewalls, see the [Anthropic API IP addresses](https://platform.claude.com/docs/en/api/ip-addresses).
 
-For self-hosted [GitHub Enterprise Server](https://code.claude.com/docs/en/GitHub Enterprise Server) instances behind a firewall, allowlist the same [Anthropic API IP addresses](https://code.claude.com/docs/en/Anthropic API IP addresses) so Anthropic infrastructure can reach your GHES host to clone repositories and post review comments.
+For self-hosted [GitHub Enterprise Server](/en/github-enterprise-server) instances behind a firewall, allowlist the same [Anthropic API IP addresses](https://platform.claude.com/docs/en/api/ip-addresses) so Anthropic infrastructure can reach your GHES host to clone repositories and post review comments.
 
 ## Additional resources
 
-* [Claude Code settings](https://code.claude.com/docs/en/Claude Code settings)
-* [Environment variables reference](https://code.claude.com/docs/en/Environment variables reference)
-* [Troubleshooting guide](https://code.claude.com/docs/en/Troubleshooting guide)
+* [Claude Code settings](/en/settings)
+* [Environment variables reference](/en/env-vars)
+* [Troubleshooting guide](/en/troubleshooting)

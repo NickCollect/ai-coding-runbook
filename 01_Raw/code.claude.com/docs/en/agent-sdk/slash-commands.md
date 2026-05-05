@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/slash-commands
-fetched_at: 2026-05-04T15:04:01.735549+00:00
+fetched_at: 2026-05-05T19:40:38.989881+00:00
 fetch_method: mintlify_md
 ---
 
@@ -37,11 +37,13 @@ The Claude Agent SDK provides information about available slash commands in the 
   import asyncio
   from claude_agent_sdk import query, ClaudeAgentOptions, SystemMessage
 
+
   async def main():
       async for message in query(prompt="Hello Claude", options=ClaudeAgentOptions(max_turns=1)):
           if isinstance(message, SystemMessage) and message.subtype == "init":
               print("Available slash commands:", message.data["slash_commands"])
               # Example output: ["/compact", "/context", "/usage"]
+
 
   asyncio.run(main())
   ```
@@ -70,11 +72,13 @@ Send slash commands by including them in your prompt string, just like regular t
   import asyncio
   from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage
 
+
   async def main():
       # Send a slash command
       async for message in query(prompt="/compact", options=ClaudeAgentOptions(max_turns=1)):
           if isinstance(message, ResultMessage):
               print("Command executed:", message.result)
+
 
   asyncio.run(main())
   ```
@@ -106,6 +110,7 @@ The `/compact` command reduces the size of your conversation history by summariz
   import asyncio
   from claude_agent_sdk import query, ClaudeAgentOptions, SystemMessage
 
+
   async def main():
       async for message in query(prompt="/compact", options=ClaudeAgentOptions(max_turns=1)):
           if isinstance(message, SystemMessage) and message.subtype == "compact_boundary":
@@ -113,20 +118,21 @@ The `/compact` command reduces the size of your conversation history by summariz
               print("Pre-compaction tokens:", message.data["compact_metadata"]["pre_tokens"])
               print("Trigger:", message.data["compact_metadata"]["trigger"])
 
+
   asyncio.run(main())
   ```
 </CodeGroup>
 
 ### Clearing the conversation
 
-The interactive `/clear` command is not available in the SDK. Each `query()` call already starts a fresh conversation, so to clear context, end the current `query()` and start a new one. The previous conversation stays on disk and can be returned to by passing its session ID to the [`resume` option](https://code.claude.com/docs/en/agent-sdk/`resume` option).
+The interactive `/clear` command is not available in the SDK. Each `query()` call already starts a fresh conversation, so to clear context, end the current `query()` and start a new one. The previous conversation stays on disk and can be returned to by passing its session ID to the [`resume` option](/en/agent-sdk/sessions#resume-by-id).
 
 ## Creating Custom Slash Commands
 
 In addition to using built-in slash commands, you can create your own custom commands that are available through the SDK. Custom commands are defined as markdown files in specific directories, similar to how subagents are configured.
 
 <Note>
-  The `.claude/commands/` directory is the legacy format. The recommended format is `.claude/skills/<name>/SKILL.md`, which supports the same slash-command invocation (`/name`) plus autonomous invocation by Claude. See [Skills](https://code.claude.com/docs/en/agent-sdk/Skills) for the current format. The CLI continues to support both formats, and the examples below remain accurate for `.claude/commands/`.
+  The `.claude/commands/` directory is the legacy format. The recommended format is `.claude/skills/<name>/SKILL.md`, which supports the same slash-command invocation (`/name`) plus autonomous invocation by Claude. See [Skills](/en/agent-sdk/skills) for the current format. The CLI continues to support both formats, and the examples below remain accurate for `.claude/commands/`.
 </Note>
 
 ### File Locations
@@ -208,6 +214,7 @@ Once defined in the filesystem, custom commands are automatically available thro
   import asyncio
   from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, SystemMessage
 
+
   async def main():
       # Use a custom command
       async for message in query(
@@ -224,6 +231,7 @@ Once defined in the filesystem, custom commands are automatically available thro
               # Will include both built-in and custom commands
               print("Available commands:", message.data["slash_commands"])
               # Example: ["/compact", "/context", "/usage", "/refactor", "/security-check"]
+
 
   asyncio.run(main())
   ```
@@ -269,12 +277,14 @@ Use in SDK:
   import asyncio
   from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage
 
+
   async def main():
       # Pass arguments to custom command
       async for message in query(prompt="/fix-issue 123 high", options=ClaudeAgentOptions(max_turns=5)):
           # Command will process with $1="123" and $2="high"
           if isinstance(message, ResultMessage):
               print("Issue fixed:", message.result)
+
 
   asyncio.run(main())
   ```
@@ -414,6 +424,7 @@ Use these commands through the SDK:
   import asyncio
   from claude_agent_sdk import query, ClaudeAgentOptions
 
+
   async def main():
       # Run code review
       async for message in query(prompt="/code-review", options=ClaudeAgentOptions(max_turns=3)):
@@ -425,14 +436,15 @@ Use these commands through the SDK:
           # Handle test results
           pass
 
+
   asyncio.run(main())
   ```
 </CodeGroup>
 
 ## See Also
 
-* [Slash Commands](https://code.claude.com/docs/en/agent-sdk/Slash Commands) - Complete slash command documentation
-* [Subagents in the SDK](https://code.claude.com/docs/en/agent-sdk/Subagents in the SDK) - Similar filesystem-based configuration for subagents
-* [TypeScript SDK reference](https://code.claude.com/docs/en/agent-sdk/TypeScript SDK reference) - Complete API documentation
-* [SDK overview](https://code.claude.com/docs/en/agent-sdk/SDK overview) - General SDK concepts
-* [CLI reference](https://code.claude.com/docs/en/agent-sdk/CLI reference) - Command-line interface
+* [Slash Commands](/en/skills) - Complete slash command documentation
+* [Subagents in the SDK](/en/agent-sdk/subagents) - Similar filesystem-based configuration for subagents
+* [TypeScript SDK reference](/en/agent-sdk/typescript) - Complete API documentation
+* [SDK overview](/en/agent-sdk/overview) - General SDK concepts
+* [CLI reference](/en/cli-reference) - Command-line interface

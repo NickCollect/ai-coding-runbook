@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/communications-kit
-fetched_at: 2026-05-04T15:05:04.513396+00:00
+fetched_at: 2026-05-05T19:40:39.220467+00:00
 fetch_method: mintlify_md
 ---
 
@@ -30,7 +30,7 @@ Work through this checklist before the announcement goes out. Each item closes a
 | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
 | `#claude-code` channel created and linked in the message                                         | Gives questions one place to land                                                   |
 | Install command tested on at least one machine in your environment                               | Catches proxy or firewall issues before everyone hits them at once                  |
-| Security and data-handling link ready ([Data usage](https://code.claude.com/docs/en/Data usage) or your internal equivalent) | "Where does my code go?" will be the first reply                                    |
+| Security and data-handling link ready ([Data usage](/en/data-usage) or your internal equivalent) | "Where does my code go?" will be the first reply                                    |
 | One concrete first task chosen, a real bug or file in your codebase                              | Generic examples don't convert; "fix the flaky test in `auth_test.go`" does         |
 | A named owner for the channel for the first 48 hours                                             | Unanswered launch-day questions kill momentum                                       |
 | A C-suite sponsor lined up to send or co-sign the announcement                                   | Exec-sent launches consistently see higher first-week adoption than admin-sent ones |
@@ -504,12 +504,12 @@ One-line replies for the questions you will be asked most.
 
 | Question                                 | Response                                                                                                                                                                                                                      |
 | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| "Does it work in VS Code?"               | Yes. There is a VS Code extension and a JetBrains plugin with the same features, embedded in your editor. [VS Code →](https://code.claude.com/docs/en/VS Code →)                                                                                            |
-| "Do I have to configure anything first?" | No. Install, then run `claude` in any repo. Run `/init` once and you're set. [Quickstart →](https://code.claude.com/docs/en/Quickstart →)                                                                                                                   |
-| "Where does my code go?"                 | The CLI runs in your terminal and sends context to Anthropic's API for inference, with no third-party servers. Under your Enterprise plan, your code and prompts are not used to train models. [Data usage →](https://code.claude.com/docs/en/Data usage →) |
-| "Can it see my whole repo?"              | It reads what you give it access to. File reads inside your working directory don't prompt; permission prompts gate edits, shell commands, and anything outside that directory. [Permissions →](https://code.claude.com/docs/en/Permissions →)              |
-| "How is this different from Copilot?"    | Copilot autocompletes lines. Claude Code is an agent that reads files, runs commands, and makes multi-file edits. [Overview →](https://code.claude.com/docs/en/Overview →)                                                                                  |
-| "What should I try first?"               | A bug you've been putting off because it's tedious. "The test in \[file] is flaky, figure out why." [Quickstart →](https://code.claude.com/docs/en/Quickstart →)                                                                                            |
+| "Does it work in VS Code?"               | Yes. There is a VS Code extension and a JetBrains plugin with the same features, embedded in your editor. [VS Code →](/en/vs-code)                                                                                            |
+| "Do I have to configure anything first?" | No. Install, then run `claude` in any repo. Run `/init` once and you're set. [Quickstart →](/en/quickstart)                                                                                                                   |
+| "Where does my code go?"                 | The CLI runs in your terminal and sends context to Anthropic's API for inference, with no third-party servers. Under your Enterprise plan, your code and prompts are not used to train models. [Data usage →](/en/data-usage) |
+| "Can it see my whole repo?"              | It reads what you give it access to. File reads inside your working directory don't prompt; permission prompts gate edits, shell commands, and anything outside that directory. [Permissions →](/en/permissions)              |
+| "How is this different from Copilot?"    | Copilot autocompletes lines. Claude Code is an agent that reads files, runs commands, and makes multi-file edits. [Overview →](/en/overview)                                                                                  |
+| "What should I try first?"               | A bug you've been putting off because it's tedious. "The test in \[file] is flaky, figure out why." [Quickstart →](/en/quickstart)                                                                                            |
 
 ### Prompt templates
 
@@ -527,5 +527,5 @@ Share these starter prompts with engineers who have installed but aren't sure wh
 | Debug a stack trace  | "here's the stack trace, find the root cause, don't just paper over it"      |
 
 <Tip>
-  Claude Code ships frequently. Verify version-specific details against the [documentation home page](https://code.claude.com/docs/en/documentation home page) before distributing internally.
+  Claude Code ships frequently. Verify version-specific details against the [documentation home page](/en/overview) before distributing internally.
 </Tip>

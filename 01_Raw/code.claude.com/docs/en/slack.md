@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/slack
-fetched_at: 2026-05-04T15:07:08.060324+00:00
+fetched_at: 2026-05-05T19:40:39.669169+00:00
 fetch_method: mintlify_md
 ---
 
@@ -30,7 +30,7 @@ Before using Claude Code in Slack, ensure you have the following:
 | Requirement            | Details                                                                                           |
 | :--------------------- | :------------------------------------------------------------------------------------------------ |
 | Claude Plan            | Pro, Max, Team, or Enterprise with Claude Code access (premium seats or Chat + Claude Code seats) |
-| Claude Code on the web | Access to [Claude Code on the web](https://code.claude.com/docs/en/Claude Code on the web) must be enabled                    |
+| Claude Code on the web | Access to [Claude Code on the web](/en/claude-code-on-the-web) must be enabled                    |
 | GitHub Account         | Connected to Claude Code on the web with at least one repository authenticated                    |
 | Slack Authentication   | Your Slack account linked to your Claude account via the Claude app                               |
 
@@ -38,7 +38,7 @@ Before using Claude Code in Slack, ensure you have the following:
 
 <Steps>
   <Step title="Install the Claude App in Slack">
-    A workspace administrator must install the Claude app from the Slack App Marketplace. Visit the [Slack App Marketplace](https://code.claude.com/docs/en/Slack App Marketplace) and click "Add to Slack" to begin the installation process.
+    A workspace administrator must install the Claude app from the Slack App Marketplace. Visit the [Slack App Marketplace](https://slack.com/marketplace/A08SF47R6P4) and click "Add to Slack" to begin the installation process.
   </Step>
 
   <Step title="Connect your Claude account">
@@ -53,7 +53,7 @@ Before using Claude Code in Slack, ensure you have the following:
   <Step title="Configure Claude Code on the web">
     Ensure your Claude Code on the web is properly configured:
 
-    * Visit [claude.ai/code](https://code.claude.com/docs/en/claude.ai/code) and sign in with the same account you connected to Slack
+    * Visit [claude.ai/code](https://claude.ai/code) and sign in with the same account you connected to Slack
     * Connect your GitHub account if not already connected
     * Authenticate at least one repository that you want Claude to work with
   </Step>
@@ -165,7 +165,7 @@ This channel-based model allows teams to restrict Claude Code usage to specific 
 **On the web**: The complete Claude Code session with full conversation history, all code changes, file operations, and the ability to continue the session or create pull requests.
 
 For Enterprise and Team accounts, sessions created from Claude in Slack are
-automatically visible to the organization. See [Claude Code on the Web sharing](https://code.claude.com/docs/en/Claude Code on the Web sharing)
+automatically visible to the organization. See [Claude Code on the Web sharing](/en/claude-code-on-the-web#share-sessions)
 for more details.
 
 ## Best practices
@@ -193,7 +193,7 @@ for more details.
 
 ### Repository not showing
 
-1. Connect the repository in Claude Code on the web at [claude.ai/code](https://code.claude.com/docs/en/claude.ai/code)
+1. Connect the repository in Claude Code on the web at [claude.ai/code](https://claude.ai/code)
 2. Verify your GitHub permissions for that repository
 3. Try disconnecting and reconnecting your GitHub account
 
@@ -211,7 +211,7 @@ for more details.
 ### Session expiration
 
 1. Sessions remain accessible in your Claude Code history on the web
-2. You can continue or reference past sessions from [claude.ai/code](https://code.claude.com/docs/en/claude.ai/code)
+2. You can continue or reference past sessions from [claude.ai/code](https://claude.ai/code)
 
 ## Current limitations
 

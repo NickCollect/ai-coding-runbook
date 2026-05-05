@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/quickstart
-fetched_at: 2026-05-04T15:06:47.409386+00:00
+fetched_at: 2026-05-05T19:40:39.602079+00:00
 fetch_method: mintlify_md
 ---
 
@@ -543,12 +543,12 @@ This quickstart guide will have you using AI-powered coding assistance in a few 
 Make sure you have:
 
 * A terminal or command prompt open
-  * If you've never used the terminal before, check out the [terminal guide](https://code.claude.com/docs/en/terminal guide)
+  * If you've never used the terminal before, check out the [terminal guide](/en/terminal-guide)
 * A code project to work with
-* A [Claude subscription](https://code.claude.com/docs/en/Claude subscription) (Pro, Max, Team, or Enterprise), [Claude Console](https://code.claude.com/docs/en/Claude Console) account, or access through a [supported cloud provider](https://code.claude.com/docs/en/supported cloud provider)
+* A [Claude subscription](https://claude.com/pricing?utm_source=claude_code\&utm_medium=docs\&utm_content=quickstart_prereq) (Pro, Max, Team, or Enterprise), [Claude Console](https://console.anthropic.com/) account, or access through a [supported cloud provider](/en/third-party-integrations)
 
 <Note>
-  This guide covers the terminal CLI. Claude Code is also available on the [web](https://code.claude.com/docs/en/web), as a [desktop app](https://code.claude.com/docs/en/desktop app), in [VS Code](https://code.claude.com/docs/en/VS Code) and [JetBrains IDEs](https://code.claude.com/docs/en/JetBrains IDEs), in [Slack](https://code.claude.com/docs/en/Slack), and in CI/CD with [GitHub Actions](https://code.claude.com/docs/en/GitHub Actions) and [GitLab](https://code.claude.com/docs/en/GitLab). See [all interfaces](https://code.claude.com/docs/en/all interfaces).
+  This guide covers the terminal CLI. Claude Code is also available on the [web](https://claude.ai/code), as a [desktop app](/en/desktop), in [VS Code](/en/vs-code) and [JetBrains IDEs](/en/jetbrains), in [Slack](/en/slack), and in CI/CD with [GitHub Actions](/en/github-actions) and [GitLab](/en/gitlab-ci-cd). See [all interfaces](/en/overview#use-claude-code-everywhere).
 </Note>
 
 ## Step 1: Install Claude Code
@@ -577,7 +577,7 @@ To install Claude Code, use one of the following methods:
 
     If you see `The token '&&' is not a valid statement separator`, you're in PowerShell, not CMD. If you see `'irm' is not recognized as an internal or external command`, you're in CMD, not PowerShell. Your prompt shows `PS C:\` when you're in PowerShell and `C:\` without the `PS` when you're in CMD.
 
-    [Git for Windows](https://code.claude.com/docs/en/Git for Windows) is recommended on native Windows so Claude Code can use the Bash tool. If Git for Windows is not installed, Claude Code uses PowerShell as the shell tool instead. WSL setups do not need Git for Windows.
+    [Git for Windows](https://git-scm.com/downloads/win) is recommended on native Windows so Claude Code can use the Bash tool. If Git for Windows is not installed, Claude Code uses PowerShell as the shell tool instead. WSL setups do not need Git for Windows.
 
     <Info>
       Native installations automatically update in the background to keep you on the latest version.
@@ -607,7 +607,7 @@ To install Claude Code, use one of the following methods:
   </Tab>
 </Tabs>
 
-You can also install with [apt, dnf, or apk](https://code.claude.com/docs/en/apt, dnf, or apk) on Debian, Fedora, RHEL, and Alpine.
+You can also install with [apt, dnf, or apk](/en/setup#install-with-linux-package-managers) on Debian, Fedora, RHEL, and Alpine.
 
 ## Step 2: Log in to your account
 
@@ -625,9 +625,9 @@ claude
 
 You can log in using any of these account types:
 
-* [Claude Pro, Max, Team, or Enterprise](https://code.claude.com/docs/en/Claude Pro, Max, Team, or Enterprise) (recommended)
-* [Claude Console](https://code.claude.com/docs/en/Claude Console) (API access with pre-paid credits). On first login, a "Claude Code" workspace is automatically created in the Console for centralized cost tracking.
-* [Amazon Bedrock, Google Vertex AI, or Microsoft Foundry](https://code.claude.com/docs/en/Amazon Bedrock, Google Vertex AI, or Microsoft Foundry) (enterprise cloud providers)
+* [Claude Pro, Max, Team, or Enterprise](https://claude.com/pricing?utm_source=claude_code\&utm_medium=docs\&utm_content=quickstart_login) (recommended)
+* [Claude Console](https://console.anthropic.com/) (API access with pre-paid credits). On first login, a "Claude Code" workspace is automatically created in the Console for centralized cost tracking.
+* [Amazon Bedrock, Google Vertex AI, or Microsoft Foundry](/en/third-party-integrations) (enterprise cloud providers)
 
 Once logged in, your credentials are stored and you won't need to log in again. To switch accounts later, use the `/login` command.
 
@@ -643,7 +643,7 @@ claude
 You'll see the Claude Code welcome screen with your session information, recent conversations, and latest updates. Type `/help` for available commands or `/resume` to continue a previous conversation.
 
 <Tip>
-  After logging in (Step 2), your credentials are stored on your system. Learn more in [Credential Management](https://code.claude.com/docs/en/Credential Management).
+  After logging in (Step 2), your credentials are stored on your system. Learn more in [Credential Management](/en/authentication#credential-management).
 </Tip>
 
 ## Step 4: Ask your first question
@@ -801,11 +801,11 @@ Here are the most important commands for daily use:
 | `/help`             | Show available commands                                | `/help`                             |
 | `exit` or Ctrl+D    | Exit Claude Code                                       | `exit`                              |
 
-See the [CLI reference](https://code.claude.com/docs/en/CLI reference) for a complete list of commands.
+See the [CLI reference](/en/cli-reference) for a complete list of commands.
 
 ## Pro tips for beginners
 
-For more, see [best practices](https://code.claude.com/docs/en/best practices) and [common workflows](https://code.claude.com/docs/en/common workflows).
+For more, see [best practices](/en/best-practices) and [common workflows](/en/common-workflows).
 
 <AccordionGroup>
   <Accordion title="Be specific with your requests">
@@ -870,4 +870,4 @@ Now that you've learned the basics, explore more advanced features:
 
 * **In Claude Code**: Type `/help` or ask "how do I..."
 * **Documentation**: You're here! Browse other guides
-* **Community**: Join our [Discord](https://code.claude.com/docs/en/Discord) for tips and support
+* **Community**: Join our [Discord](https://www.anthropic.com/discord) for tips and support

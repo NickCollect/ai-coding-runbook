@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/statusline
-fetched_at: 2026-05-04T15:07:10.587756+00:00
+fetched_at: 2026-05-05T19:40:39.698544+00:00
 fetch_method: mintlify_md
 ---
 
@@ -21,17 +21,17 @@ Status lines are useful when you:
 * Work across multiple sessions and need to distinguish them
 * Want git branch and status always visible
 
-Here's an example of a [multi-line status line](https://code.claude.com/docs/en/multi-line status line) that displays git info on the first line and a color-coded context bar on the second.
+Here's an example of a [multi-line status line](#display-multiple-lines) that displays git info on the first line and a color-coded context bar on the second.
 
 <Frame>
   <img src="https://mintcdn.com/claude-code/nibzesLaJVh4ydOq/images/statusline-multiline.png?fit=max&auto=format&n=nibzesLaJVh4ydOq&q=85&s=60f11387658acc9ff75158ae85f2ac87" alt="A multi-line status line showing model name, directory, git branch on the first line, and a context usage progress bar with cost and duration on the second line" width="776" height="212" data-path="images/statusline-multiline.png" />
 </Frame>
 
-This page walks through [setting up a basic status line](https://code.claude.com/docs/en/setting up a basic status line), explains [how the data flows](https://code.claude.com/docs/en/how the data flows) from Claude Code to your script, lists [all the fields you can display](https://code.claude.com/docs/en/all the fields you can display), and provides [ready-to-use examples](https://code.claude.com/docs/en/ready-to-use examples) for common patterns like git status, cost tracking, and progress bars.
+This page walks through [setting up a basic status line](#set-up-a-status-line), explains [how the data flows](#how-status-lines-work) from Claude Code to your script, lists [all the fields you can display](#available-data), and provides [ready-to-use examples](#examples) for common patterns like git status, cost tracking, and progress bars.
 
 ## Set up a status line
 
-Use the [`/statusline` command](https://code.claude.com/docs/en/`/statusline` command) to have Claude Code generate a script for you, or [manually create a script](https://code.claude.com/docs/en/manually create a script) and add it to your settings.
+Use the [`/statusline` command](#use-the-%2Fstatusline-command) to have Claude Code generate a script for you, or [manually create a script](#manually-configure-a-status-line) and add it to your settings.
 
 ### Use the /statusline command
 
@@ -43,7 +43,7 @@ The `/statusline` command accepts natural language instructions describing what 
 
 ### Manually configure a status line
 
-Add a `statusLine` field to your user settings (`~/.claude/settings.json`, where `~` is your home directory) or [project settings](https://code.claude.com/docs/en/project settings). Set `type` to `"command"` and point `command` to a script path or an inline shell command. For a full walkthrough of creating a script, see [Build a status line step by step](https://code.claude.com/docs/en/Build a status line step by step).
+Add a `statusLine` field to your user settings (`~/.claude/settings.json`, where `~` is your home directory) or [project settings](/en/settings#settings-files). Set `type` to `"command"` and point `command` to a script path or an inline shell command. For a full walkthrough of creating a script, see [Build a status line step by step](#build-a-status-line-step-by-step).
 
 ```json theme={null}
 {
@@ -68,9 +68,9 @@ The `command` field runs in a shell, so you can also use inline commands instead
 
 The optional `padding` field adds extra horizontal spacing (in characters) to the status line content. Defaults to `0`. This padding is in addition to the interface's built-in spacing, so it controls relative indentation rather than absolute distance from the terminal edge.
 
-The optional `refreshInterval` field re-runs your command every N seconds in addition to the [event-driven updates](https://code.claude.com/docs/en/event-driven updates). The minimum is `1`. Set this when your status line shows time-based data such as a clock, or when background subagents change git state while the main session is idle. Leave it unset to run only on events.
+The optional `refreshInterval` field re-runs your command every N seconds in addition to the [event-driven updates](#how-status-lines-work). The minimum is `1`. Set this when your status line shows time-based data such as a clock, or when background subagents change git state while the main session is idle. Leave it unset to run only on events.
 
-The optional `hideVimModeIndicator` field suppresses the built-in `-- INSERT --` text below the prompt. Set this to `true` when your script renders [`vim.mode`](https://code.claude.com/docs/en/`vim.mode`) itself, so the mode is not shown twice.
+The optional `hideVimModeIndicator` field suppresses the built-in `-- INSERT --` text below the prompt. Set this to `true` when your script renders [`vim.mode`](#available-data) itself, so the mode is not shown twice.
 
 ### Disable the status line
 
@@ -80,9 +80,9 @@ Run `/statusline` and ask it to remove or clear your status line (e.g., `/status
 
 This walkthrough shows what's happening under the hood by manually creating a status line that displays the current model, working directory, and context window usage percentage.
 
-<Note>Running [`/statusline`](https://code.claude.com/docs/en/`/statusline`) with a description of what you want configures all of this for you automatically.</Note>
+<Note>Running [`/statusline`](#use-the-%2Fstatusline-command) with a description of what you want configures all of this for you automatically.</Note>
 
-These examples use Bash scripts, which work on macOS and Linux. On Windows, see [Windows configuration](https://code.claude.com/docs/en/Windows configuration) for PowerShell and Git Bash examples.
+These examples use Bash scripts, which work on macOS and Linux. On Windows, see [Windows configuration](#windows-configuration) for PowerShell and Git Bash examples.
 
 <Frame>
   <img src="https://mintcdn.com/claude-code/nibzesLaJVh4ydOq/images/statusline-quickstart.png?fit=max&auto=format&n=nibzesLaJVh4ydOq&q=85&s=696445e59ca0059213250651ad23db6b" alt="A status line showing model name, directory, and context percentage" width="726" height="164" data-path="images/statusline-quickstart.png" />
@@ -90,7 +90,7 @@ These examples use Bash scripts, which work on macOS and Linux. On Windows, see 
 
 <Steps>
   <Step title="Create a script that reads JSON and prints output">
-    Claude Code sends JSON data to your script via stdin. This script uses [`jq`](https://code.claude.com/docs/en/`jq`), a command-line JSON parser you may need to install, to extract the model name, directory, and context percentage, then prints a formatted line.
+    Claude Code sends JSON data to your script via stdin. This script uses [`jq`](https://jqlang.github.io/jq/), a command-line JSON parser you may need to install, to extract the model name, directory, and context percentage, then prints a formatted line.
 
     Save this to `~/.claude/statusline.sh` (where `~` is your home directory, such as `/Users/username` on macOS or `/home/username` on Linux):
 
@@ -136,19 +136,19 @@ These examples use Bash scripts, which work on macOS and Linux. On Windows, see 
 
 ## How status lines work
 
-Claude Code runs your script and pipes [JSON session data](https://code.claude.com/docs/en/JSON session data) to it via stdin. Your script reads the JSON, extracts what it needs, and prints text to stdout. Claude Code displays whatever your script prints.
+Claude Code runs your script and pipes [JSON session data](#available-data) to it via stdin. Your script reads the JSON, extracts what it needs, and prints text to stdout. Claude Code displays whatever your script prints.
 
 **When it updates**
 
-Your script runs after each new assistant message, when the permission mode changes, or when vim mode toggles. Updates are debounced at 300ms, meaning rapid changes batch together and your script runs once things settle. If a new update triggers while your script is still running, the in-flight execution is cancelled. If you edit your script, the changes won't appear until your next interaction with Claude Code triggers an update.
+Your script runs after each new assistant message, after `/compact` finishes, when the permission mode changes, or when vim mode toggles. Updates are debounced at 300ms, meaning rapid changes batch together and your script runs once things settle. If a new update triggers while your script is still running, the in-flight execution is cancelled. If you edit your script, the changes won't appear until your next interaction with Claude Code triggers an update.
 
-These triggers can go quiet when the main session is idle, for example while a coordinator waits on background subagents. To keep time-based or externally-sourced segments current during idle periods, set [`refreshInterval`](https://code.claude.com/docs/en/`refreshInterval`) to also re-run the command on a fixed timer.
+These triggers can go quiet when the main session is idle, for example while a coordinator waits on background subagents. To keep time-based or externally-sourced segments current during idle periods, set [`refreshInterval`](#manually-configure-a-status-line) to also re-run the command on a fixed timer.
 
 **What your script can output**
 
-* **Multiple lines**: each `echo` or `print` statement displays as a separate row. See the [multi-line example](https://code.claude.com/docs/en/multi-line example).
-* **Colors**: use [ANSI escape codes](https://code.claude.com/docs/en/ANSI escape codes) like `\033[32m` for green (terminal must support them). See the [git status example](https://code.claude.com/docs/en/32m` for green (terminal must support them). See the [git status example).
-* **Links**: use [OSC 8 escape sequences](https://code.claude.com/docs/en/OSC 8 escape sequences) to make text clickable (Cmd+click on macOS, Ctrl+click on Windows/Linux). Requires a terminal that supports hyperlinks like iTerm2, Kitty, or WezTerm. See the [clickable links example](https://code.claude.com/docs/en/clickable links example).
+* **Multiple lines**: each `echo` or `print` statement displays as a separate row. See the [multi-line example](#display-multiple-lines).
+* **Colors**: use [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code#Colors) like `\033[32m` for green (terminal must support them). See the [git status example](#git-status-with-colors).
+* **Links**: use [OSC 8 escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code#OSC) to make text clickable (Cmd+click on macOS, Ctrl+click on Windows/Linux). Requires a terminal that supports hyperlinks like iTerm2, Kitty, or WezTerm. See the [clickable links example](#clickable-links).
 
 <Note>The status line runs locally and does not consume API tokens. It temporarily hides during certain UI interactions, including autocomplete suggestions, the help menu, and permission prompts.</Note>
 
@@ -171,7 +171,7 @@ Claude Code sends the following JSON fields to your script via stdin:
 | `context_window.context_window_size`                                             | Maximum context window size in tokens. 200000 by default, or 1000000 for models with extended context.                                                                                                                                     |
 | `context_window.used_percentage`                                                 | Pre-calculated percentage of context window used                                                                                                                                                                                           |
 | `context_window.remaining_percentage`                                            | Pre-calculated percentage of context window remaining                                                                                                                                                                                      |
-| `context_window.current_usage`                                                   | Token counts from the last API call, described in [context window fields](https://code.claude.com/docs/en/context window fields)                                                                                                                                          |
+| `context_window.current_usage`                                                   | Token counts from the last API call, described in [context window fields](#context-window-fields)                                                                                                                                          |
 | `exceeds_200k_tokens`                                                            | Whether the total token count (input, cache, and output tokens combined) from the most recent API response exceeds 200k. This is a fixed threshold regardless of actual context window size.                                               |
 | `effort.level`                                                                   | Current reasoning effort (`low`, `medium`, `high`, `xhigh`, or `max`). Reflects the live session value, including mid-session `/effort` changes. Absent when the current model does not support the effort parameter                       |
 | `thinking.enabled`                                                               | Whether extended thinking is enabled for the session                                                                                                                                                                                       |
@@ -182,7 +182,7 @@ Claude Code sends the following JSON fields to your script via stdin:
 | `transcript_path`                                                                | Path to conversation transcript file                                                                                                                                                                                                       |
 | `version`                                                                        | Claude Code version                                                                                                                                                                                                                        |
 | `output_style.name`                                                              | Name of the current output style                                                                                                                                                                                                           |
-| `vim.mode`                                                                       | Current vim mode (`NORMAL`, `INSERT`, `VISUAL`, or `VISUAL LINE`) when [vim mode](https://code.claude.com/docs/en/vim mode) is enabled                                                                                                         |
+| `vim.mode`                                                                       | Current vim mode (`NORMAL`, `INSERT`, `VISUAL`, or `VISUAL LINE`) when [vim mode](/en/interactive-mode#vim-editor-mode) is enabled                                                                                                         |
 | `agent.name`                                                                     | Agent name when running with the `--agent` flag or agent settings configured                                                                                                                                                               |
 | `worktree.name`                                                                  | Name of the active worktree. Present only during `--worktree` sessions                                                                                                                                                                     |
 | `worktree.path`                                                                  | Absolute path to the worktree directory                                                                                                                                                                                                    |
@@ -278,7 +278,7 @@ Claude Code sends the following JSON fields to your script via stdin:
 
   **Fields that may be `null`**:
 
-  * `context_window.current_usage`: `null` before the first API call in a session
+  * `context_window.current_usage`: `null` before the first API call in a session, and again after `/compact` until the next API call repopulates it
   * `context_window.used_percentage`, `context_window.remaining_percentage`: may be `null` early in the session
 
   Handle missing fields with conditional access and null values with fallback defaults in your scripts.
@@ -302,7 +302,7 @@ The `used_percentage` field is calculated from input tokens only: `input_tokens 
 
 If you calculate context percentage manually from `current_usage`, use the same input-only formula to match `used_percentage`.
 
-The `current_usage` object is `null` before the first API call in a session.
+The `current_usage` object is `null` before the first API call in a session, and again immediately after `/compact` until the next API call repopulates it.
 
 ## Examples
 
@@ -310,9 +310,9 @@ These examples show common status line patterns. To use any example:
 
 1. Save the script to a file like `~/.claude/statusline.sh` (or `.py`/`.js`)
 2. Make it executable: `chmod +x ~/.claude/statusline.sh`
-3. Add the path to your [settings](https://code.claude.com/docs/en/settings)
+3. Add the path to your [settings](#manually-configure-a-status-line)
 
-The Bash examples use [`jq`](https://code.claude.com/docs/en/`jq`) to parse JSON. Python and Node.js have built-in JSON parsing.
+The Bash examples use [`jq`](https://jqlang.github.io/jq/) to parse JSON. Python and Node.js have built-in JSON parsing.
 
 ### Context window usage
 
@@ -383,7 +383,7 @@ Display the current model and context window usage with a visual progress bar. E
 
 ### Git status with colors
 
-Show git branch with color-coded indicators for staged and modified files. This script uses [ANSI escape codes](https://code.claude.com/docs/en/ANSI escape codes) for terminal colors: `\033[32m` is green, `\033[33m` is yellow, and `\033[0m` resets to default.
+Show git branch with color-coded indicators for staged and modified files. This script uses [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code#Colors) for terminal colors: `\033[32m` is green, `\033[33m` is yellow, and `\033[0m` resets to default.
 
 <Frame>
   <img src="https://mintcdn.com/claude-code/nibzesLaJVh4ydOq/images/statusline-git-context.png?fit=max&auto=format&n=nibzesLaJVh4ydOq&q=85&s=e656f34f90d1d9a1d0e220988914345f" alt="A status line showing model, directory, git branch, and colored indicators for staged and modified files" width="742" height="178" data-path="images/statusline-git-context.png" />
@@ -973,7 +973,7 @@ Or, when Git Bash is installed, run a Bash script directly:
 
 ## Subagent status lines
 
-The `subagentStatusLine` setting renders a custom row body for each [subagent](https://code.claude.com/docs/en/subagent) shown in the agent panel below the prompt. Use it to replace the default `name · description · token count` row with your own formatting.
+The `subagentStatusLine` setting renders a custom row body for each [subagent](/en/sub-agents) shown in the agent panel below the prompt. Use it to replace the default `name · description · token count` row with your own formatting.
 
 ```json theme={null}
 {
@@ -984,19 +984,19 @@ The `subagentStatusLine` setting renders a custom row body for each [subagent](h
 }
 ```
 
-The command runs once per refresh tick with all visible subagent rows passed as a single JSON object on stdin. The input includes the [base hook fields](https://code.claude.com/docs/en/base hook fields) plus `columns` (the usable row width) and a `tasks` array, where each task has `id`, `name`, `type`, `status`, `description`, `label`, `startTime`, `tokenCount`, `tokenSamples`, and `cwd`.
+The command runs once per refresh tick with all visible subagent rows passed as a single JSON object on stdin. The input includes the [base hook fields](/en/hooks#common-input-fields) plus `columns` (the usable row width) and a `tasks` array, where each task has `id`, `name`, `type`, `status`, `description`, `label`, `startTime`, `tokenCount`, `tokenSamples`, and `cwd`.
 
 Write one JSON line to stdout per row you want to override, in the form `{"id": "<task id>", "content": "<row body>"}`. The `content` string is rendered as-is, including ANSI colors and OSC 8 hyperlinks. Omit a task's `id` to keep the default rendering for that row; emit an empty `content` string to hide it.
 
-The same trust and `disableAllHooks` gates that apply to `statusLine` apply here. Plugins can ship a default `subagentStatusLine` in their [`settings.json`](https://code.claude.com/docs/en/`settings.json`).
+The same trust and `disableAllHooks` gates that apply to `statusLine` apply here. Plugins can ship a default `subagentStatusLine` in their [`settings.json`](/en/plugins-reference#standard-plugin-layout).
 
 ## Tips
 
 * **Test with mock input**: `echo '{"model":{"display_name":"Opus"},"workspace":{"current_dir":"/home/user/project"},"context_window":{"used_percentage":25},"session_id":"test-session-abc"}' | ./statusline.sh`
 * **Keep output short**: the status bar has limited width, so long output may get truncated or wrap awkwardly
-* **Cache slow operations**: your script runs frequently during active sessions, so commands like `git status` can cause lag. See the [caching example](https://code.claude.com/docs/en/caching example) for how to handle this.
+* **Cache slow operations**: your script runs frequently during active sessions, so commands like `git status` can cause lag. See the [caching example](#cache-expensive-operations) for how to handle this.
 
-Community projects like [ccstatusline](https://code.claude.com/docs/en/ccstatusline) and [starship-claude](https://code.claude.com/docs/en/starship-claude) provide pre-built configurations with themes and additional features.
+Community projects like [ccstatusline](https://github.com/sirmalloc/ccstatusline) and [starship-claude](https://github.com/martinemde/starship-claude) provide pre-built configurations with themes and additional features.
 
 ## Troubleshooting
 
