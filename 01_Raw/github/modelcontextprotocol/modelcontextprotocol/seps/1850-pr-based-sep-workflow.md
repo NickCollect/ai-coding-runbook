@@ -41,7 +41,7 @@ A file-based workflow addresses these issues by:
 
 1. **Draft the proposal** in `seps/0000-{slug}.md` using `0000` as a placeholder number
 2. **Open a pull request** containing the draft SEP and any supporting materials
-3. **Request a sponsor** from the Maintainers list; tag potential sponsors from [MAINTAINERS.md](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/MAINTAINERS.md)
+3. **Request a sponsor** from the Maintainers list; tag potential sponsors from [MAINTAINERS.md](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/MAINTAINERS.md)
 4. **After the PR number is known**, amend the commit to rename the file to `{PR-number}-{slug}.md` and update the header (`SEP-{PR-number}` and `PR: #{PR-number}`)
 5. **Wait for sponsor assignment**: Once a sponsor agrees, they will assign themselves and update the status to `Draft`
 

@@ -23,7 +23,7 @@ These always require an issue first:
 - New public APIs or decorators
 - Architectural changes or refactoring
 - Changes that touch multiple modules
-- Features that might require spec changes (these need a [SEP](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/SEP) first)
+- Features that might require spec changes (these need a [SEP](https://github.com/modelcontextprotocol/modelcontextprotocol) first)
 
 Bug fixes for clear, reproducible issues are welcome—but still create an issue to track the fix.
 
@@ -31,9 +31,9 @@ Bug fixes for clear, reproducible issues are welcome—but still create an issue
 
 | Label | For | Description |
 |-------|-----|-------------|
-| [`good first issue`](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/`good first issue`) | Newcomers | Can tackle without deep codebase knowledge |
-| [`help wanted`](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/`help wanted`) | Experienced contributors | Maintainers probably won't get to this |
-| [`ready for work`](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/`ready for work`) | Maintainers | Triaged and ready for a maintainer to pick up |
+| [`good first issue`](https://github.com/modelcontextprotocol/python-sdk/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) | Newcomers | Can tackle without deep codebase knowledge |
+| [`help wanted`](https://github.com/modelcontextprotocol/python-sdk/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) | Experienced contributors | Maintainers probably won't get to this |
+| [`ready for work`](https://github.com/modelcontextprotocol/python-sdk/issues?q=is%3Aopen+is%3Aissue+label%3A%22ready+for+work%22) | Maintainers | Triaged and ready for a maintainer to pick up |
 
 Issues labeled `needs confirmation` or `needs maintainer action` are **not** ready for work—wait for maintainer input first.
 
@@ -42,7 +42,7 @@ Before starting, comment on the issue so we can assign it to you. This prevents 
 ## Development Setup
 
 1. Make sure you have Python 3.10+ installed
-2. Install [uv](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/uv)
+2. Install [uv](https://docs.astral.sh/uv/getting-started/installation/)
 3. Fork the repository
 4. Clone your fork: `git clone https://github.com/YOUR-USERNAME/python-sdk.git`
 5. Install dependencies:
@@ -139,7 +139,7 @@ A few dozen lines can be reviewed in minutes. Hundreds of lines across many file
 
 ## Code of Conduct
 
-Please note that this project is released with a [Code of Conduct](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Code of Conduct). By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 ## License
 

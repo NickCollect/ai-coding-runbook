@@ -14,13 +14,13 @@ We'll build a server that exposes two tools: `get-alerts` and `get-forecast`. Th
 
 MCP servers can provide three main types of capabilities:
 
-1. **[Resources](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Resources)**: File-like data that can be read by clients (like API responses or file contents)
-2. **[Tools](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Tools)**: Functions that can be called by the LLM (with user approval)
-3. **[Prompts](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Prompts)**: Pre-written templates that help users accomplish specific tasks
+1. **[Resources](https://modelcontextprotocol.io/docs/learn/server-concepts#resources)**: File-like data that can be read by clients (like API responses or file contents)
+2. **[Tools](https://modelcontextprotocol.io/docs/learn/server-concepts#tools)**: Functions that can be called by the LLM (with user approval)
+3. **[Prompts](https://modelcontextprotocol.io/docs/learn/server-concepts#prompts)**: Pre-written templates that help users accomplish specific tasks
 
 This tutorial will primarily focus on tools.
 
-Let's get started with building our weather server! [You can find the complete code for what we'll be building here.](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/You can find the complete code for what we'll be building here.)
+Let's get started with building our weather server! [You can find the complete code for what we'll be building here.](https://github.com/modelcontextprotocol/typescript-sdk/tree/main/examples/server-quickstart)
 
 ## Prerequisites
 
@@ -37,11 +37,11 @@ npm --version
 ```
 
 > [!TIP]
-> The MCP SDK also works with **Bun** and **Deno**. This tutorial uses Node.js, but you can substitute `bun` or `deno` commands where appropriate. For HTTP-based servers on Bun or Deno, use `WebStandardStreamableHTTPServerTransport` instead of the Node.js-specific transport — see the [server guide](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/server guide) for details.
+> The MCP SDK also works with **Bun** and **Deno**. This tutorial uses Node.js, but you can substitute `bun` or `deno` commands where appropriate. For HTTP-based servers on Bun or Deno, use `WebStandardStreamableHTTPServerTransport` instead of the Node.js-specific transport — see the [server guide](./server.md) for details.
 
 ## Set up your environment
 
-First, let's install Node.js and npm if you haven't already. You can download them from [nodejs.org](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/nodejs.org).
+First, let's install Node.js and npm if you haven't already. You can download them from [nodejs.org](https://nodejs.org/).
 
 Now, let's create and set up our project:
 
@@ -370,14 +370,14 @@ Let's now test your server from an existing MCP host.
 
 ## Testing your server in VS Code
 
-[VS Code](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/VS Code) with [GitHub Copilot](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/GitHub Copilot) can discover and invoke MCP tools via agent mode. [Copilot Free](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Copilot Free) is sufficient to follow along.
+[VS Code](https://code.visualstudio.com/) with [GitHub Copilot](https://github.com/features/copilot) can discover and invoke MCP tools via agent mode. [Copilot Free](https://github.com/features/copilot/plans) is sufficient to follow along.
 
 > [!NOTE]
-> Servers can connect to any client. We've chosen VS Code here for simplicity, but we also have a guide on [building your own client](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/building your own client) as well as a [list of other clients here](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/list of other clients here).
+> Servers can connect to any client. We've chosen VS Code here for simplicity, but we also have a guide on [building your own client](./client-quickstart.md) as well as a [list of other clients here](https://modelcontextprotocol.io/clients).
 
 ### Prerequisites
 
-1. Install [VS Code](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/VS Code) (version 1.99 or later).
+1. Install [VS Code](https://code.visualstudio.com/) (version 1.99 or later).
 2. Install the **GitHub Copilot** extension from the VS Code Extensions marketplace.
 3. Sign in to your GitHub account when prompted.
 
@@ -471,6 +471,6 @@ This isn't an error - it just means there are no current weather alerts for that
 
 Now that your server is running locally, here are some ways to go further:
 
-- [**Server guide**](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/**Server guide**) — Add resources, prompts, logging, error handling, and remote transports to your server.
-- [**Example servers**](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/**Example servers**) — Browse runnable examples covering OAuth, streaming, sessions, and more.
-- [**FAQ**](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/**FAQ**) — Troubleshoot common errors (Zod version conflicts, transport issues, etc.).
+- [**Server guide**](./server.md) — Add resources, prompts, logging, error handling, and remote transports to your server.
+- [**Example servers**](https://github.com/modelcontextprotocol/typescript-sdk/tree/main/examples/server) — Browse runnable examples covering OAuth, streaming, sessions, and more.
+- [**FAQ**](./faq.md) — Troubleshoot common errors (Zod version conflicts, transport issues, etc.).

@@ -12,7 +12,7 @@ PR: https://github.com/modelcontextprotocol/modelcontextprotocol/pull/1350
 
 _A short (\~200 word) description of the technical issue being addressed._
 
-In [SEP-994](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/SEP-994), we introduced a notion of “Working Groups” and “Interest Groups” that facilitate MCP sub-communities for discussion and collaboration. This SEP aims to formally define those two terms: what they are meant to achieve, how groups can be created, how they are governed, and how they can be retired.
+In [SEP-994](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/1002), we introduced a notion of “Working Groups” and “Interest Groups” that facilitate MCP sub-communities for discussion and collaboration. This SEP aims to formally define those two terms: what they are meant to achieve, how groups can be created, how they are governed, and how they can be retired.
 
 Interest Groups work to define _problems_ that MCP should solve by facilitating _discussions_, while Working Groups push forward specific _solutions_ by collaboratively producing _deliverables_ (in the form of SEPs or community-owned implementations of the specification). Interest Group input is a welcome (but not required) justification for creation of a Working Group. Interest Group or Working Group input is collectively a welcome (but not required) input into a SEP.
 
@@ -22,8 +22,8 @@ _The motivation should clearly explain why the existing protocol specification i
 
 The community has already been self-organizing into several disparate systems for these collaborative groups:
 
-- The Steering group has had a long-standing practice of managing a handful of collaborative groups through Discord channels (e.g. security, auth, agents). See [bottom of MAINTAINERS.md](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/bottom of MAINTAINERS.md).
-- The “CWG Discord” has had a [semi-formal process](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/semi-formal process) for pushing equivalent grassroots initiatives, mostly in pursuit of creating artifacts for SEP consideration (e.g. hosting, UI, tool-interfaces, search-tools)
+- The Steering group has had a long-standing practice of managing a handful of collaborative groups through Discord channels (e.g. security, auth, agents). See [bottom of MAINTAINERS.md](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/MAINTAINERS.md).
+- The “CWG Discord” has had a [semi-formal process](https://github.com/modelcontextprotocol-community/working-groups) for pushing equivalent grassroots initiatives, mostly in pursuit of creating artifacts for SEP consideration (e.g. hosting, UI, tool-interfaces, search-tools)
 
 With SEP-994 resulting in the merging of the Discord communities, we have a need to:
 
@@ -115,7 +115,7 @@ There is no requirement to be part of an IG to start a WG, or even to start a SE
 
 ### WG/IG Facilitators
 
-A “Facilitator” role in a WG or IG does _not_ result in a [maintainership role](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/maintainership role) across the MCP organization. It is an informal role into which anyone can self-nominate, responsible for helping shepherd discussions and collaboration within the group.
+A “Facilitator” role in a WG or IG does _not_ result in a [maintainership role](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/MAINTAINERS.md) across the MCP organization. It is an informal role into which anyone can self-nominate, responsible for helping shepherd discussions and collaboration within the group.
 
 Core Maintainers reserve the right to modify the list of Facilitators and Maintainers for any WG/IG at any time.
 
@@ -127,7 +127,7 @@ _The rationale explains why particular design decisions were made. It should des
 
 The design above comes from experience in facilitating the creation of \+ observing the behavior of informal “Community Working Groups” in the CWG Discord, and leading one of / participating in / observing the “Steering Committee Working Groups”. While the Steering WG’s were usually informally created by Lead Maintainers, the CWG Discord had a lightweight WG-creation process that involved similar steps to the proposal above (community members would propose WG’s in \#working-group-ideation, and moderators would create channels from that collaboration).
 
-As precedent, the WG and IG concepts here are similar to W3C’s notion of [Working Groups](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/Working Groups) and [Interest Groups](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/Interest Groups).
+As precedent, the WG and IG concepts here are similar to W3C’s notion of [Working Groups](https://www.w3.org/groups/wg/) and [Interest Groups](https://www.w3.org/groups/ig/).
 
 ### Considerations
 

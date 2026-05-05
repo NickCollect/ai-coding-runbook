@@ -13,7 +13,7 @@ tags:
   - tools
 ---
 
-Many of us are still exploring the nooks and crannies of MCP and learning how to best use the building blocks of the protocol to enhance agents and applications. Some features, like [Prompts](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Prompts), are frequently implemented and used within the MCP ecosystem. Others may appear a bit more obscure but have a lot of influence on how well an agent can interact with an MCP server. **Server instructions** fall in the latter category.
+Many of us are still exploring the nooks and crannies of MCP and learning how to best use the building blocks of the protocol to enhance agents and applications. Some features, like [Prompts](https://blog.modelcontextprotocol.io/posts/2025-07-29-prompts-for-automation/), are frequently implemented and used within the MCP ecosystem. Others may appear a bit more obscure but have a lot of influence on how well an agent can interact with an MCP server. **Server instructions** fall in the latter category.
 
 ## The Problem
 
@@ -44,7 +44,7 @@ It's like having a pile of notes on my garage workbench, each trying to explain 
 
 Similarly, for global instructions that you want the LLM to follow, it's best to inject them into the model's system prompt instead of including them in multiple tool descriptions or standalone prompts.
 
-This is where **server instructions** come in. [Server instructions](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Server instructions) give the server a way to inject information that the LLM should always read in order to understand how to use the server - independent of individual prompts, tools, or messages.
+This is where **server instructions** come in. [Server instructions](https://modelcontextprotocol.io/specification/draft/schema#initializeresult) give the server a way to inject information that the LLM should always read in order to understand how to use the server - independent of individual prompts, tools, or messages.
 
 ### A Note on Implementation Variability
 
@@ -56,7 +56,7 @@ We will get deeper into both of these considerations with concrete examples.
 
 ## Real-World Example: Optimizing GitHub PR Reviews
 
-I tested server instructions using the official [GitHub MCP server](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/GitHub MCP server) to see if they could improve how models handle complex workflows. Even with advanced features like toolsets, models may struggle to consistently follow optimal multi-step patterns without explicit guidance.
+I tested server instructions using the official [GitHub MCP server](https://github.com/github/github-mcp-server) to see if they could improve how models handle complex workflows. Even with advanced features like toolsets, models may struggle to consistently follow optimal multi-step patterns without explicit guidance.
 
 ### The Problem: Detailed Pull Request Reviews
 
@@ -93,7 +93,7 @@ I used the following tool usage pattern to differentiate between successful and 
 - **Success:** `create_pending_pull_request_review` → `add_comment_to_pending_review` → `submit_pending_pull_request_review`
 - **Failure:** Single-step `create_and_submit_pull_request_review` OR no review tools used. (Sometimes the model decided just to summarize feedback but didn't leave any comments on the PR.)
 
-You can find more setup details and raw data from this evaluation in [my sample MCP Server Instructions repo](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/my sample MCP Server Instructions repo).
+You can find more setup details and raw data from this evaluation in [my sample MCP Server Instructions repo](https://github.com/olaservo/mcp-server-instructions-demo).
 
 For this sample of chat sessions, I got the following results:
 
@@ -105,7 +105,7 @@ For this sample of chat sessions, I got the following results:
 
 These results suggest that while some models naturally gravitate toward optimal patterns, others benefit significantly from explicit guidance. This variability makes server instructions particularly valuable for ensuring consistent behavior across different models and client implementations.
 
-You can check out the latest server instructions in the [GitHub MCP server repo](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/GitHub MCP server repo), which now includes this PR workflow as well as other hints for effective tool usage.
+You can check out the latest server instructions in the [GitHub MCP server repo](https://github.com/github/github-mcp-server/blob/main/pkg/github/instructions.go), which now includes this PR workflow as well as other hints for effective tool usage.
 
 ## Implementing Server Instructions: General Tips For Server Developers
 
@@ -196,11 +196,11 @@ Additional suggestions for implementing instructions in clients:
 
 ## Currently Supported Host Applications
 
-For a complete list of host applications that support server instructions, refer to the [Clients](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Clients) page in the MCP documentation.
+For a complete list of host applications that support server instructions, refer to the [Clients](https://modelcontextprotocol.io/clients) page in the MCP documentation.
 
-For a basic demo of server instructions in action, you can use the [Everything reference server](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Everything reference server) to confirm that your client supports this feature:
+For a basic demo of server instructions in action, you can use the [Everything reference server](https://github.com/modelcontextprotocol/servers/tree/main/src/everything) to confirm that your client supports this feature:
 
-1. Install the Everything Server in your host. The link above includes instructions on how to do this in a few popular applications. In the example below, we're using [Claude Code](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Claude Code).
+1. Install the Everything Server in your host. The link above includes instructions on how to do this in a few popular applications. In the example below, we're using [Claude Code](https://docs.anthropic.com/en/docs/claude-code/mcp).
 2. Once you've confirmed that the server is connected, ask the model: `does the everything server tools have any special 
 instructions?`
 3. If the model can see your instructions, you should get a response like the one below:
@@ -212,21 +212,21 @@ instructions?`
 
 ## Wrapping Up
 
-Clear and actionable server instructions are a key tool in your MCP toolkit, offering a simple but effective way to enhance how LLMs interact with your server. This post provided a brief overview of how to use and implement server instructions in MCP servers. We encourage you to share your examples, insights, and questions [in our discussions](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/in our discussions).
+Clear and actionable server instructions are a key tool in your MCP toolkit, offering a simple but effective way to enhance how LLMs interact with your server. This post provided a brief overview of how to use and implement server instructions in MCP servers. We encourage you to share your examples, insights, and questions [in our discussions](https://github.com/modelcontextprotocol/modelcontextprotocol/discussions).
 
 ## Acknowledgements
 
 Parts of this blog post were sourced from discussions with the MCP community, contributors, and maintainers including:
 
-- [@akolotov](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/@akolotov)
-- [@cliffhall](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/@cliffhall)
-- [@connor4312](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/@connor4312)
-- [@digitarald](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/@digitarald)
-- [@dsp-ant](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/@dsp-ant)
-- [@evalstate](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/@evalstate)
-- [@ivan-saorin](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/@ivan-saorin)
-- [@jegelstaff](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/@jegelstaff)
-- [@localden](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/@localden)
-- [@PederHP](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/@PederHP)
-- [@tadasant](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/@tadasant)
-- [@toby](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/@toby)
+- [@akolotov](https://github.com/akolotov)
+- [@cliffhall](https://github.com/cliffhall)
+- [@connor4312](https://github.com/connor4312)
+- [@digitarald](https://github.com/digitarald)
+- [@dsp-ant](https://github.com/dsp-ant)
+- [@evalstate](https://github.com/evalstate)
+- [@ivan-saorin](https://github.com/ivan-saorin)
+- [@jegelstaff](https://github.com/jegelstaff)
+- [@localden](https://github.com/localden)
+- [@PederHP](https://github.com/PederHP)
+- [@tadasant](https://github.com/tadasant)
+- [@toby](https://github.com/toby)

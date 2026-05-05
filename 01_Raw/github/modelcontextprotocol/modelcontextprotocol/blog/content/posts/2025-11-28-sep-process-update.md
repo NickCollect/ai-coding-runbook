@@ -11,29 +11,29 @@ tags:
   - sep
 ---
 
-We're updating how Specification Enhancement Proposals (SEPs) are submitted and managed. Starting today, SEPs will be created as pull requests to the [`seps/` directory](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/`seps/` directory) instead of GitHub issues.
+We're updating how Specification Enhancement Proposals (SEPs) are submitted and managed. Starting today, SEPs will be created as pull requests to the [`seps/` directory](https://github.com/modelcontextprotocol/modelcontextprotocol/tree/main/seps) instead of GitHub issues.
 
 ## Why the Change?
 
-When we [introduced SEPs in July](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/introduced SEPs in July), we chose GitHub Issues as our starting point. Issues are familiar to developers, low-friction, and got us up and running quickly. But as more proposals have come through the process, we've identified some key pain points:
+When we [introduced SEPs in July](https://blog.modelcontextprotocol.io/posts/2025-07-31-governance-for-mcp/), we chose GitHub Issues as our starting point. Issues are familiar to developers, low-friction, and got us up and running quickly. But as more proposals have come through the process, we've identified some key pain points:
 
 **Scattered discussions.** With issues, the proposal text lives in the issue body while implementation details often end up in a separate PR. This splits the conversation and makes it harder to follow the full history of a proposal. This also introduces two distinct numbers referencing the same SEP, making it harder to consistently track and manage changes.
 
 **No version history.** Issues don't have the same revision tracking that files in a repository do. When a SEP evolves through review, it's difficult to see what changed and when.
 
-The new PR-based approach, inspired by [Python's PEP process](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Python's PEP process), solves both problems.
+The new PR-based approach, inspired by [Python's PEP process](https://peps.python.org/), solves both problems.
 
 ## How It Works
 
 The new workflow will be familiar if you've submitted pull requests on GitHub before:
 
-1. **Draft your SEP** as a markdown file named `0000-your-feature.md` using the [SEP template](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/SEP template)
+1. **Draft your SEP** as a markdown file named `0000-your-feature.md` using the [SEP template](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/seps/TEMPLATE.md)
 
 2. **Create a pull request** adding your SEP to the `seps/` directory
 
 3. **Update the SEP number** once your PR is created, rename the file using the PR number (e.g., PR #1850 becomes `1850-your-feature.md`) and push a new commit with the rename
 
-4. **Find a sponsor** from our [maintainer list](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/maintainer list) to shepherd your proposal
+4. **Find a sponsor** from our [maintainer list](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/MAINTAINERS.md) to shepherd your proposal
 
 5. **Iterate** on feedback directly in the PR
 
@@ -51,9 +51,9 @@ Ready to propose a change to MCP? Here's what you need to know:
 
 **For new SEPs:**
 
-- Read the latest [SEP Guidelines](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/SEP Guidelines)
-- Use the [SEP template](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/SEP template) to create your proposal
-- Browse existing SEPs in the [`seps/` directory](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/`seps/` directory) for examples
+- Read the latest [SEP Guidelines](https://modelcontextprotocol.io/community/sep-guidelines)
+- Use the [SEP template](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/seps/README.md#sep-file-structure) to create your proposal
+- Browse existing SEPs in the [`seps/` directory](https://github.com/modelcontextprotocol/modelcontextprotocol/tree/main/seps) for examples
 - Follow the workflow described above
 
 **For existing SEPs:**
@@ -67,7 +67,7 @@ If you have a SEP submitted as a GitHub issue, you can continue with your curren
 
 The new PR gets a fresh SEP number and gives your proposal proper version control and centralized discussion. Any valuable context from the original issue discussion should be summarized in the new SEP or referenced via links.
 
-As always, if you're unsure whether your idea warrants a SEP, start a conversation on [Discord](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Discord) or [GitHub Discussions](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/GitHub Discussions). We're happy to help you figure out the right path forward.
+As always, if you're unsure whether your idea warrants a SEP, start a conversation on [Discord](https://modelcontextprotocol.io/community/communication#discord) or [GitHub Discussions](https://github.com/modelcontextprotocol/modelcontextprotocol/discussions). We're happy to help you figure out the right path forward.
 
 ## Thank You
 

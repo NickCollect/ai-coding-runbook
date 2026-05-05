@@ -8,9 +8,9 @@
 
 ## Abstract
 
-This proposal brings the MCP spec's handling of OAuth 2.0 Protected Resource Metadata in line with [RFC 9728](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/RFC 9728).
+This proposal brings the MCP spec's handling of OAuth 2.0 Protected Resource Metadata in line with [RFC 9728](https://datatracker.ietf.org/doc/html/rfc9728#name-obtaining-protected-resourc).
 
-Currently, the MCP spec requires the use of the HTTP WWW-Authenticate header when returning a 401 Unauthorized to indicate the location of the protected resource metadata. However, [RFC 9728, Section 5](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/RFC 9728, Section 5) states:
+Currently, the MCP spec requires the use of the HTTP WWW-Authenticate header when returning a 401 Unauthorized to indicate the location of the protected resource metadata. However, [RFC 9728, Section 5](https://datatracker.ietf.org/doc/html/rfc9728#section-5) states:
 
 “A protected resource MAY use the WWW-Authenticate HTTP response header field, as discussed in RFC 9110, to return a URL to its protected resource metadata to the client.”
 

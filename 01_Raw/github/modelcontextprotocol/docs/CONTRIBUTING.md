@@ -7,7 +7,7 @@ Thank you for your interest in contributing to the Model Context Protocol (MCP) 
 1. Install the required tools:
    - Node.js
    - Git
-   - [Mintlify CLI](https://raw.githubusercontent.com/modelcontextprotocol/docs/main/Mintlify CLI): `npm i -g mintlify`
+   - [Mintlify CLI](https://www.npmjs.com/package/mintlify): `npm i -g mintlify`
 2. Fork and clone the repository
 3. Create a new branch for your changes
 4. Run `mintlify dev` to preview changes locally
@@ -40,10 +40,10 @@ You can contribute to:
 
 ## Need Help?
 
-- Check existing documentation at [modelcontextprotocol.io](https://raw.githubusercontent.com/modelcontextprotocol/docs/main/modelcontextprotocol.io)
-- [Open an issue](https://raw.githubusercontent.com/modelcontextprotocol/docs/main/Open an issue) for bugs or concerns
-- Join our [community discussions](https://raw.githubusercontent.com/modelcontextprotocol/docs/main/community discussions)
+- Check existing documentation at [modelcontextprotocol.io](https://modelcontextprotocol.io)
+- [Open an issue](https://github.com/modelcontextprotocol/docs/issues) for bugs or concerns
+- Join our [community discussions](https://github.com/modelcontextprotocol/docs/discussions)
 
 ## Code of Conduct
 
-Please note that this project follows our [Code of Conduct](https://raw.githubusercontent.com/modelcontextprotocol/docs/main/Code of Conduct). By participating, you agree to uphold these guidelines.
+Please note that this project follows our [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you agree to uphold these guidelines.

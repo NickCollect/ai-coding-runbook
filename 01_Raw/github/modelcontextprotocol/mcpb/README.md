@@ -10,7 +10,7 @@
 
 MCP Bundles (`.mcpb`) are zip archives containing a local MCP server and a `manifest.json` that describes the server and its capabilities. The format is spiritually similar to Chrome extensions (`.crx`) or VS Code extensions (`.vsix`), enabling end users to install local MCP servers with a single click.
 
-This repository provides three components: The bundle specification in [MANIFEST.md](https://raw.githubusercontent.com/modelcontextprotocol/mcpb/main/MANIFEST.md), a CLI tool for creating bundles (see [CLI.md](https://raw.githubusercontent.com/modelcontextprotocol/mcpb/main/CLI.md)), and the code used by Claude for macOS and Windows to load and verify MCPB bundles ([src/index.ts](https://raw.githubusercontent.com/modelcontextprotocol/mcpb/main/src/index.ts)).
+This repository provides three components: The bundle specification in [MANIFEST.md](MANIFEST.md), a CLI tool for creating bundles (see [CLI.md](CLI.md)), and the code used by Claude for macOS and Windows to load and verify MCPB bundles ([src/index.ts](src/index.ts)).
 
 - For developers of local MCP servers, we aim to make distribution and installation of said servers convenient
 - For developers of apps supporting local MCP servers, we aim to make it easy to add support for MCPB bundles
@@ -31,7 +31,7 @@ npm install -g @anthropic-ai/mcpb
 2. Run `mcpb pack` to create a `mcpb` file.
 3. Now, any app implementing support for MCPB can run your local MCP server. As an example, open the file with Claude for macOS and Windows to show an installation dialog.
 
-You can find the full spec for the `manifest.json` and all its mandatory and optional fields in [MANIFEST.md](https://raw.githubusercontent.com/modelcontextprotocol/mcpb/main/MANIFEST.md). Examples for bundles can be found in [examples](https://raw.githubusercontent.com/modelcontextprotocol/mcpb/main/examples).
+You can find the full spec for the `manifest.json` and all its mandatory and optional fields in [MANIFEST.md](MANIFEST.md). Examples for bundles can be found in [examples](./examples/).
 
 ## Prompt Template for AI Tools
 
@@ -141,7 +141,7 @@ bundle.mcpb (ZIP file)
 
 # Contributing
 
-We welcome contributions! Please see our [Contributing Guide](https://raw.githubusercontent.com/modelcontextprotocol/mcpb/main/Contributing Guide) for details.
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
 ## Development Setup
 
@@ -169,4 +169,4 @@ yarn test
 
 # License
 
-This project is licensed under the Apache License 2.0 for new contributions, with existing code under MIT - see the [LICENSE](https://raw.githubusercontent.com/modelcontextprotocol/mcpb/main/LICENSE) file for details.
+This project is licensed under the Apache License 2.0 for new contributions, with existing code under MIT - see the [LICENSE](LICENSE) file for details.

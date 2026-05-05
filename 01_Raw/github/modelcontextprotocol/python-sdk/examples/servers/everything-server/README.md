@@ -4,7 +4,7 @@ A comprehensive MCP server implementing all protocol features for conformance te
 
 ## Overview
 
-The Everything Server is a reference implementation that demonstrates all features of the Model Context Protocol (MCP). It is designed to be used with the [MCP Conformance Test Framework](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/servers/everything-server/MCP Conformance Test Framework) to validate MCP client and server implementations.
+The Everything Server is a reference implementation that demonstrates all features of the Model Context Protocol (MCP). It is designed to be used with the [MCP Conformance Test Framework](https://github.com/modelcontextprotocol/conformance) to validate MCP client and server implementations.
 
 ## Installation
 
@@ -39,4 +39,4 @@ The server will be available at: `http://localhost:3001/mcp`
 
 ## Running Conformance Tests
 
-See the [MCP Conformance Test Framework](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/servers/everything-server/MCP Conformance Test Framework) for instructions on running conformance tests against this server.
+See the [MCP Conformance Test Framework](https://github.com/modelcontextprotocol/conformance) for instructions on running conformance tests against this server.

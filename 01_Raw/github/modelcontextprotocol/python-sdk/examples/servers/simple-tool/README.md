@@ -26,6 +26,7 @@ import asyncio
 from mcp.client.session import ClientSession
 from mcp.client.stdio import StdioServerParameters, stdio_client
 
+
 async def main():
     async with stdio_client(
         StdioServerParameters(command="uv", args=["run", "mcp-simple-tool"])
@@ -40,6 +41,7 @@ async def main():
             # Call the fetch tool
             result = await session.call_tool("fetch", {"url": "https://example.com"})
             print(result)
+
 
 asyncio.run(main())
 

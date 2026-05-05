@@ -81,7 +81,7 @@ uv run ruff check .
 
 **Selective:** New features outside a server's core purpose or highly opinionated additions.
 
-**Not accepted:** New server implementations (use the [MCP Server Registry](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/MCP Server Registry)), README server listing changes.
+**Not accepted:** New server implementations (use the [MCP Server Registry](https://github.com/modelcontextprotocol/registry)), README server listing changes.
 
 ## CI/CD Pipeline
 
@@ -101,4 +101,4 @@ The repo is configured with an MCP docs server (`.mcp.json`) pointing to `https:
 - Each server registers capabilities via `registerTools(server)`, `registerResources(server)`, `registerPrompts(server)` functions
 - Tool annotations: set `readOnlyHint`, `idempotentHint`, `destructiveHint` per MCP spec
 - Transport support: stdio (default), SSE (deprecated), Streamable HTTP
-- All PRs are reviewed against the [PR template](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/PR template) checklist -- ensure MCP docs are read, security best practices followed, and changes tested with an LLM client
+- All PRs are reviewed against the [PR template](.github/pull_request_template.md) checklist -- ensure MCP docs are read, security best practices followed, and changes tested with an LLM client

@@ -285,10 +285,12 @@ from mcp.client.session import ClientSession
 from mcp.client.stdio import stdio_client
 from mcp.types import CallToolResult, ElicitRequestParams, ElicitResult
 
+
 async def elicitation_callback(context, params: ElicitRequestParams) -> ElicitResult:
     print(f"\n[Elicitation] {params.message}")
     response = input("Confirm? (y/n): ")
     return ElicitResult(action="accept", content={"confirm": response.lower() == "y"})
+
 
 async def main():
     async with stdio_client(command="python", args=["server.py"]) as (read, write):
@@ -325,6 +327,7 @@ async def main():
                 final = await session.experimental.get_task_result(task_id, CallToolResult)
                 print(f"Result: {final.content[0].text}")
 
+
 if __name__ == "__main__":
     anyio.run(main)
 ```
@@ -354,5 +357,5 @@ except Exception as e:
 
 ## Next Steps
 
-- [Server Implementation](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/docs/experimental/Server Implementation) - Build task-supporting servers
-- [Tasks Overview](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/docs/experimental/Tasks Overview) - Review lifecycle and concepts
+- [Server Implementation](tasks-server.md) - Build task-supporting servers
+- [Tasks Overview](tasks.md) - Review lifecycle and concepts

@@ -10,7 +10,7 @@
 
 ## Abstract
 
-This SEP proposes adopting OAuth Client ID Metadata Documents as specified in [draft-parecki-oauth-client-id-metadata-document-03](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/draft-parecki-oauth-client-id-metadata-document-03) as an additional client registration mechanism for the Model Context Protocol (MCP). This approach allows OAuth clients to use HTTPS URLs as client identifiers, where the URL points to a JSON document containing client metadata. This specifically addresses the common MCP scenario where servers and clients have no pre-existing relationship, enabling servers to trust clients without pre-coordination while maintaining full control over access policies.
+This SEP proposes adopting OAuth Client ID Metadata Documents as specified in [draft-parecki-oauth-client-id-metadata-document-03](https://datatracker.ietf.org/doc/draft-parecki-oauth-client-id-metadata-document/) as an additional client registration mechanism for the Model Context Protocol (MCP). This approach allows OAuth clients to use HTTPS URLs as client identifiers, where the URL points to a JSON document containing client metadata. This specifically addresses the common MCP scenario where servers and clients have no pre-existing relationship, enabling servers to trust clients without pre-coordination while maintaining full control over access policies.
 
 ## Motivation
 
@@ -76,6 +76,7 @@ We will primarily rely on the text in the linked RFC, aiming not to repeat most 
       Client->>Server: Authorization Request<br/>client_id=https://app.example.com/oauth/metadata.json<br/>redirect_uri=http://localhost:3000/callback
 
       Note over Server: Authenticates user
+
 
       Note over Server: Detects URL-formatted client_id
 
@@ -249,7 +250,7 @@ This proposal is fully backward compatible:
 
 ## Prototype Implementation
 
-A prototype implementation is available [here](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/here) demonstrating:
+A prototype implementation is available [here](https://github.com/modelcontextprotocol/typescript-sdk/pull/839) demonstrating:
 
 1. Client-side metadata document hosting
 2. Server-side metadata fetching and validation
@@ -270,8 +271,8 @@ A prototype implementation is available [here](https://raw.githubusercontent.com
 
 ## References
 
-- [draft-parecki-oauth-client-id-metadata-document-03](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/draft-parecki-oauth-client-id-metadata-document-03)
-- [OAuth 2.1](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/OAuth 2.1)
-- [RFC 7591 - OAuth 2.0 Dynamic Client Registration](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/RFC 7591 - OAuth 2.0 Dynamic Client Registration)
-- [MCP Specification - Authorization](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/MCP Specification - Authorization)
-- [Evolving OAuth Client Registration in the Model Context Protocol](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/Evolving OAuth Client Registration in the Model Context Protocol)
+- [draft-parecki-oauth-client-id-metadata-document-03](https://www.ietf.org/archive/id/draft-parecki-oauth-client-id-metadata-document-03.txt)
+- [OAuth 2.1](https://datatracker.ietf.org/doc/draft-ietf-oauth-v2-1/)
+- [RFC 7591 - OAuth 2.0 Dynamic Client Registration](https://www.rfc-editor.org/rfc/rfc7591.html)
+- [MCP Specification - Authorization](https://modelcontextprotocol.org/docs/spec/authorization)
+- [Evolving OAuth Client Registration in the Model Context Protocol](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/1027/)

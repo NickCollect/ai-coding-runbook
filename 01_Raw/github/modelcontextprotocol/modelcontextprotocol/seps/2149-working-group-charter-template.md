@@ -11,7 +11,7 @@
 
 This SEP establishes governance rules and a standardized charter template for MCP's two collaborative group types: **Working Groups (WGs)** and **Interest Groups (IGs)**. Working Groups produce concrete deliverables — SEPs, implementations, and code. Interest Groups facilitate discussion and knowledge-sharing to identify problems and gather requirements. The governance rules define the requirements that all groups must follow, with lighter expectations for IGs where appropriate. The charter template defines the structure each group uses to document its specific mission, scope, leadership, and work. Together they address community feedback about unclear authority delegation and inconsistent processes across groups.
 
-This SEP is a companion to SEP-2148: MCP Contributor Ladder, which defines the org-wide contributor roles (Member, Maintainer, Core Maintainer, Lead Maintainer) referenced throughout this document. Group leadership roles intersect with the contributor ladder: WG Leads and IG Facilitators must hold at least Member status on the ladder, and group participation is a recognized pathway to ladder advancement.
+This SEP is a companion to [SEP-2148: MCP Contributor Ladder](./2148-contributor-ladder.md), which defines the org-wide contributor roles (Member, Maintainer, Core Maintainer, Lead Maintainer) referenced throughout this document. Group leadership roles intersect with the contributor ladder: WG Leads and IG Facilitators must hold at least Member status on the ladder, and group participation is a recognized pathway to ladder advancement.
 
 ## Motivation
 
@@ -55,7 +55,7 @@ Each group has one or more **Leads** (referred to as **Facilitators** for Intere
 
 **Requirements for all Leads and Facilitators:**
 
-- Hold at least Member status on the [MCP Contributor Ladder](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/MCP Contributor Ladder)
+- Hold at least Member status on the [MCP Contributor Ladder](./2148-contributor-ladder.md)
 - Demonstrated sustained engagement with the group's scope area
 - Ability to facilitate across organizational boundaries
 - Commitment to running the group's operations
@@ -78,7 +78,7 @@ Each group has one or more **Leads** (referred to as **Facilitators** for Intere
 
 **WG Leads are additionally responsible for:**
 
-- Drive proposals through the [SEP](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/SEP) (Specification Enhancement Proposal) process to resolution
+- Drive proposals through the [SEP](https://modelcontextprotocol.io/community/sep-guidelines) (Specification Enhancement Proposal) process to resolution
 - Triage SEPs in the WG's scope area, including closing SEPs that do not fit the roadmap (with documented rationale; authors may appeal to Core Maintainers)
 - Escalate blocked decisions to Core Maintainers with clear context
 - Maintain the working group's roadmap
@@ -87,7 +87,7 @@ Each group has one or more **Leads** (referred to as **Facilitators** for Intere
 
 #### 1.3 Participation Levels
 
-All groups use the following participation tiers. Note that **WG Member** is a group-specific participation level distinct from the org-wide **Member** role defined in the [Contributor Ladder](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/Contributor Ladder) — an individual may be a WG Member in a specific group without holding org-wide Member status, and vice versa.
+All groups use the following participation tiers. Note that **WG Member** is a group-specific participation level distinct from the org-wide **Member** role defined in the [Contributor Ladder](./2148-contributor-ladder.md) — an individual may be a WG Member in a specific group without holding org-wide Member status, and vice versa.
 
 | Level                | Description                                       | Privileges                                                         |
 | -------------------- | ------------------------------------------------- | ------------------------------------------------------------------ |
@@ -171,8 +171,8 @@ Leads determine meeting frequency, format, and duration based on the group's cur
 Regardless of format or frequency, all group meetings must:
 
 - Be open to all community participants (no closed or organization-internal meetings)
-- Be published on [meet.modelcontextprotocol.io](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/meet.modelcontextprotocol.io) at least 7 days in advance
-- Have agendas published and publicly available. The agenda or a link to the agenda should be published as a [GitHub Discussion in the Meeting Notes category](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/GitHub Discussion in the Meeting Notes category)
+- Be published on [meet.modelcontextprotocol.io](https://meet.modelcontextprotocol.io) at least 7 days in advance
+- Have agendas published and publicly available. The agenda or a link to the agenda should be published as a [GitHub Discussion in the Meeting Notes category](https://github.com/modelcontextprotocol/modelcontextprotocol/discussions/)
 - Have notes published within 48 hours to the same discussion
 
 Leads should actively involve WG Members and Participants in operational duties such as preparing agendas, taking meeting notes, and facilitating discussions.
@@ -186,7 +186,7 @@ All groups use the following channels:
 | Discord `#{name}-wg` or `#{name}-ig` | Quick questions, coordination  | Best effort          |
 | GitHub Discussions                   | Long-form technical discussion | Weekly triage        |
 
-In addition to Discord, groups can establish a discussion category in the [GitHub Discussions](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/GitHub Discussions). Leads will be granted the appropriate roles to manage and moderate discussions.
+In addition to Discord, groups can establish a discussion category in the [GitHub Discussions](https://github.com/modelcontextprotocol/modelcontextprotocol/discussions/). Leads will be granted the appropriate roles to manage and moderate discussions.
 
 #### 1.8 Reporting
 
@@ -198,7 +198,7 @@ In addition to Discord, groups can establish a discussion category in the [GitHu
 - Upcoming priorities
 - Resource needs
 
-The quarterly updates are provided as a document posted in the [GitHub Discussions](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/GitHub Discussions) category of the Working Group. They are optionally discussed
+The quarterly updates are provided as a document posted in the [GitHub Discussions](https://github.com/modelcontextprotocol/modelcontextprotocol/discussions/) category of the Working Group. They are optionally discussed
 with the Core Maintainers in a core maintainer meeting.
 
 **Interest Groups** do not have formal reporting requirements but should keep their charter and member list current.
@@ -214,7 +214,7 @@ with the Core Maintainers in a core maintainer meeting.
 
 **Interest Group Formation:**
 
-- Fill out the creation template in the `#wg-ig-group-creation` channel on [Discord](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/Discord)
+- Fill out the creation template in the `#wg-ig-group-creation` channel on [Discord](https://discord.gg/6CSzBmMkjX)
 - A Core Maintainer reviews the proposal; the IG and its Facilitator(s) must be sponsored by at least two Core Maintainers or one Lead Maintainer
 - Once sponsored, the Facilitator(s) organize the IG and create a charter
 
@@ -235,7 +235,7 @@ Changes to a group's charter (WG or IG) require:
 
 ### Part 2: Charter Template
 
-Every MCP Working Group and Interest Group must maintain a charter document following this template structure. Charters are stored as MDX files at `docs/community/<group-name>/charter.mdx` in the modelcontextprotocol repository and added to the `docs/docs.json` file. A copyable version of this template is published at [`docs/community/charter-template.mdx`](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/`docs/community/charter-template.mdx`).
+Every MCP Working Group and Interest Group must maintain a charter document following this template structure. Charters are stored as MDX files at `docs/community/<group-name>/charter.mdx` in the modelcontextprotocol repository and added to the `docs/docs.json` file. A copyable version of this template is published at [`docs/community/charter-template.mdx`](/community/charter-template).
 
 The charter captures information specific to each group. Governance rules from Part 1 apply automatically and do not need to be repeated in the charter. Sections marked **(WG only)** are required for Working Groups but optional for Interest Groups.
 

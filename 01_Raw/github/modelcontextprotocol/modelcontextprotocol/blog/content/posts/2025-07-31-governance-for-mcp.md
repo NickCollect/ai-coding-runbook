@@ -16,10 +16,10 @@ Today, we're taking a big step to ensure MCP can continue to grow and thrive. We
 
 ## Specification Enhancement Proposals (SEPs)
 
-One of the first major changes we're introducing is [Specification Enhancement Proposals](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Specification Enhancement Proposals) (SEPs). This will be the primary mechanism for anyone to propose changes to MCP. SEPs are inspired by other projects, like [Python PEPs](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Python PEPs) or [Rust RFCs](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Rust RFCs). We aim to make the process for suggesting changes to Model Context Protocol as straightforward as possible:
+One of the first major changes we're introducing is [Specification Enhancement Proposals](https://modelcontextprotocol.io/community/sep-guidelines) (SEPs). This will be the primary mechanism for anyone to propose changes to MCP. SEPs are inspired by other projects, like [Python PEPs](https://peps.python.org/) or [Rust RFCs](https://github.com/rust-lang/rfcs). We aim to make the process for suggesting changes to Model Context Protocol as straightforward as possible:
 
-1. Following the [SEP guidelines](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/SEP guidelines), submit a proposal as [a GitHub issue](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/a GitHub issue) to start the conversation.
-2. Our maintainers and core maintainers regularly review proposals and tag SEPs for review and sponsorship. You can also reach out and collaborate with contributing folks on [Discord](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Discord) or [GitHub](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/GitHub). Refer to [`MAINTAINERS.md`](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/`MAINTAINERS.md`) for a list of currently active maintainers and their focus areas.
+1. Following the [SEP guidelines](https://modelcontextprotocol.io/community/sep-guidelines), submit a proposal as [a GitHub issue](https://github.com/modelcontextprotocol/modelcontextprotocol/issues) to start the conversation.
+2. Our maintainers and core maintainers regularly review proposals and tag SEPs for review and sponsorship. You can also reach out and collaborate with contributing folks on [Discord](https://discord.gg/6CSzBmMkjX) or [GitHub](https://github.com/modelcontextprotocol/modelcontextprotocol). Refer to [`MAINTAINERS.md`](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/MAINTAINERS.md) for a list of currently active maintainers and their focus areas.
 3. Work with the sponsor and the MCP community to move your proposal through draft, review, and implementation stages.
 
 SEPs provide a clear, documented path for evolving the protocol, ensuring that every major change is well-vetted by the community.
@@ -32,7 +32,7 @@ The new model also establishes three types of leadership roles, ensuring both fo
 - **Core Maintainers** guide the overall direction of the project and the evolution of the MCP specification.
 - **Lead Maintainers** serve as the final decision-makers and ensure the project's long-term health.
 
-All maintainers form the **MCP steering group**. To ensure a structured and timely review of incoming proposals, our core and lead maintainers will meet bi-weekly to review submitted [SEPs](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/SEPs). Meeting notes and decisions will always be public. For example the [notes from the core maintainer meeting on July 23rd, 2025](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/notes from the core maintainer meeting on July 23rd, 2025).
+All maintainers form the **MCP steering group**. To ensure a structured and timely review of incoming proposals, our core and lead maintainers will meet bi-weekly to review submitted [SEPs](#specification-enhancement-proposals-seps). Meeting notes and decisions will always be public. For example the [notes from the core maintainer meeting on July 23rd, 2025](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1061).
 
 ## Get Involved
 
@@ -40,14 +40,14 @@ We need your help to build the future of MCP, and everyone is welcome here. Whet
 
 Many of our maintainers began with a single small contribution—sometimes just fixing a typo or asking a thoughtful question. Every journey starts somewhere, and we're excited to help you take your first step.
 
-- **New Contributors**: Unsure where to begin? Start by helping with documentation, fixing bugs, or building out examples. Every contribution matters, and we're here to support you. Check out issues tagged with [`good first issue`](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/`good first issue`) - they're perfect for getting started, and you'll find friendly faces ready to help.
+- **New Contributors**: Unsure where to begin? Start by helping with documentation, fixing bugs, or building out examples. Every contribution matters, and we're here to support you. Check out issues tagged with [`good first issue`](https://github.com/modelcontextprotocol/modelcontextprotocol/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22good%20first%20issue%22) - they're perfect for getting started, and you'll find friendly faces ready to help.
 - **SDK Developers**: Have a favorite programming language? As MCP grows, we need your expertise to build and maintain the protocol SDKs. Your work could empower entire new communities to use MCP.
-- **Documentation Writers**: Clear, comprehensive [documentation](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/documentation) is what turns a good project into a great one. If you love explaining things or making guides, your contributions will help others succeed.
+- **Documentation Writers**: Clear, comprehensive [documentation](https://modelcontextprotocol.io/introduction) is what turns a good project into a great one. If you love explaining things or making guides, your contributions will help others succeed.
 - **Future Maintainers**: We believe in growing our team from within. The path to becoming a maintainer starts with consistent, quality contributions and a commitment to the project's success. Imagine yourself guiding new contributors and shaping the future of MCP.
 
-No matter your background or experience, you belong here. Join our [Discord](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Discord) to connect with other contributors, ask questions, and find mentorship. Whether you're fixing a typo or proposing a major change to the protocol, your voice is valued and your efforts make a difference.
+No matter your background or experience, you belong here. Join our [Discord](https://discord.gg/6CSzBmMkjX) to connect with other contributors, ask questions, and find mentorship. Whether you're fixing a typo or proposing a major change to the protocol, your voice is valued and your efforts make a difference.
 
-For all the details, please see our full [governance documentation](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/governance documentation).
+For all the details, please see our full [governance documentation](https://modelcontextprotocol.io/community/governance).
 
 ## Thank You
 

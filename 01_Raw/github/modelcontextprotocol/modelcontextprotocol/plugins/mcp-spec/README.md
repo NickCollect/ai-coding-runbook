@@ -22,10 +22,10 @@ Search across MCP GitHub discussions, issues, and pull requests to find relevant
 
 **Sources searched:**
 
-- [Org-level Discussions](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/plugins/mcp-spec/Org-level Discussions)
-- [Spec-level Discussions](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/plugins/mcp-spec/Spec-level Discussions)
-- [Spec-level Issues](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/plugins/mcp-spec/Spec-level Issues)
-- [Spec-level Pull Requests](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/plugins/mcp-spec/Spec-level Pull Requests)
+- [Org-level Discussions](https://github.com/orgs/modelcontextprotocol/discussions)
+- [Spec-level Discussions](https://github.com/modelcontextprotocol/modelcontextprotocol/discussions)
+- [Spec-level Issues](https://github.com/modelcontextprotocol/modelcontextprotocol/issues)
+- [Spec-level Pull Requests](https://github.com/modelcontextprotocol/modelcontextprotocol/pulls)
 
 **Example:**
 
@@ -37,7 +37,7 @@ Search across MCP GitHub discussions, issues, and pull requests to find relevant
 
 ### `/draft-sep <idea>`
 
-Research and draft a Specification Enhancement Proposal that conforms to the [SEP governance process](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/plugins/mcp-spec/SEP governance process). Gates on whether the idea is SEP-worthy, interviews the author, checks existing spec coverage and prior art, then fills the template's required and optional sections and writes `seps/0000-{slug}.md`. Optionally opens a draft PR, backfills the SEP number, and runs `npm run generate:seps` and `npm run format:docs` so CI stays green.
+Research and draft a Specification Enhancement Proposal that conforms to the [SEP governance process](https://modelcontextprotocol.io/community/sep-guidelines). Gates on whether the idea is SEP-worthy, interviews the author, checks existing spec coverage and prior art, then fills the template's required and optional sections and writes `seps/0000-{slug}.md`. Optionally opens a draft PR, backfills the SEP number, and runs `npm run generate:seps` and `npm run format:docs` so CI stays green.
 
 **Prerequisite:** Run from a local clone of this repository or your fork of it (the skill reads `seps/TEMPLATE.md` and writes into `seps/`).
 

@@ -270,7 +270,7 @@ Provide localized strings without bloating the manifest by pointing to external 
 
 - `resources` must include a `${locale}` placeholder. Clients resolve it relative to the server install directory.
   - This property is optional, and its default value is **`mcpb-resources/${locale}.json`**.
-- `default_locale` must be a valid [BCP 47](https://raw.githubusercontent.com/modelcontextprotocol/mcpb/main/BCP 47) identifier such as `en-US` or `zh-Hans`.
+- `default_locale` must be a valid [BCP 47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) identifier such as `en-US` or `zh-Hans`.
   - This property is optional, and its default value is `en-US`.
 - Values for the default locale stay in the main manifest; localized files only need to contain overrides.
 

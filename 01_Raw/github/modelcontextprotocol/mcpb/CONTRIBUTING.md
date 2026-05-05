@@ -16,7 +16,7 @@ Thank you for your interest in contributing to MCPB! We welcome contributions fr
 2. Make your changes
 3. Run linting: `yarn lint`
 4. Run tests to ensure everything passes: `yarn test`
-5. Commit your changes with a clear, descriptive commit message (all commits must be signed - see [Commit Signing](https://raw.githubusercontent.com/modelcontextprotocol/mcpb/main/Commit Signing))
+5. Commit your changes with a clear, descriptive commit message (all commits must be signed - see [Commit Signing](#commit-signing))
 6. Push to your fork and submit a pull request
 
 ## Code Standards
@@ -30,7 +30,7 @@ Thank you for your interest in contributing to MCPB! We welcome contributions fr
 
 **All commits must be signed.** This helps verify the authenticity of contributions.
 
-To set up commit signing, see [GitHub's documentation on commit signature verification](https://raw.githubusercontent.com/modelcontextprotocol/mcpb/main/GitHub's documentation on commit signature verification).
+To set up commit signing, see [GitHub's documentation on commit signature verification](https://docs.github.com/en/authentication/managing-commit-signature-verification).
 
 ## Pull Request Process
 

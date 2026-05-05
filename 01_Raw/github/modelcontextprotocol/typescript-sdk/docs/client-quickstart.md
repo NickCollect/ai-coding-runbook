@@ -6,9 +6,9 @@ title: Client Quickstart
 
 In this tutorial, we'll build an LLM-powered chatbot that connects to an MCP server, discovers its tools, and uses Claude to call them.
 
-Before you begin, it helps to have gone through the [server quickstart](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/server quickstart) so you understand how clients and servers communicate.
+Before you begin, it helps to have gone through the [server quickstart](./server-quickstart.md) so you understand how clients and servers communicate.
 
-[You can find the complete code for this tutorial here.](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/You can find the complete code for this tutorial here.)
+[You can find the complete code for this tutorial here.](https://github.com/modelcontextprotocol/typescript-sdk/tree/main/examples/client-quickstart)
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ Before starting, ensure your system meets these requirements:
 
 - Node.js 20 or higher installed (or **Bun** / **Deno** — the SDK supports all three runtimes)
 - Latest version of `npm` installed
-- An Anthropic API key from the [Anthropic Console](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Anthropic Console)
+- An Anthropic API key from the [Anthropic Console](https://console.anthropic.com/settings/keys)
 
 > [!TIP]
 > This tutorial uses Node.js and npm, but you can substitute `bun` or `deno` commands where appropriate. For example, use `bun add` instead of `npm install`, or run the client with `bun run` / `deno run`.
@@ -419,6 +419,6 @@ If you see:
 
 Now that you have a working client, here are some ways to go further:
 
-- [**Client guide**](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/**Client guide**) — Add OAuth, middleware, sampling, and more to your client.
-- [**Example clients**](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/**Example clients**) — Browse runnable client examples.
-- [**FAQ**](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/**FAQ**) — Troubleshoot common errors.
+- [**Client guide**](./client.md) — Add OAuth, middleware, sampling, and more to your client.
+- [**Example clients**](https://github.com/modelcontextprotocol/typescript-sdk/tree/main/examples/client) — Browse runnable client examples.
+- [**FAQ**](./faq.md) — Troubleshoot common errors.

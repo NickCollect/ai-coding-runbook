@@ -6,7 +6,7 @@
 
 Support Standard Schema for tool and prompt schemas
 
-Tool and prompt registration now accepts any schema library that implements the [Standard Schema spec](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/.changeset/Standard Schema spec): Zod v4, Valibot, ArkType, and others. `RegisteredTool.inputSchema`, `RegisteredTool.outputSchema`, and `RegisteredPrompt.argsSchema` now use `StandardSchemaWithJSON` (requires both `~standard.validate` and `~standard.jsonSchema`) instead of the Zod-specific `AnySchema` type.
+Tool and prompt registration now accepts any schema library that implements the [Standard Schema spec](https://standardschema.dev/): Zod v4, Valibot, ArkType, and others. `RegisteredTool.inputSchema`, `RegisteredTool.outputSchema`, and `RegisteredPrompt.argsSchema` now use `StandardSchemaWithJSON` (requires both `~standard.validate` and `~standard.jsonSchema`) instead of the Zod-specific `AnySchema` type.
 
 **Zod v4 schemas continue to work unchanged** — Zod v4 implements the required interfaces natively.
 

@@ -11,7 +11,7 @@
 
 This SEP establishes a formal contributor ladder for the Model Context Protocol project, defining clear roles, responsibilities, and advancement criteria from first-time contributor through Core Maintainer. The ladder provides transparent pathways for community members to understand how they can grow their involvement and influence within the project.
 
-This SEP is a companion to SEP-2149: MCP Group Governance and Charter Template, which defines how Working Groups and Interest Groups operate. The two SEPs intersect: WG/IG leadership requires Member status on this ladder, and group participation is a recognized pathway to ladder advancement.
+This SEP is a companion to [SEP-2149: MCP Group Governance and Charter Template](./2149-working-group-charter-template.md), which defines how Working Groups and Interest Groups operate. The two SEPs intersect: WG/IG leadership requires Member status on this ladder, and group participation is a recognized pathway to ladder advancement.
 
 ## Motivation
 
@@ -44,12 +44,12 @@ The contributor ladder operates under these principles:
 
 | Role                                             | Summary                                       | Key Privileges                                                            | Minimum Timeline                                      |
 | ------------------------------------------------ | --------------------------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------------- |
-| [**Contributor**](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/**Contributor**)                  | Anyone who contributes to MCP                 | Submit issues, PRs, participate in discussions                            | Immediate                                             |
-| [**Member**](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/**Member**)                            | Established, active contributor               | GitHub org membership, triage rights, eligible for WG/IG leadership       | 2-3 months of meaningful contributions                |
-| [**Maintainer**](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/**Maintainer**)                    | Area steward with operational responsibility  | Merge rights, release participation                                       | 6+ months as Member                                   |
-| [**Core Maintainer**](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/**Core Maintainer**)          | Technical leadership and protocol stewardship | Final decision authority, governance participation                        | By invitation after sustained Maintainer contribution |
-| [**Lead Maintainer**](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/**Lead Maintainer**)          | Ultimate project authority (founders)         | All Core Maintainer privileges, veto authority, appoints Core Maintainers | Reserved for project founders — succession only       |
-| [**Community Moderator**](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/**Community Moderator**) | CoC enforcement and community health          | Moderation rights on community platforms, incident handling               | Parallel track — Member status + appointment          |
+| [**Contributor**](#contributor)                  | Anyone who contributes to MCP                 | Submit issues, PRs, participate in discussions                            | Immediate                                             |
+| [**Member**](#member)                            | Established, active contributor               | GitHub org membership, triage rights, eligible for WG/IG leadership       | 2-3 months of meaningful contributions                |
+| [**Maintainer**](#maintainer)                    | Area steward with operational responsibility  | Merge rights, release participation                                       | 6+ months as Member                                   |
+| [**Core Maintainer**](#core-maintainer)          | Technical leadership and protocol stewardship | Final decision authority, governance participation                        | By invitation after sustained Maintainer contribution |
+| [**Lead Maintainer**](#lead-maintainer)          | Ultimate project authority (founders)         | All Core Maintainer privileges, veto authority, appoints Core Maintainers | Reserved for project founders — succession only       |
+| [**Community Moderator**](#community-moderators) | CoC enforcement and community health          | Moderation rights on community platforms, incident handling               | Parallel track — Member status + appointment          |
 
 _Timelines listed are minimum contribution periods, not guarantees of advancement. They exist to protect the project from rapid privilege escalation and to ensure a high bar of demonstrated commitment. Actual advancement is discretionary and may take longer in practice; the only guarantee is that advancement will not happen on a shorter timescale than documented. Exceptions require explicit Core Maintainer approval with documented rationale._
 
@@ -67,7 +67,7 @@ Anyone who has contributed to MCP in any form is a contributor. This includes:
 
 **How to get started:**
 
-- Review the [Contributing Guide](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/Contributing Guide)
+- Review the [Contributing Guide](https://modelcontextprotocol.io/community/contributing)
 - Join community channels (Discord, GitHub Discussions)
 - Look for issues tagged `good-first-issue` or `help-wanted`
 - Attend working group meetings
@@ -184,7 +184,7 @@ When evaluating candidates, Core Maintainers should consider whether the current
 **Privileges:**
 
 - Final approval on breaking changes and major spec revisions
-- Voting rights on [SEPs](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/SEPs) (Specification Enhancement Proposals)
+- Voting rights on [SEPs](https://modelcontextprotocol.io/community/sep-guidelines) (Specification Enhancement Proposals)
 - Approval of Maintainers
 - Governance voting rights / expectation of governance participation
 - Administrative rights to all MCP GitHub repositories
@@ -194,7 +194,7 @@ When evaluating candidates, Core Maintainers should consider whether the current
 
 ### Lead Maintainer
 
-Lead Maintainers hold ultimate authority over MCP's direction and governance. This is a lifetime appointment reserved for project founders. There is no defined advancement path to this role; it is only assumed through succession when necessary (see [Succession](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/Succession)).
+Lead Maintainers hold ultimate authority over MCP's direction and governance. This is a lifetime appointment reserved for project founders. There is no defined advancement path to this role; it is only assumed through succession when necessary (see [Succession](#succession)).
 
 **Responsibilities:**
 
@@ -256,7 +256,7 @@ MCP operates on a principle of delegation: decisions should be made at the lowes
 
 When in doubt, make the decision at your level and document it. Escalate only when blocked, when the decision has project-wide implications, or when explicitly required by process.
 
-The detailed escalation procedure for Working Group and Interest Group disputes — including the designation of a Core Maintainer without shared organizational affiliation to resolve the issue — is defined in [SEP-2149 §1.5](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/SEP-2149 §1.5).
+The detailed escalation procedure for Working Group and Interest Group disputes — including the designation of a Core Maintainer without shared organizational affiliation to resolve the issue — is defined in [SEP-2149 §1.5](./2149-working-group-charter-template.md).
 
 #### Escalation Matrix
 
@@ -290,7 +290,7 @@ MCP values diverse contributions. Here are recognized pathways to advancement:
 #### Specification Work
 
 - Drafting or refining spec text
-- [SEP](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/SEP) authorship or co-authorship
+- [SEP](https://modelcontextprotocol.io/community/sep-guidelines) authorship or co-authorship
 - Protocol design participation
 - Compatibility analysis
 
@@ -317,7 +317,7 @@ MCP values diverse contributions. Here are recognized pathways to advancement:
 
 ### Working Group and Interest Group Leadership
 
-Working Group (WG) Leads and Interest Group (IG) Facilitators are a special form of community leadership that doesn't require Maintainer status. WG/IG leadership focuses on facilitation and coordination rather than merge authority. The full governance rules for WGs and IGs — including participation tiers, decision-making process, meeting requirements, and lifecycle — are defined in SEP-2149: MCP Group Governance and Charter Template.
+Working Group (WG) Leads and Interest Group (IG) Facilitators are a special form of community leadership that doesn't require Maintainer status. WG/IG leadership focuses on facilitation and coordination rather than merge authority. The full governance rules for WGs and IGs — including participation tiers, decision-making process, meeting requirements, and lifecycle — are defined in [SEP-2149: MCP Group Governance and Charter Template](./2149-working-group-charter-template.md).
 
 **Requirements:**
 

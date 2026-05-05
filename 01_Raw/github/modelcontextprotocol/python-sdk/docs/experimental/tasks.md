@@ -184,5 +184,5 @@ async with ClientSession(read, write) as session:
 
 ## Next Steps
 
-- [Server Implementation](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/docs/experimental/Server Implementation) - Build task-supporting servers
-- [Client Usage](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/docs/experimental/Client Usage) - Call and poll tasks from clients
+- [Server Implementation](tasks-server.md) - Build task-supporting servers
+- [Client Usage](tasks-client.md) - Call and poll tasks from clients

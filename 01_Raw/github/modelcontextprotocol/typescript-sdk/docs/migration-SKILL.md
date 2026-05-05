@@ -213,7 +213,7 @@ Zod schemas, all callback return types. Note: `callTool()` and `request()` signa
 
 The variadic `.tool()`, `.prompt()`, `.resource()` methods are removed. Use the `register*` methods with a config object.
 
-**IMPORTANT**: v2 requires schema objects implementing [Standard Schema](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Standard Schema) — raw shapes like `{ name: z.string() }` are no longer supported. Wrap with `z.object()` (Zod v4), or use ArkType's `type({...})`, or Valibot. For raw JSON Schema, wrap with
+**IMPORTANT**: v2 requires schema objects implementing [Standard Schema](https://standardschema.dev/) — raw shapes like `{ name: z.string() }` are no longer supported. Wrap with `z.object()` (Zod v4), or use ArkType's `type({...})`, or Valibot. For raw JSON Schema, wrap with
 `fromJsonSchema(schema)` from `@modelcontextprotocol/server` (validator defaults automatically; pass an explicit validator for custom configurations). Applies to `inputSchema`, `outputSchema`, and `argsSchema`.
 
 ### Tools

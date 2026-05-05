@@ -1,6 +1,6 @@
 # Calculator Rust Binary Example
 
-Demonstrates packaging a compiled Rust binary as an MCP Bundle using the `binary` server type. Based on the [official Rust MCP SDK calculator example](https://raw.githubusercontent.com/modelcontextprotocol/mcpb/main/examples/calculator-rust/official Rust MCP SDK calculator example).
+Demonstrates packaging a compiled Rust binary as an MCP Bundle using the `binary` server type. Based on the [official Rust MCP SDK calculator example](https://github.com/modelcontextprotocol/rust-sdk/tree/main/examples/servers).
 
 ## What is Binary Server Type?
 
@@ -27,7 +27,7 @@ After building, the `server/` directory is created with the compiled binary.
 
 ## Building
 
-Requires [Rust](https://raw.githubusercontent.com/modelcontextprotocol/mcpb/main/examples/calculator-rust/Rust) 1.85+.
+Requires [Rust](https://rustup.rs/) 1.85+.
 
 ```bash
 cd examples/calculator-rust
@@ -70,4 +70,4 @@ Expected: `sum(3, 4)` returns `{"text":"7"}`.
 - Binary size: ~2.5 MB (stripped, LTO enabled)
 - The `Cargo.toml` uses `edition = "2024"` (Rust 1.85+)
 - Logs are written to stderr via `tracing`, so they don't interfere with MCP's stdio transport
-- Uses the [rmcp](https://raw.githubusercontent.com/modelcontextprotocol/mcpb/main/examples/calculator-rust/rmcp) crate (official Rust MCP SDK)
+- Uses the [rmcp](https://crates.io/crates/rmcp) crate (official Rust MCP SDK)

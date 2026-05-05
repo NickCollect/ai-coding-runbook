@@ -51,28 +51,28 @@ During a deep dive, look through:
 - comments left on specific lines of code during review (`repos/modelcontextprotocol/modelcontextprotocol/pulls/{pr_number}/comments`)
 - top-level review bodies submitted with an approve/request-changes/comment verdict (`repos/modelcontextprotocol/modelcontextprotocol/pulls/{pr_number}/reviews`)
 
-Each comment returned by these endpoints includes an `author_association` field — use it to identify maintainers (see [Notable maintainer quotes](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/plugins/mcp-spec/skills/search-mcp-github/Notable maintainer quotes)).
+Each comment returned by these endpoints includes an `author_association` field — use it to identify maintainers (see [Notable maintainer quotes](#notable-maintainer-quotes)).
 
 ## Output format
 
 ### PRs
 
 ```markdown
-- [#123](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/plugins/mcp-spec/skills/search-mcp-github/url) - PR Title (**Merged/Closed/Open** <date>)
+- [#123](url) - PR Title (**Merged/Closed/Open** <date>)
   Brief summary of PR
 ```
 
 ### Issues
 
 ```markdown
-- [#456](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/plugins/mcp-spec/skills/search-mcp-github/url) - Issue Title (**Open/Closed** <date>)
+- [#456](url) - Issue Title (**Open/Closed** <date>)
   Brief summary of issue
 ```
 
 ### Discussions
 
 ```markdown
-- [#789](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/plugins/mcp-spec/skills/search-mcp-github/url) - Discussion Title (<date>)
+- [#789](url) - Discussion Title (<date>)
   Brief summary of discussion content
 ```
 
@@ -105,7 +105,7 @@ Collect all sources as footnotes at the end. Every quote and claim presented in 
 
 [^2]: [#185 ToolAnnotations](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/185)
 
-[^3]: [Spec: Tool Annotations (2025-11-25)](Spec: Tool Annotations (2025-11-25))
+[^3]: [Spec: Tool Annotations (2025-11-25)](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)
 ```
 
 ## General strategy

@@ -8,11 +8,11 @@ ShowToc: true
 draft: false
 ---
 
-MCP tool annotations were introduced nearly a year ago as a way for servers to describe the behavior of their tools — whether they're read-only, destructive, idempotent, or reach outside their local environment. Since then, the community has filed five independent [Specification Enhancement Proposals](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Specification Enhancement Proposals) (SEPs) proposing new annotations, driven in part by a sharper collective understanding of where risk actually lives in agentic workflows. This post recaps where tool annotations are today, what they can and can't realistically do, and offers a framework for evaluating new proposals.
+MCP tool annotations were introduced nearly a year ago as a way for servers to describe the behavior of their tools — whether they're read-only, destructive, idempotent, or reach outside their local environment. Since then, the community has filed five independent [Specification Enhancement Proposals](https://modelcontextprotocol.io/community/sep-guidelines) (SEPs) proposing new annotations, driven in part by a sharper collective understanding of where risk actually lives in agentic workflows. This post recaps where tool annotations are today, what they can and can't realistically do, and offers a framework for evaluating new proposals.
 
 ## What Tool Annotations Are
 
-[Tool annotations](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Tool annotations) shipped in the `2025-03-26` spec revision. The current [`ToolAnnotations` interface](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/`ToolAnnotations` interface) looks like this:
+[Tool annotations](https://modelcontextprotocol.io/specification/2025-11-25/server/tools) shipped in the `2025-03-26` spec revision. The current [`ToolAnnotations` interface](https://modelcontextprotocol.io/specification/2025-11-25/schema#toolannotations) looks like this:
 
 ```typescript
 interface ToolAnnotations {
@@ -39,17 +39,17 @@ The defaults are deliberately cautious: a tool with no annotations is assumed to
 
 ## How We Got Here
 
-The [original proposal discussion](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/original proposal discussion) surfaced a question that still shapes every annotation proposal today: **what value do hints provide when they can't be trusted?** MCP co-creator Justin Spahr-Summers [raised it directly during review](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/raised it directly during review):
+The [original proposal discussion](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/185) surfaced a question that still shapes every annotation proposal today: **what value do hints provide when they can't be trusted?** MCP co-creator Justin Spahr-Summers [raised it directly during review](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/185#discussion_r2010043988):
 
 > I think the information itself, _if it could be trusted_, would be very useful, but I wonder how a client makes use of this flag knowing that it's _not_ trustable.
 
-Basil Hosmer [pushed the point further](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/pushed the point further), arguing that clients should ignore annotations from untrusted servers entirely:
+Basil Hosmer [pushed the point further](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/185#discussion_r2010702646), arguing that clients should ignore annotations from untrusted servers entirely:
 
 > "Clients should ignore annotations from untrusted servers" applies to **all** annotations, even `title` — but especially the ones that describe operational properties.
 
 The spec landed on a compromise: call everything a **hint**, require clients to treat hints as untrusted by default, and leave it to each client to decide how much weight to give them based on what it knows about the server.
 
-The interface has stayed small since then, and that's been intentional. [`title` went in](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/`title` went in) because it's just a display name with no trust implications. `taskHint` was proposed as an annotation but [landed as `Tool.execution` instead](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/landed as `Tool.execution` instead), on the grounds that execution metadata isn't really a behavioral hint. Earlier takes on [stateless, streaming, and async annotations](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/stateless, streaming, and async annotations) and [security annotations](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/security annotations) are worth knowing about too, since the same concerns show up again in the SEPs open today.
+The interface has stayed small since then, and that's been intentional. [`title` went in](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/663) because it's just a display name with no trust implications. `taskHint` was proposed as an annotation but [landed as `Tool.execution` instead](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/1854), on the grounds that execution metadata isn't really a behavioral hint. Earlier takes on [stateless, streaming, and async annotations](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/489) and [security annotations](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1075) are worth knowing about too, since the same concerns show up again in the SEPs open today.
 
 ## What's Open Now
 
@@ -63,13 +63,13 @@ Five SEPs currently propose new annotations or closely related capabilities:
 | [#1560](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1560) | `secretHint`                                     | Proposal |
 | [#1487](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1487) | `trustedHint`                                    | Proposal |
 
-The trust and sensitivity work is co-authored by GitHub and OpenAI based on gaps they hit running MCP in production. A Tool Annotations Interest Group is forming to work through these alongside related proposals like [tool resolution and preflight checks](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/tool resolution and preflight checks). Reviewing each one in isolation makes it easy to miss how a given annotation interacts with others, and it's those interactions that determine how risky a tool actually is in a given session.
+The trust and sensitivity work is co-authored by GitHub and OpenAI based on gaps they hit running MCP in production. A Tool Annotations Interest Group is forming to work through these alongside related proposals like [tool resolution and preflight checks](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/1862). Reviewing each one in isolation makes it easy to miss how a given annotation interacts with others, and it's those interactions that determine how risky a tool actually is in a given session.
 
 ## The Lethal Trifecta: Why Combinations Matter
 
-Simon Willison's [lethal trifecta](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/lethal trifecta) names three capabilities that, when combined, create the conditions for data theft: **access to private data**, **exposure to untrusted content**, and **the ability to externally communicate**. The attack is simple: LLMs follow instructions in content, and they can't reliably tell a user's instructions apart from ones an attacker embedded in a web page, email, or calendar event. If the agent has all three capabilities, an attacker who controls one piece of untrusted content can trick the model into reading private data and sending it out.
+Simon Willison's [lethal trifecta](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/) names three capabilities that, when combined, create the conditions for data theft: **access to private data**, **exposure to untrusted content**, and **the ability to externally communicate**. The attack is simple: LLMs follow instructions in content, and they can't reliably tell a user's instructions apart from ones an attacker embedded in a web page, email, or calendar event. If the agent has all three capabilities, an attacker who controls one piece of untrusted content can trick the model into reading private data and sending it out.
 
-[Researchers have demonstrated this](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Researchers have demonstrated this) using a malicious Google Calendar event description, an MCP calendar server, and a local code execution tool. The code execution tool is the linchpin in that chain — any agent with unrestrained shell access sits one injected instruction away from exfiltration, and that's true whether the tool arrived via MCP or was built into the host. What MCP adds is the ease of assembling the chain: users routinely combine tools from several servers in one session, so the risk profile is a property of the session, not of any single server.
+[Researchers have demonstrated this](https://layerxsecurity.com/blog/claude-desktop-extensions-rce/) using a malicious Google Calendar event description, an MCP calendar server, and a local code execution tool. The code execution tool is the linchpin in that chain — any agent with unrestrained shell access sits one injected instruction away from exfiltration, and that's true whether the tool arrived via MCP or was built into the host. What MCP adds is the ease of assembling the chain: users routinely combine tools from several servers in one session, so the risk profile is a property of the session, not of any single server.
 
 One commenter on Willison's newsletter connected this directly to tool annotations:
 
@@ -95,7 +95,7 @@ Adoption across all of these is uneven, partly because MCP users split into two 
 
 **An untrusted server can lie.** A server can claim `readOnlyHint: true` and delete your files anyway. This is why the spec says clients **must** treat annotations from untrusted servers as untrusted.
 
-**They aren't enforcement.** If you need a guarantee that a tool can't exfiltrate data, that's a job for network controls or sandboxing, not a boolean hint. We made the [same point about server instructions](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/same point about server instructions): don't rely on soft signals for things that need to be hard guarantees.
+**They aren't enforcement.** If you need a guarantee that a tool can't exfiltrate data, that's a job for network controls or sandboxing, not a boolean hint. We made the [same point about server instructions](https://blog.modelcontextprotocol.io/posts/2025-11-03-using-server-instructions/): don't rely on soft signals for things that need to be hard guarantees.
 
 **A tool's risk depends on what else is in the session.** `search_emails` isn't safe or dangerous on its own; it depends on what other tools the agent has. Annotations on one tool can't tell you that.
 
@@ -105,7 +105,7 @@ As a starting point for the Interest Group, we're putting forward a tentative se
 
 ### 1. What client behavior does it enable?
 
-Maintainer Jonathan Hefner [put this directly on an early draft](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/put this directly on an early draft) of what became the governance/UX annotations proposal:
+Maintainer Jonathan Hefner [put this directly on an early draft](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/616#issuecomment-3330296295) of what became the governance/UX annotations proposal:
 
 > It's not clear to me exactly how a client would behave differently when presented with these annotations.
 
@@ -124,7 +124,7 @@ If there's no concrete client action that changes based on the annotation, it pr
 
 ### 3. Could `_meta` handle it instead?
 
-Tools already have [`_meta`](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/`_meta`), which accepts namespaced keys like `com.example/my-field` for exactly this kind of metadata. If an annotation only matters to one deployment style where the same organization runs both the server and the client, `_meta` is a reasonable home for it. It's also a good way to prove out an idea before writing a SEP: ship a namespaced field, see how it holds up in production, and come back with a proposal backed by actual usage instead of a design doc. What `_meta` can't do is drive behavior in off-the-shelf clients — those won't read a key they've never heard of, so anything aimed at ecosystem-wide UX still needs a real annotation.
+Tools already have [`_meta`](https://modelcontextprotocol.io/specification/2025-11-25/basic#_meta), which accepts namespaced keys like `com.example/my-field` for exactly this kind of metadata. If an annotation only matters to one deployment style where the same organization runs both the server and the client, `_meta` is a reasonable home for it. It's also a good way to prove out an idea before writing a SEP: ship a namespaced field, see how it holds up in production, and come back with a proposal backed by actual usage instead of a design doc. What `_meta` can't do is drive behavior in off-the-shelf clients — those won't read a key they've never heard of, so anything aimed at ecosystem-wide UX still needs a real annotation.
 
 ### 4. Does it help reason about combinations?
 
@@ -145,7 +145,7 @@ In the meantime, the existing annotations are worth using. If you're writing a s
 The Tool Annotations Interest Group is forming now. If you're interested in contributing:
 
 - Review the open SEPs linked above and leave feedback
-- Join the conversation in `#tool-annotations-ig` on the [MCP Contributors Discord](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/MCP Contributors Discord)
+- Join the conversation in `#tool-annotations-ig` on the [MCP Contributors Discord](https://modelcontextprotocol.io/community/communication#discord)
 
 ## Acknowledgements
 

@@ -307,6 +307,7 @@ from mcp.types import (
 server = Server("task-demo")
 server.experimental.enable_tasks()
 
+
 @server.list_tools()
 async def list_tools():
     return [
@@ -323,6 +324,7 @@ async def list_tools():
             execution=ToolExecution(taskSupport=TASK_REQUIRED),
         ),
     ]
+
 
 async def handle_confirm_action(arguments: dict) -> CreateTaskResult:
     ctx = server.request_context
@@ -346,6 +348,7 @@ async def handle_confirm_action(arguments: dict) -> CreateTaskResult:
 
     return await ctx.experimental.run_task(work)
 
+
 async def handle_generate_text(arguments: dict) -> CreateTaskResult:
     ctx = server.request_context
     ctx.experimental.validate_task_mode(TASK_REQUIRED)
@@ -364,6 +367,7 @@ async def handle_generate_text(arguments: dict) -> CreateTaskResult:
         return CallToolResult(content=[TextContent(type="text", text=text)])
 
     return await ctx.experimental.run_task(work)
+
 
 @server.call_tool()
 async def handle_tool(name: str, arguments: dict) -> CallToolResult | CreateTaskResult:
@@ -412,8 +416,10 @@ from mcp.types import (
     CallToolResult, CreateTaskResult, TextContent, Tool, ToolExecution, TASK_REQUIRED,
 )
 
+
 server = Server("http-task-server")
 server.experimental.enable_tasks()
+
 
 @server.list_tools()
 async def list_tools():
@@ -425,6 +431,7 @@ async def list_tools():
             execution=ToolExecution(taskSupport=TASK_REQUIRED),
         )
     ]
+
 
 async def handle_long_operation(arguments: dict) -> CreateTaskResult:
     ctx = server.request_context
@@ -441,11 +448,13 @@ async def handle_long_operation(arguments: dict) -> CreateTaskResult:
 
     return await ctx.experimental.run_task(work)
 
+
 @server.call_tool()
 async def handle_tool(name: str, arguments: dict) -> CallToolResult | CreateTaskResult:
     if name == "long_operation":
         return await handle_long_operation(arguments)
     return CallToolResult(content=[TextContent(type="text", text=f"Unknown: {name}")], isError=True)
+
 
 if __name__ == "__main__":
     uvicorn.run(server.streamable_http_app(), host="127.0.0.1", port=8000)
@@ -460,6 +469,7 @@ import pytest
 import anyio
 from mcp.client.session import ClientSession
 from mcp.types import CallToolResult
+
 
 @pytest.mark.anyio
 async def test_task_tool():
@@ -563,5 +573,5 @@ async def work(task: ServerTaskContext) -> CallToolResult:
 
 ## Next Steps
 
-- [Client Usage](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/docs/experimental/Client Usage) - Learn how clients interact with task servers
-- [Tasks Overview](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/docs/experimental/Tasks Overview) - Review lifecycle and concepts
+- [Client Usage](tasks-client.md) - Learn how clients interact with task servers
+- [Tasks Overview](tasks.md) - Review lifecycle and concepts

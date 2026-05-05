@@ -71,7 +71,7 @@ Early-stage or specialized SDKs exploring the protocol space.
 
 ### Conformance Testing
 
-All SDKs must undergo conformance testing using protocol trace validation: for details see [Conformance Testing RFC (forthcoming)](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/Conformance Testing RFC (forthcoming)). This SEP is not focusing on Conformance testing. For the initial version of tiering, we will go with the simplified version where we would have an Example server for each SDK and run simplified conformance tests against those.
+All SDKs must undergo conformance testing using protocol trace validation: for details see [Conformance Testing RFC (forthcoming)](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1627). This SEP is not focusing on Conformance testing. For the initial version of tiering, we will go with the simplified version where we would have an Example server for each SDK and run simplified conformance tests against those.
 
 ```mermaid
 sequenceDiagram
@@ -217,17 +217,17 @@ This proposal introduces a new classification system with no breaking changes:
 
 ## References
 
-- [SDK Maintainer Meeting Notes (\#1648)](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/SDK Maintainer Meeting Notes (\#1648))
-- [SDK Harmonization Goals (\#1444)](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/SDK Harmonization Goals (\#1444))
-- [Conformance Testing SEP (DRAFT)](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/Conformance Testing SEP (DRAFT))
+- [SDK Maintainer Meeting Notes (\#1648)](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1648)
+- [SDK Harmonization Goals (\#1444)](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1444)
+- [Conformance Testing SEP (DRAFT)](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1627)
 
 ## Appendix
 
 ### Simplified conformance tests
 
-While we are working on a [comprehensive proposal for conformance testing](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/comprehensive proposal for conformance testing) which will take some time to implement, we want to move forward with at least some automated way to check if SDK has a full set of features. We will start from Servers features set, as we have many more servers than clients and the vast majority of developers using SDKs are Server implementers.
+While we are working on a [comprehensive proposal for conformance testing](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1627) which will take some time to implement, we want to move forward with at least some automated way to check if SDK has a full set of features. We will start from Servers features set, as we have many more servers than clients and the vast majority of developers using SDKs are Server implementers.
 
-The most straightforward approach is to have an Example Server for each SDK, similar to to [Everything Server](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/Everything Server). Then we will have Conformance Test Client with all the test cases we want to be able to test, for example:
+The most straightforward approach is to have an Example Server for each SDK, similar to to [Everything Server](https://github.com/modelcontextprotocol/servers/tree/main/src/everything). Then we will have Conformance Test Client with all the test cases we want to be able to test, for example:
 
 - execute “hello world” tool
 - Get prompt

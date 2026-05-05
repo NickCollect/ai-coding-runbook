@@ -4,12 +4,12 @@ title: Server Guide
 
 # Building MCP servers
 
-This guide covers the TypeScript SDK APIs for building MCP servers. For protocol-level concepts — what tools, resources, and prompts are and when to use each — see the [MCP overview](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/MCP overview).
+This guide covers the TypeScript SDK APIs for building MCP servers. For protocol-level concepts — what tools, resources, and prompts are and when to use each — see the [MCP overview](https://modelcontextprotocol.io/docs/learn/architecture).
 
 Building a server takes three steps:
 
-1. Create an {@linkcode @modelcontextprotocol/server!server/mcp.McpServer | McpServer} and register your [tools](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/tools), [resources](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/resources), and [prompts](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/prompts).
-2. Create a transport — [Streamable HTTP](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Streamable HTTP) for remote servers or [stdio](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/stdio) for local integrations.
+1. Create an {@linkcode @modelcontextprotocol/server!server/mcp.McpServer | McpServer} and register your [tools](#tools), [resources](#resources), and [prompts](#prompts).
+2. Create a transport — [Streamable HTTP](#streamable-http) for remote servers or [stdio](#stdio) for local integrations.
 3. Connect them with `server.connect(transport)`.
 
 ## Imports
@@ -29,7 +29,7 @@ import * as z from 'zod/v4';
 
 ## Transports
 
-MCP supports two transport mechanisms (see [Transport layer](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Transport layer) in the MCP overview). Choose based on deployment model:
+MCP supports two transport mechanisms (see [Transport layer](https://modelcontextprotocol.io/docs/learn/architecture#transport-layer) in the MCP overview). Choose based on deployment model:
 
 - **Streamable HTTP** — for remote servers accessible over the network.
 - **stdio** — for local servers spawned as child processes (Claude Desktop, CLI tools).
@@ -50,7 +50,7 @@ await server.connect(transport);
 
 **Options:** Set `sessionIdGenerator` to a function (shown above) for stateful sessions. Set it to `undefined` for stateless mode (simpler, but does not support resumability). Set `enableJsonResponse: true` to return plain JSON instead of SSE streams.
 
-For a complete server with sessions, logging, and CORS mounted on Express, see [`simpleStreamableHttp.ts`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/`simpleStreamableHttp.ts`).
+For a complete server with sessions, logging, and CORS mounted on Express, see [`simpleStreamableHttp.ts`](https://github.com/modelcontextprotocol/typescript-sdk/blob/main/examples/server/src/simpleStreamableHttp.ts).
 
 ### stdio
 
@@ -64,7 +64,7 @@ await server.connect(transport);
 
 ## Server instructions
 
-Instructions describe how to use the server and its features — cross-tool relationships, workflow patterns, and constraints (see [Instructions](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Instructions) in the MCP specification). Clients may add them to the system prompt. Instructions should not duplicate information already in tool descriptions.
+Instructions describe how to use the server and its features — cross-tool relationships, workflow patterns, and constraints (see [Instructions](https://modelcontextprotocol.io/specification/latest/basic/lifecycle#instructions) in the MCP specification). Clients may add them to the system prompt. Instructions should not duplicate information already in tool descriptions.
 
 ```ts source="../examples/server/src/serverGuide.examples.ts#instructions_basic"
 const server = new McpServer(
@@ -78,7 +78,7 @@ const server = new McpServer(
 
 ## Tools
 
-Tools let clients invoke actions on your server — they are usually the main way LLMs call into your application (see [Tools](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Tools) in the MCP overview).
+Tools let clients invoke actions on your server — they are usually the main way LLMs call into your application (see [Tools](https://modelcontextprotocol.io/docs/learn/server-concepts#tools) in the MCP overview).
 
 Register a tool with {@linkcode @modelcontextprotocol/server!server/mcp.McpServer#registerTool | registerTool}. Provide an `inputSchema` (Zod) to validate arguments, and optionally an `outputSchema` for structured return values:
 
@@ -204,7 +204,7 @@ If a handler throws instead of returning `isError`, the SDK catches the exceptio
 
 ## Resources
 
-Resources expose read-only data — files, database schemas, configuration — that the host application can retrieve and attach as context for the model (see [Resources](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Resources) in the MCP overview). Unlike [tools](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/tools), which the LLM invokes on its own, resources are application-controlled: the host decides which resources to fetch and how to present them.
+Resources expose read-only data — files, database schemas, configuration — that the host application can retrieve and attach as context for the model (see [Resources](https://modelcontextprotocol.io/docs/learn/server-concepts#resources) in the MCP overview). Unlike [tools](#tools), which the LLM invokes on its own, resources are application-controlled: the host decides which resources to fetch and how to present them.
 
 A static resource at a fixed URI:
 
@@ -254,7 +254,7 @@ server.registerResource(
 
 ## Prompts
 
-Prompts are reusable templates that help structure interactions with models (see [Prompts](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Prompts) in the MCP overview). Use a prompt when you want to offer a canned interaction pattern that users invoke explicitly; use a [tool](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/tool) when the LLM should decide when to call it.
+Prompts are reusable templates that help structure interactions with models (see [Prompts](https://modelcontextprotocol.io/docs/learn/server-concepts#prompts) in the MCP overview). Use a prompt when you want to offer a canned interaction pattern that users invoke explicitly; use a [tool](#tools) when the LLM should decide when to call it.
 
 ```ts source="../examples/server/src/serverGuide.examples.ts#registerPrompt_basic"
 server.registerPrompt(
@@ -312,7 +312,7 @@ server.registerPrompt(
 
 ## Logging
 
-Logging lets your server send structured diagnostics — debug traces, progress updates, warnings — to the connected client as notifications (see [Logging](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Logging) in the MCP specification).
+Logging lets your server send structured diagnostics — debug traces, progress updates, warnings — to the connected client as notifications (see [Logging](https://modelcontextprotocol.io/specification/latest/server/utilities/logging) in the MCP specification).
 
 Declare the `logging` capability, then call `ctx.mcpReq.log(level, data)` (from {@linkcode @modelcontextprotocol/server!index.ServerContext | ServerContext}) inside any handler:
 
@@ -341,7 +341,7 @@ server.registerTool(
 
 ## Progress
 
-Progress notifications let a tool report incremental status updates during long-running operations (see [Progress](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Progress) in the MCP specification).
+Progress notifications let a tool report incremental status updates during long-running operations (see [Progress](https://modelcontextprotocol.io/specification/latest/basic/utilities/progress) in the MCP specification).
 
 If the client includes a `progressToken` in the request `_meta`, send `notifications/progress` via `ctx.mcpReq.notify()` (from {@linkcode @modelcontextprotocol/server!index.BaseContext | BaseContext}):
 
@@ -380,11 +380,11 @@ server.registerTool(
 
 ## Server-initiated requests
 
-MCP is bidirectional — servers can send requests *to* the client during tool execution, as long as the client declares matching capabilities (see [Architecture](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Architecture) in the MCP overview).
+MCP is bidirectional — servers can send requests *to* the client during tool execution, as long as the client declares matching capabilities (see [Architecture](https://modelcontextprotocol.io/docs/learn/architecture) in the MCP overview).
 
 ### Sampling
 
-Sampling lets a tool handler request an LLM completion from the connected client — the handler describes a prompt and the client returns the model's response (see [Sampling](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Sampling) in the MCP overview). Use sampling when a tool needs the model to generate or transform text mid-execution.
+Sampling lets a tool handler request an LLM completion from the connected client — the handler describes a prompt and the client returns the model's response (see [Sampling](https://modelcontextprotocol.io/docs/learn/client-concepts#sampling) in the MCP overview). Use sampling when a tool needs the model to generate or transform text mid-execution.
 
 Call `ctx.mcpReq.requestSampling(params)` (from {@linkcode @modelcontextprotocol/server!index.ServerContext | ServerContext}) inside a tool handler:
 
@@ -420,11 +420,11 @@ server.registerTool(
 );
 ```
 
-For a full runnable example, see [`toolWithSampleServer.ts`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/`toolWithSampleServer.ts`).
+For a full runnable example, see [`toolWithSampleServer.ts`](https://github.com/modelcontextprotocol/typescript-sdk/blob/main/examples/server/src/toolWithSampleServer.ts).
 
 ### Elicitation
 
-Elicitation lets a tool handler request direct input from the user — form fields, confirmations, or a redirect to a URL (see [Elicitation](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Elicitation) in the MCP overview). It supports two modes:
+Elicitation lets a tool handler request direct input from the user — form fields, confirmations, or a redirect to a URL (see [Elicitation](https://modelcontextprotocol.io/docs/learn/client-concepts#elicitation) in the MCP overview). It supports two modes:
 
 - **Form** (`mode: 'form'`) — collects non-sensitive data via a schema-driven form.
 - **URL** (`mode: 'url'`) — opens a browser URL for sensitive data or secure flows (API keys, payments, OAuth).
@@ -474,11 +474,11 @@ server.registerTool(
 );
 ```
 
-For runnable examples, see [`elicitationFormExample.ts`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/`elicitationFormExample.ts`) (form) and [`elicitationUrlExample.ts`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/`elicitationUrlExample.ts`) (URL).
+For runnable examples, see [`elicitationFormExample.ts`](https://github.com/modelcontextprotocol/typescript-sdk/blob/main/examples/server/src/elicitationFormExample.ts) (form) and [`elicitationUrlExample.ts`](https://github.com/modelcontextprotocol/typescript-sdk/blob/main/examples/server/src/elicitationUrlExample.ts) (URL).
 
 ### Roots
 
-Roots let a tool handler discover the client's workspace directories — for example, to scope a file search or identify project boundaries (see [Roots](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Roots) in the MCP overview). Call {@linkcode @modelcontextprotocol/server!server/server.Server#listRoots | server.server.listRoots()} (requires the client to declare the `roots` capability):
+Roots let a tool handler discover the client's workspace directories — for example, to scope a file search or identify project boundaries (see [Roots](https://modelcontextprotocol.io/docs/learn/client-concepts#roots) in the MCP overview). Call {@linkcode @modelcontextprotocol/server!server/server.Server#listRoots | server.server.listRoots()} (requires the client to declare the `roots` capability):
 
 ```ts source="../examples/server/src/serverGuide.examples.ts#registerTool_roots"
 server.registerTool(
@@ -500,13 +500,13 @@ server.registerTool(
 > [!WARNING]
 > The tasks API is experimental and may change without notice.
 
-Task-based execution enables "call-now, fetch-later" patterns for long-running operations (see [Tasks](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Tasks) in the MCP specification). Instead of returning a result immediately, a tool creates a task that can be polled or resumed later. To use tasks:
+Task-based execution enables "call-now, fetch-later" patterns for long-running operations (see [Tasks](https://modelcontextprotocol.io/specification/latest/basic/utilities/tasks) in the MCP specification). Instead of returning a result immediately, a tool creates a task that can be polled or resumed later. To use tasks:
 
 - Provide a {@linkcode @modelcontextprotocol/server!index.TaskStore | TaskStore} implementation that persists task metadata and results (see {@linkcode @modelcontextprotocol/server!index.InMemoryTaskStore | InMemoryTaskStore} for reference).
 - Enable the `tasks` capability when constructing the server.
 - Register tools with {@linkcode @modelcontextprotocol/server!experimental/tasks/mcpServer.ExperimentalMcpServerTasks#registerToolTask | server.experimental.tasks.registerToolTask(...)}.
 
-For a full runnable example, see [`simpleTaskInteractive.ts`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/`simpleTaskInteractive.ts`).
+For a full runnable example, see [`simpleTaskInteractive.ts`](https://github.com/modelcontextprotocol/typescript-sdk/blob/main/examples/server/src/simpleTaskInteractive.ts).
 
 ## Shutdown
 
@@ -539,13 +539,13 @@ process.on('SIGINT', async () => {
 });
 ```
 
-For a complete multi-session server with shutdown handling, see [`simpleStreamableHttp.ts`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/`simpleStreamableHttp.ts`).
+For a complete multi-session server with shutdown handling, see [`simpleStreamableHttp.ts`](https://github.com/modelcontextprotocol/typescript-sdk/blob/main/examples/server/src/simpleStreamableHttp.ts).
 
 ## Deployment
 
 ### DNS rebinding protection
 
-Under normal circumstances, cross-origin browser restrictions limit what a malicious website can do to your localhost server. [DNS rebinding attacks](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/DNS rebinding attacks) get around those restrictions entirely by making the requests appear as same-origin, since the attacking domain resolves to localhost. Validating the host header on the server side protects against this scenario.  **All localhost MCP servers should use DNS rebinding protection.**
+Under normal circumstances, cross-origin browser restrictions limit what a malicious website can do to your localhost server. [DNS rebinding attacks](https://en.wikipedia.org/wiki/DNS_rebinding) get around those restrictions entirely by making the requests appear as same-origin, since the attacking domain resolves to localhost. Validating the host header on the server side protects against this scenario.  **All localhost MCP servers should use DNS rebinding protection.**
 
 The recommended approach is to use {@linkcode @modelcontextprotocol/express!express.createMcpExpressApp | createMcpExpressApp()} (from `@modelcontextprotocol/express`) or {@linkcode @modelcontextprotocol/hono!hono.createMcpHonoApp | createMcpHonoApp()} (from `@modelcontextprotocol/hono`), which enable Host header validation by default:
 
@@ -571,22 +571,22 @@ const app = createMcpExpressApp({
 
 `createMcpHonoApp()` from `@modelcontextprotocol/hono` provides the same protection for Hono-based servers and Web Standard runtimes (Cloudflare Workers, Deno, Bun).
 
-If you use `NodeStreamableHTTPServerTransport` directly with your own HTTP framework, you must implement Host header validation yourself. See the [`hostHeaderValidation`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/`hostHeaderValidation`) middleware source for reference.
+If you use `NodeStreamableHTTPServerTransport` directly with your own HTTP framework, you must implement Host header validation yourself. See the [`hostHeaderValidation`](https://github.com/modelcontextprotocol/typescript-sdk/blob/main/packages/middleware/express/src/express.ts) middleware source for reference.
 
 ## See also
 
-- [`examples/server/`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/`examples/server/`) — Full runnable server examples
-- [Client guide](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Client guide) — Building MCP clients with this SDK
-- [MCP overview](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/MCP overview) — Protocol-level concepts: participants, layers, primitives
-- [Migration guide](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Migration guide) — Upgrading from previous SDK versions
-- [FAQ](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/FAQ) — Frequently asked questions and troubleshooting
+- [`examples/server/`](https://github.com/modelcontextprotocol/typescript-sdk/tree/main/examples/server) — Full runnable server examples
+- [Client guide](./client.md) — Building MCP clients with this SDK
+- [MCP overview](https://modelcontextprotocol.io/docs/learn/architecture) — Protocol-level concepts: participants, layers, primitives
+- [Migration guide](./migration.md) — Upgrading from previous SDK versions
+- [FAQ](./faq.md) — Frequently asked questions and troubleshooting
 
 ### Additional examples
 
 | Feature | Description | Example |
 |---------|-------------|---------|
-| Web Standard transport | Deploy on Cloudflare Workers, Deno, or Bun | [`honoWebStandardStreamableHttp.ts`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/`honoWebStandardStreamableHttp.ts`) |
-| Session management | Per-session transport routing, initialization, and cleanup | [`simpleStreamableHttp.ts`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/`simpleStreamableHttp.ts`) |
-| Resumability | Replay missed SSE events via an event store | [`inMemoryEventStore.ts`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/`inMemoryEventStore.ts`) |
-| CORS | Expose MCP headers for browser clients | [`simpleStreamableHttp.ts`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/`simpleStreamableHttp.ts`) |
-| Multi-node deployment | Stateless, persistent-storage, and distributed routing patterns | [`examples/server/README.md`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/`examples/server/README.md`) |
+| Web Standard transport | Deploy on Cloudflare Workers, Deno, or Bun | [`honoWebStandardStreamableHttp.ts`](https://github.com/modelcontextprotocol/typescript-sdk/blob/main/examples/server/src/honoWebStandardStreamableHttp.ts) |
+| Session management | Per-session transport routing, initialization, and cleanup | [`simpleStreamableHttp.ts`](https://github.com/modelcontextprotocol/typescript-sdk/blob/main/examples/server/src/simpleStreamableHttp.ts) |
+| Resumability | Replay missed SSE events via an event store | [`inMemoryEventStore.ts`](https://github.com/modelcontextprotocol/typescript-sdk/blob/main/examples/server/src/inMemoryEventStore.ts) |
+| CORS | Expose MCP headers for browser clients | [`simpleStreamableHttp.ts`](https://github.com/modelcontextprotocol/typescript-sdk/blob/main/examples/server/src/simpleStreamableHttp.ts) |
+| Multi-node deployment | Stateless, persistent-storage, and distributed routing patterns | [`examples/server/README.md`](https://github.com/modelcontextprotocol/typescript-sdk/blob/main/examples/server/README.md#multi-node-deployment-patterns) |

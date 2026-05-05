@@ -10,7 +10,7 @@ implement draft specifications that are still being refined.
 
 ## Available Experimental Features
 
-### [Tasks](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/docs/experimental/Tasks)
+### [Tasks](tasks.md)
 
 Tasks enable asynchronous execution of MCP operations. Instead of waiting for a
 long-running operation to complete, the server returns a task reference immediately.
@@ -39,4 +39,4 @@ result = await session.experimental.call_tool_as_task("tool_name", {"arg": "valu
 
 Since these features are experimental, feedback is especially valuable. If you encounter
 issues or have suggestions, please open an issue on the
-[python-sdk repository](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/docs/experimental/python-sdk repository).
+[python-sdk repository](https://github.com/modelcontextprotocol/python-sdk/issues).

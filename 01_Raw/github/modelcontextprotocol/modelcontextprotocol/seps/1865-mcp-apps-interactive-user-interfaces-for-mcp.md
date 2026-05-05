@@ -12,7 +12,7 @@
 
 <Note>
 The full extension specification is maintained in the
-[ext-apps repository](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/ext-apps repository).
+[ext-apps repository](https://github.com/modelcontextprotocol/ext-apps/tree/main/specification).
 </Note>
 
 ## Abstract
@@ -33,14 +33,14 @@ This gap blocks many use cases that require visual presentation and interactivit
 plain text or structured data. As more hosts adopt this capability, the risk of fragmentation and
 interoperability challenges grows.
 
-[MCP-UI](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/MCP-UI) has demonstrated the viability and value of MCP apps built on UI
+[MCP-UI](https://mcpui.dev/) has demonstrated the viability and value of MCP apps built on UI
 resources and serves as a community playground for the UI spec and SDK. Fueled by a dedicated
 community, it developed the bi-directional communication model and the HTML, external URL, and
 remote DOM content types. MCP-UI's adopters, including hosts and providers such as Postman,
 HuggingFace, Shopify, Goose, and ElevenLabs, have provided critical insights and contributions to
 the community.
 
-OpenAI's [Apps SDK](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/Apps SDK), launched in November 2025, further
+OpenAI's [Apps SDK](https://developers.openai.com/apps-sdk/), launched in November 2025, further
 validated the demand for rich UI experiences within conversational AI interfaces. The Apps SDK
 enables developers to build rich, interactive applications inside ChatGPT using MCP as its
 backbone.
@@ -62,7 +62,7 @@ unifies the approaches pioneered by MCP-UI and the Apps SDK into a single, open 
 ## Specification
 
 The full specification can be found at
-[modelcontextprotocol/ext-apps](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/modelcontextprotocol/ext-apps).
+[modelcontextprotocol/ext-apps](https://github.com/modelcontextprotocol/ext-apps/blob/main/specification/draft/apps.mdx).
 
 At a high level, MCP Apps extends the Model Context Protocol to enable servers to deliver
 interactive user interfaces to hosts. This extension introduces:
@@ -78,7 +78,7 @@ type, with extensibility for future formats.
 
 As an extension, MCP Apps is optional and must be explicitly negotiated between clients and servers
 through the extension capabilities mechanism (see Capability Negotiation section in the
-[full specification](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/full specification)).
+[full specification](https://github.com/modelcontextprotocol/ext-apps/blob/main/specification/draft/apps.mdx)).
 
 ## Rationale
 
@@ -143,11 +143,11 @@ Based on the threat model, MCP Apps proposes the following mitigations:
 - **User consent**: Hosts can require explicit approval for UI-initiated tool calls
 
 A full threat model analysis and mitigations are available in the
-[full specification](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/full specification).
+[full specification](https://github.com/modelcontextprotocol/ext-apps/blob/main/specification/draft/apps.mdx).
 
 ## Reference Implementation
 
-- [MCP-UI](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/MCP-UI) client and server SDKs support the patterns proposed
+- [MCP-UI](https://github.com/idosal/mcp-ui) client and server SDKs support the patterns proposed
   in this spec.
-- [ext-apps](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/ext-apps) repository contains a prototype
+- [ext-apps](https://github.com/modelcontextprotocol/ext-apps) repository contains a prototype
   implementation by Olivier Chafik.

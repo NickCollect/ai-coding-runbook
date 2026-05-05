@@ -318,7 +318,7 @@ from mcp.server.mcpserver import MCPServer, Context
 mcp = MCPServer("Demo")
 ```
 
-`Context` is the type annotation for the `ctx` parameter injected into tools, resources, and prompts (see [`get_context()` removed](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/docs/`get_context()` removed) below).
+`Context` is the type annotation for the `ctx` parameter injected into tools, resources, and prompts (see [`get_context()` removed](#mcpserverget_context-removed) below).
 
 All submodules under `mcp.server.fastmcp.*` are now under `mcp.server.mcpserver.*` with the same structure. Common imports:
 
@@ -450,13 +450,16 @@ In v2, the lowlevel `Server` no longer has decorator methods (handlers are const
 from mcp.server import ServerRequestContext
 from mcp.types import EmptyResult, SetLevelRequestParams, SubscribeRequestParams
 
+
 async def handle_set_logging_level(ctx: ServerRequestContext, params: SetLevelRequestParams) -> EmptyResult:
     ...
     return EmptyResult()
 
+
 async def handle_subscribe(ctx: ServerRequestContext, params: SubscribeRequestParams) -> EmptyResult:
     ...
     return EmptyResult()
+
 
 mcp._lowlevel_server._add_request_handler("logging/setLevel", handle_set_logging_level)  # pyright: ignore[reportPrivateUsage]
 mcp._lowlevel_server._add_request_handler("resources/subscribe", handle_subscribe)  # pyright: ignore[reportPrivateUsage]
@@ -707,7 +710,7 @@ async with create_client_server_memory_streams() as (client_streams, server_stre
 
 ### Resource URI type changed from `AnyUrl` to `str`
 
-The `uri` field on resource-related types now uses `str` instead of Pydantic's `AnyUrl`. This aligns with the [MCP specification schema](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/docs/MCP specification schema) which defines URIs as plain strings (`uri: string`) without strict URL validation. This change allows relative paths like `users/me` that were previously rejected.
+The `uri` field on resource-related types now uses `str` instead of Pydantic's `AnyUrl`. This aligns with the [MCP specification schema](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/schema/draft/schema.ts) which defines URIs as plain strings (`uri: string`) without strict URL validation. This change allows relative paths like `users/me` that were previously rejected.
 
 **Before (v1):**
 
@@ -846,6 +849,7 @@ from mcp.types import (
 async def handle_list_tools(ctx: ServerRequestContext, params: PaginatedRequestParams | None) -> ListToolsResult:
     return ListToolsResult(tools=[Tool(name="my_tool", description="A tool", input_schema={})])
 
+
 async def handle_call_tool(ctx: ServerRequestContext, params: CallToolRequestParams) -> CallToolResult:
     return CallToolResult(
         content=[TextContent(type="text", text=f"Called {params.name}")],
@@ -889,6 +893,7 @@ All `params` and return types are importable from `mcp.types`.
 ```python
 from mcp.server import Server, ServerRequestContext
 from mcp.types import ProgressNotificationParams
+
 
 async def handle_progress(ctx: ServerRequestContext, params: ProgressNotificationParams) -> None:
     print(f"Progress: {params.progress}/{params.total}")
@@ -1014,6 +1019,7 @@ async def handle_call_tool(name: str, arguments: dict):
 from mcp.server import ServerRequestContext
 from mcp.types import CallToolRequestParams, CallToolResult, TextContent
 
+
 async def handle_call_tool(ctx: ServerRequestContext, params: CallToolRequestParams) -> CallToolResult:
     await ctx.session.send_log_message(level="info", data="Processing...")
     return CallToolResult(
@@ -1056,8 +1062,10 @@ async def custom_get_task(request: GetTaskRequest) -> GetTaskResult:
 from mcp.server import Server, ServerRequestContext
 from mcp.types import GetTaskRequestParams, GetTaskResult
 
+
 async def custom_get_task(ctx: ServerRequestContext, params: GetTaskRequestParams) -> GetTaskResult:
     ...
+
 
 server = Server("my-server")
 server.experimental.enable_tasks(on_get_task=custom_get_task)
@@ -1105,8 +1113,10 @@ The `streamable_http_app()` method is now available directly on the lowlevel `Se
 from mcp.server import Server, ServerRequestContext
 from mcp.types import ListToolsResult, PaginatedRequestParams
 
+
 async def handle_list_tools(ctx: ServerRequestContext, params: PaginatedRequestParams | None) -> ListToolsResult:
     return ListToolsResult(tools=[...])
+
 
 server = Server("my-server", on_list_tools=handle_list_tools)
 
@@ -1123,6 +1133,6 @@ The lowlevel `Server` also now exposes a `session_manager` property to access th
 
 If you encounter issues during migration:
 
-1. Check the [API Reference](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/docs/API Reference) for updated method signatures
-2. Review the [examples](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/docs/examples) for updated usage patterns
-3. Open an issue on [GitHub](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/docs/GitHub) if you find a bug or need further assistance
+1. Check the [API Reference](api/mcp/index.md) for updated method signatures
+2. Review the [examples](https://github.com/modelcontextprotocol/python-sdk/tree/main/examples) for updated usage patterns
+3. Open an issue on [GitHub](https://github.com/modelcontextprotocol/python-sdk/issues) if you find a bug or need further assistance

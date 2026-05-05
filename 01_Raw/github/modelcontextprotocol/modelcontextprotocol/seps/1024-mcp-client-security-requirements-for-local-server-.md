@@ -24,7 +24,7 @@ The existing MCP specification does not address client-side security concerns re
 
 4. **Arbitrary Code Execution**: Attackers can embed harmful commands in MCP server configurations and distribute them through legitimate channels (repositories, documentation, social media).
 
-Visual Studio Code [addressed this](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/addressed this) by implementing consent dialogs. Similarly, Cursor also supports a consent dialog for one-click local MCP server installation.
+Visual Studio Code [addressed this](https://den.dev/blog/vs-code-mcp-install-consent/) by implementing consent dialogs. Similarly, Cursor also supports a consent dialog for one-click local MCP server installation.
 
 Without explicit security requirements in the specification, MCP client implementers may unknowingly create vulnerable installation flows, putting end users at risk of system compromise.
 

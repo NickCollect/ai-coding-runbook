@@ -14,7 +14,7 @@ a vulnerability in an MCP SDK, please report it in the appropriate SDK repositor
 ## Reporting Security Issues in MCP SDKs
 
 If you discover a security vulnerability in an MCP SDK, please report it through the
-[GitHub Security Advisory process](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/GitHub Security Advisory process)
+[GitHub Security Advisory process](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability)
 in the relevant SDK repository.
 
 Please **do not** report security vulnerabilities through public GitHub issues, discussions,

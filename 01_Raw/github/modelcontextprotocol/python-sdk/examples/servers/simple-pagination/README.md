@@ -31,6 +31,7 @@ import asyncio
 from mcp.client.session import ClientSession
 from mcp.client.stdio import StdioServerParameters, stdio_client
 
+
 async def main():
     async with stdio_client(
         StdioServerParameters(command="uv", args=["run", "mcp-simple-pagination"])
@@ -55,6 +56,7 @@ async def main():
             # And for prompts
             prompts_page1 = await session.list_prompts()
             print(f"First page: {len(prompts_page1.prompts)} prompts")
+
 
 asyncio.run(main())
 ```

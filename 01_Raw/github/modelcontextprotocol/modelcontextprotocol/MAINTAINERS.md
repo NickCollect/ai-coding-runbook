@@ -6,211 +6,211 @@ This document lists current maintainers in the Model Context Protocol project.
 
 ## Lead Maintainers
 
-- [David Soria Parra](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/David Soria Parra)
-- [Den Delimarsky](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Den Delimarsky)
+- [David Soria Parra](https://github.com/dsp-ant)
+- [Den Delimarsky](https://github.com/localden)
 
 ## Core Maintainers
 
-- [Caitie McCaffrey](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Caitie McCaffrey)
-- [Che Liu](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Che Liu)
-- [Clare Liguori](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Clare Liguori)
-- [Kurtis Van Gent](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Kurtis Van Gent)
-- [Nick Aldridge](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Nick Aldridge)
-- [Nick Cooper](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Nick Cooper)
-- [Paul Carleton](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Paul Carleton)
-- [Peter Alexander](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Peter Alexander)
+- [Caitie McCaffrey](https://github.com/CaitieM20)
+- [Che Liu](https://github.com/pwwpche)
+- [Clare Liguori](https://github.com/clareliguori)
+- [Kurtis Van Gent](https://github.com/kurtisvg)
+- [Nick Aldridge](https://github.com/000-000-000-000-000)
+- [Nick Cooper](https://github.com/nickcoai)
+- [Paul Carleton](https://github.com/pcarleton)
+- [Peter Alexander](https://github.com/pja-ant)
 
 ## Emeritus
 
-- [Justin Spahr-Summers](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Justin Spahr-Summers) (Co-Inventor, Lead Maintainer Emeritus)
+- [Justin Spahr-Summers](https://github.com/jspahrsummers) (Co-Inventor, Lead Maintainer Emeritus)
 
 ## SDK Maintainers
 
 ### Java SDK
 
-- [Christian Tzolov](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Christian Tzolov)
-- [Dariusz Jędrzejczyk](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Dariusz Jędrzejczyk)
-- [Daniel Garnier-Moiroux](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Daniel Garnier-Moiroux)
-- [Mark Pollack](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Mark Pollack)
+- [Christian Tzolov](https://github.com/tzolov)
+- [Dariusz Jędrzejczyk](https://github.com/chemicL)
+- [Daniel Garnier-Moiroux](https://github.com/Kehrlann)
+- [Mark Pollack](https://github.com/markpollack)
 
 ### Ruby SDK
 
-- [Topher Bullock](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Topher Bullock)
-- [Koichi Ito](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Koichi Ito)
-- [Ateş Göral](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Ateş Göral)
-- [Jonathan Hefner](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Jonathan Hefner)
+- [Topher Bullock](https://github.com/topherbullock)
+- [Koichi Ito](https://github.com/koic)
+- [Ateş Göral](https://github.com/atesgoral)
+- [Jonathan Hefner](https://github.com/jonathanhefner)
 
 ### Swift SDK
 
-- [Matt Zmuda](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Matt Zmuda)
-- [Carl Peaslee](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Carl Peaslee)
-- [Maksym Mova](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Maksym Mova)
-- [Stephen Tallent](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Stephen Tallent)
+- [Matt Zmuda](https://github.com/mattt)
+- [Carl Peaslee](https://github.com/carlpeaslee)
+- [Maksym Mova](https://github.com/movetz)
+- [Stephen Tallent](https://github.com/stallent)
 
 ### Go SDK
 
-- [Maciej Kisiel](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Maciej Kisiel)
-- [Yaroslav Shevchuk](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Yaroslav Shevchuk)
-- [Guglielmo Colombo](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Guglielmo Colombo)
-- [Jonathan Amsterdam](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Jonathan Amsterdam)
+- [Maciej Kisiel](https://github.com/maciej-kisiel)
+- [Yaroslav Shevchuk](https://github.com/yarolegovich)
+- [Guglielmo Colombo](https://github.com/guglielmo-san)
+- [Jonathan Amsterdam](https://github.com/jba)
 
 ### C# SDK
 
-- [Stephan Halter](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Stephan Halter)
-- [Mike Kistler](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Mike Kistler)
-- [Den Delimarsky](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Den Delimarsky)
-- [Eirik Tsarpalis](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Eirik Tsarpalis)
-- [Stephen Toub](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Stephen Toub)
+- [Stephan Halter](https://github.com/halter73)
+- [Mike Kistler](https://github.com/mikekistler)
+- [Den Delimarsky](https://github.com/dend)
+- [Eirik Tsarpalis](https://github.com/eiriktsarpalis)
+- [Stephen Toub](https://github.com/stephentoub)
 
 ### Kotlin SDK
 
-- [Leonid Stashevsky](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Leonid Stashevsky)
-- [Sergey Ignatov](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Sergey Ignatov)
-- [Konstantin Pavlov](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Konstantin Pavlov)
-- [Pavel Gorgulov](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Pavel Gorgulov)
-- [Briliantov Vadim](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Briliantov Vadim)
-- [Sergei Dubov](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Sergei Dubov)
-- [Maria Tigina](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Maria Tigina)
+- [Leonid Stashevsky](https://github.com/e5l)
+- [Sergey Ignatov](https://github.com/ignatov)
+- [Konstantin Pavlov](https://github.com/kpavlov)
+- [Pavel Gorgulov](https://github.com/devcrocod)
+- [Briliantov Vadim](https://github.com/Ololoshechkin)
+- [Sergei Dubov](https://github.com/sdubov)
+- [Maria Tigina](https://github.com/tiginamaria)
 
 ### Python SDK
 
-- [Inna Harper](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Inna Harper)
-- [Jerome Swannack](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Jerome Swannack)
-- [Marcelo Trylesinski](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Marcelo Trylesinski)
-- [Max Isbey](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Max Isbey)
-- [Felix Weinberger](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Felix Weinberger)
+- [Inna Harper](https://github.com/ihrpr)
+- [Jerome Swannack](https://github.com/jerome3o)
+- [Marcelo Trylesinski](https://github.com/Kludex)
+- [Max Isbey](https://github.com/maxisbey)
+- [Felix Weinberger](https://github.com/felixweinberger)
 
 ### TypeScript SDK
 
-- [Inna Harper](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Inna Harper)
-- [Felix Weinberger](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Felix Weinberger)
-- [Olivier Chafik](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Olivier Chafik)
-- [Konstantin Konstantinov](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Konstantin Konstantinov)
-- [Matt Carey](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Matt Carey)
+- [Inna Harper](https://github.com/ihrpr)
+- [Felix Weinberger](https://github.com/felixweinberger)
+- [Olivier Chafik](https://github.com/ochafik)
+- [Konstantin Konstantinov](https://github.com/KKonstantinov)
+- [Matt Carey](https://github.com/mattzcarey)
 
 ### Rust SDK
 
-- [Alex Hancock](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Alex Hancock)
-- [Michael Bolin](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Michael Bolin)
-- [Bradley Axen](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Bradley Axen)
-- [Jack Amadeo](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Jack Amadeo)
-- [Michael Neale](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Michael Neale)
+- [Alex Hancock](https://github.com/alexhancock)
+- [Michael Bolin](https://github.com/bolinfest)
+- [Bradley Axen](https://github.com/baxen)
+- [Jack Amadeo](https://github.com/jamadeo)
+- [Michael Neale](https://github.com/michaelneale)
 
 ### PHP SDK
 
-- [Kyrian Obikwelu](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Kyrian Obikwelu)
-- [Christopher Hertel](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Christopher Hertel)
-- [Fabien Potencier](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Fabien Potencier)
-- [Nicolas Grekas](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Nicolas Grekas)
-- [Tobias Nyholm](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Tobias Nyholm)
-- [Roman Pronskiy](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Roman Pronskiy)
+- [Kyrian Obikwelu](https://github.com/CodeWithKyrian)
+- [Christopher Hertel](https://github.com/chr-hertel)
+- [Fabien Potencier](https://github.com/fabpot)
+- [Nicolas Grekas](https://github.com/nicolas-grekas)
+- [Tobias Nyholm](https://github.com/Nyholm)
+- [Roman Pronskiy](https://github.com/pronskiy)
 
 ## Project Maintainers
 
 ### use-mcp
 
-- [Glen Maddern](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Glen Maddern)
+- [Glen Maddern](https://github.com/geelen)
 
 ### Inspector
 
-- [Cliff Hall](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Cliff Hall)
-- [Konstantin Konstantinov](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Konstantin Konstantinov)
-- [Ola Hungerford](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Ola Hungerford)
-- [Bob Dickinson](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Bob Dickinson)
+- [Cliff Hall](https://github.com/cliffhall)
+- [Konstantin Konstantinov](https://github.com/KKonstantinov)
+- [Ola Hungerford](https://github.com/olaservo)
+- [Bob Dickinson](https://github.com/BobDickinson)
 
 ### Registry
 
-- [Toby Padilla](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Toby Padilla)
-- [Tadas Antanavicius](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Tadas Antanavicius)
-- [Adam Jones](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Adam Jones)
-- [Radoslav (Rado) Dimitrov](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Radoslav (Rado) Dimitrov)
-- [Bob Dickinson](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Bob Dickinson)
+- [Toby Padilla](https://github.com/toby)
+- [Tadas Antanavicius](https://github.com/tadasant)
+- [Adam Jones](https://github.com/domdomegg)
+- [Radoslav (Rado) Dimitrov](https://github.com/rdimitrov)
+- [Bob Dickinson](https://github.com/BobDickinson)
 
 ### MCPB (Model Context Protocol Bundle)
 
-- [Alexander Sklar](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Alexander Sklar)
-- [Adam Jones](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Adam Jones)
-- [Joan Xie](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Joan Xie)
+- [Alexander Sklar](https://github.com/asklar)
+- [Adam Jones](https://github.com/domdomegg)
+- [Joan Xie](https://github.com/joan-anthropic)
 
 ### Reference Servers
 
-- [Ola Hungerford](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Ola Hungerford)
-- [Cliff Hall](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Cliff Hall)
-- [Tadas Antanavicius](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Tadas Antanavicius)
-- [Shaun Smith](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Shaun Smith)
-- [Jonathan Hefner](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Jonathan Hefner)
+- [Ola Hungerford](https://github.com/olaservo)
+- [Cliff Hall](https://github.com/cliffhall)
+- [Tadas Antanavicius](https://github.com/tadasant)
+- [Shaun Smith](https://github.com/evalstate)
+- [Jonathan Hefner](https://github.com/jonathanhefner)
 
 ## Community Moderators
 
-- [Ola Hungerford](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Ola Hungerford)
-- [Cliff Hall](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Cliff Hall)
-- [Shaun Smith](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Shaun Smith)
-- [Jonathan Hefner](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Jonathan Hefner)
-- [Tadas Antanavicius](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Tadas Antanavicius)
-- [Peder Holdgaard Pedersen](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Peder Holdgaard Pedersen)
+- [Ola Hungerford](https://github.com/olaservo)
+- [Cliff Hall](https://github.com/cliffhall)
+- [Shaun Smith](https://github.com/evalstate)
+- [Jonathan Hefner](https://github.com/jonathanhefner)
+- [Tadas Antanavicius](https://github.com/tadasant)
+- [Peder Holdgaard Pedersen](https://github.com/PederHP)
 
 ## Working Group & Interest Group Maintainers
 
-[Working Groups and Interest Groups](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Working Groups and Interest Groups) are not required to have maintainers (they can be managed by informal facilitators), but maintainers may be appointed on an as-needed basis.
+[Working Groups and Interest Groups](https://modelcontextprotocol.io/community/working-interest-groups) are not required to have maintainers (they can be managed by informal facilitators), but maintainers may be appointed on an as-needed basis.
 
 ### Security Interest Group
 
-- [Den Delimarsky](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Den Delimarsky)
-- [Paul Carleton](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Paul Carleton)
-- [Jenn Newton](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Jenn Newton)
+- [Den Delimarsky](https://github.com/dend)
+- [Paul Carleton](https://github.com/pcarleton)
+- [Jenn Newton](https://github.com/jenn-newton)
 
 ### Authorization Interest Group
 
-- [Aaron Parecki](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Aaron Parecki)
-- [Darin McAdams](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Darin McAdams)
-- [Paul Carleton](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Paul Carleton)
+- [Aaron Parecki](https://github.com/aaronpk)
+- [Darin McAdams](https://github.com/D-McAdams)
+- [Paul Carleton](https://github.com/pcarleton)
 
 ### Client Implementor Interest Group
 
 **Note:** These individuals serve as MCP protocol representatives for their respective clients. For client-specific issues, use the official support channels provided by each product.
 
-- [Alex Hancock](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Alex Hancock) - Goose
-- [Ben Brandt](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Ben Brandt) - Zed
-- [Connor Peet](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Connor Peet) - VS Code
-- [Gabriel Peal](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Gabriel Peal) - Codex
-- [Jun Han](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Jun Han) - GitHub Copilot for JetBrains
-- [Tyler Leonhardt](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Tyler Leonhardt) - VS Code
-- [Michael Feldstein](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Michael Feldstein) - Cursor
+- [Alex Hancock](https://github.com/alexhancock) - Goose
+- [Ben Brandt](https://github.com/benbrandt) - Zed
+- [Connor Peet](https://github.com/connor4312) - VS Code
+- [Gabriel Peal](https://github.com/gpeal) - Codex
+- [Jun Han](https://github.com/formulahendry) - GitHub Copilot for JetBrains
+- [Tyler Leonhardt](https://github.com/TylerLeonhardt) - VS Code
+- [Michael Feldstein](https://github.com/msfeldstein) - Cursor
 
 ### Financial Services Interest Group
 
-- [Sambhav Kothari](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Sambhav Kothari)
-- [Peder Holdgaard Pedersen](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Peder Holdgaard Pedersen)
+- [Sambhav Kothari](https://github.com/sambhav)
+- [Peder Holdgaard Pedersen](https://github.com/PederHP)
 
 ### Transports Interest Group
 
-- [Kurtis Van Gent](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Kurtis Van Gent)
-- [Jonathan Hefner](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Jonathan Hefner)
-- [Shaun Smith](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Shaun Smith)
-- [Harvey Tuch](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Harvey Tuch)
+- [Kurtis Van Gent](https://github.com/kurtisvg)
+- [Jonathan Hefner](https://github.com/jonathanhefner)
+- [Shaun Smith](https://github.com/evalstate)
+- [Harvey Tuch](https://github.com/htuch)
 
 ### Server Identity Working Group
 
-- [David Soria Parra](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/David Soria Parra)
-- [Nick Cooper](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Nick Cooper)
+- [David Soria Parra](https://github.com/dsp-ant)
+- [Nick Cooper](https://github.com/nickcoai)
 
 ### Agents Working Group
 
-- [Peter Alexander](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Peter Alexander)
-- [Luca Chang](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Luca Chang)
-- [Inna Harper](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Inna Harper)
+- [Peter Alexander](https://github.com/pja-ant)
+- [Luca Chang](https://github.com/LucaButBoring)
+- [Inna Harper](https://github.com/ihrpr)
 
 ### MCP Apps Working Group
 
-- [Liad Yosef](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Liad Yosef)
-- [Ido Salomon](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Ido Salomon)
+- [Liad Yosef](https://github.com/liady)
+- [Ido Salomon](https://github.com/idosal)
 
 ### Primitive Grouping Interest Group
 
-- [Tapan Chugh](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Tapan Chugh)
+- [Tapan Chugh](https://github.com/chughtapan)
 
 ## About This Document
 
 This document is updated by the MCP maintainers and reflects the current
 governance structure. For more information about MCP governance, see our
-[governance documentation](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/governance documentation).
+[governance documentation](https://modelcontextprotocol.io/community/governance).

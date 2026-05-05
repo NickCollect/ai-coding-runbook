@@ -3,7 +3,7 @@
 Thank you for your interest in contributing to the Model Context Protocol specification, schemas, or docs!
 This document outlines how to contribute to this project.
 
-Also see the [overall MCP communication guidelines in our docs](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/overall MCP communication guidelines in our docs), which explain how and where discussions about changes happen.
+Also see the [overall MCP communication guidelines in our docs](https://modelcontextprotocol.io/community/communication), which explain how and where discussions about changes happen.
 
 ## General prerequisites
 
@@ -12,12 +12,12 @@ The following software is required to work on the spec:
 - Node.js 24 or above
 - TypeScript
 - TypeScript JSON Schema (for generating JSON schema)
-- [Mintlify](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Mintlify) (optional, for docs)
+- [Mintlify](https://mintlify.com/) (optional, for docs)
 - nvm (optional, for managing Node versions)
 
 ### Getting Started
 
-1. [Fork the repository](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Fork the repository)
+1. [Fork the repository](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo)
 
 2. Clone your fork:
 
@@ -55,7 +55,7 @@ npm run generate:schema
 
 ## Documentation changes
 
-Documentation is written in MDX format and in the [`docs`](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/`docs`) directory.
+Documentation is written in MDX format and in the [`docs`](./docs) directory.
 
 You can preview documentation changes locally by running:
 
@@ -76,7 +76,7 @@ npm run format
 
 ## Blog changes
 
-The blog is built using [Hugo](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Hugo) and located in the [`blog`](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/`blog`) directory.
+The blog is built using [Hugo](https://gohugo.io/installation/) and located in the [`blog`](./blog) directory.
 
 To preview blog changes locally:
 
@@ -102,8 +102,8 @@ When contributing to the documentation:
 
 ## Specification Proposal Guidelines
 
-Specification changes follow the [SEP process](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/SEP process).
-Before drafting a proposal, review the [MCP design principles](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/MCP design principles)
+Specification changes follow the [SEP process](https://modelcontextprotocol.io/community/sep-guidelines).
+Before drafting a proposal, review the [MCP design principles](https://modelcontextprotocol.io/community/design-principles)
 — proposals that align with these principles move faster through review.
 
 The shortest summary: explore the problem space and validate that others share the problem,
@@ -170,9 +170,9 @@ We reserve the right to close submissions that appear to not follow the disclosu
 
 By contributing, you agree that your code or specification contributions will be
 licensed under the Apache License 2.0. Documentation contributions (excluding
-specifications) are licensed under CC-BY 4.0. See the [LICENSE](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/LICENSE) file for
+specifications) are licensed under CC-BY 4.0. See the [LICENSE](LICENSE) file for
 details.
 
 ## Security
 
-Please review our [Security Policy](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/Security Policy) for reporting security issues.
+Please review our [Security Policy](SECURITY.md) for reporting security issues.

@@ -23,7 +23,7 @@ MCP currently lacks any form of guidance on how extensions are to be proposed or
 
 An MCP extension is an optional addition to the specification that defines capabilities beyond the core protocol. Extensions enable functionality that may be modular (e.g., distinct features like authentication), specialized (e.g., industry-specific logic), or experimental (e.g., features being incubated for potential core inclusion).
 
-Extensions are identified using a unique _extension identifier_ with the format: `{vendor-prefix}/{extension-name}`, e.g. `io.modelcontextprotocol/oauth-client-credentials` or `com.example/websocket-transport`. The names follow the same rules as the [\_meta keys](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/\_meta keys), except that the prefix is mandatory.
+Extensions are identified using a unique _extension identifier_ with the format: `{vendor-prefix}/{extension-name}`, e.g. `io.modelcontextprotocol/oauth-client-credentials` or `com.example/websocket-transport`. The names follow the same rules as the [\_meta keys](https://modelcontextprotocol.io/specification/draft/basic/index#meta), except that the prefix is mandatory.
 
 To prevent identifier collisions, the vendor prefix SHOULD be a reversed domain name that the extension author owns or controls (similar to Java package naming conventions). For example, a company owning `example.com` would use `com.example/` as their prefix.
 
@@ -40,12 +40,12 @@ Official extensions live inside the MCP github org at https://github.com/modelco
 An _extension repository_ is a repository within the official modelcontextprotocol github org with the `ext-` prefix, e.g. https://github.com/modelcontextprotocol/ext-auth.
 
 - Extension repositories are created at the core maintainers discretion with the purpose of grouping extensions in a specific area (e.g. auth, transport, financial services).
-- A repository has a set of maintainers (identified by MAINTAINERS.md) appointed by the core maintainers that are responsible for the repository and extensions within it (e.g. [ext-auth MAINTAINERS.md](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/ext-auth MAINTAINERS.md), [ext-apps MAINTAINERS.md](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/ext-apps MAINTAINERS.md)).
+- A repository has a set of maintainers (identified by MAINTAINERS.md) appointed by the core maintainers that are responsible for the repository and extensions within it (e.g. [ext-auth MAINTAINERS.md](https://github.com/modelcontextprotocol/ext-auth/blob/main/MAINTAINERS.md), [ext-apps MAINTAINERS.md](https://github.com/modelcontextprotocol/ext-apps/blob/main/MAINTAINERS.md)).
 - Extensions SHOULD have an associated working group or interest group to guide their development and gather community input.
 
 An _extension_ is a versioned specification document within an extension repository, e.g. https://github.com/modelcontextprotocol/ext-auth/blob/main/specification/draft/oauth-client-credentials.mdx
 
-- Extension specifications MUST use the same language as the core specification (i.e. [[BCP 14](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/[BCP 14)] [[RFC2119](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/[RFC2119)] [[RFC8174](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/[RFC8174)]) and SHOULD be worded as if they were part of the core specification.
+- Extension specifications MUST use the same language as the core specification (i.e. [[BCP 14](https://www.rfc-editor.org/info/bcp14)] [[RFC2119](https://datatracker.ietf.org/doc/html/rfc2119)] [[RFC8174](https://datatracker.ietf.org/doc/html/rfc8174)]) and SHOULD be worded as if they were part of the core specification.
 
 While day-to-day governance is delegated to extension repository maintainers, the core maintainers retain ultimate authority over official extensions, including the ability to modify, deprecate, or remove any extension.
 
@@ -69,7 +69,7 @@ To graduate an experimental extension to official status, the standard SEP proce
 
 Extensions MAY optionally begin as experimental extensions (see _Experimental Extensions_ section) to facilitate prototyping and collaboration before formal submission. This incubation period is encouraged but not required.
 
-To become an official extension, extensions are created via a SEP in the [main MCP repository](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/main MCP repository) using the [standard SEP guidelines](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/standard SEP guidelines) but with a new type: **Extensions Track**. This type follows the same review and acceptance process as Standards Track SEPs, but clearly indicates that the proposal is for an extension rather than a core protocol addition. The SEP must identify the Working Group and Extension Maintainers that will be responsible for the extension. See [SEP-2148](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/SEP-2148) for how maintainers are appointed.
+To become an official extension, extensions are created via a SEP in the [main MCP repository](https://github.com/modelcontextprotocol/modelcontextprotocol/) using the [standard SEP guidelines](https://modelcontextprotocol.io/community/sep-guidelines) but with a new type: **Extensions Track**. This type follows the same review and acceptance process as Standards Track SEPs, but clearly indicates that the proposal is for an extension rather than a core protocol addition. The SEP must identify the Working Group and Extension Maintainers that will be responsible for the extension. See [SEP-2148](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/2148) for how maintainers are appointed.
 
 Extension SEPs:
 
@@ -90,7 +90,7 @@ Eventually, some extensions MAY transition to being core protocol features. This
 
 ### Spec Recommendation
 
-Extensions will be referenced from a new page on the MCP website at [modelcontextprotocol.io/extensions](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/modelcontextprotocol.io/extensions) (to be created) with links to their specification.
+Extensions will be referenced from a new page on the MCP website at [modelcontextprotocol.io/extensions](http://modelcontextprotocol.io/extensions) (to be created) with links to their specification.
 
 Links to relevant extensions MAY also be added to the core specification as appropriate (e.g. https://modelcontextprotocol.io/specification/draft/basic/authorization may link to ext-auth extensions), but they MUST be clearly advertised as optional extensions and SHOULD be links only (not copies of specification text).
 
@@ -112,7 +112,7 @@ Extensions SHOULD be versioned, but exact versioning approach is not specified h
 
 ### Negotiation
 
-Clients and servers advertise their support for extensions in the [ClientCapabilities](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/ClientCapabilities) and [ServerCapabilities](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/ServerCapabilities) fields respectively, and in the [Server Card](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/Server Card) (currently in progress).
+Clients and servers advertise their support for extensions in the [ClientCapabilities](https://modelcontextprotocol.io/specification/2025-06-18/schema#clientcapabilities) and [ServerCapabilities](https://modelcontextprotocol.io/specification/2025-06-18/schema#servercapabilities) fields respectively, and in the [Server Card](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1649) (currently in progress).
 
 A new "extensions" field will be introduced to each that is a map of _extension identifiers_ to per-extension settings objects. Each extension specifies the schema of its settings object; an empty object indicates no settings.
 
@@ -248,7 +248,7 @@ Some specific design choices:
 
 The extension framework itself is purely additive to the core protocol, so there are no backwards compatibility concerns with the core specification.
 
-The design described in this SEP is consistent with existing official extensions ([ext-apps](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/ext-apps) and [ext-auth](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/ext-auth)), which already use the patterns specified here for capability negotiation and extension identifiers.
+The design described in this SEP is consistent with existing official extensions ([ext-apps](https://github.com/modelcontextprotocol/ext-apps) and [ext-auth](https://github.com/modelcontextprotocol/ext-auth)), which already use the patterns specified here for capability negotiation and extension identifiers.
 
 However, individual extensions may have their own backwards compatibility concerns. Extensions MUST consider and account for backwards compatibility in their design, both across core protocol versions and extension versions. Breaking changes within an extension MUST use a new extension identifier (see _Definition_ section). Extensions SHOULD also document their approach to backwards compatibility and stability (e.g. an extension MAY advertise itself as "experimental" indicating that it may break without notice).
 

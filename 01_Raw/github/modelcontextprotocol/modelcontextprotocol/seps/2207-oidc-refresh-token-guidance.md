@@ -92,7 +92,7 @@ MCP Servers (acting as OAuth 2.0 Protected Resources):
 The `offline_access` scope is fundamentally different from resource-specific
 scopes. It represents a client's desire for long-lived access, not a
 requirement of the resource. Per
-[OAuth 2.1 Section 5.3.1](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/OAuth 2.1 Section 5.3.1),
+[OAuth 2.1 Section 5.3.1](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-13#section-5.3.1),
 the `scope` attribute in `WWW-Authenticate` indicates "the required scope of the
 access token for accessing the requested resource." Since the resource doesn't
 require `offline_access`, including it would be semantically incorrect.

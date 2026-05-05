@@ -76,7 +76,7 @@ allowed during this period. Violating these terms may lead to a permanent ban.
 
 This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 2.0, available at <https://www.contributor-covenant.org/version/2/0/code_of_conduct.html>.
 
-Community Impact Guidelines were inspired by [Mozilla's code of conduct enforcement ladder](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/Mozilla's code of conduct enforcement ladder).
+Community Impact Guidelines were inspired by [Mozilla's code of conduct enforcement ladder](https://github.com/mozilla/diversity).
 
 [homepage]: https://www.contributor-covenant.org
 

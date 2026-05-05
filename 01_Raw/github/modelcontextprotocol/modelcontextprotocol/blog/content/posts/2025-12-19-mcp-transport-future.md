@@ -13,9 +13,9 @@ tags:
 ShowToc: true
 ---
 
-When MCP first launched in November of 2024, quite a few of its users relied on local environments, connecting clients to servers over [STDIO](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/STDIO). As MCP became the go-to standard for LLM integrations, community needs evolved, leading to the build-out of infrastructure around remote servers. There's now growing demand for distributed deployments that can operate at scale.
+When MCP first launched in November of 2024, quite a few of its users relied on local environments, connecting clients to servers over [STDIO](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#stdio). As MCP became the go-to standard for LLM integrations, community needs evolved, leading to the build-out of infrastructure around remote servers. There's now growing demand for distributed deployments that can operate at scale.
 
-The [Streamable HTTP](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Streamable HTTP) transport was a significant step forward, enabling remote MCP deployments and unlocking new use cases. However, as enterprise deployments scale to millions of daily requests, early adopters have encountered practical challenges that make it difficult to leverage existing infrastructure patterns. The friction of stateful connections has become a bottleneck for managed services and load balancing.
+The [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) transport was a significant step forward, enabling remote MCP deployments and unlocking new use cases. However, as enterprise deployments scale to millions of daily requests, early adopters have encountered practical challenges that make it difficult to leverage existing infrastructure patterns. The friction of stateful connections has become a bottleneck for managed services and load balancing.
 
 Some of these challenges include:
 
@@ -38,7 +38,7 @@ We envision a future where agentic applications are stateful, but the protocol i
 
 We are exploring ways to make MCP stateless by:
 
-- Replacing the [`initialize` handshake](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/`initialize` handshake) and sending the shared information with each request and response instead.
+- Replacing the [`initialize` handshake](https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle#initialization) and sending the shared information with each request and response instead.
 - Providing a `discovery` mechanism for clients to query server capabilities if they need the information early, for scenarios such as UI hydration.
 
 These changes enable a more dynamic model where clients can optimistically attempt operations and receive clear error messages if a capability is unsupported.
@@ -57,7 +57,7 @@ This direction mirrors standard HTTP, where the protocol itself is stateless whi
 
 ### Elicitations and Sampling
 
-Two MCP features are central to a few of the modern AI workflows: [Elicitations](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Elicitations), which request human input, and [Sampling](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Sampling), which enable agentic LLM interactions.
+Two MCP features are central to a few of the modern AI workflows: [Elicitations](https://modelcontextprotocol.io/specification/2025-11-25/client/elicitation), which request human input, and [Sampling](https://modelcontextprotocol.io/specification/2025-11-25/client/sampling), which enable agentic LLM interactions.
 
 Supporting these features at scale requires rethinking the bidirectional communication pattern they rely on. Currently, when a server needs more information to complete a tool call, it suspends execution and waits for a client response, requiring it to track all outstanding requests.
 
@@ -65,11 +65,11 @@ To address this, we're looking at designing server requests and responses to wor
 
 ### Update Notifications and Subscriptions
 
-MCP is dynamic by design - [tools](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/tools), [prompts](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/prompts), and [resources](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/resources) can change during operation. Today, servers send `ListChangedNotification` messages to clients as a hint to invalidate their caches.
+MCP is dynamic by design - [tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools), [prompts](https://modelcontextprotocol.io/specification/2025-11-25/server/prompts), and [resources](https://modelcontextprotocol.io/specification/2025-11-25/server/resources) can change during operation. Today, servers send `ListChangedNotification` messages to clients as a hint to invalidate their caches.
 
 We're exploring replacing the general-purpose `GET` stream with explicit subscription streams. Clients would open dedicated streams for specific items they want to monitor, with support for multiple concurrent subscriptions. If a stream is interrupted, the client simply restarts it with no complex resumption logic.
 
-To make notifications truly optional - an optimization rather than a requirement - we're considering adding Time-To-Live (TTL) values and version identifiers (such as [ETags](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/ETags)) to data. This would let clients make intelligent caching decisions independently of the notification stream, significantly improving reliability.
+To make notifications truly optional - an optimization rather than a requirement - we're considering adding Time-To-Live (TTL) values and version identifiers (such as [ETags](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/ETag)) to data. This would let clients make intelligent caching decisions independently of the notification stream, significantly improving reliability.
 
 ### JSON-RPC Envelopes
 
@@ -81,7 +81,7 @@ While we're keeping JSON-RPC as the message format, we're exploring ways to expo
 
 Today, clients must complete a full initialization handshake just to learn basic information about an MCP server, like its capabilities or available tools. This creates friction for discovery, integration, and optimization scenarios.
 
-We're exploring the direction of introducing [MCP Server Cards](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/MCP Server Cards): structured metadata documents that servers expose through a standardized `/.well-known/mcp.json` endpoint. Server Cards enable clients to discover server capabilities, authentication requirements, and available primitives _before_ establishing a connection. This unlocks use cases like autoconfiguration, automated discovery, static security validation, and reduced latency for UI hydration — all without requiring the full initialization sequence.
+We're exploring the direction of introducing [MCP Server Cards](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1649): structured metadata documents that servers expose through a standardized `/.well-known/mcp.json` endpoint. Server Cards enable clients to discover server capabilities, authentication requirements, and available primitives _before_ establishing a connection. This unlocks use cases like autoconfiguration, automated discovery, static security validation, and reduced latency for UI hydration — all without requiring the full initialization sequence.
 
 ### Official and Custom Transports
 
@@ -89,7 +89,7 @@ To ensure a minimum compatibility baseline across the ecosystem, MCP will contin
 
 We also recognize that transport and protocol changes can be disruptive. Backwards compatibility is a priority, and we'll only introduce breaking changes when strictly necessary for critical use cases.
 
-For teams with specialized requirements, the MCP Specification supports [Custom Transports](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Custom Transports), giving developers the flexibility to build alternatives that fit their needs. Our focus is on making Custom Transports easier to implement by improving SDK integration—so the community can experiment freely without fragmenting the standard.
+For teams with specialized requirements, the MCP Specification supports [Custom Transports](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#custom-transports), giving developers the flexibility to build alternatives that fit their needs. Our focus is on making Custom Transports easier to implement by improving SDK integration—so the community can experiment freely without fragmenting the standard.
 
 ## Summary
 
@@ -99,8 +99,8 @@ For most SDK users, both on the client and server sides, the impact will be mini
 
 ## Next Steps
 
-Work is already underway. Our goal is to finalize the required [Spec Enhancement Proposals](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Spec Enhancement Proposals) (SEPs) in the first quarter of 2026 for inclusion in the next specification release, which is tentatively slated for June of 2026. With these changes, MCP can easily scale while keeping the ergonomics that made it successful.
+Work is already underway. Our goal is to finalize the required [Spec Enhancement Proposals](https://modelcontextprotocol.io/community/sep-guidelines) (SEPs) in the first quarter of 2026 for inclusion in the next specification release, which is tentatively slated for June of 2026. With these changes, MCP can easily scale while keeping the ergonomics that made it successful.
 
-We want your input. Join us in the [MCP Contributors Discord server](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/MCP Contributors Discord server), or engage directly with transport-related SEPs in the [Model Context Protocol repository](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Model Context Protocol repository).
+We want your input. Join us in the [MCP Contributors Discord server](https://modelcontextprotocol.io/community/communication#discord), or engage directly with transport-related SEPs in the [Model Context Protocol repository](https://github.com/modelcontextprotocol/modelcontextprotocol/pulls).
 
 This roadmap is shaped by real-world feedback from developers and companies building with MCP. We're excited to collaborate with the MCP community to continuously improve the protocol and its capabilities!

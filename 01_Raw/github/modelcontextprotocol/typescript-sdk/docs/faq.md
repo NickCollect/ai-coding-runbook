@@ -7,10 +7,10 @@ title: FAQ
 <details>
 <summary>Table of Contents</summary>
 
-- [General](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/General)
-- [Clients](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Clients)
-- [Servers](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Servers)
-- [v1 (legacy)](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/v1 (legacy))
+- [General](#general)
+- [Clients](#clients)
+- [Servers](#servers)
+- [v1 (legacy)](#v1-legacy)
 
 </details>
 
@@ -67,7 +67,7 @@ For production use, you can either:
 
 ### Where can I find runnable server examples?
 
-The [server quickstart](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/server quickstart) walks you through building a weather server from scratch. Its complete source lives in [`examples/server-quickstart/`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/`examples/server-quickstart/`). For more advanced examples (OAuth, streaming, sessions, etc.), see the server examples index in [`examples/server/README.md`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/`examples/server/README.md`).
+The [server quickstart](./server-quickstart.md) walks you through building a weather server from scratch. Its complete source lives in [`examples/server-quickstart/`](https://github.com/modelcontextprotocol/typescript-sdk/tree/main/examples/server-quickstart/). For more advanced examples (OAuth, streaming, sessions, etc.), see the server examples index in [`examples/server/README.md`](../examples/server/README.md).
 
 ### Where are the server auth helpers?
 
@@ -82,4 +82,4 @@ wanting to switch to `v2` and using SSE should migrate to Streamable HTTP.
 
 ### Where do v1 documentation and v1-specific fixes live?
 
-The v1 API documentation is available at [`https://ts.sdk.modelcontextprotocol.io/`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/`https:/ts.sdk.modelcontextprotocol.io/`). The v1 source code and any v1-specific fixes live on the long-lived [`v1.x` branch](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/`v1.x` branch). V2 API docs are at [`/v2/`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/`/v2/`).
+The v1 API documentation is available at [`https://ts.sdk.modelcontextprotocol.io/`](https://ts.sdk.modelcontextprotocol.io/). The v1 source code and any v1-specific fixes live on the long-lived [`v1.x` branch](https://github.com/modelcontextprotocol/typescript-sdk/tree/v1.x). V2 API docs are at [`/v2/`](https://ts.sdk.modelcontextprotocol.io/v2/).

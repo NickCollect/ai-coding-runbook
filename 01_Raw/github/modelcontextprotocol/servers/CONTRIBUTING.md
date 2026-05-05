@@ -2,11 +2,11 @@
 
 Thanks for your interest in contributing! Here's how you can help make this repo better.
 
-We accept changes through [the standard GitHub flow model](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/the standard GitHub flow model).
+We accept changes through [the standard GitHub flow model](https://docs.github.com/en/get-started/using-github/github-flow).
 
 ## Server Listings
 
-The README no longer contains a list of third-party MCP servers — that list has been retired in favor of the [MCP Server Registry](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/MCP Server Registry). To make your server discoverable, follow the [quickstart guide](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/quickstart guide) to publish it there.
+The README no longer contains a list of third-party MCP servers — that list has been retired in favor of the [MCP Server Registry](https://github.com/modelcontextprotocol/registry). To make your server discoverable, follow the [quickstart guide](https://github.com/modelcontextprotocol/registry/blob/main/docs/modelcontextprotocol-io/quickstart.mdx) to publish it there.
 
 You can browse published servers at [https://registry.modelcontextprotocol.io/](https://registry.modelcontextprotocol.io/).
 
@@ -18,10 +18,10 @@ We welcome:
 - **Enhancements that demonstrate MCP protocol features** — We encourage contributions that help reference servers better illustrate underutilized aspects of the MCP protocol beyond just Tools, such as Resources, Prompts, or Roots. For example, adding Roots support to filesystem-server helps showcase this important but lesser-known feature.
 
 We're more selective about:
-- **Other new features** — Especially if they're not crucial to the server's core purpose or are highly opinionated. The existing servers are reference servers meant to inspire the community. If you need specific features, we encourage you to build enhanced versions and publish them to the [MCP Server Registry](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/MCP Server Registry)! We think a diverse ecosystem of servers is beneficial for everyone.
+- **Other new features** — Especially if they're not crucial to the server's core purpose or are highly opinionated. The existing servers are reference servers meant to inspire the community. If you need specific features, we encourage you to build enhanced versions and publish them to the [MCP Server Registry](https://github.com/modelcontextprotocol/registry)! We think a diverse ecosystem of servers is beneficial for everyone.
 
 We don't accept:
-- **New server implementations** — We encourage you to publish them to the [MCP Server Registry](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/MCP Server Registry) instead.
+- **New server implementations** — We encourage you to publish them to the [MCP Server Registry](https://github.com/modelcontextprotocol/registry) instead.
 
 ## Testing
 
@@ -35,6 +35,6 @@ We're more selective about adding wholly new documentation, especially in ways t
 
 ## Community
 
-[Learn how the MCP community communicates](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/Learn how the MCP community communicates).
+[Learn how the MCP community communicates](https://modelcontextprotocol.io/community/communication).
 
 Thank you for helping make MCP servers better for everyone!

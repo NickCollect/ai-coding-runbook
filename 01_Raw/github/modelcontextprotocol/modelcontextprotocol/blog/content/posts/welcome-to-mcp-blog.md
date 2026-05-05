@@ -17,5 +17,5 @@ The Model Context Protocol is an open standard that enables seamless integration
 
 We're excited to build this ecosystem together with you. Here's how you can participate:
 
-- Check out the [MCP specification](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/MCP specification)
-- Join the discussion on [GitHub](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/GitHub)
+- Check out the [MCP specification](https://github.com/modelcontextprotocol/modelcontextprotocol/tree/main/docs/specification)
+- Join the discussion on [GitHub](https://github.com/modelcontextprotocol)

@@ -24,7 +24,7 @@ Community discussion (GitHub Discussion #366, PR #655) revealed that implementat
 
 ### 1. Default Dialect
 
-Embedded JSON schemas within MCP messages **MUST** conform to [JSON Schema 2020-12](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/JSON Schema 2020-12) when no `$schema` field is present.
+Embedded JSON schemas within MCP messages **MUST** conform to [JSON Schema 2020-12](https://json-schema.org/draft/2020-12/schema) when no `$schema` field is present.
 
 ### 2. Explicit Dialect Declaration
 
@@ -147,14 +147,14 @@ Implementations should use well-maintained JSON Schema validator libraries and k
 
 ## Related Work
 
-### SEP-1330: Elicitation Enum Schema Improvements
+### [SEP-1330: Elicitation Enum Schema Improvements](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1330)
 
 **SEP-1330** proposes deprecating the non-standard `enumNames` property in favor of JSON Schema 2020-12 compliant patterns. This work is directly enabled by establishing 2020-12 as the default dialect.
 
 **Implementation Consideration:**  
 As noted in SEP-1330 discussion, there is some concern about parsing complexity with advanced JSON Schema features like `oneOf` and `anyOf`. However, these features are part of the JSON Schema standard and well-supported by mature validator libraries. Implementations can balance standards compliance with their parsing needs by using well-tested JSON Schema validation libraries.
 
-### SEP-834: Full JSON Schema 2020-12 Support
+### [SEP-834: Full JSON Schema 2020-12 Support](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/834)
 
 This SEP establishes the foundation (default dialect) while SEP-834 addresses comprehensive support for 2020-12 features.
 

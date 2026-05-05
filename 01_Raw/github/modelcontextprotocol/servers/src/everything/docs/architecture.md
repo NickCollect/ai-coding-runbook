@@ -1,11 +1,11 @@
 # Everything Server – Architecture
 
 **Architecture
-| [Project Structure](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/Project Structure)
-| [Startup Process](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/Startup Process)
-| [Server Features](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/Server Features)
-| [Extension Points](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/Extension Points)
-| [How It Works](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/How It Works)**
+| [Project Structure](structure.md)
+| [Startup Process](startup.md)
+| [Server Features](features.md)
+| [Extension Points](extension.md)
+| [How It Works](how-it-works.md)**
 
 This documentation summarizes the current layout and runtime architecture of the `src/everything` package.
 It explains how the server starts, how transports are wired, where tools, prompts, and resources are registered, and how to extend the system.
@@ -33,12 +33,12 @@ resource subscriptions and simulated logging.
 - The `build` script copies `docs/` into `dist/` so instruction files ship alongside the compiled server.
 - The CLI bin is configured in `package.json` as `mcp-server-everything` → `dist/index.js`.
 
-## [Project Structure](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/Project Structure)
+## [Project Structure](structure.md)
 
-## [Startup Process](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/Startup Process)
+## [Startup Process](startup.md)
 
-## [Server Features](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/Server Features)
+## [Server Features](features.md)
 
-## [Extension Points](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/Extension Points)
+## [Extension Points](extension.md)
 
-## [How It Works](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/How It Works)
+## [How It Works](how-it-works.md)

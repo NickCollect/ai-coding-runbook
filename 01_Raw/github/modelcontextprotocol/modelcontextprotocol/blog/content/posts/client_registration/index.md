@@ -10,10 +10,10 @@ The Model Context Protocol (MCP) has adopted OAuth 2.1 as the foundation for its
 
 This is especially important in a world where clients and servers don't have a pre-existing relationship - we can't assume that we will always know which MCP clients will connect to which MCP servers. This design highlights two challenges that need to be addressed:
 
-- Operational issues with managing client IDs via [Dynamic Client Registration](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/client_registration/Dynamic Client Registration) (DCR)
+- Operational issues with managing client IDs via [Dynamic Client Registration](https://datatracker.ietf.org/doc/html/rfc7591) (DCR)
 - Preventing client impersonation
 
-If you're already familiar with OAuth and the current state of client registration in MCP, skip to [Two Distinct Challenges in MCP Client Registration](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/client_registration/Two Distinct Challenges in MCP Client Registration).
+If you're already familiar with OAuth and the current state of client registration in MCP, skip to [Two Distinct Challenges in MCP Client Registration](#two-distinct-challenges-in-mcp-client-registration).
 
 ## Background on OAuth
 
@@ -104,7 +104,7 @@ The DCR design takes the pre-registration pattern available in modern OAuth-base
 
 ### **Solution: Client ID Metadata Documents (CIMD)**
 
-Client ID Metadata Documents (CIMD), described in [OAuth Client ID Metadata Document](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/client_registration/OAuth Client ID Metadata Document) and implemented by Bluesky, elegantly sidestep these operational issues.
+Client ID Metadata Documents (CIMD), described in [OAuth Client ID Metadata Document](https://www.ietf.org/archive/id/draft-parecki-oauth-client-id-metadata-document-03.html) and implemented by Bluesky, elegantly sidestep these operational issues.
 
 Instead of a registration step, clients use an HTTPS metadata URL as their client ID directly. The server fetches the metadata from the URL at authorization time:
 
@@ -139,7 +139,7 @@ For web-based clients, trust is more straightforward, as we have an HTTPS domain
 
 We can map impersonation scenarios on two axes: attacker cost and mitigation complexity.
 
-![Mitigation Cost vs Attack Cost](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/client_registration/mitigation-attack-cost.png)
+![Mitigation Cost vs Attack Cost](mitigation-attack-cost.png)
 
 **Low attacker cost/Low mitigation complexity: Domain-based attacks**
 
@@ -214,11 +214,11 @@ If we adopt these approaches, we’ll need good best practices and SDK support t
 
 ## **Next Steps**
 
-Discussions for these approaches are happening in the [Specification Enhancement Proposals](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/client_registration/Specification Enhancement Proposals) (SEP):
+Discussions for these approaches are happening in the [Specification Enhancement Proposals](https://modelcontextprotocol.io/community/sep-guidelines) (SEP):
 
-- SEP-991: Client ID Metadata Documents
-- SEP-1032: Software Statements with DCR
+- [SEP-991: Client ID Metadata Documents](https://github.com/modelcontextprotocol/specification/discussions/991)
+- [SEP-1032: Software Statements with DCR](https://github.com/modelcontextprotocol/specification/discussions/1032)
 
-Get involved: Join the conversation in [Discord](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/client_registration/Discord) (the \#auth-wg-client-registration channel) or comment on the SEPs directly.
+Get involved: Join the conversation in [Discord](https://discord.gg/6CSzBmMkjX) (the \#auth-wg-client-registration channel) or comment on the SEPs directly.
 
 A big thank to the following folks for help with this blog post: Den Delimarsky, Aaron Parecki, Geoff Goodman, Andrew Block, Pieter Kasselman, Abhishek Hingnikar, and Bobby Tiernay.

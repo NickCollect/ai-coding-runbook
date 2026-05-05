@@ -137,7 +137,7 @@ const transport = new StreamableHTTPClientTransport(new URL('http://localhost:30
 
 Resource Server helpers (`requireBearerAuth`, `mcpAuthMetadataRouter`, `getOAuthProtectedResourceMetadataUrl`, `OAuthTokenVerifier`) are now first-class in `@modelcontextprotocol/express`.
 
-Authorization Server helpers (`mcpAuthRouter`, `OAuthServerProvider`, `ProxyOAuthServerProvider`, `authenticateClient`, `allowedMethods`, etc.) have been removed from the core SDK; new code should use a dedicated IdP/OAuth library. See the [examples](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/examples) for a working demo with `better-auth`.
+Authorization Server helpers (`mcpAuthRouter`, `OAuthServerProvider`, `ProxyOAuthServerProvider`, `authenticateClient`, `allowedMethods`, etc.) have been removed from the core SDK; new code should use a dedicated IdP/OAuth library. See the [examples](../examples/server/src/) for a working demo with `better-auth`.
 
 Note: `AuthInfo` has moved from `server/auth/types.ts` to the core types and is now re-exported by `@modelcontextprotocol/client` and `@modelcontextprotocol/server`.
 
@@ -248,7 +248,7 @@ server.registerResource('config', 'config://app', {}, async uri => {
 
 ### Standard Schema objects required (raw shapes no longer supported)
 
-v2 requires schema objects implementing the [Standard Schema spec](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Standard Schema spec) for `inputSchema`, `outputSchema`, and `argsSchema`. Raw object shapes are no longer accepted. Zod v4, ArkType, and Valibot all implement the spec.
+v2 requires schema objects implementing the [Standard Schema spec](https://standardschema.dev/) for `inputSchema`, `outputSchema`, and `argsSchema`. Raw object shapes are no longer accepted. Zod v4, ArkType, and Valibot all implement the spec.
 
 **Before (v1):**
 
@@ -369,7 +369,7 @@ The request and notification parameters remain fully typed via `RequestTypeMap` 
 
 #### Custom (non-spec) methods
 
-For vendor-prefixed methods (anything not in the MCP spec), use the 3-arg form: pass the method string, a `{ params, result? }` schemas object, and the handler. Any [Standard Schema](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Standard Schema) library works (Zod, Valibot, ArkType).
+For vendor-prefixed methods (anything not in the MCP spec), use the 3-arg form: pass the method string, a `{ params, result? }` schemas object, and the handler. Any [Standard Schema](https://standardschema.dev) library works (Zod, Valibot, ArkType).
 
 **Before (v1):**
 
@@ -487,7 +487,7 @@ const result = await client.callTool({ name: 'my-tool', arguments: {} });
 
 The return type is now inferred from the method name via `ResultTypeMap`. For example, `client.request({ method: 'tools/call', ... })` returns `Promise<CallToolResult | CreateTaskResult>`.
 
-For **custom (non-spec)** methods, keep the result-schema argument — see [Sending custom-method requests](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/Sending custom-method requests). Only drop the schema when calling a spec method.
+For **custom (non-spec)** methods, keep the result-schema argument — see [Sending custom-method requests](#sending-custom-method-requests). Only drop the schema when calling a spec method.
 
 If you were using `CallToolResultSchema` (or any `*Schema` constant) for **runtime validation** (not just in `request()`/`callTool()` calls), use `isSpecType` or `specTypeSchemas`:
 
@@ -957,13 +957,13 @@ The following APIs are unchanged between v1 and v2 (only the import paths change
 
 ## Using an LLM to migrate your code
 
-An LLM-optimized version of this guide is available at [`docs/migration-SKILL.md`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/`docs/migration-SKILL.md`). It contains dense mapping tables designed for tools like Claude Code to mechanically apply all the changes described above. You can paste it into your LLM context or load it as
+An LLM-optimized version of this guide is available at [`docs/migration-SKILL.md`](migration-SKILL.md). It contains dense mapping tables designed for tools like Claude Code to mechanically apply all the changes described above. You can paste it into your LLM context or load it as
 a skill.
 
 ## Need Help?
 
 If you encounter issues during migration:
 
-1. Check the [FAQ](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/FAQ) for common questions about v2 changes
-2. Review the [examples](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/examples) for updated usage patterns
-3. Open an issue on [GitHub](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/docs/GitHub) if you find a bug or need further assistance
+1. Check the [FAQ](faq.md) for common questions about v2 changes
+2. Review the [examples](https://github.com/modelcontextprotocol/typescript-sdk/tree/main/examples) for updated usage patterns
+3. Open an issue on [GitHub](https://github.com/modelcontextprotocol/typescript-sdk/issues) if you find a bug or need further assistance

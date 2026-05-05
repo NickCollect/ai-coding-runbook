@@ -1,11 +1,11 @@
 # Everything Server - Extension Points
 
-**[Architecture](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/Architecture)
-| [Project Structure](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/Project Structure)
-| [Startup Process](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/Startup Process)
-| [Server Features](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/Server Features)
+**[Architecture](architecture.md)
+| [Project Structure](structure.md)
+| [Startup Process](startup.md)
+| [Server Features](features.md)
 | Extension Points
-| [How It Works](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/How It Works)**
+| [How It Works](how-it-works.md)**
 
 ## Adding Tools
 

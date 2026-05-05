@@ -13,13 +13,13 @@ tags:
   - tutorial
 ---
 
-[MCP (Model Context Protocol)](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/MCP (Model Context Protocol)) prompts enable workflow automation by combining AI capabilities with structured data access. This post demonstrates how to build automations using MCP's [prompts](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/prompts) and [resource templates](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/resource templates) through a practical example.
+[MCP (Model Context Protocol)](https://modelcontextprotocol.io/specification/2025-06-18) prompts enable workflow automation by combining AI capabilities with structured data access. This post demonstrates how to build automations using MCP's [prompts](https://modelcontextprotocol.io/specification/2025-06-18/server/prompts) and [resource templates](https://modelcontextprotocol.io/specification/2025-06-18/server/resources#resource-templates) through a practical example.
 
 This guide demonstrates how MCP prompts can automate repetitive workflows. Whether you're interested in the MCP ecosystem or simply want to leverage AI for workflow automation, you'll learn how to build practical automations through a concrete meal planning example. No prior MCP experience needed—we'll cover the fundamentals before diving into implementation.
 
 ## The Problem: Time-Consuming Repetitive Tasks
 
-Everyone has a collection of repetitive tasks that eat away at their productive hours. Common examples include applying code review feedback, generating weekly reports, updating documentation, or creating boilerplate code. These tasks aren't complex—they follow predictable patterns—but they're cumbersome and time-consuming. [MCP prompts](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/MCP prompts) were designed to help automate this kind of work.
+Everyone has a collection of repetitive tasks that eat away at their productive hours. Common examples include applying code review feedback, generating weekly reports, updating documentation, or creating boilerplate code. These tasks aren't complex—they follow predictable patterns—but they're cumbersome and time-consuming. [MCP prompts](https://modelcontextprotocol.io/specification/2025-06-18/server/prompts) were designed to help automate this kind of work.
 
 MCP prompts offer more than command shortcuts. They're a primitive for building workflow automation that combines the flexibility of scripting with the intelligence of modern AI systems. This post explores how to build automations using MCP's prompt system, resource templates, and modular servers. I'll demonstrate these concepts through a meal planning automation I built, but the patterns apply broadly to any structured, repetitive workflow.
 
@@ -49,17 +49,17 @@ So I decided to use MCP! By automating these steps, I could reduce the entire wo
     alt="Final generated meal plan and shopping list output"
   />
 
-Here we are focuses primarily on the Recipe Server with its prompts and resources. You can find the [printing server example here](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/printing server example here) (it works with a specific thermal printer model, but you could easily swap it for email, Notion, or any other output method). The beauty of separate servers is that you can mix and match different capabilities.
+Here we are focuses primarily on the Recipe Server with its prompts and resources. You can find the [printing server example here](https://github.com/ihrpr/mcp-server-tiny-print) (it works with a specific thermal printer model, but you could easily swap it for email, Notion, or any other output method). The beauty of separate servers is that you can mix and match different capabilities.
 
 ## Core Components
 
-Let's dive into the three components that make this automation possible: [prompts](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/prompts), [resources](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/resources), and [completions](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/completions). I'll show you how each works conceptually, then we'll implement them together.
+Let's dive into the three components that make this automation possible: [prompts](https://modelcontextprotocol.io/specification/2025-06-18/server/prompts), [resources](https://modelcontextprotocol.io/specification/2025-06-18/server/resources), and [completions](https://modelcontextprotocol.io/specification/2025-06-18/server/utilities/completion). I'll show you how each works conceptually, then we'll implement them together.
 
 ### 1. Resource Templates
 
-In MCP, [static resources](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/static resources) represent specific pieces of content with unique URIs—like `file://recipes/italian.md` or `file://recipes/mexican.md`. While straightforward, this approach doesn't scale well. If you have recipes for 20 cuisines, you'd need to define 20 separate resources, each with its own URI and metadata.
+In MCP, [static resources](https://modelcontextprotocol.io/specification/2025-06-18/server/resources#resource-types) represent specific pieces of content with unique URIs—like `file://recipes/italian.md` or `file://recipes/mexican.md`. While straightforward, this approach doesn't scale well. If you have recipes for 20 cuisines, you'd need to define 20 separate resources, each with its own URI and metadata.
 
-[Resource templates](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Resource templates) solve this through URI patterns with parameters, transforming static resource definitions into dynamic content providers.
+[Resource templates](https://modelcontextprotocol.io/specification/2025-06-18/server/resources#resource-templates) solve this through URI patterns with parameters, transforming static resource definitions into dynamic content providers.
 
 For example, a template like `file://recipes/{cuisine}.md` might represent a set of resources like these:
 
@@ -73,11 +73,11 @@ This pattern extends beyond simple filtering. You can create templates for:
 - Web resources: `https://api.example.com/users/{userId}/data`
 - Query parameters: `https://example.com/{collection}?type={filter}`
 
-For more details on URI schemes and resource templates, see the [MCP Resource specification](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/MCP Resource specification).
+For more details on URI schemes and resource templates, see the [MCP Resource specification](https://modelcontextprotocol.io/specification/2025-06-18/server/resources#resource-templates).
 
 ### 2. Completions
 
-Nobody remembers exact parameter values. Is it "italian" or "Italian" or "it"? [Completions](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Completions) bridge this gap by providing suggestions as users type, creating an interface that feels intuitive rather than restrictive.
+Nobody remembers exact parameter values. Is it "italian" or "Italian" or "it"? [Completions](https://modelcontextprotocol.io/specification/2025-06-18/server/utilities/completion) bridge this gap by providing suggestions as users type, creating an interface that feels intuitive rather than restrictive.
 
 Different MCP clients present completions differently:
 
@@ -89,7 +89,7 @@ But the underlying data comes from your server, maintaining consistency across a
 
 ### 3. Prompts: Commands That Evolve With Context
 
-[Prompts](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/Prompts) are the entry points to your automation. They define what commands are available and can range from simple text instructions to rich, context-aware operations.
+[Prompts](https://modelcontextprotocol.io/specification/2025-06-18/server/prompts) are the entry points to your automation. They define what commands are available and can range from simple text instructions to rich, context-aware operations.
 
 Let's see how prompts can evolve to handle increasingly sophisticated use cases:
 
@@ -131,7 +131,7 @@ The key difference from simple prompts: instead of asking "Plan Italian meals" a
     alt="VS Code showing the rendered prompt with attached recipe resources"
   />
 
-The recipe resources we've been using are **embedded resources** that have inline content from the server. According to the [MCP specification](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/MCP specification), prompts can also include other data types.
+The recipe resources we've been using are **embedded resources** that have inline content from the server. According to the [MCP specification](https://modelcontextprotocol.io/specification/2025-06-18/server/prompts#data-types), prompts can also include other data types.
 
 This enables advanced use cases beyond our text-based recipes, like design review prompts with screenshots or voice transcription services.
 
@@ -273,9 +273,9 @@ Focus on ingredient overlap between recipes to reduce food waste.`,
 
 ## Running It Yourself
 
-The [full code for the recipe server is available here](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/full code for the recipe server is available here).
+The [full code for the recipe server is available here](https://github.com/ihrpr/mcp-server-fav-recipes).
 
-Follow VS Code's [documentation to set up the server](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/blog/content/posts/documentation to set up the server). Once a server is set up in VS Code, you can see its status, debug what's happening, and iterate quickly on your automations.
+Follow VS Code's [documentation to set up the server](https://code.visualstudio.com/docs/copilot/chat/mcp-servers). Once a server is set up in VS Code, you can see its status, debug what's happening, and iterate quickly on your automations.
 
 After the server is set up in VS Code, type "/" in chat and select the prompt.
 

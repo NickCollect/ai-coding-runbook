@@ -262,27 +262,27 @@ Using stored validations in the JSON Schema Validator at https://www.jsonschemav
 
 #### Legacy Single Selection
 
-- `EnumSchema` validating a [legacy single select instance schema with titles](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/legacy single select instance schema with titles)
-- The legacy titled single select instance schema validating [a correct single selection](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/a correct single selection)
-- The legacy titled single select instance schema validating [an incorrect single selection](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/an incorrect single selection)
+- `EnumSchema` validating a [legacy single select instance schema with titles](https://www.jsonschemavalidator.net/s/lsK7Bn0C)
+- The legacy titled single select instance schema validating [a correct single selection](https://www.jsonschemavalidator.net/s/GSk7rnRe)
+- The legacy titled single select instance schema validating [an incorrect single selection](https://www.jsonschemavalidator.net/s/3kYvxsVP)
 
 #### Single Selection
 
-- `EnumSchema` validating a [single select instance schema without titles](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/single select instance schema without titles)
-- `EnumSchema` validating a [single select instance schema with titles](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/single select instance schema with titles)
-- The untitled single select instance schema validating [a correct single selection](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/a correct single selection)
-- The untitled single select instance schema invalidating [an incorrect single selection](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/an incorrect single selection)
-- The titled single select instance schema validating [a correct single selection](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/a correct single selection)
-- The titled single select instance schema invalidating [an incorrect single selection](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/an incorrect single selection)
+- `EnumSchema` validating a [single select instance schema without titles](https://www.jsonschemavalidator.net/s/MBlHW5IQ)
+- `EnumSchema` validating a [single select instance schema with titles](https://www.jsonschemavalidator.net/s/s38xt4JV)
+- The untitled single select instance schema validating [a correct single selection](https://www.jsonschemavalidator.net/s/M0hkYoeG)
+- The untitled single select instance schema invalidating [an incorrect single selection](https://www.jsonschemavalidator.net/s/3Try4BCt)
+- The titled single select instance schema validating [a correct single selection](https://www.jsonschemavalidator.net/s/4oDbv9yt)
+- The titled single select instance schema invalidating [an incorrect single selection](https://www.jsonschemavalidator.net/s/A2KlNzLH)
 
 #### Multiple Selection
 
-- `EnumSchema` validating the [multi-select instance schema without titles](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/multi-select instance schema without titles)
-- `EnumSchema` validating the [multi-select instance schema with titles](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/multi-select instance schema with titles)
-- The untitled multi-select instance schema validating [a correct multiple selection](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/a correct multiple selection)
-  The untitled multi-select instance schema validating invalidating[ an incorrect multiple selection](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/an incorrect multiple selection)
-  The titled multi-select instance schema validating [a correct multiple selection](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/a correct multiple selection)
-  The titled multi-select instance schema validating invalidating [an incorrect multiple selection](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/an incorrect multiple selection)
+- `EnumSchema` validating the [multi-select instance schema without titles](https://www.jsonschemavalidator.net/s/4uc3Ndsq)
+- `EnumSchema` validating the [multi-select instance schema with titles](https://www.jsonschemavalidator.net/s/TmkIqqXI)
+- The untitled multi-select instance schema validating [a correct multiple selection](https://www.jsonschemavalidator.net/s/IE8Bkvtg)
+  The untitled multi-select instance schema validating invalidating[ an incorrect multiple selection](https://www.jsonschemavalidator.net/s/8tlqjUgW)
+  The titled multi-select instance schema validating [a correct multiple selection](https://www.jsonschemavalidator.net/s/Nb1Rw1qa)
+  The titled multi-select instance schema validating invalidating [an incorrect multiple selection](https://www.jsonschemavalidator.net/s/MRfyqrVC)
 
 ### JSON meta-schema
 

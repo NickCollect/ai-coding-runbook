@@ -100,8 +100,8 @@ Please note that mcp-server-git is currently in early development. The functiona
 
 ### Using uv (recommended)
 
-When using [`uv`](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/git/`uv`) no specific installation is needed. We will
-use [`uvx`](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/git/`uvx`) to directly run *mcp-server-git*.
+When using [`uv`](https://docs.astral.sh/uv/) no specific installation is needed. We will
+use [`uvx`](https://docs.astral.sh/uv/guides/tools/) to directly run *mcp-server-git*.
 
 ### Using PIP
 
@@ -168,9 +168,9 @@ Add this to your `claude_desktop_config.json`:
 
 For quick installation, use one of the one-click install buttons below...
 
-[![Install with UV in VS Code](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/git/![Install with UV in VS Code)](https://insiders.vscode.dev/redirect/mcp/install?name=git&config=%7B%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22mcp-server-git%22%5D%7D) [![Install with UV in VS Code Insiders](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/git/![Install with UV in VS Code Insiders)](https://insiders.vscode.dev/redirect/mcp/install?name=git&config=%7B%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22mcp-server-git%22%5D%7D&quality=insiders)
+[![Install with UV in VS Code](https://img.shields.io/badge/VS_Code-UV-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=git&config=%7B%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22mcp-server-git%22%5D%7D) [![Install with UV in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-UV-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=git&config=%7B%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22mcp-server-git%22%5D%7D&quality=insiders)
 
-[![Install with Docker in VS Code](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/git/![Install with Docker in VS Code)](https://insiders.vscode.dev/redirect/mcp/install?name=git&config=%7B%22command%22%3A%22docker%22%2C%22args%22%3A%5B%22run%22%2C%22--rm%22%2C%22-i%22%2C%22--mount%22%2C%22type%3Dbind%2Csrc%3D%24%7BworkspaceFolder%7D%2Cdst%3D%2Fworkspace%22%2C%22mcp%2Fgit%22%5D%7D) [![Install with Docker in VS Code Insiders](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/git/![Install with Docker in VS Code Insiders)](https://insiders.vscode.dev/redirect/mcp/install?name=git&config=%7B%22command%22%3A%22docker%22%2C%22args%22%3A%5B%22run%22%2C%22--rm%22%2C%22-i%22%2C%22--mount%22%2C%22type%3Dbind%2Csrc%3D%24%7BworkspaceFolder%7D%2Cdst%3D%2Fworkspace%22%2C%22mcp%2Fgit%22%5D%7D&quality=insiders)
+[![Install with Docker in VS Code](https://img.shields.io/badge/VS_Code-Docker-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=git&config=%7B%22command%22%3A%22docker%22%2C%22args%22%3A%5B%22run%22%2C%22--rm%22%2C%22-i%22%2C%22--mount%22%2C%22type%3Dbind%2Csrc%3D%24%7BworkspaceFolder%7D%2Cdst%3D%2Fworkspace%22%2C%22mcp%2Fgit%22%5D%7D) [![Install with Docker in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Docker-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=git&config=%7B%22command%22%3A%22docker%22%2C%22args%22%3A%5B%22run%22%2C%22--rm%22%2C%22-i%22%2C%22--mount%22%2C%22type%3Dbind%2Csrc%3D%24%7BworkspaceFolder%7D%2Cdst%3D%2Fworkspace%22%2C%22mcp%2Fgit%22%5D%7D&quality=insiders)
 
 For manual installation, you can configure the MCP server using one of these methods:
 
@@ -180,7 +180,7 @@ Add the configuration to your user-level MCP configuration file. Open the Comman
 **Method 2: Workspace Configuration**
 Alternatively, you can add the configuration to a file called `.vscode/mcp.json` in your workspace. This will allow you to share the configuration with others.
 
-> For more details about MCP configuration in VS Code, see the [official VS Code MCP documentation](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/git/official VS Code MCP documentation).
+> For more details about MCP configuration in VS Code, see the [official VS Code MCP documentation](https://code.visualstudio.com/docs/copilot/customization/mcp-servers).
 
 ```json
 {
@@ -214,7 +214,7 @@ For Docker installation:
 }
 ```
 
-### Usage with [Zed](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/git/Zed)
+### Usage with [Zed](https://github.com/zed-industries/zed)
 
 Add to your Zed settings.json:
 
@@ -248,7 +248,7 @@ Add to your Zed settings.json:
 ```
 </details>
 
-### Usage with [Zencoder](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/git/Zencoder)
+### Usage with [Zencoder](https://zencoder.ai)
 
 1. Go to the Zencoder menu (...)
 2. From the dropdown menu, select `Agent Tools`
@@ -288,7 +288,7 @@ help you debug any issues.
 
 If you are doing local development, there are two ways to test your changes:
 
-1. Run the MCP inspector to test your changes. See [Debugging](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/git/Debugging) for run instructions.
+1. Run the MCP inspector to test your changes. See [Debugging](#debugging) for run instructions.
 
 2. Test using the Claude desktop app. Add the following to your `claude_desktop_config.json`:
 

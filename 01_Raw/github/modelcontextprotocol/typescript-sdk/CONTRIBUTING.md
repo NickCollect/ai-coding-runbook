@@ -19,7 +19,7 @@ Straightforward bug fixes (a few lines of code with tests demonstrating the fix)
 - New public APIs or classes
 - Architectural changes or refactoring
 - Changes that touch multiple modules
-- Features that might require spec changes (these need a [SEP](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/SEP) first)
+- Features that might require spec changes (these need a [SEP](https://modelcontextprotocol.io/community/sep-guidelines) first)
 
 ### Writing Good Issues
 
@@ -35,9 +35,9 @@ We're a small team, so issues that include some upfront debugging help us move f
 
 | Label                                                                                                                                     | For                      | Description                                   |
 | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ | --------------------------------------------- |
-| [`good first issue`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/`good first issue`) | Newcomers                | Can tackle without deep codebase knowledge    |
-| [`help wanted`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/`help wanted`)           | Experienced contributors | Maintainers probably won't get to this        |
-| [`ready for work`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/`ready for work`)     | Maintainers              | Triaged and ready for a maintainer to pick up |
+| [`good first issue`](https://github.com/modelcontextprotocol/typescript-sdk/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) | Newcomers                | Can tackle without deep codebase knowledge    |
+| [`help wanted`](https://github.com/modelcontextprotocol/typescript-sdk/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22)           | Experienced contributors | Maintainers probably won't get to this        |
+| [`ready for work`](https://github.com/modelcontextprotocol/typescript-sdk/issues?q=is%3Aopen+is%3Aissue+label%3A%22ready+for+work%22)     | Maintainers              | Triaged and ready for a maintainer to pick up |
 
 Issues labeled `needs confirmation`, `needs repro`, or `needs design` are **not** ready for work—wait for maintainer input before starting.
 
@@ -88,7 +88,7 @@ PRs may be rejected for:
 
 ### Getting Started
 
-This project uses [pnpm](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/pnpm) as its package manager. If you don't have pnpm installed, enable it via [corepack](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/corepack) (included with Node.js 16.9+):
+This project uses [pnpm](https://pnpm.io/) as its package manager. If you don't have pnpm installed, enable it via [corepack](https://nodejs.org/api/corepack.html) (included with Node.js 16.9+):
 
 ```bash
 corepack enable
@@ -112,7 +112,7 @@ Then:
 
 ### Running Examples
 
-See [`examples/server/README.md`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/`examples/server/README.md`) and [`examples/client/README.md`](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/`examples/client/README.md`) for a full list of runnable examples.
+See [`examples/server/README.md`](examples/server/README.md) and [`examples/client/README.md`](examples/client/README.md) for a full list of runnable examples.
 
 Quick start:
 
@@ -156,7 +156,7 @@ npm version patch      # Creates v1.23.2 tag
 git push origin release/1.23 --tags
 ```
 
-Then manually trigger the "Publish v1.x" workflow from [GitHub Actions](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/GitHub Actions), specifying the tag (e.g., `v1.23.2`).
+Then manually trigger the "Publish v1.x" workflow from [GitHub Actions](https://github.com/modelcontextprotocol/typescript-sdk/actions/workflows/release-v1x.yml), specifying the tag (e.g., `v1.23.2`).
 
 ### npm Tags
 
@@ -170,18 +170,18 @@ npm install @modelcontextprotocol/sdk@release-1.25
 
 ### Code of Conduct
 
-This project follows our [Code of Conduct](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/Code of Conduct). Please review it before contributing.
+This project follows our [Code of Conduct](CODE_OF_CONDUCT.md). Please review it before contributing.
 
 ### Reporting Issues
 
-- Use the [GitHub issue tracker](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/GitHub issue tracker)
+- Use the [GitHub issue tracker](https://github.com/modelcontextprotocol/typescript-sdk/issues)
 - Search existing issues before creating a new one
 - Provide clear reproduction steps
 
 ### Security Issues
 
-Please review our [Security Policy](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/Security Policy) for reporting security vulnerabilities.
+Please review our [Security Policy](SECURITY.md) for reporting security vulnerabilities.
 
 ### License
 
-By contributing, you agree that your code contributions will be licensed under the Apache License 2.0. Documentation contributions (excluding specifications) are licensed under CC-BY 4.0. See the [LICENSE](https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/LICENSE) file for details.
+By contributing, you agree that your code contributions will be licensed under the Apache License 2.0. Documentation contributions (excluding specifications) are licensed under CC-BY 4.0. See the [LICENSE](LICENSE) file for details.

@@ -26,11 +26,11 @@ The operational server-to-client **Ping** is excepted from this restriction.
 
 The current specification uses **SHOULD** language in the transport layer:
 
-In context of responding to a POST Request in the Streamable HTTP transport [(2025-11-25/basic/transports.mdx:121-L123)](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/(2025-11-25/basic/transports.mdx:121-L123)):
+In context of responding to a POST Request in the Streamable HTTP transport [(2025-11-25/basic/transports.mdx:121-L123)](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/2025-11-25/docs/specification/2025-11-25/basic/transports.mdx?plain=1#L121-L123):
 
 > - "The server **MAY** send JSON-RPC _requests_ and _notifications_ before sending the JSON-RPC _response_. These messages **SHOULD** relate to the originating client _request_."
 
-For the optional GET SSE Stream [(2025-11-25/basic/transports.mdx:146-L148)](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/(2025-11-25/basic/transports.mdx:146-L148)):
+For the optional GET SSE Stream [(2025-11-25/basic/transports.mdx:146-L148)](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/2025-11-25/docs/specification/2025-11-25/basic/transports.mdx?plain=1#L146C1-L148C32):
 
 > - "The server **MAY** send JSON-RPC _requests_ and _notifications_ on the stream."
 > - "These messages **SHOULD** be unrelated to any concurrently-running JSON-RPC _request_ from the client."

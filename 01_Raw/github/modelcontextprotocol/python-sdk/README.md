@@ -18,63 +18,63 @@
 > [!NOTE]
 > **This README documents v1.x of the MCP Python SDK (the current stable release).**
 >
-> For v1.x code and documentation, see the [`v1.x` branch](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/`v1.x` branch).
-> For the upcoming v2 documentation (pre-alpha, in development on `main`), see [`README.v2.md`](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/`README.v2.md`).
+> For v1.x code and documentation, see the [`v1.x` branch](https://github.com/modelcontextprotocol/python-sdk/tree/v1.x).
+> For the upcoming v2 documentation (pre-alpha, in development on `main`), see [`README.v2.md`](README.v2.md).
 
 <!-- omit in toc -->
 ## Table of Contents
 
-- [MCP Python SDK](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/MCP Python SDK)
-  - [Overview](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Overview)
-  - [Installation](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Installation)
-    - [Adding MCP to your python project](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Adding MCP to your python project)
-    - [Running the standalone MCP development tools](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Running the standalone MCP development tools)
-  - [Quickstart](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Quickstart)
-  - [What is MCP?](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/What is MCP?)
-  - [Core Concepts](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Core Concepts)
-    - [Server](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Server)
-    - [Resources](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Resources)
-    - [Tools](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Tools)
-      - [Structured Output](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Structured Output)
-    - [Prompts](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Prompts)
-    - [Images](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Images)
-    - [Context](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Context)
-      - [Getting Context in Functions](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Getting Context in Functions)
-      - [Context Properties and Methods](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Context Properties and Methods)
-    - [Completions](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Completions)
-    - [Elicitation](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Elicitation)
-    - [Sampling](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Sampling)
-    - [Logging and Notifications](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Logging and Notifications)
-    - [Authentication](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Authentication)
-    - [FastMCP Properties](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/FastMCP Properties)
-    - [Session Properties and Methods](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Session Properties and Methods)
-    - [Request Context Properties](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Request Context Properties)
-  - [Running Your Server](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Running Your Server)
-    - [Development Mode](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Development Mode)
-    - [Claude Desktop Integration](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Claude Desktop Integration)
-    - [Direct Execution](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Direct Execution)
-    - [Streamable HTTP Transport](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Streamable HTTP Transport)
-      - [CORS Configuration for Browser-Based Clients](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/CORS Configuration for Browser-Based Clients)
-    - [Mounting to an Existing ASGI Server](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Mounting to an Existing ASGI Server)
-      - [StreamableHTTP servers](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/StreamableHTTP servers)
-        - [Basic mounting](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Basic mounting)
-        - [Host-based routing](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Host-based routing)
-        - [Multiple servers with path configuration](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Multiple servers with path configuration)
-        - [Path configuration at initialization](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Path configuration at initialization)
-      - [SSE servers](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/SSE servers)
-  - [Advanced Usage](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Advanced Usage)
-    - [Low-Level Server](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Low-Level Server)
-      - [Structured Output Support](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Structured Output Support)
-    - [Pagination (Advanced)](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Pagination (Advanced))
-    - [Writing MCP Clients](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Writing MCP Clients)
-    - [Client Display Utilities](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Client Display Utilities)
-    - [OAuth Authentication for Clients](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/OAuth Authentication for Clients)
-    - [Parsing Tool Results](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Parsing Tool Results)
-    - [MCP Primitives](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/MCP Primitives)
-    - [Server Capabilities](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Server Capabilities)
-  - [Documentation](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Documentation)
-  - [Contributing](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Contributing)
-  - [License](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/License)
+- [MCP Python SDK](#mcp-python-sdk)
+  - [Overview](#overview)
+  - [Installation](#installation)
+    - [Adding MCP to your python project](#adding-mcp-to-your-python-project)
+    - [Running the standalone MCP development tools](#running-the-standalone-mcp-development-tools)
+  - [Quickstart](#quickstart)
+  - [What is MCP?](#what-is-mcp)
+  - [Core Concepts](#core-concepts)
+    - [Server](#server)
+    - [Resources](#resources)
+    - [Tools](#tools)
+      - [Structured Output](#structured-output)
+    - [Prompts](#prompts)
+    - [Images](#images)
+    - [Context](#context)
+      - [Getting Context in Functions](#getting-context-in-functions)
+      - [Context Properties and Methods](#context-properties-and-methods)
+    - [Completions](#completions)
+    - [Elicitation](#elicitation)
+    - [Sampling](#sampling)
+    - [Logging and Notifications](#logging-and-notifications)
+    - [Authentication](#authentication)
+    - [FastMCP Properties](#fastmcp-properties)
+    - [Session Properties and Methods](#session-properties-and-methods)
+    - [Request Context Properties](#request-context-properties)
+  - [Running Your Server](#running-your-server)
+    - [Development Mode](#development-mode)
+    - [Claude Desktop Integration](#claude-desktop-integration)
+    - [Direct Execution](#direct-execution)
+    - [Streamable HTTP Transport](#streamable-http-transport)
+      - [CORS Configuration for Browser-Based Clients](#cors-configuration-for-browser-based-clients)
+    - [Mounting to an Existing ASGI Server](#mounting-to-an-existing-asgi-server)
+      - [StreamableHTTP servers](#streamablehttp-servers)
+        - [Basic mounting](#basic-mounting)
+        - [Host-based routing](#host-based-routing)
+        - [Multiple servers with path configuration](#multiple-servers-with-path-configuration)
+        - [Path configuration at initialization](#path-configuration-at-initialization)
+      - [SSE servers](#sse-servers)
+  - [Advanced Usage](#advanced-usage)
+    - [Low-Level Server](#low-level-server)
+      - [Structured Output Support](#structured-output-support)
+    - [Pagination (Advanced)](#pagination-advanced)
+    - [Writing MCP Clients](#writing-mcp-clients)
+    - [Client Display Utilities](#client-display-utilities)
+    - [OAuth Authentication for Clients](#oauth-authentication-for-clients)
+    - [Parsing Tool Results](#parsing-tool-results)
+    - [MCP Primitives](#mcp-primitives)
+    - [Server Capabilities](#server-capabilities)
+  - [Documentation](#documentation)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 [pypi-badge]: https://img.shields.io/pypi/v/mcp.svg
 [pypi-url]: https://pypi.org/project/mcp/
@@ -102,7 +102,7 @@ The Model Context Protocol allows applications to provide context for LLMs in a 
 
 ### Adding MCP to your python project
 
-We recommend using [uv](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/uv) to manage your Python projects.
+We recommend using [uv](https://docs.astral.sh/uv/) to manage your Python projects.
 
 If you haven't created a uv-managed project yet, create one:
 
@@ -149,17 +149,20 @@ from mcp.server.fastmcp import FastMCP
 # Create an MCP server
 mcp = FastMCP("Demo", json_response=True)
 
+
 # Add an addition tool
 @mcp.tool()
 def add(a: int, b: int) -> int:
     """Add two numbers"""
     return a + b
 
+
 # Add a dynamic greeting resource
 @mcp.resource("greeting://{name}")
 def get_greeting(name: str) -> str:
     """Get a personalized greeting"""
     return f"Hello, {name}!"
+
 
 # Add a prompt
 @mcp.prompt()
@@ -173,15 +176,16 @@ def greet_user(name: str, style: str = "friendly") -> str:
 
     return f"{styles.get(style, styles['friendly'])} for someone named {name}."
 
+
 # Run with streamable HTTP transport
 if __name__ == "__main__":
     mcp.run(transport="streamable-http")
 ```
 
-_Full example: [examples/snippets/servers/fastmcp_quickstart.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/fastmcp_quickstart.py)_
+_Full example: [examples/snippets/servers/fastmcp_quickstart.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/fastmcp_quickstart.py)_
 <!-- /snippet-source -->
 
-You can install this server in [Claude Code](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Claude Code) and interact with it right away. First, run the server:
+You can install this server in [Claude Code](https://docs.claude.com/en/docs/claude-code/mcp) and interact with it right away. First, run the server:
 
 ```bash
 uv run --with mcp examples/snippets/servers/fastmcp_quickstart.py
@@ -203,7 +207,7 @@ In the inspector UI, connect to `http://localhost:8000/mcp`.
 
 ## What is MCP?
 
-The [Model Context Protocol (MCP)](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Model Context Protocol (MCP)) lets you build servers that expose data and functionality to LLM applications in a secure, standardized way. Think of it like a web API, but specifically designed for LLM interactions. MCP servers can:
+The [Model Context Protocol (MCP)](https://modelcontextprotocol.io) lets you build servers that expose data and functionality to LLM applications in a secure, standardized way. Think of it like a web API, but specifically designed for LLM interactions. MCP servers can:
 
 - Expose data through **Resources** (think of these sort of like GET endpoints; they are used to load information into the LLM's context)
 - Provide functionality through **Tools** (sort of like POST endpoints; they are used to execute code or otherwise produce a side effect)
@@ -227,6 +231,7 @@ from dataclasses import dataclass
 from mcp.server.fastmcp import Context, FastMCP
 from mcp.server.session import ServerSession
 
+
 # Mock database class for example
 class Database:
     """Mock database class for example."""
@@ -244,11 +249,13 @@ class Database:
         """Execute a query."""
         return "Query result"
 
+
 @dataclass
 class AppContext:
     """Application context with typed dependencies."""
 
     db: Database
+
 
 @asynccontextmanager
 async def app_lifespan(server: FastMCP) -> AsyncIterator[AppContext]:
@@ -261,8 +268,10 @@ async def app_lifespan(server: FastMCP) -> AsyncIterator[AppContext]:
         # Cleanup on shutdown
         await db.disconnect()
 
+
 # Pass lifespan to server
 mcp = FastMCP("My App", lifespan=app_lifespan)
+
 
 # Access type-safe lifespan context in tools
 @mcp.tool()
@@ -272,7 +281,7 @@ def query_db(ctx: Context[ServerSession, AppContext]) -> str:
     return db.query()
 ```
 
-_Full example: [examples/snippets/servers/lifespan_example.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/lifespan_example.py)_
+_Full example: [examples/snippets/servers/lifespan_example.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/lifespan_example.py)_
 <!-- /snippet-source -->
 
 ### Resources
@@ -285,11 +294,13 @@ from mcp.server.fastmcp import FastMCP
 
 mcp = FastMCP(name="Resource Example")
 
+
 @mcp.resource("file://documents/{name}")
 def read_document(name: str) -> str:
     """Read a document by name."""
     # This would normally read from disk
     return f"Content of {name}"
+
 
 @mcp.resource("config://settings")
 def get_settings() -> str:
@@ -301,7 +312,7 @@ def get_settings() -> str:
 }"""
 ```
 
-_Full example: [examples/snippets/servers/basic_resource.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/basic_resource.py)_
+_Full example: [examples/snippets/servers/basic_resource.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/basic_resource.py)_
 <!-- /snippet-source -->
 
 ### Tools
@@ -314,10 +325,12 @@ from mcp.server.fastmcp import FastMCP
 
 mcp = FastMCP(name="Tool Example")
 
+
 @mcp.tool()
 def sum(a: int, b: int) -> int:
     """Add two numbers together."""
     return a + b
+
 
 @mcp.tool()
 def get_weather(city: str, unit: str = "celsius") -> str:
@@ -326,7 +339,7 @@ def get_weather(city: str, unit: str = "celsius") -> str:
     return f"Weather in {city}: 22degrees{unit[0].upper()}"
 ```
 
-_Full example: [examples/snippets/servers/basic_tool.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/basic_tool.py)_
+_Full example: [examples/snippets/servers/basic_tool.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/basic_tool.py)_
 <!-- /snippet-source -->
 
 Tools can optionally receive a Context object by including a parameter with the `Context` type annotation. This context is automatically injected by the FastMCP framework and provides access to MCP capabilities:
@@ -337,6 +350,7 @@ from mcp.server.fastmcp import Context, FastMCP
 from mcp.server.session import ServerSession
 
 mcp = FastMCP(name="Progress Example")
+
 
 @mcp.tool()
 async def long_running_task(task_name: str, ctx: Context[ServerSession, None], steps: int = 5) -> str:
@@ -355,7 +369,7 @@ async def long_running_task(task_name: str, ctx: Context[ServerSession, None], s
     return f"Task '{task_name}' completed"
 ```
 
-_Full example: [examples/snippets/servers/tool_progress.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/tool_progress.py)_
+_Full example: [examples/snippets/servers/tool_progress.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/tool_progress.py)_
 <!-- /snippet-source -->
 
 #### Structured Output
@@ -407,11 +421,13 @@ from mcp.types import CallToolResult, TextContent
 
 mcp = FastMCP("CallToolResult Example")
 
+
 class ValidationModel(BaseModel):
     """Model for validating structured output."""
 
     status: str
     data: dict[str, int]
+
 
 @mcp.tool()
 def advanced_tool() -> CallToolResult:
@@ -420,6 +436,7 @@ def advanced_tool() -> CallToolResult:
         content=[TextContent(type="text", text="Response visible to the model")],
         _meta={"hidden": "data for client applications only"},
     )
+
 
 @mcp.tool()
 def validated_tool() -> Annotated[CallToolResult, ValidationModel]:
@@ -430,13 +447,14 @@ def validated_tool() -> Annotated[CallToolResult, ValidationModel]:
         _meta={"internal": "metadata"},
     )
 
+
 @mcp.tool()
 def empty_result_tool() -> CallToolResult:
     """For empty results, return CallToolResult with empty content."""
     return CallToolResult(content=[])
 ```
 
-_Full example: [examples/snippets/servers/direct_call_tool_result.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/direct_call_tool_result.py)_
+_Full example: [examples/snippets/servers/direct_call_tool_result.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/direct_call_tool_result.py)_
 <!-- /snippet-source -->
 
 **Important:** `CallToolResult` must always be returned (no `Optional` or `Union`). For empty results, use `CallToolResult(content=[])`. For optional simple types, use `str | None` without `CallToolResult`.
@@ -453,6 +471,7 @@ from mcp.server.fastmcp import FastMCP
 
 mcp = FastMCP("Structured Output Example")
 
+
 # Using Pydantic models for rich structured data
 class WeatherData(BaseModel):
     """Weather information structure."""
@@ -461,6 +480,7 @@ class WeatherData(BaseModel):
     humidity: float = Field(description="Humidity percentage")
     condition: str
     wind_speed: float
+
 
 @mcp.tool()
 def get_weather(city: str) -> WeatherData:
@@ -473,22 +493,26 @@ def get_weather(city: str) -> WeatherData:
         wind_speed=5.2,
     )
 
+
 # Using TypedDict for simpler structures
 class LocationInfo(TypedDict):
     latitude: float
     longitude: float
     name: str
 
+
 @mcp.tool()
 def get_location(address: str) -> LocationInfo:
     """Get location coordinates"""
     return LocationInfo(latitude=51.5074, longitude=-0.1278, name="London, UK")
+
 
 # Using dict[str, Any] for flexible schemas
 @mcp.tool()
 def get_statistics(data_type: str) -> dict[str, float]:
     """Get various statistics"""
     return {"mean": 42.5, "median": 40.0, "std_dev": 5.2}
+
 
 # Ordinary classes with type hints work for structured output
 class UserProfile:
@@ -501,10 +525,12 @@ class UserProfile:
         self.age = age
         self.email = email
 
+
 @mcp.tool()
 def get_user(user_id: str) -> UserProfile:
     """Get user profile - returns structured data"""
     return UserProfile(name="Alice", age=30, email="alice@example.com")
+
 
 # Classes WITHOUT type hints cannot be used for structured output
 class UntypedConfig:
@@ -512,10 +538,12 @@ class UntypedConfig:
         self.setting1 = setting1
         self.setting2 = setting2
 
+
 @mcp.tool()
 def get_config() -> UntypedConfig:
     """This returns unstructured output - no schema generated"""
     return UntypedConfig("value1", "value2")
+
 
 # Lists and other types are wrapped automatically
 @mcp.tool()
@@ -524,6 +552,7 @@ def list_cities() -> list[str]:
     return ["London", "Paris", "Tokyo"]
     # Returns: {"result": ["London", "Paris", "Tokyo"]}
 
+
 @mcp.tool()
 def get_temperature(city: str) -> float:
     """Get temperature as a simple float"""
@@ -531,7 +560,7 @@ def get_temperature(city: str) -> float:
     # Returns: {"result": 22.5}
 ```
 
-_Full example: [examples/snippets/servers/structured_output.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/structured_output.py)_
+_Full example: [examples/snippets/servers/structured_output.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/structured_output.py)_
 <!-- /snippet-source -->
 
 ### Prompts
@@ -545,9 +574,11 @@ from mcp.server.fastmcp.prompts import base
 
 mcp = FastMCP(name="Prompt Example")
 
+
 @mcp.prompt(title="Code Review")
 def review_code(code: str) -> str:
     return f"Please review this code:\n\n{code}"
+
 
 @mcp.prompt(title="Debug Assistant")
 def debug_error(error: str) -> list[base.Message]:
@@ -558,7 +589,7 @@ def debug_error(error: str) -> list[base.Message]:
     ]
 ```
 
-_Full example: [examples/snippets/servers/basic_prompt.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/basic_prompt.py)_
+_Full example: [examples/snippets/servers/basic_prompt.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/basic_prompt.py)_
 <!-- /snippet-source -->
 
 ### Icons
@@ -594,7 +625,7 @@ def my_resource():
     return "content"
 ```
 
-_Full example: [examples/fastmcp/icons_demo.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/fastmcp/icons_demo.py)_
+_Full example: [examples/fastmcp/icons_demo.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/fastmcp/icons_demo.py)_
 
 ### Images
 
@@ -610,6 +641,7 @@ from mcp.server.fastmcp import FastMCP, Image
 
 mcp = FastMCP("Image Example")
 
+
 @mcp.tool()
 def create_thumbnail(image_path: str) -> Image:
     """Create a thumbnail from an image"""
@@ -618,7 +650,7 @@ def create_thumbnail(image_path: str) -> Image:
     return Image(data=img.tobytes(), format="png")
 ```
 
-_Full example: [examples/snippets/servers/images.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/images.py)_
+_Full example: [examples/snippets/servers/images.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/images.py)_
 <!-- /snippet-source -->
 
 ### Context
@@ -634,6 +666,7 @@ from mcp.server.fastmcp import Context, FastMCP
 
 mcp = FastMCP(name="Context Example")
 
+
 @mcp.tool()
 async def my_tool(x: int, ctx: Context) -> str:
     """Tool that uses context capabilities."""
@@ -647,9 +680,9 @@ The Context object provides the following capabilities:
 
 - `ctx.request_id` - Unique ID for the current request
 - `ctx.client_id` - Client ID if available
-- `ctx.fastmcp` - Access to the FastMCP server instance (see [FastMCP Properties](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/FastMCP Properties))
-- `ctx.session` - Access to the underlying session for advanced communication (see [Session Properties and Methods](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Session Properties and Methods))
-- `ctx.request_context` - Access to request-specific data and lifespan resources (see [Request Context Properties](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Request Context Properties))
+- `ctx.fastmcp` - Access to the FastMCP server instance (see [FastMCP Properties](#fastmcp-properties))
+- `ctx.session` - Access to the underlying session for advanced communication (see [Session Properties and Methods](#session-properties-and-methods))
+- `ctx.request_context` - Access to request-specific data and lifespan resources (see [Request Context Properties](#request-context-properties))
 - `await ctx.debug(message)` - Send debug log message
 - `await ctx.info(message)` - Send info log message  
 - `await ctx.warning(message)` - Send warning log message
@@ -665,6 +698,7 @@ from mcp.server.fastmcp import Context, FastMCP
 from mcp.server.session import ServerSession
 
 mcp = FastMCP(name="Progress Example")
+
 
 @mcp.tool()
 async def long_running_task(task_name: str, ctx: Context[ServerSession, None], steps: int = 5) -> str:
@@ -683,7 +717,7 @@ async def long_running_task(task_name: str, ctx: Context[ServerSession, None], s
     return f"Task '{task_name}' completed"
 ```
 
-_Full example: [examples/snippets/servers/tool_progress.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/tool_progress.py)_
+_Full example: [examples/snippets/servers/tool_progress.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/tool_progress.py)_
 <!-- /snippet-source -->
 
 ### Completions
@@ -712,6 +746,7 @@ server_params = StdioServerParameters(
     args=["run", "server", "completion", "stdio"],  # Server with completion support
     env={"UV_INDEX": os.environ.get("UV_INDEX", "")},
 )
+
 
 async def run():
     """Run the completion client example."""
@@ -763,15 +798,17 @@ async def run():
                 )
                 print(f"Completions for 'style' argument: {result.completion.values}")
 
+
 def main():
     """Entry point for the completion client."""
     asyncio.run(run())
+
 
 if __name__ == "__main__":
     main()
 ```
 
-_Full example: [examples/snippets/clients/completion_client.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/clients/completion_client.py)_
+_Full example: [examples/snippets/clients/completion_client.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/clients/completion_client.py)_
 <!-- /snippet-source -->
 ### Elicitation
 
@@ -797,6 +834,7 @@ from mcp.types import ElicitRequestURLParams
 
 mcp = FastMCP(name="Elicitation Example")
 
+
 class BookingPreferences(BaseModel):
     """Schema for collecting user preferences."""
 
@@ -805,6 +843,7 @@ class BookingPreferences(BaseModel):
         default="2024-12-26",
         description="Alternative date (YYYY-MM-DD)",
     )
+
 
 @mcp.tool()
 async def book_table(date: str, time: str, party_size: int, ctx: Context[ServerSession, None]) -> str:
@@ -829,6 +868,7 @@ async def book_table(date: str, time: str, party_size: int, ctx: Context[ServerS
     # Date available
     return f"[SUCCESS] Booked for {date} at {time}"
 
+
 @mcp.tool()
 async def secure_payment(amount: float, ctx: Context[ServerSession, None]) -> str:
     """Process a secure payment requiring URL confirmation.
@@ -851,6 +891,7 @@ async def secure_payment(amount: float, ctx: Context[ServerSession, None]) -> st
     elif result.action == "decline":
         return "Payment declined by user"
     return "Payment cancelled"
+
 
 @mcp.tool()
 async def connect_service(service_name: str, ctx: Context[ServerSession, None]) -> str:
@@ -876,7 +917,7 @@ async def connect_service(service_name: str, ctx: Context[ServerSession, None]) 
     )
 ```
 
-_Full example: [examples/snippets/servers/elicitation.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/elicitation.py)_
+_Full example: [examples/snippets/servers/elicitation.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/elicitation.py)_
 <!-- /snippet-source -->
 
 Elicitation schemas support default values for all field types. Default values are automatically included in the JSON schema sent to clients, allowing them to pre-populate forms.
@@ -899,6 +940,7 @@ from mcp.types import SamplingMessage, TextContent
 
 mcp = FastMCP(name="Sampling Example")
 
+
 @mcp.tool()
 async def generate_poem(topic: str, ctx: Context[ServerSession, None]) -> str:
     """Generate a poem using LLM sampling."""
@@ -920,7 +962,7 @@ async def generate_poem(topic: str, ctx: Context[ServerSession, None]) -> str:
     return str(result.content)
 ```
 
-_Full example: [examples/snippets/servers/sampling.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/sampling.py)_
+_Full example: [examples/snippets/servers/sampling.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/sampling.py)_
 <!-- /snippet-source -->
 
 ### Logging and Notifications
@@ -933,6 +975,7 @@ from mcp.server.fastmcp import Context, FastMCP
 from mcp.server.session import ServerSession
 
 mcp = FastMCP(name="Notifications Example")
+
 
 @mcp.tool()
 async def process_data(data: str, ctx: Context[ServerSession, None]) -> str:
@@ -949,14 +992,14 @@ async def process_data(data: str, ctx: Context[ServerSession, None]) -> str:
     return f"Processed: {data}"
 ```
 
-_Full example: [examples/snippets/servers/notifications.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/notifications.py)_
+_Full example: [examples/snippets/servers/notifications.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/notifications.py)_
 <!-- /snippet-source -->
 
 ### Authentication
 
 Authentication can be used by servers that want to expose tools accessing protected resources.
 
-`mcp.server.auth` implements OAuth 2.1 resource server functionality, where MCP servers act as Resource Servers (RS) that validate tokens issued by separate Authorization Servers (AS). This follows the [MCP authorization specification](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/MCP authorization specification) and implements RFC 9728 (Protected Resource Metadata) for AS discovery.
+`mcp.server.auth` implements OAuth 2.1 resource server functionality, where MCP servers act as Resource Servers (RS) that validate tokens issued by separate Authorization Servers (AS). This follows the [MCP authorization specification](https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization) and implements RFC 9728 (Protected Resource Metadata) for AS discovery.
 
 MCP servers can use authentication by providing an implementation of the `TokenVerifier` protocol:
 
@@ -973,11 +1016,13 @@ from mcp.server.auth.provider import AccessToken, TokenVerifier
 from mcp.server.auth.settings import AuthSettings
 from mcp.server.fastmcp import FastMCP
 
+
 class SimpleTokenVerifier(TokenVerifier):
     """Simple token verifier for demonstration."""
 
     async def verify_token(self, token: str) -> AccessToken | None:
         pass  # This is where you would implement actual token validation
+
 
 # Create FastMCP instance as a Resource Server
 mcp = FastMCP(
@@ -993,6 +1038,7 @@ mcp = FastMCP(
     ),
 )
 
+
 @mcp.tool()
 async def get_weather(city: str = "London") -> dict[str, str]:
     """Get weather data for a city"""
@@ -1003,14 +1049,15 @@ async def get_weather(city: str = "London") -> dict[str, str]:
         "humidity": "65%",
     }
 
+
 if __name__ == "__main__":
     mcp.run(transport="streamable-http")
 ```
 
-_Full example: [examples/snippets/servers/oauth_server.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/oauth_server.py)_
+_Full example: [examples/snippets/servers/oauth_server.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/oauth_server.py)_
 <!-- /snippet-source -->
 
-For a complete example with separate Authorization Server and Resource Server implementations, see [`examples/servers/simple-auth/`](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/`examples/servers/simple-auth/`).
+For a complete example with separate Authorization Server and Resource Server implementations, see [`examples/servers/simple-auth/`](examples/servers/simple-auth/).
 
 **Architecture:**
 
@@ -1018,7 +1065,7 @@ For a complete example with separate Authorization Server and Resource Server im
 - **Resource Server (RS)**: Your MCP server that validates tokens and serves protected resources
 - **Client**: Discovers AS through RFC 9728, obtains tokens, and uses them with the MCP server
 
-See [TokenVerifier](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/TokenVerifier) for more details on implementing token validation.
+See [TokenVerifier](src/mcp/server/auth/provider.py) for more details on implementing token validation.
 
 ### FastMCP Properties
 
@@ -1113,7 +1160,7 @@ def query_with_config(query: str, ctx: Context) -> str:
     return str(result)
 ```
 
-_Full lifespan example: [examples/snippets/servers/lifespan_example.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/lifespan_example.py)_
+_Full lifespan example: [examples/snippets/servers/lifespan_example.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/lifespan_example.py)_
 
 ## Running Your Server
 
@@ -1165,20 +1212,23 @@ from mcp.server.fastmcp import FastMCP
 
 mcp = FastMCP("My App")
 
+
 @mcp.tool()
 def hello(name: str = "World") -> str:
     """Say hello to someone."""
     return f"Hello, {name}!"
 
+
 def main():
     """Entry point for the direct execution server."""
     mcp.run()
+
 
 if __name__ == "__main__":
     main()
 ```
 
-_Full example: [examples/snippets/servers/direct_execution.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/direct_execution.py)_
+_Full example: [examples/snippets/servers/direct_execution.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/direct_execution.py)_
 <!-- /snippet-source -->
 
 Run it with:
@@ -1214,18 +1264,20 @@ mcp = FastMCP("StatelessServer", stateless_http=True, json_response=True)
 # Stateful server with session persistence
 # mcp = FastMCP("StatefulServer")
 
+
 # Add a simple tool to demonstrate the server
 @mcp.tool()
 def greet(name: str = "World") -> str:
     """Greet someone by name."""
     return f"Hello, {name}!"
 
+
 # Run server with streamable_http transport
 if __name__ == "__main__":
     mcp.run(transport="streamable-http")
 ```
 
-_Full example: [examples/snippets/servers/streamable_config.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/streamable_config.py)_
+_Full example: [examples/snippets/servers/streamable_config.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/streamable_config.py)_
 <!-- /snippet-source -->
 
 You can mount multiple FastMCP servers in a Starlette application:
@@ -1247,18 +1299,22 @@ from mcp.server.fastmcp import FastMCP
 # Create the Echo server
 echo_mcp = FastMCP(name="EchoServer", stateless_http=True, json_response=True)
 
+
 @echo_mcp.tool()
 def echo(message: str) -> str:
     """A simple echo tool"""
     return f"Echo: {message}"
 
+
 # Create the Math server
 math_mcp = FastMCP(name="MathServer", stateless_http=True, json_response=True)
+
 
 @math_mcp.tool()
 def add_two(n: int) -> int:
     """Tool to add two to the input"""
     return n + 2
+
 
 # Create a combined lifespan to manage both session managers
 @contextlib.asynccontextmanager
@@ -1267,6 +1323,7 @@ async def lifespan(app: Starlette):
         await stack.enter_async_context(echo_mcp.session_manager.run())
         await stack.enter_async_context(math_mcp.session_manager.run())
         yield
+
 
 # Create the Starlette app and mount the MCP servers
 app = Starlette(
@@ -1283,13 +1340,13 @@ app = Starlette(
 # math_mcp.settings.streamable_http_path = "/"
 ```
 
-_Full example: [examples/snippets/servers/streamable_starlette_mount.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/streamable_starlette_mount.py)_
+_Full example: [examples/snippets/servers/streamable_starlette_mount.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/streamable_starlette_mount.py)_
 <!-- /snippet-source -->
 
 For low level server with Streamable HTTP implementations, see:
 
-- Stateful server: [`examples/servers/simple-streamablehttp/`](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/`examples/servers/simple-streamablehttp/`)
-- Stateless server: [`examples/servers/simple-streamablehttp-stateless/`](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/`examples/servers/simple-streamablehttp-stateless/`)
+- Stateful server: [`examples/servers/simple-streamablehttp/`](examples/servers/simple-streamablehttp/)
+- Stateless server: [`examples/servers/simple-streamablehttp-stateless/`](examples/servers/simple-streamablehttp-stateless/)
 
 The streamable HTTP transport supports:
 
@@ -1328,7 +1385,7 @@ This configuration is necessary because:
 
 By default, SSE servers are mounted at `/sse` and Streamable HTTP servers are mounted at `/mcp`. You can customize these paths using the methods described below.
 
-For more information on mounting applications in Starlette, see the [Starlette documentation](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Starlette documentation).
+For more information on mounting applications in Starlette, see the [Starlette documentation](https://www.starlette.io/routing/#submounting-routes).
 
 #### StreamableHTTP servers
 
@@ -1355,16 +1412,19 @@ from mcp.server.fastmcp import FastMCP
 # Create MCP server
 mcp = FastMCP("My App", json_response=True)
 
+
 @mcp.tool()
 def hello() -> str:
     """A simple hello tool"""
     return "Hello from MCP!"
+
 
 # Create a lifespan context manager to run the session manager
 @contextlib.asynccontextmanager
 async def lifespan(app: Starlette):
     async with mcp.session_manager.run():
         yield
+
 
 # Mount the StreamableHTTP server to the existing ASGI server
 app = Starlette(
@@ -1375,7 +1435,7 @@ app = Starlette(
 )
 ```
 
-_Full example: [examples/snippets/servers/streamable_http_basic_mounting.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/streamable_http_basic_mounting.py)_
+_Full example: [examples/snippets/servers/streamable_http_basic_mounting.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/streamable_http_basic_mounting.py)_
 <!-- /snippet-source -->
 
 ##### Host-based routing
@@ -1399,16 +1459,19 @@ from mcp.server.fastmcp import FastMCP
 # Create MCP server
 mcp = FastMCP("MCP Host App", json_response=True)
 
+
 @mcp.tool()
 def domain_info() -> str:
     """Get domain-specific information"""
     return "This is served from mcp.acme.corp"
+
 
 # Create a lifespan context manager to run the session manager
 @contextlib.asynccontextmanager
 async def lifespan(app: Starlette):
     async with mcp.session_manager.run():
         yield
+
 
 # Mount using Host-based routing
 app = Starlette(
@@ -1419,7 +1482,7 @@ app = Starlette(
 )
 ```
 
-_Full example: [examples/snippets/servers/streamable_http_host_mounting.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/streamable_http_host_mounting.py)_
+_Full example: [examples/snippets/servers/streamable_http_host_mounting.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/streamable_http_host_mounting.py)_
 <!-- /snippet-source -->
 
 ##### Multiple servers with path configuration
@@ -1444,20 +1507,24 @@ from mcp.server.fastmcp import FastMCP
 api_mcp = FastMCP("API Server", json_response=True)
 chat_mcp = FastMCP("Chat Server", json_response=True)
 
+
 @api_mcp.tool()
 def api_status() -> str:
     """Get API status"""
     return "API is running"
+
 
 @chat_mcp.tool()
 def send_message(message: str) -> str:
     """Send a chat message"""
     return f"Message sent: {message}"
 
+
 # Configure servers to mount at the root of each path
 # This means endpoints will be at /api and /chat instead of /api/mcp and /chat/mcp
 api_mcp.settings.streamable_http_path = "/"
 chat_mcp.settings.streamable_http_path = "/"
+
 
 # Create a combined lifespan to manage both session managers
 @contextlib.asynccontextmanager
@@ -1466,6 +1533,7 @@ async def lifespan(app: Starlette):
         await stack.enter_async_context(api_mcp.session_manager.run())
         await stack.enter_async_context(chat_mcp.session_manager.run())
         yield
+
 
 # Mount the servers
 app = Starlette(
@@ -1477,7 +1545,7 @@ app = Starlette(
 )
 ```
 
-_Full example: [examples/snippets/servers/streamable_http_multiple_servers.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/streamable_http_multiple_servers.py)_
+_Full example: [examples/snippets/servers/streamable_http_multiple_servers.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/streamable_http_multiple_servers.py)_
 <!-- /snippet-source -->
 
 ##### Path configuration at initialization
@@ -1504,10 +1572,12 @@ mcp_at_root = FastMCP(
     streamable_http_path="/",
 )
 
+
 @mcp_at_root.tool()
 def process_data(data: str) -> str:
     """Process some data"""
     return f"Processed: {data}"
+
 
 # Mount at /process - endpoints will be at /process instead of /process/mcp
 app = Starlette(
@@ -1517,12 +1587,12 @@ app = Starlette(
 )
 ```
 
-_Full example: [examples/snippets/servers/streamable_http_path_config.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/streamable_http_path_config.py)_
+_Full example: [examples/snippets/servers/streamable_http_path_config.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/streamable_http_path_config.py)_
 <!-- /snippet-source -->
 
 #### SSE servers
 
-> **Note**: SSE transport is being superseded by [Streamable HTTP transport](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Streamable HTTP transport).
+> **Note**: SSE transport is being superseded by [Streamable HTTP transport](https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#streamable-http).
 
 You can mount the SSE server to an existing ASGI server using the `sse_app` method. This allows you to integrate the SSE server with other ASGI applications.
 
@@ -1530,6 +1600,7 @@ You can mount the SSE server to an existing ASGI server using the `sse_app` meth
 from starlette.applications import Starlette
 from starlette.routing import Mount, Host
 from mcp.server.fastmcp import FastMCP
+
 
 mcp = FastMCP("My App")
 
@@ -1581,7 +1652,7 @@ if __name__ == "__main__":
     search_mcp.run(transport="sse", mount_path="/search")
 ```
 
-For more information on mounting applications in Starlette, see the [Starlette documentation](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Starlette documentation).
+For more information on mounting applications in Starlette, see the [Starlette documentation](https://www.starlette.io/routing/#submounting-routes).
 
 ## Advanced Usage
 
@@ -1605,6 +1676,7 @@ import mcp.types as types
 from mcp.server.lowlevel import NotificationOptions, Server
 from mcp.server.models import InitializationOptions
 
+
 # Mock database class for example
 class Database:
     """Mock database class for example."""
@@ -1624,6 +1696,7 @@ class Database:
         # Simulate database query
         return [{"id": "1", "name": "Example", "query": query_str}]
 
+
 @asynccontextmanager
 async def server_lifespan(_server: Server) -> AsyncIterator[dict[str, Any]]:
     """Manage server startup and shutdown lifecycle."""
@@ -1635,8 +1708,10 @@ async def server_lifespan(_server: Server) -> AsyncIterator[dict[str, Any]]:
         # Clean up on shutdown
         await db.disconnect()
 
+
 # Pass lifespan to server
 server = Server("example-server", lifespan=server_lifespan)
+
 
 @server.list_tools()
 async def handle_list_tools() -> list[types.Tool]:
@@ -1653,6 +1728,7 @@ async def handle_list_tools() -> list[types.Tool]:
         )
     ]
 
+
 @server.call_tool()
 async def query_db(name: str, arguments: dict[str, Any]) -> list[types.TextContent]:
     """Handle database query tool call."""
@@ -1667,6 +1743,7 @@ async def query_db(name: str, arguments: dict[str, Any]) -> list[types.TextConte
     results = await db.query(arguments["query"])
 
     return [types.TextContent(type="text", text=f"Query results: {results}")]
+
 
 async def run():
     """Run the server with lifespan management."""
@@ -1684,13 +1761,14 @@ async def run():
             ),
         )
 
+
 if __name__ == "__main__":
     import asyncio
 
     asyncio.run(run())
 ```
 
-_Full example: [examples/snippets/servers/lowlevel/lifespan.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/lowlevel/lifespan.py)_
+_Full example: [examples/snippets/servers/lowlevel/lifespan.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/lowlevel/lifespan.py)_
 <!-- /snippet-source -->
 
 The lifespan API provides:
@@ -1716,6 +1794,7 @@ from mcp.server.models import InitializationOptions
 # Create a server instance
 server = Server("example-server")
 
+
 @server.list_prompts()
 async def handle_list_prompts() -> list[types.Prompt]:
     """List available prompts."""
@@ -1726,6 +1805,7 @@ async def handle_list_prompts() -> list[types.Prompt]:
             arguments=[types.PromptArgument(name="arg1", description="Example argument", required=True)],
         )
     ]
+
 
 @server.get_prompt()
 async def handle_get_prompt(name: str, arguments: dict[str, str] | None) -> types.GetPromptResult:
@@ -1745,6 +1825,7 @@ async def handle_get_prompt(name: str, arguments: dict[str, str] | None) -> type
         ],
     )
 
+
 async def run():
     """Run the basic low-level server."""
     async with mcp.server.stdio.stdio_server() as (read_stream, write_stream):
@@ -1761,11 +1842,12 @@ async def run():
             ),
         )
 
+
 if __name__ == "__main__":
     asyncio.run(run())
 ```
 
-_Full example: [examples/snippets/servers/lowlevel/basic.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/lowlevel/basic.py)_
+_Full example: [examples/snippets/servers/lowlevel/basic.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/lowlevel/basic.py)_
 <!-- /snippet-source -->
 
 Caution: The `uv run mcp run` and `uv run mcp dev` tool doesn't support low-level server.
@@ -1790,6 +1872,7 @@ from mcp.server.lowlevel import NotificationOptions, Server
 from mcp.server.models import InitializationOptions
 
 server = Server("example-server")
+
 
 @server.list_tools()
 async def list_tools() -> list[types.Tool]:
@@ -1816,6 +1899,7 @@ async def list_tools() -> list[types.Tool]:
         )
     ]
 
+
 @server.call_tool()
 async def call_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
     """Handle tool calls with structured output."""
@@ -1837,6 +1921,7 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
     else:
         raise ValueError(f"Unknown tool: {name}")
 
+
 async def run():
     """Run the structured output server."""
     async with mcp.server.stdio.stdio_server() as (read_stream, write_stream):
@@ -1853,11 +1938,12 @@ async def run():
             ),
         )
 
+
 if __name__ == "__main__":
     asyncio.run(run())
 ```
 
-_Full example: [examples/snippets/servers/lowlevel/structured_output.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/lowlevel/structured_output.py)_
+_Full example: [examples/snippets/servers/lowlevel/structured_output.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/lowlevel/structured_output.py)_
 <!-- /snippet-source -->
 
 Tools can return data in four ways:
@@ -1890,6 +1976,7 @@ from mcp.server.models import InitializationOptions
 
 server = Server("example-server")
 
+
 @server.list_tools()
 async def list_tools() -> list[types.Tool]:
     """List available tools."""
@@ -1905,6 +1992,7 @@ async def list_tools() -> list[types.Tool]:
         )
     ]
 
+
 @server.call_tool()
 async def handle_call_tool(name: str, arguments: dict[str, Any]) -> types.CallToolResult:
     """Handle tool calls by returning CallToolResult directly."""
@@ -1917,6 +2005,7 @@ async def handle_call_tool(name: str, arguments: dict[str, Any]) -> types.CallTo
         )
 
     raise ValueError(f"Unknown tool: {name}")
+
 
 async def run():
     """Run the server."""
@@ -1934,11 +2023,12 @@ async def run():
             ),
         )
 
+
 if __name__ == "__main__":
     asyncio.run(run())
 ```
 
-_Full example: [examples/snippets/servers/lowlevel/direct_call_tool_result.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/lowlevel/direct_call_tool_result.py)_
+_Full example: [examples/snippets/servers/lowlevel/direct_call_tool_result.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/lowlevel/direct_call_tool_result.py)_
 <!-- /snippet-source -->
 
 **Note:** When returning `CallToolResult`, you bypass the automatic content/structured conversion. You must construct the complete response yourself.
@@ -1966,6 +2056,7 @@ server = Server("paginated-server")
 # Sample data to paginate
 ITEMS = [f"Item {i}" for i in range(1, 101)]  # 100 items
 
+
 @server.list_resources()
 async def list_resources_paginated(request: types.ListResourcesRequest) -> types.ListResourcesResult:
     """List resources with pagination support."""
@@ -1990,7 +2081,7 @@ async def list_resources_paginated(request: types.ListResourcesRequest) -> types
     return types.ListResourcesResult(resources=page_items, nextCursor=next_cursor)
 ```
 
-_Full example: [examples/snippets/servers/pagination_example.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/servers/pagination_example.py)_
+_Full example: [examples/snippets/servers/pagination_example.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/servers/pagination_example.py)_
 <!-- /snippet-source -->
 
 #### Client-side Consumption
@@ -2006,6 +2097,7 @@ import asyncio
 from mcp.client.session import ClientSession
 from mcp.client.stdio import StdioServerParameters, stdio_client
 from mcp.types import PaginatedRequestParams, Resource
+
 
 async def list_all_resources() -> None:
     """Fetch all resources using pagination."""
@@ -2034,11 +2126,12 @@ async def list_all_resources() -> None:
 
             print(f"Total resources: {len(all_resources)}")
 
+
 if __name__ == "__main__":
     asyncio.run(list_all_resources())
 ```
 
-_Full example: [examples/snippets/clients/pagination_client.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/clients/pagination_client.py)_
+_Full example: [examples/snippets/clients/pagination_client.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/clients/pagination_client.py)_
 <!-- /snippet-source -->
 
 #### Key Points
@@ -2048,11 +2141,11 @@ _Full example: [examples/snippets/clients/pagination_client.py](https://raw.gith
 - **Backward compatible** - clients that don't support pagination will still work (they'll just get the first page)
 - **Flexible page sizes** - Each endpoint can define its own page size based on data characteristics
 
-See the [simple-pagination example](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/simple-pagination example) for a complete implementation.
+See the [simple-pagination example](examples/servers/simple-pagination) for a complete implementation.
 
 ### Writing MCP Clients
 
-The SDK provides a high-level client interface for connecting to MCP servers using various [transports](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/transports):
+The SDK provides a high-level client interface for connecting to MCP servers using various [transports](https://modelcontextprotocol.io/specification/2025-03-26/basic/transports):
 
 <!-- snippet-source examples/snippets/clients/stdio_client.py -->
 ```python
@@ -2077,6 +2170,7 @@ server_params = StdioServerParameters(
     env={"UV_INDEX": os.environ.get("UV_INDEX", "")},
 )
 
+
 # Optional: create a sampling callback
 async def handle_sampling_message(
     context: RequestContext[ClientSession, None], params: types.CreateMessageRequestParams
@@ -2091,6 +2185,7 @@ async def handle_sampling_message(
         model="gpt-3.5-turbo",
         stopReason="endTurn",
     )
+
 
 async def run():
     async with stdio_client(server_params) as (read, write):
@@ -2129,18 +2224,20 @@ async def run():
             result_structured = result.structuredContent
             print(f"Structured tool result: {result_structured}")
 
+
 def main():
     """Entry point for the client script."""
     asyncio.run(run())
+
 
 if __name__ == "__main__":
     main()
 ```
 
-_Full example: [examples/snippets/clients/stdio_client.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/clients/stdio_client.py)_
+_Full example: [examples/snippets/clients/stdio_client.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/clients/stdio_client.py)_
 <!-- /snippet-source -->
 
-Clients can also connect using [Streamable HTTP transport](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Streamable HTTP transport):
+Clients can also connect using [Streamable HTTP transport](https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#streamable-http):
 
 <!-- snippet-source examples/snippets/clients/streamable_basic.py -->
 ```python
@@ -2153,6 +2250,7 @@ import asyncio
 
 from mcp import ClientSession
 from mcp.client.streamable_http import streamable_http_client
+
 
 async def main():
     # Connect to a streamable HTTP server
@@ -2169,11 +2267,12 @@ async def main():
             tools = await session.list_tools()
             print(f"Available tools: {[tool.name for tool in tools.tools]}")
 
+
 if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-_Full example: [examples/snippets/clients/streamable_basic.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/clients/streamable_basic.py)_
+_Full example: [examples/snippets/clients/streamable_basic.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/clients/streamable_basic.py)_
 <!-- /snippet-source -->
 
 ### Client Display Utilities
@@ -2201,6 +2300,7 @@ server_params = StdioServerParameters(
     env={"UV_INDEX": os.environ.get("UV_INDEX", "")},
 )
 
+
 async def display_tools(session: ClientSession):
     """Display available tools with human-readable names"""
     tools_response = await session.list_tools()
@@ -2211,6 +2311,7 @@ async def display_tools(session: ClientSession):
         print(f"Tool: {display_name}")
         if tool.description:
             print(f"   {tool.description}")
+
 
 async def display_resources(session: ClientSession):
     """Display available resources with human-readable names"""
@@ -2225,6 +2326,7 @@ async def display_resources(session: ClientSession):
         display_name = get_display_name(template)
         print(f"Resource Template: {display_name}")
 
+
 async def run():
     """Run the display utilities example."""
     async with stdio_client(server_params) as (read, write):
@@ -2238,15 +2340,17 @@ async def run():
             print("\n=== Available Resources ===")
             await display_resources(session)
 
+
 def main():
     """Entry point for the display utilities client."""
     asyncio.run(run())
+
 
 if __name__ == "__main__":
     main()
 ```
 
-_Full example: [examples/snippets/clients/display_utilities.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/clients/display_utilities.py)_
+_Full example: [examples/snippets/clients/display_utilities.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/clients/display_utilities.py)_
 <!-- /snippet-source -->
 
 The `get_display_name()` function implements the proper precedence rules for displaying names:
@@ -2258,7 +2362,7 @@ This ensures your client UI shows the most user-friendly names that servers prov
 
 ### OAuth Authentication for Clients
 
-The SDK includes [authorization support](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/authorization support) for connecting to protected MCP servers:
+The SDK includes [authorization support](https://modelcontextprotocol.io/specification/2025-03-26/basic/authorization) for connecting to protected MCP servers:
 
 <!-- snippet-source examples/snippets/clients/oauth_client.py -->
 ```python
@@ -2281,6 +2385,7 @@ from mcp import ClientSession
 from mcp.client.auth import OAuthClientProvider, TokenStorage
 from mcp.client.streamable_http import streamable_http_client
 from mcp.shared.auth import OAuthClientInformationFull, OAuthClientMetadata, OAuthToken
+
 
 class InMemoryTokenStorage(TokenStorage):
     """Demo In-memory token storage implementation."""
@@ -2305,13 +2410,16 @@ class InMemoryTokenStorage(TokenStorage):
         """Store client information."""
         self.client_info = client_info
 
+
 async def handle_redirect(auth_url: str) -> None:
     print(f"Visit: {auth_url}")
+
 
 async def handle_callback() -> tuple[str, str | None]:
     callback_url = input("Paste callback URL: ")
     params = parse_qs(urlparse(callback_url).query)
     return params["code"][0], params.get("state", [None])[0]
+
 
 async def main():
     """Run the OAuth client example."""
@@ -2340,17 +2448,19 @@ async def main():
                 resources = await session.list_resources()
                 print(f"Available resources: {[r.uri for r in resources.resources]}")
 
+
 def run():
     asyncio.run(main())
+
 
 if __name__ == "__main__":
     run()
 ```
 
-_Full example: [examples/snippets/clients/oauth_client.py](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/snippets/clients/oauth_client.py)_
+_Full example: [examples/snippets/clients/oauth_client.py](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/snippets/clients/oauth_client.py)_
 <!-- /snippet-source -->
 
-For a complete working example, see [`examples/clients/simple-auth-client/`](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/`examples/clients/simple-auth-client/`).
+For a complete working example, see [`examples/clients/simple-auth-client/`](examples/clients/simple-auth-client/).
 
 ### Parsing Tool Results
 
@@ -2363,6 +2473,7 @@ import asyncio
 
 from mcp import ClientSession, StdioServerParameters, types
 from mcp.client.stdio import stdio_client
+
 
 async def parse_tool_results():
     """Demonstrates how to parse different types of content in CallToolResult."""
@@ -2411,8 +2522,10 @@ async def parse_tool_results():
                     if isinstance(content, types.TextContent):
                         print(f"Error: {content.text}")
 
+
 async def main():
     await parse_tool_results()
+
 
 if __name__ == "__main__":
     asyncio.run(main())
@@ -2442,15 +2555,15 @@ MCP servers declare capabilities during initialization:
 
 ## Documentation
 
-- [API Reference](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/API Reference)
-- [Experimental Features (Tasks)](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Experimental Features (Tasks))
-- [Model Context Protocol documentation](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Model Context Protocol documentation)
-- [Model Context Protocol specification](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Model Context Protocol specification)
-- [Officially supported servers](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/Officially supported servers)
+- [API Reference](https://modelcontextprotocol.github.io/python-sdk/api/)
+- [Experimental Features (Tasks)](https://modelcontextprotocol.github.io/python-sdk/experimental/tasks/)
+- [Model Context Protocol documentation](https://modelcontextprotocol.io)
+- [Model Context Protocol specification](https://modelcontextprotocol.io/specification/latest)
+- [Officially supported servers](https://github.com/modelcontextprotocol/servers)
 
 ## Contributing
 
-We are passionate about supporting contributors of all levels of experience and would love to see you get involved in the project. See the [contributing guide](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/contributing guide) to get started.
+We are passionate about supporting contributors of all levels of experience and would love to see you get involved in the project. See the [contributing guide](CONTRIBUTING.md) to get started.
 
 ## License
 

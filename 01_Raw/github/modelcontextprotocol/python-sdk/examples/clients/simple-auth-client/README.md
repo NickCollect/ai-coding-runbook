@@ -19,7 +19,7 @@ uv sync --reinstall
 
 ### 1. Start an MCP server with OAuth support
 
-The simple-auth server example provides three server configurations. See [examples/servers/simple-auth/README.md](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/clients/simple-auth-client/examples/servers/simple-auth/README.md) for full details.
+The simple-auth server example provides three server configurations. See [examples/servers/simple-auth/README.md](../../servers/simple-auth/README.md) for full details.
 
 #### Option A: New Architecture (Recommended)
 

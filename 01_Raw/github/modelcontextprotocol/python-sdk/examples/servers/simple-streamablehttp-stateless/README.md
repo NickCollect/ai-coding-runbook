@@ -35,4 +35,4 @@ The server exposes a tool named "start-notification-stream" that accepts three a
 
 ## Client
 
-You can connect to this server using an HTTP client. For now, only the TypeScript SDK has streamable HTTP client examples, or you can use [Inspector](https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/examples/servers/simple-streamablehttp-stateless/Inspector) for testing.
+You can connect to this server using an HTTP client. For now, only the TypeScript SDK has streamable HTTP client examples, or you can use [Inspector](https://github.com/modelcontextprotocol/inspector) for testing.

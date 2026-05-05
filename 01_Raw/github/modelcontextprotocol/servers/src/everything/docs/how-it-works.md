@@ -1,10 +1,10 @@
 # Everything Server - How It Works
 
-**[Architecture](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/Architecture)
-| [Project Structure](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/Project Structure)
-| [Startup Process](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/Startup Process)
-| [Server Features](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/Server Features)
-| [Extension Points](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/Extension Points)
+**[Architecture](architecture.md)
+| [Project Structure](structure.md)
+| [Startup Process](startup.md)
+| [Server Features](features.md)
+| [Extension Points](extension.md)
 | How It Works**
 
 # Conditional Tool Registration

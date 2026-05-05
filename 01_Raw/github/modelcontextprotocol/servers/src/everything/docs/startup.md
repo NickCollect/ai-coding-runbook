@@ -1,11 +1,11 @@
 # Everything Server - Startup Process
 
-**[Architecture](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/Architecture)
-| [Project Structure](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/Project Structure)
+**[Architecture](architecture.md)
+| [Project Structure](structure.md)
 | Startup Process
-| [Server Features](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/Server Features)
-| [Extension Points](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/Extension Points)
-| [How It Works](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/everything/docs/How It Works)**
+| [Server Features](features.md)
+| [Extension Points](extension.md)
+| [How It Works](how-it-works.md)**
 
 ## 1. Everything Server Launcher
 

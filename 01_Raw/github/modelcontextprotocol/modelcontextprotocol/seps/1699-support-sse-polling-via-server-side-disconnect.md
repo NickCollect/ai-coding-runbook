@@ -12,15 +12,15 @@ This SEP proposes changes to the Streamable HTTP transport in order to mitigate 
 
 ## Motivation
 
-The Streamable HTTP transport spec [does not allow](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/does not allow) servers to close a connection while computing a result. In other words, barring client-side disconnection, servers must maintain potentially long-running connections.
+The Streamable HTTP transport spec [does not allow](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/04c6e1f0ea6544c7df307fb2d7c637efe34f58d3/docs/specification/draft/basic/transports.mdx?plain=1#L109-L111) servers to close a connection while computing a result. In other words, barring client-side disconnection, servers must maintain potentially long-running connections.
 
 ## Specification
 
-When a server starts an SSE stream, it MUST immediately send an SSE event consisting of an [`id`](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/`id`) and an empty [`data`](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/`data`) string in order to prime the client to reconnect with that event ID as the `Last-Event-ID`.
+When a server starts an SSE stream, it MUST immediately send an SSE event consisting of an [`id`](https://html.spec.whatwg.org/multipage/server-sent-events.html#:~:text=field%20name%20is%20%22id%22) and an empty [`data`](https://html.spec.whatwg.org/multipage/server-sent-events.html#:~:text=field%20name%20is%20%22data%22) string in order to prime the client to reconnect with that event ID as the `Last-Event-ID`.
 
-Note that the SSE standard explicitly [permits setting `data` to an empty string](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/permits setting `data` to an empty string), and says that the appropriate client-side handling is to record the `id` for `Last-Event-ID` but otherwise ignore the event (i.e., not call the event handler callback).
+Note that the SSE standard explicitly [permits setting `data` to an empty string](https://html.spec.whatwg.org/multipage/server-sent-events.html#:~:text=data%20buffer%20is%20an%20empty%20string), and says that the appropriate client-side handling is to record the `id` for `Last-Event-ID` but otherwise ignore the event (i.e., not call the event handler callback).
 
-At any point after the server has sent an event ID to the client, the server MAY disconnect at will. Specifically, [this part of the MCP spec](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/this part of the MCP spec) will be changed from:
+At any point after the server has sent an event ID to the client, the server MAY disconnect at will. Specifically, [this part of the MCP spec](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/04c6e1f0ea6544c7df307fb2d7c637efe34f58d3/docs/specification/draft/basic/transports.mdx?plain=1#L109-L111) will be changed from:
 
 > The server **SHOULD NOT** close the SSE stream before sending the JSON-RPC _response_ for the received JSON-RPC _request_
 
@@ -28,7 +28,7 @@ To:
 
 > The server **MAY** close the connection before sending the JSON-RPC _response_ if it has sent an SSE event with an event ID to the client
 
-If a server disconnects, the client will interpret the disconnection the same as a network failure, and will attempt to reconnect. In order to prevent clients from reconnecting / polling excessively, the server SHOULD send an SSE event with a [`retry`](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/`retry`) field indicating how long the client should wait before reconnecting. Clients MUST respect the `retry` field.
+If a server disconnects, the client will interpret the disconnection the same as a network failure, and will attempt to reconnect. In order to prevent clients from reconnecting / polling excessively, the server SHOULD send an SSE event with a [`retry`](https://html.spec.whatwg.org/multipage/server-sent-events.html#:~:text=field%20name%20is%20%22retry%22) field indicating how long the client should wait before reconnecting. Clients MUST respect the `retry` field.
 
 ## Rationale
 
@@ -41,4 +41,4 @@ Servers may disconnect at will, avoiding long-running connections. Sending a `re
 
 ## Additional Information
 
-This SEP supersedes (in part) [SEP-1335](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/SEP-1335).
+This SEP supersedes (in part) [SEP-1335](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1335).

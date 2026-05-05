@@ -42,7 +42,7 @@ These headers are **required** for compliance with the MCP version in which they
 
 > **Rationale**: This requirement prevents potential security vulnerabilities and error conditions that could arise when different components in the network rely on different sources of truth. For example, a load balancer or gateway might use the header values to make routing decisions, while the MCP server uses the body values for execution. This requirement applies to any network intermediary that processes the message body, as well as the MCP server itself.
 
-**Case Sensitivity**: Header names (called "field names" in [RFC 9110](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/RFC 9110)) are case-insensitive. Clients and servers MUST use case-insensitive comparisons for header names.
+**Case Sensitivity**: Header names (called "field names" in [RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110#name-field-names)) are case-insensitive. Clients and servers MUST use case-insensitive comparisons for header names.
 
 #### Example: tools/call Request
 
@@ -370,7 +370,7 @@ Clients MUST encode parameter values before including them in HTTP headers to en
 
 **Character Restrictions**
 
-Per [RFC 9110](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/RFC 9110), HTTP header field values must consist of visible ASCII characters (0x21-0x7E), space (0x20), and horizontal tab (0x09). The following characters are explicitly prohibited:
+Per [RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110#name-field-values), HTTP header field values must consist of visible ASCII characters (0x21-0x7E), space (0x20), and horizontal tab (0x09). The following characters are explicitly prohibited:
 
 - Carriage return (`\r`, 0x0D)
 - Line feed (`\n`, 0x0A)
@@ -429,12 +429,12 @@ When constructing a `tools/call` request via HTTP transport, the client MUST:
 1. Extract the values for any standard headers from the request body (e.g., `method`, `params.name`, `params.uri`)
 1. Append the `Mcp-Method` header and, if applicable, `Mcp-Name` header to the request
 1. Inspect the tool's `inputSchema` for properties marked with `x-mcp-header` and extract the value for each parameter
-1. Encode the values according to the rules in [Value Encoding](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/Value Encoding)
+1. Encode the values according to the rules in [Value Encoding](#value-encoding)
 1. Append a `Mcp-Param-{Name}: {Value}` header to the request:
 
 #### Server Behavior
 
-When receiving a request, the server MUST reject requests with `Mcp-Param-{Name}` headers that contain invalid characters (see "Character Restrictions" in the [Value Encoding](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/Value Encoding) section).
+When receiving a request, the server MUST reject requests with `Mcp-Param-{Name}` headers that contain invalid characters (see "Character Restrictions" in the [Value Encoding](#value-encoding) section).
 
 Any server that processes the message body (not simply forwarding it) MUST validate that encoded header values, after decoding if Base64-encoded, match the corresponding values in the request body. Servers MUST reject requests with a `400 Bad Request` HTTP status if any validation fails.
 
@@ -570,7 +570,7 @@ The `x-mcp-header` mechanism currently applies only to `tools/call` requests bec
 
 ### No Specification-Level Header Size Limit
 
-This specification intentionally does not define limits on individual header value length, total MCP header size, or number of custom headers. Headers are solely an HTTP concept, and HTTP itself ([RFC 9110](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/RFC 9110)) does not specify header size limits. Common HTTP infrastructure imposes its own limits — ranging from 4–8 KB on some servers (e.g., Apache at ~8190 bytes) to 128 KB on others (e.g., Cloudflare) — but the appropriate limit depends on the deployment environment, which only the service operator can determine.
+This specification intentionally does not define limits on individual header value length, total MCP header size, or number of custom headers. Headers are solely an HTTP concept, and HTTP itself ([RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110)) does not specify header size limits. Common HTTP infrastructure imposes its own limits — ranging from 4–8 KB on some servers (e.g., Apache at ~8190 bytes) to 128 KB on others (e.g., Cloudflare) — but the appropriate limit depends on the deployment environment, which only the service operator can determine.
 
 Defining a specification-level limit (such as "omit headers exceeding 8192 bytes") would introduce problems:
 
@@ -620,7 +620,7 @@ The `x-mcp-header` extension is optional for servers. Existing tools without thi
 
 Header injection attacks occur when malicious values containing control characters (especially `\r\n`) are included in headers, potentially allowing attackers to inject additional headers or terminate the header section early.
 
-Clients MUST follow the [Value Encoding](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/Value Encoding) rules defined in this specification. These rules ensure that:
+Clients MUST follow the [Value Encoding](#value-encoding) rules defined in this specification. These rules ensure that:
 
 - Control characters are never included in header values
 - Non-ASCII values are safely encoded using Base64

@@ -16,7 +16,7 @@ This extension is designed to facilitate secure and interoperable authorization 
 
 ## How Has This Been Tested?
 
-We have an end to end implementation of this [here](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/here), and in-progress MCP implementations with some partners.
+We have an end to end implementation of this [here](https://github.com/oktadev/okta-cross-app-access-mcp), and in-progress MCP implementations with some partners.
 
 ## Breaking Changes
 
@@ -26,7 +26,7 @@ This is designed to augment the existing OAuth profile by providing an alternati
 
 For more background on this problem, you can refer to my blog post about this here:
 
-[Enterprise-Ready MCP](https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/seps/Enterprise-Ready MCP)
+[Enterprise-Ready MCP](https://aaronparecki.com/2025/05/12/27/enterprise-ready-mcp)
 
 I also presented this at the MCP Dev Summit in May.
 

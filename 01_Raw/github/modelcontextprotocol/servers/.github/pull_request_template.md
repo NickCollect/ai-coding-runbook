@@ -4,9 +4,9 @@
 
 ## Publishing Your Server
 
-**Note: We are no longer accepting PRs to add servers to the README.** Instead, please publish your server to the [MCP Server Registry](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/.github/MCP Server Registry) to make it discoverable to the MCP ecosystem.
+**Note: We are no longer accepting PRs to add servers to the README.** Instead, please publish your server to the [MCP Server Registry](https://github.com/modelcontextprotocol/registry) to make it discoverable to the MCP ecosystem.
 
-To publish your server, follow the [quickstart guide](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/.github/quickstart guide). You can browse published servers at [https://registry.modelcontextprotocol.io/](https://registry.modelcontextprotocol.io/).
+To publish your server, follow the [quickstart guide](https://github.com/modelcontextprotocol/registry/blob/main/docs/modelcontextprotocol-io/quickstart.mdx). You can browse published servers at [https://registry.modelcontextprotocol.io/](https://registry.modelcontextprotocol.io/).
 
 ## Server Details
 <!-- If modifying an existing server, provide details -->
@@ -31,7 +31,7 @@ To publish your server, follow the [quickstart guide](https://raw.githubusercont
 
 ## Checklist
 <!-- Go over all the following points, and put an `x` in all the boxes that apply. -->
-- [ ] I have read the [MCP Protocol Documentation](https://raw.githubusercontent.com/modelcontextprotocol/servers/main/.github/MCP Protocol Documentation)
+- [ ] I have read the [MCP Protocol Documentation](https://modelcontextprotocol.io)
 - [ ] My changes follows MCP security best practices
 - [ ] I have updated the server's README accordingly
 - [ ] I have tested this with an LLM client
