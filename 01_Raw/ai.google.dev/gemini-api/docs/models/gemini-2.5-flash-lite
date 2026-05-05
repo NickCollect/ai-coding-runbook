@@ -1,45 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=de
-fetched_at: 2026-05-05T19:49:21.821578+00:00
-title: "Gemini\u00a02.5 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=vi
+fetched_at: 2026-05-05T20:00:46.064050+00:00
+title: "Gemini 2.5 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Feedback geben
+Gửi ý kiến phản hồi
 
-# Gemini 2.5 Flash-Lite
+# Gemini 2.5 Flash-Lite
 
-Unser kostengünstigstes multimodales Modell mit der schnellsten Leistung für häufige, einfache Aufgaben. Gemini 2.5 Flash-Lite eignet sich am besten für die Klassifizierung großer Datenmengen, die einfache Datenextraktion und Anwendungen mit extrem niedriger Latenz, bei denen Budget und Geschwindigkeit die wichtigsten Einschränkungen sind.
+Mô hình đa phương thức tiết kiệm chi phí nhất của chúng tôi, mang lại hiệu suất nhanh nhất cho các tác vụ tần suất cao, dung lượng nhẹ. Gemini 2.5 Flash-Lite phù hợp nhất cho việc phân loại số lượng lớn, trích xuất dữ liệu đơn giản và các ứng dụng có độ trễ cực thấp, trong đó ngân sách và tốc độ là những hạn chế chính.
 
-[In Google AI Studio testen](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=de)
+[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=vi)
 
 ## gemini-2.5-flash-lite
 
-| Attribut | Beschreibung |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardModellcode | `gemini-2.5-flash-lite` |
-| saveUnterstützte Datentypen | **Eingaben**  Text, Bild, Video, Audio, PDF  **Ausgabe**  Text |
-| token\_autoToken limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=de) | **Tokenlimit für Eingaben**  1.048.576  **Tokenlimit für Ausgaben**  65.536 |
-| handymanFunktionen | **Audioerstellung**  Nicht unterstützt  **Batch API**  Unterstützt  **Caching**  Unterstützt  **Codeausführung**  Unterstützt  **Dateisuche**  Unterstützt  **Flex-Inferenz**  Unterstützt  **Funktionsaufrufe**  Unterstützt  **Fundierung mit Google Maps**  Unterstützt  **Bildgenerierung**  Nicht unterstützt  **Live API**  Nicht unterstützt  **Prioritätsinferenz**  Unterstützt  **Suchfundierung**  Unterstützt  **Strukturierte Ausgaben**  Unterstützt  **Überlegung**  Unterstützt  **URL-Kontext**  Unterstützt |
-| 123Versionen | Weitere Informationen finden Sie unter [Modellversionsmuster](https://ai.google.dev/gemini-api/docs/models/gemini?hl=de#model-versions).  - Stable: `gemini-2.5-flash-lite` - Herunterfahren: [`gemini-2.5-flash-lite-preview-09-2025`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite-preview-09-2025?hl=de) |
-| calendar\_monthLetztes Update | Juli 2025 |
-| cognition\_2Wissensstichtag | Januar 2025 |
+| id\_cardMã mô hình | `gemini-2.5-flash-lite` |
+| saveCác loại dữ liệu được hỗ trợ | **Thông tin đầu vào**  Văn bản, hình ảnh, video, âm thanh, PDF  **Đầu ra**  Văn bản |
+| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  1.048.576  **Giới hạn mã thông báo đầu ra**  65.536 |
+| handymanCác tính năng | **Tạo âm thanh**  Không được hỗ trợ  **API hàng loạt**  Được hỗ trợ  **Lưu vào bộ nhớ đệm**  Được hỗ trợ  **Thực thi mã**  Được hỗ trợ  **Tìm tệp**  Được hỗ trợ  **Suy luận linh hoạt**  Được hỗ trợ  **Gọi hàm**  Được hỗ trợ  **Tìm trong Google Maps**  Được hỗ trợ  **Tạo hình ảnh**  Không được hỗ trợ  **API trực tiếp**  Không được hỗ trợ  **Suy luận theo mức độ ưu tiên**  Được hỗ trợ  **Tìm trong phần liên kết thực tế**  Được hỗ trợ  **Đầu ra có cấu trúc**  Được hỗ trợ  **Tư duy**  Được hỗ trợ  **Bối cảnh URL**  Được hỗ trợ |
+| 123Phiên bản | Đọc các [mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm chi tiết.  - Ổn định: `gemini-2.5-flash-lite` - Tắt: [`gemini-2.5-flash-lite-preview-09-2025`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite-preview-09-2025?hl=vi) |
+| calendar\_monthBản cập nhật mới nhất | Tháng 7 năm 2025 |
+| cognition\_2Điểm cắt kiến thức | Tháng 1 năm 2025 |
 
-Feedback geben
+Gửi ý kiến phản hồi
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Zuletzt aktualisiert: 2026-04-29 (UTC).
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-Haben Sie Feedback für uns?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-04-29 (UTC)."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

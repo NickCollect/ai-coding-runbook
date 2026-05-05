@@ -1,46 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=fr
-fetched_at: 2026-05-05T19:50:23.789200+00:00
-title: "Mod\u00e8le Gemini\u00a02.5 Computer Use \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=hi
+fetched_at: 2026-05-05T20:02:33.207492+00:00
+title: "Gemini 2.5 Computer Use \u092e\u0949\u0921\u0932 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
+[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Envoyer des commentaires
+सुझाव भेजें
 
-# Modèle Gemini 2.5 Computer Use
+# Gemini 2.5 Computer Use मॉडल
 
-Modèle de capacité agentique conçu pour l'interaction directe avec l'interface, permettant à Gemini de percevoir et de naviguer dans les environnements numériques. Gemini 2.5 Computer Use est idéal pour l'automatisation des navigateurs, les tâches logicielles en plusieurs étapes et les tests d'interface utilisateur qui nécessitent un raisonnement visuel et un contrôle précis du curseur.
+यह एक एजेंटिक क्षमता वाला मॉडल है, जिसे सीधे इंटरफ़ेस के साथ इंटरैक्ट करने के लिए डिज़ाइन किया गया है. इससे Gemini, डिजिटल एनवायरमेंट को समझ सकता है और उनमें नेविगेट कर सकता है. Gemini 2.5 Computer Use, ब्राउज़र को ऑटोमेट करने, सॉफ़्टवेयर के कई चरणों वाले टास्क, और यूज़र इंटरफ़ेस (यूआई) की टेस्टिंग के लिए सबसे सही है. इसके लिए, विज़ुअल रीज़निंग और कर्सर पर सटीक कंट्रोल की ज़रूरत होती है.
 
-## Documentation
+## दस्तावेज़
 
-Consultez la page [Utilisation de l'ordinateur](https://ai.google.dev/gemini-api/docs/computer-use?hl=fr) pour obtenir une couverture complète
-des fonctionnalités.
+सुविधाओं और क्षमताओं के बारे में पूरी जानकारी पाने के लिए, [कंप्यूटर इस्तेमाल करने की सुविधा वाला](https://ai.google.dev/gemini-api/docs/computer-use?hl=hi) पेज देखें.
 
 ## gemini-2.5-computer-use-preview-10-2025
 
-| Propriété | Description |
+| प्रॉपर्टी | ब्यौरा |
 | --- | --- |
-| id\_cardCode du modèle | **API Gemini**  `gemini-2.5-computer-use-preview-10-2025` |
-| saveTypes de données acceptés | **Entrée**  Image, texte  **Résultat**  Texte |
-| token\_auto[Limites de jetons[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  128 000  **Limite de jetons de sortie**  64 000 |
-| 123Versions | Pour en savoir plus, consultez les [modèles de version de modèle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - Aperçu : `gemini-2.5-computer-use-preview-10-2025` |
-| calendar\_monthDernière mise à jour | Octobre 2025 |
+| id\_cardModel कोड | **Gemini API**  `gemini-2.5-computer-use-preview-10-2025` |
+| saveSupported डेटा टाइप | **इनपुट**  इमेज, टेक्स्ट  **आउटपुट**  टेक्स्ट |
+| token\_autoToken सीमाएं[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट टोकन की सीमा**  1,28,000  **आउटपुट टोकन की सीमा**  64,000 |
+| 123वर्शन | ज़्यादा जानकारी के लिए, [मॉडल के वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) पढ़ें.  - झलक देखें: `gemini-2.5-computer-use-preview-10-2025` |
+| calendar\_monthसबसे नया अपडेट | अक्टूबर 2025 |
 
-Envoyer des commentaires
+सुझाव भेजें
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Dernière mise à jour le 2026/04/29 (UTC).
+आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया.
 
-Voulez-vous nous donner plus d'informations ?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/04/29 (UTC)."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया."],[],[]]

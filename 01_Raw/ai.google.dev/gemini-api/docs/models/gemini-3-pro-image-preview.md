@@ -1,49 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=vi
-fetched_at: 2026-05-05T19:44:02.322603+00:00
-title: "B\u1ea3n xem tr\u01b0\u1edbc h\u00ecnh \u1ea3nh c\u1ee7a Gemini 3 Pro \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=ar
+fetched_at: 2026-05-05T20:07:39.581153+00:00
+title: "\u0645\u0639\u0627\u064a\u0646\u0629 \u0627\u0644\u0635\u0648\u0631 \u0641\u064a Gemini 3 Pro \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
-# Bản xem trước hình ảnh của Gemini 3 Pro
+# معاينة الصور في Gemini 3 Pro
 
-**Nano Banana Pro** là một công cụ tinh vi dựa trên khả năng suy luận để chỉnh sửa và tạo hình ảnh ở cấp chuyên nghiệp, mang đến độ chính xác ở cấp độ studio và khả năng kiểm soát sáng tạo nâng cao. Nano Banana Pro phù hợp nhất với thiết kế đồ hoạ phức tạp, bản mô phỏng sản phẩm có độ trung thực cao và hình ảnh trực quan hoá dữ liệu thực tế đòi hỏi khả năng hiển thị văn bản chính xác và liên kết thực tế thông qua Google Tìm kiếm.
+‫**Nano Banana Pro** هو محرّك متطوّر يعتمد على الاستدلال لإنشاء الصور وتعديلها بجودة احترافية، ويوفّر دقة بجودة الاستوديو وتحكّمًا إبداعيًا متقدّمًا. يُعدّ Nano Banana Pro الخيار الأفضل لتصميم الرسومات المعقّدة، والنماذج الأولية للمنتجات عالية الدقة، وعرض البيانات الواقعية التي تتطلب عرضًا دقيقًا للنص وتحديد المصادر في العالم الحقيقي من خلال "بحث Google".
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=gemini-3-pro-image-preview&hl=vi)
+[تجربة في Google AI Studio](https://aistudio.google.com?model=gemini-3-pro-image-preview&hl=ar)
 
-## Tài liệu
+## الوثائق
 
-Hãy truy cập trang [Tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi) để xem toàn bộ các tính năng và khả năng.
+يمكنك الانتقال إلى صفحة [إنشاء الصور](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar) للاطّلاع على تغطية كاملة للميزات والإمكانات.
 
 ## gemini-3-pro-image-preview
 
-| Thuộc tính | Mô tả |
+| الموقع | الوصف |
 | --- | --- |
-| id\_cardMã mô hình | `gemini-3-pro-image-preview` |
-| saveCác loại dữ liệu được hỗ trợ | **Thông tin đầu vào**  Hình ảnh và văn bản  **Đầu ra**  Hình ảnh và văn bản |
-| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  65.536  **Giới hạn mã thông báo đầu ra**  32.768 |
-| handymanCác tính năng | **Tạo âm thanh**  Không được hỗ trợ  **API hàng loạt**  Được hỗ trợ  **Lưu vào bộ nhớ đệm**  Không được hỗ trợ  **Thực thi mã**  Không được hỗ trợ  **Tìm kiếm tệp**  Không được hỗ trợ  **Suy luận linh hoạt**  Được hỗ trợ  **Gọi hàm**  Không được hỗ trợ  **Liên kết thực tế với Google Maps**  Không được hỗ trợ  **Tạo hình ảnh**  Được hỗ trợ  **API trực tiếp**  Không được hỗ trợ  **Suy luận mức độ ưu tiên**  Được hỗ trợ  **Tìm trong phần liên kết thực tế**  Được hỗ trợ  **Đầu ra có cấu trúc**  Được hỗ trợ  **Tư duy**  Được hỗ trợ  **Ngữ cảnh URL**  Không được hỗ trợ |
-| 123Phiên bản | Đọc các [mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm thông tin.  - `Preview: gemini-3-pro-image-preview` |
-| calendar\_monthNội dung cập nhật mới nhất | Tháng 11 năm 2025 |
-| cognition\_2Điểm cắt kiến thức | Tháng 1 năm 2025 |
+| id\_cardرمز النموذج | `gemini-3-pro-image-preview` |
+| saveأنواع البيانات المتوافقة | **المدخلات**  صورة ونص  **الناتج**  صورة ونص |
+| token\_autoحدود الرموز[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحد الأقصى لرموز الإدخال**  65,536  **الحد الأقصى لرموز الإخراج**  32,768 |
+| handymanالإمكانات | **إنشاء الصوت**  غير متاح  **واجهة برمجة التطبيقات المجمّعة**  متاح  **التخزين المؤقت**  غير متاح  **تنفيذ الرموز البرمجية**  غير متاح  **البحث عن الملفات**  غير متاح  **الاستدلال المرن**  متاح  **استدعاء الدوال**  غير متاح  **استخدام "خرائط Google" كمصدر**  غير متاح  **إنشاء الصور**  متاح  **واجهة برمجة التطبيقات المباشرة**  غير متاح  **الاستدلال حسب الأولوية**  متاح  **لتحديد المصادر في "بحث Google"**  متاح  **مُخرجات منظَّمة**  متاح  **طريقة التفكير**  متاح  **سياق عنوان URL**  غير متاح |
+| 123الإصدارات | يمكنك قراءة [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions) لمزيد من التفاصيل.  - `Preview: gemini-3-pro-image-preview` |
+| calendar\_monthآخر تحديث | نوفمبر 2025 |
+| cognition\_2تاريخ آخر تحديث للبيانات | يناير 2025 |
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

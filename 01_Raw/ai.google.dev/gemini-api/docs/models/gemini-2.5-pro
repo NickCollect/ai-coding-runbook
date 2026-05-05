@@ -1,47 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=th
-fetched_at: 2026-05-05T19:43:47.341391+00:00
-title: "Gemini 2.5 Pro \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=pl
+fetched_at: 2026-05-05T20:07:19.772519+00:00
+title: "Gemini\u00a02.5 Pro \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-ส่งความคิดเห็น
+Prześlij opinię
 
-# Gemini 2.5 Pro
+# Gemini 2.5 Pro
 
-โมเดลการคิดที่ล้ำสมัยของเราสามารถให้เหตุผลเกี่ยวกับปัญหาที่ซับซ้อน
-ในโค้ด คณิตศาสตร์ และ STEM รวมถึงวิเคราะห์ชุดข้อมูล ฐานของโค้ด และ
-เอกสารขนาดใหญ่โดยใช้บริบทแบบยาว
+Nasz najnowocześniejszy model myślący, który potrafi rozumować nad złożonymi problemami w kodzie, matematyce i naukach przyrodniczych, technice, inżynierii i matematyce, a także analizować duże zbiory danych, bazy kodu i dokumenty przy użyciu długiego kontekstu.
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com?model=gemini-2.5-pro&hl=th)
+[Wypróbuj w Google AI Studio](https://aistudio.google.com?model=gemini-2.5-pro&hl=pl)
 
 ## gemini-2.5-pro
 
-| พร็อพเพอร์ตี้ | คำอธิบาย |
+| Właściwość | Opis |
 | --- | --- |
-| รหัสโมเดล id\_card | `gemini-2.5-pro` |
-| บันทึกประเภทข้อมูลที่รองรับ | **อินพุต**  เสียง รูปภาพ วิดีโอ ข้อความ และ PDF  **เอาต์พุต**  ข้อความ |
-| token\_autoขีดจำกัดของโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  1,048,576  **ขีดจำกัดโทเค็นเอาต์พุต**  65,536 |
-| handymanความสามารถ | **การสร้างเสียง**  สิ่งที่ทำไม่ได้  **Batch API**  สิ่งที่ทำได้  **การแคช**  สิ่งที่ทำได้  **การรันโค้ด**  สิ่งที่ทำได้  **ค้นหาไฟล์**  สิ่งที่ทำได้  **การอนุมานแบบยืดหยุ่น**  สิ่งที่ทำได้  **การเรียกใช้ฟังก์ชัน**  สิ่งที่ทำได้  **การเชื่อมต่อแหล่งข้อมูลกับ Google Maps**  สิ่งที่ทำได้  **การสร้างรูปภาพ**  สิ่งที่ทำไม่ได้  **Live API**  สิ่งที่ทำไม่ได้  **การอนุมานตามลำดับความสำคัญ**  สิ่งที่ทำได้  **การเชื่อมต่อแหล่งข้อมูลของ Search**  สิ่งที่ทำได้  **เอาต์พุตที่มีโครงสร้าง**  สิ่งที่ทำได้  **การคิด**  สิ่งที่ทำได้  **บริบทของ URL**  สิ่งที่ทำได้ |
-| 123เวอร์ชัน | อ่านรายละเอียดเพิ่มเติมได้ใน[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)  - `Stable: gemini-2.5-pro` |
-| calendar\_monthการอัปเดตล่าสุด | มิถุนายน 2025 |
-| cognition\_2การตัดข้อมูล | มกราคม 2025 |
+| id\_cardKod modelu | `gemini-2.5-pro` |
+| saveObsługiwane typy danych | **Dane wejściowe**  Dźwięk, obrazy, filmy, tekst i PDF  **Dane wyjściowe**  Tekst |
+| token\_autoLimity tokenów[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | **Limit tokenów wejściowych**  1 048 576  **Limit tokenów wyjściowych**  65 536 |
+| handymanMożliwości | **Generowanie dźwięku**  Nieobsługiwane  **Batch API**  Obsługiwane  **Buforowanie**  Obsługiwane  **Wykonywanie kodu**  Obsługiwane  **Wyszukiwanie plików**  Obsługiwane  **Elastyczne wnioskowanie**  Obsługiwane  **Wywoływanie funkcji**  Obsługiwane  **Powiązanie ze źródłem informacji przy użyciu Map Google**  Obsługiwane  **Generowanie obrazów**  Nieobsługiwane  **Live API**  Nieobsługiwane  **Wnioskowanie priorytetowe**  Obsługiwane  **Ugruntowanie w wyszukiwarce**  Obsługiwane  **Ustrukturyzowane dane wyjściowe**  Obsługiwane  **Myślenie**  Obsługiwane  **Kontekst adresu URL**  Obsługiwane |
+| 123Wersje | Więcej informacji znajdziesz w artykule [Wzorce wersji modelu](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#model-versions).  - `Stable: gemini-2.5-pro` |
+| calendar\_monthOstatnia aktualizacja | Czerwiec 2025 r. |
+| cognition\_2Granica wiedzy | Styczeń 2025 r. |
 
-ส่งความคิดเห็น
+Prześlij opinię
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-อัปเดตล่าสุด 2026-04-29 UTC
+Ostatnia aktualizacja: 2026-04-29 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Chcesz przekazać coś jeszcze?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-29 UTC"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]

@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/audio?hl=vi
-fetched_at: 2026-05-05T19:45:25.382195+00:00
+fetched_at: 2026-05-05T20:06:45.855347+00:00
 title: "Hi\u1ec3u \u00e2m thanh \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

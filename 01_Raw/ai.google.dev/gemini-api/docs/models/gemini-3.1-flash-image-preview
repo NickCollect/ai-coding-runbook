@@ -1,61 +1,64 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=zh-TW
-fetched_at: 2026-05-05T19:48:14.959654+00:00
-title: "Gemini 3.1 Flash Image \u9810\u5148\u767c\u5e03\u7248 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=fr
+fetched_at: 2026-05-05T20:02:09.705837+00:00
+title: "Aper\u00e7u de l'image Gemini\u00a03.1 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-提供意見
+Envoyer des commentaires
 
-# Gemini 3.1 Flash Image 預先發布版
+# Aperçu de l'image Gemini 3.1 Flash
 
-**Nano Banana 2** 價格實惠，延遲時間短，可生成高品質圖像，並提供對話式編輯功能。這是 [Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=zh-tw) 的高效能對應模型，專為速度和大量開發人員使用案例而設計。
+**Nano Banana 2** génère des images de haute qualité et permet de les modifier de manière conversationnelle à un prix abordable et avec une faible latence. Il s'agit de l'équivalent à
+haute efficacité de [Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=fr), optimisé pour la vitesse et les
+cas d'utilisation des développeurs à fort volume.
 
-**異動重點如下：**
+**Principales nouveautés :**
 
-- 新增輸出解析度選項：
-  - 新增支援 0.5K、2K 和 4K，預設為 1K
-- 全新圖片搜尋基礎：
-  - 整合文字和圖片搜尋結果，並運用即時網路資料生成內容
-  - 支援開啟或關閉「思考」功能
-- 新增 1:4、4:1、1:8 和 8:1 顯示比例
-- 改善顯示比例遵循情況
-- 提升圖片品質和一致性
-- 改善 i18n 文字算繪
+- Nouvelles options de résolution de sortie :
+  - Nouvelle compatibilité avec les résolutions 0,5K, 2K et 4K, 1K par défaut
+- Nouvel ancrage de la recherche d'images :
+  - Intégration des résultats de recherche de texte et d'images pour informer la génération avec des données Web en temps réel
+  - Compatible avec la fonctionnalité "Raisonnement" activée ou désactivée
+- Nouveaux formats 1:4, 4:1, 1:8 et 8:1
+- Meilleure prise en compte des formats
+- Amélioration de la qualité et de la cohérence des images
+- Amélioration du rendu du texte i18n
 
-[在 Google AI Studio 中試用](https://aistudio.google.com?model=gemini-3.1-flash-image-preview&hl=zh-tw)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-3.1-flash-image-preview&hl=fr)
 
-## 說明文件
+## Documentation
 
-如要全面瞭解功能和特色，請前往「[圖像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw)」頁面。
+Consultez la page [Génération d'images](https://ai.google.dev/gemini-api/docs/image-generation?hl=fr) pour obtenir une couverture complète
+des fonctionnalités.
 
 ## gemini-3.1-flash-image-preview
 
-| 屬性 | 說明 |
+| Propriété | Description |
 | --- | --- |
-| id\_card 模型代碼 | `gemini-3.1-flash-image-preview` |
-| save支援的資料類型 | **輸入裝置**  文字和圖片 / PDF  **輸出內容**  圖片和文字 |
-| token\_auto 代幣限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw) | **輸入權杖限制**  131,072  **輸出詞元限制**  32,768 |
-| handyman功能 | **語音生成**  不支援  **批次 API**  支援  **快取**  不支援  **程式碼執行**  不支援  **檔案搜尋**  不支援  **函式呼叫**  不支援  **利用 Google 地圖建立基準**  不支援  **圖像生成**  支援  **Live API**  不支援  **搜尋基準**  支援  **結構化輸出內容**  不支援  **思考型**  支援  **網址內容**  不支援 |
-| 123 個版本 | 如要瞭解詳情，請參閱[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-tw#model-versions)。  - `Preview: gemini-3.1-flash-image-preview` |
-| calendar\_month最新更新 | 2026 年 2 月 |
-| cognition\_2知識截點 | 2025 年 1 月 |
+| id\_cardCode du modèle | `gemini-3.1-flash-image-preview` |
+| saveTypes de données compatibles | **Entrées**  Texte et image / PDF  **Résultat**  Image et texte |
+| token\_auto[Limites de jetons[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  131 072  **Limite de jetons de sortie**  32 768 |
+| handymanFonctionnalités | **Génération audio**  Not supported  **API par lot**  Compatible  **Mise en cache**  Not supported  **Exécution de code**  Not supported  **Recherche de fichiers**  Not supported  **Appel de fonction**  Not supported  **Ancrage avec Google Maps**  Not supported  **Génération d'images**  Compatible  **API Live**  Not supported  **Ancrage de recherche**  Compatible  **Sorties structurées**  Not supported  **Raisonnement**  Compatible  **Contexte d'URL**  Not supported |
+| 123Versions | Pour en savoir plus, consultez les [modèles de version de modèle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - `Preview: gemini-3.1-flash-image-preview` |
+| calendar\_monthDernière mise à jour | Février 2026 |
+| cognition\_2Date limite des connaissances | Janvier 2025 |
 
-提供意見
+Envoyer des commentaires
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-上次更新時間：2026-04-29 (世界標準時間)。
+Dernière mise à jour le 2026/04/29 (UTC).
 
-想進一步說明嗎？
+Voulez-vous nous donner plus d'informations ?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-04-29 (世界標準時間)。"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/04/29 (UTC)."],[],[]]

@@ -1,69 +1,67 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/usage-policies?hl=zh-CN
-fetched_at: 2026-05-05T19:46:10.423703+00:00
-title: "\u76d1\u63a7\u6ee5\u7528\u884c\u4e3a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/usage-policies?hl=es-419
+fetched_at: 2026-05-05T20:06:08.511858+00:00
+title: "Supervisi\u00f3n de abusos \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-发送反馈
+Enviar comentarios
 
-# 监控滥用行为
+# Supervisión de abusos
 
-Google 致力于以负责任的方式开发和使用 AI。为确保 Gemini API 的安全性和完整性，我们制定了这些政策指南。
-使用 Gemini API 即表示您同意以下指南、《[Gemini API
-附加服务条款](https://ai.google.dev/gemini-api/terms?hl=zh-cn)》和《生成式 AI [使用限制
-政策](https://policies.google.com/terms/generative-ai/use-policy?hl=zh-cn)》。
+Google se compromete con el desarrollo y el uso responsable de la IA. Para garantizar la seguridad y la integridad de la API de Gemini, creamos estos lineamientos de políticas.
+Cuando usas la API de Gemini, aceptas los siguientes lineamientos, las [Condiciones del Servicio Adicionales](https://ai.google.dev/gemini-api/terms?hl=es-419) de la API de Gemini y la Política de Uso [Prohibido](https://policies.google.com/terms/generative-ai/use-policy?hl=es-419) de IA Generativas.
 
-## 我们如何监控滥用行为
+## Cómo supervisamos el uso inadecuado
 
-Google 的信任与安全团队会结合使用自动化流程和人工流程来检测 Gemini API 和 Google AI Studio 中可能存在的滥用行为，以便执行我们的政策。
+El equipo de Confianza y Seguridad de Google emplea una combinación de procesos manuales y automatizados para detectar posibles usos inadecuados de la API de Gemini y Google AI Studio para aplicar nuestras políticas.
 
-- **自动检测**： 自动化系统会扫描 API 使用情况，以检测违反我们《使用限制政策》的行为，例如宣扬仇恨言论、骚扰、色情内容和危险内容。
-- **人工检测**： 如果某个项目持续出现可疑活动，则可能会被标记为由获得 Google 授权的人员进行人工审核。
+- **Detección automatizada:** Los sistemas automatizados analizan el uso de la API para detectar incumplimientos de nuestra Política de Uso Prohibido, como contenido que incite al odio o a la violencia, acoso, contenido sexualmente explícito y contenido peligroso.
+- **Detección manual:** Si un proyecto muestra actividad sospechosa de manera constante, es posible que se marque para que personal autorizado de Google lo revise de forma manual.
 
-## 我们如何处理数据
+## Cómo manejamos los datos
 
-Google 会保留以下数据 55 天，以便检测和防范违反《使用限制政策》的行为，从而维护服务的安全，并进行任何必要的法律或监管披露：
+Google retiene los siguientes datos durante cincuenta y cinco (55) días para detectar y evitar incumplimientos de la Política de Uso Prohibido, mantener la seguridad de los Servicios y realizar las divulgaciones legales o reglamentarias necesarias:
 
-- **提示**： 您提交给 API 的文本提示。
-- **背景信息**： 您在提示中提供的任何其他背景信息。
-- **输出**： Gemini API 生成的回答。
+- **Instrucciones:** Las instrucciones de texto que envías a la API.
+- **Información contextual:** Cualquier contexto adicional que proporciones con tus instrucciones.
+- **Resultados:** Las respuestas que genera la API de Gemini.
 
-## 我们如何调查潜在问题
+## Cómo investigamos posibles problemas
 
-如果提示或模型输出被上述安全过滤器和滥用行为检测系统标记，获得 Google 授权的员工可能会评估被标记的内容，并根据预定义的指南和政策确认或更正分类或判定。只有获得 Google 授权的员工才能通过内部治理评估和审核管理平台访问数据以进行人工审核。记录数据以进行滥用行为监控时，这些数据仅用于执行政策和防范违反政策的行为。
-除了专门用于执行政策的 AI/机器学习模型之外，这些数据不会用于训练或微调任何其他 AI/机器学习模型。
+Cuando los filtros de seguridad y los sistemas de detección de abusos descritos anteriormente marcan las instrucciones o los resultados del modelo, los empleados autorizados de Google pueden evaluar el contenido marcado y confirmar o corregir la clasificación o la determinación según los lineamientos y las políticas predefinidos. Solo los empleados autorizados de Google pueden acceder a los datos para realizar una revisión humana a través de una plataforma interna de evaluación de gobernanza y administración de revisiones. Cuando se registran datos para la supervisión de abusos, se usan únicamente para aplicar las políticas y evitar incumplimientos.
+No se usan para entrenar ni ajustar ningún modelo de IA o AA, excepto los que se usan específicamente para aplicar las políticas.
 
-## 与您合作以确保政策合规性
+## Trabajamos contigo para garantizar el cumplimiento de las políticas
 
-如果您对 Gemini 的使用不符合我们的政策，我们可能会采取以下措施：
+Si tu uso de Gemini no se alinea con nuestras políticas, es posible que tomemos las siguientes medidas:
 
-- **与您联系**： 我们可能会通过电子邮件与您联系，了解您的使用场景，并探讨如何让您的使用行为符合政策。
-- **临时用量限制**： 我们可能会限制您对 Gemini API 的访问权限。
-- **临时暂停**： 我们可能会暂时暂停您对 Gemini API 的访问权限。
-- **关停账号**： 作为最后的手段，对于严重违规行为，我们可能会永久关闭您对 Gemini API 和其他 Google 服务的访问权限。
+- **Comunicarnos contigo:** Es posible que nos comuniquemos contigo por correo electrónico para comprender tu caso de uso y explorar formas de que tu uso cumpla con las políticas.
+- **Límites de uso temporales:** Es posible que limitemos tu acceso a la API de Gemini.
+- **Suspensión temporal:** Es posible que pausemos temporalmente tu acceso a la API de Gemini.
+- **Cierre de cuenta:** Como último recurso y en caso de incumplimientos graves, es posible que cerremos de forma permanente tu acceso a la API de Gemini y a otros servicios de Google.
 
-如果我们因暂停或关停账号事宜与您联系，我们还会提供一个链接，供您提出申诉。
+Si nos comunicamos contigo en relación con una suspensión o el cierre de cuenta, también te proporcionaremos un vínculo para que puedas apelar la decisión.
 
-## 范围
+## Alcance
 
-这些政策指南适用于 Gemini API 和 AI Studio 的使用。
+Estos lineamientos de políticas se aplican al uso de la API de Gemini y AI Studio.
 
-发送反馈
+Enviar comentarios
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-最后更新时间 (UTC)：2026-04-29。
+Última actualización: 2026-04-29 (UTC)
 
-需要向我们提供更多信息？
+¿Quieres brindar más información?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]

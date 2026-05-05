@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=zh-CN
-fetched_at: 2026-05-05T19:50:29.587290+00:00
+fetched_at: 2026-05-05T20:04:06.683986+00:00
 title: "Gemini \u601d\u8003 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

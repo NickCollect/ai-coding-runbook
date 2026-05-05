@@ -1,36 +1,36 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/quickstart?hl=es-419
-fetched_at: 2026-05-05T19:45:17.186720+00:00
-title: "Gu\u00eda de inicio r\u00e1pido de la API de Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/quickstart?hl=de
+fetched_at: 2026-05-05T20:05:57.073179+00:00
+title: "Gemini API \u2013 Kurzanleitung \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Enviar comentarios
+Feedback geben
 
-# Guía de inicio rápido de la API de Gemini
+# Gemini API – Kurzanleitung
 
-En esta guía de inicio rápido, se muestra cómo instalar nuestras [bibliotecas](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419) y realizar tu primera solicitud a la API de Gemini.
+In dieser Kurzanleitung erfahren Sie, wie Sie unsere [Bibliotheken](https://ai.google.dev/gemini-api/docs/libraries?hl=de) installieren und Ihre erste Gemini API-Anfrage stellen.
 
-## Antes de comenzar
+## Hinweis
 
-Para usar la API de Gemini, necesitas una clave de API. Puedes crear una de forma gratuita para comenzar.
+Für die Verwendung der Gemini API ist ein API-Schlüssel erforderlich. Sie können kostenlos einen erstellen, um loszulegen.
 
-[Crea una clave de la API de Gemini](https://aistudio.google.com/app/apikey?hl=es-419)
+[Gemini API-Schlüssel erstellen](https://aistudio.google.com/app/apikey?hl=de)
 
-## Instala el SDK de IA generativa de Google
+## Google GenAI SDK installieren
 
 ### Python
 
-Con [Python 3.9 o versiones posteriores](https://www.python.org/downloads/), instala el [paquete `google-genai`](https://pypi.org/project/google-genai/) con el siguiente [comando pip](https://packaging.python.org/en/latest/tutorials/installing-packages/):
+Installieren Sie mit [Python 3.9+](https://www.python.org/downloads/) das [`google-genai`-Paket](https://pypi.org/project/google-genai/) mit dem folgenden [pip-Befehl](https://packaging.python.org/en/latest/tutorials/installing-packages/):
 
 ```
 pip install -q -U google-genai
@@ -38,15 +38,15 @@ pip install -q -U google-genai
 
 ### JavaScript
 
-Con [Node.js v18 o versiones posteriores](https://nodejs.org/en/download/package-manager), instala el [SDK de IA generativa de Google para TypeScript y JavaScript](https://www.npmjs.com/package/@google/genai) con el siguiente [comando npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm):
+Installieren Sie mit [Node.js v18+](https://nodejs.org/en/download/package-manager) das [Google Gen AI SDK für TypeScript und JavaScript](https://www.npmjs.com/package/@google/genai) mit dem folgenden [npm-Befehl](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm):
 
 ```
 npm install @google/genai
 ```
 
-### Go
+### Ok
 
-Instala [google.golang.org/genai](https://pkg.go.dev/google.golang.org/genai) en el directorio de tu módulo con el [comando go get](https://go.dev/doc/code):
+Installieren Sie [google.golang.org/genai](https://pkg.go.dev/google.golang.org/genai) in Ihrem Modulverzeichnis mit dem [Befehl „go get“](https://go.dev/doc/code):
 
 ```
 go get google.golang.org/genai
@@ -54,7 +54,7 @@ go get google.golang.org/genai
 
 ### Java
 
-Si usas Maven, puedes instalar [google-genai](https://github.com/googleapis/java-genai) agregando lo siguiente a tus dependencias:
+Wenn Sie Maven verwenden, können Sie [google-genai](https://github.com/googleapis/java-genai) installieren, indem Sie Ihren Abhängigkeiten Folgendes hinzufügen:
 
 ```
 <dependencies>
@@ -68,33 +68,33 @@ Si usas Maven, puedes instalar [google-genai](https://github.com/googleapis/java
 
 ### C#
 
-Instala [googleapis/go-genai](https://googleapis.github.io/dotnet-genai/) en el directorio de tu módulo con el [comando dotnet add](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-package-add).
+Installieren Sie [googleapis/go-genai](https://googleapis.github.io/dotnet-genai/) in Ihrem Modulverzeichnis mit dem [dotnet add-Befehl](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-package-add).
 
 ```
 dotnet add package Google.GenAI
 ```
 
-### Apps Script
+### Apps Script
 
-1. Para crear un nuevo proyecto de Apps Script, ve a [script.new](https://script.google.com/u/0/home/projects/create?hl=es-419).
-2. Haz clic en **Proyecto sin título**.
-3. Cámbiale el nombre al proyecto de Apps Script **AI Studio** y haz clic en **Cambiar nombre**.
-4. Establece tu [clave de API](https://developers.google.com/apps-script/guides/properties?hl=es-419#manage_script_properties_manually).
-   1. A la izquierda, haz clic en **Configuración del proyecto** ![El ícono de configuración del proyecto](https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/settings/default/24px.svg).
-   2. En **Propiedades de secuencia de comandos**, haz clic en **Agregar propiedad de secuencia de comandos**.
-   3. En **Propiedad**, ingresa el nombre de la clave: `GEMINI_API_KEY`.
-   4. En **Valor**, ingresa el valor de la clave de API.
-   5. Haz clic en **Guardar las propiedades de la secuencia de comandos**.
-5. Reemplaza el contenido del archivo `Code.gs` por el siguiente código:
+1. Wenn Sie ein neues Apps Script-Projekt erstellen möchten, rufen Sie [script.new](https://script.google.com/u/0/home/projects/create?hl=de) auf.
+2. Klicken Sie auf **Unbenanntes Projekt**.
+3. Benennen Sie das Apps Script-Projekt in **AI Studio** um und klicken Sie auf **Umbenennen**.
+4. [API-Schlüssel](https://developers.google.com/apps-script/guides/properties?hl=de#manage_script_properties_manually) festlegen
+   1. Klicken Sie links auf **Projekteinstellungen** ![Symbol für die Projekteinstellungen](https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/settings/default/24px.svg).
+   2. Klicken Sie unter **Skripteigenschaften** auf **Skripteigenschaft hinzufügen**.
+   3. Geben Sie unter **Property** den Schlüsselnamen `GEMINI_API_KEY` ein.
+   4. Geben Sie für **Wert** den Wert für den API-Schlüssel ein.
+   5. Klicken Sie auf **Skripteigenschaften speichern**.
+5. Ersetzen Sie den Inhalt der Datei `Code.gs` durch den folgenden Code:
 
-## Realiza tu primera solicitud
+## Erste Anfrage senden
 
-Este es un ejemplo que usa el método [`generateContent`](https://ai.google.dev/api/generate-content?hl=es-419#method:-models.generatecontent) para enviar una solicitud a la API de Gemini con el modelo Gemini 2.5 Flash.
+Hier ist ein Beispiel, in dem die Methode [`generateContent`](https://ai.google.dev/api/generate-content?hl=de#method:-models.generatecontent) verwendet wird, um eine Anfrage mit dem Modell Gemini 2.5 Flash an die Gemini API zu senden.
 
-Si [configuras tu clave de API](https://ai.google.dev/gemini-api/docs/api-key?hl=es-419#set-api-env-var) como la variable de entorno `GEMINI_API_KEY`, el cliente la detectará automáticamente cuando uses las [bibliotecas de la API de Gemini](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419).
-De lo contrario, deberás [pasar tu clave de API](https://ai.google.dev/gemini-api/docs/api-key?hl=es-419#provide-api-key-explicitly) como un argumento cuando inicialices el cliente.
+Wenn Sie Ihren [API-Schlüssel](https://ai.google.dev/gemini-api/docs/api-key?hl=de#set-api-env-var) als Umgebungsvariable `GEMINI_API_KEY` festlegen, wird er automatisch vom Client übernommen, wenn Sie die [Gemini API-Bibliotheken](https://ai.google.dev/gemini-api/docs/libraries?hl=de) verwenden.
+Andernfalls müssen Sie [Ihren API-Schlüssel](https://ai.google.dev/gemini-api/docs/api-key?hl=de#provide-api-key-explicitly) als Argument beim Initialisieren des Clients übergeben.
 
-Ten en cuenta que todas las muestras de código en la documentación de la API de Gemini suponen que estableciste la variable de entorno `GEMINI_API_KEY`.
+Beachten Sie, dass in allen Codebeispielen in der Gemini API-Dokumentation davon ausgegangen wird, dass Sie die Umgebungsvariable `GEMINI_API_KEY` festgelegt haben.
 
 ### Python
 
@@ -129,7 +129,7 @@ async function main() {
 main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -205,7 +205,7 @@ public class GenerateContentSimpleText {
 }
 ```
 
-### Apps Script
+### Apps Script
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -259,24 +259,24 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
   }'
 ```
 
-## ¿Qué sigue?
+## Nächste Schritte
 
-Ahora que realizaste tu primera solicitud a la API, te recomendamos que explores las siguientes guías que muestran Gemini en acción:
+Nachdem Sie Ihre erste API-Anfrage gesendet haben, können Sie sich die folgenden Anleitungen ansehen, in denen Gemini in Aktion gezeigt wird:
 
-- [Generación de texto](https://ai.google.dev/gemini-api/docs/text-generation?hl=es-419)
-- [Generación de imágenes](https://ai.google.dev/gemini-api/docs/image-generation?hl=es-419)
-- [Comprensión de imágenes](https://ai.google.dev/gemini-api/docs/image-understanding?hl=es-419)
-- [Pensamiento](https://ai.google.dev/gemini-api/docs/thinking?hl=es-419)
-- [Llamada a función](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419)
-- [Contexto largo](https://ai.google.dev/gemini-api/docs/long-context?hl=es-419)
-- [Embeddings](https://ai.google.dev/gemini-api/docs/embeddings?hl=es-419)
+- [Textgenerierung](https://ai.google.dev/gemini-api/docs/text-generation?hl=de)
+- [Bildgenerierung](https://ai.google.dev/gemini-api/docs/image-generation?hl=de)
+- [Bildverständnis](https://ai.google.dev/gemini-api/docs/image-understanding?hl=de)
+- [Denken](https://ai.google.dev/gemini-api/docs/thinking?hl=de)
+- [Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/function-calling?hl=de)
+- [Langer Kontext](https://ai.google.dev/gemini-api/docs/long-context?hl=de)
+- [Einbettungen](https://ai.google.dev/gemini-api/docs/embeddings?hl=de)
 
-Enviar comentarios
+Feedback geben
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Última actualización: 2026-04-29 (UTC)
+Zuletzt aktualisiert: 2026-04-29 (UTC).
 
-¿Quieres brindar más información?
+Haben Sie Feedback für uns?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-04-29 (UTC)."],[],[]]

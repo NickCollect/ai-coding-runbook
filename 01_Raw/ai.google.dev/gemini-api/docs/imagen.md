@@ -1,28 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=ja
-fetched_at: 2026-05-05T19:43:44.716313+00:00
-title: "Imagen \u3092\u4f7f\u7528\u3057\u3066\u753b\u50cf\u3092\u751f\u6210\u3059\u308b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=tr
+fetched_at: 2026-05-05T20:10:05.155307+00:00
+title: "Imagen'i kullanarak resim olu\u015fturma \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-フィードバックを送信
+Geri bildirim gönderin
 
-# Imagen を使用して画像を生成する
+# Imagen'i kullanarak resim oluşturma
 
-Imagen は、Google の高忠実度画像生成モデルです。テキスト プロンプトからリアルで高画質な画像を生成できます。すべての生成画像には SynthID の透かしが埋め込まれています。使用可能な Imagen モデル バリエーションの詳細については、[モデル バージョン](#model-versions)をご覧ください。
+Imagen, Google'ın yüksek kaliteli görüntü üretme modelidir. Metin istemlerinden gerçekçi ve yüksek kaliteli görüntüler üretebilir. Üretilen tüm görüntülerde SynthID filigranı bulunur. Kullanılabilen Imagen modeli varyantları hakkında daha fazla bilgi edinmek için [Model sürümleri](#model-versions) bölümüne bakın.
 
-## Imagen モデルを使用して画像を生成する
+## Imagen modellerini kullanarak resim üretme
 
-次の例は、[Imagen モデル](https://deepmind.google/technologies/imagen/?hl=ja)を使用して画像を生成する方法を示しています。
+Bu örnekte, [Imagen modeliyle](https://deepmind.google/technologies/imagen/?hl=tr) görüntü oluşturma gösterilmektedir:
 
 ### Python
 
@@ -132,359 +132,363 @@ curl -X POST \
       }'
 ```
 
-![赤いスケートボードを持っているロボットの AI 生成画像](https://ai.google.dev/static/gemini-api/docs/images/robot-skateboard.png?hl=ja)
+![Kırmızı kaykay tutan bir robotun yapay zekayla üretilmiş görüntüsü](https://ai.google.dev/static/gemini-api/docs/images/robot-skateboard.png?hl=tr)
 
-赤いスケートボードを持っているロボットの AI 生成画像
+Kırmızı kaykay tutan bir robotun yapay zekayla üretilmiş görüntüsü
 
-### Imagen の構成
+### Imagen yapılandırması
 
-Imagen は現在、英語のプロンプトと次のパラメータのみをサポートしています。
+Imagen şu anda yalnızca İngilizce istemleri ve aşağıdaki parametreleri desteklemektedir:
 
-- `numberOfImages`: 生成する画像の数（1 ～ 4）。デフォルトは 4 です。
-- `imageSize`: 生成される画像のサイズ。これは、Standard モデルと Ultra モデルでのみサポートされています。サポートされている値は `1K` と `2K` です。デフォルトは `1K` です。
-- `aspectRatio`: 生成された画像のアスペクト比を変更します。サポートされている値は `"1:1"`、`"3:4"`、`"4:3"`、`"9:16"`、`"16:9"` です。デフォルトは `"1:1"` です。
-- `personGeneration`: モデルが人物の画像を生成できるようにします。次の値を使用できます。
+- `numberOfImages`: Oluşturulacak resim sayısı (1-4 arası).
+  Varsayılan değer 4'tür.
+- `imageSize`: Üretilen resmin boyutu. Bu özellik yalnızca Standart ve Ultra modellerinde desteklenir. Desteklenen değerler `1K` ve `2K`'dir.
+  Varsayılan değer `1K`'dır.
+- `aspectRatio`: Oluşturulan resmin en boy oranını değiştirir. Desteklenen değerler: `"1:1"`, `"3:4"`, `"4:3"`, `"9:16"` ve `"16:9"`. Varsayılan değer: `"1:1"`.
+- `personGeneration`: Modelin insan resimleri oluşturmasına izin verin. Aşağıdaki değerler desteklenir:
 
-  - `"dont_allow"`: 人物の画像の生成をブロックします。
-  - `"allow_adult"`: 大人の画像を生成しますが、子供の画像は生成しません。これがデフォルトです。
-  - `"allow_all"`: 大人や子供の画像が生成されます。
+  - `"dont_allow"`: İnsanların yer aldığı görüntülerin üretilmesini engelleme
+  - `"allow_adult"`: Çocukların değil, yetişkinlerin resimlerini üretin. Bu, varsayılan seçenektir.
+  - `"allow_all"`: Yetişkinlerin ve çocukların yer aldığı görüntüler üretme
 
-## Imagen プロンプト ガイド
+## Imagen istem rehberi
 
-Imagen ガイドのこのセクションでは、テキスト画像変換プロンプトを変更して異なる結果を生成する方法と、作成できる画像の例について説明します。
+Imagen kılavuzunun bu bölümünde, metinden görüntü oluşturma istemini değiştirmenin nasıl farklı sonuçlar verebileceği ve oluşturabileceğiniz resim örnekleri gösterilmektedir.
 
-### プロンプト作成の基本
+### İstem yazmayla ilgili temel bilgiler
 
-適切なプロンプトは、説明的で明確であり、意味のあるキーワードと修飾子を使用しています。まず、**主題**、**コンテキスト**、**スタイル**について考えてみましょう。
+İyi bir istem açıklayıcı ve net olmalı, anlamlı anahtar kelimeler ve değiştiriciler kullanmalıdır. **Özne**, **bağlam** ve **stil** hakkında düşünerek başlayın.
 
-![主題、コンテキスト、スタイルが強調されているプロンプト](https://ai.google.dev/static/gemini-api/docs/images/imagen/style-subject-context.png?hl=ja)
+![Konu, bağlam ve stilin vurgulandığı istem](https://ai.google.dev/static/gemini-api/docs/images/imagen/style-subject-context.png?hl=tr)
 
-画像のテキスト: モダンなアパート）
-（**主題**）が超高層ビル（**コンテキストと背景**）に囲まれているスケッチ（**スタイル**）。
+Resim metni: *Gökdelenlerle* (**bağlam ve arka plan**) çevrili bir *modern apartman binasının* (**konu**) *eskizi* (**stil**).
 
-1. **主題**: プロンプトについて最初に考えるべきなのは主題、すなわち画像の主体となる物体、人物、動物、風景などです。
-2. **コンテキストと背景:** その主題が配置される背景やコンテキストも同様に重要です。主題をさまざまな背景に置いてみてください。たとえば、スタジオの白い背景、屋外、屋内の環境などです。
-3. **スタイル:** 最後に、希望する画像のスタイルを追加します。スタイルは、概括的なもの（絵画、写真、スケッチ）でも、特定化されたもの（パステル画、木炭画、アイソメトリック 3D）でもかまいません。スタイルを組み合わせることもできます。
+1. **Özne**: Her istemde ilk olarak *özneyi* düşünmeniz gerekir. Bu, resmini istediğiniz nesne, kişi, hayvan veya manzaradır.
+2. **Bağlam ve arka plan:** Konunun yerleştirileceği *arka plan veya bağlam* da aynı derecede önemlidir. Öznenizi çeşitli arka planlara yerleştirmeyi deneyin. Örneğin, beyaz arka planlı bir stüdyo, dış mekan veya iç mekan ortamları.
+3. **Stil:** Son olarak, istediğiniz resim stilini ekleyin. *Stiller* genel (tablo, fotoğraf, eskiz) veya çok özel (pastel boya, kömür çizimi, izometrik 3D) olabilir. Stilleri de birleştirebilirsiniz.
 
-プロンプトの最初のバージョンを作成したら、目的の画像が得られるまで詳細を追加してプロンプトを改良します。反復処理が重要です。まずコアアイデアを定義し、生成された画像がビジョンに近づくまで、そのコアアイデアを絞り込み、拡張します。
+İstemin ilk sürümünü yazdıktan sonra, istediğiniz görüntüye ulaşana kadar daha fazla ayrıntı ekleyerek isteminizi iyileştirin. Tekrar önemlidir.
+Önce temel fikrinizi belirleyin, ardından oluşturulan resim vizyonunuza yakın olana kadar bu temel fikri iyileştirin ve genişletin.
 
 |  |  |  |
 | --- | --- | --- |
-| フォトリアリスティックなサンプル画像 1   プロンプト: 湖のそばにある春の公園 | フォトリアリスティックなサンプル画像 2   プロンプト: 湖のそばにある春の公園、**湖に沈む夕日、ゴールデン アワー** | フォトリアリスティックなサンプル画像 3   プロンプト: 湖のそばにある春の公園、***湖に沈む夕日、ゴールデン アワー、赤く咲き誇る野生の花*** |
+| gerçekçi örnek resim 1   İstem: İlkbaharda bir gölün yanındaki park | Fotoğraf gerçekliğinde örnek resim 2   İstem: İlkbaharda bir gölün yanındaki park, **güneş gölün üzerinde batıyor, altın saat** | gerçekçi örnek resim 3   İstem: İlkbaharda bir gölün kenarındaki park, ***güneş gölün üzerinde batıyor, altın saat, kırmızı kır çiçekleri*** |
 
-Imagen モデルは、プロンプトが短くても、長くて詳細でも、アイデアを詳細な画像に変換できます。反復的なプロンプトを通じてビジョンを絞り込み、完璧な結果が得られるまで詳細を追加します。
+Imagen modelleri, istemleriniz kısa veya uzun ve ayrıntılı olsa da fikirlerinizi ayrıntılı görüntülere dönüştürebilir. Mükemmel sonucu elde edene kadar ayrıntı ekleyerek istemleri yineleyin ve vizyonunuzu geliştirin.
 
 |  |  |
 | --- | --- |
-| 短いプロンプトを使用すると、画像をすばやく生成できます。  Imagen 4 の短いプロンプトの例   プロンプト: 20 代の女性のクローズアップ写真、ストリート写真、映画のワンシーン、落ち着いたオレンジの暖色調 | 長いプロンプトを使用すると、具体的な詳細を追加して画像を作成できます。  Imagen 4 の長いプロンプトの例   プロンプト: ストリート フォトスタイルを活用した 20 代の女性の魅力的な写真。画像は、オレンジ色の暖色系の落ち着いた色調にし、映画のワンシーンのように見えるようにする必要があります。 |
+| Kısa istemler, hızlı bir şekilde resim üretmenize olanak tanır.  Imagen 4 kısa istem örneği   İstem: 20'li yaşlarında bir kadının yakın çekim fotoğrafı, sokak fotoğrafı, film karesi, soluk turuncu sıcak tonlar | Daha uzun istemler, belirli ayrıntılar eklemenize ve görüntünüzü oluşturmanıza olanak tanır.  Imagen 4 uzun istem örneği   İstem: Sokak fotoğrafçılığı tarzında çekilmiş, 20'li yaşlarında bir kadının büyüleyici fotoğrafı. Resim, turuncu ve sıcak tonların kullanıldığı bir film karesi gibi görünmeli. |
 
-Imagen プロンプトの作成に関するその他のヒント:
+Imagen istemi yazmayla ilgili ek öneriler:
 
-- **わかりやすい表現を使用する**: 具体的な形容詞や副詞を使用して、Imagen の明確な画像を描きます。
-- **コンテキストを提供する**: 必要に応じて、AI の理解を助けるために背景情報を含めます。
-- **特定のアーティストやスタイルを参照する**: 特定の美学を念頭に置いている場合は、特定のアーティストや芸術運動を参照すると役に立ちます。
-- **プロンプト エンジニアリング ツールを使用する**: プロンプトを改良して最適な結果を得るために、プロンプト エンジニアリング ツールやリソースの使用をおすすめします。
-- **個人写真やグループ写真の顔の細部を補正する**: 写真の焦点として顔の細部を指定します（たとえば、プロンプトで「ポートレート」という単語を使用します）。
+- **Açıklayıcı bir dil kullanın**: Imagen'e net bir resim sunmak için ayrıntılı sıfatlar ve zarflar kullanın.
+- **Bağlam bilgisi verin**: Gerekirse yapay zekanın anlamasına yardımcı olmak için arka plan bilgilerini ekleyin.
+- **Belirli sanatçılardan veya stillerden bahsedin**: Aklınızda belirli bir estetik varsa belirli sanatçılardan veya sanat akımlarından bahsetmek faydalı olabilir.
+- **İstem mühendisliği araçlarını kullanın**: İstemlerinizi hassaslaştırmanıza ve en iyi sonuçları elde etmenize yardımcı olacak istem mühendisliği araçlarını veya kaynaklarını inceleyin.
+- **Kişisel ve grup resimlerinizdeki yüz ayrıntılarını iyileştirme**: Yüz ayrıntılarını fotoğrafın odak noktası olarak belirtin (örneğin, istemde "portre" kelimesini kullanın).
 
-### 画像内のテキストを生成する
+### Resimlerde metin oluşturma
 
-Imagen モデルは画像にテキストを追加できるため、よりクリエイティブな画像生成が可能になります。この機能を最大限に活用するには、次のガイダンスに沿って操作してください。
+Imagen modelleri, resimlere metin ekleyerek daha yaratıcı görüntü üretme olanakları sunar. Bu özellikten en iyi şekilde yararlanmak için aşağıdaki bilgileri kullanın:
 
-- **確実に反復処理する**: 目的の外観になるまで画像を再生成しなければならない場合があります。Imagen のテキスト統合は現在も進化しており、複数回試行することで最良の結果が得られることもあります。
-- **テキストを短くする**: 生成を最適化するには、テキストを 25 文字以下に制限します。
-- **複数のフレーズ**: 2 つから 3 つの異なるフレーズをテストして、追加情報を提供します。クリーンな構成にするため、フレーズは 3 つを超えないようにします。
+- **Güvenle yineleme yapın**: İstediğiniz görünümü elde edene kadar görüntüleri yeniden oluşturmanız gerekebilir. Imagen'in metin entegrasyonu hâlâ gelişmektedir ve bazen birden fazla deneme en iyi sonuçları verir.
+- **Kısa tutun**: En iyi sonuç için metni 25 karakterle sınırlayın.
+- **Birden fazla ifade**: Ek bilgi sağlamak için iki veya üç farklı ifadeyle denemeler yapın. Daha net kompozisyonlar için üç ifadeyi aşmayın.
 
-  ![Imagen 4 のテキスト生成の例](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_generate-text.png?hl=ja)
+  ![Imagen 4 ile metin oluşturma örneği](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_generate-text.png?hl=tr)
 
-  プロンプト: タイトルとして太字のフォントで「Summerland」というテキストが書かれたポスター。このテキストの下には「Summer never felt so good」というスローガンが書かれています
-- **ガイド付き配置**: Imagen は指示どおりにテキストを配置しようとしますが、場合によっては変動が生じることがあります。この機能は継続的に改善されています。
-- **フォント スタイルを引き出す**: 一般的なフォント スタイルを指定して、Imagen の選択に微妙な影響を与えます。正確なフォント レプリケーションに依存せず、クリエイティブな解釈を想定してください。
-- **フォントサイズ**: フォントサイズまたはサイズの一般的な指標（小、中、大など）を指定して、フォントサイズの生成に影響を与えます。
+  İstem: Başlık olarak kalın yazı tipiyle "Summerland" metninin yer aldığı bir poster. Bu metnin altında "Summer never felt so good" (Yaz hiç bu kadar güzel olmamıştı) sloganı yer alıyor.
+- **Kılavuz Yerleşimi**: Imagen, metni yönlendirildiği şekilde yerleştirmeye çalışsa da zaman zaman farklılıklar olabilir. Bu özellik sürekli olarak geliştirilmektedir.
+- **Inspire yazı tipi stili**: Imagen'in seçimlerini ince bir şekilde etkilemek için genel bir yazı tipi stili belirtin. Yazı tipinin bire bir kopyalanmasını beklemeyin ancak yaratıcı yorumlar bekleyebilirsiniz.
+- **Yazı tipi boyutu**: Yazı tipi boyutu oluşturmayı etkilemek için bir yazı tipi boyutu veya genel bir boyut göstergesi (örneğin, *küçük*, *orta*, *büyük*) belirtin.
 
-### プロンプトのパラメータ化
+### İstem parametrelendirme
 
-出力結果をより適切に制御するには、Imagen への入力をパラメータ化すると便利です。たとえば、お客様がビジネスのロゴを生成できるようにし、ロゴが常に単色の背景で生成されるようにしたいとします。また、クライアントがメニューから選択できるオプションを制限することもできます。
+Çıkış sonuçlarını daha iyi kontrol etmek için Imagen'e girişleri parametrelendirmeniz faydalı olabilir. Örneğin, müşterilerinizin işletmeleri için logo oluşturabilmesini ve logoların her zaman düz renk bir arka plan üzerinde oluşturulmasını istediğinizi varsayalım. Ayrıca, müşterinin menüden seçebileceği seçenekleri de sınırlamak istiyorsunuz.
 
-この例では、次のようなパラメータ化されたプロンプトを作成できます。
+Bu örnekte, aşağıdakine benzer şekilde parametreli bir istem oluşturabilirsiniz:
 
 ```
 A {logo_style} logo for a {company_area} company on a solid color background. Include the text {company_name}.
 ```
 
-カスタム ユーザー インターフェースでは、ユーザーはメニューを使用してパラメータを入力できます。選択した値が、Imagen が受け取るプロンプトに入力されます。
+Müşteri, özel kullanıcı arayüzünüzde bir menü kullanarak parametreleri girebilir ve seçtiği değer, Imagen'in aldığı istemi doldurur.
 
-次に例を示します。
+Örneğin:
 
-1. プロンプト: `A minimalist logo for a health care company on a solid color background. Include the text Journey.`
+1. İstem: `A minimalist logo for a health care company on a solid color background. Include the text Journey.`
 
-   ![Imagen 4 プロンプトのパラメータ化の例 1](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_healthcare.png?hl=ja)
-2. プロンプト: `A modern logo for a software company on a solid color background. Include the text Silo.`
+   ![Imagen 4 istem parametreleştirme örneği 1](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_healthcare.png?hl=tr)
+2. İstem: `A modern logo for a software company on a solid color background. Include the text Silo.`
 
-   ![Imagen 4 プロンプトのパラメータ化の例 2](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_software.png?hl=ja)
-3. プロンプト: `A traditional logo for a baking company on a solid color background. Include the text Seed.`
+   ![Imagen 4 istem parametrelendirme örneği 2](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_software.png?hl=tr)
+3. İstem: `A traditional logo for a baking company on a solid color background. Include the text Seed.`
 
-   ![Imagen 4 プロンプトのパラメータ化の例 3](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_baking.png?hl=ja)
+   ![Imagen 4 istem parametreleştirme örneği 3](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_baking.png?hl=tr)
 
-### 高度なプロンプト作成手法
+### Gelişmiş istem yazma teknikleri
 
-以下の例を使用すると、属性（写真の記述子、形状と素材、歴史的な芸術運動、画質の修飾子など）に基づいて、より具体的なプロンプトを作成できます。
+Fotoğrafçılık tanımlayıcıları, şekiller ve malzemeler, tarihi sanat akımları ve resim kalitesi değiştiricileri gibi özelliklere dayalı daha spesifik istemler oluşturmak için aşağıdaki örnekleri kullanın.
 
-#### 写真
+#### Fotoğrafçılık
 
-- プロンプトに「...の写真」が含まれる
+- İstem şunları içerir: *"... fotoğrafı"*
 
-このスタイルを使用するには、写真を探していることを Imagen に明確に伝えるキーワードを最初に使用します。プロンプトに「...の写真*​*」と記述します。例を示します。
-
-|  |  |  |
-| --- | --- | --- |
-| フォトリアリスティックなサンプル画像 1   プロンプト: キッチンで木製のテーブルに置かれたコーヒー豆の**写真** | フォトリアリスティックなサンプル画像 2   プロンプト: キッチン カウンターに置かれた板チョコの**写真** | フォトリアリスティックなサンプル画像 3   プロンプト: 水を背景にしたモダンな建物の**写真** |
-
-画像の生成元: 各画像は、対応するテキスト プロンプトと Imagen 4 モデルを使用して生成されました。
-
-##### 写真の修飾子
-
-次の例では、写真に固有のいくつかの修飾子とパラメータを見ることができます。複数の修飾子を組み合わせて、より正確に制御できます。
-
-1. **カメラの近接性** - クローズアップ、遠くから撮影
-
-   |  |  |
-   | --- | --- |
-   | クローズアップによるカメラのサンプル画像   プロンプト: コーヒー豆の**クローズアップ**写真 | ズームアウトによるカメラのサンプル画像   プロンプト: 散らかったキッチンに置かれた コーヒー豆の小さな袋の**ズームアウト**写真 |
-2. **カメラの位置** - 空中、下から
-
-   |  |  |
-   | --- | --- |
-   | 空中からの写真のサンプル画像   プロンプト: 高層ビルがそびえる都会の**航空写真** | 下から撮影したサンプル画像   プロンプト: **下から**撮影した青空と林冠の写真 |
-3. **照明** - 自然、ドラマチック、暖かい、寒い
-
-   |  |  |
-   | --- | --- |
-   | 自然光のサンプル画像   プロンプト: モダンなアームチェアのスタジオ写真、**自然光** | ドラマチックな照明のサンプル画像   プロンプト: モダンなアームチェアのスタジオ写真、**ドラマチックな照明** |
-4. **カメラの設定** - モーション ブラー、ソフト フォーカス、ボケ、ポートレート
-
-   |  |  |
-   | --- | --- |
-   | モーション ブラーのサンプル画像   プロンプト: 高層ビルがそびえる都会を社内から撮影した**モーション ブラー**のある写真 | ソフト フォーカスのサンプル画像   プロンプト: 都会の橋を夜間に撮影した**ソフト フォーカス**の写真 |
-5. **レンズの種類** - 35 mm、50 mm、魚眼、広角、マクロ
-
-   |  |  |
-   | --- | --- |
-   | マクロレンズのサンプル画像   プロンプト: 葉の写真、**マクロレンズ** | 魚眼レンズのサンプル画像   プロンプト: 街路写真、ニューヨーク市、**魚眼レンズ** |
-6. **フィルムの種類** - モノクロ、ポラロイド
-
-   |  |  |
-   | --- | --- |
-   | ポラロイド写真のサンプル画像   プロンプト: サングラスをかけた犬の**ポラロイド ポートレート** | モノクロ写真のサンプル画像   プロンプト: サングラスをかけた犬の**モノクロ写真** |
-
-画像の生成元: 各画像は、対応するテキスト プロンプトと Imagen 4 モデルを使用して生成されました。
-
-### イラストとアート
-
-- プロンプトには、「...のpainting」、「...のsketch」という表現を含めます。
-
-アートのスタイルは、鉛筆のスケッチなどのモノクロ スタイルから、ハイパーリアルなデジタルアートまで、多岐にわたります。たとえば、次の画像では、同じプロンプトを異なるスタイルで使用します。
-
-「高層ビルを背景にした、角張ったスポーティな電動セダンの[art style or creation technique]」
+Bu stili kullanmak için Imagen'a fotoğraf aradığınızı net bir şekilde belirten anahtar kelimelerle başlayın. İstemlerinize *"Şunun fotoğrafı:" ifadesiyle başlayın. . ."*. Örneğin:
 
 |  |  |  |
 | --- | --- | --- |
-| アートのサンプル画像   プロンプト: 角張った ... の**技術的な鉛筆画** | アートのサンプル画像   プロンプト: 角張った ... の**木炭画** | アートのサンプル画像   プロンプト: 角張った ... の**色鉛筆画** |
+| gerçekçi örnek resim 1   İstem: **Mutfakta ahşap bir yüzeyin üzerinde** kahve çekirdeklerinin  fotoğrafı | Fotoğraf gerçekliğinde örnek resim 2   İstem: Mutfak tezgahında **bir** çikolata çubuğunun | gerçekçi örnek resim 3   İstem: Arka planda su bulunan modern bir binanın **fotoğrafı** |
+
+Resim kaynağı: Her resim, Imagen 4 modeliyle ilgili metin istemi kullanılarak oluşturulmuştur.
+
+##### Fotoğrafçılık değiştiricileri
+
+Aşağıdaki örneklerde, fotoğrafa özel çeşitli değiştiricileri ve parametreleri görebilirsiniz. Daha hassas kontrol için birden fazla değiştiriciyi birleştirebilirsiniz.
+
+1. **Kamera Yakınlığı** - *Uzaktan çekilen yakın çekim*
+
+   |  |  |
+   | --- | --- |
+   | yakın çekim kamera örnek resmi   İstem: Kahve çekirdeklerinin **yakın çekim** fotoğrafı | Uzaklaştırılmış kamera örnek resmi   İstem: Dağınık bir mutfakta küçük bir kahve çekirdeği torbasının **uzaklaştırılmış** fotoğrafı |
+2. **Kamera Konumu** - *aerial, from below* (havadan, aşağıdan)
+
+   |  |  |
+   | --- | --- |
+   | Kuş bakışı fotoğraf örneği   İstem: Gökdelenlerin bulunduğu bir şehir merkezinin **havadan fotoğrafı** | alttan görünüm örnek resmi   İstem: **Aşağıdan çekilmiş, mavi gökyüzünün göründüğü bir orman örtüsü fotoğrafı aşağıdan** |
+3. **Işıklandırma**: *doğal, dramatik, sıcak, soğuk*
+
+   |  |  |
+   | --- | --- |
+   | doğal ışıklandırma örnek resmi   İstem: Modern bir koltuğun stüdyo fotoğrafı, **doğal ışıklandırma** | Etkileyici aydınlatma örnek resmi   İstem: Modern bir koltuğun **etkileyici ışıklandırmayla** çekilmiş stüdyo fotoğrafı |
+4. **Kamera Ayarları** *- hareket bulanıklığı, Odağı Yumuşat, bokeh, portre*
+
+   |  |  |
+   | --- | --- |
+   | hareket bulanıklığı örnek resmi   İstem: **Hareket bulanıklığı** olan bir arabanın içinden çekilmiş, gökdelenlerle dolu bir şehir fotoğrafı | Odağı Yumuşat örnek resmi   İstem: Gece, şehirdeki bir köprünün **odağı yumuşatılmış** fotoğrafı |
+5. **Lens türleri** - *35 mm, 50 mm, balık gözü, geniş açı, makro*
+
+   |  |  |
+   | --- | --- |
+   | Makro lens örnek resmi   İstem: Yaprak fotoğrafı, **makro lens** | Balık gözü lens örnek resmi   İstem: sokak fotoğrafçılığı, New York, **balık gözü lens** |
+6. **Film türleri** - *siyah beyaz, polaroid*
+
+   |  |  |
+   | --- | --- |
+   | polaroid fotoğraf örneği resim   İstem: Güneş gözlüğü takan bir köpeğin **Polaroid portresi** | siyah beyaz fotoğraf örneği   İstem: Güneş gözlüğü takan bir köpeğin **siyah beyaz fotoğrafı** |
+
+Resim kaynağı: Her resim, Imagen 4 modeliyle ilgili metin istemi kullanılarak oluşturulmuştur.
+
+### İllüstrasyon ve sanat
+
+- İstem şunları içerir: *"... painting resmi"*, *"Bir sketch..."*
+
+Sanat stilleri, kurşun kalemle çizilmiş eskizler gibi tek renkli stillerden hiper gerçekçi dijital sanat eserlerine kadar çeşitlilik gösterir. Örneğin, aşağıdaki resimlerde farklı stillerle aynı istem kullanılmıştır:
+
+*"Arka planda gökdelenler olan, köşeli ve sportif bir elektrikli sedanın [art style or creation technique] resmi"*
 
 |  |  |  |
 | --- | --- | --- |
-| アートのサンプル画像   プロンプト: 角張った ... の**パステル画** | アートのサンプル画像   プロンプト: 角張った ... の**デジタルアート** | アートのサンプル画像   プロンプト: 角張った ... の**アールデコ（ポスター）** |
-
-画像の生成元: 各画像は、対応するテキスト プロンプトと Imagen 2 モデルを使用して生成されました。
-
-##### 形状と素材
-
-- プロンプトには、「... で作られた ...」、「... の形の ...」という表現を含めます。
-
-このテクノロジーの強みの一つは、他の方法では困難または不可能な画像を作成できることです。たとえば、さまざまな素材やテクスチャで会社のロゴを再現できます。
+| Sanat örnek resimleri   İstem: Köşeli bir...**teknik kalem çizimi** | Sanat örnek resimleri   İstem: Köşeli bir...**karakalem çizimi** | Sanat örnek resimleri   İstem: Köşeli bir...**renkli kalem çizimi** |
 
 |  |  |  |
 | --- | --- | --- |
-| 形状と素材のサンプル画像 1   プロンプト: チーズで**作った**ダッフルバッグ | 形状と素材のサンプル画像 2   プロンプト: 鳥の**形の**ネオンチューブ | 形状と素材のサンプル画像 3   プロンプト: **紙で作られた**アームチェア、スタジオ写真、折り紙スタイル |
+| Sanat örnek resimleri   İstem: Köşeli bir...**pastel boya resmi** | Sanat örnek resimleri   İstem: Köşeli bir...**dijital sanatı** | Sanat örnek resimleri   İstem: Köşeli bir...**art deco (poster)** |
 
-画像の生成元: 各画像は、対応するテキスト プロンプトと Imagen 4 モデルを使用して生成されました。
+Resim kaynağı: Her resim, Imagen 2 modeliyle ilgili metin istemi kullanılarak oluşturulmuştur.
 
-#### 歴史的美術品のリファレンス
+##### Şekiller ve malzemeler
 
-- プロンプトには、「... スタイルの ...」という表現を含めます。
+- İstem şunları içeriyor: *"...yapılmış..."*, *"...şeklinde..."*
 
-特定のスタイルは、長年の間に象徴的な存在になりました。歴史的絵画やアートのスタイルを試すためのアイデアのいくつかを、以下に紹介します。
-
-「[art period or movement]
- スタイルの画像（風力発電所）を生成」
+Bu teknolojinin güçlü yönlerinden biri, başka şekilde zor veya imkansız olan görüntüler oluşturabilmenizdir. Örneğin, şirket logonuzu farklı materyaller ve dokularla yeniden oluşturabilirsiniz.
 
 |  |  |  |
 | --- | --- | --- |
-| 印象派のサンプル画像   プロンプト: 印象派絵画の**スタイルの**画像（風力発電所）を生成 | ルネサンス期のサンプル画像   プロンプト: ルネサンス期絵画の**スタイルの**画像（風力発電所）を生成 | ポップアートのサンプル画像   プロンプト: ポップアート **スタイルの**画像（風力発電所）を生成 |
+| Şekiller ve materyaller örneği resim 1   İstem: **Peynirden yapılmış** bir spor çantası | şekiller ve malzemeler örneği resim 2   İstem: Kuş **şeklinde** neon tüpler | şekiller ve malzemeler örneği resim 3   İstem: **kağıttan yapılmış** bir koltuk, stüdyo fotoğrafı, origami tarzı |
 
-画像の生成元: 各画像は、対応するテキスト プロンプトと Imagen 4 モデルを使用して生成されました。
+Resim kaynağı: Her resim, Imagen 4 modeliyle ilgili metin istemi kullanılarak oluşturulmuştur.
 
-#### 画像品質の修飾子
+#### Tarihi sanat referansları
 
-特定のキーワードから、高品質のアセットを探していることをモデルが認識できます。品質の修飾子の例を次に示します。
+- İstem şunları içeriyor: *"...tarzında..."*
 
-- **一般的な修飾子** - 高品質、美しい、図案化された
-- **写真** - 4K、HDR、スタジオ写真
-- **アート、イラスト** - プロが作成した、詳細な
+Bazı stiller yıllar içinde ikonik hale geldi. Aşağıda, deneyebileceğiniz bazı tarihi resim veya sanat tarzları hakkında fikirler verilmiştir.
 
-以下に、品質の修飾子を使用しない場合のプロンプトと、同じプロンプトで品質の修飾子を使用したいくつかの例を示します。
+*"[art period or movement]
+ tarzında bir resim üret: rüzgar çiftliği"*
+
+|  |  |  |
+| --- | --- | --- |
+| empresyonizm örneği resim   İstem: **Empresyonist bir tablo *stilinde*** resim üretme: rüzgar çiftliği | Rönesans dönemi örneği   İstem: **Rönesans dönemi tablosu *stilinde*** bir rüzgar santrali resmi oluştur | pop art örnek resmi   İstem: **Pop art*tarzında*** bir rüzgar çiftliği görüntüsü oluştur |
+
+Resim kaynağı: Her resim, Imagen 4 modeliyle ilgili metin istemi kullanılarak oluşturulmuştur.
+
+#### Resim kalitesi değiştiricileri
+
+Belirli anahtar kelimeler, modelin yüksek kaliteli bir öğe aradığınızı anlamasını sağlayabilir. Kalite değiştiricilere örnek olarak şunlar verilebilir:
+
+- **Genel Değiştiriciler** - *yüksek kaliteli, güzel, stilize edilmiş*
+- **Fotoğraflar** - *4K, HDR, Studio Photo*
+- **Sanat, İllüstrasyon** - *Profesyonel, ayrıntılı*
+
+Aşağıda, kalite değiştiricileri içermeyen istemlere ve aynı istemin kalite değiştiricileri içeren versiyonuna dair birkaç örnek verilmiştir.
 
 |  |  |
 | --- | --- |
-| 修飾子なしのトウモロコシのサンプル画像   プロンプト（品質の修飾子なし）: トウモロコシの茎の写真 | 修飾子ありのトウモロコシのサンプル画像   プロンプト（品質の修飾子付き）: **4k HDR 美しい**  **プロカメラマンが撮影した** トウモロコシの茎の写真 |
+| Değiştiriciler olmadan mısır örneği resmi   İstem (kalite değiştiriciler yok): Mısır koçanı fotoğrafı | Değiştiricilerle birlikte mısır örneği resmi   İstem (kalite değiştiricilerle): **4K HDR kalitesinde**   bir mısır koçanı fotoğrafı **çeken bir   profesyonel fotoğrafçı** |
 
-画像の生成元: 各画像は、対応するテキスト プロンプトと Imagen 4 モデルを使用して生成されました。
+Resim kaynağı: Her resim, Imagen 4 modeliyle ilgili metin istemi kullanılarak oluşturulmuştur.
 
-#### アスペクト比
+#### En boy oranları
 
-Imagen の画像生成では、5 つの異なる画像アスペクト比を設定できます。
+Imagen ile görüntü üretme özelliği, beş farklı görüntü en-boy oranı ayarlamanıza olanak tanır.
 
-1. **スクエア**（1:1、デフォルト）- 標準の正方形の写真。このアスペクト比の一般的な用途としては、ソーシャル メディアの投稿などがあります。
-2. **全画面**（4:3） - このアスペクト比は、メディアや映画でよく使用されます。また、古い（ワイドスクリーンではない）テレビやミディアム フォーマット カメラでも使用されています。1:1 と比べると、横方向に広いシーンをキャプチャできるため、写真撮影に適したアスペクト比です。
-
-   |  |  |
-   | --- | --- |
-   | アスペクト比の例   プロンプト: ピアノを弾いているミュージシャンの手のアップ、モノクロ フィルム、ヴィンテージ（4:3 のアスペクト比） | アスペクト比の例   プロンプト: 高級レストランのフライドポテトのプロのスタジオ写真, フード雑誌のスタイル（アスペクト比 4:3） |
-3. **縦向き全画面**（3:4） - 全画面のアスペクト比を 90 度回転したもの。1:1 のアスペクト比と比べると、縦方向に広がるシーンをキャプチャできます。
+1. **Kare** (1:1, varsayılan): Standart bir kare fotoğraf. Bu en boy oranının yaygın kullanım alanları arasında sosyal medya gönderileri yer alır.
+2. **Tam ekran** (4:3): Bu en boy oranı genellikle medyada veya filmlerde kullanılır.
+   Ayrıca çoğu eski (geniş ekran olmayan) TV'nin ve orta formatlı kameraların boyutlarıdır. Yatay olarak daha fazla sahneyi yakalar (1:1 ile karşılaştırıldığında). Bu nedenle, fotoğrafçılık için tercih edilen en boy oranıdır.
 
    |  |  |
    | --- | --- |
-   | アスペクト比の例   プロンプト: ハイキングをする女性, 水たまりに映るブーツのクローズアップ, 背景に大きな山, 広告スタイル, ドラマチックなアングル（3:4 のアスペクト比） | アスペクト比の例   プロンプト: 神秘的な渓谷を流れる川の空撮（アスペクト比 3:4） |
-4. **ワイドスクリーン**（16:9）- 4:3 に代わって、テレビ、モニター、スマートフォンの画面（横向き）で最も一般的なアスペクト比。風景など、広い背景を撮影する場合に使用します。
+   | en boy oranı örneği   İstem: Piyano çalan bir müzisyenin parmaklarının yakın çekimi, siyah beyaz film, vintage (4:3 en boy oranı) | en-boy oranı örneği   İstem: Lüks bir restoran için patates kızartmasının yemek dergisi tarzında profesyonel bir stüdyo fotoğrafı (4:3 en-boy oranı) |
+3. **Dikey tam ekran** (3:4): Bu, 90 derece döndürülmüş tam ekran en boy oranıdır. Bu sayede, 1:1 en boy oranına kıyasla sahnenin daha fazlası dikey olarak yakalanabilir.
 
-   ![アスペクト比の例](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_16-9_man.png?hl=ja)
+   |  |  |
+   | --- | --- |
+   | en boy oranı örneği   İstem: Yürüyüş yapan bir kadın, botlarının bir su birikintisine yansıyan yakın çekimi, arka planda büyük dağlar, reklam tarzında, dramatik açılar (3:4 en-boy oranı) | en boy oranı örneği   İstem: mistik bir vadide akan nehrin havadan çekilmiş fotoğrafı (3:4 en-boy oranı) |
+4. **Geniş ekran** (16:9): Bu oran, 4:3'ün yerini almıştır ve artık TV'ler, monitörler ve cep telefonu ekranları (yatay) için en yaygın en boy oranıdır.
+   Arka planın daha fazlasını (ör. manzaralar) yakalamak istediğinizde bu en boy oranını kullanın.
 
-   プロンプト: 全身白の服を着た男性がビーチに座っている, クローズアップ, ゴールデン アワーの照明（アスペクト比 16:9）
-5. **縦向き**（9:16）- 比率はワイドスクリーンですが、回転しています。これは、ショート動画アプリ（YouTube ショートなど）で普及している比較的新しいアスペクト比です。建物、木、滝など、縦方向に長い対象に使用します。
+   ![en boy oranı örneği](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_16-9_man.png?hl=tr)
 
-   ![アスペクト比の例](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_9-16_skyscraper.png?hl=ja)
+   İstem: Plajda oturan, baştan aşağı beyaz giyinmiş bir adam, yakın çekim, altın saat ışığı (16:9 en-boy oranı)
+5. **Dikey** (9:16): Bu oran, geniş ekranın döndürülmüş halidir. Bu, kısa video uygulamaları (ör. YouTube Shorts) tarafından popüler hale getirilen nispeten yeni bir en-boy oranıdır. Binalar, ağaçlar, şelaleler veya benzeri diğer nesneler gibi güçlü dikey yönlere sahip uzun nesneler için kullanın.
 
-   プロンプト: 巨大な高層ビルのデジタル レンダリング, モダン, 壮大, 壮大な背景に美しい夕日（9:16 のアスペクト比）
+   ![en boy oranı örneği](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_9-16_skyscraper.png?hl=tr)
 
-#### フォトリアリスティックな画像
+   İstem: Arka planda güzel bir gün batımı olan, devasa, modern, görkemli ve destansı bir gökdelenin dijital görüntüsü (9:16 en-boy oranı)
 
-画像生成モデルのさまざまなバージョンによって、芸術的な出力とフォトリアリスティックな出力が混在する場合があります。プロンプトで次の表現を使用することで、生成する主題に応じてよりフォトリアリスティックな出力を生成できます。
+#### Fotoğraf gerçekliğinde görüntüler
 
-| ユースケース | レンズの種類 | レンズ焦点距離 | 補足情報 |
+Görüntü üretme modelinin farklı sürümleri, sanatsal ve fotogerçekçi çıkışların bir karışımını sunabilir. Oluşturmak istediğiniz konuya göre daha fotogerçekçi sonuçlar elde etmek için istemlerde aşağıdaki ifadeleri kullanın.
+
+| Kullanım alanı | Lens türü | Odak uzaklıkları | Ek bilgiler |
 | --- | --- | --- | --- |
-| 人（縦向き） | プライム、ズーム | 24～35mm | モノクロ フィルム、フィルム ノワール、被写界深度、デュオトーン（2 色について言及） |
-| 食品、虫、植物（物体、静物） | マクロ | 60～105mm | 高精細、正確なフォーカス、照明の制御 |
-| スポーツ、野生動物（モーション） | 望遠ズーム | 100～400mm | 高速シャッター スピード、アクションまたは動作のトラッキング |
-| 天体、風景（広角） | 広角 | 10～24mm | 長い露光時間、シャープ フォーカス、長時間露光、滑らかな水や雲 |
+| Kişiler (portreler) | Asal sayı, yakınlaştırma | 24-35mm | Siyah beyaz film, Film noir, Alan derinliği, Çift tonlu (iki renkten bahsedin) |
+| Yiyecek, böcek, bitki (nesneler, natürmort) | Makro | 60-105mm | Yüksek ayrıntı, hassas odaklama, kontrollü ışıklandırma |
+| Spor, vahşi yaşam (hareket) | Telefoto yakınlaştırma | 100-400mm | Yüksek deklanşör hızı, aksiyon veya hareket takibi |
+| Astronomik, manzara (geniş açı) | Geniş Açı | 10-24mm | Uzun pozlama süreleri, keskin odak, uzun pozlama, pürüzsüz su veya bulutlar |
 
-##### ポートレート
+##### Portreler
 
-| ユースケース | レンズの種類 | レンズ焦点距離 | 補足情報 |
+| Kullanım alanı | Lens türü | Odak uzaklıkları | Ek bilgiler |
 | --- | --- | --- | --- |
-| 人（縦向き） | プライム、ズーム | 24～35mm | モノクロ フィルム、フィルム ノワール、被写界深度、デュオトーン（2 色について言及） |
+| Kişiler (portreler) | Asal sayı, yakınlaştırma | 24-35mm | Siyah beyaz film, Film noir, Alan derinliği, Çift tonlu (iki renkten bahsedin) |
 
-このテーブルから複数のキーワードを使用して、Imagen により次のポートレートを生成できます。
+Imagen, tablodaki birkaç anahtar kelimeyi kullanarak aşağıdaki portreleri oluşturabilir:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| ポートレート写真の例 | ポートレート写真の例 | ポートレート写真の例 | ポートレート写真の例 |
+| portre fotoğrafçılığı örneği | portre fotoğrafçılığı örneği | portre fotoğrafçılığı örneği | portre fotoğrafçılığı örneği |
 
-プロンプト: 女性、35mm の縦向き、青とグレーのデュオトーン  
-モデル: `imagen-4.0-generate-001`
-
-|  |  |  |  |
-| --- | --- | --- | --- |
-| ポートレート写真の例 | ポートレート写真の例 | ポートレート写真の例 | ポートレート写真の例 |
-
-プロンプト: 女性、35mm 縦向き、フィルム ノワール  
-モデル: `imagen-4.0-generate-001`
-
-##### オブジェクト
-
-| ユースケース | レンズの種類 | レンズ焦点距離 | 補足情報 |
-| --- | --- | --- | --- |
-| 食品、虫、植物（物体、静物） | マクロ | 60～105mm | 高精細、正確なフォーカス、照明の制御 |
-
-このテーブルから複数のキーワードを使用して、Imagen により次のオブジェクト画像を生成できます。
+İstem: *35 mm portre, mavi ve gri çift tonlu bir kadın*  
+Model: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| 物体写真の例 | 物体写真の例 | 物体写真の例 | 物体写真の例 |
+| portre fotoğrafçılığı örneği | portre fotoğrafçılığı örneği | portre fotoğrafçılığı örneği | portre fotoğrafçılığı örneği |
 
-プロンプト: 花類、リーフ、60mm  
-モデル: `imagen-4.0-generate-001`
+İstem: *35 mm portre, film noir tarzında bir kadın*  
+Model: `imagen-4.0-generate-001`
+
+##### Nesneler
+
+| Kullanım alanı | Lens türü | Odak uzaklıkları | Ek bilgiler |
+| --- | --- | --- | --- |
+| Yiyecek, böcek, bitki (nesneler, natürmort) | Makro | 60-105mm | Yüksek ayrıntı, hassas odaklama, kontrollü ışıklandırma |
+
+Imagen, tablodaki birkaç anahtar kelimeyi kullanarak aşağıdaki nesne resimlerini oluşturabilir:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| 物体写真の例 | 物体写真の例 | 物体写真の例 | 物体写真の例 |
+| Nesne fotoğrafı örneği | Nesne fotoğrafı örneği | Nesne fotoğrafı örneği | Nesne fotoğrafı örneği |
 
-プロンプト: パスタのプレート、100mm マクロレンズ  
-モデル: `imagen-4.0-generate-001`
-
-##### モーション
-
-| ユースケース | レンズの種類 | レンズ焦点距離 | 補足情報 |
-| --- | --- | --- | --- |
-| スポーツ、野生動物（モーション） | 望遠ズーム | 100～400mm | 高速シャッター スピード、アクションまたは動作のトラッキング |
-
-このテーブルから複数のキーワードを使用して、Imagen により次の動画を生成できます。
+İstem: *leaf of a prayer plant, macro lens, 60mm*  
+Model: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| モーション フォトの例 | モーション フォトの例 | モーション フォトの例 | モーション フォトの例 |
+| Nesne fotoğrafı örneği | Nesne fotoğrafı örneği | Nesne fotoğrafı örneği | Nesne fotoğrafı örneği |
 
-プロンプト: 勝利のタッチダウン、高速シャッター速度、動作トラッキング  
-モデル: `imagen-4.0-generate-001`
+İstem: *a plate of pasta, 100mm Macro lens*  
+Model: `imagen-4.0-generate-001`
+
+##### Hareket
+
+| Kullanım alanı | Lens türü | Odak uzaklıkları | Ek bilgiler |
+| --- | --- | --- | --- |
+| Spor, vahşi yaşam (hareket) | Telefoto yakınlaştırma | 100-400mm | Yüksek deklanşör hızı, aksiyon veya hareket takibi |
+
+Imagen, tablodaki birkaç anahtar kelimeyi kullanarak aşağıdaki hareketli görüntüleri oluşturabilir:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| モーション フォトの例 | モーション フォトの例 | モーション フォトの例 | モーション フォトの例 |
+| hareketli fotoğrafçılık örneği | hareketli fotoğrafçılık örneği | hareketli fotoğrafçılık örneği | hareketli fotoğrafçılık örneği |
 
-プロンプト: 森の中を走るシカ、シャッター速度、動作トラッキング  
-モデル: `imagen-4.0-generate-001`
-
-##### 広角
-
-| ユースケース | レンズの種類 | レンズ焦点距離 | 補足情報 |
-| --- | --- | --- | --- |
-| 天体、風景（広角） | 広角 | 10～24mm | 長い露光時間、シャープ フォーカス、長時間露光、滑らかな水や雲 |
-
-このテーブル内の複数のキーワードを使用して、Imagen により次の広角画像を生成できます。
+İstem: *a winning touchdown, hızlı deklanşör hızı, hareket takibi*  
+Model: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| 広角撮影の例 | 広角撮影の例 | 広角撮影の例 | 広角撮影の例 |
+| hareketli fotoğrafçılık örneği | hareketli fotoğrafçılık örneği | hareketli fotoğrafçılık örneği | hareketli fotoğrafçılık örneği |
 
-プロンプト: 広大な山並み、風景、広角 10mm  
-モデル: `imagen-4.0-generate-001`
+İstem: *Ormanda koşan bir geyik, yüksek deklanşör hızı, hareket takibi*  
+Model: `imagen-4.0-generate-001`
+
+##### Geniş Açı
+
+| Kullanım alanı | Lens türü | Odak uzaklıkları | Ek bilgiler |
+| --- | --- | --- | --- |
+| Astronomik, manzara (geniş açı) | Geniş Açı | 10-24mm | Uzun pozlama süreleri, keskin odak, uzun pozlama, pürüzsüz su veya bulutlar |
+
+Tablodaki birkaç anahtar kelimeyi kullanarak Imagen, aşağıdaki geniş açılı fotoğrafları oluşturabilir:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| 広角撮影の例 | 広角撮影の例 | 広角撮影の例 | 広角撮影の例 |
+| Geniş açılı fotoğraf örneği | Geniş açılı fotoğraf örneği | Geniş açılı fotoğraf örneği | Geniş açılı fotoğraf örneği |
 
-プロンプト: 月の写真、天体写真、広角 10mm  
-モデル: `imagen-4.0-generate-001`
+İstem: *an expansive mountain range, landscape wide angle 10mm*  
+Model: `imagen-4.0-generate-001`
 
-## モデル バージョン
+|  |  |  |  |
+| --- | --- | --- | --- |
+| Geniş açılı fotoğraf örneği | Geniş açılı fotoğraf örneği | Geniş açılı fotoğraf örneği | Geniş açılı fotoğraf örneği |
+
+İstem: *Ayın fotoğrafı, astro fotoğrafçılık, 10 mm geniş açı*  
+Model: `imagen-4.0-generate-001`
+
+## Model sürümleri
 
 ### Imagen 4
 
-| プロパティ | 説明 |
+| Mülk | Açıklama |
 | --- | --- |
-| id\_cardモデルコード | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
-| save でサポートされるデータ型 | **入力**  テキスト  **出力**  画像 |
-| token\_autoトークン上限[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ja) | **入力トークンの上限**  480 トークン（テキスト）  **出力画像**  1 ～ 4（Ultra/Standard/Fast） |
-| calendar\_month最終更新日 | 2025 年 6 月 |
+| id\_cardModel kodu | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
+| saveDesteklenen veri türleri | **Giriş**  Metin  **Çıkış**  Resimler |
+| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  480 jeton (metin)  **Çıkış resimleri**  1 ila 4 (Ultra/Standart/Hızlı) |
+| calendar\_monthSon güncelleme | Haziran 2025 |
 
 ### Imagen 3
 
-Imagen 3 モデルは[シャットダウン](https://ai.google.dev/gemini-api/docs/deprecations?hl=ja)されました。
+Imagen 3 modeli [kapatıldı](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr).
 
-フィードバックを送信
+Geri bildirim gönderin
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-最終更新日 2026-04-29 UTC。
+Son güncelleme tarihi: 2026-04-29 UTC.
 
-ご意見をお聞かせください
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]

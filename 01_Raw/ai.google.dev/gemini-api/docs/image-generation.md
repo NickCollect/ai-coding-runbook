@@ -1,112 +1,111 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/image-generation?hl=th
-fetched_at: 2026-05-05T19:47:51.967957+00:00
+source_url: https://ai.google.dev/gemini-api/docs/image-generation?hl=it
+fetched_at: 2026-05-05T20:00:17.226085+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-ส่งความคิดเห็น
+Invia feedback
 
-# การสร้างรูปภาพด้วย Nano Banana
+# Generazione di immagini con Nano Banana
 
-พรอมต์เพื่อสร้างต้นแบบแอปที่ทำงานได้อย่างเต็มรูปแบบและมี UI ครบถ้วน
-และดู Nano Banana 2 ที่ผสานรวมกับเครื่องมือ ข้อมูล และระบบนิเวศของ Gemini
-ในโลกแห่งความเป็นจริง ทั้งหมดนี้ก่อนที่จะเขียนโค้ดแม้แต่บรรทัดเดียว
+Prompt per prototipare app completamente funzionali e con UI completa e vedere
+Nano Banana 2 integrato con strumenti, dati ed ecosistema Gemini reali. Tutto prima di scrivere una sola riga di codice.
 
-- [ลองใช้แอป Nano Banana 2](https://aistudio.google.com/apps/bundled/pet_passport?hl=th)
-- หรือสร้างเองจากพรอมต์
+- [Prova un'app Nano Banana 2](https://aistudio.google.com/apps/bundled/pet_passport?hl=it)
+- Oppure crea il tuo da prompt:
 
-- ![นิตยสาร](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
-  ![ลอนดอน](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
-  ![คืนค่า](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
-  ![กล้วย](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
-- ![นิตยสาร](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+- ![rivista](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+  ![Londra](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
+  ![ripristina](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
+  ![banana](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
+- ![rivista](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
 
-  สร้างโดย Nano Banana 2
+  Generato da Nano Banana 2
 
-  **พรอมต์:** "รูปภาพหน้าปกนิตยสารแบบมัน หน้าปกสีน้ำเงินเรียบๆ มีคำว่า Nano Banana ตัวหนาขนาดใหญ่ ข้อความอยู่ในแบบอักษร Serif และเต็มมุมมอง ไม่มีข้อความอื่น ด้านหน้าข้อความมีภาพบุคคลในชุดเดรสเรียบหรูและมินิมอล โดยเธอถือหมายเลข 2 อย่างสนุกสนาน ซึ่งเป็นจุดโฟกัส
+  **Prompt:** "Una foto della copertina lucida di una rivista. La copertina blu minimalista riporta le parole Nano Banana in grassetto e di grandi dimensioni. Il testo è in un carattere serif e riempie la visualizzazione. Nessun altro testo. Davanti al testo c'è il ritratto di una persona con un abito elegante e minimalista. Sta tenendo in mano in modo giocoso il numero 2, che è il punto focale.
     
-  ใส่หมายเลขฉบับและวันที่ "ก.พ. 2026" ไว้ที่มุมพร้อมกับบาร์โค้ด นิตยสารวางอยู่บนชั้นวางติดกับผนังสีส้มที่ฉาบปูนภายในร้านค้าของดีไซเนอร์
+  Inserisci il codice problema e la data "Feb 2026" nell'angolo insieme a un codice a barre. La rivista è su uno scaffale contro una parete intonacata di arancione, all'interno di un negozio di design.
 
-  สร้าง[ภาพผลิตภัณฑ์ระดับมืออาชีพ](#4_product_mockups_commercial_photography)ใน [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=th)
-- ![ลอนดอน](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
+  Crea [scatti di prodotti professionali](#4_product_mockups_commercial_photography) in [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=it)
+- ![Londra](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
 
-  สร้างโดย Nano Banana Pro
+  Generato da Nano Banana Pro
 
-  **พรอมต์:** "นำเสนอฉากการ์ตูน 3 มิติขนาดเล็กแบบไอโซเมตริกจากมุมมองด้านบน 45° ที่ชัดเจนของลอนดอน โดยมีสถานที่สำคัญและองค์ประกอบทางสถาปัตยกรรมที่โดดเด่นที่สุด ใช้พื้นผิวที่นุ่มนวลและละเอียดด้วยวัสดุ PBR ที่สมจริง รวมถึงแสงและเงาที่นุ่มนวลและสมจริง ผสานรวมสภาพอากาศปัจจุบันเข้ากับสภาพแวดล้อมของเมืองโดยตรงเพื่อสร้างบรรยากาศที่สมจริง ใช้การจัดองค์ประกอบที่เรียบง่ายและสะอาดตาโดยมีพื้นหลังสีทึบที่นุ่มนวล วางชื่อ "ลอนดอน" เป็นข้อความตัวหนาขนาดใหญ่ไว้ตรงกลางด้านบน วางไอคอนสภาพอากาศที่โดดเด่นไว้ใต้ชื่อ จากนั้นวางวันที่ (ข้อความขนาดเล็ก) และอุณหภูมิ (ข้อความขนาดกลาง) ข้อความทั้งหมดต้องอยู่ตรงกลางโดยมีระยะห่างที่สอดคล้องกัน และอาจซ้อนทับส่วนบนของอาคารเล็กน้อย"
+  **Prompt:** "Presenta una scena di cartone animato 3D in miniatura con prospettiva isometrica dall'alto a 45° di Londra, con i suoi monumenti ed elementi architettonici più iconici. Utilizza texture morbide e raffinate con materiali PBR realistici e illuminazione e ombre delicate e realistiche. Integra le condizioni meteo attuali direttamente nell'ambiente della città per creare un'atmosfera coinvolgente. Utilizza una composizione pulita e minimalista con uno sfondo morbido e in tinta unita. Nella parte superiore centrale, inserisci il titolo "Londra" in testo in grassetto grande, un'icona meteo in evidenza sotto, poi la data (testo piccolo) e la temperatura (testo medio). Tutto il testo deve essere centrato con una spaziatura uniforme e può sovrapporsi leggermente alla parte superiore degli edifici."
 
-  ดูข้อมูลเพิ่มเติมเกี่ยวกับ[การเชื่อมต่อแหล่งข้อมูลจาก Search](#use-with-grounding) และลองใช้ใน [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=th)
-- ![เควตซัล](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
+  Scopri di più sul [grounding della ricerca](#use-with-grounding) e provalo in [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=it)
+- ![quetzal](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
 
-  สร้างโดย Nano Banana 2
+  Generato da Nano Banana 2
 
-  **พรอมต์:** "ใช้การค้นหารูปภาพเพื่อค้นหารูปภาพที่ถูกต้องของนกเควทซัลที่สวยงาม สร้างวอลเปเปอร์ขนาด 3:2 ที่สวยงามของนกตัวนี้ โดยใช้การไล่ระดับสีจากบนลงล่างตามธรรมชาติและองค์ประกอบที่เรียบง่าย"
+  **Prompt:** "Utilizza la ricerca immagini per trovare immagini accurate di un quetzal splendente. Crea un bellissimo sfondo 3:2 di questo uccello, con una sfumatura naturale dall'alto verso il basso e una composizione minimalista."
 
-  ใช้การอ้างอิง[การค้นหารูปภาพ](#image-search)ของ Google กับ Nano Banana 2 ลองใช้ใน [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=th)
-- ![กล้วย](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
+  Utilizza la funzionalità di grounding della [Ricerca immagini](#image-search) di Google con Nano Banana 2. Prova in [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=it)
+- ![banana](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
 
-  สร้างโดย Nano Banana Pro
+  Generato da Nano Banana Pro
 
-  **พรอมต์:** "ใส่โลโก้นี้ในโฆษณาระดับไฮเอนด์สำหรับน้ำหอมกลิ่นกล้วย โลโก้ผสานรวมเข้ากับขวดได้อย่างลงตัว"
+  **Prompt:** "Inserisci questo logo in un annuncio di lusso per un profumo al profumo di banana. Il logo è perfettamente integrato nella bottiglia".
 
-  ลองใช้[การคงรายละเอียดที่มีความเที่ยงตรงสูง](#5_high-fidelity_detail_preservation)ของ Nano Banana ใน [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=th)
-- ![ร้านกาแฟ](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
+  Prova la [conservazione dei dettagli ad alta fedeltà](#5_high-fidelity_detail_preservation) di Nano Banana in [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=it)
+- ![bar](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
 
-  สร้างโดย Nano Banana Pro
+  Generato da Nano Banana Pro
 
-  **พรอมต์:** "รูปภาพฉากในชีวิตประจำวันที่คาเฟ่ที่วุ่นวายซึ่งเสิร์ฟอาหารเช้า ในเบื้องหน้าเป็นชายหนุ่มในการ์ตูนที่มีผมสีน้ำเงิน คนหนึ่งเป็นภาพร่างดินสอ อีกคนเป็นตัวละครดินน้ำมัน"
+  **Prompt:** "Una foto di una scena quotidiana in un caffè affollato che serve la colazione. In primo piano c'è un uomo anime con i capelli blu, una delle persone è un disegno a matita, un'altra è una persona in claymation"
 
-  ทดลองใช้[สไตล์ศิลปะ](#3_style_transfer)ต่างๆ ด้วย Nano Banana ใน [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=th)
-- ![บทความ](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
+  Sperimenta diversi [stili artistici](#3_style_transfer) con Nano Banana in [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=it)
+- ![articolo](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
 
-  สร้างโดย Nano Banana Pro
+  Generato da Nano Banana Pro
 
-  **พรอมต์:** "ใช้ Search เพื่อดูว่าการเปิดตัว Gemini 3 Flash ได้รับการตอบรับอย่างไร ใช้ข้อมูลนี้เพื่อเขียนบทความสั้นๆ เกี่ยวกับเรื่องนี้ (พร้อมหัวข้อ) ส่งคืนรูปภาพของบทความตามที่ปรากฏในนิตยสารแบบมันที่เน้นการออกแบบ เป็นรูปภาพของหน้าเดียวที่พับอยู่ ซึ่งแสดงบทความเกี่ยวกับ Gemini 3 Flash รูปภาพหลัก 1 รูป บรรทัดแรกในแบบอักษร Serif"
+  **Prompt:** "Utilizza la ricerca per scoprire come è stato accolto il lancio di Gemini 3 Flash. Utilizza queste informazioni per scrivere un breve articolo sull'argomento (con i titoli). Restituisci una foto dell'articolo così come appariva in una rivista patinata incentrata sul design. È una foto di una singola pagina piegata, che mostra l'articolo su Gemini 3 Flash. Una foto hero. Titolo in serif."
 
-  สร้าง[ข้อความที่ถูกต้อง](#3_accurate_text_in_images)จาก[การค้นหา](#use-with-grounding) ลองใช้ Nano Banana ใน [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=th)
-- ![สุนัข](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
+  Genera [testo accurato](#3_accurate_text_in_images) dalla [ricerca](#use-with-grounding). Prova Nano Banana in [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=it)
+- ![cane](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
 
-  สร้างโดย Nano Banana Pro
+  Generato da Nano Banana Pro
 
-  **พรอมต์:** "ไอคอนที่แสดงสุนัขน่ารัก พื้นหลังเป็นสีขาว สร้างไอคอนในสไตล์ 3 มิติที่มีสีสันและจับต้องได้ ไม่มีข้อความ"
+  **Prompt:** "Un'icona che rappresenta un cane carino. Lo sfondo è bianco. Crea le icone in uno stile 3D colorato e tattile. Nessun testo."
 
-  สร้าง[ไอคอน สติกเกอร์ และชิ้นงาน](#2_stylized_illustrations_stickers)ด้วย Nano Banana ใน [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=th)
-- ![ไอโซเมตริก](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
+  Crea [icone, adesivi e asset](#2_stylized_illustrations_stickers) con Nano Banana in [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=it)
+- ![isometrico](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
 
-  สร้างโดย Nano Banana 2
+  Generato da Nano Banana 2
 
-  **พรอมต์:** "สร้างรูปภาพที่เป็นไอโซเมตริกอย่างสมบูรณ์ นี่ไม่ใช่ภาพย่อ แต่เป็นภาพที่ถ่ายมาซึ่งเป็นภาพไอโซเมตริกที่สมบูรณ์แบบ เป็นรูปภาพของสวนสมัยใหม่ที่สวยงาม มีสระว่ายน้ำขนาดใหญ่รูปเลข 2 และคำว่า "Nano Banana 2"
+  **Prompt:** "Crea una foto perfettamente isometrica. Non è una miniatura, ma una foto acquisita che è risultata perfettamente isometrica. È la foto di un bellissimo giardino moderno. C'è una grande piscina a forma di 2 e le parole: Nano Banana 2."
 
-  ลอง[การสร้างรูปภาพที่สมจริง](#1_photorealistic_scenes)ใน [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=th)
+  Prova la [generazione di immagini fotorealistiche](#1_photorealistic_scenes) in [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=it)
 
-**Nano Banana** คือชื่อของความสามารถในการสร้างรูปภาพดั้งเดิมของ Gemini
-Gemini สามารถสร้างและประมวลผลรูปภาพในรูปแบบการสนทนา
-ด้วยข้อความ รูปภาพ หรือทั้ง 2 อย่างรวมกัน ซึ่งช่วยให้คุณสร้าง แก้ไข และ
-ทำซ้ำภาพด้วยการควบคุมที่ไม่เคยมีมาก่อน
+**Nano Banana** è il nome delle funzionalità di generazione di immagini native di Gemini.
+Gemini può generare ed elaborare immagini in modo conversazionale
+con testo, immagini o una combinazione di entrambi. In questo modo puoi creare, modificare e
+iterare le immagini con un controllo senza precedenti.
 
-Nano Banana หมายถึงโมเดล 3 รายการที่แตกต่างกันซึ่งพร้อมให้บริการใน Gemini API ดังนี้
+Nano Banana si riferisce a tre modelli distinti disponibili nell'API Gemini:
 
-- **Nano Banana 2**: โมเดล[ตัวอย่างรูปภาพ Gemini 3.1 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=th) (`gemini-3.1-flash-image-preview`) โมเดลนี้เป็นโมเดลที่มีประสิทธิภาพสูงเทียบเท่ากับรูปภาพ Gemini 3 Pro ซึ่งได้รับการเพิ่มประสิทธิภาพเพื่อความเร็วและกรณีการใช้งานของนักพัฒนาซอฟต์แวร์ที่มีปริมาณมาก
-- **Nano Banana Pro**: โมเดล[ตัวอย่างรูปภาพ Gemini 3 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=th)
-  (`gemini-3-pro-image-preview`) โมเดลนี้ออกแบบมาเพื่อการผลิตชิ้นงานระดับมืออาชีพ
-  โดยใช้การให้เหตุผลขั้นสูง ("การคิด") เพื่อทำตามคำสั่งที่ซับซ้อน
-  และแสดงข้อความที่มีความเที่ยงตรงสูง
-- **Nano Banana**: โมเดล[รูปภาพ Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=th)
-  (`gemini-2.5-flash-image`) โมเดลนี้ออกแบบมาเพื่อความเร็วและ
-  ประสิทธิภาพ โดยปรับให้เหมาะกับงานที่มีปริมาณมากและมีเวลาในการตอบสนองต่ำ
+- **Nano Banana 2**: il modello [Gemini 3.1 Flash Image Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=it) (`gemini-3.1-flash-image-preview`). Questo modello è la controparte
+  ad alta efficienza di Gemini 3 Pro Image, ottimizzato per la velocità e
+  i casi d'uso degli sviluppatori con volumi elevati.
+- **Nano Banana Pro**: il modello [Anteprima di Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=it)
+  (`gemini-3-pro-image-preview`). Questo modello è progettato per la produzione di asset professionali, utilizza il ragionamento avanzato ("Pensiero") per seguire istruzioni complesse e riprodurre testo ad alta fedeltà.
+- **Nano Banana**: il modello [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=it)
+  (`gemini-2.5-flash-image`). Questo modello è progettato per velocità ed
+  efficienza, ottimizzato per attività a basso volume e bassa latenza.
 
-รูปภาพที่สร้างขึ้นทั้งหมดจะมี[ลายน้ำ SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=th)
+Tutte le immagini generate includono una [filigrana SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=it).
 
-## การสร้างรูปภาพ (การเปลี่ยนข้อความเป็นรูปภาพ)
+## Generazione di immagini (da testo a immagine)
 
 ### Python
 
@@ -259,16 +258,19 @@ curl -s -X POST \
   }'
 ```
 
-## การแก้ไขรูปภาพ (ข้อความและรูปภาพเป็นรูปภาพ)
+## Modifica delle immagini (da testo e immagine a immagine)
 
-**โปรดทราบ**: โปรดตรวจสอบว่าคุณมีสิทธิ์ที่จำเป็นสำหรับรูปภาพใดก็ตามที่คุณอัปโหลด
-อย่าสร้างเนื้อหาที่ละเมิดสิทธิของผู้อื่น รวมถึงวิดีโอหรือรูปภาพที่หลอกลวง คุกคาม หรือเป็นอันตราย การใช้บริการ Generative AI นี้เป็นไปตาม[นโยบายการใช้งานที่ไม่อนุญาต](https://policies.google.com/terms/generative-ai/use-policy?hl=th)ของเรา
+**Promemoria**: assicurati di disporre dei diritti necessari per le immagini che carichi.
+Non generare contenuti che violano i diritti di altre persone, inclusi video o
+immagini che ingannano, molestano o danneggiano. L'utilizzo di questo servizio di AI generativa è
+soggetto alle nostre [Norme relative all'uso vietato](https://policies.google.com/terms/generative-ai/use-policy?hl=it).
 
-ระบุรูปภาพและใช้พรอมต์ข้อความเพื่อเพิ่ม นำออก หรือแก้ไของค์ประกอบ
-เปลี่ยนสไตล์ หรือปรับการไล่ระดับสี
+Fornisci un'immagine e utilizza prompt di testo per aggiungere, rimuovere o modificare elementi,
+cambiare lo stile o regolare la classificazione del colore.
 
-ตัวอย่างต่อไปนี้แสดงการอัปโหลดรูปภาพที่เข้ารหัส `base64`
-สำหรับรูปภาพหลายรายการ เพย์โหลดขนาดใหญ่ และประเภท MIME ที่รองรับ โปรดดูหน้า[การทำความเข้าใจรูปภาพ](https://ai.google.dev/gemini-api/docs/image-understanding?hl=th)
+Il seguente esempio mostra il caricamento di immagini codificate `base64`.
+Per più immagini, payload più grandi e tipi MIME supportati, consulta la pagina [Comprensione
+delle immagini](https://ai.google.dev/gemini-api/docs/image-understanding?hl=it).
 
 ### Python
 
@@ -471,10 +473,11 @@ curl -s -X POST \
     }"
 ```
 
-### การแต่งภาพแบบหลายรอบ
+### Modifica di immagini in più passaggi
 
-สร้างและแก้ไขรูปภาพต่อไปด้วยการสนทนา การแชทหรือการสนทนาแบบหลายรอบเป็นวิธีที่แนะนำในการทำซ้ำรูปภาพ ตัวอย่างต่อไปนี้
-แสดงพรอมต์เพื่อสร้างอินโฟกราฟิกเกี่ยวกับกระบวนการสังเคราะห์แสง
+Continua a generare e modificare immagini in modo conversazionale. La chat o la conversazione multi-turno
+è il modo consigliato per iterare le immagini. L'esempio
+seguente mostra un prompt per generare un'infografica sulla fotosintesi.
 
 ### Python
 
@@ -665,11 +668,11 @@ curl -s -X POST \
   }'
 ```
 
-![อินโฟกราฟิกที่ AI สร้างขึ้นเกี่ยวกับการสังเคราะห์ด้วยแสง](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=th)
+![Infografica creata con l&#39;AI sulla fotosintesi](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=it)
 
-อินโฟกราฟิกเกี่ยวกับกระบวนการสังเคราะห์แสงที่ AI สร้างขึ้น
+Infografica creata con l'AI sulla fotosintesi
 
-จากนั้นคุณสามารถใช้แชทเดียวกันเพื่อเปลี่ยนภาษาในกราฟิกเป็นภาษาสเปน
+Puoi quindi utilizzare la stessa chat per cambiare la lingua del grafico in spagnolo.
 
 ### Python
 
@@ -817,41 +820,38 @@ curl -s -X POST \
   }'
 ```
 
-![อินโฟกราฟิกเกี่ยวกับกระบวนการสังเคราะห์แสงที่ AI สร้างขึ้นเป็นภาษาสเปน](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=th)
+![Infografica creata con l&#39;AI sulla fotosintesi in spagnolo](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=it)
 
-อินโฟกราฟิกเกี่ยวกับกระบวนการสังเคราะห์แสงที่ AI สร้างขึ้นเป็นภาษาสเปน
+Infografica generata con l'AI sulla fotosintesi in spagnolo
 
-## ฟีเจอร์ใหม่ในโมเดลรูปภาพ Gemini 3
+## Novità dei modelli Gemini 3 Image
 
-Gemini 3 มีโมเดลการสร้างและแก้ไขรูปภาพที่ล้ำสมัย Gemini 3.1
-Flash Image ได้รับการเพิ่มประสิทธิภาพเพื่อความเร็วและกรณีการใช้งานที่มีปริมาณสูง ส่วน Gemini 3
-Pro Image ได้รับการเพิ่มประสิทธิภาพเพื่อการผลิตชิ้นงานระดับมืออาชีพ
-ออกแบบมาเพื่อจัดการเวิร์กโฟลว์ที่ท้าทายที่สุดผ่านการให้เหตุผลขั้นสูง
-จึงทำงานสร้างสรรค์และแก้ไขที่ซับซ้อนแบบหลายรอบได้ดี
+Gemini 3 offre modelli all'avanguardia per la generazione e la modifica di immagini. Gemini 3.1
+Flash Image è ottimizzato per la velocità e i casi d'uso ad alto volume, mentre Gemini 3
+Pro Image è ottimizzato per la produzione di asset professionali.
+Progettati per affrontare i workflow più impegnativi grazie al ragionamento avanzato,
+sono ideali per attività di creazione e modifica complesse e in più passaggi.
 
-- **เอาต์พุตความละเอียดสูง**: ความสามารถในการสร้างภาพความละเอียด 1K, 2K และ 4K ในตัว
-  - **รูปภาพ Gemini 3.1 Flash** เพิ่มความละเอียด 512 (0.5K) ที่เล็กลง
-- **การแสดงข้อความขั้นสูง**: สามารถสร้างข้อความที่อ่านได้และมีสไตล์สำหรับ
-  อินโฟกราฟิก เมนู ไดอะแกรม และชิ้นงานทางการตลาด
-- **การเชื่อมต่อแหล่งข้อมูลกับ Google Search**: โมเดลสามารถใช้ Google Search เป็นเครื่องมือเพื่อยืนยันข้อเท็จจริงและสร้างภาพโดยอิงตามข้อมูลแบบเรียลไทม์ (เช่น แผนที่สภาพอากาศปัจจุบัน แผนภูมิหุ้น เหตุการณ์ล่าสุด)
-  - **รูปภาพ Gemini 3.1 Flash** เพิ่มการผสานรวมการเชื่อมต่อแหล่งข้อมูลกับ Google Search สำหรับ Google รูปภาพควบคู่ไปกับ Web Search
-- **โหมดการคิด**: โมเดลใช้กระบวนการ "การคิด" เพื่อให้เหตุผลผ่านพรอมต์ที่ซับซ้อน
-  โดยจะสร้าง "ภาพความคิด" ชั่วคราว (มองเห็นได้ในแบ็กเอนด์
-  แต่ไม่มีการเรียกเก็บเงิน) เพื่อปรับแต่งองค์ประกอบก่อนที่จะสร้างเอาต์พุตคุณภาพสูง
-  ขั้นสุดท้าย
-- **รูปภาพอ้างอิงสูงสุด 14 รูป**: ตอนนี้คุณสามารถผสมรูปภาพอ้างอิงได้สูงสุด 14 รูปเพื่อ
-  สร้างรูปภาพสุดท้าย
-- **สัดส่วนภาพใหม่**: ตัวอย่างรูปภาพ Gemini 3.1 Flash เพิ่ม[สัดส่วนภาพ](#aspect_ratios_and_image_size) 1:4, 4:1, 1:8 และ 8:1
+- **Output ad alta risoluzione**: funzionalità di generazione integrate per immagini 1K, 2K e 4K.
+  - **Gemini 3.1 Flash Image** aggiunge la risoluzione più piccola di 512 (0,5 K).
+- **Rendering avanzato del testo**: in grado di generare testo leggibile e stilizzato per
+  infografiche, menu, diagrammi e asset di marketing.
+- **Grounding con la Ricerca Google**: il modello può utilizzare la Ricerca Google come strumento per verificare i fatti e generare immagini basate su dati in tempo reale (ad es. mappe meteo attuali, grafici azionari, eventi recenti).
+  - **Gemini 3.1 Flash Image** aggiunge l'integrazione di Grounding con la Ricerca Google per le immagini insieme alla Ricerca web.
+- **Modalità di pensiero**: il modello utilizza un processo di "pensiero" per ragionare su prompt complessi. Genera "immagini di pensiero" provvisorie (visibili nel backend ma non addebitate) per perfezionare la composizione prima di produrre l'output finale di alta qualità.
+- **Fino a 14 immagini di riferimento**: ora puoi combinare fino a 14 immagini di riferimento per
+  produrre l'immagine finale.
+- **Nuove proporzioni**: l'anteprima di Gemini 3.1 Flash Image aggiunge le [proporzioni](#aspect_ratios_and_image_size) 1:4, 4:1, 1:8 e 8:1.
 
-### ใช้รูปภาพอ้างอิงได้สูงสุด 14 รูป
+### Utilizza fino a 14 immagini di riferimento
 
-โมเดลรูปภาพของ Gemini 3 ช่วยให้คุณผสมรูปภาพอ้างอิงได้สูงสุด 14 รูป รูปภาพทั้ง 14 รูป
-อาจมีลักษณะต่อไปนี้
+I modelli di immagini Gemini 3 ti consentono di combinare fino a 14 immagini di riferimento. Queste 14 immagini
+possono includere:
 
-| เวอร์ชันตัวอย่างของรูปภาพ Gemini 3.1 Flash | ตัวอย่างรูปภาพ Gemini 3 Pro |
+| Gemini 3.1 Flash Image (anteprima) | Anteprima di Gemini 3 Pro Image |
 | --- | --- |
-| รูปภาพวัตถุที่มีความเที่ยงตรงสูงสูงสุด 10 ภาพที่จะรวมไว้ในรูปภาพสุดท้าย | รูปภาพวัตถุที่มีความเที่ยงตรงสูงสูงสุด 6 ภาพเพื่อรวมไว้ในรูปภาพสุดท้าย |
-| รูปภาพตัวละครสูงสุด 4 รูปเพื่อรักษาความสอดคล้องของตัวละคร | รูปภาพตัวละครสูงสุด 5 รูปเพื่อรักษาความสอดคล้องของตัวละคร |
+| Fino a 10 immagini di oggetti ad alta fedeltà da includere nell'immagine finale | Fino a 6 immagini di oggetti ad alta fedeltà da includere nell'immagine finale |
+| Fino a 4 immagini di personaggi per mantenere la coerenza | Fino a 5 immagini di personaggi per mantenere la coerenza |
 
 ### Python
 
@@ -1119,17 +1119,19 @@ curl -s -X POST \
     }"
 ```
 
-![รูปภาพกลุ่มในออฟฟิศที่ AI สร้างขึ้น](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=th)
+![Foto di gruppo di un ufficio creata con l&#39;AI](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=it)
 
-รูปภาพหมู่ในออฟฟิศที่ AI สร้างขึ้น
+Foto di gruppo in ufficio generata con l'AI
 
-### การเชื่อมต่อแหล่งข้อมูลกับ Google Search
+### Grounding con la Ricerca Google
 
-ใช้[เครื่องมือ Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th) เพื่อสร้างรูปภาพ
-โดยอิงตามข้อมูลแบบเรียลไทม์ เช่น พยากรณ์อากาศ แผนภูมิหุ้น หรือ
-เหตุการณ์ล่าสุด
+Utilizza lo [strumento Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it) per generare immagini
+basate su informazioni in tempo reale, come previsioni meteo, grafici azionari o
+eventi recenti.
 
-โปรดทราบว่าเมื่อใช้การเชื่อมต่อแหล่งข้อมูลกับ Google Search ร่วมกับการสร้างรูปภาพ ระบบจะไม่ส่งผลการค้นหาตามรูปภาพไปยังโมเดลการสร้าง และจะยกเว้นออกจากคำตอบ (ดู[การเชื่อมต่อแหล่งข้อมูลกับ Google Search สำหรับรูปภาพ](#image-search))
+Tieni presente che quando utilizzi il Grounding con la Ricerca Google con la generazione di immagini,
+i risultati di ricerca basati su immagini non vengono passati al modello di generazione e sono
+esclusi dalla risposta (vedi [Grounding con la Ricerca Google per le immagini](#image-search)).
 
 ### Python
 
@@ -1271,26 +1273,26 @@ curl -s -X POST \
   }'
 ```
 
-![แผนภูมิสภาพอากาศ 5 วันที่ AI สร้างขึ้นสำหรับซานฟรานซิสโก](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=th)
+![Grafico meteo di cinque giorni creato con l&#39;AI per San Francisco](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=it)
 
-แผนภูมิสภาพอากาศ 5 วันสำหรับซานฟรานซิสโกที่ AI สร้างขึ้น
+Grafico meteo di cinque giorni generato con l'AI per San Francisco
 
-การตอบกลับมี `groundingMetadata` ซึ่งมีช่องที่จำเป็นต่อไปนี้
+La risposta include `groundingMetadata`, che contiene i seguenti campi obbligatori:
 
-- **`searchEntryPoint`**: มี HTML และ CSS เพื่อแสดงผลคำแนะนำในการค้นหาที่จำเป็น
-- **`groundingChunks`**: แสดงผลแหล่งที่มาบนเว็บ 3 อันดับแรกที่ใช้เป็นพื้นฐานสำหรับ
-  รูปภาพที่สร้างขึ้น
+- **`searchEntryPoint`**: contiene HTML e CSS per il rendering dei suggerimenti di ricerca richiesti.
+- **`groundingChunks`**: restituisce le prime tre fonti web utilizzate per basare l'immagine generata
 
-### การเชื่อมต่อแหล่งข้อมูลกับ Google Search สำหรับรูปภาพ (3.1 Flash)
+### Grounding con la Ricerca Google per immagini (3.1 Flash)
 
-การเชื่อมต่อแหล่งข้อมูลกับ Google Search สำหรับรูปภาพช่วยให้โมเดลใช้รูปภาพบนเว็บที่ดึงข้อมูลผ่าน Google Search เป็นบริบทภาพสำหรับการสร้างรูปภาพได้ การค้นหารูปภาพเป็น
-การค้นหาประเภทใหม่ภายในเครื่องมือการอ้างอิงด้วย Google Search ที่มีอยู่
-ซึ่งทำงานควบคู่ไปกับ[การค้นเว็บ](#use-with-grounding)มาตรฐาน
+La fondatezza con la Ricerca Google per le immagini consente ai modelli di utilizzare le immagini web recuperate tramite la Ricerca Google come contesto visivo per la generazione di immagini. La ricerca di immagini è un
+nuovo tipo di ricerca all'interno dello strumento esistente Grounding con la Ricerca Google,
+che funziona insieme alla [ricerca web](#use-with-grounding) standard.
 
-หากต้องการเปิดใช้การค้นหารูปภาพ ให้กำหนดค่าเครื่องมือ `googleSearch` ในคำขอ API
-และระบุ `imageSearch` ภายในออบเจ็กต์ `searchTypes` คุณใช้ Image Search แยกต่างหากหรือร่วมกับ Web Search ก็ได้
+Per attivare la ricerca immagini, configura lo strumento `googleSearch` nella richiesta API
+e specifica `imageSearch` all'interno dell'oggetto `searchTypes`. La ricerca di immagini può essere
+utilizzata in modo indipendente o insieme alla ricerca sul web.
 
-โปรดทราบว่าคุณไม่สามารถใช้การเชื่อมต่อแหล่งข้อมูลกับ Google Search สำหรับรูปภาพเพื่อค้นหาบุคคลได้
+Tieni presente che la funzionalità di grounding con la Ricerca Google per le immagini non può essere utilizzata per cercare persone.
 
 ### Python
 
@@ -1424,36 +1426,39 @@ curl -s -X POST \
   }'
 ```
 
-**ข้อกำหนดในการแสดงผล**
+**Requisiti di visualizzazione**
 
-เมื่อใช้การค้นหารูปภาพภายใน การเชื่อมต่อแหล่งข้อมูลกับ Google Search คุณต้องปฏิบัติตามเงื่อนไขต่อไปนี้
+Quando utilizzi la ricerca immagini all'interno di Grounding con la Ricerca Google, devi rispettare
+le seguenti condizioni:
 
-- **การระบุแหล่งที่มา**: คุณต้องระบุลิงก์ไปยังหน้าเว็บที่มีรูปภาพต้นฉบับ ("หน้าที่มีรูปภาพ" ไม่ใช่ไฟล์รูปภาพเอง) ในลักษณะที่ผู้ใช้จะจดจำได้ว่าเป็นลิงก์
-- **การนำทางโดยตรง**: หากเลือกแสดงรูปภาพต้นฉบับด้วย คุณต้องระบุเส้นทางแบบคลิกเดียวโดยตรงจากรูปภาพต้นฉบับไปยังหน้าเว็บต้นฉบับที่มีรูปภาพนั้น การติดตั้งใช้งานอื่นๆ ที่ทำให้การเข้าถึงหน้าเว็บแหล่งที่มาของผู้ใช้ปลายทางล่าช้าหรือซับซ้อน รวมถึงแต่ไม่จำกัดเพียงเส้นทางแบบหลายคลิกหรือการใช้โปรแกรมดูรูปภาพขั้นกลาง จะไม่ได้รับอนุญาต
+- **Attribuzione della fonte**: devi fornire un link alla pagina web contenente
+  l'immagine di origine (la "pagina contenente", non il file immagine stesso) in un
+  modo che l'utente riconoscerà come link.
+- **Navigazione diretta**: se scegli anche di mostrare le immagini di origine, devi fornire un percorso diretto con un solo clic dalle immagini di origine alla pagina web di origine che le contiene. Non è consentita qualsiasi altra implementazione che ritardi o astragga l'accesso dell'utente finale alla pagina web di origine, inclusi, a titolo esemplificativo ma non esaustivo, qualsiasi percorso a più clic o l'utilizzo di un visualizzatore di immagini intermedio.
 
-**การตอบกลับ**
+**Risposta**
 
-สำหรับคำตอบที่อิงตามข้อมูลจริงโดยใช้การค้นหารูปภาพ API จะให้การระบุแหล่งที่มาที่ชัดเจน
-และข้อมูลเมตาเพื่อลิงก์เอาต์พุตกับแหล่งที่มาที่ได้รับการยืนยัน ฟิลด์หลักในออบเจ็กต์
-`groundingMetadata` มีดังนี้
+Per le risposte basate sulla ricerca immagini, l'API fornisce un'attribuzione chiara
+e metadati per collegare il suo output a fonti verificate. I campi chiave nell'oggetto
+`groundingMetadata` includono:
 
-- **`imageSearchQueries`**: คำค้นหาที่เฉพาะเจาะจงซึ่งโมเดลใช้สำหรับบริบทภาพ (การค้นหารูปภาพ)
-- **`groundingChunks`**: มีข้อมูลแหล่งที่มาสำหรับผลการค้นหาที่ดึงข้อมูล
-  สำหรับแหล่งที่มาของรูปภาพ ระบบจะแสดงผลเป็น URL เปลี่ยนเส้นทางโดยใช้ประเภทก้อนข้อมูลรูปภาพใหม่
-  โดยส่วนนี้ประกอบด้วย
+- **`imageSearchQueries`**: le query specifiche utilizzate dal modello per il contesto visivo (ricerca immagini).
+- **`groundingChunks`**: contiene le informazioni sull'origine dei risultati recuperati.
+  Per le origini immagini, questi verranno restituiti come URL di reindirizzamento utilizzando un nuovo tipo di chunk
+  immagine. Questo blocco include:
 
-  - **`uri`**: URL ของหน้าเว็บสำหรับการระบุแหล่งที่มา (หน้า Landing Page)
-  - **`image_uri`**: URL ของรูปภาพโดยตรง
-- **`groundingSupports`**: ระบุการแมปที่เฉพาะเจาะจงซึ่งลิงก์เนื้อหาที่สร้างขึ้น
-  ไปยังแหล่งที่มาของการอ้างอิงที่เกี่ยวข้องในก้อนข้อมูล
-- **`searchEntryPoint`**: มีชิป "Google Search" ที่มี HTML และ CSS ที่เป็นไปตามข้อกำหนดเพื่อแสดงผลคำแนะนำในการค้นหา
+  - **`uri`**: l'URL della pagina web per l'attribuzione (la pagina di destinazione).
+  - **`image_uri`**: l'URL diretto dell'immagine.
+- **`groundingSupports`**: fornisce mappature specifiche che collegano i contenuti generati alla fonte di citazione pertinente nei blocchi.
+- **`searchEntryPoint`**: include il chip "Ricerca Google" contenente
+  HTML e CSS conformi per il rendering dei suggerimenti di ricerca.
 
-### สร้างรูปภาพที่มีความละเอียดสูงสุด 4K
+### Generare immagini con una risoluzione fino a 4K
 
-โมเดลรูปภาพ Gemini 3 จะสร้างรูปภาพขนาด 1K โดยค่าเริ่มต้น แต่ก็สามารถแสดงรูปภาพขนาด 2K, 4K และ 512 (0.5K) (รูปภาพ Gemini 3.1 Flash เท่านั้น) ได้เช่นกัน หากต้องการสร้างชิ้นงานที่มีความละเอียดสูงขึ้น
-ให้ระบุ `image_size` ใน `generation_config`
+I modelli di immagini Gemini 3 generano per impostazione predefinita 1000 immagini, ma possono anche produrre immagini a 2000, 4000 e 512 (0,5 K) (solo Gemini 3.1 Flash Image). Per generare asset
+con una risoluzione più elevata, specifica `image_size` in `generation_config`.
 
-คุณต้องใช้ตัว "K" พิมพ์ใหญ่ (เช่น 1K, 2K, 4K) ค่า `512` ไม่ได้ใช้คำต่อท้าย "K" ระบบจะปฏิเสธพารามิเตอร์ตัวพิมพ์เล็ก (เช่น 1k)
+Devi utilizzare una "K" maiuscola (ad es. 1K, 2K, 4K). Il valore `512` non utilizza il suffisso "K". I parametri in minuscolo (ad es. 1k) verranno rifiutati.
 
 ### Python
 
@@ -1646,20 +1651,19 @@ curl -s -X POST \
   }'
 ```
 
-ต่อไปนี้เป็นตัวอย่างรูปภาพที่สร้างขึ้นจากพรอมต์นี้
+Di seguito è riportata un'immagine di esempio generata da questo prompt:
 
-![ภาพร่างกายวิภาคสไตล์ดาวินชีที่ AI สร้างขึ้นของผีเสื้อจักรพรรดิที่ผ่าตัด](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=th)
+![Schizzo anatomico in stile Da Vinci di una farfalla monarca sezionata, creato con l&#39;AI.](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=it)
 
-ภาพร่างกายวิภาคของผีเสื้อจักรพรรดิที่ผ่าตัดแล้วในสไตล์ของดาวินชีซึ่ง AI สร้างขึ้น
+Schizzo anatomico in stile Da Vinci di una farfalla monarca sezionata creato con l'AI.
 
-### กระบวนการคิด
+### Procedura di ragionamento
 
-โมเดลรูปภาพ Gemini 3 เป็นโมเดลการคิดที่ใช้กระบวนการให้เหตุผล ("การคิด") สำหรับพรอมต์ที่ซับซ้อน ฟีเจอร์นี้เปิดใช้อยู่โดยค่าเริ่มต้นและ
-ปิดใช้ใน API ไม่ได้ ดูข้อมูลเพิ่มเติมเกี่ยวกับกระบวนการคิดได้ที่คำแนะนำ[การคิดของ Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=th)
+I modelli di immagine Gemini 3 sono modelli di ragionamento che utilizzano un processo di ragionamento ("Ragionamento") per i prompt complessi. Questa funzionalità è attivata per impostazione predefinita e non può essere disattivata nell'API. Per saperne di più sul processo di pensiero, consulta la guida [Il ragionamento di Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=it).
 
-โมเดลจะสร้างรูปภาพชั่วคราวสูงสุด 2 รูปเพื่อทดสอบองค์ประกอบและตรรกะ รูปภาพสุดท้ายในส่วน "กำลังคิด" คือรูปภาพสุดท้ายที่แสดงผล
+Il modello genera fino a due immagini provvisorie per testare la composizione e la logica. L'ultima immagine all'interno di Ragionamento è anche l'immagine di rendering finale.
 
-คุณสามารถดูความคิดที่นำไปสู่การสร้างรูปภาพสุดท้ายได้
+Puoi controllare i pensieri che hanno portato alla produzione dell'immagine finale.
 
 ### Python
 
@@ -1689,13 +1693,15 @@ for (const part of response.candidates[0].content.parts) {
 }
 ```
 
-#### การควบคุมระดับการคิด
+#### Controllare i livelli di pensiero
 
-Gemini 3.1 Flash Image ช่วยให้คุณควบคุมปริมาณการคิดของโมเดล เพื่อรักษาสมดุลระหว่างคุณภาพและเวลาในการตอบสนองได้ ค่าเริ่มต้น `thinkingLevel` คือ `minimal`
-และระดับที่รองรับคือ `minimal` และ `high` การตั้งค่า `thinkingLevel` เป็น `minimal` จะให้การตอบสนองที่มีเวลาในการตอบสนองต่ำที่สุด โปรดทราบว่า
-การคิดขั้นต่ำไม่ได้หมายความว่าโมเดลจะไม่ใช้การคิดเลย
+Con Gemini 3.1 Flash Image, puoi controllare la quantità di ragionamento utilizzata dal modello
+per bilanciare qualità e latenza. Il valore predefinito di `thinkingLevel` è `minimal`,
+mentre i livelli supportati sono `minimal` e `high`. L'impostazione di
+`thinkingLevel` su `minimal` fornisce le risposte con la latenza più bassa. Tieni presente che
+il pensiero minimo non significa che il modello non utilizzi alcun pensiero.
 
-คุณสามารถเพิ่ม`includeThoughts`บูลีนเพื่อกำหนดว่าจะแสดงความคิดที่โมเดลสร้างขึ้นในการตอบกลับหรือซ่อนไว้
+Puoi aggiungere il valore booleano `includeThoughts` per determinare se i pensieri generati dal modello vengono restituiti nella risposta o rimangono nascosti.
 
 ### Python
 
@@ -1835,22 +1841,26 @@ curl -s -X POST \
   }'
 ```
 
-โปรดทราบว่าระบบจะเรียกเก็บเงินสำหรับโทเค็นการคิดไม่ว่า `includeThoughts` จะตั้งค่าเป็น `true` หรือ `false` เนื่องจาก[กระบวนการคิด](#thinking-process)จะเกิดขึ้นโดยค่าเริ่มต้นเสมอไม่ว่าคุณจะดูกระบวนการนี้หรือไม่ก็ตาม
+Tieni presente che i token di pensiero vengono fatturati indipendentemente dal fatto che `includeThoughts` sia
+impostato su `true` o `false`, poiché il [processo di pensiero](#thinking-process) avviene sempre
+per impostazione predefinita, indipendentemente dal fatto che tu lo visualizzi o meno.
 
-#### ลายเซ็นความคิด
+#### Firme dei pensieri
 
-ลายเซ็นความคิดคือการแสดงที่เข้ารหัสของกระบวนการคิดภายในของโมเดล และใช้เพื่อรักษาบริบทการให้เหตุผลในการโต้ตอบแบบหลายรอบ คำตอบทั้งหมดจะมี`thought_signature`
-ฟิลด์ โดยทั่วไปแล้ว หากคุณได้รับลายเซ็นความคิดในคำตอบของโมเดล คุณควรส่งลายเซ็นกลับไปตามที่ได้รับเมื่อส่งประวัติการสนทนาในรอบถัดไป การไม่เผยแพร่ลายเซ็นความคิด
-อาจทำให้การตอบกลับไม่สำเร็จ ดูคำอธิบายเพิ่มเติมเกี่ยวกับลายเซ็นโดยรวมได้ในเอกสารประกอบเกี่ยวกับ[ลายเซ็นความคิด](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=th)
+Le firme del pensiero sono rappresentazioni criptate del
+processo di pensiero interno del modello e vengono utilizzate per preservare il contesto del ragionamento
+nelle interazioni multi-turno. Tutte le risposte includono un campo `thought_signature`. Come regola generale, se ricevi una firma del pensiero nella risposta di un modello, devi restituirla esattamente come l'hai ricevuta quando invii la cronologia della conversazione nel turno successivo. La mancata circolazione delle firme del pensiero
+potrebbe causare l'esito negativo della risposta. Per ulteriori spiegazioni sulle firme in generale, consulta la documentazione relativa alla [firma del pensiero](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=it).
 
-วิธีการทำงานของลายเซ็นความคิดมีดังนี้
+Ecco come funzionano le firme dei pensieri:
 
-- `inline_data` ส่วนทั้งหมดที่มีรูปภาพ`mimetype`ซึ่งเป็นส่วนหนึ่งของการตอบกลับ
-  ควรมีลายเซ็น
-- หากมีข้อความบางส่วนที่ตอนต้น (ก่อนรูปภาพ) ทันทีหลังจากความคิดเห็น ข้อความส่วนแรกควรมีลายเซ็นด้วย
-- หาก`inline_data`ชิ้นส่วนที่มีรูปภาพ`mimetype`เป็นส่วนหนึ่งของความคิด ระบบจะไม่ใส่ลายเซ็น
+- Tutte le parti `inline_data` con l'immagine `mimetype` che fanno parte della risposta
+  devono avere una firma.
+- Se all'inizio (prima di qualsiasi immagine) sono presenti alcune parti di testo subito dopo
+  i pensieri, anche la prima parte di testo deve avere una firma.
+- Se le `inline_data` parti con l'immagine `mimetype` fanno parte dei pensieri, non avranno firme.
 
-โค้ดต่อไปนี้แสดงตัวอย่างตำแหน่งที่รวมลายเซ็นความคิด
+Il seguente codice mostra un esempio di dove sono incluse le firme dei pensieri:
 
 ```
 [
@@ -1910,210 +1920,210 @@ curl -s -X POST \
 ]
 ```
 
-## โหมดการสร้างรูปภาพอื่นๆ
+## Altre modalità di generazione di immagini
 
-Gemini รองรับโหมดการโต้ตอบกับรูปภาพอื่นๆ ตามโครงสร้างพรอมต์และบริบท ซึ่งรวมถึง
+Gemini supporta altre modalità di interazione con le immagini in base alla struttura e al contesto del prompt, tra cui:
 
-- **ข้อความเป็นรูปภาพและข้อความ (สลับ):** แสดงรูปภาพพร้อมข้อความที่เกี่ยวข้อง
-  - ตัวอย่างพรอมต์: "สร้างสูตรปาเอญ่าพร้อมภาพประกอบ"
-- **รูปภาพและข้อความเป็นรูปภาพและข้อความ (แทรกสลับ)**: ใช้รูปภาพและข้อความที่ป้อนเพื่อสร้างรูปภาพและข้อความใหม่ที่เกี่ยวข้อง
-  - ตัวอย่างพรอมต์: (พร้อมรูปภาพห้องที่มีเฟอร์นิเจอร์) "โซฟาสีอื่นจะเข้ากับพื้นที่ของฉันไหม อัปเดตรูปภาพได้ไหม"
+- **Da testo a immagini e testo (alternato)**: restituisce immagini con testo correlato.
+  - Prompt di esempio: "Genera una ricetta illustrata per una paella".
+- **Immagini e testo in immagini e testo (interleaved)**: utilizza immagini e testo di input per creare nuove immagini e testo correlati.
+  - Prompt di esempio: (con un'immagine di una stanza arredata) "Quali altri divani di colore diverso si adatterebbero al mio spazio? Puoi aggiornare l'immagine?"
 
-## สร้างรูปภาพเป็นชุด
+## Generare immagini in batch
 
-หากต้องการสร้างรูปภาพจำนวนมาก ให้ใช้ [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th) คุณจะได้รับ[ขีดจำกัดอัตรา](https://ai.google.dev/gemini-api/docs/rate-limits?hl=th)ที่สูงขึ้น
-เพื่อแลกกับการดำเนินการที่ใช้เวลาไม่เกิน
-24 ชั่วโมง
+Se devi generare molte immagini, puoi utilizzare l'[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=it). In cambio di un tempo di risposta fino a 24 ore, ottieni limiti di frequenza
+[più elevati](https://ai.google.dev/gemini-api/docs/rate-limits?hl=it).
 
-ดู[เอกสารประกอบการสร้างรูปภาพด้วย Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th#image-generation) และ[สูตรการใช้งาน](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=th)
-เพื่อดูตัวอย่างรูปภาพและโค้ดของ Batch API
+Consulta la [documentazione sulla generazione di immagini dell'API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=it#image-generation) e il [cookbook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=it)
+per esempi e codice di immagini dell'API Batch.
 
-## คำแนะนำและกลยุทธ์ในการเขียนพรอมต์
+## Guida e strategie per i prompt
 
-การสร้างรูปภาพอย่างเชี่ยวชาญเริ่มต้นด้วยหลักการพื้นฐานข้อเดียว
+Per padroneggiare la generazione di immagini, devi partire da un principio fondamentale:
 
-> **อธิบายฉาก อย่าเพียงแค่แสดงรายการคีย์เวิร์ด**
-> จุดแข็งหลักของโมเดลคือความเข้าใจภาษาอย่างลึกซึ้ง ย่อหน้าแบบบรรยาย
-> ที่อธิบายรายละเอียดจะสร้างรูปภาพที่ดีขึ้นและสอดคล้องกันมากกว่า
-> รายการคำที่ไม่ได้เชื่อมต่อกันเกือบทุกครั้ง
+> **Descrivi la scena, non elencare solo le parole chiave.**
+> Il punto di forza principale del modello è la sua profonda comprensione del linguaggio. Un paragrafo narrativo e descrittivo produrrà quasi sempre un'immagine migliore e più coerente rispetto a un elenco di parole scollegate.
 
-### พรอมต์สำหรับการสร้างรูปภาพ
+### Prompt per la generazione di immagini
 
-กลยุทธ์ต่อไปนี้จะช่วยให้คุณสร้างพรอมต์ที่มีประสิทธิภาพเพื่อ
-สร้างรูปภาพที่คุณต้องการได้อย่างแม่นยำ
+Le seguenti strategie ti aiuteranno a creare prompt efficaci per
+generare esattamente le immagini che stai cercando.
 
-#### การถ่ายภาพ
+#### Fotografia
 
-หากต้องการรูปภาพที่สมจริง ให้ใช้คำศัพท์เกี่ยวกับการถ่ายภาพ ระบุมุมกล้อง ประเภทเลนส์
-แสง และรายละเอียดเล็กๆ น้อยๆ เพื่อนำโมเดลไปสู่ผลลัพธ์ที่สมจริง
+Per immagini realistiche, utilizza termini fotografici. Menziona angolazioni della videocamera, tipi di obiettivo,
+illuminazione e dettagli precisi per guidare il modello verso un risultato realistico.
 
-| **พรอมต์** | **เอาต์พุตที่ได้** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| ภาพถ่ายระยะใกล้ของช่างเซรามิกชาวญี่ปุ่นสูงวัยที่มีรอยเหี่ยวย่นลึกที่เกิดจากแสงแดดและรอยยิ้มที่อบอุ่นและรู้ทัน เขากำลังตรวจสอบชามชาที่เพิ่งเคลือบอย่างละเอียด ฉากหลังเป็นเวิร์กช็อปแบบเรียบง่ายที่สว่างไสวด้วยแสงแดด ฉากนี้สว่างด้วยแสงอ่อนๆ ในช่วงเวลาแสงสีทองที่ส่องผ่านหน้าต่าง ซึ่งช่วยขับเน้นพื้นผิวที่ละเอียดของดิน ถ่ายด้วยเลนส์ภาพบุคคล 85 มม. ทำให้ได้พื้นหลังที่เบลออย่างนุ่มนวล (โบเก้) ให้บรรยากาศโดยรวมดูสงบและเชี่ยวชาญ การวางแนวตั้ง | ช่างปั้นเซรามิกชาวญี่ปุ่นสูงวัย |
+| Una foto di un ritratto in primo piano di un ceramista giapponese anziano con rughe profonde e incise dal sole e un sorriso caloroso e consapevole. Sta esaminando attentamente una ciotola da tè appena smaltata. L'ambientazione è il suo laboratorio rustico e assolato. La scena è illuminata da una luce soffusa dell'ora d'oro che entra da una finestra, mettendo in risalto la trama fine dell'argilla. Scattata con un obiettivo da ritratto da 85 mm, con uno sfondo morbido e sfocato (bokeh). L'atmosfera generale è serena e magistrale. Orientamento verticale. | Ceramista giapponese anziano |
 
-#### ภาพวาดและสติกเกอร์ที่มีสไตล์
+#### Illustrazioni e adesivi stilizzati
 
-หากต้องการสร้างสติกเกอร์ ไอคอน หรือชิ้นงาน ให้ระบุสไตล์อย่างชัดเจนและขอ
-พื้นหลังสีขาว
+Per creare adesivi, icone o asset, specifica lo stile e richiedi uno
+sfondo bianco.
 
-| **พรอมต์** | **เอาต์พุตที่ได้** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| สติกเกอร์สไตล์คาวาอี้ของแพนด้าแดงที่มีความสุขสวมหมวกไม้ไผ่ใบเล็ก มันกำลังแทะใบไผ่สีเขียว การออกแบบมีโครงร่างที่ชัดเจนและสะอาดตา การแรเงาแบบเซลที่เรียบง่าย และชุดสีสดใส พื้นหลังต้องเป็นสีขาว | สติกเกอร์แพนด้าแดงคาวาอี้ |
+| Un adesivo in stile kawaii di un panda rosso felice che indossa un piccolo cappello di bambù. Sta mangiando una foglia di bambù verde. Il design è caratterizzato da contorni spessi e puliti, cel-shading semplice e una tavolozza di colori vivaci. Lo sfondo deve essere bianco. | Adesivo del panda rosso kawaii |
 
-#### ข้อความที่ถูกต้องในรูปภาพ
+#### Testo accurato nelle immagini
 
-Gemini ทำงานได้ดีในการแสดงข้อความ ระบุข้อความ รูปแบบแบบอักษร
-(เชิงพรรณนา) และการออกแบบโดยรวมให้ชัดเจน ใช้ตัวอย่างรูปภาพ Gemini 3 Pro สำหรับ
-การผลิตชิ้นงานระดับมืออาชีพ
+Gemini eccelle nel rendering del testo. Descrivi in modo chiaro il testo, lo stile del carattere e il design complessivo. Utilizza l'anteprima di Gemini 3 Pro Image per
+la produzione di asset professionali.
 
-| **พรอมต์** | **เอาต์พุตที่ได้** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| สร้างโลโก้ที่ทันสมัยและเรียบง่ายสำหรับร้านกาแฟชื่อ "The Daily Grind" ข้อความควรอยู่ในแบบอักษร Sans Serif ที่สะอาดตาและตัวหนา รูปแบบสีเป็นสีขาวดำ ใส่โลโก้ในวงกลม ใช้เมล็ดกาแฟอย่างชาญฉลาด | โลโก้ร้านกาแฟ |
+| Crea un logo moderno e minimalista per una caffetteria chiamata "The Daily Grind". Il testo deve essere in un carattere sans serif pulito e in grassetto. La combinazione di colori è in bianco e nero. Inserisci il logo in un cerchio. Utilizza un chicco di caffè in modo intelligente. | Logo della caffetteria |
 
-#### ภาพจำลองผลิตภัณฑ์และการถ่ายภาพเชิงพาณิชย์
+#### Mockup di prodotti e fotografia commerciale
 
-เหมาะอย่างยิ่งสำหรับการสร้างภาพผลิตภัณฑ์ที่สะอาดตาและดูเป็นมืออาชีพสำหรับอีคอมเมิร์ซ การโฆษณา หรือการสร้างแบรนด์
+Ideale per creare scatti di prodotti puliti e professionali per l'e-commerce, la pubblicità o il branding.
 
-| **พรอมต์** | **เอาต์พุตที่ได้** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| ภาพถ่ายผลิตภัณฑ์ความละเอียดสูงที่จัดแสงในสตูดิโอของแก้วกาแฟเซรามิกสไตล์มินิมอลสีดำด้านบนพื้นผิวคอนกรีตขัดเงา การจัดแสงเป็นแบบซอฟต์บ็อกซ์ 3 จุดที่ออกแบบมาเพื่อสร้างไฮไลต์ที่นุ่มนวลและกระจายแสง รวมถึงขจัดเงาที่แข็งกระด้าง มุมกล้องเป็นภาพมุมสูงเล็กน้อยที่ 45 องศาเพื่อแสดงเส้นสายที่สะอาดตา สมจริงสุดๆ โดยเน้นที่ไอน้ำที่ลอยขึ้นจากกาแฟ รูปภาพสี่เหลี่ยมจัตุรัส | ภาพผลิตภัณฑ์แก้วกาแฟมัคเซรามิก |
+| Fotografia di prodotto ad alta risoluzione illuminata in studio di una tazza da caffè in ceramica minimalista di colore nero opaco, presentata su una superficie in cemento lucido. L'illuminazione è una configurazione softbox a tre punti progettata per creare luci morbide e diffuse ed eliminare le ombre marcate. L'angolazione della videocamera è leggermente rialzata a 45 gradi per mostrare le linee pulite. Ultrarealistico, con una messa a fuoco nitida sul vapore che sale dal caffè. Immagine quadrata. | Foto del prodotto: tazza di caffè in ceramica |
 
-#### การออกแบบพื้นที่ว่างและเรียบง่าย
+#### Design minimalista e con spazio negativo
 
-เหมาะอย่างยิ่งสำหรับการสร้างพื้นหลังสำหรับเว็บไซต์ งานนำเสนอ หรือสื่อการตลาดที่จะมีการวางซ้อนข้อความ
+Ideale per creare sfondi per siti web, presentazioni o materiali di marketing
+in cui verrà sovrapposto il testo.
 
-| **พรอมต์** | **เอาต์พุตที่ได้** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| ภาพองค์ประกอบแบบมินิมอลที่มีใบเมเปิลสีแดงที่บอบบางเพียงใบเดียววางอยู่ด้านขวาล่างของเฟรม พื้นหลังเป็นผืนผ้าใบสีขาวนวลที่ว่างเปล่าและกว้างใหญ่ ทำให้เกิดพื้นที่ว่างเชิงลบที่สำคัญสำหรับข้อความ แสงนุ่มๆ กระจายจากด้านซ้ายบน รูปภาพสี่เหลี่ยมจัตุรัส | ดีไซน์เรียบง่ายพร้อมใบเมเปิลสีแดง |
+| Una composizione minimalista con una singola e delicata foglia d'acero rossa posizionata in basso a destra dell'inquadratura. Lo sfondo è una tela bianco sporco vasta e vuota, che crea uno spazio negativo significativo per il testo. Illuminazione soffusa e diffusa dalla parte superiore sinistra. Immagine quadrata. | Design minimalista con foglia d&#39;acero rossa |
 
-#### ภาพต่อเนื่อง (แผงการ์ตูน / สตอรีบอร์ด)
+#### Arte sequenziale (riquadro di fumetto / storyboard)
 
-สร้างความสอดคล้องของตัวละครและคำอธิบายฉากเพื่อสร้างแผงสำหรับ
-การเล่าเรื่องด้วยภาพ หากต้องการความแม่นยำของข้อความและความสามารถในการเล่าเรื่อง พรอมต์เหล่านี้จะทำงานได้ดีที่สุดกับ Gemini 3 Pro และตัวอย่างรูปภาพ Gemini 3.1 Flash
+Si basa sulla coerenza dei personaggi e sulla descrizione della scena per creare riquadri per
+la narrazione visiva. Per una maggiore precisione con il testo e la capacità di storytelling, questi
+prompt funzionano meglio con Gemini 3 Pro e l'anteprima di Gemini 3.1 Flash Image.
 
-| **พรอมต์** | **เอาต์พุตที่ได้** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| **รูปภาพที่ป้อน:**  ชายใส่แว่นสีขาว   รูปภาพอินพุต   **พรอมต์:** สร้างการ์ตูน 3 ช่องในสไตล์ศิลปะแบบฟิล์มนัวร์ที่สมจริงด้วยหมึกสีขาวดำที่มีคอนทราสต์สูง ใส่ตัวละครในฉากตลก | แผงการ์ตูนฟิล์มนัวร์สุดหดหู่ |
+| **Input image:**  Uomo con occhiali bianchi   Immagine di input   **Prompt:** crea un fumetto di tre vignette in uno stile artistico noir e crudo con inchiostri in bianco e nero ad alto contrasto. Inserisci il personaggio in una scena umoristica. | Vignetta di un fumetto noir crudo |
 
-#### การเชื่อมต่อแหล่งข้อมูลกับ Google Search
+#### Grounding con la Ricerca Google
 
-ใช้ Google Search เพื่อสร้างรูปภาพตามข้อมูลล่าสุดหรือข้อมูลแบบเรียลไทม์
-ซึ่งจะเป็นประโยชน์สำหรับข่าวสาร สภาพอากาศ และหัวข้ออื่นๆ ที่ต้องอัปเดตอยู่เสมอ
+Utilizza la Ricerca Google per generare immagini basate su informazioni recenti o in tempo reale.
+Questa funzionalità è utile per notizie, meteo e altri argomenti urgenti.
 
-| **พรอมต์** | **เอาต์พุตที่ได้** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| สร้างกราฟิกเรียบง่ายแต่มีสไตล์ของการแข่งขันของอาร์เซนอลเมื่อคืนในแชมเปียนส์ลีก | กราฟิกคะแนนฟุตบอลอาร์เซนอล |
+| Crea una grafica semplice ma elegante della partita di ieri sera dell'Arsenal in Champions League | Grafica del risultato della partita di calcio dell&#39;Arsenal |
 
-### พรอมต์สำหรับการแก้ไขรูปภาพ
+### Prompt per la modifica delle immagini
 
-ตัวอย่างเหล่านี้แสดงวิธีระบุรูปภาพพร้อมกับพรอมต์ข้อความสำหรับการ
-แก้ไข องค์ประกอบ และการโอนสไตล์
+Questi esempi mostrano come fornire immagini insieme ai prompt di testo per la modifica, la composizione e il trasferimento dello stile.
 
-#### การเพิ่มและนำองค์ประกอบออก
+#### Aggiunta e rimozione di elementi
 
-ระบุรูปภาพและอธิบายการเปลี่ยนแปลง โมเดลจะตรงกับสไตล์ แสง และมุมมองของรูปภาพต้นฉบับ
+Fornisci un'immagine e descrivi la modifica. Il modello corrisponderà allo stile, all'illuminazione e alla prospettiva dell'immagine originale.
 
-| **พรอมต์** | **เอาต์พุตที่ได้** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| **รูปภาพที่ป้อน:**  ภาพเหมือนจริงของแมวขิงขนปุย...   รูปภาพอินพุต   **พรอมต์:** โปรดเพิ่มหมวกพ่อมดถักขนาดเล็กบนศีรษะของแมวจากรูปภาพที่ให้มา ทำให้ดูเหมือนว่าตัวแบบนั่งสบายและเข้ากับแสงนุ่มๆ ของรูปภาพ | แมวใส่หมวกพ่อมด |
+| **Input image:**  Un&#39;immagine fotorealistica di un gatto rosso e soffice…   Immagine di input   **Prompt:** utilizzando l'immagine fornita del mio gatto, aggiungi un piccolo cappello da mago lavorato a maglia sulla sua testa. Fai in modo che sembri seduto comodamente e che l'illuminazione corrisponda a quella della foto. | Gatto con cappello da mago |
 
-#### การแก้ไขจุดบกพร่องในภาพ (การมาสก์เชิงความหมาย)
+#### Inpainting (mascheratura semantica)
 
-กำหนด "มาสก์" ในลักษณะการสนทนาเพื่อแก้ไขส่วนใดส่วนหนึ่งของรูปภาพโดย
-ไม่แตะต้องส่วนอื่นๆ
+Definisci in modo conversazionale una "maschera" per modificare una parte specifica di un'immagine
+lasciando invariato il resto.
 
-| **พรอมต์** | **เอาต์พุตที่ได้** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| **รูปภาพที่ป้อน:**  ภาพมุมกว้างของห้องนั่งเล่นสมัยใหม่ที่มีแสงสว่างเพียงพอ...   รูปภาพอินพุต   **พรอมต์:** ใช้รูปภาพห้องนั่งเล่นที่ให้มา เปลี่ยนเฉพาะโซฟาสีน้ำเงินให้เป็นโซฟาเชสเตอร์ฟิลด์หนังสีน้ำตาลสไตล์วินเทจ ส่วนอื่นๆ ของห้องจะยังคงเดิม รวมถึงหมอนบนโซฟาและแสงสว่าง | ห้องนั่งเล่นที่มีโซฟาหนังสีน้ำตาล |
+| **Input image:**  Un&#39;inquadratura ampia di un soggiorno moderno e ben illuminato…   Immagine di input   **Prompt:** utilizzando l'immagine fornita di un soggiorno, cambia solo il divano blu in un divano Chesterfield vintage in pelle marrone. Mantieni invariato il resto della stanza, inclusi i cuscini sul divano e l'illuminazione. | Salotto con divano in pelle marrone |
 
-#### การถ่ายโอนสไตล์
+#### Trasferimento stile
 
-ส่งรูปภาพและขอให้โมเดลสร้างเนื้อหาของรูปภาพนั้นใหม่ใน
-สไตล์ศิลปะที่แตกต่างกัน
+Fornisci un'immagine e chiedi al modello di ricreare i suoi contenuti in uno stile artistico diverso.
 
-| **พรอมต์** | **เอาต์พุตที่ได้** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| **รูปภาพที่ป้อน:**  ภาพถ่ายความละเอียดสูงที่สมจริงของถนนในเมืองที่วุ่นวาย...   รูปภาพอินพุต   **พรอมต์:** เปลี่ยนภาพถ่ายถนนในเมืองสมัยใหม่ที่ให้มาในตอนกลางคืนให้เป็นสไตล์ศิลปะของ "Starry Night" ของวินเซนต์ แวน โก๊ะ คงองค์ประกอบเดิมของอาคารและรถยนต์ไว้ แต่แสดงผลองค์ประกอบทั้งหมดด้วยฝีแปรงแบบอิมพาสโตที่หมุนวนและชุดสีที่น่าทึ่งของสีน้ำเงินเข้มและสีเหลืองสด | ถนนในเมืองในสไตล์ &quot;ราตรีประดับดาว&quot; |
+| **Input image:**  Una fotografia fotorealistica ad alta risoluzione di una strada trafficata di una città…   Immagine di input   **Prompt:** trasforma la fotografia fornita di una strada moderna di una città di notte nello stile artistico di "Notte stellata" di Vincent van Gogh. Preserva la composizione originale di edifici e auto, ma esegui il rendering di tutti gli elementi con pennellate vorticose e materiche e una tavolozza drammatica di blu intensi e gialli brillanti. | Strada cittadina nello stile di Notte stellata |
 
-#### การจัดองค์ประกอบขั้นสูง: การรวมรูปภาพหลายรูป
+#### Composizione avanzata: combinare più immagini
 
-ระบุรูปภาพหลายรูปเป็นบริบทเพื่อสร้างฉากคอมโพสิตใหม่ ซึ่งเหมาะสำหรับภาพจำลองผลิตภัณฑ์หรือภาพคอลลาจที่สร้างสรรค์
+Fornisci più immagini come contesto per creare una nuova scena composita. È
+perfetto per i mockup di prodotti o i collage creativi.
 
-| **พรอมต์** | **เอาต์พุตที่ได้** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| **รูปภาพอินพุต:**  รูปภาพที่ถ่ายอย่างมืออาชีพของชุดเดรสฤดูร้อนลายดอกไม้สีน้ำเงิน...   อินพุต 1: ชุดเดรส   ภาพเต็มตัวของผู้หญิงที่มัดผมเป็นมวย...   อินพุต 2: นางแบบ   **พรอมต์:** สร้างรูปภาพแฟชั่นอีคอมเมิร์ซระดับมืออาชีพ นำชุดเดรสลายดอกไม้สีน้ำเงินจากรูปภาพแรกมาให้ผู้หญิงในรูปภาพที่ 2 สวมใส่ สร้างภาพเต็มตัวที่สมจริงของผู้หญิงที่สวมชุด โดยปรับแสงและเงาให้เข้ากับสภาพแวดล้อมภายนอก | ภาพถ่ายอีคอมเมิร์ซแฟชั่น |
+| **Immagini di input:**  Una foto scattata da un professionista di un abito estivo a fiori blu…   Input 1: Abito   Scatto a figura intera di una donna con i capelli raccolti in uno chignon…   Input 2: Modello   **Prompt:** crea una foto di moda di e-commerce professionale. Prendi l'abito a fiori blu della prima immagine e fallo indossare alla donna della seconda immagine. Genera uno scatto realistico a figura intera della donna che indossa l'abito, con l'illuminazione e le ombre regolate in modo che corrispondano all'ambiente esterno. | Scatto di e-commerce di moda |
 
-#### การรักษาความละเอียดสูง
+#### Conservazione dei dettagli ad alta fedeltà
 
-หากต้องการให้ระบบเก็บรายละเอียดที่สำคัญ (เช่น ใบหน้าหรือโลโก้) ไว้ในระหว่างการแก้ไข
-โปรดอธิบายรายละเอียดเหล่านั้นพร้อมกับคำขอแก้ไข
+Per assicurarti che i dettagli importanti (come un volto o un logo) vengano conservati durante una modifica,
+descrivili in dettaglio insieme alla richiesta di modifica.
 
-| **พรอมต์** | **เอาต์พุตที่ได้** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| **รูปภาพอินพุต:**  ภาพหน้าตรงแบบมืออาชีพของผู้หญิงผมสีน้ำตาลและตาสีฟ้า...   อินพุต 1: ผู้หญิง   โลโก้เรียบง่ายทันสมัยที่มีตัวอักษร &quot;G&quot; และ &quot;A&quot;...   อินพุต 2: โลโก้   **พรอมต์:** ใช้รูปภาพแรกของผู้หญิงผมสีน้ำตาล ตาสีฟ้า และมีสีหน้าเป็นกลาง เพิ่มโลโก้จากรูปภาพที่ 2 ลงบนเสื้อยืดสีดำของเธอ ตรวจสอบว่าใบหน้าและลักษณะของหญิงสาวไม่เปลี่ยนแปลงโดยสิ้นเชิง โลโก้ควรดูเหมือนพิมพ์ลงบนเนื้อผ้าอย่างเป็นธรรมชาติตามรอยพับของเสื้อ | ผู้หญิงใส่เสื้อยืดที่มีโลโก้ |
+| **Immagini di input:**  Un ritratto professionale di una donna con capelli castani e occhi azzurri…   Input 1: Donna   Un logo semplice e moderno con le lettere &quot;G&quot; e &quot;A&quot;...   Input 2: Logo   **Prompt**:prendi la prima immagine della donna con capelli castani, occhi azzurri e un'espressione neutra. Aggiungi il logo della seconda immagine alla sua t-shirt nera. Assicurati che il volto e i tratti della donna rimangano completamente invariati. Il logo deve sembrare stampato in modo naturale sul tessuto, seguendo le pieghe della maglietta. | Donna con logo sulla T-shirt |
 
-#### ทำให้มีชีวิตชีวา
+#### Dare vita a qualcosa
 
-อัปโหลดภาพร่างหรือภาพวาดคร่าวๆ แล้วขอให้โมเดลปรับแต่งให้เป็นรูปภาพที่เสร็จสมบูรณ์
+Carica uno schizzo o un disegno e chiedi al modello di perfezionarlo in un'immagine finita.
 
-| **พรอมต์** | **เอาต์พุตที่ได้** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| **รูปภาพที่ป้อน:**  ภาพร่างรถยนต์   ภาพร่างคร่าวๆ ของรถยนต์   **พรอมต์:** เปลี่ยนภาพร่างดินสอหยาบๆ ของรถยนต์แห่งอนาคตนี้ให้เป็นภาพถ่ายที่สวยงามของรถยนต์ต้นแบบที่เสร็จสมบูรณ์ในโชว์รูม คงเส้นสายที่โฉบเฉี่ยวและรูปลักษณ์ที่ต่ำจากภาพร่างไว้ แต่เพิ่มสีน้ำเงินเมทัลลิกและแสงขอบล้อสีนีออน | ภาพรถแนวคิดที่ตกแต่งอย่างดี |
+| **Input image:**  Schizzo di un&#39;auto   Schizzo approssimativo di un'auto   **Prompt:** trasforma questo schizzo a matita grezzo di un'auto futuristica in una foto rifinita della concept car finita in uno showroom. Mantieni le linee eleganti e il profilo basso dello schizzo, ma aggiungi una vernice blu metallizzata e un'illuminazione del cerchione al neon. | Foto ritoccata di una concept car |
 
-#### ความสอดคล้องของตัวละคร: มุมมอง 360 องศา
+#### Coerenza dei personaggi: visione a 360°
 
-คุณสร้างมุมมอง 360 องศาของตัวละครได้โดยการป้อนพรอมต์ซ้ำๆ เพื่อให้ได้มุมที่แตกต่างกัน
-เพื่อผลลัพธ์ที่ดีที่สุด ให้ใส่รูปภาพที่สร้างไว้ก่อนหน้านี้ในพรอมต์ถัดไปเพื่อรักษาความสอดคล้องกัน สำหรับท่าทางที่ซับซ้อน ให้ใส่
-รูปภาพอ้างอิงของท่าทางที่ต้องการ
+Puoi generare visualizzazioni a 360 gradi di un personaggio chiedendo in modo iterativo
+angolazioni diverse. Per ottenere risultati ottimali, includi le immagini generate in precedenza nei prompt successivi per mantenere la coerenza. Per le pose complesse, includi un'immagine di riferimento della posa desiderata.
 
-| **พรอมต์** | **เอาต์พุตที่ได้** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| **รูปภาพที่ป้อน:**  อินพุตต้นฉบับของชายที่สวมแว่นสีขาว   รูปภาพต้นฉบับ   **พรอมต์:** ภาพถ่ายสตูดิโอของชายคนนี้บนพื้นหลังสีขาว โดยหันข้างไปทางขวา | เอาต์พุตของชายใส่แว่นสีขาวที่มองไปทางขวา   ชายสวมแว่นสีขาวมองไปทางขวา   เอาต์พุตของชายใส่แว่นสีขาวที่มองไปข้างหน้า   ชายสวมแว่นสีขาวมองตรง |
+| **Input image:**  Input originale di un uomo con occhiali bianchi   Immagine originale   **Prompt:** un ritratto in studio di quest'uomo su sfondo bianco, di profilo e rivolto verso destra | Output di un uomo con occhiali bianchi che guarda a destra   Uomo con occhiali bianchi che guarda a destra   Output di un uomo con occhiali bianchi che guarda avanti   Uomo con occhiali bianchi che guarda avanti |
 
-### แนวทางปฏิบัติแนะนำ
+### Best practice
 
-หากต้องการยกระดับผลลัพธ์จากดีเป็นยอดเยี่ยม ให้ใช้กลยุทธ์ระดับมืออาชีพ
-เหล่านี้ในเวิร์กโฟลว์
+Per migliorare i tuoi risultati, incorpora queste strategie professionali nel tuo flusso di lavoro.
 
-- **ระบุรายละเอียดให้มากที่สุด:** ยิ่งคุณให้รายละเอียดมากเท่าไหร่ คุณก็จะยิ่งควบคุมได้มากขึ้นเท่านั้น
-  แทนที่จะใช้คำว่า "ชุดเกราะแฟนตาซี" ให้อธิบายว่า "ชุดเกราะเพลทของเอลฟ์ที่ตกแต่งอย่างงดงาม สลักลายใบไม้สีเงิน มีคอเสื้อสูงและเกราะไหล่รูปปีกเหยี่ยว"
-- **ระบุบริบทและเจตนา:** อธิบาย*วัตถุประสงค์*ของรูปภาพ ความเข้าใจบริบทของ
-  โมเดลจะมีผลต่อเอาต์พุตสุดท้าย เช่น "สร้างโลโก้สำหรับแบรนด์ผลิตภัณฑ์ดูแลผิวระดับไฮเอนด์ที่เน้นความเรียบง่าย" จะให้ผลลัพธ์ที่ดีกว่า เพียงแค่ "สร้างโลโก้"
-- **ทำซ้ำและปรับแต่ง:** อย่าคาดหวังว่าจะได้รูปภาพที่สมบูรณ์แบบตั้งแต่ครั้งแรก ใช้
-  ลักษณะการสนทนาของโมเดลเพื่อทำการเปลี่ยนแปลงเล็กๆ น้อยๆ ติดตามด้วยพรอมต์ เช่น "ดีมาก แต่ช่วยปรับแสงให้ดูอบอุ่นขึ้นหน่อยได้ไหม" หรือ "คงทุกอย่างไว้เหมือนเดิม แต่เปลี่ยนสีหน้าของตัวละครให้ดูจริงจังมากขึ้น"
-- **ใช้คำสั่งแบบทีละขั้นตอน:** สำหรับฉากที่ซับซ้อนซึ่งมีองค์ประกอบจำนวนมาก ให้แบ่งพรอมต์ออกเป็นขั้นตอน "ก่อนอื่น ให้สร้างพื้นหลังเป็นป่าที่เงียบสงบและมีหมอก
-  ในตอนเช้า จากนั้นเพิ่มแท่นบูชาหินโบราณที่ปกคลุมด้วยมอสไว้ที่ด้านหน้า
-  สุดท้าย ให้วางดาบเรืองแสงเล่มเดียวไว้บนแท่นบูชา"
-- **ใช้ "พรอมต์เชิงลบเชิงความหมาย":** แทนที่จะพูดว่า "ไม่มีรถ" ให้อธิบาย
-  ฉากที่ต้องการในเชิงบวกว่า "ถนนที่ว่างเปล่าและรกร้างไม่มีร่องรอย
-  การจราจร"
-- **ควบคุมกล้อง:** ใช้ภาษาที่เกี่ยวข้องกับการถ่ายภาพและภาพยนตร์เพื่อควบคุม
-  องค์ประกอบ คำอย่าง `wide-angle shot`, `macro shot`, `low-angle
-  perspective`
+- **Fornisci dettagli specifici**:più dettagli fornisci, maggiore sarà il controllo. Invece di "armatura fantasy", descrivila: "armatura a piastre elfica riccamente decorata, incisa
+  con motivi a foglie d'argento, con un colletto alto e spallacci a forma di ali di
+  falco".
+- **Fornisci contesto e intenzione**:spiega lo *scopo* dell'immagine. La comprensione del contesto da parte del modello influenzerà l'output finale. Ad esempio,
+  "Crea un logo per un brand di prodotti per la cura della pelle minimalista di fascia alta" produrrà risultati migliori
+  rispetto a "Crea un logo".
+- **Esegui l'iterazione e perfeziona**:non aspettarti un'immagine perfetta al primo tentativo. Sfrutta
+  la natura conversazionale del modello per apportare piccole modifiche. Segui con prompt come "Ottimo, ma puoi rendere l'illuminazione un po' più calda?" o "Lascia tutto invariato, ma cambia l'espressione del personaggio in modo che sia più serio".
+- **Utilizza istruzioni passo passo**:per scene complesse con molti elementi,
+  suddividi il prompt in passaggi. "Per prima cosa, crea uno sfondo di una serena foresta
+  nebbiosa all'alba. Poi, in primo piano, aggiungi un antico altare in pietra ricoperto di muschio.
+  Infine, posiziona una spada singola e luminosa sopra l'altare".
+- **Utilizza "prompt negativi semantici"**: invece di dire "no auto", descrivi
+  la scena desiderata in modo positivo: "una strada vuota e deserta senza segni di
+  traffico".
+- **Controlla la fotocamera**:utilizza un linguaggio fotografico e cinematografico per controllare
+  la composizione. Termini come `wide-angle shot`, `macro shot`, `low-angle
+  perspective`.
 
-## ข้อจำกัด
+## Limitazioni
 
-- เพื่อประสิทธิภาพสูงสุด ให้ใช้ภาษาต่อไปนี้ EN, ar-EG, de-DE, es-MX,
-  fr-FR, hi-IN, id-ID, it-IT, ja-JP, ko-KR, pt-BR, ru-RU, ua-UA, vi-VN, zh-CN
-- การสร้างรูปภาพไม่รองรับอินพุตเสียงหรือวิดีโอ
-- โมเดลจะไม่สร้างรูปภาพตามจำนวนที่ผู้ใช้ขออย่างชัดเจนเสมอไป
-- `gemini-2.5-flash-image` ทำงานได้ดีที่สุดเมื่อมีรูปภาพเป็นอินพุตไม่เกิน 3 รูป ส่วน
-  `gemini-3-pro-image-preview` รองรับรูปภาพ 5 รูปที่มีความเที่ยงตรงสูง และรองรับรูปภาพทั้งหมดไม่เกิน
-  14 รูป `gemini-3.1-flash-image-preview` รองรับความคล้ายคลึงของตัวละครได้สูงสุด 4 ตัวและคุณภาพของออบเจ็กต์ได้สูงสุด 10 รายการในเวิร์กโฟลว์เดียว
-- เมื่อสร้างข้อความสำหรับรูปภาพ Gemini จะทำงานได้ดีที่สุดหากคุณสร้างข้อความก่อน แล้วจึงขอรูปภาพที่มีข้อความนั้น
-- `gemini-3.1-flash-image-preview` ขณะนี้การเชื่อมต่อแหล่งข้อมูลกับ Google Search ไม่รองรับการใช้รูปภาพของผู้คนในโลกแห่งความเป็นจริงจากการค้นหาบนเว็บ
-- รูปภาพที่สร้างขึ้นทั้งหมดจะมี[ลายน้ำ SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=th)
+- Per ottenere prestazioni ottimali, utilizza le seguenti lingue: EN, ar-EG, de-DE, es-MX,
+  fr-FR, hi-IN, id-ID, it-IT, ja-JP, ko-KR, pt-BR, ru-RU, ua-UA, vi-VN, zh-CN.
+- La generazione di immagini non supporta input audio o video.
+- Il modello non sempre segue il numero esatto di output di immagini richiesto esplicitamente dall'utente.
+- `gemini-2.5-flash-image` funziona al meglio con un massimo di tre immagini come input, mentre
+  `gemini-3-pro-image-preview` supporta cinque immagini ad alta fedeltà e fino a
+  14 immagini in totale. `gemini-3.1-flash-image-preview` supporta la somiglianza
+  dei personaggi fino a 4 caratteri e la fedeltà fino a 10 oggetti in un
+  unico flusso di lavoro.
+- Quando genera testo per un'immagine, Gemini funziona meglio se prima genera il testo e poi chiede un'immagine con il testo.
+- `gemini-3.1-flash-image-preview` Al momento, la fondatezza con la Ricerca Google non supporta l'utilizzo di immagini di persone del mondo reale provenienti dalla ricerca web.
+- Tutte le immagini generate includono una [filigrana SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=it).
 
-## การกำหนดค่าที่ไม่บังคับ
+## Configurazioni facoltative
 
-คุณเลือกกำหนดค่ารูปแบบการตอบกลับและสัดส่วนภาพของเอาต์พุตของโมเดลได้ในฟิลด์ `config` ของการเรียกใช้ `generate_content`
+Facoltativamente, puoi configurare le modalità di risposta e le proporzioni dell'output del modello nel campo `config` delle chiamate `generate_content`.
 
-### ประเภทเอาต์พุต
+### Tipi di output
 
-โมเดลจะแสดงคำตอบเป็นข้อความและรูปภาพโดยค่าเริ่มต้น
-(เช่น `response_modalities=['Text', 'Image']`)
-คุณกำหนดค่าคำตอบให้แสดงเฉพาะรูปภาพโดยไม่มีข้อความได้โดยใช้
-`response_modalities=['Image']`
+Per impostazione predefinita, il modello restituisce risposte di testo e immagini
+(ad es. `response_modalities=['Text', 'Image']`).
+Puoi configurare la risposta in modo che restituisca solo immagini senza testo utilizzando
+`response_modalities=['Image']`.
 
 ### Python
 
@@ -2183,11 +2193,12 @@ curl -s -X POST \
   }'
 ```
 
-### สัดส่วนภาพและขนาดรูปภาพ
+### Proporzioni e dimensioni delle immagini
 
-โดยค่าเริ่มต้น โมเดลจะจับคู่ขนาดรูปภาพเอาต์พุตกับขนาดของรูปภาพอินพุต หรือสร้างสี่เหลี่ยมจัตุรัส 1:1
-คุณควบคุมสัดส่วนของรูปภาพเอาต์พุตได้โดยใช้ฟิลด์ `aspect_ratio`
-ในส่วน `image_config` ในคำขอการตอบกลับ ซึ่งแสดงที่นี่
+Per impostazione predefinita, il modello abbina le dimensioni dell'immagine di output a quelle dell'immagine di input
+oppure genera quadrati 1:1.
+Puoi controllare le proporzioni dell'immagine di output utilizzando il campo `aspect_ratio`
+in `image_config` nella richiesta di risposta, come mostrato di seguito:
 
 ### Python
 
@@ -2340,11 +2351,11 @@ curl -s -X POST \
   }'
 ```
 
-อัตราส่วนต่างๆ ที่พร้อมใช้งานและขนาดของรูปภาพที่สร้างขึ้นแสดงอยู่ในตารางต่อไปนี้
+I diversi rapporti disponibili e le dimensioni dell'immagine generata sono elencati nelle tabelle seguenti:
 
-### 3.1 ตัวอย่างรูปภาพ Flash
+### 3.1 Anteprima dell'immagine Flash
 
-| สัดส่วนภาพ | ความละเอียด 512 | 0.5K โทเค็น | ความละเอียดระดับ 1K | โทเค็น 1,000 รายการ | ความละเอียดระดับ 2K | 2,000 โทเค็น | ความละเอียดระดับ 4K | 4,000 โทเค็น |
+| Proporzioni | Risoluzione 512 | 500 token | Risoluzione 1K | 1000 token | Risoluzione 2K | 2000 token | Risoluzione 4K | Token 4K |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | **1:1** | 512x512 | 747 | 1024x1024 | 1120 | 2048x2048 | 1680 | 4096x4096 | 2520 |
 | **1:4** | 256x1024 | 747 | 512x2048 | 1120 | 1024x4096 | 1680 | 2048x8192 | 2520 |
@@ -2361,9 +2372,9 @@ curl -s -X POST \
 | **16:9** | 688x384 | 747 | 1376x768 | 1120 | 2752x1536 | 1680 | 5504x3072 | 2520 |
 | **21:9** | 792x168 | 747 | 1584x672 | 1120 | 3168x1344 | 1680 | 6336x2688 | 2520 |
 
-### ตัวอย่างรูปภาพ 3 Pro
+### Anteprima di Gemini 3 Pro Image
 
-| สัดส่วนภาพ | ความละเอียดระดับ 1K | โทเค็น 1,000 รายการ | ความละเอียดระดับ 2K | 2,000 โทเค็น | ความละเอียดระดับ 4K | 4,000 โทเค็น |
+| Proporzioni | Risoluzione 1K | 1000 token | Risoluzione 2K | 2000 token | Risoluzione 4K | Token 4K |
 | --- | --- | --- | --- | --- | --- | --- |
 | **1:1** | 1024x1024 | 1120 | 2048x2048 | 1120 | 4096x4096 | 2000 |
 | **2:3** | 848x1264 | 1120 | 1696x2528 | 1120 | 3392x5056 | 2000 |
@@ -2376,9 +2387,9 @@ curl -s -X POST \
 | **16:9** | 1376x768 | 1120 | 2752x1536 | 1120 | 5504x3072 | 2000 |
 | **21:9** | 1584x672 | 1120 | 3168x1344 | 1120 | 6336x2688 | 2000 |
 
-### รูปภาพ Gemini 2.5 Flash
+### Gemini 2.5 Flash Image
 
-| สัดส่วนภาพ | ความละเอียด | โทเค็น |
+| Proporzioni | Risoluzione | Token |
 | --- | --- | --- |
 | 1:1 | 1024x1024 | 1290 |
 | 2:3 | 832x1248 | 1290 |
@@ -2391,36 +2402,42 @@ curl -s -X POST \
 | 16:9 | 1344x768 | 1290 |
 | 21:9 | 1536x672 | 1290 |
 
-## การเลือกโมเดล
+## Selezione del modello
 
-เลือกโมเดลที่เหมาะกับกรณีการใช้งานของคุณมากที่สุด
+Scegli il modello più adatto al tuo caso d'uso specifico.
 
-- **ตัวอย่างรูปภาพ Gemini 3.1 Flash (ตัวอย่าง Nano Banana 2)** ควรเป็นโมเดลการสร้างรูปภาพที่คุณเลือกใช้ เนื่องจากมีประสิทธิภาพและความอัจฉริยะรอบด้านที่ดีที่สุด รวมถึงความสมดุลระหว่างต้นทุนกับเวลาในการตอบสนอง ดูรายละเอียดเพิ่มเติมได้ที่หน้า[ราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th#gemini-3.1-flash-image-preview)และ[ความสามารถ](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=th)ของโมเดล
-- **ตัวอย่างรูปภาพ Gemini 3 Pro (ตัวอย่าง Nano Banana Pro)** ออกแบบมาสำหรับ
-  การผลิตชิ้นงานระดับมืออาชีพและคำสั่งที่ซับซ้อน โมเดลนี้มี การเชื่อมต่อแหล่งข้อมูลจากโลกแห่งความเป็นจริงโดยใช้ Google Search, กระบวนการ "การคิด" เริ่มต้นที่ ปรับแต่งองค์ประกอบก่อนการสร้าง และสร้างรูปภาพที่มีความละเอียดสูงสุด 4K ได้ ดูรายละเอียดเพิ่มเติมได้ที่หน้า[ราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th#gemini-3-pro-image-preview)และ[ความสามารถ](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=th)ของโมเดล
-- **รูปภาพ Gemini 2.5 Flash (Nano Banana)** ออกแบบมาเพื่อความเร็วและ
-  ประสิทธิภาพ โมเดลนี้ได้รับการเพิ่มประสิทธิภาพสำหรับงานที่มีปริมาณมากและมีเวลาในการตอบสนองต่ำ และสร้างรูปภาพที่ความละเอียด 1024 พิกเซล ดูรายละเอียดเพิ่มเติมได้ที่หน้า[ราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th#gemini-2.5-flash-image)และ[ความสามารถ](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=th)ของโมเดล
+- **Gemini 3.1 Flash Image Preview (anteprima di Nano Banana 2)** dovrebbe essere il tuo
+  modello di generazione di immagini di riferimento, in quanto offre le migliori prestazioni
+  e intelligenza complessive in termini di equilibrio tra costi e latenza. Per ulteriori dettagli, consulta la pagina relativa ai [prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it#gemini-3.1-flash-image-preview) e alle [funzionalità](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=it) del modello.
+- **L'anteprima di Gemini 3 Pro Image (anteprima di Nano Banana Pro)** è progettata per
+  la produzione di asset professionali e istruzioni complesse. Questo modello è caratterizzato da
+  una fondatezza nel mondo reale che utilizza la Ricerca Google, un processo di "Ragionamento" predefinito che
+  perfeziona la composizione prima della generazione e può generare immagini con risoluzioni fino a 4K. Per ulteriori dettagli, consulta la pagina relativa ai [prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it#gemini-3-pro-image-preview) e alle [funzionalità](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=it) del modello.
+- **Gemini 2.5 Flash Image (Nano Banana)** è progettato per la velocità e
+  l'efficienza. Questo modello è ottimizzato per attività a basso volume e bassa latenza e
+  genera immagini con una risoluzione di 1024 px. Per ulteriori dettagli, consulta la pagina relativa ai [prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it#gemini-2.5-flash-image) e alle [funzionalità](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=it) del modello.
 
-### กรณีที่ควรใช้ Imagen
+### Quando utilizzare Imagen
 
-นอกเหนือจากการใช้ความสามารถในการสร้างรูปภาพในตัวของ Gemini แล้ว คุณยังเข้าถึง [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=th) ซึ่งเป็นโมเดลการสร้างรูปภาพเฉพาะของเราผ่าน Gemini API ได้ด้วย
+Oltre a utilizzare le funzionalità di generazione di immagini integrate di Gemini, puoi
+accedere anche a [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=it), il nostro modello specializzato di generazione di immagini, tramite l'API Gemini.
 
-Imagen 4 ควรเป็นโมเดลที่คุณเลือกใช้เมื่อเริ่มสร้างรูปภาพด้วย Imagen เลือก Imagen 4 Ultra สำหรับกรณีการใช้งานขั้นสูง
-หรือเมื่อต้องการรูปภาพคุณภาพดีที่สุด (โปรดทราบว่าสร้างได้ครั้งละ 1 รูปเท่านั้น)
+Imagen 4 dovrebbe essere il modello di riferimento quando inizi a generare immagini
+con Imagen. Scegli Imagen 4 Ultra per casi d'uso avanzati o quando hai bisogno della migliore qualità dell'immagine (tieni presente che può generare solo un'immagine alla volta).
 
-## ขั้นตอนถัดไป
+## Passaggi successivi
 
-- ดูตัวอย่างและโค้ดตัวอย่างเพิ่มเติมได้ใน[คู่มือตำราอาหาร](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_Started_Nano_Banana.ipynb?hl=th)
-- ดู[คู่มือ Veo](https://ai.google.dev/gemini-api/docs/video?hl=th) เพื่อดูวิธีสร้าง
-  วิดีโอด้วย Gemini API
-- ดูข้อมูลเพิ่มเติมเกี่ยวกับโมเดล Gemini ได้ที่[โมเดล Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th)
+- Trova altri esempi ed esempi di codice nella [guida Cookbook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_Started_Nano_Banana.ipynb?hl=it).
+- Consulta la [guida di Veo](https://ai.google.dev/gemini-api/docs/video?hl=it) per scoprire come generare
+  video con l'API Gemini.
+- Per scoprire di più sui modelli Gemini, consulta [Modelli Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it).
 
-ส่งความคิดเห็น
+Invia feedback
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-อัปเดตล่าสุด 2026-04-29 UTC
+Ultimo aggiornamento 2026-04-29 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Vuoi dirci altro?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-29 UTC"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]

@@ -1,48 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=es-419
-fetched_at: 2026-05-05T19:50:15.660415+00:00
-title: "Vista previa de clip de Lyria 3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=ar
+fetched_at: 2026-05-05T20:04:12.814675+00:00
+title: "\u0645\u0639\u0627\u064a\u0646\u0629 \u0645\u0642\u0637\u0639 Lyria 3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Enviar comentarios
+إرسال ملاحظات
 
-# Vista previa de clip de Lyria 3
+# معاينة مقطع Lyria 3
 
-Lyria 3 Clip Preview es el modelo de Google optimizado para generar clips musicales, bucles y vistas previas cortos. Genera audio estéreo de alta calidad de 48 kHz y 30 segundos a partir de instrucciones de texto o entradas de imágenes.
+‫Lyria 3 Clip Preview هو نموذج من Google تم تحسينه لإنشاء مقاطع موسيقية قصيرة وحلقات ومعاينات. وينشئ النموذج ملفات صوتية ستيريو عالية الجودة مدتها 30 ثانية وبتردد 48 كيلوهرتز من الطلبات النصية أو الصور المُدخَلة.
 
-[Probar en Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=lyria-3-clip-preview&hl=es-419)
+[تجربة النموذج في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=lyria-3-clip-preview&hl=ar)
 
-## Documentación
+## الوثائق
 
-Visita la guía de [Generación de música](https://ai.google.dev/gemini-api/docs/music-generation?hl=es-419) para obtener una cobertura completa de las funciones y capacidades.
+يمكنك الانتقال إلى دليل [إنشاء الموسيقى](https://ai.google.dev/gemini-api/docs/music-generation?hl=ar) للاطّلاع على تغطية كاملة
+للميزات والإمكانات.
 
 ## lyria-3-clip-preview
 
-| Propiedad | Descripción |
+| الموقع | الوصف |
 | --- | --- |
-| Código del modelo id\_card | `lyria-3-clip-preview` |
-| saveTipos de datos admitidos | **Entradas**  Texto e imagen  **Resultado**  Audio (MP3), texto (letras) |
-| token\_autoLímites de tokens[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419) | **Límite de tokens de entrada**  131,072 |
-| handymanFunciones | **Generación de audio**  Admitido  **API de Batch**  No compatible  **Almacenamiento en caché**  No compatible  **Ejecución de código**  No compatible  **Búsqueda de archivos**  No compatible  **Llamada a función**  No compatible  **Fundamentación con Google Maps**  No compatible  **Generación de imágenes**  No compatible  **API de Live**  No compatible  **Fundamentación con la Búsqueda**  No compatible  **Resultados estructurados**  No compatible  **Pensamiento**  No compatible  **Contexto de la URL**  No compatible |
-| Versiones 123 | Lee los [patrones de versiones de modelos](https://ai.google.dev/gemini-api/docs/models/gemini?hl=es-419#model-versions) para obtener más detalles.  - Vista previa: `lyria-3-clip-preview` - Vista previa: `lyria-3-pro-preview` |
-| calendar\_monthÚltima actualización | Marzo de 2026 |
+| id\_cardرمز النموذج | `lyria-3-clip-preview` |
+| saveأنواع البيانات المتاحة | **البيانات المُدخَلة**  النص والصورة  **الناتج**  ملف صوتي (MP3)، نص (كلمات الأغنية) |
+| token\_autoحدود الرموز المميّزة[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحدّ الأقصى للرموز المميّزة المُدخَلة**  131,072 |
+| handymanالإمكانات | **إنشاء الصوت**  متاح  **واجهة برمجة التطبيقات المجمّعة**  غير متاح  **التخزين المؤقت**  غير متاح  **تنفيذ الرموز البرمجية**  غير متاح  **البحث عن الملفات**  غير متاح  **استدعاء الدوال**  غير متاح  **استخدام "خرائط Google" كمصدر**  غير متاح  **إنشاء الصور**  غير متاح  **واجهة برمجة التطبيقات المباشرة**  غير متاح  **لتحديد المصادر في "بحث Google"**  غير متاح  **مُخرجات منظَّمة**  غير متاح  **طريقة التفكير**  غير متاح  **سياق عنوان URL**  غير متاح |
+| 123الإصدارات | يمكنك قراءة [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions) لمزيد من التفاصيل.  - معاينة: `lyria-3-clip-preview` - معاينة: `lyria-3-pro-preview` |
+| calendar\_monthآخر تعديل | مارس 2026 |
 
-Enviar comentarios
+إرسال ملاحظات
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Última actualización: 2026-04-29 (UTC)
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-¿Quieres brindar más información?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

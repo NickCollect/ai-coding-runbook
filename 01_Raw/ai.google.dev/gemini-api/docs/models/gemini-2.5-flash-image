@@ -1,49 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=hi
-fetched_at: 2026-05-05T19:49:48.452058+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=ko
+fetched_at: 2026-05-05T20:03:17.697307+00:00
 title: "Gemini 2.5 Flash Image (Nano Banana) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-सुझाव भेजें
+의견 보내기
 
 # Gemini 2.5 Flash Image (Nano Banana)
 
-यह विज़ुअल बनाने वाला हमारा सबसे बेहतरीन इंजन है. यह बहुत तेज़ी से विज़ुअल बनाता है और इसकी परफ़ॉर्मेंस भी शानदार है. Gemini 2.5 Flash Image को Nano Banana के नाम से भी जाना जाता है. यह एक साथ कई इमेज जनरेट करने, बातचीत के दौरान इमेज में बदलाव करने, और कम समय में क्रिएटिव वर्कफ़्लो पूरा करने के लिए सबसे अच्छा है. इसके लिए, मल्टीमॉडल को समझने की ज़रूरत होती है.
+최첨단 속도와 효율성을 제공하는 고속 시각적 콘텐츠 제작을 위한 최고의 엔진입니다. Nano Banana라고도 하는 Gemini 2.5 Flash Image는 대량 생성, 대화형 이미지 편집, 네이티브 멀티모달 이해가 필요한 짧은 지연 시간의 크리에이티브 워크플로에 가장 적합합니다.
 
-[Google AI Studio में आज़माएं](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=hi)
+[Google AI Studio에서 사용해 보기](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=ko)
 
-## दस्तावेज़
+## 문서
 
-सुविधाओं और क्षमताओं के बारे में पूरी जानकारी पाने के लिए, [इमेज जनरेट करने](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi) की गाइड पर जाएं.
+기능 및 기능에 대한 전체 내용은 [이미지 생성](https://ai.google.dev/gemini-api/docs/image-generation?hl=ko) 가이드를 참고하세요.
 
 ## gemini-2.5-flash-image
 
-| प्रॉपर्टी | ब्यौरा |
+| 속성 | 설명 |
 | --- | --- |
-| id\_cardमॉडल कोड | `gemini-2.5-flash-image` |
-| saveइस्तेमाल किए जा सकने वाले डेटा टाइप | **इनपुट**  इमेज और टेक्स्ट  **आउटपुट**  इमेज और टेक्स्ट |
-| token\_autoटोकन की सीमाएं[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट टोकन की सीमा**  65,536  **आउटपुट टोकन की सीमा**  32,768 |
-| handymanसुविधाएँ | **ऑडियो जनरेट करने की सुविधा**  काम नहीं करता है  **Batch API**  काम करता है  **कैश मेमोरी में सेव होना**  काम करता है  **कोड को चलाने की सुविधा**  काम नहीं करता है  **फ़ाइल खोजना**  काम नहीं करता है  **फ़्लेक्स इन्फ़रेंस**  काम करता है  **फ़ंक्शन कॉलिंग**  काम नहीं करता है  **Google Maps की मदद से जवाब पाना**  काम नहीं करता है  **इमेज जनरेट करना**  काम करता है  **Live API**  काम नहीं करता है  **प्राथमिकता का अनुमान लगाना**  काम करता है  **भरोसेमंद स्रोतों से जानकारी लेना**  काम नहीं करता है  **स्ट्रक्चर्ड आउटपुट**  काम करता है  **सोच-विचार करना**  काम नहीं करता है  **यूआरएल का कॉन्टेक्स्ट**  काम नहीं करता है |
-| 123वर्शन | ज़्यादा जानकारी के लिए, [मॉडल वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) पढ़ें.  - स्थिर: `gemini-2.5-flash-image` - समर्थन नहीं: `gemini-2.5-flash-image-preview` |
-| calendar\_monthनया अपडेट | अक्टूबर 2025 |
-| cognition\_2जानकारी न मिलना | जून 2025 |
+| id\_card모델 코드 | `gemini-2.5-flash-image` |
+| save 지원 데이터 유형 | **입력**  이미지 및 텍스트  **출력**  이미지 및 텍스트 |
+| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 토큰 한도**  65,536  **출력 토큰 한도**  32,768 |
+| handyman기능 | **오디오 생성**  지원되지 않음  **Batch API**  지원됨  **캐싱**  지원됨  **코드 실행**  지원되지 않음  **파일 검색**  지원되지 않음  **유연한 추론**  지원됨  **함수 호출**  지원되지 않음  **Google 지도 그라운딩**  지원되지 않음  **이미지 생성**  지원됨  **Live API**  지원되지 않음  **우선순위 추론**  지원됨  **검색 그라운딩**  지원되지 않음  **구조화된 출력**  지원됨  **사고**  지원되지 않음  **URL 컨텍스트**  지원되지 않음 |
+| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - 안정화 버전: `gemini-2.5-flash-image` - `gemini-2.5-flash-image-preview`이(가) 지원 중단되었습니다. |
+| calendar\_month최신 업데이트 | 2025년 10월 |
+| cognition\_2지식 단절 | 2025년 6월 |
 
-सुझाव भेजें
+의견 보내기
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया.
+최종 업데이트: 2026-04-29(UTC)
 
-क्या आपको हमें और कुछ बताना है?
+의견을 전달하고 싶나요?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]

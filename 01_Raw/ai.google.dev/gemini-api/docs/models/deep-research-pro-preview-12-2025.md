@@ -1,46 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-pro-preview-12-2025?hl=de
-fetched_at: 2026-05-05T19:51:22.103435+00:00
-title: "Deep Research-Vorschau \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-pro-preview-12-2025?hl=id
+fetched_at: 2026-05-05T20:02:40.152823+00:00
+title: "Pratinjau Deep Research \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
+[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Feedback geben
+Kirim masukan
 
-# Deep Research-Vorschau
+# Pratinjau Deep Research
 
-Ein leistungsstarker agentischer Researcher, der für autonome, mehrstufige Untersuchungen entwickelt wurde und komplexe Informationen in umfassenden, zitierten Berichten zusammenfasst. Dieses Modell basiert auf Gemini 3.1 Pro und ist für lang andauernde Aufgaben und präzise Analysen in Hunderten von öffentlichen Webquellen und privaten Workspace-Daten wie Gmail und Drive optimiert.
+Peneliti agentik yang canggih dan dirancang untuk penyelidikan multi-langkah yang otonom, yang menyintesis informasi kompleks menjadi laporan komprehensif yang mencantumkan kutipan. Didukung oleh Gemini 3.1 Pro, model ini dioptimalkan untuk tugas yang berjalan lama dan analisis yang sangat akurat di ratusan sumber web publik dan data ruang kerja pribadi seperti Gmail dan Drive.
 
-## Dokumentation
+## Dokumentasi
 
-Besuchen Sie die Seite [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) für eine vollständige Übersicht
-über die Funktionen und Möglichkeiten.
+Buka halaman [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) untuk mengetahui cakupan lengkap fitur dan kapabilitas.
 
 ## deep-research-pro-preview-12-2025
 
-| Attribut | Beschreibung |
+| Properti | Deskripsi |
 | --- | --- |
-| id\_cardAgent-Code | **Interactions API**  `deep-research-pro-preview-12-2025` |
-| saveUnterstützte Datentypen | **Eingabe**  Text, Bild, PDF, Audio, Video  **Ausgabe**  Text (zitierte Berichte) |
-| token\_autoToken limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=de) | **Kontextfenster für die Eingabe**  1.048.576  **Tokenausgabelimit**  65.536 |
-| 123Versionen | Weitere Informationen finden Sie unter [Modellversionsmuster](https://ai.google.dev/gemini-api/docs/models/gemini?hl=de#model-versions).  - Vorschau für: `deep-research-pro-preview-12-2025` |
-| calendar\_monthLetzte Aktualisierung | Dezember 2025 |
+| Kode agen id\_card | **Interactions API**  `deep-research-pro-preview-12-2025` |
+| saveJenis data yang didukung | **Input**  Teks, Gambar, PDF, Audio, Video  **Output**  Teks (Laporan yang Dikutip) |
+| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Jendela konteks input**  1.048.576  **Batas token output**  65.536 |
+| Versi 123 | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - Pratinjau: `deep-research-pro-preview-12-2025` |
+| calendar\_monthPembaruan terbaru | Desember 2025 |
 
-Feedback geben
+Kirim masukan
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Zuletzt aktualisiert: 2026-04-29 (UTC).
+Terakhir diperbarui pada 2026-04-29 UTC.
 
-Haben Sie Feedback für uns?
+Ada masukan untuk kami?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-04-29 (UTC)."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]

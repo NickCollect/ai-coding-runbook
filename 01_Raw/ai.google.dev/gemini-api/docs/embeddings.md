@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/embeddings?hl=fr
-fetched_at: 2026-05-05T19:43:56.125430+00:00
-title: "Embeddings \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/embeddings?hl=ko
+fetched_at: 2026-05-05T20:07:36.130892+00:00
+title: "\uc784\ubca0\ub529 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Envoyer des commentaires
+의견 보내기
 
-# Embeddings
+# 임베딩
 
-L'API Gemini propose des modèles d'embedding pour générer des embeddings pour du texte, des images, des vidéos et d'autres contenus. Les embeddings obtenus peuvent ensuite être utilisés pour des tâches telles que la recherche sémantique, la classification et le clustering. Ils fournissent des résultats plus précis et plus adaptés au contexte que les approches basées sur les mots clés.
+Gemini API는 텍스트, 이미지, 동영상, 기타 콘텐츠의 임베딩을 생성하는 임베딩 모델을 제공합니다. 이러한 결과 임베딩은 시맨틱 검색, 분류, 클러스터링과 같은 작업에 사용할 수 있으며, 키워드 기반 접근 방식보다 더 정확하고 맥락을 인식하는 결과를 제공합니다.
 
-Le dernier modèle, `gemini-embedding-2`, est le premier modèle d'embedding multimodal de l'API Gemini. Il mappe le texte, les images, les vidéos, l'audio et les documents dans un espace d'embedding unifié, ce qui permet la recherche, la classification et le clustering cross-modal dans plus de 100 langues. Pour en savoir plus, consultez la section [Embeddings multimodaux](#multimodal). Pour les cas d'utilisation uniquement basés sur du texte, `gemini-embedding-001` reste disponible.
+최신 모델인 `gemini-embedding-2`는 Gemini API의 첫 번째 멀티모달 임베딩 모델입니다. 텍스트, 이미지, 동영상, 오디오, 문서를 통합 임베딩 공간에 매핑하여 100개 이상의 언어로 교차 모달 검색, 분류, 클러스터링을 지원합니다. 자세한 내용은 [멀티모달 임베딩 섹션](#multimodal)을 참고하세요. 텍스트 전용 사용 사례의 경우 `gemini-embedding-001`를 계속 사용할 수 있습니다.
 
-La création de systèmes de génération augmentée par récupération (RAG) est un cas d'utilisation courant pour les produits d'IA. Les embeddings jouent un rôle clé dans l'amélioration significative des résultats des modèles, en offrant une meilleure précision factuelle, une meilleure cohérence et une meilleure richesse contextuelle. Si vous préférez utiliser une solution RAG gérée, nous avons créé l'outil [Recherche de fichiers](https://ai.google.dev/gemini-api/docs/file-search?hl=fr), qui facilite la gestion et réduit les coûts du RAG.
+검색 증강 생성 (RAG) 시스템을 빌드하는 것은 AI 제품의 일반적인 사용 사례입니다. 임베딩은 사실 기반 정확도, 일관성, 상황별 풍부함이 개선된 모델 출력을 크게 향상하는 데 중요한 역할을 합니다. 관리형 RAG 솔루션을 사용하려면 RAG를 더 쉽게 관리하고 비용 효율적으로 수행할 수 있는 [파일 검색](https://ai.google.dev/gemini-api/docs/file-search?hl=ko) 도구를 사용하세요.
 
-## Générer des embeddings
+## 임베딩 생성
 
-Utilisez la méthode `embedContent` pour générer des embeddings de texte :
+`embedContent` 메서드를 사용하여 텍스트 임베딩을 생성합니다.
 
 ### Python
 
@@ -43,7 +43,7 @@ result = client.models.embed_content(
 print(result.embeddings)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -120,28 +120,28 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-## Spécifier le type de tâche pour améliorer les performances
+## 성능을 개선하기 위해 작업 유형 지정
 
-Vous pouvez utiliser des embeddings pour un large éventail de tâches, de la classification à la recherche de documents. Spécifier le bon type de tâche permet d'optimiser les embeddings pour les relations souhaitées, ce qui maximise la précision et l'efficacité.
+분류부터 문서 검색까지 다양한 작업에 임베딩을 사용할 수 있습니다. 올바른 태스크 유형을 지정하면 의도한 관계에 맞게 임베딩을 최적화하여 정확성과 효율성을 극대화할 수 있습니다.
 
-### Types de tâches avec Embeddings 2
+### 임베딩 2가 적용된 태스크 유형
 
-Pour les tâches textuelles avec `gemini-embedding-2`, nous vous recommandons vivement d'ajouter les instructions de la tâche dans votre requête. Pour ce faire, mettez en forme la requête et le document avec le préfixe de tâche approprié.
+`gemini-embedding-2`를 사용한 텍스트 전용 작업의 경우 프롬프트에 작업 지침을 추가하는 것이 좋습니다. 올바른 작업 접두사를 사용하여 질문과 문서의 형식을 지정하면 됩니다.
 
-Les tableaux suivants montrent des exemples de mise en forme des requêtes et des documents pour les cas d'utilisation symétriques et asymétriques à l'aide du modèle `gemini-embedding-2`.
+다음 표는 `gemini-embedding-2` 모델을 사용하여 대칭 및 비대칭 사용 사례에 맞게 쿼리와 문서를 포맷하는 방법을 보여줍니다.
 
-**Cas d'utilisation de la récupération (format asymétrique)**
+**검색 사용 사례 (비대칭 형식)**
 
-Dans les cas d'utilisation asymétriques, ajoutez le préfixe de la tâche à la requête et appliquez la structure du document pour le contenu que vous souhaitez intégrer et récupérer.
+비대칭 사용 사례에서는 쿼리에 작업 접두사를 추가하고 삽입하고 검색하려는 콘텐츠에 문서 구조를 적용합니다.
 
-| Cas d'utilisation | Structure d'une requête | Structure du document |
+| 사용 사례 | 쿼리 구조 | 문서 구조 |
 | --- | --- | --- |
-| Requête de recherche | `task: search result | query: {content}` | `title: {title} | text: {content}` S'il n'y a pas de titre, utilisez `title: none`. |
-| Systèmes de questions-réponses | `task: question answering | query: {content}` | `title: {title} | text: {content}` |
-| Fact-checking | `task: fact checking | query: {content}` | `title: {title} | text: {content}` |
-| Récupération du code | `task: code retrieval | query: {content}` | `title: {title} | text: {content}` |
+| 검색어 | `task: search result | query: {content}` | `title: {title} | text: {content}` 제목이 없으면 `title: none`을 사용합니다. |
+| 질의 응답 | `task: question answering | query: {content}` | `title: {title} | text: {content}` |
+| 사실확인 | `task: fact checking | query: {content}` | `title: {title} | text: {content}` |
+| 코드 검색 | `task: code retrieval | query: {content}` | `title: {title} | text: {content}` |
 
-**Exemple d'utilisation**
+**사용 예**
 
 ### Python
 
@@ -160,17 +160,17 @@ def prepare_document(content, title=None):
     return f"title: {title} | text: {content}"
 ```
 
-**Cas d'utilisation à entrée unique (format symétrique)**
+**단일 입력 사용 사례 (대칭 형식)**
 
-Dans les cas d'utilisation symétriques, utilisez le même format pour la requête et le document pour une même tâche.
+대칭 사용 사례에서는 동일한 작업에 대해 질문과 문서에 동일한 형식을 사용합니다.
 
-| Cas d'utilisation | Structure d'entrée |
+| 사용 사례 | 입력 구조 |
 | --- | --- |
-| Classification | `task: classification | query: {content}` |
-| Clustering | `task: clustering | query: {content}` |
-| Similarité sémantique | `task: sentence similarity | query: {content}` Ne pas utiliser pour la recherche ou la récupération. Elle est destinée à la similarité textuelle sémantique. |
+| 분류 | `task: classification | query: {content}` |
+| 클러스터링 | `task: clustering | query: {content}` |
+| 의미론적 유사도 | `task: sentence similarity | query: {content}` 검색 또는 검색에는 사용하지 마세요. 의미론적 텍스트 유사성을 위한 것입니다. |
 
-**Exemple d'utilisation**
+**사용 예**
 
 ### Python
 
@@ -182,13 +182,13 @@ def prepare_query_and_document(content):
     return f'task: classification | query: {content}'
 ```
 
-Il est important que la tâche soit utilisée de manière cohérente. Par exemple, si les documents sont intégrés avec `f'task: classification | query: {content}'`, la requête doit également être intégrée en suivant ce format de tâche.
+작업을 일관되게 사용하는 것이 중요합니다. 예를 들어 문서가 `f'task: classification | query: {content}'`로 삽입된 경우 쿼리도 이 작업 형식을 따라 삽입해야 합니다.
 
-### Types de tâches avec Embeddings 1
+### 임베딩 1이 있는 태스크 유형
 
-Pour `gemini-embedding-001`, vous pouvez spécifier `task_type` dans la méthode `embedContent`. Pour obtenir la liste complète des types de tâches acceptés, consultez le tableau [Types de tâches acceptés](#supported-task-types).
+`gemini-embedding-001`의 경우 `embedContent` 메서드에서 `task_type`를 지정할 수 있습니다. 지원되는 작업 유형의 전체 목록은 [지원되는 작업 유형](#supported-task-types) 표를 참고하세요.
 
-L'exemple suivant montre comment utiliser `SEMANTIC_SIMILARITY` pour vérifier la similarité sémantique de chaînes de texte.
+다음 예는 `SEMANTIC_SIMILARITY`를 사용하여 텍스트 문자열의 의미가 얼마나 유사한지 확인하는 방법을 보여줍니다.
 
 ### Python
 
@@ -222,7 +222,7 @@ df = pd.DataFrame(
 print(df)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -350,28 +350,28 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-0
     }'
 ```
 
-Les extraits de code montreront à quel point les différents blocs de texte sont similaires les uns aux autres lorsqu'ils sont exécutés.
+코드 스니펫은 실행 시 텍스트의 여러 청크가 서로 얼마나 유사한지 보여줍니다.
 
-#### Types de tâches compatibles
+#### 지원되는 태스크 유형
 
-Types de tâches compatibles avec `gemini-embedding-001` :
+`gemini-embedding-001`에 지원되는 작업 유형:
 
-| Type de tâche | Description | Exemples |
+| 작업 유형 | 설명 | 예 |
 | --- | --- | --- |
-| **SEMANTIC\_SIMILARITY** | Embeddings optimisés pour évaluer la similitude de texte. | Systèmes de recommandation, détection des doublons |
-| **CLASSIFICATION** | Embeddings optimisés pour classer des textes en fonction d'étiquettes prédéfinies. | Analyse des sentiments, détection du spam |
-| **CLUSTERING** | Embeddings optimisés pour regrouper des textes en fonction de leurs similitudes. | Organisation de documents, études de marché, détection d'anomalies |
-| **RETRIEVAL\_DOCUMENT** | Embeddings optimisés pour la recherche de documents. | Indexation d'articles, de livres ou de pages Web pour la recherche. |
-| **RETRIEVAL\_QUERY** | Embeddings optimisés pour les requêtes de recherche générales. Utilisez `RETRIEVAL_QUERY` pour les requêtes et `RETRIEVAL_DOCUMENT` pour les documents à récupérer. | Tests personnalisés sur le Réseau de Recherche |
-| **CODE\_RETRIEVAL\_QUERY** | Embeddings optimisés pour la récupération de blocs de code en fonction de requêtes en langage naturel. Utilisez `CODE_RETRIEVAL_QUERY` pour les requêtes et `RETRIEVAL_DOCUMENT` pour les blocs de code à récupérer. | Suggestions de code et recherche |
-| **QUESTION\_ANSWERING** | Embeddings pour les questions dans un système de questions-réponses, optimisés pour trouver les documents qui répondent à la question. Utilisez `QUESTION_ANSWERING` pour les questions et `RETRIEVAL_DOCUMENT` pour les documents à récupérer. | Chatbox |
-| **FACT\_VERIFICATION** | Embeddings pour les déclarations à valider, optimisés pour récupérer les documents contenant des preuves qui soutiennent ou réfutent la déclaration. Utilisez `FACT_VERIFICATION` pour le texte cible et `RETRIEVAL_DOCUMENT` pour les documents à récupérer. | Systèmes de fact-checking automatisés |
+| **SEMANTIC\_SIMILARITY** | 텍스트 유사성을 평가하도록 최적화된 임베딩 | 추천 시스템, 중복 감지 |
+| **분류** | 사전 설정된 라벨에 따라 텍스트를 분류하도록 최적화된 임베딩 | 감정 분석, 스팸 감지 |
+| **클러스터링** | 유사성을 기반으로 텍스트를 클러스터링하는 데 최적화된 임베딩 | 문서 정리, 시장 조사, 이상 감지 |
+| **RETRIEVAL\_DOCUMENT** | 문서 검색에 최적화된 임베딩입니다. | 검색을 위해 기사, 책 또는 웹페이지를 색인 생성합니다. |
+| **RETRIEVAL\_QUERY** | 일반 검색어에 최적화된 임베딩 쿼리에는 `RETRIEVAL_QUERY`를 사용하고 검색할 문서에는 `RETRIEVAL_DOCUMENT`를 사용합니다. | 맞춤검색 |
+| **CODE\_RETRIEVAL\_QUERY** | 자연어 쿼리를 기반으로 코드 블록을 검색하는 데 최적화된 임베딩입니다. 질문에는 `CODE_RETRIEVAL_QUERY`를 사용하고 검색할 코드 블록에는 `RETRIEVAL_DOCUMENT`를 사용하세요. | 코드 추천 및 검색 |
+| **QUESTION\_ANSWERING** | 질의 응답 시스템의 질문 임베딩(질문에 답변하는 문서를 찾는 데 최적화됨) 질문에는 `QUESTION_ANSWERING`를 사용하고 검색할 문서에는 `RETRIEVAL_DOCUMENT`를 사용합니다. | 채팅 상자 |
+| **FACT\_VERIFICATION** | 확인해야 하는 진술의 임베딩으로, 진술을 뒷받침하거나 반박하는 증거가 포함된 문서를 검색하는 데 최적화되어 있습니다. 타겟 텍스트에는 `FACT_VERIFICATION`를 사용하고 검색할 문서에는 `RETRIEVAL_DOCUMENT`를 사용합니다. | 자동 사실 확인 시스템 |
 
-## Contrôler la taille de l'intégration
+## 임베딩 크기 제어
 
-`gemini-embedding-001` et `gemini-embedding-2` sont tous deux entraînés à l'aide de la technique d'apprentissage de la représentation Matryoshka (MRL, Matryoshka Representation Learning), qui apprend à un modèle à apprendre des embeddings de grande dimension dont les segments initiaux (ou préfixes) sont également des versions plus simples et utiles des mêmes données.
+`gemini-embedding-001`와 `gemini-embedding-2`는 모두 Matryoshka Representation Learning (MRL) 기법을 사용하여 학습됩니다. 이 기법은 모델에 동일한 데이터의 유용하고 더 간단한 버전인 초기 세그먼트 (또는 접두사)가 있는 고차원 삽입을 학습하도록 가르칩니다.
 
-Utilisez le paramètre `output_dimensionality` pour contrôler la taille du vecteur d'embedding de sortie. En sélectionnant une dimensionnalité de sortie plus petite, vous pouvez économiser de l'espace de stockage et augmenter l'efficacité des calculs pour les applications en aval, tout en sacrifiant peu de qualité. Par défaut, les deux modèles génèrent un embedding de 3 072 dimensions, mais vous pouvez le tronquer à une taille plus petite sans perdre en qualité pour économiser de l'espace de stockage. Nous vous recommandons d'utiliser des dimensions de sortie de 768, 1 536 ou 3 072.
+`output_dimensionality` 파라미터를 사용하여 출력 임베딩 벡터의 크기를 제어합니다. 더 작은 출력 크기를 선택하면 저장공간을 절약하고 다운스트림 애플리케이션의 계산 효율성을 높일 수 있으며 품질 면에서는 거의 손실이 없습니다. 기본적으로 두 모델 모두 3072차원 임베딩을 출력하지만 품질 손실 없이 더 작은 크기로 잘라 저장공간을 절약할 수 있습니다. 768, 1536 또는 3072 출력 크기를 사용하는 것이 좋습니다.
 
 ### Python
 
@@ -393,7 +393,7 @@ embedding_length = len(embedding_obj.values)
 print(f"Length of embedding: {embedding_length}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -468,17 +468,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-emb
     }'
 ```
 
-Exemple de résultat de l'extrait de code :
+코드 스니펫의 출력 예시:
 
 ```
 Length of embedding: 768
 ```
 
-## Garantir la qualité pour les dimensions plus petites
+## 더 작은 크기의 품질 보장
 
-Alors que les embeddings de dimension 3072 par défaut sont toujours normalisés, Gemini Embedding 2 normalise également automatiquement les dimensions tronquées (par exemple, 768, 1536). Cela garantit que la similarité sémantique est calculée à l'aide de la direction du vecteur plutôt que de son amplitude, ce qui permet d'obtenir des résultats plus précis prêts à l'emploi.
+기본 3072차원 임베딩은 항상 정규화되지만 Gemini Embedding 2는 잘린 차원 (예: 768, 1536)도 자동 정규화합니다. 이렇게 하면 크기가 아닌 벡터 방향을 통해 의미 유사성이 계산되므로 기본적으로 더 정확한 결과를 얻을 수 있습니다.
 
-**Anciens modèles** : si vous utilisez `gemini-embedding-001`, vous devez normaliser manuellement les dimensions non 3072 comme suit :
+**이전 모델**: `gemini-embedding-001`를 사용하는 경우 다음과 같이 3072가 아닌 차원을 수동으로 정규화해야 합니다.
 
 ### Python
 
@@ -494,45 +494,45 @@ print(f"Normed embedding length: {len(normed_embedding)}")
 print(f"Norm of normed embedding: {np.linalg.norm(normed_embedding):.6f}") # Should be very close to 1
 ```
 
-Exemple de résultat de cet extrait de code :
+이 코드 스니펫의 출력 예시:
 
 ```
 Normed embedding length: 768
 Norm of normed embedding: 1.000000
 ```
 
-Le tableau suivant présente les scores MTEB, un benchmark couramment utilisé pour les embeddings, pour différentes dimensions. Le résultat montre notamment que les performances ne sont pas strictement liées à la taille de la dimension d'intégration, les dimensions inférieures obtenant des scores comparables à ceux de leurs homologues de dimension supérieure.
+다음 표에는 다양한 차원에 대한 MTEB 점수가 나와 있습니다. MTEB는 임베딩에 흔히 사용되는 벤치마크입니다. 특히 결과에 따르면 성능이 임베딩 차원의 크기와 엄격하게 연결되어 있지 않으며, 낮은 차원이 높은 차원과 비슷한 점수를 달성합니다.
 
-| Dimension MRL | Score MTEB (Gemini Embedding 001) |
+| MRL 측정기준 | MTEB 점수 (Gemini Embedding 001) |
 | --- | --- |
 | 2048 | 68.16 |
 | 1536 | 68.17 |
 | 768 | 67.99 |
-| 512 | 67,55 |
-| 256 | 66,19 |
+| 512 | 67.55 |
+| 256 | 66.19 |
 | 128 | 63.31 |
 
-## Embeddings multimodaux
+## 멀티모달 임베딩
 
-Le modèle `gemini-embedding-2` accepte les entrées multimodales, ce qui vous permet d'intégrer des images, des vidéos, des contenus audio et des documents en plus du texte. Toutes les modalités sont mappées dans le même espace d'embedding, ce qui permet la recherche et la comparaison intermodales.
+`gemini-embedding-2` 모델은 멀티모달 입력을 지원하므로 텍스트와 함께 이미지, 동영상, 오디오, 문서 콘텐츠를 삽입할 수 있습니다. 모든 모달리티는 동일한 임베딩 공간에 매핑되어 교차 모달 검색 및 비교가 가능합니다.
 
-### Modalités et limites acceptées
+### 지원되는 모달리티 및 한도
 
-La limite globale maximale de jetons d'entrée est de 8 192 jetons.
+전체 최대 입력 토큰 한도는 8,192개입니다.
 
-| Modalité | Spécifications et limites |
+| 형식 | 사양 및 한도 |
 | --- | --- |
-| **Texte** | Il accepte jusqu'à 8 192 jetons. |
-| **Image** | Six images maximum par requête. Formats acceptés : PNG, JPEG. |
-| **Audio** | Durée maximale de 180 secondes. Formats compatibles : MP3, WAV. |
-| **Vidéo** | Durée maximale de 120 secondes. Formats acceptés : MP4, MOV. Codecs compatibles : H264, H265, AV1, VP9.  Le système traite un maximum de 32 images par vidéo : les vidéos courtes (≤ 32 s) sont échantillonnées à 1 FPS, tandis que les vidéos plus longues sont échantillonnées de manière uniforme à 32 images. Les pistes audio ne sont pas traitées dans les fichiers vidéo. |
-| **Documents (PDF)** | Six pages maximum. |
+| **텍스트** | 최대 8,192개의 토큰을 지원합니다. |
+| **이미지** | 요청당 최대 6개의 이미지 지원되는 형식: PNG, JPEG |
+| **오디오** | 최대 재생 시간은 180초입니다. 지원되는 형식: MP3, WAV |
+| **동영상** | 최대 길이는 120초입니다. 지원되는 형식: MP4, MOV 지원되는 코덱: H264, H265, AV1, VP9  시스템은 동영상당 최대 32프레임을 처리합니다. 짧은 동영상 (≤32초)은 1fps로 샘플링되고 긴 동영상은 32프레임으로 균일하게 샘플링됩니다. 오디오 트랙은 동영상 파일에서 처리되지 않습니다. |
+| **문서 (PDF)** | 최대 6페이지 |
 
-### Intégrer des images
+### 이미지 삽입
 
-L'exemple suivant montre comment intégrer une image à l'aide de `gemini-embedding-2`.
+다음 예에서는 `gemini-embedding-2`를 사용하여 이미지를 삽입하는 방법을 보여줍니다.
 
-Les images peuvent être fournies sous forme de données intégrées ou de fichiers importés via l'[API Files](https://ai.google.dev/gemini-api/docs/files?hl=fr).
+이미지는 인라인 데이터로 제공하거나 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ko)를 통해 업로드된 파일로 제공할 수 있습니다.
 
 ### Python
 
@@ -558,7 +558,7 @@ result = client.models.embed_content(
 print(result.embeddings)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -606,15 +606,15 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### Agrégation d'embeddings
+### 임베딩 집계
 
-Lorsque vous travaillez avec du contenu multimodal, la façon dont vous structurez votre entrée affecte la sortie d'embedding :
+멀티모달 콘텐츠로 작업할 때 입력 구조는 임베딩 출력에 영향을 미칩니다.
 
-- **Plusieurs parties (agrégées)** : l'ajout de plusieurs entrées directement au paramètre `contents` produit un embedding agrégé pour toutes les entrées.
-- **Plusieurs objets `Content` (séparés)** : en encapsulant chaque entrée dans un objet `Content` et en les transmettant dans le paramètre `contents`, des embeddings distincts sont renvoyés pour chaque entrée.
-- **Représentation au niveau du post** : pour les objets complexes tels que les posts sur les réseaux sociaux comportant plusieurs éléments multimédias, nous vous recommandons d'agréger des embeddings distincts (par exemple, en les moyennant) afin de créer une représentation cohérente au niveau du post.
+- **여러 부분 (집계됨):** `contents` 매개변수에 여러 입력을 직접 추가하면 모든 입력에 대해 하나의 집계된 임베딩이 생성됩니다.
+- **여러 `Content` 객체 (별도):** 각 입력을 `Content` 객체로 래핑하고 `contents` 매개변수에 전달하면 각 항목에 대해 별도의 임베딩이 반환됩니다.
+- **게시물 수준 표현:** 미디어 항목이 여러 개인 소셜 미디어 게시물과 같은 복잡한 객체의 경우 별도의 삽입을 집계(예: 평균)하여 일관된 게시물 수준 표현을 만드는 것이 좋습니다.
 
-L'exemple suivant montre comment créer un embedding agrégé pour les entrées de texte et d'image. Il vous suffit d'ajouter plusieurs entrées au paramètre `contents` :
+다음 예시는 텍스트 및 이미지 입력에 대해 하나의 집계된 임베딩을 만드는 방법을 보여줍니다. `contents` 매개변수에 여러 입력을 추가하기만 하면 됩니다.
 
 ### Python
 
@@ -643,7 +643,7 @@ for embedding in result.embeddings:
     print(embedding.values)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -700,7 +700,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-En revanche, si vous utilisez des objets `Content` dans le paramètre `contents`, il renvoie des embeddings distincts. Cet exemple crée plusieurs embeddings en un seul appel d'embedding :
+반면 `contents` 매개변수 내에서 `Content` 객체를 사용하면 별도의 임베딩이 반환됩니다. 이 예시에서는 하나의 임베딩 호출에서 여러 임베딩을 만듭니다.
 
 ### Python
 
@@ -733,7 +733,7 @@ for embedding in result.embeddings:
     print(embedding.values)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -791,11 +791,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### Intégrer de l'audio
+### 오디오 삽입
 
-L'exemple suivant montre comment intégrer un fichier audio à l'aide de `gemini-embedding-2`.
+다음 예는 `gemini-embedding-2`를 사용하여 오디오 파일을 삽입하는 방법을 보여줍니다.
 
-Les fichiers audio peuvent être fournis sous forme de données intégrées ou de fichiers importés via l'[API Files](https://ai.google.dev/gemini-api/docs/files?hl=fr).
+오디오 파일은 인라인 데이터로 제공하거나 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ko)를 통해 업로드된 파일로 제공할 수 있습니다.
 
 ### Python
 
@@ -821,7 +821,7 @@ result = client.models.embed_content(
 print(result.embeddings)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -869,11 +869,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### Intégrer une vidéo
+### 동영상 삽입
 
-L'exemple suivant montre comment intégrer une vidéo à l'aide de `gemini-embedding-2`.
+다음 예는 `gemini-embedding-2`를 사용하여 동영상을 삽입하는 방법을 보여줍니다.
 
-Les vidéos peuvent être fournies sous forme de données intégrées ou de fichiers importés via l'[API Files](https://ai.google.dev/gemini-api/docs/files?hl=fr).
+동영상은 인라인 데이터로 제공하거나 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ko)를 통해 업로드된 파일로 제공할 수 있습니다.
 
 ### Python
 
@@ -899,7 +899,7 @@ result = client.models.embed_content(
 print(result.embeddings[0].values)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -947,13 +947,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-Si vous devez intégrer des vidéos de plus de 120 secondes, vous pouvez les découper en segments qui se chevauchent et intégrer ces segments individuellement.
+120초가 넘는 동영상을 삽입해야 하는 경우 동영상을 중복되는 세그먼트로 나누어 각 세그먼트를 개별적으로 삽입하면 됩니다.
 
-### Intégrer des documents
+### 문서 삽입
 
-Les documents au format PDF peuvent être intégrés directement. Le modèle traite le contenu visuel et textuel de chaque page.
+PDF 형식의 문서는 직접 삽입할 수 있습니다. 모델은 각 페이지의 시각적 콘텐츠와 텍스트 콘텐츠를 처리합니다.
 
-Les fichiers PDF peuvent être fournis sous forme de données intégrées ou de fichiers importés via l'[API Files](https://ai.google.dev/gemini-api/docs/files?hl=fr).
+PDF는 인라인 데이터로 제공하거나 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ko)를 통해 업로드된 파일로 제공할 수 있습니다.
 
 ### Python
 
@@ -979,7 +979,7 @@ result = client.models.embed_content(
 print(result.embeddings)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1027,91 +1027,91 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-## Cas d'utilisation
+## 사용 사례
 
-Les embeddings de texte sont essentiels pour de nombreux cas d'utilisation courants de l'IA, tels que :
+텍스트 임베딩은 다음과 같은 다양한 일반적인 AI 사용 사례에 매우 중요합니다.
 
-- **Génération augmentée par récupération (RAG)** : les embeddings améliorent la qualité du texte généré en récupérant et en intégrant des informations pertinentes dans le contexte d'un modèle.
-- **Récupération d'informations** : recherchez le texte ou les documents les plus similaires d'un point de vue sémantique à partir d'un texte d'entrée.
+- **검색 증강 생성 (RAG):** 임베딩은 모델의 컨텍스트에서 관련 정보를 검색하고 통합하여 생성된 텍스트의 품질을 향상합니다.
+- **정보 검색:** 입력 텍스트가 주어졌을 때 의미적으로 가장 유사한 텍스트 또는 문서를 검색합니다.
 
-  [Tutoriel sur la recherche de documentstask](https://github.com/google-gemini/cookbook/blob/main/examples/Talk_to_documents_with_embeddings.ipynb)
-- **Reclassement des résultats de recherche** : classez les éléments les plus pertinents en attribuant un score sémantique aux résultats initiaux par rapport à la requête.
+  [문서 검색 튜토리얼task](https://github.com/google-gemini/cookbook/blob/main/examples/Talk_to_documents_with_embeddings.ipynb)
+- **검색 재순위 지정**: 쿼리에 대해 초기 결과에 시맨틱 점수를 매겨 가장 관련성 높은 항목에 우선순위를 지정합니다.
 
-  [Tutoriel sur le réordonnancement des résultats de recherchetask](https://github.com/google-gemini/cookbook/blob/main/examples/Search_reranking_using_embeddings.ipynb)
-- **Détection des anomalies** : la comparaison de groupes d'embeddings peut aider à identifier des tendances ou des valeurs aberrantes cachées.
+  [검색 재순위 지정 튜토리얼task](https://github.com/google-gemini/cookbook/blob/main/examples/Search_reranking_using_embeddings.ipynb)
+- **이상 감지:** 임베딩 그룹을 비교하면 숨겨진 추세나 이상치를 식별할 수 있습니다.
 
-  [Tutoriel sur la détection d'anomaliesbubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/Anomaly_detection_with_embeddings.ipynb)
-- **Classification** : catégorisez automatiquement le texte en fonction de son contenu, comme l'analyse des sentiments ou la détection du spam.
+  [이상 감지 튜토리얼bubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/Anomaly_detection_with_embeddings.ipynb)
+- **분류:** 감정 분석 또는 스팸 감지와 같은 콘텐츠를 기반으로 텍스트를 자동으로 분류합니다.
 
-  [Tutoriel sur la classificationtoken](https://github.com/google-gemini/cookbook/blob/main/examples/Classify_text_with_embeddings.ipynb)
-- **Clustering** : comprenez efficacement les relations complexes en créant des clusters et des visualisations de vos embeddings.
+  [분류 튜토리얼token](https://github.com/google-gemini/cookbook/blob/main/examples/Classify_text_with_embeddings.ipynb)
+- **클러스터링:** 임베딩의 클러스터와 시각화를 만들어 복잡한 관계를 효과적으로 파악합니다.
 
-  [Tutoriel sur la visualisation du clusteringbubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/clustering_with_embeddings.ipynb)
+  [클러스터링 시각화 튜토리얼bubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/clustering_with_embeddings.ipynb)
 
-## Stocker les embeddings
+## 임베딩 저장
 
-Lorsque vous déployez des embeddings en production, il est courant d'utiliser des **bases de données vectorielles** pour stocker, indexer et récupérer efficacement des embeddings de grande dimension. Google Cloud propose des services de données gérés qui peuvent être utilisés à cette fin, y compris [Gemini Enterprise Agent Platform Vector Search 2.0](https://docs.cloud.google.com/gemini-enterprise-agent-platform/BUILD/vector-search-2?hl=fr), [BigQuery](https://cloud.google.com/bigquery/docs/introduction?hl=fr), [AlloyDB](https://cloud.google.com/alloydb/docs/overview?hl=fr) et [Cloud SQL](https://cloud.google.com/sql/docs/postgres/introduction?hl=fr).
+임베딩을 프로덕션에 적용할 때 **벡터 데이터베이스**를 사용하여 고차원 임베딩을 효율적으로 저장, 색인 생성, 검색하는 것이 일반적입니다. Google Cloud는 [Gemini Enterprise Agent Platform Vector Search 2.0](https://docs.cloud.google.com/gemini-enterprise-agent-platform/BUILD/vector-search-2?hl=ko), [BigQuery](https://cloud.google.com/bigquery/docs/introduction?hl=ko), [AlloyDB](https://cloud.google.com/alloydb/docs/overview?hl=ko), [Cloud SQL](https://cloud.google.com/sql/docs/postgres/introduction?hl=ko) 등 이러한 용도로 사용할 수 있는 관리형 데이터 서비스를 제공합니다.
 
-Les tutoriels suivants montrent comment utiliser d'autres bases de données vectorielles tierces avec Gemini Embedding.
+다음 튜토리얼에서는 Gemini Embedding과 함께 다른 서드 파티 벡터 데이터베이스를 사용하는 방법을 보여줍니다.
 
-- [Tutoriels ChromaDBbolt](https://docs.trychroma.com/integrations/embedding-models/google-gemini)
-- [Tutoriels QDrantbolt](https://qdrant.tech/documentation/embeddings/gemini/)
-- [Tutoriels Weaviatebolt](https://docs.weaviate.io/weaviate/model-providers/google)
-- [Tutoriels Pineconebolt](https://github.com/google-gemini/cookbook/blob/main/examples/langchain/Gemini_LangChain_QA_Pinecone_WebLoad.ipynb)
+- [ChromaDB 튜토리얼bolt](https://docs.trychroma.com/integrations/embedding-models/google-gemini)
+- [QDrant 튜토리얼bolt](https://qdrant.tech/documentation/embeddings/gemini/)
+- [Weaviate 튜토리얼bolt](https://docs.weaviate.io/weaviate/model-providers/google)
+- [Pinecone 튜토리얼bolt](https://github.com/google-gemini/cookbook/blob/main/examples/langchain/Gemini_LangChain_QA_Pinecone_WebLoad.ipynb)
 
-## Versions de modèle
+## 모델 버전
 
-### Embedding Gemini 2
+### Gemini 임베딩 2
 
-| Propriété | Description |
+| 속성 | 설명 |
 | --- | --- |
-| Code du modèle id\_card | **API Gemini**  `gemini-embedding-2` |
-| Types de données acceptés pour save | **Entrée**  Texte, image, vidéo, audio, PDF  **Résultat**  Embeddings textuels |
-| token\_autoLimites de jetons[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  8 192  **Taille de la dimension de sortie**  Flexible, prend en charge : 128 à 3 072, recommandé : 768, 1 536, 3 072 |
-| Versions 123 | Pour en savoir plus, consultez les [schémas de version de modèle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - Stable : `gemini-embedding-2` |
-| calendar\_monthDernière mise à jour | Avril 2026 |
+| id\_card모델 코드 | **Gemini API**  `gemini-embedding-2` |
+| save 지원 데이터 유형 | **입력**  텍스트, 이미지, 동영상, 오디오, PDF  **출력**  텍스트 임베딩 |
+| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 토큰 한도**  8,192  **출력 측정기준 크기**  유연함, 지원: 128~3072, 권장: 768, 1536, 3072 |
+| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - 안정화 버전: `gemini-embedding-2` |
+| calendar\_month최신 업데이트 | 2026년 4월 |
 
-### Embedding Gemini
+### Gemini 임베딩
 
-| Propriété | Description |
+| 속성 | 설명 |
 | --- | --- |
-| Code du modèle id\_card | **API Gemini**  `gemini-embedding-001` |
-| Types de données acceptés pour save | **Entrée**  Texte  **Résultat**  Embeddings textuels |
-| token\_autoLimites de jetons[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  2 048  **Taille de la dimension de sortie**  Flexible, prend en charge : 128 à 3 072, recommandé : 768, 1 536, 3 072 |
-| Versions 123 | Pour en savoir plus, consultez les [schémas de version de modèle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - Stable : `gemini-embedding-001` |
-| calendar\_monthDernière mise à jour | Juin 2025 |
+| id\_card모델 코드 | **Gemini API**  `gemini-embedding-001` |
+| save 지원 데이터 유형 | **입력**  텍스트  **출력**  텍스트 임베딩 |
+| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 토큰 한도**  2,048  **출력 측정기준 크기**  유연함, 지원: 128~3072, 권장: 768, 1536, 3072 |
+| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - 안정화 버전: `gemini-embedding-001` |
+| calendar\_month최신 업데이트 | 2025년 6월 |
 
-Pour les modèles d'embeddings obsolètes, consultez la page [Obsolescence](https://ai.google.dev/gemini-api/docs/deprecations?hl=fr).
+지원 중단된 임베딩 모델은 [지원 중단](https://ai.google.dev/gemini-api/docs/deprecations?hl=ko) 페이지를 참고하세요.
 
-## Migration depuis gemini-embedding-001
+## gemini-embedding-001에서 이전
 
-Les espaces d'intégration entre `gemini-embedding-001` et `gemini-embedding-2` sont **incompatibles**. Cela signifie que vous ne pouvez pas comparer directement les embeddings générés par un modèle avec ceux générés par l'autre. Si vous passez à `gemini-embedding-2`, vous devez réintégrer toutes vos données existantes.
+`gemini-embedding-001`와 `gemini-embedding-2` 사이의 삽입 공간은 **호환되지 않습니다**. 즉, 한 모델에서 생성된 임베딩을 다른 모델에서 생성된 임베딩과 직접 비교할 수 없습니다. `gemini-embedding-2`로 업그레이드하는 경우 기존 데이터를 모두 다시 삽입해야 합니다.
 
-Outre l'incompatibilité, il existe plusieurs autres différences notables entre les deux modèles :
+호환성 외에도 두 모델 간에는 몇 가지 주목할 만한 차이점이 있습니다.
 
-- **Spécification du type de tâche** : avec `gemini-embedding-001`, vous spécifiez le type de tâche à l'aide du paramètre `task_type` (par exemple, `SEMANTIC_SIMILARITY`, `RETRIEVAL_DOCUMENT`). Avec `gemini-embedding-2`, le paramètre `task_type` n'est pas accepté. Au lieu de cela, vous devez inclure les instructions de la tâche directement dans la requête pour les tâches textuelles. Pour savoir comment mettre en forme les requêtes pour différents cas d'utilisation, consultez [Types de tâches avec Embeddings 2](#task-types-embeddings-2).
-- **Agrégation d'embeddings** : `gemini-embedding-001` génère des embeddings individuels pour chaque chaîne d'une liste d'entrées. En revanche, `gemini-embedding-2` produit un seul embedding agrégé lorsque plusieurs entrées (comme du texte et des images) sont fournies directement dans une même requête. Pour générer des embeddings distincts pour chaque entrée, enveloppez chaque entrée dans un objet `Content` ou utilisez l'[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr#batch-embedding). Pour en savoir plus, consultez [Agrégation d'intégration](#embedding-aggregation).
-- **Normalisation** : si vous utilisez `output_dimensionality` pour demander des embeddings avec moins de 3 072 dimensions, `gemini-embedding-2` normalise automatiquement ces embeddings tronqués. Avec `gemini-embedding-001`, vous devez effectuer une normalisation manuelle pour les dimensions autres que 3 072. Pour en savoir plus, consultez [Garantir la qualité pour les dimensions plus petites](#quality-for-smaller-dimensions).
+- **작업 유형 지정:** `gemini-embedding-001`를 사용하면 `task_type` 매개변수 (예: `SEMANTIC_SIMILARITY`, `RETRIEVAL_DOCUMENT`)를 사용하여 작업 유형을 지정합니다. `gemini-embedding-2`를 사용하면 `task_type` 매개변수가 지원되지 않습니다. 대신 텍스트 전용 작업의 프롬프트에 작업 안내를 직접 포함해야 합니다. 다양한 사용 사례에 맞게 프롬프트를 포맷하는 방법에 대한 자세한 내용은 [임베딩 2가 포함된 태스크 유형](#task-types-embeddings-2)을 참고하세요.
+- **임베딩 집계:** `gemini-embedding-001`는 입력 목록에 있는 각 문자열에 대해 개별 임베딩을 생성합니다. 반면 `gemini-embedding-2`는 텍스트, 이미지와 같은 여러 입력이 하나의 요청에 직접 제공되는 경우 단일 집계 임베딩을 생성합니다. 개별 입력에 대해 별도의 임베딩을 생성하려면 각 입력을 `Content` 객체로 래핑하거나 [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ko#batch-embedding)를 사용하세요. 자세한 내용은 [삽입 집계](#embedding-aggregation)를 참고하세요.
+- **정규화:** `output_dimensionality`를 사용하여 3072개 미만의 차원으로 임베딩을 요청하면 `gemini-embedding-2`가 잘린 임베딩을 자동으로 정규화합니다. `gemini-embedding-001`의 경우 3072 이외의 차원에 대해 수동 정규화를 실행해야 합니다. 자세한 내용은 [작은 크기의 품질 보장](#quality-for-smaller-dimensions)을 참고하세요.
 
-## Embeddings par lot
+## 일괄 임베딩
 
-Si la latence n'est pas un problème, essayez d'utiliser les modèles d'embeddings Gemini avec l'[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr#batch-embedding). Cela permet un débit beaucoup plus élevé à 50% du prix par défaut des embeddings.
-Vous trouverez des exemples pour vous aider à vous lancer dans le [cookbook de l'API Batch](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb).
+지연 시간이 문제가 되지 않는다면 [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ko#batch-embedding)와 함께 Gemini Embeddings 모델을 사용해 보세요. 이를 통해 기본 삽입 가격의 50% 로 훨씬 높은 처리량을 달성할 수 있습니다.
+시작하는 방법의 예는 [Batch API 쿡북](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb)을 참고하세요.
 
-## Avis sur l'utilisation responsable
+## 책임감 있는 사용 알림
 
-Contrairement aux modèles d'IA générative qui créent du contenu, le modèle Gemini Embedding est uniquement destiné à transformer le format de vos données d'entrée en représentation numérique. Bien que Google soit responsable de la fourniture d'un modèle d'embedding qui transforme le format de vos données d'entrée au format numérique demandé, les utilisateurs conservent l'entière responsabilité des données qu'ils saisissent et des embeddings qui en résultent. En utilisant le modèle d'embedding Gemini, vous confirmez que vous disposez des droits nécessaires sur tous les contenus que vous mettez en ligne. Ne générez aucun contenu qui porte atteinte à la propriété intellectuelle ou aux droits au respect de la confidentialité d'autrui. Votre utilisation de ce service est soumise à notre [Règlement sur les utilisations interdites](https://policies.google.com/terms/generative-ai/use-policy?hl=fr) et aux [Conditions d'utilisation de Google](https://ai.google.dev/gemini-api/terms?hl=fr).
+새 콘텐츠를 생성하는 생성형 AI 모델과 달리 Gemini 임베딩 모델은 입력 데이터의 형식을 수치 표현으로 변환하는 데만 사용됩니다. Google은 입력 데이터의 형식을 요청된 숫자 형식으로 변환하는 삽입 모델을 제공할 책임이 있지만, 사용자는 입력한 데이터와 결과 삽입에 대한 모든 책임을 집니다. Gemini 임베딩 모델을 사용하면 업로드하는 모든 콘텐츠에 필요한 권리를 보유하고 있음을 확인하는 것으로 간주됩니다. 타인의 지식 재산 및 개인 정보 보호 권리를 침해하는 콘텐츠를 생성해서는 안 됩니다. 이 서비스 사용 시 Google의 [금지된 사용 정책](https://policies.google.com/terms/generative-ai/use-policy?hl=ko) 및 [Google 서비스 약관](https://ai.google.dev/gemini-api/terms?hl=ko)이 적용됩니다.
 
-## Commencer à créer avec des embeddings
+## 임베딩으로 빌드 시작
 
-Consultez le [notebook de démarrage rapide sur les embeddings](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Embeddings.ipynb) pour explorer les capacités du modèle et découvrir comment personnaliser et visualiser vos embeddings.
+[임베딩 빠른 시작 노트북](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Embeddings.ipynb)을 확인하여 모델 기능을 살펴보고 임베딩을 맞춤설정하고 시각화하는 방법을 알아보세요.
 
-Envoyer des commentaires
+의견 보내기
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Dernière mise à jour le 2026/05/01 (UTC).
+최종 업데이트: 2026-05-01(UTC)
 
-Voulez-vous nous donner plus d'informations ?
+의견을 전달하고 싶나요?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/05/01 (UTC)."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-05-01(UTC)"],[],[]]

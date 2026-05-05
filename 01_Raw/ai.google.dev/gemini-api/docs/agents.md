@@ -1,65 +1,76 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agents?hl=ar
-fetched_at: 2026-05-05T19:44:25.429945+00:00
-title: "\u0646\u0638\u0631\u0629 \u0639\u0627\u0645\u0629 \u0639\u0644\u0649 \u0627\u0644\u0648\u0643\u0644\u0627\u0621 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agents?hl=id
+fetched_at: 2026-05-05T20:08:26.473162+00:00
+title: "Ringkasan Agen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-إرسال ملاحظات
+Kirim masukan
 
-# نظرة عامة على الوكلاء
+# Ringkasan Agen
 
-الوكلاء هم أنظمة تستفيد من نماذج Gemini ومجموعة من الأدوات وإمكانيات الاستدلال لأداء مهام معقّدة ومتعدّدة الخطوات وتحقيق أهداف معيّنة. على عكس استدعاء نموذج واحد، يمكن للوكيل التخطيط وتنفيذ سلسلة من الإجراءات والتفاعل مع الأنظمة الخارجية وتجميع المعلومات لتلبية طلب المستخدم.
+Agen adalah sistem yang memanfaatkan model Gemini, serangkaian alat, dan kemampuan penalaran untuk melakukan tugas kompleks multi-langkah dan mencapai sasaran tertentu. Tidak seperti satu panggilan model, agen dapat merencanakan, menjalankan serangkaian tindakan, berinteraksi dengan sistem eksternal, dan mensintesis informasi untuk memenuhi permintaan pengguna.
 
-باستخدام Gemini API، يمكنك إنشاء وكلاء فعّالين من خلال الاستفادة من ميزات مثل:
+Dengan Gemini API, Anda dapat membangun agen yang andal dengan memanfaatkan fitur seperti:
 
-- **[نماذج Gemini](https://ai.google.dev/gemini-api/docs/models?hl=ar):** هي الذكاء الأساسي الذي يوفّر إمكانيات التحليل المنطقي وفهم اللغة.
-- **[الأدوات](https://ai.google.dev/gemini-api/docs/tools?hl=ar):** هي الإمكانيات التي تربط النموذج بـ
-  المعلومات والإجراءات في العالم الحقيقي. يمكن أن تكون هذه الأدوات مضمّنة (مثل "بحث Google" أو "خرائط Google" أو "تنفيذ الرموز البرمجية") أو أدوات مخصّصة.
-- **[استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar):** هي الآلية التي تتيح لك
-  تحديد أدواتك وواجهات برمجة التطبيقات المخصّصة وربطها بنموذج Gemini.
-- **[\*\*Thinking\*\*](https://ai.google.dev/gemini-api/docs/thinking?hl=ar):** هي الميزات التي تُحسّن قدرة النموذج على التحليل المنطقي والتخطيط للمهام المعقّدة.
-- **[\*\*السياق الطويل\*\*](https://ai.google.dev/gemini-api/docs/long-context?hl=ar):** يتيح للوكلاء
-  الاحتفاظ بالحالة والمعلومات خلال التفاعلات المطوّلة.
+- **[Model Gemini](https://ai.google.dev/gemini-api/docs/models?hl=id):** Kecerdasan inti,
+  yang menyediakan penalaran dan pemahaman bahasa.
+- **[Alat](https://ai.google.dev/gemini-api/docs/tools?hl=id):** Kemampuan yang menghubungkan model ke
+  informasi dan tindakan dunia nyata. Alat ini dapat berupa alat bawaan (seperti Google Penelusuran, Maps, Eksekusi Kode) atau alat kustom.
+- **[Panggilan fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id):** Mekanisme untuk
+  menentukan dan menghubungkan alat dan API kustom Anda sendiri ke model Gemini.
+- **[Penalaran](https://ai.google.dev/gemini-api/docs/thinking?hl=id):** Fitur yang meningkatkan
+  kemampuan model untuk menalar dan merencanakan tugas yang kompleks.
+- **[Konteks panjang](https://ai.google.dev/gemini-api/docs/long-context?hl=id):** Memungkinkan agen untuk
+  mempertahankan status dan informasi selama interaksi yang diperpanjang.
 
-## الوكلاء المتاحون
+## Agen yang Tersedia
 
-- **[وكيل الأبحاث المتعمّقة](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar):** هو وكيل مستقل يخطّط وينفّذ ويجمع مهام بحث متعدّدة الخطوات لحالات استخدام مثل تحليل السوق والعناية الواجبة ومراجعات الأدبيات.
+- **[Agen Riset Mendalam](https://ai.google.dev/gemini-api/docs/deep-research?hl=id):** Agen otonom
+  yang merencanakan, menjalankan, dan mensintesis tugas riset multi-langkah untuk
+  kasus penggunaan seperti analisis pasar, uji tuntas, dan tinjauan literatur.
 
-## إنشاء الوكلاء
+## Membangun agen
 
-يستخدم الوكلاء النماذج والأدوات لإكمال المهام المتعدّدة الخطوات. في حين يوفّر Gemini إمكانيات التحليل المنطقي (العقل) والأدوات الأساسية (الأيدي)، غالبًا ما تحتاج إلى إطار عمل للتنسيق من أجل إدارة ذاكرة الوكيل وحلقات التخطيط وتنفيذ ربط الأدوات المعقّد.
+Agen menggunakan model dan alat untuk menyelesaikan tugas multi-langkah. Meskipun Gemini menyediakan kemampuan penalaran ("otak") dan alat penting ("tangan"), Anda sering kali memerlukan framework orkestrasi untuk mengelola memori agen, loop rencana, dan melakukan chaining alat yang kompleks.
 
-لتحقيق أقصى قدر من الموثوقية في عمليات سير العمل المتعدّدة الخطوات، عليك إنشاء تعليمات تتحكّم بشكل صريح في طريقة تحليل النموذج وتخطيطه. في حين يوفّر Gemini إمكانيات تحليل منطقي عامة قوية، تستفيد الوكلاء المعقّدون من الطلبات التي تفرض سلوكيات معيّنة، مثل الثبات في مواجهة المشاكل وتقييم المخاطر والتخطيط الاستباقي.
+Untuk memaksimalkan keandalan dalam alur kerja multi-langkah, Anda harus membuat petunjuk yang secara eksplisit mengontrol cara model menalar dan merencanakan. Meskipun Gemini menyediakan penalaran umum yang kuat, agen yang kompleks akan mendapatkan manfaat dari perintah yang menerapkan perilaku tertentu seperti persistensi saat menghadapi masalah, penilaian risiko, dan perencanaan proaktif.
 
-[يمكنك الاطّلاع على عمليات سير العمل المستندة إلى الوكلاء للحصول على استراتيجيات حول تصميم هذه الطلبات.](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ar#agentic-workflows) [في ما يلي مثال على تعليمات النظام التي حسّنت الأداء في العديد من المقاييس المستندة إلى الوكلاء بنسبة %5 تقريبًا.](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ar#agentic-si-template)
+Lihat [Alur kerja
+Agentic](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=id#agentic-workflows) untuk
+mengetahui strategi dalam mendesain perintah ini. Berikut adalah contoh [petunjuk
+sistem](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=id#agentic-si-template) yang
+meningkatkan performa pada beberapa tolok ukur agentic sekitar 5%.
 
-## أطر عمل الوكلاء
+## Framework agen
 
-يتكامل Gemini مع أطر عمل الوكلاء الرائدة والمفتوحة المصدر، مثل:
+Gemini terintegrasi dengan framework agen open source terkemuka seperti:
 
-- [**LangChain / LangGraph**](https://ai.google.dev/gemini-api/docs/langgraph-example?hl=ar): يمكنك إنشاء تدفقات تطبيقات معقّدة ومستندة إلى الحالة وأنظمة متعدّدة الوكلاء باستخدام هياكل الرسم البياني.
-- [**LlamaIndex**](https://ai.google.dev/gemini-api/docs/llama-index?hl=ar): يمكنك ربط وكلاء Gemini بـ
-  بياناتك الخاصة لعمليات سير العمل المحسّنة باستخدام تقنية الاسترجاع المعزّز للتوليد (RAG).
-- [**CrewAI**](https://ai.google.dev/gemini-api/docs/crewai-example?hl=ar)
-- [**Vercel AI SDK**](https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=ar): يمكنك إنشاء واجهات مستخدم ووكلاء مستندين إلى الذكاء الاصطناعي بلغة JavaScript/TypeScript.
-- [**\*\*Google ADK\*\***](https://google.github.io/adk-docs/get-started/python/): هو إطار عمل مفتوح المصدر لإنشاء وكلاء ذكاء اصطناعي قابلين للتشغيل المتبادل وتنسيقهم.
+- [**LangChain / LangGraph**](https://ai.google.dev/gemini-api/docs/langgraph-example?hl=id): Membangun
+  alur aplikasi stateful yang kompleks dan sistem multi-agen menggunakan struktur grafik.
+- [**LlamaIndex**](https://ai.google.dev/gemini-api/docs/llama-index?hl=id): Menghubungkan agen Gemini ke
+  data pribadi Anda untuk alur kerja yang ditingkatkan RAG.
+- [**CrewAI**](https://ai.google.dev/gemini-api/docs/crewai-example?hl=id): Mengorkestrasi agen AI otonom yang kolaboratif,
+  memainkan peran.
+- [**Vercel AI SDK**](https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=id): Membangun
+  antarmuka dan agen pengguna yang didukung AI di JavaScript/TypeScript.
+- [**Google ADK**](https://google.github.io/adk-docs/get-started/python/): Framework open source untuk membangun dan mengorkestrasi agen AI yang dapat beroperasi.
 
-إرسال ملاحظات
+Kirim masukan
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
+Terakhir diperbarui pada 2026-04-29 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Ada masukan untuk kami?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]

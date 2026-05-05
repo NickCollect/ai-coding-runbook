@@ -1,41 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite-preview-09-2025?hl=id
-fetched_at: 2026-05-05T19:46:05.039117+00:00
-title: "Pratinjau Gemini 2.5 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite-preview-09-2025?hl=vi
+fetched_at: 2026-05-05T20:07:00.929454+00:00
+title: "B\u1ea3n xem tr\u01b0\u1edbc Gemini 2.5 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Kirim masukan
+Gửi ý kiến phản hồi
 
-# Pratinjau Gemini 2.5 Flash-Lite
+# Bản xem trước Gemini 2.5 Flash-Lite
 
 ## gemini-2.5-flash-lite-preview-09-2025
 
-| Properti | Deskripsi |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardKode model | `gemini-2.5-flash-lite-preview-09-2025` |
-| saveJenis data yang didukung | **Input**  Teks, gambar, video, audio, PDF  **Output**  Teks |
-| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Batas token input**  1.048.576  **Batas token output**  65.536 |
-| handymanKemampuan | **Pembuatan audio**  Tidak didukung  **Batch API**  Didukung  **Menyimpan ke cache**  Didukung  **Eksekusi kode**  Didukung  **Penelusuran file**  Didukung  **Panggilan fungsi**  Didukung  **Grounding dengan Google Maps**  Tidak didukung  **Pembuatan gambar**  Tidak didukung  **Live API**  Tidak didukung  **Grounding penelusuran**  Didukung  **Output terstruktur**  Didukung  **Penalaran**  Didukung  **Konteks URL**  Didukung |
-| 123Versi | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - Stabil: [`gemini-2.5-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=id) - Dihentikan: `gemini-2.5-flash-lite-preview-09-2025` |
-| calendar\_monthPembaruan terbaru | September 2025 |
-| cognition\_2Batas informasi | Januari 2025 |
+| id\_cardMã kiểu máy | `gemini-2.5-flash-lite-preview-09-2025` |
+| saveCác loại dữ liệu được hỗ trợ | **Thông tin đầu vào**  Văn bản, hình ảnh, video, âm thanh, PDF  **Đầu ra**  Văn bản |
+| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  1.048.576  **Giới hạn mã thông báo đầu ra**  65.536 |
+| handymanChức năng | **Tạo âm thanh**  Không được hỗ trợ  **Batch API**  Được hỗ trợ  **Lưu vào bộ nhớ đệm**  Được hỗ trợ  **Thực thi mã**  Được hỗ trợ  **Tìm kiếm tệp**  Được hỗ trợ  **Gọi hàm**  Được hỗ trợ  **Kết nối với Google Maps**  Không được hỗ trợ  **Tạo hình ảnh**  Không được hỗ trợ  **Live API**  Không được hỗ trợ  **Tìm trong phần liên kết thực tế**  Được hỗ trợ  **Đầu ra có cấu trúc**  Được hỗ trợ  **Tư duy**  Được hỗ trợ  **Bối cảnh URL**  Được hỗ trợ |
+| 123Phiên bản | Đọc [các mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm thông tin chi tiết.  - Ổn định: [`gemini-2.5-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=vi) - Tắt: `gemini-2.5-flash-lite-preview-09-2025` |
+| calendar\_monthThông tin cập nhật mới nhất | Tháng 9 năm 2025 |
+| cognition\_2Điểm cắt kiến thức | Tháng 1 năm 2025 |
 
-Kirim masukan
+Gửi ý kiến phản hồi
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Terakhir diperbarui pada 2026-04-29 UTC.
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-Ada masukan untuk kami?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

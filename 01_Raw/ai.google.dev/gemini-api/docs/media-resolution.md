@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/media-resolution?hl=ko
-fetched_at: 2026-05-05T19:42:35.253734+00:00
+fetched_at: 2026-05-05T20:08:40.984391+00:00
 title: "\ubbf8\ub514\uc5b4 \ud574\uc0c1\ub3c4 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

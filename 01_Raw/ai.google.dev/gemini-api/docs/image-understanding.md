@@ -1,43 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/image-understanding?hl=pl
-fetched_at: 2026-05-05T19:51:39.794873+00:00
-title: "Interpretacja obrazu \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/image-understanding?hl=ko
+fetched_at: 2026-05-05T20:04:22.257451+00:00
+title: "\uc774\ubbf8\uc9c0 \uc774\ud574 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Prześlij opinię
+의견 보내기
 
-# Interpretacja obrazu
+# 이미지 이해
 
-Modele Gemini są budowane od podstaw z myślą o multimodalności, co umożliwia wykonywanie wielu zadań związanych z przetwarzaniem obrazów i widzeniem komputerowym, w tym m.in. opisywanie obrazów, klasyfikowanie obrazów i odpowiadanie na pytania dotyczące obrazów, bez konieczności trenowania wyspecjalizowanych modeli ML.
+Gemini 모델은 처음부터 멀티모달로 설계되어 전문 ML 모델을 학습하지 않고도 이미지 캡셔닝, 분류, 시각적 질의 응답을 비롯한 다양한 이미지 처리 및 컴퓨터 비전 작업을 수행할 수 있습니다.
 
-Oprócz ogólnych możliwości multimodalnych modele Gemini oferują
-**większą dokładność** w konkretnych przypadkach użycia, takich jak [wykrywanie obiektów](#object-detection), dzięki dodatkowemu
-trenowaniu.
+Gemini 모델은 일반적인 멀티모달 기능 외에도 추가 학습을 통해 [객체 감지](#object-detection)와 같은 특정 사용 사례에 대한 **정확도를 향상**합니다.
 
-## Przekazywanie obrazów do Gemini
+## Gemini에 이미지 전달
 
-Obrazy możesz przekazywać jako dane wejściowe do Gemini na 2 sposoby:
+다음 두 가지 방법을 사용하여 Gemini에 이미지를 입력으로 제공할 수 있습니다.
 
-- [Przekazywanie danych obrazu w tekście](#inline-image): idealne rozwiązanie w przypadku mniejszych plików (łączny rozmiar żądania
-  mniejszy niż 20 MB, w tym prompty).
-- [Przesyłanie obrazów za pomocą interfejsu File API](#upload-image): zalecane w przypadku większych plików lub
-  ponownego wykorzystywania obrazów w wielu żądaniach.
+- [인라인 이미지 데이터 전달](#inline-image): 프롬프트를 포함한 총 요청 크기가 20MB 미만인 작은 파일에 적합합니다.
+- [File API를 사용하여 이미지 업로드](#upload-image): 대용량 파일에 권장되며 여러 요청에서 이미지를 재사용하는 데도 권장됩니다.
 
-### Przekazywanie danych obrazu w tekście
+### 인라인 이미지 데이터 전달
 
-Dane obrazu w tekście możesz przekazywać w żądaniu do `generateContent`. Dane obrazu możesz podać jako ciągi zakodowane w formacie Base64 lub odczytując bezpośrednio pliki lokalne (w zależności od języka).
+`generateContent`에 대한 요청에서 인라인 이미지 데이터를 전달할 수 있습니다. Base64 인코딩 문자열로 이미지 데이터를 제공하거나 언어에 따라 로컬 파일을 직접 읽을 수 있습니다.
 
-Poniższy przykład pokazuje, jak odczytać obraz z pliku lokalnego i przekazać go do interfejsu `generateContent` API w celu przetworzenia.
+다음 예에서는 로컬 파일에서 이미지를 읽고 처리할 `generateContent` API에 전달하는 방법을 보여줍니다.
 
 ### Python
 
@@ -63,7 +59,7 @@ Poniższy przykład pokazuje, jak odczytać obraz z pliku lokalnego i przekazać
   print(response.text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -145,7 +141,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 }' 2> /dev/null
 ```
 
-Możesz też pobrać obraz z adresu URL, przekonwertować go na bajty i przekazać do `generateContent`, jak pokazują poniższe przykłady.
+다음 예와 같이 URL에서 이미지를 가져와 바이트로 변환하고 `generateContent`에 전달할 수도 있습니다.
 
 ### Python
 
@@ -171,7 +167,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -287,9 +283,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
     }' 2> /dev/null
 ```
 
-### Przesyłanie obrazów za pomocą interfejsu File API
+### File API를 사용하여 이미지 업로드
 
-W przypadku dużych plików lub gdy chcesz wielokrotnie używać tego samego pliku obrazu, użyj interfejsu Files API. Poniższy kod przesyła plik obrazu, a następnie używa go w wywołaniu `generateContent`. Więcej informacji i przykładów znajdziesz w [przewodniku po interfejsie Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl).
+큰 파일의 경우 또는 동일한 이미지 파일을 반복적으로 사용하려면 Files API를 사용하세요. 다음 코드는 이미지 파일을 업로드한 다음 `generateContent` 호출에서 파일을 사용합니다. 자세한 내용과 예시는 [파일 API 가이드](https://ai.google.dev/gemini-api/docs/files?hl=ko)를 참고하세요.
 
 ### Python
 
@@ -308,7 +304,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import {
@@ -434,9 +430,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## Promptowanie za pomocą wielu obrazów
+## 여러 이미지로 프롬프트
 
-W jednym prompcie możesz podać wiele obrazów, umieszczając w tablicy `contents` kilka obiektów `Part` obrazu. Mogą to być dane w tekście (pliki lokalne lub adresy URL) oraz odwołania do interfejsu File API.
+`contents` 배열에 이미지 `Part` 객체를 여러 개 포함하여 단일 프롬프트에 이미지를 여러 개 제공할 수 있습니다. 인라인 데이터(로컬 파일 또는 URL)와 파일 API 참조가 혼합될 수 있습니다.
 
 ### Python
 
@@ -472,7 +468,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import {
@@ -621,9 +617,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## Wykrywanie obiektów
+## 객체 감지
 
-Modele są trenowane do wykrywania obiektów w obrazie i uzyskiwania współrzędnych ich ramek ograniczających. Współrzędne względem wymiarów obrazu są skalowane do zakresu [0, 1000]. Musisz przeskalować te współrzędne na podstawie oryginalnego rozmiaru obrazu.
+모델은 이미지에서 객체를 감지하고 경계 상자 좌표를 가져오도록 학습됩니다. 이미지 크기에 상대적인 좌표는 [0, 1000]으로 조정됩니다. 원본 이미지 크기에 따라 이러한 좌표의 크기를 조정해야 합니다.
 
 ### Python
 
@@ -662,84 +658,78 @@ print("Image size: ", width, height)
 print("Bounding boxes:", converted_bounding_boxes)
 ```
 
-Więcej przykładów znajdziesz w tych notatnikach w [Gemini Cookbook](https://github.com/google-gemini/cookbook):
+자세한 예는 [Gemini Cookbook](https://github.com/google-gemini/cookbook)의 다음 노트북을 참고하세요.
 
-- [2D spatial understanding notebook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Spatial_understanding.ipynb?hl=pl)
-- [Experimental 3D pointing notebook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/examples/Spatial_understanding_3d.ipynb?hl=pl)
+- [2D 공간 이해 노트북](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Spatial_understanding.ipynb?hl=ko)
+- [실험용 3D 포인팅 노트북](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/examples/Spatial_understanding_3d.ipynb?hl=ko)
 
-## Obsługiwane formaty obrazów
+## 지원되는 이미지 형식
 
-Gemini obsługuje te typy MIME formatów obrazów:
+Gemini는 다음 이미지 형식 MIME 유형을 지원합니다.
 
-- PNG – `image/png`
-- JPEG – `image/jpeg`
-- WEBP – `image/webp`
-- HEIC – `image/heic`
-- HEIF – `image/heif`
+- PNG - `image/png`
+- JPEG - `image/jpeg`
+- WEBP - `image/webp`
+- HEIC - `image/heic`
+- HEIF - `image/heif`
 
-Więcej informacji o innych metodach wprowadzania plików znajdziesz w przewodniku
-[Metody wprowadzania plików](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=pl).
+다른 파일 입력 방법에 대해 알아보려면 [파일 입력 방법](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ko) 가이드를 참고하세요.
 
-## Uprawnienia
+## 기능
 
-Wszystkie wersje modelu Gemini są multimodalne i mogą być używane w wielu zadaniach związanych z przetwarzaniem obrazów i widzeniem komputerowym, w tym m.in. opisywaniem obrazów, odpowiadaniem na pytania dotyczące obrazów, klasyfikowaniem obrazów i wykrywaniem obiektów.
+모든 Gemini 모델 버전은 멀티모달이며 이미지 캡션, 시각적 질문 및 답변, 이미지 분류, 객체 감지를 비롯한 다양한 이미지 처리 및 컴퓨터 비전 작업에 활용할 수 있습니다.
 
-W zależności od wymagań dotyczących jakości i wydajności Gemini może zmniejszyć potrzebę korzystania z wyspecjalizowanych modeli ML.
+Gemini는 품질 및 성능 요구사항에 따라 전문 ML 모델을 사용할 필요성을 줄일 수 있습니다.
 
-Najnowsze wersje modelu są specjalnie trenowane, aby zwiększyć dokładność w
-wyspecjalizowanych zadaniach, oprócz ogólnych możliwości, takich jak ulepszone
-[wykrywanie obiektów](#object-detection).
+최신 모델 버전은 향상된 [객체 감지](#object-detection)와 같은 일반적인 기능 외에도 전문적인 작업의 정확도를 개선하도록 특별히 학습됩니다.
 
-## Ograniczenia i najważniejsze informacje techniczne
+## 제한사항 및 주요 기술 정보
 
-### Limit pliku
+### 파일 한도
 
-Modele Gemini obsługują maksymalnie 3600 plików obrazów na żądanie.
+Gemini 모델은 요청당 최대 3,600개의 이미지 파일을 지원합니다.
 
-### Obliczanie tokenów
+### 토큰 계산
 
-- 258 tokenów, jeśli oba wymiary są mniejsze lub równe 384 pikselom.
-  Większe obrazy są dzielone na kafelki o wymiarach 768 x 768 pikseli, z których każdy kosztuje 258 tokenów.
+- 두 치수가 모두 384픽셀 이하인 경우 258개의 토큰
+  큰 이미지는 768x768 픽셀 타일로 타일링되며 각 타일은 258개의 토큰이 필요합니다.
 
-Przybliżony wzór na obliczanie liczby kafelków:
+타일 수를 계산하는 대략적인 공식은 다음과 같습니다.
 
-- Oblicz rozmiar jednostki przycinania, który wynosi w przybliżeniu: floor(min(szerokość, wysokość) / 1,5).
-- Podziel każdy wymiar przez rozmiar jednostki przycinania i pomnóż przez siebie, aby uzyskać liczbę kafelków.
+- 대략 floor(min(width, height) / 1.5)인 자르기 단위 크기를 계산합니다.
+- 각 차원을 자르기 단위 크기로 나누고 함께 곱하여 타일 수를 구합니다.
 
-Na przykład w przypadku obrazu o wymiarach 960 x 540 rozmiar jednostki przycinania wyniesie 360. Podziel każdy wymiar przez 360, a liczba kafelków wyniesie 3 \* 2 = 6.
+예를 들어 크기가 960x540인 이미지의 자르기 단위 크기는 360입니다. 각 차원을 360으로 나누면 타일 수는 3 \* 2 = 6입니다.
 
-### Rozdzielczość multimediów
+### 미디어 해상도
 
-Gemini 3 wprowadza szczegółową kontrolę nad przetwarzaniem obrazów multimodalnych za pomocą parametru `media_resolution`. Parametr `media_resolution` określa **maksymalną liczbę tokenów przydzielonych na obraz wejściowy lub klatkę wideo**.
-Wyższe rozdzielczości zwiększają zdolność modelu do odczytywania drobnego tekstu lub identyfikowania małych szczegółów, ale zwiększają zużycie tokenów i opóźnienie.
+Gemini 3는 `media_resolution` 파라미터를 통해 멀티모달 비전 처리에 대한 세밀한 제어 기능을 제공합니다. `media_resolution` 파라미터는 **입력 이미지 또는 동영상 프레임당 할당되는 최대 토큰 수**를 결정합니다.
+해상도가 높을수록 모델이 작은 텍스트를 읽거나 세부 요소를 식별하는 능력을 향상시키지만, 토큰 사용량과 지연 시간이 증가합니다.
 
-Więcej informacji o tym parametrze i jego wpływie na obliczanie tokenów znajdziesz w przewodniku [Rozdzielczość multimediów](https://ai.google.dev/gemini-api/docs/media-resolution?hl=pl).
+파라미터 및 파라미터가 토큰 계산에 미치는 영향에 대한 자세한 내용은 [미디어 해상도](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ko) 가이드를 참고하세요.
 
-## Porady i sprawdzone metody
+## 팁 및 권장사항
 
-- Sprawdź, czy obrazy są prawidłowo obrócone.
-- Używaj wyraźnych obrazów bez rozmycia.
-- Jeśli używasz jednego obrazu z tekstem, umieść prompta tekstowego *po* części obrazu w tablicy `contents`.
+- 이미지가 올바르게 회전되었는지 확인합니다.
+- 흐릿하지 않고 선명한 이미지를 사용하세요.
+- 텍스트가 포함된 단일 이미지를 사용하는 경우 `contents` 배열의 이미지 부분 *뒤에* 텍스트 프롬프트를 배치합니다.
 
-## Co dalej?
+## 다음 단계
 
-Z tego przewodnika dowiesz się, jak przesyłać pliki obrazów i generować dane wyjściowe w postaci tekstu na podstawie danych wejściowych w postaci obrazów. Więcej informacji znajdziesz w tych materiałach:
+이 가이드에서는 이미지 파일을 업로드하고 이미지 입력에서 텍스트 출력을 생성하는 방법을 보여줍니다. 자세한 내용은 다음 리소스를 참고하세요.
 
-- [Interfejs Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl): dowiedz się więcej o przesyłaniu plików i zarządzaniu nimi na potrzeby Gemini.
-- [Instrukcje systemowe](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl#system-instructions):
-  Instrukcje systemowe pozwalają sterować działaniem modelu na podstawie
-  konkretnych potrzeb i przypadków użycia.
-- [Strategie tworzenia promptów za pomocą plików](https://ai.google.dev/gemini-api/docs/files?hl=pl#prompt-guide): interfejs Gemini API obsługuje tworzenie promptów za pomocą danych tekstowych, obrazów, dźwięku i wideo, czyli tworzenie promptów multimodalnych.
-- [Wskazówki dotyczące bezpieczeństwa](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=pl): modele generatywnej
-  AI czasami generują nieoczekiwane dane wyjściowe, np. niedokładne,
-  stronnicze lub obraźliwe. Przetwarzanie końcowe i sprawdzanie przez weryfikatorów są niezbędne, aby ograniczyć ryzyko szkód spowodowanych takimi danymi wyjściowymi.
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ko): Gemini에서 사용할 파일을 업로드하고 관리하는 방법을 자세히 알아보세요.
+- [시스템 안내](https://ai.google.dev/gemini-api/docs/text-generation?hl=ko#system-instructions):
+  시스템 안내를 사용하면 특정 요구사항 및 사용 사례에 따라 모델의 동작을 조정할 수 있습니다.
+- [파일 프롬프트 전략](https://ai.google.dev/gemini-api/docs/files?hl=ko#prompt-guide): Gemini API는 텍스트, 이미지, 오디오, 동영상 데이터로 프롬프트를 지정하는 것을 지원하며, 이를 멀티모달 프롬프트라고도 합니다.
+- [안전 가이드](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=ko): 생성형 AI 모델은 때때로 부정확하거나, 편향되거나, 불쾌감을 주는 등 예상치 못한 출력을 생성합니다. 이러한 출력으로 인한 피해 위험을 제한하려면 후처리 및 사람의 평가가 필수적입니다.
 
-Prześlij opinię
+의견 보내기
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Ostatnia aktualizacja: 2026-05-01 UTC.
+최종 업데이트: 2026-05-01(UTC)
 
-Chcesz przekazać coś jeszcze?
+의견을 전달하고 싶나요?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-05-01 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-05-01(UTC)"],[],[]]

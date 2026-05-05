@@ -1,146 +1,165 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/partner-integration?hl=ko
-fetched_at: 2026-05-05T19:47:07.494343+00:00
-title: "\ud30c\ud2b8\ub108 \ubc0f \ub77c\uc774\ube0c\ub7ec\ub9ac \ud1b5\ud569 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/partner-integration?hl=pt-BR
+fetched_at: 2026-05-05T20:05:44.063238+00:00
+title: "Integra\u00e7\u00f5es de parceiros e bibliotecas \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-의견 보내기
+Envie comentários
 
-# 파트너 및 라이브러리 통합
+# Integrações de parceiros e bibliotecas
 
-이 가이드에서는 Gemini API를 기반으로 라이브러리, 플랫폼, 게이트웨이를 빌드하기 위한 아키텍처 전략을 간략하게 설명합니다. 공식 생성형 AI SDK, Direct API (REST/gRPC), OpenAI 호환성 레이어를 사용하는 것 간의 기술적 절충점을 자세히 설명합니다.
+Este guia descreve estratégias arquitetônicas para criar bibliotecas, plataformas e gateways com base na API Gemini. Ele detalha as compensações técnicas
+entre o uso dos SDKs oficiais de IA generativa, da API Direct (REST/gRPC) e da
+camada de compatibilidade do OpenAI.
 
-오픈소스 프레임워크, 엔터프라이즈 게이트웨이, SaaS 애그리게이터와 같은 다른 개발자를 위한 도구를 빌드하고 종속 항목 위생, 번들 크기 또는 기능 패리티에 맞게 최적화해야 하는 경우 이 가이드를 사용하세요.
+Use este guia se você estiver criando ferramentas para outros desenvolvedores, como
+estruturas de código aberto, gateways corporativos ou agregadores de SaaS, e precisar
+otimizar a higiene de dependências, o tamanho do pacote ou a paridade de recursos.
 
-## 파트너 통합이란 무엇인가요?
+## O que é a integração de parceiros?
 
-파트너는 Gemini API와 최종 사용자 개발자 간의 통합을 빌드하는 모든 사람입니다. Google은 파트너를 네 가지 원형으로 분류합니다. 가장 일치하는 항목을 식별하면 올바른 통합 경로를 선택하는 데 도움이 됩니다.
+Um parceiro é qualquer pessoa que esteja criando uma integração entre a API Gemini e desenvolvedores
+de usuários finais. Categorizamos os parceiros em quatro arquétipos. Identificar qual delas corresponde mais ao seu caso vai ajudar você a escolher o caminho de integração certo.
 
-#### 생태계 프레임워크
+#### Framework do ecossistema
 
-- **대상:** 오픈소스 프레임워크 (예: LangChain, LlamaIndex, Spring AI) 또는 언어별 클라이언트의 관리자입니다.
-- **목표:** 광범위한 호환성입니다. 사용자가 선택한 모든 환경에서 충돌을 일으키지 않고 라이브러리가 작동하도록 하려고 합니다.
+- **Quem você é**:mantenedor de um framework de código aberto (por exemplo, LangChain, LlamaIndex, Spring AI) ou clientes específicos de linguagem.
+- **Seu objetivo**:compatibilidade ampla. Você quer que sua biblioteca funcione em qualquer ambiente escolhido pelo usuário sem forçar conflitos.
 
-#### 런타임 및 에지 플랫폼
+#### Plataforma de ambiente de execução e de borda
 
-- **대상:** 코드 실행이 제한된 환경에서 발생하는 SaaS 플랫폼, AI 게이트웨이 또는 클라우드 인프라 제공업체 (예: Vercel, Cloudflare, Zapier)입니다.
-- **목표:** 성능입니다. 지연 시간이 짧고 번들 크기가 최소화되며 콜드 스타트가 빨라야 합니다.
+- **Quem você é**:plataformas SaaS, gateways de IA ou provedores de infraestrutura de nuvem (por exemplo, Vercel, Cloudflare, Zapier) em que a execução de código acontece em ambientes restritos.
+- **Seu objetivo**:desempenho. Você precisa de baixa latência, tamanho mínimo do pacote e
+  inicializações a frio rápidas.
 
-#### 애그리게이터
+#### Agregador
 
-- **대상:** 여러 LLM 제공업체 (예: OpenAI, Anthropic, Google)의 액세스를 단일 인터페이스로 정규화하는 플랫폼, 프록시 또는 내부 '모델 가든'입니다.
-- **목표:** 이식성과 균일성입니다.
+- **Quem você é**:plataformas, proxies ou "Model Gardens" internos que normalizam o acesso em vários provedores de LLM diferentes (por exemplo, OpenAI, Anthropic, Google) em uma única interface.
+- **Seu objetivo**:portabilidade e uniformidade.
 
-#### 엔터프라이즈 게이트웨이
+#### Gateway empresarial
 
-- **대상:** 수백 명의 내부 개발자를 위한 '최적의 경로'를 빌드하는 대기업의 내부 플랫폼 엔지니어링팀입니다.
-- **목표:** 표준화, 거버넌스, 통합 인증입니다.
+- **Quem você é**:equipes internas de engenharia de plataforma em grandes empresas que criam "caminhos dourados" para centenas de desenvolvedores internos.
+- **Seu objetivo**:padronização, governança e autenticação unificada.
 
-## 한눈에 비교하기
+## Resumo comparativo
 
-**글로벌 권장사항:** 모든 파트너는 선택한 경로와 관계없이 [`x-goog-api-client`
-헤더](#client-id)를 전송해야 합니다.
+**Prática recomendada global**:todos os parceiros precisam enviar o [cabeçalho `x-goog-api-client`](#client-id), seja qual for o caminho escolhido.
 
-| 다음과 같은 경우... | 권장 경로 | 주요 이점 | 주요 절충점 | 권장사항 |
+| Se você é... | Caminho recomendado | Principal benefício | Compensação principal | Prática recomendada |
 | --- | --- | --- | --- | --- |
-| **엔터프라이즈 게이트웨이, 생태계 프레임워크** | **[Google 생성형 AI SDK](#genai-sdk)** | **Gemini Enterprise Agent Platform 패리티 및 속도.** 유형, 인증, 복잡한 기능 (예: 파일 업로드)을 기본적으로 처리합니다. Google Cloud로 원활하게 마이그레이션합니다. | **종속 항목 가중치.** 전이적 종속 항목은 복잡하고 제어할 수 없습니다. 지원되는 언어 (Python/Node/Go/Java)로 제한됩니다. | **버전 잠금.** 팀 간의 안정성을 보장하기 위해 내부 기본 이미지에서 SDK 버전을 고정합니다. |
-| **생태계 프레임워크, 에지 플랫폼, 애그리게이터** | **[Direct API](#rest)**  *(REST / gRPC)* | **종속 항목 없음.** HTTP 클라이언트와 정확한 번들 크기를 제어합니다. 모든 API 및 모델 기능에 대한 전체 액세스 권한입니다. | **개발자 오버헤드가 높습니다.** JSON 구조는 깊이 중첩될 수 있으며 엄격한 수동 유효성 검사 및 유형 검사가 필요합니다. | **OpenAPI 사양을 사용합니다.** 수동으로 작성하는 대신 공식 사양을 사용하여 유형 생성을 자동화합니다. |
-| **텍스트 기반 워크플로만 필요한 OpenAI SDK를 사용하는 애그리게이터**  *(레거시 이식성을 위해 최적화)* | **[OpenAI 호환성](#openai)** | **즉시 이식성.** 기존 OpenAI 호환 코드 또는 라이브러리를 재사용합니다. | **기능 한도.** 모델별 기능 (네이티브 동영상, 캐싱)을 사용하지 못할 수 있습니다. | **마이그레이션 계획.** 빠른 유효성 검사에 사용하지만 전체 API 기능을 위해 Direct API로 업그레이드할 계획입니다. |
+| **Gateway empresarial, framework de ecossistema** | **[SDK da IA generativa do Google](#genai-sdk)** | **Paridade e velocidade da plataforma de agentes do Gemini Enterprise**. Tratamento integrado para tipos, autenticação e recursos complexos (por exemplo, uploads de arquivos). Migração perfeita para o Google Cloud. | **Peso da dependência**. As dependências transitivas podem ser complexas e estar fora do seu controle. Limitado às linguagens compatíveis (Python/Node/Go/Java). | **Bloquear versões**. Fixe as versões do SDK nas imagens de base internas para garantir a estabilidade entre as equipes. |
+| **Framework de ecossistema, plataformas de borda e agregadores** | **[API Direct](#rest)**  *(REST / gRPC)* | **Sem dependências**. Você controla o cliente HTTP e o tamanho exato do pacote. Acesso total a todos os recursos de API e modelo. | **Alta sobrecarga do desenvolvedor.** As estruturas JSON podem ser profundamente aninhadas e exigem validação manual e verificação de tipo rigorosas. | **Use especificações OpenAPI.** Automatize a geração de tipos usando nossas especificações oficiais em vez de escrevê-las à mão. |
+| **Agregador que usa SDKs da OpenAI que exigem apenas fluxos de trabalho baseados em texto**  *(otimização para portabilidade legada)* | **[Compatibilidade com a OpenAI](#openai)** | **Portabilidade instantânea.** Reutilizar códigos ou bibliotecas compatíveis com a OpenAI. | **Teto de recursos.** Recursos específicos do modelo (vídeo nativo, armazenamento em cache) podem não estar disponíveis. | **Plano de migração**. Use isso para validação rápida, mas planeje fazer upgrade para a API Direct e ter acesso a todos os recursos da API. |
 
-## Google 생성형 AI SDK 통합
+## Integração do SDK de IA generativa do Google
 
-프레임워크의 경우 [Google 생성형 AI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=ko)
-를 구현하는 것이 지원되는
-언어의 코드 줄 수가 가장 적기 때문에 가장 간단한 경로인 경우가 많습니다.
+Para frameworks, a implementação do [SDK do Google GenAI](https://ai.google.dev/gemini-api/docs/libraries?hl=pt-br)
+é geralmente o caminho mais simples, já que tem o menor número de linhas de código em linguagens
+compatíveis.
 
-내부 플랫폼팀의 경우 기본 제공 항목은 제품 엔지니어가 보안 정책을 준수하면서 빠르게 이동할 수 있도록 하는 '최적의 경로'인 경우가 많습니다.
+Para equipes internas de plataforma, o principal resultado é geralmente um "caminho ideal"
+que permite que os engenheiros de produtos trabalhem rapidamente e cumpram as políticas de
+segurança.
 
-**혜택:**
+**Benefícios:**
 
-- **Gemini Enterprise Agent Platform 마이그레이션을 위한 통합 인터페이스:** 내부 개발자는 API 키 (Gemini API)를 사용하여 프로토타입을 만들고 프로덕션 규정 준수를 위해 Gemini Enterprise Agent Platform (IAM)에 배포하는 경우가 많습니다. SDK는 이러한 인증 차이를 추상화합니다.
-  마찬가지로 프레임워크의 경우 하나의 코드 경로를 구현하고 두 개의 사용자 집합을 지원할 수 있습니다.
-- **클라이언트 측 도우미:** SDK에는 복잡한 작업의 상용구 코드를 줄이는 관용적 유틸리티가 포함되어 있습니다.
-  - *예:* 프롬프트에서 `PIL` 이미지 객체를 직접 지원, 자동 함수 호출, 포괄적인 유형
-- **Day-zero 기능 액세스:** 새로운 API 기능은 SDK를 통해 출시 시점에 제공됩니다.
-- **코드 생성 지원 개선:** 로컬 SDK 설치는 유형 정의 및 독스트링을 코딩 어시스턴트 (예: Cursor, Copilot)에 노출합니다.
-  이 컨텍스트는 원시 REST 요청을 생성하는 것보다 코드 생성 정확도를 개선합니다.
+- **Interface unificada para migração da plataforma de agentes do Gemini Enterprise**:os desenvolvedores internos geralmente criam protótipos usando chaves de API (API Gemini) e implantam na plataforma de agentes do Gemini Enterprise (IAM) para conformidade de produção. O SDK abstrai essas diferenças de autenticação.
+  Da mesma forma, para frameworks, você pode implementar um codepath e oferecer suporte a dois conjuntos de usuários.
+- **Auxiliares do lado do cliente**:o SDK inclui utilitários idiomáticos que reduzem o boilerplate para tarefas complexas.
+  - *Exemplos*:suporte a objetos de imagem `PIL` diretamente em comandos, chamadas automáticas de função e tipos abrangentes.
+- **Acesso a recursos no dia zero**:os novos recursos da API ficam disponíveis no momento do lançamento
+  pelos SDKs.
+- **Melhor suporte à geração de código**:a instalação do SDK local expõe definições de tipo e docstrings a assistentes de programação (por exemplo, Cursor, Copilot).
+  Esse contexto melhora a precisão da geração de código em comparação com a geração de solicitações REST brutas.
 
-**절충점:**
+**A compensação:**
 
-- **종속 항목 가중치 및 복잡성:** SDK에는 자체 종속 항목이 있으므로 번들 크기가 커지고 공급망 위험이 발생할 수 있습니다.
-- **버전 관리:** 새로운 API 기능은 최소 SDK 버전에 고정되는 경우가 많습니다.
-  새로운 기능이나 모델에 액세스하려면 사용자에게 업데이트를 푸시해야 할 수 있으며, 이 경우 사용자에게 영향을 미치는 전이적 종속 항목을 변경해야 할 수 있습니다.
-- **프로토콜 한도:** SDK는 기본 API의 경우 HTTPS만 지원하고 Live API의 경우 WebSocket (WSS)만 지원합니다. gRPC는 상위 수준 SDK 클라이언트를 사용하여 지원되지 않습니다.
-- **언어 지원:** SDK는 *현재* 언어 버전을 지원합니다. EOL 버전 (예: Python 3.9)을 지원해야 하는 경우 포크를 유지해야 합니다.
+- **Peso e complexidade da dependência**:os SDKs têm dependências próprias, o que pode aumentar o tamanho do pacote e o risco da cadeia de suprimentos.
+- **Controle de versões**:os novos recursos da API geralmente são fixados em versões mínimas do SDK.
+  Talvez seja necessário enviar atualizações para os usuários acessarem novos recursos ou modelos,
+  o que, em alguns casos, pode exigir mudanças em dependências transitivas que
+  afetam seus usuários.
+- **Limites de protocolo**:os SDKs são compatíveis apenas com HTTPS para a API principal e
+  WebSockets (WSS) para a API Live. O gRPC não é compatível com os
+  clientes SDK de alto nível.
+- **Suporte a idiomas**:os SDKs são compatíveis com as versões *atuais* dos idiomas. Se você precisar oferecer suporte a versões EOL (por exemplo, Python 3.9), será necessário manter um fork.
 
-**권장사항:**
+**Prática recomendada:**
 
-- **버전 잠금:** 팀 간의 안정성을 보장하기 위해 내부 기본 이미지에서 SDK 버전을 고정합니다.
+- **Bloquear versões**:fixe a versão do SDK nas imagens de base internas para garantir a estabilidade entre as equipes.
 
-## API 직접 통합
+## Integração direta de API
 
-수천 명의 개발자에게 라이브러리를 배포하거나, 제한된 환경에서 실행하거나, Gemini의 최첨단 기능이 필요한 애그리게이터를 빌드하는 경우 REST 또는 gRPC를 사용하여 API와 직접 통합해야 할 수 있습니다.
+Se você estiver distribuindo uma biblioteca para milhares de desenvolvedores, executando em um ambiente restrito ou criando um agregador que exija os recursos mais recentes do Gemini, talvez seja necessário fazer a integração diretamente com a API usando REST ou gRPC.
 
-**혜택:**
+**Benefícios:**
 
-- **전체 기능 액세스:** OpenAI 호환성 레이어와 달리 API를 직접 사용하면 파일 API에 업로드, 콘텐츠 캐싱 생성, 양방향 Live API 사용과 같은 Gemini 전용 기능을 사용할 수 있습니다.
-- **최소 종속 항목:** 크기 또는 감사 비용으로 인해 종속 항목이 민감한 환경입니다. `fetch`와 같은 표준 라이브러리 또는 `httpx`와 같은 래퍼를 통해 API를 직접 사용하면 라이브러리가 경량으로 유지됩니다.
-- **언어에 구애받지 않음:** 언어 제한이 없으므로 Rust, PHP, Ruby와 같이 SDK에서 다루지 않는 언어의 유일한 경로입니다.
-- **성능:** Direct API에는 초기화 오버헤드가 없으므로 서버리스 함수의 콜드 스타트가 최소화됩니다.
+- **Acesso ao recurso completo**:ao contrário da camada de compatibilidade da OpenAI, usar a API diretamente ativa recursos específicos do Gemini, como fazer upload para a API File, criar armazenamento em cache de conteúdo e usar a API Live bidirecional.
+- **Dependências mínimas**:em um ambiente em que as dependências são sensíveis devido ao tamanho ou aos custos de auditoria. Usar a API diretamente por uma
+  biblioteca padrão, como `fetch`, ou por um wrapper, como `httpx`, garante que sua
+  biblioteca permaneça leve.
+- **Independente de linguagem**:esse é o único caminho para linguagens não cobertas pelos SDKs, como Rust, PHP e Ruby, já que não há restrições de linguagem.
+- **Performance**:a API Direct não tem sobrecarga de inicialização, minimizando as inicializações a frio em funções sem servidor.
 
-**절충점:**
+**A compensação:**
 
-- **수동 Gemini Enterprise Agent Platform 구현:** SDK와 달리 API를 직접 사용하면 AI Studio (API 키)와 Gemini Enterprise Agent Platform (IAM) 간의 인증 차이가 자동으로 처리되지 않습니다. 두 환경을 모두 지원하려면 별도의 인증 핸들러를 구현해야 합니다.
-- **기본 유형 또는 도우미 없음:** 요청 객체에 대한 코드 완성 또는 컴파일 시간 검사를 직접 구현하지 않으면 사용할 수 없습니다. 클라이언트 '도우미'(예: 함수-스키마 변환기)가 없으므로 이 로직을 직접 수동으로 작성해야 합니다.
+- **Implementação manual da plataforma de agentes do Gemini Enterprise**:ao contrário do SDK, usar a API diretamente não processa automaticamente as diferenças de autenticação entre o AI Studio (chave de API) e a plataforma de agentes do Gemini Enterprise (IAM). É necessário implementar manipuladores de autenticação separados se você quiser oferecer suporte aos dois ambientes.
+- **Sem tipos ou helpers nativos**:você não recebe preenchimentos de código nem verificações de tempo de compilação para objetos de solicitação, a menos que os implemente por conta própria. Não há "ajudantes" de cliente (por exemplo, conversores de função para esquema), então você precisa escrever essa lógica manualmente.
 
-**권장사항**
+**Prática recomendada**
 
-Google은 라이브러리의 유형 정의를 생성하는 데 사용할 수 있는 기계 가독형 사양을 제공하므로 수동으로 작성할 필요가 없습니다. 빌드 프로세스 중에 사양을 다운로드하고 유형을 생성하고 컴파일된 코드를 제공합니다.
+Exibimos uma especificação legível por máquina que pode ser usada para gerar definições de tipo para sua biblioteca, evitando que você as escreva à mão. Faça o download da
+especificação durante o processo de build, gere os tipos e envie o código compilado.
 
-- **엔드포인트:** `https://generativelanguage.googleapis.com/$discovery/OPENAPI3_0`
+- **Endpoint**:`https://generativelanguage.googleapis.com/$discovery/OPENAPI3_0`
 
-## OpenAI SDK 통합
+## Integração do SDK da OpenAI
 
-모델별 기능보다 통합 스키마 (OpenAI Chat Completions)를 우선시하는 플랫폼인 경우 이 경로가 가장 빠릅니다.
+Se você for uma plataforma que prioriza um esquema unificado (OpenAI Chat Completions) em vez de recursos específicos do modelo, esse é o trajeto mais rápido.
 
-**혜택:**
+**Benefícios:**
 
-- **마찰이 적음:** `baseURL` 및 `apiKey`를 변경하여 Gemini 지원을 추가할 수 있는 경우가 많습니다. 새 코드를 작성하지 않고 Gemini 지원을 추가하여 'Bring Your Own Key' 구현을 통합하는 빠른 방법입니다.
-- **제약 조건:** 이 경로는 OpenAI SDK로 제한되고 파일 API와 같은 고급 Gemini 기능이 필요하지 않거나 Google 검색을 사용한 그라운딩과 같은 도구에 대한 지원을 수동으로 추가하지 않는 경우에만 권장됩니다.
+- **Baixa fricção**:muitas vezes, é possível adicionar suporte ao Gemini mudando o `baseURL`
+  e o `apiKey`. Essa é uma maneira rápida de integrar implementações de "Traga sua própria chave", adicionando suporte do Gemini sem escrever um novo código.
+- **Restrições**:esse caminho só é recomendado se você estiver restrito ao SDK da
+  OpenAI e não precisar de recursos avançados do Gemini, como a API File,
+  ou adicionar manualmente suporte para ferramentas como o embasamento com a Pesquisa Google.
 
-**절충점:**
+**A compensação:**
 
-- **기능 제한사항:** 호환성 레이어는 핵심 Gemini 기능에 제한사항을 제공합니다. 사용 가능한 서버 측 도구는 플랫폼마다 다르며 Gemini API 도구와 함께 작동하려면 수동으로 처리해야 할 수 있습니다.
-- **번역 오버헤드:** OpenAI 스키마가 Gemini의 아키텍처에 1:1로 매핑되지 않으므로 호환성 레이어를 사용하면 사용자 '검색' 도구를 올바른 플랫폼 도구에 매핑하는 것과 같이 해결하기 위해 추가 구현 작업이 필요한 몇 가지 복잡성이 발생합니다.
-  상당한 양의 특수 처리가 필요한 경우 각 플랫폼에 전용 SDK 또는 API를 사용하는 것이 더 가치가 있을 수 있습니다.
+- **Limitações de recursos**:a camada de compatibilidade limita os recursos principais do Gemini. As ferramentas disponíveis do lado do servidor variam entre as plataformas e podem exigir manipulação manual para funcionar com as ferramentas da API Gemini.
+- **Sobrecarga de tradução**:como o esquema da OpenAI não tem mapeamento 1:1 com a arquitetura do Gemini, confiar na camada de compatibilidade introduz algumas complexidades que exigem trabalho extra de implementação para resolver, como mapear uma ferramenta de "pesquisa" do usuário para a ferramenta de plataforma certa.
+  Se você precisar de uma quantidade significativa de tratamento especial, talvez seja mais valioso usar um SDK ou uma API dedicada para cada plataforma.
 
-**권장사항**
+**Prática recomendada**
 
-가능한 경우 Gemini API와 직접 통합합니다. 하지만 호환성을 극대화하려면 다양한 제공업체를 인식하고 도구 및 메시지 매핑을 처리할 수 있는 라이브러리를 사용하는 것이 좋습니다.
+Sempre que possível, faça a integração diretamente com a API Gemini. No entanto, para máxima compatibilidade, considere usar uma biblioteca que conheça diferentes provedores e possa processar o mapeamento de ferramentas e mensagens para você.
 
-## 모든 파트너를 위한 권장사항: 클라이언트 식별
+## Prática recomendada para todos os parceiros: identificação do cliente
 
-플랫폼 또는 라이브러리로 Gemini API를 호출할 때는 `x-goog-api-client` 헤더를 사용하여 클라이언트를 식별해야 합니다.
+Ao fazer chamadas para a API Gemini como uma plataforma ou biblioteca, é necessário
+identificar seu cliente usando o cabeçalho `x-goog-api-client`.
 
-이렇게 하면 Google에서 특정 트래픽 세그먼트를 식별할 수 있으며 라이브러리에서 특정 오류 패턴이 생성되는 경우 디버깅을 지원하기 위해 연락할 수 있습니다.
+Isso permite que o Google identifique seus segmentos de tráfego específicos. Se a biblioteca estiver produzindo um padrão de erro específico, podemos entrar em contato para ajudar na depuração.
 
-`company-product/version` 형식 (예: `acme-framework/1.2.0`)을 사용합니다.
+Use o formato `company-product/version` (por exemplo, `acme-framework/1.2.0`).
 
-### 구현 예
+### Exemplos de implementação
 
-### 생성형 AI SDK
+### SDK de IA generativa
 
-API 클라이언트를 제공하면 SDK가 자동으로 커스텀 헤더를 내부 헤더에 추가합니다.
+Ao fornecer o cliente de API, o SDK anexa automaticamente o cabeçalho personalizado aos cabeçalhos internos.
 
 ```
 from google import genai
@@ -155,7 +174,7 @@ client = genai.Client(
 )
 ```
 
-### Direct API (REST)
+### API direta (REST)
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=$GEMINI_API_KEY" \
@@ -164,7 +183,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
     -d '{...}'
 ```
 
-### OpenAI SDK
+### SDK da OpenAI
 
 ```
 from openai import OpenAI
@@ -178,19 +197,19 @@ client = OpenAI(
 )
 ```
 
-## 다음 단계
+## Próximas etapas
 
-- [라이브러리 개요](https://ai.google.dev/gemini-api/docs/libraries?hl=ko)를 방문하여
-  생성형 AI SDK에 대해 알아보세요.
-- [API 참조](https://ai.google.dev/api?hl=ko) 찾아보기
-- [OpenAI 호환성 가이드](https://ai.google.dev/gemini-api/docs/openai?hl=ko) 읽어보기
+- Acesse a [visão geral da biblioteca](https://ai.google.dev/gemini-api/docs/libraries?hl=pt-br) para saber mais sobre
+  os SDKs da IA generativa
+- Consulte a [referência da API](https://ai.google.dev/api?hl=pt-br).
+- Leia o [guia de compatibilidade da OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=pt-br)
 
-의견 보내기
+Envie comentários
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-최종 업데이트: 2026-04-29(UTC)
+Última atualização 2026-04-29 UTC.
 
-의견을 전달하고 싶나요?
+Quer enviar seu feedback?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]

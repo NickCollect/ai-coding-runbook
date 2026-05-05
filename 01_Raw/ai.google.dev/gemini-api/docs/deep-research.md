@@ -1,28 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=vi
-fetched_at: 2026-05-05T19:50:58.957639+00:00
-title: "T\u00e1c nh\u00e2n Deep Research c\u1ee7a Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-TW
+fetched_at: 2026-05-05T20:02:57.756570+00:00
+title: "Gemini Deep Research Agent \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Gửi ý kiến phản hồi
+提供意見
 
-# Tác nhân Deep Research của Gemini
+# Gemini Deep Research Agent
 
-Tác nhân Deep Research của Gemini tự động lập kế hoạch, thực hiện và tổng hợp các nhiệm vụ nghiên cứu nhiều bước. Được hỗ trợ bởi Gemini, công cụ này điều hướng các mảng thông tin phức tạp để tạo ra các báo cáo chi tiết có trích dẫn. Các chức năng mới cho phép bạn lập kế hoạch cộng tác với tác nhân, kết nối với các công cụ bên ngoài bằng máy chủ MCP, bao gồm cả hình ảnh trực quan (chẳng hạn như biểu đồ và đồ thị) và cung cấp trực tiếp tài liệu làm dữ liệu đầu vào.
+Gemini Deep Research 代理會自主規劃、執行及統整多步驟研究工作。這項功能採用 Gemini，可瀏覽複雜的資訊環境，生成詳細且附有引用的報告。新功能可讓您與代理共同規劃、使用 MCP 伺服器連結外部工具、加入視覺化內容 (例如圖表)，以及直接提供文件做為輸入內容。
 
-Các tác vụ nghiên cứu bao gồm tìm kiếm và đọc lặp đi lặp lại và có thể mất vài phút để hoàn thành. Bạn phải sử dụng tính năng thực thi ở chế độ nền (đặt `background=true`) để chạy tác nhân một cách không đồng bộ và thăm dò kết quả hoặc truyền trực tuyến thông tin cập nhật. Hãy xem phần [Xử lý các tác vụ chạy trong thời gian dài](#long-running-tasks) để biết thêm thông tin chi tiết.
+研究工作需要反覆搜尋和閱讀，可能需要幾分鐘才能完成。您必須使用背景執行 (設定 `background=true`)，以非同步方式執行代理程式，並輪詢結果或串流更新。詳情請參閱「[處理長時間執行的工作](#long-running-tasks)」。
 
-Ví dụ sau đây cho thấy cách bắt đầu một tác vụ nghiên cứu ở chế độ nền và thăm dò kết quả.
+以下範例說明如何在背景啟動研究工作，並輪詢結果。
 
 ### Python
 
@@ -97,20 +97,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Các phiên bản được hỗ trợ
+## 支援版本
 
-Nhân viên hỗ trợ Deep Research có 2 phiên bản:
+Deep Research 代理有兩種版本：
 
-- **Deep Research** (`deep-research-preview-04-2026`): Được thiết kế để đạt tốc độ và hiệu quả cao, lý tưởng để truyền trực tiếp về giao diện người dùng của một ứng dụng.
-- **Deep Research Max** (`deep-research-max-preview-04-2026`): Mức độ toàn diện tối đa để tự động thu thập và tổng hợp bối cảnh.
+- **Deep Research** (`deep-research-preview-04-2026`)：專為速度和效率而設計，非常適合串流回用戶端 UI。
+- **Deep Research Max** (`deep-research-max-preview-04-2026`)：自動收集及統整內容，提供最全面的資訊。
 
-## Lập kế hoạch cộng tác
+## 共同規劃
 
-Lập kế hoạch cộng tác giúp bạn kiểm soát hướng nghiên cứu trước khi tác nhân bắt đầu công việc. Khi được bật, tác nhân sẽ trả về một kế hoạch nghiên cứu đề xuất thay vì thực thi ngay lập tức. Sau đó, bạn có thể xem xét, sửa đổi hoặc phê duyệt kế hoạch thông qua các lượt tương tác nhiều lượt.
+在代理開始工作前，您可透過協作規劃功能控管研究方向。啟用後，代理程式會傳回建議的研究計畫，而不是立即執行。然後透過多輪互動檢閱、修改或核准計畫。
 
-### Bước 1: Yêu cầu tạo kế hoạch
+### 步驟 1：申請方案
 
-Đặt `collaborative_planning=True` trong lượt tương tác đầu tiên. Thay vì trả về một báo cáo đầy đủ, tác nhân sẽ trả về một kế hoạch nghiên cứu.
+在第一次互動中設定 `collaborative_planning=True`。代理程式會傳回研究計畫，而不是完整報告。
 
 ### Python
 
@@ -176,9 +176,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Bước 2: Tinh chỉnh kế hoạch (không bắt buộc)
+### 步驟 2：修正計畫 (選用)
 
-Sử dụng `previous_interaction_id` để tiếp tục cuộc trò chuyện và lặp lại kế hoạch. Giữ `collaborative_planning=True` để tiếp tục ở chế độ lập kế hoạch.
+使用 `previous_interaction_id` 繼續對話，並反覆修正行程。按住 `collaborative_planning=True` 即可繼續規劃模式。
 
 ### Python
 
@@ -242,9 +242,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Bước 3: Phê duyệt và thực hiện
+### 步驟 3：核准並執行
 
-Đặt `collaborative_planning=False` (hoặc bỏ qua) để phê duyệt kế hoạch và bắt đầu nghiên cứu.
+設定 `collaborative_planning=False` (或省略) 即可核准計畫並開始研究。
 
 ### Python
 
@@ -308,10 +308,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Hình ảnh trực quan
+## 視覺化
 
-Khi `visualization` được đặt thành `"auto"`, tác nhân có thể tạo biểu đồ, đồ thị và các phần tử trực quan khác để hỗ trợ các kết quả nghiên cứu của mình.
-Hình ảnh được tạo sẽ có trong đầu ra phản hồi và được truyền dưới dạng các delta `image`. Để có kết quả tốt nhất, hãy yêu cầu rõ ràng về hình ảnh trong câu hỏi của bạn, ví dụ: "Đưa biểu đồ cho thấy xu hướng theo thời gian" hoặc "Tạo hình ảnh so sánh thị phần". Việc đặt `visualization` thành `"auto"` sẽ bật tính năng này, nhưng tác nhân chỉ tạo hình ảnh khi câu lệnh yêu cầu.
+將 `visualization` 設為 `"auto"` 後，代理程式就能生成圖表和其他視覺元素，輔助研究結果。生成圖像會納入回覆輸出內容，並以 `image` 增量串流傳輸。為獲得最佳結果，請在查詢中明確要求提供視覺化內容，例如「附上顯示一段時間內趨勢的圖表」或「生成比較市占率的圖形」。將 `visualization` 設為 `"auto"` 即可啟用這項功能，但只有在提示要求時，代理程式才會生成圖像。
 
 ### Python
 
@@ -395,21 +394,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Các công cụ được hỗ trợ
+## 支援的工具
 
-Deep Research hỗ trợ nhiều công cụ tích hợp và công cụ bên ngoài. Theo mặc định (khi không có tham số `tools` nào được cung cấp), tác nhân có quyền truy cập vào Google Tìm kiếm, Bối cảnh URL và Thực thi mã. Bạn có thể chỉ định rõ ràng các công cụ để hạn chế hoặc mở rộng khả năng của tác nhân.
+Deep Research 支援多種內建和外部工具。根據預設 (未提供 `tools` 參數時)，代理程式可存取 Google 搜尋、網址內容和程式碼執行功能。您可以明確指定工具，限制或擴充代理程式的功能。
 
-| Công cụ | Giá trị loại | Mô tả |
+| 工具 | 輸入值 | 說明 |
 | --- | --- | --- |
-| Google Tìm kiếm | `google_search` | Tìm kiếm trên web công khai. Bật theo mặc định. |
-| Ngữ cảnh URL | `url_context` | Đọc và tóm tắt nội dung trang web. Bật theo mặc định. |
-| Thực thi mã | `code_execution` | Thực thi mã để thực hiện các phép tính và phân tích dữ liệu. Bật theo mặc định. |
-| Máy chủ MCP | `mcp_server` | Kết nối với các máy chủ MCP từ xa để truy cập vào công cụ bên ngoài. |
-| Tìm kiếm tệp | `file_search` | Tìm kiếm tập hợp tài liệu bạn đã tải lên. |
+| Google 搜尋 | `google_search` | 搜尋公開網路。(預設為啟用)。 |
+| 網址背景資訊 | `url_context` | 閱讀並摘要網頁內容。(預設為啟用)。 |
+| 程式碼執行 | `code_execution` | 執行程式碼以進行計算和資料分析。(預設為啟用)。 |
+| MCP 伺服器 | `mcp_server` | 連線至遠端 MCP 伺服器，存取外部工具。 |
+| 檔案搜尋 | `file_search` | 搜尋上傳的文件語料庫。 |
 
-### Google Tìm kiếm
+### Google 搜尋
 
-Bật Google Tìm kiếm một cách rõ ràng làm công cụ duy nhất:
+明確啟用 Google 搜尋做為唯一工具：
 
 ### Python
 
@@ -447,9 +446,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Bối cảnh URL
+### 網址背景資訊
 
-Cho phép tác nhân đọc và tóm tắt các trang web cụ thể:
+讓代理程式能夠讀取及摘要特定網頁內容：
 
 ### Python
 
@@ -487,9 +486,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Thực thi mã
+### 程式碼執行
 
-Cho phép tác nhân thực thi mã để tính toán và phân tích dữ liệu:
+允許代理執行程式碼，進行計算和資料分析：
 
 ### Python
 
@@ -527,19 +526,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Máy chủ MCP
+### MCP 伺服器
 
-Cung cấp `name` và `url` của máy chủ trong cấu hình công cụ. Bạn cũng có thể truyền thông tin xác thực và hạn chế những công cụ mà tác nhân có thể gọi.
+在工具設定中提供伺服器 `name` 和 `url`。您也可以傳遞驗證憑證，並限制代理程式可呼叫的工具。
 
-| Trường | Loại | Bắt buộc | Mô tả |
+| 欄位 | 類型 | 必要 | 說明 |
 | --- | --- | --- | --- |
-| `type` | `string` | Có | Phải là `"mcp_server"`. |
-| `name` | `string` | Không | Tên hiển thị của máy chủ MCP. |
-| `url` | `string` | Không | URL đầy đủ cho điểm cuối của máy chủ MCP. |
-| `headers` | `object` | Không | Các cặp khoá-giá trị được gửi dưới dạng tiêu đề HTTP trong mỗi yêu cầu đến máy chủ (ví dụ: mã thông báo xác thực). |
-| `allowed_tools` | `array` | Không | Hạn chế những công cụ mà tác nhân có thể gọi từ máy chủ. |
+| `type` | `string` | 是 | 必須為 `"mcp_server"`。 |
+| `name` | `string` | 否 | MCP 伺服器的顯示名稱。 |
+| `url` | `string` | 否 | MCP 伺服器端點的完整網址。 |
+| `headers` | `object` | 否 | 以 HTTP 標頭形式傳送至伺服器的鍵值組 (例如驗證權杖)。 |
+| `allowed_tools` | `array` | 否 | 限制代理程式可呼叫伺服器的哪些工具。 |
 
-#### Cách sử dụng cơ bản
+#### 基本用法
 
 ### Python
 
@@ -598,9 +597,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Tìm kiếm tệp
+### 檔案搜尋
 
-Cấp cho tác nhân quyền truy cập vào dữ liệu của riêng bạn bằng cách sử dụng công cụ [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi).
+使用「檔案搜尋」工具，授予代理程式存取您自有資料的權限。
 
 ### Python
 
@@ -652,11 +651,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Khả năng điều hướng và định dạng
+## 可操控性和格式
 
-Bạn có thể điều hướng đầu ra của tác nhân bằng cách cung cấp hướng dẫn định dạng cụ thể trong câu lệnh. Nhờ đó, bạn có thể sắp xếp báo cáo thành các phần và tiểu mục cụ thể, thêm bảng dữ liệu hoặc điều chỉnh giọng điệu cho các đối tượng khác nhau (ví dụ: "chuyên môn", "điều hành", "thông thường").
+您可以在提示中提供特定格式設定指令，引導代理程式輸出內容。您可以將報表劃分為特定章節和子章節、加入資料表，或針對不同目標對象調整語氣 (例如「技術」、「高階主管」、「輕鬆」)。
 
-Xác định rõ định dạng đầu ra mong muốn trong văn bản đầu vào.
+在輸入文字中明確定義所需的輸出格式。
 
 ### Python
 
@@ -709,9 +708,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Thông tin đầu vào đa phương thức
+## 多模態輸入內容
 
-Tính năng Deep Research hỗ trợ nhiều phương thức nhập, bao gồm cả hình ảnh và tài liệu (tệp PDF), cho phép tác nhân phân tích nội dung trực quan và tiến hành nghiên cứu dựa trên nền tảng web theo bối cảnh của thông tin đầu vào được cung cấp.
+「Deep Research」支援多模態輸入內容，包括圖片和文件 (PDF)，讓代理程式分析視覺內容，並根據提供的輸入內容進行網路研究。
 
 ### Python
 
@@ -815,9 +814,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Hiểu tài liệu
+### 文件解讀
 
-Truyền trực tiếp tài liệu dưới dạng dữ liệu đầu vào đa phương thức. Trợ lý sẽ phân tích các tài liệu được cung cấp và tiến hành nghiên cứu dựa trên nội dung của các tài liệu đó.
+直接將文件做為多模態輸入內容傳送。代理程式會分析您提供的文件，並根據文件內容進行研究。
 
 ### Python
 
@@ -878,28 +877,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Xử lý các tác vụ chạy trong thời gian dài
+## 處理長時間執行的工作
 
-Deep Research là một quy trình gồm nhiều bước, bao gồm lập kế hoạch, tìm kiếm, đọc và viết. Chu kỳ này thường vượt quá giới hạn thời gian chờ tiêu chuẩn của các lệnh gọi API đồng bộ.
+Deep Research 包含規劃、搜尋、閱讀和撰寫等多個步驟。這個週期通常會超出同步 API 呼叫的標準逾時限制。
 
-Nhân viên hỗ trợ bắt buộc phải sử dụng `background=True`. API này sẽ trả về ngay một đối tượng `Interaction` một phần. Bạn có thể dùng thuộc tính `id` để truy xuất một lượt tương tác cho hoạt động bỏ phiếu. Trạng thái tương tác sẽ chuyển từ `in_progress` sang `completed` hoặc `failed`.
+服務專員必須使用 `background=True`。API 會立即傳回部分 `Interaction` 物件。您可以使用 `id` 屬性擷取輪詢的互動。互動狀態會從 `in_progress` 轉換為 `completed` 或 `failed`。
 
-### Phát trực tiếp
+### 串流
 
-Tính năng Deep Research hỗ trợ truyền trực tuyến để nhận thông tin cập nhật theo thời gian thực về tiến trình nghiên cứu, bao gồm cả bản tóm tắt ý tưởng, đầu ra văn bản và hình ảnh được tạo.
-Bạn phải đặt `stream=True` và `background=True`.
+Deep Research 支援串流功能，可即時更新研究進度，包括想法摘要、文字輸出內容和生成的圖片。您必須設定 `stream=True` 和 `background=True`。
 
-Để nhận các bước suy luận trung gian (tư duy) và thông tin cập nhật về tiến trình, bạn phải bật **bản tóm tắt tư duy** bằng cách đặt `thinking_summaries` thành `"auto"` trong `agent_config`. Nếu không có tham số này, luồng có thể chỉ cung cấp kết quả cuối cùng.
+如要接收中介推論步驟 (想法) 和進度更新，請將 `agent_config` 中的 `thinking_summaries` 設為 `"auto"`，啟用**思考摘要**。否則串流可能只會提供最終結果。
 
-#### Loại sự kiện phát trực tuyến
+#### 串流事件類型
 
-| Loại sự kiện | Loại delta | Mô tả |
+| 事件類型 | Delta 類型 | 說明 |
 | --- | --- | --- |
-| `content.delta` | `thought_summary` | Bước suy luận trung gian của tác nhân. |
-| `content.delta` | `text` | Một phần của văn bản đầu ra cuối cùng. |
-| `content.delta` | `image` | Một hình ảnh được tạo (được mã hoá bằng base64). |
+| `content.delta` | `thought_summary` | 代理程式的中間推論步驟。 |
+| `content.delta` | `text` | 最終文字輸出內容的一部分。 |
+| `content.delta` | `image` | 生成的圖片 (Base64 編碼)。 |
 
-Ví dụ sau đây bắt đầu một tác vụ nghiên cứu và xử lý luồng bằng tính năng tự động kết nối lại. Thao tác này theo dõi `interaction_id` và `last_event_id` để nếu kết nối bị gián đoạn (ví dụ: sau khi hết thời gian chờ 600 giây), thao tác này có thể tiếp tục từ nơi bị gián đoạn.
+以下範例會啟動研究工作，並處理自動重新連線的串流。這項功能會追蹤 `interaction_id` 和 `last_event_id`，因此如果連線中斷 (例如在 600 秒逾時後)，可以從中斷處繼續。
 
 ### Python
 
@@ -1020,9 +1018,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/INTER
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Câu hỏi nối tiếp và lượt tương tác
+## 後續問題和互動
 
-Bạn có thể tiếp tục cuộc trò chuyện sau khi nhân viên hỗ trợ gửi báo cáo cuối cùng bằng cách sử dụng `previous_interaction_id`. Nhờ đó, bạn có thể yêu cầu làm rõ, tóm tắt hoặc giải thích chi tiết về các phần cụ thể của nghiên cứu mà không cần bắt đầu lại toàn bộ nhiệm vụ.
+代理程式傳回最終報告後，你可以使用 `previous_interaction_id` 繼續對話。這樣一來，您不必重新啟動整個工作，就能要求澄清、摘要或詳細說明研究的特定部分。
 
 ### Python
 
@@ -1065,28 +1063,28 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Trường hợp nên dùng Tác nhân Deep Research của Gemini
+## 何時使用 Gemini Deep Research 代理
 
-Deep Research là một **tác nhân**, chứ không chỉ là một mô hình. Công cụ này phù hợp nhất với những khối lượng công việc yêu cầu phương pháp "nhà phân tích trong hộp" thay vì trò chuyện có độ trễ thấp.
+Deep Research 是**代理**，而不只是模型。最適合需要「分析師即時服務」方法的工作負載，而非低延遲的即時通訊。
 
-| Tính năng | Các mô hình Gemini tiêu chuẩn | Tác nhân Deep Research của Gemini |
+| 功能 | 標準 Gemini 模型 | Gemini Deep Research 代理程式 |
 | --- | --- | --- |
-| **Độ trễ** | Giây | Phút (Không đồng bộ/Nền) |
-| **Quy trình** | Tạo -> Đầu ra | Lập kế hoạch -> Tìm kiếm -> Đọc -> Lặp lại -> Đầu ra |
-| **Đầu ra** | Cuộc trò chuyện, viết mã, bản tóm tắt ngắn | Báo cáo chi tiết, phân tích dài, bảng so sánh |
-| **Phù hợp nhất cho** | Chatbot, trích xuất, viết sáng tạo | Phân tích thị trường, thẩm định, đánh giá tài liệu, bối cảnh cạnh tranh |
+| **延遲** | 秒 | 分鐘 (非同步/背景) |
+| **流程** | 生成 -> 輸出內容 | 規劃 -> 搜尋 -> 閱讀 -> 疊代 -> 輸出 |
+| **輸出內容** | 對話文字、程式碼、簡短摘要 | 詳細報表、長篇分析、比較表 |
+| **最佳用途** | 聊天機器人、擷取、創意寫作 | 市場分析、盡職調查、文獻回顧、競爭環境 |
 
-## Cấu hình tác nhân
+## 代理程式設定
 
-Deep Research sử dụng tham số `agent_config` để kiểm soát hành vi.
-Truyền nó dưới dạng một từ điển có các trường sau:
+Deep Research 會使用 `agent_config` 參數控制行為。
+以字典形式傳遞，並包含下列欄位：
 
-| Trường | Loại | Mặc định | Mô tả |
+| 欄位 | 類型 | 預設 | 說明 |
 | --- | --- | --- | --- |
-| `type` | `string` | Bắt buộc | Phải là `"deep-research"`. |
-| `thinking_summaries` | `string` | `"none"` | Đặt thành `"auto"` để nhận các bước suy luận trung gian trong quá trình truyền trực tuyến. Đặt thành `"none"` để tắt. |
-| `visualization` | `string` | `"auto"` | Đặt thành `"auto"` để cho phép biểu đồ và hình ảnh do tác nhân tạo. Đặt thành `"off"` để tắt. |
-| `collaborative_planning` | `boolean` | `false` | Đặt thành `true` để bật tính năng xem xét kế hoạch nhiều lượt trước khi bắt đầu nghiên cứu. |
+| `type` | `string` | 必填 | 必須為 `"deep-research"`。 |
+| `thinking_summaries` | `string` | `"none"` | 設為 `"auto"` 即可在串流期間接收中間推論步驟。如要停用，請設為 `"none"`。 |
+| `visualization` | `string` | `"auto"` | 設為 `"auto"`，即可啟用代理程式生成的圖表和圖片。如要停用，請設為 `"off"`。 |
+| `collaborative_planning` | `boolean` | `false` | 設為 `true`，即可在開始研究前啟用多輪計畫審查。 |
 
 ### Python
 
@@ -1141,59 +1139,61 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Tình trạng còn hàng và giá
+## 適用情形與定價
 
-Bạn có thể truy cập vào Gemini Deep Research Agent bằng Interactions API trong Google AI Studio và Gemini API.
+您可以使用 Google AI Studio 和 Gemini API 中的 Interactions API，存取 Gemini Deep Research Agent。
 
-Giá tuân theo [mô hình trả tiền theo mức dùng](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#pricing-for-agents) dựa trên các mô hình Gemini cơ bản và các công cụ cụ thể mà tác nhân sử dụng. Không giống như các yêu cầu trò chuyện thông thường (một yêu cầu dẫn đến một kết quả đầu ra), tác vụ Deep Research là một quy trình làm việc dựa trên tác nhân. Một yêu cầu duy nhất sẽ kích hoạt một vòng lặp tự động gồm lập kế hoạch, tìm kiếm, đọc và suy luận.
+價格採用[即付即用模式](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw#pricing-for-agents)，取決於基礎 Gemini 模型和代理程式使用的特定工具。標準的即時通訊要求會產生一個輸出內容，但 Deep Research 工作是代理式工作流程，只要提出要求，系統就會自動規劃、搜尋、閱讀和推論。
 
-### Chi phí ước tính
+### 預估費用
 
-Chi phí sẽ khác nhau tuỳ thuộc vào mức độ nghiên cứu cần thiết. Trợ lý tự động xác định mức độ cần thiết của việc đọc và tìm kiếm để trả lời câu lệnh của bạn.
+費用會因所需研究的深度而異。代理會自主判斷回答提示詞需要多少閱讀和搜尋量。
 
-- **Deep Research** (`deep-research-preview-04-2026`): Đối với một cụm từ tìm kiếm thông thường đòi hỏi mức độ phân tích vừa phải, tác nhân có thể sử dụng khoảng 80 cụm từ tìm kiếm, khoảng 250.000 mã thông báo đầu vào (khoảng 50-70% được lưu vào bộ nhớ đệm) và khoảng 60.000 mã thông báo đầu ra.
-  - **Tổng ước tính:** Khoảng 10.000 VND – 30.000 VND cho mỗi nhiệm vụ
-- **Deep Research Max** (`deep-research-max-preview-04-2026`): Để phân tích sâu về môi trường cạnh tranh hoặc thẩm định kỹ lưỡng, tác nhân có thể sử dụng tối đa khoảng 160 cụm từ tìm kiếm, khoảng 900.000 mã thông báo đầu vào (khoảng 50-70% được lưu vào bộ nhớ đệm) và khoảng 80.000 mã thông báo đầu ra.
-  - **Tổng ước tính:** Khoảng 30.000 VND – 70.000 VND cho mỗi nhiệm vụ
+- **Deep Research** (`deep-research-preview-04-2026`)：對於需要中等程度分析的典型查詢，代理程式可能會使用約 80 個搜尋查詢、約 25 萬個輸入權杖 (約 50% 至 70% 的權杖會快取)，以及約 6 萬個輸出權杖。
+  - **預估總金額：**每項工作約$1.00 美元至 $3.00 美元
+- **Deep Research Max** (`deep-research-max-preview-04-2026`)：如要深入分析競爭環境或進行廣泛的盡職調查，代理程式最多可能會使用約 160 個搜尋查詢、約 90 萬個輸入權杖 (約 50% 至 70% 的權杖會快取)，以及約 8 萬個輸出權杖。
+  - **預估總金額：**每項工作約$3.00 美元至 $7.00 美元
 
-## Lưu ý về an toàn
+## 安全考量
 
-Việc cấp cho một đặc vụ quyền truy cập vào web và các tệp riêng tư của bạn đòi hỏi bạn phải cân nhắc kỹ lưỡng các rủi ro về an toàn.
+授予代理程式網路和私人檔案的存取權時，請務必仔細考量安全風險。
 
-- **Tiêm câu lệnh (prompt injection) sử dụng tệp:** Trợ lý sẽ đọc nội dung của các tệp mà bạn cung cấp. Đảm bảo rằng các tài liệu đã tải lên (tệp PDF, tệp văn bản) đến từ các nguồn đáng tin cậy. Một tệp độc hại có thể chứa văn bản ẩn được thiết kế để thao túng đầu ra của tác nhân.
-- **Rủi ro về nội dung trên web:** Đặc vụ tìm kiếm trên web công khai. Mặc dù chúng tôi triển khai các bộ lọc an toàn mạnh mẽ, nhưng vẫn có nguy cơ là tác nhân có thể gặp phải và xử lý các trang web độc hại. Bạn nên xem xét `citations` được cung cấp trong câu trả lời để xác minh các nguồn.
-- **Trích xuất:** Hãy thận trọng khi yêu cầu tác nhân tóm tắt dữ liệu nội bộ nhạy cảm nếu bạn cũng cho phép tác nhân duyệt web.
+- **使用檔案進行提示詞注入：**代理程式會讀取您提供的檔案內容。請確認上傳的文件 (PDF、文字檔) 來自可信來源。惡意檔案可能含有隱藏的文字，用於操縱代理程式的輸出內容。
+- **網路內容風險：**代理程式會搜尋公開網路，雖然我們導入了強大的安全篩選器，但代理程式仍可能遇到並處理惡意網頁。建議您查看回覆中`citations`提供的
+  來源，確認資訊是否正確。
+- **資料外洩：**如果允許代理程式瀏覽網頁，要求代理程式摘要說明機密內部資料時，請務必謹慎。
 
-## Các phương pháp hay nhất
+## 最佳做法
 
-- **Nhắc về những thông tin chưa biết:** Hướng dẫn nhân viên cách xử lý dữ liệu bị thiếu.
-  Ví dụ: hãy thêm *"Nếu không có số liệu cụ thể cho năm 2025, hãy nêu rõ rằng đó là số liệu dự đoán hoặc không có sẵn thay vì ước tính"* vào câu lệnh của bạn.
-- **Cung cấp bối cảnh:** Hỗ trợ hoạt động nghiên cứu của tác nhân bằng cách cung cấp thông tin cơ bản hoặc các ràng buộc ngay trong câu lệnh đầu vào.
-- **Sử dụng tính năng lập kế hoạch cộng tác:** Đối với các câu hỏi phức tạp, hãy bật tính năng lập kế hoạch cộng tác để xem xét và tinh chỉnh kế hoạch nghiên cứu trước khi thực hiện.
-- **Thông tin đầu vào đa phương thức:** Deep Research Agent hỗ trợ thông tin đầu vào đa phương thức.
-  Hãy sử dụng một cách thận trọng vì điều này sẽ làm tăng chi phí và nguy cơ tràn cửa sổ ngữ cảnh.
+- **提示未知內容：**指示代理程式如何處理遺漏的資料。
+  舉例來說，在提示中加入「如果沒有 2025 年的具體數據，請明確指出這些是預測或無法取得，而非估算」。
+- **提供脈絡：**直接在輸入提示中提供背景資訊或限制，做為代理程式研究的基準。
+- **使用協作規劃功能：**對於複雜查詢，請啟用協作規劃功能，以便在執行前查看及修正研究計畫。
+- **多模態輸入內容：**Deep Research 代理程式支援多模態輸入內容。
+  請謹慎使用，因為這會增加成本，並可能導致脈絡視窗溢位。
 
-## Các điểm hạn chế
+## 限制
 
-- **Trạng thái thử nghiệm**: Interactions API đang ở giai đoạn thử nghiệm công khai. Các tính năng và lược đồ có thể thay đổi.
-- **Công cụ tuỳ chỉnh:** Hiện tại, bạn không thể cung cấp công cụ Gọi hàm tuỳ chỉnh nhưng có thể sử dụng các máy chủ MCP (Giao thức ngữ cảnh mô hình) từ xa với tác nhân Deep Research.
-- **Đầu ra có cấu trúc:** Deep Research Agent hiện không hỗ trợ đầu ra có cấu trúc.
-- **Thời gian nghiên cứu tối đa:** Trợ lý Deep Research có thời gian nghiên cứu tối đa là 60 phút. Hầu hết các nhiệm vụ sẽ hoàn tất trong vòng 20 phút.
-- **Yêu cầu về cửa hàng:** Việc thực thi tác nhân bằng `background=True` yêu cầu `store=True`.
-- **Google Tìm kiếm:** [Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi) được bật theo mặc định và [các hạn chế cụ thể](https://ai.google.dev/gemini-api/terms?hl=vi#use-restrictions2) áp dụng cho kết quả có căn cứ.
+- **Beta 版狀態**：Interactions API 目前為公開 Beta 版。功能和結構定義可能會有所異動。
+- **自訂工具：**目前無法提供自訂函式呼叫工具，但您可以搭配 Deep Research 代理使用遠端 MCP (Model Context Protocol) 伺服器。
+- **結構化輸出內容：**Deep Research Agent 目前不支援結構化輸出內容。
+- **研究時間上限：**Deep Research 代理的研究時間上限為 60 分鐘。大多數工作應可在 20 分鐘內完成。
+- **商店規定：**使用 `background=True` 執行代理程式時，需要
+  `store=True`。
+- **Google 搜尋：** [Google 搜尋](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)預設為啟用，且[特定限制](https://ai.google.dev/gemini-api/terms?hl=zh-tw#use-restrictions2)適用於以 Google 搜尋為基礎的結果。
 
-## Bước tiếp theo
+## 後續步驟
 
-- Tìm hiểu thêm về [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=vi).
-- Hãy dùng thử [Deep Research trong Sổ tay về Gemini API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Deep_Research.ipynb?hl=vi).
-- Tìm hiểu cách sử dụng dữ liệu của riêng bạn bằng công cụ [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi).
+- 進一步瞭解 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=zh-tw)。
+- 請參閱 [Gemini API 教戰手冊中的 Deep Research](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Deep_Research.ipynb?hl=zh-tw)。
+- 瞭解如何使用[檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw)工具，運用自己的資料。
 
-Gửi ý kiến phản hồi
+提供意見
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+上次更新時間：2026-04-29 (世界標準時間)。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+想進一步說明嗎？
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-04-29 (世界標準時間)。"],[],[]]

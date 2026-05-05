@@ -1,44 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=zh-TW
-fetched_at: 2026-05-05T19:44:41.241609+00:00
-title: "Gemini 3.1 Flash-Lite \u9810\u5148\u767c\u5e03\u7248 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=tr
+fetched_at: 2026-05-05T20:07:23.153409+00:00
+title: "Gemini 3.1 Flash-Lite \u00d6nizlemesi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-提供意見
+Geri bildirim gönderin
 
-# Gemini 3.1 Flash-Lite 預先發布版
+# Gemini 3.1 Flash-Lite Önizlemesi
 
-這是我們成本效益最高的多模態模型，可快速執行輕量型工作，且執行頻率高。Gemini 3.1 Flash-Lite 最適合處理大量代理工作、簡單的資料擷取作業，以及預算和速度是主要限制的極低延遲應用程式。
+En uygun maliyetli çok formatlı modelimiz. Yüksek sıklıkta gerçekleştirilen, basit görevlerde en hızlı performansı sunar. Gemini 3.1 Flash-Lite, yüksek hacimli yapay zeka görevleri, basit veri ayıklama ve bütçe ile hızın temel kısıtlamalar olduğu son derece düşük gecikmeli uygulamalar için en iyisidir.
 
-[在 Google AI Studio 中試用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-preview&hl=zh-tw)
+[Google AI Studio'da deneme](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-preview&hl=tr)
 
 ## gemini-3.1-flash-lite-preview
 
-| 屬性 | 說明 |
+| Mülk | Açıklama |
 | --- | --- |
-| id\_card 模型代碼 | `gemini-3.1-flash-lite-preview` |
-| save支援的資料類型 | **輸入裝置**  文字、圖片、影片、音訊和 PDF  **輸出內容**  文字 |
-| token\_auto 代幣限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw) | **輸入權杖限制**  1,048,576  **輸出詞元限制**  65,536 |
-| handyman功能 | **語音生成**  不支援  **批次 API**  支援  **快取**  支援  **程式碼執行**  支援  **電腦使用**  不支援  **檔案搜尋**  支援  **Flex 推論**  支援  **函式呼叫**  支援  **利用 Google 地圖建立基準**  支援  **圖像生成**  不支援  **Live API**  不支援  **優先推論**  支援  **搜尋基準**  支援  **結構化輸出內容**  支援  **思考型**  支援  **網址內容**  支援 |
-| 123 個版本 | 如要瞭解詳情，請參閱[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-tw#model-versions)。  - `Preview: gemini-3.1-flash-lite-preview` |
-| calendar\_month最新更新 | 2026 年 3 月 |
-| cognition\_2知識截點 | 2025 年 1 月 |
+| id\_cardModel kodu | `gemini-3.1-flash-lite-preview` |
+| saveDesteklenen veri türleri | **Girişler**  Metin, resim, video, ses ve PDF  **Çıkış**  Metin |
+| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  1.048.576  **Çıkış jetonu sınırı**  65.536 |
+| handymanÖzellikler | **Ses üretimi**  Desteklenmiyor  **Batch API**  Destekleniyor  **Önbelleğe alma**  Destekleniyor  **Kod yürütme**  Destekleniyor  **Bilgisayar kullanımı**  Desteklenmiyor  **Dosya arama**  Destekleniyor  **Esnek çıkarım**  Destekleniyor  **İşlev çağırma**  Destekleniyor  **Google Haritalar ile Temellendirme**  Destekleniyor  **Görüntü üretme**  Desteklenmiyor  **Live API**  Desteklenmiyor  **Öncelik çıkarımı**  Destekleniyor  **Arama temellendirme**  Destekleniyor  **Yapılandırılmış çıkışlar**  Destekleniyor  **Düşünme** (Thinking)  Destekleniyor  **URL bağlamı**  Destekleniyor |
+| 123Sürümleri | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - `Preview: gemini-3.1-flash-lite-preview` |
+| calendar\_monthSon güncelleme | Mart 2026 |
+| cognition\_2Son güncel bilgi tarihi | Ocak 2025 |
 
-## 開發人員指南
+## Geliştirici kılavuzu
 
-Gemini 3.1 Flash-Lite 最擅長處理大規模的簡單工作。以下是 Gemini 3.1 Flash-Lite 最適合的用途：
+Gemini 3.1 Flash-Lite, büyük ölçekli basit görevleri en iyi şekilde yerine getirir. Gemini 3.1 Flash-Lite'ın en uygun olduğu bazı kullanım alanları:
 
-- **翻譯**：快速、便宜且大量翻譯，例如大規模處理即時通訊訊息、評論和支援單。你可以使用系統指令，將輸出內容限制為僅有譯文，不含額外註解：
+- **Çeviri**: Sohbet mesajları, yorumlar ve destek taleplerinin büyük ölçekte işlenmesi gibi hızlı, ucuz ve yüksek hacimli çeviri. Çıkışı yalnızca çevrilmiş metinle sınırlamak için sistem talimatlarını kullanabilirsiniz. Bu talimatlar, ek yorum içermez:
 
   ```
   text = "Hey, are you down to grab some pizza later? I'm starving!"
@@ -53,7 +53,7 @@ Gemini 3.1 Flash-Lite 最擅長處理大規模的簡單工作。以下是 Gemini
 
   print(response.text)
   ```
-- **轉錄**：處理錄音、語音記事或任何音訊內容，並取得文字轉錄稿，不必另外啟動語音轉文字管道。支援多模態輸入，因此您可以直接傳遞音訊檔案進行轉錄：
+- **Transkripsiyon**: Ayrı bir sesle yazma ardışık düzeni oluşturmadan, metin transkriptine ihtiyaç duyduğunuz kayıtları, sesli notları veya ses içeriklerini işleyin. Çok formatlı girişleri desteklediği için transkripsiyon için ses dosyalarını doğrudan iletebilirsiniz:
 
   ```
   # URL = "https://storage.googleapis.com/generativeai-downloads/data/State_of_the_Union_Address_30_January_1961.mp3"
@@ -70,7 +70,7 @@ Gemini 3.1 Flash-Lite 最擅長處理大規模的簡單工作。以下是 Gemini
 
   print(response.text)
   ```
-- **輕量型代理程式工作和資料擷取**：支援實體擷取、分類和輕量型資料處理管道，並以結構化 JSON 輸出。舉例來說，從電子商務顧客評論中擷取結構化資料：
+- **Basit aracı görevleri ve veri ayıklama**: Yapılandırılmış JSON çıkışıyla desteklenen, varlık ayıklama, sınıflandırma ve basit veri işleme ardışık düzenleri. Örneğin, bir e-ticaret müşteri yorumundan yapılandırılmış verileri ayıklama:
 
   ```
   from pydantic import BaseModel, Field
@@ -95,7 +95,7 @@ Gemini 3.1 Flash-Lite 最擅長處理大規模的簡單工作。以下是 Gemini
 
   print(response.text)
   ```
-- **處理文件和摘要**：剖析 PDF 並傳回簡潔摘要，例如建構文件處理管道或快速分類收到的檔案：
+- **Belge işleme ve özetleme**: PDF'leri ayrıştırın ve kısa özetler döndürün. Örneğin, belge işleme ardışık düzeni oluşturma veya gelen dosyaları hızlı bir şekilde önceliklendirme gibi işlemler için kullanılabilir:
 
   ```
   import httpx
@@ -118,7 +118,7 @@ Gemini 3.1 Flash-Lite 最擅長處理大規模的簡單工作。以下是 Gemini
 
   print(response.text)
   ```
-- **模型路徑**：使用低延遲且低成本的模型做為分類器，根據工作複雜度將查詢轉送至適當的模型。這是實際的生產模式，開放原始碼的 [Gemini CLI](https://geminicli.com/docs/core/#model-fallback) 會使用 Flash-Lite 分類工作複雜度，並據此將工作轉送至 Flash 或 Pro。
+- **Model yönlendirme**: Sorguları görev karmaşıklığına göre uygun modele yönlendiren bir sınıflandırıcı olarak düşük gecikmeli ve düşük maliyetli bir model kullanın. Bu, üretimde kullanılan gerçek bir kalıptır. Açık kaynaklı [Gemini CLI](https://geminicli.com/docs/core/#model-fallback), görev karmaşıklığını sınıflandırmak ve buna göre Flash veya Pro'ya yönlendirmek için Flash-Lite'ı kullanır.
 
   ```
   FLASH_MODEL = 'flash'
@@ -167,7 +167,7 @@ Gemini 3.1 Flash-Lite 最擅長處理大規模的簡單工作。以下是 Gemini
 
   print(response.text)
   ```
-- **思考**：如要提高準確率，請針對需要逐步推論的任務設定思考，讓模型在產生最終輸出內容前，花費額外的運算資源進行內部推論：
+- **Düşünme**: Adım adım akıl yürütme gerektiren görevlerde daha iyi doğruluk için düşünme özelliğini, modelin nihai çıktıyı oluşturmadan önce dahili akıl yürütme için ek işlem yapacak şekilde yapılandırın:
 
   ```
   response = client.models.generate_content(
@@ -181,12 +181,12 @@ Gemini 3.1 Flash-Lite 最擅長處理大規模的簡單工作。以下是 Gemini
   print(response.text)
   ```
 
-提供意見
+Geri bildirim gönderin
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-上次更新時間：2026-04-29 (世界標準時間)。
+Son güncelleme tarihi: 2026-04-29 UTC.
 
-想進一步說明嗎？
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-04-29 (世界標準時間)。"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]

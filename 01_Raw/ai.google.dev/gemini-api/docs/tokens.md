@@ -1,63 +1,69 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=ko
-fetched_at: 2026-05-05T19:49:05.356786+00:00
-title: "\ud1a0\ud070 \uc774\ud574 \ubc0f \uacc4\uc0b0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=pl
+fetched_at: 2026-05-05T20:01:08.641442+00:00
+title: "Zrozumienie i liczenie token\u00f3w \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-의견 보내기
+Prześlij opinię
 
-# 토큰 이해 및 계산
+# Zrozumienie i liczenie tokenów
 
-Gemini 및 기타 생성형 AI 모델은 *토큰*이라는 세분성으로 입력과 출력을 처리합니다.
+Gemini i inne modele generatywnej AI przetwarzają dane wejściowe i wyjściowe z dokładnością do *tokena*.
 
-**Gemini 모델의 경우 토큰은 약 4자에 해당합니다.
-토큰 100개는 영어 단어 약 60~80개에 해당합니다.**
+**W przypadku modeli Gemini token odpowiada około 4 znakom.
+100 tokenów to około 60–80 słów w języku angielskim.**
 
-## 토큰 정보
+## Informacje o tokenach
 
-토큰은 단일 문자(예: `z`) 또는 전체 단어(예: `cat`)일 수 있습니다. 긴 단어는 여러 토큰으로 나뉩니다. 모델에서 사용하는 모든 토큰 집합을 어휘라고 하며, 텍스트를 토큰으로 분할하는 프로세스를 *토큰화*라고 합니다.
+Tokeny mogą być pojedynczymi znakami, np. `z`, lub całymi słowami, np. `cat`. Długie słowa są dzielone na kilka tokenów. Zbiór wszystkich tokenów używanych przez model nazywa się słownikiem, a proces dzielenia tekstu na tokeny – *tokenizacją*.
 
-결제가 사용 설정된 경우 [Gemini API 호출 비용](https://ai.google.dev/pricing?hl=ko)은 입력 및 출력 토큰 수에 따라 결정되므로 토큰 수를 세는 방법을 알아두면 유용합니다.
+Gdy płatności są włączone, [koszt wywołania interfejsu Gemini API](https://ai.google.dev/pricing?hl=pl) jest
+częściowo określany przez liczbę tokenów wejściowych i wyjściowych, dlatego warto wiedzieć, jak je
+zliczać.
 
-Colab에서 토큰 수를 세어 볼 수 있습니다.
+Możesz wypróbować zliczanie tokenów w Colab.
 
 |  |  |  |
 | --- | --- | --- |
-| [ai.google.dev에서 보기](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | [Colab 노트북 사용해 보기](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ko) | [GitHub에서 노트북 보기](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ko) |
+| [Wyświetl w ai.google.dev](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | [Wypróbuj notatnik Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=pl) | [Wyświetl notatnik w GitHub](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=pl) |
 
-## 토큰 집계
+## Zliczanie tokenów
 
-텍스트, 이미지 파일, 기타 비텍스트 모달리티를 비롯한 Gemini API의 모든 입력과 출력은 토큰화됩니다.
+Wszystkie dane wejściowe i wyjściowe interfejsu Gemini API są tokenizowane, w tym tekst, pliki graficzne i inne formaty nietekstowe.
 
-다음과 같은 방법으로 토큰을 계산할 수 있습니다.
+Tokeny możesz zliczać na te sposoby:
 
-- **요청의 입력으로 [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=ko)를 호출합니다.**  
-   *입력만*의 총 토큰 수를 반환합니다. 모델에 입력을 보내기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다.
-- **`generate_content`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용합니다.**  
-   *입력과 출력 모두*의 총 토큰 수를 반환합니다(`total_token_count`).  
-   또한 입력 및 출력의 토큰 수를 별도로 반환합니다. `prompt_token_count` (입력 토큰) 및 `candidates_token_count`(출력 토큰)
+- **Wywołaj funkcję [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=pl) z danymi wejściowymi
+  żądania.**  
+   Zwraca ona łączną liczbę tokenów *tylko w danych wejściowych*. Możesz wywołać tę funkcję przed wysłaniem danych wejściowych do modelu, aby sprawdzić rozmiar żądań.
+- **Po wywołaniu funkcji `generate_content` użyj atrybutu `usage_metadata` w obiekcie `response`**  
+   Zwraca on łączną liczbę
+  tokenów *zarówno w danych wejściowych, jak i wyjściowych*: `total_token_count`.  
+   Zwraca też oddzielnie liczbę tokenów w danych wejściowych i wyjściowych: `prompt_token_count` (tokeny wejściowe) i `candidates_token_count` (tokeny wyjściowe).
 
-  [사고 모델](https://ai.google.dev/gemini-api/docs/thinking?hl=ko)을 사용하는 경우 사고 과정에서 사용된 토큰이 `thoughts_token_count`에 반환됩니다. [컨텍스트 캐싱](https://ai.google.dev/gemini-api/docs/caching?hl=ko)을 사용하는 경우 캐시된 토큰 수는 `cached_content_token_count`에 표시됩니다.
+  Jeśli używasz modelu [myślącego, tokeny użyte podczas procesu myślenia
+  są zwracane w `thoughts_token_count`.](https://ai.google.dev/gemini-api/docs/thinking?hl=pl) A jeśli używasz
+  [buforowania kontekstu](https://ai.google.dev/gemini-api/docs/caching?hl=pl), liczba tokenów w pamięci podręcznej będzie w `cached_content_token_count`.
 
-### 텍스트 토큰 수 계산
+### Zliczanie tokenów tekstowych
 
-텍스트 전용 입력으로 `count_tokens`를 호출하면 *입력만* (`total_tokens`)의 텍스트 토큰 수가 반환됩니다. `generate_content`를 호출하기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다.
+Jeśli wywołasz funkcję `count_tokens` z danymi wejściowymi zawierającymi tylko tekst, zwróci ona liczbę tokenów tekstu *tylko w danych wejściowych* (`total_tokens`). Możesz wywołać tę funkcję przed wywołaniem funkcji `generate_content`, aby sprawdzić rozmiar żądań.
 
-또 다른 방법은 `generate_content`을 호출한 다음 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
+Inną opcją jest wywołanie funkcji `generate_content`, a następnie użycie atrybutu `usage_metadata` w obiekcie `response`, aby uzyskać te informacje:
 
-- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 별도 토큰 수
-- 사고 과정의 토큰 수 (`thoughts_token_count`)
-- *입력과 출력 모두*의 총 토큰 수(`total_token_count`)
+- oddzielne liczby tokenów w danych wejściowych (`prompt_token_count`), treści w pamięci podręcznej (`cached_content_token_count`) i danych wyjściowych (`candidates_token_count`);
+- liczba tokenów w procesie myślenia (`thoughts_token_count`);
+- łączna liczba tokenów *zarówno w danych wejściowych, jak i wyjściowych* (`total_token_count`).
 
 ### Python
 
@@ -79,7 +85,7 @@ response = client.models.generate_content(
 print(response.usage_metadata)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -132,17 +138,17 @@ fmt.Println(string(usageMetadata))
     ```
 ```
 
-### 멀티턴 (채팅) 토큰 수 계산
+### Zliczanie tokenów w czacie wieloetapowym
 
-채팅 기록과 함께 `count_tokens`를 호출하면 채팅의 각 역할 (`total_tokens`)에서 텍스트의 총 토큰 수가 반환됩니다.
+Jeśli wywołasz funkcję `count_tokens` z historią czatu, zwróci ona łączną liczbę tokenów tekstu z każdej roli w czacie (`total_tokens`).
 
-또 다른 방법은 `send_message`을 호출한 다음 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
+Inną opcją jest wywołanie funkcji `send_message`, a następnie użycie atrybutu `usage_metadata` w obiekcie `response`, aby uzyskać te informacje:
 
-- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 별도 토큰 수
-- 사고 과정의 토큰 수 (`thoughts_token_count`)
-- *입력과 출력 모두*의 총 토큰 수(`total_token_count`)
+- oddzielne liczby tokenów w danych wejściowych (`prompt_token_count`), treści w pamięci podręcznej (`cached_content_token_count`) i danych wyjściowych (`candidates_token_count`);
+- liczba tokenów w procesie myślenia (`thoughts_token_count`);
+- łączna liczba tokenów *zarówno w danych wejściowych, jak i wyjściowych* (`total_token_count`).
 
-다음 대화 턴의 크기를 파악하려면 `count_tokens`를 호출할 때 기록에 추가해야 합니다.
+Aby dowiedzieć się, jak duży będzie następny etap rozmowy, musisz dołączyć go do historii, gdy wywołujesz funkcję `count_tokens`.
 
 ### Python
 
@@ -184,7 +190,7 @@ history = [*chat.get_history(), extra]
 print(client.models.count_tokens(model="gemini-3-flash-preview", contents=history))
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -268,31 +274,33 @@ if err != nil {
 fmt.Println(secondTokenResp.TotalTokens)
 ```
 
-### 멀티모달 토큰 수 계산
+### Zliczanie tokenów multimodalnych
 
-텍스트, 이미지 파일, 기타 텍스트가 아닌 모달리티를 비롯한 Gemini API의 모든 입력은 토큰화됩니다. Gemini API에서 처리하는 동안 멀티모달 입력의 토큰화에 관한 다음 상위 수준 주요 사항에 유의하세요.
+Wszystkie dane wejściowe interfejsu Gemini API są tokenizowane, w tym tekst, pliki graficzne i inne formaty nietekstowe. Podczas przetwarzania przez interfejs Gemini API pamiętaj o tych najważniejszych kwestiach dotyczących tokenizacji danych wejściowych multimodalnych:
 
-- 두 치수가 모두 384픽셀 이하인 이미지 입력은 258개의 토큰으로 계산됩니다. 한쪽 또는 양쪽 크기가 더 큰 이미지는 필요에 따라 768x768픽셀 타일로 잘리고 크기가 조정되며, 각 타일은 258개의 토큰으로 계산됩니다.
-- 동영상 및 오디오 파일은 다음 고정 요율로 토큰으로 변환됩니다. 동영상은 초당 263개 토큰, 오디오는 초당 32개 토큰입니다.
+- Dane wejściowe obrazu o obu wymiarach <= 384 piksele są liczone jako 258 tokenów. Obrazy większe w jednym lub obu wymiarach są w razie potrzeby przycinane i skalowane do kafelków o wymiarach 768 x 768 pikseli, z których każdy jest liczony jako 258 tokenów.
+- Pliki wideo i audio są konwertowane na tokeny według tych stałych stawek: wideo – 263 tokeny na sekundę, audio – 32 tokeny na sekundę.
 
-#### 미디어 해상도
+#### Rozdzielczości multimediów
 
-[Gemini 3 모델](https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-3)은 `media_resolution` 파라미터를 통해 멀티모달 비전 처리에 대한 세밀한 제어 기능을 제공합니다. `media_resolution` 파라미터는 **입력 이미지 또는 동영상 프레임당 할당되는 최대 토큰 수**를 결정합니다.
-해상도가 높을수록 모델이 작은 텍스트를 읽거나 세부 요소를 식별하는 능력을 향상시키지만, 토큰 사용량과 지연 시간이 증가합니다.
+[Modele Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=pl#gemini-3) wprowadzają szczegółową kontrolę nad
+przetwarzaniem obrazu multimodalnego za pomocą parametru `media_resolution`. Parametr `media_resolution` określa **maksymalną liczbę tokenów przydzielonych na obraz wejściowy lub klatkę wideo**.
+Wyższe rozdzielczości zwiększają zdolność modelu do odczytywania drobnego tekstu lub identyfikowania małych szczegółów, ale zwiększają zużycie tokenów i opóźnienie.
 
-파라미터 및 파라미터가 토큰 계산에 미치는 영향에 대한 자세한 내용은 [미디어 해상도](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ko) 가이드를 참고하세요.
+Więcej informacji o parametrze i jego wpływie na obliczenia tokenów,
+znajdziesz w przewodniku po [rozdzielczości multimediów](https://ai.google.dev/gemini-api/docs/media-resolution?hl=pl).
 
-#### 이미지 파일
+#### Pliki graficzne
 
-텍스트와 이미지 입력으로 `count_tokens`를 호출하면 *입력만* (`total_tokens`)에 텍스트와 이미지의 결합된 토큰 수가 반환됩니다. `generate_content`를 호출하기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다. 선택적으로 텍스트와 파일에서 각각 `count_tokens`을 호출할 수도 있습니다.
+Jeśli wywołasz funkcję `count_tokens` z danymi wejściowymi zawierającymi tekst i obraz, zwróci ona łączną liczbę tokenów tekstu i obrazu *tylko w danych wejściowych* (`total_tokens`). Możesz wywołać tę funkcję przed wywołaniem funkcji `generate_content`, aby sprawdzić rozmiar żądań. Opcjonalnie możesz też wywołać funkcję `count_tokens` oddzielnie dla tekstu i pliku.
 
-또 다른 방법은 `generate_content`을 호출한 다음 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
+Inną opcją jest wywołanie funkcji `generate_content`, a następnie użycie atrybutu `usage_metadata` w obiekcie `response`, aby uzyskać te informacje:
 
-- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 별도 토큰 수
-- 사고 과정의 토큰 수 (`thoughts_token_count`)
-- *입력과 출력 모두*의 총 토큰 수(`total_token_count`)
+- oddzielne liczby tokenów w danych wejściowych (`prompt_token_count`), treści w pamięci podręcznej (`cached_content_token_count`) i danych wyjściowych (`candidates_token_count`);
+- liczba tokenów w procesie myślenia (`thoughts_token_count`);
+- łączna liczba tokenów *zarówno w danych wejściowych, jak i wyjściowych* (`total_token_count`).
 
-File API에서 업로드된 이미지를 사용하는 예:
+Przykład, który używa przesłanego obrazu z interfejsu File API:
 
 ### Python
 
@@ -315,7 +323,7 @@ response = client.models.generate_content(
 print(response.usage_metadata)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -392,7 +400,7 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-이미지를 인라인 데이터로 제공하는 예:
+Przykład, który udostępnia obraz jako dane wbudowane:
 
 ### Python
 
@@ -416,7 +424,7 @@ response = client.models.generate_content(
 print(response.usage_metadata)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -489,20 +497,20 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-#### 동영상 또는 오디오 파일
+#### Pliki wideo lub audio
 
-오디오와 동영상은 각각 다음 고정된 비율로 토큰으로 변환됩니다.
+Audio i wideo są konwertowane na tokeny według tych stałych stawek:
 
-- 동영상: 초당 토큰 263개
-- 오디오: 초당 토큰 32개
+- Wideo: 263 tokeny na sekundę
+- Audio: 32 tokeny na sekundę
 
-텍스트 및 동영상/오디오 입력으로 `count_tokens`를 호출하면 *입력만*(`total_tokens`)에 있는 텍스트와 동영상/오디오 파일의 결합된 토큰 수가 반환됩니다. `generate_content`를 호출하기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다. 선택적으로 텍스트와 파일에서 `count_tokens`를 별도로 호출할 수도 있습니다.
+Jeśli wywołasz funkcję `count_tokens` z danymi wejściowymi zawierającymi tekst i wideo/audio, zwróci ona łączną liczbę tokenów tekstu i pliku wideo/audio *tylko w danych wejściowych* (`total_tokens`). Możesz wywołać tę funkcję przed wywołaniem funkcji `generate_content`, aby sprawdzić rozmiar żądań. Opcjonalnie możesz też wywołać funkcję `count_tokens` oddzielnie dla tekstu i pliku.
 
-또 다른 방법은 `generate_content`을 호출한 다음 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
+Inną opcją jest wywołanie funkcji `generate_content`, a następnie użycie atrybutu `usage_metadata` w obiekcie `response`, aby uzyskać te informacje:
 
-- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 별도 토큰 수
-- 사고 과정의 토큰 수 (`thoughts_token_count`)
-- *입력과 출력 모두*의 총 토큰 수(`total_token_count`)입니다.
+- oddzielne liczby tokenów w danych wejściowych (`prompt_token_count`), treści w pamięci podręcznej (`cached_content_token_count`) i danych wyjściowych (`candidates_token_count`);
+- liczba tokenów w procesie myślenia (`thoughts_token_count`);
+- łączna liczba tokenów *zarówno w danych wejściowych, jak i wyjściowych* (`total_token_count`).
 
 ### Python
 
@@ -532,7 +540,7 @@ response = client.models.generate_content(
 print(response.usage_metadata)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -627,9 +635,9 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-## 컨텍스트 윈도우
+## Okna kontekstu
 
-Gemini API를 통해 사용할 수 있는 모델에는 토큰으로 측정되는 컨텍스트 윈도우가 있습니다. 컨텍스트 윈도우는 제공할 수 있는 입력의 양과 모델이 생성할 수 있는 출력의 양을 정의합니다. [`models.get` 엔드포인트](https://ai.google.dev/api/rest/v1/models/get?hl=ko)를 호출하거나 [모델 문서](https://ai.google.dev/gemini-api/docs/models?hl=ko)를 확인하여 컨텍스트 윈도우의 크기를 확인할 수 있습니다.
+Modele dostępne za pomocą interfejsu Gemini API mają okna kontekstu, które są mierzone w tokenach. Okno kontekstu określa, ile danych wejściowych możesz podać i ile danych wyjściowych może wygenerować model. Rozmiar okna kontekstu możesz określić, wywołując punkt końcowy [`models.get` lub sprawdzając [dokumentację modeli](https://ai.google.dev/gemini-api/docs/models?hl=pl).](https://ai.google.dev/api/rest/v1/models/get?hl=pl)
 
 ### Python
 
@@ -642,7 +650,7 @@ print(f"{model_info.input_token_limit=}")
 print(f"{model_info.output_token_limit=}")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -674,12 +682,12 @@ fmt.Println("input token limit:", modelInfo.InputTokenLimit)
 fmt.Println("output token limit:", modelInfo.OutputTokenLimit)
 ```
 
-의견 보내기
+Prześlij opinię
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-최종 업데이트: 2026-04-29(UTC)
+Ostatnia aktualizacja: 2026-04-29 UTC.
 
-의견을 전달하고 싶나요?
+Chcesz przekazać coś jeszcze?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]

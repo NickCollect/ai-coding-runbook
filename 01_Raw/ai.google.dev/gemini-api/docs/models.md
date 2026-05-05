@@ -1,22 +1,22 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models?hl=th
-fetched_at: 2026-05-05T19:52:18.783348+00:00
-title: "\u0e42\u0e21\u0e40\u0e14\u0e25 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models?hl=id
+fetched_at: 2026-05-05T20:03:07.304626+00:00
+title: "Model \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
+[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-ส่งความคิดเห็น
+Kirim masukan
 
-# โมเดล
+# Model
 
 ---
 
@@ -26,51 +26,51 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 ### Gemini 3.1 Pro
 
-ความสามารถด้านปัญญาประดิษฐ์ขั้นสูง ทักษะการแก้ปัญหาที่ซับซ้อน และความสามารถในการเขียนโค้ดแบบเป็น Agent และ Vibe Coding
+Kecerdasan tingkat lanjut, keterampilan pemecahan masalah yang kompleks, serta kemampuan pengodean suasana dan agen yang canggih.
 
-Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=th)
+Pratinjau](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=id)
 [spark
 
 ### Gemini 3 Flash
 
-ประสิทธิภาพระดับ Frontier ที่เทียบเคียงได้กับโมเดลขนาดใหญ่กว่าในราคาที่ถูกกว่ามาก
+Performa kelas Frontier yang menyaingi model yang lebih besar dengan sebagian kecil biaya.
 
-Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=th)
+Pratinjau](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=id)
 [bolt
 
 ### Gemini 3.1 Flash-Lite
 
-ประสิทธิภาพระดับ Frontier ที่เทียบเคียงได้กับโมเดลขนาดใหญ่กว่าในราคาที่ถูกกว่ามาก
+Performa kelas Frontier yang menyaingi model yang lebih besar dengan sebagian kecil biaya.
 
-Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=th)
+Pratinjau](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=id)
 [🍌🍌
 
 ### Nano Banana 2
 
-การสร้างและแก้ไขรูปภาพที่มีประสิทธิภาพสูงและทรงพลัง ซึ่งปรับให้เหมาะกับกรณีการใช้งานที่ต้องใช้ความเร็วสูงและมีปริมาณมาก
+Pembuatan dan pengeditan gambar yang canggih dan sangat efisien, dioptimalkan untuk kecepatan dan kasus penggunaan bervolume tinggi.
 
-Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=th)
+Pratinjau](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=id)
 [🍌
 
 ### Nano Banana Pro
 
-โมเดลการสร้างและแก้ไขรูปภาพที่ล้ำสมัยที่สุดสำหรับการสร้างรูปภาพแบบเนทีฟที่มีบริบทสูง
+Model pengeditan dan pembuatan gambar tercanggih untuk pembuatan gambar native yang sangat kontekstual.
 
-Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=th)
+Pratinjau](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=id)
 [settings\_voice
 
 ### Gemini 3.1 Flash Live
 
-โมเดล Live API คุณภาพสูงที่มีเวลาในการตอบสนองต่ำสำหรับการโต้ตอบแบบเรียลไทม์และแอปพลิเคชัน AI ที่ใช้เสียงเป็นหลัก
+Model Live API berkualitas tinggi dan berlatensi rendah untuk aplikasi AI berbasis suara dan dialog real-time.
 
-New Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=th)
+Pratinjau Baru](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=id)
 [graphic\_eq
 
 ### Gemini 3.1 Flash TTS
 
-การสร้างเสียงพูดที่ทรงพลังและมีเวลาในการตอบสนองต่ำ
+Pembuatan ucapan yang andal dengan latensi rendah.
 
-New Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=th)
+Pratinjau Baru](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=id)
 
 ---
 
@@ -78,27 +78,27 @@ New Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-p
 
 bolt
 
-### [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=th)
+### [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=id)
 
-โมเดลที่มีประสิทธิภาพคุ้มค่าที่สุดของเราสำหรับงานที่มีปริมาณมากและมีเวลาในการตอบสนองต่ำซึ่งต้องใช้ความสามารถในการให้เหตุผล
+Model rasio harga-performa terbaik kami untuk tugas latensi rendah dan volume tinggi yang memerlukan penalaran.
 
 image\_search
 
-### [Nano Banana](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=th)
+### [Nano Banana](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=id)
 
-การสร้างและแก้ไขรูปภาพแบบเนทีฟที่ล้ำสมัยที่สุด ซึ่งออกแบบมาสำหรับเวิร์กโฟลว์ที่รวดเร็วและสร้างสรรค์
+Pembuatan dan pengeditan gambar native tercanggih yang dirancang untuk alur kerja yang cepat dan kreatif.
 
 settings\_voice
 
-### [Gemini 2.5 Flash Live Live (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=th)
+### [Pratinjau Live Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=id)
 
-ปรับให้เหมาะกับเอเจนต์การสนทนาแบบเรียลไทม์ที่มีการสตรีมเสียงแบบเนทีฟที่ใช้เวลาไม่ถึงวินาที
+Dioptimalkan untuk agen percakapan real-time dengan streaming audio native kurang dari satu detik.
 
 record\_voice\_over
 
-### [Gemini 2.5 Flash TTS (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=th)
+### [Pratinjau Gemini 2.5 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=id)
 
-การสร้างเสียงพูดจากข้อความที่ควบคุมได้พร้อมการควบคุมสไตล์และจังหวะอย่างละเอียด
+Pembuatan audio text-to-speech yang dapat dikontrol dengan kontrol yang akurat atas gaya dan kecepatan.
 
 ---
 
@@ -106,9 +106,9 @@ record\_voice\_over
 
 speed
 
-### [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=th)
+### [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=id)
 
-โมเดลหลายรูปแบบที่เร็วที่สุดและประหยัดที่สุดในตระกูล 2.5
+Model multimodal tercepat dan paling hemat biaya dalam keluarga 2.5.
 
 ---
 
@@ -116,225 +116,227 @@ speed
 
 psychology
 
-### [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=th)
+### [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=id)
 
-โมเดลที่ล้ำหน้าที่สุดของเราสำหรับงานที่ซับซ้อน ซึ่งมีความสามารถในการให้เหตุผลและการเขียนโค้ดที่ลึกซึ้ง
+Model tercanggih kami untuk tugas yang kompleks, yang memiliki kemampuan penalaran dan coding yang mendalam.
 
 record\_voice\_over
 
-### [Gemini 2.5 Pro TTS (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=th)
+### [Pratinjau Gemini 2.5 Pro TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=id)
 
-การสังเคราะห์เสียงพูดแบบรายละเอียดเสมือนจริงสูง ซึ่งปรับให้เหมาะกับคุณภาพในเวิร์กโฟลว์ที่มีโครงสร้าง เช่น พ็อดแคสต์และหนังสือเสียง
+Sintesis ucapan fidelitas tinggi yang dioptimalkan untuk kualitas dalam alur kerja terstruktur seperti podcast dan buku audio.
 
 ---
 
-## โมเดลเสียง
+## Model audio
 
-*ส่วนนี้มีโมเดลเสียงทั้งหมด รวมถึงโมเดลที่อาจแสดงอยู่ในส่วนอื่นๆ แล้ว*
+*Bagian ini berisi semua model audio, termasuk model yang mungkin sudah tercantum di bagian lain*
 
 settings\_input\_antenna
 
-### [Gemini 3.1 Flash Live Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=th)
+### [Pratinjau Gemini 3.1 Flash Live](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=id)
 
-โมเดลเสียงพูดเป็นเสียงพูด (A2A) คุณภาพสูงที่มีเวลาในการตอบสนองต่ำ ซึ่งออกแบบมาสำหรับการโต้ตอบแบบเรียลไทม์และแอปพลิเคชัน AI ที่ใช้เสียงเป็นหลัก
+Model audio-ke-audio (A2A) berkualitas tinggi dan berlatensi rendah kami dirancang untuk dialog real-time dan aplikasi AI yang mengutamakan suara.
 
 graphic\_eq
 
-### [Gemini 3.1 Flash TTS Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=th)
+### [Gemini 3.1 Flash TTS Pratinjau](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=id)
 
-การสร้างเสียงพูดที่ทรงพลังและมีเวลาในการตอบสนองต่ำ พร้อมเอาต์พุตที่เป็นธรรมชาติ พรอมต์ที่ควบคุมได้ และแท็กเสียงแสดงอารมณ์ใหม่สำหรับการควบคุมการบรรยายที่แม่นยำ
+Pembuatan ucapan yang canggih dan berlatensi rendah, dengan output alami, perintah yang dapat diarahkan, dan tag audio ekspresif baru untuk kontrol narasi yang presisi.
 
 settings\_voice
 
-### [Gemini 2.5 Flash Live Live (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=th)
+### [Pratinjau Live Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=id)
 
-โมเดล Live API หลักของเราสำหรับเอเจนต์เสียงและวิดีโอแบบสองทิศทางที่มีเวลาในการตอบสนองต่ำ พร้อมความสามารถในการให้เหตุผลด้านเสียงแบบเนทีฟ
+Model Live API unggulan kami untuk agen suara dan video dua arah berlatensi rendah dengan penalaran audio native.
 
 bolt
 
-### [Gemini 2.5 Flash TTS (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=th)
+### [Pratinjau Gemini 2.5 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=id)
 
-การเปลี่ยนข้อความเป็นเสียงพูดที่รวดเร็วและควบคุมได้สำหรับแอปพลิเคชันที่มีเวลาในการตอบสนองต่ำและคุ้มค่า รวมถึงผู้ช่วยแบบเรียลไทม์
+Text-to-speech yang cepat dan mudah dikontrol untuk aplikasi latensi rendah, hemat biaya, dan asisten real-time.
 
 record\_voice\_over
 
-### [Gemini 2.5 Pro TTS (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=th)
+### [Pratinjau Gemini 2.5 Pro TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=id)
 
-การสังเคราะห์เสียงพูดแบบรายละเอียดเสมือนจริงสูง ซึ่งปรับให้เหมาะกับคุณภาพในเวิร์กโฟลว์ที่มีโครงสร้าง เช่น พ็อดแคสต์และหนังสือเสียง
+Sintesis ucapan fidelitas tinggi yang dioptimalkan untuk kualitas dalam alur kerja terstruktur seperti podcast dan buku audio.
 
 ---
 
-## โมเดล GenMedia
+## Model media generatif
 
-*ส่วนนี้มีโมเดล GenMedia ทั้งหมด รวมถึงโมเดลที่อาจแสดงอยู่ในส่วนอื่นๆ แล้ว*
+*Bagian ini berisi semua model media generatif, termasuk model yang mungkin sudah tercantum di bagian lain*
 
 blur\_on
 
-### [Nano Banana 2 (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=th)
+### [Pratinjau Nano Banana 2](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=id)
 
-การสร้างภาพระดับการผลิตที่มีประสิทธิภาพสูง ซึ่งผสานรวมความสามารถด้านปัญญาประดิษฐ์ของซีรีส์ Gemini 3 เข้ากับความเร็วในการสร้างที่รวดเร็ว
+Pembuatan visual skala produksi yang sangat efisien, yang menggabungkan kecerdasan seri Gemini 3 dengan kecepatan pembuatan yang sangat cepat.
 
 movie\_filter
 
-### [Veo 3.1 (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=th)
+### [Pratinjau Veo 3.1](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=id)
 
-การสร้างวิดีโอสไตล์ภาพยนตร์ที่ล้ำสมัยที่สุดพร้อมการควบคุมการสร้างสรรค์ขั้นสูงและเสียงที่ซิงค์แบบเนทีฟ
+Pembuatan video sinematik canggih dengan kontrol kreatif lanjutan dan audio yang disinkronkan secara native.
 
 image\_edit
 
-### [Nano Banana Pro (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=th)
+### [Pratinjau Nano Banana Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=id)
 
-เอนจินการออกแบบระดับมืออาชีพที่มีแกนกลางด้านความสามารถในการให้เหตุผลสำหรับภาพ 4K คุณภาพระดับสตูดิโอ เลย์เอาต์ที่ซับซ้อน และการแสดงข้อความที่แม่นยำ
+Mesin desain profesional dengan inti penalaran untuk visual 4K berkualitas studio, tata letak yang kompleks, dan rendering teks yang presisi.
 
 movie\_edit
 
-### [Veo 3.1 Lite (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=th)
+### [Pratinjau Veo 3.1 Lite](https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=id)
 
-การสร้างและแก้ไขวิดีโอ รวมถึงการควบคุมสไตล์ภาพยนตร์ที่มีประสิทธิภาพสูง ต้นทุนต่ำ และเน้นนักพัฒนาซอฟต์แวร์เป็นหลักจากตระกูล Veo 3.1
+Pembuatan dan pengeditan video serta kontrol sinematik yang sangat efisien, berbiaya rendah, dan mengutamakan developer dari keluarga Veo 3.1.
 
 image\_search
 
-### [Nano Banana](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=th)
+### [Nano Banana](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=id)
 
-การสร้างและแก้ไขรูปภาพแบบเนทีฟที่ล้ำสมัยที่สุด ซึ่งออกแบบมาสำหรับเวิร์กโฟลว์ที่รวดเร็วและสร้างสรรค์
+Pembuatan dan pengeditan gambar native tercanggih yang dirancang untuk alur kerja yang cepat dan kreatif.
 
 palette
 
-### [Imagen 4](https://ai.google.dev/gemini-api/docs/models/imagen?hl=th)
+### [Imagen 4](https://ai.google.dev/gemini-api/docs/models/imagen?hl=id)
 
-โมเดลการเปลี่ยนข้อความเป็นรูปภาพที่ล้ำสมัยที่สุด ซึ่งมีความเร็วในการสร้างที่รวดเร็วและเร็วมาก รวมถึงความคมชัดที่ยอดเยี่ยมสูงสุดถึงความละเอียด 2K
+Model text-to-image, yang menampilkan pembuatan cepat dan sangat cepat serta kejernihan luar biasa hingga resolusi 2K.
 
 ---
 
-## โมเดลการสร้างเสียงดนตรี
+## Model pembuatan musik
 
-*ส่วนนี้มีโมเดลการสร้างเสียงดนตรีทั้งหมด รวมถึงโมเดลที่อาจแสดงอยู่ในส่วนอื่นๆ แล้ว*
+*Bagian ini berisi semua model pembuatan musik, termasuk model yang mungkin sudah tercantum di bagian lain*
 
 music\_note
 
-### [Lyria 3 Pro (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=th)
+### [Pratinjau Lyria 3 Pro](https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=id)
 
-โมเดลการสร้างเสียงดนตรีหลักของเรา ซึ่งปรับให้เหมาะกับเพลงเต็มความยาวที่มีความสอดคล้องของโครงสร้างที่ซับซ้อน
+Model pembuatan musik unggulan kami, yang dioptimalkan untuk lagu berdurasi penuh dengan koherensi struktural yang kompleks.
 
 music\_note\_2
 
-### [Lyria 3 Clip (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=th)
+### [Pratinjau Klip Lyria 3](https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=id)
 
-ปรับให้เหมาะกับการสร้างคลิปดนตรีสั้นๆ ลูป และตัวอย่างความยาวสูงสุด 30 วินาที
+Dioptimalkan untuk membuat klip musik pendek, loop, dan pratinjau hingga 30 detik.
 
 music\_history
 
-### [Lyria RealTime (เวอร์ชันทดลอง)](https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=th)
+### [Lyria RealTime Eksperimental](https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=id)
 
-โมเดลการสร้างเสียงดนตรีแบบรายละเอียดเสมือนจริงสูง ซึ่งให้การควบคุมการสร้างสรรค์แบบละเอียดและความสามารถในการสตรีมแบบเรียลไทม์
+Model pembuatan musik dengan fidelitas tinggi yang memberikan kontrol kreatif terperinci dan kemampuan streaming real-time.
 
 ---
 
-## โมเดลเครื่องมือและโมเดลเอเจนต์
+## Model alat dan agen
 
 desktop\_windows
 
-### [การใช้คอมพิวเตอร์ เวอร์ชันตัวอย่าง](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=th)
+### [Pratinjau Penggunaan Komputer](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=id)
 
-โมเดลเฉพาะที่ "มองเห็น" หน้าจอดิจิทัลและดำเนินการ UI เช่น การคลิก การพิมพ์ และการไปยังส่วนต่างๆ เพื่อทำให้งานที่ซับซ้อนในเบราว์เซอร์เป็นไปโดยอัตโนมัติ
-
-travel\_explore
-
-### [Gemini Deep Research (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=th)
-
-โมเดลแบบเป็น Agent ที่วางแผนและดำเนินการวิจัยแบบหลายขั้นตอนในแหล่งข้อมูลหลายร้อยแห่งโดยอัตโนมัติเพื่อสร้างรายงานแบบโต้ตอบที่มีการอ้างอิง
+Model khusus yang dapat "melihat" layar digital dan melakukan tindakan UI seperti mengklik, mengetik, dan membuka untuk mengotomatiskan tugas browser yang kompleks.
 
 travel\_explore
 
-### [Gemini Deep Research Max (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=th)
+### [Pratinjau Deep Research Gemini](https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=id)
 
-ความครอบคลุมสูงสุดสำหรับการรวบรวมและสังเคราะห์บริบทโดยอัตโนมัติจากแหล่งข้อมูลหลายร้อยแห่ง
+Model agentic yang secara mandiri merencanakan dan menjalankan riset multi-langkah di ratusan sumber untuk menghasilkan laporan interaktif yang mengutip sumber.
+
+travel\_explore
+
+### [Pratinjau Deep Research Max Gemini](https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=id)
+
+Komprehensivitas maksimum untuk pengumpulan dan sintesis konteks otomatis di ratusan sumber.
 
 ---
 
-## โมเดลงานเฉพาะ
+## Model tugas khusus
 
 hub
 
-### [Gemini Embedding 2](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=th)
+### [Gemini Embedding 2](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=id)
 
-โมเดลการฝังหลายรูปแบบแรกของเรา ซึ่งแมปข้อความ รูปภาพ วิดีโอ เสียง และ PDF ลงในพื้นที่การฝังแบบรวมสำหรับการค้นหาเชิงความหมายขั้นสูงและระบบ RAG
+Model embedding multimodal pertama kami, yang memetakan teks, gambar, video, audio, dan PDF ke dalam ruang embedding terpadu untuk sistem RAG dan penelusuran semantik tingkat lanjut.
 
 hub
 
-### [Gemini Embedding](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-001?hl=th)
+### [Penyematan Gemini](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-001?hl=id)
 
-การแสดงเวกเตอร์แบบหลายมิติสำหรับการค้นหาเชิงความหมายขั้นสูง การจัดประเภทข้อความ และระบบ RAG
+Representasi vektor berdimensi tinggi untuk penelusuran semantik tingkat lanjut, klasifikasi teks, dan sistem RAG.
 
 precision\_manufacturing
 
-### [Gemini Robotics-ER 1.6(เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.6-preview?hl=th)
+### [Gemini Robotics-ER 1.6Pratinjau](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.6-preview?hl=id)
 
-โมเดลการให้เหตุผลแบบฝังตัวขั้นสูงที่เข้าใจพื้นที่ทางกายภาพและวางแผนงานแบบหลายขั้นตอนสำหรับเอเจนต์หุ่นยนต์ที่มีความสามารถใหม่ๆ เช่น การอ่านเครื่องมือ ความสามารถในการให้เหตุผลเชิงพื้นที่และทางกายภาพที่ได้รับการปรับปรุง
+Model penalaran berwujud canggih yang memahami ruang fisik dan merencanakan tugas multi-langkah untuk agen robotik dengan kemampuan baru seperti pembacaan instrumen, peningkatan penalaran spasial dan fisik.
 
 ---
 
-## โมเดลก่อนหน้า
+## Model sebelumnya
 
 history
 
-### [Gemini 2.0 Flash (เลิกใช้งานแล้ว)](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash?hl=th)
+### [Gemini 2.0 Flash Tidak Digunakan Lagi](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash?hl=id)
 
-โมเดลหลักรุ่นที่ 2 ของเราที่มีฟีเจอร์รุ่นใหม่และความสามารถที่ได้รับการปรับปรุง ซึ่งรวมถึงความเร็วที่เหนือกว่า การใช้เครื่องมือแบบเนทีฟ และหน้าต่างบริบทขนาด 1 ล้านโทเค็น
-
-restore
-
-### [Gemini 2.0 Flash-Lite (เลิกใช้งานแล้ว)](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash-lite?hl=th)
-
-โมเดลรุ่นที่ 2 ที่เร็วที่สุดของเรา ซึ่งปรับให้เหมาะกับประสิทธิภาพด้านต้นทุนและเวลาในการตอบสนองต่ำ
+Model andalan generasi kedua kami, dengan fitur generasi berikutnya dan kemampuan yang ditingkatkan, termasuk kecepatan yang lebih tinggi, penggunaan alat native, dan jendela konteks 1 juta token.
 
 restore
 
-### [Gemini 3 Pro (เวอร์ชันตัวอย่าง) ปิดให้บริการแล้ว](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-preview?hl=th)
+### [Gemini 2.0 Flash-Lite Tidak Digunakan Lagi](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash-lite?hl=id)
 
-โมเดลการให้เหตุผลที่ล้ำสมัยที่สุดพร้อมความสามารถในการทำความเข้าใจข้อมูลหลายรูปแบบขั้นสูง
+Model generasi kedua tercepat kami, yang dioptimalkan untuk efisiensi biaya dan latensi rendah.
+
+restore
+
+### [Pratinjau Gemini 3 Pro Tutup](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-preview?hl=id)
+
+Model penalaran canggih kami, dengan pemahaman multimodal tingkat lanjut.
 
 ---
 
-## รูปแบบชื่อเวอร์ชันของโมเดล
+## Pola nama versi model
 
-โมเดล Gemini มีให้ใช้งานในเวอร์ชัน *คงที่* *ตัวอย่าง* *ล่าสุด* หรือ
-*ทดลอง*
+Model Gemini tersedia dalam versi *stabil*, *pratinjau*, *terbaru*, atau
+*eksperimental*.
 
-### คงที่
+### Stabil
 
-ชี้ไปยังโมเดลคงที่ที่เฉพาะเจาะจง โดยปกติแล้วโมเดลคงที่จะไม่เปลี่ยนแปลง แอปการผลิตส่วนใหญ่ควรใช้โมเดลคงที่ที่เฉพาะเจาะจง
+Menunjuk ke model stabil tertentu. Model stabil biasanya tidak berubah. Sebagian besar aplikasi produksi harus menggunakan model stabil tertentu.
 
-ตัวอย่างเช่น `gemini-2.5-flash`
+Misalnya: `gemini-2.5-flash`.
 
-### ตัวอย่าง
+### Pratinjau
 
-ชี้ไปยังโมเดลตัวอย่างที่อาจใช้สำหรับการผลิต โดยปกติแล้วโมเดลตัวอย่างจะเปิดใช้การเรียกเก็บเงิน อาจมีขีดจำกัดอัตราที่เข้มงวดมากขึ้น และจะเลิกใช้งานโดยแจ้งให้ทราบล่วงหน้าอย่างน้อย 2 สัปดาห์
+Menunjuk ke model pratinjau yang dapat digunakan untuk produksi. Model pratinjau biasanya mengaktifkan penagihan, mungkin memiliki batas penggunaan yang lebih ketat, dan akan dihentikan dengan pemberitahuan minimal 2 minggu sebelumnya.
 
-ตัวอย่างเช่น `gemini-2.5-flash-preview-09-2025`
+Misalnya: `gemini-2.5-flash-preview-09-2025`.
 
-### ล่าสุด
+### Terbaru
 
-ชี้ไปยังรุ่นล่าสุดสำหรับโมเดลรูปแบบที่เฉพาะเจาะจง ซึ่งอาจเป็นรุ่นคงที่ รุ่นตัวอย่าง หรือรุ่นทดลอง นามแฝงนี้จะได้รับการสลับแบบร้อนเมื่อมีการเผยแพร่โมเดลรูปแบบที่เฉพาะเจาะจงรุ่นใหม่ เราจะแจ้งให้ทราบล่วงหน้า **2 สัปดาห์** ทางอีเมลก่อนที่จะเปลี่ยนเวอร์ชันที่อยู่เบื้องหลังเวอร์ชันล่าสุด
+Menunjuk ke rilis terbaru untuk variasi model tertentu. Rilis ini dapat berupa rilis stabil, pratinjau, atau eksperimental. Alias ini akan diganti secara langsung dengan
+setiap rilis baru variasi model tertentu. **Pemberitahuan 2 minggu** akan
+diberikan melalui email sebelum versi yang lebih lama dari versi terbaru diubah.
 
-ตัวอย่างเช่น `gemini-flash-latest`
+Misalnya: `gemini-flash-latest`.
 
-### ทดลอง
+### Eksperimental
 
-ชี้ไปยังโมเดลทดลองซึ่งโดยปกติแล้วจะไม่เหมาะกับการใช้งานจริงและมีขีดจำกัดอัตราที่เข้มงวดมากขึ้น เราเผยแพร่โมเดลทดลองเพื่อรวบรวมความคิดเห็นและนำข้อมูลอัปเดตล่าสุดไปให้นักพัฒนาซอฟต์แวร์ได้ใช้โดยเร็ว
+Menunjuk ke model eksperimental yang biasanya tidak cocok untuk penggunaan produksi dan memiliki batas kecepatan yang lebih ketat. Kami merilis model eksperimental untuk mengumpulkan masukan dan memberikan update terbaru kami kepada developer dengan cepat.
 
-โมเดลทดลองไม่เสถียรและสถานะพร้อมใช้งานของปลายทางโมเดลอาจมีการเปลี่ยนแปลง
+Model eksperimental tidak stabil dan ketersediaan endpoint model dapat berubah.
 
-## การเลิกใช้งานโมเดล
+## Penghentian penggunaan model
 
-ดูข้อมูลเกี่ยวกับการเลิกใช้งานโมเดลได้ที่หน้า[การเลิกใช้งาน Gemini](https://ai.google.dev/gemini-api/docs/deprecations?hl=th)
+Untuk mengetahui informasi tentang penghentian penggunaan model, buka halaman [Penghentian penggunaan Gemini](https://ai.google.dev/gemini-api/docs/deprecations?hl=id).
 
-ส่งความคิดเห็น
+Kirim masukan
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-อัปเดตล่าสุด 2026-04-30 UTC
+Terakhir diperbarui pada 2026-04-30 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Ada masukan untuk kami?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-30 UTC"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-30 UTC."],[],[]]

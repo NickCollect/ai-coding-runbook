@@ -1,98 +1,98 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tools?hl=ko
-fetched_at: 2026-05-05T19:52:00.964554+00:00
-title: "Gemini API\ub85c \ub3c4\uad6c \uc0ac\uc6a9 \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tools?hl=de
+fetched_at: 2026-05-05T20:03:40.604041+00:00
+title: "Tools mit der Gemini API verwenden \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-의견 보내기
+Feedback geben
 
-# Gemini API로 도구 사용
+# Tools mit der Gemini API verwenden
 
-도구는 Gemini 모델의 기능을 확장하여 모델이 실제 상황에서 조치를 취하고, 실시간 정보에 액세스하고, 복잡한 계산 작업을 실행할 수 있도록 지원합니다. 모델은 [Live API](https://ai.google.dev/gemini-api/docs/live-tools?hl=ko)를 사용하여 표준 요청-응답 상호작용과 실시간 스트리밍 세션 모두에서 도구를 사용할 수 있습니다.
+Tools erweitern die Funktionen von Gemini-Modellen und ermöglichen es ihnen, Aktionen in der realen Welt auszuführen, auf Echtzeitinformationen zuzugreifen und komplexe Berechnungsaufgaben zu erledigen. Modelle können Tools sowohl bei Standard-Anfrage-Antwort-Interaktionen als auch bei Echtzeit-Streaming-Sitzungen über die [Live API](https://ai.google.dev/gemini-api/docs/live-tools?hl=de) verwenden.
 
-도구는 모델이 질문에 답변하는 데 사용할 수 있는 특정 기능 (예: Google 검색 또는 코드 실행)입니다. Gemini API는 완전 관리형 기본 제공 도구 모음을 제공하며, [함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)을 사용하여 맞춤 도구를 정의할 수도 있습니다.
+Tools sind bestimmte Funktionen (z. B. Google Suche oder Codeausführung), die ein Modell verwenden kann, um Anfragen zu beantworten. Die Gemini API bietet eine Reihe von vollständig verwalteten, integrierten Tools. Sie können aber auch benutzerdefinierte Tools mit [Funktionsaufruf](https://ai.google.dev/gemini-api/docs/function-calling?hl=de) definieren.
 
-다단계 목표 지향 시스템을 빌드하려면 [에이전트 개요](https://ai.google.dev/gemini-api/docs/agents?hl=ko)를 참고하세요.
+Informationen zum Erstellen von mehrstufigen, zielorientierten Systemen finden Sie in der [Übersicht über Agents](https://ai.google.dev/gemini-api/docs/agents?hl=de).
 
-## 사용 가능한 기본 제공 도구
+## Verfügbare integrierte Tools
 
-| 도구 | 설명 | 사용 사례 |
+| Tool | Beschreibung | Anwendungsfälle |
 | --- | --- | --- |
-| [Google 검색](https://ai.google.dev/gemini-api/docs/google-search?hl=ko) | 웹의 최신 이벤트와 사실에 기반하여 대답을 그라운딩하여 할루시네이션을 줄입니다. | \- 최근 이벤트에 대한 질문에 답변   \- 다양한 소스를 통해 사실 확인 |
-| [Google 지도](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ko) | 장소를 찾고, 길을 안내하고, 풍부한 지역 컨텍스트를 제공할 수 있는 위치 인식 어시스턴트를 빌드하세요. | - 여러 경유지가 있는 여행 일정 계획   - 사용자 기준에 따라 현지 비즈니스 찾기 |
-| [코드 실행](https://ai.google.dev/gemini-api/docs/code-execution?hl=ko) | 모델이 Python 코드를 작성하고 실행하여 수학 문제를 해결하거나 데이터를 정확하게 처리하도록 허용합니다. | \- 복잡한 수학 방정식 풀이   \- 텍스트 데이터를 정확하게 처리하고 분석 |
-| [URL 컨텍스트](https://ai.google.dev/gemini-api/docs/url-context?hl=ko) | 모델이 특정 웹페이지 또는 문서의 콘텐츠를 읽고 분석하도록 지시합니다. | \- 특정 URL 또는 문서를 기반으로 질문에 답변   \- 여러 웹페이지에서 정보 검색 |
-| [컴퓨터 사용 (미리보기)](https://ai.google.dev/gemini-api/docs/computer-use?hl=ko) | Gemini가 화면을 보고 웹브라우저 UI와 상호작용하는 작업을 생성하도록 지원합니다 (클라이언트 측 실행). | \- 반복적인 웹 기반 워크플로 자동화   \- 웹 애플리케이션 사용자 인터페이스 테스트 |
-| [파일 검색](https://ai.google.dev/gemini-api/docs/file-search?hl=ko) | 자체 문서를 색인 생성하고 검색하여 검색 증강 생성 (RAG)을 사용 설정합니다. | - 기술 설명서 검색   - 독점 데이터를 기반으로 한 질의 응답 |
+| [Google Suche](https://ai.google.dev/gemini-api/docs/google-search?hl=de) | Antworten auf aktuelle Ereignisse und Fakten aus dem Web stützen, um Halluzinationen zu reduzieren. | \- Fragen zu aktuellen Ereignissen beantworten   \- Fakten mit verschiedenen Quellen abgleichen |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=de) | Erstellen Sie standortbezogene Assistenten, die Orte finden, Wegbeschreibungen abrufen und umfassende lokale Informationen bereitstellen können. | – Reisepläne mit mehreren Zwischenstopps erstellen   – Lokale Unternehmen anhand von Nutzerkriterien finden |
+| [Codeausführung](https://ai.google.dev/gemini-api/docs/code-execution?hl=de) | Das Modell darf Python-Code schreiben und ausführen, um mathematische Probleme zu lösen oder Daten genau zu verarbeiten. | \- Komplexe mathematische Gleichungen lösen   \- Textdaten präzise verarbeiten und analysieren |
+| [URL-Kontext](https://ai.google.dev/gemini-api/docs/url-context?hl=de) | Weisen Sie das Modell an, Inhalte von bestimmten Webseiten oder Dokumenten zu lesen und zu analysieren. | – Fragen basierend auf bestimmten URLs oder Dokumenten beantworten   – Informationen von verschiedenen Webseiten abrufen |
+| [Computernutzung (Vorschau)](https://ai.google.dev/gemini-api/docs/computer-use?hl=de) | Gemini kann einen Bildschirm ansehen und Aktionen generieren, um mit Webbrowser-Benutzeroberflächen zu interagieren (clientseitige Ausführung). | – Automatisieren von sich wiederholenden webbasierten Workflows   – Testen von Benutzeroberflächen von Webanwendungen |
+| [Dateisuche](https://ai.google.dev/gemini-api/docs/file-search?hl=de) | Sie können Ihre eigenen Dokumente indexieren und durchsuchen, um Retrieval-Augmented Generation (RAG) zu ermöglichen. | – Suche in technischen Handbüchern   – Question Answering über proprietäre Daten |
 
-특정 도구와 관련된 비용에 대한 자세한 내용은 [가격 책정 페이지](https://ai.google.dev/gemini-api/docs/pricing?hl=ko#pricing_for_tools)를 참고하세요.
+Weitere Informationen zu den Kosten für bestimmte Tools finden Sie auf der [Preisseite](https://ai.google.dev/gemini-api/docs/pricing?hl=de#pricing_for_tools).
 
-## 도구 실행 작동 방식
+## So funktioniert die Toolausführung
 
-도구를 사용하면 모델이 대화 중에 작업을 요청할 수 있습니다. 흐름은 도구가 내장되어 있는지 (Google에서 관리) 또는 맞춤설정되어 있는지 (사용자가 관리)에 따라 다릅니다.
+Mithilfe von Tools kann das Modell während einer Unterhaltung Aktionen anfordern. Der Ablauf hängt davon ab, ob das Tool integriert (von Google verwaltet) oder benutzerdefiniert (von Ihnen verwaltet) ist.
 
-### 기본 제공 도구 흐름
+### Ablauf integrierter Tools
 
-기본 제공 도구 (Google 검색, Google 지도, URL 컨텍스트, 파일 검색, 코드 실행)의 경우 전체 프로세스가 하나의 API 호출 내에서 이루어집니다.
+Bei integrierten Tools (Google Suche, Google Maps, URL-Kontext, Dateisuche, Codeausführung) erfolgt der gesamte Prozess in einem API-Aufruf:
 
-1. **사용자**가 프롬프트를 보냅니다. 'GOOG의 최신 주가의 제곱근은 뭐야?'
-2. **Gemini**는 도구가 필요하다고 판단하고 Google 서버에서 도구를 실행합니다(예: 주가를 검색한 다음 Python 코드를 실행하여 제곱근을 계산).
-3. **Gemini**가 도구 결과를 기반으로 한 최종 대답을 다시 보냅니다.
+1. **Sie** senden einen Prompt: „Was ist die Quadratwurzel des aktuellen Aktienkurses von GOOG?“
+2. **Gemini** entscheidet, dass Tools benötigt werden, und führt sie auf den Servern von Google aus (z.B. wird nach dem Aktienkurs gesucht und dann Python-Code ausgeführt, um die Quadratwurzel zu berechnen).
+3. **Gemini** sendet die endgültige Antwort zurück, die auf den Tool-Ergebnissen basiert.
 
-### 맞춤 도구 흐름 (함수 호출)
+### Benutzerdefinierter Toolablauf (Funktionsaufrufe)
 
-맞춤 도구 및 Computer Use의 경우 애플리케이션에서 실행을 처리합니다.
+Bei benutzerdefinierten Tools und der Computerverwendung übernimmt Ihre Anwendung die Ausführung:
 
-1. **사용자**가 함수 (도구) 선언과 함께 프롬프트를 전송합니다.
-2. **Gemini**는 항상 고유한 `id`와 함께 특정 함수(예: `{"name": "get_order_status", "args": {"order_id": "123"}}`)를 호출하기 위해 구조화된 JSON을 다시 전송할 수 있습니다.
-3. **사용자**가 애플리케이션 또는 환경에서 함수를 실행합니다.
-4. **사용자**는 함수 호출과 동일한 `id`를 사용하여 함수 결과를 Gemini에 다시 보냅니다.
-5. **Gemini**는 결과를 사용하여 최종 대답이나 다른 도구 호출을 생성합니다.
+1. **Sie** senden einen Prompt zusammen mit Funktionsdeklarationen (Tools).
+2. **Gemini** kann strukturiertes JSON zurückgeben, um eine bestimmte Funktion aufzurufen (z. B. `{"name": "get_order_status", "args": {"order_id": "123"}}`), immer mit einer eindeutigen `id`.
+3. **Sie** führen die Funktion in Ihrer Anwendung oder Umgebung aus.
+4. **Sie** senden die Funktionsergebnisse mit demselben `id` wie beim Funktionsaufruf zurück an Gemini.
+5. **Gemini** verwendet die Ergebnisse, um eine endgültige Antwort oder einen weiteren Tool-Aufruf zu generieren.
 
-자세한 내용은 [함수 호출 가이드](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)를 참고하세요.
+Weitere Informationen finden Sie im [Leitfaden zu Funktionsaufrufen](https://ai.google.dev/gemini-api/docs/function-calling?hl=de).
 
-### 기본 제공 도구와 맞춤 도구 흐름 결합
+### Ablauf zum Kombinieren integrierter und benutzerdefinierter Tools
 
-기본 제공 도구와 맞춤 도구 (함수 호출)를 결합하는 요청의 경우 모델은 [도구 컨텍스트 순환](https://ai.google.dev/gemini-api/docs/toold-combination?hl=ko)을 사용하여 다양한 환경에서 실행을 조정합니다.
+Bei Anfragen, in denen integrierte und benutzerdefinierte Tools (Funktionsaufrufe) kombiniert werden, verwendet das Modell [Tool-Kontextzirkulation](https://ai.google.dev/gemini-api/docs/toold-combination?hl=de), um die Ausführung in verschiedenen Umgebungen zu koordinieren:
 
-1. **사용자**가 프롬프트를 보내고 사용 설정하려는 내장 도구와 맞춤 함수를 선언하여 조합 지원을 사용 설정하는 플래그를 설정합니다.
-2. **Gemini**는 내장 도구를 실행하고 클라이언트 측 함수 호출이 생성되면 사용자에게 양보합니다 (먼저 실행되는 것은 프롬프트와 모델의 결정에 따라 다름). 다음과 같은 응답을 다시 보냅니다.
-   - 도구 호출 확인
-   - 도구 응답 결과 (모델에서 병렬 함수 호출을 두 개 생성한 경우 JSON 뒤에 올 수 있음)
-   - 함수를 호출하는 구조화된 JSON
-   - 컨텍스트를 보존하기 위해 암호화된 생각 서명
-3. **사용자**가 애플리케이션 또는 환경에서 함수를 실행합니다.
-4. **사용자**는 Gemini의 응답의 모든 부분과 함수 호출 결과를 반환합니다.
-5. **Gemini**는 결합된 모든 컨텍스트를 사용하여 최종 대답을 생성합니다.
+1. **Sie** senden einen Prompt und deklarieren die integrierten Tools und benutzerdefinierten Funktionen, die Sie aktivieren möchten. Dabei legen Sie ein Flag fest, um die Unterstützung von Kombinationen zu aktivieren.
+2. **Gemini** führt integrierte Tools aus und übergibt die Kontrolle an den Nutzer, wenn clientseitige Funktionsaufrufe generiert werden. Welche Aktion zuerst ausgeführt wird, hängt vom Prompt und der Entscheidung des Modells ab. Es wird eine Antwort mit Folgendem zurückgesendet:
+   - Bestätigung des Tool-Aufrufs
+   - Ergebnisse der Tool-Antwort (diese können nach dem JSON-Code stehen, wenn das Modell zwei parallele Funktionsaufrufe generiert hat)
+   - Strukturierter JSON-Code zum Aufrufen Ihrer Funktion
+   - Verschlüsselte Gedanken-Signaturen, um den Kontext beizubehalten
+3. **Sie** führen die Funktion in Ihrer Anwendung oder Umgebung aus.
+4. **Sie** geben alle Teile der Antwort von Gemini sowie die Ergebnisse Ihres Funktionsaufrufs zurück.
+5. **Gemini** generiert die endgültige Antwort anhand des gesamten kombinierten Kontexts.
 
-[도구 조합 가이드](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ko)를 읽고 기본 제공 도구와 맞춤 도구 조합 지원을 사용 설정하는 방법과 컨텍스트 순환의 예를 알아보세요.
+Im [Leitfaden zur Kombination von Tools](https://ai.google.dev/gemini-api/docs/tool-combination?hl=de) erfahren Sie, wie Sie die Unterstützung für die Kombination von integrierten und benutzerdefinierten Tools aktivieren und wie der Kontext weitergegeben wird.
 
-## 구조화된 출력과 함수 호출 비교
+## Strukturierte Ausgaben im Vergleich zu Funktionsaufrufen
 
-Gemini는 구조화된 출력을 생성하는 두 가지 방법을 제공합니다. 모델이 자체 도구 또는 데이터 시스템에 연결하여 중간 단계를 실행해야 하는 경우 [함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)을 사용합니다. 맞춤 UI를 렌더링하는 등 모델의 최종 대답이 특정 스키마를 엄격하게 준수해야 하는 경우 [구조화된 출력](https://ai.google.dev/gemini-api/docs/structured-output?hl=ko)을 사용하세요.
+Gemini bietet zwei Methoden zum Generieren strukturierter Ausgaben. Verwenden Sie [Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/function-calling?hl=de), wenn das Modell einen Zwischenschritt ausführen muss, indem es eine Verbindung zu Ihren eigenen Tools oder Datensystemen herstellt. Verwenden Sie [strukturierte Ausgaben](https://ai.google.dev/gemini-api/docs/structured-output?hl=de), wenn die endgültige Antwort des Modells unbedingt einem bestimmten Schema entsprechen muss, z. B. zum Rendern einer benutzerdefinierten Benutzeroberfläche.
 
-## 도구를 사용한 구조화된 출력
+## Strukturierte Ausgaben mit Tools
 
-[구조화된 출력](https://ai.google.dev/gemini-api/docs/structured-output?hl=ko)을 내장 도구와 결합하여 외부 데이터 또는 계산에 기반한 모델 응답이 엄격한 스키마를 준수하도록 할 수 있습니다.
+Sie können [strukturierte Ausgaben](https://ai.google.dev/gemini-api/docs/structured-output?hl=de) mit integrierten Tools kombinieren, um sicherzustellen, dass Modellantworten, die auf externen Daten oder Berechnungen basieren, einem strengen Schema entsprechen.
 
-코드 예시는 [도구를 사용한 구조화된 출력](https://ai.google.dev/gemini-api/docs/structured-output?example=recipe&hl=ko#structured_outputs_with_tools)을 참고하세요.
+Codebeispiele finden Sie unter [Strukturierte Ausgaben mit Tools](https://ai.google.dev/gemini-api/docs/structured-output?example=recipe&hl=de#structured_outputs_with_tools).
 
-의견 보내기
+Feedback geben
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-최종 업데이트: 2026-04-29(UTC)
+Zuletzt aktualisiert: 2026-04-29 (UTC).
 
-의견을 전달하고 싶나요?
+Haben Sie Feedback für uns?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-04-29 (UTC)."],[],[]]

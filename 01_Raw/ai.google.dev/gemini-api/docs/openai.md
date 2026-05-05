@@ -1,27 +1,24 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/openai?hl=ar
-fetched_at: 2026-05-05T19:51:30.353442+00:00
-title: "\u0627\u0644\u062a\u0648\u0627\u0641\u0642 \u0645\u0639 OpenAI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/openai?hl=de
+fetched_at: 2026-05-05T20:04:55.246790+00:00
+title: "Kompatibilit\u00e4t mit OpenAI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-إرسال ملاحظات
+Feedback geben
 
-# التوافق مع OpenAI
+# Kompatibilität mit OpenAI
 
-يمكن الوصول إلى نماذج Gemini باستخدام مكتبات OpenAI (Python وTypeScript /
-Javascript) بالإضافة إلى REST API، وذلك من خلال تعديل ثلاثة أسطر من الرمز البرمجي
-واستخدام مفتاح [Gemini API](https://aistudio.google.com/apikey?hl=ar). إذا لم تكن تستخدم مكتبات OpenAI، ننصحك باستدعاء
-[Gemini API مباشرةً](https://ai.google.dev/gemini-api/docs/quickstart?hl=ar).
+Gemini-Modelle sind über die OpenAI-Bibliotheken (Python und TypeScript/Javascript) sowie die REST API zugänglich. Dazu müssen Sie drei Codezeilen aktualisieren und Ihren [Gemini API-Schlüssel](https://aistudio.google.com/apikey?hl=de) verwenden. Wenn Sie noch keine OpenAI-Bibliotheken nutzen, sollten Sie die [Gemini API direkt aufrufen](https://ai.google.dev/gemini-api/docs/quickstart?hl=de).
 
 ### Python
 
@@ -92,31 +89,28 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
   }'
 ```
 
-ما الذي تغيّر؟ ثلاثة أسطر فقط!
+Was hat sich geändert? Nur drei Zeilen!
 
-- **`api_key="GEMINI_API_KEY"`**: استبدِل "`GEMINI_API_KEY`" بمفتاح Gemini
-  API الفعلي، الذي يمكنك الحصول عليه في [Google AI Studio](https://aistudio.google.com?hl=ar).
-- **`base_url="https://generativelanguage.googleapis.com/v1beta/openai/"`:** يطلب هذا السطر من مكتبة OpenAI إرسال الطلبات إلى نقطة نهاية Gemini API بدلاً من عنوان URL التلقائي.
-- **`model="gemini-3-flash-preview"`**: اختَر نموذج Gemini متوافقًا
+- **`api_key="GEMINI_API_KEY"`**: Ersetzen Sie „`GEMINI_API_KEY`“ durch Ihren tatsächlichen Gemini API-Schlüssel, den Sie in [Google AI Studio](https://aistudio.google.com?hl=de) erhalten.
+- **`base_url="https://generativelanguage.googleapis.com/v1beta/openai/"`**:Dadurch wird die OpenAI-Bibliothek angewiesen, Anfragen an den Gemini API-Endpunkt anstelle der Standard-URL zu senden.
+- **`model="gemini-3-flash-preview"`**: Kompatibles Gemini-Modell auswählen
 
-## جارٍ التفكير
+## Thinking
 
-تم تدريب نماذج Gemini على التفكير في المشاكل المعقّدة، ما يؤدي إلى تحسين كبير في عملية الاستدلال. تتضمّن Gemini API مَعلمات [التفكير](https://ai.google.dev/gemini-api/docs/thinking?hl=ar) التي تمنحك تحكّمًا دقيقًا
-في مقدار التفكير الذي سيجريه النموذج.
+Gemini-Modelle sind darauf trainiert, komplexe Probleme zu durchdenken, was zu einer deutlich verbesserten logischen Schlussfolgerung führt. Die Gemini API bietet [Parameter für die Denkweise](https://ai.google.dev/gemini-api/docs/thinking?hl=de), mit denen Sie genau steuern können, wie viel das Modell nachdenken soll.
 
-تتضمّن نماذج Gemini المختلفة إعدادات استدلال مختلفة، ويمكنك الاطّلاع على كيفية ربطها بجهود OpenAI في مجال الاستدلال على النحو التالي:
+Verschiedene Gemini-Modelle haben unterschiedliche Konfigurationen für das logische Denken. Die Zuordnung zu den Bemühungen von OpenAI in diesem Bereich ist wie folgt:
 
-| `reasoning_effort` (OpenAI) | `thinking_level` (‫Gemini 3.1 Pro) | `thinking_level` (‫Gemini 3.1 Flash-Lite) | `thinking_level` (‫Gemini 3 Flash) | `thinking_budget` (‫Gemini 2.5) |
+| `reasoning_effort` (OpenAI) | `thinking_level` (Gemini 3.1 Pro) | `thinking_level` (Gemini 3.1 Flash Lite) | `thinking_level` (Gemini 3 Flash) | `thinking_budget` (Gemini 2.5) |
 | --- | --- | --- | --- | --- |
 | `minimal` | `low` | `minimal` | `minimal` | `1,024` |
 | `low` | `low` | `low` | `low` | `1,024` |
 | `medium` | `medium` | `medium` | `medium` | `8,192` |
 | `high` | `high` | `high` | `high` | `24,576` |
 
-[[إذا لم يتم تحديد `reasoning_effort`، يستخدم Gemini المستوى أو الميزانية التلقائية للنموذج.](https://ai.google.dev/gemini-api/docs/thinking?hl=ar#levels)](https://ai.google.dev/gemini-api/docs/thinking?hl=ar#set-budget)
+Wenn kein `reasoning_effort` angegeben ist, verwendet Gemini die Standard-[Stufe](https://ai.google.dev/gemini-api/docs/thinking?hl=de#levels) oder das Standard-[Budget](https://ai.google.dev/gemini-api/docs/thinking?hl=de#set-budget) des Modells.
 
-إذا أردت إيقاف التفكير، يمكنك ضبط `reasoning_effort` على `"none"` لنماذج
-2.5. لا يمكن إيقاف الاستدلال لنماذج Gemini 2.5 Pro أو 3.
+Wenn Sie die Funktion „Denken“ deaktivieren möchten, können Sie für 2.5-Modelle `reasoning_effort` auf `"none"` festlegen. Die Funktion „Begründung“ kann für Gemini 2.5 Pro- oder Gemini 3-Modelle nicht deaktiviert werden.
 
 ### Python
 
@@ -190,11 +184,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
   }'
 ```
 
-تنتج نماذج التفكير في Gemini أيضًا [ملخّصات للأفكار](https://ai.google.dev/gemini-api/docs/thinking?hl=ar#summaries).
-يمكنك استخدام الحقل [`extra_body`](#extra-body) لتضمين حقول Gemini
-في طلبك.
+Gemini-Denkmodelle erstellen auch [Zusammenfassungen der Gedanken](https://ai.google.dev/gemini-api/docs/thinking?hl=de#summaries).
+Mit dem Feld [`extra_body`](#extra-body) können Sie Gemini-Felder in Ihre Anfrage einfügen.
 
-يُرجى العِلم أنّ `reasoning_effort` و`thinking_level`/`thinking_budget` تتداخلان في الوظائف، لذا لا يمكن استخدامهما في الوقت نفسه.
+Beachten Sie, dass `reasoning_effort` und `thinking_level`/`thinking_budget` überlappende Funktionen haben und daher nicht gleichzeitig verwendet werden können.
 
 ### Python
 
@@ -270,11 +263,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
       }'
 ```
 
-يتوافق Gemini 3 مع OpenAI لتوقيعات الأفكار في واجهات برمجة التطبيقات لإكمال المحادثات. يمكنك الاطّلاع على المثال الكامل في صفحة [توقيعات الأفكار](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=ar#openai).
+Gemini 3 unterstützt die OpenAI-Kompatibilität für Gedanken-Signaturen in Chat Completion-APIs. Das vollständige Beispiel finden Sie auf der Seite [Gedankensignaturen](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=de#openai).
 
-## البث
+## Streaming
 
-[تتيح Gemini API بث الردود.](https://ai.google.dev/gemini-api/docs/text-generation?lang=python&hl=ar#generate-a-text-stream)
+Die Gemini API unterstützt [Streaming-Antworten](https://ai.google.dev/gemini-api/docs/text-generation?lang=python&hl=de#generate-a-text-stream).
 
 ### Python
 
@@ -353,10 +346,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
     }'
 ```
 
-## استدعاء الدالة
+## Funktionsaufrufe
 
-تسهّل عليك ميزة "استدعاء الدالة" الحصول على بيانات منظَّمة من
-النماذج التوليدية، وهي [متاحة في Gemini API](https://ai.google.dev/gemini-api/docs/function-calling/tutorial?hl=ar).
+Mit Funktionsaufrufen können Sie leichter strukturierte Datenausgaben von generativen Modellen erhalten. Die Funktion wird [in der Gemini API unterstützt](https://ai.google.dev/gemini-api/docs/function-calling/tutorial?hl=de).
 
 ### Python
 
@@ -487,10 +479,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
 }'
 ```
 
-## فهم الصور
+## Bilder verstehen
 
-نماذج Gemini هي نماذج متعددة الوسائط بشكل أساسي وتقدّم أفضل أداء في فئتها على
-[العديد من مهام الرؤية الشائعة](https://ai.google.dev/gemini-api/docs/vision?hl=ar).
+Gemini-Modelle sind nativ multimodal und bieten eine erstklassige Leistung bei [vielen gängigen Vision-Aufgaben](https://ai.google.dev/gemini-api/docs/vision?hl=de).
 
 ### Python
 
@@ -619,9 +610,9 @@ bash -c '
 '
 ```
 
-## إنشاء صورة
+## Image generieren
 
-يمكنك إنشاء صورة باستخدام `gemini-2.5-flash-image` أو `gemini-3-pro-image-preview`. تشمل المَعلمات المتوافقة `prompt` و`model` و`n` و`size` و`response_format`. سيتم تجاهل أي مَعلمات أخرى غير مُدرَجة هنا أو في قسم [`extra_body`](#extra-body) بدون إشعار من قِبل طبقة التوافق.
+Mit `gemini-2.5-flash-image` oder `gemini-3-pro-image-preview` ein Bild generieren Zu den unterstützten Parametern gehören `prompt`, `model`, `n`, `size` und `response_format`. Alle anderen Parameter, die nicht hier oder im Abschnitt [`extra_body`](#extra-body) aufgeführt sind, werden von der Kompatibilitätsebene ignoriert.
 
 ### Python
 
@@ -688,12 +679,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/images/generations
       }'
 ```
 
-## إنشاء فيديو
+## Video generieren
 
-يمكنك إنشاء فيديو باستخدام `veo-3.1-generate-preview` من خلال نقطة النهاية `/v1/videos` المتوافقة مع Sora. المَعلمتان المتوافقتان على المستوى الأعلى هما `prompt` و`model`. يجب تمرير المَعلمات الإضافية، مثل `duration_seconds` و`image` و`aspect_ratio`، باستخدام `extra_body`. راجِع قسم [`extra_body`](#extra-body)
-للاطّلاع على جميع المَعلمات المتاحة.
+Video mit `veo-3.1-generate-preview` über den Sora-kompatiblen `/v1/videos`-Endpunkt generieren Unterstützte Parameter der obersten Ebene sind `prompt` und `model`. Zusätzliche Parameter wie `duration_seconds`, `image` und `aspect_ratio` müssen mit `extra_body` übergeben werden. Alle verfügbaren Parameter finden Sie im Abschnitt [`extra_body`](#extra-body).
 
-إنشاء الفيديو هو عملية تشغيل طويلة المدى تعرض رقم تعريف عملية يمكنك إجراء طلبات بحث عنه لمعرفة ما إذا اكتملت:
+Die Videogenerierung ist ein Vorgang mit langer Ausführungszeit, der eine Vorgangs-ID zurückgibt, die Sie auf Abschluss prüfen können.
 
 ### Python
 
@@ -748,9 +738,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/videos" \
   -F "prompt=A cinematic drone shot of a waterfall"
 ```
 
-### الاطّلاع على حالة الفيديو
+### Videostatus prüfen
 
-يتم إنشاء الفيديو بشكل غير متزامن. استخدِم `GET /v1/videos/{id}` للاطّلاع على الحالة واسترداد عنوان URL النهائي للفيديو عند اكتماله:
+Die Videogenerierung erfolgt asynchron. Verwenden Sie `GET /v1/videos/{id}`, um den Status abzurufen und die finale Video-URL zu erhalten, wenn der Vorgang abgeschlossen ist:
 
 ### Python
 
@@ -814,9 +804,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/videos/VIDEO_ID" \
   -H "Authorization: Bearer $GEMINI_API_KEY"
 ```
 
-## فهم الصوت
+## Verständnis von Audioinhalten
 
-يمكنك تحليل الإدخال الصوتي:
+Audioeingabe analysieren:
 
 ### Python
 
@@ -929,9 +919,9 @@ bash -c '
 '
 ```
 
-## ناتج منظَّم
+## Strukturierte Ausgabe
 
-يمكن لنماذج Gemini عرض كائنات JSON بأي [بنية تحدّدها](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar).
+Gemini-Modelle können JSON-Objekte in jeder [von Ihnen definierten Struktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=de) ausgeben.
 
 ### Python
 
@@ -992,10 +982,9 @@ const event = completion.choices[0].message.parsed;
 console.log(event);
 ```
 
-## التضمينات
+## Einbettungen
 
-تقيس تضمينات النصوص مدى الصلة بين السلاسل النصية ويمكن إنشاؤها
-باستخدام [Gemini API](https://ai.google.dev/gemini-api/docs/embeddings?hl=ar). يمكنك استخدام `gemini-embedding-2-preview` للتضمينات المتعددة الوسائط أو `gemini-embedding-001` للتضمينات النصية فقط.
+Texteinbettungen messen die Ähnlichkeit von Textstrings und können mit der [Gemini API](https://ai.google.dev/gemini-api/docs/embeddings?hl=de) generiert werden. Sie können `gemini-embedding-2-preview` für multimodale Einbettungen oder `gemini-embedding-001` für reine Texteinbettungen verwenden.
 
 ### Python
 
@@ -1051,19 +1040,18 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/embeddings" \
 
 ## Batch API
 
-يمكنك إنشاء [مهام مجمّعة](https://ai.google.dev/gemini-api/docs/batch-mode?hl=ar) وإرسالها والاطّلاع على حالتها
-باستخدام مكتبة OpenAI.
+Sie können [Batchjobs](https://ai.google.dev/gemini-api/docs/batch-mode?hl=de) erstellen, einreichen und ihren Status mit der OpenAI-Bibliothek prüfen.
 
-عليك إعداد ملف JSONL بتنسيق الإدخال في OpenAI. على سبيل المثال:
+Sie müssen die JSONL-Datei im OpenAI-Eingabeformat vorbereiten. Beispiel:
 
 ```
 {"custom_id": "request-1", "method": "POST", "url": "/v1/chat/completions", "body": {"model": "gemini-3-flash-preview", "messages": [{"role": "user", "content": "Tell me a one-sentence joke."}]}}
 {"custom_id": "request-2", "method": "POST", "url": "/v1/chat/completions", "body": {"model": "gemini-3-flash-preview", "messages": [{"role": "user", "content": "Why is the sky blue?"}]}}
 ```
 
-يتوافق Batch مع OpenAI، ما يتيح إنشاء مجموعة ورصد حالة المهمة وعرض نتائج المجموعة.
+Die OpenAI-Kompatibilität für Batch unterstützt das Erstellen eines Batches, das Überwachen des Jobstatus und das Ansehen von Batchergebnissen.
 
-التوافق مع التحميل والتنزيل غير متاح حاليًا. [بدلاً من ذلك، يستخدم المثال التالي برنامج `genai` لتحميل الملفات وتنزيلها، تمامًا كما هو الحال عند استخدام Gemini [Batch API](https://ai.google.dev/gemini-api/docs/batch-mode?hl=ar#input-file).](https://ai.google.dev/gemini-api/docs/files?hl=ar)
+Die Kompatibilität für Upload und Download wird derzeit nicht unterstützt. Im folgenden Beispiel wird stattdessen der `genai`-Client zum Hoch- und Herunterladen von [Dateien](https://ai.google.dev/gemini-api/docs/files?hl=de) verwendet, genau wie bei der Verwendung der Gemini [Batch API](https://ai.google.dev/gemini-api/docs/batch-mode?hl=de#input-file).
 
 ### Python
 
@@ -1109,7 +1097,7 @@ for line in file_content.splitlines():
     print(line)
 ```
 
-تتيح حزمة تطوير البرامج (SDK) من OpenAI أيضًا [إنشاء تضمينات باستخدام Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ar#batch-embeddings). لإجراء ذلك، بدِّل حقل `endpoint` في طريقة `create` بنقطة نهاية للتضمينات، بالإضافة إلى المفتاحَين `url` و`model` في ملف JSONL:
+Das OpenAI SDK unterstützt auch das [Generieren von Einbettungen mit der Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=de#batch-embeddings). Ersetzen Sie dazu das Feld `endpoint` der Methode `create` durch einen Einbettungs-Endpunkt sowie die Schlüssel `url` und `model` in der JSONL-Datei:
 
 ```
 # JSONL file using embeddings model and endpoint
@@ -1126,12 +1114,11 @@ batch = openai_client.batches.create(
 )
 ```
 
-يمكنك الاطّلاع على مثال كامل في قسم [إنشاء تضمينات مجمّعة](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb)
-في دليل استخدام التوافق مع OpenAI.
+Ein vollständiges Beispiel finden Sie im Abschnitt [Batch embedding generation](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb) (Generierung von Batch-Einbettungen) im OpenAI-Kompatibilitäts-Cookbook.
 
-## الاستدلال المرن والاستدلال حسب الأولوية
+## Flex- und Priority-Inferenz
 
-تطابق Gemini API المَعلمة `service_tier` من OpenAI في الاسم والمنطق، ما يفرض حدودًا ويوجه حركة المرور بشكل مناسب لكل من مستويَي الاستدلال المرن والاستدلال حسب الأولوية.
+Die Gemini API entspricht dem Parameter `service_tier` von OpenAI in Bezug auf Name und Logik. Sie erzwingt Limits und leitet Traffic für die Inferenzebenen „Flex“ und „Priority“ auf geordnete Weise weiter.
 
 ### Python
 
@@ -1154,38 +1141,38 @@ completion = client.chat.completions.create(
 print(completion)
 ```
 
-إذا لم يتم تحديد `service_tier` بشكل صريح، يتم ضبطها تلقائيًا على `standard`، وهو ما يعادل `default` في OpenAI.
-يمكنك التعرّف أكثر على مستويات الاستدلال في مستندات [التحسين](https://ai.google.dev/gemini-api/docs/optimization?hl=ar).
+Wenn nicht explizit zugewiesen, wird für `service_tier` standardmäßig `standard` verwendet, was für OpenAI `default` entspricht.
+Weitere Informationen zu den Inferenzstufen finden Sie in der [Dokumentation zur Optimierung](https://ai.google.dev/gemini-api/docs/optimization?hl=de).
 
-## تفعيل ميزات Gemini باستخدام `extra_body`
+## Gemini-Funktionen mit `extra_body` aktivieren
 
-تتوفّر عدة ميزات في Gemini لا تتوفّر في نماذج OpenAI، ولكن يمكن تفعيلها باستخدام الحقل `extra_body`.
+Es gibt mehrere Funktionen, die von Gemini unterstützt werden, aber nicht in OpenAI-Modellen verfügbar sind. Sie können jedoch mit dem Feld `extra_body` aktiviert werden.
 
-| المَعلمة | النوع | نقطة نهاية | الوصف |
+| Parameter | Typ | Endpunkt | Beschreibung |
 | --- | --- | --- | --- |
-| **`cached_content`** | نص | محادثة | يتطابق مع ذاكرة التخزين المؤقت العامة للمحتوى في Gemini. |
-| **`thinking_config`** | عنصر | محادثة | يتطابق مع ThinkingConfig في Gemini. |
-| **`aspect_ratio`** | نص | الصور | نسبة العرض إلى الارتفاع للناتج (مثل `"16:9"` أو `"1:1"` أو `"9:16"`) |
-| **`generation_config`** | عنصر | الصور | عنصر إعدادات الإنشاء في Gemini (مثل `{"responseModalities": ["IMAGE"], "candidateCount": 2}`) |
-| **`safety_settings`** | قائمة | الصور | فلاتر مخصّصة للحدود القصوى للأمان (مثل `[{"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}]`) |
-| **`tools`** | قائمة | الصور | تفعيل الاستناد إلى "بحث Google" (مثل `[{"google_search": {}}]`)، وذلك لنموذج `gemini-3-pro-image-preview` فقط |
-| **`aspect_ratio`** | نص | فيديو | أبعاد الفيديو الناتج (`16:9` للفيديوهات الأفقية و`9:16` للفيديوهات العمودية) يتم الربط من `size` إذا لم يتم تحديدها. |
-| **`resolution`** | نص | فيديو | درجة الدقة للناتج (`720p` أو `1080p` أو `4K`) ملاحظة: تؤدي `1080p` و`4K` إلى تشغيل سلسلة التعديل التصاعدي. |
-| **`duration_seconds`** | عدد صحيح | فيديو | مدة الإنشاء (القيم: `4` أو `6` أو `8`) يجب أن تكون `8` عند استخدام `reference_images` أو الاستيفاء أو الإضافة. |
-| **`frame_rate`** | نص | فيديو | عدد اللقطات في الثانية للفيديو الناتج (مثل `"24"`) |
-| **`input_reference`** | نص | فيديو | الإدخال المرجعي لإنشاء الفيديو |
-| **`extend_video_id`** | نص | فيديو | رقم تعريف فيديو حالي لتمديده |
-| **`negative_prompt`** | نص | فيديو | العناصر التي يجب استبعادها (مثل `"shaky camera"`) |
-| **`seed`** | عدد صحيح | فيديو | عدد صحيح للإنشاء الحتمي |
-| **`style`** | نص | فيديو | النمط المرئي (`cinematic` تلقائيًا، و`creative` للفيديوهات المحسّنة لوسائل التواصل الاجتماعي) |
-| **`person_generation`** | نص | فيديو | التحكّم في إنشاء صور تتضمّن أشخاصًا (`allow_adult` أو `allow_all` أو `dont_allow`) |
-| **`reference_images`** | قائمة | فيديو | ما يصل إلى 3 صور كمرجع للنمط/الشخصية (مواد عرض base64) |
-| **`image`** | نص | فيديو | صورة الإدخال الأولية بترميز base64 لتحديد عملية إنشاء الفيديو |
-| **`last_frame`** | عنصر | فيديو | الصورة النهائية للاستيفاء (تتطلّب `image` كإطار أول) |
+| **`cached_content`** | Text | Chat | Entspricht dem allgemeinen Inhaltscache von Gemini. |
+| **`thinking_config`** | Objekt | Chat | Entspricht der ThinkingConfig von Gemini. |
+| **`aspect_ratio`** | Text | Bilder | Seitenverhältnis der Ausgabe (z.B. `"16:9"`, `"1:1"`, `"9:16"`). |
+| **`generation_config`** | Objekt | Bilder | Gemini-Konfigurationsobjekt für die Generierung (z.B. `{"responseModalities": ["IMAGE"], "candidateCount": 2}`). |
+| **`safety_settings`** | Liste | Bilder | Benutzerdefinierte Filter für Sicherheitsgrenzwerte (z.B. `[{"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}]`). |
+| **`tools`** | Liste | Bilder | Ermöglicht die Fundierung (z.B. `[{"google_search": {}}]`). Nur für `gemini-3-pro-image-preview`. |
+| **`aspect_ratio`** | Text | Video | Abmessungen des Ausgabevideos (`16:9` für Querformat, `9:16` für Hochformat). Wenn keine Angabe gemacht wird, werden Karten aus `size` verwendet. |
+| **`resolution`** | Text | Video | Ausgabeauflösung (`720p`, `1080p`, `4K`). Hinweis: `1080p` und `4K` lösen die Upsampler-Pipeline aus. |
+| **`duration_seconds`** | Ganzzahl | Video | Länge der Generierung (Werte: `4`, `6`, `8`). Muss `8` sein, wenn `reference_images`, Interpolation oder Erweiterung verwendet werden. |
+| **`frame_rate`** | Text | Video | Framerate für die Videoausgabe (z.B. `"24"`). |
+| **`input_reference`** | Text | Video | Referenzeingabe für die Videogenerierung. |
+| **`extend_video_id`** | Text | Video | Die ID eines vorhandenen Videos, das verlängert werden soll. |
+| **`negative_prompt`** | Text | Video | Auszuschließende Elemente (z.B. `"shaky camera"`). |
+| **`seed`** | Ganzzahl | Video | Ganzzahl für die deterministische Generierung. |
+| **`style`** | Text | Video | Visueller Stil (`cinematic` Standard, `creative` für soziale Medien optimiert). |
+| **`person_generation`** | Text | Video | Steuert die Generierung von Personen (`allow_adult`, `allow_all`, `dont_allow`). |
+| **`reference_images`** | Liste | Video | Bis zu drei Bilder als Stil-/Charakterreferenz (Base64-Assets). |
+| **`image`** | Text | Video | Base64-codiertes ursprüngliches Eingabebild, das zur Bedingung der Videogenerierung verwendet wird. |
+| **`last_frame`** | Objekt | Video | Letztes Bild für die Interpolation (erfordert `image` als ersten Frame). |
 
-### مثال على استخدام `extra_body`
+### Beispiel mit `extra_body`
 
-في ما يلي مثال على استخدام `extra_body` لضبط `cached_content`:
+Hier ein Beispiel für die Verwendung von `extra_body` zum Festlegen von `cached_content`:
 
 ### Python
 
@@ -1223,9 +1210,9 @@ for chunk in stream:
     print(chunk.usage.to_dict())
 ```
 
-## عرض قائمة النماذج
+## Modelle auflisten
 
-يمكنك الحصول على قائمة بنماذج Gemini المتاحة:
+So rufen Sie eine Liste der verfügbaren Gemini-Modelle ab:
 
 ### Python
 
@@ -1269,9 +1256,9 @@ curl https://generativelanguage.googleapis.com/v1beta/openai/models \
 -H "Authorization: Bearer GEMINI_API_KEY"
 ```
 
-## استرداد نموذج
+## Modell abrufen
 
-يمكنك استرداد نموذج Gemini:
+Gemini-Modell abrufen:
 
 ### Python
 
@@ -1312,23 +1299,22 @@ curl https://generativelanguage.googleapis.com/v1beta/openai/models/gemini-3-fla
 -H "Authorization: Bearer GEMINI_API_KEY"
 ```
 
-## القيود الحالية
+## Aktuelle Beschränkungen
 
-لا يزال دعم مكتبات OpenAI في مرحلة تجريبية أثناء توسيع نطاق دعم الميزات.
+Die Unterstützung für die OpenAI-Bibliotheken befindet sich noch in der Betaphase, während wir die Funktionsunterstützung erweitern.
 
-إذا كانت لديك أسئلة حول المَعلمات المتوافقة أو الميزات القادمة أو واجهت
-أي مشاكل في البدء باستخدام Gemini، يُرجى الانضمام إلى [منتدى المطوّرين](https://discuss.ai.google.dev/c/gemini-api/4?hl=ar).
+Wenn Sie Fragen zu unterstützten Parametern oder anstehenden Funktionen haben oder Probleme beim Einstieg in Gemini auftreten, können Sie sich an unser [Entwicklerforum](https://discuss.ai.google.dev/c/gemini-api/4?hl=de) wenden.
 
-## الخطوات التالية
+## Nächste Schritte
 
-يمكنك تجربة [Colab المتوافق مع OpenAI](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb?hl=ar) للتعرّف على المزيد من الأمثلة التفصيلية.
+In unserem [OpenAI Compatibility Colab](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb?hl=de) finden Sie detailliertere Beispiele.
 
-إرسال ملاحظات
+Feedback geben
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
+Zuletzt aktualisiert: 2026-04-29 (UTC).
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Haben Sie Feedback für uns?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-04-29 (UTC)."],[],[]]

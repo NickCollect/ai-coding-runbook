@@ -1,103 +1,93 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/best-practices?hl=ar
-fetched_at: 2026-05-05T19:50:03.127039+00:00
+source_url: https://ai.google.dev/gemini-api/docs/live-api/best-practices?hl=vi
+fetched_at: 2026-05-05T20:02:47.403910+00:00
 title: "Live API best practices \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-إرسال ملاحظات
+Gửi ý kiến phản hồi
 
 # Live API best practices
 
-يتناول هذا الدليل أفضل الممارسات التي يمكنك اتّباعها لتحسين استخدامك لواجهة Live API.
-يمكنك الاطّلاع على صفحة [البدء باستخدام Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar) للحصول على نظرة عامة ورمز نموذجي لحالات الاستخدام الشائعة.
+Hướng dẫn này trình bày các phương pháp hay nhất mà bạn có thể làm theo để tối ưu hoá việc sử dụng Live API.
+Hãy xem trang [Bắt đầu sử dụng Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi) để biết thông tin tổng quan và mã mẫu cho các trường hợp sử dụng phổ biến.
 
-## تصميم تعليمات نظام واضحة
+## Thiết kế hướng dẫn rõ ràng cho hệ thống
 
-للحصول على أفضل أداء من Live API، ننصحك بتحديد مجموعة واضحة من تعليمات النظام (SI) التي تحدّد شخصية الوكيل وقواعد المحادثة وضوابط الأمان، بهذا الترتيب.
+Để khai thác tối đa hiệu suất của Live API, chúng tôi khuyên bạn nên có một bộ hướng dẫn hệ thống (SI) được xác định rõ ràng để xác định vai trò của tác nhân, các quy tắc đàm thoại và các biện pháp bảo vệ, theo thứ tự này.
 
-للحصول على أفضل النتائج، قسِّم كل وكيل إلى نظام فرعي مميّز.
+Để có kết quả tốt nhất, hãy tách từng tác nhân thành một SI riêng biệt.
 
-1. **تحديد شخصية الوكيل:** قدِّم تفاصيل حول اسم الوكيل ودوره وأي خصائص مفضّلة. إذا أردت تحديد اللهجة، احرص على تحديد لغة الإخراج المفضّلة أيضًا (مثل اللهجة البريطانية لشخص يتحدث الإنجليزية).
-2. **تحديد قواعد المحادثة:** ضَع هذه القواعد بالترتيب الذي تتوقّع أن يتبعه النموذج. حدِّد الفرق بين العناصر التي تظهر لمرة واحدة في المحادثة وحلقات المحادثة. على سبيل المثال:
+1. **Chỉ định tính cách của nhân viên hỗ trợ:** Cung cấp thông tin chi tiết về tên, vai trò và mọi đặc điểm ưu tiên của nhân viên hỗ trợ. Nếu bạn muốn chỉ định giọng, hãy nhớ chỉ định cả ngôn ngữ đầu ra ưu tiên (chẳng hạn như giọng Anh cho người nói tiếng Anh).
+2. **Chỉ định các quy tắc trò chuyện:** Đặt các quy tắc này theo thứ tự mà bạn muốn mô hình tuân theo. Phân biệt giữa các yếu tố chỉ xuất hiện một lần trong cuộc trò chuyện và các vòng lặp trò chuyện. Ví dụ:
 
-   - **العنصر لمرة واحدة:** جمع تفاصيل العميل مرة واحدة (مثل الاسم أو الموقع الجغرافي أو رقم بطاقة الولاء)
-   - **حلقة المحادثة:** يمكن للمستخدم مناقشة الاقتراحات والأسعار وعمليات الإرجاع والتسليم، وقد يرغب في الانتقال من موضوع إلى آخر. أخبِر النموذج بأنّه لا بأس من المشاركة في هذه الحلقة الحوارية طالما أراد المستخدم ذلك.
-3. **تحديد استدعاءات الأدوات ضمن تدفق في جمل منفصلة:** على سبيل المثال، إذا كانت خطوة واحدة لمرة واحدة لجمع تفاصيل العميل تتطلّب استدعاء دالة `get_user_info`، يمكنك القول: *خطوتك الأولى هي جمع معلومات المستخدم. في البداية،
-   اطلب من المستخدم تقديم اسمه وموقعه الجغرافي ورقم بطاقة الولاء. بعد ذلك، استدعِ الدالة `get_user_info` باستخدام هذه التفاصيل.*
-4. **إضافة أي ضوابط ضرورية:** قدِّم أي ضوابط عامة للمحادثات لا تريد أن يلتزم بها النموذج. يمكنك تقديم أمثلة محددة، مثل إذا حدث *س*، عليك أن تطلب من النموذج تنفيذ *ص*. إذا لم تحصل على مستوى الدقة المطلوب، استخدِم الكلمة *بشكل لا لبس فيه* لتوجيه النموذج إلى أن يكون دقيقًا.
+   - **Phần tử dùng một lần:** Thu thập thông tin chi tiết của khách hàng một lần (chẳng hạn như tên, vị trí, số thẻ khách hàng thân thiết).
+   - **Vòng lặp trò chuyện:** Người dùng có thể thảo luận về đề xuất, giá cả, việc trả lại hàng và giao hàng, đồng thời có thể muốn chuyển từ chủ đề này sang chủ đề khác. Cho mô hình biết rằng mô hình có thể tham gia vào vòng lặp trò chuyện này miễn là người dùng muốn.
+3. **Chỉ định các lệnh gọi công cụ trong một quy trình bằng các câu riêng biệt:** Ví dụ: nếu một bước duy nhất để thu thập thông tin chi tiết của khách hàng yêu cầu bạn phải gọi một hàm `get_user_info`, bạn có thể nói: *Bước đầu tiên là thu thập thông tin người dùng. Trước tiên, hãy yêu cầu người dùng cung cấp tên, vị trí và số thẻ khách hàng thân thiết của họ. Sau đó, hãy gọi `get_user_info` kèm theo những thông tin chi tiết này.*
+4. **Thêm mọi biện pháp bảo vệ cần thiết:** Cung cấp mọi biện pháp bảo vệ chung trong cuộc trò chuyện mà bạn không muốn mô hình thực hiện. Bạn có thể cung cấp các ví dụ cụ thể về trường hợp nếu *x* xảy ra, bạn muốn mô hình thực hiện *y*. Nếu bạn vẫn chưa nhận được mức độ chính xác như mong muốn, hãy dùng từ *rõ ràng* để hướng dẫn mô hình đưa ra kết quả chính xác.
 
-## تحديد الأدوات بدقة
+## Xác định chính xác các công cụ
 
-عند استخدام أدوات مع Live API، يجب أن تكون دقيقًا في تعريفات الأدوات.
-احرص على إخبار Gemini بالشروط التي يجب استيفاؤها لتنفيذ استدعاء أداة. لمزيد من التفاصيل، راجِع [تعريفات الأدوات](#tool-definitions-example) في قسم الأمثلة.
+Khi sử dụng các công cụ có Live API, hãy xác định cụ thể trong định nghĩa công cụ của bạn.
+Hãy nhớ cho Gemini biết những điều kiện mà bạn nên gọi một công cụ. Để biết thêm thông tin chi tiết, hãy xem phần [Định nghĩa công cụ](#tool-definitions-example) trong phần ví dụ.
 
-## صياغة طلبات فعّالة
+## Tạo câu lệnh hiệu quả
 
-- **استخدام طلبات واضحة:** قدِّم أمثلة على ما يجب وما لا يجب أن تفعله النماذج في الطلبات، وحاوِل أن تقتصر الطلبات على طلب واحد لكل شخصية أو دور في كل مرة. بدلاً من الطلبات الطويلة التي تتضمّن صفحات متعددة، ننصحك باستخدام تسلسل الطلبات. يعمل النموذج على أفضل نحو في المهام التي تتضمّن استدعاءات دالة واحدة.
-- **تقديم أوامر ومعلومات بدء:** تتوقّع واجهة برمجة التطبيقات Live API أن يقدّم المستخدم بيانات أدخلها المستخدم قبل أن تستجيب. لجعل Live API يبدأ المحادثة، أدرِج طلبًا يطلب منه الترحيب بالمستخدم أو بدء المحادثة. تضمين معلومات عن المستخدم لتخصيص التحية في Live API
+- **Sử dụng câu lệnh rõ ràng:** Cung cấp ví dụ về những việc mà mô hình nên và không nên làm trong câu lệnh, đồng thời cố gắng giới hạn câu lệnh ở một câu lệnh cho mỗi nhân vật hoặc vai trò tại một thời điểm. Thay vì sử dụng các câu lệnh dài, nhiều trang, hãy cân nhắc sử dụng tính năng liên kết câu lệnh. Mô hình này hoạt động hiệu quả nhất đối với các tác vụ có một lệnh gọi hàm.
+- **Cung cấp lệnh và thông tin bắt đầu:** Live API cần có hoạt động đầu vào của người dùng trước khi phản hồi. Để Live API bắt đầu cuộc trò chuyện, hãy thêm một câu lệnh yêu cầu API chào người dùng hoặc bắt đầu cuộc trò chuyện. Bao gồm thông tin về người dùng để Live API cá nhân hoá lời chào đó.
 
-## تحديد اللغة
+## Chỉ định ngôn ngữ
 
-لتحقيق الأداء الأمثل على واجهة برمجة التطبيقات المتسلسلة `gemini-live-2.5-flash`،
-تأكَّد من أنّ `language_code` لواجهة برمجة التطبيقات يتطابق مع اللغة التي يتحدث بها المستخدم.
+Để có hiệu suất tối ưu trên `gemini-live-2.5-flash` xếp tầng Live API, hãy đảm bảo rằng `language_code` của API này khớp với ngôn ngữ mà người dùng nói.
 
-إذا كان المطلوب من النموذج الرد بلغة غير الإنجليزية،
-يُرجى تضمين ما يلي كجزء من تعليمات النظام:
+Nếu bạn muốn mô hình phản hồi bằng một ngôn ngữ không phải tiếng Anh, hãy thêm nội dung sau vào chỉ dẫn hệ thống:
 
 ```
 RESPOND IN {OUTPUT_LANGUAGE}. YOU MUST RESPOND UNMISTAKABLY IN {OUTPUT_LANGUAGE}.
 ```
 
-## البث
+## Phát trực tiếp
 
-عند تنفيذ ميزة "الصوت في الوقت الفعلي"، اتّبِع أفضل الممارسات التالية:
+Khi triển khai âm thanh theo thời gian thực, hãy làm theo các phương pháp hay nhất sau đây:
 
-- **حجم الأجزاء ووقت الاستجابة**: أرسِل الصوت في أجزاء تتراوح مدتها بين 20 و40 ملي ثانية.
-- **التعامل مع المقاطعات**: عندما يتحدث المستخدم أثناء ردّ النموذج، يرسل الخادم رسالة `server_content` تتضمّن `"interrupted": true`. عليك التخلص من مخزن الصوت المؤقت من جهة العميل على الفور لمنع الوكيل من مواصلة التحدث أثناء حديث المستخدم.
+- **Kích thước phân đoạn và độ trễ**: Gửi âm thanh theo phân đoạn từ 20 mili giây đến 40 mili giây.
+- **Xử lý gián đoạn**: Khi người dùng nói trong lúc mô hình đang trả lời, máy chủ sẽ gửi thông báo `server_content` kèm theo `"interrupted": true`. Bạn phải huỷ ngay bộ đệm âm thanh phía máy khách để ngăn tác nhân tiếp tục nói chuyện với người dùng.
 
-## إدارة السياق
+## Quản lý ngữ cảnh
 
-استخدِم `ContextWindowCompressionConfig` للجلسات الطويلة، لأنّ الرموز المميزة الأصلية للصوت تتراكم بسرعة (حوالي 25 رمزًا مميزًا لكل ثانية من الصوت).
+Sử dụng `ContextWindowCompressionConfig` cho các phiên dài, vì mã thông báo âm thanh gốc tích luỹ nhanh chóng (khoảng 25 mã thông báo/giây âm thanh).
 
-## التخزين المؤقت من جهة العميل
+## Lưu vào bộ đệm phía máy khách
 
-لا تخزِّن الصوت المُدخَل مؤقتًا بشكل كبير (مثل ثانية واحدة) قبل إرساله. إرسال أجزاء صغيرة (من 20 إلى 100 ملي ثانية) لتقليل وقت الاستجابة
+Không đệm đáng kể âm thanh đầu vào (chẳng hạn như 1 giây) trước khi gửi. Gửi các đoạn nhỏ (20 mili giây – 100 mili giây) để giảm thiểu độ trễ.
 
-## إعادة أخذ العيّنات
+## Lấy mẫu lại
 
-تأكَّد من أنّ تطبيق العميل يعيد أخذ عيّنات من إدخال الميكروفون (غالبًا 44.1 كيلو هرتز أو 48 كيلو هرتز) إلى 16 كيلو هرتز قبل الإرسال.
+Đảm bảo ứng dụng khách của bạn lấy mẫu lại dữ liệu đầu vào từ micrô (thường là 44,1 kHz hoặc 48 kHz) thành 16 kHz trước khi truyền.
 
-## إدارة الجلسة
+## Quản lý phiên
 
-اتّبِع الإرشادات التالية للتعامل مع دورة حياة الجلسة وضمان تقديم تجربة موثوقة للمستخدم:
+Hãy làm theo các nguyên tắc này để xử lý vòng đời phiên và đảm bảo mang lại trải nghiệm đáng tin cậy cho người dùng:
 
-- **تفعيل ميزة ضغط قدرة الاستيعاب:** تتراكم الرموز المميزة الصوتية بمعدل 25 رمزًا مميزًا في الثانية تقريبًا. بدون ضغط، تقتصر الجلسات الصوتية فقط على 15 دقيقة وجلسات الصوت والفيديو على دقيقتَين. فعِّل
-  [ضغط قدرة الاستيعاب](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ar#context-window-compression)
-  لتمديد الجلسات إلى مدة غير محدودة.
-- **تنفيذ استئناف الجلسة:** قد يعيد الخادم ضبط اتصال WebSocket بشكل دوري. استخدِم ميزة
-  [استئناف الجلسة](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ar#session-resumption)
-  لإعادة الاتصال بسلاسة بدون فقدان السياق. الاحتفاظ بآخر رمز مميز لاستئناف المحادثة من `SessionResumptionUpdate` رسالة وتمريره كمؤشر عند إعادة الاتصال تكون رموز الإيقاف المؤقت صالحة لمدة ساعتين بعد انتهاء آخر جلسة.
-- **التعامل مع رسائل GoAway:** يرسل الخادم رسالة [GoAway](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ar#goaway-message) قبل إنهاء الاتصال. استمع إلى هذه الرسالة واستخدِم الحقل
-  `timeLeft` لإنهاء الاتصال أو إعادة الاتصال بشكل سليم قبل إغلاق الاتصال.
-- **التعامل مع إشارات generationComplete:** استخدِم رسالة
-  [`generationComplete`](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ar#generation-complete-message)
-  لمعرفة الوقت الذي ينتهي فيه النموذج من إنشاء ردّ، كي يتمكّن تطبيقك من تعديل واجهة المستخدم أو المتابعة إلى الإجراء التالي.
+- **Bật tính năng nén cửa sổ ngữ cảnh:** Các mã thông báo âm thanh tích luỹ với tốc độ khoảng 25 mã thông báo mỗi giây. Nếu không nén, các phiên chỉ có âm thanh sẽ bị giới hạn ở 15 phút và các phiên có cả âm thanh và video sẽ bị giới hạn ở 2 phút. Bật tính năng [nén cửa sổ ngữ cảnh](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=vi#context-window-compression) để kéo dài phiên đến thời lượng không giới hạn.
+- **Triển khai tính năng tiếp tục phiên:** Máy chủ có thể định kỳ đặt lại kết nối WebSocket. Sử dụng tính năng [tiếp tục phiên](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=vi#session-resumption) để kết nối lại một cách liền mạch mà không bị mất ngữ cảnh. Giữ lại mã thông báo tiếp tục mới nhất từ `SessionResumptionUpdate` tin nhắn và truyền mã thông báo đó dưới dạng mã nhận dạng khi kết nối lại. Mã thông báo tiếp tục có hiệu lực trong 2 giờ sau khi phiên gần nhất kết thúc.
+- **Xử lý thông báo GoAway:** Máy chủ gửi thông báo [GoAway](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=vi#goaway-message) trước khi chấm dứt kết nối. Lắng nghe thông báo này và sử dụng trường `timeLeft` để kết thúc hoặc kết nối lại một cách suôn sẻ trước khi kết nối đóng.
+- **Xử lý tín hiệu generationComplete:** Sử dụng thông báo [`generationComplete`](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=vi#generation-complete-message) để biết thời điểm mô hình đã hoàn tất việc tạo câu trả lời, nhờ đó ứng dụng của bạn có thể cập nhật giao diện người dùng hoặc tiến hành hành động tiếp theo.
 
-للحصول على تفاصيل التنفيذ، راجِع [إدارة الجلسات](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ar).
+Để biết thông tin chi tiết về cách triển khai, hãy xem phần [Quản lý phiên](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=vi).
 
-## أمثلة
+## Ví dụ
 
-يجمع هذا المثال بين أفضل الممارسات و[إرشادات تصميم تعليمات النظام](#system-instruction-guidelines) لتوجيه أداء النموذج بصفته مستشارًا مهنيًا.
+Ví dụ này kết hợp cả các phương pháp hay nhất và [hướng dẫn về thiết kế chỉ dẫn hệ thống](#system-instruction-guidelines) để hướng dẫn hiệu suất của mô hình với vai trò là huấn luyện viên nghề nghiệp.
 
 ```
 **Persona:**
@@ -149,10 +139,10 @@ Remember that your ultimate goal is to create a supportive environment for your
 clients to thrive.
 ```
 
-### تعريفات الأدوات
+### Định nghĩa về công cụ
 
-يحدد ملف JSON هذا الدوال ذات الصلة التي تم استدعاؤها في مثال "المستشار المهني".
-للحصول على أفضل النتائج عند تحديد الدوال، يجب تضمين أسمائها وأوصافها ومَعلماتها وشروط استدعائها.
+JSON này xác định các hàm có liên quan được gọi trong ví dụ về huấn luyện viên nghề nghiệp.
+Để có kết quả tốt nhất khi xác định các hàm, hãy thêm tên, nội dung mô tả, tham số và điều kiện gọi của các hàm đó.
 
 ```
 [
@@ -242,12 +232,12 @@ clients to thrive.
 ]
 ```
 
-إرسال ملاحظات
+Gửi ý kiến phản hồi
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

@@ -1,55 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/troubleshoot-ai-studio?hl=ar
-fetched_at: 2026-05-05T19:44:05.896750+00:00
-title: "\u062a\u062d\u062f\u064a\u062f \u0627\u0644\u0645\u0634\u0627\u0643\u0644 \u0648\u062d\u0644\u0651\u0647\u0627 \u0641\u064a Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/troubleshoot-ai-studio?hl=zh-TW
+fetched_at: 2026-05-05T20:09:43.695454+00:00
+title: "\u6392\u89e3 Google AI Studio \u554f\u984c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-إرسال ملاحظات
+提供意見
 
-# تحديد المشاكل وحلّها في Google AI Studio
+# 排解 Google AI Studio 問題
 
-تقدّم هذه الصفحة اقتراحات لتحديد المشاكل في Google AI Studio وحلّها في حال مواجهة أي منها.
+本頁提供 Google AI Studio 的疑難排解建議，協助您解決問題。
 
-## فهم أخطاء "403 Access Restricted"
+## 瞭解 403 存取受限錯誤
 
-إذا ظهر لك الخطأ "403 Access Restricted"، يعني ذلك أنّك تستخدم Google AI Studio بطريقة لا تتوافق مع [بنود الخدمة](https://ai.google.dev/terms?hl=ar). أحد الأسباب الشائعة هو أنّك لا تقيم في منطقة [مدعومة](https://ai.google.dev/available_regions?hl=ar).
+如果看到「403 Access Restricted」錯誤，表示您使用 Google AI Studio 的方式違反《[服務條款](https://ai.google.dev/terms?hl=zh-tw)》。常見原因之一是您不在[支援的區域](https://ai.google.dev/available_regions?hl=zh-tw)。
 
-## حلّ مشكلة الردود التي لا تتضمّن أي محتوى في Google AI Studio
+## 解決 Google AI Studio 中的「沒有內容」回應
 
-تظهر رسالة warning **No Content** على
-Google AI Studio إذا تم حظر المحتوى لأي سبب كان. للاطّلاع على مزيد من التفاصيل،
-مرِّر المؤشر فوق **No Content** وانقر
-warning **Safety**.
+如果內容因任何原因遭到封鎖，Google AI Studio 會顯示「沒有內容」warning訊息。如要查看更多詳細資料，請將指標懸停在「沒有內容」上，然後按一下「安全」圖示 warning。
 
-إذا تم حظر الرد بسبب [إعدادات الأمان](https://ai.google.dev/docs/safety_setting?hl=ar) و
-كنت قد أخذت في الاعتبار [المخاطر المتعلّقة بالأمان](https://ai.google.dev/docs/safety_guidance?hl=ar) في حالة الاستخدام، يمكنك
-تعديل
-[إعدادات الأمان](https://ai.google.dev/docs/safety_setting?hl=ar#safety_settings_in_makersuite)
-للتأثير في الرد الذي يتم عرضه.
+如果回應因[安全設定](https://ai.google.dev/docs/safety_setting?hl=zh-tw)而遭到封鎖，且您已考量用途的[安全風險](https://ai.google.dev/docs/safety_guidance?hl=zh-tw)，可以修改[安全設定](https://ai.google.dev/docs/safety_setting?hl=zh-tw#safety_settings_in_makersuite)，影響系統傳回的回應。
 
-إذا تم حظر الرد ولكن ليس بسبب إعدادات الأمان، قد يكون الطلب أو
-الرد مخالفًا لـ [بنود الخدمة](https://ai.google.dev/terms?hl=ar) أو غير متوافق معها.
+如果回覆遭到封鎖，但並非因為安全設定，則查詢或回覆可能違反[服務條款](https://ai.google.dev/terms?hl=zh-tw)，或是不受支援。
 
-## التحقّق من استخدام الرموز وحدودها
+## 查看權杖用量和限制
 
-عند فتح طلب، يعرض الزر **Text Preview** في أسفل الشاشة الرموز الحالية المستخدَمة لمحتوى طلبك والحد الأقصى لعدد الرموز في النموذج المستخدَم.
+開啟提示後，畫面底部的「文字預覽」按鈕會顯示提示內容目前使用的詞元，以及所用模型的詞元上限。
 
-إرسال ملاحظات
+提供意見
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
+上次更新時間：2026-04-29 (世界標準時間)。
 
-هل تريد مشاركة ملاحظاتك معنا؟
+想進一步說明嗎？
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-04-29 (世界標準時間)。"],[],[]]

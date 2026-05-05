@@ -1,53 +1,55 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=he
-fetched_at: 2026-05-05T19:52:15.096837+00:00
+source_url: https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=ar
+fetched_at: 2026-05-05T20:04:39.404281+00:00
 title: "Live API capabilities guide \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-שליחת משוב
+إرسال ملاحظات
 
 # Live API capabilities guide
 
-זהו מדריך מקיף שכולל את היכולות וההגדרות שזמינות ב-API בזמן אמת.
-במאמר [תחילת העבודה עם Live API](https://ai.google.dev/gemini-api/docs/live?hl=he) מופיע סקירה כללית וקוד לדוגמה לתרחישי שימוש נפוצים.
+هذا دليل شامل يتناول الإمكانات والإعدادات المتاحة من خلال Live API.
+يمكنك الاطّلاع على صفحة [البدء باستخدام Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar) للحصول على نظرة عامة ورمز نموذجي لحالات الاستخدام الشائعة.
 
-## לפני שמתחילים
+## قبل البدء
 
-- **כדאי להכיר את המושגים העיקריים:** אם עדיין לא עשיתם את זה, קודם כדאי לקרוא את המאמר [תחילת העבודה עם Live API](https://ai.google.dev/gemini-api/docs/live?hl=he) .
-  במאמר הזה נסביר על העקרונות הבסיסיים של Live API, איך הוא פועל ועל [גישות שונות להטמעה](https://ai.google.dev/gemini-api/docs/live?hl=he#implementation-approach).
-- **התנסות ב-Live API ב-AI Studio:** מומלץ להתנסות ב-Live API ב-[Google AI Studio](https://aistudio.google.com/app/live?hl=he) לפני שמתחילים לפתח. כדי להשתמש ב-Live API ב-Google AI Studio, בוחרים באפשרות **Stream** (שידור).
+- **التعرّف على المفاهيم الأساسية:** إذا لم يسبق لك ذلك،
+  ننصحك بقراءة صفحة [البدء باستخدام Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar)  أولاً.
+  سنتعرّف في هذا الدليل على المبادئ الأساسية لواجهة برمجة التطبيقات Live API وطريقة عملها و[مختلف طرق التنفيذ](https://ai.google.dev/gemini-api/docs/live?hl=ar#implementation-approach).
+- **تجربة Live API في AI Studio:** قد يكون من المفيد تجربة Live API في [Google AI Studio](https://aistudio.google.com/app/live?hl=ar) قبل البدء في إنشاء التطبيقات. لاستخدام Live API في Google AI Studio، انقر على **البث المباشر (Stream)**.
 
-## השוואה בין מודלים
+## مقارنة النماذج
 
-בטבלה הבאה מפורטים ההבדלים העיקריים בין המודלים של [Gemini 3.1 Flash בגרסת טרום-השקה (Preview)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=he) לבין [Gemini 2.5 Flash בגרסת טרום-השקה (Preview)](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=he):
+يلخّص الجدول التالي الاختلافات الرئيسية بين
+نموذج [Gemini 3.1 Flash Live Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=ar) ونموذج [Gemini 2.5 Flash Live Preview](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=ar):
 
-| תכונה | ‫Gemini 3.1 Flash Live Preview | גרסת טרום-השקה של Gemini ‎2.5 Flash Live |
+| الميزة | معاينة Gemini 3.1 Flash Live | النسخة الحصرية من Gemini 2.5 Flash |
 | --- | --- | --- |
-| **[תהליך החשיבה](#native-audio-output-thinking)** | משתמש ב-`thinkingLevel` כדי לשלוט בעומק החשיבה באמצעות הגדרות כמו `minimal`,‏ `low`,‏ `medium` ו-`high`. ברירת המחדל היא `minimal` כדי לבצע אופטימיזציה לזמן האחזור הנמוך ביותר. [מידע נוסף על תקציבים ורמות חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he#levels-budgets) | משתמשים ב-`thinkingBudget` כדי להגדיר את מספר הטוקנים של החשיבה. התכונה 'חשיבה דינמית' מופעלת כברירת מחדל. כדי להשבית, מגדירים את `thinkingBudget` להיות `0`. [מידע נוסף על תקציבים ורמות חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he#levels-budgets) |
-| **[קבלת תשובה](https://ai.google.dev/api/live?hl=he#bidigeneratecontentservercontent)** | אירוע יחיד בשרת יכול להכיל כמה חלקי תוכן בו-זמנית (לדוגמה, `inlineData` ותמליל). כדי שלא יחסר תוכן, חשוב לוודא שהקוד מעבד את כל החלקים בכל אירוע. | כל אירוע שרת מכיל רק חלק תוכן אחד. החלקים מועברים באירועים נפרדים. |
-| **[תוכן של לקוחות](#incremental-updates)** | ‫`send_client_content` נתמך רק לאכלוס היסטוריית ההקשר הראשוני (נדרשת הגדרה של `initial_history_in_client_content` בהגדרת הסשן). כדי לשלוח עדכוני טקסט במהלך השיחה, משתמשים באפשרות `send_realtime_input`. | `send_client_content` נתמך לאורך השיחה כדי לשלוח עדכוני תוכן מצטברים וליצור הקשר. |
-| **[הפעלת כיסוי](https://ai.google.dev/api/live?hl=he#turncoverage)** | ברירת המחדל היא `TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO`. התור של המודל כולל פעילות אודיו שזוהתה וכל פריים של הווידאו. | ברירת המחדל היא `TURN_INCLUDES_ONLY_ACTIVITY`. התור של המודל כולל רק את הפעילות שזוהתה. |
-| **[Custom VAD](#disable-automatic-vad)** (`activity_start`/`activity_end`) | נתמך. משביתים את ה-VAD האוטומטי ושולחים הודעות `activityStart` ו-`activityEnd` באופן ידני כדי לשלוט בהגדרת הגבולות של תורות הדיבור. | נתמך. משביתים את ה-VAD האוטומטי ושולחים הודעות `activityStart` ו-`activityEnd` באופן ידני כדי לשלוט בהגדרת הגבולות של תורות הדיבור. |
-| **[הגדרה אוטומטית של VAD](#configure-automatic-vad)** | נתמך. מגדירים פרמטרים כמו `start_of_speech_sensitivity`, `end_of_speech_sensitivity`, `prefix_padding_ms` ו-`silence_duration_ms`. | נתמך. מגדירים פרמטרים כמו `start_of_speech_sensitivity`, `end_of_speech_sensitivity`, `prefix_padding_ms` ו-`silence_duration_ms`. |
-| **[קריאות אסינכרוניות לפונקציות](https://ai.google.dev/gemini-api/docs/live-tools?hl=he#async-function-calling)** (`behavior: NON_BLOCKING`) | לא נתמך. הפעלת פונקציות היא רציפה בלבד. המודל לא יתחיל להגיב עד שתשלחו את התשובה של הכלי. | נתמך. כדי שהמודל ימשיך באינטראקציה בזמן שהפונקציה פועלת, צריך להגדיר את `behavior` לערך `NON_BLOCKING` בהצהרת הפונקציה. אפשר לשלוט באופן שבו המודל מטפל בתשובות באמצעות הפרמטר `scheduling` (`INTERRUPT`,‏ `WHEN_IDLE` או `SILENT`). |
-| **[אודיו יזום](#proactive-audio)** | לא נתמך | נתמך. כשההגדרה הזו מופעלת, המודל יכול להחליט באופן יזום לא להגיב אם תוכן הקלט לא רלוונטי. מגדירים את `proactive_audio` ל-`true` בתצורה `proactivity` (נדרש `v1alpha`). |
-| **[שיחה מותאמת-רגש](#affective-dialog)** | לא נתמך | נתמך. סגנון התשובה של המודל מותאם לסגנון הביטוי ולטון של הקלט. מגדירים את `enable_affective_dialog` ל-`true` בהגדרות הסשן (נדרש `v1alpha`). |
+| **[التفكير](#native-audio-output-thinking)** | تستخدم `thinkingLevel` للتحكّم في عمق التفكير من خلال إعدادات مثل `minimal` و`low` و`medium` و`high`. القيمة التلقائية هي `minimal` لتحسين وقت الاستجابة إلى أدنى حدّ. اطّلِع على [مستويات التفكير والميزانيات](https://ai.google.dev/gemini-api/docs/thinking?hl=ar#levels-budgets). | يتم استخدام `thinkingBudget` لضبط عدد الرموز المميزة للتفكير. تكون ميزة "التفكير الديناميكي" مفعَّلة تلقائيًا. اضبط `thinkingBudget` على `0` لإيقافها. اطّلِع على [مستويات التفكير والميزانيات](https://ai.google.dev/gemini-api/docs/thinking?hl=ar#levels-budgets). |
+| **[تلقّي الردّ](https://ai.google.dev/api/live?hl=ar#bidigeneratecontentservercontent)** | يمكن أن يحتوي حدث خادم واحد على أجزاء متعدّدة من المحتوى في الوقت نفسه (على سبيل المثال، `inlineData` والنص). احرص على أن يعالج الرمز البرمجي جميع الأجزاء في كل حدث لتجنُّب فقدان المحتوى. | يحتوي كل حدث على الخادم على جزء واحد فقط من المحتوى. يتم تسليم الأجزاء في أحداث منفصلة. |
+| **[محتوى العميل](#incremental-updates)** | لا تتوفّر `send_client_content` إلا لإنشاء سجلّ سياق أولي (يتطلّب ضبط `initial_history_in_client_content` في إعدادات الجلسة). لإرسال تحديثات نصية أثناء المحادثة، استخدِم `send_realtime_input` بدلاً من ذلك. | يتوفّر `send_client_content` طوال المحادثة لإرسال تحديثات المحتوى التدريجية وتحديد السياق. |
+| **[تفعيل التغطية](https://ai.google.dev/api/live?hl=ar#turncoverage)** | القيمة التلقائية هي `TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO`. يتضمّن دور النموذج النشاط الصوتي الذي تم رصده وجميع لقطات الفيديو. | القيمة التلقائية هي `TURN_INCLUDES_ONLY_ACTIVITY`. يتضمّن ردّ النموذج النشاط الذي تم رصده فقط. |
+| **[التعرّف المخصّص على النشاط الصوتي](#disable-automatic-vad)** (`activity_start`/`activity_end`) | متاح أوقِف ميزة "رصد النشاط الصوتي" التلقائية وأرسِل الرسالتَين `activityStart` و`activityEnd` يدويًا للتحكّم في حدود الدور. | متاح أوقِف ميزة "رصد النشاط الصوتي" التلقائية وأرسِل الرسالتَين `activityStart` و`activityEnd` يدويًا للتحكّم في حدود الدور. |
+| **[إعدادات VAD التلقائية](#configure-automatic-vad)** | متاح اضبط المَعلمات، مثل `start_of_speech_sensitivity` و`end_of_speech_sensitivity` و`prefix_padding_ms` و`silence_duration_ms`. | متاح اضبط المَعلمات، مثل `start_of_speech_sensitivity` و`end_of_speech_sensitivity` و`prefix_padding_ms` و`silence_duration_ms`. |
+| **[استدعاء الدوال غير المتزامن](https://ai.google.dev/gemini-api/docs/live-tools?hl=ar#async-function-calling)** (`behavior: NON_BLOCKING`) | غير متاح لا يمكن استدعاء الدوال إلا بشكل تسلسلي. لن يبدأ النموذج في الردّ إلى أن ترسل ردّ الأداة. | متاح اضبط قيمة `behavior` على `NON_BLOCKING` في تعريف الدالة للسماح للنموذج بمواصلة التفاعل أثناء تشغيل الدالة. يمكنك التحكّم في طريقة تعامل النموذج مع الردود باستخدام المَعلمة `scheduling` (`INTERRUPT` أو `WHEN_IDLE` أو `SILENT`). |
+| **[التحكّم الاستباقي بالصوت](#proactive-audio)** | غير متاح | متاح عند تفعيل هذه الميزة، يمكن للنموذج أن يقرّر بشكل استباقي عدم الردّ إذا كان المحتوى المُدخَل غير ذي صلة. اضبط قيمة `proactive_audio` على `true` في إعدادات `proactivity` (يتطلّب ذلك `v1alpha`). |
+| **[الحوار العاطفي](#affective-dialog)** | غير متاح | متاح يعدّل النموذج أسلوب الردّ ليتناسب مع أسلوب التعبير والنبرة في الإدخال. اضبط قيمة `enable_affective_dialog` على `true` في إعدادات الجلسة (يتطلّب ذلك `v1alpha`). |
 
-כדי לעבור מ-Gemini 2.5 Flash Live ל-Gemini 3.1 Flash Live, אפשר לעיין ב[מדריך להעברת נתונים](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=he#migrating).
+للانتقال من Gemini 2.5 Flash Live إلى Gemini 3.1 Flash Live، يُرجى الاطّلاع على [دليل نقل البيانات](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=ar#migrating).
 
-## יצירת חיבור
+## إنشاء اتصال
 
-בדוגמה הבאה מוצג אופן היצירה של חיבור באמצעות מפתח API:
+يوضّح المثال التالي كيفية إنشاء عملية ربط باستخدام مفتاح واجهة برمجة التطبيقات:
 
 ### Python
 
@@ -108,13 +110,13 @@ async function main() {
 main();
 ```
 
-## אופני אינטראקציה
+## طُرق التفاعل
 
-בקטעים הבאים מופיעות דוגמאות והסבר על ההקשר של אמצעי הקלט והפלט השונים שזמינים ב-Live API.
+تقدّم الأقسام التالية أمثلة وسياقًا داعمًا لمختلف أساليب الإدخال والإخراج المتاحة في Live API.
 
-### האודיו בתהליכי שליחה…
+### إرسال الصوت
 
-צריך לשלוח את האודיו כנתוני PCM גולמיים (אודיו PCM גולמי של 16 ביט, 16kHz, little-endian).
+يجب إرسال الصوت كبيانات PCM أولية (صوت PCM أولي 16 بت، 16 كيلوهرتز، ترتيب البايتات الصغير).
 
 ### Python
 
@@ -140,14 +142,13 @@ session.sendRealtimeInput({
 });
 ```
 
-### פורמטים של אודיו
+### تنسيقات الصوت
 
-נתוני האודיו ב-Live API הם תמיד גולמיים, בפורמט little-endian,
-PCM של 16 ביט. תמיד נעשה שימוש בתדירות דגימה של 24kHz בפלט האודיו. השמע שמוזן הוא בדרך כלל 16kHz, אבל Live API ידגום מחדש אם צריך, כך שאפשר לשלוח כל תדירות דגימה. כדי להעביר את תדירות הדגימה של אודיו מהקלט, צריך להגדיר את סוג ה-MIME של כל [Blob](https://ai.google.dev/api/caching?hl=he#Blob) שמכיל אודיו לערך כמו `audio/pcm;rate=16000`.
+تكون البيانات الصوتية في Live API دائمًا بتنسيق PCM الأولي ذي الترتيب البايتي الصغير، وبدقة 16 بت. يستخدم مصدر إخراج الصوت دائمًا معدّل بيانات يبلغ 24 كيلوهرتز. يكون معدّل البيانات في الملف الصوتي 16 كيلو هرتز بشكل تلقائي، ولكن ستعيد Live API أخذ عينات إذا لزم الأمر، ما يتيح إرسال أي معدّل بيانات في الملف الصوتي. لتحديد معدّل أخذ العينات من الصوت المُدخَل، اضبط نوع MIME لكل [Blob](https://ai.google.dev/api/caching?hl=ar#Blob) يحتوي على صوت على قيمة مثل `audio/pcm;rate=16000`.
 
-### קבלת אודיו
+### استلام الصوت
 
-התשובות הקוליות של המודל מתקבלות כמקטעי נתונים.
+يتم تلقّي الردود الصوتية من النموذج على شكل أجزاء من البيانات.
 
 ### Python
 
@@ -175,9 +176,9 @@ if (content?.modelTurn?.parts) {
 }
 ```
 
-### נשלחת הודעת טקסט
+### جارٍ إرسال الرسالة النصية
 
-אפשר לשלוח טקסט באמצעות `send_realtime_input` (Python) או `sendRealtimeInput` (JavaScript).
+يمكن إرسال النص باستخدام `send_realtime_input` (Python) أو `sendRealtimeInput` (JavaScript).
 
 ### Python
 
@@ -193,9 +194,9 @@ session.sendRealtimeInput({
 });
 ```
 
-### שליחת הסרטון מתבצעת
+### إرسال الفيديو
 
-פריימים של סרטונים נשלחים כתמונות נפרדות (למשל, JPEG או PNG) בקצב פריימים ספציפי (עד פריים אחד לשנייה).
+يتم إرسال إطارات الفيديو كصور فردية (مثل JPEG أو PNG) بعدد اللقطات في الثانية محدّد (إطار واحد في الثانية كحد أقصى).
 
 ### Python
 
@@ -221,9 +222,9 @@ session.sendRealtimeInput({
 });
 ```
 
-#### עדכונים מצטברים של תוכן
+#### تعديلات المحتوى التدريجية
 
-אפשר להשתמש בעדכונים מצטברים כדי לשלוח קלט טקסט, ליצור הקשר של סשן או לשחזר את ההקשר של סשן. בהקשרים קצרים אפשר לשלוח אינטראקציות שלב אחר שלב כדי לייצג את רצף האירועים המדויק:
+استخدِم التحديثات التزايدية لإرسال النص المُدخَل أو إنشاء سياق الجلسة أو استعادة سياق الجلسة. بالنسبة إلى السياقات القصيرة، يمكنك إرسال تفاعلات اتّجاهات مفصّلة لتمثيل التسلسل الدقيق للأحداث:
 
 ### Python
 
@@ -255,14 +256,14 @@ inputTurns = [{ "role": "user", "parts": [{ "text": "What is the capital of Germ
 session.sendClientContent({ turns: inputTurns, turnComplete: true })
 ```
 
-בהקשרים ארוכים יותר, מומלץ לספק סיכום של ההודעה כדי לפנות מקום בחלון ההקשר לאינטראקציות הבאות. במאמר בנושא [המשכת סשן](https://ai.google.dev/gemini-api/docs/live-session?hl=he#session-resumption) מוסבר על שיטה נוספת לטעינת הקשר של הסשן.
+بالنسبة إلى السياقات الأطول، ننصحك بتقديم ملخّص لرسالة واحدة لإتاحة مساحة أكبر في قدرة الاستيعاب للتفاعلات اللاحقة. راجِع [استئناف الجلسة](https://ai.google.dev/gemini-api/docs/live-session?hl=ar#session-resumption) للتعرّف على طريقة أخرى لتحميل سياق الجلسة.
 
-### תמלולי אודיו
+### النصوص المُحوَّلة من مقاطع صوتية
 
-בנוסף לתשובה של המודל, אפשר גם לקבל תמלילים של פלט האודיו ושל קלט האודיו.
+بالإضافة إلى ردّ النموذج، يمكنك أيضًا تلقّي نصوص لكل من مصدر إخراج الصوت والمدخل الصوتي.
 
-כדי להפעיל תמלול של פלט האודיו של המודל, שולחים את המחרוזת
-`output_audio_transcription` בהגדרות. שפת התמלול נקבעת לפי התשובה של המודל.
+لتفعيل تحويل الصوت الذي يخرجه النموذج إلى نص، أرسِل
+`output_audio_transcription` في إعدادات الضبط. يتم استنتاج لغة التسجيل الذي تريد تحويله إلى نص من ردّ النموذج.
 
 ### Python
 
@@ -380,8 +381,8 @@ async function main() {
 main();
 ```
 
-כדי להפעיל תמלול של קלט האודיו של המודל, שולחים את הפקודה
-`input_audio_transcription` בהגדרות.
+لتفعيل تحويل الصوت إلى نص، أرسِل
+`input_audio_transcription` في إعدادات الضبط.
 
 ### Python
 
@@ -526,11 +527,11 @@ async function main() {
 main();
 ```
 
-### שינוי הקול והשפה
+### تغيير الصوت واللغة
 
-מודלים של [פלט אודיו מקורי](#native-audio-output) תומכים בכל הקולות שזמינים במודלים של [המרת טקסט לדיבור (TTS)](https://ai.google.dev/gemini-api/docs/speech-generation?hl=he#voices). אפשר להאזין לכל הקולות ב-[AI Studio](https://aistudio.google.com/app/live?hl=he).
+تتيح نماذج [مصدر إخراج الصوت الأصلي](#native-audio-output) استخدام أي من الأصوات المتاحة لنماذج [تحويل النص إلى كلام (TTS)](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ar#voices). يمكنك الاستماع إلى جميع الأصوات في [AI Studio](https://aistudio.google.com/app/live?hl=ar).
 
-כדי לציין קול, מגדירים את שם הקול באובייקט `speechConfig` כחלק מהגדרת הסשן:
+لتحديد صوت، اضبط اسم الصوت ضمن الكائن `speechConfig` كجزء من إعدادات الجلسة:
 
 ### Python
 
@@ -552,16 +553,17 @@ const config = {
 };
 ```
 
-‫Live API תומך ב[כמה שפות](#supported-languages).
-מודלים של [פלט אודיו בשפה המקורית](#native-audio-output) בוחרים באופן אוטומטי את השפה המתאימה ולא תומכים בהגדרה מפורשת של קוד השפה.
+تتيح Live API [لغات متعددة](#supported-languages).
+تختار نماذج [مصدر إخراج الصوت الأصلي](#native-audio-output) اللغة المناسبة تلقائيًا، ولا تتيح ضبط رمز اللغة بشكل صريح.
 
-## יכולות אודיו מובנות
+## إمكانات الصوت المضمَّنة
 
-המודלים הכי חדשים שלנו כוללים [פלט אודיו מקורי](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=he), שמספק דיבור טבעי וריאליסטי ומשפר את הביצועים בריבוי שפות.
+تتضمّن أحدث نماذجنا ميزة [مصدر إخراج الصوت الأصلي](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=ar)، التي توفّر كلامًا طبيعيًا وواقعيًا وأداءً محسّنًا بلغات متعددة.
 
-### העמקה
+### جارٍ التفكير
 
-מודלים של Gemini 3.1 משתמשים ב-`thinkingLevel` כדי לשלוט בעומק החשיבה, עם הגדרות כמו `minimal`,‏ `low`,‏ `medium` ו-`high`. ברירת המחדל היא `minimal` כדי לבצע אופטימיזציה לזמן האחזור הנמוך ביותר. במקום זאת, במודלים של Gemini 2.5 נעשה שימוש ב-`thinkingBudget` כדי להגדיר את מספר טוקני החשיבה. [מידע נוסף על רמות לעומת תקציבים](https://ai.google.dev/gemini-api/docs/thinking?hl=he#levels-budgets)
+تستخدم نماذج Gemini 3.1 `thinkingLevel` للتحكّم في عمق التفكير، مع إعدادات مثل `minimal` و`low` و`medium` و`high`. القيمة التلقائية هي `minimal` لتحسين وقت الاستجابة إلى أدنى حدّ. تستخدم نماذج Gemini 2.5
+`thinkingBudget` لتحديد عدد الرموز المميزة الخاصة بالتفكير بدلاً من ذلك. لمزيد من التفاصيل حول المستويات والميزانيات، يُرجى الاطّلاع على [مستويات التفكير والميزانيات](https://ai.google.dev/gemini-api/docs/thinking?hl=ar#levels-budgets).
 
 ### Python
 
@@ -606,7 +608,9 @@ async function main() {
 main();
 ```
 
-בנוסף, אפשר להפעיל סיכומי מחשבות על ידי הגדרת `includeThoughts` לערך `true` בהגדרות. מידע נוסף זמין במאמר בנושא [סיכומי מחשבות](https://ai.google.dev/gemini-api/docs/thinking?hl=he#summaries).
+بالإضافة إلى ذلك، يمكنك تفعيل ملخّصات الأفكار من خلال ضبط `includeThoughts` على
+`true` في الإعدادات. يمكنك الاطّلاع على [ملخّصات الأفكار](https://ai.google.dev/gemini-api/docs/thinking?hl=ar#summaries)
+لمزيد من المعلومات:
 
 ### Python
 
@@ -635,11 +639,12 @@ const config = {
 };
 ```
 
-### שיחה מותאמת-רגש
+### حوار تفاعلي تعاطفي
 
-התכונה הזו מאפשרת ל-Gemini להתאים את סגנון התשובה שלו לניסוח ולטון של הקלט.
+تتيح هذه الميزة لـ Gemini مواءمة أسلوب ردوده مع التعبير المدخَل ونبرته.
 
-כדי להשתמש בשיחה מותאמת-רגש, צריך להגדיר את גרסת ה-API ל-`v1alpha` ולהגדיר את `enable_affective_dialog` ל-`true` בהודעת ההגדרה:
+لاستخدام الحوار التفاعلي التعاطفي، اضبط إصدار واجهة برمجة التطبيقات على `v1alpha` واضبط
+`enable_affective_dialog` على `true` في رسالة الإعداد:
 
 ### Python
 
@@ -663,11 +668,12 @@ const config = {
 };
 ```
 
-### אודיו פרואקטיבי
+### التحكّم التلقائي بالصوت
 
-כשהתכונה הזו מופעלת, Gemini יכול להחליט מראש לא להגיב אם התוכן לא רלוונטי.
+عند تفعيل هذه الميزة، يمكن لـ Gemini أن يقرّر بشكل استباقي عدم الردّ إذا كان المحتوى غير ذي صلة.
 
-כדי להשתמש בו, צריך להגדיר את גרסת ה-API ל-`v1alpha`, להגדיר את השדה `proactivity` בהודעת ההגדרה ולהגדיר את הערך `proactive_audio` ל-`true`:
+لاستخدامها، اضبط إصدار واجهة برمجة التطبيقات على `v1alpha` واضبط الحقل `proactivity`
+في رسالة الإعداد واضبط `proactive_audio` على `true`:
 
 ### Python
 
@@ -691,13 +697,13 @@ const config = {
 }
 ```
 
-## זיהוי פעילות קולית (VAD)
+## التعرّف على النشاط الصوتي (VAD)
 
-זיהוי פעילות קולית (VAD) מאפשר למודל לזהות מתי אדם מדבר. היכולת הזו חיונית ליצירת שיחות טבעיות, כי היא מאפשרת למשתמש לקטוע את המודל בכל שלב.
+تتيح ميزة "رصد النشاط الصوتي" (VAD) للنموذج التعرّف على وقت تحدث شخص ما. وهذا أمر ضروري لإنشاء محادثات طبيعية، لأنّه يتيح للمستخدم مقاطعة النموذج في أي وقت.
 
-כש-VAD מזהה הפרעה, היצירה המתמשכת מבוטלת ומושלכת. רק המידע שכבר נשלח ללקוח נשמר בהיסטוריית הסשנים. השרת שולח הודעת [`BidiGenerateContentServerContent`](https://ai.google.dev/api/live?hl=he#bidigeneratecontentservercontent) כדי לדווח על ההפרעה.
+عندما ترصد ميزة VAD انقطاعًا، يتم إلغاء عملية إنشاء الصوت الجارية والتخلص منها. يتم الاحتفاظ فقط بالمعلومات التي تم إرسالها إلى العميل في سجلّ الجلسة. بعد ذلك، يرسل الخادم رسالة [`BidiGenerateContentServerContent`](https://ai.google.dev/api/live?hl=ar#bidigeneratecontentservercontent) للإبلاغ عن الانقطاع.
 
-שרת Gemini מוחק את כל הקריאות לפונקציות שממתינות ושולח הודעת `BidiGenerateContentServerContent` עם מזהי השיחות שבוטלו.
+بعد ذلك، يتجاهل خادم Gemini أي طلبات معلّقة لاستدعاء الدوال ويرسل رسالة `BidiGenerateContentServerContent` تتضمّن أرقام تعريف الطلبات الملغاة.
 
 ### Python
 
@@ -725,11 +731,13 @@ for (const turn of turns) {
 }
 ```
 
-### זיהוי אוטומטי של פעילות קולית (VAD)
+### الكشف التلقائي عن النشاط الصوتي
 
-כברירת מחדל, המודל מבצע VAD באופן אוטומטי על זרם קלט רציף של אודיו. אפשר להגדיר את ה-VAD באמצעות השדה [`realtimeInputConfig.automaticActivityDetection`](https://ai.google.dev/api/live?hl=he#RealtimeInputConfig.AutomaticActivityDetection) של [הגדרת ההגדרה](https://ai.google.dev/api/live?hl=he#BidiGenerateContentSetup).
+بشكل تلقائي، ينفّذ النموذج ميزة &quot;التعرّف على النشاط الصوتي&quot; على دفق مستمر من إدخال الصوت. يمكن ضبط VAD باستخدام الحقل
+[`realtimeInputConfig.automaticActivityDetection`](https://ai.google.dev/api/live?hl=ar#RealtimeInputConfig.AutomaticActivityDetection)
+في [إعدادات الضبط](https://ai.google.dev/api/live?hl=ar#BidiGenerateContentSetup).
 
-אם זרם האודיו מושהה למשך יותר משנייה (לדוגמה, כי המשתמש כיבה את המיקרופון), צריך לשלוח אירוע [`audioStreamEnd`](https://ai.google.dev/api/live?hl=he#BidiGenerateContentRealtimeInput.FIELDS.bool.BidiGenerateContentRealtimeInput.audio_stream_end) כדי לנקות את האודיו שנשמר במטמון. הלקוח יכול להמשיך לשלוח נתוני אודיו בכל שלב.
+عند إيقاف بث الصوت مؤقتًا لأكثر من ثانية واحدة (على سبيل المثال، لأنّ المستخدم أوقف الميكروفون)، يجب إرسال حدث [`audioStreamEnd`](https://ai.google.dev/api/live?hl=ar#BidiGenerateContentRealtimeInput.FIELDS.bool.BidiGenerateContentRealtimeInput.audio_stream_end) لمحو أي صوت مخزّن مؤقتًا. يمكن للعميل استئناف إرسال البيانات الصوتية في أي وقت.
 
 ### Python
 
@@ -865,11 +873,11 @@ async function main() {
 main();
 ```
 
-אם משתמשים ב-`send_realtime_input`, ה-API יגיב לאודיו באופן אוטומטי על סמך VAD. המודל `send_client_content` מוסיף הודעות להקשר של המודל לפי הסדר, אבל המודל `send_realtime_input` עובר אופטימיזציה לתגובה מהירה על חשבון סדר דטרמיניסטי.
+باستخدام `send_realtime_input`، ستستجيب واجهة برمجة التطبيقات تلقائيًا للصوت استنادًا إلى VAD. في حين أنّ `send_client_content` يضيف الرسائل إلى سياق النموذج بالترتيب، تم تحسين `send_realtime_input` لتحقيق سرعة الاستجابة على حساب الترتيب الحتمي.
 
-### הגדרה אוטומטית של VAD
+### إعدادات VAD التلقائية
 
-כדי לקבל שליטה רבה יותר בפעילות של זיהוי דיבור, אפשר להגדיר את הפרמטרים הבאים. מידע נוסף זמין במאמר בנושא [הפניית API](https://ai.google.dev/api/live?hl=he#automaticactivitydetection).
+لمزيد من التحكّم في نشاط VAD، يمكنك ضبط المَعلمات التالية. يمكنك الاطّلاع على [مرجع واجهة برمجة التطبيقات](https://ai.google.dev/api/live?hl=ar#automaticactivitydetection) للحصول على مزيد من المعلومات.
 
 ### Python
 
@@ -909,9 +917,10 @@ const config = {
 };
 ```
 
-### השבתה של זיהוי דיבור אוטומטי
+### إيقاف ميزة "التعرّف التلقائي على النشاط الصوتي"
 
-לחלופין, אפשר להשבית את ה-VAD האוטומטי על ידי הגדרת הערך `realtimeInputConfig.automaticActivityDetection.disabled` ל-`true` בהודעת ההגדרה. בהגדרה הזו, הלקוח אחראי לזיהוי הדיבור של המשתמש ולשליחת ההודעות [`activityStart`](https://ai.google.dev/api/live?hl=he#BidiGenerateContentRealtimeInput.FIELDS.BidiGenerateContentRealtimeInput.ActivityStart.BidiGenerateContentRealtimeInput.activity_start) ו-[`activityEnd`](https://ai.google.dev/api/live?hl=he#BidiGenerateContentRealtimeInput.FIELDS.BidiGenerateContentRealtimeInput.ActivityEnd.BidiGenerateContentRealtimeInput.activity_end) בזמנים המתאימים. לא נשלח `audioStreamEnd` בהגדרה הזו. במקום זאת, כל הפרעה לשידור מסומנת בהודעה `activityEnd`.
+بدلاً من ذلك، يمكن إيقاف ميزة VAD التلقائية من خلال ضبط
+`realtimeInputConfig.automaticActivityDetection.disabled` على `true` في رسالة الإعداد. في هذا الإعداد، يكون العميل مسؤولاً عن رصد كلام المستخدم وإرسال رسالتَي [`activityStart`](https://ai.google.dev/api/live?hl=ar#BidiGenerateContentRealtimeInput.FIELDS.BidiGenerateContentRealtimeInput.ActivityStart.BidiGenerateContentRealtimeInput.activity_start) و[`activityEnd`](https://ai.google.dev/api/live?hl=ar#BidiGenerateContentRealtimeInput.FIELDS.BidiGenerateContentRealtimeInput.ActivityEnd.BidiGenerateContentRealtimeInput.activity_end) في الأوقات المناسبة. لا يتم إرسال `audioStreamEnd` في هذا الإعداد. بدلاً من ذلك، يتم تمييز أي انقطاع في البث برسالة `activityEnd`.
 
 ### Python
 
@@ -958,9 +967,9 @@ session.sendRealtimeInput(
 session.sendRealtimeInput({ activityEnd: {} })
 ```
 
-## ספירת הטוקנים
+## عدد الرموز المميّزة
 
-אפשר למצוא את המספר הכולל של הטוקנים שנצרכו בשדה [usageMetadata](https://ai.google.dev/api/live?hl=he#usagemetadata) של הודעת השרת שמוחזרת.
+يمكنك العثور على إجمالي عدد الرموز المميزة المستهلكة في الحقل [usageMetadata](https://ai.google.dev/api/live?hl=ar#usagemetadata) ضمن رسالة الخادم التي تم إرجاعها.
 
 ### Python
 
@@ -994,9 +1003,10 @@ for (const turn of turns) {
 }
 ```
 
-## רזולוציית המדיה
+## درجة دقة الوسائط
 
-אתם יכולים לציין את רזולוציית המדיה של מדיה הקלט על ידי הגדרת השדה `mediaResolution` כחלק מהגדרת הסשן:
+يمكنك تحديد دقة الوسائط المُدخلة من خلال ضبط الحقل
+`mediaResolution` كجزء من إعدادات الجلسة:
 
 ### Python
 
@@ -1020,99 +1030,100 @@ const config = {
 };
 ```
 
-## מגבלות
+## القيود
 
-כדאי להביא בחשבון את המגבלות הבאות של Live API כשמתכננים את הפרויקט.
+يُرجى مراعاة القيود التالية في Live API عند التخطيط لمشروعك.
 
-### אופני תגובה
+### طُرق الاستجابة
 
-מודלים מקוריים של אודיו תומכים רק ב-`AUDIO response modality. אם אתם צריכים את התשובה של המודל כטקסט, אתם יכולים להשתמש בתכונה [תמלול אודיו של הפלט](#audio-transcription).
+لا تتوافق نماذج الصوت الأصلية إلا مع وضع الاستجابة `AUDIO. إذا كنت بحاجة إلى الحصول على ردّ النموذج كنص، استخدِم ميزة [تحويل الصوت إلى نص](#audio-transcription).
 
-### אימות לקוח
+### مصادقة البرنامج
 
-כברירת מחדל, Live API מספק רק אימות משרת לשרת. אם אתם מטמיעים את אפליקציית Live API באמצעות [גישה של לקוח לשרת](https://ai.google.dev/gemini-api/docs/live?hl=he#implementation-approach), אתם צריכים להשתמש ב[טוקנים זמניים](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=he) כדי לצמצם את הסיכונים לאבטחה.
+لا توفّر Live API تلقائيًا سوى مصادقة الخادم إلى الخادم. إذا كنت تنفّذ تطبيق Live API باستخدام [أسلوب من العميل إلى الخادم](https://ai.google.dev/gemini-api/docs/live?hl=ar#implementation-approach)، عليك استخدام [رموز مميزة مؤقتة](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=ar) للحدّ من المخاطر الأمنية.
 
-### משך הביקור
+### مدة الجلسة
 
-משך הפגישות עם אודיו בלבד מוגבל ל-15 דקות, ומשך הפגישות עם אודיו ווידאו מוגבל ל-2 דקות.
-עם זאת, אתם יכולים להגדיר [טכניקות שונות לניהול סשנים](https://ai.google.dev/gemini-api/docs/live-session?hl=he) כדי להאריך את משך הסשן ללא הגבלה.
+تقتصر مدة الجلسات الصوتية فقط على 15 دقيقة،
+بينما تقتصر مدة الجلسات الصوتية والمرئية على دقيقتَين.
+ومع ذلك، يمكنك ضبط [تقنيات مختلفة لإدارة الجلسات](https://ai.google.dev/gemini-api/docs/live-session?hl=ar) من أجل تمديد مدة الجلسة إلى أجل غير مسمى.
 
-### חלון ההקשר
+### قدرة الاستيعاب
 
-לסשן יש מגבלה של חלון הקשר:
+يبلغ الحدّ الأقصى لقدرة الاستيعاب في الجلسة:
 
-- ‫128,000 טוקנים למודלים של [פלט אודיו מקורי](#native-audio-output)
-- ‫32,000 טוקנים בדגמים אחרים של Live API
+- ‫128 ألف رمز مميز لنماذج [مصدر إخراج الصوت الأصلي](#native-audio-output)
+- ‫32,000 رمز مميز لطُرز Live API الأخرى
 
-## שפות נתמכות
+## اللغات المتاحة
 
-ה-API של שידורים חיים תומך ב-97 השפות הבאות.
+تتيح Live API اللغات الـ 97 التالية.
 
-| שפה | קוד BCP-47 | שפה | קוד BCP-47 |
+| اللغة | رمز BCP-47 | اللغة | رمز BCP-47 |
 | --- | --- | --- | --- |
-| אפריקאנס | `af` | לטבית | `lv` |
-| אקאן | `ak` | ליטאית | `lt` |
-| אלבנית | `sq` | מקדונית | `mk` |
-| אמהרית | `am` | מלאית | `ms` |
-| ערבית | `ar` | מליאלאם | `ml` |
-| ארמנית | `hy` | מלטית | `mt` |
-| אסאמית | `as` | מאורית | `mi` |
-| אזרית | `az` | מראטהית | `mr` |
-| בסקית | `eu` | מונגולית | `mn` |
-| בלארוסית | `be` | נפאלית | `ne` |
-| בנגלית | `bn` | נורווגית | `no` |
-| בוסנית | `bs` | אודיה | `or` |
-| בולגרית | `bg` | אורומו | `om` |
-| בורמזית | `my` | פשטו | `ps` |
-| קטלאנית | `ca` | פרסית | `fa` |
-| סבואנו | `ceb` | פולנית | `pl` |
-| סינית | `zh` | פורטוגזית | `pt` |
-| קרואטית | `hr` | פנג'אבי | `pa` |
-| צ'כית | `cs` | קצ'ואה | `qu` |
-| דנית | `da` | רומנית | `ro` |
-| הולנדית | `nl` | רומאנש | `rm` |
-| אנגלית | `en` | רוסית | `ru` |
-| אסטונית | `et` | סרבית | `sr` |
-| פארואזית | `fo` | סינדהית | `sd` |
-| פיליפינית | `fil` | סינהאלה | `si` |
-| פינית | `fi` | סלובקית | `sk` |
-| צרפתית | `fr` | סלובנית | `sl` |
-| גליציאנית | `gl` | סומלית | `so` |
-| גאורגית | `ka` | ססוטו | `st` |
-| גרמנית | `de` | ספרדית | `es` |
-| יוונית | `el` | סווהילי | `sw` |
-| גוג'ראטי | `gu` | שוודית | `sv` |
-| האוסה | `ha` | טג'יקית | `tg` |
-| עברית | `iw` | טמילית | `ta` |
-| הינדי | `hi` | טלוגו | `te` |
-| הונגרית | `hu` | תאית | `th` |
-| איסלנדית | `is` | טסוואנה | `tn` |
-| אינדונזית | `id` | טורקית | `tr` |
-| אירית | `ga` | טורקמנית | `tk` |
-| איטלקית | `it` | אוקראינית | `uk` |
-| יפנית | `ja` | אורדו | `ur` |
-| קנאדה | `kn` | אוזבקית | `uz` |
-| קזחית | `kk` | וייטנאמית | `vi` |
-| חמרית | `km` | וולשית | `cy` |
-| קינירואנדה | `rw` | פריזית מערבית | `fy` |
-| קוריאנית | `ko` | וולוף | `wo` |
-| כורדית | `ku` | יורובה | `yo` |
-| קירגיזית | `ky` | זולו | `zu` |
-| לאו | `lo` |  |  |
+| الأفريقانية | `af` | اللاتفية | `lv` |
+| الأكانية | `ak` | الليتوانية | `lt` |
+| الألبانية | `sq` | المقدونية | `mk` |
+| الأمهرية | `am` | الماليزية | `ms` |
+| العربية | `ar` | المالايالامية | `ml` |
+| الأرمينية | `hy` | المالطية | `mt` |
+| الأسامية | `as` | الماورية | `mi` |
+| الأذربيجانية | `az` | المراثية | `mr` |
+| الباسك | `eu` | المنغولية | `mn` |
+| البيلاروسية | `be` | النيبالية | `ne` |
+| البنغالية | `bn` | النرويجية | `no` |
+| البوسنية | `bs` | الأوديا | `or` |
+| البلغارية | `bg` | الأورومية | `om` |
+| البورمية | `my` | البشتو | `ps` |
+| الكتالانية | `ca` | الفارسية | `fa` |
+| السيبيوانية | `ceb` | البولندية | `pl` |
+| الصينية | `zh` | البرتغالية | `pt` |
+| الكرواتية | `hr` | البنجابية | `pa` |
+| التشيكية | `cs` | الكويتشوا | `qu` |
+| الدانماركية | `da` | الرومانية | `ro` |
+| الهولندية | `nl` | الرومانشية | `rm` |
+| الإنجليزية | `en` | الروسية | `ru` |
+| الإستونية | `et` | الصربية | `sr` |
+| الفاروية | `fo` | السندية | `sd` |
+| الفلبينية | `fil` | السنهالية | `si` |
+| الفنلندية | `fi` | السلوفاكية | `sk` |
+| الفرنسية | `fr` | السلوفينية | `sl` |
+| الغليشيانية | `gl` | الصومالية | `so` |
+| الجورجية | `ka` | السوتو الجنوبية | `st` |
+| الألمانية | `de` | الإسبانية | `es` |
+| اليونانية | `el` | السواحيلية | `sw` |
+| الغوجاراتية | `gu` | السويدية | `sv` |
+| الهوسا | `ha` | الطاجيكية | `tg` |
+| العبرية | `iw` | التاميلية | `ta` |
+| الهندية | `hi` | التيلوغوية | `te` |
+| الهنغارية | `hu` | التايلاندية | `th` |
+| الأيسلندية | `is` | التسوانية | `tn` |
+| الإندونيسية | `id` | التركية | `tr` |
+| الأيرلندية | `ga` | التركمانية | `tk` |
+| الإيطالية | `it` | الأوكرانية | `uk` |
+| اليابانية | `ja` | الأوردية | `ur` |
+| الكانادا | `kn` | الأوزبكية | `uz` |
+| الكازاخية | `kk` | الفيتنامية | `vi` |
+| الخميرية | `km` | الويلزية | `cy` |
+| الكينيارواندا | `rw` | الفريزيان | `fy` |
+| الكورية | `ko` | الولوفية | `wo` |
+| الكردية | `ku` | اليوروبا | `yo` |
+| القيرغيزية | `ky` | الزولو | `zu` |
+| لاو | `lo` |  |  |
 
-## המאמרים הבאים
+## الخطوات التالية
 
-- כדאי לקרוא את המדריכים [שימוש בכלי](https://ai.google.dev/gemini-api/docs/live-tools?hl=he) ו[ניהול סשנים](https://ai.google.dev/gemini-api/docs/live-session?hl=he) כדי לקבל מידע חשוב על שימוש יעיל ב-Live API.
-- אפשר לנסות את ממשק ה-API של Live ב-[Google AI Studio](https://aistudio.google.com/app/live?hl=he).
-- מידע נוסף על מודלים של Live API זמין במאמר [Gemini 2.5 Flash Native Audio](https://ai.google.dev/gemini-api/docs/models?hl=he#gemini-2.5-flash-native-audio) בדף Models.
-- אפשר לנסות דוגמאות נוספות ב[ספר המתכונים של Live API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=he), ב[ספר המתכונים של Live API Tools](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=he) וב[סקריפט Live API Get Started](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.py).
+- يمكنك الاطّلاع على دليلَي [استخدام الأدوات](https://ai.google.dev/gemini-api/docs/live-tools?hl=ar) و[إدارة الجلسات](https://ai.google.dev/gemini-api/docs/live-session?hl=ar) للحصول على معلومات أساسية حول استخدام Live API بفعالية.
+- جرِّب Live API في [Google AI Studio](https://aistudio.google.com/app/live?hl=ar).
+- لمزيد من المعلومات حول نماذج Live API، يُرجى الاطّلاع على [Gemini 2.5 Flash Native Audio](https://ai.google.dev/gemini-api/docs/models?hl=ar#gemini-2.5-flash-native-audio) في صفحة "النماذج".
+- يمكنك تجربة المزيد من الأمثلة في [كتاب وصفات Live API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=ar) و[كتاب وصفات أدوات Live API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=ar) و[نص برمجي للبدء باستخدام Live API](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.py).
 
-שליחת משוב
+إرسال ملاحظات
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-עדכון אחרון: 2026-04-29 (שעון UTC).
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-רוצה לתת לנו משוב?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

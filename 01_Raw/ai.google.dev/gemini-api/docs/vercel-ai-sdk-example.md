@@ -1,44 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=pt-BR
-fetched_at: 2026-05-05T19:51:43.666492+00:00
-title: "Agente de pesquisa de mercado com o Gemini e o SDK de IA da Vercel \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=id
+fetched_at: 2026-05-05T20:03:21.329067+00:00
+title: "Agen Riset Pasar dengan Gemini dan AI SDK dari Vercel \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Envie comentários
+Kirim masukan
 
-# Agente de pesquisa de mercado com o Gemini e o SDK de IA da Vercel
+# Agen Riset Pasar dengan Gemini dan AI SDK dari Vercel
 
-O [SDK de IA da Vercel](https://ai-sdk.dev) (em inglês) é uma biblioteca de código aberto avançada para
-criar aplicativos, interfaces de usuário e agentes com tecnologia de IA em TypeScript.
+[AI SDK dari Vercel](https://ai-sdk.dev) adalah library open source yang canggih untuk
+membangun aplikasi, antarmuka pengguna, dan agen yang didukung AI di TypeScript.
 
-Este guia vai orientar você na criação de um aplicativo Node.js com TypeScript
-que usa o SDK de IA para se conectar à API Gemini pelo [provedor de IA generativa do Google](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai) e realizar análises automatizadas de tendências de mercado. O aplicativo final vai:
+Panduan ini akan memandu Anda membangun aplikasi Node.js dengan TypeScript
+yang menggunakan AI SDK untuk terhubung dengan Gemini API melalui [Google Generative AI Provider](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai) dan melakukan analisis tren pasar otomatis. Aplikasi akhir akan:
 
-1. Use o Gemini com a Pesquisa Google para pesquisar as tendências atuais do mercado.
-2. Extrair dados estruturados da pesquisa para gerar gráficos.
-3. Combine a pesquisa e os gráficos em um relatório HTML profissional e salve como PDF.
+1. Menggunakan Gemini dengan Google Penelusuran untuk meneliti tren pasar saat ini.
+2. Mengekstrak data terstruktur dari riset untuk membuat diagram.
+3. Menggabungkan riset dan diagram ke dalam laporan HTML profesional dan menyimpannya sebagai PDF.
 
-## Pré-requisitos
+## Prasyarat
 
-Para concluir este guia, você vai precisar do seguinte:
+Untuk menyelesaikan panduan ini, Anda memerlukan:
 
-- Uma chave da API Gemini. Você pode criar uma sem custo financeiro no [Google AI Studio](https://aistudio.google.com/apikey?hl=pt-br).
-- [Node.js](https://nodejs.org/en/download) versão 18 ou mais recente.
-- Um gerenciador de pacotes, como `npm`, `pnpm` ou `yarn`.
+- Kunci Gemini API. Anda dapat membuatnya secara gratis di [Google AI Studio](https://aistudio.google.com/apikey?hl=id).
+- [Node.js](https://nodejs.org/en/download) versi 18 atau yang lebih baru.
+- Pengelola paket, seperti `npm`, `pnpm`, atau `yarn`.
 
-## Configurar o aplicativo
+## Menyiapkan aplikasi Anda
 
-Primeiro, crie um diretório para seu projeto e inicialize-o.
+Pertama, buat direktori baru untuk project Anda dan lakukan inisialisasi.
 
 ### npm
 
@@ -56,7 +56,7 @@ cd market-trend-app
 pnpm init
 ```
 
-### novelo
+### yarn
 
 ```
 mkdir market-trend-app
@@ -64,10 +64,9 @@ cd market-trend-app
 yarn init -y
 ```
 
-### Instalar dependências
+### Menginstal dependensi
 
-Em seguida, instale o SDK de IA, o provedor de IA generativa do Google e outras
-dependências necessárias.
+Selanjutnya, instal AI SDK, Google Generative AI Provider, dan dependensi lain yang diperlukan.
 
 ### npm
 
@@ -76,8 +75,7 @@ npm install ai @ai-sdk/google zod
 npm install -D @types/node tsx typescript && npx tsc --init
 ```
 
-Para evitar um erro do compilador TypeScript, coloque a seguinte linha em comentário no
-`tsconfig.json` gerado:
+Untuk mencegah error pengompilasi TypeScript, beri komentar pada baris berikut di `tsconfig.json` yang dihasilkan:
 
 ```
 //"verbatimModuleSyntax": true,
@@ -90,21 +88,22 @@ pnpm add ai @ai-sdk/google zod
 pnpm add -D @types/node tsx typescript
 ```
 
-### novelo
+### yarn
 
 ```
 yarn add ai @ai-sdk/google zod
 yarn add -D @types/node tsx typescript && yarn tsc --init
 ```
 
-Para evitar um erro do compilador TypeScript, coloque a seguinte linha em comentário no
-`tsconfig.json` gerado:
+Untuk mencegah error pengompilasi TypeScript, beri komentar pada baris berikut di `tsconfig.json` yang dihasilkan:
 
 ```
 //"verbatimModuleSyntax": true,
 ```
 
-Esse aplicativo também vai usar os pacotes de terceiros [Puppeteer](https://pptr.dev/) e [Chart.js](https://www.chartjs.org) para renderizar gráficos e criar um PDF:
+Aplikasi ini juga akan menggunakan paket pihak ketiga [Puppeteer](https://pptr.dev/)
+dan [Chart.js](https://www.chartjs.org) untuk merender diagram dan
+membuat PDF:
 
 ### npm
 
@@ -120,19 +119,18 @@ pnpm add puppeteer chart.js
 pnpm add -D @types/chart.js
 ```
 
-### novelo
+### yarn
 
 ```
 yarn add puppeteer chart.js
 yarn add -D @types/chart.js
 ```
 
-O pacote `puppeteer` exige a execução de um script para baixar o navegador
-Chromium. O gerenciador de pacotes pode pedir aprovação. Portanto, aprove o script quando solicitado.
+Paket `puppeteer` mengharuskan Anda menjalankan skrip untuk mendownload browser Chromium. Pengelola paket Anda mungkin akan meminta persetujuan, jadi pastikan Anda menyetujui skrip saat diminta.
 
-### Configurar a chave de API
+### Mengonfigurasi kunci API Anda
 
-Defina a variável de ambiente `GOOGLE_GENERATIVE_AI_API_KEY` com sua chave de API Gemini. O provedor de IA generativa do Google procura automaticamente sua chave de API nessa variável de ambiente.
+Tetapkan variabel lingkungan `GOOGLE_GENERATIVE_AI_API_KEY` dengan kunci Gemini API Anda. Google Generative AI Provider akan otomatis mencari kunci API Anda di variabel lingkungan ini.
 
 ### MacOS/Linux
 
@@ -146,14 +144,11 @@ export GOOGLE_GENERATIVE_AI_API_KEY="YOUR_API_KEY_HERE"
 setx GOOGLE_GENERATIVE_AI_API_KEY "YOUR_API_KEY_HERE"
 ```
 
-## Criar o aplicativo
+## Membuat aplikasi Anda
 
-Agora, vamos criar o arquivo principal do nosso aplicativo. Crie um arquivo chamado
-`main.ts` no diretório do projeto. Você vai criar a lógica neste arquivo
-etapa por etapa.
+Sekarang, mari kita buat file utama untuk aplikasi kita. Buat file baru bernama `main.ts` di direktori project Anda. Anda akan membangun logika dalam file ini langkah demi langkah.
 
-Para um teste rápido e garantir que tudo esteja configurado corretamente, adicione o seguinte
-código a `main.ts`. Este exemplo básico usa `generateText` para receber uma resposta simples do Gemini.
+Untuk pengujian cepat guna memastikan semuanya disiapkan dengan benar, tambahkan kode berikut ke `main.ts`. Contoh dasar ini menggunakan `generateText` untuk mendapatkan respons sederhana dari Gemini.
 
 ```
 import { google } from "@ai-sdk/google";
@@ -171,8 +166,7 @@ async function main() {
 main().catch(console.error);
 ```
 
-Antes de adicionar mais complexidade, execute este script para verificar se o ambiente
-está configurado corretamente. Execute o comando a seguir no terminal.
+Sebelum menambahkan kompleksitas lainnya, jalankan skrip ini untuk memverifikasi bahwa lingkungan Anda dikonfigurasi dengan benar. Jalankan perintah berikut di terminal.
 
 ### npm
 
@@ -186,19 +180,20 @@ npx tsc && node main.js
 pnpm tsx main.ts
 ```
 
-### novelo
+### yarn
 
 ```
 yarn tsc && node main.js
 ```
 
-Se tudo estiver configurado corretamente, a resposta do Gemini vai aparecer no console.
+Jika semuanya disiapkan dengan benar, Anda akan melihat respons Gemini dicetak ke konsol.
 
-## Fazer pesquisas de mercado com a Pesquisa Google
+## Melakukan riset pasar dengan Google Penelusuran
 
-Para receber informações atualizadas, ative a ferramenta [Pesquisa Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br) no Gemini. Quando essa ferramenta está ativa, o modelo pode pesquisar na Web para responder ao comando e retorna as fontes usadas.
+Untuk mendapatkan informasi terbaru, Anda dapat mengaktifkan alat
+[Google Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id) untuk Gemini. Jika alat ini aktif, model dapat menelusuri web untuk menjawab perintah dan akan menampilkan sumber yang digunakannya.
 
-Substitua o conteúdo de `main.ts` pelo código a seguir para realizar a primeira etapa da nossa análise.
+Ganti konten `main.ts` dengan kode berikut untuk melakukan langkah pertama analisis kita.
 
 ```
 import { google } from "@ai-sdk/google";
@@ -224,14 +219,13 @@ async function main() {
 main().catch(console.error);
 ```
 
-## Extrair dados do gráfico
+## Mengekstrak data diagram
 
-Em seguida, vamos processar o texto da pesquisa para extrair dados estruturados adequados para gráficos. Use a função `generateObject` do SDK de IA com um esquema `zod`
-para definir a estrutura de dados exata.
+Selanjutnya, mari kita proses teks riset untuk mengekstrak data terstruktur yang sesuai untuk diagram. Gunakan fungsi `generateObject` AI SDK bersama dengan skema `zod` untuk menentukan struktur data yang tepat.
 
-Crie também uma função auxiliar para converter esses dados estruturados em uma configuração que o `Chart.js` possa entender.
+Buat juga fungsi helper untuk mengonversi data terstruktur ini menjadi konfigurasi yang dapat dipahami `Chart.js`.
 
-Adicione o seguinte código a `main.ts`: Observe as novas importações e a adição da "Etapa 2".
+Tambahkan kode berikut ke `main.ts`. Perhatikan impor baru dan "Langkah 2" yang ditambahkan.
 
 ```
 import { google } from "@ai-sdk/google";
@@ -313,13 +307,13 @@ ${marketTrends}
 main().catch(console.error);
 ```
 
-## Gerar o relatório final
+## Membuat laporan akhir
 
-Na etapa final, instrua o Gemini a agir como um especialista em redação de relatórios.
-Forneça a pesquisa de mercado, as configurações de gráfico e um conjunto claro de instruções para criar um relatório em HTML. Em seguida, use o
-[Puppeteer](https://pptr.dev/) para renderizar esse HTML e salvá-lo como um PDF.
+Pada langkah terakhir, instruksikan Gemini untuk bertindak sebagai penulis laporan ahli.
+Berikan riset pasar, konfigurasi diagram, dan serangkaian petunjuk yang jelas untuk membangun laporan HTML. Kemudian, gunakan
+[Puppeteer](https://pptr.dev/) untuk merender HTML ini dan menyimpannya sebagai PDF.
 
-Adicione a importação final de `puppeteer` e "Etapa 3" ao arquivo `main.ts`.
+Tambahkan impor `puppeteer` akhir dan "Langkah 3" ke file `main.ts` Anda.
 
 ```
 // ... (imports from previous step)
@@ -380,10 +374,9 @@ async function main() {
 main().catch(console.error);
 ```
 
-## Execute o aplicativo
+## Menjalankan aplikasi Anda
 
-Agora você já pode executar o aplicativo. Execute o seguinte comando no
-terminal:
+Anda kini siap menjalankan aplikasi. Jalankan perintah berikut di terminal:
 
 ### npm
 
@@ -397,34 +390,33 @@ npx tsc && node main.js
 pnpm tsx main.ts
 ```
 
-### novelo
+### yarn
 
 ```
 yarn tsc && node main.js
 ```
 
-Você verá o registro no terminal à medida que o script executa cada etapa.
-Quando concluído, um arquivo `report.pdf` com sua análise de mercado será criado no diretório do projeto.
+Anda akan melihat logging di terminal saat skrip menjalankan setiap langkah.
+Setelah selesai, file `report.pdf` yang berisi analisis pasar Anda akan dibuat di direktori project Anda.
 
-Confira abaixo as duas primeiras páginas de um exemplo de relatório em PDF:
+Di bawah ini, Anda akan melihat dua halaman pertama dari contoh laporan PDF:
 
-![Relatório de análise de mercado](https://ai.google.dev/static/gemini-api/docs/images/market-research-pdf.jpg?hl=pt-br)
+![Laporan analisis pasar](https://ai.google.dev/static/gemini-api/docs/images/market-research-pdf.jpg?hl=id)
 
-## Outros recursos
+## Aset lainnya
 
-Para mais informações sobre como criar com o Gemini e o SDK de IA,
-confira estes recursos:
+Untuk mengetahui informasi selengkapnya tentang cara membangun dengan Gemini dan AI SDK, pelajari referensi berikut:
 
-- [Documentos do SDK de IA](https://ai-sdk.dev/docs)
-- [Documentação da IA generativa do Google do SDK de IA](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai)
-- [Livro de receitas do SDK de IA: comece a usar o Gemini](https://ai-sdk.dev/cookbook/guides/gemini)
+- [Dokumen AI SDK](https://ai-sdk.dev/docs)
+- [Dokumen AI SDK Google Generative AI](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai)
+- [Cookbook AI SDK: Memulai Gemini](https://ai-sdk.dev/cookbook/guides/gemini)
 
-Envie comentários
+Kirim masukan
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Última atualização 2026-04-29 UTC.
+Terakhir diperbarui pada 2026-04-29 UTC.
 
-Quer enviar seu feedback?
+Ada masukan untuk kami?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]

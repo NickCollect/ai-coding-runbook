@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/coding-agents?hl=id
-fetched_at: 2026-05-05T19:42:38.470462+00:00
+fetched_at: 2026-05-05T20:07:42.356321+00:00
 title: "Menyiapkan asisten coding Anda dengan Gemini MCP dan Keterampilan \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

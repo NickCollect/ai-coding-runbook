@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate?hl=zh-TW
-fetched_at: 2026-05-05T19:42:58.135795+00:00
-title: "\u9077\u79fb\u81f3 Google GenAI SDK \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate?hl=vi
+fetched_at: 2026-05-05T20:09:01.555113+00:00
+title: "Chuy\u1ec3n sang Google GenAI SDK \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-提供意見
+Gửi ý kiến phản hồi
 
-# 遷移至 Google GenAI SDK
+# Chuyển sang Google GenAI SDK
 
-自 2024 年底發布 Gemini 2.0 起，我們推出了一組名為 [Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-tw) 的新程式庫。透過[更新的用戶端架構](https://ai.google.dev/gemini-api/docs/migrate?hl=zh-tw#client)，提供更優質的開發人員體驗，並[簡化開發人員和企業工作流程之間的轉換](https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=zh-tw)。
+Kể từ bản phát hành Gemini 2.0 vào cuối năm 2024, chúng tôi đã giới thiệu một bộ thư viện mới có tên là [Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=vi). API này mang đến trải nghiệm cải thiện cho nhà phát triển thông qua [cấu trúc ứng dụng mới](https://ai.google.dev/gemini-api/docs/migrate?hl=vi#client) và [đơn giản hoá quá trình chuyển đổi](https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=vi) giữa quy trình làm việc của nhà phát triển và doanh nghiệp.
 
-Google GenAI SDK 現已[正式發布 (GA)](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-tw#new-libraries)，支援所有平台。如果您使用[舊版程式庫](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-tw#previous-sdks)，強烈建議您遷移。
+Google GenAI SDK hiện đã được [phát hành rộng rãi (GA)](https://ai.google.dev/gemini-api/docs/libraries?hl=vi#new-libraries) trên tất cả các nền tảng được hỗ trợ. Nếu đang sử dụng một trong các [thư viện cũ](https://ai.google.dev/gemini-api/docs/libraries?hl=vi#previous-sdks) của chúng tôi, bạn nên di chuyển.
 
-本指南提供遷移前後的程式碼範例，協助您開始使用。
+Hướng dẫn này cung cấp các ví dụ về mã trước và sau khi di chuyển để giúp bạn bắt đầu.
 
-## 安裝
+## Cài đặt
 
-**變更前**
+**Trước**
 
 ### Python
 
@@ -46,7 +46,7 @@ npm install @google/generative-ai
 go get github.com/google/generative-ai-go
 ```
 
-**變更後**
+**Sau**
 
 ### Python
 
@@ -66,16 +66,16 @@ npm install @google/genai
 go get google.golang.org/genai
 ```
 
-## API 存取權
+## Quyền truy cập API
 
-舊版 SDK 會使用各種臨時方法，在幕後隱含處理 API 用戶端。因此難以管理用戶端和憑證。
-現在，您可透過中央 `Client` 物件互動。這個 `Client` 物件可做為各種 API 服務 (例如 `models`、`chats`、`files`、`tunings`) 的單一進入點，有助於提升一致性，並簡化不同 API 呼叫的憑證和設定管理作業。
+SDK cũ đã xử lý ngầm ứng dụng API ở chế độ nền bằng nhiều phương thức đặc biệt. Điều này gây khó khăn cho việc quản lý ứng dụng và thông tin đăng nhập.
+Giờ đây, bạn tương tác thông qua một đối tượng `Client` trung tâm. Đối tượng `Client` này đóng vai trò là một điểm truy cập duy nhất cho nhiều dịch vụ API (ví dụ: `models`, `chats`, `files`, `tunings`), giúp tăng tính nhất quán và đơn giản hoá việc quản lý thông tin đăng nhập và cấu hình trên nhiều lệnh gọi API.
 
-**之前 (API 存取權較不集中)**
+**Trước đây (Quyền truy cập API ít tập trung hơn)**
 
 ### Python
 
-舊版 SDK 未明確使用頂層用戶端物件進行大多數 API 呼叫。您會直接例項化 `GenerativeModel` 物件並與之互動。
+SDK cũ không sử dụng rõ ràng đối tượng ứng dụng cấp cao nhất cho hầu hết các lệnh gọi API. Bạn sẽ trực tiếp khởi tạo và tương tác với các đối tượng `GenerativeModel`.
 
 ```
 import google.generativeai as genai
@@ -88,7 +88,7 @@ chat = model.start_chat(...)
 
 ### JavaScript
 
-`GoogleGenerativeAI` 是模型和即時通訊的中心點，但檔案和快取管理等其他功能通常需要匯入及例項化完全獨立的用戶端類別。
+Mặc dù `GoogleGenerativeAI` là điểm trung tâm cho các mô hình và cuộc trò chuyện, nhưng các chức năng khác như quản lý tệp và bộ nhớ đệm thường yêu cầu nhập và khởi tạo các lớp ứng dụng hoàn toàn riêng biệt.
 
 ```
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -110,7 +110,7 @@ const cache = await cacheManager.create(...);
 
 ### Go
 
-`genai.NewClient` 函式建立了用戶端，但生成模型作業通常是在從這個用戶端取得的個別 `GenerativeModel` 執行個體上呼叫。其他服務可能透過不同的套件或模式存取。
+Hàm `genai.NewClient` đã tạo một ứng dụng khách, nhưng các thao tác của mô hình tạo sinh thường được gọi trên một thực thể `GenerativeModel` riêng biệt lấy từ ứng dụng khách này. Các dịch vụ khác có thể đã được truy cập thông qua các gói hoặc mẫu riêng biệt.
 
 ```
 import (
@@ -131,7 +131,7 @@ cs := model.StartChat()
 uploadedFile, err := fileClient.UploadFile(...)
 ```
 
-**之後 (集中式用戶端物件)**
+**Sau (Đối tượng khách hàng tập trung)**
 
 ### Python
 
@@ -178,15 +178,15 @@ uploadedFile, err := client.Files.Upload(...)
 tuningJob, err := client.Tunings.Tune(...)
 ```
 
-## 驗證
+## Xác thực
 
-新舊程式庫都使用 API 金鑰進行驗證。您可以在 Google AI Studio [建立](https://aistudio.google.com/app/apikey?hl=zh-tw) API 金鑰。
+Cả thư viện cũ và thư viện mới đều xác thực bằng khoá API. Bạn có thể [tạo](https://aistudio.google.com/app/apikey?hl=vi) khoá API trong Google AI Studio.
 
-**變更前**
+**Trước**
 
 ### Python
 
-舊版 SDK 會隱含處理 API 用戶端物件。
+SDK cũ xử lý đối tượng ứng dụng API một cách ngầm ẩn.
 
 ```
 import google.generativeai as genai
@@ -204,7 +204,7 @@ const genAI = new GoogleGenerativeAI("GEMINI_API_KEY");
 
 ### Go
 
-匯入 Google 程式庫：
+Nhập các thư viện của Google:
 
 ```
 import (
@@ -213,17 +213,18 @@ import (
 )
 ```
 
-建立用戶端：
+Tạo ứng dụng khách:
 
 ```
 client, err := genai.NewClient(ctx, option.WithAPIKey("GEMINI_API_KEY"))
 ```
 
-**變更後**
+**Sau**
 
 ### Python
 
-使用 Google GenAI SDK 時，您必須先建立 API 用戶端，才能呼叫 API。如果您未將 API 金鑰傳遞至用戶端，新的 SDK 會從 `GEMINI_API_KEY` 環境變數中擷取 API 金鑰。
+Với Google GenAI SDK, trước tiên, bạn sẽ tạo một ứng dụng API dùng để gọi API.
+SDK mới sẽ lấy khoá API của bạn từ các biến môi trường `GEMINI_API_KEY`, nếu bạn không truyền khoá API cho ứng dụng.
 
 ```
 export GEMINI_API_KEY="YOUR_API_KEY"
@@ -247,13 +248,13 @@ const ai = new GoogleGenAI({apiKey: "GEMINI_API_KEY"});
 
 ### Go
 
-匯入 GenAI 程式庫：
+Nhập thư viện AI tạo sinh:
 
 ```
 import "google.golang.org/genai"
 ```
 
-建立用戶端：
+Tạo ứng dụng khách:
 
 ```
 client, err := genai.NewClient(ctx, &genai.ClientConfig{
@@ -261,15 +262,15 @@ client, err := genai.NewClient(ctx, &genai.ClientConfig{
 })
 ```
 
-## 生成內容
+## Tạo nội dung
 
-### 文字
+### Văn bản
 
-**變更前**
+**Trước**
 
 ### Python
 
-先前沒有用戶端物件，您是透過 `GenerativeModel` 物件直接存取 API。
+Trước đây, không có đối tượng ứng dụng, bạn truy cập trực tiếp vào các API thông qua các đối tượng `GenerativeModel`.
 
 ```
 import google.generativeai as genai
@@ -313,12 +314,11 @@ if err != nil {
 printResponse(resp) // utility for printing response parts
 ```
 
-**變更後**
+**Sau**
 
 ### Python
 
-透過新的 Google GenAI SDK，您可以使用 `Client` 物件存取所有 API 方法。除了少數有狀態的特殊情況 (`chat` 和
-live-api `session`)，這些都是無狀態函式。為求實用性和一致性，傳回的物件是 `pydantic` 類別。
+SDK GenAI mới của Google cung cấp quyền truy cập vào tất cả các phương thức API thông qua đối tượng `Client`. Ngoại trừ một số trường hợp đặc biệt có trạng thái (`chat` và `session` live-api), đây đều là các hàm không có trạng thái. Để có tính tiện ích và tính đồng nhất, các đối tượng được trả về là các lớp `pydantic`.
 
 ```
 from google import genai
@@ -364,9 +364,9 @@ if err != nil {
 debugPrint(result) // utility for printing result
 ```
 
-### 圖片
+### Hình ảnh
 
-**變更前**
+**Trước**
 
 ### Python
 
@@ -436,11 +436,11 @@ if err != nil {
 printResponse(resp) // utility for printing response
 ```
 
-**變更後**
+**Sau**
 
 ### Python
 
-新版 SDK 包含許多相同的便利功能。舉例來說，`PIL.Image` 物件會自動轉換。
+Nhiều tính năng tiện lợi tương tự cũng có trong SDK mới. Ví dụ: các đối tượng `PIL.Image` sẽ được tự động chuyển đổi.
 
 ```
 from google import genai
@@ -510,9 +510,9 @@ if err != nil {
 debugPrint(result) // utility for printing result
 ```
 
-### 串流
+### Phát trực tiếp
 
-**變更前**
+**Trước**
 
 ### Python
 
@@ -569,7 +569,7 @@ for {
 }
 ```
 
-**變更後**
+**Sau**
 
 ### Python
 
@@ -625,9 +625,9 @@ for result, err := range client.Models.GenerateContentStream(
 }
 ```
 
-## 設定
+## Cấu hình
 
-**變更前**
+**Trước**
 
 ### Python
 
@@ -694,12 +694,11 @@ if err != nil {
 printResponse(resp) // utility for printing response
 ```
 
-**變更後**
+**Sau**
 
 ### Python
 
-在新版 SDK 的所有方法中，必要引數都會以關鍵字引數的形式提供。所有選用輸入內容都會在 `config`
-引數中提供。設定引數可以指定為 Python 字典或 `google.genai.types` 命名空間中的 `Config` 類別。為求實用和一致性，`types` 模組中的所有定義都是 `pydantic` 類別。
+Đối với tất cả các phương thức trong SDK mới, các đối số bắt buộc được cung cấp dưới dạng đối số từ khoá. Tất cả các đầu vào không bắt buộc đều được cung cấp trong đối số `config`. Bạn có thể chỉ định các đối số cấu hình dưới dạng từ điển Python hoặc các lớp `Config` trong không gian tên `google.genai.types`. Để có tính tiện ích và tính đồng nhất, tất cả các định nghĩa trong mô-đun `types` đều là các lớp `pydantic`.
 
 ```
 from google import genai
@@ -775,11 +774,11 @@ if err != nil {
 debugPrint(result) // utility for printing response
 ```
 
-## 安全性設定
+## Chế độ cài đặt an toàn
 
-使用安全設定生成回覆：
+Tạo câu trả lời bằng chế độ cài đặt an toàn:
 
-**變更前**
+**Trước**
 
 ### Python
 
@@ -827,7 +826,7 @@ try {
 }
 ```
 
-**變更後**
+**Sau**
 
 ### Python
 
@@ -879,9 +878,9 @@ console.log("Finish reason:", response.candidates[0].finishReason);
 console.log("Safety ratings:", response.candidates[0].safetyRatings);
 ```
 
-## 非同步
+## Không đồng bộ
 
-**變更前**
+**Trước**
 
 ### Python
 
@@ -894,11 +893,11 @@ response = model.generate_content_async(
 )
 ```
 
-**變更後**
+**Sau**
 
 ### Python
 
-如要在 `asyncio` 中使用新版 SDK，請在 `client.aio` 下方分別實作每個方法 `async`。
+Để sử dụng SDK mới với `asyncio`, bạn cần triển khai riêng `async` cho từng phương thức trong `client.aio`.
 
 ```
 from google import genai
@@ -911,11 +910,11 @@ response = await client.aio.models.generate_content(
 )
 ```
 
-## 即時通訊
+## Trò chuyện
 
-開始與模型對話並傳送訊息：
+Bắt đầu trò chuyện và gửi tin nhắn cho mô hình:
 
-**變更前**
+**Trước**
 
 ### Python
 
@@ -991,7 +990,7 @@ if err != nil {
 printResponse(res) // utility for printing the response
 ```
 
-**變更後**
+**Sau**
 
 ### Python
 
@@ -1066,9 +1065,9 @@ if err != nil {
 debugPrint(result) // utility for printing result
 ```
 
-## 函式呼叫
+## Gọi hàm
 
-**變更前**
+**Trước**
 
 ### Python
 
@@ -1095,11 +1094,11 @@ response = model.generate_content("What is the weather in San Francisco?")
 function_call = response.candidates[0].parts[0].function_call
 ```
 
-**變更後**
+**Sau**
 
 ### Python
 
-在新版 SDK 中，系統預設會自動呼叫函式。在這裡停用。
+Trong SDK mới, lệnh gọi hàm tự động là chế độ mặc định. Tại đây, bạn có thể tắt tính năng này.
 
 ```
 from google import genai
@@ -1129,13 +1128,13 @@ response = client.models.generate_content(
 function_call = response.candidates[0].content.parts[0].function_call
 ```
 
-### 自動函式呼叫
+### Tự động gọi hàm
 
-**變更前**
+**Trước**
 
 ### Python
 
-舊版 SDK 僅支援在即時通訊中自動呼叫函式。在新版 SDK 中，這是 `generate_content` 的預設行為。
+SDK cũ chỉ hỗ trợ chức năng gọi tự động trong cuộc trò chuyện. Trong SDK mới, đây là hành vi mặc định trong `generate_content`.
 
 ```
 import google.generativeai as genai
@@ -1153,7 +1152,7 @@ chat = model.start_chat(
 result = chat.send_message("What is the weather in San Francisco?")
 ```
 
-**變更後**
+**Sau**
 
 ### Python
 
@@ -1174,11 +1173,11 @@ response = client.models.generate_content(
 )
 ```
 
-## 程式碼執行
+## Thực thi mã
 
-程式碼執行工具可讓模型生成及執行 Python 程式碼，並傳回結果。
+Thực thi mã là một công cụ cho phép mô hình tạo mã Python, kích hoạt mã đó và trả về kết quả.
 
-**變更前**
+**Trước**
 
 ### Python
 
@@ -1215,7 +1214,7 @@ const result = await model.generateContent(
 console.log(result.response.text());
 ```
 
-**變更後**
+**Sau**
 
 ### Python
 
@@ -1259,11 +1258,11 @@ console.log("-".repeat(80));
 console.log("\n", response.text);
 ```
 
-## 以 Google 搜尋為參考依據
+## Tìm trong phần liên kết thực tế
 
-`GoogleSearch` (Gemini>=2.0) 和 `GoogleSearchRetrieval` (Gemini < 2.0) 是由 Google 提供的工具，可讓模型擷取公開網路資料做為基準。
+`GoogleSearch` (Gemini>=2.0) và `GoogleSearchRetrieval` (Gemini < 2.0) là những công cụ cho phép mô hình truy xuất dữ liệu công khai trên web để liên kết thực tế, do Google cung cấp.
 
-**變更前**
+**Trước**
 
 ### Python
 
@@ -1277,7 +1276,7 @@ response = model.generate_content(
 )
 ```
 
-**變更後**
+**Sau**
 
 ### Python
 
@@ -1300,15 +1299,15 @@ response = client.models.generate_content(
 )
 ```
 
-## JSON 回應
+## Nội dung phản hồi JSON
 
-以 JSON 格式生成答案。
+Tạo câu trả lời ở định dạng JSON.
 
-**變更前**
+**Trước**
 
 ### Python
 
-指定 `response_schema` 並設定 `response_mime_type="application/json"` 使用者即可限制模型，按照指定結構產生 `JSON` 回應。
+Bằng cách chỉ định một `response_schema` và đặt `response_mime_type="application/json"`, người dùng có thể hạn chế mô hình tạo ra một phản hồi `JSON` theo một cấu trúc nhất định.
 
 ```
 import google.generativeai as genai
@@ -1371,11 +1370,11 @@ const result = await model.generateContent(
 console.log(result.response.text());
 ```
 
-**變更後**
+**Sau**
 
 ### Python
 
-新版 SDK 會使用 `pydantic` 類別提供結構定義 (但您可以傳遞 `genai.types.Schema` 或同等 `dict`)。SDK 會盡可能剖析傳回的 JSON，並以 `response.parsed` 傳回結果。如果您提供 `pydantic` 類別做為結構定義，SDK 會將該 `JSON` 轉換為類別例項。
+SDK mới sử dụng các lớp `pydantic` để cung cấp giản đồ (mặc dù bạn có thể truyền `genai.types.Schema` hoặc `dict` tương đương). Khi có thể, SDK sẽ phân tích cú pháp JSON được trả về và trả về kết quả trong `response.parsed`. Nếu bạn cung cấp một lớp `pydantic` làm giản đồ, SDK sẽ chuyển đổi `JSON` đó thành một thực thể của lớp.
 
 ```
 from google import genai
@@ -1432,13 +1431,13 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-## 檔案
+## Tệp
 
-### 上傳
+### Tải lên
 
-上傳檔案：
+Tải tệp lên:
 
-**變更前**
+**Trước**
 
 ### Python
 
@@ -1462,7 +1461,7 @@ response = model.generate_content([
 print(response.text)
 ```
 
-**變更後**
+**Sau**
 
 ### Python
 
@@ -1490,11 +1489,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### 列出及取得
+### Liệt kê và nhận
 
-列出上傳的檔案，並透過檔案名稱取得上傳的檔案：
+Liệt kê các tệp đã tải lên và nhận một tệp đã tải lên có tên tệp:
 
-**變更前**
+**Trước**
 
 ### Python
 
@@ -1507,7 +1506,7 @@ for file in genai.list_files():
 file = genai.get_file(name=file.name)
 ```
 
-**變更後**
+**Sau**
 
 ### Python
 
@@ -1521,11 +1520,11 @@ for file in client.files.list():
 file = client.files.get(name=file.name)
 ```
 
-### 刪除
+### Xoá
 
-刪除檔案：
+Xoá tệp:
 
-**變更前**
+**Trước**
 
 ### Python
 
@@ -1539,7 +1538,7 @@ dummy_file = genai.upload_file(path='dummy.txt')
 file = genai.delete_file(name=dummy_file.name)
 ```
 
-**變更後**
+**Sau**
 
 ### Python
 
@@ -1555,11 +1554,11 @@ dummy_file = client.files.upload(file='dummy.txt')
 response = client.files.delete(name=dummy_file.name)
 ```
 
-## 脈絡快取
+## Lưu ngữ cảnh vào bộ nhớ đệm
 
-使用者可透過脈絡快取功能將內容傳遞至模型一次、快取輸入權杖，然後在後續呼叫中參照快取的權杖，以降低成本。
+Tính năng lưu nội dung vào bộ nhớ đệm theo ngữ cảnh cho phép người dùng truyền nội dung đến mô hình một lần, lưu các mã thông báo đầu vào vào bộ nhớ đệm, sau đó tham chiếu đến các mã thông báo đã lưu vào bộ nhớ đệm trong các lệnh gọi tiếp theo để giảm chi phí.
 
-**變更前**
+**Trước**
 
 ### Python
 
@@ -1631,7 +1630,7 @@ const result = await model.generateContent(
 console.log(result.response.text());
 ```
 
-**變更後**
+**Sau**
 
 ### Python
 
@@ -1713,11 +1712,11 @@ const response = await ai.models.generateContent({
 console.log("Response text:", response.text);
 ```
 
-## 計算詞元數
+## Đếm mã thông báo
 
-計算要求中的權杖數量。
+Đếm số lượng mã thông báo trong một yêu cầu.
 
-**變更前**
+**Trước**
 
 ### Python
 
@@ -1759,7 +1758,7 @@ response = model.count_tokens(
  // { promptTokenCount: 11, candidatesTokenCount: 124, totalTokenCount: 135 }
 ```
 
-**變更後**
+**Sau**
 
 ### Python
 
@@ -1794,11 +1793,11 @@ const generateResponse = await ai.models.generateContent({
 console.log(generateResponse.usageMetadata);
 ```
 
-## 生成圖像
+## Tạo hình ảnh
 
-生成圖片：
+Tạo hình ảnh:
 
-**變更前**
+**Trước**
 
 ### Python
 
@@ -1817,7 +1816,7 @@ gen_images = imagen.generate_images(
 )
 ```
 
-**變更後**
+**Sau**
 
 ### Python
 
@@ -1842,11 +1841,11 @@ for n, image in enumerate(gen_images.generated_images):
         image.image.image_bytes)
 ```
 
-## 嵌入內容
+## Nhúng nội dung
 
-生成內容嵌入。
+Tạo vectơ nhúng nội dung.
 
-**變更前**
+**Trước**
 
 ### Python
 
@@ -1874,7 +1873,7 @@ const result = await model.embedContent("Hello world!");
 console.log(result.embedding);
 ```
 
-**變更後**
+**Sau**
 
 ### Python
 
@@ -1904,12 +1903,12 @@ const result = await ai.models.embedContent({
 console.log(result.embeddings);
 ```
 
-提供意見
+Gửi ý kiến phản hồi
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-上次更新時間：2026-04-29 (世界標準時間)。
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-想進一步說明嗎？
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-04-29 (世界標準時間)。"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

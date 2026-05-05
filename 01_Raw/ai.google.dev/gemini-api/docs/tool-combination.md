@@ -1,26 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-TW
-fetched_at: 2026-05-05T19:48:51.043477+00:00
-title: "\u7d50\u5408\u5167\u5efa\u5de5\u5177\u548c\u51fd\u5f0f\u547c\u53eb \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=pt-BR
+fetched_at: 2026-05-05T20:02:03.836758+00:00
+title: "Combinar ferramentas integradas e chamadas de fun\u00e7\u00e3o \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-提供意見
+Envie comentários
 
-# 結合內建工具和函式呼叫
+# Combinar ferramentas integradas e chamadas de função
 
-Gemini 支援在單一生成作業中，結合[內建工具](https://ai.google.dev/gemini-api/docs/tools?hl=zh-tw) (例如 `google_search`) 和[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw) (也稱為*自訂工具*)，方法是保留並公開工具呼叫的內容記錄。內建和自訂工具組合可支援複雜的代理功能工作流程，例如模型可先根據即時網路資料建立基準，再呼叫特定商業邏輯。
+O Gemini permite a combinação de [ferramentas integradas](https://ai.google.dev/gemini-api/docs/tools?hl=pt-br), como
+`google_search`, e [chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br)
+(também conhecida como *ferramentas personalizadas*) em uma única geração, preservando e expondo
+o histórico de contexto das chamadas de ferramentas. As combinações de ferramentas integradas e personalizadas permitem fluxos de trabalho complexos e com agentes em que, por exemplo, o modelo pode se basear em dados da Web em tempo real antes de chamar sua lógica de negócios específica.
 
-以下範例會透過 `google_search` 和自訂函式 `getWeather`，啟用內建和自訂工具組合：
+Confira um exemplo que ativa combinações de ferramentas integradas e personalizadas com
+`google_search` e uma função personalizada `getWeather`:
 
 ### Python
 
@@ -396,55 +400,64 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-f
 }'
 ```
 
-## 運作方式
+## Como funciona
 
-Gemini 3 模型使用*工具脈絡循環*，可啟用內建和自訂工具組合。工具內容循環機制可保留及公開內建工具的內容，並在同一通話中，從一輪對話到下一輪對話，與自訂工具共用內容。
+Os modelos do Gemini 3 usam a *circulação de contexto de ferramentas* para ativar combinações de ferramentas integradas e personalizadas. A circulação do contexto da ferramenta permite preservar e expor o contexto das ferramentas integradas e compartilhá-lo com ferramentas personalizadas na mesma chamada de turno para turno.
 
-### 啟用工具組合
+### Ativar a combinação de ferramentas
 
-- 您必須將 `include_server_side_tool_invocations` 旗標設為 `true`，才能啟用工具情境流通。
-- 加入 [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw#function-declarations)，以及要使用的內建工具，即可觸發組合行為。
-  - 如果未加入 `function_declarations`，只要設定標記，工具環境流通仍會對內建工具生效。
+- Defina a flag `include_server_side_tool_invocations` como `true` para
+  ativar a circulação de contexto da ferramenta.
+- Inclua o [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br#function-declarations) e as ferramentas integradas que você quer usar para acionar o comportamento de combinação.
+  - Se você não incluir `function_declarations`, a circulação de contexto da ferramenta
+    ainda vai agir nas ferramentas integradas incluídas, desde que a flag esteja definida.
 
-### API 會傳回零件
+### A API retorna partes
 
-在單一回應中，API 會傳回內建工具呼叫的 `toolCall` 和 `toolResponse` 部分。如果是函式 (自訂工具) 呼叫，API 會傳回 `functionCall` 呼叫部分，使用者會在下一個回合中提供 `functionResponse` 部分。
+Em uma única resposta, a API retorna as partes `toolCall` e `toolResponse` para a chamada de função integrada. Para a chamada de função (ferramenta personalizada), a API retorna a parte da chamada `functionCall`, em que o usuário fornece a parte `functionResponse` na próxima vez.
 
-- `toolCall` 和 `toolResponse`：API 會傳回這些部分，以保留在伺服器端執行的工具內容，以及這些工具的執行結果，供下一個回合使用。
-- `functionCall` 和 `functionResponse`：API 會將函式呼叫傳送給使用者填寫，使用者則會在函式回應中傳回結果 (這些部分是 Gemini API 中所有[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)的標準做法，並非工具組合功能獨有)。
-- (僅限[程式碼執行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw)工具)
-  `executableCode` 和 `codeExecutionResult`：
-  使用程式碼執行工具時，API 會傳回 `executableCode` (模型生成的程式碼，用於執行) 和 `codeExecutionResult` (可執行程式碼的結果)，而不是 `functionCall` 和 `functionResponse`。
+- `toolCall` e `toolResponse`: a API retorna essas partes para preservar o contexto de quais ferramentas são executadas no lado do servidor e o resultado da execução delas para a próxima vez.
+- `functionCall` e `functionResponse`: a API envia a chamada de função para o usuário preencher, e ele envia o resultado de volta na resposta da função. Essas partes são padrão para todas as [chamadas de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br) na API Gemini, não exclusivas do recurso de combinação de ferramentas.
+- (Somente ferramenta [Execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br))
+  `executableCode` e `codeExecutionResult`:
+  ao usar a ferramenta Execução de código, em vez de `functionCall` e
+  `functionResponse`, a API retorna `executableCode` (o código gerado
+  pelo modelo que deve ser executado) e `codeExecutionResult` (o
+  resultado do código executável).
 
-您必須在每個回合中將所有部分 (包括所含的所有[欄位](#critical-fields)) 傳回模型，以維持脈絡並啟用工具組合。
+É preciso retornar todas as partes, incluindo todos os [campos](#critical-fields) que elas contêm, ao modelo em cada interação para manter o contexto e ativar combinações de ferramentas.
 
-### 傳回零件中的重要欄位
+### Campos críticos em peças retornadas
 
-API 傳回的[特定部分](#api-returns-parts)會包含 `id`、`tool_type` 和 `thought_signature` 欄位。這些欄位對於維護工具內容至關重要 (因此對於工具組合也至關重要)，您需要在後續要求中傳回*回應中提供的所有部分*。
+Algumas [partes retornadas pela API](#api-returns-parts) incluem os campos `id`, `tool_type` e `thought_signature`. Esses campos são essenciais para manter o contexto da ferramenta (e, portanto, para combinações de ferramentas). Você precisa retornar todas as partes *conforme fornecidas na resposta* nas suas solicitações subsequentes.
 
-- `id`：將呼叫對應至回應的專屬 ID。`id` 會**針對所有函式呼叫回應設定**，無論工具脈絡循環為何。您*必須*在函式回應中提供與 API 在函式呼叫中提供的相同 `id`。內建工具會自動在工具呼叫和工具回應之間共用 `id`。
-  - 可在所有工具相關部分找到：`toolCall`、`toolResponse`、`functionCall`、`functionResponse`、`executableCode`、`codeExecutionResult`
-- `tool_type`：識別所用的特定工具；內建工具的常值或 (例如 `URL_CONTEXT`) 或函式 (例如 `getWeather`) 名稱。
-  - 位於 `toolCall` 和 `toolResponse` 部分。
-- `thought_signature`：實際加密的內容，內嵌在 **API 傳回的每個部分**。如果沒有想法簽章，就無法重建背景資訊；如果您未在每個回合中傳回所有部分的想法簽章，模型就會發生錯誤。
-  - 在*所有*部分中找到。
+- `id`: um identificador exclusivo que mapeia uma chamada para a resposta dela. `id` é **definido em
+  todas as respostas de chamada de função**, independente da circulação do contexto da ferramenta.
+  Você *precisa* fornecer o mesmo `id` na resposta da função
+  que a API fornece na chamada de função. As ferramentas integradas compartilham automaticamente o `id` entre a chamada e a resposta da ferramenta.
+  - Encontrado em todas as partes relacionadas a ferramentas: `toolCall`, `toolResponse`,
+    `functionCall`, `functionResponse`, `executableCode`, `codeExecutionResult`
+- `tool_type`: identifica a ferramenta específica que está sendo usada, seja a ferramenta literal integrada (por exemplo, `URL_CONTEXT`) ou o nome da função (por exemplo, `getWeather`).
+  - Encontrado nas partes `toolCall` e `toolResponse`.
+- `thought_signature`: o contexto criptografado real incorporado em **cada
+  parte retornada pela API**. O contexto não pode ser reconstruído sem assinaturas de pensamento. Se você não retornar as assinaturas de pensamento para todas as partes em cada turno, o modelo vai gerar um erro.
+  - Encontrado em *todas* as partes.
 
-### 工具專屬資料
+### Dados específicos da ferramenta
 
-部分內建工具會傳回使用者可見的資料引數，這些引數專屬於工具類型。
+Algumas ferramentas integradas retornam argumentos de dados visíveis para o usuário específicos do tipo de ferramenta.
 
-| 工具 | 使用者可見的工具呼叫引數 (如有) | 使用者可見的工具回應 (如有) |
+| Ferramenta | Argumentos de chamada de ferramenta visíveis para o usuário (se houver) | Resposta da ferramenta visível para o usuário (se houver) |
 | --- | --- | --- |
 | **GOOGLE\_SEARCH** | `queries` | `search_suggestions` |
 | **GOOGLE\_MAPS** | `queries` | `places` `google_maps_widget_context_token` |
-| **URL\_CONTEXT** | `urls` 要瀏覽的網址 | `urls_metadata` `retrieved_url`：瀏覽的網址 `url_retrieval_status`：瀏覽狀態 |
-| **FILE\_SEARCH** | 無 | 無 |
+| **URL\_CONTEXT** | `urls` URLs a serem pesquisados | `urls_metadata` `retrieved_url`: URLs navegados `url_retrieval_status`: status da navegação |
+| **FILE\_SEARCH** | Nenhum | Nenhum |
 
-## 工具組合要求結構範例
+## Exemplo de estrutura de solicitação de combinação de ferramentas
 
-以下要求結構顯示提示的要求結構：「美國最北端的城市是哪裡？What's the weather like there
-today?" 這項工具結合了三種工具：內建的 Gemini 工具 `google_search`
-和 `code_execution`，以及自訂函式 `get_weather`。
+A estrutura de solicitação a seguir mostra a estrutura do comando: "Qual é a cidade mais ao norte dos Estados Unidos? Como está o tempo aí hoje?". Ele combina três ferramentas: as ferramentas integradas do Gemini `google_search`
+e `code_execution`, além de uma função personalizada `get_weather`.
 
 ```
 {
@@ -513,48 +526,50 @@ today?" 這項工具結合了三種工具：內建的 Gemini 工具 `google_sear
 }
 ```
 
-## 權杖和價格
+## Tokens e preços
 
-請注意，要求中的 `toolCall` 和 `toolResponse` 部分會計入 `prompt_token_count`。由於這些中間工具步驟現在會顯示並傳回給您，因此屬於對話記錄的一部分。這只適用於*要求*，不適用於*回應*。
+Observe que as partes `toolCall` e `toolResponse` nas solicitações são contabilizadas para `prompt_token_count`. Como essas etapas intermediárias da ferramenta agora estão visíveis e são retornadas para você, elas fazem parte do histórico da conversa. Isso só acontece com *solicitações*, não com *respostas*.
 
-Google 搜尋工具不在此限。Google 搜尋已在查詢層級套用自己的定價模式，因此不會重複收取權杖費用 (請參閱「[定價](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw)」頁面)。
+A ferramenta Pesquisa Google é uma exceção a essa regra. A Pesquisa Google já aplica o próprio modelo de preços no nível da consulta, então os tokens não são cobrados duas vezes. Consulte a página [Preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br).
 
-詳情請參閱「[符記](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw)」頁面。
+Leia a página [Tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) para mais informações.
 
-## 限制
+## Limitações
 
-- 啟用 `include_server_side_tool_invocations` 旗標時，預設為 `VALIDATED` 模式 (不支援 `AUTO` 模式)
-- `google_search` 等內建工具會根據位置和目前時間資訊運作，因此如果 `system_instruction` 或 `function_declaration.description` 的位置和時間資訊有衝突，工具組合功能可能無法正常運作。
+- Usar o modo `VALIDATED` por padrão (o modo `AUTO` não é compatível) quando a flag `include_server_side_tool_invocations` está ativada
+- Ferramentas integradas, como o `google_search`, dependem de informações de localização e hora atual. Portanto, se o `system_instruction` ou o `function_declaration.description` tiver informações conflitantes de localização e hora, o recurso de combinação de ferramentas poderá não funcionar bem.
 
-## 支援的工具
+## Ferramentas compatíveis
 
-標準工具環境流通適用於伺服器端 (內建) 工具。程式碼執行也是伺服器端工具，但有自己的內建解決方案，可進行脈絡循環。電腦使用和函式呼叫是用戶端工具，也內建解決方案，可循環使用內容。
+A circulação padrão de contexto de ferramentas se aplica a ferramentas do lado do servidor (integradas).
+A execução de código também é uma ferramenta do lado do servidor, mas tem uma solução integrada própria para
+circulação de contexto. O uso de computador e a chamada de função são ferramentas do lado do cliente e também têm soluções integradas para a circulação de contexto.
 
-| 工具 | 執行端 | 情境流通支援 |
+| Ferramenta | Lado da execução | Suporte à circulação de contexto |
 | --- | --- | --- |
-| [Google 搜尋](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw) | 伺服器端 | 有權限 |
-| [Google 地圖](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-tw) | 伺服器端 | 有權限 |
-| [網址環境](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw) | 伺服器端 | 有權限 |
-| [檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw) | 伺服器端 | 有權限 |
-| [程式碼執行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw) | 伺服器端 | 支援 (內建，使用 `executableCode` 和 `codeExecutionResult` 部分) |
-| [電腦使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-tw) | 用戶端 | 支援 (內建，使用 `functionCall` 和 `functionResponse` 部分) |
-| [自訂函式](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw) | 用戶端 | 支援 (內建，使用 `functionCall` 和 `functionResponse` 部分) |
+| [Pesquisa Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br) | Servidor | Compatível |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pt-br) | Servidor | Compatível |
+| [Contexto do URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br) | Servidor | Compatível |
+| [Pesquisa de arquivos](https://ai.google.dev/gemini-api/docs/file-search?hl=pt-br) | Servidor | Compatível |
+| [Execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br) | Servidor | Compatível (integrado, usa partes `executableCode` e `codeExecutionResult`) |
+| [Uso do computador](https://ai.google.dev/gemini-api/docs/computer-use?hl=pt-br) | Lado do cliente | Compatível (integrado, usa partes `functionCall` e `functionResponse`) |
+| [Funções personalizadas](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br) | Lado do cliente | Compatível (integrado, usa partes `functionCall` e `functionResponse`) |
 
-## 後續步驟
+## A seguir
 
-- 進一步瞭解 Gemini API 中的[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)。
-- 探索支援的工具：
-  - [Google 搜尋](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)
-  - [Google 地圖](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-tw)
-  - [網址環境](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw)
-  - [檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw)
+- Saiba mais sobre a [chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br) na API Gemini.
+- Conheça as ferramentas compatíveis:
+  - [Pesquisa Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br)
+  - [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pt-br)
+  - [Contexto do URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br)
+  - [Pesquisa de arquivos](https://ai.google.dev/gemini-api/docs/file-search?hl=pt-br)
 
-提供意見
+Envie comentários
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-上次更新時間：2026-04-29 (世界標準時間)。
+Última atualização 2026-04-29 UTC.
 
-想進一步說明嗎？
+Quer enviar seu feedback?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-04-29 (世界標準時間)。"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]
