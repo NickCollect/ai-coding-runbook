@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/task-budgets
-fetched_at: 2026-05-04T16:08:27.587943+00:00
+fetched_at: 2026-05-05T19:40:45.178179+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,13 +11,13 @@ Give Claude an advisory token budget for the full agentic loop to help the model
 ---
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/Zero Data Retention (ZDR)). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 Task budgets let you tell Claude how many tokens it has for a full agentic loop, including thinking, tool calls, tool results, and output. The model sees a running countdown and uses it to prioritize work and finish gracefully as the budget is consumed.
 
 <Note>
-Task budgets are in public beta on [Claude Opus 4.7](https://platform.claude.com/docs/en/build-with-claude/Claude Opus 4.7). Set the `task-budgets-2026-03-13` beta header to opt in.
+Task budgets are in public beta on [Claude Opus 4.7](/docs/en/about-claude/models/overview). Set the `task-budgets-2026-03-13` beta header to opt in.
 </Note>
 
 ## When to use task budgets
@@ -28,7 +28,7 @@ Task budgets work best for agentic workflows where Claude makes multiple tool ca
 - You have a predictable per-task cost or latency ceiling to enforce.
 - You want the model to finish gracefully (summarize findings, report progress) as it approaches the budget rather than cutting off mid-action.
 
-Task budgets complement the [effort parameter](https://platform.claude.com/docs/en/build-with-claude/effort parameter): effort controls how thoroughly Claude reasons about each step, while task budgets cap the total work Claude can do across an agentic loop.
+Task budgets complement the [effort parameter](/docs/en/build-with-claude/effort): effort controls how thoroughly Claude reasons about each step, while task budgets cap the total work Claude can do across an agentic loop.
 
 ## Setting a task budget
 
@@ -428,7 +428,7 @@ For a hard cap on cost or latency, combine task budgets with a reasonable `max_t
 Because `task_budget` spans the full agentic loop (potentially many requests) while `max_tokens` caps each individual request, the two values are independent; one is not required to be at or below the other.
 
 <Warning>
-**A budget that is too small for the task can cause refusal-like behavior.** When Claude sees a budget that is clearly insufficient for the work being asked (for example, a 20,000-token budget for a multi-hour agentic coding task), it may decline to attempt the task at all, scope it down aggressively, or stop early with a partial result rather than start work it cannot finish. If you observe unexpected refusals or premature stops after setting a budget, raise the budget before debugging other parameters. Size budgets against your actual task-length distribution rather than a fixed default; see [Choosing a budget](https://platform.claude.com/docs/en/build-with-claude/Choosing a budget).
+**A budget that is too small for the task can cause refusal-like behavior.** When Claude sees a budget that is clearly insufficient for the work being asked (for example, a 20,000-token budget for a multi-hour agentic coding task), it may decline to attempt the task at all, scope it down aggressively, or stop early with a partial result rather than start work it cannot finish. If you observe unexpected refusals or premature stops after setting a budget, raise the budget before debugging other parameters. Size budgets against your actual task-length distribution rather than a fixed default; see [Choosing a budget](#choosing-a-budget).
 </Warning>
 
 ## Choosing a budget
@@ -503,9 +503,9 @@ The minimum accepted `task_budget.total` is **20,000 tokens**; values below the 
 ## Interaction with other parameters
 
 - **`max_tokens`:** Orthogonal to task budgets. `max_tokens` is a hard per-request cap on generated tokens, while `task_budget` is an advisory cap across the full agentic loop (potentially spanning many requests). At `xhigh` or `max` effort, set `max_tokens` to at least 64k to give Claude room to think and act on each request.
-- **[Effort](https://platform.claude.com/docs/en/build-with-claude/Effort):** Effort controls how deeply Claude reasons per step. Task budgets control how much total work Claude does across an agentic loop. The two are complementary: effort tunes depth, task budgets tune breadth.
-- **[Adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/Adaptive thinking):** Task budgets include thinking tokens in the count, so adaptive thinking naturally scales down as the budget depletes.
-- **[Prompt caching](https://platform.claude.com/docs/en/build-with-claude/Prompt caching):** The budget-countdown marker is injected server-side per turn, so it does not match across requests. If your client decrements `task_budget.remaining` on each follow-up request, the changed value invalidates any cache prefix that contains it. To preserve caching, set the budget once on the initial request and let the model self-regulate against the server-side countdown rather than mutating the budget client-side.
+- **[Effort](/docs/en/build-with-claude/effort):** Effort controls how deeply Claude reasons per step. Task budgets control how much total work Claude does across an agentic loop. The two are complementary: effort tunes depth, task budgets tune breadth.
+- **[Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking):** Task budgets include thinking tokens in the count, so adaptive thinking naturally scales down as the budget depletes.
+- **[Prompt caching](/docs/en/build-with-claude/prompt-caching):** The budget-countdown marker is injected server-side per turn, so it does not match across requests. If your client decrements `task_budget.remaining` on each follow-up request, the changed value invalidates any cache prefix that contains it. To preserve caching, set the budget once on the initial request and let the model self-regulate against the server-side countdown rather than mutating the budget client-side.
 
 ## Feature support
 
@@ -516,4 +516,4 @@ The minimum accepted `task_budget.total` is **20,000 tokens**; values below the 
 | Claude Sonnet 4.6 | Not supported |
 | Claude Haiku 4.5 | Not supported |
 
-Task budgets are not supported on [Claude Code](https://platform.claude.com/docs/en/build-with-claude/Claude Code) or Cowork surfaces at launch. Use task budgets directly via the Messages API on Claude Opus 4.7.
+Task budgets are not supported on [Claude Code](https://docs.claude.com/en/docs/claude-code) or Cowork surfaces at launch. Use task budgets directly via the Messages API on Claude Opus 4.7.

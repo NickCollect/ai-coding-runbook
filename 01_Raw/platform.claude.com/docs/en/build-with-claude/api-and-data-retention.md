@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention
-fetched_at: 2026-05-04T16:09:10.442513+00:00
+fetched_at: 2026-05-05T19:40:47.201583+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,11 +11,11 @@ Learn about how Anthropic's APIs and associated features retain data, including 
 ---
 
 <Note>
-Information about Anthropic's standard retention policies is set out in [Anthropic's commercial data retention policy](https://platform.claude.com/docs/en/build-with-claude/Anthropic's commercial data retention policy) and [consumer data retention policy](https://platform.claude.com/docs/en/build-with-claude/consumer data retention policy).
+Information about Anthropic's standard retention policies is set out in [Anthropic's commercial data retention policy](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data) and [consumer data retention policy](https://privacy.claude.com/en/articles/10023548-how-long-do-you-store-my-data).
 
 Anthropic offers two data handling arrangements for the Claude API:
 - **Zero data retention (ZDR):** Customer data is not stored at rest after the API response is returned, except where needed to comply with law or combat misuse.
-- **HIPAA readiness:** For organizations handling protected health information (PHI), Anthropic offers HIPAA-ready API access with a signed Business Associate Agreement (BAA). See [HIPAA readiness](https://platform.claude.com/docs/en/build-with-claude/HIPAA readiness).
+- **HIPAA readiness:** For organizations handling protected health information (PHI), Anthropic offers HIPAA-ready API access with a signed Business Associate Agreement (BAA). See [HIPAA readiness](#hipaa-readiness).
 </Note>
 
 ## Anthropic's approach to data retention
@@ -26,14 +26,14 @@ Different APIs and features have different storage and retention needs. Where an
 - Only what is technically necessary for the API and feature to work is retained. Conversation content (your prompts and Claude's outputs) is never retained unless explicitly noted.
 - Data is purged on the shortest practical TTL, and Anthropic aims to give customers control over how long data is retained. What is held, and the retention duration where a specific TTL applies, is documented on each feature's page.
 
-In the [feature eligibility table](https://platform.claude.com/docs/en/build-with-claude/feature eligibility table), some features are marked "Yes (qualified)" in the ZDR eligible column. If your organization has a ZDR arrangement, you can use these features with confidence that what Anthropic retains is narrow and is required for optimal performance.
+In the [feature eligibility table](#feature-eligibility), some features are marked "Yes (qualified)" in the ZDR eligible column. If your organization has a ZDR arrangement, you can use these features with confidence that what Anthropic retains is narrow and is required for optimal performance.
 
 ## Zero data retention (ZDR) scope
 
 **What ZDR covers**
 
 - **Certain Claude APIs:** ZDR applies to the Claude Messages and Token Counting APIs
-- **Claude Code:** ZDR applies when used with Commercial organization API keys or through Claude Enterprise (see [Claude Code ZDR docs](https://platform.claude.com/docs/en/build-with-claude/Claude Code ZDR docs))
+- **Claude Code:** ZDR applies when used with Commercial organization API keys or through Claude Enterprise (see [Claude Code ZDR docs](https://code.claude.com/docs/en/zero-data-retention))
 
 **What ZDR does NOT cover**
 
@@ -54,7 +54,7 @@ The Claude API supports HIPAA-ready integrations for organizations that handle p
 Previously, organizations that required HIPAA readiness for the Claude API needed to enable ZDR. HIPAA-ready API access removes this requirement and provides a foundation for Anthropic to progressively enable additional features as they are audited for HIPAA readiness.
 
 <Note>
-This page covers HIPAA readiness for the Claude API. For the full HIPAA Implementation Guide covering Claude Enterprise, Claude Code, and configuration requirements, see the [Anthropic Trust Center](https://platform.claude.com/docs/en/build-with-claude/Anthropic Trust Center).
+This page covers HIPAA readiness for the Claude API. For the full HIPAA Implementation Guide covering Claude Enterprise, Claude Code, and configuration requirements, see the [Anthropic Trust Center](https://trust.anthropic.com/resources).
 </Note>
 
 ### Getting started
@@ -63,13 +63,13 @@ To set up HIPAA-ready API access:
 
 <Steps>
 <Step title="Sign a Business Associate Agreement">
-Contact the [Anthropic sales team](https://platform.claude.com/docs/en/build-with-claude/Anthropic sales team) to sign a BAA that covers API usage.
+Contact the [Anthropic sales team](https://claude.com/contact-sales) to sign a BAA that covers API usage.
 </Step>
 <Step title="Provision a HIPAA-enabled organization">
 Anthropic provisions a dedicated organization with HIPAA readiness controls enabled. This organization automatically enforces feature restrictions, blocking API requests that use non-eligible features.
 </Step>
 <Step title="Build with eligible features">
-Use the [feature eligibility table](https://platform.claude.com/docs/en/build-with-claude/feature eligibility table) to confirm which features are supported. Review the [PHI handling guidelines](https://platform.claude.com/docs/en/build-with-claude/PHI handling guidelines) for features that require specific restrictions on where PHI can appear. For detailed configuration and compliance requirements, refer to the [HIPAA Implementation Guide](https://platform.claude.com/docs/en/build-with-claude/HIPAA Implementation Guide).
+Use the [feature eligibility table](#feature-eligibility) to confirm which features are supported. Review the [PHI handling guidelines](#phi-handling-guidelines) for features that require specific restrictions on where PHI can appear. For detailed configuration and compliance requirements, refer to the [HIPAA Implementation Guide](https://trust.anthropic.com/resources).
 </Step>
 </Steps>
 
@@ -81,7 +81,7 @@ HIPAA readiness is enforced at the organization level. If you need both HIPAA-re
 
 **What HIPAA readiness covers**
 
-- **Claude API:** HIPAA readiness applies to the Claude API (`api.anthropic.com`) for eligible features listed in the [feature eligibility table](https://platform.claude.com/docs/en/build-with-claude/feature eligibility table).
+- **Claude API:** HIPAA readiness applies to the Claude API (`api.anthropic.com`) for eligible features listed in the [feature eligibility table](#feature-eligibility).
 
 **What HIPAA readiness does NOT cover**
 
@@ -90,7 +90,7 @@ HIPAA readiness is enforced at the organization level. If you need both HIPAA-re
 - **Third-party platforms:** Claude on AWS Bedrock or Google Cloud Vertex AI (refer to those platforms' compliance documentation)
 - **Third-party integrations:** Data processed by external tools or services connected to your application
 - **Claude Code:** Claude Code is not covered under HIPAA readiness
-- **Beta features:** Features in beta are generally not covered under the BAA unless explicitly listed as eligible in the [feature eligibility table](https://platform.claude.com/docs/en/build-with-claude/feature eligibility table)
+- **Beta features:** Features in beta are generally not covered under the BAA unless explicitly listed as eligible in the [feature eligibility table](#feature-eligibility)
 
 ### PHI handling guidelines
 
@@ -104,7 +104,7 @@ The following fields are not expected to contain PHI under the BAA: workspace na
 
 #### Schema and tool definition restrictions
 
-When using [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured outputs) or tools with `strict: true`, the API compiles JSON schemas into grammars that are cached separately from message content. These cached schemas do not receive the same PHI protections as prompts and responses.
+When using [structured outputs](/docs/en/build-with-claude/structured-outputs) or tools with `strict: true`, the API compiles JSON schemas into grammars that are cached separately from message content. These cached schemas do not receive the same PHI protections as prompts and responses.
 
 **Do not include PHI in JSON schema definitions.** This restriction applies to:
 
@@ -137,42 +137,42 @@ The following table lists which Claude API features are eligible for ZDR and HIP
 
 | Feature | Endpoint | ZDR eligible | HIPAA eligible | Details |
 | ------- | -------- | ------------ | -------------- | ------- |
-| [Messages API](https://platform.claude.com/docs/en/build-with-claude/Messages API) | `/v1/messages` | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Standard API calls for generating Claude responses. |
-| [Token counting](https://platform.claude.com/docs/en/build-with-claude/Token counting) | `/v1/messages/count_tokens` | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Count tokens before sending requests. |
-| [Web search](https://platform.claude.com/docs/en/build-with-claude/Web search) | `/v1/messages` (with `web_search` tool) | <Eligible>Yes</Eligible><sup>1</sup> | <Eligible>Yes</Eligible><sup>1</sup> | Real-time web search results returned in the API response. |
-| [Web fetch](https://platform.claude.com/docs/en/build-with-claude/Web fetch) | `/v1/messages` (with `web_fetch` tool) | <Eligible>Yes</Eligible><sup>1</sup> <sup>2</sup> | <Eligible status="no">No</Eligible> | Fetched web content returned in the API response. |
-| [Advisor tool](https://platform.claude.com/docs/en/build-with-claude/Advisor tool) | `/v1/messages` (with `advisor` tool) | <Eligible>Yes</Eligible> | <Eligible status="no">No</Eligible> | Advisor model output is returned in the API response; nothing is stored server-side after the response. |
-| [Memory tool](https://platform.claude.com/docs/en/build-with-claude/Memory tool) | `/v1/messages` (with `memory` tool) | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Client-side memory storage where you control data retention. |
-| [Context management (compaction)](https://platform.claude.com/docs/en/build-with-claude/Context management (compaction)) | `/v1/messages` (with `context_management`) | <Eligible>Yes</Eligible> | <Eligible status="no">No</Eligible> | Server-side compaction results are returned/round-tripped statelessly through the API response. |
-| [Context editing](https://platform.claude.com/docs/en/build-with-claude/Context editing) | `/v1/messages` (with `context_management`) | <Eligible>Yes</Eligible> | <Eligible status="no">No</Eligible> | Context edits (tool use clearing + thinking clearing) are applied in real time. |
-| [Fast mode](https://platform.claude.com/docs/en/build-with-claude/Fast mode) | `/v1/messages` (with `speed: "fast"`) | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Same Messages API endpoint with faster inference. ZDR applies regardless of speed setting. |
-| [1M token context window](https://platform.claude.com/docs/en/build-with-claude/1M token context window) | `/v1/messages` | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Extended context processing uses the standard Messages API. |
-| [Adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/Adaptive thinking) | `/v1/messages` | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Dynamic thinking depth uses the standard Messages API. |
-| [Citations](https://platform.claude.com/docs/en/build-with-claude/Citations) | `/v1/messages` | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Source attribution uses the standard Messages API. |
-| [Data residency](https://platform.claude.com/docs/en/build-with-claude/Data residency) | `/v1/messages` (with `inference_geo`) | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Geographic routing uses the standard Messages API. |
-| [Effort](https://platform.claude.com/docs/en/build-with-claude/Effort) | `/v1/messages` (with `effort`) | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Token efficiency control uses the standard Messages API. |
-| [Extended thinking](https://platform.claude.com/docs/en/build-with-claude/Extended thinking) | `/v1/messages` (with `thinking`) | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Step-by-step reasoning uses the standard Messages API. |
-| [PDF support](https://platform.claude.com/docs/en/build-with-claude/PDF support) | `/v1/messages` | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | PDF document processing uses the standard Messages API. HIPAA eligibility applies to PDFs sent inline via the Messages API, not through the Files API. |
-| [Search results](https://platform.claude.com/docs/en/build-with-claude/Search results) | `/v1/messages` (with `search_results` source) | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | RAG citation support uses the standard Messages API. |
-| [Bash tool](https://platform.claude.com/docs/en/build-with-claude/Bash tool) | `/v1/messages` (with `bash` tool) | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Client-side tool executed in your environment. |
-| [Text editor tool](https://platform.claude.com/docs/en/build-with-claude/Text editor tool) | `/v1/messages` (with `text_editor` tool) | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Client-side tool executed in your environment. |
-| [Computer use](https://platform.claude.com/docs/en/build-with-claude/Computer use) | `/v1/messages` (with `computer` tool) | <Eligible>Yes</Eligible> | <Eligible status="no">No</Eligible> | Client-side tool where screenshots and files are captured and stored in your environment, not by Anthropic. See [Computer use](https://platform.claude.com/docs/en/build-with-claude/Computer use). |
-| [Fine-grained tool streaming](https://platform.claude.com/docs/en/build-with-claude/Fine-grained tool streaming) | `/v1/messages` | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Streaming tool parameters uses the standard Messages API. |
-| [Prompt caching](https://platform.claude.com/docs/en/build-with-claude/Prompt caching) | `/v1/messages` | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Your prompts and Claude's outputs are not stored. KV cache representations and cryptographic hashes are held in memory for the cache TTL and promptly deleted after expiry. See [Prompt caching](https://platform.claude.com/docs/en/build-with-claude/Prompt caching). |
-| [Structured outputs](https://platform.claude.com/docs/en/build-with-claude/Structured outputs) | `/v1/messages` | <Eligible status="qualified">Yes (qualified)</Eligible> | <Eligible>Yes</Eligible><sup>3</sup> | Your prompts and Claude's outputs are not stored. Only the JSON schema is cached, for up to 24 hours since last use. This also covers [strict tool use](https://platform.claude.com/docs/en/build-with-claude/strict tool use) (`strict: true` on tools), which uses the same grammar pipeline. See [Structured outputs](https://platform.claude.com/docs/en/build-with-claude/Structured outputs). |
-| [Tool search](https://platform.claude.com/docs/en/build-with-claude/Tool search) | `/v1/messages` (with `tool_search` tool) | <Eligible>Yes</Eligible> | <Eligible status="no">No</Eligible> | Tool search uses the standard Messages API. |
-| [Batch processing](https://platform.claude.com/docs/en/build-with-claude/Batch processing) | `/v1/messages/batches` | <Eligible status="no">No</Eligible> | <Eligible status="no">No</Eligible> | 29-day retention; async storage required. See [Batch processing](https://platform.claude.com/docs/en/build-with-claude/Batch processing). |
-| [Code execution](https://platform.claude.com/docs/en/build-with-claude/Code execution) | `/v1/messages` (with `code_execution` tool) | <Eligible status="no">No</Eligible> | <Eligible status="no">No</Eligible> | Container data retained up to 30 days. See [Code execution](https://platform.claude.com/docs/en/build-with-claude/Code execution). |
-| [Programmatic tool calling](https://platform.claude.com/docs/en/build-with-claude/Programmatic tool calling) | `/v1/messages` (with `code_execution` tool) | <Eligible status="no">No</Eligible> | <Eligible status="no">No</Eligible> | Built on code execution containers; data retained up to 30 days. See [Programmatic tool calling](https://platform.claude.com/docs/en/build-with-claude/Programmatic tool calling). |
-| [Files API](https://platform.claude.com/docs/en/build-with-claude/Files API) | `/v1/files` | <Eligible status="no">No</Eligible> | <Eligible status="no">No</Eligible> | Files retained until explicitly deleted. See [Files API](https://platform.claude.com/docs/en/build-with-claude/Files API). |
-| [Agent skills](https://platform.claude.com/docs/en/build-with-claude/Agent skills) | `/v1/messages` (with `skills`) / `/v1/skills` | <Eligible status="no">No</Eligible> | <Eligible status="no">No</Eligible> | Skill data retained per standard policy. See [Agent skills](https://platform.claude.com/docs/en/build-with-claude/Agent skills). |
-| [MCP connector](https://platform.claude.com/docs/en/build-with-claude/MCP connector) | `/v1/messages` (with `mcp_servers`) | <Eligible status="no">No</Eligible> | <Eligible status="no">No</Eligible> | Data retained per standard policy. See [MCP connector](https://platform.claude.com/docs/en/build-with-claude/MCP connector). |
+| [Messages API](/docs/en/build-with-claude/working-with-messages) | `/v1/messages` | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Standard API calls for generating Claude responses. |
+| [Token counting](/docs/en/build-with-claude/token-counting) | `/v1/messages/count_tokens` | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Count tokens before sending requests. |
+| [Web search](/docs/en/agents-and-tools/tool-use/web-search-tool) | `/v1/messages` (with `web_search` tool) | <Eligible>Yes</Eligible><sup>1</sup> | <Eligible>Yes</Eligible><sup>1</sup> | Real-time web search results returned in the API response. |
+| [Web fetch](/docs/en/agents-and-tools/tool-use/web-fetch-tool) | `/v1/messages` (with `web_fetch` tool) | <Eligible>Yes</Eligible><sup>1</sup> <sup>2</sup> | <Eligible status="no">No</Eligible> | Fetched web content returned in the API response. |
+| [Advisor tool](/docs/en/agents-and-tools/tool-use/advisor-tool) | `/v1/messages` (with `advisor` tool) | <Eligible>Yes</Eligible> | <Eligible status="no">No</Eligible> | Advisor model output is returned in the API response; nothing is stored server-side after the response. |
+| [Memory tool](/docs/en/agents-and-tools/tool-use/memory-tool) | `/v1/messages` (with `memory` tool) | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Client-side memory storage where you control data retention. |
+| [Context management (compaction)](/docs/en/build-with-claude/compaction) | `/v1/messages` (with `context_management`) | <Eligible>Yes</Eligible> | <Eligible status="no">No</Eligible> | Server-side compaction results are returned/round-tripped statelessly through the API response. |
+| [Context editing](/docs/en/build-with-claude/context-editing) | `/v1/messages` (with `context_management`) | <Eligible>Yes</Eligible> | <Eligible status="no">No</Eligible> | Context edits (tool use clearing + thinking clearing) are applied in real time. |
+| [Fast mode](/docs/en/build-with-claude/fast-mode) | `/v1/messages` (with `speed: "fast"`) | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Same Messages API endpoint with faster inference. ZDR applies regardless of speed setting. |
+| [1M token context window](/docs/en/build-with-claude/context-windows) | `/v1/messages` | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Extended context processing uses the standard Messages API. |
+| [Adaptive thinking](/docs/en/build-with-claude/adaptive-thinking) | `/v1/messages` | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Dynamic thinking depth uses the standard Messages API. |
+| [Citations](/docs/en/build-with-claude/citations) | `/v1/messages` | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Source attribution uses the standard Messages API. |
+| [Data residency](/docs/en/build-with-claude/data-residency) | `/v1/messages` (with `inference_geo`) | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Geographic routing uses the standard Messages API. |
+| [Effort](/docs/en/build-with-claude/effort) | `/v1/messages` (with `effort`) | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Token efficiency control uses the standard Messages API. |
+| [Extended thinking](/docs/en/build-with-claude/extended-thinking) | `/v1/messages` (with `thinking`) | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Step-by-step reasoning uses the standard Messages API. |
+| [PDF support](/docs/en/build-with-claude/pdf-support) | `/v1/messages` | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | PDF document processing uses the standard Messages API. HIPAA eligibility applies to PDFs sent inline via the Messages API, not through the Files API. |
+| [Search results](/docs/en/build-with-claude/search-results) | `/v1/messages` (with `search_results` source) | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | RAG citation support uses the standard Messages API. |
+| [Bash tool](/docs/en/agents-and-tools/tool-use/bash-tool) | `/v1/messages` (with `bash` tool) | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Client-side tool executed in your environment. |
+| [Text editor tool](/docs/en/agents-and-tools/tool-use/text-editor-tool) | `/v1/messages` (with `text_editor` tool) | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Client-side tool executed in your environment. |
+| [Computer use](/docs/en/agents-and-tools/tool-use/computer-use-tool) | `/v1/messages` (with `computer` tool) | <Eligible>Yes</Eligible> | <Eligible status="no">No</Eligible> | Client-side tool where screenshots and files are captured and stored in your environment, not by Anthropic. See [Computer use](/docs/en/agents-and-tools/tool-use/computer-use-tool#data-retention). |
+| [Fine-grained tool streaming](/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming) | `/v1/messages` | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Streaming tool parameters uses the standard Messages API. |
+| [Prompt caching](/docs/en/build-with-claude/prompt-caching) | `/v1/messages` | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Your prompts and Claude's outputs are not stored. KV cache representations and cryptographic hashes are held in memory for the cache TTL and promptly deleted after expiry. See [Prompt caching](/docs/en/build-with-claude/prompt-caching#data-retention). |
+| [Structured outputs](/docs/en/build-with-claude/structured-outputs) | `/v1/messages` | <Eligible status="qualified">Yes (qualified)</Eligible> | <Eligible>Yes</Eligible><sup>3</sup> | Your prompts and Claude's outputs are not stored. Only the JSON schema is cached, for up to 24 hours since last use. This also covers [strict tool use](/docs/en/agents-and-tools/tool-use/strict-tool-use) (`strict: true` on tools), which uses the same grammar pipeline. See [Structured outputs](/docs/en/build-with-claude/structured-outputs#data-retention). |
+| [Tool search](/docs/en/agents-and-tools/tool-use/tool-search-tool) | `/v1/messages` (with `tool_search` tool) | <Eligible>Yes</Eligible> | <Eligible status="no">No</Eligible> | Tool search uses the standard Messages API. |
+| [Batch processing](/docs/en/build-with-claude/batch-processing) | `/v1/messages/batches` | <Eligible status="no">No</Eligible> | <Eligible status="no">No</Eligible> | 29-day retention; async storage required. See [Batch processing](/docs/en/build-with-claude/batch-processing#data-retention). |
+| [Code execution](/docs/en/agents-and-tools/tool-use/code-execution-tool) | `/v1/messages` (with `code_execution` tool) | <Eligible status="no">No</Eligible> | <Eligible status="no">No</Eligible> | Container data retained up to 30 days. See [Code execution](/docs/en/agents-and-tools/tool-use/code-execution-tool#data-retention). |
+| [Programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling) | `/v1/messages` (with `code_execution` tool) | <Eligible status="no">No</Eligible> | <Eligible status="no">No</Eligible> | Built on code execution containers; data retained up to 30 days. See [Programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling#data-retention). |
+| [Files API](/docs/en/build-with-claude/files) | `/v1/files` | <Eligible status="no">No</Eligible> | <Eligible status="no">No</Eligible> | Files retained until explicitly deleted. See [Files API](/docs/en/build-with-claude/files#data-retention). |
+| [Agent skills](/docs/en/agents-and-tools/agent-skills/overview) | `/v1/messages` (with `skills`) / `/v1/skills` | <Eligible status="no">No</Eligible> | <Eligible status="no">No</Eligible> | Skill data retained per standard policy. See [Agent skills](/docs/en/agents-and-tools/agent-skills/overview#data-retention). |
+| [MCP connector](/docs/en/agents-and-tools/mcp-connector) | `/v1/messages` (with `mcp_servers`) | <Eligible status="no">No</Eligible> | <Eligible status="no">No</Eligible> | Data retained per standard policy. See [MCP connector](/docs/en/agents-and-tools/mcp-connector#data-retention). |
 
-<sup>1</sup> [Dynamic filtering](https://platform.claude.com/docs/en/build-with-claude/Dynamic filtering) is not eligible for ZDR or HIPAA.
+<sup>1</sup> [Dynamic filtering](/docs/en/agents-and-tools/tool-use/web-search-tool#dynamic-filtering) is not eligible for ZDR or HIPAA.
 
 <sup>2</sup> While web fetch is ZDR-eligible, website publishers may retain request data (such as fetched URLs and request metadata) according to their own policies.
 
-<sup>3</sup> PHI must not be included in JSON schema definitions. See [PHI handling guidelines](https://platform.claude.com/docs/en/build-with-claude/PHI handling guidelines).
+<sup>3</sup> PHI must not be included in JSON schema definitions. See [PHI handling guidelines](#phi-handling-guidelines).
 
 ## Limitations and exclusions
 
@@ -198,7 +198,7 @@ Check your contract terms or contact your Anthropic account representative to co
 
 <section title="Can I use ZDR-eligible (qualified) features under my ZDR arrangement?">
 
-Yes. These features retain a minimal, documented set of technical data, not your prompts or Claude's outputs. See [Anthropic's approach to data retention](https://platform.claude.com/docs/en/build-with-claude/Anthropic's approach to data retention) for the commitments that govern these features.
+Yes. These features retain a minimal, documented set of technical data, not your prompts or Claude's outputs. See [Anthropic's approach to data retention](#anthropics-approach-to-data-retention) for the commitments that govern these features.
 
 </section>
 
@@ -238,7 +238,7 @@ No. HIPAA readiness is enforced at the organization level and automatically bloc
 
 <section title="How do I request HIPAA-ready API access?">
 
-Contact the [Anthropic sales team](https://platform.claude.com/docs/en/build-with-claude/Anthropic sales team) to discuss HIPAA-ready API access and sign a Business Associate Agreement.
+Contact the [Anthropic sales team](https://claude.com/contact-sales) to discuss HIPAA-ready API access and sign a Business Associate Agreement.
 
 </section>
 
@@ -259,7 +259,7 @@ ZDR is enabled on a per-organization basis. Each new organization requires ZDR t
 
 Additionally, if you have metrics logging enabled in Claude Code, productivity data (such as usage statistics) is exempted from ZDR and may be retained.
 
-For full details on ZDR for Claude Code on Claude Enterprise, including disabled features and how to request enablement, see the [Claude Code ZDR documentation](https://platform.claude.com/docs/en/build-with-claude/Claude Code ZDR documentation).
+For full details on ZDR for Claude Code on Claude Enterprise, including disabled features and how to request enablement, see the [Claude Code ZDR documentation](https://code.claude.com/docs/en/zero-data-retention).
 
 </section>
 
@@ -271,15 +271,15 @@ No, Claude for Excel is not currently ZDR-eligible.
 
 <section title="How do I request ZDR?">
 
-To request a ZDR arrangement, contact the [Anthropic sales team](https://platform.claude.com/docs/en/build-with-claude/Anthropic sales team).
+To request a ZDR arrangement, contact the [Anthropic sales team](https://claude.com/contact-sales).
 
 </section>
 
 ## Related resources
 
-- [Privacy Policy](https://platform.claude.com/docs/en/build-with-claude/Privacy Policy)
-- [Structured outputs](https://platform.claude.com/docs/en/build-with-claude/Structured outputs)
-- [Prompt caching](https://platform.claude.com/docs/en/build-with-claude/Prompt caching)
-- [Batch processing](https://platform.claude.com/docs/en/build-with-claude/Batch processing)
-- [Files API](https://platform.claude.com/docs/en/build-with-claude/Files API)
-- [Trust Center](https://platform.claude.com/docs/en/build-with-claude/Trust Center)
+- [Privacy Policy](https://www.anthropic.com/legal/privacy)
+- [Structured outputs](/docs/en/build-with-claude/structured-outputs)
+- [Prompt caching](/docs/en/build-with-claude/prompt-caching)
+- [Batch processing](/docs/en/build-with-claude/batch-processing)
+- [Files API](/docs/en/api/files-create)
+- [Trust Center](https://trust.anthropic.com/resources)

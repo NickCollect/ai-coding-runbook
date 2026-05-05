@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/completions
-fetched_at: 2026-05-04T16:09:10.988883+00:00
+fetched_at: 2026-05-05T19:40:47.202817+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,9 +12,9 @@ fetch_method: mintlify_md
 
 [Legacy] Create a Text Completion.
 
-The Text Completions API is a legacy API. We recommend using the [Messages API](https://platform.claude.com/docs/en/api/Messages API) going forward.
+The Text Completions API is a legacy API. We recommend using the [Messages API](https://docs.claude.com/en/api/messages) going forward.
 
-Future models and features will not be compatible with Text Completions. See our [migration guide](https://platform.claude.com/docs/en/api/migration guide) for guidance in migrating from Text Completions to Messages.
+Future models and features will not be compatible with Text Completions. See our [migration guide](https://docs.claude.com/en/api/migrating-from-text-completions-to-messages) for guidance in migrating from Text Completions to Messages.
 
 ### Header Parameters
 
@@ -84,13 +84,13 @@ Future models and features will not be compatible with Text Completions. See our
 
   The model that will complete your prompt.
 
-  See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
   - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
     The model that will complete your prompt.
 
-    See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `"claude-opus-4-7"`
 
@@ -180,7 +180,7 @@ Future models and features will not be compatible with Text Completions. See our
   Assistant:"
   ```
 
-  See [prompt validation](https://platform.claude.com/docs/en/api/prompt validation) and our guide to [prompt design](https://platform.claude.com/docs/en/api/prompt design) for more details.
+  See [prompt validation](https://docs.claude.com/en/api/prompt-validation) and our guide to [prompt design](https://docs.claude.com/en/docs/intro-to-prompting) for more details.
 
 - `metadata: optional Metadata`
 
@@ -204,7 +204,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   Whether to incrementally stream the response using server-sent events.
 
-  See [streaming](https://platform.claude.com/docs/en/api/streaming) for details.
+  See [streaming](https://docs.claude.com/en/api/streaming) for details.
 
 - `temperature: optional number`
 
@@ -218,7 +218,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   Only sample from the top K options for each subsequent token.
 
-  Used to remove "long tail" low probability responses. [Learn more technical details here](https://platform.claude.com/docs/en/api/Learn more technical details here).
+  Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
   Recommended for advanced use cases only.
 
@@ -248,13 +248,13 @@ Future models and features will not be compatible with Text Completions. See our
 
     The model that will complete your prompt.
 
-    See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `"claude-opus-4-7"`
 
@@ -378,13 +378,13 @@ curl https://api.anthropic.com/v1/complete \
 
     The model that will complete your prompt.
 
-    See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `"claude-opus-4-7"`
 

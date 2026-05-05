@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner
-fetched_at: 2026-05-04T16:08:36.623295+00:00
+fetched_at: 2026-05-05T19:40:45.566601+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ Use the SDK's Tool Runner abstraction to handle the agentic loop, error wrapping
 
 ---
 
-Tool Runner handles the agentic loop, error wrapping, and type safety so you don't have to. Use the [manual loop](https://platform.claude.com/docs/en/agents-and-tools/tool-use/manual loop) only when you need human-in-the-loop approval, custom logging, or conditional execution. Available in Python, TypeScript, and Ruby SDKs.
+Tool Runner handles the agentic loop, error wrapping, and type safety so you don't have to. Use the [manual loop](/docs/en/agents-and-tools/tool-use/handle-tool-calls) only when you need human-in-the-loop approval, custom logging, or conditional execution. Available in Python, TypeScript, and Ruby SDKs.
 
 The tool runner provides an out-of-the-box solution for executing tools with Claude. Instead of manually handling tool calls, tool results, and conversation management, the tool runner automatically:
 
@@ -22,13 +22,13 @@ The tool runner provides an out-of-the-box solution for executing tools with Cla
 Use the tool runner for most tool use implementations.
 
 <Note>
-The tool runner is currently in beta and available in the [Python](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Python), [TypeScript](https://platform.claude.com/docs/en/agents-and-tools/tool-use/TypeScript), and [Ruby](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Ruby) SDKs.
+The tool runner is currently in beta and available in the [Python](https://github.com/anthropics/anthropic-sdk-python/blob/main/tools.md), [TypeScript](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/helpers.md#tool-helpers), and [Ruby](https://github.com/anthropics/anthropic-sdk-ruby/blob/main/helpers.md#3-auto-looping-tool-runner-beta) SDKs.
 </Note>
 
 <Tip>
 **Automatic context management with compaction**
 
-The tool runner supports automatic [compaction](https://platform.claude.com/docs/en/agents-and-tools/tool-use/compaction), which generates summaries when token usage exceeds a threshold. This allows long-running agentic tasks to continue beyond context window limits.
+The tool runner supports automatic [compaction](/docs/en/build-with-claude/context-editing#client-side-compaction-sdk), which generates summaries when token usage exceeds a threshold. This allows long-running agentic tasks to continue beyond context window limits.
 </Tip>
 
 ## Basic usage
@@ -50,6 +50,7 @@ from anthropic import Anthropic, beta_tool
 
 client = Anthropic()
 
+
 @beta_tool
 def get_weather(location: str, unit: str = "fahrenheit") -> str:
     """Get the current weather in a given location.
@@ -60,6 +61,7 @@ def get_weather(location: str, unit: str = "fahrenheit") -> str:
     """
     return json.dumps({"temperature": "20°C", "condition": "Sunny"})
 
+
 @beta_tool
 def calculate_sum(a: int, b: int) -> str:
     """Add two numbers together.
@@ -69,6 +71,7 @@ def calculate_sum(a: int, b: int) -> str:
         b: Second number
     """
     return str(a + b)
+
 
 runner = client.beta.messages.tool_runner(
     model="claude-opus-4-7",
@@ -281,15 +284,18 @@ from anthropic import beta_tool
 
 client = anthropic.Anthropic()
 
+
 @beta_tool
 def get_weather(location: str) -> str:
     """Get the current weather in a given location."""
     return "20°C, Sunny"
 
+
 @beta_tool
 def calculate_sum(a: int, b: int) -> str:
     """Add two numbers together."""
     return str(a + b)
+
 
 runner = client.beta.messages.tool_runner(
     model="claude-opus-4-7",
@@ -523,10 +529,12 @@ from anthropic import beta_tool
 
 client = anthropic.Anthropic()
 
+
 @beta_tool
 def my_tool(query: str) -> str:
     """A sample tool."""
     return f"Result for: {query}"
+
 
 runner = client.beta.messages.tool_runner(
     model="claude-opus-4-7",
@@ -648,7 +656,7 @@ end
 
 ### Modifying tool results
 
-You can modify tool results before they're sent back to Claude. This is useful for adding metadata like `cache_control` to enable [prompt caching](https://platform.claude.com/docs/en/agents-and-tools/tool-use/prompt caching) on tool results, or for transforming the tool output.
+You can modify tool results before they're sent back to Claude. This is useful for adding metadata like `cache_control` to enable [prompt caching](/docs/en/build-with-claude/prompt-caching) on tool results, or for transforming the tool output.
 
 Use the tool response method to get the tool result, then modify it before the runner proceeds. Whether you explicitly append the modified result or mutate it in place depends on the SDK; see the code comments in each tab.
 
@@ -661,10 +669,12 @@ from anthropic import beta_tool
 
 client = anthropic.Anthropic()
 
+
 @beta_tool
 def search_documents(query: str) -> str:
     """Search documents for relevant information."""
     return f"Found 3 documents matching: {query}"
+
 
 runner = client.beta.messages.tool_runner(
     model="claude-opus-4-7",
@@ -789,7 +799,7 @@ end
 </Tabs>
 
 <Tip>
-Adding `cache_control` to tool results is particularly useful when tools return large amounts of data (like document search results) that you want to cache for subsequent API calls. See [Prompt caching](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Prompt caching) for more details on caching strategies.
+Adding `cache_control` to tool results is particularly useful when tools return large amounts of data (like document search results) that you want to cache for subsequent API calls. See [Prompt caching](/docs/en/build-with-claude/prompt-caching) for more details on caching strategies.
 </Tip>
 
 ## Streaming
@@ -807,10 +817,12 @@ from anthropic import beta_tool
 
 client = anthropic.Anthropic()
 
+
 @beta_tool
 def calculate_sum(a: int, b: int) -> str:
     """Add two numbers together."""
     return str(a + b)
+
 
 runner = client.beta.messages.tool_runner(
     model="claude-opus-4-7",
@@ -908,6 +920,6 @@ end
 
 ## Next steps
 
-- For manual control over the tool-call loop, see [Handle tool calls](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Handle tool calls).
-- For running multiple tools concurrently, see [Parallel tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Parallel tool use).
-- For the full tool-use workflow, see [Define tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Define tools).
+- For manual control over the tool-call loop, see [Handle tool calls](/docs/en/agents-and-tools/tool-use/handle-tool-calls).
+- For running multiple tools concurrently, see [Parallel tool use](/docs/en/agents-and-tools/tool-use/parallel-tool-use).
+- For the full tool-use workflow, see [Define tools](/docs/en/agents-and-tools/tool-use/define-tools).

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool
-fetched_at: 2026-05-04T16:08:43.088815+00:00
+fetched_at: 2026-05-05T19:40:45.832641+00:00
 fetch_method: mintlify_md
 ---
 
@@ -9,12 +9,12 @@ fetch_method: mintlify_md
 ---
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Zero Data Retention (ZDR)). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 Claude can use an Anthropic-schema text editor tool to view and modify text files, helping you debug, fix, and improve your code or other text documents. This allows Claude to directly interact with your files, providing hands-on assistance rather than just suggesting changes.
 
-For model support, see the [Tool reference](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Tool reference).
+For model support, see the [Tool reference](/docs/en/agents-and-tools/tool-use/tool-reference).
 
 ## When to use the text editor tool
 
@@ -1023,8 +1023,10 @@ The tool type is `type: "text_editor_20250728"` for Claude 4 models.
         ]
     )
 
+
     def handle_editor_tool(tc):
         return "ok"
+
 
     # Process tool use in Claude's response
     for content in response.content:
@@ -1164,6 +1166,7 @@ Implement a backup system in your application that creates copies of files befor
 ```python hidelines={1}
 import os
 
+
 def backup_file(file_path):
     """Create a backup of a file before editing."""
     backup_path = f"{file_path}.backup"
@@ -1228,9 +1231,9 @@ In addition to the base tokens, the following additional input tokens are needed
 | Tool | Additional input tokens |
 | ----------------------------------------- | --------------------------------------- |
 | `text_editor_20250429` (Claude 4.x) | 700 tokens |
-| `text_editor_20250124` (Claude Sonnet 3.7 ([deprecated](https://platform.claude.com/docs/en/agents-and-tools/tool-use/deprecated))) | 700 tokens |
+| `text_editor_20250124` (Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations))) | 700 tokens |
 
-For more detailed information about tool pricing, see [Tool use pricing](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Tool use pricing).
+For more detailed information about tool pricing, see [Tool use pricing](/docs/en/agents-and-tools/tool-use/overview#pricing).
 
 ## Integrate the text editor tool with other tools
 
@@ -1245,7 +1248,7 @@ The text editor tool can be used alongside other Claude tools. When combining to
 | July 28, 2025 | `text_editor_20250728` | Release of an updated text editor Tool that fixes some issues and adds an optional `max_characters` parameter. It is otherwise identical to `text_editor_20250429`. |
 | April 29, 2025 | `text_editor_20250429` | Release of the text editor Tool for Claude 4. This version removes the `undo_edit` command but maintains all other capabilities. The tool name has been updated to reflect its str_replace-based architecture. |
 | March 13, 2025 | `text_editor_20250124` | Introduction of standalone text editor Tool documentation. This version is optimized for Claude Sonnet 3.7 but has identical capabilities to the previous version. |
-| October 22, 2024 | `text_editor_20241022` | Initial release of the text editor Tool with Claude Sonnet 3.5 ([retired](https://platform.claude.com/docs/en/agents-and-tools/tool-use/retired)). Provides capabilities for viewing, creating, and editing files through the `view`, `create`, `str_replace`, `insert`, and `undo_edit` commands. |
+| October 22, 2024 | `text_editor_20241022` | Initial release of the text editor Tool with Claude Sonnet 3.5 ([retired](/docs/en/about-claude/model-deprecations)). Provides capabilities for viewing, creating, and editing files through the `view`, `create`, `str_replace`, `insert`, and `undo_edit` commands. |
 
 ## Next steps
 

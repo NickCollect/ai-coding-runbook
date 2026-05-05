@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/quickstart
-fetched_at: 2026-05-04T16:08:57.885361+00:00
+fetched_at: 2026-05-05T19:40:46.451468+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,7 +13,7 @@ Create your first autonomous agent.
 This guide walks you through creating an agent, setting up an environment, starting a session, and streaming agent responses.
 
 <Tip>
-**Prefer an interactive walkthrough?** Run `/claude-api managed-agents-onboard` in the latest version of [Claude Code](https://platform.claude.com/docs/en/managed-agents/Claude Code) for a guided setup and interactive question-answering.
+**Prefer an interactive walkthrough?** Run `/claude-api managed-agents-onboard` in the latest version of [Claude Code](https://claude.com/product/claude-code) for a guided setup and interactive question-answering.
 </Tip>
 
 ## Core concepts
@@ -27,8 +27,8 @@ This guide walks you through creating an agent, setting up an environment, start
 
 ## Prerequisites
 
-- An Anthropic [Console account](https://platform.claude.com/docs/en/managed-agents/Console account)
-- An [API key](https://platform.claude.com/docs/en/managed-agents/API key)
+- An Anthropic [Console account](/)
+- An [API key](/settings/keys)
 
 ## Install the CLI
 
@@ -52,7 +52,7 @@ curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VER
   | sudo tar -xz -C /usr/local/bin ant
 ```
 
-You can find all releases on the [GitHub releases page](https://platform.claude.com/docs/en/managed-agents/GitHub releases page).
+You can find all releases on the [GitHub releases page](https://github.com/anthropics/anthropic-cli/releases).
 
 </Tab>
 <Tab title="Go">
@@ -336,7 +336,7 @@ puts "Agent ID: #{agent.id}, version: #{agent.version}"
 
     </CodeGroup>
 
-    The `agent_toolset_20260401` tool type enables the full set of pre-built agent tools (bash, file operations, web search, and more). See [Tools](https://platform.claude.com/docs/en/managed-agents/Tools) for the complete list and per-tool configuration options.
+    The `agent_toolset_20260401` tool type enables the full set of pre-built agent tools (bash, file operations, web search, and more). See [Tools](/docs/en/managed-agents/tools) for the complete list and per-tool configuration options.
 
     Save the returned `agent.id`. You'll reference it in every session you create.
 

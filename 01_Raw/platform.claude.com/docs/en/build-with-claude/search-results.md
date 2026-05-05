@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/search-results
-fetched_at: 2026-05-04T16:08:31.228939+00:00
+fetched_at: 2026-05-05T19:40:45.342390+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,7 +11,7 @@ Enable natural citations for RAG applications by providing search results with s
 ---
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/Zero Data Retention (ZDR)). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 Search result content blocks enable natural citations with proper source attribution, bringing web search-quality citations to your custom applications. This feature is particularly powerful for RAG (Retrieval-Augmented Generation) applications where you need Claude to cite sources accurately.
@@ -24,11 +24,11 @@ The search results feature is available on the following models:
 - Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)
 - Claude Opus 4.5 (`claude-opus-4-5-20251101`)
 - Claude Opus 4.1 (`claude-opus-4-1-20250805`)
-- Claude Opus 4 ([deprecated](https://platform.claude.com/docs/en/build-with-claude/deprecated)) (`claude-opus-4-20250514`)
-- Claude Sonnet 4 ([deprecated](https://platform.claude.com/docs/en/build-with-claude/deprecated)) (`claude-sonnet-4-20250514`)
-- Claude Sonnet 3.7 ([deprecated](https://platform.claude.com/docs/en/build-with-claude/deprecated)) (`claude-3-7-sonnet-20250219`)
+- Claude Opus 4 ([deprecated](/docs/en/about-claude/model-deprecations)) (`claude-opus-4-20250514`)
+- Claude Sonnet 4 ([deprecated](/docs/en/about-claude/model-deprecations)) (`claude-sonnet-4-20250514`)
+- Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)) (`claude-3-7-sonnet-20250219`)
 - Claude Haiku 4.5 (`claude-haiku-4-5-20251001`)
-- Claude Haiku 3.5 ([deprecated](https://platform.claude.com/docs/en/build-with-claude/deprecated)) (`claude-3-5-haiku-20241022`)
+- Claude Haiku 3.5 ([deprecated](/docs/en/about-claude/model-deprecations)) (`claude-3-5-haiku-20241022`)
 
 ## Key benefits
 
@@ -120,6 +120,7 @@ knowledge_base_tool = {
     },
 }
 
+
 # Function to handle the tool call
 def search_knowledge_base(query):
     # Your search logic here
@@ -150,6 +151,7 @@ def search_knowledge_base(query):
             citations={"enabled": True},
         ),
     ]
+
 
 # Create a message with the tool
 response = client.messages.create(
@@ -1306,7 +1308,7 @@ Each citation includes:
 | `start_block_index` | integer | 0-based index of the first cited block in the search result's `content` array. |
 | `end_block_index` | integer | Exclusive end index of the cited block range in the search result's `content` array. Always greater than `start_block_index`. |
 
-The block indices identify a slice of the search result's `content` array, and `cited_text` is the full text of that slice. The text block is the minimal citable unit: Claude cites whole blocks, not substrings within a block. To get finer-grained citations, split your search result content into smaller blocks (see [Multiple content blocks](https://platform.claude.com/docs/en/build-with-claude/Multiple content blocks)).
+The block indices identify a slice of the search result's `content` array, and `cited_text` is the full text of that slice. The text block is the minimal citable unit: Claude cites whole blocks, not substrings within a block. To get finer-grained citations, split your search result content into smaller blocks (see [Multiple content blocks](#multiple-content-blocks)).
 
 ## Multiple content blocks
 
@@ -1348,7 +1350,7 @@ A citation referencing the rate limits block looks like:
 }
 ```
 
-When this search result is cited, `start_block_index` and `end_block_index` identify which of these blocks the citation covers, and `cited_text` contains exactly those blocks' text. Splitting content into smaller, focused blocks gives Claude finer citation boundaries; combining content into one block means every citation returns the full text. This is the same model used by [custom content documents](https://platform.claude.com/docs/en/build-with-claude/custom content documents) in the Citations feature.
+When this search result is cited, `start_block_index` and `end_block_index` identify which of these blocks the citation covers, and `cited_text` contains exactly those blocks' text. Splitting content into smaller, focused blocks gives Claude finer citation boundaries; combining content into one block means every citation returns the full text. This is the same model used by [custom content documents](/docs/en/build-with-claude/citations#custom-content-documents) in the Citations feature.
 
 ## Advanced usage
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/remote-mcp-servers
-fetched_at: 2026-05-04T16:08:54.040309+00:00
+fetched_at: 2026-05-05T19:40:46.318808+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,12 +24,12 @@ To connect to a remote MCP server:
 2. Ensure you have the necessary authentication credentials.
 3. Follow the server-specific connection instructions provided by each company.
 
-For more information about using remote MCP servers with the Claude API, see the [MCP connector docs](https://platform.claude.com/docs/en/agents-and-tools/MCP connector docs).
+For more information about using remote MCP servers with the Claude API, see the [MCP connector docs](/docs/en/agents-and-tools/mcp-connector).
 
 ## Remote MCP server examples
 
 <MCPServersTable platform="mcpConnector" />
 
 <Note>
-**Looking for more?** [Find hundreds more MCP servers on GitHub](https://platform.claude.com/docs/en/agents-and-tools/Find hundreds more MCP servers on GitHub).
+**Looking for more?** [Find hundreds more MCP servers on GitHub](https://github.com/modelcontextprotocol/servers).
 </Note>

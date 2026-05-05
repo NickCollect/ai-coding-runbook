@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/parallel-tool-use
-fetched_at: 2026-05-04T16:08:36.091719+00:00
+fetched_at: 2026-05-05T19:40:45.537938+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ Enable and format parallel tool calls, with message-history guidance and trouble
 
 ---
 
-This page covers parallel tool calls: when Claude calls multiple tools in one turn, how to format the message history so parallelism keeps working, and how to disable it. For the single-call flow, see [Handle tool calls](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Handle tool calls).
+This page covers parallel tool calls: when Claude calls multiple tools in one turn, how to format the message history so parallelism keeps working, and how to disable it. For the single-call flow, see [Handle tool calls](/docs/en/agents-and-tools/tool-use/handle-tool-calls).
 
 By default, Claude may use multiple tools to answer a user query. You can disable this behavior by:
 
@@ -20,7 +20,7 @@ By default, Claude may use multiple tools to answer a user query. You can disabl
 ## Worked example
 
 <Note>
-**Simpler with Tool Runner**: The example below shows manual parallel tool handling. For most use cases, [Tool Runner](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Tool Runner) automatically handles parallel tool execution with much less code.
+**Simpler with Tool Runner**: The example below shows manual parallel tool handling. For most use cases, [Tool Runner](/docs/en/agents-and-tools/tool-use/tool-runner) automatically handles parallel tool execution with much less code.
 </Note>
 
 Here's a complete, runnable script to test and verify parallel tool calls are working correctly:
@@ -905,11 +905,11 @@ Specifically for parallel tool use:
 ]
 ```
 
-See [Handle tool calls](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Handle tool calls) for other formatting rules.
+See [Handle tool calls](/docs/en/agents-and-tools/tool-use/handle-tool-calls) for other formatting rules.
 
 **2. Weak prompting**
 
-Default prompting may not be sufficient. Use the stronger system prompt from the [Maximizing parallel tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Maximizing parallel tool use) section above.
+Default prompting may not be sufficient. Use the stronger system prompt from the [Maximizing parallel tool use](#maximizing-parallel-tool-use) section above.
 
 **3. Measuring parallel tool usage**
 
@@ -933,6 +933,6 @@ print(f"Average tools per message: {avg_tools_per_message}")
 
 ## Next steps
 
-- For the single-tool-call flow and `tool_result` formatting rules, see [Handle tool calls](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Handle tool calls).
-- For the SDK abstraction that handles parallel execution automatically, see [Tool Runner](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Tool Runner).
-- For the full tool-use workflow, see [Define tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Define tools).
+- For the single-tool-call flow and `tool_result` formatting rules, see [Handle tool calls](/docs/en/agents-and-tools/tool-use/handle-tool-calls).
+- For the SDK abstraction that handles parallel execution automatically, see [Tool Runner](/docs/en/agents-and-tools/tool-use/tool-runner).
+- For the full tool-use workflow, see [Define tools](/docs/en/agents-and-tools/tool-use/define-tools).

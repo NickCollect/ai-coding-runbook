@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/quickstart
-fetched_at: 2026-05-04T16:08:51.892675+00:00
+fetched_at: 2026-05-05T19:40:46.243728+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,7 +14,7 @@ This tutorial shows you how to use Agent Skills to create a PowerPoint presentat
 
 ## Prerequisites
 
-- [Claude API key](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/Claude API key)
+- [Claude API key](/settings/keys)
 - Python 3.7+ or curl installed
 - Basic familiarity with making API requests
 
@@ -28,7 +28,7 @@ Pre-built Agent Skills extend Claude's capabilities with specialized expertise f
 - **PDF (pdf):** Generate PDF documents
 
 <Note>
-**Want to create custom Skills?** See the [Agent Skills Cookbook](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/Agent Skills Cookbook) for examples of building your own Skills with domain-specific expertise.
+**Want to create custom Skills?** See the [Agent Skills Cookbook](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction) for examples of building your own Skills with domain-specific expertise.
 </Note>
 
 ## Step 1: List available Skills
@@ -311,7 +311,7 @@ if (fileId) {
 </CodeGroup>
 
 <Note>
-For complete details on working with generated files, see the [code execution tool documentation](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/code execution tool documentation).
+For complete details on working with generated files, see the [code execution tool documentation](/docs/en/agents-and-tools/tool-use/code-execution-tool#retrieve-generated-files).
 </Note>
 
 ## Try more examples

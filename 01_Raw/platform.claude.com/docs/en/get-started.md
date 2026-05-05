@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/get-started
-fetched_at: 2026-05-04T16:08:23.753546+00:00
+fetched_at: 2026-05-05T19:40:45.088386+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,8 +12,8 @@ Make your first API call to Claude and build a simple web search assistant.
 
 ## Prerequisites
 
-- An Anthropic [Console account](https://platform.claude.com/docs/en/Console account)
-- An [API key](https://platform.claude.com/docs/en/API key)
+- An Anthropic [Console account](/)
+- An [API key](/settings/keys)
 
 ## Call the API
 
@@ -21,7 +21,7 @@ Make your first API call to Claude and build a simple web search assistant.
   <Tab title="cURL">
     <Steps>
       <Step title="Set your API key">
-        Get your API key from the [Claude Console](https://platform.claude.com/docs/en/Claude Console) and set it as an environment variable:
+        Get your API key from the [Claude Console](/settings/keys) and set it as an environment variable:
 
         ```bash
         export ANTHROPIC_API_KEY='your-api-key-here'
@@ -77,7 +77,7 @@ Make your first API call to Claude and build a simple web search assistant.
   <Tab title="CLI">
     <Steps>
       <Step title="Set your API key">
-        Get your API key from the [Claude Console](https://platform.claude.com/docs/en/Claude Console) and set it as an environment variable:
+        Get your API key from the [Claude Console](/settings/keys) and set it as an environment variable:
 
         ```bash
         export ANTHROPIC_API_KEY='your-api-key-here'
@@ -93,7 +93,7 @@ Make your first API call to Claude and build a simple web search assistant.
         brew install anthropics/tap/ant
         ```
 
-        For other installation methods, see [Installation](https://platform.claude.com/docs/en/Installation) in the CLI reference.
+        For other installation methods, see [Installation](/docs/en/api/sdks/cli#installation) in the CLI reference.
       </Step>
 
       <Step title="Make your first API call">
@@ -136,7 +136,7 @@ Make your first API call to Claude and build a simple web search assistant.
   <Tab title="Python">
     <Steps>
       <Step title="Set your API key">
-        Get your API key from the [Claude Console](https://platform.claude.com/docs/en/Claude Console) and set it as an environment variable:
+        Get your API key from the [Claude Console](/settings/keys) and set it as an environment variable:
 
         ```bash
         export ANTHROPIC_API_KEY='your-api-key-here'
@@ -196,7 +196,7 @@ Make your first API call to Claude and build a simple web search assistant.
   <Tab title="TypeScript">
     <Steps>
       <Step title="Set your API key">
-        Get your API key from the [Claude Console](https://platform.claude.com/docs/en/Claude Console) and set it as an environment variable:
+        Get your API key from the [Claude Console](/settings/keys) and set it as an environment variable:
 
         ```bash
         export ANTHROPIC_API_KEY='your-api-key-here'
@@ -290,7 +290,7 @@ main().catch(console.error);
   <Tab title="Java">
     <Steps>
       <Step title="Set your API key">
-        Get your API key from the [Claude Console](https://platform.claude.com/docs/en/Claude Console) and set it as an environment variable:
+        Get your API key from the [Claude Console](/settings/keys) and set it as an environment variable:
 
         ```bash
         export ANTHROPIC_API_KEY='your-api-key-here'
@@ -300,7 +300,7 @@ main().catch(console.error);
       </Step>
 
       <Step title="Install the SDK">
-        Add the Anthropic Java SDK to your project. First find the current version on [Maven Central](https://platform.claude.com/docs/en/Maven Central).
+        Add the Anthropic Java SDK to your project. First find the current version on [Maven Central](https://central.sonatype.com/artifact/com.anthropic/anthropic-java).
 
         **Gradle:**
         ```groovy

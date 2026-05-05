@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/messages/count_tokens
-fetched_at: 2026-05-04T16:09:22.711528+00:00
+fetched_at: 2026-05-05T19:40:47.670336+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ Count the number of tokens in a Message.
 
 The Token Count API can be used to count the number of tokens in a Message, including tools, images, and documents, without creating it.
 
-Learn more about token counting in our [user guide](https://platform.claude.com/docs/en/api/beta/messages/user guide)
+Learn more about token counting in our [user guide](https://docs.claude.com/en/docs/build-with-claude/token-counting)
 
 ### Header Parameters
 
@@ -117,9 +117,9 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
   {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
   ```
 
-  See [input examples](https://platform.claude.com/docs/en/api/beta/messages/input examples).
+  See [input examples](https://docs.claude.com/en/api/messages-examples).
 
-  Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/api/beta/messages/system prompt), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+  Note that if you want to include a [system prompt](https://docs.claude.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
   There is a limit of 100,000 messages in a single request.
 
@@ -2724,13 +2724,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   The model that will complete your prompt.
 
-  See [models](https://platform.claude.com/docs/en/api/beta/messages/models) for additional details and options.
+  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
   - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
     The model that will complete your prompt.
 
-    See [models](https://platform.claude.com/docs/en/api/beta/messages/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `"claude-opus-4-7"`
 
@@ -2987,7 +2987,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `format: optional BetaJSONOutputFormat`
 
-    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/api/beta/messages/structured outputs)
+    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
     - `schema: map[unknown]`
 
@@ -3017,7 +3017,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
 - `output_format: optional BetaJSONOutputFormat`
 
-  Deprecated: Use `output_config.format` instead. See [structured outputs](https://platform.claude.com/docs/en/api/beta/messages/structured outputs)
+  Deprecated: Use `output_config.format` instead. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
   A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
@@ -3041,7 +3041,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   System prompt.
 
-  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/api/beta/messages/guide to system prompts).
+  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
   - `UnionMember0 = string`
 
@@ -3164,7 +3164,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-  See [extended thinking](https://platform.claude.com/docs/en/api/beta/messages/extended thinking) for details.
+  See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
   - `BetaThinkingConfigEnabled = object { budget_tokens, type, display }`
 
@@ -3174,7 +3174,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       Must be ≥1024 and less than `max_tokens`.
 
-      See [extended thinking](https://platform.claude.com/docs/en/api/beta/messages/extended thinking) for details.
+      See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
     - `type: "enabled"`
 
@@ -3272,13 +3272,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/api/beta/messages/server tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/api/beta/messages/web search tool)).
+  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview#server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/web-search-tool)).
 
   Each tool definition includes:
 
   * `name`: Name of the tool.
   * `description`: Optional, but strongly-recommended description of the tool.
-  * `input_schema`: [JSON schema](https://platform.claude.com/docs/en/api/beta/messages/JSON schema) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
+  * `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
 
   For example, if you defined `tools` as:
 
@@ -3328,13 +3328,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-  See our [guide](https://platform.claude.com/docs/en/api/beta/messages/guide) for more details.
+  See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
   - `BetaTool = object { input_schema, name, allowed_callers, 7 more }`
 
     - `input_schema: object { type, properties, required }`
 
-      [JSON schema](https://platform.claude.com/docs/en/api/beta/messages/JSON schema) for this tool's input.
+      [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
       This defines the shape of the `input` that your tool accepts and that the model will produce.
 
@@ -4241,7 +4241,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       - `country: optional string`
 
-        The two letter [ISO country code](https://platform.claude.com/docs/en/api/beta/messages/ISO country code) of the user.
+        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
       - `region: optional string`
 
@@ -4249,7 +4249,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       - `timezone: optional string`
 
-        The [IANA timezone](https://platform.claude.com/docs/en/api/beta/messages/IANA timezone) of the user.
+        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
   - `BetaWebFetchTool20250910 = object { name, type, allowed_callers, 8 more }`
 
@@ -4405,7 +4405,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       - `country: optional string`
 
-        The two letter [ISO country code](https://platform.claude.com/docs/en/api/beta/messages/ISO country code) of the user.
+        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
       - `region: optional string`
 
@@ -4413,7 +4413,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       - `timezone: optional string`
 
-        The [IANA timezone](https://platform.claude.com/docs/en/api/beta/messages/IANA timezone) of the user.
+        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
   - `BetaWebFetchTool20260209 = object { name, type, allowed_callers, 8 more }`
 
@@ -4577,13 +4577,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/beta/messages/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/messages/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 

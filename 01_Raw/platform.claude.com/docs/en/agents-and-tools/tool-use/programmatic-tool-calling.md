@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling
-fetched_at: 2026-05-04T16:08:45.697479+00:00
+fetched_at: 2026-05-05T19:40:45.976249+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,12 +8,12 @@ fetch_method: mintlify_md
 
 ---
 
-Programmatic tool calling allows Claude to write code that calls your tools programmatically within a [code execution](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code execution) container, rather than requiring round trips through the model for each tool invocation. This reduces latency for multi-tool workflows and decreases token consumption by allowing Claude to filter or process data before it reaches the model's context window. On agentic search benchmarks like [BrowseComp](https://platform.claude.com/docs/en/agents-and-tools/tool-use/BrowseComp) and [DeepSearchQA](https://platform.claude.com/docs/en/agents-and-tools/tool-use/DeepSearchQA), which test multi-step web research and complex information retrieval, adding programmatic tool calling on top of basic search tools was the key factor that fully unlocked agent performance.
+Programmatic tool calling allows Claude to write code that calls your tools programmatically within a [code execution](/docs/en/agents-and-tools/tool-use/code-execution-tool) container, rather than requiring round trips through the model for each tool invocation. This reduces latency for multi-tool workflows and decreases token consumption by allowing Claude to filter or process data before it reaches the model's context window. On agentic search benchmarks like [BrowseComp](https://arxiv.org/abs/2504.12516) and [DeepSearchQA](https://github.com/google-deepmind/deepsearchqa), which test multi-step web research and complex information retrieval, adding programmatic tool calling on top of basic search tools was the key factor that fully unlocked agent performance.
 
 The difference compounds fast in real workflows. Consider checking budget compliance across 20 employees: the traditional approach requires 20 separate model round-trips, pulling thousands of expense line items into the context along the way. With programmatic tool calling, a single script runs all 20 lookups, filters the results, and returns only the employees who exceeded their limits, shrinking what Claude needs to reason over from hundreds of kilobytes down to a handful of lines.
 
 <Tip>
-For a deeper look at the inference and context costs that programmatic tool calling addresses, see [Advanced tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Advanced tool use).
+For a deeper look at the inference and context costs that programmatic tool calling addresses, see [Advanced tool use](https://www.anthropic.com/engineering/advanced-tool-use).
 </Tip>
 
 <Note>
@@ -21,7 +21,7 @@ This feature requires the code execution tool to be enabled.
 </Note>
 
 <Note>
-This feature is **not** eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Zero Data Retention (ZDR)). Data is retained according to the feature's standard retention policy.
+This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). Data is retained according to the feature's standard retention policy.
 </Note>
 
 ## Model compatibility
@@ -36,7 +36,7 @@ Programmatic tool calling requires `code_execution_20260120`, which is supported
 | Claude Opus 4.5 (`claude-opus-4-5-20251101`) |
 | Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) |
 
-For the full code execution tool version matrix, see the [code execution tool model compatibility table](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code execution tool model compatibility table). Programmatic tool calling is available via the Claude API and Microsoft Foundry.
+For the full code execution tool version matrix, see the [code execution tool model compatibility table](/docs/en/agents-and-tools/tool-use/code-execution-tool#model-compatibility). Programmatic tool calling is available via the Claude API and Microsoft Foundry.
 
 ## Quick start
 
@@ -510,7 +510,7 @@ Send a request with code execution and a tool that allows programmatic calling. 
 Provide detailed descriptions of your tool's output format in the tool description. If you specify that the tool returns JSON, Claude attempts to deserialize and process the result in code. The more detail you provide about the output schema, the better Claude can handle the response programmatically.
 </Note>
 
-The request shape is identical to the [Quick start](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Quick start) example: include `code_execution` in your tools list, add `allowed_callers: ["code_execution_20260120"]` to any tool you want Claude to invoke from code, and send your user message.
+The request shape is identical to the [Quick start](#quick-start) example: include `code_execution` in your tools list, add `allowed_callers: ["code_execution_20260120"]` to any tool you want Claude to invoke from code, and send your user message.
 
 ### Step 2: API response with tool call
 
@@ -1056,6 +1056,7 @@ Claude can write code that processes multiple items efficiently:
 async def query_database(sql):
     return [{"revenue": 100}]
 
+
 async def _claude_code():
     regions = ["West", "East", "Central", "North", "South"]
     results = {}
@@ -1066,6 +1067,7 @@ async def _claude_code():
     # Process results programmatically
     top_region = max(results.items(), key=lambda x: x[1])
     print(f"Top region: {top_region[0]} with ${top_region[1]:,} in revenue")
+
 
 _ = _claude_code
 ```
@@ -1083,6 +1085,7 @@ Claude can stop processing as soon as success criteria are met:
 async def check_health(ep):
     return "healthy"
 
+
 async def _claude_code():
     endpoints = ["us-east", "eu-west", "apac"]
     for endpoint in endpoints:
@@ -1090,6 +1093,7 @@ async def _claude_code():
         if status == "healthy":
             print(f"Found healthy endpoint: {endpoint}")
             break  # Stop early, don't check remaining
+
 
 _ = _claude_code
 ```
@@ -1100,13 +1104,17 @@ _ = _claude_code
 async def get_file_info(p):
     return {"size": 500}
 
+
 async def read_full_file(p):
     return "content"
+
 
 async def read_file_summary(p):
     return "summary"
 
+
 path = "/tmp/example.txt"
+
 
 async def _claude_code():
     file_info = await get_file_info(path)
@@ -1115,6 +1123,7 @@ async def _claude_code():
     else:
         content = await read_file_summary(path)
     print(content)
+
 
 _ = _claude_code
 ```
@@ -1125,7 +1134,9 @@ _ = _claude_code
 async def fetch_logs(sid):
     return ["INFO: ok", "ERROR: failed"]
 
+
 server_id = "srv-01"
+
 
 async def _claude_code():
     logs = await fetch_logs(server_id)
@@ -1133,6 +1144,7 @@ async def _claude_code():
     print(f"Found {len(errors)} errors")
     for error in errors[-10:]:  # Only return last 10 errors
         print(error)
+
 
 _ = _claude_code
 ```
@@ -1250,7 +1262,7 @@ Claude's code receives this error and can handle it appropriately.
 
 The following tools cannot currently be called programmatically, but support may be added in future releases:
 
-- Tools provided by an [MCP connector](https://platform.claude.com/docs/en/agents-and-tools/tool-use/MCP connector)
+- Tools provided by an [MCP connector](/docs/en/agents-and-tools/mcp-connector)
 
 ### Message formatting restrictions
 
@@ -1314,7 +1326,7 @@ For example, calling 10 tools directly uses ~10x the tokens of calling them prog
 
 ## Usage and pricing
 
-Programmatic tool calling uses the same pricing as code execution. See the [code execution pricing](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code execution pricing) for details.
+Programmatic tool calling uses the same pricing as code execution. See the [code execution pricing](/docs/en/agents-and-tools/tool-use/code-execution-tool#usage-and-pricing) for details.
 
 <Note>
 Token counting for programmatic tool calls: Tool results from programmatic invocations do not count toward your input/output token usage. Only the final code execution result and Claude's response count.
@@ -1427,7 +1439,7 @@ Consider using Anthropic's managed solution if you're using the Claude API.
 
 Programmatic tool calling is built on the code execution infrastructure and uses the same sandbox containers. Container data, including execution artifacts and outputs, is retained for up to 30 days.
 
-For ZDR eligibility across all features, see [API and data retention](https://platform.claude.com/docs/en/agents-and-tools/tool-use/API and data retention).
+For ZDR eligibility across all features, see [API and data retention](/docs/en/build-with-claude/api-and-data-retention).
 
 ## Related features
 

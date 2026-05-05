@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/memory_stores/memories/create
-fetched_at: 2026-05-04T16:09:58.552789+00:00
+fetched_at: 2026-05-05T19:40:49.459748+00:00
 fetch_method: mintlify_md
 ---
 
@@ -118,7 +118,7 @@ Create a memory
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](https://platform.claude.com/docs/en/api/beta/memory_stores/memories/List memory versions).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list).
 
   - `path: string`
 

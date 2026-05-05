@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/events-and-streaming
-fetched_at: 2026-05-04T16:09:03.262321+00:00
+fetched_at: 2026-05-05T19:40:46.660719+00:00
 fetch_method: mintlify_md
 ---
 
@@ -33,7 +33,7 @@ Event type strings follow a `{domain}.{action}` naming convention.
 | `user.interrupt` | Stop the agent mid-execution. |
 | `user.custom_tool_result` | Response to a custom tool call from the agent. |
 | `user.tool_confirmation` | Approve or deny an agent or MCP tool call when a permission policy requires confirmation. |
-| `user.define_outcome` | Define an [outcome](https://platform.claude.com/docs/en/managed-agents/outcome) for the agent to work toward.  |
+| `user.define_outcome` | Define an [outcome](/docs/en/managed-agents/define-outcomes) for the agent to work toward.  |
 
   </Tab>
   <Tab title="Agent events">
@@ -48,8 +48,8 @@ Event type strings follow a `{domain}.{action}` naming convention.
 | `agent.mcp_tool_result` | Result of an MCP tool execution. |
 | `agent.custom_tool_use` | Agent invokes one of your custom tools. Respond with a `user.custom_tool_result` event. |
 | `agent.thread_context_compacted` | Conversation history was compacted to fit the context window. |
-| `agent.thread_message_sent` | Agent sent a message to another [multiagent](https://platform.claude.com/docs/en/managed-agents/multiagent) thread. |
-| `agent.thread_message_received` | Agent received a message from another [multiagent](https://platform.claude.com/docs/en/managed-agents/multiagent) thread. |
+| `agent.thread_message_sent` | Agent sent a message to another [multiagent](/docs/en/managed-agents/multi-agent) thread. |
+| `agent.thread_message_received` | Agent received a message from another [multiagent](/docs/en/managed-agents/multi-agent) thread. |
 
   </Tab>
   <Tab title="Session events">
@@ -61,9 +61,9 @@ Event type strings follow a `{domain}.{action}` naming convention.
 | `session.status_rescheduled` | A transient error occurred and the session is retrying automatically. |
 | `session.status_terminated` | Session ended due to an unrecoverable error. |
 | `session.error` | An error occurred during processing. Includes a typed `error` object with a `retry_status`. |
-| `session.outcome_evaluated` | An [outcome](https://platform.claude.com/docs/en/managed-agents/outcome) evaluation has reached a terminal status.  |
-| `session.thread_created` | The coordinator spawned a new [multiagent](https://platform.claude.com/docs/en/managed-agents/multiagent) thread. |
-| `session.thread_idle` | A [multiagent](https://platform.claude.com/docs/en/managed-agents/multiagent) thread finished its current work. |
+| `session.outcome_evaluated` | An [outcome](/docs/en/managed-agents/define-outcomes) evaluation has reached a terminal status.  |
+| `session.thread_created` | The coordinator spawned a new [multiagent](/docs/en/managed-agents/multi-agent) thread. |
+| `session.thread_idle` | A [multiagent](/docs/en/managed-agents/multi-agent) thread finished its current work. |
 
   </Tab>
   <Tab title="Span events">
@@ -74,9 +74,9 @@ Span events are observability markers that wrap activity for timing and usage tr
 | --- | --- |
 | `span.model_request_start` | A model inference call has started. |
 | `span.model_request_end` | A model inference call has completed. Includes `model_usage` with token counts. |
-| `span.outcome_evaluation_start` | [Outcome](https://platform.claude.com/docs/en/managed-agents/Outcome) evaluation has started.  |
-| `span.outcome_evaluation_ongoing` | Heartbeat during an ongoing [outcome](https://platform.claude.com/docs/en/managed-agents/outcome) evaluation.  |
-| `span.outcome_evaluation_end` | [Outcome](https://platform.claude.com/docs/en/managed-agents/Outcome) evaluation has completed.  |
+| `span.outcome_evaluation_start` | [Outcome](/docs/en/managed-agents/define-outcomes) evaluation has started.  |
+| `span.outcome_evaluation_ongoing` | Heartbeat during an ongoing [outcome](/docs/en/managed-agents/define-outcomes) evaluation.  |
+| `span.outcome_evaluation_end` | [Outcome](/docs/en/managed-agents/define-outcomes) evaluation has completed.  |
 
   </Tab>
 </Tabs>
@@ -1096,7 +1096,7 @@ events.data.each { puts "[#{it.type}] #{it.processed_at}" }
 
 ### Handling custom tool calls
 
-When the agent invokes a [custom tool](https://platform.claude.com/docs/en/managed-agents/custom tool):
+When the agent invokes a [custom tool](/docs/en/managed-agents/tools#custom-tools):
 
 1. The session emits an `agent.custom_tool_use` event containing the tool name and input.
 2. The session pauses with a `session.status_idle` event containing `stop_reason: requires_action`. The blocking event IDs are in the `stop_reason.requires_action.event_ids` array.
@@ -1373,7 +1373,7 @@ end
 
 ### Tool confirmation
 
-When a [permission policy](https://platform.claude.com/docs/en/managed-agents/permission policy) requires confirmation before a tool executes:
+When a [permission policy](/docs/en/managed-agents/permission-policies) requires confirmation before a tool executes:
 
 1. The session emits an `agent.tool_use` or `agent.mcp_tool_use` event.
 2. The session pauses with a `session.status_idle` event containing `stop_reason: requires_action`. The blocking event IDs are in the `stop_reason.requires_action.event_ids` array.

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/token-counting
-fetched_at: 2026-05-04T16:08:49.143637+00:00
+fetched_at: 2026-05-05T19:40:46.082755+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,14 +14,14 @@ Token counting enables you to determine the number of tokens in a message before
 - Optimize prompts to be a specific length
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/Zero Data Retention (ZDR)). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 ---
 
 ## How to count message tokens
 
-The [token counting](https://platform.claude.com/docs/en/build-with-claude/token counting) endpoint accepts the same structured list of inputs for creating a message, including support for system prompts, [tools](https://platform.claude.com/docs/en/build-with-claude/tools), [images](https://platform.claude.com/docs/en/build-with-claude/images), and [PDFs](https://platform.claude.com/docs/en/build-with-claude/PDFs). The response contains the total number of input tokens.
+The [token counting](/docs/en/api/messages-count-tokens) endpoint accepts the same structured list of inputs for creating a message, including support for system prompts, [tools](/docs/en/agents-and-tools/tool-use/overview), [images](/docs/en/build-with-claude/vision), and [PDFs](/docs/en/build-with-claude/pdf-support). The response contains the total number of input tokens.
 
 <Note>
 The token count should be considered an **estimate**. In some cases, the actual number of input tokens used when creating a message may differ by a small amount.
@@ -30,7 +30,7 @@ Token counts may include tokens added automatically by Anthropic for system opti
 </Note>
 
 ### Supported models
-All [active models](https://platform.claude.com/docs/en/build-with-claude/active models) support token counting.
+All [active models](/docs/en/about-claude/models/overview) support token counting.
 
 ### Count tokens in basic messages
 
@@ -213,7 +213,7 @@ puts response
 ### Count tokens in messages with tools
 
 <Note>
-[Server tool](https://platform.claude.com/docs/en/build-with-claude/Server tool) token counts only apply to the first sampling call.
+[Server tool](/docs/en/agents-and-tools/tool-use/server-tools) token counts only apply to the first sampling call.
 </Note>
 
 <CodeGroup>
@@ -893,7 +893,7 @@ puts response
 ### Count tokens in messages with extended thinking
 
 <Note>
-See [how the context window is calculated with extended thinking](https://platform.claude.com/docs/en/build-with-claude/how the context window is calculated with extended thinking) for more details
+See [how the context window is calculated with extended thinking](/docs/en/build-with-claude/extended-thinking#how-context-window-is-calculated-with-extended-thinking) for more details
 - Thinking blocks from **previous** assistant turns are ignored and **do not** count toward your input tokens
 - **Current** assistant turn thinking **does** count toward your input tokens
 </Note>
@@ -1269,7 +1269,7 @@ puts response
 ### Count tokens in messages with PDFs
 
 <Note>
-Token counting supports PDFs with the same [limitations](https://platform.claude.com/docs/en/build-with-claude/limitations) as the Messages API.
+Token counting supports PDFs with the same [limitations](/docs/en/build-with-claude/pdf-support#pdf-support-limitations) as the Messages API.
 </Note>
 
 <CodeGroup>
@@ -1604,7 +1604,7 @@ puts response
 
 ## Pricing and rate limits
 
-Token counting is **free to use** but subject to requests per minute rate limits based on your [usage tier](https://platform.claude.com/docs/en/build-with-claude/usage tier). If you need higher limits, contact sales through the [Claude Console](https://platform.claude.com/docs/en/build-with-claude/Claude Console).
+Token counting is **free to use** but subject to requests per minute rate limits based on your [usage tier](/docs/en/api/rate-limits#rate-limits). If you need higher limits, contact sales through the [Claude Console](/settings/limits).
 
 | Usage tier | Requests per minute (RPM) |
 |------------|---------------------------|

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool
-fetched_at: 2026-05-04T16:08:41.462500+00:00
+fetched_at: 2026-05-05T19:40:45.923542+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,16 +10,16 @@ fetch_method: mintlify_md
 
 The memory tool enables Claude to store and retrieve information across conversations through a memory file directory. Claude can create, read, update, and delete files that persist between sessions, allowing it to build knowledge over time without keeping everything in the context window.
 
-This is the key primitive for just-in-time context retrieval: rather than loading all relevant information upfront, agents store what they learn in memory and pull it back on demand. This keeps the active context focused on what's currently relevant, critical for long-running workflows where loading everything at once would overwhelm the context window. See [Effective context engineering](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Effective context engineering) for the broader pattern.
+This is the key primitive for just-in-time context retrieval: rather than loading all relevant information upfront, agents store what they learn in memory and pull it back on demand. This keeps the active context focused on what's currently relevant, critical for long-running workflows where loading everything at once would overwhelm the context window. See [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) for the broader pattern.
 
 The memory tool operates client-side: you control where and how the data is stored through your own infrastructure.
 
 <Note>
-Reach out through the [feedback form](https://platform.claude.com/docs/en/agents-and-tools/tool-use/feedback form) to share your feedback on this feature.
+Reach out through the [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88) to share your feedback on this feature.
 </Note>
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Zero Data Retention (ZDR)). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 ## Use cases
@@ -98,7 +98,7 @@ Claude calls the memory tool:
 "Based on your customer service guidelines, I can help you craft a response. Please share the ticket details..."
 ```
 
-For model support, see the [Tool reference](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Tool reference).
+For model support, see the [Tool reference](/docs/en/agents-and-tools/tool-use/tool-reference).
 
 ## Getting started
 
@@ -111,8 +111,8 @@ To use the memory tool:
 To handle memory tool operations in your application, you need to implement handlers for each memory command. The SDKs provide memory tool helpers that handle the tool interface. You can subclass `BetaAbstractMemoryTool` (Python) or use `betaMemoryTool` (TypeScript) to implement your own memory backend (file-based, database, cloud storage, encrypted files, etc.).
 
 For working examples, see:
-- Python: [examples/memory/basic.py](https://platform.claude.com/docs/en/agents-and-tools/tool-use/examples/memory/basic.py)
-- TypeScript: [examples/tools-helpers-memory.ts](https://platform.claude.com/docs/en/agents-and-tools/tool-use/examples/tools-helpers-memory.ts)
+- Python: [examples/memory/basic.py](https://github.com/anthropics/anthropic-sdk-python/blob/main/examples/memory/basic.py)
+- TypeScript: [examples/tools-helpers-memory.ts](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/examples/tools-helpers-memory.ts)
 </Note>
 
 ## Basic usage
@@ -573,15 +573,15 @@ Consider these safeguards:
 
 ## Error handling
 
-The memory tool uses similar error handling patterns to the [text editor tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/text editor tool). See the individual tool command sections above for detailed error messages and behaviors. Common errors include file not found, permission errors, invalid paths, and duplicate text matches.
+The memory tool uses similar error handling patterns to the [text editor tool](/docs/en/agents-and-tools/tool-use/text-editor-tool#handle-errors). See the individual tool command sections above for detailed error messages and behaviors. Common errors include file not found, permission errors, invalid paths, and duplicate text matches.
 
 ## Context editing integration
 
-The memory tool pairs with context editing to manage long-running conversations. For details, see [Context editing](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Context editing).
+The memory tool pairs with context editing to manage long-running conversations. For details, see [Context editing](/docs/en/build-with-claude/context-editing).
 
 ## Using with Compaction
 
-The memory tool can also be paired with [compaction](https://platform.claude.com/docs/en/agents-and-tools/tool-use/compaction), which provides server-side summarization of older conversation context. While context editing clears specific tool results on the client side, compaction automatically summarizes the entire conversation on the server side when it approaches the context window limit.
+The memory tool can also be paired with [compaction](/docs/en/build-with-claude/compaction), which provides server-side summarization of older conversation context. While context editing clears specific tool results on the client side, compaction automatically summarizes the entire conversation on the server side when it approaches the context window limit.
 
 For long-running agentic workflows, consider using both: compaction keeps the active context manageable without client-side bookkeeping, and memory persists important information across compaction boundaries so that nothing critical is lost in the summary.
 
@@ -602,7 +602,7 @@ For long-running software projects that span multiple agent sessions, memory fil
 Work on one feature at a time. Only mark a feature complete after end-to-end verification confirms it works, not just after the code is written. This keeps the progress log trustworthy and prevents scope creep from compounding across sessions.
 
 <Tip>
-For a detailed case study of this pattern in practice, including the initializer script, progress file structure, and git-based recovery, see [Effective harnesses for long-running agents](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Effective harnesses for long-running agents).
+For a detailed case study of this pattern in practice, including the initializer script, progress file structure, and git-based recovery, see [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents).
 </Tip>
 
 ## Next steps

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/memory_stores/memory_versions/list
-fetched_at: 2026-05-04T16:10:01.907586+00:00
+fetched_at: 2026-05-05T19:40:49.478833+00:00
 fetch_method: mintlify_md
 ---
 
@@ -134,7 +134,7 @@ List memory versions
 
   - `memory_id: string`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](https://platform.claude.com/docs/en/api/beta/memory_stores/memory_versions/List memory versions) to retrieve the full lineage including the `deleted` row.
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list) to retrieve the full lineage including the `deleted` row.
 
   - `memory_store_id: string`
 
@@ -168,7 +168,7 @@ List memory versions
 
   - `created_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/beta/memory_stores/memory_versions/Sessions API).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](/docs/en/api/sessions-retrieve).
 
     - `BetaManagedAgentsSessionActor = object { session_id, type }`
 
@@ -176,7 +176,7 @@ List memory versions
 
       - `session_id: string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/beta/memory_stores/memory_versions/Retrieve a session) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](/docs/en/api/sessions-retrieve) for further provenance.
 
       - `type: "session_actor"`
 
@@ -216,7 +216,7 @@ List memory versions
 
   - `redacted_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/beta/memory_stores/memory_versions/Sessions API).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](/docs/en/api/sessions-retrieve).
 
     - `BetaManagedAgentsSessionActor = object { session_id, type }`
 
@@ -224,7 +224,7 @@ List memory versions
 
       - `session_id: string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/beta/memory_stores/memory_versions/Retrieve a session) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](/docs/en/api/sessions-retrieve) for further provenance.
 
       - `type: "session_actor"`
 

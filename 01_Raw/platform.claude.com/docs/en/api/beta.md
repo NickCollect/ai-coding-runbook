@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta
-fetched_at: 2026-05-04T16:09:19.319253+00:00
+fetched_at: 2026-05-05T19:40:47.503406+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1388,7 +1388,7 @@ Send a structured list of input messages with text and/or image content, and the
 
 The Messages API can be used for either single queries or stateless multi-turn conversations.
 
-Learn more about the Messages API in our [user guide](https://platform.claude.com/docs/en/api/user guide)
+Learn more about the Messages API in our [user guide](https://docs.claude.com/en/docs/initial-setup)
 
 ### Header Parameters
 
@@ -1454,9 +1454,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-  Set to `0` to populate the [prompt cache](https://platform.claude.com/docs/en/api/prompt cache) without generating a response.
+  Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
 
-  Different models have different maximum values for this parameter.  See [models](https://platform.claude.com/docs/en/api/models) for details.
+  Different models have different maximum values for this parameter.  See [models](https://docs.claude.com/en/docs/models-overview) for details.
 
 - `messages: array of BetaMessageParam`
 
@@ -1503,9 +1503,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
   {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
   ```
 
-  See [input examples](https://platform.claude.com/docs/en/api/input examples).
+  See [input examples](https://docs.claude.com/en/api/messages-examples).
 
-  Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/api/system prompt), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+  Note that if you want to include a [system prompt](https://docs.claude.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
   There is a limit of 100,000 messages in a single request.
 
@@ -4110,13 +4110,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   The model that will complete your prompt.
 
-  See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
   - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
     The model that will complete your prompt.
 
-    See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `"claude-opus-4-7"`
 
@@ -4421,7 +4421,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `format: optional BetaJSONOutputFormat`
 
-    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/api/structured outputs)
+    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
     - `schema: map[unknown]`
 
@@ -4451,7 +4451,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
 - `output_format: optional BetaJSONOutputFormat`
 
-  Deprecated: Use `output_config.format` instead. See [structured outputs](https://platform.claude.com/docs/en/api/structured outputs)
+  Deprecated: Use `output_config.format` instead. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
   A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
@@ -4467,7 +4467,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-  Anthropic offers different levels of service for your API requests. See [service-tiers](https://platform.claude.com/docs/en/api/service-tiers) for details.
+  Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
 
   - `"auto"`
 
@@ -4493,13 +4493,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   Whether to incrementally stream the response using server-sent events.
 
-  See [streaming](https://platform.claude.com/docs/en/api/streaming) for details.
+  See [streaming](https://docs.claude.com/en/api/messages-streaming) for details.
 
 - `system: optional string or array of BetaTextBlockParam`
 
   System prompt.
 
-  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/api/guide to system prompts).
+  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
   - `UnionMember0 = string`
 
@@ -4630,7 +4630,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-  See [extended thinking](https://platform.claude.com/docs/en/api/extended thinking) for details.
+  See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
   - `BetaThinkingConfigEnabled = object { budget_tokens, type, display }`
 
@@ -4640,7 +4640,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       Must be ≥1024 and less than `max_tokens`.
 
-      See [extended thinking](https://platform.claude.com/docs/en/api/extended thinking) for details.
+      See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
     - `type: "enabled"`
 
@@ -4738,13 +4738,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/api/server tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/api/web search tool)).
+  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview#server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/web-search-tool)).
 
   Each tool definition includes:
 
   * `name`: Name of the tool.
   * `description`: Optional, but strongly-recommended description of the tool.
-  * `input_schema`: [JSON schema](https://platform.claude.com/docs/en/api/JSON schema) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
+  * `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
 
   For example, if you defined `tools` as:
 
@@ -4794,13 +4794,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-  See our [guide](https://platform.claude.com/docs/en/api/guide) for more details.
+  See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
   - `BetaTool = object { input_schema, name, allowed_callers, 7 more }`
 
     - `input_schema: object { type, properties, required }`
 
-      [JSON schema](https://platform.claude.com/docs/en/api/JSON schema) for this tool's input.
+      [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
       This defines the shape of the `input` that your tool accepts and that the model will produce.
 
@@ -5707,7 +5707,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `country: optional string`
 
-        The two letter [ISO country code](https://platform.claude.com/docs/en/api/ISO country code) of the user.
+        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
       - `region: optional string`
 
@@ -5715,7 +5715,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `timezone: optional string`
 
-        The [IANA timezone](https://platform.claude.com/docs/en/api/IANA timezone) of the user.
+        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
   - `BetaWebFetchTool20250910 = object { name, type, allowed_callers, 8 more }`
 
@@ -5871,7 +5871,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `country: optional string`
 
-        The two letter [ISO country code](https://platform.claude.com/docs/en/api/ISO country code) of the user.
+        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
       - `region: optional string`
 
@@ -5879,7 +5879,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `timezone: optional string`
 
-        The [IANA timezone](https://platform.claude.com/docs/en/api/IANA timezone) of the user.
+        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
   - `BetaWebFetchTool20260209 = object { name, type, allowed_callers, 8 more }`
 
@@ -6043,13 +6043,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -6367,7 +6367,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   Only sample from the top K options for each subsequent token.
 
-  Used to remove "long tail" low probability responses. [Learn more technical details here](https://platform.claude.com/docs/en/api/Learn more technical details here).
+  Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
   Recommended for advanced use cases only.
 
@@ -7358,13 +7358,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     The model that will complete your prompt.
 
-    See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `"claude-opus-4-7"`
 
@@ -7671,13 +7671,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           The model that will complete your prompt.
 
-          See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
             The model that will complete your prompt.
 
-            See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
             - `"claude-opus-4-7"`
 
@@ -7821,7 +7821,7 @@ Count the number of tokens in a Message.
 
 The Token Count API can be used to count the number of tokens in a Message, including tools, images, and documents, without creating it.
 
-Learn more about token counting in our [user guide](https://platform.claude.com/docs/en/api/user guide)
+Learn more about token counting in our [user guide](https://docs.claude.com/en/docs/build-with-claude/token-counting)
 
 ### Header Parameters
 
@@ -7926,9 +7926,9 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
   {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
   ```
 
-  See [input examples](https://platform.claude.com/docs/en/api/input examples).
+  See [input examples](https://docs.claude.com/en/api/messages-examples).
 
-  Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/api/system prompt), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+  Note that if you want to include a [system prompt](https://docs.claude.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
   There is a limit of 100,000 messages in a single request.
 
@@ -10533,13 +10533,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   The model that will complete your prompt.
 
-  See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
   - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
     The model that will complete your prompt.
 
-    See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `"claude-opus-4-7"`
 
@@ -10796,7 +10796,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `format: optional BetaJSONOutputFormat`
 
-    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/api/structured outputs)
+    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
     - `schema: map[unknown]`
 
@@ -10826,7 +10826,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
 - `output_format: optional BetaJSONOutputFormat`
 
-  Deprecated: Use `output_config.format` instead. See [structured outputs](https://platform.claude.com/docs/en/api/structured outputs)
+  Deprecated: Use `output_config.format` instead. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
   A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
@@ -10850,7 +10850,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   System prompt.
 
-  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/api/guide to system prompts).
+  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
   - `UnionMember0 = string`
 
@@ -10973,7 +10973,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-  See [extended thinking](https://platform.claude.com/docs/en/api/extended thinking) for details.
+  See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
   - `BetaThinkingConfigEnabled = object { budget_tokens, type, display }`
 
@@ -10983,7 +10983,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       Must be ≥1024 and less than `max_tokens`.
 
-      See [extended thinking](https://platform.claude.com/docs/en/api/extended thinking) for details.
+      See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
     - `type: "enabled"`
 
@@ -11081,13 +11081,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/api/server tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/api/web search tool)).
+  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview#server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/web-search-tool)).
 
   Each tool definition includes:
 
   * `name`: Name of the tool.
   * `description`: Optional, but strongly-recommended description of the tool.
-  * `input_schema`: [JSON schema](https://platform.claude.com/docs/en/api/JSON schema) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
+  * `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
 
   For example, if you defined `tools` as:
 
@@ -11137,13 +11137,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-  See our [guide](https://platform.claude.com/docs/en/api/guide) for more details.
+  See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
   - `BetaTool = object { input_schema, name, allowed_callers, 7 more }`
 
     - `input_schema: object { type, properties, required }`
 
-      [JSON schema](https://platform.claude.com/docs/en/api/JSON schema) for this tool's input.
+      [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
       This defines the shape of the `input` that your tool accepts and that the model will produce.
 
@@ -12050,7 +12050,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       - `country: optional string`
 
-        The two letter [ISO country code](https://platform.claude.com/docs/en/api/ISO country code) of the user.
+        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
       - `region: optional string`
 
@@ -12058,7 +12058,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       - `timezone: optional string`
 
-        The [IANA timezone](https://platform.claude.com/docs/en/api/IANA timezone) of the user.
+        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
   - `BetaWebFetchTool20250910 = object { name, type, allowed_callers, 8 more }`
 
@@ -12214,7 +12214,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       - `country: optional string`
 
-        The two letter [ISO country code](https://platform.claude.com/docs/en/api/ISO country code) of the user.
+        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
       - `region: optional string`
 
@@ -12222,7 +12222,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       - `timezone: optional string`
 
-        The [IANA timezone](https://platform.claude.com/docs/en/api/IANA timezone) of the user.
+        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
   - `BetaWebFetchTool20260209 = object { name, type, allowed_callers, 8 more }`
 
@@ -12386,13 +12386,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -12776,13 +12776,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     The model that will complete your prompt.
 
-    See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `"claude-opus-4-7"`
 
@@ -12916,13 +12916,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     The model that will complete your prompt.
 
-    See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `"claude-opus-4-7"`
 
@@ -19136,13 +19136,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -20737,13 +20737,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     The model that will complete your prompt.
 
-    See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `"claude-opus-4-7"`
 
@@ -21050,13 +21050,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           The model that will complete your prompt.
 
-          See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
             The model that will complete your prompt.
 
-            See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
             - `"claude-opus-4-7"`
 
@@ -21306,13 +21306,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
           The model that will complete your prompt.
 
-          See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `"claude-opus-4-7"`
 
@@ -24097,7 +24097,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `format: optional BetaJSONOutputFormat`
 
-    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/api/structured outputs)
+    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
     - `schema: map[unknown]`
 
@@ -25581,13 +25581,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           The model that will complete your prompt.
 
-          See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
             The model that will complete your prompt.
 
-            See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
             - `"claude-opus-4-7"`
 
@@ -26662,13 +26662,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -26975,13 +26975,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             The model that will complete your prompt.
 
-            See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
             - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
               The model that will complete your prompt.
 
-              See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
               - `"claude-opus-4-7"`
 
@@ -28088,13 +28088,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
           The model that will complete your prompt.
 
-          See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `"claude-opus-4-7"`
 
@@ -28401,13 +28401,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               The model that will complete your prompt.
 
-              See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
               - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
                 The model that will complete your prompt.
 
-                See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
                 - `"claude-opus-4-7"`
 
@@ -28793,13 +28793,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             The model that will complete your prompt.
 
-            See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
             - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
               The model that will complete your prompt.
 
-              See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
               - `"claude-opus-4-7"`
 
@@ -31615,7 +31615,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Must be ≥1024 and less than `max_tokens`.
 
-    See [extended thinking](https://platform.claude.com/docs/en/api/extended thinking) for details.
+    See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
   - `type: "enabled"`
 
@@ -31637,7 +31637,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-  See [extended thinking](https://platform.claude.com/docs/en/api/extended thinking) for details.
+  See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
   - `BetaThinkingConfigEnabled = object { budget_tokens, type, display }`
 
@@ -31647,7 +31647,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Must be ≥1024 and less than `max_tokens`.
 
-      See [extended thinking](https://platform.claude.com/docs/en/api/extended thinking) for details.
+      See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
     - `type: "enabled"`
 
@@ -31727,7 +31727,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `input_schema: object { type, properties, required }`
 
-    [JSON schema](https://platform.claude.com/docs/en/api/JSON schema) for this tool's input.
+    [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
     This defines the shape of the `input` that your tool accepts and that the model will produce.
 
@@ -33544,7 +33544,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `input_schema: object { type, properties, required }`
 
-      [JSON schema](https://platform.claude.com/docs/en/api/JSON schema) for this tool's input.
+      [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
       This defines the shape of the `input` that your tool accepts and that the model will produce.
 
@@ -34451,7 +34451,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `country: optional string`
 
-        The two letter [ISO country code](https://platform.claude.com/docs/en/api/ISO country code) of the user.
+        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
       - `region: optional string`
 
@@ -34459,7 +34459,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `timezone: optional string`
 
-        The [IANA timezone](https://platform.claude.com/docs/en/api/IANA timezone) of the user.
+        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
   - `BetaWebFetchTool20250910 = object { name, type, allowed_callers, 8 more }`
 
@@ -34615,7 +34615,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `country: optional string`
 
-        The two letter [ISO country code](https://platform.claude.com/docs/en/api/ISO country code) of the user.
+        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
       - `region: optional string`
 
@@ -34623,7 +34623,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `timezone: optional string`
 
-        The [IANA timezone](https://platform.claude.com/docs/en/api/IANA timezone) of the user.
+        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
   - `BetaWebFetchTool20260209 = object { name, type, allowed_callers, 8 more }`
 
@@ -34787,13 +34787,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -35408,13 +35408,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
           The model that will complete your prompt.
 
-          See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `"claude-opus-4-7"`
 
@@ -35544,7 +35544,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `country: optional string`
 
-    The two letter [ISO country code](https://platform.claude.com/docs/en/api/ISO country code) of the user.
+    The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
   - `region: optional string`
 
@@ -35552,7 +35552,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `timezone: optional string`
 
-    The [IANA timezone](https://platform.claude.com/docs/en/api/IANA timezone) of the user.
+    The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
 ### Beta Web Fetch Block
 
@@ -36813,7 +36813,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `country: optional string`
 
-      The two letter [ISO country code](https://platform.claude.com/docs/en/api/ISO country code) of the user.
+      The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
     - `region: optional string`
 
@@ -36821,7 +36821,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `timezone: optional string`
 
-      The [IANA timezone](https://platform.claude.com/docs/en/api/IANA timezone) of the user.
+      The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
 ### Beta Web Search Tool 20260209
 
@@ -36904,7 +36904,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `country: optional string`
 
-      The two letter [ISO country code](https://platform.claude.com/docs/en/api/ISO country code) of the user.
+      The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
     - `region: optional string`
 
@@ -36912,7 +36912,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `timezone: optional string`
 
-      The [IANA timezone](https://platform.claude.com/docs/en/api/IANA timezone) of the user.
+      The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
 ### Beta Web Search Tool Request Error
 
@@ -37235,7 +37235,7 @@ Send a batch of Message creation requests.
 
 The Message Batches API can be used to process multiple Messages API requests at once. Once a Message Batch is created, it begins processing immediately. Batches can take up to 24 hours to complete.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/api/user guide)
+Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
 
 ### Header Parameters
 
@@ -37309,7 +37309,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     Messages API creation parameters for the individual request.
 
-    See the [Messages API reference](https://platform.claude.com/docs/en/api/Messages API reference) for full documentation on available parameters.
+    See the [Messages API reference](https://docs.claude.com/en/api/messages) for full documentation on available parameters.
 
     - `max_tokens: number`
 
@@ -37317,9 +37317,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-      Set to `0` to populate the [prompt cache](https://platform.claude.com/docs/en/api/prompt cache) without generating a response.
+      Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
 
-      Different models have different maximum values for this parameter.  See [models](https://platform.claude.com/docs/en/api/models) for details.
+      Different models have different maximum values for this parameter.  See [models](https://docs.claude.com/en/docs/models-overview) for details.
 
     - `messages: array of BetaMessageParam`
 
@@ -37366,9 +37366,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
       {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
       ```
 
-      See [input examples](https://platform.claude.com/docs/en/api/input examples).
+      See [input examples](https://docs.claude.com/en/api/messages-examples).
 
-      Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/api/system prompt), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+      Note that if you want to include a [system prompt](https://docs.claude.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
       There is a limit of 100,000 messages in a single request.
 
@@ -39973,13 +39973,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -40284,7 +40284,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `format: optional BetaJSONOutputFormat`
 
-        A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/api/structured outputs)
+        A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
         - `schema: map[unknown]`
 
@@ -40314,7 +40314,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `output_format: optional BetaJSONOutputFormat`
 
-      Deprecated: Use `output_config.format` instead. See [structured outputs](https://platform.claude.com/docs/en/api/structured outputs)
+      Deprecated: Use `output_config.format` instead. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
       A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
@@ -40330,7 +40330,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-      Anthropic offers different levels of service for your API requests. See [service-tiers](https://platform.claude.com/docs/en/api/service-tiers) for details.
+      Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
 
       - `"auto"`
 
@@ -40356,13 +40356,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       Whether to incrementally stream the response using server-sent events.
 
-      See [streaming](https://platform.claude.com/docs/en/api/streaming) for details.
+      See [streaming](https://docs.claude.com/en/api/messages-streaming) for details.
 
     - `system: optional string or array of BetaTextBlockParam`
 
       System prompt.
 
-      A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/api/guide to system prompts).
+      A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
       - `UnionMember0 = string`
 
@@ -40493,7 +40493,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-      See [extended thinking](https://platform.claude.com/docs/en/api/extended thinking) for details.
+      See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
       - `BetaThinkingConfigEnabled = object { budget_tokens, type, display }`
 
@@ -40503,7 +40503,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           Must be ≥1024 and less than `max_tokens`.
 
-          See [extended thinking](https://platform.claude.com/docs/en/api/extended thinking) for details.
+          See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
         - `type: "enabled"`
 
@@ -40601,13 +40601,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-      There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/api/server tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/api/web search tool)).
+      There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview#server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/web-search-tool)).
 
       Each tool definition includes:
 
       * `name`: Name of the tool.
       * `description`: Optional, but strongly-recommended description of the tool.
-      * `input_schema`: [JSON schema](https://platform.claude.com/docs/en/api/JSON schema) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
+      * `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
 
       For example, if you defined `tools` as:
 
@@ -40657,13 +40657,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-      See our [guide](https://platform.claude.com/docs/en/api/guide) for more details.
+      See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
       - `BetaTool = object { input_schema, name, allowed_callers, 7 more }`
 
         - `input_schema: object { type, properties, required }`
 
-          [JSON schema](https://platform.claude.com/docs/en/api/JSON schema) for this tool's input.
+          [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
           This defines the shape of the `input` that your tool accepts and that the model will produce.
 
@@ -41570,7 +41570,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `country: optional string`
 
-            The two letter [ISO country code](https://platform.claude.com/docs/en/api/ISO country code) of the user.
+            The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
           - `region: optional string`
 
@@ -41578,7 +41578,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `timezone: optional string`
 
-            The [IANA timezone](https://platform.claude.com/docs/en/api/IANA timezone) of the user.
+            The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
       - `BetaWebFetchTool20250910 = object { name, type, allowed_callers, 8 more }`
 
@@ -41734,7 +41734,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `country: optional string`
 
-            The two letter [ISO country code](https://platform.claude.com/docs/en/api/ISO country code) of the user.
+            The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
           - `region: optional string`
 
@@ -41742,7 +41742,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `timezone: optional string`
 
-            The [IANA timezone](https://platform.claude.com/docs/en/api/IANA timezone) of the user.
+            The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
       - `BetaWebFetchTool20260209 = object { name, type, allowed_callers, 8 more }`
 
@@ -41906,13 +41906,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           The model that will complete your prompt.
 
-          See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
             The model that will complete your prompt.
 
-            See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
             - `"claude-opus-4-7"`
 
@@ -42230,7 +42230,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       Only sample from the top K options for each subsequent token.
 
-      Used to remove "long tail" low probability responses. [Learn more technical details here](https://platform.claude.com/docs/en/api/Learn more technical details here).
+      Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
       Recommended for advanced use cases only.
 
@@ -42369,7 +42369,7 @@ curl https://api.anthropic.com/v1/messages/batches \
 
 This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/api/user guide)
+Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
 
 ### Path Parameters
 
@@ -42538,7 +42538,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/api/user guide)
+Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
 
 ### Query Parameters
 
@@ -42731,7 +42731,7 @@ Batches may be canceled any time before processing ends. Once cancellation is in
 
 The number of canceled requests is specified in `request_counts`. To determine which requests were canceled, check the individual results within the batch. Note that cancellation may not result in any canceled requests if they were non-interruptible.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/api/user guide)
+Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
 
 ### Path Parameters
 
@@ -42903,7 +42903,7 @@ Delete a Message Batch.
 
 Message Batches can only be deleted once they've finished processing. If you'd like to delete an in-progress batch, you must first cancel it.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/api/user guide)
+Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
 
 ### Path Parameters
 
@@ -43001,7 +43001,7 @@ Streams the results of a Message Batch as a `.jsonl` file.
 
 Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/api/user guide)
+Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
 
 ### Path Parameters
 
@@ -44058,13 +44058,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           The model that will complete your prompt.
 
-          See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
             The model that will complete your prompt.
 
-            See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
             - `"claude-opus-4-7"`
 
@@ -44371,13 +44371,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 The model that will complete your prompt.
 
-                See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
                 - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
                   The model that will complete your prompt.
 
-                  See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
                   - `"claude-opus-4-7"`
 
@@ -45813,13 +45813,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           The model that will complete your prompt.
 
-          See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
             The model that will complete your prompt.
 
-            See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
             - `"claude-opus-4-7"`
 
@@ -46126,13 +46126,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 The model that will complete your prompt.
 
-                See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
                 - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
                   The model that will complete your prompt.
 
-                  See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
                   - `"claude-opus-4-7"`
 
@@ -47367,13 +47367,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
           The model that will complete your prompt.
 
-          See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `"claude-opus-4-7"`
 
@@ -47680,13 +47680,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               The model that will complete your prompt.
 
-              See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
               - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
                 The model that will complete your prompt.
 
-                See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
                 - `"claude-opus-4-7"`
 
@@ -48883,13 +48883,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -49196,13 +49196,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             The model that will complete your prompt.
 
-            See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
             - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
               The model that will complete your prompt.
 
-              See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
               - `"claude-opus-4-7"`
 
@@ -49390,19 +49390,19 @@ Create Agent
 
 - `model: BetaManagedAgentsModel or BetaManagedAgentsModelConfigParams`
 
-  Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/api/model string), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
+  Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
 
   - `BetaManagedAgentsModel = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string`
 
     The model that will power your agent.
 
-    See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
       The model that will power your agent.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `"claude-opus-4-7"`
 
@@ -49450,13 +49450,13 @@ Create Agent
 
       The model that will power your agent.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -49804,13 +49804,13 @@ Create Agent
 
       The model that will power your agent.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -50204,13 +50204,13 @@ List Agents
 
       The model that will power your agent.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -50591,13 +50591,13 @@ Get Agent
 
       The model that will power your agent.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -50962,19 +50962,19 @@ Update Agent
 
 - `model: optional BetaManagedAgentsModel or BetaManagedAgentsModelConfigParams`
 
-  Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/api/model string), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
+  Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
   - `BetaManagedAgentsModel = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string`
 
     The model that will power your agent.
 
-    See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
       The model that will power your agent.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `"claude-opus-4-7"`
 
@@ -51022,13 +51022,13 @@ Update Agent
 
       The model that will power your agent.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -51352,13 +51352,13 @@ Update Agent
 
       The model that will power your agent.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -51733,13 +51733,13 @@ Archive Agent
 
       The model that will power your agent.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -52047,13 +52047,13 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
       The model that will power your agent.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -53081,13 +53081,13 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
   The model that will power your agent.
 
-  See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
   - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
     The model that will power your agent.
 
-    See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `"claude-opus-4-7"`
 
@@ -53137,13 +53137,13 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
     The model that will power your agent.
 
-    See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
       The model that will power your agent.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `"claude-opus-4-7"`
 
@@ -53201,13 +53201,13 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
     The model that will power your agent.
 
-    See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
       The model that will power your agent.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `"claude-opus-4-7"`
 
@@ -53427,13 +53427,13 @@ List Agent Versions
 
       The model that will power your agent.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -55700,13 +55700,13 @@ Create Session
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
           The model that will power your agent.
 
-          See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `"claude-opus-4-7"`
 
@@ -56296,13 +56296,13 @@ List Sessions
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
           The model that will power your agent.
 
-          See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `"claude-opus-4-7"`
 
@@ -56845,13 +56845,13 @@ Get Session
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
           The model that will power your agent.
 
-          See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `"claude-opus-4-7"`
 
@@ -57404,13 +57404,13 @@ Update Session
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
           The model that will power your agent.
 
-          See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `"claude-opus-4-7"`
 
@@ -58039,13 +58039,13 @@ Archive Session
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
           The model that will power your agent.
 
-          See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `"claude-opus-4-7"`
 
@@ -58679,13 +58679,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
           The model that will power your agent.
 
-          See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `"claude-opus-4-7"`
 
@@ -59143,13 +59143,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
       The model that will power your agent.
 
-      See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -59733,7 +59733,7 @@ List Events
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/event's) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_confirmation"`
 
@@ -59757,7 +59757,7 @@ List Events
 
     - `custom_tool_use_id: string`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/event's) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.custom_tool_result"`
 
@@ -61162,7 +61162,7 @@ Send Events
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/event's) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_confirmation"`
 
@@ -61178,7 +61178,7 @@ Send Events
 
     - `custom_tool_use_id: string`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/event's) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.custom_tool_result"`
 
@@ -61540,7 +61540,7 @@ Send Events
 
       - `tool_use_id: string`
 
-        The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/event's) `stop_reason.event_ids` field.
+        The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       - `type: "user.tool_confirmation"`
 
@@ -61564,7 +61564,7 @@ Send Events
 
       - `custom_tool_use_id: string`
 
-        The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/event's) `stop_reason.event_ids` field.
+        The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       - `type: "user.custom_tool_result"`
 
@@ -62015,7 +62015,7 @@ Stream Events
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/event's) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_confirmation"`
 
@@ -62039,7 +62039,7 @@ Stream Events
 
     - `custom_tool_use_id: string`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/event's) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.custom_tool_result"`
 
@@ -64046,7 +64046,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/event's) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_confirmation"`
 
@@ -64062,7 +64062,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `custom_tool_use_id: string`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/event's) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.custom_tool_result"`
 
@@ -64774,7 +64774,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `tool_use_id: string`
 
-        The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/event's) `stop_reason.event_ids` field.
+        The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       - `type: "user.tool_confirmation"`
 
@@ -64798,7 +64798,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `custom_tool_use_id: string`
 
-        The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/event's) `stop_reason.event_ids` field.
+        The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       - `type: "user.custom_tool_result"`
 
@@ -65498,7 +65498,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/event's) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_confirmation"`
 
@@ -65522,7 +65522,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `custom_tool_use_id: string`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/event's) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.custom_tool_result"`
 
@@ -67098,7 +67098,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/event's) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_confirmation"`
 
@@ -67122,7 +67122,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `custom_tool_use_id: string`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/event's) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.custom_tool_result"`
 
@@ -68362,7 +68362,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
   - `custom_tool_use_id: string`
 
-    The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/event's) `stop_reason.event_ids` field.
+    The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
   - `type: "user.custom_tool_result"`
 
@@ -68530,7 +68530,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
   - `custom_tool_use_id: string`
 
-    The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/event's) `stop_reason.event_ids` field.
+    The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
   - `type: "user.custom_tool_result"`
 
@@ -69054,7 +69054,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
   - `tool_use_id: string`
 
-    The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/event's) `stop_reason.event_ids` field.
+    The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
   - `type: "user.tool_confirmation"`
 
@@ -69084,7 +69084,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
   - `tool_use_id: string`
 
-    The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/event's) `stop_reason.event_ids` field.
+    The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
   - `type: "user.tool_confirmation"`
 
@@ -73815,7 +73815,7 @@ Create a memory
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](https://platform.claude.com/docs/en/api/List memory versions).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list).
 
   - `path: string`
 
@@ -73983,7 +73983,7 @@ List memories
 
     - `memory_version_id: string`
 
-      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](https://platform.claude.com/docs/en/api/List memory versions).
+      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list).
 
     - `path: string`
 
@@ -74003,7 +74003,7 @@ List memories
 
   - `BetaManagedAgentsMemoryPrefix = object { path, type }`
 
-    A rolled-up directory marker returned by [List memories](https://platform.claude.com/docs/en/api/List memories) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+    A rolled-up directory marker returned by [List memories](/docs/en/api/beta/memory_stores/memories/list) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
     - `path: string`
 
@@ -74132,7 +74132,7 @@ Retrieve a memory
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](https://platform.claude.com/docs/en/api/List memory versions).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list).
 
   - `path: string`
 
@@ -74287,7 +74287,7 @@ Update a memory
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](https://platform.claude.com/docs/en/api/List memory versions).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list).
 
   - `path: string`
 
@@ -74394,7 +74394,7 @@ Delete a memory
 
 - `BetaManagedAgentsDeletedMemory = object { id, type }`
 
-  Tombstone returned by [Delete a memory](https://platform.claude.com/docs/en/api/Delete a memory). The memory's version history persists and remains listable via [List memory versions](https://platform.claude.com/docs/en/api/List memory versions) until the store itself is deleted.
+  Tombstone returned by [Delete a memory](/docs/en/api/beta/memory_stores/memories/delete). The memory's version history persists and remains listable via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list) until the store itself is deleted.
 
   - `id: string`
 
@@ -74444,7 +74444,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
 - `BetaManagedAgentsDeletedMemory = object { id, type }`
 
-  Tombstone returned by [Delete a memory](https://platform.claude.com/docs/en/api/Delete a memory). The memory's version history persists and remains listable via [List memory versions](https://platform.claude.com/docs/en/api/List memory versions) until the store itself is deleted.
+  Tombstone returned by [Delete a memory](/docs/en/api/beta/memory_stores/memories/delete). The memory's version history persists and remains listable via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list) until the store itself is deleted.
 
   - `id: string`
 
@@ -74586,7 +74586,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](https://platform.claude.com/docs/en/api/List memory versions).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list).
 
   - `path: string`
 
@@ -74608,7 +74608,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
 - `BetaManagedAgentsMemoryListItem = BetaManagedAgentsMemory or BetaManagedAgentsMemoryPrefix`
 
-  One item in a [List memories](https://platform.claude.com/docs/en/api/List memories) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
+  One item in a [List memories](/docs/en/api/beta/memory_stores/memories/list) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
   - `BetaManagedAgentsMemory = object { id, content_sha256, content_size_bytes, 7 more }`
 
@@ -74636,7 +74636,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
     - `memory_version_id: string`
 
-      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](https://platform.claude.com/docs/en/api/List memory versions).
+      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list).
 
     - `path: string`
 
@@ -74656,7 +74656,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
   - `BetaManagedAgentsMemoryPrefix = object { path, type }`
 
-    A rolled-up directory marker returned by [List memories](https://platform.claude.com/docs/en/api/List memories) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+    A rolled-up directory marker returned by [List memories](/docs/en/api/beta/memory_stores/memories/list) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
     - `path: string`
 
@@ -74694,7 +74694,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
 - `BetaManagedAgentsMemoryPrefix = object { path, type }`
 
-  A rolled-up directory marker returned by [List memories](https://platform.claude.com/docs/en/api/List memories) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+  A rolled-up directory marker returned by [List memories](/docs/en/api/beta/memory_stores/memories/list) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
   - `path: string`
 
@@ -74860,7 +74860,7 @@ List memory versions
 
   - `memory_id: string`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](https://platform.claude.com/docs/en/api/List memory versions) to retrieve the full lineage including the `deleted` row.
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list) to retrieve the full lineage including the `deleted` row.
 
   - `memory_store_id: string`
 
@@ -74894,7 +74894,7 @@ List memory versions
 
   - `created_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/Sessions API).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](/docs/en/api/sessions-retrieve).
 
     - `BetaManagedAgentsSessionActor = object { session_id, type }`
 
@@ -74902,7 +74902,7 @@ List memory versions
 
       - `session_id: string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/Retrieve a session) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](/docs/en/api/sessions-retrieve) for further provenance.
 
       - `type: "session_actor"`
 
@@ -74942,7 +74942,7 @@ List memory versions
 
   - `redacted_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/Sessions API).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](/docs/en/api/sessions-retrieve).
 
     - `BetaManagedAgentsSessionActor = object { session_id, type }`
 
@@ -74950,7 +74950,7 @@ List memory versions
 
       - `session_id: string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/Retrieve a session) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](/docs/en/api/sessions-retrieve) for further provenance.
 
       - `type: "session_actor"`
 
@@ -75087,7 +75087,7 @@ Retrieve a memory version
 
   - `memory_id: string`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](https://platform.claude.com/docs/en/api/List memory versions) to retrieve the full lineage including the `deleted` row.
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list) to retrieve the full lineage including the `deleted` row.
 
   - `memory_store_id: string`
 
@@ -75121,7 +75121,7 @@ Retrieve a memory version
 
   - `created_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/Sessions API).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](/docs/en/api/sessions-retrieve).
 
     - `BetaManagedAgentsSessionActor = object { session_id, type }`
 
@@ -75129,7 +75129,7 @@ Retrieve a memory version
 
       - `session_id: string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/Retrieve a session) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](/docs/en/api/sessions-retrieve) for further provenance.
 
       - `type: "session_actor"`
 
@@ -75169,7 +75169,7 @@ Retrieve a memory version
 
   - `redacted_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/Sessions API).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](/docs/en/api/sessions-retrieve).
 
     - `BetaManagedAgentsSessionActor = object { session_id, type }`
 
@@ -75177,7 +75177,7 @@ Retrieve a memory version
 
       - `session_id: string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/Retrieve a session) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](/docs/en/api/sessions-retrieve) for further provenance.
 
       - `type: "session_actor"`
 
@@ -75300,7 +75300,7 @@ Redact a memory version
 
   - `memory_id: string`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](https://platform.claude.com/docs/en/api/List memory versions) to retrieve the full lineage including the `deleted` row.
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list) to retrieve the full lineage including the `deleted` row.
 
   - `memory_store_id: string`
 
@@ -75334,7 +75334,7 @@ Redact a memory version
 
   - `created_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/Sessions API).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](/docs/en/api/sessions-retrieve).
 
     - `BetaManagedAgentsSessionActor = object { session_id, type }`
 
@@ -75342,7 +75342,7 @@ Redact a memory version
 
       - `session_id: string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/Retrieve a session) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](/docs/en/api/sessions-retrieve) for further provenance.
 
       - `type: "session_actor"`
 
@@ -75382,7 +75382,7 @@ Redact a memory version
 
   - `redacted_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/Sessions API).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](/docs/en/api/sessions-retrieve).
 
     - `BetaManagedAgentsSessionActor = object { session_id, type }`
 
@@ -75390,7 +75390,7 @@ Redact a memory version
 
       - `session_id: string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/Retrieve a session) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](/docs/en/api/sessions-retrieve) for further provenance.
 
       - `type: "session_actor"`
 
@@ -75436,7 +75436,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memory_versions
 
 - `BetaManagedAgentsActor = BetaManagedAgentsSessionActor or BetaManagedAgentsAPIActor or BetaManagedAgentsUserActor`
 
-  Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/Sessions API).
+  Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](/docs/en/api/sessions-retrieve).
 
   - `BetaManagedAgentsSessionActor = object { session_id, type }`
 
@@ -75444,7 +75444,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memory_versions
 
     - `session_id: string`
 
-      ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/Retrieve a session) for further provenance.
+      ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](/docs/en/api/sessions-retrieve) for further provenance.
 
     - `type: "session_actor"`
 
@@ -75504,7 +75504,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memory_versions
 
   - `memory_id: string`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](https://platform.claude.com/docs/en/api/List memory versions) to retrieve the full lineage including the `deleted` row.
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list) to retrieve the full lineage including the `deleted` row.
 
   - `memory_store_id: string`
 
@@ -75538,7 +75538,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memory_versions
 
   - `created_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/Sessions API).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](/docs/en/api/sessions-retrieve).
 
     - `BetaManagedAgentsSessionActor = object { session_id, type }`
 
@@ -75546,7 +75546,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memory_versions
 
       - `session_id: string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/Retrieve a session) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](/docs/en/api/sessions-retrieve) for further provenance.
 
       - `type: "session_actor"`
 
@@ -75586,7 +75586,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memory_versions
 
   - `redacted_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/Sessions API).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](/docs/en/api/sessions-retrieve).
 
     - `BetaManagedAgentsSessionActor = object { session_id, type }`
 
@@ -75594,7 +75594,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memory_versions
 
       - `session_id: string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/Retrieve a session) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](/docs/en/api/sessions-retrieve) for further provenance.
 
       - `type: "session_actor"`
 
@@ -75644,7 +75644,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memory_versions
 
   - `session_id: string`
 
-    ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/Retrieve a session) for further provenance.
+    ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](/docs/en/api/sessions-retrieve) for further provenance.
 
   - `type: "session_actor"`
 

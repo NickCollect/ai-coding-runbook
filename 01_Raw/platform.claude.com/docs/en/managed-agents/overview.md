@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/overview
-fetched_at: 2026-05-04T16:08:57.354780+00:00
+fetched_at: 2026-05-05T19:40:46.442970+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ Anthropic offers two ways to build with Claude, each suited to different use cas
 |---|---|---|
 | **What it is** | Direct model prompting access | Pre-built, configurable agent harness that runs in managed infrastructure |
 | **Best for** | Custom agent loops and fine-grained control | Long-running tasks and asynchronous work |
-| **Learn more** | [Messages API docs](https://platform.claude.com/docs/en/managed-agents/Messages API docs) | [Claude Managed Agents docs](https://platform.claude.com/docs/en/managed-agents/Claude Managed Agents docs) |
+| **Learn more** | [Messages API docs](/docs/en/build-with-claude/working-with-messages) | [Claude Managed Agents docs](/docs/en/managed-agents/overview) |
 
 Claude Managed Agents provides the harness and infrastructure for running Claude as an autonomous agent. Instead of building your own agent loop, tool execution, and runtime, you get a fully managed environment where Claude can read files, run commands, browse the web, and execute code securely. The harness supports built in prompt caching, compaction, and other performance optimizations for high quality, efficient agent outputs.
 
@@ -78,7 +78,7 @@ Claude Managed Agents gives Claude access to a comprehensive set of built-in too
 - **Web search and fetch** - Search the web and retrieve content from URLs
 - **MCP servers** - Connect to external tool providers
 
-See [Tools](https://platform.claude.com/docs/en/managed-agents/Tools) for the full list and configuration options.
+See [Tools](/docs/en/managed-agents/tools) for the full list and configuration options.
 
 ## Beta access
 <Note>
@@ -87,11 +87,11 @@ Claude Managed Agents is currently in beta. All Managed Agents endpoints require
 
 To get started, you need:
 
-1. A [Claude API key](https://platform.claude.com/docs/en/managed-agents/Claude API key)
+1. A [Claude API key](/settings/keys)
 2. The beta header above on all requests
 3. Access to Claude Managed Agents (enabled by default for all API accounts)
 
-Certain features ([outcomes](https://platform.claude.com/docs/en/managed-agents/outcomes) and [multiagent](https://platform.claude.com/docs/en/managed-agents/multiagent)) are in research preview. [Request access](https://platform.claude.com/docs/en/managed-agents/Request access) to try them.
+Certain features ([outcomes](/docs/en/managed-agents/define-outcomes) and [multiagent](/docs/en/managed-agents/multi-agent)) are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
 
 ## Rate limits
 
@@ -102,7 +102,7 @@ Managed Agents endpoints are rate-limited per organization:
 | Create endpoints (agents, sessions, environments, etc.) | 300 requests per minute |
 | Read endpoints (retrieve, list, stream, etc.) | 600 requests per minute |
 
-Organization-level [spend limits and tier-based rate limits](https://platform.claude.com/docs/en/managed-agents/spend limits and tier-based rate limits) also apply.
+Organization-level [spend limits and tier-based rate limits](/docs/en/api/rate-limits) also apply.
 
 ## Branding guidelines
 
@@ -118,4 +118,4 @@ For partners integrating Claude Managed Agents, use of Claude branding is option
 - "Claude Cowork" or "Claude Cowork Agent"
 - Claude Code-branded ASCII art or visual elements that mimic Claude Code
 
-Your product should maintain its own branding and not appear to be Claude Code, Claude Cowork, or any other Anthropic product. For questions about branding compliance, contact the Anthropic [sales team](https://platform.claude.com/docs/en/managed-agents/sales team).
+Your product should maintain its own branding and not appear to be Claude Code, Claude Cowork, or any other Anthropic product. For questions about branding compliance, contact the Anthropic [sales team](https://www.anthropic.com/contact-sales).

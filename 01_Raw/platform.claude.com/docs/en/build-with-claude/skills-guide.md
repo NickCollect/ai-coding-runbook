@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/skills-guide
-fetched_at: 2026-05-04T16:08:53.504457+00:00
+fetched_at: 2026-05-05T19:40:46.283294+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,12 +14,12 @@ Agent Skills extend Claude's capabilities through organized folders of instructi
 
 <Note>
 For complete API reference including request/response schemas and all parameters, see:
-- [Skill Management API Reference](https://platform.claude.com/docs/en/build-with-claude/Skill Management API Reference) - CRUD operations for Skills
-- [Skill Versions API Reference](https://platform.claude.com/docs/en/build-with-claude/Skill Versions API Reference) - Version management
+- [Skill Management API Reference](/docs/en/api/skills/list-skills) - CRUD operations for Skills
+- [Skill Versions API Reference](/docs/en/api/skills/list-skill-versions) - Version management
 </Note>
 
 <Note>
-This feature is **not** eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/Zero Data Retention (ZDR)). Data is retained according to the feature's standard retention policy.
+This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). Data is retained according to the feature's standard retention policy.
 </Note>
 
 ## Quick Links
@@ -44,7 +44,7 @@ This feature is **not** eligible for [Zero Data Retention (ZDR)](https://platfor
 ## Overview
 
 <Note>
-For a deep dive into the architecture and real-world applications of Agent Skills, read the engineering blog post: [Equipping agents for the real world with Agent Skills](https://platform.claude.com/docs/en/build-with-claude/Equipping agents for the real world with Agent Skills).
+For a deep dive into the architecture and real-world applications of Agent Skills, read the engineering blog post: [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills).
 </Note>
 
 Skills integrate with the Messages API through the code execution tool. Whether using pre-built Skills managed by Anthropic or custom Skills you've uploaded, the integration shape is identical: both require code execution and use the same `container` structure.
@@ -60,16 +60,16 @@ Skills integrate identically in the Messages API regardless of source. You speci
 | **Type value** | `anthropic` | `custom` |
 | **Skill IDs** | Short names: `pptx`, `xlsx`, `docx`, `pdf` | Generated: `skill_01AbCdEfGhIjKlMnOpQrStUv` |
 | **Version format** | Date-based: `20251013` or `latest` | Epoch timestamp: `1759178010641129` or `latest` |
-| **Management** | Pre-built and maintained by Anthropic | Upload and manage via [Skills API](https://platform.claude.com/docs/en/build-with-claude/Skills API) |
+| **Management** | Pre-built and maintained by Anthropic | Upload and manage via [Skills API](/docs/en/api/skills/create-skill) |
 | **Availability** | Available to all users | Private to your workspace |
 
-Both skill sources are returned by the [List Skills endpoint](https://platform.claude.com/docs/en/build-with-claude/List Skills endpoint) (use the `source` parameter to filter). The integration shape and execution environment are identical. The only difference is where the Skills come from and how they're managed.
+Both skill sources are returned by the [List Skills endpoint](/docs/en/api/skills/list-skills) (use the `source` parameter to filter). The integration shape and execution environment are identical. The only difference is where the Skills come from and how they're managed.
 
 ### Prerequisites
 
 To use Skills, you need:
 
-1. **Claude API key** from the [Console](https://platform.claude.com/docs/en/build-with-claude/Console)
+1. **Claude API key** from the [Console](/settings/keys)
 2. **Beta headers:**
    - `code-execution-2025-08-25` - Enables code execution (required for Skills)
    - `skills-2025-10-02` - Enables Skills API
@@ -394,8 +394,7 @@ When Skills create documents (Excel, PowerPoint, PDF, Word), they return `file_i
 
 **Example: Creating and downloading an Excel file**
 
-<Tabs>
-<Tab title="cURL">
+<CodeGroup>
 
 ```bash cURL hidelines={1}
 cd "$(mktemp -d)"
@@ -442,9 +441,6 @@ curl "https://api.anthropic.com/v1/files/$FILE_ID/content" \
 echo "Downloaded: $FILENAME"
 ```
 
-</Tab>
-<Tab title="CLI">
-
 ```bash CLI nocheck hidelines={1}
 cd "$(mktemp -d)"
 # Step 1: Use the xlsx Skill to create a file
@@ -483,9 +479,6 @@ ant beta:files download \
 printf 'Downloaded: %s\n' "$FILENAME"
 ```
 
-</Tab>
-<Tab title="Python">
-
 ```python Python nocheck hidelines={1..2}
 import anthropic
 
@@ -508,6 +501,7 @@ response = client.beta.messages.create(
     tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 
+
 # Step 2: Extract file IDs from the response
 def extract_file_ids(response):
     file_ids = []
@@ -520,6 +514,7 @@ def extract_file_ids(response):
                         file_ids.append(file.file_id)
     return file_ids
 
+
 # Step 3: Download the file using Files API
 for file_id in extract_file_ids(response):
     file_metadata = client.beta.files.retrieve_metadata(file_id=file_id)
@@ -529,9 +524,6 @@ for file_id in extract_file_ids(response):
     file_content.write_to_file(file_metadata.filename)
     print(f"Downloaded: {file_metadata.filename}")
 ```
-
-</Tab>
-<Tab title="TypeScript">
 
 ```typescript TypeScript hidelines={1..3}
 import Anthropic from "@anthropic-ai/sdk";
@@ -584,9 +576,6 @@ for (const fileId of extractFileIds(response)) {
   console.log(`Downloaded: ${fileMetadata.filename}`);
 }
 ```
-
-</Tab>
-<Tab title="C#">
 
 ```csharp C# nocheck
 using System;
@@ -682,9 +671,6 @@ class Program
 }
 ```
 
-</Tab>
-<Tab title="Go">
-
 ```go Go hidelines={1..15,68..69}
 package main
 
@@ -771,9 +757,6 @@ func extractFileIDs(response *anthropic.BetaMessage) []string {
 }
 ```
 
-</Tab>
-<Tab title="Java">
-
 ```java Java nocheck hidelines={1..4,8,10..17,-2..}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
@@ -840,13 +823,6 @@ public class SkillsFileDownload {
 }
 ```
 
-</Tab>
-<Tab title="PHP">
-
-<Note>
-The PHP SDK doesn't include a file download method. Use `retrieveMetadata()` for file info, then download the file content via the REST API.
-</Note>
-
 ```php PHP nocheck hidelines={1..4}
 <?php
 
@@ -890,37 +866,16 @@ function extractFileIds($response) {
     return $fileIds;
 }
 
-// Step 3: Get metadata and download via REST API
-$apiKey = getenv("ANTHROPIC_API_KEY");
+// Step 3: Download the file using Files API
 foreach (extractFileIds($response) as $fileId) {
-    $fileMetadata = $client->beta->files->retrieveMetadata(
-        fileID: $fileId,
-    );
-
-    // Download file content via REST API
-    $context = stream_context_create([
-        'http' => [
-            'header' => implode("\r\n", [
-                "x-api-key: $apiKey",
-                "anthropic-version: 2023-06-01",
-                "anthropic-beta: files-api-2025-04-14",
-            ]),
-        ],
-    ]);
-    $fileContent = file_get_contents(
-        "https://api.anthropic.com/v1/files/$fileId/content",
-        false,
-        $context
-    );
+    $fileMetadata = $client->beta->files->retrieveMetadata($fileId);
+    $fileContent  = $client->beta->files->download($fileId);
 
     // Step 4: Save to disk
     file_put_contents($fileMetadata->filename, $fileContent);
     echo "Downloaded: {$fileMetadata->filename}\n";
 }
 ```
-
-</Tab>
-<Tab title="Ruby">
 
 ```ruby Ruby nocheck hidelines={1..2}
 require "anthropic"
@@ -972,8 +927,7 @@ extract_file_ids(response).each do |file_id|
 end
 ```
 
-</Tab>
-</Tabs>
+</CodeGroup>
 
 **Additional Files API operations:**
 
@@ -1157,9 +1111,7 @@ $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
 $fileId = "file_abc123";
 
 // Get file metadata
-$fileInfo = $client->beta->files->retrieveMetadata(
-    fileID: $fileId,
-);
+$fileInfo = $client->beta->files->retrieveMetadata($fileId);
 echo "Filename: {$fileInfo->filename}, Size: {$fileInfo->sizeBytes} bytes\n";
 
 // List all files
@@ -1169,9 +1121,7 @@ foreach ($files->data as $file) {
 }
 
 // Delete a file
-$client->beta->files->delete(
-    fileID: $fileId,
-);
+$client->beta->files->delete($fileId);
 ```
 
 ```ruby Ruby nocheck hidelines={1..2}
@@ -1196,7 +1146,7 @@ client.beta.files.delete(file_id)
 </CodeGroup>
 
 <Note>
-For complete details on the Files API, see the [Files API documentation](https://platform.claude.com/docs/en/build-with-claude/Files API documentation).
+For complete details on the Files API, see the [Files API documentation](/docs/en/api/files-content).
 </Note>
 
 ### Multi-Turn Conversations
@@ -2836,7 +2786,7 @@ puts "Latest version: #{skill.latest_version}"
   - `name`: Maximum 64 characters, lowercase letters/numbers/hyphens only, no XML tags, no reserved words ("anthropic", "claude")
   - `description`: Maximum 1024 characters, non-empty, no XML tags
 
-For complete request/response schemas, see the [Create Skill API reference](https://platform.claude.com/docs/en/build-with-claude/Create Skill API reference).
+For complete request/response schemas, see the [Create Skill API reference](/docs/en/api/skills/create-skill).
 
 ### Listing Skills
 
@@ -3023,7 +2973,7 @@ custom_skills = client.beta.skills.list(
 ```
 </CodeGroup>
 
-See the [List Skills API reference](https://platform.claude.com/docs/en/build-with-claude/List Skills API reference) for pagination and filtering options.
+See the [List Skills API reference](/docs/en/api/skills/list-skills) for pagination and filtering options.
 
 ### Retrieving a Skill
 
@@ -3919,7 +3869,7 @@ puts latest_response
 ```
 </CodeGroup>
 
-See the [Create Skill Version API reference](https://platform.claude.com/docs/en/build-with-claude/Create Skill Version API reference) for complete details.
+See the [Create Skill Version API reference](/docs/en/api/skills/create-skill-version) for complete details.
 
 ---
 
@@ -4359,7 +4309,7 @@ Skills run in the code execution container with these limitations:
 - **No runtime package installation** - Only pre-installed packages available
 - **Isolated environment** - Each request gets a fresh container
 
-See the [code execution tool documentation](https://platform.claude.com/docs/en/build-with-claude/code execution tool documentation) for available packages.
+See the [code execution tool documentation](/docs/en/agents-and-tools/tool-use/code-execution-tool) for available packages.
 
 ---
 
@@ -5181,7 +5131,7 @@ end
 
 Agent Skills are not covered by ZDR arrangements. Skill definitions and execution data are retained according to Anthropic's standard data retention policy.
 
-For ZDR eligibility across all features, see [API and data retention](https://platform.claude.com/docs/en/build-with-claude/API and data retention).
+For ZDR eligibility across all features, see [API and data retention](/docs/en/build-with-claude/api-and-data-retention).
 
 ## Next Steps
 

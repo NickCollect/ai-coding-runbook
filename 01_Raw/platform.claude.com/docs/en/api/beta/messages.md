@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/messages
-fetched_at: 2026-05-04T16:09:21.563928+00:00
+fetched_at: 2026-05-05T19:40:47.607553+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,7 +14,7 @@ Send a structured list of input messages with text and/or image content, and the
 
 The Messages API can be used for either single queries or stateless multi-turn conversations.
 
-Learn more about the Messages API in our [user guide](https://platform.claude.com/docs/en/api/beta/user guide)
+Learn more about the Messages API in our [user guide](https://docs.claude.com/en/docs/initial-setup)
 
 ### Header Parameters
 
@@ -80,9 +80,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-  Set to `0` to populate the [prompt cache](https://platform.claude.com/docs/en/api/beta/prompt cache) without generating a response.
+  Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
 
-  Different models have different maximum values for this parameter.  See [models](https://platform.claude.com/docs/en/api/beta/models) for details.
+  Different models have different maximum values for this parameter.  See [models](https://docs.claude.com/en/docs/models-overview) for details.
 
 - `messages: array of BetaMessageParam`
 
@@ -129,9 +129,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
   {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
   ```
 
-  See [input examples](https://platform.claude.com/docs/en/api/beta/input examples).
+  See [input examples](https://docs.claude.com/en/api/messages-examples).
 
-  Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/api/beta/system prompt), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+  Note that if you want to include a [system prompt](https://docs.claude.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
   There is a limit of 100,000 messages in a single request.
 
@@ -2736,13 +2736,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   The model that will complete your prompt.
 
-  See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
   - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
     The model that will complete your prompt.
 
-    See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `"claude-opus-4-7"`
 
@@ -3047,7 +3047,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `format: optional BetaJSONOutputFormat`
 
-    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/api/beta/structured outputs)
+    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
     - `schema: map[unknown]`
 
@@ -3077,7 +3077,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
 - `output_format: optional BetaJSONOutputFormat`
 
-  Deprecated: Use `output_config.format` instead. See [structured outputs](https://platform.claude.com/docs/en/api/beta/structured outputs)
+  Deprecated: Use `output_config.format` instead. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
   A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
@@ -3093,7 +3093,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-  Anthropic offers different levels of service for your API requests. See [service-tiers](https://platform.claude.com/docs/en/api/beta/service-tiers) for details.
+  Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
 
   - `"auto"`
 
@@ -3119,13 +3119,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   Whether to incrementally stream the response using server-sent events.
 
-  See [streaming](https://platform.claude.com/docs/en/api/beta/streaming) for details.
+  See [streaming](https://docs.claude.com/en/api/messages-streaming) for details.
 
 - `system: optional string or array of BetaTextBlockParam`
 
   System prompt.
 
-  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/api/beta/guide to system prompts).
+  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
   - `UnionMember0 = string`
 
@@ -3256,7 +3256,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-  See [extended thinking](https://platform.claude.com/docs/en/api/beta/extended thinking) for details.
+  See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
   - `BetaThinkingConfigEnabled = object { budget_tokens, type, display }`
 
@@ -3266,7 +3266,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       Must be ≥1024 and less than `max_tokens`.
 
-      See [extended thinking](https://platform.claude.com/docs/en/api/beta/extended thinking) for details.
+      See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
     - `type: "enabled"`
 
@@ -3364,13 +3364,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/api/beta/server tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/api/beta/web search tool)).
+  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview#server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/web-search-tool)).
 
   Each tool definition includes:
 
   * `name`: Name of the tool.
   * `description`: Optional, but strongly-recommended description of the tool.
-  * `input_schema`: [JSON schema](https://platform.claude.com/docs/en/api/beta/JSON schema) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
+  * `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
 
   For example, if you defined `tools` as:
 
@@ -3420,13 +3420,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-  See our [guide](https://platform.claude.com/docs/en/api/beta/guide) for more details.
+  See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
   - `BetaTool = object { input_schema, name, allowed_callers, 7 more }`
 
     - `input_schema: object { type, properties, required }`
 
-      [JSON schema](https://platform.claude.com/docs/en/api/beta/JSON schema) for this tool's input.
+      [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
       This defines the shape of the `input` that your tool accepts and that the model will produce.
 
@@ -4333,7 +4333,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `country: optional string`
 
-        The two letter [ISO country code](https://platform.claude.com/docs/en/api/beta/ISO country code) of the user.
+        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
       - `region: optional string`
 
@@ -4341,7 +4341,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `timezone: optional string`
 
-        The [IANA timezone](https://platform.claude.com/docs/en/api/beta/IANA timezone) of the user.
+        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
   - `BetaWebFetchTool20250910 = object { name, type, allowed_callers, 8 more }`
 
@@ -4497,7 +4497,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `country: optional string`
 
-        The two letter [ISO country code](https://platform.claude.com/docs/en/api/beta/ISO country code) of the user.
+        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
       - `region: optional string`
 
@@ -4505,7 +4505,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `timezone: optional string`
 
-        The [IANA timezone](https://platform.claude.com/docs/en/api/beta/IANA timezone) of the user.
+        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
   - `BetaWebFetchTool20260209 = object { name, type, allowed_callers, 8 more }`
 
@@ -4669,13 +4669,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -4993,7 +4993,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   Only sample from the top K options for each subsequent token.
 
-  Used to remove "long tail" low probability responses. [Learn more technical details here](https://platform.claude.com/docs/en/api/beta/Learn more technical details here).
+  Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
   Recommended for advanced use cases only.
 
@@ -5984,13 +5984,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     The model that will complete your prompt.
 
-    See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `"claude-opus-4-7"`
 
@@ -6297,13 +6297,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
           The model that will complete your prompt.
 
-          See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
             The model that will complete your prompt.
 
-            See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
             - `"claude-opus-4-7"`
 
@@ -6447,7 +6447,7 @@ Count the number of tokens in a Message.
 
 The Token Count API can be used to count the number of tokens in a Message, including tools, images, and documents, without creating it.
 
-Learn more about token counting in our [user guide](https://platform.claude.com/docs/en/api/beta/user guide)
+Learn more about token counting in our [user guide](https://docs.claude.com/en/docs/build-with-claude/token-counting)
 
 ### Header Parameters
 
@@ -6552,9 +6552,9 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
   {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
   ```
 
-  See [input examples](https://platform.claude.com/docs/en/api/beta/input examples).
+  See [input examples](https://docs.claude.com/en/api/messages-examples).
 
-  Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/api/beta/system prompt), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+  Note that if you want to include a [system prompt](https://docs.claude.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
   There is a limit of 100,000 messages in a single request.
 
@@ -9159,13 +9159,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   The model that will complete your prompt.
 
-  See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
   - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
     The model that will complete your prompt.
 
-    See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `"claude-opus-4-7"`
 
@@ -9422,7 +9422,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `format: optional BetaJSONOutputFormat`
 
-    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/api/beta/structured outputs)
+    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
     - `schema: map[unknown]`
 
@@ -9452,7 +9452,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
 - `output_format: optional BetaJSONOutputFormat`
 
-  Deprecated: Use `output_config.format` instead. See [structured outputs](https://platform.claude.com/docs/en/api/beta/structured outputs)
+  Deprecated: Use `output_config.format` instead. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
   A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
@@ -9476,7 +9476,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   System prompt.
 
-  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/api/beta/guide to system prompts).
+  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
   - `UnionMember0 = string`
 
@@ -9599,7 +9599,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-  See [extended thinking](https://platform.claude.com/docs/en/api/beta/extended thinking) for details.
+  See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
   - `BetaThinkingConfigEnabled = object { budget_tokens, type, display }`
 
@@ -9609,7 +9609,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       Must be ≥1024 and less than `max_tokens`.
 
-      See [extended thinking](https://platform.claude.com/docs/en/api/beta/extended thinking) for details.
+      See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
     - `type: "enabled"`
 
@@ -9707,13 +9707,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/api/beta/server tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/api/beta/web search tool)).
+  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview#server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/web-search-tool)).
 
   Each tool definition includes:
 
   * `name`: Name of the tool.
   * `description`: Optional, but strongly-recommended description of the tool.
-  * `input_schema`: [JSON schema](https://platform.claude.com/docs/en/api/beta/JSON schema) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
+  * `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
 
   For example, if you defined `tools` as:
 
@@ -9763,13 +9763,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-  See our [guide](https://platform.claude.com/docs/en/api/beta/guide) for more details.
+  See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
   - `BetaTool = object { input_schema, name, allowed_callers, 7 more }`
 
     - `input_schema: object { type, properties, required }`
 
-      [JSON schema](https://platform.claude.com/docs/en/api/beta/JSON schema) for this tool's input.
+      [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
       This defines the shape of the `input` that your tool accepts and that the model will produce.
 
@@ -10676,7 +10676,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       - `country: optional string`
 
-        The two letter [ISO country code](https://platform.claude.com/docs/en/api/beta/ISO country code) of the user.
+        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
       - `region: optional string`
 
@@ -10684,7 +10684,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       - `timezone: optional string`
 
-        The [IANA timezone](https://platform.claude.com/docs/en/api/beta/IANA timezone) of the user.
+        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
   - `BetaWebFetchTool20250910 = object { name, type, allowed_callers, 8 more }`
 
@@ -10840,7 +10840,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       - `country: optional string`
 
-        The two letter [ISO country code](https://platform.claude.com/docs/en/api/beta/ISO country code) of the user.
+        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
       - `region: optional string`
 
@@ -10848,7 +10848,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       - `timezone: optional string`
 
-        The [IANA timezone](https://platform.claude.com/docs/en/api/beta/IANA timezone) of the user.
+        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
   - `BetaWebFetchTool20260209 = object { name, type, allowed_callers, 8 more }`
 
@@ -11012,13 +11012,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -11402,13 +11402,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     The model that will complete your prompt.
 
-    See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `"claude-opus-4-7"`
 
@@ -11542,13 +11542,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     The model that will complete your prompt.
 
-    See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `"claude-opus-4-7"`
 
@@ -17762,13 +17762,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -19363,13 +19363,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     The model that will complete your prompt.
 
-    See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `"claude-opus-4-7"`
 
@@ -19676,13 +19676,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           The model that will complete your prompt.
 
-          See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
             The model that will complete your prompt.
 
-            See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
             - `"claude-opus-4-7"`
 
@@ -19932,13 +19932,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
           The model that will complete your prompt.
 
-          See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `"claude-opus-4-7"`
 
@@ -22723,7 +22723,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `format: optional BetaJSONOutputFormat`
 
-    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/api/beta/structured outputs)
+    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
     - `schema: map[unknown]`
 
@@ -24207,13 +24207,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           The model that will complete your prompt.
 
-          See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
             The model that will complete your prompt.
 
-            See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
             - `"claude-opus-4-7"`
 
@@ -25288,13 +25288,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -25601,13 +25601,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             The model that will complete your prompt.
 
-            See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
             - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
               The model that will complete your prompt.
 
-              See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
               - `"claude-opus-4-7"`
 
@@ -26714,13 +26714,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
           The model that will complete your prompt.
 
-          See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `"claude-opus-4-7"`
 
@@ -27027,13 +27027,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               The model that will complete your prompt.
 
-              See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
               - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
                 The model that will complete your prompt.
 
-                See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
                 - `"claude-opus-4-7"`
 
@@ -27419,13 +27419,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             The model that will complete your prompt.
 
-            See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
             - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
               The model that will complete your prompt.
 
-              See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
               - `"claude-opus-4-7"`
 
@@ -30241,7 +30241,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Must be ≥1024 and less than `max_tokens`.
 
-    See [extended thinking](https://platform.claude.com/docs/en/api/beta/extended thinking) for details.
+    See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
   - `type: "enabled"`
 
@@ -30263,7 +30263,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-  See [extended thinking](https://platform.claude.com/docs/en/api/beta/extended thinking) for details.
+  See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
   - `BetaThinkingConfigEnabled = object { budget_tokens, type, display }`
 
@@ -30273,7 +30273,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Must be ≥1024 and less than `max_tokens`.
 
-      See [extended thinking](https://platform.claude.com/docs/en/api/beta/extended thinking) for details.
+      See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
     - `type: "enabled"`
 
@@ -30353,7 +30353,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `input_schema: object { type, properties, required }`
 
-    [JSON schema](https://platform.claude.com/docs/en/api/beta/JSON schema) for this tool's input.
+    [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
     This defines the shape of the `input` that your tool accepts and that the model will produce.
 
@@ -32170,7 +32170,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `input_schema: object { type, properties, required }`
 
-      [JSON schema](https://platform.claude.com/docs/en/api/beta/JSON schema) for this tool's input.
+      [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
       This defines the shape of the `input` that your tool accepts and that the model will produce.
 
@@ -33077,7 +33077,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `country: optional string`
 
-        The two letter [ISO country code](https://platform.claude.com/docs/en/api/beta/ISO country code) of the user.
+        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
       - `region: optional string`
 
@@ -33085,7 +33085,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `timezone: optional string`
 
-        The [IANA timezone](https://platform.claude.com/docs/en/api/beta/IANA timezone) of the user.
+        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
   - `BetaWebFetchTool20250910 = object { name, type, allowed_callers, 8 more }`
 
@@ -33241,7 +33241,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `country: optional string`
 
-        The two letter [ISO country code](https://platform.claude.com/docs/en/api/beta/ISO country code) of the user.
+        The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
       - `region: optional string`
 
@@ -33249,7 +33249,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `timezone: optional string`
 
-        The [IANA timezone](https://platform.claude.com/docs/en/api/beta/IANA timezone) of the user.
+        The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
   - `BetaWebFetchTool20260209 = object { name, type, allowed_callers, 8 more }`
 
@@ -33413,13 +33413,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -34034,13 +34034,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
           The model that will complete your prompt.
 
-          See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `"claude-opus-4-7"`
 
@@ -34170,7 +34170,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `country: optional string`
 
-    The two letter [ISO country code](https://platform.claude.com/docs/en/api/beta/ISO country code) of the user.
+    The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
   - `region: optional string`
 
@@ -34178,7 +34178,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `timezone: optional string`
 
-    The [IANA timezone](https://platform.claude.com/docs/en/api/beta/IANA timezone) of the user.
+    The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
 ### Beta Web Fetch Block
 
@@ -35439,7 +35439,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `country: optional string`
 
-      The two letter [ISO country code](https://platform.claude.com/docs/en/api/beta/ISO country code) of the user.
+      The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
     - `region: optional string`
 
@@ -35447,7 +35447,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `timezone: optional string`
 
-      The [IANA timezone](https://platform.claude.com/docs/en/api/beta/IANA timezone) of the user.
+      The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
 ### Beta Web Search Tool 20260209
 
@@ -35530,7 +35530,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `country: optional string`
 
-      The two letter [ISO country code](https://platform.claude.com/docs/en/api/beta/ISO country code) of the user.
+      The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
     - `region: optional string`
 
@@ -35538,7 +35538,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `timezone: optional string`
 
-      The [IANA timezone](https://platform.claude.com/docs/en/api/beta/IANA timezone) of the user.
+      The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
 ### Beta Web Search Tool Request Error
 
@@ -35861,7 +35861,7 @@ Send a batch of Message creation requests.
 
 The Message Batches API can be used to process multiple Messages API requests at once. Once a Message Batch is created, it begins processing immediately. Batches can take up to 24 hours to complete.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/api/beta/user guide)
+Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
 
 ### Header Parameters
 
@@ -35935,7 +35935,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     Messages API creation parameters for the individual request.
 
-    See the [Messages API reference](https://platform.claude.com/docs/en/api/beta/Messages API reference) for full documentation on available parameters.
+    See the [Messages API reference](https://docs.claude.com/en/api/messages) for full documentation on available parameters.
 
     - `max_tokens: number`
 
@@ -35943,9 +35943,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-      Set to `0` to populate the [prompt cache](https://platform.claude.com/docs/en/api/beta/prompt cache) without generating a response.
+      Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
 
-      Different models have different maximum values for this parameter.  See [models](https://platform.claude.com/docs/en/api/beta/models) for details.
+      Different models have different maximum values for this parameter.  See [models](https://docs.claude.com/en/docs/models-overview) for details.
 
     - `messages: array of BetaMessageParam`
 
@@ -35992,9 +35992,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
       {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
       ```
 
-      See [input examples](https://platform.claude.com/docs/en/api/beta/input examples).
+      See [input examples](https://docs.claude.com/en/api/messages-examples).
 
-      Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/api/beta/system prompt), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+      Note that if you want to include a [system prompt](https://docs.claude.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
       There is a limit of 100,000 messages in a single request.
 
@@ -38599,13 +38599,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -38910,7 +38910,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `format: optional BetaJSONOutputFormat`
 
-        A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/api/beta/structured outputs)
+        A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
         - `schema: map[unknown]`
 
@@ -38940,7 +38940,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `output_format: optional BetaJSONOutputFormat`
 
-      Deprecated: Use `output_config.format` instead. See [structured outputs](https://platform.claude.com/docs/en/api/beta/structured outputs)
+      Deprecated: Use `output_config.format` instead. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
       A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
@@ -38956,7 +38956,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-      Anthropic offers different levels of service for your API requests. See [service-tiers](https://platform.claude.com/docs/en/api/beta/service-tiers) for details.
+      Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
 
       - `"auto"`
 
@@ -38982,13 +38982,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       Whether to incrementally stream the response using server-sent events.
 
-      See [streaming](https://platform.claude.com/docs/en/api/beta/streaming) for details.
+      See [streaming](https://docs.claude.com/en/api/messages-streaming) for details.
 
     - `system: optional string or array of BetaTextBlockParam`
 
       System prompt.
 
-      A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/api/beta/guide to system prompts).
+      A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
       - `UnionMember0 = string`
 
@@ -39119,7 +39119,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-      See [extended thinking](https://platform.claude.com/docs/en/api/beta/extended thinking) for details.
+      See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
       - `BetaThinkingConfigEnabled = object { budget_tokens, type, display }`
 
@@ -39129,7 +39129,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           Must be ≥1024 and less than `max_tokens`.
 
-          See [extended thinking](https://platform.claude.com/docs/en/api/beta/extended thinking) for details.
+          See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
         - `type: "enabled"`
 
@@ -39227,13 +39227,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-      There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/api/beta/server tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/api/beta/web search tool)).
+      There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview#server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/web-search-tool)).
 
       Each tool definition includes:
 
       * `name`: Name of the tool.
       * `description`: Optional, but strongly-recommended description of the tool.
-      * `input_schema`: [JSON schema](https://platform.claude.com/docs/en/api/beta/JSON schema) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
+      * `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the tool `input` shape that the model will produce in `tool_use` output content blocks.
 
       For example, if you defined `tools` as:
 
@@ -39283,13 +39283,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-      See our [guide](https://platform.claude.com/docs/en/api/beta/guide) for more details.
+      See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
       - `BetaTool = object { input_schema, name, allowed_callers, 7 more }`
 
         - `input_schema: object { type, properties, required }`
 
-          [JSON schema](https://platform.claude.com/docs/en/api/beta/JSON schema) for this tool's input.
+          [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
           This defines the shape of the `input` that your tool accepts and that the model will produce.
 
@@ -40196,7 +40196,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `country: optional string`
 
-            The two letter [ISO country code](https://platform.claude.com/docs/en/api/beta/ISO country code) of the user.
+            The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
           - `region: optional string`
 
@@ -40204,7 +40204,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `timezone: optional string`
 
-            The [IANA timezone](https://platform.claude.com/docs/en/api/beta/IANA timezone) of the user.
+            The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
       - `BetaWebFetchTool20250910 = object { name, type, allowed_callers, 8 more }`
 
@@ -40360,7 +40360,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `country: optional string`
 
-            The two letter [ISO country code](https://platform.claude.com/docs/en/api/beta/ISO country code) of the user.
+            The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
           - `region: optional string`
 
@@ -40368,7 +40368,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `timezone: optional string`
 
-            The [IANA timezone](https://platform.claude.com/docs/en/api/beta/IANA timezone) of the user.
+            The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
       - `BetaWebFetchTool20260209 = object { name, type, allowed_callers, 8 more }`
 
@@ -40532,13 +40532,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           The model that will complete your prompt.
 
-          See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
             The model that will complete your prompt.
 
-            See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
             - `"claude-opus-4-7"`
 
@@ -40856,7 +40856,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       Only sample from the top K options for each subsequent token.
 
-      Used to remove "long tail" low probability responses. [Learn more technical details here](https://platform.claude.com/docs/en/api/beta/Learn more technical details here).
+      Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
       Recommended for advanced use cases only.
 
@@ -40995,7 +40995,7 @@ curl https://api.anthropic.com/v1/messages/batches \
 
 This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/api/beta/user guide)
+Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
 
 ### Path Parameters
 
@@ -41164,7 +41164,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/api/beta/user guide)
+Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
 
 ### Query Parameters
 
@@ -41357,7 +41357,7 @@ Batches may be canceled any time before processing ends. Once cancellation is in
 
 The number of canceled requests is specified in `request_counts`. To determine which requests were canceled, check the individual results within the batch. Note that cancellation may not result in any canceled requests if they were non-interruptible.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/api/beta/user guide)
+Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
 
 ### Path Parameters
 
@@ -41529,7 +41529,7 @@ Delete a Message Batch.
 
 Message Batches can only be deleted once they've finished processing. If you'd like to delete an in-progress batch, you must first cancel it.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/api/beta/user guide)
+Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
 
 ### Path Parameters
 
@@ -41627,7 +41627,7 @@ Streams the results of a Message Batch as a `.jsonl` file.
 
 Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/api/beta/user guide)
+Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
 
 ### Path Parameters
 
@@ -42684,13 +42684,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           The model that will complete your prompt.
 
-          See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
             The model that will complete your prompt.
 
-            See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
             - `"claude-opus-4-7"`
 
@@ -42997,13 +42997,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 The model that will complete your prompt.
 
-                See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
                 - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
                   The model that will complete your prompt.
 
-                  See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
                   - `"claude-opus-4-7"`
 
@@ -44439,13 +44439,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           The model that will complete your prompt.
 
-          See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
             The model that will complete your prompt.
 
-            See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
             - `"claude-opus-4-7"`
 
@@ -44752,13 +44752,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 The model that will complete your prompt.
 
-                See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
                 - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
                   The model that will complete your prompt.
 
-                  See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
                   - `"claude-opus-4-7"`
 
@@ -45993,13 +45993,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
           The model that will complete your prompt.
 
-          See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `"claude-opus-4-7"`
 
@@ -46306,13 +46306,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               The model that will complete your prompt.
 
-              See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
               - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
                 The model that will complete your prompt.
 
-                See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
                 - `"claude-opus-4-7"`
 
@@ -47509,13 +47509,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
       The model that will complete your prompt.
 
-      See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
         The model that will complete your prompt.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -47822,13 +47822,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             The model that will complete your prompt.
 
-            See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
             - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
               The model that will complete your prompt.
 
-              See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
               - `"claude-opus-4-7"`
 

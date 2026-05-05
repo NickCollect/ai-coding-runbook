@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool
-fetched_at: 2026-05-04T16:08:42.542869+00:00
+fetched_at: 2026-05-05T19:40:45.866138+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,18 +8,18 @@ fetch_method: mintlify_md
 
 ---
 
-Claude can interact with computer environments through the computer use tool, which provides screenshot capabilities and mouse/keyboard control for autonomous desktop interaction. On [WebArena](https://platform.claude.com/docs/en/agents-and-tools/tool-use/WebArena), a benchmark for autonomous web navigation across real websites, Claude achieves state-of-the-art results among single-agent systems, demonstrating strong ability to complete multi-step browser tasks end to end.
+Claude can interact with computer environments through the computer use tool, which provides screenshot capabilities and mouse/keyboard control for autonomous desktop interaction. On [WebArena](https://webarena.dev/), a benchmark for autonomous web navigation across real websites, Claude achieves state-of-the-art results among single-agent systems, demonstrating strong ability to complete multi-step browser tasks end to end.
 
 <Note>
-Computer use is in beta and requires a [beta header](https://platform.claude.com/docs/en/agents-and-tools/tool-use/beta header):
+Computer use is in beta and requires a [beta header](/docs/en/api/beta-headers):
 - `"computer-use-2025-11-24"` for Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, Claude Opus 4.5
-- `"computer-use-2025-01-24"` for Sonnet 4.5, Haiku 4.5, Opus 4.1, Sonnet 4, Opus 4, and Sonnet 3.7 ([deprecated](https://platform.claude.com/docs/en/agents-and-tools/tool-use/deprecated))
+- `"computer-use-2025-01-24"` for Sonnet 4.5, Haiku 4.5, Opus 4.1, Sonnet 4, Opus 4, and Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations))
 
-Reach out through the [feedback form](https://platform.claude.com/docs/en/agents-and-tools/tool-use/feedback form) to share your feedback on this feature.
+Reach out through the [feedback form](https://forms.gle/H6UFuXaaLywri9hz6) to share your feedback on this feature.
 </Note>
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Zero Data Retention (ZDR)). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 ## Overview
@@ -33,7 +33,7 @@ Computer use is a beta feature that enables Claude to interact with desktop envi
 
 While computer use can be augmented with other tools like bash and text editor for more comprehensive automation workflows, computer use specifically refers to the computer use tool's capability to see and control desktop environments.
 
-For model support, see the [Tool reference](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Tool reference).
+For model support, see the [Tool reference](/docs/en/agents-and-tools/tool-use/tool-reference).
 
 ## Security considerations
 
@@ -50,7 +50,7 @@ To minimize risks, consider taking precautions such as:
 
 In some circumstances, Claude will follow commands found in content even if it conflicts with the user's instructions. For example, Claude instructions on webpages or contained in images may override instructions or cause Claude to make mistakes. Take precautions to isolate Claude from sensitive data and actions to avoid risks related to prompt injection.
 
-The model has been trained to resist these prompt injections, and an extra layer of defense has been added. If you use the computer use tools, classifiers will automatically run on your prompts to flag potential instances of prompt injections. When these classifiers identify potential prompt injections in screenshots, they will automatically steer the model to ask for user confirmation before proceeding with the next action. This extra protection won't be ideal for every use case (for example, use cases without a human in the loop), so if you'd like to opt out and turn it off, please [contact support](https://platform.claude.com/docs/en/agents-and-tools/tool-use/contact support).
+The model has been trained to resist these prompt injections, and an extra layer of defense has been added. If you use the computer use tools, classifiers will automatically run on your prompts to flag potential instances of prompt injections. When these classifiers identify potential prompt injections in screenshots, they will automatically steer the model to ask for user confirmation before proceeding with the next action. This extra protection won't be ideal for every use case (for example, use cases without a human in the loop), so if you'd like to opt out and turn it off, please [contact support](https://support.claude.com/en/).
 
 These precautions remain important even with the classifier defense layer in place.
 
@@ -438,11 +438,11 @@ For security and isolation, the reference implementation runs all of this inside
 
 ### Start with the reference implementation
 
-A [reference implementation](https://platform.claude.com/docs/en/agents-and-tools/tool-use/reference implementation) is available that includes everything you need to get started quickly with computer use:
+A [reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) is available that includes everything you need to get started quickly with computer use:
 
-- A [containerized environment](https://platform.claude.com/docs/en/agents-and-tools/tool-use/containerized environment) suitable for computer use with Claude
-- Implementations of [the computer use tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/the computer use tools)
-- An [agent loop](https://platform.claude.com/docs/en/agents-and-tools/tool-use/agent loop) that interacts with the Claude API and executes the computer use tools
+- A [containerized environment](https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/Dockerfile) suitable for computer use with Claude
+- Implementations of [the computer use tools](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo/computer_use_demo/tools)
+- An [agent loop](https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/computer_use_demo/loop.py) that interacts with the Claude API and executes the computer use tools
 - A web interface to interact with the container, agent loop, and tools.
 
 ### Understanding the agentic loop
@@ -451,6 +451,7 @@ The core of computer use is the "agent loop" - a cycle where Claude requests too
 
 ```python hidelines={1}
 from anthropic import Anthropic
+
 
 async def sampling_loop(
     *,
@@ -552,7 +553,7 @@ Here are some tips on how to get the best quality outputs:
 2. Claude sometimes assumes outcomes of its actions without explicitly checking their results. To prevent this you can prompt Claude with `After each step, take a screenshot and carefully evaluate if you have achieved the right outcome. Explicitly show your thinking: "I have evaluated step X..." If not correct, try again. Only when you confirm a step was executed correctly should you move on to the next one.`
 3. Some UI elements (like dropdowns and scrollbars) might be tricky for Claude to manipulate using mouse movements. If you experience this, try prompting the model to use keyboard shortcuts.
 4. For repeatable tasks or UI interactions, include example screenshots and tool calls of successful outcomes in your prompt.
-5. If you need the model to log in, provide it with the username and password in your prompt inside xml tags like `<robot_credentials>`. Using computer use within applications that require login increases the risk of bad outcomes as a result of prompt injection. Review the [guide on mitigating prompt injections](https://platform.claude.com/docs/en/agents-and-tools/tool-use/guide on mitigating prompt injections) before providing the model with login credentials.
+5. If you need the model to log in, provide it with the username and password in your prompt inside xml tags like `<robot_credentials>`. Using computer use within applications that require login increases the risk of bad outcomes as a result of prompt injection. Review the [guide on mitigating prompt injections](/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks) before providing the model with login credentials.
 
 <Tip>
   If you repeatedly encounter a clear set of issues or know in advance the tasks
@@ -564,13 +565,13 @@ Here are some tips on how to get the best quality outputs:
   For agents that span multiple sessions, run end-to-end verification at the
   start of each session, not only after implementation. Browser-based checks
   catch regressions from prior sessions that code-level review alone misses. See
-  [Effective harnesses for long-running agents](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Effective harnesses for long-running agents)
+  [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
   for details.
 </Tip>
 
 ### System prompts
 
-When one of the Anthropic-schema tools is requested via the Claude API, a computer use-specific system prompt is generated. It's similar to the [tool use system prompt](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool use system prompt) but starts with:
+When one of the Anthropic-schema tools is requested via the Claude API, a computer use-specific system prompt is generated. It's similar to the [tool use system prompt](/docs/en/agents-and-tools/tool-use/define-tools#tool-use-system-prompt) but starts with:
 
 > You have access to a set of functions you can use to answer the user's question. This includes access to a sandboxed computing environment. You do NOT currently have the ability to inspect files or interact with external resources, except by invoking the below functions.
 
@@ -719,15 +720,15 @@ The `text` parameter in click/scroll actions accepts modifier keys like `shift`,
 
 ### Combining with extended thinking
 
-For combining computer use with extended thinking, see [Extended thinking](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Extended thinking).
+For combining computer use with extended thinking, see [Extended thinking](/docs/en/build-with-claude/extended-thinking).
 
 ### Augmenting computer use with other tools
 
-To add other tools alongside computer use, include them in the same `tools` array. The quick start above shows this pattern with the [bash tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/bash tool) and [text editor tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/text editor tool). You can add your own [custom tool definitions](https://platform.claude.com/docs/en/agents-and-tools/tool-use/custom tool definitions) the same way.
+To add other tools alongside computer use, include them in the same `tools` array. The quick start above shows this pattern with the [bash tool](/docs/en/agents-and-tools/tool-use/bash-tool) and [text editor tool](/docs/en/agents-and-tools/tool-use/text-editor-tool). You can add your own [custom tool definitions](/docs/en/agents-and-tools/tool-use/define-tools) the same way.
 
 ### Build a custom computer use environment
 
-The [reference implementation](https://platform.claude.com/docs/en/agents-and-tools/tool-use/reference implementation) is meant to help you get started with computer use. It includes all of the components needed to have Claude use a computer. However, you can build your own environment for computer use to suit your needs. You'll need:
+The [reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) is meant to help you get started with computer use. It includes all of the components needed to have Claude use a computer. However, you can build your own environment for computer use to suit your needs. You'll need:
 
 - A virtualized or containerized environment suitable for computer use with Claude
 - An implementation of at least one of the Anthropic-schema computer use tools
@@ -768,8 +769,10 @@ The computer use tool is implemented as a schema-less tool. When using this tool
         content=[_SN(type="tool_use", input={"action": "screenshot"}, id="toolu_01")]
     )
 
+
     def handle_computer_action(a, p):
         return "ok"
+
 
     for content in response.content:
         if content.type == "tool_use":
@@ -800,8 +803,10 @@ The computer use tool is implemented as a schema-less tool. When using this tool
         }
     ]
 
+
     def process_tool_calls(r):
         return []
+
 
     while True:
         response = client.beta.messages.create(
@@ -895,7 +900,7 @@ If an action fails to execute:
 Claude Opus 4.7 supports up to 2576 pixels on the long edge, and its coordinates are 1\:1 with image pixels (no scale-factor conversion required). The 1568-pixel guidance below applies to earlier models.
 </Note>
 
-The API constrains images to a maximum of 1568 pixels on the longest edge and approximately 1.15 megapixels total (see [image resizing](https://platform.claude.com/docs/en/agents-and-tools/tool-use/image resizing) for details). For example, a 1512x982 screen gets downsampled to approximately 1330x864. Claude analyzes this smaller image and returns coordinates in that space, but your tool executes clicks in the original screen space.
+The API constrains images to a maximum of 1568 pixels on the longest edge and approximately 1.15 megapixels total (see [image resizing](/docs/en/build-with-claude/vision#evaluate-image-size) for details). For example, a 1512x982 screen gets downsampled to approximately 1330x864. Claude analyzes this smaller image and returns coordinates in that space, but your tool executes clicks in the original screen space.
 
 This can cause Claude's click coordinates to miss their targets unless you handle the coordinate transformation.
 
@@ -905,10 +910,13 @@ To fix this, resize screenshots yourself and scale Claude's coordinates back up:
 ```python Python hidelines={1..7}
 screen_width, screen_height = 1512, 982
 
+
 def capture_and_resize(w, h): ...
 def perform_click(x, y): ...
 
+
 import math
+
 
 def get_scale_factor(width, height):
     """Calculate scale factor to meet API constraints."""
@@ -920,6 +928,7 @@ def get_scale_factor(width, height):
 
     return min(1.0, long_edge_scale, total_pixels_scale)
 
+
 # When capturing screenshot
 scale = get_scale_factor(screen_width, screen_height)
 scaled_width = int(screen_width * scale)
@@ -927,6 +936,7 @@ scaled_height = int(screen_height * scale)
 
 # Resize image to scaled dimensions before sending to Claude
 screenshot = capture_and_resize(scaled_width, scaled_height)
+
 
 # When handling Claude's coordinates, scale them back up
 def execute_click(x, y):
@@ -999,6 +1009,7 @@ Some applications need time to respond to actions:
 ```python hidelines={1..4}
 import time
 
+
 def click_at(x, y): ...
 def click_and_wait(x, y, wait_time=0.5):
     click_at(x, y)
@@ -1012,6 +1023,7 @@ def click_and_wait(x, y, wait_time=0.5):
 Check that requested actions are safe and valid:
 ```python hidelines={1}
 display_width, display_height = 1024, 768
+
 
 def validate_action(action_type, params):
     if action_type == "left_click":
@@ -1028,6 +1040,7 @@ def validate_action(action_type, params):
 Keep a log of all actions for troubleshooting:
 ```python
 import logging
+
 
 def log_action(action_type, params, result):
     logging.info(f"Action: {action_type}, Params: {params}, Result: {result}")
@@ -1059,11 +1072,11 @@ Always carefully review and verify Claude's computer use actions and logs. Do no
 
 Computer use is a client-side tool. All screenshots, mouse actions, keyboard inputs, and any files involved in a session are captured and stored in your environment, not by Anthropic. Anthropic processes the screenshot images and action requests in real time as part of the API call but does not retain them after the response is returned.
 
-Because your application controls where and how computer use data is stored, computer use is ZDR eligible. For ZDR eligibility across all features, see [API and data retention](https://platform.claude.com/docs/en/agents-and-tools/tool-use/API and data retention).
+Because your application controls where and how computer use data is stored, computer use is ZDR eligible. For ZDR eligibility across all features, see [API and data retention](/docs/en/build-with-claude/api-and-data-retention).
 
 ## Pricing
 
-Computer use follows the standard [tool use pricing](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool use pricing). When using the computer use tool:
+Computer use follows the standard [tool use pricing](/docs/en/agents-and-tools/tool-use/overview#pricing). When using the computer use tool:
 
 **System prompt overhead**: The computer use beta adds 466-499 tokens to the system prompt
 
@@ -1071,10 +1084,10 @@ Computer use follows the standard [tool use pricing](https://platform.claude.com
 | Model | Input tokens per tool definition |
 | ----- | -------------------------------- |
 | Claude 4.x models | 735 tokens |
-| Claude Sonnet 3.7 ([deprecated](https://platform.claude.com/docs/en/agents-and-tools/tool-use/deprecated)) | 735 tokens |
+| Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)) | 735 tokens |
 
 **Additional token consumption**:
-- Screenshot images (see [Vision pricing](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Vision pricing))
+- Screenshot images (see [Vision pricing](/docs/en/build-with-claude/vision))
 - Tool execution results returned to Claude
 
 <Note>

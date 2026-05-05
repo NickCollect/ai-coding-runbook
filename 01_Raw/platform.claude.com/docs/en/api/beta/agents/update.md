@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/agents/update
-fetched_at: 2026-05-04T16:09:29.489224+00:00
+fetched_at: 2026-05-05T19:40:47.960085+00:00
 fetch_method: mintlify_md
 ---
 
@@ -102,19 +102,19 @@ Update Agent
 
 - `model: optional BetaManagedAgentsModel or BetaManagedAgentsModelConfigParams`
 
-  Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/api/beta/agents/model string), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
+  Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
   - `BetaManagedAgentsModel = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string`
 
     The model that will power your agent.
 
-    See [models](https://platform.claude.com/docs/en/api/beta/agents/models) for additional details and options.
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
       The model that will power your agent.
 
-      See [models](https://platform.claude.com/docs/en/api/beta/agents/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `"claude-opus-4-7"`
 
@@ -162,13 +162,13 @@ Update Agent
 
       The model that will power your agent.
 
-      See [models](https://platform.claude.com/docs/en/api/beta/agents/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/agents/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -492,13 +492,13 @@ Update Agent
 
       The model that will power your agent.
 
-      See [models](https://platform.claude.com/docs/en/api/beta/agents/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/agents/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 

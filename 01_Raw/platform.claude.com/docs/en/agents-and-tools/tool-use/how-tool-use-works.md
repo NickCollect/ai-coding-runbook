@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works
-fetched_at: 2026-05-04T16:08:33.914003+00:00
+fetched_at: 2026-05-05T19:40:45.428427+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ Understand the tool use loop, where tools execute, and when to use tools instead
 
 ---
 
-This page explains the concepts behind tool use: where tools run, how the agentic loop works, and when tool use is the right approach. For hands-on guidance, start with the [tutorial](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tutorial) or the [implementation guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/implementation guide).
+This page explains the concepts behind tool use: where tools run, how the agentic loop works, and when tool use is the right approach. For hands-on guidance, start with the [tutorial](/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent) or the [implementation guide](/docs/en/agents-and-tools/tool-use/define-tools).
 
 ## The tool-use contract
 
@@ -54,13 +54,13 @@ The canonical shape is a `while` loop keyed on `stop_reason`:
 
 In practice this reads as: while `stop_reason == "tool_use"`, execute the tools and continue the conversation. The loop exits on any other stop reason (`"end_turn"`, `"max_tokens"`, `"stop_sequence"`, or `"refusal"`), which means Claude has either produced a final answer or stopped for another reason that your application should handle.
 
-For the mechanics of building requests, handling parallel tool calls, and formatting results, see [Handle tool calls](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Handle tool calls).
+For the mechanics of building requests, handling parallel tool calls, and formatting results, see [Handle tool calls](/docs/en/agents-and-tools/tool-use/handle-tool-calls).
 
 ## The server-side loop
 
 Server-executed tools run their own loop inside Anthropic's infrastructure. A single request from your application might trigger several web searches or code executions before a response comes back. The model searches, reads results, decides to search again, and iterates until it has what it needs, all without your application participating.
 
-This internal loop has an iteration limit. If the model is still iterating when it hits the cap, the response comes back with `stop_reason: "pause_turn"` instead of `"end_turn"`. A paused turn means the work isn't finished; re-send the conversation (including the paused response) to let the model continue where it left off. See [Server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Server tools) for the continuation pattern.
+This internal loop has an iteration limit. If the model is still iterating when it hits the cap, the response comes back with `stop_reason: "pause_turn"` instead of `"end_turn"`. A paused turn means the work isn't finished; re-send the conversation (including the paused response) to let the model continue where it left off. See [Server tools](/docs/en/agents-and-tools/tool-use/server-tools) for the continuation pattern.
 
 ## When to use tools (and when not to)
 
@@ -83,9 +83,9 @@ Tool use doesn't fit when:
 
 | Approach | When to use it | What to expect | Learn more |
 | --- | --- | --- | --- |
-| User-defined client tools | Custom business logic, internal APIs, proprietary data | You handle execution and the agentic loop | [Define tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Define tools) |
-| Anthropic-schema client tools | Standard dev operations (bash, file editing, browser control) | You handle execution; Claude calls the tool reliably because the schema is trained-in | [Tool reference](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Tool reference) |
-| Server-executed tools | Web search, code sandbox, web fetch | Anthropic handles execution; you get results directly | [Server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Server tools) |
+| User-defined client tools | Custom business logic, internal APIs, proprietary data | You handle execution and the agentic loop | [Define tools](/docs/en/agents-and-tools/tool-use/define-tools) |
+| Anthropic-schema client tools | Standard dev operations (bash, file editing, browser control) | You handle execution; Claude calls the tool reliably because the schema is trained-in | [Tool reference](/docs/en/agents-and-tools/tool-use/tool-reference) |
+| Server-executed tools | Web search, code sandbox, web fetch | Anthropic handles execution; you get results directly | [Server tools](/docs/en/agents-and-tools/tool-use/server-tools) |
 
 ## Next steps
 

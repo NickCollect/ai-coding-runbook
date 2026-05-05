@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/sessions/events/stream
-fetched_at: 2026-05-04T16:09:42.264896+00:00
+fetched_at: 2026-05-05T19:40:48.625760+00:00
 fetch_method: mintlify_md
 ---
 
@@ -272,7 +272,7 @@ Stream Events
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/event's) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_confirmation"`
 
@@ -296,7 +296,7 @@ Stream Events
 
     - `custom_tool_use_id: string`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/event's) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.custom_tool_result"`
 

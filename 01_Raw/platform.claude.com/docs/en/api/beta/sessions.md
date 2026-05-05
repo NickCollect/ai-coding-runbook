@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/sessions
-fetched_at: 2026-05-04T16:09:36.846061+00:00
+fetched_at: 2026-05-05T19:40:48.287454+00:00
 fetch_method: mintlify_md
 ---
 
@@ -230,13 +230,13 @@ Create Session
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
           The model that will power your agent.
 
-          See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `"claude-opus-4-7"`
 
@@ -826,13 +826,13 @@ List Sessions
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
           The model that will power your agent.
 
-          See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `"claude-opus-4-7"`
 
@@ -1375,13 +1375,13 @@ Get Session
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
           The model that will power your agent.
 
-          See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `"claude-opus-4-7"`
 
@@ -1934,13 +1934,13 @@ Update Session
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
           The model that will power your agent.
 
-          See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `"claude-opus-4-7"`
 
@@ -2569,13 +2569,13 @@ Archive Session
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
           The model that will power your agent.
 
-          See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `"claude-opus-4-7"`
 
@@ -3209,13 +3209,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
           The model that will power your agent.
 
-          See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
           - `"claude-opus-4-7"`
 
@@ -3673,13 +3673,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
       The model that will power your agent.
 
-      See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 
@@ -4263,7 +4263,7 @@ List Events
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/event's) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_confirmation"`
 
@@ -4287,7 +4287,7 @@ List Events
 
     - `custom_tool_use_id: string`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/event's) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.custom_tool_result"`
 
@@ -5692,7 +5692,7 @@ Send Events
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/event's) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_confirmation"`
 
@@ -5708,7 +5708,7 @@ Send Events
 
     - `custom_tool_use_id: string`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/event's) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.custom_tool_result"`
 
@@ -6070,7 +6070,7 @@ Send Events
 
       - `tool_use_id: string`
 
-        The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/event's) `stop_reason.event_ids` field.
+        The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       - `type: "user.tool_confirmation"`
 
@@ -6094,7 +6094,7 @@ Send Events
 
       - `custom_tool_use_id: string`
 
-        The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/event's) `stop_reason.event_ids` field.
+        The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       - `type: "user.custom_tool_result"`
 
@@ -6545,7 +6545,7 @@ Stream Events
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/event's) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_confirmation"`
 
@@ -6569,7 +6569,7 @@ Stream Events
 
     - `custom_tool_use_id: string`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/event's) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.custom_tool_result"`
 
@@ -8576,7 +8576,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/event's) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_confirmation"`
 
@@ -8592,7 +8592,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `custom_tool_use_id: string`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/event's) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.custom_tool_result"`
 
@@ -9304,7 +9304,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `tool_use_id: string`
 
-        The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/event's) `stop_reason.event_ids` field.
+        The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       - `type: "user.tool_confirmation"`
 
@@ -9328,7 +9328,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `custom_tool_use_id: string`
 
-        The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/event's) `stop_reason.event_ids` field.
+        The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       - `type: "user.custom_tool_result"`
 
@@ -10028,7 +10028,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/event's) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_confirmation"`
 
@@ -10052,7 +10052,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `custom_tool_use_id: string`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/event's) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.custom_tool_result"`
 
@@ -11628,7 +11628,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/event's) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_confirmation"`
 
@@ -11652,7 +11652,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `custom_tool_use_id: string`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/event's) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.custom_tool_result"`
 
@@ -12892,7 +12892,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
   - `custom_tool_use_id: string`
 
-    The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/event's) `stop_reason.event_ids` field.
+    The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
   - `type: "user.custom_tool_result"`
 
@@ -13060,7 +13060,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
   - `custom_tool_use_id: string`
 
-    The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/event's) `stop_reason.event_ids` field.
+    The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
   - `type: "user.custom_tool_result"`
 
@@ -13584,7 +13584,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
   - `tool_use_id: string`
 
-    The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/event's) `stop_reason.event_ids` field.
+    The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
   - `type: "user.tool_confirmation"`
 
@@ -13614,7 +13614,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
   - `tool_use_id: string`
 
-    The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/event's) `stop_reason.event_ids` field.
+    The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](https://platform.claude.com/docs/en/api/beta/sessions/events/list#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
   - `type: "user.tool_confirmation"`
 

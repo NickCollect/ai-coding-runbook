@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/environments
-fetched_at: 2026-05-04T16:09:01.681474+00:00
+fetched_at: 2026-05-05T19:40:46.645524+00:00
 fetch_method: mintlify_md
 ---
 
@@ -672,4 +672,4 @@ client.beta.environments.delete(environment.id)
 
 ## Pre-installed runtimes
 
-Cloud containers include common runtimes out of the box. See [Container reference](https://platform.claude.com/docs/en/managed-agents/Container reference) for the full list of pre-installed languages, databases, and utilities.
+Cloud containers include common runtimes out of the box. See [Container reference](/docs/en/managed-agents/cloud-containers) for the full list of pre-installed languages, databases, and utilities.

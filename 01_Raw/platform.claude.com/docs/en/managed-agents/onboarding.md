@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/onboarding
-fetched_at: 2026-05-04T16:08:58.445374+00:00
+fetched_at: 2026-05-05T19:40:46.514975+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ Create and test agents visually in Console without writing API calls.
 
 ---
 
-[Console](https://platform.claude.com/docs/en/managed-agents/Console)  provides a visual interface for creating and configuring agents. It produces the same `/v1/agents` and `/v1/sessions` resources as the API but lets you iterate on configuration interactively before writing code.
+[Console](https://platform.claude.com/workspaces/default/agent-quickstart/)  provides a visual interface for creating and configuring agents. It produces the same `/v1/agents` and `/v1/sessions` resources as the API but lets you iterate on configuration interactively before writing code.
 
 <Note>
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
@@ -18,7 +18,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 ## How to build an agent
 
-The [visual interface](https://platform.claude.com/docs/en/managed-agents/visual interface) walks you through each field of an agent definition:
+The [visual interface](https://platform.claude.com/workspaces/default/agent-quickstart/) walks you through each field of an agent definition:
 
 - **Model and system prompt:** Pick a model and write the system prompt in a full-width editor.
 - **MCP servers:** Add remote MCP servers by URL and authenticate your agent to take action on your behalf.
@@ -36,7 +36,7 @@ Console includes an inline session runner. After configuring your agent, you can
 Once your agent works as expected:
 
 1. Copy the agent ID from Console output.
-2. Reference it in your code when [creating sessions](https://platform.claude.com/docs/en/managed-agents/creating sessions):
+2. Reference it in your code when [creating sessions](/docs/en/managed-agents/sessions):
 
 <CodeGroup>
 

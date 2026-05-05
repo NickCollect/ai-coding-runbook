@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/agent-setup
-fetched_at: 2026-05-04T16:08:58.969228+00:00
+fetched_at: 2026-05-05T19:40:46.513298+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ Create a reusable, versioned agent configuration.
 
 An agent is a reusable, versioned configuration that defines persona and capabilities. It bundles the model, system prompt, tools, MCP servers, and skills that shape how Claude behaves during a session.
 
-Create the agent once as a reusable resource and reference it by ID each time you [start a session](https://platform.claude.com/docs/en/managed-agents/start a session). Agents are versioned and easier to manage across many sessions.
+Create the agent once as a reusable resource and reference it by ID each time you [start a session](/docs/en/managed-agents/sessions). Agents are versioned and easier to manage across many sessions.
 
 <Note>
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
@@ -23,18 +23,18 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 | Field | Description |
 | --- | --- |
 | `name` | Required. A human-readable name for the agent. |
-| `model` | Required. The Claude [model](https://platform.claude.com/docs/en/managed-agents/model) that powers the agent. All Claude 4.5 and later models are supported. |
-| `system` | A [system prompt](https://platform.claude.com/docs/en/managed-agents/system prompt) that defines the agent's behavior and persona. The system prompt is distinct from [user messages](https://platform.claude.com/docs/en/managed-agents/user messages), which should describe the work to be done. |
-| `tools` | The tools available to the agent. Combines [pre-built agent tools](https://platform.claude.com/docs/en/managed-agents/pre-built agent tools), [MCP tools](https://platform.claude.com/docs/en/managed-agents/MCP tools), and [custom tools](https://platform.claude.com/docs/en/managed-agents/custom tools). |
+| `model` | Required. The Claude [model](/docs/en/about-claude/models/overview) that powers the agent. All Claude 4.5 and later models are supported. |
+| `system` | A [system prompt](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role) that defines the agent's behavior and persona. The system prompt is distinct from [user messages](/docs/en/managed-agents/events-and-streaming#user-events), which should describe the work to be done. |
+| `tools` | The tools available to the agent. Combines [pre-built agent tools](/docs/en/managed-agents/tools), [MCP tools](/docs/en/managed-agents/mcp-connector), and [custom tools](/docs/en/managed-agents/tools#custom-tools). |
 | `mcp_servers` | MCP servers that provide standardized third-party capabilities. |
-| `skills` | [Skills](https://platform.claude.com/docs/en/managed-agents/Skills) that supply domain-specific context with progressive disclosure. |
-| `callable_agents` | Other agents this agent can invoke for [multi-agent orchestration](https://platform.claude.com/docs/en/managed-agents/multi-agent orchestration). This is a research preview feature; [request access](https://platform.claude.com/docs/en/managed-agents/request access) to try it.|
+| `skills` | [Skills](/docs/en/managed-agents/skills) that supply domain-specific context with progressive disclosure. |
+| `callable_agents` | Other agents this agent can invoke for [multi-agent orchestration](/docs/en/managed-agents/multi-agent). This is a research preview feature; [request access](https://claude.com/form/claude-managed-agents) to try it.|
 | `description` | A description of what the agent does. |
 | `metadata` | Arbitrary key-value pairs for your own tracking. |
 
 ## Create an agent
 
-The following example defines a coding agent that uses Claude Opus 4.7 with access to the pre-built agent toolset. The toolset lets the agent write code, read files, search the web, and more. See the [agent tools reference](https://platform.claude.com/docs/en/managed-agents/agent tools reference) for the full list of supported tools.
+The following example defines a coding agent that uses Claude Opus 4.7 with access to the pre-built agent toolset. The toolset lets the agent write code, read files, search the web, and more. See the [agent tools reference](/docs/en/managed-agents/tools) for the full list of supported tools.
 
 <CodeGroup defaultLanguage="CLI">
   
@@ -166,7 +166,7 @@ agent = client.beta.agents.create(
 </CodeGroup>
 
 <Tip>
-To use Claude Opus 4.6 with [fast mode](https://platform.claude.com/docs/en/managed-agents/fast mode), pass `model` as an object: `{"id": "claude-opus-4-6", "speed": "fast"}`.
+To use Claude Opus 4.6 with [fast mode](/docs/en/build-with-claude/fast-mode), pass `model` as an object: `{"id": "claude-opus-4-6", "speed": "fast"}`.
 </Tip>
 
 The response echoes your configuration and adds `id`, `version`, `created_at`, `updated_at`, and `archived_at` fields. The `version` starts at 1 and increments each time you update the agent.
@@ -480,6 +480,6 @@ puts "Archived at: #{archived.archived_at.iso8601}"
 
 ## Next steps
 
-- [Configure tools](https://platform.claude.com/docs/en/managed-agents/Configure tools) to customize which capabilities the agent can use.
-- [Attach skills](https://platform.claude.com/docs/en/managed-agents/Attach skills) for domain-specific expertise.
-- [Start a session](https://platform.claude.com/docs/en/managed-agents/Start a session) that references your agent.
+- [Configure tools](/docs/en/managed-agents/tools) to customize which capabilities the agent can use.
+- [Attach skills](/docs/en/managed-agents/skills) for domain-specific expertise.
+- [Start a session](/docs/en/managed-agents/sessions) that references your agent.

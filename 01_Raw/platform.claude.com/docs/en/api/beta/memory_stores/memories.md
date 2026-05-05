@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/memory_stores/memories
-fetched_at: 2026-05-04T16:09:58.037755+00:00
+fetched_at: 2026-05-05T19:40:49.288123+00:00
 fetch_method: mintlify_md
 ---
 
@@ -120,7 +120,7 @@ Create a memory
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](https://platform.claude.com/docs/en/api/beta/memory_stores/List memory versions).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list).
 
   - `path: string`
 
@@ -288,7 +288,7 @@ List memories
 
     - `memory_version_id: string`
 
-      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](https://platform.claude.com/docs/en/api/beta/memory_stores/List memory versions).
+      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list).
 
     - `path: string`
 
@@ -308,7 +308,7 @@ List memories
 
   - `BetaManagedAgentsMemoryPrefix = object { path, type }`
 
-    A rolled-up directory marker returned by [List memories](https://platform.claude.com/docs/en/api/beta/memory_stores/List memories) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+    A rolled-up directory marker returned by [List memories](/docs/en/api/beta/memory_stores/memories/list) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
     - `path: string`
 
@@ -437,7 +437,7 @@ Retrieve a memory
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](https://platform.claude.com/docs/en/api/beta/memory_stores/List memory versions).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list).
 
   - `path: string`
 
@@ -592,7 +592,7 @@ Update a memory
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](https://platform.claude.com/docs/en/api/beta/memory_stores/List memory versions).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list).
 
   - `path: string`
 
@@ -699,7 +699,7 @@ Delete a memory
 
 - `BetaManagedAgentsDeletedMemory = object { id, type }`
 
-  Tombstone returned by [Delete a memory](https://platform.claude.com/docs/en/api/beta/memory_stores/Delete a memory). The memory's version history persists and remains listable via [List memory versions](https://platform.claude.com/docs/en/api/beta/memory_stores/List memory versions) until the store itself is deleted.
+  Tombstone returned by [Delete a memory](/docs/en/api/beta/memory_stores/memories/delete). The memory's version history persists and remains listable via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list) until the store itself is deleted.
 
   - `id: string`
 
@@ -749,7 +749,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
 - `BetaManagedAgentsDeletedMemory = object { id, type }`
 
-  Tombstone returned by [Delete a memory](https://platform.claude.com/docs/en/api/beta/memory_stores/Delete a memory). The memory's version history persists and remains listable via [List memory versions](https://platform.claude.com/docs/en/api/beta/memory_stores/List memory versions) until the store itself is deleted.
+  Tombstone returned by [Delete a memory](/docs/en/api/beta/memory_stores/memories/delete). The memory's version history persists and remains listable via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list) until the store itself is deleted.
 
   - `id: string`
 
@@ -891,7 +891,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](https://platform.claude.com/docs/en/api/beta/memory_stores/List memory versions).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list).
 
   - `path: string`
 
@@ -913,7 +913,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
 - `BetaManagedAgentsMemoryListItem = BetaManagedAgentsMemory or BetaManagedAgentsMemoryPrefix`
 
-  One item in a [List memories](https://platform.claude.com/docs/en/api/beta/memory_stores/List memories) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
+  One item in a [List memories](/docs/en/api/beta/memory_stores/memories/list) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
   - `BetaManagedAgentsMemory = object { id, content_sha256, content_size_bytes, 7 more }`
 
@@ -941,7 +941,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
     - `memory_version_id: string`
 
-      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](https://platform.claude.com/docs/en/api/beta/memory_stores/List memory versions).
+      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list).
 
     - `path: string`
 
@@ -961,7 +961,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
   - `BetaManagedAgentsMemoryPrefix = object { path, type }`
 
-    A rolled-up directory marker returned by [List memories](https://platform.claude.com/docs/en/api/beta/memory_stores/List memories) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+    A rolled-up directory marker returned by [List memories](/docs/en/api/beta/memory_stores/memories/list) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
     - `path: string`
 
@@ -999,7 +999,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
 - `BetaManagedAgentsMemoryPrefix = object { path, type }`
 
-  A rolled-up directory marker returned by [List memories](https://platform.claude.com/docs/en/api/beta/memory_stores/List memories) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+  A rolled-up directory marker returned by [List memories](/docs/en/api/beta/memory_stores/memories/list) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
   - `path: string`
 

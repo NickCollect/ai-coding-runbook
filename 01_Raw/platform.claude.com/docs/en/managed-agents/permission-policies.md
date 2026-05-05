@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/permission-policies
-fetched_at: 2026-05-04T16:09:00.593366+00:00
+fetched_at: 2026-05-05T19:40:46.557259+00:00
 fetch_method: mintlify_md
 ---
 
@@ -625,7 +625,7 @@ When the agent invokes a tool with an `always_ask` policy:
 3. Send a `user.tool_confirmation` event for each, passing the event ID in the `tool_use_id` param. Set `result` to `"allow"` or `"deny"`. Use `deny_message` to explain a denial.
 4. Once all blocking events are resolved, the session transitions back to `running`.
 
-Learn more about event handling in the [session event stream](https://platform.claude.com/docs/en/managed-agents/session event stream) guide.
+Learn more about event handling in the [session event stream](/docs/en/managed-agents/events-and-streaming) guide.
 
 <CodeGroup>
 ```bash curl
@@ -880,4 +880,4 @@ client.beta.sessions.events.send_(
 
 ## Custom tools
 
-Permission policies do not apply to custom tools. When the agent invokes a custom tool, your application receives an `agent.custom_tool_use` event and is responsible for deciding whether to execute it before sending back a `user.custom_tool_result`. See [Session event stream](https://platform.claude.com/docs/en/managed-agents/Session event stream) for the full flow.
+Permission policies do not apply to custom tools. When the agent invokes a custom tool, your application receives an `agent.custom_tool_use` event and is responsible for deciding whether to execute it before sending back a `user.custom_tool_result`. See [Session event stream](/docs/en/managed-agents/events-and-streaming#handling-custom-tool-calls) for the full flow.

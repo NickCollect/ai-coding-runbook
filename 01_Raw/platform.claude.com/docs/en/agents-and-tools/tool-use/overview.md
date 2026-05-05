@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview
-fetched_at: 2026-05-04T16:08:33.318186+00:00
+fetched_at: 2026-05-05T19:40:45.435611+00:00
 fetch_method: mintlify_md
 ---
 
@@ -69,23 +69,23 @@ console.log(response.content);
 
 Tools differ primarily by where the code executes. **Client tools** (including user-defined tools and Anthropic-schema tools like bash and text_editor) run in your application: Claude responds with `stop_reason: "tool_use"` and one or more `tool_use` blocks, your code executes the operation, and you send back a `tool_result`. **Server tools** (web_search, code_execution, web_fetch, tool_search) run on Anthropic's infrastructure: you see the results directly without handling execution.
 
-For the full conceptual model including the agentic loop and when to choose each approach, see [How tool use works](https://platform.claude.com/docs/en/agents-and-tools/tool-use/How tool use works).
+For the full conceptual model including the agentic loop and when to choose each approach, see [How tool use works](/docs/en/agents-and-tools/tool-use/how-tool-use-works).
 
-For connecting to MCP servers, see the [MCP connector](https://platform.claude.com/docs/en/agents-and-tools/tool-use/MCP connector). For building your own MCP client, see [modelcontextprotocol.io](https://platform.claude.com/docs/en/agents-and-tools/tool-use/modelcontextprotocol.io).
+For connecting to MCP servers, see the [MCP connector](/docs/en/agents-and-tools/mcp-connector). For building your own MCP client, see [modelcontextprotocol.io](https://modelcontextprotocol.io/docs/develop/build-client).
 
 <Tip>
 **Guarantee schema conformance with strict tool use**
 
-Add `strict: true` to your tool definitions to ensure Claude's tool calls always match your schema exactly. See [Strict tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Strict tool use).
+Add `strict: true` to your tool definitions to ensure Claude's tool calls always match your schema exactly. See [Strict tool use](/docs/en/agents-and-tools/tool-use/strict-tool-use).
 </Tip>
 
-Tool access is one of the highest-leverage primitives you can give an agent. On benchmarks like [LAB-Bench FigQA](https://platform.claude.com/docs/en/agents-and-tools/tool-use/LAB-Bench FigQA) (scientific figure interpretation) and [SWE-bench](https://platform.claude.com/docs/en/agents-and-tools/tool-use/SWE-bench) (real-world software engineering), adding even basic tools produces outsized capability gains, often surpassing human expert baselines.
+Tool access is one of the highest-leverage primitives you can give an agent. On benchmarks like [LAB-Bench FigQA](https://lab-bench.org/) (scientific figure interpretation) and [SWE-bench](https://www.swebench.com/) (real-world software engineering), adding even basic tools produces outsized capability gains, often surpassing human expert baselines.
 
 ---
 
 ## Tool use examples
 
-For a complete hands-on walkthrough, see the [tutorial](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tutorial). For reference examples of individual concepts, see [Define tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Define tools) and [Handle tool calls](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Handle tool calls).
+For a complete hands-on walkthrough, see the [tutorial](/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent). For reference examples of individual concepts, see [Define tools](/docs/en/agents-and-tools/tool-use/define-tools) and [Handle tool calls](/docs/en/agents-and-tools/tool-use/handle-tool-calls).
 
 <section title="What happens when Claude needs more information">
 
@@ -135,16 +135,16 @@ When you use `tools`, we also automatically include a special system prompt for 
 | Claude Sonnet 4.6          | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
 | Claude Sonnet 4.5          | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
 | Claude Sonnet 4          | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
-| Claude Sonnet 3.7 ([deprecated](https://platform.claude.com/docs/en/agents-and-tools/tool-use/deprecated))        | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
+| Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations))        | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
 | Claude Haiku 4.5         | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
 | Claude Haiku 3.5         | `auto`, `none`<hr />`any`, `tool`   | 264 tokens<hr />340 tokens |
-| Claude Opus 3 ([deprecated](https://platform.claude.com/docs/en/agents-and-tools/tool-use/deprecated))            | `auto`, `none`<hr />`any`, `tool`   | 530 tokens<hr />281 tokens |
+| Claude Opus 3 ([deprecated](/docs/en/about-claude/model-deprecations))            | `auto`, `none`<hr />`any`, `tool`   | 530 tokens<hr />281 tokens |
 | Claude Sonnet 3          | `auto`, `none`<hr />`any`, `tool`   | 159 tokens<hr />235 tokens |
 | Claude Haiku 3           | `auto`, `none`<hr />`any`, `tool`   | 264 tokens<hr />340 tokens |
 
 These token counts are added to your normal input and output tokens to calculate the total cost of a request.
 
-Refer to the [models overview table](https://platform.claude.com/docs/en/agents-and-tools/tool-use/models overview table) for current per-model prices.
+Refer to the [models overview table](/docs/en/about-claude/models/overview#latest-models-comparison) for current per-model prices.
 
 When you send a tool use prompt, just like any other API request, the response will output both input and output token counts as part of the reported `usage` metrics.
 

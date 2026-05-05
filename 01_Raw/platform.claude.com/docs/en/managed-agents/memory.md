@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/memory
-fetched_at: 2026-05-04T16:09:06.063692+00:00
+fetched_at: 2026-05-05T19:40:46.775625+00:00
 fetch_method: mintlify_md
 ---
 
@@ -17,7 +17,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 </Note>
 
 ## Overview
-A **memory store** is a workspace-scoped collection of text documents optimized for Claude. When you attach a store to a session, it is mounted as a directory inside the session's container. The agent reads and writes it with the same file tools it uses for the rest of the filesystem, and a note describing each mount is automatically added to the system prompt so the agent knows where to look. The [agent toolset](https://platform.claude.com/docs/en/managed-agents/agent toolset) is required for these interactions; make sure to enable it during [agent creation](https://platform.claude.com/docs/en/managed-agents/agent creation).
+A **memory store** is a workspace-scoped collection of text documents optimized for Claude. When you attach a store to a session, it is mounted as a directory inside the session's container. The agent reads and writes it with the same file tools it uses for the rest of the filesystem, and a note describing each mount is automatically added to the system prompt so the agent knows where to look. The [agent toolset](/docs/en/managed-agents/tools) is required for these interactions; make sure to enable it during [agent creation](/docs/en/managed-agents/agent-setup).
 
 Each **memory** in a store is addressed by a path and can be read and edited directly via the API or Console, allowing for tuning, importing, and exporting.
 
@@ -404,11 +404,11 @@ A maximum of **8 memory stores** are supported per session. Attach multiple stor
 
 ### How the agent accesses memory
 
-Each attached store is mounted inside the session's container as a directory under `/mnt/memory/`, and the agent reads and writes it with the standard [agent toolset](https://platform.claude.com/docs/en/managed-agents/agent toolset). Writes are persisted back to the store and stay in sync across sessions that share it. A short description of each mount (path, access mode, store `description`, and any `instructions`) is automatically added to the system prompt.
+Each attached store is mounted inside the session's container as a directory under `/mnt/memory/`, and the agent reads and writes it with the standard [agent toolset](/docs/en/managed-agents/tools). Writes are persisted back to the store and stay in sync across sessions that share it. A short description of each mount (path, access mode, store `description`, and any `instructions`) is automatically added to the system prompt.
 
-`access` is enforced at the filesystem level: a `read_only` mount rejects writes, while writes to a `read_write` mount produce [memory versions](https://platform.claude.com/docs/en/managed-agents/memory versions) attributed to the session.
+`access` is enforced at the filesystem level: a `read_only` mount rejects writes, while writes to a `read_write` mount produce [memory versions](#audit-memory-changes) attributed to the session.
 
-The agent's reads and writes appear in the [event stream](https://platform.claude.com/docs/en/managed-agents/event stream) as ordinary `agent.tool_use` and `agent.tool_result` events for whichever tool touched the mount.
+The agent's reads and writes appear in the [event stream](/docs/en/managed-agents/events-and-streaming) as ordinary `agent.tool_use` and `agent.tool_result` events for whichever tool touched the mount.
 
 ## View and edit memories
 
@@ -530,7 +530,7 @@ end
 
 </CodeGroup>
 
-See the [List memories reference](https://platform.claude.com/docs/en/managed-agents/List memories reference) for full parameters and response schema.
+See the [List memories reference](/docs/en/api/beta/memory_stores/memories/list) for full parameters and response schema.
 
 ### Read a memory
 Fetching an individual memory returns the full content.
@@ -614,11 +614,11 @@ puts retrieved.content
 
 </CodeGroup>
 
-See the [Retrieve a memory reference](https://platform.claude.com/docs/en/managed-agents/Retrieve a memory reference) for full parameters and response schema.
+See the [Retrieve a memory reference](/docs/en/api/beta/memory_stores/memories/retrieve) for full parameters and response schema.
 
 ### Create a memory
 
-`memories.create` creates a memory at a given `path`. Create does not overwrite; to change an existing memory, use [`memories.update`](https://platform.claude.com/docs/en/managed-agents/`memories.update`).
+`memories.create` creates a memory at a given `path`. Create does not overwrite; to change an existing memory, use [`memories.update`](#update-a-memory).
 
 <CodeGroup>
   
@@ -712,7 +712,7 @@ mem = client.beta.memory_stores.memories.create(
 
 </CodeGroup>
 
-See the [Create a memory reference](https://platform.claude.com/docs/en/managed-agents/Create a memory reference) for full parameters and response schema.
+See the [Create a memory reference](/docs/en/api/beta/memory_stores/memories/create) for full parameters and response schema.
 
 ### Update a memory
 
@@ -806,7 +806,7 @@ client.beta.memory_stores.memories.update(
 
 </CodeGroup>
 
-See the [Update a memory reference](https://platform.claude.com/docs/en/managed-agents/Update a memory reference) for full parameters and response schema.
+See the [Update a memory reference](/docs/en/api/beta/memory_stores/memories/update) for full parameters and response schema.
 
 #### Safe content edits (optimistic concurrency)
 
@@ -1001,7 +1001,7 @@ client.beta.memory_stores.memories.delete(
 
 </CodeGroup>
 
-See the [Delete a memory reference](https://platform.claude.com/docs/en/managed-agents/Delete a memory reference) for full parameters and response schema.
+See the [Delete a memory reference](/docs/en/api/beta/memory_stores/memories/delete) for full parameters and response schema.
 
 ## Audit memory changes
 
@@ -1139,7 +1139,7 @@ version_id = versions.data[1].id
 
 </CodeGroup>
 
-See the [List memory versions reference](https://platform.claude.com/docs/en/managed-agents/List memory versions reference) for full parameters and response schema.
+See the [List memory versions reference](/docs/en/api/beta/memory_stores/memory_versions/list) for full parameters and response schema.
 
 ### Retrieve a version
 
@@ -1227,7 +1227,7 @@ puts version.content
 
 </CodeGroup>
 
-See the [Retrieve a memory version reference](https://platform.claude.com/docs/en/managed-agents/Retrieve a memory version reference) for full parameters and response schema.
+See the [Retrieve a memory version reference](/docs/en/api/beta/memory_stores/memory_versions/retrieve) for full parameters and response schema.
 
 ### Redact a version
 
@@ -1312,11 +1312,11 @@ client.beta.memory_stores.memory_versions.redact(
 
 </CodeGroup>
 
-See the [Redact a memory version reference](https://platform.claude.com/docs/en/managed-agents/Redact a memory version reference) for full parameters and response schema.
+See the [Redact a memory version reference](/docs/en/api/beta/memory_stores/memory_versions/redact) for full parameters and response schema.
 
 ## Manage memory stores
 
-In addition to [`create`](https://platform.claude.com/docs/en/managed-agents/`create`), memory stores support [`retrieve`](https://platform.claude.com/docs/en/managed-agents/`retrieve`), [`update`](https://platform.claude.com/docs/en/managed-agents/`update`), [`list`](https://platform.claude.com/docs/en/managed-agents/`list`), [`archive`](https://platform.claude.com/docs/en/managed-agents/`archive`), and [`delete`](https://platform.claude.com/docs/en/managed-agents/`delete`).
+In addition to [`create`](/docs/en/api/beta/memory_stores/create), memory stores support [`retrieve`](/docs/en/api/beta/memory_stores/retrieve), [`update`](/docs/en/api/beta/memory_stores/update), [`list`](/docs/en/api/beta/memory_stores/list), [`archive`](/docs/en/api/beta/memory_stores/archive), and [`delete`](/docs/en/api/beta/memory_stores/delete).
 
 ### List stores
 
@@ -1397,7 +1397,7 @@ end
 
 </CodeGroup>
 
-See the [List memory stores reference](https://platform.claude.com/docs/en/managed-agents/List memory stores reference) for full parameters and response schema.
+See the [List memory stores reference](/docs/en/api/beta/memory_stores/list) for full parameters and response schema.
 
 ### Archive a store
 
@@ -1457,10 +1457,10 @@ client.beta.memory_stores.archive(store.id)
 
 </CodeGroup>
 
-See the [Archive a memory store reference](https://platform.claude.com/docs/en/managed-agents/Archive a memory store reference) for full parameters and response schema.
+See the [Archive a memory store reference](/docs/en/api/beta/memory_stores/archive) for full parameters and response schema.
 
-To permanently remove a store along with all of its memories and versions, use [`memory_stores.delete`](https://platform.claude.com/docs/en/managed-agents/`memory_stores.delete`).
+To permanently remove a store along with all of its memories and versions, use [`memory_stores.delete`](/docs/en/api/beta/memory_stores/delete).
 
 ## Limits
 
-Default capacity and rate limits apply to memory stores while this feature is in beta. [Contact support](https://platform.claude.com/docs/en/managed-agents/Contact support) if you need higher limits.
+Default capacity and rate limits apply to memory stores while this feature is in beta. [Contact support](https://support.claude.com) if you need higher limits.

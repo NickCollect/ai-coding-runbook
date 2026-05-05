@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/mcp-connector
-fetched_at: 2026-05-04T16:09:00.036755+00:00
+fetched_at: 2026-05-05T19:40:46.559680+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,12 +10,12 @@ Connect MCP servers to your agents for access to external tools and data sources
 
 ---
 
-Claude Managed Agents supports connecting [Model Context Protocol (MCP)](https://platform.claude.com/docs/en/managed-agents/Model Context Protocol (MCP)) servers to your agents. This gives the agent access to external tools, data sources, and services through a standardized protocol.
+Claude Managed Agents supports connecting [Model Context Protocol (MCP)](https://modelcontextprotocol.io) servers to your agents. This gives the agent access to external tools, data sources, and services through a standardized protocol.
 
 MCP configuration is split across two steps:
 
 1. **Agent creation** declares which MCP servers the agent connects to, by name and URL.
-2. **Session creation** supplies auth for those servers by referencing a pre-registered [vault](https://platform.claude.com/docs/en/managed-agents/vault).
+2. **Session creation** supplies auth for those servers by referencing a pre-registered [vault](/docs/en/managed-agents/vaults).
 
 This separation keeps secrets out of reusable agent definitions while letting each session authenticate with its own credentials.
 
@@ -234,12 +234,12 @@ agent = client.beta.agents.create(
 </CodeGroup>
 
 <Tip>
-The MCP toolset defaults to a permission policy of `always_ask`, which requires user approval before each tool call. See [permission policies](https://platform.claude.com/docs/en/managed-agents/permission policies) to configure this behavior.
+The MCP toolset defaults to a permission policy of `always_ask`, which requires user approval before each tool call. See [permission policies](/docs/en/managed-agents/permission-policies) to configure this behavior.
 </Tip>
 
 ## Provide auth at session creation
 
-When starting a session, pass `vault_ids` to provide credentials for your MCP servers. Vaults are collections of credentials that you register once and reference by ID. See [Authenticate with vaults](https://platform.claude.com/docs/en/managed-agents/Authenticate with vaults) for how to create vaults and manage credentials.
+When starting a session, pass `vault_ids` to provide credentials for your MCP servers. Vaults are collections of credentials that you register once and reference by ID. See [Authenticate with vaults](/docs/en/managed-agents/vaults) for how to create vaults and manage credentials.
 
 <CodeGroup>
   
@@ -340,10 +340,10 @@ session = client.beta.sessions.create(
 
 </CodeGroup>
 
-If the authorization credentials supplied in the vault are invalid, session creation will succeed and interaction is still possible. A `session.error` event is emitted describing the MCP auth failure. You can decide whether to block further interactions on this error, trigger a credential update, or allow the session to continue without the MCP. Authentication retries will happen on the following `session.status_idle` to `session.status_running` transition. See [Session event stream](https://platform.claude.com/docs/en/managed-agents/Session event stream) for details on consuming `session.error` and other events.
+If the authorization credentials supplied in the vault are invalid, session creation will succeed and interaction is still possible. A `session.error` event is emitted describing the MCP auth failure. You can decide whether to block further interactions on this error, trigger a credential update, or allow the session to continue without the MCP. Authentication retries will happen on the following `session.status_idle` to `session.status_running` transition. See [Session event stream](/docs/en/managed-agents/events-and-streaming) for details on consuming `session.error` and other events.
 
 ## Supported MCP server types
 
-Claude Managed Agents connects to [remote MCP servers](https://platform.claude.com/docs/en/managed-agents/remote MCP servers) that expose an HTTP endpoint. The server must support the MCP protocol's streamable HTTP transport.
+Claude Managed Agents connects to [remote MCP servers](/docs/en/agents-and-tools/remote-mcp-servers) that expose an HTTP endpoint. The server must support the MCP protocol's streamable HTTP transport.
 
-For more information on MCP and building MCP servers, see the [MCP documentation](https://platform.claude.com/docs/en/managed-agents/MCP documentation).
+For more information on MCP and building MCP servers, see the [MCP documentation](https://modelcontextprotocol.io).

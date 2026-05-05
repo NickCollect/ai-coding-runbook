@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/fast-mode
-fetched_at: 2026-05-04T16:08:28.142404+00:00
+fetched_at: 2026-05-05T19:40:45.216591+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,11 +13,11 @@ Higher output speed for Claude Opus 4.6, delivering significantly faster token g
 Fast mode provides significantly faster output token generation for Claude Opus 4.6. By setting `speed: "fast"` in your API request, you get up to 2.5x higher output tokens per second from the same model at premium pricing.
 
 <Note>
-Fast mode is in beta (research preview). [Join the waitlist](https://platform.claude.com/docs/en/build-with-claude/Join the waitlist) to request access. Availability is limited while Anthropic gathers feedback.
+Fast mode is in beta (research preview). [Join the waitlist](https://claude.com/fast-mode) to request access. Availability is limited while Anthropic gathers feedback.
 </Note>
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/Zero Data Retention (ZDR)). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 ## Supported models
@@ -233,10 +233,10 @@ Fast mode is priced at 6x standard Opus rates across the full context window, in
 
 Fast mode pricing stacks with other pricing modifiers:
 
-- [Prompt caching multipliers](https://platform.claude.com/docs/en/build-with-claude/Prompt caching multipliers) apply on top of fast mode pricing
-- [Data residency](https://platform.claude.com/docs/en/build-with-claude/Data residency) multipliers apply on top of fast mode pricing
+- [Prompt caching multipliers](/docs/en/about-claude/pricing#model-pricing) apply on top of fast mode pricing
+- [Data residency](/docs/en/build-with-claude/data-residency) multipliers apply on top of fast mode pricing
 
-For complete pricing details, see the [pricing page](https://platform.claude.com/docs/en/build-with-claude/pricing page).
+For complete pricing details, see the [pricing page](/docs/en/about-claude/pricing#fast-mode-pricing).
 
 ## Rate limits
 
@@ -253,7 +253,7 @@ The response includes headers that indicate your fast mode rate limit status:
 | `anthropic-fast-output-tokens-remaining` | Remaining fast mode output tokens |
 | `anthropic-fast-output-tokens-reset` | Time when the fast mode output token limit resets |
 
-For tier-specific rate limits, see the [rate limits page](https://platform.claude.com/docs/en/build-with-claude/rate limits page).
+For tier-specific rate limits, see the [rate limits page](/docs/en/api/rate-limits).
 
 ## Checking which speed was used
 
@@ -432,7 +432,7 @@ puts(response.usage.speed)  # "fast" or "standard"
 }
 ```
 
-To track fast mode usage and costs across your organization, see the [Usage and Cost API](https://platform.claude.com/docs/en/build-with-claude/Usage and Cost API).
+To track fast mode usage and costs across your organization, see the [Usage and Cost API](/docs/en/build-with-claude/usage-cost-api).
 
 ## Retries and fallback
 
@@ -445,7 +445,7 @@ When fast mode rate limits are exceeded, the API returns a `429` error with a `r
 If you'd prefer to fall back to standard speed rather than wait for fast mode capacity, catch the rate limit error and retry without `speed: "fast"`. Set `max_retries` to `0` on the initial fast request to skip automatic retries and fail immediately on rate limit errors.
 
 <Note>
-Falling back from fast to standard speed will result in a [prompt cache](https://platform.claude.com/docs/en/build-with-claude/prompt cache) miss. Requests at different speeds do not share cached prefixes.
+Falling back from fast to standard speed will result in a [prompt cache](/docs/en/build-with-claude/prompt-caching) miss. Requests at different speeds do not share cached prefixes.
 </Note>
 
 Since setting `max_retries` to `0` also disables retries for other transient errors (overloaded, internal server errors), the examples below re-issue the original request with default retries for those cases.
@@ -495,6 +495,7 @@ import anthropic
 
 client = anthropic.Anthropic()
 
+
 def create_message_with_fast_fallback(max_retries=None, max_attempts=3, **params):
     try:
         return client.beta.messages.create(**params, max_retries=max_retries)
@@ -513,6 +514,7 @@ def create_message_with_fast_fallback(max_retries=None, max_attempts=3, **params
                 max_attempts=max_attempts - 1, **params
             )
         raise
+
 
 message = create_message_with_fast_fallback(
     model="claude-opus-4-6",
@@ -813,8 +815,8 @@ message = create_message_with_fast_fallback(
 - **Prompt caching:** Switching between fast and standard speed invalidates the prompt cache. Requests at different speeds do not share cached prefixes.
 - **Supported models:** Fast mode is currently supported on Opus 4.6 only. Sending `speed: "fast"` with an unsupported model returns an error.
 - **TTFT:** Fast mode's benefits are focused on output tokens per second (OTPS), not time to first token (TTFT).
-- **Batch API:** Fast mode is not available with the [Batch API](https://platform.claude.com/docs/en/build-with-claude/Batch API).
-- **Priority Tier:** Fast mode is not available with [Priority Tier](https://platform.claude.com/docs/en/build-with-claude/Priority Tier).
+- **Batch API:** Fast mode is not available with the [Batch API](/docs/en/build-with-claude/batch-processing).
+- **Priority Tier:** Fast mode is not available with [Priority Tier](/docs/en/api/service-tiers).
 
 ## Next steps
 

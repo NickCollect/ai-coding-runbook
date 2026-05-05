@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-code-analytics-api
-fetched_at: 2026-05-04T16:09:09.381589+00:00
+fetched_at: 2026-05-05T19:40:47.125526+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,7 +14,7 @@ Programmatically access your organization's Claude Code usage analytics and prod
 **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console → Settings → Organization**.
 </Tip>
 
-The Claude Code Analytics Admin API provides programmatic access to daily aggregated usage metrics for Claude Code users, enabling organizations to analyze developer productivity and build custom dashboards. This API bridges the gap between our basic [Analytics dashboard](https://platform.claude.com/docs/en/build-with-claude/Analytics dashboard) and the complex OpenTelemetry integration.
+The Claude Code Analytics Admin API provides programmatic access to daily aggregated usage metrics for Claude Code users, enabling organizations to analyze developer productivity and build custom dashboards. This API bridges the gap between our basic [Analytics dashboard](/claude-code) and the complex OpenTelemetry integration.
 
 This API enables you to better monitor, analyze, and optimize your Claude Code adoption:
 
@@ -27,7 +27,7 @@ This API enables you to better monitor, analyze, and optimize your Claude Code a
 <Check>
   **Admin API key required**
 
-  This API is part of the [Admin API](https://platform.claude.com/docs/en/build-with-claude/Admin API). These endpoints require an Admin API key (starting with `sk-ant-admin...`) that differs from standard API keys. Only organization members with the admin role can provision Admin API keys through the [Claude Console](https://platform.claude.com/docs/en/build-with-claude/Claude Console).
+  This API is part of the [Admin API](/docs/en/build-with-claude/administration-api). These endpoints require an Admin API key (starting with `sk-ant-admin...`) that differs from standard API keys. Only organization members with the admin role can provision Admin API keys through the [Claude Console](/settings/admin-keys).
 </Check>
 
 ## Quick start
@@ -64,7 +64,7 @@ Track Claude Code usage, productivity metrics, and developer activity across you
 - **Cursor-based pagination**: Handle large datasets with stable pagination using opaque cursors
 - **Data freshness**: Metrics are available with up to 1-hour delay for consistency
 
-For complete parameter details and response schemas, see the [Claude Code Analytics API reference](https://platform.claude.com/docs/en/build-with-claude/Claude Code Analytics API reference).
+For complete parameter details and response schemas, see the [Claude Code Analytics API reference](/docs/en/api/admin-api/claude-code/get-claude-code-usage-report).
 
 ### Basic examples
 
@@ -225,7 +225,7 @@ The cursor encodes the position of the last record and ensures stable pagination
 Claude Code analytics data typically appears within 1 hour of user activity completion. To ensure consistent pagination results, only data older than 1 hour is included in responses.
 
 ### Can I get real-time metrics?
-No, this API provides daily aggregated metrics only. For real-time monitoring, consider using the [OpenTelemetry integration](https://platform.claude.com/docs/en/build-with-claude/OpenTelemetry integration).
+No, this API provides daily aggregated metrics only. For real-time monitoring, consider using the [OpenTelemetry integration](https://code.claude.com/docs/en/monitoring-usage).
 
 ### How are users identified in the data?
 Users are identified through the `actor` field in two ways:
@@ -253,9 +253,9 @@ All dates are in UTC. The `starting_at` parameter should be in YYYY-MM-DD format
 
 The Claude Code Analytics API helps you understand and optimize your team's development workflow. Learn more about related features:
 
-- [Admin API overview](https://platform.claude.com/docs/en/build-with-claude/Admin API overview)
-- [Admin API reference](https://platform.claude.com/docs/en/build-with-claude/Admin API reference)
-- [Claude Code Analytics dashboard](https://platform.claude.com/docs/en/build-with-claude/Claude Code Analytics dashboard)
-- [Usage and Cost API](https://platform.claude.com/docs/en/build-with-claude/Usage and Cost API) - Track API usage across all Anthropic services
-- [Identity and access management](https://platform.claude.com/docs/en/build-with-claude/Identity and access management)
-- [Monitoring usage with OpenTelemetry](https://platform.claude.com/docs/en/build-with-claude/Monitoring usage with OpenTelemetry) for custom metrics and alerting
+- [Admin API overview](/docs/en/build-with-claude/administration-api)
+- [Admin API reference](/docs/en/api/admin)
+- [Claude Code Analytics dashboard](/claude-code)
+- [Usage and Cost API](/docs/en/build-with-claude/usage-cost-api) - Track API usage across all Anthropic services
+- [Identity and access management](https://code.claude.com/docs/en/iam)
+- [Monitoring usage with OpenTelemetry](https://code.claude.com/docs/en/monitoring-usage) for custom metrics and alerting

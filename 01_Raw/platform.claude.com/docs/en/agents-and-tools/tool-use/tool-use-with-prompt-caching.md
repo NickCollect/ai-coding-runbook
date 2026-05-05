@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching
-fetched_at: 2026-05-04T16:08:37.669268+00:00
+fetched_at: 2026-05-05T19:40:45.656540+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ Cache tool definitions across turns and understand what invalidates your cache.
 
 ---
 
-This page covers prompt caching for tool definitions: where to place `cache_control` breakpoints, how `defer_loading` preserves your cache, and what invalidates it. For general prompt caching, see [Prompt caching](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Prompt caching).
+This page covers prompt caching for tool definitions: where to place `cache_control` breakpoints, how `defer_loading` preserves your cache, and what invalidates it. For general prompt caching, see [Prompt caching](/docs/en/build-with-claude/prompt-caching).
 
 ## cache_control on tool definitions
 
@@ -50,11 +50,11 @@ For `mcp_toolset`, the `cache_control` breakpoint lands on the last tool in the 
 
 ## defer_loading and cache preservation
 
-Deferred tools are not included in the system-prompt prefix. When the model discovers a deferred tool through [tool search](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool search), the definition is appended inline as a `tool_reference` block in the conversation history. The prefix is untouched, so prompt caching is preserved.
+Deferred tools are not included in the system-prompt prefix. When the model discovers a deferred tool through [tool search](/docs/en/agents-and-tools/tool-use/tool-search-tool), the definition is appended inline as a `tool_reference` block in the conversation history. The prefix is untouched, so prompt caching is preserved.
 
 This means adding tools dynamically through tool search does not break your cache. You can start a conversation with a small set of always-loaded tools (cached), let the model discover additional tools as needed, and keep the same cache hit across every turn.
 
-`defer_loading` also acts independently of grammar construction for [strict mode](https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict mode). The grammar builds from the full toolset regardless of which tools are deferred, so prompt caching and grammar caching are both preserved when tools load dynamically.
+`defer_loading` also acts independently of grammar construction for [strict mode](/docs/en/agents-and-tools/tool-use/strict-tool-use). The grammar builds from the full toolset regardless of which tools are deferred, so prompt caching and grammar caching are both preserved when tools load dynamically.
 
 ## What invalidates your cache
 
@@ -77,14 +77,14 @@ If you need to vary `tool_choice` mid-conversation, consider placing cache break
 
 | Tool | Caching considerations |
 |---|---|
-| [Web search](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Web search) | Enabling or disabling invalidates the system and messages caches |
-| [Web fetch](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Web fetch) | Enabling or disabling invalidates the system and messages caches |
-| [Code execution](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Code execution) | Container state is independent of prompt cache |
-| [Tool search](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Tool search) | Discovered tools load as `tool_reference` blocks, preserving prefix cache |
-| [Computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Computer use) | Screenshot presence affects messages cache |
-| [Text editor](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Text editor) | Standard client tool, no special caching interaction |
-| [Bash](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Bash) | Standard client tool, no special caching interaction |
-| [Memory](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Memory) | Standard client tool, no special caching interaction |
+| [Web search](/docs/en/agents-and-tools/tool-use/web-search-tool) | Enabling or disabling invalidates the system and messages caches |
+| [Web fetch](/docs/en/agents-and-tools/tool-use/web-fetch-tool) | Enabling or disabling invalidates the system and messages caches |
+| [Code execution](/docs/en/agents-and-tools/tool-use/code-execution-tool) | Container state is independent of prompt cache |
+| [Tool search](/docs/en/agents-and-tools/tool-use/tool-search-tool) | Discovered tools load as `tool_reference` blocks, preserving prefix cache |
+| [Computer use](/docs/en/agents-and-tools/tool-use/computer-use-tool) | Screenshot presence affects messages cache |
+| [Text editor](/docs/en/agents-and-tools/tool-use/text-editor-tool) | Standard client tool, no special caching interaction |
+| [Bash](/docs/en/agents-and-tools/tool-use/bash-tool) | Standard client tool, no special caching interaction |
+| [Memory](/docs/en/agents-and-tools/tool-use/memory-tool) | Standard client tool, no special caching interaction |
 
 ## Next steps
 

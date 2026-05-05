@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/memory_stores/memories/delete
-fetched_at: 2026-05-04T16:10:00.766342+00:00
+fetched_at: 2026-05-05T19:40:49.412735+00:00
 fetch_method: mintlify_md
 ---
 
@@ -82,7 +82,7 @@ Delete a memory
 
 - `BetaManagedAgentsDeletedMemory = object { id, type }`
 
-  Tombstone returned by [Delete a memory](https://platform.claude.com/docs/en/api/beta/memory_stores/memories/Delete a memory). The memory's version history persists and remains listable via [List memory versions](https://platform.claude.com/docs/en/api/beta/memory_stores/memories/List memory versions) until the store itself is deleted.
+  Tombstone returned by [Delete a memory](/docs/en/api/beta/memory_stores/memories/delete). The memory's version history persists and remains listable via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list) until the store itself is deleted.
 
   - `id: string`
 

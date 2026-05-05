@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/messages/batches/list
-fetched_at: 2026-05-04T16:09:24.991165+00:00
+fetched_at: 2026-05-05T19:40:47.770500+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ fetch_method: mintlify_md
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/api/beta/messages/batches/user guide)
+Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
 
 ### Query Parameters
 

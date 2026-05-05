@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool
-fetched_at: 2026-05-04T16:08:40.938994+00:00
+fetched_at: 2026-05-05T19:40:45.752919+00:00
 fetch_method: mintlify_md
 ---
 
@@ -21,7 +21,7 @@ This pattern fits long-horizon agentic workloads (coding agents, computer use, m
 </Note>
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Zero Data Retention (ZDR)). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 ## When to use it
@@ -297,8 +297,8 @@ The advisor itself runs without tools and without context management. Its thinki
 | `type`                  | string         | _required_   | Must be `"advisor_20260301"`.                                                                                                                      |
 | `name`                  | string         | _required_   | Must be `"advisor"`.                                                                                                                               |
 | `model`                 | string         | _required_   | The advisor model ID, such as `"claude-opus-4-7"`. Billed at this model's rates for the sub-inference.                                             |
-| `max_uses`              | integer        | unlimited    | Maximum number of advisor calls allowed in a single request. Once the executor reaches this cap, further advisor calls return an `advisor_tool_result_error` with `error_code: "max_uses_exceeded"` and the executor continues without further advice. This is a per-request cap, not a per-conversation cap; see [Cost control](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Cost control) for conversation-level limits. |
-| `caching`               | object \| null | `null` (off) | Enables prompt caching for the advisor's own transcript across calls within a conversation. See [Advisor prompt caching](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Advisor prompt caching). |
+| `max_uses`              | integer        | unlimited    | Maximum number of advisor calls allowed in a single request. Once the executor reaches this cap, further advisor calls return an `advisor_tool_result_error` with `error_code: "max_uses_exceeded"` and the executor continues without further advice. This is a per-request cap, not a per-conversation cap; see [Cost control](#cost-control) for conversation-level limits. |
+| `caching`               | object \| null | `null` (off) | Enables prompt caching for the advisor's own transcript across calls within a conversation. See [Advisor prompt caching](#advisor-prompt-caching). |
 
 The `caching` object has the shape `{"type": "ephemeral", "ttl": "5m" | "1h"}`. Unlike `cache_control` on content blocks, this is not a breakpoint marker; it is an on/off switch. The server decides where cache boundaries go.
 
@@ -525,7 +525,7 @@ The advisor's prompt on the Nth call is the (N-1)th call's prompt with one more 
 **Keep it consistent:** Set `caching` once and leave it for the whole conversation. Toggling it off and on mid-conversation causes cache misses.
 
 <Warning>
-  [`clear_thinking`](https://platform.claude.com/docs/en/agents-and-tools/tool-use/`clear_thinking`) with a `keep`
+  [`clear_thinking`](/docs/en/build-with-claude/context-editing) with a `keep`
   value other than `"all"` shifts the advisor's quoted transcript each turn,
   causing advisor-side cache misses. This is a cost degradation only; advice
   quality is unaffected. When extended thinking is enabled without explicit
@@ -567,10 +567,10 @@ The executor can search the web, call the advisor, and use your custom tools in 
 
 | Feature                                                          | Interaction                                                                                                                                                                                                                                                                        |
 | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Batch processing](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Batch processing)         | Supported. `usage.iterations` is reported per item.                                                                                                                                                                                                                                |
-| [Token counting](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Token counting)      | Returns the executor's first-iteration input tokens only. For a rough advisor estimate, call `count_tokens` with `model` set to the advisor model and the same messages.                                                                                                           |
-| [Context editing](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Context editing) | `clear_tool_uses` is not yet fully compatible with advisor tool blocks; full support is planned for a follow-up release. With `clear_thinking`, see the caching warning above.                                                                                                    |
-| `pause_turn`                                                     | A dangling advisor call ends the response with `stop_reason: "pause_turn"` and the `server_tool_use` block as the last content block. The advisor executes on resumption. See [Server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Server tools). |
+| [Batch processing](/docs/en/build-with-claude/batch-processing)         | Supported. `usage.iterations` is reported per item.                                                                                                                                                                                                                                |
+| [Token counting](/docs/en/build-with-claude/token-counting)      | Returns the executor's first-iteration input tokens only. For a rough advisor estimate, call `count_tokens` with `model` set to the advisor model and the same messages.                                                                                                           |
+| [Context editing](/docs/en/build-with-claude/context-editing) | `clear_tool_uses` is not yet fully compatible with advisor tool blocks; full support is planned for a follow-up release. With `clear_thinking`, see the caching warning above.                                                                                                    |
+| `pause_turn`                                                     | A dangling advisor call ends the response with `stop_reason: "pause_turn"` and the `server_tool_use` block as the last content block. The advisor executes on resumption. See [Server tools](/docs/en/agents-and-tools/tool-use/server-tools#the-server-side-loop-and-pause-turn). |
 
 ## Best practices
 
@@ -624,7 +624,7 @@ Pair this with the timing block above for the strongest cost-versus-quality trad
 
 ### Pairing with effort settings
 
-For coding tasks, pairing a Sonnet executor at medium [effort](https://platform.claude.com/docs/en/agents-and-tools/tool-use/effort) with an Opus advisor achieves intelligence comparable to Sonnet at default effort, at lower cost. For maximum intelligence, keep the executor at default effort.
+For coding tasks, pairing a Sonnet executor at medium [effort](/docs/en/build-with-claude/effort) with an Opus advisor achieves intelligence comparable to Sonnet at default effort, at lower cost. For maximum intelligence, keep the executor at default effort.
 
 ### Cost control
 

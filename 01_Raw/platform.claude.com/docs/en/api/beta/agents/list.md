@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/agents/list
-fetched_at: 2026-05-04T16:09:28.368152+00:00
+fetched_at: 2026-05-05T19:40:47.864569+00:00
 fetch_method: mintlify_md
 ---
 
@@ -126,13 +126,13 @@ List Agents
 
       The model that will power your agent.
 
-      See [models](https://platform.claude.com/docs/en/api/beta/agents/models) for additional details and options.
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
       - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
         The model that will power your agent.
 
-        See [models](https://platform.claude.com/docs/en/api/beta/agents/models) for additional details and options.
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-opus-4-7"`
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/multilingual-support
-fetched_at: 2026-05-04T16:08:32.299795+00:00
+fetched_at: 2026-05-05T19:40:45.440176+00:00
 fetch_method: mintlify_md
 ---
 
@@ -38,10 +38,10 @@ Below are the zero-shot chain-of-thought evaluation scores for Claude models acr
 | Swahili | 89.8% | 89.5% | 91.1% | 87.1% | 78.3% |
 | Yoruba | 80.3% | 78.9% | 79.7% | 76.4% | 52.7% |
 
-<sup>1</sup> With [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended thinking).
+<sup>1</sup> With [extended thinking](/docs/en/build-with-claude/extended-thinking).
 
 <Note>
-These metrics are based on [MMLU (Massive Multitask Language Understanding)](https://platform.claude.com/docs/en/build-with-claude/MMLU (Massive Multitask Language Understanding)) English test sets that were translated into 14 additional languages by professional human translators, as documented in [OpenAI's simple-evals repository](https://platform.claude.com/docs/en/build-with-claude/OpenAI's simple-evals repository). The use of human translators for this evaluation ensures high-quality translations, particularly important for languages with fewer digital resources.
+These metrics are based on [MMLU (Massive Multitask Language Understanding)](https://en.wikipedia.org/wiki/MMLU) English test sets that were translated into 14 additional languages by professional human translators, as documented in [OpenAI's simple-evals repository](https://github.com/openai/simple-evals/blob/main/multilingual_mmlu_benchmark_results.md). The use of human translators for this evaluation ensures high-quality translations, particularly important for languages with fewer digital resources.
 </Note>
 
 ***
@@ -54,7 +54,7 @@ When working with multilingual content:
 2. **Use native scripts**: Submit text in its native script rather than transliteration for optimal results
 3. **Consider cultural context**: Effective communication often requires cultural and regional awareness beyond pure translation
 
-Also follow the general [prompt engineering guidelines](https://platform.claude.com/docs/en/build-with-claude/prompt engineering guidelines) to better improve Claude's performance.
+Also follow the general [prompt engineering guidelines](/docs/en/build-with-claude/prompt-engineering/overview) to better improve Claude's performance.
 
 ***
 

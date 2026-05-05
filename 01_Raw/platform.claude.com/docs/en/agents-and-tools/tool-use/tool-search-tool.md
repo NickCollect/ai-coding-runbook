@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool
-fetched_at: 2026-05-04T16:08:45.164776+00:00
+fetched_at: 2026-05-05T19:40:45.977798+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,26 +16,26 @@ This approach solves two problems that compound quickly as tool libraries scale:
 - **Tool selection accuracy:** Claude's ability to correctly pick the right tool degrades significantly once you exceed 30–50 available tools. By surfacing a focused set of relevant tools on demand, tool search keeps selection accuracy high even across thousands of tools.
 
 <Tip>
-For background on the scaling challenges that tool search solves, see [Advanced tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Advanced tool use). Tool search's on-demand loading is also an instance of the broader just-in-time retrieval principle described in [Effective context engineering](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Effective context engineering).
+For background on the scaling challenges that tool search solves, see [Advanced tool use](https://www.anthropic.com/engineering/advanced-tool-use). Tool search's on-demand loading is also an instance of the broader just-in-time retrieval principle described in [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents).
 </Tip>
 
-Although this is provided as a server-side tool, you can also implement your own client-side tool search functionality. See [Custom tool search implementation](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Custom tool search implementation) for details.
+Although this is provided as a server-side tool, you can also implement your own client-side tool search functionality. See [Custom tool search implementation](#custom-tool-search-implementation) for details.
 
 <Note>
-Share feedback on this feature through the [feedback form](https://platform.claude.com/docs/en/agents-and-tools/tool-use/feedback form).
+Share feedback on this feature through the [feedback form](https://forms.gle/MhcGFFwLxuwnWTkYA).
 </Note>
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Zero Data Retention (ZDR)). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 <Warning>
   On Amazon Bedrock, server-side tool search is available only via the [invoke
-  API](https://platform.claude.com/docs/en/agents-and-tools/tool-use/invoke  API),
+  API](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-runtime_example_bedrock-runtime_InvokeModel_AnthropicClaude_section.html),
   not the converse API.
 </Warning>
 
-You can also implement [client-side tool search](https://platform.claude.com/docs/en/agents-and-tools/tool-use/client-side tool search) by returning `tool_reference` blocks from your own search implementation.
+You can also implement [client-side tool search](#custom-tool-search-implementation) by returning `tool_reference` blocks from your own search implementation.
 
 ## How tool search works
 
@@ -687,7 +687,7 @@ The `tool_reference` blocks are automatically expanded into full tool definition
 
 ## MCP integration
 
-For configuring `mcp_toolset` with `defer_loading`, see [MCP connector](https://platform.claude.com/docs/en/agents-and-tools/tool-use/MCP connector).
+For configuring `mcp_toolset` with `defer_loading`, see [MCP connector](/docs/en/agents-and-tools/mcp-connector).
 
 ## Custom tool search implementation
 
@@ -704,16 +704,16 @@ You can implement your own tool search logic (e.g., using embeddings or semantic
 Every tool referenced must have a corresponding tool definition in the top-level `tools` parameter with `defer_loading: true`. This approach lets you use more sophisticated search algorithms while maintaining compatibility with the tool search system.
 
 <Note>
-The `tool_search_tool_result` format shown in the [Response format](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Response format) section is the server-side format used internally by Anthropic's built-in tool search. For custom client-side implementations, always use the standard `tool_result` format with `tool_reference` content blocks as shown above.
+The `tool_search_tool_result` format shown in the [Response format](#response-format) section is the server-side format used internally by Anthropic's built-in tool search. For custom client-side implementations, always use the standard `tool_result` format with `tool_reference` content blocks as shown above.
 </Note>
 
-For a complete example using embeddings, see the [tool search with embeddings cookbook](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool search with embeddings cookbook).
+For a complete example using embeddings, see the [tool search with embeddings cookbook](https://platform.claude.com/cookbooks/tool_use).
 
 ## Error handling
 
 <Note>
   The tool search tool is not compatible with [tool use
-  examples](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool use  examples).
+  examples](/docs/en/agents-and-tools/tool-use/define-tools#providing-tool-use-examples).
   If you need to provide examples of tool usage, use standard tool calling
   without tool search.
 </Note>
@@ -821,7 +821,7 @@ Errors during tool execution return a 200 response with error information in the
 
 ## Prompt caching
 
-For how `defer_loading` preserves prompt caching, see [Tool use with prompt caching](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Tool use with prompt caching).
+For how `defer_loading` preserves prompt caching, see [Tool use with prompt caching](/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching).
 
 The system automatically expands `tool_reference` blocks throughout the entire conversation history, so Claude can reuse discovered tools in subsequent turns without re-searching.
 
@@ -848,7 +848,7 @@ data: {"type": "content_block_start", "index": 2, "content_block": {"type": "too
 
 ## Batch requests
 
-You can include the tool search tool in the [Messages Batches API](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Messages Batches API). Tool search operations through the Messages Batches API are priced the same as those in regular Messages API requests.
+You can include the tool search tool in the [Messages Batches API](/docs/en/build-with-claude/batch-processing). Tool search operations through the Messages Batches API are priced the same as those in regular Messages API requests.
 
 ## Limits and best practices
 
@@ -857,7 +857,7 @@ You can include the tool search tool in the [Messages Batches API](https://platf
 - **Maximum tools:** 10,000 tools in your catalog
 - **Search results:** Returns 3-5 most relevant tools per search
 - **Pattern length:** Maximum 200 characters for regex patterns
-- **Model support:** [Claude Mythos Preview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Claude Mythos Preview), Sonnet 4.0+, Opus 4.0+, Haiku 4.5+
+- **Model support:** [Claude Mythos Preview](https://anthropic.com/glasswing), Sonnet 4.0+, Opus 4.0+, Haiku 4.5+
 
 ### When to use tool search
 

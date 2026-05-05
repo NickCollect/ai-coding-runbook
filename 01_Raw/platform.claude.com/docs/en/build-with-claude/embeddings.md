@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/embeddings
-fetched_at: 2026-05-04T16:08:32.803138+00:00
+fetched_at: 2026-05-05T19:40:45.412464+00:00
 fetch_method: mintlify_md
 ---
 
@@ -34,30 +34,30 @@ Voyage recommends using the following text embedding models:
 
 | Model | Context Length | Embedding Dimension | Description |
 | --- | --- | --- | --- |
-| `voyage-4-large` | 32,000 | 1024 (default), 256, 512, 2048 | The best general-purpose and multilingual retrieval quality. See [blog post](https://platform.claude.com/docs/en/build-with-claude/blog post) for details. |
-| `voyage-4` | 32,000 | 1024 (default), 256, 512, 2048 | Optimized for general-purpose and multilingual retrieval quality. Balances quality and efficiency. See [blog post](https://platform.claude.com/docs/en/build-with-claude/blog post) for details. |
-| `voyage-4-lite` | 32,000 | 1024 (default), 256, 512, 2048 | Optimized for latency and cost. See [blog post](https://platform.claude.com/docs/en/build-with-claude/blog post) for details. |
-| `voyage-4-nano` | 32,000 | 1024 (default), 256, 512, 2048 | Open-weight model (Apache 2.0 license) available on Hugging Face. See [blog post](https://platform.claude.com/docs/en/build-with-claude/blog post) for details. |
+| `voyage-4-large` | 32,000 | 1024 (default), 256, 512, 2048 | The best general-purpose and multilingual retrieval quality. See [blog post](https://blog.voyageai.com/2026/01/15/voyage-4/) for details. |
+| `voyage-4` | 32,000 | 1024 (default), 256, 512, 2048 | Optimized for general-purpose and multilingual retrieval quality. Balances quality and efficiency. See [blog post](https://blog.voyageai.com/2026/01/15/voyage-4/) for details. |
+| `voyage-4-lite` | 32,000 | 1024 (default), 256, 512, 2048 | Optimized for latency and cost. See [blog post](https://blog.voyageai.com/2026/01/15/voyage-4/) for details. |
+| `voyage-4-nano` | 32,000 | 1024 (default), 256, 512, 2048 | Open-weight model (Apache 2.0 license) available on Hugging Face. See [blog post](https://blog.voyageai.com/2026/01/15/voyage-4/) for details. |
 
 **Previous generation**
 
 | Model | Context Length | Embedding Dimension | Description |
 | --- | --- | --- | --- |
-| `voyage-3-large` | 32,000 | 1024 (default), 256, 512, 2048 | The best general-purpose and multilingual retrieval quality. See [blog post](https://platform.claude.com/docs/en/build-with-claude/blog post) for details. |
-| `voyage-3.5` | 32,000 | 1024 (default), 256, 512, 2048 | Optimized for general-purpose and multilingual retrieval quality. See [blog post](https://platform.claude.com/docs/en/build-with-claude/blog post) for details. |
-| `voyage-3.5-lite` | 32,000 | 1024 (default), 256, 512, 2048 | Optimized for latency and cost. See [blog post](https://platform.claude.com/docs/en/build-with-claude/blog post) for details. |
-| `voyage-code-3` | 32,000 | 1024 (default), 256, 512, 2048 | Optimized for **code** retrieval. See [blog post](https://platform.claude.com/docs/en/build-with-claude/blog post) for details. |
-| `voyage-finance-2` | 32,000 | 1024 | Optimized for **finance** retrieval and RAG. See [blog post](https://platform.claude.com/docs/en/build-with-claude/blog post) for details. |
-| `voyage-law-2` | 16,000 | 1024 | Optimized for **legal** and **long-context** retrieval and RAG. Also improved performance across all domains. See [blog post](https://platform.claude.com/docs/en/build-with-claude/blog post) for details. |
+| `voyage-3-large` | 32,000 | 1024 (default), 256, 512, 2048 | The best general-purpose and multilingual retrieval quality. See [blog post](https://blog.voyageai.com/2025/01/07/voyage-3-large/) for details. |
+| `voyage-3.5` | 32,000 | 1024 (default), 256, 512, 2048 | Optimized for general-purpose and multilingual retrieval quality. See [blog post](https://blog.voyageai.com/2025/05/20/voyage-3-5/) for details. |
+| `voyage-3.5-lite` | 32,000 | 1024 (default), 256, 512, 2048 | Optimized for latency and cost. See [blog post](https://blog.voyageai.com/2025/05/20/voyage-3-5/) for details. |
+| `voyage-code-3` | 32,000 | 1024 (default), 256, 512, 2048 | Optimized for **code** retrieval. See [blog post](https://blog.voyageai.com/2024/12/04/voyage-code-3/) for details. |
+| `voyage-finance-2` | 32,000 | 1024 | Optimized for **finance** retrieval and RAG. See [blog post](https://blog.voyageai.com/2024/06/03/domain-specific-embeddings-finance-edition-voyage-finance-2/) for details. |
+| `voyage-law-2` | 16,000 | 1024 | Optimized for **legal** and **long-context** retrieval and RAG. Also improved performance across all domains. See [blog post](https://blog.voyageai.com/2024/04/15/domain-specific-embeddings-and-retrieval-legal-edition-voyage-law-2/) for details. |
 
 Additionally, the following multimodal embedding models are recommended:
 
 | Model | Context Length | Embedding Dimension | Description |
 | --- | --- | --- | --- |
-| `voyage-multimodal-3.5` | 32,000 | 1024 (default), 256, 512, 2048 | Rich multimodal embedding model that can vectorize interleaved text, images, and videos. Includes video support as the first production-grade video embedding model. See [blog post](https://platform.claude.com/docs/en/build-with-claude/blog post) for details. |
-| `voyage-multimodal-3` | 32,000 | 1024 | Rich multimodal embedding model that can vectorize interleaved text and content-rich images, such as screenshots of PDFs, slides, tables, figures, and more. See [blog post](https://platform.claude.com/docs/en/build-with-claude/blog post) for details. |
+| `voyage-multimodal-3.5` | 32,000 | 1024 (default), 256, 512, 2048 | Rich multimodal embedding model that can vectorize interleaved text, images, and videos. Includes video support as the first production-grade video embedding model. See [blog post](https://blog.voyageai.com/2026/01/15/voyage-multimodal-3-5/) for details. |
+| `voyage-multimodal-3` | 32,000 | 1024 | Rich multimodal embedding model that can vectorize interleaved text and content-rich images, such as screenshots of PDFs, slides, tables, figures, and more. See [blog post](https://blog.voyageai.com/2024/11/12/voyage-multimodal-3/) for details. |
 
-Need help deciding which text embedding model to use? Check out the [FAQ](https://platform.claude.com/docs/en/build-with-claude/FAQ).
+Need help deciding which text embedding model to use? Check out the [FAQ](https://docs.voyageai.com/docs/faq#what-embedding-models-are-available-and-which-one-should-i-use&ref=anthropic).
 
 ## Getting started with Voyage AI
 
@@ -71,7 +71,7 @@ To access Voyage embeddings:
 export VOYAGE_API_KEY="<your secret key>"
 ```
 
-You can obtain the embeddings by either using the official [`voyageai` Python package](https://platform.claude.com/docs/en/build-with-claude/`voyageai` Python package) or HTTP requests, as described below.
+You can obtain the embeddings by either using the official [`voyageai` Python package](https://github.com/voyage-ai/voyageai-python) or HTTP requests, as described below.
 
 ### Voyage Python library
 
@@ -106,7 +106,7 @@ print(result.embeddings[1])
 
 When creating the embeddings, you can specify a few other arguments to the `embed()` function.
 
-For more information on the Voyage python package, see [the Voyage documentation](https://platform.claude.com/docs/en/build-with-claude/the Voyage documentation).
+For more information on the Voyage python package, see [the Voyage documentation](https://docs.voyageai.com/docs/embeddings#python-api).
 
 ### Voyage HTTP API
 
@@ -144,11 +144,11 @@ The response you would get is a JSON object containing the embeddings and the to
 }
 ```
 
-For more information on the Voyage HTTP API, see [the Voyage documentation](https://platform.claude.com/docs/en/build-with-claude/the Voyage documentation).
+For more information on the Voyage HTTP API, see [the Voyage documentation](https://docs.voyageai.com/reference/embeddings-api).
 
 ### AWS Marketplace
 
-Voyage embeddings are available on [AWS Marketplace](https://platform.claude.com/docs/en/build-with-claude/AWS Marketplace). Instructions for accessing Voyage on AWS are available in the [Voyage AWS Marketplace documentation](https://platform.claude.com/docs/en/build-with-claude/Voyage AWS Marketplace documentation).
+Voyage embeddings are available on [AWS Marketplace](https://aws.amazon.com/marketplace/seller-profile?id=seller-snt4gb6fd7ljg). Instructions for accessing Voyage on AWS are available in the [Voyage AWS Marketplace documentation](https://docs.voyageai.com/docs/aws-marketplace-model-package?ref=anthropic).
 
 ## Quickstart example
 
@@ -201,7 +201,7 @@ retrieved_id = np.argmax(similarities)
 print(documents[retrieved_id])
 ```
 
-Note that `input_type="document"` and `input_type="query"` are used for embedding the document and query, respectively. More specification can be found in the [Voyage Python package section](https://platform.claude.com/docs/en/build-with-claude/Voyage Python package section).
+Note that `input_type="document"` and `input_type="query"` are used for embedding the document and query, respectively. More specification can be found in the [Voyage Python package section](/docs/en/build-with-claude/embeddings#voyage-python-package).
 
 The output would be the 5th document, which is indeed the most relevant to the query:
 
@@ -209,7 +209,7 @@ The output would be the 5th document, which is indeed the most relevant to the q
 Apple's conference call to discuss fourth fiscal quarter results and business updates is scheduled for Thursday, November 2, 2023 at 2:00 p.m. PT / 5:00 p.m. ET.
 ```
 
-If you are looking for a detailed set of cookbooks on how to do RAG with embeddings, including vector databases, check out the [RAG cookbook](https://platform.claude.com/docs/en/build-with-claude/RAG cookbook).
+If you are looking for a detailed set of cookbooks on how to do RAG with embeddings, including vector databases, check out the [RAG cookbook](https://platform.claude.com/cookbook/third-party-pinecone-rag-using-pinecone).
 
 ## FAQ
 
@@ -221,7 +221,7 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
     - Loss functions
     - Optimizer selection
 
-    Learn more about Voyage's technical approach on their [blog](https://platform.claude.com/docs/en/build-with-claude/blog).
+    Learn more about Voyage's technical approach on their [blog](https://blog.voyageai.com/).
   
 </section>
 
@@ -244,7 +244,7 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
 
   <section title="Which similarity function should I use?">
 
-    You can use Voyage embeddings with either dot-product similarity, cosine similarity, or Euclidean distance. An explanation about embedding similarity can be found in this [vector similarity guide](https://platform.claude.com/docs/en/build-with-claude/vector similarity guide).
+    You can use Voyage embeddings with either dot-product similarity, cosine similarity, or Euclidean distance. An explanation about embedding similarity can be found in this [vector similarity guide](https://www.pinecone.io/learn/vector-similarity/).
 
     Voyage AI embeddings are normalized to length 1, which means that:
 
@@ -255,7 +255,7 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
 
   <section title="What is the relationship between characters, words, and tokens?">
 
-    See this [page](https://platform.claude.com/docs/en/build-with-claude/page).
+    See this [page](https://docs.voyageai.com/docs/tokenization?ref=anthropic).
   
 </section>
 
@@ -273,7 +273,7 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
     >     - When `input_type="query"`, a query like "When is Apple's conference call scheduled?" will become "**Represent the query for retrieving supporting documents:** When is Apple's conference call scheduled?"
     >     - When `input_type="document"`, a query like "Apple's conference call to discuss fourth fiscal quarter results and business updates is scheduled for Thursday, November 2, 2023 at 2:00 p.m. PT / 5:00 p.m. ET." will become "**Represent the document for retrieval:** Apple's conference call to discuss fourth fiscal quarter results and business updates is scheduled for Thursday, November 2, 2023 at 2:00 p.m. PT / 5:00 p.m. ET."
 
-    `voyage-large-2-instruct`, as the name suggests, is trained to be responsive to additional instructions that are prepended to the input text. For classification, clustering, or other [MTEB](https://platform.claude.com/docs/en/build-with-claude/MTEB) subtasks, please use the [voyage-large-2-instruct instructions](https://platform.claude.com/docs/en/build-with-claude/voyage-large-2-instruct instructions).
+    `voyage-large-2-instruct`, as the name suggests, is trained to be responsive to additional instructions that are prepended to the input text. For classification, clustering, or other [MTEB](https://huggingface.co/mteb) subtasks, please use the [voyage-large-2-instruct instructions](https://github.com/voyage-ai/voyage-large-2-instruct).
   
 </section>
 
@@ -302,6 +302,7 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
     import voyageai
     import numpy as np
 
+
     def embd_normalize(v: np.ndarray) -> np.ndarray:
         """
         Normalize the rows of a 2D numpy array to unit vectors by dividing each row by its Euclidean
@@ -311,6 +312,7 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
         if np.any(row_norms == 0):
             raise ValueError("Cannot normalize rows with a norm of zero.")
         return v / row_norms
+
 
     vo = voyageai.Client()
 
@@ -328,4 +330,4 @@ If you are looking for a detailed set of cookbooks on how to do RAG with embeddi
 
 ## Pricing
 
-Visit Voyage's [pricing page](https://platform.claude.com/docs/en/build-with-claude/pricing page) for the most up to date pricing details.
+Visit Voyage's [pricing page](https://docs.voyageai.com/docs/pricing?ref=anthropic) for the most up to date pricing details.

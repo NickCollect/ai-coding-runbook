@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/context-editing
-fetched_at: 2026-05-04T16:08:48.019251+00:00
+fetched_at: 2026-05-05T19:40:46.131621+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,16 +11,16 @@ Automatically manage conversation context as it grows with context editing.
 ---
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/Zero Data Retention (ZDR)). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 ## Overview
 
 <Note>
-For most use cases, [server-side compaction](https://platform.claude.com/docs/en/build-with-claude/server-side compaction) is the primary strategy for managing context in long-running conversations. The strategies on this page are useful for specific scenarios where you need more fine-grained control over what content is cleared.
+For most use cases, [server-side compaction](/docs/en/build-with-claude/compaction) is the primary strategy for managing context in long-running conversations. The strategies on this page are useful for specific scenarios where you need more fine-grained control over what content is cleared.
 </Note>
 
-Context editing allows you to selectively clear specific content from conversation history as it grows. Beyond optimizing costs and staying within limits, this is about actively curating what Claude sees: context is a finite resource with diminishing returns, and irrelevant content degrades model focus. Context editing gives you fine-grained runtime control over that curation. For the broader principles behind context management, see [Effective context engineering](https://platform.claude.com/docs/en/build-with-claude/Effective context engineering). This page covers:
+Context editing allows you to selectively clear specific content from conversation history as it grows. Beyond optimizing costs and staying within limits, this is about actively curating what Claude sees: context is a finite resource with diminishing returns, and irrelevant content degrades model focus. Context editing gives you fine-grained runtime control over that curation. For the broader principles behind context management, see [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents). This page covers:
 
 - **Tool result clearing** - Best for agentic workflows with heavy tool use where old tool results are no longer needed
 - **Thinking block clearing** - For managing thinking blocks when using extended thinking, with options to preserve recent thinking for context continuity
@@ -29,14 +29,14 @@ Context editing allows you to selectively clear specific content from conversati
 | Approach | Where it runs | Strategies | How it works |
 |----------|---------------|------------|--------------|
 | **Server-side** | API | Tool result clearing (`clear_tool_uses_20250919`)<br/>Thinking block clearing (`clear_thinking_20251015`) | Applied before the prompt reaches Claude. Clears specific content from conversation history. Each strategy can be configured independently. |
-| **Client-side** | SDK | Compaction | Available in [Python, TypeScript, and Ruby SDKs](https://platform.claude.com/docs/en/build-with-claude/Python, TypeScript, and Ruby SDKs) when using [`tool_runner`](https://platform.claude.com/docs/en/build-with-claude/`tool_runner`). Generates a summary and replaces full conversation history. See [Client-side compaction](https://platform.claude.com/docs/en/build-with-claude/Client-side compaction) below. |
+| **Client-side** | SDK | Compaction | Available in [Python, TypeScript, and Ruby SDKs](/docs/en/api/client-sdks) when using [`tool_runner`](/docs/en/agents-and-tools/tool-use/tool-runner). Generates a summary and replaces full conversation history. See [Client-side compaction](#client-side-compaction-sdk) below. |
 
 ## Server-side strategies
 
 <Note>
 Context editing is in beta with support for tool result clearing and thinking block clearing. To enable it, use the beta header `context-management-2025-06-27` in your API requests.
 
-Share feedback on this feature through the [feedback form](https://platform.claude.com/docs/en/build-with-claude/feedback form).
+Share feedback on this feature through the [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88).
 </Note>
 
 ### Tool result clearing
@@ -53,7 +53,7 @@ The `clear_thinking_20251015` strategy manages `thinking` blocks in conversation
 **Default behavior:** The default varies by model class. **Opus**: Claude Opus 4.5 and later Opus models keep all prior thinking blocks; Claude Opus 4.1 and earlier Opus models keep only the last assistant turn's thinking. **Sonnet**: Claude Sonnet 4.6 and later Sonnet models keep all; Claude Sonnet 4.5 and earlier Sonnet models keep only the last turn. **Haiku**: all Haiku models through Claude Haiku 4.5 keep only the last turn. Use this strategy to override the default. If your code runs across multiple model tiers, set `keep` explicitly rather than relying on the per-model default.
 </Tip>
 
-An assistant conversation turn may include multiple content blocks (e.g. when using tools) and multiple thinking blocks (e.g. with [interleaved thinking](https://platform.claude.com/docs/en/build-with-claude/interleaved thinking)).
+An assistant conversation turn may include multiple content blocks (e.g. when using tools) and multiple thinking blocks (e.g. with [interleaved thinking](/docs/en/build-with-claude/extended-thinking#interleaved-thinking)).
 
 ### Context editing happens server-side
 
@@ -61,7 +61,7 @@ Context editing is applied server-side before the prompt reaches Claude. Your cl
 
 ### Context editing and prompt caching
 
-Context editing's interaction with [prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt caching) varies by strategy:
+Context editing's interaction with [prompt caching](/docs/en/build-with-claude/prompt-caching) varies by strategy:
 
 - **Tool result clearing**: Invalidates cached prompt prefixes when content is cleared. To account for this, clear enough tokens to make the cache invalidation worthwhile. Use the `clear_at_least` parameter to ensure a minimum number of tokens is cleared each time. You'll incur cache write costs each time content is cleared, but subsequent requests can reuse the newly cached prefix.
 
@@ -73,7 +73,7 @@ Context editing is available on all supported Claude models.
 
 ## Tool result clearing usage
 
-The simplest way to enable tool result clearing is to specify only the strategy type. All other [configuration options](https://platform.claude.com/docs/en/build-with-claude/configuration options) use their default values:
+The simplest way to enable tool result clearing is to specify only the strategy type. All other [configuration options](#configuration-options-for-tool-result-clearing) use their default values:
 
 <CodeGroup>
 
@@ -1515,7 +1515,7 @@ For streaming responses, the context edits will be included in the final `messag
 
 ## Token counting
 
-The [token counting](https://platform.claude.com/docs/en/build-with-claude/token counting) endpoint supports context management, allowing you to preview how many tokens your prompt will use after context editing is applied.
+The [token counting](/docs/en/build-with-claude/token-counting) endpoint supports context management, allowing you to preview how many tokens your prompt will use after context editing is applied.
 
 <CodeGroup>
 
@@ -1857,7 +1857,7 @@ The response shows both the final token count after context management is applie
 
 ## Using with the Memory Tool
 
-Context editing can be combined with the [memory tool](https://platform.claude.com/docs/en/build-with-claude/memory tool). When your conversation context approaches the configured clearing threshold, Claude receives an automatic warning to preserve important information. This enables Claude to save tool results or context to its memory files before they're cleared from the conversation history.
+Context editing can be combined with the [memory tool](/docs/en/agents-and-tools/tool-use/memory-tool). When your conversation context approaches the configured clearing threshold, Claude receives an automatic warning to preserve important information. This enables Claude to save tool results or context to its memory files before they're cleared from the conversation history.
 
 This combination allows you to:
 
@@ -2088,19 +2088,19 @@ puts response
 
 </CodeGroup>
 
-For the full memory tool reference including commands and examples, see [Memory tool](https://platform.claude.com/docs/en/build-with-claude/Memory tool).
+For the full memory tool reference including commands and examples, see [Memory tool](/docs/en/agents-and-tools/tool-use/memory-tool).
 
 ## Client-side compaction (SDK)
 
 <Warning>
-**Anthropic recommends server-side compaction over SDK compaction.** [Server-side compaction](https://platform.claude.com/docs/en/build-with-claude/Server-side compaction) handles context management automatically with less integration complexity, better token usage calculation, and no client-side limitations. Use SDK compaction only if you specifically need client-side control over the summarization process.
+**Anthropic recommends server-side compaction over SDK compaction.** [Server-side compaction](/docs/en/build-with-claude/compaction) handles context management automatically with less integration complexity, better token usage calculation, and no client-side limitations. Use SDK compaction only if you specifically need client-side control over the summarization process.
 </Warning>
 
 <Note>
-Compaction is available in the [Python, TypeScript, and Ruby SDKs](https://platform.claude.com/docs/en/build-with-claude/Python, TypeScript, and Ruby SDKs) when using the [`tool_runner` method](https://platform.claude.com/docs/en/build-with-claude/`tool_runner` method).
+Compaction is available in the [Python, TypeScript, and Ruby SDKs](/docs/en/api/client-sdks) when using the [`tool_runner` method](/docs/en/agents-and-tools/tool-use/tool-runner).
 </Note>
 
-Compaction is an SDK feature that automatically manages conversation context by generating summaries when token usage grows too large. Unlike server-side context editing strategies that clear content, compaction instructs Claude to summarize the conversation history, then replaces the full history with that summary. This allows Claude to continue working on long-running tasks that would otherwise exceed the [context window](https://platform.claude.com/docs/en/build-with-claude/context window).
+Compaction is an SDK feature that automatically manages conversation context by generating summaries when token usage grows too large. Unlike server-side context editing strategies that clear content, compaction instructs Claude to summarize the conversation history, then replaces the full history with that summary. This allows Claude to continue working on long-running tasks that would otherwise exceed the [context window](/docs/en/build-with-claude/context-windows).
 
 ### How compaction works
 
@@ -2119,7 +2119,7 @@ Add `compaction_control` to your `tool_runner` call to enable automatic summariz
 <Tab title="CLI">
 
 <Note>
-The CLI does not include a `tool_runner` helper. Use [server-side compaction](https://platform.claude.com/docs/en/build-with-claude/server-side compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+The CLI does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
 </Note>
 
 </Tab>
@@ -2129,10 +2129,12 @@ The CLI does not include a `tool_runner` helper. Use [server-side compaction](ht
 import anthropic
 from anthropic import beta_tool
 
+
 @beta_tool
 def read_file(path: str) -> str:
     """Read the contents of a file."""
     return "file contents..."
+
 
 client = anthropic.Anthropic()
 
@@ -2189,28 +2191,28 @@ main();
 <Tab title="C#">
 
 <Note>
-The C# SDK does not include a `tool_runner` helper. Use [server-side compaction](https://platform.claude.com/docs/en/build-with-claude/server-side compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+The C# SDK does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
 </Note>
 
 </Tab>
 <Tab title="Go">
 
 <Note>
-The Go SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](https://platform.claude.com/docs/en/build-with-claude/server-side compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+The Go SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
 </Note>
 
 </Tab>
 <Tab title="Java">
 
 <Note>
-The Java SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](https://platform.claude.com/docs/en/build-with-claude/server-side compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+The Java SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
 </Note>
 
 </Tab>
 <Tab title="PHP">
 
 <Note>
-The PHP SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](https://platform.claude.com/docs/en/build-with-claude/server-side compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+The PHP SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead, which handles compaction on Anthropic's servers without SDK-side integration.
 </Note>
 
 </Tab>
@@ -2446,7 +2448,7 @@ Wrap your summary in <summary></summary> tags.
 #### Server-side tools
 
 <Warning>
-Compaction requires special consideration when using server-side tools such as [web search](https://platform.claude.com/docs/en/build-with-claude/web search) or [web fetch](https://platform.claude.com/docs/en/build-with-claude/web fetch).
+Compaction requires special consideration when using server-side tools such as [web search](/docs/en/agents-and-tools/tool-use/web-search-tool) or [web fetch](/docs/en/agents-and-tools/tool-use/web-fetch-tool).
 </Warning>
 
 When using server-side tools, the SDK may incorrectly calculate token usage, causing compaction to trigger at the wrong time.
@@ -2467,7 +2469,7 @@ The SDK calculates total usage as 63,000 + 270,000 = 333,000 tokens. However, th
 
 **Workarounds:**
 
-- Use the [token counting](https://platform.claude.com/docs/en/build-with-claude/token counting) endpoint to get accurate context length
+- Use the [token counting](/docs/en/build-with-claude/token-counting) endpoint to get accurate context length
 - Avoid compaction when using server-side tools extensively
 
 #### Tool use edge cases
@@ -2543,28 +2545,28 @@ main();
 <Tab title="C#">
 
 <Note>
-The C# SDK does not include a `tool_runner` helper. Use [server-side compaction](https://platform.claude.com/docs/en/build-with-claude/server-side compaction) instead.
+The C# SDK does not include a `tool_runner` helper. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
 </Note>
 
 </Tab>
 <Tab title="Go">
 
 <Note>
-The Go SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](https://platform.claude.com/docs/en/build-with-claude/server-side compaction) instead.
+The Go SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
 </Note>
 
 </Tab>
 <Tab title="Java">
 
 <Note>
-The Java SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](https://platform.claude.com/docs/en/build-with-claude/server-side compaction) instead.
+The Java SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
 </Note>
 
 </Tab>
 <Tab title="PHP">
 
 <Note>
-The PHP SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](https://platform.claude.com/docs/en/build-with-claude/server-side compaction) instead.
+The PHP SDK's `tool_runner` does not support `compaction_control`. Use [server-side compaction](/docs/en/build-with-claude/compaction) instead.
 </Note>
 
 </Tab>

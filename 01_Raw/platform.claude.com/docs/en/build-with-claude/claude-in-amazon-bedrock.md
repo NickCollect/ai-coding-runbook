@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock
-fetched_at: 2026-05-04T16:08:55.120958+00:00
+fetched_at: 2026-05-05T19:40:46.344331+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,19 +13,19 @@ Access Claude models through Amazon Bedrock with AWS-native authentication, bill
 This guide walks you through setting up and making API calls to Claude in Amazon Bedrock. Claude in Amazon Bedrock runs on AWS-managed infrastructure with zero operator access (Anthropic personnel have no access to the inference infrastructure), letting you build sensitive applications entirely inside the AWS security boundary while using the same Messages API shape you use with Anthropic's first-party API.
 
 <Note>
-This page covers Claude in Amazon Bedrock, which serves Claude through the Messages API at `/anthropic/v1/messages` on AWS-managed infrastructure. The previous Amazon Bedrock integration (the `InvokeModel` and `Converse` APIs with ARN-versioned model identifiers) remains available and is documented at [Claude on Amazon Bedrock (legacy)](https://platform.claude.com/docs/en/build-with-claude/Claude on Amazon Bedrock (legacy)).
+This page covers Claude in Amazon Bedrock, which serves Claude through the Messages API at `/anthropic/v1/messages` on AWS-managed infrastructure. The previous Amazon Bedrock integration (the `InvokeModel` and `Converse` APIs with ARN-versioned model identifiers) remains available and is documented at [Claude on Amazon Bedrock (legacy)](/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy).
 </Note>
 
 ## Access
 
-Claude Opus 4.7 and Claude Haiku 4.5 are open to all Amazon Bedrock customers. Claude Mythos Preview requires an invitation; see [Project Glasswing](https://platform.claude.com/docs/en/build-with-claude/Project Glasswing). For region availability, see [Regions](https://platform.claude.com/docs/en/build-with-claude/Regions).
+Claude Opus 4.7 and Claude Haiku 4.5 are open to all Amazon Bedrock customers. Claude Mythos Preview requires an invitation; see [Project Glasswing](https://anthropic.com/glasswing). For region availability, see [Regions](#regions).
 
 ## Prerequisites
 
 Before you begin, ensure you have:
 
-- An AWS account with [Amazon Bedrock model access](https://platform.claude.com/docs/en/build-with-claude/Amazon Bedrock model access) enabled for the Claude models you intend to use.
-- The [AWS CLI](https://platform.claude.com/docs/en/build-with-claude/AWS CLI) installed and configured (optional, for credential management).
+- An AWS account with [Amazon Bedrock model access](https://console.aws.amazon.com/bedrock/home#/modelaccess) enabled for the Claude models you intend to use.
+- The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) installed and configured (optional, for credential management).
 
 Claude Mythos Preview additionally requires a dedicated AWS account that has been allowlisted by the Bedrock Marketplace team. Your Anthropic account executive can submit your account ID for allowlisting (typically processed within 24 hours), and AWS sends a welcome email once it's complete.
 
@@ -42,7 +42,7 @@ Use a Bedrock service role with AWS-managed keys for the most secure, long-lived
 An AWS administrator provisions a Bedrock service role and grants developers `iam:PassRole` permission on the service role ARN.
 </Step>
 <Step title="Developer: pass the role">
-When calling the API, Bedrock assumes the service role on your behalf. See the [Amazon Bedrock documentation](https://platform.claude.com/docs/en/build-with-claude/Amazon Bedrock documentation) for how to associate the role with your requests.
+When calling the API, Bedrock assumes the service role on your behalf. See the [Amazon Bedrock documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-mantle.html) for how to associate the role with your requests.
 </Step>
 </Steps>
 
@@ -74,7 +74,7 @@ Use the `aws-bedrock-token-generator` CLI to mint a bearer token. Pass it in the
 
 ## Install an SDK
 
-Anthropic's [client SDKs](https://platform.claude.com/docs/en/build-with-claude/client SDKs) support Claude in Amazon Bedrock through a Bedrock-specific package or module.
+Anthropic's [client SDKs](/docs/en/api/client-sdks) support Claude in Amazon Bedrock through a Bedrock-specific package or module.
 
 <Tabs>
 <Tab title="Python">
@@ -333,13 +333,13 @@ You can also use the standard `Anthropic` client: set `base_url` to `https://bed
 
 ## Supported models
 
-Model IDs in Claude in Amazon Bedrock carry an `anthropic.` provider prefix. Model capabilities and behaviors are documented on the [Models overview](https://platform.claude.com/docs/en/build-with-claude/Models overview) page.
+Model IDs in Claude in Amazon Bedrock carry an `anthropic.` provider prefix. Model capabilities and behaviors are documented on the [Models overview](/docs/en/about-claude/models/overview) page.
 
 | Model                 | Model ID                          | Access                                                                     |
 | --------------------- | --------------------------------- | -------------------------------------------------------------------------- |
 | Claude Opus 4.7       | `anthropic.claude-opus-4-7`       | Open                                                                       |
 | Claude Haiku 4.5      | `anthropic.claude-haiku-4-5`      | Open                                                                       |
-| Claude Mythos Preview | `anthropic.claude-mythos-preview` | Invitation only ([Project Glasswing](https://platform.claude.com/docs/en/build-with-claude/Project Glasswing))     |
+| Claude Mythos Preview | `anthropic.claude-mythos-preview` | Invitation only ([Project Glasswing](https://anthropic.com/glasswing))     |
 
 ## Feature availability
 
@@ -366,7 +366,7 @@ Claude in Amazon Bedrock supports features that run inside the model. Features t
 Claude in Amazon Bedrock is available in the following AWS regions. Amazon Bedrock offers two endpoint types:
 
 - **Global:** dynamic routing across all available regions for maximum availability. No pricing premium.
-- **Regional:** the endpoint resolves to the single AWS region you specify, for data-residency requirements. Regional endpoints carry a 10% pricing premium over global endpoints. To route across multiple regions within a geography, use an [inference profile](https://platform.claude.com/docs/en/build-with-claude/inference profile) (US, EU, JP, or AU). Regions marked **In-region only** in the table support direct single-region routing without an inference profile.
+- **Regional:** the endpoint resolves to the single AWS region you specify, for data-residency requirements. Regional endpoints carry a 10% pricing premium over global endpoints. To route across multiple regions within a geography, use an [inference profile](https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html) (US, EU, JP, or AU). Regions marked **In-region only** in the table support direct single-region routing without an inference profile.
 
 The global endpoint is available for Claude Opus 4.7 and Claude Haiku 4.5. Claude Mythos Preview is regional only and is available in `us-east-1`.
 
@@ -406,7 +406,7 @@ Default quota is 2 million input tokens per minute (TPM). You can request up to 
 
 ## Data retention
 
-Data handling for this offering is governed by Amazon Bedrock. For details, see [Data protection in Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/Data protection in Amazon Bedrock).
+Data handling for this offering is governed by Amazon Bedrock. For details, see [Data protection in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html).
 
 Zero data retention (ZDR) is available. To enable ZDR for your account, contact AWS support.
 
@@ -419,5 +419,5 @@ Claude in Amazon Bedrock emits logs to both CloudWatch and CloudTrail. Anthropic
 For support, contact **bedrock-ant-eap@amazon.com**. Include your AWS account ID and the `request-id` from any failed API responses.
 
 <Note>
-**Claude Mythos Preview** is a research preview model available to invited customers on Amazon Bedrock. For more information, see [Project Glasswing](https://platform.claude.com/docs/en/build-with-claude/Project Glasswing).
+**Claude Mythos Preview** is a research preview model available to invited customers on Amazon Bedrock. For more information, see [Project Glasswing](https://anthropic.com/glasswing).
 </Note>

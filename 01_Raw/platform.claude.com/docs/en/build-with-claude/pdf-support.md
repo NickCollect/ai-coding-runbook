@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/pdf-support
-fetched_at: 2026-05-04T16:08:50.247920+00:00
+fetched_at: 2026-05-05T19:40:46.145732+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,7 +11,7 @@ Process PDFs with Claude. Extract text, analyze charts, and understand visual co
 ---
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/Zero Data Retention (ZDR)). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 You can ask Claude about any text, pictures, charts, and tables in PDFs you provide. Some sample use cases:
@@ -27,21 +27,21 @@ Claude works with any standard PDF. Ensure your request size meets these require
 
 | Requirement | Limit |
 |------------|--------|
-| Maximum request size | 32&nbsp;MB ([varies by platform](https://platform.claude.com/docs/en/build-with-claude/varies by platform)) |
+| Maximum request size | 32&nbsp;MB ([varies by platform](/docs/en/api/overview#request-size-limits)) |
 | Maximum pages per request | 600 (100 for models with a 200k-token context window) |
 | Format | Standard PDF (no passwords/encryption) |
 
-Both limits are on the entire request payload, including any other content sent alongside PDFs. For large PDFs, consider uploading with the [Files API](https://platform.claude.com/docs/en/build-with-claude/Files API) and referencing by `file_id` to keep request payloads small.
+Both limits are on the entire request payload, including any other content sent alongside PDFs. For large PDFs, consider uploading with the [Files API](#option-3-files-api) and referencing by `file_id` to keep request payloads small.
 
 <Tip>
 Dense PDFs (many small-font pages, complex tables, or heavy graphics) can fill the context window before reaching the page limit. Requests with large PDFs can also fail before reaching the page limit, even when using the Files API. Try splitting the document into sections; for large files, since each page is processed as an image, downsampling embedded images can also help.
 </Tip>
 
-Since PDF support relies on Claude's vision capabilities, it is subject to the same [limitations and considerations](https://platform.claude.com/docs/en/build-with-claude/limitations and considerations) as other vision tasks.
+Since PDF support relies on Claude's vision capabilities, it is subject to the same [limitations and considerations](/docs/en/build-with-claude/vision#limitations) as other vision tasks.
 
 ### Supported platforms and models
 
-PDF support is currently supported via direct API access and Google Vertex AI. All [active models](https://platform.claude.com/docs/en/build-with-claude/active models) support PDF processing.
+PDF support is currently supported via direct API access and Google Vertex AI. All [active models](/docs/en/about-claude/models/overview) support PDF processing.
 
 PDF support is now available on Amazon Bedrock with the following considerations:
 
@@ -50,7 +50,7 @@ PDF support is now available on Amazon Bedrock with the following considerations
 When using PDF support through Amazon Bedrock's Converse API, there are two distinct document processing modes:
 
 <Note>
-**Important:** To access Claude's full visual PDF understanding capabilities in the Converse API, you must enable citations. Without citations enabled, the API falls back to basic text extraction only. Learn more about [working with citations](https://platform.claude.com/docs/en/build-with-claude/working with citations).
+**Important:** To access Claude's full visual PDF understanding capabilities in the Converse API, you must enable citations. Without citations enabled, the API falls back to basic text extraction only. Learn more about [working with citations](/docs/en/build-with-claude/citations).
 </Note>
 
 #### Document Processing Modes
@@ -82,7 +82,7 @@ This is a known constraint with the Converse API. For applications that require 
 </Note>
 
 <Note>
-For non-PDF files like .csv, .xlsx, .docx, .md, or .txt files, see [Working with other file formats](https://platform.claude.com/docs/en/build-with-claude/Working with other file formats).
+For non-PDF files like .csv, .xlsx, .docx, .md, or .txt files, see [Working with other file formats](/docs/en/build-with-claude/files#working-with-other-file-formats).
 </Note>
 
 ***
@@ -94,7 +94,7 @@ Let's start with a simple example using the Messages API. You can provide PDFs t
 
 1. As a URL reference to a PDF hosted online
 2. As a base64-encoded PDF in `document` content blocks
-3. By a `file_id` from the [Files API](https://platform.claude.com/docs/en/build-with-claude/Files API)
+3. By a `file_id` from the [Files API](/docs/en/build-with-claude/files)
 
 #### Option 1: URL-based PDF document
 
@@ -460,7 +460,7 @@ If you need to send PDFs from your local system or when a URL isn't available:
 
 #### Option 3: Files API
 
-For PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use the [Files API](https://platform.claude.com/docs/en/build-with-claude/Files API):
+For PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use the [Files API](/docs/en/build-with-claude/files):
 
 <CodeGroup>
 ```bash cURL hidelines={1..2}
@@ -681,9 +681,9 @@ When you send a PDF to Claude, the following steps occur:
 ### Estimate your costs
 The token count of a PDF file depends on the total text extracted from the document as well as the number of pages:
 - Text token costs: Each page typically uses 1,500-3,000 tokens per page depending on content density. Standard API pricing applies with no additional PDF fees.
-- Image token costs: Since each page is converted into an image, the same [image-based cost calculations](https://platform.claude.com/docs/en/build-with-claude/image-based cost calculations) are applied.
+- Image token costs: Since each page is converted into an image, the same [image-based cost calculations](/docs/en/build-with-claude/vision#evaluate-image-size) are applied.
 
-You can use [token counting](https://platform.claude.com/docs/en/build-with-claude/token counting) to estimate costs for your specific PDFs.
+You can use [token counting](/docs/en/build-with-claude/token-counting) to estimate costs for your specific PDFs.
 
 ***
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/vision
-fetched_at: 2026-05-04T16:08:50.772942+00:00
+fetched_at: 2026-05-05T19:40:46.186461+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,8 +18,8 @@ This guide describes how to work with images in Claude, including best practices
 
 Use Claude’s vision capabilities through:
 
-- [claude.ai](https://platform.claude.com/docs/en/build-with-claude/claude.ai). Upload an image like you would a file, or drag and drop an image directly into the chat window.
-- The [Console Workbench](https://platform.claude.com/docs/en/build-with-claude/Console Workbench). A button to add images appears at the top right of every User message block.
+- [claude.ai](https://claude.ai/). Upload an image like you would a file, or drag and drop an image directly into the chat window.
+- The [Console Workbench](/workbench/). A button to add images appears at the top right of every User message block.
 - API request. See the examples in this guide.
 
 Multiple images can be included in a single request, which Claude will analyze jointly when formulating its response. This can be helpful for comparing or contrasting images.
@@ -31,16 +31,16 @@ Multiple images can be included in a single request, which Claude will analyze j
 ### General limits
 
 The maximal number of images per message or request is:
-  - 20 per message on [claude.ai](https://platform.claude.com/docs/en/build-with-claude/claude.ai).
+  - 20 per message on [claude.ai](https://claude.ai/).
   - 100 per request on the API, for models with a 200k-token context window.
   - 600 per request on the API, for all other models.
 
 The maximal dimensions per image are 8000x8000 px. If you submit more than 20 images in one API request, this limit is reduced to 2000x2000 px.
 
 <Note>
-While the API supports up to 600 images per request, [request size limits](https://platform.claude.com/docs/en/build-with-claude/request size limits) (32&nbsp;MB for standard endpoints; lower on some third-party platforms) can be reached first. For many images, consider uploading with the [Files API](https://platform.claude.com/docs/en/build-with-claude/Files API) and referencing by `file_id` to keep request payloads small.
+While the API supports up to 600 images per request, [request size limits](/docs/en/api/overview#request-size-limits) (32&nbsp;MB for standard endpoints; lower on some third-party platforms) can be reached first. For many images, consider uploading with the [Files API](#files-api-image-example) and referencing by `file_id` to keep request payloads small.
 
-Even when using the Files API, requests with many large images can fail before reaching the 600-image count. Reduce image dimensions or file sizes (for example, by downsampling) before uploading (see [Evaluate image size](https://platform.claude.com/docs/en/build-with-claude/Evaluate image size)).
+Even when using the Files API, requests with many large images can fail before reaching the 600-image count. Reduce image dimensions or file sizes (for example, by downsampling) before uploading (see [Evaluate image size](#evaluate-image-size)).
 </Note>
 
 ### Evaluate image size
@@ -61,7 +61,7 @@ To minimize latency and to simplify coordinate-based workflows, you should prefe
 
 ### Calculate image costs
 
-Each image you include in a request to Claude counts towards your token usage. To calculate the approximate cost, multiply the approximate number of image tokens computed as above by the [per-token price of the model](https://platform.claude.com/docs/en/build-with-claude/per-token price of the model) you’re using.
+Each image you include in a request to Claude counts towards your token usage. To calculate the approximate cost, multiply the approximate number of image tokens computed as above by the [per-token price of the model](https://claude.com/pricing) you’re using.
 
 Here are examples of approximate tokenization and costs for different image sizes within the API's size constraints based on Claude Sonnet 4.6 per-token price of $3 per million input tokens:
 
@@ -108,12 +108,12 @@ When providing images to Claude, keep the following in mind for best results:
 
 ## Prompt examples
 
-Many of the [prompting techniques](https://platform.claude.com/docs/en/build-with-claude/prompting techniques) that work well for text-based interactions with Claude can also be applied to image-based prompts.
+Many of the [prompting techniques](/docs/en/build-with-claude/prompt-engineering/overview) that work well for text-based interactions with Claude can also be applied to image-based prompts.
 
 These examples demonstrate best practice prompt structures involving images.
 
 <Tip>
-  Just as [placing long documents before your query](https://platform.claude.com/docs/en/build-with-claude/placing long documents before your query) improves results in text prompts, Claude works best when images come before text. Images placed after text or interpolated with text still perform well, but if your use case allows it, prefer an image-then-text structure.
+  Just as [placing long documents before your query](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#long-context-prompting) improves results in text prompts, Claude works best when images come before text. Images placed after text or interpolated with text still perform well, but if your use case allows it, prefer an image-then-text structure.
 </Tip>
 
 ### About the prompt examples
@@ -865,7 +865,7 @@ Below are examples of how to include images in a Messages API request using base
 
 ### Files API image example
 
-For images you'll use repeatedly or when you want to avoid encoding overhead, use the [Files API](https://platform.claude.com/docs/en/build-with-claude/Files API). Upload the image once, then reference the returned `file_id` in subsequent messages instead of resending base64 data.
+For images you'll use repeatedly or when you want to avoid encoding overhead, use the [Files API](/docs/en/build-with-claude/files). Upload the image once, then reference the returned `file_id` in subsequent messages instead of resending base64 data.
 
 <Tip>
   In multi-turn conversations and agentic workflows, each request resends the
@@ -1222,7 +1222,7 @@ puts message.content
 ```
 </CodeGroup>
 
-See [Messages API examples](https://platform.claude.com/docs/en/build-with-claude/Messages API examples) for more example code and parameter details.
+See [Messages API examples](/docs/en/api/messages/create) for more example code and parameter details.
 
 <section title="Example: One image">
 
@@ -1479,7 +1479,7 @@ Ask Claude to contrast two images, then ask a follow-up question comparing the f
 | User | Image 1: \[Image 3\] Image 2: \[Image 4\] Are these images similar to the first two? |
 | Assistant | \[Claude's response\] |
 
-When using the API, simply insert new images into the array of Messages in the `user` role as part of any standard [multiturn conversation](https://platform.claude.com/docs/en/build-with-claude/multiturn conversation) structure.
+When using the API, simply insert new images into the array of Messages in the `user` role as part of any standard [multiturn conversation](/docs/en/api/messages/create) structure.
 
 </section>
 
@@ -1489,12 +1489,12 @@ When using the API, simply insert new images into the array of Messages in the `
 
 While Claude's image understanding capabilities are cutting-edge, there are some limitations to be aware of:
 
-- **People identification**: Claude [cannot be used](https://platform.claude.com/docs/en/build-with-claude/cannot be used) to name people in images and refuses to do so.
+- **People identification**: Claude [cannot be used](https://www.anthropic.com/legal/aup) to name people in images and refuses to do so.
 - **Accuracy**: Claude may hallucinate or make mistakes when interpreting low-quality, rotated, or very small images under 200 pixels.
 - **Spatial reasoning**: Claude's spatial reasoning abilities are limited. It may struggle with tasks requiring precise localization or layouts, like reading an analog clock face or describing exact positions of chess pieces.
 - **Counting**: Claude can give approximate counts of objects in an image but may not always be precisely accurate, especially with large numbers of small objects.
 - **AI generated images**: Claude does not know if an image is AI-generated and may be incorrect if asked. Do not rely on it to detect fake or synthetic images.
-- **Inappropriate content**: Claude does not process inappropriate or explicit images that violate the [Acceptable Use Policy](https://platform.claude.com/docs/en/build-with-claude/Acceptable Use Policy).
+- **Inappropriate content**: Claude does not process inappropriate or explicit images that violate the [Acceptable Use Policy](https://www.anthropic.com/legal/aup).
 - **Healthcare applications**: While Claude can analyze general medical images, it is not designed to interpret complex diagnostic scans such as CTs or MRIs. Claude's outputs should not be considered a substitute for professional medical advice or diagnosis.
 
 Always carefully review and verify Claude's image interpretations, especially for high-stakes use cases. Do not use Claude for tasks requiring perfect precision or sensitive image analysis without human oversight.
@@ -1549,7 +1549,7 @@ Always carefully review and verify Claude's image interpretations, especially fo
     - Messages API: Up to 600 images per request (100 for models with a 200k-token context window)
     - claude.ai: Up to 20 images per turn
 
-    Requests exceeding these limits are rejected and return an error. Requests with many large images may also fail before reaching these limits; see [Basics and limits](https://platform.claude.com/docs/en/build-with-claude/Basics and limits) for details.
+    Requests exceeding these limits are rejected and return an error. Requests with many large images may also fail before reaching these limits; see [Basics and limits](#basics-and-limits) for details.
 
   
 </section>
@@ -1587,7 +1587,7 @@ Always carefully review and verify Claude's image interpretations, especially fo
     If Claude's image interpretation seems incorrect:
     1. Ensure the image is clear, high-quality, and correctly oriented.
     2. Try prompt engineering techniques to improve results.
-    3. If the issue persists, flag the output in claude.ai (thumbs up/down) or contact the [support team](https://platform.claude.com/docs/en/build-with-claude/support team).
+    3. If the issue persists, flag the output in claude.ai (thumbs up/down) or contact the [support team](https://support.claude.com/).
 
     Your feedback helps improve Claude!
 
@@ -1606,7 +1606,7 @@ Always carefully review and verify Claude's image interpretations, especially fo
 
 Ready to start building with images using Claude? Here are a few helpful resources:
 
-- [Multimodal cookbook](https://platform.claude.com/docs/en/build-with-claude/Multimodal cookbook): This cookbook has tips on [getting started with images](https://platform.claude.com/docs/en/build-with-claude/getting started with images) and [best practice techniques](https://platform.claude.com/docs/en/build-with-claude/best practice techniques) to ensure the highest quality performance with images. See how you can effectively prompt Claude with images to carry out tasks such as [interpreting and analyzing charts](https://platform.claude.com/docs/en/build-with-claude/interpreting and analyzing charts) or [extracting content from forms](https://platform.claude.com/docs/en/build-with-claude/extracting content from forms).
-- [API reference](https://platform.claude.com/docs/en/build-with-claude/API reference): Documentation for the Messages API, including example [API calls involving images](https://platform.claude.com/docs/en/build-with-claude/API calls involving images).
+- [Multimodal cookbook](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision): This cookbook has tips on [getting started with images](https://platform.claude.com/cookbook/multimodal-getting-started-with-vision) and [best practice techniques](https://platform.claude.com/cookbook/multimodal-best-practices-for-vision) to ensure the highest quality performance with images. See how you can effectively prompt Claude with images to carry out tasks such as [interpreting and analyzing charts](https://platform.claude.com/cookbook/multimodal-reading-charts-graphs-powerpoints) or [extracting content from forms](https://platform.claude.com/cookbook/multimodal-how-to-transcribe-text).
+- [API reference](/docs/en/api/messages/create): Documentation for the Messages API, including example [API calls involving images](/docs/en/build-with-claude/working-with-messages#vision).
 
-If you have any other questions, reach out to the [support team](https://platform.claude.com/docs/en/build-with-claude/support team). You can also join the [developer community](https://platform.claude.com/docs/en/build-with-claude/developer community) to connect with other creators and get help from Anthropic experts.
+If you have any other questions, reach out to the [support team](https://support.claude.com/). You can also join the [developer community](https://www.anthropic.com/discord) to connect with other creators and get help from Anthropic experts.

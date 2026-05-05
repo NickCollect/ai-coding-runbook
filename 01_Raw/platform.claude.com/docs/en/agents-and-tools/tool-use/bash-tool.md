@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/bash-tool
-fetched_at: 2026-05-04T16:08:42.007599+00:00
+fetched_at: 2026-05-05T19:40:45.785797+00:00
 fetch_method: mintlify_md
 ---
 
@@ -9,10 +9,10 @@ fetch_method: mintlify_md
 ---
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Zero Data Retention (ZDR)). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
-The bash tool enables Claude to execute shell commands in a persistent bash session, allowing system operations, script execution, and command-line automation. Shell access is a foundational agent capability. On [Terminal-Bench 2.0](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Terminal-Bench 2.0), a benchmark that evaluates real-world terminal tasks using shell-only validation, Claude shows strong performance gains with access to a persistent bash session.
+The bash tool enables Claude to execute shell commands in a persistent bash session, allowing system operations, script execution, and command-line automation. Shell access is a foundational agent capability. On [Terminal-Bench 2.0](https://github.com/terminal-bench/terminal-bench), a benchmark that evaluates real-world terminal tasks using shell-only validation, Claude shows strong performance gains with access to a persistent bash session.
 
 ## Overview
 
@@ -22,7 +22,7 @@ The bash tool provides Claude with:
 - Access to environment variables and working directory
 - Command chaining and scripting capabilities
 
-For model support, see the [Tool reference](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Tool reference).
+For model support, see the [Tool reference](/docs/en/agents-and-tools/tool-use/tool-reference).
 
 ## Use cases
 
@@ -155,6 +155,7 @@ The bash tool is implemented as a schema-less tool. When using this tool, you do
     import threading
     import queue
 
+
     class BashSession:
         def __init__(self):
             self.process = subprocess.Popen(
@@ -222,6 +223,7 @@ The bash tool is implemented as a schema-less tool. When using this tool, you do
 
     ALLOWED_COMMANDS = {"ls", "cat", "echo", "pwd", "grep", "find", "wc", "head", "tail"}
     SHELL_OPERATORS = {"&&", "||", "|", ";", "&", ">", "<", ">>"}
+
 
     def validate_command(command):
         # Allow only commands from an explicit allowlist
@@ -320,6 +322,7 @@ Implement timeouts to prevent hanging commands:
 ```python hidelines={1..3}
 import subprocess
 
+
 def execute_with_timeout(command, timeout=30):
     try:
         result = subprocess.run(
@@ -365,6 +368,7 @@ def truncate_output(output, max_lines=100):
 Keep an audit trail of executed commands:
 ```python
 import logging
+
 
 def log_command(command, output, user_id):
     logging.info(f"User {user_id} executed: {command}")
@@ -416,7 +420,7 @@ Additional tokens are consumed by:
 - Error messages
 - Large file contents
 
-See [tool use pricing](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool use pricing) for complete pricing details.
+See [tool use pricing](/docs/en/agents-and-tools/tool-use/overview#pricing) for complete pricing details.
 
 ## Common patterns
 
@@ -454,10 +458,10 @@ Git serves as a structured recovery mechanism in long-running agent workflows, n
 
 ## Combining with other tools
 
-The bash tool is most powerful when combined with the [text editor](https://platform.claude.com/docs/en/agents-and-tools/tool-use/text editor) and other tools.
+The bash tool is most powerful when combined with the [text editor](/docs/en/agents-and-tools/tool-use/text-editor-tool) and other tools.
 
 <Note>
-If you're also using the [code execution tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code execution tool), Claude has access to two separate execution environments: your local bash session and Anthropic's sandboxed container. State is not shared between them. See [Using code execution with other execution tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Using code execution with other execution tools) for guidance on prompting Claude to distinguish between environments.
+If you're also using the [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool), Claude has access to two separate execution environments: your local bash session and Anthropic's sandboxed container. State is not shared between them. See [Using code execution with other execution tools](/docs/en/agents-and-tools/tool-use/code-execution-tool#using-code-execution-with-other-execution-tools) for guidance on prompting Claude to distinguish between environments.
 </Note>
 
 ## Next steps

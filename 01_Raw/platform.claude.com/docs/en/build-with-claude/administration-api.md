@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/administration-api
-fetched_at: 2026-05-04T16:09:07.111556+00:00
+fetched_at: 2026-05-05T19:40:46.851856+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ fetch_method: mintlify_md
 **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console → Settings → Organization**.
 </Tip>
 
-The [Admin API](https://platform.claude.com/docs/en/build-with-claude/Admin API) allows you to programmatically manage your organization's resources, including organization members, workspaces, and API keys. This provides programmatic control over administrative tasks that would otherwise require manual configuration in the [Claude Console](https://platform.claude.com/docs/en/build-with-claude/Claude Console).
+The [Admin API](/docs/en/api/admin) allows you to programmatically manage your organization's resources, including organization members, workspaces, and API keys. This provides programmatic control over administrative tasks that would otherwise require manual configuration in the [Claude Console](/).
 
 <Check>
   **The Admin API requires special access**
@@ -38,12 +38,12 @@ This is useful for:
 
 ## Organization roles and permissions
 
-There are five organization-level roles. See more details in the [API Console roles and permissions](https://platform.claude.com/docs/en/build-with-claude/API Console roles and permissions) article.
+There are five organization-level roles. See more details in the [API Console roles and permissions](https://support.claude.com/en/articles/10186004-api-console-roles-and-permissions) article.
 
 | Role | Permissions |
 |------|-------------|
 | user | Can use Workbench |
-| claude_code_user | Can use Workbench and [Claude Code](https://platform.claude.com/docs/en/build-with-claude/Claude Code) |
+| claude_code_user | Can use Workbench and [Claude Code](https://code.claude.com/docs/en/overview) |
 | developer | Can use Workbench and manage API keys |
 | billing | Can use Workbench and manage billing details |
 | admin | Can do all of the above, plus manage users |
@@ -52,7 +52,7 @@ There are five organization-level roles. See more details in the [API Console ro
 
 ### Organization Members
 
-You can list [organization members](https://platform.claude.com/docs/en/build-with-claude/organization members), update member roles, and remove members.
+You can list [organization members](/docs/en/api/admin-api/users/get-user), update member roles, and remove members.
 
 <CodeGroup>
 ```bash cURL
@@ -77,7 +77,7 @@ curl --request DELETE "https://api.anthropic.com/v1/organizations/users/{user_id
 
 ### Organization Invites
 
-You can invite users to organizations and manage those [invites](https://platform.claude.com/docs/en/build-with-claude/invites).
+You can invite users to organizations and manage those [invites](/docs/en/api/admin-api/invites/get-invite).
 
 <CodeGroup>
 
@@ -106,11 +106,11 @@ curl --request DELETE "https://api.anthropic.com/v1/organizations/invites/{invit
 
 ### Workspaces
 
-For a comprehensive guide to workspaces, including Console and API examples, see [Workspaces](https://platform.claude.com/docs/en/build-with-claude/Workspaces).
+For a comprehensive guide to workspaces, including Console and API examples, see [Workspaces](/docs/en/build-with-claude/workspaces).
 
 ### Workspace Members
 
-Manage [user access to specific workspaces](https://platform.claude.com/docs/en/build-with-claude/user access to specific workspaces):
+Manage [user access to specific workspaces](/docs/en/api/admin-api/workspace_members/get-workspace-member):
 
 <CodeGroup>
 
@@ -147,7 +147,7 @@ curl --request DELETE "https://api.anthropic.com/v1/organizations/workspaces/{wo
 
 ### API Keys
 
-Monitor and manage [API keys](https://platform.claude.com/docs/en/build-with-claude/API keys):
+Monitor and manage [API keys](/docs/en/api/admin-api/apikeys/get-api-key):
 
 <CodeGroup>
 
@@ -191,19 +191,19 @@ curl "https://api.anthropic.com/v1/organizations/me" \
 
 This endpoint is useful for programmatically determining which organization an Admin API key belongs to.
 
-For complete parameter details and response schemas, see the [Organization Info API reference](https://platform.claude.com/docs/en/build-with-claude/Organization Info API reference).
+For complete parameter details and response schemas, see the [Organization Info API reference](/docs/en/api/admin-api/organization/get-me).
 
 ## Usage and cost reports
 
-Track your organization's usage and costs with the [Usage and Cost API](https://platform.claude.com/docs/en/build-with-claude/Usage and Cost API).
+Track your organization's usage and costs with the [Usage and Cost API](/docs/en/build-with-claude/usage-cost-api).
 
 ## Claude Code analytics
 
-Monitor developer productivity and Claude Code adoption with the [Claude Code Analytics API](https://platform.claude.com/docs/en/build-with-claude/Claude Code Analytics API).
+Monitor developer productivity and Claude Code adoption with the [Claude Code Analytics API](/docs/en/build-with-claude/claude-code-analytics-api).
 
 ## Rate limits
 
-Read the rate limits configured for your organization and its workspaces with the [Rate Limits API](https://platform.claude.com/docs/en/build-with-claude/Rate Limits API).
+Read the rate limits configured for your organization and its workspaces with the [Rate Limits API](/docs/en/build-with-claude/rate-limits-api).
 
 ## Best practices
 
@@ -247,4 +247,4 @@ Organization invites expire after 21 days. There is currently no way to modify t
 
 </section>
 
-For workspace-specific questions, see the [Workspaces FAQ](https://platform.claude.com/docs/en/build-with-claude/Workspaces FAQ).
+For workspace-specific questions, see the [Workspaces FAQ](/docs/en/build-with-claude/workspaces#faq).

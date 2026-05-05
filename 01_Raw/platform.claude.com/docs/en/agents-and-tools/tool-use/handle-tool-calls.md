@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls
-fetched_at: 2026-05-04T16:08:35.551771+00:00
+fetched_at: 2026-05-05T19:40:45.526466+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,10 +10,10 @@ Parse tool_use blocks, format tool_result responses, and handle errors with is_e
 
 ---
 
-This page covers the tool-call lifecycle: reading `tool_use` blocks from Claude's response, formatting `tool_result` blocks in your reply, and signaling errors. For the SDK abstraction that handles this automatically, see [Tool Runner](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Tool Runner).
+This page covers the tool-call lifecycle: reading `tool_use` blocks from Claude's response, formatting `tool_result` blocks in your reply, and signaling errors. For the SDK abstraction that handles this automatically, see [Tool Runner](/docs/en/agents-and-tools/tool-use/tool-runner).
 
 <Note>
-**Simpler with Tool Runner**: The manual tool handling described on this page is automatically managed by [Tool Runner](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Tool Runner). Use this page when you need custom control over tool execution.
+**Simpler with Tool Runner**: The manual tool handling described on this page is automatically managed by [Tool Runner](/docs/en/agents-and-tools/tool-use/tool-runner). Use this page when you need custom control over tool execution.
 </Note>
 
 Claude's response differs based on whether it uses a client or server tool.
@@ -243,7 +243,7 @@ However, you can also continue the conversation forward with a `tool_result` tha
 If a tool request is invalid or missing parameters, Claude will retry 2-3 times with corrections before apologizing to the user.
 
 <Tip>
-To eliminate invalid tool calls entirely, use [strict tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict tool use) with `strict: true` on your tool definitions. This guarantees that tool inputs will always match your schema exactly, preventing missing parameters and type mismatches.
+To eliminate invalid tool calls entirely, use [strict tool use](/docs/en/agents-and-tools/tool-use/strict-tool-use) with `strict: true` on your tool definitions. This guarantees that tool inputs will always match your schema exactly, preventing missing parameters and type mismatches.
 </Tip>
 
 </section>
@@ -262,6 +262,6 @@ For web search specifically, possible error codes include:
 
 ## Next steps
 
-- For running multiple tools in one turn, see [Parallel tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Parallel tool use).
-- For the SDK abstraction that automates this loop, see [Tool Runner](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Tool Runner).
-- For the full tool-use workflow, see [Define tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/Define tools).
+- For running multiple tools in one turn, see [Parallel tool use](/docs/en/agents-and-tools/tool-use/parallel-tool-use).
+- For the SDK abstraction that automates this loop, see [Tool Runner](/docs/en/agents-and-tools/tool-use/tool-runner).
+- For the full tool-use workflow, see [Define tools](/docs/en/agents-and-tools/tool-use/define-tools).

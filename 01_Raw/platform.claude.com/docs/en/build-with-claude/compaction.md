@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/compaction
-fetched_at: 2026-05-04T16:08:47.433320+00:00
+fetched_at: 2026-05-05T19:40:46.024969+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,7 +11,7 @@ Server-side context compaction for managing long conversations that approach con
 ---
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/Zero Data Retention (ZDR)). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 <Tip>
@@ -22,7 +22,7 @@ Compaction extends the effective context length for long-running conversations a
 
 <Tip>
 For a deeper look at why long contexts degrade and how compaction helps, see
-[Effective context engineering](https://platform.claude.com/docs/en/build-with-claude/Effective context engineering).
+[Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents).
 </Tip>
 
 This is ideal for:
@@ -31,14 +31,14 @@ This is ideal for:
 - Task-oriented prompts that require a lot of follow-up work (often tool use) that may exceed the context window
 
 <Note>
-Compaction is in beta. Include the [beta header](https://platform.claude.com/docs/en/build-with-claude/beta header) `compact-2026-01-12` in your API requests to use this feature.
+Compaction is in beta. Include the [beta header](/docs/en/api/beta-headers) `compact-2026-01-12` in your API requests to use this feature.
 </Note>
 
 ## Supported models
 
 Compaction is supported on the following models:
 
-- [Claude Mythos Preview](https://platform.claude.com/docs/en/build-with-claude/Claude Mythos Preview) (`claude-mythos-preview`)
+- [Claude Mythos Preview](https://anthropic.com/glasswing) (`claude-mythos-preview`)
 - Claude Opus 4.7 (`claude-opus-4-7`)
 - Claude Opus 4.6 (`claude-opus-4-6`)
 - Claude Sonnet 4.6 (`claude-sonnet-4-6`)
@@ -54,7 +54,7 @@ When compaction is enabled, Claude automatically summarizes your conversation wh
 
 On subsequent requests, append the response to your messages. The API automatically drops all message blocks prior to the `compaction` block, continuing the conversation from the summary.
 
-![Flow diagram showing the compaction process: when input tokens exceed the trigger threshold, Claude generates a summary in a compaction block and continues the response with the compacted context](https://platform.claude.com/docs/images/compaction-flow.svg)
+![Flow diagram showing the compaction process: when input tokens exceed the trigger threshold, Claude generates a summary in a compaction block and continues the response with the compacted context](/docs/images/compaction-flow.svg)
 
 ## Basic usage
 
@@ -1869,7 +1869,7 @@ end
 
 ### Prompt caching
 
-Compaction works well with [prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt caching). You can add a `cache_control` breakpoint on compaction blocks to cache the summarized content. The original compacted content is ignored.
+Compaction works well with [prompt caching](/docs/en/build-with-claude/prompt-caching). You can add a `cache_control` breakpoint on compaction blocks to cache the summarized content. The original compacted content is ignored.
 
 ```json
 {
@@ -2408,6 +2408,7 @@ client = anthropic.Anthropic()
 
 messages: list[dict] = []
 
+
 def chat(user_message: str) -> str:
     messages.append({"role": "user", "content": user_message})
 
@@ -2431,6 +2432,7 @@ def chat(user_message: str) -> str:
 
     # Return the text content
     return next(block.text for block in response.content if block.type == "text")
+
 
 # Run a long conversation
 print(chat("Help me build a Python web scraper"))
@@ -2750,6 +2752,7 @@ client = anthropic.Anthropic()
 
 messages: list[dict[str, Any]] = []
 
+
 def chat(user_message: str) -> str:
     messages.append({"role": "user", "content": user_message})
 
@@ -2802,6 +2805,7 @@ def chat(user_message: str) -> str:
 
     # Return the text content
     return next(block.text for block in response.content if block.type == "text")
+
 
 # Run a long conversation
 print(chat("Help me build a Python web scraper"))

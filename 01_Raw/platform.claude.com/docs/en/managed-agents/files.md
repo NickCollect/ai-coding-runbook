@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/files
-fetched_at: 2026-05-04T16:09:05.519427+00:00
+fetched_at: 2026-05-05T19:40:46.754642+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 ## Uploading files
 
-First, upload a file using the [Files API](https://platform.claude.com/docs/en/managed-agents/Files API):
+First, upload a file using the [Files API](/docs/en/build-with-claude/files):
 
 <CodeGroup>
   
@@ -85,18 +85,9 @@ IO.println("File ID: " + file.id());
 
   
 ````php
-$ch = curl_init('https://api.anthropic.com/v1/files');
-curl_setopt_array($ch, [
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_POST => true,
-    CURLOPT_HTTPHEADER => [
-        'x-api-key: ' . getenv('ANTHROPIC_API_KEY'),
-        'anthropic-version: 2023-06-01',
-        'anthropic-beta: files-api-2025-04-14',
-    ],
-    CURLOPT_POSTFIELDS => ['file' => new CURLFile($csvPath, 'text/csv', 'data.csv')],
-]);
-$file = json_decode(curl_exec($ch));
+$file = $client->beta->files->upload(
+    FileParam::fromResource(fopen($csvPath, 'r'), filename: 'data.csv', contentType: 'text/csv'),
+);
 echo "File ID: {$file->id}\n";
 ````
 
@@ -270,7 +261,7 @@ session = client.beta.sessions.create(
 
 </CodeGroup>
 
-A new `file_id` will be created that references the instance of the file in the session. These copies do not count against your [storage limits](https://platform.claude.com/docs/en/managed-agents/storage limits).
+A new `file_id` will be created that references the instance of the file in the session. These copies do not count against your [storage limits](/docs/en/build-with-claude/files).
 
 ## Multiple files
 
@@ -584,7 +575,7 @@ client.beta.sessions.resources.delete(resource.id, session_id: session.id)
 
 ## Listing and downloading session files
 
-Use the [Files API](https://platform.claude.com/docs/en/managed-agents/Files API) to list files scoped to a session and download them.
+Use the [Files API](/docs/en/build-with-claude/files) to list files scoped to a session and download them.
 
 <CodeGroup>
 ```bash curl
