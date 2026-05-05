@@ -1,42 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=it
-fetched_at: 2026-05-05T20:07:28.280065+00:00
+source_url: https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=he
+fetched_at: 2026-05-05T20:41:07.968698+00:00
 title: "Get started with Gemini Live API using the Google GenAI SDK \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Invia feedback
+שליחת משוב
 
 # Get started with Gemini Live API using the Google GenAI SDK
 
-L'API Gemini Live consente un'interazione bidirezionale in tempo reale con i modelli Gemini, supportando input audio, video e di testo e output audio nativi. Questa guida spiega come eseguire l'integrazione con l'API utilizzando l'SDK Google GenAI sul server.
+‫Gemini Live API מאפשר אינטראקציה דו-כיוונית בזמן אמת עם מודלים של Gemini, ותומך בקלט של אודיו, וידאו וטקסט ובפלט אודיו מקורי. במדריך הזה מוסבר איך לבצע שילוב עם ה-API באמצעות Google GenAI SDK בשרת שלכם.
 
-[Prova l'API Live in Google AI Studiomic](https://aistudio.google.com/live?hl=it)
-[Clona l'app di esempio da GitHubcode](https://github.com/google-gemini/gemini-live-api-examples/tree/main/gemini-live-genai-python-sdk)
-[Usa le competenze dell'agente di codiceterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=it)
+[רוצים לנסות את Live API ב-Google AI Studio?mic](https://aistudio.google.com/live?hl=he)
+[משכפלים את אפליקציית הדוגמה מ-GitHubcode](https://github.com/google-gemini/gemini-live-api-examples/tree/main/gemini-live-genai-python-sdk)
+[שימוש במיומנויות של סוכן קודterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=he)
 
-## Panoramica
+## סקירה כללית
 
-L'API Gemini Live utilizza i WebSocket per la comunicazione in tempo reale. L'SDK `google-genai` fornisce un'interfaccia asincrona di alto livello per la gestione di queste connessioni.
+‫Gemini Live API משתמש ב-WebSockets לתקשורת בזמן אמת. ערכת ה-SDK של `google-genai` מספקת ממשק אסינכרוני ברמה גבוהה לניהול החיבורים האלה.
 
-Concetti chiave:
+מושגים מרכזיים:
 
-- **Sessione**: una connessione persistente al modello.
-- **Configurazione**: configurazione di modalità (audio/testo), voce e istruzioni di sistema.
-- **Input in tempo reale**: invio di frame audio e video come blob.
+- **סשן**: חיבור קבוע למודל.
+- ‫**Config** (הגדרה): הגדרת אופנים (אודיו/טקסט), קול והוראות מערכת.
+- **קלט בזמן אמת**: שליחת פריימים של אודיו ווידאו כ-blob.
 
-## Connessione all'API Live
+## התחברות ל-Live API
 
-Avvia una sessione dell'API Live con una chiave API:
+כדי להתחיל סשן Live API עם מפתח API:
 
 ### Python
 
@@ -97,9 +97,9 @@ async function main() {
 main();
 ```
 
-## Invio di testo
+## נשלחת הודעת טקסט
 
-Il testo può essere inviato utilizzando `send_realtime_input` (Python) o `sendRealtimeInput` (JavaScript).
+אפשר לשלוח טקסט באמצעות `send_realtime_input` (Python) או `sendRealtimeInput` (JavaScript).
 
 ### Python
 
@@ -115,9 +115,9 @@ session.sendRealtimeInput({
 });
 ```
 
-## Invio di audio
+## האודיו בתהליכי שליחה…
 
-L'audio deve essere inviato come dati PCM non elaborati (audio PCM a 16 bit non elaborato, 16 kHz, little-endian).
+צריך לשלוח את האודיו כנתוני PCM גולמיים (אודיו PCM גולמי של 16 ביט, 16kHz, little-endian).
 
 ### Python
 
@@ -143,12 +143,11 @@ session.sendRealtimeInput({
 });
 ```
 
-Per un esempio di come ottenere l'audio dal dispositivo client (ad es. il browser)
-consulta l'esempio end-to-end su [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L31-L70).
+דוגמה לאופן קבלת האודיו ממכשיר הלקוח (למשל, הדפדפן) מופיעה בדוגמה מקצה לקצה ב-[GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L31-L70).
 
-## Invio di video
+## שליחת הסרטון מתבצעת
 
-I frame video vengono inviati come singole immagini (ad es. JPEG o PNG) a una frequenza fotogrammi specifica (max 1 frame al secondo).
+פריימים של סרטונים נשלחים כתמונות נפרדות (למשל, JPEG או PNG) בקצב פריימים ספציפי (עד פריים אחד לשנייה).
 
 ### Python
 
@@ -174,12 +173,11 @@ session.sendRealtimeInput({
 });
 ```
 
-Per un esempio di come ottenere il video dal dispositivo client (ad es. il browser)
-consulta l'esempio end-to-end su [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L84-L120).
+דוגמה לאופן קבלת הסרטון ממכשיר הלקוח (למשל, הדפדפן) מופיעה בדוגמה מקצה לקצה ב-[GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L84-L120).
 
-## Ricezione di audio
+## קבלת אודיו
 
-Le risposte audio del modello vengono ricevute come blocchi di dati.
+התשובות הקוליות של המודל מתקבלות כמקטעי נתונים.
 
 ### Python
 
@@ -207,11 +205,11 @@ if (content?.modelTurn?.parts) {
 }
 ```
 
-Consulta l'app di esempio su GitHub per scoprire come [ricevere l'audio sul server](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/gemini_live.py#L86-L98) e [riprodurlo nel browser](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L145-L174).
+אפשר לעיין באפליקציה לדוגמה ב-GitHub כדי ללמוד איך [לקבל את האודיו בשרת](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/gemini_live.py#L86-L98) ו[להפעיל אותו בדפדפן](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L145-L174).
 
-## Ricezione di testo
+## מתקבל טקסט
 
-Le trascrizioni sia dell'input dell'utente sia dell'output del modello sono disponibili nei contenuti del server.
+תמלילים של קלט של משתמשים ושל פלט המודל זמינים בתוכן השרת.
 
 ### Python
 
@@ -238,9 +236,9 @@ if (content?.outputTranscription) {
 }
 ```
 
-## Gestione delle chiamate allo strumento
+## טיפול בשיחות עם כלים
 
-L'API supporta la chiamata allo strumento (chiamata di funzioni). Quando il modello richiede una chiamata allo strumento, devi eseguire la funzione e inviare la risposta.
+ה-API תומך בהפעלת כלים (קריאה לפונקציות). כשהמודל מבקש הפעלה של כלי, צריך להפעיל את הפונקציה ולשלוח את התשובה בחזרה.
 
 ### Python
 
@@ -281,20 +279,20 @@ if (response.toolCall) {
 }
 ```
 
-## Passaggi successivi
+## המאמרים הבאים
 
-- Leggi la guida completa alle [funzionalità](https://ai.google.dev/gemini-api/docs/live-guide?hl=it) dell'API Live per le funzionalità e le configurazioni chiave, tra cui il rilevamento dell'attività vocale e le funzionalità audio native.
-- Leggi la guida all'[utilizzo degli strumenti](https://ai.google.dev/gemini-api/docs/live-tools?hl=it) per scoprire come integrare l'API Live con gli strumenti e la chiamata di funzioni.
-- Leggi la guida alla [gestione delle sessioni](https://ai.google.dev/gemini-api/docs/live-session?hl=it) per gestire le conversazioni a lunga esecuzione.
-- Leggi la guida ai [token effimeri](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=it) per l'autenticazione sicura nelle applicazioni [client-server](#implementation-approach).
-- Per ulteriori informazioni sull'API WebSocket sottostante, consulta la [documentazione di riferimento dell'API WebSocket](https://ai.google.dev/api/live?hl=it).
+- במדריך המלא בנושא [יכולות](https://ai.google.dev/gemini-api/docs/live-guide?hl=he) של Live API מפורטות היכולות וההגדרות העיקריות, כולל זיהוי פעילות קולית ותכונות אודיו מקוריות.
+- במדריך [שימוש בכלים](https://ai.google.dev/gemini-api/docs/live-tools?hl=he) מוסבר איך לשלב את Live API עם כלים ועם בקשות להפעלת פונקציות.
+- כדי לנהל שיחות ארוכות, כדאי לקרוא את המדריך בנושא [ניהול סשנים](https://ai.google.dev/gemini-api/docs/live-session?hl=he).
+- קוראים את המדריך בנושא [אסימונים זמניים](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=he) לאימות מאובטח באפליקציות [client-to-server](#implementation-approach).
+- מידע נוסף על WebSockets API מופיע ב[הפניית WebSockets API](https://ai.google.dev/api/live?hl=he).
 
-Invia feedback
+שליחת משוב
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Ultimo aggiornamento 2026-04-29 UTC.
+עדכון אחרון: 2026-04-29 (שעון UTC).
 
-Vuoi dirci altro?
+רוצה לתת לנו משוב?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]

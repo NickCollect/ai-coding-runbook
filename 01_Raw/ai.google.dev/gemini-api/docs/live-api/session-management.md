@@ -1,39 +1,52 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=vi
-fetched_at: 2026-05-05T20:00:31.054373+00:00
+source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=pt-BR
+fetched_at: 2026-05-05T20:46:46.389041+00:00
 title: "Session management with Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Gửi ý kiến phản hồi
+Envie comentários
 
 # Session management with Live API
 
-Trong Live API, phiên là một kết nối liên tục, trong đó dữ liệu đầu vào và đầu ra được truyền trực tuyến liên tục qua cùng một kết nối (đọc thêm về [cách hoạt động](https://ai.google.dev/gemini-api/docs/live?hl=vi)).
-Thiết kế phiên duy nhất này cho phép độ trễ thấp và hỗ trợ các tính năng duy nhất, nhưng cũng có thể gây ra các thách thức, chẳng hạn như giới hạn thời gian phiên và việc chấm dứt sớm.
-Hướng dẫn này đề cập đến các chiến lược để khắc phục những thách thức về việc quản lý phiên có thể phát sinh khi sử dụng Live API.
+Na API Live, uma sessão se refere a uma conexão persistente
+em que a entrada e a saída são transmitidas continuamente pela mesma
+conexão. Saiba mais sobre [como ela funciona](https://ai.google.dev/gemini-api/docs/live?hl=pt-br).
+Esse design de sessão exclusivo permite baixa latência e oferece suporte a recursos exclusivos, mas também pode apresentar desafios, como limites de tempo de sessão e encerramento antecipado.
+Este guia aborda estratégias para superar os desafios de gerenciamento de sessão que podem surgir ao usar a API Live.
 
-## Thời gian tồn tại của phiên
+## Tempo de vida da sessão
 
-Nếu không nén, các phiên chỉ có âm thanh sẽ bị giới hạn ở 15 phút và các phiên có cả âm thanh và video sẽ bị giới hạn ở 2 phút. Nếu vượt quá các giới hạn này, phiên sẽ kết thúc (và do đó, kết nối cũng kết thúc), nhưng bạn có thể sử dụng [tính năng nén cửa sổ ngữ cảnh](#context-window-compression) để kéo dài phiên đến một khoảng thời gian không giới hạn.
+Sem compressão, as sessões somente de áudio são limitadas a 15 minutos, e as sessões de áudio e vídeo são limitadas a 2 minutos. Exceder esses limites
+encerra a sessão (e, portanto, a conexão), mas é possível usar
+[a compressão da janela de contexto](#context-window-compression) para estender as sessões por
+um período ilimitado.
 
-Thời gian tồn tại của một kết nối cũng bị giới hạn, khoảng 10 phút. Khi kết nối chấm dứt, phiên cũng sẽ chấm dứt. Trong trường hợp này, bạn có thể định cấu hình một phiên duy nhất để duy trì hoạt động trên nhiều kết nối bằng cách sử dụng [tính năng tiếp tục phiên](#session-resumption).
-Bạn cũng sẽ nhận được [thông báo GoAway](#goaway-message) trước khi kết thúc kết nối, cho phép bạn thực hiện các hành động khác.
+O tempo de vida de uma conexão também é limitado a cerca de 10 minutos. Quando a conexão termina, a sessão também é encerrada. Nesse caso, é possível
+configurar uma única sessão para permanecer ativa em várias conexões usando
+[a retomada da sessão](#session-resumption).
+Você também vai receber uma [mensagem GoAway](#goaway-message) antes do
+término da conexão, permitindo que você tome outras ações.
 
-## Nén cửa sổ ngữ cảnh
+## Compressão da janela de contexto
 
-Để cho phép các phiên dài hơn và tránh tình trạng kết nối bị chấm dứt đột ngột, bạn có thể bật tính năng nén cửa sổ ngữ cảnh bằng cách đặt trường [contextWindowCompression](https://ai.google.dev/api/live?hl=vi#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression) trong cấu hình phiên.
+Para ativar sessões mais longas e evitar o encerramento abrupto da conexão, você pode
+ativar a compactação da janela de contexto definindo o campo [contextWindowCompression](https://ai.google.dev/api/live?hl=pt-br#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression)
+como parte da configuração da sessão.
 
-Trong [ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=vi#contextwindowcompressionconfig), bạn có thể định cấu hình [cơ chế cửa sổ trượt](https://ai.google.dev/api/live?hl=vi#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window) và [số lượng mã thông báo](https://ai.google.dev/api/live?hl=vi#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens) kích hoạt tính năng nén.
+No [ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=pt-br#contextwindowcompressionconfig), é possível configurar um
+[mecanismo de janela deslizante](https://ai.google.dev/api/live?hl=pt-br#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window)
+e o [número de tokens](https://ai.google.dev/api/live?hl=pt-br#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens)
+que acionam a compressão.
 
 ### Python
 
@@ -60,13 +73,19 @@ const config = {
 };
 ```
 
-## Tiếp tục phiên
+## Retomada da sessão
 
-Để ngăn chặn việc kết thúc phiên khi máy chủ định kỳ đặt lại kết nối WebSocket, hãy định cấu hình trường [sessionResumption](https://ai.google.dev/api/live?hl=vi#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption) trong [cấu hình thiết lập](https://ai.google.dev/api/live?hl=vi#BidiGenerateContentSetup).
+Para evitar o encerramento da sessão quando o servidor redefine periodicamente a conexão WebSocket
+connection, configure o [sessionResumption](https://ai.google.dev/api/live?hl=pt-br#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption)
+campo na [configuração de instalação](https://ai.google.dev/api/live?hl=pt-br#BidiGenerateContentSetup).
 
-Việc truyền cấu hình này khiến máy chủ gửi thông báo [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=vi#SessionResumptionUpdate). Bạn có thể dùng thông báo này để tiếp tục phiên bằng cách truyền mã thông báo tiếp tục gần đây nhất làm [`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=vi#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle) của kết nối tiếp theo.
+A transmissão dessa configuração faz com que o
+servidor envie [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=pt-br#SessionResumptionUpdate)
+mensagens, que podem ser usadas para retomar a sessão transmitindo o último token de retomada
+como o [`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=pt-br#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle)
+da conexão subsequente.
 
-Mã thông báo tiếp tục có hiệu lực trong 2 giờ sau khi phiên gần nhất kết thúc.
+Os tokens de retomada são válidos por duas horas após o encerramento das últimas sessões.
 
 ### Python
 
@@ -201,9 +220,11 @@ async function main() {
 main();
 ```
 
-## Nhận được thông báo trước khi phiên kết nối bị ngắt
+## Receber uma mensagem antes que a sessão seja desconectada
 
-Máy chủ gửi thông báo [GoAway](https://ai.google.dev/api/live?hl=vi#GoAway) cho biết rằng kết nối hiện tại sẽ sớm bị chấm dứt. Thông báo này bao gồm [timeLeft](https://ai.google.dev/api/live?hl=vi#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left), cho biết thời gian còn lại và cho phép bạn thực hiện thêm hành động trước khi kết nối bị chấm dứt ở trạng thái ABORTED.
+O servidor envia uma mensagem [GoAway](https://ai.google.dev/api/live?hl=pt-br#GoAway) que sinaliza que a conexão atual será encerrada em breve. Essa mensagem inclui o [timeLeft](https://ai.google.dev/api/live?hl=pt-br#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left),
+indicando o tempo restante, e permite que você tome outras medidas antes que a
+conexão seja encerrada como ABORTADA.
 
 ### Python
 
@@ -226,9 +247,10 @@ for (const turn of turns) {
 }
 ```
 
-## Nhận thông báo khi quá trình tạo hoàn tất
+## Receber uma mensagem quando a geração estiver concluída
 
-Máy chủ gửi thông báo [generationComplete](https://ai.google.dev/api/live?hl=vi#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete) cho biết mô hình đã hoàn tất việc tạo phản hồi.
+O servidor envia uma [generationComplete](https://ai.google.dev/api/live?hl=pt-br#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete)
+mensagem que sinaliza que o modelo terminou de gerar a resposta.
 
 ### Python
 
@@ -250,16 +272,19 @@ for (const turn of turns) {
 }
 ```
 
-## Bước tiếp theo
+## A seguir
 
-Khám phá thêm các cách sử dụng Live API trong hướng dẫn đầy đủ về [Các chức năng](https://ai.google.dev/gemini-api/docs/live?hl=vi), trang [Cách sử dụng công cụ](https://ai.google.dev/gemini-api/docs/live-tools?hl=vi) hoặc [Sổ tay Live API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=vi).
+Confira outras maneiras de trabalhar com a API Live no guia completo de
+[recursos](https://ai.google.dev/gemini-api/docs/live?hl=pt-br),
+na página de [uso da ferramenta](https://ai.google.dev/gemini-api/docs/live-tools?hl=pt-br) ou no
+[livro de receitas da API Live](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=pt-br).
 
-Gửi ý kiến phản hồi
+Envie comentários
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+Última atualização 2026-04-29 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Quer enviar seu feedback?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]

@@ -1,53 +1,53 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=it
-fetched_at: 2026-05-05T20:00:40.281171+00:00
-title: "Anteprima di Gemini 3.1 Flash TTS (Text-to-Speech) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=th
+fetched_at: 2026-05-05T20:47:12.019935+00:00
+title: "\u0e40\u0e27\u0e2d\u0e23\u0e4c\u0e0a\u0e31\u0e19\u0e15\u0e31\u0e27\u0e2d\u0e22\u0e48\u0e32\u0e07\u0e02\u0e2d\u0e07 TTS (\u0e01\u0e32\u0e23\u0e2d\u0e48\u0e32\u0e19\u0e2d\u0e2d\u0e01\u0e40\u0e2a\u0e35\u0e22\u0e07\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21) \u0e02\u0e2d\u0e07 Gemini 3.1 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Invia feedback
+ส่งความคิดเห็น
 
-# Anteprima di Gemini 3.1 Flash TTS (Text-to-Speech)
+# เวอร์ชันตัวอย่างของ TTS (การอ่านออกเสียงข้อความ) ของ Gemini 3.1 Flash
 
-Il modello di anteprima Gemini 3.1 Flash TTS offre una generazione di voce potente e a bassa latenza con output naturali, prompt controllabili e nuovi tag audio espressivi per un controllo preciso della narrazione.
+โมเดล Gemini 3.1 Flash TTS Preview มีฟีเจอร์การสร้างคำพูดที่ทรงประสิทธิภาพและมีความหน่วงต่ำ พร้อมเอาต์พุตที่เป็นธรรมชาติ พรอมต์ที่ควบคุมได้ และแท็กเสียงแบบใหม่ที่แสดงอารมณ์ได้หลากหลายเพื่อการควบคุมการบรรยายที่แม่นยำ
 
-[Prova in Google AI Studio](https://aistudio.google.com?model=gemini-3.1-flash-tts-preview&hl=it)
+[ลองใช้ใน Google AI Studio](https://aistudio.google.com?model=gemini-3.1-flash-tts-preview&hl=th)
 
-## Documentazione
+## เอกสารประกอบ
 
-Il modello Gemini 3.1 Flash TTS Preview introduce [tag audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=it#transcript-tags) espressivi
-per controllare la narrazione, nonché miglioramenti generali in termini di naturalezza,
-controllabilità e multilinguismo.
+โมเดล Gemini 3.1 Flash TTS Preview มาพร้อม[แท็กเสียง](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th#transcript-tags)
+ที่แสดงอารมณ์ได้หลากหลายเพื่อควบคุมการบรรยาย รวมถึงการปรับปรุงโดยรวมในด้านความเป็นธรรมชาติ
+ความสามารถในการควบคุม และความสามารถในการรองรับหลายภาษา
 
-Visita la guida [Text-to-Speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=it) per una copertura completa di funzionalità e capacità.
+ดูฟีเจอร์และความสามารถทั้งหมดได้ที่คู่มือ [Text-to-Speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th)
 
 ## gemini-3.1-flash-tts-preview
 
-| Proprietà | Descrizione |
+| พร็อพเพอร์ตี้ | คำอธิบาย |
 | --- | --- |
-| Codice modello id\_card | `gemini-3.1-flash-tts-preview` |
-| saveTipi di dati supportati | **Input**  Testo  **Output**  Audio |
-| token\_autoLimiti dei token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=it) | **Limite di token di input**  8192  **Limite di token di output**  16.384 |
-| handymanFunzionalità | **Generazione di audio**  Supportato  **API batch**  Supportato  **Memorizzazione nella cache**  Non supportato  **Esecuzione di codice**  Non supportato  **Ricerca file**  Non supportato  **Chiamata di funzione**  Non supportato  **Grounding con Google Maps**  Non supportato  **Generazione di immagini**  Non supportato  **API Live**  Non supportato  **Fondatezza della Ricerca**  Non supportato  **Output strutturati**  Non supportato  **Ragionamento**  Non supportato  **Contesto URL**  Non supportato |
-| Versioni 123 | Per ulteriori dettagli, leggi i [pattern delle versioni del modello](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it#model-versions).  - `gemini-3.1-flash-tts-preview` |
-| calendar\_monthUltimo aggiornamento | Aprile 2026 |
-| calendar\_monthKnowledge cutoff | Gennaio 2025 |
+| id\_cardรหัสโมเดล | `gemini-3.1-flash-tts-preview` |
+| saveประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ  **เอาต์พุต**  เสียง |
+| token\_autoขีดจำกัดโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  8,192  **ขีดจำกัดโทเค็นเอาต์พุต**  16,384 |
+| handymanความสามารถ | **การสร้างเสียง**  สิ่งที่ทำได้  **Batch API**  สิ่งที่ทำได้  **การแคช**  ไม่รองรับ  **การรันโค้ด**  ไม่รองรับ  **การค้นหาไฟล์**  สิ่งที่ทำไม่ได้  **การเรียกฟังก์ชัน**  ไม่รองรับ  **การเชื่อมต่อแหล่งข้อมูลกับ Google Maps**  ไม่รองรับ  **การสร้างรูปภาพ**  ไม่รองรับ  **Live API**  ไม่รองรับ  **การเชื่อมต่อแหล่งข้อมูลของ Search**  ไม่รองรับ  **เอาต์พุตที่มีโครงสร้าง**  ไม่รองรับ  **การคิด**  ไม่รองรับ  **บริบท URL**  ไม่รองรับ |
+| 123เวอร์ชัน | อ่านรายละเอียดเพิ่มเติมเกี่ยวกับ[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)  - `gemini-3.1-flash-tts-preview` |
+| calendar\_monthการอัปเดตล่าสุด | เมษายน 2026 |
+| calendar\_monthวันที่สิ้นสุดข้อมูล | มกราคม 2025 |
 
-Invia feedback
+ส่งความคิดเห็น
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Ultimo aggiornamento 2026-04-29 UTC.
+อัปเดตล่าสุด 2026-04-29 UTC
 
-Vuoi dirci altro?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-29 UTC"],[],[]]

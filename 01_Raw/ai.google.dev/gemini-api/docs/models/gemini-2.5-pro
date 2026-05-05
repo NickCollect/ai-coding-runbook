@@ -1,45 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=pl
-fetched_at: 2026-05-05T20:07:19.772519+00:00
-title: "Gemini\u00a02.5 Pro \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-CN
+fetched_at: 2026-05-05T20:42:06.347814+00:00
+title: "Gemini 2.5 Pro \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Prześlij opinię
+发送反馈
 
-# Gemini 2.5 Pro
+# Gemini 2.5 Pro
 
-Nasz najnowocześniejszy model myślący, który potrafi rozumować nad złożonymi problemami w kodzie, matematyce i naukach przyrodniczych, technice, inżynierii i matematyce, a także analizować duże zbiory danych, bazy kodu i dokumenty przy użyciu długiego kontekstu.
+我们最先进的思考模型，能够推理代码、数学和 STEM 领域中的复杂问题，还能使用长上下文分析大型数据集、代码库和文档。
 
-[Wypróbuj w Google AI Studio](https://aistudio.google.com?model=gemini-2.5-pro&hl=pl)
+[在 Google AI Studio 中试用](https://aistudio.google.com?model=gemini-2.5-pro&hl=zh-cn)
 
 ## gemini-2.5-pro
 
-| Właściwość | Opis |
+| 属性 | 说明 |
 | --- | --- |
-| id\_cardKod modelu | `gemini-2.5-pro` |
-| saveObsługiwane typy danych | **Dane wejściowe**  Dźwięk, obrazy, filmy, tekst i PDF  **Dane wyjściowe**  Tekst |
-| token\_autoLimity tokenów[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | **Limit tokenów wejściowych**  1 048 576  **Limit tokenów wyjściowych**  65 536 |
-| handymanMożliwości | **Generowanie dźwięku**  Nieobsługiwane  **Batch API**  Obsługiwane  **Buforowanie**  Obsługiwane  **Wykonywanie kodu**  Obsługiwane  **Wyszukiwanie plików**  Obsługiwane  **Elastyczne wnioskowanie**  Obsługiwane  **Wywoływanie funkcji**  Obsługiwane  **Powiązanie ze źródłem informacji przy użyciu Map Google**  Obsługiwane  **Generowanie obrazów**  Nieobsługiwane  **Live API**  Nieobsługiwane  **Wnioskowanie priorytetowe**  Obsługiwane  **Ugruntowanie w wyszukiwarce**  Obsługiwane  **Ustrukturyzowane dane wyjściowe**  Obsługiwane  **Myślenie**  Obsługiwane  **Kontekst adresu URL**  Obsługiwane |
-| 123Wersje | Więcej informacji znajdziesz w artykule [Wzorce wersji modelu](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#model-versions).  - `Stable: gemini-2.5-pro` |
-| calendar\_monthOstatnia aktualizacja | Czerwiec 2025 r. |
-| cognition\_2Granica wiedzy | Styczeń 2025 r. |
+| id\_card 模型代码 | `gemini-2.5-pro` |
+| 保存支持的数据类型 | **输入源**  音频、图片、视频、文本和 PDF  **输出**  文本 |
+| token\_auto令牌限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入 token 限制**  1,048,576  **输出 token 限制**  65536 |
+| handyman功能 | **音频生成**  不受支持  **批量 API**  支持  **缓存**  支持  **代码执行**  支持  **文件搜索**  支持  **Flex 推理**  支持  **函数调用**  支持  **依托 Google 地图进行接地**  支持  **图片生成**  不受支持  **Live API**  不受支持  **优先推断**  支持  **搜索接地**  支持  **结构化输出**  支持  **思考型**  支持  **网址上下文**  支持 |
+| 123 版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - `Stable: gemini-2.5-pro` |
+| calendar\_month最新更新 | 2025 年 6 月 |
+| cognition\_2知识截点 | 2025 年 1 月 |
 
-Prześlij opinię
+发送反馈
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Ostatnia aktualizacja: 2026-04-29 UTC.
+最后更新时间 (UTC)：2026-04-29。
 
-Chcesz przekazać coś jeszcze?
+需要向我们提供更多信息？
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]

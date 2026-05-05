@@ -1,69 +1,69 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=pl
-fetched_at: 2026-05-05T20:01:08.641442+00:00
-title: "Zrozumienie i liczenie token\u00f3w \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=ja
+fetched_at: 2026-05-05T20:47:38.598439+00:00
+title: "\u30c8\u30fc\u30af\u30f3\u3092\u7406\u89e3\u3057\u3066\u30ab\u30a6\u30f3\u30c8\u3059\u308b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Prześlij opinię
+フィードバックを送信
 
-# Zrozumienie i liczenie tokenów
+# トークンを理解してカウントする
 
-Gemini i inne modele generatywnej AI przetwarzają dane wejściowe i wyjściowe z dokładnością do *tokena*.
+Gemini や他の生成 AI モデルは、入力と出力を*トークン*と呼ばれる粒度で処理します。
 
-**W przypadku modeli Gemini token odpowiada około 4 znakom.
-100 tokenów to około 60–80 słów w języku angielskim.**
+**Gemini モデルの場合、1 個のトークンは約 4 文字に相当します。
+100 個のトークンは約 60 ～ 80 ワード（英語）に相当します。**
 
-## Informacje o tokenach
+## トークンについて
 
-Tokeny mogą być pojedynczymi znakami, np. `z`, lub całymi słowami, np. `cat`. Długie słowa są dzielone na kilka tokenów. Zbiór wszystkich tokenów używanych przez model nazywa się słownikiem, a proces dzielenia tekstu na tokeny – *tokenizacją*.
+トークンは、`z` などの単一の文字、`cat` などの単語全体にすることができます。長い単語は複数のトークンに分割されます。モデルで使用されるすべてのトークンのセットを語彙と呼びます。テキストをトークンに分割するプロセスは、トークン化と呼ばれます。
 
-Gdy płatności są włączone, [koszt wywołania interfejsu Gemini API](https://ai.google.dev/pricing?hl=pl) jest
-częściowo określany przez liczbę tokenów wejściowych i wyjściowych, dlatego warto wiedzieć, jak je
-zliczać.
+課金が有効になっている場合、[Gemini API の呼び出しの費用](https://ai.google.dev/pricing?hl=ja)は
+入力トークンと出力トークンの数によって決まります。トークンの
+カウント方法を知っておくと便利です。
 
-Możesz wypróbować zliczanie tokenów w Colab.
+Colab でトークンのカウントを試すことができます。
 
 |  |  |  |
 | --- | --- | --- |
-| [Wyświetl w ai.google.dev](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | [Wypróbuj notatnik Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=pl) | [Wyświetl notatnik w GitHub](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=pl) |
+| [[View on ai.google.dev]](https://ai.google.dev/gemini-api/docs/tokens?hl=ja) | [[Colab ノートブックを試す]](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ja) | [[GitHub でノートブックを表示]](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ja) |
 
-## Zliczanie tokenów
+## トークンをカウントする
 
-Wszystkie dane wejściowe i wyjściowe interfejsu Gemini API są tokenizowane, w tym tekst, pliki graficzne i inne formaty nietekstowe.
+Gemini API との間でやり取りされるすべての入力と出力は、テキスト、画像ファイル、その他のテキスト以外のモダリティを含め、トークン化されます。
 
-Tokeny możesz zliczać na te sposoby:
+トークンは次の方法でカウントできます。
 
-- **Wywołaj funkcję [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=pl) z danymi wejściowymi
-  żądania.**  
-   Zwraca ona łączną liczbę tokenów *tylko w danych wejściowych*. Możesz wywołać tę funkcję przed wysłaniem danych wejściowych do modelu, aby sprawdzić rozmiar żądań.
-- **Po wywołaniu funkcji `generate_content` użyj atrybutu `usage_metadata` w obiekcie `response`**  
-   Zwraca on łączną liczbę
-  tokenów *zarówno w danych wejściowych, jak i wyjściowych*: `total_token_count`.  
-   Zwraca też oddzielnie liczbę tokenów w danych wejściowych i wyjściowych: `prompt_token_count` (tokeny wejściowe) i `candidates_token_count` (tokeny wyjściowe).
+- **リクエストの入力
+  で [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=ja) を呼び出します。**  
+   これにより、入力のみのトークンの合計数が返されます。  この呼び出しは、入力をモデルに送信する前に行い、リクエストのサイズを確認できます。
+- **`generate_content` を呼び出した後、`response` オブジェクトの `usage_metadata` 属性を使用します。**  
+   これにより、
+  入力と出力の両方の*トークンの合計数*が返されます`total_token_count`。  
+   また、入力と出力のトークン数が別々に返されます。`prompt_token_count`（入力トークン）と `candidates_token_count`（出力トークン）です。
 
-  Jeśli używasz modelu [myślącego, tokeny użyte podczas procesu myślenia
-  są zwracane w `thoughts_token_count`.](https://ai.google.dev/gemini-api/docs/thinking?hl=pl) A jeśli używasz
-  [buforowania kontekstu](https://ai.google.dev/gemini-api/docs/caching?hl=pl), liczba tokenów w pamięci podręcznej będzie w `cached_content_token_count`.
+  [思考
+  モデル](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)を使用している場合、思考
+  プロセスで使用されるトークンは `thoughts_token_count` で返されます。[コンテキスト キャッシュを使用している場合、キャッシュされたトークン数は `cached_content_token_count` になります。](https://ai.google.dev/gemini-api/docs/caching?hl=ja)
 
-### Zliczanie tokenów tekstowych
+### テキスト トークンをカウントする
 
-Jeśli wywołasz funkcję `count_tokens` z danymi wejściowymi zawierającymi tylko tekst, zwróci ona liczbę tokenów tekstu *tylko w danych wejściowych* (`total_tokens`). Możesz wywołać tę funkcję przed wywołaniem funkcji `generate_content`, aby sprawdzić rozmiar żądań.
+テキストのみの入力で `count_tokens` を呼び出すと、入力のみのテキストのトークン数（`total_tokens`）が返されます。 この呼び出しは、`generate_content` を呼び出す前に行い、リクエストのサイズを確認できます。
 
-Inną opcją jest wywołanie funkcji `generate_content`, a następnie użycie atrybutu `usage_metadata` w obiekcie `response`, aby uzyskać te informacje:
+別の方法として、`generate_content` を呼び出し、`response` オブジェクトの `usage_metadata` 属性を使用して、次の情報を取得することもできます。
 
-- oddzielne liczby tokenów w danych wejściowych (`prompt_token_count`), treści w pamięci podręcznej (`cached_content_token_count`) i danych wyjściowych (`candidates_token_count`);
-- liczba tokenów w procesie myślenia (`thoughts_token_count`);
-- łączna liczba tokenów *zarówno w danych wejściowych, jak i wyjściowych* (`total_token_count`).
+- 入力（`prompt_token_count`）、キャッシュされたコンテンツ（`cached_content_token_count`）、出力（`candidates_token_count`）のトークン数
+- 思考プロセスのトークン数（`thoughts_token_count`）
+- 入力と出力の両方のトークンの合計数（`total_token_count`）
 
 ### Python
 
@@ -138,17 +138,17 @@ fmt.Println(string(usageMetadata))
     ```
 ```
 
-### Zliczanie tokenów w czacie wieloetapowym
+### マルチターン（チャット）トークンをカウントする
 
-Jeśli wywołasz funkcję `count_tokens` z historią czatu, zwróci ona łączną liczbę tokenów tekstu z każdej roli w czacie (`total_tokens`).
+チャット履歴で `count_tokens` を呼び出すと、チャット内の各ロールのテキストのトークン合計数（`total_tokens`）が返されます。
 
-Inną opcją jest wywołanie funkcji `send_message`, a następnie użycie atrybutu `usage_metadata` w obiekcie `response`, aby uzyskać te informacje:
+別の方法として、`send_message` を呼び出し、`response` オブジェクトの `usage_metadata` 属性を使用して、次の情報を取得することもできます。
 
-- oddzielne liczby tokenów w danych wejściowych (`prompt_token_count`), treści w pamięci podręcznej (`cached_content_token_count`) i danych wyjściowych (`candidates_token_count`);
-- liczba tokenów w procesie myślenia (`thoughts_token_count`);
-- łączna liczba tokenów *zarówno w danych wejściowych, jak i wyjściowych* (`total_token_count`).
+- 入力（`prompt_token_count`）、キャッシュされたコンテンツ（`cached_content_token_count`）、出力（`candidates_token_count`）のトークン数
+- 思考プロセスのトークン数（`thoughts_token_count`）
+- 入力と出力の両方のトークンの合計数（`total_token_count`）
 
-Aby dowiedzieć się, jak duży będzie następny etap rozmowy, musisz dołączyć go do historii, gdy wywołujesz funkcję `count_tokens`.
+次の会話のターンがどのくらいの大きさになるかを確認するには、`count_tokens` を呼び出すときに履歴に追加する必要があります。
 
 ### Python
 
@@ -274,33 +274,31 @@ if err != nil {
 fmt.Println(secondTokenResp.TotalTokens)
 ```
 
-### Zliczanie tokenów multimodalnych
+### マルチモーダル トークンをカウントする
 
-Wszystkie dane wejściowe interfejsu Gemini API są tokenizowane, w tym tekst, pliki graficzne i inne formaty nietekstowe. Podczas przetwarzania przez interfejs Gemini API pamiętaj o tych najważniejszych kwestiach dotyczących tokenizacji danych wejściowych multimodalnych:
+Gemini API へのすべての入力は、テキスト、画像ファイル、その他のテキスト以外のモダリティを含め、トークン化されます。Gemini API による処理中のマルチモーダル入力のトークン化に関する、次の概要のキーポイントに注意してください。
 
-- Dane wejściowe obrazu o obu wymiarach <= 384 piksele są liczone jako 258 tokenów. Obrazy większe w jednym lub obu wymiarach są w razie potrzeby przycinane i skalowane do kafelków o wymiarach 768 x 768 pikseli, z których każdy jest liczony jako 258 tokenów.
-- Pliki wideo i audio są konwertowane na tokeny według tych stałych stawek: wideo – 263 tokeny na sekundę, audio – 32 tokeny na sekundę.
+- 両方の寸法が 384 ピクセル以下の画像入力は、258 個のトークンとしてカウントされます。1 つまたは両方の寸法が大きい画像は、必要に応じて 768x768 ピクセルのタイルに切り抜かれ、スケーリングされます。各タイルは 258 個のトークンとしてカウントされます。
+- 動画ファイルと音声ファイルは、次の固定レートでトークンに変換されます。動画は 1 秒あたり 263 トークン、音声は 1 秒あたり 32 トークンです。
 
-#### Rozdzielczości multimediów
+#### メディアの解像度
 
-[Modele Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=pl#gemini-3) wprowadzają szczegółową kontrolę nad
-przetwarzaniem obrazu multimodalnego za pomocą parametru `media_resolution`. Parametr `media_resolution` określa **maksymalną liczbę tokenów przydzielonych na obraz wejściowy lub klatkę wideo**.
-Wyższe rozdzielczości zwiększają zdolność modelu do odczytywania drobnego tekstu lub identyfikowania małych szczegółów, ale zwiększają zużycie tokenów i opóźnienie.
+[Gemini 3 モデル](https://ai.google.dev/gemini-api/docs/models?hl=ja#gemini-3)では、`media_resolution` パラメータを使用して、マルチモーダル ビジョン処理をきめ細かく制御できます。`media_resolution` パラメータは、**入力画像または動画フレームごとに割り当てられるトークンの最大数** を決定します。解像度が高いほど、モデルが細かいテキストを読み取ったり、小さな詳細を識別する能力が向上しますが、トークンの使用量とレイテンシが増加します。
 
-Więcej informacji o parametrze i jego wpływie na obliczenia tokenów,
-znajdziesz w przewodniku po [rozdzielczości multimediów](https://ai.google.dev/gemini-api/docs/media-resolution?hl=pl).
+パラメータの詳細と、トークン計算への影響については、
+[メディアの解像度](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ja)ガイドをご覧ください。
 
-#### Pliki graficzne
+#### 画像ファイル
 
-Jeśli wywołasz funkcję `count_tokens` z danymi wejściowymi zawierającymi tekst i obraz, zwróci ona łączną liczbę tokenów tekstu i obrazu *tylko w danych wejściowych* (`total_tokens`). Możesz wywołać tę funkcję przed wywołaniem funkcji `generate_content`, aby sprawdzić rozmiar żądań. Opcjonalnie możesz też wywołać funkcję `count_tokens` oddzielnie dla tekstu i pliku.
+テキストと画像の入力で `count_tokens` を呼び出すと、入力のみのテキストと画像のトークン数の合計（`total_tokens`）が返されます。 この呼び出しは、`generate_content` を呼び出す前に行い、リクエストのサイズを確認できます。必要に応じて、テキストとファイルを別々に `count_tokens` で呼び出すこともできます。
 
-Inną opcją jest wywołanie funkcji `generate_content`, a następnie użycie atrybutu `usage_metadata` w obiekcie `response`, aby uzyskać te informacje:
+別の方法として、`generate_content` を呼び出し、`response` オブジェクトの `usage_metadata` 属性を使用して、次の情報を取得することもできます。
 
-- oddzielne liczby tokenów w danych wejściowych (`prompt_token_count`), treści w pamięci podręcznej (`cached_content_token_count`) i danych wyjściowych (`candidates_token_count`);
-- liczba tokenów w procesie myślenia (`thoughts_token_count`);
-- łączna liczba tokenów *zarówno w danych wejściowych, jak i wyjściowych* (`total_token_count`).
+- 入力（`prompt_token_count`）、キャッシュされたコンテンツ（`cached_content_token_count`）、出力（`candidates_token_count`）のトークン数
+- 思考プロセスのトークン数（`thoughts_token_count`）
+- 入力と出力の両方のトークンの合計数（`total_token_count`）
 
-Przykład, który używa przesłanego obrazu z interfejsu File API:
+File API からアップロードされた画像を使用する例:
 
 ### Python
 
@@ -400,7 +398,7 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-Przykład, który udostępnia obraz jako dane wbudowane:
+画像をインライン データとして提供する例:
 
 ### Python
 
@@ -497,20 +495,20 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-#### Pliki wideo lub audio
+#### 動画ファイルまたは音声ファイル
 
-Audio i wideo są konwertowane na tokeny według tych stałych stawek:
+音声と動画は、次の固定レートでトークンに変換されます。
 
-- Wideo: 263 tokeny na sekundę
-- Audio: 32 tokeny na sekundę
+- 動画: 1 秒あたり 263 トークン
+- 音声: 1 秒あたり 32 トークン
 
-Jeśli wywołasz funkcję `count_tokens` z danymi wejściowymi zawierającymi tekst i wideo/audio, zwróci ona łączną liczbę tokenów tekstu i pliku wideo/audio *tylko w danych wejściowych* (`total_tokens`). Możesz wywołać tę funkcję przed wywołaniem funkcji `generate_content`, aby sprawdzić rozmiar żądań. Opcjonalnie możesz też wywołać funkcję `count_tokens` oddzielnie dla tekstu i pliku.
+テキストと動画/音声の入力で `count_tokens` を呼び出すと、入力のみのテキストと動画/音声ファイルのトークン数の合計（`total_tokens`）が返されます。 この呼び出しは、`generate_content` を呼び出す前に行い、リクエストのサイズを確認できます。必要に応じて、テキストとファイルを別々に `count_tokens` で呼び出すこともできます。
 
-Inną opcją jest wywołanie funkcji `generate_content`, a następnie użycie atrybutu `usage_metadata` w obiekcie `response`, aby uzyskać te informacje:
+別の方法として、`generate_content` を呼び出し、`response` オブジェクトの `usage_metadata` 属性を使用して、次の情報を取得することもできます。
 
-- oddzielne liczby tokenów w danych wejściowych (`prompt_token_count`), treści w pamięci podręcznej (`cached_content_token_count`) i danych wyjściowych (`candidates_token_count`);
-- liczba tokenów w procesie myślenia (`thoughts_token_count`);
-- łączna liczba tokenów *zarówno w danych wejściowych, jak i wyjściowych* (`total_token_count`).
+- 入力（`prompt_token_count`）、キャッシュされたコンテンツ（`cached_content_token_count`）、出力（`candidates_token_count`）のトークン数
+- 思考プロセスのトークン数（`thoughts_token_count`）
+- 入力と出力の両方のトークンの合計数（`total_token_count`）。
 
 ### Python
 
@@ -635,9 +633,9 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-## Okna kontekstu
+## コンテキスト ウィンドウ
 
-Modele dostępne za pomocą interfejsu Gemini API mają okna kontekstu, które są mierzone w tokenach. Okno kontekstu określa, ile danych wejściowych możesz podać i ile danych wyjściowych może wygenerować model. Rozmiar okna kontekstu możesz określić, wywołując punkt końcowy [`models.get` lub sprawdzając [dokumentację modeli](https://ai.google.dev/gemini-api/docs/models?hl=pl).](https://ai.google.dev/api/rest/v1/models/get?hl=pl)
+Gemini API で使用できるモデルには、トークン単位で測定されるコンテキスト ウィンドウがあります。コンテキスト ウィンドウは、提供できる入力の量と、モデルが生成できる出力の量を定義します。コンテキスト ウィンドウのサイズは、[`models.get` エンドポイント](https://ai.google.dev/api/rest/v1/models/get?hl=ja)を呼び出すか、[モデルのドキュメント](https://ai.google.dev/gemini-api/docs/models?hl=ja)で確認できます。
 
 ### Python
 
@@ -682,12 +680,12 @@ fmt.Println("input token limit:", modelInfo.InputTokenLimit)
 fmt.Println("output token limit:", modelInfo.OutputTokenLimit)
 ```
 
-Prześlij opinię
+フィードバックを送信
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Ostatnia aktualizacja: 2026-04-29 UTC.
+最終更新日 2026-04-29 UTC。
 
-Chcesz przekazać coś jeszcze?
+ご意見をお聞かせください
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]

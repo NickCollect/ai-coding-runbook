@@ -1,42 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=es-419
-fetched_at: 2026-05-05T20:06:57.659612+00:00
-title: "Comparaci\u00f3n entre la API de Gemini Developer y Agent Platform de Gemini Enterprise \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=vi
+fetched_at: 2026-05-05T20:50:16.427748+00:00
+title: "Gemini Developer API so v\u1edbi N\u1ec1n t\u1ea3ng t\u00e1c nh\u00e2n Gemini Enterprise \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Enviar comentarios
+Gửi ý kiến phản hồi
 
-# Comparación entre la API de Gemini Developer y Agent Platform de Gemini Enterprise
+# Gemini Developer API so với Nền tảng tác nhân Gemini Enterprise
 
-Cuando desarrollas soluciones de IA generativa con Gemini, Google ofrece dos productos de API:
-la [API de Gemini Developer](https://ai.google.dev/gemini-api/docs?hl=es-419) y la [API de Agent Platform de Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform/overview?hl=es-419).
+Khi phát triển các giải pháp AI tạo sinh bằng Gemini, Google cung cấp 2 sản phẩm API: [Gemini Developer API](https://ai.google.dev/gemini-api/docs?hl=vi) và [Gemini Enterprise Agent Platform API](https://cloud.google.com/gemini-enterprise-agent-platform/overview?hl=vi).
 
-La API de Gemini Developer proporciona la ruta más rápida para compilar, producir y escalar aplicaciones potenciadas por Gemini. La mayoría de los desarrolladores deberían usar la API de Gemini Developer, a menos que necesiten controles empresariales específicos.
+Gemini Developer API cung cấp cách nhanh nhất để tạo, phát hành công khai và mở rộng quy mô các ứng dụng dựa trên Gemini. Hầu hết nhà phát triển nên sử dụng Gemini Developer API, trừ phi cần có các chế độ kiểm soát cụ thể cho doanh nghiệp.
 
-Agent Platform de Gemini Enterprise ofrece un ecosistema integral de funciones y servicios listos para la empresa para compilar e implementar aplicaciones de IA generativa respaldadas por Google Cloud Platform.
+Nền tảng tác nhân Gemini Enterprise cung cấp một hệ sinh thái toàn diện gồm các tính năng và dịch vụ sẵn sàng cho doanh nghiệp để xây dựng và triển khai các ứng dụng AI tạo sinh được hỗ trợ bởi Google Cloud Platform.
 
-Recientemente, simplificamos la migración entre estos servicios. Ahora se puede acceder a la API de Gemini Developer y a la API de Agent Platform de Gemini Enterprise a través del [SDK de IA generativa de Google unificado](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419).
+Gần đây, chúng tôi đã đơn giản hoá quy trình di chuyển giữa các dịch vụ này. Giờ đây, bạn có thể truy cập cả Gemini Developer API và Gemini Enterprise Agent Platform API thông qua [Google Gen AI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=vi) hợp nhất.
 
-## Comparación de código
+## So sánh mã
 
-En esta página, se incluyen comparaciones de código en paralelo entre las guías de inicio rápido de la API de Gemini Developer y Agent Platform de Gemini Enterprise para la generación de texto.
+Trang này có các đoạn mã so sánh song song giữa Gemini Developer API và hướng dẫn nhanh về Nền tảng tác nhân Gemini Enterprise để tạo văn bản.
 
 ### Python
 
-Puedes acceder a los servicios de la API de Gemini Developer y Agent Platform de Gemini Enterprise a través de la biblioteca `google-genai`. Consulta la página de [bibliotecas](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419)
-para obtener instrucciones sobre cómo instalar `google-genai`.
+Bạn có thể truy cập cả Gemini Developer API và các dịch vụ của Nền tảng tác nhân Gemini Enterprise thông qua thư viện `google-genai`. Hãy xem trang [thư viện](https://ai.google.dev/gemini-api/docs/libraries?hl=vi) để biết hướng dẫn về cách cài đặt `google-genai`.
 
-### API de Gemini Developer
+### Gemini Developer API
 
 ```
 from google import genai
@@ -49,7 +47,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### API de Agent Platform de Gemini Enterprise
+### Gemini Enterprise Agent Platform API
 
 ```
 from google import genai
@@ -64,12 +62,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### JavaScript y TypeScript
+### JavaScript và TypeScript
 
-Puedes acceder a los servicios de la API de Gemini Developer y Agent Platform de Gemini Enterprise a través de la biblioteca `@google/genai`. Consulta la página de [bibliotecas](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419) para obtener instrucciones sobre cómo
-instalar `@google/genai`.
+Bạn có thể truy cập cả Gemini Developer API và các dịch vụ của Nền tảng tác nhân Gemini Enterprise thông qua thư viện `@google/genai`. Hãy xem trang [thư viện](https://ai.google.dev/gemini-api/docs/libraries?hl=vi) để biết hướng dẫn về cách cài đặt `@google/genai`.
 
-### API de Gemini Developer
+### Gemini Developer API
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -87,7 +84,7 @@ async function main() {
 main();
 ```
 
-### API de Agent Platform de Gemini Enterprise
+### Gemini Enterprise Agent Platform API
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -110,10 +107,9 @@ main();
 
 ### Go
 
-Puedes acceder a los servicios de la API de Gemini Developer y Agent Platform de Gemini Enterprise a través de la biblioteca `google.golang.org/genai`. Consulta la página de [bibliotecas](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419) para obtener instrucciones sobre cómo
-instalar `google.golang.org/genai`.
+Bạn có thể truy cập cả Gemini Developer API và các dịch vụ của Nền tảng tác nhân Gemini Enterprise thông qua thư viện `google.golang.org/genai`. Hãy xem trang [thư viện](https://ai.google.dev/gemini-api/docs/libraries?hl=vi) để biết hướng dẫn về cách cài đặt `google.golang.org/genai`.
 
-### API de Gemini Developer
+### Gemini Developer API
 
 ```
 import (
@@ -140,7 +136,7 @@ func main() {
 }
 ```
 
-### API de Agent Platform de Gemini Enterprise
+### Gemini Enterprise Agent Platform API
 
 ```
 import (
@@ -172,47 +168,40 @@ func main() {
 }
 ```
 
-### Otros casos de uso y plataformas
+### Các trường hợp sử dụng và nền tảng khác
 
-[[Consulta las guías específicas de casos de uso en la documentación de la API de Gemini Developer y la documentación de Agent Platform de Gemini Enterprise para obtener información sobre otras plataformas y casos de uso.](https://ai.google.dev/gemini-api/docs?hl=es-419)](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=es-419)
+Hãy tham khảo hướng dẫn dành riêng cho từng trường hợp sử dụng trên [Tài liệu về Gemini Developer API](https://ai.google.dev/gemini-api/docs?hl=vi) và [Tài liệu về Nền tảng tác nhân Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=vi) cho các nền tảng và trường hợp sử dụng khác.
 
-## Consideraciones sobre la migración
+## Những điều cần cân nhắc khi di chuyển
 
-Cuando migres, ten en cuenta lo siguiente:
+Khi bạn di chuyển:
 
-- Deberás usar cuentas de servicio de Google Cloud para autenticarte. Consulta la [documentación de Agent Platform de Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=es-419)
-  para obtener más información.
-- Puedes usar tu proyecto existente de Google Cloud
-  (el mismo que usaste para generar tu clave de API) o puedes
-  [crear un proyecto nuevo de Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=es-419).
-- Las regiones compatibles pueden diferir entre la API de Gemini Developer y la API de Agent Platform de Gemini Enterprise. Consulta la lista de
-  [regiones compatibles para la IA generativa en Google Cloud](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/learn/locations-genai?hl=es-419).
-- Todos los modelos que creaste en Google AI Studio deben volver a entrenarse en Agent Platform de Gemini Enterprise.
+- Bạn cần sử dụng tài khoản dịch vụ Google Cloud để xác thực. Hãy xem [tài liệu về Nền tảng tác nhân Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=vi) để biết thêm thông tin.
+- Bạn có thể sử dụng dự án Google Cloud hiện có (dự án mà bạn đã dùng để tạo khoá API) hoặc bạn có thể [tạo một dự án Google Cloud mới](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=vi).
+- Các khu vực được hỗ trợ có thể khác nhau giữa Gemini Developer API và Gemini Enterprise Agent Platform API. Xem danh sách [các khu vực được hỗ trợ cho AI tạo sinh trên Google Cloud](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/learn/locations-genai?hl=vi).
+- Bạn cần phải huấn luyện lại mọi mô hình mà bạn đã tạo trong Google AI Studio trong Nền tảng tác nhân Gemini Enterprise.
 
-Si ya no necesitas usar tu clave de API de Gemini para la API de Gemini Developer, sigue las prácticas recomendadas de seguridad y bórrala.
+Nếu không cần dùng khoá Gemini API cho Gemini Developer API nữa, hãy làm theo các phương pháp bảo mật hay nhất và xoá khoá đó.
 
-Para borrar una clave de API, haz lo siguiente:
+Cách xoá khoá API:
 
-1. Abre la
-   [página Credenciales de la API de Google Cloud](https://console.cloud.google.com/apis/credentials?hl=es-419).
-2. Busca la clave de API que deseas borrar y haz clic en el ícono **Acciones**.
-3. Selecciona **Borrar clave de API**.
-4. En la ventana modal **Borrar credencial**, selecciona **Borrar**.
+1. Mở trang [Thông tin đăng nhập API Google Cloud](https://console.cloud.google.com/apis/credentials?hl=vi).
+2. Tìm khoá API mà bạn muốn xoá rồi nhấp vào biểu tượng **Thao tác**.
+3. Chọn **Xoá khoá API**.
+4. Trong cửa sổ **Xoá thông tin đăng nhập**, hãy chọn **Xoá**.
 
-   Borrar una clave de API por completo demora algunos minutos. Una vez que finalice este proceso, el tráfico que use la clave de API borrada se rechazará.
+   Quá trình xoá khoá API sẽ mất vài phút để có hiệu lực. Sau khi quá trình truyền dữ liệu hoàn tất, mọi lưu lượng truy cập sử dụng khoá API đã xoá đều bị từ chối.
 
-## Próximos pasos
+## Các bước tiếp theo
 
-- Consulta la
-  [descripción general de la IA generativa en Agent Platform de Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/multimodal/overview?hl=es-419)
-  para obtener más información sobre las soluciones de IA generativa en Agent Platform de Gemini Enterprise.
+- Xem [Tổng quan về AI tạo sinh trên Nền tảng tác nhân Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/multimodal/overview?hl=vi) để tìm hiểu thêm về các giải pháp AI tạo sinh trên Nền tảng tác nhân Gemini Enterprise.
 
-Enviar comentarios
+Gửi ý kiến phản hồi
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Última actualización: 2026-04-29 (UTC)
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-¿Quieres brindar más información?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

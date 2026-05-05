@@ -1,114 +1,105 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=ko
-fetched_at: 2026-05-05T20:00:57.203500+00:00
-title: "Google AI Studio\uc5d0\uc11c \ud480 \uc2a4\ud0dd \uc571 \uac1c\ubc1c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=zh-TW
+fetched_at: 2026-05-05T20:47:47.695421+00:00
+title: "\u5728 Google AI Studio \u4e2d\u958b\u767c\u5168\u7aef\u61c9\u7528\u7a0b\u5f0f \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-의견 보내기
+提供意見
 
-# Google AI Studio에서 풀 스택 앱 개발
+# 在 Google AI Studio 中開發全端應用程式
 
-이제 Google AI Studio에서 풀 스택 개발을 지원하므로 클라이언트 측 프로토타입을 넘어선 애플리케이션을 빌드할 수 있습니다. 서버 측 런타임을 사용하면 보안 비밀을 관리하고, 외부 API에 연결하고, 실시간 멀티플레이어 환경을 빌드할 수 있습니다.
+Google AI Studio 現在支援全端開發，可讓您建構的應用程式不只是用戶端原型。透過伺服器端執行階段，您可以管理密鑰、連線至外部 API，以及建構即時多人遊戲體驗。
 
-## 서버 측 런타임
+## 伺服器端執行階段
 
-이제 Google AI Studio 애플리케이션에 서버 측 구성요소 (Node.js)를 포함할 수 있습니다.
-그러면 다음과 같은 이점을 얻을 수 있습니다.
+Google AI Studio 應用程式現在可以包含伺服器端元件 (Node.js)。這種做法有以下幾個優點：
 
-- **서버 측 로직 실행**: 클라이언트에 노출해서는 안 되는 코드를 실행합니다.
-- **npm 패키지 액세스**: [Antigravity 에이전트](https://antigravity.google/docs/agent?hl=ko)
-  는 광범위한 npm 생태계에서 패키지를 설치하고 사용할 수 있습니다.
-- **보안 비밀 처리**: API 키와 사용자 인증 정보를 안전하게 사용합니다.
+- **執行伺服器端邏輯**：執行不應向用戶端公開的程式碼。
+- **存取 npm 套件**：[Antigravity Agent](https://antigravity.google/docs/agent?hl=zh-tw) 可以安裝及使用 npm 生態系統中的大量套件。
+- **處理密鑰**：安全地使用 API 金鑰和憑證。
 
-### npm 패키지 사용
+### 使用 npm 套件
 
-`npm install`을 수동으로 실행할 필요가 없습니다. 에이전트에게 패키지가 필요한 기능을 추가해 달라고 요청하기만 하면 에이전트가 설치 및 가져오기를 처리합니다.
+您不需要手動執行 `npm install`，只要要求 Agent 新增需要套件的功能，Agent 就會處理安裝和匯入作業。
 
-**예**: > "`axios`를 사용하여 외부 API에서 데이터를 가져옵니다."
+**範例**：>「使用 `axios` 從外部 API 擷取資料。」
 
-## 보안 비밀 안전하게 관리
+## 安全地管理密鑰
 
-이제 서버 측 코드와 보안 비밀 관리를 통해 전 세계와 상호작용하는 앱을 빌드할 수 있습니다.
+有了伺服器端程式碼和密鑰管理功能，您現在可以建構與世界互動的應用程式。
 
-- **서드 파티 API**: Stripe, SendGrid 또는 커스텀
-  REST API와 같은 서비스에 연결합니다.
-- **데이터베이스**: 외부 데이터베이스 (예: Supabase, Firebase,
-  또는 MongoDB Atlas를 통해)에 연결하여 세션 외에 데이터를 유지합니다.
+- **第三方 API**：連結至 Stripe、SendGrid 或自訂 REST API 等服務。
+- **資料庫**：連線至外部資料庫 (例如透過 Supabase、Firebase 或 MongoDB Atlas)，在工作階段結束後保留資料。
 
-실제 앱을 빌드할 때는 API 키가 필요한 서드 파티 서비스(예: Twilio, Slack 또는 데이터베이스)에 연결해야 하는 경우가 많습니다. 다음 단계에 따라 키를 수동으로 추가할 수 있습니다.
+建構實際應用程式時，您通常需要連線至第三方服務 (例如 Twilio、Slack 或資料庫)，這些服務需要 API 金鑰。您可以按照下列步驟手動新增金鑰：
 
-1. **보안 비밀 추가**: Google AI Studio의 **설정** 메뉴로 이동하여 보안 비밀 섹션을 찾습니다.
-2. **키 저장**: 여기에 API 키 또는 보안 비밀 토큰을 추가합니다.
-3. **코드에서 액세스**: 에이전트는 이러한
-   보안 비밀에 안전하게 액세스하는 서버 측 코드를 작성할 수 있습니다 (일반적으로 환경 변수를 통해). 이렇게 하면 보안 비밀이 클라이언트 측 브라우저에
-   노출되지 않습니다.
+1. **新增密鑰**：前往 Google AI Studio 的「設定」選單，然後找到「密鑰」專區。
+2. **儲存金鑰**：在此新增 API 金鑰或密碼權杖。
+3. **在程式碼中存取**：代理程式可以編寫伺服器端程式碼，安全地存取這些密鑰 (通常是透過環境變數)，確保密鑰絕不會暴露給用戶端瀏覽器。
 
-필요한 경우 에이전트는 새 보안 비밀이 필요하거나 프로젝트의 env 변수에서 새 키가 감지될 때마다 키를 추가하라는 메시지를 표시하는 카드를 채팅에 표시합니다.
+如有需要，當需要新的 Secret 或在專案的環境變數中偵測到新的金鑰時，代理程式也會在對話中顯示資訊卡，提示您新增金鑰。
 
-### 데이터베이스 및 인증을 위한 Firebase 통합
+### 整合 Firebase 資料庫和驗證功能
 
-이제 Google AI Studio를 사용하면 Firebase 통합을 통해 앱에 데이터베이스 또는 인증을 쉽게 추가할 수 있습니다.
-Antigravity 에이전트는 다음 서비스를 자동으로 프로비저닝하고 설정할 수 있습니다.
+現在透過 [Firebase 整合](https://firebase.google.com/docs/ai-assistance/ai-studio-integration?hl=zh-tw)，您可以在 Google AI Studio 中輕鬆為應用程式新增資料庫或驗證功能。Antigravity Agent 可以自動佈建及設定下列服務：
 
-- **Firestore 데이터베이스**: 클라이언트 및 서버 측 개발을 위한 데이터를 저장하고 동기화하기 위한 유연하고 확장 가능한 NoSQL 클라우드 데이터베이스입니다.
-- **Firebase 인증**: 사용자가 Google 계정으로 로그인 흐름을 사용하여 애플리케이션에 안전하게 로그인할 수 있도록 합니다.
+- **Firestore 資料庫**：彈性且可擴充的 NoSQL 雲端資料庫，可儲存及同步處理用戶端與伺服器端開發的資料。
+- **Firebase 驗證**：讓使用者透過「使用 Google 帳戶登入」流程，安全地登入應用程式。
 
-에이전트에게 '앱에 데이터베이스 추가' 또는 'Google 로그인 설정'을 요청하기만 하면 에이전트가 필요한 구성 및 코드 생성을 처리합니다.
+只要要求代理程式「在我的應用程式中新增資料庫」或「設定 Google 登入」，
+代理程式就會為您處理必要的設定和程式碼產生作業。
 
-Firebase를 사용하면 무료로 시작할 수 있으며, 할당량을 늘리거나 유료 기능을 사용할 준비가 되면 유료 계정으로 확장할 수 있습니다.
+Firebase 提供免費方案，您也可以視需求升級至付費帳戶，享有更多配額或使用付費功能。
 
-### OAuth 설정
+### 設定 OAuth
 
-보안 비밀 관리의 주요 사용 사례 중 하나는 OAuth를 설정하여 다른 웹사이트 또는 앱에 연결하는 것입니다. 프롬프트에 OAuth 인증이 필요한 서드 파티 앱에 연결하는 방법에 관한 안내가 포함되어 있으면 에이전트가 해당 애플리케이션에 OAuth를 설정하는 방법을 안내합니다. 이 안내에는 OAuth 애플리케이션을 구성하는 데 필요한 콜백 URL이 포함됩니다.
-콜백 URL은 설정 패널의 **통합** 에서도 찾을 수 있습니다.
+密鑰管理的主要用途之一，是設定 OAuth 來連線至其他網站或應用程式。如果提示包含連線至需要 OAuth 驗證的第三方應用程式的操作說明，智慧助理會提供該應用程式的 OAuth 設定說明。這些操作說明會提供設定 OAuth 應用程式所需的必要回呼網址。您也可以在「設定」面板的「整合」下方找到回呼網址。
 
-## 멀티플레이어 환경 빌드
+## 打造多人遊戲體驗
 
-풀 스택 런타임은 실시간 공동작업 기능을 지원합니다.
+全堆疊執行階段可啟用即時協作功能。
 
-- **실시간 상태**: 에이전트에게 "실시간
-  채팅", "공동 화이트보드" 또는 "멀티플레이어 게임"과 같은 기능을 빌드해 달라고 요청할 수 있습니다.
-- **동기화된 세션**: 서버가 상태를 관리하므로 여러 사용자가
-  동일한 애플리케이션 인스턴스와 실시간으로 상호작용할 수 있습니다.
+- **即時狀態**：你可以要求 Agent 建構「即時通訊」、「協作白板」或「多人遊戲」等功能。
+- **同步工作階段**：伺服器會管理狀態，讓多位使用者即時與同一個應用程式例項互動。
 
-**프롬프트 예시**: > "플레이어가 서로의 커서를 볼 수 있는 멀티플레이어 게임으로 만들어 줘."
+**範例提示**：「將這個遊戲設為多人遊戲，讓玩家可以看到彼此的游標。」
 
-### 멀티플레이어 앱 테스트를 위한 팁
+### 測試多人遊戲應用程式的訣竅
 
-앱을 배포하기 전에 두 가지 방법으로 멀티플레이어 모드를 테스트할 수 있습니다.
+部署應用程式前，您可以透過兩種方式測試多人遊戲模式。
 
-1. 여러 탭에서 Google AI Studio 빌드 모드로 앱을 엽니다. 빌드 모드에서 개발할 때 앱은 개발 컨테이너에 있습니다. 여러 탭에서 앱을 열면 앱을 사용하는 여러 플레이어를 시뮬레이션할 수 있습니다.
-2. 오른쪽 상단의 **공유** 메뉴를 사용하여 다른 사용자와 앱을 공유합니다. 그런 다음 **공유** 메뉴의 **통합** 탭에서 **공유 URL** 을 사용하여 앱을 공유한 플레이어와 함께 앱을 사용합니다.
+1. 在多個分頁中，以 Google AI Studio 建構模式開啟應用程式。在「建構」模式下開發時，應用程式會位於開發容器中。在多個分頁中開啟應用程式，即可模擬多位玩家使用應用程式。
+2. 使用右上方的「分享」選單與他人共用應用程式。
+   然後使用「分享」選單「整合」分頁中的「共用網址」，與您共用應用程式的玩家一起使用應用程式。
 
-## 권장사항
+## 最佳做法
 
-- **보안 비밀 보안**: 민감한 키에는 항상 보안 비밀 관리자를 사용합니다.
-  파일에 하드 코딩하지 마세요.
-- **관심사 분리**: UI 로직은 클라이언트 측 프레임워크
-  (React/Angular)에, 비즈니스 로직/데이터 처리는 서버 측에 유지합니다.
-- **오류 처리**: 서버 측 코드가 외부 API 호출의 오류를 강력하게 처리하여 앱이 비정상 종료되지 않도록 합니다.
+- **密鑰安全性**：請務必使用 Secret Manager 管理機密金鑰。
+  請勿在檔案中以硬式編碼方式加入這些金鑰。
+- **關注點分離**：將 UI 邏輯保留在用戶端框架 (React/Angular)，並將商業邏輯/資料處理保留在伺服器端。
+- **錯誤處理**：確保伺服器端程式碼能妥善處理外部 API 呼叫的錯誤，避免應用程式當機。
 
-## 다음 단계
+## 後續步驟
 
-- [Google AI Studio에서 앱 빌드](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=ko)
-- [앱 갤러리](https://aistudio.google.com/apps?source=showcase&hl=ko)
+- [在 Google AI Studio 中建構應用程式](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=zh-tw)
+- [應用程式庫](https://aistudio.google.com/apps?source=showcase&hl=zh-tw)
 
-의견 보내기
+提供意見
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-최종 업데이트: 2026-04-29(UTC)
+上次更新時間：2026-04-29 (世界標準時間)。
 
-의견을 전달하고 싶나요?
+想進一步說明嗎？
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-04-29 (世界標準時間)。"],[],[]]

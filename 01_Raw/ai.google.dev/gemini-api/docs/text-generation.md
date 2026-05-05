@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=ar
-fetched_at: 2026-05-05T20:01:50.309193+00:00
+fetched_at: 2026-05-05T20:46:59.501975+00:00
 title: "\u0625\u0646\u0634\u0627\u0621 \u0627\u0644\u0646\u0635 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

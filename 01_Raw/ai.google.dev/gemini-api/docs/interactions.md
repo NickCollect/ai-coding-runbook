@@ -1,77 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions?hl=pl
-fetched_at: 2026-05-05T20:05:34.465654+00:00
-title: "Interactions API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions?hl=ar
+fetched_at: 2026-05-05T20:49:45.543184+00:00
+title: "\u0648\u0627\u062c\u0647\u0629 \u0628\u0631\u0645\u062c\u0629 \u0627\u0644\u062a\u0637\u0628\u064a\u0642\u0627\u062a Interactions API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Prześlij opinię
+إرسال ملاحظات
 
-# Interactions API
+# واجهة برمجة التطبيقات Interactions API
 
-Interfejs Interactions API ([beta](https://ai.google.dev/gemini-api/docs/api-versions?hl=pl)) to ujednolicony interfejs do korzystania z modeli i agentów Gemini. Jest to ulepszona alternatywa dla interfejsu [`generateContent`](https://ai.google.dev/api/generate-content?hl=pl#method:-models.generatecontent)API, która upraszcza zarządzanie stanem, koordynację narzędzi i długotrwałe zadania. Szczegółowy widok schematu interfejsu API znajdziesz w [dokumentacji API](https://ai.google.dev/api/interactions-api?hl=pl). W okresie testów beta funkcje i schematy mogą ulec [istotnym zmianom](#breaking-changes).
-Aby szybko rozpocząć, wypróbuj [notatnik z krótkim wprowadzeniem do interfejsu Interactions API](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_interactions_api.ipynb?hl=pl).
+‫Interactions API ([إصدار تجريبي](https://ai.google.dev/gemini-api/docs/api-versions?hl=ar)) هي واجهة موحّدة للتفاعل مع نماذج Gemini وبرامج Gemini الآلية. وهي بديل محسّن لواجهة برمجة التطبيقات [`generateContent`](https://ai.google.dev/api/generate-content?hl=ar#method:-models.generatecontent)، وتسهّل إدارة الحالة وتنظيم الأدوات والمهام الطويلة الأمد. للحصول على عرض شامل لمخطط واجهة برمجة التطبيقات، يُرجى الاطّلاع على [مرجع واجهة برمجة التطبيقات](https://ai.google.dev/api/interactions-api?hl=ar). أثناء الإصدار التجريبي، قد تحدث [تغييرات غير متوافقة](#breaking-changes) في الميزات والمخططات.
+للبدء بسرعة، جرِّب [دفتر ملاحظات التشغيل السريع لواجهة Interactions API](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_interactions_api.ipynb?hl=ar).
 
-Ogólne zastosowanie
-Wywoływanie funkcji
-Agent Deep Research
+الاستخدام العام
+استدعاء الدوال البرمجية
+وكيل Deep Research
 
-Poniższy przykład pokazuje, jak wywołać interfejs Interactions API za pomocą prompta tekstowego.
-
-### Python
-
-```
-from google import genai
-
-client = genai.Client()
-
-interaction =  client.interactions.create(
-    model="gemini-3-flash-preview",
-    input="Tell me a short joke about programming."
-)
-
-print(interaction.outputs[-1].text)
-```
-
-### JavaScript
-
-```
-import { GoogleGenAI } from '@google/genai';
-
-const client = new GoogleGenAI({});
-
-const interaction =  await client.interactions.create({
-    model: 'gemini-3-flash-preview',
-    input: 'Tell me a short joke about programming.',
-});
-
-console.log(interaction.outputs[interaction.outputs.length - 1].text);
-```
-
-### REST
-
-```
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
--H "Content-Type: application/json" \
--H "x-goog-api-key: $GEMINI_API_KEY" \
--d '{
-    "model": "gemini-3-flash-preview",
-    "input": "Tell me a short joke about programming."
-}'
-```
-
-## Podstawowe interakcje
-
-Interfejs Interactions API jest dostępny w ramach naszych [dotychczasowych pakietów SDK](#sdk). Najprostszym sposobem interakcji z modelem jest podanie prompta tekstowego. `input` może być ciągiem znaków, listą zawierającą obiekty treści lub listą tur z rolami i obiektami treści.
+يوضّح المثال التالي كيفية استدعاء Interactions API باستخدام طلب نصي.
 
 ### Python
 
@@ -115,16 +69,63 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Rozmowa
+## التفاعلات الأساسية
 
-Rozmowy wieloetapowe możesz tworzyć na 2 sposoby:
+تتوفّر Interactions API من خلال [حِزم تطوير البرامج (SDK) الحالية](#sdk). أبسط طريقة للتفاعل مع النموذج هي تقديم طلب نصي. يمكن أن يكون `input` سلسلة أو قائمة تتضمّن عناصر محتوى أو قائمة أدوار مع عناصر محتوى.
 
-- z zachowaniem stanu przez odniesienie do poprzedniej interakcji,
-- bezstanowo, przez podanie całej historii rozmowy;
+### Python
 
-### Rozmowa z zachowaniem stanu
+```
+from google import genai
 
-Aby kontynuować rozmowę, przekaż parametr `id` z poprzedniej interakcji do parametru `previous_interaction_id`. Interfejs API zapamiętuje historię rozmowy, więc musisz tylko wysłać nowe dane wejściowe. Szczegółowe informacje o tym, które pola są dziedziczone, a które należy określić ponownie, znajdziesz w sekcji [Zarządzanie stanem po stronie serwera](#server-side-state).
+client = genai.Client()
+
+interaction =  client.interactions.create(
+    model="gemini-3-flash-preview",
+    input="Tell me a short joke about programming."
+)
+
+print(interaction.outputs[-1].text)
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from '@google/genai';
+
+const client = new GoogleGenAI({});
+
+const interaction =  await client.interactions.create({
+    model: 'gemini-3-flash-preview',
+    input: 'Tell me a short joke about programming.',
+});
+
+console.log(interaction.outputs[interaction.outputs.length - 1].text);
+```
+
+### REST
+
+```
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+-H "Content-Type: application/json" \
+-H "x-goog-api-key: $GEMINI_API_KEY" \
+-d '{
+    "model": "gemini-3-flash-preview",
+    "input": "Tell me a short joke about programming."
+}'
+```
+
+## المحادثة
+
+يمكنك إنشاء محادثات متعدّدة الجولات بطريقتَين:
+
+- حفظ الحالة من خلال الرجوع إلى تفاعل سابق
+- بدون الاحتفاظ بأي بيانات من خلال تقديم سجلّ المحادثات بالكامل
+
+### محادثة ذات حالة
+
+لمواصلة محادثة، مرِّر `id` من التفاعل السابق إلى المَعلمة `previous_interaction_id`. يتذكّر واجهة برمجة التطبيقات سجلّ المحادثات،
+لذلك ما عليك سوى إرسال الإدخال الجديد. للحصول على تفاصيل حول الحقول التي يتم توريثها والحقول التي يجب إعادة تحديدها، اطّلِع على [إدارة الحالة من جهة الخادم](#server-side-state).
 
 ### Python
 
@@ -195,9 +196,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # }'
 ```
 
-#### Pobieranie poprzednich interakcji stanowych
+#### استرداد التفاعلات السابقة التي تتضمّن معلومات الحالة
 
-Używanie interakcji `id` do pobierania poprzednich tur rozmowy.
+استخدام التفاعل `id` لاسترداد أدوار المحادثة السابقة
 
 ### Python
 
@@ -221,9 +222,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/<YOUR
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-#### Uwzględnij pierwotne dane wejściowe
+#### تضمين الإدخال الأصلي
 
-Domyślnie funkcja `interactions.get()` zwraca tylko wyniki modelu. Aby uwzględnić w odpowiedzi oryginalne znormalizowane dane wejściowe, ustaw wartość `include_input` na `true`.
+بشكلٍ تلقائي، تعرض الدالة `interactions.get()` نواتج النموذج فقط. لتضمين الإدخال الأصلي الذي تمّت تسويته في الردّ، اضبط `include_input` على `true`.
 
 ### Python
 
@@ -256,9 +257,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/<YOUR
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Rozmowa bezstanowa
+### محادثة بدون حالة
 
-Historią rozmów możesz zarządzać ręcznie po stronie klienta.
+يمكنك إدارة سجلّ المحادثات يدويًا من جهة العميل.
 
 ### Python
 
@@ -355,15 +356,15 @@ console.log(`Model: ${interaction2.outputs[interaction2.outputs.length - 1].text
 }'
 ```
 
-## Możliwości multimodalne
+## الإمكانات المتعددة الوسائط
 
-Interfejsu Interactions API możesz używać w przypadku zastosowań multimodalnych, takich jak rozpoznawanie obrazów czy generowanie filmów.
+يمكنك استخدام Interactions API لحالات الاستخدام المتعدّدة الوسائط، مثل فهم الصور أو إنشاء الفيديوهات.
 
-### Rozpoznawanie multimodalne
+### فهم المحتوى المتعدد الوسائط
 
-Dane multimodalne możesz podać w formie zakodowanej w formacie base64 w treści, używając interfejsu Files API w przypadku większych plików lub przekazując publicznie dostępny link w polu uri. W przykładach kodu poniżej pokazujemy metodę publicznego adresu URL.
+يمكنك تقديم مدخلات متعددة الوسائط كبيانات مضمّنة مرمّزة بـ base64، أو باستخدام Files API للملفات الأكبر حجمًا، أو عن طريق تمرير رابط متاح للجميع في الحقل uri. توضّح عيّنات الرموز البرمجية التالية طريقة استخدام عنوان URL العام.
 
-#### Rozpoznawanie obrazów
+#### فهم الصور
 
 ### Python
 
@@ -428,7 +429,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-#### Rozpoznawanie dźwięku
+#### فهم الصوت
 
 ### Python
 
@@ -491,7 +492,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-#### Rozpoznawanie filmów
+#### فهم الفيديوهات
 
 ### Python
 
@@ -557,7 +558,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-#### Rozumienie dokumentów (PDF)
+#### فهم المستندات (ملف PDF)
 
 ### Python
 
@@ -619,11 +620,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Generowanie multimodalne
+### إنشاء محتوى متعدد الوسائط
 
-Za pomocą interfejsu API interakcji możesz generować dane wyjściowe w różnych formatach.
+يمكنك استخدام Interactions API لإنشاء مخرجات متعددة الوسائط.
 
-#### Generowanie obrazów
+#### إنشاء الصور
 
 ### Python
 
@@ -683,14 +684,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-##### Konfigurowanie danych wyjściowych obrazu
+##### ضبط إعدادات إخراج الصور
 
-Wygenerowane obrazy możesz dostosowywać za pomocą `image_config` w `generation_config`, aby kontrolować proporcje i rozdzielczość.
+يمكنك تخصيص الصور التي تم إنشاؤها باستخدام `image_config` ضمن `generation_config`
+للتحكّم في نسبة العرض إلى الارتفاع ودرجة الدقة.
 
-| Parametr | Opcje | Opis |
+| المَعلمة | الخيارات | الوصف |
 | --- | --- | --- |
-| `aspect_ratio` | `1:1`, `2:3`, `3:2`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9` | Określa stosunek szerokości do wysokości obrazu wyjściowego. |
-| `image_size` | `1k`, `2k`, `4k` | Ustawia rozdzielczość obrazu wyjściowego. |
+| `aspect_ratio` | ‫`1:1`، `2:3`، `3:2`، `3:4`، `4:3`، `4:5`، `5:4`، `9:16`، `16:9`، `21:9` | تتحكّم هذه السمة في نسبة عرض الصورة الناتجة إلى ارتفاعها. |
+| `image_size` | ‫`1k`، `2k`، `4k` | تضبط هذه السمة درجة دقة الصورة الناتجة. |
 
 ### Python
 
@@ -765,10 +767,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-#### Generowanie mowy
+#### إنشاء الكلام
 
-Generowanie naturalnie brzmiącej mowy na podstawie tekstu za pomocą modelu zamiany tekstu na mowę (TTS).
-Skonfiguruj ustawienia głosu, języka i głośnika za pomocą parametru `speech_config`.
+إنشاء كلام يبدو طبيعيًا من نص باستخدام نموذج "تحويل النص إلى كلام"
+اضبط إعدادات الصوت واللغة والمكبّر باستخدام المَعلمة `speech_config`.
 
 ### Python
 
@@ -890,13 +892,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 ffmpeg -f s16le -ar 24000 -ac 1 -i generated_audio.pcm generated_audio.wav
 ```
 
-TTS nie obsługuje strumieniowego przesyłania danych.
+لا تتيح ميزة "تحويل النص إلى كلام" البث.
 
-##### Generowanie mowy wielu rozmówców
+##### إنشاء محتوى صوتي لعدة متحدثين
 
-Generuj mowę z udziałem wielu osób, podając ich imiona w prompcie i dopasowując je w `speech_config`.
+إنشاء محتوى صوتي يتضمّن عدة متحدثين من خلال تحديد أسماء المتحدثين في الطلب
+ومطابقتها في `speech_config`
 
-Prompt powinien zawierać imiona mówców:
+يجب أن يتضمّن الطلب أسماء المتحدثين:
 
 ```
 TTS the following conversation between Alice and Bob:
@@ -905,7 +908,7 @@ Bob: I'm doing great, thanks for asking! How about you?
 Alice: Fantastic! I just learned about the Gemini API.
 ```
 
-Następnie skonfiguruj `speech_config` z pasującymi głośnikami:
+بعد ذلك، اضبط `speech_config` باستخدام مكبّرات صوت متوافقة:
 
 ```
 "generation_config": {
@@ -916,11 +919,11 @@ Następnie skonfiguruj `speech_config` z pasującymi głośnikami:
 }
 ```
 
-#### Generowanie muzyki
+#### إنشاء الموسيقى
 
-Generuj wysokiej jakości muzykę na podstawie promptów tekstowych za pomocą modeli Lyria 3. Interfejs Interactions API obsługuje zarówno krótkie klipy, jak i pełne utwory z wokalem, tekstem i aranżacją instrumentalną.
+إنشاء موسيقى عالية الجودة من الطلبات النصية باستخدام نماذج Lyria 3 تتيح واجهة Interactions API استخدام مقاطع قصيرة وأغانٍ كاملة تتضمّن مقاطع صوتية وكلمات وترتيبات موسيقية.
 
-Pełny przewodnik po generowaniu muzyki, w tym niestandardowych tekstów, kontroli czasu trwania i przekształcania obrazów w muzykę, znajdziesz w artykule [Generowanie muzyki za pomocą Lyrii 3](https://ai.google.dev/gemini-api/docs/music-generation?hl=pl).
+للحصول على دليل كامل حول إنشاء الموسيقى، بما في ذلك الكلمات المخصّصة والتحكّم في التوقيت وتحويل الصور إلى موسيقى، يُرجى الاطّلاع على [إنشاء الموسيقى باستخدام Lyria 3](https://ai.google.dev/gemini-api/docs/music-generation?hl=ar).
 
 ### Python
 
@@ -981,7 +984,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-W przypadku pełnych utworów (do ok. 4 minut) użyj modelu `lyria-3-pro-preview`:
+لإنشاء أغانٍ كاملة (تصل مدتها إلى 4 دقائق تقريبًا)، استخدِم نموذج `lyria-3-pro-preview`:
 
 ### Python
 
@@ -1017,13 +1020,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Możliwości agentowe
+## إمكانات بالذكاء الاصطناعي الوكيل
 
-Interfejs Interactions API jest przeznaczony do tworzenia agentów i interakcji z nimi. Obsługuje wywoływanie funkcji, wbudowane narzędzia, dane wyjściowe o strukturze oraz protokół Model Context Protocol (MCP).
+تم تصميم Interactions API لإنشاء الوكلاء والتفاعل معهم، وهي تتضمّن ميزات استدعاء الدوال والأدوات المضمّنة والمخرجات المنظَّمة وبروتوكول سياق النموذج (MCP).
 
-### Agenty
+### الوكلاء
 
-Do wykonywania złożonych zadań możesz używać specjalistycznych agentów, takich jak `deep-research-preview-04-2026`. Więcej informacji o agencie Deep Research w Gemini znajdziesz w przewodniku [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl).
+يمكنك استخدام وكلاء متخصصين، مثل `deep-research-preview-04-2026`، لتنفيذ المهام المعقّدة. لمزيد من المعلومات حول "وكيل Deep Research" في Gemini، يُرجى الاطّلاع على دليل [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar).
 
 ### Python
 
@@ -1108,11 +1111,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Narzędzia i wywoływanie funkcji
+### الأدوات واستدعاء الدوال
 
-W tej sekcji wyjaśniamy, jak używać wywoływania funkcji do definiowania narzędzi niestandardowych oraz jak korzystać z wbudowanych narzędzi Google w ramach interfejsu Interactions API.
+يوضّح هذا القسم كيفية استخدام ميزة "استدعاء الدوال" لتحديد أدوات مخصّصة وكيفية استخدام أدوات Google المضمّنة ضمن Interactions API.
 
-#### Wywoływanie funkcji
+#### استدعاء الدالة
 
 ### Python
 
@@ -1258,9 +1261,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # }'
 ```
 
-##### Wywoływanie funkcji ze stanem po stronie klienta
+##### استدعاء الدالة مع الحالة من جهة العميل
 
-Jeśli nie chcesz używać stanu po stronie serwera, możesz zarządzać nim w całości po stronie klienta.
+إذا كنت لا تريد استخدام الحالة من جهة الخادم، يمكنك إدارة كل ذلك من جهة العميل.
 
 ### Python
 
@@ -1371,9 +1374,9 @@ for (const output of interaction.outputs) {
 }
 ```
 
-##### Wyniki funkcji multimodalnych
+##### نتائج الدالة المتعددة الوسائط
 
-Pole `result` w obiekcie `function_result` akceptuje zwykły ciąg znaków lub tablicę obiektów `TextContent` i `ImageContent`. Dzięki temu możesz zwracać obrazy, takie jak zrzuty ekranu lub wykresy, wraz z tekstem z wywołań funkcji, aby model mógł analizować dane wyjściowe wizualne.
+يقبل الحقل `result` في `function_result` إما سلسلة عادية أو مصفوفة من عناصر `TextContent` و`ImageContent`. يتيح لك ذلك عرض صور، مثل لقطات الشاشة أو الرسوم البيانية، إلى جانب النص من استدعاءات الدوال، ما يتيح للنموذج التفكير في الناتج المرئي.
 
 ### Python
 
@@ -1538,11 +1541,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # }'
 ```
 
-#### Wbudowane narzędzia
+#### الأدوات المضمّنة
 
-Gemini ma wbudowane narzędzia, takie jak [powiązanie ze źródłem informacji przy użyciu wyszukiwarki Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pl), [powiązanie ze źródłem informacji przy użyciu wyszukiwarki obrazów Google](#image-search-grounding), [powiązanie ze źródłem informacji przy użyciu Map Google](#grounding-with-google-maps), [wykonywanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl), [kontekst adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl) i [korzystanie z komputera](https://ai.google.dev/gemini-api/docs/computer-use?hl=pl).
+يتضمّن Gemini أدوات مدمجة، مثل
+[تحديد المصدر من خلال "بحث Google"](https://ai.google.dev/gemini-api/docs/google-search?hl=ar) و[تحديد المصدر باستخدام "بحث صور Google"](#image-search-grounding) و[استخدام "خرائط Google" كمصدر](#grounding-with-google-maps) و[تنفيذ الرمز البرمجي](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar) و[سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar) و[استخدام الكمبيوتر](https://ai.google.dev/gemini-api/docs/computer-use?hl=ar).
 
-##### Powiązanie ze źródłem informacji przy użyciu wyszukiwarki Google
+##### تحديد المصدر من خلال "بحث Google"
 
 ### Python
 
@@ -1592,13 +1596,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-##### Powiązanie ze źródłem informacji przy użyciu wyszukiwarki grafiki Google (tylko w przypadku Gemini 3.1 Flash Image)
+##### تحديد المصدر باستخدام "بحث صور Google" (لصور Flash 3.1 فقط)
 
-Uziemienie za pomocą wyszukiwarki grafiki Google umożliwia modelom wykorzystywanie obrazów z internetu pobranych za pomocą wyszukiwarki grafiki Google jako kontekstu wizualnego do generowania obrazów. Wyszukiwanie obrazów to nowy typ wyszukiwania w ramach istniejącego narzędzia Powiązanie ze źródłem informacji przy użyciu wyszukiwarki Google, który działa równolegle ze standardowym [wyszukiwaniem w internecie](#grounding-with-google-search).
+تتيح ميزة تحديد المصدر من خلال صور بحث Google للنماذج استخدام صور الويب التي يتم استرجاعها من خلال صور بحث Google كسياق مرئي لإنشاء الصور. "البحث بالصور" هو نوع بحث جديد ضمن أداة "تحديد المصدر من خلال "بحث Search"" الحالية، ويعمل إلى جانب [بحث الويب](#grounding-with-google-search) العادي.
 
-###### Włączanie wyszukiwania obrazów
+###### تفعيل ميزة "البحث بالصور"
 
-Aby poprosić o wyniki w postaci obrazów, dodaj `"image_search"` do tablicy `search_types` w przypadku narzędzia `google_search`.
+يمكنك طلب نتائج صور من خلال إضافة `"image_search"` إلى مصفوفة `search_types` الخاصة بالأداة `google_search`.
 
 ### Python
 
@@ -1642,26 +1646,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-###### Wymagania dotyczące obowiązkowego wyświetlania
+###### متطلبات العرض الإلزامية
 
-Aby zachować zgodność z [Warunkami korzystania z usługi wyszukiwarka Google](https://ai.google.dev/gemini-api/terms?hl=pl#grounding-with-google-search), interfejs użytkownika musi implementować 2 różne poziomy atrybucji:
+للامتثال [لبنود خدمة &quot;بحث Google&quot;](https://ai.google.dev/gemini-api/terms?hl=ar#grounding-with-google-search)، يجب أن تتضمّن واجهة المستخدم مستويَين مختلفَين من تحديد المصدر:
 
-1. **Atrybucja w wyszukiwarce Google**
+1. **تحديد مصدر الإحالة الناجحة في "بحث Google"**
 
-   Musisz wyświetlać sugestie wyszukiwania „Sprawdź w Google” podane w bloku `google_search_result`.
+   يجب عرض اقتراحات البحث الخاصة بميزة "التحقّق على Google" المقدَّمة في الحزمة `google_search_result`.
 
-   - **Pole:** `rendered_content` (HTML/CSS)
-   - **Działanie:** wyświetl ten element w pobliżu odpowiedzi modelu w niezmienionej formie.
-2. **Atrybucja wydawcy**
+   - **الحقل:** `rendered_content` (HTML/CSS)
+   - **الإجراء:** اعرض هذه الشريحة كما هي بالقرب من ردّ النموذج.
+2. **إحالة الناشر**
 
-   W przypadku każdego wyświetlanego obrazu musisz podać link do „strony zawierającej” (strony docelowej).
+   يجب تقديم رابط يؤدي إلى "الصفحة الحاوية" (الصفحة المقصودة) لكل صورة معروضة.
 
-   - **Pole:** `url` (znajduje się w tablicy `result`)
-   - **Wymaganie:** musisz zapewnić bezpośrednią ścieżkę do strony źródłowej zawierającej obraz, która wymaga tylko jednego kliknięcia. Korzystanie z pośrednich przeglądarek obrazów lub ścieżek wymagających wielu kliknięć jest niedozwolone.
+   - **الحقل:** `url` (تم العثور عليه ضمن الصفيف `result`)
+   - **الشرط:** يجب توفير مسار مباشر بنقرة واحدة من الصورة إلى صفحة الويب المصدر التي تحتوي عليها. لا يُسمح باستخدام عارضات الصور الوسيطة أو مسارات النقر المتعدد.
 
-###### Obsługa odpowiedzi opartej na faktach
+###### التعامل مع الردود المستندة إلى معلومات
 
-Poniższy fragment kodu pokazuje, jak obsługiwać przeplatane bloki odpowiedzi w przypadku nieprzetworzonych danych obrazu i obowiązkowego atrybutu.
+يوضّح المقتطف التالي كيفية التعامل مع حِزم الردود المتداخلة لكلّ من بيانات الصور الأولية وبيانات تحديد المصدر الإلزامي.
 
 ### Python
 
@@ -1710,9 +1714,9 @@ for (const output of interaction.outputs) {
 }
 ```
 
-###### Oczekiwany schemat wyjściowy
+###### مخطط الناتج المتوقّع
 
-**Blok obrazu** (typ: `"image"`) zawiera nieprzetworzone dane wizualne wygenerowane lub pobrane przez model.
+يحتوي **مربع الصورة** (النوع: `"image"`) على البيانات المرئية الأولية التي أنشأها النموذج أو استردّها.
 
 ```
 {
@@ -1722,7 +1726,7 @@ for (const output of interaction.outputs) {
 }
 ```
 
-**Blok wyników** (typ: `"google_search_result"`) zawiera obowiązkowe metadane atrybucji powiązane z wyszukiwaniem.
+تحتوي **كتلة النتائج** (النوع: `"google_search_result"`) على البيانات الوصفية الإلزامية لتحديد المصدر المرتبطة بعملية البحث.
 
 ```
 {
@@ -1739,9 +1743,9 @@ for (const output of interaction.outputs) {
 }
 ```
 
-##### Grounding z użyciem Map Google
+##### استخدام "خرائط Google" كمصدر
 
-Powiązanie ze źródłem informacji przy użyciu Map Google umożliwia modelom korzystanie z danych Map Google w celu uzyskiwania kontekstu wizualnego, pinezek na mapie i odkrywania informacji na podstawie lokalizacji.
+يتيح استخدام &quot;خرائط Google&quot; كمصدر للنماذج استخدام بيانات &quot;خرائط Google&quot; للحصول على سياق مرئي ودبابيس الخرائط والاستكشاف المستند إلى الموقع الجغرافي.
 
 ### Python
 
@@ -1780,21 +1784,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-###### Wymagania dotyczące korzystania z usługi
+###### متطلبات استخدام الخدمة
 
-Podczas prezentowania wyników powiązania ze źródłem informacji przy użyciu Map Google musisz przestrzegać [Warunków korzystania z usługi Mapy Google](https://ai.google.dev/gemini-api/terms?hl=pl#grounding-with-google-maps).
-Musisz poinformować użytkowników o tych wymaganiach dotyczących wyświetlania i je spełniać:
+عند عرض نتائج من ميزة "استخدام "خرائط Google" كمصدر"، يجب الالتزام [ببنود خدمة "خرائط Google"](https://ai.google.dev/gemini-api/terms?hl=ar#grounding-with-google-maps).
+يجب إبلاغ المستخدمين بما يلي واستيفاء متطلبات العرض هذه:
 
-- **Poinformuj użytkownika:** natychmiast po wygenerowaniu treści podaj powiązane źródła w Mapach Google. Źródła muszą być widoczne w ramach jednej interakcji użytkownika.
-- **Wyświetl linki:** wygeneruj podgląd linku dla każdego źródła (w tym fragmenty opinii, jeśli są dostępne).
-- **Atrybucja do „Map Google”:** postępuj zgodnie z [wskazówkami dotyczącymi atrybucji tekstowej](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pl#maps-attribution-guidelines).
-- **Wyświetl tytuł źródła.**
-- **Połącz się ze źródłem** za pomocą podanego adresu URL.
-- **Wytyczne dotyczące atrybucji:** nie modyfikuj tekstu „Mapy Google” (wielkość liter, zawijanie). Zapobiegaj tłumaczeniu w przeglądarce za pomocą `translate="no"`.
+- **إبلاغ المستخدم**: يجب أن يتبع المحتوى الذي تم إنشاؤه على الفور مصادر &quot;خرائط Google&quot; المرتبطة به. يجب أن تكون المستندات المصدر قابلة للعرض ضمن تفاعل واحد من المستخدم.
+- **روابط العرض**: يمكنك إنشاء معاينة للرابط لكل مصدر (بما في ذلك مقتطفات المراجعات إذا كانت متوفرة).
+- **تحديد المصدر على "خرائط Google"**: اتّبِع [إرشادات تحديد المصدر النصي](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ar#maps-attribution-guidelines).
+- **عرض عنوان المستند المصدر**
+- **الرابط إلى المصدر** باستخدام عنوان URL المقدَّم
+- **إرشادات تحديد المصدر**: لا تعدّل النص "خرائط Google" (الكتابة بالأحرف اللاتينية الكبيرة، والتفاف النص). منع ترجمة المتصفّح باستخدام `translate="no"`
 
-###### Obsługa odpowiedzi
+###### التعامل مع الردّ
 
-Poniższy fragment kodu pokazuje, jak przetworzyć odpowiedź, wyodrębniając tekst i cytaty w tekście (w tym fragmenty opinii), aby spełnić wymagania dotyczące wyświetlania.
+يوضّح المقتطف التالي كيفية التعامل مع الردّ من خلال استخراج النص والاقتباسات المضمّنة (بما في ذلك مقتطفات المراجعات) لاستيفاء متطلبات العرض.
 
 ### Python
 
@@ -1840,11 +1844,11 @@ for (const output of interaction.outputs) {
 }
 ```
 
-###### Oczekiwany schemat wyjściowy
+###### مخطط الناتج المتوقّع
 
-Podczas korzystania z powiązania ze źródłem informacji przy użyciu Map Google spodziewaj się następującego schematu danych wyjściowych.
+توقَّع مخطط الإخراج التالي عند استخدام Grounding with Google Maps.
 
-**Blok wyników** (typ: `"google_maps_result"`) zawiera uporządkowane dane o miejscu.
+تحتوي **كتلة النتائج** (النوع: `"google_maps_result"`) على بيانات المكان المنظَّمة.
 
 ```
 {
@@ -1871,7 +1875,7 @@ Podczas korzystania z powiązania ze źródłem informacji przy użyciu Map Goo
 }
 ```
 
-**Blok tekstu** (typ: `"text"`) zawiera wygenerowane treści z adnotacjami wbudowanymi.
+يحتوي **مربع النص** (النوع: `"text"`) على المحتوى الذي تم إنشاؤه مع التعليقات التوضيحية المضمّنة.
 
 ```
 {
@@ -1897,7 +1901,7 @@ Podczas korzystania z powiązania ze źródłem informacji przy użyciu Map Goo
 }
 ```
 
-##### Wykonanie kodu
+##### تنفيذ الرمز البرمجي
 
 ### Python
 
@@ -1942,9 +1946,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-##### Kontekst adresu URL
+##### سياق عنوان URL
 
-Ugruntowanie za pomocą kontekstu adresu URL umożliwia modelowi odczytywanie publicznych adresów URL podanych w prompcie lub na liście narzędzi.
+يتيح تحديد المصدر باستخدام سياق عنوان URL للنموذج قراءة عناوين URL العلنية المقدَّمة في الطلب أو قائمة الأدوات.
 
 ### Python
 
@@ -1987,9 +1991,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-###### Obsługa odpowiedzi
+###### التعامل مع الردّ
 
-Poniższy fragment kodu pokazuje, jak przetworzyć odpowiedź, wyodrębniając tekst i cytaty w tekście (typ `url_citation`).
+يوضّح المقتطف التالي كيفية التعامل مع الردّ من خلال استخراج النص والاقتباسات المضمّنة (النوع `url_citation`).
 
 ### Python
 
@@ -2022,11 +2026,11 @@ for (const output of interaction.outputs) {
 }
 ```
 
-###### Oczekiwany schemat wyjściowy
+###### مخطط الناتج المتوقّع
 
-Gdy używasz kontekstu adresu URL, oczekuj tego schematu danych wyjściowych.
+توقَّع مخطط الناتج التالي عند استخدام سياق عنوان URL.
 
-**Blok wywołania** (typ: `"url_context_call"`) zawiera adres URL, który model próbował odczytać.
+يحتوي **حظر المكالمة** (النوع: `"url_context_call"`) على عنوان URL الذي حاول النموذج قراءته.
 
 ```
 {
@@ -2039,7 +2043,7 @@ Gdy używasz kontekstu adresu URL, oczekuj tego schematu danych wyjściowych.
 }
 ```
 
-**Blok wyników** (typ: `"url_context_result"`) zawiera stan pobierania.
+يحتوي **قسم النتائج** (النوع: `"url_context_result"`) على حالة الاسترداد.
 
 ```
 {
@@ -2053,7 +2057,7 @@ Gdy używasz kontekstu adresu URL, oczekuj tego schematu danych wyjściowych.
 }
 ```
 
-**Blok tekstu** zawiera wygenerowany tekst i cytaty w tekście.
+يحتوي **مربع النص** على النص الذي تم إنشاؤه والاستشهادات المضمَّنة.
 
 ```
 {
@@ -2071,7 +2075,7 @@ Gdy używasz kontekstu adresu URL, oczekuj tego schematu danych wyjściowych.
 }
 ```
 
-##### Korzystanie z komputera
+##### استخدام الكمبيوتر
 
 ### Python
 
@@ -2135,9 +2139,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-###### Obsługa wyników funkcji Korzystanie z komputera
+###### معالجة نتائج الدالة Computer Use
 
-Narzędzie Computer Use to pętla po stronie klienta, więc musisz wykonać działanie (np. otworzyć przeglądarkę) i odesłać wynik do modelu. Wysyłając parametr `function_result` w przypadku działań takich jak `open_web_browser`, pamiętaj, aby przekazać odpowiedź URL na liście wyników, jak pokazano poniżej:
+بما أنّ "استخدام الكمبيوتر" هو حلقة أدوات من جهة العميل، عليك تنفيذ الإجراء (مثل فتح متصفّح) وإرسال النتيجة إلى النموذج. عند إرسال `function_result` لإجراءات مثل `open_web_browser`، احرص على تمرير استجابة عنوان URL في قائمة النتائج كما هو موضّح أدناه:
 
 ```
 {
@@ -2158,9 +2162,9 @@ Narzędzie Computer Use to pętla po stronie klienta, więc musisz wykonać dzia
 }
 ```
 
-##### Wyszukiwanie plików
+##### البحث عن ملف
 
-Ugruntowanie za pomocą wyszukiwania plików umożliwia modelowi wyszukiwanie przesłanych plików w magazynach wyszukiwania plików.
+تتيح ميزة "تحديد المصدر" من خلال "البحث في الملفات" للنموذج البحث في الملفات التي حمّلتها في "متاجر البحث في الملفات".
 
 ### Python
 
@@ -2203,9 +2207,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-###### Obsługa odpowiedzi
+###### التعامل مع الردّ
 
-Poniższy fragment kodu pokazuje, jak przetworzyć odpowiedź, wyodrębniając tekst i cytaty w tekście (typ `file_citation`).
+يوضّح المقتطف التالي كيفية التعامل مع الردّ من خلال استخراج النص والاقتباسات المضمّنة (النوع `file_citation`).
 
 ### Python
 
@@ -2240,11 +2244,11 @@ for (const output of interaction.outputs) {
 }
 ```
 
-###### Oczekiwany schemat wyjściowy
+###### مخطط الناتج المتوقّع
 
-Podczas korzystania z wyszukiwania plików oczekuj następującego schematu danych wyjściowych.
+توقَّع مخطط الإخراج التالي عند استخدام "البحث في الملفات".
 
-**Blok połączenia** (typ: `"file_search_call"`) zawiera metadane połączenia.
+يحتوي **حظر المكالمات** (النوع: `"file_search_call"`) على البيانات الوصفية للمكالمة.
 
 ```
 {
@@ -2254,7 +2258,7 @@ Podczas korzystania z wyszukiwania plików oczekuj następującego schematu dan
 }
 ```
 
-**Blok wyników** (typ: `"file_search_result"`) zawiera metadane wyniku.
+يحتوي **مربع النتائج** (النوع: `"file_search_result"`) على البيانات الوصفية للنتائج.
 
 ```
 {
@@ -2264,7 +2268,7 @@ Podczas korzystania z wyszukiwania plików oczekuj następującego schematu dan
 }
 ```
 
-**Blok tekstu** zawiera wygenerowany tekst i cytaty w tekście.
+يحتوي **مربع النص** على النص الذي تم إنشاؤه والاستشهادات المضمَّنة.
 
 ```
 {
@@ -2283,9 +2287,9 @@ Podczas korzystania z wyszukiwania plików oczekuj następującego schematu dan
 }
 ```
 
-#### Łączenie wbudowanych narzędzi i wywoływania funkcji
+#### الجمع بين الأدوات المضمّنة واستخدام الدوال
 
-Możesz używać [wbudowanych narzędzi i wywoływania funkcji](https://ai.google.dev/gemini-api/docs/tool-combination?hl=pl) w tym samym żądaniu.
+يمكنك استخدام [الأدوات المضمّنة واستدعاء الدوال](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ar) معًا في الطلب نفسه.
 
 ### Python
 
@@ -2469,18 +2473,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-##### Informacje o rozpowszechnianiu kontekstu narzędzia
+##### فهم تداول سياق الأداة
 
-Modele Gemini 3 i nowsze obsługują **przekazywanie kontekstu narzędzia**, aby zachować niezawodną „pamięć” działań po stronie serwera. Gdy zostanie uruchomione wbudowane narzędzie (np. wyszukiwarka Google), interfejs API wygeneruje konkretne części `toolCall` i `toolResponse`. Zawierają one dokładny kontekst, którego model potrzebuje, aby w następnej turze uzasadnić te wyniki.
+تتيح الإصدارات 3 من Gemini والإصدارات الأحدث **تداول سياق الأدوات** للحفاظ على "ذاكرة" موثوقة للإجراءات من جهة الخادم. عندما يتم تشغيل أداة مدمجة (مثل &quot;بحث Google&quot;)، تنشئ واجهة برمجة التطبيقات أجزاء `toolCall` و`toolResponse` محدّدة. تحتوي هذه الأجزاء على السياق الدقيق الذي يحتاج إليه النموذج للتوصل إلى استنتاجات بشأن تلك النتائج في الجولة التالية.
 
-- **Stanowe (zalecane):** jeśli używasz `previous_interaction_id`, interfejs API automatycznie zarządza tym obiegiem.
-- **Bezstanowy:** jeśli zarządzasz historią ręcznie, musisz uwzględnić te bloki w tablicy wejściowej dokładnie tak, jak zostały zwrócone przez interfejs API.
+- **الاحتفاظ بالحالة (يُنصح به)**: إذا كنت تستخدم `previous_interaction_id`، ستتولّى واجهة برمجة التطبيقات إدارة هذا التداول تلقائيًا.
+- **بلا حالة**: إذا كنت تدير السجلّ يدويًا، يجب تضمين هذه الحظر
+  بالضبط كما تم عرضها من خلال واجهة برمجة التطبيقات في مصفوفة الإدخال.
 
-### Protokół kontekstu modelu zdalnego (MCP)
+### بروتوكول سياق النموذج عن بُعد (MCP)
 
-Integracja zdalnego [MCP](https://modelcontextprotocol.io/docs/getting-started/intro)
-upraszcza tworzenie agentów, ponieważ umożliwia interfejsowi Gemini API
-bezpośrednie wywoływanie narzędzi zewnętrznych hostowanych na serwerach zdalnych.
+تسهّل عملية دمج [MCP](https://modelcontextprotocol.io/docs/getting-started/intro) عن بُعد عملية تطوير الوكيل من خلال السماح لواجهة برمجة التطبيقات Gemini API باستدعاء الأدوات الخارجية المستضافة على الخوادم البعيدة مباشرةً.
 
 ### Python
 
@@ -2551,15 +2554,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-**Ważne informacje:**
+**ملاحظات مهمّة:**
 
-- Zdalny MCP działa tylko z serwerami HTTP obsługującymi strumieniowanie (serwery SSE nie są obsługiwane).
-- Zdalny MCP nie działa z modelami Gemini 3 (ta funkcja będzie dostępna wkrótce).
-- Nazwy serwerów MCP nie powinny zawierać znaku „-” (zamiast tego używaj nazw serwerów w formacie snake\_case).
+- لا يعمل MCP البعيد إلا مع خوادم HTTP قابلة للبث (لا تتوافق مع خوادم SSE)
+- لا تعمل ميزة "التحكّم عن بُعد في MCP" مع نماذج Gemini 3 (ستتوفّر هذه الميزة قريبًا)
+- يجب ألا تتضمّن أسماء خادم MCP الرمز "-" (استخدِم أسماء خادم snake\_case بدلاً من ذلك)
 
-### Uporządkowane dane wyjściowe (schemat JSON)
+### الناتج المنظَّم (مخطّط JSON)
 
-Wymuś określone dane wyjściowe JSON, podając schemat JSON w parametrze `response_format`. Jest to przydatne w przypadku zadań takich jak moderowanie, klasyfikowanie czy wyodrębnianie danych.
+فرض إخراج JSON محدّد من خلال توفير مخطّط JSON في المَعلمة
+`response_format` وهي مفيدة في مهام مثل الإشراف أو التصنيف أو استخراج البيانات.
 
 ### Python
 
@@ -2644,9 +2648,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Łączenie narzędzi i uporządkowanych danych wyjściowych
+### الجمع بين الأدوات والمخرجات المنظَّمة
 
-Łącz wbudowane narzędzia z uporządkowanymi danymi wyjściowymi, aby uzyskać wiarygodny obiekt JSON na podstawie informacji pobranych przez narzędzie.
+يمكنك الجمع بين الأدوات المضمّنة والناتج المنظَّم للحصول على كائن JSON موثوق به استنادًا إلى المعلومات التي تستردّها إحدى الأدوات.
 
 ### Python
 
@@ -2721,15 +2725,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Funkcje zaawansowane
+## الميزات المتقدمة
 
-Dostępne są też dodatkowe funkcje zaawansowane, które zapewniają większą elastyczność w korzystaniu z interfejsu Interactions API.
+تتوفّر أيضًا ميزات متقدّمة إضافية تمنحك المزيد من المرونة
+في استخدام Interactions API.
 
-### Streaming
+### البث
 
-Otrzymuj odpowiedzi stopniowo w miarę ich generowania.
+تلقّي الردود بشكل تدريجي أثناء إنشائها
 
-Gdy `stream=true`, ostatnie zdarzenie `interaction.complete` nie zawiera wygenerowanych treści w polu `outputs`. Zawiera tylko metadane dotyczące użytkowania i stan końcowy. Musisz agregować zdarzenia `content.delta` po stronie klienta, aby odtworzyć pełną odpowiedź lub argumenty wywołania narzędzia.
+عندما تكون القيمة `stream=true`، لا يتضمّن الحدث النهائي `interaction.complete` المحتوى الذي تم إنشاؤه في الحقل `outputs`. ويحتوي فقط على البيانات الوصفية للاستخدام والحالة النهائية. يجب تجميع أحداث `content.delta` من جهة العميل لإعادة إنشاء الرد الكامل أو وسيطات استدعاء الأداة.
 
 ### Python
 
@@ -2795,23 +2800,24 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-#### Typy zdarzeń strumieniowania
+#### أنواع أحداث البث
 
-Gdy strumieniowanie jest włączone, interfejs API zwraca zdarzenia wysyłane przez serwer (SSE). Każde zdarzenie ma pole `event_type` wskazujące jego przeznaczenie. Pełna lista typów zdarzeń jest dostępna w [dokumentacji API](https://ai.google.dev/api/interactions-api?hl=pl#Resource:Interaction).
+عند تفعيل البث، تعرض واجهة برمجة التطبيقات أحداثًا يتم إرسالها من الخادم (SSE). يحتوي كل حدث على حقل `event_type` يشير إلى الغرض منه. تتوفّر القائمة الكاملة لأنواع الأحداث في [مرجع واجهة برمجة التطبيقات](https://ai.google.dev/api/interactions-api?hl=ar#Resource:Interaction).
 
-| Typ zdarzenia | Opis |
+| نوع الحدث | الوصف |
 | --- | --- |
-| `interaction.start` | Pierwsze zdarzenie. Zawiera interakcję `id` i początkową `status` (`in_progress`). |
-| `interaction.status_update` | Wskazuje zmiany stanu (np. `in_progress`). |
-| `content.start` | Oznacza początek nowego bloku wyjściowego. Zawiera `index` i treści `type` (np. `text`, `thought`). |
-| `content.delta` | przyrostowe aktualizacje treści, Zawiera częściowe dane kluczowane przez `delta.type`. |
-| `content.stop` | Oznacza koniec bloku wyjściowego w miejscu `index`. |
-| `interaction.complete` | Ostatnie zdarzenie. Zawiera `id`, `status`, `usage` i metadane. **Uwaga:** `outputs` to `None` – musisz odtworzyć dane wyjściowe ze zdarzeń `content.*`. |
-| `error` | Wskazuje, że wystąpił błąd. Zawiera `error.code` i `error.message`. |
+| `interaction.start` | الحدث الأول تحتوي على التفاعل `id` و`status` الأولي (`in_progress`). |
+| `interaction.status_update` | تشير إلى التغييرات في الحالة (مثل `in_progress`). |
+| `content.start` | تضع علامة على بداية مجموعة إخراج جديدة. يحتوي على `index` والمحتوى `type` (مثل `text` و`thought`). |
+| `content.delta` | تعديلات المحتوى التدريجية يحتوي على البيانات الجزئية التي تمّت فهرستها باستخدام `delta.type`. |
+| `content.stop` | تضع هذه السمة علامة على نهاية كتلة الإخراج في `index`. |
+| `interaction.complete` | الحدث النهائي يتضمّن `id` و`status` و`usage` وبيانات وصفية. **ملاحظة:** `outputs` هي `None`، لذا عليك إعادة إنشاء النتائج من أحداث `content.*`. |
+| `error` | يشير إلى حدوث خطأ. يتضمّن `error.code` و`error.message`. |
 
-#### Odtwarzanie obiektu Interaction na podstawie zdarzeń przesyłanych strumieniowo
+#### إعادة إنشاء عنصر Interaction من أحداث البث
 
-W przeciwieństwie do odpowiedzi bez strumieniowania odpowiedzi strumieniowane **nie** zawierają tablicy `outputs`. Musisz odtworzyć dane wyjściowe, gromadząc treści z `content.delta` zdarzeń.
+على عكس الردود غير المتدفقة، فإنّ الردود المتدفقة **لا** تحتوي على مصفوفة
+`outputs`. يجب إعادة إنشاء النتائج من خلال تجميع المحتوى من أحداث `content.delta`.
 
 ### Python
 
@@ -2895,10 +2901,10 @@ const finalOutputs = [...outputs.entries()]
 console.log(`\n\nOutputs:`, finalOutputs);
 ```
 
-#### Wywołania narzędzi do strumieniowania
+#### طلبات أدوات البث
 
-Gdy korzystasz z narzędzi do przesyłania strumieniowego, model generuje wywołania funkcji jako sekwencję zdarzeń `content.delta` w strumieniu. W przeciwieństwie do tekstu argumenty narzędzia są dostarczane jako kompletne obiekty JSON w ramach jednego zdarzenia `content.delta`. Tablica
-`outputs` jest pusta w zdarzeniu `interaction.complete` podczas przesyłania strumieniowego. Musisz rejestrować wywołania narzędzi z różnic, jak pokazano poniżej.
+عند استخدام أدوات مع البث، ينشئ النموذج طلبات الدوال كسلسلة من أحداث `content.delta` في البث. على عكس النص، يتم تقديم وسيطات الأدوات ككائنات JSON كاملة ضمن حدث `content.delta` واحد. إذا كانت مصفوفة
+`outputs` فارغة في حدث `interaction.complete` أثناء البث، عليك تسجيل طلبات الأدوات من الفروق كما هو موضّح أدناه.
 
 ### Python
 
@@ -3018,9 +3024,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Konfiguracja
+### التهيئة
 
-Dostosuj działanie modelu za pomocą `generation_config`.
+تخصيص سلوك النموذج باستخدام `generation_config`
 
 ### Python
 
@@ -3079,29 +3085,30 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Myślę
+### جارٍ التفكير
 
-Modele Gemini 2.5 i nowsze przed wygenerowaniem odpowiedzi korzystają z wewnętrznego procesu rozumowania zwanego „myśleniem”. Pomaga to modelowi udzielać lepszych odpowiedzi w przypadku złożonych zadań, takich jak matematyka, kodowanie i wielostopniowe wnioskowanie.
+تستخدم نماذج Gemini 2.5 والإصدارات الأحدث عملية استدلال داخلية تُعرف باسم "التفكير"
+قبل إنشاء ردّ. يساعد ذلك النموذج في تقديم إجابات أفضل للمهام المعقّدة، مثل الرياضيات والترميز والاستدلال المتعدّد الخطوات.
 
-#### Poziom myślenia
+#### مستوى التفكير
 
-Parametr `thinking_level` umożliwia kontrolowanie głębokości rozumowania modelu:
+تتيح لك المَعلمة `thinking_level` التحكّم في عمق الاستنتاج في النموذج:
 
-| Poziom | Opis | Obsługiwane modele |
+| المستوى | الوصف | النماذج المتوافقة |
 | --- | --- | --- |
-| `minimal` | W przypadku większości zapytań odpowiada ustawieniu „bez myślenia”. W niektórych przypadkach modele mogą myśleć w bardzo ograniczony sposób. Minimalizuje opóźnienia i koszty. | **Tylko modele Flash**   (np. Gemini 3 Flash) |
-| `low` | Uproszczone rozumowanie, które priorytetowo traktuje czas oczekiwania i oszczędności kosztów w przypadku prostych instrukcji i czatów. | **Wszystkie modele myślenia** |
-| `medium` | Zrównoważone myślenie w przypadku większości zadań. | **Tylko modele Flash**   (np. Gemini 3 Flash) |
-| `high` | **(Domyślny)** Maksymalizuje głębokość rozumowania. Model może potrzebować znacznie więcej czasu na wygenerowanie pierwszego tokena, ale wynik będzie bardziej przemyślany. | **Wszystkie modele myślenia** |
+| `minimal` | يتطابق هذا الخيار مع الإعداد "بدون تفكير" لمعظم طلبات البحث. في بعض الحالات، قد تفكّر النماذج بشكل بسيط جدًا. يقلّل من زمن الانتقال والتكلفة. | **نماذج Flash فقط**   (مثل Gemini 3 Flash) |
+| `low` | الاستدلال البسيط الذي يعطي الأولوية لوقت الاستجابة وتوفير التكاليف عند اتّباع التعليمات البسيطة والمحادثة | **جميع نماذج التفكير** |
+| `medium` | تفكير متوازن لمعظم المهام | **نماذج Flash فقط**   (مثل Gemini 3 Flash) |
+| `high` | **(تلقائي)** يزيد من عمق التفكير. قد يستغرق النموذج وقتًا أطول بكثير للوصول إلى الرمز المميز الأول، ولكن سيكون الناتج أكثر دقة. | **جميع نماذج التفكير** |
 
-#### Podsumowania myśli
+#### ملخّصات التفكير
 
-Proces myślowy modelu jest przedstawiany w postaci **bloków myślowych** (`type: "thought"`) w danych wyjściowych odpowiedzi. Za pomocą parametru `thinking_summaries` możesz określić, czy chcesz otrzymywać podsumowania procesu myślowego w formie czytelnej dla człowieka:
+يتم تمثيل عملية التفكير التي يجريها النموذج على شكل **مربّعات أفكار** (`type: "thought"`) في نواتج الردود. يمكنك التحكّم في ما إذا كنت تريد تلقّي ملخّصات قابلة للقراءة من قِبل البشر حول عملية التفكير باستخدام المَعلمة `thinking_summaries`:
 
-| Wartość | Opis |
+| القيمة | الوصف |
 | --- | --- |
-| `auto` | **(Domyślnie)** Zwraca podsumowania przemyśleń, jeśli są dostępne. |
-| `none` | Wyłącza podsumowania myśli. |
+| `auto` | **(الإعداد التلقائي)** لعرض ملخّصات الأفكار عند توفّرها |
+| `none` | تؤدي إلى إيقاف ملخّصات الأفكار. |
 
 ### Python
 
@@ -3167,18 +3174,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Każdy blok myśli zawiera pole `signature` (kryptograficzny skrót wewnętrznego stanu rozumowania) i opcjonalne pole `summary` (czytelne dla człowieka podsumowanie rozumowania modelu). `signature` jest zawsze obecny, ale w tych przypadkach blok myśli może zawierać tylko podpis bez podsumowania:
+يحتوي كل قسم من أقسام الأفكار على حقل `signature` (تجزئة تشفيرية لحالة الاستدلال الداخلية) وحقل `summary` اختياري (ملخّص قابل للقراءة من قِبل الإنسان حول استدلال النموذج). تظهر `signature` دائمًا، ولكن قد يحتوي قسم الأفكار على توقيع فقط بدون ملخّص في الحالات التالية:
 
-- **Proste żądania:** model nie przeprowadził wystarczającego rozumowania, aby wygenerować podsumowanie.
-- **`thinking_summaries: "none"`**: podsumowania są wyraźnie wyłączone.
+- **الطلبات البسيطة**: لم يقدّم النموذج أسبابًا كافية لإنشاء ملخّص
+- ‫**`thinking_summaries: "none"`**: تم إيقاف الملخّصات بشكل صريح
 
-Kod powinien zawsze obsługiwać bloki myśli, w których pole `summary` jest puste lub nie występuje. Jeśli zarządzasz historią rozmów ręcznie (tryb bezstanowy), musisz uwzględniać bloki myśli wraz z ich podpisami w kolejnych żądaniach, aby potwierdzić autentyczność.
+يجب أن يتعامل الرمز دائمًا مع كتل الأفكار التي يكون فيها `summary` فارغًا أو غير متوفّر. عند إدارة سجلّ المحادثات يدويًا (وضع عدم الاحتفاظ بالحالة)، يجب تضمين كتل الأفكار مع توقيعاتها في الطلبات اللاحقة للتحقّق من صحتها.
 
-### Praca z plikami
+### العمل باستخدام الملفات
 
-#### Praca z plikami zdalnymi
+#### العمل باستخدام الملفات البعيدة
 
-Dostęp do plików przy użyciu zdalnych adresów URL bezpośrednio w wywołaniu interfejsu API.
+الوصول إلى الملفات باستخدام عناوين URL عن بُعد مباشرةً في طلب البيانات من واجهة برمجة التطبيقات
 
 ### Python
 
@@ -3242,9 +3249,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-#### Praca z interfejsem Gemini Files API
+#### العمل باستخدام Gemini Files API
 
-Przed użyciem plików prześlij je do [interfejsu Gemini Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl).
+حمِّل الملفات إلى [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ar) من Gemini
+قبل استخدامها.
 
 ### Python
 
@@ -3340,12 +3348,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Poziomy wnioskowania Flex i Priority
+### فئات استنتاج Flex وPriority
 
-Za pomocą poziomów wnioskowania w interfejsie Interactions API możesz optymalizować różne potrzeby związane z obciążeniem:
+يمكنك استخدام مستويات الاستدلال مع Interactions API لتحسين الأداء بما يتناسب مع احتياجات أحمال العمل المختلفة:
 
-- [Elastyczne](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pl) (`flex`) w celu optymalizacji kosztów; 50% zniżki w stosunku do ceny standardowej.
-- [Priorytet](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pl) (`priority`) w przypadku optymalizacji pod kątem opóźnień; najwyższy poziom usług pod względem niezawodności.
+- ‫[Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ar) (`flex`) لتحسين التكلفة، وخصم% 50 على الأسعار العادية
+- [الأولوية](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ar) (`priority`) لتحسين وقت الاستجابة، وهي فئة الخدمة الأعلى موثوقية.
 
 ### Python
 
@@ -3400,124 +3408,129 @@ except Exception as e:
  }'
 ```
 
-### Model danych
+### نموذج البيانات
 
-Więcej informacji o modelu danych znajdziesz w [dokumentacji interfejsu API](https://ai.google.dev/api/interactions-api?hl=pl#data-models). Poniżej znajdziesz ogólny przegląd głównych komponentów.
+يمكنك الاطّلاع على مزيد من المعلومات حول نموذج البيانات في [مرجع واجهة برمجة التطبيقات](https://ai.google.dev/api/interactions-api?hl=ar#data-models). في ما يلي نظرة عامة عالية المستوى على المكوّنات الرئيسية.
 
-#### Interakcja
+#### التفاعل
 
-| Właściwość | Typ | Opis |
+| الموقع | النوع | الوصف |
 | --- | --- | --- |
-| `id` | `string` | Unikalny identyfikator interakcji. |
-| `model`/`agent` | `string` | Użyty model lub agent. Możesz podać tylko jedną wartość. |
-| `input` | [`Content[]`](https://ai.google.dev/api/interactions-api?hl=pl#data-models) | dane wejściowe. |
-| `outputs` | [`Content[]`](https://ai.google.dev/api/interactions-api?hl=pl#data-models) | odpowiedzi modelu; |
-| `tools` | [`Tool[]`](https://ai.google.dev/api/interactions-api?hl=pl#Resource:Tool) | używane narzędzia; |
-| `previous_interaction_id` | `string` | Identyfikator poprzedniej interakcji w celu uzyskania kontekstu. |
-| `stream` | `boolean` | Czy interakcja jest strumieniowa. |
-| `status` | `string` | Stan: `completed`, `in_progress`, `requires_action`, `failed` itp. |
-| `background` | `boolean` | Określa, czy interakcja odbywa się w trybie działania w tle. |
-| `store` | `boolean` | Określa, czy zapisać interakcję. Domyślnie: `true`. Aby zrezygnować, ustaw wartość `false`. |
-| `usage` | [Wykorzystanie](https://ai.google.dev/api/interactions-api?hl=pl#Resource:Interaction) | Wykorzystanie tokenów w żądaniu interakcji. |
+| `id` | `string` | المعرّف الفريد للتفاعل |
+| `model` / `agent` | `string` | النموذج أو الوكيل المستخدَم يمكن تقديم واحد فقط. |
+| `input` | [`Content[]`](https://ai.google.dev/api/interactions-api?hl=ar#data-models) | المدخلات المقدَّمة |
+| `outputs` | [`Content[]`](https://ai.google.dev/api/interactions-api?hl=ar#data-models) | ردود النموذج |
+| `tools` | [`Tool[]`](https://ai.google.dev/api/interactions-api?hl=ar#Resource:Tool) | الأدوات المستخدَمة |
+| `previous_interaction_id` | `string` | معرّف التفاعل السابق لتوفير السياق |
+| `stream` | `boolean` | تُستخدَم لتحديد ما إذا كان التفاعل يتم من خلال البث. |
+| `status` | `string` | الحالة: `completed` أو `in_progress` أو `requires_action` أو `failed` أو غير ذلك |
+| `background` | `boolean` | تُستخدَم لتحديد ما إذا كان التفاعل في وضع الخلفية. |
+| `store` | `boolean` | تُستخدَم لتحديد ما إذا كان يجب تخزين التفاعل. القيمة التلقائية: `true` اضبط الخيار على `false` لإيقاف هذه الميزة. |
+| `usage` | [الاستخدام](https://ai.google.dev/api/interactions-api?hl=ar#Resource:Interaction) | استخدام الرموز المميزة لطلب التفاعل |
 
-## Obsługiwane modele i agenci
+## الطُرز والوكلاء المتوافقون
 
-| Nazwa modelu | Typ | Identyfikator modelu |
+| اسم النموذج | النوع | رقم تعريف الطراز |
 | --- | --- | --- |
-| Gemini 3.1 Flash-Lite (wersja testowa) | Model | `gemini-3.1-flash-lite-preview` |
-| Gemini 3.1 Pro (wersja testowa) | Model | `gemini-3.1-pro-preview` |
-| Gemini 3 Flash (wersja testowa) | Model | `gemini-3-flash-preview` |
-| Gemini 2.5 Pro | Model | `gemini-2.5-pro` |
-| Gemini 2.5 Flash | Model | `gemini-2.5-flash` |
-| Gemini 2.5 Flash-lite | Model | `gemini-2.5-flash-lite` |
-| Podgląd klipu Lyria 3 | Model | `lyria-3-clip-preview` |
-| Lyria 3 Pro (wersja testowa) | Model | `lyria-3-pro-preview` |
-| Wersja testowa Deep Research | Agent | `deep-research-pro-preview-12-2025` |
-| Wersja testowa Deep Research | Agent | `deep-research-preview-04-2026` |
-| Wersja testowa Deep Research | Agent | `deep-research-max-preview-04-2026` |
+| معاينة Gemini 3.1 Flash-Lite | الطراز | `gemini-3.1-flash-lite-preview` |
+| معاينة Gemini 3.1 Pro | الطراز | `gemini-3.1-pro-preview` |
+| معاينة Gemini 3 Flash | الطراز | `gemini-3-flash-preview` |
+| Gemini 2.5 Pro | الطراز | `gemini-2.5-pro` |
+| Gemini 2.5 Flash | الطراز | `gemini-2.5-flash` |
+| Gemini 2.5 Flash-lite | الطراز | `gemini-2.5-flash-lite` |
+| معاينة مقطع Lyria 3 | الطراز | `lyria-3-clip-preview` |
+| معاينة Lyria 3 Pro | الطراز | `lyria-3-pro-preview` |
+| معاينة Deep Research | الوكيل | `deep-research-pro-preview-12-2025` |
+| معاينة Deep Research | الوكيل | `deep-research-preview-04-2026` |
+| معاينة Deep Research | الوكيل | `deep-research-max-preview-04-2026` |
 
-## Jak działa interfejs Interactions API
+## طريقة عمل Interactions API
 
-Interfejs Interactions API jest oparty na centralnym zasobie: [**`Interaction`**](https://ai.google.dev/api/interactions-api?hl=pl#Resource:Interaction).
-Symbol `Interaction` oznacza pełną turę w rozmowie lub zadaniu. Działa on jako zapis sesji, zawierający całą historię interakcji, w tym wszystkie dane wejściowe użytkownika, przemyślenia modelu, wywołania narzędzi, wyniki narzędzi i końcowe dane wyjściowe modelu.
+تم تصميم Interactions API حول مورد مركزي هو
+[**`Interaction`**](https://ai.google.dev/api/interactions-api?hl=ar#Resource:Interaction).
+يمثّل `Interaction` دورة كاملة في محادثة أو مهمة. يعمل هذا السجلّ كسجلّ للجلسة، ويتضمّن السجلّ الكامل للتفاعل، بما في ذلك جميع البيانات التي أدخلها المستخدِم وأفكار النموذج واستدعاءات الأدوات ونتائج الأدوات ومخرجات النموذج النهائية.
 
-Gdy dzwonisz pod numer [`interactions.create`](https://ai.google.dev/api/interactions-api?hl=pl#CreateInteraction), tworzysz nowy zasób `Interaction`.
+عند إجراء طلب إلى
+[`interactions.create`](https://ai.google.dev/api/interactions-api?hl=ar#CreateInteraction)، فإنّك
+تنشئ مورد `Interaction` جديدًا.
 
-### Zarządzanie stanem po stronie serwera
+### إدارة الحالة من جهة الخادم
 
-W kolejnym wywołaniu możesz użyć `id` zakończonej interakcji, korzystając z parametru `previous_interaction_id`, aby kontynuować rozmowę. Serwer używa tego identyfikatora do pobierania historii rozmów, dzięki czemu nie musisz ponownie wysyłać całej historii czatu.
+يمكنك استخدام `id` لتفاعل مكتمل في مكالمة لاحقة باستخدام المَعلمة `previous_interaction_id` لمواصلة المحادثة. يستخدم الخادم هذا المعرّف لاسترداد سجلّ المحادثات، ما يوفّر عليك عناء إعادة إرسال سجلّ المحادثات بأكمله.
 
-Zachowywana jest tylko historia rozmów (dane wejściowe i wyjściowe) za pomocą `previous_interaction_id`. Pozostałe parametry mają **zakres interakcji** i mają zastosowanie tylko do konkretnej interakcji, którą obecnie generujesz:
+يتم الاحتفاظ فقط بسجلّ المحادثات (المدخلات والمخرجات) باستخدام `previous_interaction_id`. المَعلمات الأخرى **محدودة بنطاق التفاعل**
+ولا تنطبق إلا على التفاعل المحدّد الذي يتم إنشاؤه حاليًا:
 
 - `tools`
 - `system_instruction`
-- `generation_config` (w tym `thinking_level`, `temperature` itp.)
+- ‫`generation_config` (بما في ذلك `thinking_level` و`temperature` وما إلى ذلك)
 
-Oznacza to, że jeśli chcesz, aby te parametry były stosowane, musisz ponownie określić je w każdej nowej interakcji. Zarządzanie stanem po stronie serwera jest opcjonalne. Możesz też działać w trybie bezstanowym, wysyłając w każdym żądaniu pełną historię rozmowy.
+وهذا يعني أنّه عليك إعادة تحديد هذه المَعلمات في كل تفاعل جديد إذا كنت تريد تطبيقها. تكون إدارة الحالة من جهة الخادم اختيارية، ويمكنك أيضًا التشغيل في وضع بلا حالة من خلال إرسال سجلّ المحادثة الكامل في كل طلب.
 
-### Przechowywanie danych
+### تخزين البيانات والاحتفاظ بها
 
-Domyślnie wszystkie obiekty Interaction są przechowywane (`store=true`), aby uprościć korzystanie z funkcji zarządzania stanem po stronie serwera (z `previous_interaction_id`), wykonywania w tle (za pomocą `background=true`) i dostrzegalności.
+يتم تلقائيًا تخزين جميع عناصر Interaction (`store=true`) من أجل تبسيط استخدام ميزات إدارة الحالة من جهة الخادم (باستخدام `previous_interaction_id`) والتنفيذ في الخلفية (باستخدام `background=true`) ولأغراض إمكانية تتبّع البيانات.
 
-- **Wersja płatna:**  interakcje są przechowywane przez **55 dni**.
-- **Poziom bezpłatny:**  interakcje są przechowywane przez **1 dzień**.
+- **المستوى المدفوع**: يتم الاحتفاظ بالتفاعلات لمدة **55 يومًا**.
+- **الطبقة المجانية**: يتم الاحتفاظ بالتفاعلات لمدة **يوم واحد**.
 
-Jeśli nie chcesz tego robić, możesz w swojej prośbie ustawić `store=false`. To ustawienie jest niezależne od zarządzania stanem. Możesz zrezygnować z przechowywania danych w przypadku dowolnej interakcji. Pamiętaj jednak, że `store=false` jest niezgodny z `background=true` i uniemożliwia używanie `previous_interaction_id` w kolejnych turach.
+إذا كنت لا تريد ذلك، يمكنك ضبط `store=false` في طلبك. يختلف عنصر التحكّم هذا عن إدارة الحالة، ويمكنك إيقاف مساحة التخزين لأي تفاعل. يُرجى العِلم أنّ `store=false` غير متوافق مع `background=true` ويمنع استخدام `previous_interaction_id` في المحادثات اللاحقة.
 
-Zapisane interakcje możesz w każdej chwili usunąć za pomocą metody usuwania opisanej w [dokumentacji interfejsu API](https://ai.google.dev/api/interactions-api?hl=pl). Interakcje możesz usuwać tylko wtedy, gdy znasz ich identyfikator.
+يمكنك حذف التفاعلات المخزّنة في أي وقت باستخدام طريقة الحذف المتوفّرة في [مرجع واجهة برمجة التطبيقات](https://ai.google.dev/api/interactions-api?hl=ar). لا يمكنك حذف التفاعلات إلا إذا كنت تعرف رقم تعريف التفاعل.
 
-Po wygaśnięciu okresu przechowywania Twoje dane zostaną automatycznie usunięte.
+وبعد انتهاء صلاحية فترة التخزين، سيتم حذف بياناتك تلقائيًا.
 
-Obiekty interakcji są przetwarzane zgodnie z [warunkami](https://ai.google.dev/gemini-api/terms?hl=pl).
+تتم معالجة عناصر التفاعل وفقًا [للبنود](https://ai.google.dev/gemini-api/terms?hl=ar).
 
-## Sprawdzone metody
+## أفضل الممارسات
 
-- **Współczynnik trafień w pamięci podręcznej:** używanie symbolu `previous_interaction_id` do kontynuowania rozmów ułatwia systemowi korzystanie z niejawnego buforowania historii rozmów, co zwiększa wydajność i obniża koszty.
-- **Mieszanie interakcji:** możesz mieszać interakcje z agentem i modelem w ramach jednej rozmowy. Możesz na przykład użyć specjalistycznego agenta, takiego jak agent Deep Research, do wstępnego zbierania danych, a następnie użyć standardowego modelu Gemini do wykonywania kolejnych zadań, takich jak podsumowywanie lub formatowanie, łącząc te kroki za pomocą funkcji `previous_interaction_id`.
+- **نسبة نتيجة ذاكرة التخزين المؤقت**: يتيح استخدام `previous_interaction_id` لمواصلة المحادثات للنظام الاستفادة بسهولة أكبر من التخزين المؤقت الضمني لسجلّ المحادثات، ما يحسّن الأداء ويقلّل التكاليف.
+- **مزج التفاعلات**: يمكنك مزج التفاعلات بين الوكيل والنموذج ومطابقتها ضمن محادثة واحدة. على سبيل المثال، يمكنك استخدام وكيل متخصص، مثل وكيل &quot;البحث المعمّق&quot;، لجمع البيانات الأولية، ثم استخدام نموذج Gemini عادي لتنفيذ مهام المتابعة، مثل التلخيص أو إعادة التنسيق، وربط هذه الخطوات باستخدام `previous_interaction_id`.
 
-## Pakiety SDK
+## حزم SDK
 
-Aby uzyskać dostęp do interfejsu API interakcji, możesz użyć najnowszej wersji pakietów SDK Google GenAI.
+يمكنك استخدام أحدث إصدار من حِزم تطوير البرامج (SDK) من Google GenAI للوصول إلى واجهة برمجة التطبيقات Interactions API.
 
-- W Pythonie jest to pakiet `google-genai` od wersji `1.55.0`.
-- W przypadku JavaScriptu jest to pakiet `@google/genai` od wersji `1.33.0`.
+- في Python، هذه هي حزمة `google-genai` من الإصدار `1.55.0` والإصدارات الأحدث.
+- في JavaScript، هذه هي حزمة `@google/genai` من الإصدار `1.33.0` والإصدارات الأحدث.
 
-Więcej informacji o instalowaniu pakietów SDK znajdziesz na stronie [Biblioteki](https://ai.google.dev/gemini-api/docs/libraries?hl=pl).
+يمكنك الاطّلاع على مزيد من المعلومات حول كيفية تثبيت حِزم SDK على صفحة [المكتبات](https://ai.google.dev/gemini-api/docs/libraries?hl=ar).
 
-## Ograniczenia
+## القيود
 
-- **Stan wersji beta:** interfejs Interactions API jest dostępny w wersji beta lub w wersji zapoznawczej. Funkcje i schematy mogą ulec zmianie.
-- **Zdalne MCP:** Gemini 3 nie obsługuje zdalnego MCP. Ta funkcja będzie dostępna wkrótce.
+- **حالة الإصدار التجريبي**: تتوفّر Interactions API في إصدار تجريبي/معاينة. قد تتغيّر الميزات والمخططات.
+- **التحكّم عن بُعد في MCP**: لا يتيح Gemini 3 التحكّم عن بُعد في MCP، ولكن ستتوفّر هذه الميزة قريبًا.
 
-## Zmiany powodujące niezgodność
+## التغييرات التي قد تؤدي إلى أعطال
 
-Interfejs Interactions API jest obecnie w wersji beta. Aktywnie rozwijamy i udoskonalamy możliwości interfejsu API, schematy zasobów i interfejsy SDK na podstawie rzeczywistego wykorzystania i opinii deweloperów.
+تتوفّر واجهة Interactions API حاليًا في مرحلة تجريبية مبكرة. نعمل حاليًا على تطوير وتحسين إمكانات واجهة برمجة التطبيقات ومخططات الموارد وواجهات حزمة تطوير البرامج (SDK) استنادًا إلى الاستخدام الفعلي وملاحظات المطوّرين.
 
-W związku z tym **mogą wystąpić zmiany powodujące niezgodność**.
-Aktualizacje mogą obejmować zmiany w:
+نتيجةً لذلك، **قد تحدث تغييرات غير متوافقة مع الإصدارات السابقة**.
+قد تشمل التعديلات تغييرات على ما يلي:
 
-- Schematy danych wejściowych i wyjściowych.
-- sygnatury metod pakietu SDK i struktury obiektów;
-- konkretne zachowania funkcji,
+- مخططات الإدخال والإخراج
+- توقيعات طرق حزمة SDK وبُنى العناصر
+- سلوكيات الميزات المحدّدة
 
-W przypadku zadań produkcyjnych należy nadal używać standardowego interfejsu API [`generateContent`](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl). Jest to zalecana ścieżka w przypadku stabilnych wdrożeń, która będzie nadal aktywnie rozwijana i utrzymywana.
+بالنسبة إلى أحمال العمل في مرحلة الإنتاج، عليك مواصلة استخدام واجهة برمجة التطبيقات القياسية
+[`generateContent`](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar). ويظل هذا المسار هو المسار المقترَح لعمليات النشر الثابتة، وسيستمر تطويره وصيانته بشكل نشط.
 
-## Prześlij opinię
+## الملاحظات
 
-Twoja opinia jest kluczowa dla rozwoju interfejsu Interactions API.
-Podziel się swoimi przemyśleniami, zgłoś błędy lub poproś o funkcje na naszym [forum społeczności deweloperów Google AI](https://discuss.ai.google.dev/c/gemini-api/4?hl=pl).
+تُعدّ ملاحظاتك مهمة جدًا لتطوير Interactions API.
+يمكنك مشاركة أفكارك أو الإبلاغ عن أخطاء أو طلب ميزات في [منتدى مطوّري الذكاء الاصطناعي من Google](https://discuss.ai.google.dev/c/gemini-api/4?hl=ar).
 
-## Co dalej?
+## الخطوات التالية
 
-- Wypróbuj [notatnik z szybkim wprowadzeniem do interfejsu Interactions API](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_interactions_api.ipynb?hl=pl).
-- Dowiedz się więcej o [agencie Deep Research w Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl).
+- جرِّب [دفتر ملاحظات التشغيل السريع لواجهة Interactions API](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_interactions_api.ipynb?hl=ar).
+- [مزيد من المعلومات حول "وكيل Deep Research" في Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar)
 
-Prześlij opinię
+إرسال ملاحظات
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Ostatnia aktualizacja: 2026-04-29 UTC.
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-Chcesz przekazać coś jeszcze?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

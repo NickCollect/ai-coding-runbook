@@ -1,24 +1,24 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/audio?hl=vi
-fetched_at: 2026-05-05T20:06:45.855347+00:00
-title: "Hi\u1ec3u \u00e2m thanh \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/audio?hl=hi
+fetched_at: 2026-05-05T20:49:56.040647+00:00
+title: "\u0911\u0921\u093f\u092f\u094b \u0915\u094b \u0938\u092e\u091d\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Gửi ý kiến phản hồi
+सुझाव भेजें
 
-# Hiểu âm thanh
+# ऑडियो को समझना
 
-Gemini có thể phân tích dữ liệu đầu vào âm thanh và tạo câu trả lời bằng văn bản.
+Gemini, ऑडियो इनपुट का विश्लेषण करके टेक्स्ट में जवाब जनरेट कर सकता है.
 
 ### Python
 
@@ -165,25 +165,25 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## Tổng quan
+## खास जानकारी
 
-Gemini có thể phân tích và hiểu dữ liệu đầu vào âm thanh, đồng thời tạo câu trả lời bằng văn bản cho dữ liệu đó, cho phép sử dụng các trường hợp như sau:
+Gemini, ऑडियो इनपुट का विश्लेषण और उसे समझकर, टेक्स्ट में जवाब जनरेट कर सकता है. इससे इन जैसे इस्तेमाल के उदाहरणों को पूरा किया जा सकता है:
 
-- Mô tả, tóm tắt hoặc trả lời câu hỏi về nội dung âm thanh.
-- Cung cấp bản chép lời và bản dịch của âm thanh (chuyển lời nói thành văn bản).
-- Phát hiện cảm xúc trong lời nói và âm nhạc.
-- Phân tích các đoạn cụ thể của âm thanh và cung cấp dấu thời gian.
+- ऑडियो कॉन्टेंट के बारे में जानकारी देना, खास जानकारी देना या सवालों के जवाब देना.
+- ऑडियो की ट्रांसक्रिप्ट और अनुवाद उपलब्ध कराना (बोली को टेक्स्ट में बदलना).
+- बोली और संगीत में भावनाओं का पता लगाना.
+- ऑडियो के खास सेगमेंट का विश्लेषण करना और टाइमस्टैंप उपलब्ध कराना.
 
-Hiện tại, Gemini API không hỗ trợ các trường hợp sử dụng tính năng chép lời theo thời gian thực.
-Đối với các hoạt động tương tác bằng giọng nói và video theo thời gian thực, hãy tham khảo [Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi).
-Đối với các mô hình chuyển lời nói thành văn bản chuyên dụng có hỗ trợ tính năng chép lời theo thời gian thực,
-hãy sử dụng [Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=vi).
+फ़िलहाल, Gemini API, रीयल-टाइम ट्रांसक्रिप्ट के इस्तेमाल के उदाहरणों के साथ काम नहीं करता.
+रीयल-टाइम में वॉइस और वीडियो इंटरैक्शन के लिए, [Live API](https://ai.google.dev/gemini-api/docs/live?hl=hi) देखें.
+रीयल-टाइम ट्रांसक्रिप्ट की सुविधा के साथ, बोली को टेक्स्ट में बदलने वाले मॉडल इस्तेमाल करने के लिए,
+[Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=hi) का इस्तेमाल करें.
 
-## Chuyển lời nói thành văn bản
+## बोली को टेक्स्ट में बदलना
 
-Ứng dụng mẫu này cho biết cách nhắc Gemini API chép lời,
-dịch và tóm tắt lời nói, bao gồm cả dấu thời gian và tính năng phát hiện cảm xúc
-bằng cách sử dụng [dữ liệu đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi).
+इस उदाहरण वाले ऐप्लिकेशन में, Gemini API को बोली को ट्रांसक्रिप्ट करने,
+उसका अनुवाद करने, और उसकी खास जानकारी देने के लिए प्रॉम्प्ट करने का तरीका दिखाया गया है. इसमें, स्ट्रक्चर्ड आउटपुट का इस्तेमाल करके टाइमस्टैंप और भावनाओं का पता लगाने की सुविधा भी शामिल है.
+using [structured outputs](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi).
 
 ### Python
 
@@ -411,31 +411,27 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-Bạn có thể nhắc [AI Studio Build](https://aistudio.google.com/apps?e=0&hl=vi) tạo
-một ứng dụng giống như
-[ứng dụng chép lời mẫu này](https://aistudio.google.com/apps/bundled/echoscript?hl=vi)
-chỉ bằng một nút nhấp.
+[[AI Studio Build](https://aistudio.google.com/apps?e=0&hl=hi) को इस उदाहरण वाले ट्रांसक्रिप्ट ऐप्लिकेशन की तरह कोई ऐप्लिकेशन बनाने के लिए प्रॉम्प्ट किया जा सकता है. इसके लिए, आपको सिर्फ़ एक बटन पर क्लिक करना होगा.](https://aistudio.google.com/apps/bundled/echoscript?hl=hi)
 
-![Ứng dụng Gemini có tính năng chuyển âm thanh thành văn bản bằng nhiều ngôn ngữ](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=vi)
+![Gemini ऐप्लिकेशन, जो कई भाषाओं में ऑडियो ट्रांसक्रिप्शन की सुविधा देता है](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=hi)
 
-## Nhập âm thanh
+## ऑडियो इनपुट
 
-Bạn có thể cung cấp dữ liệu âm thanh cho Gemini theo những cách sau:
+Gemini को ऑडियो डेटा इन तरीकों से दिया जा सकता है:
 
-- [Tải tệp âm thanh lên](#upload-audio) trước khi đưa ra yêu cầu
-  `generateContent`.
-- [Truyền dữ liệu âm thanh cùng dòng](#inline-audio) bằng yêu cầu
+- [कोई ऑडियो फ़ाइल अपलोड करना](#upload-audio) इससे पहले कि आप
+  `generateContent` के लिए अनुरोध करें.
+- [इनलाइन ऑडियो डेटा पास करें](#inline-audio) अनुरोध के साथ
   `generateContent`.
 
-Để tìm hiểu về các phương thức nhập tệp khác, hãy xem hướng dẫn về
-[Phương thức nhập tệp](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=vi).
+फ़ाइल इनपुट के अन्य तरीकों के बारे में जानने के लिए, [फ़ाइल इनपुट के तरीके](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=hi) वाली गाइड देखें.
 
-### Tải tệp âm thanh lên
+### ऑडियो फ़ाइल अपलोड करना
 
-Bạn có thể sử dụng [Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi) để tải tệp âm thanh lên.
-Luôn sử dụng Files API khi tổng kích thước yêu cầu (bao gồm cả tệp, câu lệnh văn bản, hướng dẫn hệ thống, v.v.) lớn hơn 20 MB.
+ऑडियो फ़ाइल अपलोड करने के लिए, [Files API](https://ai.google.dev/gemini-api/docs/files?hl=hi) का इस्तेमाल किया जा सकता है.
+Files API का इस्तेमाल हमेशा तब करें, जब अनुरोध का कुल साइज़ (जिसमें फ़ाइलें, टेक्स्ट प्रॉम्प्ट, सिस्टम के निर्देश वगैरह शामिल हैं) 20 एमबी से ज़्यादा हो.
 
-Mã sau đây tải một tệp âm thanh lên, sau đó sử dụng tệp đó trong một lệnh gọi đến `generateContent`.
+यहां दिया गया कोड, एक ऑडियो फ़ाइल अपलोड करता है. इसके बाद, `generateContent` को कॉल करने के लिए, इस फ़ाइल का इस्तेमाल करता है.
 
 ### Python
 
@@ -582,12 +578,11 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-Để tìm hiểu thêm về cách làm việc với tệp đa phương tiện, hãy xem
-[Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi).
+मीडिया फ़ाइलों के साथ काम करने के बारे में ज़्यादा जानने के लिए, [Files API](https://ai.google.dev/gemini-api/docs/files?hl=hi) देखें.
 
-### Truyền dữ liệu âm thanh cùng dòng
+### इनलाइन ऑडियो डेटा पास करना
 
-Thay vì tải tệp âm thanh lên, bạn có thể truyền dữ liệu âm thanh cùng dòng trong yêu cầu đến `generateContent`:
+ऑडियो फ़ाइल अपलोड करने के बजाय, `generateContent` के लिए अनुरोध में इनलाइन ऑडियो डेटा पास किया जा सकता है:
 
 ### Python
 
@@ -686,18 +681,17 @@ func main() {
 }
 ```
 
-Một vài điều cần lưu ý về dữ liệu âm thanh cùng dòng:
+इनलाइन ऑडियो डेटा के बारे में याद रखने योग्य कुछ बातें यहां बताई गई हैं:
 
-- Kích thước yêu cầu tối đa là 20 MB, bao gồm cả câu lệnh văn bản, hướng dẫn hệ thống và tệp được cung cấp cùng dòng. Nếu kích thước tệp của bạn
-  sẽ khiến *tổng kích thước yêu cầu* vượt quá 20 MB, thì
-  hãy sử dụng Files API để [tải tệp âm thanh lên](#upload-audio) để sử dụng trong
-  yêu cầu.
-- Nếu bạn đang sử dụng mẫu âm thanh nhiều lần, thì việc tải tệp âm thanh lên sẽ hiệu quả hơn
+- अनुरोध का ज़्यादा से ज़्यादा साइज़ 20 एमबी हो सकता है. इसमें टेक्स्ट प्रॉम्प्ट, सिस्टम के निर्देश, और इनलाइन दी गई फ़ाइलें शामिल हैं. अगर आपकी फ़ाइल के
+  साइज़ की वजह से *अनुरोध का कुल साइज़* 20 एमबी से ज़्यादा हो जाता है, तो
+  अनुरोध में इस्तेमाल करने के लिए, Files API का इस्तेमाल करके कोई ऑडियो फ़ाइल [अपलोड करें](#upload-audio).
+- अगर किसी ऑडियो सैंपल का इस्तेमाल कई बार किया जा रहा है, तो ऑडियो फ़ाइल अपलोड करना ज़्यादा बेहतर है
   .
 
-## Lấy bản chép lời
+## ट्रांसक्रिप्ट पाना
 
-Để lấy bản chép lời của dữ liệu âm thanh, bạn chỉ cần yêu cầu trong câu lệnh:
+ऑडियो डेटा की ट्रांसक्रिप्ट पाने के लिए, प्रॉम्प्ट में इसके बारे में पूछें:
 
 ### Python
 
@@ -786,12 +780,12 @@ func main() {
 }
 ```
 
-## Tham khảo dấu thời gian
+## टाइमस्टैंप का रेफ़रंस देना
 
-Bạn có thể tham khảo các đoạn cụ thể của tệp âm thanh bằng dấu thời gian ở dạng `MM:SS`. Ví dụ: câu lệnh sau yêu cầu một bản chép lời
+`MM:SS` फ़ॉर्मैट वाले टाइमस्टैंप का इस्तेमाल करके, ऑडियो फ़ाइल के खास सेक्शन का रेफ़रंस दिया जा सकता है. उदाहरण के लिए, यहां दिया गया प्रॉम्प्ट, ऐसी ट्रांसक्रिप्ट का अनुरोध करता है जो
 
-- Bắt đầu từ 2 phút 30 giây kể từ đầu tệp.
-- Kết thúc ở 3 phút 29 giây kể từ đầu tệp.
+- फ़ाइल की शुरुआत से 2 मिनट 30 सेकंड पर शुरू होती है.
+- फ़ाइल की शुरुआत से 3 मिनट 29 सेकंड पर खत्म होती है.
 
 ### Python
 
@@ -853,9 +847,9 @@ func main() {
 }
 ```
 
-## Đếm mã thông báo
+## टोकन की संख्या गिनना
 
-Gọi phương thức `countTokens` để đếm số lượng mã thông báo trong tệp âm thanh. Ví dụ:
+किसी ऑडियो फ़ाइल में टोकन की संख्या जानने के लिए, `countTokens` तरीके को कॉल करें. उदाहरण के लिए:
 
 ### Python
 
@@ -939,44 +933,44 @@ func main() {
 }
 ```
 
-## Định dạng âm thanh được hỗ trợ
+## Google Podcasts के लिए इस्तेमाल किए जा सकने वाले ऑडियो फ़ॉर्मैट
 
-Gemini hỗ trợ các loại MIME định dạng âm thanh sau:
+Gemini, इन ऑडियो फ़ॉर्मैट के MIME टाइप के साथ काम करता है:
 
-- WAV – `audio/wav`
-- MP3 – `audio/mp3`
-- AIFF – `audio/aiff`
-- AAC – `audio/aac`
-- OGG Vorbis – `audio/ogg`
-- FLAC – `audio/flac`
+- WAV - `audio/wav`
+- MP3 - `audio/mp3`
+- AIFF - `audio/aiff`
+- AAC - `audio/aac`
+- OGG Vorbis - `audio/ogg`
+- FLAC - `audio/flac`
 
-## Thông tin kỹ thuật về âm thanh
+## ऑडियो के बारे में तकनीकी जानकारी
 
-- Gemini biểu thị mỗi giây âm thanh là 32 mã thông báo; ví dụ: một phút âm thanh được biểu thị là 1.920 mã thông báo.
-- Gemini có thể "hiểu" các thành phần không phải lời nói, chẳng hạn như tiếng chim hót hoặc tiếng còi báo động.
-- Thời lượng tối đa được hỗ trợ của dữ liệu âm thanh trong một câu lệnh là 9,5 giờ.
-  Gemini không giới hạn *số lượng* tệp âm thanh trong một câu lệnh; tuy nhiên, tổng thời lượng kết hợp của tất cả tệp âm thanh trong một câu lệnh không được vượt quá 9,5 giờ.
-- Gemini lấy mẫu tệp âm thanh xuống độ phân giải dữ liệu 16 Kbps.
-- Nếu nguồn âm thanh chứa nhiều kênh, Gemini sẽ kết hợp các kênh đó thành một kênh.
+- Gemini, ऑडियो के हर सेकंड को 32 टोकन के तौर पर दिखाता है. उदाहरण के लिए, एक मिनट के ऑडियो को 1,920 टोकन के तौर पर दिखाया जाता है.
+- Gemini, बोली के अलावा अन्य कॉम्पोनेंट को भी "समझ" सकता है. जैसे, पक्षियों के गाने या सायरन की आवाज़.
+- एक प्रॉम्प्ट में, ऑडियो डेटा की ज़्यादा से ज़्यादा लंबाई 9.5 घंटे हो सकती है.
+  Gemini, एक प्रॉम्प्ट में ऑडियो फ़ाइलों की *संख्या* पर कोई पाबंदी नहीं लगाता. हालांकि, एक प्रॉम्प्ट में सभी ऑडियो फ़ाइलों की कुल लंबाई 9.5 घंटे से ज़्यादा नहीं हो सकती.
+- Gemini, ऑडियो फ़ाइलों को 16 केबीपीएस के डेटा रिज़ॉल्यूशन पर डाउनसैंपल करता है.
+- अगर ऑडियो सोर्स में एक से ज़्यादा चैनल हैं, तो Gemini उन चैनलों को मिलाकर एक चैनल बना देता है.
 
-## Bước tiếp theo
+## आगे क्या करना है
 
-Hướng dẫn này cho biết cách tạo văn bản để phản hồi dữ liệu âm thanh. Để tìm hiểu thêm, hãy xem các tài nguyên sau:
+इस गाइड में, ऑडियो डेटा के जवाब में टेक्स्ट जनरेट करने का तरीका बताया गया है. ज़्यादा जानने के लिए, ये लेख पढ़ें और वीडियो देखें:
 
-- [Chiến lược nhắc tệp](https://ai.google.dev/gemini-api/docs/files?hl=vi#prompt-guide): Gemini API hỗ trợ nhắc bằng dữ liệu văn bản, hình ảnh, âm thanh và video, còn
-  được gọi là nhắc đa phương thức.
-- [Hướng dẫn hệ thống](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi#system-instructions):
-  Hướng dẫn hệ thống cho phép bạn điều chỉnh hành vi của mô hình dựa trên
-  nhu cầu và trường hợp sử dụng cụ thể của mình.
-- [Hướng dẫn về độ an toàn](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=vi): Đôi khi, các mô hình AI tạo sinh
-  tạo ra kết quả không mong muốn, chẳng hạn như kết quả không chính xác, thiên vị hoặc phản cảm. Việc xử lý hậu kỳ và đánh giá của con người là rất cần thiết để hạn chế nguy cơ gây hại từ những kết quả như vậy.
+- [फ़ाइल के साथ प्रॉम्प्ट करने की रणनीतियां](https://ai.google.dev/gemini-api/docs/files?hl=hi#prompt-guide): Gemini API, टेक्स्ट, इमेज, ऑडियो, और वीडियो डेटा के साथ प्रॉम्प्ट करने की सुविधा देता है. इसे
+  मल्टीमॉडल प्रॉम्प्टिंग भी कहा जाता है.
+- [सिस्टम के निर्देश](https://ai.google.dev/gemini-api/docs/text-generation?hl=hi#system-instructions):
+  सिस्टम के निर्देशों की मदद से, अपनी
+  खास ज़रूरतों और इस्तेमाल के उदाहरणों के हिसाब से मॉडल के व्यवहार को कंट्रोल किया जा सकता है.
+- [सुरक्षा से जुड़े दिशा-निर्देश](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=hi): कभी-कभी, जनरेटिव एआई
+  मॉडल से ऐसे आउटपुट मिलते हैं जिनकी उम्मीद नहीं होती. जैसे, गलत, पक्षपात वाले या आपत्तिजनक आउटपुट. ऐसे आउटपुट से होने वाले नुकसान के जोखिम को कम करने के लिए, पोस्ट-प्रोसेसिंग और मैन्युअल तरीके से आकलन करना ज़रूरी है.
 
-Gửi ý kiến phản hồi
+सुझाव भेजें
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया."],[],[]]

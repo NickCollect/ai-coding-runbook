@@ -1,46 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/imagen?hl=pt-BR
-fetched_at: 2026-05-05T20:06:38.431136+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/imagen?hl=ar
+fetched_at: 2026-05-05T20:48:31.620413+00:00
 title: "Imagen 4 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Envie comentários
+إرسال ملاحظات
 
 # Imagen 4
 
-Um mecanismo de alto desempenho para síntese visual avançada, que oferece controle criativo sofisticado e saída fotorrealista. Use o Imagen 4 para branding profissional, composição de cenas complexas e tarefas de design de alta fidelidade que exigem renderização de texto precisa e iluminação complexa.
+محرك عالي الأداء لتجميع الصور المتقدّمة، يوفّر تحكّمًا إبداعيًا متطوّرًا وصورًا واقعية. يمكنك استخدام Imagen 4 للعلامات التجارية الاحترافية وتكوين المشاهد المعقّدة ومهام التصميم عالية الدقة التي تتطلّب عرضًا دقيقًا للنص وإضاءة معقّدة.
 
-[Testar no Google AI Studio](https://aistudio.google.com?model=imagen-4.0-generate-001&hl=pt-br)
+[تجربة في Google AI Studio](https://aistudio.google.com?model=imagen-4.0-generate-001&hl=ar)
 
-## Documentação
+## الوثائق
 
-Acesse a página do [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=pt-br) para conferir a cobertura completa de recursos e funcionalidades.
+يمكنك الانتقال إلى صف0}حة [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=ar) للاطّلاع على تغطية كاملة لـ
+لميزات والإمكانات.
 
 ## imagen-4.0-generate-001
 
-| Propriedade | Descrição |
+| الموقع | الوصف |
 | --- | --- |
-| id\_card id\_cardModel | **API Gemini**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
-| saveTipos de dados com suporte | **Entrada**  Texto  **Saída**  Imagens |
-| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de token de entrada**  480 tokens (texto)  **Imagens de saída**  1 a 4 (Ultra/Padrão/Rápido) |
-| calendar\_monthAtualização mais recente | Junho de 2025 |
+| id\_cardModel code | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
+| saveSupported data types | **الإدخال**  نص  **الناتج**  الصور |
+| token\_autoToken limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحدّ الأقصى لرموز الإدخال**  480 رمزًا (نص)  **الصور الناتجة**  من 1 إلى 4 (Ultra/Standard/Fast) |
+| calendar\_monthLatest update | يونيو 2025 |
 
-Envie comentários
+إرسال ملاحظات
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Última atualização 2026-04-29 UTC.
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-Quer enviar seu feedback?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

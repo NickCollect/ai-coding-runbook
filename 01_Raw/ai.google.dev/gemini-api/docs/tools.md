@@ -1,98 +1,110 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tools?hl=de
-fetched_at: 2026-05-05T20:03:40.604041+00:00
-title: "Tools mit der Gemini API verwenden \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tools?hl=vi
+fetched_at: 2026-05-05T20:46:11.898540+00:00
+title: "S\u1eed d\u1ee5ng c\u00f4ng c\u1ee5 v\u1edbi Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Feedback geben
+Gửi ý kiến phản hồi
 
-# Tools mit der Gemini API verwenden
+# Sử dụng công cụ với Gemini API
 
-Tools erweitern die Funktionen von Gemini-Modellen und ermöglichen es ihnen, Aktionen in der realen Welt auszuführen, auf Echtzeitinformationen zuzugreifen und komplexe Berechnungsaufgaben zu erledigen. Modelle können Tools sowohl bei Standard-Anfrage-Antwort-Interaktionen als auch bei Echtzeit-Streaming-Sitzungen über die [Live API](https://ai.google.dev/gemini-api/docs/live-tools?hl=de) verwenden.
+Các công cụ mở rộng khả năng của mô hình Gemini, cho phép mô hình thực hiện hành động trong thế giới thực, truy cập thông tin theo thời gian thực và thực hiện các tác vụ tính toán phức tạp. Mô hình có thể sử dụng các công cụ trong cả hoạt động tương tác yêu cầu-phản hồi tiêu chuẩn và
+phiên phát trực tuyến theo thời gian thực bằng [Live API](https://ai.google.dev/gemini-api/docs/live-tools?hl=vi).
 
-Tools sind bestimmte Funktionen (z. B. Google Suche oder Codeausführung), die ein Modell verwenden kann, um Anfragen zu beantworten. Die Gemini API bietet eine Reihe von vollständig verwalteten, integrierten Tools. Sie können aber auch benutzerdefinierte Tools mit [Funktionsaufruf](https://ai.google.dev/gemini-api/docs/function-calling?hl=de) definieren.
+Các công cụ là những khả năng cụ thể (như Google Tìm kiếm hoặc Thực thi mã) mà mô hình có thể sử dụng để trả lời truy vấn. Gemini API cung cấp một bộ công cụ tích hợp sẵn và được quản lý đầy đủ
+, hoặc bạn có thể xác định các công cụ tuỳ chỉnh bằng cách sử dụng tính năng [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi).
 
-Informationen zum Erstellen von mehrstufigen, zielorientierten Systemen finden Sie in der [Übersicht über Agents](https://ai.google.dev/gemini-api/docs/agents?hl=de).
+Để xây dựng hệ thống nhiều bước và hướng đến mục tiêu, hãy xem bài viết [Tổng quan về tác nhân](https://ai.google.dev/gemini-api/docs/agents?hl=vi).
 
-## Verfügbare integrierte Tools
+## Các công cụ tích hợp sẵn có
 
-| Tool | Beschreibung | Anwendungsfälle |
+| Công cụ | Mô tả | Trường hợp sử dụng |
 | --- | --- | --- |
-| [Google Suche](https://ai.google.dev/gemini-api/docs/google-search?hl=de) | Antworten auf aktuelle Ereignisse und Fakten aus dem Web stützen, um Halluzinationen zu reduzieren. | \- Fragen zu aktuellen Ereignissen beantworten   \- Fakten mit verschiedenen Quellen abgleichen |
-| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=de) | Erstellen Sie standortbezogene Assistenten, die Orte finden, Wegbeschreibungen abrufen und umfassende lokale Informationen bereitstellen können. | – Reisepläne mit mehreren Zwischenstopps erstellen   – Lokale Unternehmen anhand von Nutzerkriterien finden |
-| [Codeausführung](https://ai.google.dev/gemini-api/docs/code-execution?hl=de) | Das Modell darf Python-Code schreiben und ausführen, um mathematische Probleme zu lösen oder Daten genau zu verarbeiten. | \- Komplexe mathematische Gleichungen lösen   \- Textdaten präzise verarbeiten und analysieren |
-| [URL-Kontext](https://ai.google.dev/gemini-api/docs/url-context?hl=de) | Weisen Sie das Modell an, Inhalte von bestimmten Webseiten oder Dokumenten zu lesen und zu analysieren. | – Fragen basierend auf bestimmten URLs oder Dokumenten beantworten   – Informationen von verschiedenen Webseiten abrufen |
-| [Computernutzung (Vorschau)](https://ai.google.dev/gemini-api/docs/computer-use?hl=de) | Gemini kann einen Bildschirm ansehen und Aktionen generieren, um mit Webbrowser-Benutzeroberflächen zu interagieren (clientseitige Ausführung). | – Automatisieren von sich wiederholenden webbasierten Workflows   – Testen von Benutzeroberflächen von Webanwendungen |
-| [Dateisuche](https://ai.google.dev/gemini-api/docs/file-search?hl=de) | Sie können Ihre eigenen Dokumente indexieren und durchsuchen, um Retrieval-Augmented Generation (RAG) zu ermöglichen. | – Suche in technischen Handbüchern   – Question Answering über proprietäre Daten |
+| [Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi) | Dựa vào các sự kiện và thông tin thực tế hiện tại trên web để giảm thiểu tình trạng ảo giác. | \- Trả lời câu hỏi về các sự kiện gần đây   \- Xác minh thông tin thực tế bằng nhiều nguồn |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi) | Xây dựng trợ lý nhận biết vị trí có thể tìm địa điểm, chỉ đường và cung cấp bối cảnh địa phương phong phú. | \- Lên kế hoạch cho hành trình du lịch có nhiều điểm dừng   \- Tìm doanh nghiệp địa phương dựa trên tiêu chí của người dùng |
+| [Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi) | Cho phép mô hình viết và chạy mã Python để giải các bài toán hoặc xử lý dữ liệu một cách chính xác. | \- Giải các phương trình toán học phức tạp   \- Xử lý và phân tích dữ liệu văn bản một cách chính xác |
+| [Ngữ cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi) | Hướng dẫn mô hình đọc và phân tích nội dung từ các trang web hoặc tài liệu cụ thể. | \- Trả lời câu hỏi dựa trên các URL hoặc tài liệu cụ thể   \- Truy xuất thông tin trên nhiều trang web |
+| [Sử dụng máy tính (Bản dùng thử)](https://ai.google.dev/gemini-api/docs/computer-use?hl=vi) | Cho phép Gemini xem màn hình và tạo hành động để tương tác với giao diện người dùng của trình duyệt web (Thực thi phía máy khách). | \- Tự động hoá các quy trình làm việc lặp đi lặp lại trên web   \- Kiểm thử giao diện người dùng của ứng dụng web |
+| [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi) | Lập chỉ mục và tìm kiếm tài liệu của riêng bạn để bật tính năng Tạo sinh tăng cường truy xuất (RAG). | - Tìm kiếm hướng dẫn kỹ thuật   - Trả lời câu hỏi dựa trên dữ liệu độc quyền |
 
-Weitere Informationen zu den Kosten für bestimmte Tools finden Sie auf der [Preisseite](https://ai.google.dev/gemini-api/docs/pricing?hl=de#pricing_for_tools).
+Hãy xem [trang Giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#pricing_for_tools) để biết thông tin chi tiết
+về chi phí liên quan đến các công cụ cụ thể.
 
-## So funktioniert die Toolausführung
+## Cách thực thi công cụ
 
-Mithilfe von Tools kann das Modell während einer Unterhaltung Aktionen anfordern. Der Ablauf hängt davon ab, ob das Tool integriert (von Google verwaltet) oder benutzerdefiniert (von Ihnen verwaltet) ist.
+Các công cụ cho phép mô hình yêu cầu hành động trong cuộc trò chuyện. Quy trình này khác nhau tuỳ thuộc vào việc công cụ đó là công cụ tích hợp sẵn (do Google quản lý) hay công cụ tuỳ chỉnh (do bạn quản lý).
 
-### Ablauf integrierter Tools
+### Quy trình công cụ tích hợp sẵn
 
-Bei integrierten Tools (Google Suche, Google Maps, URL-Kontext, Dateisuche, Codeausführung) erfolgt der gesamte Prozess in einem API-Aufruf:
+Đối với các công cụ tích hợp sẵn (Google Tìm kiếm, Google Maps, Ngữ cảnh URL, Tìm kiếm tệp, Thực thi mã), toàn bộ quy trình diễn ra trong một lệnh gọi API:
 
-1. **Sie** senden einen Prompt: „Was ist die Quadratwurzel des aktuellen Aktienkurses von GOOG?“
-2. **Gemini** entscheidet, dass Tools benötigt werden, und führt sie auf den Servern von Google aus (z.B. wird nach dem Aktienkurs gesucht und dann Python-Code ausgeführt, um die Quadratwurzel zu berechnen).
-3. **Gemini** sendet die endgültige Antwort zurück, die auf den Tool-Ergebnissen basiert.
+1. **Bạn** gửi một câu lệnh: "Căn bậc hai của giá cổ phiếu mới nhất của GOOG là bao nhiêu?"
+2. **Gemini** quyết định cần các công cụ và thực thi các công cụ đó trên máy chủ của Google (ví dụ: tìm kiếm giá cổ phiếu, sau đó chạy mã Python để tính căn bậc hai).
+3. **Gemini** gửi lại câu trả lời cuối cùng dựa trên kết quả của công cụ.
 
-### Benutzerdefinierter Toolablauf (Funktionsaufrufe)
+### Quy trình công cụ tuỳ chỉnh (Gọi hàm)
 
-Bei benutzerdefinierten Tools und der Computerverwendung übernimmt Ihre Anwendung die Ausführung:
+Đối với các công cụ tuỳ chỉnh và tính năng Sử dụng máy tính, ứng dụng của bạn sẽ xử lý quá trình thực thi:
 
-1. **Sie** senden einen Prompt zusammen mit Funktionsdeklarationen (Tools).
-2. **Gemini** kann strukturiertes JSON zurückgeben, um eine bestimmte Funktion aufzurufen (z. B. `{"name": "get_order_status", "args": {"order_id": "123"}}`), immer mit einer eindeutigen `id`.
-3. **Sie** führen die Funktion in Ihrer Anwendung oder Umgebung aus.
-4. **Sie** senden die Funktionsergebnisse mit demselben `id` wie beim Funktionsaufruf zurück an Gemini.
-5. **Gemini** verwendet die Ergebnisse, um eine endgültige Antwort oder einen weiteren Tool-Aufruf zu generieren.
+1. **Bạn** gửi một câu lệnh cùng với các khai báo hàm (công cụ).
+2. **Gemini** có thể gửi lại JSON có cấu trúc để gọi một hàm cụ thể
+   (ví dụ: `{"name": "get_order_status", "args": {"order_id": "123"}}`),
+   luôn có một `id` duy nhất.
+3. **Bạn** thực thi hàm trong ứng dụng hoặc môi trường của mình.
+4. **Bạn** gửi kết quả của hàm (có cùng `id` với lệnh gọi hàm) trở lại Gemini.
+5. **Gemini** sử dụng kết quả này để tạo câu trả lời cuối cùng hoặc một lệnh gọi công cụ khác.
 
-Weitere Informationen finden Sie im [Leitfaden zu Funktionsaufrufen](https://ai.google.dev/gemini-api/docs/function-calling?hl=de).
+Tìm hiểu thêm trong [hướng dẫn Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi).
 
-### Ablauf zum Kombinieren integrierter und benutzerdefinierter Tools
+### Kết hợp quy trình công cụ tích hợp sẵn và công cụ tuỳ chỉnh
 
-Bei Anfragen, in denen integrierte und benutzerdefinierte Tools (Funktionsaufrufe) kombiniert werden, verwendet das Modell [Tool-Kontextzirkulation](https://ai.google.dev/gemini-api/docs/toold-combination?hl=de), um die Ausführung in verschiedenen Umgebungen zu koordinieren:
+[Đối với các yêu cầu kết hợp công cụ tích hợp sẵn và công cụ tuỳ chỉnh (lệnh gọi hàm), mô hình sẽ sử dụng tính năng lưu thông ngữ cảnh công cụ để điều phối quá trình thực thi trên nhiều môi trường:](https://ai.google.dev/gemini-api/docs/toold-combination?hl=vi)
 
-1. **Sie** senden einen Prompt und deklarieren die integrierten Tools und benutzerdefinierten Funktionen, die Sie aktivieren möchten. Dabei legen Sie ein Flag fest, um die Unterstützung von Kombinationen zu aktivieren.
-2. **Gemini** führt integrierte Tools aus und übergibt die Kontrolle an den Nutzer, wenn clientseitige Funktionsaufrufe generiert werden. Welche Aktion zuerst ausgeführt wird, hängt vom Prompt und der Entscheidung des Modells ab. Es wird eine Antwort mit Folgendem zurückgesendet:
-   - Bestätigung des Tool-Aufrufs
-   - Ergebnisse der Tool-Antwort (diese können nach dem JSON-Code stehen, wenn das Modell zwei parallele Funktionsaufrufe generiert hat)
-   - Strukturierter JSON-Code zum Aufrufen Ihrer Funktion
-   - Verschlüsselte Gedanken-Signaturen, um den Kontext beizubehalten
-3. **Sie** führen die Funktion in Ihrer Anwendung oder Umgebung aus.
-4. **Sie** geben alle Teile der Antwort von Gemini sowie die Ergebnisse Ihres Funktionsaufrufs zurück.
-5. **Gemini** generiert die endgültige Antwort anhand des gesamten kombinierten Kontexts.
+1. **Bạn** gửi một câu lệnh và khai báo các công cụ tích hợp sẵn cũng như các hàm tuỳ chỉnh mà bạn muốn bật, đồng thời đặt một cờ để bật tính năng hỗ trợ kết hợp.
+2. **Gemini** thực thi các công cụ tích hợp sẵn và nhường quyền cho người dùng nếu có bất kỳ lệnh gọi hàm phía máy khách nào được tạo (lệnh gọi nào thực thi trước sẽ phụ thuộc vào câu lệnh và những gì mô hình quyết định). Mô hình sẽ gửi lại một phản hồi có:
+   - Xác nhận lệnh gọi công cụ
+   - Kết quả của phản hồi công cụ (kết quả này có thể xuất hiện sau JSON nếu mô hình tạo ra 2 lệnh gọi hàm song song)
+   - JSON có cấu trúc để gọi hàm
+   - Chữ ký ý tưởng được mã hoá để giữ nguyên ngữ cảnh
+3. **Bạn** thực thi hàm trong ứng dụng hoặc môi trường của mình.
+4. **Bạn** trả về tất cả các phần của phản hồi của Gemini, cộng với kết quả lệnh gọi hàm.
+5. **Gemini** tạo phản hồi cuối cùng bằng cách sử dụng tất cả ngữ cảnh kết hợp.
 
-Im [Leitfaden zur Kombination von Tools](https://ai.google.dev/gemini-api/docs/tool-combination?hl=de) erfahren Sie, wie Sie die Unterstützung für die Kombination von integrierten und benutzerdefinierten Tools aktivieren und wie der Kontext weitergegeben wird.
+Hãy đọc [hướng dẫn Kết hợp công cụ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi) để tìm hiểu cách bật tính năng hỗ trợ kết hợp công cụ tích hợp sẵn và công cụ tuỳ chỉnh, cũng như các ví dụ về lưu thông ngữ cảnh.
 
-## Strukturierte Ausgaben im Vergleich zu Funktionsaufrufen
+## Đầu ra có cấu trúc so với gọi hàm
 
-Gemini bietet zwei Methoden zum Generieren strukturierter Ausgaben. Verwenden Sie [Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/function-calling?hl=de), wenn das Modell einen Zwischenschritt ausführen muss, indem es eine Verbindung zu Ihren eigenen Tools oder Datensystemen herstellt. Verwenden Sie [strukturierte Ausgaben](https://ai.google.dev/gemini-api/docs/structured-output?hl=de), wenn die endgültige Antwort des Modells unbedingt einem bestimmten Schema entsprechen muss, z. B. zum Rendern einer benutzerdefinierten Benutzeroberfläche.
+Gemini cung cấp 2 phương thức để tạo đầu ra có cấu trúc. Hãy sử dụng tính năng [Gọi
+hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) khi mô hình cần thực hiện một
+bước trung gian bằng cách kết nối với các công cụ hoặc hệ thống dữ liệu của riêng bạn. Hãy sử dụng
+[Đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi) khi bạn cần mô hình tuân thủ một giản đồ cụ thể trong phản hồi cuối cùng, chẳng hạn như để kết xuất
+giao diện người dùng tuỳ chỉnh.
 
-## Strukturierte Ausgaben mit Tools
+## Đầu ra có cấu trúc với các công cụ
 
-Sie können [strukturierte Ausgaben](https://ai.google.dev/gemini-api/docs/structured-output?hl=de) mit integrierten Tools kombinieren, um sicherzustellen, dass Modellantworten, die auf externen Daten oder Berechnungen basieren, einem strengen Schema entsprechen.
+Bạn có thể kết hợp [Đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi) với
+các công cụ tích hợp sẵn để đảm bảo rằng các phản hồi của mô hình dựa trên dữ liệu hoặc
+tính toán bên ngoài vẫn tuân thủ một giản đồ nghiêm ngặt.
 
-Codebeispiele finden Sie unter [Strukturierte Ausgaben mit Tools](https://ai.google.dev/gemini-api/docs/structured-output?example=recipe&hl=de#structured_outputs_with_tools).
+Hãy xem bài viết [Đầu ra có cấu trúc với các công cụ](https://ai.google.dev/gemini-api/docs/structured-output?example=recipe&hl=vi#structured_outputs_with_tools)
+để xem các đoạn mã ví dụ.
 
-Feedback geben
+Gửi ý kiến phản hồi
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Zuletzt aktualisiert: 2026-04-29 (UTC).
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-Haben Sie Feedback für uns?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-04-29 (UTC)."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

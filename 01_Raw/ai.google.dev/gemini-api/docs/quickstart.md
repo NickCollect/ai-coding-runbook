@@ -1,36 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/quickstart?hl=de
-fetched_at: 2026-05-05T20:05:57.073179+00:00
-title: "Gemini API \u2013 Kurzanleitung \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/quickstart?hl=ja
+fetched_at: 2026-05-05T20:49:14.118453+00:00
+title: "Gemini API \u306e\u30af\u30a4\u30c3\u30af\u30b9\u30bf\u30fc\u30c8 \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Feedback geben
+フィードバックを送信
 
-# Gemini API – Kurzanleitung
+# Gemini API のクイックスタート
 
-In dieser Kurzanleitung erfahren Sie, wie Sie unsere [Bibliotheken](https://ai.google.dev/gemini-api/docs/libraries?hl=de) installieren und Ihre erste Gemini API-Anfrage stellen.
+このクイックスタートでは、[ライブラリ](https://ai.google.dev/gemini-api/docs/libraries?hl=ja)
+をインストールして最初の Gemini API リクエストを行う方法について説明します。
 
-## Hinweis
+## 始める前に
 
-Für die Verwendung der Gemini API ist ein API-Schlüssel erforderlich. Sie können kostenlos einen erstellen, um loszulegen.
+Gemini API を使用するには API キーが必要です。API キーは無料で作成できます。
 
-[Gemini API-Schlüssel erstellen](https://aistudio.google.com/app/apikey?hl=de)
+[Gemini API キーを作成する](https://aistudio.google.com/app/apikey?hl=ja)
 
-## Google GenAI SDK installieren
+## Google GenAI SDK をインストールする
 
 ### Python
 
-Installieren Sie mit [Python 3.9+](https://www.python.org/downloads/) das [`google-genai`-Paket](https://pypi.org/project/google-genai/) mit dem folgenden [pip-Befehl](https://packaging.python.org/en/latest/tutorials/installing-packages/):
+[Python 3.9+](https://www.python.org/downloads/) 以降を使用して、次の
+[pip コマンド](https://packaging.python.org/en/latest/tutorials/installing-packages/)で
+[`google-genai` パッケージ](https://pypi.org/project/google-genai/)をインストールします。
 
 ```
 pip install -q -U google-genai
@@ -38,15 +41,16 @@ pip install -q -U google-genai
 
 ### JavaScript
 
-Installieren Sie mit [Node.js v18+](https://nodejs.org/en/download/package-manager) das [Google Gen AI SDK für TypeScript und JavaScript](https://www.npmjs.com/package/@google/genai) mit dem folgenden [npm-Befehl](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm):
+[Node.js v18+](https://nodejs.org/en/download/package-manager) 以降を使用して、次の [npm コマンド](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)で [TypeScript と JavaScript 用の Google Gen AI SDK](https://www.npmjs.com/package/@google/genai) をインストールします。
 
 ```
 npm install @google/genai
 ```
 
-### Ok
+### Go
 
-Installieren Sie [google.golang.org/genai](https://pkg.go.dev/google.golang.org/genai) in Ihrem Modulverzeichnis mit dem [Befehl „go get“](https://go.dev/doc/code):
+[go get コマンドを使用して、モジュール ディレクトリに
+[google.golang.org/genai](https://pkg.go.dev/google.golang.org/genai) をインストールします。](https://go.dev/doc/code)
 
 ```
 go get google.golang.org/genai
@@ -54,7 +58,8 @@ go get google.golang.org/genai
 
 ### Java
 
-Wenn Sie Maven verwenden, können Sie [google-genai](https://github.com/googleapis/java-genai) installieren, indem Sie Ihren Abhängigkeiten Folgendes hinzufügen:
+Maven を使用している場合は、依存関係に次のものを追加して
+[google-genai](https://github.com/googleapis/java-genai)をインストールできます。
 
 ```
 <dependencies>
@@ -68,7 +73,8 @@ Wenn Sie Maven verwenden, können Sie [google-genai](https://github.com/googleap
 
 ### C#
 
-Installieren Sie [googleapis/go-genai](https://googleapis.github.io/dotnet-genai/) in Ihrem Modulverzeichnis mit dem [dotnet add-Befehl](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-package-add).
+[dotnet add コマンドを使用して、モジュール ディレクトリに
+[googleapis/go-genai](https://googleapis.github.io/dotnet-genai/) をインストールします。](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-package-add)
 
 ```
 dotnet add package Google.GenAI
@@ -76,25 +82,29 @@ dotnet add package Google.GenAI
 
 ### Apps Script
 
-1. Wenn Sie ein neues Apps Script-Projekt erstellen möchten, rufen Sie [script.new](https://script.google.com/u/0/home/projects/create?hl=de) auf.
-2. Klicken Sie auf **Unbenanntes Projekt**.
-3. Benennen Sie das Apps Script-Projekt in **AI Studio** um und klicken Sie auf **Umbenennen**.
-4. [API-Schlüssel](https://developers.google.com/apps-script/guides/properties?hl=de#manage_script_properties_manually) festlegen
-   1. Klicken Sie links auf **Projekteinstellungen** ![Symbol für die Projekteinstellungen](https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/settings/default/24px.svg).
-   2. Klicken Sie unter **Skripteigenschaften** auf **Skripteigenschaft hinzufügen**.
-   3. Geben Sie unter **Property** den Schlüsselnamen `GEMINI_API_KEY` ein.
-   4. Geben Sie für **Wert** den Wert für den API-Schlüssel ein.
-   5. Klicken Sie auf **Skripteigenschaften speichern**.
-5. Ersetzen Sie den Inhalt der Datei `Code.gs` durch den folgenden Code:
+1. 新しい Apps Script プロジェクトを作成するには、
+   [script.new](https://script.google.com/u/0/home/projects/create?hl=ja) に移動します。
+2. [**無題のプロジェクト**] をクリックします。
+3. Apps Script プロジェクトの名前を **AI Studio** に変更して、[**名前を変更**] をクリックします。
+4. [API キー](https://developers.google.com/apps-script/guides/properties?hl=ja#manage_script_properties_manually)を設定する
+   1. 左側の [**プロジェクトの設定**] ![プロジェクト設定のアイコン](https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/settings/default/24px.svg) をクリックします。
+   2. [**スクリプト プロパティ**] で [**スクリプト プロパティを追加**] をクリックします。
+   3. [**プロパティ**] にキー名 `GEMINI_API_KEY` を入力します。
+   4. [**\*\*値\*\***] に API キーの値を入力します。
+   5. [**スクリプト プロパティを保存**] をクリックします。
+5. `Code.gs` ファイルの内容を次のコードに置き換えます。
 
-## Erste Anfrage senden
+## 最初のリクエストを送信する
 
-Hier ist ein Beispiel, in dem die Methode [`generateContent`](https://ai.google.dev/api/generate-content?hl=de#method:-models.generatecontent) verwendet wird, um eine Anfrage mit dem Modell Gemini 2.5 Flash an die Gemini API zu senden.
+Gemini 2.5 Flash モデルを使用して Gemini API にリクエストを送信する
+[`generateContent`](https://ai.google.dev/api/generate-content?hl=ja#method:-models.generatecontent) メソッド
+を使用する例を次に示します。
 
-Wenn Sie Ihren [API-Schlüssel](https://ai.google.dev/gemini-api/docs/api-key?hl=de#set-api-env-var) als Umgebungsvariable `GEMINI_API_KEY` festlegen, wird er automatisch vom Client übernommen, wenn Sie die [Gemini API-Bibliotheken](https://ai.google.dev/gemini-api/docs/libraries?hl=de) verwenden.
-Andernfalls müssen Sie [Ihren API-Schlüssel](https://ai.google.dev/gemini-api/docs/api-key?hl=de#provide-api-key-explicitly) als Argument beim Initialisieren des Clients übergeben.
+API キーを[環境変数 `GEMINI_API_KEY`として](https://ai.google.dev/gemini-api/docs/api-key?hl=ja#set-api-env-var)設定すると、
+Gemini API ライブラリを[使用するときにクライアントによって](https://ai.google.dev/gemini-api/docs/libraries?hl=ja)自動的に取得されます。
+[それ以外の場合は、クライアントを初期化するときに API キーを引数として渡す必要があります。](https://ai.google.dev/gemini-api/docs/api-key?hl=ja#provide-api-key-explicitly)
 
-Beachten Sie, dass in allen Codebeispielen in der Gemini API-Dokumentation davon ausgegangen wird, dass Sie die Umgebungsvariable `GEMINI_API_KEY` festgelegt haben.
+Gemini API ドキュメントのすべてのコードサンプルでは、環境変数 `GEMINI_API_KEY` が設定されていることを前提としています。
 
 ### Python
 
@@ -129,7 +139,7 @@ async function main() {
 main();
 ```
 
-### Ok
+### Go
 
 ```
 package main
@@ -259,24 +269,24 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
   }'
 ```
 
-## Nächste Schritte
+## 次のステップ
 
-Nachdem Sie Ihre erste API-Anfrage gesendet haben, können Sie sich die folgenden Anleitungen ansehen, in denen Gemini in Aktion gezeigt wird:
+最初の API リクエストが完了したので、Gemini の動作を示す次のガイドをご覧ください。
 
-- [Textgenerierung](https://ai.google.dev/gemini-api/docs/text-generation?hl=de)
-- [Bildgenerierung](https://ai.google.dev/gemini-api/docs/image-generation?hl=de)
-- [Bildverständnis](https://ai.google.dev/gemini-api/docs/image-understanding?hl=de)
-- [Denken](https://ai.google.dev/gemini-api/docs/thinking?hl=de)
-- [Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/function-calling?hl=de)
-- [Langer Kontext](https://ai.google.dev/gemini-api/docs/long-context?hl=de)
-- [Einbettungen](https://ai.google.dev/gemini-api/docs/embeddings?hl=de)
+- [テキスト生成](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja)
+- [画像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja)
+- [画像理解](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ja)
+- [思考モード](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)
+- [関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)
+- [長いコンテキスト](https://ai.google.dev/gemini-api/docs/long-context?hl=ja)
+- [エンベディング](https://ai.google.dev/gemini-api/docs/embeddings?hl=ja)
 
-Feedback geben
+フィードバックを送信
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Zuletzt aktualisiert: 2026-04-29 (UTC).
+最終更新日 2026-04-29 UTC。
 
-Haben Sie Feedback für uns?
+ご意見をお聞かせください
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-04-29 (UTC)."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]

@@ -1,30 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/code-execution?hl=ko
-fetched_at: 2026-05-05T20:09:54.127351+00:00
-title: "\ucf54\ub4dc \uc2e4\ud589 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-CN
+fetched_at: 2026-05-05T20:43:19.853399+00:00
+title: "\u4ee3\u7801\u6267\u884c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-의견 보내기
+发送反馈
 
-# 코드 실행
+# 代码执行
 
-Gemini API는 모델이 Python 코드를 생성하고 실행할 수 있는 코드 실행 도구를 제공합니다. 그런 다음 모델은 최종 출력을 도출할 때까지 코드 실행 결과를 통해 반복적으로 학습할 수 있습니다. 코드 실행을 사용하여 코드 기반 추론의 이점을 활용하는 애플리케이션을 빌드할 수 있습니다. 예를 들어 코드 실행을 사용하여 방정식을 풀거나 텍스트를 처리할 수 있습니다. 코드 실행 환경에 포함된 [라이브러리](#supported-libraries)를 사용하여 더 전문적인 작업을 실행할 수도 있습니다.
+Gemini API 提供代码执行工具，可让模型生成和运行 Python 代码。然后，模型可以根据代码执行结果进行迭代学习，直到获得最终输出。您可以利用代码执行功能来构建可受益于基于代码的推理的应用。例如，您可以使用代码执行功能来求解方程式或处理文本。您还可以使用代码执行环境中包含的[库](#supported-libraries)来执行更专业的任务。
 
-Gemini는 Python으로만 코드를 실행할 수 있습니다. Gemini에 다른 언어로 코드를 생성해 달라고 요청할 수는 있지만 모델이 코드 실행 도구를 사용하여 코드를 실행할 수는 없습니다.
+Gemini 只能执行 Python 代码。您仍然可以问问 Gemini 以其他语言生成代码，但模型无法使用代码执行工具来运行该代码。
 
-## 코드 실행 사용 설정
+## 启用代码执行功能
 
-코드 실행을 사용 설정하려면 모델에서 코드 실행 도구를 구성하세요. 이를 통해 모델이 코드를 생성하고 실행할 수 있습니다.
+如需启用代码执行功能，请在模型上配置代码执行工具。这样一来，模型就可以生成并运行代码。
 
 ### Python
 
@@ -52,7 +52,7 @@ for part in response.candidates[0].content.parts:
         print(part.code_execution_result.output)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -142,7 +142,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 }'
 ```
 
-출력은 가독성을 위해 서식이 지정된 다음과 같이 표시될 수 있습니다.
+输出可能如下所示，为了便于阅读，已对其进行格式设置：
 
 ```
 Okay, I need to calculate the sum of the first 50 prime numbers. Here's how I'll
@@ -191,27 +191,27 @@ sum_of_primes=5117
 The sum of the first 50 prime numbers is 5117.
 ```
 
-이 출력은 코드 실행을 사용할 때 모델이 반환하는 여러 콘텐츠 부분을 결합합니다.
+此输出结合了模型在使用代码执行功能时返回的多个内容部分：
 
-- `text`: 모델에서 생성된 인라인 텍스트
-- `executableCode`: 실행 목적으로 모델에서 생성된 코드
-- `codeExecutionResult`: 실행 가능한 코드의 결과
+- `text`：模型生成的内嵌文本
+- `executableCode`：由模型生成且旨在执行的代码
+- `codeExecutionResult`：可执行代码的结果
 
-이러한 부분의 이름 지정 규칙은 프로그래밍 언어에 따라 다릅니다.
+这些部分的命名惯例因编程语言而异。
 
-## 이미지를 사용한 코드 실행 (Gemini 3)
+## 使用图片执行代码 (Gemini 3)
 
-이제 Gemini 3 Flash 모델이 Python 코드를 작성하고 실행하여 이미지를 적극적으로 조작하고 검사할 수 있습니다.
+Gemini 3 Flash 模型现在可以编写和执行 Python 代码，主动操纵和检查图片。
 
-**사용 사례**
+**用例**
 
-- **확대/축소 및 검사**: 모델은 세부정보가 너무 작을 때(예: 멀리 있는 게이지를 읽는 경우) 이를 암시적으로 감지하고 더 높은 해상도로 영역을 잘라 다시 검사하는 코드를 작성합니다.
-- **시각적 수학**: 모델은 코드를 사용하여 다단계 계산을 실행할 수 있습니다 (예: 영수증의 항목 합계).
-- **이미지 주석**: 모델은 질문에 답하기 위해 이미지를 주석으로 달 수 있습니다(예: 관계를 보여주는 화살표를 그림).
+- **缩放和检查**：模型会隐式检测细节何时过小（例如，读取远处的仪表），并编写代码来裁剪和重新检查更高分辨率的区域。
+- **可视化数学**：模型可以使用代码运行多步计算（例如，对收据上的各个商品项求和）。
+- **图片批注**：模型可以批注图片以回答问题，例如绘制箭头来显示关系。
 
-### 이미지를 사용한 코드 실행 사용 설정
+### 启用图片代码执行功能
 
-이미지를 사용한 코드 실행은 Gemini 3 Flash에서 공식적으로 지원됩니다. 도구로서의 코드 실행과 사고를 모두 사용 설정하면 이 동작을 활성화할 수 있습니다.
+Gemini 3 Flash 正式支持使用图片执行代码。您可以同时启用“将代码执行作为工具”和“思考”来激活此行为。
 
 ### Python
 
@@ -251,7 +251,7 @@ for part in response.candidates[0].content.parts:
         display(Image.open(io.BytesIO(part.as_image().image_bytes)))
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 async function main() {
@@ -426,9 +426,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/$MODEL:generateCon
     }'
 ```
 
-## 채팅에서 코드 실행 사용
+## 在对话中使用代码执行
 
-채팅의 일부로 코드 실행을 사용할 수 있습니다.
+您还可以在对话中使用代码执行功能。
 
 ### Python
 
@@ -462,7 +462,7 @@ for part in response.candidates[0].content.parts:
         print(part.code_execution_result.output)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import {GoogleGenAI} from "@google/genai";
@@ -586,73 +586,72 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 }'
 ```
 
-## 입력/출력 (I/O)
+## 输入/输出 (I/O)
 
-코드 실행은 파일 입력과 그래프 출력을 지원합니다. 이러한 입력 및 출력 기능을 사용하면 CSV 파일과 텍스트 파일을 업로드하고 파일에 대해 질문하고 대답의 일부로 [Matplotlib](https://matplotlib.org/) 그래프를 생성할 수 있습니다. 출력 파일은 응답에 인라인 이미지로 반환됩니다.
+代码执行支持文件输入和图表输出。利用这些输入和输出功能，您可以上传 CSV 和文本文件，询问有关这些文件的问题，并让系统在回答中为您生成 [Matplotlib](https://matplotlib.org/) 图表。输出文件以内嵌图片的形式在响应中返回。
 
-### I/O 가격 책정
+### I/O 定价
 
-코드 실행 I/O를 사용하면 입력 토큰과 출력 토큰에 대한 요금이 청구됩니다.
+使用代码执行 I/O 时，您需要为输入 token 和输出 token 支付费用：
 
-**입력 토큰:**
+**输入 token**：
 
-- 사용자 프롬프트
+- 用户提示
 
-**출력 토큰:**
+**输出 token 数**：
 
-- 모델에서 생성된 코드
-- 코드 환경의 코드 실행 출력
-- 사고 토큰
-- 모델에서 생성된 요약
+- 由模型生成的代码
+- 代码环境中的代码执行输出
+- 思考 token
+- 模型生成的摘要
 
-### I/O 세부정보
+### I/O 详情
 
-코드 실행 I/O를 사용할 때는 다음 기술 세부정보에 유의하세요.
+使用代码执行 I/O 时，请注意以下技术细节：
 
-- 코드 환경의 최대 런타임은 30초입니다.
-- 코드 환경에서 오류가 발생하면 모델이 코드 출력을 재생성할 수 있습니다. 이러한 상황은 최대 5번까지 발생할 수 있습니다.
-- 최대 파일 입력 크기는 모델 토큰 창에 의해 제한됩니다. AI Studio에서 최대 입력 파일 크기는 100만 토큰입니다 (지원되는 입력 유형의 텍스트 파일의 경우 약 2MB). 너무 큰 파일을 업로드하면 AI Studio에서 전송할 수 없습니다.
-- 코드 실행은 텍스트 및 CSV 파일에서 가장 잘 작동합니다.
-- 입력 파일은 `part.inlineData` 또는 `part.fileData` ([Files API](https://ai.google.dev/gemini-api/docs/files?hl=ko)를 통해 업로드됨)로 전달할 수 있으며 출력 파일은 항상 `part.inlineData`로 반환됩니다.
+- 代码环境的最长运行时间为 30 秒。
+- 如果代码环境生成错误，模型可能会决定重新生成代码输出。此过程最多可重复 5 次。
+- 文件输入大小上限受模型 token 窗口的限制。在 AI Studio 中，输入文件大小上限为 100 万个 token（对于支持的输入类型的文本文件，大约为 2MB）。如果您上传的文件过大，AI Studio 将不允许您发送该文件。
+- 代码执行最适合处理文本文件和 CSV 文件。
+- 输入文件可以采用 `part.inlineData` 或 `part.fileData` 格式（通过 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn) 上传），输出文件始终以 `part.inlineData` 格式返回。
 
-## 결제
+## 结算
 
-Gemini API에서 코드 실행을 사용 설정하는 데에는 추가 비용이 발생하지 않습니다.
-사용 중인 Gemini 모델에 따라 입력 및 출력 토큰의 현재 요율로 비용이 청구됩니다.
+通过 Gemini API 启用代码执行功能不会产生额外的费用。系统会根据您使用的 Gemini 模型，按当前的输入和输出 token 费率向您收费。
 
-코드 실행의 청구에 대해 몇 가지 중요한 사항은 다음과 같습니다.
+以下是关于代码执行结算的一些其他事项：
 
-- 모델에 전달하는 입력 토큰에 대해서는 비용이 한 번만 청구되며, 모델에서 사용자에게 반환하는 최종 출력 토큰에 대해서는 비용이 청구됩니다.
-- 생성된 코드를 나타내는 토큰은 출력 토큰으로 계산됩니다. 생성된 코드에는 텍스트 및 멀티모달 출력(예: 이미지)이 포함될 수 있습니다.
-- 코드 실행 결과도 출력 토큰으로 집계됩니다.
+- 您只需为传递给模型的输入 token 支付一次费用，并需要为模型返回给您的最终输出 token 支付费用。
+- 表示生成的代码的 token 会计为输出 token。生成的代码可以包含文本和多模态输出结果（例如图片）。
+- 代码执行结果也会计为输出 token。
 
-결제 모델은 다음 다이어그램에 나와 있습니다.
+结算模式如下图所示：
 
-![코드 실행 청구 모델](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=ko)
+![代码执行结算模式](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=zh-cn)
 
-- 사용 중인 Gemini 모델에 따라 입력 및 출력 토큰의 현재 요율로 비용이 청구됩니다.
-- 응답을 생성할 때 Gemini에 코드 실행이 사용되는 경우 원본 프롬프트, 생성된 코드, 실행된 코드 결과가 *중간 토큰* 라벨로 표시되고 *입력 토큰*으로 청구됩니다.
-- 그런 후 Gemini가 요약을 생성하고 생성된 코드, 실행된 코드 결과, 최종 요약을 반환합니다. 이러한 토큰은 *출력 토큰*으로 청구됩니다.
-- Gemini API에는 API 응답에 중간 토큰 수가 포함되기 때문에 초기 프롬프트 이상으로 추가된 입력 토큰이 발생하는 이유를 알 수 있습니다.
+- 系统会根据您使用的 Gemini 模型，按当前的输入和输出 token 费率向您收费。
+- 如果 Gemini 在生成回答时使用了代码执行功能，则原始提示、生成的代码以及已执行代码的相应结果会被标记为*中间 token*，并会按*输入 token* 计费。
+- 然后，Gemini 会生成摘要，并返回生成的代码、已执行代码的相应结果以及最终摘要。这些内容会按*输出 token* 计费。
+- Gemini API 在 API 响应中包含中间 token 数，因此您可以了解为什么会获得除初始提示之外的其他输入 token。
 
-## 제한사항
+## 限制
 
-- 모델은 코드를 생성 및 실행할 수만 있습니다. 미디어 파일과 같은 다른 아티팩트는 반환할 수 없습니다.
-- 일부 경우에 코드 실행을 사용 설정하면 모델 출력의 다른 영역(예: 스토리 작성)에서 성능이 저하될 수 있습니다.
-- 모델마다 코드 실행을 성공적으로 사용하는 기능에 약간의 차이가 있습니다.
+- 该模型只能生成和执行代码。它无法返回其他制品，例如媒体文件。
+- 在某些情况下，启用代码执行功能可能会导致模型输出的其他方面（例如，编写故事）出现回归问题。
+- 不同模型成功使用代码执行功能的能力各不相同。
 
-## 지원되는 도구 조합
+## 支持的工具组合
 
-코드 실행 도구를 [Google 검색을 사용한 그라운딩](https://ai.google.dev/gemini-api/docs/google-search?hl=ko)과 결합하여 더 복잡한 사용 사례를 지원할 수 있습니다.
+代码执行工具可以与[依托 Google 搜索进行接地](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn)功能结合使用，以处理更复杂的用例。
 
-Gemini 3 모델은 코드 실행과 같은 기본 제공 도구와 맞춤 도구(함수 호출)의 조합을 지원합니다. 도구 조합이 작동하려면 `id` 및 `thought_signature` 필드를 다시 전달해야 합니다. [도구 조합](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ko) 페이지에서 자세히 알아보세요.
+Gemini 3 模型支持将内置工具（例如代码执行）与自定义工具（函数调用）相结合。您必须传递回 `id` 和 `thought_signature` 字段，才能使工具组合正常运行。如需了解详情，请参阅[工具组合](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-cn)页面。
 
-## 지원되는 라이브러리
+## 受支持的库
 
-코드 실행 환경에는 다음 라이브러리가 포함됩니다.
+代码执行环境包含以下库：
 
 - attrs
-- 체스
+- 国际象棋
 - contourpy
 - fpdf
 - geopandas
@@ -667,7 +666,7 @@ Gemini 3 모델은 코드 실행과 같은 기본 제공 도구와 맞춤 도구
 - numpy
 - opencv-python
 - openpyxl
-- 패키징
+- 打包
 - pandas
 - pillow
 - protobuf
@@ -681,29 +680,29 @@ Gemini 3 모델은 코드 실행과 같은 기본 제공 도구와 맞춤 도구
 - scikit-learn
 - scipy
 - seaborn
-- 육
+- six
 - striprtf
 - sympy
 - tabulate
-- tensorflow
+- TensorFlow
 - toolz
 - xlrd
 
-사용자의 고유 라이브러리는 설치할 수 없습니다.
+您无法安装自己的库。
 
-## 다음 단계
+## 后续步骤
 
-- [코드 실행 Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Code_Execution.ipynb?hl=ko)을 사용해 보세요.
-- 다른 Gemini API 도구 알아보기:
-  - [함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)
-  - [Google 검색으로 그라운딩](https://ai.google.dev/gemini-api/docs/grounding?hl=ko)
+- 试用[代码执行 Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Code_Execution.ipynb?hl=zh-cn)。
+- 了解其他 Gemini API 工具：
+  - [函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)
+  - [使用 Google 搜索建立依据](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-cn)
 
-의견 보내기
+发送反馈
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-최종 업데이트: 2026-04-29(UTC)
+最后更新时间 (UTC)：2026-04-29。
 
-의견을 전달하고 싶나요?
+需要向我们提供更多信息？
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]

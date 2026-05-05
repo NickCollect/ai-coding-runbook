@@ -1,46 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=tr
-fetched_at: 2026-05-05T20:06:15.602183+00:00
+source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=es-419
+fetched_at: 2026-05-05T20:49:10.865434+00:00
 title: "Tool use with Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-Geri bildirim gönderin
+Enviar comentarios
 
 # Tool use with Live API
 
-Araç kullanımı, gerçek dünyada işlemler gerçekleştirmesine ve gerçek zamanlı bağlantıyı korurken harici bağlamları dahil etmesine olanak tanıyarak Live API'nin sohbetin ötesine geçmesine olanak tanır.
-Live API ile [işlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) ve [Google Arama](https://ai.google.dev/gemini-api/docs/grounding?hl=tr) gibi araçları tanımlayabilirsiniz.
+El uso de herramientas permite que la API de Live vaya más allá de la conversación, ya que le permite realizar acciones en el mundo real y extraer contexto externo mientras mantiene una conexión en tiempo real.
+Puedes definir herramientas como la [llamada a función](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419)
+y la [Búsqueda de Google](https://ai.google.dev/gemini-api/docs/grounding?hl=es-419) con la API de Live.
 
-## Desteklenen araçlara genel bakış
+## Descripción general de las herramientas compatibles
 
-Live API modelleri için kullanılabilecek araçlara kısa bir genel bakış:
+A continuación, se incluye una breve descripción general de las herramientas disponibles para los modelos de la API de Live:
 
-| Araç | Gemini 3.1 Flash Live Preview | Gemini 2.5 Flash Live Preview |
+| Herramienta | Versión preliminar de Gemini 3.1 Flash Live | Versión preliminar de Gemini 2.5 Flash Live |
 | --- | --- | --- |
-| **Arama** | Destekleniyor | Destekleniyor |
-| **İşlev çağırma** | Desteklenir (yalnızca eşzamanlı) | Desteklenir (eşzamanlı ve [eşzamansız](#async-function-calling)) |
-| **Google Haritalar** | Desteklenmiyor | Desteklenmiyor |
-| **Kod yürütme** | Desteklenmiyor | Desteklenmiyor |
-| **URL bağlamı** | Desteklenmiyor | Desteklenmiyor |
+| **Búsqueda** | Admitido | Admitido |
+| **Llamada a función** | Admitido (solo síncrono) | Admitido (síncrono y [asíncrono](#async-function-calling)) |
+| **Google Maps** | No admitido | No admitido |
+| **Ejecución de código** | No admitido | No admitido |
+| **Contexto de URL** | No admitido | No admitido |
 
-## İşlev çağırma
+## Llamada a función
 
-Live API, normal içerik oluşturma istekleri gibi işlev çağrılarını destekler. İşlev çağırma, Live API'nin harici veriler ve programlarla etkileşime geçmesini sağlayarak uygulamalarınızın yapabileceklerini büyük ölçüde artırır.
+La API de Live admite la llamada a función, al igual que las solicitudes de generación de contenido normales. La llamada a función permite que la API de Live interactúe con datos y programas externos, lo que aumenta en gran medida lo que pueden lograr tus aplicaciones.
 
-Oturum yapılandırmasının bir parçası olarak işlev bildirimlerini tanımlayabilirsiniz.
-Araç çağrıları alındıktan sonra istemci, `session.send_tool_response` yöntemini kullanarak `FunctionResponse` nesnelerinin listesiyle yanıt vermelidir.
+Puedes definir declaraciones de funciones como parte de la configuración de la sesión.
+Después de recibir llamadas a herramientas, el cliente debe responder con una lista de objetos `FunctionResponse` mediante el método `session.send_tool_response`.
 
-Daha fazla bilgi edinmek için [İşlev çağırma eğitimi](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) konusuna bakın.
+Consulta el [instructivo de llamadas a funciones](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419) para obtener
+más información.
 
 ### Python
 
@@ -217,13 +219,13 @@ async function main() {
 main();
 ```
 
-Model, tek bir istemden birden fazla işlev çağrısı ve bunların çıkışlarını zincirlemek için gereken kodu oluşturabilir. Bu kod, bir korumalı alan ortamında yürütülerek sonraki [BidiGenerateContentToolCall](https://ai.google.dev/api/live?hl=tr#bidigeneratecontenttoolcall) mesajlarını oluşturur.
+A partir de una sola instrucción, el modelo puede generar varias llamadas a funciones y el código necesario para encadenar sus resultados. Este código se ejecuta en un entorno de pruebas, lo que genera mensajes [BidiGenerateContentToolCall](https://ai.google.dev/api/live?hl=es-419#bidigeneratecontenttoolcall) posteriores.
 
-## Eşzamansız işlev çağrısı
+## Llamada a función asíncrona
 
-İşlev çağrısı varsayılan olarak sırayla yürütülür. Bu nedenle, her işlev çağrısının sonuçları kullanılabilir olana kadar yürütme duraklatılır. Bu, işlevler çalıştırılırken modelle etkileşime devam edemeyeceğiniz anlamına gelen sıralı işlemeyi sağlar.
+La llamada a función se ejecuta de forma secuencial de forma predeterminada, lo que significa que la ejecución se detiene hasta que estén disponibles los resultados de cada llamada a función. Esto garantiza el procesamiento secuencial, lo que significa que no podrás seguir interactuando con el modelo mientras se ejecutan las funciones.
 
-Sohbeti engellemek istemiyorsanız modele işlevleri eşzamansız olarak çalıştırmasını söyleyebilirsiniz. Bunu yapmak için önce işlev tanımlarına bir `behavior` eklemeniz gerekir:
+Si no quieres bloquear la conversación, puedes indicarle al modelo que ejecute las funciones de forma asíncrona. Para ello, primero debes agregar un `behavior` a las definiciones de función:
 
 ### Python
 
@@ -247,13 +249,16 @@ const turn_off_the_lights = {name: "turn_off_the_lights"}
 const tools = [{ functionDeclarations: [turn_on_the_lights, turn_off_the_lights] }]
 ```
 
-`NON-BLOCKING`, işlevin eşzamansız olarak çalışmasını sağlarken modelle etkileşim kurmaya devam edebilirsiniz.
+`NON-BLOCKING` garantiza que la función se ejecute de forma asíncrona mientras puedes seguir interactuando con el modelo.
 
-Ardından, `scheduling` parametresini kullanarak modele `FunctionResponse` aldığında nasıl davranması gerektiğini söylemeniz gerekir. Şunlardan birini yapabilir:
+Luego, debes indicarle al modelo cómo debe comportarse cuando reciba el `FunctionResponse` con el parámetro `scheduling`. Puede hacer lo siguiente:
 
-- Yaptığı işlemi kesintiye uğratıp aldığı yanıtı hemen size bildirir (`scheduling="INTERRUPT"`),
-- Şu anda yaptığı işlemi tamamlamasını bekler (`scheduling="WHEN_IDLE"`),
-- Dilerseniz hiçbir şey yapmayıp bu bilgileri daha sonra tartışmada kullanabilir (`scheduling="SILENT"`)
+- Interrumpir lo que está haciendo y contarte sobre la respuesta que obtuvo de inmediato
+  (`scheduling="INTERRUPT"`)
+- Esperar hasta que termine lo que está haciendo
+  (`scheduling="WHEN_IDLE"`)
+- No hacer nada y usar ese conocimiento más adelante en la conversación
+  (`scheduling="SILENT"`)
 
 ### Python
 
@@ -285,9 +290,10 @@ const functionResponse = {
 }
 ```
 
-## Google Arama ile Temellendirme
+## Fundamentación con la Búsqueda de Google
 
-Oturum yapılandırmasının bir parçası olarak Google Arama ile Temellendirme'yi etkinleştirebilirsiniz. Bu, Live API'nin doğruluğunu artırır ve halüsinasyonları önler. Daha fazla bilgi edinmek için [Temellendirme eğitimi](https://ai.google.dev/gemini-api/docs/grounding?hl=tr) konusuna bakın.
+Puedes habilitar la fundamentación con la Búsqueda de Google como parte de la configuración de la sesión. Esto aumenta la precisión de la API de Live y evita las alucinaciones. Consulta el [instructivo de fundamentación](https://ai.google.dev/gemini-api/docs/grounding?hl=es-419) para
+obtener más información.
 
 ### Python
 
@@ -446,9 +452,9 @@ async function main() {
 main();
 ```
 
-## Birden fazla aracı birleştirme
+## Combinación de varias herramientas
 
-Live API'de birden fazla aracı birleştirerek uygulamanızın özelliklerini daha da artırabilirsiniz:
+Puedes combinar varias herramientas dentro de la API de Live, lo que aumenta aún más las capacidades de tu aplicación:
 
 ### Python
 
@@ -496,17 +502,19 @@ const config = {
 // ... remaining model call
 ```
 
-## Sırada ne var?
+## ¿Qué sigue?
 
-- Araçları Live API ile kullanma hakkında daha fazla örnek için [Araç kullanımı çözüm kitabına](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=tr) göz atın.
-- Özellikler ve yapılandırmalarla ilgili tüm bilgileri [Live API Özellikleri kılavuzundan](https://ai.google.dev/gemini-api/docs/live-guide?hl=tr) edinebilirsiniz.
+- Consulta más ejemplos del uso de herramientas con la API de Live en el
+  [libro de recetas de uso de herramientas](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=es-419).
+- Obtén la historia completa sobre las funciones y configuraciones en la
+  [guía de capacidades de la API de Live](https://ai.google.dev/gemini-api/docs/live-guide?hl=es-419).
 
-Geri bildirim gönderin
+Enviar comentarios
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-Son güncelleme tarihi: 2026-05-01 UTC.
+Última actualización: 2026-05-01 (UTC)
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+¿Quieres brindar más información?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-05-01 UTC."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-05-01 (UTC)"],[],[]]

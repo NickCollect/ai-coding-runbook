@@ -1,50 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ja
-fetched_at: 2026-05-05T20:09:46.156566+00:00
-title: "Gemini 3 Flash \u30d7\u30ec\u30d3\u30e5\u30fc \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=de
+fetched_at: 2026-05-05T20:40:41.221839+00:00
+title: "Gemini\u00a03\u00a0Flash Preview \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-フィードバックを送信
+Feedback geben
 
-# Gemini 3 Flash プレビュー
+# Gemini 3 Flash Preview
 
-マルチモーダル理解において世界最高水準のモデルであり、Google 史上最も強力なエージェント型モデルであり、バイブ コーディング
-モデルでもあります。最先端の推論技術を基盤として構築されており、より充実したビジュアルとより深いインタラクティビティを実現します。
+Das weltweit beste Modell für multimodales Verstehen und unser bisher leistungsstärkstes agentisches Vibe-Coding-Modell. Es ermöglicht besonders ansprechende Visualisierungen und mehr Interaktivität – alles auf Grundlage modernster Schlussfolgerungsfunktionen.
 
-[Google AI Studio で試す](https://aistudio.google.com/prompts/new_chat?model=gemini-3-flash-preview&hl=ja)
+[In Google AI Studio testen](https://aistudio.google.com/prompts/new_chat?model=gemini-3-flash-preview&hl=de)
 
-## ドキュメント
+## Dokumentation
 
-機能の詳細については、[Gemini 3 デベロッパー ガイド](https://ai.google.dev/gemini-api/docs/gemini-3?hl=ja)のページをご覧ください。
+Auf der Seite [Gemini 3 Developer Guide](https://ai.google.dev/gemini-api/docs/gemini-3?hl=de) finden Sie eine vollständige Übersicht der
+Funktionen und Möglichkeiten.
 
 ## gemini-3-flash-preview
 
-| プロパティ | 説明 |
+| Attribut | Beschreibung |
 | --- | --- |
-| id\_cardモデルコード | `gemini-3-flash-preview` |
-| saveサポートされているデータ型 | **入力**  テキスト、画像、動画、音声、PDF  **出力**  テキスト |
-| token\_autoトークン上限[[\*](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)] | **入力トークンの上限**  1,048,576  **出力トークンの上限**  65,536 |
-| handyman機能 | **音声生成**  サポート対象外  **Batch API**  サポート対象  **キャッシュ保存**  サポート対象  **コードの実行**  サポート対象  **コンピュータ使用**  サポート対象  **ファイル検索**  サポート対象  **Flex 推論**  サポート対象  **関数呼び出し**  サポート対象  **Google マップによるグラウンディング**  サポート対象  **画像生成**  サポート対象外  **Live API**  サポート対象外  **候補の推論**  サポート対象  **検索によるグラウンディング**  サポート対象  **構造化出力**  サポート対象  **思考モード**  サポート対象  **URL コンテキスト**  サポート対象 |
-| 123バージョン | [詳細については、モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja#model-versions)をご覧ください。  - `Preview: gemini-3-flash-preview` |
-| calendar\_month最新の更新 | 2025 年 12 月 |
-| cognition\_2ナレッジ カットオフ | 2025 年 1 月 |
+| id\_cardModellcode | `gemini-3-flash-preview` |
+| saveUnterstützte Datentypen | **Eingaben**  Text, Bild, Video, Audio und PDF  **Ausgabe**  Text |
+| token\_autoToken limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=de) | **Tokenlimit für Eingaben**  1.048.576  **Tokenlimit für Ausgaben**  65.536 |
+| handymanFunktionen | **Audioerstellung**  Nicht unterstützt  **Batch API**  Unterstützt  **Caching**  Unterstützt  **Codeausführung**  Unterstützt  **Computerverwendung**  Unterstützt  **Dateisuche**  Unterstützt  **Flex-Inferenz**  Unterstützt  **Funktionsaufrufe**  Unterstützt  **Fundierung mit Google Maps**  Unterstützt  **Bildgenerierung**  Nicht unterstützt  **Live API**  Nicht unterstützt  **Prioritätsinferenz**  Unterstützt  **Suchfundierung**  Unterstützt  **Strukturierte Ausgaben**  Unterstützt  **Überlegung**  Unterstützt  **URL-Kontext**  Unterstützt |
+| 123Versionen | Weitere Informationen finden Sie unter [Modellversionsmuster](https://ai.google.dev/gemini-api/docs/models/gemini?hl=de#model-versions).  - `Preview: gemini-3-flash-preview` |
+| calendar\_monthLetzte Aktualisierung | Dezember 2025 |
+| cognition\_2Wissensstichtag | Januar 2025 |
 
-フィードバックを送信
+Feedback geben
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-最終更新日 2026-04-29 UTC。
+Zuletzt aktualisiert: 2026-04-29 (UTC).
 
-ご意見をお聞かせください
+Haben Sie Feedback für uns?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-04-29 (UTC)."],[],[]]

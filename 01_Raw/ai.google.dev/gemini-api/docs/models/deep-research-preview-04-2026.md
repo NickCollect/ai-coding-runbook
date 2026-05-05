@@ -1,45 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=vi
-fetched_at: 2026-05-05T20:04:00.038563+00:00
-title: "B\u1ea3n d\u00f9ng th\u1eed Deep Research \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=ko
+fetched_at: 2026-05-05T20:44:45.518455+00:00
+title: "Deep Research \ubbf8\ub9ac\ubcf4\uae30 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Gửi ý kiến phản hồi
+의견 보내기
 
-# Bản dùng thử Deep Research
+# Deep Research 미리보기
 
-Một nhà nghiên cứu mạnh mẽ được thiết kế cho các cuộc điều tra tự động, nhiều bước, tổng hợp thông tin phức tạp thành các báo cáo toàn diện có trích dẫn. Mô hình này hỗ trợ lập kế hoạch cộng tác, hình ảnh hoá, máy chủ MCP và Tìm tệp. Mô hình này có hai phiên bản: Deep Research để tăng tốc độ và hiệu quả, và Deep Research Max để tối đa hoá tính toàn diện.
+복잡한 정보를 종합하여 포괄적이고 인용된 보고서로 만드는 자율적이고 다단계 조사를 위해 설계된 강력한 에이전트 연구원입니다. 이 모델은 공동 계획, 시각화, MCP 서버, 파일 검색을 지원합니다. 속도와 효율성을 위한 Deep Research와 최대한의 포괄성을 위한 Deep Research Max의 두 가지 버전으로 제공됩니다.
 
-## Tài liệu
+## 문서
 
-Truy cập trang [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) để xem đầy đủ các tính năng và chức năng.
+기능 및 기능에 대한 전체 내용은 [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko) 페이지를 참고하세요.
 
 ## deep-research-preview-04-2026
 
-| Thuộc tính | Mô tả |
+| 속성 | 설명 |
 | --- | --- |
-| id\_cardMã đại lý | **API Tương tác**  `deep-research-preview-04-2026` |
-| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, Hình ảnh, PDF, Âm thanh, Video  **Đầu ra**  Văn bản (Báo cáo có trích dẫn), Hình ảnh |
-| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Cửa sổ ngữ cảnh đầu vào**  1.048.576  **Giới hạn mã thông báo đầu ra**  65.536 |
-| 123Phiên bản | Đọc các [mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm chi tiết.  - Xem trước: `deep-research-preview-04-2026` - Max: `deep-research-max-preview-04-2026` |
-| calendar\_monthNội dung cập nhật mới nhất | Tháng 4 năm 2026 |
+| id\_card에이전트 코드 | **Interactions API**  `deep-research-preview-04-2026` |
+| save지원되는 데이터 유형 | **입력**  텍스트, 이미지, PDF, 오디오, 동영상  **출력**  텍스트 (인용된 보고서), 이미지 |
+| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 컨텍스트 윈도우**  1,048,576  **출력 토큰 한도**  65,536 |
+| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - 미리보기: `deep-research-preview-04-2026` - 최대: `deep-research-max-preview-04-2026` |
+| calendar\_month최근 업데이트 | 2026년 4월 |
 
-Gửi ý kiến phản hồi
+의견 보내기
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+최종 업데이트: 2026-04-29(UTC)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+의견을 전달하고 싶나요?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]

@@ -1,46 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=he
-fetched_at: 2026-05-05T20:07:51.581648+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=th
+fetched_at: 2026-05-05T20:42:08.972508+00:00
 title: "Veo 3.1 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-שליחת משוב
+ส่งความคิดเห็น
 
 # Veo 3.1
 
-מנוע קולנועי מתקדם שנועד ליצור סיפורים קריאייטיביים ברמה גבוהה ולהפיק סרטונים ניסיוניים. ‫Veo 3.1 הוא המודל הכי מתאים ליצירת פלט באיכות מקצועית של 4K, ליצירת אודיו עם סנכרון מובנה ולתנועות מורכבות של המצלמה שדורשות את הרמה הכי גבוהה של עקביות זמנית ושליטה אומנותית.
+เอนจินภาพยนตร์ที่ล้ำสมัยซึ่งออกแบบมาเพื่อการเล่าเรื่องเชิงสร้างสรรค์ระดับไฮเอนด์และการผลิตวิดีโอเชิงทดลอง Veo 3.1 เหมาะที่สุดสำหรับเอาต์พุต 4K ระดับมืออาชีพ การสร้างเสียงที่ซิงค์กันโดยกำเนิด และการเคลื่อนไหวของกล้องที่ซับซ้อนซึ่งต้องใช้ความสอดคล้องด้านเวลาและการควบคุมทางศิลปะในระดับสูงสุด
 
-[לניסיון ב-Google AI Studio](https://aistudio.google.com?model=veo-3.1-generate-preview&hl=he)
+[ลองใช้ใน Google AI Studio](https://aistudio.google.com?model=veo-3.1-generate-preview&hl=th)
 
-## מאמרי עזרה
+## เอกสารประกอบ
 
-ב[דף בנושא יצירת סרטונים](https://ai.google.dev/gemini-api/docs/video?hl=he) אפשר לקרוא על כל התכונות והיכולות.
+ไปที่หน้า[การสร้างวิดีโอ](https://ai.google.dev/gemini-api/docs/video?hl=th)เพื่อดูฟีเจอร์และความสามารถทั้งหมด
 
 ## veo-3.1-generate-preview
 
-| נכס | תיאור |
+| พร็อพเพอร์ตี้ | คำอธิบาย |
 | --- | --- |
-| id\_cardקוד מודל | ‫**Gemini API**  `veo-3.1-generate-preview`  `veo-3.1-fast-generate-preview` |
-| saveסוגי נתונים נתמכים | **קלט**  טקסט, תמונה  **פלט**  סרטון עם אודיו |
-| token\_autoמגבלות | **קלט טקסט**  ‫1,024 טוקנים  **סרטון הפלט**  1 |
-| calendar\_monthהעדכון האחרון | ינואר 2026 |
+| id\_cardรหัสโมเดล | **Gemini API**  `veo-3.1-generate-preview`  `veo-3.1-fast-generate-preview` |
+| saveประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ รูปภาพ  **เอาต์พุต**  วิดีโอพร้อมเสียง |
+| token\_autoขีดจำกัด | **อินพุตข้อความ**  1,024 โทเค็น  **วิดีโอเอาต์พุต**  1 |
+| calendar\_monthการอัปเดตล่าสุด | มกราคม 2026 |
 
-שליחת משוב
+ส่งความคิดเห็น
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-עדכון אחרון: 2026-04-29 (שעון UTC).
+อัปเดตล่าสุด 2026-04-29 UTC
 
-רוצה לתת לנו משוב?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-29 UTC"],[],[]]

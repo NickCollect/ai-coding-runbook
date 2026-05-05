@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/music-generation?hl=pt-BR
-fetched_at: 2026-05-05T20:00:54.837454+00:00
+fetched_at: 2026-05-05T20:46:23.005713+00:00
 title: "Gerar m\u00fasicas com o Lyria 3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

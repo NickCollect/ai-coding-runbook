@@ -1,41 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=th
-fetched_at: 2026-05-05T20:07:10.712568+00:00
-title: "\u0e40\u0e2d\u0e32\u0e15\u0e4c\u0e1e\u0e38\u0e15\u0e17\u0e35\u0e48\u0e21\u0e35\u0e42\u0e04\u0e23\u0e07\u0e2a\u0e23\u0e49\u0e32\u0e07 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=it
+fetched_at: 2026-05-05T20:50:05.240137+00:00
+title: "Output strutturati \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-ส่งความคิดเห็น
+Invia feedback
 
-# เอาต์พุตที่มีโครงสร้าง
+# Output strutturati
 
-คุณสามารถกำหนดค่าโมเดล Gemini ให้สร้างการตอบสนองที่เป็นไปตาม JSON Schema ที่ระบุได้ ซึ่งจะช่วยให้ได้ผลลัพธ์ที่คาดการณ์ได้และมีความปลอดภัยในการกำหนดประเภท รวมถึงทำให้การดึง Structured Data จากข้อความที่ไม่มีโครงสร้างเป็นเรื่องง่าย
+Puoi configurare i modelli Gemini per generare risposte conformi a uno schema JSON fornito. Ciò garantisce risultati prevedibili e sicuri e semplifica l'estrazione
+di dati strutturati da testo non strutturato.
 
-การใช้เอาต์พุตที่มีโครงสร้างเหมาะสำหรับกรณีต่อไปนี้
+L'utilizzo di output strutturati è ideale per:
 
-- **การดึงข้อมูล:** ดึงข้อมูลที่เฉพาะเจาะจง เช่น ชื่อและวันที่ จากข้อความ
-- **การจัดประเภทที่มีโครงสร้าง:** จัดประเภทข้อความเป็นหมวดหมู่ที่กำหนดไว้ล่วงหน้า
-- **เวิร์กโฟลว์แบบ Agent:** สร้างอินพุตที่มีโครงสร้างสำหรับเครื่องมือหรือ API
+- **Estrazione dei dati:** estrai informazioni specifiche come nomi e date dal testo.
+- **Classificazione strutturata**:consente di classificare il testo in categorie predefinite.
+- **Workflow agentici**:genera input strutturati per strumenti o API.
 
-นอกจากจะรองรับ JSON Schema ใน REST API แล้ว Google GenAI SDKs
-ยังช่วยให้คุณกำหนดสคีมาได้ง่ายๆ โดยใช้
-[Pydantic](https://docs.pydantic.dev/latest/) (Python) และ
-[Zod](https://zod.dev/) (JavaScript)
+Oltre a supportare JSON Schema nell'API REST, gli SDK Google GenAI
+semplificano la definizione degli schemi utilizzando
+[Pydantic](https://docs.pydantic.dev/latest/) (Python) e
+[Zod](https://zod.dev/) (JavaScript).
 
-Recipe Extractor
-Content Moderation
-Recursive Structures
+Estrai ricette
+Moderazione dei contenuti
+Strutture ricorsive
 
-ตัวอย่างนี้แสดงวิธีดึง Structured Data จากข้อความโดยใช้ประเภท JSON Schema พื้นฐาน เช่น `object`, `array`, `string` และ `integer`
+Questo esempio mostra come estrarre dati strutturati dal testo utilizzando tipi di schema JSON di base come `object`, `array`, `string` e `integer`.
 
 ### Python
 
@@ -264,7 +265,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
     }'
 ```
 
-**ตัวอย่างการตอบสนอง**
+**Esempio di risposta:**
 
 ```
 {
@@ -319,11 +320,12 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 }
 ```
 
-## สตรีมมิง
+## Streaming
 
-คุณสามารถสตรีมเอาต์พุตที่มีโครงสร้าง ซึ่งจะช่วยให้คุณเริ่มประมวลผลการตอบสนองได้ทันทีที่ระบบสร้างการตอบสนองนั้น โดยไม่ต้องรอให้เอาต์พุตทั้งหมดเสร็จสมบูรณ์ ซึ่งอาจช่วยปรับปรุงประสิทธิภาพที่รับรู้ได้ของแอปพลิเคชัน
+Puoi trasmettere in streaming gli output strutturati, il che ti consente di iniziare a elaborare la risposta man mano che viene generata, senza dover attendere il completamento dell'intero output. In questo modo, puoi migliorare le prestazioni percepite della tua applicazione.
 
-ก้อนข้อมูลที่สตรีมจะเป็นสตริง JSON บางส่วนที่ถูกต้อง ซึ่งสามารถนำมารวมกันเพื่อสร้างออบเจ็กต์ JSON ที่สมบูรณ์
+I chunk trasmessi in streaming saranno stringhe JSON parziali valide, che possono essere
+concatenate per formare l'oggetto JSON finale completo.
 
 ### Python
 
@@ -381,16 +383,14 @@ for await (const chunk of stream) {
 }
 ```
 
-## เอาต์พุตที่มีโครงสร้างพร้อมเครื่องมือ
+## Output strutturati con strumenti
 
- 
-
-Gemini 3 ช่วยให้คุณรวมเอาต์พุตที่มีโครงสร้างเข้ากับเครื่องมือในตัวได้ ซึ่งรวมถึง
-[การเชื่อมต่อแหล่งข้อมูลกับ Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th),
-[URL Context](https://ai.google.dev/gemini-api/docs/url-context?hl=th),
-[Code Execution](https://ai.google.dev/gemini-api/docs/code-execution?hl=th),
-[File Search](https://ai.google.dev/gemini-api/docs/file-search?hl=th#structured-output) และ
-[Function Calling](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)
+Gemini 3 ti consente di combinare gli output strutturati con strumenti integrati, tra cui
+[Grounding con la Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it),
+[Contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it),
+[Esecuzione di codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it),
+[Ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it#structured-output) e
+[Chiamata di funzioni](https://ai.google.dev/gemini-api/docs/function-calling?hl=it).
 
 ### Python
 
@@ -493,99 +493,99 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-pre
   }'
 ```
 
-## การรองรับ JSON Schema
+## Supporto dello schema JSON
 
-หากต้องการสร้างออบเจ็กต์ JSON ให้ตั้งค่า `response_mime_type` ในการกำหนดค่าการสร้างเป็น `application/json` และระบุ `response_json_schema` สคีมาต้องเป็น [JSON Schema](https://json-schema.org/) ที่ถูกต้องซึ่งอธิบายรูปแบบเอาต์พุตที่ต้องการ
+Per generare un oggetto JSON, imposta `response_mime_type` nella configurazione di generazione su `application/json` e fornisci un `response_json_schema`. Lo schema deve essere uno [schema JSON](https://json-schema.org/) valido che descriva il formato di output desiderato.
 
-จากนั้นโมเดลจะสร้างการตอบสนองที่เป็นสตริง JSON ที่ถูกต้องตามหลักไวยากรณ์ซึ่งตรงกับสคีมาที่ระบุ เมื่อใช้เอาต์พุตที่มีโครงสร้าง โมเดลจะสร้างเอาต์พุตตามลำดับเดียวกับคีย์ในสคีมา
+Il modello genererà quindi una risposta che è una stringa JSON sintatticamente valida corrispondente allo schema fornito. Quando utilizzi output strutturati, il modello produce output nello stesso ordine delle chiavi nello schema.
 
-โหมดเอาต์พุตที่มีโครงสร้างของ Gemini รองรับข้อมูลย่อยของข้อกำหนด [JSON Schema](https://json-schema.org)
+La modalità di output strutturato di Gemini supporta un sottoinsieme della specifica [JSON Schema](https://json-schema.org).
 
-ระบบรองรับค่า `type` ต่อไปนี้
+Sono supportati i seguenti valori di `type`:
 
-- **`string`**: สำหรับข้อความ
-- **`number`**: สำหรับเลขจุดลอยตัว
-- **`integer`**: สำหรับจำนวนเต็ม
-- **`boolean`**: สำหรับค่าจริง/เท็จ
-- **`object`**: สำหรับ Structured Data พร้อมคู่คีย์-ค่า
-- **`array`**: สำหรับรายการไอเทม
-- **`null`**: หากต้องการอนุญาตให้พร็อพเพอร์ตี้เป็น Null ให้ใส่ `"null"` ในอาร์เรย์ประเภท (เช่น `{"type": ["string", "null"]}`)
+- **`string`**: Per il testo.
+- **`number`**: per i numeri in virgola mobile.
+- **`integer`**: per i numeri interi.
+- **`boolean`**: per i valori vero/falso.
+- **`object`**: per dati strutturati con coppie chiave-valore.
+- **`array`**: per gli elenchi di elementi.
+- **`null`**: per consentire a una proprietà di essere null, includi `"null"` nell'array di tipi (ad es. `{"type": ["string", "null"]}`).
 
-พร็อพเพอร์ตี้เชิงอธิบายเหล่านี้ช่วยแนะนำโมเดล
+Queste proprietà descrittive aiutano a guidare il modello:
 
-- **`title`**: คำอธิบายสั้นๆ ของพร็อพเพอร์ตี้
-- **`description`**: คำอธิบายที่ยาวและละเอียดมากขึ้นของพร็อพเพอร์ตี้
+- **`title`**: una breve descrizione di una proprietà.
+- **`description`**: una descrizione più lunga e dettagliata di una proprietà.
 
-### พร็อพเพอร์ตี้เฉพาะประเภท
+### Proprietà specifiche per tipo
 
-**สำหรับค่า `object`**
+**Per i valori di `object`:**
 
-- **`properties`**: ออบเจ็กต์ที่แต่ละคีย์เป็นชื่อพร็อพเพอร์ตี้และแต่ละค่าเป็นสคีมาสำหรับพร็อพเพอร์ตี้นั้น
-- **`required`**: อาร์เรย์ของสตริงที่แสดงรายการพร็อพเพอร์ตี้ที่จำเป็น
-- **`additionalProperties`**: ควบคุมว่าจะอนุญาตพร็อพเพอร์ตี้ที่ไม่ได้ระบุไว้ใน `properties` หรือไม่ โดยอาจเป็นบูลีนหรือสคีมา
+- **`properties`**: un oggetto in cui ogni chiave è il nome di una proprietà e ogni valore è uno schema per quella proprietà.
+- **`required`**: un array di stringhe che elenca le proprietà obbligatorie.
+- **`additionalProperties`**: controlla se le proprietà non elencate in `properties` sono consentite. Può essere un valore booleano o uno schema.
 
-**สำหรับค่า `string`**
+**Per i valori di `string`:**
 
-- **`enum`**: แสดงรายการชุดสตริงที่เป็นไปได้ที่เฉพาะเจาะจงสำหรับงานการจัดประเภท
-- **`format`**: ระบุไวยากรณ์สำหรับสตริง เช่น `date-time`, `date`, `time`
+- **`enum`**: elenca un insieme specifico di possibili stringhe per le attività di classificazione.
+- **`format`**: specifica una sintassi per la stringa, ad esempio `date-time`, `date`, `time`.
 
-**สำหรับค่า `number` และ `integer`**
+**Per i valori `number` e `integer`:**
 
-- **`enum`**: แสดงรายการชุดค่าตัวเลขที่เป็นไปได้ที่เฉพาะเจาะจง
-- **`minimum`**: ค่าต่ำสุดแบบรวม
-- **`maximum`**: ค่าสูงสุดแบบรวม
+- **`enum`**: elenca un insieme specifico di valori numerici possibili.
+- **`minimum`**: il valore inclusivo minimo.
+- **`maximum`**: il valore inclusivo massimo.
 
-**สำหรับค่า `array`**
+**Per i valori di `array`:**
 
-- **`items`**: กำหนดสคีมาสำหรับไอเทมทั้งหมดในอาร์เรย์
-- **`prefixItems`**: กำหนดรายการสคีมาสำหรับไอเทม N รายการแรก ซึ่งอนุญาตให้ใช้โครงสร้างคล้ายทูเพิล
-- **`minItems`**: จำนวนไอเทมขั้นต่ำในอาร์เรย์
-- **`maxItems`**: จำนวนไอเทมสูงสุดในอาร์เรย์
+- **`items`**: definisce lo schema per tutti gli elementi dell'array.
+- **`prefixItems`**: definisce un elenco di schemi per i primi N elementi, consentendo strutture simili a tuple.
+- **`minItems`**: il numero minimo di elementi nell'array.
+- **`maxItems`**: il numero massimo di elementi nell'array.
 
-## การรองรับโมเดล
+## Supporto del modello
 
-โมเดลต่อไปนี้รองรับเอาต์พุตที่มีโครงสร้าง
+I seguenti modelli supportano l'output strutturato:
 
-| โมเดล | เอาต์พุตที่มีโครงสร้าง |
+| Modello | Output strutturati |
 | --- | --- |
-| Gemini 3.1 Pro (เวอร์ชันตัวอย่าง) | ✔️ |
-| Gemini 3 Flash (เวอร์ชันตัวอย่าง) | ✔️ |
+| Gemini 3.1 Pro (anteprima) | ✔️ |
+| Gemini 3 Flash (anteprima) | ✔️ |
 | Gemini 2.5 Pro | ✔️ |
 | Gemini 2.5 Flash | ✔️ |
 | Gemini 2.5 Flash-Lite | ✔️ |
 | Gemini 2.0 Flash | ✔️\* |
 | Gemini 2.0 Flash-Lite | ✔️\* |
 
-*\* โปรดทราบว่า Gemini 2.0 ต้องมีรายการ `propertyOrdering` ที่ชัดเจนภายในอินพุต JSON เพื่อกำหนดโครงสร้างที่ต้องการ คุณดูตัวอย่างได้ในคู่มือนี้ [cookbook](https://github.com/google-gemini/cookbook/blob/main/examples/Pdf_structured_outputs_on_invoices_and_forms.ipynb).*
+*\* Tieni presente che Gemini 2.0 richiede un elenco `propertyOrdering` esplicito all'interno dell'input JSON per definire la struttura preferita. Puoi trovare un esempio in questo [cookbook](https://github.com/google-gemini/cookbook/blob/main/examples/Pdf_structured_outputs_on_invoices_and_forms.ipynb).*
 
-## เอาต์พุตที่มีโครงสร้างเทียบกับการเรียกฟังก์ชัน
+## Output strutturati e chiamata di funzione
 
-ทั้งเอาต์พุตที่มีโครงสร้างและการเรียกฟังก์ชันใช้ JSON Schema แต่มีวัตถุประสงค์ที่แตกต่างกัน
+Sia gli output strutturati che le chiamate di funzione utilizzano schemi JSON, ma hanno scopi diversi:
 
-| ฟีเจอร์ | กรณีการใช้งานหลัก |
+| Funzionalità | Caso d'uso principale |
 | --- | --- |
-| **เอาต์พุตที่มีโครงสร้าง** | **การจัดรูปแบบการตอบสนองสุดท้ายที่จะแสดงต่อผู้ใช้** ใช้ฟีเจอร์นี้เมื่อต้องการให้ *คำตอบ* ของโมเดลอยู่ในรูปแบบที่เฉพาะเจาะจง (เช่น การดึงข้อมูลจากเอกสารเพื่อบันทึกลงในฐานข้อมูล) |
-| **การเรียกฟังก์ชัน** | **การดำเนินการระหว่างการสนทนา** ใช้ฟีเจอร์นี้เมื่อโมเดลต้อง *ขอให้คุณ* ทำงาน (เช่น "รับสภาพอากาศปัจจุบัน") ก่อนที่จะให้คำตอบสุดท้ายได้ |
+| **Output strutturati** | **Formattazione della risposta finale all'utente.** Utilizza questo prompt quando vuoi che la *risposta* del modello sia in un formato specifico (ad es. estrazione di dati da un documento da salvare in un database). |
+| **Chiamata di funzione** | **Eseguire azioni durante la conversazione.** Utilizza questo intent quando il modello deve *chiederti* di eseguire un'attività (ad es. "ottieni il meteo attuale") prima di poter fornire una risposta finale. |
 
-## แนวทางปฏิบัติแนะนำ
+## Best practice
 
-- **คำอธิบายที่ชัดเจน:** ใช้ช่อง `description` ในสคีมาเพื่อระบุวิธีการที่ชัดเจนให้โมเดลทราบว่าพร็อพเพอร์ตี้แต่ละรายการแสดงถึงอะไร ซึ่งเป็นสิ่งสำคัญในการแนะนำเอาต์พุตของโมเดล
-- **การพิมพ์ที่เข้มงวด:** ใช้ประเภทที่เฉพาะเจาะจง (`integer`, `string`, `enum`) ทุกครั้งที่ทำได้ หากพารามิเตอร์มีชุดค่าที่ถูกต้องแบบจำกัด ให้ใช้ `enum`
-- **วิศวกรรมพรอมต์ (Prompt Engineering):** ระบุในพรอมต์อย่างชัดเจนว่าต้องการให้โมเดลทำอะไร เช่น "ดึงข้อมูลต่อไปนี้จากข้อความ..." หรือ "จัดประเภทความคิดเห็นนี้ตามสคีมาที่ระบุ..."
-- **การตรวจสอบความถูกต้อง:** แม้ว่าเอาต์พุตที่มีโครงสร้างจะรับประกัน JSON ที่ถูกต้องตามหลักไวยากรณ์ แต่ก็ไม่ได้การันตีว่าค่าจะถูกต้องตามความหมาย ดังนั้นให้ตรวจสอบความถูกต้องของเอาต์พุตสุดท้ายในโค้ดของแอปพลิเคชันก่อนที่จะใช้งานเสมอ
-- **การจัดการข้อผิดพลาด:** ใช้การจัดการข้อผิดพลาดที่มีประสิทธิภาพในแอปพลิเคชันเพื่อจัดการกรณีที่เอาต์พุตของโมเดลเป็นไปตามสคีมา แต่ไม่ตรงกับข้อกำหนดทางตรรกะทางธุรกิจของคุณ
+- **Descrizioni chiare**:utilizza il campo `description` nello schema per fornire istruzioni chiare al modello su cosa rappresenta ogni proprietà. Questo è fondamentale per guidare l'output del modello.
+- **Tipizzazione forte**:utilizza tipi specifici (`integer`, `string`, `enum`) quando possibile. Se un parametro ha un insieme limitato di valori validi, utilizza un `enum`.
+- **Ingegneria dei prompt:** indica chiaramente nel prompt cosa vuoi che faccia il modello. Ad esempio, "Estrai le seguenti informazioni dal testo…" o "Classifica questo feedback in base allo schema fornito…".
+- **Convalida**:sebbene l'output strutturato garantisca un JSON sintatticamente corretto, non garantisce che i valori siano semanticamente corretti. Verifica sempre l'output finale nel codice dell'applicazione prima di utilizzarlo.
+- **Gestione degli errori:** implementa una gestione degli errori efficace nella tua applicazione per gestire correttamente i casi in cui l'output del modello, pur essendo conforme allo schema, potrebbe non soddisfare i requisiti della logica di business.
 
-## ข้อจำกัด
+## Limitazioni
 
-- **ข้อมูลย่อยของสคีมา:** ระบบไม่รองรับฟีเจอร์บางอย่างของข้อกำหนด JSON Schema โดยโมเดลจะละเว้นพร็อพเพอร์ตี้ที่ไม่รองรับ
-- **ความซับซ้อนของสคีมา:** API อาจปฏิเสธสคีมาที่มีขนาดใหญ่มากหรือมีการซ้อนกันหลายชั้น หากพบข้อผิดพลาด ให้ลองลดความซับซ้อนของสคีมาโดยย่อชื่อพร็อพเพอร์ตี้ ลดการซ้อน หรือจำกัดจำนวนข้อจำกัด
+- **Sottoinsieme dello schema**:non tutte le funzionalità della specifica JSON Schema sono supportate. Il modello ignora le proprietà non supportate.
+- **Complessità dello schema**:l'API potrebbe rifiutare schemi molto grandi o nidificati in profondità. Se si verificano errori, prova a semplificare lo schema riducendo i nomi delle proprietà, diminuendo il livello di nidificazione o limitando il numero di vincoli.
 
-ส่งความคิดเห็น
+Invia feedback
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-อัปเดตล่าสุด 2026-04-29 UTC
+Ultimo aggiornamento 2026-04-29 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Vuoi dirci altro?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-29 UTC"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]

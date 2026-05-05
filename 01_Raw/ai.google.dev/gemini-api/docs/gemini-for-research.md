@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=vi
-fetched_at: 2026-05-05T20:08:10.528712+00:00
+fetched_at: 2026-05-05T20:42:58.306510+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

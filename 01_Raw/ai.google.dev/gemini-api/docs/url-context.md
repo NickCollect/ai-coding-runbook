@@ -1,35 +1,33 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/url-context?hl=vi
-fetched_at: 2026-05-05T20:03:27.152851+00:00
+source_url: https://ai.google.dev/gemini-api/docs/url-context?hl=zh-CN
+fetched_at: 2026-05-05T20:44:25.125909+00:00
 title: "URL context \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Gửi ý kiến phản hồi
+发送反馈
 
 # URL context
 
-Công cụ bối cảnh URL cho phép bạn cung cấp thêm bối cảnh cho các mô hình dưới dạng URL. Bằng cách đưa URL vào yêu cầu, mô hình sẽ truy cập vào nội dung trên những trang đó (miễn là đó không phải là loại URL có trong phần [các điểm hạn chế](#limitations)) để cung cấp thông tin và cải thiện phản hồi của mô hình.
+借助网址上下文工具，您可以网址的形式向模型提供更多上下文。通过在请求中添加网址，模型将访问这些网页中的内容（只要不是[限制部分](#limitations)中列出的网址类型），从而为回答提供信息并提高回答质量。
 
-Công cụ bối cảnh URL hữu ích cho các tác vụ như sau:
+网址上下文工具适用于以下任务：
 
-- **Trích xuất dữ liệu**: Lấy thông tin cụ thể như giá, tên hoặc kết quả chính
-  từ nhiều URL.
-- **So sánh tài liệu**: Phân tích nhiều báo cáo, bài viết hoặc tệp PDF để
-  xác định sự khác biệt và theo dõi xu hướng.
-- **Tổng hợp và tạo nội dung**: Kết hợp thông tin từ nhiều URL nguồn để tạo bản tóm tắt, bài đăng trên blog hoặc báo cáo chính xác.
-- **Phân tích mã và tài liệu**: Trỏ đến kho lưu trữ GitHub hoặc tài liệu kỹ thuật để giải thích mã, tạo hướng dẫn thiết lập hoặc trả lời câu hỏi.
+- **提取数据**：从多个网址中提取价格、名称或关键发现等特定信息。
+- **比较文档**：分析多份报告、文章或 PDF，以找出差异并跟踪趋势。
+- **综合和创建内容**：整合来自多个来源网址的信息，生成准确的摘要、博文或报告。
+- **分析代码和文档**：指向 GitHub 代码库或技术文档，以解释代码、生成设置说明或回答问题。
 
-Ví dụ sau đây cho biết cách so sánh 2 công thức từ các trang web khác nhau.
+以下示例展示了如何比较来自不同网站的两份食谱。
 
 ### Python
 
@@ -112,26 +110,19 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 cat result.json
 ```
 
-## Cách hoạt động
+## 运作方式
 
-Công cụ Bối cảnh URL sử dụng quy trình truy xuất gồm 2 bước để cân bằng tốc độ, chi phí và quyền truy cập vào dữ liệu mới. Khi bạn cung cấp một URL, công cụ này sẽ cố gắng tìm nạp nội dung từ bộ nhớ đệm chỉ mục nội bộ. Đây là bộ nhớ đệm được tối ưu hoá cao. Nếu một URL không có trong chỉ mục (ví dụ: nếu đó là một trang rất mới), công cụ này sẽ tự động quay lại để tìm nạp trực tiếp.
-Công cụ này sẽ truy cập trực tiếp vào URL để truy xuất nội dung của URL đó theo thời gian thực.
+网址上下文工具使用两步检索流程来平衡速度、费用和对最新数据的访问。当您提供网址时，该工具会先尝试从内部索引缓存中提取内容。它充当高度优化的缓存。如果某个网址未编入索引（例如，如果该网址指向的网页是新近发布的），该工具会自动回退到执行实时提取。此工具会直接访问网址，以实时检索其内容。
 
-## Kết hợp với các công cụ khác
+## 与其他工具结合使用
 
-Bạn có thể kết hợp công cụ bối cảnh URL với các công cụ khác để tạo quy trình làm việc hiệu quả hơn.
+您可以将网址上下文工具与其他工具结合使用，以创建更强大的工作流。
 
-[Các mô hình Gemini 3](#supported-models) hỗ trợ việc kết hợp các công cụ tích hợp
-(như Bối cảnh URL) với các công cụ tuỳ chỉnh (gọi hàm). Tìm hiểu thêm trên trang
-[kết hợp công cụ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi).
+[Gemini 3 模型](#supported-models)支持将内置工具（例如网址上下文）与自定义工具（函数调用）相结合。如需了解详情，请参阅[工具组合](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-cn)页面。
 
-### Liên kết thực tế với tính năng tìm kiếm
+### 依托搜索进行接地
 
-Khi bạn bật cả bối cảnh URL và
-[Dựa trên kết quả của Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/grounding?hl=vi),
-mô hình có thể sử dụng các chức năng tìm kiếm của mình để tìm
-thông tin liên quan trên mạng, sau đó sử dụng công cụ bối cảnh URL để hiểu rõ hơn về các
-trang mà mô hình tìm thấy. Phương pháp này rất hữu ích cho các lời nhắc yêu cầu cả tìm kiếm rộng và phân tích sâu các trang cụ thể.
+同时启用网址上下文和[依托 Google 搜索进行接地](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-cn)后，模型可以使用其搜索功能在网上查找相关信息，然后使用网址上下文工具更深入地了解找到的网页。对于需要广泛搜索和深入分析特定网页的提示，这种方法非常有效。
 
 ### Python
 
@@ -216,11 +207,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 cat result.json
 ```
 
-## Tìm hiểu về phản hồi
+## 了解回答
 
-Khi mô hình sử dụng công cụ bối cảnh URL, phản hồi sẽ bao gồm đối tượng `url_context_metadata`. Đối tượng này liệt kê các URL mà mô hình truy xuất nội dung và trạng thái của từng lần truy xuất. Điều này hữu ích cho việc xác minh và gỡ lỗi.
+当模型使用网址上下文工具时，响应会包含 `url_context_metadata` 对象。此对象列出了模型从中检索内容的网址以及每次检索尝试的状态，这有助于进行验证和调试。
 
-Sau đây là ví dụ về phần đó của phản hồi (các phần của phản hồi đã bị bỏ qua để ngắn gọn):
+以下是该部分回答的示例（为简洁起见，省略了部分回答）：
 
 ```
 {
@@ -252,16 +243,15 @@ Sau đây là ví dụ về phần đó của phản hồi (các phần của ph
 }
 ```
 
-Để biết thông tin chi tiết đầy đủ về đối tượng này , hãy xem tài liệu tham khảo API
-[`UrlContextMetadata`](https://ai.google.dev/api/generate-content?hl=vi#UrlContextMetadata).
+如需详细了解此对象，请参阅 [`UrlContextMetadata` API 参考文档](https://ai.google.dev/api/generate-content?hl=zh-cn#UrlContextMetadata)。
 
-### Kiểm tra an toàn
+### 安全检查
 
-Hệ thống sẽ kiểm tra việc kiểm duyệt nội dung trên URL để xác nhận rằng các URL đó đáp ứng các tiêu chuẩn an toàn. Nếu URL bạn cung cấp không vượt qua quy trình kiểm tra này, bạn sẽ nhận được `url_retrieval_status` là `URL_RETRIEVAL_STATUS_UNSAFE`.
+系统会对网址进行内容审核检查，以确认其符合安全标准。如果您提供的网址未通过此检查，您将收到 `URL_RETRIEVAL_STATUS_UNSAFE` 的 `url_retrieval_status`。
 
-### Số lượng mã thông báo
+### Token 计数
 
-Nội dung được truy xuất từ các URL mà bạn chỉ định trong lời nhắc sẽ được tính là một phần của mã thông báo đầu vào. Bạn có thể xem số lượng token cho câu lệnh và mức sử dụng công cụ trong [`usage_metadata`](https://ai.google.dev/api/generate-content?hl=vi#UsageMetadata) đối tượng của đầu ra của mô hình. Sau đây là ví dụ về dữ liệu đầu ra:
+从您在提示中指定的网址检索到的内容会作为输入 token 的一部分进行统计。您可以在模型输出的 [`usage_metadata`](https://ai.google.dev/api/generate-content?hl=zh-cn#UsageMetadata) 对象中查看提示和工具使用的 token 数量。以下是输出示例：
 
 ```
 'usage_metadata': {
@@ -277,66 +267,59 @@ Nội dung được truy xuất từ các URL mà bạn chỉ định trong lờ
   }
 ```
 
-Giá mỗi mã thông báo phụ thuộc vào mô hình được sử dụng. Hãy xem trang
-[giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi) để biết thông tin chi tiết.
+每个令牌的价格取决于所用模型，详情请参阅[价格](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn)页面。
 
-## Mô hình được hỗ trợ
+## 支持的模型
 
-| Mô hình | Bối cảnh URL |
+| 模型 | 网址上下文 |
 | --- | --- |
-| [Bản xem trước Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/gemini-3.1-pro-preview?hl=vi) | ✔️ |
-| [Bản xem trước Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/gemini-3.1-flash-lite-preview?hl=vi) | ✔️ |
-| [Bản xem trước Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=vi) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=vi) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=vi) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=vi) | ✔️ |
+| [Gemini 3.1 Pro 预览版](https://ai.google.dev/gemini-api/docs/gemini-3.1-pro-preview?hl=zh-cn) | ✔️ |
+| [Gemini 3.1 Flash-Lite 预览版](https://ai.google.dev/gemini-api/docs/gemini-3.1-flash-lite-preview?hl=zh-cn) | ✔️ |
+| [Gemini 3 Flash 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-cn) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-cn) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=zh-cn) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-cn) | ✔️ |
 
-## Các phương pháp hay nhất
+## 最佳做法
 
-- **Cung cấp URL cụ thể**: Để có kết quả tốt nhất, hãy cung cấp URL trực tiếp đến
-  nội dung mà bạn muốn mô hình phân tích. Mô hình sẽ chỉ truy xuất nội dung từ các URL mà bạn cung cấp, chứ không phải bất kỳ nội dung nào từ các đường liên kết lồng nhau.
-- **Kiểm tra khả năng tiếp cận**: Xác minh rằng các URL bạn cung cấp không dẫn đến
-  các trang yêu cầu đăng nhập hoặc nằm sau tường phí.
-- **Sử dụng URL đầy đủ**: Cung cấp URL đầy đủ, bao gồm cả giao thức
-  (ví dụ: https://www.google.com thay vì chỉ google.com).
+- **提供具体网址**：为获得最佳结果，请提供您希望模型分析的内容的直接网址。模型只会从您提供的网址中检索内容，而不会从嵌套链接中检索任何内容。
+- **检查可访问性**：验证您提供的网址是否不会指向需要登录或位于付费墙后面的网页。
+- **使用完整网址**：提供完整网址，包括协议（例如，https://www.google.com 而不是仅提供 google.com）。
 
-## Các điểm hạn chế
+## 限制
 
-- Gọi hàm: Hiện không hỗ trợ việc sử dụng công cụ (Bối cảnh URL, Dựa trên kết quả của Google Tìm kiếm, v.v.) với tính năng gọi hàm.
-- Giới hạn yêu cầu: Công cụ này có thể xử lý tối đa 20 URL cho mỗi yêu cầu.
-- Kích thước nội dung URL: Kích thước tối đa cho nội dung được truy xuất từ một URL là 34 MB.
-- Khả năng tiếp cận công khai: Các URL phải có thể truy cập công khai trên web.
-  Không được hỗ trợ địa chỉ máy chủ cục bộ (ví dụ: localhost, 127.0.0.1), mạng riêng tư và dịch vụ tạo đường hầm (ví dụ: ngrok, pinggy).
-- Chỉ API Gemini: Bối cảnh URL chỉ có trong API Gemini, chứ không phải thông qua Nền tảng tác nhân Gemini Enterprise.
+- 函数调用：目前不支持将工具使用（网址上下文、依托 Google 搜索进行接地等）与函数调用搭配使用。
+- 请求限制：该工具每次请求最多可处理 20 个网址。
+- 网址内容大小：从单个网址检索的内容大小上限为 34MB。
+- 公开可访问性：网址必须可在网络上公开访问。
+  不支持本地主机地址（例如，localhost、127.0.0.1）、专用网络和隧道服务（例如，ngrok、pinggy）。
+- 仅限 Gemini API：网址上下文仅在 Gemini API 中提供，无法通过 Gemini Enterprise Agent Platform 使用。
 
-### Các loại nội dung được hỗ trợ và không được hỗ trợ
+### 支持和不支持的内容类型
 
-Công cụ này có thể trích xuất nội dung từ các URL có các loại nội dung sau:
+该工具可以从具有以下内容类型的网址中提取内容：
 
-- Văn bản (text/html, application/json, text/plain, text/xml, text/css, text/javascript , text/csv, text/rtf)
-- Hình ảnh (image/png, image/jpeg, image/bmp, image/webp)
+- 文本（text/html、application/json、text/plain、text/xml、text/css、text/javascript、text/csv、text/rtf）
+- 图片（image/png、image/jpeg、image/bmp、image/webp）
 - PDF (application/pdf)
 
-Các loại nội dung sau **không** được hỗ trợ:
+以下内容类型**不**受支持：
 
-- Nội dung có tường phí
-- Video trên YouTube (Hãy xem
-  [phần tìm hiểu về video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi#youtube) để biết
-  cách xử lý URL trên YouTube)
-- Các tệp trong Google Workspace như tài liệu hoặc bảng tính trên Google
-- Tệp video và âm thanh
+- 付费内容
+- YouTube 视频（请参阅[视频理解](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-cn#youtube)，了解如何处理 YouTube 网址）
+- Google Workspace 文件，例如 Google 文档或电子表格
+- 视频和音频文件
 
-## Bước tiếp theo
+## 后续步骤
 
-- Khám phá [sổ tay bối cảnh URL](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Grounding.ipynb?hl=vi#url-context)
-  để xem thêm ví dụ.
+- 如需查看更多示例，请参阅 [网址 上下文实用指南](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Grounding.ipynb?hl=zh-cn#url-context)。
 
-Gửi ý kiến phản hồi
+发送反馈
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+最后更新时间 (UTC)：2026-04-29。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+需要向我们提供更多信息？
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]

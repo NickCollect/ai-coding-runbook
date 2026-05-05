@@ -1,47 +1,56 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/troubleshoot-ai-studio?hl=zh-TW
-fetched_at: 2026-05-05T20:09:43.695454+00:00
-title: "\u6392\u89e3 Google AI Studio \u554f\u984c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/troubleshoot-ai-studio?hl=vi
+fetched_at: 2026-05-05T20:43:07.458305+00:00
+title: "Kh\u1eafc ph\u1ee5c s\u1ef1 c\u1ed1 li\u00ean quan \u0111\u1ebfn Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-提供意見
+Gửi ý kiến phản hồi
 
-# 排解 Google AI Studio 問題
+# Khắc phục sự cố liên quan đến Google AI Studio
 
-本頁提供 Google AI Studio 的疑難排解建議，協助您解決問題。
+Trang này đưa ra các đề xuất về cách khắc phục sự cố Google AI Studio nếu bạn gặp vấn đề.
 
-## 瞭解 403 存取受限錯誤
+## Tìm hiểu về lỗi 403 Quyền truy cập bị hạn chế
 
-如果看到「403 Access Restricted」錯誤，表示您使用 Google AI Studio 的方式違反《[服務條款](https://ai.google.dev/terms?hl=zh-tw)》。常見原因之一是您不在[支援的區域](https://ai.google.dev/available_regions?hl=zh-tw)。
+Nếu bạn thấy lỗi 403 Quyền truy cập bị hạn chế, thì có nghĩa là bạn đang sử dụng Google AI Studio theo cách không tuân thủ [Điều khoản dịch vụ](https://ai.google.dev/terms?hl=vi). Một lý do thường gặp là
+bạn không ở [khu vực được hỗ trợ](https://ai.google.dev/available_regions?hl=vi).
 
-## 解決 Google AI Studio 中的「沒有內容」回應
+## Khắc phục phản hồi Không có nội dung trên Google AI Studio
 
-如果內容因任何原因遭到封鎖，Google AI Studio 會顯示「沒有內容」warning訊息。如要查看更多詳細資料，請將指標懸停在「沒有內容」上，然後按一下「安全」圖示 warning。
+Thông báo warning **Không có nội dung** sẽ xuất hiện trên
+Google AI Studio nếu nội dung bị chặn vì bất kỳ lý do nào. Để xem thêm thông tin chi tiết,
+hãy di chuột qua **Không có nội dung** rồi nhấp vào
+warning **An toàn**.
 
-如果回應因[安全設定](https://ai.google.dev/docs/safety_setting?hl=zh-tw)而遭到封鎖，且您已考量用途的[安全風險](https://ai.google.dev/docs/safety_guidance?hl=zh-tw)，可以修改[安全設定](https://ai.google.dev/docs/safety_setting?hl=zh-tw#safety_settings_in_makersuite)，影響系統傳回的回應。
+Nếu phản hồi bị chặn do [chế độ cài đặt an toàn](https://ai.google.dev/docs/safety_setting?hl=vi) và
+bạn đã cân nhắc các [rủi ro về an toàn](https://ai.google.dev/docs/safety_guidance?hl=vi) cho trường hợp sử dụng của mình, thì bạn
+có thể sửa đổi
+[chế độ cài đặt an toàn](https://ai.google.dev/docs/safety_setting?hl=vi#safety_settings_in_makersuite)
+để ảnh hưởng đến phản hồi được trả về.
 
-如果回覆遭到封鎖，但並非因為安全設定，則查詢或回覆可能違反[服務條款](https://ai.google.dev/terms?hl=zh-tw)，或是不受支援。
+Nếu phản hồi bị chặn nhưng không phải do chế độ cài đặt an toàn, thì có thể truy vấn hoặc
+phản hồi đó vi phạm [Điều khoản dịch vụ](https://ai.google.dev/terms?hl=vi) hoặc không được hỗ trợ.
 
-## 查看權杖用量和限制
+## Kiểm tra mức sử dụng và giới hạn về mã thông báo
 
-開啟提示後，畫面底部的「文字預覽」按鈕會顯示提示內容目前使用的詞元，以及所用模型的詞元上限。
+Khi bạn mở một câu lệnh, nút **Xem trước văn bản** ở cuối màn hình sẽ cho biết số lượng token hiện tại được dùng cho nội dung của câu lệnh và số lượng token tối đa cho mô hình đang được sử dụng.
 
-提供意見
+Gửi ý kiến phản hồi
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-上次更新時間：2026-04-29 (世界標準時間)。
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-想進一步說明嗎？
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-04-29 (世界標準時間)。"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

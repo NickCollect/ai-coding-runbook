@@ -1,43 +1,51 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/video?hl=he
-fetched_at: 2026-05-05T20:09:34.874182+00:00
-title: "\u05d9\u05e6\u05d9\u05e8\u05ea \u05e1\u05e8\u05d8\u05d5\u05e0\u05d9\u05dd \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea Veo 3.1 \u05d1-Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/video?hl=it
+fetched_at: 2026-05-05T20:41:57.095644+00:00
+title: "Generare video con Veo 3.1 nell'API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-שליחת משוב
+Invia feedback
 
-# יצירת סרטונים באמצעות Veo 3.1 ב-Gemini API
+# Generare video con Veo 3.1 nell'API Gemini
 
-> במדריך [הבנת סרטונים](https://ai.google.dev/gemini-api/docs/video-understanding?hl=he) אפשר לקרוא מידע נוסף על הבנת סרטונים.
+> Per scoprire di più sulla comprensione dei video, consulta la guida [Comprensione dei video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=it).
 
-‫[Veo 3.1](https://deepmind.google/models/veo/?hl=he) הוא המודל המתקדם ביותר של Google ליצירת סרטונים באיכות גבוהה באורך 8 שניות ברזולוציה 720p, ‏ 1080p או 4k, עם ריאליזם מדהים ואודיו שנוצר באופן מקורי. אפשר לגשת למודל הזה באופן פרוגרמטי באמצעות Gemini API. מידע נוסף על הגרסאות הזמינות של מודל Veo זמין בקטע [גרסאות המודל](#model-versions).
+[Veo 3.1](https://deepmind.google/models/veo/?hl=it) è il modello all'avanguardia di Google
+per la generazione di video di 8 secondi in alta fedeltà a 720p, 1080p o 4K caratterizzati da
+un realismo straordinario e audio generato in modo nativo. Puoi accedere
+a questo modello in modo programmatico utilizzando l'API Gemini. Per scoprire di più sulle varianti del modello Veo disponibili, consulta la sezione [Versioni del modello](#model-versions).
 
-‫Veo 3.1 מצטיין במגוון רחב של סגנונות חזותיים וקולנועיים, וכולל כמה יכולות חדשות:
+Veo 3.1 eccelle in un'ampia gamma di stili visivi e cinematografici e introduce
+diverse nuove funzionalità:
 
-- **סרטונים לאורך**: אפשר לבחור בין סרטונים לרוחב (`16:9`) לבין סרטונים לאורך (`9:16`).
-- **הארכת סרטונים**: הארכת סרטונים שנוצרו בעבר באמצעות Veo.
-- **יצירה ספציפית של פריימים**: אפשר ליצור סרטון על ידי ציון הפריימים הראשון והאחרון.
-- **הנחיה מבוססת-תמונה**: אפשר להשתמש בעד שלוש תמונות עזר כדי להנחות את התוכן של הסרטון שנוצר.
+- **Video verticali**: scegli tra video orizzontali (`16:9`) e verticali (`9:16`).
+- **Estensione video**: estendi i video generati in precedenza
+  utilizzando Veo.
+- **Generazione specifica per frame**: genera un video specificando il primo e l'ultimo frame.
+- **Indicazioni basate sulle immagini**: utilizza fino a tre immagini di riferimento per guidare
+  i contenuti del video generato.
 
-מידע נוסף על כתיבת הנחיות טקסט יעילות ליצירת סרטונים זמין [במדריך לכתיבת הנחיות ל-Veo](#prompt-guide)
+Per saperne di più su come scrivere prompt di testo efficaci per la generazione di video,
+consulta la [guida ai prompt di Veo](#prompt-guide).
 
-## יצירת סרטונים לפי טקסט
+## Generazione di video da testo
 
-כדי לראות איך ליצור סרטון עם דיאלוג, עם ריאליזם קולנועי או עם אנימציה יצירתית, בוחרים דוגמה:
+Scegli un esempio per scoprire come generare un video con dialoghi, realismo
+cinematografico o animazione creativa:
 
-דיאלוג ואפקטים קוליים
-ריאליזם קולנועי
-אנימציה יצירתית
+Dialoghi ed effetti sonori
+Realismo cinematografico
+Animazione creativa
 
 ### Python
 
@@ -229,9 +237,10 @@ while true; do
 done
 ```
 
-### שליטה ביחס הגובה-רוחב
+### Controllare le proporzioni
 
-‫Veo 3.1 מאפשר ליצור סרטונים לרוחב (`16:9`, הגדרת ברירת המחדל) או לאורך (`9:16`). אפשר לציין למודל באיזה מהם רוצים להשתמש באמצעות הפרמטר `aspect_ratio`:
+Veo 3.1 ti consente di creare video in formato orizzontale (`16:9`, l'impostazione predefinita) o verticale (`9:16`). Puoi indicare al modello quale vuoi utilizzare utilizzando il parametro
+`aspect_ratio`:
 
 ### Python
 
@@ -394,13 +403,15 @@ while true; do
 done
 ```
 
-### שליטה ברזולוציה
+### Controllare la risoluzione
 
-‫Veo 3.1 יכול גם ליצור ישירות סרטונים באיכות 720p, ‏ 1080p או 4k (איכות 4k לא זמינה ב-Veo 3.1 Lite).
+Veo 3.1 può anche generare direttamente video a 720p, 1080p o 4K (4K non disponibile
+per Veo 3.1 Lite).
 
-שימו לב: ככל שהרזולוציה גבוהה יותר, כך זמן האחזור יהיה ארוך יותר. סרטונים באיכות 4K גם עולים יותר (ראו [תמחור](https://ai.google.dev/gemini-api/docs/pricing?hl=he#veo-3.1)).
+Tieni presente che maggiore è la risoluzione, maggiore sarà la latenza. I video in 4K
+sono anche più costosi (vedi [prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it#veo-3.1)).
 
-[התוסף ליצירת סרטונים](#extending_veo_videos) מוגבל גם הוא לסרטונים ברזולוציה 720p.
+Anche l'[estensione video](#extending_veo_videos) è limitata ai video a 720p.
 
 ### Python
 
@@ -563,9 +574,12 @@ while true; do
 done
 ```
 
-## יצירת סרטון מתמונה
+## Generazione di video da immagini
 
-הקוד הבא מדגים יצירת תמונה באמצעות [Gemini 3.1 Flash Image,‏ Nano Banana 2](https://ai.google.dev/gemini-api/docs/image-generation?hl=he), ולאחר מכן שימוש בתמונה הזו כפריים הפתיחה ליצירת סרטון באמצעות Veo 3.1.
+Il seguente codice mostra la generazione di un'immagine utilizzando
+[Gemini 3.1 Flash Image, noto anche come Nano Banana 2](https://ai.google.dev/gemini-api/docs/image-generation?hl=it),
+quindi l'utilizzo di questa immagine come
+frame iniziale per la generazione di un video con Veo 3.1.
 
 ### Python
 
@@ -753,15 +767,18 @@ class GenerateVideoFromImage {
 }
 ```
 
-### שימוש בתמונות לדוגמה
+### Utilizzo delle immagini di riferimento
 
-מעכשיו אפשר להעלות עד 3 תמונות לדוגמה ב-Veo 3.1 כדי להנחות את ה-AI ליצור סרטון עם תוכן שמתאים לכם. כדי לשמור על המראה של הנושא בסרטון הפלט, צריך לספק תמונות של אדם, דמות או מוצר.
+Veo 3.1 ora accetta fino a tre immagini di riferimento per guidare i contenuti del video generato. Fornisci immagini di una persona, un personaggio o un prodotto per
+preservare l'aspetto del soggetto nel video di output.
 
-לדוגמה, אם משתמשים בשלוש התמונות האלה שנוצרו באמצעות [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=he) כהפניות עם [הנחיה כתובה היטב](#use-reference-images), נוצר הסרטון הבא:
+Ad esempio, utilizzando queste tre immagini generate con
+[Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=it) come riferimenti con un
+[prompt ben scritto](#use-reference-images) viene creato il seguente video:
 
 | `` `dress_image` `` | `` `woman_image` `` | `` `glasses_image` `` |
 | --- | --- | --- |
-| שמלת פלמינגו אופנתית עם שכבות של נוצות ורודות ופוקסיה | אישה יפה עם שיער כהה ועיניים חומות חמות | משקפי שמש ורודים בצורת לב |
+| Abito da fenicottero di alta moda con strati di piume rosa e fucsia | Bella donna con capelli scuri e occhi marrone caldo | Occhiali da sole rosa a forma di cuore |
 
 ### Python
 
@@ -989,9 +1006,11 @@ while true; do
 done
 ```
 
-### שימוש בפריים הראשון ובפריים האחרון
+### Utilizzo del primo e dell'ultimo frame
 
-עם Veo 3.1 אתם יכולים ליצור סרטונים באמצעות אינטרפולציה, או על ידי ציון הפריימים הראשון והאחרון של הסרטון. מידע על כתיבת הנחיות טקסט יעילות ליצירת סרטונים זמין [במדריך לכתיבת הנחיות ל-Veo](#use-reference-images).
+Veo 3.1 ti consente di creare video utilizzando l'interpolazione o specificando il primo e
+l'ultimo fotogramma del video. Per informazioni su come scrivere prompt di testo efficaci
+per la generazione di video, consulta la [guida ai prompt di Veo](#use-reference-images).
 
 ### Python
 
@@ -1164,31 +1183,35 @@ done
 
 | `` `first_image` `` | `` `last_image` `` | *veo3.1\_with\_interpolation.mp4* |
 | --- | --- | --- |
-| אישה רפאים עם שיער לבן ארוך ושמלה מתנפנפת מתנדנדת בעדינות על נדנדת חבלים | אישה רפאים נעלמת מהנדנדה | סרטון קולנועי ומטריד של אישה מוזרה שנעלמת מנדנדה בערפל |
+| Una donna spettrale con lunghi capelli bianchi e un abito svolazzante si dondola dolcemente su un&#39;altalena di corda | La donna spettrale scompare dall&#39;altalena | Un video cinematografico e inquietante di una donna misteriosa che scompare da un&#39;altalena nella nebbia |
 
-## הארכת סרטונים ב-Veo
+## Estensione dei video di Veo
 
-אפשר להשתמש ב-Veo 3.1 כדי להאריך סרטונים שנוצרו בעבר באמצעות Veo ב-7 שניות, ועד 20 פעמים.
+Utilizza Veo 3.1 per estendere i video che hai generato in precedenza con Veo di 7 secondi
+e fino a 20 volte.
 
-מגבלות על סרטוני קלט:
+Limitazioni relative al video di input:
 
-- הסרטונים שנוצרים ב-Veo יכולים להיות באורך של עד 141 שניות.
-- ‫Gemini API תומך בהרחבות וידאו רק לסרטונים שנוצרו באמצעות Veo.
-- הסרטון צריך להיות מדור קודם, כמו
+- I video generati da Veo durano al massimo 141 secondi.
+- L'API Gemini supporta solo le estensioni video per i video generati con Veo.
+- Il video deve provenire da una generazione precedente, ad esempio
   `operation.response.generated_videos[0].video`
-- סרטונים נשמרים למשך יומיים, אבל אם נעשה שימוש בסרטון להארכת שיחה, טיימר השמירה של יומיים מתאפס. אפשר להאריך רק סרטונים שנוצרו או שהייתה אליהם הפניה ביומיים האחרונים.
-- הסרטונים שמוזנים צריכים להיות באורך מסוים, ביחס גובה-רוחב מסוים ובמידות מסוימות:
-  - יחס גובה-רוחב: 9:16 או 16:9
-  - רזולוציה: 720p
-  - אורך הסרטון: 141 שניות או פחות
+- I video vengono archiviati per 2 giorni, ma se un video viene utilizzato come riferimento per l'estensione,
+  il timer di archiviazione di 2 giorni viene reimpostato. Puoi estendere solo i video generati
+  o a cui è stato fatto riferimento negli ultimi due giorni.
+- I video di input devono avere una determinata durata, proporzioni e dimensioni:
+  - Proporzioni: 9:16 o 16:9
+  - Risoluzione: 720p
+  - Durata del video: 141 secondi o meno
 
-הפלט של התוסף הוא סרטון אחד שמשלב את סרטון הקלט של המשתמש ואת הסרטון המורחב שנוצר, באורך של עד 148 שניות.
+L'output dell'estensione è un singolo video che combina il video inserito dall'utente e
+il video esteso generato per un massimo di 148 secondi di video.
 
-בדוגמה הזו לקחנו סרטון שנוצר על ידי Veo, שמוצג כאן עם ההנחיה המקורית שלו, והארכנו אותו באמצעות הפרמטר `video` והנחיה חדשה:
+Questo esempio prende un video generato da Veo, mostrato qui con il prompt originale, e lo estende utilizzando il parametro `video` e un nuovo prompt:
 
-| הנחיה | פלט: `butterfly_video` |
+| Prompt | Output: `butterfly_video` |
 | --- | --- |
-| פרפר אוריגמי מנפנף בכנפיו ועף מחוץ לדלתות הצרפתיות אל הגינה. | פרפר אוריגמי מנפנף בכנפיו ועף מחוץ לדלתות הצרפתיות אל הגן. |
+| Una farfalla di origami sbatte le ali e vola fuori dalle porte finestre nel giardino. | Una farfalla di origami sbatte le ali e vola fuori dalle porte finestre nel giardino. |
 
 ### Python
 
@@ -1364,13 +1387,16 @@ while true; do
 done
 ```
 
-מידע על כתיבת הנחיות טקסט יעילות ליצירת סרטונים זמין [במדריך לכתיבת הנחיות ל-Veo](#extend-prompt).
+Per informazioni su come scrivere prompt di testo efficaci per la generazione di video, consulta
+la [guida ai prompt di Veo](#extend-prompt).
 
-## טיפול בפעולות אסינכרוניות
+## Gestione di operazioni asincrone
 
-יצירת סרטונים היא משימה שדורשת הרבה משאבי מחשוב. כששולחים בקשה ל-API, מתחילה משימה ארוכה ומוחזר מיד אובייקט `operation`. לאחר מכן, צריך לשלוח בקשות עד שהסרטון יהיה מוכן, כלומר עד שהסטטוס `done` יהיה true.
+La generazione di video è un'attività che richiede un'elevata potenza di calcolo. Quando invii una richiesta
+all'API, questa avvia un job a lunga esecuzione e restituisce immediatamente un oggetto `operation`. A questo punto, devi eseguire il polling finché il video non è pronto, come indicato dallo stato
+`done` impostato su true.
 
-הליבה של התהליך הזה היא לולאת דגימה, שבודקת מעת לעת את סטטוס העבודה.
+Il fulcro di questo processo è un ciclo di polling, che controlla periodicamente lo stato del job.
 
 ### Python
 
@@ -1549,303 +1575,343 @@ while true; do
 done
 ```
 
-## פרמטרים ומפרטים של Veo API
+## Parametri e specifiche dell'API Veo
 
-אלה הפרמטרים שאפשר להגדיר בבקשת ה-API כדי לשלוט בתהליך יצירת הסרטון.
+Questi sono i parametri che puoi impostare nella richiesta API per controllare il processo di generazione dei video.
 
-| פרמטר | ‫Veo 3.1 ו-Veo 3.1 Fast | Veo 3.1 Lite | ‫Veo 3 ו-Veo 3 Fast | Veo 2 |
+| Parametro | Veo 3.1 e Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 e Veo 3 Fast | Veo 2 |
 | --- | --- | --- | --- | --- |
-| קולאז' מתמונה | | | | |
-| ‫`prompt`: תיאור הטקסט של הסרטון. תומך בסימנים קוליים. | `string` | `string` | `string` | `string` |
-| ‫`image`: תמונה ראשונית ליצירת אנימציה. | אובייקט `Image` | אובייקט `Image` | אובייקט `Image` | אובייקט `Image` |
-| ‫`lastFrame`: התמונה הסופית של סרטון אינטרפולציה למעבר. חובה להשתמש בו בשילוב עם הפרמטר `image`. | אובייקט `Image` | אובייקט `Image` | אובייקט `Image` | אובייקט `Image` |
-| ‫`referenceImages`: עד שלוש תמונות שישמשו כהפניות לסגנון ולתוכן. | אובייקט `VideoGenerationReferenceImage` | אובייקט `n/a` | לא רלוונטי | לא רלוונטי |
-| ‫`video`:  סרטון לשימוש בתוסף סרטון. | אובייקט `Video` מדור קודם | לא רלוונטי | לא רלוונטי | לא רלוונטי |
-| פרמטרים | | | | |
-| ‫`aspectRatio`: יחס הגובה-רוחב של הסרטון. | `"16:9"` (ברירת מחדל), `"9:16"` | `"16:9"` (ברירת מחדל), `"9:16"` | `"16:9"` (ברירת מחדל), `"9:16"` | `"16:9"` (ברירת מחדל), `"9:16"` |
-| ‫`durationSeconds`: אורך הסרטון שנוצר. | `"4"`, `"6"`, `"8"`.   *הערך צריך להיות 8 כשמשתמשים בתוסף, בתמונות לדוגמה או ברזולוציות 1080p ו-4k* | `"4"`, `"6"`, `"8"`.   *הערך חייב להיות 8 כשמשתמשים בתמונות לדוגמה או ברזולוציה של 1080p* | `"4"`, `"6"`, `"8"`.   *הערך צריך להיות 8 כשמשתמשים בתוסף, בתמונות לדוגמה או ברזולוציות 1080p ו-4k* | `"5"`,‏ `"6"`,‏ `"8"` |
-| ‫`personGeneration`: שליטה ביצירת תמונות של אנשים. (הגבלות אזוריות מפורטות בקטע [מגבלות](#limitations)) | סרטון לפי טקסט ותוסף: `"allow_all"` בלבד   סרטון לפי תמונה, אינטרפולציה ותמונות להשוואה: `"allow_adult"` בלבד | סרטון לפי טקסט: `"allow_all"` בלבד   סרטון לפי תמונה, אינטרפולציה ותמונות עזר: `"allow_adult"` בלבד | טקסט לווידאו: `"allow_all"` בלבד   תמונה לווידאו: `"allow_adult"` בלבד | טקסט לסרטון:  `"allow_all"`, ‏`"allow_adult"`, ‏`"dont_allow"`   תמונה לסרטון:  `"allow_adult"` ו-`"dont_allow"` |
-| ‫`resolution`: הרזולוציה של הסרטון. | ‫`"720p"` (ברירת מחדל),  `"1080p"` (תומך רק במשך זמן של 8 שניות), `"4k"` (תומך רק במשך זמן של 8 שניות)   *`"720p"` רק לתוסף* | ‫`"720p"` (ברירת מחדל),  `"1080p"` (תומך רק במשך 8 שניות) | ‫`"720p"` (ברירת מחדל),  `"1080p"` (תומך רק במשך זמן של 8 שניות), `"4k"` (תומך רק במשך זמן של 8 שניות)   *`"720p"` רק לתוסף* | לא נתמך |
+| Istanze | | | | |
+| `prompt`:  la descrizione testuale del video. Supporta i segnali acustici. | `string` | `string` | `string` | `string` |
+| `image`: un'immagine iniziale da animare. | `Image` oggetto | `Image` oggetto | `Image` oggetto | `Image` oggetto |
+| `lastFrame`: l'immagine finale per la transizione di un video di interpolazione. Deve essere utilizzato in combinazione con il parametro `image`. | `Image` oggetto | `Image` oggetto | `Image` oggetto | `Image` oggetto |
+| `referenceImages`: fino a tre immagini da utilizzare come riferimenti di stile e contenuti. | `VideoGenerationReferenceImage` oggetto | `n/a` oggetto | n/a | n/a |
+| `video`:  video da utilizzare per l'estensione video. | `Video` oggetto di una generazione precedente | n/a | n/d | n/a |
+| Parametri | | | | |
+| `aspectRatio`:  le proporzioni del video. | `"16:9"` (predefinito), `"9:16"` | `"16:9"` (predefinito), `"9:16"` | `"16:9"` (predefinito), `"9:16"` | `"16:9"` (predefinito), `"9:16"` |
+| `durationSeconds`:  la durata del video generato. | `"4"`, `"6"`, `"8"`.   *Deve essere "8" quando si utilizzano estensioni, immagini di riferimento o risoluzioni 1080p e 4K* | `"4"`, `"6"`, `"8"`.   *Deve essere "8" quando utilizzi immagini di riferimento o con 1080p* | `"4"`, `"6"`, `"8"`.   *Deve essere "8" quando si utilizzano estensioni, immagini di riferimento o risoluzioni 1080p e 4K* | `"5"`, `"6"`, `"8"` |
+| `personGeneration`:  controlla la generazione di persone. Per le limitazioni regionali, consulta la sezione [Limitazioni](#limitations). | Da testo a video ed Estensione: `"allow_all"` solo   Da immagine a video, Interpolazione e Immagini di riferimento: `"allow_adult"` solo | Da testo a video: `"allow_all"` solo   Da immagine a video, Interpolazione e Immagini di riferimento: `"allow_adult"` solo | Da testo a video: `"allow_all"` solo   Da immagine a video: `"allow_adult"` solo | Da testo a video:  `"allow_all"`, `"allow_adult"`, `"dont_allow"`   Da immagine a video:  `"allow_adult"` e `"dont_allow"` |
+| `resolution`:  la risoluzione del video. | `"720p"` (impostazione predefinita),  `"1080p"` (supporta solo la durata di 8 secondi), `"4k"` (supporta solo la durata di 8 secondi)   *`"720p"` solo per l'estensione* | `"720p"` (impostazione predefinita),  `"1080p"` (supporta solo la durata di 8 secondi) | `"720p"` (impostazione predefinita),  `"1080p"` (supporta solo la durata di 8 secondi), `"4k"` (supporta solo la durata di 8 secondi)   *`"720p"` solo per l'estensione* | Non supportato |
 
-שימו לב שפרמטר `seed` זמין גם במודלים של Veo 3.
-הפעולה הזו לא מבטיחה דטרמיניזם, אבל היא משפרת אותו קצת.
+Tieni presente che il parametro `seed` è disponibile anche per i modelli Veo 3.
+Non garantisce il determinismo, ma lo migliora leggermente.
 
-## תכונות המודל
+## Funzionalità del modello
 
-| תכונה | ‫Veo 3.1 ו-Veo 3.1 Fast | Veo 3.1 Lite | ‫Veo 3 ו-Veo 3 Fast | Veo 2 |
+| Funzionalità | Veo 3.1 e Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 e Veo 3 Fast | Veo 2 |
 | --- | --- | --- | --- | --- |
-| **אודיו:** יצירת אודיו באופן טבעי עם וידאו. | ✔️ תמיד מופעל | ✔️ תמיד מופעל | ✔️ תמיד מופעל | ‫❌ רק שקט |
-| **אמצעי קלט:**  סוג הקלט שמשמש ליצירה. | טקסט לווידאו, תמונה לווידאו, וידאו לווידאו | סרטון לפי טקסט, סרטון לפי תמונה | סרטון לפי טקסט, סרטון לפי תמונה | סרטון לפי טקסט, סרטון לפי תמונה |
-| **רזולוציה:**  רזולוציית הפלט של הסרטון. | ‫720p, ‏ 1080p (אורך של 8 שניות בלבד), ‏ 4k (אורך של 8 שניות בלבד)  *720p רק כשמשתמשים בתוסף וידאו.* | ‫720p, ‏ 1080p (אורך של 8 שניות בלבד) | ‫720p ו-1080p (16:9 בלבד) | 720p |
-| **קצב פריימים:**  קצב הפריימים של פלט הסרטון. | 24 פריימים לשנייה | 24 פריימים לשנייה | 24 פריימים לשנייה | 24 פריימים לשנייה |
-| **משך הסרטון:** אורך הסרטון שנוצר. | ‫8 שניות, 6 שניות, 4 שניות  *8 שניות רק אם הרזולוציה היא 1080p או 4k או אם משתמשים בתמונות להשוואה* | ‫8 שניות, 6 שניות, 4 שניות  *8 שניות רק אם הרזולוציה היא 1080p או אם משתמשים בתמונות להשוואה* | 8 שניות | ‫5-8 שניות |
-| **סרטונים לכל בקשה:** מספר הסרטונים שנוצרו לכל בקשה. | 1 | 1 | 1 | ‫1 או 2 |
-| **סטטוס:** זמינות המודל | [לתצוגה המקדימה](https://ai.google.dev/gemini-api/docs/models?hl=he#preview) | [לתצוגה המקדימה](https://ai.google.dev/gemini-api/docs/models?hl=he#preview) | [יציב](https://ai.google.dev/gemini-api/docs/models?hl=he#stable) | [יציב](https://ai.google.dev/gemini-api/docs/models?hl=he#latest-stable) |
+| **Audio**:  genera audio in modo nativo con il video. | ✔️ Sempre attivo | ✔️ Sempre attivo | ✔️ Sempre attivo | ❌ Solo silenzioso |
+| **Modalità di input**:  il tipo di input utilizzato per la generazione. | Da testo a video, da immagine a video, da video a video | Da testo a video, da immagine a video | Da testo a video, da immagine a video | Da testo a video, da immagine a video |
+| **Risoluzione**:  la risoluzione di output del video. | 720p, 1080p (solo durata di 8 secondi), 4K (solo durata di 8 secondi)  *720p solo quando si utilizza l'estensione video.* | 720p, 1080p (solo 8 secondi) | 720p e 1080p (solo 16:9) | 720p |
+| **Frequenza fotogrammi**:  la frequenza fotogrammi di output del video. | 24 fps | 24 fps | 24 fps | 24 fps |
+| **Durata del video** :la durata del video generato. | 8 secondi, 6 secondi, 4 secondi  *8 secondi solo se la risoluzione è 1080p o 4K o se vengono utilizzate immagini di riferimento* | 8 secondi, 6 secondi, 4 secondi  *8 secondi solo se la risoluzione è 1080p o se utilizzi immagini di riferimento* | 8 secondi | 5-8 secondi |
+| **Video per richiesta**:  numero di video generati per richiesta. | 1 | 1 | 1 | 1 o 2 |
+| **Stato:** Disponibilità del modello | [Anteprima](https://ai.google.dev/gemini-api/docs/models?hl=it#preview) | [Anteprima](https://ai.google.dev/gemini-api/docs/models?hl=it#preview) | [Stabile](https://ai.google.dev/gemini-api/docs/models?hl=it#stable) | [Stabile](https://ai.google.dev/gemini-api/docs/models?hl=it#latest-stable) |
 
-## מגבלות
+## Limitazioni
 
-- **זמן האחזור של הבקשה:** מינימום: 11 שניות; מקסימום: 6 דקות (בשעות השיא).
-- **הגבלות אזוריות:** במיקומים באיחוד האירופי, בבריטניה, בשווייץ ובמזרח התיכון ובצפון אפריקה, הערכים המותרים ל`personGeneration` הם:
-  - ‫Veo 3 ו-3.1: `allow_adult` בלבד.
-  - ‫Veo 2: `dont_allow` ו-`allow_adult`. ברירת המחדל היא `dont_allow`.
-- **שמירת סרטונים:** סרטונים שנוצרו מאוחסנים בשרת למשך יומיים, ולאחר מכן הם מוסרים. כדי לשמור עותק מקומי, צריך להוריד את הסרטון תוך יומיים ממועד היצירה. סרטונים מורחבים נחשבים לסרטונים חדשים שנוצרו.
-- **הוספת סימני מים:** לסרטונים שנוצרו על ידי Veo מתווסף סימן מים באמצעות [SynthID](https://deepmind.google/technologies/synthid/?hl=he), הכלי שלנו להוספת סימני מים ולזיהוי תוכן שנוצר על ידי AI. אפשר לאמת סרטונים באמצעות פלטפורמת האימות [SynthID](https://deepmind.google/science/synthid/?hl=he).
-- **בטיחות:** הסרטונים שנוצרים עוברים דרך מסנני בטיחות ותהליכי בדיקה של שינון, שעוזרים לצמצם את הסיכונים לפגיעה בפרטיות, בזכויות יוצרים ובדעות קדומות.
-- **שגיאה באודיו:** לפעמים Veo 3.1 יחסום יצירת סרטון בגלל מסנני בטיחות או בעיות אחרות בעיבוד האודיו. לא נחייב אתכם אם הסרטון שלכם ייחסם ולא תתאפשר יצירה שלו.
+- **Latenza delle richieste**: min. 11 secondi; max. 6 minuti (durante le ore di punta).
+- **Limitazioni regionali:** in UE, Regno Unito, Svizzera e MENA, i seguenti
+  sono i valori consentiti per `personGeneration`:
+  - Veo 3 e 3.1: solo `allow_adult`.
+  - Veo 2: `dont_allow` e `allow_adult`. Il valore predefinito è `dont_allow`.
+- **Conservazione dei video**:i video generati vengono memorizzati sul server per 2 giorni,
+  dopodiché vengono rimossi. Per salvare una copia locale, devi scaricare il video entro 2 giorni dalla generazione. I video estesi vengono trattati come video
+  generati di recente.
+- **Filigrana**:i video creati da Veo vengono filigranati utilizzando [SynthID](https://deepmind.google/technologies/synthid/?hl=it), il nostro strumento per l'applicazione di filigrane e l'identificazione dei contenuti generati con l'AI. I video possono essere verificati utilizzando la piattaforma di verifica
+  [SynthID](https://deepmind.google/science/synthid/?hl=it).
+- **Sicurezza**:i video generati vengono sottoposti a filtri di sicurezza e a processi di controllo della memorizzazione che contribuiscono a ridurre i rischi di privacy, copyright e pregiudizi.
+- **Errore audio:** a volte Veo 3.1 impedisce la generazione di un video
+  a causa di filtri di sicurezza o altri problemi di elaborazione dell'audio. Non ti verrà addebitato alcun costo se la generazione del video viene bloccata.
 
-## מדריך לכתיבת הנחיות ל-Veo
+## Guida ai prompt di Veo
 
-בקטע הזה יש דוגמאות לסרטונים שאפשר ליצור באמצעות Veo, והסברים על שינוי ההנחיות כדי לקבל תוצאות שונות.
+Questa sezione contiene esempi di video che puoi creare utilizzando Veo e mostra come modificare i prompt per produrre risultati diversi.
 
-### מסנני בטיחות
+### filtri di sicurezza
 
-ב-Gemini יש מסנני בטיחות שמופעלים ב-Veo כדי לוודא שהסרטונים שנוצרו והתמונות שהועלו לא מכילים תוכן פוגעני.
-הנחיות שמפירות את [התנאים וההנחיות](https://ai.google.dev/gemini-api/docs/usage-policies?hl=he#abuse-monitoring) שלנו נחסמות.
+Veo applica filtri di sicurezza in Gemini per garantire che
+i video generati e le foto caricate non contengano contenuti offensivi.
+I prompt che violano i nostri [termini e linee guida](https://ai.google.dev/gemini-api/docs/usage-policies?hl=it#abuse-monitoring) vengono bloccati.
 
-### יסודות כתיבת ההנחיות
+### Nozioni di base sulla scrittura di prompt
 
-הנחיות טובות הן תיאוריות וברורות. כדי להפיק את המרב מ-Veo, כדאי להתחיל בזיהוי הרעיון המרכזי, לשפר את הרעיון באמצעות הוספת מילות מפתח ומשנים, ולשלב בהנחיות מינוח ספציפי לסרטונים.
+I prompt efficaci sono descrittivi e chiari. Per ottenere il massimo da Veo, inizia
+identificando la tua idea principale, perfezionala aggiungendo parole chiave e modificatori
+e incorpora la terminologia specifica dei video nei prompt.
 
-האלמנטים הבאים צריכים להיכלל בהנחיה:
+Il prompt deve includere i seguenti elementi:
 
-- **נושא**: האובייקט, האדם, החיה או הנוף שאתם רוצים בסרטון, כמו *נוף עירוני*, *טבע*, *כלי רכב* או *גורים*.
-- **פעולה**: מה הנושא עושה (לדוגמה, *הליכה*, *ריצה* או *הפניית הראש*).
-- **סגנון**: מציינים את הכיוון הקריאייטיבי באמצעות מילות מפתח ספציפיות שקשורות לסגנון הסרט, כמו *מדע בדיוני*, *סרט אימה*, *סרט אפל* או סגנונות אנימציה כמו *סרט מצויר*.
-- **מיקום המצלמה והתנועה שלה**: [אופציונלי] שליטה במיקום המצלמה ובתנועה שלה באמצעות מונחים כמו *תצוגה אווירית*, *גובה העיניים*, *צילום מלמעלה למטה*, *צילום בעגלת דולי* או *צילום מנקודת מבט של תולעת*.
-- **קומפוזיציה**: [אופציונלי] איך הצילום ממוסגר, למשל *צילום רחב*, *תקריב*, *צילום יחיד* או *צילום של שני אנשים*.
-- **פוקוס ואפקטים של עדשה**: [אופציונלי] אפשר להשתמש במונחים כמו *פוקוס רדוד*, *פוקוס עמוק*, *פוקוס רך*, *עדשת מאקרו* ו*עדשה רחבת זווית* כדי להשיג אפקטים חזותיים ספציפיים.
-- **אווירה**: [אופציונלי] איך הצבע והאור תורמים לסצנה, למשל *גוונים כחולים*, *לילה* או *גוונים חמים*.
+- **Soggetto**: l'oggetto, la persona, l'animale o il paesaggio che vuoi includere nel video, ad esempio *paesaggio urbano*, *natura*, *veicoli* o *cuccioli*.
+- **Azione**: cosa sta facendo il soggetto (ad esempio, *camminare*, *correre* o
+  *girare la testa*).
+- **Stile**: specifica la direzione creativa utilizzando parole chiave specifiche per lo stile cinematografico, ad esempio *fantascienza*, *film horror*, *film noir* o stili di animazione come *cartone animato*.
+- **Posizionamento e movimento della videocamera**: [facoltativo] controlla la posizione
+  e il movimento della videocamera utilizzando termini come *vista aerea*, *altezza degli occhi*, *inquadratura dall'alto*,
+  *carrellata* o *dal basso*.
+- **Composizione**: [facoltativo] come viene inquadrata la scena, ad esempio *campo lungo*,
+  *primo piano*, *inquadratura singola* o *inquadratura doppia*.
+- **Messa a fuoco ed effetti obiettivo**: [facoltativo] utilizza termini come *messa a fuoco ridotta*,
+  *messa a fuoco profonda*, *sfocatura diffusa*, *obiettivo macro* e *obiettivo grandangolare* per ottenere
+  effetti visivi specifici.
+- **Atmosfera**: [facoltativo] come il colore e la luce contribuiscono alla scena,
+  ad esempio *toni del blu*, *notte* o *toni caldi*.
 
-#### טיפים נוספים לכתיבת הנחיות
+#### Altri suggerimenti per scrivere prompt
 
-- **להשתמש בשפה תיאורית**: כדאי להשתמש בשמות תואר ובתיאורי פועל כדי ליצור תמונה ברורה ב-Veo.
-- **שיפור הפרטים של הפנים**: מציינים פרטים של הפנים כמוקד של התמונה, למשל באמצעות המילה *דיוקן* בהנחיה.
+- **Usa un linguaggio descrittivo**: utilizza aggettivi e avverbi per fornire un quadro chiaro a Veo.
+- **Migliora i dettagli del viso**: specifica
+  i dettagli del viso come punto focale della foto, ad esempio utilizzando la parola *ritratto* nel
+  prompt.
 
-*למידע נוסף על אסטרטגיות מקיפות יותר ליצירת הנחיות, אפשר לעיין במאמר [מבוא לתכנון הנחיות](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=he).*
+*Per strategie di prompting più complete, visita la pagina [Introduzione alla
+progettazione dei prompt](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=it).*
 
-### הנחיות לאודיו
+### Richiesta di audio
 
-אתם יכולים לספק ל-Veo רמזים לאפקטים קוליים, לרעשי הסביבה ולדיאלוגים.
-המודל מזהה את הניואנסים של הרמזים האלה כדי ליצור פסקול מסונכרן.
+Puoi fornire a Veo indicazioni per effetti sonori, rumore ambientale e dialoghi.
+Il modello acquisisce le sfumature di questi segnali per generare una colonna sonora sincronizzata.
 
-- **דיאלוג:** משתמשים במירכאות לציטוט של דיבור ספציפי. (דוגמה: "This must be the
-  key," he murmured.)
-- **אפקטים קוליים (SFX):** מתארים במפורש את הצלילים. (דוגמה: צמיגים
-  חורקים בעוצמה, מנוע שואג).
-- **רעשי הסביבה:** תיאור של נוף הצלילים בסביבה. (דוגמה: המהום חלש ומצמרר נשמע ברקע).
+- **Dialogo**:utilizza le virgolette per un discorso specifico. (Esempio: "Questa deve essere la
+  chiave", sussurrò.)
+- **Effetti sonori (SFX):** descrivi esplicitamente i suoni. (Esempio: pneumatici
+  che stridono forte, motore che romba.)
+- **Rumore ambientale:** descrivi il paesaggio sonoro dell'ambiente. (Esempio: un leggero,
+  inquietante ronzio risuona in sottofondo.)
 
-בסרטונים האלה מוצגות הנחיות ליצירת אודיו באמצעות Veo 3, עם רמות פירוט שונות.
+Questi video mostrano come richiedere la generazione di audio di Veo 3 con livelli di dettaglio crescenti.
 
-| **הנחיה** | **פלט שנוצר באמצעות AI** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| **יותר פרטים (דיאלוג ואווירה)**  צילום רחב של יער מעורפל באזור הפסיפיק נורת' וסט. שני מטיילים מותשים, גבר ואישה, עוברים בין שרכים כשהגבר עוצר בפתאומיות ומסתכל על עץ. תקריב: סימני שריטות עמוקים וטריים חרוטים בקליפת העץ. גבר: (יד על סכין הציד) "זה לא דוב רגיל". אישה: (קולה מתוח מפחד, סורקת את היער) "אז מה זה?" נביחה מחוספסת, ענפים נשברים, צעדים על האדמה הלחה. ציפור בודדה מצייצת. | שני אנשים ביער נתקלים בסימנים של דוב. |
-| **פחות פרטים (דיאלוג)** אנימציה של נייר חתוך. ספרן חדש: "איפה אתם שומרים את הספרים האסורים?" האוצר הישן: "לא. הם שומרים אותנו." | ספרנים עם אנימציה דנים בספרים אסורים |
+| **Più dettagli (dialoghi e atmosfera)** Un'inquadratura ampia di una foresta nebbiosa del Pacifico nord-occidentale. Due escursionisti esausti, un uomo e una donna, si fanno strada tra le felci quando l'uomo si ferma bruscamente, fissando un albero. Primo piano: segni di artigli freschi e profondi sono incisi nella corteccia dell'albero. Uomo: (con la mano sul coltello da caccia) "Questo non è un orso normale". Donna: (voce tesa per la paura, scrutando il bosco) "Allora cos'è?" Una corteccia ruvida, rami che si spezzano, passi sulla terra umida. Un uccello solitario cinguetta. | Due persone nel bosco trovano tracce di un orso. |
+| **Meno dettagli (dialoghi)** Animazione con ritagli di carta. Nuovo bibliotecario: "Dove tenete i libri proibiti?" Vecchio curatore: "Non lo facciamo. Ci tengono." | Bibliotecari animati che discutono di libri proibiti |
 
-כדאי לנסות את ההנחיות האלה בעצמכם כדי לשמוע את האודיו!
-[רוצה לנסות את Veo?](https://deepmind.google/models/veo/?hl=he)
+Prova questi prompt per ascoltare l'audio.
+[Prova Veo](https://deepmind.google/models/veo/?hl=it)
 
-### מתן הנחיות באמצעות תמונות לדוגמה
+### Prompt con immagini di riferimento
 
-אתם יכולים להשתמש בתמונה אחת או יותר כקלט כדי להנחות את הסרטונים שנוצרו, באמצעות היכולות של Veo ליצירת [סרטון מתמונה](https://ai.google.dev/gemini-api/docs/video?hl=he#generate-from-images). ‫Veo משתמש בתמונה שהזנתם כפריים הראשוני. בוחרים תמונה שהכי קרובה למה שרוצים שתהיה הסצנה הראשונה בסרטון, כדי להנפיש חפצים יומיומיים, להפיח חיים בציורים, ולהוסיף תנועה וקול לסצנות טבע.
+Puoi utilizzare una o più immagini come input per guidare i video generati, utilizzando
+le funzionalità di [conversione da immagine a video](https://ai.google.dev/gemini-api/docs/video?hl=it#generate-from-images) di
+Veo. Veo utilizza l'immagine di input come frame iniziale. Seleziona un'immagine
+che si avvicini di più a quella che immagini come prima scena del tuo video per animare
+oggetti di uso quotidiano, dare vita a disegni e dipinti e aggiungere movimento e
+suono a scene naturali.
 
-| **הנחיה** | **פלט שנוצר באמצעות AI** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| **תמונת קלט (נוצרה על ידי Nano Banana)** תמונת מאקרו היפר-ריאליסטית של גולשים זעירים שגולשים על גלי האוקיינוס בתוך כיור אבן כפרי בחדר אמבטיה. ברז פליז ישן פתוח, ויוצר גל גלישה נצחי. סוריאליסטי, גחמני, תאורה טבעית בהירה. | גולשים זעירים רוכבים על גלי האוקיינוס בתוך כיור אבן כפרי בחדר אמבטיה. |
-| **סרטון פלט (נוצר על ידי Veo 3.1)** סרטון מאקרו סוריאליסטי בסגנון קולנועי. גולשים קטנים גולשים על גלים מתגלגלים בכיור אבן בחדר רחצה. ברז פליז ישן שפועל יוצר את הגלים האינסופיים. המצלמה מבצעת פנינג לאט על פני הסצנה המוזרה והמוארת בשמש, כשהדמויות המיניאטוריות חורטות במיומנות את מי הטורקיז. | גולשים קטנים שמסתובבים במעגלים בכיור באמבטיה. |
+| **Immagine di input (generata da Nano Banana)** Una macrofotografia iperrealistica di piccoli surfisti in miniatura che cavalcano le onde dell'oceano all'interno di un lavandino rustico in pietra. Un rubinetto in ottone vintage è aperto e crea l'onda perpetua. Illuminazione naturale surreale, stravagante e intensa. | Piccoli surfisti in miniatura che cavalcano le onde dell&#39;oceano all&#39;interno di un lavandino rustico in pietra. |
+| **Video di output (generato da Veo 3.1)** Un video macro surreale e cinematografico. Piccoli surfisti cavalcano onde perpetue e rotolanti all'interno di un lavandino in pietra. Un rubinetto in ottone vintage aperto genera onde infinite. La videocamera si sposta lentamente sulla scena stravagante e illuminata dal sole mentre le figure in miniatura solcano abilmente l'acqua turchese. | Piccoli surfisti che cavalcano le onde nel lavandino di un bagno. |
 
-‫Veo 3.1 מאפשר לכם [להשתמש בתמונות לדוגמה](https://ai.google.dev/gemini-api/docs/video?hl=he#reference-images) או במרכיבים כדי לכוון את התוכן של הסרטון שנוצר. אפשר לספק עד שלוש תמונות של נכס שכוללות אדם, דמות או מוצר בודד. ‫Veo שומר על המראה של האובייקט בסרטון הפלט.
+Veo 3.1 ti consente di [fare riferimento a immagini](https://ai.google.dev/gemini-api/docs/video?hl=it#reference-images) o
+ingredienti per indirizzare i contenuti del video
+generato. Fornisci fino a tre immagini di asset di una singola persona, personaggio
+o prodotto. Veo mantiene l'aspetto del soggetto nel video di output.
 
-| **הנחיה** | **פלט שנוצר באמצעות AI** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| **תמונה לדוגמה (נוצרה על ידי Nano Banana)** דג חכאי שחי במעמקי הים מסתתר במים העמוקים והחשוכים, השיניים שלו חשופות והפיתיון שלו זוהר. | דג חכה כהה וזוהר |
-| **תמונה לדוגמה (נוצרה על ידי Nano Banana)** תחפושת נסיכה לילדות בצבע ורוד, עם שרביט וכתר, על רקע מוצר פשוט. | תחפושת נסיכה ורודה לילדים |
-| **סרטון פלט (נוצר על ידי Veo 3.1)** צור גרסת קריקטורה מטופשת של הדג כשהוא לובש את התחפושת, שוחה ומנופף בשרביט. | דג חכה לבוש בתחפושת של נסיכה |
+| **Immagine di riferimento (generata da Nano Banana)** Una rana pescatrice di acque profonde si nasconde nell'acqua buia e profonda, con i denti scoperti e l'esca luminosa. | Un pesce abissale scuro e luminoso |
+| **Immagine di riferimento (generata da Nano Banana)** Un costume da principessa rosa per bambini completo di bacchetta e tiara, su uno sfondo semplice del prodotto. | Un costume da principessa rosa per bambini |
+| **Video di output (generato da Veo 3.1)** Crea una versione a cartoni animati buffa del pesce che indossa il costume, nuota e agita la bacchetta. | Un pesce abissale che indossa un costume da principessa |
 
-בעזרת Veo 3.1, אתם יכולים גם ליצור סרטונים על ידי ציון [הפריים הראשון והפריים האחרון](https://ai.google.dev/gemini-api/docs/video?hl=he#using-first-and-last-video-frames) של הסרטון.
+Con Veo 3.1 puoi anche generare video specificando il [primo e l'ultimo
+fotogramma](https://ai.google.dev/gemini-api/docs/video?hl=it#using-first-and-last-video-frames) del video.
 
-| **הנחיה** | **פלט שנוצר באמצעות AI** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| **התמונה הראשונה (נוצרה על ידי Nano Banana)** תמונה מציאותית באיכות גבוהה של חתול ג'ינג'י נוהג במכונית מרוץ אדומה עם גג נפתח בחוף הריביירה הצרפתית. | חתול ג&#39;ינג&#39;י נוהג במכונית מרוץ אדומה עם גג נפתח |
-| **התמונה האחרונה (נוצרה על ידי Nano Banana)** תראה מה קורה כשהמכונית ממריאה מצוק. | חתול ג&#39;ינג&#39;י נוהג במכונית קבריולט אדומה ונופל מצוק |
-| **פלט וידאו (נוצר על ידי Veo 3.1)** אופציונלי | חתול נוהג אל צוק ומתרומם לאוויר |
+| **Prima immagine (generata da Nano Banana)** Un'immagine frontale fotorealistica di alta qualità di un gatto rosso che guida un'auto da corsa cabriolet rossa sulla costa della riviera francese. | Un gatto rosso alla guida di un&#39;auto da corsa cabriolet rossa |
+| **Ultima immagine (generata da Nano Banana)** Mostra cosa succede quando l'auto decolla da una scogliera. | Un gatto rosso alla guida di una decappottabile rossa cade da una scogliera |
+| **Video di output (generato da Veo 3.1)** Facoltativo | Un gatto si lancia da una scogliera e decolla |
 
-התכונה הזו מאפשרת לכם לשלוט במדויק בקומפוזיציה של הצילום, כי אתם יכולים להגדיר את פריים ההתחלה ופריים הסיום. כדי לוודא שהסצנה מתחילה ומסתיימת בדיוק כמו שדמיינתם, אתם יכולים להעלות תמונה או להשתמש בפריים מסרטון קודם שיצרתם.
+Questa funzionalità ti offre un controllo preciso sulla composizione della ripresa, consentendoti di definire il fotogramma iniziale e finale. Carica un'immagine o utilizza un frame di una
+generazione di video precedente per assicurarti che la scena inizi e si concluda esattamente
+come l'hai immaginata.
 
-### הנחיות לתוסף
+### Richiesta di estensione
 
-כדי [להאריך](https://ai.google.dev/gemini-api/docs/video?hl=he#extending_veo_videos) סרטון שנוצר באמצעות Veo עם Veo 3.1 (לא זמין ב-Veo 3.1 Lite), משתמשים בסרטון כקלט יחד עם הנחיה כתובה אופציונלית. הארכה – המצלמה ממשיכה לצלם את הסצנה בלי הפרעה, ומסיימת את השנייה האחרונה או את 24 הפריימים האחרונים של הסרטון.
+Per [estendere](https://ai.google.dev/gemini-api/docs/video?hl=it#extending_veo_videos) il video generato da Veo con Veo 3.1 (non disponibile per Veo 3.1 Lite), utilizza il video come input insieme a un prompt di testo facoltativo. Estendi finalizza l'ultimo secondo o i 24
+fotogrammi del video e continua l'azione.
 
-שימו לב: אי אפשר להאריך את הקול בצורה יעילה אם הוא לא מופיע בשנייה האחרונה של הסרטון.
+Tieni presente che la voce non può essere estesa in modo efficace se non è presente
+nell'ultimo secondo del video.
 
-| **הנחיה** | **פלט שנוצר באמצעות AI** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| **סרטון קלט (נוצר על ידי Veo 3.1)** מצנח רחיפה ממריא מפסגת ההר ומתחיל לגלוש במורד ההרים שמשקיפים על העמקים שמכוסים בפרחים למטה. | מצנח רחיפה ממריא מפסגת הר |
-| **סרטון פלט (נוצר על ידי Veo 3.1)** תאריך את הסרטון הזה עם מצנח רחיפה שיורד לאט. | מצנח רחיפה ממריא מפסגת הר, ואז יורד לאט |
+| **Video di input (generato da Veo 3.1)** Il parapendio decolla dalla cima della montagna e inizia a planare sulle montagne che si affacciano sulle valli sottostanti ricoperte di fiori. | Un parapendio decolla dalla cima di una montagna |
+| **Output video (generato da Veo 3.1)** Estendi questo video con il parapendio che scende lentamente. | Un parapendio decolla dalla cima di una montagna, poi scende lentamente |
 
-### הנחיות ופלט לדוגמה
+### Prompt e output di esempio
 
-בקטע הזה מוצגות כמה הנחיות שמדגימות איך פרטים תיאוריים יכולים לשפר את התוצאה של כל סרטון.
+Questa sezione presenta diversi prompt, evidenziando come i dettagli descrittivi possano
+migliorare il risultato di ogni video.
 
-#### נטיפי קרח
+#### Ghiaccioli
 
-בסרטון הזה מוצגות דוגמאות לשימוש ברכיבים של [הנחיות בסיסיות](#basics) בהנחיה.
+Questo video mostra come utilizzare gli elementi delle
+[basi per la scrittura dei prompt](#basics) nel prompt.
 
-| **הנחיה** | **פלט שנוצר באמצעות AI** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| צילום תקריב (קומפוזיציה) של נטיפי קרח נמסים (נושא) על קיר סלעים קפוא (הקשר) עם גוונים כחולים קרירים (אווירה), בהגדלה (תנועת המצלמה) תוך שמירה על פרטי התקריב של טיפות מים (פעולה). | נטיפי קרח מטפטפים על רקע כחול. |
+| Scatto ravvicinato (composizione) di stalattiti che si sciolgono (soggetto) su una parete rocciosa congelata (contesto) con tonalità fredde di blu (atmosfera), con zoom (movimento della videocamera) che mantiene i dettagli ravvicinati delle gocce d'acqua (azione). | Stalattiti che gocciolano su uno sfondo blu. |
 
-#### גבר בטלפון
+#### Uomo al telefono
 
-בסרטונים האלה מוצגות דוגמאות לאופן שבו אפשר לשנות את ההנחיה ולהוסיף לה פרטים ספציפיים יותר ויותר, כדי ש-Veo ישפר את הפלט לפי הטעם שלכם.
+Questi video mostrano come rivedere il prompt con dettagli sempre più specifici per fare in modo che Veo perfezioni l'output in base alle tue preferenze.
 
-| **הנחיה** | **פלט שנוצר באמצעות AI** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| **פחות פרטים**  המצלמה מתקרבת כדי להציג תקריב של גבר נואש במעיל גשם ירוק. הוא מתקשר בטלפון קיר עם חוגה, עם תאורת ניאון ירוקה. זה נראה כמו סצנה מסרט. | גבר מדבר בטלפון. |
-| **פרטים נוספים** תקריב קולנועי של גבר נואש במעיל גשם ירוק דהוי, מחייג בטלפון חוגה שמחובר לקיר לבנים מחוספס, שטוף באור המפחיד של שלט ניאון ירוק. המצלמה מתקרבת אליו, ורואים את המתח בלסת שלו ואת הייאוש שמוטבע בפניו כשהוא מנסה להתקשר. עומק השדה הרדוד מתמקד במצח המקומט שלו ובטלפון השחור עם החוגה, ומטשטש את הרקע לים של צבעי ניאון וצללים לא ברורים, ויוצר תחושה של דחיפות ובדידות. | גבר מדבר בטלפון |
+| **Meno dettagli** La videocamera si sposta per mostrare il primo piano di un uomo disperato che indossa un impermeabile verde. Sta effettuando una chiamata con un telefono a muro in stile rotativo con una luce verde al neon. Sembra una scena di un film. | Uomo che parla al telefono. |
+| **Maggiori dettagli** Un primo piano cinematografico segue un uomo disperato con un cappotto verde consunto mentre compone un numero su un telefono a disco montato su un muro di mattoni sporco, immerso nel bagliore inquietante di un'insegna al neon verde. La videocamera si avvicina, rivelando la tensione nella mascella e la disperazione incisa sul suo volto mentre fatica a effettuare la chiamata. La profondità di campo ridotta si concentra sulla sua fronte corrugata e sul telefono nero con tasti rotanti, sfocando lo sfondo in un mare di colori al neon e ombre indistinte, creando un senso di urgenza e isolamento. | Uomo che parla al telefono |
 
-#### נמר השלג
+#### Leopardo delle nevi
 
-| **הנחיה** | **פלט שנוצר באמצעות AI** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| **הנחיה פשוטה:** יצור חמוד עם פרווה שדומה לזו של נמר השלג הולך ביער חורפי, רינדור בסגנון סרטים מצוירים בתלת ממד. | נמר השלג רדום. |
-| **הנחיה מפורטת:**  תיצור סצנת אנימציה קצרה בתלת ממד בסגנון סרטים מצוירים שמח. יצור חמוד עם פרווה כמו של נמר שלג, עיניים גדולות ומלאות הבעה וגוף ידידותי ומעוגל, רוקד בשמחה ביער חורפי קסום. הסצנה צריכה לכלול עצים מעוגלים ומכוסים בשלג, פתיתי שלג עדינים שנופלים ואור שמש חמים שחודר מבעד לענפים. התנועות הקופצניות של היצור והחיוך הרחב שלו צריכים לשדר שמחה טהורה. השתמש בטון אופטימי ומחמם לב עם צבעים בהירים ועליזים ואנימציה שובבה. | הנמר פועל מהר יותר. |
+| **Prompt semplice:** Una creatura carina con pelliccia simile a quella di un leopardo delle nevi cammina in una foresta invernale, rendering in stile cartone animato 3D. | Il leopardo delle nevi è letargico. |
+| **Prompt dettagliato:** crea una breve scena animata in 3D in uno stile cartone animato gioioso. Una simpatica creatura con pelliccia simile a quella del leopardo delle nevi, grandi occhi espressivi e una forma amichevole e arrotondata che trotterella felice in una foresta invernale fantastica. La scena dovrebbe mostrare alberi arrotondati e innevati, fiocchi di neve che cadono delicatamente e una calda luce solare che filtra tra i rami. I movimenti rimbalzanti della creatura e il suo ampio sorriso devono trasmettere pura gioia. Punta a un tono allegro e commovente con colori vivaci e allegri e animazioni giocose. | Il leopardo delle nevi sta correndo più velocemente. |
 
-### דוגמאות לפי רכיבי כתיבה
+### Esempi per elementi di scrittura
 
-בדוגמאות האלה מוסבר איך לשפר את ההנחיות לפי כל אחד מהרכיבים הבסיסיים.
+Questi esempi mostrano come perfezionare i prompt in base a ogni elemento di base.
 
-#### נושא והקשר
+#### Oggetto e contesto
 
-מציינים את המוקד העיקרי (הנושא) ואת הרקע או הסביבה (ההקשר).
+Specifica il soggetto principale e lo sfondo o l'ambiente (contesto).
 
-| **הנחיה** | **פלט שנוצר באמצעות AI** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| הדמיה אדריכלית של בניין דירות מבטון לבן עם צורות אורגניות זורמות, שמשתלב בצורה חלקה עם צמחייה עשירה ואלמנטים עתידניים | פלייסהולדר. |
-| לוויין שמרחף בחלל החיצון עם הירח וכמה כוכבים ברקע. | לוויין שמרחף באטמוספירה. |
+| Rendering architettonico di un condominio in cemento bianco con forme organiche fluide, che si fondono perfettamente con la vegetazione lussureggiante ed elementi futuristici | Segnaposto. |
+| Un satellite che fluttua nello spazio con la luna e alcune stelle sullo sfondo. | Satellite che fluttua nell&#39;atmosfera. |
 
-#### פעולה
+#### Azione
 
-מציינים מה הנושא עושה (למשל, הליכה, ריצה או סיבוב הראש).
+Specifica cosa sta facendo il soggetto (ad es. cammina, corre o gira la
+testa).
 
-| **הנחיה** | **פלט שנוצר באמצעות AI** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| צילום רחב של אישה הולכת לאורך החוף, נראית מרוצה ורגועה, ומביטה אל האופק בשקיעה. | השקיעה יפהפייה. |
+| Un'inquadratura ampia di una donna che cammina lungo la spiaggia, con un'espressione felice e rilassata mentre guarda l'orizzonte al tramonto. | Il tramonto è assolutamente meraviglioso. |
 
-#### סגנון
+#### Stile
 
-מוסיפים מילות מפתח כדי לכוון את היצירה לסגנון אסתטי ספציפי (למשל, סוריאליסטי, וינטג', עתידני, פילם נואר).
+Aggiungi parole chiave per indirizzare la generazione verso un'estetica specifica (ad es. surreale,
+vintage, futuristico, film noir).
 
-| **הנחיה** | **פלט שנוצר באמצעות AI** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| סגנון פילם נואר, גבר ואישה הולכים ברחוב, מסתורין, קולנועי, שחור-לבן. | סגנון הפילם נואר יפהפה. |
+| Stile noir, uomo e donna camminano per strada, mistero, cinematografico, bianco e nero. | Lo stile noir è assolutamente meraviglioso. |
 
-#### תנועת המצלמה והקומפוזיציה
+#### Movimento e composizione della videocamera
 
-מציינים איך המצלמה זזה (צילום מנקודת מבט מסוימת, צילום אווירי, צילום במעקב עם רחפן) ואיך הצילום ממוסגר (צילום רחב, תקריב, צילום מזווית נמוכה).
+Specifica come si muove la videocamera (soggettiva, ripresa aerea, ripresa a seguire con drone) e
+come viene inquadrata la ripresa (campo lungo, primo piano, inquadratura dal basso).
 
-| **הנחיה** | **פלט שנוצר באמצעות AI** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| צילום מנקודת מבט של נסיעה במכונית וינטג' בגשם, קנדה בלילה, בסגנון קולנועי. | השקיעה יפהפייה. |
-| תקריב קיצוני של עין עם השתקפות של העיר בתוכה. | השקיעה יפהפייה. |
+| Scatto POV da un'auto d'epoca che guida sotto la pioggia, Canada di notte, cinematografico. | Il tramonto è assolutamente meraviglioso. |
+| Primissimo piano di un occhio con il riflesso della città. | Il tramonto è assolutamente meraviglioso. |
 
-#### אווירה
+#### Atmosfera
 
-לוחות הצבעים והתאורה משפיעים על האווירה. אפשר לנסות מונחים כמו "כתום מושתק, גוונים חמים", "אור טבעי", "זריחה" או "גוונים כחולים קרירים".
+Le tavolozze di colori e l'illuminazione influenzano l'atmosfera. Prova con termini come "arancione tenue
+toni caldi", "luce naturale", "alba" o "toni freddi del blu".
 
-| **הנחיה** | **פלט שנוצר באמצעות AI** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| תקריב של ילדה שמחזיקה גור גולדן רטריבר חמוד בפארק, באור שמש. | גור כלבים בזרועות של ילדה צעירה. |
-| תמונת תקריב קולנועית של אישה עצובה נוסעת באוטובוס בגשם, עם גוונים כחולים קרירים ואווירה עצובה. | אישה נוסעת באוטובוס ונראית עצובה. |
+| Primo piano di una ragazza che tiene in braccio un adorabile cucciolo di golden retriever al parco, luce solare. | Un cucciolo tra le braccia di una bambina. |
+| Primo piano cinematografico di una donna triste che viaggia in autobus sotto la pioggia, toni freddi del blu, atmosfera triste. | Una donna su un autobus che si sente triste. |
 
-### יחסי גובה-רוחב
+### Proporzioni
 
-ב-Veo אפשר לציין את יחס הגובה-רוחב של הסרטון.
+Veo ti consente di specificare le proporzioni del video.
 
-| **הנחיה** | **פלט שנוצר באמצעות AI** |
+| **Prompt** | **Output generato** |
 | --- | --- |
-| **מסך רחב (16:9)** יצירת סרטון עם תצוגת מעקב מרחפן של גבר שנוהג במכונית קבריולט אדומה בפאלם ספרינגס, שנות ה-70, אור שמש חם, צללים ארוכים. | גבר נוהג במכונית קבריולט אדומה בפאלם ספרינגס, בסגנון שנות ה-70. |
-| **לאורך (9:16)** יוצרים סרטון שמציג את התנועה החלקה של מפל מלכותי בהוואי בתוך יער גשם עבות. התמקדות בזרימת מים ריאליסטית, בעלווה מפורטת ובתאורה טבעית כדי להעביר תחושה של שלווה. צלמו את המים הזורמים, את האווירה הערפילית ואת אור השמש המנוקד שמסתנן מבעד לחופת העצים הצפופה. כדאי להשתמש בתנועות מצלמה חלקות בסגנון קולנועי כדי להציג את המפל ואת הסביבה שלו. השתמשו בטון שליו וריאליסטי, שיעביר את הצופה ליופי השליו של יער הגשם בהוואי. | מפל מרשים בהוואי, בתוך יער גשם עשיר בצמחייה. |
+| **Widescreen (16:9)** Crea un video con una vista da drone che segue un uomo alla guida di un'auto cabriolet rossa a Palm Springs negli anni '70, con luce solare calda e ombre lunghe. | Un uomo alla guida di un&#39;auto cabriolet rossa a Palm Springs, in stile anni &#39;70. |
+| **Verticale (9:16)** Crea un video che metta in evidenza il movimento fluido di una maestosa cascata hawaiana all'interno di una lussureggiante foresta pluviale. Concentrati sul flusso d'acqua realistico, sul fogliame dettagliato e sull'illuminazione naturale per trasmettere tranquillità. Cattura l'acqua impetuosa, l'atmosfera nebbiosa e la luce del sole che filtra attraverso la fitta chioma degli alberi. Utilizza movimenti della videocamera fluidi e cinematografici per mostrare la cascata e l'ambiente circostante. Punta a un tono tranquillo e realistico, trasportando lo spettatore nella serena bellezza della foresta pluviale hawaiana. | Una maestosa cascata hawaiana in una lussureggiante foresta pluviale. |
 
-## גרסאות המודלים
+## Versioni modello
 
-פרטים נוספים על השימוש במודל Veo זמינים בדף [תמחור](https://ai.google.dev/gemini-api/docs/pricing?hl=he#veo-3.1) ובמאמר [מגבלות קצב](https://aistudio.google.com/rate-limit?hl=he).
+Per ulteriori dettagli sull'utilizzo specifico dei modelli Veo, consulta la pagina [Prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it#veo-3.1) e [Limiti di frequenza](https://aistudio.google.com/rate-limit?hl=it).
 
-### גרסת טרום-השקה של Veo 3.1
+### Anteprima di Veo 3.1
 
-| נכס | תיאור |
+| Proprietà | Descrizione |
 | --- | --- |
-| id\_cardקוד מודל | ‫**Gemini API**  `veo-3.1-generate-preview` |
-| saveסוגי נתונים נתמכים | **קלט**  טקסט, תמונה  **פלט**  סרטון עם אודיו |
-| token\_autoמגבלות | **קלט טקסט**  ‫1,024 טוקנים  **סרטון הפלט**  1 |
-| calendar\_monthהעדכון האחרון | ינואר 2026 |
+| Codice modello id\_card | **API Gemini**  `veo-3.1-generate-preview` |
+| saveTipi di dati supportati | **Ingresso**  Testo, immagine  **Output**  Video con audio |
+| Limiti di token\_auto | **Inserimento di testo**  1024 token  **Output video**  1 |
+| calendar\_monthUltimo aggiornamento | Gennaio 2026 |
 
-### גרסת טרום-השקה של Veo 3.1 Fast
+### Anteprima di Veo 3.1 Fast
 
-| נכס | תיאור |
+| Proprietà | Descrizione |
 | --- | --- |
-| id\_cardקוד מודל | ‫**Gemini API**  `veo-3.1-fast-generate-preview` |
-| saveסוגי נתונים נתמכים | **קלט**  טקסט, תמונה  **פלט**  סרטון עם אודיו |
-| token\_autoמגבלות | **קלט טקסט**  ‫1,024 טוקנים  **סרטון הפלט**  1 |
-| calendar\_monthהעדכון האחרון | ינואר 2026 |
+| Codice modello id\_card | **API Gemini**  `veo-3.1-fast-generate-preview` |
+| saveTipi di dati supportati | **Ingresso**  Testo, immagine  **Output**  Video con audio |
+| Limiti di token\_auto | **Inserimento di testo**  1024 token  **Output video**  1 |
+| calendar\_monthUltimo aggiornamento | Gennaio 2026 |
 
-### ‫Veo 3.1 Lite Preview
+### Anteprima di Veo 3.1 Lite
 
-| נכס | תיאור |
+| Proprietà | Descrizione |
 | --- | --- |
-| id\_cardקוד מודל | ‫**Gemini API**  `veo-3.1-lite-generate-preview` |
-| saveסוגי נתונים נתמכים | **קלט**  טקסט, תמונה  **פלט**  סרטון עם אודיו |
-| token\_autoמגבלות | **קלט טקסט**  ‫1,024 טוקנים  **סרטון הפלט**  1 |
-| calendar\_monthהעדכון האחרון | מרץ 2026 |
+| Codice modello id\_card | **API Gemini**  `veo-3.1-lite-generate-preview` |
+| saveTipi di dati supportati | **Ingresso**  Testo, immagine  **Output**  Video con audio |
+| Limiti di token\_auto | **Inserimento di testo**  1024 token  **Output video**  1 |
+| calendar\_monthUltimo aggiornamento | Marzo 2026 |
 
 ### Veo 3
 
-| נכס | תיאור |
+| Proprietà | Descrizione |
 | --- | --- |
-| id\_cardקוד מודל | ‫**Gemini API**  `veo-3.0-generate-001` |
-| saveסוגי נתונים נתמכים | **קלט**  טקסט, תמונה  **פלט**  סרטון עם אודיו |
-| token\_autoמגבלות | **קלט טקסט**  ‫1,024 טוקנים  **סרטון הפלט**  1 |
-| calendar\_monthהעדכון האחרון | יולי 2025 |
+| Codice modello id\_card | **API Gemini**  `veo-3.0-generate-001` |
+| saveTipi di dati supportati | **Ingresso**  Testo, immagine  **Output**  Video con audio |
+| Limiti di token\_auto | **Inserimento di testo**  1024 token  **Output video**  1 |
+| calendar\_monthUltimo aggiornamento | Luglio 2025 |
 
 ### Veo 3 Fast
 
-| נכס | תיאור |
+| Proprietà | Descrizione |
 | --- | --- |
-| id\_cardקוד מודל | ‫**Gemini API**  `veo-3.0-fast-generate-001` |
-| saveסוגי נתונים נתמכים | **קלט**  טקסט, תמונה  **פלט**  סרטון עם אודיו |
-| token\_autoמגבלות | **קלט טקסט**  ‫1,024 טוקנים  **סרטון הפלט**  1 |
-| calendar\_monthהעדכון האחרון | יולי 2025 |
+| Codice modello id\_card | **API Gemini**  `veo-3.0-fast-generate-001` |
+| saveTipi di dati supportati | **Ingresso**  Testo, immagine  **Output**  Video con audio |
+| Limiti di token\_auto | **Inserimento di testo**  1024 token  **Output video**  1 |
+| calendar\_monthUltimo aggiornamento | Luglio 2025 |
 
 ### Veo 2
 
-| נכס | תיאור |
+| Proprietà | Descrizione |
 | --- | --- |
-| id\_cardקוד מודל | ‫**Gemini API**  `veo-2.0-generate-001` |
-| saveסוגי נתונים נתמכים | **קלט**  טקסט, תמונה  **פלט**  וידאו |
-| token\_autoמגבלות | **קלט טקסט**  לא רלוונטי  **קלט תמונה**  כל רזולוציה ויחס גובה-רוחב של תמונה עד גודל קובץ של 20MB  **סרטון הפלט**  עד 2 |
-| calendar\_monthהעדכון האחרון | אפריל 2025 |
+| Codice modello id\_card | **API Gemini**  `veo-2.0-generate-001` |
+| saveTipi di dati supportati | **Ingresso**  Testo, immagine  **Output**  Video |
+| Limiti di token\_auto | **Inserimento di testo**  N/D  **Input immagine**  Qualsiasi risoluzione e proporzione dell'immagine fino a una dimensione del file di 20 MB  **Output video**  Fino a 2 |
+| calendar\_monthUltimo aggiornamento | Aprile 2025 |
 
 ### Veo 2
 
-| נכס | תיאור |
+| Proprietà | Descrizione |
 | --- | --- |
-| id\_cardקוד מודל | ‫**Gemini API**  `veo-2.0-generate-001` |
-| saveסוגי נתונים נתמכים | **קלט**  טקסט, תמונה  **פלט**  וידאו |
-| token\_autoמגבלות | **קלט טקסט**  לא רלוונטי  **קלט תמונה**  כל רזולוציה ויחס גובה-רוחב של תמונה עד גודל קובץ של 20MB  **סרטון הפלט**  עד 2 |
-| calendar\_monthהעדכון האחרון | אפריל 2025 |
+| Codice modello id\_card | **API Gemini**  `veo-2.0-generate-001` |
+| saveTipi di dati supportati | **Ingresso**  Testo, immagine  **Output**  Video |
+| Limiti di token\_auto | **Inserimento di testo**  N/D  **Input immagine**  Qualsiasi risoluzione e proporzione dell'immagine fino a una dimensione del file di 20 MB  **Output video**  Fino a 2 |
+| calendar\_monthUltimo aggiornamento | Aprile 2025 |
 
-גרסאות Veo Fast מאפשרות למפתחים ליצור סרטונים עם סאונד, תוך שמירה על איכות גבוהה ואופטימיזציה של מהירות ותרחישי שימוש עסקיים. הן מתאימות במיוחד לשירותי קצה עורפי (backend) שמייצרים מודעות באופן פרוגרמטי, לכלים לבדיקות A/B מהירות של קונספטים קריאייטיביים או לאפליקציות שצריכות ליצור במהירות תוכן לרשתות החברתיות.
+Le versioni di Veo Fast consentono agli sviluppatori di creare video con audio mantenendo
+un'alta qualità e ottimizzando la velocità e i casi d'uso aziendali. Sono ideali per i servizi di backend che generano annunci in modo programmatico, per gli strumenti di test A/B rapidi dei concetti creativi o per le app che devono produrre rapidamente contenuti per i social media.
 
-## המאמרים הבאים
+## Passaggi successivi
 
-- כדי להתחיל להשתמש ב-Veo 3.1 API, אפשר להתנסות ב-[Veo Quickstart Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Veo.ipynb?hl=he) וב-[Veo 3.1 applet](https://aistudio.google.com/apps/bundled/veo_studio?hl=he).
-- כדי ללמוד איך לכתוב הנחיות טובות עוד יותר, אפשר לעיין ב[מבוא לעיצוב הנחיות](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=he).
+- Inizia a utilizzare l'API Veo 3.1 sperimentando in [Veo Quickstart Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Veo.ipynb?hl=it)
+  e nell'[applet Veo 3.1](https://aistudio.google.com/apps/bundled/veo_studio?hl=it).
+- Scopri come scrivere prompt ancora migliori con la nostra [Introduzione alla progettazione dei prompt](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=it).
 
-שליחת משוב
+Invia feedback
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-עדכון אחרון: 2026-04-29 (שעון UTC).
+Ultimo aggiornamento 2026-04-29 UTC.
 
-רוצה לתת לנו משוב?
+Vuoi dirci altro?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]

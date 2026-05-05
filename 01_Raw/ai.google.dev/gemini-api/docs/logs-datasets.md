@@ -1,88 +1,93 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=vi
-fetched_at: 2026-05-05T20:01:11.489780+00:00
-title: "Nh\u1eadt k\u00fd v\u00e0 t\u1eadp d\u1eef li\u1ec7u \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=zh-CN
+fetched_at: 2026-05-05T20:47:05.726948+00:00
+title: "\u65e5\u5fd7\u548c\u6570\u636e\u96c6 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Gửi ý kiến phản hồi
+发送反馈
 
-# Nhật ký và tập dữ liệu
+# 日志和数据集
 
-Hướng dẫn này chứa mọi thông tin bạn cần để bắt đầu bật tính năng ghi nhật ký cho các ứng dụng Gemini API hiện có. Trong hướng dẫn này, bạn sẽ tìm hiểu cách xem nhật ký của một ứng dụng hiện có hoặc ứng dụng mới trong trang tổng quan Google AI Studio để hiểu rõ hơn về hành vi của mô hình và cách người dùng có thể tương tác với các ứng dụng của bạn. Sử dụng tính năng ghi nhật ký để quan sát, gỡ lỗi và *tuỳ ý chia sẻ ý kiến phản hồi về việc sử dụng với Google nhằm giúp cải thiện Gemini trong các trường hợp sử dụng của nhà phát triển*.[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=vi)
+本指南包含开始为现有 Gemini API 应用启用日志记录所需的一切信息。在本指南中，您将了解如何在 Google AI Studio
+信息中心内查看现有或新应用的日志，以便更好地了解模型行为以及用户与应用互动的方式。使用日志记录来观察、调试，并 *选择性地与 Google
+分享使用情况反馈，以帮助改进 Gemini 在开发者使用场景中的表现*。[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=zh-cn)
 
-Tất cả lệnh gọi API `GenerateContent` và `StreamGenerateContent` đều được hỗ trợ, kể cả những lệnh gọi được thực hiện thông qua các điểm cuối [khả năng tương thích với OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=vi).
+所有 `GenerateContent` 和 `StreamGenerateContent` API 调用（包括通过 [OpenAI 兼容性](https://ai.google.dev/gemini-api/docs/openai?hl=zh-cn)端点进行的调用）均受支持。
 
-## 1. Bật tính năng ghi nhật ký trong Google AI Studio
+## 1. 在 Google AI Studio 中启用日志记录
 
-Trước khi bắt đầu, hãy đảm bảo bạn có một dự án có bật tính năng thanh toán mà bạn sở hữu.
+在开始之前，请确保您拥有一个已启用结算功能的项目。
 
-1. Mở trang nhật ký trong [AI Studio](https://aistudio.google.com/logs?hl=vi) của Google.
-2. Chọn dự án của bạn trong trình đơn thả xuống rồi nhấn nút bật để bật tính năng ghi nhật ký cho tất cả các yêu cầu theo mặc định.
+1. 在 Google [AI Studio](https://aistudio.google.com/logs?hl=zh-cn) 中打开“日志”页面。
+2. 从下拉菜单中选择您的项目，然后按“启用”按钮，即可默认启用所有请求的日志记录。
 
-![](https://ai.google.dev/static/gemini-api/docs/images/logs-state.png?hl=vi)
+![](https://ai.google.dev/static/gemini-api/docs/images/logs-state.png?hl=zh-cn)
 
-Bạn có thể bật hoặc tắt tính năng ghi nhật ký cho tất cả dự án hoặc cho các dự án cụ thể, đồng thời thay đổi các lựa chọn ưu tiên này bất cứ lúc nào thông qua Google AI Studio.
+您可以为所有项目或特定项目启用或停用日志记录，并随时通过 Google AI Studio 更改这些偏好设置。
 
-## 2. Xem nhật ký trong AI Studio
+## 2. 在 AI Studio 中查看日志
 
-1. Chuyển đến [AI Studio](https://aistudio.google.com/logs?hl=vi).
-2. Chọn dự án mà bạn đã bật tính năng ghi nhật ký.
-3. Bạn sẽ thấy nhật ký xuất hiện trong bảng theo thứ tự thời gian đảo ngược.
+1. 前往 [AI Studio](https://aistudio.google.com/logs?hl=zh-cn)。
+2. 选择您已启用日志记录的项目。
+3. 您应该会看到日志以反向时间顺序显示在表格中。
 
 ![](https://storage.googleapis.com/generativeai-downloads/images/nano-banana-logs.gif)
 
-Nhấp vào một mục để xem toàn bộ lượt xem trang của cặp yêu cầu và phản hồi. Bạn có thể kiểm tra toàn bộ câu lệnh, phản hồi hoàn chỉnh từ Gemini và ngữ cảnh từ lượt trò chuyện trước đó. Xin lưu ý rằng mỗi dự án có hạn mức lưu trữ mặc định là tối đa 1.000 nhật ký và nhật ký không được lưu trong tập dữ liệu sẽ hết hạn sau 55 ngày. Nếu dự án của bạn đạt đến hạn mức bộ nhớ, bạn sẽ được nhắc xoá nhật ký.
+点击条目即可查看请求和响应对的完整页面视图。您可以检查完整提示、Gemini 的全卷答完的回答以及上一轮的上下文。请注意，每个项目的默认存储空间上限为
+1,000 条日志，而未保存在数据集中的日志将在 55 天后过期。如果您的项目达到存储空间上限，系统会提示您删除日志。
 
-## 3. Tuyển chọn và chia sẻ tập dữ liệu
+## 3. 整理和共享数据集
 
-- Trong bảng nhật ký, hãy tìm thanh bộ lọc ở trên cùng để chọn một thuộc tính cần lọc.
-- Trong chế độ xem nhật ký đã lọc, hãy dùng hộp đánh dấu để chọn tất cả hoặc một số nhật ký.
-- Nhấp vào nút "Tạo tập dữ liệu" xuất hiện ở đầu danh sách.
-- Đặt tên mang tính mô tả và nội dung mô tả (không bắt buộc) cho tập dữ liệu mới.
-- Bạn sẽ thấy tập dữ liệu mà bạn vừa tạo cùng với tập hợp nhật ký được tuyển chọn.
-- Xuất tập dữ liệu để phân tích thêm dưới dạng tệp CSV, JSONL hoặc sang Google Trang tính.
+- 在日志表格中，找到顶部的过滤条件栏，选择要过滤的属性。
+- 在过滤后的日志视图中，使用复选框选择全部或部分日志。
+- 点击列表顶部显示的“创建数据集”按钮。
+- 为新数据集添加描述性名称和说明（可选）。
+- 您将看到刚刚创建的数据集，其中包含整理后的日志集。
+- 将数据集导出为 CSV、JSONL 文件或 Google 表格，以进行进一步分析。
 
 ![](https://storage.googleapis.com/generativeai-downloads/images/sales-dataset.gif)
 
-Tập dữ liệu có thể hữu ích cho nhiều trường hợp sử dụng.
+数据集可用于多种不同的使用场景。
 
-- **Tuyển chọn các bộ thử thách:** Thúc đẩy những điểm cải tiến trong tương lai nhắm đến những lĩnh vực mà bạn muốn AI cải thiện.
-- **Tuyển chọn các bộ dữ liệu mẫu:** Ví dụ: một mẫu từ việc sử dụng thực tế để tạo phản hồi từ một mô hình khác hoặc một tập hợp các trường hợp đặc biệt để kiểm tra thường xuyên trước khi triển khai.
-- **Tập hợp đánh giá:** Tập hợp đại diện cho mức sử dụng thực tế trên các chức năng quan trọng, để so sánh giữa các mô hình hoặc các lần lặp lại hướng dẫn hệ thống khác.
+- **整理挑战集**： 推动未来的改进，以解决您希望 AI 改进的领域。
+- **整理样本集**： 例如，从实际使用情况中提取样本，以生成来自其他模型的响应；或者收集边缘情况，以便在部署前进行例行检查。
+- **评估集**： 这些集合代表了重要功能在实际使用中的情况，可用于与其他模型或系统指令迭代进行比较。
 
-Bạn có thể giúp thúc đẩy tiến trình nghiên cứu AI, Gemini API và Google AI Studio bằng cách chọn chia sẻ các tập dữ liệu của mình dưới dạng ví dụ minh hoạ. Điều này cho phép chúng tôi tinh chỉnh các mô hình của mình trong nhiều bối cảnh và tạo ra các hệ thống AI vẫn hữu ích cho nhà phát triển trong nhiều lĩnh vực và ứng dụng
+您可以选择将数据集作为演示示例进行分享，从而帮助推动 AI 研究、Gemini API 和 Google AI Studio 的发展。这样，我们就可以在各种背景下改进模型，并创建对许多领域和应用的开发者都有用的 AI 系统
 
-## Các bước tiếp theo và những điều cần kiểm thử
+## 后续步骤和测试内容
 
-Giờ đây, khi đã bật tính năng ghi nhật ký, bạn có thể thử một số thao tác sau:
+现在您已启用日志记录，可以尝试以下操作：
 
-- **Tạo mẫu bằng nhật ký phiên:** Tận dụng [AI Studio Build](https://aistudio.google.com/apps?hl=vi) để tạo ứng dụng mã rung và thêm khoá API để bật nhật ký nhật ký người dùng.
-- **Chạy lại nhật ký bằng Gemini Batch API:** Sử dụng các tập dữ liệu để lấy mẫu phản hồi và đánh giá các mô hình hoặc logic ứng dụng bằng cách chạy lại nhật ký thông qua [Gemini Batch API](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb).
+- **使用会话记录进行原型设计**： 利用 [AI Studio Build](https://aistudio.google.com/apps?hl=zh-cn) 来编写代码应用，并添加 API 密钥以启用用户日志记录。
+- **使用 Gemini Batch API 重新运行日志**： 使用数据集进行响应抽样
+  和模型或应用逻辑评估，方法是通过
+  [Gemini Batch API](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb) 重新运行日志。
 
-## Khả năng tương thích
+## 兼容性
 
-Tính năng ghi nhật ký hiện không được hỗ trợ cho những trường hợp sau:
+目前不支持以下内容的日志记录：
 
-- Mô hình Imagen và Veo
-- Mô hình nhúng Gemini
-- Đầu vào chứa video, ảnh GIF hoặc tệp PDF
+- Imagen 和 Veo 模型
+- Gemini 嵌入模型
+- 包含视频、GIF 或 PDF 的输入
 
-Gửi ý kiến phản hồi
+发送反馈
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+最后更新时间 (UTC)：2026-04-29。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+需要向我们提供更多信息？
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]

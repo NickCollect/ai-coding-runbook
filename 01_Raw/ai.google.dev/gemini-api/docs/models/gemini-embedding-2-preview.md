@@ -1,45 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2-preview?hl=th
-fetched_at: 2026-05-05T20:07:45.425015+00:00
-title: "\u0e42\u0e21\u0e40\u0e14\u0e25 Gemini Embedding 2 (\u0e40\u0e27\u0e2d\u0e23\u0e4c\u0e0a\u0e31\u0e19\u0e15\u0e31\u0e27\u0e2d\u0e22\u0e48\u0e32\u0e07) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2-preview?hl=hi
+fetched_at: 2026-05-05T20:43:00.018869+00:00
+title: "Gemini Embedding 2 \u0915\u093e Preview \u092e\u0949\u0921\u0932 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
+[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
 
-ส่งความคิดเห็น
+सुझाव भेजें
 
-# โมเดล Gemini Embedding 2 (เวอร์ชันตัวอย่าง)
+# Gemini Embedding 2 का Preview मॉडल
 
-โมเดลการฝังแบบหลายรูปแบบตัวแรกของเรา ซึ่งให้การแมปตัวเลขที่มีประสิทธิภาพของ
-ข้อความ รูปภาพ วิดีโอ เสียง และ PDF ลงในพื้นที่การฝังแบบรวมเดียว โมเดล Gemini Embedding 2 เหมาะที่สุดสำหรับการค้นหาเชิงความหมายแบบข้ามโมดอล การดึงข้อมูลเอกสาร และระบบคำแนะนำที่ต้องมีการคำนวณความคล้ายคลึงที่รวดเร็วและปรับขนาดได้ในชุดข้อมูลมัลติโมดอลขนาดใหญ่
+यह हमारा पहला मल्टीमॉडल एम्बेडिंग मॉडल है. यह टेक्स्ट, इमेज, वीडियो, ऑडियो, और PDF को एक ही यूनिफ़ाइड एम्बेडिंग स्पेस में, संख्या के हिसाब से मैप करता है. Gemini Embedding 2 मॉडल, क्रॉस-मॉडल सिमैंटिक खोज, दस्तावेज़ वापस पाने, और सुझाव देने वाले सिस्टम के लिए सबसे सही है. इन सिस्टम को, बड़े मल्टीमॉडल डेटासेट में समानता की गणना तेज़ी से और बड़े पैमाने पर करनी होती है.
 
-## เอกสารประกอบ
+## दस्तावेज़
 
-ไปที่หน้า[การฝัง](https://ai.google.dev/gemini-api/docs/embeddings?hl=th)เพื่อดูฟีเจอร์และความสามารถทั้งหมด
+सुविधाओं और क्षमताओं के बारे में पूरी जानकारी पाने के लिए, [एम्बेडिंग](https://ai.google.dev/gemini-api/docs/embeddings?hl=hi) पेज पर जाएं.
 
 ## gemini-embedding-2-preview
 
-| พร็อพเพอร์ตี้ | คำอธิบาย |
+| प्रॉपर्टी | ब्यौरा |
 | --- | --- |
-| รหัสโมเดล id\_card | **Gemini API**  `gemini-embedding-2-preview` |
-| บันทึกประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ, รูปภาพ, วิดีโอ, เสียง, PDF  **เอาต์พุต**  การฝังข้อความ |
-| token\_autoขีดจำกัดของโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  8,192  **ขนาดมิติข้อมูลเอาต์พุต**  ยืดหยุ่น รองรับ: 128 - 3072, แนะนำ: 768, 1536, 3072 |
-| 123เวอร์ชัน | อ่านรายละเอียดเพิ่มเติมได้ใน[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)  - ตัวอย่าง: `gemini-embedding-2-preview` |
-| calendar\_monthการอัปเดตล่าสุด | มีนาคม 2026 |
+| id\_cardModel code | **Gemini API**  `gemini-embedding-2-preview` |
+| saveSupported data types | **इनपुट**  टेक्स्ट, इमेज, वीडियो, ऑडियो, PDF  **आउटपुट**  टेक्स्ट एम्बेडिंग |
+| token\_autoToken limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट टोकन की सीमा**  8,192  **आउटपुट डाइमेंशन का साइज़**  फ़्लेक्सिबल, इसके साथ काम करता है: 128 - 3072, सुझाया गया साइज़: 768, 1536, 3072 |
+| 123Versions | ज़्यादा जानकारी के लिए, [मॉडल के वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) पढ़ें.  - झलक देखें: `gemini-embedding-2-preview` |
+| calendar\_monthसबसे नया अपडेट | मार्च 2026 |
 
-ส่งความคิดเห็น
+सुझाव भेजें
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-อัปเดตล่าสุด 2026-04-29 UTC
+आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+क्या आपको हमें और कुछ बताना है?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-29 UTC"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया."],[],[]]

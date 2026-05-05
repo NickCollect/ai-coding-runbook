@@ -1,75 +1,75 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/temporal-example?hl=pl
-fetched_at: 2026-05-05T20:00:21.471158+00:00
-title: "Trwa\u0142y agent AI z\u00a0Gemini i\u00a0Temporal \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/temporal-example?hl=tr
+fetched_at: 2026-05-05T20:48:10.823752+00:00
+title: "Gemini ve Temporal ile dayan\u0131kl\u0131 yapay zeka temsilcisi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Prześlij opinię
+Geri bildirim gönderin
 
-# Trwały agent AI z Gemini i Temporal
+# Gemini ve Temporal ile dayanıklı yapay zeka temsilcisi
 
-Ten samouczek przeprowadzi Cię przez proces tworzenia pętli agentowej w [stylu ReAct](https://arxiv.org/abs/2210.03629), która do rozumowania używa interfejsu Gemini API, a do trwałości – [Temporal](https://temporal.io/).
-Pełny kod źródłowy tego samouczka jest dostępny na [GitHub](https://github.com/temporal-community/durable-react-agent-gemini).
+Bu eğitimde, akıl yürütme için Gemini API'yi ve dayanıklılık için [Temporal](https://temporal.io/)'ı kullanan bir [ReAct tarzı](https://arxiv.org/abs/2210.03629) agentic döngü oluşturma süreci adım adım açıklanmaktadır.
+Bu eğitimin tam kaynak kodunu [GitHub](https://github.com/temporal-community/durable-react-agent-gemini)'da bulabilirsiniz.
 
-Agent może wywoływać narzędzia, np. wyszukiwać alerty pogodowe lub lokalizować adres IP, i będzie to robić, dopóki nie uzyska wystarczającej ilości informacji, aby odpowiedzieć.
+Aracı, hava durumu uyarılarını arama veya IP adresinin coğrafi konumunu belirleme gibi araçları çağırabilir ve yanıt vermek için yeterli bilgiye sahip olana kadar döngüye girer.
 
-Od typowej wersji demonstracyjnej agenta różni się ona **trwałością**. Każde wywołanie LLM, każde wywołanie narzędzia i każdy krok pętli agenta jest utrwalany przez Temporal. Jeśli proces ulegnie awarii, sieć zostanie odłączona lub interfejs API przekroczy limit czasu, Temporal automatycznie ponowi próbę i wznowi działanie od ostatniego ukończonego kroku. Nie utracisz historii rozmów ani nie powtórzysz nieprawidłowo wywołań narzędzi.
+Bu demoyu tipik bir ajan demosundan farklı kılan özellik **dayanıklılıktır**. Her LLM çağrısı, her araç çağırma ve her aracı döngüsü adımı Temporal tarafından kalıcı hale getirilir. İşlem çökerse, ağ düşerse veya API zaman aşımına uğrarsa Temporal otomatik olarak yeniden dener ve son tamamlanan adımdan devam eder. Sohbet geçmişi kaybolmaz ve araç çağrıları yanlışlıkla tekrarlanmaz.
 
-## Architektura
+## Mimari
 
-Architektura składa się z 3 części:
+Mimari üç bölümden oluşur:
 
-- **Przepływ pracy:** pętla agenta, która zarządza logiką wykonywania.
-- **Aktywności:** poszczególne jednostki pracy (wywołania LLM, wywołania narzędzi), które Temporal sprawia, że są trwałe.
-- **Proces roboczy:** proces, który wykonuje przepływy pracy i działania.
+- **İş akışı:** Yürütme mantığını düzenleyen ajan tabanlı döngü.
+- **Etkinlikler:** Temporal'ın kalıcı hale getirdiği ayrı iş birimleri (LLM çağrıları, araç çağrıları).
+- **Çalışan:** İş akışlarını ve etkinlikleri yürüten süreç.
 
-W tym przykładzie umieścisz wszystkie 3 elementy w jednym pliku (`durable_agent_worker.py`). W rzeczywistym wdrożeniu rozdzielisz je, aby uzyskać różne korzyści związane z wdrażaniem i skalowalnością. Kod, który dostarcza prompta do agenta, umieścisz w drugim pliku (`start_workflow.py`).
+Bu örnekte, bu üç parçanın tamamını tek bir dosyaya (`durable_agent_worker.py`) yerleştirirsiniz. Gerçek dünyadaki bir uygulamada, çeşitli dağıtım ve ölçeklenebilirlik avantajlarından yararlanmak için bunları ayırırsınız. Aracıya istem sağlayan kodu ikinci bir dosyaya (`start_workflow.py`) yerleştirirsiniz.
 
-## Wymagania wstępne
+## Ön koşullar
 
-Aby skorzystać z tego przewodnika, potrzebujesz:
+Bu kılavuzu tamamlamak için ihtiyacınız olanlar:
 
-- Klucz interfejsu Gemini API. Możesz go utworzyć bezpłatnie w [Google AI Studio](https://aistudio.google.com/apikey?hl=pl).
-- [Python](https://www.python.org/downloads/) w wersji 3.10 lub nowszej.
-- [Temporal CLI](https://docs.temporal.io/cli) do uruchamiania lokalnego serwera programistycznego.
+- Gemini API anahtarı. [Google AI Studio](https://aistudio.google.com/apikey?hl=tr)'da ücretsiz olarak oluşturabilirsiniz.
+- [Python](https://www.python.org/downloads/) 3.10 veya sonraki sürümler.
+- Yerel geliştirme sunucusu çalıştırmak için [Temporal CLI](https://docs.temporal.io/cli).
 
-## Konfiguracja
+## Kurulum
 
-Zanim zaczniesz, upewnij się, że na Twoim komputerze działa [serwer programistyczny Temporal](https://docs.temporal.io/cli#start-dev-server):
+Başlamadan önce, yerel olarak çalışan bir [Temporal geliştirme sunucunuzun](https://docs.temporal.io/cli#start-dev-server) olduğundan emin olun:
 
 ```
 temporal server start-dev
 ```
 
-Następnie zainstaluj wymagane zależności:
+Ardından, gerekli bağımlılıkları yükleyin:
 
 ```
 pip install temporalio google-genai httpx pydantic python-dotenv
 ```
 
-Utwórz w katalogu projektu plik `.env` z kluczem interfejsu Gemini API. Klucz interfejsu API możesz uzyskać w [Google AI Studio](https://aistudio.google.com/apikey?hl=pl).
+Proje dizininizde Gemini API anahtarınızla bir `.env` dosyası oluşturun. [Google AI Studio](https://aistudio.google.com/apikey?hl=tr)'dan API anahtarı alabilirsiniz.
 
 ```
 echo "GOOGLE_API_KEY=your-api-key-here" > .env
 ```
 
-## Implementacja
+## Uygulama
 
-W dalszej części tego samouczka omówimy `durable_agent_worker.py` od góry do dołu, budując agenta krok po kroku. Utwórz plik i postępuj zgodnie z instrukcjami.
+Bu eğitimin geri kalanında, `durable_agent_worker.py` yukarıdan aşağıya doğru adım adım oluşturularak açıklanmaktadır. Dosyayı oluşturun ve adımları uygulayın.
 
-### Importowanie i konfigurowanie piaskownicy
+### İçe aktarma işlemleri ve korumalı alan kurulumu
 
-Zacznij od importów, które muszą być zdefiniowane z góry. Blok `workflow.unsafe.imports_passed_through()` informuje piaskownicę przepływu pracy Temporal, że niektóre moduły mogą przechodzić bez ograniczeń. Jest to konieczne, ponieważ kilka bibliotek (zwłaszcza `httpx`, która jest podklasą `urllib.request.Request`) używa wzorców, które w innych okolicznościach zostałyby zablokowane przez piaskownicę.
+Önceden tanımlanması gereken içe aktarma işlemleriyle başlayın. `workflow.unsafe.imports_passed_through()` bloğu, Temporal'ın iş akışı sanal alanına belirli modüllerin kısıtlama olmadan geçmesine izin vermesini söyler. Çeşitli kitaplıklar (özellikle `httpx`, `urllib.request.Request`'in alt sınıfıdır) korumalı alanın aksi takdirde engelleyeceği kalıplar kullandığından bu gereklidir.
 
 ```
 from temporalio import workflow
@@ -84,9 +84,9 @@ with workflow.unsafe.imports_passed_through():
     from google.genai import types
 ```
 
-### Instrukcje systemowe
+### Sistem talimatları
 
-Następnie zdefiniuj osobowość agenta. Instrukcje systemowe informują model, jak ma się zachowywać. Ten agent ma odpowiadać w formie haiku, gdy nie są potrzebne żadne narzędzia.
+Ardından, temsilcinin kişiliğini tanımlayın. Sistem talimatları, modele nasıl davranması gerektiğini söyler. Bu temsilci, araç gerekmediğinde haiku tarzında yanıt vermesi için talimatlandırıldı.
 
 ```
 SYSTEM_INSTRUCTIONS = """
@@ -97,9 +97,9 @@ If no tools are needed, respond in haikus.
 """
 ```
 
-### Definicje narzędzi
+### Araç tanımları
 
-Teraz zdefiniuj narzędzia, z których może korzystać agent. Każde narzędzie to funkcja asynchroniczna z opisowym ciągiem dokumentacyjnym. Narzędzia, które przyjmują parametry, używają modelu Pydantic jako pojedynczego argumentu. Jest to sprawdzona metoda Temporal, która zapewnia stabilność sygnatur aktywności w miarę dodawania pól opcjonalnych.
+Şimdi temsilcinin kullanabileceği araçları tanımlayın. Her araç, açıklayıcı bir doküman dizesi içeren bir eşzamansız işlevdir. Parametre alan araçlar, tek bağımsız değişken olarak Pydantic modeli kullanır. Bu, zaman içinde isteğe bağlı alanlar eklerken etkinlik imzalarını sabit tutan bir Temporal en iyi uygulamasıdır.
 
 ```
 import json
@@ -128,7 +128,7 @@ async def get_weather_alerts(request: GetWeatherAlertsRequest) -> str:
         return json.dumps(response.json())
 ```
 
-Następnie zdefiniuj narzędzia do geolokalizacji adresów IP:
+Ardından, IP adresi coğrafi konumu için araçları tanımlayın:
 
 ```
 class GetLocationRequest(BaseModel):
@@ -157,10 +157,9 @@ async def get_location_info(request: GetLocationRequest) -> str:
         return f"{result['city']}, {result['regionName']}, {result['country']}"
 ```
 
-### Rejestr narzędzi
+### Araç kayıt defteri
 
-Następnie utwórz rejestr, który mapuje nazwy narzędzi na funkcje obsługi. Funkcja
-`get_tools()` generuje obiekty `FunctionDeclaration` zgodne z Gemini z obiektów wywoływalnych za pomocą `FunctionDeclaration.from_callable_with_api_option()`.
+Ardından, araç adlarını işleyici işlevleriyle eşleyen bir kayıt oluşturun. `get_tools()` işlevi, `FunctionDeclaration.from_callable_with_api_option()` kullanarak çağrılabilir öğelerden Gemini ile uyumlu `FunctionDeclaration` nesneler oluşturur.
 
 ```
 from typing import Any, Awaitable, Callable
@@ -198,11 +197,11 @@ def get_tools() -> types.Tool:
     )
 ```
 
-### Aktywność LLM
+### LLM etkinliği
 
-Teraz zdefiniuj aktywność, która wywołuje interfejs Gemini API. `GeminiChatRequest` i `GeminiChatResponse` definiują umowę.
+Şimdi Gemini API'yi çağıran etkinliği tanımlayın. Sözleşme, `GeminiChatRequest` ve `GeminiChatResponse` veri sınıflarıyla tanımlanır.
 
-Wyłączysz automatyczne wywoływanie funkcji, aby wywołanie modelu LLM i wywołanie narzędzia były traktowane jako oddzielne zadania, co zwiększy trwałość agenta. Wyłączysz też wbudowane ponawianie prób w pakiecie SDK (`attempts=1`), ponieważ Temporal trwale obsługuje ponawianie prób.
+LLM çağırma ve araç çağırma işlemlerinin ayrı görevler olarak ele alınması için otomatik işlev çağırmayı devre dışı bırakarak aracınızın daha dayanıklı olmasını sağlayacaksınız. Ayrıca, Temporal, yeniden denemeleri kalıcı olarak işlediğinden SDK'nın yerleşik yeniden denemelerini de devre dışı bırakırsınız (`attempts=1`).
 
 ```
 import os
@@ -278,11 +277,11 @@ async def generate_content(request: GeminiChatRequest) -> GeminiChatResponse:
     )
 ```
 
-### Aktywność narzędzia dynamicznego
+### Dinamik araç etkinliği
 
-Następnie zdefiniuj aktywność, która wykonuje narzędzia. Korzysta z funkcji dynamicznej aktywności Temporal: moduł obsługi narzędzia (funkcja wywoływalna) jest pobierany z rejestru narzędzi za pomocą funkcji `get_handler`. Dzięki temu można definiować różne rodzaje agentów, podając po prostu inny zestaw narzędzi i instrukcji systemowych. W przypadku przepływu pracy implementującego pętlę agenta nie trzeba wprowadzać żadnych zmian.
+Ardından, araçları yürüten etkinliği tanımlayın. Bu işlemde Temporal'ın dinamik etkinlik özelliği kullanılır: Araç işleyici (çağrılabilir) `get_handler` işlevi aracılığıyla araç kayıt defterinden alınır. Bu sayede, farklı araçlar ve sistem talimatları sağlanarak farklı aracıların tanımlanması kolaylaşır. Aracı döngüsünü uygulayan iş akışında herhangi bir değişiklik yapılması gerekmez.
 
-Działanie sprawdza sygnaturę modułu obsługi, aby określić sposób przekazywania argumentów. Jeśli moduł obsługi oczekuje modelu Pydantic, obsługuje zagnieżdżony format danych wyjściowych generowany przez Gemini (np. `{"request": {"state": "CA"}}` zamiast płaskiego `{"state": "CA"}`).
+Etkinlik, bağımsız değişkenlerin nasıl iletileceğini belirlemek için işleyicinin imzasını inceler. İşleyici bir Pydantic modeli bekliyorsa Gemini'ın ürettiği iç içe yerleştirilmiş çıkış biçimini (örneğin, düz `{"state": "CA"}` yerine `{"request": {"state": "CA"}}`) işler.
 
 ```
 import inspect
@@ -322,12 +321,12 @@ async def dynamic_tool_activity(args: Sequence[RawValue]) -> dict:
     return result
 ```
 
-### Przepływ pracy w pętli agentowej
+### Temsilci döngüsü iş akışı
 
-Masz już wszystkie elementy potrzebne do ukończenia tworzenia agenta. Klasa `AgentWorkflow`
-implementuje przepływ pracy zawierający pętlę agenta. W tej pętli model LLM jest wywoływany za pomocą działania (co sprawia, że jest trwały), jego dane wyjściowe są sprawdzane, a jeśli model LLM wybrał narzędzie, jest ono wywoływane za pomocą funkcji `dynamic_tool_activity`.
+Artık aracıyı oluşturmayı tamamlamak için gereken tüm parçalara sahipsiniz. `AgentWorkflow`
+sınıfı, aracı döngüsünü içeren bir iş akışını uygular. Bu döngüde, LLM etkinlik aracılığıyla çağrılır (bu da onu dayanıklı hale getirir), çıkış incelenir ve LLM tarafından bir araç seçilmişse bu araç `dynamic_tool_activity` aracılığıyla çağrılır.
 
-W tym prostym agencie w stylu ReAct, gdy model LLM zdecyduje, że nie będzie używać narzędzia, pętla jest uznawana za zakończoną i zwracany jest ostateczny wynik modelu LLM.
+Bu basit ReAct tarzı aracıda, LLM bir aracı kullanmamayı seçtiğinde döngü tamamlanmış kabul edilir ve nihai LLM sonucu döndürülür.
 
 ```
 from datetime import timedelta
@@ -395,13 +394,13 @@ class AgentWorkflow:
         return result
 ```
 
-Pętla agenta jest w pełni trwała. Jeśli po kilku iteracjach pętli proces roboczy agenta ulegnie awarii, Temporal wznowi działanie dokładnie w miejscu, w którym zostało przerwane, bez konieczności ponownego wywoływania już wykonanych wywołań LLM ani wywołań narzędzi.
+The agentic loop is fully durable. Aracının çalışanı döngüde birkaç yinelemeden sonra kilitlenirse Temporal, yürütülen LLM çağrılarını veya araç çağrılarını yeniden çağırmaya gerek kalmadan tam olarak kaldığı yerden devam eder.
 
-### Uruchamianie instancji roboczej
+### Çalışan başlatma
 
-Na koniec połącz wszystko przewodami. Chociaż kod implementuje niezbędną logikę biznesową w sposób, który sprawia, że wydaje się on działać w ramach jednego procesu, użycie Temporal sprawia, że jest to system oparty na zdarzeniach (a konkretnie na źródłach zdarzeń), w którym komunikacja między przepływem pracy a aktywnościami odbywa się za pomocą wiadomości dostarczanych przez Temporal.
+Son olarak, her şeyi birbirine bağlayın. Kod, gerekli iş mantığını tek bir süreçte çalışıyormuş gibi görünecek şekilde uygularken Temporal'ın kullanılması, iş akışı ile etkinlikler arasındaki iletişimin Temporal tarafından sağlanan mesajlaşma yoluyla gerçekleştiği, olaya dayalı (özellikle de olay kaynaklı) bir sistem oluşturur.
 
-Instancja robocza Temporal łączy się z usługą Temporal i działa jako harmonogram zadań przepływu pracy i aktywności. Proces roboczy rejestruje przepływ pracy i oba działania, a następnie zaczyna nasłuchiwać zadań.
+Temporal Worker, Temporal hizmetine bağlanır ve iş akışı ile etkinlik görevleri için planlayıcı görevi görür. Çalışan, iş akışını ve her iki etkinliği de kaydeder, ardından görevleri dinlemeye başlar.
 
 ```
 import asyncio
@@ -440,9 +439,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## Skrypt klienta
+## İstemci komut dosyası
 
-Utwórz skrypt klienta (`start_workflow.py`). Wysyła on zapytanie i czeka na wynik. Zwróć uwagę, że łączy się on z tą samą kolejką zadań, do której odwołuje się skrypt `start_workflow` agenta. Skrypt wysyła do tej kolejki zadanie przepływu pracy z promptem użytkownika, co inicjuje wykonanie agenta.
+İstemci komut dosyasını (`start_workflow.py`) oluşturun. Bu komut dosyası bir sorgu gönderir ve sonucu bekler. Bu komutun, agent worker'da referans verilen görev sırasına bağlandığını unutmayın. `start_workflow` komut dosyası, kullanıcı istemiyle birlikte bir iş akışı görevini bu görev sırasına göndererek aracının yürütülmesini başlatır.
 
 ```
 import asyncio
@@ -472,29 +471,29 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## Uruchom agenta
+## Temsilciyi çalıştırma
 
-Jeśli jeszcze tego nie zrobisz, uruchom serwer programistyczny Temporal:
+Henüz yapmadıysanız Temporal geliştirme sunucusunu başlatın:
 
 ```
 temporal server start-dev
 ```
 
-W nowym oknie terminala uruchom proces roboczy agenta:
+Yeni bir terminal penceresinde aracı çalışanını başlatın:
 
 ```
 python -m durable_agent_worker
 ```
 
-W trzecim oknie terminala prześlij zapytanie do agenta:
+Üçüncü bir terminal penceresinde, aracınıza bir sorgu gönderin:
 
 ```
 python -m start_workflow "are there any weather alerts for where I am?"
 ```
 
-Zwróć uwagę na dane wyjściowe w terminalu `durable_agent_worker`, które pokazują działania wykonywane w każdej iteracji pętli agenta. LLM może spełnić prośbę użytkownika, wywołując serię dostępnych narzędzi. Wykonane kroki możesz zobaczyć w interfejsie Temporal pod adresem `http://localhost:8233/namespaces/default/workflows`.
+`durable_agent_worker` terminalindeki çıkışa dikkat edin. Bu çıkış, aracılı döngünün her yinelemesinde gerçekleşen işlemleri gösterir. LLM, elindeki bir dizi aracı kullanarak kullanıcı isteğini karşılayabilir. Temporal kullanıcı arayüzü üzerinden yürütülen adımları `http://localhost:8233/namespaces/default/workflows` adresinden görebilirsiniz.
 
-Wypróbuj kilka różnych promptów, aby zobaczyć uzasadnienie agenta i narzędzia do połączeń:
+Temsilci nedenini ve görüşme araçlarını görmek için birkaç farklı istem deneyin:
 
 ```
 python -m start_workflow "are there any weather alerts for New York?"
@@ -503,64 +502,64 @@ python -m start_workflow "what is my ip address?"
 python -m start_workflow "tell me a joke"
 ```
 
-Ostatni prompt nie wymaga żadnych narzędzi, więc agent odpowiada w formie haiku na podstawie `SYSTEM_INSTRUCTIONS`.
+Son istem için herhangi bir araç gerekmediğinden aracı, `SYSTEM_INSTRUCTIONS` temel alınarak haiku tarzında yanıt veriyor.
 
-## Testowanie trwałości (opcjonalnie)
+## Dayanıklılığı test etme (isteğe bağlı)
 
-Korzystanie z Temporal zapewnia płynne działanie agenta w przypadku awarii. Możesz to sprawdzić za pomocą 2 różnych eksperymentów.
+Temporal'ı temel almak, temsilcinizin hatalardan sorunsuz bir şekilde kurtulmasını sağlar. Bunu iki ayrı deneme kullanarak test edebilirsiniz.
 
-### Symulowanie awarii sieci
+### Ağ kesintisini simüle etme
 
-W tym teście tymczasowo wyłączysz połączenie komputera z internetem, prześlesz przepływ pracy, zobaczysz, jak Temporal automatycznie ponawia próbę, a następnie przywrócisz sieć, aby sprawdzić, czy wszystko wróci do normy.
+Bu testte, bilgisayarınızın internet bağlantısını geçici olarak devre dışı bırakacak, bir iş akışı gönderecek, Temporal'ın otomatik olarak yeniden denemesini izleyecek ve ardından ağın kurtarıldığını görmek için ağı geri yükleyeceksiniz.
 
-1. Odłącz urządzenie od internetu (np. wyłącz Wi-Fi).
-2. Prześlij przepływ pracy:
+1. Makinenizin internet bağlantısını kesin (örneğin, kablosuz ağınızı kapatın).
+2. İş akışı gönderme:
 
    ```
    python -m start_workflow "tell me a joke"
    ```
-3. Sprawdź interfejs Temporal (`http://localhost:8233`). Zobaczysz, że aktywność LLM się nie powiodła, a Temporal automatycznie zarządza ponownymi próbami w tle.
-4. Połącz się ponownie z internetem.
-5. Następna automatyczna próba ponowienia zakończy się powodzeniem i uzyska dostęp do interfejsu Gemini API, a terminal wyświetli ostateczny wynik.
+3. Temporal kullanıcı arayüzünü (`http://localhost:8233`) kontrol edin. LLM etkinliğinin başarısız olduğunu ve Temporal'ın yeniden denemeleri arka planda otomatik olarak yönettiğini görürsünüz.
+4. İnternete tekrar bağlanın.
+5. Bir sonraki otomatik yeniden deneme, Gemini API'ye başarıyla ulaşacak ve terminaliniz nihai sonucu yazdıracaktır.
 
-### Przetrwanie awarii instancji roboczej
+### Çalışan kilitlenmesinden kurtulma
 
-W tym teście zabijesz instancję roboczą w trakcie wykonywania i ponownie ją uruchomisz. Temporal odtwarza historię przepływu pracy (źródło zdarzeń) i wznawia działanie od ostatniej ukończonej aktywności – wywołania LLM i wywołania narzędzi, które zostały już wykonane, nie są powtarzane.
+Bu testte, çalışan yürütülürken sonlandırılır ve yeniden başlatılır. Temporal, iş akışı geçmişini (olay kaynağı) yeniden oynatır ve son tamamlanan etkinlikten devam eder. Önceden tamamlanmış LLM çağrıları ve araç çağrıları tekrarlanmaz.
 
-1. Aby dać sobie czas na zakończenie działania worker, otwórz `durable_agent_worker.py` i tymczasowo usuń komentarz z wiersza `await asyncio.sleep(10)` w pętli `AgentWorkflow`
-   `run`.
-2. Uruchom ponownie instancję roboczą:
+1. Çalışanı sonlandırmak için kendinize zaman tanımak istiyorsanız `durable_agent_worker.py` dosyasını açın ve `AgentWorkflow`
+   `run` döngüsünde `await asyncio.sleep(10)` yorumunu geçici olarak kaldırın.
+2. Çalışanı yeniden başlatın:
 
    ```
    python -m durable_agent_worker
    ```
-3. Prześlij zapytanie, które uruchamia kilka narzędzi:
+3. Birden fazla aracı tetikleyen bir sorgu gönderin:
 
    ```
    python -m start_workflow "are there any weather alerts where I am?"
    ```
-4. Zakończ proces roboczy w dowolnym momencie przed jego ukończeniem (`Ctrl-C` w terminalu roboczym lub za pomocą `kill %1`, jeśli proces jest uruchomiony w tle).
-5. Uruchom ponownie instancję roboczą:
+4. Çalışan işlemini tamamlanmadan önce istediğiniz zaman sonlandırın (çalışan terminalinde `Ctrl-C` veya arka planda çalışıyorsa `kill %1` kullanılarak).
+5. Çalışanı yeniden başlatın:
 
    ```
    python -m durable_agent_worker
    ```
 
-Temporal odtwarza historię przepływu pracy. Wywołania LLM i narzędzi, które zostały już ukończone, **nie** są wykonywane ponownie – ich wyniki są natychmiast odtwarzane z historii (dziennika zdarzeń). Przepływ pracy zostanie zakończony.
+Temporal, iş akışı geçmişini yeniden oynatır. Daha önce tamamlanmış olan LLM çağrıları ve araç çağırmaları **yeniden** yürütülmez. Sonuçları, geçmişten (olay günlüğü) anında yeniden oynatılır. İş akışı başarıyla tamamlanır.
 
-## Dodatkowe zasoby
+## Diğer kaynaklar
 
-- [Dokumentacja czasowa](https://docs.temporal.io/)
+- [Temporal dokümanları](https://docs.temporal.io/)
 - [Temporal Python SDK](https://docs.temporal.io/develop/python)
-- [Pakiet SDK Google GenAI](https://googleapis.github.io/python-genai/)
-- [Kod źródłowy tego samouczka](https://github.com/temporal-community/durable-react-agent-gemini)
+- [Google GenAI SDK'sı](https://googleapis.github.io/python-genai/)
+- [Bu eğitim için kaynak kodu](https://github.com/temporal-community/durable-react-agent-gemini)
 
-Prześlij opinię
+Geri bildirim gönderin
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Ostatnia aktualizacja: 2026-04-29 UTC.
+Son güncelleme tarihi: 2026-04-29 UTC.
 
-Chcesz przekazać coś jeszcze?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]

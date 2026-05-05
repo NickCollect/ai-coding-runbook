@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi
-fetched_at: 2026-05-05T20:08:16.699450+00:00
-title: "C\u0103n c\u1ee9 v\u00e0o Google Maps \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ko
+fetched_at: 2026-05-05T20:42:38.023151+00:00
+title: "Google \uc9c0\ub3c4\ub97c \uc0ac\uc6a9\ud55c \uadf8\ub77c\uc6b4\ub529 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Gửi ý kiến phản hồi
+의견 보내기
 
-# Căn cứ vào Google Maps
+# Google 지도를 사용한 그라운딩
 
-Tính năng Kết nối với Google Maps kết hợp các khả năng tạo nội dung của Gemini với dữ liệu phong phú, thực tế và mới nhất của Google Maps. Tính năng này giúp nhà phát triển dễ dàng kết hợp chức năng nhận biết vị trí vào ứng dụng của họ. Khi một truy vấn của người dùng có bối cảnh liên quan đến dữ liệu của Maps, mô hình Gemini sẽ tận dụng Google Maps để cung cấp câu trả lời mới và chính xác dựa trên thực tế, đồng thời phù hợp với vị trí cụ thể hoặc khu vực khái quát mà người dùng chỉ định.
+Google 지도 기반 그라운딩은 Gemini의 생성 기능을 Google 지도의 풍부하고 사실에 기반한 최신 데이터와 연결합니다. 이 기능을 사용하면 개발자가 위치 인식 기능을 애플리케이션에 쉽게 통합할 수 있습니다. 사용자 질문에 지도 데이터와 관련된 맥락이 있는 경우 Gemini 모델은 Google 지도를 활용하여 사용자가 지정한 위치 또는 대략적인 위치와 관련된 사실에 기반한 최신 답변을 제공합니다.
 
-- **Câu trả lời chính xác, nhận biết vị trí:** Tận dụng dữ liệu phong phú và mới nhất của Google Maps cho các truy vấn cụ thể về mặt địa lý.
-- **Cá nhân hoá nâng cao:** Điều chỉnh đề xuất và thông tin dựa trên vị trí do người dùng cung cấp.
-- **Thông tin và tiện ích theo bối cảnh:** Mã thông báo theo bối cảnh để kết xuất các tiện ích tương tác của Google Maps cùng với nội dung được tạo.
+- **정확한 위치 인식 응답:** 지리적으로 구체적인 질문에 Google 지도의 광범위하고 최신 데이터를 활용합니다.
+- **개인화 개선:** 사용자 제공 위치를 기반으로 추천 및 정보를 맞춤설정합니다.
+- **컨텍스트 정보 및 위젯:** 생성된 콘텐츠와 함께 대화형 Google 지도 위젯을 렌더링하는 컨텍스트 토큰
 
-## Bắt đầu
+## 시작하기
 
-Ví dụ này minh hoạ cách tích hợp tính năng Kết nối với Google Maps vào ứng dụng của bạn để cung cấp câu trả lời chính xác, nhận biết vị trí cho các truy vấn của người dùng. Lời nhắc yêu cầu các đề xuất tại địa phương kèm theo vị trí không bắt buộc của người dùng, cho phép mô hình Gemini sử dụng dữ liệu của Google Maps.
+이 예시에서는 Google 지도 기반 그라운딩을 애플리케이션에 통합하여 사용자 질문에 정확한 위치 인식 응답을 제공하는 방법을 보여줍니다. 프롬프트는 선택적 사용자 위치와 함께 현지 추천을 요청하여 Gemini 모델이 Google 지도 데이터를 사용할 수 있도록 합니다.
 
 ### Python
 
@@ -62,7 +62,7 @@ if grounding := response.candidates[0].grounding_metadata:
       print(f'- [{chunk.maps.title}]({chunk.maps.uri})')
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -128,37 +128,34 @@ curl -X POST 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-f
 }'
 ```
 
-## Cách hoạt động của tính năng Kết nối với Google Maps
+## Google 지도 기반 그라운딩 작동 방식
 
-Tính năng Kết nối với Google Maps tích hợp Gemini API với hệ sinh thái Google Geo bằng cách sử dụng API Maps làm nguồn liên kết thực tế. Khi truy vấn của người dùng chứa bối cảnh địa lý, mô hình Gemini có thể gọi công cụ Kết nối với Google Maps. Sau đó, mô hình này có thể tạo câu trả lời dựa trên dữ liệu của Google Maps liên quan đến vị trí được cung cấp.
+Google 지도 기반 그라운딩은 Maps API를 그라운딩 소스로 사용하여 Gemini API를 Google 지리 생태계와 통합합니다. 사용자의 질문에 지리적 맥락이 포함된 경우 Gemini 모델은 Google 지도 기반 그라운딩 도구를 호출할 수 있습니다. 그러면 모델이 제공된 위치와 관련된 Google 지도 데이터를 기반으로 그라운딩된 대답을 생성할 수 있습니다.
 
-Quá trình này thường bao gồm:
+이 프로세스에는 일반적으로 다음이 포함됩니다.
 
-1. **Truy vấn của người dùng:** Người dùng gửi một truy vấn đến ứng dụng của bạn, có thể bao gồm bối cảnh địa lý (ví dụ: "quán cà phê gần tôi", "bảo tàng ở San Francisco").
-2. **Gọi công cụ:** Mô hình Gemini, nhận ra ý định địa lý, sẽ gọi công cụ Kết nối với Google Maps. Bạn có thể tuỳ ý cung cấp `latitude` và `longitude` của người dùng cho công cụ này. Công cụ này là một công cụ tìm kiếm bằng văn bản và hoạt động tương tự như tìm kiếm trên Maps, trong đó các truy vấn tại địa phương ("gần tôi") sẽ sử dụng toạ độ, còn các truy vấn cụ thể hoặc không phải tại địa phương sẽ không bị ảnh hưởng bởi vị trí rõ ràng.
-3. **Truy xuất dữ liệu:** Dịch vụ Kết nối với Google Maps truy vấn Google Maps để tìm thông tin có liên quan (ví dụ: địa điểm, bài đánh giá, ảnh, địa chỉ, giờ mở cửa).
-4. **Tạo nội dung dựa trên dữ liệu thực tế:** Dữ liệu của Maps được truy xuất sẽ được dùng để cung cấp thông tin cho câu trả lời của mô hình Gemini, đảm bảo tính chính xác và mức độ phù hợp.
-5. **Mã thông báo câu trả lời và tiện ích:** Mô hình này trả về một câu trả lời bằng văn bản, bao gồm cả trích dẫn các nguồn trên Google Maps. Bạn cũng có thể tuỳ ý để phản hồi API chứa `google_maps_widget_context_token`, cho phép nhà phát triển kết xuất một tiện ích Địa điểm theo bối cảnh trong ứng dụng của họ để tương tác bằng hình ảnh.
+1. **사용자 쿼리:** 사용자가 애플리케이션에 쿼리를 제출합니다. 여기에는 지리적 컨텍스트 (예: '내 주변 카페', '샌프란시스코 박물관')가 포함될 수 있습니다.
+2. **도구 호출:** 지리적 의도를 인식한 Gemini 모델이 Google 지도 기반 그라운딩 도구를 호출합니다. 이 도구에는 선택적으로 사용자의 `latitude` 및 `longitude`이 제공될 수 있습니다. 이 도구는 텍스트 검색 도구이며, 로컬 쿼리 ('내 주변')는 좌표를 사용하는 반면 구체적이거나 비로컬 쿼리는 명시적 위치의 영향을 받지 않을 가능성이 높다는 점에서 지도에서 검색하는 것과 유사하게 작동합니다.
+3. **데이터 검색:** Google 지도 기반 그라운딩 서비스는 Google 지도에 관련 정보 (예: 장소, 리뷰, 사진, 주소, 영업시간)를 쿼리합니다.
+4. **그라운딩된 생성:** 검색된 지도 데이터는 Gemini 모델의 대답에 정보를 제공하여 사실적 정확성과 관련성을 보장합니다.
+5. **대답 및 위젯 토큰:** 모델이 Google 지도 소스에 대한 인용이 포함된 텍스트 대답을 반환합니다. 선택적으로 API 응답에는 `google_maps_widget_context_token`도 포함될 수 있으므로 개발자가 시각적 상호작용을 위해 애플리케이션에서 컨텍스트 Google 지도 위젯을 렌더링할 수 있습니다.
 
-## Lý do và thời điểm nên sử dụng tính năng Kết nối với Google Maps
+## Google 지도 기반 그라운딩을 사용해야 하는 이유 및 조건
 
-Tính năng Kết nối với Google Maps là lựa chọn lý tưởng cho những ứng dụng yêu cầu thông tin chính xác, mới nhất và dành riêng cho vị trí. Tính năng này giúp nâng cao trải nghiệm người dùng bằng cách cung cấp nội dung phù hợp và được cá nhân hoá dựa trên cơ sở dữ liệu phong phú của Google Maps về hơn 250 triệu địa điểm trên toàn thế giới.
+Google 지도 기반 그라운딩은 정확하고 최신이며 위치별 정보가 필요한 애플리케이션에 적합합니다. 전 세계 2억 5천만 개 이상의 장소로 구성된 Google 지도의 광범위한 데이터베이스를 기반으로 관련성 높은 맞춤 콘텐츠를 제공하여 사용자 환경을 개선합니다.
 
-Bạn nên sử dụng tính năng Kết nối với Google Maps khi ứng dụng của bạn cần:
+애플리케이션에서 다음 작업을 수행해야 하는 경우 Google 지도 기반 그라운딩을 사용해야 합니다.
 
-- Cung cấp câu trả lời đầy đủ và chính xác cho các câu hỏi cụ thể về địa lý.
-- Xây dựng trình lập kế hoạch chuyến đi và hướng dẫn viên địa phương theo hình thức trò chuyện.
-- Đề xuất các địa điểm yêu thích dựa trên vị trí và lựa chọn ưu tiên của người dùng, chẳng hạn như nhà hàng hoặc cửa hàng.
-- Tạo trải nghiệm nhận biết vị trí cho các dịch vụ xã hội, bán lẻ hoặc giao đồ ăn.
+- 지역별 질문에 대해 완전하고 정확한 대답을 제공합니다.
+- 대화형 여행 계획 도구와 현지 가이드를 빌드하세요.
+- 위치 및 음식점이나 상점과 같은 사용자 환경설정을 기반으로 관심 장소를 추천합니다.
+- 소셜, 소매 또는 음식 배달 서비스를 위한 위치 인식 환경을 만드세요.
 
-Tính năng Kết nối với Google Maps vượt trội trong các trường hợp sử dụng mà khoảng cách và dữ liệu thực tế hiện tại là rất quan trọng, chẳng hạn như tìm "quán cà phê ngon nhất gần tôi" hoặc tìm đường đi.
+Google 지도 기반 그라운딩은 '가장 가까운 커피숍'을 찾거나 길을 안내받는 등 근접성과 현재 사실 데이터가 중요한 사용 사례에서 뛰어납니다.
 
-## Phương thức và tham số API
+## API 메서드 및 매개변수
 
-Tính năng Kết nối với Google Maps được cung cấp thông qua Gemini API dưới dạng một công cụ trong
-phương thức [`generateContent`](https://ai.google.dev/api/generate-content?hl=vi). Bạn có thể bật và định cấu hình
-tính năng Kết nối với Google Maps bằng cách thêm đối tượng
-[`googleMaps`](https://ai.google.dev/api/caching?hl=vi#GoogleMaps) vào tham số `tools` trong yêu cầu của mình.
+Google 지도 기반 그라운딩은 Gemini API를 통해 [`generateContent`](https://ai.google.dev/api/generate-content?hl=ko) 메서드 내의 도구로 노출됩니다. 요청의 `tools` 매개변수에 [`googleMaps`](https://ai.google.dev/api/caching?hl=ko#GoogleMaps) 객체를 포함하여 Google 지도 기반 그라운딩을 사용 설정하고 구성합니다.
 
 ### JSON
 
@@ -173,11 +170,7 @@ tính năng Kết nối với Google Maps bằng cách thêm đối tượng
 }
 ```
 
-Công cụ [`googleMaps`](https://ai.google.dev/api/caching?hl=vi#GoogleMaps) cũng có thể chấp nhận tham số
-boolean `enableWidget`. Tham số này được dùng để kiểm soát việc trường
-[`googleMapsWidgetContextToken`](https://ai.google.dev/api/generate-content?hl=vi#GroundingMetadata)
-có được trả về trong phản hồi hay không. Bạn có thể dùng tham số này để hiển thị một
-[tiện ích Địa điểm theo bối cảnh](https://developers.google.com/maps/documentation/javascript/reference/places-widget?hl=vi).
+[`googleMaps`](https://ai.google.dev/api/caching?hl=ko#GoogleMaps) 도구는 불리언 `enableWidget` 파라미터를 추가로 허용할 수 있으며, 이는 [`googleMapsWidgetContextToken`](https://ai.google.dev/api/generate-content?hl=ko#GroundingMetadata) 필드가 대답에 반환되는지 여부를 제어하는 데 사용됩니다. 이를 사용하여 [컨텍스트 Places 위젯](https://developers.google.com/maps/documentation/javascript/reference/places-widget?hl=ko)을 표시할 수 있습니다.
 
 ### JSON
 
@@ -192,7 +185,7 @@ có được trả về trong phản hồi hay không. Bạn có thể dùng tha
 }
 ```
 
-Ngoài ra, công cụ này còn hỗ trợ việc truyền vị trí theo bối cảnh dưới dạng `toolConfig`.
+또한 이 도구는 컨텍스트 위치를 `toolConfig`로 전달하는 것을 지원합니다.
 
 ### JSON
 
@@ -215,11 +208,10 @@ Ngoài ra, công cụ này còn hỗ trợ việc truyền vị trí theo bối 
 }
 ```
 
-### Tìm hiểu về phản hồi kết nối
+### 그라운딩 응답 이해하기
 
-Khi một phản hồi được kết nối thành công với dữ liệu của Google Maps, phản hồi đó
-sẽ bao gồm trường [`groundingMetadata`](https://ai.google.dev/api/generate-content?hl=vi#GroundingMetadata).
-Dữ liệu có cấu trúc này là cần thiết để xác minh các tuyên bố và xây dựng trải nghiệm trích dẫn phong phú trong ứng dụng của bạn, cũng như đáp ứng các yêu cầu về việc sử dụng dịch vụ.
+Google 지도 데이터로 대답이 성공적으로 그라운딩되면 대답에 [`groundingMetadata`](https://ai.google.dev/api/generate-content?hl=ko#GroundingMetadata) 필드가 포함됩니다.
+이 구조화된 데이터는 서비스 사용 요구사항을 충족할 뿐만 아니라 애플리케이션에서 주장을 확인하고 풍부한 인용 환경을 구축하는 데 필수적입니다.
 
 ### JSON
 
@@ -267,31 +259,25 @@ Dữ liệu có cấu trúc này là cần thiết để xác minh các tuyên b
 }
 ```
 
-Gemini API trả về thông tin sau đây cùng với the
-[`groundingMetadata`](https://ai.google.dev/api/generate-content?hl=vi#GroundingMetadata):
+Gemini API는 [`groundingMetadata`](https://ai.google.dev/api/generate-content?hl=ko#GroundingMetadata)와 함께 다음 정보를 반환합니다.
 
-- `groundingChunks`: Mảng các đối tượng chứa nguồn `maps` (`uri`, `placeId` và `title`).
-- `groundingSupports`: Mảng các đoạn để kết nối văn bản phản hồi của mô hình với các nguồn trong `groundingChunks`. Mỗi đoạn liên kết một khoảng văn bản (được xác định bởi `startIndex` và `endIndex`) với một hoặc nhiều `groundingChunkIndices`. Đây là chìa khoá để xây dựng trích dẫn nội tuyến.
-- `googleMapsWidgetContextToken`: Mã thông báo văn bản có thể dùng để hiển thị một
-  [tiện ích Địa điểm theo bối cảnh](https://developers.google.com/maps/documentation/javascript/reference/places-widget?hl=vi).
+- `groundingChunks`: `maps` 소스 (`uri`, `placeId`, `title`)가 포함된 객체의 배열입니다.
+- `groundingSupports`: 모델 응답 텍스트를 `groundingChunks`의 소스에 연결하는 청크 배열입니다. 각 청크는 텍스트 범위 (`startIndex` 및 `endIndex`로 정의됨)를 하나 이상의 `groundingChunkIndices`에 연결합니다. 인라인 인용을 만드는 데 필요한 키입니다.
+- `googleMapsWidgetContextToken`: [맥락에 맞는 장소 위젯](https://developers.google.com/maps/documentation/javascript/reference/places-widget?hl=ko)을 렌더링하는 데 사용할 수 있는 텍스트 토큰입니다.
 
-Để xem đoạn mã cho biết cách hiển thị trích dẫn nội tuyến trong văn bản, hãy xem [ví
-dụ](https://ai.google.dev/gemini-api/docs/google-search?hl=vi#attributing_sources_with_inline_citations)
-trong tài liệu Dựa trên kết quả của Google Tìm kiếm.
+텍스트에 인라인 인용을 렌더링하는 방법을 보여주는 코드 스니펫은 Google 검색을 사용한 그라운딩 문서의 [예시](https://ai.google.dev/gemini-api/docs/google-search?hl=ko#attributing_sources_with_inline_citations)를 참고하세요.
 
-### Hiển thị tiện ích theo bối cảnh của Google Maps
+### Google 지도 컨텍스트 위젯 표시
 
-Để sử dụng `googleMapsWidgetContextToken` được trả về, bạn cần [tải
-Google Maps JavaScript
-API](https://developers.google.com/maps/documentation/javascript/load-maps-js-api?hl=vi).
+반환된 `googleMapsWidgetContextToken`를 사용하려면 [Google Maps JavaScript API를 로드](https://developers.google.com/maps/documentation/javascript/load-maps-js-api?hl=ko)해야 합니다.
 
-## Trường hợp sử dụng
+## 사용 사례
 
-Tính năng Kết nối với Google Maps hỗ trợ nhiều trường hợp sử dụng nhận biết vị trí. Các ví dụ sau đây minh hoạ cách các lời nhắc và tham số khác nhau có thể tận dụng tính năng Kết nối với Google Maps. Thông tin trong Kết quả dựa trên dữ liệu của Google Maps có thể khác với tình hình thực tế.
+Google 지도 기반 그라운딩은 다양한 위치 인식 사용 사례를 지원합니다. 다음 예에서는 다양한 프롬프트와 파라미터가 Google 지도 기반 그라운딩을 활용하는 방법을 보여줍니다. Google 지도 그라운딩 결과의 정보는 실제 상황과 다를 수 있습니다.
 
-### Xử lý các câu hỏi cụ thể về địa điểm
+### 장소 관련 질문 처리
 
-Đặt câu hỏi chi tiết về một địa điểm cụ thể để nhận câu trả lời dựa trên bài đánh giá của người dùng Google và các dữ liệu khác của Maps.
+특정 장소에 관해 자세한 질문을 하면 Google 사용자 리뷰 및 기타 지도 데이터를 기반으로 답변을 받을 수 있습니다.
 
 ### Python
 
@@ -329,7 +315,7 @@ if grounding := response.candidates[0].grounding_metadata:
   ```
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -397,9 +383,9 @@ curl -X POST 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-f
 }'
 ```
 
-### Cung cấp tính năng cá nhân hoá dựa trên vị trí
+### 위치 기반 맞춤설정 제공
 
-Nhận các đề xuất phù hợp với lựa chọn ưu tiên của người dùng và một khu vực địa lý cụ thể.
+사용자의 선호도와 특정 지역에 맞게 맞춤 추천을 받습니다.
 
 ### Python
 
@@ -434,7 +420,7 @@ if grounding := response.candidates[0].grounding_metadata:
       print(f'- [{chunk.maps.title}]({chunk.maps.uri})')
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -501,14 +487,11 @@ curl -X POST 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-f
 }'
 ```
 
-### Hỗ trợ lập kế hoạch hành trình
+### 여행 일정 계획 지원
 
-Tạo kế hoạch nhiều ngày kèm theo chỉ đường và thông tin về nhiều địa điểm, phù hợp với các ứng dụng du lịch.
+여행 애플리케이션에 적합한 다양한 위치에 관한 정보와 경로가 포함된 여러 날짜의 계획을 생성합니다.
 
-Trong ví dụ này, `googleMapsWidgetContextToken` đã được yêu cầu bằng cách bật tiện ích trong công cụ Google Maps. Khi được bật, mã thông báo được trả về
-có thể dùng để kết xuất một tiện ích Địa điểm theo bối cảnh bằng cách sử dụng
-`<gmp-places-contextual> component`
-từ Google Maps JavaScript API.
+이 예에서는 Google 지도 도구에서 위젯을 사용 설정하여 `googleMapsWidgetContextToken`가 요청되었습니다. 사용 설정하면 반환된 토큰을 사용하여 Google Maps JavaScript API의 `<gmp-places-contextual> component`를 사용하여 컨텍스트 장소 위젯을 렌더링할 수 있습니다.
 
 ### Python
 
@@ -547,7 +530,7 @@ if grounding := response.candidates[0].grounding_metadata:
     print(f'<gmp-place-contextual context-token="{widget_token}"></gmp-place-contextual>')
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -621,76 +604,74 @@ curl -X POST 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-f
 }'
 ```
 
-Khi được kết xuất, tiện ích này sẽ trông giống như sau:
+위젯이 렌더링되면 다음과 같이 표시됩니다.
 
-![Ví dụ về một tiện ích bản đồ khi được hiển thị](https://ai.google.dev/static/gemini-api/docs/images/maps/maps-widget.png?hl=vi)
+![렌더링된 지도 위젯의 예](https://ai.google.dev/static/gemini-api/docs/images/maps/maps-widget.png?hl=ko)
 
-## Yêu cầu về việc sử dụng dịch vụ
+## 서비스 사용 요구사항
 
-Phần này mô tả các yêu cầu về việc sử dụng dịch vụ đối với tính năng Kết nối với Google Maps.
+이 섹션에서는 Google 지도 그라운딩에 대한 서비스 사용 요구사항을 설명합니다.
 
-### Thông báo cho người dùng về việc sử dụng các nguồn trên Google Maps
+### 사용자에게 Google 지도 소스 사용 알림
 
-Với mỗi kết quả dựa trên dữ liệu của Google Maps, bạn sẽ nhận được các nguồn trong `groundingChunks` hỗ trợ từng câu trả lời. Siêu dữ liệu sau đây cũng được trả về:
+각 Google 지도 그라운딩 결과와 함께 각 응답을 지원하는 `groundingChunks`의 소스가 수신됩니다. 다음 메타데이터도 반환됩니다.
 
-- URI nguồn
-- Tiêu đề
+- 소스 URI
+- 제목
 - ID
 
-Khi trình bày kết quả từ tính năng Kết nối với Google Maps, bạn phải chỉ định các nguồn liên kết trên Google Maps và thông báo cho người dùng của mình về những điều sau:
+Google 지도 기반 그라운딩 결과를 표시할 때는 연결된 Google 지도 소스를 명시하고 사용자에게 다음 사항을 알려야 합니다.
 
-- Các nguồn trên Google Maps phải xuất hiện ngay sau nội dung được tạo mà các nguồn đó hỗ trợ. Nội dung được tạo này còn được gọi là Kết quả dựa trên dữ liệu của Google Maps.
-- Người dùng phải xem được các nguồn trên Google Maps trong một lượt tương tác của người dùng.
+- Google 지도 소스는 해당 소스를 뒷받침하는 생성된 콘텐츠 직후에 따라와야 합니다. 이렇게 생성된 콘텐츠를 Google 지도 그라운딩 결과라고도 합니다.
+- Google 지도 소스는 단일 사용자 상호작용 내에서 확인 가능해야 합니다.
 
-### Hiển thị các nguồn trên Google Maps kèm theo đường liên kết đến Google Maps
+### Google 지도 소스를 Google 지도 링크와 함께 표시
 
-Đối với mỗi nguồn trong `groundingChunks` và trong `grounding_chunks.maps.placeAnswerSources.reviewSnippets`, bạn phải tạo bản xem trước đường liên kết theo các yêu cầu sau:
+`groundingChunks`와 `grounding_chunks.maps.placeAnswerSources.reviewSnippets` 내의 각 소스에 대해 다음 요구사항에 따라 링크 미리보기를 생성해야 합니다.
 
-- Ghi công từng nguồn cho Google Maps theo nguyên tắc ghi công văn bản của Google Maps
-  .
-- Hiển thị tiêu đề nguồn được cung cấp trong phản hồi.
-- Liên kết đến nguồn bằng cách sử dụng `uri` hoặc `googleMapsUri` từ phản hồi.
+- 각 소스는 Google 지도에서 제공한 것임을 명시하고 Google 지도의 텍스트 [저작자 표시 지침](#maps-attribution-guidelines)을 따라야 합니다.
+- 응답에 포함된 소스 제목을 표시해야 합니다.
+- 응답에 제공된 `uri` 또는 `googleMapsUri`를 사용하여 소스에 연결해야 합니다.
 
-Những hình ảnh này cho thấy các yêu cầu tối thiểu để hiển thị các nguồn và đường liên kết đến Google Maps.
+아래 이미지는 소스와 Google 지도 링크를 표시하기 위한 최소 요구사항을 보여줍니다.
 
-![Câu lệnh có câu trả lời cho thấy nguồn](https://ai.google.dev/static/gemini-api/docs/images/maps/sources-expanded.jpg?hl=vi)
+![소스가 표시된 응답 포함 프롬프트](https://ai.google.dev/static/gemini-api/docs/images/maps/sources-expanded.jpg?hl=ko)
 
-Bạn có thể thu gọn chế độ xem các nguồn.
+또한 소스 보기 영역은 접을 수 있습니다.
 
-![Câu lệnh có phản hồi và nguồn được thu gọn](https://ai.google.dev/static/gemini-api/docs/images/maps/sources-collapsed.jpg?hl=vi)
+![응답과 소스가 접힌 프롬프트](https://ai.google.dev/static/gemini-api/docs/images/maps/sources-collapsed.jpg?hl=ko)
 
-Không bắt buộc: Nâng cao bản xem trước đường liên kết bằng nội dung bổ sung, chẳng hạn như:
+선택사항: 링크 미리보기를 다음과 같은 추가 콘텐츠로 보강할 수 있습니다.
 
-- Biểu tượng trang web của [Google Maps](https://www.google.com/images/branding/product/ico/web_maps_icon_32dp.ico?hl=vi) được chèn trước phần ghi công văn bản của Google Maps.
-- Một bức ảnh từ URL nguồn (`og:image`).
+- Google 지도 텍스트 저작자 표시 앞에 [Google 지도 파비콘](https://www.google.com/images/branding/product/ico/web_maps_icon_32dp.ico?hl=ko)을 삽입합니다.
+- 소스 URL에서 제공되는 사진(예: `og:image`)을 표시합니다.
 
-Để biết thêm thông tin về một số nhà cung cấp dữ liệu của Google Maps và các
-điều khoản cấp phép của họ, hãy xem [thông báo pháp lý của Google Maps và Google Earth](https://www.google.com/help/legalnotices_maps/?hl=vi).
+일부 Google 지도 데이터 제공업체 및 해당 라이선스 조건에 대한 자세한 내용은 [Google 지도 및 Google 어스 법적 고지](https://www.google.com/help/legalnotices_maps/?hl=ko)를 참고하세요.
 
-### Nguyên tắc ghi công văn bản của Google Maps
+### Google 지도 텍스트 저작자 표시 가이드라인
 
-Khi bạn ghi công các nguồn cho Google Maps trong văn bản, hãy tuân theo các nguyên tắc sau:
+Google 지도의 텍스트 저작자 소스를 표시할 때는 다음 가이드라인을 따라야 합니다.
 
-- Không sửa đổi văn bản Google Maps theo bất kỳ cách nào:
-  - Không thay đổi cách viết hoa của Google Maps.
-  - Không xuống dòng cho Google Maps.
-  - Không bản địa hoá Google Maps sang ngôn ngữ khác.
-  - Ngăn trình duyệt dịch Google Maps bằng cách sử dụng thuộc tính HTML translate="no".
-- Tạo kiểu cho văn bản Google Maps như mô tả trong bảng sau:
+- Google 지도 텍스트를 어떤 방식으로도 수정하지 마세요.
+  - Google 지도의 대소문자를 변경하지 마세요.
+  - Google 지도를 여러 줄로 나누어 표시하지 마세요.
+  - Google 지도를 다른 언어로 현지화하지 마세요.
+  - 브라우저가 Google 지도를 번역하지 못하도록 HTML 속성 translate="no"를 사용해야 합니다.
+- 다음 표에 설명된 대로 Google 지도 텍스트 스타일을 지정해야 합니다.
 
-| Thuộc tính | Kiểu |
+| 속성 | 스타일 |
 | --- | --- |
-| `Font family` | Roboto. Bạn không bắt buộc phải tải phông chữ. |
-| `Fallback font family` | Bất kỳ phông chữ không chân nào đã được dùng trong sản phẩm của bạn hoặc "Sans-Serif" để gọi phông chữ mặc định của hệ thống |
-| `Font style` | Bình thường |
+| `Font family` | Roboto. 글꼴 로드는 선택사항입니다. |
+| `Fallback font family` | 제품에서 이미 사용 중인 sans serif 본문 글꼴 또는 'Sans-Serif'를 지정해 기본 시스템 글꼴을 호출합니다. |
+| `Font style` | 보통 |
 | `Font weight` | 400 |
-| `Font color` | Trắng, đen (#1F1F1F) hoặc xám (#5E5E5E). Duy trì độ tương phản dễ tiếp cận (4,5:1) so với nền. |
-| `Font size` | - Cỡ chữ tối thiểu: 12sp - Cỡ chữ tối đa: 16sp - Để tìm hiểu về sp, hãy xem bài viết Đơn vị cỡ chữ trên trang web [Material Design](https://m3.material.io/styles/typography/type-scale-tokens#3f4488e7-3b74-45b0-a143-9d6afa4d62dc). |
-| `Spacing` | Bình thường |
+| `Font color` | 흰색, 검정(#1F1F1F) 또는 회색(#5E5E5E). 배경 대비를 고려해 접근성 비율(4.5:1)을 유지해야 합니다. |
+| `Font size` | - 최소 글꼴 크기: 12sp - 최대 글꼴 크기: 16sp - sp에 대해 자세히 알아보려면 [Material Design 웹사이트](https://m3.material.io/styles/typography/type-scale-tokens#3f4488e7-3b74-45b0-a143-9d6afa4d62dc)의 글꼴 크기 단위를 참고하세요. |
+| `Spacing` | 보통 |
 
-#### Ví dụ về CSS
+#### 예시 CSS
 
-CSS sau đây kết xuất Google Maps với kiểu chữ và màu sắc phù hợp trên nền trắng hoặc nền sáng.
+다음 CSS는 흰색 또는 밝은 배경에서 Google 지도를 적절한 타이포그래픽 스타일과 색상으로 렌더링합니다.
 
 ### CSS
 
@@ -709,91 +690,87 @@ color: #5e5e5e;
 }
 ```
 
-### Mã thông báo theo bối cảnh, mã địa điểm và mã bài đánh giá
+### 컨텍스트 토큰, 장소 ID, 리뷰 ID
 
-Dữ liệu của Google Maps bao gồm mã thông báo theo bối cảnh, mã địa điểm và mã bài đánh giá. Bạn có thể lưu vào bộ nhớ đệm, lưu trữ và xuất dữ liệu phản hồi sau đây:
+Google 지도 데이터에는 컨텍스트 토큰, 장소 ID, 리뷰 ID가 포함됩니다. 다음 응답 데이터를 캐시, 저장, 내보내기할 수 있습니다.
 
 - `googleMapsWidgetContextToken`
 - `placeId`
 - `reviewId`
 
-Các hạn chế đối với việc lưu vào bộ nhớ đệm trong Điều khoản về tính năng Kết nối với Google Maps không áp dụng.
+Google 지도 기반 그라운딩 약관에 명시된 캐싱 제한사항은 적용되지 않습니다.
 
-### Hoạt động và lãnh thổ bị cấm
+### 금지된 활동 및 지역
 
-Tính năng Kết nối với Google Maps có thêm các hạn chế đối với một số nội dung và hoạt động để duy trì một nền tảng an toàn và đáng tin cậy. Ngoài các hạn chế về việc sử dụng
-trong [Điều khoản](https://ai.google.dev/gemini-api/terms?hl=vi#grounding-with-google-maps):
+Google 지도 기반 그라운딩은 안전하고 신뢰할 수 있는 플랫폼을 유지하기 위해 특정 콘텐츠 및 활동에 추가 제한을 둡니다. [약관](https://ai.google.dev/gemini-api/terms?hl=ko#grounding-with-google-maps)의 사용 제한 외에도 다음 사항에 동의합니다.
 
-- Bạn sẽ không sử dụng tính năng Kết nối với Google Maps cho các hoạt động có rủi ro cao, bao gồm cả dịch vụ ứng phó khẩn cấp.
-- Bạn sẽ không phân phối hoặc tiếp thị ứng dụng của mình cung cấp tính năng Kết nối với Google Maps ở Lãnh thổ bị cấm. Các Lãnh thổ bị cấm hiện tại là:
+- 응급 대응 서비스를 비롯한 고위험 활동에 Google 지도 기반 그라운딩을 사용하지 않습니다.
+- '금지 지역'에서 Google 지도 그라운딩을 제공하는 애플리케이션을 배포하거나 마케팅하지 않습니다. 현재 금지된 지역은 다음과 같습니다.
 
-  - Trung Quốc
-  - Crimea
-  - Cuba
-  - Cộng hoà Nhân dân Donetsk
-  - Iran
-  - Cộng hoà Nhân dân Luhansk
-  - Triều Tiên
-  - Syria
-  - Việt Nam
+  - 중국
+  - 크리미아
+  - 쿠바
+  - 도네츠크 인민공화국
+  - 이란
+  - 루한스크 인민공화국
+  - 북한
+  - 시리아
+  - 베트남
 
-  Danh sách này có thể được cập nhật theo thời gian.
+  이 목록은 때때로 업데이트될 수 있습니다.
 
-## Các phương pháp hay nhất
+## 권장사항
 
-- **Cung cấp vị trí của người dùng:** Để có câu trả lời phù hợp và được cá nhân hoá nhất, hãy luôn thêm `user_location` (vĩ độ và kinh độ) vào cấu hình `googleMapsGrounding` khi bạn biết vị trí của người dùng.
-- **Kết xuất tiện ích theo bối cảnh của Google Maps:** Tiện ích theo bối cảnh được kết xuất bằng mã thông báo theo bối cảnh, `googleMapsWidgetContextToken`. Mã thông báo này được trả về trong phản hồi của Gemini API và có thể dùng để kết xuất nội dung trực quan từ Google Maps. Để biết thêm thông tin về tiện ích theo bối cảnh, hãy xem
-  [Tiện ích Kết nối với Google Maps
-  trong Hướng dẫn cho nhà phát triển của Google.](https://developers.google.com/maps/documentation/javascript/maps-grounding-widget?hl=vi)
-- **Thông báo cho người dùng cuối:** Thông báo rõ ràng cho người dùng cuối rằng dữ liệu của Google Maps đang được dùng để trả lời các truy vấn của họ, đặc biệt là khi công cụ này được bật.
-- **Theo dõi độ trễ:** Đối với các ứng dụng trò chuyện, hãy đảm bảo rằng độ trễ P95 cho các câu trả lời được kết nối vẫn nằm trong ngưỡng chấp nhận được để duy trì trải nghiệm người dùng mượt mà.
-- **Tắt khi không cần:** Tính năng Kết nối với Google Maps được tắt theo mặc định. Chỉ bật tính năng này (`"tools": [{"googleMaps": {}}]`) khi một truy vấn có bối cảnh địa lý rõ ràng để tối ưu hoá hiệu suất và chi phí.
+- **사용자 위치 제공:** 가장 관련성 높은 맞춤형 대답을 위해 사용자의 위치를 알 수 있는 경우 항상 `googleMapsGrounding` 구성에 `user_location` (위도 및 경도)를 포함하세요.
+- **Google 지도 컨텍스트 위젯 렌더링:** 컨텍스트 위젯은 Gemini API 응답에 포함된 컨텍스트 토큰인 `googleMapsWidgetContextToken`을 사용하여 렌더링됩니다. 이 토큰을 활용하면 Google 지도의 시각적 콘텐츠를 렌더링할 수 있습니다. 컨텍스트 위젯에 대한 자세한 내용은 Google 개발자 가이드의 [Google 지도 기반 그라운딩 위젯](https://developers.google.com/maps/documentation/javascript/maps-grounding-widget?hl=ko)을 참고하세요.
+- **최종 사용자에게 알림:** 특히 도구가 사용 설정된 경우 Google 지도 데이터가 사용자의 질문에 답변하는 데 사용된다는 사실을 최종 사용자에게 명확하게 알립니다.
+- **지연 시간 모니터링:** 대화형 애플리케이션의 경우 그라운딩된 대답의 P95 지연 시간이 허용 가능한 기준점 내에 유지되어 원활한 사용자 환경을 유지해야 합니다.
+- **필요하지 않을 때 사용 중지:** Google 지도 기반 그라운딩은 기본적으로 사용 중지되어 있습니다. 성능과 비용을 최적화하려면 쿼리에 명확한 지리적 컨텍스트가 있는 경우에만 사용 설정 (`"tools": [{"googleMaps": {}}]`)하세요.
 
-## Các điểm hạn chế
+## 제한사항
 
-- **Phạm vi địa lý:** Tính năng Kết nối với Google Maps có trên toàn cầu
-- **Hỗ trợ mô hình:** Xem phần [Mô hình được hỗ trợ](#supported-models).
-- **Nội dung đầu vào/đầu ra đa phương thức:** Tính năng Kết nối với Google Maps hiện không hỗ trợ nội dung đầu vào hoặc đầu ra đa phương thức ngoài văn bản và tiện ích bản đồ theo bối cảnh.
-- **Trạng thái mặc định:** Công cụ Kết nối với Google Maps được tắt theo mặc định.
-  Bạn phải bật công cụ này một cách rõ ràng trong các yêu cầu API.
+- **지리적 범위:** Google 지도 기반 그라운딩은 전 세계에서 사용할 수 있습니다.
+- **모델 지원:** [지원되는 모델](#supported-models) 섹션을 참고하세요.
+- **멀티모달 입력/출력:** 현재 Google 지도 기반 그라운딩은 텍스트 및 컨텍스트 지도 위젯을 넘어 멀티모달 입력 또는 출력을 지원하지 않습니다.
+- **기본 상태:** Google 지도 기반 그라운딩 도구는 기본적으로 사용 중지되어 있습니다.
+  API 요청에서 명시적으로 사용 설정해야 합니다.
 
-## Giá và hạn mức về giá
+## 가격 및 비율 제한
 
-Giá của tính năng Kết nối với Google Maps dựa trên các truy vấn. Mức giá hiện tại là **25 USD / 1.000 câu lệnh được liên kết thực tế**. Cấp miễn phí cũng có tối đa 500 yêu cầu mỗi ngày. Một yêu cầu chỉ được tính vào hạn mức khi một lời nhắc trả về thành công ít nhất một kết quả được kết nối trên Google Maps (tức là kết quả chứa ít nhất một nguồn trên Google Maps). Nếu nhiều truy vấn được gửi đến Google Maps từ một yêu cầu, thì yêu cầu đó sẽ được tính là một yêu cầu theo hạn mức về giá.
+Google 지도 기반 그라운딩 가격은 쿼리를 기반으로 합니다. 현재 요금은 **그라운딩된 프롬프트 1,000개당 25달러**입니다. 무료 등급에서는 일일 최대 500개의 요청도 사용할 수 있습니다. 프롬프트가 하나 이상의 Google 지도 그라운딩 결과 (즉, 하나 이상의 Google 지도 소스를 포함하는 결과)를 성공적으로 반환하는 경우에만 요청이 할당량에 포함됩니다. 단일 요청에서 Google 지도에 여러 쿼리가 전송되면 비율 제한에 대해 하나의 요청으로 계산됩니다.
 
-Để biết thông tin chi tiết về giá, hãy xem [trang Giá của Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=vi).
+자세한 가격 정보는 [Gemini API 가격 페이지](https://ai.google.dev/gemini-api/docs/pricing?hl=ko)를 참고하세요.
 
-## Mô hình được hỗ trợ
+## 지원되는 모델
 
-Các mô hình sau đây hỗ trợ tính năng Kết nối với Google Maps:
+다음 모델은 Google 지도 기반 그라운딩을 지원합니다.
 
-| Mô hình | Kết nối với Google Maps |
+| 모델 | Google 지도를 사용한 그라운딩 |
 | --- | --- |
-| [Bản xem trước Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=vi) | ✔️ |
-| [Bản xem trước Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=vi) | ✔️ |
-| [Bản xem trước Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=vi) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=vi) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=vi) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=vi) | ✔️ |
-| [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash?hl=vi) | ✔️ |
+| [Gemini 3.1 Pro 프리뷰](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ko) | ✔️ |
+| [Gemini 3.1 Flash-Lite 프리뷰](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=ko) | ✔️ |
+| [Gemini 3 Flash 프리뷰](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ko) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ko) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=ko) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ko) | ✔️ |
+| [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash?hl=ko) | ✔️ |
 
-## Các cách kết hợp công cụ được hỗ trợ
+## 지원되는 도구 조합
 
-Các mô hình Gemini 3 hỗ trợ việc kết hợp các công cụ tích hợp (như Kết nối với Google Maps) với các công cụ tuỳ chỉnh (gọi hàm). Tìm hiểu thêm trên trang về các cách kết hợp công cụ
-.
+Gemini 3 모델은 내장 도구 (예: Google 지도 기반 그라운딩)와 맞춤 도구 (함수 호출)의 조합을 지원합니다. [도구 조합](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ko) 페이지에서 자세히 알아보세요.
 
-## Bước tiếp theo
+## 다음 단계
 
-- Hãy thử tính năng [Dựa trên kết quả của Google Tìm kiếm trong Gemini API Sổ tay](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=vi).
-- Tìm hiểu về các [công cụ khác hiện có](https://ai.google.dev/gemini-api/docs/tools?hl=vi).
-- Để tìm hiểu thêm về các phương pháp hay nhất về AI có trách nhiệm và bộ lọc an toàn của Gemini API, hãy xem [Hướng dẫn về chế độ cài đặt an toàn](https://ai.google.dev/gemini-api/docs/safety-settings?hl=vi).
+- [Gemini API 설명서의 Google 검색을 사용한 그라운딩](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=ko)을 사용해 보세요.
+- [사용 가능한 다른 도구](https://ai.google.dev/gemini-api/docs/tools?hl=ko)에 대해 알아보세요.
+- 책임감 있는 AI 권장사항 및 Gemini API의 안전 필터에 대해 자세히 알아보려면 [안전 설정 가이드](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ko)를 참고하세요.
 
-Gửi ý kiến phản hồi
+의견 보내기
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+최종 업데이트: 2026-04-29(UTC)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+의견을 전달하고 싶나요?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]

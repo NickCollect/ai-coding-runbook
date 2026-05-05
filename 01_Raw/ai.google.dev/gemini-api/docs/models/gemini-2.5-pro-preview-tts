@@ -1,48 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=ko
-fetched_at: 2026-05-05T20:05:03.241191+00:00
-title: "Gemini 2.5 Pro Text-to-Speech \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=ar
+fetched_at: 2026-05-05T20:48:50.470178+00:00
+title: "\u0645\u064a\u0632\u0629 \"\u062a\u062d\u0648\u064a\u0644 \u0627\u0644\u0646\u0635 \u0625\u0644\u0649 \u0643\u0644\u0627\u0645\" \u0641\u064a Gemini 2.5 Pro \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-의견 보내기
+إرسال ملاحظات
 
-# Gemini 2.5 Pro Text-to-Speech
+# ميزة "تحويل النص إلى كلام" في Gemini 2.5 Pro
 
-스튜디오급 음성 합성을 위한 프리미엄 엔진으로, 고품질의 정교한 오디오 생성을 제공합니다. Gemini 2.5 Pro TTS는 최고 수준의 음성 선명도와 자연스러운 운율이 필요한 장문 콘텐츠, 전문 내레이션, 복잡한 크리에이티브 워크플로에 가장 적합합니다.
+محركنا المميّز لتوليد الكلام بجودة الاستوديو، الذي يقدّم إمكانات متطورة لتوليد الصوت بدقة عالية. ‫Gemini 2.5 Pro TTS هو الخيار الأفضل للمحتوى الطويل والسرد الاحترافي ومهام سير العمل الإبداعية المعقّدة التي تتطلب أعلى مستوى من الوضوح الصوتي والترنيم الطبيعي.
 
-[Google AI Studio에서 사용해 보기](https://aistudio.google.com?model=gemini-2.5-pro-preview-tts&hl=ko)
+[تجربة في Google AI Studio](https://aistudio.google.com?model=gemini-2.5-pro-preview-tts&hl=ar)
 
-## 문서
+## الوثائق
 
-기능 및 기능의 전체 범위는 [텍스트 음성 변환](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ko) 가이드를 참고하세요.
+يُرجى الانتقال إلى دليل [تحويل النص إلى كلام](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ar) للاطّلاع على تغطية كاملة
+للميزات والإمكانات.
 
 ## gemini-2.5-pro-preview-tts
 
-| 속성 | 설명 |
+| الموقع | الوصف |
 | --- | --- |
-| id\_card모델 코드 | `gemini-2.5-pro-preview-tts` |
-| save지원되는 데이터 유형 | **입력**  텍스트  **출력**  오디오 |
-| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 토큰 한도**  8,192  **출력 토큰 한도**  16,384 |
-| handyman기능 | **오디오 생성**  지원됨  **Batch API**  지원됨  **캐싱**  지원되지 않음  **코드 실행**  지원되지 않음  **파일 검색**  지원되지 않음  **함수 호출**  지원되지 않음  **Google 지도 기반 그라운딩**  지원되지 않음  **이미지 생성**  지원되지 않음  **Live API**  지원되지 않음  **검색 그라운딩**  지원되지 않음  **구조화된 출력**  지원되지 않음  **사고**  지원되지 않음  **URL 컨텍스트**  지원되지 않음 |
-| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - `gemini-2.5-pro-preview-tts` |
-| calendar\_month최신 업데이트 | 2025년 12월 |
+| id\_cardرمز النموذج | `gemini-2.5-pro-preview-tts` |
+| saveأنواع البيانات المتوفرة | **المدخلات**  نص  **الناتج**  الصوت |
+| token\_autoحدود الرموز المميّزة[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحدّ الأقصى للرموز المميّزة للإدخال**  8,192  **الحدّ الأقصى للرموز المميّزة للإخراج**  16,384 |
+| handymanالإمكانات | **إنشاء الصوت**  متاح  **واجهة برمجة التطبيقات المجمّعة**  متاح  **التخزين المؤقت**  غير متاح  **تنفيذ الرموز البرمجية**  غير متاح  **البحث عن الملفات**  غير متاح  **استدعاء الدوال**  غير متاح  **استخدام "خرائط Google" كمصدر**  غير متاح  **إنشاء الصور**  غير متاح  **واجهة برمجة التطبيقات المباشرة**  غير متاح  **لتحديد المصادر في "بحث Google"**  غير متاح  **مُخرجات منظَّمة**  غير متاح  **طريقة التفكير**  غير متاح  **سياق عنوان URL**  غير متاح |
+| 123الإصدارات | يُرجى قراءة [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions) لمزيد من التفاصيل.  - `gemini-2.5-pro-preview-tts` |
+| calendar\_monthآخر تعديل | ديسمبر 2025 |
 
-의견 보내기
+إرسال ملاحظات
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-최종 업데이트: 2026-04-29(UTC)
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-의견을 전달하고 싶나요?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
