@@ -89,6 +89,39 @@ The agent auto-loads `CLAUDE.md` / `AGENTS.md` project rules and reads `02_Wiki/
 
 ---
 
+## What the wiki output actually looks like
+
+The wiki isn't just a mirror — the real value is in **`02_Wiki/Comparison/`** (cross-vendor decision matrices) and **`03_Output/Cheatsheets/`** (concrete lookups). For example:
+
+> **From [`03_Output/Cheatsheets/skill-vs-plugin-vs-mcp-vs-subagent.md`](./03_Output/Cheatsheets/skill-vs-plugin-vs-mcp-vs-subagent.md):**
+>
+> The 4 most-confused extension mechanisms in Claude Code, in one line each:
+> - **Skill** — a loadable "specialized knowledge + flow" (file, local)
+> - **Plugin** — a **distribution container** that bundles other things (skills/hooks/MCP/subagents/commands)
+> - **MCP-server** — wires an **external service** in as a tool (process, remote or local)
+> - **Subagent** — a child agent with **isolated context** (runtime, not a file)
+>
+> | If you want to ... | Use | Why |
+> |---|---|---|
+> | Turn a **specialized flow** like "PDF processing" into something Claude auto-invokes | **Skill** | Model-invoked, few files, runs from a local path |
+> | **Distribute** a "GitHub PR toolkit + hooks + scripts" bundle to your team | **Plugin** | The only container with marketplace + semver |
+> | Let Claude query your company's **database / private API** | **MCP-server** | MCP is the standard protocol for external services |
+> | Let Claude do a **batch task** without polluting the main context | **Subagent** | Isolates context, only summary returns to parent |
+> | Enforce **lint before commit**, rewrite prompts, audit tool args | **Hook** | The only deterministic lifecycle trigger |
+>
+> *(Plus a 5-dimension property table, 5 common combination patterns, common pitfalls, and wikilinks back to 5 entity dossiers — see the file for full content)*
+
+Other examples worth opening directly:
+
+- [`agent-sdk-quick-reference.md`](./03_Output/Cheatsheets/agent-sdk-quick-reference.md) — Claude Agent SDK key APIs
+- [`hooks-recipes.md`](./03_Output/Cheatsheets/hooks-recipes.md) — 13 ready-to-use hook recipes
+- [`model-pricing.md`](./03_Output/Cheatsheets/model-pricing.md) — Cross-vendor pricing comparison (Anthropic / OpenAI / Google / Cursor)
+- [`plugin-install-and-marketplace.md`](./03_Output/Cheatsheets/plugin-install-and-marketplace.md) — Full plugin install + marketplace walkthrough
+
+Full list → [`03_Output/Cheatsheets/`](./03_Output/Cheatsheets/) · Cross-vendor decision matrices → [`02_Wiki/Comparison/`](./02_Wiki/Comparison/)
+
+---
+
 ## Stats
 
 - **9,500+** raw files (markdown + git-cloned source code), maintained by 9 GHA matrix sources
@@ -400,7 +433,7 @@ See `scripts/sources.yaml`. Currently 9 active GHA matrix sources:
 1. `code.claude.com` — Claude Code docs
 2. `platform.claude.com` — Anthropic API + platform docs (legacy `docs.claude.com` 301-redirects to these two)
 3. `anthropic.com/{research,engineering}` — Anthropic blog
-4. `docs.cursor.com` — Cursor IDE docs (by prefix: `/get-started/` `/chat/` `/tab/` `/agent/` `/context/` `/settings/` `/troubleshooting/` `/account/` `/privacy/`)
+4. `docs.cursor.com` — Cursor IDE docs (actually crawls `cursor.com/docs/`, since Cursor migrated the docs site in 2026-05). Covers 23 sections: `account / agent / api / bugbot / cli / cloud-agent / configuration / customizing / enterprise / extension-api / get-started / hooks / integrations / mcp / models / models-and-pricing / plugins / reference / rules / sdk / security-review / skills / subagents`
 5. `ai.google.dev/gemini-api/docs/` — Gemini API docs
 6. `openai.com/{index,blog}/` — OpenAI blog (model releases / product announcements)
 

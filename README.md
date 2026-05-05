@@ -89,6 +89,39 @@ agent 自动加载 `CLAUDE.md` / `AGENTS.md` 项目规则，读 `02_Wiki/Compari
 
 ---
 
+## 实际 wiki 长啥样（sample）
+
+Wiki 不只是 mirror 官方文档 —— 真正有价值的是 **`02_Wiki/Comparison/`** 下的横向对比和 **`03_Output/Cheatsheets/`** 下的速查。例：
+
+> **从 [`03_Output/Cheatsheets/skill-vs-plugin-vs-mcp-vs-subagent.md`](./03_Output/Cheatsheets/skill-vs-plugin-vs-mcp-vs-subagent.md)：**
+>
+> Claude Code 4 种最常被混淆的扩展机制 —— 一句话区分：
+> - **Skill** = 一份可加载的"专项知识 + 流程"（文件，本地）
+> - **Plugin** = 多种东西的**打包分发**容器（可含 skills/hooks/MCP/subagents/commands）
+> - **MCP-server** = 把**外部服务**接进来当 tool（进程，远程或本地）
+> - **Subagent** = **隔离 context** 的子 agent（运行时，不是文件）
+>
+> | 你想 ... | 用 | 原因 |
+> |---|---|---|
+> | 把"PDF 处理"这样一个**专项流程**变成 Claude 自动调用的能力 | **Skill** | model-invoked、文件少、本地路径就能跑 |
+> | 把"GitHub PR 工具集 + 配套 hook + 脚本"作为**一个包分发**给团队 | **Plugin** | 唯一支持 marketplace + 版本化分发的容器 |
+> | 让 Claude 能查公司内部 **数据库 / 私有 API** | **MCP-server** | MCP 是接外部服务的标准协议 |
+> | 让 Claude **大批量做某类任务**，又不想污染主 context | **Subagent** | 隔离 context，最终只回主一条总结 |
+> | 在 commit 前**强制 lint**、把 prompt **强制改写**、调用前**审核 tool 参数** | **Hook** | 唯一在生命周期固定点 deterministic 触发的机制 |
+>
+> *(还有 5 维属性对比 + 5 个组合 pattern + 易踩的坑 + wikilink 回到 5 份 entity 详档，详见原文)*
+
+类似的还有：
+
+- [`agent-sdk-quick-reference.md`](./03_Output/Cheatsheets/agent-sdk-quick-reference.md) —— Claude Agent SDK 关键 API 速查
+- [`hooks-recipes.md`](./03_Output/Cheatsheets/hooks-recipes.md) —— 13 个常用 hook recipe
+- [`model-pricing.md`](./03_Output/Cheatsheets/model-pricing.md) —— Anthropic / OpenAI / Google / Cursor 模型横向 pricing 对比
+- [`plugin-install-and-marketplace.md`](./03_Output/Cheatsheets/plugin-install-and-marketplace.md) —— Plugin 安装 + marketplace 全流程
+
+完整列表 → [`03_Output/Cheatsheets/`](./03_Output/Cheatsheets/) · 跨厂商决策矩阵 → [`02_Wiki/Comparison/`](./02_Wiki/Comparison/)
+
+---
+
 ## Stats
 
 - **9,500+** raw 文件（markdown + git-clone 来的源代码），9 个 GHA matrix source 维护
@@ -400,7 +433,7 @@ GHA workflow 没有 PR review，改 sources.yaml 加坏 prefix 会导致下次 c
 1. `code.claude.com` —— Claude Code 文档
 2. `platform.claude.com` —— Anthropic API + 平台文档（旧 `docs.claude.com` 已 301 重定向到这两个域名）
 3. `anthropic.com/{research,engineering}` —— Anthropic blog
-4. `docs.cursor.com` —— Cursor IDE 文档（按 prefix：`/get-started/` `/chat/` `/tab/` `/agent/` `/context/` `/settings/` `/troubleshooting/` `/account/` `/privacy/`）
+4. `docs.cursor.com` —— Cursor IDE 文档（实际抓 `cursor.com/docs/`，2026-05 Cursor 整站迁移）。覆盖 23 个 sections：`account / agent / api / bugbot / cli / cloud-agent / configuration / customizing / enterprise / extension-api / get-started / hooks / integrations / mcp / models / models-and-pricing / plugins / reference / rules / sdk / security-review / skills / subagents`
 5. `ai.google.dev/gemini-api/docs/` —— Gemini API 文档
 6. `openai.com/{index,blog}/` —— OpenAI 官网 blog（model release / 产品公告）
 
