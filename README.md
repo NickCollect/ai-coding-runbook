@@ -1,5 +1,7 @@
 # AI Coding Runbook · 项目手册（Master Guide）
 
+[English](./README.en.md) | **中文**
+
 > **写给任何 LLM 和未来失忆的人**——下次任何 LLM 或人打开这个项目却不知它怎么工作时，**先读这一份**。
 > 项目所有规则、踩过的坑、维护方法都在这里。`CLAUDE.md` / `AGENTS.md` / `system_instructions.md` 都是这份的子集 / 引用。
 
