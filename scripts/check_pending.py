@@ -17,7 +17,7 @@ LEGITIMATE_TOP = {
     "01_Raw", "02_Wiki", "03_Output", "scripts", "docs",
     ".git", ".github", ".obsidian", ".claude", ".claudian", ".venv",
 }
-LEGITIMATE_ROOT_FILES = {"CLAUDE.md", "AGENTS.md", "README.md", "system_instructions.md"}
+LEGITIMATE_ROOT_FILES = {"CLAUDE.md", "AGENTS.md", "README.md", "README.en.md", "system_instructions.md"}
 
 
 def list_raw_files() -> list[Path]:
