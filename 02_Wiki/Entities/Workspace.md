@@ -29,15 +29,17 @@ Anthropic 组织内的 sub-unit —— 隔离 API key、rate limit、cost、file
 - **Workspace Rate Limit** sub：`GET .../{workspace_id}/rate_limits` —— 列 per-workspace overrides（仅有 override 的 group 出现，其他 inherit org 不列；用 `/v1/organizations/rate_limits` 看 org 级） [[workspaces--admin-api]] [[Rate-limit-API]]
 - **Auth**：`X-Api-Key: $ANTHROPIC_ADMIN_API_KEY` + `anthropic-version: 2023-06-01`
 - **关联**：[[API-key]]、[[Files-API]]、[[Batches-API]]、[[Code-execution-tool]] container 都按 workspace scope
+- **WIF 集成**：Federation rule 绑定一个 `workspace_id`；目标 service account 必须是该 workspace 的成员；minted token 跟随该 workspace 的 rate limits + usage attribution（与 API key 等价）；OAuth scope `workspace:developer` 授予该 workspace 内 Messages/Models/Managed Agents/Files/Skills 访问 [[workload-identity-federation--bwc]] [[wif-reference--api-auth]]
 
 ## 出现来源
 
-_47 summaries reference this entity_ ——
+_55 summaries reference this entity_ ——
 - [[workspaces--admin-api]] / [[workspaces-create--admin-api]] / [[workspaces-list--admin-api]] / [[workspaces-retrieve--admin-api]] / [[workspaces-update--admin-api]] / [[workspaces-archive--admin-api]]
 - [[workspaces-members--admin-api]] / [[workspaces-members-create--admin-api]] / [[workspaces-members-list--admin-api]] / [[workspaces-members-retrieve--admin-api]] / [[workspaces-members-update--admin-api]] / [[workspaces-members-delete--admin-api]]
 - [[workspaces-rate_limits-list--admin-api]]
 - [[admin--api-index]] / [[administration-api--bwc]] / [[workspaces--bwc]]
 - [[batch-processing--bwc]] / [[code-execution-tool--at]] / [[files--bwc]]
+- [[workload-identity-federation--bwc]] / [[authentication-overview--api-auth]] / [[wif-reference--api-auth]] / [[wif-aws--bwc]] / [[wif-gcp--bwc]] / [[wif-azure--bwc]] / [[wif-okta--bwc]]
 
 ## 相关
 

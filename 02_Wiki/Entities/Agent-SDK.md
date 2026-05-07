@@ -35,6 +35,7 @@ Anthropic 提供的 Python SDK，构建用 Claude Code 同款 harness 的 agent 
 - **vs [[Managed-agent]]**：Agent SDK 在你机器跑；Managed Agent 在 Anthropic infra 跑（云沙盒），同时支持 [[Session-API]] / [[Vault]] / [[Memory-store]] / [[Environment-API]] 等 [[overview--agent-sdk]]
 - **TypeScript 版状态**：原 `claude-code-sdk-typescript` repo deprecated（404）；v0.1.0 重命名为 `@anthropic-ai/claude-agent-sdk` 后 TS 仍持续维护；deprecated 提及在 P1 cheatsheet 已被新版本超越 [[migration-guide]]
 - **新版本 v0.2.111+** 必需用于 Opus 4.7 [[overview--agent-sdk]]
+- **WIF support**：Agent SDK + `ant` CLI 都跟 standard Anthropic SDK 共享 profile resolution —— 配在 `<config_dir>/configs/<name>.json` 的 federation profile 也能直接 auth Claude Code 和 Agent SDK，无需额外配置；active profile 解析顺序 `$ANTHROPIC_PROFILE` → `<config_dir>/active_config` 文件 → 字面 `default` [[wif-reference--api-auth]]
 
 ## 出现来源
 
@@ -46,7 +47,7 @@ _45 summaries reference this entity_:
 - [[agent-sdk-verifier-py]]
 - [[agent-sdk-verifier-ts]]
 - [[changelog]]
-- [[claude]]
+- [[claude--cc-workflow]]
 - [[claude-api--java]]
 - [[claude-code-features]]
 - [[cli-reference]]
@@ -85,6 +86,7 @@ _45 summaries reference this entity_:
 - [[typescript--agent-sdk]]
 - [[typescript-v2-preview]]
 - [[user-input]]
+- [[wif-reference--api-auth]]
 
 ## 相关
 

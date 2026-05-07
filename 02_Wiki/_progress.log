@@ -40,3 +40,5 @@
   - 新增 02_Wiki/QA/cursor-codex-workflows.md
   - sources.yaml 更新：新增 docs.cursor.com + openai/codex
   - Audit: PASS (0 issues)
+[2026-05-07 09:46] INGEST - 9 summaries (platform.claude.com WIF: workload-identity-federation, authentication overview/wif-reference, 6 providers aws/gcp/azure/k8s/okta/github-actions), 4 entity updates (API-key/Workspace/Messages-API/Agent-SDK), 5 new stubs (Workload-Identity-Federation/Service-account/Federation-issuer/Federation-rule entities + JWT concept), canonical-names updated
+[2026-05-07 09:50] FIX - rename 02_Wiki/Summaries/claude.md → claude--cc-workflow.md (avoid macOS case-insensitive collision with CLAUDE.md harness loader; updated 5 wikilinks in CI-integration + Agent-SDK; git mv preserves history)

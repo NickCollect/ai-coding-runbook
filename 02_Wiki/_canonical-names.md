@@ -145,6 +145,21 @@
 | Rate-limit-API | per-org / per-workspace rate limit |
 | Invite | workspace member invitation |
 
+### Workload Identity Federation entities (`/v1/oauth/token`)
+
+| Canonical | Raw 中变体 | 说明 |
+|---|---|---|
+| Workload-Identity-Federation | WIF / workload identity federation / OIDC federation | 整个 feature；用 IdP 签的短 lived JWT 换 `sk-ant-oat01-...` access token |
+| Service-account | service account / svac | `svac_...` Anthropic org 内的非人类 identity，token "act as" 的对象 |
+| Federation-issuer | federation issuer / issuer / fdis | `fdis_...` 注册的 OIDC IdP（issuer URL + JWKS source: discovery / explicit_url / inline） |
+| Federation-rule | federation rule / fdrl / WIF rule | `fdrl_...` issuer↔service-account 桥；match (subject_prefix/audience/claims/CEL condition) + target + authorization (scope + lifetime) |
+
+### Concepts (continued)
+
+| Canonical | 变体 / 备注 |
+|---|---|
+| JWT | JSON Web Token / jwt-bearer / RFC 7519 / RFC 7523 (token format + verification rules) |
+
 ### SDK (raw API client，distinct from Agent-SDK)
 
 | Canonical | 说明 |
