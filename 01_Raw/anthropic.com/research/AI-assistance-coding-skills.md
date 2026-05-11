@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/AI-assistance-coding-skills
-fetched_at: 2026-05-05T20:39:24.205957+00:00
+fetched_at: 2026-05-11T04:55:42.832778+00:00
 title: "How AI assistance impacts the formation of coding skills \\ Anthropic"
 ---
 
@@ -14,7 +14,7 @@ Jan 29, 2026
 
 ![How AI assistance impacts the formation of coding skills](https://www-cdn.anthropic.com/images/4zrzovbb/website/f06ca06f9d08ca4a85f26357eb896c3730274507-1000x1000.svg)
 
-Research shows AI helps people do [parts](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4945566) of their job faster. In an observational [study](https://www.anthropic.com/research/estimating-productivity-gains) of [Claude.ai](http://claude.ai/redirect/website.v1.ebeed087-6172-4c55-b660-8977b1ad48a9) data, we found AI can speed up some tasks by 80%. But does this increased productivity come with trade-offs? Other research shows that when people use AI assistance, they become [less engaged with their work](https://www.nature.com/articles/s41598-025-98385-2) and [reduce](https://www.microsoft.com/en-us/research/wp-content/uploads/2025/01/lee_2025_ai_critical_thinking_survey.pdf) the effort they put into doing it—in other words, they offload their thinking to AI.
+Research shows AI helps people do [parts](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4945566) of their job faster. In an observational [study](https://www.anthropic.com/research/estimating-productivity-gains) of [Claude.ai](http://claude.ai/redirect/website.v1.5aae9689-2506-4938-b8d4-f6b3892b42f8) data, we found AI can speed up some tasks by 80%. But does this increased productivity come with trade-offs? Other research shows that when people use AI assistance, they become [less engaged with their work](https://www.nature.com/articles/s41598-025-98385-2) and [reduce](https://www.microsoft.com/en-us/research/wp-content/uploads/2025/01/lee_2025_ai_critical_thinking_survey.pdf) the effort they put into doing it—in other words, they offload their thinking to AI.
 
 It’s unclear whether this cognitive offloading can prevent people from growing their skills on the job, or—in the case of coding—understanding the systems they’re building. Our latest study, a randomized controlled trial with software developers as participants, investigates this potential downside of using AI at work.
 
@@ -119,16 +119,18 @@ Copy
 
 ## Related content
 
-### How people ask Claude for personal guidance
+### Teaching Claude why
 
-[Read more](https://www.anthropic.com/research/claude-personal-guidance)
+New research on how we've reduced agentic misalignment.
 
-### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
+[Read more](https://www.anthropic.com/research/teaching-claude-why)
 
-[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
+### Natural Language Autoencoders: Turning Claude’s thoughts into text
 
-### Announcing the Anthropic Economic Index Survey
+AI models like Claude talk in words but think in numbers. In this study we train Claude to translate its thoughts into human-readable text.
 
-We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
+[Read more](https://www.anthropic.com/research/natural-language-autoencoders)
 
-[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)
+### Donating our open-source alignment tool
+
+[Read more](https://www.anthropic.com/research/donating-open-source-petri)

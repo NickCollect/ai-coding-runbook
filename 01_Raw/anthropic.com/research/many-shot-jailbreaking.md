@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/many-shot-jailbreaking
-fetched_at: 2026-05-05T19:41:47.905885+00:00
+fetched_at: 2026-05-11T04:56:22.512567+00:00
 title: "Many-shot jailbreaking \\ Anthropic"
 ---
 
@@ -96,16 +96,18 @@ All the technical details of our many-shot jailbreaking study are reported in ou
 
 ## Related content
 
-### How people ask Claude for personal guidance
+### Teaching Claude why
 
-[Read more](https://www.anthropic.com/research/claude-personal-guidance)
+New research on how we've reduced agentic misalignment.
 
-### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
+[Read more](https://www.anthropic.com/research/teaching-claude-why)
 
-[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
+### Natural Language Autoencoders: Turning Claude’s thoughts into text
 
-### Announcing the Anthropic Economic Index Survey
+AI models like Claude talk in words but think in numbers. In this study we train Claude to translate its thoughts into human-readable text.
 
-We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
+[Read more](https://www.anthropic.com/research/natural-language-autoencoders)
 
-[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)
+### Donating our open-source alignment tool
+
+[Read more](https://www.anthropic.com/research/donating-open-source-petri)

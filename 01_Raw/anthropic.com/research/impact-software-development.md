@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/impact-software-development
-fetched_at: 2026-05-05T20:40:02.305420+00:00
+fetched_at: 2026-05-11T04:56:16.940037+00:00
 title: "Anthropic Economic Index: AI's impact on software development \\ Anthropic"
 ---
 
@@ -16,7 +16,7 @@ Jobs that involve computer programming are a small sector of the modern economy,
 
 In our [previous Economic Index research](https://www.anthropic.com/news/the-anthropic-economic-index), we found very disproportionate use of Claude by US workers in computer-related occupations: that is, there were many more conversations with Claude about computer-related tasks than one would predict from the number of people working in relevant jobs. It’s the same in [the educational context](https://www.anthropic.com/news/anthropic-education-report-how-university-students-use-claude): Computer Science degrees—which involve large amounts of coding—show highly disproportionate AI use.
 
-To understand these changes in more detail, we conducted an analysis of 500,000 coding-related interactions across [Claude.ai](http://claude.ai/redirect/website.v1.ebeed087-6172-4c55-b660-8977b1ad48a9) (the “default” way that most people interact with Claude) and [Claude Code](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview) (our new specialist coding “agent” that can independently accomplish chains of complex tasks using a variety of digital tools).
+To understand these changes in more detail, we conducted an analysis of 500,000 coding-related interactions across [Claude.ai](http://claude.ai/redirect/website.v1.5aae9689-2506-4938-b8d4-f6b3892b42f8) (the “default” way that most people interact with Claude) and [Claude Code](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview) (our new specialist coding “agent” that can independently accomplish chains of complex tasks using a variety of digital tools).
 
 We found three key patterns:
 
@@ -122,16 +122,18 @@ Compared to use cases that don’t involve software, software development is mor
 
 ## Related content
 
-### How people ask Claude for personal guidance
+### Teaching Claude why
 
-[Read more](https://www.anthropic.com/research/claude-personal-guidance)
+New research on how we've reduced agentic misalignment.
 
-### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
+[Read more](https://www.anthropic.com/research/teaching-claude-why)
 
-[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
+### Natural Language Autoencoders: Turning Claude’s thoughts into text
 
-### Announcing the Anthropic Economic Index Survey
+AI models like Claude talk in words but think in numbers. In this study we train Claude to translate its thoughts into human-readable text.
 
-We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
+[Read more](https://www.anthropic.com/research/natural-language-autoencoders)
 
-[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)
+### Donating our open-source alignment tool
+
+[Read more](https://www.anthropic.com/research/donating-open-source-petri)

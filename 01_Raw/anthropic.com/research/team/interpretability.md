@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/interpretability
-fetched_at: 2026-05-05T19:42:11.089990+00:00
+fetched_at: 2026-05-11T04:56:50.301451+00:00
 title: "Interpretability Research \\ Anthropic"
 ---
 
@@ -50,6 +50,9 @@ Search
 
 DateCategoryTitle
 
+- [May 7, 2026Interpretability
+
+  Natural Language Autoencoders: Turning Claude’s thoughts into text](https://www.anthropic.com/research/natural-language-autoencoders)
 - [Apr 2, 2026Interpretability
 
   Emotion concepts and their function in a large language model](https://www.anthropic.com/research/emotion-concepts-function)
@@ -77,9 +80,6 @@ DateCategoryTitle
 - [Feb 20, 2025Interpretability
 
   Insights on Crosscoder Model Diffing](https://www.anthropic.com/research/crosscoder-model-diffing)
-- [Oct 25, 2024Societal Impacts
-
-  Evaluating feature steering: A case study in mitigating social biases](https://www.anthropic.com/research/evaluating-feature-steering)
 
 [See more](#)
 

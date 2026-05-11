@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/training-a-helpful-and-harmless-assistant-with-reinforcement-learning-from-human-feedback
-fetched_at: 2026-05-05T19:42:14.683317+00:00
+fetched_at: 2026-05-11T04:56:52.700501+00:00
 title: "Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback \\ Anthropic"
 ---
 
@@ -22,16 +22,18 @@ Yuntao Bai, Andy Jones, Kamal Ndousse, Amanda Askell, Anna Chen, Nova DasSarma, 
 
 ## Related content
 
-### How people ask Claude for personal guidance
+### Teaching Claude why
 
-[Read more](https://www.anthropic.com/research/claude-personal-guidance)
+New research on how we've reduced agentic misalignment.
 
-### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
+[Read more](https://www.anthropic.com/research/teaching-claude-why)
 
-[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
+### Natural Language Autoencoders: Turning Claude’s thoughts into text
 
-### Announcing the Anthropic Economic Index Survey
+AI models like Claude talk in words but think in numbers. In this study we train Claude to translate its thoughts into human-readable text.
 
-We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
+[Read more](https://www.anthropic.com/research/natural-language-autoencoders)
 
-[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)
+### Donating our open-source alignment tool
+
+[Read more](https://www.anthropic.com/research/donating-open-source-petri)

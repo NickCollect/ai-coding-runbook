@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/alignment
-fetched_at: 2026-05-05T19:42:06.345896+00:00
+fetched_at: 2026-05-11T04:56:48.396529+00:00
 title: "Alignment Research \\ Anthropic"
 ---
 
@@ -50,6 +50,12 @@ Search
 
 DateCategoryTitle
 
+- [May 8, 2026Alignment
+
+  Teaching Claude why](https://www.anthropic.com/research/teaching-claude-why)
+- [May 7, 2026Alignment
+
+  Donating our open-source alignment tool](https://www.anthropic.com/research/donating-open-source-petri)
 - [Apr 14, 2026Alignment
 
   Automated Alignment Researchers: Using large language models to scale scalable oversight](https://www.anthropic.com/research/automated-alignment-researchers)
@@ -74,12 +80,6 @@ DateCategoryTitle
 - [Nov 21, 2025Alignment
 
   From shortcuts to sabotage: natural emergent misalignment from reward hacking](https://www.anthropic.com/research/emergent-misalignment-reward-hacking)
-- [Nov 4, 2025Alignment
-
-  Commitments on model deprecation and preservation](https://www.anthropic.com/research/deprecation-commitments)
-- [Oct 9, 2025Alignment
-
-  A small number of samples can poison LLMs of any size](https://www.anthropic.com/research/small-samples-poison)
 
 [See more](#)
 

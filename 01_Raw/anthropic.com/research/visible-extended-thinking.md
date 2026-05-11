@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/visible-extended-thinking
-fetched_at: 2026-05-05T20:40:41.859393+00:00
+fetched_at: 2026-05-11T04:56:55.967025+00:00
 title: "Claude's extended thinking \\ Anthropic"
 ---
 
@@ -100,7 +100,7 @@ The above is just a short summary of some of our extensive safety work on Claude
 
 ## **Using Claude**
 
-You can use Claude 3.7 Sonnet now at [Claude.ai](http://claude.ai/redirect/website.v1.dd570b69-42ca-4659-a9f8-7845e624ecae) or on [our API](https://docs.anthropic.com/en/api/getting-started). And just as Claude can now let you know what it thinks, we hope you’ll let us know what you think, too. Please send your feedback about the new model to [feedback@anthropic.com](mailto:feedback@anthropic.com).
+You can use Claude 3.7 Sonnet now at [Claude.ai](http://claude.ai/redirect/website.v1.5aae9689-2506-4938-b8d4-f6b3892b42f8) or on [our API](https://docs.anthropic.com/en/api/getting-started). And just as Claude can now let you know what it thinks, we hope you’ll let us know what you think, too. Please send your feedback about the new model to [feedback@anthropic.com](mailto:feedback@anthropic.com).
 
 #### Footnotes
 
@@ -114,16 +114,18 @@ You can use Claude 3.7 Sonnet now at [Claude.ai](http://claude.ai/redirect/websi
 
 ## Related content
 
-### How people ask Claude for personal guidance
+### Teaching Claude why
 
-[Read more](https://www.anthropic.com/research/claude-personal-guidance)
+New research on how we've reduced agentic misalignment.
 
-### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
+[Read more](https://www.anthropic.com/research/teaching-claude-why)
 
-[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
+### Natural Language Autoencoders: Turning Claude’s thoughts into text
 
-### Announcing the Anthropic Economic Index Survey
+AI models like Claude talk in words but think in numbers. In this study we train Claude to translate its thoughts into human-readable text.
 
-We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
+[Read more](https://www.anthropic.com/research/natural-language-autoencoders)
 
-[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)
+### Donating our open-source alignment tool
+
+[Read more](https://www.anthropic.com/research/donating-open-source-petri)

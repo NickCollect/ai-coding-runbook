@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/how-ai-is-transforming-work-at-anthropic
-fetched_at: 2026-05-05T19:41:37.781305+00:00
+fetched_at: 2026-05-11T04:56:15.858117+00:00
 title: "How AI Is Transforming Work at Anthropic \\ Anthropic"
 ---
 
@@ -313,16 +313,18 @@ Finally, this research was conducted in August 2025 when Claude Sonnet 4 and Cla
 
 ## Related content
 
-### How people ask Claude for personal guidance
+### Teaching Claude why
 
-[Read more](https://www.anthropic.com/research/claude-personal-guidance)
+New research on how we've reduced agentic misalignment.
 
-### Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
+[Read more](https://www.anthropic.com/research/teaching-claude-why)
 
-[Read more](https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench)
+### Natural Language Autoencoders: Turning Claude’s thoughts into text
 
-### Announcing the Anthropic Economic Index Survey
+AI models like Claude talk in words but think in numbers. In this study we train Claude to translate its thoughts into human-readable text.
 
-We're launching the Anthropic Economic Index Survey, a monthly survey conducted through Anthropic Interviewer.
+[Read more](https://www.anthropic.com/research/natural-language-autoencoders)
 
-[Read more](https://www.anthropic.com/research/economic-index-survey-announcement)
+### Donating our open-source alignment tool
+
+[Read more](https://www.anthropic.com/research/donating-open-source-petri)
