@@ -1,12 +1,12 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted-pool
-fetched_at: 2026-05-05T19:55:38.644469+00:00
+fetched_at: 2026-05-11T04:55:36.720311+00:00
 fetch_method: mintlify_md
 ---
 
 # Self-Hosted Pool
 
-Self-Hosted Pool is for teams that want Cloud Agents to run inside company-managed infrastructure. Instead of each developer starting a worker on a personal machine, admins operate a pool of workers that can be assigned to agents across the organization.
+Self-Hosted Pool is for Enterprise teams that want Cloud Agents to run inside company-managed infrastructure. Instead of each developer starting a worker on a personal machine, admins operate a pool of workers that can be assigned to agents across the organization.
 
 Use a pool when you need:
 
@@ -30,7 +30,7 @@ Self-Hosted Cloud Agents support up to 10 workers per user and 50 per team. For 
 
 ## Prerequisites
 
-- A **Cursor team plan**
+- A **Cursor Enterprise plan**
 - Self-hosted settings configured by a team admin in the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#self-hosted-agents):
   - **Allow Self-Hosted Agents** lets users opt in to self-hosted runs.
   - **Require Self-Hosted Agents** routes every Cloud Agent run to self-hosted workers.

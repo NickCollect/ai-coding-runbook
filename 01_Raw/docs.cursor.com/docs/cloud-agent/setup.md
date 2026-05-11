@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/setup
-fetched_at: 2026-05-05T19:55:38.754265+00:00
+fetched_at: 2026-05-11T04:55:36.686076+00:00
 fetch_method: mintlify_md
 ---
 
@@ -298,8 +298,6 @@ RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/ubuntu
 # Set a password for ubuntu user
 RUN echo "ubuntu:ubuntu" | chpasswd
 ```
-
-After Docker is installed, add `sudo service docker start` to your `start` command so the daemon is available before the agent begins work.
 
 ## Running Tailscale
 

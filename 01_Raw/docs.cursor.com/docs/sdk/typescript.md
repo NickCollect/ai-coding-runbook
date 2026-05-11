@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/sdk/typescript
-fetched_at: 2026-05-05T19:55:43.961281+00:00
+fetched_at: 2026-05-11T04:55:38.518151+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,7 +11,7 @@ fetch_method: mintlify_md
 The TypeScript SDK is in public beta. APIs may change before general
 availability.
 
-The `@cursor/sdk` package lets you call Cursor's agent from your own code. The same agent that runs in the Cursor IDE, CLI, and web app is now scriptable from TypeScript.
+The `@cursor/sdk` package lets you call Cursor's agent from your own code. The same agent that runs in the Cursor IDE, CLI, and web app is now scriptable from TypeScript. You can also use Cursor's native `/sdk` skill to help you start building.
 
 ## Overview
 

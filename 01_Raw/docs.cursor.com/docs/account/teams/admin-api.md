@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/admin-api
-fetched_at: 2026-05-05T19:55:35.047043+00:00
+fetched_at: 2026-05-11T04:55:35.555775+00:00
 fetch_method: mintlify_md
 ---
 
@@ -477,11 +477,17 @@ The `cursorTokenFee` field represents the Cursor Token Rate and is only present 
 
 `startDate` number
 
-Start date in epoch milliseconds
+Start date in epoch milliseconds. This bound is inclusive.
 
 `endDate` number
 
-End date in epoch milliseconds
+End date in epoch milliseconds. This bound is inclusive.
+
+`startDate` and `endDate` are points in time with millisecond precision, and
+both bounds are inclusive. An event exactly at `2026-05-08T00:00:00.000Z` is
+included when `endDate` is `1778198400000`. For non-overlapping daily
+ingestion windows, set the previous window's `endDate` to the final
+millisecond of the day, such as `2026-05-07T23:59:59.999Z`.
 
 `userId` number
 

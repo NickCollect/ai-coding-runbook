@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted-k8s
-fetched_at: 2026-05-05T19:55:38.644749+00:00
+fetched_at: 2026-05-11T04:55:36.647976+00:00
 fetch_method: mintlify_md
 ---
 
@@ -15,7 +15,7 @@ Deploy and manage [Self-Hosted Pool](https://cursor.com/docs/cloud-agent/self-ho
 - A Kubernetes cluster (v1.24+), either a cloud cluster (EKS, GKE, AKS) or a local one via [OrbStack](https://orbstack.dev) for testing
 - `kubectl` configured to talk to your cluster
 - `helm` v3 installed
-- A Cursor team plan with Self-Hosted Cloud Agents enabled
+- A Cursor Enterprise plan with Self-Hosted Cloud Agents enabled
 - A [service account API key](https://cursor.com/docs/account/enterprise/service-accounts.md) for worker authentication
 
 If using OrbStack locally, switch to its context first:

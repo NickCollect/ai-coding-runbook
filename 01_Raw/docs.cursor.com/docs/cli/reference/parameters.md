@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/reference/parameters
-fetched_at: 2026-05-05T19:55:37.353388+00:00
+fetched_at: 2026-05-11T04:55:36.225413+00:00
 fetch_method: mintlify_md
 ---
 
@@ -30,6 +30,7 @@ Global options can be used with any command:
 | `--approve-mcps`           | Automatically approve all MCP servers                                                                                           |
 | `--trust`                  | Trust the workspace without prompting (headless mode only)                                                                      |
 | `--workspace <path>`       | Workspace directory to use                                                                                                      |
+| `--plugin-dir <path>`      | Load a local plugin directory (can be specified multiple times)                                                                 |
 | `--worktree`               | Run in a new Git worktree under `~/.cursor/worktrees` (see [CLI worktrees](https://cursor.com/docs/cli/using.md#cli-worktrees)) |
 | `-h, --help`               | Display help for command                                                                                                        |
 

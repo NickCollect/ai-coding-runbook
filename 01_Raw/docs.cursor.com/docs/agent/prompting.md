@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/prompting
-fetched_at: 2026-05-05T19:55:36.309508+00:00
+fetched_at: 2026-05-11T04:55:35.979548+00:00
 fetch_method: mintlify_md
 ---
 
@@ -33,6 +33,23 @@ This is useful for implementing design mockups, debugging visual issues, and ref
 ## Voice input
 
 Click the microphone icon in the chat input to dictate your prompt instead of typing. Speak naturally, include technical details like file and function names, and review the transcription before sending.
+
+## Context usage
+
+Every chat shares a fixed context window with the model. As you add files, run tools, and exchange messages, those tokens fill up. When the window gets close to full, Cursor compresses older parts of the conversation into a summary to leave more room for new conversation.
+
+The context ring next to your prompt input shows how full the window is at a glance. Click the ring to open the breakdown tray, which shows the total tokens used split by category:
+
+- **System prompt**: Cursor's built-in instructions for the model
+- **Tools**: definitions of every tool available to the agent
+- **Rules**: project and user rules included in the prompt
+- **Skills**: skill descriptions injected into the system context
+- **MCP**: instructions and catalog from connected MCP servers
+- **Subagents**: documentation for subagent types the agent can launch
+- **Summarized conversation**: compressed summaries of earlier turns
+- **Conversation**: your messages, the agent's replies, and tool results
+
+Hover a segment in the bar or a row in the list to highlight that category.
 
 ## Changing models
 
