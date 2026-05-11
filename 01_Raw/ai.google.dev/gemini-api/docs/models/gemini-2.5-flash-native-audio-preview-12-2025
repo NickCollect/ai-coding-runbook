@@ -1,50 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=ar
-fetched_at: 2026-05-05T20:48:16.666661+00:00
-title: "\u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u062d\u0635\u0631\u064a\u0629 \u0645\u0646 Gemini 2.5 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=zh-CN
+fetched_at: 2026-05-11T05:07:25.343819+00:00
+title: "Gemini 2.5 Flash \u5b9e\u65f6\u9884\u89c8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-إرسال ملاحظات
+发送反馈
 
-# النسخة الحصرية من Gemini 2.5 Flash
+# Gemini 2.5 Flash 实时预览
 
-تتيح Live API التفاعلات الصوتية والمرئية في الوقت الفعلي مع Gemini 2.5 Flash، مع تأخير منخفض. تعالج هذه الواجهة تدفقات مستمرة من الصوت أو الفيديو أو النص لتقديم ردود منطوقة فورية تشبه الردود البشرية، ما يمنح المستخدمين التجربة الحوارية الطبيعية.
+借助 Live API，您可以与 Gemini 2.5 Flash 进行低延迟、实时的语音和视频互动。它能够处理连续的音频、视频或文本流，以提供即时、自然逼真的语音回答，从而为您的用户创造自然的对话式体验。
 
-[تجربة في Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-native-audio-preview-12-2025&hl=ar)
+[在 Google AI Studio 中试用](https://aistudio.google.com?model=gemini-2.5-flash-native-audio-preview-12-2025&hl=zh-cn)
 
-## الوثائق
+## 文档
 
-يُرجى الانتقال إلى دليل [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar) للاطّلاع على تغطية كاملة
-للميزات والإمكانات.
+如需全面了解功能和能力，请参阅 [Live API](https://ai.google.dev/gemini-api/docs/live?hl=zh-cn) 指南。
 
 ## gemini-2.5-flash-native-audio-preview-12-2025
 
-| الموقع | الوصف |
+| 属性 | 说明 |
 | --- | --- |
-| id\_cardرمز النموذج | `gemini-2.5-flash-native-audio-preview-12-2025` |
-| saveأنواع البيانات المتوافقة | **المدخلات**  الصوت والفيديو والنص  **الناتج**  الصوت والنص |
-| token\_autoالحدود القصوى للرموز المميزة[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحد الأقصى لرموز الإدخال المميزة**  131,072  **الحد الأقصى لرموز الإخراج المميزة**  8,192 |
-| handymanالإمكانات | **إنشاء الصوت**  متاح  **Batch API**  غير متاح  **التخزين المؤقت**  غير متاح  **تنفيذ الرموز البرمجية**  غير متاح  **البحث عن الملفات**  غير متاح  **استدعاء الوظائف**  متاح  **استخدام "خرائط Google" كمصدر**  غير متاح  **إنشاء الصور**  غير متاح  **Live API**  متاح  **لتحديد المصادر في "بحث Google"**  متاح  **مُخرجات منظَّمة**  غير متاح  **طريقة التفكير**  متاح  **سياق عنوان URL**  غير متاح |
-| 123الإصدارات | يُرجى قراءة [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions) لمزيد من التفاصيل.  - معاينة: `gemini-2.5-flash-native-audio-preview-12-2025` |
-| calendar\_monthآخر تعديل | سبتمبر 2025 |
-| cognition\_2تاريخ آخر تحديث للبيانات | يناير 2025 |
+| id\_card 模型代码 | `gemini-2.5-flash-native-audio-preview-12-2025` |
+| 保存支持的数据类型 | **输入源**  音频、视频、文字  **输出**  音频和文字 |
+| token\_auto令牌限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入 token 限制**  131,072  **输出 token 限制**  8192 |
+| handyman功能 | **音频生成**  支持  **批量 API**  不受支持  **缓存**  不受支持  **代码执行**  不受支持  **文件搜索**  不支持  **函数调用**  支持  **依托 Google 地图进行接地**  不受支持  **图片生成**  不受支持  **Live API**  支持  **搜索接地**  支持  **结构化输出**  不受支持  **思考型**  支持  **网址上下文**  不受支持 |
+| 123 版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 预览：`gemini-2.5-flash-native-audio-preview-12-2025` |
+| calendar\_month最新更新 | 2025 年 9 月 |
+| cognition\_2知识截点 | 2025 年 1 月 |
 
-إرسال ملاحظات
+发送反馈
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
+最后更新时间 (UTC)：2026-04-29。
 
-هل تريد مشاركة ملاحظاتك معنا؟
+需要向我们提供更多信息？
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]

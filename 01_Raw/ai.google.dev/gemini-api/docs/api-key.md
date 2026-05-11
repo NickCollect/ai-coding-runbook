@@ -1,131 +1,131 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-key?hl=he
-fetched_at: 2026-05-05T20:50:32.168132+00:00
-title: "\u05e9\u05d9\u05de\u05d5\u05e9 \u05d1\u05de\u05e4\u05ea\u05d7\u05d5\u05ea API \u05e9\u05dc Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-key?hl=fr
+fetched_at: 2026-05-11T05:05:36.544023+00:00
+title: "Utiliser des cl\u00e9s API Gemini \u00a0|\u00a0 Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-שליחת משוב
+Envoyer des commentaires
 
-# שימוש במפתחות API של Gemini
+# Utiliser des clés API Gemini
 
-כדי להשתמש ב-Gemini API, אתם צריכים מפתח API. בדף הזה מוסבר איך ליצור ולנהל את המפתחות ב-Google AI Studio, ואיך להגדיר את הסביבה כדי להשתמש בהם בקוד.
+Pour utiliser l'API Gemini, vous avez besoin d'une clé API. Cette page explique comment créer et gérer vos clés dans Google AI Studio, et comment configurer votre environnement pour les utiliser dans votre code.
 
-[איך יוצרים מפתח Gemini API או צופים בו](https://aistudio.google.com/app/apikey?hl=he)
+[Créer ou afficher une clé API Gemini](https://aistudio.google.com/app/apikey?hl=fr)
 
-## מפתחות API
+## Clés API
 
-אתם יכולים ליצור ולנהל את כל מפתחות Gemini API מתוך הדף **מפתחות API** ב-[Google AI Studio](https://aistudio.google.com/app/apikey?hl=he).
+Vous pouvez créer et gérer toutes vos clés API Gemini sur la page [Clés API](https://aistudio.google.com/app/apikey?hl=fr) de **Google AI Studio**.
 
-אחרי שיש לכם מפתח API, יש לכם את האפשרויות הבאות להתחבר ל-Gemini API:
+Une fois que vous disposez d'une clé API, vous avez les options suivantes pour vous connecter à l'API Gemini :
 
-- [הגדרת מפתח ה-API כמשתנה סביבה](#set-api-env-var)
-- [העברת מפתח ה-API באופן מפורש](#provide-api-key-explicitly)
+- [Définir votre clé API comme variable d'environnement](#set-api-env-var)
+- [Fournir explicitement votre clé API](#provide-api-key-explicitly)
 
-לצורך בדיקה ראשונית, אפשר להגדיר מפתח API בהארדקוד, אבל זה צריך להיות זמני כי זה לא מאובטח. דוגמאות לקידוד קשיח של מפתח ה-API מופיעות בקטע [הוספה מפורשת של מפתח API](#provide-api-key-explicitly).
+Pour les tests initiaux, vous pouvez coder en dur une clé API, mais cela ne doit être que temporaire, car ce n'est pas sécurisé. Vous trouverez des exemples d'intégration en dur de la clé API dans la section [Fournir explicitement la clé API](#provide-api-key-explicitly).
 
-## פרויקטים ב-Google Cloud
+## Projets Google Cloud
 
-[פרויקטים ב-Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=he) הם הבסיס לשימוש בשירותי Google Cloud (כמו Gemini API), לניהול החיוב ולשליטה בשותפי עריכה ובהרשאות. ‫Google AI Studio מספק ממשק קל משקל לפרויקטים שלכם ב-Google Cloud.
+Les [projets Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=fr) sont essentiels pour utiliser les services Google Cloud (tels que l'API Gemini), gérer la facturation et contrôler les collaborateurs et les autorisations. Google AI Studio fournit une interface légère pour vos projets Google Cloud.
 
-אם עדיין לא יצרתם פרויקטים, אתם צריכים ליצור פרויקט חדש או לייבא פרויקט מ-Google Cloud אל Google AI Studio. בדף **Projects** ב-Google AI Studio יוצגו כל המפתחות שיש להם הרשאה מספקת להשתמש ב-Gemini API. הוראות מפורטות זמינות בקטע [ייבוא פרויקטים](#import-projects).
+Si vous n'avez pas encore créé de projets, vous devez en créer un ou en importer un depuis Google Cloud dans Google AI Studio. La page **Projets** de Google AI Studio affiche toutes les clés disposant des autorisations suffisantes pour utiliser l'API Gemini. Pour obtenir des instructions, consultez la section [Importer des projets](#import-projects).
 
-### פרויקט ברירת מחדל
+### Projet par défaut
 
-למשתמשים חדשים, אחרי אישור התנאים וההגבלות, Google AI Studio יוצר פרויקט ברירת מחדל ב-Google Cloud ומפתח API, כדי להקל על השימוש. כדי לשנות את השם של הפרויקט ב-Google AI Studio, עוברים לתצוגה **Projects** ב**מרכז הבקרה**, לוחצים על סמל ההגדרות (3 נקודות) לצד הפרויקט ובוחרים באפשרות **Rename project** (שינוי שם הפרויקט). למשתמשים קיימים או למשתמשים שכבר יש להם חשבונות Google Cloud לא נוצר פרויקט ברירת מחדל.
+Pour les nouveaux utilisateurs, Google AI Studio crée un projet Google Cloud et une clé API par défaut après l'acceptation des conditions d'utilisation, pour faciliter l'utilisation. Vous pouvez renommer ce projet dans Google AI Studio en accédant à la vue **Projets** du **tableau de bord**, en cliquant sur le bouton des paramètres à trois points à côté d'un projet et en sélectionnant **Renommer le projet**. Aucun projet par défaut ne sera créé pour les utilisateurs existants ou ceux qui possèdent déjà des comptes Google Cloud.
 
-## ייבוא פרויקטים
+## Importer des projets
 
-כל מפתח Gemini API משויך לפרויקט בענן של Google. כברירת מחדל, לא כל הפרויקטים שלכם ב-Cloud מוצגים ב-Google AI Studio. כדי לייבא פרויקטים, צריך לחפש את השם או את מזהה הפרויקט בתיבת הדו-שיח **ייבוא פרויקטים**. כדי לראות רשימה מלאה של הפרויקטים שיש לכם גישה אליהם, נכנסים ל-Cloud Console.
+Chaque clé API Gemini est associée à un projet Google Cloud. Par défaut, Google AI Studio n'affiche pas tous vos projets Cloud. Vous devez importer les projets souhaités en recherchant leur nom ou leur ID dans la boîte de dialogue **Importer des projets**. Pour afficher la liste complète des projets auxquels vous avez accès, consultez la console Cloud.
 
-אם עדיין לא ייבאתם פרויקטים, פועלים לפי השלבים הבאים כדי לייבא פרויקט של Google Cloud וליצור מפתח:
+Si vous n'avez pas encore importé de projets, suivez ces étapes pour importer un projet Google Cloud et créer une clé :
 
-1. עוברים אל [Google AI Studio](https://aistudio.google.com?hl=he).
-2. פותחים את **מרכז הבקרה** מהחלונית הימנית.
-3. לוחצים על **פרויקטים**.
-4. בדף **Projects** (פרויקטים), לוחצים על הלחצן **Import projects** (ייבוא פרויקטים).
-5. מחפשים את פרויקט הענן ב-Google Cloud שרוצים לייבא, בוחרים אותו ולוחצים על הלחצן **ייבוא**.
+1. Accédez à [Google AI Studio](https://aistudio.google.com?hl=fr).
+2. Ouvrez le **tableau de bord** dans le panneau latéral de gauche.
+3. Sélectionnez **Projets**.
+4. Sélectionnez le bouton **Importer des projets** sur la page **Projets**.
+5. Recherchez et sélectionnez le projet Google Cloud que vous souhaitez importer, puis cliquez sur le bouton **Importer**.
 
-אחרי שמייבאים פרויקט, עוברים לדף **API Keys** בתפריט **Dashboard** ויוצרים מפתח API בפרויקט שזה עתה ייבאתם.
+Une fois le projet importé, accédez à la page **Clés API** depuis le menu **Tableau de bord** et créez une clé API dans le projet que vous venez d'importer.
 
-## מגבלות
+## Limites
 
-אלה המגבלות על ניהול מפתחות API ופרויקטים ב-Google Cloud ב-Google AI Studio.
+Voici les limites liées à la gestion des clés API et des projets Google Cloud dans Google AI Studio.
 
-- אפשר ליצור עד 10 פרויקטים בכל פעם בדף **Projects** ב-Google AI Studio.
-- אתם יכולים לתת שמות לפרויקטים ולמפתחות ולשנות את השמות שלהם.
-- בדפים **API keys** ו-**Projects** מוצגים עד 100 מפתחות ו-50 פרויקטים.
-- מוצגים רק מפתחות API ללא הגבלות, או מפתחות API עם הגבלות על Generative Language API.
+- Vous pouvez créer jusqu'à 10 projets à la fois sur la page **Projets** de Google AI Studio.
+- Vous pouvez nommer et renommer des projets et des clés.
+- Les pages **Clés API** et **Projets** affichent un maximum de 100 clés et 50 projets.
+- Seules les clés API sans restriction ou limitées à l'API Generative Language s'affichent.
 
-כדי לקבל גישה נוספת לניהול הפרויקטים, כולל שינוי מפתחות API והגבלת הגישה אליהם, אפשר להיכנס אל [דף פרטי הכניסה במסוף Google Cloud](https://console.cloud.google.com/apis/credentials?hl=he).
-ב-Cloud Console, אפשר לבחור את הפרויקט, ללחוץ על מפתח API קיים ואז להגביל אותו ל-**Generative Language API**.
+Pour bénéficier d'un accès supplémentaire à la gestion de vos projets, y compris pour modifier et restreindre les clés API, accédez à la [page des identifiants de la console Google Cloud](https://console.cloud.google.com/apis/credentials?hl=fr).
+Dans la console Cloud, vous pouvez sélectionner votre projet, cliquer sur une clé API existante, puis la limiter à l'**API Generative Language**.
 
-## הגדרת מפתח ה-API כמשתנה סביבה
+## Définir la clé API comme variable d'environnement
 
-אם מגדירים את משתנה הסביבה `GEMINI_API_KEY` או `GOOGLE_API_KEY`, מפתח ה-API יזוהה באופן אוטומטי על ידי הלקוח כשמשתמשים באחת מ[ספריות Gemini API](https://ai.google.dev/gemini-api/docs/libraries?hl=he). מומלץ להגדיר רק אחד מהמשתנים האלה, אבל אם מגדירים את שניהם, `GOOGLE_API_KEY` מקבל עדיפות.
+Si vous définissez la variable d'environnement `GEMINI_API_KEY` ou `GOOGLE_API_KEY`, la clé API sera automatiquement récupérée par le client lors de l'utilisation de l'une des [bibliothèques de l'API Gemini](https://ai.google.dev/gemini-api/docs/libraries?hl=fr). Il est recommandé de ne définir qu'une seule de ces variables, mais si les deux sont définies, `GOOGLE_API_KEY` est prioritaire.
 
-אם אתם משתמשים ב-API בארכיטקטורת REST או ב-JavaScript בדפדפן, תצטרכו לציין את מפתח ה-API באופן מפורש.
+Si vous utilisez l'API REST ou JavaScript sur le navigateur, vous devrez fournir la clé API de manière explicite.
 
-כך מגדירים את מפתח ה-API באופן מקומי כמשתנה הסביבה `GEMINI_API_KEY` במערכות הפעלה שונות.
+Voici comment définir votre clé API localement en tant que variable d'environnement `GEMINI_API_KEY` avec différents systèmes d'exploitation.
 
-### ‫Linux/macOS – Bash
+### Linux/macOS : Bash
 
-‫Bash היא הגדרה נפוצה של טרמינל ב-Linux וב-macOS. כדי לבדוק אם יש לכם קובץ תצורה בשבילו, מריצים את הפקודה הבאה:
+Bash est une configuration de terminal Linux et macOS courante. Pour vérifier si vous disposez d'un fichier de configuration, exécutez la commande suivante :
 
 ```
 ~/.bashrc
 ```
 
-אם התשובה היא "No such file or directory" (אין קובץ או ספרייה כאלה), צריך ליצור את הקובץ הזה ולפתוח אותו באמצעות הפעלת הפקודות הבאות, או להשתמש ב-`zsh`:
+Si la réponse est "No such file or directory" (Aucun fichier ni répertoire de ce type), vous devrez créer ce fichier et l'ouvrir en exécutant les commandes suivantes, ou utiliser `zsh` :
 
 ```
 touch ~/.bashrc
 open ~/.bashrc
 ```
 
-בשלב הבא צריך להגדיר את מפתח ה-API על ידי הוספת פקודת הייצוא הבאה:
+Ensuite, vous devez définir votre clé API en ajoutant la commande d'exportation suivante :
 
 ```
 export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
 ```
 
-אחרי ששומרים את הקובץ, מריצים את הפקודה הבאה כדי להחיל את השינויים:
+Après avoir enregistré le fichier, appliquez les modifications en exécutant la commande suivante :
 
 ```
 source ~/.bashrc
 ```
 
-### ‫macOS –‏ Zsh
+### macOS – Zsh
 
-‫Zsh היא הגדרה נפוצה של טרמינל ב-Linux וב-macOS. כדי לבדוק אם יש לכם קובץ תצורה בשבילו, מריצים את הפקודה הבאה:
+Zsh est une configuration de terminal Linux et macOS courante. Pour vérifier si vous disposez d'un fichier de configuration, exécutez la commande suivante :
 
 ```
 ~/.zshrc
 ```
 
-אם התשובה היא "No such file or directory" (אין קובץ או ספרייה כאלה), צריך ליצור את הקובץ הזה ולפתוח אותו באמצעות הפעלת הפקודות הבאות, או להשתמש ב-`bash`:
+Si la réponse est "No such file or directory" (Aucun fichier ni répertoire de ce type), vous devrez créer ce fichier et l'ouvrir en exécutant les commandes suivantes, ou utiliser `bash` :
 
 ```
 touch ~/.zshrc
 open ~/.zshrc
 ```
 
-בשלב הבא צריך להגדיר את מפתח ה-API על ידי הוספת פקודת הייצוא הבאה:
+Ensuite, vous devez définir votre clé API en ajoutant la commande d'exportation suivante :
 
 ```
 export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
 ```
 
-אחרי ששומרים את הקובץ, מריצים את הפקודה הבאה כדי להחיל את השינויים:
+Après avoir enregistré le fichier, appliquez les modifications en exécutant la commande suivante :
 
 ```
 source ~/.zshrc
@@ -133,24 +133,23 @@ source ~/.zshrc
 
 ### Windows
 
-1. בסרגל החיפוש, מחפשים את האפשרות Environment Variables (משתני סביבה).
-2. בוחרים באפשרות לשינוי **הגדרות המערכת**. יכול להיות שתתבקשו לאשר שאתם רוצים לבצע את הפעולה הזו.
-3. בתיבת הדו-שיח של הגדרות המערכת, לוחצים על הלחצן **Environment
-   Variables** (משתני סביבה).
-4. בקטע **User variables** (משתני משתמש, עבור המשתמש הנוכחי) או **System variables** (משתני מערכת, חל על כל המשתמשים במחשב), לוחצים על **New...** (חדש...).
-5. מציינים את שם המשתנה כ-`GEMINI_API_KEY`. מציינים את מפתח ה-API של Gemini כערך המשתנה.
-6. לוחצים על **אישור** כדי להחיל את השינויים.
-7. פותחים סשן טרמינל חדש (cmd או Powershell) כדי לקבל את המשתנה החדש.
+1. Recherchez "Variables d'environnement" dans la barre de recherche.
+2. Choisissez de modifier les **paramètres système**. Vous devrez peut-être confirmer que vous souhaitez effectuer cette action.
+3. Dans la boîte de dialogue des paramètres système, cliquez sur le bouton **Variables d'environnement**.
+4. Sous **Variables utilisateur** (pour l'utilisateur actuel) ou **Variables système** (s'applique à tous les utilisateurs de la machine), cliquez sur **Nouveau…**.
+5. Spécifiez le nom de la variable sous la forme `GEMINI_API_KEY`. Spécifiez votre clé API Gemini comme valeur de la variable.
+6. Cliquez sur **OK** pour appliquer les modifications.
+7. Ouvrez une nouvelle session de terminal (cmd ou PowerShell) pour obtenir la nouvelle variable.
 
-## ציון מפתח ה-API באופן מפורש
+## Fournir explicitement la clé API
 
-במקרים מסוימים, כדאי לספק מפתח API באופן מפורש. לדוגמה:
+Dans certains cas, vous pouvez fournir explicitement une clé API. Exemple :
 
-- אתם מבצעים קריאה פשוטה ל-API ומעדיפים להגדיר את מפתח ה-API בתוך הקוד.
-- אתם רוצים שליטה מפורשת בלי להסתמך על גילוי אוטומטי של משתני סביבה על ידי ספריות Gemini API
-- אתם משתמשים בסביבה שבה משתני סביבה לא נתמכים (למשל, באינטרנט) או שאתם מבצעים קריאות REST.
+- Vous effectuez un appel d'API simple et préférez coder en dur la clé API.
+- Vous souhaitez un contrôle explicite sans avoir à vous fier à la découverte automatique des variables d'environnement par les bibliothèques de l'API Gemini.
+- Vous utilisez un environnement dans lequel les variables d'environnement ne sont pas prises en charge (par exemple, le Web) ou vous effectuez des appels REST.
 
-בהמשך מפורטות דוגמאות לאופן שבו אפשר לספק מפתח API באופן מפורש:
+Vous trouverez ci-dessous des exemples de la façon dont vous pouvez fournir une clé API de manière explicite :
 
 ### Python
 
@@ -261,49 +260,79 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
   }'
 ```
 
-## שמירה על אבטחת מפתח ה-API
+## Sécuriser votre clé API
 
-התייחס למפתח ה-API של Gemini כמו לסיסמה. אם המפתח ייפרץ, אנשים אחרים יוכלו להשתמש במכסת הפרויקט, לחייב אתכם (אם החיוב מופעל) ולגשת לנתונים הפרטיים שלכם, כמו קבצים.
+Traitez votre clé API Gemini comme un mot de passe. S'il est compromis, d'autres utilisateurs peuvent utiliser le quota de votre projet, générer des frais (si la facturation est activée) et accéder à vos données privées, comme vos fichiers.
 
-### כללי אבטחה קריטיים
+### Règles de sécurité critiques
 
-- **שמירה על סודיות המפתחות**: מפתחות API של Gemini עשויים לגשת למידע אישי רגיש שהאפליקציה שלכם מסתמכת עליו.
+- **Gardez vos clés confidentielles** : les clés API pour Gemini peuvent accéder à des données sensibles dont votre application dépend.
 
-  - **לעולם אל תבצעו קומיט של מפתחות API למערכת לניהול גרסאות.** אל תכניסו את מפתח ה-API למערכות בקרת גרסאות כמו Git.
-  - **לעולם אל תחשפו מפתחות API בצד הלקוח.** לא להשתמש במפתח ה-API ישירות באפליקציות לאינטרנט או לנייד בסביבת ייצור. אפשר לחלץ מפתחות מקוד בצד הלקוח (כולל ספריות JavaScript/TypeScript וקריאות ל-REST).
-- **הגבלת הגישה**: כדאי להגביל את השימוש במפתח API לכתובות IP ספציפיות, לגורמים מפנים מסוג HTTP או לאפליקציות ספציפיות ל-Android או ל-iOS, אם אפשר.
-- **הגבלת השימוש**: מפעילים רק את ממשקי ה-API הנדרשים לכל מפתח.
-- **ביצוע בדיקות שוטפות**: חשוב לבדוק את מפתחות ה-API באופן קבוע ולבצע רוטציה שלהם מדי פעם.
+  - **N'effectuez jamais de commit de clés API vers le contrôle de source.** Ne vérifiez pas votre clé API dans les systèmes de contrôle des versions tels que Git.
+  - **N'exposez jamais les clés API côté client.** N'utilisez pas votre clé API directement dans les applications Web ou mobiles en production. Les clés dans le code côté client (y compris nos bibliothèques JavaScript/TypeScript et les appels REST) peuvent être extraites.
+- **Restreignez l'accès** : si possible, limitez l'utilisation des clés API à des adresses IP, des URL de provenance HTTP ou des applications Android/iOS spécifiques.
+- **Restreignez l'utilisation** : n'activez que les API nécessaires pour chaque clé.
+- **Effectuez des audits réguliers** : auditez régulièrement vos clés API et faites-les tourner périodiquement.
 
-### שיטות מומלצות
+### Bonnes pratiques
 
-- **שימוש בקריאות בצד השרת עם מפתחות API** הדרך הכי מאובטחת להשתמש במפתח API היא לשלוח קריאה ל-Gemini API מאפליקציה בצד השרת, שבה אפשר לשמור את המפתח בסודיות.
-- **שימוש בטוקנים זמניים לגישה בצד הלקוח (Live API בלבד):** כדי לקבל גישה ישירה ל-Live API בצד הלקוח, אפשר להשתמש בטוקנים זמניים. הן מגיעות עם סיכוני אבטחה נמוכים יותר ויכולות להתאים לשימוש בסביבת הייצור. מידע נוסף זמין במדריך בנושא [טוקנים זמניים](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=he).
-- **כדאי להוסיף הגבלות למפתח:** אפשר להגביל את ההרשאות של מפתח על ידי הוספה של [הגבלות על מפתחות API](https://cloud.google.com/api-keys/docs/add-restrictions-api-keys?hl=he#add-api-restrictions).
-  כך מצמצמים את הנזק הפוטנציאלי אם המפתח ידלוף.
+- **Utiliser des appels côté serveur avec des clés API** : la méthode la plus sécurisée pour utiliser votre clé API consiste à appeler l'API Gemini à partir d'une application côté serveur où la clé peut rester confidentielle.
+- **Utilisez des jetons éphémères pour l'accès côté client (API Live uniquement)** : pour un accès direct côté client à l'API Live, vous pouvez utiliser des jetons éphémères. Ils présentent moins de risques de sécurité et peuvent être utilisés en production. Pour en savoir plus, consultez le guide sur les [jetons éphémères](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=fr).
+- **Envisagez d'ajouter des restrictions à votre clé** : vous pouvez limiter les autorisations d'une clé en ajoutant des [restrictions de clé API](https://cloud.google.com/api-keys/docs/add-restrictions-api-keys?hl=fr#add-api-restrictions).
+  Cela permet de minimiser les dommages potentiels si la clé est divulguée.
 
-[במאמר הזה](https://support.google.com/googleapi/answer/6310037?hl=he) מפורטות שיטות מומלצות כלליות נוספות.
+Pour obtenir des bonnes pratiques générales, vous pouvez également consulter [cet article d'aide](https://support.google.com/googleapi/answer/6310037?hl=fr).
 
-## פתרון בעיות ביצירת מפתח API
+## Sécuriser les clés API sans restriction
 
-ב-Google AI Studio, יכול להיות שהלחצן **Create API key** לא יהיה זמין, ותופיע ההודעה: *You do not have permission to create a key in this project* (אין לך הרשאה ליצור מפתח בפרויקט הזה).
+Les clés API sans restriction sont vulnérables aux acteurs malveillants et aux utilisations non autorisées. À partir du 19 juin 2026, pour améliorer la sécurité, l'API Gemini ne sera plus compatible avec les clés de trafic non restreint.
 
-השגיאה הזו מתרחשת כשאין לכם את ההרשאות הנדרשות בפרויקט כדי ליצור מפתח חדש:
+**Cela signifie que vos requêtes API Gemini échoueront si vous ne prenez pas de mesures.**
 
-- ‫**`resourcemanager.projects.get`**: מאפשר ל-AI Studio לאמת את קיום הפרויקט.
-- ‫**`apikeys.keys.create`**: מאפשר ליצור את מפתח ה-API עצמו.
-- ‫**`serviceusage.services.enable`**: נדרש כדי לוודא ש-Gemini API פעיל בפרויקט.
+Pour continuer à utiliser l'API Gemini sans interruption, sécurisez vos clés de trafic en ajoutant des restrictions dans [AI Studio](https://aistudio.google.com/api-keys?hl=fr).
 
-כדי לתקן את ההרשאות, צריך לבקש מאדמין הפרויקט או מהאדמין של הארגון (אם הפרויקט שייך ל[ארגון](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=he)) להקצות לכם תפקיד עם ההרשאות שצוינו למעלה (כמו עריכה בפרויקט או תפקיד בהתאמה אישית).
+Sur [aistudio.google.com/api-keys](https://aistudio.google.com/api-keys?hl=fr), une bannière s'affiche pour vous informer lorsque les clés API sont sans restriction. Vous pouvez voir quelles clés sont sans restriction et l'utilisation des services au cours des 90 derniers jours.
 
-אם אין לכם הרשאת אדמין בפרויקט, אתם יכולים ליצור פרויקט חדש שלא משויך לארגון כדי ליצור את המפתחות.
+Pour les clés sans restriction, vous devez choisir l'une des options suivantes :
 
-שליחת משוב
+- Utilisez la clé uniquement pour l'API Gemini.
+- Utilisez la clé pour une API autre que Gemini.
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+### Limiter la clé à l'API Gemini uniquement
 
-עדכון אחרון: 2026-04-29 (שעון UTC).
+Si vous souhaitez limiter la clé à l'API Gemini uniquement, sécurisez-la dans [AI Studio](https://aistudio.google.com/api-keys?hl=fr) en cliquant sur le bouton **Restreindre à l'API Gemini**.
 
-רוצה לתת לנו משוב?
+### Restreindre la clé pour une utilisation autre que l'API Gemini
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]
+Si vous souhaitez restreindre la clé pour une utilisation autre que l'API Gemini :
+
+1. Accédez à la [page "Identifiants" de la console Google Cloud](https://console.cloud.google.com/apis/credentials?hl=fr).
+2. Assurez-vous que le projet est correctement sélectionné.
+3. Sélectionnez une clé API.
+4. Développez le menu déroulant **Restrictions d'API** et appliquez des restrictions de service à la clé API.
+
+Si vous souhaitez modifier des clés avec des restrictions existantes ou nouvellement ajoutées, accédez à la [console Google Cloud](https://console.cloud.google.com/apis/credentials?hl=fr).
+
+## Résoudre les problèmes de création de clés API
+
+Dans Google AI Studio, le bouton **Créer une clé API** peut sembler indisponible et le message suivant peut s'afficher : *Vous n'avez pas l'autorisation de créer une clé dans ce projet*.
+
+Cela se produit lorsque vous ne disposez pas des autorisations nécessaires dans le projet pour générer une clé :
+
+- **`resourcemanager.projects.get`** : permet à AI Studio de vérifier l'existence du projet.
+- **`apikeys.keys.create`** : permet de générer la clé API elle-même.
+- **`serviceusage.services.enable`** : obligatoire pour s'assurer que l'API Gemini est active dans le projet.
+
+Pour corriger vos autorisations, demandez à l'administrateur de votre projet ou de votre organisation (si le projet appartient à une [organisation](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=fr)) de vous attribuer un rôle disposant des autorisations listées ci-dessus (par exemple, le rôle "Éditeur de projet" ou un rôle personnalisé).
+
+Si vous n'avez pas accès à un projet en tant qu'administrateur, vous pouvez en créer un qui n'est pas associé à une organisation pour générer vos clés.
+
+Envoyer des commentaires
+
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+
+Dernière mise à jour le 2026/05/07 (UTC).
+
+Voulez-vous nous donner plus d'informations ?
+
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/05/07 (UTC)."],[],[]]

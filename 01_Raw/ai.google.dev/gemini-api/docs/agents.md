@@ -1,64 +1,82 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agents?hl=pt-BR
-fetched_at: 2026-05-05T20:42:53.582176+00:00
-title: "Vis\u00e3o geral dos agentes \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agents?hl=it
+fetched_at: 2026-05-11T05:02:59.138755+00:00
+title: "Panoramica degli agenti \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Envie comentários
+Invia feedback
 
-# Visão geral dos agentes
+# Panoramica degli agenti
 
-Os agentes são sistemas que usam modelos do Gemini, um conjunto de ferramentas e recursos de raciocínio para realizar tarefas complexas de várias etapas e atingir metas específicas. Ao contrário de uma única chamada de modelo, um agente pode planejar, executar uma série de ações, interagir com sistemas externos e sintetizar informações para atender à solicitação de um usuário.
+Gli agenti sono sistemi che sfruttano i modelli Gemini, un insieme di strumenti e capacità di ragionamento per svolgere attività complesse in più passaggi e raggiungere obiettivi specifici. A differenza di una singola chiamata di modello, un agente può pianificare, eseguire una serie di azioni, interagire con sistemi esterni e sintetizzare le informazioni per soddisfare la richiesta di un utente.
 
-Com a API Gemini, é possível criar agentes eficientes usando recursos como:
+Con l'API Gemini, puoi creare agenti potenti utilizzando funzionalità come:
 
-- **[Modelos do Gemini](https://ai.google.dev/gemini-api/docs/models?hl=pt-br)**:a inteligência principal, que oferece raciocínio e compreensão de linguagem.
-- **[Ferramentas](https://ai.google.dev/gemini-api/docs/tools?hl=pt-br)**:recursos que conectam o modelo a informações e ações do mundo real. Elas podem ser ferramentas integradas (como a Pesquisa Google, o Maps e a execução de código) ou personalizadas.
-- **[Chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br)**:o mecanismo para definir e conectar suas próprias ferramentas e APIs personalizadas ao modelo do Gemini.
-- **[Raciocínio](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br)**:recursos que melhoram a capacidade do modelo de raciocinar e planejar tarefas complexas.
-- **[Contexto longo](https://ai.google.dev/gemini-api/docs/long-context?hl=pt-br)**:permite que os agentes mantenham o estado e as informações em interações mais longas.
+- **[Modelli Gemini](https://ai.google.dev/gemini-api/docs/models?hl=it):** l'intelligenza di base,
+  che fornisce ragionamento e comprensione del linguaggio.
+- **[Strumenti](https://ai.google.dev/gemini-api/docs/tools?hl=it):** funzionalità che collegano il modello a
+  informazioni e azioni del mondo reale. Questi possono essere strumenti integrati (come la Ricerca Google, Maps, Esecuzione di codice) o strumenti personalizzati.
+- **[Chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it):** il meccanismo per
+  definire e connettere le tue API e i tuoi strumenti personalizzati al modello Gemini.
+- **[Ragionamento](https://ai.google.dev/gemini-api/docs/thinking?hl=it):** funzionalità che migliorano la capacità del modello di ragionare e pianificare attività complesse.
+- **[Contesto lungo](https://ai.google.dev/gemini-api/docs/long-context?hl=it):** consente agli agenti di
+  mantenere lo stato e le informazioni durante interazioni prolungate.
 
-## Representantes disponíveis
+## Agenti disponibili
 
-- **[Deep Research Agent](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br)**:um agente autônomo que planeja, executa e sintetiza tarefas de pesquisa de várias etapas para casos de uso como análise de mercado, Deep Research e revisões de literatura.
+- **[Agente Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it):** un agente autonomo
+  che pianifica, esegue e sintetizza attività di ricerca in più fasi per
+  casi d'uso come analisi di mercato, due diligence e revisioni della letteratura.
 
-## Como criar agentes
+## Creare agenti
 
-Os agentes usam modelos e ferramentas para concluir tarefas de várias etapas. Embora o Gemini ofereça os recursos de raciocínio (o "cérebro") e as ferramentas essenciais (as "mãos"), muitas vezes você precisa de uma estrutura de orquestração para gerenciar a memória do agente, planejar loops e realizar encadeamento de ferramentas complexo.
+Gli agenti utilizzano modelli e strumenti per completare attività in più passaggi. Sebbene Gemini fornisca
+le funzionalità di ragionamento (il "cervello") e gli strumenti essenziali (le "mani"),
+spesso è necessario un framework di orchestrazione per gestire la memoria dell'agente, pianificare
+i loop ed eseguire un concatenamento complesso di strumenti.
 
-Para maximizar a confiabilidade em fluxos de trabalho de várias etapas, crie instruções que controlem explicitamente como o modelo raciocina e planeja. Embora o Gemini ofereça um raciocínio geral forte, agentes complexos se beneficiam de comandos que impõem comportamentos específicos, como persistência diante de problemas, avaliação de riscos e planejamento proativo.
+Per massimizzare l'affidabilità nei flussi di lavoro in più passaggi, devi creare istruzioni
+che controllino esplicitamente il modo in cui il modello ragiona e pianifica. Anche se Gemini fornisce
+un ragionamento generale solido, gli agenti complessi traggono vantaggio da prompt che impongono
+comportamenti specifici come la persistenza di fronte ai problemi, la valutazione del rischio e
+la pianificazione proattiva.
 
-Consulte os [fluxos de trabalho
-de agente](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=pt-br#agentic-workflows) para
-estratégias de design desses comandos. Confira um exemplo de uma [instrução do sistema](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=pt-br#agentic-si-template) que melhorou a performance em vários comparativos de agentes em cerca de 5%.
+Consulta i [flussi di lavoro
+agentici](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=it#agentic-workflows) per
+strategie sulla progettazione di questi prompt. Ecco un esempio di [istruzione
+di sistema](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=it#agentic-si-template) che ha
+migliorato le prestazioni in diversi benchmark agentici di circa il 5%.
 
-## Frameworks de agentes
+## Framework degli agenti
 
-O Gemini se integra aos principais frameworks de agentes de código aberto, como:
+Gemini si integra con i principali framework di agenti open source, ad esempio:
 
-- [**LangChain / LangGraph**](https://ai.google.dev/gemini-api/docs/langgraph-example?hl=pt-br): crie fluxos de aplicativos complexos e com estado e sistemas multiagentes usando estruturas de grafo.
-- [**LlamaIndex**](https://ai.google.dev/gemini-api/docs/llama-index?hl=pt-br): conecte agentes do Gemini aos seus dados particulares para fluxos de trabalho aprimorados com RAG.
-- [**CrewAI**](https://ai.google.dev/gemini-api/docs/crewai-example?hl=pt-br): orquestre agentes de IA autônomos colaborativos e de interpretação de papéis.
-- [**SDK de IA da Vercel**](https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=pt-br): crie
-  interfaces e agentes de usuário com tecnologia de IA em JavaScript/TypeScript.
-- [**ADK do Google**](https://google.github.io/adk-docs/get-started/python/): um framework de código aberto para criar e orquestrar agentes de IA interoperáveis.
+- [**LangChain / LangGraph**](https://ai.google.dev/gemini-api/docs/langgraph-example?hl=it): crea flussi di applicazioni complessi e con stato e sistemi multi-agente utilizzando strutture grafiche.
+- [**LlamaIndex**](https://ai.google.dev/gemini-api/docs/llama-index?hl=it): collega gli agenti Gemini ai tuoi dati privati per flussi di lavoro migliorati con RAG.
+- [**CrewAI**](https://ai.google.dev/gemini-api/docs/crewai-example?hl=it): orchestra agenti AI autonomi collaborativi
+  che interpretano ruoli.
+- [**Vercel AI SDK**](https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=it): crea
+  interfacce utente e agenti basati sull'AI in JavaScript/TypeScript.
+- [**Google ADK**](https://google.github.io/adk-docs/get-started/python/): un framework
+  open source per la creazione e l'orchestrazione di agenti di IA
+  interoperabili.
 
-Envie comentários
+Invia feedback
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Última atualização 2026-04-29 UTC.
+Ultimo aggiornamento 2026-04-29 UTC.
 
-Quer enviar seu feedback?
+Vuoi dirci altro?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]

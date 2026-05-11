@@ -1,46 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=id
-fetched_at: 2026-05-05T20:40:48.583028+00:00
-title: "Pembuatan musik real-time menggunakan Lyria RealTime \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=vi
+fetched_at: 2026-05-11T05:04:20.789935+00:00
+title: "T\u1ea1o nh\u1ea1c theo th\u1eddi gian th\u1ef1c b\u1eb1ng Lyria RealTime \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Kirim masukan
+Gửi ý kiến phản hồi
 
-# Pembuatan musik real-time menggunakan Lyria RealTime
+# Tạo nhạc theo thời gian thực bằng Lyria RealTime
 
-Gemini API, menggunakan
-[Lyria RealTime](https://deepmind.google/technologies/lyria/realtime/?hl=id),
-memberikan akses ke model pembuatan musik streaming real-time canggih. API ini memungkinkan developer membuat aplikasi tempat pengguna dapat membuat, mengarahkan, dan memainkan musik instrumental secara interaktif.
+Gemini API, sử dụng [Lyria RealTime](https://deepmind.google/technologies/lyria/realtime/?hl=vi), cung cấp quyền truy cập vào một mô hình tạo nhạc trực tuyến theo thời gian thực, hiện đại. Công cụ này cho phép nhà phát triển xây dựng các ứng dụng mà người dùng có thể tương tác để tạo, điều khiển liên tục và biểu diễn nhạc cụ.
 
-Pembuatan musik Lyria RealTime menggunakan koneksi streaming dua arah yang persisten dan latensi rendah menggunakan [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
+Tính năng tạo nhạc theo thời gian thực của Lyria sử dụng một kết nối truyền phát trực tiếp hai chiều, có độ trễ thấp và liên tục bằng [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
 
-Untuk merasakan apa yang dapat dibuat menggunakan Lyria RealTime, coba di AI Studio menggunakan aplikasi [Prompt DJ](https://aistudio.google.com/apps/bundled/promptdj?hl=id) atau [MIDI DJ](https://aistudio.google.com/apps/bundled/promptdj-midi?hl=id).
+Để trải nghiệm những nội dung có thể tạo bằng Lyria RealTime, hãy dùng thử trên AI Studio bằng ứng dụng [Prompt DJ](https://aistudio.google.com/apps/bundled/promptdj?hl=vi) hoặc [MIDI DJ](https://aistudio.google.com/apps/bundled/promptdj-midi?hl=vi).
 
-## Membuat dan mengontrol musik
+## Tạo và điều khiển nhạc
 
-Lyria RealTime berfungsi mirip dengan [Live API](https://ai.google.dev/gemini-api/docs/live?hl=id)
-karena menggunakan Websocket untuk mempertahankan komunikasi real-time dengan model.
+Lyria RealTime hoạt động tương tự như [Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi) ở chỗ sử dụng Websocket để duy trì giao tiếp theo thời gian thực với mô hình.
 
-Kode berikut menunjukkan cara membuat musik:
+Đoạn mã sau đây minh hoạ cách tạo nhạc:
 
 ### Python
 
-Contoh ini menginisialisasi sesi Lyria RealTime menggunakan
-`client.aio.live.music.connect()`, lalu mengirimkan
-perintah awal dengan `session.set_weighted_prompts()` bersama dengan
-konfigurasi awal menggunakan `session.set_music_generation_config`, memulai
-pembuatan musik menggunakan `session.play()`, dan menyiapkan
-`receive_audio()` untuk memproses potongan audio yang diterimanya.
+Ví dụ này khởi tạo phiên Lyria RealTime bằng `client.aio.live.music.connect()`, sau đó gửi một lời nhắc ban đầu bằng `session.set_weighted_prompts()` cùng với cấu hình ban đầu bằng `session.set_music_generation_config`, bắt đầu tạo nhạc bằng `session.play()` và thiết lập `receive_audio()` để xử lý các đoạn âm thanh mà nó nhận được.
 
 ```
   import asyncio
@@ -83,12 +75,7 @@ pembuatan musik menggunakan `session.play()`, dan menyiapkan
 
 ### JavaScript
 
-Contoh ini menginisialisasi sesi Lyria RealTime menggunakan
-`client.live.music.connect()`, lalu mengirimkan
-perintah awal dengan `session.setWeightedPrompts()` bersama dengan
-konfigurasi awal menggunakan `session.setMusicGenerationConfig`, memulai
-pembuatan musik menggunakan `session.play()`, dan menyiapkan
-callback `onMessage` untuk memproses potongan audio yang diterimanya.
+Ví dụ này khởi tạo phiên Lyria RealTime bằng `client.live.music.connect()`, sau đó gửi một lời nhắc ban đầu bằng `session.setWeightedPrompts()` cùng với cấu hình ban đầu bằng `session.setMusicGenerationConfig`, bắt đầu tạo nhạc bằng `session.play()` và thiết lập một lệnh gọi lại `onMessage` để xử lý các đoạn âm thanh mà nó nhận được.
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -144,18 +131,17 @@ async function main() {
 main().catch(console.error);
 ```
 
-Kemudian, Anda dapat menggunakan `session.play()`, `session.pause()`, `session.stop()`, dan `session.reset_context()` untuk memulai, menjeda, menghentikan, atau mereset sesi.
+Sau đó, bạn có thể dùng `session.play()`, `session.pause()`, `session.stop()` và `session.reset_context()` để bắt đầu, tạm dừng, dừng hoặc đặt lại phiên.
 
-## Mengarahkan musik secara real-time
+## Điều hướng nhạc theo thời gian thực
 
-Anda dapat mengarahkan pembuatan musik secara real time dengan mengirimkan perintah dan memperbarui parameter pembuatan secara real time.
+Bạn có thể định hướng quá trình tạo nhạc theo thời gian thực bằng cách gửi câu lệnh và cập nhật các thông số tạo theo thời gian thực.
 
-### Perintah RealTime Lyria
+### Câu lệnh Lyria RealTime
 
-Saat streaming aktif, Anda dapat mengirim pesan `WeightedPrompt` baru kapan saja untuk mengubah musik yang dihasilkan. Model akan bertransisi dengan lancar berdasarkan input baru.
+Trong khi sự kiện phát trực tiếp đang diễn ra, bạn có thể gửi tin nhắn `WeightedPrompt` mới bất cứ lúc nào để thay đổi nhạc được tạo. Mô hình sẽ chuyển đổi mượt mà dựa trên dữ liệu đầu vào mới.
 
-Perintah harus mengikuti format yang benar dengan `text` (perintah sebenarnya), dan `weight`. `weight` dapat mengambil nilai apa pun kecuali `0`. `1.0`
-biasanya merupakan titik awal yang baik.
+Câu lệnh cần tuân theo đúng định dạng với `text` (câu lệnh thực tế) và `weight`. `weight` có thể nhận bất kỳ giá trị nào ngoại trừ `0`. `1.0`thường là một điểm xuất phát tốt.
 
 ### Python
 
@@ -182,15 +168,13 @@ biasanya merupakan titik awal yang baik.
   });
 ```
 
-Perhatikan bahwa transisi model dapat sedikit tiba-tiba saat mengubah perintah secara drastis, jadi sebaiknya terapkan semacam cross-fade dengan mengirimkan nilai bobot perantara ke model.
+Xin lưu ý rằng quá trình chuyển đổi mô hình có thể diễn ra hơi đột ngột khi bạn thay đổi lời nhắc một cách đáng kể. Vì vậy, bạn nên triển khai một số loại hiệu ứng làm mờ bằng cách gửi các giá trị trọng số trung gian đến mô hình.
 
-### Mengupdate konfigurasi
+### Cập nhật cấu hình
 
-Anda dapat mengarahkan pembuatan musik dengan memperbarui parameter pembuatan musik secara real time. Anda tidak dapat hanya memperbarui parameter, Anda harus menetapkan seluruh
-konfigurasi. Jika tidak, kolom lainnya akan direset kembali ke nilai
-defaultnya.
+Bạn có thể điều hướng quá trình tạo nhạc bằng cách cập nhật các thông số tạo nhạc theo thời gian thực. Bạn không thể chỉ cập nhật một tham số, mà cần phải đặt toàn bộ cấu hình. Nếu không, các trường khác sẽ được đặt lại về giá trị mặc định.
 
-Karena memperbarui bpm atau skala adalah perubahan drastis bagi model, Anda juga perlu memberi tahu model untuk mereset konteksnya menggunakan `reset_context()` agar memperhitungkan konfigurasi baru. Tindakan ini tidak akan menghentikan streaming, tetapi akan menjadi transisi yang sulit. Anda tidak perlu melakukannya untuk parameter lainnya.
+Vì việc cập nhật bpm hoặc tỷ lệ là một thay đổi lớn đối với mô hình, bạn cũng cần cho mô hình biết rằng mô hình cần đặt lại ngữ cảnh bằng cách sử dụng `reset_context()` để tính đến cấu hình mới. Thao tác này sẽ không dừng luồng phát, nhưng sẽ là một quá trình chuyển đổi khó khăn. Bạn không cần làm việc này cho các tham số khác.
 
 ### Python
 
@@ -220,11 +204,11 @@ Karena memperbarui bpm atau skala adalah perubahan drastis bagi model, Anda juga
   await session.reset_context();
 ```
 
-## Panduan perintah untuk Lyria RealTime
+## Hướng dẫn về câu lệnh cho Lyria RealTime
 
-Berikut adalah daftar perintah tidak lengkap yang dapat Anda gunakan untuk memicu Lyria RealTime:
+Sau đây là danh sách không đầy đủ các câu lệnh bạn có thể dùng để nhắc Lyria RealTime:
 
-- Instrumen: `303 Acid Bass, 808 Hip Hop Beat, Accordion, Alto Saxophone,
+- Nhạc cụ: `303 Acid Bass, 808 Hip Hop Beat, Accordion, Alto Saxophone,
   Bagpipes, Balalaika Ensemble, Banjo, Bass Clarinet, Bongos, Boomy Bass,
   Bouzouki, Buchla Synths, Cello, Charango, Clavichord, Conga Drums,
   Didgeridoo, Dirty Synths, Djembe, Drumline, Dulcimer, Fiddle, Flamenco
@@ -235,7 +219,7 @@ Berikut adalah daftar perintah tidak lengkap yang dapat Anda gunakan untuk memic
   Guitar, Sitar, Slide Guitar, Smooth Pianos, Spacey Synths, Steel Drum, Synth
   Pads, Tabla, TR-909 Drum Machine, Trumpet, Tuba, Vibraphone, Viola Ensemble,
   Warm Acoustic Guitar, Woodwinds, ...`
-- Genre Musik: `Acid Jazz, Afrobeat, Alternative Country, Baroque, Bengal Baul,
+- Thể loại nhạc: `Acid Jazz, Afrobeat, Alternative Country, Baroque, Bengal Baul,
   Bhangra, Bluegrass, Blues Rock, Bossa Nova, Breakbeat, Celtic Folk, Chillout,
   Chiptune, Classic Rock, Contemporary R&B, Cumbia, Deep House, Disco Funk,
   Drum & Bass, Dubstep, EDM, Electro Swing, Funk Metal, G-funk, Garage Rock,
@@ -246,122 +230,105 @@ Berikut adalah daftar perintah tidak lengkap yang dapat Anda gunakan untuk memic
   Rock, Psytrance, R&B, Reggae, Reggaeton, Renaissance Music, Salsa, Shoegaze,
   Ska, Surf Rock, Synthpop, Techno, Trance, Trap Beat, Trip Hop, Vaporwave,
   Witch house, ...`
-- Mood/Deskripsi: `Acoustic Instruments, Ambient, Bright Tones, Chill,
+- Tâm trạng/Nội dung mô tả: `Acoustic Instruments, Ambient, Bright Tones, Chill,
   Crunchy Distortion, Danceable, Dreamy, Echo, Emotional, Ethereal Ambience,
   Experimental, Fat Beats, Funky, Glitchy Effects, Huge Drop, Live Performance,
   Lo-fi, Ominous Drone, Psychedelic, Rich Orchestration, Saturated Tones,
   Subdued Melody, Sustained Chords, Swirling Phasers, Tight Groove,
   Unsettling, Upbeat, Virtuoso, Weird Noises, ...`
 
-Ini hanyalah beberapa contoh, Lyria RealTime dapat melakukan lebih banyak hal. Bereksperimenlah dengan perintah Anda sendiri.
+Đây chỉ là một số ví dụ, Lyria RealTime có thể làm được nhiều việc hơn thế. Thử nghiệm với câu lệnh của riêng bạn!
 
-## Praktik terbaik
+## Các phương pháp hay nhất
 
-- Aplikasi klien harus menerapkan buffering audio yang andal untuk memastikan pemutaran yang lancar. Hal ini membantu memperhitungkan jitter jaringan dan sedikit variasi dalam latensi pembuatan.
-- Penulisan perintah yang efektif:
-  - Berikan gambaran yang jelas. Gunakan kata sifat yang menggambarkan mood, genre, dan instrumentasi.
-  - Lakukan iterasi dan arahkan secara bertahap. Daripada mengubah perintah sepenuhnya,
-    coba tambahkan atau ubah elemen untuk mengubah musik dengan lebih lancar.
-  - Bereksperimenlah dengan bobot pada `WeightedPrompt` untuk memengaruhi seberapa kuat perintah baru memengaruhi pembuatan yang sedang berlangsung.
+- Các ứng dụng khách phải triển khai tính năng đệm âm thanh mạnh mẽ để đảm bảo quá trình phát mượt mà. Điều này giúp tính đến độ trễ mạng và những thay đổi nhỏ về độ trễ tạo.
+- Đưa ra câu lệnh hiệu quả:
+  - Hãy cung cấp thông tin mô tả. Sử dụng tính từ mô tả tâm trạng, thể loại và nhạc cụ.
+  - Lặp lại và điều chỉnh dần dần. Thay vì thay đổi hoàn toàn câu lệnh, hãy thử thêm hoặc sửa đổi các phần tử để biến đổi nhạc một cách mượt mà hơn.
+  - Thử nghiệm với trọng số trên `WeightedPrompt` để tác động đến mức độ ảnh hưởng của một câu lệnh mới đối với quá trình tạo nội dung đang diễn ra.
 
-## Detail teknis
+## Chi tiết kỹ thuật
 
-Bagian ini menjelaskan secara spesifik cara menggunakan pembuatan musik RealTime Lyria.
+Phần này mô tả cụ thể cách sử dụng tính năng tạo nhạc theo thời gian thực của Lyria.
 
-### Spesifikasi
+### Thông số kỹ thuật
 
-- Format output: Audio PCM 16-bit Mentah
-- Frekuensi sampel: 48 kHz
-- Saluran: 2 (stereo)
+- Định dạng đầu ra: Âm thanh PCM 16 bit thô
+- Tốc độ lấy mẫu: 48 kHz
+- Kênh: 2 (âm thanh nổi)
 
-### Kontrol
+### Các chế độ kiểm soát
 
-Pembuatan musik dapat dipengaruhi secara real time dengan mengirim pesan yang berisi:
+Bạn có thể ảnh hưởng đến quá trình tạo nhạc theo thời gian thực bằng cách gửi tin nhắn có chứa:
 
-- `WeightedPrompt`: String teks yang mendeskripsikan ide musik, genre, instrumen, suasana hati, atau karakteristik. Beberapa perintah dapat diberikan untuk memadukan pengaruh. Lihat [di atas](https://ai.google.dev/gemini-api/docs/:?hl=id#steer-music) untuk mengetahui detail selengkapnya tentang cara terbaik untuk memberikan perintah ke
-  Lyria RealTime.
-- `MusicGenerationConfig`: Konfigurasi untuk proses pembuatan musik, yang memengaruhi karakteristik audio output. Parameter
-  mencakup:
-  - `guidance`: (float) Rentang: `[0.0, 6.0]`. Default: `4.0`.
-    Mengontrol seberapa ketat model mengikuti perintah. Panduan yang lebih tinggi meningkatkan kepatuhan terhadap perintah, tetapi membuat transisi lebih tiba-tiba.
-  - `bpm`: (int) Rentang: `[60, 200]`.
-    Menetapkan Denyut Per Menit yang Anda inginkan untuk musik yang dihasilkan. Anda perlu menghentikan/memutar atau mereset konteks model agar memperhitungkan bpm baru.
-  - `density`: (float) Rentang: `[0.0, 1.0]`.
-    Mengontrol kepadatan not/suara musik. Nilai yang lebih rendah menghasilkan musik yang lebih jarang; nilai yang lebih tinggi menghasilkan musik yang "lebih ramai".
-  - `brightness`: (float) Rentang: `[0.0, 1.0]`.
-    Menyesuaikan kualitas tonal. Nilai yang lebih tinggi menghasilkan audio yang terdengar "lebih cerah", yang umumnya menekankan frekuensi yang lebih tinggi.
-  - `scale`: (Enum)
-    Menetapkan skala musik (Key dan Mode) untuk pembuatan. Gunakan
-    nilai enum [`Scale`](#scale-enum) yang disediakan oleh SDK. Anda perlu menghentikan/memutar atau mereset konteks model agar memperhitungkan skala baru.
-  - `mute_bass`: (bool) Default: `False`.
-    Mengontrol apakah model mengurangi bass output.
-  - `mute_drums`: (bool) Default: `False`.
-    Mengontrol apakah output model mengurangi drum output.
-  - `only_bass_and_drums`: (bool) Default: `False`.
-    Arahkan model untuk mencoba hanya menghasilkan output bass dan drum.
-  - `music_generation_mode`: (Enum)
-    Menunjukkan kepada model apakah model harus berfokus pada `QUALITY` (nilai default) atau
-    `DIVERSITY` musik. Setelan ini juga dapat disetel ke `VOCALIZATION` agar model membuat vokal sebagai instrumen lain (tambahkan sebagai perintah baru).
-- `PlaybackControl`: Perintah untuk mengontrol aspek pemutaran, seperti putar, jeda,
-  berhenti, atau reset konteks.
+- `WeightedPrompt`: Một chuỗi văn bản mô tả ý tưởng âm nhạc, thể loại, nhạc cụ, tâm trạng hoặc đặc điểm. Bạn có thể cung cấp nhiều câu lệnh để kết hợp các yếu tố ảnh hưởng. Hãy xem [phía trên](https://ai.google.dev/gemini-api/docs/:?hl=vi#steer-music) để biết thêm thông tin chi tiết về cách đưa ra câu lệnh hiệu quả nhất cho Lyria RealTime.
+- `MusicGenerationConfig`: Cấu hình cho quy trình tạo nhạc, ảnh hưởng đến các đặc điểm của âm thanh đầu ra.). Các tham số bao gồm:
+  - `guidance`: (số thực có độ chính xác đơn) Phạm vi: `[0.0, 6.0]`. Mặc định: `4.0`.
+    Kiểm soát mức độ tuân thủ câu lệnh của mô hình. Hướng dẫn chi tiết hơn sẽ giúp cải thiện mức độ tuân thủ lời nhắc, nhưng khiến các chuyển cảnh trở nên đột ngột hơn.
+  - `bpm`: (int) Phạm vi: `[60, 200]`.
+    Đặt số nhịp mỗi phút bạn muốn cho bản nhạc được tạo. Bạn cần dừng/phát hoặc đặt lại ngữ cảnh để mô hình tính đến nhịp độ mới.
+  - `density`: (số thực có độ chính xác đơn) Phạm vi: `[0.0, 1.0]`.
+    Kiểm soát mật độ của các nốt nhạc/âm thanh. Giá trị thấp tạo ra nhạc thưa thớt hơn; giá trị cao tạo ra nhạc "dồn dập" hơn.
+  - `brightness`: (số thực có độ chính xác đơn) Phạm vi: `[0.0, 1.0]`.
+    Điều chỉnh chất lượng âm sắc. Giá trị càng cao thì âm thanh càng "sáng", thường nhấn mạnh các tần số cao hơn.
+  - `scale`: (Enum) Đặt thang âm nhạc (Khoá và chế độ) cho quá trình tạo. Sử dụng [các giá trị enum `Scale`](#scale-enum) do SDK cung cấp. Bạn cần dừng/phát hoặc đặt lại ngữ cảnh để mô hình tính đến tỷ lệ mới.
+  - `mute_bass`: (bool) Mặc định: `False`.
+    Kiểm soát xem mô hình có giảm âm trầm của đầu ra hay không.
+  - `mute_drums`: (bool) Mặc định: `False`.
+    Kiểm soát xem đầu ra của mô hình có giảm âm lượng trống của đầu ra hay không.
+  - `only_bass_and_drums`: (bool) Mặc định: `False`.
+    Điều chỉnh mô hình để chỉ xuất ra âm trầm và trống.
+  - `music_generation_mode`: (Enum) Cho biết mô hình có nên tập trung vào `QUALITY` (giá trị mặc định) hay `DIVERSITY` của nhạc hay không. Bạn cũng có thể đặt thành `VOCALIZATION` để cho phép mô hình tạo ra các âm thanh như một nhạc cụ khác (thêm các âm thanh đó dưới dạng câu lệnh mới).
+- `PlaybackControl`: Các lệnh điều khiển các khía cạnh phát, chẳng hạn như phát, tạm dừng, dừng hoặc đặt lại ngữ cảnh.
 
-Untuk `bpm`, `density`, `brightness`, dan `scale`, jika tidak ada nilai yang diberikan, model akan memutuskan apa yang terbaik sesuai dengan perintah awal Anda.
+Đối với `bpm`, `density`, `brightness` và `scale`, nếu bạn không cung cấp giá trị nào, thì mô hình sẽ quyết định giá trị nào phù hợp nhất dựa trên câu lệnh ban đầu của bạn.
 
-Parameter yang lebih klasik seperti `temperature` (0,0 hingga 3,0, default 1,1), `top_k`
-(1 hingga 1000, default 40), dan `seed` (0 hingga 2.147.483.647, dipilih secara acak secara
-default) juga dapat disesuaikan di `MusicGenerationConfig`.
+Các thông số cổ điển khác như `temperature` (0 đến 3, mặc định là 1,1), `top_k` (1 đến 1000, mặc định là 40) và `seed` (0 đến 2.147.483.647, được chọn ngẫu nhiên theo mặc định) cũng có thể tuỳ chỉnh trong `MusicGenerationConfig`.
 
-#### Nilai Enum Skala
+#### Giá trị enum tỷ lệ
 
-Berikut adalah semua nilai skala yang dapat diterima model:
+Sau đây là tất cả các giá trị tỷ lệ mà mô hình có thể chấp nhận:
 
-| Nilai Enum | Skala / Kunci |
+| Giá trị enum | Gam / Khoá |
 | --- | --- |
-| `C_MAJOR_A_MINOR` | C mayor / A minor |
-| `D_FLAT_MAJOR_B_FLAT_MINOR` | D♭ mayor / B♭ minor |
-| `D_MAJOR_B_MINOR` | D mayor / B minor |
-| `E_FLAT_MAJOR_C_MINOR` | E♭ mayor / C minor |
-| `E_MAJOR_D_FLAT_MINOR` | E mayor / C♯/D♭ minor |
-| `F_MAJOR_D_MINOR` | F mayor / D minor |
-| `G_FLAT_MAJOR_E_FLAT_MINOR` | G♭ mayor / E♭ minor |
-| `G_MAJOR_E_MINOR` | G mayor / E minor |
-| `A_FLAT_MAJOR_F_MINOR` | A♭ mayor / F minor |
-| `A_MAJOR_G_FLAT_MINOR` | A mayor / F♯/G♭ minor |
-| `B_FLAT_MAJOR_G_MINOR` | B♭ mayor / G minor |
-| `B_MAJOR_A_FLAT_MINOR` | B mayor / G♯/A♭ minor |
-| `SCALE_UNSPECIFIED` | Default / Model memutuskan |
+| `C_MAJOR_A_MINOR` | Đô trưởng / La thứ |
+| `D_FLAT_MAJOR_B_FLAT_MINOR` | Rê giáng trưởng / Si giáng thứ |
+| `D_MAJOR_B_MINOR` | D trưởng / B thứ |
+| `E_FLAT_MAJOR_C_MINOR` | Mi giáng trưởng / Đô thứ |
+| `E_MAJOR_D_FLAT_MINOR` | Mi trưởng / Đô thăng/Rê giáng thứ |
+| `F_MAJOR_D_MINOR` | Fa trưởng / Rê thứ |
+| `G_FLAT_MAJOR_E_FLAT_MINOR` | Sol giáng trưởng / Mi giáng thứ |
+| `G_MAJOR_E_MINOR` | Sol trưởng / Mi thứ |
+| `A_FLAT_MAJOR_F_MINOR` | La giáng trưởng / Fa thứ |
+| `A_MAJOR_G_FLAT_MINOR` | La trưởng / Fa thăng/Sol giáng thứ |
+| `B_FLAT_MAJOR_G_MINOR` | Si giáng trưởng / Sol thứ |
+| `B_MAJOR_A_FLAT_MINOR` | B major / G♯/A♭ minor |
+| `SCALE_UNSPECIFIED` | Mặc định / Mô hình quyết định |
 
-Model ini dapat memandu not yang dimainkan, tetapi tidak membedakan antara nada relatif. Jadi, setiap enum sesuai dengan
-mayor dan minor relatif. Misalnya, `C_MAJOR_A_MINOR` akan sesuai dengan semua
-tombol putih piano, dan `F_MAJOR_D_MINOR` akan menjadi semua tombol putih
-kecuali B flat.
+Mô hình này có khả năng hướng dẫn các nốt nhạc được chơi, nhưng không phân biệt được các khoá tương đối. Do đó, mỗi enum tương ứng với cả hai khoá chính và khoá phụ tương đối. Ví dụ: `C_MAJOR_A_MINOR` sẽ tương ứng với tất cả các phím trắng của đàn piano và `F_MAJOR_D_MINOR` sẽ là tất cả các phím trắng ngoại trừ phím B giáng.
 
-### Batasan
+### Các điểm hạn chế
 
-- Khusus instrumental: Model hanya menghasilkan musik instrumental.
-- Keamanan: Perintah diperiksa oleh filter keamanan. Perintah yang memicu filter
-  akan diabaikan dan penjelasan akan ditulis di kolom
-  `filtered_prompt` output.
-- Pemberian watermark: Audio output selalu diberi watermark untuk identifikasi sesuai dengan prinsip [AI Bertanggung Jawab](https://ai.google/responsibility/principles/?hl=id) kami.
+- Chỉ nhạc không lời: Mô hình chỉ tạo nhạc không lời.
+- An toàn: Các bộ lọc an toàn sẽ kiểm tra câu lệnh. Các câu lệnh kích hoạt bộ lọc sẽ bị bỏ qua. Trong trường hợp đó, lời giải thích sẽ được viết trong trường `filtered_prompt` của đầu ra.
+- Tạo hình mờ: Âm thanh đầu ra luôn được tạo hình mờ để nhận dạng theo các nguyên tắc [AI có trách nhiệm](https://ai.google/responsibility/principles/?hl=vi) của chúng tôi.
 
-## Langkah berikutnya
+## Bước tiếp theo
 
-- Buat lagu lengkap dan trek vokal dengan [Lyria 3](https://ai.google.dev/gemini-api/docs/music-generation?hl=id),
-- Daripada musik, pelajari cara membuat percakapan multi-penutur menggunakan
-  [model TTS](https://ai.google.dev/gemini-api/docs/audio-generation?hl=id),
-- Temukan cara membuat [gambar](https://ai.google.dev/gemini-api/docs/image-generation?hl=id) atau [video](https://ai.google.dev/gemini-api/docs/video?hl=id).
-- Daripada membuat musik atau audio, cari tahu cara Gemini dapat [memahami file Audio](https://ai.google.dev/gemini-api/docs/audio?hl=id),
-- Lakukan percakapan real-time dengan Gemini menggunakan
-  [Live API](https://ai.google.dev/gemini-api/docs/live?hl=id).
+- Tạo các bài hát hoàn chỉnh và bản nhạc có giọng hát bằng [Lyria 3](https://ai.google.dev/gemini-api/docs/music-generation?hl=vi),
+- Thay vì âm nhạc, hãy tìm hiểu cách tạo cuộc trò chuyện có nhiều người nói bằng [các mô hình TTS](https://ai.google.dev/gemini-api/docs/audio-generation?hl=vi),
+- Khám phá cách tạo [hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi) hoặc [video](https://ai.google.dev/gemini-api/docs/video?hl=vi),
+- Thay vì tạo nhạc hoặc âm thanh, hãy tìm hiểu cách Gemini có thể [hiểu các tệp âm thanh](https://ai.google.dev/gemini-api/docs/audio?hl=vi),
+- Trò chuyện theo thời gian thực với Gemini bằng [Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi).
 
-Pelajari [Cookbook](https://github.com/google-gemini/cookbook) untuk mengetahui contoh kode dan tutorial lainnya.
+Khám phá [Sổ tay hướng dẫn](https://github.com/google-gemini/cookbook) để xem thêm các ví dụ về mã và hướng dẫn.
 
-Kirim masukan
+Gửi ý kiến phản hồi
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Terakhir diperbarui pada 2026-04-29 UTC.
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-Ada masukan untuk kami?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

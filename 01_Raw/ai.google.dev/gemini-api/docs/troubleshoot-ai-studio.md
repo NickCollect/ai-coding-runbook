@@ -1,56 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/troubleshoot-ai-studio?hl=vi
-fetched_at: 2026-05-05T20:43:07.458305+00:00
-title: "Kh\u1eafc ph\u1ee5c s\u1ef1 c\u1ed1 li\u00ean quan \u0111\u1ebfn Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/troubleshoot-ai-studio?hl=pt-BR
+fetched_at: 2026-05-11T05:00:25.619564+00:00
+title: "Resolver problemas do Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Gửi ý kiến phản hồi
+Envie comentários
 
-# Khắc phục sự cố liên quan đến Google AI Studio
+# Resolver problemas do Google AI Studio
 
-Trang này đưa ra các đề xuất về cách khắc phục sự cố Google AI Studio nếu bạn gặp vấn đề.
+Nesta página, você encontra sugestões para resolver problemas do Google AI Studio.
 
-## Tìm hiểu về lỗi 403 Quyền truy cập bị hạn chế
+## Entender os erros de acesso restrito 403
 
-Nếu bạn thấy lỗi 403 Quyền truy cập bị hạn chế, thì có nghĩa là bạn đang sử dụng Google AI Studio theo cách không tuân thủ [Điều khoản dịch vụ](https://ai.google.dev/terms?hl=vi). Một lý do thường gặp là
-bạn không ở [khu vực được hỗ trợ](https://ai.google.dev/available_regions?hl=vi).
+Se você encontrar um erro 403 de acesso restrito, significa que está usando o Google AI Studio de uma forma que não segue os [Termos de Serviço](https://ai.google.dev/terms?hl=pt-br). Um motivo comum é que você não está em uma [região aceita](https://ai.google.dev/available_regions?hl=pt-br).
 
-## Khắc phục phản hồi Không có nội dung trên Google AI Studio
+## Resolver respostas de "Sem conteúdo" no Google AI Studio
 
-Thông báo warning **Không có nội dung** sẽ xuất hiện trên
-Google AI Studio nếu nội dung bị chặn vì bất kỳ lý do nào. Để xem thêm thông tin chi tiết,
-hãy di chuột qua **Không có nội dung** rồi nhấp vào
-warning **An toàn**.
+Uma mensagem warning **Sem conteúdo** aparece no
+Google AI Studio se o conteúdo for bloqueado por qualquer motivo. Para mais detalhes, passe o ponteiro sobre **Nenhum conteúdo** e clique em warning **Segurança**.
 
-Nếu phản hồi bị chặn do [chế độ cài đặt an toàn](https://ai.google.dev/docs/safety_setting?hl=vi) và
-bạn đã cân nhắc các [rủi ro về an toàn](https://ai.google.dev/docs/safety_guidance?hl=vi) cho trường hợp sử dụng của mình, thì bạn
-có thể sửa đổi
-[chế độ cài đặt an toàn](https://ai.google.dev/docs/safety_setting?hl=vi#safety_settings_in_makersuite)
-để ảnh hưởng đến phản hồi được trả về.
+Se a resposta foi bloqueada devido às [configurações de segurança](https://ai.google.dev/docs/safety_setting?hl=pt-br) e você considerou os [riscos de segurança](https://ai.google.dev/docs/safety_guidance?hl=pt-br) para seu caso de uso, é possível modificar as [configurações de segurança](https://ai.google.dev/docs/safety_setting?hl=pt-br#safety_settings_in_makersuite) para influenciar a resposta retornada.
 
-Nếu phản hồi bị chặn nhưng không phải do chế độ cài đặt an toàn, thì có thể truy vấn hoặc
-phản hồi đó vi phạm [Điều khoản dịch vụ](https://ai.google.dev/terms?hl=vi) hoặc không được hỗ trợ.
+Se a resposta foi bloqueada, mas não devido às configurações de segurança, a consulta ou
+resposta pode violar os [Termos de Serviço](https://ai.google.dev/terms?hl=pt-br) ou não ser compatível.
 
-## Kiểm tra mức sử dụng và giới hạn về mã thông báo
+## Verificar o uso e os limites de tokens
 
-Khi bạn mở một câu lệnh, nút **Xem trước văn bản** ở cuối màn hình sẽ cho biết số lượng token hiện tại được dùng cho nội dung của câu lệnh và số lượng token tối đa cho mô hình đang được sử dụng.
+Quando um comando está aberto, o botão **Prévia do texto** na parte de baixo da tela mostra os tokens atuais usados para o conteúdo do comando e a contagem máxima de tokens do modelo em uso.
 
-Gửi ý kiến phản hồi
+Envie comentários
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+Última atualização 2026-04-29 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Quer enviar seu feedback?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]

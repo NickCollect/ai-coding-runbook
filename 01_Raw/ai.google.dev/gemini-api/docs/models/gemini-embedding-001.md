@@ -1,45 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-001?hl=ko
-fetched_at: 2026-05-05T20:48:13.520488+00:00
-title: "Gemini \uc784\ubca0\ub529 \ubaa8\ub378 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-001?hl=ar
+fetched_at: 2026-05-11T05:07:13.170992+00:00
+title: "\u0646\u0645\u0648\u0630\u062c Gemini Embedding \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-의견 보내기
+إرسال ملاحظات
 
-# Gemini 임베딩 모델
+# نموذج Gemini Embedding
 
-고차원 벡터 표현을 위한 특수 엔진으로, 텍스트와 이미지의 효율적인 숫자 매핑을 제공합니다. Gemini 임베딩 모델은 대규모 데이터 세트에서 빠르고 확장 가능한 유사성 계산이 필요한 시맨틱 검색, 문서 검색, 추천 시스템에 가장 적합합니다.
+محرك متخصص لتمثيل المتجهات عالية الأبعاد، يوفر ربطًا رقميًا فعالاً للنصوص والصور. يُعدّ نموذج Gemini Embedding الأفضل للبحث الدلالي واسترجاع المستندات وأنظمة الاقتراحات التي تتطلب إجراء عمليات حسابية سريعة وقابلة للتوسّع للتشابه في مجموعات البيانات الكبيرة.
 
-## 문서
+## الوثائق
 
-기능 및 기능에 대한 전체 내용은 [임베딩](https://ai.google.dev/gemini-api/docs/embeddings?hl=ko) 페이지를 참고하세요.
+[يمكنك الانتقال إلى صفings](https://ai.google.dev/gemini-api/docs/embeddings?hl=ar) صفحة التضمينات للاطّلاع على تغطية كاملة
+للميزات والإمكانات.
 
 ## gemini-embedding-001
 
-| 속성 | 설명 |
+| الموقع | الوصف |
 | --- | --- |
-| id\_card모델 코드 | **Gemini API**  `gemini-embedding-001` |
-| save지원되는 데이터 유형 | **입력**  텍스트  **출력**  텍스트 임베딩 |
-| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 토큰 한도**  2,048  **출력 크기**  유연함, 지원: 128~3072, 권장: 768, 1536, 3072 |
-| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - 안정화 버전: `gemini-embedding-001` |
-| calendar\_month최근 업데이트 | 2025년 6월 |
+| id\_cardرمز النموذج | **Gemini API**  `gemini-embedding-001` |
+| saveأنواع البيانات المتوافقة | **الإدخال**  نص  **الناتج**  تضمينات النص |
+| token\_autoالحدود القصوى للرموز[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحدّ الأقصى لرموز الإدخال**  2,048  **حجم بُعد الناتج**  مرن، يتراوح بين 128 و3072، ننصح باستخدام: 768 و1536 و3072 |
+| 123الإصدارات | يمكنك قراءة [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions) لمزيد من التفاصيل.  - الإصدار الثابت: `gemini-embedding-001` |
+| calendar\_monthآخر تعديل | يونيو 2025 |
 
-의견 보내기
+إرسال ملاحظات
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-최종 업데이트: 2026-04-29(UTC)
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-의견을 전달하고 싶나요?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

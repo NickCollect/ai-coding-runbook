@@ -1,53 +1,51 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=th
-fetched_at: 2026-05-05T20:47:12.019935+00:00
-title: "\u0e40\u0e27\u0e2d\u0e23\u0e4c\u0e0a\u0e31\u0e19\u0e15\u0e31\u0e27\u0e2d\u0e22\u0e48\u0e32\u0e07\u0e02\u0e2d\u0e07 TTS (\u0e01\u0e32\u0e23\u0e2d\u0e48\u0e32\u0e19\u0e2d\u0e2d\u0e01\u0e40\u0e2a\u0e35\u0e22\u0e07\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21) \u0e02\u0e2d\u0e07 Gemini 3.1 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=tr
+fetched_at: 2026-05-11T05:09:14.283532+00:00
+title: "Gemini 3.1 Flash TTS (Metin Okuma) \u00d6nizlemesi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-ส่งความคิดเห็น
+Geri bildirim gönderin
 
-# เวอร์ชันตัวอย่างของ TTS (การอ่านออกเสียงข้อความ) ของ Gemini 3.1 Flash
+# Gemini 3.1 Flash TTS (Metin Okuma) Önizlemesi
 
-โมเดล Gemini 3.1 Flash TTS Preview มีฟีเจอร์การสร้างคำพูดที่ทรงประสิทธิภาพและมีความหน่วงต่ำ พร้อมเอาต์พุตที่เป็นธรรมชาติ พรอมต์ที่ควบคุมได้ และแท็กเสียงแบบใหม่ที่แสดงอารมณ์ได้หลากหลายเพื่อการควบคุมการบรรยายที่แม่นยำ
+Gemini 3.1 Flash TTS Preview modeli; doğal çıkışlar, yönlendirilebilir istemler ve hassas anlatım kontrolü için yeni etkileyici ses etiketleriyle güçlü ve düşük gecikmeli konuşma üretimi sağlar.
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com?model=gemini-3.1-flash-tts-preview&hl=th)
+[Google AI Studio'da deneme](https://aistudio.google.com?model=gemini-3.1-flash-tts-preview&hl=tr)
 
-## เอกสารประกอบ
+## Belgeler
 
-โมเดล Gemini 3.1 Flash TTS Preview มาพร้อม[แท็กเสียง](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th#transcript-tags)
-ที่แสดงอารมณ์ได้หลากหลายเพื่อควบคุมการบรรยาย รวมถึงการปรับปรุงโดยรวมในด้านความเป็นธรรมชาติ
-ความสามารถในการควบคุม และความสามารถในการรองรับหลายภาษา
+Gemini 3.1 Flash TTS Preview modeli, anlatımı kontrol etmek için [ses etiketleri](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr#transcript-tags) sunar. Ayrıca, doğallık, kontrol edilebilirlik ve çok dillilik konusunda genel iyileştirmeler içerir.
 
-ดูฟีเจอร์และความสามารถทั้งหมดได้ที่คู่มือ [Text-to-Speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th)
+Özellikler ve işlevler hakkında kapsamlı bilgi için [Metin Okuma](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr) kılavuzunu ziyaret edin.
 
 ## gemini-3.1-flash-tts-preview
 
-| พร็อพเพอร์ตี้ | คำอธิบาย |
+| Mülk | Açıklama |
 | --- | --- |
-| id\_cardรหัสโมเดล | `gemini-3.1-flash-tts-preview` |
-| saveประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ  **เอาต์พุต**  เสียง |
-| token\_autoขีดจำกัดโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  8,192  **ขีดจำกัดโทเค็นเอาต์พุต**  16,384 |
-| handymanความสามารถ | **การสร้างเสียง**  สิ่งที่ทำได้  **Batch API**  สิ่งที่ทำได้  **การแคช**  ไม่รองรับ  **การรันโค้ด**  ไม่รองรับ  **การค้นหาไฟล์**  สิ่งที่ทำไม่ได้  **การเรียกฟังก์ชัน**  ไม่รองรับ  **การเชื่อมต่อแหล่งข้อมูลกับ Google Maps**  ไม่รองรับ  **การสร้างรูปภาพ**  ไม่รองรับ  **Live API**  ไม่รองรับ  **การเชื่อมต่อแหล่งข้อมูลของ Search**  ไม่รองรับ  **เอาต์พุตที่มีโครงสร้าง**  ไม่รองรับ  **การคิด**  ไม่รองรับ  **บริบท URL**  ไม่รองรับ |
-| 123เวอร์ชัน | อ่านรายละเอียดเพิ่มเติมเกี่ยวกับ[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)  - `gemini-3.1-flash-tts-preview` |
-| calendar\_monthการอัปเดตล่าสุด | เมษายน 2026 |
-| calendar\_monthวันที่สิ้นสุดข้อมูล | มกราคม 2025 |
+| id\_cardModel kodu | `gemini-3.1-flash-tts-preview` |
+| saveDesteklenen veri türleri | **Girişler**  Metin  **Çıkış**  Ses |
+| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  8.192  **Çıkış jetonu sınırı**  16.384 |
+| handymanÖzellikler | **Ses üretimi**  Destekleniyor  **Batch API**  Destekleniyor  **Önbelleğe alma**  Desteklenmiyor  **Kod yürütme**  Desteklenmiyor  **Dosya arama**  Desteklenmiyor  **İşlev çağırma**  Desteklenmiyor  **Google Haritalar ile Temellendirme**  Desteklenmiyor  **Görüntü üretme**  Desteklenmiyor  **Live API**  Desteklenmiyor  **Arama temellendirme**  Desteklenmiyor  **Yapılandırılmış çıkışlar**  Desteklenmiyor  **Düşünme** (Thinking)  Desteklenmiyor  **URL bağlamı**  Desteklenmiyor |
+| 123Sürümleri | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - `gemini-3.1-flash-tts-preview` |
+| calendar\_monthSon güncelleme | Nisan 2026 |
+| calendar\_monthSon güncel bilgi tarihi | Ocak 2025 |
 
-ส่งความคิดเห็น
+Geri bildirim gönderin
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-อัปเดตล่าสุด 2026-04-29 UTC
+Son güncelleme tarihi: 2026-04-29 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-29 UTC"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]

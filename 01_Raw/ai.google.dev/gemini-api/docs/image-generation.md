@@ -1,106 +1,107 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/image-generation?hl=tr
-fetched_at: 2026-05-05T20:46:43.424592+00:00
+source_url: https://ai.google.dev/gemini-api/docs/image-generation?hl=ar
+fetched_at: 2026-05-11T05:09:09.521592+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Geri bildirim gönderin
+إرسال ملاحظات
 
-# Nano Banana ile görüntü üretme
+# إنشاء الصور باستخدام Nano Banana
 
-Tam işlevli, kullanıcı arayüzü eksiksiz uygulamalar için istemler oluşturun ve Nano Banana 2'nin gerçek dünya araçları, verileri ve Gemini ekosistemiyle entegre edildiğini görün. Tüm bunları tek bir kod satırı yazmadan yapabilirsiniz.
+يمكنك تقديم طلب لإنشاء نماذج أولية لتطبيقات كاملة الوظائف ومكتملة واجهة المستخدم،
+والاطّلاع على Nano Banana 2 مدمجًا مع أدوات وبيانات من الواقع العملي
+ونظام Gemini المتكامل. كل ذلك قبل كتابة سطر واحد من الرموز البرمجية.
 
-- [Nano Banana 2 uygulamasını deneyin](https://aistudio.google.com/apps/bundled/pet_passport?hl=tr)
-- Dilerseniz istemleri kullanarak kendi uygulamanızı oluşturabilirsiniz:
+- [تجربة تطبيق Nano Banana 2](https://aistudio.google.com/apps/bundled/pet_passport?hl=ar)
+- أو يمكنك إنشاء سلسلة إجراءات خاصة بك من الطلبات:
 
-- ![dergi](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
-  ![londra](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
-  ![restore](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
-  ![muz](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
-- ![dergi](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+- ![مجلة](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+  ![london](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
+  ![استعادة](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
+  ![موزة](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
+- ![مجلة](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
 
-  Nano Banana 2 tarafından oluşturuldu
+  تم إنشاؤها باستخدام Nano Banana 2
 
-  **İstem:** "Parlak bir dergi kapağının fotoğrafı. Minimalist mavi kapakta büyük ve kalın Nano Banana yazıyor. Metin, serif yazı tipinde ve görünümü dolduruyor. Başka metin yok. Metnin önünde, şık ve minimalist bir elbise giymiş bir kişinin portresi var. Odak noktası olan 2 rakamını eğlenceli bir şekilde tutuyor.
+  **الطلب:** "صورة لغلاف مجلة لامع، الغلاف الأزرق البسيط يتضمّن الكلمات الكبيرة البارزة Nano Banana". يظهر النص بخط serif ويملأ الشاشة. لا يتضمّن أي نص آخر. أمام النص، تظهر صورة مقرّبة لشخص يرتدي فستانًا أنيقًا وبسيطًا. تمسك الفتاة بالرقم 2 بشكل مرح، وهو نقطة التركيز في الصورة.
     
-  Köşeye, barkodun yanı sıra sorun numarasını ve "Şubat 2026" tarihini ekleyin. Dergi, tasarımcı mağazasında turuncu sıvalı bir duvarın önündeki rafta duruyor."
+  ضَع رقم العدد والتاريخ "شباط (فبراير) 2026" في الزاوية مع رمز شريطي. المجلة موضوعة على رفّ أمام جدار برتقالي مكسو بالجص، داخل متجر للمصمّمين".
 
-  [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=tr)'da [profesyonel ürün fotoğrafları](#4_product_mockups_commercial_photography) oluşturma
-- ![londra](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
+  إنشاء [لقطات احترافية للمنتجات](#4_product_mockups_commercial_photography) في [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=ar)
+- ![london](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
 
-  Nano Banana Pro ile üretildi
+  تم إنشاؤها باستخدام Nano Banana Pro
 
-  **İstem:** "Londra'nın en ikonik simge yapılarını ve mimari unsurlarını içeren, 45 derecelik yukarıdan bakış açılı net bir izometrik minyatür 3D çizgi film sahnesi oluştur. Gerçekçi PBR materyalleri ve yumuşak, gerçekçi ışıklandırma ve gölgelerle yumuşak, zarif dokular kullanın. Etkileyici bir atmosfer oluşturmak için mevcut hava koşullarını doğrudan şehir ortamına entegre edin. Yumuşak ve tek renkli bir arka planla temiz ve minimalist bir kompozisyon kullanın. En üstte ortada "London" başlığını büyük ve kalın metinle, altına belirgin bir hava durumu simgesini, ardından tarihi (küçük metin) ve sıcaklığı (orta boy metin) yerleştirin. Tüm metinler, tutarlı aralıklarla ortalanmalı ve binaların üst kısımlarıyla hafifçe çakışabilir."
+  **الطلب:** "أريد مشهدًا كرتونيًا ثلاثي الأبعاد مصغّرًا ودقيقًا من منظور متساوي القياس (أيزومتري) وزاوية رؤية علوية 45 درجة، يجسِّد مدينة لندن ويضمّ أبرز معالمها وعناصرها المعمارية. استخدِم ملمسًا ناعمًا ودقيقًا مع مواد PBR واقعية وإضاءة وظلال ناعمة وطبيعية. يمكنك دمج أحوال الطقس الحالية مباشرةً في بيئة المدينة لإنشاء أجواء غامرة. استخدِم تركيبة بسيطة ونظيفة مع خلفية ناعمة بلون موحّد. في أعلى منتصف الشاشة، ضَع العنوان "لندن" بخط كبير غامق، ثم أيقونة بارزة للطقس أسفله، ثم التاريخ (بخط صغير) ودرجة الحرارة (بخط متوسط). يجب توسيط كل النصوص مع ترك مسافة متسقة بينها، ويجوز أن تتداخل بشكل طفيف مع أعلى المباني".
 
-  [Arama temellendirmesi](#use-with-grounding) hakkında daha fazla bilgi edinin ve [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=tr)'da deneyin.
+  مزيد من المعلومات حول [تحديد المصدر في البحث](#use-with-grounding) وتجربته في [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=ar)
 - ![quetzal](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
 
-  Nano Banana 2 tarafından oluşturuldu
+  تم إنشاؤها باستخدام Nano Banana 2
 
-  **İstem:** "Görsel arama kullanarak parlak bir ketsal kuşunun doğru resimlerini bul. Bu kuşun, yukarıdan aşağıya doğal bir renk geçişi ve minimal bir kompozisyonla 3:2 oranında güzel bir duvar kağıdını oluştur."
+  **الطلب:** "استخدِم "بحث الصور" للعثور على صور دقيقة لطائر الكيتزال الرائع. أنشئ خلفية جميلة بنسبة عرض إلى ارتفاع 3:2 لهذه الطائر، مع تدرّج طبيعي من الأعلى إلى الأسفل وتصميم بسيط".
 
-  Nano Banana 2 ile Google [Görsel Arama](#image-search) temellendirmesini kullanın. [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=tr)'da deneyin.
-- ![muz](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
+  استخدِم ميزة "الاستناد إلى معلومات خارجية" من [بحث الصور](#image-search) من Google مع Nano Banana 2. تجربة الميزة في [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=ar)
+- ![موزة](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
 
-  Nano Banana Pro ile üretildi
+  تم إنشاؤها باستخدام Nano Banana Pro
 
-  **İstem:** "Bu logoyu muz kokulu bir parfümün üst düzey reklamına yerleştir. Logo, şişeye mükemmel şekilde entegre edilmiş."
+  **الطلب:** "أريد وضع هذا الشعار على إعلان فاخر لعطر برائحة الموز. تم دمج الشعار بشكل مثالي في الزجاجة".
 
-  [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=tr)'da Nano Banana'nın [yüksek doğrulukta ayrıntı koruma](#5_high-fidelity_detail_preservation) özelliğini deneyin.
-- ![kafe](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
+  جرِّب ميزة [الحفاظ على التفاصيل بدقة عالية](#5_high-fidelity_detail_preservation) في Nano Banana ضمن [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=ar)
+- ![مقهى](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
 
-  Nano Banana Pro ile üretildi
+  تم إنشاؤها باستخدام Nano Banana Pro
 
-  **İstem:** "Kahvaltı servisi yapan kalabalık bir kafedeki günlük bir sahnenin fotoğrafı. Ön planda mavi saçlı bir anime karakteri var. Kişilerden biri kurşun kalemle çizilmiş, diğeri ise kil animasyon karakteri.
+  **الطلب:** "صورة لمشهد يومي في مقهى مزدحم يقدّم وجبة الفطور في مقدّمة الصورة، يظهر رجل من عالم الأنمي بشعر أزرق، وأحد الأشخاص هو رسم بقلم الرصاص، وآخر هو شخص من الصلصال"
 
-  [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=tr)'da Nano Banana ile farklı [sanat stillerini](#3_style_transfer) deneyin.
-- ![makale](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
+  جرِّب [أنماطًا فنية](#3_style_transfer) مختلفة باستخدام Nano Banana في [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=ar)
+- ![مقالة](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
 
-  Nano Banana Pro ile üretildi
+  تم إنشاؤها باستخدام Nano Banana Pro
 
-  **İstem:** "Gemini 3 Flash'in kullanıma sunulmasının nasıl karşılandığını bulmak için aramayı kullan. Bu bilgileri kullanarak konuyla ilgili kısa bir makale (başlıklarla birlikte) yaz. Makalenin, tasarıma odaklanan parlak bir dergideki fotoğrafını döndür. Bu resimde, Gemini 3 Flash ile ilgili makalenin yer aldığı, katlanmış tek bir sayfa gösteriliyor. Bir hero fotoğrafı. Serif yazı tipiyle başlık."
+  **الطلب:** "استخدِم "بحث Google" لمعرفة آراء المستخدمين حول إطلاق Gemini 3 Flash. استخدِم هذه المعلومات لكتابة مقالة قصيرة حول هذا الموضوع (مع عناوين). أريد صورة للمقالة كما ظهرت في مجلة لامعة تركز على التصميم. إنّها صورة لصفحة واحدة مطوية، تعرض المقالة حول Gemini 3 Flash. صورة رئيسية واحدة عنوان بخط ذي نهايات معقوفة".
 
-  [Arama](#use-with-grounding) sonuçlarından [doğru metinler](#3_accurate_text_in_images) oluşturun. [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=tr)'da Nano Banana'yı deneyin
-- ![köpek](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
+  إنشاء [نص دقيق](#3_accurate_text_in_images) من [البحث](#use-with-grounding) تجربة Nano Banana في [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=ar)
+- ![كلب](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
 
-  Nano Banana Pro ile üretildi
+  تم إنشاؤها باستخدام Nano Banana Pro
 
-  **İstem:** "Sevimli bir köpeği temsil eden simge. Arka plan beyaz olmalı. Simgeleri renkli ve dokunsal bir 3D stilinde oluştur. Metin yok."
+  **الطلب:** "أريد رمزًا يمثّل كلبًا لطيفًا. يجب أن تكون الخلفية بيضاء. أنشئ الرموز بأسلوب ثلاثي الأبعاد ملون وملموس. لا يوجد نص".
 
-  [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=tr)'da Nano Banana ile [simgeler, çıkartmalar ve öğeler](#2_stylized_illustrations_stickers) oluşturma
-- ![izometrik](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
+  إنشاء [رموز وملصقات ومواد عرض](#2_stylized_illustrations_stickers) باستخدام Nano Banana في [استوديو الذكاء الاصطناعي](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=ar)
+- ![متساوي القياس](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
 
-  Nano Banana 2 tarafından oluşturuldu
+  تم إنشاؤها باستخدام Nano Banana 2
 
-  **İstem:** "Tamamen izometrik bir fotoğraf oluştur. Bu, minyatür değil, yalnızca mükemmel şekilde izometrik olan bir fotoğraftır. Bu, güzel bir modern bahçenin fotoğrafı. Büyük bir 2 şeklinde havuz ve "Nano Banana 2" yazısı var.
+  **الطلب:** "أنشئ صورة متساوية القياس تمامًا. إنّها ليست صورة مصغّرة، بل هي صورة تم التقاطها وكانت متساوية القياس تمامًا. إنّها صورة لحديقة عصرية جميلة. يظهر مسبح كبير على شكل الرقم 2 والعبارة Nano Banana 2".
 
-  [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=tr)'da [gerçekçi görüntü üretme](#1_photorealistic_scenes) özelliğini deneyin.
+  تجربة [إنشاء صور واقعية](#1_photorealistic_scenes) في [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=ar)
 
-**Nano Banana**, Gemini'ın yerel görüntü üretme özelliklerinin adıdır.
-Gemini, metin, resim veya her ikisinin kombinasyonuyla etkileşimli olarak resim oluşturabilir ve işleyebilir. Bu sayede, görselleri benzeri görülmemiş bir kontrolle oluşturabilir, düzenleyebilir ve yineleyebilirsiniz.
+‫**Nano Banana** هو اسم إمكانات إنشاء الصور الأصلية في Gemini.
+يمكن لـ Gemini إنشاء الصور ومعالجتها بشكل حواري باستخدام النصوص أو الصور أو مزيج من الاثنين. يتيح لك ذلك إنشاء المرئيات وتعديلها وتكرارها مع التحكّم فيها بشكل غير مسبوق.
 
-Nano Banana, Gemini API'de bulunan üç farklı modeli ifade eder:
+يشير Nano Banana إلى ثلاثة نماذج مختلفة متوفّرة في Gemini API:
 
-- **Nano Banana 2**: [Gemini 3.1 Flash Image Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=tr)
-  modeli (`gemini-3.1-flash-image-preview`). Bu model, Gemini 3 Pro Image'in yüksek verimli karşılığı olarak hizmet verir ve hız ile yüksek hacimli geliştirici kullanım alanları için optimize edilmiştir.
-- **Nano Banana Pro**: [Gemini 3 Pro Image Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=tr) modeli
-  (`gemini-3-pro-image-preview`). Bu model, karmaşık talimatları uygulamak ve yüksek doğrulukta metinler oluşturmak için gelişmiş akıl yürütme ("Düşünme") özelliğinden yararlanarak profesyonel düzeyde öğe üretmek üzere tasarlanmıştır.
-- **Nano Banana**: [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=tr) modeli
-  (`gemini-2.5-flash-image`). Bu model, hız ve verimlilik için tasarlanmış olup yüksek hacimli ve düşük gecikmeli görevler için optimize edilmiştir.
+- **‫Nano Banana 2**: هو نموذج [معاينة الصور في Gemini 3.1 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=ar) (`gemini-3.1-flash-image-preview`). يعمل هذا النموذج كبديل عالي الكفاءة لنموذج Gemini 3 Pro Image، وهو محسّن من أجل السرعة وحالات الاستخدام التي تتطلّب عددًا كبيرًا من المطورين.
+- **‫Nano Banana Pro**: هو نموذج [معاينة الصور من Gemini 3 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=ar)
+  (`gemini-3-pro-image-preview`). تم تصميم هذا النموذج لإنتاج أصول احترافية، وهو يستخدم ميزة "الاستدلال المتقدّم" ("التفكير") لتنفيذ التعليمات المعقّدة وعرض نص عالي الدقة.
+- **‫Nano Banana**: هو نموذج [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=ar)
+  (`gemini-2.5-flash-image`) المصمَّم لتحقيق السرعة والكفاءة، وهو محسَّن لتنفيذ المهام التي تتطلّب معدّل نقل بيانات مرتفعًا ووقت استجابة منخفضًا.
 
-Üretilen tüm resimlerde [SynthID filigranı](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=tr) bulunur.
+تتضمّن جميع الصور التي يتم إنشاؤها [علامة مائية من SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=ar).
 
-## Görüntü üretme (metinden görüntü oluşturma)
+## إنشاء الصور (تحويل النص إلى صورة)
 
 ### Python
 
@@ -197,7 +198,7 @@ func main() {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -253,15 +254,15 @@ curl -s -X POST \
   }'
 ```
 
-## Görüntü düzenleme (metin ve resimden resme)
+## تعديل الصور (تحويل النص والصورة إلى صورة)
 
-**Hatırlatma**: Yüklediğiniz tüm resimlerle ilgili gerekli haklara sahip olduğunuzdan emin olun.
-Başkalarının haklarını ihlal eden içerikler (ör. yanıltıcı, taciz edici veya zarar verici videolar ya da görüntüler) üretmeyin. Bu üretken yapay zeka hizmetinin kullanımı [Yasaklanan Kullanım Politikamıza](https://policies.google.com/terms/generative-ai/use-policy?hl=tr) tabidir.
+**تذكير**: يُرجى التأكّد من امتلاكك الحقوق اللازمة لأي صور قبل تحميلها.
+لا يجوز إنشاء محتوى ينتهك حقوق الآخرين، بما في ذلك الفيديوهات أو الصور التي تتسبب في الخداع أو المضايقة أو الأذى. يخضع استخدامك لخدمة الذكاء الاصطناعي التوليدي هذه [لسياسة الاستخدام المحظور](https://policies.google.com/terms/generative-ai/use-policy?hl=ar).
 
-Resim sağlayın ve metin istemlerini kullanarak öğe ekleyin, kaldırın veya değiştirin, stili değiştirin ya da renk derecelendirmesini ayarlayın.
+قدِّم صورة واستخدِم طلبات نصية لإضافة عناصر أو إزالتها أو تعديلها، أو تغيير النمط، أو ضبط تصحيح الألوان.
 
-Aşağıdaki örnekte, `base64` kodlu resimlerin nasıl yükleneceği gösterilmektedir.
-Birden fazla resim, daha büyük yükler ve desteklenen MIME türleri için [Resim anlama](https://ai.google.dev/gemini-api/docs/image-understanding?hl=tr) sayfasını inceleyin.
+يوضّح المثال التالي كيفية تحميل صور مرمّزة `base64`.
+للحصول على معلومات حول الصور المتعددة وأحجام الحمولة الأكبر وأنواع MIME المتوافقة، يُرجى الاطّلاع على صفحة [فهم الصور](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ar).
 
 ### Python
 
@@ -392,7 +393,7 @@ func main() {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -464,9 +465,9 @@ curl -s -X POST \
     }"
 ```
 
-### Çok turlu görüntü düzenleme
+### تعديل الصور من خلال محادثة متعددة الجولات
 
-Görsel oluşturmaya ve düzenlemeye etkileşimli olarak devam edin. Resimler üzerinde yineleme yapmak için Chat veya çok turlu görüşme önerilir. Aşağıdaki örnekte, fotosentez hakkında infografik oluşturma istemi gösterilmektedir.
+مواصلة إنشاء الصور وتعديلها بشكل حواري ننصحك باستخدام ميزة المحادثة أو المحادثة المتعدّدة الجولات لتكرار الصور. يعرض المثال التالي طلبًا لإنشاء مخطّط بياني حول عملية البناء الضوئي.
 
 ### Python
 
@@ -578,7 +579,7 @@ func main() {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Chat;
@@ -657,11 +658,11 @@ curl -s -X POST \
   }'
 ```
 
-![Fotosentez hakkında yapay zekayla üretilmiş infografik](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=tr)
+![مخطّط بياني من إنشاء الذكاء الاصطناعي حول عملية التمثيل الضوئي](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=ar)
 
-Fotosentez hakkında yapay zekayla üretilmiş infografik
+مخطّط بياني من إنشاء الذكاء الاصطناعي حول عملية البناء الضوئي
 
-Ardından, grafikteki dili İspanyolca olarak değiştirmek için aynı sohbeti kullanabilirsiniz.
+يمكنك بعد ذلك استخدام المحادثة نفسها لتغيير اللغة في الرسم إلى الإسبانية.
 
 ### Python
 
@@ -745,7 +746,7 @@ for _, part := range resp.Candidates[0].Content.Parts {
 }
 ```
 
-### Java
+### جافا
 
 ```
 String aspectRatio = "16:9"; // "1:1","1:4","1:8","2:3","3:2","3:4","4:1","4:3","4:5","5:4","8:1","9:16","16:9","21:9"
@@ -809,34 +810,34 @@ curl -s -X POST \
   }'
 ```
 
-![İspanyolca fotosentez infografiği (yapay zekayla üretilmiş)](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=tr)
+![مخطّط بياني من إنشاء الذكاء الاصطناعي حول عملية البناء الضوئي باللغة الإسبانية](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=ar)
 
-İspanyolca fotosentez infografiği (yapay zekayla üretilmiş)
+مخطّط بياني من إنشاء الذكاء الاصطناعي حول عملية البناء الضوئي باللغة الإسبانية
 
-## Gemini 3 Image modelleriyle gelen yenilikler
+## ميزات جديدة في نماذج Gemini 3 Image
 
-Gemini 3, son teknoloji görüntü üretme ve düzenleme modelleri sunar. Gemini 3.1
-Flash Image, hız ve yüksek hacimli kullanım alanları için, Gemini 3
-Pro Image ise profesyonel öğe üretimi için optimize edilmiştir.
-Gelişmiş akıl yürütme özelliğiyle en zorlu iş akışlarının üstesinden gelmek için tasarlanan bu modeller, karmaşık ve çok turlu içerik oluşturma ve değiştirme görevlerinde üstün performans gösterir.
+يوفّر Gemini 3 أحدث النماذج لإنشاء الصور وتعديلها. تم تحسين أداء Gemini 3.1
+Flash Image ليكون سريعًا ومناسبًا لحالات الاستخدام التي تتطلّب كميات كبيرة، بينما تم تحسين أداء Gemini 3
+Pro Image لإنتاج مواد عرض احترافية.
+تم تصميم هذه النماذج للتعامل مع أكثر مهام سير العمل صعوبة من خلال الاستدلال المتقدّم، وهي تتفوّق في المهام المعقّدة والمتعددة المراحل التي تتضمّن إنشاء المحتوى وتعديله.
 
-- **Yüksek çözünürlüklü çıktı**: 1K, 2K ve 4K görseller için yerleşik üretim özellikleri.
-  - **Gemini 3.1 Flash Image**, daha küçük olan 512 (0,5K) çözünürlüğünü ekler.
-- **Gelişmiş metin oluşturma**: İnfografikler, menüler, diyagramlar ve pazarlama öğeleri için okunaklı ve stilize edilmiş metinler oluşturabilir.
-- **Google Arama ile temellendirme**: Model, Google Arama'yı bir araç olarak kullanarak gerçekleri doğrulayabilir ve gerçek zamanlı verilere (ör. mevcut hava durumu haritaları, borsa grafikleri, son olaylar) dayalı görüntüler oluşturabilir.
-  - **Gemini 3.1 Flash Image**, Google Web Arama'nın yanı sıra Görseller için Google Arama ile Temellendirme entegrasyonunu ekler.
-- **Düşünme modu**: Model, karmaşık istemleri anlamak için "düşünme" sürecini kullanır. Son yüksek kaliteli çıktıyı üretmeden önce kompozisyonu iyileştirmek için geçici "düşünce resimleri" oluşturur (arka uçta görünür ancak ücretlendirilmez).
-- **En fazla 14 referans görsel**: Artık nihai resmi oluşturmak için en fazla 14 referans görseli karıştırabilirsiniz.
-- **Yeni en boy oranları**: Gemini 3.1 Flash Image Preview, 1:4, 4:1, 1:8 ve 8:1 [en boy oranlarını](#aspect_ratios_and_image_size) ekliyor.
+- **إخراج بدقة عالية**: إمكانات إنشاء مدمَجة لمرئيات بدقة 1K و2K و4K
+  - يضيف **Gemini 3.1 Flash Image** درجة الدقة الأصغر 512 (0.5K).
+- **تكنولوجيا متقدمة لعرض النصوص**: يمكنها إنشاء نصوص قابلة للقراءة ومصمّمة بشكل أنيق للرسومات البيانية والقوائم والمخططات ومواد التسويق.
+- **تحديد المصدر من خلال "بحث Search"**: يمكن للنموذج استخدام "بحث Google" كأداة للتحقّق من الحقائق وإنشاء صور استنادًا إلى بيانات في الوقت الفعلي (مثل خرائط الطقس الحالية، والرسومات البيانية للأسهم، والأحداث الأخيرة).
+  - تضيف **Gemini 3.1 Flash Image** ميزة تحديد المصدر من خلال "بحث Search" المتكاملة مع "بحث Google عن الصور" إلى جانب "بحث الويب".
+- **وضع التفكير**: يستخدم النموذج عملية "تفكير" للاستدلال على الطلبات المعقّدة. تنشئ هذه الأداة "صورًا فكرية" مؤقتة (تظهر في الخلفية ولكن لا يتم تحصيل رسوم مقابلها) لتحسين التركيب قبل إنتاج الناتج النهائي عالي الجودة.
+- **ما يصل إلى 14 صورة مرجعية**: يمكنك الآن دمج ما يصل إلى 14 صورة مرجعية لإنتاج الصورة النهائية.
+- [**نسب العرض إلى الارتفاع الجديدة**: يضيف الإصدار الحصري من Gemini 3.1 Flash Image نسب العرض إلى الارتفاع 1:4 و4:1 و1:8 و8:1.](#aspect_ratios_and_image_size)
 
-### En fazla 14 referans görsel kullanın
+### استخدام ما يصل إلى 14 صورة مرجعية
 
-Gemini 3 görüntü modelleri, 14 adede kadar referans görseli karıştırmanıza olanak tanır. Bu 14 resim aşağıdakileri içerebilir:
+تتيح لك نماذج الصور في Gemini 3 دمج ما يصل إلى 14 صورة مرجعية. يمكن أن تتضمّن هذه الصور الـ 14 ما يلي:
 
-| Gemini 3.1 Flash Image Önizlemesi | Gemini 3 Pro Görüntü Önizlemesi |
+| معاينة Gemini 3.1 Flash Image | معاينة الصور في Gemini 3 Pro |
 | --- | --- |
-| Son resme eklenecek, yüksek çözünürlüklü nesnelerin 10 adede kadar resmi | Son resme eklenecek, yüksek çözünürlüklü en fazla 6 nesne resmi |
-| Karakter tutarlılığını korumak için en fazla 4 karakter resmi | Karakter tutarlılığını korumak için en fazla 5 karakter resmi |
+| ما يصل إلى 10 صور لكائنات عالية الدقة لتضمينها في الصورة النهائية | ما يصل إلى 6 صور لكائنات عالية الدقة لتضمينها في الصورة النهائية |
+| ما يصل إلى 4 صور لشخصيات للحفاظ على اتساق مظهرها | يمكنك تحميل 5 صور كحد أقصى للشخصيات للحفاظ على اتساق مظهرها |
 
 ### Python
 
@@ -1023,7 +1024,7 @@ func main() {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -1104,15 +1105,15 @@ curl -s -X POST \
     }"
 ```
 
-![Yapay zekayla üretilmiş ofis grubu fotoğrafı](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=tr)
+![صورة جماعية للمكتب من إنشاء الذكاء الاصطناعي](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=ar)
 
-Yapay zekayla üretilmiş ofis grubu fotoğrafı
+صورة جماعية للمكتب من إنشاء الذكاء الاصطناعي
 
-### Google Arama ile Temellendirme
+### تحديد المصدر من خلال "بحث Google"
 
-Hava durumu tahminleri, borsa grafikleri veya son olaylar gibi gerçek zamanlı bilgilere dayalı görseller oluşturmak için [Google Arama aracını](https://ai.google.dev/gemini-api/docs/google-search?hl=tr) kullanın.
+استخدِم [أداة &quot;بحث Google&quot;](https://ai.google.dev/gemini-api/docs/google-search?hl=ar) لإنشاء صور استنادًا إلى معلومات في الوقت الفعلي، مثل توقعات الطقس أو الرسومات البيانية للأسهم أو الأحداث الأخيرة.
 
-Google Arama ile temellendirme, görüntü oluşturma ile birlikte kullanılırken görüntü tabanlı arama sonuçlarının oluşturma modeline aktarılmadığını ve yanıttan çıkarıldığını unutmayın (bkz. [Görüntüler için Google Arama ile temellendirme](#image-search)).
+يُرجى العِلم أنّه عند استخدام ميزة "تحديد المصدر من خلال بحث Google" مع إنشاء الصور، لا يتم تمرير نتائج البحث المستندة إلى الصور إلى نموذج الإنشاء ويتم استبعادها من الردّ (راجِع [تحديد المصدر من خلال بحث Google للصور](#image-search)).
 
 ### Python
 
@@ -1185,7 +1186,7 @@ const response = await ai.models.generateContent({
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -1254,23 +1255,22 @@ curl -s -X POST \
   }'
 ```
 
-![San Francisco için yapay zekayla üretilmiş beş günlük hava durumu grafiği](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=tr)
+![مخطط الطقس لمدة خمسة أيام في سان فرانسيسكو من إنشاء الذكاء الاصطناعي](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=ar)
 
-San Francisco için yapay zekayla üretilmiş beş günlük hava durumu grafiği
+مخطط الطقس لمدة خمسة أيام في سان فرانسيسكو من إنشاء الذكاء الاصطناعي
 
-Yanıtta, aşağıdaki zorunlu alanları içeren `groundingMetadata` yer alıyor:
+تتضمّن الاستجابة `groundingMetadata` الذي يحتوي على الحقول المطلوبة التالية:
 
-- **`searchEntryPoint`**: Gerekli arama önerilerini oluşturmak için HTML ve CSS'yi içerir.
-- **`groundingChunks`**: Oluşturulan görüntüyü temellendirmek için kullanılan en iyi 3 web kaynağını döndürür.
+- **`searchEntryPoint`**: يحتوي على HTML وCSS لعرض اقتراحات البحث المطلوبة.
+- ‫**`groundingChunks`**: تعرض أهم 3 مصادر على الويب تم استخدامها لإنشاء الصورة
 
-### Google Görsel Arama ile Temellendirme (3.1 Flash)
+### تحديد المصدر من خلال "بحث Search" عن الصور (الإصدار 3.1 من Flash)
 
-Görseller için Google Arama ile temellendirme, modellerin Google Arama aracılığıyla alınan web görsellerini görüntü oluşturma için görsel bağlam olarak kullanmasına olanak tanır. Görsel Arama, mevcut Google Arama ile Temellendirme aracındaki yeni bir arama türüdür ve standart [Web Arama](#use-with-grounding) ile birlikte çalışır.
+تتيح ميزة &quot;تحديد المصدر من خلال &quot;بحث Search&quot;&quot; في &quot;بحث Google&quot; للصور أن تستخدم النماذج صور الويب التي يتم استرجاعها عبر &quot;بحث Google&quot; كسياق مرئي لإنشاء الصور. &quot;البحث بالصور&quot; هو نوع بحث جديد ضمن أداة &quot;تحديد المصدر من خلال &quot;بحث Search&quot;&quot; الحالية، ويعمل إلى جانب [بحث الويب](#use-with-grounding) العادي.
 
-Görsel Arama'yı etkinleştirmek için API isteğinizde `googleSearch` aracını yapılandırın
-ve `searchTypes` nesnesinde `imageSearch` değerini belirtin. Görsel Arama, bağımsız olarak veya Web Arama ile birlikte kullanılabilir.
+لتفعيل ميزة "البحث بالصور"، اضبط أداة `googleSearch` في طلب بيانات من واجهة برمجة التطبيقات وحدِّد `imageSearch` ضمن العنصر `searchTypes`. يمكن استخدام &quot;بحث الصور&quot; بشكل مستقل أو مع &quot;بحث الويب&quot;.
 
-Resimler için Google Arama ile Temellendirme özelliğinin, insan aramak için kullanılamayacağını unutmayın.
+يُرجى العِلم أنّه لا يمكن استخدام ميزة تحديد المصدر من خلال "بحث Search" للبحث عن أشخاص.
 
 ### Python
 
@@ -1404,31 +1404,32 @@ curl -s -X POST \
   }'
 ```
 
-**Görüntüleme koşulları**
+**متطلبات العرض**
 
-Google Arama ile Temellendirme'de Görsel Arama'yı kullanırken aşağıdaki koşullara uymanız gerekir:
+عند استخدام ميزة &quot;البحث بالصور&quot; ضمن &quot;تحديد المصدر من خلال بحث Google&quot;، عليك الالتزام بالشروط التالية:
 
-- **Kaynak atfı**: Kaynak resmi içeren web sayfasına (resim dosyası değil,"içeren sayfa") kullanıcı tarafından bağlantı olarak tanınacak şekilde bir bağlantı sağlamanız gerekir.
-- **Doğrudan gezinme**: Kaynak resimleri de göstermeyi seçerseniz kaynak resimlerden bunları içeren kaynak web sayfasına doğrudan, tek tıklamayla erişilebilen bir yol sağlamanız gerekir. Son kullanıcının kaynak web sayfasına erişimini geciktiren veya soyutlayan diğer tüm uygulamalara (ör. çok tıklamalı yol veya ara resim görüntüleyici kullanımı) izin verilmez.
+- **الإشارة إلى المصدر**: يجب توفير رابط يؤدي إلى صفحة الويب التي تتضمّن صورة المصدر (أي "الصفحة الحاوية"، وليس ملف الصورة نفسه) بطريقة يمكن للمستخدم التعرّف عليها كرابط.
+- **التنقّل المباشر**: إذا اخترت أيضًا عرض الصور المصدر، عليك توفير مسار مباشر بنقرة واحدة من الصور المصدر إلى صفحة الويب المصدر التي تحتوي عليها. لا يُسمح بأي طريقة أخرى تؤخّر أو تحجب وصول المستخدم النهائي إلى صفحة الويب المصدر، بما في ذلك على سبيل المثال لا الحصر، أي مسار يتضمّن نقرات متعدّدة أو استخدام عارض صور وسيط.
 
-**Yanıt**
+**الردّ**
 
-Görsel arama kullanılarak temellendirilmiş yanıtlarda API, çıkışını doğrulanmış kaynaklara bağlamak için net ilişkilendirme ve meta veriler sağlar. `groundingMetadata` nesnesindeki önemli alanlar şunlardır:
+بالنسبة إلى الردود المستندة إلى مصادر باستخدام البحث بالصور، توفّر واجهة برمجة التطبيقات إشارة واضحة إلى المصدر
+وبيانات وصفية لربط الناتج بمصادر تم التحقّق منها. تشمل الحقول الرئيسية في الكائن `groundingMetadata` ما يلي:
 
-- **`imageSearchQueries`**: Modelin görsel bağlam (görsel arama) için kullandığı belirli sorgular.
-- **`groundingChunks`**: Alınan sonuçlarla ilgili kaynak bilgilerini içerir.
-  Resim kaynakları için bunlar, yeni bir resim parçası türü kullanılarak yönlendirme URL'leri olarak döndürülür. Bu parça şunları içerir:
+- **‫`imageSearchQueries`**: طلبات البحث المحدّدة التي يستخدمها النموذج للحصول على سياق مرئي (البحث بالصور).
+- ‫**`groundingChunks`**: يحتوي على معلومات المصدر للنتائج التي تم استرجاعها.
+  بالنسبة إلى مصادر الصور، سيتم عرضها كعناوين URL لإعادة التوجيه باستخدام نوع جديد من أجزاء الصور. يتضمّن هذا الجزء ما يلي:
 
-  - **`uri`**: İlişkilendirme için kullanılan web sayfası URL'si (açılış sayfası).
-  - **`image_uri`**: Doğrudan resim URL'si.
-- **`groundingSupports`**: Oluşturulan içeriği parçalardaki ilgili alıntı kaynağına bağlayan belirli eşlemeler sağlar.
-- **`searchEntryPoint`**: Arama Önerileri'ni oluşturmak için uyumlu HTML ve CSS'yi içeren "Google Arama" çipini içerir.
+  - استبدِل **`uri`** بعنوان URL لصفحة الويب المستخدَمة في تحديد المصدر (الصفحة المقصودة).
+  - **`image_uri`**: عنوان URL المباشر للصورة.
+- **`groundingSupports`**: يوفّر عمليات ربط محدّدة تربط المحتوى الذي تم إنشاؤه بمصدر الاقتباس ذي الصلة في الأجزاء.
+- **`searchEntryPoint`**: يتضمّن شريحة "بحث Google" التي تحتوي على HTML وCSS متوافقَين لعرض "اقتراحات البحث".
 
-### 4K çözünürlüğe kadar resim oluşturma
+### إنشاء صور بدقة تصل إلى 4K
 
-Gemini 3 görüntü modelleri varsayılan olarak 1.000 görüntü üretir ancak 2.000, 4.000 ve 512 (0, 5K) görüntü de (yalnızca Gemini 3.1 Flash Image) oluşturabilir. Daha yüksek çözünürlüklü öğeler oluşturmak için `generation_config` içinde `image_size` değerini belirtin.
+تنشئ نماذج الصور في Gemini 3 صورًا بدقة 1000 بكسل تلقائيًا، ولكن يمكنها أيضًا إنشاء صور بدقة 2000 و4000 و512 بكسل (0.5 ألف بكسل) (في Gemini 3.1 Flash Image فقط). لإنشاء مواد عرض بدقة أعلى، حدِّد `image_size` في `generation_config`.
 
-Büyük harf "K" kullanmanız gerekir (ör. 1K, 2K, 4K). `512` değerinde "K" soneki kullanılmıyor. Küçük harfli parametreler (ör. 1k) reddedilir.
+يجب استخدام الحرف "K" الكبير (مثلاً، 1K أو 2K أو 4K). لا تستخدم القيمة `512` اللاحقة "K". سيتم رفض المعلمات التي تتضمّن أحرفًا صغيرة (مثل 1k).
 
 ### Python
 
@@ -1554,7 +1555,7 @@ func main() {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -1621,19 +1622,19 @@ curl -s -X POST \
   }'
 ```
 
-Aşağıda, bu istemden oluşturulan örnek bir resim verilmiştir:
+في ما يلي مثال على صورة تم إنشاؤها من خلال هذا الطلب:
 
-![Yapay zeka tarafından üretilmiş, Da Vinci tarzında, parçalanmış bir kral kelebeğinin anatomik çizimi.](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=tr)
+![رسم تشريحي بأسلوب دافنشي من إنشاء الذكاء الاصطناعي لفراشة ملكية تم تشريحها](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=ar)
 
-Da Vinci tarzında, yapay zekayla üretilmiş, parçalanmış bir kral kelebeğinin anatomik çizimi.
+رسم تشريحي لفراشة ملكية تم تشريحها بأسلوب ليوناردو دافنشي من إنشاء الذكاء الاصطناعي
 
-### Düşünme Süreci
+### عملية التفكير
 
-Gemini 3 görüntü modelleri, karmaşık istemler için mantık yürütme sürecini ("Düşünme") kullanan düşünen modellerdir. Bu özellik varsayılan olarak etkindir ve API'de devre dışı bırakılamaz. Düşünme süreci hakkında daha fazla bilgi edinmek için [Gemini Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr) rehberine bakın.
+نماذج الصور في Gemini 3 هي نماذج مُفكِّرة تستخدم عملية استدلال ("تفكير") للتعامل مع الطلبات المعقّدة. تكون هذه الميزة مفعّلة تلقائيًا ولا يمكن إيقافها في واجهة برمجة التطبيقات. لمزيد من المعلومات حول عملية التفكير، يُرجى الاطّلاع على دليل [تفكير Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=ar).
 
-Model, kompozisyonu ve mantığı test etmek için en fazla iki ara resim oluşturur. Düşünme aşamasındaki son resim, oluşturulan son resimdir.
+ينشئ النموذج ما يصل إلى صورتَين مؤقتتَين لاختبار التركيب والمنطق. الصورة الأخيرة ضمن "جارٍ التفكير" هي أيضًا الصورة النهائية المعروضة.
 
-Son görüntünün üretilmesine yol açan düşünceleri kontrol edebilirsiniz.
+يمكنك الاطّلاع على الأفكار التي أدّت إلى إنتاج الصورة النهائية.
 
 ### Python
 
@@ -1663,12 +1664,13 @@ for (const part of response.candidates[0].content.parts) {
 }
 ```
 
-#### Düşünme düzeylerini kontrol etme
+#### التحكّم في مستويات التفكير
 
-Gemini 3.1 Flash Image ile modelin kalite ve gecikme süresini dengelemek için kullandığı düşünme miktarını kontrol edebilirsiniz. Varsayılan `thinkingLevel` değeri `minimal`'dir.
-Desteklenen düzeyler `minimal` ve `high`'dir. `thinkingLevel` değerini `minimal` olarak ayarladığınızda en düşük gecikmeli yanıtlar elde edilir. Minimal düşünme, modelin hiç düşünmediği anlamına gelmez.
+باستخدام Gemini 3.1 Flash Image، يمكنك التحكّم في مقدار التفكير الذي يستخدمه النموذج لتحقيق التوازن بين الجودة وسرعة الاستجابة. القيمة التلقائية `thinkingLevel` هي `minimal`،
+والمستويات المتاحة هي `minimal` و`high`. يؤدي ضبط
+`thinkingLevel` على `minimal` إلى تقديم ردود بأقل وقت استجابة. يُرجى العِلم أنّ الحد الأدنى من التفكير لا يعني أنّ النموذج لا يستخدم أي تفكير على الإطلاق.
 
-Modelin oluşturduğu düşüncelerin yanıtta döndürülüp döndürülmeyeceğini veya gizli kalıp kalmayacağını belirlemek için `includeThoughts` boole değerini ekleyebilirsiniz.
+يمكنك إضافة القيمة المنطقية `includeThoughts` لتحديد ما إذا كان سيتم عرض الأفكار التي أنشأها النموذج في الردّ أو إخفاؤها.
 
 ### Python
 
@@ -1808,20 +1810,20 @@ curl -s -X POST \
   }'
 ```
 
-`includeThoughts`, `true` veya `false` olarak ayarlanıp ayarlanmadığına bakılmaksızın düşünme jetonlarının faturalandırıldığını unutmayın. Çünkü [düşünme süreci](#thinking-process), süreci görüntüleyip görüntülemediğinize bakılmaksızın her zaman varsayılan olarak gerçekleşir.
+يُرجى العِلم أنّه يتم تحصيل رسوم من الرموز المميزة الخاصة بالتفكير بغض النظر عمّا إذا تم ضبط `includeThoughts` على `true` أو `false`، لأنّ [عملية التفكير](#thinking-process) تحدث دائمًا بشكل تلقائي سواء عرضت العملية أم لا.
 
-#### Düşünce İmzaları
+#### توقيعات الأفكار
 
-Düşünce imzaları, modelin dahili düşünce sürecinin şifrelenmiş temsilleridir ve çok turlu etkileşimlerde muhakeme bağlamını korumak için kullanılır. Tüm yanıtlarda `thought_signature` alanı bulunur. Genel bir kural olarak, bir model yanıtında düşünce imzası alırsanız görüşme geçmişini bir sonraki dönüşte gönderirken bu imzayı aynen aldığınız şekilde geri iletmeniz gerekir. Düşünce imzalarının dolaşıma sokulmaması yanıtın başarısız olmasına neden olabilir. İmzalarla ilgili daha fazla açıklama için [düşünce imzası](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=tr)
-dokümanlarını inceleyin.
+توقيعات الأفكار هي تمثيلات مشفّرة لعملية التفكير الداخلية الخاصة بالنموذج، ويتم استخدامها للحفاظ على سياق الاستدلال في المحادثات المتعدّدة الجولات. تتضمّن جميع الردود الحقل `thought_signature`. كقاعدة عامة، إذا تلقّيت توقيعًا فكريًا في ردّ من النموذج، عليك إعادة إرساله تمامًا كما تلقّيته عند إرسال سجلّ المحادثة في الدور التالي. قد يؤدي عدم تداول توقيعات الأفكار إلى تعذّر عرض الرد. يمكنك الاطّلاع على مستندات [توقيع الأفكار](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=ar)
+للحصول على مزيد من التوضيحات حول التواقيع بشكل عام.
 
-Düşünce imzaları şu şekilde çalışır:
+إليك طريقة عمل التوقيعات الفكرية:
 
-- Yanıtta yer alan, resim `mimetype` içeren tüm `inline_data` bölümlerinde imza olmalıdır.
-- Düşüncelerden hemen sonra (herhangi bir resimden önce) metin bölümleri varsa ilk metin bölümünde de imza bulunmalıdır.
-- `inline_data` Resim içeren `mimetype` bölümler düşüncelerin bir parçasıysa imza içermez.
+- يجب أن تتضمّن جميع أجزاء `inline_data` التي تحتوي على الصورة `mimetype` والمضمّنة في الرد توقيعًا.
+- إذا كانت هناك بعض أجزاء النص في البداية (قبل أي صورة) بعد الأفكار مباشرةً، يجب أن يتضمّن جزء النص الأول توقيعًا أيضًا.
+- إذا كانت `inline_data` أجزاء تتضمّن صورة `mimetype` جزءًا من أفكار، لن تتضمّن توقيعات.
 
-Aşağıdaki kodda, düşünce imzalarının nerede yer aldığına dair bir örnek gösterilmektedir:
+يوضّح الرمز التالي مثالاً على الأماكن التي يتم فيها تضمين توقيعات الأفكار:
 
 ```
 [
@@ -1881,181 +1883,184 @@ Aşağıdaki kodda, düşünce imzalarının nerede yer aldığına dair bir ör
 ]
 ```
 
-## Diğer görüntü üretme modları
+## أوضاع أخرى لإنشاء الصور
 
-Gemini, istem yapısına ve bağlama bağlı olarak diğer görüntü etkileşimi modlarını da destekler. Örneğin:
+يتيح Gemini أوضاعًا أخرى للتفاعل مع الصور استنادًا إلى بنية الطلب وسياقه، بما في ذلك:
 
-- **Metinden resimlere ve metne (araya eklenmiş):** İlgili metinleri içeren resimler oluşturur.
-  - Örnek istem: "Paella için resimli bir tarif oluştur."
-- **Resimler ve metinden resimlere ve metne (dönüşümlü)**: İlgili yeni resimler ve metinler oluşturmak için giriş resimlerini ve metinlerini kullanır.
-  - Örnek istem: (Döşenmiş bir odanın resmiyle) "Mekanıma hangi renklerde kanepeler yakışır? Resmi güncelleyebilir misin?"
+- **النص إلى صور والنص (متداخل):** يعرض صورًا مع نص ذي صلة.
+  - مثال على الطلب: "أنشئ وصفة مصوّرة لطبق البايلا".
+- **الصور والنصوص إلى صور ونصوص (متداخلة)**: تستخدم هذه الميزة الصور والنصوص المُدخَلة لإنشاء صور ونصوص جديدة ذات صلة.
+  - مثال على الطلب: (مع صورة لغرفة مفروشة) "ما هي ألوان الأرائك الأخرى التي يمكن استخدامها في مساحتي؟ هل يمكنك تعديل الصورة؟"
 
-## Toplu olarak resim oluşturma
+## إنشاء صور بشكل مجمّع
 
-Çok sayıda resim oluşturmanız gerekiyorsa [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr)'yi kullanabilirsiniz. 24 saate kadar yanıt süresi karşılığında daha yüksek [hız sınırları](https://ai.google.dev/gemini-api/docs/rate-limits?hl=tr) elde edersiniz.
+إذا كنت بحاجة إلى إنشاء عدد كبير من الصور، يمكنك استخدام [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ar). يمكنك الحصول على [حدود معدّل استخدام أعلى](https://ai.google.dev/gemini-api/docs/rate-limits?hl=ar) مقابل مدة استجابة تصل إلى 24 ساعة.
 
-Toplu API görüntü örnekleri ve kodu için [Toplu API görüntü oluşturma belgelerini](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr#image-generation) ve [yemek kitabını](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=tr) inceleyin.
+راجِع [مستندات إنشاء الصور باستخدام Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ar#image-generation) و[كتاب الطبخ](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=ar)
+للاطّلاع على أمثلة وتعليمات برمجية حول إنشاء الصور باستخدام Batch API.
 
-## İstem yazma kılavuzu ve stratejileri
+## دليل واستراتيجيات كتابة الطلبات
 
-Görüntü oluşturmada ustalaşmak için temel bir ilkeyi anlamanız gerekir:
+يبدأ إتقان إنشاء الصور بمبدأ أساسي واحد:
 
-> **Anahtar kelimeleri listelemekle kalmayın, sahneyi de açıklayın.**
-> Modelin temel gücü, dili derinlemesine anlamasıdır. Bir anlatı, açıklayıcı paragraf, neredeyse her zaman bağlantısız kelimelerden oluşan bir listeden daha iyi ve tutarlı bir resim oluşturur.
+> **صف المشهد، ولا تكتفِ بإدراج الكلمات الرئيسية.**
+> تتمثّل نقطة القوة الأساسية للنموذج في فهمه العميق للغة. سيؤدي تضمين فقرة وصفية سردية إلى إنشاء صورة أفضل وأكثر اتساقًا
+> من مجرد إدراج قائمة بكلمات غير مرتبطة.
 
-### Görüntü üretme istemleri
+### طلبات إنشاء الصور
 
-Aşağıdaki stratejiler, tam olarak aradığınız resimleri oluşturmak için etkili istemler oluşturmanıza yardımcı olacaktır.
+ستساعدك الاستراتيجيات التالية في إنشاء طلبات فعّالة للحصول على الصور التي تبحث عنها بالضبط.
 
-#### Fotoğrafçılık
+#### تصوير فوتوغرافي
 
-Gerçekçi görüntüler için fotoğrafçılık terimlerini kullanın. Modeli gerçekçi bir sonuca yönlendirmek için kamera açıları, lens türleri, ışıklandırma ve ince ayrıntılardan bahsedin.
+للحصول على صور واقعية، استخدِم مصطلحات التصوير الفوتوغرافي. اذكر زوايا الكاميرا وأنواع العدسات والإضاءة والتفاصيل الدقيقة لتوجيه النموذج نحو نتيجة واقعية.
 
-| **İstem** | **Üretilen çıkış** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| Güneşten etkilenmiş derin kırışıklıkları ve sıcak, bilgili bir gülümsemesi olan yaşlı bir Japon seramik sanatçısının yakın çekim portre fotoğrafı. Yeni sırlanmış bir çay kasesini dikkatlice inceliyor. Arka planda, güneş ışığıyla dolu rustik atölyesi var. Sahne, pencereden süzülen yumuşak, altın saat ışığıyla aydınlatılıyor ve kilin ince dokusu vurgulanıyor. 85 mm portre lensiyle çekilmiş, yumuşak ve bulanık bir arka plan (bokeh) oluşturulmuş olsun. Genel atmosfer sakin ve ustaca olmalı. Dikey portre yönü. | Yaşlı Japon seramik sanatçısı |
+| صورة مقرّبة لبورتريه خزّاف ياباني مسنّ تظهر على وجهه تجاعيد عميقة ناتجة عن التعرّض للشمس وابتسامة دافئة وواثقة. وهو يتفحّص بعناية وعاء شاي مطليًا حديثًا. المكان هو ورشة عمله الريفية المشمسة. يضيء المشهد ضوء ناعم من الساعة الذهبية يمرّ عبر نافذة، ما يبرز الملمس الناعم للطين. تم التقاط الصورة باستخدام عدسة بورتريه مقاس 85 مم، ما أدّى إلى الحصول على خلفية ناعمة ومموَّهة (تأثير البوكيه). الأجواء العامة هادئة ومتقنة. الاتجاه الرأسي العمودي | فنان ياباني مسنّ يصنع السيراميك |
 
-#### Stilize edilmiş resimler ve çıkartmalar
+#### صور توضيحية وملصقات ذات أنماط مختلفة
 
-Çıkartma, simge veya öğe oluşturmak için stil hakkında net olun ve beyaz arka plan isteyin.
+لإنشاء ملصقات أو رموز أو مواد عرض، يجب أن تكون واضحًا بشأن الأسلوب وأن تطلب خلفية بيضاء.
 
-| **İstem** | **Üretilen çıkış** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| Küçük bir bambu şapka takan mutlu bir kırmızı pandanın kawaii tarzı çıkartması. Yeşil bir bambu yaprağını yiyor. Tasarımda belirgin ve temiz ana hatlar, basit bir selüloit gölgeleme ve canlı bir renk paleti kullanılıyor. Arka plan beyaz olmalıdır. | Kawaii tarzında kızıl panda çıkartması |
+| ملصق بأسلوب كاواي لدب باندا أحمر سعيد يرتدي قبعة خيزران صغيرة وهو يمضغ ورقة خيزران خضراء. يتميّز التصميم بخطوط عريضة وواضحة، وتظليل بسيط للخلايا، ولوحة ألوان زاهية. يجب أن تكون الخلفية بيضاء. | ملصق باندا حمراء بأسلوب &quot;كاواي&quot; |
 
-#### Resimlerdeki metinlerin doğruluğu
+#### نص دقيق في الصور
 
-Gemini, metin oluşturma konusunda üstündür. Metin, yazı tipi stili (açıklayıcı bir şekilde) ve genel tasarım hakkında net olun. Profesyonel öğe üretimi için Gemini 3 Pro Image Preview'u kullanın.
+يتفوّق Gemini في عرض النص. يجب أن يكون النص واضحًا، وأن يكون نمط الخط (وصفيًا)، وأن يكون التصميم العام واضحًا. استخدام &quot;معاينة الصور&quot; في Gemini 3 Pro لإنتاج مواد عرض احترافية
 
-| **İstem** | **Üretilen çıkış** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| "The Daily Grind" adlı bir kafe için modern ve minimalist bir logo oluştur. Metin, sade, kalın ve sans-serif yazı tipinde olmalıdır. Renk şeması siyah beyazdır. Logoyu daire içine alın. Kahve çekirdeklerini akıllıca kullanın. | Kafe logosu |
+| أنشِئ شعارًا عصريًا وبسيطًا لمقهى اسمه "The Daily Grind". يجب أن يكون النص بخط sans-serif واضح وغامق. نظام الألوان هو الأبيض والأسود. ضَع الشعار في دائرة. استخدِم حبوب القهوة بطريقة مبتكرة. | شعار المقهى |
 
-#### Ürün maketleri ve ticari fotoğrafçılık
+#### نماذج المنتجات والتصوير الفوتوغرافي التجاري
 
-E-ticaret, reklam veya markalama için net ve profesyonel ürün fotoğrafları oluşturmak üzere idealdir.
+وهي مثالية لإنشاء لقطات منتجات احترافية وواضحة للتجارة الإلكترونية أو الإعلانات أو العلامات التجارية.
 
-| **İstem** | **Üretilen çıkış** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| Parlak beton yüzey üzerinde sunulan, mat siyah renkteki minimalist seramik kahve kupasının yüksek çözünürlüklü ve stüdyo ışıklı ürün fotoğrafı. Aydınlatma, yumuşak ve dağınık vurgular oluşturmak ve sert gölgeleri ortadan kaldırmak için tasarlanmış üç noktalı bir softbox kurulumudur. Temiz çizgilerini göstermek için kamera açısı biraz yukarıdan 45 derecelik bir çekimdir. Kahveden yükselen buhara keskin bir şekilde odaklanılmış, ultra gerçekçi bir görüntü. Kare resim. | Seramik kahve kupası ürün fotoğrafı |
+| صورة منتج فوتوغرافية عالية الدقة تم التقاطها في استوديو مضاء، وتظهر فيها قهوة في كوب سيراميك بسيط باللون الأسود غير اللامع، موضوع على سطح خرساني مصقول. الإضاءة عبارة عن مجموعة من ثلاثة صناديق إضاءة ناعمة مصمَّمة لإنشاء ظلال ناعمة وموزّعة وإزالة الظلال القاسية. زاوية الكاميرا هي لقطة بزاوية 45 درجة مرتفعة قليلاً لإبراز خطوطها الواضحة. صورة واقعية للغاية مع تركيز حاد على البخار المتصاعد من القهوة صورة مربّعة | لقطة لمنتج كوب قهوة من السيراميك |
 
-#### Minimalist ve negatif alan tasarımı
+#### التصميم البسيط والمساحة السلبية
 
-Metnin yerleştirileceği web siteleri, sunumlar veya pazarlama materyalleri için arka plan oluşturmak üzere mükemmeldir.
+وهي ممتازة لإنشاء خلفيات للمواقع الإلكترونية أو العروض التقديمية أو المواد التسويقية التي سيتم عرض النص فوقها.
 
-| **İstem** | **Üretilen çıkış** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| Kadrajın sağ alt kısmında yer alan tek bir narin kırmızı akçaağaç yaprağının yer aldığı minimalist bir kompozisyon. Arka plan, metin için önemli bir negatif alan oluşturan geniş ve boş bir kirli beyaz tuvaldir. Sol üstten gelen yumuşak ve eşit dağılmış ışıklandırma. Kare resim. | Kırmızı akçaağaç yaprağı içeren minimalist tasarım |
+| صورة بسيطة تعرض ورقة شجر قيقب حمراء واحدة ورقيقة موضوعة في أسفل يسار الإطار الخلفية عبارة عن لوحة قماشية واسعة وفارغة بلون أبيض مائل للصفرة، ما يخلق مساحة سالبة كبيرة للنص. إضاءة ناعمة وموزّعة من أعلى اليمين صورة مربّعة | تصميم بسيط مع ورقة شجر قيقب حمراء |
 
-#### Sıralı sanat (Çizgi roman paneli / Resimli taslak)
+#### الفن التسلسلي (لوحة الكتب المصوّرة / لوحة ترتيب الصور)
 
-Görsel hikaye anlatımı için paneller oluşturmak üzere karakter tutarlılığı ve sahne açıklaması üzerine kuruludur. Metin doğruluğu ve hikaye anlatma becerisi için bu istemler en iyi sonucu Gemini 3 Pro ve Gemini 3.1 Flash Image Preview ile verir.
+تستند هذه الميزة إلى اتّساق الشخصيات ووصف المشاهد لإنشاء لوحات لسرد القصص بشكل مرئي. للحصول على أفضل النتائج من حيث الدقة في النصوص والقدرة على سرد القصص، تعمل هذه الطلبات بشكل أفضل مع Gemini 3 Pro وGemini 3.1 Flash Image Preview.
 
-| **İstem** | **Üretilen çıkış** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| **Giriş resmi:**  Beyaz gözlüklü adam   Giriş resmi   **İstem:** Yüksek kontrastlı siyah beyaz mürekkeplerle, sert ve karanlık bir sanat tarzında 3 panelli bir çizgi roman oluştur. Karakteri komik bir sahneye yerleştir. | Sert ve gerçekçi kara film tarzında çizgi roman paneli |
+| **الصورة المدخَلة:**  رجل يرتدي نظارات بيضاء   صورة الإدخال   **الطلب:** أنشئ قصة مصوّرة من 3 لوحات بأسلوب فنّي جريء ومظلم باستخدام أحبار بالأبيض والأسود عالية التباين. ضَع الشخصية في مشهد فكاهي. | لوحة كوميدية سوداء |
 
-#### Google Arama ile Temellendirme
+#### تحديد المصدر من خلال "بحث Google"
 
-Google Arama'yı kullanarak güncel veya gerçek zamanlı bilgilere dayalı görseller oluşturun.
-Bu özellik; haberler, hava durumu ve zamana duyarlı diğer konular için kullanışlıdır.
+استخدام "بحث Google" لإنشاء صور استنادًا إلى معلومات حديثة أو في الوقت الفعلي
+ويُعدّ ذلك مفيدًا للأخبار والطقس والمواضيع الأخرى التي تتطلّب معلومات حديثة.
 
-| **İstem** | **Üretilen çıkış** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| Dün geceki Şampiyonlar Ligi Arsenal maçının basit ama şık bir grafiğini oluştur. | Arsenal futbol maçının skor grafiği |
+| أنشئ رسمًا بسيطًا وعصريًا لمباراة "أرسنال" التي أُقيمت الليلة الماضية في دوري أبطال أوروبا | صورة لنتيجة مباراة كرة قدم لفريق &quot;أرسنال&quot; |
 
-### Resimleri düzenleme istemleri
+### طلبات تعديل الصور
 
-Bu örneklerde, düzenleme, kompozisyon ve stil aktarımı için metin istemlerinizle birlikte nasıl resim sağlayacağınız gösterilmektedir.
+توضّح هذه الأمثلة كيفية تقديم صور إلى جانب طلباتك النصية لإجراء عمليات التعديل والتركيب ونقل الأنماط.
 
-#### Öğe ekleme ve kaldırma
+#### إضافة العناصر وإزالتها
 
-Bir resim ekleyin ve değişikliğinizi açıklayın. Model, orijinal resmin stili, ışığı ve perspektifiyle eşleşir.
+قدِّم صورة واشرح التغيير المطلوب. سيتطابق النموذج مع نمط الصورة الأصلية وإضاءتها ومنظورها.
 
-| **İstem** | **Üretilen çıkış** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| **Giriş resmi:**  Tüylü bir kızıl kedinin fotogerçekçi resmi...   Giriş resmi   **İstem:** Kedimin sağlanan resmini kullanarak lütfen başına küçük, örülmüş bir büyücü şapkası ekle. Öğenin rahat bir şekilde yerleştirilmiş ve fotoğraftaki yumuşak ışıkla uyumlu görünmesini sağlayın. | Sihirbaz şapkalı kedi |
+| **الصورة المدخَلة:**  صورة واقعية لقطة زنجبيلية منفوشة...   صورة الإدخال   **الطلب:** باستخدام صورة قطتي المرفقة، يُرجى إضافة قبعة ساحر صغيرة منسوجة على رأسها. اجعلها تبدو وكأنّها تجلس بشكل مريح وتتطابق مع الإضاءة الناعمة في الصورة. | قطة ترتدي قبعة ساحر |
 
-#### İç boyama (Anlamsal maskeleme)
+#### طلاء أجزاء من الصورة (الإخفاء الدلالي)
 
-Bir resmin belirli bir bölümünü düzenlerken geri kalanına dokunmadan bırakmak için "maske"yi sohbet ederek tanımlayın.
+تحديد "قناع" بشكل حواري لتعديل جزء معيّن من الصورة بدون التأثير في بقية الصورة
 
-| **İstem** | **Üretilen çıkış** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| **Giriş resmi:**  Modern ve iyi aydınlatılmış bir oturma odasının geniş çekimi...   Giriş resmi   **İstem:** Sağlanan oturma odası resmini kullanarak yalnızca mavi kanepenin yerine eski tarz, kahverengi deri bir Chesterfield kanepe koy. Odanın geri kalanını (ör. koltuktaki yastıklar ve aydınlatma) değiştirmeyin. | Kahverengi deri kanepeli oturma odası |
+| **الصورة المدخَلة:**  لقطة واسعة لغرفة معيشة عصرية مضاءة جيدًا...   صورة الإدخال   **الطلب:** باستخدام صورة غرفة المعيشة المقدَّمة، غيِّروا فقط الأريكة الزرقاء إلى أريكة تشيسترفيلد عتيقة من الجلد البني. لا تغيِّر بقية الغرفة، بما في ذلك الوسائد على الأريكة والإضاءة. | غرفة معيشة فيها أريكة جلدية بنية |
 
-#### Stil aktarımı
+#### تحويل النمط
 
-Bir resim sağlayın ve modelden içeriğini farklı bir sanatsal tarzda yeniden oluşturmasını isteyin.
+قدِّم صورة واطلب من النموذج إعادة إنشاء محتواها بأسلوب فني مختلف.
 
-| **İstem** | **Üretilen çıkış** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| **Giriş resmi:**  Kalabalık bir şehir caddesinin fotogerçekçi ve yüksek çözünürlüklü fotoğrafı...   Giriş resmi   **İstem:** Gece çekilmiş modern bir şehir caddesinin fotoğrafını, Vincent van Gogh'un "Yıldızlı Gece" adlı eserinin sanatsal tarzına dönüştür. Binaların ve arabaların orijinal kompozisyonunu koruyun ancak tüm öğeleri, derin maviler ve parlak sarılardan oluşan dramatik bir paletle, kalın boya fırçası darbeleriyle işleyin. | Yıldızlı Gece tarzında şehir caddesi |
+| **الصورة المدخَلة:**  صورة فوتوغرافية واقعية وعالية الدقة لشارع مزدحم في مدينة...   صورة الإدخال   **الطلب:** حوِّل الصورة المقدَّمة لشارع في مدينة حديثة في الليل إلى أسلوب "ليلة مرصّعة بالنجوم" الفني الخاص بـ "فان غوخ". الحفاظ على التركيبة الأصلية للمباني والسيارات، ولكن عرض جميع العناصر بضربات فرشاة دوّارة وسميكة ولوحة ألوان درامية من درجات الأزرق الداكن والأصفر الساطع | شارع في المدينة بأسلوب &quot;ليلة مرصعة بالنجوم&quot; |
 
-#### Gelişmiş kompozisyon: Birden fazla görüntüyü birleştirme
+#### التركيب المتقدّم: الجمع بين صور متعددة
 
-Yeni bir kompozit sahne oluşturmak için bağlam olarak birden fazla resim sağlayın. Bu özellik, ürün maketleri veya yaratıcı kolajlar için idealdir.
+تقديم صور متعددة كسياق لإنشاء مشهد جديد ومجمّع هذه الميزة مثالية لإنشاء نماذج للمنتجات أو صور مجمّعة إبداعية.
 
-| **İstem** | **Üretilen çıkış** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| **Giriş resimleri:**  Mavi çiçekli bir yazlık elbisenin profesyonelce çekilmiş fotoğrafı...   Giriş 1: Elbise   Saçları topuz yapılmış bir kadının tam boy fotoğrafı...   Giriş 2: Model   **İstem:** Profesyonel bir e-ticaret moda fotoğrafı oluştur. İlk resimdeki mavi çiçekli elbiseyi alıp ikinci resimdeki kadına giydir. Elbiseyi giyen kadının, dış ortamla uyumlu olacak şekilde ışık ve gölgeler ayarlanmış, gerçekçi ve tam vücut fotoğrafını oluştur. | Moda e-ticaret çekimi |
+| **الصور المدخَلة:**  صورة احترافية لفستان صيفي أزرق مزيّن بالورود...   المدخل 1: فستان   لقطة كاملة لامرأة بشعر مرفوع على شكل كعكة...   المدخل 2: عارضة أزياء   **الطلب:** أريد صورة احترافية لمنتج أزياء للتجارة الإلكترونية. استخدِم الفستان الأزرق المنقوش بالورود من الصورة الأولى واجعل المرأة من الصورة الثانية ترتديه. أنشِئ صورة واقعية لكامل جسم المرأة وهي ترتدي الفستان، مع تعديل الإضاءة والظلال لتتناسب مع البيئة الخارجية. | لقطة للتجارة الإلكترونية في مجال الموضة |
 
-#### Yüksek doğruluk oranıyla ayrıntı koruma
+#### الحفاظ على التفاصيل العالية الدقة
 
-Düzenleme sırasında önemli ayrıntıların (ör. yüz veya logo) korunmasını sağlamak için düzenleme isteğinizle birlikte bu ayrıntıları ayrıntılı bir şekilde açıklayın.
+لضمان الحفاظ على التفاصيل المهمة (مثل وجه أو شعار) أثناء التعديل،
+يجب وصفها بالتفصيل مع طلب التعديل.
 
-| **İstem** | **Üretilen çıkış** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| **Giriş resimleri:**  Kahverengi saçlı ve mavi gözlü bir kadının profesyonel portre fotoğrafı...   Giriş 1: Kadın   &quot;G&quot; ve &quot;A&quot; harflerinin yer aldığı sade ve modern bir logo...   Giriş 2: Logo   **İstem:** Kahverengi saçlı, mavi gözlü ve ifadesiz kadının ilk fotoğrafını çek. İkinci resimdeki logoyu kadının siyah tişörtüne ekle. Kadının yüzünün ve özelliklerinin tamamen değişmeden kalmasını sağla. Logo, gömleğin kıvrımlarını takip ederek kumaşa doğal bir şekilde basılmış gibi görünmelidir. | Tişörtünde logo olan kadın |
+| **الصور المدخَلة:**  صورة احترافية لوجه امرأة ذات شعر بني وعينين زرقاوين...   الإدخال 1: امرأة   شعار بسيط وعصري يتضمّن الحرفين &quot;G&quot; و&quot;A&quot;...   الإدخال 2: شعار   **الطلب:** أريد الصورة الأولى للمرأة ذات الشعر البني والعينين الزرقاوين وتعابير الوجه المحايدة. أضِف الشعار من الصورة الثانية إلى القميص الأسود الذي ترتديه. تأكَّد من عدم تغيير وجه المرأة وملامحها على الإطلاق. يجب أن يبدو الشعار وكأنّه مطبوع بشكل طبيعي على القماش، مع مراعاة طيّات القميص. | امرأة ترتدي قميصًا يحمل شعارًا |
 
-#### Hayata geçirmek
+#### تحويل فكرة إلى واقع
 
-Kaba bir taslak veya çizim yükleyip modelden bunu tamamlanmış bir resme dönüştürmesini isteyin.
+حمِّل رسمًا تخطيطيًا أو لوحة واطلب من النموذج تحسينها لتصبح صورة نهائية.
 
-| **İstem** | **Üretilen çıkış** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| **Giriş resmi:**  Araba çizimi   Arabanın kaba taslağı   **İstem:** Fütüristik bir arabanın bu kaba kurşun kalem eskizini, galerideki bitmiş konsept arabanın cilalı bir fotoğrafına dönüştür. Eskizdeki şık çizgileri ve alçak profili koruyun ancak metalik mavi boya ve neon jant ışığı ekleyin. | Kavramsal arabanın cilalı fotoğrafı |
+| **الصورة المدخَلة:**  رسم تخطيطي لسيارة   رسم تقريبي لسيارة   **الطلب:** حوِّل هذه اللوحة الأولية المرسومة بقلم الرصاص لسيارة مستقبلية إلى صورة مصقولة لسيارة نموذجية جاهزة في صالة عرض. احتفظ بالخطوط الأنيقة والتصميم المنخفض من الرسم التخطيطي، ولكن أضِف طلاءً أزرق معدنيًا وإضاءة نيون على الحواف. | صورة مصقولة لسيارة نموذجية |
 
-#### Karakter tutarlılığı: 360 görünümü
+#### الحفاظ على ملامح الشخصية: العرض بزاوية 360 درجة
 
-Farklı açılar için yinelemeli olarak istemde bulunarak bir karakterin 360 derece görünümlerini oluşturabilirsiniz. En iyi sonuçlar için tutarlılığı korumak amacıyla daha önce oluşturulan resimleri sonraki istemlere ekleyin. Karmaşık pozlar için istenen pozun referans görselini ekleyin.
+يمكنك إنشاء عروض بزاوية 360 درجة لشخصية من خلال تقديم طلبات بشكل متكرّر للحصول على زوايا مختلفة. للحصول على أفضل النتائج، أدرِج الصور التي تم إنشاؤها سابقًا في الطلبات اللاحقة للحفاظ على التناسق. بالنسبة إلى الوضعيات المعقّدة، أدرِج صورة مرجعية للوضعية المطلوبة.
 
-| **İstem** | **Üretilen çıkış** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| **Giriş resmi:**  Beyaz gözlüklü bir adamın orijinal girişi   Orijinal resim   **İstem:** Bu adamın beyaz arka plan üzerinde, sağa doğru bakan profil stüdyo portresi | Sağa bakan beyaz gözlüklü bir adamın çıktısı   Beyaz gözlüklü adam sağa bakıyor   Beyaz gözlük takıp ileriye bakan bir adamın çıktısı   Beyaz gözlüklü adam öne bakıyor |
+| **الصورة المدخَلة:**  المدخلات الأصلية لرجل يرتدي نظارات بيضاء   الصورة الأصلية   **الطلب:** صورة استوديو لهذا الرجل على خلفية بيضاء، من الجانب الأيمن | ناتج لرجل يرتدي نظارة بيضاء وينظر إلى اليمين   رجل يرتدي نظارات بيضاء وينظر إلى اليمين   ناتج لرجل يرتدي نظارة بيضاء وينظر إلى الأمام   رجل يرتدي نظارات بيضاء وينظر إلى الأمام |
 
-### En İyi Uygulamalar
+### أفضل الممارسات
 
-Sonuçlarınızı iyi seviyeden mükemmel seviyeye taşımak için bu profesyonel stratejileri iş akışınıza dahil edin.
+لتحسين نتائجك من جيدة إلى ممتازة، يمكنك دمج الاستراتيجيات الاحترافية التالية في سير عملك.
 
-- **Çok Ayrıntılı Olun:** Ne kadar çok ayrıntı verirseniz o kadar fazla kontrol sahibi olursunuz. "Fantezi zırh" yerine "gümüş yaprak desenleriyle işlenmiş, yüksek yakalı ve şahin kanatları şeklinde omuzlukları olan, süslü elf zırhı" gibi bir açıklama yapın.
-- **Bağlam ve Amaç Sağlama:** Resmin *amacını* açıklayın. Modelin bağlamı anlaması, nihai çıktıyı etkiler. Örneğin, "Üst düzey, minimalist bir cilt bakımı markası için logo oluştur" istemi, yalnızca "Logo oluştur" istemine kıyasla daha iyi sonuçlar verir.
-- **İterasyon yapın ve iyileştirin:** İlk denemede mükemmel bir resim elde etmeyi beklemeyin. Küçük değişiklikler yapmak için modelin etkileşimli yapısından yararlanın. "Bu harika ama ışığı biraz daha sıcak yapabilir misin?" veya "Her şeyi aynı tut ama karakterin ifadesini daha ciddi olacak şekilde değiştir" gibi ek sorularla devam edin.
-- **Adım adım talimatlar kullanın:** Çok sayıda öğe içeren karmaşık sahneler için isteminizi adımlara ayırın. "Öncelikle şafakta sakin ve sisli bir orman arka planı oluştur. Ardından, ön plana yosun kaplı eski bir taş sunak ekle.
-  Son olarak, sunakın üzerine tek bir parlayan kılıç yerleştirin."
-- **"Anlamsal Olumsuz İstemler" kullanın:** "Araba yok" demek yerine, istediğiniz sahneyi olumlu bir şekilde tanımlayın: "Trafik işareti olmayan boş ve ıssız bir sokak."
-- **Kamerayı Kontrol Etme:** Kompozisyonu kontrol etmek için fotoğraf ve sinema dilini kullanın. `wide-angle shot`, `macro shot`, `low-angle
-  perspective` gibi terimler.
+- **كن دقيقًا جدًا:** كلّما قدّمت تفاصيل أكثر، زادت إمكانية التحكّم. بدلاً من كتابة "درع خيالي"، يمكنك وصفه: "درع معدني مزخرف خاص بالجِن، منقوش عليه أوراق فضية، مع ياقة عالية وواقيات كتف على شكل أجنحة صقر".
+- **توفير السياق والنية:** اشرح *الغرض* من الصورة. سيؤثر فهم النموذج للسياق في النتيجة النهائية. على سبيل المثال، سيؤدي طلب "إنشاء شعار لعلامة تجارية راقية وبسيطة للعناية بالبشرة" إلى نتائج أفضل من مجرد طلب "إنشاء شعار".
+- **التكرار والتحسين:** لا تتوقّع الحصول على صورة مثالية من المحاولة الأولى. استخدِم
+  الطبيعة الحوارية للنموذج لإجراء تغييرات بسيطة. يمكنك متابعة المحادثة بطلبات مثل "هذا رائع، ولكن هل يمكنك جعل الإضاءة أكثر دفئًا؟" أو "أريد الإبقاء على كل شيء كما هو، ولكن تغيير تعابير وجه الشخصية لتكون أكثر جدية".
+- **استخدام التعليمات المفصّلة:** بالنسبة إلى المشاهد المعقّدة التي تتضمّن عناصر كثيرة، قسِّم طلبك إلى خطوات. "أولاً، أنشئ خلفية لغابة هادئة يلفّها الضباب
+  عند الفجر. بعد ذلك، أضِف في المقدّمة مذبحًا قديمًا من الحجر مغطّى بالطحلب.
+  أخيرًا، ضَع سيفًا واحدًا متوهجًا فوق المذبح".
+- **استخدام "مطالبات سلبية دلالية":** بدلاً من قول "لا أريد سيارات"، يمكنك وصف المشهد المطلوب بشكل إيجابي: "شارع خالٍ ومهجور لا تظهر فيه أي علامات على حركة المرور".
+- **التحكّم في الكاميرا:** استخدِم لغة التصوير الفوتوغرافي والسينمائي للتحكّم في التركيب. عبارات مثل `wide-angle shot` و`macro shot` و`low-angle
+  perspective`
 
-## Sınırlamalar
+## القيود
 
-- En iyi performans için şu dilleri kullanın: EN, ar-EG, de-DE, es-MX,
-  fr-FR, hi-IN, id-ID, it-IT, ja-JP, ko-KR, pt-BR, ru-RU, ua-UA, vi-VN, zh-CN.
-- Görüntü oluşturma, ses veya video girişlerini desteklemez.
-- Model, kullanıcının açıkça istediği resim çıkışlarının tam sayısını her zaman karşılamaz.
-- `gemini-2.5-flash-image`, giriş olarak en fazla 3 resimle en iyi şekilde çalışır. `gemini-3-pro-image-preview` ise yüksek doğrulukta 5 resmi ve toplamda en fazla 14 resmi destekler. `gemini-3.1-flash-image-preview`, tek bir iş akışında en fazla 4 karakter benzerliğini ve 10 nesnenin doğruluğunu destekler.
-- Gemini, bir resim için metin oluştururken önce metni oluşturup ardından metni içeren bir resim istemeniz durumunda en iyi şekilde çalışır.
-- `gemini-3.1-flash-image-preview` Google Arama ile temellendirme şu anda web aramasından elde edilen gerçek insan resimlerinin kullanılmasını desteklemiyor.
-- Üretilen tüm resimlerde [SynthID filigranı](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=tr) bulunur.
+- للحصول على أفضل أداء، استخدِم اللغات التالية: الإنجليزية، والعربية (مصر)، والألمانية (ألمانيا)، والإسبانية (المكسيك)، والفرنسية (فرنسا)، والهندية (الهند)، والإندونيسية (إندونيسيا)، والإيطالية (إيطاليا)، واليابانية (اليابان)، والكورية (كوريا الجنوبية)، والبرتغالية (البرازيل)، والروسية (روسيا)، والأوكرانية (أوكرانيا)، والفيتنامية (فيتنام)، والصينية (الصين).
+- لا تتيح ميزة إنشاء الصور إدخال ملفات صوت أو فيديو.
+- لن يلتزم النموذج دائمًا بالعدد الدقيق لنتائج الصور التي يطلبها المستخدم بشكل صريح.
+- يعمل `gemini-2.5-flash-image` على أفضل وجه مع ما يصل إلى 3 صور كمدخلات، بينما يتيح `gemini-3-pro-image-preview` استخدام 5 صور بدقة عالية، وما يصل إلى 14 صورة إجمالاً. تتيح `gemini-3.1-flash-image-preview` تشابه الأحرف بما يصل إلى 4 أحرف ودقة تصل إلى 10 عناصر في سير عمل واحد.
+- عند إنشاء نص لصورة، يعمل Gemini بشكل أفضل إذا أنشأت النص أولاً ثم طلبت صورة تتضمّن النص.
+- `gemini-3.1-flash-image-preview` لا تتيح ميزة "تحديد المصدر من خلال بحث Google" حاليًا استخدام صور واقعية لأشخاص من "بحث الويب".
+- تتضمّن جميع الصور التي يتم إنشاؤها [علامة مائية من SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=ar).
 
-## İsteğe bağlı yapılandırmalar
+## الإعدادات الاختيارية
 
-İsteğe bağlı olarak, `generate_content` çağrılarının `config` alanında modelin çıkışının yanıt biçimlerini ve en-boy oranını yapılandırabilirsiniz.
+يمكنك بشكل اختياري ضبط طرق عرض الرد ونسبة العرض إلى الارتفاع لناتج النموذج في الحقل `config` ضمن طلبات `generate_content`.
 
-### Çıkış türleri
+### أنواع النتائج
 
-Model, varsayılan olarak metin ve resim yanıtları (ör. `response_modalities=['Text', 'Image']`) döndürür.
-`response_modalities=['Image']` kullanarak yanıtı yalnızca resim döndürecek şekilde (metin olmadan) yapılandırabilirsiniz.
+يعرض النموذج تلقائيًا ردودًا نصية وردودًا على شكل صور (أي `response_modalities=['Text', 'Image']`). يمكنك ضبط الردود لعرض الصور فقط بدون نص باستخدام `response_modalities=['Image']`.
 
 ### Python
 
@@ -2095,7 +2100,7 @@ result, _ := client.Models.GenerateContent(
   )
 ```
 
-### Java
+### جافا
 
 ```
 response = client.models.generateContent(
@@ -2125,10 +2130,10 @@ curl -s -X POST \
   }'
 ```
 
-### En boy oranları ve resim boyutu
+### نِسَب العرض إلى الارتفاع وحجم الصورة
 
-Model, varsayılan olarak çıkış resminin boyutunu giriş resminizin boyutuyla eşleştirir veya 1:1 kareler oluşturur.
-Yanıt isteğindeki `image_config` altında bulunan `aspect_ratio` alanını kullanarak çıkış resminin en boy oranını kontrol edebilirsiniz. Bu alan burada gösterilmiştir:
+يتم ضبط النموذج تلقائيًا على مطابقة حجم الصورة الناتجة مع حجم الصورة التي أدخلتها، أو يتم إنشاء مربّعات بنسبة 1:1.
+يمكنك التحكّم في نسبة العرض إلى الارتفاع للصورة الناتجة باستخدام الحقل `aspect_ratio` ضمن `image_config` في طلب الاستجابة، كما هو موضّح هنا:
 
 ### Python
 
@@ -2215,7 +2220,7 @@ result_gemini3, _ := client.Models.GenerateContent(
   )
 ```
 
-### Java
+### جافا
 
 ```
 // For gemini-2.5-flash-image
@@ -2281,83 +2286,85 @@ curl -s -X POST \
   }'
 ```
 
-Kullanılabilen farklı oranlar ve oluşturulan resmin boyutu aşağıdaki tablolarda listelenmiştir:
+في ما يلي الجداول التي تعرض النسب المختلفة المتاحة وحجم الصورة التي يتم إنشاؤها:
 
-### 3.1 Flash Image Preview
+### ‫3.1 Flash Image Preview
 
-| En boy oranı | 512 çözünürlük | 500 jeton | 1K çözünürlük | 1.000 jeton | 2K çözünürlük | 2.000 jeton | 4K çözünürlük | 4K jeton |
+| نسبة العرض إلى الارتفاع | درجة الدقة 512 | ‫0.5 ألف رمز مميّز | درجة الدقة 1K | ‫1,000 رمز مميّز | درجة الدقة 2K | 2,000 رمز مميّز | درجة الدقة 4K | ‫4,000 رمز مميّز |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **1:1** | 512x512 | 747 | 1024x1024 | 1120 | 2048x2048 | 1680 | 4096x4096 | 2520 |
-| **1:4** | 256x1024 | 747 | 512x2048 | 1120 | 1024x4096 | 1680 | 2048x8192 | 2520 |
-| **1:8** | 192x1536 | 747 | 384x3072 | 1120 | 768x6144 | 1680 | 1536x12288 | 2520 |
-| **2:3** | 424x632 | 747 | 848x1264 | 1120 | 1696x2528 | 1680 | 3392x5056 | 2520 |
+| **1:1** | ‫512×512 | 747 | 1024x1024 | 1120 | ‫2048x2048 | 1680 | 4096x4096 | 2520 |
+| **1:4** | 256x1024 | 747 | 512x2048 | 1120 | ‫1024x4096 | 1680 | 2048x8192 | 2520 |
+| **1:8** | 192x1536 | 747 | ‫384 × 3072 | 1120 | ‫768x6144 | 1680 | 1536x12288 | 2520 |
+| **2:3** | 424x632 | 747 | 848x1264 | 1120 | ‫1696x2528 | 1680 | ‫3392 × 5056 | 2520 |
 | **3:2** | 632x424 | 747 | 1264x848 | 1120 | 2528x1696 | 1680 | 5056x3392 | 2520 |
-| **3:4** | 448x600 | 747 | 896x1200 | 1120 | 1792x2400 | 1680 | 3584x4800 | 2520 |
-| **4:1** | 1024x256 | 747 | 2048x512 | 1120 | 4096x1024 | 1680 | 8192x2048 | 2520 |
-| **4:3** | 600x448 | 747 | 1200x896 | 1120 | 2400x1792 | 1680 | 4800x3584 | 2520 |
-| **4:5** | 464x576 | 747 | 928x1152 | 1120 | 1856x2304 | 1680 | 3712x4608 | 2520 |
-| **5:4** | 576x464 | 747 | 1152x928 | 1120 | 2304x1856 | 1680 | 4608x3712 | 2520 |
-| **8:1** | 1536x192 | 747 | 3072x384 | 1120 | 6144x768 | 1680 | 12288x1536 | 2520 |
-| **9:16** | 384x688 | 747 | 768x1376 | 1120 | 1536x2752 | 1680 | 3072x5504 | 2520 |
-| **16:9** | 688x384 | 747 | 1376x768 | 1120 | 2752x1536 | 1680 | 5504x3072 | 2520 |
-| **21:9** | 792x168 | 747 | 1584x672 | 1120 | 3168x1344 | 1680 | 6336x2688 | 2520 |
+| **3:4** | ‫448x600 | 747 | ‫896x1200 | 1120 | 1792x2400 | 1680 | ‫3584x4800 | 2520 |
+| **4:1** | 1024x256 | 747 | 2048x512 | 1120 | 4096x1024 | 1680 | ‫8192x2048 | 2520 |
+| **4:3** | 600x448 | 747 | ‫1200x896 | 1120 | 2400x1792 | 1680 | 4800x3584 | 2520 |
+| **4:5** | 464x576 | 747 | ‫928×1152 | 1120 | 1856x2304 | 1680 | 3712x4608 | 2520 |
+| **5:4** | 576x464 | 747 | ‫1152×928 | 1120 | 2304x1856 | 1680 | 4608x3712 | 2520 |
+| **8:1** | 1536x192 | 747 | ‫3072x384 | 1120 | 6144x768 | 1680 | 12288x1536 | 2520 |
+| **9:16** | 384x688 | 747 | ‎768x1376 | 1120 | ‫1536 × 2752 | 1680 | 3072x5504 | 2520 |
+| **16:9** | 688x384 | 747 | 1376x768 | 1120 | ‫2752x1536 | 1680 | 5504x3072 | 2520 |
+| **21:9** | 792x168 | 747 | 1584x672 | 1120 | ‫3168x1344 | 1680 | 6336x2688 | 2520 |
 
-### 3 Pro Resim Önizlemesi
+### معاينة الصورة في الإصدار 3 Pro
 
-| En boy oranı | 1K çözünürlük | 1.000 jeton | 2K çözünürlük | 2.000 jeton | 4K çözünürlük | 4K jeton |
+| نسبة العرض إلى الارتفاع | درجة الدقة 1K | ‫1,000 رمز مميّز | درجة الدقة 2K | 2,000 رمز مميّز | درجة الدقة 4K | ‫4,000 رمز مميّز |
 | --- | --- | --- | --- | --- | --- | --- |
-| **1:1** | 1024x1024 | 1120 | 2048x2048 | 1120 | 4096x4096 | 2000 |
-| **2:3** | 848x1264 | 1120 | 1696x2528 | 1120 | 3392x5056 | 2000 |
+| **1:1** | 1024x1024 | 1120 | ‫2048x2048 | 1120 | 4096x4096 | 2000 |
+| **2:3** | 848x1264 | 1120 | ‫1696x2528 | 1120 | ‫3392 × 5056 | 2000 |
 | **3:2** | 1264x848 | 1120 | 2528x1696 | 1120 | 5056x3392 | 2000 |
-| **3:4** | 896x1200 | 1120 | 1792x2400 | 1120 | 3584x4800 | 2000 |
-| **4:3** | 1200x896 | 1120 | 2400x1792 | 1120 | 4800x3584 | 2000 |
-| **4:5** | 928x1152 | 1120 | 1856x2304 | 1120 | 3712x4608 | 2000 |
-| **5:4** | 1152x928 | 1120 | 2304x1856 | 1120 | 4608x3712 | 2000 |
-| **9:16** | 768x1376 | 1120 | 1536x2752 | 1120 | 3072x5504 | 2000 |
-| **16:9** | 1376x768 | 1120 | 2752x1536 | 1120 | 5504x3072 | 2000 |
-| **21:9** | 1584x672 | 1120 | 3168x1344 | 1120 | 6336x2688 | 2000 |
+| **3:4** | ‫896x1200 | 1120 | 1792x2400 | 1120 | ‫3584x4800 | 2000 |
+| **4:3** | ‫1200x896 | 1120 | 2400x1792 | 1120 | 4800x3584 | 2000 |
+| **4:5** | ‫928×1152 | 1120 | 1856x2304 | 1120 | 3712x4608 | 2000 |
+| **5:4** | ‫1152×928 | 1120 | 2304x1856 | 1120 | 4608x3712 | 2000 |
+| **9:16** | ‎768x1376 | 1120 | ‫1536 × 2752 | 1120 | 3072x5504 | 2000 |
+| **16:9** | 1376x768 | 1120 | ‫2752x1536 | 1120 | 5504x3072 | 2000 |
+| **21:9** | 1584x672 | 1120 | ‫3168x1344 | 1120 | 6336x2688 | 2000 |
 
 ### Gemini 2.5 Flash Image
 
-| En boy oranı | Çözünürlük | Token'lar |
+| نسبة العرض إلى الارتفاع | الدقة | الرموز المميزة |
 | --- | --- | --- |
 | 1:1 | 1024x1024 | 1290 |
-| 2:3 | 832x1248 | 1290 |
-| 3:2 | 1248x832 | 1290 |
-| 3:4 | 864x1184 | 1290 |
-| 4:3 | 1184x864 | 1290 |
-| 4:5 | 896x1152 | 1290 |
-| 5:4 | 1152x896 | 1290 |
-| 9:16 | 768x1344 | 1290 |
+| 2:3 | ‫832x1248 | 1290 |
+| 3:2 | ‫1248x832 | 1290 |
+| 3:4 | ‫864 × 1184 | 1290 |
+| 4:3 | ‎1184x864 | 1290 |
+| 4:5 | ‫896×1152 | 1290 |
+| 5:4 | ‫1152x896 | 1290 |
+| 9:16 | ‎768x1344 | 1290 |
 | 16:9 | 1344x768 | 1290 |
-| 21:9 | 1536x672 | 1290 |
+| 21:9 | ‫1536x672 | 1290 |
 
-## Model seçimi
+## اختيار النموذج
 
-Belirli kullanım alanınıza en uygun modeli seçin.
+اختَر النموذج الأنسب لحالة الاستخدام المحدّدة.
 
-- **Gemini 3.1 Flash Image Preview (Nano Banana 2 Preview)**, maliyet ve gecikme dengesi açısından en iyi genel performansı ve zekayı sunduğu için görüntü üretme modeliniz olmalıdır. Daha fazla bilgi için model [fiyatlandırma](https://ai.google.dev/gemini-api/docs/pricing?hl=tr#gemini-3.1-flash-image-preview) ve [özellikler](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=tr) sayfasına göz atın.
-- **Gemini 3 Pro Görüntü Önizleme (Nano Banana Pro Önizleme)**, profesyonel öğe üretimi ve karmaşık talimatlar için tasarlanmıştır. Bu modelde Google Arama kullanılarak gerçek dünyayla temellendirme yapılır, oluşturma işleminden önce kompozisyonu iyileştiren varsayılan bir "Düşünme" süreci uygulanır ve 4K çözünürlüğe kadar görüntüler oluşturulabilir. Daha fazla bilgi için model [fiyatlandırma](https://ai.google.dev/gemini-api/docs/pricing?hl=tr#gemini-3-pro-image-preview) ve [özellikler](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=tr) sayfasına göz atın.
-- **Gemini 2.5 Flash Image (Nano Banana)**, hız ve verimlilik için tasarlanmıştır. Bu model, yüksek hacimli ve düşük gecikmeli görevler için optimize edilmiştir ve 1.024 piksel çözünürlükte görüntüler oluşturur. Daha fazla bilgi için model [fiyatlandırma](https://ai.google.dev/gemini-api/docs/pricing?hl=tr#gemini-2.5-flash-image) ve [özellikler](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=tr) sayfasına göz atın.
+- ننصحك باستخدام **الإصدار التجريبي من Gemini 3.1 Flash لإنشاء الصور (الإصدار التجريبي 2 من Nano Banana)**، فهو الأفضل من حيث الأداء العام والموازنة بين الذكاء والتكلفة ووقت الاستجابة. لمزيد من التفاصيل، يُرجى الاطّلاع على صفحة [الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#gemini-3.1-flash-image-preview) و[الإمكانات](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=ar) الخاصة بالنموذج.
+- تم تصميم **معاينة الصور في Gemini 3 Pro (معاينة Nano Banana Pro)** لإنتاج أصول احترافية وتنفيذ التعليمات المعقّدة. يتضمّن هذا النموذج ميزات
+  تستند إلى بيانات واقعية باستخدام "بحث Google"، وعملية "التفكير" التلقائية التي
+  تحسّن التركيب قبل الإنشاء، ويمكنه إنشاء صور بدقة تصل إلى 4K. لمزيد من التفاصيل، يُرجى الاطّلاع على صفحة [الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#gemini-3-pro-image-preview) و[الإمكانات](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=ar) الخاصة بالنموذج.
+- تم تصميم **‫Gemini 2.5 Flash Image (المعروف أيضًا باسم Nano Banana)** لتحقيق السرعة والكفاءة. تم تحسين هذا النموذج لتنفيذ المهام التي تتطلّب عددًا كبيرًا من العمليات ووقت استجابة منخفضًا، وهو ينشئ صورًا بدقة 1024 بكسل. يمكنك الاطّلاع على صفحة [الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#gemini-2.5-flash-image) و[الإمكانات](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=ar) الخاصة بالنموذج للحصول على مزيد من التفاصيل.
 
-### Imagen'i ne zaman kullanmalısınız?
+### حالات استخدام Imagen
 
-Gemini'ın yerleşik görüntü üretme özelliklerini kullanmanın yanı sıra Gemini API aracılığıyla özel görüntü üretme modelimiz [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=tr)'e de erişebilirsiniz.
+بالإضافة إلى استخدام إمكانات إنشاء الصور المضمّنة في Gemini، يمكنك أيضًا الاستفادة من [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=ar)، نموذجنا المتخصّص في إنشاء الصور، من خلال Gemini API.
 
-Imagen ile görüntü oluşturmaya başlarken Imagen 4'ü kullanmanız önerilir. Gelişmiş kullanım alanları için veya en iyi resim kalitesine ihtiyacınız olduğunda Imagen 4 Ultra'yı seçin (aynı anda yalnızca bir görüntü oluşturulabileceğini unutmayın).
+يجب أن يكون Imagen 4 هو النموذج الذي تستخدمه عند البدء في إنشاء صور باستخدام Imagen. اختَر Imagen 4 Ultra للحالات المتقدّمة أو عندما تحتاج إلى أفضل جودة للصور (يُرجى العِلم أنّه يمكنك إنشاء صورة واحدة فقط في كل مرة).
 
-## Sırada ne var?
+## الخطوات التالية
 
-- Daha fazla örnek ve kod örneğini [cookbook rehberinde](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_Started_Nano_Banana.ipynb?hl=tr) bulabilirsiniz.
-- Gemini API ile nasıl video oluşturacağınızı öğrenmek için [Veo kılavuzuna](https://ai.google.dev/gemini-api/docs/video?hl=tr) göz atın.
-- Gemini modelleri hakkında daha fazla bilgi edinmek için [Gemini modelleri](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr) başlıklı makaleyi inceleyin.
+- يمكنك العثور على المزيد من الأمثلة ونماذج الرموز في [دليل كتاب الطبخ](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_Started_Nano_Banana.ipynb?hl=ar).
+- راجِع [دليل Veo](https://ai.google.dev/gemini-api/docs/video?hl=ar) للتعرّف على كيفية إنشاء فيديوهات باستخدام Gemini API.
+- لمزيد من المعلومات حول نماذج Gemini، يُرجى الاطّلاع على [نماذج Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar).
 
-Geri bildirim gönderin
+إرسال ملاحظات
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Son güncelleme tarihi: 2026-04-29 UTC.
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

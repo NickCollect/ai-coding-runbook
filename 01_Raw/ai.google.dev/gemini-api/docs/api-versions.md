@@ -1,48 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=vi
-fetched_at: 2026-05-05T20:47:08.738646+00:00
-title: "Gi\u1ea3i th\u00edch v\u1ec1 c\u00e1c phi\u00ean b\u1ea3n API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=pt-BR
+fetched_at: 2026-05-11T05:07:02.411799+00:00
+title: "Explica\u00e7\u00e3o sobre as vers\u00f5es da API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu tham khảo API](https://ai.google.dev/api?hl=vi)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Referência da API](https://ai.google.dev/api?hl=pt-br)
 
-Gửi ý kiến phản hồi
+Envie comentários
 
-# Giải thích về các phiên bản API
+# Explicação sobre as versões da API
 
-Tài liệu này cung cấp thông tin tổng quan cấp cao về sự khác biệt giữa phiên bản `v1` và `v1beta` của Gemini API.
+Este documento oferece uma visão geral das diferenças entre as versões `v1`
+e `v1beta` da API Gemini.
 
-- **v1**: Phiên bản ổn định của API. Các tính năng trong phiên bản ổn định được hỗ trợ đầy đủ trong suốt thời gian tồn tại của phiên bản lớn. Nếu có bất kỳ thay đổi có thể gây lỗi nào, thì phiên bản lớn tiếp theo của API sẽ được tạo và phiên bản hiện có sẽ không được dùng nữa sau một khoảng thời gian hợp lý.
-  Các thay đổi không làm gián đoạn có thể được giới thiệu cho API mà không làm thay đổi phiên bản chính.
-- **v1beta**: Phiên bản này bao gồm các tính năng ban đầu có thể đang trong giai đoạn phát triển và có thể có các thay đổi làm gián đoạn. Ngoài ra, không có gì đảm bảo rằng các tính năng trong phiên bản thử nghiệm sẽ chuyển sang phiên bản ổn định. **Nếu cần sự ổn định trong môi trường phát hành chính thức và không thể chấp nhận các thay đổi có thể gây lỗi, bạn không nên sử dụng phiên bản này trong môi trường phát hành chính thức.**
+- **v1**: versão estável da API. Os recursos na versão estável têm suporte total durante o ciclo de vida da versão principal. Se houver mudanças interruptivas, a próxima versão principal da API será criada, e a versão atual será descontinuada após um período razoável.
+  Mudanças não interruptivas podem ser introduzidas na API sem alterar a versão principal.
+- **v1beta**: essa versão inclui recursos iniciais que podem estar em desenvolvimento e sujeitos a mudanças interruptivas. Também não há garantia de que os recursos na versão Beta serão movidos para a versão estável. **Se você precisar de estabilidade no ambiente de produção e não puder correr o risco de mudanças interruptivas, não use essa versão na produção.**
 
-| Tính năng | v1 | v1beta |
+| Recurso | v1 | v1beta |
 | --- | --- | --- |
-| Tạo nội dung – Chỉ nhập văn bản |  |  |
-| Tạo nội dung – Đầu vào là văn bản và hình ảnh |  |  |
-| Tạo nội dung – Kết quả dạng văn bản |  |  |
-| Tạo nội dung – Cuộc trò chuyện nhiều lượt (trò chuyện) |  |  |
-| Tạo nội dung – Lệnh gọi hàm |  |  |
-| Tạo nội dung – Phát trực tuyến |  |  |
-| Nhúng nội dung – Chỉ nhập văn bản |  |  |
-| Tạo câu trả lời |  |  |
-| Công cụ truy xuất ngữ nghĩa |  |  |
-| Interactions API |  |  |
+| Gerar conteúdo: entrada somente de texto |  |  |
+| Gerar conteúdo: entrada de texto e imagem |  |  |
+| Gerar conteúdo: saída de texto |  |  |
+| Gerar conteúdo: conversas com várias interações (chat) |  |  |
+| Gerar conteúdo: chamadas de função |  |  |
+| Gerar conteúdo: streaming |  |  |
+| Incorporar conteúdo: entrada somente de texto |  |  |
+| Gerar resposta |  |  |
+| Recuperador semântico |  |  |
+| API Interactions |  |  |
 
-- – Được hỗ trợ
-- – Sẽ không bao giờ được hỗ trợ
+- - Compatível
+- - Nunca será compatível
 
-## Định cấu hình phiên bản API trong SDK
+## Configurar a versão da API em um SDK
 
-Gemini API SDK mặc định là `v1beta`, nhưng bạn có thể chọn sử dụng các phiên bản khác bằng cách đặt phiên bản API như trong mẫu mã sau:
+Os SDKs da API Gemini são definidos como `v1beta`, mas você pode usar outras versões definindo a versão da API, conforme mostrado no exemplo de código a seguir:
 
 ### Python
 
@@ -93,12 +94,12 @@ curl "https://generativelanguage.googleapis.com/v1/models/gemini-3-flash-preview
    }'
 ```
 
-Gửi ý kiến phản hồi
+Envie comentários
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+Última atualização 2026-04-29 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Quer enviar seu feedback?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]

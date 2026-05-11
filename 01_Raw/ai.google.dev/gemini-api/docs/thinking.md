@@ -1,30 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=he
-fetched_at: 2026-05-05T20:45:14.261858+00:00
-title: "\u05d7\u05e9\u05d9\u05d1\u05d4 \u05e9\u05dc Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=zh-CN
+fetched_at: 2026-05-11T05:00:11.132707+00:00
+title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-שליחת משוב
+发送反馈
 
-# חשיבה של Gemini
+# Gemini 思考
 
-[למודלים מסדרות Gemini 3 ו-2.5](https://ai.google.dev/gemini-api/docs/models?hl=he) יש תהליך חשיבה פנימי שמשפר באופן משמעותי את יכולות החשיבה הרציונלית והתכנון שלהם, ולכן הם יעילים מאוד במשימות מורכבות כמו כתיבת קוד, מתמטיקה מתקדמת וניתוח נתונים.
+The [Gemini 3 and 2.5 series models](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn) use an internal
+"thinking process" that significantly improves their reasoning and multi-step
+planning abilities, making them highly effective for complex tasks such as
+coding, advanced mathematics, and data analysis.
 
-במדריך הזה מוסבר איך להשתמש ביכולות החשיבה של Gemini באמצעות Gemini API.
+本指南介绍了如何使用 Gemini API 来使用 Gemini 的思考功能。
 
-## יצירת תוכן עם חשיבה
+## 通过思考生成内容
 
-הגשת בקשה באמצעות מודל חשיבה דומה להגשת בקשה ליצירת תוכן. ההבדל העיקרי הוא שצריך לציין את אחד [המודלים עם תמיכה בחשיבה](#supported-models) בשדה `model`, כמו בדוגמה הבאה של [יצירת טקסט](https://ai.google.dev/gemini-api/docs/text-generation?hl=he#text-input):
+使用思考模型发起请求与任何其他内容生成请求类似。主要区别在于，在 `model` 字段中指定一个
+[支持思考的模型](#supported-models)，如
+以下 [文本生成](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-cn#text-input) 示例所示：
 
 ### Python
 
@@ -112,13 +117,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
  ```
 ```
 
-## סיכומי מחשבות
+## 思考总结
 
-סיכומי מחשבות הם גרסאות מסוכמות של המחשבות הגולמיות של המודל, והם מספקים תובנות לגבי תהליך ההיגיון הפנימי של המודל. חשוב לזכור שרמות החשיבה והתקציבים חלים על המחשבות הגולמיות של המודל ולא על סיכומי המחשבות.
+思考总结是模型原始思考的总结版本，可帮助您了解模型的内部推理过程。请注意，思考等级和预算适用于模型的原始思考，而不适用于思考总结。
 
-כדי להפעיל סיכומי מחשבות, צריך להגדיר את `includeThoughts` לערך `true` בהגדרות הבקשה. אחר כך אפשר לגשת לסיכום על ידי איטרציה בפרמטר `response` של `parts` ובדיקה של הערך הבוליאני `thought`.
+您可以在请求配置中将 `includeThoughts` 设置为 `true`，以启用思考总结。然后，您可以遍历 `response` 参数的 `parts` 并检查 `thought` 布尔值，以访问总结。
 
-הנה דוגמה שמראה איך להפעיל את סיכומי המחשבות ולאחזר אותם בלי סטרימינג. בדוגמה הזו, המערכת מחזירה סיכום מחשבות סופי יחיד עם התגובה:
+以下示例演示了如何在不进行流式传输的情况下启用和检索思考总结，该示例会返回包含回答的单个最终思考总结：
 
 ### Python
 
@@ -228,7 +233,7 @@ func main() {
 }
 ```
 
-דוגמה לשימוש ב-thinking with streaming, שמחזירה סיכומים מצטברים מתגלגלים במהלך היצירה:
+以下示例展示了如何使用流式传输进行思考，该示例会在生成期间返回滚动式增量总结：
 
 ### Python
 
@@ -381,25 +386,25 @@ func main() {
 }
 ```
 
-## שליטה בחשיבה
+## 控制思考
 
-מודלים של Gemini חושבים באופן דינמי כברירת מחדל, ומתאימים אוטומטית את כמות המאמץ של ההסקה על סמך מורכבות הבקשה של המשתמש.
-עם זאת, אם יש לכם אילוצים ספציפיים לגבי זמן האחזור או שאתם רוצים שהמודל יבצע חשיבה רציונלית מעמיקה יותר מהרגיל, אתם יכולים להשתמש בפרמטרים כדי לשלוט בהתנהגות החשיבה.
+Gemini 模型默认进行动态思考，根据用户请求的复杂程度自动调整推理工作量。
+但是，如果您有特定的延迟时间限制，或者需要模型进行比平时更深入的推理，您可以选择使用参数来控制思考行为。
 
-### רמות ההעמקה (Gemini 3)
+### 思考等级 (Gemini 3)
 
-הפרמטר `thinkingLevel`, שמומלץ לשימוש במודלים של Gemini 3 ואילך, מאפשר לכם לשלוט בהתנהגות של חשיבה רציונלית.
+`thinkingLevel` 参数（建议用于 Gemini 3 模型及更高版本）可让您控制推理行为。
 
-בטבלה הבאה מפורטות ההגדרות של `thinkingLevel` לכל סוג מודל:
+下表详细介绍了每种模型类型的 `thinkingLevel` 设置：
 
-| רמת ההעמקה | ‫Gemini 3.1 Pro | ‫Gemini 3.1 Flash-Lite | Gemini 3 Flash | תיאור |
+| 思考等级 | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | 说明 |
 | --- | --- | --- | --- | --- |
-| **`minimal`** | לא נתמך | נתמך (ברירת מחדל) | נתמך | מתאים להגדרה 'ללא חשיבה' ברוב השאילתות. יכול להיות שהמודל יחשוב בצורה מינימלית מאוד על משימות מורכבות של כתיבת קוד. ממזער את זמן האחזור של אפליקציות צ'אט או אפליקציות עם תפוקה גבוהה. הערה: `minimal` לא מבטיח שהחשיבה מושבתת. |
-| **`low`** | נתמך | נתמך | נתמך | מצמצם את זמן האחזור והעלות. הכי טוב למעקב אחרי הוראות פשוטות, לצ'אט או לאפליקציות עם תפוקה גבוהה. |
-| **`medium`** | נתמך | נתמך | נתמך | חשיבה מאוזנת לרוב המשימות. |
-| **`high`** | נתמך (ברירת מחדל, דינמי) | נתמך (דינמי) | נתמך (ברירת מחדל, דינמי) | העומק המקסימלי של החשיבה הרציונלית. יכול להיות שייקח למודל הרבה יותר זמן להגיע לטוקן הפלט הראשון (שאינו טוקן חשיבה), אבל הפלט יהיה מנומק יותר. |
+| **`minimal`** | 不支持 | 受支持（默认） | 受支持 | 与大多数查询的“不思考”设置匹配。对于复杂的编码任务，模型可能会进行非常少的思考。最大限度地减少聊天或高吞吐量应用的延迟时间。请注意，`minimal` 并不能保证思考功能处于关闭状态。 |
+| **`low`** | 受支持 | 支持 | 受支持 | 最大限度地减少延迟时间和费用。最适合简单的指令遵循、聊天或高吞吐量应用。 |
+| **`medium`** | 受支持 | 支持 | 受支持 | 针对大多数任务进行平衡思考。 |
+| **`high`** | 受支持（默认，动态） | 受支持（动态） | 受支持（默认，动态） | 最大限度地提高推理深度。模型可能需要更长的时间才能 生成第一个（非思考）输出 token，但输出将经过更仔细的推理。 |
 
-בדוגמה הבאה אפשר לראות איך מגדירים את רמת החשיבה.
+以下示例展示了如何设置思考等级。
 
 ### Python
 
@@ -502,30 +507,29 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 }'
 ```
 
-אי אפשר להשבית את החשיבה של Gemini 3.1 Pro. בנוסף, במודלים Gemini 3 Flash ו-Flash-Lite אין תמיכה בהשבתה מלאה של התכונה 'חשיבה', אבל הגדרה של `minimal`
-פירושה שהמודל כנראה לא יחשוב (אבל עדיין יש לו פוטנציאל לעשות זאת).
-אם לא מציינים רמת חשיבה, Gemini ישתמש ברמת החשיבה הדינמית שמוגדרת כברירת מחדל במודלים של Gemini 3, ‏ `"high"`.
+您无法为 Gemini 3.1 Pro 停用思考功能。Gemini 3 Flash 和 Flash-Lite 也不支持完全关闭思考功能，但 `minimal` 设置意味着模型可能不会思考（但仍有可能思考）。
+如果您未指定思考等级，Gemini 将使用 Gemini 3 模型的
+默认动态思考等级 `"high"`。
 
-מודלים מסדרת Gemini 2.5 לא תומכים ב-`thinkingLevel`. במקום זאת, צריך להשתמש ב-`thinkingBudget`
-.
+Gemini 2.5 系列模型不支持 `thinkingLevel`；请改用 `thinkingBudget`。
 
-### תקציבים לשיקול
+### 思考预算
 
-הפרמטר `thinkingBudget`, שהוצג בסדרת Gemini 2.5, מכוון את המודל לגבי מספר האסימונים הספציפיים של החשיבה שבהם צריך להשתמש לצורך חשיבה רציונלית.
+`thinkingBudget` 参数是 Gemini 2.5 系列中引入的参数，用于指导模型使用特定数量的思考 token 进行推理。
 
-בהמשך מפורטים פרטי ההגדרה של כל סוג מודל.`thinkingBudget`
-כדי להשבית את החשיבה, צריך להגדיר את `thinkingBudget` ל-0.
-הגדרת הערך `thinkingBudget` כ-‎-1 מפעילה **חשיבה דינמית**, כלומר המודל ישנה את התקציב בהתאם למורכבות הבקשה.
+以下是每种模型类型的 `thinkingBudget` 配置详细信息。
+您可以通过将 `thinkingBudget` 设置为 0 来停用思考功能。
+将 `thinkingBudget` 设置为 -1 会启用 **动态思考** ，这意味着模型将根据请求的复杂程度调整预算。
 
-| דגם | הגדרת ברירת המחדל (התקציב לא מוגדר) | טווח | השבתת תהליך החשיבה | הפעלת חשיבה דינמית |
+| 模型 | 默认设置 (未设置思考预算) | 范围 | 停用思考 | 启用动态思考 |
 | --- | --- | --- | --- | --- |
-| ‫**2.5 Pro** | חשיבה דינמית | `128` עד `32768` | לא רלוונטי: אי אפשר להשבית את החשיבה | ‫`thinkingBudget = -1` (ברירת מחדל) |
-| ‫**2.5 Flash** | חשיבה דינמית | `0` עד `24576` | `thinkingBudget = 0` | ‫`thinkingBudget = -1` (ברירת מחדל) |
-| **‫2.5 Flash Preview** | חשיבה דינמית | `0` עד `24576` | `thinkingBudget = 0` | ‫`thinkingBudget = -1` (ברירת מחדל) |
-| ‫**2.5 Flash Lite** | המודל לא חושב | `512` עד `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
-| ‫**2.5 Flash Lite Preview** | המודל לא חושב | `512` עד `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
-| **Robotics-ER 1.6 Preview** | חשיבה דינמית | `0` עד `24576` | `thinkingBudget = 0` | ‫`thinkingBudget = -1` (ברירת מחדל) |
-| ‫**2.5 Flash Live Native Audio Preview (09-2025)** | חשיבה דינמית | `0` עד `24576` | `thinkingBudget = 0` | ‫`thinkingBudget = -1` (ברירת מחדל) |
+| **2.5 Pro** | 动态思考 | `128` 到 `32768` | 不适用：无法停用思考 | `thinkingBudget = -1`（默认） |
+| **2.5 Flash** | 动态思考 | `0` 到 `24576` | `thinkingBudget = 0` | `thinkingBudget = -1`（默认） |
+| **2.5 Flash 预览版** | 动态思考 | `0` 到 `24576` | `thinkingBudget = 0` | `thinkingBudget = -1`（默认） |
+| **2.5 Flash Lite** | 模型不思考 | `512` 到 `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
+| **2.5 Flash Lite 预览版** | 模型不思考 | `512` 到 `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
+| **Robotics-ER 1.6 预览版** | 动态思考 | `0` 到 `24576` | `thinkingBudget = 0` | `thinkingBudget = -1`（默认） |
+| **2.5 Flash Live 原生音频预览版 (09-2025)** | 动态思考 | `0` 到 `24576` | `thinkingBudget = 0` | `thinkingBudget = -1`（默认） |
 
 ### Python
 
@@ -640,28 +644,30 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:g
 }'
 ```
 
-בהתאם להנחיה, יכול להיות שהמודל יחרוג מהתקציב של הטוקנים או ישתמש בפחות טוקנים מהתקציב.
+根据提示，模型可能会超出或低于 token 预算。
 
-## חתימות של מחשבות
+## 思考特征
 
-ממשק Gemini API הוא חסר מצב (stateless), ולכן המודל מתייחס לכל בקשת API באופן עצמאי ואין לו גישה להקשר של מחשבות משיחות קודמות באינטראקציות מרובות.
+Gemini API 是无状态的，因此模型会独立处理每个 API 请求，并且无法访问多轮互动中之前轮次的思考上下文。
 
-כדי לאפשר שמירה של הקשר המחשבתי באינטראקציות מרובות, Gemini מחזיר חתימות מחשבתיות, שהן ייצוגים מוצפנים של תהליך החשיבה הפנימי של המודל.
+为了能够在多轮互动中保持思考上下文，Gemini 会返回思考特征，这些特征是模型内部思考过程的加密表示形式。
 
-- **מודלים של Gemini 2.5** מחזירים חתימות של מחשבות כשהחשיבה מופעלת והבקשה כוללת [בקשות להפעלת פונקציות](https://ai.google.dev/gemini-api/docs/function-calling?hl=he#thinking), ובמיוחד [הצהרות על פונקציות](https://ai.google.dev/gemini-api/docs/function-calling?hl=he#step-2).
-- **מודלים של Gemini 3** עשויים להחזיר חתימות של מחשבות לכל סוגי [החלקים](https://ai.google.dev/api/caching?hl=he#Part).
-  מומלץ תמיד להעביר את כל החתימות בחזרה כמו שהן התקבלו, אבל *חובה* לעשות את זה לחתימות של קריאות לפונקציות. מידע נוסף זמין בדף [חתימות מחשבה](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=he).
+- **Gemini 2.5 模型**在启用思考功能且
+  请求包含[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn#thinking)（具体来说是[函数声明](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn#step-2)）时，会返回思考特征。
+- **Gemini 3 模型** 可能会针对所有类型的 [部件](https://ai.google.dev/api/caching?hl=zh-cn#Part) 返回思考特征。
+  我们建议您始终按收到的方式传递所有特征，但对于函数调用特征，这是必需的。 如需了解详情，请参阅
+  [思考特征](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=zh-cn)页面。
 
-הגבלות שימוש נוספות שכדאי לקחת בחשבון כשמשתמשים בהפעלת פונקציות:
+使用函数调用时，还需考虑以下用量限制：
 
-- החתימות מוחזרות מהמודל בתוך חלקים אחרים בתגובה, למשל קריאה לפונקציה או חלקי טקסט.
-  [החזרת התשובה המלאה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he#step-4) עם כל החלקים למודל בתורות הבאות.
-- אל תשרשרו חלקים עם חתימות יחד.
-- אל תמזגו חלק אחד עם חתימה עם חלק אחר ללא חתימה.
+- 特征由模型在回答的其他部分（例如函数调用或文本部分）中返回。[在后续对话轮次中，将包含所有部分的完整回答](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn#step-4)
+  返回给模型。
+- 请勿将包含特征的部分串联在一起。
+- 请勿将包含签名的部分与不包含签名的部分合并。
 
-## תמחור
+## 价格
 
-כשהתכונה 'חשיבה' מופעלת, התמחור של התגובה הוא סכום האסימונים של הפלט והאסימונים של החשיבה. אפשר לקבל את המספר הכולל של טוקנים של חשיבה שנוצרו מהשדה `thoughtsTokenCount`.
+启用思考功能后，回答价格是输出 token 和思考 token 的总和。您可以从 `thoughtsTokenCount` 字段获取生成的思考 token 总数。
 
 ### Python
 
@@ -691,52 +697,58 @@ fmt.Println("Thoughts tokens:", string(usageMetadata.thoughts_token_count))
 fmt.Println("Output tokens:", string(usageMetadata.candidates_token_count))
 ```
 
-מודלים של חשיבה יוצרים מחשבות מלאות כדי לשפר את האיכות של התשובה הסופית, ואז יוצרים [סיכומים](#summaries) כדי לספק תובנות לגבי תהליך החשיבה. לכן, התמחור מבוסס על האסימונים המלאים של המחשבה שהמודל צריך ליצור כדי ליצור סיכום, למרות שרק הסיכום הוא הפלט של ה-API.
+[思考模型会生成完整的思考，以提高最终回答的质量，然后输出总结，以帮助您了解思考过程。](#summaries)因此，价格取决于模型生成总结所需的完整思考 token，即使 API 仅输出总结也是如此。
 
-מידע נוסף על טוקנים זמין במדריך [ספירת טוקנים](https://ai.google.dev/gemini-api/docs/tokens?hl=he).
+如需详细了解 token，请参阅 [token 计数](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn)
+指南。
 
-## שיטות מומלצות
+## 最佳实践
 
-בקטע הזה מופיעות כמה הנחיות לשימוש יעיל במודלים של חשיבה.
-כמו תמיד, כדי להשיג את התוצאות הטובות ביותר, מומלץ לפעול לפי [ההנחיות והשיטות המומלצות שלנו לכתיבת הנחיות](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=he).
+本部分提供了一些关于如何高效使用思考模型的指导。
+与往常一样，遵循我们的[提示指南和最佳实践](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=zh-cn)将获得最佳结果。
 
-### ניפוי באגים והכוונה
+### 调试和引导
 
-- **בדיקת חשיבה רציונלית**: אם לא מקבלים את התשובה הרצויה מהמודלים החושבים, כדאי לנתח בקפידה את סיכומי החשיבה של Gemini.
-  תוכלו לראות איך הוא פירק את המשימה והגיע למסקנה, ולהשתמש במידע הזה כדי לתקן את התוצאות.
-- **מתן הנחיות לגבי תהליך החשיבה הרציונלית**: אם אתם רוצים לקבל פלט ארוך במיוחד, כדאי לתת הנחיות בהנחיה כדי להגביל את [כמות החשיבה](#set-budget) שהמודל משתמש בה. כך תוכלו להקצות יותר מהפלט של הטוקן לתגובה שלכם.
+- **查看推理**：如果您没有从
+  思考模型中获得预期的回答，仔细分析 Gemini 的思考总结可能会有所帮助。
+  您可以了解模型如何分解任务并得出结论，并使用该信息来纠正结果，使其更符合预期。
+- **在推理中提供指导**：如果您希望获得特别长的
+  输出，不妨在提示中提供指导，以限制模型使用的
+  [思考量](#set-budget)。这样，您就可以为回答预留更多 token 输出。
 
-### מורכבות המשימה
+### 任务复杂性
 
-- **משימות פשוטות (העמקה יכולה להיות מושבתת):** לבקשות פשוטות שלא דורשות חשיבה רציונלית מורכבת, כמו שליפת עובדות או סיווג, אין צורך בחשיבה. דוגמאות:
-  - "?Where was DeepMind founded"
-  - "האם האימייל הזה הוא הזמנה לפגישה או שהוא רק מספק מידע?"
-- **משימות בינוניות (ברירת מחדל/חלק מהחשיבה):** הרבה בקשות נפוצות נהנות ממידה מסוימת של עיבוד שלב אחר שלב או מהבנה מעמיקה יותר. ‫Gemini יכול להשתמש ביכולת החשיבה באופן גמיש כדי לבצע משימות כמו:
-  - השוואה בין פוטוסינתזה לבין גדילה.
-  - השוו והבדילו בין מכוניות חשמליות למכוניות היברידיות.
-- **משימות קשות (יכולת חשיבה מקסימלית):** כדי להתמודד עם אתגרים מורכבים במיוחד, כמו פתרון בעיות מתמטיות מסובכות או משימות תכנות, מומלץ להגדיר תקציב חשיבה גבוה. כדי לבצע את סוגי המשימות האלה, המודל צריך להשתמש בכל יכולות החשיבה הרציונלית והתכנון שלו, ולרוב הוא מבצע הרבה שלבים פנימיים לפני שהוא מספק תשובה. דוגמאות:
-  - פתרון בעיה 1 ב-AIME 2025: צריך למצוא את הסכום של כל הבסיסים השלמים b > 9 שעבורם 17b הוא מחלק של 97b.
-  - לכתוב קוד Python לאפליקציית אינטרנט שמציגה נתונים של שוק המניות בזמן אמת, כולל אימות משתמשים. להקפיד על יעילות מקסימלית.
+- **简单任务（可以关闭思考功能）** ：对于不需要复杂推理的简单请求（例如事实检索或分类），不需要思考功能。例如：
+  - “DeepMind 是在哪里成立的？”
+  - 这封电子邮件是要求开会还是仅提供信息？
+- **中等任务（默认/部分思考）** ：许多常见请求都受益于一定程度的逐步处理或更深入的理解。Gemini 可以灵活地使用思考功能来处理以下任务：
+  - 将光合作用比作成长。
+  - 比较和对比电动汽车和混合动力汽车。
+- **困难任务（最大思考能力）** ：对于真正复杂的挑战（例如解决复杂的数学问题或编码任务），我们建议设置较高的思考预算。这些类型的任务需要模型充分发挥推理和规划能力，通常需要经过许多内部步骤才能提供答案。例如：
+  - 解决 AIME 2025 中的问题 1：求所有整数基数 b > 9 的和，其中 17b 是 97b 的除数。
+  - 为可视化实时股市数据的 Web 应用编写 Python 代码，包括用户身份验证。尽可能提高效率。
 
-## מודלים, כלים ויכולות נתמכים
+## 支持的模型、工具和功能
 
-תכונות החשיבה נתמכות בכל המודלים מסדרות 3 ו-2.5.
-בדף [סקירה כללית של הדגם](https://ai.google.dev/gemini-api/docs/models?hl=he) אפשר לראות את כל היכולות של הדגם.
+所有 3 和 2.5 系列模型都支持思考功能。
+您可以在
+[模型概览](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn)页面上找到所有模型功能。
 
-מודלים מסוג Thinking פועלים עם כל הכלים והיכולות של Gemini. היכולת הזו מאפשרת למודלים ליצור אינטראקציה עם מערכות חיצוניות, להריץ קוד או לגשת למידע בזמן אמת, ולשלב את התוצאות בהסקה ובתשובה הסופית שלהם.
+思考模型适用于 Gemini 的所有工具和功能。这使得模型能够与外部系统互动、执行代码或访问实时信息，并将结果纳入其推理和最终回答中。
 
-אפשר לנסות דוגמאות לשימוש בכלים עם מודלים חושבים ב[ספר המתכונים של Thinking](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_thinking.ipynb?hl=he).
+您可以在
+[思考功能使用示例](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_thinking.ipynb?hl=zh-cn)中尝试使用思考模型搭配工具的示例。
 
-## מה השלב הבא?
+## 接下来怎么做？
 
-- מידע על כיסוי המחשבה זמין במדריך שלנו בנושא [תאימות ל-OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=he#thinking).
+- 您可以在我们的 [OpenAI 兼容性](https://ai.google.dev/gemini-api/docs/openai?hl=zh-cn#thinking) 指南中查看思考功能覆盖范围。
 
-שליחת משוב
+发送反馈
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-עדכון אחרון: 2026-04-29 (שעון UTC).
+最后更新时间 (UTC)：2026-05-07。
 
-רוצה לתת לנו משוב?
+需要向我们提供更多信息？
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-05-07。"],[],[]]

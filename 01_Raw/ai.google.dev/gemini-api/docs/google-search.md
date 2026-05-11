@@ -1,30 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/google-search?hl=hi
-fetched_at: 2026-05-05T20:42:00.045117+00:00
-title: "Google Search \u0915\u0947 \u0906\u0927\u093e\u0930 \u092a\u0930 \u091c\u093e\u0928\u0915\u093e\u0930\u0940 \u0926\u0947\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/google-search?hl=ar
+fetched_at: 2026-05-11T05:00:22.015273+00:00
+title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-सुझाव भेजें
+إرسال ملاحظات
 
-# Google Search के आधार पर जानकारी देना
+# تحديد المصدر من خلال "بحث Google"
 
-Google Search के साथ ग्राउंडिंग की सुविधा, Gemini मॉडल को रीयल-टाइम में वेब कॉन्टेंट से कनेक्ट करती है. यह सुविधा, सभी उपलब्ध भाषाओं में काम करती है. इससे Gemini को ज़्यादा सटीक जवाब देने और भरोसेमंद स्रोतों का हवाला देने में मदद मिलती है. ये स्रोत, Gemini के ट्रेनिंग डेटा में शामिल नहीं होते.
+يربط تحديد المصدر من خلال "بحث Google" نموذج Gemini بمحتوى الويب في الوقت الفعلي ويتوافق مع جميع اللغات المتاحة. ويسمح ذلك لـ Gemini بتقديم إجابات أكثر دقة والاستشهاد بمصادر يمكن التحقّق منها تتجاوز تاريخ آخر تحديث للبيانات.
 
-ग्राउंडिंग की मदद से, ऐसे ऐप्लिकेशन बनाए जा सकते हैं जो ये काम कर सकते हैं:
+يساعدك تحديد المصدر في إنشاء تطبيقات يمكنها إجراء ما يلي:
 
-- **तथ्यों के सही होने की संभावना बढ़ाना:** मॉडल के गलत जानकारी देने की संभावना को कम करना. इसके लिए, जवाबों को असल दुनिया की जानकारी पर आधारित करना.
-- **रीयल-टाइम में जानकारी ऐक्सेस करना:** हाल ही की घटनाओं और विषयों के बारे में सवालों के जवाब पाना.
-- **साइटेशन दें:** मॉडल के दावों के सोर्स दिखाकर, लोगों का भरोसा जीतें.
+- **زيادة الدقة الوقائعية:** تقليل حالات الهلوسة في النموذج من خلال استناد الردود إلى معلومات واقعية.
+- **الوصول إلى المعلومات في الوقت الفعلي:** الإجابة عن الأسئلة حول الأحداث والمواضيع الحديثة.
+- **تقديم الاقتباسات:** تعزيز ثقة المستخدمين من خلال عرض مصادر ادعاءات النموذج.
 
 ### Python
 
@@ -98,24 +98,23 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
   }'
 ```
 
-ज़्यादा जानने के लिए, [खोज टूल
-नोटबुक](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=hi) का इस्तेमाल करें.
+يمكنك الاطّلاع على مزيد من المعلومات من خلال تجربة دفتر ملاحظات [أداة "بحث Google"](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=ar).
 
-## Google Search से सटीक जानकारी पाने की सुविधा कैसे काम करती है
+## طريقة عمل تحديد المصدر من خلال "بحث Google"
 
-`google_search` टूल चालू करने पर, मॉडल खोज करने, जानकारी को प्रोसेस करने, और उद्धरण देने से जुड़े पूरे वर्कफ़्लो को अपने-आप मैनेज करता है.
+عند تفعيل أداة `google_search`، يعالج النموذج تلقائيًا سير العمل بالكامل للبحث عن المعلومات ومعالجتها والاستشهاد بها.
 
-![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=hi)
+![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=ar)
 
-1. **उपयोगकर्ता का प्रॉम्प्ट:** आपका ऐप्लिकेशन, उपयोगकर्ता के प्रॉम्प्ट को Gemini API को भेजता है. इसके लिए, `google_search` टूल चालू होना चाहिए.
-2. **प्रॉम्प्ट का विश्लेषण:** मॉडल, प्रॉम्प्ट का विश्लेषण करता है और यह तय करता है कि क्या Google Search से जवाब को बेहतर बनाया जा सकता है.
-3. **Google Search:** अगर ज़रूरत होती है, तो मॉडल अपने-आप एक या एक से ज़्यादा सर्च क्वेरी जनरेट करता है और उन्हें पूरा करता है.
-4. **खोज के नतीजों को प्रोसेस करना:** मॉडल, खोज के नतीजों को प्रोसेस करता है, जानकारी को इकट्ठा करता है, और जवाब तैयार करता है.
-5. **भरोसेमंद स्रोतों से मिली जानकारी के आधार पर जवाब देना:** एपीआई, खोज के नतीजों के आधार पर, उपयोगकर्ता के लिए फ़ायदेमंद जवाब देता है. इस जवाब में, मॉडल का टेक्स्ट वाला जवाब और `groundingMetadata` शामिल है. इसमें खोज क्वेरी, वेब नतीजे, और उद्धरण भी शामिल हैं.
+1. **طلب المستخدم:** يرسل تطبيقك طلبًا من المستخدم إلى Gemini API مع تفعيل أداة `google_search`.
+2. **تحليل الطلب:** يحلّل النموذج الطلب ويحدّد ما إذا كان بإمكان "بحث Google" تحسين الإجابة.
+3. **بحث Google:** إذا لزم الأمر، ينشئ النموذج تلقائيًا طلب بحث واحدًا أو أكثر وينفّذها.
+4. **معالجة نتائج البحث:** يعالج النموذج نتائج البحث ويجمع المعلومات ويصوغ ردًا.
+5. **الرد المستند إلى المصدر:** تعرض واجهة برمجة التطبيقات ردًا نهائيًا سهل الاستخدام يستند إلى نتائج البحث. يتضمّن هذا الرد الإجابة النصية للنموذج و`groundingMetadata` التي تتضمّن طلبات البحث ونتائج الويب والاقتباسات.
 
-## भरोसेमंद स्रोतों से मिले जवाब को समझना
+## فهم تحديد المصدر
 
-जब किसी जवाब में भरोसेमंद स्रोतों से मिली जानकारी शामिल होती है, तो उस जवाब में `groundingMetadata` फ़ील्ड शामिल होता है. दावों की पुष्टि करने और अपने ऐप्लिकेशन में उद्धरणों को ज़्यादा बेहतर तरीके से दिखाने के लिए, यह स्ट्रक्चर्ड डेटा ज़रूरी है.
+عندما يتم تحديد مصدر الرد بنجاح، يتضمّن الرد حقل `groundingMetadata`. هذه البيانات المنظَّمة ضرورية للتحقّق من الادعاءات وإنشاء تجربة اقتباس غنية في تطبيقك.
 
 ```
 {
@@ -157,18 +156,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 }
 ```
 
-Gemini API, `groundingMetadata` के साथ यह जानकारी दिखाता है:
+تعرض Gemini API المعلومات التالية مع `groundingMetadata`:
 
-- `webSearchQueries` : इस्तेमाल की गई खोज क्वेरी का कलेक्शन. यह डीबग करने और मॉडल की तर्क देने की प्रोसेस को समझने के लिए फ़ायदेमंद है.
-- `searchEntryPoint` : इसमें ज़रूरी खोज के सुझावों को रेंडर करने के लिए एचटीएमएल और सीएसएस शामिल होता है. इस्तेमाल से जुड़ी सभी ज़रूरी शर्तों के बारे में, [सेवा की शर्तों](https://ai.google.dev/gemini-api/terms?hl=hi#grounding-with-google-search) में बताया गया है.
-- `groundingChunks` : यह ऑब्जेक्ट का ऐसा कलेक्शन है जिसमें वेब सोर्स (`uri` और `title`) शामिल होते हैं.
-- `groundingSupports` : यह चंक का ऐसा कलेक्शन है जो मॉडल के जवाब `text` को `groundingChunks` में मौजूद सोर्स से कनेक्ट करता है. हर चंक, टेक्स्ट `segment` को एक या उससे ज़्यादा `groundingChunkIndices` से लिंक करता है. `segment` को `startIndex` और `endIndex` से तय किया जाता है. इनलाइन उद्धरण बनाने के लिए, यह ज़रूरी है.
+- `webSearchQueries` : مصفوفة من طلبات البحث المستخدَمة. تكون هذه الميزة مفيدة لتحديد الأخطاء وفهم عملية الاستدلال في النموذج.
+- `searchEntryPoint` : يحتوي على HTML وCSS لعرض "اقتراحات البحث" المطلوبة. يتم تفصيل متطلبات الاستخدام الكاملة في [بنود
+  الخدمة](https://ai.google.dev/gemini-api/terms?hl=ar#grounding-with-google-search).
+- `groundingChunks` : مصفوفة من الكائنات التي تحتوي على مصادر الويب (`uri` و`title`).
+- `groundingSupports` : مصفوفة من الأجزاء لربط `text` الردّ من النموذج بالمصادر في `groundingChunks`. يربط كل جزء `segment` نصًا (محدّدًا من خلال `startIndex` و`endIndex`) بواحد أو أكثر من `groundingChunkIndices`. هذا هو المفتاح لإنشاء اقتباسات مضمّنة.
 
-Google Search से मिली जानकारी का इस्तेमाल, [यूआरएल के कॉन्टेक्स्ट वाले टूल](https://ai.google.dev/gemini-api/docs/url-context?hl=hi) के साथ भी किया जा सकता है. इससे, जवाबों में सार्वजनिक वेब डेटा और आपके दिए गए यूआरएल, दोनों से जानकारी शामिल की जा सकती है.
+يمكن أيضًا استخدام تحديد المصدر من خلال "بحث Google" مع أداة سياق [عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar) لتحديد مصدر الردود في كلّ من بيانات الويب
+العلنية وعناوين URL المحدّدة التي تقدّمها.
 
-## इनलाइन उद्धरणों की मदद से सोर्स एट्रिब्यूट करना
+## إسناد المصادر من خلال الاقتباسات المضمّنة
 
-यह एपीआई, स्ट्रक्चर्ड उद्धरण डेटा दिखाता है. इससे आपको यह तय करने का पूरा कंट्रोल मिलता है कि आपको अपने यूज़र इंटरफ़ेस में सोर्स कैसे दिखाने हैं. मॉडल के जवाबों को सीधे उनके सोर्स से लिंक करने के लिए, `groundingSupports` और `groundingChunks` फ़ील्ड का इस्तेमाल किया जा सकता है. यहां मेटाडेटा को प्रोसेस करने का सामान्य पैटर्न दिया गया है, ताकि इनलाइन और क्लिक किए जा सकने वाले उद्धरणों के साथ जवाब बनाया जा सके.
+تعرض واجهة برمجة التطبيقات بيانات اقتباس منظَّمة، ما يمنحك تحكّمًا كاملاً في طريقة عرض المصادر في واجهة المستخدم. يمكنك استخدام الحقلَين `groundingSupports` و`groundingChunks` لربط عبارات النموذج مباشرةً بمصادرها. في ما يلي نمط شائع لمعالجة البيانات الوصفية لإنشاء ردّ يتضمّن اقتباسات مضمّنة قابلة للنقر.
 
 ### Python
 
@@ -243,52 +244,58 @@ const textWithCitations = addCitations(response);
 console.log(textWithCitations);
 ```
 
-इनलाइन उद्धरणों के साथ नया जवाब ऐसा दिखेगा:
+سيظهر الردّ الجديد الذي يتضمّن اقتباسات مضمّنة على النحو التالي:
 
 ```
 Spain won Euro 2024, defeating England 2-1 in the final.[1](https:/...), [2](https:/...), [4](https:/...), [5](https:/...) This victory marks Spain's record-breaking fourth European Championship title.[5]((https:/...), [2](https:/...), [3](https:/...), [4](https:/...)
 ```
 
-## कीमत
+## الأسعار
 
-Gemini 3 के साथ Google Search की ग्राउंडिंग का इस्तेमाल करने पर, आपके प्रोजेक्ट को हर उस खोज क्वेरी के लिए बिल किया जाता है जिसे मॉडल पूरा करने का फ़ैसला करता है. अगर मॉडल किसी एक प्रॉम्प्ट का जवाब देने के लिए, कई खोज क्वेरी चलाने का फ़ैसला करता है (उदाहरण के लिए, एक ही एपीआई कॉल में `"UEFA Euro 2024 winner"` और `"Spain vs England Euro 2024 final
-score"` खोजना), तो उस अनुरोध के लिए, इस टूल के दो बार इस्तेमाल करने का शुल्क लिया जाएगा. बिलिंग के लिए, यूनीक क्वेरी की गिनती करते समय, हम वेब सर्च की उन क्वेरी को अनदेखा करते हैं जिनमें कोई कॉन्टेंट नहीं होता. यह बिलिंग मॉडल सिर्फ़ Gemini 3 मॉडल पर लागू होता है. Gemini 2.5 या इससे पुराने मॉडल के साथ खोज के नतीजों का इस्तेमाल करने पर, आपके प्रोजेक्ट के लिए हर प्रॉम्प्ट के हिसाब से बिल भेजा जाता है.
+عند استخدام تحديد المصدر من خلال "بحث Google" مع Gemini 3، يتم تحصيل رسوم من مشروعك مقابل كل طلب بحث يقرّر النموذج تنفيذه. إذا قرّر النموذج تنفيذ طلبات بحث متعددة للردّ على طلب واحد (على سبيل المثال، البحث عن `"UEFA Euro 2024 winner"` و`"Spain vs England Euro 2024 final
+score"` ضمن طلب بيانات من واجهة برمجة التطبيقات نفسه)، يتم احتساب ذلك كاستخدامَين قابلَين للفوترة للأداة لهذا الطلب. لأغراض الفوترة، نتجاهل طلبات البحث الفارغة على الويب عند احتساب الطلبات الفريدة. لا ينطبق نموذج الفوترة هذا إلا على نماذج Gemini 3. عند استخدام تحديد المصدر من خلال "بحث Google" مع Gemini 2.5 أو النماذج الأقدم، يتم تحصيل رسوم من مشروعك لكل طلب.
 
-शुल्क के बारे में ज़्यादा जानकारी के लिए, [Gemini API के शुल्क वाला पेज](https://ai.google.dev/gemini-api/docs/pricing?hl=hi) देखें.
+للحصول على معلومات مفصّلة عن الأسعار، يُرجى الاطّلاع على صفحة [أسعار Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=ar).
 
-## इन मॉडल के साथ काम करता है
+## النماذج المتوافقة
 
-आपको [मॉडल की खास जानकारी](https://ai.google.dev/gemini-api/docs/models?hl=hi) वाले पेज पर, सभी सुविधाएं मिल सकती हैं.
+يمكنك الاطّلاع على الإمكانات الكاملة في صفحة نظرة عامة على [النموذج](https://ai.google.dev/gemini-api/docs/models?hl=ar).
 
-| मॉडल | Google Search की मदद से, भरोसेमंद स्रोतों से जानकारी पाना |
+| الطراز | تحديد المصدر من خلال "بحث Google" |
 | --- | --- |
-| Gemini 3.1 Flash की इमेज का प्रीव्यू | ✔️ |
-| Gemini 3.1 Pro की झलक | ✔️ |
-| Gemini 3 Pro की इमेज की झलक | ✔️ |
-| Gemini 3 Flash की झलक | ✔️ |
+| Gemini 3.1 Flash-Lite | ✔️ |
+| Gemini 3.1 Flash Image Preview | ✔️ |
+| Gemini 3.1 Pro Preview | ✔️ |
+| Gemini 3 Pro Image Preview | ✔️ |
+| Gemini 3 Flash Preview | ✔️ |
+| Gemini 3.1 Flash-Lite Preview | ✔️ |
 | Gemini 2.5 Pro | ✔️ |
 | Gemini 2.5 Flash | ✔️ |
 | Gemini 2.5 Flash-Lite | ✔️ |
 | Gemini 2.0 Flash | ✔️ |
 
-## इस्तेमाल किए जा सकने वाले टूल कॉम्बिनेशन
+## مجموعات الأدوات المتوافقة
 
-ज़्यादा मुश्किल इस्तेमाल के उदाहरणों के लिए, Google Search के साथ ग्राउंडिंग की सुविधा का इस्तेमाल अन्य टूल के साथ किया जा सकता है. जैसे, [कोड एक्ज़ीक्यूशन](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi) और [यूआरएल कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi).
+يمكنك استخدام تحديد المصدر من خلال "بحث Google" مع أدوات أخرى، مثل
+[تنفيذ الرموز](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar) و
+[سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar) لتعزيز حالات الاستخدام الأكثر تعقيدًا.
 
-Gemini 3 मॉडल, बिल्ट-इन टूल (जैसे, Google Search के साथ ग्राउंडिंग) को कस्टम टूल (फ़ंक्शन कॉलिंग) के साथ इस्तेमाल करने की सुविधा देते हैं. [टूल के कॉम्बिनेशन](https://ai.google.dev/gemini-api/docs/tool-combination?hl=hi) पेज पर जाकर, इस बारे में ज़्यादा जानें.
+تتيح نماذج Gemini 3 الجمع بين الأدوات المضمّنة (مثل تحديد المصدر من خلال "بحث Google") والأدوات المخصّصة (استدعاء الدوال). مزيد من المعلومات في صفحة
+[مجموعات الأدوات](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ar).
 
-## आगे क्या करना है
+## الخطوات التالية
 
-- [Gemini API की कुकबुक में, Google Search की मदद से जानकारी पाने की सुविधा](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=hi) आज़माएं.
-- उपलब्ध अन्य टूल के बारे में जानें. जैसे, [फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi).
-- [यूआरएल कॉन्टेक्स्ट टूल](https://ai.google.dev/gemini-api/docs/url-context?hl=hi) का इस्तेमाल करके, प्रॉम्प्ट में खास यूआरएल जोड़ने का तरीका जानें.
+- [جرِّب تحديد المصدر من خلال "بحث Google" في Gemini API
+  Cookbook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=ar).
+- تعرَّف على الأدوات الأخرى المتاحة، مثل [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar).
+- تعلَّف على كيفية زيادة الطلبات باستخدام عناوين URL محدّدة من خلال أداة [سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar).
 
-सुझाव भेजें
+إرسال ملاحظات
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया.
+تاريخ التعديل الأخير: 2026-05-08 (حسب التوقيت العالمي المتفَّق عليه)
 
-क्या आपको हमें और कुछ बताना है?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-08 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

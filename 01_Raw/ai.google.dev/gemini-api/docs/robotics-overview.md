@@ -1,50 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-overview?hl=tr
-fetched_at: 2026-05-05T20:50:29.164742+00:00
+source_url: https://ai.google.dev/gemini-api/docs/robotics-overview?hl=vi
+fetched_at: 2026-05-11T05:06:05.039988+00:00
 title: "Gemini Robotics-ER 1.6 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Geri bildirim gönderin
+Gửi ý kiến phản hồi
 
 # Gemini Robotics-ER 1.6
 
-Gemini Robotics-ER 1.6, Gemini'ın ajan tabanlı yeteneklerini robotik alanına taşıyan bir görsel-dil modelidir (VLM). Fiziksel dünyada gelişmiş akıl yürütme için tasarlanmıştır. Robotların karmaşık görsel verileri yorumlamasına, uzamsal akıl yürütme yapmasına ve doğal dil komutlarından eylemler planlamasına olanak tanır.
+Gemini Robotics-ER 1.6 là một mô hình thị giác-ngôn ngữ (VLM) mang các khả năng của tác nhân AI của Gemini vào lĩnh vực robot học. Mô hình này được thiết kế để suy luận nâng cao trong thế giới thực, cho phép robot diễn giải dữ liệu hình ảnh phức tạp, thực hiện suy luận không gian và lập kế hoạch hành động từ các lệnh bằng ngôn ngữ tự nhiên.
 
-Gemini Robotics-ER 1.5 kullanıyorsanız API çağrısında model adını `model="gemini-robotics-er-1.5-preview"` yerine `model="gemini-robotics-er-1.6-preview"` olarak değiştirerek 1.6 modelini kullanmaya başlayabilirsiniz.
+Xin lưu ý rằng nếu đang sử dụng Gemini Robotics-ER 1.5, bạn có thể bắt đầu sử dụng mô hình 1.6 bằng cách thay thế tên mô hình từ `model="gemini-robotics-er-1.5-preview"` thành `model="gemini-robotics-er-1.6-preview"` trong lệnh gọi API.
 
-Temel özellikler ve avantajlar:
+Các tính năng và lợi ích chính:
 
-- **Gelişmiş özerklik:** Robotlar, açık uçlu ortamlardaki değişikliklere akıl yürüterek, uyum sağlayarak ve yanıt vererek tepki verebilir.
-- **Doğal dil etkileşimi:** Doğal dili kullanarak karmaşık görev atamaları yapmayı mümkün kılarak robotların kullanımını kolaylaştırır.
-- **Görev düzenleme:** Doğal dil komutlarını alt görevlere ayırır ve uzun vadeli görevleri tamamlamak için mevcut robot denetleyicileri ve davranışlarıyla entegre olur.
-- **Çok yönlü özellikler:** Nesneleri bulup tanımlar, nesne ilişkilerini anlar, tutma ve yörünge planları yapar ve dinamik sahneleri yorumlar.
+- **Khả năng tự chủ nâng cao:** Robot có thể suy luận, thích ứng và phản hồi những thay đổi trong môi trường mở.
+- **Tương tác bằng ngôn ngữ tự nhiên:** Giúp người dùng dễ dàng sử dụng robot hơn bằng cách cho phép giao các nhiệm vụ phức tạp bằng ngôn ngữ tự nhiên.
+- **Điều phối tác vụ:** Phân tích các lệnh bằng ngôn ngữ tự nhiên thành các tác vụ phụ và tích hợp với các bộ điều khiển cũng như hành vi hiện có của robot để hoàn thành các tác vụ dài hạn.
+- **Khả năng linh hoạt:** Định vị và xác định các đối tượng, hiểu mối quan hệ giữa các đối tượng, lập kế hoạch nắm bắt và quỹ đạo, đồng thời diễn giải các cảnh động.
 
-Bu belgede, [modelin ne yaptığı](#how-it-works) açıklanmakta ve modelin [örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler aracılığıyla örnekler](#standard-spatial-reasoning) aracılığı
+Tài liệu này mô tả [những việc mà mô hình này có thể làm](#how-it-works) và giới thiệu cho bạn một số [ví dụ](#standard-spatial-reasoning) minh hoạ các khả năng của tác nhân AI của mô hình này.
 
-Hemen kullanmaya başlamak isterseniz modeli Google AI Studio'da deneyebilirsiniz.
+Nếu muốn bắt đầu ngay, bạn có thể dùng thử mô hình này trong Google AI Studio.
 
-[Google AI Studio'da deneme](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-1.6-preview&hl=tr)
+[Dùng thử trong Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-1.6-preview&hl=vi)
 
-## Güvenlik
+## An toàn
 
-Gemini Robotics-ER 1.6 güvenliğe öncelik verilerek geliştirilmiş olsa da robotun etrafında güvenli bir ortam sağlamak sizin sorumluluğunuzdadır. Üretken yapay zeka modelleri hata yapabilir ve fiziksel robotlar hasara neden olabilir. Güvenlik bizim için önceliklidir. Üretken yapay zeka modellerinin gerçek dünyadaki robotik uygulamalarda güvenli bir şekilde kullanılmasını sağlamak, araştırmalarımızın aktif ve kritik bir alanıdır. Daha fazla bilgi edinmek için [Google DeepMind robotik güvenlik sayfasını](https://deepmind.google/models/gemini-robotics/safety?hl=tr) ziyaret edin.
+Mặc dù Gemini Robotics-ER 1.6 được xây dựng với mục tiêu đảm bảo an toàn, nhưng bạn vẫn phải có trách nhiệm duy trì một môi trường an toàn xung quanh robot. Các mô hình AI tạo sinh có thể mắc lỗi và robot thực có thể gây hư hỏng. An toàn là ưu tiên hàng đầu và việc đảm bảo an toàn cho các mô hình AI tạo sinh khi sử dụng với robot trong thế giới thực là một lĩnh vực nghiên cứu quan trọng và đang được chúng tôi tích cực triển khai. Để tìm hiểu thêm, hãy truy cập vào [trang an toàn về robot của Google DeepMind](https://deepmind.google/models/gemini-robotics/safety?hl=vi).
 
-## Başlangıç: Bir sahnedeki nesneleri bulma
+## Bắt đầu: Tìm các đối tượng trong một cảnh
 
-Aşağıdaki örnekte, robotik alanında yaygın bir kullanım alanı gösterilmektedir. Bu örnekte, [`generateContent`](https://ai.google.dev/api/generate-content?hl=tr#method:-models.generatecontent) yöntemini kullanarak modele bir resim ve metin isteminin nasıl iletileceği gösterilmektedir. Böylece, tanımlanan nesnelerin listesi ve ilgili 2D noktaları elde edilebilir.
-Model, bir resimde tanımladığı öğeler için puan döndürür. Bu öğelerin normalleştirilmiş 2D koordinatlarını ve etiketlerini döndürür.
+Ví dụ sau đây minh hoạ một trường hợp sử dụng phổ biến trong lĩnh vực robot học. Ví dụ này cho thấy cách truyền một hình ảnh và một câu lệnh văn bản đến mô hình bằng phương thức [`generateContent`](https://ai.google.dev/api/generate-content?hl=vi#method:-models.generatecontent) để nhận danh sách các đối tượng được nhận dạng cùng với các điểm 2D tương ứng.
+Mô hình này trả về các điểm cho những mục mà mô hình xác định được trong một hình ảnh, trả về nhãn và toạ độ 2D được chuẩn hoá của các mục đó.
 
-Bu çıkışı bir robotik API ile kullanabilir veya bir robotun gerçekleştireceği işlemleri oluşturmak için bir Vision-Language-Action (VLA) modeli ya da diğer üçüncü taraf kullanıcı tanımlı işlevleri çağırabilirsiniz.
+Bạn có thể sử dụng đầu ra này với một API robot hoặc gọi một mô hình hành động bằng ngôn ngữ thị giác (VLA) hoặc bất kỳ hàm do người dùng xác định nào khác của bên thứ ba để tạo hành động cho robot thực hiện.
 
 ### Python
 
@@ -119,7 +119,7 @@ curl -X POST \
   }'
 ```
 
-Çıktı, her biri `point` (normalleştirilmiş `[y, x]` koordinatları) ve nesneyi tanımlayan bir `label` içeren nesnelerden oluşan bir JSON dizisi olacaktır.
+Đầu ra sẽ là một mảng JSON chứa các đối tượng, mỗi đối tượng có một `point` (toạ độ `[y, x]` được chuẩn hoá) và một `label` xác định đối tượng.
 
 ### JSON
 
@@ -138,43 +138,43 @@ curl -X POST \
 ]
 ```
 
-Aşağıdaki resimde, bu noktaların nasıl gösterilebileceğine dair bir örnek verilmiştir:
+Hình ảnh sau đây là một ví dụ về cách hiển thị các điểm này:
 
-![Resimdeki nesnelerin noktalarını gösteren bir örnek](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=tr)
+![Ví dụ minh hoạ các điểm của đối tượng trong hình ảnh](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=vi)
 
-## İşleyiş şekli
+## Cách hoạt động
 
-Gemini Robotics-ER 1.6, robotlarınızın uzamsal anlayışı kullanarak fiziksel dünyada bağlam oluşturmasına ve çalışmasına olanak tanır. Resim/video/ses girişini ve doğal dil istemlerini kullanarak:
+Gemini Robotics-ER 1.6 cho phép robot của bạn hiểu rõ bối cảnh và hoạt động trong thế giới thực bằng cách sử dụng khả năng hiểu biết về không gian. Công cụ này nhận đầu vào là hình ảnh/video/âm thanh và câu lệnh bằng ngôn ngữ tự nhiên để:
 
-- **Nesneleri ve sahne bağlamını anlama**: Nesneleri ve sahneyle ilişkilerini (kullanım olanakları dahil) tanımlar.
-- **Görev talimatlarını anlama**: Doğal dilde verilen görevleri yorumlar (ör. "muz nerede?").
-- **Uzamsal ve zamansal olarak akıl yürütme**: Eylem dizilerini ve nesnelerin zaman içinde bir sahneyle nasıl etkileşimde bulunduğunu anlama.
-- **Yapılandırılmış çıkış sağlama**: Nesne konumlarını temsil eden koordinatları (noktalar veya sınırlayıcı kutular) döndürür.
+- **Hiểu được các đối tượng và bối cảnh của cảnh**: Xác định các đối tượng và lý do về mối quan hệ của các đối tượng đó với cảnh, bao gồm cả khả năng tương tác của các đối tượng.
+- **Hiểu hướng dẫn về nhiệm vụ**: Diễn giải các nhiệm vụ được giao bằng ngôn ngữ tự nhiên, chẳng hạn như "tìm quả chuối".
+- **Lý luận về không gian và thời gian**: Hiểu rõ trình tự hành động và cách các đối tượng tương tác với một cảnh theo thời gian.
+- **Cung cấp đầu ra có cấu trúc**: Trả về toạ độ (điểm hoặc khung hình chữ nhật) biểu thị vị trí của đối tượng.
 
-Bu sayede robotlar, çevrelerini programatik olarak "görebilir" ve "anlayabilir".
+Điều này cho phép robot "nhìn" và "hiểu" môi trường của chúng một cách có lập trình.
 
-Gemini Robotics-ER 1.6, karmaşık görevleri ("elmaları kaseye koy" gibi) alt görevlere ayırarak uzun vadeli görevleri yönetebilen bir aracıdır:
+Gemini Robotics-ER 1.6 cũng có khả năng hành động, tức là có thể chia nhỏ các tác vụ phức tạp (như "đặt quả táo vào bát") thành các tác vụ phụ để điều phối các tác vụ trong thời gian dài:
 
-- **Alt görevleri sıralama**: Komutları mantıksal bir adım dizisine ayırır.
-- **İşlev çağrıları/Kod yürütme**: Mevcut robot işlevlerinizi/araçlarınızı çağırarak veya oluşturulan kodu yürüterek adımları uygular.
+- **Sắp xếp các bước của lệnh**: Phân tách các lệnh thành một trình tự hợp lý gồm các bước.
+- **Lệnh gọi hàm/Thực thi mã**: Thực thi các bước bằng cách gọi các hàm/công cụ hiện có của robot hoặc thực thi mã được tạo.
 
-Gemini ile işlev çağrısının nasıl çalıştığı hakkında daha fazla bilgiyi [İşlev Çağrısı sayfasında](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=tr#how-it-works) bulabilirsiniz.
+Đọc thêm về cách tính năng gọi hàm hoạt động với Gemini trên [trang Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=vi#how-it-works).
 
-### Gemini Robotics-ER 1.6 ile düşünme bütçesini kullanma
+### Sử dụng ngân sách tư duy với Gemini Robotics-ER 1.6
 
-Gemini Robotics-ER 1.6, gecikme ve doğruluk arasındaki dengeyi kontrol etmenizi sağlayan esnek bir düşünme bütçesine sahiptir. Nesne algılama gibi mekansal anlama görevlerinde model, küçük bir düşünme bütçesiyle yüksek performans elde edebilir. Sayma ve ağırlık tahmini gibi daha karmaşık akıl yürütme görevleri, daha büyük bir düşünme bütçesinden yararlanır. Bu sayede, daha zorlu görevlerde düşük gecikmeli yanıtlar ile yüksek doğruluklu sonuçlar arasında denge kurabilirsiniz.
+Gemini Robotics-ER 1.6 có ngân sách tư duy linh hoạt, giúp bạn kiểm soát được sự đánh đổi giữa độ trễ và độ chính xác. Đối với các tác vụ hiểu không gian như phát hiện đối tượng, mô hình có thể đạt được hiệu suất cao với ngân sách suy nghĩ nhỏ. Các nhiệm vụ suy luận phức tạp hơn như đếm và ước tính trọng lượng sẽ được hưởng lợi từ ngân sách tư duy lớn hơn. Điều này giúp bạn cân bằng nhu cầu về phản hồi có độ trễ thấp với kết quả có độ chính xác cao cho các tác vụ khó khăn hơn.
 
-Düşünme bütçeleri hakkında daha fazla bilgi edinmek için [Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr) temel özellikleri sayfasını inceleyin.
+Để tìm hiểu thêm về ngân sách tư duy, hãy xem trang [Tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi) về các chức năng cốt lõi.
 
-## Standart mekansal akıl yürütme
+## Suy luận không gian tiêu chuẩn
 
-Aşağıdaki örneklerde, doğal dil istemlerini kullanarak **robotik algılama** ve uzamsal akıl yürütme ile ilgili görevler gösterilmektedir. Bu görevler arasında bir görüntüdeki nesneleri işaretleme ve bulma ile yörünge planlama yer alır. Basitlik açısından, bu örneklerdeki kod snippet'leri yalnızca istemi ve `generate_content` API'sine yapılan çağrıyı gösterecek şekilde azaltılmıştır.
+Các ví dụ sau đây minh hoạ các nhiệm vụ về **nhận thức của robot** và suy luận không gian bằng cách sử dụng câu lệnh bằng ngôn ngữ tự nhiên, từ việc chỉ và tìm vật thể trong hình ảnh đến lập kế hoạch cho quỹ đạo. Để đơn giản hoá, các đoạn mã trong những ví dụ này đã được rút gọn để chỉ hiển thị câu lệnh và lệnh gọi đến API `generate_content`.
 
-Çalıştırılabilir kodun tamamı ve ek örnekleri [Robotics cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)'ta bulabilirsiniz.
+Bạn có thể tìm thấy mã có thể chạy đầy đủ cũng như các ví dụ khác trong [Sổ tay về robot học](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-### Nesneleri işaret etme
+### Chỉ vào vật thể
 
-Görüntü veya video karelerindeki nesneleri işaretleme ve bulma, robotik alanında kullanılan görme ve dil modellerinin (VLMs) yaygın bir kullanım alanıdır. Aşağıdaki örnekte, modelden bir resimdeki belirli nesneleri bulup koordinatlarını döndürmesi isteniyor.
+Chỉ và tìm vật thể trong hình ảnh hoặc khung hình video là một trường hợp sử dụng phổ biến đối với các mô hình thị giác và ngôn ngữ (VLM) trong ngành robot học. Ví dụ sau đây yêu cầu mô hình tìm các đối tượng cụ thể trong một hình ảnh và trả về toạ độ của các đối tượng đó.
 
 ### Python
 
@@ -222,7 +222,7 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-Çıkış, başlangıç örneğine benzer şekilde, bulunan nesnelerin koordinatlarını ve etiketlerini içeren bir JSON olacaktır.
+Đầu ra sẽ tương tự như ví dụ về cách bắt đầu, một tệp JSON chứa toạ độ của các đối tượng được tìm thấy và nhãn của các đối tượng đó.
 
 ```
 [
@@ -236,9 +236,9 @@ print(image_response.text)
 ]
 ```
 
-![Bir resimde tanımlanan nesnelerin noktalarını gösteren örnek](https://ai.google.dev/static/gemini-api/docs/images/robotics/pointing-objects.png?hl=tr)
+![Ví dụ minh hoạ các điểm của vật thể được nhận dạng trong hình ảnh](https://ai.google.dev/static/gemini-api/docs/images/robotics/pointing-objects.png?hl=vi)
 
-Modelden belirli nesneler yerine "meyve" gibi soyut kategorileri yorumlamasını ve resimdeki tüm örnekleri bulmasını istemek için aşağıdaki istemi kullanın.
+Sử dụng câu lệnh sau để yêu cầu mô hình diễn giải các danh mục trừu tượng như "trái cây" thay vì các đối tượng cụ thể và xác định vị trí của tất cả các thực thể trong hình ảnh.
 
 ### Python
 
@@ -251,13 +251,13 @@ prompt = f"""
         [y, x] format normalized to 0-1000."""
 ```
 
-Diğer görüntü işleme teknikleri için [görüntü yorumlama](https://ai.google.dev/gemini-api/docs/image-understanding?hl=tr) sayfasını ziyaret edin.
+Truy cập vào trang [hiểu hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi) để biết các kỹ thuật xử lý hình ảnh khác.
 
-### Videodaki nesneleri izleme
+### Theo dõi đối tượng trong video
 
-Gemini Robotics-ER 1.6, nesneleri zaman içinde takip etmek için video karelerini de analiz edebilir. Desteklenen video biçimlerinin listesi için [Video girişleri](https://ai.google.dev/gemini-api/docs/video-understanding?hl=tr#supported-formats) bölümüne bakın.
+Gemini Robotics-ER 1.6 cũng có thể phân tích các khung hình video để theo dõi các đối tượng theo thời gian. Hãy xem phần [Đầu vào video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi#supported-formats) để biết danh sách các định dạng video được hỗ trợ.
 
-Aşağıdaki temel istem, modelin analiz ettiği her karede belirli nesneleri bulmak için kullanılır:
+Sau đây là câu lệnh cơ bản được dùng để tìm các đối tượng cụ thể trong mỗi khung hình mà mô hình phân tích:
 
 ### Python
 
@@ -281,17 +281,17 @@ base_prompt = f"""
   """
 ```
 
-Çıkışta, video karelerinde takip edilen bir kalem ve dizüstü bilgisayar gösteriliyor.
+Đầu ra cho thấy một cây bút và máy tính xách tay đang được theo dõi trên các khung hình video.
 
-![Bir GIF&#39;teki kareler aracılığıyla izlenen nesneleri gösteren bir örnek](https://ai.google.dev/static/gemini-api/docs/images/robotics/object-tracking.gif?hl=tr)
+![Ví dụ minh hoạ các đối tượng được theo dõi qua các khung hình trong ảnh GIF](https://ai.google.dev/static/gemini-api/docs/images/robotics/object-tracking.gif?hl=vi)
 
-Çalıştırılabilir kodun tamamı için [Robotics cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)'a bakın.
+Để xem mã có thể chạy đầy đủ, hãy xem [Sổ tay về robot học](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-### Nesne algılama ve sınırlayıcı kutular
+### Phát hiện vật thể và khung hình chữ nhật
 
-Model, tek noktaların yanı sıra 2D sınırlayıcı kutular da döndürebilir. Bu kutular, bir nesneyi çevreleyen dikdörtgen bir bölge sağlar.
+Ngoài các điểm đơn lẻ, mô hình này cũng có thể trả về các khung hình chữ nhật 2D, cung cấp một vùng hình chữ nhật bao quanh một đối tượng.
 
-Bu örnekte, bir masadaki tanımlanabilir nesneler için 2 boyutlu sınırlayıcı kutular istenmektedir. Model, çıkışı 25 nesneyle sınırlaması ve birden fazla örneği benzersiz şekilde adlandırması için yönlendiriliyor.
+Ví dụ này yêu cầu hộp giới hạn 2D cho các đối tượng có thể nhận dạng trên một chiếc bàn. Mô hình được hướng dẫn giới hạn đầu ra ở 25 đối tượng và đặt tên riêng cho nhiều thực thể.
 
 ### Python
 
@@ -334,19 +334,18 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-Aşağıda, modelden döndürülen kutular gösterilmektedir.
+Sau đây là các hộp được trả về từ mô hình.
 
-![Bulunan nesnelerin sınırlayıcı kutularını gösteren bir örnek](https://ai.google.dev/static/gemini-api/docs/images/robotics/bounding-boxes.png?hl=tr)
+![Ví dụ minh hoạ các hộp giới hạn cho những đối tượng được tìm thấy](https://ai.google.dev/static/gemini-api/docs/images/robotics/bounding-boxes.png?hl=vi)
 
-Çalıştırılabilir kodun tamamı için [Robotics
-cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)'a bakın.
-[Görüntü anlama](https://ai.google.dev/gemini-api/docs/image-understanding?hl=tr) sayfasında, nesne algılama ve sınırlayıcı kutu örnekleri gibi görsel görevlerle ilgili ek örnekler de yer alır.
+Để xem toàn bộ mã có thể chạy, hãy xem [Sổ tay về Robotics](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+Trang [Hiểu hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi) cũng có các ví dụ khác về những tác vụ trực quan như phát hiện đối tượng và ví dụ về khung hình chữ nhật.
 
-### Yörüngeler
+### Quỹ đạo
 
-Gemini Robotics-ER 1.6, robot hareketini yönlendirmek için yararlı olan ve bir yörüngeyi tanımlayan nokta dizileri oluşturabilir.
+Gemini Robotics-ER 1.6 có thể tạo ra các chuỗi điểm xác định quỹ đạo, hữu ích cho việc hướng dẫn chuyển động của robot.
 
-Bu örnekte, başlangıç noktası ve bir dizi ara nokta da dahil olmak üzere kırmızı bir kalemi bir düzenleyiciye götürmek için bir yörünge isteniyor.
+Ví dụ này yêu cầu một quỹ đạo để di chuyển bút đỏ đến một ngăn chứa, bao gồm cả điểm xuất phát và một loạt điểm trung gian.
 
 ### Python
 
@@ -388,7 +387,7 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-Yanıt, kırmızı kalemin düzenleyicinin üzerine taşıma görevini tamamlamak için izlemesi gereken yolun yörüngesini açıklayan bir dizi koordinattır:
+Phản hồi là một tập hợp các toạ độ mô tả quỹ đạo của đường dẫn mà bút màu đỏ phải đi theo để hoàn thành nhiệm vụ di chuyển bút lên trên cùng của trình sắp xếp:
 
 ```
 [
@@ -411,15 +410,15 @@ Yanıt, kırmızı kalemin düzenleyicinin üzerine taşıma görevini tamamlama
 ]
 ```
 
-![Planlanan yörüngeyi gösteren bir örnek](https://ai.google.dev/static/gemini-api/docs/images/robotics/trajectories.png?hl=tr)
+![Ví dụ cho thấy quỹ đạo dự kiến](https://ai.google.dev/static/gemini-api/docs/images/robotics/trajectories.png?hl=vi)
 
-## Ajan tabanlı yetenekler
+## Khả năng của tác nhân AI
 
-Aşağıdaki örneklerde, modelin ajan tabanlı yeteneklerini (özellikle **kod yürütme**) kullanarak gelişmiş **robotik akıl yürütme** gösterilmektedir. Bu senaryolarda model, yanıt vermeden önce belirsizlikleri gidermek veya doğruluğu artırmak için görüntüleri değiştirmek (ör. yakınlaştırma, kırpma veya döndürme) üzere Python kodu yazıp yürütmeye karar verebilir.
+Các ví dụ sau đây minh hoạ **khả năng suy luận nâng cao của robot** bằng cách sử dụng các khả năng của tác nhân AI của mô hình, cụ thể là **khả năng thực thi mã**. Trong những trường hợp này, mô hình có thể quyết định viết và thực thi mã Python để thao tác với hình ảnh (chẳng hạn như phóng to, cắt hoặc xoay) nhằm giải quyết sự mơ hồ hoặc cải thiện độ chính xác trước khi trả lời.
 
-### Nesne algılama (yakınlaştırma ve kırpma)
+### Phát hiện vật thể (Thu phóng và cắt)
 
-Aşağıdaki örnekte, nesneleri algılarken ve sınırlayıcı kutuları döndürürken daha net bir görünüm için kodu yürütme özelliğini kullanarak bir resmi nasıl yakınlaştırıp kırpacağınız gösterilmektedir.
+Ví dụ sau đây minh hoạ cách sử dụng tính năng thực thi mã để thu phóng và cắt ảnh nhằm có chế độ xem rõ ràng hơn khi phát hiện các đối tượng và trả về các hộp giới hạn.
 
 ### Python
 
@@ -458,7 +457,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Model çıkışı aşağıdaki gibi olur:
+Đầu ra của mô hình sẽ tương tự như sau:
 
 ```
 [
@@ -470,13 +469,13 @@ Model çıkışı aşağıdaki gibi olur:
 ]
 ```
 
-Aşağıda, modelden döndürülen kutular gösterilmektedir.
+Sau đây là các hộp được trả về từ mô hình.
 
-![Bulunan nesnelerin sınırlayıcı kutularını gösteren bir örnek](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=tr)
+![Ví dụ minh hoạ các hộp giới hạn cho những đối tượng được tìm thấy](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=vi)
 
-### Analog bir göstergeyi okuma ve mantık uygulama
+### Đọc đồng hồ đo analog và áp dụng logic
 
-Aşağıdaki örnekte, analog bir ölçüm cihazını okumak ve zaman hesaplamaları yapmak için modelin nasıl kullanılacağı gösterilmektedir. JSON çıkışını zorunlu kılmak için sistem talimatı kullanır.
+Ví dụ sau đây minh hoạ cách sử dụng mô hình để đọc đồng hồ đo tương tự và thực hiện các phép tính thời gian. Công cụ này sử dụng một chỉ dẫn hệ thống để thực thi đầu ra JSON.
 
 ### Python
 
@@ -513,11 +512,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Aşağıda örnek bir resim girişi verilmiştir.
+Sau đây là một ví dụ về dữ liệu đầu vào hình ảnh.
 
-![Okunacak bir saati gösteren örnek](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-clock-reading.png?hl=tr)
+![Ví dụ minh hoạ một chiếc đồng hồ để đọc](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-clock-reading.png?hl=vi)
 
-Model çıkışı aşağıdaki gibi olur:
+Đầu ra của mô hình sẽ tương tự như sau:
 
 ```
 Time Response:  {
@@ -526,9 +525,9 @@ Time Response:  {
  }
 ```
 
-### Bir kaptaki sıvıyı ölçme
+### Đo chất lỏng trong một bình chứa
 
-Aşağıdaki örnekte, bir ölçüm cihazını okumak ve sıvı seviyesini yüzde olarak hesaplamak için kod yürütmenin nasıl kullanılacağı gösterilmektedir.
+Ví dụ sau đây cho biết cách sử dụng tính năng thực thi mã để đọc đồng hồ đo và tính toán mức chất lỏng theo tỷ lệ phần trăm.
 
 ### Python
 
@@ -568,13 +567,13 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Aşağıda, girişin yakınlaştırılmış resmi gösterilmektedir.
+Sau đây là hình ảnh phóng to của đầu vào.
 
-![Okunacak bir saati gösteren örnek](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-fluid-container.png?hl=tr)
+![Ví dụ minh hoạ một chiếc đồng hồ để đọc](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-fluid-container.png?hl=vi)
 
-### Devre kartındaki işaretleri okuma
+### Đọc các dấu hiệu trên bảng mạch
 
-Aşağıdaki örnekte, bir devre kartı çipindeki metni okumak için kod yürütmenin nasıl kullanılacağı gösterilmektedir. Bu sayede model, resmi gerektiği gibi yakınlaştırabilir, kırpabilir ve döndürebilir.
+Ví dụ sau đây minh hoạ cách sử dụng tính năng thực thi mã để đọc văn bản trên một vi mạch bảng mạch, cho phép mô hình thu phóng, cắt và xoay hình ảnh khi cần.
 
 ### Python
 
@@ -608,13 +607,13 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Aşağıda, girişin yakınlaştırılmış resmi gösterilmektedir.
+Sau đây là hình ảnh phóng to của đầu vào.
 
-![Okunacak bir saati gösteren örnek](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=tr)
+![Ví dụ minh hoạ một chiếc đồng hồ để đọc](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=vi)
 
-### Görüntü ek açıklaması
+### Chú thích hình ảnh
 
-Aşağıdaki örnekte, kod yürütme özelliğinin bir resmi açıklama eklemek (ör. imha talimatları için ok çizme) ve değiştirilmiş resmi döndürmek için nasıl kullanılacağı gösterilmektedir.
+Ví dụ sau đây minh hoạ cách sử dụng tính năng thực thi mã để chú thích một hình ảnh (ví dụ: vẽ mũi tên cho hướng dẫn xử lý) và trả về hình ảnh đã sửa đổi.
 
 ### Python
 
@@ -652,11 +651,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Aşağıda örnek bir resim girişi verilmiştir.
+Sau đây là một ví dụ về dữ liệu đầu vào hình ảnh.
 
-![Okunacak bir saati gösteren örnek](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=tr)
+![Ví dụ minh hoạ một chiếc đồng hồ để đọc](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=vi)
 
-Model çıkışı aşağıdaki gibi olur:
+Đầu ra của mô hình sẽ tương tự như sau:
 
 ```
 The annotated image shows the suggested disposal locations for the items on the table:
@@ -665,13 +664,13 @@ The annotated image shows the suggested disposal locations for the items on the 
 - **Black bin (Trash)**: Chocolate bar wrapper, Welch's packet, and white tissue.
 ```
 
-## Düzenleme
+## Phối khí
 
-Gemini Robotics-ER 1.6, **görev planlama** ve daha üst düzeyde mekansal akıl yürütme işlemlerini gerçekleştirebilir. Ayrıca, uzun vadeli görevleri yönetmek için bağlamsal anlayışa dayalı olarak eylemleri çıkarabilir veya en uygun konumları belirleyebilir.
+Gemini Robotics-ER 1.6 có thể thực hiện **lập kế hoạch cho công việc** và suy luận không gian ở cấp độ cao hơn, suy luận các hành động hoặc xác định vị trí tối ưu dựa trên khả năng hiểu ngữ cảnh để điều phối các công việc trong thời gian dài.
 
-### Dizüstü bilgisayar için yer açma
+### Tạo không gian cho máy tính xách tay
 
-Bu örnekte, Gemini Robotics-ER'ın bir alan hakkında nasıl akıl yürütebileceği gösterilmektedir. İstemde, başka bir öğeye yer açmak için hangi nesnenin taşınması gerektiği soruluyor.
+Ví dụ này minh hoạ cách Gemini Robotics-ER có thể suy luận về một không gian. Câu lệnh yêu cầu mô hình xác định đối tượng nào cần được di chuyển để tạo khoảng trống cho một mục khác.
 
 ### Python
 
@@ -709,7 +708,7 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-Yanıtta, kullanıcının sorusunu yanıtlayan nesnenin 2 boyutlu koordinatı yer alır. Bu örnekte, dizüstü bilgisayara yer açmak için taşınması gereken nesne söz konusudur.
+Phản hồi chứa toạ độ 2D của đối tượng trả lời câu hỏi của người dùng, trong trường hợp này, đối tượng cần di chuyển để nhường chỗ cho máy tính xách tay.
 
 ```
 [
@@ -717,11 +716,11 @@ Yanıtta, kullanıcının sorusunu yanıtlayan nesnenin 2 boyutlu koordinatı ye
 ]
 ```
 
-![Başka bir nesne için hangi nesnenin taşınması gerektiğini gösteren bir örnek](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=tr)
+![Ví dụ minh hoạ đối tượng cần di chuyển cho một đối tượng khác](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=vi)
 
-### Öğle Yemeği Hazırlama
+### Chuẩn bị bữa trưa
 
-Model, çok adımlı görevlerle ilgili talimatlar da verebilir ve her adımda ilgili nesnelere işaret edebilir. Bu örnekte, modelin bir öğle yemeği çantasını hazırlamak için bir dizi adımı nasıl planladığı gösterilmektedir.
+Mô hình này cũng có thể cung cấp hướng dẫn cho các tác vụ nhiều bước và chỉ đến các đối tượng có liên quan cho từng bước. Ví dụ này cho thấy cách mô hình lên kế hoạch cho một loạt các bước để đóng gói một túi đựng bữa trưa.
 
 ### Python
 
@@ -760,13 +759,13 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-Bu istemin yanıtı, resim girişinden yola çıkarak öğle yemeği çantasını nasıl hazırlayacağınızla ilgili adım adım talimatlar içerir.
+Câu trả lời cho câu lệnh này là một bộ hướng dẫn từng bước về cách đóng gói một túi đựng bữa trưa từ dữ liệu đầu vào là hình ảnh.
 
-**Giriş resmi**
+**Hình ảnh đầu vào**
 
-![Yemek kutusu ve içine konulacak öğelerin resmi](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=tr)
+![Hình ảnh hộp đựng bữa trưa và các vật phẩm cần bỏ vào hộp](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=vi)
 
-**Model çıkışı**
+**Đầu ra của mô hình**
 
 ```
 Based on the image, here is a plan to pack the lunch box and lunch bag:
@@ -789,15 +788,15 @@ Here is the list of objects and their locations:
 *   [{"point": [448, 501], "label": "brown lunch bag"}]
 ```
 
-### Özel bir robot API'sini çağırma
+### Gọi một API robot tuỳ chỉnh
 
-Bu örnekte, özel bir robot API'si ile görev düzenleme gösterilmektedir. Bu kitapta, seçme ve yerleştirme işlemi için tasarlanmış bir sahte API tanıtılmaktadır. Görev, mavi bir bloğu alıp turuncu bir kaseye yerleştirmektir:
+Ví dụ này minh hoạ việc điều phối tác vụ bằng một API robot tuỳ chỉnh. Thư viện này giới thiệu một API mô phỏng được thiết kế cho thao tác chọn và đặt. Việc cần làm là nhặt một khối màu xanh dương và đặt vào một chiếc bát màu cam:
 
-![Blok ve kase resmi](https://ai.google.dev/static/gemini-api/docs/images/robotics/robot-api-example.png?hl=tr)
+![Hình ảnh khối và bát](https://ai.google.dev/static/gemini-api/docs/images/robotics/robot-api-example.png?hl=vi)
 
-Bu sayfadaki diğer örneklere benzer şekilde, çalıştırılabilir kodun tamamını [Robotics cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)'ta bulabilirsiniz.
+Tương tự như các ví dụ khác trên trang này, mã có thể chạy đầy đủ có trong [Sổ tay về Robotics](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-İlk adımda, aşağıdaki istemi kullanarak her iki öğeyi de bulun:
+Bước đầu tiên là xác định vị trí của cả hai mục bằng câu lệnh sau:
 
 ### Python
 
@@ -810,7 +809,7 @@ prompt = """
           """
 ```
 
-Model yanıtı, bloğun ve kâsenin normalleştirilmiş koordinatlarını içerir:
+Phản hồi của mô hình bao gồm toạ độ được chuẩn hoá của khối và bát:
 
 ```
 [
@@ -819,7 +818,7 @@ Model yanıtı, bloğun ve kâsenin normalleştirilmiş koordinatlarını içeri
 ]
 ```
 
-Bu örnekte aşağıdaki sahte robot API'si kullanılmaktadır:
+Ví dụ này sử dụng API robot mô phỏng sau:
 
 ### Python
 
@@ -834,7 +833,7 @@ def returnToOrigin():
   print("Returning to origin pose")
 ```
 
-Bir sonraki adım, işlemi yürütmek için gerekli mantığa sahip bir dizi API işlevini çağırmaktır. Aşağıdaki istemde, modelin bu görevi düzenlerken kullanması gereken robot API'sinin açıklaması yer alıyor.
+Bước tiếp theo là gọi một chuỗi các hàm API với logic cần thiết để thực thi hành động. Câu lệnh sau đây bao gồm nội dung mô tả về API robot mà mô hình nên sử dụng khi điều phối tác vụ này.
 
 ### Python
 
@@ -878,7 +877,7 @@ prompt = f"""
 """
 ```
 
-Aşağıda, isteme ve sahte robot API'sine dayalı olarak modelin olası bir çıkışı gösterilmektedir. Çıkış, modelin düşünce sürecini ve bunun sonucunda planladığı görevleri içerir. Ayrıca, modelin birlikte sıraladığı robot işlevi çağrılarının çıkışını da gösterir.
+Sau đây là kết quả đầu ra có thể có của mô hình dựa trên câu lệnh và API robot mô phỏng. Đầu ra bao gồm quy trình suy nghĩ của mô hình và các nhiệm vụ mà mô hình đã lên kế hoạch. Nó cũng cho thấy đầu ra của các lệnh gọi hàm rô-bốt mà mô hình đã sắp xếp theo trình tự.
 
 ```
 Reasoning: To perform the pick and place operation, I will first move the
@@ -978,72 +977,71 @@ moving to coordinates: -247, 90, 15
 Returning to origin pose
 ```
 
-## En iyi uygulamalar
+## Các phương pháp hay nhất
 
-Robotik uygulamalarınızın performansını ve doğruluğunu optimize etmek için Gemini modeliyle etkili bir şekilde nasıl etkileşim kuracağınızı anlamanız çok önemlidir. Bu bölümde, en güvenilir sonuçları elde etmek için istem oluşturma, görsel verileri işleme ve görevleri yapılandırmaya yönelik en iyi uygulamalar ve temel stratejiler özetlenmektedir.
+Để tối ưu hoá hiệu suất và độ chính xác của các ứng dụng robot, bạn cần phải hiểu cách tương tác hiệu quả với mô hình Gemini. Phần này trình bày các phương pháp hay nhất và chiến lược chính để tạo câu lệnh, xử lý dữ liệu trực quan và cấu trúc hoá các tác vụ nhằm đạt được kết quả đáng tin cậy nhất.
 
-1. Açık ve basit bir dil kullanın.
+1. Sử dụng ngôn từ rõ ràng và đơn giản.
 
-   - **Doğal dili kullanın**: Gemini modeli, doğal ve sohbet tarzındaki dili anlamak için tasarlanmıştır. İstemlerinizi, semantik olarak net olacak ve bir kişinin doğal olarak talimat vereceği şekilde yapılandırın.
-   - **Günlük dilde kullanılan terimleri tercih edin**: Teknik veya uzmanlık alanına özgü jargon yerine günlük dilde kullanılan terimleri tercih edin. Model, belirli bir terime beklendiği gibi yanıt vermiyorsa terimi daha yaygın bir eş anlamlı kelimeyle yeniden ifade etmeyi deneyin.
-2. Görsel girişi optimize edin.
+   - **Sử dụng ngôn ngữ tự nhiên**: Mô hình Gemini được thiết kế để hiểu ngôn ngữ tự nhiên, đàm thoại. Hãy xây dựng câu lệnh theo cách rõ ràng về mặt ngữ nghĩa và phản ánh cách một người sẽ tự nhiên đưa ra chỉ dẫn.
+   - **Sử dụng thuật ngữ hằng ngày**: Chọn ngôn ngữ thông thường, hằng ngày thay vì biệt ngữ chuyên ngành hoặc kỹ thuật. Nếu mô hình không phản hồi một thuật ngữ cụ thể như mong đợi, hãy thử diễn đạt lại bằng một từ đồng nghĩa phổ biến hơn.
+2. Tối ưu hoá dữ liệu đầu vào trực quan.
 
-   - **Ayrıntı için yakınlaştırın**: Küçük olan veya daha geniş bir çekimde ayırt edilmesi zor olan nesnelerle uğraşırken ilgilenilen nesneyi izole etmek için sınırlayıcı kutu işlevini kullanın. Ardından, görüntüyü bu seçime göre kırpabilir ve daha ayrıntılı bir analiz için yeni, odaklanmış görüntüyü modele gönderebilirsiniz.
-   - **Işık ve renkle denemeler yapın**: Modelin algısı, zorlu ışık koşullarından ve zayıf renk kontrastından etkilenebilir.
-3. Karmaşık sorunları daha küçük adımlara bölün. Her küçük adımı ayrı ayrı ele alarak modeli daha hassas ve başarılı bir sonuca yönlendirebilirsiniz.
-4. Uzlaşma yoluyla doğruluğu artırın. Yüksek derecede hassasiyet gerektiren görevler için modele aynı istemle birden fazla kez sorgu gönderebilirsiniz. Döndürülen sonuçların ortalamasını alarak genellikle daha doğru ve güvenilir olan bir "uzlaşmaya" varabilirsiniz.
+   - **Phóng to để xem chi tiết**: Khi xử lý các đối tượng nhỏ hoặc khó phân biệt trong một bức ảnh rộng, hãy dùng chức năng khung viền để tách biệt đối tượng mà bạn quan tâm. Sau đó, bạn có thể cắt hình ảnh theo lựa chọn này và gửi hình ảnh mới, tập trung vào mô hình để phân tích chi tiết hơn.
+   - **Thử nghiệm với ánh sáng và màu sắc**: Cảm nhận của mô hình có thể bị ảnh hưởng bởi điều kiện ánh sáng khó khăn và độ tương phản màu kém.
+3. Chia nhỏ các vấn đề phức tạp thành các bước nhỏ hơn. Bằng cách giải quyết từng bước nhỏ riêng lẻ, bạn có thể hướng dẫn mô hình đạt được kết quả chính xác và thành công hơn.
+4. Cải thiện độ chính xác thông qua sự đồng thuận. Đối với những tác vụ đòi hỏi độ chính xác cao, bạn có thể truy vấn mô hình nhiều lần bằng cùng một câu lệnh. Bằng cách tính trung bình các kết quả trả về, bạn có thể đạt được "sự đồng thuận" thường chính xác và đáng tin cậy hơn.
 
-## Sınırlamalar
+## Các điểm hạn chế
 
-Gemini Robotics-ER 1.6 ile geliştirme yaparken aşağıdaki sınırlamaları göz önünde bulundurun:
+Hãy cân nhắc những hạn chế sau đây khi phát triển bằng Gemini Robotics-ER 1.6:
 
-- **Önizleme durumu:** Model şu anda **önizleme** aşamasındadır. API'ler ve özellikler değişebilir. Ayrıca, kapsamlı testler yapılmadan üretime yönelik kritik uygulamalar için uygun olmayabilir.
-- **Gecikme:** Karmaşık sorgular, yüksek çözünürlüklü girişler veya kapsamlı
-  `thinking_budget`, işlem sürelerinin uzamasına neden olabilir.
-- **Halüsinasyonlar:** Tüm büyük dil modelleri gibi Gemini Robotics-ER 1.6 da bazen "halüsinasyon" yapabilir veya yanlış bilgi verebilir. Bu durum özellikle belirsiz istemler ya da dağıtım dışı girişler için geçerlidir.
-- **İstem kalitesine bağlılık:** Modelin çıktısının kalitesi, giriş isteminin netliğine ve spesifikliğine büyük ölçüde bağlıdır. Belirsiz veya kötü yapılandırılmış istemler, optimum olmayan sonuçlara yol açabilir.
-- **Hesaplama maliyeti:** Özellikle video girişleriyle veya yüksek `thinking_budget` ile modeli çalıştırmak, hesaplama kaynaklarını tüketir ve maliyetlere neden olur.
-  Daha fazla bilgi için [Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr) sayfasına bakın.
-- **Giriş türleri:** Her moddaki sınırlamalarla ilgili ayrıntılar için aşağıdaki konulara bakın.
-  - [Resim girişleri](https://ai.google.dev/gemini-api/docs/image-understanding?hl=tr#technical-details-image)
-  - [Video girişleri](https://ai.google.dev/gemini-api/docs/video-understanding?hl=tr#supported-formats)
-  - [Ses girişleri](https://ai.google.dev/gemini-api/docs/audio?hl=tr#supported-formats)
+- **Trạng thái xem trước:** Mô hình hiện đang ở trạng thái **Xem trước**. Các API và chức năng có thể thay đổi và có thể không phù hợp với các ứng dụng quan trọng trong quá trình sản xuất nếu không được kiểm thử kỹ lưỡng.
+- **Độ trễ:** Các truy vấn phức tạp, dữ liệu đầu vào có độ phân giải cao hoặc `thinking_budget` trên diện rộng có thể dẫn đến thời gian xử lý tăng lên.
+- **Ảo tưởng:** Giống như mọi mô hình ngôn ngữ lớn, Gemini Robotics-ER 1.6 đôi khi có thể "ảo tưởng" hoặc cung cấp thông tin không chính xác, đặc biệt là đối với những câu lệnh mơ hồ hoặc đầu vào nằm ngoài phạm vi phân phối.
+- **Phụ thuộc vào chất lượng câu lệnh:** Chất lượng đầu ra của mô hình phụ thuộc rất nhiều vào độ rõ ràng và tính cụ thể của câu lệnh đầu vào. Câu lệnh mơ hồ hoặc có cấu trúc kém có thể dẫn đến kết quả không tối ưu.
+- **Chi phí điện toán:** Việc chạy mô hình, đặc biệt là với dữ liệu đầu vào là video hoặc `thinking_budget` có độ phân giải cao, sẽ tiêu tốn tài nguyên điện toán và phát sinh chi phí.
+  Hãy xem trang [Tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi) để biết thêm thông tin chi tiết.
+- **Loại dữ liệu đầu vào:** Xem các chủ đề sau để biết thông tin chi tiết về hạn chế đối với từng chế độ.
+  - [Đầu vào hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi#technical-details-image)
+  - [Đầu vào video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi#supported-formats)
+  - [Đầu vào âm thanh](https://ai.google.dev/gemini-api/docs/audio?hl=vi#supported-formats)
 
-## Gizlilik Uyarısı
+## Thông báo về quyền riêng tư
 
-Bu belgede referans verilen modellerin ("Robotik Modeller"), donanımınızı talimatlarınıza uygun şekilde çalıştırmak ve hareket ettirmek için video ve ses verilerinden yararlandığını kabul edersiniz. Bu nedenle, Robotik Modelleri, tanımlanabilir kişilerden elde edilen veriler (ör. ses, görüntü ve benzerlik verileri) ("Kişisel Veriler") Robotik Modeller tarafından toplanacak şekilde çalıştırabilirsiniz. Robotik Modelleri Kişisel Veri toplayacak şekilde çalıştırmayı seçerseniz, bu tür tanımlanabilir kişilerin, Kişisel Verilerinin [https://ai.google.dev/gemini-api/terms](https://ai.google.dev/gemini-api/terms?hl=tr) adresinde bulunan Gemini API Ek Hizmet Şartları'nda ("Şartlar") belirtildiği şekilde Google'a sağlanabileceği ve Google tarafından kullanılabileceği konusunda yeterince bilgilendirilip onay vermediği sürece Robotik Modellerle etkileşime girmesine veya Robotik Modellerin bulunduğu alanın çevresinde bulunmasına izin vermeyeceğinizi kabul edersiniz. Bu durum, "Google Verilerinizi Nasıl Kullanır?" başlıklı bölüm uyarınca da geçerlidir. Bu tür bir bildirimin, Şartlar'da belirtildiği şekilde Kişisel Verilerin toplanmasına ve kullanılmasına izin vermesini sağlayacak ve yüz bulanıklaştırma gibi teknikler kullanarak ve Robotik Modelleri, tanımlanabilir kişilerin bulunmadığı alanlarda çalıştırarak Kişisel Verilerin toplanmasını ve dağıtılmasını mümkün olduğunca en aza indirmek için ticari olarak makul çabayı göstereceksiniz.
+Bạn xác nhận rằng các mô hình được đề cập trong tài liệu này ("Mô hình robot") tận dụng dữ liệu video và âm thanh để vận hành và di chuyển phần cứng theo hướng dẫn của bạn. Do đó, bạn có thể vận hành Các mô hình robot sao cho Các mô hình robot sẽ thu thập dữ liệu của những người có thể nhận dạng, chẳng hạn như dữ liệu giọng nói, hình ảnh và dữ liệu về chân dung ("Dữ liệu cá nhân"). Nếu chọn vận hành Các mô hình robot theo cách thu thập Dữ liệu cá nhân, bạn đồng ý rằng bạn sẽ không cho phép bất kỳ cá nhân nào có thể nhận dạng tương tác hoặc xuất hiện trong khu vực xung quanh Các mô hình robot, trừ phi và cho đến khi những cá nhân có thể nhận dạng đó được thông báo đầy đủ và đồng ý với việc Google có thể cung cấp và sử dụng Dữ liệu cá nhân của họ như được nêu trong Điều khoản dịch vụ bổ sung của Gemini API tại [https://ai.google.dev/gemini-api/terms](https://ai.google.dev/gemini-api/terms?hl=vi) ("Điều khoản"), kể cả theo phần "Cách Google sử dụng dữ liệu của bạn". Bạn sẽ đảm bảo rằng thông báo đó cho phép thu thập và sử dụng dữ liệu cá nhân như quy định trong Điều khoản, đồng thời bạn sẽ nỗ lực một cách hợp lý về phương diện thương mại để giảm thiểu việc thu thập và phân phối dữ liệu cá nhân bằng cách sử dụng các kỹ thuật như làm mờ khuôn mặt và vận hành mô hình robot ở những khu vực không có người có thể nhận dạng được trong phạm vi có thể thực hiện được.
 
-## Fiyatlandırma
+## Giá
 
-Fiyatlandırma ve kullanılabilir bölgeler hakkında ayrıntılı bilgi için [fiyatlandırma](https://ai.google.dev/gemini-api/docs/pricing?hl=tr) sayfasına bakın.
+Để biết thông tin chi tiết về giá và các khu vực có tính năng này, hãy tham khảo trang [định giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi).
 
-## Model sürümleri
+## Phiên bản mô hình
 
-### Robotics-ER 1.6 Önizlemesi
+### Robotics-ER 1.6 Preview
 
-| Mülk | Açıklama |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardModel kodu | `gemini-robotics-er-1.6-preview` |
-| saveDesteklenen veri türleri | **Girişler**  Metin, resim, video, ses  **Çıkış**  Metin |
-| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  131.072  **Çıkış jetonu sınırı**  65.536 |
-| handymanÖzellikler | **Ses üretimi**  Desteklenmiyor  **Batch API**  Destekleniyor  **Önbelleğe alma**  Destekleniyor  **Kod yürütme**  Destekleniyor  **Bilgisayar kullanımı**  Destekleniyor  **Dosya arama**  Destekleniyor  **Esnek çıkarım**  Destekleniyor  **İşlev çağırma**  Destekleniyor  **Google Haritalar ile Temellendirme**  Destekleniyor  **Görüntü üretme**  Desteklenmiyor  **Live API**  Desteklenmiyor  **Öncelik çıkarımı**  Destekleniyor  **Arama temellendirme**  Destekleniyor  **Yapılandırılmış çıkışlar**  Destekleniyor  **Düşünme** (Thinking)  Destekleniyor  **URL bağlamı**  Destekleniyor |
-| 123Sürümleri | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - Önizleme: `gemini-robotics-er-1.6-preview` |
-| calendar\_monthSon güncelleme | Aralık 2025 |
-| cognition\_2Son güncel bilgi tarihi | Ocak 2025 |
+| id\_cardMã kiểu máy | `gemini-robotics-er-1.6-preview` |
+| saveCác loại dữ liệu được hỗ trợ | **Thông tin đầu vào**  Văn bản, hình ảnh, video, âm thanh  **Đầu ra**  Văn bản |
+| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  131.072  **Giới hạn mã thông báo đầu ra**  65.536 |
+| handymanChức năng | **Tạo âm thanh**  Không được hỗ trợ  **Batch API**  Được hỗ trợ  **Lưu vào bộ nhớ đệm**  Được hỗ trợ  **Thực thi mã**  Được hỗ trợ  **Sử dụng máy tính**  Được hỗ trợ  **Tìm kiếm tệp**  Được hỗ trợ  **Suy luận linh hoạt**  Được hỗ trợ  **Gọi hàm**  Được hỗ trợ  **Kết nối với Google Maps**  Được hỗ trợ  **Tạo hình ảnh**  Không được hỗ trợ  **Live API**  Không được hỗ trợ  **Suy luận mức độ ưu tiên**  Được hỗ trợ  **Tìm trong phần liên kết thực tế**  Được hỗ trợ  **Đầu ra có cấu trúc**  Được hỗ trợ  **Tư duy**  Được hỗ trợ  **Bối cảnh URL**  Được hỗ trợ |
+| 123Phiên bản | Đọc [các mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm thông tin chi tiết.  - Xem trước: `gemini-robotics-er-1.6-preview` |
+| calendar\_monthThông tin cập nhật mới nhất | Tháng 12 năm 2025 |
+| cognition\_2Điểm cắt kiến thức | Tháng 1 năm 2025 |
 
-## Sonraki adımlar
+## Các bước tiếp theo
 
-- Diğer özellikleri keşfedin ve Gemini Robotics-ER 1.6'nın daha fazla uygulamasını keşfetmek için farklı istemler ve girişlerle denemeler yapmaya devam edin.
-  Daha fazla örnek için [Robotics getting started colab](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb) (Robotik için Colab'i kullanmaya başlama) başlıklı makaleyi inceleyin.
-- Gemini Robotics modellerinin güvenlik göz önünde bulundurularak nasıl geliştirildiği hakkında bilgi edinmek için [Google DeepMind Robotics Güvenliği sayfasına](https://deepmind.google/models/gemini-robotics/safety?hl=tr) gidin.
-- Gemini Robotics modellerindeki en son güncellemeler hakkında bilgi edinmek için [Gemini Robotics açılış sayfasına](https://deepmind.google/robotics?hl=tr) göz atın.
+- Khám phá các khả năng khác và tiếp tục thử nghiệm nhiều câu lệnh và dữ liệu đầu vào để khám phá thêm các ứng dụng cho Gemini Robotics-ER 1.6.
+  Hãy xem [Colab về cách bắt đầu sử dụng Robotics](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb) để biết thêm ví dụ.
+- Tìm hiểu về cách các mô hình Gemini Robotics được xây dựng chú trọng đến sự an toàn, hãy truy cập vào [trang an toàn về robot của Google DeepMind](https://deepmind.google/models/gemini-robotics/safety?hl=vi).
+- Đọc thông tin cập nhật mới nhất về các mô hình Gemini Robotics trên [trang đích của Gemini Robotics](https://deepmind.google/robotics?hl=vi).
 
-Geri bildirim gönderin
+Gửi ý kiến phản hồi
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Son güncelleme tarihi: 2026-05-01 UTC.
+Cập nhật lần gần đây nhất: 2026-05-01 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-05-01 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-01 UTC."],[],[]]

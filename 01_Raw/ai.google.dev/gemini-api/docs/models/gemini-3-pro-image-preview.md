@@ -1,49 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=tr
-fetched_at: 2026-05-05T20:42:18.718583+00:00
-title: "Gemini 3 Pro G\u00f6r\u00fcnt\u00fc \u00d6nizlemesi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=ja
+fetched_at: 2026-05-11T05:03:57.647813+00:00
+title: "Gemini 3 Pro \u753b\u50cf\u30d7\u30ec\u30d3\u30e5\u30fc \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Geri bildirim gönderin
+フィードバックを送信
 
-# Gemini 3 Pro Görüntü Önizlemesi
+# Gemini 3 Pro 画像プレビュー
 
-**Nano Banana Pro**, profesyonel düzeyde görüntü düzenleme ve üretme için gelişmiş bir akıl yürütme motorudur. Stüdyo kalitesinde hassasiyet ve gelişmiş yaratıcı kontrol sunar. Nano Banana Pro, karmaşık grafik tasarım, yüksek kaliteli ürün taslakları ve Google Arama aracılığıyla doğru metin oluşturma ve gerçek dünyayla temellendirme gerektiren, olgusal veri görselleştirmeleri için en uygun modeldir.
+**Nano Banana Pro** は、プロフェッショナル向けの画像編集と生成のための高度な推論主導型エンジンです。スタジオ品質の精度と高度なクリエイティブ コントロールを実現します。Nano Banana Pro は、複雑なグラフィック デザイン、忠実度の高いプロダクト
+モックアップ、正確なテキスト レンダリングと Google 検索による現実世界のグラウンディングを必要とする事実に基づいたデータ可視化に最適です。
 
-[Google AI Studio'da deneme](https://aistudio.google.com?model=gemini-3-pro-image-preview&hl=tr)
+[Google AI Studio で試す](https://aistudio.google.com?model=gemini-3-pro-image-preview&hl=ja)
 
-## Belgeler
+## ドキュメント
 
-Özellikler ve işlevler hakkında kapsamlı bilgi için [Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr) sayfasını ziyaret edin.
+機能と機能の詳細については、[画像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja)のページをご覧ください。
 
 ## gemini-3-pro-image-preview
 
-| Mülk | Açıklama |
+| プロパティ | 説明 |
 | --- | --- |
-| id\_cardModel kodu | `gemini-3-pro-image-preview` |
-| saveDesteklenen veri türleri | **Girişler**  Resim ve Metin  **Çıkış**  Resim ve Metin |
-| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  65.536  **Çıkış jetonu sınırı**  32.768 |
-| handymanÖzellikler | **Ses üretimi**  Desteklenmiyor  **Batch API**  Destekleniyor  **Önbelleğe alma**  Desteklenmiyor  **Kod yürütme**  Desteklenmiyor  **Dosya arama**  Desteklenmiyor  **Esnek çıkarım**  Destekleniyor  **İşlev çağırma**  Desteklenmiyor  **Google Haritalar ile Temellendirme**  Desteklenmiyor  **Görüntü üretme**  Destekleniyor  **Live API**  Desteklenmiyor  **Öncelik çıkarımı**  Destekleniyor  **Arama temellendirme**  Destekleniyor  **Yapılandırılmış çıkışlar**  Destekleniyor  **Düşünme** (Thinking)  Destekleniyor  **URL bağlamı**  Desteklenmiyor |
-| 123Sürümleri | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - `Preview: gemini-3-pro-image-preview` |
-| calendar\_monthSon güncelleme | Kasım 2025 |
-| cognition\_2Son güncel bilgi tarihi | Ocak 2025 |
+| id\_cardモデルコード | `gemini-3-pro-image-preview` |
+| saveサポートされるデータタイプ | **入力**  画像とテキスト  **出力**  画像とテキスト |
+| token\_autoトークン上限[[\*](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)] | **入力トークンの上限**  65,536  **出力トークンの上限**  32,768 |
+| handyman機能 | **音声生成**  サポート対象外  **Batch API**  サポート対象  **キャッシュ保存**  サポート対象外  **コードの実行**  サポート対象外  **ファイル検索**  サポート対象外  **Flex 推論**  サポート対象  **関数呼び出し**  サポート対象外  **Google マップによるグラウンディング**  サポート対象外  **画像生成**  サポート対象  **Live API**  サポート対象外  **候補の推論**  サポート対象  **検索によるグラウンディング**  サポート対象  **構造化出力**  サポート対象  **思考モード**  サポート対象  **URL コンテキスト**  サポート対象外 |
+| 123バージョン | 詳細については、[モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja#model-versions)をご覧ください。  - `Preview: gemini-3-pro-image-preview` |
+| calendar\_month最終更新日 | 2025 年 11 月 |
+| cognition\_2ナレッジ カットオフ | 2025 年 1 月 |
 
-Geri bildirim gönderin
+フィードバックを送信
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Son güncelleme tarihi: 2026-04-29 UTC.
+最終更新日 2026-04-29 UTC。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+ご意見をお聞かせください
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]

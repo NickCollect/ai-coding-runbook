@@ -1,24 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/openai?hl=hi
-fetched_at: 2026-05-05T20:43:47.181146+00:00
-title: "OpenAI \u0915\u0940 \u0938\u0941\u0935\u093f\u0927\u093e \u0915\u0947 \u0938\u093e\u0925 \u0915\u093e\u092e \u0915\u0930\u0924\u093e \u0939\u0948 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/openai?hl=fr
+fetched_at: 2026-05-11T04:59:10.743794+00:00
+title: "Compatibilit\u00e9 OpenAI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
+La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-सुझाव भेजें
+Envoyer des commentaires
 
-# OpenAI की सुविधा के साथ काम करता है
+# Compatibilité OpenAI
 
-Gemini मॉडल को OpenAI लाइब्रेरी (Python और TypeScript / JavaScript) के साथ-साथ REST API का इस्तेमाल करके ऐक्सेस किया जा सकता है. इसके लिए, आपको कोड की तीन लाइनें अपडेट करनी होंगी और [Gemini API कुंजी](https://aistudio.google.com/apikey?hl=hi) का इस्तेमाल करना होगा. अगर OpenAI लाइब्रेरी का इस्तेमाल पहले से नहीं किया जा रहा है, तो हमारा सुझाव है कि आप [Gemini API को सीधे तौर पर कॉल करें](https://ai.google.dev/gemini-api/docs/quickstart?hl=hi).
+Les modèles Gemini sont accessibles à l'aide des bibliothèques OpenAI (Python et TypeScript/
+JavaScript) ainsi que de l'API REST, en mettant à jour trois lignes de code
+et en utilisant votre [clé API Gemini](https://aistudio.google.com/apikey?hl=fr). Si vous
+n'utilisez pas encore les bibliothèques OpenAI, nous vous recommandons d'appeler directement l'
+[API Gemini](https://ai.google.dev/gemini-api/docs/quickstart?hl=fr).
 
 ### Python
 
@@ -89,17 +93,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
   }'
 ```
 
-क्या बदलाव हुए हैं? सिर्फ़ तीन लाइनें!
+Nouveautés Seulement trois lignes !
 
-- **`api_key="GEMINI_API_KEY"`**: "`GEMINI_API_KEY`" को अपने Gemini API पासकोड से बदलें. यह पासकोड आपको [Google AI Studio](https://aistudio.google.com?hl=hi) में मिलेगा.
-- **`base_url="https://generativelanguage.googleapis.com/v1beta/openai/"`:** इससे OpenAI लाइब्रेरी को यह पता चलता है कि उसे डिफ़ॉल्ट यूआरएल के बजाय, Gemini API एंडपॉइंट को अनुरोध भेजने हैं.
-- **`model="gemini-3-flash-preview"`**: Gemini का ऐसा मॉडल चुनें जो इस सुविधा के साथ काम करता हो
+- **`api_key="GEMINI_API_KEY"`** : remplacez "`GEMINI_API_KEY`" par votre clé API Gemini
+  réelle, que vous pouvez obtenir dans [Google AI Studio](https://aistudio.google.com?hl=fr).
+- **`base_url="https://generativelanguage.googleapis.com/v1beta/openai/"`:** Ceci
+  indique à la bibliothèque OpenAI d'envoyer des requêtes au point de terminaison de l'API Gemini au lieu de
+  l'URL par défaut.
+- **`model="gemini-3-flash-preview"`** : choisissez un modèle Gemini compatible.
 
-## सूझ-बूझ वाला मॉडल
+## Raisonnement
 
-Gemini मॉडल को मुश्किल समस्याओं के बारे में सोचने के लिए ट्रेन किया गया है. इससे, तर्क करने की क्षमता में काफ़ी सुधार हुआ है. Gemini API में [सोचने के पैरामीटर](https://ai.google.dev/gemini-api/docs/thinking?hl=hi) होते हैं. इनसे यह तय किया जा सकता है कि मॉडल को कितना सोचना है.
+Les modèles Gemini sont entraînés pour résoudre des problèmes complexes, ce qui améliore considérablement le raisonnement. L'API Gemini est fournie avec des paramètres de [raisonnement](https://ai.google.dev/gemini-api/docs/thinking?hl=fr) qui permettent de contrôler précisément le niveau de réflexion du modèle.
 
-Gemini के अलग-अलग मॉडल में, तर्क देने की क्षमता अलग-अलग होती है. OpenAI के तर्क देने की क्षमता के हिसाब से, Gemini के मॉडल की तुलना यहाँ की गई है:
+Les différents modèles Gemini ont des configurations de raisonnement différentes. Vous pouvez voir comment ils correspondent aux efforts de raisonnement d'OpenAI comme suit :
 
 | `reasoning_effort` (OpenAI) | `thinking_level` (Gemini 3.1 Pro) | `thinking_level` (Gemini 3.1 Flash-Lite) | `thinking_level` (Gemini 3 Flash) | `thinking_budget` (Gemini 2.5) |
 | --- | --- | --- | --- | --- |
@@ -108,9 +115,11 @@ Gemini के अलग-अलग मॉडल में, तर्क देन
 | `medium` | `medium` | `medium` | `medium` | `8,192` |
 | `high` | `high` | `high` | `high` | `24,576` |
 
-अगर कोई `reasoning_effort` नहीं दी गई है, तो Gemini, मॉडल के डिफ़ॉल्ट [लेवल](https://ai.google.dev/gemini-api/docs/thinking?hl=hi#levels) या [बजट](https://ai.google.dev/gemini-api/docs/thinking?hl=hi#set-budget) का इस्तेमाल करता है.
+Si aucun `reasoning_effort` n'est spécifié, Gemini utilise le
+niveau [par défaut](https://ai.google.dev/gemini-api/docs/thinking?hl=fr#levels) ou le [budget](https://ai.google.dev/gemini-api/docs/thinking?hl=fr#set-budget) du modèle.
 
-अगर आपको सूझ-बूझ वाली सुविधा बंद करनी है, तो 2.5 मॉडल के लिए `reasoning_effort` को `"none"` पर सेट करें. Gemini 2.5 Pro या 3 मॉडल के लिए, तर्क करने की सुविधा बंद नहीं की जा सकती.
+Si vous souhaitez désactiver le raisonnement, vous pouvez définir `reasoning_effort` sur `"none"` pour
+les modèles 2.5. Le raisonnement ne peut pas être désactivé pour les modèles Gemini 2.5 Pro ou 3.
 
 ### Python
 
@@ -184,10 +193,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
   }'
 ```
 
-Gemini के थिंकिंग मॉडल, [सोच-विचार की खास जानकारी](https://ai.google.dev/gemini-api/docs/thinking?hl=hi#summaries) भी जनरेट करते हैं.
-अपने अनुरोध में Gemini फ़ील्ड शामिल करने के लिए, [`extra_body`](#extra-body) फ़ील्ड का इस्तेमाल किया जा सकता है.
+Les modèles de raisonnement Gemini produisent également des [résumés de réflexion](https://ai.google.dev/gemini-api/docs/thinking?hl=fr#summaries).
+Vous pouvez utiliser le [`extra_body`](#extra-body) champ pour inclure des champs Gemini
+dans votre requête.
 
-ध्यान दें कि `reasoning_effort` और `thinking_level`/`thinking_budget` की सुविधाएं एक जैसी होती हैं. इसलिए, इन्हें एक साथ इस्तेमाल नहीं किया जा सकता.
+Notez que `reasoning_effort` et `thinking_level`/`thinking_budget` se chevauchent, de sorte qu'ils ne peuvent pas être utilisés en même temps.
 
 ### Python
 
@@ -263,11 +273,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
       }'
 ```
 
-Gemini 3, चैट पूरी करने वाले एपीआई में थॉट सिग्नेचर के लिए OpenAI के साथ काम करता है. पूरा उदाहरण देखने के लिए, [थॉट सिग्नेचर](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=hi#openai) पेज पर जाएं.
+Gemini 3 est compatible avec OpenAI pour les signatures de réflexion dans les API de complétion de chat. Vous trouverez l'exemple complet sur la page des [signatures de réflexion](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=fr#openai).
 
-## स्ट्रीमिंग
+## Streaming
 
-Gemini API, [स्ट्रीमिंग रिस्पॉन्स](https://ai.google.dev/gemini-api/docs/text-generation?lang=python&hl=hi#generate-a-text-stream) की सुविधा के साथ काम करता है.
+L'API Gemini est compatible avec les réponses en [streaming](https://ai.google.dev/gemini-api/docs/text-generation?lang=python&hl=fr#generate-a-text-stream).
 
 ### Python
 
@@ -346,9 +356,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
     }'
 ```
 
-## फ़ंक्शन कॉल करने की सुविधा
+## Appel de fonction
 
-Function calling की मदद से, जनरेटिव मॉडल से स्ट्रक्चर्ड डेटा आउटपुट पाना आसान हो जाता है. यह सुविधा [Gemini API में उपलब्ध है](https://ai.google.dev/gemini-api/docs/function-calling/tutorial?hl=hi).
+L'appel de fonction vous permet d'obtenir plus facilement des sorties de données structurées à partir de
+modèles génératifs et est [compatible avec l'API Gemini](https://ai.google.dev/gemini-api/docs/function-calling/tutorial?hl=fr).
 
 ### Python
 
@@ -479,9 +490,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
 }'
 ```
 
-## इमेज की बारीक़ी से पहचान
+## Compréhension d'images
 
-Gemini मॉडल, नेटिव तौर पर मल्टीमॉडल होते हैं. साथ ही, [कई सामान्य विज़न टास्क](https://ai.google.dev/gemini-api/docs/vision?hl=hi) में बेहतरीन परफ़ॉर्मेंस देते हैं.
+Les modèles Gemini sont multimodaux par nature et offrent les meilleures performances de leur catégorie pour
+[de nombreuses tâches de vision courantes](https://ai.google.dev/gemini-api/docs/vision?hl=fr).
 
 ### Python
 
@@ -610,9 +622,9 @@ bash -c '
 '
 ```
 
-## इमेज जनरेट करें
+## Générer une image
 
-`gemini-2.5-flash-image` या `gemini-3-pro-image-preview` का इस्तेमाल करके इमेज जनरेट करें. `prompt`, `model`, `n`, `size`, और `response_format` जैसे पैरामीटर इस्तेमाल किए जा सकते हैं. यहां या [`extra_body`](#extra-body) सेक्शन में शामिल नहीं किए गए अन्य पैरामीटर को कंपैटिबिलिटी लेयर चुपचाप अनदेखा कर देगी.
+Générez une image à l'aide de `gemini-2.5-flash-image` ou `gemini-3-pro-image-preview`. Les paramètres compatibles incluent `prompt`, `model`, `n`, `size`, et `response_format`. Tous les autres paramètres qui ne sont pas listés ici ou dans la section [`extra_body`](#extra-body) seront ignorés par la couche de compatibilité.
 
 ### Python
 
@@ -679,11 +691,12 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/images/generations
       }'
 ```
 
-## वीडियो जनरेट करना
+## Générer une vidéo
 
-Sora के साथ काम करने वाले `/v1/videos` एंडपॉइंट के ज़रिए, `veo-3.1-generate-preview` का इस्तेमाल करके वीडियो जनरेट करें. `prompt` और `model` को टॉप-लेवल पैरामीटर के तौर पर इस्तेमाल किया जा सकता है. `duration_seconds`, `image`, और `aspect_ratio` जैसे अतिरिक्त पैरामीटर, `extra_body` के साथ पास किए जाने चाहिए. सभी उपलब्ध पैरामीटर के लिए, [`extra_body`](#extra-body) सेक्शन देखें.
+Générez une vidéo à l'aide de `veo-3.1-generate-preview` via le point de terminaison `/v1/videos` compatible avec Sora. Les paramètres de premier niveau compatibles sont `prompt` et `model`. Les paramètres supplémentaires tels que `duration_seconds`, `image` et `aspect_ratio` doivent être transmis avec `extra_body`. Consultez la [`extra_body`](#extra-body) section
+pour connaître tous les paramètres disponibles.
 
-वीडियो जनरेट करने की प्रोसेस में ज़्यादा समय लगता है. यह प्रोसेस पूरी होने पर, आपको एक ऑपरेशन आईडी मिलता है. इस आईडी का इस्तेमाल करके, प्रोसेस पूरी होने की स्थिति की जानकारी पाई जा सकती है.
+La génération de vidéos est une opération de longue durée qui renvoie un ID d'opération que vous pouvez interroger pour vérifier l'avancement.
 
 ### Python
 
@@ -738,9 +751,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/videos" \
   -F "prompt=A cinematic drone shot of a waterfall"
 ```
 
-### वीडियो की स्थिति देखना
+### Vérifier l'état d'une vidéo
 
-वीडियो जनरेट करने की प्रोसेस एसिंक्रोनस होती है. स्टेटस की जानकारी पाने के लिए `GET /v1/videos/{id}` का इस्तेमाल करें. साथ ही, प्रोसेस पूरी होने पर फ़ाइनल वीडियो यूआरएल पाएं:
+La génération de vidéos est asynchrone. Utilisez `GET /v1/videos/{id}` pour interroger l'état et récupérer l'URL de la vidéo finale une fois l'opération terminée :
 
 ### Python
 
@@ -804,9 +817,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/videos/VIDEO_ID" \
   -H "Authorization: Bearer $GEMINI_API_KEY"
 ```
 
-## ऑडियो को समझना
+## Compréhension audio
 
-ऑडियो इनपुट का विश्लेषण करना:
+Analysez l'entrée audio :
 
 ### Python
 
@@ -919,9 +932,9 @@ bash -c '
 '
 ```
 
-## स्ट्रक्चर्ड आउटपुट
+## Sortie structurée
 
-Gemini मॉडल, JSON ऑब्जेक्ट को [आपके तय किए गए किसी भी स्ट्रक्चर](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi) में आउटपुट कर सकते हैं.
+Les modèles Gemini peuvent générer des objets JSON dans n'importe quelle [structure que vous définissez](https://ai.google.dev/gemini-api/docs/structured-output?hl=fr).
 
 ### Python
 
@@ -982,9 +995,10 @@ const event = completion.choices[0].message.parsed;
 console.log(event);
 ```
 
-## एंबेड करना
+## Embeddings
 
-टेक्स्ट एम्बेडिंग से, टेक्स्ट स्ट्रिंग के बीच समानता का पता चलता है. इन्हें [Gemini API](https://ai.google.dev/gemini-api/docs/embeddings?hl=hi) का इस्तेमाल करके जनरेट किया जा सकता है. मल्टीमॉडल एम्बेडिंग के लिए `gemini-embedding-2-preview` या सिर्फ़ टेक्स्ट वाली एम्बेडिंग के लिए `gemini-embedding-001` का इस्तेमाल किया जा सकता है.
+Les embeddings de texte mesurent la relation entre les chaînes de texte et peuvent être générés
+à l'aide de l'[API Gemini](https://ai.google.dev/gemini-api/docs/embeddings?hl=fr). Vous pouvez utiliser `gemini-embedding-2-preview` pour les embeddings multimodaux ou `gemini-embedding-001` pour les embeddings de texte uniquement.
 
 ### Python
 
@@ -1038,20 +1052,21 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/embeddings" \
   }'
 ```
 
-## Batch API
+## API Batch
 
-OpenAI लाइब्रेरी का इस्तेमाल करके, [बैच जॉब](https://ai.google.dev/gemini-api/docs/batch-mode?hl=hi) बनाए जा सकते हैं. साथ ही, उन्हें सबमिट किया जा सकता है और उनकी स्थिति देखी जा सकती है.
+Vous pouvez créer des [tâches par lot](https://ai.google.dev/gemini-api/docs/batch-mode?hl=fr), les envoyer et vérifier
+leur état à l'aide de la bibliothèque OpenAI.
 
-आपको OpenAI के इनपुट फ़ॉर्मैट में JSONL फ़ाइल तैयार करनी होगी. उदाहरण के लिए:
+Vous devez préparer le fichier JSONL au format d'entrée OpenAI. Exemple :
 
 ```
 {"custom_id": "request-1", "method": "POST", "url": "/v1/chat/completions", "body": {"model": "gemini-3-flash-preview", "messages": [{"role": "user", "content": "Tell me a one-sentence joke."}]}}
 {"custom_id": "request-2", "method": "POST", "url": "/v1/chat/completions", "body": {"model": "gemini-3-flash-preview", "messages": [{"role": "user", "content": "Why is the sky blue?"}]}}
 ```
 
-OpenAI के साथ काम करने की सुविधा के ज़रिए, बैच के लिए ये काम किए जा सकते हैं: बैच बनाना, जॉब की स्थिति को मॉनिटर करना, और बैच के नतीजे देखना.
+La compatibilité OpenAI pour Batch permet de créer un lot, de surveiller l'état des tâches et d'afficher les résultats par lot.
 
-फ़िलहाल, अपलोड और डाउनलोड करने की सुविधा उपलब्ध नहीं है. इसके बजाय, यहां दिए गए उदाहरण में `genai` क्लाइंट का इस्तेमाल करके [फ़ाइलें](https://ai.google.dev/gemini-api/docs/files?hl=hi) अपलोड और डाउनलोड की गई हैं. ऐसा Gemini [Batch API](https://ai.google.dev/gemini-api/docs/batch-mode?hl=hi#input-file) का इस्तेमाल करते समय भी किया जाता है.
+La compatibilité pour l'importation et le téléchargement n'est actuellement pas disponible. [L'exemple suivant utilise le client `genai` pour importer et télécharger des fichiers, comme lors de l'utilisation de l'API Gemini [Batch](https://ai.google.dev/gemini-api/docs/batch-mode?hl=fr#input-file).](https://ai.google.dev/gemini-api/docs/files?hl=fr)
 
 ### Python
 
@@ -1097,7 +1112,7 @@ for line in file_content.splitlines():
     print(line)
 ```
 
-OpenAI SDK, [Batch API की मदद से एम्बेडिंग जनरेट करने](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi#batch-embeddings) की सुविधा भी देता है. इसके लिए, JSONL फ़ाइल में `create` तरीके के `endpoint` फ़ील्ड को एम्बेडिंग एंडपॉइंट के लिए बदलें. साथ ही, `url` और `model` कुंजियों को भी बदलें:
+Le SDK OpenAI est également compatible avec [la génération d'embeddings avec l'API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr#batch-embeddings). Pour ce faire, remplacez le champ `endpoint` de la méthode `create` par un point de terminaison d'embeddings, ainsi que les clés `url` et `model` dans le fichier JSONL :
 
 ```
 # JSONL file using embeddings model and endpoint
@@ -1114,11 +1129,12 @@ batch = openai_client.batches.create(
 )
 ```
 
-पूरे उदाहरण के लिए, OpenAI के साथ काम करने वाले कुकबुक का [बैच एम्बेडिंग जनरेशन](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb) सेक्शन देखें.
+Pour obtenir un exemple complet, consultez la section [Génération d'embeddings par lot](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb)
+du cookbook de compatibilité OpenAI.
 
-## Flex और प्राथमिकता का अनुमान लगाने की सुविधा
+## Inférence flexible et prioritaire
 
-Gemini API, नाम और लॉजिक के मामले में OpenAI के `service_tier` पैरामीटर से मेल खाता है. यह Flex और Priority, दोनों इन्फ़्रेंस टियर के लिए सीमाएं लागू करता है और ट्रैफ़िक को सही तरीके से मैनेज करता है.
+L'API Gemini correspond au paramètre `service_tier` d'OpenAI en termes de nom et de logique, en appliquant des limites et en dirigeant le trafic de manière appropriée pour les niveaux d'inférence flexible et prioritaire.
 
 ### Python
 
@@ -1141,38 +1157,38 @@ completion = client.chat.completions.create(
 print(completion)
 ```
 
-अगर `service_tier` को साफ़ तौर पर असाइन नहीं किया जाता है, तो यह डिफ़ॉल्ट रूप से `standard` पर सेट होता है. यह OpenAI के लिए `default` के बराबर होता है.
-[ऑप्टिमाइज़ेशन](https://ai.google.dev/gemini-api/docs/optimization?hl=hi) दस्तावेज़ में, अनुमान के टियर के बारे में ज़्यादा जानें.
+Lorsqu'il n'est pas explicitement attribué, `service_tier` est défini par défaut sur `standard`, ce qui équivaut à `default` pour OpenAI.
+Pour en savoir plus sur les niveaux d'inférence, consultez la documentation sur l'[optimisation](https://ai.google.dev/gemini-api/docs/optimization?hl=fr).
 
-## `extra_body` के साथ Gemini की सुविधाएँ चालू करना
+## Activer les fonctionnalités Gemini avec `extra_body`
 
-Gemini में ऐसी कई सुविधाएँ उपलब्ध हैं जो OpenAI के मॉडल में नहीं हैं. हालाँकि, `extra_body` फ़ील्ड का इस्तेमाल करके इन सुविधाओं को चालू किया जा सकता है.
+Plusieurs caractéristiques compatibles avec Gemini ne sont pas disponibles dans les modèles OpenAI, mais peuvent être activées à l'aide du champ `extra_body`.
 
-| पैरामीटर | टाइप | एंडपॉइंट | ब्यौरा |
+| Paramètre | Type | Point de terminaison | Description |
 | --- | --- | --- | --- |
-| **`cached_content`** | टेक्स्ट | Chat | यह Gemini की सामान्य कॉन्टेंट कैश मेमोरी से मेल खाती है. |
-| **`thinking_config`** | ऑब्जेक्ट | Chat | यह Gemini के ThinkingConfig से मेल खाता है. |
-| **`aspect_ratio`** | टेक्स्ट | इमेज | आउटपुट का आसपेक्ट रेशियो (जैसे, `"16:9"`, `"1:1"`, `"9:16"`). |
-| **`generation_config`** | ऑब्जेक्ट | इमेज | Gemini जनरेशन कॉन्फ़िगरेशन ऑब्जेक्ट (जैसे, `{"responseModalities": ["IMAGE"], "candidateCount": 2}`). |
-| **`safety_settings`** | सूची | इमेज | सुरक्षा थ्रेशोल्ड के कस्टम फ़िल्टर (जैसे, `[{"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}]`). |
-| **`tools`** | सूची | इमेज | ग्राउंडिंग की सुविधा चालू करता है (जैसे, `[{"google_search": {}}]`). यह सिर्फ़ `gemini-3-pro-image-preview` के लिए है. |
-| **`aspect_ratio`** | टेक्स्ट | वीडियो | आउटपुट वीडियो के डाइमेंशन (लैंडस्केप के लिए `16:9`, पोर्ट्रेट के लिए `9:16`). अगर कुछ नहीं बताया गया है, तो `size` से मैप किए जाते हैं. |
-| **`resolution`** | टेक्स्ट | वीडियो | आउटपुट रिज़ॉल्यूशन (`720p`, `1080p`, `4K`). ध्यान दें: `1080p` और `4K`, अपसैंपलर पाइपलाइन को ट्रिगर करते हैं. |
-| **`duration_seconds`** | पूर्णांक | वीडियो | जनरेट किए गए जवाब की लंबाई (वैल्यू: `4`, `6`, `8`). `reference_images`, इंटरपोलेशन या एक्सटेंशन का इस्तेमाल करते समय, इसकी वैल्यू `8` होनी चाहिए. |
-| **`frame_rate`** | टेक्स्ट | वीडियो | वीडियो आउटपुट के लिए फ़्रेम रेट (जैसे, `"24"`). |
-| **`input_reference`** | टेक्स्ट | वीडियो | वीडियो जनरेट करने के लिए रेफ़रंस इनपुट. |
-| **`extend_video_id`** | टेक्स्ट | वीडियो | उस मौजूदा वीडियो का आईडी जिसकी अवधि बढ़ानी है. |
-| **`negative_prompt`** | टेक्स्ट | वीडियो | शामिल न किए जाने वाले आइटम (जैसे, `"shaky camera"`). |
-| **`seed`** | पूर्णांक | वीडियो | डिटरमिनिस्टिक जनरेशन के लिए पूर्णांक. |
-| **`style`** | टेक्स्ट | वीडियो | विज़ुअल स्टाइलिंग (`cinematic` डिफ़ॉल्ट, `creative` सोशल मीडिया के लिए ऑप्टिमाइज़ की गई). |
-| **`person_generation`** | टेक्स्ट | वीडियो | इससे लोगों की इमेज जनरेट करने की सुविधा को कंट्रोल किया जाता है (`allow_adult`, `allow_all`, `dont_allow`). |
-| **`reference_images`** | सूची | वीडियो | स्टाइल/कैरेक्टर के रेफ़रंस के लिए ज़्यादा से ज़्यादा तीन इमेज (base64 ऐसेट). |
-| **`image`** | टेक्स्ट | वीडियो | वीडियो जनरेट करने के लिए, Base64 कोड में बदली गई शुरुआती इनपुट इमेज. |
-| **`last_frame`** | ऑब्जेक्ट | वीडियो | इंटरपोलेशन के लिए फ़ाइनल इमेज (इसके लिए, पहले फ़्रेम के तौर पर `image` की ज़रूरत होती है). |
+| **`cached_content`** | Texte | Chat | Correspond au cache de contenu général de Gemini. |
+| **`thinking_config`** | Objet | Chat | Correspond à ThinkingConfig de Gemini. |
+| **`aspect_ratio`** | Texte | Images | Format de sortie (par exemple, `"16:9"`, `"1:1"`, `"9:16"`). |
+| **`generation_config`** | Objet | Images | Objet de configuration de génération Gemini (par exemple, `{"responseModalities": ["IMAGE"], "candidateCount": 2}`). |
+| **`safety_settings`** | Liste | Images | Filtres de seuil de sécurité personnalisés (par exemple, `[{"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}]`). |
+| **`tools`** | Liste | Images | Active le grounding (par exemple, `[{"google_search": {}}]`). Uniquement pour `gemini-3-pro-image-preview`. |
+| **`aspect_ratio`** | Texte | Vidéo | Dimensions de la vidéo de sortie (`16:9` pour le format paysage, `9:16` pour le format portrait). Correspond à `size` si aucune valeur n'est spécifiée. |
+| **`resolution`** | Texte | Vidéo | Résolution de sortie (`720p`, `1080p`, `4K`). Remarque : `1080p` et `4K` déclenchent un pipeline d'upsampling. |
+| **`duration_seconds`** | Nombre entier | Vidéo | Durée de la génération (valeurs : `4`, `6`, `8`). Doit être `8` lorsque vous utilisez `reference_images`, l'interpolation ou une extension. |
+| **`frame_rate`** | Texte | Vidéo | Fréquence d'images pour la sortie vidéo (par exemple, `"24"`). |
+| **`input_reference`** | Texte | Vidéo | Entrée de référence pour la génération de vidéos. |
+| **`extend_video_id`** | Texte | Vidéo | ID d'une vidéo existante à étendre. |
+| **`negative_prompt`** | Texte | Vidéo | Éléments à exclure (par exemple, `"shaky camera"`). |
+| **`seed`** | Nombre entier | Vidéo | Nombre entier pour la génération déterministe. |
+| **`style`** | Texte | Vidéo | Style visuel (`cinematic` par défaut, `creative` pour l'optimisation des réseaux sociaux). |
+| **`person_generation`** | Texte | Vidéo | Contrôle la génération de personnes (`allow_adult`, `allow_all`, `dont_allow`). |
+| **`reference_images`** | Liste | Vidéo | Jusqu'à trois images pour la référence de style/personnage (composants base64). |
+| **`image`** | Texte | Vidéo | Image d'entrée initiale encodée en base64 pour conditionner la génération de la vidéo. |
+| **`last_frame`** | Objet | Vidéo | Image finale pour l'interpolation (nécessite `image` comme premier cadre). |
 
-### `extra_body` का इस्तेमाल करने का उदाहरण
+### Exemple d'utilisation de `extra_body`
 
-यहां `cached_content` को सेट करने के लिए, `extra_body` का इस्तेमाल करने का एक उदाहरण दिया गया है:
+Voici un exemple d'utilisation de `extra_body` pour définir `cached_content` :
 
 ### Python
 
@@ -1210,9 +1226,9 @@ for chunk in stream:
     print(chunk.usage.to_dict())
 ```
 
-## मॉडल की सूची बनाना
+## Lister les modèles
 
-उपलब्ध Gemini मॉडल की सूची पाने के लिए:
+Obtenez la liste des modèles Gemini disponibles :
 
 ### Python
 
@@ -1256,9 +1272,9 @@ curl https://generativelanguage.googleapis.com/v1beta/openai/models \
 -H "Authorization: Bearer GEMINI_API_KEY"
 ```
 
-## किसी मॉडल को फिर से पाना
+## Récupérer un modèle
 
-Gemini मॉडल को वापस पाएं:
+Récupérez un modèle Gemini :
 
 ### Python
 
@@ -1299,22 +1315,23 @@ curl https://generativelanguage.googleapis.com/v1beta/openai/models/gemini-3-fla
 -H "Authorization: Bearer GEMINI_API_KEY"
 ```
 
-## मौजूदा सीमाएं
+## Limites actuelles
 
-OpenAI लाइब्रेरी के लिए सहायता अब भी बीटा वर्शन में है. हम इस सुविधा के लिए सहायता उपलब्ध करा रहे हैं.
+La compatibilité avec les bibliothèques OpenAI est toujours en version bêta, car nous étendons la compatibilité des fonctionnalités.
 
-अगर आपको Gemini के साथ काम करने वाले पैरामीटर, आने वाली सुविधाओं या Gemini का इस्तेमाल शुरू करने से जुड़ी किसी समस्या के बारे में कोई सवाल पूछना है, तो हमारे [डेवलपर फ़ोरम](https://discuss.ai.google.dev/c/gemini-api/4?hl=hi) में शामिल हों.
+Si vous avez des questions sur les paramètres compatibles, les fonctionnalités à venir ou si vous rencontrez
+des problèmes pour commencer à utiliser Gemini, rejoignez notre [forum pour les développeurs](https://discuss.ai.google.dev/c/gemini-api/4?hl=fr).
 
-## आगे क्या करना है
+## Étape suivante
 
-ज़्यादा जानकारी वाले उदाहरणों को समझने के लिए, [OpenAI के साथ काम करने वाले Colab](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb?hl=hi) को आज़माएं.
+Essayez notre [notebook Colab de compatibilité OpenAI](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb?hl=fr) pour découvrir des exemples plus détaillés.
 
-सुझाव भेजें
+Envoyer des commentaires
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया.
+Dernière mise à jour le 2026/04/29 (UTC).
 
-क्या आपको हमें और कुछ बताना है?
+Voulez-vous nous donner plus d'informations ?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/04/29 (UTC)."],[],[]]

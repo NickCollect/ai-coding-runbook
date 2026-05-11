@@ -1,45 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=ar
-fetched_at: 2026-05-05T20:41:16.755341+00:00
-title: "\u0645\u0639\u0627\u064a\u0646\u0629 Gemini 3.1 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=es-419
+fetched_at: 2026-05-11T05:00:45.957275+00:00
+title: "Versi\u00f3n preliminar de Gemini 3.1 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-إرسال ملاحظات
+Enviar comentarios
 
-# معاينة Gemini 3.1 Flash-Lite
+# Versión preliminar de Gemini 3.1 Flash-Lite
 
-هذا النموذج هو الأكثر فعالية من حيث التكلفة بين نماذجنا المتعددة الوسائط، وهو يقدّم أسرع أداء للمهام الخفيفة المتكررة. ‫Gemini 3.1 Flash-Lite هو الأفضل للمهام التي تتطلب وكلاء بأعداد كبيرة، واستخراج البيانات البسيط، والتطبيقات التي تتطلب وقت استجابة منخفضًا جدًا، حيث تكون الميزانية والسرعة هما القيود الأساسية.
+Es nuestro modelo multimodal más rentable, que ofrece el rendimiento más rápido para tareas ligeras y de alta frecuencia. Gemini 3.1 Flash-Lite es ideal para tareas de agentes de gran volumen, extracción de datos simple y aplicaciones de latencia extremadamente baja en las que el presupuesto y la velocidad son las principales limitaciones.
 
-[تجربة النموذج في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-preview&hl=ar)
+[Probar en Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-preview&hl=es-419)
 
 ## gemini-3.1-flash-lite-preview
 
-| الموقع | الوصف |
+| Propiedad | Descripción |
 | --- | --- |
-| id\_cardرمز النموذج | `gemini-3.1-flash-lite-preview` |
-| saveأنواع البيانات المتوفرة | **المدخلات**  النص والصورة والفيديو والصوت وملف PDF  **الناتج**  نص |
-| token\_autoحدود الرموز المميّزة[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحد الأقصى لرموز الإدخال المميّزة**  1,048,576  **الحد الأقصى لرموز الإخراج المميّزة**  65,536 |
-| handymanالإمكانات | **إنشاء الصوت**  غير متاح  **واجهة برمجة التطبيقات المجمّعة**  متاح  **التخزين المؤقت**  متاح  **تنفيذ الرموز البرمجية**  متاح  **استخدام الكمبيوتر**  غير متاح  **البحث عن الملفات**  متاح  **الاستنتاج المرن**  متاح  **استدعاء الوظائف**  متاح  **استخدام "خرائط Google" كمصدر**  متاح  **إنشاء الصور**  غير متاح  **واجهة برمجة التطبيقات المباشرة**  غير متاح  **الاستنتاج حسب الأولوية**  متاح  **لتحديد المصادر في "بحث Google"**  متاح  **مُخرجات منظَّمة**  متاح  **طريقة التفكير**  متاح  **سياق عنوان URL**  متاح |
-| 123الإصدارات | يمكنك قراءة [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions) لمزيد من التفاصيل.  - `Preview: gemini-3.1-flash-lite-preview` |
-| calendar\_monthآخر تحديث | مارس 2026 |
-| cognition\_2تاريخ آخر تحديث للبيانات | يناير 2025 |
+| Código del modelo id\_card | `gemini-3.1-flash-lite-preview` |
+| saveTipos de datos admitidos | **Entradas**  Texto, imágenes, videos, audio y PDF  **Resultado**  Texto |
+| token\_autoLímites de tokens[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419) | **Límite de tokens de entrada**  1,048,576  **Límite de tokens de salida**  65,536 |
+| handymanFunciones | **Generación de audio**  No compatible  **API de Batch**  Admitido  **Almacenamiento en caché**  Admitido  **Ejecución de código**  Admitido  **Uso de la computadora**  No compatible  **Búsqueda de archivos**  Admitido  **Inferencia flexible**  Admitido  **Llamada a función**  Admitido  **Fundamentación con Google Maps**  Admitido  **Generación de imágenes**  No compatible  **API de Live**  No compatible  **Inferencia de prioridad**  Admitido  **Fundamentación con la Búsqueda**  Admitido  **Resultados estructurados**  Admitido  **Pensamiento**  Admitido  **Contexto de la URL**  Admitido |
+| Versiones 123 | Lee los [patrones de versiones de modelos](https://ai.google.dev/gemini-api/docs/models/gemini?hl=es-419#model-versions) para obtener más detalles.  - `Preview: gemini-3.1-flash-lite-preview` |
+| calendar\_monthÚltima actualización | Marzo de 2026 |
+| cognition\_2Fecha límite de conocimiento | Enero de 2025 |
 
-## دليل مطوّري البرامج
+## Guía para desarrolladores
 
-‫Gemini 3.1 Flash-Lite هو الأفضل في التعامل مع المهام البسيطة على نطاق واسع. في ما يلي بعض حالات الاستخدام الأنسب لـ Gemini 3.1 Flash-Lite:
+Gemini 3.1 Flash-Lite es ideal para manejar tareas sencillas a gran escala. Estos son algunos casos de uso más adecuados para Gemini 3.1 Flash-Lite:
 
-- **الترجمة**: ترجمة سريعة ورخيصة وواسعة النطاق، مثل معالجة
-  رسائل المحادثات والمراجعات وطلبات الدعم على نطاق واسع. يمكنك استخدام تعليمات النظام لحصر الناتج في النص المترجَم فقط بدون أي تعليقات إضافية:
+- **Traducción**: Traducción rápida, económica y de gran volumen, como el procesamiento a gran escala de mensajes de chat, opiniones y tickets de asistencia Puedes usar instrucciones del sistema para limitar el resultado solo al texto traducido sin comentarios adicionales:
 
   ```
   text = "Hey, are you down to grab some pizza later? I'm starving!"
@@ -54,7 +53,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   print(response.text)
   ```
-- **تحويل الصوت إلى نص**: معالجة التسجيلات أو الملاحظات الصوتية أو أي محتوى صوتي تحتاج فيه إلى نص مكتوب بدون إنشاء مسار منفصل لتحويل الكلام إلى نص. يتيح النموذج إدخال بيانات متعددة الوسائط، لذا يمكنك تمرير الملفات الصوتية مباشرةً لكتابتها:
+- **Transcripción**: Procesa grabaciones, notas de voz o cualquier contenido de audio en el que necesites una transcripción de texto sin tener que crear una canalización de voz a texto independiente. Admite entradas multimodales, por lo que puedes pasar archivos de audio directamente para la transcripción:
 
   ```
   # URL = "https://storage.googleapis.com/generativeai-downloads/data/State_of_the_Union_Address_30_January_1961.mp3"
@@ -71,9 +70,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   print(response.text)
   ```
-- **المهام الخفيفة التي تتطلب وكلاء واستخراج البيانات**: استخراج الكيانات،
-  التصنيف، ومسارات معالجة البيانات الخفيفة التي يتم عرضها بتنسيق
-  JSON منظَّم. على سبيل المثال، استخراج بيانات منظَّمة من مراجعة من عميل لمنتج في التجارة الإلكترونية:
+- **Tareas de agentes y extracción de datos ligeras**: Extracción de entidades, clasificación y canalizaciones de procesamiento de datos ligeras compatibles con resultados JSON estructurados. Por ejemplo, extraer datos estructurados de una opinión de un cliente de comercio electrónico:
 
   ```
   from pydantic import BaseModel, Field
@@ -98,7 +95,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   print(response.text)
   ```
-- **معالجة المستندات وتلخيصها**: تحليل ملفات PDF وعرض ملخصات موجزة، مثل إنشاء مسار لمعالجة المستندات أو فرز الملفات الواردة بسرعة:
+- **Procesamiento y resumen de documentos**: Analiza archivos PDF y devuelve resúmenes concisos, como para compilar una canalización de procesamiento de documentos o priorizar rápidamente los archivos entrantes:
 
   ```
   import httpx
@@ -121,7 +118,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   print(response.text)
   ```
-- **توجيه النماذج**: استخدام نموذج منخفض وقت الاستجابة ومنخفض التكلفة كأداة تصنيف توجّه الطلبات إلى النموذج المناسب استنادًا إلى مدى تعقيد المهمة. هذا نمط حقيقي في الإنتاج، إذ تستخدم واجهة سطر الأوامر [Gemini](https://geminicli.com/docs/core/#model-fallback) مفتوحة المصدر نموذج Flash-Lite لتصنيف مدى تعقيد المهام وتوجيهها إلى Flash أو Pro وفقًا لذلك.
+- **Enrutamiento de modelos**: Usa un modelo de baja latencia y bajo costo como clasificador que enruta las búsquedas al modelo adecuado según la complejidad de la tarea. Este es un patrón real en producción: la [CLI de Gemini](https://geminicli.com/docs/core/#model-fallback) de código abierto usa Flash-Lite para clasificar la complejidad de las tareas y enrutar a Flash o Pro según corresponda.
 
   ```
   FLASH_MODEL = 'flash'
@@ -170,8 +167,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   print(response.text)
   ```
-- **طريقة التفكير**: لتحسين دقة المهام التي تستفيد من التفكير خطوة بخطوة
-  ، يمكنك ضبط طريقة التفكير بحيث يخصّص النموذج قدرة حوسبة إضافية للتفكير الداخلي قبل إنتاج الناتج النهائي:
+- **Pensamiento**: Para mejorar la precisión en las tareas que se benefician del razonamiento paso a paso, configura el pensamiento de modo que el modelo dedique recursos de procesamiento adicionales al razonamiento interno antes de producir el resultado final:
 
   ```
   response = client.models.generate_content(
@@ -185,12 +181,12 @@ Google uses AI technology to translate content into your preferred language. AI 
   print(response.text)
   ```
 
-إرسال ملاحظات
+Enviar comentarios
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
+Última actualización: 2026-04-29 (UTC)
 
-هل تريد مشاركة ملاحظاتك معنا؟
+¿Quieres brindar más información?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]

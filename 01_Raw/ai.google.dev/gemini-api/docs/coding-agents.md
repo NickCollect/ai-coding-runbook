@@ -1,62 +1,63 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/coding-agents?hl=es-419
-fetched_at: 2026-05-05T20:42:21.410433+00:00
-title: "Configura tu asistente de programaci\u00f3n con Gemini MCP y Skills \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/coding-agents?hl=ar
+fetched_at: 2026-05-11T05:04:03.848507+00:00
+title: "\u0625\u0639\u062f\u0627\u062f \u0645\u0633\u0627\u0639\u062f \u0627\u0644\u062a\u0631\u0645\u064a\u0632 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 Gemini MCP \u0648\"\u0627\u0644\u0645\u0647\u0627\u0631\u0627\u062a\" \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Enviar comentarios
+إرسال ملاحظات
 
-# Configura tu asistente de programación con Gemini MCP y Skills
+# إعداد مساعد الترميز باستخدام Gemini MCP و"المهارات"
 
-Los asistentes de programación con IA son potentes, pero tienen limitaciones: los datos de entrenamiento se cortan en una fecha específica y faltan nuevas funciones y cambios en la API. Sin acceso a la documentación específica de Gemini, los agentes pueden sugerir patrones genéricos en lugar de enfoques optimizados.
+تتسم أدوات المساعدة في البرمجة المستندة إلى الذكاء الاصطناعي بالقوة، ولكن لها حدود، إذ إنّ بيانات التدريب تتوقف عند تاريخ معيّن، ما يؤدي إلى عدم توفّر ميزات وتغييرات جديدة في واجهة برمجة التطبيقات. بدون الوصول إلى مستندات خاصة بـ Gemini، قد تقترح البرامج الآلية أنماطًا عامة بدلاً من أساليب محسّنة.
 
-Para mantener tu asistente de programación actualizado con la API de Gemini en constante evolución y su uso recomendado, te sugerimos que configures el **MCP de la documentación de Gemini** y que mejores tu entorno con las **habilidades de la API de Gemini**. Si bien estas herramientas se pueden usar de forma independiente, están diseñadas para funcionar en conjunto y brindar una cobertura completa.
+لإبقاء مساعد الترميز على اطّلاع بآخر التعديلات على Gemini API وطريقة استخدامه المقترَحة، ننصحك بإعداد **Gemini Docs MCP** وتحسين بيئة التطوير باستخدام **مهارات Gemini API**. وعلى الرغم من إمكانية استخدام هذه الأدوات بشكل مستقل، فإنّها مصمّمة للعمل معًا لتوفير تغطية كاملة.
 
-## Conecta el MCP de Gemini Docs
+## ربط حزمة MCP الخاصة بـ "مستندات Gemini"
 
-Gemini aloja un servidor público del Protocolo de contexto del modelo (MCP) en `https://gemini-api-docs-mcp.dev`. Conectar tu agente de programación a este servidor garantiza que todas las consultas tengan acceso a las APIs más recientes, las actualizaciones de código y los ejemplos de configuración óptima.
+يستضيف Gemini خادمًا عامًا لبروتوكول سياق النموذج (MCP) على
+`https://gemini-api-docs-mcp.dev`. يضمن ربط وكيل الترميز بهذا الخادم إمكانية وصول جميع الطلبات إلى أحدث واجهات برمجة التطبيقات وتحديثات الرموز البرمجية وأمثلة الإعدادات المثالية.
 
-Ejecuta el siguiente comando en la terminal o la raíz del proyecto de tu agente para instalar el servidor:
+نفِّذ الأمر التالي في الوحدة الطرفية أو جذر المشروع الخاصَّين بالوكيل لتثبيت الخادم:
 
 ```
 npx add-mcp "https://gemini-api-docs-mcp.dev"
 ```
 
-Este servidor agrega una función `search_documentation` que tu agente puede usar para recuperar definiciones de API y patrones de integración en tiempo real de los archivos de documentación oficiales de Gemini.
+يضيف هذا الخادم وظيفة `search_documentation` يمكن أن يستخدمها الوكيل لاسترداد تعريفات واجهة برمجة التطبيقات وأنماط الدمج في الوقت الفعلي من ملفات مستندات Gemini الرسمية.
 
-## Add API Development Skills
+## إضافة مهارات تطوير واجهات برمجة التطبيقات
 
-Las habilidades proporcionan **reglas y prácticas recomendadas integradas** (como aplicar las versiones correctas del SDK y del modelo actual) directamente en el contexto de tu asistente. La habilidad funciona en conjunto con el servicio de MCP de la documentación de Gemini: Si tienes ambos instalados, la habilidad usa el servicio de MCP para la documentación, pero incluso sin el MCP instalado, recuperará `llms.txt` de `ai.google.dev` como alternativa.
+توفّر المهارات **قواعد وأفضل الممارسات المضمّنة** (مثل فرض استخدام الإصدارات الصحيحة من حزمة تطوير البرامج (SDK) والنماذج الحالية) مباشرةً في سياق مساعدك. تعمل المهارة مع خدمة MCP في Gemini Docs: إذا كان لديك كلتا الخدمتين مثبّتتَين، تستخدم المهارة خدمة MCP للحصول على المستندات، ولكن حتى بدون تثبيت MCP، ستسترد المهارة `llms.txt` من `ai.google.dev` كإجراء احتياطي.
 
-Para instalar estas habilidades, puedes usar una de las siguientes herramientas compatibles. A continuación, se proporcionan las instrucciones de instalación para ambos módulos de habilidad:
+لتثبيت هذه المهارات، يمكنك استخدام إحدى الأدوات المتوافقة التالية. يتم توفير تعليمات التثبيت لكليهما أسفل كل وحدة مهارات:
 
-- **[skills.sh](https://skills.sh)**: Se recomienda. Es el estándar abierto para los comportamientos portátiles de los agentes.
-- **[Context7](https://context7.com)**: Se admite para los usuarios que ya utilizan el ecosistema de Context7.
+- ‫**[skills.sh](https://skills.sh)**: يُنصح به. المعيار المفتوح لسلوكيات الوكلاء القابلة للنقل
+- **[Context7](https://context7.com)**: متاح للمستخدمين الذين يستفيدون من منظومة Context7 المتكاملة.
 
 ### gemini-api-dev
 
-Es la habilidad fundamental para el desarrollo de Gemini de uso general. Esta habilidad proporciona documentación y prácticas recomendadas para lo siguiente:
+المهارة الأساسية لتطوير Gemini للأغراض العامة توفّر هذه المهارة مستندات وأفضل الممارسات بشأن ما يلي:
 
-- Enrutamiento de instrucciones a los modelos actuales (p.ej., Gemini 3.1 Pro/Flash) y evitación de modelos obsoletos
-- Instrucciones multimodales, llamadas a funciones, resultados estructurados y patrones de integración comunes
+- توجيه الطلبات إلى النماذج الحالية (مثل Gemini 3.1 Pro/Flash) وتجنُّب النماذج المتوقّفة
+- إنشاء الطلبات المتعددة الوسائط، واستدعاء الدوال، والمخرجات المنظَّمة، وأنماط الدمج الشائعة
 
-#### Instala con skills.sh
+#### التثبيت باستخدام skills.sh
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-api-dev --global
 ```
 
-#### Instalación con Context7
+#### التثبيت باستخدام Context7
 
 ```
 npx ctx7 skills install /google-gemini/gemini-skills gemini-api-dev
@@ -64,19 +65,19 @@ npx ctx7 skills install /google-gemini/gemini-skills gemini-api-dev
 
 ### gemini-live-api-dev
 
-Habilidad para compilar aplicaciones de IA conversacional en tiempo real con la API de Gemini Live. Esta habilidad proporciona documentación y prácticas recomendadas para lo siguiente:
+مهارة إنشاء تطبيقات ذكاء اصطناعي حواري في الوقت الفعلي باستخدام واجهة برمجة التطبيقات Gemini Live توفّر هذه المهارة مستندات وأفضل الممارسات بشأن ما يلي:
 
-- Conexiones WebSocket para la transmisión de baja latencia
-- Transmisión de audio, video y texto
-- Detección de actividad de voz y compatibilidad con la interrupción
+- اتصالات WebSocket للبث بزمن استجابة منخفض
+- بث الصوت والفيديو والنص
+- رصد النشاط الصوتي وإمكانية مقاطعة المساعد
 
-#### Instala con skills.sh
+#### التثبيت باستخدام skills.sh
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-live-api-dev --global
 ```
 
-#### Instalación con Context7
+#### التثبيت باستخدام Context7
 
 ```
 npx ctx7 skills install /google-gemini/gemini-skills gemini-live-api-dev
@@ -84,87 +85,88 @@ npx ctx7 skills install /google-gemini/gemini-skills gemini-live-api-dev
 
 ### gemini-interactions-api
 
-Habilidad para compilar apps con la [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=es-419). La API de Interactions es una interfaz unificada para interactuar con modelos y agentes de Gemini, diseñada para aplicaciones basadas en agentes. En este curso, se abordan los siguientes temas:
+مهارة إنشاء تطبيقات باستخدام
+[واجهة Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=ar) ‫Interactions API هي واجهة موحّدة للتفاعل مع نماذج ووكلاء Gemini، وهي مصمَّمة للتطبيقات المستندة إلى الوكلاء. تتضمّن هذه المهارة ما يلي:
 
-- Generación de texto, chat de varios turnos y transmisión
-- Llamadas a funciones, resultados estructurados y generación de imágenes
-- Ejecución en segundo plano y agentes de Deep Research
-- Administración del estado de la conversación del servidor
-- Patrones de SDK de Python y TypeScript
+- إنشاء النصوص والمحادثات المتعددة الجولات والبث
+- استدعاء الدوال والنتائج المنظَّمة وإنشاء الصور
+- التنفيذ في الخلفية وعملاء Deep Research
+- إدارة حالة المحادثة من جهة الخادم
+- أنماط حِزم تطوير البرامج (SDK) في Python وTypeScript
 
-#### Instala con skills.sh
+#### التثبيت باستخدام skills.sh
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-interactions-api --global
 ```
 
-#### Instalación con Context7
+#### التثبيت باستخدام Context7
 
 ```
 npx ctx7 skills install /google-gemini/gemini-skills gemini-interactions-api
 ```
 
-## Verifica la instalación
+## التحقق من التثبيت
 
-Después de la instalación, confirma que tu asistente de programación pueda conectarse al servidor de MCP de la documentación de Gemini y usar las habilidades instaladas.
+بعد التثبيت، تأكَّد من أنّ مساعد الترميز يمكنه الاتصال بخادم MCP في "مستندات Gemini" واستخدام المهارات المثبَّتة.
 
-### 1. Verifica el comportamiento del agente
+### 1. التحقّق من سلوك الوكيل
 
-La forma más confiable de verificarlo es hacerle a tu agente una pregunta técnica sobre la API de Gemini.
+أكثر طريقة موثوقة للتحقّق هي أن تطرح على الوكيل سؤالاً فنيًا حول Gemini API.
 
-**Instrucción:** "¿Cómo uso el almacenamiento de contexto en caché con la API de Gemini?"
+**الطلب:** "كيف يمكنني استخدام التخزين المؤقت للسياق مع Gemini API؟"
 
-Una configuración exitosa tendrá las siguientes características:
+عند إعداد ميزة "التحقّق بخطوتين" بنجاح، سيحدث ما يلي:
 
-- **Proporciona código preciso**: Haz referencia a métodos específicos de Gemini, como `cacheContent` o `cachedContents.create`, desde los extremos más recientes.
-- **Usa la herramienta de MCP**: Demuestra que está conectada al **servidor de MCP de Gemini Docs** o que utiliza la herramienta de `search_documentation` para recuperar datos.
-- **Invocar habilidades cargadas**: Mostrar un indicador de que se está "Usando la habilidad: gemini-api-dev" (si se depende de un wrapper secundario).
+- **تقديم رمز برمجي دقيق**: يمكنك الرجوع إلى طرق Gemini محدّدة، مثل `cacheContent` أو `cachedContents.create` من أحدث نقاط النهاية.
+- **استخدام أداة MCP**: إثبات أنّها مرتبطة **بخادم MCP في Gemini Docs** أو تستخدم أداة `search_documentation` لاسترداد البيانات
+- **استدعاء المهارات المحمَّلة**: عرض مؤشر يفيد بأنّه "يتم استخدام المهارة: gemini-api-dev" (في حال الاعتماد على برنامج تضمين ثانوي)
 
-### 2. Verifica las manifestaciones y las herramientas
+### 2. التحقّق من البيانات والأدوات
 
-Si el agente da una respuesta general o genérica, usa los comandos específicos de Discovery o Status para tu entorno y verifica que el MCP o la habilidad de Docs se hayan cargado en la memoria.
+إذا قدّم الوكيل ردًا عامًا أو عاديًا، استخدِم أوامر Discovery أو Status المحدّدة لبيئتك للتأكّد من تحميل Docs MCP أو المهارة في الذاكرة.
 
-| Entorno | Verificación del MCP | Verificación de habilidades |
+| البيئة | تأكيد حساب MCP | إثبات المهارات |
 | --- | --- | --- |
-| **Claude Code** | Escribe `/mcp` en la terminal para ver los servidores activos y las herramientas de `search_documentation`. | Escribe `/skills` en la terminal para enumerar todos los manifiestos activos. |
-| **Cursor** | Navega a **Configuración > Funciones > MCP**. Asegúrate de que el servidor esté “Conectado”. | Abre **Configuración > Reglas**. Verifica que la habilidad aparezca en "El agente decide". |
-| **Antigravity** | Consulta el estado del MCP en la barra lateral **Personalizaciones > Conexiones**. | Escribe `/skills list` o consulta la barra lateral **Personalizaciones > Reglas**. |
-| **CLI de Gemini** | Ejecuta `gemini mcp list` o usa `/mcp list`. | Ejecuta `gemini skills list` o usa el comando de barra `/skills` durante la sesión. |
-| **Copilot** | Escribe `@gemini /mcp` para enumerar los conectores de datos activos. | Escribe `@gemini /skills` (o `/skills`) para ver las extensiones activas. |
+| **Claude Code** | اكتب `/mcp` في نافذة الوحدة الطرفية لعرض الخوادم النشطة وأدوات `search_documentation`. | اكتب `/skills` في نافذة الأوامر لعرض جميع ملفات البيان النشطة. |
+| **المؤشر** | انتقِل إلى **الإعدادات > الميزات > MCP**. تأكَّد من أنّ الخادم "متّصل". | افتح **الإعدادات > القواعد**. تأكَّد من ظهور المهارة ضمن "يقرّر الوكيل". |
+| **Antigravity** | تحقَّق من الشريط الجانبي **التخصيصات > عمليات الربط** لمعرفة حالة "برنامج شركاء المحتوى". | اكتب `/skills list` أو ضَع علامة في الشريط الجانبي **التخصيصات > القواعد**. |
+| **Gemini CLI** | تشغيل `gemini mcp list` أو استخدام `/mcp list` | نفِّذ `gemini skills list` أو استخدِم الأمر `/skills` الذي يبدأ بشرطة مائلة أثناء الجلسة. |
+| **Copilot** | اكتب `@gemini /mcp` لإدراج أدوات ربط البيانات النشطة. | اكتب `@gemini /skills` (أو `/skills`) لعرض الإضافات النشطة. |
 
-## Solución de problemas
+## تحديد المشاكل وحلّها
 
-Si tu agente solo proporciona información general o no reconoce los métodos específicos de Gemini, verifica lo siguiente:
+إذا كان وكيلك يقدّم معلومات عامة فقط أو لا يتعرّف على طرق خاصة بـ Gemini، تحقَّق مما يلي:
 
-### El agente no descubrió la skill
+### لم يكتشف الوكيل المهارة
 
-La mayoría de los agentes indexan las habilidades solo al inicio.
+يفهرس معظم الوكلاء المهارات عند بدء التشغيل فقط.
 
-**Solución:** Reinicia por completo tu IDE (Cursor/VS Code) o sal de tu agente basado en terminal (Claude Code) y vuelve a abrirlo.
+**الحلّ:** أعِد تشغيل بيئة التطوير المتكاملة (Cursor أو VS Code) بالكامل أو اخرج من الوكيل المستند إلى الجهاز الطرفي (Claude Code) وأعِد فتحه.
 
-### Conflictos globales y locales
+### النزاعات العالمية والمحلية
 
-Si realizaste la instalación con la marca `--global`, es posible que tu agente la ignore y prefiera las reglas específicas del proyecto.
+إذا تم التثبيت باستخدام العلامة `--global`، قد يتجاهل الوكيل هذه العلامة لصالح القواعد الخاصة بالمشروع.
 
-**Solución:** Intenta instalar la habilidad directamente en la raíz de tu proyecto sin la marca global:
+**الحلّ:** جرِّب تثبيت المهارة مباشرةً في جذر مشروعك بدون العلامة العامة:
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-api-dev
 ```
 
-## Recursos
+## الموارد
 
-- [Habilidades de la API de Gemini en GitHub](https://github.com/google-gemini/gemini-skills)
-- [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=es-419)
-- [Guía de inicio rápido](https://ai.google.dev/gemini-api/docs/quickstart?hl=es-419)
-- [Bibliotecas](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419)
+- [مهارات Gemini API على GitHub](https://github.com/google-gemini/gemini-skills)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=ar)
+- [Quickstart](https://ai.google.dev/gemini-api/docs/quickstart?hl=ar)
+- [المكتبات](https://ai.google.dev/gemini-api/docs/libraries?hl=ar)
 
-Enviar comentarios
+إرسال ملاحظات
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Última actualización: 2026-04-29 (UTC)
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-¿Quieres brindar más información?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

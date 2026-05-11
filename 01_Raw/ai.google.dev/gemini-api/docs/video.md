@@ -1,51 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/video?hl=it
-fetched_at: 2026-05-05T20:41:57.095644+00:00
-title: "Generare video con Veo 3.1 nell'API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/video?hl=ar
+fetched_at: 2026-05-11T05:00:42.691293+00:00
+title: "\u0625\u0646\u0634\u0627\u0621 \u0641\u064a\u062f\u064a\u0648\u0647\u0627\u062a \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 Veo 3.1 \u0641\u064a Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Invia feedback
+إرسال ملاحظات
 
-# Generare video con Veo 3.1 nell'API Gemini
+# إنشاء فيديوهات باستخدام Veo 3.1 في Gemini API
 
-> Per scoprire di più sulla comprensione dei video, consulta la guida [Comprensione dei video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=it).
+> للتعرّف على فهم الفيديوهات، يُرجى الاطّلاع على دليل [فهم الفيديوهات](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ar).
 
-[Veo 3.1](https://deepmind.google/models/veo/?hl=it) è il modello all'avanguardia di Google
-per la generazione di video di 8 secondi in alta fedeltà a 720p, 1080p o 4K caratterizzati da
-un realismo straordinario e audio generato in modo nativo. Puoi accedere
-a questo modello in modo programmatico utilizzando l'API Gemini. Per scoprire di più sulle varianti del modello Veo disponibili, consulta la sezione [Versioni del modello](#model-versions).
+[‫Veo 3.1](https://deepmind.google/models/veo/?hl=ar) هو نموذج Google الأحدث
+لإنشاء فيديوهات عالية الدقة مدتها 8 ثوانٍ وبدقة 720p أو 1080p أو 4k، وتتميّز
+بواقعية مذهلة ومحتوى صوتي تم إنشاؤه بشكل أصلي. يمكنك الوصول إلى هذا النموذج آليًا باستخدام Gemini API. لمزيد من المعلومات حول
+خيارات نماذج Veo المتاحة، يُرجى الاطّلاع على قسم [إصدارات النماذج](#model-versions).
 
-Veo 3.1 eccelle in un'ampia gamma di stili visivi e cinematografici e introduce
-diverse nuove funzionalità:
+يتفوّق Veo 3.1 في مجموعة كبيرة من الأساليب المرئية والسينمائية، ويقدّم عدة إمكانات جديدة:
 
-- **Video verticali**: scegli tra video orizzontali (`16:9`) e verticali (`9:16`).
-- **Estensione video**: estendi i video generati in precedenza
-  utilizzando Veo.
-- **Generazione specifica per frame**: genera un video specificando il primo e l'ultimo frame.
-- **Indicazioni basate sulle immagini**: utilizza fino a tre immagini di riferimento per guidare
-  i contenuti del video generato.
+- **الفيديوهات العمودية**: اختَر بين الفيديوهات الأفقية (`16:9`) والعمودية (`9:16`).
+- **إضافة مقاطع إلى الفيديو**: إضافة مقاطع إلى الفيديوهات التي تم إنشاؤها سابقًا باستخدام Veo
+- **إنشاء فيديو محدّد الإطار**: يمكنك إنشاء فيديو من خلال تحديد الإطارَين الأول والأخير.
+- **تحديد المسار الإبداعي استنادًا إلى الصور**: استخدِموا ما يصل إلى ثلاث صور مرجعية لتحديد محتوى الفيديو الذي تريدون إنشاؤه.
 
-Per saperne di più su come scrivere prompt di testo efficaci per la generazione di video,
-consulta la [guida ai prompt di Veo](#prompt-guide).
+لمزيد من المعلومات حول كتابة طلبات نصية فعّالة لإنشاء الفيديوهات،
+راجِع [دليل طلبات Veo](#prompt-guide)
 
-## Generazione di video da testo
+## إنشاء فيديوهات من نص
 
-Scegli un esempio per scoprire come generare un video con dialoghi, realismo
-cinematografico o animazione creativa:
+اختَر مثالاً لمعرفة كيفية إنشاء فيديو يتضمّن حوارًا أو واقعية سينمائية أو رسومًا متحركة إبداعية:
 
-Dialoghi ed effetti sonori
-Realismo cinematografico
-Animazione creativa
+الحوار والمؤثرات الصوتية
+الواقعية السينمائية
+الصور المتحركة الإبداعية
 
 ### Python
 
@@ -157,7 +153,7 @@ func main() {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -237,9 +233,9 @@ while true; do
 done
 ```
 
-### Controllare le proporzioni
+### التحكّم في نسبة العرض إلى الارتفاع
 
-Veo 3.1 ti consente di creare video in formato orizzontale (`16:9`, l'impostazione predefinita) o verticale (`9:16`). Puoi indicare al modello quale vuoi utilizzare utilizzando il parametro
+تتيح لك Veo 3.1 إنشاء فيديوهات بالعرض (`16:9`، وهو الإعداد التلقائي) أو بالطول (`9:16`). يمكنك إخبار النموذج بالخيار الذي تريده باستخدام المَعلمة
 `aspect_ratio`:
 
 ### Python
@@ -403,15 +399,14 @@ while true; do
 done
 ```
 
-### Controllare la risoluzione
+### التحكّم في درجة الدقة
 
-Veo 3.1 può anche generare direttamente video a 720p, 1080p o 4K (4K non disponibile
-per Veo 3.1 Lite).
+يمكن لنموذج Veo 3.1 أيضًا إنشاء فيديوهات بدقة 720p أو 1080p أو 4k مباشرةً (لا تتوفّر دقة 4k في Veo 3.1 Lite).
 
-Tieni presente che maggiore è la risoluzione, maggiore sarà la latenza. I video in 4K
-sono anche più costosi (vedi [prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it#veo-3.1)).
+يُرجى العِلم أنّه كلما زادت الدقة، زاد وقت الاستجابة. تكون فيديوهات 4K
+أكثر تكلفة أيضًا (راجِع [الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#veo-3.1)).
 
-Anche l'[estensione video](#extending_veo_videos) è limitata ai video a 720p.
+[إضافة الفيديو](#extending_veo_videos) مقتصرة أيضًا على الفيديوهات بدقة 720p.
 
 ### Python
 
@@ -574,12 +569,12 @@ while true; do
 done
 ```
 
-## Generazione di video da immagini
+## إنشاء فيديو من صورة
 
-Il seguente codice mostra la generazione di un'immagine utilizzando
-[Gemini 3.1 Flash Image, noto anche come Nano Banana 2](https://ai.google.dev/gemini-api/docs/image-generation?hl=it),
-quindi l'utilizzo di questa immagine come
-frame iniziale per la generazione di un video con Veo 3.1.
+يوضّح الرمز التالي كيفية إنشاء صورة باستخدام
+[Gemini 3.1 Flash Image، المعروف أيضًا باسم Nano Banana 2](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar)،
+ثم استخدام هذه الصورة كإطار
+أولي لإنشاء فيديو باستخدام Veo 3.1.
 
 ### Python
 
@@ -722,7 +717,7 @@ func main() {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -767,18 +762,18 @@ class GenerateVideoFromImage {
 }
 ```
 
-### Utilizzo delle immagini di riferimento
+### استخدام الصور المرجعية
 
-Veo 3.1 ora accetta fino a tre immagini di riferimento per guidare i contenuti del video generato. Fornisci immagini di una persona, un personaggio o un prodotto per
-preservare l'aspetto del soggetto nel video di output.
+يقبل Veo 3.1 الآن ما يصل إلى 3 صور مرجعية لتوجيه محتوى الفيديو الذي يتم إنشاؤه. قدِّم صورًا لشخص أو شخصية أو منتج
+للحفاظ على مظهر الموضوع في الفيديو الناتج.
 
-Ad esempio, utilizzando queste tre immagini generate con
-[Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=it) come riferimenti con un
-[prompt ben scritto](#use-reference-images) viene creato il seguente video:
+على سبيل المثال، يؤدي استخدام هذه الصور الثلاث التي تم إنشاؤها باستخدام
+[Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar) كمرجع مع
+[طلب مكتوب بشكل جيد](#use-reference-images) إلى إنشاء الفيديو التالي:
 
 | `` `dress_image` `` | `` `woman_image` `` | `` `glasses_image` `` |
 | --- | --- | --- |
-| Abito da fenicottero di alta moda con strati di piume rosa e fucsia | Bella donna con capelli scuri e occhi marrone caldo | Occhiali da sole rosa a forma di cuore |
+| فستان عصري على شكل طائر الفلامنغو مزيّن بطبقات من الريش الوردي والأرجواني | امرأة جميلة بشعر داكن وعينين بنيتين دافئتين | نظارات شمسية وردية اللون على شكل قلب |
 
 ### Python
 
@@ -1006,11 +1001,9 @@ while true; do
 done
 ```
 
-### Utilizzo del primo e dell'ultimo frame
+### استخدام الإطارين الأول والأخير
 
-Veo 3.1 ti consente di creare video utilizzando l'interpolazione o specificando il primo e
-l'ultimo fotogramma del video. Per informazioni su come scrivere prompt di testo efficaci
-per la generazione di video, consulta la [guida ai prompt di Veo](#use-reference-images).
+تتيح لك Veo 3.1 إنشاء فيديوهات باستخدام الاستيفاء أو تحديد الإطارَين الأول والأخير من الفيديو. للحصول على معلومات حول كتابة طلبات نصية فعّالة لإنشاء الفيديوهات، يُرجى الاطّلاع على [دليل كتابة الطلبات في Veo](#use-reference-images).
 
 ### Python
 
@@ -1183,35 +1176,31 @@ done
 
 | `` `first_image` `` | `` `last_image` `` | *veo3.1\_with\_interpolation.mp4* |
 | --- | --- | --- |
-| Una donna spettrale con lunghi capelli bianchi e un abito svolazzante si dondola dolcemente su un&#39;altalena di corda | La donna spettrale scompare dall&#39;altalena | Un video cinematografico e inquietante di una donna misteriosa che scompare da un&#39;altalena nella nebbia |
+| امرأة شبحية ذات شعر أبيض طويل وفستان فضفاض تتأرجح بلطف على أرجوحة حبل | تختفي المرأة الشبحية من الأرجوحة | فيديو سينمائي مخيف لامرأة غريبة تختفي من أرجوحة في الضباب |
 
-## Estensione dei video di Veo
+## إطالة مدة فيديوهات Veo
 
-Utilizza Veo 3.1 per estendere i video che hai generato in precedenza con Veo di 7 secondi
-e fino a 20 volte.
+استخدِم Veo 3.1 لتمديد الفيديوهات التي أنشأتها سابقًا باستخدام Veo لمدة 7 ثوانٍ
+وما يصل إلى 20 مرة.
 
-Limitazioni relative al video di input:
+القيود المفروضة على فيديوهات الإدخال:
 
-- I video generati da Veo durano al massimo 141 secondi.
-- L'API Gemini supporta solo le estensioni video per i video generati con Veo.
-- Il video deve provenire da una generazione precedente, ad esempio
-  `operation.response.generated_videos[0].video`
-- I video vengono archiviati per 2 giorni, ma se un video viene utilizzato come riferimento per l'estensione,
-  il timer di archiviazione di 2 giorni viene reimpostato. Puoi estendere solo i video generati
-  o a cui è stato fatto riferimento negli ultimi due giorni.
-- I video di input devono avere una determinata durata, proporzioni e dimensioni:
-  - Proporzioni: 9:16 o 16:9
-  - Risoluzione: 720p
-  - Durata del video: 141 secondi o meno
+- تقتصر مدة الفيديوهات التي تنشئها Veo على 141 ثانية.
+- تتيح Gemini API استخدام إضافات الفيديو فقط للفيديوهات التي تم إنشاؤها باستخدام Veo.
+- يجب أن يكون الفيديو من جيل سابق، مثل `operation.response.generated_videos[0].video`
+- يتم تخزين الفيديوهات لمدة يومَين، ولكن إذا تمت الإشارة إلى فيديو لتمديد مدة تخزينه، تتم إعادة ضبط الموقّت الذي يبلغ يومَين. يمكنك فقط تمديد مدة الفيديوهات التي تم إنشاؤها أو الرجوع إليها خلال آخر يومَين.
+- من المتوقّع أن تتضمّن الفيديوهات المدخلة مدة ونسبة عرض إلى ارتفاع وأبعادًا معيّنة:
+  - نسبة العرض إلى الارتفاع: 9:16 أو 16:9
+  - درجة الدقة: 720p
+  - مدة الفيديو: 141 ثانية أو أقل
 
-L'output dell'estensione è un singolo video che combina il video inserito dall'utente e
-il video esteso generato per un massimo di 148 secondi di video.
+تنتج الإضافة فيديو واحدًا يجمع بين الفيديو الذي أدخله المستخدم والفيديو الموسّع الذي تم إنشاؤه، وذلك لمدة تصل إلى 148 ثانية.
 
-Questo esempio prende un video generato da Veo, mostrato qui con il prompt originale, e lo estende utilizzando il parametro `video` e un nuovo prompt:
+يأخذ هذا المثال فيديو من إنشاء Veo، كما هو موضّح هنا مع الطلب الأصلي، ويوسّعه باستخدام المَعلمة `video` وطلب جديد:
 
-| Prompt | Output: `butterfly_video` |
+| الطلب | الناتج: `butterfly_video` |
 | --- | --- |
-| Una farfalla di origami sbatte le ali e vola fuori dalle porte finestre nel giardino. | Una farfalla di origami sbatte le ali e vola fuori dalle porte finestre nel giardino. |
+| فراشة أوريغامي ترفرف بجناحيها وتطير من الأبواب الفرنسية إلى الحديقة. | فراشة مصنوعة من الأوريغامي ترفرف بجناحيها وتطير من الأبواب الزجاجية إلى الحديقة. |
 
 ### Python
 
@@ -1387,16 +1376,14 @@ while true; do
 done
 ```
 
-Per informazioni su come scrivere prompt di testo efficaci per la generazione di video, consulta
-la [guida ai prompt di Veo](#extend-prompt).
+للحصول على معلومات حول كتابة طلبات نصية فعّالة لإنشاء الفيديوهات، يُرجى الاطّلاع على [دليل كتابة طلبات Veo](#extend-prompt).
 
-## Gestione di operazioni asincrone
+## التعامل مع العمليات غير المتزامنة
 
-La generazione di video è un'attività che richiede un'elevata potenza di calcolo. Quando invii una richiesta
-all'API, questa avvia un job a lunga esecuzione e restituisce immediatamente un oggetto `operation`. A questo punto, devi eseguire il polling finché il video non è pronto, come indicato dallo stato
-`done` impostato su true.
+إنشاء الفيديوهات مهمة تتطلّب إمكانيات حاسوبية عالية. عند إرسال طلب إلى واجهة برمجة التطبيقات، تبدأ مهمة طويلة الأمد وتعرض على الفور عنصر `operation`. بعد ذلك، عليك إجراء استطلاع إلى أن يصبح الفيديو جاهزًا، ويتم الإشارة إلى ذلك من خلال أن تصبح حالة
+`done` صحيحة.
 
-Il fulcro di questo processo è un ciclo di polling, che controlla periodicamente lo stato del job.
+تتمحور هذه العملية حول حلقة استطلاع تتحقّق بشكل دوري من حالة المهمة.
 
 ### Python
 
@@ -1494,7 +1481,7 @@ func main() {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -1575,343 +1562,312 @@ while true; do
 done
 ```
 
-## Parametri e specifiche dell'API Veo
+## مواصفات ومَعلمات Veo API
 
-Questi sono i parametri che puoi impostare nella richiesta API per controllare il processo di generazione dei video.
+في ما يلي المَعلمات التي يمكنك ضبطها في طلب بيانات من واجهة برمجة التطبيقات للتحكّم في عملية إنشاء الفيديو.
 
-| Parametro | Veo 3.1 e Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 e Veo 3 Fast | Veo 2 |
+| المَعلمة | ‫Veo 3.1 وVeo 3.1 Fast | Veo 3.1 Lite | ‫Veo 3 وVeo 3 Fast | Veo 2 |
 | --- | --- | --- | --- | --- |
-| Istanze | | | | |
-| `prompt`:  la descrizione testuale del video. Supporta i segnali acustici. | `string` | `string` | `string` | `string` |
-| `image`: un'immagine iniziale da animare. | `Image` oggetto | `Image` oggetto | `Image` oggetto | `Image` oggetto |
-| `lastFrame`: l'immagine finale per la transizione di un video di interpolazione. Deve essere utilizzato in combinazione con il parametro `image`. | `Image` oggetto | `Image` oggetto | `Image` oggetto | `Image` oggetto |
-| `referenceImages`: fino a tre immagini da utilizzare come riferimenti di stile e contenuti. | `VideoGenerationReferenceImage` oggetto | `n/a` oggetto | n/a | n/a |
-| `video`:  video da utilizzare per l'estensione video. | `Video` oggetto di una generazione precedente | n/a | n/d | n/a |
-| Parametri | | | | |
-| `aspectRatio`:  le proporzioni del video. | `"16:9"` (predefinito), `"9:16"` | `"16:9"` (predefinito), `"9:16"` | `"16:9"` (predefinito), `"9:16"` | `"16:9"` (predefinito), `"9:16"` |
-| `durationSeconds`:  la durata del video generato. | `"4"`, `"6"`, `"8"`.   *Deve essere "8" quando si utilizzano estensioni, immagini di riferimento o risoluzioni 1080p e 4K* | `"4"`, `"6"`, `"8"`.   *Deve essere "8" quando utilizzi immagini di riferimento o con 1080p* | `"4"`, `"6"`, `"8"`.   *Deve essere "8" quando si utilizzano estensioni, immagini di riferimento o risoluzioni 1080p e 4K* | `"5"`, `"6"`, `"8"` |
-| `personGeneration`:  controlla la generazione di persone. Per le limitazioni regionali, consulta la sezione [Limitazioni](#limitations). | Da testo a video ed Estensione: `"allow_all"` solo   Da immagine a video, Interpolazione e Immagini di riferimento: `"allow_adult"` solo | Da testo a video: `"allow_all"` solo   Da immagine a video, Interpolazione e Immagini di riferimento: `"allow_adult"` solo | Da testo a video: `"allow_all"` solo   Da immagine a video: `"allow_adult"` solo | Da testo a video:  `"allow_all"`, `"allow_adult"`, `"dont_allow"`   Da immagine a video:  `"allow_adult"` e `"dont_allow"` |
-| `resolution`:  la risoluzione del video. | `"720p"` (impostazione predefinita),  `"1080p"` (supporta solo la durata di 8 secondi), `"4k"` (supporta solo la durata di 8 secondi)   *`"720p"` solo per l'estensione* | `"720p"` (impostazione predefinita),  `"1080p"` (supporta solo la durata di 8 secondi) | `"720p"` (impostazione predefinita),  `"1080p"` (supporta solo la durata di 8 secondi), `"4k"` (supporta solo la durata di 8 secondi)   *`"720p"` solo per l'estensione* | Non supportato |
+| إطارات مبعثَرة | | | | |
+| `prompt`: الوصف النصي للفيديو. تتيح استخدام الإشارات الصوتية. | `string` | `string` | `string` | `string` |
+| `image`: صورة أولية لتحريكها | العنصر `Image` | العنصر `Image` | العنصر `Image` | العنصر `Image` |
+| ‫`lastFrame`: الصورة النهائية التي سيتم الانتقال إليها في فيديو الاستيفاء يجب استخدامها مع المَعلمة `image`. | العنصر `Image` | العنصر `Image` | العنصر `Image` | العنصر `Image` |
+| ‫`referenceImages`: ما يصل إلى ثلاث صور لاستخدامها كمرجع للأسلوب والمحتوى | العنصر `VideoGenerationReferenceImage` | العنصر `n/a` | لا تنطبق | لا تنطبق |
+| `video`: الفيديو الذي سيتم استخدامه لإضافة الفيديو | عنصر `Video` من جيل سابق | لا تنطبق | لا تنطبق | لا تنطبق |
+| المعلمات | | | | |
+| ‫`aspectRatio`: نسبة العرض إلى الارتفاع للفيديو | ‫`"16:9"` (تلقائي)، `"9:16"` | ‫`"16:9"` (تلقائي)، `"9:16"` | ‫`"16:9"` (تلقائي)، `"9:16"` | ‫`"16:9"` (تلقائي)، `"9:16"` |
+| ‫`durationSeconds`: مدة الفيديو الذي تم إنشاؤه. | `"4"`، `"6"`، `"8"`.   *يجب أن تكون القيمة "8" عند استخدام الإضافة أو الصور المرجعية أو عند استخدام دقة 1080p و4k* | `"4"`، `"6"`، `"8"`.   *يجب أن تكون القيمة "8" عند استخدام الصور المرجعية أو مع دقة 1080p* | `"4"`، `"6"`، `"8"`.   *يجب أن تكون القيمة "8" عند استخدام الإضافة أو الصور المرجعية أو عند استخدام دقة 1080p و4k* | ‫`"5"`، `"6"`، `"8"` |
+| `personGeneration`:  يتحكّم في إنشاء صور تتضمّن أشخاصًا. (يُرجى الاطّلاع على [القيود](#limitations) لمعرفة القيود المفروضة على المناطق) | تحويل النص إلى فيديو وتوسيع الفيديو: `"allow_all"` فقط   تحويل الصور إلى فيديوهات، وتعديل معدّل عرض اللقطات، والصور المرجعية: `"allow_adult"` فقط | تحويل النص إلى فيديو: `"allow_all"` فقط   تحويل الصور إلى فيديوهات، والتحويل بين الصور، والصور المرجعية: `"allow_adult"` فقط | تحويل النص إلى فيديو: `"allow_all"` فقط   تحويل الصورة إلى فيديو: `"allow_adult"` فقط | تحويل النص إلى فيديو:  `"allow_all"` و`"allow_adult"` و`"dont_allow"`   تحويل الصور إلى فيديو:  `"allow_adult"` و`"dont_allow"` |
+| استبدِل `resolution` بـ  :درجة دقة الفيديو. | ‫`"720p"` (الإعداد التلقائي)،  `"1080p"` (يتيح مدة 8 ثوانٍ فقط)، `"4k"` (يتيح مدة 8 ثوانٍ فقط)   *`"720p"` للإضافة فقط* | ‫`"720p"` (تلقائي)،  `"1080p"` (يتيح مدة 8 ثوانٍ فقط) | ‫`"720p"` (الإعداد التلقائي)،  `"1080p"` (يتيح مدة 8 ثوانٍ فقط)، `"4k"` (يتيح مدة 8 ثوانٍ فقط)   *`"720p"` للإضافة فقط* | غير متوافقة |
 
-Tieni presente che il parametro `seed` è disponibile anche per i modelli Veo 3.
-Non garantisce il determinismo, ma lo migliora leggermente.
+يُرجى العِلم أنّ المَعلمة `seed` متاحة أيضًا لنماذج Veo 3.
+لا يضمن ذلك تحديد النتائج، ولكنّه يحسّنها قليلاً.
 
-## Funzionalità del modello
+## ميزات النموذج
 
-| Funzionalità | Veo 3.1 e Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 e Veo 3 Fast | Veo 2 |
+| الميزة | ‫Veo 3.1 وVeo 3.1 Fast | Veo 3.1 Lite | ‫Veo 3 وVeo 3 Fast | Veo 2 |
 | --- | --- | --- | --- | --- |
-| **Audio**:  genera audio in modo nativo con il video. | ✔️ Sempre attivo | ✔️ Sempre attivo | ✔️ Sempre attivo | ❌ Solo silenzioso |
-| **Modalità di input**:  il tipo di input utilizzato per la generazione. | Da testo a video, da immagine a video, da video a video | Da testo a video, da immagine a video | Da testo a video, da immagine a video | Da testo a video, da immagine a video |
-| **Risoluzione**:  la risoluzione di output del video. | 720p, 1080p (solo durata di 8 secondi), 4K (solo durata di 8 secondi)  *720p solo quando si utilizza l'estensione video.* | 720p, 1080p (solo 8 secondi) | 720p e 1080p (solo 16:9) | 720p |
-| **Frequenza fotogrammi**:  la frequenza fotogrammi di output del video. | 24 fps | 24 fps | 24 fps | 24 fps |
-| **Durata del video** :la durata del video generato. | 8 secondi, 6 secondi, 4 secondi  *8 secondi solo se la risoluzione è 1080p o 4K o se vengono utilizzate immagini di riferimento* | 8 secondi, 6 secondi, 4 secondi  *8 secondi solo se la risoluzione è 1080p o se utilizzi immagini di riferimento* | 8 secondi | 5-8 secondi |
-| **Video per richiesta**:  numero di video generati per richiesta. | 1 | 1 | 1 | 1 o 2 |
-| **Stato:** Disponibilità del modello | [Anteprima](https://ai.google.dev/gemini-api/docs/models?hl=it#preview) | [Anteprima](https://ai.google.dev/gemini-api/docs/models?hl=it#preview) | [Stabile](https://ai.google.dev/gemini-api/docs/models?hl=it#stable) | [Stabile](https://ai.google.dev/gemini-api/docs/models?hl=it#latest-stable) |
+| **الصوت:** يتم إنشاء الصوت بشكلٍ أصلي مع الفيديو. | ✔️ قيد التشغيل دائمًا | ✔️ قيد التشغيل دائمًا | ✔️ قيد التشغيل دائمًا | ❌ الوضع الصامت فقط |
+| **طُرق الإدخال:** نوع الإدخال المستخدَم في الإنشاء | تحويل النص إلى فيديو، وتحويل الصورة إلى فيديو، وتحويل الفيديو إلى فيديو | تحويل النص إلى فيديو والصورة إلى فيديو | تحويل النص إلى فيديو والصورة إلى فيديو | تحويل النص إلى فيديو والصورة إلى فيديو |
+| **درجة الدقة:** هي درجة دقة الفيديو الناتج. | ‫720p و1080p (لمدة 8 ثوانٍ فقط) و4k (لمدة 8 ثوانٍ فقط)  *‫720p فقط عند استخدام إضافة الفيديو* | ‫720p و1080p (لمدة 8 ثوانٍ فقط) | ‫720p و1080p (بنسبة عرض إلى ارتفاع 16:9 فقط) | 720 بكسل |
+| **معدّل عرض الإطارات:** يشير إلى معدّل عرض الإطارات للفيديو. | 24 إطارًا في الثانية | 24 إطارًا في الثانية | 24 إطارًا في الثانية | 24 إطارًا في الثانية |
+| **مدة الفيديو:** هي مدة الفيديو الذي تم إنشاؤه. | 8 ثوانٍ أو 6 ثوانٍ أو 4 ثوانٍ  *8 ثوانٍ فقط إذا كانت الدقة 1080p أو 4k أو إذا كنت تستخدم صورًا مرجعية* | ‫8 ثوانٍ أو 6 ثوانٍ أو 4 ثوانٍ  *8 ثوانٍ فقط إذا كانت الدقة 1080p أو إذا كنت تستخدم صورًا مرجعية* | 8 ثوانٍ | ‫5 إلى 8 ثوانٍ |
+| **الفيديوهات لكل طلب:** عدد الفيديوهات التي يتم إنشاؤها لكل طلب | 1 | 1 | 1 | 1 أو 2 |
+| **الحالة:** مدى توفّر النموذج | [معاينة](https://ai.google.dev/gemini-api/docs/models?hl=ar#preview) | [معاينة](https://ai.google.dev/gemini-api/docs/models?hl=ar#preview) | [مستقر](https://ai.google.dev/gemini-api/docs/models?hl=ar#stable) | [مستقر](https://ai.google.dev/gemini-api/docs/models?hl=ar#latest-stable) |
 
-## Limitazioni
+## القيود
 
-- **Latenza delle richieste**: min. 11 secondi; max. 6 minuti (durante le ore di punta).
-- **Limitazioni regionali:** in UE, Regno Unito, Svizzera e MENA, i seguenti
-  sono i valori consentiti per `personGeneration`:
-  - Veo 3 e 3.1: solo `allow_adult`.
-  - Veo 2: `dont_allow` e `allow_adult`. Il valore predefinito è `dont_allow`.
-- **Conservazione dei video**:i video generati vengono memorizzati sul server per 2 giorni,
-  dopodiché vengono rimossi. Per salvare una copia locale, devi scaricare il video entro 2 giorni dalla generazione. I video estesi vengono trattati come video
-  generati di recente.
-- **Filigrana**:i video creati da Veo vengono filigranati utilizzando [SynthID](https://deepmind.google/technologies/synthid/?hl=it), il nostro strumento per l'applicazione di filigrane e l'identificazione dei contenuti generati con l'AI. I video possono essere verificati utilizzando la piattaforma di verifica
-  [SynthID](https://deepmind.google/science/synthid/?hl=it).
-- **Sicurezza**:i video generati vengono sottoposti a filtri di sicurezza e a processi di controllo della memorizzazione che contribuiscono a ridurre i rischi di privacy, copyright e pregiudizi.
-- **Errore audio:** a volte Veo 3.1 impedisce la generazione di un video
-  a causa di filtri di sicurezza o altri problemi di elaborazione dell'audio. Non ti verrà addebitato alcun costo se la generazione del video viene bloccata.
+- **وقت استجابة الطلب:** الحدّ الأدنى: 11 ثانية، الحدّ الأقصى: 6 دقائق (خلال ساعات الذروة)
+- **القيود الإقليمية:** في مواقع الاتحاد الأوروبي والمملكة المتحدة وسويسرا والشرق الأوسط وشمال أفريقيا، القيم المسموح بها لـ `personGeneration` هي:
+  - ‫Veo 3 و3.1: `allow_adult` فقط
+  - ‫Veo 2: `dont_allow` و`allow_adult` القيمة التلقائية هي `dont_allow`.
+- **الاحتفاظ بالفيديوهات:** يتم تخزين الفيديوهات التي تم إنشاؤها على الخادم لمدة يومَين،
+  وبعد ذلك تتم إزالتها. لحفظ نسخة محلية، يجب تنزيل الفيديو في غضون يومَين من إنشائه. يتم التعامل مع الفيديوهات الممتدة على أنّها فيديوهات تم إنشاؤها حديثًا.
+- **وضع العلامات المائية:** يتم وضع علامات مائية على الفيديوهات التي تم إنشاؤها باستخدام Veo من خلال [SynthID](https://deepmind.google/technologies/synthid/?hl=ar)، وهي أداتنا لوضع العلامات المائية والتعرّف على المحتوى من إنشاء الذكاء الاصطناعي. يمكن التحقّق من الفيديوهات باستخدام منصة التحقّق
+  [SynthID](https://deepmind.google/science/synthid/?hl=ar).
+- **الأمان:** تخضع الفيديوهات من إنشاء الذكاء الاصطناعي إلى فلاتر الأمان وعمليات التحقّق من الحفظ في الذاكرة التي تساعد في الحدّ من مخاطر الخصوصية وحقوق الطبع والنشر والتحيّز.
+- **خطأ في الصوت:** في بعض الأحيان، سيمنع Veo 3.1 إنشاء فيديو بسبب فلاتر الأمان أو مشاكل أخرى في معالجة الصوت. لن يتم تحصيل رسوم منك إذا تم حظر إنشاء الفيديو.
 
-## Guida ai prompt di Veo
+## دليل كتابة الطلبات في Veo
 
-Questa sezione contiene esempi di video che puoi creare utilizzando Veo e mostra come modificare i prompt per produrre risultati diversi.
+يحتوي هذا القسم على أمثلة للفيديوهات التي يمكنك إنشاؤها باستخدام Veo، ويوضّح لك كيفية تعديل الطلبات للحصول على نتائج مختلفة.
 
-### filtri di sicurezza
+### فلاتر السلامة
 
-Veo applica filtri di sicurezza in Gemini per garantire che
-i video generati e le foto caricate non contengano contenuti offensivi.
-I prompt che violano i nostri [termini e linee guida](https://ai.google.dev/gemini-api/docs/usage-policies?hl=it#abuse-monitoring) vengono bloccati.
+يطبّق Veo فلاتر الأمان على جميع منتجات Gemini للمساعدة في ضمان عدم احتواء الفيديوهات التي يتم إنشاؤها والصور التي يتم تحميلها على محتوى مسيء.
+يتم حظر الطلبات التي تنتهك [الأحكام والإرشادات](https://ai.google.dev/gemini-api/docs/usage-policies?hl=ar#abuse-monitoring).
 
-### Nozioni di base sulla scrittura di prompt
+### أساسيات كتابة الطلبات
 
-I prompt efficaci sono descrittivi e chiari. Per ottenere il massimo da Veo, inizia
-identificando la tua idea principale, perfezionala aggiungendo parole chiave e modificatori
-e incorpora la terminologia specifica dei video nei prompt.
+تكون الطلبات الجيدة وصفية وواضحة. للاستفادة إلى أقصى حد من Veo، ابدأ بتحديد فكرتك الأساسية، ثم حسِّنها من خلال إضافة كلمات رئيسية ومعدِّلات، وأدرِج مصطلحات خاصة بالفيديو في طلباتك.
 
-Il prompt deve includere i seguenti elementi:
+يجب تضمين العناصر التالية في الطلب:
 
-- **Soggetto**: l'oggetto, la persona, l'animale o il paesaggio che vuoi includere nel video, ad esempio *paesaggio urbano*, *natura*, *veicoli* o *cuccioli*.
-- **Azione**: cosa sta facendo il soggetto (ad esempio, *camminare*, *correre* o
-  *girare la testa*).
-- **Stile**: specifica la direzione creativa utilizzando parole chiave specifiche per lo stile cinematografico, ad esempio *fantascienza*, *film horror*, *film noir* o stili di animazione come *cartone animato*.
-- **Posizionamento e movimento della videocamera**: [facoltativo] controlla la posizione
-  e il movimento della videocamera utilizzando termini come *vista aerea*, *altezza degli occhi*, *inquadratura dall'alto*,
-  *carrellata* o *dal basso*.
-- **Composizione**: [facoltativo] come viene inquadrata la scena, ad esempio *campo lungo*,
-  *primo piano*, *inquadratura singola* o *inquadratura doppia*.
-- **Messa a fuoco ed effetti obiettivo**: [facoltativo] utilizza termini come *messa a fuoco ridotta*,
-  *messa a fuoco profonda*, *sfocatura diffusa*, *obiettivo macro* e *obiettivo grandangolare* per ottenere
-  effetti visivi specifici.
-- **Atmosfera**: [facoltativo] come il colore e la luce contribuiscono alla scena,
-  ad esempio *toni del blu*, *notte* o *toni caldi*.
+- **الموضوع**: يشير إلى الكائن أو الشخص أو الحيوان أو المشهد الذي تريد تضمينه في الفيديو، مثل *مناظر المدينة* أو *الطبيعة* أو *المركبات* أو *الجراء*.
+- **النشاط**: النشاط الذي يؤديه الشخص/العنصر محور التركيز (مثل *المشي* أو *الجري* أو *تحريك الرأس*).
+- **الأسلوب**: حدِّد التوجيه الإبداعي باستخدام كلمات رئيسية خاصة بأسلوب الفيلم، مثل *الخيال العلمي* أو *فيلم رعب* أو *فيلم جريمة* أو أساليب الرسوم المتحركة مثل *الرسوم الكرتونية*.
+- **موضع الكاميرا وحركتها**: [اختياري] يمكنك التحكّم في موضع الكاميرا وحركتها باستخدام عبارات مثل *منظر جوي* أو *منظر من مستوى العين* أو *لقطة من الأعلى* أو *لقطة متحركة* أو *منظر من الأسفل*.
+- **التركيب**: [اختياري] يصف كيفية تأطير اللقطة، مثل *لقطة واسعة* أو *لقطة مقرَّبة* أو *لقطة فردية* أو *لقطة مزدوجة*.
+- **التركيز وتأثيرات العدسة**: [اختياري] استخدِم عبارات مثل *تركيز سطحي* و*تركيز عميق* و*تركيز ناعم* و*عدسة ماكرو* و*عدسة بزاوية عريضة* لتحقيق تأثيرات بصرية معيّنة.
+- **طابع التباين العام**: [اختياري] يصف هذا الحقل كيف تساهم الألوان والإضاءة في المشهد،
+  مثل *درجات الأزرق* أو *الليل* أو *درجات الألوان الدافئة*.
 
-#### Altri suggerimenti per scrivere prompt
+#### المزيد من النصائح لكتابة الطلبات
 
-- **Usa un linguaggio descrittivo**: utilizza aggettivi e avverbi per fornire un quadro chiaro a Veo.
-- **Migliora i dettagli del viso**: specifica
-  i dettagli del viso come punto focale della foto, ad esempio utilizzando la parola *ritratto* nel
-  prompt.
+- **استخدام لغة وصفية**: استخدِم الصفات والأحوال لتقديم صورة واضحة لـ Veo.
+- **تحسين تفاصيل الوجه**: حدِّد تفاصيل الوجه كبؤرة تركيز الصورة، مثلاً باستخدام الكلمة *صورة شخصية* في الطلب.
 
-*Per strategie di prompting più complete, visita la pagina [Introduzione alla
-progettazione dei prompt](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=it).*
+*للحصول على استراتيجيات أكثر شمولاً لإنشاء الطلبات، يمكنك الانتقال إلى [مقدمة حول
+تصميم الطلبات](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=ar).*
 
-### Richiesta di audio
+### طلب الإذن بالوصول إلى الصوت
 
-Puoi fornire a Veo indicazioni per effetti sonori, rumore ambientale e dialoghi.
-Il modello acquisisce le sfumature di questi segnali per generare una colonna sonora sincronizzata.
+يمكنك تزويد Veo بإشارات للمؤثرات الصوتية والضوضاء المحيطة والحوار.
+يلتقط النموذج الفروق الدقيقة في هذه الإشارات لإنشاء مقطع صوتي متزامن.
 
-- **Dialogo**:utilizza le virgolette per un discorso specifico. (Esempio: "Questa deve essere la
-  chiave", sussurrò.)
-- **Effetti sonori (SFX):** descrivi esplicitamente i suoni. (Esempio: pneumatici
-  che stridono forte, motore che romba.)
-- **Rumore ambientale:** descrivi il paesaggio sonoro dell'ambiente. (Esempio: un leggero,
-  inquietante ronzio risuona in sottofondo.)
+- **الحوار:** استخدِم علامات الاقتباس للإشارة إلى كلام محدّد. (مثال: "يجب أن يكون هذا هو المفتاح"، همس).
+- **المؤثرات الصوتية:** يجب وصف الأصوات بوضوح. (مثال: إطارات
+  تصرخ بصوت عالٍ، محرك يزمجر.)
+- **الضوضاء المحيطة:** وصف المشهد الصوتي للبيئة (مثال: يتردد صدى همهمة خافتة ومخيفة في الخلفية.)
 
-Questi video mostrano come richiedere la generazione di audio di Veo 3 con livelli di dettaglio crescenti.
+تعرض هذه الفيديوهات كيفية تقديم طلبات إلى Veo 3 لإنشاء محتوى صوتي بمستويات تفصيلية متزايدة.
 
-| **Prompt** | **Output generato** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| **Più dettagli (dialoghi e atmosfera)** Un'inquadratura ampia di una foresta nebbiosa del Pacifico nord-occidentale. Due escursionisti esausti, un uomo e una donna, si fanno strada tra le felci quando l'uomo si ferma bruscamente, fissando un albero. Primo piano: segni di artigli freschi e profondi sono incisi nella corteccia dell'albero. Uomo: (con la mano sul coltello da caccia) "Questo non è un orso normale". Donna: (voce tesa per la paura, scrutando il bosco) "Allora cos'è?" Una corteccia ruvida, rami che si spezzano, passi sulla terra umida. Un uccello solitario cinguetta. | Due persone nel bosco trovano tracce di un orso. |
-| **Meno dettagli (dialoghi)** Animazione con ritagli di carta. Nuovo bibliotecario: "Dove tenete i libri proibiti?" Vecchio curatore: "Non lo facciamo. Ci tengono." | Bibliotecari animati che discutono di libri proibiti |
+| **مزيد من التفاصيل (الحوار والأجواء)** لقطة واسعة لغابة ضبابية في شمال غرب المحيط الهادئ يواصل رجل وامرأة، وهما متعبان، السير بين نباتات السرخس، ثم يتوقف الرجل فجأة وينظر إلى شجرة. لقطة مقرّبة: تظهر علامات مخالب عميقة وطازجة على لحاء الشجرة. الرجل: (يضع يده على سكين الصيد) "هذا ليس دبًا عاديًا". المرأة: (صوتها يرتجف خوفًا، وتنظر إلى الغابة) "إذًا ما هذا؟" لحاء خشن، وأغصان متكسّرة، وخطوات على الأرض الرطبة تغرّد طائر وحيد. | شخصان في الغابة يصادفان آثارًا لدب |
+| **تفاصيل أقل (حوار)** رسوم متحركة بتأثير الورق المقصوص أمين مكتبة جديد: "أين تحتفظون بالكتب المحظورة؟" المنظّم السابق: "لا، لا نفعل ذلك. إنّها تحتفظ بها". | أمينتا مكتبة كرتونيتان تناقشان الكتب المحظورة |
 
-Prova questi prompt per ascoltare l'audio.
-[Prova Veo](https://deepmind.google/models/veo/?hl=it)
+جرِّب هذه الطلبات بنفسك للاستماع إلى الصوت.
+[تجربة Veo](https://deepmind.google/models/veo/?hl=ar)
 
-### Prompt con immagini di riferimento
+### توجيه الطلبات باستخدام الصور المرجعية
 
-Puoi utilizzare una o più immagini come input per guidare i video generati, utilizzando
-le funzionalità di [conversione da immagine a video](https://ai.google.dev/gemini-api/docs/video?hl=it#generate-from-images) di
-Veo. Veo utilizza l'immagine di input come frame iniziale. Seleziona un'immagine
-che si avvicini di più a quella che immagini come prima scena del tuo video per animare
-oggetti di uso quotidiano, dare vita a disegni e dipinti e aggiungere movimento e
-suono a scene naturali.
+يمكنك استخدام صورة واحدة أو أكثر كمدخلات لتوجيه الفيديوهات التي يتم إنشاؤها، وذلك باستخدام إمكانات [تحويل الصور إلى فيديوهات](https://ai.google.dev/gemini-api/docs/video?hl=ar#generate-from-images) في Veo. تستخدم أداة Veo الصورة المُدخَلة كإطار أولي. اختَر صورة
+قريبة من المشهد الأول الذي تتخيّله لفيديوك، ثم حرِّك
+الأغراض اليومية، واجعل الرسومات واللوحات الفنية تنبض بالحياة، وأضِف الحركة
+والصوت إلى مشاهد الطبيعة.
 
-| **Prompt** | **Output generato** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| **Immagine di input (generata da Nano Banana)** Una macrofotografia iperrealistica di piccoli surfisti in miniatura che cavalcano le onde dell'oceano all'interno di un lavandino rustico in pietra. Un rubinetto in ottone vintage è aperto e crea l'onda perpetua. Illuminazione naturale surreale, stravagante e intensa. | Piccoli surfisti in miniatura che cavalcano le onde dell&#39;oceano all&#39;interno di un lavandino rustico in pietra. |
-| **Video di output (generato da Veo 3.1)** Un video macro surreale e cinematografico. Piccoli surfisti cavalcano onde perpetue e rotolanti all'interno di un lavandino in pietra. Un rubinetto in ottone vintage aperto genera onde infinite. La videocamera si sposta lentamente sulla scena stravagante e illuminata dal sole mentre le figure in miniatura solcano abilmente l'acqua turchese. | Piccoli surfisti che cavalcano le onde nel lavandino di un bagno. |
+| **الصورة المصدر (من إنشاء Nano Banana)** صورة ماكرو فائقة الواقعية لراكبي أمواج صغار جدًا يركبون أمواج المحيط داخل حوض حمام حجري ريفي. صنبور نحاسي قديم يتدفق منه الماء، ما يؤدي إلى تكوّن أمواج دائمة. صورة سريالية غريبة الأطوار بإضاءة طبيعية ساطعة | راكبو أمواج مصغّرون يركبون أمواج المحيط داخل حوض حمّام حجري ريفي |
+| **فيديو الناتج (من إنشاء Veo 3.1)** فيديو سينمائي كلّي بجودة عالية يركب راكبو الأمواج الصغار أمواجًا متواصلة ومتدفقة داخل حوض حمام حجري. تنتج الأمواج المتواصلة عن صنبور نحاسي قديم مفتوح. تتحرّك الكاميرا ببطء عبر المشهد الغريب والمضاء بنور الشمس بينما تنحت المجسّمات الصغيرة المياه الفيروزية بمهارة. | متزلجون على الأمواج صغار الحجم يلتفون حول الأمواج في حوض حمام |
 
-Veo 3.1 ti consente di [fare riferimento a immagini](https://ai.google.dev/gemini-api/docs/video?hl=it#reference-images) o
-ingredienti per indirizzare i contenuti del video
-generato. Fornisci fino a tre immagini di asset di una singola persona, personaggio
-o prodotto. Veo mantiene l'aspetto del soggetto nel video di output.
+تتيح لك أداة Veo 3.1 [الاستناد إلى صور مرجعية](https://ai.google.dev/gemini-api/docs/video?hl=ar#reference-images) أو مكوّنات لتوجيه محتوى الفيديو الذي تنشئه. قدِّم ما يصل إلى ثلاث صور أصول لشخص واحد أو شخصية واحدة أو منتج واحد. تحافظ أداة Veo على مظهر الشخص في الفيديو الناتج.
 
-| **Prompt** | **Output generato** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| **Immagine di riferimento (generata da Nano Banana)** Una rana pescatrice di acque profonde si nasconde nell'acqua buia e profonda, con i denti scoperti e l'esca luminosa. | Un pesce abissale scuro e luminoso |
-| **Immagine di riferimento (generata da Nano Banana)** Un costume da principessa rosa per bambini completo di bacchetta e tiara, su uno sfondo semplice del prodotto. | Un costume da principessa rosa per bambini |
-| **Video di output (generato da Veo 3.1)** Crea una versione a cartoni animati buffa del pesce che indossa il costume, nuota e agita la bacchetta. | Un pesce abissale che indossa un costume da principessa |
+| **الصورة المرجعية (من إنشاء Nano Banana)** سمكة أبو الشص في المياه العميقة المظلمة، وأسنانها مكشوفة والطعم متوهّج. | سمكة أبو الشصّ الداكنة والمضيئة |
+| **الصورة المرجعية (تم إنشاؤها باستخدام Nano Banana)** زي أميرة باللون الوردي للأطفال مزوّد بعصا سحرية وتاج، مع خلفية منتج عادية | زي أميرة وردي للأطفال |
+| **فيديو الناتج (تم إنشاؤه بواسطة Veo 3.1)** أنشئ نسخة كرتونية مضحكة من السمكة وهي ترتدي الزي وتسبح وتلوّح بالعصا السحرية. | سمكة أبو الشص ترتدي زي أميرة |
 
-Con Veo 3.1 puoi anche generare video specificando il [primo e l'ultimo
-fotogramma](https://ai.google.dev/gemini-api/docs/video?hl=it#using-first-and-last-video-frames) del video.
+باستخدام Veo 3.1، يمكنك أيضًا إنشاء فيديوهات من خلال تحديد [الإطارَين الأول والأخير](https://ai.google.dev/gemini-api/docs/video?hl=ar#using-first-and-last-video-frames) للفيديو.
 
-| **Prompt** | **Output generato** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| **Prima immagine (generata da Nano Banana)** Un'immagine frontale fotorealistica di alta qualità di un gatto rosso che guida un'auto da corsa cabriolet rossa sulla costa della riviera francese. | Un gatto rosso alla guida di un&#39;auto da corsa cabriolet rossa |
-| **Ultima immagine (generata da Nano Banana)** Mostra cosa succede quando l'auto decolla da una scogliera. | Un gatto rosso alla guida di una decappottabile rossa cade da una scogliera |
-| **Video di output (generato da Veo 3.1)** Facoltativo | Un gatto si lancia da una scogliera e decolla |
+| **الصورة الأولى (تم إنشاؤها باستخدام Nano Banana)** صورة أمامية واقعية عالية الجودة لقطة زنجبيلية تقود سيارة سباق حمراء مكشوفة على ساحل الريفييرا الفرنسية | هرّ زنجبيلي يقود سيارة سباق حمراء مكشوفة |
+| **آخر صورة (تم إنشاؤها بواسطة Nano Banana)** عرض ما يحدث عندما تنطلق السيارة من منحدر | قطة زنجبيلية تقود سيارة حمراء مكشوفة وتسقط من منحدر |
+| **الفيديو الناتج (الذي أنشأته Veo 3.1)** اختياري | قطة تقود سيارة وتسقط من منحدر ثم تطير |
 
-Questa funzionalità ti offre un controllo preciso sulla composizione della ripresa, consentendoti di definire il fotogramma iniziale e finale. Carica un'immagine o utilizza un frame di una
-generazione di video precedente per assicurarti che la scena inizi e si concluda esattamente
-come l'hai immaginata.
+تمنحك هذه الميزة تحكّمًا دقيقًا في تركيبة اللقطة من خلال السماح لك بتحديد إطارَي البداية والنهاية. حمِّل صورة أو استخدِم إطارًا من فيديو تم إنشاؤه سابقًا للتأكّد من أنّ المشهد يبدأ وينتهي تمامًا كما تتخيّله.
 
-### Richiesta di estensione
+### الطلب من الإضافة
 
-Per [estendere](https://ai.google.dev/gemini-api/docs/video?hl=it#extending_veo_videos) il video generato da Veo con Veo 3.1 (non disponibile per Veo 3.1 Lite), utilizza il video come input insieme a un prompt di testo facoltativo. Estendi finalizza l'ultimo secondo o i 24
-fotogrammi del video e continua l'azione.
+[لتمديد](https://ai.google.dev/gemini-api/docs/video?hl=ar#extending_veo_videos) الفيديو الذي أنشأته باستخدام Veo من خلال Veo 3.1 (غير متاح في Veo 3.1 Lite)، استخدِم الفيديو كمدخل مع طلب نصي اختياري. يُنهي خيار "تمديد الفيديو" الثانية الأخيرة أو 24 لقطة من الفيديو ويواصل تصوير المَشهد.
 
-Tieni presente che la voce non può essere estesa in modo efficace se non è presente
-nell'ultimo secondo del video.
+يُرجى العِلم أنّه لا يمكن تمديد مدة ظهور الصوت بشكل فعال إذا لم يكن متوفّرًا في آخر ثانية من الفيديو.
 
-| **Prompt** | **Output generato** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| **Video di input (generato da Veo 3.1)** Il parapendio decolla dalla cima della montagna e inizia a planare sulle montagne che si affacciano sulle valli sottostanti ricoperte di fiori. | Un parapendio decolla dalla cima di una montagna |
-| **Output video (generato da Veo 3.1)** Estendi questo video con il parapendio che scende lentamente. | Un parapendio decolla dalla cima di una montagna, poi scende lentamente |
+| **الفيديو المصدر (من إنشاء Veo 3.1)** يقلع المظلّي من أعلى الجبل ويبدأ بالتحليق فوق الجبال المطلة على الوديان المغطاة بالزهور أدناه. | طائرة شراعية تقلع من أعلى جبل |
+| **فيديو الناتج (من إنشاء Veo 3.1)** أريد فيديو أطول يظهر فيه الشخص وهو يهبط ببطء بالمظلة الشراعية. | شخص يطير بمظلة شراعية من أعلى جبل ثم ينزل ببطء |
 
-### Prompt e output di esempio
+### أمثلة على الطلبات والنتائج
 
-Questa sezione presenta diversi prompt, evidenziando come i dettagli descrittivi possano
-migliorare il risultato di ogni video.
+يعرض هذا القسم عدة طلبات، مع تسليط الضوء على كيف يمكن للتفاصيل الوصفية أن تحسّن نتيجة كل فيديو.
 
-#### Ghiaccioli
+#### دلالة جليدية
 
-Questo video mostra come utilizzare gli elementi delle
-[basi per la scrittura dei prompt](#basics) nel prompt.
+يوضّح هذا الفيديو كيف يمكنك استخدام عناصر
+[أساسيات كتابة الطلبات](#basics) في طلبك.
 
-| **Prompt** | **Output generato** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| Scatto ravvicinato (composizione) di stalattiti che si sciolgono (soggetto) su una parete rocciosa congelata (contesto) con tonalità fredde di blu (atmosfera), con zoom (movimento della videocamera) che mantiene i dettagli ravvicinati delle gocce d'acqua (azione). | Stalattiti che gocciolano su uno sfondo blu. |
+| لقطة مقرّبة (تركيب) لكتل جليدية ذائبة (الموضوع) على جدار صخري متجمّد (السياق) بألوان زرقاء باردة (الأجواء)، مع تكبير الصورة (حركة الكاميرا) والحفاظ على تفاصيل قطرات الماء المقرّبة (الحركة). | كتل جليدية تذوب على خلفية زرقاء |
 
-#### Uomo al telefono
+#### رجل يتحدث على الهاتف
 
-Questi video mostrano come rivedere il prompt con dettagli sempre più specifici per fare in modo che Veo perfezioni l'output in base alle tue preferenze.
+توضّح هذه الفيديوهات كيف يمكنك تعديل طلبك بإضافة المزيد من التفاصيل المحدّدة لكي تحسّن أداة Veo الناتج بما يتوافق مع تفضيلاتك.
 
-| **Prompt** | **Output generato** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| **Meno dettagli** La videocamera si sposta per mostrare il primo piano di un uomo disperato che indossa un impermeabile verde. Sta effettuando una chiamata con un telefono a muro in stile rotativo con una luce verde al neon. Sembra una scena di un film. | Uomo che parla al telefono. |
-| **Maggiori dettagli** Un primo piano cinematografico segue un uomo disperato con un cappotto verde consunto mentre compone un numero su un telefono a disco montato su un muro di mattoni sporco, immerso nel bagliore inquietante di un'insegna al neon verde. La videocamera si avvicina, rivelando la tensione nella mascella e la disperazione incisa sul suo volto mentre fatica a effettuare la chiamata. La profondità di campo ridotta si concentra sulla sua fronte corrugata e sul telefono nero con tasti rotanti, sfocando lo sfondo in un mare di colori al neon e ombre indistinte, creando un senso di urgenza e isolamento. | Uomo che parla al telefono |
+| **تفاصيل أقل** تتحرك الكاميرا على دولاب لتُظهر لقطة عن قرب لرجل يائس يرتدي معطفًا أخضر. يُجري مكالمة على هاتف مثبت على الحائط بقرص دوار مع ضوء نيون أخضر. يبدو وكأنه مشهد من فيلم. | رجل يتحدث على الهاتف |
+| **مزيد من التفاصيل** لقطة سينمائية مقرّبة تظهر فيها صورة رجل يائس يرتدي معطفًا أخضر قديمًا وهو يتصل بهاتف بقرص دوار مثبّت على جدار من الطوب الخشن، وتظهر إضاءة نيون خضراء مخيفة. تتحرك الكاميرا إلى الأمام، وتكشف عن التوتر في فكّه واليأس الذي يظهر على وجهه وهو يحاول إجراء المكالمة. تُركّز زاوية التقاط الصورة القريبة على جبينه المقطّب وهاتفه الأسود ذي القرص الدوّار، مع تمويه الخلفية لتظهر كبحر من ألوان النيون والظلال غير الواضحة، ما يخلق إحساسًا بالاستعجال والعزلة. | رجل يتحدث على الهاتف |
 
-#### Leopardo delle nevi
+#### نمر الثلج
 
-| **Prompt** | **Output generato** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| **Prompt semplice:** Una creatura carina con pelliccia simile a quella di un leopardo delle nevi cammina in una foresta invernale, rendering in stile cartone animato 3D. | Il leopardo delle nevi è letargico. |
-| **Prompt dettagliato:** crea una breve scena animata in 3D in uno stile cartone animato gioioso. Una simpatica creatura con pelliccia simile a quella del leopardo delle nevi, grandi occhi espressivi e una forma amichevole e arrotondata che trotterella felice in una foresta invernale fantastica. La scena dovrebbe mostrare alberi arrotondati e innevati, fiocchi di neve che cadono delicatamente e una calda luce solare che filtra tra i rami. I movimenti rimbalzanti della creatura e il suo ampio sorriso devono trasmettere pura gioia. Punta a un tono allegro e commovente con colori vivaci e allegri e animazioni giocose. | Il leopardo delle nevi sta correndo più velocemente. |
+| **طلب بسيط:** مخلوق لطيف بفرو يشبه فراء النمر الثلجي يمشي في غابة شتوية، صورة بنمط الرسوم المتحركة الثلاثية الأبعاد. | نمر الثلج خامل. |
+| **طلب مفصّل:** أنشئ مشهدًا قصيرًا ثلاثي الأبعاد بأسلوب الرسوم المتحركة المبهج. مخلوق لطيف ذو فرو يشبه فراء النمر الثلجي وعينَين كبيرتَين معبرتَين وشكل ودود مستدير يرقص بسعادة في غابة شتوية غريبة الأطوار. يجب أن يتضمّن المشهد أشجارًا مستديرة مغطاة بالثلوج، ورقاقات ثلج تتساقط برفق، وأشعة الشمس الدافئة تتخلّل الأغصان. يجب أن تعكس حركات المخلوق المفعمة بالحيوية وابتسامته العريضة شعورًا بالبهجة المطلقة. استخدِم أسلوبًا إيجابيًا ومؤثرًا مع ألوان زاهية ومبهجة ورسومات متحركة مرحة. | النمر الثلجي يركض بسرعة أكبر. |
 
-### Esempi per elementi di scrittura
+### أمثلة حسب عناصر الكتابة
 
-Questi esempi mostrano come perfezionare i prompt in base a ogni elemento di base.
+توضّح لك هذه الأمثلة كيفية تحسين طلباتك باستخدام كل عنصر أساسي.
 
-#### Oggetto e contesto
+#### الموضوع والسياق
 
-Specifica il soggetto principale e lo sfondo o l'ambiente (contesto).
+حدِّد محور التركيز الرئيسي (الموضوع) والخلفية أو البيئة (السياق).
 
-| **Prompt** | **Output generato** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| Rendering architettonico di un condominio in cemento bianco con forme organiche fluide, che si fondono perfettamente con la vegetazione lussureggiante ed elementi futuristici | Segnaposto. |
-| Un satellite che fluttua nello spazio con la luna e alcune stelle sullo sfondo. | Satellite che fluttua nell&#39;atmosfera. |
+| تصميم معماري لمبنى سكني أبيض من الخرسانة يتضمّن أشكالًا عضوية متدفّقة تمتزج بسلاسة مع المساحات الخضراء المورقة والعناصر المستقبلية | عنصر نائب |
+| قمر صناعي يطفو في الفضاء الخارجي مع القمر وبعض النجوم في الخلفية | قمر صناعي يطفو في الغلاف الجوي |
 
-#### Azione
+#### الإجراء
 
-Specifica cosa sta facendo il soggetto (ad es. cammina, corre o gira la
-testa).
+حدِّد النشاط الذي يؤديه الشخص/العنصر محور التركيز (مثل المشي أو الجري أو تحريك الرأس).
 
-| **Prompt** | **Output generato** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| Un'inquadratura ampia di una donna che cammina lungo la spiaggia, con un'espressione felice e rilassata mentre guarda l'orizzonte al tramonto. | Il tramonto è assolutamente meraviglioso. |
+| لقطة واسعة لامرأة تمشي على طول الشاطئ، تبدو سعيدة ومرتاحة وهي تنظر إلى الأفق عند غروب الشمس | منظر الغروب جميل للغاية. |
 
-#### Stile
+#### النمط
 
-Aggiungi parole chiave per indirizzare la generazione verso un'estetica specifica (ad es. surreale,
-vintage, futuristico, film noir).
+أضِف كلمات رئيسية لتوجيه عملية الإنشاء نحو شكل جمالي معيّن (مثل السريالية أو الطراز القديم أو المستقبلية أو أفلام الجريمة).
 
-| **Prompt** | **Output generato** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| Stile noir, uomo e donna camminano per strada, mistero, cinematografico, bianco e nero. | Lo stile noir è assolutamente meraviglioso. |
+| أسلوب أفلام النوار، رجل وامرأة يسيران في الشارع، غموض، سينمائي، بالأبيض والأسود | أسلوب أفلام النوار جميل للغاية. |
 
-#### Movimento e composizione della videocamera
+#### حركة الكاميرا والتركيب
 
-Specifica come si muove la videocamera (soggettiva, ripresa aerea, ripresa a seguire con drone) e
-come viene inquadrata la ripresa (campo lungo, primo piano, inquadratura dal basso).
+حدِّد طريقة تحرّك الكاميرا (لقطة من وجهة نظر الشخص، تصوير جوّي، لقطة من طائرة بدون طيار تتبع الهدف) وطريقة ضبط الإطار (لقطة واسعة، لقطة مقرَّبة، زاوية منخفضة).
 
-| **Prompt** | **Output generato** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| Scatto POV da un'auto d'epoca che guida sotto la pioggia, Canada di notte, cinematografico. | Il tramonto è assolutamente meraviglioso. |
-| Primissimo piano di un occhio con il riflesso della città. | Il tramonto è assolutamente meraviglioso. |
+| لقطة من وجهة نظر شخصية من سيارة قديمة تقود في المطر، كندا في الليل، سينمائية | منظر الغروب جميل للغاية. |
+| لقطة مقرّبة جدًا لعين تنعكس فيها المدينة | منظر الغروب جميل للغاية. |
 
-#### Atmosfera
+#### الأجواء
 
-Le tavolozze di colori e l'illuminazione influenzano l'atmosfera. Prova con termini come "arancione tenue
-toni caldi", "luce naturale", "alba" o "toni freddi del blu".
+تؤثر لوحات الألوان والإضاءة في الحالة المزاجية. جرِّب عبارات مثل "ألوان برتقالية هادئة
+بدرجات دافئة" أو "ضوء طبيعي" أو "شروق الشمس" أو "درجات زرقاء باردة".
 
-| **Prompt** | **Output generato** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| Primo piano di una ragazza che tiene in braccio un adorabile cucciolo di golden retriever al parco, luce solare. | Un cucciolo tra le braccia di una bambina. |
-| Primo piano cinematografico di una donna triste che viaggia in autobus sotto la pioggia, toni freddi del blu, atmosfera triste. | Una donna su un autobus che si sente triste. |
+| لقطة مقرّبة لفتاة تحمل جروًا لطيفًا من سلالة غولدن ريتريفر في الحديقة، مع ضوء الشمس | جرو بين ذراعي فتاة صغيرة |
+| لقطة سينمائية مقرّبة لامرأة حزينة تركب حافلة تحت المطر، مع درجات اللون الأزرق الباردة، وأجواء حزينة | امرأة تركب حافلة وتشعر بالحزن |
 
-### Proporzioni
+### نِسب العرض إلى الارتفاع
 
-Veo ti consente di specificare le proporzioni del video.
+تتيح لك أداة Veo تحديد نسبة العرض إلى الارتفاع للفيديو.
 
-| **Prompt** | **Output generato** |
+| **الطلب** | **المخرجات المولَّدة** |
 | --- | --- |
-| **Widescreen (16:9)** Crea un video con una vista da drone che segue un uomo alla guida di un'auto cabriolet rossa a Palm Springs negli anni '70, con luce solare calda e ombre lunghe. | Un uomo alla guida di un&#39;auto cabriolet rossa a Palm Springs, in stile anni &#39;70. |
-| **Verticale (9:16)** Crea un video che metta in evidenza il movimento fluido di una maestosa cascata hawaiana all'interno di una lussureggiante foresta pluviale. Concentrati sul flusso d'acqua realistico, sul fogliame dettagliato e sull'illuminazione naturale per trasmettere tranquillità. Cattura l'acqua impetuosa, l'atmosfera nebbiosa e la luce del sole che filtra attraverso la fitta chioma degli alberi. Utilizza movimenti della videocamera fluidi e cinematografici per mostrare la cascata e l'ambiente circostante. Punta a un tono tranquillo e realistico, trasportando lo spettatore nella serena bellezza della foresta pluviale hawaiana. | Una maestosa cascata hawaiana in una lussureggiante foresta pluviale. |
+| **شاشة عريضة (16:9)** أنشئ فيديو يظهر فيه رجل يقود سيارة حمراء مكشوفة في بالم سبرينغز في السبعينيات، مع لقطة من طائرة بدون طيار، وأشعة الشمس الدافئة، وظلال طويلة. | رجل يقود سيارة حمراء مكشوفة في بالم سبرينغز، بأسلوب السبعينيات |
+| **الوضع العمودي (9:16)** أنشئ فيديو يسلّط الضوء على الحركة السلسة لشلال هاواي المهيب داخل غابة مطيرة مورقة. ركِّز على تدفّق المياه الواقعي وأوراق الشجر المفصّلة والإضاءة الطبيعية لنقل إحساس بالهدوء. التقط صورًا للمياه المتدفقة والأجواء الضبابية وأشعة الشمس المتخلّلة لأوراق الشجر الكثيفة. استخدِم حركات كاميرا سينمائية سلسة لعرض الشلال والمناطق المحيطة به. احرص على استخدام أسلوب هادئ وواقعي ينقل المشاهد إلى الجمال الهادئ للغابة المطيرة في هاواي. | شلال مهيب في هاواي يقع في غابة مطيرة كثيفة |
 
-## Versioni modello
+## إصدارات النماذج
 
-Per ulteriori dettagli sull'utilizzo specifico dei modelli Veo, consulta la pagina [Prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it#veo-3.1) e [Limiti di frequenza](https://aistudio.google.com/rate-limit?hl=it).
+يمكنك الاطّلاع على صفحة [الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#veo-3.1) و[حدود المعدّل](https://aistudio.google.com/rate-limit?hl=ar) للحصول على مزيد من التفاصيل حول استخدام نموذج Veo.
 
-### Anteprima di Veo 3.1
+### ‫Veo 3.1 Preview
 
-| Proprietà | Descrizione |
+| الموقع | الوصف |
 | --- | --- |
-| Codice modello id\_card | **API Gemini**  `veo-3.1-generate-preview` |
-| saveTipi di dati supportati | **Ingresso**  Testo, immagine  **Output**  Video con audio |
-| Limiti di token\_auto | **Inserimento di testo**  1024 token  **Output video**  1 |
-| calendar\_monthUltimo aggiornamento | Gennaio 2026 |
+| id\_cardرمز النموذج | **Gemini API**  `veo-3.1-generate-preview` |
+| saveأنواع البيانات المتوافقة | **الإدخال**  نص، صورة  **الناتج**  فيديو مع صوت |
+| token\_autoالحدود | **إدخال النص**  ‫1,024 رمزًا مميّزًا  **فيديو الناتج**  1 |
+| calendar\_monthآخر تعديل | يناير 2026 |
 
-### Anteprima di Veo 3.1 Fast
+### Veo 3.1 Fast Preview
 
-| Proprietà | Descrizione |
+| الموقع | الوصف |
 | --- | --- |
-| Codice modello id\_card | **API Gemini**  `veo-3.1-fast-generate-preview` |
-| saveTipi di dati supportati | **Ingresso**  Testo, immagine  **Output**  Video con audio |
-| Limiti di token\_auto | **Inserimento di testo**  1024 token  **Output video**  1 |
-| calendar\_monthUltimo aggiornamento | Gennaio 2026 |
+| id\_cardرمز النموذج | **Gemini API**  `veo-3.1-fast-generate-preview` |
+| saveأنواع البيانات المتوافقة | **الإدخال**  نص، صورة  **الناتج**  فيديو مع صوت |
+| token\_autoالحدود | **إدخال النص**  ‫1,024 رمزًا مميّزًا  **فيديو الناتج**  1 |
+| calendar\_monthآخر تعديل | يناير 2026 |
 
-### Anteprima di Veo 3.1 Lite
+### Veo 3.1 Lite Preview
 
-| Proprietà | Descrizione |
+| الموقع | الوصف |
 | --- | --- |
-| Codice modello id\_card | **API Gemini**  `veo-3.1-lite-generate-preview` |
-| saveTipi di dati supportati | **Ingresso**  Testo, immagine  **Output**  Video con audio |
-| Limiti di token\_auto | **Inserimento di testo**  1024 token  **Output video**  1 |
-| calendar\_monthUltimo aggiornamento | Marzo 2026 |
+| id\_cardرمز النموذج | **Gemini API**  `veo-3.1-lite-generate-preview` |
+| saveأنواع البيانات المتوافقة | **الإدخال**  نص وصورة  **الناتج**  فيديو مع صوت |
+| token\_autoالحدود | **إدخال النص**  ‫1,024 رمزًا مميّزًا  **فيديو الناتج**  1 |
+| calendar\_monthآخر تعديل | مارس 2026 |
 
 ### Veo 3
 
-| Proprietà | Descrizione |
+| الموقع | الوصف |
 | --- | --- |
-| Codice modello id\_card | **API Gemini**  `veo-3.0-generate-001` |
-| saveTipi di dati supportati | **Ingresso**  Testo, immagine  **Output**  Video con audio |
-| Limiti di token\_auto | **Inserimento di testo**  1024 token  **Output video**  1 |
-| calendar\_monthUltimo aggiornamento | Luglio 2025 |
+| id\_cardرمز النموذج | **Gemini API**  `veo-3.0-generate-001` |
+| saveأنواع البيانات المتوافقة | **الإدخال**  نص، صورة  **الناتج**  فيديو مع صوت |
+| token\_autoالحدود | **إدخال النص**  ‫1,024 رمزًا مميّزًا  **فيديو الناتج**  1 |
+| calendar\_monthآخر تعديل | يوليو 2025 |
 
 ### Veo 3 Fast
 
-| Proprietà | Descrizione |
+| الموقع | الوصف |
 | --- | --- |
-| Codice modello id\_card | **API Gemini**  `veo-3.0-fast-generate-001` |
-| saveTipi di dati supportati | **Ingresso**  Testo, immagine  **Output**  Video con audio |
-| Limiti di token\_auto | **Inserimento di testo**  1024 token  **Output video**  1 |
-| calendar\_monthUltimo aggiornamento | Luglio 2025 |
+| id\_cardرمز النموذج | **Gemini API**  `veo-3.0-fast-generate-001` |
+| saveأنواع البيانات المتوافقة | **الإدخال**  نص، صورة  **الناتج**  فيديو مع صوت |
+| token\_autoالحدود | **إدخال النص**  ‫1,024 رمزًا مميّزًا  **فيديو الناتج**  1 |
+| calendar\_monthآخر تعديل | يوليو 2025 |
 
 ### Veo 2
 
-| Proprietà | Descrizione |
+| الموقع | الوصف |
 | --- | --- |
-| Codice modello id\_card | **API Gemini**  `veo-2.0-generate-001` |
-| saveTipi di dati supportati | **Ingresso**  Testo, immagine  **Output**  Video |
-| Limiti di token\_auto | **Inserimento di testo**  N/D  **Input immagine**  Qualsiasi risoluzione e proporzione dell'immagine fino a una dimensione del file di 20 MB  **Output video**  Fino a 2 |
-| calendar\_monthUltimo aggiornamento | Aprile 2025 |
+| id\_cardرمز النموذج | **Gemini API**  `veo-2.0-generate-001` |
+| saveأنواع البيانات المتوافقة | **الإدخال**  نص وصورة  **الناتج**  فيديو |
+| token\_autoالحدود | **إدخال النص**  لا ينطبق  **إدخال الصورة**  أي درجة دقة ونسبة عرض إلى ارتفاع للصورة بحجم ملف يصل إلى 20 ميغابايت  **فيديو الناتج**  ما يصل إلى 2 |
+| calendar\_monthآخر تعديل | أبريل 2025 |
 
 ### Veo 2
 
-| Proprietà | Descrizione |
+| الموقع | الوصف |
 | --- | --- |
-| Codice modello id\_card | **API Gemini**  `veo-2.0-generate-001` |
-| saveTipi di dati supportati | **Ingresso**  Testo, immagine  **Output**  Video |
-| Limiti di token\_auto | **Inserimento di testo**  N/D  **Input immagine**  Qualsiasi risoluzione e proporzione dell'immagine fino a una dimensione del file di 20 MB  **Output video**  Fino a 2 |
-| calendar\_monthUltimo aggiornamento | Aprile 2025 |
+| id\_cardرمز النموذج | **Gemini API**  `veo-2.0-generate-001` |
+| saveأنواع البيانات المتوافقة | **الإدخال**  نص وصورة  **الناتج**  فيديو |
+| token\_autoالحدود | **إدخال النص**  لا ينطبق  **إدخال الصورة**  أي درجة دقة ونسبة عرض إلى ارتفاع للصورة بحجم ملف يصل إلى 20 ميغابايت  **فيديو الناتج**  ما يصل إلى 2 |
+| calendar\_monthآخر تعديل | أبريل 2025 |
 
-Le versioni di Veo Fast consentono agli sviluppatori di creare video con audio mantenendo
-un'alta qualità e ottimizzando la velocità e i casi d'uso aziendali. Sono ideali per i servizi di backend che generano annunci in modo programmatico, per gli strumenti di test A/B rapidi dei concetti creativi o per le app che devono produrre rapidamente contenuti per i social media.
+تتيح إصدارات Veo Fast للمطوّرين إنشاء فيديوهات مع صوت مع الحفاظ على جودة عالية وتحسين السرعة وحالات الاستخدام التجاري. وهي مثالية لخدمات الخلفية التي تنشئ الإعلانات آليًا، أو الأدوات التي تتيح إجراء اختبارات A/B بسرعة للمفاهيم الإبداعية، أو التطبيقات التي تحتاج إلى إنشاء محتوى بسرعة على وسائل التواصل الاجتماعي.
 
-## Passaggi successivi
+## الخطوات التالية
 
-- Inizia a utilizzare l'API Veo 3.1 sperimentando in [Veo Quickstart Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Veo.ipynb?hl=it)
-  e nell'[applet Veo 3.1](https://aistudio.google.com/apps/bundled/veo_studio?hl=it).
-- Scopri come scrivere prompt ancora migliori con la nostra [Introduzione alla progettazione dei prompt](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=it).
+- يمكنك البدء باستخدام واجهة برمجة التطبيقات Veo 3.1 من خلال تجربة [Veo Quickstart Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Veo.ipynb?hl=ar)
+  و[تطبيق Veo 3.1 الصغير](https://aistudio.google.com/apps/bundled/veo_studio?hl=ar).
+- تعرَّف على كيفية كتابة طلبات أفضل من خلال [مقدمة حول تصميم الطلبات](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=ar).
 
-Invia feedback
+إرسال ملاحظات
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Ultimo aggiornamento 2026-04-29 UTC.
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-Vuoi dirci altro?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

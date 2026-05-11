@@ -1,93 +1,92 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=zh-CN
-fetched_at: 2026-05-05T20:47:05.726948+00:00
-title: "\u65e5\u5fd7\u548c\u6570\u636e\u96c6 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=hi
+fetched_at: 2026-05-11T05:08:36.246616+00:00
+title: "\u0932\u0949\u0917 \u0914\u0930 \u0921\u0947\u091f\u093e\u0938\u0947\u091f \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
+[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-发送反馈
+सुझाव भेजें
 
-# 日志和数据集
+# लॉग और डेटासेट
 
-本指南包含开始为现有 Gemini API 应用启用日志记录所需的一切信息。在本指南中，您将了解如何在 Google AI Studio
-信息中心内查看现有或新应用的日志，以便更好地了解模型行为以及用户与应用互动的方式。使用日志记录来观察、调试，并 *选择性地与 Google
-分享使用情况反馈，以帮助改进 Gemini 在开发者使用场景中的表现*。[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=zh-cn)
+इस गाइड में, Gemini API के मौजूदा ऐप्लिकेशन के लिए लॉगिंग की सुविधा चालू करने से जुड़ी सभी ज़रूरी जानकारी दी गई है. इस गाइड में, Google AI Studio के डैशबोर्ड में मौजूद किसी मौजूदा या नए ऐप्लिकेशन के लॉग देखने का तरीका बताया गया है. इससे मॉडल के व्यवहार और इस बारे में बेहतर तरीके से समझा जा सकता है कि लोग आपके ऐप्लिकेशन के साथ कैसे इंटरैक्ट कर रहे हैं. *लॉगिंग की सुविधा का इस्तेमाल करके, डेवलपर इस्तेमाल के अलग-अलग मामलों में Gemini को बेहतर बनाने के लिए, Google के साथ इस्तेमाल से जुड़ा सुझाव/राय या शिकायत शेयर कर सकते हैं.इसके अलावा, लॉगिंग की सुविधा का इस्तेमाल करके, ऐप्लिकेशन में मौजूद गड़बड़ियों को ठीक किया जा सकता है और ऐप्लिकेशन के इस्तेमाल के पैटर्न को समझा जा सकता है[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=hi)*
 
-所有 `GenerateContent` 和 `StreamGenerateContent` API 调用（包括通过 [OpenAI 兼容性](https://ai.google.dev/gemini-api/docs/openai?hl=zh-cn)端点进行的调用）均受支持。
+सभी `GenerateContent` और `StreamGenerateContent` एपीआई कॉल काम करते हैं,
+इनमें [OpenAI के साथ काम करने वाले](https://ai.google.dev/gemini-api/docs/openai?hl=hi)
+एंडपॉइंट के ज़रिए किए गए कॉल भी शामिल हैं.
 
-## 1. 在 Google AI Studio 中启用日志记录
+## 1. Google AI Studio में लॉगिंग की सुविधा चालू करना
 
-在开始之前，请确保您拥有一个已启用结算功能的项目。
+शुरू करने से पहले, पक्का करें कि आपके पास बिलिंग की सुविधा वाला कोई प्रोजेक्ट हो.
 
-1. 在 Google [AI Studio](https://aistudio.google.com/logs?hl=zh-cn) 中打开“日志”页面。
-2. 从下拉菜单中选择您的项目，然后按“启用”按钮，即可默认启用所有请求的日志记录。
+1. Google [AI Studio](https://aistudio.google.com/logs?hl=hi) में, लॉग वाला पेज खोलें.
+2. ड्रॉप-डाउन से अपना प्रोजेक्ट चुनें और डिफ़ॉल्ट रूप से सभी अनुरोधों के लिए लॉगिंग की सुविधा चालू करने के लिए, चालू करें बटन दबाएं.
 
-![](https://ai.google.dev/static/gemini-api/docs/images/logs-state.png?hl=zh-cn)
+![](https://ai.google.dev/static/gemini-api/docs/images/logs-state.png?hl=hi)
 
-您可以为所有项目或特定项目启用或停用日志记录，并随时通过 Google AI Studio 更改这些偏好设置。
+सभी प्रोजेक्ट या चुनिंदा प्रोजेक्ट के लिए, लॉगिंग की सुविधा चालू या बंद की जा सकती है. साथ ही, Google AI Studio के ज़रिए, इन सेटिंग में कभी भी बदलाव किया जा सकता है.
 
-## 2. 在 AI Studio 中查看日志
+## 2. AI Studio में लॉग देखना
 
-1. 前往 [AI Studio](https://aistudio.google.com/logs?hl=zh-cn)。
-2. 选择您已启用日志记录的项目。
-3. 您应该会看到日志以反向时间顺序显示在表格中。
+1. [AI Studio](https://aistudio.google.com/logs?hl=hi) पर जाएं.
+2. वह प्रोजेक्ट चुनें जिसके लिए आपने लॉगिंग की सुविधा चालू की है.
+3. आपको टेबल में, समय के हिसाब से उल्टे क्रम में अपने लॉग दिखने चाहिए.
 
 ![](https://storage.googleapis.com/generativeai-downloads/images/nano-banana-logs.gif)
 
-点击条目即可查看请求和响应对的完整页面视图。您可以检查完整提示、Gemini 的全卷答完的回答以及上一轮的上下文。请注意，每个项目的默认存储空间上限为
-1,000 条日志，而未保存在数据集中的日志将在 55 天后过期。如果您的项目达到存储空间上限，系统会提示您删除日志。
+अनुरोध और जवाब के जोड़े को पूरे पेज पर देखने के लिए, किसी एंट्री पर क्लिक करें. पूरा प्रॉम्प्ट, Gemini का पूरा जवाब, और पिछले टर्न का कॉन्टेक्स्ट देखा जा सकता है. ध्यान दें कि हर प्रोजेक्ट के लिए, डिफ़ॉल्ट रूप से 1,000 लॉग सेव करने की सीमा होती है. साथ ही, डेटासेट में सेव न किए गए लॉग, 55 दिनों के बाद मिट जाएंगे. अगर आपका प्रोजेक्ट, सेव करने की सीमा तक पहुंच जाता है, तो आपको लॉग मिटाने के लिए कहा जाएगा.
 
-## 3. 整理和共享数据集
+## 3. डेटासेट तैयार करना और शेयर करना
 
-- 在日志表格中，找到顶部的过滤条件栏，选择要过滤的属性。
-- 在过滤后的日志视图中，使用复选框选择全部或部分日志。
-- 点击列表顶部显示的“创建数据集”按钮。
-- 为新数据集添加描述性名称和说明（可选）。
-- 您将看到刚刚创建的数据集，其中包含整理后的日志集。
-- 将数据集导出为 CSV、JSONL 文件或 Google 表格，以进行进一步分析。
+- लॉग की टेबल में, सबसे ऊपर मौजूद फ़िल्टर बार ढूंढें. इसके बाद, फ़िल्टर करने के लिए कोई प्रॉपर्टी चुनें.
+- लॉग के फ़िल्टर किए गए व्यू में, सभी या कुछ लॉग चुनने के लिए चेकबॉक्स का इस्तेमाल करें.
+- सूची में सबसे ऊपर दिखने वाले, "डेटासेट बनाएं" बटन पर क्लिक करें.
+- अपने नए डेटासेट को जानकारी देने वाला नाम दें. साथ ही, इसके बारे में जानकारी भी दी जा सकती है. हालांकि, यह ज़रूरी नहीं है.
+- आपको बनाया गया डेटासेट, लॉग के तैयार किए गए सेट के साथ दिखेगा.
+- अपने डेटासेट को CSV, JSONL फ़ाइलों के तौर पर या Google Sheets में एक्सपोर्ट करें, ताकि इसका विश्लेषण किया जा सके.
 
 ![](https://storage.googleapis.com/generativeai-downloads/images/sales-dataset.gif)
 
-数据集可用于多种不同的使用场景。
+डेटासेट, अलग-अलग कामों के लिए मददगार साबित हो सकते हैं.
 
-- **整理挑战集**： 推动未来的改进，以解决您希望 AI 改进的领域。
-- **整理样本集**： 例如，从实际使用情况中提取样本，以生成来自其他模型的响应；或者收集边缘情况，以便在部署前进行例行检查。
-- **评估集**： 这些集合代表了重要功能在实际使用中的情况，可用于与其他模型或系统指令迭代进行比较。
+- **चैलेंज सेट तैयार करना:** आने वाले समय में, उन क्षेत्रों में सुधार करें जहां आपको अपने एआई को बेहतर बनाना है.
+- **सैंपल सेट तैयार करना:** उदाहरण के लिए, किसी दूसरे मॉडल से जवाब जनरेट करने के लिए, असल इस्तेमाल का कोई सैंपल या डिप्लॉयमेंट से पहले, रूटीन चेक के लिए कुछ खास मामलों का कलेक्शन.
+- **इवैलुएशन सेट:** ऐसे सेट जो अहम क्षमताओं के लिए, असल इस्तेमाल के पैटर्न को दिखाते हैं. इनका इस्तेमाल, अन्य मॉडल या सिस्टम इंस्ट्रक्शन के अलग-अलग वर्शन की तुलना करने के लिए किया जाता है.
 
-您可以选择将数据集作为演示示例进行分享，从而帮助推动 AI 研究、Gemini API 和 Google AI Studio 的发展。这样，我们就可以在各种背景下改进模型，并创建对许多领域和应用的开发者都有用的 AI 系统
+उदाहरण के तौर पर अपने डेटासेट शेयर करके, एआई रिसर्च, Gemini API, और Google AI Studio में होने वाली प्रोग्रेस में मदद की जा सकती है. इससे हमें अलग-अलग कॉन्टेक्स्ट में अपने मॉडल को बेहतर बनाने और ऐसे एआई सिस्टम बनाने में मदद मिलती है जो कई फ़ील्ड और ऐप्लिकेशन में डेवलपर के लिए काम के साबित होते हैं
 
-## 后续步骤和测试内容
+## अगले चरण और किन चीज़ों की जांच करनी है
 
-现在您已启用日志记录，可以尝试以下操作：
+लॉगिंग की सुविधा चालू करने के बाद, ये काम किए जा सकते हैं:
 
-- **使用会话记录进行原型设计**： 利用 [AI Studio Build](https://aistudio.google.com/apps?hl=zh-cn) 来编写代码应用，并添加 API 密钥以启用用户日志记录。
-- **使用 Gemini Batch API 重新运行日志**： 使用数据集进行响应抽样
-  和模型或应用逻辑评估，方法是通过
-  [Gemini Batch API](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb) 重新运行日志。
+- **सेशन के इतिहास के साथ प्रोटोटाइप बनाना:** कोड वाले ऐप्लिकेशन बनाने के लिए, [AI Studio Build](https://aistudio.google.com/apps?hl=hi) का इस्तेमाल करें. साथ ही, उपयोगकर्ता के लॉग का इतिहास दिखाने के लिए, अपनी एपीआई पासकोड जोड़ें.
+- **Gemini Batch API की मदद से लॉग फिर से चलाना:** Gemini Batch API की मदद से लॉग फिर से चलाकर, जवाब के सैंपल लेने
+  और मॉडल या ऐप्लिकेशन लॉजिक का आकलन करने के लिए, डेटासेट का इस्तेमाल करें
+  .
 
-## 兼容性
+## इनके साथ काम करता है
 
-目前不支持以下内容的日志记录：
+फ़िलहाल, इनके लिए लॉगिंग की सुविधा उपलब्ध नहीं है:
 
-- Imagen 和 Veo 模型
-- Gemini 嵌入模型
-- 包含视频、GIF 或 PDF 的输入
+- Imagen और Veo मॉडल
+- Gemini एम्बेडिंग मॉडल
+- वीडियो, GIF या PDF वाले इनपुट
 
-发送反馈
+सुझाव भेजें
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-最后更新时间 (UTC)：2026-04-29。
+आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया.
 
-需要向我们提供更多信息？
+क्या आपको हमें और कुछ बताना है?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया."],[],[]]

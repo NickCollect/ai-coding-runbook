@@ -1,112 +1,115 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/available-regions
-fetched_at: 2026-05-05T20:48:55.397217+00:00
-title: "Available regions for Google AI Studio and Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/available-regions?hl=vi
+fetched_at: 2026-05-11T05:05:05.913425+00:00
+title: "C\u00e1c khu v\u1ef1c \u0111\u01b0\u1ee3c h\u1ed7 tr\u1ee3 Google AI Studio v\u00e0 API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research) is now available in preview with collaborative planning, visualization, MCP support, and more.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-- [Home](https://ai.google.dev/)
-- [Gemini API](https://ai.google.dev/gemini-api)
-- [Docs](https://ai.google.dev/gemini-api/docs)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Send feedback
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-# Available regions for Google AI Studio and Gemini API
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-If you reached this page while attempting to access [Google AI Studio](https://aistudio.google.com/), it may
-be due to one of the following reasons:
+Gửi ý kiến phản hồi
 
-- **Regional restrictions**: Google AI Studio is not available in your region. Refer to the section below for a list of supported regions.
-- **Age requirements**: You do not meet the minimum age requirement (18+) to access this service.
-- **Account verification**: You may have access to the service, but you haven't yet [verified your age](https://support.google.com/accounts/answer/10071085) on your Google Account.
+# Các khu vực được hỗ trợ Google AI Studio và API Gemini
 
-For further details regarding requirements, review our [Terms of Service](https://ai.google.dev/gemini-api/terms).
+Nếu bạn truy cập vào trang này khi cố gắng sử dụng [Google AI Studio](https://aistudio.google.com/?hl=vi), thì có thể
+là do một trong các nguyên nhân sau:
 
-## Available regions
+- **Quy định hạn chế theo khu vực**: Google AI Studio không có ở khu vực của bạn. Hãy tham khảo phần bên dưới để xem danh sách các khu vực được hỗ trợ.
+- **Yêu cầu về độ tuổi**: Bạn không đáp ứng yêu cầu về độ tuổi tối thiểu (từ 18 tuổi trở lên) để sử dụng dịch vụ này.
+- **Xác minh tài khoản**: Bạn có thể sử dụng dịch vụ này nhưng chưa [xác minh tuổi của mình](https://support.google.com/accounts/answer/10071085?hl=vi) trên Tài khoản Google.
 
-The Gemini API and Google AI Studio are available in the following countries and
-territories. If you're not in one of these countries or territories, try the
-[Gemini API in Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform):
+Để biết thêm thông tin chi tiết về các yêu cầu, hãy xem [Điều khoản dịch vụ](https://ai.google.dev/gemini-api/terms?hl=vi) của chúng tôi.
+
+## Khu vực khả dụng
+
+Gemini API và Google AI Studio có ở các quốc gia và vùng lãnh thổ sau. Nếu bạn không ở một trong những quốc gia hoặc vùng lãnh thổ này, hãy thử
+[Gemini API trong Nền tảng đại lý Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform?hl=vi):
 
 - Albania
 - Algeria
-- American Samoa
+- Samoa thuộc Hoa Kỳ
 - Andorra
 - Angola
 - Anguilla
-- Antarctica
-- Antigua and Barbuda
+- Nam Cực
+- Antigua và Barbuda
 - Argentina
 - Armenia
 - Aruba
-- Australia
-- Austria
+- Úc
+- Áo
 - Azerbaijan
-- The Bahamas
+- Bahamas
 - Bahrain
 - Bangladesh
 - Barbados
-- Belgium
+- Bỉ
 - Belize
 - Benin
 - Bermuda
 - Bhutan
 - Bolivia
-- Bosnia and Herzegovina
+- Bosnia và Herzegovina
 - Botswana
 - Brazil
-- British Indian Ocean Territory
-- British Virgin Islands
+- Lãnh thổ Ấn Độ Dương thuộc Anh
+- Quần đảo Virgin thuộc Anh
 - Brunei
 - Bulgaria
 - Burkina Faso
 - Burundi
 - Cabo Verde
-- Cambodia
+- Campuchia
 - Cameroon
 - Canada
-- Caribbean Netherlands
-- Cayman Islands
-- Central African Republic
+- Caribbean thuộc Hà Lan
+- Quần đảo Cayman
+- Cộng hoà Trung Phi
 - Chad
 - Chile
-- Christmas Island
-- Cocos (Keeling) Islands
+- Đảo Christmas
+- Quần đảo Cocos (Keeling)
 - Colombia
 - Comoros
-- Cook Islands
+- Quần đảo Cook
 - Costa Rica
-- Côte d'Ivoire
+- Bờ biển Ngà
 - Croatia
 - Curaçao
-- Czech Republic
-- Democratic Republic of the Congo
-- Denmark
+- Cộng hoà Séc
+- Cộng hoà Dân chủ Congo
+- Đan Mạch
 - Djibouti
 - Dominica
-- Dominican Republic
+- Cộng hoà Dominica
 - Ecuador
-- Egypt
+- Ai Cập
 - El Salvador
-- Equatorial Guinea
+- Guinea Xích đạo
 - Eritrea
 - Estonia
 - Eswatini
 - Ethiopia
-- Falkland Islands (Islas Malvinas)
-- Faroe Islands
+- Quần đảo Falkland (Islas Malvinas)
+- Quần đảo Faroe
 - Fiji
-- Finland
-- France
-- French Guiana
+- Phần Lan
+- Pháp
+- Guiana thuộc Pháp
 - Gabon
-- The Gambia
+- Gambia
 - Georgia
-- Germany
+- Đức
 - Ghana
 - Gibraltar
-- Greece
+- Hy Lạp
 - Greenland
 - Grenada
 - Guam
@@ -116,19 +119,19 @@ territories. If you're not in one of these countries or territories, try the
 - Guinea-Bissau
 - Guyana
 - Haiti
-- Heard Island and McDonald Islands
+- Đảo Heard và Quần đảo McDonald
 - Honduras
 - Hungary
 - Iceland
-- India
+- Ấn Độ
 - Indonesia
 - Iraq
 - Ireland
-- Isle of Man
+- Đảo Man
 - Israel
-- Italy
+- Ý
 - Jamaica
-- Japan
+- Nhật Bản
 - Jersey
 - Jordan
 - Kazakhstan
@@ -137,7 +140,7 @@ territories. If you're not in one of these countries or territories, try the
 - Kosovo
 - Kuwait
 - Kyrgyzstan
-- Laos
+- Lào
 - Latvia
 - Lebanon
 - Lesotho
@@ -152,32 +155,32 @@ territories. If you're not in one of these countries or territories, try the
 - Maldives
 - Mali
 - Malta
-- Marshall Islands
+- Quần đảo Marshall
 - Mauritania
 - Mauritius
 - Mexico
 - Micronesia
 - Moldova
 - Monaco
-- Mongolia
+- Mông Cổ
 - Montenegro
 - Montserrat
-- Morocco
+- Ma Rốc
 - Mozambique
 - Namibia
 - Nauru
 - Nepal
-- Netherlands
+- Hà Lan
 - New Caledonia
 - New Zealand
 - Nicaragua
 - Niger
 - Nigeria
 - Niue
-- Norfolk Island
-- North Macedonia
-- Northern Mariana Islands
-- Norway
+- Đảo Norfolk
+- Bắc Macedonia
+- Quần đảo Bắc Mariana
+- Na Uy
 - Oman
 - Pakistan
 - Palau
@@ -187,26 +190,26 @@ territories. If you're not in one of these countries or territories, try the
 - Paraguay
 - Peru
 - Philippines
-- Pitcairn Islands
-- Poland
-- Portugal
+- Quần đảo Pitcairn
+- Ba Lan
+- Bồ Đào Nha
 - Puerto Rico
 - Qatar
-- Republic of Cyprus
-- Republic of the Congo
+- Cộng hoà Síp
+- Cộng hoà Congo
 - Romania
 - Rwanda
 - Réunion
 - Saint Barthélemy
-- Saint Helena, Ascension and Tristan da Cunha
-- Saint Kitts and Nevis
+- Saint Helena, Ascension và Tristan da Cunha
+- Saint Kitts và Nevis
 - Saint Lucia
-- Saint Pierre and Miquelon
-- Saint Vincent and the Grenadines
+- Saint Pierre và Miquelon
+- Saint Vincent và Grenadines
 - Samoa
 - San Marino
-- São Tomé and Príncipe
-- Saudi Arabia
+- São Tomé và Príncipe
+- Ả Rập Xê Út
 - Senegal
 - Serbia
 - Seychelles
@@ -214,58 +217,58 @@ territories. If you're not in one of these countries or territories, try the
 - Singapore
 - Slovakia
 - Slovenia
-- Solomon Islands
+- Quần đảo Solomon
 - Somalia
-- South Africa
-- South Georgia and the South Sandwich Islands
-- South Korea
-- South Sudan
-- Spain
+- Nam Phi
+- Nam Georgia và quần đảo Nam Sandwich
+- Hàn Quốc
+- Nam Sudan
+- Tây Ban Nha
 - Sri Lanka
 - Sudan
 - Suriname
-- Sweden
-- Switzerland
-- Taiwan
+- Thuỵ Điển
+- Thuỵ Sĩ
+- Đài Loan
 - Tajikistan
 - Tanzania
-- Thailand
-- Timor-Leste
+- Thái Lan
+- Đông Timor
 - Togo
 - Tokelau
 - Tonga
-- Trinidad and Tobago
+- Trinidad và Tobago
 - Tunisia
 - Turkmenistan
-- Turks and Caicos Islands
+- Quần đảo Turks và Caicos
 - Tuvalu
-- Türkiye
+- Thổ Nhĩ Kỳ
 - Uganda
-- Ukraine
-- United Arab Emirates
-- United Kingdom
-- United States
-- United States Minor Outlying Islands
+- Ukraina
+- Các Tiểu Vương quốc Ả Rập Thống nhất
+- Vương quốc Anh
+- Hoa Kỳ
+- Các tiểu đảo xa của Hoa Kỳ
 - Uruguay
-- U.S. Virgin Islands
+- Quần đảo Virgin thuộc Hoa Kỳ
 - Uzbekistan
 - Vanuatu
-- Vatican City
+- Thành quốc Vatican
 - Venezuela
-- Vietnam
-- Wallis and Futuna
-- Western Sahara
+- Việt Nam
+- Wallis và Futuna
+- Tây Sahara
 - Yemen
 - Zambia
 - Zimbabwe
-- Åland Islands
+- Quần đảo Åland
 
-Send feedback
+Gửi ý kiến phản hồi
 
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Last updated 2026-04-28 UTC.
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-Need to tell us more?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-04-28 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

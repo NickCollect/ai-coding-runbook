@@ -1,52 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=pt-BR
-fetched_at: 2026-05-05T20:46:46.389041+00:00
+source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=th
+fetched_at: 2026-05-11T05:09:44.804632+00:00
 title: "Session management with Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Envie comentários
+ส่งความคิดเห็น
 
 # Session management with Live API
 
-Na API Live, uma sessão se refere a uma conexão persistente
-em que a entrada e a saída são transmitidas continuamente pela mesma
-conexão. Saiba mais sobre [como ela funciona](https://ai.google.dev/gemini-api/docs/live?hl=pt-br).
-Esse design de sessão exclusivo permite baixa latência e oferece suporte a recursos exclusivos, mas também pode apresentar desafios, como limites de tempo de sessão e encerramento antecipado.
-Este guia aborda estratégias para superar os desafios de gerenciamento de sessão que podem surgir ao usar a API Live.
+ใน Live API เซสชันหมายถึงการเชื่อมต่อแบบถาวร
+ซึ่งมีการสตรีมอินพุตและเอาต์พุตอย่างต่อเนื่องผ่านการเชื่อมต่อเดียวกัน (อ่านเพิ่มเติมเกี่ยวกับ[วิธีการทำงาน](https://ai.google.dev/gemini-api/docs/live?hl=th))
+การออกแบบเซสชันที่ไม่เหมือนใครนี้ช่วยให้เกิดเวลาในการตอบสนองที่ต่ำและรองรับฟีเจอร์ที่ไม่เหมือนใคร แต่
+ก็อาจทำให้เกิดความท้าทายต่างๆ เช่น ขีดจำกัดเวลาของเซสชันและการสิ้นสุดก่อนเวลา
+คู่มือนี้ครอบคลุมกลยุทธ์ในการแก้ปัญหาความท้าทายด้านการจัดการเซสชัน
+ที่อาจเกิดขึ้นเมื่อใช้ Live API
 
-## Tempo de vida da sessão
+## อายุของเซสชัน
 
-Sem compressão, as sessões somente de áudio são limitadas a 15 minutos, e as sessões de áudio e vídeo são limitadas a 2 minutos. Exceder esses limites
-encerra a sessão (e, portanto, a conexão), mas é possível usar
-[a compressão da janela de contexto](#context-window-compression) para estender as sessões por
-um período ilimitado.
+หากไม่มีการบีบอัด เซสชันเสียงอย่างเดียวจะจำกัดไว้ที่ 15 นาที
+และเซสชันเสียงและวิดีโอจะจำกัดไว้ที่ 2 นาที การเกินขีดจำกัดเหล่านี้จะทำให้เซสชันสิ้นสุดลง (และทำให้การเชื่อมต่อสิ้นสุดลงด้วย) แต่คุณสามารถใช้[การบีบอัดหน้าต่างบริบท](#context-window-compression)เพื่อขยายเซสชันได้โดยไม่จำกัดเวลา
 
-O tempo de vida de uma conexão também é limitado a cerca de 10 minutos. Quando a conexão termina, a sessão também é encerrada. Nesse caso, é possível
-configurar uma única sessão para permanecer ativa em várias conexões usando
-[a retomada da sessão](#session-resumption).
-Você também vai receber uma [mensagem GoAway](#goaway-message) antes do
-término da conexão, permitindo que você tome outras ações.
+อายุการใช้งานของการเชื่อมต่อก็ถูกจำกัดไว้ที่ประมาณ 10 นาทีเช่นกัน เมื่อการเชื่อมต่อสิ้นสุดลง เซสชันก็จะสิ้นสุดลงด้วย ในกรณีนี้ คุณสามารถ
+กำหนดค่าเซสชันเดียวให้ทำงานอยู่ตลอดการเชื่อมต่อหลายครั้งได้โดยใช้
+[การกลับมาใช้เซสชันต่อ](#session-resumption)
+นอกจากนี้ คุณจะได้รับ[ข้อความ GoAway](#goaway-message) ก่อนที่การเชื่อมต่อจะสิ้นสุดลง ซึ่งจะช่วยให้คุณดำเนินการเพิ่มเติมได้
 
-## Compressão da janela de contexto
+## การบีบอัดหน้าต่างบริบท
 
-Para ativar sessões mais longas e evitar o encerramento abrupto da conexão, você pode
-ativar a compactação da janela de contexto definindo o campo [contextWindowCompression](https://ai.google.dev/api/live?hl=pt-br#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression)
-como parte da configuração da sessão.
+หากต้องการเปิดใช้เซสชันที่ยาวขึ้นและหลีกเลี่ยงการสิ้นสุดการเชื่อมต่ออย่างกะทันหัน คุณสามารถ
+เปิดใช้การบีบอัดหน้าต่างบริบทได้โดยการตั้งค่าฟิลด์ [contextWindowCompression](https://ai.google.dev/api/live?hl=th#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression)
+เป็นส่วนหนึ่งของการกำหนดค่าเซสชัน
 
-No [ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=pt-br#contextwindowcompressionconfig), é possível configurar um
-[mecanismo de janela deslizante](https://ai.google.dev/api/live?hl=pt-br#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window)
-e o [número de tokens](https://ai.google.dev/api/live?hl=pt-br#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens)
-que acionam a compressão.
+ใน [ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=th#contextwindowcompressionconfig) คุณสามารถกำหนดค่า
+[กลไกหน้าต่างเลื่อน](https://ai.google.dev/api/live?hl=th#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window)
+และ[จำนวนโทเค็น](https://ai.google.dev/api/live?hl=th#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens)
+ที่ทริกเกอร์การบีบอัดได้
 
 ### Python
 
@@ -73,19 +71,17 @@ const config = {
 };
 ```
 
-## Retomada da sessão
+## การกลับมาใช้เซสชันต่อ
 
-Para evitar o encerramento da sessão quando o servidor redefine periodicamente a conexão WebSocket
-connection, configure o [sessionResumption](https://ai.google.dev/api/live?hl=pt-br#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption)
-campo na [configuração de instalação](https://ai.google.dev/api/live?hl=pt-br#BidiGenerateContentSetup).
+หากต้องการป้องกันไม่ให้ระบบสิ้นสุดเซสชันเมื่อเซิร์ฟเวอร์รีเซ็ตการเชื่อมต่อ WebSocket เป็นระยะ
+ให้กำหนดค่าฟิลด์ [sessionResumption](https://ai.google.dev/api/live?hl=th#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption)
+ภายใน[การกำหนดค่าการตั้งค่า](https://ai.google.dev/api/live?hl=th#BidiGenerateContentSetup)
 
-A transmissão dessa configuração faz com que o
-servidor envie [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=pt-br#SessionResumptionUpdate)
-mensagens, que podem ser usadas para retomar a sessão transmitindo o último token de retomada
-como o [`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=pt-br#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle)
-da conexão subsequente.
+การส่งการกำหนดค่านี้จะทำให้เซิร์ฟเวอร์ส่งข้อความ [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=th#SessionResumptionUpdate)
+ซึ่งใช้เพื่อกลับมาใช้เซสชันต่อได้โดยการส่งโทเค็นการกลับมาใช้ต่อล่าสุดเป็น [`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=th#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle)
+ของการเชื่อมต่อครั้งถัดไป
 
-Os tokens de retomada são válidos por duas horas após o encerramento das últimas sessões.
+โทเค็นการกลับมาทำงานต่อจะมีอายุ 2 ชั่วโมงหลังจากเซสชันสุดท้ายสิ้นสุดลง
 
 ### Python
 
@@ -220,11 +216,10 @@ async function main() {
 main();
 ```
 
-## Receber uma mensagem antes que a sessão seja desconectada
+## การรับข้อความก่อนที่เซสชันจะตัดการเชื่อมต่อ
 
-O servidor envia uma mensagem [GoAway](https://ai.google.dev/api/live?hl=pt-br#GoAway) que sinaliza que a conexão atual será encerrada em breve. Essa mensagem inclui o [timeLeft](https://ai.google.dev/api/live?hl=pt-br#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left),
-indicando o tempo restante, e permite que você tome outras medidas antes que a
-conexão seja encerrada como ABORTADA.
+เซิร์ฟเวอร์จะส่งข้อความ [GoAway](https://ai.google.dev/api/live?hl=th#GoAway) ซึ่งส่งสัญญาณว่าการเชื่อมต่อปัจจุบันจะสิ้นสุดในเร็วๆ นี้ ข้อความนี้มี [timeLeft](https://ai.google.dev/api/live?hl=th#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left)
+ซึ่งระบุเวลาที่เหลืออยู่และช่วยให้คุณดำเนินการเพิ่มเติมได้ก่อนที่ระบบจะสิ้นสุดการเชื่อมต่อเป็น ABORTED
 
 ### Python
 
@@ -247,10 +242,10 @@ for (const turn of turns) {
 }
 ```
 
-## Receber uma mensagem quando a geração estiver concluída
+## รับข้อความเมื่อการสร้างเสร็จสมบูรณ์
 
-O servidor envia uma [generationComplete](https://ai.google.dev/api/live?hl=pt-br#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete)
-mensagem que sinaliza que o modelo terminou de gerar a resposta.
+เซิร์ฟเวอร์จะส่งข้อความ [generationComplete](https://ai.google.dev/api/live?hl=th#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete)
+ซึ่งเป็นสัญญาณว่าโมเดลสร้างคำตอบเสร็จแล้ว
 
 ### Python
 
@@ -272,19 +267,18 @@ for (const turn of turns) {
 }
 ```
 
-## A seguir
+## ขั้นตอนถัดไป
 
-Confira outras maneiras de trabalhar com a API Live no guia completo de
-[recursos](https://ai.google.dev/gemini-api/docs/live?hl=pt-br),
-na página de [uso da ferramenta](https://ai.google.dev/gemini-api/docs/live-tools?hl=pt-br) ou no
-[livro de receitas da API Live](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=pt-br).
+ดูวิธีอื่นๆ ในการทำงานกับ Live API ได้ในคู่มือ[ความสามารถ](https://ai.google.dev/gemini-api/docs/live?hl=th)ฉบับเต็ม
+หน้า[การใช้เครื่องมือ](https://ai.google.dev/gemini-api/docs/live-tools?hl=th) หรือ
+[ตำรา Live API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=th)
 
-Envie comentários
+ส่งความคิดเห็น
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Última atualização 2026-04-29 UTC.
+อัปเดตล่าสุด 2026-04-29 UTC
 
-Quer enviar seu feedback?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-29 UTC"],[],[]]

@@ -1,28 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=de
-fetched_at: 2026-05-05T20:43:23.849748+00:00
-title: "Bilder mit Imagen generieren \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=th
+fetched_at: 2026-05-11T05:02:17.745940+00:00
+title: "\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e23\u0e39\u0e1b\u0e20\u0e32\u0e1e\u0e42\u0e14\u0e22\u0e43\u0e0a\u0e49 Imagen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Feedback geben
+ส่งความคิดเห็น
 
-# Bilder mit Imagen generieren
+# สร้างรูปภาพโดยใช้ Imagen
 
-Imagen ist das High-Fidelity-Modell zur Bildgenerierung von Google, mit dem sich realistische und hochwertige Bilder aus Text-Prompts generieren lassen. Alle generierten Bilder enthalten ein SynthID-Wasserzeichen. Weitere Informationen zu den verfügbaren Imagen-Modellvarianten finden Sie im Abschnitt [Modellversionen](#model-versions).
+Imagen คือโมเดลการสร้างรูปภาพที่มีความเที่ยงตรงสูงของ Google ซึ่งสามารถสร้าง
+รูปภาพที่สมจริงและมีคุณภาพสูงจากพรอมต์ข้อความ รูปภาพที่สร้างขึ้นทั้งหมด
+จะมีลายน้ำ SynthID ดูข้อมูลเพิ่มเติมเกี่ยวกับโมเดล Imagen
+ที่มีให้ใช้งานได้ในส่วน[เวอร์ชันของโมเดล](#model-versions)
 
-## Bilder mit den Imagen-Modellen generieren
+## สร้างรูปภาพโดยใช้โมเดล Imagen
 
-In diesem Beispiel wird gezeigt, wie Sie Bilder mit einem [Imagen-Modell](https://deepmind.google/technologies/imagen/?hl=de) generieren:
+ตัวอย่างนี้แสดงการสร้างรูปภาพด้วย[โมเดล Imagen](https://deepmind.google/technologies/imagen/?hl=th)
 
 ### Python
 
@@ -75,7 +78,7 @@ async function main() {
 main();
 ```
 
-### Ok
+### Go
 
 ```
 package main
@@ -132,364 +135,399 @@ curl -X POST \
       }'
 ```
 
-![KI-generiertes Bild eines Roboters, der ein rotes Skateboard hält](https://ai.google.dev/static/gemini-api/docs/images/robot-skateboard.png?hl=de)
+![รูปภาพที่ AI สร้างขึ้นของหุ่นยนต์ที่ถือสเกตบอร์ดสีแดง](https://ai.google.dev/static/gemini-api/docs/images/robot-skateboard.png?hl=th)
 
-KI-generiertes Bild eines Roboters, der ein rotes Skateboard hält
+รูปภาพหุ่นยนต์ถือสเกตบอร์ดสีแดงที่ AI สร้างขึ้น
 
-### Imagen-Konfiguration
+### การกำหนดค่า Imagen
 
-Imagen unterstützt derzeit nur Prompts in englischer Sprache und die folgenden Parameter:
+ปัจจุบัน Imagen รองรับเฉพาะพรอมต์ภาษาอังกฤษและพารามิเตอร์ต่อไปนี้
 
-- `numberOfImages`: Die Anzahl der zu generierenden Bilder, von 1 bis 4 (einschließlich).
-  Der Standardwert ist 4.
-- `imageSize`: Die Größe des generierten Bildes. Dies wird nur für die Modelle „Standard“ und „Ultra“ unterstützt. Die unterstützten Werte sind `1K` und `2K`.
-  Der Standardwert ist `1K`.
-- `aspectRatio`: Ändert das Seitenverhältnis des generierten Bildes. Unterstützte Werte sind `"1:1"`, `"3:4"`, `"4:3"`, `"9:16"` und `"16:9"`. Der Standardwert ist `"1:1"`.
-- `personGeneration`: Das Modell darf Bilder von Personen generieren. Folgende Werte werden unterstützt:
+- `numberOfImages`: จำนวนรูปภาพที่จะสร้าง ตั้งแต่ 1 ถึง 4 (รวม)
+  ค่าเริ่มต้นคือ 4
+- `imageSize`: ขนาดของรูปภาพที่สร้างขึ้น ฟีเจอร์นี้รองรับเฉพาะรุ่น Standard และ Ultra ค่าที่รองรับคือ `1K` และ `2K`
+  ค่าเริ่มต้นคือ `1K`
+- `aspectRatio`: เปลี่ยนสัดส่วนภาพของรูปภาพที่สร้างขึ้น ค่าที่รองรับคือ `"1:1"`, `"3:4"`, `"4:3"`, `"9:16"` และ `"16:9"` ค่าเริ่มต้นคือ
+  `"1:1"`
+- `personGeneration`: อนุญาตให้โมเดลสร้างรูปภาพบุคคล ค่าที่รองรับมีดังนี้
 
-  - `"dont_allow"`: Generierung von Bildern von Personen blockieren.
-  - `"allow_adult"`: Bilder von Erwachsenen, aber nicht von Kindern generieren. Das ist die Standardeinstellung.
-  - `"allow_all"`: Bilder generieren, auf denen Erwachsene und Kinder zu sehen sind.
+  - `"dont_allow"`: บล็อกการสร้างรูปภาพบุคคล
+  - `"allow_adult"`: สร้างรูปภาพของผู้ใหญ่ แต่ไม่ใช่เด็ก ซึ่งเป็นค่าเริ่มต้น
+  - `"allow_all"`: สร้างรูปภาพที่มีผู้ใหญ่และเด็ก
 
-## Imagen-Leitfaden für Prompts
+## คู่มือการใช้พรอมต์ Imagen
 
-In diesem Abschnitt des Imagen-Leitfadens erfahren Sie, wie sich durch Ändern einer Text-zu-Bild-Eingabeaufforderung unterschiedliche Ergebnisse erzielen lassen. Außerdem finden Sie Beispiele für Bilder, die Sie erstellen können.
+ส่วนนี้ของคำแนะนำเกี่ยวกับ Imagen จะแสดงให้เห็นว่าการแก้ไขพรอมต์การเปลี่ยนข้อความเป็นรูปภาพ สามารถสร้างผลลัพธ์ที่แตกต่างกันได้อย่างไร พร้อมตัวอย่างรูปภาพที่คุณสร้างได้
 
-### Grundlagen zum Schreiben von Prompts
+### ข้อมูลเบื้องต้นเกี่ยวกับการเขียนพรอมต์
 
-Ein guter Prompt ist beschreibend und klar und verwendet aussagekräftige Keywords und Modifikatoren. Beginnen Sie mit dem **Motiv**, dem **Kontext** und dem **Stil**.
+พรอมต์ที่ดีควรสื่อความหมายและชัดเจน รวมถึงใช้คีย์เวิร์ดและตัวแก้ไขที่มีความหมาย เริ่มจากการคิดถึง**หัวข้อ** **บริบท** และ**สไตล์**
 
-![Eingabeaufforderung mit Akzent auf Motiv, Kontext und Stil](https://ai.google.dev/static/gemini-api/docs/images/imagen/style-subject-context.png?hl=de)
+![พรอมต์ที่มีการเน้นเรื่อง วัตถุ บริบท และสไตล์](https://ai.google.dev/static/gemini-api/docs/images/imagen/style-subject-context.png?hl=th)
 
-Bildtext: Eine *Skizze* (**Stil**) eines *modernen Wohngebäudes* (**Motiv**) umgeben von *Wolkenkratzern* (**Kontext und Hintergrund**).
+ข้อความในรูปภาพ: *ภาพร่าง* (**สไตล์**) ของ*อาคารอพาร์ตเมนต์สมัยใหม่*
+(**เรื่อง**) ที่ล้อมรอบด้วย*ตึกระฟ้า* (**บริบทและพื้นหลัง**)
 
-1. **Thema:** Das Erste, woran Sie bei jeder Eingabeaufforderung denken müssen, ist das *Motiv*. Das Objekt, eine Person, ein Tier oder eine Landschaft, von der Sie ein Bild möchten.
-2. **Kontext und Hintergrund:** Ebenso wichtig ist der *Hintergrund oder Kontext*, in dem das Motiv platziert wird. Platzieren Sie das Motiv vor verschiedenen Hintergründen. Zum Beispiel ein Studio mit weißem Hintergrund, im Freien oder in Gebäuden.
-3. **Stil:** Fügen Sie abschließend den Stil des gewünschten Bildes hinzu. *Stile* können allgemein (Malerei, Fotografie, Skizzen) oder sehr spezifisch sein (Pastel, Kohlezeichnung, isometrische 3D-Perspektive). Sie können auch Stile kombinieren.
+1. **เรื่อง**: สิ่งแรกที่ต้องคิดถึงเมื่อใช้พรอมต์คือ*เรื่อง* ซึ่งก็คือวัตถุ บุคคล สัตว์ หรือทิวทัศน์ที่คุณต้องการให้เป็นรูปภาพ
+2. **บริบทและพื้นหลัง:** *พื้นหลังหรือบริบท*
+   ที่วางวัตถุมีความสำคัญไม่แพ้กัน ลองวางวัตถุในพื้นหลังที่หลากหลาย เช่น สตูดิโอที่มีพื้นหลังสีขาว กลางแจ้ง หรือ
+   สภาพแวดล้อมในร่ม
+3. **สไตล์:** สุดท้าย ให้เพิ่มสไตล์ของรูปภาพที่ต้องการ *สไตล์*อาจเป็นแบบทั่วไป
+   (ภาพวาด ภาพถ่าย ภาพร่าง) หรือเฉพาะเจาะจงมาก (ภาพวาดสีพาสเทล ภาพวาด
+   ถ่าน ภาพ 3 มิติแบบไอโซเมตริก) นอกจากนี้ คุณยังรวมสไตล์ได้ด้วย
 
-Nachdem Sie eine erste Version Ihres Prompts geschrieben haben, können Sie ihn verfeinern, indem Sie weitere Details hinzufügen, bis Sie das gewünschte Bild erhalten. Iteration ist wichtig.
-Beginnen Sie mit Ihrer Kernidee und verfeinern und erweitern Sie diese dann, bis das generierte Bild Ihrer Vision entspricht.
+หลังจากเขียนพรอมต์เวอร์ชันแรกแล้ว ให้ปรับแต่งพรอมต์โดยเพิ่มรายละเอียด
+เพิ่มเติมจนกว่าจะได้รูปภาพที่ต้องการ การทำซ้ำเป็นสิ่งสำคัญ
+เริ่มต้นด้วยการกำหนดแนวคิดหลัก จากนั้นปรับแต่งและขยายแนวคิดหลักนั้นจนกว่ารูปภาพที่สร้างขึ้นจะใกล้เคียงกับวิสัยทัศน์ของคุณ
 
 |  |  |  |
 | --- | --- | --- |
-| Fotorealistisches Beispielbild 1   Eingabeaufforderung: Ein Park im Frühling neben einem See | Fotorealistisches Beispielbild 2   Prompt: Ein Park im Frühling neben einem See, **die Sonne geht über dem See unter, goldene Stunde** | Fotorealistisches Beispielbild 3   Prompt: Ein Park im Frühling neben einem See, ***die Sonne geht über dem See unter, goldene Stunde, rote Wildblumen*** |
+| รูปภาพตัวอย่างแบบสมจริง 1   พรอมต์: สวนสาธารณะในฤดูใบไม้ผลิริมทะเลสาบ | รูปภาพตัวอย่างแบบสมจริง 2   พรอมต์: สวนสาธารณะในฤดูใบไม้ผลิริมทะเลสาบ **พระอาทิตย์ตกข้ามทะเลสาบ ช่วงเวลาแสงสีทอง** | รูปภาพตัวอย่างแบบสมจริง 3   พรอมต์: สวนสาธารณะในฤดูใบไม้ผลิริมทะเลสาบ ***พระอาทิตย์ตกข้ามทะเลสาบ ช่วงเวลาแสงสีทอง ดอกไม้ป่าสีแดง*** |
 
-Imagen-Modelle können Ihre Ideen in detaillierte Bilder umwandeln, unabhängig davon, ob Ihre Prompts kurz oder lang und detailliert sind. Verfeinern Sie Ihre Vision durch iterative Prompts und fügen Sie Details hinzu, bis Sie das perfekte Ergebnis erzielen.
+โมเดล Imagen สามารถเปลี่ยนไอเดียของคุณให้กลายเป็นรูปภาพที่มีรายละเอียด ไม่ว่าพรอมต์ของคุณจะสั้นหรือยาวและมีรายละเอียดก็ตาม
+ปรับแต่งวิสัยทัศน์ของคุณ
+ผ่านการแจ้งอย่างต่อเนื่อง เพิ่มรายละเอียดจนกว่าจะได้ผลลัพธ์ที่สมบูรณ์แบบ
 
 |  |  |
 | --- | --- |
-| Mit kurzen Prompts können Sie schnell ein Bild generieren.  Beispiel für einen kurzen Prompt für Imagen 4   Prompt: Nahaufnahme einer Frau in ihren 20ern, Straßenfotografie, Standbild, gedeckte warme Orangetöne | Mit längeren Prompts können Sie spezifische Details hinzufügen und Ihr Bild erstellen.  Beispiel für einen langen Prompt für Imagen 4   Prompt: Beeindruckendes Foto einer Frau in ihren 20ern, das einen Straßenfotografie-Stil verwendet. Das Bild sollte wie ein Standfoto mit gedeckten, orangefarbenen, warmen Tönen aussehen. |
+| พรอมต์แบบสั้นช่วยให้คุณสร้างรูปภาพได้อย่างรวดเร็ว  ตัวอย่างพรอมต์สั้นๆ สำหรับ Imagen 4   พรอมต์: ภาพถ่ายระยะใกล้ของผู้หญิงในช่วงอายุ 20 ปี ภาพถ่ายบนท้องถนน ภาพจากภาพยนตร์ โทนสีส้มอบอุ่น | พรอมต์ที่ยาวขึ้นจะช่วยให้คุณเพิ่มรายละเอียดที่เฉพาะเจาะจงและสร้างรูปภาพได้  ตัวอย่างพรอมต์ยาวสำหรับ Imagen 4   พรอมต์: ภาพถ่ายที่น่าดึงดูดใจของผู้หญิงในช่วงอายุ 20 ปีที่ใช้สไตล์การถ่ายภาพ บนท้องถนน รูปภาพควรดูเหมือนภาพนิ่งจากภาพยนตร์ที่มีโทนสีส้ม อบอุ่น |
 
-Zusätzliche Tipps zum Verfassen von Prompts für Imagen:
+คำแนะนำเพิ่มเติมสำหรับการเขียนพรอมต์ของ Imagen
 
-- **Beschreibende Sprache verwenden**: Verwenden Sie detaillierte Adjektive und Adverbien, um Imagen ein klares Bild zu vermitteln.
-- **Kontext angeben**: Fügen Sie bei Bedarf Hintergrundinformationen hinzu, damit die KI den Prompt besser versteht.
-- **Auf bestimmte Künstler oder Stile verweisen**: Wenn Sie eine bestimmte Ästhetik im Sinn haben, kann es hilfreich sein, auf bestimmte Künstler oder Kunstrichtungen zu verweisen.
-- **Tools für Prompt Engineering verwenden**: Sie können Tools oder Ressourcen für Prompt Engineering nutzen, um Ihre Prompts zu optimieren und optimale Ergebnisse zu erzielen.
-- **Gesichtsdetails in Ihren persönlichen Fotos und Gruppenfotos optimieren**: Geben Sie Gesichtsdetails als Fokus des Fotos an (z. B. mit dem Wort „Porträt“ im Prompt).
+- **ใช้ภาษาที่สื่อความหมาย**: ใช้คำคุณศัพท์และคำกริยาวิเศษณ์โดยละเอียดเพื่อ
+  วาดภาพที่ชัดเจนสำหรับ Imagen
+- **ระบุบริบท**: หากจำเป็น ให้ระบุข้อมูลพื้นฐานเพื่อช่วยให้ AI เข้าใจ
+- **อ้างอิงศิลปินหรือสไตล์ที่เฉพาะเจาะจง**: หากคุณมีสุนทรียะที่เฉพาะเจาะจงในใจ การอ้างอิงศิลปินหรือขบวนการศิลปะที่เฉพาะเจาะจงอาจเป็นประโยชน์
+- **ใช้เครื่องมือวิศวกรรมพรอมต์**: ลองสำรวจเครื่องมือหรือแหล่งข้อมูลวิศวกรรมพรอมต์
+  เพื่อช่วยปรับแต่งพรอมต์และให้ได้ผลลัพธ์ที่ดีที่สุด
+- **การปรับปรุงรายละเอียดใบหน้าในรูปภาพส่วนตัวและรูปภาพกลุ่ม**: ระบุรายละเอียดใบหน้าเป็นจุดโฟกัสของรูปภาพ (เช่น ใช้คำว่า "ภาพบุคคล" ในพรอมต์)
 
-### Text in Bildern generieren
+### สร้างข้อความในรูปภาพ
 
-Mit Imagen-Modellen lässt sich Text in Bilder einfügen, was neue kreative Möglichkeiten für die Bilderstellung eröffnet. Mit den folgenden Tipps können Sie diese Funktion optimal nutzen:
+โมเดล Imagen สามารถเพิ่มข้อความลงในรูปภาพได้ ซึ่งจะช่วยเปิดโอกาสในการสร้างรูปภาพที่สร้างสรรค์มากขึ้น
+คำแนะนำต่อไปนี้จะช่วยให้คุณใช้ประโยชน์จากฟีเจอร์นี้ได้มากที่สุด
 
-- **Sicher iterieren**: Möglicherweise müssen Sie Bilder neu generieren, bis Sie das gewünschte Ergebnis erhalten. Die Textintegration von Imagen wird ständig weiterentwickelt. Manchmal sind mehrere Versuche erforderlich, um die besten Ergebnisse zu erzielen.
-- **Kurz fassen**: Der Text sollte maximal 25 Zeichen umfassen, damit er optimal generiert werden kann.
-- **Mehrere Formulierungen**: Testen Sie zwei oder drei unterschiedliche Formulierungen, um zusätzliche Informationen bereitzustellen. Verwenden Sie nicht mehr als drei Begriffe, um die Komposition zu optimieren.
+- **ทำซ้ำได้อย่างมั่นใจ**: คุณอาจต้องสร้างรูปภาพใหม่จนกว่าจะได้
+  รูปลักษณ์ที่ต้องการ การผสานรวมข้อความของ Imagen ยังคง
+  พัฒนาต่อไป และบางครั้งการลองหลายๆ ครั้งอาจให้ผลลัพธ์ที่ดีที่สุด
+- **เขียนให้กระชับ**: จำกัดข้อความให้มีอักขระไม่เกิน 25 ตัวเพื่อการสร้างที่เหมาะสมที่สุด
+- **หลายวลี**: ทดลองใช้วลีที่แตกต่างกัน 2-3 วลีเพื่อ
+  ให้ข้อมูลเพิ่มเติม หลีกเลี่ยงการใช้คำมากกว่า 3 คำเพื่อให้
+  องค์ประกอบมีความชัดเจนยิ่งขึ้น
 
-  ![Beispiel für die Textgenerierung mit Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_generate-text.png?hl=de)
+  ![ตัวอย่างข้อความที่ Imagen 4 สร้างขึ้น](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_generate-text.png?hl=th)
 
-  Prompt: Ein Poster mit dem Text „Summerland“ in fetter Schrift als Titel. Darunter befindet sich der Slogan „Summer never felt so good“ (Der Sommer hat sich noch nie so gut angefühlt).
-- **Platzierung von Anleitungen**: Imagen kann versuchen, Text wie angegeben zu positionieren, aber es kann zu Abweichungen kommen. Diese Funktion wird kontinuierlich verbessert.
-- **Schriftstil inspirieren**: Geben Sie einen allgemeinen Schriftstil an, um die Auswahl von Imagen subtil zu beeinflussen. Verlassen Sie sich nicht auf eine genaue Schriftartreplikation, sondern rechnen Sie mit kreativen Interpretationen.
-- **Schriftgröße**: Geben Sie eine Schriftgröße oder eine allgemeine Größenangabe (z. B. *klein*, *mittel*, *groß*) an, um die Generierung der Schriftgröße zu beeinflussen.
+  พรอมต์: โปสเตอร์ที่มีข้อความ "Summerland" เป็นตัวหนาเป็น
+  ชื่อ และมีสโลแกน "Summer never felt so good" อยู่ใต้ข้อความนี้
+- **คำแนะนำในการจัดวาง**: แม้ว่า Imagen จะพยายามจัดวางข้อความตามที่สั่ง
+  แต่ก็อาจมีการเปลี่ยนแปลงเป็นครั้งคราว เรากำลังปรับปรุงฟีเจอร์นี้อย่างต่อเนื่อง
+- **รูปแบบแบบอักษรที่สร้างแรงบันดาลใจ**: ระบุรูปแบบแบบอักษรทั่วไปเพื่อมีอิทธิพลต่อตัวเลือกของ Imagen อย่างละเอียด
+  อย่าพึ่งพาการจำลองแบบอักษรที่แม่นยำ แต่คาดหวังการตีความเชิงสร้างสรรค์
+- **ขนาดแบบอักษร**: ระบุขนาดแบบอักษรหรือข้อบ่งชี้ทั่วไปเกี่ยวกับขนาด (เช่น *เล็ก* *ปานกลาง* *ใหญ่*) เพื่อกำหนดการสร้างขนาดแบบอักษร
 
-### Prompt-Parametrisierung
+### การกำหนดพารามิเตอร์ของพรอมต์
 
-Um die Ausgaberesultate besser zu steuern, kann es hilfreich sein, die Eingaben in Imagen zu parametrisieren. Angenommen, Sie möchten, dass Ihre Kunden Logos für ihr Unternehmen generieren können, und Sie möchten sicherstellen, dass Logos immer auf einem einfarbigen Hintergrund generiert werden. Außerdem möchten Sie die Optionen einschränken, die der Kunde in einem Menü auswählen kann.
+คุณอาจพบว่าการกำหนดพารามิเตอร์
+อินพุตใน Imagen มีประโยชน์ในการควบคุมผลลัพธ์ได้ดียิ่งขึ้น ตัวอย่างเช่น สมมติว่าคุณต้องการให้ลูกค้าสร้างโลโก้สำหรับธุรกิจของตนได้ และต้องการให้มั่นใจว่าระบบจะสร้างโลโก้บนพื้นหลังสีทึบเสมอ นอกจากนี้ คุณยังอาจต้องการจำกัดตัวเลือกที่ไคลเอ็นต์เลือกได้จากเมนูด้วย
 
-In diesem Beispiel können Sie einen parametrisierten Prompt ähnlich dem folgenden erstellen:
+ในตัวอย่างนี้ คุณสามารถสร้างพรอมต์ที่มีพารามิเตอร์คล้ายกับพรอมต์ต่อไปนี้ได้
 
 ```
 A {logo_style} logo for a {company_area} company on a solid color background. Include the text {company_name}.
 ```
 
-In Ihrer benutzerdefinierten Benutzeroberfläche kann der Kunde die Parameter über ein Menü eingeben. Der ausgewählte Wert wird dann in den Prompt eingefügt, den Imagen erhält.
+ในอินเทอร์เฟซผู้ใช้ที่กำหนดเอง ลูกค้าจะป้อนพารามิเตอร์โดยใช้เมนูได้ และค่าที่เลือกจะป้อนลงในพรอมต์ที่ Imagen ได้รับ
 
-Beispiel:
+เช่น
 
-1. Prompt: `A minimalist logo for a health care company on a solid color background. Include the text Journey.`
+1. พรอมต์: `A minimalist logo for a health care company on a solid color background. Include the text Journey.`
 
-   ![Beispiel 1 für die Parameterisierung von Prompts für Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_healthcare.png?hl=de)
-2. Prompt: `A modern logo for a software company on a solid color background. Include the text Silo.`
+   ![ตัวอย่างการกำหนดพารามิเตอร์พรอมต์ของ Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_healthcare.png?hl=th)
+2. พรอมต์: `A modern logo for a software company on a solid color background. Include the text Silo.`
 
-   ![Beispiel 2 für die Parametrisierung von Prompts für Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_software.png?hl=de)
-3. Prompt: `A traditional logo for a baking company on a solid color background. Include the text Seed.`
+   ![ตัวอย่างการกำหนดพารามิเตอร์พรอมต์ของ Imagen 4 2](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_software.png?hl=th)
+3. พรอมต์: `A traditional logo for a baking company on a solid color background. Include the text Seed.`
 
-   ![Beispiel 3 für die Parameterisierung von Prompts für Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_baking.png?hl=de)
+   ![ตัวอย่างการกำหนดพารามิเตอร์พรอมต์ของ Imagen 4 3](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_baking.png?hl=th)
 
-### Erweiterte Techniken zum Schreiben von Eingabeaufforderungen
+### เทคนิคการเขียนพรอมต์ขั้นสูง
 
-Anhand der folgenden Beispiele können Sie anhand von Attributen wie Bilddeskriptoren, Formen und Materialien, historischen Kunstbewegungen und Bildqualitätsmodifikatoren spezifischere Prompts erstellen.
+ใช้ตัวอย่างต่อไปนี้เพื่อสร้างพรอมต์ที่เฉพาะเจาะจงมากขึ้นโดยอิงตามแอตทริบิวต์ เช่น คำอธิบายการถ่ายภาพ รูปร่างและวัสดุ ขบวนการศิลปะในประวัติศาสตร์ และตัวแก้ไขคุณภาพของรูปภาพ
 
-#### Fotografie
+#### การถ่ายภาพ
 
-- Eingabeaufforderung enthält: *„Ein Foto von...”*
+- พรอมต์มีข้อความว่า *"รูปภาพของ..."*
 
-Um diesen Stil zu verwenden, beginnen Sie mit der Verwendung von Keywords, die Imagen klar mitteilen, dass Sie nach einem Foto suchen. Starten Sie die Eingabeaufforderungen mit *„Ein Foto von. . .”*. Beispiel:
-
-|  |  |  |
-| --- | --- | --- |
-| Fotorealistisches Beispielbild 1   **Eingabeaufforderung:** Ein Foto von   Kaffeebohnen auf einer Holzoberfläche in einer Küche | Fotorealistisches Beispielbild 2   **Eingabeaufforderung:** Ein Foto von   einer Schokolade auf einem Küchentresen. | Fotorealistisches Beispielbild 3   Prompt: **Ein Foto eines** modernen Gebäudes mit Wasser im Hintergrund |
-
-Bildquelle: Jedes Bild wurde mit dem entsprechenden Text-Prompt mit dem Imagen 4-Modell generiert.
-
-##### Fotografische Modifikatotionen
-
-In den folgenden Beispielen sehen Sie mehrere fotospezifische Modifikatoren und Parameter. Sie können mehrere Modifikatoren kombinieren, um eine genauere Steuerung zu erreichen.
-
-1. **Kameranähe**: *aus der Nähe, von weit weg*
-
-   |  |  |
-   | --- | --- |
-   | Beispiel für Bild aus der Nähe   Eingabeaufforderung: Ein Foto von Kaffeebohnen **aus der Nähe** | Beispiel für herausgezoomtes Bild   Eingabeaufforderung: Ein **herausgezoomtes** Foto eines kleinen Beutels mit  Kaffeebohnen in einer unaufgeräumten Küche |
-2. **Kameraposition**: *Luftaufnahme, von unten*
-
-   |  |  |
-   | --- | --- |
-   | Beispielbild für Luftaufnahme   Eingabeaufforderung: **Luftaufnahme** einer Stadt mit Wolkenkratzern | Beispielbild von unten   Eingabeaufforderung: Ein Foto eines Waldstamms mit blauem Himmel **von unten** |
-3. **Beleuchtung**: *natürlich, dramatisch, warm, kalt*
-
-   |  |  |
-   | --- | --- |
-   | Beispielbild für natürliche Beleuchtung   Eingabeaufforderung: Studiofoto eines modernen Sessels, **natürliche Beleuchtung** | Beispielbild für dramatische Beleuchtung   Eingabeaufforderung: Studiofoto eines modernen Sessels, **dramatische Beleuchtung** |
-4. **Kameraeinstellungen**:  *Bewegungsunschärfe, Weichzeichnung, Bokeh, Hochformat*
-
-   |  |  |
-   | --- | --- |
-   | Beispielbild für Bewegungsunschärfe   Prompt: Foto einer Stadt mit Wolkenkratzern aus dem Inneren eines Autos mit **Bewegungsunschärfe** | Beispielbild für Weichzeichnung   Prompt: **Weichzeichnung** eines Fotos einer Brücke in einer Stadt bei Nacht |
-5. **Objektive**: *35 mm, 50 mm, Fischauge, Weitwinkel, Makro*
-
-   |  |  |
-   | --- | --- |
-   | Beispielbild für Makro   Eingabeaufforderung: Foto eines Blattes, **Makroobjektiv** | Beispielbild für Fischaugenobjektiv   Eingabeaufforderung: Straßenansicht, New York City, **Fischaugenobjektiv** |
-6. **Filmtypen**: *Schwarz-Weiß, Polaroid*
-
-   |  |  |
-   | --- | --- |
-   | Beispielbild für Polaroid   Prompt: Ein **Polaroid-Hochformatbild** eines Hundes mit Sonnenbrille | Beispielbild für Schwarz-Weiß-Foto   Eingabeaufforderung: **Schwarz-Weiß-Foto** eines Hundes mit Sonnenbrille |
-
-Bildquelle: Jedes Bild wurde mit dem entsprechenden Text-Prompt mit dem Imagen 4-Modell generiert.
-
-### Illustration und Kunst
-
-- Eingabeaufforderung enthält: *„Eine painting von...”*, *„Eine sketch von...”*
-
-Die Stile variieren von monochromen Stilen wie Bleistift bis hin zu hyperrealistischer digitaler Kunst. Die folgenden Bilder verwenden beispielsweise dieselbe Eingabeaufforderung mit unterschiedlichen Stilen:
-
-*„Eine [art style or creation technique] einer kantigen elektrischen Limousine mit Wolkenkratzern im Hintergrund“*
+หากต้องการใช้สไตล์นี้ ให้เริ่มต้นด้วยการใช้คีย์เวิร์ดที่บอก Imagen อย่างชัดเจนว่าคุณกำลังมองหารูปภาพ เริ่มต้นพรอมต์ด้วย
+*"รูปภาพของ . "* เช่น
 
 |  |  |  |
 | --- | --- | --- |
-| Beispielbilder für Kunst   Eingabeaufforderung: Eine **technische Bleistiftskizze** eines kantigen... | Beispielbilder für Kunst   Eingabeaufforderung: Eine **Kohlezeichnung** eines kantigen... | Beispielbilder für Kunst   Prompt: Eine **Farbstiftzeichnung** eines kantigen... |
+| รูปภาพตัวอย่างแบบสมจริง 1   พรอมต์: **รูปภาพ**เมล็ดกาแฟในห้องครัวบนพื้นผิวไม้ | รูปภาพตัวอย่างแบบสมจริง 2   พรอมต์: **รูปภาพ**แท่งช็อกโกแลตบนเคาน์เตอร์ครัว | รูปภาพตัวอย่างแบบสมจริง 3   พรอมต์: **รูปภาพของ**อาคารสมัยใหม่ที่มีน้ำอยู่เบื้องหลัง |
+
+แหล่งที่มาของรูปภาพ: รูปภาพแต่ละรูปสร้างขึ้นโดยใช้พรอมต์ข้อความที่เกี่ยวข้องกับโมเดล Imagen 4
+
+##### ตัวปรับแต่งการถ่ายภาพ
+
+ในตัวอย่างต่อไปนี้ คุณจะเห็นตัวแก้ไขและพารามิเตอร์เฉพาะการถ่ายภาพหลายรายการ
+คุณรวมตัวแก้ไขหลายรายการเพื่อควบคุมได้แม่นยำยิ่งขึ้น
+
+1. **ระยะใกล้ของกล้อง** - *ถ่ายจากระยะไกลในระยะใกล้*
+
+   |  |  |
+   | --- | --- |
+   | ภาพตัวอย่างกล้องระยะใกล้   พรอมต์: รูปภาพ**ระยะใกล้**ของเมล็ดกาแฟ | ภาพตัวอย่างกล้องที่ซูมออก   พรอมต์: ภาพถ่าย**ซูมออก**ของถุงเล็กๆ ที่ใส่ เมล็ดกาแฟในครัวที่รก |
+2. **ตำแหน่งกล้อง** - *มุมสูงจากด้านล่าง*
+
+   |  |  |
+   | --- | --- |
+   | ภาพตัวอย่างภาพถ่ายทางอากาศ   พรอมต์: **ภาพถ่ายทางอากาศ**ของเมืองที่มีตึกสูง | ภาพตัวอย่างมุมมองจากด้านล่าง   พรอมต์: ภาพหลังคาป่าที่มีท้องฟ้าสีฟ้า**จากด้านล่าง** |
+3. **แสง** - *ธรรมชาติ สื่ออารมณ์ อบอุ่น เย็น*
+
+   |  |  |
+   | --- | --- |
+   | รูปภาพตัวอย่างแสงธรรมชาติ   พรอมต์: ภาพถ่ายสตูดิโอของอาร์มแชร์สมัยใหม่ **แสงธรรมชาติ** | รูปภาพตัวอย่างแสงไฟสื่ออารมณ์   พรอมต์: ภาพถ่ายอาร์มแชร์สมัยใหม่ในสตูดิโอ **การจัดแสงที่น่าทึ่ง** |
+4. **การตั้งค่ากล้อง** *- เบลอการเคลื่อนไหว ซอฟต์โฟกัส โบเก้ ภาพบุคคล*
+
+   |  |  |
+   | --- | --- |
+   | รูปภาพตัวอย่างเบลอจากการเคลื่อนไหว   พรอมต์: ภาพถ่ายเมืองที่มีตึกระฟ้าจากภายในรถยนต์ที่มี**ภาพเบลอจากการเคลื่อนไหว** | รูปภาพตัวอย่างซอฟต์โฟกัส   พรอมต์: **ซอฟต์โฟกัส**ภาพถ่ายสะพานในเมืองยามค่ำคืน |
+5. **ประเภทเลนส์** - *35 มม., 50 มม., ฟิชอาย, มุมกว้าง, มาโคร*
+
+   |  |  |
+   | --- | --- |
+   | รูปภาพตัวอย่างจากเลนส์มาโคร   พรอมต์: ภาพใบไม้ **เลนส์มาโคร** | รูปภาพตัวอย่างจากเลนส์ฟิชอาย   พรอมต์: ภาพถ่ายบนท้องถนน, นิวยอร์กซิตี้, **เลนส์ฟิชอาย** |
+6. **ประเภทฟิล์ม** - *ขาวดำ โพลารอยด์*
+
+   |  |  |
+   | --- | --- |
+   | รูปภาพตัวอย่างภาพถ่ายโพลารอยด์   พรอมต์: **ภาพถ่ายบุคคลแบบโพลารอยด์**ของสุนัขที่สวมแว่นกันแดด | รูปภาพตัวอย่างภาพถ่ายขาวดำ   พรอมต์: **ภาพขาวดำ**ของสุนัขที่ใส่แว่นกันแดด |
+
+แหล่งที่มาของรูปภาพ: รูปภาพแต่ละรูปสร้างขึ้นโดยใช้พรอมต์ข้อความที่เกี่ยวข้องกับโมเดล Imagen 4
+
+### ภาพและศิลปะ
+
+- พรอมต์มีลักษณะดังนี้ *"painting ของ..."* *"sketch ของ..."*
+
+สไตล์ศิลปะมีตั้งแต่สไตล์ขาวดำ เช่น ภาพร่างดินสอ ไปจนถึงศิลปะดิจิทัลที่สมจริงอย่างมาก
+ตัวอย่างเช่น รูปภาพต่อไปนี้ใช้พรอมต์เดียวกันแต่มีสไตล์แตกต่างกัน
+
+*"[art style or creation technique]ของรถซีดานไฟฟ้าสปอร์ตแบบเหลี่ยมที่มีตึกระฟ้าเป็นฉากหลัง"*
 
 |  |  |  |
 | --- | --- | --- |
-| Beispielbilder für Kunst   Eingabeaufforderung: Ein **Pastelbild** eines kantigen... | Beispielbilder für Kunst   Eingabeaufforderung: Eine **digitale Kunst** eines kantigen... | Beispielbilder für Kunst   Eingabeaufforderung: Ein **Art-dèco-Poster** eines kantigen... |
-
-Bildquelle: Jedes Bild wurde mit dem Imagen 2-Modell über den entsprechenden Text-Prompt generiert.
-
-##### Formen und Materialien
-
-- Eingabeaufforderung: *„...aus...”*, *„...in Form von...”*
-
-Eine der Stärken dieser Technologie ist, dass Sie Bilder erstellen können, die andernfalls schwer oder unmöglich wären. Sie können beispielsweise Ihr Firmenlogo in verschiedenen Materialien und Texturen neu erstellen.
+| รูปภาพตัวอย่างงานศิลปะ   พรอมต์: **ภาพวาดดินสอเทคนิค**ของ... | รูปภาพตัวอย่างงานศิลปะ   พรอมต์: **ภาพวาดด้วยดินสอถ่าน**ของ... | รูปภาพตัวอย่างงานศิลปะ   พรอมต์: **ภาพวาดด้วยดินสอสี**ของ... |
 
 |  |  |  |
 | --- | --- | --- |
-| Beispielbild 1 für Formen und Materialien   Eingabeaufforderung: Duffle Bag**aus** Käse | Beispielbild 2 für Formen und Materialien   Prompt: Neonröhren **in Form** eines Vogels | Beispielbild 3 für Formen und Materialien   Eingabeaufforderung: Ein Sessel **aus Papier**, Studiofoto, Origami-Stil |
+| รูปภาพตัวอย่างงานศิลปะ   พรอมต์: **ภาพวาดพาสเทล**ของ... | รูปภาพตัวอย่างงานศิลปะ   พรอมต์: **อาร์ตดิจิทัล**ของ... | รูปภาพตัวอย่างงานศิลปะ   พรอมต์: **อาร์ตเดโค (โปสเตอร์)** ของ... |
 
-Bildquelle: Jedes Bild wurde mit dem entsprechenden Text-Prompt mit dem Imagen 4-Modell generiert.
+แหล่งที่มาของรูปภาพ: รูปภาพแต่ละรูปสร้างขึ้นโดยใช้พรอมต์ข้อความที่เกี่ยวข้องกับโมเดล Imagen 2
 
-#### Bezüge auf historische Kunst
+##### รูปร่างและวัสดุ
 
-- Eingabeaufforderung: *„...im Stil von...”*
+- พรอมต์มีข้อความต่อไปนี้ *"...ทำจาก..."* *"...ในรูปของ..."*
 
-Bestimmte Stile haben sich im Laufe der Jahre zu einem Mythos entwickelt. Im Folgenden finden Sie einige Ideen für historische Gemälde oder Kunststile, die Sie ausprobieren können.
-
-*„Bild generieren im Stil von [art period or movement]
-: ein Windpark“*
+จุดแข็งอย่างหนึ่งของเทคโนโลยีนี้คือคุณสามารถสร้างภาพที่
+ทำได้ยากหรือทำไม่ได้เลยหากไม่มีเทคโนโลยีนี้ เช่น คุณสามารถสร้างโลโก้บริษัทใหม่ในวัสดุและพื้นผิวต่างๆ
 
 |  |  |  |
 | --- | --- | --- |
-| Beispielbild für Impressionsismus   Prompt: Bild generieren **im Stil von *einem Gemälde des Impressionismus***: ein Windpark | Beispielbild für Renaissance   Prompt: generate an image **in the style of *a renaissance painting***: a wind farm | Beispielbild für Pop Art   Bild generieren: **im Stil von *Pop-Art***: ein Windpark |
+| ภาพตัวอย่างรูปร่างและวัสดุ 1   พรอมต์: กระเป๋าทรงยาวฐานกลม**ทำจาก**ชีส | ภาพตัวอย่างรูปร่างและวัสดุ 2   พรอมต์: หลอดไฟนีออน**ในรูปทรง**ของนก | ภาพตัวอย่างรูปร่างและวัสดุ 3   พรอมต์: เก้าอี้เท้าแขน**ทำจากกระดาษ** ภาพถ่ายในสตูดิโอ สไตล์โอริกามิ |
 
-Bildquelle: Jedes Bild wurde mit dem entsprechenden Text-Prompt mit dem Imagen 4-Modell generiert.
+แหล่งที่มาของรูปภาพ: รูปภาพแต่ละรูปสร้างขึ้นโดยใช้พรอมต์ข้อความที่เกี่ยวข้องกับโมเดล Imagen 4
 
-#### Modifikatoren für die Bildqualität
+#### ข้อมูลอ้างอิงเกี่ยวกับศิลปะในประวัติศาสตร์
 
-Bestimmte Keywords können dem Modell mitteilen, dass Sie nach einem qualitativ hochwertigen Bild suchen. Beispiele für Qualitätsmodifikatoren:
+- พรอมต์มีข้อความว่า *"...ในสไตล์ของ..."*
 
-- **Allgemeine Modifikatoren**: *hohe Qualität, ansprechend, stilisiert*
-- **Fotos**: *4K, HDR, Studiofoto*
-- **Kunst, Illustration**: *von einem Profi, detailliert*
+สไตล์บางอย่างกลายเป็นสัญลักษณ์ที่โดดเด่นในช่วงหลายปีที่ผ่านมา ต่อไปนี้คือไอเดีย
+ภาพวาดหรือสไตล์ศิลปะในประวัติศาสตร์ที่คุณลองใช้ได้
 
-Im Folgenden finden Sie einige Beispiele für Eingabeaufforderungen ohne Qualitätsmodifikatoren und die gleiche Aufforderung mit Qualitätsmodifikatoren.
+*"สร้างรูปภาพในสไตล์ของ [art period or movement]
+: กังหันลม"*
+
+|  |  |  |
+| --- | --- | --- |
+| รูปภาพตัวอย่างลัทธิประทับใจ   พรอมต์: สร้างรูปภาพ**ในสไตล์*ภาพวาดแนวอิมเพรสชันนิสต์***: ฟาร์มกังหันลม | ตัวอย่างรูปภาพยุคฟื้นฟูศิลปะ   พรอมต์: สร้างรูปภาพ**ในสไตล์*ภาพวาดเรเนซองส์***: ฟาร์มกังหันลม | ภาพตัวอย่างป๊อปอาร์ต   พรอมต์: สร้างรูปภาพ**ในสไตล์*ป๊อปอาร์ต***: กังหันลม |
+
+แหล่งที่มาของรูปภาพ: รูปภาพแต่ละรูปสร้างขึ้นโดยใช้พรอมต์ข้อความที่เกี่ยวข้องกับโมเดล Imagen 4
+
+#### ตัวแก้ไขคุณภาพของรูปภาพ
+
+คีย์เวิร์ดบางคำจะช่วยให้โมเดลทราบว่าคุณกำลังมองหาชิ้นงานคุณภาพสูง
+ตัวอย่างตัวปรับคุณภาพมีดังนี้
+
+- **ตัวดัดแปลงทั่วไป** - *คุณภาพสูง สวยงาม มีสไตล์*
+- **รูปภาพ** - *4K, HDR, รูปภาพสตูดิโอ*
+- **ภาพวาด ภาพประกอบ** - *โดยมืออาชีพ มีรายละเอียด*
+
+ต่อไปนี้คือตัวอย่างพรอมต์บางส่วนที่ไม่มีตัวปรับแต่งคุณภาพและพรอมต์เดียวกันที่มีตัวปรับแต่งคุณภาพ
 
 |  |  |
 | --- | --- |
-| Getreide-Beispielbild ohne Modifikatoren   Eingabeaufforderung (keine Qualitätsmodifikatoren): Ein Foto von einem Getreidehalm | Getreide-Beispielbild mit Modifikatoren   Eingabeaufforderung (mit Qualitätsmodifikatoren): **Schönes 4K-**   Foto eines Getreidehalms **von einem  Profi-Fotografen aufgenommen** |
+| รูปภาพตัวอย่างข้าวโพดที่ไม่มีตัวแก้ไข   พรอมต์ (ไม่มีตัวแก้ไขคุณภาพ): รูปภาพต้นข้าวโพด | รูปภาพตัวอย่างข้าวโพดพร้อมตัวแก้ไข   พรอมต์ (พร้อมตัวปรับแต่งคุณภาพ): **4k HDR สวยงาม**   ภาพต้นข้าวโพด**ถ่ายโดย ช่างภาพมืออาชีพ** |
 
-Bildquelle: Jedes Bild wurde mit dem entsprechenden Text-Prompt mit dem Imagen 4-Modell generiert.
+แหล่งที่มาของรูปภาพ: รูปภาพแต่ละรูปสร้างขึ้นโดยใช้พรอมต์ข้อความที่เกี่ยวข้องกับโมเดล Imagen 4
 
-#### Seitenverhältnisse
+#### สัดส่วนภาพ
 
-Mit der Imagen-Bildgenerierung können Sie fünf verschiedene Bild-Seitenverhältnisse festlegen.
+การสร้างรูปภาพด้วย Imagen ช่วยให้คุณกำหนดสัดส่วนภาพที่แตกต่างกัน 5 แบบได้
 
-1. **Quadrat** (1:1, Standard) - Ein quadratisches Standardfoto. Typische Anwendungsfälle für dieses Seitenverhältnis sind Beiträge in sozialen Medien.
-2. **Vollbild** (4:3) - Dieses Seitenverhältnis wird häufig in Medien oder in Filmen verwendet.
-   Es bezeichnet auch die Abmessungen der meisten alten (Nicht-Breitbild-)Fernseher und Mittelformatkameras. Es erfasst horizontal mehr von der Szene (im Vergleich zu 1:1), dadurch gehört es zu den bevorzugten Seitenverhältnissen für die Fotografie.
-
-   |  |  |
-   | --- | --- |
-   | Seitenverhältnis-Beispiel   Prompt: Nahaufnahme der Finger eines Musikers, der Klavier spielt, Schwarz-Weiß-Film, Vintage (Seitenverhältnis 4:3) | Seitenverhältnis-Beispiel   Prompt: Ein professionelles Studiofoto von Pommes Frites für ein High-End-Restaurant im Stil einer Lebensmittelzeitschrift (Seitenverhältnis 4:3). |
-3. **Vollbild-Vollbild** (3:4) – Dies ist das um 90 Grad gedrehte Vollbild-Seitenverhältnis. So kann vertikal im Vergleich zum Seitenverhältnis 1:1 mehr von der Szene erfasst werden.
+1. **สี่เหลี่ยมจัตุรัส** (1:1, ค่าเริ่มต้น) - รูปภาพสี่เหลี่ยมจัตุรัสมาตรฐาน การใช้งานทั่วไปสำหรับ
+   สัดส่วนภาพนี้ ได้แก่ โพสต์ในโซเชียลมีเดีย
+2. **เต็มหน้าจอ** (4:3) - สัดส่วนภาพนี้มักใช้กันโดยทั่วไปในสื่อหรือภาพยนตร์
+   นอกจากนี้ยังเป็นสัดส่วนของทีวีรุ่นเก่า (ที่ไม่ใช่ไวด์สกรีน) และกล้องฟอร์แมตขนาดกลางส่วนใหญ่ด้วย
+   โดยจะจับภาพฉากในแนวนอนได้มากขึ้น (เมื่อเทียบกับ 1:1)
+   จึงเป็นสัดส่วนภาพที่ต้องการสำหรับการถ่ายภาพ
 
    |  |  |
    | --- | --- |
-   | Seitenverhältnis-Beispiel   Prompt: Eine Frau wandert, Nahaufnahme ihrer Stiefel, die sich in einer Pfütze spiegeln, große Berge im Hintergrund, im Stil einer Werbung, dramatische Blickwinkel (Seitenverhältnis 3:4) | Seitenverhältnis-Beispiel   Prompt: Luftaufnahme eines Flusses, der in einem mystischen Tal fließt (Seitenverhältnis 3:4) |
-4. **Breitbild** (16:9): Dieses Seitenverhältnis hat 4:3 ersetzt und ist heute das gängigste Seitenverhältnis für Fernseher, Monitore und Bildschirme von Smartphones (Querformat).
-   Verwenden Sie dieses Seitenverhältnis, wenn Sie mehr vom Hintergrund erfassen möchten (z. B. malerische Landschaften).
+   | ตัวอย่างสัดส่วนภาพ   พรอมต์: ภาพนิ้วมือของนักดนตรีในระยะใกล้ กำลังเล่นเปียโน ฟิล์มขาวดำ วินเทจ (สัดส่วนภาพ 4:3) | ตัวอย่างสัดส่วนภาพ   พรอมต์: ภาพถ่ายในสตูดิโอระดับมืออาชีพของ เฟรนช์ฟรายสำหรับร้านอาหารระดับไฮเอนด์ ในสไตล์ของนิตยสารอาหาร (สัดส่วนภาพ 4:3) |
+3. **เต็มหน้าจอแนวตั้ง** (3:4) - นี่คือสัดส่วนภาพแบบเต็มหน้าจอที่หมุน
+   90 องศา ซึ่งช่วยให้จับภาพฉากในแนวตั้งได้มากขึ้นเมื่อเทียบกับสัดส่วนภาพ 1:1
 
-   ![Seitenverhältnis-Beispiel](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_16-9_man.png?hl=de)
+   |  |  |
+   | --- | --- |
+   | ตัวอย่างสัดส่วนภาพ   พรอมต์: ผู้หญิงเดินป่า ภาพระยะใกล้ของ รองเท้าบูทที่สะท้อนในแอ่งน้ำ ภูเขาขนาดใหญ่เป็นฉากหลัง ใน สไตล์โฆษณา มุมที่น่าทึ่ง (สัดส่วนภาพ 3:4) | ตัวอย่างสัดส่วนภาพ   พรอมต์: ภาพมุมสูงของแม่น้ำที่ไหล ขึ้นไปในหุบเขาลึกลับ (สัดส่วนภาพ 3:4) |
+4. **จอกว้าง** (16:9) - อัตราส่วนนี้มาแทนที่ 4:3 และปัจจุบันเป็นอัตราส่วนที่พบมากที่สุด
+   สำหรับทีวี จอภาพ และหน้าจอโทรศัพท์มือถือ (แนวนอน)
+   ใช้สัดส่วนภาพนี้เมื่อต้องการบันทึกภาพพื้นหลังให้มากขึ้น (เช่น ทิวทัศน์ที่สวยงาม)
 
-   Prompt: Ein Mann ganz in weißer Kleidung, der am Strand sitzt, Nahaufnahme, Lichtverhältnisse einer goldenen Stunde (Seitenverhältnis 16:9)
-5. **Hochformat** (9:16): Dieses Seitenverhältnis entspricht dem Breitbild, aber gedreht. Dabei handelt es sich um ein relativ neues Seitenverhältnis, das in Kurzvideo-Apps beliebt ist (z. B. YouTube Shorts). Verwenden Sie es für hohe Objekte mit stark vertikalen Ausrichtungen wie Gebäude, Bäume, Wasserfälle oder ähnliche Objekte.
+   ![ตัวอย่างสัดส่วนภาพ](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_16-9_man.png?hl=th)
 
-   ![Seitenverhältnis-Beispiel](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_9-16_skyscraper.png?hl=de)
+   พรอมต์: ชายสวมเสื้อผ้าสีขาวทั้งหมดนั่งอยู่บนชายหาด ถ่ายภาพระยะใกล้ แสงสีช่วงเวลาแสงสีทอง (สัดส่วนภาพ 16:9
+   )
+5. **แนวตั้ง** (9:16) - อัตราส่วนนี้เป็นจอกว้างแต่หมุน อัตราส่วนภาพนี้เป็นอัตราส่วนภาพที่ค่อนข้างใหม่ซึ่งได้รับความนิยมจากแอปวิดีโอแบบสั้น (เช่น YouTube Shorts) ใช้สำหรับวัตถุสูงที่มีการวางแนวตั้งที่ชัดเจน เช่น อาคาร ต้นไม้ น้ำตก หรือวัตถุอื่นๆ ที่คล้ายกัน
 
-   Prompt: ein digitales Rendering eines riesigen Wolkenkratzers, modern,
-   groß, monumental, mit einem schönen Sonnenuntergang im Hintergrund (Seitenverhältnis 9:16)
+   ![ตัวอย่างสัดส่วนภาพ](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_9-16_skyscraper.png?hl=th)
 
-#### Fotorealistische Bilder
+   พรอมต์: ภาพเรนเดอร์ดิจิทัลของตึกระฟ้าขนาดใหญ่ที่ทันสมัย
+   ยิ่งใหญ่ อลังการ พร้อมฉากหลังเป็นภาพพระอาทิตย์ตกที่สวยงาม (สัดส่วนภาพ 9:16)
 
-Verschiedene Versionen des Bildgenerierungsmodells können eine Mischung aus künstlerischer und fotorealistischer Ausgabe bieten. Verwenden Sie die folgende Formulierung in Prompts, um je nach dem zu generierenden Thema eine fotorealistischere Ausgabe zu generieren.
+#### รูปภาพสมจริง
 
-| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
+โมเดลการสร้างรูปภาพ
+เวอร์ชันต่างๆ อาจให้ผลลัพธ์ทั้งแบบศิลปะและแบบสมจริง ใช้คำต่อไปนี้ในพรอมต์เพื่อสร้างเอาต์พุตที่สมจริงมากขึ้นตามวัตถุ
+ที่คุณต้องการสร้าง
+
+| กรณีการใช้งาน | ประเภทเลนส์ | ความยาวโฟกัส | รายละเอียดเพิ่มเติม |
 | --- | --- | --- | --- |
-| Personen (Hochformat) | Prime, Zoom | 24-35mm | Schwarz-Weiß-Film, Film Noir, Tiefenschärfe, Duotone (erwähnt zwei Farben) |
-| Essen, Insekten, Pflanzen (Objekte, Stilleben) | Makro | 60-105mm | Hohe Details, präzise Fokussierung, kontrollierte Beleuchtung |
-| Sport, Tiere (Bewegung) | Telefotozoom | 100-400mm | Schnelle Belichtungszeit, Aktions- oder Bewegungsverfolgung |
-| Astronomisch, Landschaft (Weitwinkel) | Weitwinkel | 10-24mm | Langzeitbelichtung, scharfe Fokussierung, Langzeitbelichtung, glattes Wasser oder Wolken |
+| ผู้คน (ภาพบุคคล) | ไพรม์ ซูม | 24-35 มม. | ฟิล์มขาวดำ, ฟิล์มนัวร์, ระยะชัดลึก, ดูโอโทน (ระบุ 2 สี) |
+| อาหาร แมลง พืช (วัตถุ ภาพหุ่นนิ่ง) | มาโคร | 60-105 มม. | รายละเอียดสูง โฟกัสแม่นยำ แสงที่ควบคุมได้ |
+| กีฬา สัตว์ป่า (การเคลื่อนไหว) | ซูมเทเลโฟโต้ | 100-400 มม. | ความเร็วชัตเตอร์สูง การติดตามการเคลื่อนไหวหรือการเคลื่อนที่ |
+| ดาราศาสตร์, ภูมิทัศน์ (มุมกว้าง) | ไวด์ | 10-24 มม. | เวลาเปิดรับแสงนาน โฟกัสคมชัด เปิดรับแสงนาน น้ำหรือเมฆเรียบ |
 
-##### Porträts
+##### ภาพพอร์เทรต
 
-| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
+| กรณีการใช้งาน | ประเภทเลนส์ | ความยาวโฟกัส | รายละเอียดเพิ่มเติม |
 | --- | --- | --- | --- |
-| Personen (Hochformat) | Prime, Zoom | 24-35mm | Schwarz-Weiß-Film, Film Noir, Tiefenschärfe, Duotone (erwähnt zwei Farben) |
+| ผู้คน (ภาพบุคคล) | ไพรม์ ซูม | 24-35 มม. | ฟิล์มขาวดำ, ฟิล์มนัวร์, ระยะชัดลึก, ดูโอโทน (ระบุ 2 สี) |
 
-Mit mehreren Suchbegriffen aus der Tabelle kann Imagen die folgenden Porträts generieren:
+Imagen สามารถสร้างภาพบุคคลต่อไปนี้ได้โดยใช้คีย์เวิร์ดหลายคำจากตาราง
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| Beispiel für Porträtfotos | Beispiel für Porträtfotos | Beispiel für Porträtfotos | Beispiel für Porträtfotos |
+| ตัวอย่างการถ่ายภาพบุคคล | ตัวอย่างการถ่ายภาพบุคคล | ตัวอย่างการถ่ายภาพบุคคล | ตัวอย่างการถ่ายภาพบุคคล |
 
-Prompt: *Eine Frau, 35 mm Hochformat, blaue und graue Duotones*  
-Modell: `imagen-4.0-generate-001`
-
-|  |  |  |  |
-| --- | --- | --- | --- |
-| Beispiel für Porträtfotos | Beispiel für Porträtfotos | Beispiel für Porträtfotos | Beispiel für Porträtfotos |
-
-Eingabeaufforderung: *Eine Frau, 35 mm Hochformat, Film Noir*  
-Modell: `imagen-4.0-generate-001`
-
-##### Objekte
-
-| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
-| --- | --- | --- | --- |
-| Essen, Insekten, Pflanzen (Objekte, Stilleben) | Makro | 60-105mm | Hohe Details, präzise Fokussierung, kontrollierte Beleuchtung |
-
-Mit mehreren Suchbegriffen aus der Tabelle kann Imagen die folgenden Objektbilder generieren:
+พรอมต์: *ภาพบุคคลขนาด 35 มม. ของผู้หญิงที่มีสีฟ้าและเทา*  
+โมเดล: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| Beispiel für Objektfotografie | Beispiel für Objektfotografie | Beispiel für Objektfotografie | Beispiel für Objektfotografie |
+| ตัวอย่างการถ่ายภาพบุคคล | ตัวอย่างการถ่ายภาพบุคคล | ตัวอย่างการถ่ายภาพบุคคล | ตัวอย่างการถ่ายภาพบุคคล |
 
-Eingabeaufforderung: *Blatt einer Gebetspflanze, Makroobjektiv, 60 mm*  
-Modell: `imagen-4.0-generate-001`
+พรอมต์: *ภาพบุคคลผู้หญิง 35 มม. ฟิล์มนัวร์*  
+โมเดล: `imagen-4.0-generate-001`
+
+##### วัตถุ
+
+| กรณีการใช้งาน | ประเภทเลนส์ | ความยาวโฟกัส | รายละเอียดเพิ่มเติม |
+| --- | --- | --- | --- |
+| อาหาร แมลง พืช (วัตถุ ภาพหุ่นนิ่ง) | มาโคร | 60-105 มม. | รายละเอียดสูง โฟกัสแม่นยำ แสงที่ควบคุมได้ |
+
+เมื่อใช้คีย์เวิร์ดหลายคำจากตาราง Imagen จะสร้างรูปภาพออบเจ็กต์ต่อไปนี้ได้
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| Beispiel für Objektfotografie | Beispiel für Objektfotografie | Beispiel für Objektfotografie | Beispiel für Objektfotografie |
+| ตัวอย่างการถ่ายภาพวัตถุ | ตัวอย่างการถ่ายภาพวัตถุ | ตัวอย่างการถ่ายภาพวัตถุ | ตัวอย่างการถ่ายภาพวัตถุ |
 
-Eingabeaufforderung: *Eine Nudelplatte, 100-mm-Makroobjektiv*  
-Modell: `imagen-4.0-generate-001`
-
-##### Bewegung
-
-| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
-| --- | --- | --- | --- |
-| Sport, Tiere (Bewegung) | Telefotozoom | 100-400mm | Schnelle Belichtungszeit, Aktions- oder Bewegungsverfolgung |
-
-Mit mehreren Suchbegriffen aus der Tabelle kann Imagen die folgenden Bewegungsbilder generieren:
+พรอมต์: *ใบของต้นอธิษฐาน เลนส์มาโคร 60 มม.*  
+โมเดล: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild |
+| ตัวอย่างการถ่ายภาพวัตถุ | ตัวอย่างการถ่ายภาพวัตถุ | ตัวอย่างการถ่ายภาพวัตถุ | ตัวอย่างการถ่ายภาพวัตถุ |
 
-Prompt: *Ein erfolgreicher Touchdown, schnelle Belichtungszeit, Bewegungsverfolgung*  
-Modell: `imagen-4.0-generate-001`
+พรอมต์: *จานพาสต้า เลนส์มาโคร 100 มม.*  
+โมเดล: `imagen-4.0-generate-001`
+
+##### การเคลื่อนไหว
+
+| กรณีการใช้งาน | ประเภทเลนส์ | ความยาวโฟกัส | รายละเอียดเพิ่มเติม |
+| --- | --- | --- | --- |
+| กีฬา สัตว์ป่า (การเคลื่อนไหว) | ซูมเทเลโฟโต้ | 100-400 มม. | ความเร็วชัตเตอร์สูง การติดตามการเคลื่อนไหวหรือการเคลื่อนที่ |
+
+เมื่อใช้คีย์เวิร์ดหลายคำจากตาราง Imagen จะ
+สร้างภาพเคลื่อนไหวต่อไปนี้ได้
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild |
+| ตัวอย่างการถ่ายภาพเคลื่อนไหว | ตัวอย่างการถ่ายภาพเคลื่อนไหว | ตัวอย่างการถ่ายภาพเคลื่อนไหว | ตัวอย่างการถ่ายภาพเคลื่อนไหว |
 
-Eingabeaufforderung: *Ein Reh läuft im Wald, schnelle Belichtungszeit, Bewegungsverfolgung*  
-Modell: `imagen-4.0-generate-001`
-
-##### Weitwinkel
-
-| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
-| --- | --- | --- | --- |
-| Astronomisch, Landschaft (Weitwinkel) | Weitwinkel | 10-24mm | Langzeitbelichtung, scharfe Fokussierung, Langzeitbelichtung, glattes Wasser oder Wolken |
-
-Mit mehreren Suchbegriffen aus der Tabelle kann Imagen die folgenden Weitwinkelbilder generieren:
+พรอมต์: *ทัชดาวน์ที่ชนะ ความเร็วชัตเตอร์สูง การติดตามการเคลื่อนไหว*  
+โมเดล: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie |
+| ตัวอย่างการถ่ายภาพเคลื่อนไหว | ตัวอย่างการถ่ายภาพเคลื่อนไหว | ตัวอย่างการถ่ายภาพเคลื่อนไหว | ตัวอย่างการถ่ายภาพเคลื่อนไหว |
 
-Eingabeaufforderung: *Großer Bergbereich, Querwinkel 10 mm*  
-Modell: `imagen-4.0-generate-001`
+พรอมต์: *กวางวิ่งในป่า ความเร็วชัตเตอร์สูง การติดตามการเคลื่อนไหว*  
+โมเดล: `imagen-4.0-generate-001`
+
+##### ไวด์
+
+| กรณีการใช้งาน | ประเภทเลนส์ | ความยาวโฟกัส | รายละเอียดเพิ่มเติม |
+| --- | --- | --- | --- |
+| ดาราศาสตร์, ภูมิทัศน์ (มุมกว้าง) | ไวด์ | 10-24 มม. | เวลาเปิดรับแสงนาน โฟกัสคมชัด เปิดรับแสงนาน น้ำหรือเมฆเรียบ |
+
+Imagen สามารถสร้างรูปภาพมุมกว้างต่อไปนี้ได้โดยใช้คีย์เวิร์ดหลายคำจากตาราง
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie |
+| ตัวอย่างการถ่ายภาพมุมกว้าง | ตัวอย่างการถ่ายภาพมุมกว้าง | ตัวอย่างการถ่ายภาพมุมกว้าง | ตัวอย่างการถ่ายภาพมุมกว้าง |
 
-Prompt: *ein Foto des Mondes, Astrofotografie, Weitwinkel 10 mm*  
-Modell: `imagen-4.0-generate-001`
+พรอมต์: *เทือกเขากว้างใหญ่ มุมกว้างแนวนอน 10 มม.*  
+โมเดล: `imagen-4.0-generate-001`
 
-## Modellversionen
+|  |  |  |  |
+| --- | --- | --- | --- |
+| ตัวอย่างการถ่ายภาพมุมกว้าง | ตัวอย่างการถ่ายภาพมุมกว้าง | ตัวอย่างการถ่ายภาพมุมกว้าง | ตัวอย่างการถ่ายภาพมุมกว้าง |
 
-### Imagen 4
+พรอมต์: *รูปภาพดวงจันทร์ การถ่ายภาพดวงดาว มุมกว้าง 10 มม.*  
+โมเดล: `imagen-4.0-generate-001`
 
-| Attribut | Beschreibung |
+## เวอร์ชันของโมเดล
+
+### Imagen 4
+
+| พร็อพเพอร์ตี้ | คำอธิบาย |
 | --- | --- |
-| id\_cardModellcode | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
-| saveUnterstützte Datentypen | **Eingabe**  Text  **Ausgabe**  Bilder |
-| token\_autoToken-Limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=de) | **Eingabetokenlimit**  480 Tokens (Text)  **Ausgabe von Bildern**  1 bis 4 (Ultra/Standard/Schnell) |
-| calendar\_monthLetzte Aktualisierung | Juni 2025 |
+| รหัสโมเดล id\_card | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
+| บันทึกประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ  **เอาต์พุต**  รูปภาพ |
+| token\_autoขีดจำกัดของโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  480 โทเค็น (ข้อความ)  **รูปภาพเอาต์พุต**  1 ถึง 4 (Ultra/Standard/Fast) |
+| calendar\_monthการอัปเดตล่าสุด | มิถุนายน 2025 |
 
-### Imagen 3
+### Imagen 3
 
-Das Modell Imagen 3 wurde [eingestellt](https://ai.google.dev/gemini-api/docs/deprecations?hl=de).
+[ปิด](https://ai.google.dev/gemini-api/docs/deprecations?hl=th)โมเดล Imagen 3 แล้ว
 
-Feedback geben
+ส่งความคิดเห็น
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Zuletzt aktualisiert: 2026-04-29 (UTC).
+อัปเดตล่าสุด 2026-04-29 UTC
 
-Haben Sie Feedback für uns?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-04-29 (UTC)."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-29 UTC"],[],[]]

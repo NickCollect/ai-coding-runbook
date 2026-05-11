@@ -1,48 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi
-fetched_at: 2026-05-05T20:44:41.787302+00:00
-title: "Hi\u1ec3u video \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-TW
+fetched_at: 2026-05-11T05:00:01.268873+00:00
+title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Gửi ý kiến phản hồi
+提供意見
 
-# Hiểu video
+# 影片解讀
 
-> Để tìm hiểu về tính năng tạo video, hãy xem hướng dẫn về [Veo](https://ai.google.dev/gemini-api/docs/video?hl=vi).
+> 如要瞭解如何生成影片，請參閱 [Veo](https://ai.google.dev/gemini-api/docs/video?hl=zh-tw) 指南。
 
-Các mô hình Gemini có thể xử lý video, cho phép nhiều trường hợp sử dụng tiên tiến dành cho nhà phát triển mà trước đây cần đến các mô hình dành riêng cho miền.
-Một số tính năng về thị giác của Gemini bao gồm khả năng: mô tả, phân đoạn và trích xuất thông tin từ video, trả lời câu hỏi về nội dung video và tham chiếu đến các dấu thời gian cụ thể trong video.
+Gemini 模型可處理影片，因此許多前沿開發人員可使用這些模型，不必再像過去一樣，需要特定領域的模型。Gemini 的部分視覺功能包括：描述、區隔及擷取影片資訊、回答影片內容相關問題，以及參照影片中的特定時間戳記。
 
-Bạn có thể cung cấp video làm dữ liệu đầu vào cho Gemini theo những cách sau:
+你可以透過下列方式將影片提供給 Gemini：
 
-| Phương thức nhập | Kích thước tối đa | Trường hợp sử dụng được đề xuất |
+| 輸入法 | 大小上限 | 建議用途 |
 | --- | --- | --- |
-| [File API](#upload-video) | 20 GB (có tính phí) / 2 GB (miễn phí) | Tệp lớn (từ 100 MB trở lên), video dài (từ 10 phút trở lên), tệp có thể dùng lại. |
-| [Đăng ký Cloud Storage](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=vi#registration) | 2 GB (mỗi tệp, không có giới hạn về bộ nhớ) | Tệp lớn (từ 100 MB trở lên), video dài (từ 10 phút trở lên), tệp liên tục, có thể dùng lại. |
-| [Dữ liệu nội tuyến](#inline-video) | < 100 MB | Tệp nhỏ (dưới 100 MB), thời lượng ngắn (dưới 1 phút), dữ liệu đầu vào một lần. |
-| [URL trên YouTube](#youtube) | Không áp dụng | Video công khai trên YouTube. |
+| [檔案 API](#upload-video) | 20 GB (付費) / 2 GB (免費) | 大型檔案 (100 MB 以上)、長影片 (10 分鐘以上)、可重複使用的檔案。 |
+| [Cloud Storage 註冊](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-tw#registration) | 2 GB (每個檔案，無儲存空間限制) | 大型檔案 (100 MB 以上)、長影片 (10 分鐘以上)、可重複使用的永久檔案。 |
+| [內嵌資料](#inline-video) | < 100MB | 小型檔案 (小於 100 MB)、短時間 (小於 1 分鐘)、一次性輸入。 |
+| [YouTube 網址](#youtube) | 不適用 | 公開的 YouTube 影片。 |
 
-> **Lưu ý:** Bạn nên sử dụng [File API](#upload-video) cho hầu hết các trường hợp sử dụng, đặc biệt là đối với các tệp có kích thước lớn hơn 100 MB hoặc khi bạn muốn sử dụng lại tệp trên nhiều yêu cầu.
+> **注意：**建議在大多數情況下使用 [File API](#upload-video)，尤其是檔案大小超過 100 MB，或是您想在多個要求中重複使用檔案時。
 
-Để tìm hiểu về các phương thức nhập tệp khác, chẳng hạn như sử dụng URL bên ngoài hoặc tệp
-được lưu trữ trong Google Cloud, hãy xem hướng dẫn về
-[Phương thức nhập tệp](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=vi).
+如要瞭解其他檔案輸入方法，例如使用外部網址或儲存在 Google Cloud 中的檔案，請參閱[檔案輸入方法](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-tw)指南。
 
-### Tải tệp video lên
+### 上傳影片檔案
 
-Đoạn mã sau đây tải một video mẫu xuống, tải video đó lên bằng [Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi),
-đợi video được xử lý, sau đó sử dụng tham chiếu tệp đã tải lên để
-tóm tắt video.
+下列程式碼會下載影片樣本、使用 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw) 上傳影片、等待處理完成，然後使用上傳的檔案參照來總結影片內容。
 
 ### Python
 
@@ -167,17 +162,15 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 jq -r ".candidates[].content.parts[].text" response.json
 ```
 
-Luôn sử dụng Files API khi tổng kích thước yêu cầu (bao gồm tệp, câu lệnh bằng văn bản, hướng dẫn hệ thống, v.v.) lớn hơn 20 MB, thời lượng video đáng kể hoặc nếu bạn dự định sử dụng cùng một video trong nhiều câu lệnh.
-File API chấp nhận trực tiếp các định dạng tệp video.
+如果要求總大小 (包括檔案、文字提示詞、系統指令等) 超過 20 MB、影片時間長度較長，或您打算在多個提示詞中使用相同影片，請一律使用 Files API。File API 可直接接受影片檔案格式。
 
-Để tìm hiểu thêm về cách làm việc với các tệp đa phương tiện, hãy xem
-[Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi).
+如要進一步瞭解如何處理媒體檔案，請參閱 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw)。
 
-### Truyền dữ liệu video nội tuyến
+### 內嵌傳遞影片資料
 
-Thay vì tải tệp video lên bằng File API, bạn có thể truyền trực tiếp các video nhỏ hơn trong yêu cầu đến `generateContent`. Phương thức này phù hợp với các video ngắn hơn có tổng kích thước yêu cầu dưới 20 MB.
+您可以直接在 `generateContent` 的要求中傳遞較小的影片，不必使用 File API 上傳影片檔案。這適合總要求大小小於 20 MB 的短片。
 
-Sau đây là ví dụ về cách cung cấp dữ liệu video nội tuyến:
+以下是提供內嵌影片資料的範例：
 
 ### Python
 
@@ -262,9 +255,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
     }' 2> /dev/null
 ```
 
-### Truyền URL trên YouTube
+### 傳送 YouTube 網址
 
-Bạn có thể truyền trực tiếp URL trên YouTube đến Gemini API như một phần của yêu cầu như sau:
+您可以將 YouTube 網址直接傳遞至 Gemini API，做為要求的一部分，如下所示：
 
 ### Python
 
@@ -370,22 +363,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
     }' 2> /dev/null
 ```
 
-**Giới hạn:**
+**限制：**
 
-- Đối với gói miễn phí, bạn không thể tải lên quá 8 giờ video trên YouTube mỗi ngày.
-- Đối với gói có tính phí, không có giới hạn dựa trên thời lượng video.
-- Đối với các mô hình trước Gemini 2.5, bạn chỉ có thể tải lên 1 video cho mỗi yêu cầu. Đối với các mô hình Gemini 2.5 trở lên, bạn có thể tải lên tối đa 10 video cho mỗi yêu cầu.
-- Bạn chỉ có thể tải lên video công khai (không phải video riêng tư hoặc không công khai).
+- 免費方案每天最多只能上傳 8 小時的 YouTube 影片。
+- 付費方案則沒有影片長度限制。
+- 如果是 Gemini 2.5 之前的模型，每次要求只能上傳 1 部影片。如果是 Gemini 2.5 以上版本，每個要求最多可上傳 10 部影片。
+- 你只能上傳公開影片，無法上傳私人或不公開影片。
 
-## Sử dụng tính năng lưu vào bộ nhớ đệm theo bối cảnh cho video dài
+## 在長片中使用脈絡快取功能
 
-Đối với những video dài hơn 10 phút hoặc khi bạn dự định thực hiện nhiều yêu cầu
-đối với cùng một tệp video, hãy sử dụng [tính năng lưu vào bộ nhớ đệm theo bối cảnh](https://ai.google.dev/gemini-api/docs/caching?hl=vi) để
-giảm chi phí và cải thiện độ trễ. Tính năng lưu vào bộ nhớ đệm theo bối cảnh cho phép bạn xử lý video một lần và sử dụng lại các mã thông báo cho các truy vấn tiếp theo, giúp tính năng này trở nên lý tưởng cho các phiên trò chuyện hoặc phân tích lặp lại nội dung dài.
+如果影片長度超過 10 分鐘，或您打算對同一個影片檔案提出多項要求，請使用[內容快取](https://ai.google.dev/gemini-api/docs/caching?hl=zh-tw)，以降低成本並縮短延遲時間。脈絡快取功能可讓您處理一次影片，並在後續查詢中重複使用權杖，非常適合用於對話工作階段或重複分析長篇內容。
 
-## Tham chiếu đến dấu thời gian trong nội dung
+## 參考內容中的時間戳記
 
-Bạn có thể đặt câu hỏi về các điểm cụ thể trong video bằng cách sử dụng dấu thời gian ở dạng `MM:SS`.
+你可以使用 `MM:SS` 格式的時間戳記，詢問影片中特定時間點的問題。
 
 ### Python
 
@@ -416,12 +407,11 @@ const prompt = "What are the examples given at 00:05 and 00:10 supposed to show 
 PROMPT="What are the examples given at 00:05 and 00:10 supposed to show us?"
 ```
 
-## Trích xuất thông tin chi tiết từ video
+## 從影片擷取詳細洞察資料
 
-Các mô hình Gemini cung cấp các tính năng mạnh mẽ để hiểu nội dung video bằng cách xử lý thông tin từ cả luồng **âm thanh và hình ảnh**. Điều này cho phép bạn trích xuất một tập hợp thông tin chi tiết phong phú, bao gồm cả việc tạo nội dung mô tả về những gì đang diễn ra trong video và trả lời câu hỏi về nội dung của video đó.
+Gemini 模型可處理**音訊和影像**串流中的資訊，因此具備強大的影片內容解讀能力。這項功能可讓你擷取豐富的詳細資料，包括生成影片內容的說明，以及回答相關問題。
 
-Đối với nội dung mô tả bằng hình ảnh, mô hình này lấy mẫu video với tốc độ **1 khung hình/giây** (FPS). Tốc độ lấy mẫu mặc định này hoạt động hiệu quả đối với hầu hết nội dung, nhưng lưu ý rằng tốc độ này có thể bỏ lỡ thông tin chi tiết trong các video có chuyển động nhanh hoặc thay đổi cảnh nhanh.
-Đối với nội dung có chuyển động nhanh như vậy, hãy cân nhắc [đặt tốc độ khung hình tuỳ chỉnh](#custom-frame-rate).
+如要生成視覺描述，模型會以**每秒 1 個影格** (FPS) 的速率對影片取樣。這個預設取樣率適用於大多數內容，但請注意，如果影片有快速動作或場景快速變換，可能就會錯過細節。對於這類高動態內容，建議[設定自訂影格率](#custom-frame-rate)。
 
 ### Python
 
@@ -451,13 +441,13 @@ const prompt = "Describe the key events in this video, providing both audio and 
 PROMPT="Describe the key events in this video, providing both audio and visual details. Include timestamps for salient moments."
 ```
 
-## Tuỳ chỉnh quá trình xử lý video
+## 自訂影片處理方式
 
-Bạn có thể tuỳ chỉnh quá trình xử lý video trong Gemini API bằng cách đặt khoảng thời gian cắt hoặc cung cấp tính năng lấy mẫu tốc độ khung hình tuỳ chỉnh.
+您可以設定剪輯間隔或提供自訂影格率取樣，在 Gemini API 中自訂影片處理作業。
 
-### Đặt khoảng thời gian cắt
+### 設定剪輯間隔
 
-Bạn có thể cắt video bằng cách chỉ định `videoMetadata` với độ lệch bắt đầu và kết thúc.
+您可以指定 `videoMetadata`，並提供開始和結束偏移量，藉此剪輯影片。
 
 ### Python
 
@@ -524,9 +514,9 @@ console.log(response.text)
 await main();
 ```
 
-### Đặt tốc độ khung hình tuỳ chỉnh
+### 設定自訂影格率
 
-Bạn có thể đặt tính năng lấy mẫu tốc độ khung hình tuỳ chỉnh bằng cách truyền đối số `fps` đến `videoMetadata`.
+您可以將 `fps` 引數傳遞至 `videoMetadata`，藉此設定自訂影格率取樣。
 
 ### Python
 
@@ -555,11 +545,11 @@ response = client.models.generate_content(
 )
 ```
 
-Theo mặc định, 1 khung hình/giây (FPS) được lấy mẫu từ video. Bạn có thể muốn đặt FPS thấp (dưới 1) cho video dài. Điều này đặc biệt hữu ích đối với các video tĩnh (ví dụ: bài giảng). Sử dụng FPS cao hơn cho các video yêu cầu phân tích chi tiết theo thời gian, chẳng hạn như hiểu hành động nhanh hoặc theo dõi chuyển động tốc độ cao.
+系統預設會從影片中取樣每秒 1 個影格。如果是長片，建議將 FPS 設為低於 1。這項功能特別適合大部分為靜態的影片 (例如講座)。如果影片需要精細的時間分析，例如瞭解快速動作或追蹤高速動作，請使用較高的每秒影格數。
 
-## Định dạng video được hỗ trợ
+## 支援的影片格式
 
-Gemini hỗ trợ các loại MIME định dạng video sau:
+Gemini 支援下列影片格式 MIME 類型：
 
 - `video/mp4`
 - `video/mpeg`
@@ -571,56 +561,46 @@ Gemini hỗ trợ các loại MIME định dạng video sau:
 - `video/wmv`
 - `video/3gpp`
 
-## Thông tin chi tiết kỹ thuật về video
+## 影片技術詳細資料
 
-- **Mô hình và bối cảnh được hỗ trợ**: Tất cả các mô hình Gemini đều có thể xử lý dữ liệu video.
-  - Các mô hình có cửa sổ ngữ cảnh 1M có thể xử lý video dài tối đa 1 giờ ở độ phân giải phương tiện mặc định hoặc dài tối đa 3 giờ ở độ phân giải phương tiện thấp.
-- **Xử lý File API**: Khi sử dụng File API, video được lưu trữ ở tốc độ 1
-  khung hình/giây (FPS) và âm thanh được xử lý ở tốc độ 1 Kbps (một kênh).
-  Dấu thời gian được thêm vào mỗi giây.
-  - Các tốc độ này có thể thay đổi trong tương lai để cải thiện khả năng suy luận.
-  - Bạn có thể ghi đè tốc độ lấy mẫu 1 FPS bằng cách [đặt tốc độ khung hình tuỳ chỉnh](#custom-frame-rate).
-- **Tính toán mã thông báo**: Mỗi giây video được mã hoá thành mã thông báo như sau:
-  - Khung hình riêng lẻ (được lấy mẫu ở tốc độ 1 FPS):
-    - Nếu [`mediaResolution`](https://ai.google.dev/api/generate-content?hl=vi#MediaResolution) được đặt
-      thành thấp, thì các khung hình sẽ được mã hoá thành mã thông báo ở tốc độ 66 mã thông báo/khung hình.
-    - Nếu không, các khung hình sẽ được mã hoá thành mã thông báo ở tốc độ 258 mã thông báo/khung hình.
-  - Âm thanh: 32 mã thông báo/giây.
-  - Siêu dữ liệu cũng được đưa vào.
-  - Tổng cộng: Khoảng 300 mã thông báo/giây video ở độ phân giải phương tiện mặc định hoặc 100 mã thông báo/giây video ở độ phân giải phương tiện thấp.
-- **Độ phân giải phương tiện**: Gemini 3 giới thiệu tính năng kiểm soát chi tiết quá trình xử lý thị giác đa phương thức
-  bằng tham số `media_resolution`. Tham số `media_resolution` xác định **số lượng mã thông báo tối đa được phân bổ cho mỗi hình ảnh hoặc khung hình video đầu vào.**
-  Độ phân giải cao hơn giúp cải thiện khả năng đọc văn bản nhỏ hoặc xác định các chi tiết nhỏ của mô hình, nhưng làm tăng mức sử dụng mã thông báo và độ trễ.
+- **支援的模型和脈絡**：所有 Gemini 模型都能處理影片資料。
+  - 支援 100 萬個詞元的脈絡窗口模型，可以處理長達 1 小時的影片 (預設媒體解析度)，或長達 3 小時的影片 (低媒體解析度)。
+- **File API 處理**：使用 File API 時，影片會以每秒 1 個影格 (FPS) 的速度儲存，音訊則會以 1 Kbps (單一聲道) 的速度處理。系統每秒都會新增時間戳記。
+  - 為提升推論品質，這些費率日後可能會有所變動。
+  - 如要覆寫 1 FPS 的取樣率，請[設定自訂影格率](#custom-frame-rate)。
+- **符記計算**：每秒影片會轉換為以下符記：
+  - 個別影格 (以 1 FPS 取樣)：
+    - 如果 [`mediaResolution`](https://ai.google.dev/api/generate-content?hl=zh-tw#MediaResolution) 設為低，每個影格會產生 66 個權杖。
+    - 否則，每個影格會以 258 個權杖進行權杖化。
+  - 音訊：每秒 32 個權杖。
+  - 也包含中繼資料。
+  - 總計：預設媒體解析度下，每秒影片約 300 個權杖；低媒體解析度下，每秒影片約 100 個權杖。
+- **中等解析度**：Gemini 3 推出 `media_resolution` 參數，可精細控管多模態視覺處理。`media_resolution` 參數會決定每個輸入圖片或影片影格分配的詞元數量上限。解析度越高，模型就越能辨識細小文字或細節，但也會增加詞元用量和延遲時間。
 
-  Để biết thêm thông tin chi tiết về tham số và cách tham số này có thể tác động đến việc tính toán mã thông báo, hãy xem hướng dẫn về [độ phân giải phương tiện](https://ai.google.dev/gemini-api/docs/media-resolution?hl=vi).
-- **Định dạng dấu thời gian**: Khi tham chiếu đến các khoảnh khắc cụ thể trong video trong lời nhắc, hãy sử dụng định dạng `MM:SS` (ví dụ: `01:15` cho 1 phút 15 giây).
-- **Các phương pháp hay nhất**:
+  如要進一步瞭解參數及其對權杖計算的影響，請參閱[媒體解析度](https://ai.google.dev/gemini-api/docs/media-resolution?hl=zh-tw)指南。
+- **時間戳記格式**：在提示中提及影片的特定時間點時，請使用 `MM:SS` 格式 (例如 `01:15` 代表 1 分 15 秒)。
+- **最佳做法**：
 
-  - Chỉ sử dụng một video cho mỗi yêu cầu lời nhắc để có kết quả tối ưu.
-  - Nếu kết hợp văn bản và một video, hãy đặt lời nhắc bằng văn bản *sau* phần video trong mảng `contents`.
-  - Xin lưu ý rằng các chuỗi hành động nhanh có thể mất thông tin chi tiết do tốc độ lấy mẫu 1 FPS. Hãy cân nhắc làm chậm các đoạn video như vậy nếu cần.
+  - 為獲得最佳結果，每個提示要求只能使用一部影片。
+  - 如果結合文字和單一影片，請將文字提示詞放在 `contents` 陣列的影片部分*之後*。
+  - 請注意，由於取樣率為每秒 1 幀，快速動作序列可能會遺失細節。如有需要，請考慮放慢這類片段的速度。
 
-## Bước tiếp theo
+## 後續步驟
 
-Hướng dẫn này trình bày cách tải tệp video lên và tạo văn bản đầu ra từ dữ liệu đầu vào video. Để tìm hiểu thêm, hãy xem các tài nguyên sau:
+本指南說明如何上傳影片檔案，並從影片輸入內容生成文字輸出內容。如要進一步瞭解相關內容，請參閱下列資源：
 
-- [Hướng dẫn hệ thống](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi#system-instructions):
-  Hướng dẫn hệ thống cho phép bạn điều chỉnh hành vi của mô hình dựa trên
-  nhu cầu và trường hợp sử dụng cụ thể.
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi): Tìm hiểu thêm về cách tải lên và quản lý
-  tệp để sử dụng với Gemini.
-- [Chiến lược đưa ra lời nhắc bằng tệp](https://ai.google.dev/gemini-api/docs/files?hl=vi#prompt-guide): Gemini API hỗ trợ đưa ra lời nhắc bằng dữ liệu văn bản, hình ảnh, âm thanh và video,
-  còn được gọi là đưa ra lời nhắc đa phương thức.
-- [Hướng dẫn về an toàn](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=vi): Đôi khi, các mô hình AI tạo sinh
-  tạo ra kết quả không mong muốn, chẳng hạn như kết quả không chính xác, thiên vị hoặc phản cảm. Việc xử lý hậu kỳ và đánh giá của con người là điều cần thiết để
-  hạn chế nguy cơ gây hại từ những kết quả như vậy.
+- [系統指令](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-tw#system-instructions)：
+  系統指令可根據特定需求和用途，引導模型行為。
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw)：進一步瞭解如何上傳及管理檔案，以供 Gemini 使用。
+- [檔案提示策略](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw#prompt-guide)：Gemini API 支援使用文字、圖片、音訊和影片資料提示，也就是多模態提示。
+- [安全注意事項](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=zh-tw)：有時生成式 AI 模型會產生出乎意料的輸出內容，例如不正確、有偏誤或令人反感的內容。後續處理和人工評估是不可或缺的環節，有助於降低這類輸出內容造成危害的風險。
 
-Gửi ý kiến phản hồi
+提供意見
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+上次更新時間：2026-05-07 (世界標準時間)。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+想進一步說明嗎？
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-07 (世界標準時間)。"],[],[]]

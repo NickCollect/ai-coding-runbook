@@ -1,30 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=th
-fetched_at: 2026-05-05T20:47:17.329115+00:00
-title: "\u0e23\u0e27\u0e21\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e21\u0e37\u0e2d\u0e43\u0e19\u0e15\u0e31\u0e27\u0e41\u0e25\u0e30\u0e01\u0e32\u0e23\u0e40\u0e23\u0e35\u0e22\u0e01\u0e43\u0e0a\u0e49\u0e1f\u0e31\u0e07\u0e01\u0e4c\u0e0a\u0e31\u0e19 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-CN
+fetched_at: 2026-05-11T05:07:22.299331+00:00
+title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-ส่งความคิดเห็น
+发送反馈
 
-# รวมเครื่องมือในตัวและการเรียกใช้ฟังก์ชัน
+# 结合使用内置工具和函数调用
 
-Gemini ช่วยให้คุณสามารถรวม[เครื่องมือในตัว](https://ai.google.dev/gemini-api/docs/tools?hl=th) เช่น `google_search` และ[การเรียกใช้ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)
-(หรือที่เรียกว่า*เครื่องมือที่กำหนดเอง*) ไว้ในการสร้างครั้งเดียวได้โดยการเก็บรักษาและแสดงประวัติบริบทของการเรียกใช้เครื่องมือ การผสมผสานเครื่องมือในตัวและเครื่องมือที่กำหนดเองช่วยให้
-เวิร์กโฟลว์ที่ซับซ้อนและมีเอเจนต์ทำงานได้ เช่น โมเดลสามารถอ้างอิง
-ข้อมูลเว็บแบบเรียลไทม์ก่อนที่จะเรียกตรรกะทางธุรกิจที่เฉพาะเจาะจงของคุณ
+Gemini 允许在一次生成中组合使用[内置工具](https://ai.google.dev/gemini-api/docs/tools?hl=zh-cn)（例如 `google_search`）和[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)（也称为*自定义工具*），方法是保留并公开工具调用的上下文历史记录。借助内置和自定义工具组合，您可以实现复杂的智能体工作流，例如，模型可以在调用特定业务逻辑之前，先根据实时网络数据确定自己的基础。
 
-ตัวอย่างที่เปิดใช้การผสมผสานเครื่องมือในตัวและเครื่องมือที่กำหนดเองด้วย
-`google_search` และฟังก์ชันที่กำหนดเอง `getWeather` มีดังนี้
+以下示例展示了如何通过 `google_search` 和自定义函数 `getWeather` 启用内置工具和自定义工具组合：
 
 ### Python
 
@@ -400,70 +396,54 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-f
 }'
 ```
 
-## วิธีการทำงาน
+## 运作方式
 
-โมเดล Gemini 3 ใช้*การหมุนเวียนบริบทของเครื่องมือ*เพื่อเปิดใช้ชุดค่าผสมของเครื่องมือในตัวและเครื่องมือที่กำหนดเอง
-การหมุนเวียนบริบทของเครื่องมือช่วยให้สามารถรักษาและแสดงบริบทของเครื่องมือในตัว รวมถึงแชร์กับเครื่องมือที่กำหนดเองในการเรียกใช้เดียวกันได้ตั้งแต่ต้นจนจบ
+Gemini 3 模型使用*工具上下文循环*来启用内置工具和自定义工具组合。借助工具上下文循环，可以保留和公开内置工具的上下文，并在同一调用中逐轮与自定义工具共享该上下文。
 
-### เปิดใช้การรวมเครื่องมือ
+### 启用工具组合
 
-- คุณต้องตั้งค่าแฟล็ก `include_server_side_tool_invocations` เป็น `true` เพื่อ
-  เปิดใช้การหมุนเวียนบริบทของเครื่องมือ
-- ใส่ [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=th#function-declarations) พร้อมกับเครื่องมือในตัวที่ต้องการใช้เพื่อเรียกใช้ลักษณะการทำงานร่วมกัน
-  - หากคุณไม่รวม `function_declarations` การหมุนเวียนบริบทของเครื่องมือ
-    จะยังคงทำงานกับเครื่องมือในตัวที่รวมไว้ ตราบใดที่ตั้งค่าสถานะไว้
+- 您必须将 `include_server_side_tool_invocations` 标志设置为 `true`，才能启用工具上下文循环。
+- 包含 [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn#function-declarations) 以及您要使用的内置工具，以触发组合行为。
+  - 如果您未添加 `function_declarations`，只要设置了该标志，工具上下文循环仍会作用于所包含的内置工具。
 
-### API แสดงผลชิ้นส่วน
+### API 返回部分
 
-ในคำตอบเดียว API จะแสดงผลส่วน `toolCall` และ `toolResponse`
-สำหรับการเรียกเครื่องมือในตัว สำหรับการเรียกฟังก์ชัน (เครื่องมือที่กำหนดเอง) API จะ
-แสดงส่วนการเรียก `functionCall` ซึ่งผู้ใช้จะระบุส่วน `functionResponse` ในรอบถัดไป
+在单个响应中，该 API 会返回内置工具调用的 `toolCall` 和 `toolResponse` 部分。对于函数（自定义工具）调用，API 会返回 `functionCall` 调用部分，用户会在下一轮中提供 `functionResponse` 部分。
 
-- `toolCall` และ `toolResponse`: API จะแสดงส่วนเหล่านี้เพื่อรักษาบริบทของเครื่องมือที่เรียกใช้ในฝั่งเซิร์ฟเวอร์ และผลลัพธ์ของการดำเนินการสำหรับรอบถัดไป
-- `functionCall` และ `functionResponse`: API จะส่งการเรียกใช้ฟังก์ชันให้ผู้ใช้กรอกข้อมูล และผู้ใช้จะส่งผลลัพธ์กลับมาในการตอบกลับฟังก์ชัน (ส่วนเหล่านี้เป็นมาตรฐานสำหรับการ[เรียกใช้ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)ทั้งหมดใน Gemini API ไม่ได้มีเฉพาะฟีเจอร์การรวมเครื่องมือ)
-- (เครื่องมือ[การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th)เท่านั้น)
-  `executableCode` และ `codeExecutionResult`:
-  เมื่อใช้เครื่องมือการเรียกใช้โค้ด แทนที่จะเป็น `functionCall` และ
-  `functionResponse` API จะแสดง `executableCode` (โค้ดที่โมเดลสร้างขึ้น
-  ซึ่งมีไว้สำหรับการเรียกใช้) และ `codeExecutionResult` (ผลลัพธ์ของโค้ดที่เรียกใช้ได้)
+- `toolCall` 和 `toolResponse`：API 会返回这些部分，以保留在服务器端运行的工具的上下文及其执行结果，供下一轮使用。
+- `functionCall` 和 `functionResponse`：API 会将函数调用发送给用户以供填写，用户会在函数响应中将结果发送回来（这些部分是 Gemini API 中所有[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)的标准部分，并非工具组合功能的特有部分）。
+- （仅限[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn)工具）
+  `executableCode` 和 `codeExecutionResult`：
+  使用代码执行工具时，API 会返回 `executableCode`（模型生成的旨在执行的代码）和 `codeExecutionResult`（可执行代码的结果），而不是 `functionCall` 和 `functionResponse`。
 
-คุณต้องส่งคืนชิ้นส่วนทั้งหมด รวมถึง[ฟิลด์](#critical-fields)ทั้งหมดที่ชิ้นส่วนเหล่านั้นมี กลับไปยังโมเดลในแต่ละรอบเพื่อรักษาบริบทและเปิดใช้การรวมเครื่องมือ
+您必须在每个对话轮次中将所有部分（包括其中包含的所有[字段](#critical-fields)）返回给模型，以保持上下文并启用工具组合。
 
-### ฟิลด์ที่สำคัญในชิ้นส่วนที่ส่งคืน
+### 返回部件中的关键字段
 
-[ชิ้นส่วนบางอย่างที่ API แสดงผล](#api-returns-parts)จะมีฟิลด์ `id`,
-`tool_type` และ `thought_signature` ฟิลด์เหล่านี้มีความสําคัญต่อ
-การรักษาบริบทของเครื่องมือ (และด้วยเหตุนี้จึงมีความสําคัญต่อการรวมเครื่องมือ) คุณต้อง
-ส่งคืนชิ้นส่วนทั้งหมด*ตามที่ระบุไว้ในการตอบกลับ*ในคําขอที่ตามมา
+[API 返回的某些部分](#api-returns-parts)将包含 `id`、`tool_type` 和 `thought_signature` 字段。这些字段对于保持工具上下文（因此对于工具组合至关重要）至关重要；您需要在后续请求中返回所有部分*（如响应中所示）*。
 
-- `id`: ตัวระบุที่ไม่ซ้ำกันซึ่งแมปการเรียกไปยังการตอบกลับ `id` จะ**ตั้งค่าเป็น
-  การตอบกลับการเรียกใช้ฟังก์ชันทั้งหมด** ไม่ว่าบริบทของเครื่องมือจะหมุนเวียนหรือไม่ก็ตาม
-  คุณ*ต้อง*ระบุ `id` เดียวกันในการตอบกลับของฟังก์ชัน ที่ API ระบุในการเรียกใช้ฟังก์ชัน เครื่องมือในตัวจะแชร์ `id` ระหว่างการเรียกใช้เครื่องมือและการตอบกลับเครื่องมือโดยอัตโนมัติ
-  - พบในส่วนที่เกี่ยวข้องกับเครื่องมือทั้งหมด: `toolCall`, `toolResponse`,
-    `functionCall`, `functionResponse`, `executableCode`, `codeExecutionResult`
-- `tool_type`: ระบุเครื่องมือที่ใช้โดยเฉพาะ เครื่องมือในตัวที่แท้จริง
-  หรือ (เช่น `URL_CONTEXT`) หรือชื่อฟังก์ชัน (เช่น `getWeather`)
-  - พบในส่วน `toolCall` และ `toolResponse`
-- `thought_signature`: บริบทที่เข้ารหัสจริงซึ่งฝังอยู่ใน**แต่ละ
-  ส่วนที่ API แสดงผล** ระบบจะสร้างบริบทขึ้นใหม่ไม่ได้หากไม่มีลายเซ็นความคิด หากคุณไม่ส่งคืนลายเซ็นความคิดสำหรับทุกส่วนในทุกๆ เทิร์น โมเดลจะแสดงข้อผิดพลาด
-  - พบได้ใน*ทุก*ส่วน
+- `id`：将调用与其响应相关联的唯一标识符。无论工具上下文循环如何，`id` 都会**在所有函数调用响应中设置**。您*必须*在函数响应中提供与 API 在函数调用中提供的相同的 `id`。内置工具会自动在工具调用和工具响应之间共享 `id`。
+  - 在所有与工具相关的部分中均有：`toolCall`、`toolResponse`、`functionCall`、`functionResponse`、`executableCode`、`codeExecutionResult`
+- `tool_type`：标识所使用的特定工具；内置字面量工具（例如 `URL_CONTEXT`）或函数（例如 `getWeather`）名称。
+  - 可在 `toolCall` 和 `toolResponse` 部分中找到。
+- `thought_signature`：嵌入在 **API 返回的每个部分**中的实际加密上下文。如果不提供思考签名，就无法重建上下文；如果您未在每个对话轮次中返回所有部分的思考签名，模型就会出错。
+  - 在*所有*部分中均有。
 
-### ข้อมูลเฉพาะของเครื่องมือ
+### 工具专用数据
 
-เครื่องมือในตัวบางอย่างจะแสดงอาร์กิวเมนต์ข้อมูลที่ผู้ใช้มองเห็นได้ซึ่งเจาะจงสำหรับประเภทเครื่องมือ
+某些内置工具会返回特定于工具类型的用户可见数据实参。
 
-| เครื่องมือ | อาร์กิวเมนต์การเรียกใช้เครื่องมือที่ผู้ใช้มองเห็น (หากมี) | การตอบกลับของเครื่องมือที่ผู้ใช้มองเห็น (หากมี) |
+| 工具 | 用户可见的工具调用实参（如果有） | 用户可见的工具响应（如果有） |
 | --- | --- | --- |
 | **GOOGLE\_SEARCH** | `queries` | `search_suggestions` |
 | **GOOGLE\_MAPS** | `queries` | `places` `google_maps_widget_context_token` |
-| **URL\_CONTEXT** | `urls` URL ที่จะเรียกดู | `urls_metadata` `retrieved_url`: URL ที่เข้าชม `url_retrieval_status`: สถานะการเรียกดู |
-| **FILE\_SEARCH** | ไม่มี | ไม่มี |
+| **URL\_CONTEXT** | `urls` 要浏览的网址 | `urls_metadata` `retrieved_url`：浏览的网址 `url_retrieval_status`：浏览状态 |
+| **FILE\_SEARCH** | 无 | 无 |
 
-## ตัวอย่างโครงสร้างคำขอรวมเครื่องมือ
+## 工具组合请求结构示例
 
-โครงสร้างคำขอต่อไปนี้แสดงโครงสร้างคำขอของพรอมต์ "เมืองที่อยู่เหนือสุดในสหรัฐอเมริกาคือเมืองอะไร
-วันนี้อากาศที่นั่นเป็นยังไงบ้าง" โดยจะรวมเครื่องมือ 3 อย่าง ได้แก่ เครื่องมือ Gemini ในตัว `google_search`
-และ `code_execution` รวมถึงฟังก์ชันที่กำหนดเอง `get_weather`
+以下请求结构展示了提示“美国最北端的城市是哪个？”的请求结构。What's the weather like there
+today?"。它结合了三种工具：内置的 Gemini 工具 `google_search` 和 `code_execution`，以及自定义函数 `get_weather`。
 
 ```
 {
@@ -532,51 +512,48 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-f
 }
 ```
 
-## โทเค็นและการกำหนดราคา
+## 令牌和价格
 
-โปรดทราบว่าส่วน `toolCall` และ `toolResponse` ในคำขอจะนับรวมใน `prompt_token_count` เนื่องจากตอนนี้คุณสามารถเห็นขั้นตอนเครื่องมือระดับกลางเหล่านี้และระบบจะส่งคืนให้คุณ ขั้นตอนเหล่านี้จึงเป็นส่วนหนึ่งของประวัติการสนทนา ซึ่งจะเกิดขึ้นกับ*คำขอ*เท่านั้น ไม่ใช่*คำตอบ*
+请注意，请求中的 `toolCall` 和 `toolResponse` 部分会纳入 `prompt_token_count` 的统计范围。由于这些中间工具步骤现在可见并返回给您，因此它们属于对话历史记录的一部分。这种情况仅适用于*请求*，而不适用于*响应*。
 
-เครื่องมือ Google Search เป็นข้อยกเว้นของกฎนี้ Google Search ใช้โมเดลการกำหนดราคาของตัวเองที่ระดับคำค้นหาอยู่แล้ว จึงไม่มีการเรียกเก็บเงินจากโทเค็นซ้ำ (ดูหน้า[การกำหนดราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th))
+Google 搜索工具不受此规则约束。Google 搜索已在查询级别应用自己的价格模型，因此不会重复收取令牌费用（请参阅[价格](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn)页面）。
 
-อ่านข้อมูลเพิ่มเติมได้ที่หน้า[โทเค็น](https://ai.google.dev/gemini-api/docs/tokens?hl=th)
+如需了解详情，请参阅[令牌](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn)页面。
 
-## ข้อจำกัด
+## 限制
 
-- ค่าเริ่มต้นจะเป็นโหมด `VALIDATED` (ไม่รองรับโหมด `AUTO`) เมื่อเปิดใช้ฟีเจอร์ `include_server_side_tool_invocations`
-- เครื่องมือในตัว เช่น `google_search` อาศัยข้อมูลตำแหน่งและเวลาปัจจุบัน ดังนั้นหาก `system_instruction` หรือ `function_declaration.description` มีข้อมูลตำแหน่งและเวลา ที่ขัดแย้งกัน ฟีเจอร์การรวมเครื่องมืออาจทำงานได้ไม่ดี
+- 如果启用了 `include_server_side_tool_invocations` 标志，则默认采用 `VALIDATED` 模式（不支持 `AUTO` 模式）
+- `google_search` 等内置工具依赖于位置信息和当前时间信息，因此如果 `system_instruction` 或 `function_declaration.description` 的位置信息和时间信息存在冲突，工具组合功能可能无法正常运行。
 
-## เครื่องมือที่รองรับ
+## 支持的工具
 
-การหมุนเวียนบริบทของเครื่องมือมาตรฐานจะใช้กับเครื่องมือฝั่งเซิร์ฟเวอร์ (ในตัว)
-การดำเนินการโค้ดเป็นเครื่องมือฝั่งเซิร์ฟเวอร์เช่นกัน แต่มีโซลูชันในตัวของตัวเองสำหรับ
-การหมุนเวียนบริบท การใช้คอมพิวเตอร์และการเรียกใช้ฟังก์ชันเป็นเครื่องมือฝั่งไคลเอ็นต์
-และยังมีโซลูชันในตัวสำหรับการหมุนเวียนบริบทด้วย
+标准工具上下文循环适用于服务器端（内置）工具。代码执行也是一种服务器端工具，但它有自己的内置解决方案来处理上下文传递。计算机使用和函数调用是客户端工具，还具有内置的上下文循环解决方案。
 
-| เครื่องมือ | ฝั่งที่ดำเนินการ | การสนับสนุนการหมุนเวียนบริบท |
+| 工具 | 执行方 | 上下文传递支持 |
 | --- | --- | --- |
-| [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th) | ฝั่งเซิร์ฟเวอร์ | รองรับ |
-| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th) | ฝั่งเซิร์ฟเวอร์ | รองรับ |
-| [บริบท URL](https://ai.google.dev/gemini-api/docs/url-context?hl=th) | ฝั่งเซิร์ฟเวอร์ | รองรับ |
-| [การค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th) | ฝั่งเซิร์ฟเวอร์ | รองรับ |
-| [การรันโค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th) | ฝั่งเซิร์ฟเวอร์ | รองรับ (ติดตั้งในตัว ใช้ชิ้นส่วน `executableCode` และ `codeExecutionResult`) |
-| [การใช้คอมพิวเตอร์](https://ai.google.dev/gemini-api/docs/computer-use?hl=th) | ฝั่งไคลเอ็นต์ | รองรับ (ติดตั้งในตัว ใช้ชิ้นส่วน `functionCall` และ `functionResponse`) |
-| [ฟังก์ชันที่กำหนดเอง](https://ai.google.dev/gemini-api/docs/function-calling?hl=th) | ฝั่งไคลเอ็นต์ | รองรับ (ติดตั้งในตัว ใช้ชิ้นส่วน `functionCall` และ `functionResponse`) |
+| [Google 搜索](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn) | 服务器端 | 支持 |
+| [Google 地图](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-cn) | 服务器端 | 支持 |
+| [网址上下文](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-cn) | 服务器端 | 支持 |
+| [文件搜索](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-cn) | 服务器端 | 支持 |
+| [代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn) | 服务器端 | 支持（内置，使用 `executableCode` 和 `codeExecutionResult` 零件） |
+| [计算机使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-cn) | 客户端 | 支持（内置，使用 `functionCall` 和 `functionResponse` 零件） |
+| [自定义函数](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn) | 客户端 | 支持（内置，使用 `functionCall` 和 `functionResponse` 零件） |
 
-## ขั้นตอนถัดไป
+## 后续步骤
 
-- ดูข้อมูลเพิ่มเติมเกี่ยวกับ[การเรียกฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)ใน Gemini API
-- สำรวจเครื่องมือที่รองรับ
-  - [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th)
-  - [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th)
-  - [บริบท URL](https://ai.google.dev/gemini-api/docs/url-context?hl=th)
-  - [การค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th)
+- 详细了解 Gemini API 中的[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)。
+- 探索支持的工具：
+  - [Google 搜索](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn)
+  - [Google 地图](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-cn)
+  - [网址上下文](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-cn)
+  - [文件搜索](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-cn)
 
-ส่งความคิดเห็น
+发送反馈
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-อัปเดตล่าสุด 2026-04-29 UTC
+最后更新时间 (UTC)：2026-05-07。
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+需要向我们提供更多信息？
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-29 UTC"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-05-07。"],[],[]]

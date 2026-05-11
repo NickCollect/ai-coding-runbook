@@ -1,39 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/music-generation?hl=pt-BR
-fetched_at: 2026-05-05T20:46:23.005713+00:00
-title: "Gerar m\u00fasicas com o Lyria 3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/music-generation?hl=ar
+fetched_at: 2026-05-11T05:07:33.888830+00:00
+title: "\u0625\u0646\u0634\u0627\u0621 \u0645\u0648\u0633\u064a\u0642\u0649 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 Lyria 3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Envie comentários
+إرسال ملاحظات
 
-# Gerar músicas com o Lyria 3
+# إنشاء موسيقى باستخدام Lyria 3
 
-O Lyria 3 é a família de modelos de geração de música do Google, disponível
-pela API Gemini. Com o Lyria 3, é possível gerar áudio estéreo de alta qualidade e 44, 1 kHz com comandos de texto ou imagens. Esses modelos oferecem coerência estrutural, incluindo vocais, letras sincronizadas e arranjos instrumentais completos.
+‫Lyria 3 هي مجموعة نماذج من Google لإنشاء الموسيقى، وهي متاحة من خلال Gemini API. باستخدام Lyria 3، يمكنك إنشاء مقاطع صوتية مجسّمة عالية الجودة بتردد 44.1 كيلو هرتز من طلبات نصية أو من صور. تقدّم هذه النماذج محتوًى متماسكًا من الناحية البنيوية، بما في ذلك الغناء والكلمات المتزامنة والترتيبات الموسيقية الكاملة.
 
-A família Lyria 3 inclui dois modelos:
+تتضمّن مجموعة Lyria 3 نموذجَين:
 
-| Modelo | ID do modelo | Ideal para | Duração | Saída |
+| الطراز | رقم تعريف الطراز | الأفضل لـ | المدة | الناتج |
 | --- | --- | --- | --- | --- |
-| **Lyria 3 Clip** | `lyria-3-clip-preview` | Clipes curtos, loops, prévias | 30 segundos | MP3 |
-| **Lyria 3 Pro** | `lyria-3-pro-preview` | Músicas completas com versos, refrões e pontes | Alguns minutos (controláveis por comando) | MP3 |
+| **مقطع Lyria 3** | `lyria-3-clip-preview` | المقاطع القصيرة والحلقات المتكررة والمعاينات | ‫30 ثانية | MP3 |
+| **Lyria 3 Pro** | `lyria-3-pro-preview` | أغانٍ كاملة تتضمّن مقاطع ولوازم وجسورًا موسيقية | بضع دقائق (يمكن التحكّم فيها من خلال الطلب) | MP3 |
 
-Os dois modelos podem ser usados com o método `generateContent` padrão e a nova [API Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=pt-br), que aceita entradas multimodais (texto e imagens) e produz áudio **estéreo de alta fidelidade de 44,1 kHz**.
+يمكن استخدام كلا النموذجين من خلال طريقة `generateContent` العادية و[واجهة برمجة التطبيقات الجديدة Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=ar) التي تتيح إدخال بيانات متعددة الوسائط (نصوص وصور) وإنتاج صوت **استيريو عالي الدقة بتردد 44.1 كيلو هرتز**.
 
-## Gerar um videoclipe
+## إنشاء مقطع موسيقي
 
-O modelo Lyria 3 Clip sempre gera um clipe de **30 segundos**. Para gerar um
-clipe, chame o método `generateContent` com um comando de texto. A resposta sempre inclui a letra e a estrutura da música geradas junto com o áudio.
+ينشئ نموذج Lyria 3 Clip دائمًا مقطعًا مدته **30 ثانية**. لإنشاء مقطع، استدعِ الدالة `generateContent` مع طلب نصي. يتضمّن الرد دائمًا الكلمات وبنية الأغنية التي تم إنشاؤها بالإضافة إلى الصوت.
 
 ### Python
 
@@ -134,7 +132,7 @@ func main() {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -186,7 +184,7 @@ curl -s -X POST \
   }'
 ```
 
-### C#
+### #C
 
 ```
 using System.Threading.Tasks;
@@ -214,10 +212,9 @@ public class GenerateMusicClip {
 }
 ```
 
-## Gerar uma música completa
+## إنشاء أغنية كاملة
 
-Use o modelo `lyria-3-pro-preview` para gerar músicas completas que duram alguns minutos. O modelo Pro entende a estrutura musical e pode criar
-composições com versos, refrões e pontes distintos. É possível influenciar a duração especificando-a no comando (por exemplo, "crie uma música de 2 minutos") ou usando [carimbos de data/hora](#timing) para definir a estrutura.
+استخدِم نموذج `lyria-3-pro-preview` لإنشاء أغانٍ كاملة المدة تستغرق بضع دقائق. يفهم نموذج Pro البنية الموسيقية ويمكنه إنشاء مقطوعات موسيقية تتضمّن مقاطع شعرية ولازمة وجسرًا موسيقيًا. يمكنك التأثير في المدة من خلال تحديدها في طلبك (مثلاً، "إنشاء أغنية مدتها دقيقتان") أو باستخدام [الطوابع الزمنية](#timing) لتحديد البنية.
 
 ### Python
 
@@ -255,7 +252,7 @@ result, err := client.Models.GenerateContent(
 )
 ```
 
-### Java
+### جافا
 
 ```
 GenerateContentResponse response = client.models.generateContent(
@@ -281,7 +278,7 @@ curl -s -X POST \
   }'
 ```
 
-### C#
+### #C
 
 ```
 var response = await client.Models.GenerateContentAsync(
@@ -292,9 +289,9 @@ var response = await client.Models.GenerateContentAsync(
 );
 ```
 
-## Selecionar formato de saída
+## اختيار تنسيق الإخراج
 
-Por padrão, os modelos do Lyria 3 geram áudio no formato **MP3**. Para o Lyria 3 Pro, também é possível solicitar a saída no formato **WAV** definindo `response_mime_type` em `generationConfig`.
+تنشئ نماذج Lyria 3 المحتوى الصوتي بتنسيق **MP3** تلقائيًا. بالنسبة إلى Lyria 3 Pro، يمكنك أيضًا طلب الإخراج بتنسيق **WAV** من خلال ضبط `response_format` في `generationConfig`.
 
 ### Python
 
@@ -304,7 +301,7 @@ response = client.models.generate_content(
     contents="An atmospheric ambient track.",
     config=types.GenerateContentConfig(
         response_modalities=["AUDIO", "TEXT"],
-        response_mime_type="audio/wav",
+        response_format={"audio": {"mime_type": "audio/wav"}},
     ),
 )
 ```
@@ -317,7 +314,7 @@ const response = await ai.models.generateContent({
   contents: "An atmospheric ambient track.",
   config: {
     responseModalities: ["AUDIO", "TEXT"],
-    responseMimeType: "audio/wav",
+    responseFormat: { audio: { mimeType: "audio/wav" } },
   },
 });
 ```
@@ -338,12 +335,12 @@ result, err := client.Models.GenerateContent(
 )
 ```
 
-### Java
+### جافا
 
 ```
 GenerateContentConfig config = GenerateContentConfig.builder()
     .responseModalities("AUDIO", "TEXT")
-    .responseMimeType("audio/wav")
+    .responseFormat(ResponseFormat.builder().audio(AudioFormat.builder().mimeType("audio/wav").build()).build())
     .build();
 
 GenerateContentResponse response = client.models.generateContent(
@@ -352,7 +349,7 @@ GenerateContentResponse response = client.models.generateContent(
     config);
 ```
 
-### C#
+### #C
 
 ```
 var config = new GenerateContentConfig {
@@ -382,15 +379,15 @@ curl -s -X POST \
     }],
     "generationConfig": {
       "responseModalities": ["AUDIO", "TEXT"],
-      "responseMimeType": "audio/wav"
+      "responseFormat": { "audio": { "mimeType": "audio/wav" } }
     }
   }'
 ```
 
-## Analise a resposta
+## تحليل الردّ
 
-A resposta da Lyria 3 contém várias partes. As partes de texto contêm as letras geradas ou uma descrição JSON da estrutura da música. As partes com
-`inline_data` contêm os bytes de áudio.
+تتضمّن الاستجابة من Lyria 3 أجزاء متعدّدة. تحتوي الأجزاء النصية على كلمات الأغنية التي تم إنشاؤها أو وصف بتنسيق JSON لبنية الأغنية. تحتوي الأجزاء التي تتضمّن
+`inline_data` على وحدات البايت الصوتية.
 
 ### Python
 
@@ -461,7 +458,7 @@ if audioData != nil {
 }
 ```
 
-### Java
+### جافا
 
 ```
 List<String> lyrics = new ArrayList<>();
@@ -484,7 +481,7 @@ if (audioData != null) {
 }
 ```
 
-### C#
+### #C
 
 ```
 var lyrics = new List<string>();
@@ -516,9 +513,9 @@ if (audioData != null) {
 curl ... | jq -r '.candidates[0].content.parts[] | select(.inlineData) | .inlineData.data' | base64 -d > output.mp3
 ```
 
-## Gerar música com base em imagens
+## إنشاء موسيقى من الصور
 
-O Lyria 3 aceita entradas multimodais. Você pode fornecer até **10 imagens** junto com seu comando de texto, e o modelo vai compor músicas inspiradas no conteúdo visual.
+يتوافق Lyria 3 مع الإدخالات المتعدّدة الوسائط، إذ يمكنك تقديم ما يصل إلى **10 صور** إلى جانب طلبك النصي، وسينشئ النموذج موسيقى مستوحاة من المحتوى المرئي.
 
 ### Python
 
@@ -590,7 +587,7 @@ result, err := client.Models.GenerateContent(
 )
 ```
 
-### Java
+### جافا
 
 ```
 GenerateContentResponse response = client.models.generateContent(
@@ -625,7 +622,7 @@ curl -s -X POST \
   }"
 ```
 
-### C#
+### #C
 
 ```
 var response = await client.Models.GenerateContentAsync(
@@ -639,11 +636,9 @@ var response = await client.Models.GenerateContentAsync(
 
 ![](https://storage.googleapis.com/generativeai-downloads/images/desert_sunset.jpg)
 
-## Fornecer letras personalizadas
+## تقديم كلمات أغنية مخصّصة
 
-Você pode escrever suas próprias letras e incluí-las no comando. Use tags de seção
-como `[Verse]`, `[Chorus]` e `[Bridge]` para ajudar o modelo a entender a
-estrutura da música:
+يمكنك كتابة كلمات الأغنية الخاصة بك وتضمينها في الطلب. استخدِم علامات الأقسام، مثل `[Verse]` و`[Chorus]` و`[Bridge]`، لمساعدة النموذج في فهم بنية الأغنية:
 
 ### Python
 
@@ -741,7 +736,7 @@ result, err := client.Models.GenerateContent(
 )
 ```
 
-### Java
+### جافا
 
 ```
 String prompt = """
@@ -771,7 +766,7 @@ GenerateContentResponse response = client.models.generateContent(
     prompt);
 ```
 
-### C#
+### #C
 
 ```
 var prompt = @"
@@ -822,11 +817,9 @@ curl -s -X POST \
 
 ](https://storage.googleapis.com/generativeai-downloads/songs/Neon%20Echoes_Lyrics.webm)
 
-## Controlar o tempo e a estrutura
+## التحكّم في التوقيت والبنية
 
-É possível especificar exatamente o que acontece em momentos específicos da música usando
-carimbos de data/hora. Isso é útil para controlar quando os instrumentos entram, quando as letras
-são entregues e como a música progride:
+يمكنك تحديد ما يحدث بالضبط في لحظات معيّنة من الأغنية باستخدام الطوابع الزمنية. يفيد ذلك في التحكّم في وقت بدء الآلات الموسيقية ووقت عرض كلمات الأغنية وطريقة تقدّم الأغنية:
 
 ### Python
 
@@ -888,7 +881,7 @@ result, err := client.Models.GenerateContent(
 )
 ```
 
-### Java
+### جافا
 
 ```
 String prompt = """
@@ -906,7 +899,7 @@ GenerateContentResponse response = client.models.generateContent(
     prompt);
 ```
 
-### C#
+### #C
 
 ```
 var prompt = @"
@@ -941,9 +934,9 @@ curl -s -X POST \
   }'
 ```
 
-## Gerar músicas instrumentais
+## إنشاء مقاطع موسيقية بدون غناء
 
-Para música de fundo, trilhas sonoras de jogos ou qualquer caso de uso em que não sejam necessários vocais, peça ao modelo para produzir músicas apenas instrumentais:
+بالنسبة إلى الموسيقى الخلفية أو المقاطع الصوتية للألعاب أو أي حالة استخدام لا تتطلّب أصواتًا بشرية، يمكنك أن تطلب من النموذج إنشاء مقاطع موسيقية فقط:
 
 ### Python
 
@@ -978,7 +971,7 @@ result, err := client.Models.GenerateContent(
 )
 ```
 
-### Java
+### جافا
 
 ```
 GenerateContentResponse response = client.models.generateContent(
@@ -987,7 +980,7 @@ GenerateContentResponse response = client.models.generateContent(
         + "video game style. Instrumental only, no vocals.");
 ```
 
-### C#
+### #C
 
 ```
 var response = await client.Models.GenerateContentAsync(
@@ -1013,9 +1006,10 @@ curl -s -X POST \
   }'
 ```
 
-## Gerar músicas em diferentes idiomas
+## إنشاء موسيقى بلغات مختلفة
 
-O Lyria 3 gera letras no idioma do seu comando. Para gerar uma música com letras em francês, escreva o comando nesse idioma. O modelo adapta o estilo vocal e a pronúncia para corresponder ao idioma.
+تنشئ Lyria 3 كلمات الأغاني باللغة التي تستخدمها في طلبك. لإنشاء أغنية
+بكلمات فرنسية، اكتب طلبك باللغة الفرنسية. ويعدّل النموذج أسلوبه الصوتي وطريقة لفظه لتتطابق مع اللغة.
 
 ### Python
 
@@ -1053,7 +1047,7 @@ result, err := client.Models.GenerateContent(
 )
 ```
 
-### Java
+### جافا
 
 ```
 GenerateContentResponse response = client.models.generateContent(
@@ -1063,7 +1057,7 @@ GenerateContentResponse response = client.models.generateContent(
         + "la guitare acoustique.");
 ```
 
-### C#
+### #C
 
 ```
 var response = await client.Models.GenerateContentAsync(
@@ -1090,14 +1084,16 @@ curl -s -X POST \
   }'
 ```
 
-## Inteligência do modelo
+## ذكاء النموذج
 
-O Lyria 3 analisa seu processo de comando em que o modelo raciocina sobre a estrutura musical (introdução, verso, refrão, ponte etc.) com base no seu comando.
-Isso acontece antes da geração do áudio e garante coerência estrutural e musicalidade.
+يحلّل Lyria 3 عملية الطلب التي تتضمّن
+النموذج الذي يحلّل البنية الموسيقية (المقدمة، والمقطع، والجوقة، والجسر الموسيقي، وما إلى ذلك)
+استنادًا إلى طلبك.
+يحدث ذلك قبل إنشاء الصوت ويضمن التماسك البنيوي والانسجام الموسيقي.
 
-## API Interactions
+## واجهة Interactions API
 
-É possível usar os modelos Lyria 3 com a [API Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=pt-br), uma interface unificada para interagir com modelos e agentes do Gemini. Ela simplifica o gerenciamento de estado e tarefas de longa duração para casos de uso multimodais complexos.
+يمكنك استخدام نماذج Lyria 3 مع [واجهة برمجة التطبيقات Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=ar)، وهي واجهة موحّدة للتفاعل مع نماذج Gemini ووكلاء Gemini. فهي تبسّط إدارة الحالة والمهام الطويلة الأمد لحالات الاستخدام المعقّدة المتعدّدة الوسائط.
 
 ### Python
 
@@ -1159,82 +1155,80 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Guia de comandos
+## دليل كتابة الطلبات
 
-Seu comando pode ser simples, como "uma música folk sobre gatos fofos evitando poças, vocais femininos e o barulho da chuva", ou algo detalhado e estruturado, como:
+يمكن أن يكون طلبك بسيطًا، مثل "أغنية شعبية عن قطط لطيفة تتجنّب البرك،
+أداء صوتي نسائي وصوت المطر"، أو مفصّلاً ومنظّمًا،
+مثل:
 
-> Uma música synth-pop no estilo dos anos 1980 com uma batida marcante, sintetizadores reverberantes e um refrão cativante e hino. A música precisa ter uma vibe retrofuturista, lembrando os clássicos do pop dos anos 80, com uma produção moderna. O
-> tempo precisa ser animado e dançante, em torno de 120 BPM, com uma estrutura
-> clara de verso-refrão e um refrão instrumental memorável. A letra fala sobre
-> a sensação de se arrumar para uma festa.
+> أغنية من نوع "سينثبوب" مستوحاة من الثمانينات، تتضمّن إيقاعًا حيويًا وأصواتًا خلفية براقة من آلات توليف وجوقة آسرة ومؤثرة. يجب أن تعكس الأغنية طابعًا قديمًا مستقبليًا،
+> يذكّر بأغاني البوب الكلاسيكية من الثمانينات، مع لمسة عصرية. يجب أن يكون الإيقاع سريعًا ومناسبًا للرقص، حوالي 120 نبضة في الدقيقة، مع بنية واضحة من مقاطع شعرية ولازمة موسيقية، بالإضافة إلى لحن آلي جذاب. تتحدث كلمات الأغنية عن
+> الشعور بالاستعداد لحفلة.
 
-Comandos simples e complexos podem gerar boas respostas. Recomendamos que você teste essas dicas para descobrir o que funciona melhor para você.
+يمكن أن تمنحك الطلبات البسيطة والمعقّدة نتائج جيدة. ننصحك بتجربة هذه النصائح للعثور على ما يناسبك بشكل أفضل.
 
-### Gênero
+### النوع
 
-Comece o comando com o gênero musical que você quer, como hip hop, rock e rap. É possível especificar uma mistura de gêneros:
+ابدأ طلبك بنوع الموسيقى الذي تريده، مثل الهيب هوب والروك والراب. يمكنك تحديد مزيج من الأنواع الموسيقية:
 
-- Uma fusão de metal e rap
-- Uma combinação de death metal e ópera
-- Uma peça clássica com elementos de drone eletrônico
-- Música eletrônica moderna (EDM) misturada com Europop
+- مزيج من موسيقى الروك والراب
+- مزيج من موسيقى الموت والموسيقى الأوبرالية
+- مقطوعة كلاسيكية تتضمّن عناصر إلكترونية
+- موسيقى رقص إلكترونية حديثة (EDM) ممزوجة بموسيقى البوب الأوروبية
 
-Você também pode incorporar uma era:
+يمكنك أيضًا تضمين حقبة:
 
-- Hip-hop do início dos anos 90
-- Pop iê-iê francês dos anos 60
-- Experimentação eletrônica dos anos 80
-- Pop mainstream dos anos 2000
+- موسيقى الهيب هوب في أوائل التسعينيات
+- موسيقى "بوب" فرنسية من الستينيات
+- تجارب إلكترونية في الثمانينيات
+- موسيقى البوب الرائجة في العقد الأول من القرن الحادي والعشرين
 
-Se você pedir gêneros personalizados ou variantes regionais, como "techno de Berlim" ou "hyphy da área da baía", o modelo vai tentar capturar essa essência, mas nem sempre vai acertar.
+إذا طلبت أنواعًا مخصّصة أو أشكالاً إقليمية، مثل "تكنو برلين" أو "هيفي من منطقة الخليج"، سيحاول النموذج التقاط هذا الجوهر، ولكن قد لا ينجح دائمًا في ذلك.
 
-### Instrumentos
+### آلات
 
-Por padrão, o Lyria 3 cria músicas com os instrumentos e ferramentas que você esperaria para o gênero. Não é necessário ser prescritivo.
+ستنشئ Lyria 3 تلقائيًا أغاني تتضمّن الآلات الموسيقية والأدوات التي تتوقّعها لهذا النوع من الموسيقى. ليس عليك أن تكون إلزاميًا.
 
-No entanto, uma música de dança não vai incluir um saxofone a menos que você peça. Se você quiser um solo de saxofone, faça o seguinte comando:
+ومع ذلك، لن تتضمّن أغنية رقص مقطعًا من الساكسفون إلا إذا طلبت ذلك. لذا، إذا أردت معزوفة منفردة على الساكسفون، عليك تقديم الطلب التالي:
 
-> Uma música de dança com uma batida envolvente, sintetizadores brilhantes e um refrão cativante e
-> empolgante. Um solo de saxofone deve entrar durante a ponte.
+> أغنية رقص ذات إيقاع قوي وأصوات تركيبية براقة وجوقة جذابة تشبه الأغاني الوطنية يجب أن يكون هناك مقطع منفرد لآلة الساكسفون خلال الجزء الانتقالي.
 
-Seu comando pode incluir instrumentos específicos, como eles soam e como eles interagem entre si. Você pode usar essa combinação para criar determinados humores ou texturas:
+يمكن أن يتضمّن طلبك آلات موسيقية محدّدة، وطريقة عزفها، وكيفية تفاعلها مع بعضها البعض. يمكنك استخدام هذه المجموعة لإنشاء بعض الأجواء أو الملمس:
 
-- Um baixo sujo e distorcido lutando contra hi-hats limpos e nítidos
-- Pads de sintetizador analógico quentes aumentando sob um violão acústico seco e intimista
-- Uma parede de som criada por várias camadas de guitarras difusas, com vocais distantes e enterrados.
+- خطّ جهير مشوّه وغير واضح يتناغم مع أصوات قبّعات عالية واضحة ونقية
+- أصوات خلفية دافئة من آلة توليف تناظرية تتصاعد تحت غيتار أكويستك بلمسة دافئة وقريبة
+- جدار صوتي تم إنشاؤه من طبقات متعددة من غيتارات مشوّشة، مع أصوات غنائية بعيدة ومخفية
 
-### Estrutura da música
+### بنية الأغنية
 
-Você pode descrever a progressão de uma música no comando. Use setas ou uma lista para definir o fluxo:
+يمكنك تحديد تسلسل الأغنية في طلبك. استخدِم الأسهم أو القائمة لتحديد التسلسل:
 
 - `[Intro]` -> `[Verse 1]` -> `[Chorus]` -> `[Verse 2]` -> `[Chorus]` ->
   `[Bridge]` -> `[Outro]`
-- Comece com uma introdução de piano suave, aumente o volume em um verso alto, faça um silêncio e exploda no refrão.
+- ابدأ بمقدمة هادئة على البيانو، ثم انتقِل إلى مقطع صوتي مرتفع، ثم إلى صمت، ثم إلى جوقة صاخبة.
 
-Você também pode especificar como os níveis de energia mudam entre essas seções:
+يمكنك أيضًا تحديد كيفية تغيُّر مستويات الطاقة بين هذه الأقسام:
 
-- Crie tensão no pré-refrão e depois faça um silêncio antes de um refrão enorme e
-  explosivo
-- Crescendo gradual ao longo da música, adicionando um instrumento de cada vez até uma parede caótica de som
-- Parada repentina após a ponte, seguida de um refrão a capela
+- بناء التشويق في المقطع التمهيدي، ثم الانتقال إلى الصمت قبل مقطع كورَس ضخم ومثير
+- تصاعد تدريجي في مستوى الصوت طوال الأغنية، مع إضافة آلة موسيقية واحدة في كل مرة
+  إلى أن يصبح الصوت صاخبًا
+- توقّف مفاجئ بعد المقطع الانتقالي، يليه مقطع كورال بدون آلات موسيقية
 
-Você também pode pedir o horário exato em que quer que algo aconteça:
+يمكنك أيضًا تحديد الوقت الدقيق الذي تريد أن يحدث فيه أمر معيّن:
 
-- Aumente até uma queda em 12 segundos
-- Alguém diz "o quê" a cada 2 segundos
-- O refrão começa aos 22 segundos
+- إنشاء فيديو قصير مدته 12 ثانية
+- يقول شخص ما "ماذا" كل ثانيتَين
+- تبدأ اللازمة عند الثانية 22
 
-### Letras
+### كلمات الأغنية
 
-Os vocais e a letra são gerados por padrão. Você pode fornecer suas próprias letras,
-pedir para não incluir letras (ou um instrumental) ou direcionar a geração de letras
-para o que você quiser.
+يتم إنشاء الأصوات الغنائية وكلمات الأغاني تلقائيًا. يمكنك تقديم كلمات الأغنية الخاصة بك أو طلب عدم تضمين كلمات (أو تضمين مقطوعة موسيقية فقط) أو توجيه عملية إنشاء الكلمات إلى الاتجاه الذي تريده.
 
-As letras vão aparecer no idioma em que você escrever o comando. Você também pode pedir para as letras serem escritas em outro idioma, como "Escreva a letra em francês".
+ستكون كلمات الأغنية باللغة التي تكتب بها طلبك. يمكنك أيضًا طلب كتابة كلمات الأغنية بلغة أخرى، مثل "اكتب كلمات الأغنية باللغة الفرنسية".
 
-#### Usar suas próprias letras
+#### استخدام كلمات الأغنية الخاصة بك
 
-Para dar suas próprias letras ao modelo, inclua-as no comando com um prefixo "Letra:":
+لتزويد النموذج بكلمات الأغاني الخاصة بك، عليك تضمينها في الطلب مع البادئة "Lyrics:" (كلمات الأغاني:)
 
 ```
 Lyrics:
@@ -1251,52 +1245,54 @@ Go with the flow
 ...
 ```
 
-Você pode prefixar partes da música com títulos de seção como `[Intro]`,
-`[Verse 1]`, `[Pre-chorus]`, `[Chorus]` e `[Outro]`.
+يمكنك إضافة بادئة إلى أجزاء من الأغنية باستخدام عناوين أقسام مثل `[Intro]` و`[Verse 1]` و`[Pre-chorus]` و`[Chorus]` و`[Outro]`.
 
-Se você quiser que uma palavra ou linha seja repetida, como um eco ou por cantores de apoio, inclua entre parênteses: "Vamos (vamos)".
+إذا أردت تكرار كلمة أو سطر، مثلاً كصدى أو من خلال المغنّين المساندين، يمكنك تضمينه بين قوسين: "هيا بنا (هيا بنا)".
 
-#### Pedir ao modelo para escrever letras de músicas
+#### توجيه الطلبات إلى النموذج لكتابة كلمات الأغاني
 
-Se você quiser que o Lyria 3 crie letras para você, é melhor incluir detalhes sobre o tema no comando. Caso contrário, o modelo precisará inferir um assunto com base no comando de música, e talvez não seja o que você quer.
+إذا أردت أن تنشئ لك Lyria 3 كلمات أغنية، من الأفضل تضمين تفاصيل حول موضوع الأغنية في طلبك. وإلا سيحتاج النموذج إلى استنتاج موضوع من طلبك الموسيقي، وقد لا يكون هذا الموضوع هو ما تريده.
 
-> A letra fala sobre um amor perdido e a dor de um coração partido. A cantora está relembrando um relacionamento passado e as memórias que voltam à tona.
+> تتحدث كلمات الأغنية عن الحب الضائع وألم الانفصال. تتذكر المغنية علاقة سابقة والذكريات التي تعود إلى ذهنها.
 
-Se quiser um refrão repetido, peça isso no comando:
+إذا أردت الحصول على مقطع متكرّر، من المفيد أن تطلب ذلك في طلبك:
 
-> A letra fala sobre um amor perdido e a dor de um coração partido. A cantora está relembrando um relacionamento passado e as memórias que voltam à tona. Um refrão forte se concentra em superar a dor e seguir em frente.
+> تتحدث كلمات الأغنية عن الحب الضائع وألم الانفصال. تتذكر المغنية علاقة سابقة والذكريات التي تعود إلى ذهنها. وتركز اللازمة القوية على التغلّب على الألم والمضي قدمًا.
 
-O Lyria 3 direciona automaticamente a estrutura da letra para o tipo de música que você está pedindo, mas você também pode reforçar isso no comando. Exemplo:
+ستوجّه Lyria 3 تلقائيًا بنية كلمات الأغنية نحو نوع الموسيقى الذي تطلبه، ولكن يمكنك إعادة التأكيد على ذلك في طلبك أيضًا. على سبيل المثال:
 
-> Uma música eletrônica que repete a mesma frase energética várias vezes.
+> أغنية إلكترونية راقصة تكرّر العبارة الحماسية نفسها مرارًا وتكرارًا
 
-Também é possível pedir efeitos vocais que não sejam estritamente letras de músicas, por exemplo:
+يمكنك أيضًا طلب تأثيرات صوتية ليست كلمات أغنية، مثل:
 
-- Uma amostra repetida de um filme diz "Não consigo acreditar!" ao longo da música.
-- Uma música techno de alta energia, logo antes da queda, o som para e uma voz diz: "Não sei o que estou fazendo aqui", e então a música começa.
-- A música começa com uma conversa sobre os filmes dos anos 90 serem melhores do que os de hoje. Em seguida, a faixa passa para uma música pop.
+- تتضمّن الأغنية عيّنة متكرّرة من فيلم تقول "لا أصدّق هذا!"
+- أغنية تكنو حماسية، قبل أن تتوقف الموسيقى تمامًا ويقول صوت صغير "لا أعرف ما الذي أفعله هنا"، ثم تبدأ الموسيقى.
+- تبدأ الأغنية بمحادثة حول أنّ الأفلام في التسعينيات كانت أفضل من الأفلام الحالية. ثم تنتقل الأغنية إلى أغنية بوب.
 
-### Vocais
+### الغناء
 
-Você pode pedir como quer que a letra seja entregue. Para ter os melhores resultados, especifique um perfil detalhado do cantor, incluindo gênero, timbre e extensão vocal.
+يمكنك تقديم طلب بشأن طريقة عرض كلمات الأغنية. للحصول على أفضل النتائج، حدِّد ملفًا شخصيًا مفصّلاً للمغني يشمل الجنس والنبرة والمجال الصوتي.
 
-- **Soprano feminino**: timbre claro e cristalino com uma qualidade ágil e crescente. Capaz de alcançar notas altas com um timbre leve e arejado.
-- **Contralto feminino**: alcance mais baixo rico, quente e rouco. Timbre esfumaçado com um toque de vocal fry, cheio de alma e ressonante.
-- **Tenor masculino**: brilhante, penetrante e energético. Timbre jovem com um leve toque nasal, que se destaca na mixagem com grande potência de belting.
-- **Barítono masculino**: grave, com um toque de chocolate e suave como veludo. Voz de peito ressonante com uma entrega suave e melodiosa.
-- **Rocker experiente (masculino)**: rouca e texturizada com um timbre grave, que lembra o grunge dos anos 90. Intervalo superior tenso para intensidade emocional.
+- **صوت نسائي عالٍ**: صوت واضح ونقي يتميّز بالخفة والارتفاع. تتميز بقدرتها على إصدار نغمات عالية صافية مع نسيج صوتي خفيف.
+- **صوت ألتو نسائي**: نطاق صوتي منخفض غني ودافئ وأجش صوت مدخّن مع لمسة من صوت مقلي، صوت روحي ورنّان.
+- **صوت التينور الرجالي**: صوت حاد ونشيط ومشرق نبرة صوت شبابية مع
+  حدة أنفية طفيفة، تخترق المزيج بقوة عالية.
+- **صوت رجالي منخفض**: عميق، ودافئ، وناعم. صوت جهوري
+  رنان يقدّم أداءً هادئًا ومريحًا.
+- **المغني المخضرم (ذكر)**: صوت أجش وخشن مع نبرة حادة،
+  يذكّرنا بموسيقى الغرنج في التسعينيات. نطاق صوتي مرتفع متوتر للتعبير عن المشاعر القوية
 
-### Outros parâmetros de comando
+### مَعلمات الطلبات الأخرى
 
-Você também pode incluir estes parâmetros para refinar ainda mais o comando:
+يمكنك أيضًا تضمين هذه المَعلمات لتحسين طلبك بشكل أكبر:
 
-- **Tonalidade/escala**: especifique uma tonalidade musical (por exemplo, "em sol maior", "ré menor").
-- **Clima e atmosfera**: use adjetivos descritivos (por exemplo, "nostálgico", "agressivo", "etéreo", "onírico").
-- **Duração**: o modelo de clipe sempre produz clipes de 30 segundos. Para o modelo Pro, especifique a duração desejada no comando (por exemplo, "crie uma música de 2 minutos") ou use carimbos de data/hora para controlar a duração.
+- **المفتاح الموسيقي/المقياس الموسيقي**: حدِّد مفتاحًا موسيقيًا (مثل "في سلم G الكبير" أو "في سلم D الصغير").
+- **المزاج والأجواء**: استخدِم صفات وصفية (مثل "حنين" أو "عدواني" أو "أثيري" أو "حالم").
+- **المدة**: ينتج نموذج "المقطع" دائمًا مقاطع مدتها 30 ثانية. بالنسبة إلى طراز Pro، حدِّد المدة المطلوبة في طلبك (مثلاً، "أريد إنشاء أغنية مدتها دقيقتان") أو استخدِم الطوابع الزمنية للتحكّم في المدة.
 
-### Exemplos de comandos
+### أمثلة على الطلبات
 
-Confira alguns exemplos de comandos eficazes:
+إليك بعض الأمثلة على الطلبات الفعّالة:
 
 - `"A 30-second lofi hip hop beat with dusty vinyl crackle, mellow Rhodes
   piano chords, a slow boom-bap drum pattern at 85 BPM, and a jazzy upright
@@ -1306,42 +1302,40 @@ Confira alguns exemplos de comandos eficazes:
 - `"A dark, atmospheric trap beat at 140 BPM with heavy 808 bass, eerie synth
   pads, sharp hi-hats, and a haunting vocal sample. In D minor."`
 
-## Práticas recomendadas
+## أفضل الممارسات
 
-- **Itere primeiro com o Clipe.** Use o modelo `lyria-3-clip-preview` mais rápido para
-  testar comandos antes de gerar um texto completo com
-  `lyria-3-pro-preview`.
-- **Faça uma descrição específica**. Comandos vagos produzem resultados genéricos. Mencione instrumentos, BPM, tom, humor e estrutura para ter o melhor resultado.
-- **Use tags de seção.** As tags `[Verse]`, `[Chorus]` e `[Bridge]` oferecem ao modelo uma estrutura clara para seguir.
-- **Separe a letra das instruções.** Ao fornecer letras personalizadas, separe-as claramente das instruções de direção musical.
+- **التكرار باستخدام Clip أولاً** استخدِم النموذج الأسرع `lyria-3-clip-preview` لتجربة الطلبات قبل الالتزام بإنشاء أغنية كاملة باستخدام `lyria-3-pro-preview`.
+- **الدقة** تؤدي الطلبات الغامضة إلى نتائج عامة. اذكر الآلات الموسيقية وسرعة الإيقاع والمفتاح الموسيقي والحالة المزاجية والبنية للحصول على أفضل نتيجة.
+- **استخدام علامات الأقسام** تمنح العلامات `[Verse]` و`[Chorus]` و`[Bridge]` النموذج بنية واضحة يجب اتّباعها.
+- **فصل كلمات الأغنية عن التعليمات:** عند تقديم كلمات أغنية مخصّصة، يجب فصلها بوضوح عن تعليمات التوجيه الموسيقي.
 
-## Limitações
+## القيود
 
-- **Segurança**: todos os comandos são verificados por filtros de segurança. Os comandos que acionam os filtros serão bloqueados. Isso inclui comandos que pedem vozes de artistas específicos ou a geração de letras protegidas por direitos autorais.
-- **Marca-d'água**: todos os áudios gerados incluem uma [marca-d'água digital do SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=pt-br) para identificação. Essa marca-d'água é imperceptível ao ouvido humano e não afeta a experiência de audição.
-- **Edição em várias etapas**: a geração de músicas é um processo de uma única etapa.
-  A edição iterativa ou o refinamento de um clipe gerado com vários comandos não é compatível com a versão atual do Lyria 3.
-- **Duração**: o modelo de clipe sempre gera clipes de 30 segundos. O modelo Pro
-  gera músicas que duram alguns minutos. A duração exata pode ser
-  influenciada pelo comando.
-- **Determinismo**: os resultados podem variar entre as chamadas, mesmo com o mesmo comando.
+- **الأمان**: تتحقّق فلاتر الأمان من جميع الطلبات. سيتم حظر الطلبات التي تؤدي إلى تشغيل الفلاتر. ويشمل ذلك الطلبات التي تطلب أصوات فنّانين معيّنين أو إنشاء كلمات أغاني محمية بحقوق الطبع والنشر.
+- **وضع العلامات المائية**: تتضمّن جميع المقاطع الصوتية التي يتم إنشاؤها [علامة مائية لمقطع صوتي من SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=ar) لتحديدها. هذه العلامة المائية غير مسموعة بالأذن البشرية ولا تؤثر في تجربة الاستماع.
+- **التعديل المتعدد**: عملية إنشاء الموسيقى هي عملية من خطوة واحدة.
+  لا يتيح الإصدار الحالي من Lyria 3 تعديل المقاطع التي تم إنشاؤها أو تحسينها بشكل متكرر من خلال طلبات متعددة.
+- **المدة**: ينشئ نموذج "المقطع" دائمًا مقاطع مدتها 30 ثانية. ينشئ نموذج Pro أغاني تستغرق بضع دقائق، ويمكن التأثير في المدة الدقيقة من خلال الطلب.
+- **التحديد**: قد تختلف النتائج بين المكالمات، حتى مع استخدام الطلب نفسه.
 
-## A seguir
+## الخطوات التالية
 
-- Confira os [preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br) dos modelos do Lyria 3.
-- Teste a [geração de música em tempo real](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=pt-br) com o
-  Lyria RealTime.
-- Gerar conversas com vários locutores usando os [modelos de TTS](https://ai.google.dev/gemini-api/docs/audio-generation?hl=pt-br).
-- Descubra como gerar [imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br) ou [vídeos](https://ai.google.dev/gemini-api/docs/video?hl=pt-br),
-- Saiba como o Gemini pode [entender arquivos de áudio](https://ai.google.dev/gemini-api/docs/audio?hl=pt-br),
-- Converse em tempo real com o Gemini usando a [API Live](https://ai.google.dev/gemini-api/docs/live?hl=pt-br).
+- اطّلِع على [الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar) لنماذج Lyria 3
+- جرِّب [إنشاء الموسيقى في الوقت الفعلي](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=ar) مع
+  ‫Lyria RealTime،
+- إنشاء محادثات بين عدة أشخاص باستخدام
+  [نماذج تحويل النص إلى كلام](https://ai.google.dev/gemini-api/docs/audio-generation?hl=ar)
+- تعرَّف على كيفية إنشاء [صور](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar) أو [فيديوهات](https://ai.google.dev/gemini-api/docs/video?hl=ar).
+- تعرَّف على كيفية [فهم Gemini للملفات الصوتية](https://ai.google.dev/gemini-api/docs/audio?hl=ar)،
+- إجراء محادثة فورية مع Gemini باستخدام
+  [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar)
 
-Envie comentários
+إرسال ملاحظات
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Última atualização 2026-04-28 UTC.
+تاريخ التعديل الأخير: 2026-05-07 (حسب التوقيت العالمي المتفَّق عليه)
 
-Quer enviar seu feedback?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-28 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-07 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

@@ -1,49 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=pl
-fetched_at: 2026-05-05T20:43:58.769893+00:00
-title: "Gemini\u00a02.5 Flash Image (Nano Banana) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=he
+fetched_at: 2026-05-11T04:57:49.199399+00:00
+title: "\u05ea\u05de\u05d5\u05e0\u05d4 \u05e9\u05dc Gemini 2.5 Flash (Nano Banana) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Prześlij opinię
+שליחת משוב
 
-# Gemini 2.5 Flash Image (Nano Banana)
+# תמונה של Gemini 2.5 Flash (Nano Banana)
 
-Nasz najlepszy silnik do szybkiego tworzenia wizualizacji, który zapewnia najnowocześniejszą szybkość i wydajność. Gemini 2.5 Flash Image, znany też jako Nano Banana, najlepiej sprawdza się w przypadku generowania dużej liczby obrazów, konwersacyjnego edytowania obrazów i kreatywnych procesów wymagających natywnego rozumienia multimodalnego, które charakteryzują się krótkim czasem oczekiwania.
+המנוע הכי טוב שלנו ליצירת תמונות במהירות גבוהה, שמציע מהירות ויעילות מתקדמות. מודל Gemini 2.5 Flash Image, שנקרא גם Nano Banana, הוא המודל הכי טוב ליצירת תמונות בכמויות גדולות, לעריכת תמונות בשיחה ולתהליכי עבודה יצירתיים עם זמן אחזור נמוך שדורשים הבנה מקורית של נתונים ממקורות שונים.
 
-[Wypróbuj w Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=pl)
+[לניסיון ב-Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=he)
 
-## Dokumentacja
+## מאמרי עזרה
 
-Więcej informacji o funkcjach i możliwościach znajdziesz w przewodniku [Generowanie obrazów](https://ai.google.dev/gemini-api/docs/image-generation?hl=pl).
+במדריך [יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he) יש מידע מקיף על התכונות והיכולות.
 
 ## gemini-2.5-flash-image
 
-| Właściwość | Opis |
+| נכס | תיאור |
 | --- | --- |
-| id\_cardKod modelu | `gemini-2.5-flash-image` |
-| saveObsługiwane typy danych | **Dane wejściowe**  Obrazy i tekst  **Dane wyjściowe**  Obrazy i tekst |
-| token\_autoLimity tokenów[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | **Limit tokenów wejściowych**  65 536  **Limit tokenów wyjściowych**  32 768 |
-| handymanMożliwości | **Generowanie dźwięku**  Nieobsługiwane  **Interfejs Batch API**  Obsługiwane  **Zapisywanie w pamięci podręcznej**  Obsługiwane  **Wykonywanie kodu**  Nieobsługiwane  **Wyszukiwanie plików**  Nieobsługiwane  **Wnioskowanie Flex**  Obsługiwane  **Wywoływanie funkcji**  Nieobsługiwane  **Powiązanie ze źródłem informacji przy użyciu Map Google**  Nieobsługiwane  **Generowanie obrazów**  Obsługiwane  **Interfejs Live API**  Nieobsługiwane  **Wnioskowanie priorytetowe**  Obsługiwane  **Szukaj groundingu**  Nieobsługiwane  **Ustrukturyzowane dane wyjściowe**  Obsługiwane  **Myślę**  Nieobsługiwane  **Kontekst adresu URL**  Nieobsługiwane |
-| 123Wersje | Więcej informacji znajdziesz w artykule [Wzorce wersji modelu](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#model-versions).  - Stabilny: `gemini-2.5-flash-image` - Wycofany: `gemini-2.5-flash-image-preview` |
-| calendar\_monthOstatnia aktualizacja | Październik 2025 r. |
-| cognition\_2Granica wiedzy | Czerwiec 2025 r. |
+| id\_cardקוד מודל | `gemini-2.5-flash-image` |
+| saveסוגי נתונים נתמכים | **קלטים**  תמונות וטקסט  **פלט**  תמונות וטקסט |
+| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  65,536  **מגבלת אסימונים בפלט**  32,768 |
+| handymanיכולות | **יצירת אודיו**  לא נתמך  ‫**Batch API**  נתמך  **שמירת נתונים במטמון**  נתמך  **ביצוע קוד**  לא נתמך  **חיפוש קבצים**  לא נתמך  **הסקת מסקנות גמישה**  נתמך  **בקשה להפעלת פונקציה**  לא נתמך  **עיגון בעזרת מפות Google**  לא נתמך  **יצירת תמונות**  נתמך  ‫**Live API**  לא נתמך  **היקש בעדיפות גבוהה**  נתמך  **חיפוש עם עיגון בנתונים**  לא נתמך  **פלטים מובְנים**  נתמך  **תהליך החשיבה**  לא נתמך  **הקשר של כתובת ה-URL**  לא נתמך |
+| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - יציב: `gemini-2.5-flash-image` - הוצא משימוש: `gemini-2.5-flash-image-preview` |
+| calendar\_monthהעדכון האחרון | אוקטובר 2025 |
+| cognition\_2תאריך סף הידע | יוני 2025 |
 
-Prześlij opinię
+שליחת משוב
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Ostatnia aktualizacja: 2026-04-29 UTC.
+עדכון אחרון: 2026-04-29 (שעון UTC).
 
-Chcesz przekazać coś jeszcze?
+רוצה לתת לנו משוב?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]
