@@ -64,7 +64,6 @@ use crate::outgoing_message::OutgoingMessage;
 use crate::outgoing_message::OutgoingMessageSender;
 use crate::outgoing_message::QueuedOutgoingMessage;
 use crate::transport::CHANNEL_CAPACITY;
-use crate::transport::ConnectionOrigin;
 use crate::transport::OutboundConnectionState;
 use crate::transport::route_outgoing_envelope;
 use codex_analytics::AppServerRpcTransport;
@@ -82,6 +81,7 @@ use codex_config::CloudRequirementsLoader;
 use codex_config::LoaderOverrides;
 use codex_config::ThreadConfigLoader;
 use codex_core::config::Config;
+use codex_core::resolve_installation_id;
 use codex_exec_server::EnvironmentManager;
 use codex_feedback::CodexFeedback;
 use codex_login::AuthManager;
@@ -344,7 +344,7 @@ impl InProcessClientHandle {
 /// the runtime is shut down and an `InvalidData` error is returned.
 pub async fn start(args: InProcessStartArgs) -> IoResult<InProcessClientHandle> {
     let initialize = args.initialize.clone();
-    let client = start_uninitialized(args);
+    let client = start_uninitialized(args).await?;
 
     let initialize_response = client
         .request(ClientRequest::Initialize {
@@ -364,8 +364,9 @@ pub async fn start(args: InProcessStartArgs) -> IoResult<InProcessClientHandle> 
     Ok(client)
 }
 
-fn start_uninitialized(args: InProcessStartArgs) -> InProcessClientHandle {
+async fn start_uninitialized(args: InProcessStartArgs) -> IoResult<InProcessClientHandle> {
     let channel_capacity = args.channel_capacity.max(1);
+    let installation_id = resolve_installation_id(&args.config.codex_home).await?;
     let (client_tx, mut client_rx) = mpsc::channel::<InProcessClientMessage>(channel_capacity);
     let (event_tx, event_rx) = mpsc::channel::<InProcessServerEvent>(channel_capacity);
 
@@ -427,12 +428,13 @@ fn start_uninitialized(args: InProcessStartArgs) -> InProcessClientHandle {
                 config_warnings: args.config_warnings,
                 session_source: args.session_source,
                 auth_manager,
+                installation_id,
                 rpc_transport: AppServerRpcTransport::InProcess,
                 remote_control_handle: None,
                 plugin_startup_tasks: crate::PluginStartupTasks::Start,
             }));
             let mut thread_created_rx = processor.thread_created_receiver();
-            let session = Arc::new(ConnectionSessionState::new(ConnectionOrigin::InProcess));
+            let session = Arc::new(ConnectionSessionState::new());
             let mut listen_for_threads = true;
 
             loop {
@@ -707,26 +709,20 @@ fn start_uninitialized(args: InProcessStartArgs) -> InProcessClientHandle {
         }
     });
 
-    InProcessClientHandle {
+    Ok(InProcessClientHandle {
         client: InProcessClientSender { client_tx },
         event_rx,
         runtime_handle,
         #[cfg(test)]
         _test_codex_home: None,
-    }
+    })
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::error_code::INVALID_REQUEST_ERROR_CODE;
     use codex_app_server_protocol::ClientInfo;
     use codex_app_server_protocol::ConfigRequirementsReadResponse;
-    use codex_app_server_protocol::DeviceKeyPublicParams;
-    use codex_app_server_protocol::DeviceKeySignParams;
-    use codex_app_server_protocol::DeviceKeySignPayload;
-    use codex_app_server_protocol::RemoteControlClientConnectionAudience;
-    use codex_app_server_protocol::RemoteControlClientEnrollmentAudience;
     use codex_app_server_protocol::SessionSource as ApiSessionSource;
     use codex_app_server_protocol::ThreadStartParams;
     use codex_app_server_protocol::ThreadStartResponse;
@@ -812,87 +808,6 @@ mod tests {
 
         let _parsed: ConfigRequirementsReadResponse =
             serde_json::from_value(response).expect("response should match v2 schema");
-        client
-            .shutdown()
-            .await
-            .expect("in-process runtime should shutdown cleanly");
-    }
-
-    #[tokio::test]
-    async fn in_process_allows_device_key_requests_to_reach_device_key_processor() {
-        let client = start_test_client(SessionSource::Cli).await;
-        const MALFORMED_KEY_ID_MESSAGE: &str = concat!(
-            "invalid device key payload: keyId must be dk_hse_, dk_tpm_, or dk_osn_ ",
-            "followed by unpadded base64url-encoded 32 bytes"
-        );
-        let requests = [
-            (
-                ClientRequest::DeviceKeyPublic {
-                    request_id: RequestId::Integer(11),
-                    params: DeviceKeyPublicParams {
-                        key_id: String::new(),
-                    },
-                },
-                MALFORMED_KEY_ID_MESSAGE,
-            ),
-            (
-                ClientRequest::DeviceKeySign {
-                    request_id: RequestId::Integer(12),
-                    params: DeviceKeySignParams {
-                        key_id: String::new(),
-                        payload: DeviceKeySignPayload::RemoteControlClientConnection {
-                            nonce: "nonce-123".to_string(),
-                            audience:
-                                RemoteControlClientConnectionAudience::RemoteControlClientWebsocket,
-                            session_id: "wssess_123".to_string(),
-                            target_origin: "https://chatgpt.com".to_string(),
-                            target_path: "/api/codex/remote/control/client".to_string(),
-                            account_user_id: "acct_123".to_string(),
-                            client_id: "cli_123".to_string(),
-                            token_expires_at: 4_102_444_800,
-                            token_sha256_base64url: "47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU"
-                                .to_string(),
-                            scopes: vec!["remote_control_controller_websocket".to_string()],
-                        },
-                    },
-                },
-                MALFORMED_KEY_ID_MESSAGE,
-            ),
-            (
-                ClientRequest::DeviceKeySign {
-                    request_id: RequestId::Integer(13),
-                    params: DeviceKeySignParams {
-                        key_id: String::new(),
-                        payload: DeviceKeySignPayload::RemoteControlClientEnrollment {
-                            nonce: "nonce-123".to_string(),
-                            audience:
-                                RemoteControlClientEnrollmentAudience::RemoteControlClientEnrollment,
-                            challenge_id: "rch_123".to_string(),
-                            target_origin: "https://chatgpt.com".to_string(),
-                            target_path: "/wham/remote/control/client/enroll".to_string(),
-                            account_user_id: "acct_123".to_string(),
-                            client_id: "cli_123".to_string(),
-                            device_identity_sha256_base64url:
-                                "47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU".to_string(),
-                            challenge_expires_at: 4_102_444_800,
-                        },
-                    },
-                },
-                MALFORMED_KEY_ID_MESSAGE,
-            ),
-        ];
-
-        for (request, expected_message) in requests {
-            let error = client
-                .request(request)
-                .await
-                .expect("request transport should work")
-                .expect_err("request should be rejected");
-
-            assert_eq!(error.code, INVALID_REQUEST_ERROR_CODE);
-            assert_eq!(error.message, expected_message);
-        }
-
         client
             .shutdown()
             .await

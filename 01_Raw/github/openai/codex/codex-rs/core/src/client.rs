@@ -58,7 +58,7 @@ use codex_api::SseTelemetry;
 use codex_api::TransportError;
 use codex_api::WebsocketTelemetry;
 use codex_api::auth_header_telemetry;
-use codex_api::build_conversation_headers;
+use codex_api::build_session_headers;
 use codex_api::create_text_param_for_request;
 use codex_api::response_create_client_metadata;
 use codex_app_server_protocol::AuthMode;
@@ -70,9 +70,9 @@ use codex_login::default_client::build_reqwest_client;
 use codex_otel::SessionTelemetry;
 use codex_otel::current_span_w3c_trace_context;
 
+use codex_protocol::SessionId;
 use codex_protocol::ThreadId;
 use codex_protocol::config_types::ReasoningSummary as ReasoningSummaryConfig;
-use codex_protocol::config_types::ServiceTier;
 use codex_protocol::config_types::Verbosity as VerbosityConfig;
 use codex_protocol::models::ResponseItem;
 use codex_protocol::openai_models::ModelInfo;
@@ -100,10 +100,14 @@ use tokio::sync::oneshot::error::TryRecvError;
 use tokio_tungstenite::tungstenite::Error;
 use tokio_tungstenite::tungstenite::Message;
 use tokio_util::sync::CancellationToken;
+use tracing::debug;
 use tracing::instrument;
 use tracing::trace;
 use tracing::warn;
 
+use crate::attestation::AttestationContext;
+use crate::attestation::AttestationProvider;
+use crate::attestation::X_OAI_ATTESTATION_HEADER;
 use crate::client_common::Prompt;
 use crate::client_common::ResponseEvent;
 use crate::client_common::ResponseStream;
@@ -146,13 +150,20 @@ const MEMORIES_SUMMARIZE_ENDPOINT: &str = "/memories/trace_summarize";
 pub(crate) const WEBSOCKET_CONNECT_TIMEOUT: Duration =
     Duration::from_millis(DEFAULT_WEBSOCKET_CONNECT_TIMEOUT_MS);
 
+pub(crate) struct CompactConversationRequestSettings {
+    pub(crate) effort: Option<ReasoningEffortConfig>,
+    pub(crate) summary: ReasoningSummaryConfig,
+    pub(crate) service_tier: Option<String>,
+}
+
 /// Session-scoped state shared by all [`ModelClient`] clones.
 ///
 /// This is intentionally kept minimal so `ModelClient` does not need to hold a full `Config`. Most
 /// configuration is per turn and is passed explicitly to streaming/unary methods.
 #[derive(Debug)]
 struct ModelClientState {
-    conversation_id: ThreadId,
+    session_id: SessionId,
+    thread_id: ThreadId,
     window_generation: AtomicU64,
     installation_id: String,
     provider: SharedModelProvider,
@@ -162,6 +173,8 @@ struct ModelClientState {
     enable_request_compression: bool,
     include_timing_metrics: bool,
     beta_features_header: Option<String>,
+    include_attestation: bool,
+    attestation_provider: Option<Arc<dyn AttestationProvider>>,
     disable_websockets: AtomicBool,
     cached_websocket_session: StdMutex<WebsocketSession>,
 }
@@ -190,7 +203,7 @@ impl RequestRouteTelemetry {
 /// A session-scoped client for model-provider API calls.
 ///
 /// This holds configuration and state that should be shared across turns within a Codex session
-/// (auth, provider selection, conversation id, and transport fallback state).
+/// (auth, provider selection, thread id, and transport fallback state).
 ///
 /// WebSocket fallback is session-scoped: once a turn activates the HTTP fallback, subsequent turns
 /// will also use HTTP for the remainder of the session.
@@ -297,7 +310,8 @@ impl ModelClient {
     /// are passed to [`ModelClientSession::stream`] (and other turn-scoped methods) explicitly.
     pub fn new(
         auth_manager: Option<Arc<AuthManager>>,
-        conversation_id: ThreadId,
+        session_id: SessionId,
+        thread_id: ThreadId,
         installation_id: String,
         provider_info: ModelProviderInfo,
         session_source: SessionSource,
@@ -305,6 +319,7 @@ impl ModelClient {
         enable_request_compression: bool,
         include_timing_metrics: bool,
         beta_features_header: Option<String>,
+        attestation_provider: Option<Arc<dyn AttestationProvider>>,
     ) -> Self {
         let model_provider = create_model_provider(provider_info, auth_manager);
         let codex_api_key_env_enabled = model_provider
@@ -313,9 +328,11 @@ impl ModelClient {
             .is_some_and(|manager| manager.codex_api_key_env_enabled());
         let auth_env_telemetry =
             collect_auth_env_telemetry(model_provider.info(), codex_api_key_env_enabled);
+        let include_attestation = model_provider.supports_attestation();
         Self {
             state: Arc::new(ModelClientState {
-                conversation_id,
+                session_id,
+                thread_id,
                 window_generation: AtomicU64::new(0),
                 installation_id,
                 provider: model_provider,
@@ -325,6 +342,8 @@ impl ModelClient {
                 enable_request_compression,
                 include_timing_metrics,
                 beta_features_header,
+                include_attestation,
+                attestation_provider,
                 disable_websockets: AtomicBool::new(false),
                 cached_websocket_session: StdMutex::new(WebsocketSession::default()),
             }),
@@ -360,9 +379,9 @@ impl ModelClient {
     }
 
     fn current_window_id(&self) -> String {
-        let conversation_id = self.state.conversation_id;
+        let thread_id = self.state.thread_id;
         let window_generation = self.state.window_generation.load(Ordering::Relaxed);
-        format!("{conversation_id}:{window_generation}")
+        format!("{thread_id}:{window_generation}")
     }
 
     fn take_cached_websocket_session(&self) -> WebsocketSession {
@@ -410,12 +429,11 @@ impl ModelClient {
     ///
     /// The model selection and telemetry context are passed explicitly to keep `ModelClient`
     /// session-scoped.
-    pub async fn compact_conversation_history(
+    pub(crate) async fn compact_conversation_history(
         &self,
         prompt: &Prompt,
         model_info: &ModelInfo,
-        effort: Option<ReasoningEffortConfig>,
-        summary: ReasoningSummaryConfig,
+        settings: CompactConversationRequestSettings,
         session_telemetry: &SessionTelemetry,
         compaction_trace: &CompactionTraceContext,
     ) -> Result<Vec<ResponseItem>> {
@@ -438,9 +456,9 @@ impl ModelClient {
             &client_setup.api_provider,
             prompt,
             model_info,
-            effort,
-            summary,
-            /*service_tier*/ None,
+            settings.effort,
+            settings.summary,
+            settings.service_tier,
         )?;
         let ResponsesApiRequest {
             model,
@@ -449,12 +467,11 @@ impl ModelClient {
             tools,
             parallel_tool_calls,
             reasoning,
+            service_tier,
+            prompt_cache_key,
             text,
             ..
         } = request;
-        let client =
-            ApiCompactClient::new(transport, client_setup.api_provider, client_setup.api_auth)
-                .with_telemetry(Some(request_telemetry));
         let payload = ApiCompactionInput {
             model: &model,
             input: &input,
@@ -462,6 +479,8 @@ impl ModelClient {
             tools,
             parallel_tool_calls,
             reasoning,
+            service_tier: service_tier.as_deref(),
+            prompt_cache_key: prompt_cache_key.as_deref(),
             text,
         };
 
@@ -475,9 +494,16 @@ impl ModelClient {
             /*turn_metadata_header*/ None,
         ));
         extra_headers.extend(self.build_responses_identity_headers());
-        extra_headers.extend(build_conversation_headers(Some(
-            self.state.conversation_id.to_string(),
-        )));
+        extra_headers.extend(build_session_headers(
+            Some(self.state.session_id.to_string()),
+            Some(self.state.thread_id.to_string()),
+        ));
+        if let Some(header_value) = self.generate_attestation_header_for().await {
+            extra_headers.insert(X_OAI_ATTESTATION_HEADER, header_value);
+        }
+        let client =
+            ApiCompactClient::new(transport, client_setup.api_provider, client_setup.api_auth)
+                .with_telemetry(Some(request_telemetry));
         let trace_attempt = compaction_trace.start_attempt(&payload);
         let result = client
             .compact_input(&payload, extra_headers)
@@ -491,11 +517,14 @@ impl ModelClient {
         &self,
         sdp: String,
         session_config: ApiRealtimeSessionConfig,
-        extra_headers: ApiHeaderMap,
+        mut extra_headers: ApiHeaderMap,
     ) -> Result<RealtimeWebrtcCallStart> {
         // Create the media call over HTTP first, then retain matching auth so realtime can attach
         // the server-side control WebSocket to the call id from that HTTP response.
         let client_setup = self.current_client_setup().await?;
+        if let Some(header_value) = self.generate_attestation_header_for().await {
+            extra_headers.insert(X_OAI_ATTESTATION_HEADER, header_value);
+        }
         let mut sideband_headers = extra_headers.clone();
         sideband_headers.extend(sideband_websocket_auth_headers(
             client_setup.api_auth.as_ref(),
@@ -626,6 +655,20 @@ impl ModelClient {
         client_metadata
     }
 
+    async fn generate_attestation_header_for(&self) -> Option<HeaderValue> {
+        if !self.state.include_attestation {
+            return None;
+        }
+
+        self.state
+            .attestation_provider
+            .as_ref()?
+            .header_for_request(AttestationContext {
+                thread_id: self.state.thread_id,
+            })
+            .await
+    }
+
     /// Builds request telemetry for unary API calls (e.g., Compact endpoint).
     fn build_request_telemetry(
         session_telemetry: &SessionTelemetry,
@@ -669,7 +712,7 @@ impl ModelClient {
         model_info: &ModelInfo,
         effort: Option<ReasoningEffortConfig>,
         summary: ReasoningSummaryConfig,
-        service_tier: Option<ServiceTier>,
+        service_tier: Option<String>,
     ) -> Result<ResponsesApiRequest> {
         let instructions = &prompt.base_instructions.text;
         let input = prompt.get_formatted_input();
@@ -696,7 +739,9 @@ impl ModelClient {
             &prompt.output_schema,
             prompt.output_schema_strict,
         );
-        let prompt_cache_key = Some(self.state.conversation_id.to_string());
+        let prompt_cache_key = Some(self.state.thread_id.to_string());
+        let service_tier =
+            service_tier.filter(|service_tier| model_info.supports_service_tier(service_tier));
         let request = ResponsesApiRequest {
             model: model_info.slug.clone(),
             instructions: instructions.clone(),
@@ -708,11 +753,7 @@ impl ModelClient {
             store: provider.is_azure_responses_endpoint(),
             stream: true,
             include,
-            service_tier: match service_tier {
-                Some(ServiceTier::Fast) => Some("priority".to_string()),
-                Some(service_tier) => Some(service_tier.to_string()),
-                None => None,
-            },
+            service_tier,
             prompt_cache_key,
             text,
             client_metadata: Some(HashMap::from([(
@@ -767,7 +808,9 @@ impl ModelClient {
         auth_context: AuthRequestTelemetryContext,
         request_route_telemetry: RequestRouteTelemetry,
     ) -> std::result::Result<ApiWebSocketConnection, ApiError> {
-        let headers = self.build_websocket_headers(turn_state.as_ref(), turn_metadata_header);
+        let headers = self
+            .build_websocket_headers(turn_state.as_ref(), turn_metadata_header)
+            .await;
         let websocket_telemetry = ModelClientSession::build_websocket_telemetry(
             session_telemetry,
             auth_context,
@@ -844,23 +887,27 @@ impl ModelClient {
     ///
     /// Callers should pass the current turn-state lock when available so sticky-routing state is
     /// replayed on reconnect within the same turn.
-    fn build_websocket_headers(
+    async fn build_websocket_headers(
         &self,
         turn_state: Option<&Arc<OnceLock<String>>>,
         turn_metadata_header: Option<&str>,
     ) -> ApiHeaderMap {
         let turn_metadata_header = parse_turn_metadata_header(turn_metadata_header);
-        let conversation_id = self.state.conversation_id.to_string();
+        let session_id = self.state.session_id.to_string();
+        let thread_id = self.state.thread_id.to_string();
         let mut headers = build_responses_headers(
             self.state.beta_features_header.as_deref(),
             turn_state,
             turn_metadata_header.as_ref(),
         );
-        if let Ok(header_value) = HeaderValue::from_str(&conversation_id) {
+        if let Ok(header_value) = HeaderValue::from_str(&thread_id) {
             headers.insert("x-client-request-id", header_value);
         }
-        headers.extend(build_conversation_headers(Some(conversation_id)));
+        headers.extend(build_session_headers(Some(session_id), Some(thread_id)));
         headers.extend(self.build_responses_identity_headers());
+        if let Some(header_value) = self.generate_attestation_header_for().await {
+            headers.insert(X_OAI_ATTESTATION_HEADER, header_value);
+        }
         headers.insert(
             OPENAI_BETA_HEADER,
             HeaderValue::from_static(RESPONSES_WEBSOCKETS_V2_BETA_HEADER_VALUE),
@@ -892,20 +939,34 @@ impl ModelClientSession {
             .set_connection_reused(/*connection_reused*/ false);
     }
 
+    pub(crate) async fn send_response_processed(&self, response_id: &str) {
+        let Some(connection) = self.websocket_session.connection.as_ref() else {
+            return;
+        };
+        if let Err(err) = connection
+            .send_response_processed(response_id.to_string())
+            .await
+        {
+            debug!("failed to send response.processed websocket request: {err}");
+        }
+    }
+
     #[allow(clippy::too_many_arguments)]
     /// Builds shared Responses API transport options and request-body options.
     ///
     /// Keeping option construction in one place ensures request-scoped headers are consistent
     /// regardless of transport choice.
-    fn build_responses_options(
+    async fn build_responses_options(
         &self,
         turn_metadata_header: Option<&str>,
         compression: Compression,
     ) -> ApiResponsesOptions {
         let turn_metadata_header = parse_turn_metadata_header(turn_metadata_header);
-        let conversation_id = self.client.state.conversation_id.to_string();
+        let session_id = self.client.state.session_id.to_string();
+        let thread_id = self.client.state.thread_id.to_string();
         ApiResponsesOptions {
-            conversation_id: Some(conversation_id),
+            session_id: Some(session_id),
+            thread_id: Some(thread_id),
             session_source: Some(self.client.state.session_source.clone()),
             extra_headers: {
                 let mut headers = build_responses_headers(
@@ -914,6 +975,9 @@ impl ModelClientSession {
                     turn_metadata_header.as_ref(),
                 );
                 headers.extend(self.client.build_responses_identity_headers());
+                if let Some(header_value) = self.client.generate_attestation_header_for().await {
+                    headers.insert(X_OAI_ATTESTATION_HEADER, header_value);
+                }
                 headers
             },
             compression,
@@ -1151,7 +1215,7 @@ impl ModelClientSession {
         session_telemetry: &SessionTelemetry,
         effort: Option<ReasoningEffortConfig>,
         summary: ReasoningSummaryConfig,
-        service_tier: Option<ServiceTier>,
+        service_tier: Option<String>,
         turn_metadata_header: Option<&str>,
         inference_trace: &InferenceTraceContext,
     ) -> Result<ResponseStream> {
@@ -1190,7 +1254,9 @@ impl ModelClientSession {
                 self.client.state.auth_env_telemetry.clone(),
             );
             let compression = self.responses_request_compression(client_setup.auth.as_ref());
-            let options = self.build_responses_options(turn_metadata_header, compression);
+            let options = self
+                .build_responses_options(turn_metadata_header, compression)
+                .await;
 
             let request = self.client.build_responses_request(
                 &client_setup.api_provider,
@@ -1198,7 +1264,7 @@ impl ModelClientSession {
                 model_info,
                 effort,
                 summary,
-                service_tier,
+                service_tier.clone(),
             )?;
             let inference_trace_attempt = inference_trace.start_attempt();
             inference_trace_attempt.record_started(&request);
@@ -1276,7 +1342,7 @@ impl ModelClientSession {
         session_telemetry: &SessionTelemetry,
         effort: Option<ReasoningEffortConfig>,
         summary: ReasoningSummaryConfig,
-        service_tier: Option<ServiceTier>,
+        service_tier: Option<String>,
         turn_metadata_header: Option<&str>,
         warmup: bool,
         request_trace: Option<W3cTraceContext>,
@@ -1297,14 +1363,16 @@ impl ModelClientSession {
             );
             let compression = self.responses_request_compression(client_setup.auth.as_ref());
 
-            let options = self.build_responses_options(turn_metadata_header, compression);
+            let options = self
+                .build_responses_options(turn_metadata_header, compression)
+                .await;
             let request = self.client.build_responses_request(
                 &client_setup.api_provider,
                 prompt,
                 model_info,
                 effort,
                 summary,
-                service_tier,
+                service_tier.clone(),
             )?;
             let mut ws_payload = ResponseCreateWsRequest {
                 client_metadata: response_create_client_metadata(
@@ -1436,7 +1504,7 @@ impl ModelClientSession {
         session_telemetry: &SessionTelemetry,
         effort: Option<ReasoningEffortConfig>,
         summary: ReasoningSummaryConfig,
-        service_tier: Option<ServiceTier>,
+        service_tier: Option<String>,
         turn_metadata_header: Option<&str>,
     ) -> Result<()> {
         if !self.client.responses_websocket_enabled() {
@@ -1497,7 +1565,7 @@ impl ModelClientSession {
         session_telemetry: &SessionTelemetry,
         effort: Option<ReasoningEffortConfig>,
         summary: ReasoningSummaryConfig,
-        service_tier: Option<ServiceTier>,
+        service_tier: Option<String>,
         turn_metadata_header: Option<&str>,
         inference_trace: &InferenceTraceContext,
     ) -> Result<ResponseStream> {
@@ -1513,7 +1581,7 @@ impl ModelClientSession {
                             session_telemetry,
                             effort,
                             summary,
-                            service_tier,
+                            service_tier.clone(),
                             turn_metadata_header,
                             /*warmup*/ false,
                             request_trace,

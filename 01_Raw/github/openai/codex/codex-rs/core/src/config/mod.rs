@@ -37,7 +37,6 @@ use codex_config::profile_toml::ConfigProfile;
 use codex_config::sandbox_mode_requirement_for_permission_profile;
 use codex_config::types::ApprovalsReviewer;
 use codex_config::types::AuthCredentialsStoreMode;
-use codex_config::types::DEFAULT_OTEL_ENVIRONMENT;
 use codex_config::types::History;
 use codex_config::types::McpServerConfig;
 use codex_config::types::McpServerDisabledReason;
@@ -46,9 +45,6 @@ use codex_config::types::MemoriesConfig;
 use codex_config::types::ModelAvailabilityNuxConfig;
 use codex_config::types::Notice;
 use codex_config::types::OAuthCredentialsStoreMode;
-use codex_config::types::OtelConfig;
-use codex_config::types::OtelConfigToml;
-use codex_config::types::OtelExporterKind;
 use codex_config::types::SessionPickerViewMode;
 use codex_config::types::ToolSuggestConfig;
 use codex_config::types::ToolSuggestDisabledTool;
@@ -70,7 +66,9 @@ use codex_features::FeaturesToml;
 use codex_features::MultiAgentV2ConfigToml;
 use codex_git_utils::resolve_root_git_project_for_trust;
 use codex_login::AuthManagerConfig;
+use codex_mcp::BuiltinMcpServerOptions;
 use codex_mcp::McpConfig;
+use codex_mcp::enabled_builtin_mcp_servers;
 use codex_memories_read::memory_root;
 use codex_model_provider_info::LEGACY_OLLAMA_CHAT_PROVIDER_ID;
 use codex_model_provider_info::ModelProviderInfo;
@@ -130,10 +128,10 @@ pub(crate) mod agent_roles;
 pub mod edit;
 mod managed_features;
 mod network_proxy_spec;
+mod otel;
 mod permissions;
 #[cfg(test)]
 mod schema;
-pub(crate) mod template_interpolation;
 pub use codex_config::Constrained;
 pub use codex_config::ConstraintError;
 pub use codex_config::ConstraintResult;
@@ -382,8 +380,6 @@ pub enum ThreadStoreConfig {
     /// Persist threads locally using rollout JSONL files and sqlite metadata.
     #[default]
     Local,
-    /// Persist threads through the remote thread-store service.
-    Remote { endpoint: String },
     /// In-memory thread store for test and debug configurations.
     InMemory { id: String },
 }
@@ -401,8 +397,8 @@ pub struct Config {
     /// Optional override of model selection.
     pub model: Option<String>,
 
-    /// Effective service tier preference for new turns (`fast` or `flex`).
-    pub service_tier: Option<ServiceTier>,
+    /// Effective service tier request id preference for new turns.
+    pub service_tier: Option<String>,
 
     /// Model used specifically for review sessions.
     pub review_model: Option<String>,
@@ -475,6 +471,8 @@ pub struct Config {
     pub compact_prompt: Option<String>,
 
     /// Optional commit attribution text for commit message co-author trailers.
+    /// This top-level setting only takes effect when `[features].codex_git_commit`
+    /// is enabled.
     ///
     /// - `None`: use default attribution (`Codex <noreply@openai.com>`)
     /// - `Some("")` or whitespace-only: disable commit attribution
@@ -1088,6 +1086,11 @@ impl Config {
     ) -> McpConfig {
         let plugins_input = self.plugins_config_input();
         let loaded_plugins = plugins_manager.plugins_for_config(&plugins_input).await;
+        let builtin_mcp_servers = enabled_builtin_mcp_servers(BuiltinMcpServerOptions {
+            memories_enabled: self.features.enabled(Feature::BuiltInMcp)
+                && self.features.enabled(Feature::MemoryTool)
+                && self.memories.use_memories,
+        });
         let mut configured_mcp_servers = self.mcp_servers.get().clone();
         for plugin in loaded_plugins
             .plugins()
@@ -1107,8 +1110,13 @@ impl Config {
         if let Some(mcp_requirements) = self.config_layer_stack.requirements().mcp_servers.as_ref()
             && mcp_requirements.value.is_empty()
         {
-            // A present empty allowlist bans all MCPs, including plugin MCPs merged above.
+            // A present empty allowlist bans configurable MCPs, including plugin MCPs merged
+            // above. Built-ins are product-owned and stay available regardless of admin
+            // allowlists.
             filter_mcp_servers_by_requirements(&mut configured_mcp_servers, Some(mcp_requirements));
+        }
+        for builtin_server in &builtin_mcp_servers {
+            configured_mcp_servers.remove(builtin_server.name());
         }
 
         McpConfig {
@@ -1126,8 +1134,65 @@ impl Config {
             use_legacy_landlock: self.features.use_legacy_landlock(),
             apps_enabled: self.features.enabled(Feature::Apps),
             configured_mcp_servers,
+            builtin_mcp_servers,
             plugin_capability_summaries: loaded_plugins.capability_summaries().to_vec(),
         }
+    }
+
+    pub async fn rebuild_preserving_session_layers(
+        &self,
+        refreshed_config: &Config,
+    ) -> std::io::Result<Self> {
+        let mut layers = refreshed_config
+            .config_layer_stack
+            .get_layers(
+                ConfigLayerStackOrdering::LowestPrecedenceFirst,
+                /*include_disabled*/ true,
+            )
+            .into_iter()
+            .filter(|layer| !is_session_layer(&layer.name))
+            .cloned()
+            .collect::<Vec<_>>();
+        layers.extend(
+            self.config_layer_stack
+                .get_layers(
+                    ConfigLayerStackOrdering::LowestPrecedenceFirst,
+                    /*include_disabled*/ true,
+                )
+                .into_iter()
+                .filter(|layer| is_session_layer(&layer.name))
+                .cloned(),
+        );
+        layers.sort_by_key(|layer| layer.name.precedence());
+
+        let config_layer_stack = ConfigLayerStack::new(
+            layers,
+            refreshed_config.config_layer_stack.requirements().clone(),
+            refreshed_config
+                .config_layer_stack
+                .requirements_toml()
+                .clone(),
+        )?
+        .with_user_and_project_exec_policy_rules_ignored(
+            refreshed_config
+                .config_layer_stack
+                .ignore_user_and_project_exec_policy_rules(),
+        );
+        let cfg: ConfigToml = config_layer_stack
+            .effective_config()
+            .try_into()
+            .map_err(|err| std::io::Error::new(std::io::ErrorKind::InvalidData, err))?;
+        Self::load_config_with_layer_stack(
+            LOCAL_FS.as_ref(),
+            cfg,
+            ConfigOverrides {
+                cwd: Some(self.cwd.to_path_buf()),
+                ..Default::default()
+            },
+            refreshed_config.codex_home.clone(),
+            config_layer_stack,
+        )
+        .await
     }
 
     /// This is the preferred way to create an instance of [Config].
@@ -1666,18 +1731,16 @@ fn resolve_tool_suggest_config_from_config(
     }
 }
 
-fn thread_store_config(
-    thread_store: Option<ThreadStoreToml>,
-    legacy_remote_endpoint: Option<String>,
-) -> ThreadStoreConfig {
+fn thread_store_config(thread_store: Option<ThreadStoreToml>) -> ThreadStoreConfig {
     match thread_store {
         Some(ThreadStoreToml::Local {}) => ThreadStoreConfig::Local,
-        Some(ThreadStoreToml::Remote { endpoint }) => ThreadStoreConfig::Remote { endpoint },
         Some(ThreadStoreToml::InMemory { id }) => ThreadStoreConfig::InMemory { id },
-        None => legacy_remote_endpoint.map_or(ThreadStoreConfig::Local, |endpoint| {
-            ThreadStoreConfig::Remote { endpoint }
-        }),
+        None => ThreadStoreConfig::Local,
     }
+}
+
+fn is_session_layer(source: &ConfigLayerSource) -> bool {
+    matches!(source, ConfigLayerSource::SessionFlags)
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -1796,7 +1859,7 @@ pub struct ConfigOverrides {
     pub permission_profile: Option<PermissionProfile>,
     pub default_permissions: Option<String>,
     pub model_provider: Option<String>,
-    pub service_tier: Option<Option<ServiceTier>>,
+    pub service_tier: Option<Option<String>>,
     pub config_profile: Option<String>,
     pub codex_self_exe: Option<PathBuf>,
     pub codex_linux_sandbox_exe: Option<PathBuf>,
@@ -2024,65 +2087,15 @@ impl Config {
         codex_home: AbsolutePathBuf,
         config_layer_stack: ConfigLayerStack,
     ) -> std::io::Result<Self> {
-        let config = Self::build_config_with_layer_stack(
-            fs,
-            cfg.clone(),
-            overrides.clone(),
-            codex_home.clone(),
-            config_layer_stack.clone(),
-        )
-        .await?;
-        let mut interpolation_source_cfg = cfg.clone();
-        template_interpolation::apply_resolved_config_fields(
-            &config,
-            &mut interpolation_source_cfg,
-        )
-        .map_err(|err| {
-            std::io::Error::new(
-                std::io::ErrorKind::InvalidData,
-                format!("failed to materialize config for interpolation: {err}"),
-            )
-        })?;
-        let interpolation_source =
-            toml::Value::try_from(interpolation_source_cfg).map_err(|err| {
-                std::io::Error::new(
-                    std::io::ErrorKind::InvalidData,
-                    format!("failed to serialize config for interpolation: {err}"),
-                )
-            })?;
-        let mut interpolated_cfg = cfg;
-        let interpolated = template_interpolation::interpolate_config_string_fields(
-            &mut interpolated_cfg,
-            &interpolation_source,
-        )
-        .map_err(|err| {
-            std::io::Error::new(
-                std::io::ErrorKind::InvalidData,
-                format!("failed to interpolate config template fields: {err}"),
-            )
-        })?;
-        if interpolated {
-            return Self::build_config_with_layer_stack(
-                fs,
-                interpolated_cfg,
-                overrides,
-                codex_home,
-                config_layer_stack,
-            )
-            .await;
-        }
-        Ok(config)
-    }
-
-    async fn build_config_with_layer_stack(
-        fs: &dyn ExecutorFileSystem,
-        cfg: ConfigToml,
-        overrides: ConfigOverrides,
-        codex_home: AbsolutePathBuf,
-        config_layer_stack: ConfigLayerStack,
-    ) -> std::io::Result<Self> {
         // Keep the large config-construction future off small test thread stacks.
         Box::pin(async move {
+        if cfg.experimental_thread_store_endpoint.is_some() {
+            return Err(std::io::Error::new(
+                std::io::ErrorKind::InvalidInput,
+                "`experimental_thread_store_endpoint` is no longer supported; remove it from config.toml",
+            ));
+        }
+
         validate_model_providers(&cfg.model_providers)
             .map_err(|message| std::io::Error::new(std::io::ErrorKind::InvalidInput, message))?;
         // Ensure that every field of ConfigRequirements is applied to the final
@@ -2723,14 +2736,15 @@ impl Config {
             }
             None => config_profile.service_tier.or(cfg.service_tier),
         };
-        let service_tier = match service_tier {
-            Some(ServiceTier::Fast) if features.enabled(Feature::FastMode) => {
-                Some(ServiceTier::Fast)
+        let service_tier = service_tier.and_then(|service_tier| {
+            match ServiceTier::from_request_value(&service_tier) {
+                Some(ServiceTier::Fast) => features
+                    .enabled(Feature::FastMode)
+                    .then(|| ServiceTier::Fast.request_value().to_string()),
+                Some(ServiceTier::Flex) => Some(ServiceTier::Flex.request_value().to_string()),
+                None => Some(service_tier),
             }
-            Some(ServiceTier::Fast) => None,
-            Some(ServiceTier::Flex) => Some(ServiceTier::Flex),
-            None => None,
-        };
+        });
 
         let compact_prompt = compact_prompt.or(cfg.compact_prompt).and_then(|value| {
             let trimmed = value.trim();
@@ -2957,6 +2971,7 @@ impl Config {
             .value
             .set(effective_permission_profile)
             .map_err(std::io::Error::from)?;
+        let otel = otel::resolve_config(cfg.otel.unwrap_or_default(), &mut startup_warnings);
         let config = Self {
             model,
             service_tier,
@@ -3103,10 +3118,7 @@ impl Config {
             experimental_realtime_ws_startup_context: cfg.experimental_realtime_ws_startup_context,
             experimental_realtime_start_instructions: cfg.experimental_realtime_start_instructions,
             experimental_thread_config_endpoint: cfg.experimental_thread_config_endpoint,
-            experimental_thread_store: thread_store_config(
-                cfg.experimental_thread_store,
-                cfg.experimental_thread_store_endpoint,
-            ),
+            experimental_thread_store: thread_store_config(cfg.experimental_thread_store),
             forced_chatgpt_workspace_id,
             forced_login_method,
             include_apply_patch_tool: include_apply_patch_tool_flag,
@@ -3184,23 +3196,7 @@ impl Config {
                 .as_ref()
                 .map(|t| t.keymap.clone())
                 .unwrap_or_default(),
-            otel: {
-                let t: OtelConfigToml = cfg.otel.unwrap_or_default();
-                let log_user_prompt = t.log_user_prompt.unwrap_or(false);
-                let environment = t
-                    .environment
-                    .unwrap_or(DEFAULT_OTEL_ENVIRONMENT.to_string());
-                let exporter = t.exporter.unwrap_or(OtelExporterKind::None);
-                let trace_exporter = t.trace_exporter.unwrap_or_else(|| exporter.clone());
-                let metrics_exporter = t.metrics_exporter.unwrap_or(OtelExporterKind::Statsig);
-                OtelConfig {
-                    log_user_prompt,
-                    environment,
-                    exporter,
-                    trace_exporter,
-                    metrics_exporter,
-                }
-            },
+            otel,
         };
         Ok(config)
         })
