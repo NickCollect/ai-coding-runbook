@@ -15,10 +15,12 @@ from mcp.types import (
     ListToolsRequest,
 )
 
+from .._errors import ProcessError
 from ..types import (
     PermissionMode,
     PermissionResultAllow,
     PermissionResultDeny,
+    PermissionUpdate,
     SDKControlPermissionRequest,
     SDKControlRequest,
     SDKControlResponse,
@@ -128,6 +130,11 @@ class Query:
 
         # Track first result for proper stream closure with SDK MCP servers
         self._first_result_event = anyio.Event()
+        # Set to the result's error text when the most recent message is a
+        # result with is_error=True. Used to replace the generic "exit code 1"
+        # ProcessError with the structured error the CLI already reported.
+        # Mirrors the TypeScript SDK's `lastErrorResultText` (Query.ts).
+        self._last_error_result_text: str | None = None
 
         # SessionStore mirroring (set via set_transcript_mirror_batcher)
         self._transcript_mirror_batcher: TranscriptMirrorBatcher | None = None
@@ -294,6 +301,22 @@ class Query:
                     if self._transcript_mirror_batcher is not None:
                         await self._transcript_mirror_batcher.flush()
                     self._first_result_event.set()
+                    if message.get("is_error"):
+                        errors = message.get("errors") or []
+                        self._last_error_result_text = "; ".join(errors) or str(
+                            message.get("subtype", "unknown error")
+                        )
+                    else:
+                        self._last_error_result_text = None
+                elif not (
+                    msg_type == "system"
+                    and message.get("subtype") == "session_state_changed"
+                ):
+                    # Anything other than the post-turn session_state_changed
+                    # marker means the conversation moved on; a ProcessError
+                    # now is a fresh crash, not the expected exit from a prior
+                    # error result. Mirrors the TypeScript SDK's reset logic.
+                    self._last_error_result_text = None
 
                 # Regular SDK messages go to the stream
                 await self._message_send.send(message)
@@ -303,14 +326,31 @@ class Query:
             logger.debug("Read task cancelled")
             raise  # Re-raise to properly handle cancellation
         except Exception as e:
-            logger.error(f"Fatal error in message reader: {e}")
             # Signal all pending control requests so they fail fast instead of timing out
             for request_id, event in list(self.pending_control_responses.items()):
                 if request_id not in self.pending_control_results:
                     self.pending_control_results[request_id] = e
                     event.set()
+            # When the CLI emits a result with is_error=True (e.g.
+            # error_max_turns, error_during_execution) it then exits non-zero
+            # on purpose, for shell-script consumers. The trailing ProcessError
+            # carries no information beyond "exit code 1" — replace it with the
+            # structured error the CLI already reported so the exception is
+            # actionable. Mirrors the TypeScript SDK (Query.ts readMessages).
+            if isinstance(e, ProcessError) and self._last_error_result_text is not None:
+                error_text = (
+                    f"Claude Code returned an error result: "
+                    f"{self._last_error_result_text}"
+                )
+                logger.debug(
+                    "Replacing ProcessError (exit code %s) with result error text",
+                    e.exit_code,
+                )
+            else:
+                error_text = str(e)
+                logger.error(f"Fatal error in message reader: {e}")
             # Put error in stream so iterators can handle it
-            await self._message_send.send({"type": "error", "error": str(e)})
+            await self._message_send.send({"type": "error", "error": error_text})
         finally:
             # Flush any remaining transcript mirror entries before closing so
             # an early stdout EOF or transport error doesn't drop entries
@@ -350,8 +390,12 @@ class Query:
 
                 context = ToolPermissionContext(
                     signal=None,  # TODO: Add abort signal support
-                    suggestions=permission_request.get("permission_suggestions", [])
-                    or [],
+                    suggestions=[
+                        PermissionUpdate.from_dict(s)
+                        for s in (
+                            permission_request.get("permission_suggestions") or []
+                        )
+                    ],
                     tool_use_id=permission_request.get("tool_use_id"),
                     agent_id=permission_request.get("agent_id"),
                     blocked_path=permission_request.get("blocked_path"),

@@ -84,6 +84,7 @@ class AgentDefinition:
 
     description: str
     prompt: str
+    # Deprecated: passing "Skill" here is deprecated; use `skills` instead.
     tools: list[str] | None = None
     disallowedTools: list[str] | None = None  # noqa: N815
     # Model alias ("sonnet", "opus", "haiku", "inherit") or a full model ID.
@@ -168,6 +169,27 @@ class PermissionUpdate:
                 result["directories"] = self.directories
 
         return result
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> "PermissionUpdate":
+        """Construct a PermissionUpdate from the control protocol dict format (inverse of to_dict)."""
+        rules = None
+        if data.get("rules") is not None:
+            rules = [
+                PermissionRuleValue(
+                    tool_name=r["toolName"],
+                    rule_content=r.get("ruleContent"),
+                )
+                for r in data["rules"]
+            ]
+        return cls(
+            type=data["type"],
+            rules=rules,
+            behavior=data.get("behavior"),
+            mode=data.get("mode"),
+            directories=data.get("directories"),
+            destination=data.get("destination"),
+        )
 
 
 # Tool callback types
@@ -390,7 +412,7 @@ class PreToolUseHookSpecificOutput(TypedDict):
     """Hook-specific output for PreToolUse events."""
 
     hookEventName: Literal["PreToolUse"]
-    permissionDecision: NotRequired[Literal["allow", "deny", "ask"]]
+    permissionDecision: NotRequired[Literal["allow", "deny", "ask", "defer"]]
     permissionDecisionReason: NotRequired[str]
     updatedInput: NotRequired[dict[str, Any]]
     additionalContext: NotRequired[str]
@@ -1105,6 +1127,20 @@ class MirrorErrorMessage(SystemMessage):
 
 
 @dataclass
+class DeferredToolUse:
+    """Tool use that was deferred by a PreToolUse hook returning ``"defer"``.
+
+    When a PreToolUse hook returns ``permissionDecision: "defer"``, the run
+    stops and the result message carries the deferred tool call here so the
+    caller can inspect it and decide whether to resume.
+    """
+
+    id: str
+    name: str
+    input: dict[str, Any]
+
+
+@dataclass
 class ResultMessage:
     """Result message with cost and usage information."""
 
@@ -1121,7 +1157,12 @@ class ResultMessage:
     structured_output: Any = None
     model_usage: dict[str, Any] | None = None
     permission_denials: list[Any] | None = None
+    deferred_tool_use: DeferredToolUse | None = None
     errors: list[str] | None = None
+    # HTTP status code (e.g. 429, 500, 529) of the failing API call when
+    # ``is_error`` is True and ``subtype`` is "success"; None otherwise.
+    # Emitted by the CLI since v2.1.110. Safe to log (no message content).
+    api_error_status: int | None = None
     uuid: str | None = None
 
 
@@ -1180,6 +1221,40 @@ class RateLimitEvent:
     rate_limit_info: RateLimitInfo
     uuid: str
     session_id: str
+
+
+@dataclass
+class HookEventMessage(SystemMessage):
+    """Hook event emitted by the CLI when ``include_hook_events`` is enabled.
+
+    When ``ClaudeAgentOptions.include_hook_events`` is ``True``, the CLI emits
+    hook lifecycle events (PreToolUse, PostToolUse, Stop, etc.) into the
+    message stream. Each event is identified by ``hook_event_name`` and the
+    full raw payload is available in ``data``.
+
+    These arrive on the wire as ``{"type": "system", "subtype":
+    "hook_started" | "hook_response", "hook_event": "PreToolUse", ...}``.
+
+    Subclass of SystemMessage: existing ``isinstance(msg, SystemMessage)`` and
+    ``case SystemMessage()`` checks continue to match. The base ``subtype``
+    and ``data`` fields remain populated with the raw payload.
+
+    Attributes:
+        subtype: Lifecycle phase — ``"hook_started"`` when a hook begins
+            executing, ``"hook_response"`` when it completes (the latter
+            carries ``output``, ``exit_code``, and ``outcome`` keys in
+            ``data``).
+        hook_event_name: Name of the hook event (e.g. ``"PreToolUse"``,
+            ``"PostToolUse"``, ``"Stop"``).
+        data: Full raw event dict from the CLI, including any
+            event-specific fields not modeled here.
+        session_id: Session ID the event belongs to, if present.
+        uuid: Unique ID of the event, if present.
+    """
+
+    hook_event_name: str = ""
+    session_id: str | None = None
+    uuid: str | None = None
 
 
 Message = (
@@ -1519,6 +1594,11 @@ class ClaudeAgentOptions:
 
     These tools execute automatically without asking the user for approval.
     To restrict which tools are available at all, use ``tools``.
+
+    .. deprecated::
+        Passing ``"Skill"`` here is deprecated. Use the :attr:`skills` option
+        instead, which configures everything needed (including allowing the
+        ``Skill`` tool).
     """
 
     system_prompt: str | SystemPromptPreset | SystemPromptFile | None = None
@@ -1690,6 +1770,14 @@ class ClaudeAgentOptions:
     """Include partial/streaming message events in the output.
 
     When true, ``SDKPartialAssistantMessage`` events are emitted during streaming.
+    """
+
+    include_hook_events: bool = False
+    """Include hook lifecycle events in the message stream.
+
+    When true, the CLI emits hook events (PreToolUse, PostToolUse, Stop,
+    etc.) as ``HookEventMessage`` objects in the message stream. Matches the
+    TypeScript SDK's ``includeHookEvents``.
     """
 
     fork_session: bool = False

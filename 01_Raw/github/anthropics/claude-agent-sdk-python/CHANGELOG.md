@@ -1,5 +1,83 @@
 # Changelog
 
+## 0.1.80
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.138
+
+## 0.1.79
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.137
+
+## 0.1.78
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.136
+
+## 0.1.77
+
+### Bug Fixes
+
+- **Actionable error messages after error results**: Replaced the generic `Command failed with exit code 1` exception raised after an error result with one carrying the result's actual error text (e.g. "Reached maximum number of turns"), matching the TypeScript SDK behavior (#918)
+
+### Documentation
+
+- Deprecated `"Skill"` in `allowed_tools` in favor of the `skills` option on `ClaudeAgentOptions`, which provides more granular control over available skills (#924)
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.133
+
+## 0.1.76
+
+### New Features
+
+- **API error status on result messages**: Added `api_error_status: int | None` to `ResultMessage`, surfacing the HTTP status code (e.g. 429, 500, 529) from failing API calls. This provides a safe-to-log field for classifying API failures when `is_error=True` (#923)
+
+### Bug Fixes
+
+- **Permission suggestions deserialization**: Fixed `ToolPermissionContext.suggestions` containing raw dicts instead of `PermissionUpdate` instances. Added `PermissionUpdate.from_dict()` so suggestions from `can_use_tool` callbacks can be inspected and echoed back in `PermissionResultAllow(updated_permissions=...)` without `AttributeError` (#920)
+
+### Internal/Other Changes
+
+- Pinned third-party GitHub Actions to immutable commit SHAs (#919)
+- Updated bundled Claude CLI to version 2.1.132
+
+## 0.1.75
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.131
+
+## 0.1.74
+
+### New Features
+
+- **Hook event streaming**: Added `include_hook_events` option to `ClaudeAgentOptions`. When set, hook events (PreToolUse, PostToolUse, Stop, etc.) are emitted by the CLI and yielded from the message stream as `HookEventMessage`, matching the TypeScript SDK's `includeHookEvents` (#917)
+- **Defer hook decision**: Added support for the `"defer"` hook decision in `PreToolUseHookSpecificOutput.permissionDecision` and new `DeferredToolUse` dataclass on `ResultMessage.deferred_tool_use`, bringing parity with the TypeScript SDK's deferred tool use round trip (#865)
+- **Strict MCP config**: Added `strict_mcp_config` option to `ClaudeAgentOptions`. When `True`, the CLI only uses MCP servers passed via `mcp_servers`, ignoring project, user, and global MCP configurations for fully deterministic server sets (#915)
+- **Permission context enrichment**: Added `decision_reason`, `blocked_path`, `title`, `display_name`, and `description` fields to `ToolPermissionContext`, enabling richer permission prompts in `can_use_tool` callbacks (#909)
+- **`updatedToolOutput` for post-tool hooks**: Added `updatedToolOutput` to `PostToolUseHookSpecificOutput` for replacing any tool's output before it reaches the model, not just MCP tools (#911)
+- **`xhigh` effort level**: Added `"xhigh"` to the `effort` Literal on `ClaudeAgentOptions` and `AgentDefinition`, an Opus 4.7-specific level that falls back to `high` on other models (#914)
+- **Subprocess cleanup on parent exit**: Registered an atexit handler to terminate live CLI subprocesses when the parent process exits, preventing orphaned `claude` processes from leaking (#916)
+
+### Bug Fixes
+
+- **ResourceWarning on disconnect**: Fixed `ResourceWarning: Unclosed <MemoryObjectReceiveStream>` emitted on `ClaudeSDKClient` disconnect and `query()` cleanup by closing the receive stream at the consumer boundary (#908)
+- **Session `created_at` timestamp**: Fixed `list_sessions()` returning `created_at=None` for sessions whose first JSONL record lacks a `timestamp` field by scanning the full head buffer instead of only the first line (#907)
+
+### Documentation
+
+- Clarified that `can_use_tool` fires only on `"ask"` permission decisions, not on `"allow"` or `"deny"` (#912)
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.129
+
 ## 0.1.73
 
 ### New Features
