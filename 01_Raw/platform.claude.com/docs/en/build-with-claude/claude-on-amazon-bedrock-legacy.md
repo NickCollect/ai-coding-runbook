@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy
-fetched_at: 2026-05-05T19:40:46.391830+00:00
+fetched_at: 2026-05-11T04:55:24.336650+00:00
 fetch_method: mintlify_md
 ---
 
@@ -60,14 +60,14 @@ go get github.com/anthropics/anthropic-sdk-go/bedrock
 <Tab title="Java">
 <CodeGroup>
 ```groovy Gradle
-implementation("com.anthropic:anthropic-java-bedrock:2.27.0")
+implementation("com.anthropic:anthropic-java-bedrock:2.30.0")
 ```
 
 ```xml Maven
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-bedrock</artifactId>
-    <version>2.27.0</version>
+    <version>2.30.0</version>
 </dependency>
 ```
 
@@ -340,8 +340,8 @@ The following examples show how to generate text from Claude on Bedrock:
       # Temporary credentials can be used with aws_session_token.
       # Read more at https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html.
       aws_session_token="<session_token>",
-      # aws_region changes the aws region to which the request is made. By default, we read AWS_REGION,
-      # and if that's not present, we default to us-east-1. Note that we do not read ~/.aws/config for the region.
+      # aws_region changes the aws region to which the request is made. By default, the SDK reads AWS_REGION,
+      # and if that's not present, defaults to us-east-1. Note that the SDK does not read ~/.aws/config for the region.
       aws_region="us-west-2",
   )
 
@@ -370,9 +370,9 @@ The following examples show how to generate text from Claude on Bedrock:
     awsSessionToken: "<session_token>",
 
     // awsRegion changes the aws region to which the request
-    // is made. By default, we read AWS_REGION, and if that's
-    // not present, we default to us-east-1. Note that we do
-    // not read ~/.aws/config for the region.
+    // is made. By default, the SDK reads AWS_REGION, and if
+    // that's not present, defaults to us-east-1. Note that
+    // the SDK does not read ~/.aws/config for the region.
     awsRegion: "us-west-2"
   });
 

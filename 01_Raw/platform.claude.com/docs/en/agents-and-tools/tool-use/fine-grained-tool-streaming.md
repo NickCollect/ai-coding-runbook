@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming
-fetched_at: 2026-05-05T19:40:45.986461+00:00
+fetched_at: 2026-05-11T04:55:23.996524+00:00
 fetch_method: mintlify_md
 ---
 
@@ -305,7 +305,7 @@ for await (const event of stream) {
 </CodeGroup>
 
 <Tip>
-The Python and TypeScript SDKs provide higher-level stream helpers (`stream.get_final_message()`, `stream.finalMessage()`) that perform this accumulation for you. Use the manual pattern above only when you need to react to partial input before the block closes, such as rendering a progress indicator or starting a downstream request early.
+The Python and TypeScript SDKs provide higher-level stream helpers (`stream.get_final_message()`, `stream.finalMessage()`) that perform this accumulation for you. Use the preceding manual pattern only when you need to react to partial input before the block closes, such as rendering a progress indicator or starting a downstream request early.
 </Tip>
 
 ## Handling invalid JSON in tool responses

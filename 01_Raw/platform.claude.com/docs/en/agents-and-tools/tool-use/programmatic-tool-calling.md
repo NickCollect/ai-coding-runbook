@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling
-fetched_at: 2026-05-05T19:40:45.976249+00:00
+fetched_at: 2026-05-11T04:55:23.936479+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1439,7 +1439,7 @@ Consider using Anthropic's managed solution if you're using the Claude API.
 
 Programmatic tool calling is built on the code execution infrastructure and uses the same sandbox containers. Container data, including execution artifacts and outputs, is retained for up to 30 days.
 
-For ZDR eligibility across all features, see [API and data retention](/docs/en/build-with-claude/api-and-data-retention).
+For ZDR eligibility across all features, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 
 ## Related features
 

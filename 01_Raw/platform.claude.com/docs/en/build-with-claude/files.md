@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/files
-fetched_at: 2026-05-05T19:40:46.132414+00:00
+fetched_at: 2026-05-11T04:55:24.108516+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1049,7 +1049,7 @@ You can only download files that were created by [skills](/docs/en/build-with-cl
 
 Files uploaded via the Files API are retained until explicitly deleted using the `DELETE /v1/files/{file_id}` endpoint. Files are stored for reuse across multiple API requests.
 
-For ZDR eligibility across all features, see [API and data retention](/docs/en/build-with-claude/api-and-data-retention).
+For ZDR eligibility across all features, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 
 ## Error handling
 

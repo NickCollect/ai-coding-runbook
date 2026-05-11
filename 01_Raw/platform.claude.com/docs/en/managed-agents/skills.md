@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/skills
-fetched_at: 2026-05-05T19:40:46.608614+00:00
+fetched_at: 2026-05-11T04:55:24.620185+00:00
 fetch_method: mintlify_md
 ---
 
@@ -107,8 +107,8 @@ var agent = await client.Beta.Agents.Create(new()
     System = "You are a financial analysis agent.",
     Skills =
     [
-        new BetaManagedAgentsAnthropicSkillParams { Type = "anthropic", SkillID = "xlsx" },
-        new BetaManagedAgentsCustomSkillParams { Type = "custom", SkillID = "skill_abc123", Version = "latest" },
+        new BetaManagedAgentsAnthropicSkillParams { Type = BetaManagedAgentsAnthropicSkillParamsType.Anthropic, SkillID = "xlsx" },
+        new BetaManagedAgentsCustomSkillParams { Type = BetaManagedAgentsCustomSkillParamsType.Custom, SkillID = "skill_abc123", Version = "latest" },
     ],
 });
 ```

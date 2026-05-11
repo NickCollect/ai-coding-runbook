@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use
-fetched_at: 2026-05-05T19:40:45.600094+00:00
+fetched_at: 2026-05-11T04:55:23.507811+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ Enforce JSON Schema compliance on Claude's tool inputs with grammar-constrained 
 
 ---
 
-Setting `strict: true` on a tool definition uses grammar-constrained sampling to guarantee Claude's tool inputs match your JSON Schema. This page covers why strict mode matters for agents, how to enable it, and common use cases. For the supported JSON Schema subset, see [JSON Schema limitations](/docs/en/build-with-claude/structured-outputs#json-schema-limitations). For non-strict schema guidance, see [Define tools](/docs/en/agents-and-tools/tool-use/define-tools).
+Setting `strict: true` on a tool definition guarantees Claude's tool inputs match your JSON Schema by constraining the model's token sampling to schema-valid outputs (a technique called grammar-constrained sampling). This page covers why strict mode matters for agents, how to enable it, and common use cases. For the supported JSON Schema subset, see [JSON Schema limitations](/docs/en/build-with-claude/structured-outputs#json-schema-limitations). For non-strict schema guidance, see [Define tools](/docs/en/agents-and-tools/tool-use/define-tools).
 
 Strict tool use validates tool parameters, ensuring Claude calls your functions with correctly-typed arguments. Use strict tool use when you need to:
 
@@ -28,7 +28,7 @@ Strict tool use guarantees type-safe parameters:
 - No need to validate and retry tool calls
 - Production-ready agents that work consistently at scale
 
-For example, suppose a booking system needs `passengers: int`. Without strict mode, Claude might provide `passengers: "two"` or `passengers: "2"`. With `strict: true`, the response will always contain `passengers: 2`.
+For example, suppose a booking system needs `passengers: int`. Without strict mode, Claude might provide `passengers: "two"` or `passengers: "2"`. With `strict: true`, the response always contains `passengers: 2`.
 
 ## Quick start
 
@@ -176,41 +176,35 @@ using System.Text.Json;
 using Anthropic;
 using Anthropic.Models.Messages;
 
-public class Program
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
 {
-    public static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
-
-        var parameters = new MessageCreateParams
+    Model = Model.ClaudeOpus4_7,
+    MaxTokens = 1024,
+    Messages = [new() { Role = Role.User, Content = "What's the weather like in San Francisco?" }],
+    Tools = [
+        new ToolUnion(new Tool()
         {
-            Model = Model.ClaudeOpus4_7,
-            MaxTokens = 1024,
-            Messages = [new() { Role = Role.User, Content = "What's the weather like in San Francisco?" }],
-            Tools = [
-                new ToolUnion(new Tool()
+            Name = "get_weather",
+            Description = "Get the current weather in a given location",
+            Strict = true,
+            InputSchema = new InputSchema(new Dictionary<string, JsonElement>
+            {
+                ["properties"] = JsonSerializer.SerializeToElement(new Dictionary<string, object>
                 {
-                    Name = "get_weather",
-                    Description = "Get the current weather in a given location",
-                    Strict = true,
-                    InputSchema = new InputSchema(new Dictionary<string, JsonElement>
-                    {
-                        ["properties"] = JsonSerializer.SerializeToElement(new Dictionary<string, object>
-                        {
-                            ["location"] = new { type = "string", description = "The city and state, e.g. San Francisco, CA" },
-                            ["unit"] = new { type = "string", @enum = new[] { "celsius", "fahrenheit" } },
-                        }),
-                        ["required"] = JsonSerializer.SerializeToElement(new[] { "location" }),
-                        ["additionalProperties"] = JsonSerializer.SerializeToElement(false),
-                    }),
+                    ["location"] = new { type = "string", description = "The city and state, e.g. San Francisco, CA" },
+                    ["unit"] = new { type = "string", @enum = new[] { "celsius", "fahrenheit" } },
                 }),
-            ]
-        };
+                ["required"] = JsonSerializer.SerializeToElement(new[] { "location" }),
+                ["additionalProperties"] = JsonSerializer.SerializeToElement(false),
+            }),
+        }),
+    ]
+};
 
-        var message = await client.Messages.Create(parameters);
-        Console.WriteLine(message);
-    }
-}
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message);
 ```
 
 ```go Go hidelines={1..11,-1}
@@ -421,7 +415,7 @@ puts message.content
     Set `"strict": true` as a top-level property in your tool definition, alongside `name`, `description`, and `input_schema`.
   </Step>
   <Step title="Handle tool calls">
-    When Claude uses the tool, the `input` field in the tool_use block will strictly follow your `input_schema`, and the `name` will always be valid.
+    When Claude uses the tool, the `input` field in the tool_use block strictly follows your `input_schema`, and the `name` is always valid.
   </Step>
 </Steps>
 
@@ -895,58 +889,52 @@ using System.Text.Json;
 using Anthropic;
 using Anthropic.Models.Messages;
 
-class Program
+AnthropicClient client = new();
+
+var parameters = new MessageCreateParams
 {
-    static async Task Main(string[] args)
-    {
-        AnthropicClient client = new();
-
-        var parameters = new MessageCreateParams
+    Model = Model.ClaudeOpus4_7,
+    MaxTokens = 1024,
+    Messages = [new() { Role = Role.User, Content = "Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026" }],
+    Tools = [
+        new ToolUnion(new Tool()
         {
-            Model = Model.ClaudeOpus4_7,
-            MaxTokens = 1024,
-            Messages = [new() { Role = Role.User, Content = "Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026" }],
-            Tools = [
-                new ToolUnion(new Tool()
+            Name = "search_flights",
+            Strict = true,
+            InputSchema = new InputSchema(new Dictionary<string, JsonElement>
+            {
+                ["properties"] = JsonSerializer.SerializeToElement(new Dictionary<string, object>
                 {
-                    Name = "search_flights",
-                    Strict = true,
-                    InputSchema = new InputSchema(new Dictionary<string, JsonElement>
-                    {
-                        ["properties"] = JsonSerializer.SerializeToElement(new Dictionary<string, object>
-                        {
-                            ["origin"] = new { type = "string" },
-                            ["destination"] = new { type = "string" },
-                            ["departure_date"] = new { type = "string", format = "date" },
-                            ["travelers"] = new { type = "integer", @enum = new[] { 1, 2, 3, 4, 5, 6 } },
-                        }),
-                        ["required"] = JsonSerializer.SerializeToElement(new[] { "origin", "destination", "departure_date" }),
-                        ["additionalProperties"] = JsonSerializer.SerializeToElement(false),
-                    }),
+                    ["origin"] = new { type = "string" },
+                    ["destination"] = new { type = "string" },
+                    ["departure_date"] = new { type = "string", format = "date" },
+                    ["travelers"] = new { type = "integer", @enum = new[] { 1, 2, 3, 4, 5, 6 } },
                 }),
-                new ToolUnion(new Tool()
+                ["required"] = JsonSerializer.SerializeToElement(new[] { "origin", "destination", "departure_date" }),
+                ["additionalProperties"] = JsonSerializer.SerializeToElement(false),
+            }),
+        }),
+        new ToolUnion(new Tool()
+        {
+            Name = "search_hotels",
+            Strict = true,
+            InputSchema = new InputSchema(new Dictionary<string, JsonElement>
+            {
+                ["properties"] = JsonSerializer.SerializeToElement(new Dictionary<string, object>
                 {
-                    Name = "search_hotels",
-                    Strict = true,
-                    InputSchema = new InputSchema(new Dictionary<string, JsonElement>
-                    {
-                        ["properties"] = JsonSerializer.SerializeToElement(new Dictionary<string, object>
-                        {
-                            ["city"] = new { type = "string" },
-                            ["check_in"] = new { type = "string", format = "date" },
-                            ["guests"] = new { type = "integer", @enum = new[] { 1, 2, 3, 4 } },
-                        }),
-                        ["required"] = JsonSerializer.SerializeToElement(new[] { "city", "check_in" }),
-                        ["additionalProperties"] = JsonSerializer.SerializeToElement(false),
-                    }),
+                    ["city"] = new { type = "string" },
+                    ["check_in"] = new { type = "string", format = "date" },
+                    ["guests"] = new { type = "integer", @enum = new[] { 1, 2, 3, 4 } },
                 }),
-            ]
-        };
+                ["required"] = JsonSerializer.SerializeToElement(new[] { "city", "check_in" }),
+                ["additionalProperties"] = JsonSerializer.SerializeToElement(false),
+            }),
+        }),
+    ]
+};
 
-        var message = await client.Messages.Create(parameters);
-        Console.WriteLine(message);
-    }
-}
+var message = await client.Messages.Create(parameters);
+Console.WriteLine(message);
 ```
 
 ```go Go hidelines={1..11,-1}
@@ -1182,4 +1170,4 @@ Strict tool use compiles tool `input_schema` definitions into grammars using the
 
 Strict tool use is HIPAA eligible, but **PHI must not be included in tool schema definitions**. The API caches compiled schemas separately from message content, and these cached schemas do not receive the same PHI protections as prompts and responses. Do not include PHI in `input_schema` property names, `enum` values, `const` values, or `pattern` regular expressions. PHI should only appear in message content (prompts and responses), where it is protected under HIPAA safeguards.
 
-For ZDR and HIPAA eligibility across all features, see [API and data retention](/docs/en/build-with-claude/api-and-data-retention).
+For ZDR and HIPAA eligibility across all features, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).

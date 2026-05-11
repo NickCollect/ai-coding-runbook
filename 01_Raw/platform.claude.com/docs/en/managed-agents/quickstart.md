@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/quickstart
-fetched_at: 2026-05-05T19:40:46.451468+00:00
+fetched_at: 2026-05-11T04:55:24.475194+00:00
 fetch_method: mintlify_md
 ---
 
@@ -44,8 +44,8 @@ brew install anthropics/tap/ant
 
 For Linux environments, download the release binary directly.
 
-```bash
-VERSION=1.3.2
+```bash nocheck
+VERSION=1.7.0
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 ARCH=$(uname -m | sed -e 's/x86_64/amd64/' -e 's/aarch64/arm64/')
 curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VERSION}/ant_${VERSION}_${OS}_${ARCH}.tar.gz" \
@@ -93,7 +93,7 @@ ant --version
   </Tab>
   <Tab title="Java">
     ```groovy Gradle
-    implementation("com.anthropic:anthropic-java:2.27.0")
+    implementation("com.anthropic:anthropic-java:2.30.0")
     ```
   </Tab>
   <Tab title="Go">

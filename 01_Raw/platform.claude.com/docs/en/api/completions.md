@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/completions
-fetched_at: 2026-05-05T19:40:47.202817+00:00
+fetched_at: 2026-05-11T04:55:25.486958+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,7 +24,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -71,6 +71,8 @@ Future models and features will not be compatible with Text Completions. See our
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Body Parameters
 
@@ -354,7 +356,10 @@ curl https://api.anthropic.com/v1/complete \
     -d '{
           "max_tokens_to_sample": 256,
           "model": "claude-2.1",
-          "prompt": "\\n\\nHuman: Hello, world!\\n\\nAssistant:"
+          "prompt": "\\n\\nHuman: Hello, world!\\n\\nAssistant:",
+          "temperature": 1,
+          "top_k": 5,
+          "top_p": 0.7
         }'
 ```
 

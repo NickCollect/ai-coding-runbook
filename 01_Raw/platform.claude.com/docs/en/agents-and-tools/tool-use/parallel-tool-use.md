@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/parallel-tool-use
-fetched_at: 2026-05-05T19:40:45.537938+00:00
+fetched_at: 2026-05-11T04:55:23.485747+00:00
 fetch_method: mintlify_md
 ---
 
@@ -250,7 +250,7 @@ async function testParallelTools() {
 testParallelTools().catch(console.error);
 ```
 
-```csharp C#
+```csharp C# hidelines={1..12,-2..-1}
 using System;
 using System.Collections.Generic;
 using System.Linq;

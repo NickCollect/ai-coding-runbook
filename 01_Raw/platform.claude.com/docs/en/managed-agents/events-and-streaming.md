@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/events-and-streaming
-fetched_at: 2026-05-05T19:40:46.660719+00:00
+fetched_at: 2026-05-11T04:55:24.698815+00:00
 fetch_method: mintlify_md
 ---
 
@@ -48,8 +48,8 @@ Event type strings follow a `{domain}.{action}` naming convention.
 | `agent.mcp_tool_result` | Result of an MCP tool execution. |
 | `agent.custom_tool_use` | Agent invokes one of your custom tools. Respond with a `user.custom_tool_result` event. |
 | `agent.thread_context_compacted` | Conversation history was compacted to fit the context window. |
-| `agent.thread_message_sent` | Agent sent a message to another [multiagent](/docs/en/managed-agents/multi-agent) thread. |
-| `agent.thread_message_received` | Agent received a message from another [multiagent](/docs/en/managed-agents/multi-agent) thread. |
+| `agent.thread_message_received` | In a [multiagent](/docs/en/managed-agents/multi-agent) session, an agent delivered its result to the coordinator. |
+| `agent.thread_message_sent` | In a [multiagent](/docs/en/managed-agents/multi-agent) session, the coordinator sent a follow-up to another agent. |
 
   </Tab>
   <Tab title="Session events">
@@ -61,9 +61,10 @@ Event type strings follow a `{domain}.{action}` naming convention.
 | `session.status_rescheduled` | A transient error occurred and the session is retrying automatically. |
 | `session.status_terminated` | Session ended due to an unrecoverable error. |
 | `session.error` | An error occurred during processing. Includes a typed `error` object with a `retry_status`. |
-| `session.outcome_evaluated` | An [outcome](/docs/en/managed-agents/define-outcomes) evaluation has reached a terminal status.  |
-| `session.thread_created` | The coordinator spawned a new [multiagent](/docs/en/managed-agents/multi-agent) thread. |
-| `session.thread_idle` | A [multiagent](/docs/en/managed-agents/multi-agent) thread finished its current work. |
+| `session.thread_created` | A [multiagent](/docs/en/managed-agents/multi-agent) thread was created. |
+| `session.thread_status_running` | A [multiagent](/docs/en/managed-agents/multi-agent) thread started activity. |
+| `session.thread_status_idle` | A [multiagent](/docs/en/managed-agents/multi-agent) thread finished its turn and is awaiting input. Includes `stop_reason`. |
+| `session.thread_status_terminated` | A [multiagent](/docs/en/managed-agents/multi-agent) thread was archived or reached a terminal error. |
 
   </Tab>
   <Tab title="Span events">
@@ -91,7 +92,8 @@ Every event includes a `processed_at` timestamp indicating when the event was re
 Send a `user.message` event to start or continue the agent's work:
 
 <CodeGroup>
-```bash curl
+  
+````bash
 curl -sS --fail-with-body "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
@@ -109,9 +111,21 @@ curl -sS --fail-with-body "https://api.anthropic.com/v1/sessions/$SESSION_ID/eve
   ]
 }
 EOF
-```
+````
 
-```python Python
+  
+````bash
+ant beta:sessions:events send --session-id "$SESSION_ID" <<'YAML'
+events:
+  - type: user.message
+    content:
+      - type: text
+        text: Analyze the performance of the sort function in utils.py
+YAML
+````
+
+  
+````python
 client.beta.sessions.events.send(
     session.id,
     events=[
@@ -126,9 +140,10 @@ client.beta.sessions.events.send(
         },
     ],
 )
-```
+````
 
-```typescript TypeScript
+  
+````typescript
 await client.beta.sessions.events.send(session.id, {
   events: [
     {
@@ -136,15 +151,16 @@ await client.beta.sessions.events.send(session.id, {
       content: [
         {
           type: "text",
-          text: "Analyze the performance of the sort function in utils.py"
-        }
-      ]
-    }
-  ]
+          text: "Analyze the performance of the sort function in utils.py",
+        },
+      ],
+    },
+  ],
 });
-```
+````
 
-```csharp C#
+  
+````csharp
 await client.Beta.Sessions.Events.Send(session.ID, new()
 {
     Events =
@@ -163,11 +179,12 @@ await client.Beta.Sessions.Events.Send(session.ID, new()
         },
     ],
 });
-```
+````
 
-```go Go
+  
+````go
 if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
-	Events: []anthropic.SendEventsParamsUnion{{
+	Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
 		OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
 			Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
 			Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
@@ -181,9 +198,10 @@ if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSes
 }); err != nil {
 	panic(err)
 }
-```
+````
 
-```java Java
+  
+````java
 client.beta().sessions().events().send(
     session.id(),
     EventSendParams.builder()
@@ -192,9 +210,10 @@ client.beta().sessions().events().send(
             .addTextContent("Analyze the performance of the sort function in utils.py")
             .build())
         .build());
-```
+````
 
-```php PHP
+  
+````php
 $client->beta->sessions->events->send(
     $session->id,
     events: [
@@ -209,27 +228,33 @@ $client->beta->sessions->events->send(
         ],
     ],
 );
-```
+````
 
-```ruby Ruby
+  
+````ruby
 client.beta.sessions.events.send_(
   session.id,
   events: [
     {
       type: "user.message",
       content: [
-        {type: "text", text: "Analyze the performance of the sort function in utils.py"}
+        {
+          type: "text",
+          text: "Analyze the performance of the sort function in utils.py"
+        }
       ]
     }
   ]
 )
-```
+````
+
 </CodeGroup>
 
 Send a `user.interrupt` event to stop the agent mid-execution, then follow up with a `user.message` event to redirect it:
 
 <CodeGroup>
-```bash curl
+  
+````bash
 # Agent is currently analyzing a file...
 # Interrupt with a new direction:
 curl -sS --fail-with-body "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
@@ -250,9 +275,24 @@ curl -sS --fail-with-body "https://api.anthropic.com/v1/sessions/$SESSION_ID/eve
   ]
 }
 EOF
-```
+````
 
-```python Python
+  
+````bash
+# Agent is currently analyzing a file...
+# Interrupt with a new direction:
+ant beta:sessions:events send --session-id "$SESSION_ID" <<'YAML'
+events:
+  - type: user.interrupt
+  - type: user.message
+    content:
+      - type: text
+        text: Instead, focus on fixing the bug in line 42.
+YAML
+````
+
+  
+````python
 # Agent is currently analyzing a file...
 # Interrupt with a new direction:
 client.beta.sessions.events.send(
@@ -270,9 +310,10 @@ client.beta.sessions.events.send(
         },
     ],
 )
-```
+````
 
-```typescript TypeScript
+  
+````typescript
 // Agent is currently analyzing a file...
 // Interrupt with a new direction:
 await client.beta.sessions.events.send(session.id, {
@@ -283,15 +324,16 @@ await client.beta.sessions.events.send(session.id, {
       content: [
         {
           type: "text",
-          text: "Instead, focus on fixing the bug in line 42."
-        }
-      ]
-    }
-  ]
+          text: "Instead, focus on fixing the bug in line 42.",
+        },
+      ],
+    },
+  ],
 });
-```
+````
 
-```csharp C#
+  
+````csharp
 // Agent is currently analyzing a file...
 // Interrupt with a new direction:
 await client.Beta.Sessions.Events.Send(session.ID, new()
@@ -316,13 +358,14 @@ await client.Beta.Sessions.Events.Send(session.ID, new()
         },
     ],
 });
-```
+````
 
-```go Go
+  
+````go
 // Agent is currently analyzing a file...
 // Interrupt with a new direction:
 if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
-	Events: []anthropic.SendEventsParamsUnion{
+	Events: []anthropic.BetaManagedAgentsEventParamsUnion{
 		{
 			OfUserInterrupt: &anthropic.BetaManagedAgentsUserInterruptEventParams{
 				Type: anthropic.BetaManagedAgentsUserInterruptEventParamsTypeUserInterrupt,
@@ -343,9 +386,10 @@ if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSes
 }); err != nil {
 	panic(err)
 }
-```
+````
 
-```java Java
+  
+````java
 // Agent is currently analyzing a file...
 // Interrupt with a new direction:
 client.beta().sessions().events().send(
@@ -359,9 +403,10 @@ client.beta().sessions().events().send(
             .addTextContent("Instead, focus on fixing the bug in line 42.")
             .build())
         .build());
-```
+````
 
-```php PHP
+  
+````php
 // Agent is currently analyzing a file...
 // Interrupt with a new direction:
 $client->beta->sessions->events->send(
@@ -379,9 +424,10 @@ $client->beta->sessions->events->send(
         ],
     ],
 );
-```
+````
 
-```ruby Ruby
+  
+````ruby
 # Agent is currently analyzing a file...
 # Interrupt with a new direction:
 client.beta.sessions.events.send_(
@@ -396,13 +442,14 @@ client.beta.sessions.events.send_(
     }
   ]
 )
-```
+````
+
 </CodeGroup>
 
 The agent will acknowledge the interruption and switch to the new task.
 
   </Tab>
-  <Tab title="Streaming responses">
+  <Tab title="Streaming events">
 
 Stream events from the session to receive real-time updates as the agent works. Only events emitted after the stream is opened are delivered, so open the stream before sending events to avoid a race condition.
 
@@ -412,7 +459,7 @@ Stream events from the session to receive real-time updates as the agent works. 
 # Open the stream first, then send the user message
 exec {stream}< <(
   curl -sS -N --fail-with-body \
-    "https://api.anthropic.com/v1/sessions/$SESSION_ID/stream?beta=true" \
+    "https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream?beta=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -458,40 +505,8 @@ exec {stream}<&-
 
   
 ````bash
-# Open the stream first, then send the user message
-exec {stream}< <(ant beta:sessions stream \
-  --session-id "$SESSION_ID" \
-  --transform '{type,text:content.#(type=="text").text,err:error.message}' \
-  --format yaml)
-
-ant beta:sessions:events send \
-  --session-id "$SESSION_ID" \
- > /dev/null <<'YAML'
-events:
-  - type: user.message
-    content:
-      - type: text
-        text: Summarize the repo README
-YAML
-
-type=
-while IFS= read -r -u "$stream" line; do
-  case "$line" in
-    type:\ session.status_idle) break ;;
-    type:\ session.error)
-      IFS= read -r -u "$stream" next || next=
-      case "$next" in err:\ *) msg=${next#err: } ;; *) msg=unknown ;; esac
-      printf '\n[Error: %s]\n' "$msg"; break ;;
-    type:\ *) type=${line#type: } ;;
-    text:*)
-      [[ $type == agent.message ]] || continue
-      val=${line#text: }
-      case "$val" in '|-'|'|') ;; *) printf '%s' "$val" ;; esac ;;
-    \ \ *)
-      if [[ $type == agent.message ]]; then printf '%s\n' "${line#  }"; fi ;;
-  esac
-done
-exec {stream}<&-
+# This workflow does not translate well to a one-off shell command.
+# Use one of the SDK examples in this code group instead.
 ````
 
   
@@ -740,7 +755,7 @@ To reconnect to an existing session without missing events, open a new stream an
 ````bash
 exec {stream}< <(
   curl -sS -N --fail-with-body \
-    "https://api.anthropic.com/v1/sessions/$SESSION_ID/stream?beta=true" \
+    "https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream?beta=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -782,41 +797,8 @@ exec {stream}<&-
 
   
 ````bash
-exec {stream}< <(ant beta:sessions stream \
-  --session-id "$SESSION_ID" \
-  --transform '{id,type,text:content.#(type=="text").text}' \
-  --format yaml)
-stream_pid=$!
-
-# Stream is open and buffering. List history before tailing live.
-declare -A seen_event_ids
-while IFS= read -r id; do
-  seen_event_ids[$id]=1
-done < <(ant beta:sessions:events list \
-  --session-id "$SESSION_ID" \
-  --transform id --format yaml)
-
-# Tail live events, skipping anything already seen
-id= type= skip=
-while IFS= read -r -u "$stream" line; do
-  case "$line" in
-    id:\ *)
-      id=${line#id: }
-      if [[ -n ${seen_event_ids[$id]+seen} ]]; then skip=1; continue; fi
-      skip=; seen_event_ids[$id]=1 ;;
-    type:\ *)
-      [[ -n $skip ]] && continue
-      type=${line#type: }
-      [[ $type == session.status_idle ]] && break ;;
-    text:*)
-      [[ -z $skip && $type == agent.message ]] || continue
-      val=${line#text: }
-      case "$val" in '|-'|'|') ;; *) printf '%s' "$val" ;; esac ;;
-    \ \ *)
-      [[ -z $skip && $type == agent.message ]] && printf '%s\n' "${line#  }" ;;
-  esac
-done
-exec {stream}<&-
+# This workflow does not translate well to a one-off shell command.
+# Use one of the SDK examples in this code group instead.
 ````
 
   
@@ -1023,37 +1005,50 @@ end
 Retrieve the full event history for a session:
 
 <CodeGroup>
-```bash curl
+  
+````bash
 curl -sS --fail-with-body "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
   | jq -r '.data[] | "[\(.type)] \(.processed_at)"'
-```
+````
 
-```python Python
+  
+````bash
+ant beta:sessions:events list \
+  --session-id "$SESSION_ID" \
+  --format jsonl \
+  --transform '{type,processed_at}'
+````
+
+  
+````python
 events = client.beta.sessions.events.list(session.id)
 for event in events.data:
     print(f"[{event.type}] {event.processed_at}")
-```
+````
 
-```typescript TypeScript
+  
+````typescript
 const events = await client.beta.sessions.events.list(session.id);
 for (const event of events.data) {
   console.log(`[${event.type}] ${event.processed_at}`);
 }
-```
+````
 
-```csharp C#
+  
+````csharp
 var events = await client.Beta.Sessions.Events.List(session.ID);
 foreach (var evt in events.Items)
 {
     Console.WriteLine($"[{evt.Json.GetProperty("type").GetString()}] {evt.ProcessedAt}");
 }
-```
+````
 
-```go Go
+  
+````go
 events, err := client.Beta.Sessions.Events.List(ctx, session.ID, anthropic.BetaSessionEventListParams{})
 if err != nil {
 	panic(err)
@@ -1061,9 +1056,10 @@ if err != nil {
 for _, event := range events.Data {
 	fmt.Printf("[%s] %s\n", event.Type, event.ProcessedAt)
 }
-```
+````
 
-```java Java
+  
+````java
 var events = client.beta().sessions().events().list(session.id());
 for (var event : events.data()) {
     var json = (Map<String, JsonValue>) event._json().orElseThrow().asObject().orElseThrow();
@@ -1073,20 +1069,129 @@ for (var event : events.data()) {
         : "pending";
     IO.println("[" + type + "] " + processedAt);
 }
-```
+````
 
-```php PHP
+  
+````php
 $events = $client->beta->sessions->events->list($session->id);
 foreach ($events->data as $event) {
     $processedAt = ($event->processedAt ?? null)?->format(DATE_RFC3339) ?? 'pending';
     echo "[{$event->type}] {$processedAt}\n";
 }
-```
+````
 
-```ruby Ruby
+  
+````ruby
 events = client.beta.sessions.events.list(session.id)
 events.data.each { puts "[#{it.type}] #{it.processed_at}" }
-```
+````
+
+</CodeGroup>
+
+Pass a `types` filter to return only specific event types:
+
+<CodeGroup>
+  
+````bash
+curl -sS --fail-with-body "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true&types[]=agent.tool_use&types[]=agent.tool_result" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: managed-agents-2026-04-01" \
+  | jq -r '.data[] | "[\(.type)] \(.processed_at)"'
+````
+
+  
+````bash
+ant beta:sessions:events list \
+  --session-id "$SESSION_ID" \
+  --type agent.tool_use \
+  --type agent.tool_result \
+  --format jsonl \
+  --transform '{type,processed_at}'
+````
+
+  
+````python
+events = client.beta.sessions.events.list(
+    session.id,
+    types=["agent.tool_use", "agent.tool_result"],
+)
+for event in events.data:
+    print(f"[{event.type}] {event.processed_at}")
+````
+
+  
+````typescript
+const events = await client.beta.sessions.events.list(session.id, {
+  types: ["agent.tool_use", "agent.tool_result"],
+});
+for (const event of events.data) {
+  console.log(`[${event.type}] ${event.processed_at}`);
+}
+````
+
+  
+````csharp
+var events = await client.Beta.Sessions.Events.List(session.ID, new()
+{
+    Types = ["agent.tool_use", "agent.tool_result"],
+});
+foreach (var evt in events.Items)
+{
+    Console.WriteLine($"[{evt.Json.GetProperty("type").GetString()}] {evt.ProcessedAt}");
+}
+````
+
+  
+````go
+events, err := client.Beta.Sessions.Events.List(ctx, session.ID, anthropic.BetaSessionEventListParams{
+	Types: []string{"agent.tool_use", "agent.tool_result"},
+})
+if err != nil {
+	panic(err)
+}
+for _, event := range events.Data {
+	fmt.Printf("[%s] %s\n", event.Type, event.ProcessedAt)
+}
+````
+
+  
+````java
+var events = client.beta().sessions().events().list(
+    session.id(),
+    EventListParams.builder()
+        .addType("agent.tool_use")
+        .addType("agent.tool_result")
+        .build());
+for (var event : events.data()) {
+    event.agentToolUse().ifPresent(toolUse ->
+        IO.println("[" + toolUse.type() + "] " + toolUse.processedAt()));
+    event.agentToolResult().ifPresent(toolResult ->
+        IO.println("[" + toolResult.type() + "] " + toolResult.processedAt()));
+}
+````
+
+  
+````php
+$events = $client->beta->sessions->events->list(
+    $session->id,
+    types: ['agent.tool_use', 'agent.tool_result'],
+);
+foreach ($events->data as $event) {
+    $processedAt = ($event->processedAt ?? null)?->format(DATE_RFC3339) ?? 'pending';
+    echo "[{$event->type}] {$processedAt}\n";
+}
+````
+
+  
+````ruby
+events = client.beta.sessions.events.list(
+  session.id,
+  types: ["agent.tool_use", "agent.tool_result"]
+)
+events.data.each { puts "[#{it.type}] #{it.processed_at}" }
+````
+
 </CodeGroup>
 
   </Tab>
@@ -1099,14 +1204,15 @@ events.data.each { puts "[#{it.type}] #{it.processed_at}" }
 When the agent invokes a [custom tool](/docs/en/managed-agents/tools#custom-tools):
 
 1. The session emits an `agent.custom_tool_use` event containing the tool name and input.
-2. The session pauses with a `session.status_idle` event containing `stop_reason: requires_action`. The blocking event IDs are in the `stop_reason.requires_action.event_ids` array.
+2. The session pauses with a `session.status_idle` event containing `stop_reason: requires_action`. The blocking event IDs are in the `stop_reason.event_ids` array.
 3. Execute the tool in your system and send a `user.custom_tool_result` event for each, passing the event ID in the `custom_tool_use_id` param along with the result content.
 4. Once all blocking events are resolved, the session transitions back to `running`.
 
 <CodeGroup>
-```bash curl
+  
+````bash
 exec {fd}< <(curl -sS -N --fail-with-body \
-  "https://api.anthropic.com/v1/sessions/$SESSION_ID/stream?beta=true" \
+  "https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream?beta=true" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -1140,9 +1246,16 @@ while IFS= read -r -u "$fd" line; do
   esac
 done
 exec {fd}<&-
-```
+````
 
-```python Python
+  
+````bash
+# This workflow does not translate well to a one-off shell command.
+# Use one of the SDK examples in this code group instead.
+````
+
+  
+````python
 with client.beta.sessions.events.stream(session.id) as stream:
     for event in stream:
         if event.type == "session.status_idle" and (stop := event.stop_reason):
@@ -1166,9 +1279,10 @@ with client.beta.sessions.events.stream(session.id) as stream:
                         )
                 case "end_turn":
                     break
-```
+````
 
-```typescript TypeScript
+  
+````typescript
 const stream = await client.beta.sessions.events.stream(session.id);
 
 for await (const event of stream) {
@@ -1185,9 +1299,9 @@ for await (const event of stream) {
             {
               type: "user.custom_tool_result",
               custom_tool_use_id: eventId,
-              content: [{ type: "text", text: result }]
-            }
-          ]
+              content: [{ type: "text", text: result }],
+            },
+          ],
         });
       }
     } else if (event.stop_reason?.type === "end_turn") {
@@ -1195,9 +1309,10 @@ for await (const event of stream) {
     }
   }
 }
-```
+````
 
-```csharp C#
+  
+````csharp
 await foreach (var streamEvent in client.Beta.Sessions.Events.StreamStreaming(session.ID))
 {
     if (streamEvent.Value is BetaManagedAgentsSessionStatusIdleEvent idle)
@@ -1237,52 +1352,54 @@ await foreach (var streamEvent in client.Beta.Sessions.Events.StreamStreaming(se
         }
     }
 }
-```
+````
 
-```go Go
-stream := client.Beta.Sessions.Events.StreamEvents(ctx, session.ID, anthropic.BetaSessionEventStreamParams{})
-defer stream.Close()
+  
+````go
+	stream := client.Beta.Sessions.Events.StreamEvents(ctx, session.ID, anthropic.BetaSessionEventStreamParams{})
+	defer stream.Close()
 
 loop:
-for stream.Next() {
-	event, ok := stream.Current().AsAny().(anthropic.BetaManagedAgentsSessionStatusIdleEvent)
-	if !ok {
-		continue
-	}
-	switch stopReason := event.StopReason.AsAny().(type) {
-	case anthropic.BetaManagedAgentsSessionRequiresAction:
-		for _, eventID := range stopReason.EventIDs {
-			// Look up the custom tool use event and execute it
-			toolEvent := eventsByID[eventID]
-			result := callTool(toolEvent.Name, toolEvent.Input)
-			// Send the result back
-			if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
-				Events: []anthropic.SendEventsParamsUnion{{
-					OfUserCustomToolResult: &anthropic.BetaManagedAgentsUserCustomToolResultEventParams{
-						Type:            anthropic.BetaManagedAgentsUserCustomToolResultEventParamsTypeUserCustomToolResult,
-						CustomToolUseID: eventID,
-						Content: []anthropic.BetaManagedAgentsUserCustomToolResultEventParamsContentUnion{{
-							OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-								Type: anthropic.BetaManagedAgentsTextBlockTypeText,
-								Text: result,
-							},
-						}},
-					},
-				}},
-			}); err != nil {
-				panic(err)
-			}
+	for stream.Next() {
+		event, ok := stream.Current().AsAny().(anthropic.BetaManagedAgentsSessionStatusIdleEvent)
+		if !ok {
+			continue
 		}
-	case anthropic.BetaManagedAgentsSessionEndTurn:
-		break loop
+		switch stopReason := event.StopReason.AsAny().(type) {
+		case anthropic.BetaManagedAgentsSessionRequiresAction:
+			for _, eventID := range stopReason.EventIDs {
+				// Look up the custom tool use event and execute it
+				toolEvent := eventsByID[eventID]
+				result := callTool(toolEvent.Name, toolEvent.Input)
+				// Send the result back
+				if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
+					Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
+						OfUserCustomToolResult: &anthropic.BetaManagedAgentsUserCustomToolResultEventParams{
+							Type:            anthropic.BetaManagedAgentsUserCustomToolResultEventParamsTypeUserCustomToolResult,
+							CustomToolUseID: eventID,
+							Content: []anthropic.BetaManagedAgentsUserCustomToolResultEventParamsContentUnion{{
+								OfText: &anthropic.BetaManagedAgentsTextBlockParam{
+									Type: anthropic.BetaManagedAgentsTextBlockTypeText,
+									Text: result,
+								},
+							}},
+						},
+					}},
+				}); err != nil {
+					panic(err)
+				}
+			}
+		case anthropic.BetaManagedAgentsSessionEndTurn:
+			break loop
+		}
 	}
-}
-if err := stream.Err(); err != nil {
-	panic(err)
-}
-```
+	if err := stream.Err(); err != nil {
+		panic(err)
+	}
+````
 
-```java Java
+  
+````java
 try (var stream = client.beta().sessions().events().streamStreaming(session.id())) {
     for (var event : (Iterable<StreamEvents>) stream.stream()::iterator) {
         if (!event.isSessionStatusIdle()) continue;
@@ -1308,9 +1425,10 @@ try (var stream = client.beta().sessions().events().streamStreaming(session.id()
         }
     }
 }
-```
+````
 
-```php PHP
+  
+````php
 $stream = $client->beta->sessions->events->streamStream(
     $session->id,
     requestOptions: ['transporter' => $streamingClient],
@@ -1341,16 +1459,17 @@ foreach ($stream as $event) {
         }
     }
 }
-```
+````
 
-```ruby Ruby
+  
+````ruby
 client.beta.sessions.events.stream_events(session.id).each do |event|
   case event
   in {type: :"session.status_idle", stop_reason: {type: :requires_action, event_ids:}}
     event_ids.each do |event_id|
       # Look up the custom tool use event and execute it
       tool_event = events_by_id[event_id]
-      result = call_tool(tool_event.name, tool_event.input)
+      result = call_tool.call(tool_event.name, tool_event.input)
       # Send the result back
       client.beta.sessions.events.send_(
         session.id,
@@ -1368,7 +1487,8 @@ client.beta.sessions.events.stream_events(session.id).each do |event|
   else
   end
 end
-```
+````
+
 </CodeGroup>
 
 ### Tool confirmation
@@ -1376,14 +1496,15 @@ end
 When a [permission policy](/docs/en/managed-agents/permission-policies) requires confirmation before a tool executes:
 
 1. The session emits an `agent.tool_use` or `agent.mcp_tool_use` event.
-2. The session pauses with a `session.status_idle` event containing `stop_reason: requires_action`. The blocking event IDs are in the `stop_reason.requires_action.event_ids` array.
+2. The session pauses with a `session.status_idle` event containing `stop_reason: requires_action`. The blocking event IDs are in the `stop_reason.event_ids` array.
 3. Send a `user.tool_confirmation` event for each, passing the event ID in the `tool_use_id` param. Set `result` to `"allow"` or `"deny"`. Use `deny_message` to explain a denial.
 4. Once all blocking events are resolved, the session transitions back to `running`.
 
 <CodeGroup>
-```bash curl
+  
+````bash
 exec {fd}< <(curl -sS -N --fail-with-body \
-  "https://api.anthropic.com/v1/sessions/$SESSION_ID/stream?beta=true" \
+  "https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream?beta=true" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -1415,9 +1536,16 @@ while IFS= read -r -u "$fd" line; do
   esac
 done
 exec {fd}<&-
-```
+````
 
-```python Python
+  
+````bash
+# This workflow does not translate well to a one-off shell command.
+# Use one of the SDK examples in this code group instead.
+````
+
+  
+````python
 with client.beta.sessions.events.stream(session.id) as stream:
     for event in stream:
         if event.type == "session.status_idle" and (stop := event.stop_reason):
@@ -1437,9 +1565,10 @@ with client.beta.sessions.events.stream(session.id) as stream:
                         )
                 case "end_turn":
                     break
-```
+````
 
-```typescript TypeScript
+  
+````typescript
 const stream = await client.beta.sessions.events.stream(session.id);
 
 for await (const event of stream) {
@@ -1452,9 +1581,9 @@ for await (const event of stream) {
             {
               type: "user.tool_confirmation",
               tool_use_id: eventId,
-              result: "allow"
-            }
-          ]
+              result: "allow",
+            },
+          ],
         });
       }
     } else if (event.stop_reason?.type === "end_turn") {
@@ -1462,9 +1591,10 @@ for await (const event of stream) {
     }
   }
 }
-```
+````
 
-```csharp C#
+  
+````csharp
 await foreach (var streamEvent in client.Beta.Sessions.Events.StreamStreaming(session.ID))
 {
     if (streamEvent.Value is BetaManagedAgentsSessionStatusIdleEvent idle)
@@ -1494,44 +1624,46 @@ await foreach (var streamEvent in client.Beta.Sessions.Events.StreamStreaming(se
         }
     }
 }
-```
+````
 
-```go Go
-stream := client.Beta.Sessions.Events.StreamEvents(ctx, session.ID, anthropic.BetaSessionEventStreamParams{})
-defer stream.Close()
+  
+````go
+	stream := client.Beta.Sessions.Events.StreamEvents(ctx, session.ID, anthropic.BetaSessionEventStreamParams{})
+	defer stream.Close()
 
 loop:
-for stream.Next() {
-	event, ok := stream.Current().AsAny().(anthropic.BetaManagedAgentsSessionStatusIdleEvent)
-	if !ok {
-		continue
-	}
-	switch stopReason := event.StopReason.AsAny().(type) {
-	case anthropic.BetaManagedAgentsSessionRequiresAction:
-		for _, eventID := range stopReason.EventIDs {
-			// Approve the pending tool call
-			if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
-				Events: []anthropic.SendEventsParamsUnion{{
-					OfUserToolConfirmation: &anthropic.BetaManagedAgentsUserToolConfirmationEventParams{
-						Type:      anthropic.BetaManagedAgentsUserToolConfirmationEventParamsTypeUserToolConfirmation,
-						ToolUseID: eventID,
-						Result:    anthropic.BetaManagedAgentsUserToolConfirmationEventParamsResultAllow,
-					},
-				}},
-			}); err != nil {
-				panic(err)
-			}
+	for stream.Next() {
+		event, ok := stream.Current().AsAny().(anthropic.BetaManagedAgentsSessionStatusIdleEvent)
+		if !ok {
+			continue
 		}
-	case anthropic.BetaManagedAgentsSessionEndTurn:
-		break loop
+		switch stopReason := event.StopReason.AsAny().(type) {
+		case anthropic.BetaManagedAgentsSessionRequiresAction:
+			for _, eventID := range stopReason.EventIDs {
+				// Approve the pending tool call
+				if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
+					Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
+						OfUserToolConfirmation: &anthropic.BetaManagedAgentsUserToolConfirmationEventParams{
+							Type:      anthropic.BetaManagedAgentsUserToolConfirmationEventParamsTypeUserToolConfirmation,
+							ToolUseID: eventID,
+							Result:    anthropic.BetaManagedAgentsUserToolConfirmationEventParamsResultAllow,
+						},
+					}},
+				}); err != nil {
+					panic(err)
+				}
+			}
+		case anthropic.BetaManagedAgentsSessionEndTurn:
+			break loop
+		}
 	}
-}
-if err := stream.Err(); err != nil {
-	panic(err)
-}
-```
+	if err := stream.Err(); err != nil {
+		panic(err)
+	}
+````
 
-```java Java
+  
+````java
 try (var stream = client.beta().sessions().events().streamStreaming(session.id())) {
     for (var event : (Iterable<StreamEvents>) stream.stream()::iterator) {
         if (!event.isSessionStatusIdle()) continue;
@@ -1554,9 +1686,10 @@ try (var stream = client.beta().sessions().events().streamStreaming(session.id()
         }
     }
 }
-```
+````
 
-```php PHP
+  
+````php
 $stream = $client->beta->sessions->events->streamStream(
     $session->id,
     requestOptions: ['transporter' => $streamingClient],
@@ -1583,9 +1716,10 @@ foreach ($stream as $event) {
         }
     }
 }
-```
+````
 
-```ruby Ruby
+  
+````ruby
 client.beta.sessions.events.stream_events(session.id).each do |event|
   case event
   in {type: :"session.status_idle", stop_reason: {type: :requires_action, event_ids:}}
@@ -1603,7 +1737,8 @@ client.beta.sessions.events.stream_events(session.id).each do |event|
   else
   end
 end
-```
+````
+
 </CodeGroup>
 
 ### Resuming an idle session
@@ -1616,7 +1751,7 @@ While session history is persisted until deleted, checkpoints are only preserved
 
 To resume a session, send a `user.message` event to it as usual:
 
-```python
+```python nocheck
 # Resume a previously created session by ID
 client.beta.sessions.events.send(
     "sesn_01...",

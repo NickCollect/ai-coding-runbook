@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/search-results
-fetched_at: 2026-05-05T19:40:45.342390+00:00
+fetched_at: 2026-05-11T04:55:23.175307+00:00
 fetch_method: mintlify_md
 ---
 
@@ -929,7 +929,7 @@ response = client.messages.create(
     ],
 )
 
-print(response.model_dump_json(indent=2))
+print(response)
 ```
 
 ```typescript TypeScript hidelines={1..2}

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/skills-guide
-fetched_at: 2026-05-05T19:40:46.283294+00:00
+fetched_at: 2026-05-11T04:55:24.233540+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,7 +22,7 @@ For complete API reference including request/response schemas and all parameters
 This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). Data is retained according to the feature's standard retention policy.
 </Note>
 
-## Quick Links
+## Quick links
 
 <CardGroup cols={2}>
   <Card
@@ -33,7 +33,7 @@ This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-
     Create your first Skill
   </Card>
   <Card
-    title="Create Custom Skills"
+    title="Create custom Skills"
     icon="hammer"
     href="/docs/en/agents-and-tools/agent-skills/best-practices"
   >
@@ -47,7 +47,7 @@ This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-
 For a deep dive into the architecture and real-world applications of Agent Skills, read the engineering blog post: [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills).
 </Note>
 
-Skills integrate with the Messages API through the code execution tool. Whether using pre-built Skills managed by Anthropic or custom Skills you've uploaded, the integration shape is identical: both require code execution and use the same `container` structure.
+Skills integrate with the Messages API through the [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool). Whether using pre-built Skills managed by Anthropic or custom Skills you've uploaded, the integration shape is identical: both require code execution and use the same `container` structure.
 
 ### Using Skills
 
@@ -60,7 +60,7 @@ Skills integrate identically in the Messages API regardless of source. You speci
 | **Type value** | `anthropic` | `custom` |
 | **Skill IDs** | Short names: `pptx`, `xlsx`, `docx`, `pdf` | Generated: `skill_01AbCdEfGhIjKlMnOpQrStUv` |
 | **Version format** | Date-based: `20251013` or `latest` | Epoch timestamp: `1759178010641129` or `latest` |
-| **Management** | Pre-built and maintained by Anthropic | Upload and manage via [Skills API](/docs/en/api/skills/create-skill) |
+| **Management** | Pre-built and maintained by Anthropic | Upload and manage through the [Skills API](/docs/en/api/skills/create-skill) |
 | **Availability** | Available to all users | Private to your workspace |
 
 Both skill sources are returned by the [List Skills endpoint](/docs/en/api/skills/list-skills) (use the `source` parameter to filter). The integration shape and execution environment are identical. The only difference is where the Skills come from and how they're managed.
@@ -74,13 +74,13 @@ To use Skills, you need:
    - `code-execution-2025-08-25` - Enables code execution (required for Skills)
    - `skills-2025-10-02` - Enables Skills API
    - `files-api-2025-04-14` - For uploading/downloading files to/from container
-3. **Code execution tool** enabled in your requests
+3. **[Code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool)** enabled in your requests
 
 ---
 
 ## Using Skills in Messages
 
-### Container Parameter
+### Container parameter
 
 Skills are specified using the `container` parameter in the Messages API. You can include up to 8 Skills per request.
 
@@ -382,7 +382,7 @@ puts message
 ```
 </CodeGroup>
 
-### Downloading Generated Files
+### Downloading generated files
 
 When Skills create documents (Excel, PowerPoint, PDF, Word), they return `file_id` attributes in the response. You must use the Files API to download these files.
 
@@ -444,7 +444,7 @@ echo "Downloaded: $FILENAME"
 ```bash CLI nocheck hidelines={1}
 cd "$(mktemp -d)"
 # Step 1: Use the xlsx Skill to create a file
-# Step 2: Extract file_id from the response via --transform (GJSON path)
+# Step 2: Extract file_id from the response with --transform (GJSON path)
 FILE_ID=$(ant beta:messages create \
   --beta code-execution-2025-08-25 \
   --beta skills-2025-10-02 \
@@ -509,9 +509,9 @@ def extract_file_ids(response):
         if item.type == "bash_code_execution_tool_result":
             content_item = item.content
             if content_item.type == "bash_code_execution_result":
+                # concrete-typed list: List[BashCodeExecutionOutputBlock]
                 for file in content_item.content:
-                    if hasattr(file, "file_id"):
-                        file_ids.append(file.file_id)
+                    file_ids.append(file.file_id)
     return file_ids
 
 
@@ -1149,7 +1149,7 @@ client.beta.files.delete(file_id)
 For complete details on the Files API, see the [Files API documentation](/docs/en/api/files-content).
 </Note>
 
-### Multi-Turn Conversations
+### Multi-turn conversations
 
 Reuse the same container across multiple messages by specifying the container ID:
 
@@ -1566,7 +1566,7 @@ puts response2
 ```
 </CodeGroup>
 
-### Long-Running Operations
+### Long-running operations
 
 Skills may perform operations that require multiple turns. Handle `pause_turn` stop reasons:
 
@@ -3873,7 +3873,7 @@ See the [Create Skill Version API reference](/docs/en/api/skills/create-skill-ve
 
 ---
 
-## How Skills Are Loaded
+## How Skills are loaded
 
 When you specify Skills in a container:
 
@@ -3886,7 +3886,7 @@ The progressive disclosure architecture ensures efficient context usage: Claude 
 
 ---
 
-## Use Cases
+## Use cases
 
 ### Organizational Skills
 
@@ -3922,7 +3922,7 @@ The progressive disclosure architecture ensures efficient context usage: Claude 
 - Testing frameworks
 - Deployment workflows
 
-### Example: Financial Modeling
+### Example: financial modeling
 
 Combine Excel and custom DCF analysis Skills:
 
@@ -4078,7 +4078,14 @@ var client = new AnthropicClient();
 var dcfSkill = await client.Beta.Skills.Create(new SkillCreateParams
 {
     DisplayTitle = "DCF Analysis",
-    Files = new[] { new SkillFileParam { Path = "dcf_skill/SKILL.md", Content = skillContent } },
+    Files = new[]
+    {
+        new SkillFileParam
+        {
+            Path = "dcf_skill/SKILL.md",
+            Content = System.IO.File.ReadAllText("dcf_skill/SKILL.md")
+        }
+    },
 });
 
 // Use with Excel to create financial model
@@ -4327,7 +4334,7 @@ Combine Skills when tasks involve multiple document types or domains:
 **Avoid:**
 - Including unused Skills (impacts performance)
 
-### Version Management Strategy
+### Version management strategy
 
 **For production:**
 
@@ -4359,7 +4366,7 @@ container = {
 }
 ```
 
-### Prompt Caching Considerations
+### Prompt caching considerations
 
 When using prompt caching, note that changing the Skills list in your container breaks the cache:
 
@@ -4826,7 +4833,7 @@ puts response2
 
 For best caching performance, keep your Skills list consistent across requests.
 
-### Error Handling
+### Error handling
 
 Handle Skill-related errors gracefully:
 
@@ -4909,6 +4916,7 @@ try {
     messages: [{ role: "user", content: "Process data" }],
     tools: [{ type: "code_execution_20250825", name: "code_execution" }]
   });
+  console.log(response);
 } catch (error) {
   if (error instanceof Anthropic.BadRequestError && error.message.includes("skill")) {
     console.error(`Skill error: ${error.message}`);
@@ -4979,7 +4987,7 @@ import (
 func main() {
 	client := anthropic.NewClient()
 
-	_, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
 		Model:     "claude-opus-4-7",
 		MaxTokens: 4096,
 		Betas:     []anthropic.AnthropicBeta{"code-execution-2025-08-25", anthropic.AnthropicBetaSkills2025_10_02},
@@ -5008,7 +5016,9 @@ func main() {
 		} else {
 			log.Fatal(err)
 		}
+		return
 	}
+	fmt.Println(response)
 }
 ```
 
@@ -5131,9 +5141,9 @@ end
 
 Agent Skills are not covered by ZDR arrangements. Skill definitions and execution data are retained according to Anthropic's standard data retention policy.
 
-For ZDR eligibility across all features, see [API and data retention](/docs/en/build-with-claude/api-and-data-retention).
+For ZDR eligibility across all features, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 
-## Next Steps
+## Next steps
 
 <CardGroup cols={2}>
   <Card

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock
-fetched_at: 2026-05-05T19:40:46.344331+00:00
+fetched_at: 2026-05-11T04:55:24.357257+00:00
 fetch_method: mintlify_md
 ---
 
@@ -105,7 +105,7 @@ go get github.com/anthropics/anthropic-sdk-go/bedrock
 <Tabs>
 <Tab title="Gradle">
 ```kotlin
-implementation("com.anthropic:anthropic-java-bedrock:2.27.0")
+implementation("com.anthropic:anthropic-java-bedrock:2.30.0")
 ```
 </Tab>
 <Tab title="Maven">
@@ -113,7 +113,7 @@ implementation("com.anthropic:anthropic-java-bedrock:2.27.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-bedrock</artifactId>
-    <version>2.27.0</version>
+    <version>2.30.0</version>
 </dependency>
 ```
 </Tab>
@@ -226,7 +226,7 @@ if (message.Content[0].Value is TextBlock block)
 
 <Tab title="Go">
 
-```go nocheck hidelines={1..2}
+```go nocheck hidelines={1..11,-1}
 package main
 
 import (
