@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/streaming-output
-fetched_at: 2026-05-05T19:40:38.996815+00:00
+fetched_at: 2026-05-11T04:55:25.417602+00:00
 fetch_method: mintlify_md
 ---
 
@@ -99,7 +99,7 @@ Both contain raw Claude API events, not accumulated text. You need to extract an
   ```typescript TypeScript theme={null}
   type SDKPartialAssistantMessage = {
     type: "stream_event";
-    event: RawMessageStreamEvent; // From Anthropic SDK
+    event: BetaRawMessageStreamEvent; // From Anthropic SDK
     parent_tool_use_id: string | null;
     uuid: UUID;
     session_id: string;

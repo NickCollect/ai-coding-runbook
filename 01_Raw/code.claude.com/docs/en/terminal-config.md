@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/terminal-config
-fetched_at: 2026-05-05T19:40:39.713198+00:00
+fetched_at: 2026-05-11T04:55:25.921627+00:00
 fetch_method: mintlify_md
 ---
 
@@ -29,11 +29,11 @@ Pressing Enter submits your message. To add a line break without submitting, pre
 
 In most terminals you can also press Shift+Enter, but support varies by terminal emulator:
 
-| Terminal                                                                            | Shift+Enter for newline                     |
-| :---------------------------------------------------------------------------------- | :------------------------------------------ |
-| Ghostty, Kitty, iTerm2, WezTerm, Warp, Apple Terminal                               | Works without setup                         |
-| VS Code, Cursor, Windsurf, Alacritty, Zed                                           | Run `/terminal-setup` once                  |
-| Windows Terminal, gnome-terminal, JetBrains IDEs such as PyCharm and Android Studio | Not available; use Ctrl+J or `\` then Enter |
+| Terminal                                                                | Shift+Enter for newline                     |
+| :---------------------------------------------------------------------- | :------------------------------------------ |
+| Ghostty, Kitty, iTerm2, WezTerm, Warp, Apple Terminal, Windows Terminal | Works without setup                         |
+| VS Code, Cursor, Windsurf, Alacritty, Zed                               | Run `/terminal-setup` once                  |
+| gnome-terminal, JetBrains IDEs such as PyCharm and Android Studio       | Not available; use Ctrl+J or `\` then Enter |
 
 For VS Code, Cursor, Windsurf, Alacritty, and Zed, `/terminal-setup` writes Shift+Enter and other keybindings into the terminal's configuration file. In VS Code, Cursor, and Windsurf it also sets `terminal.integrated.mouseWheelScrollSensitivity` in the editor settings for smoother scrolling in [fullscreen mode](/en/fullscreen). Existing bindings and settings are left in place; if you see a message such as `VSCode terminal Shift+Enter key binding already configured`, no change was made. Run `/terminal-setup` directly in the host terminal rather than inside tmux or screen, since it needs to write to the host terminal's configuration.
 
@@ -113,7 +113,7 @@ set -s extended-keys on
 set -as terminal-features 'xterm*:extkeys'
 ```
 
-The `allow-passthrough` line lets notifications and progress updates reach iTerm2, Ghostty, or Kitty instead of being swallowed by tmux. The `extended-keys` lines let tmux distinguish Shift+Enter from plain Enter so the newline shortcut works.
+The `allow-passthrough` line lets notifications and progress updates reach the outer terminal instead of being swallowed by tmux. The `extended-keys` lines let tmux distinguish Shift+Enter from plain Enter so the newline shortcut works.
 
 ## Match the color theme
 

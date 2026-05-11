@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/model-config
-fetched_at: 2026-05-05T19:40:39.532785+00:00
+fetched_at: 2026-05-11T04:55:25.764859+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,6 +22,10 @@ For the `model` setting in Claude Code, you can configure either:
   * Bedrock: an inference profile ARN
   * Foundry: a deployment name
   * Vertex: a version name
+
+<Note>
+  `ANTHROPIC_BASE_URL` changes where requests are sent, not which model answers them. To route Claude through an LLM gateway, see [LLM gateway configuration](/en/llm-gateway).
+</Note>
 
 ### Model aliases
 
@@ -228,7 +232,7 @@ Extended thinking is the reasoning Claude emits before responding. On models tha
 
 | Control                        | How to set it                                                                                                                                       |
 | :----------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Toggle for the current session | Press `Option+T` on macOS or `Alt+T` on Windows and Linux. May require [terminal configuration](/en/terminal-config) for Option-key shortcuts       |
+| Toggle for the current session | Press `Option+T` on macOS or `Alt+T` on Windows and Linux                                                                                           |
 | Set the global default         | Run `/config` and toggle thinking mode. Saved as `alwaysThinkingEnabled` in `~/.claude/settings.json`                                               |
 | Disable regardless of effort   | Set [`MAX_THINKING_TOKENS=0`](/en/env-vars). Other values apply only with a [fixed thinking budget](#adaptive-reasoning-and-fixed-thinking-budgets) |
 
@@ -272,7 +276,7 @@ You can see which model you're currently using in several ways:
 
 ## Add a custom model option
 
-Use `ANTHROPIC_CUSTOM_MODEL_OPTION` to add a single custom entry to the `/model` picker without replacing the built-in aliases. This is useful for testing model IDs that Claude Code does not list by default. For LLM gateway deployments, Claude Code populates the picker automatically from the gateway's `/v1/models` endpoint, so this variable is needed only when discovery does not return the model you want. See [LLM gateway model selection](/en/llm-gateway#model-selection).
+Use `ANTHROPIC_CUSTOM_MODEL_OPTION` to add a single custom entry to the `/model` picker without replacing the built-in aliases. This is useful for testing model IDs that Claude Code does not list by default. For LLM gateway deployments, Claude Code can populate the picker from the gateway's `/v1/models` endpoint when `CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1` is set, so this variable is needed only when discovery is disabled or does not return the model you want. See [LLM gateway model selection](/en/llm-gateway#model-selection).
 
 This example sets all three variables to make a gateway-routed Opus deployment selectable:
 

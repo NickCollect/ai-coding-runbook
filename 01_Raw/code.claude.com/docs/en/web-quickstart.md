@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/web-quickstart
-fetched_at: 2026-05-05T19:40:39.780802+00:00
+fetched_at: 2026-05-11T04:55:25.963432+00:00
 fetch_method: mintlify_md
 ---
 
@@ -211,6 +211,16 @@ The setup script exited with a non-zero status, which blocks the session from st
 * A command that works locally needs a different invocation on Ubuntu.
 
 To debug, add `set -x` at the top of the script to see which command failed. For non-critical commands, append `|| true` so they don't block session start.
+
+### New sessions hang or time out during setup
+
+If new sessions stall on the setup script step or fail with a generic container error before the script finishes, the script is likely exceeding the roughly five-minute time budget for building the [environment cache](/en/claude-code-on-the-web#environment-caching). Heavy steps such as pulling large Docker images, syncing full dependency trees, or downloading model weights often push the total over the limit, especially when they run one after another.
+
+To fix this, trim the script so it reliably finishes in under five minutes:
+
+* Run independent installs in parallel with `&` and a final `wait` instead of running them serially.
+* Move the largest downloads out of the setup script and into a [SessionStart hook](/en/claude-code-on-the-web#setup-scripts-vs-sessionstart-hooks) that launches them in the background, so the session becomes usable while they finish.
+* Remove long retry sleeps from the setup script, since a stalled retry loop counts against the budget.
 
 ### Session keeps running after closing the tab
 

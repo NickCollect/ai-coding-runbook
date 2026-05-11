@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/features-overview
-fetched_at: 2026-05-05T19:40:39.358899+00:00
+fetched_at: 2026-05-11T04:55:25.671697+00:00
 fetch_method: mintlify_md
 ---
 
@@ -225,7 +225,7 @@ Each feature has a different loading strategy and context cost:
 | **Subagents**   | When spawned              | Fresh context with specified skills           | Isolated from main session                   |
 | **Hooks**       | On trigger                | Nothing (runs externally)                     | Zero, unless hook returns additional context |
 
-\*By default, skill descriptions load at session start so Claude can decide when to use them. Set `disable-model-invocation: true` in a skill's frontmatter to hide it from Claude entirely until you invoke it manually. This reduces context cost to zero for skills you only trigger yourself.
+\*By default, skill descriptions load at session start so Claude can decide when to use them. Set `disable-model-invocation: true` in a skill's frontmatter to hide it from Claude entirely until you invoke it manually. This reduces context cost to zero for skills you only trigger yourself. For a skill you didn't write, set [`skillOverrides`](/en/skills#override-skill-visibility-from-settings) in settings to do the same without editing its file.
 
 ### Understand how features load
 
@@ -255,7 +255,7 @@ Each feature loads at different points in your session. The tabs below explain w
 
     **Context cost:** Low until used. User-only skills have zero cost until invoked.
 
-    **In subagents:** Skills work differently in subagents. Instead of on-demand loading, skills passed to a subagent are fully preloaded into its context at launch. Subagents don't inherit skills from the main session; you must specify them explicitly.
+    **In subagents:** Skills work differently in subagents. Instead of on-demand loading, skills listed in the subagent's `skills` field are fully preloaded into its context at launch. Subagents can still discover and invoke unlisted project, user, and plugin skills through the Skill tool.
 
     <Tip>Use `disable-model-invocation: true` for skills with side effects. This saves context and ensures only you trigger them.</Tip>
   </Tab>

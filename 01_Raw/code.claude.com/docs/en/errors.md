@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/errors
-fetched_at: 2026-05-05T19:40:39.324265+00:00
+fetched_at: 2026-05-11T04:55:25.652880+00:00
 fetch_method: mintlify_md
 ---
 
@@ -30,6 +30,8 @@ Match the message you see in your terminal to a section below.
 | `API Error: Repeated 529 Overloaded errors`                                          | [Server errors](#api-error-repeated-529-overloaded-errors)                                                                    |
 | `Request timed out`                                                                  | [Server errors](#request-timed-out), or [Network](#unable-to-connect-to-api) if the message mentions your internet connection |
 | `<model> is temporarily unavailable, so auto mode cannot determine the safety of...` | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action)                                                          |
+| `Auto mode could not evaluate this action and is blocking it for safety`             | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action)                                                          |
+| `Auto mode classifier transcript exceeded context window`                            | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action)                                                          |
 | `You've hit your session limit` / `You've hit your weekly limit`                     | [Usage limits](#youve-hit-your-session-limit)                                                                                 |
 | `Server is temporarily limiting requests`                                            | [Usage limits](#server-is-temporarily-limiting-requests)                                                                      |
 | `Request rejected (429)`                                                             | [Usage limits](#request-rejected-429)                                                                                         |
@@ -37,10 +39,12 @@ Match the message you see in your terminal to a section below.
 | `Not logged in · Please run /login`                                                  | [Authentication](#not-logged-in)                                                                                              |
 | `Invalid API key`                                                                    | [Authentication](#invalid-api-key)                                                                                            |
 | `This organization has been disabled`                                                | [Authentication](#this-organization-has-been-disabled)                                                                        |
+| `Routines are disabled by your organization's policy`                                | [Authentication](#routines-are-disabled-by-your-organizations-policy)                                                         |
 | `OAuth token revoked` / `OAuth token has expired`                                    | [Authentication](#oauth-token-revoked-or-expired)                                                                             |
 | `does not meet scope requirement user:profile`                                       | [Authentication](#oauth-scope-requirement)                                                                                    |
 | `Unable to connect to API`                                                           | [Network](#unable-to-connect-to-api)                                                                                          |
 | `SSL certificate verification failed`                                                | [Network](#ssl-certificate-errors)                                                                                            |
+| `403` with `x-deny-reason: host_not_allowed` in a cloud or routine session           | [Network](#host-not-allowed-in-a-cloud-session)                                                                               |
 | `Prompt is too long`                                                                 | [Request errors](#prompt-is-too-long)                                                                                         |
 | `Error during compaction: Conversation too long`                                     | [Request errors](#error-during-compaction-conversation-too-long)                                                              |
 | `Request too large`                                                                  | [Request errors](#request-too-large)                                                                                          |
@@ -120,19 +124,45 @@ This can happen during periods of high load or when a very large response is bei
 
 ### Auto mode cannot determine the safety of an action
 
-The model that [auto mode](/en/permission-modes#eliminate-prompts-with-auto-mode) uses to classify actions is overloaded, so auto mode blocked the action instead of approving it unchecked.
+The model that [auto mode](/en/permission-modes#eliminate-prompts-with-auto-mode) uses to classify actions could not produce a decision, so auto mode did not approve the action automatically. The message you see depends on why the classifier failed.
+
+Reads, searches, and edits inside your working directory skip the classifier, so they keep working in all of these cases.
+
+When the classifier model is overloaded:
 
 ```text theme={null}
 <model> is temporarily unavailable, so auto mode cannot determine the safety of <tool> right now. Wait briefly and then try this action again.
 ```
-
-Reads, searches, and edits inside your working directory skip the classifier, so they keep working during the outage.
 
 **What to do:**
 
 * Retry after a few seconds; Claude sees the same message and usually retries on its own
 * If retries keep failing, continue with read-only tasks and come back to the blocked action later
 * This is transient and unrelated to [auto mode eligibility](/en/permission-modes#eliminate-prompts-with-auto-mode); you do not need to change settings
+
+When the classifier returned an unparseable response:
+
+```text theme={null}
+Auto mode could not evaluate this action and is blocking it for safety — run with --debug for details
+```
+
+**What to do:**
+
+* Retry the action; this usually succeeds on the next attempt
+* Run `claude --debug` and repeat the action to see the underlying classifier response in the debug log
+
+When the conversation has grown larger than the classifier's context window:
+
+```text theme={null}
+Auto mode classifier transcript exceeded context window — falling back to manual approval (try /compact to reduce conversation size)
+```
+
+In an interactive session, auto mode falls back to a normal permission prompt for that action so you can approve or deny it manually. In [non-interactive mode](/en/headless) the run aborts because the transcript only grows and retrying cannot succeed.
+
+**What to do:**
+
+* Approve or deny the action in the prompt that appears
+* Run `/compact` to reduce the conversation size so subsequent actions fit within the classifier window again
 
 ## Usage limits
 
@@ -257,6 +287,21 @@ Environment variables take precedence over `/login`, so a key exported in your s
 * Run `/status` afterward to confirm the active credential is your subscription
 * If no environment variable is set and the error persists, the disabled organization is the one tied to your `/login`. Contact support or sign in with a different account.
 
+### Routines are disabled by your organization's policy
+
+Your Team or Enterprise admin has turned off routines at the organization level. The error appears when you try to create or run a routine, including from `/schedule` and the [Routines](/en/routines) UI on claude.ai/code.
+
+```text theme={null}
+Routines are disabled by your organization's policy.
+```
+
+This is a server-side setting, so it cannot be overridden from local settings, environment variables, or CLI flags.
+
+**What to do:**
+
+* Ask your admin to enable the **Routines** toggle at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code)
+* For one-off scheduled work that does not require organization-level routines, see [scheduled tasks](/en/scheduled-tasks)
+
 ### OAuth token revoked or expired
 
 Your saved login is no longer valid. A revoked token means you signed out everywhere or an admin removed access; an expired token means the automatic refresh failed mid-session.
@@ -288,7 +333,7 @@ OAuth token does not meet scope requirement: user:profile
 
 ## Network and connection errors
 
-These errors mean Claude Code could not reach the API at all. They almost always originate in your local network, proxy, or firewall rather than Anthropic infrastructure.
+These errors mean a network request from Claude Code failed to reach its destination. They usually originate in your local network, proxy, or firewall, or in the cloud environment's network policy.
 
 ### Unable to connect to API
 
@@ -313,7 +358,7 @@ Common causes include no internet access, a VPN that blocks `api.anthropic.com`,
 * Ensure your firewall allows the hosts listed in [Network access requirements](/en/network-config#network-access-requirements)
 * Intermittent failures are [retried automatically](#automatic-retries); persistent failures point to a local network issue
 
-If `curl` succeeds but Claude Code still fails, the cause is usually something between Node.js and the network rather than the network itself:
+If `curl` succeeds but Claude Code still fails, the cause is usually something between the runtime and the network rather than the network itself:
 
 * On Linux and WSL, check `/etc/resolv.conf` for an unreachable nameserver. WSL in particular can inherit a broken resolver from the host.
 * On macOS, a VPN client that was disconnected or uninstalled can leave a tunnel interface or routing rule behind. Check `ifconfig` for stale `utun` interfaces and remove the VPN's network extension in System Settings.
@@ -321,7 +366,7 @@ If `curl` succeeds but Claude Code still fails, the cause is usually something b
 
 ### SSL certificate errors
 
-A proxy or security appliance on your network is intercepting TLS traffic with its own certificate, and Node.js does not trust it.
+A proxy or security appliance on your network is intercepting TLS traffic with its own certificate, and Claude Code does not trust it.
 
 ```text theme={null}
 Unable to connect to API: SSL certificate verification failed. Check your proxy or corporate SSL certificates
@@ -330,9 +375,30 @@ Unable to connect to API: Self-signed certificate detected
 
 **What to do:**
 
-* Export your organization's CA bundle and point Node at it with `NODE_EXTRA_CA_CERTS=/path/to/ca-bundle.pem`
+* Export your organization's CA bundle and point Claude Code at it with `NODE_EXTRA_CA_CERTS=/path/to/ca-bundle.pem`
 * See [Network configuration](/en/network-config#custom-ca-certificates) for full setup instructions
 * Do not set `NODE_TLS_REJECT_UNAUTHORIZED=0`, which disables certificate validation entirely
+
+### Host not allowed in a cloud session
+
+An outbound HTTP request from a cloud session or routine was blocked by the environment's network policy.
+
+```text theme={null}
+HTTP 403
+x-deny-reason: host_not_allowed
+```
+
+You may also see a TLS certificate that doesn't match the destination's real certificate. The cloud environment routes outbound traffic through a proxy that enforces the network policy, so a mismatched certificate means the proxy terminated the connection, not the destination.
+
+This is not a client-side network problem. Cloud sessions and [routines](/en/routines) run inside a sandboxed environment whose outbound traffic is filtered to the environment's allowlist. The **Default** environment uses **Trusted** access, which permits the [default allowlist](/en/claude-code-on-the-web#default-allowed-domains) of package registries, cloud provider APIs, container registries, and common development domains but blocks everything else.
+
+**What to do:**
+
+* Open the routine for editing, or start a cloud session. Select the cloud icon showing your environment's name, such as **Default**, to open the selector. Hover over your environment and click the settings icon.
+* In the **Update cloud environment** dialog, change **Network access** from **Trusted** to **Custom**, then add the blocked domain to **Allowed domains**. Enter one domain per line. Check **Also include default list of common package managers** to keep the [default allowlist](/en/claude-code-on-the-web#default-allowed-domains) alongside your custom domains. Select **Full** instead if you want unrestricted access.
+* Click **Save changes**. The next run uses the updated allowlist.
+
+See [Network access](/en/claude-code-on-the-web#network-access) for access levels and the default allowlist. Local CLI sessions are not affected by this policy.
 
 ## Request errors
 

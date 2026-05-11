@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/permissions
-fetched_at: 2026-05-05T19:40:39.571489+00:00
+fetched_at: 2026-05-11T04:55:25.800868+00:00
 fetch_method: mintlify_md
 ---
 
@@ -42,7 +42,7 @@ Claude Code supports several permission modes that control how tools are approve
 | :------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `default`           | Standard behavior: prompts for permission on first use of each tool                                                                                                |
 | `acceptEdits`       | Automatically accepts file edits and common filesystem commands (`mkdir`, `touch`, `mv`, `cp`, etc.) for paths in the working directory or `additionalDirectories` |
-| `plan`              | Plan Mode: Claude can analyze but not modify files or execute commands                                                                                             |
+| `plan`              | Plan Mode: Claude reads files and runs read-only shell commands to explore but does not edit your source files                                                     |
 | `auto`              | Auto-approves tool calls with background safety checks that verify actions align with your request. Currently a research preview                                   |
 | `dontAsk`           | Auto-denies tools unless pre-approved via `/permissions` or `permissions.allow` rules                                                                              |
 | `bypassPermissions` | Skips all permission prompts. Root and home directory removals such as `rm -rf /` still prompt as a circuit breaker                                                |
@@ -216,6 +216,13 @@ Examples:
 * `Edit(//tmp/scratch.txt)`: edits the absolute path `/tmp/scratch.txt`
 * `Read(src/**)`: reads from `<current-directory>/src/`
 
+A rule only matches files under its anchor, so the anchor determines how far a deny rule reaches. Bare filenames follow gitignore semantics and match at any depth, so `Read(.env)` and `Read(**/.env)` are equivalent:
+
+| Deny rule                       | Blocks                                       | Does not block                                       |
+| ------------------------------- | -------------------------------------------- | ---------------------------------------------------- |
+| `Read(.env)` or `Read(**/.env)` | any `.env` at or under the current directory | `.env` in a parent directory or another project      |
+| `Read(//**/.env)`               | any `.env` anywhere on the filesystem        | nothing; the rule is anchored at the filesystem root |
+
 <Note>
   In gitignore patterns, `*` matches files in a single directory while `**` matches recursively across directories. To allow all file access, use just the tool name without parentheses: `Read`, `Edit`, or `Write`.
 </Note>
@@ -302,7 +309,7 @@ Use both for defense-in-depth:
 
 * Permission deny rules block Claude from even attempting to access restricted resources
 * Sandbox restrictions prevent Bash commands from reaching resources outside defined boundaries, even if a prompt injection bypasses Claude's decision-making
-* Filesystem restrictions in the sandbox use Read and Edit deny rules, not separate sandbox configuration
+* Filesystem restrictions in the sandbox combine the [`sandbox.filesystem`](/en/sandboxing) settings with Read and Edit deny rules; both are merged into the final sandbox boundary
 * Network restrictions combine WebFetch permission rules with the sandbox's `allowedDomains` and `deniedDomains` lists
 
 When sandboxing is enabled with `autoAllowBashIfSandboxed: true`, which is the default, sandboxed Bash commands run without prompting even if your permissions include `ask: Bash(*)`. The sandbox boundary substitutes for the per-command prompt. Explicit deny rules still apply, and `rm` or `rmdir` commands that target `/`, your home directory, or other critical system paths still trigger a prompt. See [sandbox modes](/en/sandboxing#sandbox-modes) to change this behavior.

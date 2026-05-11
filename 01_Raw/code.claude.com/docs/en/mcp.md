@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/mcp
-fetched_at: 2026-05-05T19:40:39.485445+00:00
+fetched_at: 2026-05-11T04:55:25.749765+00:00
 fetch_method: mintlify_md
 ---
 
@@ -271,6 +271,8 @@ claude mcp add --transport http secure-api https://api.example.com/mcp \
   --header "Authorization: Bearer your-token"
 ```
 
+When configuring MCP servers via JSON in `.mcp.json`, `~/.claude.json`, or `claude mcp add-json`, the `type` field accepts `streamable-http` as an alias for `http`. The MCP specification uses the name `streamable-http` for this transport, so configurations copied from server documentation work without modification.
+
 ### Option 2: Add a remote SSE server
 
 <Warning>
@@ -433,7 +435,7 @@ See the [plugin components reference](/en/plugins-reference#mcp-servers) for det
 
 ## MCP installation scopes
 
-MCP servers can be configured at three scopes. The scope you choose controls which projects the server loads in and whether the configuration is shared with your team.
+MCP servers can be configured at three scopes. The scope you choose controls which projects the server loads in and whether the configuration is shared with your team. Administrators can also deploy servers at the enterprise level via [managed configuration](#managed-mcp-configuration).
 
 | Scope                     | Loads in             | Shared with team         | Stored in                   |
 | ------------------------- | -------------------- | ------------------------ | --------------------------- |
@@ -1364,6 +1366,8 @@ URL patterns support wildcards using `*` to match any sequence of characters. Th
 * `https://mcp.company.com/*` - Allow all paths on a specific domain
 * `https://*.example.com/*` - Allow any subdomain of example.com
 * `http://localhost:*/*` - Allow any port on localhost
+
+Hostname matching is case-insensitive and ignores a trailing FQDN dot, matching DNS semantics. A pattern like `*://Mcp.Example.com/*` matches `https://mcp.example.com/api`, and `https://mcp.example.com.` is treated the same as `https://mcp.example.com`. Paths remain case-sensitive.
 
 **Remote server behavior**:
 
