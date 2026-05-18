@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/working-with-messages
-fetched_at: 2026-05-11T04:55:22.832486+00:00
+fetched_at: 2026-05-18T05:02:41.887284+00:00
 fetch_method: mintlify_md
 ---
 
@@ -246,7 +246,7 @@ import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic();
 
-await anthropic.messages.create({
+const message = await anthropic.messages.create({
   model: "claude-opus-4-7",
   max_tokens: 1024,
   messages: [
@@ -255,6 +255,7 @@ await anthropic.messages.create({
     { role: "user", content: "Can you describe LLMs to me?" }
   ]
 });
+console.log(message);
 ```
 
 ```csharp C#
@@ -383,6 +384,7 @@ puts message
       "text": "Sure, I'd be happy to provide..."
     }
   ],
+  "model": "claude-opus-4-7",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {

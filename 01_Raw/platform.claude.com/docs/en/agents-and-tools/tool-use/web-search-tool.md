@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool
-fetched_at: 2026-05-11T04:55:23.661728+00:00
+fetched_at: 2026-05-18T05:02:42.525868+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,7 +13,7 @@ The web search tool gives Claude direct access to real-time web content, allowin
 The latest web search tool version (`web_search_20260209`) supports **dynamic filtering** with [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Claude can write and execute code to filter search results before they reach the context window, keeping only relevant information and discarding the rest. This leads to more accurate responses while reducing token consumption. The previous tool version (`web_search_20250305`) remains available without dynamic filtering.
 
 <Note>
-For [Claude Mythos Preview](https://anthropic.com/glasswing), web search is supported on the Claude API, Microsoft Foundry, and Google Vertex AI. Web search is not available for Mythos Preview on Amazon Bedrock.
+For [Claude Mythos Preview](https://anthropic.com/glasswing), web search is supported on the Claude API, Microsoft Foundry, and Vertex AI. Web search is not available for Mythos Preview on Amazon Bedrock or [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws).
 </Note>
 
 For Zero Data Retention eligibility and the `allowed_callers` workaround, see [Server tools](/docs/en/agents-and-tools/tool-use/server-tools#zdr-and-allowed-callers).
@@ -41,7 +41,7 @@ Dynamic filtering is particularly effective for:
 - Response grounding and verification
 
 <Note>
-Dynamic filtering requires the [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool) to be enabled. The improved web search tool is available on the Claude API and Microsoft Azure. On Google Vertex AI, the basic web search tool (without dynamic filtering) is available.
+Dynamic filtering requires the [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool) to be enabled. The web search tool (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). On Vertex AI, only the basic web search tool (without dynamic filtering) is available. Web search is not available on Amazon Bedrock.
 </Note>
 
 To enable dynamic filtering, use the `web_search_20260209` tool version:
@@ -589,7 +589,7 @@ When the web search tool encounters an error (such as hitting rate limits), the 
 ```json Output
 {
   "type": "web_search_tool_result",
-  "tool_use_id": "servertoolu_a93jad",
+  "tool_use_id": "srvtoolu_a93jad",
   "content": {
     "type": "web_search_tool_result_error",
     "error_code": "max_uses_exceeded"

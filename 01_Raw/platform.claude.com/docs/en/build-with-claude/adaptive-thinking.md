@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking
-fetched_at: 2026-05-05T19:40:45.161233+00:00
+fetched_at: 2026-05-18T05:02:41.981620+00:00
 fetch_method: mintlify_md
 ---
 
@@ -345,7 +345,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create \
-  --transform 'content.0.text' --format yaml <<'YAML'
+  --transform 'content.0.text' --raw-output <<'YAML'
 model: claude-opus-4-7
 max_tokens: 16000
 thinking:
@@ -833,12 +833,10 @@ Here are some important considerations for summarized thinking:
 - The billed output token count will **not match** the count of tokens you see in the response.
 - On Claude 4 models, the first few lines of thinking output are more verbose, providing detailed reasoning that's particularly helpful for prompt engineering purposes. [Claude Mythos Preview](https://anthropic.com/glasswing) summarizes from the first token, so its thinking blocks do not show this verbose preamble.
 - As Anthropic seeks to improve the extended thinking feature, summarization behavior is subject to change.
-- Summarization preserves the key ideas of Claude's thinking process with minimal added latency, enabling a streamable user experience and easy migration from Claude Sonnet 3.7 to Claude 4 and later models.
+- Summarization preserves the key ideas of Claude's thinking process with minimal added latency, enabling a streamable user experience.
 - Summarization is processed by a different model than the one you target in your requests. The thinking model does not see the summarized output.
 
 <Note>
-Claude Sonnet 3.7 continues to return full thinking output.
-
 In rare cases where you need access to full thinking output for Claude 4 models, [contact our sales team](mailto:sales@anthropic.com).
 </Note>
 

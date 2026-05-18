@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/parallel-tool-use
-fetched_at: 2026-05-11T04:55:23.485747+00:00
+fetched_at: 2026-05-18T05:02:42.396343+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,8 +14,23 @@ This page covers parallel tool calls: when Claude calls multiple tools in one tu
 
 By default, Claude may use multiple tools to answer a user query. You can disable this behavior by:
 
-- Setting `disable_parallel_tool_use=true` when tool_choice type is `auto`, which ensures that Claude uses **at most one** tool
-- Setting `disable_parallel_tool_use=true` when tool_choice type is `any` or `tool`, which ensures that Claude uses **exactly one** tool
+- Setting `disable_parallel_tool_use=true` when `tool_choice` type is `auto`, which ensures that Claude uses **at most one** tool
+- Setting `disable_parallel_tool_use=true` when `tool_choice` type is `any` or `tool`, which ensures that Claude uses **exactly one** tool
+
+## Execution semantics
+
+Tool calls in a single assistant turn are unordered. You can run them concurrently (`Promise.all`, `asyncio.gather`), sequentially, or in any order. Claude doesn't assume one call in the batch has completed before another. Claude issues dependent calls across separate turns.
+
+Claude might occasionally batch calls that turn out to depend on each other (for example, a create followed by an update of the same resource). You don't need to detect this in advance: dispatch all the calls, and if one fails because of a missing prerequisite, return the natural error message in a `tool_result` with `is_error: true`. Claude recognizes the dependency and reissues the call after the prerequisite completes.
+
+```json
+{
+  "type": "tool_result",
+  "tool_use_id": "toolu_02",
+  "is_error": true,
+  "content": "cat: report.md: No such file or directory"
+}
+```
 
 ## Worked example
 
@@ -188,15 +203,17 @@ async function testParallelTools() {
 
   // Check for parallel tool calls
   const toolUses = response.content.filter((block) => block.type === "tool_use");
-  console.log(`\nClaude made ${toolUses.length} tool calls`);
+  console.log(`\n✓ Claude made ${toolUses.length} tool calls`);
 
   if (toolUses.length > 1) {
-    console.log("Parallel tool calls detected!");
+    console.log("✓ Parallel tool calls detected!");
     toolUses.forEach((tool) => {
       if (tool.type === "tool_use") {
         console.log(`  - ${tool.name}: ${JSON.stringify(tool.input)}`);
       }
     });
+  } else {
+    console.log("✗ No parallel tool calls detected");
   }
 
   // Simulate tool execution and format results correctly
@@ -244,7 +261,9 @@ async function testParallelTools() {
 
   // Verify formatting
   console.log("\n--- Verification ---");
-  console.log(`Tool results sent in single user message: ${toolResults.length} results`);
+  console.log(`✓ Tool results sent in single user message: ${toolResults.length} results`);
+  console.log("✓ No text before tool results in content array");
+  console.log("✓ Conversation formatted correctly for future parallel tool use");
 }
 
 testParallelTools().catch(console.error);
@@ -378,7 +397,7 @@ public class Program
 }
 ```
 
-```go Go hidelines={1..15,-11..-1}
+```go Go hidelines={1..15,-1}
 package main
 
 import (
@@ -848,7 +867,7 @@ While Claude 4 models have excellent parallel tool use capabilities by default, 
 
 <section title="System prompts for parallel tool use">
 
-For Claude 4 models (Opus 4 (deprecated), and Sonnet 4 (deprecated)), add this to your system prompt:
+For Claude 4 models, add this to your system prompt:
 ```text
 For maximum efficiency, whenever you need to perform multiple independent operations, invoke all relevant tools simultaneously rather than sequentially.
 ```
@@ -930,6 +949,10 @@ avg_tools_per_message = (
 print(f"Average tools per message: {avg_tools_per_message}")
 # Should be > 1.0 if parallel calls are working
 ```
+
+**4. Calls in a batch appear to depend on each other**
+
+If a tool call fails because it depends on another call in the same batch, return `is_error: true` with the natural error message (you don't need to explain the dependency). Claude recovers and reissues the call. Don't switch to sequential execution; that adds latency and masks the issue. To reduce occurrences, add this to your system prompt: "Only batch tool calls that are independent of each other."
 
 ## Next steps
 

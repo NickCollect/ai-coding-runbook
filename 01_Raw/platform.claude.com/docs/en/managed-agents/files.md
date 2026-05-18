@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/files
-fetched_at: 2026-05-05T19:40:46.754642+00:00
+fetched_at: 2026-05-18T05:02:43.646839+00:00
 fetch_method: mintlify_md
 ---
 
@@ -34,7 +34,7 @@ printf 'File ID: %s\n' "${file_id}"
 ````bash
 FILE_ID=$(ant beta:files upload \
   --file data.csv \
-  --transform id --format yaml)
+  --transform id --raw-output)
 ````
 
   
@@ -135,7 +135,7 @@ session_id=$(jq -er '.id' <<<"${session}")
 SESSION_ID=$(ant beta:sessions create \
   --agent "$AGENT_ID" \
   --environment-id "$ENVIRONMENT_ID" \
-  --transform id --format yaml <<EOF
+  --transform id --raw-output <<EOF
 resources:
   - type: file
     file_id: $FILE_ID
@@ -378,7 +378,7 @@ RESOURCE_ID=$(ant beta:sessions:resources create \
   --session-id "$SESSION_ID" \
   --type file \
   --file-id "$FILE_ID" \
-  --transform id --format yaml)
+  --transform id --raw-output)
 ````
 
   

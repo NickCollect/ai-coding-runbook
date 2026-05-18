@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/define-outcomes
-fetched_at: 2026-05-11T04:55:24.733892+00:00
+fetched_at: 2026-05-18T05:02:43.624070+00:00
 fetch_method: mintlify_md
 ---
 
@@ -80,7 +80,7 @@ printf 'Uploaded rubric: %s\n' "$rubric_id"
 ````bash
 RUBRIC_ID=$(ant beta:files upload \
   --file /tmp/rubric.md \
-  --transform id --format yaml)
+  --transform id --raw-output)
 ````
 
   
@@ -197,7 +197,7 @@ SESSION_ID=$(ant beta:sessions create \
   --agent "$AGENT_ID" \
   --environment-id "$ENVIRONMENT_ID" \
   --title "Financial analysis on Costco" \
-  --transform id --format yaml)
+  --transform id --raw-output)
 
 # Define the outcome — agent starts working on receipt
 ant beta:sessions:events send \
@@ -603,7 +603,7 @@ ant beta:files list --scope-id "$SESSION_ID"
 
 # Download a file
 FILE_ID=$(ant beta:files list --scope-id "$SESSION_ID" \
-  --transform 'data[0].id' --format yaml)
+  --transform 'data[0].id' --raw-output)
 if [[ -n $FILE_ID ]]; then
   ant beta:files download --file-id "$FILE_ID" --output /tmp/output.txt
 fi

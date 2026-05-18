@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/get-started
-fetched_at: 2026-05-11T04:55:22.814400+00:00
+fetched_at: 2026-05-18T05:02:41.871093+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,7 +13,6 @@ Make your first API call to Claude and build a simple web search assistant.
 ## Prerequisites
 
 - An Anthropic [Console account](/)
-- An [API key](/settings/keys)
 
 ## Call the API
 
@@ -76,16 +75,6 @@ Make your first API call to Claude and build a simple web search assistant.
 
   <Tab title="CLI">
     <Steps>
-      <Step title="Set your API key">
-        Get your API key from the [Claude Console](/settings/keys) and set it as an environment variable:
-
-        ```bash
-        export ANTHROPIC_API_KEY='your-api-key-here'
-        ```
-
-        To persist the key across shell sessions, add the line to your shell profile (such as `~/.zshrc` or `~/.bashrc`).
-      </Step>
-
       <Step title="Install the CLI">
         Install the Anthropic CLI with Homebrew:
 
@@ -94,6 +83,22 @@ Make your first API call to Claude and build a simple web search assistant.
         ```
 
         For other installation methods, see [Installation](/docs/en/api/sdks/cli#installation) in the CLI reference.
+      </Step>
+
+      <Step title="Authenticate">
+        Log in with your Anthropic account:
+
+        ```bash
+        ant auth login
+        ```
+
+        This opens a browser-based OAuth flow. After authorizing, confirm your credential with:
+
+        ```bash
+        ant auth status
+        ```
+
+        On a remote host without a browser, pass `--no-browser` to get a URL you can open on another device, then paste the returned code back into the terminal. If `ANTHROPIC_API_KEY` is set in your environment, it takes precedence over the login credentials. For non-interactive environments such as CI, see [Authentication](/docs/en/api/sdks/cli#authentication).
       </Step>
 
       <Step title="Make your first API call">
@@ -328,7 +333,7 @@ main().catch(console.error);
             }
 
             dependencies {
-                implementation("com.anthropic:anthropic-java:2.30.0")
+                implementation("com.anthropic:anthropic-java:2.32.0")
             }
 
             application {
@@ -353,7 +358,7 @@ main().catch(console.error);
                 <dependency>
                   <groupId>com.anthropic</groupId>
                   <artifactId>anthropic-java</artifactId>
-                  <version>2.30.0</version>
+                  <version>2.32.0</version>
                 </dependency>
               </dependencies>
             </project>

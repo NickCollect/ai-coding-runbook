@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy
-fetched_at: 2026-05-11T04:55:24.336650+00:00
+fetched_at: 2026-05-18T05:02:43.155901+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,10 +11,10 @@ The legacy Amazon Bedrock integration for Claude models, using InvokeModel and C
 ---
 
 <Note>
-This page covers the legacy Amazon Bedrock integration: the `InvokeModel` and `Converse` APIs with ARN-versioned model identifiers and AWS event-stream encoding. For models available on the Messages-API Bedrock endpoint, see [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), which uses the Messages API at `/anthropic/v1/messages` with SSE streaming.
+This page covers the legacy Amazon Bedrock integration: the `InvokeModel` and `Converse` APIs with ARN-versioned model identifiers and AWS event-stream encoding. For models available on the Messages-API Bedrock endpoint, see [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), which uses the Messages API at `/anthropic/v1/messages` with SSE streaming. For an Anthropic-operated alternative with AWS Marketplace billing and typically same-day feature access, see [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws). Existing Bedrock users can follow the [migration guide](/docs/en/build-with-claude/claude-platform-on-aws#migrating-from-amazon-bedrock).
 </Note>
 
-Calling Claude through Bedrock slightly differs from how you would call Claude when using Anthropic's client SDKs. This guide walks you through completing an API call to Claude on Bedrock using one of Anthropic's [client SDKs](/docs/en/api/client-sdks).
+Calling Claude through Bedrock slightly differs from how you would call Claude on the Claude API directly. This guide walks you through completing an API call to Claude on Bedrock using one of Anthropic's [client SDKs](/docs/en/api/client-sdks).
 
 Note that this guide assumes you have already signed up for an [AWS account](https://portal.aws.amazon.com/billing/signup) and configured programmatic access.
 
@@ -24,7 +24,7 @@ Note that this guide assumes you have already signed up for an [AWS account](htt
 2. Configure your AWS credentials using the AWS configure command (see [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)) or find your credentials by navigating to "Command line or programmatic access" within your AWS dashboard and following the directions in the popup modal.
 3. Verify that your credentials are working:
 
-```bash
+```bash AWS CLI
 aws sts get-caller-identity
 ```
 
@@ -60,14 +60,14 @@ go get github.com/anthropics/anthropic-sdk-go/bedrock
 <Tab title="Java">
 <CodeGroup>
 ```groovy Gradle
-implementation("com.anthropic:anthropic-java-bedrock:2.30.0")
+implementation("com.anthropic:anthropic-java-bedrock:2.32.0")
 ```
 
 ```xml Maven
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-bedrock</artifactId>
-    <version>2.30.0</version>
+    <version>2.32.0</version>
 </dependency>
 ```
 
@@ -117,7 +117,7 @@ gem "aws-sdk-bedrockruntime"
 
 <Tab title="Boto3 (Python)">
 ```bash
-pip install boto3>=1.28.59
+pip install "boto3>=1.28.59"
 ```
 </Tab>
 </Tabs>
@@ -139,18 +139,20 @@ Go to the [AWS Console > Bedrock > Model Access](https://console.aws.amazon.com/
   on this page because it does not have an ARN-versioned model ID.
 </Note>
 
+Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](/docs/en/about-claude/model-deprecations); a "Retiring" annotation gives the platform's announced retirement date. The dates in the following table are the **Amazon Bedrock** schedule, which AWS sets independently. A model's lifecycle status and dates here can differ from the Anthropic-operated schedule on the Model deprecations page.
+
 | Model | Base Bedrock model ID | `global` | `us` | `eu` | `jp` | `apac` |
 | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
 | Claude Opus 4.6 | anthropic.claude-opus-4-6-v1 | Yes | Yes | Yes | Yes | Yes |
 | Claude Sonnet 4.6 | anthropic.claude-sonnet-4-6 | Yes | Yes | Yes | Yes | No |
 | Claude Sonnet 4.5 | anthropic.claude-sonnet-4-5-20250929-v1:0 | Yes | Yes | Yes | Yes | No |
-| Claude Sonnet 4 <Tooltip tooltipContent="Deprecated as of April 14, 2026. Retiring October 14, 2026.">⚠️</Tooltip> | anthropic.claude-sonnet-4-20250514-v1:0 | Yes | Yes | Yes | No | Yes |
-| Claude Sonnet 3.7 <Tooltip tooltipContent="Retired as of February 19, 2026.">⚠️</Tooltip> | anthropic.claude-3-7-sonnet-20250219-v1:0 | No | Yes | Yes | No | Yes |
+| Claude Sonnet 4 <br /><small>Deprecated. Retiring October 14, 2026.</small> | anthropic.claude-sonnet-4-20250514-v1:0 | Yes | Yes | Yes | No | Yes |
+| Claude Sonnet 3.7 <br /><small>Retired April 28, 2026.</small> | anthropic.claude-3-7-sonnet-20250219-v1:0 | No | No | No | No | No |
 | Claude Opus 4.5 | anthropic.claude-opus-4-5-20251101-v1:0 | Yes | Yes | Yes | No | No |
 | Claude Opus 4.1 | anthropic.claude-opus-4-1-20250805-v1:0 | No | Yes | No | No | No |
-| Claude Opus 4 <Tooltip tooltipContent="Deprecated as of April 14, 2026. Retiring October 14, 2026.">⚠️</Tooltip> | anthropic.claude-opus-4-20250514-v1:0 | No | Yes | No | No | No |
+| Claude Opus 4 <br /><small>Deprecated. Retiring May 31, 2026.</small> | anthropic.claude-opus-4-20250514-v1:0 | No | Yes | No | No | No |
 | Claude Haiku 4.5 | anthropic.claude-haiku-4-5-20251001-v1:0 | Yes | Yes | Yes | No | No |
-| Claude Haiku 3.5 <Tooltip tooltipContent="Retired as of February 19, 2026.">⚠️</Tooltip> | anthropic.claude-3-5-haiku-20241022-v1:0 | No | Yes | No | No | No |
+| Claude Haiku 3.5 <br /><small>Deprecated. Retiring June 19, 2026.</small> | anthropic.claude-3-5-haiku-20241022-v1:0 | No | Yes | No | No | No |
 
 For more information about regional vs global model IDs, see the [Global vs regional endpoints](#global-vs-regional-endpoints) section below.
 
@@ -325,7 +327,7 @@ The following examples show how to generate text from Claude on Bedrock:
 
 <CodeGroup>
   ```bash CLI
-  # The ant CLI does not yet support Amazon Bedrock.
+  # The ant CLI does not support Amazon Bedrock.
   ```
 
   
@@ -544,7 +546,7 @@ You can authenticate with Bedrock using bearer tokens instead of AWS credentials
 Bearer token authentication is supported in the C#, Go, and Java SDKs. The PHP, Python, TypeScript, and Ruby SDKs use AWS SigV4 signing only.
 </Note>
 
-The simplest approach is to set the `AWS_BEARER_TOKEN_BEDROCK` environment variable, which is automatically detected by `fromEnv()` credential resolution.
+The simplest approach is to set the `AWS_BEARER_TOKEN_BEDROCK` environment variable, which each SDK detects automatically when resolving credentials from the environment.
 
 To provide a token programmatically:
 
@@ -558,7 +560,7 @@ var client = new AnthropicBedrockClient(
     new AnthropicBedrockApiTokenCredentials
     {
         BearerToken = "your-bearer-token",
-        Region = "us-east-1",
+        Region = "us-west-2",
     }
 );
 
@@ -647,28 +649,26 @@ Turning on this service does not give AWS or Anthropic any access to your conten
 </Note>
 
 ## Feature support
-For all currently supported features on Bedrock, see [API features overview](/docs/en/api/overview).
+For all currently supported features on Bedrock, see [Features overview](/docs/en/build-with-claude/overview).
 
 ### PDF support on Bedrock
 
-PDF support is available on Amazon Bedrock through both the Converse API and InvokeModel API. For detailed information about PDF processing capabilities and limitations, see the [PDF support documentation](/docs/en/build-with-claude/pdf-support#amazon-bedrock-pdf-support).
+PDF support is available on Bedrock through both the Converse API and InvokeModel API. For detailed information about PDF processing capabilities and limitations, see [Amazon Bedrock PDF support](/docs/en/build-with-claude/pdf-support#amazon-bedrock-pdf-support).
 
 **Important considerations for Converse API users:**
 - Visual PDF analysis (charts, images, layouts) requires citations to be enabled
 - Without citations, only basic text extraction is available
 - For full control without forced citations, use the InvokeModel API
 
-For more details on the two document processing modes and their limitations, refer to the [PDF support guide](/docs/en/build-with-claude/pdf-support#amazon-bedrock-pdf-support).
-
 ### Context window
 
 Claude Opus 4.6 and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Amazon Bedrock. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
 
-Amazon Bedrock limits request payloads to 20 MB. When sending large documents or many images, you may reach this limit before the token limit.
+Bedrock limits request payloads to 20 MB. When sending large documents or many images, you may reach this limit before the token limit.
 
 ## Global vs regional endpoints
 
-Starting with **Claude Sonnet 4.5 and all future models**, Amazon Bedrock offers two endpoint types:
+Starting with **Claude Sonnet 4.5 and all future models**, Bedrock offers two endpoint types:
 
 - **Global endpoints:** Dynamic routing for maximum availability
 - **Regional endpoints:** Guaranteed data routing through specific geographic regions
@@ -690,18 +690,18 @@ This applies to Claude Sonnet 4.5 and future models only. Older models (Claude S
 **Regional endpoints (CRIS):**
 - Route traffic through specific geographic regions
 - Required for data residency and compliance requirements
-- Available for US, EU, Japan, and Australia
+- Available for US, EU, Japan, and Asia-Pacific
 - 10% pricing premium reflects infrastructure costs for dedicated regional capacity
 
 ### Implementation
 
-**Using global endpoints (default for Opus 4.6, Sonnet 4.5, and Sonnet 4 (deprecated)):**
+**Using global endpoints (default for Opus 4.6, Sonnet 4.6, and Sonnet 4.5):**
 
-The model IDs for Claude Sonnet 4.5 and 4 (deprecated) already include the `global.` prefix:
+The model IDs for Claude Opus 4.6, Sonnet 4.6, and Sonnet 4.5 already include the `global.` prefix:
 
 <CodeGroup>
 ```bash CLI
-# The ant CLI does not yet support Amazon Bedrock.
+# The ant CLI does not support Amazon Bedrock.
 ```
 
 ```python Python nocheck
@@ -831,11 +831,11 @@ message = client.messages.create(
 
 **Using regional endpoints (CRIS):**
 
-To use regional endpoints, remove the `global.` prefix from the model ID:
+To use regional endpoints, replace the `global.` prefix with a regional prefix such as `us.`:
 
 <CodeGroup>
 ```bash CLI
-# The ant CLI does not yet support Amazon Bedrock.
+# The ant CLI does not support Amazon Bedrock.
 ```
 
 ```python Python nocheck
@@ -845,7 +845,7 @@ client = AnthropicBedrock(aws_region="us-west-2")
 
 # Using US regional endpoint (CRIS)
 message = client.messages.create(
-    model="anthropic.claude-opus-4-6-v1",  # No global. prefix
+    model="us.anthropic.claude-opus-4-6-v1",  # Regional prefix
     max_tokens=256,
     messages=[{"role": "user", "content": "Hello, world"}],
 )
@@ -860,7 +860,7 @@ const client = new AnthropicBedrock({
 
 // Using US regional endpoint (CRIS)
 const message = await client.messages.create({
-  model: "anthropic.claude-opus-4-6-v1", // No global. prefix
+  model: "us.anthropic.claude-opus-4-6-v1", // Regional prefix
   max_tokens: 256,
   messages: [{ role: "user", content: "Hello, world" }]
 });
@@ -877,7 +877,7 @@ AnthropicBedrockClient client = new(
 // Using US regional endpoint (CRIS)
 var response = await client.Messages.Create(new MessageCreateParams
 {
-    Model = "anthropic.claude-opus-4-6-v1", // No global. prefix
+    Model = "us.anthropic.claude-opus-4-6-v1", // Regional prefix
     MaxTokens = 256,
     Messages = [new() { Role = Role.User, Content = "Hello, world" }],
 });
@@ -946,7 +946,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Hello, world']
     ],
-    model: 'anthropic.claude-opus-4-6-v1',
+    model: 'us.anthropic.claude-opus-4-6-v1',
 );
 ```
 
@@ -957,7 +957,7 @@ require "anthropic"
 client = Anthropic::BedrockClient.new(aws_region: "us-west-2")
 
 message = client.messages.create(
-  model: "anthropic.claude-opus-4-6-v1", # No global. prefix
+  model: "us.anthropic.claude-opus-4-6-v1", # Regional prefix
   max_tokens: 256,
   messages: [{role: "user", content: "Hello, world"}]
 )
@@ -968,9 +968,9 @@ message = client.messages.create(
 **Claude Mythos Preview** is a research preview model available to invited customers on Amazon Bedrock. For more information, see [Project Glasswing](https://anthropic.com/glasswing).
 </Note>
 
-### Additional resources
+## Additional resources
 
-- **AWS Bedrock pricing:** [aws.amazon.com/bedrock/pricing](https://aws.amazon.com/bedrock/pricing/)
+- **Bedrock pricing:** [aws.amazon.com/bedrock/pricing](https://aws.amazon.com/bedrock/pricing/)
 - **AWS pricing documentation:** [Bedrock pricing guide](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-pricing.html)
 - **AWS blog post:** [Introducing Claude Sonnet 4.5 in Amazon Bedrock](https://aws.amazon.com/blogs/aws/introducing-claude-sonnet-4-5-in-amazon-bedrock-anthropics-most-intelligent-model-best-for-coding-and-complex-agents/)
-- **Anthropic pricing details:** [Pricing documentation](/docs/en/about-claude/pricing#third-party-platform-pricing)
+- **Anthropic pricing details:** [Cloud platform pricing](/docs/en/about-claude/pricing#cloud-platform-pricing)

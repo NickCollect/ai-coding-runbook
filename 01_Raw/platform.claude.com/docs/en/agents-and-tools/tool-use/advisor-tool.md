@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool
-fetched_at: 2026-05-05T19:40:45.752919+00:00
+fetched_at: 2026-05-18T05:02:42.587989+00:00
 fetch_method: mintlify_md
 ---
 
@@ -50,7 +50,7 @@ If you request an invalid pair, the API returns a `400 invalid_request_error` na
 
 ## Platform availability
 
-The advisor tool is available in beta on the Claude API (Anthropic).
+The advisor tool is available in beta on the Claude API and on [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws). It is not currently available on AWS Bedrock, Vertex AI, or Microsoft Foundry.
 
 ## Quick start
 
@@ -342,7 +342,7 @@ The `server_tool_use.input` is always empty. The server constructs the advisor's
 
 ### Result variants
 
-The `advisor_tool_result.content` field is a discriminated union. Which variant you receive depends on the advisor model:
+The `advisor_tool_result.content` field is a discriminated union. For successful calls, the variant depends on the advisor model:
 
 | Variant                   | Fields              | Returned when                                                       |
 | ------------------------- | ------------------- | ------------------------------------------------------------------- |
@@ -518,7 +518,7 @@ tools = [
 ]
 ```
 
-The advisor's prompt on the Nth call is the (N-1)th call's prompt with one more segment appended, so the prefix is stable across calls. With `caching` enabled, each advisor call writes a cache entry; the next call reads up to that point and pays only for the delta. You'll see `cache_read_input_tokens` become nonzero on the second and later `advisor_message` iterations.
+The advisor's prompt on the Nth call is the (N-1)th call's prompt with one more segment appended, so the prefix is stable across calls. With `caching` enabled, each advisor call writes a cache entry; the next call reads up to that point and pays only for the delta. You'll see `cache_read_input_tokens` become non-zero on the second and later `advisor_message` iterations.
 
 **When to enable it:** The cache write costs more than the reads save when the advisor is called two or fewer times per conversation. Caching breaks even at roughly three advisor calls and improves from there. Enable it for long agent loops; keep it off for short tasks.
 
@@ -569,7 +569,7 @@ The executor can search the web, call the advisor, and use your custom tools in 
 | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Batch processing](/docs/en/build-with-claude/batch-processing)         | Supported. `usage.iterations` is reported per item.                                                                                                                                                                                                                                |
 | [Token counting](/docs/en/build-with-claude/token-counting)      | Returns the executor's first-iteration input tokens only. For a rough advisor estimate, call `count_tokens` with `model` set to the advisor model and the same messages.                                                                                                           |
-| [Context editing](/docs/en/build-with-claude/context-editing) | `clear_tool_uses` is not yet fully compatible with advisor tool blocks; full support is planned for a follow-up release. With `clear_thinking`, see the caching warning above.                                                                                                    |
+| [Context editing](/docs/en/build-with-claude/context-editing) | `clear_tool_uses` is not fully compatible with advisor tool blocks. With `clear_thinking`, see the earlier caching warning.                                                                                                    |
 | `pause_turn`                                                     | A dangling advisor call ends the response with `stop_reason: "pause_turn"` and the `server_tool_use` block as the last content block. The advisor executes on resumption. See [Server tools](/docs/en/agents-and-tools/tool-use/server-tools#the-server-side-loop-and-pause-turn). |
 
 ## Best practices
@@ -614,13 +614,21 @@ If you've already retrieved data pointing one way and the advisor points another
 
 #### Trimming advisor output length
 
-Advisor output is the advisor's largest cost driver. To reduce that cost, prepend a single conciseness instruction to the system prompt before any other sentence that mentions the advisor. In internal testing, the following line cut total advisor output tokens by roughly 35 to 45 percent without changing call frequency:
+Advisor output is the advisor's largest cost driver, and `max_tokens` does not bound it. The advisor sees both your system prompt and your user messages as quoted context about the executor's task, so instructions that address the advisor directly are followed much more reliably than third-person descriptions. The most effective placement Anthropic tested is a line in the user message:
 
 ```text
-The advisor should respond in under 100 words and use enumerated steps, not explanations.
+(Advisor: please keep your guidance under 80 words — I need a focused starting point, not a comprehensive plan.)
 ```
 
-Pair this with the timing block above for the strongest cost-versus-quality tradeoff.
+This line can be prefixed programmatically by your agent framework before sending the request. The limit is a soft constraint; the advisor will occasionally exceed it, so ask for roughly 80 percent of your true ceiling.
+
+<Note>
+  In Anthropic's testing this line also increased how often the executor
+  consults the advisor, but the net effect was still lower total cost
+  (more consults, each shorter).
+</Note>
+
+Pair this approach with the timing guidance in [Suggested system prompt for coding tasks](#suggested-system-prompt-for-coding-tasks) for the strongest cost-versus-quality tradeoff.
 
 ### Pairing with effort settings
 
@@ -636,4 +644,4 @@ For coding tasks, pairing a Sonnet executor at medium [effort](/docs/en/build-wi
 - **Advisor output does not stream.** Expect a pause in the stream while the sub-inference runs.
 - **No built-in conversation-level cap on advisor calls.** Track and cap them client-side.
 - **`max_tokens` applies to executor output only.** It does not bound advisor tokens.
-- **Anthropic Priority Tier** is honored per model. Priority Tier on the executor model does not extend to the advisor; you need Priority Tier on the advisor model specifically.
+- **[Priority Tier](/docs/en/api/service-tiers)** is honored for each model. Priority Tier on the executor model does not extend to the advisor; you need Priority Tier on the advisor model specifically.

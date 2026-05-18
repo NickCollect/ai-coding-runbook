@@ -1,12 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai
-fetched_at: 2026-05-11T04:55:24.365434+00:00
+fetched_at: 2026-05-18T05:02:43.247430+00:00
 fetch_method: mintlify_md
 ---
 
 # Claude on Vertex AI
 
-Anthropic's Claude models are now generally available through [Vertex AI](https://cloud.google.com/vertex-ai).
+Anthropic's Claude models are available through [Vertex AI](https://cloud.google.com/vertex-ai).
 
 ---
 
@@ -17,7 +17,7 @@ The Vertex API for accessing Claude is nearly-identical to the [Messages API](/d
 
 Vertex is also supported by Anthropic's official [client SDKs](/docs/en/api/client-sdks). This guide walks you through making a request to Claude on Vertex AI using one of Anthropic's client SDKs.
 
-Note that this guide assumes you already have a GCP project that is able to use Vertex AI. See [using the Claude 3 models from Anthropic](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) for more information on the setup required, as well as a full walkthrough.
+Note that this guide assumes you already have a GCP project that is able to use Vertex AI. See [Anthropic Claude models on Vertex AI](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) for more information on the setup required and a full walkthrough.
 
 ## Install an SDK for accessing Vertex AI
 
@@ -51,14 +51,14 @@ go get github.com/anthropics/anthropic-sdk-go
 <Tab title="Java">
 <CodeGroup>
 ```groovy Gradle
-implementation("com.anthropic:anthropic-java-vertex:2.30.0")
+implementation("com.anthropic:anthropic-java-vertex:2.32.0")
 ```
 
 ```xml Maven
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-vertex</artifactId>
-    <version>2.30.0</version>
+    <version>2.32.0</version>
 </dependency>
 ```
 
@@ -111,9 +111,11 @@ gem "googleauth"
 
 ### Model availability
 
-Note that Anthropic model availability varies by region. Search for "Claude" in the [Vertex AI Model Garden](https://cloud.google.com/model-garden) or go to [Use Claude 3](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) for the latest information.
+Note that Anthropic model availability varies by region. Search for "Claude" in the [Vertex AI Model Garden](https://cloud.google.com/model-garden) or go to [Anthropic Claude models](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) for the latest information.
 
 #### API model IDs
+
+Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](/docs/en/about-claude/model-deprecations); a "Retiring" annotation gives the platform's announced retirement date. The dates in the following table are the **Vertex AI** schedule, which Google Cloud sets independently. A model's lifecycle status and dates here can differ from the Anthropic-operated schedule on the Model deprecations page.
 
 | Model                          | Vertex AI API model ID |
 | ------------------------------ | ------------------------ |
@@ -121,13 +123,13 @@ Note that Anthropic model availability varies by region. Search for "Claude" in 
 | Claude Opus 4.6                  | claude-opus-4-6 |
 | Claude Sonnet 4.6              | claude-sonnet-4-6 |
 | Claude Sonnet 4.5              | claude-sonnet-4-5@20250929 |
-| Claude Sonnet 4 <Tooltip tooltipContent="Deprecated as of April 14, 2026. Retiring September 14, 2026.">⚠️</Tooltip> | claude-sonnet-4@20250514 |
-| Claude Sonnet 3.7 <Tooltip tooltipContent="Retired as of February 19, 2026.">⚠️</Tooltip> | claude-3-7-sonnet@20250219 |
+| Claude Sonnet 4 <br /><small>Deprecated. Retiring September 14, 2026.</small> | claude-sonnet-4@20250514 |
+| Claude Sonnet 3.7 <br /><small>Retired May 11, 2026.</small> | claude-3-7-sonnet@20250219 |
 | Claude Opus 4.5                | claude-opus-4-5@20251101 |
 | Claude Opus 4.1                | claude-opus-4-1@20250805 |
-| Claude Opus 4 <Tooltip tooltipContent="Deprecated as of April 14, 2026. Retiring September 14, 2026.">⚠️</Tooltip> | claude-opus-4@20250514   |
+| Claude Opus 4 <br /><small>Deprecated. Retiring September 14, 2026.</small> | claude-opus-4@20250514   |
 | Claude Haiku 4.5               | claude-haiku-4-5@20251001 |
-| Claude Haiku 3.5 <Tooltip tooltipContent="Retired as of February 19, 2026.">⚠️</Tooltip> | claude-3-5-haiku@20241022 |
+| Claude Haiku 3.5 <br /><small>Deprecated. Retiring July 5, 2026.</small> | claude-3-5-haiku@20241022 |
 
 ### Making requests
 
@@ -153,12 +155,12 @@ The following examples show how to generate text from Claude on Vertex AI:
       "role": "user",
       "content": "Hey Claude!"
     }],
-    "max_tokens": 100,
+    "max_tokens": 100
   }'
   ```
 
   ```bash CLI
-  # The ant CLI does not yet support Vertex AI.
+  # The ant CLI does not support Vertex AI.
   ```
 
   
@@ -343,7 +345,7 @@ The following examples show how to generate text from Claude on Vertex AI:
 
 See the [client SDKs](/docs/en/api/client-sdks) and the official [Vertex AI docs](https://cloud.google.com/vertex-ai/docs) for more details.
 
-Claude is also available through [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock) and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry).
+Claude is also available through [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry).
 
 ## Activity logging
 
@@ -408,7 +410,7 @@ Set the `region` parameter to `"global"` when initializing the client:
 <CodeGroup>
 
 ```bash CLI
-# The ant CLI does not yet support Vertex AI.
+# The ant CLI does not support Vertex AI.
 ```
 
 ```python Python nocheck
@@ -512,20 +514,29 @@ import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.vertex.backends.VertexBackend;
 
-// Uses default Google Cloud credentials
-AnthropicClient client = AnthropicOkHttpClient.builder()
-  .backend(VertexBackend.fromEnv())
-  .build();
+void main() {
+    // Uses default Google Cloud credentials
+    AnthropicClient client = AnthropicOkHttpClient.builder()
+        .backend(
+            VertexBackend.builder()
+                .region("global")
+                .project("MY_PROJECT_ID")
+                .build()
+        )
+        .build();
 
-var message = client
-  .messages()
-  .create(
-    MessageCreateParams.builder()
-      .model("claude-opus-4-7")
-      .maxTokens(100)
-      .addUserMessage("Hey Claude!")
-      .build()
-  );
+    var message = client
+        .messages()
+        .create(
+            MessageCreateParams.builder()
+                .model("claude-opus-4-7")
+                .maxTokens(100)
+                .addUserMessage("Hey Claude!")
+                .build()
+        );
+
+    IO.println(message);
+}
 ```
 
 ```php PHP nocheck
@@ -572,6 +583,10 @@ puts message.content.first.text
 Set the `region` parameter to a multi-region identifier: `"us"` for the United States or `"eu"` for the European Union. The SDK routes requests to the corresponding multi-region endpoint (`https://aiplatform.us.rep.googleapis.com` or `https://aiplatform.eu.rep.googleapis.com`), which dynamically balances traffic across regions within that geography.
 
 <CodeGroup>
+
+```bash CLI
+# The ant CLI does not support Vertex AI.
+```
 
 ```python Python nocheck
 from anthropic import AnthropicVertex
@@ -744,7 +759,7 @@ Specify a specific region like `"us-east1"` or `"europe-west1"`:
 <CodeGroup>
 
 ```bash CLI
-# The ant CLI does not yet support Vertex AI.
+# The ant CLI does not support Vertex AI.
 ```
 
 ```python Python nocheck
@@ -912,12 +927,12 @@ puts message.content.first.text
 </CodeGroup>
 
 <Note>
-Claude Mythos Preview is a research preview available to invited customers on Google Vertex AI.  For more information, see [Project Glasswing](https://anthropic.com/glasswing).
+Claude Mythos Preview is a research preview available to invited customers on Vertex AI. For more information, see [Project Glasswing](https://anthropic.com/glasswing).
 </Note>
 
-### Additional resources
+## Additional resources
 
-- **Google Vertex AI pricing:** [cloud.google.com/vertex-ai/generative-ai/pricing](https://cloud.google.com/vertex-ai/generative-ai/pricing)
+- **Vertex AI pricing:** [cloud.google.com/vertex-ai/generative-ai/pricing](https://cloud.google.com/vertex-ai/generative-ai/pricing)
 - **Claude models documentation:** [Claude on Vertex AI](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/claude)
 - **Google blog post:** [Global endpoint for Claude models](https://cloud.google.com/blog/products/ai-machine-learning/global-endpoint-for-claude-models-generally-available-on-vertex-ai)
-- **Anthropic pricing details:** [Pricing documentation](/docs/en/about-claude/pricing#third-party-platform-pricing)
+- **Anthropic pricing details:** [Cloud platform pricing](/docs/en/about-claude/pricing#cloud-platform-pricing)

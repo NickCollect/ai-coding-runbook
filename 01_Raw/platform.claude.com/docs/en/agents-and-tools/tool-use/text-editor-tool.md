@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool
-fetched_at: 2026-05-05T19:40:45.832641+00:00
+fetched_at: 2026-05-18T05:02:42.654692+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1231,7 +1231,6 @@ In addition to the base tokens, the following additional input tokens are needed
 | Tool | Additional input tokens |
 | ----------------------------------------- | --------------------------------------- |
 | `text_editor_20250429` (Claude 4.x) | 700 tokens |
-| `text_editor_20250124` (Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations))) | 700 tokens |
 
 For more detailed information about tool pricing, see [Tool use pricing](/docs/en/agents-and-tools/tool-use/overview#pricing).
 

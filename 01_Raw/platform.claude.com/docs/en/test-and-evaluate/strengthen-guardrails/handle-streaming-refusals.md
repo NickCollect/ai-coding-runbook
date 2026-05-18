@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals
-fetched_at: 2026-05-11T04:55:23.155067+00:00
+fetched_at: 2026-05-18T05:02:42.187898+00:00
 fetch_method: mintlify_md
 ---
 
@@ -63,7 +63,7 @@ response=$(curl -N https://api.anthropic.com/v1/messages \
   --data '{
     "model": "claude-opus-4-7",
     "messages": [{"role": "user", "content": "Hello"}],
-    "max_tokens": 256,
+    "max_tokens": 1024,
     "stream": true
   }')
 
@@ -96,7 +96,7 @@ try:
     ) as stream:
         for event in stream:
             # Check for refusal in message delta
-            if hasattr(event, "type") and event.type == "message_delta":
+            if event.type == "message_delta":
                 if event.delta.stop_reason == "refusal":
                     reset_conversation()
                     break
@@ -152,7 +152,7 @@ class Program
 
         var parameters = new MessageCreateParams
         {
-            Model = Model.ClaudeSonnet4_6,
+            Model = Model.ClaudeOpus4_7,
             MaxTokens = 1024,
             Messages = [new() { Role = Role.User, Content = "Hello" }]
         };
@@ -204,7 +204,7 @@ func main() {
 	client := anthropic.NewClient()
 
 	stream := client.Messages.NewStreaming(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.Model("claude-opus-4-7"),
+		Model:     anthropic.ModelClaudeOpus4_7,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello")),
@@ -229,7 +229,7 @@ streamLoop:
 }
 ```
 
-```java Java hidelines={1..5,9..12,14..15,37..38,-1}
+```java Java hidelines={1..5,9..10}
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -241,37 +241,35 @@ import com.anthropic.models.messages.StopReason;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RefusalHandling {
-    private static List<MessageParam> messages = new ArrayList<>();
+List<MessageParam> messages = new ArrayList<>();
 
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+void main() {
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_SONNET_4_6)
-            .maxTokens(1024L)
-            .addUserMessage("Hello")
-            .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_4_7)
+        .maxTokens(1024L)
+        .addUserMessage("Hello")
+        .build();
 
-        try (StreamResponse<RawMessageStreamEvent> stream = client.messages().createStreaming(params)) {
-            stream.stream().forEach(event -> {
-                event.messageDelta().ifPresent(deltaEvent -> {
-                    deltaEvent.delta().stopReason().ifPresent(stopReason -> {
-                        if (stopReason.equals(StopReason.REFUSAL)) {
-                            resetConversation();
-                        }
-                    });
+    try (StreamResponse<RawMessageStreamEvent> stream = client.messages().createStreaming(params)) {
+        stream.stream().forEach(event -> {
+            event.messageDelta().ifPresent(deltaEvent -> {
+                deltaEvent.delta().stopReason().ifPresent(stopReason -> {
+                    if (stopReason.equals(StopReason.REFUSAL)) {
+                        resetConversation();
+                    }
                 });
             });
-        } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
-        }
+        });
+    } catch (Exception e) {
+        System.err.println("Error: " + e.getMessage());
     }
+}
 
-    private static void resetConversation() {
-        messages.clear();
-        System.out.println("Conversation reset due to content policy violation");
-    }
+void resetConversation() {
+    messages.clear();
+    IO.println("Conversation reset due to refusal");
 }
 ```
 

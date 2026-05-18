@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/embeddings
-fetched_at: 2026-05-05T19:40:45.412464+00:00
+fetched_at: 2026-05-18T05:02:42.336935+00:00
 fetch_method: mintlify_md
 ---
 
@@ -201,7 +201,7 @@ retrieved_id = np.argmax(similarities)
 print(documents[retrieved_id])
 ```
 
-Note that `input_type="document"` and `input_type="query"` are used for embedding the document and query, respectively. More specification can be found in the [Voyage Python package section](/docs/en/build-with-claude/embeddings#voyage-python-package).
+Note that `input_type="document"` and `input_type="query"` are used for embedding the document and query, respectively. More specification can be found in [Voyage Python library](/docs/en/build-with-claude/embeddings#voyage-python-library).
 
 The output would be the 5th document, which is indeed the most relevant to the query:
 

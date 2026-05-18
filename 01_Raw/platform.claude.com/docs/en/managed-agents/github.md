@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/github
-fetched_at: 2026-05-04T16:09:04.937158+00:00
+fetched_at: 2026-05-18T05:02:43.632519+00:00
 fetch_method: mintlify_md
 ---
 
@@ -63,7 +63,7 @@ AGENT_ID=$(ant beta:agents create \
   --mcp-server '{type: url, name: github, url: https://api.githubcopilot.com/mcp/}' \
   --tool '{type: agent_toolset_20260401}' \
   --tool '{type: mcp_toolset, mcp_server_name: github}' \
-  --transform id --format yaml)
+  --transform id --raw-output)
 ````
 
   
@@ -274,7 +274,7 @@ JSON
 SESSION_ID=$(ant beta:sessions create \
   --agent "$AGENT_ID" \
   --environment-id "$ENVIRONMENT_ID" \
-  --transform id --format yaml <<'EOF'
+  --transform id --raw-output <<'EOF'
 resources:
   - type: github_repository
     url: https://github.com/org/repo

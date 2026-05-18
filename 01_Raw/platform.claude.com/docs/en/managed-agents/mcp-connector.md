@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/mcp-connector
-fetched_at: 2026-05-05T19:40:46.559680+00:00
+fetched_at: 2026-05-18T05:02:43.356239+00:00
 fetch_method: mintlify_md
 ---
 
@@ -66,7 +66,7 @@ AGENT_ID=$(ant beta:agents create \
   --mcp-server '{type: url, name: github, url: "https://api.githubcopilot.com/mcp/"}' \
   --tool '{type: agent_toolset_20260401}' \
   --tool '{type: mcp_toolset, mcp_server_name: github}' \
-  --transform id --format yaml)
+  --transform id --raw-output)
 ````
 
   
@@ -266,7 +266,7 @@ SESSION_ID=$(ant beta:sessions create \
   --agent "$AGENT_ID" \
   --environment-id "$ENVIRONMENT_ID" \
   --vault-id "$VAULT_ID" \
-  --transform id --format yaml)
+  --transform id --raw-output)
 ````
 
   
