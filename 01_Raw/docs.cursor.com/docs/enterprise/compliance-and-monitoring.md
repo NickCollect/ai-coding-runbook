@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/compliance-and-monitoring
-fetched_at: 2026-05-05T19:55:39.167020+00:00
+fetched_at: 2026-05-18T05:02:44.119988+00:00
 fetch_method: mintlify_md
 ---
 
@@ -19,6 +19,7 @@ We log the following events:
 - **API key management:** Team and user API key creation and revocation
 - **Team settings:** Team-wide and per-user spending limits, admin settings, team name changes, Slack integration settings, and repository mappings
 - **Repository management:** Repository creation, deletion, and settings updates
+- **Cloud Agent environments:** Environment creation, updates, restores, and lifecycle changes
 - **Directory groups:** Directory group creation, updates, deletion, membership changes, and permission modifications
 - **Privacy settings:** Privacy Mode changes at user or team level
 - **Team rules:** Team rule management (including Bugbot rules) for custom workflows

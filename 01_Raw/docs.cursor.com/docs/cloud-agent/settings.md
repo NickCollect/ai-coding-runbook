@@ -1,30 +1,45 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/settings
-fetched_at: 2026-05-05T19:55:38.674506+00:00
+fetched_at: 2026-05-18T05:02:43.987676+00:00
 fetch_method: mintlify_md
 ---
 
-# Cloud Agents Settings
+# Cloud Agents settings
 
-Workspace admins can configure additional settings from the Cloud Agents tab on the dashboard.
+Workspace admins can configure Cloud Agents from the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents).
 
-### Defaults Settings
+## Environment management
+
+The **Environments** view lists the saved environments available to your team. Environments can be scoped to one repo or to a group of repos.
+
+Open an environment to review:
+
+- The repositories it applies to
+- Whether it uses a snapshot or `.cursor/environment.json`
+- The update script that runs before an agent starts
+- Runtime secrets and build secrets
+- Network access settings
+- Version history and setup runs
+
+Use **Update with Agent** when you want Cursor to inspect the current environment and propose a new setup. Use **New Setup Run** when you want Cursor to start setting up the environment fresh. Use **Restore** from version history to make a prior environment version active again.
+
+## Default settings
 
 - **Default model** – the model used when a run does not specify one. Pick any model that supports Max Mode.
 - **Default repository** – when empty, agents ask the user to choose a repo. Supplying a repo here lets users skip that step.
 - **Base branch** – the branch agents fork from when creating pull requests. Leave blank to use the repository’s default branch.
 
-### Network access settings
+## Network access settings
 
-Control which network resources Cloud Agents can reach. Choose from three modes:
+Control which network resources Cloud Agents can reach. User and team settings support three modes:
 
 - **Allow all network access** – no domain restrictions.
 - **Default + allowlist** – the [default domains](https://cursor.com/docs/agent/tools/terminal.md#default-network-allowlist) plus any domains you add.
 - **Allowlist only** – only domains you explicitly add.
 
-Users and team admins can both configure this setting. User settings take precedence over team defaults unless the admin has locked the setting. See [Network Access](https://cursor.com/docs/cloud-agent/security-network.md) for full details.
+Users, team admins, and environment owners can configure network access. Environment-level settings can inherit user or team policy, add an environment allowlist, or define their own access mode. See [Network Access](https://cursor.com/docs/cloud-agent/security-network.md) for full details.
 
-### Security Settings
+## Security settings
 
 All security options require admin privileges.
 
@@ -32,7 +47,7 @@ All security options require admin privileges.
 - **Display agent summary in external channels** – extends the previous toggle to Slack or any external channel you've connected.
 - **Team follow-ups** – controls whether team members can send follow-up messages to cloud agents created by other users on the team. See [team follow-ups](https://cursor.com/docs/cloud-agent/settings.md#team-follow-ups) below.
 
-### Team feature settings
+## Team feature settings
 
 Team admins can enable or disable these features for their team:
 

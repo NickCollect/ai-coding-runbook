@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/automations
-fetched_at: 2026-05-05T19:55:38.117954+00:00
+fetched_at: 2026-05-18T05:02:43.748519+00:00
 fetch_method: mintlify_md
 ---
 
@@ -161,7 +161,9 @@ Automations inherit environment configuration from your [Cloud Agents dashboard]
 - **Enabled**: The agent installs dependencies before running. Use this when the automation needs to build, test, or execute code.
 - **Disabled**: The agent skips dependency installation. Use this when it only needs to read or review code.
 
-Configure environment settings and secrets in the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents). The automation uses the same settings for the selected repository.
+Configure environment settings and secrets in the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents). The automation uses the same settings for the selected repository or multi-repo environment.
+
+Use a multi-repo environment when an automation needs to investigate or change code across repos. For example, a Slack-triggered automation can read a report from a public channel, inspect the selected repo group, and open pull requests in the repos it changes.
 
 ### Permissions
 

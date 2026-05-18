@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/identity-and-access-management
-fetched_at: 2026-05-05T19:55:39.426931+00:00
+fetched_at: 2026-05-18T05:02:44.179747+00:00
 fetch_method: mintlify_md
 ---
 
@@ -75,11 +75,20 @@ Control which extensions users can install in Cursor. Extensions can access your
 
 **How it works:**
 
-The `extensions.allowed` Cursor setting controls which extensions can be installed. This setting accepts a JSON object where keys are publisher names and values are booleans indicating whether extensions from that publisher are allowed.
+The `extensions.allowed` Cursor setting controls which extensions can be installed. This setting accepts a JSON object where keys are publisher names or full extension IDs, and values are booleans indicating whether they are allowed.
 
-For example, setting `extensions.allowed` to `{"anysphere": true, "github": true}` allows extensions from Anysphere and GitHub publishers, while setting it to `{"anysphere": false}` blocks Anysphere extensions.
+> **Important:** `extensions.allowed` uses an allowlist model. As soon as you add any entries, only explicitly allowed entries are permitted, and everything else is blocked. There is no implicit "allow all" fallback. For example, setting `extensions.allowed` to `{"anysphere": false}` does not only block Anysphere extensions; it blocks every other publisher too, because nothing else is on the allowlist.
 
-You can be more specific by including the full extension ID:
+To block specific extensions while keeping everything else allowed, use the `"*": true` wildcard alongside the entries you want to deny. The wildcard is the least specific match, so publisher and extension ID entries override it:
+
+```json
+{
+  "*": true,
+  "untrusted-publisher": false
+}
+```
+
+To restrict installs to an approved set of publishers and extensions, omit the wildcard and list only what you trust. You can include full extension IDs, pin to specific versions, or pin to a release channel:
 
 ```json
 {
@@ -94,7 +103,9 @@ You can be more specific by including the full extension ID:
 
 **Admin Portal Configuration:**
 
-Team admins can configure allowed extensions through the [team dashboard](https://cursor.com/docs/account/teams/dashboard.md) in the Security & Identity section. The configuration is applied automatically to all team members' Cursor clients. Leave the field empty to allow all extensions.
+Team admins can configure allowed extensions through the [team dashboard](https://cursor.com/docs/account/teams/dashboard.md) in the Security & Identity section. The configuration is applied automatically to all team members' Cursor clients. Leave the field empty to stop pushing a value to clients.
+
+> **Resetting clients to "allow all":** Clearing the admin portal field stops pushing a new value, but it does not remove the policy that clients already applied locally. Users keep enforcing the last value they received. To reset everyone back to allowing all extensions, deploy `{"*": true}` first, wait for clients to pick it up, and then clear the field if you no longer want to manage the setting centrally.
 
 > **Note:** Admin portal configuration for this feature requires Cursor client version 2.1 or later. Users on older versions will not have extension restrictions applied.
 

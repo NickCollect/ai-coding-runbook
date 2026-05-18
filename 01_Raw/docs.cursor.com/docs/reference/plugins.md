@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/reference/plugins
-fetched_at: 2026-05-05T19:55:43.505729+00:00
+fetched_at: 2026-05-18T05:02:45.552509+00:00
 fetch_method: mintlify_md
 ---
 
@@ -226,7 +226,7 @@ Steps to deploy to staging:
 
 ## Hooks format
 
-Hooks are automation scripts triggered by agent events. Define them in `hooks/hooks.json`:
+Hooks are automation scripts triggered by agent, Tab, or workspace events. Define them in `hooks/hooks.json`:
 
 ```json title="hooks/hooks.json"
 {
@@ -255,6 +255,7 @@ Hooks are automation scripts triggered by agent events. Define them in `hooks/ho
 
 - **Agent hooks**: `sessionStart`, `sessionEnd`, `preToolUse`, `postToolUse`, `postToolUseFailure`, `subagentStart`, `subagentStop`, `beforeShellExecution`, `afterShellExecution`, `beforeMCPExecution`, `afterMCPExecution`, `beforeReadFile`, `afterFileEdit`, `beforeSubmitPrompt`, `preCompact`, `stop`, `afterAgentResponse`, `afterAgentThought`
 - **Tab hooks**: `beforeTabFileRead`, `afterTabFileEdit`
+- **App lifecycle hooks**: `workspaceOpen`
 
 For full documentation, see [Hooks](https://cursor.com/docs/hooks.md).
 

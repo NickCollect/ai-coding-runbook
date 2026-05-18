@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/security-network
-fetched_at: 2026-05-05T19:55:38.498274+00:00
+fetched_at: 2026-05-18T05:02:43.872251+00:00
 fetch_method: mintlify_md
 ---
 
@@ -31,14 +31,14 @@ If your repository enforces branch protection rules that require signed commits,
 
 1. Grant read-write privileges to our GitHub app for repos you want to edit. We use this to clone the repo and make changes.
 2. Your code runs inside our AWS infrastructure in isolated VMs and is stored on VM disks while the agent is accessible.
-3. The agent has internet access by default. You can configure [network egress controls](https://cursor.com/docs/cloud-agent/security-network.md#network-access) to restrict the domains the agent can access.
+3. The agent has internet access by default. You can configure [network egress controls](https://cursor.com/docs/cloud-agent/security-network.md#network-access) for users, teams, and saved environments to restrict the domains the agent can access.
 4. The agent auto-runs all terminal commands, letting it iterate on tests. This differs from the foreground agent, which requires user approval for every command. Auto-running introduces data exfiltration risk: attackers could execute prompt injection attacks, tricking the agent to upload code to malicious websites. See [OpenAI's explanation about risks of prompt injection for cloud agents](https://platform.openai.com/docs/codex/agent-network#risks-of-agent-internet-access).
 5. If privacy mode is disabled, we collect prompts and dev environments to improve the product.
 6. If you disable privacy mode when starting a cloud agent, then enable it during the agent's run, the agent continues with privacy mode disabled until it completes.
 
 ## Network access
 
-Control which network resources your Cloud Agents can reach. These settings are available on the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents) for individual users and team admins.
+Control which network resources your Cloud Agents can reach. These settings are available on the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents) for individual users, saved environments, and team admins.
 
 ### Access modes
 
@@ -66,14 +66,30 @@ Individual users can configure their network access mode from the [Cloud Agents 
 
 When you select a mode that includes an allowlist (**Default + allowlist** or **Allowlist only**), an allowlist configuration section appears below the setting where you can add your custom domains.
 
+### Environment-level settings
+
+Saved environments can have their own network access mode and allowlist. Use environment-level settings when one repo or repo group needs stricter egress than the rest of your team.
+
+For example, you can keep a production-adjacent environment on **Allowlist only** while leaving a less sensitive environment on **Default + allowlist**. Agents that use the stricter environment inherit those restrictions.
+
+Environment-level settings include two inheritance options:
+
+| Mode                                         | Behavior                                                                                  |
+| :------------------------------------------- | :---------------------------------------------------------------------------------------- |
+| **Inherit settings**                         | Uses the applicable user or team network access setting.                                  |
+| **Inherit settings + environment allowlist** | Uses the applicable user or team setting and adds domains from the environment allowlist. |
+
+You can also set an environment directly to **Allow all network access**, **Default + allowlist**, or **Allowlist only**.
+
 ### Team-level settings
 
 Team admins can set a default network access mode for the entire team from the same dashboard. The team-level allowlist is the same allowlist that admins configure for the [sandbox default network allowlist](https://cursor.com/docs/agent/tools/terminal.md#default-network-allowlist). There is no separate allowlist to manage; one allowlist controls both Cloud Agent network access and the sandbox defaults.
 
 When a team-level setting exists:
 
-- If a user has configured their own setting, the **user setting takes precedence**.
-- If a user has not configured a setting, the **team default applies**.
+- If an environment defines its own mode, the **environment setting applies** to agents that use that environment.
+- If an environment inherits settings and a user has configured their own setting, the **user setting takes precedence**.
+- If neither the environment nor the user has configured a setting, the **team default applies**.
 
 ### Locking the setting (Enterprise)
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/api/endpoints
-fetched_at: 2026-05-05T19:55:37.867143+00:00
+fetched_at: 2026-05-18T05:02:43.760715+00:00
 fetch_method: mintlify_md
 ---
 
@@ -56,9 +56,21 @@ An explicit model ID returned by `GET /v1/models` (for example, `claude-4-sonnet
 
 Per-model parameters to apply to the run, such as reasoning effort or max mode. Each item has an `id` and `value`. Use only parameters supported by the selected model.
 
-`repos` array (required)
+`env` object (optional)
 
-Repository configuration. v1 currently supports one repository.
+Execution environment target. Use a named `cloud` environment, or route to a self-hosted `pool` or `machine`. Mutually exclusive with explicit `repos` when selecting a named Cursor-hosted environment.
+
+`env.type` string (required if `env` provided)
+
+Execution environment type. `cloud` uses Cursor-hosted VMs; `pool` and `machine` route to self-hosted workers.
+
+`env.name` string (optional)
+
+Named Cursor-hosted environment, self-hosted pool, or self-hosted machine name.
+
+`repos` array (optional)
+
+Repository configuration. Mutually exclusive with a named cloud environment. Omit both `repos` and `env` to start a no-repo agent. Maximum 20 repositories.
 
 `repos[0].url` string (required unless `prUrl` is provided)
 

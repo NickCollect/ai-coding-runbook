@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/sdk/typescript
-fetched_at: 2026-05-11T04:55:38.518151+00:00
+fetched_at: 2026-05-18T05:02:45.543255+00:00
 fetch_method: mintlify_md
 ---
 
@@ -132,7 +132,9 @@ These values are encrypted at rest, injected into the cloud agent's shell, and d
 
 ### Model parameters
 
-Use `model.params` to pass per-model options such as reasoning effort or max mode. Parameter ids and values vary by model. Use [`Cursor.models.list()`](https://cursor.com/docs/sdk/typescript.md#cursormodelslist) to discover supported parameters and preset variants for your account.
+Use `model.params` to pass per-model options such as reasoning effort. Parameter ids and values vary by model. Use [`Cursor.models.list()`](https://cursor.com/docs/sdk/typescript.md#cursormodelslist) to discover supported parameters and preset variants for your account.
+
+When a selected model requires [Max Mode](https://cursor.com/help/ai-features/max-mode.md), Cursor enables it automatically for the SDK request.
 
 ```typescript
 const agent = await Agent.create({
@@ -825,7 +827,7 @@ interface ModelVariant {
 }
 ```
 
-Use `Cursor.models.list()` to discover valid `model` ids and per-model `params` before calling `Agent.create()` or `agent.send()`. Parameters are model-specific. Common examples include reasoning effort and max mode.
+Use `Cursor.models.list()` to discover valid `model` ids and per-model `params` before calling `Agent.create()` or `agent.send()`. Parameters are model-specific. Common examples include reasoning effort.
 
 ```typescript
 const models = await Cursor.models.list();
@@ -1061,13 +1063,13 @@ await agent[Symbol.asyncDispose]();
 
 ### CloudOptions
 
-| Property              | Type                                                                                                        | Default             | Description                                                                                                                                                       |
-| :-------------------- | :---------------------------------------------------------------------------------------------------------- | :------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `env`                 | `{ type: "cloud"; name?: string } \| { type: "pool"; name?: string } \| { type: "machine"; name?: string }` | `{ type: "cloud" }` | Execution environment. `cloud` uses Cursor-hosted VMs; `pool` and `machine` target a [self-hosted pool](https://cursor.com/docs/cloud-agent/self-hosted-pool.md). |
-| `repos`               | `Array<{ url: string; startingRef?: string; prUrl?: string }>`                                              |                     | Repositories to clone into the VM. Pass `prUrl` to attach the agent to an existing PR.                                                                            |
-| `workOnCurrentBranch` | `boolean`                                                                                                   | `false`             | Push commits to the existing branch instead of a new one.                                                                                                         |
-| `autoCreatePR`        | `boolean`                                                                                                   | `false`             | Open a PR when the run finishes.                                                                                                                                  |
-| `skipReviewerRequest` | `boolean`                                                                                                   | `false`             | Skip requesting the calling user as a reviewer on the PR.                                                                                                         |
+| Property              | Type                                                                                                        | Default             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| :-------------------- | :---------------------------------------------------------------------------------------------------------- | :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `env`                 | `{ type: "cloud"; name?: string } \| { type: "pool"; name?: string } \| { type: "machine"; name?: string }` | `{ type: "cloud" }` | Execution environment target. `cloud` uses Cursor-hosted VMs; set `name` to use a saved Cursor-hosted environment. `pool` routes to a [Self-Hosted Pool](https://cursor.com/docs/cloud-agent/self-hosted-pool.md); `machine` routes to a specific [My Machines](https://cursor.com/docs/cloud-agent/my-machines.md) worker. Omit `repos` and leave `env` at the default for a no-repo agent with an empty workspace. Named Cursor-hosted environments and explicit `repos` are mutually exclusive. |
+| `repos`               | `Array<{ url: string; startingRef?: string; prUrl?: string }>`                                              |                     | Repositories to clone into the VM. Pass one entry for a single-repo agent, or up to 20 for a multi-repo agent. Mutually exclusive with a named `env.name` for Cursor-hosted environments. Pass `prUrl` to attach the agent to an existing PR.                                                                                                                                                                                                                                                      |
+| `workOnCurrentBranch` | `boolean`                                                                                                   | `false`             | Push commits to the existing branch instead of a new one.                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `autoCreatePR`        | `boolean`                                                                                                   | `false`             | Open a PR when the run finishes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `skipReviewerRequest` | `boolean`                                                                                                   | `false`             | Skip requesting the calling user as a reviewer on the PR.                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 
 ### AgentDefinition
 
@@ -1194,14 +1196,15 @@ class CursorAgentError extends Error {
 }
 ```
 
-| Error                          | When                                                                   |
-| :----------------------------- | :--------------------------------------------------------------------- |
-| `AuthenticationError`          | Invalid API key, not logged in, insufficient permissions.              |
-| `RateLimitError`               | Too many requests or usage limits exceeded.                            |
-| `ConfigurationError`           | Invalid model, bad request parameters.                                 |
-| `IntegrationNotConnectedError` | Creating a cloud agent for a repo whose SCM provider is not connected. |
-| `NetworkError`                 | Service unavailable, timeout.                                          |
-| `UnknownAgentError`            | Catch-all for unclassified server or runtime errors.                   |
+| Error                          | When                                                                                                                    |
+| :----------------------------- | :---------------------------------------------------------------------------------------------------------------------- |
+| `AuthenticationError`          | Invalid API key, not logged in, insufficient permissions.                                                               |
+| `RateLimitError`               | Too many requests or usage limits exceeded.                                                                             |
+| `ConfigurationError`           | Invalid model, bad request parameters.                                                                                  |
+| `AgentBusyError`               | Sending a follow-up while the agent already has a run in `CREATING` or `RUNNING` state (HTTP `409`, code `agent_busy`). |
+| `IntegrationNotConnectedError` | Creating a cloud agent for a repo whose SCM provider is not connected.                                                  |
+| `NetworkError`                 | Service unavailable, timeout.                                                                                           |
+| `UnknownAgentError`            | Catch-all for unclassified server or runtime errors.                                                                    |
 
 ### IntegrationNotConnectedError
 
@@ -1213,6 +1216,45 @@ class IntegrationNotConnectedError extends ConfigurationError {
 ```
 
 Use `helpUrl` to point the user at the right reconnect flow. New providers will be added without an SDK release.
+
+### AgentBusyError
+
+Cloud agents allow only one active run at a time. `AgentBusyError` is thrown when you call `agent.send()` (or otherwise create a run) while another run on the same agent is still `CREATING` or `RUNNING`.
+
+```typescript
+class AgentBusyError extends CursorAgentError {
+  readonly code: "agent_busy";
+  readonly status: 409;
+  readonly isRetryable: false;
+}
+```
+
+`isRetryable` is `false`. Retrying immediately will keep failing until the active run reaches a terminal status or you cancel it. Other `409` responses, such as `agent_archived`, throw `ConfigurationError` instead.
+
+Wait for the active run to finish, cancel it with `run.cancel()`, or poll `Agent.listRuns()` before sending again:
+
+```typescript
+import { Agent, AgentBusyError } from "@cursor/sdk";
+
+const agent = await Agent.resume("bc-00000000-0000-0000-0000-000000000001");
+
+try {
+  await agent.send({ text: "Also add tests for the auth middleware." });
+} catch (err) {
+  if (err instanceof AgentBusyError) {
+    const runs = await Agent.listRuns(agent.agentId, { runtime: "cloud", limit: 1 });
+    const active = runs.items[0];
+    if (active?.status === "running") {
+      await active.cancel();
+    }
+    await agent.send({ text: "Also add tests for the auth middleware." });
+    return;
+  }
+  throw err;
+}
+```
+
+Local agents do not return `agent_busy`. Use `send({ local: { force: true } })` to expire a stuck local run before starting a new one.
 
 ### UnsupportedRunOperationError
 

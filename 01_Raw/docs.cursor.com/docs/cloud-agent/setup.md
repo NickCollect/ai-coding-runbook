@@ -1,41 +1,49 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/setup
-fetched_at: 2026-05-11T04:55:36.686076+00:00
+fetched_at: 2026-05-18T05:02:44.017756+00:00
 fetch_method: mintlify_md
 ---
 
 # Setup
 
-Cloud agents run on an isolated Ubuntu machine. We recommend configuring this environment so the agent has access to the same tools a human developer would use.
+Cloud agents run on isolated Ubuntu machines. Configure the environment so the agent has the same repos, tools, dependencies, secrets, and network access a developer would use.
 
-Go to [cursor.com/onboard](https://cursor.com/onboard) to configure your environment.
+Create a new environment in your [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#environments).
 
-## Environment Options
+## Environment options
 
 There are two main ways to configure the environment for your cloud agent:
 
-1. Let Cursor's agent set up its own environment at [cursor.com/onboard](https://cursor.com/onboard). After the agent is done, you will have the option to create a snapshot of its virtual machine that can be reused for future agents.
+1. Let Cursor's agent set up its own environment from the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#environments). After the agent is done, you will have the option to create a snapshot of its virtual machine that can be reused for future agents.
 2. Manually configure the environment with a Dockerfile. If you choose this option, you can specify the Dockerfile in a `.cursor/environment.json` file.
 
 Both options generate an environment, and also allow you to specify an update command that will be run before the agent starts to ensure that its dependencies are up to date (e.g. `npm install`, `pip install`, etc.).
 
+### Multi-repo environments
+
+Use a multi-repo environment when an agent needs to work across more than one repository. Select multiple repositories when you create the environment. Cursor clones each selected repo into the agent machine and reuses the environment for future agent runs and automations that use the same repo group.
+
+Multi-repo environments are useful when your frontend, backend, infrastructure, or shared libraries live in separate repos. The agent can inspect the full workspace, make coordinated changes, run tests across repos, and open pull requests in the repos it changes.
+
+You can see which environment is active, along with all past active versions, by visiting the environment's configuration page on the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#environments).
+
 ### Environment resolution order
 
-Cursor resolves environment configuration in this order, using the first match:
+Cursor resolves environment configuration by repository or repo group, using the first match:
 
 1. `.cursor/environment.json` in the repository
-2. Personal environment configuration
-3. Team environment configuration
+2. A personal saved environment
+3. A team saved environment
 
 This gives you predictable defaults at the team level while still letting individual users override with a personal environment when a repo-level `.cursor/environment.json` is not present. User overrides are also useful to allow testing out a new environment configuration before rolling it out to the entire team.
 
 ### Agent-driven setup (recommended)
 
-You will be asked to connect your GitHub or GitLab account and select the repository you want to work on.
+You will be asked to connect your GitHub or GitLab account and select one or more repositories.
 
 Then, you provide Cursor with the environment variables and secrets it will need to install dependencies and run the code.
 
-Finally, after Cursor has installed the dependencies and verified the code is working, you can save a snapshot of its virtual machine to be reused for future agents.
+Finally, after Cursor has installed dependencies and verified the code is working, you can save a snapshot of its virtual machine to be reused for future agents.
 
 ### Manual setup with Dockerfile (advanced)
 
@@ -44,6 +52,7 @@ For advanced cases, configure the environment with a Dockerfile:
 - Create a Dockerfile to install system-level dependencies, use specific compiler versions, install debuggers, or switch the base OS image
 - Do not `COPY` the full project; Cursor manages the workspace and checks out the correct commit
 - Edit `.cursor/environment.json` directly to configure runtime settings
+- Use build secrets for private package registries or build-time credentials
 
 Here's an example `.cursor/environment.json` referencing a `.cursor/Dockerfile` (relative path) and a `custom_script.sh` install script:
 
@@ -60,6 +69,14 @@ Here's an example `.cursor/environment.json` referencing a `.cursor/Dockerfile` 
 If your repo needs Docker or Tailscale, see [Running Docker](https://cursor.com/docs/cloud-agent/setup.md#running-docker) and [Running Tailscale](https://cursor.com/docs/cloud-agent/setup.md#running-tailscale) below.
 
 You configure the environment with a Dockerfile; you do not get direct access to the remote machine.
+
+Dockerfile builds use layer caching. When you change a Dockerfile, Cursor rebuilds the changed layers instead of rebuilding every layer from scratch.
+
+### Cursor-configured Dockerfiles (private beta)
+
+For teams that do not want to write a Dockerfile from scratch, Cursor can configure one for you. During setup, Cursor inspects your repos, identifies tools and dependencies, and produces a Dockerfile-based environment configuration you can edit and version.
+
+This flow is in private beta for Enterprise teams. To request access, contact your Cursor account representative or email [hi@cursor.com](mailto:hi@cursor.com) from your team admin account.
 
 ### Computer Use Support for Dockerfile Repos
 
@@ -88,6 +105,22 @@ After `update` completes, if it took more than a few seconds to run, Cursor will
 This is why `update` commands like `pnpm install` usually lead to fast startup - if dependencies changed, the command only needs to do incremental work.
 
 Caching is best effort; you may see slower startup times on infrequently used repositories.
+
+### Environment configuration recovery
+
+Agents no longer hard fail when Cursor can recover from an environment configuration issue. Saved environments often start from a snapshot. If the requested snapshot cannot be used, Cursor falls back to the default base image and warns you.
+
+Cursor falls back when:
+
+- The snapshot expired after inactivity
+- The snapshot is invalid or failed
+- You do not have access to the snapshot
+
+When fallback happens, Cursor keeps the rest of the environment configuration and swaps the image back to the default base image. The `update` command still runs, so dependency setup can repair the environment during startup.
+
+The agent view shows **Environment ready (with warnings)** and a warning banner explaining what happened. The warning stays visible in the conversation as an environment configuration issue card. Open setup from the warning to inspect or repair the environment.
+
+Cursor does not automatically switch to an older saved environment version. If you want to roll back the saved configuration, open the environment from the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents), review **Version history**, and restore a previous version.
 
 ### How to decide what to put in your `update` script
 
@@ -125,9 +158,15 @@ Add secrets as key-value pairs. Secrets are:
 
 - Encrypted at rest with KMS
 - Exposed to cloud agents as environment variables
-- Shared across cloud agents for your workspace or team
+- Scoped to the user, team, or environment you choose
 
 As an additional level of security, you have the option to specify secrets as redacted. Redacted secrets are scanned in commits the agent makes to prevent the agent from accidentally committing secrets to the repository. They are also redacted in the tool call results so they are not exposed to the agent, or stored in the chat transcript.
+
+### Environment-scoped secrets
+
+Use environment-scoped secrets when a credential should only be available to agents that use one environment. This is useful for multi-repo environments, staging credentials, or repository groups with different access needs.
+
+Environment-scoped secrets apply to every repo in that environment. They are not available to other environments.
 
 ### Sign-in credentials and 2FA
 
