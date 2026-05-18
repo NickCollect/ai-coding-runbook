@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/fullscreen
-fetched_at: 2026-05-11T04:55:25.673342+00:00
+fetched_at: 2026-05-18T05:02:44.731499+00:00
 fetch_method: mintlify_md
 ---
 
@@ -98,6 +98,8 @@ export CLAUDE_CODE_SCROLL_SPEED=3
 ```
 
 A value of `3` matches the default in `vim` and similar applications. The setting accepts values from 1 to 20.
+
+To adjust scroll speed interactively, run `/scroll-speed`. The dialog shows a ruler you can scroll while it is open so you can feel the change immediately. Press `←` and `→` to adjust, `r` to reset to the auto-detected default, and `Enter` to save. The command writes the same value the `CLAUDE_CODE_SCROLL_SPEED` environment variable sets, persisted to `~/.claude/settings.json`. The command is not available in the JetBrains IDE terminal.
 
 ### Scroll in the JetBrains IDE terminal
 

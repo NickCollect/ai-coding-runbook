@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/slash-commands
-fetched_at: 2026-05-05T19:40:38.989881+00:00
+fetched_at: 2026-05-18T05:02:44.423038+00:00
 fetch_method: mintlify_md
 ---
 
@@ -62,7 +62,7 @@ Send slash commands by including them in your prompt string, just like regular t
     prompt: "/compact",
     options: { maxTurns: 1 }
   })) {
-    if (message.type === "result") {
+    if (message.type === "result" && message.subtype === "success") {
       console.log("Command executed:", message.result);
     }
   }
@@ -267,7 +267,7 @@ Use in SDK:
     options: { maxTurns: 5 }
   })) {
     // Command will process with $1="123" and $2="high"
-    if (message.type === "result") {
+    if (message.type === "result" && message.subtype === "success") {
       console.log("Issue fixed:", message.result);
     }
   }

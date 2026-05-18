@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/admin-setup
-fetched_at: 2026-05-05T19:40:38.836796+00:00
+fetched_at: 2026-05-18T05:02:44.291674+00:00
 fetch_method: mintlify_md
 ---
 
@@ -30,7 +30,7 @@ This page walks through the deployment decisions in order. Each row links to the
 
 ## Choose your API provider
 
-Claude Code connects to Claude through one of several API providers. Your choice affects billing, authentication, and which compliance posture you inherit.
+Claude Code connects to Claude through one of several API providers. Your choice affects billing, authentication, which compliance posture you inherit, and which Claude Code features your developers can use.
 
 | Provider                      | Choose this when                                                                                                                      |
 | :---------------------------- | :------------------------------------------------------------------------------------------------------------------------------------ |
@@ -39,6 +39,8 @@ Claude Code connects to Claude through one of several API providers. Your choice
 | Amazon Bedrock                | You want to inherit existing AWS compliance controls and billing                                                                      |
 | Google Vertex AI              | You want to inherit existing GCP compliance controls and billing                                                                      |
 | Microsoft Foundry             | You want to inherit existing Azure compliance controls and billing                                                                    |
+
+Some Claude Code features require a Claude.ai account. [Claude Code on the web](/en/claude-code-on-the-web), [Routines](/en/routines), [Code Review](/en/code-review), [Remote Control](/en/remote-control), and the [Chrome extension](/en/chrome) are not available through Console API keys or cloud-provider credentials alone. If you deploy through Bedrock, Vertex, or Foundry, plan whether developers also need Claude for Teams or Enterprise seats. Each feature page lists its plan requirements.
 
 For the full provider comparison covering authentication, regions, and feature parity, see the [enterprise deployment overview](/en/third-party-integrations). Each provider's auth setup is in [Authentication](/en/authentication).
 
@@ -80,6 +82,7 @@ Managed settings can lock down tools, sandbox execution, restrict MCP servers an
 | [MCP server control](/en/mcp#managed-mcp-configuration)                                | Restrict which MCP servers users can add or connect to                        | `allowedMcpServers`, `deniedMcpServers`, `allowManagedMcpServersOnly`         |
 | [Plugin marketplace control](/en/plugin-marketplaces#managed-marketplace-restrictions) | Restrict which marketplace sources users can add and install from             | `strictKnownMarketplaces`, `blockedMarketplaces`                              |
 | [Hook restrictions](/en/settings#hook-configuration)                                   | Only managed hooks load; restrict HTTP hook URLs                              | `allowManagedHooksOnly`, `allowedHttpHookUrls`                                |
+| [Disable agent view](/en/agent-view#how-background-sessions-are-hosted)                | Turn off `claude agents`, `--bg`, `/background`, and the on-demand supervisor | `disableAgentView`                                                            |
 | [Version floor](/en/settings)                                                          | Prevent auto-update from installing below an org-wide minimum                 | `minimumVersion`                                                              |
 
 Permission rules and sandboxing cover different layers. Denying WebFetch blocks Claude's fetch tool, but if Bash is allowed, `curl` and `wget` can still reach any URL. Sandboxing closes that gap with a network domain allowlist enforced at the OS level.

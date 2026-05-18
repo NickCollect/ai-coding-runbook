@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/keybindings
-fetched_at: 2026-05-05T19:40:39.466935+00:00
+fetched_at: 2026-05-18T05:02:44.818957+00:00
 fetch_method: mintlify_md
 ---
 
@@ -110,7 +110,7 @@ Actions available in the `Chat` context:
 | `chat:cancel`         | Escape                    | Cancel current input                                                                                                                                           |
 | `chat:clearInput`     | Ctrl+L                    | Force a full screen redraw, preserving input. In [fullscreen rendering](/en/fullscreen#clear-the-conversation), press twice within two seconds to run `/clear` |
 | `chat:clearScreen`    | Cmd+K                     | In [fullscreen rendering](/en/fullscreen#clear-the-conversation), press twice within two seconds to run `/clear`                                               |
-| `chat:killAgents`     | Ctrl+X Ctrl+K             | Kill all background agents                                                                                                                                     |
+| `chat:killAgents`     | Ctrl+X Ctrl+K             | Kill all running [background subagents](/en/sub-agents#run-subagents-in-foreground-or-background) in this session                                              |
 | `chat:cycleMode`      | Shift+Tab\*               | Cycle permission modes                                                                                                                                         |
 | `chat:modelPicker`    | Meta+P                    | Open model picker                                                                                                                                              |
 | `chat:fastMode`       | Meta+O                    | Toggle fast mode                                                                                                                                               |

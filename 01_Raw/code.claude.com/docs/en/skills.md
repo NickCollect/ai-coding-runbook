@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/skills
-fetched_at: 2026-05-11T04:55:25.893382+00:00
+fetched_at: 2026-05-18T05:02:44.989009+00:00
 fetch_method: mintlify_md
 ---
 
@@ -103,9 +103,9 @@ When skills share the same name across levels, enterprise overrides personal, an
 
 Claude Code watches skill directories for file changes. Adding, editing, or removing a skill under `~/.claude/skills/`, the project `.claude/skills/`, or a `.claude/skills/` inside an `--add-dir` directory takes effect within the current session without restarting. Creating a top-level skills directory that did not exist when the session started requires restarting Claude Code so the new directory can be watched.
 
-#### Automatic discovery from nested directories
+#### Automatic discovery from parent and nested directories
 
-When you work with files in subdirectories, Claude Code automatically discovers skills from nested `.claude/skills/` directories. For example, if you're editing a file in `packages/frontend/`, Claude Code also looks for skills in `packages/frontend/.claude/skills/`. This supports monorepo setups where packages have their own skills.
+Project skills load from `.claude/skills/` in your starting directory and in every parent directory up to the repository root, so starting Claude in a subdirectory still picks up skills defined at the root. When you work with files in subdirectories below your starting directory, Claude Code also discovers skills from nested `.claude/skills/` directories on demand. For example, if you're editing a file in `packages/frontend/`, Claude Code also looks for skills in `packages/frontend/.claude/skills/`. This supports monorepo setups where packages have their own skills.
 
 Each skill is a directory with `SKILL.md` as the entrypoint:
 
@@ -412,6 +412,8 @@ When this skill runs:
 3. Claude receives the fully-rendered prompt with actual PR data
 
 This is preprocessing, not something Claude executes. Claude only sees the final result.
+
+Substitution runs once over the original file. Command output is inserted as plain text and is not re-scanned for further `` !`<command>` `` placeholders, so a command cannot emit a placeholder for a later pass to expand.
 
 For multi-line commands, use a fenced code block opened with ` ```! ` instead of the inline form:
 

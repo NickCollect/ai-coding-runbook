@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/quickstart
-fetched_at: 2026-05-11T04:55:25.848916+00:00
+fetched_at: 2026-05-18T05:02:44.938093+00:00
 fetch_method: mintlify_md
 ---
 
@@ -313,10 +313,10 @@ For more, see [best practices](/en/best-practices) and [common workflows](/en/co
   </Accordion>
 
   <Accordion title="Save time with shortcuts">
-    * Press `?` to see all available keyboard shortcuts
+    * Type `/` to see all commands and skills
     * Use Tab for command completion
     * Press ↑ for command history
-    * Type `/` to see all commands and skills
+    * Press `Shift+Tab` to cycle permission modes
   </Accordion>
 </AccordionGroup>
 

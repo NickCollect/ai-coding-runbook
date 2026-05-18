@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/monitoring-usage
-fetched_at: 2026-05-11T04:55:25.770519+00:00
+fetched_at: 2026-05-18T05:02:44.881031+00:00
 fetch_method: mintlify_md
 ---
 
@@ -177,6 +177,8 @@ Every span carries the [standard attributes](#standard-attributes) plus a `span.
 | `gen_ai.system`                  | Always `anthropic`. OpenTelemetry GenAI semantic convention                                                           |          |
 | `gen_ai.request.model`           | Same value as `model`. OpenTelemetry GenAI semantic convention                                                        |          |
 | `query_source`                   | Subsystem that issued the request, such as `repl_main_thread` or a subagent name                                      |          |
+| `agent_id`                       | Identifier of the subagent or teammate that issued the request. Absent on the main session                            |          |
+| `parent_agent_id`                | Identifier of the agent that spawned this one. Absent for the main session and for agents spawned directly from it    |          |
 | `speed`                          | `fast` or `normal`                                                                                                    |          |
 | `llm_request.context`            | `interaction`, `tool`, or `standalone` depending on the parent span                                                   |          |
 | `duration_ms`                    | Wall-clock duration including retries                                                                                 |          |
@@ -452,6 +454,10 @@ Incremented after each API request.
 * `query_source`: Category of the subsystem that issued the request. One of `"main"`, `"subagent"`, or `"auxiliary"`
 * `speed`: `"fast"` when the request used fast mode. Absent otherwise
 * `effort`: [Effort level](/en/model-config#adjust-effort-level) applied to the request: `"low"`, `"medium"`, `"high"`, `"xhigh"`, or `"max"`. Absent when the model does not support effort.
+* `agent.name`: Subagent type that issued the request. Built-in agent names and agents from official-marketplace plugins appear verbatim. Other user-defined agent names are replaced with `"custom"`. Absent when the request was not issued by a named subagent type.
+* `skill.name`: Skill active for the request, set by the Skill tool, a `/` command, or inherited by a spawned subagent. Built-in, bundled, user-defined, and official-marketplace plugin skill names appear verbatim. Third-party plugin skill names are replaced with `"third-party"`. Absent when no skill is active.
+* `plugin.name`: Owning plugin when the active skill or subagent is provided by a plugin. Official-marketplace plugin names appear verbatim. Third-party plugin names are replaced with `"third-party"`. Absent when neither the skill nor the subagent has an owning plugin.
+* `marketplace.name`: Marketplace the owning plugin was installed from. Only emitted for official-marketplace plugins. Absent otherwise.
 
 #### Token counter
 
@@ -465,6 +471,7 @@ Incremented after each API request.
 * `query_source`: Category of the subsystem that issued the request. One of `"main"`, `"subagent"`, or `"auxiliary"`
 * `speed`: `"fast"` when the request used fast mode. Absent otherwise
 * `effort`: [Effort level](/en/model-config#adjust-effort-level) applied to the request. See [Cost counter](#cost-counter) for details.
+* `agent.name`, `skill.name`, `plugin.name`, `marketplace.name`: Skill, plugin, and agent attribution for the request. See [Cost counter](#cost-counter) for definitions and redaction behavior.
 
 #### Code edit tool decision counter
 
@@ -747,6 +754,30 @@ Logged when a plugin finishes installing, from both the `claude plugin install` 
 * `plugin.version`: Plugin version when declared in the marketplace entry. For third-party marketplaces this is included only when `OTEL_LOG_TOOL_DETAILS=1`
 * `marketplace.name`: Marketplace the plugin was installed from. For third-party marketplaces this is included only when `OTEL_LOG_TOOL_DETAILS=1`
 
+#### Plugin loaded event
+
+Logged once per enabled plugin at session start. Use this event to inventory which plugins are active across your fleet, as a complement to `plugin_installed` which records the install action itself.
+
+**Event Name**: `claude_code.plugin_loaded`
+
+**Attributes**:
+
+* All [standard attributes](#standard-attributes)
+* `event.name`: `"plugin_loaded"`
+* `event.timestamp`: ISO 8601 timestamp
+* `event.sequence`: monotonically increasing counter for ordering events within a session
+* `plugin.name`: name of the plugin. For plugins outside the official marketplace and built-in bundle the value is `"third-party"` unless `OTEL_LOG_TOOL_DETAILS=1`
+* `marketplace.name`: marketplace the plugin was installed from, when known. Redacted to `"third-party"` under the same condition as `plugin.name`
+* `plugin.version`: version from the plugin manifest. Included only when the name is not redacted and the manifest declares a version
+* `plugin.scope`: provenance category for the plugin: `"official"`, `"org"`, `"user-local"`, or `"default-bundle"`
+* `enabled_via`: how the plugin came to be enabled: `"default-enable"`, `"org-policy"`, `"seed-mount"`, or `"user-install"`
+* `plugin_id_hash`: deterministic hash of the plugin name and marketplace, sent only to your configured exporter. Lets you count how many distinct third-party plugins are loaded across your fleet without recording their names
+* `has_hooks`: whether the plugin contributes hooks
+* `has_mcp`: whether the plugin contributes MCP servers
+* `skill_path_count`: number of skill directories the plugin declares
+* `command_path_count`: number of command directories the plugin declares
+* `agent_path_count`: number of agent directories the plugin declares
+
 #### Skill activated event
 
 Logged when a skill is invoked, whether Claude calls it through the Skill tool or you run it as a `/` command.
@@ -798,6 +829,25 @@ Logged once when an API request fails after more than one attempt. Emitted along
 * `total_attempts`: Total number of attempts made
 * `total_retry_duration_ms`: Total wall-clock time across all attempts
 * `speed`: `"fast"` or `"normal"`
+
+#### Hook registered event
+
+Logged once per configured hook at session start. Use this event to inventory which hooks are active across your fleet, as a complement to the per-execution `hook_execution_start` and `hook_execution_complete` events.
+
+**Event Name**: `claude_code.hook_registered`
+
+**Attributes**:
+
+* All [standard attributes](#standard-attributes)
+* `event.name`: `"hook_registered"`
+* `event.timestamp`: ISO 8601 timestamp
+* `event.sequence`: monotonically increasing counter for ordering events within a session
+* `hook_event`: hook event type, such as `"PreToolUse"` or `"PostToolUse"`
+* `hook_type`: hook implementation type: `"command"`, `"prompt"`, `"mcp_tool"`, `"http"`, or `"agent"`
+* `hook_source`: where the hook is defined: `"userSettings"`, `"projectSettings"`, `"localSettings"`, `"flagSettings"`, `"policySettings"`, or `"pluginHook"`
+* `hook_matcher` (when `OTEL_LOG_TOOL_DETAILS=1`): the matcher string from the hook configuration, when one is set
+* `plugin.name` (when `hook_source` is `"pluginHook"`): name of the contributing plugin. For plugins outside the official marketplace and built-in bundle the value is `"third-party"` unless `OTEL_LOG_TOOL_DETAILS=1`
+* `plugin_id_hash` (when `hook_source` is `"pluginHook"`): deterministic hash of the plugin name and marketplace, sent only to your configured exporter. Lets you count distinct contributing plugins without recording their names
 
 #### Hook execution start event
 
@@ -861,18 +911,36 @@ Logged when conversation compaction completes.
 * `post_tokens`: Approximate token count after compaction
 * `error`: Error message when compaction failed
 
+#### Feedback survey event
+
+Logged when a session quality survey is shown or answered. See [Session quality surveys](/en/data-usage#session-quality-surveys) for what the surveys collect and how to control them.
+
+**Event Name**: `claude_code.feedback_survey`
+
+**Attributes**:
+
+* All [standard attributes](#standard-attributes)
+* `event.name`: `"feedback_survey"`
+* `event.timestamp`: ISO 8601 timestamp
+* `event.sequence`: monotonically increasing counter for ordering events within a session
+* `event_type`: Survey lifecycle event, for example `"appeared"`, `"responded"`, or `"transcript_prompt_appeared"`
+* `appearance_id`: Unique ID linking the events emitted for one survey instance
+* `survey_type`: Which survey produced the event. `"session"` is the "How is Claude doing?" rating prompt
+* `response`: The user's selection on `responded` events
+* `enabled_via_override`: `true` when [`CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL`](/en/env-vars) is set. Emitted as a boolean, not a string. Present on `session` survey events. Filter on this attribute to confirm the override is applied across a fleet
+
 ## Interpret metrics and events data
 
 The exported metrics and events support a range of analyses:
 
 ### Usage monitoring
 
-| Metric                                                        | Analysis Opportunity                                      |
-| ------------------------------------------------------------- | --------------------------------------------------------- |
-| `claude_code.token.usage`                                     | Break down by `type` (input/output), user, team, or model |
-| `claude_code.session.count`                                   | Track adoption and engagement over time                   |
-| `claude_code.lines_of_code.count`                             | Measure productivity by tracking code additions/removals  |
-| `claude_code.commit.count` & `claude_code.pull_request.count` | Understand impact on development workflows                |
+| Metric                                                        | Analysis Opportunity                                                                                 |
+| ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `claude_code.token.usage`                                     | Break down by `type` (input/output), user, team, model, `skill.name`, `plugin.name`, or `agent.name` |
+| `claude_code.session.count`                                   | Track adoption and engagement over time                                                              |
+| `claude_code.lines_of_code.count`                             | Measure productivity by tracking code additions/removals                                             |
+| `claude_code.commit.count` & `claude_code.pull_request.count` | Understand impact on development workflows                                                           |
 
 ### Cost monitoring
 
@@ -880,6 +948,7 @@ The `claude_code.cost.usage` metric helps with:
 
 * Tracking usage trends across teams or individuals
 * Identifying high-usage sessions for optimization
+* Attributing spend to specific skills, plugins, or subagent types via the `skill.name`, `plugin.name`, and `agent.name` attributes
 
 <Note>
   Cost metrics are approximations. For official billing data, refer to your API provider (Claude Console, Amazon Bedrock, or Google Cloud Vertex).

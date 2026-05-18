@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/overview
-fetched_at: 2026-05-11T04:55:25.789859+00:00
+fetched_at: 2026-05-18T05:02:44.878371+00:00
 fetch_method: mintlify_md
 ---
 
@@ -178,7 +178,7 @@ Here are some of the ways you can use Claude Code:
   <Accordion title="Run agent teams and build custom agents" icon="users">
     Spawn [multiple Claude Code agents](/en/sub-agents) that work on different parts of a task simultaneously. A lead agent coordinates the work, assigns subtasks, and merges results.
 
-    For fully custom workflows, the [Agent SDK](/en/agent-sdk/overview) lets you build your own agents powered by Claude Code's tools and capabilities, with full control over orchestration, tool access, and permissions.
+    To run several full sessions in parallel and watch them from one screen, use [background agents](/en/agent-view). For fully custom workflows, the [Agent SDK](/en/agent-sdk/overview) lets you build your own agents powered by Claude Code's tools and capabilities, with full control over orchestration, tool access, and permissions.
   </Accordion>
 
   <Accordion title="Pipe, script, and automate with the CLI" icon="terminal">

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-teams
-fetched_at: 2026-05-11T04:55:25.491040+00:00
+fetched_at: 2026-05-18T05:02:44.491186+00:00
 fetch_method: mintlify_md
 ---
 
@@ -134,6 +134,8 @@ Claude decides the number of teammates to spawn based on your task, or you can s
 Create a team with 4 teammates to refactor these modules in parallel.
 Use Sonnet for each teammate.
 ```
+
+Teammates don't inherit the lead's `/model` selection by default. To change the model used when the prompt doesn't specify one, set **Default teammate model** in `/config`. Pick **Default (leader's model)** to have teammates follow the lead's current model.
 
 ### Require plan approval for teammates
 
