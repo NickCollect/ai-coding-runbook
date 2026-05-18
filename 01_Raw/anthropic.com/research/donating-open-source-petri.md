@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/donating-open-source-petri
-fetched_at: 2026-05-11T04:56:03.852504+00:00
+fetched_at: 2026-05-18T05:03:19.619984+00:00
 title: "Donating our open-source alignment tool \\ Anthropic"
 ---
 
@@ -34,6 +34,12 @@ Instructions to install and use Petri can be found on the [Petri website](https:
 
 ## Related content
 
+### 2028: Two scenarios for global AI leadership
+
+Our views on the AI competition between the US and China.
+
+[Read more](https://www.anthropic.com/research/2028-ai-leadership)
+
 ### Teaching Claude why
 
 New research on how we've reduced agentic misalignment.
@@ -45,9 +51,3 @@ New research on how we've reduced agentic misalignment.
 AI models like Claude talk in words but think in numbers. In this study we train Claude to translate its thoughts into human-readable text.
 
 [Read more](https://www.anthropic.com/research/natural-language-autoencoders)
-
-### Focus areas for The Anthropic Institute
-
-At The Anthropic Institute (TAI), we’ll be using the information we can access from within a frontier lab to investigate AI’s impact on the world, and sharing our learnings with the public. Here, we’re sharing the questions that drive our research agenda.
-
-[Read more](https://www.anthropic.com/research/anthropic-institute-agenda)

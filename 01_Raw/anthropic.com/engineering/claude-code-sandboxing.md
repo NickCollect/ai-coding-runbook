@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/engineering/claude-code-sandboxing
-fetched_at: 2026-05-11T04:55:30.643055+00:00
+fetched_at: 2026-05-18T05:02:46.317270+00:00
 title: "Making Claude Code more secure and autonomous with sandboxing \\ Anthropic"
 ---
 
@@ -79,7 +79,7 @@ Our new sandboxed bash tool and Claude Code on the web offer substantial improve
 To get started with these tools:
 
 1. Run `/sandbox` in Claude and check out [our docs](https://docs.claude.com/en/docs/claude-code/sandboxing) on how to configure this sandbox.
-2. Go to [claude.com/code](http://claude.ai/redirect/website.v1.7de614d1-9646-440d-803c-58f1a9cf46a4/code) to try out Claude Code on the web.
+2. Go to [claude.com/code](http://claude.ai/redirect/website.v1.b05d78b7-d78f-4eb0-974d-933525f5c39e/code) to try out Claude Code on the web.
 
 Or, if you're building your own agents, check out our [open-sourced sandboxing code](https://github.com/anthropic-experimental/sandbox-runtime), and consider integrating it into your work. We look forward to seeing what you build.
 

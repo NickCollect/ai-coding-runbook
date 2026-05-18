@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/emergent-misalignment-reward-hacking
-fetched_at: 2026-05-11T04:56:06.007921+00:00
+fetched_at: 2026-05-18T05:03:23.737539+00:00
 title: "From shortcuts to sabotage: natural emergent misalignment from reward hacking \\ Anthropic"
 ---
 
@@ -95,6 +95,12 @@ Read [the full paper](https://assets.anthropic.com/m/74342f2c96095771/original/N
 
 ## Related content
 
+### 2028: Two scenarios for global AI leadership
+
+Our views on the AI competition between the US and China.
+
+[Read more](https://www.anthropic.com/research/2028-ai-leadership)
+
 ### Teaching Claude why
 
 New research on how we've reduced agentic misalignment.
@@ -106,7 +112,3 @@ New research on how we've reduced agentic misalignment.
 AI models like Claude talk in words but think in numbers. In this study we train Claude to translate its thoughts into human-readable text.
 
 [Read more](https://www.anthropic.com/research/natural-language-autoencoders)
-
-### Donating our open-source alignment tool
-
-[Read more](https://www.anthropic.com/research/donating-open-source-petri)

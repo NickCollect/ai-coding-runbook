@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/economic-index-survey-announcement
-fetched_at: 2026-05-11T04:56:08.817874+00:00
+fetched_at: 2026-05-18T05:03:22.114306+00:00
 title: "Announcing the Anthropic Economic Index Survey  \\ Anthropic"
 ---
 
@@ -22,13 +22,13 @@ In the Anthropic Economic Index Survey, we aim to capture a rich new corpus of q
 
 Collecting these data monthly will enable measurement of not just what people experience and expect, but how quickly their views shift as AI capabilities evolve. Combined with Claude usage data in a [privacy-preserving way](https://www.anthropic.com/research/clio), these first-hand accounts can surface change before it shows up in aggregate labor market data.
 
-The survey launches today. Each month, we will invite a small, randomly selected group of Claude users: anyone with a personal account at least two weeks old may be invited. We will rotate the sample each month so that we hear from as broad a range of people as possible over time. If you’re invited, you’ll see a banner on [claude.ai](http://claude.ai/redirect/website.v1.7de614d1-9646-440d-803c-58f1a9cf46a4), or get an email if you use Claude primarily on mobile. We’d love you to take part. We plan to publish insights in future Anthropic Economic Index reports and other research briefs. For more information, see the FAQ below.
+The survey launches today. Each month, we will invite a small, randomly selected group of Claude users: anyone with a personal account at least two weeks old may be invited. We will rotate the sample each month so that we hear from as broad a range of people as possible over time. If you’re invited, you’ll see a banner on [claude.ai](http://claude.ai/redirect/website.v1.07207d65-3556-40e2-b5e9-38342b1743b4), or get an email if you use Claude primarily on mobile. We’d love you to take part. We plan to publish insights in future Anthropic Economic Index reports and other research briefs. For more information, see the FAQ below.
 
 ## Frequently asked questions
 
 **How do I access the study?**
 
-From today, a small random sample of Claude users with accounts at least two weeks old will see an invitation in [claude.ai](http://claude.ai/redirect/website.v1.7de614d1-9646-440d-803c-58f1a9cf46a4), the Cowork desktop app, or an email if you use Claude only on mobile. We invite a new set of Claude users each month, so if you’re not selected this time, keep an eye out.
+From today, a small random sample of Claude users with accounts at least two weeks old will see an invitation in [claude.ai](http://claude.ai/redirect/website.v1.07207d65-3556-40e2-b5e9-38342b1743b4), the Cowork desktop app, or an email if you use Claude only on mobile. We invite a new set of Claude users each month, so if you’re not selected this time, keep an eye out.
 
 **What will the study ask me?**
 
@@ -42,6 +42,12 @@ We will analyze the insights from this study as part of our economic research, p
 
 ## Related content
 
+### 2028: Two scenarios for global AI leadership
+
+Our views on the AI competition between the US and China.
+
+[Read more](https://www.anthropic.com/research/2028-ai-leadership)
+
 ### Teaching Claude why
 
 New research on how we've reduced agentic misalignment.
@@ -53,7 +59,3 @@ New research on how we've reduced agentic misalignment.
 AI models like Claude talk in words but think in numbers. In this study we train Claude to translate its thoughts into human-readable text.
 
 [Read more](https://www.anthropic.com/research/natural-language-autoencoders)
-
-### Donating our open-source alignment tool
-
-[Read more](https://www.anthropic.com/research/donating-open-source-petri)

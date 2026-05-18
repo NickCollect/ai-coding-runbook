@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/shade-arena-sabotage-monitoring
-fetched_at: 2026-05-11T04:56:40.103906+00:00
+fetched_at: 2026-05-18T05:03:50.085124+00:00
 title: "SHADE-Arena: Evaluating Sabotage and Monitoring in LLM Agents \\ Anthropic"
 ---
 
@@ -112,6 +112,12 @@ If you’re interested in working on these or related questions of Alignment Sci
 
 ## Related content
 
+### 2028: Two scenarios for global AI leadership
+
+Our views on the AI competition between the US and China.
+
+[Read more](https://www.anthropic.com/research/2028-ai-leadership)
+
 ### Teaching Claude why
 
 New research on how we've reduced agentic misalignment.
@@ -123,7 +129,3 @@ New research on how we've reduced agentic misalignment.
 AI models like Claude talk in words but think in numbers. In this study we train Claude to translate its thoughts into human-readable text.
 
 [Read more](https://www.anthropic.com/research/natural-language-autoencoders)
-
-### Donating our open-source alignment tool
-
-[Read more](https://www.anthropic.com/research/donating-open-source-petri)

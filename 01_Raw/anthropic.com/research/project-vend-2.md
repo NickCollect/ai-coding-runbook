@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/project-vend-2
-fetched_at: 2026-05-11T04:56:37.192489+00:00
+fetched_at: 2026-05-18T05:03:47.443596+00:00
 title: "Project Vend: Phase two \\ Anthropic"
 ---
 
@@ -222,6 +222,12 @@ Project Vend wouldn’t exist without our partners at [Andon Labs](https://andon
 
 ## Related content
 
+### 2028: Two scenarios for global AI leadership
+
+Our views on the AI competition between the US and China.
+
+[Read more](https://www.anthropic.com/research/2028-ai-leadership)
+
 ### Teaching Claude why
 
 New research on how we've reduced agentic misalignment.
@@ -233,10 +239,6 @@ New research on how we've reduced agentic misalignment.
 AI models like Claude talk in words but think in numbers. In this study we train Claude to translate its thoughts into human-readable text.
 
 [Read more](https://www.anthropic.com/research/natural-language-autoencoders)
-
-### Donating our open-source alignment tool
-
-[Read more](https://www.anthropic.com/research/donating-open-source-petri)
 
 ## Subscribe to the Frontier Red Team newsletter
 

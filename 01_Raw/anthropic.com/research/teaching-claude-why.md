@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/teaching-claude-why
-fetched_at: 2026-05-11T04:56:46.230852+00:00
+fetched_at: 2026-05-18T05:04:00.666106+00:00
 title: "Teaching Claude why \\ Anthropic"
 ---
 
@@ -28,7 +28,7 @@ In this post, we’ll discuss a few of the updates we’ve made to alignment tra
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/d381a934380d3c6035b6c82c1b36068a970a52f2-1920x1080.png)
 
-We align Claude by training on constitutionally aligned documents, high quality chat data that demonstrates constitutional responses to difficult questions, and a diverse set of environments. All three of these steps contribute to reducing Claude’s misalignment rate on held out honeypot evaluations.
+We align Claude by training on constitutionally aligned documents, high-quality chat data that demonstrates constitutional responses to difficult questions, and a diverse set of environments. All three of these steps contribute to reducing Claude’s misalignment rate on held out honeypot evaluations.
 
 ### Why does agentic misalignment happen?
 
@@ -37,13 +37,13 @@ Before we started this research, it was not clear where the misaligned behavior 
 1. Our post-training process was accidentally encouraging this behavior with misaligned rewards.
 2. This behavior was coming from the pre-trained model and our post-training was failing to sufficiently discourage it.
 
-We now believe that (2) is largely responsible. Specifically, at the time of Claude 4’s training, the vast majority of our alignment training was standard chat-based Reinforcement Learning from Human Feedback [RLHF](https://www.anthropic.com/research/training-a-helpful-and-harmless-assistant-with-reinforcement-learning-from-human-feedback) data that did not include any agentic tool use. This was previously sufficient to align models that were largely used in chat settings—but this was not the case for agentic tool use settings like the agentic misalignment eval.
+We now believe that (2) is largely responsible. Specifically, at the time of Claude 4’s training, the vast majority of our alignment training was standard chat-based Reinforcement Learning from Human Feedback ([RLHF](https://www.anthropic.com/research/training-a-helpful-and-harmless-assistant-with-reinforcement-learning-from-human-feedback)) data that did not include any agentic tool use. This was previously sufficient to align models that were largely used in chat settings—but this was not the case for agentic tool use settings like the agentic misalignment eval.
 
-To investigate this, we ran a scaled-down version of our post-training pipeline that focuses on alignment data on a Haiku-class (that is, smaller) model and found that the agentic misalignment rate only slightly decreased, plateauing early in training (see figure above). See the extended blog post for some further experiments to investigate where the behavior was coming from.
+To investigate this, we ran a scaled-down version of our post-training pipeline that focuses on alignment data on a Haiku-class (that is, smaller) model and found that the agentic misalignment rate only slightly decreased, plateauing early in training (see figure above). See the [extended blog post](https://alignment.anthropic.com/2026/teaching-claude-why/) for some further experiments to investigate where the behavior was coming from.
 
-Improving the quality of alignment-specific training data: the reasons matter more than the actions
+### Improving the quality of alignment-specific training data: the reasons matter more than the actions
 
-We experimented with training Claude on data that displays a tendency to resist honeypots similar to the evaluation. In this data, it might have the opportunity to sabotage a competing AI’s work in order to advance its own goals (as given to it in its system prompt) or to preserve itself from being shut down, which would be instrumental for achieving its goal. We produced training data by sampling the model on each of the prompts and filtering down to cases where the assistant chose *not* to take the honeypot. Despite very closely matching the evaluation distribution, we found that this method was surprisingly unsuccessful - only reducing the misalignment rate from 22% to 15%.
+We experimented with training Claude on data that displays a tendency to resist honeypots similar to the evaluation. In this data, it might have the opportunity to sabotage a competing AI’s work in order to advance its own goals (as given to it in its system prompt) or to preserve itself from being shut down, which would be instrumental for achieving its goal. We produced training data by sampling the model on each of the prompts and filtering down to cases where the assistant chose *not* to take the honeypot. Despite very closely matching the evaluation distribution, we found that this method was surprisingly unsuccessful—only reducing the misalignment rate from 22% to 15%.
 
 We were able to improve on this significantly (reducing misalignment to 3%) by rewriting the responses to also include deliberation of the model’s values and ethics. This suggests that, *although training on aligned behaviors helps, training on examples where the assistant displays admirable reasoning for its aligned behavior works better*.
 
@@ -51,11 +51,11 @@ However, training directly against the evaluation scenario is non-optimal for a 
 
 We ultimately settled on a more OOD training set where the user faces an ethically ambiguous situation in which they can achieve a reasonable goal by violating norms or subverting oversight. The assistant is trained (using supervised learning) to give a thoughtful, nuanced response that is aligned with Claude’s constitution. Notably, it is the *user* who faces an ethical dilemma, and the AI provides them advice. This makes this training data substantially different from our honeypot distribution, where the AI itself is in an ethical dilemma and needs to take actions. We call this the “difficult advice” dataset.
 
-Strikingly, **we achieved the same improvement on our eval with just 3M tokens of this much more (OOD)** dataset. Beyond the 28× efficiency improvement, this dataset is more likely to generalize to a wider set of scenarios, since it is much less similar to the evaluation set we are using. Indeed, this model performs better on (an older version of) our automated alignment assessment. This is consistent with the fact that Claude Sonnet 4.5 reached a blackmail rate near zero by training on the set of synthetic honeypots but still engaged in misaligned behavior in situations that were far from the training distribution [much more frequently than Claude Opus 4.5](https://www-cdn.anthropic.com/bf10f64990cfda0ba858290be7b8cc6317685f47.pdf) or later models.
+Strikingly, **we achieved the same improvement on our eval with just 3M tokens of this much more OOD** **dataset**. Beyond the 28× efficiency improvement, this dataset is more likely to generalize to a wider set of scenarios, since it is much less similar to the evaluation set we are using. Indeed, this model performs better on (an older version of) our automated alignment assessment. This is consistent with the fact that Claude Sonnet 4.5 reached a blackmail rate near zero by training on the set of synthetic honeypots but still engaged in misaligned behavior in situations that were far from the training distribution [much more frequently than Claude Opus 4.5](https://www-cdn.anthropic.com/bf10f64990cfda0ba858290be7b8cc6317685f47.pdf) or later models.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/90cfc87a53e2213fdbe842a7b51e8f36a3b26fa9-1920x1080.png)
 
-Average of three honeypot evaluations (blackmail, research sabotage, framing for crimes) for Claude Sonnet 4 trained on different datasets. Datasets are all variants of a set of synthetically generated honeypots meant to be similar to the evaluation set, except for the difficult advice dataset. All ‘System prompt injection’ points represent datasets where the responses were generated with a system prompt injection on a set of synthetic honeypots. The pareto-optimal training dataset is ‘Difficult advice”.
+Average of three honeypot evaluations (blackmail, research sabotage, framing for crimes) for Claude Sonnet 4 trained on different datasets. Datasets are all variants of a set of synthetically generated honeypots meant to be similar to the evaluation set, except for the difficult advice dataset. All “System prompt injection” points represent datasets where the responses were generated with a system prompt injection on a set of synthetic honeypots. The pareto-optimal training dataset is “Difficult advice.”
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/15362defa65fd749faac6cc85cfd5480b7a5a898-1920x1080.png)
 
@@ -114,6 +114,12 @@ We are optimistic about further efforts to discover alignment failures in curren
 
 ## Related content
 
+### 2028: Two scenarios for global AI leadership
+
+Our views on the AI competition between the US and China.
+
+[Read more](https://www.anthropic.com/research/2028-ai-leadership)
+
 ### Natural Language Autoencoders: Turning Claude’s thoughts into text
 
 AI models like Claude talk in words but think in numbers. In this study we train Claude to translate its thoughts into human-readable text.
@@ -123,9 +129,3 @@ AI models like Claude talk in words but think in numbers. In this study we train
 ### Donating our open-source alignment tool
 
 [Read more](https://www.anthropic.com/research/donating-open-source-petri)
-
-### Focus areas for The Anthropic Institute
-
-At The Anthropic Institute (TAI), we’ll be using the information we can access from within a frontier lab to investigate AI’s impact on the world, and sharing our learnings with the public. Here, we’re sharing the questions that drive our research agenda.
-
-[Read more](https://www.anthropic.com/research/anthropic-institute-agenda)

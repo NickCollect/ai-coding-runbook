@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/vibe-physics
-fetched_at: 2026-05-11T04:56:55.908616+00:00
+fetched_at: 2026-05-18T05:04:06.622533+00:00
 title: "Vibe physics: The AI grad student \\ Anthropic"
 ---
 
@@ -55,7 +55,7 @@ and out would pop the paper. We are not there yet, of course. I tried giving thi
 
 To go about this scientifically, I encapsulated all the work. The rules were strict:
 
-- Only give text prompts to [Claude Code](https://claude.ai/redirect/website.v1.5aae9689-2506-4938-b8d4-f6b3892b42f8/code). No editing files directly.
+- Only give text prompts to [Claude Code](https://claude.ai/redirect/website.v1.b1e91954-cb9c-4711-8653-65844b570815/code). No editing files directly.
 - Don’t cut and paste my own calculations into the chat.
 - But pasting Gemini or GPT calculations was OK, as long as they were only text-prompted.
 
@@ -65,7 +65,7 @@ My question was: is there a set of prompts, like instructions to a talented G2, 
 
 I knew from experience that LLMs struggle with context and organization over long projects. So I started by asking Claude to come up with a plan of attack: what tasks needed to be done in what order. I also asked GPT 5.2 and Gemini 3.0. Then, I had all three LLMs merge the best ideas from each, using web interfaces and copying one to another. Next, I gave those merges to Claude, asking it to break the outline into detailed subsections. The result is [here](https://www-cdn.anthropic.com/2595299ccf7f8b9a9c74823c24faaa5d9b216804.pdf). There were 102 separate tasks across seven stages.
 
-From there, I turned to [Claude Code](https://claude.ai/redirect/website.v1.5aae9689-2506-4938-b8d4-f6b3892b42f8/code), using the extension in VS Code.
+From there, I turned to [Claude Code](https://claude.ai/redirect/website.v1.b1e91954-cb9c-4711-8653-65844b570815/code), using the extension in VS Code.
 
 ![A screen grab of Claude code](https://www-cdn.anthropic.com/images/4zrzovbb/website/2277f287d82a9a6087bc70c6d16cfd6648634d7e-1600x967.jpg)
 
@@ -254,6 +254,12 @@ In addition to the growth in interest, the tools themselves have been steadily i
 
 ## Related content
 
+### 2028: Two scenarios for global AI leadership
+
+Our views on the AI competition between the US and China.
+
+[Read more](https://www.anthropic.com/research/2028-ai-leadership)
+
 ### Teaching Claude why
 
 New research on how we've reduced agentic misalignment.
@@ -265,10 +271,6 @@ New research on how we've reduced agentic misalignment.
 AI models like Claude talk in words but think in numbers. In this study we train Claude to translate its thoughts into human-readable text.
 
 [Read more](https://www.anthropic.com/research/natural-language-autoencoders)
-
-### Donating our open-source alignment tool
-
-[Read more](https://www.anthropic.com/research/donating-open-source-petri)
 
 ## Subscribe to Anthropic Science
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/natural-language-autoencoders
-fetched_at: 2026-05-11T04:56:28.029603+00:00
+fetched_at: 2026-05-18T05:03:42.391817+00:00
 title: "Natural Language Autoencoders \\ Anthropic"
 ---
 
@@ -64,7 +64,7 @@ For example, in the blackmail test discussed above, we used NLAs to understand w
 
 Claude does not say it thinks it’s being tested in this transcript from our blackmail evaluation, but the NLA explanation reveals its suspicions.
 
-Extending this analysis to other evaluations, NLAs suggest that Claude suspects it’s being tested more often than it lets on. For instance, in a test of whether Claude takes destructive actions while writing code—for example, deleting important files—NLA explanations show signs of evaluation awareness 16% of the time, even though Claude never explicitly verbalizes this. Similarly, on the popular coding benchmark SWE-bench Verified, which we use to determine how capable Claude is, NLAs indicate that Claude is aware it is being evaluated on 26% of problems. In contrast, NLA explanations indicate evaluation awareness on less than 1% of real [claude.ai](http://claude.ai/redirect/website.v1.5aae9689-2506-4938-b8d4-f6b3892b42f8) usage that opted in for training.
+Extending this analysis to other evaluations, NLAs suggest that Claude suspects it’s being tested more often than it lets on. For instance, in a test of whether Claude takes destructive actions while writing code—for example, deleting important files—NLA explanations show signs of evaluation awareness 16% of the time, even though Claude never explicitly verbalizes this. Similarly, on the popular coding benchmark SWE-bench Verified, which we use to determine how capable Claude is, NLAs indicate that Claude is aware it is being evaluated on 26% of problems. In contrast, NLA explanations indicate evaluation awareness on less than 1% of real [claude.ai](http://claude.ai/redirect/website.v1.b1e91954-cb9c-4711-8653-65844b570815) usage that opted in for training.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/fc08005f32ff020f21e598cc72f58768af2bcc4f-1590x1170.png)
 
@@ -110,6 +110,12 @@ Find the [code](https://github.com/kitft/natural_language_autoencoders) on GitHu
 
 ## Related content
 
+### 2028: Two scenarios for global AI leadership
+
+Our views on the AI competition between the US and China.
+
+[Read more](https://www.anthropic.com/research/2028-ai-leadership)
+
 ### Teaching Claude why
 
 New research on how we've reduced agentic misalignment.
@@ -119,9 +125,3 @@ New research on how we've reduced agentic misalignment.
 ### Donating our open-source alignment tool
 
 [Read more](https://www.anthropic.com/research/donating-open-source-petri)
-
-### Focus areas for The Anthropic Institute
-
-At The Anthropic Institute (TAI), we’ll be using the information we can access from within a frontier lab to investigate AI’s impact on the world, and sharing our learnings with the public. Here, we’re sharing the questions that drive our research agenda.
-
-[Read more](https://www.anthropic.com/research/anthropic-institute-agenda)
