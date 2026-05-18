@@ -1,67 +1,67 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/usage-policies?hl=he
-fetched_at: 2026-05-11T05:05:13.434194+00:00
-title: "\u05de\u05e2\u05e7\u05d1 \u05d0\u05d7\u05e8 \u05de\u05e7\u05e8\u05d9\u05dd \u05e9\u05dc \u05e9\u05d9\u05de\u05d5\u05e9 \u05dc\u05e8\u05e2\u05d4 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/usage-policies?hl=vi
+fetched_at: 2026-05-18T05:14:48.799005+00:00
+title: "Gi\u00e1m s\u00e1t h\u00e0nh vi sai tr\u00e1i \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-שליחת משוב
+Gửi ý kiến phản hồi
 
-# מעקב אחר מקרים של שימוש לרעה
+# Giám sát hành vi sai trái
 
-‫Google מחויבת לפיתוח ולשימוש אחראיים ב-AI. כדי להבטיח את הבטיחות והיושרה של Gemini API, יצרנו את הנחיות המדיניות האלה.
-השימוש ב-Gemini API כפוף להנחיות הבאות, [לתנאים ולהגבלות הנוספים של Gemini API](https://ai.google.dev/gemini-api/terms?hl=he) ול[מדיניות בנושא שימוש אסור ב-AI גנרטיבי](https://policies.google.com/terms/generative-ai/use-policy?hl=he).
+Google cam kết phát triển và sử dụng AI một cách có trách nhiệm. Để đảm bảo tính toàn vẹn và an toàn của Gemini API, chúng tôi đã tạo ra các nguyên tắc chính sách này.
+Bằng việc sử dụng Gemini API, bạn đồng ý với các nguyên tắc sau, [Điều khoản dịch vụ bổ sung của Gemini API](https://ai.google.dev/gemini-api/terms?hl=vi) và [Chính sách về các hành vi bị cấm khi sử dụng AI tạo sinh](https://policies.google.com/terms/generative-ai/use-policy?hl=vi).
 
-## איך אנחנו עוקבים אחרי שימוש לרעה
+## Cách chúng tôi giám sát để phát hiện hành vi sử dụng sai mục đích
 
-צוות האמון והבטיחות של Google משתמש בשילוב של תהליכים אוטומטיים וידניים כדי לזהות שימוש לרעה פוטנציאלי ב-Gemini API וב-Google AI Studio, במטרה לאכוף את המדיניות שלנו.
+Nhóm An toàn và đáng tin cậy của Google sử dụng kết hợp quy trình tự động và thủ công để phát hiện hành vi có thể sử dụng sai Gemini API và Google AI Studio nhằm thực thi các chính sách của chúng tôi.
 
-- **זיהוי אוטומטי:** מערכות אוטומטיות סורקות את השימוש ב-API כדי לזהות הפרות של המדיניות שלנו בנושא שימוש אסור, כמו דברי שטנה, הטרדה, תוכן מיני בוטה ותוכן מסוכן.
-- **זיהוי ידני:** אם בפרויקט מסוים מזוהה פעילות חשודה באופן עקבי, יכול להיות שהוא יסומן לבדיקה ידנית על ידי צוות מורשה של Google.
+- **Phát hiện tự động:** Các hệ thống tự động quét việc sử dụng API để phát hiện các trường hợp vi phạm Chính sách về các hành vi bị cấm khi sử dụng, chẳng hạn như ngôn từ kích động thù hận, hành vi quấy rối, nội dung khiêu dâm và nội dung nguy hiểm.
+- **Phát hiện thủ công:** Nếu một dự án liên tục có hoạt động đáng ngờ, thì dự án đó có thể bị gắn cờ để nhân viên được uỷ quyền của Google xem xét theo cách thủ công.
 
-## איך אנחנו מטפלים בנתונים
+## Cách chúng tôi xử lý dữ liệu
 
-‫Google שומרת את הנתונים הבאים למשך חמישים וחמישה (55) ימים למטרות זיהוי ומניעה של הפרות של מדיניות השימוש האסור, כדי לשמור על הבטיחות והאבטחה של השירותים, ולכל גילוי נאות שנדרש על פי חוק או תקנה:
+Google giữ lại dữ liệu sau đây trong 55 ngày để phát hiện và ngăn chặn hành vi vi phạm Chính sách sử dụng bị cấm nhằm duy trì sự an toàn và bảo mật của Dịch vụ, cũng như mọi thông tin công bố bắt buộc theo pháp luật hoặc quy định:
 
-- **הנחיות:** הנחיות הטקסט שאתם שולחים ל-API.
-- **מידע הקשרי:** כל הקשר נוסף שאתם מספקים בהנחיות.
-- **פלט:** התשובות שנוצרו על ידי Gemini API.
+- **Câu lệnh:** Câu lệnh văn bản mà bạn gửi đến API.
+- **Thông tin theo ngữ cảnh:** Mọi thông tin bổ sung mà bạn cung cấp cùng với câu lệnh.
+- **Đầu ra:** Câu trả lời do Gemini API tạo.
 
-## איך אנחנו בודקים בעיות פוטנציאליות
+## Cách chúng tôi điều tra các vấn đề tiềm ẩn
 
-כשמערכות לזיהוי התנהלות פוגעת ומסנני בטיחות מסמנים הנחיות או פלט של מודל כבעייתיים, עובדי Google מורשים יכולים לבדוק את התוכן המסומן ולאשר או לתקן את הסיווג או את ההחלטה על סמך הנחיות ומדיניות מוגדרות מראש. רק עובדי Google מורשים יכולים לגשת לנתונים לצורך בדיקה אנושית, באמצעות פלטפורמה פנימית לניהול הערכות ובדיקות של מדיניות. כשנתונים נרשמים ביומן לצורך מעקב אחרי ניצול לרעה, הם משמשים אך ורק לאכיפת המדיניות ולמניעת הפרות של המדיניות.
-אנחנו לא משתמשים בהם כדי לאמן או לשפר מודלים של AI/ML, מלבד המודלים שמשמשים באופן ספציפי לאכיפת מדיניות.
+Khi các hệ thống phát hiện hành vi sai trái và bộ lọc an toàn gắn cờ câu lệnh hoặc đầu ra của mô hình như mô tả ở trên, nhân viên được uỷ quyền của Google có thể đánh giá nội dung bị gắn cờ và xác nhận hoặc điều chỉnh việc phân loại hoặc xác định dựa trên các nguyên tắc và chính sách được xác định trước. Chỉ những nhân viên Google được uỷ quyền mới có thể truy cập vào dữ liệu để đánh giá thủ công thông qua một nền tảng đánh giá nội bộ về hoạt động quản trị và quản lý quy trình đánh giá. Khi dữ liệu được ghi lại để giám sát hành vi sai trái, dữ liệu đó chỉ được dùng cho mục đích thực thi chính sách và ngăn chặn hành vi vi phạm chính sách.
+Dữ liệu này không được dùng để huấn luyện hoặc tinh chỉnh bất kỳ mô hình AI/học máy nào ngoài những mô hình được dùng riêng cho việc thực thi chính sách.
 
-## עבודה איתכם בנושא עמידה בדרישות המדיניות
+## Hợp tác với bạn để tuân thủ chính sách
 
-אם השימוש שלכם ב-Gemini לא תואם למדיניות שלנו, יכול להיות שננקוט את הפעולות הבאות:
+Nếu bạn sử dụng Gemini không tuân thủ chính sách của chúng tôi, chúng tôi có thể thực hiện các bước sau:
 
-- **יצירת קשר:** יכול להיות שנפנה אליך באימייל כדי להבין את תרחיש השימוש שלך ולבדוק דרכים להבטיח שהשימוש שלך יעמוד בדרישות.
-- **מגבלות שימוש זמניות:** יכול להיות שנחליט להגביל את הגישה שלכם ל-Gemini API.
-- **השעיה זמנית:** יכול להיות שנשהה באופן זמני את הגישה שלכם ל-Gemini API.
-- **סגירת החשבון:** כמוצא אחרון, ובמקרים של הפרות חמורות, אנחנו עשויים לסגור באופן סופי את הגישה שלכם ל-Gemini API ולשירותי Google אחרים.
+- **Liên hệ:** Chúng tôi có thể liên hệ với bạn qua email để tìm hiểu trường hợp sử dụng của bạn và khám phá các cách để đảm bảo bạn tuân thủ.
+- **Hạn mức sử dụng tạm thời:** Chúng tôi có thể giới hạn quyền truy cập của bạn vào Gemini API.
+- **Tạm ngưng:** Chúng tôi có thể tạm thời ngưng quyền truy cập của bạn vào Gemini API.
+- **Đóng tài khoản:** Trong trường hợp cuối cùng và đối với các lỗi vi phạm nghiêm trọng, chúng tôi có thể đóng vĩnh viễn quyền truy cập của bạn vào Gemini API và các dịch vụ khác của Google.
 
-אם ניצור איתכם קשר לגבי השעיה או סגירה של חשבון, נספק גם קישור שדרכו תוכלו לערער.
+Nếu liên hệ với bạn về việc tạm ngưng hoặc đóng tài khoản, chúng tôi cũng sẽ cung cấp một đường liên kết để bạn có thể kháng nghị.
 
-## היקף
+## Phạm vi
 
-הנחיות המדיניות האלה חלות על השימוש ב-Gemini API וב-AI Studio.
+Các nguyên tắc chính sách này áp dụng cho việc sử dụng Gemini API và AI Studio.
 
-שליחת משוב
+Gửi ý kiến phản hồi
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-עדכון אחרון: 2026-04-29 (שעון UTC).
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-רוצה לתת לנו משוב?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

@@ -1,49 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=he
-fetched_at: 2026-05-11T05:00:55.570154+00:00
-title: "\u202bGemini 3 Flash Preview \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=vi
+fetched_at: 2026-05-18T05:15:20.591856+00:00
+title: "B\u1ea3n xem tr\u01b0\u1edbc Gemini 3 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-שליחת משוב
+Gửi ý kiến phản hồi
 
-# ‫Gemini 3 Flash Preview
+# Bản xem trước Gemini 3 Flash
 
-המודל הכי טוב בעולם להבנה מולטימודאלית, והמודל הכי עוצמתי שלנו עד כה עם יכולות סוכנותיות וקידוד של אווירה, שמספק תמונות עשירות יותר ואינטראקטיביות עמוקה יותר, והכול מבוסס על יכולות חשיבה רציונלית מתקדמות.
+Mô hình tốt nhất trên thế giới về khả năng hiểu đa phương thức, đồng thời là mô hình tác nhân và mô hình mã hoá cảm xúc mạnh mẽ nhất từ trước đến nay của chúng tôi, mang đến hình ảnh phong phú hơn và khả năng tương tác sâu sắc hơn, tất cả đều được xây dựng trên nền tảng suy luận tiên tiến hàng đầu.
 
-[לניסיון ב-Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3-flash-preview&hl=he)
+[Dùng thử trong Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3-flash-preview&hl=vi)
 
-## מאמרי עזרה
+## Tài liệu
 
-ב[מדריך למפתחים של Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=he) יש מידע מקיף על התכונות והיכולות.
+Truy cập vào trang [Hướng dẫn dành cho nhà phát triển Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=vi) để xem thông tin đầy đủ về các tính năng và chức năng.
 
 ## gemini-3-flash-preview
 
-| נכס | תיאור |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardקוד מודל | `gemini-3-flash-preview` |
-| saveסוגי נתונים נתמכים | **קלטים**  טקסט, תמונה, סרטון, אודיו ו-PDF  **פלט**  טקסט |
-| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  1,048,576  **מגבלת אסימונים בפלט**  65,536 |
-| handymanיכולות | **יצירת אודיו**  לא נתמך  ‫**Batch API**  נתמך  **שמירת נתונים במטמון**  נתמך  **ביצוע קוד**  נתמך  **שימוש במחשב**  נתמך  **חיפוש קבצים**  נתמך  **הסקת מסקנות גמישה**  נתמך  **בקשה להפעלת פונקציה**  נתמך  **עיגון בעזרת מפות Google**  נתמך  **יצירת תמונות**  לא נתמך  ‫**Live API**  לא נתמך  **היקש בעדיפות גבוהה**  נתמך  **חיפוש עם עיגון בנתונים**  נתמך  **פלטים מובְנים**  נתמך  **תהליך החשיבה**  נתמך  **הקשר של כתובת ה-URL**  נתמך |
-| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - `Preview: gemini-3-flash-preview` |
-| calendar\_monthהעדכון האחרון | דצמבר 2025 |
-| cognition\_2תאריך סף הידע | ינואר 2025 |
+| id\_cardMã mô hình | `gemini-3-flash-preview` |
+| saveCác loại dữ liệu được hỗ trợ | **Thông tin đầu vào**  Văn bản, Hình ảnh, Video, Âm thanh và PDF  **Đầu ra**  Văn bản |
+| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  1.048.576  **Giới hạn mã thông báo đầu ra**  65.536 |
+| handymanChức năng | **Tạo âm thanh**  Không được hỗ trợ  **API hàng loạt**  Được hỗ trợ  **Lưu vào bộ nhớ đệm**  Được hỗ trợ  **Thực thi mã**  Được hỗ trợ  **Sử dụng máy tính**  Được hỗ trợ  **Tìm kiếm tệp**  Được hỗ trợ  **Suy luận linh hoạt**  Được hỗ trợ  **Gọi hàm**  Được hỗ trợ  **Kết nối với Google Maps**  Được hỗ trợ  **Tạo hình ảnh**  Không được hỗ trợ  **API trực tiếp**  Không được hỗ trợ  **Suy luận ưu tiên**  Được hỗ trợ  **Tìm trong phần liên kết thực tế**  Được hỗ trợ  **Đầu ra có cấu trúc**  Được hỗ trợ  **Tư duy**  Được hỗ trợ  **Ngữ cảnh URL**  Được hỗ trợ |
+| 123Phiên bản | Đọc các [mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm thông tin.  - `Preview: gemini-3-flash-preview` |
+| calendar\_monthNội dung cập nhật mới nhất | Tháng 12 năm 2025 |
+| cognition\_2Điểm cắt kiến thức | Tháng 1 năm 2025 |
 
-שליחת משוב
+Gửi ý kiến phản hồi
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-עדכון אחרון: 2026-04-29 (שעון UTC).
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-רוצה לתת לנו משוב?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

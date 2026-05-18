@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=id
-fetched_at: 2026-05-11T04:59:26.717885+00:00
+fetched_at: 2026-05-18T05:10:56.615692+00:00
 title: "Live API capabilities guide \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -148,7 +148,7 @@ session.sendRealtimeInput({
 
 Data audio di Live API selalu berupa PCM 16-bit mentah, little-endian. Output audio selalu menggunakan frekuensi sampling 24 kHz. Audio input
 secara native adalah 16 kHz, tetapi Live API akan melakukan pengambilan sampel ulang jika diperlukan
-sehingga frekuensi sampel apa pun dapat dikirim. Untuk menyampaikan sample rate audio input, tetapkan
+sehingga frekuensi sampel apa pun dapat dikirim. Untuk menyampaikan frekuensi sampling audio input, tetapkan
 jenis MIME setiap [Blob](https://ai.google.dev/api/caching?hl=id#Blob) yang berisi audio ke nilai
 seperti `audio/pcm;rate=16000`.
 
@@ -228,7 +228,7 @@ session.sendRealtimeInput({
 });
 ```
 
-#### Pembaruan konten inkremental
+#### Update konten inkremental
 
 Gunakan update inkremental untuk mengirim input teks, membuat konteks sesi, atau
 memulihkan konteks sesi. Untuk konteks singkat, Anda dapat mengirimkan interaksi belokan demi belokan untuk merepresentasikan urutan peristiwa yang tepat:
@@ -654,7 +654,7 @@ const config = {
 
 ### Dialog afektif
 
-Fitur ini memungkinkan Gemini menyesuaikan gaya responsnya dengan ekspresi dan nada bahasa input.
+Fitur ini memungkinkan Gemini menyesuaikan gaya responsnya dengan ekspresi dan nada input.
 
 Untuk menggunakan dialog afektif, tetapkan versi API ke `v1alpha` dan tetapkan
 `enable_affective_dialog` ke `true`dalam pesan penyiapan:
@@ -686,7 +686,7 @@ const config = {
 Jika fitur ini diaktifkan, Gemini dapat secara proaktif memutuskan untuk tidak merespons
 jika konten tidak relevan.
 
-Untuk menggunakannya, tetapkan versi API ke `v1alpha` dan konfigurasi kolom `proactivity` dalam pesan penyiapan, lalu tetapkan `proactive_audio` ke `true`:
+Untuk menggunakannya, tetapkan versi API ke `v1alpha` dan konfigurasi kolom `proactivity` di pesan penyiapan, lalu tetapkan `proactive_audio` ke `true`:
 
 ### Python
 
@@ -717,7 +717,8 @@ Deteksi Aktivitas Suara (VAD) memungkinkan model mengenali saat seseorang sedang
 Saat VAD mendeteksi gangguan, pembuatan yang sedang berlangsung akan dibatalkan dan
 dihapus. Hanya informasi yang sudah dikirim ke klien yang dipertahankan dalam histori sesi. Server kemudian mengirimkan pesan [`BidiGenerateContentServerContent`](https://ai.google.dev/api/live?hl=id#bidigeneratecontentservercontent) untuk melaporkan gangguan.
 
-Server Gemini kemudian akan membatalkan semua panggilan fungsi yang tertunda dan mengirim pesan `BidiGenerateContentServerContent` dengan ID panggilan yang dibatalkan.
+Server Gemini kemudian akan membatalkan semua panggilan fungsi yang tertunda dan mengirim pesan
+`BidiGenerateContentServerContent` dengan ID panggilan yang dibatalkan.
 
 ### Python
 
@@ -943,7 +944,7 @@ Atau, VAD otomatis dapat dinonaktifkan dengan menyetel
 penyiapan. Dalam konfigurasi ini, klien bertanggung jawab untuk mendeteksi ucapan pengguna dan mengirim pesan
 [`activityStart`](https://ai.google.dev/api/live?hl=id#BidiGenerateContentRealtimeInput.FIELDS.BidiGenerateContentRealtimeInput.ActivityStart.BidiGenerateContentRealtimeInput.activity_start)
 dan [`activityEnd`](https://ai.google.dev/api/live?hl=id#BidiGenerateContentRealtimeInput.FIELDS.BidiGenerateContentRealtimeInput.ActivityEnd.BidiGenerateContentRealtimeInput.activity_end)
-pada waktu yang tepat. `audioStreamEnd` tidak dikirim dalam konfigurasi ini. Sebagai gantinya, setiap gangguan streaming ditandai dengan pesan `activityEnd`.
+pada waktu yang tepat. `audioStreamEnd` tidak dikirim dalam konfigurasi ini. Sebagai gantinya, setiap gangguan pada streaming ditandai dengan pesan `activityEnd`.
 
 ### Python
 
@@ -989,6 +990,42 @@ session.sendRealtimeInput(
 
 session.sendRealtimeInput({ activityEnd: {} })
 ```
+
+### Memahami parameter VAD dan dampaknya terhadap kualitas
+
+Saat menggunakan VAD otomatis, dua parameter utama mengontrol cara audio disegmentasikan menjadi giliran bicara sebelum dikirim ke model:
+
+- **`prefixPaddingMs`**: Jumlah audio yang akan disertakan *sebelum* ucapan
+  terdeteksi. "Melihat kembali" ini memastikan model menangkap keseluruhan
+  mulai bicara, termasuk suku kata pertama yang mungkin dimulai sebelum
+  pemicu VAD. Nilai `0` dapat menyebabkan awal kata terpotong.
+- **`silenceDurationMs`**: Berapa lama server menunggu selama jeda
+  sebelum mengakhiri giliran bicara. Setelan ini menentukan seberapa toleran sistem terhadap jeda alami di tengah kalimat (misalnya, saat berpikir, bernapas, atau batas klausa).
+
+#### Dampak `silenceDurationMs` terhadap kualitas audio
+
+Nilai `silenceDurationMs` secara langsung memengaruhi ukuran dan kelengkapan potongan audio yang diterima model untuk diproses:
+
+- **Direkomendasikan (500 md–800 md):** Memberikan keseimbangan yang baik—model
+  menerima potongan audio yang lengkap dan kaya konteks sekaligus menjaga latensi
+  tetap wajar. Default internal server adalah sekitar 800 md.
+- **Terlalu rendah (misalnya, 100 md–200 md):** Sistem mengakhiri giliran bicara selama jeda alami, membagi satu ucapan menjadi beberapa fragmen audio kecil. Model menerima fragmen ini satu per satu, sehingga kehilangan konteks antar-fragmen dan menghasilkan kualitas transkripsi dan respons yang lebih rendah.
+- **Terlalu tinggi (misalnya, 2000 md+):** Sistem menunggu lama setelah
+  pengguna berhenti berbicara, sehingga meningkatkan latensi yang dirasakan sebelum model
+  merespons.
+
+#### Praktik terbaik untuk VAD manual (sisi klien)
+
+Saat Anda menonaktifkan VAD otomatis dan mengelola sinyal `activityStart`/`activityEnd`
+dari deteksi suara sisi klien Anda sendiri, perlu diketahui bahwa mekanisme buffering audio bawaan server dilewati. Artinya:
+
+1. **Tidak ada buffer pra-ucapan:** Server tidak lagi menambahkan audio sebelum
+   awal ucapan yang terdeteksi. Klien Anda harus menyertakan konteks audio yang memadai sebelum mengirimkan `activityStart`.
+2. **Tidak ada toleransi keheningan:** Server akan segera bertindak berdasarkan sinyal
+   `activityEnd` Anda tanpa menunggu lebih lama. Jika VAD sisi klien Anda menggunakan threshold akhir ucapan yang agresif (misalnya, jeda 200 md), ucapan dapat terpotong di tengah kalimat saat jeda alami.
+
+Untuk mempertahankan kualitas audio dengan VAD manual, gunakan nilai minimum jeda akhir ucapan sebesar **500 md** di detektor aktivitas suara klien Anda.
+Nilai di bawah nilai ini sering kali menyebabkan audio terfragmentasi yang menurunkan kualitas transkripsi dan respons model.
 
 ## Jumlah token
 
@@ -1069,7 +1106,7 @@ Live API hanya menyediakan autentikasi server-ke-server secara default. Jika And
 
 ### Durasi sesi
 
-Sesi audio saja dibatasi hingga 15 menit,
+Sesi khusus audio dibatasi hingga 15 menit,
 dan sesi audio plus video dibatasi hingga 2 menit.
 Namun, Anda dapat mengonfigurasi berbagai [teknik pengelolaan sesi](https://ai.google.dev/gemini-api/docs/live-session?hl=id) untuk perpanjangan tanpa batas pada durasi sesi.
 
@@ -1139,7 +1176,8 @@ Live API mendukung 97 bahasa berikut.
 ## Langkah berikutnya
 
 - Baca panduan [Penggunaan Alat](https://ai.google.dev/gemini-api/docs/live-tools?hl=id) dan
-  [Pengelolaan Sesi](https://ai.google.dev/gemini-api/docs/live-session?hl=id) untuk mendapatkan informasi penting tentang cara menggunakan Live API secara efektif.
+  [Pengelolaan Sesi](https://ai.google.dev/gemini-api/docs/live-session?hl=id) untuk mendapatkan informasi
+  penting tentang cara menggunakan Live API secara efektif.
 - Coba Live API di [Google AI Studio](https://aistudio.google.com/app/live?hl=id).
 - Untuk mengetahui info selengkapnya tentang model Live API, lihat [Audio Native Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models?hl=id#gemini-2.5-flash-native-audio)
   di halaman Model.
@@ -1151,8 +1189,8 @@ Kirim masukan
 
 Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Terakhir diperbarui pada 2026-04-29 UTC.
+Terakhir diperbarui pada 2026-05-13 UTC.
 
 Ada masukan untuk kami?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-05-13 UTC."],[],[]]

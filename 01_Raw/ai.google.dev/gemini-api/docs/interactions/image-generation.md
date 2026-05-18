@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/interactions/image-generation
-fetched_at: 2026-05-11T05:05:22.235088+00:00
+fetched_at: 2026-05-18T05:13:02.383123+00:00
 title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -8,7 +8,7 @@ title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 
 - [Home](https://ai.google.dev/)
 - [Gemini API](https://ai.google.dev/gemini-api)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/overview)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions)
 - [Docs](https://ai.google.dev/gemini-api/docs)
 
 Send feedback
@@ -158,10 +158,12 @@ main();
 ### REST
 
 ```
+# Specifies the API revision to avoid breaking changes when they become default
 curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
+  -H "Api-Revision: 2026-05-20" \
   -d '{
     "model": "gemini-3.1-flash-image-preview",
     "input": [
@@ -271,10 +273,12 @@ main();
 ### REST
 
 ```
+# Specifies the API revision to avoid breaking changes when they become default
 curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
+    -H "Api-Revision: 2026-05-20" \
     -d "{
       \"model\": \"gemini-3.1-flash-image-preview\",
       \"input\": [
@@ -355,10 +359,12 @@ await main();
 ### REST
 
 ```
+# Specifies the API revision to avoid breaking changes when they become default
 curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
+  -H "Api-Revision: 2026-05-20" \
   -d '{
     "model": "gemini-3.1-flash-image-preview",
     "input": [
@@ -383,7 +389,7 @@ interaction_2 = client.interactions.create(
     previous_interaction_id=interaction.id,
     response_format={
         "type": "image",
-        "mime_type": "image/png",
+        "mime_type": "image/jpeg",
         "aspect_ratio": "16:9",
         "image_size": "2K"
     },
@@ -405,7 +411,7 @@ for step in interaction_2.steps:
 const interaction2 = await ai.interactions.create({
   model: "gemini-3.1-flash-image-preview",
   input: "Update this infographic to be in Spanish. Do not change any other elements of the image.",
-  previousInteractionId: interaction.id,
+  previous_interaction_id: interaction.id,
   response_format: {
     type: "image",
     mime_type: "image/png",
@@ -415,11 +421,15 @@ const interaction2 = await ai.interactions.create({
 });
 
 for (const step of interaction2.steps) {
-  if (step.type === "text") {
-    console.log(step.text);
-  } else if (step.type === "image") {
-    const buffer = Buffer.from(step.data, "base64");
-    fs.writeFileSync("photosynthesis_spanish.png", buffer);
+  if (step.type === "model_output") {
+    for (const contentBlock of step.content) {
+      if (contentBlock.type === "text") {
+        console.log(contentBlock.text);
+      } else if (contentBlock.type === "image") {
+        const buffer = Buffer.from(contentBlock.data, "base64");
+        fs.writeFileSync("photosynthesis_spanish.png", buffer);
+      }
+    }
   }
 }
 ```
@@ -427,19 +437,19 @@ for (const step of interaction2.steps) {
 ### REST
 
 ```
+# Specifies the API revision to avoid breaking changes when they become default
 curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
+  -H "Api-Revision: 2026-05-20" \
   -d '{
     "model": "gemini-3.1-flash-image-preview",
-    "input": [{
-      "parts": [{"text": "Update this infographic to be in Spanish. Do not change any other elements of the image."}]
-    }],
+    "input": "Update this infographic to be in Spanish. Do not change any other elements of the image.",
     "previous_interaction_id": "<PREVIOUS_INTERACTION_ID>",
     "response_format": {
       "type": "image",
-      "mime_type": "image/png",
+      "mime_type": "image/jpeg",
       "aspect_ratio": "16:9",
       "image_size": "2K"
     }
@@ -563,17 +573,23 @@ async function main() {
       type: "text",
       text: "An office group photo of these people, they are making funny faces.",
     },
-    { type: "image", mimeType: "image/jpeg", data: base64ImageFile1 },
-    { type: "image", mimeType: "image/jpeg", data: base64ImageFile2 },
-    { type: "image", mimeType: "image/jpeg", data: base64ImageFile3 },
-    { type: "image", mimeType: "image/jpeg", data: base64ImageFile4 },
-    { type: "image", mimeType: "image/jpeg", data: base64ImageFile5 },
+    { type: "image", mime_type: "image/jpeg", data: base64ImageFile1 },
+    { type: "image", mime_type: "image/jpeg", data: base64ImageFile2 },
+    { type: "image", mime_type: "image/jpeg", data: base64ImageFile3 },
+    { type: "image", mime_type: "image/jpeg", data: base64ImageFile4 },
+    { type: "image", mime_type: "image/jpeg", data: base64ImageFile5 },
   ];
 
   const interaction = await ai.interactions.create({
     model: "gemini-3.1-flash-image-preview",
     input: input,
-    responseFormat: { image: { aspectRatio: "5:4", imageSize: "2K" } },
+    response_format: [
+      {
+        type: "image",
+        aspect_ratio: "5:4",
+        image_size: "2K",
+      }
+    ],
   });
 
   for (const step of interaction.steps) {
@@ -596,10 +612,12 @@ main();
 ### REST
 
 ```
+# Specifies the API revision to avoid breaking changes when they become default
 curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
+    -H "Api-Revision: 2026-05-20" \
     -d "{
       \"model\": \"gemini-3.1-flash-image-preview\",
       \"input\": [
@@ -649,7 +667,7 @@ interaction = client.interactions.create(
     tools=[{"type": "google_search"}],
     response_format={
         "type": "image",
-        "mime_type": "image/png",
+        "mime_type": "image/jpeg",
         "aspect_ratio": "16:9"
     },
 )
@@ -676,7 +694,7 @@ async function main() {
   const interaction = await ai.interactions.create({
     model: "gemini-3.1-flash-image-preview",
     input: "Visualize the current weather forecast for the next 5 days in San Francisco as a clean, modern weather chart. Add a visual on what I should wear each day",
-    tools: [{ googleSearch: {} }],
+    tools: [{"type": "google_search"}],
     response_format: {
       type: "image",
       mime_type: "image/png",
@@ -705,21 +723,24 @@ main();
 ### REST
 
 ```
+# Specifies the API revision to avoid breaking changes when they become default
 curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
+  -H "Api-Revision: 2026-05-20" \
   -d '{
     "model": "gemini-3.1-flash-image-preview",
     "input": [
       {"type": "text", "text": "Visualize the current weather forecast for the next 5 days in San Francisco as a clean, modern weather chart. Add a visual on what I should wear each day"}
     ],
-    "tools": [{"google_search": {}}],
+    "tools": [{"type": "google_search"}],
     "response_format": {
       "type": "image",
-      "mime_type": "image/png",
+      "mime_type": "image/jpeg",
       "aspect_ratio": "16:9"
     }
+  }'
 ```
 
 ![AI-generated five day weather chart for San Francisco](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png)
@@ -786,10 +807,12 @@ main();
 ### REST
 
 ```
+# Specifies the API revision to avoid breaking changes when they become default
 curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
+  -H "Api-Revision: 2026-05-20" \
   -d '{
     "model": "gemini-3.1-flash-image-preview",
     "input": "A detailed painting of a Timareta butterfly resting on a flower",
@@ -839,7 +862,7 @@ interaction = client.interactions.create(
     input=prompt,
     response_format={
         "type": "image",
-        "mime_type": "image/png",
+        "mime_type": "image/jpeg",
         "aspect_ratio": "1:1",
         "image_size": "1K"
     },
@@ -895,16 +918,18 @@ main();
 ### REST
 
 ```
+# Specifies the API revision to avoid breaking changes when they become default
 curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
+  -H "Api-Revision: 2026-05-20" \
   -d '{
     "model": "gemini-3.1-flash-image-preview",
     "input": "Da Vinci style anatomical sketch of a dissected Monarch butterfly. Detailed drawings of the head, wings, and legs on textured parchment with notes in English.",
     "response_format": {
       "type": "image",
-      "mime_type": "image/png",
+      "mime_type": "image/jpeg",
       "aspect_ratio": "1:1",
       "image_size": "1K"
     }
@@ -962,11 +987,8 @@ for (const step of interaction.steps) {
 #### Controlling thinking levels
 
 With Gemini 3.1 Flash Image, you can control the amount of thinking the model
-uses to balance quality and latency. The default `thinkingLevel` is `minimal`,
+uses to balance quality and latency. The default `thinking_level` is `minimal`,
 and the supported levels are `minimal` and `high`.
-
-You can add the `includeThoughts` boolean to determine whether the model's
-generated thoughts are returned in the response, or remain hidden.
 
 ### Python
 
@@ -1031,10 +1053,12 @@ main();
 ### REST
 
 ```
+# Specifies the API revision to avoid breaking changes when they become default
 curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
+  -H "Api-Revision: 2026-05-20" \
   -d '{
     "model": "gemini-3.1-flash-image-preview",
     "input": "A futuristic city built inside a giant glass bottle floating in space",
@@ -1044,9 +1068,9 @@ curl -s -X POST \
   }'
 ```
 
-Note that thinking tokens are billed regardless of whether `includeThoughts` is
-set to `true` or `false`, as the [thinking process](#thinking-process) always
-happens by default whether you view the process or not.
+Note that thinking tokens are billed by default for thinking models, as the
+[thinking process](#thinking-process) always happens by default whether you view
+the process or not.
 
 ## Other image generation modes
 
@@ -1107,7 +1131,7 @@ interaction = client.interactions.create(
     response_format=[
         {
             "type": "image",
-            "mime_type": "image/png",
+            "mime_type": "image/jpeg",
             "aspect_ratio": "16:9",
         }
     ],
@@ -1138,7 +1162,7 @@ async function main() {
     response_format: [
       {
         type: "image",
-        mime_type: "image/png",
+        mime_type: "image/jpeg",
         aspect_ratio: "16:9",
       }
     ],
@@ -1163,10 +1187,12 @@ main();
 ### REST
 
 ```
+# Specifies the API revision to avoid breaking changes when they become default
 curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
+  -H "Api-Revision: 2026-05-20" \
   -d '{
     "model": "gemini-3.1-flash-image-preview",
     "input": "A photorealistic wide-angle shot of a vibrant coral reef teeming with tropical fish. Crystal-clear turquoise water with sunbeams filtering down from the surface, illuminating a sea turtle gliding gracefully over the coral. Shot from a low perspective with a wide-angle lens. Aspect ratio 16:9.",
@@ -1327,7 +1353,7 @@ async function main() {
   const interaction = await ai.interactions.create({
     model: "gemini-3.1-flash-image-preview",
     input: "Create a modern, minimalist logo for a coffee shop called 'The Daily Grind'. The text should be in a clean, bold, sans-serif font. The color scheme is black and white. Put the logo in a circle. Use a coffee bean in a clever way.",
-    responseFormat: { type: "image", aspectRatio: "1:1" },
+    response_format: { type: "image", aspect_ratio: "1:1" },
   });
   for (const step of interaction.steps) {
     if (step.type === "model_output") {
@@ -2292,15 +2318,17 @@ import base64
 
 client = genai.Client()
 
-woman_image = Image.open('/path/to/your/woman.png')
-logo_image = Image.open('/path/to/your/logo.png')
+with open('/path/to/your/woman.png', 'rb') as f:
+    woman_bytes = f.read()
+with open('/path/to/your/logo.png', 'rb') as f:
+    logo_bytes = f.read()
 text_input = """Take the first image of the woman with brown hair, blue eyes, and a neutral expression. Add the logo from the second image onto her black t-shirt. Ensure the woman's face and features remain completely unchanged. The logo should look like it's naturally printed on the fabric, following the folds of the shirt."""
 
 interaction = client.interactions.create(
     model="gemini-3.1-flash-image-preview",
     input=[
-      {"type": "image", "mime_type":"image/png", "data": base64.b64encode(woman_image.getvalue()).decode('utf-8')},
-      {"type": "image", "mime_type":"image/png", "data": base64.b64encode(logo_image.getvalue()).decode('utf-8')},
+      {"type": "image", "mime_type":"image/png", "data": base64.b64encode(woman_bytes).decode('utf-8')},
+      {"type": "image", "mime_type":"image/png", "data": base64.b64encode(logo_bytes).decode('utf-8')},
       {"type": "text", "text": text_input}
     ],
 )
@@ -2407,13 +2435,14 @@ import base64
 
 client = genai.Client()
 
-sketch_image = Image.open('/path/to/your/car_sketch.png')
+with open('/path/to/your/car_sketch.png', 'rb') as f:
+    sketch_bytes = f.read()
 text_input = """Turn this rough pencil sketch of a futuristic car into a polished photo of the finished concept car in a showroom. Keep the sleek lines and low profile from the sketch but add metallic blue paint and neon rim lighting."""
 
 interaction = client.interactions.create(
     model="gemini-3.1-flash-image-preview",
     input=[
-      {"type": "image", "mime_type":"image/png", "data": base64.b64encode(sketch_image.getvalue()).decode('utf-8')},
+      {"type": "image", "mime_type":"image/png", "data": base64.b64encode(sketch_bytes).decode('utf-8')},
       {"type": "text", "text": text_input}
     ],
 )
@@ -2516,14 +2545,15 @@ import base64
 
 client = genai.Client()
 
-image_input = Image.open('/path/to/your/man_in_white_glasses.jpg')
+with open('/path/to/your/man_in_white_glasses.jpg', 'rb') as f:
+    image_bytes = f.read()
 text_input = """A studio portrait of this man against white, in profile looking right"""
 
 interaction = client.interactions.create(
     model="gemini-3.1-flash-image-preview",
     input={
       {"type": "text", "text": text_input},
-      {"type": "image", "mime_type":"image/png", "data": base64.b64encode(image_input.getvalue()).decode('utf-8')}
+      {"type": "image", "mime_type":"image/png", "data": base64.b64encode(image_bytes).decode('utf-8')}
     },
 )
 
@@ -2629,7 +2659,7 @@ curl -s -X POST \
   -d '{
     "model": "gemini-3.1-flash-image-preview",
     "input": "Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme",
-    "responseModalities": ["Image"]
+    "response_modalities": ["IMAGE"]
   }'
 ```
 
@@ -2661,12 +2691,13 @@ interaction = client.interactions.create(
 const interaction = await ai.interactions.create({
     model: "gemini-3.1-flash-image-preview",
     input: prompt,
-    response_format: {
-      image: {
+    response_format: [
+      {
+        type: "image",
         aspect_ratio: "16:9",
         image_size: "2K",
       }
-    },
+    ],
   });
 ```
 
@@ -2782,8 +2813,8 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-09 UTC.
+Last updated 2026-05-12 UTC.
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-09 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-12 UTC."],[],[]]

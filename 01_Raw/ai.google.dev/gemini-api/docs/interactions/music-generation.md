@@ -1,38 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/music-generation?hl=pl
-fetched_at: 2026-05-11T05:08:07.125758+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/music-generation?hl=fr
+fetched_at: 2026-05-18T05:06:34.839148+00:00
 title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/overview?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Prześlij opinię
+Envoyer des commentaires
 
-# Generowanie muzyki za pomocą Lyrii 3
+# Générer de la musique avec Lyria 3
 
-Lyria 3 to rodzina modeli generowania muzyki od Google, dostępna w ramach Gemini API. Za pomocą Lyrii 3 możesz generować wysokiej jakości dźwięk stereo o częstotliwości próbkowania 44,1 kHz na podstawie promptów tekstowych lub obrazów. Te modele zapewniają spójność strukturalną, w tym wokal, zsynchronizowany tekst i pełne aranżacje instrumentalne.
+Lyria 3 est la famille de modèles de génération de musique de Google, disponible via l'API Gemini. Avec Lyria 3, vous pouvez générer un son stéréo de haute qualité à 44, 1 kHz à partir de requêtes textuelles ou d'images. Ces modèles offrent une cohérence structurelle, y compris les voix, les paroles synchronisées et les arrangements instrumentaux complets.
 
-Rodzina modeli Lyria 3 obejmuje 2 modele:
+La famille Lyria 3 comprend deux modèles :
 
-| Model | Identyfikator modelu | Urządzenia | Czas trwania | Wyniki |
+| Modèle | ID du modèle | Application idéale | Durée | Sortie |
 | --- | --- | --- | --- | --- |
-| **Lyria 3 Clip** | `lyria-3-clip-preview` | krótkie klipy, pętle, wersje przedpremierowe; | 30 sekund | MP3 |
-| **Lyria 3 Pro** | `lyria-3-pro-preview` | pełne utwory z wersami, refrenami i przejściami; | Kilka minut (można kontrolować za pomocą prompta) | MP3 |
+| **Lyria 3 Clip** | `lyria-3-clip-preview` | Clips courts, boucles, aperçus | 30 secondes | MP3 |
+| **Lyria 3 Pro** | `lyria-3-pro-preview` | Chansons complètes avec couplets, refrains et ponts | Quelques minutes (contrôlables à l'aide d'une requête) | MP3 |
 
-Oba modele można używać za pomocą nowego [interfejsu Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=pl), który obsługuje dane wejściowe w różnych formatach (tekst i obrazy) i generuje **stereofoniczny dźwięk o wysokiej jakości (44,1 kHz)**.
+Les deux modèles peuvent être utilisés avec la nouvelle [API Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=fr),
+qui accepte les entrées multimodales (texte et images) et produit un son **stéréo haute fidélité à
+44,1 kHz**.
 
-## Generowanie klipu muzycznego
+## Générer un clip musical
 
-Model Lyria 3 Clip zawsze generuje **30-sekundowy** klip. Aby wygenerować klip, wywołaj metodę `interactions.create` z promptem tekstowym. Odpowiedź zawsze zawiera wygenerowane słowa i strukturę utworu wraz z dźwiękiem w schemacie `steps`.
+Le modèle Lyria 3 Clip génère toujours un clip de **30 secondes**. Pour générer un clip, appelez la méthode `interactions.create` avec une requête textuelle. La réponse inclut toujours les paroles et la structure de la chanson générées, ainsi que l'audio dans le schéma `steps`.
 
 ### Python
 
@@ -44,7 +46,7 @@ client = genai.Client()
 
 interaction = client.interactions.create(
     model="lyria-3-clip-preview",
-    input="Create a 30-second cheerful acoustic folk song with guitar and harmonica.",
+    input="A short instrumental acoustic guitar piece.",
 )
 
 for step in interaction.steps:
@@ -68,15 +70,14 @@ const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
     model: 'lyria-3-clip-preview',
-    input: 'Create a 30-second cheerful acoustic folk song with ' +
-           'guitar and harmonica.',
+    input: 'A short instrumental acoustic guitar piece.',
 });
 
 for (const step of interaction.steps) {
     if (step.type === 'model_output') {
         for (const contentBlock of step.content) {
             if (contentBlock.type === 'audio') {
-                console.log(`Generated audio with mime_type: ${contentBlock.mimeType}`);
+                console.log(`Generated audio with mime_type: ${contentBlock.mime_type}`);
                 fs.writeFileSync('music.mp3', Buffer.from(contentBlock.data, 'base64'));
             } else if (contentBlock.type === 'text') {
                 console.log(`Lyrics: ${contentBlock.text}`);
@@ -91,16 +92,19 @@ for (const step of interaction.steps) {
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
+-H "Api-Revision: 2026-05-20" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
     "model": "lyria-3-clip-preview",
-    "input": "Create a 30-second cheerful acoustic folk song with guitar and harmonica."
+    "input": "A short instrumental acoustic guitar piece."
 }'
 ```
 
-## Generowanie pełnych utworów
+## Générer une chanson complète
 
-Użyj modelu `lyria-3-pro-preview`, aby wygenerować pełne utwory trwające kilka minut. Model Pro rozumie strukturę muzyczną i może tworzyć kompozycje z wyraźnymi zwrotkami, refrenami i przejściami. Możesz wpłynąć na czas trwania utworu, podając go w prompcie (np. „utwórz 2-minutową piosenkę”) lub używając [sygnatur czasowych](#timing) do zdefiniowania struktury.
+Utilisez le modèle `lyria-3-pro-preview` pour générer des chansons complètes de quelques minutes. Le modèle Pro comprend la structure musicale et peut créer des compositions avec des couplets, des refrains et des ponts distincts. Vous pouvez influencer la
+durée en la spécifiant dans votre requête (par exemple, "créer une chanson de 2 minutes") ou en
+utilisant [des codes temporels](#timing) pour définir la structure.
 
 ### Python
 
@@ -116,9 +120,7 @@ interaction = client.interactions.create(
 ```
 const interaction = await client.interactions.create({
     model: 'lyria-3-pro-preview',
-    input: 'An epic cinematic orchestral piece about a journey home. ' +
-           'Starts with a solo piano intro, builds through sweeping ' +
-           'strings, and climaxes with a massive wall of sound.',
+    input: 'A beautiful piano melody.',
 });
 ```
 
@@ -127,25 +129,25 @@ const interaction = await client.interactions.create({
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
+-H "Api-Revision: 2026-05-20" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
     "model": "lyria-3-pro-preview",
-    "input": "An epic cinematic orchestral piece about a journey home. Starts with a solo piano intro, builds through sweeping strings, and climaxes with a massive wall of sound."
+    "input": "A beautiful piano melody."
 }'
 ```
 
-## Wybierz format wyjściowy
+## Sélectionner le format de sortie
 
-Domyślnie modele Lyria 3 generują dźwięk w formacie **MP3**. W przypadku Lyria 3 Pro możesz też poprosić o wygenerowanie danych wyjściowych w formacie **WAV**, ustawiając `response_mime_type`.
+Par défaut, les modèles Lyria 3 génèrent de l'audio au format **MP3**. Pour Lyria 3 Pro, vous pouvez également demander la sortie au format **WAV** en définissant le `response_format`.
 
 ### Python
 
 ```
 interaction = client.interactions.create(
     model="lyria-3-pro-preview",
-    input="An atmospheric ambient track.",
-    response_modalities=["audio", "text"],
-    response_mime_type="audio/wav",
+    input="A beautiful piano melody.",
+    response_format={"type": "audio"},
 )
 ```
 
@@ -154,9 +156,10 @@ interaction = client.interactions.create(
 ```
 const interaction = await client.interactions.create({
     model: 'lyria-3-pro-preview',
-    input: 'An atmospheric ambient track.',
-    responseModalities: ["audio", "text"],
-    responseMimeType: "audio/wav",
+    input: 'A beautiful piano melody.',
+    response_format: {
+        type: 'audio',
+    },
 });
 ```
 
@@ -165,21 +168,23 @@ const interaction = await client.interactions.create({
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H "Api-Revision: 2026-05-20" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "lyria-3-pro-preview",
-    "input": "An atmospheric ambient track.",
-    "responseModalities": ["audio", "text"],
-    "responseMimeType": "audio/wav"
+    "input": "A beautiful piano melody.",
+    "response_format": {
+        "type": "audio"
+    }
   }'
 ```
 
-## Analizowanie odpowiedzi
+## Analyser la réponse
 
-Odpowiedź z Lyrii 3 zawiera wiele bloków treści w schemacie `steps`.
-Interakcje zwracają sekwencję kroków, w której kroki `model_output` zawierają wygenerowane treści.
-Bloki treści tekstowych zawierają wygenerowany tekst lub opis struktury utworu w formacie JSON.
-Bloki treści typu `audio` zawierają dane audio zakodowane w formacie base64.
+La réponse de Lyria 3 contient plusieurs blocs de contenu dans le schéma `steps`.
+Les interactions renvoient une séquence d'étapes, où les étapes `model_output` contiennent le contenu généré.
+Les blocs de contenu textuel contiennent les paroles générées ou une description JSON de la structure de la chanson.
+Les blocs de contenu de type `audio` contiennent les données audio encodées en base64.
 
 ### Python
 
@@ -239,26 +244,31 @@ if (audioData) {
 curl ... | jq -r '.steps[] | select(.type=="model_output") | .content[] | select(.type=="audio") | .data' | base64 -d > output.mp3
 ```
 
-## Generowanie muzyki na podstawie obrazów
+## Générer de la musique à partir d'images
 
-Lyria 3 obsługuje dane wejściowe multimodalne – możesz podać maksymalnie **10 obrazów**
-wraz z promptem tekstowym na liście `input`, a model skomponuje muzykę
-inspirowaną treściami wizualnymi.
+Lyria 3 accepte les entrées multimodales. Vous pouvez fournir jusqu'à **10 images** avec votre requête textuelle dans la liste `input`. Le modèle composera de la musique inspirée du contenu visuel.
 
 ### Python
 
 ```
-uploaded_image = client.files.upload(file="desert_sunset.jpg")
+import base64
+
+with open("desert_sunset.jpg", "rb") as f:
+    image_bytes = f.read()
+    image_b64 = base64.b64encode(image_bytes).decode("utf-8")
 
 response = client.interactions.create(
     model="lyria-3-pro-preview",
     input=[
-        {"type": "text", "text": "An atmospheric ambient track inspired by the mood and colors in this image."},
+        {
+            "type": "text",
+            "text": "An atmospheric ambient track inspired by the mood and colors in this image.",
+        },
         {
             "type": "image",
-            "uri": uploaded_image.uri,
-            "mime_type": uploaded_image.mime_type
-        }
+            "mime_type": "image/jpeg",
+            "data": image_b64,
+        },
     ],
 )
 ```
@@ -266,20 +276,22 @@ response = client.interactions.create(
 ### JavaScript
 
 ```
-const uploadedImage = await client.files.upload({
-    file: "desert_sunset.jpg",
-    config: { mimeType: "image/jpeg" }
-});
+import * as fs from "fs";
+
+const imageBytes = fs.readFileSync("desert_sunset.jpg").toString("base64");
 
 const interaction = await client.interactions.create({
-    model: 'lyria-3-pro-preview',
+    model: "lyria-3-pro-preview",
     input: [
-        { type: 'text', text: 'An atmospheric ambient track inspired by the mood and colors in this image.' },
         {
-            type: 'image',
-            uri: uploadedImage.uri,
-            mimeType: uploadedImage.mimeType
-        }
+            type: "text",
+            text: "An atmospheric ambient track inspired by the mood and colors in this image.",
+        },
+        {
+            type: "image",
+            mime_type: "image/jpeg",
+            data: imageBytes,
+        },
     ],
 });
 ```
@@ -287,22 +299,23 @@ const interaction = await client.interactions.create({
 ### REST
 
 ```
-# First upload the image using the Files API, then use the URI:
+# Pass base64 encoded image data directly:
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H "Api-Revision: 2026-05-20" \
   -H 'Content-Type: application/json' \
   -d '{
     "model": "lyria-3-pro-preview",
     "input": [
       {"type": "text", "text": "An atmospheric ambient track inspired by the mood and colors in this image."},
-      {"type": "image", "uri": "YOUR_FILE_URI", "mime_type": "image/jpeg"}
+      {"type": "image", "mime_type": "image/jpeg", "data": "/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////wgALCAABAAEBAREA/8QAFBABAAAAAAAAAAAAAAAAAAAAAP/aAAgBAQABPxA="}
     ]
   }'
 ```
 
-## Podaj własny tekst
+## Fournir des paroles personnalisées
 
-Możesz napisać własny tekst i uwzględnić go w prompcie. Używaj tagów sekcji, takich jak `[Verse]`, `[Chorus]` i `[Bridge]`, aby pomóc modelowi zrozumieć strukturę utworu:
+Vous pouvez écrire vos propres paroles et les inclure dans la requête. Utilisez des balises de section telles que `[Verse]`, `[Chorus]` et `[Bridge]` pour aider le modèle à comprendre la structure de la chanson :
 
 ### Python
 
@@ -371,6 +384,7 @@ const interaction = await client.interactions.create({
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H "Api-Revision: 2026-05-20" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "lyria-3-pro-preview",
@@ -378,9 +392,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Kontrolowanie czasu i struktury
+## Contrôler le timing et la structure
 
-Za pomocą sygnatur czasowych możesz określić, co dokładnie ma się dziać w konkretnych momentach utworu. Jest to przydatne do kontrolowania, kiedy wchodzą instrumenty, kiedy pojawiają się słowa i jak rozwija się utwór:
+Vous pouvez spécifier exactement ce qui se passe à des moments précis de la chanson à l'aide de codes temporels. Cela est utile pour contrôler le moment où les instruments entrent en jeu, le moment où les paroles sont prononcées et la progression de la chanson :
 
 ### Python
 
@@ -425,6 +439,7 @@ const interaction = await client.interactions.create({
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H "Api-Revision: 2026-05-20" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "lyria-3-pro-preview",
@@ -432,9 +447,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Generowanie utworów instrumentalnych
+## Générer des pistes instrumentales
 
-W przypadku muzyki w tle, ścieżek dźwiękowych do gier lub innych zastosowań, w których nie są wymagane wokale, możesz poprosić model o wygenerowanie utworów instrumentalnych:
+Pour la musique de fond, les bandes originales de jeux ou tout cas d'utilisation où les voix ne sont pas nécessaires, vous pouvez demander au modèle de produire des pistes uniquement instrumentales :
 
 ### Python
 
@@ -459,6 +474,7 @@ const interaction = await client.interactions.create({
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H "Api-Revision: 2026-05-20" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "lyria-3-clip-preview",
@@ -466,9 +482,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Generowanie muzyki w różnych językach
+## Générer de la musique dans différentes langues
 
-Lyria 3 generuje tekst w języku prompta. Aby wygenerować utwór z tekstem w języku francuskim, napisz prompt w tym języku. Model dostosowuje styl głosu i wymowę do języka.
+Lyria 3 génère des paroles dans la langue de votre requête. Pour générer une chanson avec des paroles en français, rédigez votre requête en français. Le modèle adapte son style vocal et sa prononciation à la langue.
 
 ### Python
 
@@ -493,6 +509,7 @@ const interaction = await client.interactions.create({
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H "Api-Revision: 2026-05-20" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "lyria-3-pro-preview",
@@ -500,26 +517,30 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Inteligencja modelu
+## Intelligence du modèle
 
-Lyria 3 analizuje proces promptowania, w którym model wnioskuje na podstawie prompta o strukturze muzycznej (intro, zwrotka, refren, bridge itp.).
-Dzieje się to przed wygenerowaniem dźwięku i zapewnia spójność strukturalną oraz muzykalność.
+Lyria 3 analyse le processus de votre requête, où le modèle raisonne sur la structure musicale (intro, couplet, refrain, pont, etc.) en fonction de votre requête.
+Cela se produit avant la génération de l'audio et garantit la cohérence structurelle et la musicalité.
 
-## Przewodnik po promptach
+## Guide sur les requêtes
 
-Im bardziej szczegółowy prompt, tym lepsze wyniki. Oto co możesz uwzględnić, aby ułatwić generowanie:
+Plus votre requête est spécifique, meilleurs sont les résultats. Voici ce que vous pouvez inclure pour guider la génération :
 
-- **Gatunek:** określ gatunek lub mieszankę gatunków (np. „lo-fi hip hop”, „jazz fusion”, „cinematic orchestral”).
-- **Instrumenty:** podaj konkretne instrumenty (np. „fortepian Fender Rhodes”, „gitara slide”, „automat perkusyjny TR-808”).
-- **BPM:** ustaw tempo (np. „120 BPM”, „wolne tempo około 70 BPM”).
-- **Tonacja:** podaj tonację (np. „w tonacji G-dur”, „d-moll”).
-- **Nastrój i atmosfera:** używaj przymiotników opisowych (np. „nostalgiczny”, „agresywny”, „etericzny”, „marzycielski”).
-- **Struktura:** używaj tagów takich jak `[Verse]`, `[Chorus]`, `[Bridge]`, `[Intro]`, `[Outro]` lub sygnatur czasowych, aby kontrolować postęp utworu.
-- **Czas trwania:** model Clip zawsze tworzy 30-sekundowe klipy. W przypadku modelu Pro określ zamierzoną długość w promcie (np. „utwórz 2-minutową piosenkę”) lub użyj sygnatur czasowych, aby kontrolować czas trwania.
+- **Genre** : spécifiez un genre ou un mélange de genres (par exemple, « lo-fi hip hop »,
+  « jazz fusion », « orchestre cinématographique »).
+- **Instruments** : nommez des instruments spécifiques (par exemple, "piano Fender Rhodes",
+  "guitare slide", "boîte à rythmes TR-808").
+- **BPM** : définissez le tempo (par exemple, "120 BPM", "tempo lent autour de 70 BPM").
+- **Tonalité/Gamme** : spécifiez une tonalité musicale (par exemple, "en sol majeur", "en ré mineur").
+- **Ambiance** : utilisez des adjectifs descriptifs (par exemple, "nostalgique",
+  "agressif", "éthéré", "rêveur").
+- **Structure** : utilisez des balises telles que `[Verse]`, `[Chorus]`, `[Bridge]`, `[Intro]`,
+  `[Outro]` ou des codes temporels pour contrôler la progression de la chanson.
+- **Durée** : le modèle Clip produit toujours des clips de 30 secondes. Pour le modèle Pro, spécifiez la durée souhaitée dans votre requête (par exemple, "créer une chanson de 2 minutes") ou utilisez des codes temporels pour contrôler la durée.
 
-### Przykładowe prompty
+### Exemples de prompts
 
-Oto kilka przykładów skutecznych promptów:
+Voici quelques exemples de requêtes efficaces :
 
 - `"A 30-second lofi hip hop beat with dusty vinyl crackle, mellow Rhodes
   piano chords, a slow boom-bap drum pattern at 85 BPM, and a jazzy upright
@@ -530,38 +551,42 @@ Oto kilka przykładów skutecznych promptów:
 - `"A dark, atmospheric trap beat at 140 BPM with heavy 808 bass, eerie synth
   pads, sharp hi-hats, and a haunting vocal sample. In D minor."`
 
-## Sprawdzone metody
+## Bonnes pratiques
 
-- **Najpierw iteruj za pomocą funkcji Clip.** Używaj szybszego modelu `lyria-3-clip-preview`, aby eksperymentować z promptami, zanim zdecydujesz się na wygenerowanie pełnej wersji za pomocą modelu `lyria-3-pro-preview`.
-- **Unikaj ogólników.** Niejasne prompty dają ogólne wyniki. Aby uzyskać najlepszy wynik, podaj instrumenty, tempo, tonację, nastrój i strukturę.
-- **Dopasuj język.** Wpisz prompt w języku, w którym chcesz uzyskać tekst utworu.
-- **Używaj tagów sekcji.** Tagi `[Verse]`, `[Chorus]` i `[Bridge]` nadają modelowi wyraźną strukturę, której może się trzymać.
-- **Oddziel słowa piosenki od instrukcji.** Podczas podawania niestandardowego tekstu wyraźnie oddziel go od instrukcji dotyczących kierunku muzycznego.
+- **Itérez d'abord avec Clip.** Utilisez le modèle `lyria-3-clip-preview` plus rapide pour tester les requêtes avant de vous engager dans une génération complète avec `lyria-3-pro-preview`.
+- **Soyez précis.** Les requêtes vagues produisent des résultats génériques. Mentionnez les instruments, le BPM, la tonalité, l'ambiance et la structure pour obtenir le meilleur résultat.
+- **Utilisez la même langue.** Rédigez votre requête dans la langue dans laquelle vous souhaitez que les paroles soient générées.
+- **Utilisez des balises de section.** Les balises `[Verse]`, `[Chorus]` et `[Bridge]` donnent au modèle une structure claire à suivre.
+- **Séparez les paroles des instructions.** Lorsque vous fournissez des paroles personnalisées, séparez-les clairement de vos instructions de direction musicale.
 
-## Ograniczenia
+## Limites
 
-- **Bezpieczeństwo:** wszystkie prompty są sprawdzane przez filtry bezpieczeństwa. Prompty, które aktywują filtry, zostaną zablokowane. Obejmuje to prompty, które wymagają konkretnych głosów artystów lub generowania tekstów chronionych prawem autorskim.
-- **Dodawanie znaków wodnych:** wszystkie wygenerowane pliki audio zawierają [znak wodny audio SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=pl), który umożliwia identyfikację. Ten znak wodny jest niesłyszalny dla ludzkiego ucha i nie wpływa na jakość odsłuchu.
-- **Edytowanie wieloetapowe:** generowanie muzyki to proces jednoetapowy.
-  Iteracyjne edytowanie lub ulepszanie wygenerowanego klipu za pomocą wielu promptów nie jest obsługiwane w obecnej wersji Lyrii 3.
-- **Długość:** model Clip zawsze generuje 30-sekundowe klipy. Model Pro generuje utwory trwające kilka minut. Na dokładny czas trwania może wpływać prompt.
-- **Determinacja:** wyniki mogą się różnić w zależności od połączenia, nawet w przypadku tego samego prompta.
+- **Sécurité** : toutes les requêtes sont vérifiées par des filtres de sécurité. Les requêtes qui déclenchent les filtres seront bloquées. Cela inclut les requêtes qui demandent des voix d'artistes spécifiques ou la génération de paroles protégées par des droits d'auteur.
+- **Filigranes** : tous les contenus audio générés incluent un
+  [filigrane audio SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=fr) pour
+  l'identification. Ce filigrane est imperceptible à l'oreille humaine et n'affecte pas l'expérience d'écoute.
+- **Modification en plusieurs étapes** : la génération de musique est un processus en une seule étape.
+  La modification itérative ou l'affinage d'un clip généré via plusieurs requêtes ne sont pas compatibles avec la version actuelle de Lyria 3.
+- **Longueur** : le modèle Clip génère toujours des clips de 30 secondes. Le modèle Pro génère des chansons qui durent quelques minutes. La durée exacte peut être influencée par votre requête.
+- **Déterminisme** : les résultats peuvent varier d'un appel à l'autre, même avec la même requête.
 
-## Co dalej?
+## Étape suivante
 
-- Sprawdź [ceny](https://ai.google.dev/gemini-api/docs/interactions/pricing?hl=pl) modeli Lyria 3.
-- Wypróbuj [generowanie muzyki w czasie rzeczywistym](https://ai.google.dev/gemini-api/docs/interactions/realtime-music-generation?hl=pl) za pomocą Lyrii RealTime.
-- generować rozmowy z udziałem wielu osób za pomocą [modeli TTS](https://ai.google.dev/gemini-api/docs/interactions/audio-generation?hl=pl),
-- Dowiedz się, jak generować [obrazy](https://ai.google.dev/gemini-api/docs/interactions/image-generation?hl=pl) i [filmy](https://ai.google.dev/gemini-api/docs/interactions/video?hl=pl).
-- Dowiedz się, jak Gemini może [rozumieć pliki audio](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=pl),
-- Prowadź rozmowy z Gemini w czasie rzeczywistym za pomocą [interfejsu Live API](https://ai.google.dev/gemini-api/docs/interactions/live?hl=pl).
+- Consultez les [tarifs](https://ai.google.dev/gemini-api/docs/interactions/pricing?hl=fr) des modèles Lyria 3,
+- [Essayez la génération de musique en streaming et en temps réel avec Lyria RealTime,](https://ai.google.dev/gemini-api/docs/interactions/realtime-music-generation?hl=fr)
+- Générez des conversations à plusieurs locuteurs avec les
+  [modèles TTS](https://ai.google.dev/gemini-api/docs/interactions/audio-generation?hl=fr),
+- Découvrez comment générer des [images](https://ai.google.dev/gemini-api/docs/interactions/image-generation?hl=fr) ou des [vidéos](https://ai.google.dev/gemini-api/docs/interactions/video?hl=fr),
+- Découvrez comment Gemini peut [comprendre les fichiers audio](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=fr),
+- Discutez en temps réel avec Gemini à l'aide de l'
+  [API Live](https://ai.google.dev/gemini-api/docs/interactions/live?hl=fr).
 
-Prześlij opinię
+Envoyer des commentaires
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Ostatnia aktualizacja: 2026-05-07 UTC.
+Dernière mise à jour le 2026/05/11 (UTC).
 
-Chcesz przekazać coś jeszcze?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-05-07 UTC."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/05/11 (UTC)."],[],[]]

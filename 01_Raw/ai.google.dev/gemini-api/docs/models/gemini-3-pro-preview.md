@@ -1,41 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-preview?hl=ja
-fetched_at: 2026-05-11T05:05:48.735823+00:00
-title: "Gemini 3 Pro \u30d7\u30ec\u30d3\u30e5\u30fc \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-preview?hl=fr
+fetched_at: 2026-05-18T05:12:57.727405+00:00
+title: "Aper\u00e7u de Gemini\u00a03 Pro \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-フィードバックを送信
+Envoyer des commentaires
 
-# Gemini 3 Pro プレビュー
+# Aperçu de Gemini 3 Pro
 
 ## gemini-3-pro-preview
 
-| プロパティ | 説明 |
+| Propriété | Description |
 | --- | --- |
-| id\_cardモデルコード | `gemini-3-pro-preview` |
-| saveサポートされるデータタイプ | **入力**  テキスト、画像、動画、音声、PDF  **出力**  テキスト |
-| token\_autoトークン上限[[\*](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)] | **入力トークンの上限**  1,048,576  **出力トークンの上限**  65,536 |
-| handyman機能 | **音声生成**  サポート対象外  **Batch API**  サポート対象  **キャッシュ保存**  サポート対象  **コードの実行**  サポート対象  **コンピュータ使用**  サポート対象外  **ファイル検索**  サポート対象  **関数呼び出し**  サポート対象  **Google マップによるグラウンディング**  サポート対象外  **画像生成**  サポート対象外  **Live API**  サポート対象外  **検索によるグラウンディング**  サポート対象  **構造化出力**  サポート対象  **思考モード**  サポート対象  **URL コンテキスト**  サポート対象 |
-| 123バージョン | 詳細については、[モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja#model-versions)をご覧ください。  - *シャットダウン*: `gemini-3-pro-preview` |
-| calendar\_month最終更新日 | 2025 年 11 月 |
-| cognition\_2ナレッジ カットオフ | 2025 年 1 月 |
+| id\_cardCode du modèle | `gemini-3-pro-preview` |
+| saveTypes de données compatibles | **Entrées**  Texte, image, vidéo, audio et PDF  **Résultat**  Texte |
+| token\_auto[Limites de jetons[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  1 048 576  **Limite de jetons de sortie**  65 536 |
+| handymanFonctions | **Génération audio**  Non compatible  **API par lot**  Compatible  **Mise en cache**  Compatible  **Exécution de code**  Compatible  **Utilisation de l'ordinateur**  Non compatible  **Recherche de fichiers**  Compatible  **Appel de fonction**  Compatible  **Ancrage avec Google Maps**  Non compatible  **Génération d'images**  Non compatible  **API Live**  Non compatible  **Ancrage de recherche**  Compatible  **Sorties structurées**  Compatible  **Raisonnement**  Compatible  **Contexte d'URL**  Compatible |
+| 123Versions | Pour en savoir plus, consultez les [modèles de version](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - *Éteindre* : `gemini-3-pro-preview` |
+| calendar\_monthDernière mise à jour | Novembre 2025 |
+| cognition\_2Date limite des connaissances (ou "knowledge cutoff") | Janvier 2025 |
 
-フィードバックを送信
+Envoyer des commentaires
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-最終更新日 2026-04-29 UTC。
+Dernière mise à jour le 2026/04/29 (UTC).
 
-ご意見をお聞かせください
+Voulez-vous nous donner plus d'informations ?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/04/29 (UTC)."],[],[]]

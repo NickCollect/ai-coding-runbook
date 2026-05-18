@@ -1,404 +1,391 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/billing?hl=ar
-fetched_at: 2026-05-11T05:07:37.599351+00:00
-title: "\u0627\u0644\u0641\u0648\u062a\u0631\u0629 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/billing?hl=vi
+fetched_at: 2026-05-18T05:06:26.572403+00:00
+title: "L\u1eadp h\u00f3a \u0111\u01a1n \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-إرسال ملاحظات
+Gửi ý kiến phản hồi
 
-# الفوترة
+# Lập hóa đơn
 
-يقدّم هذا الدليل نظرة عامة على خيارات الفوترة المختلفة لواجهة Gemini API، ويوضّح كيفية تفعيل الفوترة وتتبُّع الاستخدام، كما يقدّم إجابات عن الأسئلة الشائعة حول الفوترة.
+Hướng dẫn này cung cấp thông tin tổng quan về các lựa chọn tính phí khi dùng Gemini API, giải thích cách bật tính năng thanh toán và theo dõi mức sử dụng, đồng thời giải đáp các câu hỏi thường gặp (FAQ) về việc thanh toán.
 
-## لمحة عن الفوترة والمستويات
+## Giới thiệu về việc thanh toán và các cấp
 
-تستند الفوترة في Gemini API إلى سجلّ الدفع الخاص بك.
+Việc tính phí cho Gemini API dựa trên nhật ký thanh toán của bạn.
 
-| فئة الاستخدام | التصفيات | [الحد الأقصى لفئة الفوترة](#spend-caps) |
+| Cấp sử dụng | Vòng loại | [Hạn mức cấp thanh toán](#spend-caps) |
 | --- | --- | --- |
-| **Free** | [مشروع نشط](https://ai.google.dev/gemini-api/docs/api-key?hl=ar#google-cloud-projects) أو فترة تجريبية مجانية | لا ينطبق |
-| **المستوى 1** | [إعداد حساب فوترة نشط وربطه](#setup-billing) | ‫250 دولار أمريكي |
-| **المستوى 2** | تم دفع 100 دولار أمريكي + 3 أيام من أول عملية دفع ناجحة | 2000 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
-| **المستوى 3** | تم دفع 1,000 دولار أمريكي + 30 يومًا من أول عملية دفع ناجحة | $20,000 - $100,000+ |
+| **Free** | [Dự án đang hoạt động](https://ai.google.dev/gemini-api/docs/api-key?hl=vi#google-cloud-projects) hoặc dùng thử miễn phí | Không áp dụng |
+| **Cấp 1** | [Thiết lập và liên kết một tài khoản thanh toán đang hoạt động](#setup-billing) | đô la Hong Kong |
+| **Cấp 2** | Đã thanh toán 100 USD + 3 ngày kể từ lần thanh toán thành công đầu tiên | $2.000 |
+| **Cấp 3** | Thanh toán 1.000 USD + 30 ngày kể từ lần thanh toán thành công đầu tiên | 20.000 – 100.000 đô la Mỹ trở lên |
 
-تبدأ الحسابات الجديدة في &quot;الخطة المجانية&quot; التي تتيح الوصول إلى [نماذج معيّنة](https://ai.google.dev/gemini-api/docs/pricing?hl=ar) في Gemini API وAI Studio، وذلك بما يصل إلى [حدود معدّل](https://aistudio.google.com/rate-limit?hl=ar) الخطة المجانية للنماذج.
+Các tài khoản mới sẽ bắt đầu ở Cấp miễn phí, cho phép truy cập vào [một số mô hình](https://ai.google.dev/gemini-api/docs/pricing?hl=vi) trong Gemini API và AI Studio, tối đa theo [hạn mức tốc độ](https://aistudio.google.com/rate-limit?hl=vi) của cấp miễn phí của các mô hình.
 
-للوصول إلى حدود معدّل استخدام أعلى، واستخدام نماذج متقدّمة، والتأكّد من **عدم** استخدام طلباتك وردودك لتحسين منتجات Google\*، يمكنك [ربط حساب فوترة](#setup-billing) و[الدفع المسبق](#prepay) للانتقال إلى
-الفئات المدفوعة.
-بعد ذلك، ستنتقل إلى مستويات أعلى استنادًا إلى الإنفاق التراكمي وعمر الحساب. في المستوى 3، قد يتوفّر لك خيار التبديل إلى نظام الفوترة [الدفع عند الاستخدام](#postpay).
+Để triển khai các ứng dụng ngay từ Chế độ tạo, bạn có thể sử dụng **Bậc khởi đầu của Google Cloud**.
+Cấp này cho phép bạn xuất bản tối đa 2 ứng dụng full stack mà không cần thiết lập dự án trên đám mây của Google hoặc tài khoản thanh toán.
+Hãy xem phần [Triển khai từ Google AI Studio](https://ai.google.dev/gemini-api/docs/deploying?hl=vi) để biết thông tin chi tiết và tham khảo [tài liệu về Bậc khởi đầu của Google Cloud](https://docs.cloud.google.com/docs/starter-tier?hl=vi) để biết thêm thông tin.
 
-يتم تحديد الفئات وحدود المعدّل القصوى وحدود حساب الفوترة على مستوى [حساب الفوترة](#cloud-billing).
+Để truy cập vào hạn mức tốc độ cao hơn, sử dụng các mô hình nâng cao và đảm bảo rằng câu lệnh và câu trả lời của bạn **không** được dùng để cải thiện các sản phẩm của Google\*, bạn có thể [liên kết tài khoản thanh toán](#setup-billing) và [trả trước](#prepay) để chuyển sang Cấp có tính phí.
+Sau đó, bạn sẽ chuyển sang các cấp cao hơn dựa trên tổng mức chi tiêu và tuổi tài khoản. Ở Cấp 3, bạn có thể chuyển sang phương thức thanh toán [trả sau](#postpay).
 
-\* *خصوصية البيانات على مستوى المؤسسة: لمزيد من المعلومات حول استخدام البيانات
-في الخدمات المدفوعة، يُرجى الاطّلاع على [بنود الخدمة](https://ai.google.dev/gemini-api/terms?hl=ar#data-use-paid).*
+Các cấp, hạn mức và hạn mức tài khoản thanh toán đều được xác định ở cấp [tài khoản thanh toán](#cloud-billing).
 
-## إعداد الفوترة للوصول إلى "المستوى المدفوع"
+\* *Quyền riêng tư đối với dữ liệu cấp doanh nghiệp: Để biết thêm thông tin về việc sử dụng dữ liệu cho các dịch vụ có tính phí, hãy xem [Điều khoản dịch vụ](https://ai.google.dev/gemini-api/terms?hl=vi#data-use-paid).*
 
-يمكنك إنشاء مشروع وإعداد الفوترة، أو استيراد مشروع حالي، للترقية إلى "المستوى المدفوع" في [Google AI Studio](https://aistudio.google.com/projects?hl=ar).
-يعني الترقية من "المستوى المجاني" إلى "المستوى المدفوع" ربط حساب فوترة و[الدفع المسبق](#prepay) لإضافة 10 دولار أمريكي كحد أدنى (أو ما يعادله بعملات أخرى) إلى حسابك.
+## Thiết lập thông tin thanh toán để sử dụng Gói trả phí
 
-1. انتقِل إلى صفحة [مفاتيح واجهة برمجة التطبيقات](https://aistudio.google.com/api-keys?hl=ar) أو صفحة [المشاريع](https://aistudio.google.com/projects?hl=ar) في AI Studio، أو إلى أي مكان يظهر فيه زر **إعداد الفوترة** في AI Studio.
-   - سيتم تلقائيًا إنشاء [مشروع ومفتاح واجهة برمجة تطبيقات](https://ai.google.dev/gemini-api/docs/api-key?hl=ar#google-cloud-projects) للمستخدمين الجدد.
-   - إذا كنت بحاجة إلى مفتاح جديد، انقر على [**إنشاء مفتاح واجهة برمجة تطبيقات**](https://aistudio.google.com/api-keys?hl=ar)
-     واتّبِع التعليمات الواردة في مربّع الحوار لإضافة زوج من المفتاح والمشروع إلى الجدول.
-2. ابحث عن مشروع "المستوى المجاني" الذي تريد ترقيته إلى "المستوى المدفوع"، وانقر على **إعداد الفوترة** ضمن عمود *مستوى الفوترة*.
-3. إذا لم يسبق لك إعداد حساب فوترة على Google:
-   - سيُطلب منك اختيار بلدك للموافقة على بنود الخدمة.
-   - بعد ذلك، املأ معلومات الاتصال وطريقة الدفع أو أكِّدهما للمتابعة.
-4. إذا سبق لك إعداد حسابات فوترة على Google:
-   - سيُطلب منك الاختيار من بين حسابات الفوترة الحالية.
-   - إذا كنت لا تريد استخدام أي من حساباتك الحالية، انقر على **إضافة حساب فوترة جديد** واملأ معلومات الاتصال وطريقة الدفع أو أكِّدها للمتابعة.
-5. بعد ذلك، سيتم:
-   - يُطلب منك الدفع المسبق لمبلغ 10 دولار أمريكي كحد أدنى لإكمال عملية إعداد الفوترة (ما يعني أنّه يتم تلقائيًا تعيين حسابك إلى خطة الفوترة [الدفع المسبق](#prepay))،
-   - يجب الاختيار بين خطتَي الفوترة [الدفع المسبق](#prepay) و[الدفع الآجل](#postpay) لحسابك.
-   - تم تعيينها إلى خطة فوترة [الدفع عند الاستخدام](#postpay) لفترة وسيطة إلى أن يتم نشر نظام الدفع المسبق الجديد لجميع المستخدمين (اعتبارًا من 23 مارس 2026).
-6. بعد الدفع المسبق أو اختيار الدفع الآجل، يكتمل إعداد حسابك.
+Bạn có thể tạo một dự án và thiết lập thông tin thanh toán hoặc nhập một dự án hiện có để nâng cấp lên Cấp có tính phí trong [Google AI Studio](https://aistudio.google.com/projects?hl=vi).
+Việc nâng cấp từ Bậc miễn phí lên Bậc trả phí có nghĩa là bạn phải liên kết một tài khoản thanh toán và [trả trước](#prepay) để thêm ít nhất 10 USD (hoặc số tiền tương đương bằng các đơn vị tiền tệ khác) vào tài khoản của mình.
 
-### الترقية إلى فئة الاشتراك المدفوع التالية
+1. Chuyển đến trang [Khoá API](https://aistudio.google.com/api-keys?hl=vi), trang [Dự án](https://aistudio.google.com/projects?hl=vi) hoặc bất kỳ nơi nào bạn thấy nút **Thiết lập thông tin thanh toán** trong AI Studio.
+   - Theo mặc định, người dùng mới sẽ có một [dự án và khoá API](https://ai.google.dev/gemini-api/docs/api-key?hl=vi#google-cloud-projects) được tạo cho họ.
+   - Nếu bạn cần một khoá mới, hãy nhấp vào [**Tạo khoá API**](https://aistudio.google.com/api-keys?hl=vi) rồi làm theo hộp thoại để thêm một cặp khoá-dự án vào bảng.
+2. Tìm dự án thuộc Bậc miễn phí mà bạn muốn nâng cấp lên Bậc có tính phí, rồi nhấp vào **Thiết lập thông tin thanh toán** trong cột *Bậc thanh toán*.
+3. Nếu bạn chưa từng thiết lập tài khoản thanh toán trên Google:
+   - Bạn sẽ được yêu cầu chọn quốc gia của mình để đồng ý với Điều khoản dịch vụ.
+   - Sau đó, hãy điền hoặc xác nhận thông tin liên hệ và phương thức thanh toán để tiếp tục.
+4. Nếu trước đây bạn đã thiết lập tài khoản thanh toán của Google:
+   - Bạn sẽ được yêu cầu chọn trong số các tài khoản thanh toán hiện có.
+   - Nếu bạn không muốn sử dụng bất kỳ tài khoản hiện có nào, hãy nhấp vào **Thêm tài khoản thanh toán mới** rồi điền hoặc xác nhận thông tin liên hệ và phương thức thanh toán để tiếp tục.
+5. Tiếp theo, bạn sẽ:
+   - Được yêu cầu trả trước tối thiểu 100.000 VND để hoàn tất quy trình thiết lập thông tin thanh toán (tức là tài khoản của bạn được tự động chỉ định cho gói thanh toán [Trả trước](#prepay)),
+   - Bạn có thể chọn giữa gói thanh toán [Trả trước](#prepay) và [Trả sau](#postpay) cho tài khoản của mình.
+   - Được chỉ định cho gói thanh toán [Trả sau](#postpay) trong một khoảng thời gian trung gian cho đến khi hệ thống Trả trước mới được áp dụng cho tất cả người dùng (kể từ ngày 23 tháng 3 năm 2026).
+6. Sau khi thanh toán trước hoặc chọn thanh toán sau, bạn đã hoàn tất việc thiết lập tài khoản.
 
-إذا كنت مشتركًا في فئة مدفوعة وتستوفي [المعايير](#about-billing)
-لتغيير الخطة، ستتم ترقيتك تلقائيًا إلى الفئة التالية
-(مع مراعاة [أوقات المعالجة](#processing-times)).
+### Nâng cấp lên gói trả phí tiếp theo
 
-## التحقّق من حالة الفوترة
+Nếu đang sử dụng một gói có tính phí và đáp ứng [các tiêu chí](#about-billing) để thay đổi gói, bạn sẽ được tự động nâng cấp lên gói tiếp theo (tuỳ thuộc vào [thời gian xử lý](#processing-times)).
 
-بعد [ربط حساب فوترة](#setup-billing) بمشروعك، يمكنك تتبُّع حالته في [صفحة الفوترة في AI Studio](https://aistudio.google.com/billing?hl=ar). على عكس المستوى المجاني، تتغيّر حالة المستوى المدفوع بشكل ديناميكي. ففي حين يتم تحديد مستوى استخدامك من خلال سجلّ حسابك، لن تستجيب Gemini API للطلبات إلا إذا كان لديك رصيد [دفع مسبق](#prepay) إيجابي.
+## Xác minh trạng thái thanh toán
 
-في صفحة [المشاريع](https://aistudio.google.com/projects?hl=ar)، يمكنك الاطّلاع على فئة مشروعك وخطة الفوترة ضمن عمود *فئة الفوترة*. تظهر أي إجراءات متعلقة بحالة الفوترة يجب اتّخاذها لأحد المشاريع في عمودَي *فئة الفوترة* أو *الحالة*:
+Sau khi [liên kết một tài khoản thanh toán](#setup-billing) với dự án của mình, bạn có thể theo dõi trạng thái của tài khoản đó trên [trang Thanh toán của AI Studio](https://aistudio.google.com/billing?hl=vi). Không giống như bậc miễn phí, trạng thái bậc có tính phí là trạng thái động; mặc dù bậc sử dụng của bạn được xác định dựa trên nhật ký tài khoản, nhưng Gemini API sẽ chỉ xử lý các yêu cầu nếu bạn có số dư tín dụng [Trả trước](#prepay) dương.
 
-- ***إعداد الفوترة*** إذا لم يكن المشروع مرتبطًا بحساب فوترة
-- ***إعداد الدفع المسبق*** إذا كان المشروع يتضمّن حساب فوترة مرتبطًا به، ولكن يجب استخدام خطة فوترة [الدفع المسبق](#prepay) التي يجب إعدادها.
-- "***لا تتوفّر أرصدة***" إذا كان حساب الفوترة مطلوبًا لشراء أرصدة ولكن لم يتم إعداد حساب الدفعات المسبقة أو تم استنفاد رصيد الأرصدة المتاحة.
+Trên trang [Dự án](https://aistudio.google.com/projects?hl=vi), bạn sẽ có thể xem cấp và gói thanh toán của dự án trong cột *Cấp thanh toán*. Mọi thao tác liên quan đến trạng thái thanh toán mà bạn có thể cần thực hiện cho một dự án đều xuất hiện trong cột *Bậc thanh toán* hoặc *Trạng thái*:
 
-انقر على أي من الرسائل للمتابعة واتّخاذ الإجراءات اللازمة.
+- "***Thiết lập thông tin thanh toán***" nếu dự án chưa có tài khoản thanh toán được đính kèm.
+- "***Thiết lập phương thức thanh toán trả trước***" nếu dự án có tài khoản thanh toán được đính kèm, nhưng bạn phải sử dụng gói thanh toán [Trả trước](#prepay) cần được thiết lập.
+- "***Không có tín dụng***" nếu tài khoản thanh toán cần mua tín dụng nhưng tài khoản thanh toán trả trước chưa được thiết lập hoặc số dư tín dụng hiện có đã hết.
 
-## مراقبة الاستخدام
+Nhấp vào một trong các thông báo để tiến hành các hành động cần thiết.
 
-يمكنك تتبُّع استخدامك لواجهة Gemini API في [Google AI Studio](https://aistudio.google.com/usage?hl=ar) من خلال **لوحة البيانات** > **الاستخدام**.
+## Giám sát mức sử dụng
 
-## خطط الفوترة
+Bạn có thể theo dõi mức sử dụng Gemini API trong [Google AI Studio](https://aistudio.google.com/usage?hl=vi) trên **Trang tổng quan** > **Mức sử dụng**.
 
-تنقسم خطط الفوترة لواجهة Gemini API وAI Studio إلى فئتَين تحدّدان وقت الدفع مقابل الاستخدام: الدفع المسبق والدفع الآجل. يمكنك الاطّلاع على خطة الفوترة المحدّدة وإدارة طرق الدفع في صفحة [فوترة AI Studio](https://aistudio.google.com/billing?hl=ar).
+## Gói thanh toán
 
-### الدفع المسبق
+Các gói thanh toán cho Gemini API và AI Studio được chia thành 2 danh mục để xác định thời điểm bạn thanh toán cho mức sử dụng: Trả trước và Trả sau. Bạn có thể kiểm tra gói thanh toán được chỉ định và quản lý phương thức thanh toán trên trang [Thanh toán cho AI Studio](https://aistudio.google.com/billing?hl=vi).
 
-في خطة الفوترة "الدفع المسبق"، يمكنك شراء أرصدة لتضاف إلى رصيد الدفع المسبق قبل استخدامك لواجهة Gemini API، ويتم خصم تكاليف استخدام واجهة برمجة التطبيقات من رصيد الدفع المسبق [في الوقت الفعلي تقريبًا](#processing-times).
-يمكنك إجراء الدفع المسبق من خلال [إضافة رصيد](#buy-credits) إلى حسابك أو إعداد ميزة [تعبئة الرصيد تلقائيًا](#auto-reload). بعد شراء الأرصدة، تنتهي صلاحية الأرصدة غير المستخدَمة بعد 12 شهرًا، وهي [غير قابلة للاسترداد](#refunds)، إلا بعد [التبديل إلى حساب بنظام الدفع الآجل](#postpay).
+### Trả trước
 
-عندما يصل رصيد ائتمان الدفع المُسبَق في حساب الفوترة إلى 0 دولار أمريكي، ستتوقّف جميع مفاتيح API في جميع المشاريع المرتبطة بحساب الفوترة هذا عن العمل في الوقت نفسه.
-لا تنطبق الأرصدة المدفوعة مسبقًا إلا على تكاليف استخدام Gemini API، ولا يمكنك استخدامها للدفع مقابل خدمات Google Cloud الأخرى.
+Trong gói thanh toán Trả trước, bạn mua tín dụng để nạp vào số dư trả trước trước khi sử dụng Gemini API và chi phí sử dụng API sẽ được trừ vào số dư tín dụng trả trước của bạn [gần như theo thời gian thực](#processing-times).
+Bạn có thể trả trước bằng cách [thêm tín dụng](#buy-credits) vào tài khoản hoặc thiết lập tính năng [tự động nạp tiền](#auto-reload). Sau khi bạn mua tín dụng, tín dụng chưa dùng sẽ hết hạn sau 12 tháng và [không hoàn lại được](#refunds), trừ trường hợp sau khi [chuyển sang tài khoản Trả sau](#postpay).
 
-يتم تلقائيًا ضبط خطة الفوترة على "الدفع المسبق" للمستخدمين الجدد. قد تحتاج المشاريع التي تم إنشاؤها قبل طرح خطتَي الفوترة "الدفع المسبق" و"الدفع الآجل" إلى [تعديل تفاصيل الفوترة الخاصة بالمشروع](#verify-billing) قبل مواصلة استخدام Gemini API.
+Khi số dư tín dụng trả trước trong tài khoản thanh toán đạt đến 0 USD, tất cả khoá API trong tất cả dự án được liên kết với tài khoản thanh toán đó sẽ ngừng hoạt động cùng một lúc.
+Khoản tín dụng trả trước chỉ áp dụng cho chi phí sử dụng Gemini API; bạn không thể dùng khoản tín dụng này để thanh toán cho các dịch vụ khác của Google Cloud.
 
-*يُرجى العِلم أنّ ميزة "الدفع المُسبَق" غير متاحة لحسابات [الفوترة (أو الدفع بلا إنترنت)](https://docs.cloud.google.com/billing/docs/concepts?hl=ar#billing_account_types).*
+Người dùng mới sẽ mặc định sử dụng gói thanh toán Trả trước. Những dự án có trước thời điểm ra mắt gói thanh toán trả trước và trả sau có thể cần phải [cập nhật thông tin thanh toán của dự án](#verify-billing) trước khi tiếp tục sử dụng Gemini API.
 
-#### شراء وحدات
+*Xin lưu ý rằng phương thức Trả trước không dùng được cho tài khoản [Có hoá đơn (hoặc Ngoại tuyến)](https://docs.cloud.google.com/billing/docs/concepts?hl=vi#billing_account_types).*
 
-يمكنك شراء وحدات يدويًا مسبقًا قبل استخدام Gemini API لتحميلها إلى رصيد حساب الدفع المسبق.
+#### Mua tín dụng
 
-لشراء رصيد، انتقِل إلى صفحة [الفوترة في AI Studio](https://aistudio.google.com/billing?hl=ar) وانقر على **شراء رصيد**.
-الحد الأدنى للشراء هو 10 دولار أمريكي. الحدّ الأقصى لمبلغ الرصيد الذي يمكنك دفعه مسبقًا هو 5,000 دولار أمريكي.
+Bạn có thể mua tín dụng theo cách thủ công trước khi sử dụng Gemini API để nạp tín dụng vào số dư tín dụng trong tài khoản Trả trước.
 
-#### إعادة التحميل تلقائيًا
+Để mua tín dụng, hãy chuyển đến trang [Thanh toán của AI Studio](https://aistudio.google.com/billing?hl=vi) rồi chọn **Mua tín dụng**.
+Số tiền mua hàng tối thiểu là 10 đô la Mỹ. Số tiền tín dụng tối đa mà bạn có thể trả trước là 50.000.000 VND.
 
-ميزة "تعبئة الرصيد تلقائيًا" هي ميزة اختيارية تتيح لك تعبئة رصيد حسابك للدفع المسبق تلقائيًا عندما يكون منخفضًا. ويفيد ذلك في تجنُّب انقطاع الخدمة.
+#### Tự động nạp tiền
 
-يمكنك إعداد ميزة تعبئة الرصيد تلقائيًا والاطّلاع على حالتها في بطاقة *الرصيد المتاح* ضمن صفحة [الفوترة في AI Studio](https://aistudio.google.com/billing?hl=ar). انقر على **إعداد ميزة "تعبئة الرصيد تلقائيًا"** أو **إدارة ميزة "تعبئة الرصيد تلقائيًا"** لضبط طريقة الدفع ومبلغ إعادة التعبئة والحد الأدنى للرصيد الذي يؤدي إلى إجراء دفعة إعادة التعبئة.
+Tự động nạp tiền là một tính năng không bắt buộc, giúp tự động nạp tiền vào số dư tín dụng trả trước của bạn khi số dư này sắp hết. Điều này giúp tránh bị gián đoạn dịch vụ.
 
-### الدفع عند الاستخدام
+Bạn có thể thiết lập tính năng tự động nạp tiền và xem trạng thái tự động nạp tiền trong thẻ *Số tiền tín dụng hiện có* trên trang [Thanh toán trong AI Studio](https://aistudio.google.com/billing?hl=vi). Nhấp vào **Thiết lập tính năng tự động nạp tiền** hoặc **Quản lý tính năng tự động nạp tiền** để thiết lập phương thức thanh toán, số tiền nạp và số dư tối thiểu kích hoạt khoản thanh toán nạp tiền.
 
-في خطة الفوترة بنظام الدفع عند الاستخدام، تتراكم التكاليف في حساب الفوترة على Cloud Billing، ويتم تحصيل الرسوم منك تلقائيًا في نهاية الشهر أو عندما تصل تكاليفك إلى [حد أقصى للإنفاق يتم تحديده تلقائيًا](#tier-spend-caps) استنادًا إلى فئة حسابك.
-يتم تحصيل الدفعة من طريقة الدفع المرتبطة بحسابك على Postpay، ويمكنك إدارة ذلك من صفحة [الفوترة في AI Studio](https://aistudio.google.com/billing?hl=ar).
+### Trả sau
 
-عند استيفاء [معايير المستوى 3](#about-billing)، يمكنك التبديل يدويًا من "خطة الدفع المُسبق" إلى "خطة الدفع عند الاستخدام". لتغيير الخطط، عليك النقر على الزر **التبديل إلى الدفع عند الاستخدام** الذي يظهر في أعلى يسار صفحة [الفوترة في AI Studio](https://aistudio.google.com/billing?hl=ar) عندما يصبح حسابك مؤهلاً.
+Trong gói thanh toán trả sau, tài khoản thanh toán trên đám mây của bạn sẽ tích luỹ chi phí và bạn sẽ tự động bị tính phí vào cuối tháng hoặc khi chi phí đạt đến [hạn mức chi tiêu được chỉ định tự động](#tier-spend-caps) dựa trên cấp tài khoản của bạn.
+Khoản thanh toán sẽ được tính vào phương thức thanh toán được liên kết với tài khoản thanh toán Trả sau của bạn. Bạn có thể quản lý phương thức thanh toán này trên trang [Thanh toán của AI Studio](https://aistudio.google.com/billing?hl=vi).
 
-بعد ذلك، ستتمكّن في صفحة **الفوترة** من الاطّلاع على رصيدك وتواريخ الاستحقاق والدفعات السابقة، بالإضافة إلى إجراء الدفعات وإدارة طرق الدفع.
+Khi đáp ứng [các tiêu chí của Cấp 3](#about-billing), bạn có thể chuyển từ gói Trả trước sang gói Trả sau theo cách thủ công. Để thay đổi gói, bạn cần nhấp vào nút **Chuyển sang trả sau** xuất hiện ở trên cùng bên phải của trang [Thanh toán trong AI Studio](https://aistudio.google.com/billing?hl=vi) khi tài khoản của bạn đủ điều kiện.
 
-عند [إعداد الفوترة](#setup-billing) لمشروع جديد، إذا كنت مؤهَّلاً للاستفادة من خدمة الدفع الآجل، سيُتاح لك خيار الاختيار بين الدفع المسبق والدفع الآجل في مربّع الحوار [إعدادات الفوترة](#setup-billing).
+Sau đó, trên trang **Thanh toán**, bạn có thể xem số dư, ngày đến hạn và các khoản thanh toán trước đây, cũng như thực hiện thanh toán và quản lý phương thức thanh toán.
 
-بعد التبديل إلى خطة الفوترة بنظام الدفع الآجل في حساب فوترة في Cloud، سيتم التبديل إلى هذه الخطة في جميع المشاريع المرتبطة بحساب الفوترة هذا. ولا يمكنك إعادة حساب الفوترة هذا إلى خطة الفوترة المدفوعة مسبقًا. يمكنك نقل مشروع إلى حساب فوترة يتضمّن خطة فوترة مختلفة لتغيير دورة الفوترة لهذا المشروع. يُرجى الاطّلاع على مستندات Cloud حول [إدارة الفوترة للمشاريع](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=ar).
+Khi [thiết lập thông tin thanh toán](#setup-billing) cho một dự án mới, nếu đủ điều kiện sử dụng phương thức thanh toán trả sau, bạn sẽ có thể chọn giữa phương thức thanh toán trả trước và trả sau trong hộp thoại [thiết lập thông tin thanh toán](#setup-billing).
 
-يمكنك الاطّلاع على مزيد من المعلومات عن دورة فوترة الدفع عند الاستخدام في [دليل فوترة Cloud](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=ar).
+Sau khi bạn chuyển một tài khoản thanh toán trên Cloud sang sử dụng gói thanh toán Trả sau, tất cả các dự án được liên kết với tài khoản thanh toán đó sẽ được chuyển sang gói Trả sau. Bạn không thể chuyển tài khoản thanh toán đó về lại gói thanh toán trả trước. Bạn có thể di chuyển một dự án sang tài khoản thanh toán có gói thanh toán khác để thay đổi chu kỳ tính phí cho dự án đó; hãy truy cập vào tài liệu trên Cloud về [cách quản lý hoạt động thanh toán cho dự án](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=vi).
 
-## حدود الإنفاق
+Bạn có thể tìm hiểu thêm về chu kỳ tính phí Postpay trong [hướng dẫn về Thanh toán trên đám mây](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=vi).
 
-تتيح Gemini API وضع حدود قصوى للإنفاق الشهري على مستوى كلّ من فئة حساب الفوترة والمشاريع. تم تصميم عناصر التحكّم هذه لحماية حسابك من التكاليف الزائدة غير المتوقّعة، ولحماية النظام المتكامل لضمان توفّر الخدمة.
+## Mức chi tiêu
 
-*يُرجى العِلم أنّ حدود الإنفاق غير متاحة لحسابات [الفوترة (أو الدفع بلا إنترنت)](https://docs.cloud.google.com/billing/docs/concepts?hl=ar#billing_account_types).*
+Gemini API hỗ trợ hạn mức chi tiêu hằng tháng ở cả cấp tài khoản thanh toán và cấp dự án. Các chế độ kiểm soát này được thiết kế để bảo vệ tài khoản của bạn khỏi tình trạng sử dụng quá mức ngoài dự kiến và bảo vệ hệ sinh thái để đảm bảo dịch vụ luôn hoạt động.
 
-### حدود الإنفاق على المشاريع
+*Xin lưu ý rằng hạn mức chi tiêu không dùng được cho tài khoản [Có hoá đơn (hoặc Ngoại tuyến)](https://docs.cloud.google.com/billing/docs/concepts?hl=vi#billing_account_types).*
 
-يمكنك ضبط حدود الإنفاق [على مستوى المشروع](https://ai.google.dev/gemini-api/docs/api-key?hl=ar#google-cloud-projects) في AI Studio.
-ويكون ذلك مفيدًا إذا كان لديك مشاريع متعددة ضمن حساب الفوترة نفسه وأردت التأكّد من أنّ كل مشروع يمكنه الاستفادة من الحدّ الأقصى للإنفاق التراكمي.
+### Giới hạn chi tiêu dự kiến
 
-يمكن للحسابات التي لديها أدوار محرّر المشروع أو المالك أو المشرف [تعيين حدود الإنفاق](https://docs.cloud.google.com/iam/docs/roles-overview?hl=ar) لكل مشروع في &quot;استوديو الذكاء الاصطناعي&quot; من خلال صفحة [الإنفاق](https://aistudio.google.com/spend?hl=ar) ضمن **حد الإنفاق الشهري** > **تعديل حد الإنفاق**.
+Bạn có thể đặt hạn mức chi tiêu [ở cấp dự án](https://ai.google.dev/gemini-api/docs/api-key?hl=vi#google-cloud-projects) trong AI Studio.
+Điều này sẽ hữu ích nếu bạn có nhiều dự án trong cùng một tài khoản thanh toán và muốn đảm bảo mỗi dự án đều có đủ hạn mức chi tiêu tích luỹ.
 
-في حال [نقل مشروع إلى حساب فوترة مختلف](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=ar#change_the_billing_account_for_a_project)، سيظلّ أي حدّ أقصى للإنفاق سبق أن ضبطته لهذا المشروع ساريًا، ولكن ستتم إعادة ضبط أي إنفاق متراكم إلى 0 دولار أمريكي لدورة الفوترة الجديدة.
+Những tài khoản có [vai trò](https://docs.cloud.google.com/iam/docs/roles-overview?hl=vi) người chỉnh sửa, chủ sở hữu hoặc quản trị viên dự án có thể đặt hạn mức chi tiêu cho mỗi dự án trong AI Studio trên trang [Chi tiêu](https://aistudio.google.com/spend?hl=vi) trong phần **Hạn mức chi tiêu hằng tháng** > **Chỉnh sửa hạn mức chi tiêu**.
 
-قد تستمرّ تكاليف الاستخدام الزائد في الظهور عند إكمال [الوضع المجمّع](https://ai.google.dev/gemini-api/docs/batch-api?hl=ar).
+Nếu bạn [chuyển một dự án sang một tài khoản thanh toán khác](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=vi#change_the_billing_account_for_a_project), thì mọi hạn mức chi tiêu mà bạn đã đặt cho dự án đó sẽ vẫn giữ nguyên, nhưng mọi khoản chi tiêu tích luỹ sẽ được đặt lại thành 0 USD cho chu kỳ thanh toán mới.
 
-قد تتأخر أوقات معالجة بيانات الفوترة قليلاً في AI Studio،
-لمدة تصل إلى 10 دقائق تقريبًا. قد تتجاوز التكاليف الحد الأقصى للمشروع
-إذا لم تتم معالجة بيانات الفوترة قبل تراكم المزيد من الرسوم.
+Việc hoàn tất ở [chế độ hàng loạt](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi) vẫn có thể phát sinh phí vượt mức.
 
-### حدود الإنفاق القصوى لمستوى حساب الفوترة
+Thời gian xử lý dữ liệu thanh toán trong AI Studio có thể bị chậm trễ một chút, tối đa khoảng 10 phút. Bạn có thể phát sinh thêm chi phí ngoài hạn mức dự án nếu dữ liệu thanh toán chưa được xử lý trước khi phát sinh thêm các khoản phí.
 
-يحتوي كل [مستوى](#about-billing) على حدّ أقصى للإنفاق الشهري:
+### Hạn mức chi tiêu theo cấp của tài khoản thanh toán
 
-| فئة الاستخدام | الحدّ الأقصى للإنفاق |
+Mỗi [bậc](#about-billing) đều có hạn mức chi tiêu tối đa hằng tháng:
+
+| Cấp sử dụng | Giới hạn chi tiêu |
 | --- | --- |
-| **Free** | لا ينطبق |
-| **المستوى 1** | ‫250 دولار أمريكي |
-| **المستوى 2** | 2000 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
-| **المستوى 3** | ‫20,000 - 100,000 دولار أمريكي |
+| **Free** | Không áp dụng |
+| **Cấp 1** | đô la Hong Kong |
+| **Cấp 2** | $2.000 |
+| **Cấp 3** | 20.000 – 100.000 đô la Mỹ |
 
-يتم فرض حدود قصوى للاستخدام الشهري لواجهة Gemini API على مستوى [حساب الفوترة](#cloud-billing). على الرغم من أنّ الحدود التلقائية تكون مضبوطة مسبقًا، يمكنك [طلب زيادة](https://docs.google.com/forms/d/e/1FAIpQLSdiP6BWJyNNN65lnwnlOr-5Kv0MOFp0jLQyqi_ixVCfddqWBw/viewform?hl=ar) لاستيعاب الاستخدام الأعلى. يتم تجميع إجمالي الإنفاق على مستوى جميع المشاريع المرتبطة التي تم تفعيل خدمة Gemini API فيها. بعد أن يصل إجمالي الحساب التراكمي إلى حد الفئة، يتم إيقاف الخدمة مؤقتًا لجميع المشاريع المرتبطة بحساب الفوترة هذا إلى حين بدء دورة الفوترة التالية (اليوم الأول من كل شهر).
+Hạn mức sử dụng hằng tháng được áp dụng cho Gemini API ở cấp [tài khoản thanh toán](#cloud-billing). Mặc dù hạn mức mặc định được đặt sẵn, nhưng bạn có thể [yêu cầu tăng hạn mức](https://docs.google.com/forms/d/e/1FAIpQLSdiP6BWJyNNN65lnwnlOr-5Kv0MOFp0jLQyqi_ixVCfddqWBw/viewform?hl=vi) để đáp ứng nhu cầu sử dụng cao hơn. Tổng mức chi tiêu được tổng hợp trên tất cả các dự án được liên kết có bật dịch vụ Gemini API. Sau khi tổng tài khoản tích luỹ đạt đến hạn mức bậc, dịch vụ sẽ bị tạm dừng cho tất cả các dự án được liên kết với tài khoản thanh toán đó cho đến khi bắt đầu chu kỳ thanh toán tiếp theo (ngày 1 của mỗi tháng).
 
-#### تقييم الإنفاق في حساب الفوترة
+#### Đánh giá mức chi tiêu của tài khoản thanh toán
 
-لتقييم إنفاقك الشهري السابق وتحديد ما إذا كانت [حدود الإنفاق الجديدة على مستوى حساب الفوترة](#tier-spend-caps) ستؤثر في مشاريعك الحالية، اتّبِع الخطوات التالية:
+Để đánh giá mức chi tiêu hằng tháng trước đây nhằm xác định xem [hạn mức chi tiêu theo cấp độ Tài khoản thanh toán](#tier-spend-caps) mới có ảnh hưởng đến các dự án đang diễn ra của bạn hay không, hãy làm theo các bước sau:
 
-1. في Google Cloud Console، اعرض صفحة [تقارير حساب فوترة Cloud](https://console.cloud.google.com/billing/reports?hl=ar).
-   - إذا كان لديك أكثر من حساب فوترة واحد، اختَر حساب فوترة Cloud الذي تريد عرض تقارير التكاليف الخاصة به، عندما يُطلب منك ذلك.
-2. يتم ضبط التقرير تلقائيًا على "التجميع حسب الخدمة" في "الشهر الحالي". سيظهر **Gemini API** في عمود **الخدمة** وإجمالي الإنفاق في عمود **تكلفة الاستخدام** في الجدول.
-3. للاطّلاع على التكاليف التفصيلية التي تقتصر على استخدام Gemini API، اضبط فلتر **التجميع حسب** على التجميع حسب **رمز التخزين التعريفي**، وفلتر **الخدمات** على **Gemini API**.
-4. اضبط فلتر **النطاق الزمني حسب تاريخ الاستخدام** على النطاق المطلوب لتقييم إنفاقك السابق خلال فترة زمنية.
+1. Trong bảng điều khiển Google Cloud, hãy xem trang [Báo cáo tài khoản thanh toán Cloud](https://console.cloud.google.com/billing/reports?hl=vi).
+   - Nếu bạn có nhiều tài khoản thanh toán, hãy chọn tài khoản thanh toán Cloud mà bạn muốn xem báo cáo chi phí khi được nhắc.
+2. Theo mặc định, báo cáo sẽ là "Nhóm theo dịch vụ" trong "Tháng hiện tại". Bạn sẽ thấy **Gemini API** trong cột **Dịch vụ** và tổng mức chi tiêu trong cột **Chi phí sử dụng** của bảng.
+3. Để xem chi phí chi tiết chỉ giới hạn ở mức sử dụng Gemini API, hãy đặt bộ lọc **Nhóm theo** để nhóm theo **SKU** và bộ lọc **Dịch vụ** thành **Gemini API**.
+4. Điều chỉnh bộ lọc **Phạm vi thời gian theo ngày sử dụng** thành phạm vi bạn muốn để đánh giá mức chi tiêu trước đây trong một khoảng thời gian.
 
-## مدد المعالجة
+## Thời gian xử lý
 
-لا تتم دائمًا إشارات الفوترة والتعديلات في الوقت الفعلي.
+Các tín hiệu và thông tin cập nhật về việc thanh toán không phải lúc nào cũng diễn ra theo thời gian thực.
 
-- **استخدام الرصيد**: يتم عادةً خصم تكاليف الاستخدام من رصيدك في غضون دقائق.
-- **تأكيد الدفع**: على الرغم من أنّ معظم عمليات الدفع باستخدام البطاقات تتم بشكل فوري، قد تستغرق بعض طرق الدفع (مثل الحوالات المصرفية) عدة أيام لتتم معالجتها. لا يمكن استئناف الخدمات أو ترقيتها إلا بعد تأكيد شراء الرصيد رسميًا.
-- **الترقيات إلى فئة أعلى**: بعد إتمام عملية الدفع بنجاح أو عند استيفاء [معايير الترقية](#about-billing)، تظهر الترقيات إلى فئة أعلى عادةً في غضون 10 دقائق.
-- **الرسومات البيانية لتفاصيل التكلفة الإجمالية**: قد يستغرق تعديل الرسومات البيانية التي تعرض تفاصيل التكلفة الإجمالية في كلّ من صفحة [الفوترة](https://aistudio.google.com/billing?hl=ar) وصفحة [الإنفاق](https://aistudio.google.com/spend?hl=ar) مدة تصل إلى 24 ساعة.
+- **Mức sử dụng tín dụng**: Chi phí sử dụng thường được trừ vào số dư của bạn trong vòng vài phút.
+- **Xác nhận thanh toán**: Mặc dù hầu hết các khoản thanh toán bằng thẻ đều được xử lý ngay lập tức, nhưng một số phương thức thanh toán (như chuyển khoản ngân hàng) có thể mất vài ngày để xử lý. Các dịch vụ chỉ tiếp tục hoặc nâng cấp sau khi giao dịch mua tín dụng được xác nhận chính thức.
+- **Nâng cấp cấp độ**: Sau khi bạn thanh toán thành công hoặc khi bạn đáp ứng [các tiêu chí nâng cấp](#about-billing), hệ thống thường sẽ nâng cấp cấp độ trong vòng 10 phút.
+- **Biểu đồ phân tích tổng chi phí**: Biểu đồ cho thấy thông tin phân tích tổng chi phí của bạn trên cả trang [Thanh toán](https://aistudio.google.com/billing?hl=vi) và trang [Chi tiêu](https://aistudio.google.com/spend?hl=vi) có thể mất đến 24 giờ để cập nhật.
 
-اطّلِع على أدلة الفوترة في السحابة الإلكترونية حول [دورة الفوترة](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=ar#delayed-billing)
-و[فترات التأخير في المعاملات](https://docs.cloud.google.com/billing/docs/how-to/view-history?hl=ar#missing-transactions)
-لمعرفة المزيد عن حالات التأخير المحتملة في الفوترة.
+Hãy đọc hướng dẫn về Cloud Billing liên quan đến [chu kỳ tính phí](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=vi#delayed-billing) và độ trễ [giao dịch](https://docs.cloud.google.com/billing/docs/how-to/view-history?hl=vi#missing-transactions) để tìm hiểu thêm về các trường hợp có thể bị chậm trễ trong việc lập hoá đơn.
 
-## عمليات ردّ الأموال
+## Hoàn tiền
 
-لا يمكن استرداد الأموال في حسابات الفوترة **الدفع المسبق**، إلا عند تبديل أنواع الحسابات.
+Bạn không được hoàn tiền cho tài khoản thanh toán **Trả trước**, trừ trường hợp chuyển đổi loại tài khoản.
 
-**عندما يتم التبديل من حساب الدفع المسبق إلى حساب الدفع الآجل** (بعد استيفاء [المعايير](#about-billing) و[الترقية يدويًا](#postpay) لحسابك)، يتم إغلاق حساب الدفع المسبق ويتم تلقائيًا ردّ أي رصيد متبقٍّ من الدفع المسبق إلى طريقة الدفع المحفوظة.
+**Khi tài khoản Trả trước chuyển sang loại tài khoản Trả sau** (sau khi bạn đáp ứng [các tiêu chí](#about-billing) và [nâng cấp tài khoản theo cách thủ công](#postpay)), tài khoản Trả trước sẽ bị đóng và mọi khoản tín dụng trả trước còn lại sẽ tự động được hoàn lại vào phương thức thanh toán trong hồ sơ.
 
-في حال [إغلاق](https://docs.cloud.google.com/billing/docs/how-to/close-or-reopen-billing-account?hl=ar#close-a-billing-account) حسابك المدفوع مسبقًا لأي سبب آخر غير الترقية إلى حساب الدفع عند الاستخدام، سيتم إلغاء أي أرصدة متبقية مدفوعة مسبقًا.
+Nếu bạn [đóng](https://docs.cloud.google.com/billing/docs/how-to/close-or-reopen-billing-account?hl=vi#close-a-billing-account) tài khoản Trả trước vì bất kỳ lý do nào khác ngoài việc nâng cấp lên tài khoản Trả sau, mọi khoản tín dụng trả trước còn lại sẽ bị mất.
 
-تنتهي صلاحية الأرصدة التي يتم شراؤها بعد عام واحد. بعد انتهاء صلاحيتها، يتم فقدان الأرصدة ولا يمكن استردادها.
+Khoản tín dụng đã mua sẽ hết hạn sau 1 năm. Sau khi hết hạn, các khoản tín dụng sẽ bị mất và không thể lấy lại.
 
-تخضع حسابات **الدفع عند الاستخدام** [لسياسة رد الأموال في Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/resolve-issues?hl=ar#request_a_refund).
+Tài khoản **trả sau** tuân theo [chính sách hoàn tiền của Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/resolve-issues?hl=vi#request_a_refund).
 
-## حسابات الفوترة في السحابة الإلكترونية
+## Tài khoản thanh toán trên Cloud
 
-تستخدم Gemini API [حسابات الفوترة في Cloud](https://cloud.google.com/billing/docs/concepts?hl=ar) لخدمات الفوترة، ويمكنك [إعدادها مباشرةً في AI Studio](#setup-billing).
-يمكنك استخدام AI Studio لتتبُّع الإنفاق وفهم التكاليف وتسديد الدفعات.
+Gemini API sử dụng [tài khoản Cloud Billing](https://cloud.google.com/billing/docs/concepts?hl=vi) cho các dịch vụ thanh toán. Bạn có thể [thiết lập tài khoản này ngay trong AI Studio](#setup-billing).
+Bạn có thể sử dụng AI Studio để theo dõi mức chi tiêu, tìm hiểu chi phí và thanh toán.
 
-يتم تحديد الفئات وحدود المعدّل القصوى وحدود حساب الفوترة على مستوى حساب الفوترة.
+Các cấp, hạn mức tốc độ và hạn mức tài khoản thanh toán đều được xác định ở cấp tài khoản thanh toán.
 
-### المشاريع ومفاتيح واجهة برمجة التطبيقات
+### Dự án và khoá API
 
-ترث جميع [المشاريع](https://ai.google.dev/gemini-api/docs/api-key?hl=ar#google-cloud-projects) المرتبطة بحساب فوترة في السحابة الإلكترونية فئة الاستخدام وحدود المعدّل القصوى وسقوف الحساب المرتبطة بحساب الفوترة. في حال [تغيير مشروع](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=ar#change_the_billing_account_for_a_project)
-من حساب فوترة إلى آخر، سيتم تبديل فئته، وبالتالي حدود المعدّل القصوى وحدود الحساب، إلى فئة حساب الفوترة الجديد.
+Tất cả [dự án](https://ai.google.dev/gemini-api/docs/api-key?hl=vi#google-cloud-projects) được liên kết với một tài khoản Thanh toán trên đám mây đều kế thừa cấp sử dụng của tài khoản thanh toán và các giới hạn về tỷ lệ cũng như hạn mức tài khoản được liên kết. Nếu bạn [thay đổi dự án](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=vi#change_the_billing_account_for_a_project) từ tài khoản thanh toán này sang tài khoản thanh toán khác, thì cấp của dự án đó, cũng như hạn mức tốc độ và hạn mức tài khoản, sẽ chuyển sang cấp của tài khoản thanh toán mới.
 
-يتم احتساب الإنفاق التراكمي (على جميع منتجات Google Cloud) وعمر الحساب في جميع المشاريع المرتبطة بحساب فوترة ضمن [مؤهلات الفئة](#about-billing) الخاصة بحساب الفوترة هذا.
+Tổng mức chi tiêu (cho tất cả các sản phẩm của Google Cloud) và tuổi tài khoản trên tất cả các dự án được liên kết với một tài khoản thanh toán sẽ được tính vào [điều kiện để đạt được cấp](#about-billing) của tài khoản thanh toán đó.
 
-يمكنك [إلغاء ربط مشروع](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=ar#disable_billing_for_a_project) بحساب الفوترة للرجوع إلى الطبقة المجانية.
+Bạn có thể [huỷ liên kết một dự án](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=vi#disable_billing_for_a_project) khỏi tài khoản thanh toán của dự án đó để quay lại bậc miễn phí.
 
-[مفاتيح واجهة برمجة التطبيقات](https://ai.google.dev/gemini-api/docs/api-key?hl=ar) هي بيانات اعتماد يتم إنشاؤها داخل مشروع.
-ولا تتضمّن هذه المشاريع إعدادات فوترة مستقلة، بل ترث حدود الفئة وحالة الفوترة الخاصة بالمشروع. يتم احتساب الاستخدام التراكمي من جميع المفاتيح ضِمن مشروع معيّن ضمن الحد الأقصى للإنفاق الخاص بهذا المشروع وإجمالي الإنفاق الخاص بحساب الفوترة.
+[Khoá API](https://ai.google.dev/gemini-api/docs/api-key?hl=vi) là thông tin xác thực được tạo trong một dự án.
+Chúng không có chế độ cài đặt thanh toán độc lập; chúng kế thừa hạn mức theo cấp và trạng thái thanh toán của dự án. Mức sử dụng tích luỹ của tất cả các khoá trong một dự án sẽ được tính vào hạn mức chi tiêu của dự án đó và tổng mức chi tiêu của tài khoản thanh toán.
 
-## الأسئلة الشائعة
+## Câu hỏi thường gặp
 
-تقدّم الأقسام التالية إجابات عن الأسئلة الشائعة.
+Các phần sau đây cung cấp câu trả lời cho các câu hỏi thường gặp.
 
-### ما هي الرسوم التي يتم تحصيلها مني؟
+### Tôi bị tính phí cho những khoản nào?
 
-يستند تسعير Gemini API إلى ما يلي:
+Giá của Gemini API dựa trên những yếu tố sau:
 
-- عدد الرموز المميزة للإدخال
-- عدد الرموز المميزة الناتجة
-- عدد الرموز المميّزة المخزَّنة مؤقتًا
-- مدة تخزين الرمز المميّز المخزّن مؤقتًا
+- Số lượng mã thông báo đầu vào
+- Số lượng mã thông báo đầu ra
+- Số lượng mã thông báo được lưu vào bộ nhớ đệm
+- Khoảng thời gian lưu trữ mã thông báo được lưu vào bộ nhớ đệm
 
-للحصول على معلومات عن الأسعار، اطّلِع على [صفحة الأسعار](https://ai.google.dev/pricing?hl=ar).
+Để biết thông tin về giá, hãy xem [trang Giá](https://ai.google.dev/pricing?hl=vi).
 
-### أين يمكنني الاطّلاع على حصتي؟
+### Tôi có thể xem hạn mức của mình ở đâu?
 
-يمكنك الاطّلاع على الحصة المخصّصة لك وحدود النظام في [استوديو الذكاء الاصطناعي](https://aistudio.google.com/usage?hl=ar).
+Bạn có thể xem hạn mức và giới hạn hệ thống trong [AI Studio](https://aistudio.google.com/usage?hl=vi).
 
-### كيف يمكنني الانتقال إلى فئة أعلى من الحدّ الأقصى لمعدّل الطلبات أو طلب المزيد من الحصة؟
+### Làm cách nào để chuyển sang cấp hạn mức tốc độ cao hơn hoặc yêu cầu thêm hạn mức?
 
-سيتم تلقائيًا منحك المزيد من الحصة عندما يستوفي حسابك [متطلبات المستوى](https://ai.google.dev/gemini-api/docs/rate-limits?hl=ar#usage-tiers) التالي.
+Bạn sẽ tự động được cấp thêm hạn mức khi tài khoản của bạn đạt đến [yêu cầu về cấp độ](https://ai.google.dev/gemini-api/docs/rate-limits?hl=vi#usage-tiers) tiếp theo.
 
-### هل يمكنني استخدام Gemini API بدون أي تكلفة في المنطقة الاقتصادية الأوروبية (بما في ذلك الاتحاد الأوروبي) والمملكة المتحدة وسويسرا؟
+### Tôi có thể sử dụng Gemini API miễn phí ở Khu vực kinh tế Châu Âu (bao gồm cả Liên minh Châu Âu), Vương quốc Anh và Thuỵ Sĩ không?
 
-نعم، تتوفّر الطبقة المجانية والطبقة المدفوعة في [العديد من المناطق](https://ai.google.dev/gemini-api/docs/available-regions?hl=ar).
+Có. Chúng tôi cung cấp gói miễn phí và gói có tính phí ở [nhiều khu vực](https://ai.google.dev/gemini-api/docs/available-regions?hl=vi).
 
-### إذا أعددت الفوترة باستخدام Gemini API، هل سيتم تحصيل رسوم مني مقابل استخدام Google AI Studio؟
+### Nếu thiết lập thông tin thanh toán cho Gemini API, tôi có bị tính phí khi sử dụng Google AI Studio không?
 
-يبقى استخدام AI Studio بدون أي تكلفة ما لم يربط المستخدمون مفتاح API مدفوعًا للاستفادة من الميزات المدفوعة.
-بعد ربط مفتاح واجهة برمجة تطبيقات مدفوعة كجزء من مشروع مدفوع في AI Studio، سيتم تحصيل رسوم منك مقابل استخدام AI Studio لهذا المفتاح. يمكنك التبديل بين مشاريع &quot;الفئة المدفوعة&quot; ومشاريع &quot;الفئة المجانية&quot; حسب الحاجة باستخدام مفاتيح واجهة برمجة التطبيقات المرتبطة بكل نوع.
+Người dùng vẫn có thể sử dụng AI Studio miễn phí, trừ phi họ liên kết một khoá API có tính phí để truy cập vào các tính năng có tính phí.
+Sau khi liên kết một khoá API có tính phí trong một dự án có tính phí trong AI Studio, bạn sẽ bị tính phí sử dụng AI Studio cho khoá đó. Bạn có thể chuyển đổi giữa các dự án thuộc Cấp có tính phí và các dự án thuộc Cấp miễn phí khi cần bằng cách sử dụng các khoá API tương ứng được liên kết với từng loại.
 
-### إذا كنت مشتركًا في "الخطة المجانية"، كيف يمكنني الترقية إلى خطط أعلى؟
+### Nếu đang sử dụng Bậc miễn phí, làm cách nào để nâng cấp lên các bậc cao hơn?
 
-للوصول إلى مستويات أعلى، يجب إعداد الفوترة في مشروعك. انقر على [**إعداد
-الفوترة**](#setup-billing) في Google AI Studio. سيرشدك ذلك خلال عملية اختيار حساب فوترة على Cloud أو إنشائه. إذا كان عليك استخدام نموذج الفوترة المدفوعة مسبقًا، ستساعدك عملية **إعداد الفوترة** في إنشاء حساب الدفع المسبق المرتبط بحساب الفوترة في السحابة الإلكترونية.
+Để sử dụng các cấp cao hơn, bạn phải thiết lập thông tin thanh toán cho dự án của mình. Nhấp vào [**Thiết lập thông tin thanh toán**](#setup-billing) trong Google AI Studio. Thao tác này sẽ hướng dẫn bạn chọn hoặc tạo một tài khoản thanh toán trên Cloud. Nếu bạn bắt buộc phải sử dụng mô hình thanh toán trả trước, thì quy trình **Thiết lập thông tin thanh toán** sẽ hướng dẫn bạn thực hiện quy trình tạo tài khoản Trả trước được liên kết với tài khoản thanh toán Cloud của bạn.
 
-### هل يمكنني استخدام مليون رمز مميز في الطبقة المجانية؟
+### Tôi có thể sử dụng 1 triệu mã thông báo trong gói miễn phí không?
 
-تختلف الفئة المجانية من Gemini API استنادًا إلى النموذج الذي تم اختياره. يمكنك حاليًا تجربة قدرة استيعاب مليون رمز مميّز بالطرق التالية:
+Cấp miễn phí cho Gemini API sẽ khác nhau tuỳ thuộc vào mô hình được chọn. Hiện tại, bạn có thể dùng cửa sổ ngữ cảnh 1 triệu token theo những cách sau:
 
-- في Google AI Studio
-- مع خطط مجانية لطُرز محدّدة
-- مع خطط الدفع عند الاستخدام
+- Trong Google AI Studio
+- Với các gói miễn phí cho một số mẫu xe
+- Với gói trả sau
 
-### هل يمكنني الرجوع إلى "الطبقة المجانية" بعد الترقية إلى طبقات أعلى (مدفوعة)؟
+### Tôi có thể quay lại Gói miễn phí sau khi nâng cấp lên các gói cao hơn (trả phí) không?
 
-للرجوع إلى "الطبقة المجانية"، يمكنك [إيقاف الفوترة](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=ar#disable_billing_for_a_project)
-في كل مشروع تريد الرجوع إلى إصدار سابق منه.
+Để hạ cấp xuống Bậc miễn phí, bạn có thể [tắt tính năng thanh toán](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=vi#disable_billing_for_a_project) trên từng dự án mà bạn muốn hạ cấp.
 
-### كيف يمكنني احتساب عدد الرموز المميزة التي أستخدمها؟
+### Làm cách nào để tính số lượng mã thông báo mà tôi đang sử dụng?
 
-استخدِم طريقة [`GenerativeModel.count_tokens`](https://ai.google.dev/api/python/google/generativeai/GenerativeModel?hl=ar#count_tokens)
-لاحتساب عدد الرموز المميزة. راجِع [دليل الرموز المميزة](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) لمعرفة المزيد من المعلومات حول الرموز المميزة.
+Sử dụng phương thức [`GenerativeModel.count_tokens`](https://ai.google.dev/api/python/google/generativeai/GenerativeModel?hl=vi#count_tokens) để đếm số lượng mã thông báo. Hãy tham khảo [Hướng dẫn về mã thông báo](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) để tìm hiểu thêm về mã thông báo.
 
-### إذا اشتركتُ في أول حساب فوترة على Cloud من خلال AI Studio، هل سأظلّ مؤهَّلاً للحصول على فترة تجريبية مجانية من Google Cloud؟
+### Nếu đăng ký Tài khoản thanh toán trên đám mây đầu tiên thông qua AI Studio, tôi có được dùng thử miễn phí Google Cloud không?
 
-عند الاشتراك في أول حساب فوترة على Cloud، تبدأ [الفترة التجريبية المجانية من Google Cloud](https://docs.cloud.google.com/free/docs/free-cloud-features?hl=ar#free-trial) ويتم منحك [رصيدًا ترحيبيًا](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=ar#welcome-credits) بقيمة 300 دولار أمريكي.
-ومع ذلك، لا يمكن استخدام هذه الأرصدة للدفع مقابل استخدام AI Studio. يمكنك استخدام رصيد الترحيب للدفع مقابل خدمات أخرى مؤهَّلة ضمن Google Cloud (يُرجى العِلم أنّه بعد استهلاك هذه الأرصدة أو انتهاء صلاحيتها (في غضون 90 يومًا)، سيتم تلقائيًا تحصيل أي تكاليف استخدام إضافية من طريقة الدفع التي حدّدتها).
+Khi bạn đăng ký Tài khoản thanh toán trên Cloud lần đầu tiên, [Bản dùng thử miễn phí của Google Cloud](https://docs.cloud.google.com/free/docs/free-cloud-features?hl=vi#free-trial) sẽ bắt đầu và bạn sẽ được cấp [Khoản tín dụng chào mừng](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=vi#welcome-credits) trị giá 300 đô la.
+Tuy nhiên, bạn không thể dùng những khoản tín dụng đó để thanh toán cho việc sử dụng AI Studio. Bạn có thể sử dụng khoản tín dụng Chào mừng để thanh toán cho các dịch vụ đủ điều kiện khác trong Google Cloud (xin lưu ý rằng sau khi bạn sử dụng hết hoặc khoản tín dụng hết hạn (trong vòng 90 ngày), mọi chi phí sử dụng bổ sung sẽ tự động được tính vào phương thức thanh toán mà bạn đã thiết lập).
 
-### هل يمكنني استخدام رصيدي الترحيبي على Google Cloud مع Gemini API؟
+### Tôi có thể sử dụng tín dụng chào mừng của Google Cloud với Gemini API không?
 
-لا، لا يمكن استخدام [رصيد الترحيب](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=ar#welcome-credits) أو الرصيد التجريبي المجاني في Google Cloud مع Gemini API أو AI Studio.
+Không, bạn không thể dùng [Khoản tín dụng chào mừng](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=vi#welcome-credits) hoặc khoản tín dụng dùng thử miễn phí của Google Cloud cho Gemini API hoặc AI Studio.
 
-إذا تم منحك رصيدًا ترحيبيًا من Google Cloud قبل أن تصبح غير مؤهّل، يمكنك إنفاق الرصيد المتبقي على Gemini API وAI Studio إلى أن تنتهي صلاحية الرصيد (بعد 90 يومًا).
+Nếu được cấp tín dụng chào mừng của Google Cloud trước khi không đủ điều kiện, bạn vẫn có thể chi tiêu số tín dụng còn lại cho Gemini API và AI Studio cho đến khi tín dụng hết hạn (sau 90 ngày).
 
-### هل تنطبق الفترة التجريبية المجانية من Google Cloud على استخدام Gemini API؟
+### Chương trình Dùng thử miễn phí của Google Cloud có áp dụng cho việc sử dụng Gemini API không?
 
-لا، اعتبارًا من آذار (مارس) 2026، سيتم استبعاد تكاليف استخدام Gemini API تحديدًا من برنامج [الفترة التجريبية المجانية من Google Cloud بقيمة 300 دولار أمريكي](https://docs.cloud.google.com/free/docs/free-cloud-features?hl=ar#free-trial).
+Không. Kể từ tháng 3 năm 2026, chi phí sử dụng Gemini API sẽ không được tính vào chương trình [Dùng thử miễn phí Google Cloud trị giá 300 USD](https://docs.cloud.google.com/free/docs/free-cloud-features?hl=vi#free-trial).
 
-### كيف تتم إدارة الفوترة؟
+### Việc thanh toán được xử lý như thế nào?
 
-تتم معالجة الفوترة في Gemini API من خلال نظام [الفوترة في Cloud](https://cloud.google.com/billing/docs/concepts?hl=ar). يمكنك الاطّلاع على مزيد من المعلومات عن عملية إعداد الفوترة في Cloud داخل المنتج في [مستندات Cloud Billing](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=ar).
+Hệ thống [Thanh toán trên Google Cloud](https://cloud.google.com/billing/docs/concepts?hl=vi) sẽ xử lý việc thanh toán cho Gemini API. Tìm hiểu về chế độ thiết lập Thanh toán trên đám mây trong sản phẩm trong [tài liệu về Thanh toán trên đám mây](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=vi).
 
-### هل يتم تحصيل رسوم مني مقابل الطلبات التي تعذّر تنفيذها؟
+### Tôi có bị tính phí cho các yêu cầu không thực hiện được không?
 
-إذا تعذّر تنفيذ طلبك وظهرت رسالة الخطأ 400 أو 500، لن يتم تحصيل رسوم منك مقابل الرموز المميزة المستخدَمة. ومع ذلك، سيتم احتساب الطلب ضمن حصتك.
+Nếu yêu cầu của bạn không thành công và gặp lỗi 400 hoặc 500, bạn sẽ không bị tính phí cho các mã thông báo đã dùng. Tuy nhiên, yêu cầu này vẫn được tính vào hạn mức của bạn.
 
-### هل يتم تحصيل رسوم مقابل `GetTokens`؟
+### `GetTokens` có bị tính phí không?
 
-لا يتم تحصيل رسوم مقابل الطلبات إلى واجهة برمجة التطبيقات `GetTokens`، ولا يتم احتسابها ضمن حصة الاستدلال.
+Các yêu cầu gửi đến API `GetTokens` không bị tính phí và không được tính vào hạn mức suy luận.
 
-### كيف تتم معالجة بياناتي في Google AI Studio إذا كان لديّ حساب API مدفوع؟
+### Dữ liệu của tôi trên Google AI Studio được xử lý như thế nào nếu tôi có tài khoản API trả phí?
 
-راجِع [بنود الخدمة](https://ai.google.dev/gemini-api/terms?hl=ar#paid-services) للحصول على تفاصيل حول طريقة معالجة البيانات عند تفعيل الفوترة في Cloud (اطّلِع على "كيفية استخدام Google لبياناتك" ضمن "الخدمات المدفوعة"). يُرجى العِلم أنّ طلباتك في Google AI Studio تخضع لبنود "الخدمات المدفوعة" نفسها ما دام تم تفعيل الفوترة في مشروع واحد على الأقل من مشاريع واجهة برمجة التطبيقات، ويمكنك التأكّد من ذلك من خلال [صفحة مفتاح Gemini API](https://aistudio.google.com/api-keys?hl=ar) إذا رأيت أي مشاريع مصنّفة على أنّها "مدفوعة" ضمن "الخطة".
+Tham khảo [Điều khoản dịch vụ](https://ai.google.dev/gemini-api/terms?hl=vi#paid-services) để biết thông tin chi tiết về cách dữ liệu được xử lý khi bạn bật tính năng thanh toán qua Cloud (xem phần "Cách Google sử dụng dữ liệu của bạn" trong mục "Dịch vụ có tính phí"). Xin lưu ý rằng các câu lệnh của bạn trên Google AI Studio sẽ được xử lý theo các điều khoản tương tự như "Dịch vụ có tính phí" miễn là có ít nhất 1 dự án API đã bật tính năng thanh toán. Bạn có thể xác thực điều này trên [trang khoá Gemini API](https://aistudio.google.com/api-keys?hl=vi) nếu thấy bất kỳ dự án nào được đánh dấu là "Có tính phí" trong mục "Gói".
 
-### ما هي الفوترة المدفوعة مسبقًا ومن يُطلب منه استخدام نموذج الفوترة المدفوعة مسبقًا؟
+### Thanh toán trả trước là gì và những ai phải sử dụng mô hình thanh toán trả trước?
 
-تتيح الفوترة المدفوعة مُسبقًا لمستخدمي Gemini API في AI Studio الشراء بشكل مسبق للأرصدة.
-اعتبارًا من 23 مارس 2026، قد يُطلب من المستخدمين الجدد في AI Studio الاشتراك في خطة فوترة مسبقة الدفع. أثناء عملية [إعداد الفوترة](#setup-billing) في AI Studio، ستساعدك واجهة المستخدم في إعداد الفوترة، وستوضّح لك ما إذا كان عليك الدفع مسبقًا.
+Tính năng thanh toán trả trước cho phép người dùng Gemini API trong AI Studio mua trước tín dụng.
+Kể từ ngày 23 tháng 3 năm 2026, người dùng mới của AI Studio có thể phải sử dụng gói thanh toán trả trước. Trong quá trình [Thiết lập thông tin thanh toán](#setup-billing) trên AI Studio, giao diện người dùng sẽ hướng dẫn bạn thực hiện quy trình thiết lập thông tin thanh toán và cho biết liệu bạn có phải trả trước hay không.
 
-### كيف يمكنني شراء أرصدة الدفع المُسبَق، وهل هناك حدّ أدنى أو أقصى؟
+### Làm cách nào để mua tín dụng trả trước và có hạn mức tối thiểu hoặc tối đa không?
 
-يمكنك [شراء وحدات](#buy-credits) في صفحة الفوترة في AI Studio. أثناء عملية الشراء، ستوفّر واجهة المستخدم الحد الأدنى لمبلغ الشراء المسبق المطلوب في منطقتك ومستوى اشتراكك، بالإضافة إلى الحد الأقصى للمبلغ الذي يمكن أن يكون في حسابك في وقت واحد.
+Bạn có thể [mua tín dụng](#buy-credits) trên trang Thanh toán của AI Studio. Trong quá trình mua, giao diện người dùng sẽ cung cấp số tiền tối thiểu cần có trước khi mua theo khu vực và cấp độ của bạn, cũng như số tiền tối đa có thể có trong tài khoản của bạn tại một thời điểm.
 
-### هل يمكنني ضبط حساب الدفع المُسبَق لشراء المزيد من الرصيد تلقائيًا حسب الحاجة؟
+### Tôi có thể định cấu hình tài khoản trả trước để tự động mua thêm tín dụng khi cần không?
 
-نعم، ننصحك بضبط إعدادات [إعادة التحميل التلقائي](#auto-reload) في إعدادات الفوترة في AI Studio. عليك تحديد رصيد "التشغيل" (على سبيل المثال، "عندما ينخفض رصيدي عن 30 دولارًا أمريكيًا") و "قيمة إعادة التعبئة" (على سبيل المثال، "إضافة 100 دولار أمريكي").
+Có, bạn nên thiết lập chế độ [tự động nạp tiền](#auto-reload) trong phần Cài đặt thanh toán của AI Studio. Bạn chỉ định số dư tín dụng "kích hoạt" (ví dụ: "khi số dư của tôi thấp hơn 30 USD") và "giá trị nạp lại" (ví dụ: "thêm 100 USD").
 
-### هل يمكنني استرداد الأموال المدفوعة مقابل الرصيد غير المستخدَم؟
+### Tôi có thể yêu cầu hoàn tiền cho phần tín dụng chưa sử dụng không?
 
-تنتهي صلاحية جميع أرصدة واجهة برمجة التطبيقات المدفوعة مسبقًا بعد عام واحد ولا يمكن استردادها. اطّلِع على
-[سياسة ردّ الأموال لحسابات الدفع المُسبَق](#refunds).
+Tất cả các khoản tín dụng API trả trước đều hết hạn sau 1 năm và không được hoàn tiền. Đọc [chính sách hoàn tiền cho tài khoản trả trước](#refunds).
 
-### هل تنتهي صلاحية الرصيد المدفوع مسبقًا؟
+### Các khoản tín dụng trả trước của tôi có hết hạn không?
 
-نعم، تنتهي صلاحية الوحدات بعد 12 شهرًا من تاريخ شرائها.
+Có, tín dụng sẽ hết hạn sau 12 tháng kể từ ngày mua.
 
-### ماذا يحدث عندما يصل رصيد الدفع المُسبق إلى 0 دولار أمريكي؟
+### Điều gì sẽ xảy ra khi số dư tín dụng trả trước của tôi đạt mức 0?
 
-سيتم إيقاف جميع خدمات Gemini API في جميع المشاريع المدفوعة من خلال حساب Cloud Billing Prepay على الفور لمنع تكبّد المزيد من الرسوم. لا يتم تلقائيًا خفض مستوى مشاريعك إلى الفئة المجانية.
+Tất cả các dịch vụ Gemini API trong mọi dự án được thanh toán bằng tài khoản Thanh toán trước trên Google Cloud đó sẽ ngừng hoạt động ngay lập tức để tránh phát sinh thêm phí. Các dự án của bạn sẽ không tự động hạ cấp xuống Hạng miễn phí.
 
-لاستعادة الخدمة على مستوى "الفئة المدفوعة" الحالي، عليك [شراء
-رصيد إضافي](#buy-credits). بعد شراء الوحدات، من المفترض أن تتمكّن من استخدام Gemini API. يُرجى العِلم أنّه قد يحدث [تأخير](#processing-times) أثناء تعديل أنظمتنا لتعكس رصيد الائتمان.
+Để khôi phục dịch vụ ở Cấp có tính phí hiện tại, bạn phải [mua thêm tín dụng](#buy-credits). Sau khi mua tín dụng, bạn có thể sử dụng Gemini API. Xin lưu ý rằng có thể có [độ trễ](#processing-times) trong khi hệ thống của chúng tôi cập nhật để phản ánh số dư tín dụng của bạn.
 
-يمكنك اختياريًا [إيقاف الفوترة](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=ar#disable_billing_for_a_project) على المشاريع التي تريد الرجوع إلى إصدار سابق منها، وذلك للرجوع إلى "الطبقة المجانية".
+Nếu muốn hạ cấp xuống Bậc miễn phí, bạn có thể [tắt tính năng thanh toán](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=vi#disable_billing_for_a_project) cho các dự án mà bạn muốn hạ cấp.
 
-### لماذا توقّف استخدامي على الرغم من أنّ رصيد الدفع المسبق أكبر من 0 دولار أمريكي؟
+### Tại sao mức sử dụng của tôi dừng lại mặc dù số dư tín dụng trả trước của tôi lớn hơn 0?
 
-ربما بلغت [حدّ الاستخدام الأقصى](#tier-spend-caps) لمستوى اشتراكك الحالي.
-ستزداد حدود الاستخدام تلقائيًا عند الانتقال إلى مستويات أعلى. قد يتأثر استخدامك لواجهة Gemini API في AI Studio أيضًا [بحالة حسابك على
-الفوترة في السحابة الإلكترونية](#missed-payment).
+Bạn có thể đã đạt đến [hạn mức sử dụng](#tier-spend-caps) cho cấp hiện tại.
+Hạn mức sử dụng sẽ tự động tăng lên khi bạn chuyển sang các cấp cao hơn. Mức sử dụng Gemini API trong AI Studio cũng có thể bị ảnh hưởng do [trạng thái của tài khoản thanh toán trên Cloud](#missed-payment).
 
-### لماذا رصيد حساب الدفع المسبق سالب؟
+### Tại sao số dư tín dụng trong tài khoản trả trước của tôi lại là số âm?
 
-نظرًا لتعقيد أنظمة الفوترة والمعالجة لدينا، قد يحدث [تأخير](#processing-times) في قدرتنا على إيقاف الاستخدام بعد استهلاك جميع أرصدتك. قد يظهر هذا الاستخدام الزائد كرصيد سالب في لوحة بيانات الفوترة في AI Studio. في هذه الحالة، سيتم إيقاف خدمتك مؤقتًا، وسيتم خصم رصيدك السالب من عملية شراء الرصيد التالية.
+Do hệ thống thanh toán và xử lý phức tạp của chúng tôi, có thể xảy ra [tình trạng chậm trễ](#processing-times) trong việc chúng tôi ngừng tính phí mức sử dụng sau khi bạn sử dụng hết tất cả các khoản tín dụng. Mức sử dụng vượt quá này có thể xuất hiện dưới dạng số dư tín dụng âm trong trang tổng quan thanh toán của AI Studio. Nếu điều này xảy ra, dịch vụ của bạn sẽ bị tạm dừng và số dư âm sẽ được trừ vào lần mua tín dụng tiếp theo của bạn.
 
-لتجنُّب توقّف خدمة Gemini API مؤقتًا، ننصحك بإعداد ميزة
-[تعبئة الرصيد تلقائيًا](#auto-reload) لشراء المزيد من الرصيد تلقائيًا عندما ينخفض رصيدك إلى أقل من قيمة تحدّدها.
+Để tránh bị tạm dừng dịch vụ Gemini API, bạn nên thiết lập tính năng [tự động nạp tiền](#auto-reload) để tự động mua thêm tín dụng khi số dư tín dụng của bạn thấp hơn một giá trị mà bạn chỉ định.
 
-### هل يمكنني استخدام أرصدة Prepay لخدمات Google Cloud الأخرى، مثل Gemini Enterprise Agent Platform؟
+### Tôi có thể sử dụng khoản tín dụng trả trước cho các dịch vụ khác của Google Cloud, chẳng hạn như Nền tảng tác nhân Gemini Enterprise không?
 
-لا، فالأرصدة المدفوعة مسبقًا مخصّصة حصريًا لاستخدام Gemini API. يتم تحصيل رسوم أي خدمات أخرى من Google Cloud تستخدمها (مثل Compute وStorage وGemini Enterprise Agent Platform) باستخدام [دورة الفوترة العادية في Cloud](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=ar).
+Không. Khoản tín dụng trả trước chỉ được dùng cho việc sử dụng Gemini API. Mọi dịch vụ khác của Google Cloud mà bạn sử dụng (Điện toán, Lưu trữ, Nền tảng tác nhân Gemini Enterprise) đều được tính phí theo [chu kỳ tính phí tiêu chuẩn của Cloud](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=vi).
 
-### هل يمكنني التبديل إلى خطة فوترة للدفع عند الاستخدام؟
+### Tôi có thể chuyển sang gói thanh toán trả sau không?
 
-عند إنشاء سجلّ دفع و[الوصول إلى مستوى مؤهّل](#about-billing) لخطة الفوترة بنظام الدفع الآجل، يمكنك اختيار نقل جميع تكاليف استخدامك المستقبلي لواجهة Gemini API إلى [دورة فوترة بنظام الدفع الآجل](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=ar#view-your-charging-cycle) موحّدة وعادية على Google Cloud.
+Khi đã có nhật ký thanh toán và [đạt đến bậc đủ điều kiện](#about-billing) để sử dụng gói thanh toán Trả sau, bạn có thể chọn chuyển tất cả các khoản phí sử dụng Gemini API trong tương lai sang [chu kỳ tính phí Trả sau](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=vi#view-your-charging-cycle) tiêu chuẩn, hợp nhất của Google Cloud.
 
-### ماذا يحدث لرصيدي المدفوع مسبقًا إذا بدّلت إلى خطة الدفع الآجل؟
+### Điều gì sẽ xảy ra với các khoản tín dụng trả trước của tôi nếu tôi chuyển sang gói trả sau?
 
-عند الترقية إلى [الدفع الآجل](#postpay)، يغلق حساب "الفوترة على Cloud" حساب الدفع المسبق، ويوقف ميزة [تعبئة الرصيد تلقائيًا](#auto-reload)، ويردّ إليك تلقائيًا أي رصيد غير مستخدَم من رصيد الدفع المسبق (مع مراعاة وقت معالجة عمليات ردّ الأموال المعتاد).
+Khi bạn nâng cấp lên gói [Trả sau](#postpay), Cloud Billing sẽ đóng tài khoản thanh toán Trả trước của bạn, tắt tính năng [tự động nạp tiền](#auto-reload) và tự động hoàn tiền cho mọi khoản tín dụng Trả trước chưa sử dụng (tuỳ thuộc vào thời gian xử lý hoàn tiền tiêu chuẩn).
 
-### أين يمكنني الاطّلاع على رصيد حساب الدفع المُسبَق الحالي وسجلّ المعاملات؟
+### Tôi có thể xem số dư tín dụng trả trước hiện tại và nhật ký giao dịch ở đâu?
 
-يجب إجراء جميع عمليات إدارة الرصيد وسجلّ المعاملات في Gemini API مباشرةً ضمن علامة التبويب "الفوترة" في Google AI Studio.
+Bạn phải quản lý số dư và xem nhật ký giao dịch của Gemini API ngay trong thẻ Thanh toán của Google AI Studio.
 
-### لماذا تظهر لي الرسالة "نوع حساب الفوترة غير نشط أو غير متوافق"؟
+### Tại sao tôi thấy thông báo "Loại tài khoản thanh toán không hoạt động hoặc không được hỗ trợ"?
 
-قد يتم حظر التفاعلات المتعلقة بالدفع في [صفحة الفوترة في AI Studio](https://aistudio.google.com/billing?hl=ar) واستبدالها بالرسالة "نوع حساب الفوترة غير نشط أو غير متوافق" إذا كان نوع حساب الفوترة المحدّد أو حالة حساب الفوترة غير مؤهّلين للاستفادة من "الخطة المدفوعة" في AI Studio.
+Các hoạt động thanh toán trên [trang Thanh toán của AI Studio](https://aistudio.google.com/billing?hl=vi) có thể bị chặn và thay thế bằng thông báo "Loại tài khoản thanh toán không hoạt động hoặc không được hỗ trợ" nếu loại tài khoản thanh toán hoặc trạng thái tài khoản thanh toán mà bạn chọn không đủ điều kiện sử dụng Cấp có tính phí trong AI Studio.
 
-تحقَّق من [Cloud Console](https://console.cloud.google.com/billing/?hl=ar) للاطّلاع على حالة حساب الفوترة. أحد الأنواع غير المؤهَّلة هو *حساب الفترة التجريبية المجانية*، وفي هذه الحالة، يمكنك [تفعيل الفوترة](#setup-billing) في AI Studio لتصبح مؤهَّلاً. إحدى حالات عدم النشاط هي *مغلق*، وفي هذه الحالة يمكنك [إعادة فتح الحساب](https://docs.cloud.google.com/billing/docs/how-to/close-or-reopen-billing-account?hl=ar).
+Kiểm tra [Cloud Console](https://console.cloud.google.com/billing/?hl=vi) để xem trạng thái của tài khoản thanh toán. Một loại tài khoản không đủ điều kiện có thể là *Tài khoản dùng thử miễn phí*. Trong trường hợp này, bạn có thể [kích hoạt tính năng thanh toán](#setup-billing) trong AI Studio để đủ điều kiện. Một trạng thái không hoạt động có thể là *Đã đóng*. Trong trường hợp này, bạn có thể [mở lại tài khoản](https://docs.cloud.google.com/billing/docs/how-to/close-or-reopen-billing-account?hl=vi).
 
-### هل ستظهر تكاليف استخدام Gemini API في "وحدة تحكّم Google Cloud"؟
+### Chi phí sử dụng Gemini API của tôi có xuất hiện trong bảng điều khiển Cloud không?
 
-نعم، يمكن الاطّلاع على تكاليف Gemini API، بالإضافة إلى التكاليف المرتبطة بأي خدمات أخرى من Google Cloud يتم دفعها من خلال حساب الفوترة في Cloud، وذلك في [صفحات إدارة التكاليف](https://docs.cloud.google.com/billing/docs/how-to/split-charging-cycle?hl=ar#cost-reports) في [وحدة تحكّم الفوترة في Cloud](https://console.cloud.google.com/billing?hl=ar). يُرجى العِلم أنّه يمكنك إدارة رصيد الدفع المسبق في "استوديو الذكاء الاصطناعي" فقط.
+Có, bạn có thể xem chi phí của Gemini API cùng với chi phí liên quan đến mọi dịch vụ khác của Google Cloud mà tài khoản thanh toán Cloud của bạn thanh toán trên [các trang Quản lý chi phí](https://docs.cloud.google.com/billing/docs/how-to/split-charging-cycle?hl=vi#cost-reports) trong [bảng điều khiển Thanh toán Cloud](https://console.cloud.google.com/billing?hl=vi). Xin lưu ý rằng bạn chỉ có thể quản lý số dư tín dụng trả trước trong AI Studio.
 
-### لماذا لا يظهر استخدام Gemini API في Cloud Billing Console، مع أنّه يظهر في "فوترة AI Studio"، بالإضافة إلى استهلاك الرصيد؟
+### Tại sao mức sử dụng Gemini API của tôi không xuất hiện trong Cloud Billing Console, mặc dù tôi có thể thấy mức sử dụng này trong phần Thanh toán của AI Studio, cùng với mức sử dụng tín dụng của tôi?
 
-تُرسِل Google Cloud وAI Studio بيانات الاستخدام إلى خدمة &quot;الفوترة في Cloud&quot; على فترات زمنية مختلفة. بسبب تعقيد أنظمة الفوترة والمعالجة لدينا، قد يحدث تأخير بين استخدامك للخدمات وتوفُّر بيانات الاستخدام والتكاليف في "الفوترة في Cloud". تتوفّر تفاصيل التكلفة عادةً في غضون يوم واحد، ولكن قد تستغرق أكثر من 24 ساعة في بعض الأحيان.
-يمكنك الاطّلاع على مزيد من المعلومات عن الفوترة المؤجّلة في [مستندات "فوترة Cloud"](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=ar#delayed-billing).
+Google Cloud và AI Studio báo cáo dữ liệu sử dụng cho Cloud Billing theo các khoảng thời gian khác nhau. Do hệ thống thanh toán và xử lý của chúng tôi khá phức tạp, nên có thể bạn sẽ thấy độ trễ giữa thời điểm bạn sử dụng dịch vụ và thời điểm bạn có thể xem mức sử dụng cũng như chi phí trong phần Thanh toán trên Cloud. Thông thường, thông tin chi tiết về chi phí sẽ có trong vòng một ngày, nhưng đôi khi có thể mất hơn 24 giờ.
+Tìm hiểu thêm về tính năng thanh toán chậm trong [tài liệu về Thanh toán trên đám mây](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=vi#delayed-billing).
 
-### إذا كنت أستخدم خدمات أخرى من Google Cloud تتضمّن تكاليف تخضع لدورة فوترة بنظام الدفع الآجل، ماذا يحدث إذا لم أسدّد دفعة؟
+### Nếu tôi sử dụng các dịch vụ khác của Google Cloud có chi phí phải chịu chu kỳ tính phí trả sau, thì điều gì sẽ xảy ra nếu tôi không thanh toán đúng hạn?
 
-قد يؤدي عدم دفع رسوم خدمات Google Cloud الأخرى إلى تعليق إمكانية الوصول إلى Gemini API في AI Studio، **بغض النظر عن عدد الأرصدة المدفوعة مسبقًا المتوفّرة لديك**. يتم توفير إمكانية استخدام AI Studio من خلال حساب فوترة على Google Cloud، ويمكن أن يشارك هذا الحساب في كل من الفوترة المسبقة الدفع في AI Studio والفوترة اللاحقة الدفع في خدمات Cloud الأخرى. تؤدي مشكلة في رصيد Postpay إلى إيقاف جميع الخدمات المرتبطة بهذا الحساب. سيتم تعليق استخدامك لواجهة Gemini API إذا تم الإبلاغ عن حساب الفوترة في Cloud بسبب مشاكل مثل:
+Nếu không thanh toán cho các dịch vụ khác của Google Cloud, bạn có thể bị tạm ngưng quyền truy cập vào Gemini API trong AI Studio, **bất kể bạn có bao nhiêu tín dụng trả trước**. Việc sử dụng AI Studio được hỗ trợ bởi một tài khoản thanh toán Google Cloud. Tài khoản này có thể dùng cả phương thức thanh toán trả trước cho AI Studio và thanh toán trả sau cho các dịch vụ khác trên Cloud. Vấn đề về số dư trả sau sẽ tạm dừng tất cả dịch vụ liên kết với tài khoản đó. Việc sử dụng Gemini API của bạn sẽ bị tạm ngưng nếu Tài khoản thanh toán trên Cloud của bạn bị gắn cờ vì các vấn đề như:
 
-- رصيد متأخّر أو مستحق
-- دفعة مرفوضة
-- طريقة دفع غير صالحة أو منتهية الصلاحية
+- Số dư quá hạn hoặc chưa thanh toán
+- Khoản thanh toán bị từ chối
+- Phương thức thanh toán không hợp lệ hoặc đã hết hạn
 
-لاستعادة الخدمة، عليك [حلّ مشكلة حساب الدفع الآجل](https://docs.cloud.google.com/billing/docs/how-to/resolve-issues?hl=ar#resolving-declined-payments) في وحدة تحكّم الفوترة في Google Cloud. بعد حلّ المشكلة، ستستعيد إمكانية الوصول إلى أرصدة وخدمات Gemini API المدفوعة مسبقًا.
+Để khôi phục dịch vụ, bạn phải [giải quyết vấn đề về tài khoản trả sau](https://docs.cloud.google.com/billing/docs/how-to/resolve-issues?hl=vi#resolving-declined-payments) trong bảng điều khiển Thanh toán của Google Cloud. Sau khi giải quyết vấn đề, bạn sẽ lấy lại được quyền truy cập vào các khoản tín dụng và dịch vụ Gemini API trả trước.
 
-### أين يمكنني الحصول على المساعدة بشأن الفوترة؟
+### Tôi có thể yêu cầu trợ giúp về việc thanh toán ở đâu?
 
-للحصول على مساعدة بشأن الفوترة، يُرجى الاطّلاع على [الحصول على دعم بشأن الفوترة في Cloud](https://cloud.google.com/support/billing?hl=ar).
+Để được trợ giúp về việc thanh toán, hãy xem phần [Yêu cầu hỗ trợ về việc thanh toán trên Cloud](https://cloud.google.com/support/billing?hl=vi).
 
-إرسال ملاحظات
+Gửi ý kiến phản hồi
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-تاريخ التعديل الأخير: 2026-04-28 (حسب التوقيت العالمي المتفَّق عليه)
+Cập nhật lần gần đây nhất: 2026-05-16 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-28 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-16 UTC."],[],[]]

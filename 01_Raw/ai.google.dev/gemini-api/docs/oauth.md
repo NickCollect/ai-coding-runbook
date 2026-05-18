@@ -1,95 +1,85 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/oauth?hl=vi
-fetched_at: 2026-05-11T05:04:59.510522+00:00
-title: "X\u00e1c th\u1ef1c b\u1eb1ng t\u00ednh n\u0103ng b\u1eaft \u0111\u1ea7u nhanh OAuth \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/oauth?hl=ar
+fetched_at: 2026-05-18T05:13:13.958150+00:00
+title: "\u0627\u0644\u0645\u0635\u0627\u062f\u0642\u0629 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u062a\u0634\u063a\u064a\u0644 \u0627\u0644\u0633\u0631\u064a\u0639 \u0644\u0628\u0631\u0648\u062a\u0648\u0643\u0648\u0644 OAuth \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
-# Xác thực bằng tính năng bắt đầu nhanh OAuth
+# المصادقة باستخدام التشغيل السريع لبروتوكول OAuth
 
-Cách dễ nhất để xác thực với Gemini API là định cấu hình khoá API, như
-mô tả trong [hướng dẫn bắt đầu nhanh về Gemini API](https://ai.google.dev/gemini-api/docs/quickstart?hl=vi). Nếu cần kiểm soát quyền truy cập chặt chẽ hơn, bạn có thể sử dụng OAuth. Hướng dẫn này sẽ giúp bạn thiết lập quy trình xác thực bằng OAuth.
+أسهل طريقة للمصادقة على Gemini API هي إعداد مفتاح واجهة برمجة التطبيقات، كما هو موضّح في [دليل البدء السريع لواجهة Gemini API](https://ai.google.dev/gemini-api/docs/quickstart?hl=ar). إذا كنت بحاجة إلى عناصر تحكّم أكثر صرامة في الوصول، يمكنك استخدام OAuth بدلاً من ذلك. سيساعدك هذا الدليل في إعداد المصادقة باستخدام OAuth.
 
-Hướng dẫn này sử dụng phương pháp xác thực đơn giản, phù hợp với môi trường kiểm thử. Đối với môi trường phát hành công khai, hãy tìm hiểu
-về
-[quy trình xác thực và uỷ quyền](https://developers.google.com/workspace/guides/auth-overview?hl=vi)
-trước khi
-[chọn thông tin đăng nhập để truy cập](https://developers.google.com/workspace/guides/create-credentials?hl=vi#choose_the_access_credential_that_is_right_for_you)
-phù hợp với ứng dụng của bạn.
+يستخدم هذا الدليل أسلوبًا مبسطًا للمصادقة مناسبًا لبيئة الاختبار. بالنسبة إلى بيئة الإنتاج، تعرَّف على [المصادقة والتفويض](https://developers.google.com/workspace/guides/auth-overview?hl=ar) قبل [اختيار بيانات الاعتماد الخاصة بالوصول](https://developers.google.com/workspace/guides/create-credentials?hl=ar#choose_the_access_credential_that_is_right_for_you) المناسبة لتطبيقك.
 
-## Mục tiêu
+## الأهداف
 
-- Thiết lập dự án trên đám mây cho OAuth
-- Thiết lập thông tin xác thực mặc định của ứng dụng
-- Quản lý thông tin xác thực trong chương trình thay vì sử dụng `gcloud auth`
+- إعداد مشروعك على السحابة الإلكترونية لاستخدام OAuth
+- إعداد بيانات الاعتماد التلقائية للتطبيق
+- إدارة بيانات الاعتماد في برنامجك بدلاً من استخدام "`gcloud auth`"
 
-## Điều kiện tiên quyết
+## المتطلبات الأساسية
 
-Để chạy hướng dẫn bắt đầu nhanh này, bạn cần:
+لتشغيل هذا الدليل السريع، يجب توفُّر ما يلي:
 
-- [Một dự án trên Google Cloud](https://developers.google.com/workspace/guides/create-project?hl=vi)
-- [Một bản cài đặt cục bộ của gcloud CLI](https://cloud.google.com/sdk/docs/install?hl=vi)
+- [مشروع على السحابة الإلكترونية من Google Cloud](https://developers.google.com/workspace/guides/create-project?hl=ar)
+- [تثبيت gcloud CLI على الجهاز](https://cloud.google.com/sdk/docs/install?hl=ar)
 
-## Thiết lập dự án trên đám mây
+## إعداد مشروعك على السحابة الإلكترونية
 
-Để hoàn tất hướng dẫn bắt đầu nhanh này, trước tiên, bạn cần thiết lập dự án trên đám mây.
+لإكمال هذا الدليل السريع، عليك أولاً إعداد مشروعك على السحابة الإلكترونية.
 
-### 1. Bật API
+### 1. تفعيل واجهة برمجة التطبيقات
 
-Trước khi sử dụng API của Google, bạn cần bật các API đó trong một dự án trên Google Cloud.
+قبل استخدام واجهات Google APIs، عليك تفعيلها في مشروع على Google Cloud.
 
-- Trong bảng điều khiển Cloud, hãy bật Generative Language API của Google.
+- في Google Cloud Console، فعِّل Google Generative Language API.
 
-  [Bật API](https://console.cloud.google.com/flows/enableapi?apiid=generativelanguage.googleapis.com&hl=vi)
+  [تفعيل واجهة برمجة التطبيقات](https://console.cloud.google.com/flows/enableapi?apiid=generativelanguage.googleapis.com&hl=ar)
 
-### 2. Định cấu hình màn hình xin phép bằng OAuth
+### 2. إعداد شاشة طلب الموافقة المتعلّقة ببروتوكول OAuth
 
-Tiếp theo, hãy định cấu hình màn hình xin phép bằng OAuth của dự án và thêm chính bạn làm người dùng thử nghiệm. Nếu bạn đã hoàn tất bước này cho dự án trên đám mây, hãy chuyển sang phần tiếp theo.
+بعد ذلك، اضبط شاشة طلب الموافقة المتعلّقة ببروتوكول OAuth في المشروع وأضِف نفسك كمستخدم اختباري. إذا سبق لك إكمال هذه الخطوة لمشروعك على السحابة الإلكترونية، انتقِل إلى القسم التالي.
 
-1. Trong bảng điều khiển Cloud, hãy chuyển đến **Trình đơn** > **Nền tảng xác thực của Google** > **Tổng quan**.
+1. في وحدة تحكّم Google Cloud، انتقِل إلى **القائمة** > **منصة Google Auth** > **نظرة عامة**.
 
-   [Chuyển đến Nền tảng xác thực của Google](https://console.developers.google.com/auth/overview?hl=vi)
-2. Hoàn tất biểu mẫu cấu hình dự án và đặt loại người dùng thành **Bên ngoài** trong phần **Đối tượng**.
-3. Hoàn tất phần còn lại của biểu mẫu, chấp nhận các điều khoản trong Chính sách dữ liệu người dùng, rồi nhấp vào **Tạo**.
-4. Hiện tại, bạn có thể bỏ qua bước thêm phạm vi và nhấp vào **Lưu và tiếp tục**. Trong tương lai, khi tạo một ứng dụng để sử dụng bên ngoài tổ chức Google Workspace, bạn phải thêm và xác minh các phạm vi uỷ quyền mà ứng dụng của bạn yêu cầu.
-5. Thêm người dùng thử nghiệm:
+   [الانتقال إلى منصة Google Auth](https://console.developers.google.com/auth/overview?hl=ar)
+2. أكمِل نموذج إعداد المشروع واضبط نوع المستخدم على **خارجي** في قسم **الجمهور**.
+3. أكمِل بقية النموذج، واقبَل بنود سياسة بيانات المستخدِم، ثم انقر على **إنشاء**.
+4. في الوقت الحالي، يمكنك تخطّي إضافة النطاقات والنقر على **حفظ ومتابعة**. في المستقبل، عندما تنشئ تطبيقًا لاستخدامه خارج مؤسستك على Google Workspace، عليك إضافة نطاقات الأذونات التي يتطلبها تطبيقك وإثبات ملكيتها.
+5. إضافة مستخدمين اختباريين:
 
-   1. Chuyển đến trang
-      [Đối tượng](https://console.developers.google.com/auth/audience?hl=vi) của
-      Nền tảng xác thực của Google.
-   2. Trong phần **Người dùng thử nghiệm**, hãy nhấp vào **Thêm người dùng**.
-   3. Nhập địa chỉ email của bạn và mọi người dùng thử nghiệm được uỷ quyền khác, sau đó nhấp vào **Lưu**.
+   1. انتقِل إلى [صفحة الجمهور](https://console.developers.google.com/auth/audience?hl=ar) في منصة Google Auth.
+   2. ضمن **المستخدمون التجريبيون**، انقر على **إضافة مستخدمين**.
+   3. أدخِل عنوان بريدك الإلكتروني وأي مستخدمين اختباريين آخرين معتمَدين، ثم انقر على **حفظ**.
 
-### 3. Uỷ quyền thông tin đăng nhập cho một ứng dụng dành cho máy tính
+### 3- تفويض بيانات اعتماد لتطبيق على الكمبيوتر
 
-Để xác thực với tư cách là người dùng cuối và truy cập vào dữ liệu người dùng trong ứng dụng của mình, bạn cần tạo một hoặc nhiều Mã ứng dụng khách OAuth 2.0. Mã ứng dụng khách được dùng để xác định một ứng dụng duy nhất cho các máy chủ OAuth của Google. Nếu ứng dụng của bạn chạy trên nhiều nền tảng, bạn phải tạo một mã ứng dụng khách riêng cho mỗi nền tảng.
+لإجراء المصادقة كمستخدم نهائي والوصول إلى بيانات المستخدم في تطبيقك، عليك إنشاء معرّف عميل واحد أو أكثر من معرّفات عملاء OAuth 2.0. يُستخدم معرّف العميل لتعريف تطبيق واحد على خوادم OAuth من Google. إذا كان تطبيقك يعمل على منصات متعددة، عليك إنشاء معرّف عميل منفصل لكل منصة.
 
-1. Trong bảng điều khiển Cloud, hãy chuyển đến **Trình đơn** > **Nền tảng xác thực của Google** > **Ứng dụng**.
+1. في وحدة تحكّم Google Cloud، انتقِل إلى **القائمة** > **منصة Google Auth** > **العملاء**.
 
-   [Chuyển đến phần Thông tin đăng nhập](https://console.developers.google.com/auth/clients?hl=vi)
-2. Nhấp vào **Tạo ứng dụng**.
-3. Nhấp vào **Loại ứng dụng** > **Ứng dụng dành cho máy tính**.
-4. Trong trường **Name** (Tên), hãy nhập tên cho thông tin đăng nhập. Tên này chỉ xuất hiện trong bảng điều khiển Google Cloud.
-5. Nhấp vào **Tạo**. Màn hình ứng dụng OAuth đã tạo sẽ xuất hiện, cho thấy Mã ứng dụng khách và Khoá bí mật của ứng dụng khách mới.
-6. Nhấp vào **OK**. Thông tin xác thực mới tạo sẽ xuất hiện trong phần **Mã ứng dụng khách OAuth 2.0**.
-7. Nhấp vào nút tải xuống để lưu tệp JSON. Tệp này sẽ được lưu dưới dạng
-   `client_secret_<identifier>.json`. Hãy đổi tên tệp thành `client_secret.json`
-   và chuyển tệp đó vào thư mục làm việc của bạn.
+   [الانتقال إلى "بيانات الاعتماد"](https://console.developers.google.com/auth/clients?hl=ar)
+2. انقر على **إنشاء عميل**.
+3. انقر على **نوع التطبيق** > **تطبيق على الكمبيوتر**.
+4. في حقل **الاسم**، اكتب اسمًا لبيانات الاعتماد. ولا يظهر هذا الاسم إلا في Google Cloud Console.
+5. انقر على **إنشاء**. تظهر شاشة إنشاء عميل OAuth، وتعرض معرّف العميل وسر العميل الجديدَين.
+6. انقر على **موافق**. تظهر بيانات الاعتماد التي تم إنشاؤها حديثًا ضمن **معرّفات عملاء OAuth 2.0**.
+7. انقر على زر التنزيل لحفظ ملف JSON. سيتم حفظه باسم `client_secret_<identifier>.json`، ثم عليك إعادة تسميته إلى `client_secret.json` ونقله إلى دليل العمل.
 
-## Thiết lập thông tin xác thực mặc định của ứng dụng
+## إعداد "بيانات الاعتماد التلقائية للتطبيق"
 
-Để chuyển đổi tệp `client_secret.json` thành thông tin xác thực có thể sử dụng, hãy truyền vị trí của tệp đó vào đối số `--client-id-file` của lệnh `gcloud auth application-default login`.
+لتحويل ملف `client_secret.json` إلى بيانات اعتماد قابلة للاستخدام، مرِّر موقعه الجغرافي إلى وسيطة `--client-id-file` الخاصة بالأمر `gcloud auth application-default login`.
 
 ```
 gcloud auth application-default login \
@@ -97,10 +87,9 @@ gcloud auth application-default login \
     --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/generative-language.retriever'
 ```
 
-Quy trình thiết lập dự án đơn giản trong hướng dẫn này sẽ kích hoạt hộp thoại **"Google hasn't
-verified this app."** (Google chưa xác minh ứng dụng này). Đây là điều bình thường, hãy chọn **"continue"** (tiếp tục).
+يؤدي إعداد المشروع المبسَّط في هذا البرنامج التعليمي إلى ظهور مربّع الحوار **"لم تتحقّق Google من هذا التطبيق"**. هذا أمر طبيعي، لذا اختَر **"متابعة"**.
 
-Thao tác này sẽ đặt mã thông báo kết quả ở một vị trí đã biết để `gcloud` hoặc các thư viện ứng dụng có thể truy cập vào mã thông báo đó.
+يؤدي ذلك إلى وضع الرمز المميز الناتج في مكان معروف جيدًا ليتمكّن `gcloud` أو مكتبات البرامج من الوصول إليه.
 
 ```` ```
 gcloud auth application-default login   
@@ -111,11 +100,11 @@ gcloud auth application-default login
     --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/generative-language.retriever'
 ``` ````
 
-Sau khi bạn thiết lập Thông tin xác thực mặc định của ứng dụng (ADC), các thư viện ứng dụng bằng hầu hết các ngôn ngữ sẽ cần rất ít hoặc không cần trợ giúp để tìm thấy các thông tin xác thực đó.
+بعد ضبط بيانات الاعتماد التلقائية للتطبيق (ADC)، لن تحتاج مكتبات البرامج في معظم اللغات إلى مساعدة كبيرة أو أي مساعدة للعثور عليها.
 
 ### Curl
 
-Cách nhanh nhất để kiểm tra xem tính năng này có hoạt động hay không là sử dụng tính năng này để truy cập vào REST API bằng curl:
+أسرع طريقة لاختبار عمل ذلك هي استخدامها للوصول إلى واجهة برمجة تطبيقات REST باستخدام curl:
 
 ```
 access_token=$(gcloud auth application-default print-access-token)
@@ -128,13 +117,13 @@ curl -X GET https://generativelanguage.googleapis.com/v1/models \
 
 ### Python
 
-Trong Python, các thư viện ứng dụng sẽ tự động tìm thấy các thông tin xác thực đó:
+في Python، من المفترض أن تعثر عليها مكتبات البرامج تلقائيًا:
 
 ```
 pip install google-genai
 ```
 
-Tập lệnh tối thiểu để kiểm tra có thể là:
+في ما يلي نص برمجي بسيط لاختبارها:
 
 ```
 from google import genai
@@ -143,29 +132,29 @@ client = genai.Client()
 print('Available base models:', [m.name for m in client.models.list()])
 ```
 
-## Các bước tiếp theo
+## الخطوات التالية
 
-Nếu tính năng đó hoạt động, bạn đã sẵn sàng thử
-[tính năng Tìm nạp ngữ nghĩa trên dữ liệu văn bản của mình](https://ai.google.dev/docs/semantic_retriever?hl=vi).
+إذا كان ذلك يعمل، يمكنك تجربة
+[الاسترجاع الدلالي لبياناتك النصية](https://ai.google.dev/docs/semantic_retriever?hl=ar).
 
-## Tự quản lý thông tin xác thực [Python]
+## إدارة بيانات الاعتماد بنفسك [Python]
 
-Trong nhiều trường hợp, bạn sẽ không có lệnh `gcloud` để tạo mã truy cập từ Mã ứng dụng khách (`client_secret.json`). Google cung cấp các thư viện bằng nhiều ngôn ngữ để cho phép bạn quản lý quy trình đó trong ứng dụng của mình. Phần này minh hoạ quy trình đó trong Python. [Bạn có thể xem các ví dụ tương đương về loại quy trình này cho các ngôn ngữ khác trong tài liệu về API Drive](https://developers.google.com/drive/api/quickstart/python?hl=vi)
+في كثير من الحالات، لن يتوفّر لك الأمر `gcloud` لإنشاء رمز الدخول من معرّف العميل (`client_secret.json`). توفّر Google مكتبات بلغات عديدة تتيح لك إدارة هذه العملية داخل تطبيقك. يوضّح هذا القسم العملية بلغة Python. تتوفّر أمثلة مكافئة لهذا النوع من الإجراءات بلغات أخرى في [مستندات Drive API](https://developers.google.com/drive/api/quickstart/python?hl=ar).
 
-### 1. Cài đặt các thư viện cần thiết
+### 1. تثبيت المكتبات اللازمة
 
-Cài đặt thư viện ứng dụng Google cho Python và thư viện ứng dụng Gemini.
+ثبِّت مكتبة برامج Google للغة Python ومكتبة برامج Gemini.
 
 ```
 pip install --upgrade -q google-api-python-client google-auth-httplib2 google-auth-oauthlib
 pip install google-genai
 ```
 
-### 2. Viết trình quản lý thông tin xác thực
+### 2. كتابة بيانات اعتماد مدير
 
-Để giảm thiểu số lần bạn phải nhấp qua các màn hình uỷ quyền, hãy tạo một tệp có tên `load_creds.py` trong thư mục làm việc của bạn để lưu vào bộ nhớ đệm tệp `token.json` mà tệp đó có thể sử dụng lại sau này hoặc làm mới nếu tệp đó hết hạn.
+للحدّ من عدد المرات التي عليك فيها النقر على شاشات التفويض، أنشئ ملفًا باسم `load_creds.py` في دليل العمل لتخزين ملف `token.json` مؤقتًا يمكن إعادة استخدامه لاحقًا، أو إعادة تحميله إذا انتهت صلاحيته.
 
-Bắt đầu bằng mã sau để chuyển đổi tệp `client_secret.json` thành mã thông báo có thể sử dụng với `genai.configure`:
+ابدأ باستخدام الرمز التالي لتحويل ملف `client_secret.json` إلى رمز مميز يمكن استخدامه مع `genai.configure`:
 
 ```
 import os.path
@@ -202,9 +191,9 @@ def load_creds():
     return creds
 ```
 
-### 3. Viết chương trình
+### 3- كتابة برنامجك
 
-Bây giờ, hãy tạo `script.py`:
+الآن، أنشئ `script.py`:
 
 ```
 import pprint
@@ -219,27 +208,28 @@ print()
 print('Available base models:', [m.name for m in client.models.list()])
 ```
 
-### 4. Chạy chương trình
+### 4. تشغيل برنامجك
 
-Trong thư mục làm việc, hãy chạy mẫu:
+في دليل العمل، شغِّل النموذج:
 
 ```
 python script.py
 ```
 
-Vào lần đầu tiên bạn chạy tập lệnh, tập lệnh này sẽ mở một cửa sổ trình duyệt và nhắc bạn uỷ quyền truy cập.
+في المرة الأولى التي تنفّذ فيها النص البرمجي، سيفتح نافذة متصفّح ويطلب منك
+منح إذن الوصول.
 
-1. Bạn sẽ được nhắc đăng nhập nếu chưa đăng nhập vào Tài khoản Google. Nếu bạn đăng nhập vào nhiều tài khoản, **hãy nhớ chọn tài khoản mà bạn đặt làm "Tài khoản thử nghiệm" khi định cấu hình dự án của mình.**
-2. Thông tin uỷ quyền được lưu trữ trong hệ thống tệp, vì vậy, vào lần tiếp theo chạy mã mẫu, bạn sẽ không được nhắc về việc uỷ quyền.
+1. إذا لم تكن مسجِّلاً الدخول إلى حساب Google، سيُطلب منك تسجيل الدخول. إذا كنت مسجّلاً الدخول إلى حسابات متعددة، **احرص على اختيار الحساب الذي ضبطته كـ "حساب اختبار" عند إعداد مشروعك.**
+2. يتم تخزين معلومات التفويض في نظام الملفات، لذا لن يُطلب منك تقديم تفويض في المرة التالية التي تشغّل فيها الرمز النموذجي.
 
-Bạn đã thiết lập thành công quy trình xác thực.
+لقد أعددت المصادقة بنجاح.
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

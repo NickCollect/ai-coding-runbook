@@ -1,46 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/imagen?hl=pl
-fetched_at: 2026-05-11T05:05:57.857612+00:00
-title: "Imagen\u00a04 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/imagen?hl=it
+fetched_at: 2026-05-18T05:14:23.400783+00:00
+title: "Imagen 4 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Prześlij opinię
+Invia feedback
 
-# Imagen 4
+# Imagen 4
 
-Wysokowydajny silnik do zaawansowanej syntezy wizualnej, który zapewnia zaawansowaną kontrolę twórczą i fotorealistyczne wyniki. Używaj modelu Imagen 4 do profesjonalnego brandingu, tworzenia złożonych kompozycji scen i wykonywania zadań projektowych o wysokiej wierności, które wymagają precyzyjnego renderowania tekstu i złożonego oświetlenia.
+Un motore ad alte prestazioni per la sintesi visiva avanzata, che offre un controllo creativo sofisticato e un output fotorealistico. Utilizza Imagen 4 per il branding professionale, la composizione di scene complesse e attività di progettazione ad alta fedeltà che richiedono un rendering preciso del testo e un'illuminazione complessa.
 
-[Wypróbuj w Google AI Studio](https://aistudio.google.com?model=imagen-4.0-generate-001&hl=pl)
+[Prova in Google AI Studio](https://aistudio.google.com?model=imagen-4.0-generate-001&hl=it)
 
-## Dokumentacja
+## Documentazione
 
-Pełny opis funkcji i możliwości znajdziesz na stronie [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=pl).
+Visita la pagina [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=it) per una copertura completa delle funzionalità.
 
 ## imagen-4.0-generate-001
 
-| Właściwość | Opis |
+| Proprietà | Descrizione |
 | --- | --- |
-| id\_cardKod modelu | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
-| saveObsługiwane typy danych | **Wejście**  Tekst  **Dane wyjściowe**  Obrazy |
-| token\_autoLimity tokenów[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | **Limit tokenów wejściowych**  480 tokenów (tekst)  **Obrazy wyjściowe**  1–4 (Ultra/Standard/Fast) |
-| calendar\_monthOstatnia aktualizacja | Czerwiec 2025 r. |
+| Codice modello id\_card | **API Gemini**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
+| saveTipi di dati supportati | **Ingresso**  Testo  **Output**  Immagini |
+| token\_autoLimiti dei token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=it) | **Limite di token di input**  480 token (testo)  **Immagini di output**  Da 1 a 4 (Ultra/Standard/Veloce) |
+| calendar\_monthUltimo aggiornamento | Giugno 2025 |
 
-Prześlij opinię
+Invia feedback
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Ostatnia aktualizacja: 2026-04-29 UTC.
+Ultimo aggiornamento 2026-04-29 UTC.
 
-Chcesz przekazać coś jeszcze?
+Vuoi dirci altro?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]

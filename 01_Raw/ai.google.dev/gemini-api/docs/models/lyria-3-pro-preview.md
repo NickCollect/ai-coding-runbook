@@ -1,48 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=zh-TW
-fetched_at: 2026-05-11T05:01:55.584106+00:00
-title: "Lyria 3 Pro \u9810\u5148\u767c\u5e03\u7248 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=zh-CN
+fetched_at: 2026-05-18T05:19:20.324613+00:00
+title: "Lyria 3 Pro\uff08\u9884\u89c8\u7248\uff09 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-提供意見
+发送反馈
 
-# Lyria 3 Pro 預先發布版
+# Lyria 3 Pro（预览版）
 
-Lyria 3 Pro 預先發布版是 Google 的旗艦音樂生成模型，這項模型經過最佳化，可生成結構連貫的完整歌曲，包括多個主歌、副歌和橋段。可根據文字提示詞或圖片輸入內容，生成高品質的 48 kHz 立體聲音訊。
+Lyria 3 Pro Preview 是 Google 的旗舰级音乐生成模型。它经过优化，可生成具有复杂结构连贯性的完整歌曲，包括多个主歌、副歌和桥段。它可以根据文本提示或图片输入生成高质量的 48kHz 立体声音频。
 
-[在 Google AI Studio 中試用](https://aistudio.google.com/prompts/new_chat?model=lyria-3-pro-preview&hl=zh-tw)
+[在 Google AI Studio 中试用](https://aistudio.google.com/prompts/new_chat?model=lyria-3-pro-preview&hl=zh-cn)
 
-## 說明文件
+## 文档
 
-如要全面瞭解這項功能，請參閱[音樂生成](https://ai.google.dev/gemini-api/docs/music-generation?hl=zh-tw)指南。
+如需全面了解功能和能力，请参阅[音乐生成](https://ai.google.dev/gemini-api/docs/music-generation?hl=zh-cn)指南。
 
 ## lyria-3-pro-preview
 
-| 屬性 | 說明 |
+| 属性 | 说明 |
 | --- | --- |
-| id\_card 模型代碼 | `lyria-3-clip-preview` |
-| save支援的資料類型 | **輸入裝置**  文字和圖片  **輸出內容**  音訊 (MP3)、文字 (歌詞) |
-| token\_auto 代幣限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw) | **輸入權杖限制**  131,072 |
-| handyman功能 | **語音生成**  支援  **批次 API**  不支援  **快取**  不支援  **程式碼執行**  不支援  **檔案搜尋**  不支援  **函式呼叫**  不支援  **利用 Google 地圖建立基準**  不支援  **圖像生成**  不支援  **Live API**  不支援  **搜尋基準**  不支援  **結構化輸出內容**  不支援  **思考型**  不支援  **網址內容**  不支援 |
-| 123 個版本 | 如要瞭解詳情，請參閱[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-tw#model-versions)。  - 預覽：`lyria-3-clip-preview` - 預覽：`lyria-3-pro-preview` |
+| id\_card模型代码 | `lyria-3-clip-preview` |
+| save支持的数据类型 | **输入**  文本和图片  **输出**  音频 (MP3)、文本（歌词） |
+| token\_auto | **输入令牌限制**  131,072 |
+| handyman功能 | **音频生成**  支持  **批量 API**  不支持  **缓存**  不支持  **代码执行**  不支持  **文件搜索**  不支持  **函数调用**  不支持  **Grounding with Google Maps**  不支持  **图片生成**  不支持  **Live API**  不支持  **搜索接地**  不支持  **结构化输出**  不支持  **思考型**  不支持  **网址上下文**  不支持 |
+| 123版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 预览：`lyria-3-clip-preview` - 预览：`lyria-3-pro-preview` |
 | calendar\_month最新更新 | 2026 年 3 月 |
 
-提供意見
+发送反馈
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-上次更新時間：2026-04-29 (世界標準時間)。
+最后更新时间 (UTC)：2026-04-29。
 
-想進一步說明嗎？
+需要向我们提供更多信息？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-04-29 (世界標準時間)。"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]

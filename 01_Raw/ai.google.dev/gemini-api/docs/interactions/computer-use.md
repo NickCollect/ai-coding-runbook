@@ -1,92 +1,79 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/computer-use?hl=pt-BR
-fetched_at: 2026-05-11T05:03:23.673961+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/computer-use?hl=fr
+fetched_at: 2026-05-18T05:18:24.638249+00:00
 title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/overview?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Envie comentários
+Envoyer des commentaires
 
-# Uso de computador
+# Utilisation d'un ordinateur
 
-Com o Uso do computador, você pode criar agentes de controle do navegador que interagem e automatizam tarefas. Usando capturas de tela, o modelo pode "ver" uma tela de computador e "agir" gerando ações específicas da interface, como cliques do mouse e entradas de teclado. Assim como na chamada de função, você precisa escrever o código do aplicativo do lado do cliente para receber e executar as ações de uso do computador.
+L'utilisation de l'ordinateur vous permet de créer des agents de contrôle du navigateur qui interagissent avec les tâches et les automatisent. À l'aide de captures d'écran, le modèle peut "voir" un écran d'ordinateur et "agir" en générant des actions d'interface utilisateur spécifiques, comme des clics de souris et des saisies au clavier. Comme pour l'appel de fonction, vous devez écrire le code de l'application côté client pour recevoir et exécuter les actions d'utilisation de l'ordinateur.
 
-Com o uso do computador, é possível criar agentes que:
+Avec l'utilisation de l'ordinateur, vous pouvez créer des agents qui :
 
-- Automatizar a entrada de dados repetitivos ou o preenchimento de formulários em sites.
-- Realizar testes automatizados de aplicativos da Web e fluxos de usuários
-- Fazer pesquisas em vários sites (por exemplo, coletar informações, preços e avaliações de produtos em sites de e-commerce para informar uma compra)
+- Automatisez la saisie de données répétitives ou le remplissage de formulaires sur les sites Web.
+- Effectuer des tests automatisés des applications Web et des parcours utilisateur
+- Effectuer des recherches sur différents sites Web (par exemple, collecter des informations sur les produits, les prix et les avis sur les sites d'e-commerce pour prendre une décision d'achat)
 
-A maneira mais fácil de testar a capacidade de uso do computador é usando a [implementação de referência](https://github.com/google/computer-use-preview/) ou o [ambiente de demonstração do Browserbase](http://gemini.browserbase.com).
+Le moyen le plus simple de tester la fonctionnalité d'utilisation de l'ordinateur consiste à utiliser l'[implémentation de référence](https://github.com/google/computer-use-preview/) ou l'[environnement de démonstration Browserbase](http://gemini.browserbase.com).
 
-## Como o uso de computador funciona
+## Fonctionnement de l'utilisation d'un ordinateur
 
-Para criar um agente de controle do navegador com o modelo de uso do computador, implemente
-um loop de agente que faça o seguinte:
+Pour créer un agent de contrôle du navigateur avec le modèle d'utilisation de l'ordinateur, implémentez une boucle d'agent qui effectue les opérations suivantes :
 
-1. [**Enviar uma solicitação para o modelo**](#send-request)
+1. [**Envoyer une requête au modèle**](#send-request)
 
-   - Adicione a ferramenta "Uso de computador" e, opcionalmente, qualquer função personalizada definida pelo usuário ou excluída à sua solicitação de API.
-   - Envie o comando com a solicitação do usuário para o modelo de uso do computador.
-2. [**Receber a resposta do modelo**](#model-response)
+   - Ajoutez l'outil d'utilisation de l'ordinateur et, éventuellement, des fonctions personnalisées ou exclues à votre requête API.
+   - Envoyez la requête de l'utilisateur au modèle d'utilisation de l'ordinateur.
+2. [**Recevoir la réponse du modèle**](#model-response)
 
-   - O modelo de uso do computador analisa a solicitação e a captura de tela do usuário e gera uma resposta que inclui um `function_call` sugerido representando uma ação da interface (por exemplo, "clique na coordenada (x,y)" ou "digite 'texto'"). Para uma descrição de todas as ações da interface compatíveis com o modelo de uso do computador, consulte [Ações compatíveis](#supported-actions).
-   - A resposta da API também pode incluir um `safety_decision` de um sistema de segurança interno que verifica a ação proposta pelo modelo. Esse
-     `safety_decision` classifica a ação como:
-     - **Regular / permitida**:a ação é considerada segura. Isso também pode ser representado pela ausência de `safety_decision`.
-     - **Requer confirmação (`require_confirmation`)**: o modelo está prestes a
-       realizar uma ação
-       que pode ser arriscada (por exemplo, clicar em um banner de cookie).
-3. [**Executar a ação recebida**](#execute-actions)
+   - Le modèle d'utilisation de l'ordinateur analyse la requête et la capture d'écran de l'utilisateur, et génère une réponse qui inclut une `function_call` suggérée représentant une action d'interface utilisateur (par exemple, "cliquer aux coordonnées (x,y)" ou "saisir 'texte'"). Pour obtenir la description de toutes les actions d'interface utilisateur compatibles avec le modèle Computer Use, consultez [Actions compatibles](#supported-actions).
+   - La réponse de l'API peut également inclure un `safety_decision` provenant d'un système de sécurité interne qui vérifie l'action proposée par le modèle. Ce `safety_decision` classe l'action comme suit :
+     - **Régulier / Autorisé** : l'action est considérée comme sûre. Cela peut également être représenté par l'absence de `safety_decision`.
+     - **Nécessite une confirmation (`require_confirmation`)** : le modèle est sur le point d'effectuer une action potentiellement risquée (par exemple, cliquer sur une bannière de cookies).
+3. [**Exécuter l'action reçue**](#execute-actions)
 
-   - Seu código do lado do cliente recebe o `function_call` e qualquer `safety_decision` acompanhante.
-     - **Regular / permitido**:se o `safety_decision` indicar regular / permitido (ou se nenhum `safety_decision` estiver presente), seu código do lado do cliente poderá executar o `function_call` especificado no ambiente de destino (por exemplo, um navegador da Web).
-     - **Requer confirmação**:se o `safety_decision` indicar
-       que requer confirmação, o aplicativo precisa pedir ao usuário final
-       que confirme antes de executar o `function_call`. Se o usuário
-       confirmar, execute a ação. Se o usuário negar, não
-       execute a ação.
-4. [**Capturar o novo estado do ambiente**](#capture-state)
+   - Votre code côté client reçoit le `function_call` et tout `safety_decision` associé.
+     - **Régulier / Autorisé** : si `safety_decision` indique "régulier/autorisé" (ou si aucun `safety_decision` n'est présent), votre code côté client peut exécuter le `function_call` spécifié dans votre environnement cible (par exemple, un navigateur Web).
+     - **Confirmation requise** : si `safety_decision` indique qu'une confirmation est requise, votre application doit demander à l'utilisateur final de confirmer avant d'exécuter `function_call`. Si l'utilisateur confirme, exécutez l'action. Si l'utilisateur refuse, n'exécutez pas l'action.
+4. [**Capturer l'état du nouvel environnement**](#capture-state)
 
-   - Se a ação tiver sido executada, o cliente vai capturar uma nova captura de tela
-     da GUI e o URL atual para enviar de volta ao modelo de uso do computador como
-     parte de um `function_result`.
-   - Se uma ação foi bloqueada pelo sistema de segurança ou teve a confirmação negada pelo usuário, seu aplicativo poderá enviar um feedback diferente para o modelo ou encerrar a interação.
+   - Si l'action a été exécutée, votre client capture une nouvelle capture d'écran de l'interface utilisateur graphique et l'URL actuelle pour les renvoyer au modèle d'utilisation de l'ordinateur dans le cadre d'un `function_result`.
+   - Si une action a été bloquée par le système de sécurité ou si l'utilisateur a refusé de la confirmer, votre application peut envoyer une autre forme de commentaires au modèle ou mettre fin à l'interaction.
 
-Esse processo se repete desde a etapa 2 com o modelo usando a nova captura de tela e a meta em andamento para sugerir a próxima ação. O loop continua até que a tarefa seja concluída, ocorra um erro ou o processo seja encerrado (por exemplo, devido a uma resposta de segurança de "bloqueio" ou uma decisão do usuário).
+Ce processus se répète à partir de l'étape 2, le modèle utilisant la nouvelle capture d'écran et l'objectif en cours pour suggérer la prochaine action. La boucle se poursuit jusqu'à ce que la tâche soit terminée, qu'une erreur se produise ou que le processus soit arrêté (par exemple, en raison d'une réponse de sécurité "bloquer" ou d'une décision de l'utilisateur).
 
-![Visão geral do uso de computadores](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=pt-br)
+![Présentation de l&#39;utilisation d&#39;un ordinateur](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=fr)
 
-## Como implementar o uso do computador
+## Implémenter l'utilisation de l'ordinateur
 
-Antes de criar com a ferramenta "Uso do computador", você precisa configurar o seguinte:
+Avant de créer des applications avec l'outil Utilisation de l'ordinateur, vous devez configurer les éléments suivants :
 
-- **Ambiente de execução seguro**:por motivos de segurança, execute o agente de uso do computador em um ambiente seguro e controlado (por exemplo, uma máquina virtual em sandbox, um contêiner ou um perfil de navegador dedicado com permissões limitadas).
-- **Gerenciador de ações do lado do cliente**:você precisa implementar uma lógica do lado do cliente para executar as ações geradas pelo modelo e capturar capturas de tela do ambiente após cada ação.
+- **Environnement d'exécution sécurisé** : pour des raisons de sécurité, vous devez exécuter votre agent d'utilisation de l'ordinateur dans un environnement sécurisé et contrôlé (par exemple, une machine virtuelle en bac à sable, un conteneur ou un profil de navigateur dédié avec des autorisations limitées).
+- **Gestionnaire d'actions côté client** : vous devrez implémenter une logique côté client pour exécuter les actions générées par le modèle et capturer des captures d'écran de l'environnement après chaque action.
 
-Os exemplos nesta seção usam um navegador como ambiente de execução
-e o [Playwright](https://playwright.dev/) como o manipulador de ações do lado do cliente. Para
-executar essas amostras, instale as dependências necessárias e inicialize uma
-instância do navegador Playwright.
+Les exemples de cette section utilisent un navigateur comme environnement d'exécution et [Playwright](https://playwright.dev/) comme gestionnaire d'actions côté client. Pour exécuter ces exemples, vous devez installer les dépendances nécessaires et initialiser une instance de navigateur Playwright.
 
-#### Instalar o Playwright
+#### Installer Playwright
 
 ```
     pip install google-genai playwright
     playwright install chromium
 ```
 
-#### Inicializar a instância do navegador Playwright
+#### Initialiser l'instance de navigateur Playwright
 
 ```
     from playwright.sync_api import sync_playwright
@@ -114,23 +101,21 @@ instância do navegador Playwright.
     # will be used in the steps below.
 ```
 
-O exemplo de código para extensão a um ambiente
-Android está incluído na seção [Usar funções personalizadas definidas pelo
-usuário](#custom-functions).
+Un exemple de code pour l'extension à un environnement Android est inclus dans la section [Utiliser des fonctions personnalisées définies par l'utilisateur](#custom-functions).
 
-### 1. Enviar uma solicitação ao modelo
+### 1. Envoyer une requête au modèle
 
-Adicione a ferramenta "Uso do computador" à solicitação de API e envie um comando ao modelo que inclua a meta do usuário. Você precisa usar um dos modelos compatíveis com o uso de computador ou vai receber um erro:
+Ajoutez l'outil Computer Use à votre requête API et envoyez une invite au modèle qui inclut l'objectif de l'utilisateur. Vous devez utiliser l'un des modèles d'utilisation de l'ordinateur compatibles, sinon une erreur s'affichera :
 
 - `gemini-2.5-computer-use-preview-10-2025`
 - `gemini-3-flash-preview`
 
-Também é possível adicionar os seguintes parâmetros opcionais:
+Vous pouvez également ajouter les paramètres facultatifs suivants :
 
-- **Ações excluídas**:se houver ações da lista de [Ações da interface compatíveis](#supported-actions) que você não quer que o modelo execute, especifique-as como `excluded_predefined_functions`.
-- **Funções definidas pelo usuário**:além da ferramenta "Uso do computador", talvez você queira incluir funções personalizadas definidas pelo usuário.
+- **Actions exclues** : si certaines actions de la liste des [actions d'interface utilisateur compatibles](#supported-actions) ne doivent pas être effectuées par le modèle, spécifiez-les comme `excluded_predefined_functions`.
+- **Fonctions définies par l'utilisateur** : en plus de l'outil Utilisation de l'ordinateur, vous pouvez inclure des fonctions définies par l'utilisateur personnalisées.
 
-Observe que não é necessário especificar o tamanho de exibição ao fazer uma solicitação; o modelo prevê coordenadas de pixel dimensionadas para a altura e a largura da tela.
+Notez qu'il n'est pas nécessaire de spécifier la taille d'affichage lors de l'envoi d'une requête. Le modèle prédit les coordonnées en pixels mises à l'échelle de la hauteur et de la largeur de l'écran.
 
 ### Python
 
@@ -157,16 +142,14 @@ interaction = client.interactions.create(
 print(interaction)
 ```
 
-Para um exemplo com funções personalizadas, consulte [Usar funções personalizadas definidas pelo usuário](#custom-functions).
+Pour obtenir un exemple avec des fonctions personnalisées, consultez [Utiliser des fonctions définies par l'utilisateur personnalisées](#custom-functions).
 
-### 2. Receber a resposta do modelo
+### 2. Recevoir la réponse du modèle
 
-Quando a ferramenta "Uso do computador" está ativada, o modelo responde com uma ou mais etapas
-`function_call` se determinar que ações da interface são necessárias para concluir a tarefa.
-O uso de computadores é compatível com a chamada de função paralela, ou seja, o modelo pode retornar
-várias ações em um único turno.
+Lorsque l'outil Utilisation de l'ordinateur est activé, le modèle répond avec une ou plusieurs étapes `function_call` s'il détermine que des actions d'interface utilisateur sont nécessaires pour accomplir la tâche.
+L'utilisation de l'ordinateur est compatible avec l'appel de fonction parallèle, ce qui signifie que le modèle peut renvoyer plusieurs actions en un seul tour.
 
-Confira um exemplo de resposta do modelo.
+Voici un exemple de réponse du modèle.
 
 ```
 {
@@ -194,20 +177,16 @@ Confira um exemplo de resposta do modelo.
 }
 ```
 
-### 3. Executar as ações recebidas
+### 3. Exécuter les actions reçues
 
-O código do aplicativo precisa analisar a resposta do modelo, executar as ações e coletar os resultados.
+Le code de votre application doit analyser la réponse du modèle, exécuter les actions et collecter les résultats.
 
-O exemplo de código a seguir extrai chamadas de função da resposta do modelo de uso de computador
-e as traduz em ações que podem ser executadas com o Playwright.
-O modelo gera coordenadas normalizadas (0 a 999) independente das dimensões da imagem de entrada. Portanto, parte da etapa de tradução é converter essas coordenadas normalizadas de volta para valores de pixel reais.
+L'exemple de code suivant extrait les appels de fonction de la réponse du modèle "Utilisation de l'ordinateur" et les traduit en actions pouvant être exécutées avec Playwright.
+Le modèle génère des coordonnées normalisées (0 à 999), quelles que soient les dimensions de l'image d'entrée. Une partie de l'étape de traduction consiste donc à reconvertir ces coordonnées normalisées en valeurs de pixels réelles.
 
-O tamanho de tela recomendado para uso com o modelo de uso do computador é (1440, 900). O modelo funciona com qualquer resolução, mas a qualidade dos resultados pode ser afetada.
+La taille d'écran recommandée pour une utilisation avec le modèle "Utilisation de l'ordinateur" est (1440, 900). Le modèle fonctionnera avec n'importe quelle résolution, mais la qualité des résultats peut être affectée.
 
-Este exemplo inclui apenas a implementação das três ações de interface mais comuns: `open_web_browser`, `click_at` e `type_text_at`. Para
-casos de uso de produção, é necessário implementar todas as outras ações da interface da lista
-[Ações compatíveis](#supported-actions), a menos que você as adicione explicitamente como
-`excluded_predefined_functions`.
+Notez que cet exemple n'inclut que l'implémentation des trois actions d'UI les plus courantes : `open_web_browser`, `click_at` et `type_text_at`. Pour les cas d'utilisation en production, vous devrez implémenter toutes les autres actions d'UI de la liste [Actions acceptées](#supported-actions), sauf si vous les ajoutez explicitement en tant que `excluded_predefined_functions`.
 
 ### Python
 
@@ -271,9 +250,9 @@ def execute_function_calls(interaction, page, screen_width, screen_height):
     return results
 ```
 
-### 4. Capturar o estado do novo ambiente
+### 4. Comprendre l'état du nouvel environnement
 
-Depois de executar as ações, envie o resultado da execução da função de volta ao modelo para que ele possa usar essas informações e gerar a próxima ação. Se várias ações (chamadas paralelas) foram executadas, envie um `function_result` para cada uma delas na próxima vez que o usuário falar.
+Après avoir exécuté les actions, renvoyez le résultat de l'exécution de la fonction au modèle afin qu'il puisse utiliser ces informations pour générer l'action suivante. Si plusieurs actions (appels parallèles) ont été exécutées, vous devez envoyer un `function_result` pour chacune d'elles lors du tour de l'utilisateur suivant.
 
 ### Python
 
@@ -305,17 +284,15 @@ def get_function_responses(page, results):
     return function_responses
 ```
 
-## Criar um loop de agente
+## Créer une boucle d'agent
 
-Para ativar interações de várias etapas, combine as quatro etapas da seção [Como implementar o uso do computador](#implement-computer-use) em um loop.
-Não se esqueça de gerenciar o histórico de conversas corretamente anexando as respostas do modelo e da função.
+Pour activer les interactions en plusieurs étapes, combinez les quatre étapes de la section [Implémenter l'utilisation de l'ordinateur](#implement-computer-use) dans une boucle.
+N'oubliez pas de gérer correctement l'historique des conversations en ajoutant les réponses du modèle et vos réponses de fonction.
 
-Para executar este exemplo de código, você precisa:
+Pour exécuter cet exemple de code, vous devez :
 
-- Instale as [dependências necessárias do Playwright](#implement-computer-use).
-- Defina as funções auxiliares das etapas [(3) Executar as ações
-  recebidas](#execute-actions) e [(4) Capturar o novo estado do
-  ambiente](#capture-state).
+- Installez les [dépendances Playwright nécessaires](#implement-computer-use).
+- Définissez les fonctions d'assistance des étapes [(3) Exécuter les actions reçues](#execute-actions) et [(4) Capturer le nouvel état de l'environnement](#capture-state).
 
 ### Python
 
@@ -408,9 +385,9 @@ finally:
     playwright.stop()
 ```
 
-## Usar funções personalizadas definidas pelo usuário
+## Utiliser des fonctions définies par l'utilisateur personnalisées
 
-Você também pode incluir funções personalizadas definidas pelo usuário na solicitação para estender a funcionalidade do modelo. O exemplo a seguir adapta o modelo e a ferramenta de uso do computador para casos de uso em dispositivos móveis, incluindo ações personalizadas definidas pelo usuário, como `open_app`, `long_press_at` e `go_home`, e excluindo ações específicas do navegador. O modelo pode chamar de forma inteligente essas funções personalizadas junto com ações padrão da interface do usuário para concluir tarefas em ambientes que não são navegadores.
+Vous pouvez éventuellement inclure des fonctions personnalisées définies par l'utilisateur dans votre requête pour étendre les fonctionnalités du modèle. L'exemple suivant adapte le modèle et l'outil d'utilisation de l'ordinateur aux cas d'utilisation mobiles en incluant des actions personnalisées définies par l'utilisateur, telles que `open_app`, `long_press_at` et `go_home`, tout en excluant les actions spécifiques au navigateur. Le modèle peut appeler intelligemment ces fonctions personnalisées en plus des actions d'interface utilisateur standards pour effectuer des tâches dans des environnements autres que le navigateur.
 
 ### Python
 
@@ -498,34 +475,31 @@ interaction = client.interactions.create(
 print(interaction)
 ```
 
-## Ações da interface compatíveis
+## Actions d'UI compatibles
 
-O modelo pode solicitar as seguintes ações de interface usando um
-`function_call`. O código do lado do cliente precisa implementar a lógica de execução dessas ações. Consulte a [implementação de referência](https://github.com/google/computer-use-preview) para exemplos.
+Le modèle peut demander les actions d'UI suivantes à l'aide d'un `function_call`. Votre code côté client doit implémenter la logique d'exécution de ces actions. Pour obtenir des exemples, consultez l'[implémentation de référence](https://github.com/google/computer-use-preview).
 
-| Nome do comando | Descrição | Argumentos (em "Chamada de função") | Exemplo de chamada de função |
+| Nom de la commande | Description | Arguments (dans l'appel de fonction) | Exemple d'appel de fonction |
 | --- | --- | --- | --- |
-| **open\_web\_browser** | Abre o navegador da Web. | Nenhum | `{"name": "open_web_browser", "arguments": {}}` |
-| **wait\_5\_seconds** | Pausa a execução por 5 segundos para permitir que o conteúdo dinâmico seja carregado ou que as animações sejam concluídas. | Nenhum | `{"name": "wait_5_seconds", "arguments": {}}` |
-| **go\_back** | Navega para a página anterior no histórico do navegador. | Nenhum | `{"name": "go_back", "arguments": {}}` |
-| **go\_forward** | Navega para a próxima página no histórico do navegador. | Nenhum | `{"name": "go_forward", "arguments": {}}` |
-| **search** | Navega até a página inicial do mecanismo de pesquisa padrão (por exemplo, o Google). Útil para iniciar uma nova tarefa de pesquisa. | Nenhum | `{"name": "search", "arguments": {}}` |
-| **navigate** | Navega o navegador diretamente para o URL especificado. | `url`: str | `{"name": "navigate", "arguments": {"url": "https://www.wikipedia.org"}}` |
-| **click\_at** | Clica em uma coordenada específica na página da Web. Os valores x e y são baseados em uma grade de 1000 x 1000 e são dimensionados para as dimensões da tela. | `y`: int (0-999), `x`: int (0-999) | `{"name": "click_at", "arguments": {"y": 300, "x": 500}}` |
-| **hover\_at** | Passa o cursor do mouse em uma coordenada específica na página da Web. Útil para revelar submenus. x e y são baseados em uma grade de 1000 x 1000. | `y`: int (0-999) `x`: int (0-999) | `{"name": "hover_at", "arguments": {"y": 150, "x": 250}}` |
-| **type\_text\_at** | Digita texto em uma coordenada específica. Por padrão, limpa o campo primeiro e pressiona ENTER depois de digitar, mas isso pode ser desativado. x e y são baseados em uma grade de 1000 x 1000. | `y`: int (0 a 999), `x`: int (0 a 999), `text`: str, `press_enter`: bool (opcional, padrão é True), `clear_before_typing`: bool (opcional, padrão é True) | `{"name": "type_text_at", "arguments": {"y": 250, "x": 400, "text": "search query", "press_enter": false}}` |
-| **key\_combination** | Pressione teclas ou combinações de teclas do teclado, como "Control+C" ou "Enter". Útil para acionar ações (como enviar um formulário com "Enter") ou operações da área de transferência. | `keys`: str (por exemplo, "enter", "control+c"). | `{"name": "key_combination", "arguments": {"keys": "Control+A"}}` |
-| **scroll\_document** | Rola toda a página da Web para "cima", "baixo", "esquerda" ou "direita". | `direction`: str ("up", "down", "left" ou "right") | `{"name": "scroll_document", "arguments": {"direction": "down"}}` |
-| **scroll\_at** | Rola um elemento ou área específica na coordenada (x, y) na direção especificada por uma determinada magnitude. As coordenadas e a magnitude (padrão 800) são baseadas em uma grade de 1000 x 1000. | `y`: int (0-999), `x`: int (0-999), `direction`: str ("up", "down", "left", "right"), `magnitude`: int (0-999, opcional, padrão 800) | `{"name": "scroll_at", "arguments": {"y": 500, "x": 500, "direction": "down", "magnitude": 400}}` |
-| **drag\_and\_drop** | Arrasta um elemento de uma coordenada inicial (x, y) e o solta em uma coordenada de destino (destination\_x, destination\_y). Todas as coordenadas são baseadas em uma grade de 1000 x 1000. | `y`: int (0-999), `x`: int (0-999), `destination_y`: int (0-999), `destination_x`: int (0-999) | `{"name": "drag_and_drop", "arguments": {"y": 100, "x": 100, "destination_y": 500, "destination_x": 500}}` |
+| **open\_web\_browser** | Ouvre le navigateur Web. | Aucun | `{"name": "open_web_browser", "arguments": {}}` |
+| **wait\_5\_seconds** | Met en pause l'exécution pendant cinq secondes pour permettre au contenu dynamique de se charger ou aux animations de se terminer. | Aucun | `{"name": "wait_5_seconds", "arguments": {}}` |
+| **go\_back** | Accède à la page précédente de l'historique du navigateur. | Aucun | `{"name": "go_back", "arguments": {}}` |
+| **go\_forward** | Accède à la page suivante de l'historique du navigateur. | Aucun | `{"name": "go_forward", "arguments": {}}` |
+| **search** | Accède à la page d'accueil du moteur de recherche par défaut (par exemple, Google). Utile pour lancer une nouvelle tâche de recherche. | Aucun | `{"name": "search", "arguments": {}}` |
+| **navigate** | Dirige le navigateur directement vers l'URL spécifiée. | `url` : str | `{"name": "navigate", "arguments": {"url": "https://www.wikipedia.org"}}` |
+| **click\_at** | Clique sur une coordonnée spécifique de la page Web. Les valeurs x et y sont basées sur une grille de 1 000 x 1 000 et sont mises à l'échelle des dimensions de l'écran. | `y` : int (0-999), `x` : int (0-999) | `{"name": "click_at", "arguments": {"y": 300, "x": 500}}` |
+| **hover\_at** | Pointez sur une coordonnée spécifique de la page Web. Utile pour afficher les sous-menus. Les valeurs x et y sont basées sur une grille de 1 000 x 1 000. | `y` : int (0-999) `x` : int (0-999) | `{"name": "hover_at", "arguments": {"y": 150, "x": 250}}` |
+| **type\_text\_at** | Saisit du texte à une coordonnée spécifique. Par défaut, le champ est d'abord effacé, puis la touche ENTRÉE est enfoncée après la saisie, mais ces actions peuvent être désactivées. x et y sont basés sur une grille de 1 000 x 1 000. | `y` : int (0-999), `x` : int (0-999), `text` : str, `press_enter` : bool (facultatif, valeur par défaut : True), `clear_before_typing` : bool (facultatif, valeur par défaut : True) | `{"name": "type_text_at", "arguments": {"y": 250, "x": 400, "text": "search query", "press_enter": false}}` |
+| **key\_combination** | Appuyez sur des touches ou des combinaisons de touches du clavier, comme "Ctrl+C" ou "Entrée". Utile pour déclencher des actions (comme l'envoi d'un formulaire avec la touche Entrée) ou des opérations du presse-papiers. | `keys` : str (par exemple, "enter", "control+c"). | `{"name": "key_combination", "arguments": {"keys": "Control+A"}}` |
+| **scroll\_document** | Fait défiler l'intégralité de la page Web vers le haut, le bas, la gauche ou la droite. | `direction` : str ("up", "down", "left" ou "right") | `{"name": "scroll_document", "arguments": {"direction": "down"}}` |
+| **scroll\_at** | Fait défiler un élément ou une zone spécifiques aux coordonnées (x, y) dans la direction spécifiée, selon une certaine amplitude. Les coordonnées et la magnitude (800 par défaut) sont basées sur une grille de 1 000 x 1 000. | `y` : int (0-999), `x` : int (0-999), `direction` : str ("up", "down", "left", "right"), `magnitude` : int (0-999, facultatif, valeur par défaut : 800) | `{"name": "scroll_at", "arguments": {"y": 500, "x": 500, "direction": "down", "magnitude": 400}}` |
+| **drag\_and\_drop** | Fait glisser un élément depuis une coordonnée de départ (x, y) et le dépose à une coordonnée de destination (destination\_x, destination\_y). Toutes les coordonnées sont basées sur une grille de 1 000 x 1 000. | `y` : int (0-999), `x` : int (0-999), `destination_y` : int (0-999), `destination_x` : int (0-999) | `{"name": "drag_and_drop", "arguments": {"y": 100, "x": 100, "destination_y": 500, "destination_x": 500}}` |
 
-## Segurança e proteção
+## Protection et sécurité
 
-### Confirmar decisão de segurança
+### Confirmer la décision de sécurité
 
-Dependendo da ação, a resposta do modelo também pode incluir um
-`safety_decision` de um sistema de segurança interno que verifica a ação
-proposta pelo modelo.
+Selon l'action, la réponse du modèle peut également inclure un `safety_decision` provenant d'un système de sécurité interne qui vérifie l'action proposée par le modèle.
 
 ```
 {
@@ -555,10 +529,9 @@ proposta pelo modelo.
 }
 ```
 
-Se o `safety_decision` for `require_confirmation`, peça ao usuário final para confirmar antes de executar a ação. De acordo com os [Termos de Serviço](https://ai.google.dev/gemini-api/terms?hl=pt-br), não é permitido ignorar solicitações de confirmação humana.
+Si `safety_decision` est défini sur `require_confirmation`, vous devez demander à l'utilisateur final de confirmer avant d'exécuter l'action. Conformément aux [Conditions d'utilisation](https://ai.google.dev/gemini-api/terms?hl=fr), vous n'êtes pas autorisé à contourner les demandes de confirmation humaine.
 
-Este exemplo de código pede confirmação ao usuário final antes de executar a
-ação. Se o usuário não confirmar a ação, o loop será encerrado. Se o usuário confirmar a ação, ela será executada e o campo `safety_acknowledgement` será marcado como `True`.
+Cet exemple de code demande à l'utilisateur final de confirmer l'action avant de l'exécuter. Si l'utilisateur ne confirme pas l'action, la boucle se termine. Si l'utilisateur confirme l'action, celle-ci est exécutée et le champ `safety_acknowledgement` est marqué comme `True`.
 
 ### Python
 
@@ -596,8 +569,7 @@ def execute_function_calls(interaction, page, screen_width, screen_height):
         # ... Execute function call and append to results ...
 ```
 
-Se o usuário confirmar, inclua o reconhecimento de segurança no
-seu `function_result`.
+Si l'utilisateur confirme, vous devez inclure la confirmation de sécurité dans votre `function_result`.
 
 ```
 ```python
@@ -624,31 +596,24 @@ function_responses.append({
 ```
 ```
 
-### Práticas recomendadas de segurança
+### Bonnes pratiques concernant la sécurité
 
-O uso de computadores é uma ferramenta nova que apresenta riscos inéditos que os desenvolvedores precisam conhecer:
+L'utilisation de l'ordinateur est un nouvel outil qui présente de nouveaux risques dont les développeurs doivent être conscients :
 
-- **Conteúdo e golpes não confiáveis**:ao tentar alcançar o objetivo do usuário, o modelo pode usar fontes de informações e instruções não confiáveis na tela. Por exemplo, se o objetivo do usuário for comprar um smartphone Pixel e o modelo encontrar um golpe de "Pixel sem custo financeiro se você responder a uma pesquisa", há alguma chance de que o modelo responda à pesquisa.
-- **Ações ocasionais não intencionais**:o modelo pode interpretar mal a meta de um usuário ou o conteúdo da página da Web, fazendo com que ele realize ações incorretas, como clicar no botão errado ou preencher o formulário errado. Isso pode levar a falhas nas tarefas ou exfiltração de dados.
-- **Violações da política**:os recursos da API podem ser direcionados, intencionalmente ou não, a atividades que violam as políticas do Google ([Política de uso proibido da IA generativa](https://policies.google.com/terms/generative-ai/use-policy?hl=pt-br) e os [Termos de Serviço adicionais da API Gemini](https://ai.google.dev/gemini-api/terms?hl=pt-br). Isso inclui ações que
-  podem interferir na integridade de um sistema, comprometer a segurança, ignorar
-  medidas de segurança,
-  controlar dispositivos médicos etc.
+- **Contenus non fiables et escroqueries** : pour atteindre l'objectif de l'utilisateur, le modèle peut s'appuyer sur des sources d'informations et des instructions non fiables provenant de l'écran. Par exemple, si l'objectif de l'utilisateur est d'acheter un téléphone Pixel et que le modèle rencontre une arnaque "Pixel sans frais si vous répondez à une enquête", il y a une chance que le modèle réponde à l'enquête.
+- **Actions involontaires occasionnelles** : le modèle peut mal interpréter l'objectif d'un utilisateur ou le contenu d'une page Web, ce qui l'amène à effectuer des actions incorrectes, comme cliquer sur le mauvais bouton ou remplir le mauvais formulaire. Cela peut entraîner l'échec des tâches ou l'exfiltration de données.
+- **Non-respect des règles** : les fonctionnalités de l'API peuvent être orientées, intentionnellement ou non, vers des activités qui enfreignent les règles de Google ([Règlement sur les utilisations interdites de l'IA générative](https://policies.google.com/terms/generative-ai/use-policy?hl=fr) et les [Conditions d'utilisation supplémentaires de l'API Gemini](https://ai.google.dev/gemini-api/terms?hl=fr)). Cela inclut les actions qui pourraient nuire à l'intégrité d'un système, compromettre la sécurité, contourner les mesures de sécurité, contrôler des dispositifs médicaux, etc.
 
-Para lidar com esses riscos, implemente as seguintes medidas de segurança e práticas recomendadas:
+Pour faire face à ces risques, vous pouvez mettre en œuvre les mesures de sécurité et les bonnes pratiques suivantes :
 
-1. **Human-in-the-Loop (HITL)**:
+1. **Human-in-the-loop (HITL)** :
 
-   - **Implemente a confirmação do usuário**:quando a resposta de segurança indicar
-     `require_confirmation`, implemente a confirmação do usuário antes da
-     execução. Consulte [Confirmar decisão de segurança](#safety-decisions) para
-     um exemplo de código.
-   - **Fornecer instruções de segurança personalizadas**:além das verificações de confirmação do usuário integradas, os desenvolvedores podem adicionar uma [instrução do sistema](https://ai.google.dev/gemini-api/docs/text-generation?hl=pt-br#system-instructions) personalizada que aplique as próprias políticas de segurança, seja para bloquear determinadas ações do modelo ou exigir a confirmação do usuário antes que o modelo execute determinadas ações irreversíveis de alto risco. Confira um exemplo de instrução personalizada de segurança
-     que você pode incluir ao interagir com o modelo.
+   - **Implémenter la confirmation de l'utilisateur** : lorsque la réponse de sécurité indique `require_confirmation`, vous devez implémenter la confirmation de l'utilisateur avant l'exécution. Pour obtenir un exemple de code, consultez [Confirmer la décision de sécurité](#safety-decisions).
+   - **Fournir des consignes de sécurité personnalisées** : en plus des vérifications de confirmation de l'utilisateur intégrées, les développeurs peuvent éventuellement ajouter une [instruction système](https://ai.google.dev/gemini-api/docs/text-generation?hl=fr#system-instructions) personnalisée qui applique leurs propres règles de sécurité, soit pour bloquer certaines actions du modèle, soit pour exiger la confirmation de l'utilisateur avant que le modèle n'effectue certaines actions irréversibles à fort enjeu. Voici un exemple d'instruction de système de sécurité personnalisé que vous pouvez inclure lorsque vous interagissez avec le modèle.
 
-     #### Exemplo de instruções de segurança
+     #### Exemples d'instructions de sécurité
 
-     Defina suas regras de segurança personalizadas como uma instrução do sistema:
+     Définissez vos règles de sécurité personnalisées comme instruction système :
 
      ```
          ## **RULE 1: Seek User Confirmation (USER_CONFIRMATION)**
@@ -736,43 +701,40 @@ Para lidar com esses riscos, implemente as seguintes medidas de segurança e pr�
          - User confirmation
          - When the task is complete or you have enough information to respond to the user
      ```
-2. **Ambiente de execução seguro**:execute o agente em um ambiente seguro e de sandbox para limitar o impacto potencial dele. Por exemplo, uma máquina virtual (VM) de sandbox, um contêiner (como o Docker) ou um perfil de navegador dedicado com permissões limitadas.
-3. **Sanitização de entrada**:sanitizar todo o texto gerado pelo usuário em comandos para
-   reduzir o risco de instruções não intencionais ou injeção de comandos. Essa é uma camada útil de segurança, mas não substitui um ambiente de execução seguro.
-4. **Mecanismos de segurança de conteúdo**:use mecanismos de segurança e [APIs de segurança de conteúdo](https://ai.google.dev/gemma/docs/shieldgemma?hl=pt-br) para avaliar entradas do usuário, entradas e saídas de ferramentas, a adequação da resposta de um agente, a injeção de comandos e a detecção de jailbreak.
-5. **Listas de permissões e de bloqueio**:implemente mecanismos de filtragem para controlar onde o modelo pode navegar e o que ele pode fazer. Uma lista de bloqueio de sites proibidos é um bom ponto de partida, mas uma lista de permissões mais restritiva é ainda mais segura.
-6. **Observabilidade e geração de registros**:mantenha registros detalhados para depuração, auditoria e resposta a incidentes. O cliente precisa registrar comandos,
-   capturas de tela, ações sugeridas pelo modelo (function\_call), respostas de segurança e
-   todas as ações executadas pelo cliente.
-7. **Gerenciamento de ambiente**:garanta que o ambiente da GUI seja consistente.
-   Pop-ups, notificações ou mudanças inesperadas no layout podem confundir o modelo. Sempre que possível, comece de um estado limpo e conhecido para cada nova tarefa.
+2. **Environnement d'exécution sécurisé** : exécutez votre agent dans un environnement de bac à sable sécurisé pour limiter son impact potentiel (par exemple, une machine virtuelle (VM) en bac à sable, un conteneur (par exemple, Docker) ou un profil de navigateur dédié avec des autorisations limitées).
+3. **Assainissement des entrées** : assainissez tout le texte généré par les utilisateurs dans les prompts pour réduire le risque d'instructions non souhaitées ou d'injection de prompts. Il s'agit d'une couche de sécurité utile, mais elle ne remplace pas un environnement d'exécution sécurisé.
+4. **Garde-fous de contenu** : utilisez des garde-fous et des [API de sécurité du contenu](https://ai.google.dev/gemma/docs/shieldgemma?hl=fr) pour évaluer la pertinence des entrées utilisateur, des entrées et sorties d'outils, et des réponses d'un agent, ainsi que pour détecter l'injection de code et les tentatives de jailbreak.
+5. **Listes d'autorisation et de blocage** : implémentez des mécanismes de filtrage pour contrôler les sites que le modèle peut consulter et les actions qu'il peut effectuer. Une liste de blocage des sites Web interdits est un bon point de départ, mais une liste d'autorisation plus restrictive est encore plus sécurisée.
+6. **Observabilité et journalisation** : conservez des journaux détaillés pour le débogage, l'audit et la réponse aux incidents. Votre client doit consigner les requêtes, les captures d'écran, les actions suggérées par le modèle (function\_call), les réponses de sécurité et toutes les actions finalement exécutées par le client.
+7. **Gestion de l'environnement** : assurez-vous que l'environnement de l'interface utilisateur graphique est cohérent.
+   Les pop-ups, les notifications ou les modifications de mise en page inattendus peuvent dérouter le modèle. Si possible, commencez chaque nouvelle tâche à partir d'un état propre et connu.
 
-## Versões do modelo
+## Versions de modèle
 
-O `gemini-3-flash-preview` tem suporte integrado para uso de computadores. Não é necessário um modelo separado para acessar a ferramenta.
+Notez que `gemini-3-flash-preview` est compatible avec l'utilisation de l'ordinateur. Vous n'avez pas besoin d'un modèle distinct pour accéder à l'outil.
 
-| Propriedade | Descrição |
+| Propriété | Description |
 | --- | --- |
-| Código do modelo id\_card | **API Gemini**  `gemini-2.5-computer-use-preview-10-2025` |
-| saveTipos de dados aceitos | **Entrada**  Imagem, texto  **Saída**  Texto |
-| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de tokens de entrada**  128.000  **Limite de token de saída**  64.000 |
-| Versões do 123 | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Visualização: `gemini-2.5-computer-use-preview-10-2025` |
-| calendar\_monthÚltima atualização | Outubro de 2025 |
+| Code du modèle id\_card | **API Gemini**  `gemini-2.5-computer-use-preview-10-2025` |
+| Types de données acceptés pour save | **Entrée**  Image, texte  **Résultat**  Texte |
+| token\_autoLimites de jetons[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  128 000  **Limite de jetons de sortie**  64 000 |
+| Versions 123 | Pour en savoir plus, consultez les [schémas de version de modèle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - Aperçu : `gemini-2.5-computer-use-preview-10-2025` |
+| calendar\_monthDernière mise à jour | Octobre 2025 |
 
-## A seguir
+## Étape suivante
 
-- Teste o uso do computador no [ambiente de demonstração do Browserbase](http://gemini.browserbase.com).
-- Confira a [implementação de referência](https://github.com/google/computer-use-preview) para exemplos de código.
-- Conheça outras ferramentas da API Gemini:
-  - [Chamadas de função](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=pt-br)
-  - [Embasamento com a Pesquisa Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=pt-br)
+- Testez l'utilisation de l'ordinateur dans l'[environnement de démonstration Browserbase](http://gemini.browserbase.com).
+- Consultez l'[implémentation de référence](https://github.com/google/computer-use-preview) pour obtenir un exemple de code.
+- Découvrez d'autres outils de l'API Gemini :
+  - [Appel de fonction](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=fr)
+  - [Ancrage avec la recherche Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=fr)
 
-Envie comentários
+Envoyer des commentaires
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Última atualização 2026-05-07 UTC.
+Dernière mise à jour le 2026/05/13 (UTC).
 
-Quer enviar seu feedback?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-05-07 UTC."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/05/13 (UTC)."],[],[]]

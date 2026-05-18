@@ -1,37 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=vi
-fetched_at: 2026-05-11T05:08:41.160794+00:00
-title: "C\u0103n c\u1ee9 v\u00e0o Google Maps \u00a0|\u00a0 Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=ar
+fetched_at: 2026-05-18T05:04:57.293130+00:00
+title: "\u0627\u0644\u0627\u0633\u062a\u0646\u0627\u062f \u0625\u0644\u0649 \"\u062e\u0631\u0627\u0626\u0637 Google\" \u00a0|\u00a0 Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/overview?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
-# Căn cứ vào Google Maps
+# الاستناد إلى "خرائط Google"
 
-Tính năng căn cứ vào thông tin trên Google Maps kết nối các khả năng tạo sinh của Gemini với dữ liệu phong phú, thực tế và mới nhất của Google Maps. Tính năng này giúp nhà phát triển dễ dàng tích hợp chức năng nhận biết vị trí vào các ứng dụng của họ. Khi một cụm từ tìm kiếm của người dùng có bối cảnh liên quan đến dữ liệu trên Maps, mô hình Gemini sẽ tận dụng Google Maps để cung cấp câu trả lời chính xác về mặt thực tế và mới nhất, đồng thời phù hợp với vị trí cụ thể hoặc khu vực khái quát mà người dùng chỉ định.
+يتيح استخدام &quot;خرائط Google&quot; كمصدر ربط إمكانات الذكاء الاصطناعي التوليدي في Gemini بالبيانات الغنية والدقيقة والحديثة المتوفرة في &quot;خرائط Google&quot;. تتيح هذه الميزة للمطوّرين دمج وظائف تستند إلى الموقع الجغرافي في تطبيقاتهم بسهولة. عندما يتضمّن طلب بحث المستخدم سياقًا مرتبطًا ببيانات &quot;خرائط Google&quot;، يستفيد نموذج Gemini من &quot;خرائط Google&quot; لتقديم إجابات دقيقة ووافية ذات صلة بالموقع الجغرافي المحدّد أو المنطقة العامة التي يطلبها المستخدم.
 
-- **Câu trả lời chính xác, nhận biết được vị trí:** Tận dụng dữ liệu phong phú và mới nhất của Google Maps cho các cụm từ tìm kiếm theo địa lý cụ thể.
-- **Nâng cao khả năng cá nhân hoá:** Điều chỉnh đề xuất và thông tin dựa trên vị trí do người dùng cung cấp.
-- **Thông tin theo bối cảnh và tiện ích:** Mã thông báo theo bối cảnh để hiển thị các tiện ích tương tác của Google Maps cùng với nội dung được tạo.
+- **ردود دقيقة ومراعية للموقع الجغرافي:** يمكنك الاستفادة من البيانات الشاملة والحديثة التي توفّرها &quot;خرائط Google&quot; للاستعلامات الخاصة بموقع جغرافي معيّن.
+- **تخصيص محسّن:** تخصيص الاقتراحات والمعلومات استنادًا إلى المواقع الجغرافية التي يقدّمها المستخدمون
+- **المعلومات والأدوات السياقية:** رموز سياقية لعرض أدوات تفاعلية من &quot;خرائط Google&quot; إلى جانب المحتوى الذي تم إنشاؤه
 
-## Bắt đầu
+## البدء
 
-Ví dụ này minh hoạ cách tích hợp tính năng Kết nối với Google Maps vào ứng dụng của bạn để cung cấp câu trả lời chính xác, nhận biết vị trí cho các truy vấn của người dùng. Câu lệnh yêu cầu đề xuất địa điểm ở địa phương (có thể có vị trí của người dùng), cho phép mô hình Gemini sử dụng dữ liệu trên Google Maps.
+يوضّح هذا المثال كيفية دمج استخدام "خرائط Google" كمصدر في تطبيقك لتقديم ردود دقيقة ومراعية للموقع الجغرافي على طلبات المستخدمين. يطلب الطلب الحصول على اقتراحات محلية مع تحديد موقع جغرافي اختياري للمستخدم، ما يتيح لنموذج Gemini استخدام بيانات &quot;خرائط Google&quot;.
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 from google import genai
 
 client = genai.Client()
@@ -62,6 +63,7 @@ for step in interaction.steps:
 ### JavaScript
 
 ```
+// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({});
@@ -87,7 +89,7 @@ async function main() {
             console.log("\nSources:");
             for (const annotation of contentBlock.annotations) {
               if (annotation.type === 'place_citation') {
-                console.log(`  - ${annotation.name}: ${annotation.url}`);
+                console.log(`  - {annotation.name}: {annotation.url}`);
               }
             }
           }
@@ -103,9 +105,11 @@ main();
 ### REST
 
 ```
+# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
+  -H "Api-Revision: 2026-05-20" \
   -d '{
     "model": "gemini-3-flash-preview",
     "input": "What are the best Italian restaurants within a 15-minute walk from here?",
@@ -117,42 +121,43 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Cách hoạt động của tính năng Kết nối với Google Maps
+## طريقة عمل ميزة "استخدام خرائط Google كمصدر"
 
-Tính năng liên kết thực tế với Google Maps tích hợp Gemini API với hệ sinh thái Google Geo bằng cách sử dụng API Maps làm nguồn thông tin cơ bản. Khi cụm từ tìm kiếm của người dùng chứa ngữ cảnh địa lý, mô hình Gemini có thể gọi công cụ Nền tảng với Google Maps. Sau đó, mô hình có thể tạo ra câu trả lời dựa trên dữ liệu của Google Maps liên quan đến vị trí được cung cấp.
+تدمج ميزة "استخدام خرائط Google كمصدر" واجهة Gemini API مع نظام Google Geo المتكامل من خلال استخدام Maps API كمصدر للاستناد إلى المعلومات. عندما يتضمّن طلب المستخدم سياقًا جغرافيًا، يمكن لنموذج Gemini استخدام أداة &quot;الاستناد إلى بيانات خرائط Google&quot;. يمكن للنموذج بعد ذلك إنشاء ردود استنادًا إلى بيانات "خرائط Google" ذات الصلة بالموقع الجغرافي المقدَّم.
 
-Quy trình này thường bao gồm:
+تتضمّن العملية عادةً ما يلي:
 
-1. **Câu hỏi của người dùng:** Người dùng gửi một câu hỏi đến ứng dụng của bạn, có thể bao gồm cả bối cảnh địa lý (ví dụ: "quán cà phê gần tôi", "bảo tàng ở San Francisco").
-2. **Gọi công cụ:** Mô hình Gemini, khi nhận ra ý định về địa lý, sẽ gọi công cụ Grounding with Google Maps. Bạn có thể cung cấp `latitude` và `longitude` của người dùng cho công cụ này (không bắt buộc). Công cụ này là một công cụ tìm kiếm bằng văn bản và hoạt động tương tự như khi bạn tìm kiếm trên Maps, trong đó các cụm từ tìm kiếm tại địa phương ("gần tôi") sẽ sử dụng toạ độ, trong khi các cụm từ tìm kiếm cụ thể hoặc không phải tại địa phương sẽ khó bị ảnh hưởng bởi vị trí rõ ràng.
-3. **Truy xuất dữ liệu:** Dịch vụ Kết nối với Google Maps truy vấn Google Maps để tìm thông tin liên quan (ví dụ: địa điểm, bài đánh giá, ảnh, địa chỉ, giờ mở cửa).
-4. **Tạo thông tin có căn cứ:** Dữ liệu được truy xuất từ Maps được dùng để cung cấp thông tin cho câu trả lời của mô hình Gemini, đảm bảo tính chính xác và mức độ phù hợp của thông tin.
-5. **Phản hồi và chú thích:** Mô hình này trả về một phản hồi bằng văn bản có chú thích cùng dòng liên kết đến các nguồn trên Google Maps, cho phép nhà phát triển hiển thị trích dẫn và tuỳ ý hiển thị một tiện ích Google Maps theo ngữ cảnh.
+1. **طلب بحث المستخدم:** يرسل المستخدم طلب بحث إلى تطبيقك، وقد يتضمّن سياقًا جغرافيًا (مثل "مقاهي بالقرب مني" أو "متاحف في سان فرانسيسكو").
+2. **استدعاء الأداة:** يستدعي نموذج Gemini أداة Grounding with Google Maps بعد التعرّف على النية الجغرافية. يمكنك اختياريًا تزويد هذه الأداة `latitude` و`longitude` الخاصين بالمستخدم. الأداة هي أداة بحث نصي وتعمل بشكل مشابه للبحث على &quot;خرائط Google&quot;، إذ إنّ طلبات البحث المحلية (&quot;بالقرب مني&quot;) ستستخدم الإحداثيات، بينما من غير المرجّح أن تتأثر طلبات البحث المحدّدة أو غير المحلية بالموقع الجغرافي الواضح.
+3. **استرداد البيانات:** تستعلم خدمة استخدام "خرائط Google" كمصدر من "خرائط Google" عن المعلومات ذات الصلة (مثل الأماكن والمراجعات والصور والعناوين وساعات العمل).
+4. **الإنشاء المستند إلى مصادر:** يتم استخدام بيانات &quot;خرائط Google&quot; التي تم استرجاعها لإبلاغ نموذج Gemini بالرد، ما يضمن الدقة الواقعية ومدى الصلة بالموضوع.
+5. **الردود والتعليقات التوضيحية:** يعرض النموذج ردًا نصيًا مع تعليقات توضيحية مضمّنة تتضمّن روابط تؤدي إلى مصادر في &quot;خرائط Google&quot;، ما يتيح للمطوّرين عرض الاقتباسات وعرض أداة سياقية من &quot;خرائط Google&quot; بشكل اختياري.
 
-## Lý do và thời điểm nên sử dụng tính năng Kết nối với Google Maps
+## أسباب استخدام ميزة "استخدام "خرائط Google" كمصدر" وحالات استخدامها
 
-Kết nối với Google Maps rất phù hợp cho những ứng dụng yêu cầu thông tin chính xác, mới nhất và theo vị trí cụ thể. Nhờ cơ sở dữ liệu rộng lớn của Google Maps với hơn 250 triệu địa điểm trên toàn thế giới, tính năng này mang đến nội dung phù hợp và được cá nhân hoá, giúp nâng cao trải nghiệm người dùng.
+يُعدّ استخدام &quot;خرائط Google&quot; كمصدر مثاليًا للتطبيقات التي تتطلّب معلومات دقيقة وحديثة وخاصة بالموقع الجغرافي. تعمل هذه الميزة على تحسين تجربة المستخدم من خلال توفير محتوى ملائم ومخصّص استنادًا إلى قاعدة بيانات &quot;خرائط Google&quot; الشاملة التي تضم أكثر من 250 مليون مكان حول العالم.
 
-Bạn nên sử dụng tính năng Kết nối với Google Maps khi ứng dụng của bạn cần:
+عليك استخدام ميزة Grounding with Google Maps عندما يحتاج تطبيقك إلى:
 
-- Đưa ra câu trả lời đầy đủ và chính xác cho các câu hỏi theo vị trí địa lý.
-- Xây dựng công cụ lập kế hoạch chuyến đi và hướng dẫn viên địa phương đàm thoại.
-- Đề xuất các địa điểm yêu thích dựa trên vị trí và lựa chọn ưu tiên của người dùng, chẳng hạn như nhà hàng hoặc cửa hàng.
-- Tạo trải nghiệm nhận biết vị trí cho các dịch vụ xã hội, bán lẻ hoặc giao đồ ăn.
+- تقديم إجابات كاملة ودقيقة عن الأسئلة الخاصة بموقع جغرافي معيّن
+- إنشاء أدوات تخطيط رحلات ومساعدين محليين مستندين إلى المحادثات
+- اقتراح نقاط الاهتمام استنادًا إلى الموقع الجغرافي وإعدادات المستخدم المفضّلة، مثل المطاعم أو المتاجر
+- إنشاء تجارب تستند إلى الموقع الجغرافي للخدمات الاجتماعية أو خدمات البيع بالتجزئة أو توصيل الطعام
 
-Kết nối với Google Maps rất phù hợp trong những trường hợp sử dụng cần có dữ liệu thực tế hiện tại và thông tin về tương cận, chẳng hạn như khi tìm "quán cà phê ngon nhất gần tôi" hoặc xem chỉ đường.
+يتفوّق استخدام "خرائط Google" كمصدر في حالات الاستخدام التي تكون فيها القرب المكاني والبيانات الواقعية الحالية مهمة، مثل العثور على "أفضل مقهى بالقرب مني" أو الحصول على اتجاهات.
 
-## Trường hợp sử dụng
+## حالات الاستخدام
 
-Tính năng kết nối với Google Maps hỗ trợ nhiều trường hợp sử dụng dựa trên vị trí.
+يتيح استخدام "خرائط Google" كمصدر مجموعة متنوعة من حالات الاستخدام التي تعتمد على الموقع الجغرافي.
 
-### Xử lý các câu hỏi dành riêng cho địa điểm
+### التعامل مع الأسئلة المتعلّقة بمكان معيّن
 
-Đặt câu hỏi chi tiết về một địa điểm cụ thể để nhận câu trả lời dựa trên các bài đánh giá của người dùng trên Google và dữ liệu khác trên Maps.
+طرح أسئلة مفصّلة حول مكان معيّن للحصول على إجابات استنادًا إلى مراجعات المستخدمين على Google وبيانات &quot;خرائط Google&quot; الأخرى
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 from google import genai
 
 client = genai.Client()
@@ -182,6 +187,7 @@ for step in interaction.steps:
 ### JavaScript
 
 ```
+// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({});
@@ -219,13 +225,14 @@ async function main() {
 main();
 ```
 
-### Cung cấp thông tin cá nhân hoá dựa trên vị trí
+### توفير ميزة التخصيص المستندة إلى الموقع الجغرافي
 
-Nhận đề xuất phù hợp với lựa chọn ưu tiên của người dùng và một khu vực địa lý cụ thể.
+الحصول على اقتراحات مخصّصة حسب الإعدادات المفضّلة للمستخدِم ومنطقة جغرافية معيّنة
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 from google import genai
 
 client = genai.Client()
@@ -255,6 +262,7 @@ for step in interaction.steps:
 ### JavaScript
 
 ```
+// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({});
@@ -292,13 +300,14 @@ async function main() {
 main();
 ```
 
-### Hỗ trợ lập kế hoạch cho hành trình
+### المساعدة في التخطيط لبرنامج الرحلة
 
-Tạo kế hoạch nhiều ngày kèm theo chỉ đường và thông tin về nhiều địa điểm, phù hợp với các ứng dụng du lịch.
+إنشاء خطط لعدة أيام تتضمّن الاتجاهات والمعلومات حول مواقع جغرافية مختلفة، ما يجعلها مثالية لتطبيقات السفر
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 from google import genai
 
 client = genai.Client()
@@ -321,6 +330,7 @@ interaction = client.interactions.create(
 ### JavaScript
 
 ```
+// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({});
@@ -344,9 +354,11 @@ main();
 ### REST
 
 ```
+# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
+  -H "Api-Revision: 2026-05-20" \
   -d '{
     "model": "gemini-3-flash-preview",
     "input": "Plan a day in San Francisco for me. I want to see the Golden Gate Bridge, visit a museum, and have a nice dinner.",
@@ -359,94 +371,95 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Yêu cầu về việc sử dụng dịch vụ
+## متطلبات استخدام الخدمة
 
-Phần này mô tả các yêu cầu về việc sử dụng dịch vụ để sử dụng tính năng Grounding with Google Maps.
+يوضّح هذا القسم متطلبات استخدام خدمة &quot;التأسيس باستخدام خرائط Google&quot;.
 
-### Thông báo cho người dùng về việc sử dụng các nguồn dữ liệu của Google Maps
+### إبلاغ المستخدم بشأن استخدام مصادر "خرائط Google"
 
-Với mỗi kết quả dựa trên dữ liệu thực tế trên Google Maps, bạn sẽ nhận được chú thích nguồn trên các khối nội dung của bước `model_output` hỗ trợ từng câu trả lời. Siêu dữ liệu sau đây sẽ được trả về:
+مع كل نتيجة مستندة إلى بيانات واقعية في &quot;خرائط Google&quot;، ستتلقّى تعليقات توضيحية حول المصدر في مربّعات المحتوى الخاصة بالخطوة `model_output` التي تدعم كل ردّ. يتم عرض بيانات التعريف التالية:
 
-- URL nguồn
-- tên
+- عنوان URL المصدر
+- الاسم
 
-Khi trình bày kết quả từ tính năng Kết nối với Google Maps, bạn phải chỉ định các nguồn liên kết trên Google Maps và thông báo cho người dùng về những điều sau:
+عند عرض نتائج من استخدام "خرائط Google" كمصدر، يجب تحديد مصادر "خرائط Google" المرتبطة وإبلاغ المستخدمين بما يلي:
 
-- Các nguồn trên Google Maps phải nằm ngay sau nội dung được tạo mà các nguồn đó hỗ trợ. Nội dung được tạo này còn được gọi là Kết quả có căn cứ trên Google Maps.
-- Người dùng phải xem được các nguồn của Google Maps trong một lượt tương tác của người dùng.
+- يجب أن تتبع مصادر &quot;خرائط Google&quot; المحتوى الذي تم إنشاؤه مباشرةً والذي تستند إليه هذه المصادر. يُشار إلى هذا المحتوى الذي يتم إنشاؤه أيضًا باسم &quot;نتيجة مستندة إلى بيانات جغرافية&quot; في &quot;خرائط Google&quot;.
+- يجب أن تكون مصادر "خرائط Google" قابلة للعرض من خلال تفاعل واحد من المستخدم.
 
-### Hiển thị các nguồn trên Google Maps bằng đường liên kết đến Google Maps
+### عرض مصادر "خرائط Google" مع روابط "خرائط Google"
 
-Đối với mỗi chú thích nguồn, bạn phải tạo một bản xem trước đường liên kết theo các yêu cầu sau:
+بالنسبة إلى كل تعليق توضيحي للمصدر، يجب إنشاء معاينة للرابط وفقًا للمتطلبات التالية:
 
-- Ghi công từng nguồn cho Google Maps theo [nguyên tắc ghi công](#maps-attribution-guidelines) văn bản của Google Maps.
-- Hiển thị tên nguồn có trong phản hồi.
-- Liên kết đến nguồn bằng cách sử dụng `url` từ chú giải.
+- يجب الإشارة إلى كل مصدر في &quot;خرائط Google&quot; وفقًا [لإرشادات الإشارة إلى المصدر](#maps-attribution-guidelines) في &quot;خرائط Google&quot;.
+- عرض اسم المصدر المقدَّم في الردّ
+- انقر على `url` من التعليق التوضيحي للانتقال إلى المصدر.
 
-### Nguyên tắc ghi công bằng văn bản của Google Maps
+### إرشادات تحديد المصدر باستخدام النصوص في "خرائط Google"
 
-Khi ghi nguồn cho Google Maps bằng văn bản, hãy tuân thủ các nguyên tắc sau:
+عند الإشارة إلى مصادر "خرائط Google" في النص، اتّبِع الإرشادات التالية:
 
-- Không sửa đổi văn bản Google Maps dưới bất kỳ hình thức nào:
-  - Đừng thay đổi cách viết hoa của Google Maps.
-  - Đừng xuống dòng Google Maps.
-  - Đừng bản địa hoá Google Maps sang một ngôn ngữ khác.
-  - Ngăn trình duyệt dịch Google Maps bằng cách sử dụng thuộc tính HTML translate="no".
+- يجب عدم تعديل النص في "خرائط Google" بأي شكل من الأشكال:
+  - لا تغيِّر الكتابة بالأحرف الكبيرة في "خرائط Google".
+  - لا تلتفّ "خرائط Google" على أسطر متعددة.
+  - لا تقلم "خرائط Google" إلى لغة أخرى.
+  - منع المتصفّحات من ترجمة &quot;خرائط Google&quot; باستخدام السمة translate=&quot;no&quot; في HTML
 
-Để biết thêm thông tin về một số nhà cung cấp dữ liệu của Google Maps và điều khoản cấp phép của họ, hãy xem [Thông báo pháp lý của Google Maps và Google Earth](https://www.google.com/help/legalnotices_maps/?hl=vi).
+لمزيد من المعلومات حول بعض مزوّدي بيانات "خرائط Google" وبنود الترخيص الخاصة بهم، يُرجى الاطّلاع على [الإشعارات القانونية الخاصة بـ "خرائط Google" وGoogle Earth](https://www.google.com/help/legalnotices_maps/?hl=ar).
 
-## Các phương pháp hay nhất
+## أفضل الممارسات
 
-- **Cung cấp vị trí của người dùng:** Để nhận được những câu trả lời phù hợp và mang tính cá nhân hoá nhất, hãy luôn thêm `latitude` và `longitude` vào cấu hình công cụ `google_maps` khi bạn biết vị trí của người dùng.
-- **Kết xuất tiện ích theo bối cảnh của Google Maps:** Tiện ích theo bối cảnh được kết xuất bằng mã thông báo bối cảnh, `google_maps_widget_context_token`. Mã thông báo này được trả về trong phản hồi của Gemini API và có thể dùng để kết xuất nội dung trực quan từ Google Maps.
-- **Thông báo cho Người dùng cuối:** Thông báo rõ ràng cho người dùng cuối rằng dữ liệu trên Google Maps đang được dùng để trả lời các câu hỏi của họ, đặc biệt là khi công cụ này được bật.
-- **Tắt khi không cần thiết:** Theo mặc định, tính năng tiếp đất bằng Google Maps sẽ ở trạng thái tắt. Chỉ bật (`"tools": [{"type": "google_maps"}]`) khi truy vấn có ngữ cảnh địa lý rõ ràng để tối ưu hoá hiệu suất và chi phí.
+- **توفير الموقع الجغرافي للمستخدم:** للحصول على الردود الأكثر صلة بالموضوع والمخصّصة، احرص دائمًا على تضمين `latitude` و`longitude` في إعدادات الأداة `google_maps` عندما يكون الموقع الجغرافي للمستخدم معروفًا.
+- **عرض التطبيق المصغّر السياقي في "خرائط Google":** يتم عرض التطبيق المصغّر السياقي باستخدام الرمز المميز للسياق، `google_maps_widget_context_token`، الذي يتم عرضه في ردّ Gemini API ويمكن استخدامه لعرض المحتوى المرئي من "خرائط Google".
+- **إعلام المستخدمين النهائيين:** يجب إعلام المستخدمين النهائيين بوضوح بأنّه يتم استخدام بيانات &quot;خرائط Google&quot; للرد على طلباتهم، خاصةً عند تفعيل الأداة.
+- **إيقاف الميزة عند عدم الحاجة إليها:** تكون ميزة "التحديد الأرضي" في "خرائط Google" غير مفعّلة تلقائيًا. لا تفعِّلها (`"tools": [{"type": "google_maps"}]`) إلا عندما يكون لطلب البحث سياق جغرافي واضح، وذلك لتحسين الأداء والتكلفة.
 
-## Các điểm hạn chế
+## القيود
 
-- Kết nối với Google Maps hiện chỉ hỗ trợ câu lệnh và câu trả lời bằng tiếng Anh.
-- Công cụ này có thể chỉ dùng được ở một số khu vực.
-- Kết quả có thể khác nhau tuỳ thuộc vào độ chính xác của vị trí và dữ liệu có sẵn trên Maps.
-- **Phạm vi địa lý:** Tính năng kết nối với Google Maps có trên toàn cầu.
-- **Trạng thái mặc định:** Công cụ Kết nối với Google Maps sẽ tắt theo mặc định.
-  Bạn phải bật tính năng này một cách rõ ràng trong các yêu cầu API.
+- لا تتوفّر حاليًا ميزة استخدام "خرائط Google" كمصدر إلا باللغة الإنجليزية.
+- قد لا تكون الأداة متاحة في بعض المناطق.
+- قد تختلف النتائج حسب دقة الموقع الجغرافي وبيانات "خرائط Google" المتاحة.
+- **النطاق الجغرافي:** يتوفّر استخدام "خرائط Google" كمصدر على مستوى العالم.
+- **الحالة التلقائية:** تكون أداة "استخدام خرائط Google كمصدر" غير مفعّلة تلقائيًا.
+  يجب تفعيلها صراحةً في طلبات واجهة برمجة التطبيقات.
 
-## Mức giá và hạn mức
+## الأسعار وحدود الاستخدام
 
-Giá của tính năng kết nối với Google Maps được tính dựa trên số lượng câu hỏi. Mức giá hiện tại là **25 USD / 1.000 câu lệnh có căn cứ**. Bậc miễn phí cũng có tối đa 500 yêu cầu mỗi ngày. Yêu cầu chỉ được tính vào hạn mức khi một câu lệnh trả về thành công ít nhất một kết quả có cơ sở từ Google Maps (tức là kết quả chứa ít nhất một nguồn từ Google Maps). Nếu nhiều truy vấn được gửi đến Google Maps từ một yêu cầu duy nhất, thì yêu cầu đó sẽ được tính là một yêu cầu trong hạn mức.
+تستند أسعار استخدام "خرائط Google" كمصدر إلى عدد طلبات البحث. يبلغ السعر الحالي
+**25 دولارًا أمريكيًا لكل 1,000 طلب مستند إلى بيانات واقعية**. تتضمّن الطبقة المجانية أيضًا ما يصل إلى 500 طلب في اليوم. لا يتم احتساب الطلب ضمن الحصة إلا عندما يعرض الردّ بنجاح نتيجة واحدة على الأقل من نتائج &quot;خرائط Google&quot; المستندة إلى بيانات واقعية (أي النتائج التي تتضمّن مصدرًا واحدًا على الأقل من &quot;خرائط Google&quot;). إذا تم إرسال طلبات بحث متعددة إلى &quot;خرائط Google&quot; من طلب واحد، سيتم احتسابها كطلب واحد ضمن الحد الأقصى لعدد الطلبات.
 
-Để biết thông tin chi tiết về giá, hãy xem [trang định giá Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=vi).
+للحصول على معلومات مفصّلة عن الأسعار، يُرجى الاطّلاع على [صفحة أسعار Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=ar).
 
-## Mô hình được hỗ trợ
+## النماذج المتوافقة
 
-Các mô hình sau đây hỗ trợ tính năng Kết nối với Google Maps:
+تتيح النماذج التالية استخدام "خرائط Google" كمصدر:
 
-| Mô hình | Kết nối với Google Maps |
+| الطراز | استخدام "خرائط Google" كمصدر |
 | --- | --- |
-| [Bản dùng thử Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=vi) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=vi) | ✔️ |
-| [Bản xem trước Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=vi) | ✔️ |
-| [Bản dùng thử Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=vi) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=vi) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=vi) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=vi) | ✔️ |
-| [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash?hl=vi) | ✔️ |
+| [إصدار تجريبي من Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ar) | ✔️ |
+| [‫Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ar) | ✔️ |
+| [معاينة Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=ar) | ✔️ |
+| [معاينة Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ar) | ✔️ |
+| [‫Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ar) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=ar) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ar) | ✔️ |
+| [‫2.0 Flash في Gemini](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash?hl=ar) | ✔️ |
 
-## Các tổ hợp công cụ được hỗ trợ
+## مجموعات الأدوات المتوافقة
 
-Các mô hình Gemini 3 hỗ trợ việc kết hợp các công cụ tích hợp sẵn (chẳng hạn như tính năng Căn cứ thông tin bằng Google Maps) với các công cụ tuỳ chỉnh (lệnh gọi hàm). Tìm hiểu thêm trên trang [các tổ hợp công cụ](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=vi).
+تتيح نماذج Gemini 3 إمكانية الجمع بين الأدوات المضمّنة (مثل Grounding with Google Maps) والأدوات المخصّصة (استدعاء الدوال). يمكنك الاطّلاع على مزيد من المعلومات في صفحة [مجموعات الأدوات](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=ar).
 
-## Bước tiếp theo
+## الخطوات التالية
 
-- Tìm hiểu về [các công cụ hiện có](https://ai.google.dev/gemini-api/docs/tools?hl=vi) khác.
-- Để tìm hiểu thêm về các phương pháp hay nhất về AI có trách nhiệm và bộ lọc an toàn của Gemini API, hãy xem [hướng dẫn về Chế độ cài đặt an toàn](https://ai.google.dev/gemini-api/docs/safety-settings?hl=vi).
+- [مزيد من المعلومات عن الأدوات الأخرى المتاحة](https://ai.google.dev/gemini-api/docs/tools?hl=ar)
+- لمزيد من المعلومات حول أفضل ممارسات الذكاء الاصطناعي المسؤول وفلاتر الأمان في Gemini API، يُرجى الاطّلاع على [دليل إعدادات الأمان](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ar).
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Cập nhật lần gần đây nhất: 2026-05-09 UTC.
+تاريخ التعديل الأخير: 2026-05-12 (حسب التوقيت العالمي المتفَّق عليه)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-09 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-12 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

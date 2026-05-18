@@ -1,44 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=es-419
-fetched_at: 2026-05-11T05:00:45.957275+00:00
-title: "Versi\u00f3n preliminar de Gemini 3.1 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=fr
+fetched_at: 2026-05-18T05:19:47.904003+00:00
+title: "Gemini\u00a03.1 Flash-Lite Preview \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
+La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Enviar comentarios
+Envoyer des commentaires
 
-# Versión preliminar de Gemini 3.1 Flash-Lite
+# Gemini 3.1 Flash-Lite Preview
 
-Es nuestro modelo multimodal más rentable, que ofrece el rendimiento más rápido para tareas ligeras y de alta frecuencia. Gemini 3.1 Flash-Lite es ideal para tareas de agentes de gran volumen, extracción de datos simple y aplicaciones de latencia extremadamente baja en las que el presupuesto y la velocidad son las principales limitaciones.
+Notre modèle multimodal le plus économique, qui offre les performances les plus rapides pour les tâches légères à haute fréquence. Gemini 3.1 Flash-Lite est idéal pour les tâches agentiques à volume élevé, l'extraction de données simples et les applications à latence extrêmement faible où le budget et la vitesse sont les principales contraintes.
 
-[Probar en Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-preview&hl=es-419)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-preview&hl=fr)
 
 ## gemini-3.1-flash-lite-preview
 
-| Propiedad | Descripción |
+| Propriété | Description |
 | --- | --- |
-| Código del modelo id\_card | `gemini-3.1-flash-lite-preview` |
-| saveTipos de datos admitidos | **Entradas**  Texto, imágenes, videos, audio y PDF  **Resultado**  Texto |
-| token\_autoLímites de tokens[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419) | **Límite de tokens de entrada**  1,048,576  **Límite de tokens de salida**  65,536 |
-| handymanFunciones | **Generación de audio**  No compatible  **API de Batch**  Admitido  **Almacenamiento en caché**  Admitido  **Ejecución de código**  Admitido  **Uso de la computadora**  No compatible  **Búsqueda de archivos**  Admitido  **Inferencia flexible**  Admitido  **Llamada a función**  Admitido  **Fundamentación con Google Maps**  Admitido  **Generación de imágenes**  No compatible  **API de Live**  No compatible  **Inferencia de prioridad**  Admitido  **Fundamentación con la Búsqueda**  Admitido  **Resultados estructurados**  Admitido  **Pensamiento**  Admitido  **Contexto de la URL**  Admitido |
-| Versiones 123 | Lee los [patrones de versiones de modelos](https://ai.google.dev/gemini-api/docs/models/gemini?hl=es-419#model-versions) para obtener más detalles.  - `Preview: gemini-3.1-flash-lite-preview` |
-| calendar\_monthÚltima actualización | Marzo de 2026 |
-| cognition\_2Fecha límite de conocimiento | Enero de 2025 |
+| Code du modèle id\_card | `gemini-3.1-flash-lite-preview` |
+| Types de données acceptés pour save | **Entrées**  Texte, image, vidéo, audio et PDF  **Résultat**  Texte |
+| token\_autoLimites de jetons[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  1 048 576  **Limite de jetons de sortie**  65 536 |
+| handyman Fonctionnalités | **Génération audio**  Not supported  **API Batch**  Compatible  **Mise en cache**  Compatible  **Exécution de code**  Compatible  **Utilisation de l'ordinateur**  Not supported  **Recherche de fichiers**  Compatible  **Inférence Flex**  Compatible  **Appel de fonction**  Compatible  **Ancrage avec Google Maps**  Compatible  **Génération d'images**  Not supported  **API Live**  Not supported  **Inférence prioritaire**  Compatible  **Ancrage de recherche**  Compatible  **Sorties structurées**  Compatible  **Raisonnement**  Compatible  **Contexte de l'URL**  Compatible |
+| Versions 123 | Pour en savoir plus, consultez les [schémas de version de modèle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - `Preview: gemini-3.1-flash-lite-preview` |
+| calendar\_monthDernière mise à jour | Mars 2026 |
+| cognition\_2Date limite des connaissances | Janvier 2025 |
 
-## Guía para desarrolladores
+## Guide du développeur
 
-Gemini 3.1 Flash-Lite es ideal para manejar tareas sencillas a gran escala. Estos son algunos casos de uso más adecuados para Gemini 3.1 Flash-Lite:
+Gemini 3.1 Flash-Lite est idéal pour gérer des tâches simples à grande échelle. Voici quelques cas d'utilisation les mieux adaptés à Gemini 3.1 Flash-Lite :
 
-- **Traducción**: Traducción rápida, económica y de gran volumen, como el procesamiento a gran escala de mensajes de chat, opiniones y tickets de asistencia Puedes usar instrucciones del sistema para limitar el resultado solo al texto traducido sin comentarios adicionales:
+- **Traduction** : traduction rapide, économique et à grand volume, comme le traitement à grande échelle des messages de chat, des avis et des demandes d'assistance. Vous pouvez utiliser des instructions système pour limiter le résultat au texte traduit, sans aucun commentaire supplémentaire :
 
   ```
   text = "Hey, are you down to grab some pizza later? I'm starving!"
@@ -53,7 +53,7 @@ Gemini 3.1 Flash-Lite es ideal para manejar tareas sencillas a gran escala. Esto
 
   print(response.text)
   ```
-- **Transcripción**: Procesa grabaciones, notas de voz o cualquier contenido de audio en el que necesites una transcripción de texto sin tener que crear una canalización de voz a texto independiente. Admite entradas multimodales, por lo que puedes pasar archivos de audio directamente para la transcripción:
+- **Transcription** : traitez des enregistrements, des notes vocales ou tout contenu audio pour lequel vous avez besoin d'une transcription textuelle sans avoir à créer un pipeline de reconnaissance vocale distinct. Il est compatible avec les entrées multimodales. Vous pouvez donc transmettre directement des fichiers audio pour la transcription :
 
   ```
   # URL = "https://storage.googleapis.com/generativeai-downloads/data/State_of_the_Union_Address_30_January_1961.mp3"
@@ -70,7 +70,7 @@ Gemini 3.1 Flash-Lite es ideal para manejar tareas sencillas a gran escala. Esto
 
   print(response.text)
   ```
-- **Tareas de agentes y extracción de datos ligeras**: Extracción de entidades, clasificación y canalizaciones de procesamiento de datos ligeras compatibles con resultados JSON estructurados. Por ejemplo, extraer datos estructurados de una opinión de un cliente de comercio electrónico:
+- **Tâches agentiques légères et extraction de données** : extraction d'entités, classification et pipelines de traitement de données légers compatibles avec une sortie JSON structurée. Par exemple, extraire des données structurées d'un avis client sur un site d'e-commerce :
 
   ```
   from pydantic import BaseModel, Field
@@ -95,7 +95,7 @@ Gemini 3.1 Flash-Lite es ideal para manejar tareas sencillas a gran escala. Esto
 
   print(response.text)
   ```
-- **Procesamiento y resumen de documentos**: Analiza archivos PDF y devuelve resúmenes concisos, como para compilar una canalización de procesamiento de documentos o priorizar rápidamente los archivos entrantes:
+- **Traitement et résumé de documents** : analysez des fichiers PDF et renvoyez des résumés concis, par exemple pour créer un pipeline de traitement de documents ou trier rapidement les fichiers entrants :
 
   ```
   import httpx
@@ -118,7 +118,7 @@ Gemini 3.1 Flash-Lite es ideal para manejar tareas sencillas a gran escala. Esto
 
   print(response.text)
   ```
-- **Enrutamiento de modelos**: Usa un modelo de baja latencia y bajo costo como clasificador que enruta las búsquedas al modelo adecuado según la complejidad de la tarea. Este es un patrón real en producción: la [CLI de Gemini](https://geminicli.com/docs/core/#model-fallback) de código abierto usa Flash-Lite para clasificar la complejidad de las tareas y enrutar a Flash o Pro según corresponda.
+- **Routage de modèles** : utilisez un modèle à faible latence et à faible coût comme classificateur qui route les requêtes vers le modèle approprié en fonction de la complexité de la tâche. Il s'agit d'un véritable modèle de production : la [CLI Gemini](https://geminicli.com/docs/core/#model-fallback) Open Source utilise Flash-Lite pour classer la complexité des tâches et les acheminer vers Flash ou Pro en conséquence.
 
   ```
   FLASH_MODEL = 'flash'
@@ -167,7 +167,7 @@ Gemini 3.1 Flash-Lite es ideal para manejar tareas sencillas a gran escala. Esto
 
   print(response.text)
   ```
-- **Pensamiento**: Para mejorar la precisión en las tareas que se benefician del razonamiento paso a paso, configura el pensamiento de modo que el modelo dedique recursos de procesamiento adicionales al razonamiento interno antes de producir el resultado final:
+- **Raisonnement** : pour améliorer la justesse des tâches qui bénéficient d'un raisonnement étape par étape, configurez le raisonnement afin que le modèle consacre davantage de ressources de calcul au raisonnement interne avant de produire le résultat final :
 
   ```
   response = client.models.generate_content(
@@ -181,12 +181,12 @@ Gemini 3.1 Flash-Lite es ideal para manejar tareas sencillas a gran escala. Esto
   print(response.text)
   ```
 
-Enviar comentarios
+Envoyer des commentaires
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Última actualización: 2026-04-29 (UTC)
+Dernière mise à jour le 2026/04/29 (UTC).
 
-¿Quieres brindar más información?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/04/29 (UTC)."],[],[]]

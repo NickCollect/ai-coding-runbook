@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=ja
-fetched_at: 2026-05-11T05:06:59.712464+00:00
+source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=he
+fetched_at: 2026-05-18T05:09:01.635319+00:00
 title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=he)
 
-フィードバックを送信
+שליחת משוב
 
-# テキスト生成
+# יצירת טקסט
 
-Gemini API は、テキスト、画像、動画、音声の入力からテキスト出力を生成できます。
+‫Gemini API יכול ליצור פלט של טקסט מקלט של טקסט, תמונות, סרטונים ואודיו.
 
-基本的な例を以下に示します。
+דוגמה בסיסית:
 
 ### Python
 
@@ -159,13 +159,11 @@ function main() {
 }
 ```
 
-## Gemini による思考
+## חשיבה עם Gemini
 
-Gemini モデルでは、多くの場合、[「思考」](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)がデフォルトで有効になっています
-。これにより、モデルはリクエストに応答する前に推論できます。
+במודלים של Gemini, התכונה ['חשיבה'](https://ai.google.dev/gemini-api/docs/thinking?hl=he) מופעלת בדרך כלל כברירת מחדל, והיא מאפשרת למודל להסיק מסקנות לפני שהוא מגיב לבקשה.
 
-各モデルは、さまざまな思考構成をサポートしており、費用、レイテンシ、インテリジェンスを制御できます。詳細については、
-[思考ガイド](https://ai.google.dev/gemini-api/docs/thinking?hl=ja#set-budget)をご覧ください。
+כל מודל תומך בהגדרות שונות של חשיבה, שמאפשרות לכם לשלוט בעלות, בחביון ובאינטליגנציה. מידע נוסף זמין ב[מדריך החשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he#set-budget).
 
 ### Python
 
@@ -337,11 +335,9 @@ function main() {
 }
 ```
 
-## システム指示とその他の構成
+## הוראות מערכת והגדרות אחרות
 
-システム指示を使用して Gemini モデルの動作を制御できます。これを行うには、
-[`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerationConfig)
-オブジェクトを渡します。
+אתם יכולים להגדיר את ההתנהגות של מודלים של Gemini באמצעות הוראות מערכת. כדי לעשות את זה, מעבירים אובייקט [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=he#v1beta.GenerationConfig).
 
 ### Python
 
@@ -513,7 +509,7 @@ function main() {
 }
 ```
 
-[`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerationConfig) オブジェクトを使用すると、[Temperature](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerationConfig)などのデフォルトの生成パラメータをオーバーライドすることもできます。
+אובייקט [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=he#v1beta.GenerationConfig) מאפשר גם לשנות פרמטרים של יצירה שמוגדרים כברירת מחדל, כמו [רמת אקראיות](https://ai.google.dev/api/generate-content?hl=he#v1beta.GenerationConfig).
 
 ### Python
 
@@ -689,13 +685,11 @@ function main() {
 }
 ```
 
-構成可能なパラメータとその
-説明の完全なリストについては、API リファレンスの [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerationConfig)
-をご覧ください。
+רשימה מלאה של הפרמטרים שאפשר להגדיר והתיאורים שלהם מופיעה [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=he#v1beta.GenerationConfig) בהפניית ה-API שלנו.
 
-## マルチモーダル入力
+## קלטים מרובי מצבים
 
-Gemini API はマルチモーダル入力をサポートしており、テキストとメディア ファイルを組み合わせることができます。次の例は、画像を提供する方法を示しています。
+‫Gemini API תומך בקלט מרובה-אופנים, כך שאפשר לשלב טקסט עם קובצי מדיה. בדוגמה הבאה מוצג איך מספקים תמונה:
 
 ### Python
 
@@ -903,16 +897,14 @@ function getImageData(url) {
 }
 ```
 
-画像の提供方法や高度な画像処理については、
-[画像理解ガイド](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ja)をご覧ください。
-この API は、[ドキュメント](https://ai.google.dev/gemini-api/docs/document-processing?hl=ja)、[動画](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja)、[音声](https://ai.google.dev/gemini-api/docs/audio?hl=ja)
-の入力と理解もサポートしています。
+שיטות חלופיות להוספת תמונות ומידע נוסף על עיבוד תמונות מתקדם זמינים [במדריך שלנו להבנת תמונות](https://ai.google.dev/gemini-api/docs/image-understanding?hl=he).
+ממשק ה-API תומך גם בהזנות ובפענוח של [מסמכים](https://ai.google.dev/gemini-api/docs/document-processing?hl=he), [סרטונים](https://ai.google.dev/gemini-api/docs/video-understanding?hl=he) ו[אודיו](https://ai.google.dev/gemini-api/docs/audio?hl=he).
 
-## ストリーミング レスポンス
+## הצגת התשובות באופן שוטף
 
-デフォルトでは、モデルは生成プロセス全体が完了した後にのみレスポンスを返します。
+כברירת מחדל, המודל מחזיר תשובה רק אחרי שתהליך היצירה כולו מסתיים.
 
-よりスムーズなインタラクションを実現するには、ストリーミングを使用して、[`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerateContentResponse) インスタンスを生成時に段階的に受信します。
+כדי לקבל אינטראקציות חלקות יותר, אפשר להשתמש בסטרימינג כדי לקבל מופעים של [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=he#v1beta.GenerateContentResponse) באופן מצטבר בזמן שהם נוצרים.
 
 ### Python
 
@@ -1066,9 +1058,9 @@ function main() {
 }
 ```
 
-## マルチターンの会話（チャット）
+## שיחות עם זיכרון (צ'אט)
 
-SDK には、複数ラウンドのプロンプトとレスポンスをチャットに収集する機能が用意されているため、会話履歴を簡単に追跡できます。
+ערכות ה-SDK שלנו מספקות פונקציונליות לאיסוף של כמה סבבים של הנחיות ותשובות בצ'אט, וכך מאפשרות לכם לעקוב בקלות אחר היסטוריית השיחות.
 
 ### Python
 
@@ -1276,7 +1268,7 @@ function main() {
 }
 ```
 
-ストリーミングは、マルチターンの会話にも使用できます。
+אפשר להשתמש בסטרימינג גם בשיחות מרובות תפניות.
 
 ### Python
 
@@ -1495,28 +1487,23 @@ function main() {
 }
 ```
 
-## プロンプトに関するヒント
+## טיפים לכתיבת הנחיות
 
-Gemini を最大限に活用するための提案については、[プロンプト エンジニアリング ガイド](https://ai.google.dev/gemini/docs/prompting-strategies?hl=ja)を
-ご覧ください。
+ב[מדריך שלנו להנדסת הנחיות](https://ai.google.dev/gemini/docs/prompting-strategies?hl=he) מופיעות הצעות שיעזרו לכם להפיק את המרב מ-Gemini.
 
-## 次のステップ
+## המאמרים הבאים
 
-- Google AI Studio で [Gemini を試す](https://aistudio.google.com?hl=ja)。
-- JSON のようなレスポンスの[構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)を
-  試す。
-- Gemini の [画像](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ja)、
-  [動画](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja)、[音声](https://ai.google.dev/gemini-api/docs/audio?hl=ja)
-  、[ドキュメント](https://ai.google.dev/gemini-api/docs/document-processing?hl=ja)の理解機能を調べる。
-- マルチモーダル
-  [ファイルのプロンプト戦略](https://ai.google.dev/gemini-api/docs/files?hl=ja#prompt-guide)について学習する。
+- כדאי לנסות את [Gemini ב-Google AI Studio](https://aistudio.google.com?hl=he).
+- אפשר להתנסות ב[פלט מובנה](https://ai.google.dev/gemini-api/docs/structured-output?hl=he) כדי לקבל תשובות שדומות ל-JSON.
+- אפשר לבדוק את היכולות של Gemini להבנת [תמונות](https://ai.google.dev/gemini-api/docs/image-understanding?hl=he), [סרטונים](https://ai.google.dev/gemini-api/docs/video-understanding?hl=he), [אודיו](https://ai.google.dev/gemini-api/docs/audio?hl=he) ו[מסמכים](https://ai.google.dev/gemini-api/docs/document-processing?hl=he).
+- [מידע על אסטרטגיות להנפקת הנחיות לקבצים](https://ai.google.dev/gemini-api/docs/files?hl=he#prompt-guide)
 
-フィードバックを送信
+שליחת משוב
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-最終更新日 2026-05-07 UTC。
+עדכון אחרון: 2026-05-13 (שעון UTC).
 
-ご意見をお聞かせください
+רוצה לתת לנו משוב?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-05-07 UTC。"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-05-13 (שעון UTC)."],[],[]]

@@ -1,100 +1,91 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/thought-signatures?hl=fr
-fetched_at: 2026-05-11T05:03:05.079470+00:00
-title: "Signatures de pens\u00e9e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/thought-signatures?hl=hi
+fetched_at: 2026-05-18T05:15:35.747197+00:00
+title: "\u0938\u094b\u091a \u0915\u0947 \u0939\u0938\u094d\u0924\u093e\u0915\u094d\u0937\u0930 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
+[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Envoyer des commentaires
+सुझाव भेजें
 
-# Signatures de pensée
+# सोच के हस्ताक्षर
 
-Les signatures de réflexion sont des représentations chiffrées du processus de réflexion interne du modèle. Elles permettent de préserver le contexte de raisonnement lors d'interactions en plusieurs étapes.
-Lorsque vous utilisez des modèles de réflexion (comme les séries Gemini 3 et 2.5), l'API peut
-renvoyer un champ `thoughtSignature` dans les [parties de contenu](https://ai.google.dev/api/caching?hl=fr#Part)
-de la réponse (par exemple, les parties `text` ou `functionCall`).
+**REST API का इस्तेमाल करते समय, आपको सीधे तौर पर थॉट सिग्नेचर के साथ काम करना होगा**. इसके अलावा, अगर *एक से ज़्यादा बार बातचीत करने के दौरान, मैन्युअल तरीके से बातचीत के कुछ हिस्सों को एक्सट्रैक्ट करके वापस भेजा जा रहा है*, तब भी आपको थॉट सिग्नेचर के साथ काम करना होगा.
 
-En règle générale, si vous recevez une signature de réflexion dans une réponse de modèle, vous devez la renvoyer exactement telle qu'elle a été reçue lorsque vous envoyez l'historique de la conversation au tour suivant.
-**Lorsque vous utilisez des modèles Gemini 3, vous devez renvoyer les signatures de réflexion lors de l'appel de fonction. Sinon, vous recevrez une erreur de validation** (code d'état 4xx).
-Cela inclut l'utilisation du `minimal`
-[paramètre de niveau de réflexion](https://ai.google.dev/gemini-api/docs/thinking?hl=fr#thinking-levels) pour Gemini 3
-Flash.
+थॉट सिग्नेचर, मॉडल की इंटरनल थॉट प्रोसेस के एन्क्रिप्ट (सुरक्षित) किए गए वर्शन होते हैं. इनका इस्तेमाल, एक से ज़्यादा चरणों वाले इंटरैक्शन में तर्क के कॉन्टेक्स्ट को बनाए रखने के लिए किया जाता है.
+सोचने-समझने वाले मॉडल (जैसे, Gemini 3 और 2.5 सीरीज़) का इस्तेमाल करते समय, एपीआई जवाब के [कॉन्टेंट वाले हिस्सों](https://ai.google.dev/api/caching?hl=hi#Part) में `thoughtSignature` फ़ील्ड दिखा सकता है. उदाहरण के लिए, `text` या `functionCall` हिस्से.
 
-## Fonctionnement
+सामान्य नियम के तौर पर, अगर आपको मॉडल के जवाब में थॉट सिग्नेचर मिलता है, तो आपको बातचीत के इतिहास को अगले टर्न में भेजते समय, उसे ठीक वैसे ही वापस भेजना चाहिए जैसा आपको मिला था.
+**Gemini 3 मॉडल का इस्तेमाल करते समय, फ़ंक्शन कॉल के दौरान थॉट सिग्नेचर वापस पास करने होंगे. ऐसा न करने पर, आपको पुष्टि करने से जुड़ी गड़बड़ी** (4xx स्टेटस कोड) मिलेगी.
+इसमें Gemini 3 Flash के लिए, `minimal`
+[सोचने-समझने की क्षमता](https://ai.google.dev/gemini-api/docs/thinking?hl=hi#thinking-levels) वाली सेटिंग का इस्तेमाल करना भी शामिल है.
 
-Le graphique ci-dessous illustre la signification des termes "tour" et "étape" tels qu'ils s'appliquent à
-[l'appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr) dans l'API Gemini. Un "tour" est un échange unique et complet dans une conversation entre un utilisateur et un modèle. Une "étape" est une action ou une opération plus précise effectuée par le modèle, souvent dans le cadre d'un processus plus vaste pour terminer un tour.
+## यह कैसे काम करता है
 
-![Diagramme des tours et des étapes d&#39;appel de fonction](https://ai.google.dev/static/gemini-api/docs/images/fc-turns.png?hl=fr)
+नीचे दिए गए ग्राफ़िक में, Gemini API में [फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi) से जुड़े "टर्न" और "चरण" का मतलब बताया गया है. "टर्न" का मतलब, उपयोगकर्ता और मॉडल के बीच हुई बातचीत में एक बार में किया गया पूरा एक्सचेंज होता है. "स्टेप" एक बारीक कार्रवाई या ऑपरेशन होता है, जिसे मॉडल पूरा करता है. अक्सर, यह किसी टर्न को पूरा करने के लिए, बड़ी प्रोसेस का हिस्सा होता है.
 
-*Ce document se concentre sur la gestion des appels de fonction pour les modèles Gemini 3. Pour connaître les différences avec la version 2.5, consultez la section [Comportement du modèle](#model-behavior).*
+![फ़ंक्शन कॉल करने के टर्न और चरणों का डायग्राम](https://ai.google.dev/static/gemini-api/docs/images/fc-turns.png?hl=hi)
 
-Gemini 3 renvoie des signatures de réflexion pour toutes les réponses de modèle (réponses de l'API) avec un appel de fonction. Les signatures de réflexion s'affichent dans les cas suivants :
+*इस दस्तावेज़ में, Gemini 3 मॉडल के लिए फ़ंक्शन कॉलिंग को मैनेज करने के बारे में बताया गया है. 2.5 के साथ अंतर के लिए, [मॉडल के व्यवहार](#model-behavior) सेक्शन देखें.*
 
-- En cas d'appels de fonction [parallèles](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr#parallel_function_calling), la première partie d'appel de fonction renvoyée par la réponse du modèle comporte une
-  signature de réflexion.
-- En cas d'appels de fonction séquentiels (en plusieurs étapes), chaque appel de fonction comporte une signature, et vous devez renvoyer toutes les signatures.
-- Les réponses de modèle sans appel de fonction renvoient une signature de réflexion dans la dernière partie renvoyée par le modèle.
+Gemini 3, फ़ंक्शन कॉल के साथ, मॉडल के सभी जवाबों (एपीआई से मिले जवाब) के लिए थॉट सिग्नेचर दिखाता है. सोच से जुड़े सिग्नेचर इन मामलों में दिखते हैं:
 
-Le tableau suivant fournit une visualisation des appels de fonction en plusieurs étapes, combinant les définitions des tours et des étapes avec le concept de signatures présenté ci-dessus :
+- [पैरलल फ़ंक्शन](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi#parallel_function_calling) कॉल होने पर, मॉडल के जवाब से मिले फ़ंक्शन कॉल के पहले हिस्से में थॉट सिग्नेचर होगा.
+- जब फ़ंक्शन कॉल क्रम से किए जाते हैं (एक से ज़्यादा चरण), तो हर फ़ंक्शन कॉल का एक सिग्नेचर होता है. आपको सभी सिग्नेचर वापस भेजने होंगे.
+- फ़ंक्शन कॉल के बिना मॉडल के जवाबों में, मॉडल से मिले जवाब के आखिरी हिस्से में थॉट सिग्नेचर दिखेगा.
+
+यहां दी गई टेबल में, एक से ज़्यादा चरणों वाले फ़ंक्शन कॉल का विज़ुअलाइज़ेशन दिया गया है. इसमें, ऊपर बताए गए सिग्नेचर के कॉन्सेप्ट के साथ-साथ, टर्न और चरणों की परिभाषाओं को भी शामिल किया गया है:
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Tour** | **Étape** | **Requête utilisateur** | **Réponse de modèle** | **FunctionResponse** |
+| **चालू करें** | **चरण** | **उपयोगकर्ता का अनुरोध** | **मॉडल का जवाब** | **FunctionResponse** |
 | 1 | 1 | `request1 = user_prompt` | `FC1 + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + (FC1 + signature) + FR1` | `FC2 + signature` | `FR2` |
-| 1 | 3 | `request3 = request2 + (FC2 + signature) + FR2` | `text_output`  `(no FCs)` | Aucun |
+| 1 | 3 | `request3 = request2 + (FC2 + signature) + FR2` | `text_output`  `(no FCs)` | कोई नहीं |
 
-## Signatures dans les parties d'appel de fonction
+## फ़ंक्शन कॉल करने वाले हिस्सों में सिग्नेचर
 
-Lorsque Gemini génère un `functionCall`, il s'appuie sur le `thought_signature` pour traiter correctement la sortie de l'outil au tour suivant.
+जब Gemini कोई `functionCall` जनरेट करता है, तो वह `thought_signature` पर भरोसा करता है, ताकि अगले टर्न में टूल के आउटपुट को सही तरीके से प्रोसेस किया जा सके.
 
-- **Comportement**:
-  - **Appel de fonction unique** : la partie `functionCall` contient un `thought_signature`.
-  - **Appels de fonction parallèles** : si le modèle génère des appels de fonction parallèles
-    dans une réponse, le `thought_signature` n'est associé **qu'à la première**
-    `functionCall` partie. Les parties `functionCall` suivantes de la même réponse **ne contiennent pas** de signature.
-- **Exigence** : vous **devel** renvoyer cette signature dans la partie exacte où elle
-  a été reçue lors de l'envoi de l'historique de la conversation.
-- **Validation** : une validation stricte est appliquée à tous les appels de fonction dans
-  le tour actuel . (Seul le tour actuel est requis. Nous ne validons pas les tours précédents.)
-  - L'API revient dans l'historique (du plus récent au plus ancien) pour trouver le message **Utilisateur** le plus récent contenant du contenu standard (par exemple, `text`) ( qui correspond au début du tour actuel). Il ne s'agit **be** d'un `functionResponse`.
-  - **Tous** les tours `functionCall` du modèle qui se produisent après ce message d'utilisation spécifique sont considérés comme faisant partie du tour.
-  - La **première** partie `functionCall` de **chaque étape** du tour actuel **doit** inclure son `thought_signature`.
-  - Si vous omettez un `thought_signature` pour la première partie `functionCall` d'une étape du tour actuel, la requête échoue avec une erreur 400.
-- **Si les signatures appropriées ne sont pas renvoyées, voici comment vous obtiendrez une erreur**
-  - Modèles Gemini 3 : si vous n'incluez pas de signatures, vous obtiendrez une erreur 400. La formulation sera de la forme suivante :
-    - L'appel de fonction `<Function Call>` dans le bloc de contenu `<index of contents array>`
-      ne comporte pas de `thought_signature`. Par exemple, *L'appel de
-      fonction `FC1` dans le bloc de contenu `1.` ne comporte pas de `thought_signature`.*
+- **व्यवहार**:
+  - **सिंगल फ़ंक्शन कॉल**: `functionCall` वाले हिस्से में `thought_signature` शामिल होगा.
+  - **पैरलल फ़ंक्शन कॉल**: अगर मॉडल, जवाब में पैरलल फ़ंक्शन कॉल जनरेट करता है, तो `thought_signature` को **सिर्फ़ पहले**
+    `functionCall` हिस्से में जोड़ा जाता है. एक ही जवाब में मौजूद बाद के `functionCall` हिस्सों में हस्ताक्षर **नहीं** होगा.
+- ****ज़रूरी शर्त**: बातचीत का इतिहास वापस भेजते समय, आपको इस हस्ताक्षर को उसी जगह पर वापस भेजना होगा जहां इसे मिला था.**
+- **पुष्टि करना**: मौजूदा टर्न में फ़ंक्शन कॉल के लिए, पुष्टि करने की सख्त प्रक्रिया लागू की जाती है . (सिर्फ़ मौजूदा टर्न की ज़रूरत है; हम पिछले टर्न की पुष्टि नहीं करते)
+  - एपीआई, इतिहास में सबसे नए से लेकर सबसे पुराने मैसेज तक जाता है, ताकि **उपयोगकर्ता** का ऐसा सबसे हाल का मैसेज मिल सके जिसमें स्टैंडर्ड कॉन्टेंट (जैसे, `text`) शामिल हो. यह मैसेज, मौजूदा बातचीत की शुरुआत में भेजा गया होगा. यह `functionResponse` **be** होगा.
+  - **सभी** मॉडल `functionCall` के लिए, इस्तेमाल से जुड़ी जानकारी देने वाले मैसेज के बाद होने वाले सभी टर्न को टर्न का हिस्सा माना जाता है.
+  - मौजूदा बातचीत के **हर चरण** में, `functionCall` का **पहला** हिस्सा **ज़रूर** शामिल होना चाहिए. साथ ही, इसमें `thought_signature` भी शामिल होना चाहिए.
+  - अगर मौजूदा बातचीत के किसी भी चरण में, पहले `functionCall` हिस्से के लिए `thought_signature` को शामिल नहीं किया जाता है, तो अनुरोध पूरा नहीं होगा और आपको 400 गड़बड़ी का मैसेज मिलेगा.
+- **अगर सही सिग्नेचर नहीं मिलते हैं, तो यहां बताया गया है कि आपको गड़बड़ी का मैसेज कैसे दिखेगा**
+  - Gemini 3 मॉडल: सिग्नेचर शामिल न करने पर, 400 गड़बड़ी दिखेगी. सूचना इस फ़ॉर्मैट में होगी:
+    - `<index of contents array>` कॉन्टेंट ब्लॉक में मौजूद फ़ंक्शन कॉल `<Function Call>` में `thought_signature` मौजूद नहीं है. उदाहरण के लिए, *`1.` कॉन्टेंट ब्लॉक में फ़ंक्शन कॉल `FC1` में `thought_signature` मौजूद नहीं है.*
 
-### Exemple d'appel de fonction séquentiel
+### फ़ंक्शन को क्रम से कॉल करने का उदाहरण
 
-Cette section présente un exemple d'appels de fonction multiples dans lesquels l'utilisateur pose une question complexe nécessitant plusieurs tâches.
+इस सेक्शन में, एक से ज़्यादा फ़ंक्शन कॉल का उदाहरण दिखाया गया है. इसमें उपयोगकर्ता एक ऐसा मुश्किल सवाल पूछता है जिसके लिए कई टास्क पूरे करने पड़ते हैं.
 
-Examinons un exemple d'appel de fonction multitours dans lequel l'utilisateur pose
-une question complexe nécessitant plusieurs tâches : `"Check flight status for AA100 and
+फ़ंक्शन कॉलिंग के एक ऐसे उदाहरण पर नज़र डालते हैं जिसमें उपयोगकर्ता कई बार बातचीत करता है. इसमें उपयोगकर्ता एक ऐसा मुश्किल सवाल पूछता है जिसके लिए कई टास्क पूरे करने पड़ते हैं: `"Check flight status for AA100 and
 book a taxi if delayed"`.
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Tour** | **Étape** | **Requête utilisateur** | **Réponse de modèle** | **FunctionResponse** |
+| **चालू करें** | **चरण** | **उपयोगकर्ता का अनुरोध** | **मॉडल का जवाब** | **FunctionResponse** |
 | 1 | 1 | `request1="Check flight status for AA100 and book a taxi 2 hours before if delayed."` | `FC1 ("check_flight") + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + FC1 ("check_flight") + signature + FR1` | `FC2("book_taxi") + signature` | `FR2` |
 | 1 | 3 | `request3 = request2 + FC2 ("book_taxi") + signature + FR2` | `text_output`  `(no FCs)` | `None` |
 
-Le code suivant illustre la séquence du tableau ci-dessus.
+यहां दिया गया कोड, ऊपर दी गई टेबल में दिए गए क्रम को दिखाता है.
 
-**Tour 1, étape 1 (requête utilisateur)**
+**पहला जवाब, पहला चरण (उपयोगकर्ता का अनुरोध)**
 
 ```
 {
@@ -149,7 +140,7 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-**Tour 1, étape 1 (réponse de modèle)**
+**पहला जवाब, पहला चरण (मॉडल का जवाब)**
 
 ```
 {
@@ -170,8 +161,7 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-**Tour 1, étape 2 (réponse utilisateur – envoi des sorties d'outil)** Comme ce tour utilisateur ne contient qu'un `functionResponse` (pas de nouveau texte), nous sommes toujours au tour 1. Nous
-devons conserver `<Signature_A>`.
+**पहला टर्न, दूसरा चरण (उपयोगकर्ता का जवाब - टूल के आउटपुट भेजना)** इस टर्न में सिर्फ़ `functionResponse` (कोई नया टेक्स्ट नहीं) शामिल है. इसलिए, हम अब भी पहले टर्न में हैं. हमें `<Signature_A>` को सुरक्षित रखना होगा.
 
 ```
 {
@@ -212,7 +202,7 @@ devons conserver `<Signature_A>`.
 }
 ```
 
-**Tour 1, étape 2 (modèle)** Le modèle décide maintenant de réserver un taxi en fonction de la sortie d'outil précédente.
+**पहला जवाब, दूसरा चरण (मॉडल)** मॉडल अब पिछले टूल के आउटपुट के आधार पर टैक्सी बुक करने का फ़ैसला करता है.
 
 ```
 {
@@ -233,7 +223,7 @@ devons conserver `<Signature_A>`.
 }
 ```
 
-**Tour 1, étape 3 (utilisateur – envoi de la sortie d'outil)** Pour envoyer la confirmation de réservation du taxi, nous devons inclure des signatures pour **TOUS** les appels de fonction de cette boucle(`<Signature A>` + `<Signature B>`).
+**पहला जवाब, तीसरा चरण (उपयोगकर्ता - टूल का आउटपुट भेजना)** टैक्सी बुकिंग की पुष्टि भेजने के लिए, हमें इस लूप में **सभी** फ़ंक्शन कॉल के लिए हस्ताक्षर शामिल करने होंगे (`<Signature A>` + `<Signature B>`).
 
 ```
 {
@@ -302,19 +292,18 @@ devons conserver `<Signature_A>`.
 }
 ```
 
-### Exemple d'appel de fonction parallèle
+### पैरलल फ़ंक्शन कॉलिंग का उदाहरण
 
-Examinons un exemple d'appel de fonction parallèle dans lequel l'utilisateur demande
-`"Check weather in Paris and London"` pour voir où le modèle effectue la validation.
+आइए, फ़ंक्शन को एक साथ कॉल करने का एक उदाहरण देखते हैं. इसमें उपयोगकर्ता, `"Check weather in Paris and London"` से यह पूछता है कि मॉडल कहां पुष्टि करता है.
 
-| **Tour** | **Étape** | **Requête utilisateur** | **Réponse de modèle** | **FunctionResponse** |
+| **चालू करें** | **चरण** | **उपयोगकर्ता का अनुरोध** | **मॉडल का जवाब** | **FunctionResponse** |
 | --- | --- | --- | --- | --- |
-| 1 | 1 | `request1="Check the weather in Paris and London"` | FC1 ("Paris") + signature  FC2 ("London") | FR1 |
-| 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | text\_output  (no FCs) | Aucun |
+| 1 | 1 | `request1="Check the weather in Paris and London"` | FC1 ("Paris") + हस्ताक्षर  FC2 ("London") | FR1 |
+| 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | text\_output  (कोई फ़ॉन्ट कलेक्शन नहीं है) | कोई नहीं |
 
-Le code suivant illustre la séquence du tableau ci-dessus.
+यहां दिया गया कोड, ऊपर दी गई टेबल में दिए गए क्रम को दिखाता है.
 
-**Tour 1, étape 1 (requête utilisateur)**
+**पहला जवाब, पहला चरण (उपयोगकर्ता का अनुरोध)**
 
 ```
 {
@@ -353,7 +342,7 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-**Tour 1, étape 1 (réponse de modèle)**
+**पहला जवाब, पहला चरण (मॉडल का जवाब)**
 
 ```
 {
@@ -381,8 +370,7 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-**Tour 1, étape 2 (réponse utilisateur – envoi des sorties d'outil)** Nous devons conserver
-`<Signature_A>` sur la première partie exactement telle qu'elle a été reçue.
+**पहले राउंड का दूसरा चरण (उपयोगकर्ता का जवाब - टूल के आउटपुट भेजना)** हमें पहले हिस्से में `<Signature_A>` को ठीक उसी तरह से सुरक्षित रखना होगा जिस तरह से हमें मिला था.
 
 ```
 [
@@ -440,19 +428,17 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 ]
 ```
 
-## Signatures dans les parties non `functionCall`
+## `functionCall` के अलावा अन्य हिस्सों में हस्ताक्षर
 
-Gemini peut également renvoyer des `thought_signatures` dans la dernière partie de la réponse dans les parties qui ne sont pas des appels de fonction.
+Gemini, फ़ंक्शन कॉल के अलावा अन्य हिस्सों में भी जवाब के आखिर में `thought_signatures` दिखा सकता है.
 
-- **Comportement** : la dernière partie de contenu (`text, inlineData…`) renvoyée par le
-  modèle peut contenir un `thought_signature`.
-- **Recommandation** : il est **recommandé** de renvoyer ces signatures pour s'assurer que
-  le modèle maintient un raisonnement de haute qualité, en particulier pour les workflows d'agent simulés ou les instructions complexes.
-- **Validation** : l'API **n'applique pas** strictement la validation. Vous ne recevrez pas d'erreur bloquante si vous les omettez, mais les performances peuvent se dégrader.
+- **व्यवहार**: मॉडल से मिले जवाब (`text, inlineData…`) में `thought_signature` शामिल हो सकता है.
+- **सुझाव**: इन सिग्नेचर को वापस लाने का **सुझाव दिया जाता है**, ताकि यह पक्का किया जा सके कि मॉडल अच्छी क्वालिटी की तार्किकता बनाए रखे. खास तौर पर, निर्देशों का पालन करने या एजेंट के तौर पर काम करने के लिए बनाए गए वर्कफ़्लो को सिम्युलेट करने के लिए.
+- **पुष्टि करना**: एपीआई, पुष्टि करने की प्रोसेस को सख्ती से लागू **नहीं** करता है. अगर आपने इन कुकी को शामिल नहीं किया है, तो आपको ब्लॉक करने से जुड़ी गड़बड़ी का मैसेज नहीं मिलेगा. हालांकि, ऐसा करने से परफ़ॉर्मेंस खराब हो सकती है.
 
-### Raisonnement textuel/contextuel (aucune validation)
+### टेक्स्ट/संदर्भ के हिसाब से तर्क (पुष्टि नहीं की गई)
 
-**Tour 1, étape 1 (réponse de modèle)**
+**पहला जवाब, पहला चरण (मॉडल का जवाब)**
 
 ```
 {
@@ -466,7 +452,7 @@ Gemini peut également renvoyer des `thought_signatures` dans la dernière parti
 }
 ```
 
-**Tour 2, étape 1 (utilisateur)**
+**दूसरा चरण, पहला चरण (उपयोगकर्ता)**
 
 ```
 [
@@ -484,27 +470,26 @@ Gemini peut également renvoyer des `thought_signatures` dans la dernière parti
 ]
 ```
 
-## Signatures pour la compatibilité avec OpenAI
+## OpenAI के साथ काम करने के लिए सिग्नेचर
 
-Les exemples suivants montrent comment gérer les signatures de réflexion pour une API de complétion de chat
-à l'aide de [la compatibilité avec OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=fr).
+यहां दिए गए उदाहरण में बताया गया है कि [OpenAI के साथ काम करने की सुविधा](https://ai.google.dev/gemini-api/docs/openai?hl=hi) का इस्तेमाल करके, चैट पूरे होने के एपीआई के लिए थॉट सिग्नेचर को कैसे मैनेज किया जाता है.
 
-### Exemple d'appel de fonction séquentiel
+### फ़ंक्शन को क्रम से कॉल करने का उदाहरण
 
-Voici un exemple d'appels de fonction multiples dans lesquels l'utilisateur pose une question complexe nécessitant plusieurs tâches.
+यह एक से ज़्यादा फ़ंक्शन कॉल करने का उदाहरण है. इसमें उपयोगकर्ता एक ऐसा मुश्किल सवाल पूछता है जिसके लिए कई टास्क पूरे करने पड़ते हैं.
 
-Examinons un exemple d'appel de fonction multitours dans lequel l'utilisateur demande `Check flight status for AA100 and book a taxi if delayed`. Vous pouvez voir ce qui se passe lorsque l'utilisateur pose une question complexe nécessitant plusieurs tâches.
+आइए, फ़ंक्शन कॉलिंग के एक ऐसे उदाहरण पर नज़र डालें जिसमें कई बार बातचीत की गई है. इसमें उपयोगकर्ता ने `Check flight status for AA100 and book a taxi if delayed` पूछा है. साथ ही, यह भी देखा जा सकता है कि जब उपयोगकर्ता कोई ऐसा मुश्किल सवाल पूछता है जिसके लिए कई टास्क पूरे करने पड़ते हैं, तो क्या होता है.
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Tour** | **Étape** | **Requête utilisateur** | **Réponse de modèle** | **FunctionResponse** |
+| **चालू करें** | **चरण** | **उपयोगकर्ता का अनुरोध** | **मॉडल का जवाब** | **FunctionResponse** |
 | 1 | 1 | `request1 = "Check flight status for AA100 and book a taxi 2 hours before if delayed."` | `FC1 ("check_flight") + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + FC1 ("check_flight") + signature + FR1` | `FC2("book_taxi") + signature` | `FR2` |
 | 1 | 3 | `request3 = request2 + FC2 ("book_taxi") + signature + FR2` | `text_output`  `(no FCs)` | `None` |
 
-Le code suivant décrit la séquence donnée.
+नीचे दिया गया कोड, दिए गए क्रम के हिसाब से काम करता है.
 
-**Tour 1, étape 1 (requête utilisateur)**
+**पहला जवाब, पहला चरण (उपयोगकर्ता का अनुरोध)**
 
 ```
 {
@@ -558,7 +543,7 @@ Le code suivant décrit la séquence donnée.
 }
 ```
 
-**Tour 1, étape 1 (réponse de modèle)**
+**पहला जवाब, पहला चरण (मॉडल का जवाब)**
 
 ```
 {
@@ -581,10 +566,9 @@ Le code suivant décrit la séquence donnée.
     }
 ```
 
-**Tour 1, étape 2 (réponse utilisateur – envoi des sorties d'outil)**
+**पहला राउंड, दूसरा चरण (उपयोगकर्ता का जवाब - टूल के आउटपुट भेजना)**
 
-Comme ce tour utilisateur ne contient qu'un `functionResponse` (pas de nouveau texte), nous sommes
-toujours au tour 1 et devons conserver `<Signature_A>`.
+इस उपयोगकर्ता के टर्न में सिर्फ़ `functionResponse` (कोई नया टेक्स्ट नहीं) है. इसलिए, हम अब भी पहले टर्न में हैं और हमें `<Signature_A>` को बनाए रखना होगा.
 
 ```
 "messages": [
@@ -619,9 +603,9 @@ toujours au tour 1 et devons conserver `<Signature_A>`.
   ]
 ```
 
-**Tour 1, étape 2 (modèle)**
+**पहला जवाब, दूसरा चरण (मॉडल)**
 
-Le modèle décide maintenant de réserver un taxi en fonction de la sortie d'outil précédente.
+अब मॉडल, पिछले टूल के आउटपुट के आधार पर टैक्सी बुक करने का फ़ैसला लेता है.
 
 ```
 {
@@ -644,10 +628,9 @@ Le modèle décide maintenant de réserver un taxi en fonction de la sortie d'ou
 }
 ```
 
-**Tour 1, étape 3 (utilisateur – envoi de la sortie d'outil)**
+**टर्न 1, तीसरा चरण (उपयोगकर्ता - टूल का आउटपुट भेजना)**
 
-Pour envoyer la confirmation de réservation du taxi, nous devons inclure des signatures pour TOUS
-les appels de fonction de cette boucle (`<Signature A>` + `<Signature B>`).
+टैक्सी बुकिंग की पुष्टि करने के लिए, हमें इस लूप (`<Signature A>` + `<Signature B>`) में सभी फ़ंक्शन कॉल के लिए हस्ताक्षर शामिल करने होंगे.
 
 ```
 "messages": [
@@ -706,21 +689,19 @@ les appels de fonction de cette boucle (`<Signature A>` + `<Signature B>`).
   ]
 ```
 
-### Exemple d'appel de fonction parallèle
+### पैरलल फ़ंक्शन कॉलिंग का उदाहरण
 
-Examinons un exemple d'appel de fonction parallèle dans lequel l'utilisateur demande
-`"Check weather in Paris and London"` pour voir où le modèle effectue la
-validation.
+आइए, फ़ंक्शन को पैरलल तरीके से कॉल करने का एक उदाहरण देखते हैं. इसमें उपयोगकर्ता `"Check weather in Paris and London"` पूछता है और आपको पता चलता है कि मॉडल कहां पुष्टि करता है.
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Tour** | **Étape** | **Requête utilisateur** | **Réponse de modèle** | **FunctionResponse** |
+| **चालू करें** | **चरण** | **उपयोगकर्ता का अनुरोध** | **मॉडल का जवाब** | **FunctionResponse** |
 | 1 | 1 | `request1="Check the weather in Paris and London"` | `FC1 ("Paris") + signature`  `FC2 ("London")` | `FR1` |
 | 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | `text_output`  `(no FCs)` | `None` |
 
-Voici le code permettant de parcourir la séquence donnée.
+यहां दिए गए क्रम के हिसाब से कोड दिया गया है.
 
-**Tour 1, étape 1 (requête utilisateur)**
+**पहला जवाब, पहला चरण (उपयोगकर्ता का अनुरोध)**
 
 ```
 {
@@ -759,7 +740,7 @@ Voici le code permettant de parcourir la séquence donnée.
 }
 ```
 
-**Tour 1, étape 1 (réponse de modèle)**
+**पहला जवाब, पहला चरण (मॉडल का जवाब)**
 
 ```
 {
@@ -790,9 +771,9 @@ Voici le code permettant de parcourir la séquence donnée.
 }
 ```
 
-**Tour 1, étape 2 (réponse utilisateur – envoi des sorties d'outil)**
+**पहला राउंड, दूसरा चरण (उपयोगकर्ता का जवाब - टूल के आउटपुट भेजना)**
 
-Vous devez conserver `<Signature_A>` sur la première partie exactement telle qu'elle a été reçue.
+आपको `<Signature_A>` को पहले हिस्से में ठीक उसी तरह से रखना होगा जैसा आपको मिला था.
 
 ```
 "messages": [
@@ -841,51 +822,40 @@ Vous devez conserver `<Signature_A>` sur la première partie exactement telle qu
   ]
 ```
 
-## Questions fréquentes
+## अक्सर पूछे जाने वाले सवाल
 
-1. **Comment transférer l'historique d'un autre modèle vers Gemini 3 avec une partie d'appel de fonction dans le tour et l'étape actuels ? Dois-je fournir des parties d'appel de fonction
-   qui n'ont pas été générées par l'API et qui ne comportent donc pas de signature de réflexion associée
-   ?**
+1. **मैं किसी दूसरे मॉडल से Gemini 3 में चैट का इतिहास कैसे ट्रांसफ़र करूं? साथ ही, मुझे मौजूदा टर्न और चरण में फ़ंक्शन कॉल वाला हिस्सा भी ट्रांसफ़र करना है. क्या मुझे फ़ंक्शन कॉल के उन हिस्सों की जानकारी देनी होगी जिन्हें एपीआई ने जनरेट नहीं किया है और इसलिए, उनसे जुड़ा कोई थॉट सिग्नेचर नहीं है?**
 
-   Bien qu'il soit fortement
-   déconseillé d'injecter des blocs d'appel de fonction personnalisés dans la requête, dans les cas où cela ne peut pas être évité (par exemple, fournir des informations
-   au modèle sur les appels de fonction et les réponses qui ont été exécutés
-   de manière déterministe par le client, ou transférer une trace d'un autre
-   modèle qui n'inclut pas de signatures de réflexion), vous pouvez définir les signatures
-   factices suivantes de `"context_engineering_is_the_way_to_go"` ou
-   `"skip_thought_signature_validator"` dans le champ de signature de réflexion pour ignorer
-   la validation.
-2. **Je renvoie des appels de fonction et des réponses parallèles entrelacés, et l'API renvoie un code 400. Pourquoi ?**
+   अनुरोध में कस्टम फ़ंक्शन कॉल ब्लॉक शामिल करने का सुझाव नहीं दिया जाता. हालांकि, कुछ मामलों में ऐसा करना ज़रूरी हो सकता है. जैसे, क्लाइंट की ओर से फ़ंक्शन कॉल और जवाबों के बारे में मॉडल को जानकारी देना या किसी ऐसे मॉडल से ट्रेस ट्रांसफ़र करना जिसमें थॉट सिग्नेचर शामिल नहीं हैं. ऐसे मामलों में, थॉट सिग्नेचर फ़ील्ड में `"context_engineering_is_the_way_to_go"` या `"skip_thought_signature_validator"` के ये डमी सिग्नेचर सेट किए जा सकते हैं, ताकि पुष्टि करने की प्रोसेस को स्किप किया जा सके.
+2. **I am sending back interleaved parallel function calls and responses and the
+   API is returning a 400. क्यों?**
 
-   Lorsque l'API renvoie des appels de fonction parallèles "FC1 + signature, FC2", la réponse utilisateur attendue est "FC1+ signature, FC2, FR1, FR2". Si vous les entrelacez comme "FC1 + signature, FR1, FC2, FR2", l'API renvoie une erreur 400.
-3. **Lors de la diffusion en streaming, le modèle ne renvoie pas d'appel de fonction. Je ne trouve pas
-   la signature de réflexion**
+   जब एपीआई, फ़ंक्शन कॉल "FC1 + हस्ताक्षर, FC2" के समानांतर जवाब देता है, तो उपयोगकर्ता से "FC1+ हस्ताक्षर, FC2, FR1, FR2" जवाब की उम्मीद की जाती है. अगर आपने उन्हें "FC1 + हस्ताक्षर, FR1, FC2, FR2" के तौर पर इंटरलीव किया है, तो एपीआई 400 गड़बड़ी दिखाएगा.
+3. **स्ट्रीमिंग के दौरान, मॉडल से फ़ंक्शन कॉल नहीं मिल रहा है. साथ ही, मुझे थॉट सिग्नेचर नहीं मिल रहा है**
 
-   Lors d'une réponse de modèle ne contenant pas de FC avec une requête de diffusion en streaming, le modèle peut renvoyer la signature de réflexion dans une partie avec une partie de contenu textuel vide. Il est conseillé d'analyser l'intégralité de la requête jusqu'à ce que le modèle renvoie le `finish_reason`.
+   स्ट्रीमिंग के अनुरोध के साथ, मॉडल के जवाब में फ़ंक्शन कॉल (एफ़सी) शामिल न होने पर, मॉडल थॉट सिग्नेचर को ऐसे हिस्से में दिखा सकता है जिसमें टेक्स्ट कॉन्टेंट वाला हिस्सा खाली हो. हमारा सुझाव है कि जब तक मॉडल `finish_reason` नहीं दिखाता, तब तक पूरे अनुरोध को पार्स करें.
 
-## Signatures de réflexion pour différents modèles
+## अलग-अलग मॉडल के लिए थॉट सिग्नेचर
 
-[Les modèles Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=fr#gemini-3) et Gemini 2.5
-se comportent différemment avec les signatures de réflexion dans les appels de fonction :
+[Gemini 3 मॉडल](https://ai.google.dev/gemini-api/docs/models?hl=hi#gemini-3) और Gemini 2.5 मॉडल, फ़ंक्शन कॉल में थॉट सिग्नेचर के साथ अलग-अलग तरीके से काम करते हैं:
 
-- S'il existe des appels de fonction dans une réponse,
-  - Gemini 3 comporte toujours la signature sur la première partie d'appel de fonction.
-    Il est **obligatoire** de renvoyer cette partie.
-  - Gemini 2.5 comporte la signature dans la première partie (quel que soit le type). Il est **facultatif** de renvoyer cette partie.
-- S'il n'y a pas d'appels de fonction dans une réponse,
-  - Gemini 3 comporte la signature sur la dernière partie si le modèle génère une réflexion.
-  - Gemini 2.5 ne comporte pas de signature dans aucune partie.
+- अगर किसी जवाब में फ़ंक्शन कॉल मौजूद हैं, तो
+  - Gemini 3 के पहले फ़ंक्शन कॉल वाले हिस्से में हमेशा सिग्नेचर मौजूद होगा.
+    उस हिस्से को वापस लाना **ज़रूरी है**.
+  - Gemini 2.5 के जवाब के पहले हिस्से में हस्ताक्षर मौजूद होगा. इससे कोई फ़र्क़ नहीं पड़ता कि जवाब किस तरह का है. उस हिस्से को वापस करना **ज़रूरी नहीं है**.
+- अगर किसी जवाब में फ़ंक्शन कॉल नहीं हैं, तो
+  - अगर मॉडल कोई जवाब जनरेट करता है, तो Gemini 3 के जवाब के आखिर में हस्ताक्षर होगा.
+  - Gemini 2.5 के जवाब में किसी भी हिस्से में हस्ताक्षर नहीं होगा.
 
-Pour plus de détails sur la comparaison, consultez la page [Réflexion](https://ai.google.dev/gemini-api/docs/thinking?hl=fr#signatures).
-Pour les modèles d'image Gemini 3, consultez la section Processus de réflexion du
-[guide de génération](https://ai.google.dev/gemini-api/docs/image-generation?hl=fr#thinking-process) d'images.
+तुलना से जुड़ी ज़्यादा जानकारी के लिए, [सोचना](https://ai.google.dev/gemini-api/docs/thinking?hl=hi#signatures) पेज देखें.
+Gemini 3 Image मॉडल के लिए, [इमेज जनरेट करने](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi#thinking-process) से जुड़ी गाइड में, सोचने की प्रोसेस वाला सेक्शन देखें.
 
-Envoyer des commentaires
+सुझाव भेजें
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Dernière mise à jour le 2026/05/08 (UTC).
+आखिरी बार 2026-05-08 (UTC) को अपडेट किया गया.
 
-Voulez-vous nous donner plus d'informations ?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/05/08 (UTC)."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-05-08 (UTC) को अपडेट किया गया."],[],[]]

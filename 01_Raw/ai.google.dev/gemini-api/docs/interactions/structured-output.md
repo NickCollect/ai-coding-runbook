@@ -1,43 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=vi
-fetched_at: 2026-05-11T04:57:21.191275+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=he
+fetched_at: 2026-05-18T05:11:01.355773+00:00
 title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/overview?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Gửi ý kiến phản hồi
+שליחת משוב
 
-# Kết quả có cấu trúc
+# פלטים מובנים
 
-Bạn có thể định cấu hình các mô hình Gemini để tạo câu trả lời tuân thủ một JSON Schema được cung cấp. Điều này đảm bảo kết quả có thể dự đoán và an toàn về kiểu, đồng thời đơn giản hoá việc trích xuất dữ liệu có cấu trúc từ văn bản không có cấu trúc.
+אתם יכולים להגדיר את מודלי Gemini כך שיפיקו תשובות בהתאם לסכימת JSON שסיפקתם. כך אפשר להבטיח תוצאות צפויות ובטוחות מבחינת סוג הנתונים, ולפשט את תהליך החילוץ של נתונים מובנים מטקסט לא מובנה.
 
-Sử dụng đầu ra có cấu trúc là lựa chọn lý tưởng cho:
+שימוש בפלט מובנה מתאים במיוחד למקרים הבאים:
 
-- **Trích xuất dữ liệu:** Lấy thông tin cụ thể như tên và ngày tháng từ văn bản.
-- **Phân loại có cấu trúc:** Phân loại văn bản thành các danh mục được xác định trước.
-- **Quy trình công việc dựa trên tác nhân:** Tạo thông tin đầu vào có cấu trúc cho các công cụ hoặc API.
+- **חילוץ נתונים:** חילוץ מידע ספציפי כמו שמות ותאריכים מטקסט.
+- **סיווג מובנה:** סיווג טקסט לקטגוריות מוגדרות מראש.
+- **תהליכי עבודה מבוססי-סוכן:** יצירת קלט מובנה לכלים או לממשקי API.
 
-Ngoài việc hỗ trợ JSON Schema trong API REST, Google GenAI SDK còn cho phép xác định giản đồ bằng [Pydantic](https://docs.pydantic.dev/latest/) (Python) và [Zod](https://zod.dev/) (JavaScript).
+בנוסף לתמיכה בסכימת JSON ב-API בארכיטקטורת REST, ערכות ה-SDK של Google GenAI מאפשרות להגדיר סכימות באמצעות [Pydantic](https://docs.pydantic.dev/latest/) (Python) ו-[Zod](https://zod.dev/) (JavaScript).
 
 Recipe Extractor
 Content Moderation
 Recursive Structures
 
-Ví dụ này minh hoạ cách trích xuất dữ liệu có cấu trúc từ văn bản bằng các loại Giản đồ JSON cơ bản như `object`, `array`, `string` và `integer`.
+בדוגמה הזו מוסבר איך לחלץ נתונים מוּבְנִים מטקסט באמצעות סוגים בסיסיים של סכימת JSON, כמו `object`, `array`, `string` ו-`integer`.
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 from google import genai
 from pydantic import BaseModel, Field
 from typing import List, Optional
@@ -85,6 +86,7 @@ print(recipe)
 ### JavaScript
 
 ```
+// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 import * as z from "zod";
 
@@ -153,9 +155,11 @@ console.log(recipe);
 ### REST
 
 ```
+# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
+    -H "Api-Revision: 2026-05-20" \
     -d '{
       "model": "gemini-3-flash-preview",
       "input": "Please extract the recipe from the following text.\nThe user wants to make delicious chocolate chip cookies.\nThey need 2 and 1/4 cups of all-purpose flour, 1 teaspoon of baking soda,\n1 teaspoon of salt, 1 cup of unsalted butter (softened), 3/4 cup of granulated sugar,\n3/4 cup of packed brown sugar, 1 teaspoon of vanilla extract, and 2 large eggs.\nFor the best part, they will need 2 cups of semisweet chocolate chips.\nFirst, preheat the oven to 375°F (190°C). Then, in a small bowl, whisk together the flour,\nbaking soda, and salt. In a large bowl, cream together the butter, granulated sugar, and brown sugar\nuntil light and fluffy. Beat in the vanilla and eggs, one at a time. Gradually beat in the dry\ningredients until just combined. Finally, stir in the chocolate chips. Drop by rounded tablespoons\nonto ungreased baking sheets and bake for 9 to 11 minutes.",
@@ -196,7 +200,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Ví dụ về câu trả lời:**
+**דוגמה לתשובה:**
 
 ```
 {
@@ -224,13 +228,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-## Kết quả phát trực tuyến
+## תוצאות סטרימינג
 
-Bạn có thể truyền trực tuyến các đầu ra có cấu trúc, cho phép bạn bắt đầu xử lý phản hồi khi phản hồi đang được tạo. Các khối được truyền trực tuyến là các chuỗi JSON hợp lệ một phần có thể được nối để tạo thành đối tượng JSON cuối cùng.
+אפשר להזרים פלט מובנה, וכך להתחיל לעבד את התשובה בזמן שהיא נוצרת. החלקים שמועברים בסטרימינג הם מחרוזות JSON חלקיות תקינות שאפשר לשרשר כדי ליצור את אובייקט ה-JSON הסופי.
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 from google import genai
 from pydantic import BaseModel
 from typing import Literal
@@ -260,6 +265,7 @@ for event in stream:
 ### JavaScript
 
 ```
+// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 import * as z from "zod";
 
@@ -294,13 +300,14 @@ for await (const event of stream) {
 }
 ```
 
-## Đầu ra có cấu trúc bằng các công cụ
+## פלט מובנה עם כלים
 
-Gemini 3 cho phép bạn kết hợp Đầu ra có cấu trúc với các công cụ tích hợp, bao gồm [Bám sát nguồn bằng Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=vi), [Ngữ cảnh URL](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=vi), [Thực thi mã](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=vi), [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=vi#structured-output) và [Gọi hàm](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=vi).
+‫Gemini 3 מאפשר לכם לשלב פלט מובנה עם כלים מובנים, כולל [עיגון באמצעות חיפוש Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=he), [הקשר של כתובת URL](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=he), [הרצת קוד](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=he), [חיפוש קבצים](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=he#structured-output) ו[קריאה לפונקציות](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=he).
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 from google import genai
 from pydantic import BaseModel, Field
 from typing import List
@@ -330,6 +337,7 @@ print(result)
 ### JavaScript
 
 ```
+// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 import * as z from "zod";
 
@@ -365,9 +373,11 @@ console.log(match);
 ### REST
 
 ```
+# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
+  -H "Api-Revision: 2026-05-20" \
   -d '{
     "model": "gemini-3.1-pro-preview",
     "input": "Search for all details for the latest Euro.",
@@ -388,93 +398,79 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Hỗ trợ giản đồ JSON
+## תמיכה בסכימת JSON
 
-Để tạo một đối tượng JSON, hãy định cấu hình `response_format` bằng một đối tượng (hoặc một mảng chứa một đối tượng) thuộc loại `text` và đặt `mime_type` của đối tượng đó thành `application/json`. Bạn nên cung cấp giản đồ trong trường `schema`.
+כדי ליצור אובייקט JSON, מגדירים את `response_format` עם אובייקט (או מערך שמכיל אובייקט) מהסוג `text` ומגדירים את `mime_type` שלו ל-`application/json`. צריך לספק את הסכימה בשדה `schema`.
 
-Chế độ đầu ra có cấu trúc của Gemini hỗ trợ một phần của quy cách [Giản đồ JSON](https://json-schema.org/).
+מצב הפלט המובנה של Gemini תומך בחלק ממפרט [JSON Schema](https://json-schema.org/).
 
-Sau đây là các giá trị được hỗ trợ của `type`:
+יש תמיכה בערכים הבאים של `type`:
 
-- **`string`**: Đối với văn bản.
-- **`number`**: Đối với số dấu phẩy động.
-- **`integer`**: Đối với số nguyên.
-- **`boolean`**: Đối với giá trị đúng hoặc sai.
-- **`object`**: Đối với dữ liệu có cấu trúc có các cặp khoá-giá trị.
-- **`array`**: Đối với danh sách các mục.
-- **`null`**: Để cho phép một thuộc tính có giá trị rỗng, hãy thêm `"null"` vào mảng loại (ví dụ: `{"type": ["string", "null"]}`).
+- ‫**`string`**: לטקסט.
+- ‫**`number`**: למספרים בשיטת נקודה צפה.
+- ‫**`integer`**: למספרים שלמים.
+- ‫**`boolean`**: לערכים True או False.
+- ‫**`object`**: לנתונים מובְנים עם צמדי מפתח/ערך.
+- ‫**`array`**: לרשימות של פריטים.
+- ‫**`null`**: כדי לאפשר שמאפיין יהיה null, צריך לכלול את `"null"` במערך הסוגים (לדוגמה, `{"type": ["string", "null"]}`).
 
-Những thuộc tính mô tả này giúp hướng dẫn mô hình:
+מאפייני התיאור האלה עוזרים להנחות את המודל:
 
-- **`title`**: Nội dung mô tả ngắn về một tài sản.
-- **`description`**: Nội dung mô tả dài và chi tiết hơn về một cơ sở lưu trú.
+- ‫**`title`**: תיאור קצר של מאפיין.
+- ‫**`description`**: תיאור ארוך ומפורט יותר של נכס.
 
-### Thuộc tính cụ thể theo loại
+### מאפיינים ספציפיים לסוג
 
-**Đối với các giá trị `object`:**
+**לערכים של `object`:**
 
-- **`properties`**: Một đối tượng trong đó mỗi khoá là tên thuộc tính và mỗi giá trị là một giản đồ cho thuộc tính đó.
-- **`required`**: Một mảng gồm các chuỗi, liệt kê những thuộc tính bắt buộc.
-- **`additionalProperties`**: Kiểm soát việc có cho phép các thuộc tính không có trong `properties` hay không. Có thể là một boolean hoặc một giản đồ.
+- ‫**`properties`**: אובייקט שבו כל מפתח הוא שם מאפיין וכל ערך הוא סכימה של המאפיין הזה.
+- ‫**`required`**: מערך של מחרוזות, שבו מפורטות המאפיינים שהם חובה.
+- ‫**`additionalProperties`**: קובעת אם מותר להשתמש בנכסים שלא מופיעים ב-`properties`. יכול להיות ערך בוליאני או סכמה.
 
-**Đối với các giá trị `string`:**
+**לערכים של `string`:**
 
-- **`enum`**: Liệt kê một tập hợp cụ thể gồm các chuỗi có thể có cho các tác vụ phân loại.
-- **`format`**: Chỉ định cú pháp cho chuỗi, chẳng hạn như `date-time`, `date`, `time`.
+- ‫**`enum`**: רשימה של קבוצה ספציפית של מחרוזות אפשריות למשימות סיווג.
+- ‫**`format`**: מציין תחביר למחרוזת, כמו `date-time`, ‏`date`, ‏`time`.
 
-**Đối với các giá trị `number` và `integer`:**
+**לערכים `number` ו-`integer`:**
 
-- **`enum`**: Liệt kê một tập hợp cụ thể gồm các giá trị bằng số có thể có.
-- **`minimum`**: Giá trị tối thiểu bao gồm.
-- **`maximum`**: Giá trị tối đa (bao gồm).
+- ‫**`enum`**: רשימה של קבוצה ספציפית של ערכים נומריים אפשריים.
+- ‫**`minimum`**: ערך המינימום כולל.
+- ‫**`maximum`**: הערך המקסימלי כולל.
 
-**Đối với các giá trị `array`:**
+**לערכים של `array`:**
 
-- **`items`**: Xác định giản đồ cho tất cả các mục trong mảng.
-- **`prefixItems`**: Xác định danh sách giản đồ cho N mục đầu tiên, cho phép các cấu trúc giống như bộ giá trị.
-- **`minItems`**: Số lượng tối thiểu của các mục trong mảng.
-- **`maxItems`**: Số lượng tối đa của các mục trong mảng.
+- ‫**`items`**: הגדרת הסכימה של כל הפריטים במערך.
+- ‫**`prefixItems`**: מגדיר רשימה של סכימות עבור הפריטים הראשונים, ומאפשר מבנים דמויי-tuple.
+- ‫**`minItems`**: המספר המינימלי של פריטים במערך.
+- ‫**`maxItems`**: המספר המקסימלי של פריטים במערך.
 
-## Hỗ trợ mô hình
+## פלט מובנה לעומת בקשה להפעלת פונקציה
 
-| Mô hình | Đầu ra có cấu trúc |
+| תכונה | תרחיש שימוש ראשי |
 | --- | --- |
-| Bản xem trước Gemini 3.1 Pro | ✔️ |
-| Bản xem trước Gemini 3 Flash | ✔️ |
-| Gemini 2.5 Pro | ✔️ |
-| Gemini 2.5 Flash | ✔️ |
-| Gemini 2.5 Flash-Lite | ✔️ |
-| Gemini 2.0 Flash | ✔️\* |
-| Gemini 2.0 Flash-Lite | ✔️\* |
+| **פלט מובנה** | **עיצוב התשובה הסופית.** משתמשים בה כשרוצים ש*התשובה* של המודל תהיה בפורמט מסוים. |
+| **בקשה להפעלת פונקציה** | **ביצוע פעולות במהלך שיחה** משתמשים בה כשצריך שהמודל *יבקש מכם* לבצע משימה לפני שהוא מספק תשובה סופית. |
 
-*\* Gemini 2.0 yêu cầu danh sách `propertyOrdering` rõ ràng.*
+## שיטות מומלצות
 
-## Đầu ra có cấu trúc so với gọi hàm
+- **תיאורים ברורים:** השתמשו בשדה `description` כדי להנחות את המודל.
+- **הקלדה חזקה:** שימוש בסוגים ספציפיים (`integer`, ‏`string`, ‏`enum`).
+- **הנדסת הנחיות:** חשוב להצהיר בבירור מה רוצים שהמודל יעשה.
+- **אימות:** למרות שהפלט הוא JSON עם תחביר תקין, תמיד צריך לאמת את הערכים באפליקציה.
+- **טיפול בשגיאות:** צריך להטמיע טיפול בשגיאות כדי לטפל בפלט שתואם לסכימה אבל לא נכון מבחינה סמנטית.
 
-| Tính năng | Trường hợp sử dụng chính |
-| --- | --- |
-| **Đầu ra có cấu trúc** | **Định dạng câu trả lời cuối cùng.** Sử dụng khi bạn muốn *câu trả lời* của mô hình ở một định dạng cụ thể. |
-| **Lệnh gọi hàm** | **Thực hiện hành động trong cuộc trò chuyện.** Sử dụng khi mô hình cần *hỏi bạn* thực hiện một việc trước khi đưa ra câu trả lời cuối cùng. |
+## מגבלות
 
-## Các phương pháp hay nhất
+- **קבוצת משנה של סכימה:** לא כל התכונות של סכימת JSON נתמכות.
+- **מורכבות הסכימה:** יכול להיות שסכימות גדולות מאוד או כאלה עם קינון עמוק יידחו.
 
-- **Nội dung mô tả rõ ràng:** Sử dụng trường `description` để hướng dẫn mô hình.
-- **Nhập mạnh:** Sử dụng các loại cụ thể (`integer`, `string`, `enum`).
-- **Thiết kế câu lệnh:** Nêu rõ bạn muốn mô hình làm gì.
-- **Xác thực:** Mặc dù đầu ra là JSON có cú pháp chính xác, nhưng bạn luôn phải xác thực các giá trị trong ứng dụng của mình.
-- **Xử lý lỗi:** Triển khai biện pháp xử lý lỗi hữu ích cho các đầu ra tuân thủ giản đồ nhưng không chính xác về mặt ngữ nghĩa.
+שליחת משוב
 
-## Các điểm hạn chế
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-- **Tập hợp con giản đồ:** Không phải tính năng nào của Giản đồ JSON cũng được hỗ trợ.
-- **Độ phức tạp của giản đồ:** Những giản đồ quá lớn hoặc có cấu trúc lồng ghép sâu có thể bị từ chối.
+עדכון אחרון: 2026-05-12 (שעון UTC).
 
-Gửi ý kiến phản hồi
+רוצה לתת לנו משוב?
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
-
-Cập nhật lần gần đây nhất: 2026-05-09 UTC.
-
-Bạn muốn chia sẻ thêm với chúng tôi?
-
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-09 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-05-12 (שעון UTC)."],[],[]]

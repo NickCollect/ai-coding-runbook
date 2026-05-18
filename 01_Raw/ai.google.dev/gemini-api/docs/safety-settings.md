@@ -1,107 +1,120 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/safety-settings?hl=tr
-fetched_at: 2026-05-11T05:02:21.835784+00:00
-title: "G\u00fcvenlik ayarlar\u0131 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/safety-settings?hl=pt-BR
+fetched_at: 2026-05-18T05:15:23.840745+00:00
+title: "Configura\u00e7\u00f5es de seguran\u00e7a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Geri bildirim gönderin
+Envie comentários
 
-# Güvenlik ayarları
+# Configurações de segurança
 
-Gemini API, uygulamanızın daha kısıtlayıcı veya daha az kısıtlayıcı bir güvenlik yapılandırması gerektirip gerektirmediğini belirlemek için prototip oluşturma aşamasında ayarlayabileceğiniz güvenlik ayarları sunar. Belirli içerik türlerini kısıtlamak veya bunlara izin vermek için bu ayarları dört filtre kategorisinde düzenleyebilirsiniz.
+A API Gemini oferece configurações de segurança que podem ser ajustadas durante a
+prototipagem para determinar se o aplicativo requer uma configuração de segurança mais ou menos
+restritiva. É possível ajustar essas configurações em quatro categorias de filtros para restringir ou permitir determinados tipos de conteúdo.
 
-Bu kılavuzda, Gemini API'nin güvenlik ayarlarını ve filtrelemeyi nasıl işlediği ve uygulamanızın güvenlik ayarlarını nasıl değiştirebileceğiniz açıklanmaktadır.
+Este guia mostra como a API Gemini lida com as configurações e a filtragem de segurança e como você pode mudar as configurações de segurança do seu aplicativo.
 
-## Güvenlik filtreleri
+## Filtros de segurança
 
-Gemini API'nin ayarlanabilir güvenlik filtreleri aşağıdaki kategorileri kapsar:
+Os filtros de segurança ajustáveis da API Gemini abrangem as seguintes categorias:
 
-| Kategori | Açıklama |
+| Categoria | Descrição |
 | --- | --- |
-| Taciz | Kimliği ve/veya korunan özellikleri hedef alan olumsuz veya zararlı yorumlar |
-| Nefret söylemi | Kaba, saygısız veya küfürlü içerik |
-| Müstehcen | Cinsel eylemlere veya diğer müstehcen içeriklere referanslar içeriyor. |
-| Tehlikeli | Zararlı eylemleri teşvik eden, kolaylaştıran veya destekleyen içerikler |
+| Assédio | Comentários negativos ou prejudiciais relacionados à identidade e/ou características protegidas. |
+| Discurso de ódio | Conteúdo grosseiro, desrespeitoso ou linguagem obscena. |
+| Conteúdo sexualmente explícito | Contém referências a atos sexuais ou outro conteúdo obsceno. |
+| Perigoso | Promove, facilita ou encoraja atos prejudiciais. |
 
-Bu kategoriler [`HarmCategory`](https://ai.google.dev/api/rest/v1/HarmCategory?hl=tr) içinde tanımlanır. Kullanım alanınıza göre ayarlamalar yapmak için bu filtreleri kullanabilirsiniz. Örneğin, video oyunu diyaloğu oluşturuyorsanız oyunun doğası gereği *Tehlikeli* olarak derecelendirilen daha fazla içeriğe izin vermeyi kabul edebilirsiniz.
+Essas categorias são definidas em [`HarmCategory`](https://ai.google.dev/api/rest/v1/HarmCategory?hl=pt-br). Use esses filtros para ajustar o que for necessário conforme seu caso de uso. Por exemplo, se você estiver criando diálogos de videogame, poderá considerar aceitável permitir mais conteúdo classificado como *Perigoso* devido à natureza do jogo.
 
-Ayarlanabilir güvenlik filtrelerine ek olarak, Gemini API'de çocukların güvenliğini tehlikeye atan içerikler gibi temel zararlara karşı yerleşik korumalar bulunur.
-Bu tür zararlar her zaman engellenir ve ayarlanamaz.
+Além dos filtros de segurança ajustáveis, a API Gemini tem proteções integradas contra danos principais, como conteúdo que coloca crianças em risco.
+Esses tipos de danos são sempre bloqueados e não podem ser ajustados.
 
-### İçerik güvenliği filtreleme düzeyi
+### Nível de filtragem da segurança de conteúdo
 
-Gemini API, içeriğin güvenli olmama olasılık düzeyini `HIGH`, `MEDIUM`, `LOW` veya `NEGLIGIBLE` olarak sınıflandırır.
+A API Gemini categoriza o nível de probabilidade de um conteúdo ser considerado não seguro como
+`HIGH`, `MEDIUM`, `LOW` ou `NEGLIGIBLE`.
 
-Gemini API, içeriğin güvenli olmama olasılığına göre içeriği engeller. İçeriğin ne kadar zararlı olduğu dikkate alınmaz. Zararın ciddiyeti yüksek olsa bile bazı içeriklerin güvenli olmama olasılığı düşük olabilir. Bu nedenle, bu durumu göz önünde bulundurmak önemlidir. Örneğin, şu cümleleri karşılaştıralım:
+A API Gemini bloqueia conteúdo com base na probabilidade de o conteúdo ser inseguro
+e não na gravidade. É importante considerar isso, porque alguns conteúdos podem ter baixa probabilidade de não serem seguros, mesmo que a gravidade dos danos ainda seja alta. Por exemplo, comparando as frases:
 
-1. Robot bana yumruk attı.
-2. Robot beni kesti.
+1. O robô me bateu.
+2. O robô me cortou.
 
-İlk cümle güvenli olmama olasılığı daha yüksek olsa da ikinci cümlenin şiddet açısından daha ciddi olduğunu düşünebilirsiniz.
-Bu nedenle, son kullanıcılara zarar vermeyi en aza indirirken temel kullanım alanlarınızı desteklemek için uygun engelleme düzeyinin ne olduğunu dikkatlice test etmeniz ve değerlendirmeniz önemlidir.
+A primeira frase pode resultar em uma probabilidade maior de não ser segura, mas a segunda pode ser considerada mais grave em termos de violência.
+Por isso, é importante testar cuidadosamente e considerar o nível apropriado de bloqueio necessário para oferecer suporte aos seus principais casos de uso e minimizar os danos aos usuários finais.
 
-### İstek başına güvenlik filtreleme
+### Filtragem de segurança por solicitação
 
-API'ye yaptığınız her istek için güvenlik ayarlarını düzenleyebilirsiniz. İstek gönderdiğinizde içerik analiz edilir ve içeriğe güvenlik derecesi atanır. Güvenlik derecelendirmesi, zarar sınıflandırmasının kategorisini ve olasılığını içerir. Örneğin, içerik taciz kategorisinin yüksek olasılıkla güvenli olmaması nedeniyle engellendiyse döndürülen güvenlik derecelendirmesinde kategori `HARASSMENT`'ya eşit olur ve zarar olasılığı `HIGH` olarak ayarlanır.
+Você pode ajustar as configurações de segurança de cada solicitação feita à API. Quando você faz uma solicitação, o conteúdo é analisado e recebe uma classificação de segurança. A classificação de segurança inclui a categoria e a probabilidade da classificação de dano. Por exemplo, se o conteúdo foi bloqueado porque a categoria de assédio tem uma alta probabilidade, a classificação de segurança retornada teria a categoria igual a `HARASSMENT` e a probabilidade de dano definida como `HIGH`.
 
-Modelin doğasında bulunan güvenlik nedeniyle ek filtreler varsayılan olarak **Kapalı**'dır.
-Bu ayarları etkinleştirmeyi seçerseniz sistemi, güvenli olmama olasılığına göre içerikleri engelleyecek şekilde yapılandırabilirsiniz. Varsayılan model davranışı çoğu kullanım alanını kapsar. Bu nedenle, bu ayarları yalnızca uygulamanızda tutarlılık gerekiyorsa değiştirmeniz gerekir.
+Devido à segurança inerente do modelo, outros filtros ficam **desativados** por padrão.
+Se você ativar essas opções, poderá configurar o sistema para bloquear conteúdo com base na probabilidade de ser inseguro. O comportamento padrão do modelo abrange a maioria dos casos de uso. Portanto, ajuste essas configurações apenas se isso for consistentemente necessário para sua aplicação.
 
-Aşağıdaki tabloda, her kategori için ayarlayabileceğiniz engelleme ayarları açıklanmaktadır. Örneğin, **Nefret söylemi** kategorisi için engelleme ayarını **Birkaçını engelle** olarak belirlerseniz nefret söylemi içeriği olma olasılığı yüksek olan her şey engellenir. Ancak olasılığı daha düşük olan her şeye izin verilir.
+A tabela a seguir descreve as configurações de bloqueio que você pode ajustar em cada categoria. Por exemplo, se você definir a configuração de bloqueio como **Bloquear poucos** na categoria **Discurso de ódio**, tudo com alta probabilidade de ser um conteúdo de discurso de ódio será bloqueado. No entanto, qualquer item com menor probabilidade de risco é permitido.
 
-| Eşik (Google AI Studio) | Eşik (API) | Açıklama |
+| Limite (Google AI Studio) | Limite (API) | Descrição |
 | --- | --- | --- |
-| Kapalı | `OFF` | Güvenlik filtresini devre dışı bırakma |
-| Hiçbirini engelleme | `BLOCK_NONE` | Güvenli olmayan içerik olasılığına bakılmaksızın her zaman göster |
-| Birkaçını engelle | `BLOCK_ONLY_HIGH` | İçeriğin güvenli olmama olasılığı yüksekse engelle |
-| Bazılarını engelleme | `BLOCK_MEDIUM_AND_ABOVE` | İçeriğin güvenli olmama olasılığı orta veya yüksekse engelle |
-| Çoğunu engelle | `BLOCK_LOW_AND_ABOVE` | İçeriğin güvenli olmama olasılığı düşük, orta veya yüksekse engelle |
-| Yok | `HARM_BLOCK_THRESHOLD_UNSPECIFIED` | Eşik belirtilmediyse varsayılan eşik kullanılarak engelleme yapılır. |
+| Desativado | `OFF` | Desativar o filtro de segurança |
+| Bloquear nenhum | `BLOCK_NONE` | Sempre mostrar, seja qual for a probabilidade do conteúdo não ser seguro |
+| Bloquear poucos | `BLOCK_ONLY_HIGH` | Bloquear quando houver alta probabilidade do conteúdo não ser seguro |
+| Bloquear alguns | `BLOCK_MEDIUM_AND_ABOVE` | Bloquear quando houver probabilidade média ou alta do conteúdo não ser seguro |
+| Bloquear muitos | `BLOCK_LOW_AND_ABOVE` | Bloquear quando houver probabilidade baixa, média ou alta de o conteúdo não ser seguro |
+| N/A | `HARM_BLOCK_THRESHOLD_UNSPECIFIED` | Como o limite não foi especificado, o bloqueio está usando o limite padrão. |
 
-Eşik ayarlanmazsa Gemini 2.5 ve 3 modelleri için varsayılan engelleme eşiği **Kapalı** olur.
+Se o limite não for definido, o padrão será **Desativado** para os modelos Gemini 2.5 e 3.
 
-Bu ayarları, üretken hizmete yaptığınız her istek için belirleyebilirsiniz.
-Ayrıntılar için [`HarmBlockThreshold`](https://ai.google.dev/api/generate-content?hl=tr#harmblockthreshold) API referansına bakın.
+Você pode definir essas configurações para cada solicitação feita ao serviço generativo.
+Consulte a referência da API [`HarmBlockThreshold`](https://ai.google.dev/api/generate-content?hl=pt-br#harmblockthreshold)
+para mais detalhes.
 
-### Güvenlikle ilgili geri bildirim
+### Feedback de segurança
 
-[`generateContent`](https://ai.google.dev/api/generate-content?hl=tr#method:-models.generatecontent)
-güvenlik geri bildirimi içeren
-[`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=tr#generatecontentresponse) döndürür.
+[`generateContent`](https://ai.google.dev/api/generate-content?hl=pt-br#method:-models.generatecontent)
+retorna um
+[`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=pt-br#generatecontentresponse) que
+inclui feedback de segurança.
 
-İstem geri bildirimi, [`promptFeedback`](https://ai.google.dev/api/generate-content?hl=tr#promptfeedback)'e dahil edilir. `promptFeedback.blockReason` ayarlanmışsa istemin içeriği engellenmiştir.
+O feedback do comando está incluído em
+[`promptFeedback`](https://ai.google.dev/api/generate-content?hl=pt-br#promptfeedback). Se
+`promptFeedback.blockReason` estiver definido, o conteúdo da solicitação será bloqueado.
 
-Yanıt adayı geri bildirimi, [`Candidate.finishReason`](https://ai.google.dev/api/generate-content?hl=tr#candidate) ve [`Candidate.safetyRatings`](https://ai.google.dev/api/generate-content?hl=tr#candidate)'a dahil edilir. Yanıt içeriği engellendiyse ve `finishReason` `SAFETY` ise daha fazla bilgi için `safetyRatings` öğesini inceleyebilirsiniz. Engellenen içerik geri yüklenmez.
+O feedback do candidato à resposta está incluído em
+[`Candidate.finishReason`](https://ai.google.dev/api/generate-content?hl=pt-br#candidate) e
+[`Candidate.safetyRatings`](https://ai.google.dev/api/generate-content?hl=pt-br#candidate). Se o conteúdo da resposta foi bloqueado e o `finishReason` era `SAFETY`, inspecione `safetyRatings` para mais detalhes. O conteúdo bloqueado não é retornado.
 
-## Güvenlik ayarlarını düzenleme
+## Ajustar as configurações de segurança
 
-Bu bölümde, hem Google AI Studio'da hem de kodunuzda güvenlik ayarlarının nasıl düzenleneceği açıklanmaktadır.
+Esta seção explica como ajustar as configurações de segurança no Google AI Studio
+e no seu código.
 
 ### Google AI Studio
 
-Güvenlik ayarlarını Google AI Studio'da yapabilirsiniz.
+É possível ajustar as configurações de segurança no Google AI Studio.
 
-**Çalıştırma ayarları** panelindeki **Gelişmiş ayarlar** bölümünde **Güvenlik ayarları**'nı tıklayarak **Çalıştırma
-güvenlik ayarları** modalını açın. Modalda, kaydırma çubuklarını kullanarak güvenlik kategorisine göre içerik filtreleme düzeyini ayarlayabilirsiniz:
+Clique em **Configurações de segurança** em **Configurações avançadas** no painel **Configurações de execução** para abrir o modal **Executar configurações de segurança**. No modal, use os controles deslizantes para ajustar o nível de filtragem de conteúdo por categoria de segurança:
 
-![](https://ai.google.dev/static/gemini-api/docs/images/safety_settings_ui.png?hl=tr)
+![](https://ai.google.dev/static/gemini-api/docs/images/safety_settings_ui.png?hl=pt-br)
 
-İstek gönderdiğinizde (ör. modele soru sorarak) isteğin içeriği engellenirse warning
-**İçerik engellendi** mesajı gösterilir. Daha fazla ayrıntı görmek için işaretçiyi **İçerik engellendi** metninin üzerine getirin. Böylece kategori ve zararlı olma olasılığı sınıflandırmasını görebilirsiniz.
+Quando você envia uma solicitação (por exemplo, fazendo uma pergunta ao modelo), uma mensagem warning
+**Conteúdo bloqueado** aparece se o conteúdo da solicitação for bloqueado. Para mais detalhes, mantenha o ponteiro sobre o texto **Conteúdo bloqueado** para ver a categoria e a probabilidade da classificação de dano.
 
-### Kod örnekleri
+### Exemplos de código
 
-Aşağıdaki kod snippet'inde, `GenerateContent` görüşmenizde güvenlik ayarlarının nasıl yapılacağı gösterilmektedir. Bu, nefret söylemi (`HARM_CATEGORY_HATE_SPEECH`) kategorisinin eşiğini belirler. Bu kategoriyi `BLOCK_LOW_AND_ABOVE` olarak ayarladığınızda, nefret söylemi olma olasılığı düşük veya yüksek olan tüm içerikler engellenir. Eşik ayarlarını anlamak için [İstek başına güvenlik filtreleme](#safety-filtering-per-request) başlıklı makaleyi inceleyin.
+O snippet de código a seguir mostra como definir as configurações de segurança na chamada de
+`GenerateContent`. Isso define o limite da categoria de discurso de ódio (`HARM_CATEGORY_HATE_SPEECH`). Definir essa categoria como
+`BLOCK_LOW_AND_ABOVE` bloqueia qualquer conteúdo com probabilidade baixa ou alta de
+ser discurso de ódio. Para entender as configurações de limite, consulte [Filtragem de segurança por solicitação](#safety-filtering-per-request).
 
 ### Python
 
@@ -231,21 +244,22 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 }'
 ```
 
-## Sonraki adımlar
+## Próximas etapas
 
-- API'nin tamamı hakkında daha fazla bilgi edinmek için [API referansına](https://ai.google.dev/api?hl=tr) bakın.
-- LLM'lerle geliştirme yaparken güvenlikle ilgili dikkat edilmesi gereken noktalar hakkında genel bir bakış için [güvenlik kılavuzunu](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=tr) inceleyin.
-- [Jigsaw ekibinin](https://developers.perspectiveapi.com/s/about-the-api-score) olasılık ve önem düzeyini değerlendirme hakkındaki makalesinden daha fazla bilgi edinin.
-- [Perspective API](https://medium.com/jigsaw/reducing-toxicity-in-large-language-models-with-perspective-api-c31c39b7a4d7) gibi güvenlik çözümlerine katkıda bulunan ürünler hakkında daha fazla bilgi edinin.
-  \* Bu güvenlik ayarlarını kullanarak toksisite sınıflandırıcı oluşturabilirsiniz. Başlamak için [sınıflandırma
-  örneğine](https://ai.google.dev/examples/train_text_classifier_embeddings?hl=tr) bakın.
+- Consulte a [referência da API](https://ai.google.dev/api?hl=pt-br) para saber mais sobre a API completa.
+- Consulte as [diretrizes de segurança](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=pt-br) para uma visão geral das considerações de segurança ao desenvolver com LLMs.
+- Saiba mais sobre como avaliar a probabilidade e a gravidade com a [equipe da Jigsaw](https://developers.perspectiveapi.com/s/about-the-api-score).
+- Saiba mais sobre os produtos que contribuem para soluções de segurança, como a
+  [API
+  Perspective](https://medium.com/jigsaw/reducing-toxicity-in-large-language-models-with-perspective-api-c31c39b7a4d7).
+  \* Você pode usar essas configurações de segurança para criar um classificador de toxicidade. Consulte o [exemplo de classificação](https://ai.google.dev/examples/train_text_classifier_embeddings?hl=pt-br) para começar.
 
-Geri bildirim gönderin
+Envie comentários
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Son güncelleme tarihi: 2026-04-29 UTC.
+Última atualização 2026-05-13 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Quer enviar seu feedback?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-05-13 UTC."],[],[]]

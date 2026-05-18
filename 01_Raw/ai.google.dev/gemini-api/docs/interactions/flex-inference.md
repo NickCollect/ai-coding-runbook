@@ -1,33 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/flex-inference?hl=de
-fetched_at: 2026-05-11T04:59:44.346467+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/flex-inference?hl=zh-CN
+fetched_at: 2026-05-18T05:09:58.353242+00:00
 title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/overview?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Feedback geben
+发送反馈
 
-# Flex-Inferenz
+# Flex 推理
 
-Die Gemini Flex API ist eine Inferenzstufe, die im Vergleich zu Standardraten eine Kostenreduzierung von 50% bietet. Im Gegenzug werden variable Latenz und Best-Effort-Verfügbarkeit geboten. Sie ist für latenztolerante Arbeitslasten konzipiert, die eine synchrone Verarbeitung erfordern, aber nicht die Echtzeitleistung der Standard-API benötigen.
+Gemini Flex API 是一种推理层级，与标准费率相比，可将成本降低 50%，但延迟时间不确定，并且仅提供尽力而为的可用性。它适用于对延迟容忍度较高的工作负载，这些工作负载需要同步处理，但不需要标准 API 的实时性能。
 
-## Flex verwenden
+## 如何使用 Flex
 
-Wenn Sie das Flex-Modell verwenden möchten, geben Sie in Ihrer Anfrage `service_tier` als `flex` an. Standardmäßig wird für Anfragen die Standardstufe verwendet, wenn dieses Feld ausgelassen wird.
+如需使用 Flex 层级，请在请求中将 `service_tier` 指定为 `flex`。默认情况下，如果省略此字段，请求将使用标准层。
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 from google import genai
 
 client = genai.Client()
@@ -46,6 +47,7 @@ except Exception as e:
 ### JavaScript
 
 ```
+// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from '@google/genai';
 
 const client = new GoogleGenAI({});
@@ -68,9 +70,11 @@ await main();
 ### REST
 
 ```
+# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "Content-Type: application/json" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H "Api-Revision: 2026-05-20" \
   -d '{
       "model": "gemini-3-flash-preview",
       "input": "Analyze this dataset for trends...",
@@ -78,56 +82,56 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## So funktioniert die Flex-Inferenz
+## 灵活推理的工作原理
 
-Die Gemini Flex-Inferenz schließt die Lücke zwischen der Standard-API und der Bearbeitungszeit von 24 Stunden der [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=de). Dabei wird Rechenleistung außerhalb der Spitzenzeiten genutzt, die bei Bedarf reduziert werden kann. So wird eine kostengünstige Lösung für Hintergrundaufgaben und sequenzielle Workflows geboten.
+Gemini Flex 推理弥合了标准 API 与 [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn) 的 24 小时周转时间之间的差距。它利用非高峰时段的“可分流”计算容量，为后台任务和顺序工作流提供经济高效的解决方案。
 
-| Funktion | Flex | Priorität | Standard | Batch |
+| 功能 | Flex | 优先级 | 标准 | 批量 |
 | --- | --- | --- | --- | --- |
-| **Preise** | 50% Rabatt | 75–100% mehr als bei Standard | Standardpreis | 50% Rabatt |
-| **Latenz** | Minuten (Ziel: 1–15 Minuten) | Niedrig (Sekunden) | Sekunden bis Minuten | Bis zu 24 Stunden |
-| **Zuverlässigkeit** | Best-Effort-Ansatz (reduzierbar) | Hoch (nicht weitergebbar) | Hoch / Mittel bis hoch | Hoch (für Durchsatz) |
-| **Schnittstelle** | Synchron | Synchron | Synchron | Asynchron |
+| **价格** | 5 折优惠 | 比标准层级高 75-100% | 全价票 | 5 折优惠 |
+| **延迟时间** | 分钟（目标时长为 1-15 分钟） | 低（秒） | 秒到分钟 | 最长 24 小时 |
+| **可靠性** | 尽力而为（可舍弃） | 高（不易掉毛） | 高 / 中高 | 高（针对吞吐量） |
+| **接口** | 同步 | 同步 | 同步 | 异步 |
 
-### Hauptvorteile
+### 主要优势
 
-- **Kosteneffizienz**: Erhebliche Einsparungen bei Evaluierungen, Hintergrund-Agents und Datenanreicherung, die nicht für die Produktion bestimmt sind.
-- **Geringer Aufwand**: Fügen Sie Ihren bestehenden Anfragen einfach einen einzelnen Parameter hinzu.
-- **Synchrone Workflows**: Ideal für sequenzielle API-Ketten, bei denen die nächste Anfrage von der Ausgabe der vorherigen abhängt. Dadurch sind sie flexibler als Batch-Workflows für agentenbasierte Workflows.
+- **成本效益**：可大幅节省非生产评估、后台代理和数据丰富化的费用。
+- **低摩擦**：只需向现有请求添加一个参数即可。
+- **同步工作流**：非常适合顺序 API 链，其中下一个请求取决于上一个请求的输出，因此比批量处理更灵活，适合智能体工作流。
 
-### Anwendungsfälle
+### 使用场景
 
-- **Offline-Bewertungen**: Regressions- oder Leaderboard-Tests mit „LLM-as-a-Judge“ durchführen.
-- **Hintergrund-Agents**: Sequenzielle Aufgaben wie CRM-Aktualisierungen, Profilerstellung oder Inhaltsmoderation, bei denen eine Verzögerung von einigen Minuten akzeptabel ist.
-- **Forschung mit beschränktem Budget**: Akademische Experimente, für die ein hohes Tokenvolumen bei beschränktem Budget erforderlich ist.
+- **离线评估**：运行“LLM 即裁判”回归测试或排行榜。
+- **后台代理**：可接受数分钟延迟的顺序任务，例如 CRM 更新、个人资料构建或内容审核。
+- **受预算限制的研究**：需要在有限的预算下使用大量 token 的学术实验。
 
-### Ratenlimits
+### 速率限制
 
-Flex-Inferenz-Traffic wird auf Ihre allgemeinen [Ratenbegrenzungen](https://aistudio.google.com/rate-limit?hl=de) angerechnet. Es gelten keine erweiterten Ratenbegrenzungen wie bei der [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=de).
+灵活推理流量会计入常规[速率限制](https://aistudio.google.com/rate-limit?hl=zh-cn)；它不会像 [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn) 那样提供扩展速率限制。
 
-### Abschaltbare Kapazität
+### 可减少的容量
 
-Flex-Traffic wird mit niedrigerer Priorität behandelt. Bei einem Anstieg des Standard-Traffics können Flex-Anfragen unterbrochen oder beendet werden, um Kapazität für Nutzer mit hoher Priorität zu schaffen. Wenn Sie eine Prioritätsinferenz durchführen möchten, lesen Sie den Abschnitt [Prioritätsinferenz](https://ai.google.dev/gemini-api/docs/interactions/priority-inference?hl=de).
+灵活流量的处理优先级较低。如果标准流量出现峰值，为了确保高优先级用户的容量，系统可能会抢占或逐出灵活请求。如果您需要高优先级的推理，请查看[优先推理](https://ai.google.dev/gemini-api/docs/interactions/priority-inference?hl=zh-cn)
 
-### Fehlercodes
+### 错误代码
 
-Wenn Flex-Kapazität nicht verfügbar ist oder das System überlastet ist, gibt die API Standardfehlercodes zurück:
+当灵活容量不可用或系统拥塞时，API 将返回标准错误代码：
 
-- **503 Service Unavailable**: Das System ist derzeit ausgelastet.
-- **429 Too Many Requests** (429 Zu viele Anfragen): Ratenbegrenzungen oder Ressourcenerschöpfung.
+- **503 服务不可用**：系统目前已达到容量上限。
+- **429 请求过多**：速率限制或资源耗尽。
 
-### Verantwortung des Kunden
+### 客户责任
 
-- **Kein serverseitiges Fallback**: Um unerwartete Gebühren zu vermeiden, wird eine Flex-Anfrage nicht automatisch auf die Standard-Stufe aktualisiert, wenn die Flex-Kapazität ausgeschöpft ist.
-- **Wiederholungsversuche**: Sie müssen Ihre eigene clientseitige Wiederholungslogik mit exponentiellem Backoff implementieren.
-- **Zeitüberschreitungen**: Da Flex-Anfragen in einer Warteschlange stehen können, empfehlen wir, clientseitige Zeitüberschreitungen auf mindestens 10 Minuten zu erhöhen, um einen vorzeitigen Verbindungsabbruch zu vermeiden.
+- **无服务器端回退**：为避免产生意外费用，如果 Flex 容量已满，系统不会自动将 Flex 请求升级为标准层级。
+- **重试**：您必须实现自己的客户端重试逻辑，并使用指数退避算法。
+- **超时**：由于 Flex 请求可能会排队，我们建议将客户端超时时间增加到 10 分钟或更长时间，以避免过早关闭连接。
 
-## Zeitüberschreitungszeiträume anpassen
+## 调整超时时间范围
 
-Sie können Zeitüberschreitungen pro Anfrage für die REST API und Clientbibliotheken konfigurieren.
-Achten Sie immer darauf, dass das clientseitige Zeitlimit das vorgesehene Server-Patience-Fenster abdeckt (z.B. 600 Sekunden und mehr für Flex-Warteschlangen). Die SDKs erwarten Zeitlimitwerte in Millisekunden.
+您可以为 REST API 和客户端库配置每个请求的超时时间。
+请务必确保客户端超时时间涵盖预期的服务器耐心等待时间（例如，对于 Flex 等待队列，超时时间应为 600 秒以上）。SDK 需要以毫秒为单位的超时值。
 
-### Zeitlimits für Anfragen
+### 每个请求的超时时间
 
 ### Python
 
@@ -168,9 +172,9 @@ async function main() {
 await main();
 ```
 
-## Wiederholungsversuche implementieren
+## 实现重试
 
-Da Flex abwerfbar ist und mit 503-Fehlern fehlschlägt, finden Sie hier ein Beispiel für die optionale Implementierung einer Wiederholungslogik, um mit fehlgeschlagenen Anfragen fortzufahren:
+由于 Flex 是可舍弃的，并且会因失败而返回 503 错误，因此以下示例展示了如何选择性地实现重试逻辑，以继续处理失败的请求：
 
 ### Python
 
@@ -251,35 +255,35 @@ async function main() {
 await main();
 ```
 
-## Preise
+## 价格
 
-Die Flex-Inferenz kostet 50% der [Standard-API](https://ai.google.dev/gemini-api/docs/pricing?hl=de) und wird pro Token abgerechnet.
+灵活推理的价格为[标准 API](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn) 的 50%，按 token 收费。
 
-## Unterstützte Modelle
+## 支持的模型
 
-Die folgenden Modelle unterstützen die Flex-Inferenz:
+以下模型支持 Flex 推理：
 
-| Modell | Flex-Inferenz |
+| 模型 | Flex 推理 |
 | --- | --- |
-| [Gemini 3.1 Flash Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=de) | ✔️ |
-| [Gemini 3.1 Flash Lite (Vorschau)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=de) | ✔️ |
-| [Gemini 3.1 Pro (Vorabversion)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=de) | ✔️ |
-| [Gemini 3 Flash (Vorabversion)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=de) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=de) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=de) | ✔️ |
-| [Gemini 2.5 Flash Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=de) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-cn) | ✔️ |
+| [Gemini 3.1 Flash-Lite 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=zh-cn) | ✔️ |
+| [Gemini 3.1 Pro 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-cn) | ✔️ |
+| [Gemini 3 Flash 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-cn) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-cn) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=zh-cn) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-cn) | ✔️ |
 
-## Nächste Schritte
+## 后续步骤
 
-- [Prioritätsinferenz](https://ai.google.dev/gemini-api/docs/interactions/priority-inference?hl=de) für extrem niedrige Latenz.
-- [Tokens](https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=de): Informationen zu Tokens.
+- [优先推理](https://ai.google.dev/gemini-api/docs/interactions/priority-inference?hl=zh-cn)，实现超低延迟。
+- [token](https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=zh-cn)：了解 token。
 
-Feedback geben
+发送反馈
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Zuletzt aktualisiert: 2026-05-09 (UTC).
+最后更新时间 (UTC)：2026-05-12。
 
-Haben Sie Feedback für uns?
+需要向我们提供更多信息？
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-05-09 (UTC)."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-05-12。"],[],[]]

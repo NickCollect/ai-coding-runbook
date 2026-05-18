@@ -1,45 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=he
-fetched_at: 2026-05-11T04:58:27.988413+00:00
-title: "Gemini \u200e2.5 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=it
+fetched_at: 2026-05-18T05:11:48.241098+00:00
+title: "Gemini 2.5 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-שליחת משוב
+Invia feedback
 
-# Gemini ‎2.5 Flash
+# Gemini 2.5 Flash
 
-המודל הכי טוב שלנו מבחינת יחס מחיר-ביצועים, עם יכולות מגוונות. ‫2.5 Flash הוא המודל הכי טוב לעיבוד בקנה מידה גדול, לזמן אחזור נמוך, למשימות בהיקף גדול שדורשות חשיבה ולתרחישי שימוש אקטיביים.
+Il nostro miglior modello in termini di rapporto prezzo/prestazioni, che offre funzionalità
+complete. 2.5 Flash è ideale per l'elaborazione su larga scala, la bassa latenza, le attività ad alto volume che richiedono ragionamento e i casi d'uso agentici.
 
-[לניסיון ב-Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash&hl=he)
+[Prova in Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash&hl=it)
 
 ## gemini-2.5-flash
 
-| נכס | תיאור |
+| Proprietà | Descrizione |
 | --- | --- |
-| id\_cardקוד מודל | `gemini-2.5-flash` |
-| saveסוגי נתונים נתמכים | **קלטים**  טקסט, תמונות, סרטונים, אודיו  **פלט**  טקסט |
-| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  1,048,576  **מגבלת אסימונים בפלט**  65,536 |
-| handymanיכולות | **יצירת אודיו**  לא נתמך  ‫**Batch API**  נתמך  **שמירת נתונים במטמון**  נתמך  **ביצוע קוד**  נתמך  **חיפוש קבצים**  נתמך  **הסקת מסקנות גמישה**  נתמך  **בקשה להפעלת פונקציה**  נתמך  **עיגון בעזרת מפות Google**  נתמך  **יצירת תמונות**  לא נתמך  ‫**Live API**  לא נתמך  **היקש בעדיפות גבוהה**  נתמך  **חיפוש עם עיגון בנתונים**  נתמך  **פלטים מובְנים**  נתמך  **תהליך החשיבה**  נתמך  **הקשר של כתובת ה-URL**  נתמך |
-| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - יציב: `gemini-2.5-flash` - כיבוי: [`gemini-2.5-flash-preview-09-2025`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-09-2025?hl=he) |
-| calendar\_monthהעדכון האחרון | יוני 2025 |
-| cognition\_2תאריך סף הידע | ינואר 2025 |
+| Codice modello id\_card | `gemini-2.5-flash` |
+| saveTipi di dati supportati | **Input**  Testo, immagini, video, audio  **Output**  Testo |
+| token\_autoLimiti dei token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=it) | **Limite di token di input**  1.048.576  **Limite di token di output**  65.536 |
+| handymanFunzionalità | **Generazione di audio**  Non supportato  **API batch**  Supportato  **Memorizzazione nella cache**  Supportato  **Esecuzione di codice**  Supportato  **Ricerca file**  Supportato  **Inferenza flessibile**  Supportato  **Chiamata di funzione**  Supportato  **Grounding con Google Maps**  Supportato  **Generazione di immagini**  Non supportato  **API Live**  Non supportato  **Inferenza della priorità**  Supportato  **Fondatezza della Ricerca**  Supportato  **Output strutturati**  Supportato  **Ragionamento**  Supportato  **Contesto URL**  Supportato |
+| Versioni 123 | Per ulteriori dettagli, leggi i [pattern delle versioni del modello](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it#model-versions).  - Stabile: `gemini-2.5-flash` - Arresto: [`gemini-2.5-flash-preview-09-2025`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-09-2025?hl=it) |
+| calendar\_monthUltimo aggiornamento | Giugno 2025 |
+| cognition\_2Knowledge cutoff | Gennaio 2025 |
 
-שליחת משוב
+Invia feedback
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-עדכון אחרון: 2026-04-29 (שעון UTC).
+Ultimo aggiornamento 2026-04-29 UTC.
 
-רוצה לתת לנו משוב?
+Vuoi dirci altro?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]

@@ -1,36 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/quickstart?hl=zh-TW
-fetched_at: 2026-05-11T05:05:52.576492+00:00
-title: "Gemini API \u5feb\u901f\u5165\u9580\u5c0e\u89bd\u8ab2\u7a0b \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/quickstart?hl=vi
+fetched_at: 2026-05-18T05:13:30.472577+00:00
+title: "B\u1eaft \u0111\u1ea7u nhanh API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-提供意見
+Gửi ý kiến phản hồi
 
-# Gemini API 快速入門導覽課程
+# Bắt đầu nhanh API Gemini
 
-本快速入門導覽課程說明如何安裝[程式庫](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-tw)，並發出第一個 Gemini API 要求。
+Hướng dẫn bắt đầu nhanh này cho bạn biết cách cài đặt [các thư viện](https://ai.google.dev/gemini-api/docs/libraries?hl=vi) của chúng tôi và thực hiện yêu cầu API đầu tiên đối với Gemini API.
 
-## 事前準備
+## Trước khi bắt đầu
 
-使用 Gemini API 時需要 API 金鑰，您可以免費建立金鑰，然後開始使用。
+Để sử dụng Gemini API, bạn cần có một khoá API để xác thực các yêu cầu, thực thi giới hạn bảo mật và theo dõi mức sử dụng cho tài khoản của bạn.
 
-[建立 Gemini API 金鑰](https://aistudio.google.com/app/apikey?hl=zh-tw)
+Tạo một dự án trên AI Studio miễn phí để bắt đầu:
 
-## 安裝 Google GenAI SDK
+[Tạo khoá Gemini API](https://aistudio.google.com/app/apikey?hl=vi)
+
+## Cài đặt Google GenAI SDK
 
 ### Python
 
-使用 [Python 3.9 以上版本](https://www.python.org/downloads/)，透過下列 [pip 指令](https://packaging.python.org/en/latest/tutorials/installing-packages/)安裝 [`google-genai` 套件](https://pypi.org/project/google-genai/)：
+Khi dùng [Python 3.9 trở lên](https://www.python.org/downloads/), hãy cài đặt gói [`google-genai`](https://pypi.org/project/google-genai/) bằng [lệnh pip](https://packaging.python.org/en/latest/tutorials/installing-packages/) sau:
 
 ```
 pip install -q -U google-genai
@@ -38,7 +40,7 @@ pip install -q -U google-genai
 
 ### JavaScript
 
-使用 [Node.js v18 以上版本](https://nodejs.org/en/download/package-manager)，透過下列 [npm 指令](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)安裝 [Google Gen AI SDK for TypeScript and JavaScript](https://www.npmjs.com/package/@google/genai)：
+Sử dụng [Node.js phiên bản 18 trở lên](https://nodejs.org/en/download/package-manager), hãy cài đặt [Google Gen AI SDK cho TypeScript và JavaScript](https://www.npmjs.com/package/@google/genai) bằng [lệnh npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) sau:
 
 ```
 npm install @google/genai
@@ -46,7 +48,7 @@ npm install @google/genai
 
 ### Go
 
-在模組目錄中，使用 [go get 指令](https://go.dev/doc/code)安裝 [google.golang.org/genai](https://pkg.go.dev/google.golang.org/genai)：
+Cài đặt [google.golang.org/genai](https://pkg.go.dev/google.golang.org/genai) trong thư mục mô-đun bằng [lệnh go get](https://go.dev/doc/code):
 
 ```
 go get google.golang.org/genai
@@ -54,7 +56,7 @@ go get google.golang.org/genai
 
 ### Java
 
-如果您使用 Maven，可以將下列項目新增至依附元件，安裝 [google-genai](https://github.com/googleapis/java-genai)：
+Nếu đang sử dụng Maven, bạn có thể cài đặt [google-genai](https://github.com/googleapis/java-genai) bằng cách thêm nội dung sau vào các phần phụ thuộc:
 
 ```
 <dependencies>
@@ -68,7 +70,7 @@ go get google.golang.org/genai
 
 ### C#
 
-使用 [dotnet add 指令](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-package-add)，在模組目錄中安裝 [googleapis/go-genai](https://googleapis.github.io/dotnet-genai/)
+Cài đặt [googleapis/go-genai](https://googleapis.github.io/dotnet-genai/) trong thư mục mô-đun bằng [lệnh dotnet add](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-package-add)
 
 ```
 dotnet add package Google.GenAI
@@ -76,24 +78,30 @@ dotnet add package Google.GenAI
 
 ### Apps Script
 
-1. 如要建立新的 Apps Script 專案，請前往 [script.new](https://script.google.com/u/0/home/projects/create?hl=zh-tw)。
-2. 按一下「未命名的專案」。
-3. 將 Apps Script 專案重新命名為「AI Studio」，然後按一下「重新命名」。
-4. 設定 [API 金鑰](https://developers.google.com/apps-script/guides/properties?hl=zh-tw#manage_script_properties_manually)
-   1. 按一下左側的「專案設定」圖示 ![專案設定圖示](https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/settings/default/24px.svg)。
-   2. 在「指令碼屬性」下方，按一下「新增指令碼屬性」。
-   3. 在「Property」(屬性) 中輸入金鑰名稱：`GEMINI_API_KEY`。
-   4. 在「Value」(值) 部分輸入 API 金鑰的值。
-   5. 按一下「儲存指令碼屬性」。
-5. 將 `Code.gs` 檔案內容替換成下列程式碼：
+1. Để tạo một dự án Apps Script mới, hãy truy cập vào [script.new](https://script.google.com/u/0/home/projects/create?hl=vi).
+2. Nhấp vào **Dự án chưa có tiêu đề**.
+3. Đổi tên dự án Apps Script thành **AI Studio** rồi nhấp vào **Rename** (Đổi tên).
+4. Đặt [khoá API](https://developers.google.com/apps-script/guides/properties?hl=vi#manage_script_properties_manually)
+   1. Ở bên trái, hãy nhấp vào **Cài đặt dự án** ![Biểu tượng cho chế độ cài đặt dự án](https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/settings/default/24px.svg).
+   2. Trong phần **Script Properties** (Thuộc tính tập lệnh), hãy nhấp vào **Add script property** (Thêm thuộc tính tập lệnh).
+   3. Đối với **Thuộc tính**, hãy nhập tên khoá: `GEMINI_API_KEY`.
+   4. Đối với **Giá trị**, hãy nhập giá trị cho khoá API.
+   5. Nhấp vào **Lưu thuộc tính của tập lệnh**.
+5. Thay thế nội dung tệp `Code.gs` bằng đoạn mã sau:
 
-## 發出第一項要求
+## Tạo yêu cầu đầu tiên
 
-以下範例使用 [`generateContent`](https://ai.google.dev/api/generate-content?hl=zh-tw#method:-models.generatecontent) 方法，透過 Gemini 2.5 Flash 模型傳送要求至 Gemini API。
+Bạn có thể dùng 2 cách để gửi yêu cầu đến Gemini API:
 
-如果您[將 API 金鑰設為](https://ai.google.dev/gemini-api/docs/api-key?hl=zh-tw#set-api-env-var)環境變數 `GEMINI_API_KEY`，使用 [Gemini API 程式庫](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-tw)時，用戶端會自動擷取該金鑰。否則，您需要在初始化用戶端時[傳遞 API 金鑰](https://ai.google.dev/gemini-api/docs/api-key?hl=zh-tw#provide-api-key-explicitly)做為引數。
+- ***(Nên dùng)*** [Interactions API](https://ai.google.dev/api/interactions-api?hl=vi) là một nguyên tắc cơ bản mới có hỗ trợ gốc cho việc sử dụng công cụ nhiều bước, điều phối và các luồng suy luận phức tạp thông qua các bước thực thi được nhập. Trong tương lai, các mô hình mới ngoài dòng sản phẩm cốt lõi, cùng với các công cụ và khả năng của tác nhân AI mới, sẽ chỉ ra mắt trên Interactions API.
+- [`generateContent`](https://ai.google.dev/api/generate-content?hl=vi#method:-models.generatecontent) cung cấp một cách để tạo câu trả lời đơn giản, không có trạng thái từ một mô hình. Mặc dù bạn nên sử dụng Interactions API, nhưng `generateContent` vẫn được hỗ trợ đầy đủ.
 
-請注意，Gemini API 文件中的所有程式碼範例，都假設您已設定環境變數 `GEMINI_API_KEY`。
+Ví dụ này sử dụng phương thức [`generateContent`](https://ai.google.dev/api/generate-content?hl=vi#method:-models.generatecontent) để gửi yêu cầu đến Gemini API bằng mô hình Gemini 2.5 Flash.
+
+Nếu bạn [đặt khoá API](https://ai.google.dev/gemini-api/docs/api-key?hl=vi#set-api-env-var) làm biến môi trường `GEMINI_API_KEY`, thì ứng dụng sẽ tự động chọn khoá này khi sử dụng [Thư viện Gemini API](https://ai.google.dev/gemini-api/docs/libraries?hl=vi).
+Nếu không, bạn sẽ cần [truyền khoá API](https://ai.google.dev/gemini-api/docs/api-key?hl=vi#provide-api-key-explicitly) làm đối số khi khởi chạy ứng dụng.
+
+Xin lưu ý rằng tất cả các mẫu mã trong tài liệu về Gemini API đều giả định rằng bạn đã đặt biến môi trường `GEMINI_API_KEY`.
 
 ### Python
 
@@ -258,24 +266,24 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
   }'
 ```
 
-## 後續步驟
+## Bước tiếp theo
 
-您已發出第一項 API 要求，現在不妨參考下列指南，瞭解 Gemini 的實際運作方式：
+Giờ đây, khi đã thực hiện yêu cầu API đầu tiên, bạn có thể muốn khám phá các hướng dẫn sau đây cho thấy Gemini đang hoạt động:
 
-- [生成文字](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-tw)
-- [圖像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw)
-- [圖像解讀](https://ai.google.dev/gemini-api/docs/image-understanding?hl=zh-tw)
-- [思考型](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-tw)
-- [函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)
-- [長篇脈絡資訊](https://ai.google.dev/gemini-api/docs/long-context?hl=zh-tw)
-- [嵌入](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-tw)
+- [Tạo văn bản](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi)
+- [Tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi)
+- [Hiểu hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi)
+- [Tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi)
+- [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi)
+- [Ngữ cảnh dài](https://ai.google.dev/gemini-api/docs/long-context?hl=vi)
+- [Vectơ nhúng](https://ai.google.dev/gemini-api/docs/embeddings?hl=vi)
 
-提供意見
+Gửi ý kiến phản hồi
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-上次更新時間：2026-05-07 (世界標準時間)。
+Cập nhật lần gần đây nhất: 2026-05-11 UTC.
 
-想進一步說明嗎？
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-07 (世界標準時間)。"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-11 UTC."],[],[]]

@@ -1,30 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/google-search?hl=ar
-fetched_at: 2026-05-11T05:00:22.015273+00:00
+source_url: https://ai.google.dev/gemini-api/docs/google-search?hl=vi
+fetched_at: 2026-05-18T05:17:31.760943+00:00
 title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-إرسال ملاحظات
+Gửi ý kiến phản hồi
 
-# تحديد المصدر من خلال "بحث Google"
+# Dựa trên kết quả của Google Tìm kiếm
 
-يربط تحديد المصدر من خلال "بحث Google" نموذج Gemini بمحتوى الويب في الوقت الفعلي ويتوافق مع جميع اللغات المتاحة. ويسمح ذلك لـ Gemini بتقديم إجابات أكثر دقة والاستشهاد بمصادر يمكن التحقّق منها تتجاوز تاريخ آخر تحديث للبيانات.
+Tính năng Bám sát nguồn bằng Google Tìm kiếm kết nối mô hình Gemini với nội dung trên web theo thời gian thực và hoạt động với tất cả các ngôn ngữ hiện có. Điều này cho phép Gemini đưa ra câu trả lời chính xác hơn và trích dẫn các nguồn có thể xác minh ngoài điểm cắt kiến thức.
 
-يساعدك تحديد المصدر في إنشاء تطبيقات يمكنها إجراء ما يلي:
+Tính năng liên kết thực tế giúp bạn xây dựng các ứng dụng có thể:
 
-- **زيادة الدقة الوقائعية:** تقليل حالات الهلوسة في النموذج من خلال استناد الردود إلى معلومات واقعية.
-- **الوصول إلى المعلومات في الوقت الفعلي:** الإجابة عن الأسئلة حول الأحداث والمواضيع الحديثة.
-- **تقديم الاقتباسات:** تعزيز ثقة المستخدمين من خلال عرض مصادر ادعاءات النموذج.
+- **Tăng độ chính xác về thông tin thực tế:** Giảm tình trạng ảo tưởng của mô hình bằng cách dựa vào thông tin thực tế để đưa ra câu trả lời.
+- **Truy cập thông tin theo thời gian thực:** Trả lời các câu hỏi về các sự kiện và chủ đề gần đây.
+- **Cung cấp thông tin trích dẫn:** Xây dựng niềm tin của người dùng bằng cách cho thấy nguồn của các tuyên bố của mô hình.
 
 ### Python
 
@@ -98,23 +98,23 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
   }'
 ```
 
-يمكنك الاطّلاع على مزيد من المعلومات من خلال تجربة دفتر ملاحظات [أداة "بحث Google"](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=ar).
+Bạn có thể tìm hiểu thêm bằng cách dùng [sổ tay công cụ Tìm kiếm](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=vi).
 
-## طريقة عمل تحديد المصدر من خلال "بحث Google"
+## Cách hoạt động của tính năng bám sát nguồn bằng Google Tìm kiếm
 
-عند تفعيل أداة `google_search`، يعالج النموذج تلقائيًا سير العمل بالكامل للبحث عن المعلومات ومعالجتها والاستشهاد بها.
+Khi bạn bật công cụ `google_search`, mô hình sẽ tự động xử lý toàn bộ quy trình tìm kiếm, xử lý và trích dẫn thông tin.
 
-![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=ar)
+![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=vi)
 
-1. **طلب المستخدم:** يرسل تطبيقك طلبًا من المستخدم إلى Gemini API مع تفعيل أداة `google_search`.
-2. **تحليل الطلب:** يحلّل النموذج الطلب ويحدّد ما إذا كان بإمكان "بحث Google" تحسين الإجابة.
-3. **بحث Google:** إذا لزم الأمر، ينشئ النموذج تلقائيًا طلب بحث واحدًا أو أكثر وينفّذها.
-4. **معالجة نتائج البحث:** يعالج النموذج نتائج البحث ويجمع المعلومات ويصوغ ردًا.
-5. **الرد المستند إلى المصدر:** تعرض واجهة برمجة التطبيقات ردًا نهائيًا سهل الاستخدام يستند إلى نتائج البحث. يتضمّن هذا الرد الإجابة النصية للنموذج و`groundingMetadata` التي تتضمّن طلبات البحث ونتائج الويب والاقتباسات.
+1. **Câu lệnh của người dùng:** Ứng dụng của bạn gửi câu lệnh của người dùng đến Gemini API khi bật công cụ `google_search`.
+2. **Phân tích câu lệnh:** Mô hình phân tích câu lệnh và xác định xem Google Tìm kiếm có thể cải thiện câu trả lời hay không.
+3. **Google Tìm kiếm:** Nếu cần, mô hình sẽ tự động tạo một hoặc nhiều cụm từ tìm kiếm và thực hiện các cụm từ đó.
+4. **Xử lý kết quả tìm kiếm:** Mô hình xử lý kết quả tìm kiếm, tổng hợp thông tin và đưa ra câu trả lời.
+5. **Câu trả lời có căn cứ:** API trả về một câu trả lời cuối cùng, thân thiện với người dùng và dựa trên kết quả tìm kiếm. Phản hồi này bao gồm câu trả lời bằng văn bản của mô hình và `groundingMetadata` cùng với các cụm từ tìm kiếm, kết quả trên web và trích dẫn.
 
-## فهم تحديد المصدر
+## Tìm hiểu về câu trả lời dựa trên thông tin thực tế
 
-عندما يتم تحديد مصدر الرد بنجاح، يتضمّن الرد حقل `groundingMetadata`. هذه البيانات المنظَّمة ضرورية للتحقّق من الادعاءات وإنشاء تجربة اقتباس غنية في تطبيقك.
+Khi một câu trả lời được căn cứ thành công, câu trả lời đó sẽ có trường `groundingMetadata`. Dữ liệu có cấu trúc này là yếu tố cần thiết để xác minh các tuyên bố và tạo trải nghiệm trích dẫn phong phú trong ứng dụng của bạn.
 
 ```
 {
@@ -156,20 +156,18 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 }
 ```
 
-تعرض Gemini API المعلومات التالية مع `groundingMetadata`:
+Gemini API trả về thông tin sau bằng `groundingMetadata`:
 
-- `webSearchQueries` : مصفوفة من طلبات البحث المستخدَمة. تكون هذه الميزة مفيدة لتحديد الأخطاء وفهم عملية الاستدلال في النموذج.
-- `searchEntryPoint` : يحتوي على HTML وCSS لعرض "اقتراحات البحث" المطلوبة. يتم تفصيل متطلبات الاستخدام الكاملة في [بنود
-  الخدمة](https://ai.google.dev/gemini-api/terms?hl=ar#grounding-with-google-search).
-- `groundingChunks` : مصفوفة من الكائنات التي تحتوي على مصادر الويب (`uri` و`title`).
-- `groundingSupports` : مصفوفة من الأجزاء لربط `text` الردّ من النموذج بالمصادر في `groundingChunks`. يربط كل جزء `segment` نصًا (محدّدًا من خلال `startIndex` و`endIndex`) بواحد أو أكثر من `groundingChunkIndices`. هذا هو المفتاح لإنشاء اقتباسات مضمّنة.
+- `webSearchQueries` : Mảng gồm các cụm từ tìm kiếm đã dùng. Điều này hữu ích cho việc gỡ lỗi và tìm hiểu quy trình suy luận của mô hình.
+- `searchEntryPoint` : Chứa HTML và CSS để kết xuất các Đề xuất tìm kiếm bắt buộc. Bạn có thể xem toàn bộ yêu cầu sử dụng trong [Điều khoản dịch vụ](https://ai.google.dev/gemini-api/terms?hl=vi#grounding-with-google-search).
+- `groundingChunks` : Mảng các đối tượng chứa nguồn trên web (`uri` và `title`).
+- `groundingSupports` : Mảng các đoạn để kết nối phản hồi của mô hình `text` với các nguồn trong `groundingChunks`. Mỗi đoạn liên kết một văn bản `segment` (do `startIndex` và `endIndex` xác định) với một hoặc nhiều `groundingChunkIndices`. Đây là chìa khoá để tạo chú thích trong dòng.
 
-يمكن أيضًا استخدام تحديد المصدر من خلال "بحث Google" مع أداة سياق [عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar) لتحديد مصدر الردود في كلّ من بيانات الويب
-العلنية وعناوين URL المحدّدة التي تقدّمها.
+Bạn cũng có thể sử dụng tính năng Bám sát nguồn bằng Google Tìm kiếm kết hợp với [công cụ ngữ cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi) để bám sát nguồn câu trả lời bằng cả dữ liệu trên web công khai và các URL cụ thể mà bạn cung cấp.
 
-## إسناد المصادر من خلال الاقتباسات المضمّنة
+## Ghi nguồn bằng trích dẫn cùng dòng
 
-تعرض واجهة برمجة التطبيقات بيانات اقتباس منظَّمة، ما يمنحك تحكّمًا كاملاً في طريقة عرض المصادر في واجهة المستخدم. يمكنك استخدام الحقلَين `groundingSupports` و`groundingChunks` لربط عبارات النموذج مباشرةً بمصادرها. في ما يلي نمط شائع لمعالجة البيانات الوصفية لإنشاء ردّ يتضمّن اقتباسات مضمّنة قابلة للنقر.
+API này trả về dữ liệu trích dẫn có cấu trúc, giúp bạn kiểm soát hoàn toàn cách hiển thị nguồn trong giao diện người dùng. Bạn có thể sử dụng các trường `groundingSupports` và `groundingChunks` để liên kết trực tiếp các câu của mô hình với nguồn của chúng. Sau đây là một mẫu phổ biến để xử lý siêu dữ liệu nhằm tạo một phản hồi có các trích dẫn có thể nhấp vào trong dòng.
 
 ### Python
 
@@ -244,58 +242,54 @@ const textWithCitations = addCitations(response);
 console.log(textWithCitations);
 ```
 
-سيظهر الردّ الجديد الذي يتضمّن اقتباسات مضمّنة على النحو التالي:
+Câu trả lời mới có trích dẫn nội dòng sẽ có dạng như sau:
 
 ```
 Spain won Euro 2024, defeating England 2-1 in the final.[1](https:/...), [2](https:/...), [4](https:/...), [5](https:/...) This victory marks Spain's record-breaking fourth European Championship title.[5]((https:/...), [2](https:/...), [3](https:/...), [4](https:/...)
 ```
 
-## الأسعار
+## Giá
 
-عند استخدام تحديد المصدر من خلال "بحث Google" مع Gemini 3، يتم تحصيل رسوم من مشروعك مقابل كل طلب بحث يقرّر النموذج تنفيذه. إذا قرّر النموذج تنفيذ طلبات بحث متعددة للردّ على طلب واحد (على سبيل المثال، البحث عن `"UEFA Euro 2024 winner"` و`"Spain vs England Euro 2024 final
-score"` ضمن طلب بيانات من واجهة برمجة التطبيقات نفسه)، يتم احتساب ذلك كاستخدامَين قابلَين للفوترة للأداة لهذا الطلب. لأغراض الفوترة، نتجاهل طلبات البحث الفارغة على الويب عند احتساب الطلبات الفريدة. لا ينطبق نموذج الفوترة هذا إلا على نماذج Gemini 3. عند استخدام تحديد المصدر من خلال "بحث Google" مع Gemini 2.5 أو النماذج الأقدم، يتم تحصيل رسوم من مشروعك لكل طلب.
+Khi bạn sử dụng tính năng Bám sát nguồn bằng Google Tìm kiếm với Gemini 3, dự án của bạn sẽ bị tính phí cho mỗi cụm từ tìm kiếm mà mô hình quyết định thực hiện. Nếu mô hình quyết định thực hiện nhiều cụm từ tìm kiếm để trả lời một câu lệnh duy nhất (ví dụ: tìm kiếm `"UEFA Euro 2024 winner"` và `"Spain vs England Euro 2024 final
+score"` trong cùng một lệnh gọi API), thì điều này được tính là hai lần sử dụng công cụ có tính phí cho yêu cầu đó. Để tính phí, chúng tôi bỏ qua các cụm từ tìm kiếm trống trên web khi tính số lượng cụm từ tìm kiếm riêng biệt. Mô hình tính phí này chỉ áp dụng cho các mô hình Gemini 3; khi bạn sử dụng tính năng căn cứ vào kết quả tìm kiếm với Gemini 2.5 hoặc các mô hình cũ hơn, dự án của bạn sẽ được tính phí theo từng câu lệnh.
 
-للحصول على معلومات مفصّلة عن الأسعار، يُرجى الاطّلاع على صفحة [أسعار Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=ar).
+Để biết thông tin chi tiết về giá, hãy xem [trang định giá Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=vi).
 
-## النماذج المتوافقة
+## Mô hình được hỗ trợ
 
-يمكنك الاطّلاع على الإمكانات الكاملة في صفحة نظرة عامة على [النموذج](https://ai.google.dev/gemini-api/docs/models?hl=ar).
+Bạn có thể xem toàn bộ các chức năng trên trang [tổng quan về mẫu](https://ai.google.dev/gemini-api/docs/models?hl=vi).
 
-| الطراز | تحديد المصدر من خلال "بحث Google" |
+| Mô hình | Dựa trên kết quả của Google Tìm kiếm |
 | --- | --- |
 | Gemini 3.1 Flash-Lite | ✔️ |
-| Gemini 3.1 Flash Image Preview | ✔️ |
-| Gemini 3.1 Pro Preview | ✔️ |
-| Gemini 3 Pro Image Preview | ✔️ |
-| Gemini 3 Flash Preview | ✔️ |
-| Gemini 3.1 Flash-Lite Preview | ✔️ |
+| Bản xem trước hình ảnh Gemini 3.1 Flash | ✔️ |
+| Bản xem trước Gemini 3.1 Pro | ✔️ |
+| Bản xem trước hình ảnh của Gemini 3 Pro | ✔️ |
+| Bản xem trước Gemini 3 Flash | ✔️ |
+| Bản xem trước Gemini 3.1 Flash-Lite | ✔️ |
 | Gemini 2.5 Pro | ✔️ |
 | Gemini 2.5 Flash | ✔️ |
 | Gemini 2.5 Flash-Lite | ✔️ |
 | Gemini 2.0 Flash | ✔️ |
 
-## مجموعات الأدوات المتوافقة
+## Các tổ hợp công cụ được hỗ trợ
 
-يمكنك استخدام تحديد المصدر من خلال "بحث Google" مع أدوات أخرى، مثل
-[تنفيذ الرموز](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar) و
-[سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar) لتعزيز حالات الاستخدام الأكثر تعقيدًا.
+Bạn có thể sử dụng tính năng Bám sát nguồn bằng Google Tìm kiếm với các công cụ khác như [thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi) và [bối cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi) để hỗ trợ các trường hợp sử dụng phức tạp hơn.
 
-تتيح نماذج Gemini 3 الجمع بين الأدوات المضمّنة (مثل تحديد المصدر من خلال "بحث Google") والأدوات المخصّصة (استدعاء الدوال). مزيد من المعلومات في صفحة
-[مجموعات الأدوات](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ar).
+Các mô hình Gemini 3 hỗ trợ việc kết hợp các công cụ tích hợp sẵn (chẳng hạn như tính năng Nền tảng kiến thức với Google Tìm kiếm) với các công cụ tuỳ chỉnh (lệnh gọi hàm). Tìm hiểu thêm trên trang [các tổ hợp công cụ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi).
 
-## الخطوات التالية
+## Bước tiếp theo
 
-- [جرِّب تحديد المصدر من خلال "بحث Google" في Gemini API
-  Cookbook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=ar).
-- تعرَّف على الأدوات الأخرى المتاحة، مثل [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar).
-- تعلَّف على كيفية زيادة الطلبات باستخدام عناوين URL محدّدة من خلال أداة [سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar).
+- Hãy thử [Hướng dẫn về việc tiếp cận thông tin thực tế bằng Google Tìm kiếm trong sổ tay về Gemini API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=vi).
+- Tìm hiểu về các công cụ khác hiện có, chẳng hạn như [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi).
+- Tìm hiểu cách tăng cường câu lệnh bằng các URL cụ thể bằng [công cụ bối cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi).
 
-إرسال ملاحظات
+Gửi ý kiến phản hồi
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-تاريخ التعديل الأخير: 2026-05-08 (حسب التوقيت العالمي المتفَّق عليه)
+Cập nhật lần gần đây nhất: 2026-05-13 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-08 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-13 UTC."],[],[]]

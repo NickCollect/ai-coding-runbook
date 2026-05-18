@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-CN
-fetched_at: 2026-05-11T05:07:22.299331+00:00
+source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-TW
+fetched_at: 2026-05-18T05:08:53.127040+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-发送反馈
+提供意見
 
-# 结合使用内置工具和函数调用
+# 結合內建工具和函式呼叫
 
-Gemini 允许在一次生成中组合使用[内置工具](https://ai.google.dev/gemini-api/docs/tools?hl=zh-cn)（例如 `google_search`）和[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)（也称为*自定义工具*），方法是保留并公开工具调用的上下文历史记录。借助内置和自定义工具组合，您可以实现复杂的智能体工作流，例如，模型可以在调用特定业务逻辑之前，先根据实时网络数据确定自己的基础。
+Gemini 支援在單一生成作業中，結合[內建工具](https://ai.google.dev/gemini-api/docs/tools?hl=zh-tw) (例如 `google_search`) 和[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw) (也稱為*自訂工具*)，方法是保留並公開工具呼叫的內容記錄。內建和自訂工具組合可支援複雜的代理功能工作流程，例如模型可先根據即時網路資料建立基準，再呼叫特定商業邏輯。
 
-以下示例展示了如何通过 `google_search` 和自定义函数 `getWeather` 启用内置工具和自定义工具组合：
+以下範例會透過 `google_search` 和自訂函式 `getWeather`，啟用內建和自訂工具組合：
 
 ### Python
 
@@ -396,54 +396,55 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-f
 }'
 ```
 
-## 运作方式
+## 運作方式
 
-Gemini 3 模型使用*工具上下文循环*来启用内置工具和自定义工具组合。借助工具上下文循环，可以保留和公开内置工具的上下文，并在同一调用中逐轮与自定义工具共享该上下文。
+Gemini 3 模型使用*工具脈絡循環*，可啟用內建和自訂工具組合。工具內容循環可保留及公開內建工具的內容，並在同一通話中逐輪與自訂工具共用。
 
-### 启用工具组合
+### 啟用工具組合
 
-- 您必须将 `include_server_side_tool_invocations` 标志设置为 `true`，才能启用工具上下文循环。
-- 包含 [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn#function-declarations) 以及您要使用的内置工具，以触发组合行为。
-  - 如果您未添加 `function_declarations`，只要设置了该标志，工具上下文循环仍会作用于所包含的内置工具。
+- 您必須將 `include_server_side_tool_invocations` 旗標設為 `true`，才能啟用工具情境流通。
+- 加入 [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw#function-declarations)，以及要使用的內建工具，即可觸發組合行為。
+  - 如果未加入 `function_declarations`，只要設定標記，工具環境流通仍會對內建工具生效。
 
-### API 返回部分
+### API 會傳回零件
 
-在单个响应中，该 API 会返回内置工具调用的 `toolCall` 和 `toolResponse` 部分。对于函数（自定义工具）调用，API 会返回 `functionCall` 调用部分，用户会在下一轮中提供 `functionResponse` 部分。
+在單一回應中，API 會傳回內建工具呼叫的 `toolCall` 和 `toolResponse` 部分。如果是函式 (自訂工具) 呼叫，API 會傳回 `functionCall` 呼叫部分，使用者會在下一個回合中提供 `functionResponse` 部分。
 
-- `toolCall` 和 `toolResponse`：API 会返回这些部分，以保留在服务器端运行的工具的上下文及其执行结果，供下一轮使用。
-- `functionCall` 和 `functionResponse`：API 会将函数调用发送给用户以供填写，用户会在函数响应中将结果发送回来（这些部分是 Gemini API 中所有[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)的标准部分，并非工具组合功能的特有部分）。
-- （仅限[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn)工具）
+- `toolCall` 和 `toolResponse`：API 會傳回這些部分，以保留在伺服器端執行的工具內容，以及這些工具的執行結果，供下一個回合使用。
+- `functionCall` 和 `functionResponse`：API 會將函式呼叫傳送給使用者填寫，使用者則會在函式回應中傳回結果 (這些部分是 Gemini API 中所有[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)的標準做法，並非工具組合功能獨有)。
+- (僅限[程式碼執行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw)工具)
   `executableCode` 和 `codeExecutionResult`：
-  使用代码执行工具时，API 会返回 `executableCode`（模型生成的旨在执行的代码）和 `codeExecutionResult`（可执行代码的结果），而不是 `functionCall` 和 `functionResponse`。
+  使用程式碼執行工具時，API 會傳回 `executableCode` (模型生成的程式碼，用於執行) 和 `codeExecutionResult` (可執行程式碼的結果)，而不是 `functionCall` 和 `functionResponse`。
 
-您必须在每个对话轮次中将所有部分（包括其中包含的所有[字段](#critical-fields)）返回给模型，以保持上下文并启用工具组合。
+您必須在每個回合中將所有部分 (包括所含的所有[欄位](#critical-fields)) 傳回模型，以維持脈絡並啟用工具組合。
 
-### 返回部件中的关键字段
+### 傳回零件中的重要欄位
 
-[API 返回的某些部分](#api-returns-parts)将包含 `id`、`tool_type` 和 `thought_signature` 字段。这些字段对于保持工具上下文（因此对于工具组合至关重要）至关重要；您需要在后续请求中返回所有部分*（如响应中所示）*。
+[API 傳回的特定部分](#api-returns-parts)會包含 `id`、`tool_type` 和 `thought_signature` 欄位。這些欄位對於維護工具內容至關重要 (因此對於工具組合也很重要)，您需要在後續要求中*傳回回應中提供的所有部分*。
 
-- `id`：将调用与其响应相关联的唯一标识符。无论工具上下文循环如何，`id` 都会**在所有函数调用响应中设置**。您*必须*在函数响应中提供与 API 在函数调用中提供的相同的 `id`。内置工具会自动在工具调用和工具响应之间共享 `id`。
-  - 在所有与工具相关的部分中均有：`toolCall`、`toolResponse`、`functionCall`、`functionResponse`、`executableCode`、`codeExecutionResult`
-- `tool_type`：标识所使用的特定工具；内置字面量工具（例如 `URL_CONTEXT`）或函数（例如 `getWeather`）名称。
-  - 可在 `toolCall` 和 `toolResponse` 部分中找到。
-- `thought_signature`：嵌入在 **API 返回的每个部分**中的实际加密上下文。如果不提供思考签名，就无法重建上下文；如果您未在每个对话轮次中返回所有部分的思考签名，模型就会出错。
-  - 在*所有*部分中均有。
+- `id`：將呼叫對應至回應的專屬 ID。無論工具脈絡循環與否，所有函式呼叫回應都會`id`**設定**。您*必須*在函式回應中提供與 API 在函式呼叫中提供的相同 `id`。內建工具會自動在工具呼叫和工具回應之間共用 `id`。
+  - 可在所有工具相關部分找到：`toolCall`、`toolResponse`、`functionCall`、`functionResponse`、`executableCode`、`codeExecutionResult`
+- `tool_type`：識別使用的特定工具；內建工具的常值或 (例如 `URL_CONTEXT`) 或函式 (例如 `getWeather`) 名稱。
+  - 位於 `toolCall` 和 `toolResponse` 部分。
+- `thought_signature`：實際加密的內容，內嵌在 **API 傳回的每個部分**。如果沒有想法簽章，就無法重建背景資訊；如果您未在每個回合中傳回所有部分的想法簽章，模型就會發生錯誤。
+  - 在*所有*部分中找到。
 
-### 工具专用数据
+### 工具專屬資料
 
-某些内置工具会返回特定于工具类型的用户可见数据实参。
+部分內建工具會傳回使用者可見的資料引數，這些引數專屬於工具類型。
 
-| 工具 | 用户可见的工具调用实参（如果有） | 用户可见的工具响应（如果有） |
+| 工具 | 使用者可見的工具呼叫引數 (如有) | 使用者可見的工具回應 (如有) |
 | --- | --- | --- |
 | **GOOGLE\_SEARCH** | `queries` | `search_suggestions` |
 | **GOOGLE\_MAPS** | `queries` | `places` `google_maps_widget_context_token` |
-| **URL\_CONTEXT** | `urls` 要浏览的网址 | `urls_metadata` `retrieved_url`：浏览的网址 `url_retrieval_status`：浏览状态 |
-| **FILE\_SEARCH** | 无 | 无 |
+| **URL\_CONTEXT** | `urls` 要瀏覽的網址 | `urls_metadata` `retrieved_url`：瀏覽的網址 `url_retrieval_status`：瀏覽狀態 |
+| **FILE\_SEARCH** | 無 | 無 |
 
-## 工具组合请求结构示例
+## 工具組合要求結構範例
 
-以下请求结构展示了提示“美国最北端的城市是哪个？”的请求结构。What's the weather like there
-today?"。它结合了三种工具：内置的 Gemini 工具 `google_search` 和 `code_execution`，以及自定义函数 `get_weather`。
+下列要求結構顯示提示的要求結構：「美國最北端的城市是哪裡？What's the weather like there
+today?" 這項工具結合了三種工具：內建的 Gemini 工具 `google_search`
+和 `code_execution`，以及自訂函式 `get_weather`。
 
 ```
 {
@@ -512,48 +513,48 @@ today?"。它结合了三种工具：内置的 Gemini 工具 `google_search` 和
 }
 ```
 
-## 令牌和价格
+## 權杖和價格
 
-请注意，请求中的 `toolCall` 和 `toolResponse` 部分会纳入 `prompt_token_count` 的统计范围。由于这些中间工具步骤现在可见并返回给您，因此它们属于对话历史记录的一部分。这种情况仅适用于*请求*，而不适用于*响应*。
+請注意，要求中的 `toolCall` 和 `toolResponse` 部分會計入 `prompt_token_count`。由於這些中間工具步驟現在會顯示並傳回給您，因此屬於對話記錄的一部分。這只適用於*要求*，不適用於*回應*。
 
-Google 搜索工具不受此规则约束。Google 搜索已在查询级别应用自己的价格模型，因此不会重复收取令牌费用（请参阅[价格](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn)页面）。
+Google 搜尋工具不在此限。Google 搜尋已在查詢層級套用自己的定價模式，因此不會重複收取權杖費用 (請參閱「[定價](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw)」頁面)。
 
-如需了解详情，请参阅[令牌](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn)页面。
+詳情請參閱「[符記](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw)」頁面。
 
 ## 限制
 
-- 如果启用了 `include_server_side_tool_invocations` 标志，则默认采用 `VALIDATED` 模式（不支持 `AUTO` 模式）
-- `google_search` 等内置工具依赖于位置信息和当前时间信息，因此如果 `system_instruction` 或 `function_declaration.description` 的位置信息和时间信息存在冲突，工具组合功能可能无法正常运行。
+- 啟用 `include_server_side_tool_invocations` 旗標時，預設為 `VALIDATED` 模式 (不支援 `AUTO` 模式)
+- `google_search` 等內建工具會根據位置和目前時間資訊運作，因此如果 `system_instruction` 或 `function_declaration.description` 的位置和時間資訊有衝突，工具組合功能可能無法正常運作。
 
-## 支持的工具
+## 支援的工具
 
-标准工具上下文循环适用于服务器端（内置）工具。代码执行也是一种服务器端工具，但它有自己的内置解决方案来处理上下文传递。计算机使用和函数调用是客户端工具，还具有内置的上下文循环解决方案。
+標準工具環境流通適用於伺服器端 (內建) 工具。程式碼執行也是伺服器端工具，但有自己的內建解決方案，可進行脈絡循環。電腦使用和函式呼叫是用戶端工具，也內建解決方案，可循環使用內容。
 
-| 工具 | 执行方 | 上下文传递支持 |
+| 工具 | 執行端 | 支援情境循環 |
 | --- | --- | --- |
-| [Google 搜索](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn) | 服务器端 | 支持 |
-| [Google 地图](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-cn) | 服务器端 | 支持 |
-| [网址上下文](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-cn) | 服务器端 | 支持 |
-| [文件搜索](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-cn) | 服务器端 | 支持 |
-| [代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn) | 服务器端 | 支持（内置，使用 `executableCode` 和 `codeExecutionResult` 零件） |
-| [计算机使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-cn) | 客户端 | 支持（内置，使用 `functionCall` 和 `functionResponse` 零件） |
-| [自定义函数](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn) | 客户端 | 支持（内置，使用 `functionCall` 和 `functionResponse` 零件） |
+| [Google 搜尋](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw) | 伺服器端 | 有權限 |
+| [Google 地圖](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-tw) | 伺服器端 | 有權限 |
+| [網址環境](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw) | 伺服器端 | 有權限 |
+| [檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw) | 伺服器端 | 有權限 |
+| [程式碼執行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw) | 伺服器端 | 支援 (內建，使用 `executableCode` 和 `codeExecutionResult` 部分) |
+| [電腦使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-tw) | 用戶端 | 支援 (內建，使用 `functionCall` 和 `functionResponse` 部分) |
+| [自訂函式](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw) | 用戶端 | 支援 (內建，使用 `functionCall` 和 `functionResponse` 部分) |
 
-## 后续步骤
+## 後續步驟
 
-- 详细了解 Gemini API 中的[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)。
-- 探索支持的工具：
-  - [Google 搜索](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn)
-  - [Google 地图](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-cn)
-  - [网址上下文](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-cn)
-  - [文件搜索](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-cn)
+- 進一步瞭解 Gemini API 中的[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)。
+- 探索支援的工具：
+  - [Google 搜尋](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)
+  - [Google 地圖](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-tw)
+  - [網址環境](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw)
+  - [檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw)
 
-发送反馈
+提供意見
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-最后更新时间 (UTC)：2026-05-07。
+上次更新時間：2026-05-13 (世界標準時間)。
 
-需要向我们提供更多信息？
+想進一步說明嗎？
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-05-07。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-13 (世界標準時間)。"],[],[]]

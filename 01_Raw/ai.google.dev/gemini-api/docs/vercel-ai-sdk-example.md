@@ -1,43 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=vi
-fetched_at: 2026-05-11T04:58:31.919356+00:00
-title: "Market Research Agent (\u0110\u1ea1i l\u00fd nghi\u00ean c\u1ee9u th\u1ecb tr\u01b0\u1eddng) b\u1eb1ng Gemini v\u00e0 AI SDK c\u1ee7a Vercel \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=ko
+fetched_at: 2026-05-18T05:10:02.083737+00:00
+title: "Vercel\uc758 Gemini \ubc0f AI SDK\ub97c \uc0ac\uc6a9\ud558\ub294 \uc2dc\uc7a5 \uc870\uc0ac \uc5d0\uc774\uc804\ud2b8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Gửi ý kiến phản hồi
+의견 보내기
 
-# Market Research Agent (Đại lý nghiên cứu thị trường) bằng Gemini và AI SDK của Vercel
+# Vercel의 Gemini 및 AI SDK를 사용하는 시장 조사 에이전트
 
-[AI SDK của Vercel](https://ai-sdk.dev) là một thư viện mã nguồn mở mạnh mẽ để
-xây dựng các ứng dụng, giao diện người dùng và tác nhân dựa trên AI trong TypeScript.
+[Vercel의 AI SDK](https://ai-sdk.dev)는 TypeScript에서 AI 기반 애플리케이션, 사용자 인터페이스, 에이전트를 빌드하기 위한 강력한 오픈소스 라이브러리입니다.
 
-Hướng dẫn này sẽ hướng dẫn bạn cách xây dựng một ứng dụng Node.js bằng TypeScript sử dụng AI SDK để kết nối với Gemini API thông qua [Nhà cung cấp AI tạo sinh của Google](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai) và thực hiện phân tích xu hướng thị trường tự động. Ứng dụng cuối cùng sẽ:
+이 가이드에서는 AI SDK를 사용하여 [Google 생성형 AI 제공업체](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai)를 통해 Gemini API에 연결하고 자동화된 시장 동향 분석을 실행하는 TypeScript로 Node.js 애플리케이션을 빌드하는 방법을 안내합니다. 최종 애플리케이션은 다음을 수행합니다.
 
-1. Sử dụng Gemini với Google Tìm kiếm để nghiên cứu các xu hướng thị trường hiện tại.
-2. Trích xuất dữ liệu có cấu trúc từ nghiên cứu để tạo biểu đồ.
-3. Kết hợp nghiên cứu và biểu đồ thành một báo cáo HTML chuyên nghiệp và lưu báo cáo đó dưới dạng tệp PDF.
+1. Google 검색과 함께 Gemini를 사용하여 현재 시장 동향을 조사하세요.
+2. 조사에서 구조화된 데이터를 추출하여 차트를 생성합니다.
+3. 연구 결과와 차트를 전문적인 HTML 보고서로 결합하고 PDF로 저장합니다.
 
-## Điều kiện tiên quyết
+## 기본 요건
 
-Để hoàn thành hướng dẫn này, bạn cần:
+이 가이드를 완료하려면 다음이 필요합니다.
 
-- Khoá Gemini API. Bạn có thể tạo một khoá miễn phí trong [Google AI Studio](https://aistudio.google.com/apikey?hl=vi).
-- [Node.js](https://nodejs.org/en/download) phiên bản 18 trở lên.
-- Trình quản lý gói, chẳng hạn như `npm`, `pnpm`, hoặc `yarn`.
+- Gemini API 키 [Google AI Studio](https://aistudio.google.com/apikey?hl=ko)에서 무료로 만들 수 있습니다.
+- [Node.js](https://nodejs.org/en/download) 버전 18 이상
+- `npm`, `pnpm`, `yarn`와 같은 패키지 관리자
 
-## Thiết lập ứng dụng
+## 애플리케이션 설정
 
-Trước tiên, hãy tạo một thư mục mới cho dự án của bạn và khởi chạy thư mục đó.
+먼저 프로젝트의 새 디렉터리를 만들고 초기화합니다.
 
 ### npm
 
@@ -55,7 +54,7 @@ cd market-trend-app
 pnpm init
 ```
 
-### yarn
+### 털실
 
 ```
 mkdir market-trend-app
@@ -63,9 +62,9 @@ cd market-trend-app
 yarn init -y
 ```
 
-### Cài đặt phần phụ thuộc
+### 종속 항목 설치
 
-Tiếp theo, hãy cài đặt AI SDK, nhà cung cấp AI tạo sinh của Google và các phần phụ thuộc cần thiết khác.
+그런 다음 AI SDK, Google 생성형 AI 제공자, 기타 필요한 종속 항목을 설치합니다.
 
 ### npm
 
@@ -74,7 +73,7 @@ npm install ai @ai-sdk/google zod
 npm install -D @types/node tsx typescript && npx tsc --init
 ```
 
-Để ngăn lỗi trình biên dịch TypeScript, hãy nhận xét dòng sau trong `tsconfig.json` đã tạo:
+TypeScript 컴파일러 오류를 방지하려면 생성된 `tsconfig.json`에서 다음 줄을 주석 처리하세요.
 
 ```
 //"verbatimModuleSyntax": true,
@@ -87,20 +86,20 @@ pnpm add ai @ai-sdk/google zod
 pnpm add -D @types/node tsx typescript
 ```
 
-### yarn
+### 털실
 
 ```
 yarn add ai @ai-sdk/google zod
 yarn add -D @types/node tsx typescript && yarn tsc --init
 ```
 
-Để ngăn lỗi trình biên dịch TypeScript, hãy nhận xét dòng sau trong `tsconfig.json` đã tạo:
+TypeScript 컴파일러 오류를 방지하려면 생성된 `tsconfig.json`에서 다음 줄을 주석 처리하세요.
 
 ```
 //"verbatimModuleSyntax": true,
 ```
 
-[Chart.js](https://www.chartjs.org)
+이 애플리케이션은 차트를 렌더링하고 PDF를 만들기 위해 서드 파티 패키지 [Puppeteer](https://pptr.dev/)와 [Chart.js](https://www.chartjs.org)도 사용합니다.
 
 ### npm
 
@@ -116,18 +115,18 @@ pnpm add puppeteer chart.js
 pnpm add -D @types/chart.js
 ```
 
-### yarn
+### 털실
 
 ```
 yarn add puppeteer chart.js
 yarn add -D @types/chart.js
 ```
 
-Gói `puppeteer` yêu cầu chạy một tập lệnh để tải trình duyệt Chromium xuống. Trình quản lý gói có thể yêu cầu bạn phê duyệt, vì vậy hãy đảm bảo bạn phê duyệt tập lệnh khi được nhắc.
+`puppeteer` 패키지를 사용하려면 스크립트를 실행하여 Chromium 브라우저를 다운로드해야 합니다. 패키지 관리자에서 승인을 요청할 수 있으므로 메시지가 표시되면 스크립트를 승인해야 합니다.
 
-### Định cấu hình khoá API
+### API 키 구성
 
-Đặt biến môi trường `GOOGLE_GENERATIVE_AI_API_KEY` bằng khoá Gemini API. Nhà cung cấp AI tạo sinh của Google sẽ tự động tìm khoá API của bạn trong biến môi trường này.
+`GOOGLE_GENERATIVE_AI_API_KEY` 환경 변수를 Gemini API 키로 설정합니다. Google 생성형 AI 제공자는 이 환경 변수에서 API 키를 자동으로 찾습니다.
 
 ### MacOS/Linux
 
@@ -141,11 +140,11 @@ export GOOGLE_GENERATIVE_AI_API_KEY="YOUR_API_KEY_HERE"
 setx GOOGLE_GENERATIVE_AI_API_KEY "YOUR_API_KEY_HERE"
 ```
 
-## Tạo ứng dụng
+## 자체 애플리케이션 구축
 
-Bây giờ, hãy tạo tệp chính cho ứng dụng của chúng ta. Tạo một tệp mới có tên là `main.ts` trong thư mục dự án của bạn. Bạn sẽ xây dựng logic trong tệp này từng bước một.
+이제 애플리케이션의 기본 파일을 만들어 보겠습니다. 프로젝트 디렉터리에 `main.ts`라는 새 파일을 만듭니다. 이 파일에서 로직을 단계별로 빌드합니다.
 
-Để kiểm tra nhanh nhằm đảm bảo mọi thứ được thiết lập đúng cách, hãy thêm mã sau vào `main.ts`. Ví dụ cơ bản này sử dụng `generateText` để nhận câu trả lời đơn giản từ Gemini.
+모든 항목이 올바르게 설정되었는지 빠르게 테스트하려면 `main.ts`에 다음 코드를 추가하세요. 이 기본 예에서는 `generateText`을 사용하여 Gemini로부터 간단한 대답을 가져옵니다.
 
 ```
 import { google } from "@ai-sdk/google";
@@ -163,7 +162,7 @@ async function main() {
 main().catch(console.error);
 ```
 
-Trước khi thêm độ phức tạp, hãy chạy tập lệnh này để xác minh rằng môi trường của bạn được định cấu hình đúng cách. Chạy lệnh sau trong thiết bị đầu cuối:
+더 복잡한 작업을 추가하기 전에 이 스크립트를 실행하여 환경이 올바르게 구성되었는지 확인하세요. 터미널에서 다음 명령어를 실행합니다.
 
 ### npm
 
@@ -177,20 +176,19 @@ npx tsc && node main.js
 pnpm tsx main.ts
 ```
 
-### yarn
+### 털실
 
 ```
 yarn tsc && node main.js
 ```
 
-Nếu mọi thứ được thiết lập đúng cách, bạn sẽ thấy câu trả lời của Gemini được in ra bảng điều khiển.
+모든 항목이 올바르게 설정되면 Gemini의 대답이 콘솔에 출력됩니다.
 
-## Nghiên cứu thị trường bằng Google Tìm kiếm
+## Google 검색으로 시장 조사하기
 
-Để nhận thông tin mới nhất, bạn có thể bật công cụ
-[Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi) cho Gemini. Khi công cụ này hoạt động, mô hình có thể tìm kiếm trên web để trả lời câu lệnh và sẽ trả về các nguồn mà mô hình đã sử dụng.
+최신 정보를 얻으려면 Gemini의 [Google 검색](https://ai.google.dev/gemini-api/docs/google-search?hl=ko) 도구를 사용 설정하세요. 이 도구가 활성화되면 모델이 웹을 검색하여 프롬프트에 답변하고 사용한 소스를 반환합니다.
 
-Thay thế nội dung của `main.ts` bằng mã sau để thực hiện bước đầu tiên trong quá trình phân tích.
+`main.ts`의 콘텐츠를 다음 코드로 바꿔 분석의 첫 번째 단계를 실행합니다.
 
 ```
 import { google } from "@ai-sdk/google";
@@ -216,13 +214,13 @@ async function main() {
 main().catch(console.error);
 ```
 
-## Trích xuất dữ liệu biểu đồ
+## 차트 데이터 추출
 
-Tiếp theo, hãy xử lý văn bản nghiên cứu để trích xuất dữ liệu có cấu trúc phù hợp với biểu đồ. Sử dụng hàm `generateObject` của AI SDK cùng với lược đồ `zod` để xác định cấu trúc dữ liệu chính xác.
+다음으로 연구 텍스트를 처리하여 차트에 적합한 구조화된 데이터를 추출해 보겠습니다. AI SDK의 `generateObject` 함수를 `zod` 스키마와 함께 사용하여 정확한 데이터 구조를 정의합니다.
 
-Ngoài ra, hãy tạo một hàm trợ giúp để chuyển đổi dữ liệu có cấu trúc này thành cấu hình mà `Chart.js` có thể hiểu.
+또한 이 구조화된 데이터를 `Chart.js`가 이해할 수 있는 구성으로 변환하는 도우미 함수를 만듭니다.
 
-Thêm mã sau vào `main.ts`. Lưu ý các lần nhập mới và "Bước 2" đã thêm.
+다음 코드를 `main.ts`에 추가합니다. 새 가져오기와 추가된 '2단계'를 참고하세요.
 
 ```
 import { google } from "@ai-sdk/google";
@@ -304,13 +302,12 @@ ${marketTrends}
 main().catch(console.error);
 ```
 
-## Tạo báo cáo hoàn chỉnh
+## 최종 보고서 생성
 
-Ở bước cuối cùng, hãy hướng dẫn Gemini đóng vai trò là người viết báo cáo chuyên gia.
-Cung cấp cho Gemini nghiên cứu thị trường, cấu hình biểu đồ và một tập hợp hướng dẫn rõ ràng để xây dựng báo cáo HTML. Sau đó, hãy sử dụng
-[Puppeteer](https://pptr.dev/) để kết xuất HTML này và lưu dưới dạng tệp PDF.
+마지막 단계에서는 Gemini가 전문가 보고서 작성자 역할을 하도록 지시합니다.
+시장 조사, 차트 구성, HTML 보고서 빌드를 위한 명확한 지침을 제공합니다. 그런 다음 [Puppeteer](https://pptr.dev/)를 사용하여 이 HTML을 렌더링하고 PDF로 저장합니다.
 
-Thêm lần nhập `puppeteer` cuối cùng và "Bước 3" vào tệp `main.ts`.
+최종 `puppeteer` 가져오기 및 'Step 3'을 `main.ts` 파일에 추가합니다.
 
 ```
 // ... (imports from previous step)
@@ -371,9 +368,9 @@ async function main() {
 main().catch(console.error);
 ```
 
-## Chạy ứng dụng
+## 애플리케이션 실행
 
-Bây giờ, bạn đã sẵn sàng chạy ứng dụng. Thực thi lệnh sau trong thiết bị đầu cuối:
+이제 애플리케이션을 실행할 수 있습니다. 터미널에서 다음 명령어를 실행합니다.
 
 ### npm
 
@@ -387,33 +384,33 @@ npx tsc && node main.js
 pnpm tsx main.ts
 ```
 
-### yarn
+### 털실
 
 ```
 yarn tsc && node main.js
 ```
 
-Bạn sẽ thấy nhật ký trong thiết bị đầu cuối khi tập lệnh thực thi từng bước.
-Sau khi hoàn tất, một tệp `report.pdf` chứa nội dung phân tích thị trường sẽ được tạo trong thư mục dự án của bạn.
+스크립트가 각 단계를 실행하면 터미널에 로깅이 표시됩니다.
+완료되면 시장 분석이 포함된 `report.pdf` 파일이 프로젝트 디렉터리에 생성됩니다.
 
-Dưới đây, bạn sẽ thấy 2 trang đầu tiên của báo cáo PDF mẫu:
+아래는 PDF 보고서의 처음 두 페이지의 예입니다.
 
-![Báo cáo phân tích thị trường](https://ai.google.dev/static/gemini-api/docs/images/market-research-pdf.jpg?hl=vi)
+![시장 분석 보고서](https://ai.google.dev/static/gemini-api/docs/images/market-research-pdf.jpg?hl=ko)
 
-## Tài nguyên khác
+## 추가 자료
 
-Để biết thêm thông tin về cách xây dựng bằng Gemini và AI SDK, hãy khám phá các tài nguyên sau:
+Gemini 및 AI SDK로 빌드하는 방법에 관한 자세한 내용은 다음 리소스를 참고하세요.
 
-- [Tài liệu về AI SDK](https://ai-sdk.dev/docs)
-- [Tài liệu về AI SDK AI tạo sinh của Google](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai)
-- [Sổ tay AI SDK: Bắt đầu sử dụng Gemini](https://ai-sdk.dev/cookbook/guides/gemini)
+- [AI SDK 문서](https://ai-sdk.dev/docs)
+- [AI SDK Google 생성형 AI 문서](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai)
+- [AI SDK 쿡북: Gemini 시작하기](https://ai-sdk.dev/cookbook/guides/gemini)
 
-Gửi ý kiến phản hồi
+의견 보내기
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+최종 업데이트: 2026-05-13(UTC)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+의견을 전달하고 싶나요?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-05-13(UTC)"],[],[]]

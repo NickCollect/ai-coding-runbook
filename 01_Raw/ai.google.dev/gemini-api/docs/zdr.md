@@ -1,61 +1,75 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/zdr?hl=pl
-fetched_at: 2026-05-11T05:08:48.515272+00:00
-title: "Brak przechowywania danych w\u00a0interfejsie Gemini Developer API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/zdr?hl=zh-CN
+fetched_at: 2026-05-18T05:06:02.926511+00:00
+title: "Gemini Developer API \u4e2d\u7684\u96f6\u6570\u636e\u4fdd\u7559 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Prześlij opinię
+发送反馈
 
-# Brak przechowywania danych w interfejsie Gemini Developer API
+# Gemini Developer API 中的零数据保留
 
-Na tej stronie znajdziesz szczegółowe informacje o tzw. „zerowym przechowywaniu danych” w interfejsie Gemini Developer API.
+本页面详细介绍了 Gemini Developer API 中通常所说的“零数据保留”。
 
-## Ograniczenie trenowania
+## 训练限制
 
-Zgodnie z [Warunkami korzystania z Gemini API](https://ai.google.dev/gemini-api/terms?hl=pl), gdy korzystasz z usług płatnych, Google nie używa Twoich promptów (w tym powiązanych instrukcji systemowych, treści w pamięci podręcznej i plików, takich jak obrazy, filmy czy dokumenty) ani odpowiedzi do ulepszania naszych usług. Usługi płatne są zdefiniowane [tutaj](https://ai.google.dev/gemini-api/terms?hl=pl#paid-services).
+如 [Gemini API 服务条款](https://ai.google.dev/gemini-api/terms?hl=zh-cn) 中所述，当您
+使用付费服务时，Google 不会使用您的提示（包括关联的系统
+说明、缓存的内容以及图片、视频或文档等文件）或
+回答来改进我们的产品。付费服务的定义见
+[此处](https://ai.google.dev/gemini-api/terms?hl=zh-cn#paid-services)。
 
-## Przechowywanie danych klientów i osiąganie zerowego poziomu przechowywania danych
+## 客户数据保留和实现零数据保留
 
-Dane klientów są zwykle przechowywane przez ograniczony czas w tych sytuacjach i na tych warunkach: Aby osiągnąć zerowy okres przechowywania danych, klienci muszą podjąć określone działania lub unikać określonych funkcji w każdym z tych obszarów:
+在以下场景和条件下，客户数据通常会保留有限的时间。若要实现零数据保留，客户必须在以下各个方面采取特定措施或避免使用特定功能：
 
-- **Rejestrowanie promptów na potrzeby monitorowania nadużyć**: zgodnie z [Dodatkowymi warunkami korzystania z usług Gemini API](https://ai.google.dev/gemini-api/terms?hl=pl) w przypadku usług płatnych Google rejestruje prompty i odpowiedzi przez ograniczony czas wyłącznie w celu wykrywania naruszeń [zasad dotyczących niedozwolonych zastosowań](https://policies.google.com/terms/generative-ai/use-policy?hl=pl). Gdy Twoja prośba o ZDR w przypadku konkretnego projektu zostanie zatwierdzona, wszystkie treści użytkowników (prompty i odpowiedzi) oraz metadane umożliwiające identyfikację (takie jak adresy IP i identyfikatory kont Google) zostaną usunięte przed rejestrowaniem. Powstały rekord jest oznaczony jako oczyszczony i nie zawiera żadnych danych użytkownika możliwego do zidentyfikowania, co zapewnia zgodność z platformą agentów Gemini Enterprise z zerowym okresem przechowywania danych.
-- **Powiązanie ze źródłem informacji przy użyciu wyszukiwarki Google**: zgodnie z [Dodatkowymi warunkami korzystania z Gemini API](https://ai.google.dev/gemini-api/terms?hl=pl#grounding-with-google-search) Google przechowuje prompty, informacje kontekstowe i wygenerowane dane wyjściowe przez 30 dni w celu tworzenia wyników opartych na powiązaniu ze źródłem informacji i sugestii wyszukiwania.
-  Te zapisane informacje mogą być używane do debugowania i testowania systemów obsługujących uziemienie. **Jeśli korzystasz z powiązania ze źródłem informacji przy użyciu wyszukiwarki Google, nie możesz wyłączyć zapisywania tych informacji.**
-- **Powiązanie ze źródłem informacji przy użyciu Map Google**: zgodnie z [Dodatkowymi warunkami korzystania z Gemini API](https://ai.google.dev/gemini-api/terms?hl=pl) Google przechowuje prompty, informacje kontekstowe i wygenerowane dane wyjściowe przez 30 dni w celu tworzenia powiązanych ze źródłem informacji wyników. Te przechowywane informacje mogą być używane wyłącznie do celów związanych z inżynierią niezawodności, np. do debugowania w przypadku problemów z usługą.
-  **Jeśli korzystasz z powiązania ze źródłem informacji przy użyciu Map Google, nie możesz wyłączyć przechowywania tych informacji.**
-- **Interfejs Interactions API:** zarządza aktywnym stanem rozmowy, aby umożliwić wielokrotne tury. **Domyślnie interfejs Interactions API umożliwia przechowywanie stanu**. Aby zapewnić brak śladu danych, musisz w żądaniach do interfejsu API wyraźnie ustawić parametr `store` na `false`, aby zrezygnować z domyślnego przechowywania stanu.
-- **Live API**: ten interfejs API z zachowywaniem stanu umożliwia ponowne połączenie w czasie rzeczywistym dzięki przechowywaniu stanu rozmowy. Aby osiągnąć zerowy okres przechowywania danych, **nie konfiguruj
-  SessionResumptionConfig**. Jeśli zostanie wygenerowany identyfikator sesji, stan rozmowy (w tym tekst, dźwięk i wideo) jest przechowywany przez maksymalnie 24 godziny.
-- **File API Storage**: interfejs File API umożliwia użytkownikom przesyłanie dużych zasobów.
-  Pliki są przechowywane w stanie spoczynku, dopóki nie zostaną usunięte przez użytkownika lub nie wygasną.
-  Korzystanie z interfejsu File API jest niezależne od rejestrowania ZDR. Aby zapewnić brak śladów danych, użytkownicy muszą ręcznie usuwać pliki.
-- **Jawne buforowanie kontekstu:** użytkownicy mogą ręcznie buforować duże zbiory danych (np. długie filmy lub biblioteki dokumentów) za pomocą pola `cached_content`. Chociaż dzienniki tych żądań są zgodne z zasadami usuwania danych ZDR, sam kontekst zapisany w pamięci podręcznej jest przechowywany z określonym przez użytkownika `ttl` lub `expire_time`. Aby osiągnąć absolutne zero danych, nie korzystaj z funkcji cached\_content.
-- **Niejawne buforowanie w pamięci:** domyślnie modele Gemini buforują dane w pamięci, aby zmniejszyć opóźnienia i koszty dla deweloperów. Te dane są przechowywane wyłącznie w pamięci RAM (nie w spoczynku), są odizolowane na poziomie projektu i mają 24-godzinny czas życia.
-  **Nie narusza to zasady zerowego przechowywania danych.**
+- **用于滥用行为监控的提示日志记录**：如[Gemini API
+  附加服务条款](https://ai.google.dev/gemini-api/terms?hl=zh-cn)中所述，对于付费服务，Google
+  会在有限的一段时间内记录提示和回答，仅用于检测
+  违反[使用限制
+  政策](https://policies.google.com/terms/generative-ai/use-policy?hl=zh-cn)的行为。当您针对特定项目的 ZDR 请求获得批准后，所有用户内容（提示和回答）和可识别的元数据（例如 IP 地址和 Google 账号 ID）都会在记录之前清除。生成的记录会被标记为已清理，并且不包含任何可识别的用户数据，确保与 Gemini Enterprise Agent Platform 零数据保留保持一致。
+- **依托 Google 搜索进行接地**：如[Gemini API 附加
+  服务条款](https://ai.google.dev/gemini-api/terms?hl=zh-cn#grounding-with-google-search)中所述，Google
+  会存储提示、上下文信息和生成的输出内容三十 (30)
+  天，以用于创建有依据的结果和搜索建议。
+  这些存储的信息可用于调试和测试支持接地的系统。**如果您使用“依托 Google 搜索进行接地”，则无法禁止存储此信息。**
+- **Grounding with Google Maps**：如 [Gemini API 附加服务条款](https://ai.google.dev/gemini-api/terms?hl=zh-cn)中所述，Google 会存储提示、上下文信息和生成的输出内容三十 (30) 天，以用于创建有依据的结果。这些存储的信息可能仅用于可靠性工程，例如在出现服务问题时进行调试。**如果您使用“Grounding with Google Maps”，则无法禁止存储此信息。**
+- **Interactions API**：Interactions API 可管理对话的活跃状态，以实现多轮对话。**默认情况下，Interactions API 会启用状态存储** 。为确保零数据足迹，您必须在 API 请求中将 `store` 参数显式设置为 `false`，以选择停用默认状态保留。
+- **Live API**：此有状态 API 通过存储
+  对话状态来实现实时重新连接。若要实现零数据保留，**请勿配置 SessionResumptionConfig** 。如果生成了会话句柄，对话状态（包括文本、音频和视频）最多会保留 24 小时。
+- **File API 存储**：借助 File API，用户可以上传大型素材资源。
+  文件会以静态方式存储，直到用户删除或过期为止。
+  File API 的使用与 ZDR 日志记录无关；用户必须手动删除文件，以确保零数据足迹。
+- **显式上下文缓存**：用户可以使用 `cached_content` 字段手动缓存大型数据集（例如
+  长视频或文档库）。虽然这些请求的日志遵循 ZDR 丢弃政策，但缓存的上下文本身会使用用户定义的 `ttl` 或 `expire_time` 进行存储。若要实现绝对零数据足迹，请勿使用 cached\_content 功能。
+- **隐式内存缓存**：默认情况下，Gemini 模型会将数据缓存在
+  内存中，以缩短延迟时间并降低开发者的费用。此数据严格存储在 RAM 中（而非静态存储），在项目级层进行隔离，并且 TTL 为 24 小时。
+  **这不会违反零数据保留。**
 
-## Co dalej?
+## 后续步骤
 
-- Dowiedz się więcej o [zasadach dotyczących niedozwolonych zastosowań generatywnej AI](https://policies.google.com/terms/generative-ai/use-policy?hl=pl).
-- Zapoznaj się z [Dodatkowymi warunkami korzystania z Gemini API](https://ai.google.dev/gemini-api/terms?hl=pl).
-- Jeśli potrzebujesz ustawień ZDR klasy korporacyjnej, które możesz samodzielnie konfigurować, zapoznaj się z [przewodnikiem po platformie agentów Gemini Enterprise
-  Zero Data Retention](https://cloud.google.com/gemini-enterprise-agent-platform/models/vertex-ai-zero-data-retention?hl=pl).
+- 了解[生成式 AI 使用限制
+  政策](https://policies.google.com/terms/generative-ai/use-policy?hl=zh-cn)。
+- 查看 [Gemini API 附加服务条款](https://ai.google.dev/gemini-api/terms?hl=zh-cn)。
+- 如果您需要企业级自助式 ZDR 控制功能，请参阅 [Gemini Enterprise Agent Platform
+  零数据保留
+  指南](https://cloud.google.com/gemini-enterprise-agent-platform/models/vertex-ai-zero-data-retention?hl=zh-cn)。
 
-Prześlij opinię
+发送反馈
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Ostatnia aktualizacja: 2026-04-29 UTC.
+最后更新时间 (UTC)：2026-04-29。
 
-Chcesz przekazać coś jeszcze?
+需要向我们提供更多信息？
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]

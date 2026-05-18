@@ -1,45 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/crewai-example?hl=ko
-fetched_at: 2026-05-11T05:04:45.352900+00:00
-title: "Gemini \ubc0f CrewAI\ub97c \uc0ac\uc6a9\ud55c \uace0\uac1d \uc9c0\uc6d0 \ubd84\uc11d \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/crewai-example?hl=tr
+fetched_at: 2026-05-18T05:14:11.845624+00:00
+title: "Gemini ve CrewAI ile m\u00fc\u015fteri deste\u011fi analizi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-의견 보내기
+Geri bildirim gönderin
 
-# Gemini 및 CrewAI를 사용한 고객 지원 분석
+# Gemini ve CrewAI ile müşteri desteği analizi
 
-[CrewAI](https://docs.crewai.com/introduction)는 복잡한 목표를 달성하기 위해 협업하는
-자율 AI 에이전트를 조정하기 위한 프레임워크입니다. 역할을 지정하고, 목표를 지정하고, 배경 스토리를 지정하여 에이전트를
-정의한 다음 에이전트의 작업을
-정의할 수 있습니다.
+[CrewAI](https://docs.crewai.com/introduction), karmaşık hedeflere ulaşmak için işbirliği yapan bağımsız yapay zeka aracılarını düzenlemeye yönelik bir çerçevedir. Rolleri, hedefleri ve geçmişleri belirterek aracıları tanımlamanıza ve ardından bunlar için görevler tanımlamanıza olanak tanır.
 
-이 예에서는 Gemini 3 Flash를 사용하여 고객 지원 데이터를 분석하여 문제를 식별하고 프로세스 개선사항을 제안하는 다중 에이전트 시스템을 빌드하는 방법을 보여줍니다. 이 시스템은 최고 운영 책임자 (COO)가 읽을 보고서를 생성합니다.
+Bu örnekte, Gemini 3 Flash kullanarak sorunları belirlemek ve süreç iyileştirmeleri önermek için müşteri desteği verilerini analiz etmeye yönelik çoklu aracı sistemi oluşturma ve bir Operasyon Direktörü (COO) tarafından okunması amaçlanan bir rapor oluşturma işlemi gösterilmektedir.
 
-이 가이드에서는 다음 작업을 실행할 수 있는 AI 에이전트 '크루'를 만드는 방법을 보여줍니다.
+Bu kılavuzda, aşağıdaki görevleri yapabilen bir "ekip" yapay zeka temsilcisi oluşturma adımları açıklanmaktadır:
 
-1. 고객 지원 데이터 가져오기 및 분석 (이 예에서 시뮬레이션됨)
-2. 반복되는 문제 및 프로세스 병목 현상 식별
-3. 실행 가능한 개선사항 제안
-4. COO에게 적합한 간결한 보고서로 발견 항목 컴파일
+1. Müşteri desteği verilerini getirme ve analiz etme (bu örnekte simüle edilmiştir).
+2. Tekrarlanan sorunları ve süreçlerdeki darboğazları belirleyin.
+3. Uygulanabilir iyileştirmeler önerin.
+4. Bulguları, COO için uygun olan kısa bir raporda derleyin.
 
-Gemini API 키가 필요합니다. 아직 키가 없으면 [Google AI Studio에서
-키를 가져올 수 있습니다](https://aistudio.google.com/app/apikey?hl=ko).
+Gemini API anahtarına ihtiyacınız vardır. Henüz bir hesabınız yoksa [Google AI Studio'da hesap oluşturabilirsiniz](https://aistudio.google.com/app/apikey?hl=tr).
 
 ```
 pip install "crewai[tools]"
 ```
 
-Gemini API 키를 `GEMINI_API_KEY`라는 환경 변수로 설정한 다음 Gemini 모델을 사용하도록 CrewAI를 구성합니다.
+Gemini API anahtarınızı `GEMINI_API_KEY` adlı bir ortam değişkeni olarak ayarlayın, ardından CrewAI'yı Gemini modelini kullanacak şekilde yapılandırın.
 
 ```
 import os
@@ -54,15 +50,13 @@ gemini_llm = LLM(
 )
 ```
 
-## 구성요소 정의
+## Bileşenleri tanımlama
 
-**도구**, **에이전트**, **태스크**, 그리고
-**크루** 자체를 사용하여 CrewAI 애플리케이션을 빌드합니다. 다음 섹션에서는 이러한 각 구성요소를 설명합니다.
+**Araçlar**, **Temsilciler**, **Görevler** ve **Ekip**'i kullanarak CrewAI uygulamaları oluşturun. Aşağıdaki bölümlerde bu bileşenlerin her biri açıklanmaktadır.
 
-### 도구
+### Araçlar
 
-도구는 에이전트가 외부 세계와 상호작용하거나 특정 작업을 실행하는 데 사용할 수 있는 기능입니다. 여기서는 고객 지원 데이터 가져오기를 시뮬레이션하기 위해 자리표시자 도구를 정의합니다. 실제 애플리케이션에서는 데이터베이스, API 또는 파일 시스템에 연결합니다. 도구에 대한 자세한 내용은 [CrewAI
-도구 가이드](https://docs.crewai.com/concepts/tools)를 참고하세요.
+Araçlar, temsilcilerin dış dünyayla etkileşim kurmak veya belirli işlemleri gerçekleştirmek için kullanabileceği özelliklerdir. Burada, müşteri desteği verilerini getirme işlemini simüle etmek için bir yer tutucu araç tanımlarsınız. Gerçek bir uygulamada, veritabanına, API'ye veya dosya sistemine bağlanırsınız. Araçlar hakkında daha fazla bilgi için [CrewAI araçları rehberine](https://docs.crewai.com/concepts/tools) bakın.
 
 ```
 from crewai.tools import BaseTool
@@ -92,10 +86,9 @@ class CustomerSupportDataTool(BaseTool):
 support_data_tool = CustomerSupportDataTool()
 ```
 
-### 에이전트
+### Temsilciler
 
-에이전트는 크루의 개별 AI 작업자입니다. 각 에이전트에는 특정 `role`, `goal`, `backstory`, 할당된 `llm`, 선택적 `tools`가 있습니다. 에이전트에 대한 자세한 내용은 [CrewAI 에이전트
-가이드](https://docs.crewai.com/concepts/agents)를 참고하세요.
+Ajanlar, ekibinizdeki bağımsız yapay zeka çalışanlarıdır. Her aracının belirli bir `role`, `goal`, `backstory`, atanmış `llm` ve isteğe bağlı `tools` vardır. Temsilciler hakkında daha fazla bilgi için [CrewAI temsilcileri rehberine](https://docs.crewai.com/concepts/agents) bakın.
 
 ```
 from crewai import Agent
@@ -142,10 +135,9 @@ report_writer = Agent(
 )
 ```
 
-### 작업
+### Görevler
 
-작업은 에이전트의 특정 할당을 정의합니다. 각 작업에는 `description`, `expected_output`이 있으며 `agent`에 할당됩니다. 작업은 기본적으로 순차적으로 실행되며 이전 작업의 컨텍스트를 포함합니다. 작업에 대한 자세한 내용은 [CrewAI 작업
-가이드](https://docs.crewai.com/concepts/tasks)를 참고하세요.
+Görevler, temsilcilerin belirli atamalarını tanımlar. Her görevin bir `description`, `expected_output` ve `agent` ataması vardır. Görevler varsayılan olarak sırayla çalıştırılır ve önceki görevin bağlamını içerir. Görevler hakkında daha fazla bilgi için [CrewAI görevleri rehberine](https://docs.crewai.com/concepts/tasks) bakın.
 
 ```
 from crewai import Task
@@ -204,9 +196,9 @@ Ensure the report is easy to understand, focuses on actionable insights, and is 
 )
 ```
 
-### 크루
+### Ekip
 
-`Crew`는 에이전트와 작업을 함께 가져와 워크플로 프로세스(예: '순차')를 정의합니다.
+`Crew`, iş akışı sürecini ("sıralı" gibi) tanımlayarak aracıları ve görevleri bir araya getirir.
 
 ```
 from crewai import Crew, Process
@@ -219,9 +211,9 @@ support_analysis_crew = Crew(
 )
 ```
 
-## 크루 실행
+## Run the crew
 
-마지막으로 필요한 입력으로 크루 실행을 시작합니다.
+Son olarak, gerekli girişleri yaparak ekibin çalışmasını başlatın.
 
 ```
 # Start the crew's work
@@ -235,19 +227,18 @@ print("--- Final Report for COO ---")
 print(result)
 ```
 
-이제 스크립트가 실행됩니다. `Data Analyst`는 도구를 사용하고, `Process
-Optimizer`는 발견 항목을 분석하고, `Report Writer`는
-최종 보고서를 컴파일한 후 콘솔에 출력합니다. `verbose=True` 설정을 사용하면 각 에이전트의 세부적인 사고 과정과 작업이 표시됩니다.
+Komut dosyası artık yürütülecek. `Data Analyst` aracı kullanır, `Process
+Optimizer` bulguları analiz eder ve `Report Writer` nihai raporu derler. Bu rapor daha sonra konsola yazdırılır. `verbose=True` ayarı, her aracının ayrıntılı düşünce sürecini ve işlemlerini gösterir.
 
-CrewAI에 대한 자세한 내용은 [CrewAI
-소개](https://docs.crewai.com/introduction)를 참고하세요.
+CrewAI hakkında daha fazla bilgi edinmek için [CrewAI'ya
+giriş](https://docs.crewai.com/introduction) bölümüne göz atın.
 
-의견 보내기
+Geri bildirim gönderin
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-최종 업데이트: 2026-04-29(UTC)
+Son güncelleme tarihi: 2026-04-29 UTC.
 
-의견을 전달하고 싶나요?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]

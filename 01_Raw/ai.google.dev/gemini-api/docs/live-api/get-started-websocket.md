@@ -1,69 +1,69 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=tr
-fetched_at: 2026-05-11T04:58:43.763532+00:00
+source_url: https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=pt-BR
+fetched_at: 2026-05-18T05:11:21.669268+00:00
 title: "Get started with Gemini Live API using WebSockets \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Geri bildirim gönderin
+Envie comentários
 
 # Get started with Gemini Live API using WebSockets
 
-Gemini Live API, Gemini modelleriyle gerçek zamanlı ve çift yönlü etkileşime olanak tanır. Ses, video ve metin girişlerinin yanı sıra doğal ses çıkışlarını destekler. Bu kılavuzda, ham WebSocket'ler kullanarak API ile doğrudan nasıl entegrasyon yapılacağı açıklanmaktadır.
+A API Gemini Live permite a interação bidirecional em tempo real com os modelos do Gemini, oferecendo suporte a entradas de áudio, vídeo e texto e saídas de áudio nativas. Este guia explica como fazer a integração diretamente com a API usando WebSockets brutos.
 
-[Google AI Studio'da Live API'yi deneyinmic](https://aistudio.google.com/live?hl=tr)
-[Örnek uygulamayı GitHub'dan klonlayıncode](https://github.com/google-gemini/gemini-live-api-examples/tree/main/gemini-live-ephemeral-tokens-websocket)
-[Kodlama aracısı becerilerini kullanınterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=tr)
+[Testar a API Live no Google AI Studiomic](https://aistudio.google.com/live?hl=pt-br)
+[Clonar o app de exemplo do GitHubcode](https://github.com/google-gemini/gemini-live-api-examples/tree/main/gemini-live-ephemeral-tokens-websocket)
+[Usar habilidades do agente de codificaçãoterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=pt-br)
 
-## Genel Bakış
+## Visão geral
 
-Gemini Live API, anlık iletişim için WebSocket'leri kullanır. Bu yaklaşımda, SDK kullanmanın aksine WebSocket bağlantısı doğrudan yönetilir ve API tarafından tanımlanan belirli bir JSON biçiminde mesaj gönderilip alınır.
+A API Gemini Live usa WebSockets para comunicação em tempo real. Ao contrário do uso de um SDK, essa abordagem envolve o gerenciamento direto da conexão WebSocket e o envio/recebimento de mensagens em um formato JSON específico definido pela API.
 
-Temel kavramlar:
+Principais conceitos:
 
-- **WebSocket Uç Noktası**: Bağlanılacak URL.
-- **Mesaj Biçimi**: Tüm iletişim, [`BidiGenerateContentClientMessage`](https://ai.google.dev/api/live?hl=tr#bidigeneratecontentclientmessage) ve [`BidiGenerateContentServerMessage`](https://ai.google.dev/api/live?hl=tr#bidigeneratecontentservermessage) yapılarına uygun JSON mesajları aracılığıyla yapılır.
-- **Oturum Yönetimi**: WebSocket bağlantısını sürdürmek sizin sorumluluğunuzdadır.
+- **Endpoint do WebSocket**: o URL específico para conexão.
+- **Formato da mensagem**: toda a comunicação é feita por mensagens JSON em conformidade com as estruturas [`BidiGenerateContentClientMessage`](https://ai.google.dev/api/live?hl=pt-br#bidigeneratecontentclientmessage) e [`BidiGenerateContentServerMessage`](https://ai.google.dev/api/live?hl=pt-br#bidigeneratecontentservermessage).
+- **Gerenciamento de sessões**: você é responsável por manter a conexão WebSocket.
 
-## Kimlik doğrulama
+## Autenticação
 
-Kimlik doğrulama, API anahtarınızın WebSocket URL'sine sorgu parametresi olarak eklenmesiyle yapılır.
+A autenticação é processada incluindo sua chave de API como um parâmetro de consulta no URL do WebSocket.
 
-Uç nokta biçimi şöyledir:
+O formato do endpoint é:
 
 ```
 wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContent?key=YOUR_API_KEY
 ```
 
-`YOUR_API_KEY` kısmını gerçek API anahtarınızla değiştirin.
+Substitua `YOUR_API_KEY` pela sua chave de API.
 
-## Kısa Ömürlü Jetonlarla Kimlik Doğrulama
+## Autenticação com tokens efêmeros
 
-[Kısa ömürlü jetonlar](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=tr) kullanıyorsanız `v1alpha` uç noktasına bağlanmanız gerekir.
-Geçici jeton, `access_token` sorgu parametresi olarak iletilmelidir.
+Se você estiver usando [tokens efêmeros](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=pt-br), precisará se conectar ao endpoint `v1alpha`.
+O token efêmero precisa ser transmitido como um parâmetro de consulta `access_token`.
 
-Kısa ömürlü anahtarların uç nokta biçimi şöyledir:
+O formato do endpoint para chaves efêmeras é:
 
 ```
 wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.GenerativeService.BidiGenerateContentConstrained?access_token={short-lived-token}
 ```
 
-`{short-lived-token}` değerini gerçek geçici jetonla değiştirin.
+Substitua `{short-lived-token}` pelo token efêmero real.
 
-## Live API'ye bağlanma
+## Como se conectar à API Live
 
-Canlı oturum başlatmak için kimliği doğrulanmış uç noktaya bir WebSocket bağlantısı oluşturun.
-WebSocket üzerinden gönderilen ilk mesaj, `config` değerini içeren bir [`BidiGenerateContentSetup`](https://ai.google.dev/api/live?hl=tr#bidigeneratecontentsetup) olmalıdır.
-Tüm yapılandırma seçenekleri için [Live API - WebSockets API referansı](https://ai.google.dev/api/live?hl=tr) başlıklı makaleyi inceleyin.
+Para iniciar uma sessão ao vivo, estabeleça uma conexão WebSocket com o endpoint autenticado.
+A primeira mensagem enviada pelo WebSocket precisa ser um [`BidiGenerateContentSetup`](https://ai.google.dev/api/live?hl=pt-br#bidigeneratecontentsetup) contendo a `config`.
+Para conferir as opções de configuração completas, consulte a [referência da API Live - WebSockets](https://ai.google.dev/api/live?hl=pt-br).
 
 ### Python
 
@@ -144,9 +144,9 @@ websocket.onclose = () => {
 };
 ```
 
-## Kısa mesaj gönderiliyor
+## Enviando texto
 
-Metin girişi göndermek için `text` alanıyla bir [`BidiGenerateContentRealtimeInput`](https://ai.google.dev/api/live?hl=tr#bidigeneratecontentrealtimeinput) mesajı oluşturun.
+Para enviar a entrada de texto, crie uma [`BidiGenerateContentRealtimeInput`](https://ai.google.dev/api/live?hl=pt-br#bidigeneratecontentrealtimeinput) mensagem com o `text` campo.
 
 ### Python
 
@@ -185,9 +185,9 @@ function sendTextMessage(text) {
 sendTextMessage("Hello, how are you?");
 ```
 
-## Ses gönderme
+## Enviando áudio
 
-Ses, ham PCM verileri (ham 16 bit PCM ses, 16 kHz, little-endian) olarak gönderilmelidir. Ses verileriyle [`BidiGenerateContentRealtimeInput`](https://ai.google.dev/api/live?hl=tr#bidigeneratecontentrealtimeinput) mesajı oluşturun. `mimeType` çok önemlidir.
+O áudio precisa ser enviado como dados PCM brutos (áudio PCM bruto de 16 bits, 16 kHz, little-endian). Crie uma [`BidiGenerateContentRealtimeInput`](https://ai.google.dev/api/live?hl=pt-br#bidigeneratecontentrealtimeinput) mensagem com os dados de áudio. O `mimeType` é essencial.
 
 ### Python
 
@@ -232,11 +232,12 @@ function sendAudioChunk(chunk) {
 // Example usage: sendAudioChunk(audioBuffer);
 ```
 
-İstemci cihazdan (ör. tarayıcı) ses alma örneği için [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-ephemeral-tokens-websocket/frontend/mediaUtils.js#L38-L74)'daki uçtan uca örneğe bakın.
+Para conferir um exemplo de como receber o áudio do dispositivo cliente (por exemplo, o navegador),
+consulte o exemplo completo no [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-ephemeral-tokens-websocket/frontend/mediaUtils.js#L38-L74).
 
-## Video gönderiliyor
+## Enviando vídeo
 
-Video kareleri ayrı resimler (ör. JPEG veya PNG) olarak gönderilir. Sesle benzer şekilde, doğru `mimeType` değerini belirterek `realtimeInput` ile birlikte `Blob` kullanın.
+Os frames de vídeo são enviados como imagens individuais (por exemplo, JPEG ou PNG). Assim como o áudio, use `realtimeInput` com um `Blob`, especificando o `mimeType` correto.
 
 ### Python
 
@@ -281,11 +282,12 @@ function sendVideoFrame(frame, mimeType = 'image/jpeg') {
 // Example usage: sendVideoFrame(jpegBuffer);
 ```
 
-Videoyu istemci cihazdan (ör. tarayıcı) alma örneği için [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-ephemeral-tokens-websocket/frontend/mediaUtils.js#L185-L222)'daki uçtan uca örneğe bakın.
+Para conferir um exemplo de como receber o vídeo do dispositivo cliente (por exemplo, o navegador),
+consulte o exemplo completo no [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-ephemeral-tokens-websocket/frontend/mediaUtils.js#L185-L222).
 
-## Yanıt alma
+## Recebimento das respostas
 
-WebSocket, [`BidiGenerateContentServerMessage`](https://ai.google.dev/api/live?hl=tr#bidigeneratecontentservermessage) mesajlarını geri gönderir. Bu JSON mesajlarını ayrıştırmanız ve farklı içerik türlerini işlemeniz gerekir.
+O WebSocket vai enviar [`BidiGenerateContentServerMessage`](https://ai.google.dev/api/live?hl=pt-br#bidigeneratecontentservermessage) mensagens. Você precisa analisar essas mensagens JSON e processar diferentes tipos de conteúdo.
 
 ### Python
 
@@ -356,11 +358,11 @@ websocket.onmessage = (event) => {
 };
 ```
 
-Yanıtın nasıl işleneceğine dair bir örnek için [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-ephemeral-tokens-websocket/frontend/geminilive.js#L22-L75)'daki uçtan uca örneğe bakın.
+Para conferir um exemplo de como processar a resposta, consulte o exemplo completo no [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-ephemeral-tokens-websocket/frontend/geminilive.js#L22-L75).
 
-## Araç çağrılarını işleme
+## Como processar chamadas de ferramentas
 
-Model bir araç çağrısı istediğinde [`BidiGenerateContentServerMessage`](https://ai.google.dev/api/live?hl=tr#bidigeneratecontentservermessage), `toolCall` alanını içerir. İşlevi yerel olarak yürütmeli ve sonucu [`BidiGenerateContentToolResponse`](https://ai.google.dev/api/live?hl=tr#bidigeneratecontenttoolresponse) mesajı kullanarak WebSocket'a geri göndermelisiniz.
+Quando o modelo solicita uma chamada de ferramenta, o [`BidiGenerateContentServerMessage`](https://ai.google.dev/api/live?hl=pt-br#bidigeneratecontentservermessage) contém um campo `toolCall`. Você precisa executar a função localmente e enviar o resultado de volta ao WebSocket usando uma [`BidiGenerateContentToolResponse`](https://ai.google.dev/api/live?hl=pt-br#bidigeneratecontenttoolresponse) mensagem.
 
 ### Python
 
@@ -447,20 +449,20 @@ function handleToolCall(toolCall) {
 // This function is called within websocket.onmessage when a toolCall is detected.
 ```
 
-## Sırada ne var?
+## A seguir
 
-- Konuşma Etkinliği Algılama ve yerel ses özellikleri de dahil olmak üzere temel özellikler ve yapılandırmalar için Live API [Özellikleri](https://ai.google.dev/gemini-api/docs/live-guide?hl=tr) kılavuzunun tamamını okuyun.
-- Live API'yi araçlarla ve işlev çağrısıyla nasıl entegre edeceğinizi öğrenmek için [Araç kullanımı](https://ai.google.dev/gemini-api/docs/live-tools?hl=tr) kılavuzunu okuyun.
-- Uzun süren görüşmeleri yönetmek için [Oturum yönetimi](https://ai.google.dev/gemini-api/docs/live-session?hl=tr) kılavuzunu okuyun.
-- [İstemciden sunucuya](#implementation-approach) uygulamalarda güvenli kimlik doğrulama için [Geçici jetonlar](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=tr) kılavuzunu okuyun.
-- Temel alınan WebSockets API hakkında daha fazla bilgi için [WebSockets API referansı](https://ai.google.dev/api/live?hl=tr) başlıklı makaleyi inceleyin.
+- Leia o guia completo de [recursos](https://ai.google.dev/gemini-api/docs/live-guide?hl=pt-br) da API Live para conferir os principais recursos e configurações, incluindo a detecção de atividade de voz e recursos de áudio nativos.
+- Leia o [guia de uso de ferramentas](https://ai.google.dev/gemini-api/docs/live-tools?hl=pt-br) para saber como integrar a API Live com ferramentas e chamadas de função.
+- Leia o [guia de gerenciamento de sessões](https://ai.google.dev/gemini-api/docs/live-session?hl=pt-br) para gerenciar conversas longas.
+- Leia o guia de [tokens efêmeros](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=pt-br) para autenticação segura em aplicativos [cliente-servidor](#implementation-approach).
+- Para mais informações sobre a API WebSockets subjacente, consulte a [referência da API WebSockets](https://ai.google.dev/api/live?hl=pt-br).
 
-Geri bildirim gönderin
+Envie comentários
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Son güncelleme tarihi: 2026-04-29 UTC.
+Última atualização 2026-05-13 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Quer enviar seu feedback?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-05-13 UTC."],[],[]]

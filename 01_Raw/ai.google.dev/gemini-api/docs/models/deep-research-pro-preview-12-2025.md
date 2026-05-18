@@ -1,46 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-pro-preview-12-2025?hl=it
-fetched_at: 2026-05-11T04:57:06.950002+00:00
-title: "Anteprima di Deep Research \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-pro-preview-12-2025?hl=pl
+fetched_at: 2026-05-18T05:10:13.635674+00:00
+title: "Podgl\u0105d Deep Research \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Invia feedback
+Prześlij opinię
 
-# Anteprima di Deep Research
+# Podgląd Deep Research
 
-Un potente ricercatore agentico progettato per indagini autonome e che richiedono più passaggi, che sintetizzano informazioni complesse in report completi e citati. Basato su Gemini 3.1 Pro, questo modello è ottimizzato per attività di lunga durata e analisi di importanza critica per l'accuratezza su centinaia di fonti web pubbliche e dati di workspace privati come Gmail e Drive.
+Zaawansowany agent badawczy zaprojektowany do autonomicznych, wieloetapowych badań, który syntetyzuje złożone informacje w obszerne, cytowane raporty. Ten model, oparty na Gemini 3.1 Pro, jest zoptymalizowany pod kątem długotrwałych zadań i analiz wymagających dużej dokładności, które obejmują setki publicznych źródeł internetowych i prywatnych danych z Workspace, takich jak Gmail i Dysk.
 
-## Documentazione
+## Dokumentacja
 
-Visita la pagina [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) per una copertura completa
-delle funzionalità.
+Więcej informacji o funkcjach i możliwościach znajdziesz na stronie [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl).
 
 ## deep-research-pro-preview-12-2025
 
-| Proprietà | Descrizione |
+| Właściwość | Opis |
 | --- | --- |
-| id\_cardCodice agente | **API Interactions**  `deep-research-pro-preview-12-2025` |
-| saveTipi di dati supportati | **Input**  Testo, immagine, PDF, audio, video  **Output**  Testo (report citati) |
-| token\_autoLimiti di token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=it) | **Finestra contestuale di input**  1.048.576  **Limite di token di output**  65.536 |
-| 123Versioni | Per ulteriori dettagli, leggi i [pattern delle versioni del modello](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it#model-versions).  - Anteprima: `deep-research-pro-preview-12-2025` |
-| calendar\_monthUltimo aggiornamento | Dicembre 2025 |
+| id\_cardKod agenta | **Interactions API**  `deep-research-pro-preview-12-2025` |
+| saveObsługiwane typy danych | **Wejście**  Tekst, obraz, PDF, dźwięk, film  **Wyjście**  Tekst (cytowane raporty) |
+| token\_autoLimity tokenów[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | **Okno kontekstu wejściowego**  1 048 576  **Limit tokenów wyjściowych**  65 536 |
+| 123Wersje | Więcej informacji znajdziesz w artykule [Wzorce wersji modelu](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#model-versions).  - Podgląd: `deep-research-pro-preview-12-2025` |
+| calendar\_monthOstatnia aktualizacja | Grudzień 2025 r. |
 
-Invia feedback
+Prześlij opinię
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Ultimo aggiornamento 2026-04-29 UTC.
+Ostatnia aktualizacja: 2026-04-29 UTC.
 
-Vuoi dirci altro?
+Chcesz przekazać coś jeszcze?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]

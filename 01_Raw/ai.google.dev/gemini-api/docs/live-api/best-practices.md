@@ -1,102 +1,94 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/best-practices?hl=ja
-fetched_at: 2026-05-11T04:58:08.286689+00:00
+source_url: https://ai.google.dev/gemini-api/docs/live-api/best-practices?hl=tr
+fetched_at: 2026-05-18T05:11:39.752953+00:00
 title: "Live API best practices \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-フィードバックを送信
+Geri bildirim gönderin
 
 # Live API best practices
 
-このガイドでは、Live API の使用を最適化するために従うことができるベスト プラクティスについて説明します。
-概要と一般的なユースケースのサンプルコードについては、[Live API を使ってみる](https://ai.google.dev/gemini-api/docs/live?hl=ja)
-をご覧ください。
+Bu kılavuzda, Live API kullanımınızı optimize etmek için uygulayabileceğiniz en iyi uygulamalar ele alınmaktadır.
+Genel bakış ve yaygın kullanım alanlarına ilişkin örnek kod için [Live API'yi kullanmaya başlama](https://ai.google.dev/gemini-api/docs/live?hl=tr) sayfasına bakın.
 
-## 明確なシステム指示を設計する
+## Net sistem talimatları tasarlama
 
-Live API のパフォーマンスを最大限に引き出すには、エージェントのペルソナ、会話ルール、ガードレールをこの順序で明確に定義した、一連のシステム指示（SI）を用意することをおすすめします。
+Live API'den en iyi performansı elde etmek için, sırasıyla aracı kişiliğini, sohbet kurallarını ve koruma sınırlarını tanımlayan net bir şekilde tanımlanmış bir dizi sistem talimatı (SI) kullanmanızı öneririz.
 
-最適な結果を得るには、各エージェントを個別の SI に分割します。
+En iyi sonuçları elde etmek için her bir aracıyı ayrı bir SI olarak ayırın.
 
-1. **エージェントのペルソナを指定する:** エージェントの名前、役割、望ましい特性について詳しく説明します。アクセントを指定する場合は、優先する出力言語（英語話者の場合は英国のアクセントなど）も必ず指定してください。
-2. **会話ルールを指定する:** モデルに適用する順序でルールを記述します。会話の 1 回限りの要素と会話ループを区別します。例:
+1. **Ajan kişiliğini belirtin:** Ajanın adı, rolü ve tercih edilen özellikleri hakkında ayrıntılı bilgi verin. Aksanı belirtmek istiyorsanız tercih edilen çıkış dilini de (ör. İngilizce konuşan biri için İngiliz aksanı) belirttiğinizden emin olun.
+2. **Sohbet kurallarını belirtin:** Bu kuralları, modelin uymasını beklediğiniz sıraya göre yerleştirin. Görüşmenin tek seferlik öğeleri ile görüşme döngüleri arasındaki farkı belirtin. Örneğin:
 
-   - **1 回限りの要素:** お客様の詳細情報（名前、ロケーション、ポイントカード番号など）を 1 回収集します。
-   - **会話ループ:** ユーザーは、おすすめ、価格、返品、配達について話し合うことができ、トピックからトピックへと移動したい場合があります。ユーザーが望む限り、この会話ループを継続してもよいことをモデルに伝えます。
-3. **フロー内のツール呼び出しを個別の文で指定する:** たとえば、お客様の詳細情報を収集する 1 回限りのステップで `get_user_info` 関数を呼び出す必要がある場合、最初のステップはユーザー情報の収集です。*まず、お客様に名前、ロケーション、ポイントカード番号の提供を依頼します。*次に、これらの詳細情報を使用して `get_user_info` を呼び出します。
-4. **必要なガードレールを追加します。**モデルに実行させたくない一般的な会話のガードレールを指定します。x が発生した場合にモデルに y を実行させたい場合は、具体的な例を自由に指定してください。それでも望ましいレベルの精度が得られない場合は、 *unmistakably* という単語を使用して、モデルが正確になるようにガイドします。
+   - **Tek seferlik öğe:** Müşterinin ayrıntılarını (ör. ad, konum, bağlılık kartı numarası) bir kez toplama.
+   - **Sohbet döngüsü:** Kullanıcı, önerileri, fiyatlandırmayı, iadeleri ve teslimatı tartışabilir ve bir konudan diğerine geçmek isteyebilir. Modele, kullanıcı istediği sürece bu sohbet döngüsüne katılmasının sorun olmadığını söyle.
+3. **Bir akış içindeki araç çağrılarını ayrı cümlelerde belirtin:** Örneğin, bir müşterinin ayrıntılarını toplamak için tek seferlik bir adımda `get_user_info` işlevinin çağrılması gerekiyorsa şunları söyleyebilirsiniz: *İlk adımınız kullanıcı bilgilerini toplamak. Öncelikle kullanıcıdan adını, konumunu ve bağlılık kartı numarasını vermesini isteyin. Ardından, bu ayrıntıları kullanarak `get_user_info` işlevini çağırın.*
+4. **Gerekli tüm koruma önlemlerini ekleyin:** Modelin yapmasını istemediğiniz genel sohbet koruma önlemlerini sağlayın. *x* gerçekleşirse modelin *y* yapmasını istediğinize dair belirli örnekler verebilirsiniz. Hâlâ istediğiniz hassasiyet düzeyine ulaşamıyorsanız modele hassas olması için yol göstermek üzere *kesinlikle* kelimesini kullanın.
 
-## ツールを正確に定義する
+## Araçları hassas bir şekilde tanımlama
 
-Live API でツールを使用する場合は、ツール定義を具体的に記述します。
-ツール呼び出しを呼び出す条件を Gemini に必ず伝えてください。詳細については、[ツール定義](#tool-definitions-example)の
-例のセクションをご覧ください。
+Canlı API ile araçları kullanırken araç tanımlarınızda net olun.
+Gemini'a hangi koşullarda araç çağrısı yapılması gerektiğini söyleyin. Daha fazla bilgi için örnek bölümündeki [Araç tanımları](#tool-definitions-example)'na bakın.
 
-## 効果的なプロンプトを作成する
+## Etkili istemler oluşturma
 
-- **明確なプロンプトを使用する:** プロンプトで、モデルが実行すべきことと実行すべきでないことの例を示します。また、プロンプトは一度に 1 つのペルソナまたは役割につき 1 つに制限するようにします。長い複数ページのプロンプトではなく、プロンプト チェーンの使用を検討してください。このモデルは、単一の関数呼び出しを含むタスクで最適なパフォーマンスを発揮します。
-- **開始コマンドと情報を提供する:** Live API は、応答する前にユーザー入力を想定しています。Live API に会話を開始させるには、ユーザーに挨拶するか、会話を開始するよう求めるプロンプトを含めます。Live API であいさつをパーソナライズするために、ユーザーに関する情報を含めます。
+- **Net istemler kullanın:** İstemlerde modellerin ne yapması ve ne yapmaması gerektiğine dair örnekler verin. Ayrıca, istemleri her seferinde bir karakter veya rol için tek bir istemle sınırlamaya çalışın. Uzun ve çok sayfalı istemler yerine istem zincirleme özelliğini kullanabilirsiniz. Model, tek işlev çağrısı içeren görevlerde en iyi performansı gösterir.
+- **Başlangıç komutları ve bilgileri sağlama:** Live API, yanıt vermeden önce kullanıcı girişi bekler. Live API'nin görüşmeyi başlatması için kullanıcıyı selamlamasını veya görüşmeye başlamasını isteyen bir istem ekleyin. Canlı API'nin bu karşılama mesajını kişiselleştirmesi için kullanıcı hakkında bilgi ekleyin.
 
-## 言語を指定する
+## Dili belirtme
 
-Live API のカスケード `gemini-live-2.5-flash` で最適なパフォーマンスを得るには、API の `language_code` がユーザーが話す言語と一致していることを確認してください。
+Canlı API'nin `gemini-live-2.5-flash` sıralamasında optimum performans için API'nin `language_code` özelliğinin, kullanıcının konuştuğu dille eşleştiğinden emin olun.
 
-モデルが英語以外の言語で応答することを想定している場合は、システム指示の一部として次の内容を含めます。
+Modelin İngilizce olmayan bir dilde yanıt vermesi bekleniyorsa sistem talimatlarınıza aşağıdakileri ekleyin:
 
 ```
 RESPOND IN {OUTPUT_LANGUAGE}. YOU MUST RESPOND UNMISTAKABLY IN {OUTPUT_LANGUAGE}.
 ```
 
-## ストリーミング
+## Canlı Yayın
 
-リアルタイム音声を実装する際は、次のベスト プラクティスを参考にしてください。
+Anlık ses özelliğini uygularken aşağıdaki en iyi uygulamalardan yararlanabilirsiniz:
 
-- **チャンクサイズとレイテンシ**: 20～40 ミリ秒のチャンクで音声を送信します。
-- **割り込み処理**: モデルが返信している間にユーザーが発話すると、サーバーは `"interrupted": true` を含む `server_content` メッセージを送信します。エージェントがユーザーに話しかけ続けるのを防ぐため、クライアントサイドの音声バッファを直ちに破棄する必要があります。
+- **Parça Boyutu ve Gecikme**: Sesi 20 ms ile 40 ms arasındaki parçalar halinde gönderin.
+- **Kesintileri İşleme**: Kullanıcı, model yanıt verirken konuştuğunda sunucu, `"interrupted": true` ile birlikte bir `server_content` mesajı gönderir. Aracının kullanıcıyla konuşmaya devam etmesini önlemek için istemci tarafındaki ses arabelleğinizi hemen atmanız gerekir.
 
-## コンテキスト管理
+## Bağlam yönetimi
 
-ネイティブ音声トークンは急速に蓄積されるため（音声 1 秒あたり約 25 トークン）、長いセッションの場合は `ContextWindowCompressionConfig` を使用します。
+Yerel ses jetonları hızla biriktiği için (yaklaşık 25 jeton/saniye ses) uzun oturumlarda `ContextWindowCompressionConfig` kullanın.
 
-## クライアント バッファリング
+## İstemci arabelleğe alma
 
-送信前に、入力音声を大幅に（1 秒など）バッファリングしないでください。レイテンシを最小限に抑えるため、小さなチャンク（20～100 ミリ秒）で送信してください。
+Göndermeden önce giriş sesini önemli ölçüde (ör. 1 saniye) arabelleğe almayın. Gecikmeyi en aza indirmek için küçük parçalar (20 ms - 100 ms) gönderin.
 
-## 再サンプリング
+## Yeniden örnekleme
 
-クライアント アプリケーションが、送信前にマイク入力（通常は 44.1 kHz または 48 kHz）を 16 kHz に再サンプリングするようにしてください。
+İstemci uygulamanızın, iletimden önce mikrofon girişini (genellikle 44,1 kHz veya 48 kHz) 16 kHz'ye yeniden örneklediğinden emin olun.
 
-## セッション管理
+## Oturum yönetimi
 
-セッションのライフサイクルを処理し、信頼性の高いユーザー エクスペリエンスを確保するには、次のガイドラインに沿ってください。
+Oturum yaşam döngüsünü yönetmek ve güvenilir bir kullanıcı deneyimi sağlamak için aşağıdaki yönergeleri uygulayın:
 
-- **コンテキスト ウィンドウの圧縮を有効にする:** 音声トークンは 1 秒あたり約 25 トークンの割合で蓄積されます。圧縮しない場合、音声のみのセッションは 15 分、音声と動画のセッションは 2 分に制限されます。[コンテキスト ウィンドウの圧縮を有効にすると、セッションを無制限に延長できます。](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ja#context-window-compression)
-- **セッションの再開を実装する:** サーバーは WebSocket 接続を定期的にリセットする場合があります。[セッションの再開を使用すると、コンテキストを失うことなくシームレスに再接続できます。](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ja#session-resumption)`SessionResumptionUpdate` メッセージから最新の再開トークンを保持し、再接続時にハンドルとして渡します。再開トークンは、最後のセッションが終了してから 2 時間有効です。
-- **GoAway メッセージを処理する:** サーバーは、接続を終了する前に
-  [GoAway](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ja#goaway-message) メッセージを送信します。このメッセージをリッスンし、`timeLeft` フィールドを使用して、接続が閉じる前に正常に終了するか再接続します。
-- **generationComplete シグナルを処理する:**
-  [`generationComplete`](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ja#generation-complete-message)
-  メッセージを使用すると、モデルがレスポンスの生成を完了したタイミングを把握できるため、
-  アプリケーションで UI を更新したり、次のアクションに進んだりできます。
+- **Bağlam penceresi sıkıştırmasını etkinleştirin:** Ses jetonları saniyede yaklaşık 25 jeton hızında birikir. Sıkıştırma olmadan yalnızca sesli oturumlar 15 dakika, sesli ve görüntülü oturumlar ise 2 dakika ile sınırlıdır. Oturumları sınırsız süreye uzatmak için [bağlam penceresi sıkıştırmasını](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=tr#context-window-compression) etkinleştirin.
+- **Oturuma devam etme özelliğini uygulayın:** Sunucu, WebSocket bağlantısını düzenli olarak sıfırlayabilir. Bağlamı kaybetmeden sorunsuz bir şekilde yeniden bağlanmak için [oturum devam ettirme](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=tr#session-resumption) özelliğini kullanın. `SessionResumptionUpdate` iletideki en son devam ettirme jetonunu saklayın ve yeniden bağlanırken bunu işleyici olarak iletin. Devam ettirme jetonları, son oturumun sona ermesinden sonraki 2 saat boyunca geçerlidir.
+- **GoAway mesajlarını işleme:** Sunucu, bağlantıyı sonlandırmadan önce [GoAway](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=tr#goaway-message) mesajı gönderir. Bu mesajı dinleyin ve bağlantı kapanmadan önce
+  `timeLeft` alanını kullanarak bağlantıyı düzgün bir şekilde sonlandırın veya yeniden bağlanın.
+- **generationComplete sinyallerini işleme:** Modelin yanıt oluşturmayı ne zaman tamamladığını öğrenmek için [`generationComplete`](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=tr#generation-complete-message) mesajını kullanın. Böylece uygulamanız kullanıcı arayüzünü güncelleyebilir veya bir sonraki işleme geçebilir.
 
-実装の詳細については、
-[セッション管理](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ja)をご覧ください。
+Uygulama ayrıntıları için [Oturum yönetimi](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=tr) başlıklı makaleyi inceleyin.
 
-## 例
+## Örnekler
 
-この例では、ベスト プラクティスと
-[システム指示の設計に関するガイドライン](#system-instruction-guidelines)の両方を組み合わせて、
-キャリアコーチとしてのモデルのパフォーマンスをガイドしています。
+Bu örnekte, modelin kariyer koçu olarak performansını yönlendirmek için hem en iyi uygulamalar hem de [sistem talimatı tasarımıyla ilgili yönergeler](#system-instruction-guidelines) bir araya getirilmiştir.
 
 ```
 **Persona:**
@@ -148,9 +140,10 @@ Remember that your ultimate goal is to create a supportive environment for your
 clients to thrive.
 ```
 
-### ツール定義
+### Araç tanımları
 
-この JSON は、キャリアコーチの例で呼び出される関連関数を定義します。関数を定義する際は、名前、説明、パラメータ、呼び出し条件を含めると、最適な結果が得られます。
+Bu JSON, kariyer koçu örneğinde çağrılan ilgili işlevleri tanımlar.
+İşlevleri tanımlarken en iyi sonuçları elde etmek için işlevlerin adlarını, açıklamalarını, parametrelerini ve çağırma koşullarını ekleyin.
 
 ```
 [
@@ -240,12 +233,44 @@ clients to thrive.
 ]
 ```
 
-フィードバックを送信
+## Fiyatlandırma ve faturalandırma
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Gemini Live API, yalnızca jeton kullanımına göre faturalandırılır. Live API, kalıcı bir WebSocket oturumu sürdürdüğünden faturalandırma, etkin bağlam penceresine dayalı olarak bileşik bir modeli izler.
 
-最終更新日 2026-04-29 UTC。
+### Oturum bağlam penceresi (bileşik maliyetler)
 
-ご意見をお聞かせください
+API, oturum bağlam penceresinde bulunan tüm jetonlar için dönüş başına ücret alır. "Dönüş", bir kullanıcı girişi ve modelin buna karşılık gelen yanıtı olarak tanımlanır.
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]
+- **Birikim:** Bağlam penceresi, mevcut dönüşteki yeni jetonların yanı sıra önceki dönüşlerde birikmiş tüm jetonları içerir.
+- **Yeniden faturalandırma:** Geçmiş jetonlar yeniden işlenir ve yapılandırılmış bağlam penceresi boyutunuza kadar her yeni dönüşte hesaba katılır. Oturum uzadıkça, sohbet geçmişi yeniden işlendiği için dönüşüm başına maliyet artar.
+
+### Ses jetonları ve transkriptler
+
+Live API, yerel olarak çok formatlıdır. Akustik nüansı ve tonu korumak için sohbet geçmişini ham ses jetonları olarak saklar.
+
+- **Ses faturalandırması:** API, her dönüşte biriken doğal ses jetonları için standart ses girişi oranında fatura keser.
+- **Transkripsiyon ek ücreti:** Sesten metne transkripsiyon etkinleştirildiğinde (`inputAudioTranscription` veya `outputAudioTranscription`), API, standart ses jetonu maliyetlerine ek olarak transkripsiyon için oluşturulan tüm metin jetonlarını metin jetonu çıkış oranında ücretlendirir.
+
+### Bağlam sınırlarıyla maliyetleri yönetme
+
+Uzun oturumlarda sınırsız maliyet artışını önlemek için bağlam penceresi boyutunuzu `contextWindowCompression` kullanarak yapılandırın.
+
+Bir sıkıştırma tetikleyicisi (ör.25.000 jeton) ve kayan pencere (ör.8.000 jeton) ayarlayarak eşik değerine ulaşıldığında API, eski jetonları otomatik olarak çıkarır. API, sonraki dönüşlerde yalnızca saklanan geçmiş ve yeni parçalar için faturalandırma yapar.
+
+### Proaktif ses modu
+
+Proaktif Ses Modu etkinleştirildiğinde, Live API dinlerken giriş jetonları için API'nin dinlediği süre boyunca ücret alınır. Çıkış jetonları için ise yalnızca API yanıt verdiğinde ücret alınır.
+
+- **Gemini 3.1 ile ilgili not:** Proaktif Ses Modu, `gemini-3.1-flash-live-preview`'da desteklenmez. Bu modelde, yalnızca aktif olarak giriş akışı yaparken ses için faturalandırılırsınız.
+
+Ayrıntılı fiyatlandırma bilgileri için [Gemini API fiyatlandırma sayfasına](https://ai.google.dev/gemini-api/docs/pricing?hl=tr) bakın.
+
+Geri bildirim gönderin
+
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+
+Son güncelleme tarihi: 2026-05-11 UTC.
+
+Bize geri bildirimde bulunmak mı istiyorsunuz?
+
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-05-11 UTC."],[],[]]

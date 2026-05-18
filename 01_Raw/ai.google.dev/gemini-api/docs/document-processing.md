@@ -1,7 +1,7 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/document-processing?hl=fr
-fetched_at: 2026-05-11T04:57:16.211627+00:00
-title: "Compr\u00e9hension des documents \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+fetched_at: 2026-05-18T05:10:30.956867+00:00
+title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
 ---
 
 La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
@@ -12,7 +12,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 - [Accueil](https://ai.google.dev/?hl=fr)
 - [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=fr)
 
 Envoyer des commentaires
 
@@ -29,7 +29,7 @@ Vous pouvez également transmettre des documents non PDF de la même manière, m
 
 ## Transmettre des données PDF de manière intégrée
 
-Vous pouvez transmettre des données PDF intégrées dans la requête à `generateContent`. Cette méthode est particulièrement adaptée aux documents peu volumineux ou au traitement temporaire pour lesquels vous n'avez pas besoin de faire référence au fichier dans les demandes ultérieures. Nous vous recommandons d'utiliser l'[API Files](https://ai.google.dev/gemini-api/docs/document-processing?hl=fr#large-pdfs) pour les documents volumineux auxquels vous devez vous référer dans les interactions multitours afin d'améliorer la latence des requêtes et de réduire l'utilisation de la bande passante.
+Vous pouvez transmettre des données PDF intégrées dans la requête à `generateContent`. Cette méthode est particulièrement adaptée aux documents de petite taille ou au traitement temporaire, lorsque vous n'avez pas besoin de faire référence au fichier dans les demandes ultérieures. Nous vous recommandons d'utiliser l'[API Files](https://ai.google.dev/gemini-api/docs/document-processing?hl=fr#large-pdfs) pour les documents volumineux auxquels vous devez vous référer dans les interactions multitours afin d'améliorer la latence des requêtes et de réduire l'utilisation de la bande passante.
 
 L'exemple suivant montre comment extraire un PDF à partir d'une URL et le convertir en octets pour le traitement :
 
@@ -970,7 +970,7 @@ Bien qu'il n'y ait pas de limite spécifique au nombre de pixels dans un documen
 
 ### Modèles Gemini 3
 
-Gemini 3 introduit un contrôle précis sur le traitement de la vision multimodale avec le paramètre `media_resolution`. Vous pouvez désormais définir la résolution sur "Faible", "Moyenne" ou "Élevée" pour chaque partie de contenu multimédia. Avec cette nouveauté, le traitement des documents PDF a été mis à jour :
+Gemini 3 introduit un contrôle précis sur le traitement de la vision multimodale avec le paramètre `media_resolution`. Vous pouvez désormais définir la résolution sur "Faible", "Moyenne" ou "Élevée" pour chaque partie de contenu multimédia. Avec cet ajout, le traitement des documents PDF a été mis à jour :
 
 1. **Inclusion du texte natif** : le texte intégré de manière native dans le PDF est extrait et fourni au modèle.
 2. **Facturation et rapports sur les jetons** :
@@ -1004,8 +1004,8 @@ Envoyer des commentaires
 
 Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Dernière mise à jour le 2026/04/29 (UTC).
+Dernière mise à jour le 2026/05/13 (UTC).
 
 Voulez-vous nous donner plus d'informations ?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/04/29 (UTC)."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/05/13 (UTC)."],[],[]]

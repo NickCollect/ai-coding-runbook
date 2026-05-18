@@ -1,55 +1,55 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/feedback-policies?hl=he
-fetched_at: 2026-05-11T05:03:08.364331+00:00
-title: "\u05de\u05e9\u05d5\u05d1 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/feedback-policies?hl=es-419
+fetched_at: 2026-05-18T05:15:26.656702+00:00
+title: "Comentarios \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-שליחת משוב
+Enviar comentarios
 
-# משוב
+# Comentarios
 
-## הצבעה להעדפות מוטבעות
+## Votación de preferencias intercalada
 
-ב-Google AI Studio, יכול להיות שמדי פעם תראו השוואה בין שתי תשובות שונות להנחיה שלכם. זה חלק ממערכת ההצבעה שלנו להעדפות בתוך התוכן. תתבקשו לבחור את התשובה המועדפת. כך אנחנו יכולים להבין אילו פלטים של המודל הכי מועילים למשתמשים.
+En Google AI Studio, es posible que, en ocasiones, veas una comparación en paralelo de dos respuestas diferentes a tu instrucción. Esto forma parte de nuestro sistema de votación de preferencias intercalada. Se te pedirá que elijas la respuesta que prefieras. Esto nos ayuda a comprender qué resultados del modelo les resultan más útiles a los usuarios.
 
-### למה אנחנו עושים את זה?
+### ¿Por qué lo haremos?
 
-אנחנו כל הזמן פועלים לשיפור המודלים והשירותים שלנו מבוססי-AI. המשוב שלכם באמצעות ההצבעה על העדפות בתוך הטקסט עוזר לנו לספק, לשפר ולפתח מוצרים ושירותים של Google וטכנולוגיות למידת מכונה, כולל תכונות, מוצרים ושירותים ארגוניים של Google, בהתאם [לתנאים והגבלות נוספים לממשקי Gemini API](https://ai.google.dev/gemini-api/terms?hl=he) ול[מדיניות הפרטיות](https://policies.google.com/privacy?hl=he).
+Trabajamos constantemente para mejorar nuestros modelos y servicios de IA. Tus comentarios a través de la votación de preferencias intercalada nos ayudan a proporcionar, mejorar y desarrollar los productos y servicios de Google, así como las tecnologías de aprendizaje automático, incluidas las funciones, los productos y los servicios empresariales de Google, de conformidad con las [Condiciones del Servicio Adicionales de la API de Gemini](https://ai.google.dev/gemini-api/terms?hl=es-419) y la [Política de Privacidad](https://policies.google.com/privacy?hl=es-419).
 
-### אילו נתונים נכללים במשוב?
+### ¿Qué datos se incluyen en los comentarios?
 
-כדי לקבל החלטות מושכלות לגבי המודלים שלנו, אנחנו אוספים נתונים מסוימים כשאתם משתתפים בהצבעה להעדפות בתוך הטקסט:
+Para tomar decisiones fundamentadas sobre nuestros modelos, recopilamos ciertos datos cuando participas en la votación de preferencias intercalada:
 
-- **הנחיות ותשובות:** אנחנו מתעדים את כל ההנחיות והתשובות, כולל כל תוכן שהועלה, בשיחה ששלחתם עליה משוב. אנחנו גם מתעדים את שתי אפשרויות התשובה שבחרתם. כך נוכל להבין את ההקשר של ההעדפה שלכם.
-- **ההצבעה שלך:** אנחנו מתעדים איזו תשובה העדפתם. זהו עיקר המשוב שאנחנו אוספים.
-- **פרטי השימוש:** כולל מידע על המודל שיצר את התגובה ופרטים טכניים ותפעוליים אחרים על השימוש שלכם בתכונה הזו.
+- **Instrucciones y respuestas:** Registramos todas las instrucciones y respuestas, incluido el contenido que se subió, en la conversación sobre la que enviaste comentarios. También registramos las dos opciones de respuesta que seleccionaste. Esto nos ayuda a comprender el contexto de tu preferencia.
+- **Tu voto:** Registramos qué respuesta preferiste. Este es el núcleo de los comentarios que recopilamos.
+- **Detalles de uso:** Incluyen información sobre qué modelo generó la respuesta y otros detalles técnicos y operativos sobre tu uso de esta función.
 
-### הפרטיות שלך
+### Tu privacidad
 
-הפרטיות שלכם חשובה לנו מאוד. במסגרת התהליך הזה, Google מבצעת פעולות כדי להגן על הפרטיות שלכם. לדוגמה, אנחנו מנתקים את הנתונים האלה מחשבון Google, ממפתח ה-API ומפרויקט הענן לפני שהבודקים רואים אותם או מוסיפים להם הערות. **אל תשלחו משוב על שיחות שכוללות מידע רגיש, סודי או אישי.**
+En Google nos tomamos tu privacidad en serio. En este proceso, Google toma medidas para proteger tu privacidad. Esto incluye desvincular estos datos de tu Cuenta de Google, clave de API y proyecto de Cloud antes de que los revisores los vean o les agreguen anotaciones. **No envíes comentarios sobre conversaciones que incluyan información personal, confidencial o sensible.**
 
-### ביטול הסכמה להצטרפות
+### Cómo inhabilitar la función
 
-תוכלו לדלג על ההצבעה להעדפות בתוך הטקסט כשהיא תופיע.
+Podrás omitir la votación de preferencias intercalada cuando aparezca.
 
-תודה שעזרת לנו לשפר את Google AI Studio!
+Gracias por ayudarnos a mejorar Google AI Studio.
 
-שליחת משוב
+Enviar comentarios
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-עדכון אחרון: 2026-04-29 (שעון UTC).
+Última actualización: 2026-04-29 (UTC)
 
-רוצה לתת לנו משוב?
+¿Quieres brindar más información?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]

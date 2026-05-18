@@ -1,49 +1,51 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=zh-TW
-fetched_at: 2026-05-11T04:58:48.530832+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=ar
+fetched_at: 2026-05-18T05:12:40.904367+00:00
 title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/overview?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-提供意見
+إرسال ملاحظات
 
-# 瞭解及計算權杖
+# فهم الرموز المميّزة وعدّها
 
-Gemini 和其他生成式 AI 模型會以稱為「*權杖*」的細微程度處理輸入和輸出內容。
+تعالج نماذج Gemini ونماذج الذكاء الاصطناعي التوليدي الأخرى الإدخالات والإخراجات بدقة تُعرف باسم *الرمز المميّز*.
 
-**對於 Gemini 模型，一個符記約等於 4 個字元。
-100 個符記約等於 60 到 80 個英文字。**
+**بالنسبة إلى نماذج Gemini، يعادل الرمز المميّز 4 أحرف تقريبًا.
+ويعادل 100 رمز مميّز من 60 إلى 80 كلمة باللغة الإنجليزية تقريبًا.**
 
-## 關於權杖
+## لمحة عن الرموز المميّزة
 
-符記可以是單一字元 (例如 `z`)，也可以是整個字詞 (例如 `cat`)。長字會拆分成多個權杖。模型使用的所有詞元集合稱為詞彙，將文字分割成詞元的過程稱為「斷詞」。
+يمكن أن تكون الرموز المميّزة أحرفًا مفردة، مثل `z`، أو كلمات كاملة، مثل `cat`. ويتم تقسيم الكلمات الطويلة إلى عدة رموز مميّزة. تُعرف مجموعة جميع الرموز المميّزة التي يستخدمها النموذج باسم المفردات، وتُعرف عملية تقسيم النص إلى رموز مميّزة باسم *الترميز*.
 
-啟用帳單後，[Gemini API 呼叫費用](https://ai.google.dev/pricing?hl=zh-tw)會部分取決於輸入和輸出權杖數量，因此瞭解如何計算權杖數量會很有幫助。
+عند تفعيل الفوترة، يتم تحديد [تكلفة طلب البيانات من Gemini API](https://ai.google.dev/pricing?hl=ar) جزئيًا حسب عدد الرموز المميّزة للإدخال والإخراج، لذا قد يكون من المفيد معرفة كيفية
+عدّ الرموز المميّزة.
 
-## 計算詞元數
+## عدّ الرموز المميّزة
 
-Gemini API 的所有輸入和輸出內容 (包括文字、圖片檔案和其他非文字模態) 都會經過權杖化。
+يتم ترميز جميع الإدخالات والإخراجات من Gemini API، بما في ذلك النصوص وملفات الصور والوسائط الأخرى غير النصية.
 
-您可以透過下列方式計算權杖：
+يمكنك عدّ الرموز المميّزة بالطرق التالية:
 
-- **使用要求的輸入內容呼叫 `count_tokens`。**傳回*輸入內容*的詞元總數。傳送輸入內容前，請先進行這項呼叫，檢查要求的大小。
-- **使用互動回覆中的 `usage`。**傳回輸入 (`total_input_tokens`)、輸出 (`total_output_tokens`)、思考 (`total_thought_tokens`)、快取內容 (`total_cached_tokens`)、工具使用 (`total_tool_use_tokens`) 和總計 (`total_tokens`) 的權杖數量。
+- **استدعاء `count_tokens` مع إدخال الطلب** تعرض هذه الدالة إجمالي عدد الرموز المميّزة في *الإدخال فقط*. يمكنك إجراء هذا الاستدعاء قبل إرسال الإدخال للتحقّق من حجم طلباتك.
+- **استخدام `usage` في استجابة التفاعل.** تعرض هذه الدالة أعداد الرموز المميّزة للإدخال (`total_input_tokens`) والإخراج (`total_output_tokens`) والتفكير (`total_thought_tokens`) والمحتوى المخزّن مؤقتًا (`total_cached_tokens`) واستخدام الأدوات (`total_tool_use_tokens`) والإجمالي (`total_tokens`).
 
-### 計算文字權杖
+### عدّ الرموز المميّزة للنص
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 from google import genai
 
 client = genai.Client()
@@ -54,7 +56,7 @@ total_tokens = client.models.count_tokens(
     model="gemini-3-flash-preview",
     contents=prompt
 )
-print("total_tokens:", total_tokens)
+print("total_tokens:", total_tokens.total_tokens)
 
 # Get usage from interaction
 interaction = client.interactions.create(
@@ -67,6 +69,7 @@ print(interaction.usage)
 ### JavaScript
 
 ```
+// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from '@google/genai';
 
 const client = new GoogleGenAI({});
@@ -90,19 +93,22 @@ console.log(interaction.usage);
 ### REST
 
 ```
+# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:countTokens" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
+  -H "Api-Revision: 2026-05-20" \
   -d '{"contents": [{"parts": [{"text": "The quick brown fox."}]}]}'
 ```
 
-### 計算多輪對話的權杖數
+### عدّ الرموز المميّزة للمحادثات المتعددة الأدوار
 
-使用 `previous_interaction_id` 計算對話記錄中的權杖數：
+يمكنك عدّ الرموز المميّزة في سجلّ المحادثات باستخدام `previous_interaction_id`:
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 # First interaction
 interaction1 = client.interactions.create(
     model="gemini-3-flash-preview",
@@ -125,6 +131,7 @@ print(f"Total tokens: {interaction2.usage.total_tokens}")
 ### JavaScript
 
 ```
+// This will only work for SDK newer than 2.0.0
 // First interaction
 const interaction1 = await client.interactions.create({
     model: "gemini-3-flash-preview",
@@ -142,20 +149,21 @@ console.log(`Input tokens: ${interaction2.usage.total_input_tokens}`);
 console.log(`Output tokens: ${interaction2.usage.total_output_tokens}`);
 ```
 
-### 計算多模態權杖
+### عدّ الرموز المميّزة المتعددة الوسائط
 
-Gemini API 的所有輸入內容都會經過權杖化，包括圖片、影片和音訊。
-代碼化相關重點：
+يتم ترميز جميع الإدخالات إلى Gemini API، بما في ذلك الصور والفيديوهات والمحتوى الصوتي.
+في ما يلي نقاط أساسية حول الترميز:
 
-- **圖片**：圖片的長寬皆 ≤384 像素，算為 258 個權杖。較大的圖片會分割成 768x768 像素的圖塊，每個圖塊算做 258 個權杖。
-- **影片**：每秒 263 個權杖
-- **音訊**：每秒 32 個權杖
+- **الصور**: يتم احتساب 258 رمزًا مميّزًا للصور التي يبلغ حجمها ‎384 × 384 بكسل أو أقل في كلا البُعدَين. ويتم تقسيم الصور الأكبر حجمًا إلى مربّعات بحجم ‎768 × 768 بكسل، ويتم احتساب 258 رمزًا مميّزًا لكل مربّع.
+- **الفيديوهات**: 263 رمزًا مميّزًا في الثانية
+- **المحتوى الصوتي**: 32 رمزًا مميّزًا في الثانية
 
-#### 圖片權杖
+#### الرموز المميّزة للصور
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 uploaded_file = client.files.upload(file="path/to/image.jpg")
 
 # Count tokens for image + text
@@ -179,6 +187,7 @@ print(interaction.usage)
 ### JavaScript
 
 ```
+// This will only work for SDK newer than 2.0.0
 const uploadedFile = await client.files.upload({
     file: "path/to/image.jpg",
     config: { mimeType: "image/jpeg" }
@@ -195,11 +204,12 @@ const countResponse = await client.models.countTokens({
 console.log(countResponse.totalTokens);
 ```
 
-**內嵌資料範例：**
+**مثال على البيانات المضمّنة:**
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 import base64
 
 with open('image.jpg', 'rb') as f:
@@ -219,11 +229,12 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### 影片權杖
+#### الرموز المميّزة للفيديوهات
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 import time
 
 video_file = client.files.upload(file="path/to/video.mp4")
@@ -251,11 +262,12 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### 音訊權杖
+#### الرموز المميّزة للمحتوى الصوتي
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 audio_file = client.files.upload(file="path/to/audio.mp3")
 
 # A 60-second audio clip is approximately 32 * 60 = 1,920 tokens
@@ -276,13 +288,14 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-### 計算系統指令的權杖數
+### عدّ الرموز المميّزة لتعليمات النظام
 
-系統指令會計入輸入權杖：
+يتم عدّ تعليمات النظام كجزء من الرموز المميّزة للإدخال:
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 interaction = client.interactions.create(
     model="gemini-3-flash-preview",
     input="Hello!",
@@ -293,13 +306,14 @@ interaction = client.interactions.create(
 print(f"Input tokens: {interaction.usage.total_input_tokens}")
 ```
 
-### 計算工具權杖
+### عدّ الرموز المميّزة للأدوات
 
-工具 (函式、程式碼執行、Google 搜尋) 也會計入：
+يتم أيضًا عدّ الأدوات (الدوال وتنفيذ التعليمات البرمجية و"بحث Google"):
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 tools = [
     {
         "type": "function",
@@ -324,15 +338,16 @@ print(f"Input tokens: {interaction.usage.total_input_tokens}")
 print(f"Tool use tokens: {interaction.usage.total_tool_use_tokens}")
 ```
 
-## 脈絡窗口
+## قدرة الاستيعاب
 
-每個 Gemini 模型都有可處理的符記數量上限。內容視窗會定義輸入和輸出權杖的合併限制。
+لكل نموذج من نماذج Gemini عدد أقصى من الرموز المميّزة التي يمكنه معالجتها. وتحدّد قدرة الاستيعاب الحدّ المجمّع للرموز المميّزة للإدخال والإخراج.
 
-### 以程式輔助方式取得脈絡窗口大小
+### الحصول على حجم قدرة الاستيعاب آليًا
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 model_info = client.models.get(model="gemini-3-flash-preview")
 print(f"Input token limit: {model_info.input_token_limit}")
 print(f"Output token limit: {model_info.output_token_limit}")
@@ -341,25 +356,26 @@ print(f"Output token limit: {model_info.output_token_limit}")
 ### JavaScript
 
 ```
+// This will only work for SDK newer than 2.0.0
 const modelInfo = await client.models.get({ model: "gemini-3-flash-preview" });
 console.log(`Input token limit: ${modelInfo.inputTokenLimit}`);
 console.log(`Output token limit: ${modelInfo.outputTokenLimit}`);
 ```
 
-您可以在「模型」頁面查看脈絡窗口大小。
+يمكنك الاطّلاع على أحجام قدرة الاستيعاب في صفحة [النماذج](https://ai.google.dev/gemini-api/docs/models?hl=ar).
 
-## 後續步驟
+## الخطوات التالية
 
-- [文字生成](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=zh-tw)：生成基礎
-- [快取](https://ai.google.dev/gemini-api/docs/interactions/caching?hl=zh-tw)：透過快取降低成本
-- [定價](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw)：瞭解費用
+- [إنشاء النص](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=ar): أساسيات الإنشاء
+- [التخزين المؤقت](https://ai.google.dev/gemini-api/docs/interactions/caching?hl=ar): خفض التكاليف باستخدام التخزين المؤقت
+- [التسعير](https://ai.google.dev/gemini-api/docs/pricing?hl=ar): التعرّف على التكاليف
 
-提供意見
+إرسال ملاحظات
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-上次更新時間：2026-05-09 (世界標準時間)。
+تاريخ التعديل الأخير: 2026-05-12 (حسب التوقيت العالمي المتفَّق عليه)
 
-想進一步說明嗎？
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-12 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

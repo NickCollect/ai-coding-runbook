@@ -1,35 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=id
-fetched_at: 2026-05-11T05:06:08.679686+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=pt-BR
+fetched_at: 2026-05-18T05:13:27.697411+00:00
 title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/overview?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Kirim masukan
+Envie comentários
 
-# Konteks URL
+# Contexto do URL
 
-[Alat konteks URL memungkinkan Anda memberikan konteks tambahan ke model dalam bentuk URL. Dengan menyertakan URL dalam permintaan Anda, model akan mengakses konten dari halaman tersebut (selama tidak termasuk jenis URL yang tercantum di bagian batasan) untuk menginformasikan dan meningkatkan kualitas responsnya.](#limitations)
+Com a ferramenta de contexto de URL, você pode fornecer mais contexto aos modelos na forma de URLs. Ao incluir URLs na sua solicitação, o modelo acessa o conteúdo dessas páginas (desde que não seja um tipo de URL listado na [seção de limitações](#limitations)) para informar e melhorar a resposta.
 
-Alat konteks URL berguna untuk tugas seperti berikut:
+A ferramenta de contexto de URL é útil para tarefas como:
 
-- **Mengekstrak Data**: Menarik informasi tertentu seperti harga, nama, atau temuan utama dari beberapa URL.
-- **Membandingkan Dokumen**: Menganalisis beberapa laporan, artikel, atau PDF untuk
-  mengidentifikasi perbedaan dan melacak tren.
-- **Menyintesis & Membuat Konten**: Menggabungkan informasi dari beberapa URL sumber untuk membuat ringkasan, postingan blog, atau laporan yang akurat.
-- **Analisis Kode & Dokumen**: Merujuk repositori GitHub atau dokumentasi teknis untuk menjelaskan kode, membuat petunjuk penyiapan, atau menjawab pertanyaan.
+- **Extrair dados**: extraia informações específicas, como preços, nomes ou descobertas importantes de vários URLs.
+- **Comparar documentos**: analise vários relatórios, artigos ou PDFs para identificar diferenças e acompanhar tendências.
+- **Sintetizar e criar conteúdo**: combine informações de vários URLs de origem para gerar resumos, postagens de blog ou relatórios precisos.
+- **Analisar código e documentos**: aponte para um repositório do GitHub ou documentação técnica para explicar o código, gerar instruções de configuração ou responder a perguntas.
 
-Contoh berikut menunjukkan cara membandingkan dua resep dari situs yang berbeda.
+O exemplo a seguir mostra como comparar duas receitas de sites diferentes.
 
 ### Python
 
@@ -110,28 +109,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Cara kerjanya
+## Como funciona
 
-Alat Konteks URL menggunakan proses pengambilan dua langkah untuk menyeimbangkan kecepatan, biaya, dan akses ke data baru. Saat Anda memberikan URL, alat ini
-pertama-tama akan mencoba mengambil konten dari cache indeks internal. Cache ini berfungsi sebagai cache yang sangat dioptimalkan. Jika URL tidak tersedia di indeks (misalnya, jika
-URL tersebut adalah halaman yang sangat baru), alat otomatis akan melakukan pengambilan langsung.
-Alat ini mengakses URL secara langsung untuk mengambil kontennya secara real time.
+A ferramenta Contexto do URL usa um processo de recuperação em duas etapas para equilibrar velocidade, custo e acesso a dados atualizados. Quando você fornece um URL, a ferramenta primeiro tenta buscar o conteúdo de um cache de índice interno. Ele funciona como um cache altamente otimizado. Se um URL não estiver disponível no índice (por exemplo, se for uma página muito nova), a ferramenta fará uma busca ativa automaticamente.
+Isso acessa diretamente o URL para recuperar o conteúdo em tempo real.
 
-## Menggabungkan dengan alat lain
+## Combinar com outras ferramentas
 
-Anda dapat menggabungkan alat konteks URL dengan alat lain untuk membuat alur kerja yang lebih canggih.
+É possível combinar a ferramenta de contexto de URL com outras para criar fluxos de trabalho mais eficientes.
 
-[Model Gemini 3](#supported-models) mendukung penggabungan alat bawaan
-(seperti Konteks URL) dengan alat kustom (pemanggilan fungsi). Pelajari lebih lanjut di halaman
-[kombinasi alat](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=id).
+Os [modelos do Gemini 3](#supported-models) permitem combinar ferramentas integradas (como o contexto de URL) com ferramentas personalizadas (chamada de função). Saiba mais na página de
+[combinações de ferramentas](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=pt-br).
 
-### Grounding dengan penelusuran
+### Embasamento com pesquisa
 
-Jika konteks URL dan
-[Grounding dengan Google Penelusuran](https://ai.google.dev/gemini-api/docs/grounding?hl=id) diaktifkan,
-model dapat menggunakan kemampuan penelusurannya untuk menemukan
-informasi yang relevan secara online, lalu menggunakan alat konteks URL untuk mendapatkan pemahaman yang lebih
-mendalam tentang halaman yang ditemukannya. Pendekatan ini sangat berguna untuk perintah yang memerlukan penelusuran luas dan analisis mendalam halaman tertentu.
+Quando o contexto do URL e o [Embasamento com a Pesquisa Google](https://ai.google.dev/gemini-api/docs/grounding?hl=pt-br) estão ativados, o modelo pode usar os recursos de pesquisa para encontrar informações relevantes on-line e usar a ferramenta de contexto do URL para entender melhor as páginas encontradas. Essa abordagem é eficiente para comandos que exigem pesquisa ampla e análise detalhada de páginas específicas.
 
 ### Python
 
@@ -201,21 +193,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Memahami respons
+## Entender a resposta
 
-Saat model menggunakan alat konteks URL, respons teksnya akan menyertakan anotasi `url_citation` inline pada blok konten teks. Setiap anotasi menautkan segmen teks respons (melalui `start_index` dan `end_index`) ke URL sumber yang digunakan untuk membuat teks tersebut. Ini adalah cara utama untuk menampilkan kutipan dalam aplikasi
-Anda. Lihat [contoh utama di atas](#get-started) untuk mengetahui cara mengekstraknya.
+Quando o modelo usa a ferramenta de contexto de URL, a resposta de texto inclui anotações `url_citation` inline no bloco de conteúdo de texto. Cada anotação vincula um segmento do texto da resposta (via `start_index` e `end_index`) ao URL de origem de onde ele foi derivado. Essa é a principal maneira de mostrar citações no seu
+aplicativo. Consulte o [exemplo principal acima](#get-started) para saber como extraí-las.
 
-Respons tersebut juga mencakup langkah `url_context_result` dengan metadata tentang setiap upaya pengambilan URL (status, URL yang diambil). Hal ini terutama berguna untuk proses debug.
+A resposta também inclui uma etapa `url_context_result` com metadados sobre cada tentativa de recuperação de URL (status, URL recuperado). Isso é útil principalmente para depuração.
 
-### Pemeriksaan keamanan
+### Confirmações de segurança
 
-Sistem melakukan pemeriksaan moderasi konten pada URL untuk mengonfirmasi bahwa URL tersebut memenuhi standar keamanan. Jika URL gagal dalam pemeriksaan ini, langkah yang sesuai
-`url_context_result` akan menampilkan `status` `"unsafe"`.
+O sistema faz uma verificação de moderação de conteúdo nos URLs para confirmar se eles atendem aos padrões de segurança. Se um URL falhar nessa verificação, a etapa
+`url_context_result` correspondente vai mostrar um `status` de `"unsafe"`.
 
-### Jumlah token
+### Contagem de tokens
 
-Konten yang diambil dari URL yang Anda tentukan dalam perintah Anda dihitung sebagai bagian dari token input. Anda dapat melihat jumlah token di objek `usage` interaksi. Berikut adalah contohnya:
+O conteúdo recuperado dos URLs especificados no comando é contado como parte dos tokens de entrada. É possível conferir a contagem de tokens no objeto
+`usage` da interação. Veja um exemplo abaixo.
 
 ```
 'usage': {
@@ -229,63 +222,59 @@ Konten yang diambil dari URL yang Anda tentukan dalam perintah Anda dihitung seb
 }
 ```
 
-Harga per token bergantung pada model yang digunakan. Lihat halaman
-[harga](https://ai.google.dev/gemini-api/docs/pricing?hl=id) untuk mengetahui detailnya.
+O preço por token depende do modelo usado. Consulte a página de [preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br) para mais detalhes.
 
-## Model yang didukung
+## Modelos compatíveis
 
-| Model | Konteks URL |
+| Modelo | Contexto do URL |
 | --- | --- |
-| [Pratinjau Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=id) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=id) | ✔️ |
-| [Pratinjau Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/gemini-3.1-flash-lite-preview?hl=id) | ✔️ |
-| [Pratinjau Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=id) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=id) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=id) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=id) | ✔️ |
+| [Pré-lançamento do Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=pt-br) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=pt-br) | ✔️ |
+| [Pré-lançamento do Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/gemini-3.1-flash-lite-preview?hl=pt-br) | ✔️ |
+| [Pré-lançamento do Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=pt-br) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=pt-br) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=pt-br) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=pt-br) | ✔️ |
 
-## Praktik Terbaik
+## Práticas recomendadas
 
-- **Berikan URL spesifik**: Untuk mendapatkan hasil terbaik, berikan URL langsung ke
-  konten yang Anda ingin untuk dianalisis oleh model. Model hanya akan mengambil konten
-  dari URL yang Anda berikan, bukan konten dari link bertingkat.
-- **Periksa aksesibilitas**: Pastikan URL yang Anda berikan tidak mengarah ke
-  halaman yang memerlukan login atau berada di balik paywall.
-- **Gunakan URL lengkap**: Berikan URL lengkap, termasuk protokol
-  (misalnya, https://www.google.com, bukan hanya google.com).
+- **Forneça URLs específicos**: para ter os melhores resultados, forneça URLs diretos do conteúdo que você quer que o modelo analise. O modelo só vai extrair conteúdo dos URLs fornecidos, não de links aninhados.
+- **Verifique a acessibilidade**: confira se os URLs fornecidos não levam a páginas que exigem login ou estão atrás de um paywall.
+- **Use o URL completo**: informe o URL completo, incluindo o protocolo (por exemplo, https://www.google.com em vez de apenas google.com).
 
-## Batasan
+## Limitações
 
-- Pemanggilan fungsi: Penggunaan alat (Konteks URL, Grounding dengan Google Penelusuran, dll.) dengan pemanggilan fungsi saat ini tidak didukung.
-- Batas permintaan: Alat ini dapat memproses hingga 20 URL per permintaan.
-- Ukuran konten URL: Ukuran maksimum untuk konten yang diambil dari satu URL adalah 34 MB.
-- Aksesibilitas publik: URL harus dapat diakses secara publik di web.
-  Alamat localhost (misalnya, localhost, 127.0.0.1), jaringan pribadi, dan layanan tunneling (misalnya, ngrok, pinggy) tidak didukung.
-- Hanya Gemini API: Konteks URL hanya tersedia di Gemini API, bukan melalui Gemini Enterprise Agent Platform.
+- Chamada de função: o uso de ferramentas (contexto de URL, embasamento com a Pesquisa Google etc.)
+  com chamada de função não é compatível no momento.
+- Limite de solicitações: a ferramenta pode processar até 20 URLs por solicitação.
+- Tamanho do conteúdo do URL: o tamanho máximo do conteúdo recuperado de um único
+  URL é de 34 MB.
+- Acessibilidade pública: os URLs precisam estar acessíveis publicamente na Web.
+  Endereços de localhost (por exemplo, localhost, 127.0.0.1), redes particulares e serviços de tunelamento (por exemplo, ngrok, pinggy) não são compatíveis.
+- Somente API Gemini: o contexto de URL está disponível apenas na API Gemini, não na plataforma de agentes do Gemini Enterprise.
 
-### Jenis konten yang didukung dan tidak didukung
+### Tipos de conteúdo aceitos e não aceitos
 
-Alat ini dapat mengekstrak konten dari URL dengan jenis konten berikut:
+A ferramenta pode extrair conteúdo de URLs com os seguintes tipos de conteúdo:
 
-- Teks (text/html, application/json, text/plain, text/xml, text/css, text/javascript , text/csv, text/rtf)
-- Gambar (image/png, image/jpeg, image/bmp, image/webp)
+- Texto (text/html, application/json, text/plain, text/xml, text/css,
+  text/javascript , text/csv, text/rtf)
+- Imagem (image/png, image/jpeg, image/bmp, image/webp)
 - PDF (application/pdf)
 
-Jenis konten berikut **tidak** didukung:
+Os seguintes tipos de conteúdo **não** são aceitos:
 
-- Konten berbayar berpenghalang
-- Video YouTube (Lihat
-  [pemahaman video](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=id#youtube) untuk mempelajari
-  cara memproses URL YouTube)
-- File Google Workspace seperti dokumen atau spreadsheet Google
-- File video dan audio
+- Conteúdo com paywall
+- Vídeos do YouTube. Consulte [Entendimento de vídeo](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=pt-br#youtube) para saber como processar URLs do YouTube.
+- Arquivos do Google Workspace, como documentos ou planilhas
+- Arquivos de áudio e vídeo
 
-Kirim masukan
+Envie comentários
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Terakhir diperbarui pada 2026-05-08 UTC.
+Última atualização 2026-05-08 UTC.
 
-Ada masukan untuk kami?
+Quer enviar seu feedback?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-05-08 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-05-08 UTC."],[],[]]

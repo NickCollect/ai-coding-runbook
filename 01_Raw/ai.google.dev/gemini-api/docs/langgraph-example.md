@@ -1,42 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/langgraph-example?hl=tr
-fetched_at: 2026-05-11T04:58:11.303028+00:00
-title: "Gemini ve LangGraph ile s\u0131f\u0131rdan ReAct temsilcisi olu\u015fturma \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/langgraph-example?hl=ja
+fetched_at: 2026-05-18T05:12:54.810610+00:00
+title: "Gemini \u3068 LangGraph \u3092\u4f7f\u7528\u3057\u3066 ReAct \u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u3092\u30bc\u30ed\u304b\u3089\u4f5c\u6210\u3059\u308b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Geri bildirim gönderin
+フィードバックを送信
 
-# Gemini ve LangGraph ile sıfırdan ReAct temsilcisi oluşturma
+# Gemini と LangGraph を使用して ReAct エージェントをゼロから作成する
 
-LangGraph, durum bilgisi olan LLM uygulamaları oluşturmaya yönelik bir çerçeve olduğundan ReAct (Reasoning and Acting) aracıları oluşturmak için iyi bir seçimdir.
+LangGraph はステートフルな LLM アプリケーションを構築するためのフレームワークであり、ReAct（推論と行動）エージェントの構築に適しています。
 
-ReAct aracıları, LLM muhakemesini işlem yürütmeyle birleştirir. Kullanıcı hedeflerine ulaşmak için yinelemeli olarak düşünür, araçları kullanır ve gözlemlerden yararlanarak hareket eder. Yaklaşımını dinamik olarak uyarlar. ["ReAct: Synergizing Reasoning and Acting<0x0x0A>in Language Models"](https://arxiv.org/abs/2210.03629) (2023) adlı makalede tanıtılan bu kalıp, katı iş akışları yerine insan benzeri, esnek problem çözme yöntemlerini yansıtmaya çalışır.
+ReAct エージェントは、LLM の推論とアクションの実行を組み合わせます。ユーザーの目標を達成するために、反復的に思考し、ツールを使用し、観察に基づいて行動し、アプローチを動的に適応させます。「["ReAct: Synergizing Reasoning and Acting
+in Language Models"](https://arxiv.org/abs/2210.03629)」（2023 年）で紹介されたこのパターンは、厳格なワークフローではなく、人間のような柔軟な問題解決を反映しようとしています。
 
-LangGraph, ReAct uygulamalarınızda daha fazla kontrol ve özelleştirme istediğinizde öne çıkan, önceden oluşturulmuş bir ReAct aracısı ([`create_react_agent`](https://langchain-ai.github.io/langgraph/reference/prebuilt/#langgraph.prebuilt.chat_agent_executor.create_react_agent)) sunar. Bu kılavuzda basitleştirilmiş bir sürüm gösterilmektedir.
+LangGraph には、ReAct エージェント（[`create_react_agent`](https://langchain-ai.github.io/langgraph/reference/prebuilt/#langgraph.prebuilt.chat_agent_executor.create_react_agent)）が組み込まれています。これは、ReAct 実装の制御とカスタマイズを強化する必要がある場合に役立ちます。このガイドでは、簡略化されたバージョンを示します。
 
-LangGraph, üç temel bileşeni kullanarak aracıları grafik olarak modeller:
+LangGraph は、次の 3 つの主要なコンポーネントを使用してエージェントをグラフとしてモデル化します。
 
-- `State`: Uygulamanın mevcut anlık görüntüsünü temsil eden paylaşılan veri yapısı (genellikle `TypedDict` veya `Pydantic BaseModel`).
-- `Nodes`: Temsilcilerinizin mantığını kodlar. Mevcut durumu giriş olarak alırlar, bazı hesaplamalar veya yan etkiler gerçekleştirirler ve LLM çağrıları ya da araç çağrıları gibi güncellenmiş bir durumu döndürürler.
-- `Edges`: Mevcut `State`'ye göre yürütülecek bir sonraki `Node`'yi tanımlayın. Bu sayede koşullu mantık ve sabit geçişler sağlanır.
+- `State`: アプリケーションの現在のスナップショットを表す共有データ構造（通常は `TypedDict` または `Pydantic BaseModel`）。
+- `Nodes`: エージェントのロジックをエンコードします。現在の State を入力として受け取り、計算または副作用を実行して、更新された State（LLM 呼び出しやツール呼び出しなど）を返します。
+- `Edges`: 現在の `State` に基づいて実行する次の `Node` を定義し、条件付きロジックと固定遷移を可能にします。
 
-Henüz bir API anahtarınız yoksa [Google AI Studio](https://aistudio.google.com/app/apikey?hl=tr)'dan edinebilirsiniz.
+API キーをまだ取得していない場合は、[Google AI
+Studio](https://aistudio.google.com/app/apikey?hl=ja) から取得できます。
 
 ```
 pip install langgraph langchain-google-genai geopy requests
 ```
 
-API anahtarınızı `GEMINI_API_KEY` ortam değişkeninde ayarlayın.
+環境変数 `GEMINI_API_KEY` に API キーを設定します。
 
 ```
 import os
@@ -45,11 +47,12 @@ import os
 api_key = os.getenv("GEMINI_API_KEY")
 ```
 
-LangGraph kullanarak ReAct aracısını nasıl uygulayacağınızı daha iyi anlamak için bu kılavuzda pratik bir örnek açıklanmaktadır. Amacı, belirli bir konumun güncel hava durumunu bulmak için bir araç kullanmak olan bir ajan oluşturacaksınız.
+LangGraph を使用して ReAct エージェントを実装する方法をよりよく理解するために、このガイドでは実践的な例を紹介します。ツールを使用して、指定された場所の現在の天気を調べるエージェントを作成します。
 
-Bu hava durumu aracısı için `State`, devam eden görüşme geçmişini (mesaj listesi olarak) ve örnekleme amacıyla atılan adım sayısını (tam sayı olarak) tutar.
+この天気エージェントでは、`State` は継続的な会話履歴（メッセージのリストとして）と、実行されたステップ数のカウンタ（整数として）を保持します。これは説明のためのものです。
 
-LangGraph, durum mesajı listelerini güncellemek için `add_messages` yardımcı işlevini sağlar. Mevcut listeyi ve yeni mesajları alıp birleştirilmiş bir liste döndüren bir [indirgeyici](https://langchain-ai.github.io/langgraph/concepts/low_level/#reducers) olarak işlev görür. Güncellemeleri mesaj kimliğine göre işler ve yeni, görülmemiş mesajlar için varsayılan olarak "yalnızca ekleme" davranışını kullanır.
+LangGraph には、状態メッセージ リストを更新するためのヘルパー関数 `add_messages` が用意されています。これは[リデューサー](https://langchain-ai.github.io/langgraph/concepts/low_level/#reducers)として機能し、
+現在のリストと新しいメッセージを受け取り、結合されたリストを返します。メッセージ ID で更新を処理し、新しい未確認のメッセージに対してはデフォルトで「追加のみ」の動作になります。
 
 ```
 from typing import Annotated,Sequence, TypedDict
@@ -63,7 +66,7 @@ class AgentState(TypedDict):
     number_of_steps: int
 ```
 
-Ardından, hava durumu aracınızı tanımlayın.
+次に、天気ツールを定義します。
 
 ```
 from langchain_core.tools import tool
@@ -102,7 +105,7 @@ def get_weather_forecast(location: str, date: str):
 tools = [get_weather_forecast]
 ```
 
-Şimdi modeli başlatın ve araçları modele bağlayın.
+次に、モデルを初期化し、ツールをモデルにバインドします。
 
 ```
 from datetime import datetime
@@ -125,14 +128,14 @@ res=model.invoke(f"What is the weather in Berlin on {datetime.today()}?")
 print(res)
 ```
 
-Temsilcinizi çalıştırmadan önceki son adım, düğümlerinizi ve kenarlarınızı tanımlamaktır.
-Bu örnekte iki düğüm ve bir kenar vardır.
+エージェントを実行する前の最後のステップは、ノードとエッジを定義することです。
+この例では、2 つのノードと 1 つのエッジがあります。
 
-- `call_tool` aracınızın yöntemini yürüten düğüm. LangGraph'ta bu amaçla kullanılan, önceden oluşturulmuş bir düğüm vardır: [ToolNode](https://langchain-ai.github.io/langgraph/how-tos/tool-calling/).
-- Modeli çağırmak için `model_with_tools` kullanan `call_model` düğümü.
-- `should_continue` Aracı mı yoksa modeli mi çağıracağını belirleyen bir sınır.
+- ツールメソッドを実行する `call_tool` ノード。[ToolNode](https://langchain-ai.github.io/langgraph/how-tos/tool-calling/)
+- `model_with_tools` を使用してモデルを呼び出す `call_model` ノード。
+- ツールを呼び出すかモデルを呼び出すかを決定する `should_continue` エッジ。
 
-Düğüm ve kenar sayısı sabit değildir. Grafiğinize istediğiniz kadar düğüm ve kenar ekleyebilirsiniz. Örneğin, yapılandırılmış çıkış eklemek için bir düğüm veya aracı ya da modeli çağırmadan önce model çıkışını kontrol etmek için bir kendi kendine doğrulama/yansıtma düğümü ekleyebilirsiniz.
+ノードとエッジの数は固定されていません。グラフには必要な数のノードとエッジを追加できます。たとえば、構造化された出力を追加するノードや、ツールまたはモデルを呼び出す前にモデルの出力を確認する自己検証/反射ノードを追加できます。
 
 ```
 from langchain_core.messages import ToolMessage
@@ -176,7 +179,7 @@ def should_continue(state: AgentState):
     return "continue"
 ```
 
-Tüm aracı bileşenleri hazır olduğunda bunları bir araya getirebilirsiniz.
+エージェントのすべてのコンポーネントが準備できたので、組み立てることができます。
 
 ```
 from langgraph.graph import StateGraph, END
@@ -212,7 +215,7 @@ workflow.add_edge("tools", "llm")
 graph = workflow.compile()
 ```
 
-Grafiğinizi `draw_mermaid_png` yöntemini kullanarak görselleştirebilirsiniz.
+`draw_mermaid_png` メソッドを使用してグラフを可視化できます。
 
 ```
 from IPython.display import Image, display
@@ -220,9 +223,9 @@ from IPython.display import Image, display
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-![png](https://ai.google.dev/static/gemini-api/docs/images/langgraph-react-agent_16_0.png?hl=tr)
+![png](https://ai.google.dev/static/gemini-api/docs/images/langgraph-react-agent_16_0.png?hl=ja)
 
-Şimdi aracı çalıştırın.
+エージェントを実行します。
 
 ```
 from datetime import datetime
@@ -235,7 +238,7 @@ for state in graph.stream(inputs, stream_mode="values"):
     last_message.pretty_print()
 ```
 
-Artık sohbetinize devam edebilir, başka bir şehirdeki hava durumunu sorabilir veya karşılaştırma isteğinde bulunabilirsiniz.
+会話を続けたり、別の都市の天気を尋ねたり、比較をリクエストしたりできます。
 
 ```
 state["messages"].append(("user", "Would it be warmer in Munich?"))
@@ -245,12 +248,12 @@ for state in graph.stream(state, stream_mode="values"):
     last_message.pretty_print()
 ```
 
-Geri bildirim gönderin
+フィードバックを送信
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Son güncelleme tarihi: 2026-04-29 UTC.
+最終更新日 2026-04-29 UTC。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+ご意見をお聞かせください
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]

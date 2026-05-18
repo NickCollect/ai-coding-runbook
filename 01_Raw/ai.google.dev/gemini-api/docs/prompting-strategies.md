@@ -1,268 +1,202 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=it
-fetched_at: 2026-05-11T05:02:49.465055+00:00
-title: "Strategie di progettazione dei prompt \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=vi
+fetched_at: 2026-05-18T05:19:17.188439+00:00
+title: "Chi\u1ebfn l\u01b0\u1ee3c thi\u1ebft k\u1ebf c\u00e2u l\u1ec7nh \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Invia feedback
+Gửi ý kiến phản hồi
 
-# Strategie di progettazione dei prompt
+# Chiến lược thiết kế câu lệnh
 
-La *progettazione dei prompt* è il processo di creazione di prompt, ovvero richieste in linguaggio naturale,
-che generano risposte accurate e di alta qualità da un modello linguistico.
+*Thiết kế câu lệnh* là quá trình tạo câu lệnh hoặc yêu cầu bằng ngôn ngữ tự nhiên để thu thập câu trả lời chính xác, chất lượng cao từ một mô hình ngôn ngữ.
 
-Questa pagina introduce concetti, strategie e best practice di base per iniziare a progettare prompt per ottenere il massimo dai modelli di AI Gemini.
+Trang này giới thiệu các khái niệm, chiến lược và phương pháp hay nhất cơ bản để giúp bạn bắt đầu thiết kế câu lệnh nhằm khai thác tối đa các mô hình AI của Gemini.
 
-## Guide per prompt specifiche per argomento
+## Hướng dẫn về câu lệnh theo chủ đề
 
-Cerchi strategie di prompt più specifiche? Consulta le nostre altre guide ai prompt
-su:
+Bạn đang tìm kiếm các chiến lược tạo câu lệnh cụ thể hơn? Hãy xem các hướng dẫn viết câu lệnh khác của chúng tôi về:
 
-- [Prompt con file multimediali](https://ai.google.dev/gemini-api/docs/files?hl=it#prompt-guide)
-- Prompt per la generazione di immagini con [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=it#imagen-prompt-guide) e [Generazione di immagini nativa di Gemini](https://ai.google.dev/gemini-api/docs/image-generation?hl=it#prompt-guide)
-- [Prompt per la generazione di video](https://ai.google.dev/gemini-api/docs/video?hl=it#prompt-guide)
+- [Đưa ra câu lệnh bằng tệp đa phương tiện](https://ai.google.dev/gemini-api/docs/files?hl=vi#prompt-guide)
+- Đưa ra câu lệnh để tạo hình ảnh bằng [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=vi#imagen-prompt-guide) và [Gemini Native Image Generation](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi#prompt-guide)
+- [Đưa ra câu lệnh để tạo video](https://ai.google.dev/gemini-api/docs/video?hl=vi#prompt-guide)
 
-Puoi trovare altri prompt di esempio nella [galleria dei prompt](https://ai.google.dev/gemini-api/prompts?hl=it),
-che ha lo scopo di mostrare in modo interattivo molti dei concetti condivisi in questa guida.
+Bạn có thể tìm thấy các câu lệnh mẫu khác trong [thư viện câu lệnh](https://ai.google.dev/gemini-api/prompts?hl=vi). Thư viện này được thiết kế để minh hoạ một cách tương tác nhiều khái niệm được chia sẻ trong hướng dẫn này.
 
-## Istruzioni chiare e specifiche
+## Hướng dẫn rõ ràng và cụ thể
 
-Un modo efficace ed efficiente per personalizzare il comportamento del modello è fornirgli
-istruzioni chiare e specifiche. Le istruzioni possono essere sotto forma di domanda,
-attività passo passo o complesse come la mappatura dell'esperienza e della mentalità di un utente.
+Một cách hiệu quả và năng suất để tuỳ chỉnh hành vi của mô hình là cung cấp cho mô hình các chỉ dẫn rõ ràng và cụ thể. Hướng dẫn có thể ở dạng câu hỏi, các bước thực hiện từng nhiệm vụ hoặc phức tạp như lập bản đồ trải nghiệm và tư duy của người dùng.
 
-### Input
+### Đầu vào
 
-L'input è il testo richiesto nel prompt a cui vuoi che il modello fornisca una
-risposta. Gli input possono essere una domanda a cui il modello
-risponde (input di domanda), un'attività eseguita dal modello (input di attività), un'entità su cui il
-modello agisce (input di entità) o un input parziale che il modello completa o
-prosegue (input di completamento).
+Đầu vào là văn bản bắt buộc trong câu lệnh mà bạn muốn mô hình đưa ra phản hồi. Thông tin đầu vào có thể là một câu hỏi mà mô hình trả lời (thông tin đầu vào câu hỏi), một việc mà mô hình thực hiện (thông tin đầu vào việc), một thực thể mà mô hình hoạt động (thông tin đầu vào thực thể) hoặc thông tin đầu vào một phần mà mô hình hoàn thành hoặc tiếp tục (thông tin đầu vào hoàn thành).
 
-| **Tipo di input** | **Prompt** | **Output generato** |
+| **Loại nội dung nhập** | **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- | --- |
-| Domanda | ```     What's a good name for a flower shop that specializes in selling bouquets of     dried flowers? Create a list of 5 options with just the names. ``` | ```     Here are 5 names for a flower shop specializing in dried flowers:      1. Everlasting Blooms     2. Dried & Delightful     3. The Petal Preserve     4. Whispers of Wildflowers     5. Forever Blooms ``` |
-| Attività | ```     Give me a simple list of just the things that I must bring on a camping trip. The list should have 5 items. ``` | ```     1. **Tent:** Your shelter from the elements.     2. **Sleeping Bag:** Stay warm and comfortable.     3. **Sleeping Pad:** Insulation and cushioning for a good night's sleep.     4. **Headlamp or Flashlight:** Light for nighttime activities.     5. **First Aid Kit:** Be prepared for minor injuries. ``` |
-| Entità | ```     Classify the following items as [large, small]: Elephant Mouse Snail ``` | ``` Here's the classification:  * **Elephant:** Large * **Mouse:** Small * **Snail:** Small ``` |
+| Câu hỏi | ```     What's a good name for a flower shop that specializes in selling bouquets of     dried flowers? Create a list of 5 options with just the names. ``` | ```     Here are 5 names for a flower shop specializing in dried flowers:      1. Everlasting Blooms     2. Dried & Delightful     3. The Petal Preserve     4. Whispers of Wildflowers     5. Forever Blooms ``` |
+| Việc cần làm | ```     Give me a simple list of just the things that I must bring on a camping trip. The list should have 5 items. ``` | ```     1. **Tent:** Your shelter from the elements.     2. **Sleeping Bag:** Stay warm and comfortable.     3. **Sleeping Pad:** Insulation and cushioning for a good night's sleep.     4. **Headlamp or Flashlight:** Light for nighttime activities.     5. **First Aid Kit:** Be prepared for minor injuries. ``` |
+| Thực thể | ```     Classify the following items as [large, small]: Elephant Mouse Snail ``` | ``` Here's the classification:  * **Elephant:** Large * **Mouse:** Small * **Snail:** Small ``` |
 
-#### Completamento parziale dell'input
+#### Hoàn tất một phần dữ liệu đầu vào
 
-I modelli linguistici generativi funzionano come uno strumento avanzato di completamento automatico. Quando
-fornisci contenuti parziali, il modello può fornire il resto dei contenuti o ciò che
-ritiene sia una continuazione di questi contenuti come risposta. In questo modo, se
-includi esempi o contesto, il modello può tenerne conto.
+Mô hình ngôn ngữ tạo sinh hoạt động như một công cụ tự động hoàn thành nâng cao. Khi bạn cung cấp nội dung một phần, mô hình có thể cung cấp phần còn lại của nội dung hoặc nội dung mà mô hình cho là phần tiếp theo của nội dung đó dưới dạng câu trả lời. Khi bạn làm như vậy, nếu bạn đưa ra ví dụ hoặc bối cảnh, mô hình có thể xem xét những ví dụ hoặc bối cảnh đó.
 
-L'esempio seguente fornisce un prompt con un'istruzione e un input di entità:
+Ví dụ sau đây cung cấp một câu lệnh có hướng dẫn và dữ liệu đầu vào là thực thể:
 
 |  |
 | --- |
-| **Prompt:**    ``` For the given order, return a JSON object that has the fields cheeseburger, hamburger, fries, or drink, with the value being the quantity.  Order: A burger and a drink. ```  **Risposta:**    ``` {   "cheeseburger": 0,   "hamburger": 1,   "fries": 0,   "drink": 1 } ```  (gemini-2.5-flash) |
+| **Câu lệnh:**    ``` For the given order, return a JSON object that has the fields cheeseburger, hamburger, fries, or drink, with the value being the quantity.  Order: A burger and a drink. ```  **Phản hồi:**    ``` {   "cheeseburger": 0,   "hamburger": 1,   "fries": 0,   "drink": 1 } ```  (gemini-2.5-flash) |
 
-Anche se il modello ha eseguito l'attività richiesta, scrivere le istruzioni in linguaggio naturale
-può essere a volte difficile e lascia molto all'interpretazione del modello.
-Ad esempio, il menu di un ristorante potrebbe contenere molti articoli. Per ridurre le dimensioni
-della risposta JSON, probabilmente ti conviene omettere gli articoli che non sono stati ordinati. In
-questo caso, puoi fornire un esempio e un prefisso di risposta e lasciare che il modello
-lo completi:
+Mặc dù mô hình đã thực hiện theo yêu cầu, nhưng đôi khi việc viết hướng dẫn bằng ngôn ngữ tự nhiên có thể gặp khó khăn và mô hình sẽ phải tự diễn giải rất nhiều.
+Ví dụ: thực đơn của nhà hàng có thể chứa nhiều món. Để giảm kích thước của phản hồi JSON, có lẽ bạn nên bỏ qua những mặt hàng chưa được đặt hàng. Trong trường hợp này, bạn có thể đưa ra một ví dụ và tiền tố phản hồi, sau đó để mô hình hoàn thành:
 
 |  |
 | --- |
-| **Prompt:**    ``` Valid fields are cheeseburger, hamburger, fries, and drink. Order: Give me a cheeseburger and fries Output: ``` {   "cheeseburger": 1,   "fries": 1 } ``` Order: I want two burgers, a drink, and fries. Output: ```  **Risposta:**    ``` ``` {   "hamburger": 2,   "drink": 1,   "fries": 1 } ``` ```  (gemini-2.5-flash) |
+| **Câu lệnh:**    ``` Valid fields are cheeseburger, hamburger, fries, and drink. Order: Give me a cheeseburger and fries Output: ``` {   "cheeseburger": 1,   "fries": 1 } ``` Order: I want two burgers, a drink, and fries. Output: ```  **Phản hồi:**    ``` ``` {   "hamburger": 2,   "drink": 1,   "fries": 1 } ``` ```  (gemini-2.5-flash) |
 
-Nota come "cheeseburger" sia stato escluso dall'output perché non faceva parte
-dell'ordine.
+Lưu ý cách "cheeseburger" bị loại trừ khỏi đầu ra vì không phải là một phần của đơn đặt hàng.
 
-Sebbene tu possa specificare il formato di semplici oggetti di risposta JSON utilizzando i prompt, ti consigliamo di utilizzare la funzionalità di [output strutturato](https://ai.google.dev/gemini-api/docs/structured-output?hl=it) dell'API Gemini quando specifichi uno schema JSON più complesso per la risposta.
+Mặc dù bạn có thể chỉ định định dạng của các đối tượng phản hồi JSON đơn giản bằng cách sử dụng câu lệnh, nhưng bạn nên sử dụng tính năng [đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi) của Gemini API khi chỉ định một giản đồ JSON phức tạp hơn cho phản hồi.
 
-### Vincoli
+### Giới hạn
 
-Specifica eventuali vincoli per la lettura del prompt o la generazione di una risposta. Puoi
-dire al modello cosa fare e cosa non fare. Ad esempio, puoi specificare un vincolo
-nel prompt sulla lunghezza del riepilogo:
+Nêu rõ mọi hạn chế đối với việc đọc câu lệnh hoặc tạo câu trả lời. Bạn có thể cho mô hình biết những việc cần làm và không cần làm. Ví dụ: bạn có thể chỉ định một ràng buộc trong câu lệnh về độ dài mà bạn muốn bản tóm tắt có:
 
 |  |
 | --- |
-| **Prompt:**     ``` Summarize this text in one sentence: Text: A quantum computer exploits quantum mechanical phenomena to perform calculations exponentially faster than any modern traditional computer. At very tiny scales, physical matter acts as both particles and as waves, and quantum computing uses specialized hardware to leverage this behavior. The operating principles of quantum devices is beyond the scope of classical physics. When deployed at scale, quantum computers could be used in a wide variety of applications such as: in cybersecurity to break existing encryption methods while helping researchers create new ones, in meteorology to develop better weather forecasting etc. However, the current state of the art quantum computers are still largely experimental and impractical. ```     **Risposta:**     ```       Exploiting quantum mechanical phenomena, quantum computers can perform calculations exponentially faster than traditional computers for potential applications like cybersecurity and meteorology, although they are currently largely experimental and impractical. ```  (gemini-2.5-flash) |
+| **Câu lệnh:**     ``` Summarize this text in one sentence: Text: A quantum computer exploits quantum mechanical phenomena to perform calculations exponentially faster than any modern traditional computer. At very tiny scales, physical matter acts as both particles and as waves, and quantum computing uses specialized hardware to leverage this behavior. The operating principles of quantum devices is beyond the scope of classical physics. When deployed at scale, quantum computers could be used in a wide variety of applications such as: in cybersecurity to break existing encryption methods while helping researchers create new ones, in meteorology to develop better weather forecasting etc. However, the current state of the art quantum computers are still largely experimental and impractical. ```     **Câu trả lời:**     ```       Exploiting quantum mechanical phenomena, quantum computers can perform calculations exponentially faster than traditional computers for potential applications like cybersecurity and meteorology, although they are currently largely experimental and impractical. ```  (gemini-2.5-flash) |
 
-### Formato della risposta
+### Định dạng của phản hồi
 
-Puoi fornire istruzioni che specificano il formato della risposta. Ad esempio,
-puoi chiedere che la risposta venga formattata come tabella, elenco puntato, discorso
-di presentazione, parole chiave, frase o paragrafo. La seguente istruzione di sistema indica
-al modello di utilizzare uno stile più conversazionale nella risposta:
+Bạn có thể đưa ra chỉ dẫn để chỉ định định dạng của câu trả lời. Ví dụ: bạn có thể yêu cầu định dạng câu trả lời dưới dạng bảng, danh sách có dấu đầu dòng, lời chào bán hàng ngắn gọn, từ khoá, câu hoặc đoạn văn. Chỉ dẫn hệ thống sau đây yêu cầu mô hình phản hồi theo cách trò chuyện hơn:
 
 |  |
 | --- |
-| **Istruzione di sistema**    ```     All questions should be answered comprehensively with details, unless the user requests a concise response specifically. ```  **Prompt**    ```     What is a smart way to make a business that sells DVD's in 2026? ```  **Risposta:**    ``` Starting a business selling DVDs in 2026 presents significant challenges due to the overwhelming dominance of digital streaming and on-demand services; a "smart" approach would therefore require a highly specialized niche, a strong value proposition beyond just the disc, and likely a focus on community or collector markets rather than mainstream consumption.  Here's a breakdown of what a smart DVD business in 2026 would likely entail:  1. Extreme Niche Specialization: You cannot compete with streaming libraries. Your business must focus on what digital doesn't offer easily or at all. This could include:      * Out-of-Print & Rare Titles: Sourcing films or TV shows that have never been released digitally or are currently unavailable on major streaming platforms.     .... ```  (gemini-2.5-flash) |
+| **Hướng dẫn của hệ thống**    ```     All questions should be answered comprehensively with details, unless the user requests a concise response specifically. ```  **Câu lệnh**    ```     What is a smart way to make a business that sells DVD's in 2026? ```  **Phản hồi:**    ``` Starting a business selling DVDs in 2026 presents significant challenges due to the overwhelming dominance of digital streaming and on-demand services; a "smart" approach would therefore require a highly specialized niche, a strong value proposition beyond just the disc, and likely a focus on community or collector markets rather than mainstream consumption.  Here's a breakdown of what a smart DVD business in 2026 would likely entail:  1. Extreme Niche Specialization: You cannot compete with streaming libraries. Your business must focus on what digital doesn't offer easily or at all. This could include:      * Out-of-Print & Rare Titles: Sourcing films or TV shows that have never been released digitally or are currently unavailable on major streaming platforms.     .... ```  (gemini-2.5-flash) |
 
-#### Formattare le risposte con la strategia di completamento
+#### Định dạng câu trả lời bằng chiến lược hoàn tất
 
-Anche la [strategia di completamento](#completion) può contribuire a formattare la risposta.
-Il seguente esempio chiede al modello di creare una struttura del saggio:
-
-|  |
-| --- |
-| **Prompt:**    ``` Create an outline for an essay about hummingbirds. ```  **Risposta:**    ``` Here is a possible outline for an essay about hummingbirds:  I. Introduction A. Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). B. Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds. C. Thesis Statement: State the main point of the essay, which could be about the remarkable adaptations, behaviors, and ecological importance of hummingbirds.  II. Appearance and Identification ..... ```  (gemini-2.5-flash) |
-
-Il prompt non ha specificato il formato della struttura e il modello ne ha scelto uno per te. Per fare in modo che il modello restituisca una struttura in un formato specifico, puoi aggiungere
-un testo che rappresenti l'inizio della struttura e lasciare che il modello la completi in base
-al pattern che hai avviato.
+[Chiến lược hoàn thành](#completion) cũng có thể giúp định dạng câu trả lời.
+Ví dụ sau đây yêu cầu mô hình tạo một dàn ý cho bài luận:
 
 |  |
 | --- |
-| **Prompt:**    ``` Create an outline for an essay about hummingbirds. I. Introduction    * ```  **Risposta:**    ``` Okay, here is an outline for an essay about hummingbirds, starting from the introduction you provided:  I. Introduction * Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). * Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds, and their general characteristics. * Thesis Statement: State the main point of the essay, focusing on the remarkable adaptations, behaviors, and ecological significance that make hummingbirds extraordinary. ..... ```  (gemini-2.5-flash) |
+| **Câu lệnh:**    ``` Create an outline for an essay about hummingbirds. ```  **Phản hồi:**    ``` Here is a possible outline for an essay about hummingbirds:  I. Introduction A. Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). B. Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds. C. Thesis Statement: State the main point of the essay, which could be about the remarkable adaptations, behaviors, and ecological importance of hummingbirds.  II. Appearance and Identification ..... ```  (gemini-2.5-flash) |
 
-## Prompt zero-shot e few-shot
-
-Puoi includere nel prompt esempi che mostrino al modello come dovrebbe essere una risposta corretta. Il modello tenta di identificare pattern e relazioni dagli esempi e li applica durante la generazione di una risposta. I prompt che contengono alcuni esempi sono chiamati prompt *few-shot*, mentre i prompt che non forniscono esempi sono chiamati prompt *zero-shot*. I prompt few-shot vengono spesso utilizzati
-per regolare la formattazione, la formulazione, l'ambito o il pattern generale delle risposte del modello. Utilizza esempi specifici e vari per aiutare il modello a restringere il campo
-e generare risultati più accurati.
-
-Ti consigliamo di includere sempre esempi few-shot nei prompt. I prompt senza
-esempi few-shot hanno meno probabilità di essere efficaci. Infatti, puoi rimuovere le istruzioni dal prompt se gli esempi sono abbastanza chiari per mostrare l'attività da svolgere.
-
-Il seguente prompt zero-shot chiede al modello di scegliere la spiegazione migliore.
+Câu lệnh không chỉ định định dạng cho dàn ý và mô hình đã chọn một định dạng cho bạn. Để mô hình trả về dàn ý ở một định dạng cụ thể, bạn có thể thêm văn bản đại diện cho phần đầu của dàn ý và để mô hình hoàn tất dàn ý đó dựa trên mẫu mà bạn đã bắt đầu.
 
 |  |
 | --- |
-| **Prompt:**    ``` Please choose the best explanation to the question:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **Risposta:**    ``` Explanation1 is the better explanation because it provides more detail on the process, including how ice crystals combine and grow into snowflakes as they fall through the atmosphere. ```  (gemini-2.5-flash) |
+| **Câu lệnh:**    ``` Create an outline for an essay about hummingbirds. I. Introduction    * ```  **Phản hồi:**    ``` Okay, here is an outline for an essay about hummingbirds, starting from the introduction you provided:  I. Introduction * Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). * Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds, and their general characteristics. * Thesis Statement: State the main point of the essay, focusing on the remarkable adaptations, behaviors, and ecological significance that make hummingbirds extraordinary. ..... ```  (gemini-2.5-flash) |
 
-Se il tuo caso d'uso richiede che il modello produca risposte concise, puoi includere
-esempi nel prompt che danno la preferenza a risposte concise.
+## Câu lệnh không có ví dụ so với câu lệnh có một vài ví dụ
 
-Il seguente prompt fornisce due esempi che mostrano la preferenza per le spiegazioni più brevi. Nella risposta, puoi notare che gli esempi hanno guidato il modello a scegliere la spiegazione più breve (`Explanation2`) anziché quella più lunga (`Explanation1`), come aveva fatto in precedenza.
+Bạn có thể đưa ra các ví dụ trong câu lệnh để cho mô hình biết thế nào là câu trả lời đúng. Mô hình này cố gắng xác định các mẫu và mối quan hệ từ các ví dụ, đồng thời áp dụng chúng khi tạo câu trả lời. Những câu lệnh có chứa một vài ví dụ được gọi là câu lệnh *dựa trên một vài ví dụ*, trong khi những câu lệnh không cung cấp ví dụ nào được gọi là câu lệnh *dựa trên không có ví dụ*. Câu lệnh có ít ví dụ thường được dùng để điều chỉnh định dạng, cách diễn đạt, phạm vi hoặc mẫu chung của câu trả lời do mô hình tạo. Sử dụng các ví dụ cụ thể và đa dạng để giúp mô hình thu hẹp phạm vi và tạo ra kết quả chính xác hơn.
 
-|  |
-| --- |
-| **Prompt:**    ``` Below are some examples showing a question, explanation, and answer format:  Question: Why is the sky blue? Explanation1: The sky appears blue because of Rayleigh scattering, which causes shorter blue wavelengths of light to be scattered more easily than longer red wavelengths, making the sky look blue. Explanation2: Due to Rayleigh scattering effect. Answer: Explanation2  Question: What is the cause of earthquakes? Explanation1: Sudden release of energy in the Earth's crust. Explanation2: Earthquakes happen when tectonic plates suddenly slip or break apart, causing a release of energy that creates seismic waves that can shake the ground and cause damage. Answer: Explanation1  Now, Answer the following question given the example formats above:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **Risposta:**    ``` Answer: Explanation2 ```  (gemini-2.5-flash) |
+Bạn nên luôn thêm một vài ví dụ về few-shot vào câu lệnh. Câu lệnh không có ví dụ ít lần có thể sẽ kém hiệu quả hơn. Trên thực tế, bạn có thể xoá hướng dẫn khỏi câu lệnh nếu các ví dụ của bạn đủ rõ ràng để cho thấy nhiệm vụ cần thực hiện.
 
-### Numero ottimale di esempi
-
-Modelli come Gemini spesso riescono a individuare pattern utilizzando pochi esempi, anche se
-potresti dover sperimentare il numero di esempi da fornire nel prompt
-per ottenere i risultati migliori. Allo stesso tempo, se includi troppi esempi,
-il modello potrebbe iniziare a [fare overfitting](https://developers.google.com/machine-learning/glossary?hl=it#overfitting)
-della risposta agli esempi.
-
-### Formato coerente
-
-Assicurati che la struttura e la formattazione degli esempi few-shot siano le stesse per
-evitare risposte con formati indesiderati. Uno degli obiettivi principali dell'aggiunta
-di esempi few-shot nei prompt è mostrare al modello il formato della risposta. Pertanto,
-è essenziale garantire un formato coerente in tutti gli esempi, prestando particolare attenzione
-a tag XML, spazi bianchi, interruzioni di riga e separatori di esempi.
-
-## Aggiungi contesto
-
-Puoi includere in un prompt istruzioni e informazioni necessarie al modello per risolvere un problema, anziché presumere che il modello disponga di tutte le informazioni richieste. Queste informazioni contestuali aiutano il modello a comprendere i vincoli
-e i dettagli di ciò che gli stai chiedendo di fare.
-
-L'esempio seguente chiede al modello di fornire indicazioni per la risoluzione dei problemi di un router:
+Lời nhắc không cần ví dụ sau đây yêu cầu mô hình chọn lời giải thích phù hợp nhất.
 
 |  |
 | --- |
-| **Prompt:**    ``` What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly. ```  **Risposta:**    ```   A yellow blinking light on your Google Wifi router usually indicates a problem   with the internet connection. Here are some steps to troubleshoot and fix the   issue:   1. Restart your router and modem:     - Unplug your modem from the power outlet and wait for 30 seconds.     - Plug your modem back in and wait for it to fully boot up.     - Unplug your Google Wifi router and wait for 30 seconds.     - Plug your Google Wifi router back in and wait for it to fully boot up. ..... ```  (gemini-2.5-flash) |
+| **Câu lệnh:**    ``` Please choose the best explanation to the question:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **Phản hồi:**    ``` Explanation1 is the better explanation because it provides more detail on the process, including how ice crystals combine and grow into snowflakes as they fall through the atmosphere. ```  (gemini-2.5-flash) |
 
-La risposta sembra contenere informazioni generiche per la risoluzione dei problemi che non sono specifiche
-per il router o lo stato delle spie LED.
+Nếu trường hợp sử dụng của bạn yêu cầu mô hình tạo ra các câu trả lời ngắn gọn, bạn có thể đưa các ví dụ vào câu lệnh ưu tiên câu trả lời ngắn gọn.
 
-Per personalizzare la risposta per il router specifico, puoi aggiungere alla richiesta la guida alla risoluzione dei problemi del router come contesto a cui fare riferimento quando fornisci una risposta.
+Câu lệnh sau đây cung cấp 2 ví dụ cho thấy sự ưu tiên đối với lời giải thích ngắn gọn hơn. Trong câu trả lời, bạn có thể thấy rằng các ví dụ đã hướng dẫn mô hình chọn lời giải thích ngắn hơn (`Explanation2`) thay vì lời giải thích dài hơn (`Explanation1`) như trước đây.
 
 |  |
 | --- |
-| **Prompt:**    ``` Answer the question using the text below. Respond with only the text provided. Question: What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly.  Text: Color: Slowly pulsing yellow What it means: There is a network error. What to do: Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again.  Color: Fast blinking yellow What it means: You are holding down the reset button and are factory resetting this device. What to do: If you keep holding down the reset button, after about 12 seconds, the light will turn solid yellow. Once it is solid yellow, let go of the factory reset button.  Color: Solid yellow What it means: Router is factory resetting. What to do: This can take up to 10 minutes. When it's done, the device will reset itself and start pulsing white, letting you know it's ready for setup.  Color: Solid red What it means: Something is wrong. What to do: Critical failure. Factory reset the router. If the light stays red, contact Wifi customer support. ```  **Risposta:**    ``` Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again. ```  (gemini-2.5-flash) |
+| **Câu lệnh:**    ``` Below are some examples showing a question, explanation, and answer format:  Question: Why is the sky blue? Explanation1: The sky appears blue because of Rayleigh scattering, which causes shorter blue wavelengths of light to be scattered more easily than longer red wavelengths, making the sky look blue. Explanation2: Due to Rayleigh scattering effect. Answer: Explanation2  Question: What is the cause of earthquakes? Explanation1: Sudden release of energy in the Earth's crust. Explanation2: Earthquakes happen when tectonic plates suddenly slip or break apart, causing a release of energy that creates seismic waves that can shake the ground and cause damage. Answer: Explanation1  Now, Answer the following question given the example formats above:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **Phản hồi:**    ``` Answer: Explanation2 ```  (gemini-2.5-flash) |
 
-## Suddividere i prompt in componenti
+### Số lượng ví dụ tối ưu
 
-Per i casi d'uso che richiedono prompt complessi, puoi aiutare il modello a gestire questa complessità
-suddividendo gli elementi in componenti più semplici.
+Các mô hình như Gemini thường có thể nhận ra các mẫu bằng một vài ví dụ, mặc dù bạn có thể cần thử nghiệm với số lượng ví dụ cần cung cấp trong câu lệnh để đạt được kết quả tốt nhất. Đồng thời, nếu bạn đưa vào quá nhiều ví dụ, mô hình có thể bắt đầu [khớp quá mức](https://developers.google.com/machine-learning/glossary?hl=vi#overfitting) phản hồi với các ví dụ.
 
-1. **Suddividi le istruzioni**:invece di avere molte istruzioni in un unico prompt, crea un prompt per ogni istruzione. Puoi scegliere quale prompt elaborare in base all'input dell'utente.
-2. **Prompt concatenati**:per attività complesse che prevedono più passaggi sequenziali,
-   trasforma ogni passaggio in un prompt e concatenali in una sequenza. In questa
-   catena sequenziale di prompt, l'output di un prompt nella sequenza diventa
-   l'input del prompt successivo. L'output dell'ultimo prompt della sequenza
-   è l'output finale.
-3. **Aggregare le risposte**:l'aggregazione si verifica quando vuoi eseguire diverse attività parallele su diverse porzioni di dati e aggregare i risultati per produrre l'output finale. Ad esempio, puoi indicare al modello di eseguire un'operazione sulla prima parte dei dati, un'altra operazione sul resto dei dati e aggregare i risultati.
+### Định dạng nhất quán
 
-## Sperimenta con i parametri del modello
+Đảm bảo rằng cấu trúc và định dạng của các ví dụ ít lượt tương tác đều giống nhau để tránh các phản hồi có định dạng không mong muốn. Một trong những mục tiêu chính của việc thêm ví dụ ít lần vào câu lệnh là cho mô hình thấy định dạng phản hồi. Do đó, bạn cần đảm bảo định dạng nhất quán trên tất cả các ví dụ, đặc biệt là chú ý đến thẻ XML, khoảng trắng, dòng mới và dấu phân cách ví dụ.
 
-Ogni chiamata inviata a un modello include valori parametro che controllano il modo in cui il modello genera una risposta. Il modello può generare risultati diversi
-a seconda dei valori parametro. Sperimenta con diversi valori parametro per ottenere
-i valori migliori per l'attività. I parametri disponibili per
-i vari modelli possono variare. I parametri più comuni sono i seguenti:
+## Thêm ngữ cảnh
 
-1. **Token di output massimi**:specifica il numero massimo di token che possono essere
-   generati nella risposta. Un token equivale a circa quattro caratteri. 100
-   token corrispondono a circa 60-80 parole.
-2. **Temperatura**:la temperatura controlla il grado di casualità nella selezione dei token. La temperatura viene utilizzata per il campionamento durante la generazione di risposte,
-   che si verifica quando vengono applicati `topP` e `topK`. Le temperature più basse sono ideali per prompt che richiedono risposte più deterministiche o meno aperte, mentre le temperature più alte possono portare a risultati più diversificati o creativi. Una
-   temperatura pari a 0 è deterministica, il che significa che viene sempre selezionata la risposta con la probabilità più alta.
-3. **`topK`:** il parametro `topK` modifica il modo in cui il modello seleziona i token per l'output. Un `topK` pari a 1 indica che il token selezionato è il più probabile tra tutti i token nel vocabolario del modello (chiamato anche decodifica greedy). Un `topK` pari a 3 indica invece che il token successivo viene selezionato tra i tre token più probabili (utilizzando la temperatura). Per ogni fase di selezione dei token, vengono campionati i
-   `topK` token con le probabilità più alte. I token vengono poi
-   ulteriormente filtrati in base a `topP` e il token finale viene selezionato utilizzando
-   il campionamento con temperatura.
-4. **`topP`:** il parametro `topP` modifica il modo in cui il modello seleziona i token per l'output. I token vengono selezionati dal più probabile al meno probabile finché la somma delle loro probabilità non corrisponde al valore di `topP`. Ad esempio, se i token A, B e C hanno una probabilità di 0,3, 0,2 e 0,1 e il valore di `topP` è 0,5, il modello seleziona A o B come token successivo utilizzando la temperatura ed esclude C come candidato. Il valore predefinito di `topP` è 0,95.
-5. **`stop_sequences`:** imposta una sequenza di interruzione per
-   indicare al modello di interrompere la generazione di contenuti. Una sequenza di interruzione può essere
-   qualsiasi sequenza di caratteri. Cerca di evitare di utilizzare una sequenza di caratteri che
-   potrebbe essere presente nei contenuti generati.
+Bạn có thể đưa ra hướng dẫn và thông tin trong một câu lệnh mà mô hình cần để giải quyết vấn đề, thay vì giả định rằng mô hình có tất cả thông tin cần thiết. Thông tin theo bối cảnh này giúp mô hình hiểu được các ràng buộc và chi tiết về những việc bạn yêu cầu mô hình thực hiện.
 
-## Strategie di iterazione dei prompt
+Ví dụ sau đây yêu cầu mô hình đưa ra hướng dẫn khắc phục sự cố cho một bộ định tuyến:
 
-A volte la progettazione dei prompt richiede alcune iterazioni prima di ottenere
-in modo coerente la risposta che stai cercando. Questa sezione fornisce
-indicazioni su alcune cose che puoi provare a fare quando esegui l'iterazione dei prompt:
+|  |
+| --- |
+| **Câu lệnh:**    ``` What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly. ```  **Phản hồi:**    ```   A yellow blinking light on your Google Wifi router usually indicates a problem   with the internet connection. Here are some steps to troubleshoot and fix the   issue:   1. Restart your router and modem:     - Unplug your modem from the power outlet and wait for 30 seconds.     - Plug your modem back in and wait for it to fully boot up.     - Unplug your Google Wifi router and wait for 30 seconds.     - Plug your Google Wifi router back in and wait for it to fully boot up. ..... ```  (gemini-2.5-flash) |
 
-1. **Utilizza una formulazione diversa**:l'utilizzo di parole o frasi diverse nei prompt
-   spesso produce risposte diverse dal modello, anche se tutte significano la
-   stessa cosa. Se il prompt non produce i risultati che ti aspettavi, prova a riformularlo.
+Câu trả lời có vẻ là thông tin khắc phục sự cố chung chung, không cụ thể cho bộ định tuyến hoặc trạng thái của đèn chỉ báo LED.
+
+Để tuỳ chỉnh câu trả lời cho bộ định tuyến cụ thể, bạn có thể thêm hướng dẫn khắc phục sự cố của bộ định tuyến vào câu lệnh dưới dạng ngữ cảnh để bộ định tuyến tham khảo khi đưa ra câu trả lời.
+
+|  |
+| --- |
+| **Câu lệnh:**    ``` Answer the question using the text below. Respond with only the text provided. Question: What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly.  Text: Color: Slowly pulsing yellow What it means: There is a network error. What to do: Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again.  Color: Fast blinking yellow What it means: You are holding down the reset button and are factory resetting this device. What to do: If you keep holding down the reset button, after about 12 seconds, the light will turn solid yellow. Once it is solid yellow, let go of the factory reset button.  Color: Solid yellow What it means: Router is factory resetting. What to do: This can take up to 10 minutes. When it's done, the device will reset itself and start pulsing white, letting you know it's ready for setup.  Color: Solid red What it means: Something is wrong. What to do: Critical failure. Factory reset the router. If the light stays red, contact Wifi customer support. ```  **Phản hồi:**    ``` Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again. ```  (gemini-2.5-flash) |
+
+## Chia câu lệnh thành các thành phần
+
+Đối với những trường hợp sử dụng đòi hỏi câu lệnh phức tạp, bạn có thể giúp mô hình quản lý độ phức tạp này bằng cách chia nhỏ mọi thứ thành các thành phần đơn giản hơn.
+
+1. **Chia nhỏ hướng dẫn:** Thay vì đưa ra nhiều hướng dẫn trong một câu lệnh, hãy tạo một câu lệnh cho mỗi hướng dẫn. Bạn có thể chọn câu lệnh cần xử lý dựa trên thông tin đầu vào của người dùng.
+2. **Kết hợp các câu lệnh:** Đối với những tác vụ phức tạp liên quan đến nhiều bước tuần tự, hãy tạo một câu lệnh cho mỗi bước và kết hợp các câu lệnh với nhau theo một trình tự. Trong chuỗi lời nhắc tuần tự này, đầu ra của một lời nhắc trong chuỗi sẽ trở thành đầu vào của lời nhắc tiếp theo. Kết quả đầu ra của câu lệnh cuối cùng trong chuỗi là kết quả đầu ra cuối cùng.
+3. **Tổng hợp phản hồi:** Tổng hợp là khi bạn muốn thực hiện nhiều tác vụ song song trên nhiều phần dữ liệu và tổng hợp kết quả để tạo ra đầu ra cuối cùng. Ví dụ: bạn có thể yêu cầu mô hình thực hiện một thao tác trên phần đầu tiên của dữ liệu, thực hiện một thao tác khác trên phần còn lại của dữ liệu và tổng hợp kết quả.
+
+## Thử nghiệm với các tham số mô hình
+
+Mỗi lệnh gọi mà bạn gửi đến một mô hình đều bao gồm các giá trị tham số kiểm soát cách mô hình tạo ra phản hồi. Mô hình có thể tạo ra các kết quả khác nhau cho các giá trị tham số khác nhau. Thử nghiệm với nhiều giá trị tham số để nhận được các giá trị tốt nhất cho tác vụ. Các tham số có sẵn cho các mô hình khác nhau có thể khác nhau. Sau đây là các tham số phổ biến nhất:
+
+1. **Số lượng mã thông báo đầu ra tối đa:** Chỉ định số lượng mã thông báo tối đa có thể được tạo trong câu trả lời. Một mã thông báo có khoảng 4 ký tự. 100 mã thông báo tương ứng với khoảng 60 đến 80 từ.
+2. **Nhiệt độ:** Nhiệt độ kiểm soát mức độ ngẫu nhiên trong việc chọn mã thông báo. Nhiệt độ được dùng để lấy mẫu trong quá trình tạo phản hồi, xảy ra khi áp dụng `topP` và `topK`. Nhiệt độ thấp phù hợp với những câu lệnh yêu cầu câu trả lời mang tính xác định hơn hoặc ít mang tính mở hơn, trong khi nhiệt độ cao có thể dẫn đến kết quả đa dạng hoặc sáng tạo hơn. Nhiệt độ 0 là xác định, tức là phản hồi có xác suất cao nhất luôn được chọn.
+3. **`topK`:** Tham số `topK` thay đổi cách mô hình chọn mã thông báo cho đầu ra. `topK` bằng 1 có nghĩa là mã thông báo được chọn có khả năng xuất hiện cao nhất trong số tất cả các mã thông báo trong từ vựng của mô hình (còn gọi là giải mã tham lam), trong khi `topK` bằng 3 có nghĩa là mã thông báo tiếp theo được chọn trong số 3 mã thông báo có khả năng xuất hiện cao nhất bằng cách sử dụng nhiệt độ. Đối với mỗi bước chọn mã thông báo, các mã thông báo `topK` có xác suất cao nhất sẽ được lấy mẫu. Sau đó, các mã thông báo sẽ được lọc thêm dựa trên `topP`, mã thông báo cuối cùng được chọn bằng cách sử dụng phương pháp lấy mẫu nhiệt độ.
+4. **`topP`:** Tham số `topP` thay đổi cách mô hình chọn mã thông báo cho đầu ra. Các mã thông báo được chọn từ mã thông báo có khả năng cao nhất đến thấp nhất cho đến khi tổng xác suất của chúng bằng với giá trị `topP`. Ví dụ: nếu các mã thông báo A, B và C có xác suất lần lượt là 0,3, 0,2 và 0,1, đồng thời giá trị `topP` là 0,5, thì mô hình sẽ chọn A hoặc B làm mã thông báo tiếp theo bằng cách sử dụng nhiệt độ và loại trừ C làm ứng cử viên. Giá trị `topP` mặc định là 0,95.
+5. **`stop_sequences`:** Đặt một chuỗi dừng để yêu cầu mô hình dừng tạo nội dung. Một chuỗi dừng có thể là bất kỳ chuỗi ký tự nào. Cố gắng tránh sử dụng một chuỗi ký tự có thể xuất hiện trong nội dung được tạo.
+
+## Chiến lược ra lệnh nối tiếp
+
+Đôi khi, bạn cần thiết kế câu lệnh nhiều lần trước khi nhận được câu trả lời mà bạn mong muốn một cách nhất quán. Phần này cung cấp hướng dẫn về một số việc bạn có thể thử khi lặp lại các câu lệnh:
+
+1. **Sử dụng cách diễn đạt khác:** Việc sử dụng các từ hoặc cách diễn đạt khác nhau trong câu lệnh thường mang lại các câu trả lời khác nhau từ mô hình, mặc dù tất cả đều có nghĩa giống nhau. Nếu bạn không nhận được kết quả như mong đợi từ câu lệnh, hãy thử diễn đạt lại câu lệnh đó.
 
    |  |
    | --- |
    | ``` Version 1: How do I bake a pie?  Version 2: Suggest a recipe for a pie.  Version 3: What's a good pie recipe? ``` |
-2. **Passa a un'attività analoga:** se non riesci a far seguire al modello le tue
-   istruzioni per un'attività, prova a fornirgli istruzioni per un'attività analoga
-   che ottenga lo stesso risultato.
+2. **Chuyển sang một việc tương tự:** Nếu bạn không thể khiến mô hình làm theo chỉ dẫn của bạn cho một việc nào đó, hãy thử đưa ra chỉ dẫn cho một việc tương tự để đạt được kết quả tương tự.
 
-   Questo prompt indica al modello di classificare un libro utilizzando categorie predefinite:
+   Câu lệnh này yêu cầu mô hình phân loại một cuốn sách bằng cách sử dụng các danh mục được xác định trước:
 
    |  |
    | --- |
-   | **Prompt:**    ``` Which category does The Odyssey belong to: thriller sci-fi mythology biography ```  **Risposta:**    ```     The Odyssey belongs to the category of **mythology**.       Here's why:      * **Mythology:** The Odyssey tells the story of Odysseus, a hero from Greek mythology, and his     journey home after the Trojan War. It features gods, monsters, and supernatural events common to     Greek mythology. ..... ```  (gemini-2.5-flash) |
+   | **Câu lệnh:**    ``` Which category does The Odyssey belong to: thriller sci-fi mythology biography ```  **Phản hồi:**    ```     The Odyssey belongs to the category of **mythology**.       Here's why:      * **Mythology:** The Odyssey tells the story of Odysseus, a hero from Greek mythology, and his     journey home after the Trojan War. It features gods, monsters, and supernatural events common to     Greek mythology. ..... ```  (gemini-2.5-flash) |
 
-   La risposta è corretta, ma il modello non è rimasto nei limiti delle opzioni. Inoltre, vuoi che il modello risponda solo con una delle opzioni
-   invece di una frase completa. In questo caso, puoi riformulare le istruzioni come una
-   domanda a scelta multipla e chiedere al modello di scegliere un'opzione.
+   Câu trả lời là chính xác, nhưng mô hình không nằm trong phạm vi của các lựa chọn. Bạn cũng muốn mô hình chỉ phản hồi bằng một trong các lựa chọn thay vì một câu đầy đủ. Trong trường hợp này, bạn có thể diễn đạt lại hướng dẫn dưới dạng câu hỏi trắc nghiệm và yêu cầu mô hình chọn một phương án.
 
    |  |
    | --- |
-   | **Prompt:**    ``` Multiple choice problem: Which of the following options describes the book The Odyssey? Options: ``` |
+   | **Câu lệnh:**    ``` Multiple choice problem: Which of the following options describes the book The Odyssey? Options: ``` |
 
    - thriller
    - sci-fi
    - mythology
    - biography
-     **Risposta:**
+     **Câu trả lời:**
 
      ```
      The correct answer is mythology.
      ```
 
      (gemini-2.5-flash)
-   - **Modificare l'ordine dei contenuti del prompt:** l'ordine dei contenuti nel prompt
-     a volte può influire sulla risposta. Prova a modificare l'ordine dei contenuti e vedi
-     come influisce sulla risposta.
+   - **Thay đổi thứ tự nội dung trong câu lệnh:** Đôi khi, thứ tự của nội dung trong câu lệnh có thể ảnh hưởng đến câu trả lời. Hãy thử thay đổi thứ tự nội dung và xem điều đó ảnh hưởng đến câu trả lời như thế nào.
 
      ```
      Version 1:
@@ -281,61 +215,51 @@ indicazioni su alcune cose che puoi provare a fare quando esegui l'iterazione de
      [context]
      ```
 
-## Risposte di riserva
+## Phản hồi dự phòng
 
-Una risposta di riserva è una risposta restituita dal modello quando il prompt o la risposta attiva un filtro di sicurezza. Un esempio di risposta di riserva è
-"Non posso aiutarti in questo caso, perché sono solo un modello linguistico".
+Phản hồi dự phòng là phản hồi do mô hình trả về khi câu lệnh hoặc câu trả lời kích hoạt bộ lọc an toàn. Ví dụ về câu trả lời dự phòng là "Tôi không thể giúp bạn về vấn đề đó vì tôi chỉ là một mô hình ngôn ngữ".
 
-Se il modello risponde con una risposta di riserva, prova ad aumentare la temperatura.
+Nếu mô hình phản hồi bằng một câu trả lời dự phòng, hãy thử tăng nhiệt độ.
 
-## Grounding ed esecuzione del codice
+## Liên kết thực tế và thực thi mã
 
-Gemini è in grado di utilizzare strumenti per evitare le allucinazioni negli scenari in cui potrebbe
-altrimenti produrre risposte errate.
+Gemini có thể sử dụng các công cụ để tránh đưa ra thông tin sai lệch trong những trường hợp mà Gemini có thể đưa ra câu trả lời không chính xác.
 
-[Grounding con la Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it) collega il modello Gemini a contenuti web in tempo reale e deve essere attivato ogni volta che il modello potrebbe aver bisogno di conoscere fatti oscuri o recenti.
+[Dựa trên kết quả của Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi) kết nối mô hình Gemini với nội dung trên web theo thời gian thực và cần được bật bất cứ khi nào mô hình có thể cần biết những thông tin thực tế không rõ ràng hoặc gần đây.
 
-Lo [strumento di esecuzione del codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it) di Gemini consente al modello di generare ed eseguire codice Python e deve essere abilitato ogni volta che il modello deve eseguire qualsiasi tipo di operazione aritmetica, conteggio o calcolo.
+[Công cụ thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi) của Gemini cho phép mô hình tạo và chạy mã Python, đồng thời phải được bật bất cứ khi nào mô hình cần thực hiện bất kỳ loại phép tính số học, đếm hoặc tính toán nào.
 
 ## Gemini 3
 
-I [modelli Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=it#gemini-3) sono progettati per il ragionamento
-avanzato e il rispetto delle istruzioni.
-Rispondono meglio a prompt diretti, ben strutturati e che definiscono chiaramente
-l'attività e qualsiasi vincolo. Per ottenere risultati ottimali con Gemini 3, si consiglia di adottare le seguenti pratiche:
+[Các mô hình Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=vi#gemini-3) được thiết kế để lập luận nâng cao và làm theo hướng dẫn.
+Các mô hình này phản hồi tốt nhất với những câu lệnh trực tiếp, có cấu trúc rõ ràng, xác định rõ nhiệm vụ và mọi ràng buộc. Bạn nên áp dụng các phương pháp sau đây để đạt được kết quả tối ưu với Gemini 3:
 
-### Principi fondamentali del prompting
+### Nguyên tắc cốt lõi về câu lệnh
 
-- **Sii preciso e diretto**:indica il tuo obiettivo in modo chiaro e conciso. Evita
-  un linguaggio non necessario o eccessivamente persuasivo.
-- **Utilizza una struttura coerente**:utilizza delimitatori chiari per separare le diverse parti del prompt. I tag in stile XML (ad es. `<context>`, `<task>`) o
-  le intestazioni Markdown sono efficaci. Scegli un formato e usalo in modo coerente
-  all'interno di un singolo prompt.
-- **Definisci i parametri:** spiega in modo esplicito eventuali termini o parametri ambigui.
-- **Controlla la verbosità dell'output:** per impostazione predefinita, i modelli Gemini 3 forniscono risposte dirette ed efficienti. Se hai bisogno di una risposta più colloquiale o dettagliata,
-  devi richiederla esplicitamente nelle istruzioni.
-- **Gestisci gli input multimodali in modo coerente:** quando utilizzi testo, immagini, audio o video, trattali come input di pari livello. Assicurati che le istruzioni facciano riferimento
-  chiaramente a ogni modalità, se necessario.
-- **Dai la priorità alle istruzioni critiche:** inserisci i vincoli comportamentali essenziali, le definizioni dei ruoli (persona) e i requisiti di formato di output nelle istruzioni di sistema o all'inizio del prompt dell'utente.
-- **Struttura per contesti lunghi**:quando fornisci grandi quantità di contesto
-  (ad es. documenti, codice), fornisci prima tutto il contesto. Inserisci le tue istruzioni o domande specifiche alla *fine* del prompt.
-- **Contesto di ancoraggio**:dopo un blocco di dati di grandi dimensioni, utilizza una frase di transizione chiara per collegare il contesto e la query, ad esempio "In base alle informazioni riportate sopra..."
+- **Chính xác và trực tiếp:** Nêu rõ mục tiêu của bạn một cách rõ ràng và ngắn gọn. Tránh sử dụng ngôn từ không cần thiết hoặc quá thuyết phục.
+- **Sử dụng cấu trúc nhất quán:** Sử dụng dấu phân cách rõ ràng để phân tách các phần khác nhau trong câu lệnh. Các thẻ theo kiểu XML (ví dụ: `<context>`, `<task>`) hoặc tiêu đề Markdown đều có hiệu quả. Chọn một định dạng và sử dụng nhất quán trong một câu lệnh.
+- **Xác định các tham số:** Giải thích rõ ràng mọi thuật ngữ hoặc tham số mơ hồ.
+- **Kiểm soát mức độ chi tiết của câu trả lời:** Theo mặc định, các mô hình Gemini 3 cung cấp câu trả lời trực tiếp và hiệu quả. Nếu cần câu trả lời chi tiết hơn hoặc mang tính trò chuyện hơn, bạn phải yêu cầu rõ ràng trong chỉ dẫn.
+- **Xử lý nhất quán các thông tin đầu vào đa phương thức:** Khi sử dụng văn bản, hình ảnh, âm thanh hoặc video, hãy coi chúng là các thông tin đầu vào thuộc cùng một loại. Đảm bảo hướng dẫn của bạn tham chiếu rõ ràng đến từng phương thức khi cần.
+- **Ưu tiên các chỉ dẫn quan trọng:** Đặt các ràng buộc hành vi thiết yếu, định nghĩa vai trò (persona) và yêu cầu về định dạng đầu ra trong Chỉ dẫn hệ thống hoặc ngay từ đầu lời nhắc của người dùng.
+- **Cấu trúc cho bối cảnh dài:** Khi cung cấp một lượng lớn bối cảnh (ví dụ: tài liệu, mã), trước tiên hãy cung cấp tất cả bối cảnh. Đặt chỉ dẫn hoặc câu hỏi cụ thể của bạn ở *cuối* câu lệnh.
+- **Ngữ cảnh liên kết:** Sau một khối dữ liệu lớn, hãy sử dụng một cụm từ chuyển đổi rõ ràng để kết nối ngữ cảnh và câu hỏi của bạn, chẳng hạn như "Dựa trên thông tin ở trên..."
 
-### Strategie di Gemini 3 Flash
+### Chiến lược Gemini 3 Flash
 
-- **Accuratezza del giorno corrente**:aggiungi la seguente clausola alle istruzioni di sistema per aiutare il modello a tenere conto del fatto che il giorno corrente è il 2026:
+- **Độ chính xác của ngày hiện tại:** Thêm mệnh đề sau vào hướng dẫn hệ thống để giúp mô hình chú ý đến ngày hiện tại là năm 2026:
 
   ```
   For time-sensitive user queries that require up-to-date information, you
   MUST follow the provided current time (date and year) when formulating
   search queries in tool calls. Remember it is 2026 this year.
   ```
-- **Accuratezza del knowledge cutoff**:aggiungi la seguente clausola alle istruzioni di sistema per rendere il modello consapevole del suo knowledge cutoff:
+- **Độ chính xác của điểm cắt kiến thức:** Thêm mệnh đề sau vào chỉ dẫn hệ thống để mô hình biết về điểm cắt kiến thức của mình:
 
   ```
   Your knowledge cutoff date is January 2025.
   ```
-- **Prestazioni di grounding**:aggiungi la seguente clausola alle istruzioni di sistema (con le modifiche appropriate) per migliorare la capacità del modello di basare le risposte sul contesto fornito:
+- **Hiệu quả liên kết thực tế:** Thêm mệnh đề sau vào chỉ dẫn hệ thống (chỉnh sửa nếu thích hợp) để cải thiện khả năng liên kết thực tế của mô hình trong ngữ cảnh được cung cấp:
 
   ```
   You are a strictly grounded assistant limited to the information provided in
@@ -351,21 +275,17 @@ l'attività e qualsiasi vincolo. Per ottenere risultati ottimali con Gemini 3, s
   the context, you must state that the information is not available.
   ```
 
-### Migliorare il ragionamento e la pianificazione
+### Nâng cao khả năng suy luận và lập kế hoạch
 
-I modelli delle serie Gemini 2.5 e 3 generano automaticamente un testo di "pensiero" interno
-per migliorare le prestazioni di ragionamento. Pertanto, in genere non è necessario includere
-la struttura, il piano o i passaggi di ragionamento dettagliati del modello nella risposta restituita. Per i problemi che richiedono un ragionamento complesso, richieste semplici come "Pensa
-molto attentamente prima di rispondere" possono migliorare le prestazioni, anche se a scapito di
-token di pensiero aggiuntivi.
+Các mô hình Gemini 2.5 và 3 tự động tạo văn bản "suy nghĩ" nội bộ để cải thiện hiệu suất suy luận. Do đó, bạn thường không cần phải có dàn ý, kế hoạch hoặc các bước suy luận chi tiết của mô hình trong chính phản hồi được trả về. Đối với những vấn đề đòi hỏi khả năng suy luận cao, các yêu cầu đơn giản như "Hãy suy nghĩ thật kỹ trước khi trả lời" có thể cải thiện hiệu suất, mặc dù phải trả giá bằng các mã thông báo suy nghĩ bổ sung.
 
-Per ulteriori dettagli, consulta la documentazione relativa al [pensiero di Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=it).
+Hãy xem tài liệu về [Cách Gemini suy nghĩ](https://ai.google.dev/gemini-api/docs/thinking?hl=vi) để biết thêm thông tin chi tiết.
 
-### Esempi di prompt strutturati
+### Ví dụ về câu lệnh có cấu trúc
 
-L'utilizzo di tag o Markdown aiuta il modello a distinguere tra istruzioni, contesto e attività.
+Việc sử dụng thẻ hoặc Markdown giúp mô hình phân biệt giữa hướng dẫn, bối cảnh và nhiệm vụ.
 
-**Esempio XML:**
+**Ví dụ về XML:**
 
 ```
 <role>
@@ -386,7 +306,7 @@ You are a helpful assistant.
 </task>
 ```
 
-**Esempio di Markdown:**
+**Ví dụ về cách đánh dấu:**
 
 ```
 # Identity
@@ -400,12 +320,11 @@ You are a senior solution architect.
 Return a single code block.
 ```
 
-### Esempio di modello che combina le best practice
+### Ví dụ về mẫu kết hợp các phương pháp hay nhất
 
-Questo modello acquisisce i principi fondamentali per la creazione di prompt con Gemini 3. Assicurati sempre
-di eseguire iterazioni e modifiche per il tuo caso d'uso specifico.
+Mẫu này ghi lại các nguyên tắc cốt lõi để đưa ra câu lệnh cho Gemini 3. Luôn đảm bảo lặp lại và sửa đổi cho trường hợp sử dụng cụ thể của bạn.
 
-**Istruzione di sistema:**
+**Hướng dẫn của hệ thống:**
 
 ```
 <role>
@@ -432,7 +351,7 @@ Structure your response as follows:
 </output_format>
 ```
 
-**Prompt dell'utente:**
+**Câu lệnh của người dùng:**
 
 ```
 <context>
@@ -448,41 +367,41 @@ Remember to think step-by-step before answering.
 </final_instruction>
 ```
 
-## Workflow agentici
+## Quy trình làm việc dựa trên trợ lý AI
 
-Per i flussi di lavoro agentici profondi, spesso sono necessarie istruzioni specifiche per controllare il modo in cui il modello ragiona, pianifica ed esegue le attività. Sebbene Gemini offra prestazioni generali elevate, gli agenti complessi spesso richiedono di configurare il compromesso tra costo di calcolo (latenza e token) e precisione dell'attività.
+Đối với quy trình làm việc sâu của tác nhân, bạn thường cần có hướng dẫn cụ thể để kiểm soát cách mô hình suy luận, lập kế hoạch và thực hiện các tác vụ. Mặc dù Gemini mang lại hiệu suất chung mạnh mẽ, nhưng các tác nhân phức tạp thường yêu cầu bạn định cấu hình sự đánh đổi giữa chi phí tính toán (độ trễ và token) và độ chính xác của tác vụ.
 
-Quando progetti i prompt per gli agenti, considera le seguenti dimensioni del comportamento che puoi indirizzare nell'agente:
+Khi thiết kế câu lệnh cho các tác nhân, hãy cân nhắc những khía cạnh sau đây về hành vi mà bạn có thể điều hướng trong tác nhân:
 
-### Ragionamento e strategia
+### Suy luận và chiến lược
 
-Configurazione del modo in cui il modello pensa e pianifica prima di agire.
+Cấu hình cho cách mô hình suy nghĩ và lập kế hoạch trước khi hành động.
 
-- **Decomposizione logica**:definisce la completezza con cui il modello deve analizzare vincoli, prerequisiti e ordine delle operazioni.
-- **Diagnosi del problema**: controlla la profondità dell'analisi durante l'identificazione delle cause e l'utilizzo del ragionamento abduttivo da parte del modello. Determina se il modello deve accettare la risposta più ovvia o esplorare spiegazioni complesse e meno probabili.
-- **Completezza delle informazioni**:il compromesso tra l'analisi di ogni norma e documento disponibile e la priorità di efficienza e velocità.
+- **Phân tích logic:** Xác định mức độ kỹ lưỡng mà mô hình phải phân tích các quy tắc ràng buộc, điều kiện tiên quyết và thứ tự hoạt động.
+- **Chẩn đoán vấn đề**: Kiểm soát mức độ phân tích khi xác định nguyên nhân và việc sử dụng suy luận bắt cầu của mô hình. Xác định xem mô hình có nên chấp nhận câu trả lời rõ ràng nhất hay khám phá những lời giải thích phức tạp, ít có khả năng hơn.
+- **Tính đầy đủ của thông tin:** Sự đánh đổi giữa việc phân tích mọi chính sách và tài liệu có sẵn so với việc ưu tiên hiệu quả và tốc độ.
 
-### Esecuzione e affidabilità
+### Thực thi và độ tin cậy
 
-Configurazione del funzionamento autonomo dell'agente e della gestione degli ostacoli.
+Cấu hình về cách tác nhân hoạt động độc lập và xử lý các trở ngại.
 
-- **Adattabilità**:come reagisce il modello ai nuovi dati. Determina se deve rispettare rigorosamente il piano iniziale o cambiare immediatamente quando le osservazioni contraddicono le ipotesi.
-- **Persistenza e recupero**:il grado in cui il modello tenta di correggere automaticamente gli errori. Una persistenza elevata aumenta i tassi di successo, ma rischia di comportare costi o loop dei token più elevati.
-- **Valutazione del rischio**:la logica per valutare le conseguenze. Distingue esplicitamente tra azioni esplorative a basso rischio (letture) e modifiche dello stato ad alto rischio (scritture).
+- **Khả năng thích ứng:** Cách mô hình phản ứng với dữ liệu mới. Xác định xem có nên tuân thủ nghiêm ngặt kế hoạch ban đầu hay chuyển hướng ngay lập tức khi các quan sát mâu thuẫn với các giả định.
+- **Tính kiên trì và khả năng phục hồi:** Mức độ mà mô hình cố gắng tự sửa lỗi. Độ duy trì cao sẽ làm tăng tỷ lệ thành công nhưng có nguy cơ tăng chi phí mã thông báo hoặc vòng lặp.
+- **Đánh giá rủi ro:** Logic để đánh giá hậu quả. Phân biệt rõ ràng giữa các thao tác khám phá có rủi ro thấp (đọc) và các thay đổi trạng thái có rủi ro cao (ghi).
 
-### Interazione e output
+### Tương tác và đầu ra
 
-Configurazione della modalità di comunicazione dell'agente con l'utente e della formattazione dei risultati.
+Cấu hình về cách nhân viên hỗ trợ giao tiếp với người dùng và định dạng kết quả.
 
-- **Gestione dell'ambiguità e delle autorizzazioni**:definisce quando il modello è autorizzato a fare ipotesi rispetto a quando deve mettere in pausa l'esecuzione per chiedere all'utente chiarimenti o autorizzazioni.
-- **Livello di dettaglio**:controlla il volume di testo generato insieme alle chiamate di strumenti. Determina se il modello spiega le sue azioni all'utente o rimane in silenzio durante l'esecuzione.
-- **Precisione e completezza**:la fedeltà richiesta dell'output. Specifica se il modello deve risolvere ogni caso limite e fornire cifre esatte o se sono accettabili stime approssimative.
+- **Tính mơ hồ và cách xử lý quyền:** Xác định thời điểm mô hình được phép đưa ra giả định so với thời điểm mô hình phải tạm dừng thực thi để yêu cầu người dùng làm rõ hoặc cấp quyền.
+- **Độ chi tiết:** Kiểm soát lượng văn bản được tạo cùng với các lệnh gọi công cụ. Điều này xác định xem mô hình có giải thích hành động của mình cho người dùng hay không, hoặc vẫn im lặng trong quá trình thực thi.
+- **Độ chính xác và tính đầy đủ:** Độ trung thực bắt buộc của đầu ra. Xác định xem mô hình có phải giải quyết mọi trường hợp đặc biệt và cung cấp số liệu chính xác hay không, hoặc có chấp nhận ước tính sơ bộ hay không.
 
-### Modello di istruzione di sistema
+### Mẫu hướng dẫn hệ thống
 
-La seguente istruzione di sistema è un esempio che è stato valutato dai ricercatori per migliorare le prestazioni nei benchmark agentici in cui il modello deve rispettare un insieme di regole complesso e interagire con un utente. Incoraggia l'agente ad agire come un forte ragionatore e pianificatore, impone comportamenti specifici nelle dimensioni elencate sopra e richiede al modello di pianificare in modo proattivo prima di intraprendere qualsiasi azione.
+Sau đây là ví dụ về chỉ dẫn hệ thống đã được các nhà nghiên cứu đánh giá để cải thiện hiệu suất trên các điểm chuẩn dựa trên tác nhân, trong đó mô hình phải tuân thủ một bộ quy tắc phức tạp và tương tác với người dùng. Điều này khuyến khích tác nhân đóng vai trò là một người lập luận và lập kế hoạch hiệu quả, thực thi các hành vi cụ thể trên các phương diện nêu trên và yêu cầu mô hình chủ động lập kế hoạch trước khi thực hiện bất kỳ hành động nào.
 
-Puoi adattare questo modello per soddisfare i vincoli del tuo caso d'uso specifico.
+Bạn có thể điều chỉnh mẫu này cho phù hợp với các ràng buộc trong trường hợp sử dụng cụ thể của mình.
 
 ```
 You are a very strong reasoner and planner. Use these critical instructions to structure your plans, thoughts, and responses.
@@ -530,21 +449,19 @@ Before taking any action (either tool calls *or* responses to the user), you mus
 9) Inhibit your response: only take an action after all the above reasoning is completed. Once you've taken an action, you cannot take it back.
 ```
 
-## Passaggi successivi
+## Các bước tiếp theo
 
-- Ora che hai una conoscenza più approfondita della progettazione dei prompt, prova a scrivere i tuoi prompt utilizzando [Google AI Studio](http://aistudio.google.com?hl=it).
-- Per scoprire di più sui prompt multimodali, consulta
-  [Prompt con file multimediali](https://ai.google.dev/gemini-api/docs/files?hl=it#prompt-guide).
-- Per scoprire di più sul prompting di immagini, consulta le guide ai prompt di [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=it#prompt-guide)
-  e [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=it#imagen-prompt-guide).
-- Per scoprire di più sui prompt video, consulta la [guida ai prompt di Veo](https://ai.google.dev/gemini-api/docs/video?hl=it#prompt-guide).
+- Giờ đây, khi đã hiểu rõ hơn về cách thiết kế câu lệnh, hãy thử viết câu lệnh của riêng bạn bằng [Google AI Studio](http://aistudio.google.com?hl=vi).
+- Để tìm hiểu về tính năng tạo câu lệnh đa phương thức, hãy xem bài viết [Tạo câu lệnh bằng tệp đa phương tiện](https://ai.google.dev/gemini-api/docs/files?hl=vi#prompt-guide).
+- Để tìm hiểu về cách đặt câu lệnh cho hình ảnh, hãy xem hướng dẫn đặt câu lệnh cho [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi#prompt-guide) và [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=vi#imagen-prompt-guide).
+- Để tìm hiểu về câu lệnh cho video, hãy xem [hướng dẫn về câu lệnh cho Veo](https://ai.google.dev/gemini-api/docs/video?hl=vi#prompt-guide).
 
-Invia feedback
+Gửi ý kiến phản hồi
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Ultimo aggiornamento 2026-04-29 UTC.
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-Vuoi dirci altro?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

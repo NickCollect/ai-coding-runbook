@@ -1,46 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=vi
-fetched_at: 2026-05-11T05:05:32.775526+00:00
+source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=ar
+fetched_at: 2026-05-18T05:13:36.615252+00:00
 title: "Tool use with Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
 # Tool use with Live API
 
-Tính năng sử dụng công cụ cho phép Live API không chỉ dừng lại ở việc trò chuyện mà còn có thể thực hiện các hành động trong thế giới thực và lấy ngữ cảnh bên ngoài trong khi vẫn duy trì kết nối theo thời gian thực.
-Bạn có thể xác định các công cụ như [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) và [Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/grounding?hl=vi) bằng Live API.
+تتيح ميزة &quot;استخدام الأدوات&quot; لواجهة Live API تجاوز مجرد المحادثة من خلال تمكينها من تنفيذ إجراءات في العالم الحقيقي واستخلاص السياق الخارجي مع الحفاظ على اتصال في الوقت الفعلي.
+يمكنك تحديد أدوات، مثل [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar)
+و[بحث Google](https://ai.google.dev/gemini-api/docs/grounding?hl=ar)، باستخدام Live API.
 
-## Tổng quan về các công cụ được hỗ trợ
+## نظرة عامة على الأدوات المتوافقة
 
-Sau đây là thông tin tổng quan ngắn gọn về các công cụ có sẵn cho mô hình Live API:
+في ما يلي نظرة عامة موجزة على الأدوات المتاحة لنماذج Live API:
 
-| Công cụ | Bản xem trước Gemini 3.1 Flash Live | Bản xem trước trực tiếp Gemini 2.5 Flash |
+| الأداة | معاينة Gemini 3.1 Flash Live | النسخة الحصرية من Gemini 2.5 Flash |
 | --- | --- | --- |
-| **Tìm kiếm** | Được hỗ trợ | Được hỗ trợ |
-| **Gọi hàm** | Được hỗ trợ (chỉ đồng bộ) | Được hỗ trợ (đồng bộ và [không đồng bộ](#async-function-calling)) |
-| **Google Maps** | Không được hỗ trợ | Không được hỗ trợ |
-| **Thực thi mã** | Không được hỗ trợ | Không được hỗ trợ |
-| **Bối cảnh URL** | Không được hỗ trợ | Không được hỗ trợ |
+| **البحث** | متاح | متاح |
+| **استدعاء الدوال** | متاح (متزامن فقط) | متوافق (متزامن و[غير متزامن](#async-function-calling)) |
+| **خرائط Google** | غير متاح | غير متاح |
+| **تنفيذ الرموز البرمجية** | غير متاح | غير متاح |
+| **سياق عنوان URL** | غير متاح | غير متاح |
 
-## Gọi hàm
+## استدعاء الدالة
 
-Live API hỗ trợ chức năng gọi, giống như các yêu cầu tạo nội dung thông thường. Tính năng gọi hàm cho phép Live API tương tác với dữ liệu và chương trình bên ngoài, giúp tăng đáng kể những gì ứng dụng của bạn có thể thực hiện.
+تتيح Live API استخدام ميزة "استدعاء الدوال"، تمامًا مثل طلبات إنشاء المحتوى العادية. تتيح ميزة &quot;استدعاء الدوال&quot; لواجهة Live API التفاعل مع البيانات والبرامج الخارجية، ما يزيد بشكل كبير من إمكانات تطبيقاتك.
 
-Bạn có thể xác định các khai báo hàm trong cấu hình phiên.
-Sau khi nhận được lệnh gọi công cụ, ứng dụng khách phải phản hồi bằng một danh sách các đối tượng `FunctionResponse` bằng phương thức `session.send_tool_response`.
+يمكنك تحديد تعريفات الدوال كجزء من إعدادات الجلسة.
+بعد تلقّي طلبات استخدام الأدوات، على العميل الردّ بقائمة من عناصر `FunctionResponse` باستخدام طريقة `session.send_tool_response`.
 
-Hãy xem [Hướng dẫn gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) để tìm hiểu thêm.
+يمكنك الاطّلاع على [الدليل التعليمي حول استخدام الأدوات](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar) لمعرفة المزيد.
 
 ### Python
 
@@ -217,13 +218,13 @@ async function main() {
 main();
 ```
 
-Từ một câu lệnh duy nhất, mô hình có thể tạo nhiều lệnh gọi hàm và mã cần thiết để liên kết các đầu ra của chúng. Mã này thực thi trong một môi trường hộp cát, tạo ra các thông báo [BidiGenerateContentToolCall](https://ai.google.dev/api/live?hl=vi#bidigeneratecontenttoolcall) tiếp theo.
+من خلال طلب واحد، يمكن للنموذج إنشاء طلبات متعددة للدوال والتعليمات البرمجية اللازمة لربط مخرجاتها. يتم تنفيذ هذا الرمز في بيئة وضع الحماية، ما يؤدي إلى إنشاء رسائل [BidiGenerateContentToolCall](https://ai.google.dev/api/live?hl=ar#bidigeneratecontenttoolcall) لاحقة.
 
-## Gọi hàm không đồng bộ
+## استدعاء الدالة بشكل غير متزامن
 
-Theo mặc định, tính năng gọi hàm sẽ thực thi tuần tự, tức là quá trình thực thi sẽ tạm dừng cho đến khi có kết quả của mỗi lệnh gọi hàm. Điều này đảm bảo quá trình xử lý tuần tự, tức là bạn sẽ không thể tiếp tục tương tác với mô hình trong khi các hàm đang chạy.
+يتم تنفيذ ميزة "استدعاء الدوال" بالتسلسل تلقائيًا، ما يعني أنّ التنفيذ يتوقف مؤقتًا إلى أن تتوفّر نتائج كل استدعاء دالة. يضمن ذلك المعالجة التسلسلية، ما يعني أنّه لن يكون بإمكانك مواصلة التفاعل مع النموذج أثناء تنفيذ الدوال.
 
-Nếu không muốn chặn cuộc trò chuyện, bạn có thể yêu cầu mô hình chạy các hàm không đồng bộ. Để làm như vậy, trước tiên bạn cần thêm một `behavior` vào định nghĩa hàm:
+إذا كنت لا تريد حظر المحادثة، يمكنك أن تطلب من النموذج تنفيذ الدوال بشكل غير متزامن. لإجراء ذلك، عليك أولاً إضافة `behavior` إلى تعريفات الدوال:
 
 ### Python
 
@@ -247,14 +248,15 @@ const turn_off_the_lights = {name: "turn_off_the_lights"}
 const tools = [{ functionDeclarations: [turn_on_the_lights, turn_off_the_lights] }]
 ```
 
-`NON-BLOCKING` đảm bảo hàm chạy không đồng bộ trong khi bạn có thể tiếp tục tương tác với mô hình.
+تضمن `NON-BLOCKING` تشغيل الدالة بشكل غير متزامن، ما يتيح لك مواصلة التفاعل مع النموذج.
 
-Sau đó, bạn cần cho mô hình biết cách hoạt động khi nhận được `FunctionResponse` bằng cách sử dụng tham số `scheduling`. Bạn có thể:
+بعد ذلك، عليك إخبار النموذج بكيفية التصرّف عند تلقّي `FunctionResponse` باستخدام المَعلمة `scheduling`. يمكنه تنفيذ أي مما يلي:
 
-- Tạm dừng những gì đang làm và cho bạn biết ngay về câu trả lời mà nó nhận được
-  (`scheduling="INTERRUPT"`),
-- Chờ đến khi hoàn tất việc đang làm (`scheduling="WHEN_IDLE"`),
-- Hoặc không làm gì cả và sử dụng kiến thức đó sau này trong cuộc thảo luận (`scheduling="SILENT"`)
+- مقاطعة ما يفعله وإعلامك بالرد الذي تلقّاه على الفور(`scheduling="INTERRUPT"`)،
+- يُرجى الانتظار حتى ينتهي من تنفيذ الإجراء الحالي
+  (`scheduling="WHEN_IDLE"`)،
+- أو يمكنك عدم اتّخاذ أي إجراء واستخدام هذه المعلومات لاحقًا في المناقشة
+  (`scheduling="SILENT"`)
 
 ### Python
 
@@ -286,9 +288,11 @@ const functionResponse = {
 }
 ```
 
-## Dựa trên kết quả của Google Tìm kiếm
+## تحديد المصدر من خلال "بحث Google"
 
-Bạn có thể bật tính năng Dựa trên kết quả của Google Tìm kiếm trong quá trình định cấu hình phiên. Điều này giúp tăng độ chính xác của Live API và ngăn chặn hiện tượng ảo giác. Hãy xem [hướng dẫn về việc liên kết thực tế](https://ai.google.dev/gemini-api/docs/grounding?hl=vi) để tìm hiểu thêm.
+يمكنك تفعيل ميزة تحديد المصدر من خلال "بحث Search" كجزء من إعدادات الجلسة. يؤدي ذلك إلى زيادة دقة Live API ومنع
+الهلوسات. يمكنك الاطّلاع على [الدليل التوجيهي بشأن Grounding](https://ai.google.dev/gemini-api/docs/grounding?hl=ar)
+لمعرفة المزيد.
 
 ### Python
 
@@ -447,9 +451,9 @@ async function main() {
 main();
 ```
 
-## Kết hợp nhiều công cụ
+## الجمع بين أدوات متعددة
 
-Bạn có thể kết hợp nhiều công cụ trong Live API, nhờ đó tăng cường hơn nữa các chức năng của ứng dụng:
+يمكنك الجمع بين أدوات متعددة ضمن Live API، ما يزيد من إمكانات تطبيقك:
 
 ### Python
 
@@ -497,17 +501,18 @@ const config = {
 // ... remaining model call
 ```
 
-## Bước tiếp theo
+## الخطوات التالية
 
-- Hãy xem thêm các ví dụ về cách sử dụng công cụ với Live API trong [Sổ tay về cách sử dụng công cụ](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=vi).
-- Xem toàn bộ thông tin về các tính năng và cấu hình trong [hướng dẫn về Các chức năng của Live API](https://ai.google.dev/gemini-api/docs/live-guide?hl=vi).
+- يمكنك الاطّلاع على المزيد من الأمثلة حول استخدام الأدوات مع Live API في [كتاب وصفات استخدام الأدوات](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=ar).
+- يمكنك الاطّلاع على القصة الكاملة حول الميزات والإعدادات من خلال
+  [دليل إمكانات Live API](https://ai.google.dev/gemini-api/docs/live-guide?hl=ar).
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Cập nhật lần gần đây nhất: 2026-05-01 UTC.
+تاريخ التعديل الأخير: 2026-05-13 (حسب التوقيت العالمي المتفَّق عليه)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-01 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-13 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

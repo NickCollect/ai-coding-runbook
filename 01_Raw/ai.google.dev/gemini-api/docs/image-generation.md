@@ -1,107 +1,103 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/image-generation?hl=ar
-fetched_at: 2026-05-11T05:09:09.521592+00:00
+source_url: https://ai.google.dev/gemini-api/docs/image-generation?hl=vi
+fetched_at: 2026-05-18T05:06:00.245921+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-إرسال ملاحظات
+Gửi ý kiến phản hồi
 
-# إنشاء الصور باستخدام Nano Banana
+# Tạo hình ảnh bằng Nano Banana
 
-يمكنك تقديم طلب لإنشاء نماذج أولية لتطبيقات كاملة الوظائف ومكتملة واجهة المستخدم،
-والاطّلاع على Nano Banana 2 مدمجًا مع أدوات وبيانات من الواقع العملي
-ونظام Gemini المتكامل. كل ذلك قبل كتابة سطر واحد من الرموز البرمجية.
+Đưa ra câu lệnh để tạo nguyên mẫu cho các ứng dụng đầy đủ chức năng, hoàn chỉnh về giao diện người dùng và xem Nano Banana 2 được tích hợp với các công cụ, dữ liệu trong thế giới thực và hệ sinh thái Gemini. Tất cả những việc này đều diễn ra trước khi bạn viết một dòng mã.
 
-- [تجربة تطبيق Nano Banana 2](https://aistudio.google.com/apps/bundled/pet_passport?hl=ar)
-- أو يمكنك إنشاء سلسلة إجراءات خاصة بك من الطلبات:
+- [Dùng thử ứng dụng Nano Banana 2](https://aistudio.google.com/apps/bundled/pet_passport?hl=vi)
+- Hoặc tạo hình ảnh của riêng bạn từ câu lệnh:
 
-- ![مجلة](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+- ![tạp chí](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
   ![london](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
-  ![استعادة](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
-  ![موزة](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
-- ![مجلة](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+  ![khôi phục](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
+  ![quả chuối](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
+- ![tạp chí](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
 
-  تم إنشاؤها باستخدام Nano Banana 2
+  Do Nano Banana 2 tạo
 
-  **الطلب:** "صورة لغلاف مجلة لامع، الغلاف الأزرق البسيط يتضمّن الكلمات الكبيرة البارزة Nano Banana". يظهر النص بخط serif ويملأ الشاشة. لا يتضمّن أي نص آخر. أمام النص، تظهر صورة مقرّبة لشخص يرتدي فستانًا أنيقًا وبسيطًا. تمسك الفتاة بالرقم 2 بشكل مرح، وهو نقطة التركيز في الصورة.
+  **Câu lệnh:** "Ảnh chụp một trang bìa tạp chí bóng bẩy, trang bìa màu xanh dương tối giản có dòng chữ Nano Banana lớn in đậm. Văn bản có phông chữ có chân và lấp đầy khung hiển thị. Không có văn bản nào khác. Phía trước văn bản là ảnh chân dung một người mặc chiếc váy thanh lịch và tối giản. Cô bé đang cầm số 2 một cách tinh nghịch, đây là tâm điểm của bức ảnh.
     
-  ضَع رقم العدد والتاريخ "شباط (فبراير) 2026" في الزاوية مع رمز شريطي. المجلة موضوعة على رفّ أمام جدار برتقالي مكسو بالجص، داخل متجر للمصمّمين".
+  Đặt số phát hành và ngày "tháng 2 năm 2026" ở góc cùng với mã vạch. Tạp chí này nằm trên một chiếc kệ dựa vào bức tường trát vữa màu cam, bên trong một cửa hàng của nhà thiết kế.
 
-  إنشاء [لقطات احترافية للمنتجات](#4_product_mockups_commercial_photography) في [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=ar)
+  Tạo [ảnh chụp sản phẩm chuyên nghiệp](#4_product_mockups_commercial_photography) trong [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=vi)
 - ![london](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
 
-  تم إنشاؤها باستخدام Nano Banana Pro
+  Do Nano Banana Pro tạo
 
-  **الطلب:** "أريد مشهدًا كرتونيًا ثلاثي الأبعاد مصغّرًا ودقيقًا من منظور متساوي القياس (أيزومتري) وزاوية رؤية علوية 45 درجة، يجسِّد مدينة لندن ويضمّ أبرز معالمها وعناصرها المعمارية. استخدِم ملمسًا ناعمًا ودقيقًا مع مواد PBR واقعية وإضاءة وظلال ناعمة وطبيعية. يمكنك دمج أحوال الطقس الحالية مباشرةً في بيئة المدينة لإنشاء أجواء غامرة. استخدِم تركيبة بسيطة ونظيفة مع خلفية ناعمة بلون موحّد. في أعلى منتصف الشاشة، ضَع العنوان "لندن" بخط كبير غامق، ثم أيقونة بارزة للطقس أسفله، ثم التاريخ (بخط صغير) ودرجة الحرارة (بخط متوسط). يجب توسيط كل النصوص مع ترك مسافة متسقة بينها، ويجوز أن تتداخل بشكل طفيف مع أعلى المباني".
+  **Câu lệnh:** "Tạo một cảnh hoạt hình 3D thu nhỏ, rõ nét, đẳng cự, góc nhìn 45° từ trên xuống về London, có các địa danh và yếu tố kiến trúc tiêu biểu nhất. Sử dụng các hoạ tiết tinh tế, mềm mại với chất liệu PBR chân thực, ánh sáng và bóng đổ nhẹ nhàng, sống động. Tích hợp điều kiện thời tiết hiện tại trực tiếp vào môi trường thành phố để tạo ra một bầu không khí sống động. Sử dụng bố cục tối giản, gọn gàng với nền có màu đồng nhất và dịu nhẹ. Ở phía trên cùng ở giữa, hãy đặt tiêu đề "London" bằng văn bản in đậm cỡ lớn, một biểu tượng thời tiết nổi bật bên dưới, sau đó là ngày (chữ nhỏ) và nhiệt độ (chữ cỡ trung). Tất cả văn bản phải được căn giữa với khoảng cách nhất quán và có thể hơi chồng lên phần trên của các toà nhà."
 
-  مزيد من المعلومات حول [تحديد المصدر في البحث](#use-with-grounding) وتجربته في [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=ar)
+  Tìm hiểu thêm về tính năng [căn cứ vào thông tin tìm kiếm](#use-with-grounding) và dùng thử tính năng này trong [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=vi)
 - ![quetzal](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
 
-  تم إنشاؤها باستخدام Nano Banana 2
+  Do Nano Banana 2 tạo
 
-  **الطلب:** "استخدِم "بحث الصور" للعثور على صور دقيقة لطائر الكيتزال الرائع. أنشئ خلفية جميلة بنسبة عرض إلى ارتفاع 3:2 لهذه الطائر، مع تدرّج طبيعي من الأعلى إلى الأسفل وتصميم بسيط".
+  **Câu lệnh:** "Sử dụng tính năng tìm kiếm hình ảnh để tìm hình ảnh chính xác về chim đuôi quạt. Tạo một hình nền đẹp mắt cho chú chim này theo tỷ lệ 3:2, với hiệu ứng chuyển màu tự nhiên từ trên xuống dưới và bố cục tối giản.
 
-  استخدِم ميزة "الاستناد إلى معلومات خارجية" من [بحث الصور](#image-search) من Google مع Nano Banana 2. تجربة الميزة في [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=ar)
-- ![موزة](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
+  Sử dụng tính năng [Tìm kiếm hình ảnh](#image-search) trên Google cùng với Nano Banana 2. Dùng thử trong [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=vi)
+- ![quả chuối](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
 
-  تم إنشاؤها باستخدام Nano Banana Pro
+  Do Nano Banana Pro tạo
 
-  **الطلب:** "أريد وضع هذا الشعار على إعلان فاخر لعطر برائحة الموز. تم دمج الشعار بشكل مثالي في الزجاجة".
+  **Câu lệnh:** "Đặt biểu trưng này lên một quảng cáo cao cấp cho nước hoa có mùi chuối. Biểu trưng được tích hợp hoàn hảo vào chai."
 
-  جرِّب ميزة [الحفاظ على التفاصيل بدقة عالية](#5_high-fidelity_detail_preservation) في Nano Banana ضمن [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=ar)
-- ![مقهى](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
+  Dùng thử tính năng [giữ lại chi tiết có độ trung thực cao](#5_high-fidelity_detail_preservation) của Nano Banana trong [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=vi)
+- ![quán cà phê](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
 
-  تم إنشاؤها باستخدام Nano Banana Pro
+  Do Nano Banana Pro tạo
 
-  **الطلب:** "صورة لمشهد يومي في مقهى مزدحم يقدّم وجبة الفطور في مقدّمة الصورة، يظهر رجل من عالم الأنمي بشعر أزرق، وأحد الأشخاص هو رسم بقلم الرصاص، وآخر هو شخص من الصلصال"
+  **Câu lệnh:** "Một bức ảnh chụp cảnh sinh hoạt thường ngày tại một quán cà phê đông đúc phục vụ bữa sáng. Ở tiền cảnh là một người đàn ông trong phim hoạt hình có mái tóc màu xanh dương, một trong số những người này là bản phác thảo bằng bút chì, người còn lại là nhân vật hoạt hình bằng đất sét
 
-  جرِّب [أنماطًا فنية](#3_style_transfer) مختلفة باستخدام Nano Banana في [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=ar)
-- ![مقالة](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
+  Thử nghiệm nhiều [phong cách nghệ thuật](#3_style_transfer) bằng Nano Banana trong [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=vi)
+- ![bài viết](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
 
-  تم إنشاؤها باستخدام Nano Banana Pro
+  Do Nano Banana Pro tạo
 
-  **الطلب:** "استخدِم "بحث Google" لمعرفة آراء المستخدمين حول إطلاق Gemini 3 Flash. استخدِم هذه المعلومات لكتابة مقالة قصيرة حول هذا الموضوع (مع عناوين). أريد صورة للمقالة كما ظهرت في مجلة لامعة تركز على التصميم. إنّها صورة لصفحة واحدة مطوية، تعرض المقالة حول Gemini 3 Flash. صورة رئيسية واحدة عنوان بخط ذي نهايات معقوفة".
+  **Câu lệnh:** "Tìm thông tin về phản ứng của mọi người đối với việc ra mắt Gemini 3 Flash. Hãy dùng thông tin này để viết một bài viết ngắn về chủ đề đó (có tiêu đề). Trả về ảnh của bài viết như ảnh xuất hiện trong một tạp chí bóng bẩy tập trung vào thiết kế. Đây là ảnh chụp một trang giấy được gấp lại, cho thấy bài viết về Gemini 3 Flash. Một ảnh chính. Dòng tiêu đề có chân."
 
-  إنشاء [نص دقيق](#3_accurate_text_in_images) من [البحث](#use-with-grounding) تجربة Nano Banana في [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=ar)
-- ![كلب](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
+  Tạo [văn bản chính xác](#3_accurate_text_in_images) từ [nội dung tìm kiếm](#use-with-grounding). Dùng thử Nano Banana trong [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=vi)
+- ![chó](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
 
-  تم إنشاؤها باستخدام Nano Banana Pro
+  Do Nano Banana Pro tạo
 
-  **الطلب:** "أريد رمزًا يمثّل كلبًا لطيفًا. يجب أن تكون الخلفية بيضاء. أنشئ الرموز بأسلوب ثلاثي الأبعاد ملون وملموس. لا يوجد نص".
+  **Câu lệnh:** "Một biểu tượng đại diện cho một chú chó dễ thương. Nền có màu trắng. Tạo các biểu tượng theo phong cách 3D đầy màu sắc và có kết cấu. Không có văn bản."
 
-  إنشاء [رموز وملصقات ومواد عرض](#2_stylized_illustrations_stickers) باستخدام Nano Banana في [استوديو الذكاء الاصطناعي](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=ar)
-- ![متساوي القياس](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
+  Tạo [biểu tượng, hình dán và thành phần](#2_stylized_illustrations_stickers) bằng Nano Banana trong [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=vi)
+- ![đẳng cự](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
 
-  تم إنشاؤها باستخدام Nano Banana 2
+  Do Nano Banana 2 tạo
 
-  **الطلب:** "أنشئ صورة متساوية القياس تمامًا. إنّها ليست صورة مصغّرة، بل هي صورة تم التقاطها وكانت متساوية القياس تمامًا. إنّها صورة لحديقة عصرية جميلة. يظهر مسبح كبير على شكل الرقم 2 والعبارة Nano Banana 2".
+  **Câu lệnh:** "Tạo một bức ảnh có góc nhìn hoàn toàn đẳng cự. Đây không phải là một mô hình thu nhỏ mà là một bức ảnh chụp được và tình cờ có góc nhìn hoàn toàn đẳng cự. Đây là bức ảnh về một khu vườn hiện đại tuyệt đẹp. Có một bể bơi lớn có hình số 2 và dòng chữ: Nano Banana 2."
 
-  تجربة [إنشاء صور واقعية](#1_photorealistic_scenes) في [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=ar)
+  Thử [tạo hình ảnh siêu thực](#1_photorealistic_scenes) trong [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=vi)
 
-‫**Nano Banana** هو اسم إمكانات إنشاء الصور الأصلية في Gemini.
-يمكن لـ Gemini إنشاء الصور ومعالجتها بشكل حواري باستخدام النصوص أو الصور أو مزيج من الاثنين. يتيح لك ذلك إنشاء المرئيات وتعديلها وتكرارها مع التحكّم فيها بشكل غير مسبوق.
+**Nano Banana** là tên gọi của các tính năng tạo hình ảnh gốc của Gemini.
+Gemini có thể tạo và xử lý hình ảnh theo cách đàm thoại bằng văn bản, hình ảnh hoặc kết hợp cả hai. Điều này giúp bạn tạo, chỉnh sửa và lặp lại các hình ảnh với khả năng kiểm soát chưa từng có.
 
-يشير Nano Banana إلى ثلاثة نماذج مختلفة متوفّرة في Gemini API:
+Nano Banana đề cập đến 3 mô hình riêng biệt có trong Gemini API:
 
-- **‫Nano Banana 2**: هو نموذج [معاينة الصور في Gemini 3.1 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=ar) (`gemini-3.1-flash-image-preview`). يعمل هذا النموذج كبديل عالي الكفاءة لنموذج Gemini 3 Pro Image، وهو محسّن من أجل السرعة وحالات الاستخدام التي تتطلّب عددًا كبيرًا من المطورين.
-- **‫Nano Banana Pro**: هو نموذج [معاينة الصور من Gemini 3 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=ar)
-  (`gemini-3-pro-image-preview`). تم تصميم هذا النموذج لإنتاج أصول احترافية، وهو يستخدم ميزة "الاستدلال المتقدّم" ("التفكير") لتنفيذ التعليمات المعقّدة وعرض نص عالي الدقة.
-- **‫Nano Banana**: هو نموذج [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=ar)
-  (`gemini-2.5-flash-image`) المصمَّم لتحقيق السرعة والكفاءة، وهو محسَّن لتنفيذ المهام التي تتطلّب معدّل نقل بيانات مرتفعًا ووقت استجابة منخفضًا.
+- **Nano Banana 2**: Mô hình [Gemini 3.1 Flash Image Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=vi) (`gemini-3.1-flash-image-preview`). Mô hình này đóng vai trò là phiên bản hiệu suất cao của Gemini 3 Pro Image, được tối ưu hoá về tốc độ và các trường hợp sử dụng của nhà phát triển có khối lượng lớn.
+- **Nano Banana Pro**: Mô hình [Gemini 3 Pro Image Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=vi) (`gemini-3-pro-image-preview`). Mô hình này được thiết kế để tạo tài sản chuyên nghiệp, sử dụng khả năng suy luận nâng cao ("Tư duy") để làm theo các chỉ dẫn phức tạp và hiển thị văn bản có độ trung thực cao.
+- **Nano Banana**: Mô hình [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=vi) (`gemini-2.5-flash-image`). Mô hình này được thiết kế để có tốc độ và hiệu suất cao, đồng thời được tối ưu hoá cho các tác vụ có khối lượng lớn và độ trễ thấp.
 
-تتضمّن جميع الصور التي يتم إنشاؤها [علامة مائية من SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=ar).
+Tất cả hình ảnh được tạo đều có [hình mờ SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=vi).
 
-## إنشاء الصور (تحويل النص إلى صورة)
+## Tạo hình ảnh (chuyển văn bản thành hình ảnh)
 
 ### Python
 
@@ -198,7 +194,7 @@ func main() {
 }
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -254,15 +250,15 @@ curl -s -X POST \
   }'
 ```
 
-## تعديل الصور (تحويل النص والصورة إلى صورة)
+## Chỉnh sửa hình ảnh (văn bản và hình ảnh thành hình ảnh)
 
-**تذكير**: يُرجى التأكّد من امتلاكك الحقوق اللازمة لأي صور قبل تحميلها.
-لا يجوز إنشاء محتوى ينتهك حقوق الآخرين، بما في ذلك الفيديوهات أو الصور التي تتسبب في الخداع أو المضايقة أو الأذى. يخضع استخدامك لخدمة الذكاء الاصطناعي التوليدي هذه [لسياسة الاستخدام المحظور](https://policies.google.com/terms/generative-ai/use-policy?hl=ar).
+**Lời nhắc**: Hãy đảm bảo rằng bạn có các quyền cần thiết đối với mọi hình ảnh mà bạn tải lên.
+Bạn không được tạo nội dung vi phạm quyền của người khác, kể cả video hoặc hình ảnh lừa gạt, quấy rối hoặc gây hại. Khi sử dụng dịch vụ AI tạo sinh này, bạn phải tuân theo [Chính sách về các hành vi bị cấm khi sử dụng](https://policies.google.com/terms/generative-ai/use-policy?hl=vi) của chúng tôi.
 
-قدِّم صورة واستخدِم طلبات نصية لإضافة عناصر أو إزالتها أو تعديلها، أو تغيير النمط، أو ضبط تصحيح الألوان.
+Cung cấp hình ảnh và sử dụng câu lệnh dạng văn bản để thêm, xoá hoặc sửa đổi các phần tử, thay đổi kiểu hoặc điều chỉnh phân loại màu.
 
-يوضّح المثال التالي كيفية تحميل صور مرمّزة `base64`.
-للحصول على معلومات حول الصور المتعددة وأحجام الحمولة الأكبر وأنواع MIME المتوافقة، يُرجى الاطّلاع على صفحة [فهم الصور](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ar).
+Ví dụ sau đây minh hoạ việc tải hình ảnh được mã hoá `base64` lên.
+Đối với nhiều hình ảnh, tải trọng lớn hơn và các loại MIME được hỗ trợ, hãy xem trang [Hiểu hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi).
 
 ### Python
 
@@ -393,7 +389,7 @@ func main() {
 }
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -465,9 +461,9 @@ curl -s -X POST \
     }"
 ```
 
-### تعديل الصور من خلال محادثة متعددة الجولات
+### Chỉnh sửa ảnh nhiều lượt
 
-مواصلة إنشاء الصور وتعديلها بشكل حواري ننصحك باستخدام ميزة المحادثة أو المحادثة المتعدّدة الجولات لتكرار الصور. يعرض المثال التالي طلبًا لإنشاء مخطّط بياني حول عملية البناء الضوئي.
+Tiếp tục tạo và chỉnh sửa hình ảnh theo cách trò chuyện. Trò chuyện hoặc trò chuyện nhiều lượt là cách nên dùng để lặp lại hình ảnh. Ví dụ sau đây cho thấy một câu lệnh để tạo bản đồ hoạ thông tin về quá trình quang hợp.
 
 ### Python
 
@@ -579,7 +575,7 @@ func main() {
 }
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Chat;
@@ -658,11 +654,11 @@ curl -s -X POST \
   }'
 ```
 
-![مخطّط بياني من إنشاء الذكاء الاصطناعي حول عملية التمثيل الضوئي](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=ar)
+![Bản đồ hoạ thông tin do AI tạo về quá trình quang hợp](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=vi)
 
-مخطّط بياني من إنشاء الذكاء الاصطناعي حول عملية البناء الضوئي
+Bản đồ hoạ thông tin do AI tạo về quá trình quang hợp
 
-يمكنك بعد ذلك استخدام المحادثة نفسها لتغيير اللغة في الرسم إلى الإسبانية.
+Sau đó, bạn có thể dùng cùng một cuộc trò chuyện để thay đổi ngôn ngữ trên hình ảnh thành tiếng Tây Ban Nha.
 
 ### Python
 
@@ -673,10 +669,7 @@ resolution = "2K" # "512", "1K", "2K", "4K"
 
 response = chat.send_message(message,
     config=types.GenerateContentConfig(
-        image_config=types.ImageConfig(
-            aspect_ratio=aspect_ratio,
-            image_size=resolution
-        ),
+        response_format={"image": {aspect_ratio: aspect_ratio,                 image_size: resolution}},
     ))
 
 for part in response.parts:
@@ -697,10 +690,12 @@ let response = await chat.sendMessage({
   message,
   config: {
     responseModalities: ['TEXT', 'IMAGE'],
-    imageConfig: {
+    responseFormat: {
+    image: {
       aspectRatio: aspectRatio,
       imageSize: resolution,
-    },
+    }
+  },
     tools: [{googleSearch: {}}],
   },
 });
@@ -746,7 +741,7 @@ for _, part := range resp.Candidates[0].Content.Parts {
 }
 ```
 
-### جافا
+### Java
 
 ```
 String aspectRatio = "16:9"; // "1:1","1:4","1:8","2:3","3:2","3:4","4:1","4:3","4:5","5:4","8:1","9:16","16:9","21:9"
@@ -802,42 +797,42 @@ curl -s -X POST \
     "tools": [{"google_search": {}}],
     "generationConfig": {
       "responseModalities": ["TEXT", "IMAGE"],
-      "imageConfig": {
+      "responseFormat": {
+    "image": {
         "aspectRatio": "16:9",
         "imageSize": "2K"
       }
+  }
     }
   }'
 ```
 
-![مخطّط بياني من إنشاء الذكاء الاصطناعي حول عملية البناء الضوئي باللغة الإسبانية](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=ar)
+![Bản đồ hoạ thông tin do AI tạo về quá trình quang hợp bằng tiếng Tây Ban Nha](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=vi)
 
-مخطّط بياني من إنشاء الذكاء الاصطناعي حول عملية البناء الضوئي باللغة الإسبانية
+Bản đồ hoạ thông tin do AI tạo về quá trình quang hợp bằng tiếng Tây Ban Nha
 
-## ميزات جديدة في نماذج Gemini 3 Image
+## Mới có các mô hình Gemini 3 Image
 
-يوفّر Gemini 3 أحدث النماذج لإنشاء الصور وتعديلها. تم تحسين أداء Gemini 3.1
-Flash Image ليكون سريعًا ومناسبًا لحالات الاستخدام التي تتطلّب كميات كبيرة، بينما تم تحسين أداء Gemini 3
-Pro Image لإنتاج مواد عرض احترافية.
-تم تصميم هذه النماذج للتعامل مع أكثر مهام سير العمل صعوبة من خلال الاستدلال المتقدّم، وهي تتفوّق في المهام المعقّدة والمتعددة المراحل التي تتضمّن إنشاء المحتوى وتعديله.
+Gemini 3 cung cấp các mô hình tạo và chỉnh sửa hình ảnh tiên tiến. Gemini 3.1 Flash Image được tối ưu hoá về tốc độ và các trường hợp sử dụng với khối lượng lớn, còn Gemini 3 Pro Image được tối ưu hoá cho việc sản xuất nội dung chuyên nghiệp.
+Được thiết kế để giải quyết những quy trình công việc khó khăn nhất thông qua khả năng suy luận nâng cao, các mô hình này có thể thực hiện xuất sắc những nhiệm vụ tạo và sửa đổi phức tạp, nhiều lượt.
 
-- **إخراج بدقة عالية**: إمكانات إنشاء مدمَجة لمرئيات بدقة 1K و2K و4K
-  - يضيف **Gemini 3.1 Flash Image** درجة الدقة الأصغر 512 (0.5K).
-- **تكنولوجيا متقدمة لعرض النصوص**: يمكنها إنشاء نصوص قابلة للقراءة ومصمّمة بشكل أنيق للرسومات البيانية والقوائم والمخططات ومواد التسويق.
-- **تحديد المصدر من خلال "بحث Search"**: يمكن للنموذج استخدام "بحث Google" كأداة للتحقّق من الحقائق وإنشاء صور استنادًا إلى بيانات في الوقت الفعلي (مثل خرائط الطقس الحالية، والرسومات البيانية للأسهم، والأحداث الأخيرة).
-  - تضيف **Gemini 3.1 Flash Image** ميزة تحديد المصدر من خلال "بحث Search" المتكاملة مع "بحث Google عن الصور" إلى جانب "بحث الويب".
-- **وضع التفكير**: يستخدم النموذج عملية "تفكير" للاستدلال على الطلبات المعقّدة. تنشئ هذه الأداة "صورًا فكرية" مؤقتة (تظهر في الخلفية ولكن لا يتم تحصيل رسوم مقابلها) لتحسين التركيب قبل إنتاج الناتج النهائي عالي الجودة.
-- **ما يصل إلى 14 صورة مرجعية**: يمكنك الآن دمج ما يصل إلى 14 صورة مرجعية لإنتاج الصورة النهائية.
-- [**نسب العرض إلى الارتفاع الجديدة**: يضيف الإصدار الحصري من Gemini 3.1 Flash Image نسب العرض إلى الارتفاع 1:4 و4:1 و1:8 و8:1.](#aspect_ratios_and_image_size)
+- **Đầu ra có độ phân giải cao**: Khả năng tạo hình ảnh 1K, 2K và 4K được tích hợp sẵn.
+  - **Hình ảnh Gemini 3.1 Flash** có độ phân giải nhỏ hơn là 512 (0,5K).
+- **Kết xuất văn bản nâng cao**: Có khả năng tạo văn bản dễ đọc, cách điệu cho đồ hoạ thông tin, thực đơn, sơ đồ và thành phần tiếp thị.
+- **Bám sát nguồn bằng Google Tìm kiếm**: Mô hình có thể sử dụng Google Tìm kiếm làm công cụ để xác minh thông tin và tạo hình ảnh dựa trên dữ liệu theo thời gian thực (ví dụ: bản đồ thời tiết hiện tại, biểu đồ cổ phiếu, các sự kiện gần đây).
+  - **Hình ảnh Gemini 3.1 Flash** bổ sung tính năng tích hợp Bám sát nguồn bằng Google Tìm kiếm cho Hình ảnh cùng với Tìm kiếm trên web.
+- **Chế độ Tư duy**: Mô hình này sử dụng quy trình "tư duy" để suy luận thông qua các câu lệnh phức tạp. Công cụ này tạo ra "hình ảnh ý tưởng" tạm thời (có thể nhìn thấy ở phần phụ trợ nhưng không tính phí) để tinh chỉnh bố cục trước khi tạo ra thành phẩm chất lượng cao cuối cùng.
+- **Tối đa 14 hình ảnh tham khảo**: Giờ đây, bạn có thể kết hợp tối đa 14 hình ảnh tham khảo để tạo ra hình ảnh cuối cùng.
+- **Tỷ lệ khung hình mới**: Gemini 3.1 Flash Image Preview bổ sung [tỷ lệ khung hình](#aspect_ratios_and_image_size) 1:4, 4:1, 1:8 và 8:1.
 
-### استخدام ما يصل إلى 14 صورة مرجعية
+### Sử dụng tối đa 14 hình ảnh tham khảo
 
-تتيح لك نماذج الصور في Gemini 3 دمج ما يصل إلى 14 صورة مرجعية. يمكن أن تتضمّن هذه الصور الـ 14 ما يلي:
+Các mô hình hình ảnh Gemini 3 cho phép bạn kết hợp tối đa 14 hình ảnh tham khảo. 14 hình ảnh này có thể bao gồm:
 
-| معاينة Gemini 3.1 Flash Image | معاينة الصور في Gemini 3 Pro |
+| Bản xem trước hình ảnh Gemini 3.1 Flash | Bản xem trước hình ảnh của Gemini 3 Pro |
 | --- | --- |
-| ما يصل إلى 10 صور لكائنات عالية الدقة لتضمينها في الصورة النهائية | ما يصل إلى 6 صور لكائنات عالية الدقة لتضمينها في الصورة النهائية |
-| ما يصل إلى 4 صور لشخصيات للحفاظ على اتساق مظهرها | يمكنك تحميل 5 صور كحد أقصى للشخصيات للحفاظ على اتساق مظهرها |
+| Tối đa 10 hình ảnh về các đối tượng có độ trung thực cao để đưa vào hình ảnh cuối cùng | Tối đa 6 hình ảnh về các đối tượng có độ trung thực cao để đưa vào hình ảnh cuối cùng |
+| Tối đa 4 hình ảnh nhân vật để duy trì tính nhất quán của nhân vật | Tối đa 5 hình ảnh nhân vật để duy trì tính nhất quán của nhân vật |
 
 ### Python
 
@@ -864,10 +859,7 @@ response = client.models.generate_content(
     ],
     config=types.GenerateContentConfig(
         response_modalities=['TEXT', 'IMAGE'],
-        image_config=types.ImageConfig(
-            aspect_ratio=aspect_ratio,
-            image_size=resolution
-        ),
+        response_format={"image": {aspect_ratio: aspect_ratio,                 image_size: resolution}},
     )
 )
 
@@ -932,10 +924,12 @@ const response = await ai.models.generateContent({
     contents: contents,
     config: {
       responseModalities: ['TEXT', 'IMAGE'],
-      imageConfig: {
+      responseFormat: {
+    image: {
         aspectRatio: aspectRatio,
         imageSize: resolution,
-      },
+      }
+  },
     },
   });
 
@@ -1024,7 +1018,7 @@ func main() {
 }
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -1097,23 +1091,25 @@ curl -s -X POST \
       }],
       \"generationConfig\": {
         \"responseModalities\": [\"TEXT\", \"IMAGE\"],
-        \"imageConfig\": {
+        \"responseFormat\": {
+        \"image\": {
           \"aspectRatio\": \"5:4\",
           \"imageSize\": \"2K\"
         }
       }
+      }
     }"
 ```
 
-![صورة جماعية للمكتب من إنشاء الذكاء الاصطناعي](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=ar)
+![Ảnh chụp nhóm nhân viên văn phòng do AI tạo](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=vi)
 
-صورة جماعية للمكتب من إنشاء الذكاء الاصطناعي
+Ảnh chụp nhóm văn phòng do AI tạo
 
-### تحديد المصدر من خلال "بحث Google"
+### Dựa trên kết quả của Google Tìm kiếm
 
-استخدِم [أداة &quot;بحث Google&quot;](https://ai.google.dev/gemini-api/docs/google-search?hl=ar) لإنشاء صور استنادًا إلى معلومات في الوقت الفعلي، مثل توقعات الطقس أو الرسومات البيانية للأسهم أو الأحداث الأخيرة.
+Sử dụng [công cụ Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi) để tạo hình ảnh dựa trên thông tin theo thời gian thực, chẳng hạn như dự báo thời tiết, biểu đồ cổ phiếu hoặc sự kiện gần đây.
 
-يُرجى العِلم أنّه عند استخدام ميزة "تحديد المصدر من خلال بحث Google" مع إنشاء الصور، لا يتم تمرير نتائج البحث المستندة إلى الصور إلى نموذج الإنشاء ويتم استبعادها من الردّ (راجِع [تحديد المصدر من خلال بحث Google للصور](#image-search)).
+Xin lưu ý rằng khi sử dụng tính năng Bám sát nguồn bằng Google Tìm kiếm để tạo hình ảnh, kết quả tìm kiếm dựa trên hình ảnh sẽ không được truyền đến mô hình tạo và sẽ bị loại trừ khỏi câu trả lời (xem phần [Bám sát nguồn bằng Google Tìm kiếm cho hình ảnh](#image-search))
 
 ### Python
 
@@ -1129,9 +1125,7 @@ response = client.models.generate_content(
     contents=prompt,
     config=types.GenerateContentConfig(
         response_modalities=['Text', 'Image'],
-        image_config=types.ImageConfig(
-            aspect_ratio=aspect_ratio,
-        ),
+        response_format={"image": {aspect_ratio: aspect_ratio,}},
         tools=[{"google_search": {}}]
     )
 )
@@ -1162,10 +1156,12 @@ const response = await ai.models.generateContent({
     contents: prompt,
     config: {
       responseModalities: ['TEXT', 'IMAGE'],
-      imageConfig: {
+      responseFormat: {
+    image: {
         aspectRatio: aspectRatio,
         imageSize: resolution,
-      },
+      }
+  },
     tools: [{ googleSearch: {} }]
     },
   });
@@ -1186,7 +1182,7 @@ const response = await ai.models.generateContent({
 main();
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -1250,27 +1246,29 @@ curl -s -X POST \
     "tools": [{"google_search": {}}],
     "generationConfig": {
       "responseModalities": ["TEXT", "IMAGE"],
-      "imageConfig": {"aspectRatio": "16:9"}
+      "responseFormat": {
+    "image": {"aspectRatio": "16:9"}
+  }
     }
   }'
 ```
 
-![مخطط الطقس لمدة خمسة أيام في سان فرانسيسكو من إنشاء الذكاء الاصطناعي](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=ar)
+![Biểu đồ thời tiết 5 ngày do AI tạo cho San Francisco](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=vi)
 
-مخطط الطقس لمدة خمسة أيام في سان فرانسيسكو من إنشاء الذكاء الاصطناعي
+Biểu đồ thời tiết 5 ngày do AI tạo cho San Francisco
 
-تتضمّن الاستجابة `groundingMetadata` الذي يحتوي على الحقول المطلوبة التالية:
+Phản hồi này bao gồm `groundingMetadata` chứa các trường bắt buộc sau:
 
-- **`searchEntryPoint`**: يحتوي على HTML وCSS لعرض اقتراحات البحث المطلوبة.
-- ‫**`groundingChunks`**: تعرض أهم 3 مصادر على الويب تم استخدامها لإنشاء الصورة
+- **`searchEntryPoint`**: Chứa HTML và CSS để hiển thị các đề xuất tìm kiếm bắt buộc.
+- **`groundingChunks`**: Trả về 3 nguồn hàng đầu trên web được dùng để làm cơ sở cho hình ảnh được tạo
 
-### تحديد المصدر من خلال "بحث Search" عن الصور (الإصدار 3.1 من Flash)
+### Bám sát nguồn bằng Google Tìm kiếm hình ảnh (3.1 Flash)
 
-تتيح ميزة &quot;تحديد المصدر من خلال &quot;بحث Search&quot;&quot; في &quot;بحث Google&quot; للصور أن تستخدم النماذج صور الويب التي يتم استرجاعها عبر &quot;بحث Google&quot; كسياق مرئي لإنشاء الصور. &quot;البحث بالصور&quot; هو نوع بحث جديد ضمن أداة &quot;تحديد المصدر من خلال &quot;بحث Search&quot;&quot; الحالية، ويعمل إلى جانب [بحث الويب](#use-with-grounding) العادي.
+Tính năng Bám sát nguồn bằng Google Tìm kiếm cho hình ảnh cho phép các mô hình sử dụng hình ảnh trên web được truy xuất thông qua Google Tìm kiếm làm bối cảnh trực quan để tạo hình ảnh. Tìm kiếm hình ảnh là một loại tìm kiếm mới trong công cụ Bám sát nguồn bằng Google Tìm kiếm hiện có, hoạt động cùng với tính năng [Tìm kiếm trên web](#use-with-grounding) tiêu chuẩn.
 
-لتفعيل ميزة "البحث بالصور"، اضبط أداة `googleSearch` في طلب بيانات من واجهة برمجة التطبيقات وحدِّد `imageSearch` ضمن العنصر `searchTypes`. يمكن استخدام &quot;بحث الصور&quot; بشكل مستقل أو مع &quot;بحث الويب&quot;.
+Để bật tính năng Tìm kiếm bằng hình ảnh, hãy định cấu hình công cụ `googleSearch` trong yêu cầu API của bạn và chỉ định `imageSearch` trong đối tượng `searchTypes`. Bạn có thể sử dụng tính năng Tìm kiếm hình ảnh độc lập hoặc cùng với tính năng Tìm kiếm trên web.
 
-يُرجى العِلم أنّه لا يمكن استخدام ميزة تحديد المصدر من خلال "بحث Search" للبحث عن أشخاص.
+Xin lưu ý rằng bạn không thể dùng tính năng Bám sát nguồn bằng Google Tìm kiếm cho hình ảnh để tìm kiếm người.
 
 ### Python
 
@@ -1404,32 +1402,31 @@ curl -s -X POST \
   }'
 ```
 
-**متطلبات العرض**
+**Yêu cầu về việc hiển thị**
 
-عند استخدام ميزة &quot;البحث بالصور&quot; ضمن &quot;تحديد المصدر من خلال بحث Google&quot;، عليك الالتزام بالشروط التالية:
+Khi sử dụng tính năng Tìm kiếm bằng hình ảnh trong tính năng Bám sát nguồn bằng Google Tìm kiếm, bạn phải tuân thủ các điều kiện sau:
 
-- **الإشارة إلى المصدر**: يجب توفير رابط يؤدي إلى صفحة الويب التي تتضمّن صورة المصدر (أي "الصفحة الحاوية"، وليس ملف الصورة نفسه) بطريقة يمكن للمستخدم التعرّف عليها كرابط.
-- **التنقّل المباشر**: إذا اخترت أيضًا عرض الصور المصدر، عليك توفير مسار مباشر بنقرة واحدة من الصور المصدر إلى صفحة الويب المصدر التي تحتوي عليها. لا يُسمح بأي طريقة أخرى تؤخّر أو تحجب وصول المستخدم النهائي إلى صفحة الويب المصدر، بما في ذلك على سبيل المثال لا الحصر، أي مسار يتضمّن نقرات متعدّدة أو استخدام عارض صور وسيط.
+- **Ghi nhận nguồn**: Bạn phải cung cấp một đường liên kết đến trang web chứa hình ảnh nguồn (trang "chứa" chứ không phải tệp hình ảnh) theo cách mà người dùng sẽ nhận ra đó là một đường liên kết.
+- **Điều hướng trực tiếp**: Nếu chọn hiển thị hình ảnh nguồn, bạn phải cung cấp một đường dẫn trực tiếp, chỉ cần nhấp một lần từ hình ảnh nguồn đến trang web nguồn chứa hình ảnh đó. Bạn không được phép triển khai bất kỳ phương thức nào khác làm chậm hoặc che giấu quyền truy cập của người dùng cuối vào trang web nguồn, bao gồm nhưng không giới hạn ở bất kỳ đường dẫn nhiều lượt nhấp nào hoặc việc sử dụng trình xem hình ảnh trung gian.
 
-**الردّ**
+**Đáp**
 
-بالنسبة إلى الردود المستندة إلى مصادر باستخدام البحث بالصور، توفّر واجهة برمجة التطبيقات إشارة واضحة إلى المصدر
-وبيانات وصفية لربط الناتج بمصادر تم التحقّق منها. تشمل الحقول الرئيسية في الكائن `groundingMetadata` ما يلي:
+Đối với các câu trả lời có căn cứ sử dụng tính năng tìm kiếm hình ảnh, API cung cấp thông tin ghi nhận quyền tác giả và siêu dữ liệu rõ ràng để liên kết đầu ra của API với các nguồn đã xác minh. Các trường chính trong đối tượng `groundingMetadata` bao gồm:
 
-- **‫`imageSearchQueries`**: طلبات البحث المحدّدة التي يستخدمها النموذج للحصول على سياق مرئي (البحث بالصور).
-- ‫**`groundingChunks`**: يحتوي على معلومات المصدر للنتائج التي تم استرجاعها.
-  بالنسبة إلى مصادر الصور، سيتم عرضها كعناوين URL لإعادة التوجيه باستخدام نوع جديد من أجزاء الصور. يتضمّن هذا الجزء ما يلي:
+- **`imageSearchQueries`**: Các cụm từ tìm kiếm cụ thể mà mô hình sử dụng cho ngữ cảnh trực quan (tìm kiếm hình ảnh).
+- **`groundingChunks`**: Chứa thông tin nguồn cho các kết quả đã truy xuất.
+  Đối với nguồn hình ảnh, các nguồn này sẽ được trả về dưới dạng URL chuyển hướng bằng cách sử dụng một loại đoạn hình ảnh mới. Khối này bao gồm:
 
-  - استبدِل **`uri`** بعنوان URL لصفحة الويب المستخدَمة في تحديد المصدر (الصفحة المقصودة).
-  - **`image_uri`**: عنوان URL المباشر للصورة.
-- **`groundingSupports`**: يوفّر عمليات ربط محدّدة تربط المحتوى الذي تم إنشاؤه بمصدر الاقتباس ذي الصلة في الأجزاء.
-- **`searchEntryPoint`**: يتضمّن شريحة "بحث Google" التي تحتوي على HTML وCSS متوافقَين لعرض "اقتراحات البحث".
+  - **`uri`**: URL của trang web để phân bổ (trang đích).
+  - **`image_uri`**: URL trực tiếp của hình ảnh.
+- **`groundingSupports`**: Cung cấp các mối liên kết cụ thể để liên kết nội dung được tạo với nguồn trích dẫn có liên quan trong các đoạn.
+- **`searchEntryPoint`**: Bao gồm chip "Google Tìm kiếm" có chứa HTML và CSS tuân thủ để hiển thị Đề xuất tìm kiếm.
 
-### إنشاء صور بدقة تصل إلى 4K
+### Tạo hình ảnh có độ phân giải lên đến 4K
 
-تنشئ نماذج الصور في Gemini 3 صورًا بدقة 1000 بكسل تلقائيًا، ولكن يمكنها أيضًا إنشاء صور بدقة 2000 و4000 و512 بكسل (0.5 ألف بكسل) (في Gemini 3.1 Flash Image فقط). لإنشاء مواد عرض بدقة أعلى، حدِّد `image_size` في `generation_config`.
+Các mô hình hình ảnh Gemini 3 tạo ra 1.000 hình ảnh theo mặc định nhưng cũng có thể xuất ra hình ảnh 2K, 4K và 512 (0, 5K) (chỉ Gemini 3.1 Flash Image). Để tạo thành phần có độ phân giải cao hơn, hãy chỉ định `image_size` trong `generation_config`.
 
-يجب استخدام الحرف "K" الكبير (مثلاً، 1K أو 2K أو 4K). لا تستخدم القيمة `512` اللاحقة "K". سيتم رفض المعلمات التي تتضمّن أحرفًا صغيرة (مثل 1k).
+Bạn phải sử dụng chữ "K" viết hoa (ví dụ: 1K, 2K, 4K). Giá trị `512` không sử dụng hậu tố "K". Các thông số viết thường (ví dụ: 1k) sẽ bị từ chối.
 
 ### Python
 
@@ -1448,10 +1445,7 @@ response = client.models.generate_content(
     contents=prompt,
     config=types.GenerateContentConfig(
         response_modalities=['TEXT', 'IMAGE'],
-        image_config=types.ImageConfig(
-            aspect_ratio=aspect_ratio,
-            image_size=resolution
-        ),
+        response_format={"image": {aspect_ratio: aspect_ratio,                 image_size: resolution}},
     )
 )
 
@@ -1482,10 +1476,12 @@ async function main() {
     contents: prompt,
     config: {
       responseModalities: ['TEXT', 'IMAGE'],
-      imageConfig: {
+      responseFormat: {
+    image: {
         aspectRatio: aspectRatio,
         imageSize: resolution,
-      },
+      }
+  },
     },
   });
 
@@ -1555,7 +1551,7 @@ func main() {
 }
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -1617,24 +1613,26 @@ curl -s -X POST \
     "tools": [{"google_search": {}}],
     "generationConfig": {
       "responseModalities": ["TEXT", "IMAGE"],
-      "imageConfig": {"aspectRatio": "1:1", "imageSize": "1K"}
+      "responseFormat": {
+    "image": {"aspectRatio": "1:1", "imageSize": "1K"}
+  }
     }
   }'
 ```
 
-في ما يلي مثال على صورة تم إنشاؤها من خلال هذا الطلب:
+Sau đây là một ví dụ về hình ảnh được tạo từ câu lệnh này:
 
-![رسم تشريحي بأسلوب دافنشي من إنشاء الذكاء الاصطناعي لفراشة ملكية تم تشريحها](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=ar)
+![Bản phác thảo giải phẫu theo phong cách Da Vinci do AI tạo về một con bướm vua bị mổ xẻ.](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=vi)
 
-رسم تشريحي لفراشة ملكية تم تشريحها بأسلوب ليوناردو دافنشي من إنشاء الذكاء الاصطناعي
+Bản phác thảo giải phẫu theo phong cách Da Vinci do AI tạo về một con bướm vua bị mổ xẻ.
 
-### عملية التفكير
+### Quá trình tư duy
 
-نماذج الصور في Gemini 3 هي نماذج مُفكِّرة تستخدم عملية استدلال ("تفكير") للتعامل مع الطلبات المعقّدة. تكون هذه الميزة مفعّلة تلقائيًا ولا يمكن إيقافها في واجهة برمجة التطبيقات. لمزيد من المعلومات حول عملية التفكير، يُرجى الاطّلاع على دليل [تفكير Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=ar).
+Mô hình hình ảnh Gemini 3 là mô hình tư duy sử dụng quy trình suy luận ("Tư duy") cho các câu lệnh phức tạp. Tính năng này được bật theo mặc định và không thể tắt trong API. Để tìm hiểu thêm về quy trình suy nghĩ, hãy xem hướng dẫn [Quy trình suy nghĩ của Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=vi).
 
-ينشئ النموذج ما يصل إلى صورتَين مؤقتتَين لاختبار التركيب والمنطق. الصورة الأخيرة ضمن "جارٍ التفكير" هي أيضًا الصورة النهائية المعروضة.
+Mô hình này tạo tối đa 2 hình ảnh tạm thời để kiểm thử bố cục và logic. Hình ảnh cuối cùng trong phần Tư duy cũng là hình ảnh được kết xuất cuối cùng.
 
-يمكنك الاطّلاع على الأفكار التي أدّت إلى إنتاج الصورة النهائية.
+Bạn có thể xem những suy nghĩ dẫn đến việc tạo ra hình ảnh cuối cùng.
 
 ### Python
 
@@ -1664,13 +1662,11 @@ for (const part of response.candidates[0].content.parts) {
 }
 ```
 
-#### التحكّم في مستويات التفكير
+#### Kiểm soát các cấp độ tư duy
 
-باستخدام Gemini 3.1 Flash Image، يمكنك التحكّم في مقدار التفكير الذي يستخدمه النموذج لتحقيق التوازن بين الجودة وسرعة الاستجابة. القيمة التلقائية `thinkingLevel` هي `minimal`،
-والمستويات المتاحة هي `minimal` و`high`. يؤدي ضبط
-`thinkingLevel` على `minimal` إلى تقديم ردود بأقل وقت استجابة. يُرجى العِلم أنّ الحد الأدنى من التفكير لا يعني أنّ النموذج لا يستخدم أي تفكير على الإطلاق.
+Với Gemini 3.1 Flash Image, bạn có thể kiểm soát mức độ tư duy mà mô hình sử dụng để cân bằng chất lượng và độ trễ. `thinkingLevel` mặc định là `minimal` và các cấp độ được hỗ trợ là `minimal` và `high`. Việc đặt `thinkingLevel` thành `minimal` sẽ mang lại các phản hồi có độ trễ thấp nhất. Xin lưu ý rằng tư duy tối thiểu không có nghĩa là mô hình hoàn toàn không sử dụng tư duy.
 
-يمكنك إضافة القيمة المنطقية `includeThoughts` لتحديد ما إذا كان سيتم عرض الأفكار التي أنشأها النموذج في الردّ أو إخفاؤها.
+Bạn có thể thêm giá trị boolean `includeThoughts` để xác định xem suy nghĩ được tạo của mô hình có được trả về trong phản hồi hay vẫn bị ẩn.
 
 ### Python
 
@@ -1810,20 +1806,19 @@ curl -s -X POST \
   }'
 ```
 
-يُرجى العِلم أنّه يتم تحصيل رسوم من الرموز المميزة الخاصة بالتفكير بغض النظر عمّا إذا تم ضبط `includeThoughts` على `true` أو `false`، لأنّ [عملية التفكير](#thinking-process) تحدث دائمًا بشكل تلقائي سواء عرضت العملية أم لا.
+Xin lưu ý rằng các token tư duy sẽ được tính phí bất kể `includeThoughts` được đặt thành `true` hay `false`, vì [quy trình tư duy](#thinking-process) luôn diễn ra theo mặc định cho dù bạn có xem quy trình đó hay không.
 
-#### توقيعات الأفكار
+#### Chữ ký suy nghĩ
 
-توقيعات الأفكار هي تمثيلات مشفّرة لعملية التفكير الداخلية الخاصة بالنموذج، ويتم استخدامها للحفاظ على سياق الاستدلال في المحادثات المتعدّدة الجولات. تتضمّن جميع الردود الحقل `thought_signature`. كقاعدة عامة، إذا تلقّيت توقيعًا فكريًا في ردّ من النموذج، عليك إعادة إرساله تمامًا كما تلقّيته عند إرسال سجلّ المحادثة في الدور التالي. قد يؤدي عدم تداول توقيعات الأفكار إلى تعذّر عرض الرد. يمكنك الاطّلاع على مستندات [توقيع الأفكار](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=ar)
-للحصول على مزيد من التوضيحات حول التواقيع بشكل عام.
+Chữ ký suy nghĩ là biểu diễn được mã hoá của quy trình suy nghĩ nội bộ của mô hình và được dùng để duy trì bối cảnh suy luận trong các lượt tương tác nhiều lượt. Tất cả các phản hồi đều có trường `thought_signature`. Theo nguyên tắc chung, nếu nhận được chữ ký suy nghĩ trong phản hồi của mô hình, bạn nên truyền lại chính xác chữ ký đó như khi nhận được khi gửi nhật ký cuộc trò chuyện ở lượt tiếp theo. Nếu không truyền tải được chữ ký suy nghĩ, thì có thể phản hồi sẽ không thành công. Hãy xem tài liệu về [chữ ký tư duy](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=vi) để biết thêm thông tin giải thích về chữ ký nói chung.
 
-إليك طريقة عمل التوقيعات الفكرية:
+Sau đây là cách hoạt động của chữ ký tư duy:
 
-- يجب أن تتضمّن جميع أجزاء `inline_data` التي تحتوي على الصورة `mimetype` والمضمّنة في الرد توقيعًا.
-- إذا كانت هناك بعض أجزاء النص في البداية (قبل أي صورة) بعد الأفكار مباشرةً، يجب أن يتضمّن جزء النص الأول توقيعًا أيضًا.
-- إذا كانت `inline_data` أجزاء تتضمّن صورة `mimetype` جزءًا من أفكار، لن تتضمّن توقيعات.
+- Tất cả các phần `inline_data` có hình ảnh `mimetype` nằm trong phản hồi đều phải có chữ ký.
+- Nếu có một số phần văn bản ở đầu (trước bất kỳ hình ảnh nào) ngay sau suy nghĩ, thì phần văn bản đầu tiên cũng phải có chữ ký.
+- Nếu `inline_data` các phần có hình ảnh `mimetype` là một phần của suy nghĩ, thì chúng sẽ không có chữ ký.
 
-يوضّح الرمز التالي مثالاً على الأماكن التي يتم فيها تضمين توقيعات الأفكار:
+Đoạn mã sau đây cho thấy ví dụ về vị trí có chữ ký suy nghĩ:
 
 ```
 [
@@ -1883,184 +1878,179 @@ curl -s -X POST \
 ]
 ```
 
-## أوضاع أخرى لإنشاء الصور
+## Các chế độ tạo hình ảnh khác
 
-يتيح Gemini أوضاعًا أخرى للتفاعل مع الصور استنادًا إلى بنية الطلب وسياقه، بما في ذلك:
+Gemini hỗ trợ các chế độ tương tác khác với hình ảnh dựa trên cấu trúc câu lệnh và ngữ cảnh, bao gồm:
 
-- **النص إلى صور والنص (متداخل):** يعرض صورًا مع نص ذي صلة.
-  - مثال على الطلب: "أنشئ وصفة مصوّرة لطبق البايلا".
-- **الصور والنصوص إلى صور ونصوص (متداخلة)**: تستخدم هذه الميزة الصور والنصوص المُدخَلة لإنشاء صور ونصوص جديدة ذات صلة.
-  - مثال على الطلب: (مع صورة لغرفة مفروشة) "ما هي ألوان الأرائك الأخرى التي يمكن استخدامها في مساحتي؟ هل يمكنك تعديل الصورة؟"
+- **Văn bản thành hình ảnh và văn bản (xen kẽ):** Tạo ra hình ảnh có văn bản liên quan.
+  - Ví dụ về câu lệnh: "Tạo một công thức minh hoạ cho món paella."
+- **(Các) hình ảnh và văn bản thành(các) hình ảnh và văn bản (xen kẽ)**: Sử dụng hình ảnh và văn bản đầu vào để tạo hình ảnh và văn bản mới có liên quan.
+  - Ví dụ về câu lệnh: (Với hình ảnh một căn phòng có đồ nội thất) "Những màu sắc nào khác của ghế sofa sẽ phù hợp với không gian của tôi? Bạn có thể cập nhật hình ảnh không?"
 
-## إنشاء صور بشكل مجمّع
+## Tạo hàng loạt hình ảnh
 
-إذا كنت بحاجة إلى إنشاء عدد كبير من الصور، يمكنك استخدام [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ar). يمكنك الحصول على [حدود معدّل استخدام أعلى](https://ai.google.dev/gemini-api/docs/rate-limits?hl=ar) مقابل مدة استجابة تصل إلى 24 ساعة.
+Nếu cần tạo nhiều hình ảnh, bạn có thể sử dụng [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi). Bạn sẽ nhận được [hạn mức tốc độ](https://ai.google.dev/gemini-api/docs/rate-limits?hl=vi) cao hơn để đổi lấy thời gian xử lý lên đến 24 giờ.
 
-راجِع [مستندات إنشاء الصور باستخدام Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ar#image-generation) و[كتاب الطبخ](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=ar)
-للاطّلاع على أمثلة وتعليمات برمجية حول إنشاء الصور باستخدام Batch API.
+Hãy xem [Tài liệu về tính năng tạo hình ảnh bằng Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi#image-generation) và [sổ tay hướng dẫn](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=vi) để biết các ví dụ và mã về hình ảnh bằng Batch API.
 
-## دليل واستراتيجيات كتابة الطلبات
+## Hướng dẫn và chiến lược đặt câu lệnh
 
-يبدأ إتقان إنشاء الصور بمبدأ أساسي واحد:
+Để nắm vững cách tạo hình ảnh, bạn cần bắt đầu bằng một nguyên tắc cơ bản:
 
-> **صف المشهد، ولا تكتفِ بإدراج الكلمات الرئيسية.**
-> تتمثّل نقطة القوة الأساسية للنموذج في فهمه العميق للغة. سيؤدي تضمين فقرة وصفية سردية إلى إنشاء صورة أفضل وأكثر اتساقًا
-> من مجرد إدراج قائمة بكلمات غير مرتبطة.
+> **Mô tả cảnh, đừng chỉ liệt kê từ khoá.**
+> Điểm mạnh cốt lõi của mô hình này là khả năng hiểu ngôn ngữ sâu sắc. Một đoạn văn mô tả, tường thuật sẽ hầu như luôn tạo ra hình ảnh tốt hơn, mạch lạc hơn so với một danh sách các từ rời rạc.
 
-### طلبات إنشاء الصور
+### Câu lệnh để tạo hình ảnh
 
-ستساعدك الاستراتيجيات التالية في إنشاء طلبات فعّالة للحصول على الصور التي تبحث عنها بالضبط.
+Các chiến lược sau đây sẽ giúp bạn tạo câu lệnh hiệu quả để tạo ra chính xác những hình ảnh mà bạn đang tìm kiếm.
 
-#### تصوير فوتوغرافي
+#### Nhiếp ảnh
 
-للحصول على صور واقعية، استخدِم مصطلحات التصوير الفوتوغرافي. اذكر زوايا الكاميرا وأنواع العدسات والإضاءة والتفاصيل الدقيقة لتوجيه النموذج نحو نتيجة واقعية.
+Để có hình ảnh chân thực, hãy sử dụng các thuật ngữ nhiếp ảnh. Đề cập đến góc camera, loại ống kính, ánh sáng và các chi tiết nhỏ để hướng dẫn mô hình tạo ra kết quả chân thực.
 
-| **الطلب** | **المخرجات المولَّدة** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| صورة مقرّبة لبورتريه خزّاف ياباني مسنّ تظهر على وجهه تجاعيد عميقة ناتجة عن التعرّض للشمس وابتسامة دافئة وواثقة. وهو يتفحّص بعناية وعاء شاي مطليًا حديثًا. المكان هو ورشة عمله الريفية المشمسة. يضيء المشهد ضوء ناعم من الساعة الذهبية يمرّ عبر نافذة، ما يبرز الملمس الناعم للطين. تم التقاط الصورة باستخدام عدسة بورتريه مقاس 85 مم، ما أدّى إلى الحصول على خلفية ناعمة ومموَّهة (تأثير البوكيه). الأجواء العامة هادئة ومتقنة. الاتجاه الرأسي العمودي | فنان ياباني مسنّ يصنع السيراميك |
+| Ảnh chụp cận cảnh chân dung một nghệ nhân gốm Nhật Bản lớn tuổi với những nếp nhăn sâu do ánh nắng và nụ cười ấm áp, thấu hiểu. Ông đang cẩn thận kiểm tra một chiếc bát trà mới tráng men. Khung cảnh là xưởng mộc mộc mạc, tràn ngập ánh nắng của ông. Khung cảnh được chiếu sáng bằng ánh sáng dịu nhẹ của giờ vàng, chiếu qua một ô cửa sổ, làm nổi bật kết cấu mịn của đất sét. Chụp bằng ống kính chân dung 85mm, tạo ra một phông nền mềm mại, mờ ảo (bokeh). Tâm trạng tổng thể là thanh bình và điêu luyện. Hướng dọc. | Nghệ nhân gốm sứ Nhật Bản lớn tuổi |
 
-#### صور توضيحية وملصقات ذات أنماط مختلفة
+#### Hình minh hoạ và hình dán cách điệu
 
-لإنشاء ملصقات أو رموز أو مواد عرض، يجب أن تكون واضحًا بشأن الأسلوب وأن تطلب خلفية بيضاء.
+Để tạo hình dán, biểu tượng hoặc thành phần, hãy nêu rõ kiểu và yêu cầu nền trắng.
 
-| **الطلب** | **المخرجات المولَّدة** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| ملصق بأسلوب كاواي لدب باندا أحمر سعيد يرتدي قبعة خيزران صغيرة وهو يمضغ ورقة خيزران خضراء. يتميّز التصميم بخطوط عريضة وواضحة، وتظليل بسيط للخلايا، ولوحة ألوان زاهية. يجب أن تكون الخلفية بيضاء. | ملصق باندا حمراء بأسلوب &quot;كاواي&quot; |
+| Hình dán theo phong cách kawaii về một chú gấu trúc đỏ vui vẻ đang đội một chiếc mũ tre nhỏ. Chú gấu trúc này đang nhai một chiếc lá tre xanh. Thiết kế này có đường viền rõ ràng, đậm nét, kỹ thuật đổ bóng đơn giản và bảng màu sống động. Nền phải có màu trắng. | Hình dán gấu trúc đỏ theo phong cách kawaii |
 
-#### نص دقيق في الصور
+#### Văn bản chính xác trong hình ảnh
 
-يتفوّق Gemini في عرض النص. يجب أن يكون النص واضحًا، وأن يكون نمط الخط (وصفيًا)، وأن يكون التصميم العام واضحًا. استخدام &quot;معاينة الصور&quot; في Gemini 3 Pro لإنتاج مواد عرض احترافية
+Gemini có khả năng kết xuất văn bản vượt trội. Nêu rõ văn bản, kiểu phông chữ (mô tả) và thiết kế tổng thể. Sử dụng bản xem trước hình ảnh của Gemini 3 Pro để sản xuất tài sản chuyên nghiệp.
 
-| **الطلب** | **المخرجات المولَّدة** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| أنشِئ شعارًا عصريًا وبسيطًا لمقهى اسمه "The Daily Grind". يجب أن يكون النص بخط sans-serif واضح وغامق. نظام الألوان هو الأبيض والأسود. ضَع الشعار في دائرة. استخدِم حبوب القهوة بطريقة مبتكرة. | شعار المقهى |
+| Tạo một biểu trưng tối giản, hiện đại cho quán cà phê có tên "The Daily Grind". Văn bản phải sử dụng phông chữ sans-serif rõ ràng và in đậm. Bảng phối màu là đen và trắng. Đặt biểu trưng vào một vòng tròn. Sử dụng hạt cà phê một cách khéo léo. | Biểu trưng quán cà phê |
 
-#### نماذج المنتجات والتصوير الفوتوغرافي التجاري
+#### Bản mô phỏng sản phẩm và ảnh chụp thương mại
 
-وهي مثالية لإنشاء لقطات منتجات احترافية وواضحة للتجارة الإلكترونية أو الإعلانات أو العلامات التجارية.
+Phù hợp để tạo ảnh chụp sản phẩm chuyên nghiệp, rõ ràng cho thương mại điện tử, quảng cáo hoặc hoạt động xây dựng thương hiệu.
 
-| **الطلب** | **المخرجات المولَّدة** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| صورة منتج فوتوغرافية عالية الدقة تم التقاطها في استوديو مضاء، وتظهر فيها قهوة في كوب سيراميك بسيط باللون الأسود غير اللامع، موضوع على سطح خرساني مصقول. الإضاءة عبارة عن مجموعة من ثلاثة صناديق إضاءة ناعمة مصمَّمة لإنشاء ظلال ناعمة وموزّعة وإزالة الظلال القاسية. زاوية الكاميرا هي لقطة بزاوية 45 درجة مرتفعة قليلاً لإبراز خطوطها الواضحة. صورة واقعية للغاية مع تركيز حاد على البخار المتصاعد من القهوة صورة مربّعة | لقطة لمنتج كوب قهوة من السيراميك |
+| Ảnh chụp sản phẩm có độ phân giải cao, được chụp trong phòng chụp ảnh và có ánh sáng chuyên nghiệp, cho thấy một chiếc cốc cà phê bằng gốm tối giản màu đen mờ, được đặt trên bề mặt bê tông đánh bóng. Ánh sáng được thiết lập bằng hộp hắt sáng ba điểm, được thiết kế để tạo ra những điểm sáng dịu nhẹ, khuếch tán và loại bỏ bóng đổ gắt. Góc máy là góc chụp 45 độ hơi cao để làm nổi bật các đường nét gọn gàng của sản phẩm. Siêu chân thực, với tiêu điểm rõ nét vào hơi nước bốc lên từ cà phê. Ảnh hình vuông. | Ảnh chụp sản phẩm cốc cà phê gốm |
 
-#### التصميم البسيط والمساحة السلبية
+#### Thiết kế tối giản và không gian âm
 
-وهي ممتازة لإنشاء خلفيات للمواقع الإلكترونية أو العروض التقديمية أو المواد التسويقية التي سيتم عرض النص فوقها.
+Rất phù hợp để tạo nền cho trang web, bản trình bày hoặc tài liệu tiếp thị có văn bản được đặt lên trên.
 
-| **الطلب** | **المخرجات المولَّدة** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| صورة بسيطة تعرض ورقة شجر قيقب حمراء واحدة ورقيقة موضوعة في أسفل يسار الإطار الخلفية عبارة عن لوحة قماشية واسعة وفارغة بلون أبيض مائل للصفرة، ما يخلق مساحة سالبة كبيرة للنص. إضاءة ناعمة وموزّعة من أعلى اليمين صورة مربّعة | تصميم بسيط مع ورقة شجر قيقب حمراء |
+| Một bố cục tối giản có một chiếc lá phong đỏ duy nhất, tinh tế nằm ở góc dưới bên phải khung hình. Nền là một bức canvas rộng lớn, trống trải có màu trắng nhạt, tạo ra khoảng trống đáng kể cho văn bản. Ánh sáng dịu nhẹ, khuếch tán từ phía trên bên trái. Ảnh hình vuông. | Thiết kế tối giản với lá phong đỏ |
 
-#### الفن التسلسلي (لوحة الكتب المصوّرة / لوحة ترتيب الصور)
+#### Nghệ thuật tuần tự (Bảng truyện tranh / Bảng phân cảnh)
 
-تستند هذه الميزة إلى اتّساق الشخصيات ووصف المشاهد لإنشاء لوحات لسرد القصص بشكل مرئي. للحصول على أفضل النتائج من حيث الدقة في النصوص والقدرة على سرد القصص، تعمل هذه الطلبات بشكل أفضل مع Gemini 3 Pro وGemini 3.1 Flash Image Preview.
+Dựa trên sự nhất quán của nhân vật và nội dung mô tả cảnh để tạo các khung hình cho việc kể chuyện bằng hình ảnh. Để đảm bảo độ chính xác về văn bản và khả năng kể chuyện, những câu lệnh này hoạt động hiệu quả nhất với Gemini 3 Pro và Gemini 3.1 Flash Image Preview.
 
-| **الطلب** | **المخرجات المولَّدة** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **الصورة المدخَلة:**  رجل يرتدي نظارات بيضاء   صورة الإدخال   **الطلب:** أنشئ قصة مصوّرة من 3 لوحات بأسلوب فنّي جريء ومظلم باستخدام أحبار بالأبيض والأسود عالية التباين. ضَع الشخصية في مشهد فكاهي. | لوحة كوميدية سوداء |
+| **Hình ảnh đầu vào:**  Người đàn ông đeo kính trắng   Hình ảnh đầu vào   **Câu lệnh:** Tạo một truyện tranh gồm 3 khung theo phong cách nghệ thuật noir thô ráp bằng mực đen trắng có độ tương phản cao. Đặt nhân vật vào một cảnh hài hước. | Bảng truyện tranh noir khắc nghiệt |
 
-#### تحديد المصدر من خلال "بحث Google"
+#### Dựa trên kết quả của Google Tìm kiếm
 
-استخدام "بحث Google" لإنشاء صور استنادًا إلى معلومات حديثة أو في الوقت الفعلي
-ويُعدّ ذلك مفيدًا للأخبار والطقس والمواضيع الأخرى التي تتطلّب معلومات حديثة.
+Sử dụng Google Tìm kiếm để tạo hình ảnh dựa trên thông tin gần đây hoặc thông tin theo thời gian thực.
+Điều này rất hữu ích đối với tin tức, thông tin thời tiết và các chủ đề khác nhạy cảm về thời gian.
 
-| **الطلب** | **المخرجات المولَّدة** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| أنشئ رسمًا بسيطًا وعصريًا لمباراة "أرسنال" التي أُقيمت الليلة الماضية في دوري أبطال أوروبا | صورة لنتيجة مباراة كرة قدم لفريق &quot;أرسنال&quot; |
+| Tạo một hình ảnh đơn giản nhưng phong cách về trận đấu tối qua của Arsenal tại Champions League | Đồ hoạ tỷ số bóng đá của Arsenal |
 
-### طلبات تعديل الصور
+### Câu lệnh chỉnh sửa hình ảnh
 
-توضّح هذه الأمثلة كيفية تقديم صور إلى جانب طلباتك النصية لإجراء عمليات التعديل والتركيب ونقل الأنماط.
+Những ví dụ này cho thấy cách cung cấp hình ảnh cùng với câu lệnh dạng văn bản để chỉnh sửa, tạo bố cục và chuyển kiểu.
 
-#### إضافة العناصر وإزالتها
+#### Thêm và xoá phần tử
 
-قدِّم صورة واشرح التغيير المطلوب. سيتطابق النموذج مع نمط الصورة الأصلية وإضاءتها ومنظورها.
+Cung cấp một hình ảnh và mô tả thay đổi bạn muốn. Mô hình sẽ khớp với phong cách, ánh sáng và góc nhìn của hình ảnh gốc.
 
-| **الطلب** | **المخرجات المولَّدة** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **الصورة المدخَلة:**  صورة واقعية لقطة زنجبيلية منفوشة...   صورة الإدخال   **الطلب:** باستخدام صورة قطتي المرفقة، يُرجى إضافة قبعة ساحر صغيرة منسوجة على رأسها. اجعلها تبدو وكأنّها تجلس بشكل مريح وتتطابق مع الإضاءة الناعمة في الصورة. | قطة ترتدي قبعة ساحر |
+| **Hình ảnh đầu vào:**  Hình ảnh chân thực về một chú mèo lông xù màu gừng...   Hình ảnh đầu vào   **Câu lệnh:** Dựa vào hình ảnh được cung cấp về chú mèo của tôi, vui lòng thêm một chiếc mũ phù thuỷ nhỏ bằng len trên đầu chú mèo. Hãy chỉnh sửa sao cho vật thể trông như đang nằm thoải mái và phù hợp với ánh sáng dịu nhẹ của bức ảnh. | Mèo đội mũ phù thuỷ |
 
-#### طلاء أجزاء من الصورة (الإخفاء الدلالي)
+#### Chỉnh sửa cụ thể (Tạo mặt nạ ngữ nghĩa)
 
-تحديد "قناع" بشكل حواري لتعديل جزء معيّن من الصورة بدون التأثير في بقية الصورة
+Xác định "mặt nạ" bằng cách trò chuyện để chỉnh sửa một phần cụ thể của hình ảnh mà không ảnh hưởng đến phần còn lại.
 
-| **الطلب** | **المخرجات المولَّدة** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **الصورة المدخَلة:**  لقطة واسعة لغرفة معيشة عصرية مضاءة جيدًا...   صورة الإدخال   **الطلب:** باستخدام صورة غرفة المعيشة المقدَّمة، غيِّروا فقط الأريكة الزرقاء إلى أريكة تشيسترفيلد عتيقة من الجلد البني. لا تغيِّر بقية الغرفة، بما في ذلك الوسائد على الأريكة والإضاءة. | غرفة معيشة فيها أريكة جلدية بنية |
+| **Hình ảnh đầu vào:**  Một cảnh quay rộng về một phòng khách hiện đại, đủ ánh sáng...   Hình ảnh đầu vào   **Câu lệnh:** Dựa vào hình ảnh phòng khách được cung cấp, hãy chỉ thay đổi chiếc ghế sofa màu xanh dương thành một chiếc ghế sofa Chesterfield bằng da màu nâu kiểu cổ điển. Giữ nguyên phần còn lại của căn phòng, bao gồm cả gối trên ghế sofa và ánh sáng. | Phòng khách có ghế sofa bằng da màu nâu |
 
-#### تحويل النمط
+#### Chuyển đổi kiểu
 
-قدِّم صورة واطلب من النموذج إعادة إنشاء محتواها بأسلوب فني مختلف.
+Cung cấp một hình ảnh và yêu cầu mô hình tạo lại nội dung của hình ảnh đó theo một phong cách nghệ thuật khác.
 
-| **الطلب** | **المخرجات المولَّدة** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **الصورة المدخَلة:**  صورة فوتوغرافية واقعية وعالية الدقة لشارع مزدحم في مدينة...   صورة الإدخال   **الطلب:** حوِّل الصورة المقدَّمة لشارع في مدينة حديثة في الليل إلى أسلوب "ليلة مرصّعة بالنجوم" الفني الخاص بـ "فان غوخ". الحفاظ على التركيبة الأصلية للمباني والسيارات، ولكن عرض جميع العناصر بضربات فرشاة دوّارة وسميكة ولوحة ألوان درامية من درجات الأزرق الداكن والأصفر الساطع | شارع في المدينة بأسلوب &quot;ليلة مرصعة بالنجوم&quot; |
+| **Hình ảnh đầu vào:**  Một bức ảnh chân thực, có độ phân giải cao về một con phố nhộn nhịp trong thành phố...   Hình ảnh đầu vào   **Câu lệnh:** Biến bức ảnh được cung cấp về một đường phố hiện đại trong thành phố vào ban đêm thành phong cách nghệ thuật của bức tranh "Đêm đầy sao" của Vincent van Gogh. Giữ nguyên bố cục ban đầu của các toà nhà và ô tô, nhưng kết xuất tất cả các phần tử bằng những nét vẽ xoáy, đắp nổi và bảng màu kịch tính gồm màu xanh dương đậm và màu vàng tươi. | Đường phố theo phong cách Đêm đầy sao |
 
-#### التركيب المتقدّم: الجمع بين صور متعددة
+#### Bố cục nâng cao: Kết hợp nhiều hình ảnh
 
-تقديم صور متعددة كسياق لإنشاء مشهد جديد ومجمّع هذه الميزة مثالية لإنشاء نماذج للمنتجات أو صور مجمّعة إبداعية.
+Cung cấp nhiều hình ảnh làm bối cảnh để tạo một cảnh ghép mới. Đây là lựa chọn hoàn hảo cho bản mô phỏng sản phẩm hoặc ảnh ghép sáng tạo.
 
-| **الطلب** | **المخرجات المولَّدة** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **الصور المدخَلة:**  صورة احترافية لفستان صيفي أزرق مزيّن بالورود...   المدخل 1: فستان   لقطة كاملة لامرأة بشعر مرفوع على شكل كعكة...   المدخل 2: عارضة أزياء   **الطلب:** أريد صورة احترافية لمنتج أزياء للتجارة الإلكترونية. استخدِم الفستان الأزرق المنقوش بالورود من الصورة الأولى واجعل المرأة من الصورة الثانية ترتديه. أنشِئ صورة واقعية لكامل جسم المرأة وهي ترتدي الفستان، مع تعديل الإضاءة والظلال لتتناسب مع البيئة الخارجية. | لقطة للتجارة الإلكترونية في مجال الموضة |
+| **Hình ảnh đầu vào:**  Ảnh chụp chuyên nghiệp chiếc váy mùa hè màu xanh dương có hoạ tiết hoa...   Đầu vào 1: Váy   Ảnh toàn thân của một người phụ nữ búi tóc...   Đầu vào 2: Người mẫu   **Câu lệnh:** Tạo một bức ảnh thời trang chuyên nghiệp cho thương mại điện tử. Lấy chiếc váy hoa màu xanh dương trong bức ảnh đầu tiên và mặc cho người phụ nữ trong bức ảnh thứ hai. Tạo một bức ảnh toàn thân chân thực về người phụ nữ mặc chiếc váy, với ánh sáng và bóng đổ được điều chỉnh cho phù hợp với môi trường ngoài trời. | Ảnh chụp thương mại điện tử về thời trang |
 
-#### الحفاظ على التفاصيل العالية الدقة
+#### Giữ lại chi tiết có độ trung thực cao
 
-لضمان الحفاظ على التفاصيل المهمة (مثل وجه أو شعار) أثناء التعديل،
-يجب وصفها بالتفصيل مع طلب التعديل.
+Để đảm bảo các chi tiết quan trọng (như khuôn mặt hoặc biểu trưng) được giữ nguyên trong quá trình chỉnh sửa, hãy mô tả các chi tiết đó một cách cụ thể cùng với yêu cầu chỉnh sửa của bạn.
 
-| **الطلب** | **المخرجات المولَّدة** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **الصور المدخَلة:**  صورة احترافية لوجه امرأة ذات شعر بني وعينين زرقاوين...   الإدخال 1: امرأة   شعار بسيط وعصري يتضمّن الحرفين &quot;G&quot; و&quot;A&quot;...   الإدخال 2: شعار   **الطلب:** أريد الصورة الأولى للمرأة ذات الشعر البني والعينين الزرقاوين وتعابير الوجه المحايدة. أضِف الشعار من الصورة الثانية إلى القميص الأسود الذي ترتديه. تأكَّد من عدم تغيير وجه المرأة وملامحها على الإطلاق. يجب أن يبدو الشعار وكأنّه مطبوع بشكل طبيعي على القماش، مع مراعاة طيّات القميص. | امرأة ترتدي قميصًا يحمل شعارًا |
+| **Hình ảnh đầu vào:**  Ảnh chân dung chuyên nghiệp của một phụ nữ có mái tóc nâu và đôi mắt xanh dương...   Đầu vào 1: Phụ nữ   Một biểu trưng đơn giản, hiện đại với các chữ cái &quot;G&quot; và &quot;A&quot;...   Đầu vào 2: Biểu trưng   **Câu lệnh:** Lấy hình ảnh đầu tiên của người phụ nữ có mái tóc nâu, mắt xanh và biểu cảm trung tính. Thêm biểu trưng trong hình ảnh thứ hai vào áo thun đen của cô ấy. Đảm bảo khuôn mặt và các đặc điểm của người phụ nữ hoàn toàn không thay đổi. Biểu trưng phải trông như được in tự nhiên trên vải, theo các nếp gấp của áo. | Người phụ nữ mặc áo thun có biểu trưng |
 
-#### تحويل فكرة إلى واقع
+#### Tạo cảm giác sống động cho một nội dung nào đó
 
-حمِّل رسمًا تخطيطيًا أو لوحة واطلب من النموذج تحسينها لتصبح صورة نهائية.
+Tải bản phác thảo hoặc bản vẽ thô lên và yêu cầu mô hình tinh chỉnh thành một hình ảnh hoàn chỉnh.
 
-| **الطلب** | **المخرجات المولَّدة** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **الصورة المدخَلة:**  رسم تخطيطي لسيارة   رسم تقريبي لسيارة   **الطلب:** حوِّل هذه اللوحة الأولية المرسومة بقلم الرصاص لسيارة مستقبلية إلى صورة مصقولة لسيارة نموذجية جاهزة في صالة عرض. احتفظ بالخطوط الأنيقة والتصميم المنخفض من الرسم التخطيطي، ولكن أضِف طلاءً أزرق معدنيًا وإضاءة نيون على الحواف. | صورة مصقولة لسيارة نموذجية |
+| **Hình ảnh đầu vào:**  Bản phác thảo một chiếc ô tô   Bản phác thảo sơ bộ về một chiếc ô tô   **Câu lệnh:** Biến bản phác thảo bằng bút chì thô này về một chiếc ô tô tương lai thành một bức ảnh bóng bẩy về chiếc ô tô ý tưởng đã hoàn thiện trong phòng trưng bày. Giữ nguyên các đường nét mượt mà và kiểu dáng thấp trong bản phác thảo, nhưng thêm sơn màu xanh dương ánh kim và đèn chiếu sáng vành xe neon. | Ảnh đã chỉnh sửa của chiếc xe ý tưởng |
 
-#### الحفاظ على ملامح الشخصية: العرض بزاوية 360 درجة
+#### Đảm bảo tính nhất quán của nhân vật: Chế độ xem 360 độ
 
-يمكنك إنشاء عروض بزاوية 360 درجة لشخصية من خلال تقديم طلبات بشكل متكرّر للحصول على زوايا مختلفة. للحصول على أفضل النتائج، أدرِج الصور التي تم إنشاؤها سابقًا في الطلبات اللاحقة للحفاظ على التناسق. بالنسبة إلى الوضعيات المعقّدة، أدرِج صورة مرجعية للوضعية المطلوبة.
+Bạn có thể tạo chế độ xem 360 độ của một nhân vật bằng cách liên tục đưa ra câu lệnh cho các góc khác nhau. Để có kết quả tốt nhất, hãy thêm những hình ảnh đã tạo trước đó vào các câu lệnh tiếp theo để duy trì tính nhất quán. Đối với những tư thế phức tạp, hãy thêm một hình ảnh tham khảo về tư thế mong muốn.
 
-| **الطلب** | **المخرجات المولَّدة** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **الصورة المدخَلة:**  المدخلات الأصلية لرجل يرتدي نظارات بيضاء   الصورة الأصلية   **الطلب:** صورة استوديو لهذا الرجل على خلفية بيضاء، من الجانب الأيمن | ناتج لرجل يرتدي نظارة بيضاء وينظر إلى اليمين   رجل يرتدي نظارات بيضاء وينظر إلى اليمين   ناتج لرجل يرتدي نظارة بيضاء وينظر إلى الأمام   رجل يرتدي نظارات بيضاء وينظر إلى الأمام |
+| **Hình ảnh đầu vào:**  Đầu vào ban đầu của một người đàn ông đeo kính trắng   Hình ảnh gốc   **Câu lệnh:** Ảnh chân dung của người đàn ông này trong studio, chụp trên nền trắng, chụp nghiêng mặt nhìn sang phải | Ảnh một người đàn ông đeo kính trắng đang nhìn sang phải   Người đàn ông đeo kính trắng nhìn sang phải   Ảnh một người đàn ông đeo kính trắng đang nhìn về phía trước   Người đàn ông đeo kính trắng nhìn về phía trước |
 
-### أفضل الممارسات
+### Các phương pháp hay nhất
 
-لتحسين نتائجك من جيدة إلى ممتازة، يمكنك دمج الاستراتيجيات الاحترافية التالية في سير عملك.
+Để nâng kết quả từ tốt lên xuất sắc, hãy kết hợp những chiến lược chuyên nghiệp này vào quy trình làm việc của bạn.
 
-- **كن دقيقًا جدًا:** كلّما قدّمت تفاصيل أكثر، زادت إمكانية التحكّم. بدلاً من كتابة "درع خيالي"، يمكنك وصفه: "درع معدني مزخرف خاص بالجِن، منقوش عليه أوراق فضية، مع ياقة عالية وواقيات كتف على شكل أجنحة صقر".
-- **توفير السياق والنية:** اشرح *الغرض* من الصورة. سيؤثر فهم النموذج للسياق في النتيجة النهائية. على سبيل المثال، سيؤدي طلب "إنشاء شعار لعلامة تجارية راقية وبسيطة للعناية بالبشرة" إلى نتائج أفضل من مجرد طلب "إنشاء شعار".
-- **التكرار والتحسين:** لا تتوقّع الحصول على صورة مثالية من المحاولة الأولى. استخدِم
-  الطبيعة الحوارية للنموذج لإجراء تغييرات بسيطة. يمكنك متابعة المحادثة بطلبات مثل "هذا رائع، ولكن هل يمكنك جعل الإضاءة أكثر دفئًا؟" أو "أريد الإبقاء على كل شيء كما هو، ولكن تغيير تعابير وجه الشخصية لتكون أكثر جدية".
-- **استخدام التعليمات المفصّلة:** بالنسبة إلى المشاهد المعقّدة التي تتضمّن عناصر كثيرة، قسِّم طلبك إلى خطوات. "أولاً، أنشئ خلفية لغابة هادئة يلفّها الضباب
-  عند الفجر. بعد ذلك، أضِف في المقدّمة مذبحًا قديمًا من الحجر مغطّى بالطحلب.
-  أخيرًا، ضَع سيفًا واحدًا متوهجًا فوق المذبح".
-- **استخدام "مطالبات سلبية دلالية":** بدلاً من قول "لا أريد سيارات"، يمكنك وصف المشهد المطلوب بشكل إيجابي: "شارع خالٍ ومهجور لا تظهر فيه أي علامات على حركة المرور".
-- **التحكّم في الكاميرا:** استخدِم لغة التصوير الفوتوغرافي والسينمائي للتحكّم في التركيب. عبارات مثل `wide-angle shot` و`macro shot` و`low-angle
-  perspective`
+- **Càng cụ thể càng tốt:** Bạn càng cung cấp nhiều thông tin chi tiết, bạn càng có nhiều quyền kiểm soát. Thay vì "áo giáp giả tưởng", hãy mô tả nó: "áo giáp dạng tấm của người lùn được trang trí công phu, khắc hoạ các hoạ tiết lá bạc, có cổ áo cao và cầu vai có hình dáng giống cánh chim ưng".
+- **Cung cấp bối cảnh và ý định:** Giải thích *mục đích* của hình ảnh. Mức độ hiểu biết của mô hình về ngữ cảnh sẽ ảnh hưởng đến kết quả đầu ra cuối cùng. Ví dụ: "Tạo một biểu trưng cho một thương hiệu chăm sóc da tối giản, cao cấp" sẽ mang lại kết quả tốt hơn so với chỉ "Tạo một biểu trưng".
+- **Lặp lại và tinh chỉnh:** Đừng mong đợi một hình ảnh hoàn hảo ngay từ lần thử đầu tiên. Sử dụng tính chất đàm thoại của mô hình để thực hiện các thay đổi nhỏ. Tiếp tục đưa ra các câu lệnh như "Tuyệt vời, nhưng bạn có thể điều chỉnh ánh sáng ấm hơn một chút không?" hoặc "Giữ nguyên mọi thứ, nhưng thay đổi biểu cảm của nhân vật sao cho nghiêm túc hơn."
+- **Sử dụng hướng dẫn từng bước:** Đối với những cảnh phức tạp có nhiều phần tử, hãy chia câu lệnh thành các bước. "Trước tiên, hãy tạo một hình nền là khu rừng yên bình, mờ sương vào lúc bình minh. Sau đó, ở tiền cảnh, hãy thêm một bàn thờ bằng đá cổ được phủ đầy rêu.
+  Cuối cùng, hãy đặt một thanh kiếm phát sáng duy nhất lên trên bàn thờ."
+- **Sử dụng "Câu lệnh phủ định ngữ nghĩa":** Thay vì nói "không có ô tô", hãy mô tả cảnh mong muốn một cách tích cực: "một con đường vắng vẻ, không có dấu hiệu giao thông".
+- **Kiểm soát Camera:** Sử dụng ngôn ngữ nhiếp ảnh và điện ảnh để kiểm soát bố cục. Các thuật ngữ như `wide-angle shot`, `macro shot`, `low-angle
+  perspective`.
 
-## القيود
+## Các điểm hạn chế
 
-- للحصول على أفضل أداء، استخدِم اللغات التالية: الإنجليزية، والعربية (مصر)، والألمانية (ألمانيا)، والإسبانية (المكسيك)، والفرنسية (فرنسا)، والهندية (الهند)، والإندونيسية (إندونيسيا)، والإيطالية (إيطاليا)، واليابانية (اليابان)، والكورية (كوريا الجنوبية)، والبرتغالية (البرازيل)، والروسية (روسيا)، والأوكرانية (أوكرانيا)، والفيتنامية (فيتنام)، والصينية (الصين).
-- لا تتيح ميزة إنشاء الصور إدخال ملفات صوت أو فيديو.
-- لن يلتزم النموذج دائمًا بالعدد الدقيق لنتائج الصور التي يطلبها المستخدم بشكل صريح.
-- يعمل `gemini-2.5-flash-image` على أفضل وجه مع ما يصل إلى 3 صور كمدخلات، بينما يتيح `gemini-3-pro-image-preview` استخدام 5 صور بدقة عالية، وما يصل إلى 14 صورة إجمالاً. تتيح `gemini-3.1-flash-image-preview` تشابه الأحرف بما يصل إلى 4 أحرف ودقة تصل إلى 10 عناصر في سير عمل واحد.
-- عند إنشاء نص لصورة، يعمل Gemini بشكل أفضل إذا أنشأت النص أولاً ثم طلبت صورة تتضمّن النص.
-- `gemini-3.1-flash-image-preview` لا تتيح ميزة "تحديد المصدر من خلال بحث Google" حاليًا استخدام صور واقعية لأشخاص من "بحث الويب".
-- تتضمّن جميع الصور التي يتم إنشاؤها [علامة مائية من SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=ar).
+- Để có hiệu suất tốt nhất, hãy sử dụng các ngôn ngữ sau: tiếng Anh, tiếng Ả Rập (Ai Cập), tiếng Đức (Đức), tiếng Tây Ban Nha (Mexico), tiếng Pháp (Pháp), tiếng Hindi (Ấn Độ), tiếng Indonesia (Indonesia), tiếng Ý (Ý), tiếng Nhật (Nhật Bản), tiếng Hàn (Hàn Quốc), tiếng Bồ Đào Nha (Brazil), tiếng Nga (Nga), tiếng Ukraina (Ukraina), tiếng Việt (Việt Nam), tiếng Trung (Trung Quốc).
+- Tính năng tạo hình ảnh không hỗ trợ dữ liệu đầu vào bằng âm thanh hoặc video.
+- Không phải lúc nào mô hình cũng tạo ra chính xác số lượng hình ảnh mà người dùng yêu cầu một cách rõ ràng.
+- `gemini-2.5-flash-image` hoạt động hiệu quả nhất khi có tối đa 3 hình ảnh làm dữ liệu đầu vào, trong khi `gemini-3-pro-image-preview` hỗ trợ 5 hình ảnh có độ trung thực cao và tổng cộng tối đa 14 hình ảnh. `gemini-3.1-flash-image-preview` hỗ trợ độ tương đồng về ký tự lên đến 4 ký tự và độ trung thực của tối đa 10 đối tượng trong một quy trình duy nhất.
+- Khi tạo văn bản cho một hình ảnh, Gemini hoạt động hiệu quả nhất nếu bạn tạo văn bản trước rồi yêu cầu tạo hình ảnh có văn bản đó.
+- `gemini-3.1-flash-image-preview` Bám sát nguồn bằng Google Tìm kiếm hiện không hỗ trợ việc sử dụng hình ảnh thực tế về con người từ tìm kiếm trên web.
+- Tất cả hình ảnh được tạo đều có [hình mờ SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=vi).
 
-## الإعدادات الاختيارية
+## Cấu hình không bắt buộc
 
-يمكنك بشكل اختياري ضبط طرق عرض الرد ونسبة العرض إلى الارتفاع لناتج النموذج في الحقل `config` ضمن طلبات `generate_content`.
+Bạn có thể tuỳ ý định cấu hình các phương thức phản hồi và tỷ lệ khung hình của đầu ra của mô hình trong trường `config` của các lệnh gọi `generate_content`.
 
-### أنواع النتائج
+### Loại kết quả
 
-يعرض النموذج تلقائيًا ردودًا نصية وردودًا على شكل صور (أي `response_modalities=['Text', 'Image']`). يمكنك ضبط الردود لعرض الصور فقط بدون نص باستخدام `response_modalities=['Image']`.
+Theo mặc định, mô hình sẽ trả về các câu trả lời bằng văn bản và hình ảnh (tức là `response_modalities=['Text', 'Image']`). Bạn có thể định cấu hình câu trả lời để chỉ trả về hình ảnh mà không có văn bản bằng cách sử dụng `response_modalities=['Image']`.
 
 ### Python
 
@@ -2100,7 +2090,7 @@ result, _ := client.Models.GenerateContent(
   )
 ```
 
-### جافا
+### Java
 
 ```
 response = client.models.generateContent(
@@ -2130,10 +2120,10 @@ curl -s -X POST \
   }'
 ```
 
-### نِسَب العرض إلى الارتفاع وحجم الصورة
+### Tỷ lệ khung hình và kích thước hình ảnh
 
-يتم ضبط النموذج تلقائيًا على مطابقة حجم الصورة الناتجة مع حجم الصورة التي أدخلتها، أو يتم إنشاء مربّعات بنسبة 1:1.
-يمكنك التحكّم في نسبة العرض إلى الارتفاع للصورة الناتجة باستخدام الحقل `aspect_ratio` ضمن `image_config` في طلب الاستجابة، كما هو موضّح هنا:
+Theo mặc định, mô hình sẽ điều chỉnh kích thước hình ảnh đầu ra cho phù hợp với kích thước hình ảnh đầu vào hoặc tạo ra các hình vuông 1:1.
+Bạn có thể kiểm soát tỷ lệ khung hình của hình ảnh đầu ra bằng cách sử dụng trường `aspect_ratio` trong `response_format` trong yêu cầu phản hồi, như minh hoạ ở đây:
 
 ### Python
 
@@ -2143,9 +2133,7 @@ response = client.models.generate_content(
     model="gemini-2.5-flash-image",
     contents=[prompt],
     config=types.GenerateContentConfig(
-        image_config=types.ImageConfig(
-            aspect_ratio="16:9",
-        )
+        response_format={"image": {aspect_ratio: "16:9",}}
     )
 )
 
@@ -2154,10 +2142,7 @@ response = client.models.generate_content(
     model="gemini-3.1-flash-image-preview",
     contents=[prompt],
     config=types.GenerateContentConfig(
-        image_config=types.ImageConfig(
-            aspect_ratio="16:9",
-            image_size="2K",
-        )
+        response_format={"image": {aspect_ratio: "16:9",                 image_size: "2K",}}
     )
 )
 ```
@@ -2170,9 +2155,11 @@ const response = await ai.models.generateContent({
     model: "gemini-2.5-flash-image",
     contents: prompt,
     config: {
-      imageConfig: {
+      responseFormat: {
+    image: {
         aspectRatio: "16:9",
-      },
+      }
+  },
     }
   });
 
@@ -2181,10 +2168,12 @@ const response_gemini3 = await ai.models.generateContent({
     model: "gemini-3.1-flash-image-preview",
     contents: prompt,
     config: {
-      imageConfig: {
+      responseFormat: {
+    image: {
         aspectRatio: "16:9",
         imageSize: "2K",
-      },
+      }
+  },
     }
   });
 ```
@@ -2220,7 +2209,7 @@ result_gemini3, _ := client.Models.GenerateContent(
   )
 ```
 
-### جافا
+### Java
 
 ```
 // For gemini-2.5-flash-image
@@ -2260,9 +2249,11 @@ curl -s -X POST \
       ]
     }],
     "generationConfig": {
-      "imageConfig": {
+      "responseFormat": {
+    "image": {
         "aspectRatio": "16:9"
       }
+  }
     }
   }'
 
@@ -2278,93 +2269,93 @@ curl -s -X POST \
       ]
     }],
     "generationConfig": {
-      "imageConfig": {
+      "responseFormat": {
+    "image": {
         "aspectRatio": "16:9",
         "imageSize": "2K"
       }
+  }
     }
   }'
 ```
 
-في ما يلي الجداول التي تعرض النسب المختلفة المتاحة وحجم الصورة التي يتم إنشاؤها:
+Các tỷ lệ hiện có và kích thước của hình ảnh được tạo được liệt kê trong các bảng sau:
 
-### ‫3.1 Flash Image Preview
+### 3.1 Bản xem trước hình ảnh Flash
 
-| نسبة العرض إلى الارتفاع | درجة الدقة 512 | ‫0.5 ألف رمز مميّز | درجة الدقة 1K | ‫1,000 رمز مميّز | درجة الدقة 2K | 2,000 رمز مميّز | درجة الدقة 4K | ‫4,000 رمز مميّز |
+| Tỷ lệ khung hình | Độ phân giải 512 | 500 token | Độ phân giải 1K | 1.000 token | Độ phân giải 2K | 2.000 token | Độ phân giải 4K | 4.000 token |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **1:1** | ‫512×512 | 747 | 1024x1024 | 1120 | ‫2048x2048 | 1680 | 4096x4096 | 2520 |
-| **1:4** | 256x1024 | 747 | 512x2048 | 1120 | ‫1024x4096 | 1680 | 2048x8192 | 2520 |
-| **1:8** | 192x1536 | 747 | ‫384 × 3072 | 1120 | ‫768x6144 | 1680 | 1536x12288 | 2520 |
-| **2:3** | 424x632 | 747 | 848x1264 | 1120 | ‫1696x2528 | 1680 | ‫3392 × 5056 | 2520 |
+| **1:1** | 512x512 | 747 | 1024x1024 | 1120 | 2048x2048 | 1680 | 4096x4096 | 2520 |
+| **1:4** | 256x1024 | 747 | 512x2048 | 1120 | 1024x4096 | 1680 | 2048x8192 | 2520 |
+| **1:8** | 192x1536 | 747 | 384x3072 | 1120 | 768x6144 | 1680 | 1536x12288 | 2520 |
+| **2:3** | 424x632 | 747 | 848x1264 | 1120 | 1696x2528 | 1680 | 3392x5056 | 2520 |
 | **3:2** | 632x424 | 747 | 1264x848 | 1120 | 2528x1696 | 1680 | 5056x3392 | 2520 |
-| **3:4** | ‫448x600 | 747 | ‫896x1200 | 1120 | 1792x2400 | 1680 | ‫3584x4800 | 2520 |
-| **4:1** | 1024x256 | 747 | 2048x512 | 1120 | 4096x1024 | 1680 | ‫8192x2048 | 2520 |
-| **4:3** | 600x448 | 747 | ‫1200x896 | 1120 | 2400x1792 | 1680 | 4800x3584 | 2520 |
-| **4:5** | 464x576 | 747 | ‫928×1152 | 1120 | 1856x2304 | 1680 | 3712x4608 | 2520 |
-| **5:4** | 576x464 | 747 | ‫1152×928 | 1120 | 2304x1856 | 1680 | 4608x3712 | 2520 |
-| **8:1** | 1536x192 | 747 | ‫3072x384 | 1120 | 6144x768 | 1680 | 12288x1536 | 2520 |
-| **9:16** | 384x688 | 747 | ‎768x1376 | 1120 | ‫1536 × 2752 | 1680 | 3072x5504 | 2520 |
-| **16:9** | 688x384 | 747 | 1376x768 | 1120 | ‫2752x1536 | 1680 | 5504x3072 | 2520 |
-| **21:9** | 792x168 | 747 | 1584x672 | 1120 | ‫3168x1344 | 1680 | 6336x2688 | 2520 |
+| **3:4** | 448x600 | 747 | 896x1200 | 1120 | 1792x2400 | 1680 | 3584x4800 | 2520 |
+| **4:1** | 1024x256 | 747 | 2048x512 | 1120 | 4096x1024 | 1680 | 8192x2048 | 2520 |
+| **4:3** | 600x448 | 747 | 1200x896 | 1120 | 2400x1792 | 1680 | 4800x3584 | 2520 |
+| **4:5** | 464x576 | 747 | 928x1152 | 1120 | 1856x2304 | 1680 | 3712x4608 | 2520 |
+| **5:4** | 576x464 | 747 | 1152x928 | 1120 | 2304x1856 | 1680 | 4608x3712 | 2520 |
+| **8:1** | 1536x192 | 747 | 3072x384 | 1120 | 6144x768 | 1680 | 12288x1536 | 2520 |
+| **9:16** | 384x688 | 747 | 768x1376 | 1120 | 1536x2752 | 1680 | 3072x5504 | 2520 |
+| **16:9** | 688x384 | 747 | 1376x768 | 1120 | 2752x1536 | 1680 | 5504x3072 | 2520 |
+| **21:9** | 792x168 | 747 | 1584x672 | 1120 | 3168x1344 | 1680 | 6336x2688 | 2520 |
 
-### معاينة الصورة في الإصدار 3 Pro
+### Bản xem trước hình ảnh 3 Pro
 
-| نسبة العرض إلى الارتفاع | درجة الدقة 1K | ‫1,000 رمز مميّز | درجة الدقة 2K | 2,000 رمز مميّز | درجة الدقة 4K | ‫4,000 رمز مميّز |
+| Tỷ lệ khung hình | Độ phân giải 1K | 1.000 token | Độ phân giải 2K | 2.000 token | Độ phân giải 4K | 4.000 token |
 | --- | --- | --- | --- | --- | --- | --- |
-| **1:1** | 1024x1024 | 1120 | ‫2048x2048 | 1120 | 4096x4096 | 2000 |
-| **2:3** | 848x1264 | 1120 | ‫1696x2528 | 1120 | ‫3392 × 5056 | 2000 |
+| **1:1** | 1024x1024 | 1120 | 2048x2048 | 1120 | 4096x4096 | 2000 |
+| **2:3** | 848x1264 | 1120 | 1696x2528 | 1120 | 3392x5056 | 2000 |
 | **3:2** | 1264x848 | 1120 | 2528x1696 | 1120 | 5056x3392 | 2000 |
-| **3:4** | ‫896x1200 | 1120 | 1792x2400 | 1120 | ‫3584x4800 | 2000 |
-| **4:3** | ‫1200x896 | 1120 | 2400x1792 | 1120 | 4800x3584 | 2000 |
-| **4:5** | ‫928×1152 | 1120 | 1856x2304 | 1120 | 3712x4608 | 2000 |
-| **5:4** | ‫1152×928 | 1120 | 2304x1856 | 1120 | 4608x3712 | 2000 |
-| **9:16** | ‎768x1376 | 1120 | ‫1536 × 2752 | 1120 | 3072x5504 | 2000 |
-| **16:9** | 1376x768 | 1120 | ‫2752x1536 | 1120 | 5504x3072 | 2000 |
-| **21:9** | 1584x672 | 1120 | ‫3168x1344 | 1120 | 6336x2688 | 2000 |
+| **3:4** | 896x1200 | 1120 | 1792x2400 | 1120 | 3584x4800 | 2000 |
+| **4:3** | 1200x896 | 1120 | 2400x1792 | 1120 | 4800x3584 | 2000 |
+| **4:5** | 928x1152 | 1120 | 1856x2304 | 1120 | 3712x4608 | 2000 |
+| **5:4** | 1152x928 | 1120 | 2304x1856 | 1120 | 4608x3712 | 2000 |
+| **9:16** | 768x1376 | 1120 | 1536x2752 | 1120 | 3072x5504 | 2000 |
+| **16:9** | 1376x768 | 1120 | 2752x1536 | 1120 | 5504x3072 | 2000 |
+| **21:9** | 1584x672 | 1120 | 3168x1344 | 1120 | 6336x2688 | 2000 |
 
-### Gemini 2.5 Flash Image
+### Hình ảnh Gemini 2.5 Flash
 
-| نسبة العرض إلى الارتفاع | الدقة | الرموز المميزة |
+| Tỷ lệ khung hình | Độ phân giải | Mã thông báo |
 | --- | --- | --- |
 | 1:1 | 1024x1024 | 1290 |
-| 2:3 | ‫832x1248 | 1290 |
-| 3:2 | ‫1248x832 | 1290 |
-| 3:4 | ‫864 × 1184 | 1290 |
-| 4:3 | ‎1184x864 | 1290 |
-| 4:5 | ‫896×1152 | 1290 |
-| 5:4 | ‫1152x896 | 1290 |
-| 9:16 | ‎768x1344 | 1290 |
+| 2:3 | 832x1248 | 1290 |
+| 3:2 | 1248x832 | 1290 |
+| 3:4 | 864x1184 | 1290 |
+| 4:3 | 1184x864 | 1290 |
+| 4:5 | 896x1152 | 1290 |
+| 5:4 | 1152x896 | 1290 |
+| 9:16 | 768x1344 | 1290 |
 | 16:9 | 1344x768 | 1290 |
-| 21:9 | ‫1536x672 | 1290 |
+| 21:9 | 1536x672 | 1290 |
 
-## اختيار النموذج
+## Lựa chọn mô hình
 
-اختَر النموذج الأنسب لحالة الاستخدام المحدّدة.
+Chọn mô hình phù hợp nhất với trường hợp sử dụng cụ thể của bạn.
 
-- ننصحك باستخدام **الإصدار التجريبي من Gemini 3.1 Flash لإنشاء الصور (الإصدار التجريبي 2 من Nano Banana)**، فهو الأفضل من حيث الأداء العام والموازنة بين الذكاء والتكلفة ووقت الاستجابة. لمزيد من التفاصيل، يُرجى الاطّلاع على صفحة [الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#gemini-3.1-flash-image-preview) و[الإمكانات](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=ar) الخاصة بالنموذج.
-- تم تصميم **معاينة الصور في Gemini 3 Pro (معاينة Nano Banana Pro)** لإنتاج أصول احترافية وتنفيذ التعليمات المعقّدة. يتضمّن هذا النموذج ميزات
-  تستند إلى بيانات واقعية باستخدام "بحث Google"، وعملية "التفكير" التلقائية التي
-  تحسّن التركيب قبل الإنشاء، ويمكنه إنشاء صور بدقة تصل إلى 4K. لمزيد من التفاصيل، يُرجى الاطّلاع على صفحة [الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#gemini-3-pro-image-preview) و[الإمكانات](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=ar) الخاصة بالنموذج.
-- تم تصميم **‫Gemini 2.5 Flash Image (المعروف أيضًا باسم Nano Banana)** لتحقيق السرعة والكفاءة. تم تحسين هذا النموذج لتنفيذ المهام التي تتطلّب عددًا كبيرًا من العمليات ووقت استجابة منخفضًا، وهو ينشئ صورًا بدقة 1024 بكسل. يمكنك الاطّلاع على صفحة [الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#gemini-2.5-flash-image) و[الإمكانات](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=ar) الخاصة بالنموذج للحصول على مزيد من التفاصيل.
+- **Bản xem trước hình ảnh Gemini 3.1 Flash (Bản xem trước Nano Banana 2)** là mô hình tạo hình ảnh mà bạn nên dùng, vì đây là mô hình có hiệu suất và trí thông minh toàn diện tốt nhất để cân bằng chi phí và độ trễ. Hãy xem trang [giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#gemini-3.1-flash-image-preview) và [khả năng](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=vi) của mô hình để biết thêm thông tin chi tiết.
+- **Bản xem trước hình ảnh của Gemini 3 Pro (Bản xem trước của Nano Banana Pro)** được thiết kế để tạo tài sản chuyên nghiệp và thực hiện các chỉ dẫn phức tạp. Mô hình này có tính năng bám sát nguồn thực tế bằng Google Tìm kiếm, quy trình "Tư duy" mặc định giúp tinh chỉnh thành phần trước khi tạo và có thể tạo hình ảnh có độ phân giải lên đến 4K. Hãy xem trang [giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#gemini-3-pro-image-preview) và [khả năng](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=vi) của mô hình để biết thêm thông tin chi tiết.
+- **Hình ảnh Gemini 2.5 Flash (Nano Banana)** được thiết kế để mang lại tốc độ và hiệu quả. Mô hình này được tối ưu hoá cho các tác vụ có khối lượng lớn, độ trễ thấp và tạo ra hình ảnh ở độ phân giải 1024px. Hãy xem trang [giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#gemini-2.5-flash-image) và [khả năng](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=vi) của mô hình để biết thêm thông tin chi tiết.
 
-### حالات استخدام Imagen
+### Trường hợp sử dụng Imagen
 
-بالإضافة إلى استخدام إمكانات إنشاء الصور المضمّنة في Gemini، يمكنك أيضًا الاستفادة من [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=ar)، نموذجنا المتخصّص في إنشاء الصور، من خلال Gemini API.
+Ngoài việc sử dụng các tính năng tạo hình ảnh tích hợp của Gemini, bạn cũng có thể truy cập vào [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=vi), mô hình tạo hình ảnh chuyên dụng của chúng tôi, thông qua Gemini API.
 
-يجب أن يكون Imagen 4 هو النموذج الذي تستخدمه عند البدء في إنشاء صور باستخدام Imagen. اختَر Imagen 4 Ultra للحالات المتقدّمة أو عندما تحتاج إلى أفضل جودة للصور (يُرجى العِلم أنّه يمكنك إنشاء صورة واحدة فقط في كل مرة).
+Imagen 4 là mô hình bạn nên dùng khi bắt đầu tạo hình ảnh bằng Imagen. Chọn Imagen 4 Ultra cho các trường hợp sử dụng nâng cao hoặc khi bạn cần chất lượng hình ảnh tốt nhất (xin lưu ý rằng bạn chỉ có thể tạo một hình ảnh tại một thời điểm).
 
-## الخطوات التالية
+## Bước tiếp theo
 
-- يمكنك العثور على المزيد من الأمثلة ونماذج الرموز في [دليل كتاب الطبخ](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_Started_Nano_Banana.ipynb?hl=ar).
-- راجِع [دليل Veo](https://ai.google.dev/gemini-api/docs/video?hl=ar) للتعرّف على كيفية إنشاء فيديوهات باستخدام Gemini API.
-- لمزيد من المعلومات حول نماذج Gemini، يُرجى الاطّلاع على [نماذج Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar).
+- Bạn có thể tìm thêm ví dụ và mã mẫu trong [hướng dẫn về sổ tay hướng dẫn](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_Started_Nano_Banana.ipynb?hl=vi).
+- Hãy xem [hướng dẫn về Veo](https://ai.google.dev/gemini-api/docs/video?hl=vi) để tìm hiểu cách tạo video bằng Gemini API.
+- Để tìm hiểu thêm về các mô hình Gemini, hãy xem phần [Các mô hình Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi).
 
-إرسال ملاحظات
+Gửi ý kiến phản hồi
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
+Cập nhật lần gần đây nhất: 2026-05-13 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-13 UTC."],[],[]]

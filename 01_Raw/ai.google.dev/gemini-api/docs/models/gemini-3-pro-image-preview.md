@@ -1,50 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=ja
-fetched_at: 2026-05-11T05:03:57.647813+00:00
-title: "Gemini 3 Pro \u753b\u50cf\u30d7\u30ec\u30d3\u30e5\u30fc \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=pt-BR
+fetched_at: 2026-05-18T05:19:10.547539+00:00
+title: "Pr\u00e9via de imagem do Gemini 3 Pro \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-フィードバックを送信
+Envie comentários
 
-# Gemini 3 Pro 画像プレビュー
+# Prévia de imagem do Gemini 3 Pro
 
-**Nano Banana Pro** は、プロフェッショナル向けの画像編集と生成のための高度な推論主導型エンジンです。スタジオ品質の精度と高度なクリエイティブ コントロールを実現します。Nano Banana Pro は、複雑なグラフィック デザイン、忠実度の高いプロダクト
-モックアップ、正確なテキスト レンダリングと Google 検索による現実世界のグラウンディングを必要とする事実に基づいたデータ可視化に最適です。
+O **Nano Banana Pro** é um mecanismo sofisticado baseado em raciocínio para edição e geração de imagens de nível profissional, oferecendo precisão de qualidade de estúdio e controle criativo avançado. O Nano Banana Pro é ideal para design gráfico complexo, mockups de produtos de alta fidelidade e visualizações de dados factuais que exigem renderização de texto precisa e embasamento no mundo real pela Pesquisa Google.
 
-[Google AI Studio で試す](https://aistudio.google.com?model=gemini-3-pro-image-preview&hl=ja)
+[Testar no Google AI Studio](https://aistudio.google.com?model=gemini-3-pro-image-preview&hl=pt-br)
 
-## ドキュメント
+## Documentação
 
-機能と機能の詳細については、[画像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja)のページをご覧ください。
+Acesse a página [Geração de imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br) para conferir a cobertura completa de recursos e funcionalidades.
 
 ## gemini-3-pro-image-preview
 
-| プロパティ | 説明 |
+| Propriedade | Descrição |
 | --- | --- |
-| id\_cardモデルコード | `gemini-3-pro-image-preview` |
-| saveサポートされるデータタイプ | **入力**  画像とテキスト  **出力**  画像とテキスト |
-| token\_autoトークン上限[[\*](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)] | **入力トークンの上限**  65,536  **出力トークンの上限**  32,768 |
-| handyman機能 | **音声生成**  サポート対象外  **Batch API**  サポート対象  **キャッシュ保存**  サポート対象外  **コードの実行**  サポート対象外  **ファイル検索**  サポート対象外  **Flex 推論**  サポート対象  **関数呼び出し**  サポート対象外  **Google マップによるグラウンディング**  サポート対象外  **画像生成**  サポート対象  **Live API**  サポート対象外  **候補の推論**  サポート対象  **検索によるグラウンディング**  サポート対象  **構造化出力**  サポート対象  **思考モード**  サポート対象  **URL コンテキスト**  サポート対象外 |
-| 123バージョン | 詳細については、[モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja#model-versions)をご覧ください。  - `Preview: gemini-3-pro-image-preview` |
-| calendar\_month最終更新日 | 2025 年 11 月 |
-| cognition\_2ナレッジ カットオフ | 2025 年 1 月 |
+| Código do modelo id\_card | `gemini-3-pro-image-preview` |
+| saveTipos de dados aceitos | **Entradas** (link em inglês)  Imagem e texto  **Saída**  Imagem e texto |
+| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de tokens de entrada**  65.536  **Limite de token de saída**  32.768 |
+| handymanRecursos | **Geração de áudio**  incompatível  **API Batch**  Compatível  **Armazenamento em cache**  incompatível  **Execução de código**  incompatível  **Pesquisa de arquivos**  incompatível  **Inferência flexível**  Compatível  **Chamadas de função**  incompatível  **Embasamento com o Google Maps**  incompatível  **Geração de imagens**  Compatível  **API Live**  incompatível  **Inferência de prioridade**  Compatível  **Embasamento da pesquisa**  Compatível  **Saídas estruturadas**  Compatível  **Raciocínio**  Compatível  **Contexto do URL**  incompatível |
+| Versões do 123 | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - `Preview: gemini-3-pro-image-preview` |
+| calendar\_monthÚltima atualização | Novembro de 2025 |
+| cognition\_2Limite de conhecimento | Janeiro de 2025 |
 
-フィードバックを送信
+Envie comentários
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-最終更新日 2026-04-29 UTC。
+Última atualização 2026-04-29 UTC.
 
-ご意見をお聞かせください
+Quer enviar seu feedback?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]

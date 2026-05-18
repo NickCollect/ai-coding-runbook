@@ -1,41 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=id
-fetched_at: 2026-05-11T05:04:24.636607+00:00
+source_url: https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=he
+fetched_at: 2026-05-18T05:18:45.626376+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
 
-# Mempercepat penemuan dengan Gemini for Research
+# מגלים תובנות מהר יותר עם Gemini for Research
 
-[Mendapatkan Kunci Gemini API](https://aistudio.google.com/apikey?hl=id)
+[קבלת מפתח Gemini API](https://aistudio.google.com/apikey?hl=he)
 
-Model Gemini dapat digunakan untuk memajukan riset dasar di berbagai disiplin ilmu.
-Berikut adalah cara Anda dapat menjelajahi Gemini untuk riset Anda:
+אפשר להשתמש במודלים של Gemini כדי לקדם מחקר בסיסי במגוון תחומים.
+כך אפשר להשתמש ב-Gemini כדי לבצע מחקר:
 
-- **Menganalisis dan mengontrol output model**: Untuk analisis lebih lanjut, Anda dapat memeriksa
-  kandidat respons yang dihasilkan oleh model menggunakan alat seperti
-  `CitationMetadata`. Anda juga dapat mengonfigurasi opsi untuk pembuatan dan output model, seperti `responseSchema`, `topP`, dan `topK`. [Pelajari lebih lanjut](https://ai.google.dev/api/generate-content?hl=id).
-- **Input multimodal**: Gemini dapat memproses gambar, audio, dan video, sehingga memungkinkan a
-  berbagai arah riset yang menarik. [Pelajari lebih lanjut](https://ai.google.dev/gemini-api/docs/vision?hl=id).
-- **Kemampuan konteks panjang**: Gemini 3.0 Flash dan Pro dilengkapi dengan jendela konteks 1 juta token. [Pelajari lebih lanjut](https://ai.google.dev/gemini-api/docs/long-context?hl=id).
-- **Grow with Google**: Akses model Gemini dengan cepat melalui API dan Google AI
-  Studio untuk kasus penggunaan produksi. Jika Anda mencari platform berbasis Google Cloud, Platform Agen Gemini Enterprise dapat menyediakan infrastruktur pendukung tambahan.
+- **ניתוח של פלט המודל ובקרה עליו**: כדי לבצע ניתוח נוסף, אתם יכולים לבדוק תשובה פוטנציאלית שנוצרה על ידי המודל באמצעות כלים כמו `CitationMetadata`. אפשר גם להגדיר אפשרויות ליצירת מודלים ולפלט, כמו `responseSchema`, `topP` ו-`topK`. [מידע נוסף](https://ai.google.dev/api/generate-content?hl=he)
+- **קלט מולטי-מודאלי**: Gemini יכול לעבד תמונות, אודיו וסרטונים, מה שמאפשר מגוון רחב של כיווני מחקר מעניינים. [מידע נוסף](https://ai.google.dev/gemini-api/docs/vision?hl=he)
+- **יכולות של הקשר ארוך**: מודלי Gemini 3.0 Flash ו-Pro מגיעים עם חלון הקשר של מיליון טוקנים. [מידע נוסף](https://ai.google.dev/gemini-api/docs/long-context?hl=he)
+- **הסדנה הדיגיטלית של Google**: גישה מהירה למודלים של Gemini דרך ה-API ו-Google AI Studio לתרחישי שימוש בייצור. אם אתם מחפשים פלטפורמה מבוססת Google Cloud, פלטפורמת הסוכנים של Gemini Enterprise יכולה לספק תשתית תומכת נוספת.
 
-Untuk mendukung riset akademis dan mendorong riset mutakhir, Google menyediakan
-akses ke kredit Gemini API untuk ilmuwan dan peneliti akademis melalui
-[Program Akademis Gemini](https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=id#gemini-academic-program).
+כדי לתמוך במחקר אקדמי ולקדם מחקר מתקדם, Google מספקת גישה לקרדיטים של Gemini API למדענים ולחוקרים אקדמיים באמצעות [תוכנית Gemini Academic](https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=he#gemini-academic-program).
 
-## Panduan awal menggunakan Gemini
+## מתחילים לעבוד עם Gemini
 
-Gemini API dan Google AI Studio membantu Anda mulai menggunakan model terbaru Google dan mengubah ide Anda menjadi aplikasi yang dapat diskalakan.
+‫Gemini API ו-Google AI Studio עוזרים לכם להתחיל לעבוד עם המודלים העדכניים ביותר של Google ולהפוך את הרעיונות שלכם לאפליקציות שניתנות להרחבה.
 
 ### Python
 
@@ -83,48 +77,36 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
    }'
 ```
 
-## Akademisi unggulan
+## אנשי אקדמיה מומלצים
 
-![](https://ai.google.dev/static/site-assets/images/diyi-yang.png?hl=id)
+![](https://ai.google.dev/static/site-assets/images/diyi-yang.png?hl=he)
 
-"Riset kami menyelidiki Gemini sebagai model bahasa visual (VLM) dan perilaku agentiknya di berbagai lingkungan dari perspektif ketahanan dan keamanan. Sejauh ini, kami telah mengevaluasi ketahanan Gemini terhadap gangguan seperti jendela pop-up saat agen VLM melakukan tugas komputer, dan telah memanfaatkan Gemini untuk menganalisis interaksi sosial, peristiwa temporal, serta faktor risiko berdasarkan input video."
+"במחקר שלנו אנחנו בודקים את Gemini כמודל שפה חזותי (VLM) ואת ההתנהגויות שלו בסביבות מגוונות מנקודות מבט של חוסן ובטיחות. עד עכשיו, בדקנו את העמידות של Gemini בפני הסחות דעת כמו חלונות קופצים כשסוכני VLM מבצעים משימות במחשב, והשתמשנו ב-Gemini כדי לנתח אינטראקציות חברתיות, אירועים זמניים וגורמי סיכון על סמך קלט וידאו".
 
-![](https://ai.google.dev/static/site-assets/images/lerrel-pinto.png?hl=id)
+![](https://ai.google.dev/static/site-assets/images/lerrel-pinto.png?hl=he)
 
-"Gemini Pro dan Flash, dengan jendela konteks panjangnya, telah membantu kami dalam OK-Robot, project manipulasi seluler kosakata terbuka kami. Gemini memungkinkan kueri dan perintah bahasa alami yang kompleks atas "memori" robot: dalam hal ini, pengamatan sebelumnya yang dilakukan oleh robot selama durasi operasi yang panjang. Mahi Shafiullah dan saya juga menggunakan Gemini untuk menguraikan tugas menjadi kode yang dapat dijalankan robot di dunia nyata."
+‫Gemini Pro ו-Flash, עם חלון ההקשר הארוך שלהם, עוזרים לנו ב-OK-Robot, פרויקט המניפולציה שלנו בנייד עם אוצר מילים פתוח. ‫Gemini מאפשר לשלוח שאילתות ופקודות מורכבות בשפה טבעית לזיכרון של הרובוט: במקרה הזה, תצפיות קודמות שהרובוט ביצע במהלך פעולה ארוכה. גם אני ומאהי שפיאוללה משתמשים ב-Gemini כדי לפרק משימות לקוד שהרובוט יכול לבצע בעולם האמיתי".
 
-## Program Akademis Gemini
+## Gemini Academic Program
 
-Peneliti akademis yang memenuhi syarat (seperti pengajar, staf, dan mahasiswa PhD) di [negara
-yang didukung](https://ai.google.dev/gemini-api/docs/available-regions?hl=id) dapat mengajukan permohonan untuk menerima kredit Gemini API
-dan batas frekuensi yang lebih tinggi untuk project riset. Dukungan ini memungkinkan throughput yang lebih tinggi untuk eksperimen ilmiah dan memajukan riset.
+חוקרים אקדמיים שעומדים בדרישות (כמו חברי סגל, עובדים וסטודנטים לתואר שלישי) ב[מדינות נתמכות](https://ai.google.dev/gemini-api/docs/available-regions?hl=he) יכולים להגיש בקשה לקבלת קרדיטים ל-Gemini API ומגבלות שימוש גבוהות יותר לפרויקטים מחקריים. התמיכה הזו מאפשרת תפוקה גבוהה יותר בניסויים מדעיים ומקדמת את המחקר.
 
-Kami sangat tertarik dengan area riset di bagian berikut, tetapi kami menerima permohonan dari berbagai disiplin ilmu:
+אנחנו מתעניינים במיוחד בתחומי המחקר שמפורטים בקטע הבא, אבל נשמח לקבל בקשות מתחומים מדעיים מגוונים:
 
-- **Evaluasi dan tolok ukur**: Metode evaluasi yang didukung komunitas yang
-  dapat memberikan sinyal performa yang kuat di area seperti faktualitas, keamanan,
-  kepatuhan terhadap petunjuk, penalaran, dan perencanaan.
-- **Mempercepat penemuan ilmiah untuk memberi manfaat bagi umat manusia**: Potensi
-  aplikasi AI dalam riset ilmiah interdisipliner, termasuk area
-  seperti penyakit langka dan terabaikan, biologi eksperimental, ilmu material,
-  dan keberlanjutan.
-- **Perwujudan dan interaksi**: Memanfaatkan model bahasa besar untuk
-  menyelidiki interaksi baru dalam bidang AI terwujud, interaksi sekitar, robotika, dan interaksi manusia-komputer.
-- **Kemampuan yang muncul**: Menjelajahi kemampuan agentik baru yang diperlukan untuk
-  meningkatkan penalaran dan perencanaan, serta cara kemampuan dapat diperluas selama
-  inferensi (misalnya, dengan memanfaatkan Gemini Flash).
-- **Interaksi dan pemahaman multimodal**: Mengidentifikasi kesenjangan dan
-  peluang untuk model dasar multimodal untuk analisis, penalaran,
-  dan perencanaan di berbagai tugas.
+- **הערכות ובנצ'מרקים**: שיטות הערכה שאושרו על ידי הקהילה ויכולות לספק אות חזק של ביצועים בתחומים כמו עובדתיות, בטיחות, ביצוע הוראות, חשיבה רציונלית ותכנון.
+- **קידום גילויים מדעיים לטובת האנושות**: יישומים פוטנציאליים של AI במחקר מדעי רב-תחומי, כולל בתחומים כמו מחלות נדירות ומוזנחות, ביולוגיה ניסויית, מדע חומרים וקיימות.
+- **התגלמות ואינטראקציות**: שימוש במודלים גדולים של שפה כדי לחקור אינטראקציות חדשות בתחומים של AI מבוסס-גוף, אינטראקציות סביבתיות, רובוטיקה ואינטראקציית אדם-מחשב.
+- **יכולות מתפתחות**: בחינת יכולות של AI אקטיבי חדשות שנדרשות לשיפור חשיבה רציונלית ותכנון, ואיך אפשר להרחיב את היכולות במהלך היקש (למשל, באמצעות Gemini Flash).
+- **אינטראקציה והבנה מולטי-מודאליות**: זיהוי פערים והזדמנויות במודלים בסיסיים מולטי-מודאליים לניתוח, להסקת מסקנות ולתכנון במגוון משימות.
 
-Kelayakan: Hanya individu (anggota pengajar, peneliti, atau yang setara) yang berafiliasi dengan institusi akademis yang valid, atau organisasi riset akademis yang dapat mengajukan permohonan. Perhatikan bahwa akses dan kredit API akan diberikan dan dihapus atas pertimbangan Google. Kami meninjau permohonan setiap bulan.
+הזכאות: רק אנשים פרטיים (חברי סגל, חוקרים או אנשים בתפקיד מקביל) שמשויכים למוסד אקדמי תקף או לארגון מחקר אקדמי יכולים להגיש בקשה. הערה: Google תעניק ותסיר גישה ל-API וקרדיטים לפי שיקול דעתה. אנחנו בודקים את הבקשות פעם בחודש.
 
-### Mulai riset dengan Gemini API
+### איך מתחילים לחקור באמצעות Gemini API
 
-[Daftar sekarang](https://forms.gle/HMviQstU8PxC5iCt5)
+[להגשת בקשה](https://forms.gle/HMviQstU8PxC5iCt5)
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Terakhir diperbarui pada 2026-04-29 UTC.
+עדכון אחרון: 2026-05-13 (שעון UTC).
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-05-13 (שעון UTC)."],[],[]]

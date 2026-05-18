@@ -1,70 +1,60 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-policy?hl=ja
-fetched_at: 2026-05-11T04:58:51.830611+00:00
-title: "\u30c7\u30fc\u30bf\u30ed\u30ae\u30f3\u30b0\u3068\u5171\u6709 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-policy?hl=tr
+fetched_at: 2026-05-18T05:11:33.026780+00:00
+title: "Veri Kayd\u0131 ve Payla\u015f\u0131m\u0131 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-フィードバックを送信
+Geri bildirim gönderin
 
-# データロギングと共有
+# Veri Kaydı ve Paylaşımı
 
-このページでは、
-[Gemini API ログ](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=ja)の保存と管理について説明します。Gemini API ログは、課金が有効になっているプロジェクトのサポート対象の Gemini API 呼び出しから取得される、デベロッパーが所有する
-API データです。ログには、ユーザーのリクエストからモデルのレスポンスまでのプロセス全体が含まれます。
+Bu sayfada, faturalandırmanın etkinleştirildiği projeler için desteklenen Gemini API çağrılarından elde edilen ve geliştiricilere ait API verileri olan [Gemini API günlüklerinin](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=tr) depolanması ve yönetilmesi açıklanmaktadır. Günlükler, kullanıcının isteğinden modelin yanıtına kadar olan tüm süreci kapsar.
 
-## 1. 共有できるデータ
+## 1. Paylaşılabilecek veriler
 
-プロジェクト オーナーは、Gemini API 呼び出しのロギングを有効にするかどうかを選択できます。ロギングは、お客様自身が使用するため、または Google とのフィードバックや共有を通じてモデルの継続的な改善に役立てるために使用できます。
+Proje sahibi olarak, kendi kullanımınız için veya modellerimizi sürekli olarak geliştirmemize yardımcı olmak üzere Google ile geri bildirim ve paylaşım amacıyla Gemini API çağrılarının günlüğe kaydedilmesini etkinleştirebilirsiniz.
 
-ロギングを有効にすると、プロダクトの改善とモデルのトレーニングのために次のデータを提供することで、さまざまな分野やユースケースのデベロッパーにとって価値のある AI システムの構築に役立てることができます。
+Günlük kaydı etkinleştirildiğinde, ürün iyileştirmeleri ve model eğitimi için aşağıdaki verileri göndermeyi seçerek çeşitli alanlardaki ve kullanım alanlarındaki geliştiriciler için değerli olmaya devam eden yapay zeka sistemleri oluşturmamıza yardımcı olabilirsiniz:
 
-- **データセット:** Google AI Studio の [Logs and Datasets] インターフェースを使用して、サポートされている Gemini API 呼び出しから関心のあるログ（リクエスト、レスポンス、メタデータなど）を選択します。データセットに含めることで提供されます。データセットの作成時にオプトアウトすることもできます。
-- **フィードバック:** ログを確認する際に、フィードバックを提供できます。これには、高評価/低評価の評価や、提供するコメントが含まれます。
+- **Veri kümeleri:** Google AI Studio'nun günlükler ve veri kümeleri arayüzünü kullanarak desteklenen Gemini API çağrılarından ilgilendiğiniz günlükleri (istekler, yanıtlar, meta veriler vb.) seçin. Veri kümelerine dahil edilerek katkıda bulunulan bu günlükler, veri kümesi oluşturma sırasında devre dışı bırakılabilir.
+- **Geri bildirim:** Günlükleri incelerken geri bildirimde bulunabilirsiniz. Geri bildirimler arasında olumlu/olumsuz puanlar ve yazdığınız yorumlar yer alır.
 
-[[データセットを Google と共有すると、リクエストやレスポンスなど、そのデータセット内のログは「無償サービス」の利用規約に従って処理されます。つまり、データセットは、モデルの改善とトレーニングなど、Google のプロダクト、サービス、機械学習技術の開発と改善に使用される可能性があります。](https://developers.google.com/terms?hl=ja)](https://ai.google.dev/gemini-api/terms?hl=ja#data-use-unpaid)**個人情報や機密情報は含めないでください。**
+Google ile bir veri kümesi paylaştığınızda, istekler ve yanıtlar dahil olmak üzere bu veri kümesindeki günlükleriniz, "[Ücretsiz Hizmetler](https://ai.google.dev/gemini-api/terms?hl=tr#data-use-unpaid)" ile ilgili [Şartlarımız](https://developers.google.com/terms?hl=tr) uyarınca işlenir. Bu, veri kümesinin, modellerimizi iyileştirme ve eğitme de dahil olmak üzere Google ürünlerini, hizmetlerini ve makine öğrenimi teknolojilerini geliştirmek ve iyileştirmek için kullanılabileceği anlamına gelir. **Kişisel, hassas veya gizli bilgiler eklemeyin.**
 
-## 2. データの使用方法
+## 2. Verilerinizi nasıl kullanırız?
 
-デフォルトでは、ログは 55 日後に期限切れになります。この期間を過ぎると、ログは使用できなくなります。データセットを作成して、この期間を超えて関心のあるログや価値のあるログを保持し、ダウンストリームのユースケースで使用したり、モデルの改善に任意で貢献したりできます。データセットに保存されたログには有効期限はありませんが、各プロジェクトのデフォルトのストレージ上限は 1,000 ログです。
+Günlüklerin süresi varsayılan olarak 55 gün sonra dolar. Bu sürenin sonunda kullanılamaz hale gelirler. Aşağı akış kullanım alanları için bu dönemin ötesinde ilgi veya değer günlüklerini saklamak ve model iyileştirmelerine isteğe bağlı olarak katkıda bulunmak üzere veri kümeleri oluşturulabilir. Veri kümelerinde depolanan günlüklerin son kullanma tarihi yoktur ancak her projenin varsayılan depolama sınırı 1.000 günlüktür.
 
-デフォルトでは、ロギングは課金が有効になっているプロジェクトでのみ使用できるため、
-データ使用に関する[規約](https://developers.google.com/terms?hl=ja)
-に従い、ログ内のプロンプトとレスポンスはプロダクトの改善や
-開発には使用されません。
+Varsayılan olarak, günlük kaydı yalnızca faturalandırmanın etkinleştirildiği projelerde kullanılabildiğinden günlüklerdeki istemler ve yanıtlar, veri kullanımına ilişkin [Şartlarımız](https://developers.google.com/terms?hl=tr) uyarınca ürün iyileştirme veya geliştirme için kullanılmaz.
 
-ログのデータセットを Google と共有することを選択した場合、これらのデータセットは、AI
-システムとアプリケーションが使用されるドメインとコンテキストの多様性をより深く理解するための実際のデモンストレーション
-データとして使用されます。このデータは、モデルの品質の向上や、将来のモデルとサービスのトレーニングと評価に役立てられる可能性があります。[このデータは、無償サービスのデータ使用に関する規約に従って処理されます。](https://ai.google.dev/gemini-api/terms?hl=ja#data-use-unpaid)そのため、人間のレビュアーが、共有した
-API 入出力の読み取り、注釈付け、処理を行う場合があります。モデルの改善にデータを使用する前に、このプロセスの一部として、ユーザーのプライバシーを保護するための措置が
-Google により講じられます。措置には Google アカウント、API キー、およびクラウド
-プロジェクトからのデータの切り離しが含まれます。これらは人間のレビュアーによる読み取りや注記の前に行われます。
+Günlüklerinizin veri kümelerini Google ile paylaşmayı seçerseniz bu veri kümeleri, yapay zeka sistemlerinin ve uygulamalarının kullanıldığı alanların ve bağlamların çeşitliliğini daha iyi anlamak için gerçek dünya gösterim verileri olarak kullanılır. Bu veriler, model kalitesini artırmak ve gelecekteki modellerin ve hizmetlerin eğitim ve değerlendirme süreçlerine bilgi sağlamak için kullanılabilir. Bu veriler, [Ücretsiz Hizmetler](https://ai.google.dev/gemini-api/terms?hl=tr#data-use-unpaid) için veri kullanım şartlarımıza uygun olarak işlenir.
+Bu nedenle, inceleme uzmanları paylaştığınız API girişlerini ve çıkışlarını okuyabilir, işleyebilir ve bunlara açıklama ekleyebilir. Veriler model geliştirmede kullanılmadan önce Google, bu süreç kapsamında kullanıcı gizliliğini korumak için gerekli önlemleri alır. Örneğin, inceleme uzmanları görmeden veya açıklama eklemeden önce bu verilerin Google Hesabınız, API anahtarınız ve Cloud projenizle bağlantısını kaldırırız.
 
-## 3. データの権限
+## 3. Veri izinleri
 
-API データの提供を有効にすることで、このドキュメントに記載されているように、Google がデータを処理して使用するために必要な権限があることを確認します。**有料サービスを通じて取得した機密情報、機密情報、専有情報を含むログは提供しないでください**
-。API 利用規約の「[コンテンツの送信](https://developers.google.com/terms?hl=ja#b_submission_of_content)」
-に規定されている内容に従って使用者から Google に与えられる許可は、Google による使用に適用される法律で求められる範囲の中で、使用者が本サービスに送信したコンテンツ（たとえばプロンプトや、それに関連したシステム命令、キャッシュに保存されたコンテンツ、画像、動画、文書などのファイル）、および生成された回答にまで範囲が拡大されます。
+API verilerine katkıda bulunmayı etkinleştirerek Google'ın verileri bu belgede açıklandığı şekilde işlemesi ve kullanması için gerekli izinlere sahip olduğunuzu onaylarsınız. **Lütfen ücretli hizmet aracılığıyla elde edilen hassas, gizli veya özel bilgileri içeren günlükler göndermeyin**.
+API Şartları'ndaki "[İçerik Gönderimi](https://developers.google.com/terms?hl=tr#b_submission_of_content)" bölümü uyarınca Google'a verdiğiniz lisans, Hizmetler'e gönderdiğiniz tüm içerikler (ör.ilişkili sistem talimatları da dahil olmak üzere istemler, önbelleğe alınmış içerikler ve resim, video ya da belge gibi dosyalar) ve oluşturulan tüm yanıtlar için de geçerlidir. Bu geçerlilik, kullanımımız için geçerli yasa kapsamında gerekli olduğu ölçüde geçerlidir.
 
-## 4. データ共有とフィードバック
+## 4. Veri paylaşımı ve geri bildirim
 
-データを例として共有することで、AI 研究、Gemini API、Google AI Studio の最先端技術の発展に貢献できます。これにより、さまざまなコンテキストでモデルを継続的に改善し、さまざまな分野やユースケースのデベロッパーにとって価値のある AI システムを構築できます。
+Verilerinizi örnek olarak paylaşmayı kabul ederek yapay zeka araştırmalarının, Gemini API'nin ve Google AI Studio'nun sınırlarını genişletmemize yardımcı olabilirsiniz. Bu sayede, modellerimizi çeşitli bağlamlarda sürekli olarak iyileştirebilir ve farklı alanlardaki ve kullanım alanlarındaki geliştiriciler için değerli olmaya devam edecek yapay zeka sistemleri oluşturabiliriz.
 
-フィードバックを送信
+Geri bildirim gönderin
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-最終更新日 2026-04-29 UTC。
+Son güncelleme tarihi: 2026-04-29 UTC.
 
-ご意見をお聞かせください
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]

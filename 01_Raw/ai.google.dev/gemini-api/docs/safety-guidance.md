@@ -1,145 +1,212 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/safety-guidance?hl=ko
-fetched_at: 2026-05-11T05:09:47.801215+00:00
-title: "\uc548\uc804 \ubc0f \uc0ac\uc2e4\uc131 \uac00\uc774\ub4dc \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/safety-guidance?hl=it
+fetched_at: 2026-05-18T05:05:29.898716+00:00
+title: "Linee guida su sicurezza e accuratezza \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-의견 보내기
+Invia feedback
 
-# 안전 및 사실성 가이드
+# Linee guida su sicurezza e accuratezza
 
-생성형 인공지능 모델은 강력한 도구이지만 한계가 있습니다. 다양한 용도로 사용할 수 있다는 장점은 부정확하거나 편향되거나 불쾌감을 주는 출력과 같은 예기치 않은 결과를 초래할 수 있습니다. 이러한 출력으로 인한 피해 위험을 제한하려면 후처리 및 엄격한 수동 평가가 필수적입니다.
+I modelli di intelligenza artificiale generativa sono strumenti potenti, ma non
+sono privi di limiti. La loro versatilità e applicabilità a volte possono
+portare a output imprevisti, come output imprecisi, distorti o
+offensivi. Il post-processing e una rigorosa valutazione manuale sono essenziali per
+limitare il rischio di danni derivanti da questi output.
 
-Gemini API에서 제공하는 모델은 다양한 생성형 AI 및 자연어 처리 (NLP) 애플리케이션에 사용할 수 있습니다. 이러한
-함수는 Gemini API 또는 Google AI Studio 웹
-앱을 통해서만 사용할 수 있습니다. Gemini API를 사용할 때는 [생성형 AI에 관한 금지된 사용
-정책](https://policies.google.com/terms/generative-ai/use-policy?hl=ko) 및
-[Gemini API 서비스 약관](https://ai.google.dev/terms?hl=ko)도 적용됩니다.
+I modelli forniti dall'API Gemini possono essere utilizzati per un'ampia gamma di applicazioni di AI generativa e di elaborazione del linguaggio naturale (NLP). L'utilizzo di queste
+funzioni è disponibile solo tramite l'API Gemini o l'app web Google AI Studio. L'utilizzo dell'API Gemini è inoltre soggetto alle [Norme relative all'uso vietato dell'AI generativa](https://policies.google.com/terms/generative-ai/use-policy?hl=it) e ai [Termini di servizio dell'API Gemini](https://ai.google.dev/terms?hl=it).
 
-대규모 언어 모델 (LLM)이 매우 유용한 이유는 다양한 언어 작업을 처리할 수 있는 창의적인 도구이기 때문입니다. 하지만 대규모 언어 모델은 불쾌감을 주거나 민감하지 않거나 사실에 맞지 않는 텍스트를 포함하여 예상치 못한 출력을 생성할 수 있습니다.
-또한 이러한 모델의 놀라운 다양성으로 인해 발생할 수 있는 바람직하지 않은 출력의 유형을 정확히 예측하기가 어렵습니다. Gemini API는 [Google's AI
-원칙](https://ai.google/principles/?hl=ko)을 염두에 두고 설계되었지만, 이러한 모델을 책임감 있게 적용하는 것은 개발자의 몫입니다. 개발자가 안전하고 책임감 있는 애플리케이션을 만들 수 있도록 Gemini API에는 기본 제공 콘텐츠 필터링과 4가지 유해성 측면에서 조정 가능한 안전 설정이 있습니다. 자세한 내용은
-[안전 설정](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ko) 가이드를 참고하세요. 또한 사실성을 개선하기 위해 Google 검색을 사용한 그라운딩을 제공하지만, 사용 사례가 정보 검색이 아닌 더 창의적인 개발자의 경우 이 기능을 사용 중지할 수 있습니다.
+Ciò che rende i modelli linguistici di grandi dimensioni (LLM) così utili è che sono
+strumenti creativi che possono affrontare molte attività linguistiche diverse. Purtroppo,
+questo significa anche che i modelli linguistici di grandi dimensioni possono generare output inaspettati,
+inclusi testi offensivi, insensibili o oggettivamente errati.
+Inoltre, l'incredibile versatilità di questi modelli rende difficile
+prevedere esattamente quali tipi di output indesiderati potrebbero produrre. Sebbene l'API Gemini sia stata progettata tenendo conto dei [principi di Google in materia di AI](https://ai.google/principles/?hl=it), spetta agli sviluppatori applicare questi modelli in modo responsabile. Per aiutare gli sviluppatori a creare applicazioni sicure e responsabili, l'API Gemini dispone di un filtro dei contenuti integrato e di impostazioni di sicurezza regolabili in quattro dimensioni di rischio. Per saperne di più, consulta la guida alle
+[impostazioni di sicurezza](https://ai.google.dev/gemini-api/docs/safety-settings?hl=it). Offre anche la funzionalità Grounding
+con la Ricerca Google abilitata per migliorare l'oggettività, anche se questa funzionalità può essere disattivata
+per gli sviluppatori i cui casi d'uso sono più creativi e non di ricerca di informazioni.
 
-이 문서는 LLM을 사용할 때 발생할 수 있는 몇 가지 안전 위험을 소개하고 새로운 안전 설계 및 개발 권장사항을 추천하기 위한 것입니다. (법률 및 규정으로 인해 제한이 적용될 수도 있지만 이러한 고려사항은 이 가이드의 범위를 벗어납니다.)
+Questo documento ha lo scopo di presentarti alcuni rischi per la sicurezza che possono sorgere quando
+utilizzi i modelli LLM e consigliare le raccomandazioni emergenti per la progettazione e lo sviluppo
+della sicurezza. Tieni presente che anche leggi e normative possono imporre limitazioni,
+ma queste considerazioni non rientrano nell'ambito di questa guida.
 
-LLM으로 애플리케이션을 빌드할 때는 다음 단계를 따르는 것이 좋습니다.
+Quando crei applicazioni con LLM, ti consigliamo di seguire questi passaggi:
 
-- 애플리케이션의 안전 위험 이해
-- 안전 위험을 완화할 수 있는 조정 고려
-- 사용 사례에 적합한 안전 테스트 수행
-- 사용자 의견을 요청하고 사용량 모니터링
+- Comprendere i rischi per la sicurezza della tua applicazione
+- Valutazione di aggiustamenti per mitigare i rischi per la sicurezza
+- Eseguire test di sicurezza appropriati al tuo caso d'uso
+- Richiesta di feedback agli utenti e monitoraggio dell'utilizzo
 
-조정 및 테스트 단계는 애플리케이션에 적합한 성능에 도달할 때까지 반복해야 합니다.
+Le fasi di aggiustamento e test devono essere iterative finché non raggiungi
+le prestazioni appropriate per la tua applicazione.
 
-![모델 구현 주기](https://ai.google.dev/static/gemini-api/docs/images/safety_diagram.png?hl=ko)
+![Ciclo di implementazione del modello](https://ai.google.dev/static/gemini-api/docs/images/safety_diagram.png?hl=it)
 
-## 애플리케이션의 안전 위험 이해
+## Comprendere i rischi per la sicurezza della tua applicazione
 
-이 맥락에서 안전은 LLM이 유해한 언어 또는 고정관념을 조장하는 콘텐츠를 생성하는 등 사용자에게 피해를 입히지 않는 능력을 의미합니다. [[Gemini API를 통해 제공되는 모델은 Google의 AI 원칙을 염두에 두고 설계되었으며, 사용 시 생성형 AI에 관한 금지된 사용 정책이 적용됩니다.](https://ai.google/principles/?hl=ko)](https://policies.google.com/terms/generative-ai/use-policy?hl=ko) 이 API는 유해한 언어 및 증오심 표현과 같은 일반적인 언어 모델 문제를 해결하고 포용성을 추구하며 고정관념을 피하는 데 도움이 되는 기본 제공 안전 필터를 제공합니다. 하지만 각 애플리케이션은 사용자에게 서로 다른 위험을 초래할 수 있습니다. 따라서 애플리케이션 소유자는 사용자와 애플리케이션이 초래할 수 있는 잠재적 피해를 파악하고 애플리케이션에서 LLM을 안전하고 책임감 있게 사용하도록 해야 합니다.
+In questo contesto, la sicurezza è definita come la capacità di un LLM di evitare
+di causare danni ai suoi utenti, ad esempio generando un linguaggio o contenuti tossici
+che promuovono stereotipi. I modelli disponibili tramite l'API Gemini sono stati
+progettati tenendo presenti i [principi dell'AI di Google](https://ai.google/principles/?hl=it)
+e il loro utilizzo è soggetto alle [Norme relative all'uso vietato dell'AI
+generativa](https://policies.google.com/terms/generative-ai/use-policy?hl=it). L'API
+fornisce filtri di sicurezza integrati per contribuire a risolvere alcuni problemi comuni dei modelli linguistici
+come linguaggio tossico e incitamento all'odio, e si impegna per l'inclusività
+e l'evitare gli stereotipi. Tuttavia, ogni applicazione può comportare una serie diversa
+di rischi per i suoi utenti. Pertanto, in qualità di proprietario dell'applicazione, sei responsabile di
+conoscere i tuoi utenti e i potenziali danni che la tua applicazione potrebbe causare e
+garantire che la tua applicazione utilizzi gli LLM in modo sicuro e responsabile.
 
-이 평가의 일환으로 피해가 발생할 가능성을 고려하고 심각도와 완화 단계를 결정해야 합니다. 예를 들어 사실에 기반한 이벤트를 기반으로 에세이를 생성하는 앱은 엔터테인먼트를 위해 허구의 이야기를 생성하는 앱에 비해 잘못된 정보를 피하는 데 더 주의해야 합니다. 잠재적인 안전 위험을 탐색하는 좋은 방법은 최종 사용자와 애플리케이션 결과의 영향을 받을 수 있는 다른 사용자를 조사하는 것입니다. 여기에는 앱 도메인의 최신 연구 조사, 유사한 앱을 사용하는 방식 관찰, 사용자 연구 또는 설문조사 실행, 잠재적 사용자와의 비공식 인터뷰 진행 등 다양한 방법이 포함될 수 있습니다.
+Nell'ambito di questa valutazione, devi considerare la probabilità che si verifichi un danno e determinare la sua gravità e le misure di mitigazione. Ad esempio, un'app che genera saggi basati su eventi reali deve prestare maggiore attenzione a evitare la disinformazione rispetto a un'app che genera storie di fantasia per l'intrattenimento. Un buon modo per iniziare a esplorare i potenziali rischi per la sicurezza
+è fare ricerche sugli utenti finali e su altre persone che potrebbero essere interessate dai
+risultati della tua applicazione. Ciò può assumere molte forme, tra cui la ricerca di studi all'avanguardia nel tuo dominio di app, l'osservazione di come le persone utilizzano app simili o l'esecuzione di uno studio sugli utenti, un sondaggio o la conduzione di interviste informali con potenziali utenti.
 
-#### 고급 팁
+#### Suggerimenti avanzati
 
-- 잠재적 위험에 대한 더 넓은 관점을 얻고 필요에 따라 다양성 기준을 조정할 수 있도록 타겟층 내에서 다양한 잠재적 사용자와 애플리케이션 및 의도된 목적에 관해 이야기합니다.
-- 미국 정부의 국립표준기술연구소 (NIST)에서 발표한 [AI 위험 관리 프레임워크](https://www.nist.gov/itl/ai-risk-management-framework)
-  는 AI 위험 관리에 관한 더 자세한 안내와 추가 학습 리소스를 제공합니다.
-- [DeepMind의 언어 모델로 인한 피해의 윤리적 및 사회적 위험에 관한 간행물은 언어 모델 애플리케이션이 피해를 입힐 수 있는 방법을 자세히 설명합니다.](https://arxiv.org/abs/2112.04359)
+- Parla con un mix diversificato di potenziali utenti all'interno della tua popolazione target della tua applicazione e del suo scopo previsto per ottenere una prospettiva più ampia sui potenziali rischi e per adeguare i criteri di diversità in base alle esigenze.
+- Il [framework per la gestione del rischio dell'AI](https://www.nist.gov/itl/ai-risk-management-framework)
+  pubblicato dal National Institute of Standards and Technology (NIST)
+  del governo degli Stati Uniti fornisce indicazioni più dettagliate e risorse di apprendimento aggiuntive per la gestione del rischio dell'AI.
+- La pubblicazione di DeepMind sui
+  [rischi etici e sociali di danni causati dai modelli linguistici](https://arxiv.org/abs/2112.04359)
+  descrive in dettaglio i modi in cui le applicazioni
+  dei modelli linguistici possono causare danni.
 
-## 안전 및 사실성 위험을 완화할 수 있는 조정 고려
+## Valuta modifiche per mitigare i rischi per la sicurezza e l'accuratezza dei fatti
 
-이제 위험을 이해했으므로 위험을 완화하는 방법을 결정할 수 있습니다. 우선순위를 지정할 위험과 위험을 방지하기 위해 수행해야 하는 작업의 양을 결정하는 것은 소프트웨어 프로젝트에서 버그를 분류하는 것과 마찬가지로 중요한 결정입니다. 우선순위를 정한 후 가장 적절한 완화 유형을 생각해 볼 수 있습니다. 간단한 변경으로도 위험을 줄일 수 있습니다.
+Ora che hai compreso i rischi, puoi decidere come mitigarli. Determinare a quali rischi dare la priorità e cosa fare per cercare di
+prevenirli è una decisione fondamentale, simile alla valutazione dei bug in un progetto
+software. Una volta stabilite le priorità, puoi iniziare a pensare ai tipi di misure di mitigazione più appropriati. Spesso semplici modifiche possono
+fare la differenza e ridurre i rischi.
 
-예를 들어 애플리케이션을 설계할 때는 다음을 고려하세요.
+Ad esempio, quando progetti un'applicazione, considera:
 
-- 애플리케이션 컨텍스트에서 허용되는 사항을 더 잘 반영하도록 **모델 출력을 튜닝** 합니다. 튜닝을 사용하면 모델의 출력을 더 예측 가능하고 일관되게 만들 수 있으므로 특정 위험을 완화하는 데 도움이 될 수 있습니다.
-- **더 안전한 출력을 지원하는 입력 방법을 제공합니다.** LLM에 제공하는 정확한 입력은 출력의 품질에 영향을 미칠 수 있습니다.
-  입력 프롬프트를 실험하여 사용 사례에서 가장 안전하게 작동하는 것을 찾는 것은 그만한 가치가 있습니다. 그러면 이를 지원하는 UX를 제공할 수 있기 때문입니다. 예를 들어 사용자가 입력 프롬프트의 드롭다운 목록에서만 선택하도록 제한하거나 애플리케이션 컨텍스트에서 안전하게 작동하는 것으로 확인된 설명 문구가 포함된 팝업 추천을 제공할 수 있습니다.
-- **안전하지 않은 입력을 차단하고 사용자에게 표시되기 전에 출력을 필터링합니다.** 간단한 상황에서는 차단 목록을 사용하여 프롬프트 또는 대답에서 안전하지 않은 단어나 구문을 식별하고 차단하거나, 인적 검토자가 이러한 콘텐츠를 수동으로 변경하거나 차단하도록 요구할 수 있습니다.
-- **학습된 분류기를 사용하여 각 프롬프트에 잠재적인 위험이나 적대적인 신호로 라벨을 지정합니다.** 그러면 감지된 위험 유형에 따라 요청을 처리하는 방법에 대해 다양한 전략을 적용할 수 있습니다. 예를 들어 입력이 명백하게 적대적이거나 악의적인 경우 차단하고 대신 사전 스크립트된 대답을 출력할 수 있습니다.
+- **Ottimizzazione dell'output del modello** per riflettere meglio ciò che è accettabile nel contesto della tua applicazione. La messa a punto può rendere l'output del modello più prevedibile e coerente e quindi può contribuire a mitigare alcuni rischi.
+- **Fornire un metodo di input che faciliti output più sicuri.** L'input esatto
+  che fornisci a un LLM può fare la differenza nella qualità dell'output.
+  Sperimentare con i prompt di input per trovare la soluzione più sicura nel tuo caso d'uso vale la pena, in quanto puoi fornire un'esperienza utente che lo faciliti. Ad esempio, potresti limitare gli utenti alla scelta solo da un
+  elenco a discesa di prompt di input oppure offrire suggerimenti popup con
+  frasi
+  descrittive che hai riscontrato essere sicure nel contesto della tua applicazione.
+- **Blocco degli input non sicuri e filtraggio dell'output prima che venga mostrato all'utente.** In situazioni semplici, le liste bloccate possono essere utilizzate per identificare e bloccare
+  parole o frasi non sicure nei prompt o nelle risposte oppure richiedere a revisori umani
+  di modificare o bloccare manualmente questi contenuti.
+- **Utilizzo di classificatori addestrati per etichettare ogni prompt con potenziali danni o
+  segnali contraddittori.** È poi possibile applicare varie strategie per gestire la richiesta in base al tipo di danno rilevato. Ad esempio, se l'input è apertamente contraddittorio o di natura illecita, potrebbe essere bloccato e fornire una risposta preimpostata.
 
-  #### 고급 도움말
+  #### Suggerimento avanzato
 
-  - 신호가 출력이 유해하다고 판단하는 경우
-    애플리케이션은 다음 옵션을 사용할 수 있습니다.
-    - 오류 메시지 또는 사전 스크립트된 출력을 제공합니다.
-    - 동일한 프롬프트에서 다른 출력이 생성될 수 있으므로 대체 안전 출력이 생성되는 경우 프롬프트를 다시 시도합니다.
-- 각 사용자에게 고유 ID를 할당하고 특정 기간에 제출할 수 있는 사용자 쿼리 수를 제한하는 등 **의도적인 오용에 대한 보호 조치를 마련합니다.** 또 다른 보호 조치는 가능한 프롬프트 인젝션을 방지하는 것입니다. 프롬프트 인젝션은 SQL 인젝션과 마찬가지로 악의적인 사용자가 모델의 출력을 조작하는 입력 프롬프트를 설계하는 방법입니다. 예를 들어 이전 예시를 무시하도록 모델에 지시하는 입력 프롬프트를 전송하는 것입니다. 의도적인 오용에 관한 자세한 내용은
-  [생성형 AI에 관한 금지된 사용 정책](https://policies.google.com/terms/generative-ai/use-policy?hl=ko)
-  을 참고하세요.
-- **본질적으로 위험이 낮은 기능으로 조정합니다.**
-  범위가 좁은 작업 (예: 텍스트 구절에서 키워드 추출) 또는 사람의 감독이 더 많은 작업 (예: 사람이 검토할 짧은 형식 콘텐츠 생성)은 위험이 낮은 경우가 많습니다. 예를 들어 이메일 답장을 처음부터 작성하는 애플리케이션을 만드는 대신 개요를 확장하거나 대체 문구를 제안하도록 제한할 수 있습니다.
-- **유해할 수 있는 대답이 표시될 가능성을 줄이도록 유해한 콘텐츠 안전 설정을 조정합니다.** Gemini API는 프로토타입 제작 단계에서 조정하여 애플리케이션에 더 제한적인 안전 구성이 필요한지 아니면 덜 제한적인 안전 구성이 필요한지 결정할 수 있는 안전 설정을 제공합니다. 5가지 필터 카테고리에서 이러한 설정을 조정하여 특정 유형의 콘텐츠를 제한하거나 허용할 수 있습니다. Gemini API를 통해 사용할 수 있는 조정 가능한 안전 설정에 관한 자세한 내용은 [안전 설정 가이드](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ko)를 참고하세요.
-- **Google 검색을 사용한 그라운딩을 사용 설정하여 잠재적인 사실 부정확성 또는 환각을 줄입니다.** 많은 AI 모델은 실험용이며 사실에 맞지 않는 정보를 제공하거나 환각을 일으키거나 기타 문제가 있는 출력을 생성할 수 있습니다. Google 검색을 사용한 그라운딩 기능은 Gemini 모델을 실시간 웹 콘텐츠에 연결하며 사용 가능한 모든 언어로 작동합니다. 이를 통해 Gemini는 모델의 지식 단절점을 넘어 더 정확한 대답을 제공하고 검증 가능한 출처를 인용할 수 있습니다.
+  - Se gli indicatori determinano che l'output è dannoso,
+    l'applicazione può utilizzare le seguenti opzioni:
+    - Fornire un messaggio di errore o un output preimpostato.
+    - Prova di nuovo il prompt, nel caso in cui venga generato un output alternativo sicuro, poiché a volte lo stesso prompt genera output diversi.
+- **Implementazione di misure di salvaguardia contro l'uso improprio intenzionale**, ad esempio assegnando a ogni utente un ID univoco e imponendo un limite al volume di query utente che possono essere inviate in un determinato periodo. Un'altra misura di salvaguardia è quella di cercare di
+  proteggere da possibili prompt injection. La prompt injection, proprio come l'SQL injection, è un modo per gli utenti malintenzionati di progettare un prompt di input che manipola l'output del modello, ad esempio inviando un prompt di input che indica al modello di ignorare tutti gli esempi precedenti. Per informazioni dettagliate sull'uso improprio intenzionale, consulta le
+  [Norme relative all'uso vietato dell'IA generativa](https://policies.google.com/terms/generative-ai/use-policy?hl=it).
+- **Modifica della funzionalità in modo che presenti un rischio intrinsecamente inferiore.**
+  Le attività con un ambito più ristretto (ad es. l'estrazione di parole chiave da passaggi di testo) o che prevedono una maggiore supervisione umana (ad es. la generazione di contenuti in formato breve che verranno esaminati da una persona) spesso comportano un rischio inferiore. Ad esempio, invece di creare un'applicazione per scrivere una risposta email da zero, potresti limitarla a espandere una bozza o suggerire formulazioni alternative.
+- **Regolazione delle impostazioni di sicurezza dei contenuti dannosi per ridurre la probabilità di
+  visualizzare risposte potenzialmente dannose.** L'API Gemini fornisce impostazioni di sicurezza
+  che puoi regolare durante la fase di prototipazione per determinare se la tua
+  applicazione richiede una configurazione di sicurezza più o meno restrittiva. Puoi
+  modificare queste impostazioni in cinque categorie di filtri per limitare o consentire
+  determinati tipi di contenuti. Consulta la [guida alle impostazioni di sicurezza](https://ai.google.dev/gemini-api/docs/safety-settings?hl=it) per scoprire di più
+  sulle impostazioni di sicurezza regolabili disponibili tramite l'API Gemini.
+- **Riduci le potenziali imprecisioni fattuali o allucinazioni attivando
+  Grounding con la Ricerca Google**. Tieni presente che molti modelli di AI sono sperimentali
+  e potrebbero presentare informazioni imprecise, avere allucinazioni o produrre
+  output problematici. La funzionalità Grounding con la Ricerca Google collega
+  il modello Gemini a contenuti web in tempo reale e funziona con tutte le lingue
+  disponibili. In questo modo, Gemini può fornire risposte più accurate e citare fonti verificabili oltre il knowledge cutoff dei modelli.
 
-## 사용 사례에 적합한 안전 테스트 수행
+## Esegui test di sicurezza appropriati al tuo caso d'uso
 
-테스트는 강력하고 안전한 애플리케이션을 빌드하는 데 중요한 부분이지만 테스트의 범위, 범위, 전략은 다양합니다. 예를 들어 재미로 만든 하이쿠 생성기는 법률 문서 요약 및 계약서 초안 작성을 위해 법률 회사에서 사용하도록 설계된 애플리케이션보다 심각한 위험을 초래할 가능성이 낮습니다. 하지만 하이쿠 생성기는 더 다양한 사용자가 사용할 수 있으므로 적대적 시도 또는 의도치 않은 유해한 입력의 가능성이 더 클 수 있습니다. 구현 컨텍스트도 중요합니다. 예를 들어 조치를 취하기 전에 인적 전문가가 출력을 검토하는 애플리케이션은 이러한 감독이 없는 동일한 애플리케이션보다 유해한 출력을 생성할 가능성이 낮은 것으로 간주될 수 있습니다.
+I test sono una parte fondamentale della creazione di applicazioni robuste e sicure, ma l'entità,
+l'ambito e le strategie di test variano. Ad esempio, un generatore di haiku
+per divertimento probabilmente comporta rischi meno gravi rispetto, ad esempio, a un'applicazione progettata
+per l'utilizzo da parte di studi legali per riassumere documenti legali e contribuire alla stesura di contratti. Tuttavia, il generatore di haiku può essere utilizzato da una gamma più ampia di utenti, il che significa che il potenziale di tentativi ostili o anche di input dannosi non intenzionali può essere maggiore. Anche il contesto di implementazione è importante. Ad esempio, un'applicazione
+con output esaminati da esperti umani prima di intraprendere qualsiasi azione
+potrebbe essere ritenuta meno propensa a produrre output dannosi rispetto all'applicazione
+identica senza tale supervisione.
 
-상대적으로 위험이 낮은 애플리케이션의 경우에도 출시할 준비가 되었다고 확신하기 전에 여러 번 변경하고 테스트하는 것이 일반적입니다. AI 애플리케이션에는 두 가지 유형의 테스트가 특히 유용합니다.
+Non è raro dover apportare modifiche e testare diverse iterazioni prima di ritenere di essere pronti per il lancio, anche per le applicazioni a rischio relativamente basso. Due tipi di test sono particolarmente utili per le applicazioni di AI:
 
-- **안전 벤치마킹** 에는 애플리케이션이 사용될 가능성이 있는 컨텍스트에서 안전하지 않을 수 있는 방식을 반영하는 안전 측정항목을 설계한 다음 평가 데이터 세트를 사용하여 측정항목에서 애플리케이션의 성능을 테스트하는 것이 포함됩니다. 테스트하기 전에 허용 가능한 최소 수준의 안전 측정항목을 고려하는 것이 좋습니다. 그래야 1) 이러한 기대치에 따라 테스트 결과를 평가하고 2) 가장 중요하게 생각하는 측정항목을 평가하는 테스트를 기반으로 평가 데이터 세트를 수집할 수 있습니다.
+- Il **benchmarking della sicurezza** prevede la progettazione di metriche di sicurezza che riflettano i modi in cui la tua applicazione potrebbe essere pericolosa nel contesto del suo probabile utilizzo, quindi il test delle prestazioni dell'applicazione in base alle metriche utilizzando set di dati di valutazione. È buona norma pensare ai livelli minimi accettabili delle metriche di sicurezza prima del test, in modo da 1) valutare i risultati del test in base a queste aspettative e 2) raccogliere il set di dati di valutazione in base ai test che valutano le metriche che ti interessano di più.
 
-  #### 고급 팁
+  #### Suggerimenti avanzati
 
-  - 애플리케이션의 컨텍스트에 완전히 적합하도록 인적 평가자를 사용하여 자체 테스트 데이터 세트를 빌드해야 할 가능성이 높으므로 '기성품' 접근 방식에 과도하게 의존하지 않도록 주의하세요.
-  - 측정항목이 두 개 이상인 경우 변경으로 인해 한 측정항목이 개선되고 다른 측정항목이 저하되는 경우 어떻게
-    절충할지 결정해야 합니다. 다른 성능 엔지니어링과 마찬가지로 평가 세트에서 평균 성능보다는 최악의 성능에 집중하는 것이 좋습니다.
-- **적대적 테스트** 에는 애플리케이션을 사전에 중단하려고 시도하는 것이 포함됩니다. 목표는 약점을 파악하여 적절한 조치를 취할 수 있도록 하는 것입니다. 적대적 테스트는 애플리케이션에 관한 전문 지식을 갖춘 평가자의 상당한 시간과 노력이 필요할 수 있지만, 더 많이 수행할수록 문제를 발견할 가능성이 높아집니다. 특히 애플리케이션을 반복 실행한 후에만 발생하는 문제의 경우 더욱 그렇습니다.
+  - Fai attenzione a non fare eccessivo affidamento su approcci "pronti all'uso", in quanto è probabile
+    che dovrai creare i tuoi set di dati di test utilizzando valutatori umani per
+    adattarli completamente al contesto della tua applicazione.
+  - Se hai più di una metrica, dovrai decidere come
+    compensare se una modifica comporta miglioramenti per una metrica a
+    detrimento di un'altra. Come per altre tecniche di ingegneria del rendimento, potresti
+    voler concentrarti sul rendimento nel caso peggiore nel set di valutazione
+    anziché sul rendimento medio.
+- I **test contraddittori** consistono nel tentativo proattivo di interrompere il funzionamento dell'applicazione. L'obiettivo è identificare i punti deboli in modo da poter adottare
+  le misure correttive più appropriate. I test avversariali possono richiedere
+  tempo/sforzi significativi da parte di valutatori esperti nella tua applicazione, ma più ne esegui, maggiori sono le possibilità di individuare problemi,
+  soprattutto quelli che si verificano raramente o solo dopo ripetute esecuzioni dell'applicazione.
 
-  - 적대적 테스트는 악의적이거나 의도치 않게 유해한 입력이 제공되었을 때 ML 모델이 어떻게 작동하는지 파악하기 위한 목적으로 ML 모델을 체계적으로 평가하는 방법입니다.
-    - 입력이 안전하지 않거나 유해한 출력을 생성하도록 명확하게 설계된 경우 입력이 악의적일 수 있습니다. 예를 들어 텍스트 생성 모델에 특정 종교에 대한 증오심 표현을 생성하도록 요청하는 것입니다.
-    - 입력 자체는 무해하지만 유해한 출력을 생성하는 경우 입력이 의도치 않게 유해합니다. 예를 들어 텍스트 생성 모델에 특정 민족의 사람을 설명하도록 요청하고 인종 차별적인 출력을 받는 것입니다.
-  - 적대적 테스트와 표준 평가를 구분하는 것은 테스트에 사용되는 데이터의 구성입니다. 적대적 테스트의 경우 모델에서 문제가 있는 출력을 생성할 가능성이 가장 높은
-    테스트 데이터를 선택합니다. 즉, 안전 정책과 관련된 드물거나 특이한 예시와 엣지 케이스를 포함하여 발생할 수 있는 모든 유형의 피해에 대해 모델의 동작을 조사하는 것입니다. 또한 구조, 의미, 길이와 같은 문장의 다양한 측면에서 다양성을 포함해야 합니다. 테스트 데이터 세트를 빌드할 때 고려해야 할 사항에 관한 자세한 내용은 [Google's Responsible AI
-    practices in
-    fairness](https://ai.google/responsibilities/responsible-ai-practices/?category=fairness&hl=ko)
-    를 참고하세요.
+  - un metodo per valutare sistematicamente un modello di ML con l'intento di apprendere come si comporta quando gli viene fornito un input dannoso, intenzionalmente o inavvertitamente:
+    - Un input può essere intenzionalmente dannoso quando è chiaramente progettato per produrre un output non sicuro o pericoloso, ad esempio quando si chiede a un modello di generazione di testo di generare un discorso di incitamento all'odio nei confronti di una particolare religione.
+    - Un input è inavvertitamente dannoso quando l'input stesso può essere
+      innocuo, ma produce un output dannoso. Ad esempio, se si chiede a un modello di
+      generazione di testo di descrivere una persona di una particolare etnia e
+      si riceve un output razzista.
+  - Ciò che distingue un test contraddittorio da una valutazione standard è la
+    composizione dei dati utilizzati per il test. Per i test contraddittori, seleziona
+    dati di test che hanno maggiori probabilità di generare output problematici
+    dal modello. Ciò significa analizzare il comportamento del modello per tutti i tipi di
+    danni possibili, inclusi esempi rari o insoliti e
+    casi limite pertinenti alle norme di sicurezza. Deve inoltre includere
+    la diversità nelle diverse dimensioni di una frase, come struttura,
+    significato e lunghezza. Per ulteriori dettagli su cosa considerare quando crei un set di dati di test, consulta le [best practice di Google per l'AI responsabile in materia di equità](https://ai.google/responsibilities/responsible-ai-practices/?category=fairness&hl=it).
 
-    #### 고급 팁
+    #### Suggerimenti avanzati
 
-    - 애플리케이션을 중단하려고 시도하는 '레드팀'에 사람을 참여시키는 기존 방법 대신
-      [자동화된 테스트](https://www.deepmind.com/blog/red-teaming-language-models-with-language-models?hl=ko)
-      를 사용합니다. 자동화된 테스트에서
-      '레드팀'은 테스트 중인 모델에서 유해한 출력을 생성하는 입력 텍스트를 찾는
-      또 다른 언어 모델입니다.
+    - Utilizza
+      [test automatici](https://www.deepmind.com/blog/red-teaming-language-models-with-language-models?hl=it)
+      anziché il metodo tradizionale di arruolare persone in "red team"
+      per cercare di compromettere la tua applicazione. Nei test automatizzati, il
+      "red team" è un altro modello linguistico che trova un testo di input che
+      genera output dannosi dal modello in fase di test.
 
-## 문제 모니터링
+## Monitorare eventuali problemi
 
-아무리 많이 테스트하고 완화해도 완벽을 보장할 수는 없으므로 발생할 문제를 발견하고 처리하는 방법을 미리 계획하세요. 일반적인 접근 방식으로는 사용자가 의견을 공유할 수 있는 모니터링 채널을 설정하고(예: 좋아요/싫어요 평가) 다양한 사용자의 의견을 사전에 요청하기 위해 사용자 연구를 실행하는 것이 있습니다. 특히 사용 패턴이 예상과 다른 경우에 유용합니다.
+Non importa quanto tu testi e mitighi, non potrai mai garantire la perfezione, quindi pianifica in anticipo come individuare e affrontare i problemi che si presentano. Gli approcci comuni includono la configurazione di un canale monitorato in cui gli utenti possono condividere feedback (ad es. valutazione Mi piace/Non mi piace) e l'esecuzione di uno studio sugli utenti per sollecitare in modo proattivo feedback da un mix diversificato di utenti, il che è particolarmente utile se i modelli di utilizzo sono diversi dalle aspettative.
 
-#### 고급 팁
+#### Suggerimenti avanzati
 
-- 사용자가 AI 제품에 의견을 제공하면 프롬프트 튜닝에 더 적합한 예시를 선택하는 데 도움이 되는 등 시간이 지남에 따라 AI
-  성능과 사용자 경험을 크게 개선할 수 있습니다. Google의 사람과 AI 가이드북의
-  [의견 및 제어 장](https://pair.withgoogle.com/chapter/feedback-controls/)
-  에서는[Google's People and AI guidebook](https://pair.withgoogle.com/guidebook/chapters)
-  의견 메커니즘을 설계할 때 고려해야 할 주요 사항을 강조합니다.
+- Quando gli utenti forniscono feedback sui prodotti AI, nel tempo le prestazioni dell'AI e l'esperienza utente possono migliorare notevolmente, ad esempio, aiutandoti a scegliere esempi migliori per l'ottimizzazione dei prompt. Il
+  [capitolo Feedback e controllo](https://pair.withgoogle.com/chapter/feedback-controls/)
+  della [guida di Google Persone e AI](https://pair.withgoogle.com/guidebook/chapters)
+  mette in evidenza le considerazioni chiave da tenere presenti durante la progettazione
+  dei meccanismi di feedback.
 
-## 다음 단계
+## Passaggi successivi
 
-- Gemini API를 통해 사용할 수 있는 조정 가능한
-  안전 설정에 관한 자세한 내용은
-  [안전 설정](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ko) 가이드를 참고하세요.
-- 첫 번째 프롬프트 작성을 시작하려면 [프롬프트 소개](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=ko)를 참고하세요.
+- Consulta la guida alle [impostazioni di sicurezza](https://ai.google.dev/gemini-api/docs/safety-settings?hl=it) per scoprire di più sulle impostazioni di sicurezza regolabili disponibili tramite l'API Gemini.
+- Consulta l'[introduzione ai prompt](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=it) per iniziare a scrivere i tuoi primi prompt.
 
-의견 보내기
+Invia feedback
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-최종 업데이트: 2026-04-29(UTC)
+Ultimo aggiornamento 2026-04-29 UTC.
 
-의견을 전달하고 싶나요?
+Vuoi dirci altro?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]

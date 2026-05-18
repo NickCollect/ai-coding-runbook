@@ -1,35 +1,36 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/media-resolution?hl=zh-TW
-fetched_at: 2026-05-11T05:06:40.618389+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/media-resolution?hl=it
+fetched_at: 2026-05-18T05:13:17.677300+00:00
 title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/overview?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-提供意見
+Invia feedback
 
-# 媒體解析度
+# Risoluzione dei media
 
-`media_resolution` 參數可決定分配給媒體輸入內容的**權杖數量上限**，藉此控管 Gemini API 處理圖片、影片和 PDF 文件等媒體輸入內容的方式，讓您在回覆品質、延遲時間和費用之間取得平衡。如要瞭解不同設定、預設值，以及這些設定與權杖的對應關係，請參閱「[權杖計數](#token-counts)」一節。
+Il parametro `media_resolution` controlla il modo in cui l'API Gemini elabora gli input multimediali come immagini, video e documenti PDF determinando il **numero massimo di token** allocati per gli input multimediali, consentendoti di bilanciare la qualità della risposta rispetto a latenza e costi. Per le diverse impostazioni, i valori predefiniti e la loro corrispondenza con i token, consulta la sezione [Conteggio dei token](#token-counts).
 
-您可以在要求中設定個別媒體物件 (內容項目) 的媒體解析度 (僅限 Gemini 3)。
+Puoi configurare la risoluzione dei media per i singoli oggetti multimediali (elementi di contenuti) all'interno della richiesta (solo Gemini 3).
 
-## 每個內容項目的媒體解析度 (僅限 Gemini 3)
+## Risoluzione dei media per elemento di contenuti (solo Gemini 3)
 
-Gemini 3 可讓您在要求中為個別媒體物件設定媒體解析度，進而精細調整權杖用量。您可以在單一要求中混用解析度層級。舉例來說，複雜的圖表使用高解析度，簡單的脈絡圖片則使用低解析度。
+Gemini 3 ti consente di impostare la risoluzione dei media per i singoli oggetti multimediali all'interno della richiesta, offrendo un'ottimizzazione granulare dell'utilizzo dei token. Puoi combinare i livelli di risoluzione in una singola richiesta. Ad esempio, puoi utilizzare l'alta risoluzione per un diagramma complesso e la bassa risoluzione per un'immagine contestuale semplice.
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 from google import genai
 
 client = genai.Client()
@@ -54,6 +55,7 @@ print(interaction.steps[-1].content[0].text)
 ### JavaScript
 
 ```
+// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({});
@@ -86,9 +88,11 @@ await main();
 
 ```
 # First upload the file using the Files API, then use the URI:
+# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
+  -H "Api-Revision: 2026-05-20" \
   -d '{
     "model": "gemini-3-flash-preview",
     "input": [
@@ -103,69 +107,69 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 可用的解析度值
+## Valori di risoluzione disponibili
 
-Gemini API 定義了下列媒體解析度層級：
+L'API Gemini definisce i seguenti livelli per la risoluzione dei media:
 
-- `unspecified`：預設設定。Gemini 3 和舊版 Gemini 模型之間，這個層級的權杖數差異很大。
-- `low`：減少權杖數量，加快處理速度並降低成本，但詳細程度較低。
-- `medium`：在詳細程度、成本和延遲時間之間取得平衡。
-- `high`：代幣數量較多，可為模型提供更多詳細資訊，但延遲時間和費用會增加。
-- `ultra_high` (僅限每個內容項目)：最高權杖數，適用於特定用途，例如[電腦使用](https://ai.google.dev/gemini-api/docs/interactions/computer-use?hl=zh-tw)。
+- `unspecified`: l'impostazione predefinita. Il conteggio dei token per questo livello varia in modo significativo tra Gemini 3 e i modelli Gemini precedenti.
+- `low`: conteggio dei token inferiore, con conseguente elaborazione più rapida e costi inferiori, ma con meno dettagli.
+- `medium`: un equilibrio tra dettagli, costi e latenza.
+- `high`: conteggio dei token più elevato, che fornisce più dettagli al modello, a scapito di latenza e costi maggiori.
+- `ultra_high` (solo per elemento di contenuti): conteggio dei token più elevato, necessario per casi d'uso specifici come [l'utilizzo del computer](https://ai.google.dev/gemini-api/docs/interactions/computer-use?hl=it).
 
-請注意，`high` 可為大多數用途提供最佳效能。
+Tieni presente che `high` offre prestazioni ottimali per la maggior parte dei casi d'uso.
 
-每個層級產生的確切權杖數量取決於**媒體類型** (圖片、影片、PDF) 和**模型版本**。
+Il numero esatto di token generati per ciascuno di questi livelli dipende sia dal **tipo di media** (immagine, video, PDF) sia dalla **versione del modello**.
 
-## 權杖數量
+## Conteggio dei token
 
-下表彙整了各模型系列的每個 `media_resolution` 值和媒體類型的大約權杖數量。
+Le tabelle seguenti riepilogano i conteggi approssimativi dei token per ogni valore `media_resolution` e tipo di media per famiglia di modelli.
 
-**Gemini 3 模型**
+**Modelli Gemini 3**
 
-| MediaResolution | 圖片 | 影片 | PDF |
+| MediaResolution | Immagine | Video | PDF |
 | --- | --- | --- | --- |
-| `unspecified` (預設) | 1120 | 70 | 560 |
-| `low` | 280 | 70 | 280 + 原生文字 |
-| `medium` | 560 | 70 | 560 + 原生文字 |
-| `high` | 1120 | 280 | 1120 + 原生文字 |
-| `ultra_high` | 2240 | 不適用 | 不適用 |
+| `unspecified` (valore predefinito) | 1120 | 70 | 560 |
+| `low` | 280 | 70 | 280 + testo nativo |
+| `medium` | 560 | 70 | 560 + testo nativo |
+| `high` | 1120 | 280 | 1120 + testo nativo |
+| `ultra_high` | 2240 | N/D | N/D |
 
-## 選擇合適的解析度
+## Scegliere la risoluzione giusta
 
-- **預設 (`unspecified`)：**從預設值開始。經過調整後，在最常見的用途中，品質、延遲時間和費用都能達到良好平衡。
-- **`low`：**適用於成本和延遲時間至關重要，但細部資訊不那麼重要的情境。
-- **`medium` / `high`：**如果工作需要瞭解媒體中的複雜細節，請提高解析度。這通常是複雜的視覺分析、解讀圖表或理解密集文件內容時的必要步驟。
-- **`ultra_high`** - 僅適用於個別內容項目設定。建議用於特定用途，例如電腦使用，或測試結果顯示比 `high` 效果更好。
-- **依內容項目控管 (Gemini 3)：**可最佳化權杖用量。舉例來說，在含有多張圖片的提示中，使用 `high` 建立複雜的圖表，並使用 `low` 或 `medium` 建立較簡單的脈絡圖片。
+- **Valore predefinito (`unspecified`):** inizia con il valore predefinito. È ottimizzato per un buon equilibrio tra qualità, latenza e costi per i casi d'uso più comuni.
+- **`low`:** utilizza questa impostazione per gli scenari in cui costi e latenza sono fondamentali e i dettagli granulari sono meno importanti.
+- **`medium` / `high`:** aumenta la risoluzione quando l'attività richiede la comprensione di dettagli complessi all'interno dei media. Questo è spesso necessario per l'analisi visiva complessa, la lettura di grafici o la comprensione di documenti densi.
+- **`ultra_high`** : disponibile solo per l'impostazione per elemento di contenuti. Consigliato per casi d'uso specifici come l'utilizzo del computer o quando i test mostrano un miglioramento netto rispetto a `high`.
+- **Controllo per elemento di contenuti (Gemini 3):** ottimizza l'utilizzo dei token. Ad esempio, in un prompt con più immagini, utilizza `high` per un diagramma complesso e `low` o `medium` per immagini contestuali più semplici.
 
-**建議設定**
+**Impostazioni consigliate**
 
-下表列出各支援媒體類型的建議媒體解析度設定。
+Di seguito sono elencate le impostazioni di risoluzione dei media consigliate per ogni tipo di media supportato.
 
-| 媒體類型 | 建議設定 | 權杖數量上限 | 使用指南 |
+| Tipo di media | Impostazione consigliata | Token massimi | Indicazioni per l'utilizzo |
 | --- | --- | --- | --- |
-| **圖片** | `high` | 1120 | 建議用於大多數圖片分析工作，確保最高品質。 |
-| **PDF** | `medium` | 560 | 最適合用於瞭解文件內容；品質通常會在 `medium` 達到飽和。增加 `high` 很少能改善標準文件的 OCR 結果。 |
-| **影片** (一般) | `low` (或 `medium`) | 70 (每格) | **注意：**對於影片，系統會將 `low` 和 `medium` 設定視為相同 (70 個詞元)，以最佳化情境使用情形。這足以應付大多數的動作辨識和描述工作。 |
-| **影片** (文字內容較多) | `high` | 280 (每格) | 只有在用途涉及讀取密集文字 (OCR) 或影片影格中的細微細節時，才需要此功能。 |
+| **Google Immagini** | `high` | 1120 | Consigliato per la maggior parte delle attività di analisi delle immagini per garantire la massima qualità. |
+| **PDF** | `medium` | 560 | Ottimale per la comprensione dei documenti; la qualità in genere raggiunge il livello massimo con `medium`. L'aumento a `high` raramente migliora i risultati dell'OCR per i documenti standard. |
+| **Video** (generale) | `low` (o `medium`) | 70 (per frame) | **Nota:** per i video, le impostazioni `low` e `medium` vengono trattate in modo identico (70 token) per ottimizzare l'utilizzo del contesto. Questo è sufficiente per la maggior parte delle attività di riconoscimento e descrizione delle azioni. |
+| **Video** (con molti testi) | `high` | 280 (per frame) | Necessario solo quando il caso d'uso prevede la lettura di testi densi (OCR) o piccoli dettagli all'interno dei frame video. |
 
-請務必測試及評估不同解析度設定對應用程式的影響，找出品質、延遲和成本之間的最佳取捨。
+Esegui sempre test e valuta l'impatto delle diverse impostazioni di risoluzione sulla tua applicazione per trovare il miglior compromesso tra qualità, latenza e costi.
 
-## 版本相容性摘要
+## Riepilogo della compatibilità delle versioni
 
-- `resolution` 只能**透過 Gemini 3 模型**為個別內容項目設定。
+- L'impostazione di `resolution` sui singoli elementi di contenuti è **esclusiva dei modelli Gemini 3**.
 
-## 後續步驟
+## Passaggi successivi
 
-- 如要進一步瞭解 Gemini API 的多模態功能，請參閱[圖像解讀](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=zh-tw)、[影片理解](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=zh-tw)和[文件理解](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=zh-tw)指南。
+- Scopri di più sulle funzionalità multimodali dell'API Gemini nelle guide alla [comprensione delle immagini](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=it), alla [comprensione dei video](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=it) e alla [comprensione dei documenti](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=it).
 
-提供意見
+Invia feedback
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-上次更新時間：2026-05-09 (世界標準時間)。
+Ultimo aggiornamento 2026-05-12 UTC.
 
-想進一步說明嗎？
+Vuoi dirci altro?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-12 UTC."],[],[]]

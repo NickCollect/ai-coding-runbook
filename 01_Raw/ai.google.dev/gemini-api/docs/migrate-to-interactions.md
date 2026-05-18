@@ -1,44 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=ko
-fetched_at: 2026-05-11T05:08:24.920537+00:00
-title: "Interactions API\ub85c \ub9c8\uc774\uadf8\ub808\uc774\uc158 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=ar
+fetched_at: 2026-05-18T05:07:05.692225+00:00
+title: "\u0646\u0642\u0644 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0625\u0644\u0649 Interactions API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-의견 보내기
+إرسال ملاحظات
 
-# Interactions API로 마이그레이션
+# نقل البيانات إلى Interactions API
 
-이 가이드에서는 `generateContent` API에서 Interactions API로 마이그레이션하는 방법을 설명합니다.
+يساعدك هذا الدليل في نقل البيانات من `generateContent` API إلى Interactions API.
 
-Interactions API는 Gemini로 빌드하기 위한 표준 인터페이스입니다. 에이전트 워크플로, 서버 측 상태 관리, 복잡한 멀티모달, 멀티턴 대화에 최적화되어 있으며 간단한 스테이트리스(stateless) 싱글턴 요청도 완전히 지원합니다. `generateContent`는 계속 완전히 지원되지만 모든 신규 개발에는 Interactions API를 사용하는 것이 좋습니다.
+‫Interactions API هي الواجهة العادية للتصميم باستخدام Gemini. وهي محسّنة لسير عمل الوكلاء وإدارة الحالة من جهة الخادم والمحادثات المعقّدة المتعدّدة الوسائط والمتعدّدة الجولات، مع مواصلة الدعم الكامل للطلبات البسيطة من جولة واحدة بدون حالة. على الرغم من أنّ `generateContent` لا تزال مدعومة بالكامل، ننصح باستخدام Interactions API لجميع عمليات التطوير الجديدة.
 
-### 마이그레이션이 필요한 이유
+### لماذا يجب نقل البيانات؟
 
-Interactions API는 Gemini로 빌드하는 더 구조화되고 강력한 방법을 제공합니다.
+توفّر Interactions API طريقة أكثر تنظيمًا وفعالية للتصميم باستخدام Gemini:
 
-- **서버 측 기록 관리**: `previous_interaction_id`를 통해 멀티턴 흐름을 간소화합니다. 서버는 기본적으로 상태를 사용 설정하지만 (`store=true`) `store=false`를 설정하여 상태 비저장 동작을 선택할 수 있습니다.
-- **관찰 가능한 실행 단계**: 유형이 지정된 단계를 사용하면 복잡한 흐름을 쉽게 디버그하고 중간 이벤트 (예: 생각 또는 검색 위젯)의 UI를 렌더링할 수 있습니다.
-- **에이전트형 워크플로를 위해 빌드됨**: 유형이 지정된 실행 단계를 통해 다단계 도구 사용, 오케스트레이션, 복잡한 추론 흐름을 기본적으로 지원합니다.
-- **장기 실행 및 백그라운드 작업**: `background=true`를 사용하여 Deep Think 및 Deep Research와 같은 시간 집약적인 작업을 백그라운드 프로세스로 오프로드하는 것을 지원합니다.
-- **새로운 모델 및 기능에 대한 액세스**: 앞으로 핵심 메인라인 제품군을 넘어선 새로운 모델과 새로운 에이전트 기능 및 도구가 Interactions API에서만 출시됩니다. `generateContent`는 기존 사용 사례에 대해 계속 완전히 지원됩니다.
+- **إدارة السجلّ من جهة الخادم**: تبسيط تدفقات المحادثات المتعدّدة الجولات من خلال `previous_interaction_id` يُفعِّل الخادم الحالة تلقائيًا (`store=true`)، ولكن يمكنكم تفعيل السلوك بدون حالة من خلال ضبط `store=false`.
+- **خطوات التنفيذ القابلة للمراقبة**: تسهّل الخطوات المكتوبة تصحيح الأخطاء في التدفقات المعقّدة وعرض واجهة المستخدم للأحداث الوسيطة (مثل الأفكار أو مربّعات البحث).
+- **مصمّمة لسير عمل الوكلاء**: دعم أصلي لاستخدام الأدوات المتعدّدة الخطوات والتنسيق وتدفقات الاستنتاج المعقّدة من خلال خطوات التنفيذ المكتوبة
+- **المهام الطويلة والمهام في الخلفية**: تتيح نقل العمليات التي تستغرق وقتًا طويلاً، مثل Deep Think وDeep Research، إلى عمليات الخلفية باستخدام `background=true`
 
-## 기본 입력/출력
+## الإدخال/الإخراج الأساسي
 
-이 섹션에서는 간단한 텍스트 생성 요청을 이전하는 방법을 보여줍니다.
+يوضّح هذا القسم كيفية نقل طلب بسيط لإنشاء نص.
 
-### 이전 (`generateContent`)
+### قبل (`generateContent`)
 
-`generateContent` API는 스테이트리스(Stateless)이며 응답을 직접 반환합니다. 응답 구조는 파싱할 `parts` 목록이 있는 `content`이 각각 포함된 `candidates` 목록으로 출력을 래핑합니다.
+‫`generateContent` API هي واجهة برمجة تطبيقات بدون حالة وتعرض الردّ مباشرةً. يغلّف بنية الردّ الناتج في قائمة `candidates`، يحتوي كل منها على `content` مع قائمة `parts` لتحليلها.
 
 ### Python
 
@@ -53,7 +52,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -67,7 +66,7 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-### REST
+### راحة
 
 ```
 # Request
@@ -106,9 +105,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### After (상호작용 API)
+### بعد (‫Interactions API)
 
-Interactions API는 `steps` 타임라인이 포함된 저장된 상호작용 리소스를 반환합니다. 후보자와 파트를 순회하는 대신 `steps` 배열을 검사하여 원하는 출력 유형을 찾습니다.
+تعرض Interactions API مورد تفاعل مخزّنًا مع مخطط زمني `steps`. بدلاً من الانتقال بين المرشّحين والأجزاء، افحصوا صفيف `steps` للعثور على نوع الناتج المطلوب.
 
 ### Python
 
@@ -128,7 +127,7 @@ for step in interaction.steps:
         print(step.content[0].text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -145,7 +144,7 @@ const modelStep = interaction.steps.find(s => s.type === 'model_output');
 console.log(modelStep.content[0].text);
 ```
 
-### REST
+### راحة
 
 ```
 # Request
@@ -186,17 +185,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## 멀티턴 대화
+## محادثات متعدّدة الجولات
 
-Interactions API는 기본적으로 상호작용을 저장하여 멀티턴 대화의 서버 측 상태 관리를 지원합니다.
+تخزِّن Interactions API التفاعلات تلقائيًا، ما يتيح إدارة الحالة من جهة الخادم للمحادثات المتعدّدة الجولات.
 
-### 이전 (`generateContent`)
+### قبل (`generateContent`)
 
-`generateContent`에서는 `contents` 배열 또는 클라이언트 측 채팅 도우미를 사용하여 대화 기록을 수동으로 관리해야 합니다.
+في `generateContent`، يجب إدارة سجلّ المحادثات يدويًا باستخدام صفيف `contents` أو أداة مساعدة للدردشة من جهة العميل.
 
 ### Python
 
-**채팅 도우미 사용 (권장)**
+**استخدام أداة مساعدة للدردشة (الخيار الذي ننصح به)**
 
 ```
 from google import genai
@@ -211,7 +210,7 @@ response2 = chat.send_message("What is my name?")
 print(response2.text)
 ```
 
-**기록 수동 관리**
+**إدارة السجلّ يدويًا**
 
 ```
 from google import genai
@@ -238,9 +237,9 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### 자바스크립트
+### JavaScript
 
-**채팅 도우미 사용 (권장)**
+**استخدام أداة مساعدة للدردشة (الخيار الذي ننصح به)**
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -255,7 +254,7 @@ response = await chat.sendMessage({ message: 'What is my name?' });
 console.log(response.text);
 ```
 
-**기록 수동 관리**
+**إدارة السجلّ يدويًا**
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -274,7 +273,7 @@ const response = await client.models.generateContent({
 console.log(response.text);
 ```
 
-### REST
+### راحة
 
 ```
 # Request (the second turn requires sending the entire history)
@@ -308,9 +307,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### After (상호작용 API)
+### بعد (‫Interactions API)
 
-Interactions API는 서버에서 상태를 관리합니다. `previous_interaction_id`를 참조하여 대화를 이어갑니다.
+تُدير Interactions API الحالة على الخادم. يمكنكم مواصلة المحادثة من خلال الإشارة إلى `previous_interaction_id`.
 
 ### Python
 
@@ -334,7 +333,7 @@ interaction2 = client.interactions.create(
 print(interaction2.steps[-1].content[0].text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -357,7 +356,7 @@ interaction = await client.interactions.create({
 console.log(interaction.steps.at(-1).content[0].text);
 ```
 
-### REST
+### راحة
 
 ```
 # First Request
@@ -407,13 +406,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## 멀티모달 입력
+## إدخالات متعددة الوسائط
 
-두 API 모두 멀티모달 입력 (텍스트, 이미지, 동영상 등)을 지원합니다.
+تتيح كلتا واجهتَي برمجة التطبيقات إدخالات متعددة الوسائط (نصوص وصور وفيديوهات وما إلى ذلك).
 
-### 이전 (`generateContent`)
+### قبل (`generateContent`)
 
-`generateContent`에서는 `contents` 배열 내에 `parts` 목록을 전달합니다. 응답은 첫 번째 후보의 `parts`에 출력을 반환합니다.
+في `generateContent`، يتم تمرير قائمة `parts` ضمن صفيف `contents`. يعرض الردّ الناتج في `parts` من المرشّح الأول.
 
 ### Python
 
@@ -436,7 +435,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### REST
+### راحة
 
 ```
 # Request
@@ -476,9 +475,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### After (상호작용 API)
+### بعد (‫Interactions API)
 
-Interactions API에서는 `input` 필드에 배열을 전달합니다. 타임라인에서 `model_output` 단계를 찾아 출력 콘텐츠를 가져옵니다.
+في Interactions API، يتم تمرير صفيف إلى حقل `input`. يمكنكم استرداد محتوى الناتج من خلال العثور على خطوة `model_output` في المخطط الزمني.
 
 ### Python
 
@@ -507,7 +506,7 @@ for step in interaction.steps:
         print(step.content[0].text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -538,7 +537,7 @@ for (const step of interaction.steps) {
 }
 ```
 
-### REST
+### راحة
 
 ```
 # Request
@@ -593,13 +592,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## 구조화된 출력
+## ناتج منظَّم
 
-모델이 특정 스키마와 일치하는 JSON을 반환하도록 하려면 응답 형식을 구성하세요.
+لجعل النموذج يعرض JSON يطابق مخططًا معيّنًا، يجب ضبط تنسيق الردّ.
 
-### 이전 (`generateContent`)
+### قبل (`generateContent`)
 
-`generateContent`에서 `generationConfig` 객체 내에 중첩된 `response_format` 필드를 사용하여 출력 형식을 구성합니다.
+في `generateContent`، يتم ضبط تنسيق الناتج باستخدام حقل `response_format` المضمّن داخل عنصر `generationConfig`.
 
 ### Python
 
@@ -630,7 +629,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### REST
+### راحة
 
 ```
 # Request
@@ -681,9 +680,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### After (상호작용 API)
+### بعد (‫Interactions API)
 
-Interactions API에서 출력 형식 컨트롤이 최상위 `response_format` 배열로 이동합니다.
+في Interactions API، تنتقل عناصر التحكّم في تنسيق الناتج إلى صفيف `response_format` على المستوى الأعلى.
 
 ### Python
 
@@ -714,7 +713,7 @@ for step in interaction.steps:
         print(step.content[0].text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -749,7 +748,7 @@ for (const step of interaction.steps) {
 }
 ```
 
-### REST
+### راحة
 
 ```
 # Request
@@ -801,13 +800,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## 멀티모달 생성
+## إنشاء محتوى متعدد الوسائط
 
-텍스트를 넘어 이미지나 오디오와 같은 모달리티로 콘텐츠를 생성할 때의 주요 차이점은 생성된 미디어를 응답에서 구성하는 방식입니다.
+عند إنشاء محتوى بتنسيقات أخرى غير النص (مثل الصور أو الصوت)، يكمن الاختلاف الأساسي في كيفية تنظيم الردّ للوسائط التي تم إنشاؤها.
 
-### 이전 (`generateContent`)
+### قبل (`generateContent`)
 
-`generateContent`에서 응답은 생성된 미디어를 후보의 `parts`에 직접 반환합니다. 일반적으로 `inlineData`의 base64 데이터로 반환됩니다.
+في `generateContent`، يعرض الردّ الوسائط التي تم إنشاؤها مباشرةً في `parts` من المرشّح، عادةً كبيانات base64 في `inlineData`.
 
 ```
 # Response structure concept
@@ -832,9 +831,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-### After (상호작용 API)
+### بعد (‫Interactions API)
 
-상호작용 API에서 생성된 미디어는 타임라인의 `model_output` 단계의 `content` 배열 내에 별도의 항목으로 표시되어 상호작용의 시간순 흐름을 유지합니다.
+في Interactions API، تظهر الوسائط التي تم إنشاؤها كعناصر مميّزة ضمن صفيف `content` لخطوة `model_output` في المخطط الزمني، ما يحافظ على التدفق الزمني للتفاعل.
 
 ```
 # Response structure concept
@@ -860,15 +859,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-이렇게 하면 입력과 텍스트 출력이 처리되는 방식과 일관되게 대답을 파싱할 수 있습니다. 즉, 모든 것이 타임라인의 단계입니다.
+يضمن ذلك أن يكون تحليل الردّ متسقًا مع طريقة التعامل مع الإدخالات والنواتج النصية، إذ يمثّل كل عنصر خطوة في المخطط الزمني.
 
-## 서버 측 도구
+## أدوات من جهة الخادم
 
-Gemini는 Google 검색 그라운딩과 같은 기본 제공 서버 측 도구를 지원합니다. 주요 차이점은 대답에서 도구 실행을 나타내는 방식입니다.
+تتيح Gemini أدوات مضمّنة من جهة الخادم، مثل ميزة تحديد مصدر المعلومات الخاصة بـ "بحث Google". ويكمن الاختلاف الأساسي في كيفية تمثيل الردّ لتنفيذ الأداة.
 
-### 이전 (`generateContent`)
+### قبل (`generateContent`)
 
-`generateContent`에서 서버 측 도구는 대부분 불투명합니다. 도구를 사용 설정하고 별도의 `groundingMetadata` 객체로 최종 답변을 받습니다. 중요한 점은 인용이 인라인이 아니라는 것입니다. `groundingSupports`는 문자 색인을 사용하여 텍스트 세그먼트를 `groundingChunks`의 웹 소스에 다시 매핑합니다.
+في `generateContent`، تكون الأدوات من جهة الخادم غير واضحة إلى حد كبير. يمكنكم تفعيل الأداة والحصول على إجابة نهائية باستخدام عنصر `groundingMetadata` منفصل. الأهم من ذلك أنّ الاقتباسات ليست مضمّنة، إذ تستخدم `groundingSupports` مؤشرات الأحرف لربط أجزاء النص بمصادر الويب في `groundingChunks`.
 
 ### Python
 
@@ -895,7 +894,7 @@ for support in metadata.grounding_supports:
     print(f"Citation: {support.segment.text}")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -919,7 +918,7 @@ for (const support of metadata.groundingSupports) {
 }
 ```
 
-### REST
+### راحة
 
 ```
 # Request
@@ -977,11 +976,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### After (상호작용 API)
+### بعد (‫Interactions API)
 
-Interactions API에서 서버 측 도구는 전체 타임라인 투명성을 제공합니다. API는 호출과 결과를 별도의 실행 `steps` (`google_search_call` 및 `google_search_result`)으로 기록하여 모델이 검색한 데이터를 정확하게 노출합니다.
+في Interactions API، توفّر الأدوات من جهة الخادم شفافية كاملة للمخطط الزمني. تسجِّل واجهة برمجة التطبيقات الطلب والنتيجة كـ `steps` تنفيذ مميّزة (`google_search_call` و`google_search_result`)، ما يكشف عن البيانات التي استردّها النموذج بالضبط.
 
-또한 API는 인용을 **인라인**으로 반환합니다. 별도의 메타데이터 객체에서 색인을 매핑하는 대신 `model_output` 단계 내의 텍스트 항목에는 소스에 직접 연결되는 자체 `annotations` 배열이 포함됩니다.
+علاوةً على ذلك، تعرض واجهة برمجة التطبيقات الاقتباسات **مضمّنة**. بدلاً من ربط المؤشرات من عنصر بيانات وصفية منفصل، يحتوي عنصر النص ضمن خطوة `model_output` على صفيف `annotations` خاص به يرتبط مباشرةً بالمصدر.
 
 ### Python
 
@@ -1006,7 +1005,7 @@ for step in interaction.steps:
                 print(f"Citation: {anno.title} ({anno.uri})")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1033,7 +1032,7 @@ for (const step of interaction.steps) {
 }
 ```
 
-### REST
+### راحة
 
 ```
 # Request
@@ -1092,13 +1091,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## 함수 호출
+## استدعاء الدالة
 
-함수 호출 및 결과의 구조도 단계 스키마에 맞게 변경되었습니다.
+تغيّرت أيضًا بنية استدعاءات الدوال ونتائجها لتناسب مخطط الخطوات.
 
-### 이전 (`generateContent`)
+### قبل (`generateContent`)
 
-`generateContent`에서 대답은 후보 내의 함수 호출을 반환합니다.
+في `generateContent`، يعرض الردّ استدعاءات الدوال ضمن المرشّحين.
 
 ### Python
 
@@ -1147,7 +1146,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1187,7 +1186,7 @@ response = await client.models.generateContent({
 console.log(response.text);
 ```
 
-### REST
+### راحة
 
 ```
 # Request
@@ -1237,9 +1236,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### After (상호작용 API)
+### بعد (‫Interactions API)
 
-이제 도구 호출과 결과가 타임라인에서 별도의 단계로 표시됩니다.
+أصبحت الآن استدعاءات الأدوات ونتائجها خطوات مميّزة في المخطط الزمني.
 
 ### Python
 
@@ -1293,7 +1292,7 @@ for step in interaction.steps:
                 print(s.content[0].text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1350,7 +1349,7 @@ for (const step of interaction.steps) {
 }
 ```
 
-### REST
+### راحة
 
 ```
 # Initial Request
@@ -1437,15 +1436,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## 스트리밍
+## البث
 
-스트리밍의 주요 차이점은 Interactions API는 요청 본문에 `"stream": true`가 있는 동일한 엔드포인트를 사용하는 반면 `generateContent` API는 전용 엔드포인트 (`:streamGenerateContent`)를 호출해야 한다는 것입니다.
+يكمن الاختلاف الرئيسي في البث في أنّ Interactions API تستخدم نقطة النهاية نفسها مع `"stream": true` في نص الطلب، بينما تتطلّب `generateContent` API استدعاء نقطة نهاية مخصّصة (`:streamGenerateContent`).
 
-또한 스트리밍 이벤트는 이제 전문화된 유형을 사용하여 상호작용 수명 주기를 모니터링하고 타임라인을 따라 실행 단계를 추적합니다.
+بالإضافة إلى ذلك، تستخدم أحداث البث الآن أنواعًا متخصّصة لمراقبة دورة حياة التفاعل وتتبُّع خطوات التنفيذ على طول المخطط الزمني.
 
-### 이전 (`generateContentStream`)
+### قبل (`generateContentStream`)
 
-`generateContent`를 사용하면 응답 청크 스트림을 소비합니다.
+باستخدام `generateContent`، يتم استهلاك سلسلة من أجزاء الردّ.
 
 ### Python
 
@@ -1457,7 +1456,7 @@ for chunk in response:
     print(chunk.text, end="")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const responseStream = await client.models.generateContentStream({
@@ -1469,7 +1468,7 @@ for await (const chunk of responseStream) {
 }
 ```
 
-### REST
+### راحة
 
 ```
 # Request
@@ -1499,9 +1498,9 @@ event: content.stop
 data: {"event_type": "content.stop", "index": 1}
 ```
 
-### After (상호작용 API)
+### بعد (‫Interactions API)
 
-Interactions API에서 스트리밍은 서버 전송 이벤트 (SSE)와 특수 델타 유형을 사용하여 실행 단계를 발생하는 대로 나타냅니다.
+في Interactions API، يستخدم البث أحداثًا يتم إرسالها من الخادم (SSE) وأنواعًا متخصّصة من التغييرات الجزئية لتمثيل خطوات التنفيذ أثناء حدوثها.
 
 ### Python
 
@@ -1524,7 +1523,7 @@ for event in stream:
         print(f"\n\n--- Stream Finished ---")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1548,9 +1547,9 @@ for await (const event of stream) {
 }
 ```
 
-### REST
+### راحة
 
-# SSE 스트림 출력 예
+# Example SSE stream output
 **event: interaction.created
 data: {"type": "interaction.created", "interaction": {"id": "int\_xyz", "status": "created"}}
 event: interaction.in\_progress
@@ -1560,24 +1559,24 @@ data: {"type": "step.start", "index": 0, "step": {"type": "thought"}}
 event: step.delta
 data: {"type": "step.delta", "index": 0, "delta": {"type": "thought", "text": "User wants an explanation."}}
 event: step.stop
-data: {"type": "step.stop", "index": 0, "status": "done"}
+data: {"type": "step.stop", "index": 0, "status": "done"}}
 event: step.start
 data: {"type": "step.start", "index": 1, "step": {"type": "model\_output"}}
 event: step.delta
 data: {"type": "step.delta", "index": 1, "delta": {"type": "text", "text": "Hello"}}
 event: step.stop
-data: {"type": "step.stop", "index": 1, "status": "done"}
+data: {"type": "step.stop", "index": 1, "status": "done"}}
 event: interaction.completed
 data: {"type": "interaction.completed", "interaction": {"id": "int\_xyz", "status": "completed", "usage": {"prompt\_tokens": 10, "completion\_tokens": 5, "total\_tokens": 15}}}**
 ```
 
-### 스트리밍 도구 및 함수 호출
+### أدوات البث واستدعاءات الدوال
 
-스트림에서 도구가 작동하는 방식이 `generateContent`에서 세부적인 관리 및 가시성을 제공하는 방식으로 크게 바뀌었습니다.
+تغيّرت طريقة عمل الأدوات في البث بشكلٍ كبير من `generateContent` لتوفير تحكّم ورؤية أكثر دقة.
 
-#### 이전 (`generateContent`)
+#### قبل (`generateContent`)
 
-`generateContent`를 사용하면 스트리밍 함수 호출이 단일 청크로 완전히 도착했습니다. 실시간으로 생성되는 인수를 확인할 수 없었으므로 핸들러는 완전한 `functionCall` 객체만 확인했습니다.
+باستخدام `generateContent`، كانت استدعاءات الدوال التي يتم بثها تصل كاملةً في جزء واحد. لم يكن بإمكانكم الاطّلاع على الوسيطات التي يتم إنشاؤها في الوقت الفعلي، لذا كان معالج الأحداث يتحقّق ببساطة من وجود عنصر `functionCall` كامل.
 
 ### Python
 
@@ -1602,7 +1601,7 @@ for chunk in stream:
         print(chunk.text, end="")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1626,7 +1625,7 @@ for await (const chunk of stream) {
 }
 ```
 
-### REST
+### راحة
 
 ```
 # Request
@@ -1642,9 +1641,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 {"candidates": [{"content": {"parts": [{"functionCall": {"name": "get_weather", "args": {"location": "Boston, MA"}}}]}}]}
 ```
 
-#### After (상호작용 API)
+#### بعد (‫Interactions API)
 
-Interactions API는 함수 호출 인수를 `arguments` 이벤트로 문자별로 스트리밍합니다. 전체 도구 수명 주기(생각, 호출, 결과, 출력)는 일련의 개별 단계로 진행됩니다.
+تبث Interactions API وسيطات استدعاء الدوال حرفًا بحرف كأحداث `arguments`. تظهر دورة حياة الأداة بأكملها، بما في ذلك الفكرة والاستدعاء والنتيجة والناتج، كسلسلة من الخطوات المميّزة.
 
 ### Python
 
@@ -1673,7 +1672,7 @@ for event in stream:
         print("\n--- Done ---")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1704,7 +1703,7 @@ for await (const event of stream) {
 }
 ```
 
-### REST
+### راحة
 
 ```
 # Request
@@ -1789,32 +1788,12 @@ event: interaction.completed
 data: {"type": "interaction.completed", "interaction": {"id": "int_xyz", "status": "completed", "usage": {"prompt_tokens": 256, "completion_tokens": 128, "total_tokens": 384}}}
 ```
 
-#### 스트림의 서버 측 도구
+إرسال ملاحظات
 
-Google 검색과 같은 서버 측 도구는 스트림의 함수 호출과 다르게 작동합니다. 이러한 호출과 결과는 `step.start` 이벤트에서 **완료**되며 델타는 없습니다. `step.start`이 바로 `step.stop`로 이어집니다.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-```
-// Server-side tool call — payload arrives complete in step.start
-event: step.start
-data: {"type": "step.start", "index": 4, "step": {"type": "google_search_call", "id": "gs_2", "query": "Alphabet Q4 2025 earnings"}}
+تاريخ التعديل الأخير: 2026-05-17 (حسب التوقيت العالمي المتفَّق عليه)
 
-event: step.stop
-data: {"type": "step.stop", "index": 4, "status": "done"}
+هل تريد مشاركة ملاحظاتك معنا؟
 
-// Server-side tool result — also complete in step.start
-event: step.start
-data: {"type": "step.start", "index": 5, "step": {"type": "google_search_result", "call_id": "gs_2", "rendered_content": "<div>Alphabet Q4 2025 Revenue: $105.6B</div>", "signature": "abc123..."}}
-
-event: step.stop
-data: {"type": "step.stop", "index": 5, "status": "done"}
-```
-
-의견 보내기
-
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
-
-최종 업데이트: 2026-05-08(UTC)
-
-의견을 전달하고 싶나요?
-
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-05-08(UTC)"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-17 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

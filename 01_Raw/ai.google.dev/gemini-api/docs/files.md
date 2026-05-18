@@ -1,34 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/files?hl=fr
-fetched_at: 2026-05-11T05:05:45.225185+00:00
+source_url: https://ai.google.dev/gemini-api/docs/files?hl=pl
+fetched_at: 2026-05-18T05:13:22.951539+00:00
 title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Envoyer des commentaires
+Prześlij opinię
 
-# API Files
+# Files API
 
-Gemini peut traiter simultanément différents types de données d'entrée, y compris du texte, des images et de l'audio.
+Model Gemini może jednocześnie przetwarzać różne typy danych wejściowych, w tym tekst, obrazy i dźwięk.
 
-Ce guide vous explique comment utiliser des fichiers multimédias avec l'API Files. Les opérations de base sont les mêmes pour les fichiers audio, les images, les vidéos, les documents et les autres types de fichiers compatibles.
+Z tego przewodnika dowiesz się, jak korzystać z plików multimedialnych za pomocą interfejsu Files API. Podstawowe operacje są takie same w przypadku plików audio, obrazów, filmów, dokumentów i innych obsługiwanych typów plików.
 
-Pour obtenir des conseils sur les prompts de fichiers, consultez la section [Guide sur les prompts de fichiers](https://ai.google.dev/gemini-api/docs/files?hl=fr#prompt-guide).
+Wskazówki dotyczące tworzenia promptów do plików znajdziesz w sekcji [Przewodnik po tworzeniu promptów do plików](https://ai.google.dev/gemini-api/docs/files?hl=pl#prompt-guide).
 
-## Importer un fichier
+## Prześlij plik
 
-Vous pouvez utiliser l'API Files pour importer un fichier multimédia. Utilisez toujours l'API Files lorsque la taille totale de la requête (y compris les fichiers, l'invite de texte, les instructions système, etc.) est supérieure à 100 Mo. Pour les fichiers PDF, la limite est de 50 Mo.
+Aby przesłać plik multimedialny, możesz użyć interfejsu Files API. Zawsze używaj interfejsu Files API, gdy łączny rozmiar żądania (w tym plików, promptu tekstowego, instrukcji systemowych itp.) przekracza 100 MB. W przypadku plików PDF limit wynosi 50 MB.
 
-Le code suivant importe un fichier, puis l'utilise dans un appel à `generateContent`.
+Poniższy kod przesyła plik, a następnie używa go w wywołaniu funkcji `generateContent`.
 
 ### Python
 
@@ -155,9 +155,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## Obtenir les métadonnées d'un fichier
+## Pobieranie metadanych pliku
 
-Vous pouvez vérifier que l'API a bien stocké le fichier importé et obtenir ses métadonnées en appelant `files.get`.
+Możesz sprawdzić, czy interfejs API zapisał przesłany plik, i pobrać jego metadane, wywołując funkcję `files.get`.
 
 ### Python
 
@@ -225,9 +225,9 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## Lister les fichiers importés
+## Wyświetlanie przesłanych plików
 
-Le code suivant permet d'obtenir la liste de tous les fichiers importés :
+Poniższy kod pobiera listę wszystkich przesłanych plików:
 
 ### Python
 
@@ -280,9 +280,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/files" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Supprimer des fichiers importés
+## Usuwanie przesłanych plików
 
-Les fichiers sont automatiquement supprimés au bout de 48 heures. Vous pouvez également supprimer manuellement un fichier importé :
+Pliki są automatycznie usuwane po 48 godzinach. Możesz też ręcznie usunąć przesłany plik:
 
 ### Python
 
@@ -334,191 +334,191 @@ curl --request "DELETE" https://generativelanguage.googleapis.com/v1beta/files/$
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Infos sur l'utilisation
+## Informacje o użytkowaniu
 
-Vous pouvez utiliser l'API Files pour importer des fichiers multimédias et interagir avec eux. L'API Files vous permet de stocker jusqu'à 20 Go de fichiers par projet, avec une taille maximale de 2 Go par fichier. Les fichiers sont stockés pendant 48 heures. Pendant cette période, vous pouvez utiliser l'API pour obtenir des métadonnées sur les fichiers, mais vous ne pouvez pas les télécharger.
-L'API Files est disponible sans frais dans toutes les régions où l'API Gemini est disponible.
+Interfejs Files API umożliwia przesyłanie plików multimedialnych i korzystanie z nich. Interfejs Files API umożliwia przechowywanie do 20 GB plików na projekt, przy czym maksymalny rozmiar pojedynczego pliku to 2 GB. Pliki są przechowywane przez 48 godzin. W tym czasie możesz używać interfejsu API do pobierania metadanych plików, ale nie możesz ich pobierać.
+Interfejs Files API jest dostępny bezpłatnie we wszystkich regionach, w których dostępny jest interfejs Gemini API.
 
-## Stratégies de requête pour les fichiers
+## Strategie dotyczące promptów w plikach
 
-Cette section fournit des conseils et des bonnes pratiques pour utiliser des fichiers multimédias avec des requêtes pour l'API Gemini.
+W tej sekcji znajdziesz wskazówki i sprawdzone metody dotyczące używania plików multimedialnych z promptami w interfejsie Gemini API.
 
-La possibilité d'utiliser différents types de données dans vos requêtes vous offre plus de flexibilité quant aux tâches que vous pouvez effectuer avec l'API Gemini. Par exemple, vous pouvez envoyer au modèle la photo d'un délicieux repas et lui demander d'écrire un court article de blog à ce sujet.
+Możliwość używania w promptach różnych typów danych zapewnia większą elastyczność w zakresie zadań, które możesz wykonywać za pomocą interfejsu Gemini API. Możesz na przykład wysłać modelowi zdjęcie pysznego posiłku i poprosić go o napisanie krótkiego bloga na jego temat.
 
 |  |  |
 | --- | --- |
-| **Prompt** (Requête) | **Réponse** |
-| Rédigez un article de blog court et attrayant basé sur cette photo. Il doit inclure une description du repas sur la photo et parler de ma méthode de préparation de repas.   Cookies | Préparer ses repas est un excellent moyen de gagner du temps et de l'argent, et cela peut aussi vous aider à manger plus sainement. Ce repas est un excellent exemple de plat sain et délicieux qui peut être facilement préparé à l'avance.  Ce plat se compose de riz brun, de légumes rôtis et de poulet teriyaki. Le riz brun est un glucide complexe et sain qui vous apportera une énergie durable. Les légumes rôtis sont un excellent moyen d'obtenir votre dose quotidienne de vitamines et de minéraux, et le poulet teriyaki est une option délicieuse et riche en protéines.  Ce plat est également très facile à préparer. Il vous suffit de cuire le riz complet, de rôtir les légumes et de cuire le poulet teriyaki. Une fois que tout est cuit, divisez-le en récipients pour la préparation des repas et conservez-les au réfrigérateur. Vous pouvez ensuite prendre un récipient et partir les matins chargés !  Si vous recherchez un repas sain et délicieux qui peut être facilement préparé à l'avance, cette recette est une excellente option. Il est riche en nutriments et en saveurs, et vous rassasiera à coup sûr.  À la préparation de repas sains et délicieux ! |
+| **Prompt** | **Odpowiedź** |
+| Napisz krótki, angażujący post na bloga na podstawie tego zdjęcia. Powinien zawierać opis posiłku na zdjęciu i opowiadać o mojej przygodzie z przygotowywaniem posiłków.   Pliki cookie | Przygotowywanie posiłków z wyprzedzeniem to świetny sposób na oszczędzanie czasu i pieniędzy, a także na zdrowsze odżywianie się. Ten posiłek to świetny przykład zdrowego i pysznego dania, które można łatwo przygotować z wyprzedzeniem.  Posiłek składa się z brązowego ryżu, pieczonych warzyw i kurczaka teriyaki. Brązowy ryż to zdrowe i złożone węglowodany, które zapewnią Ci stały dopływ energii. Pieczone warzywa to świetny sposób na dostarczenie organizmowi codziennej dawki witamin i minerałów, a kurczak teriyaki to pyszna i bogata w białko opcja.  To danie jest też bardzo łatwe w przygotowaniu. Wystarczy ugotować brązowy ryż, upiec warzywa i przygotować kurczaka teriyaki. Gdy wszystko będzie gotowe, podziel danie na porcje i umieść je w pojemnikach, a następnie przechowuj w lodówce. W zajęte poranki możesz po prostu wziąć pojemnik i wyjść z domu.  Jeśli szukasz zdrowego i pysznego posiłku, który można łatwo przygotować z wyprzedzeniem, to danie będzie świetnym wyborem. Jest pełna składników odżywczych i smaku, a do tego zaspokaja głód.  Życzymy smacznego i zdrowego przygotowywania posiłków! |
 
-Si vous ne parvenez pas à obtenir le résultat souhaité à partir de requêtes utilisant des fichiers multimédias, voici quelques stratégies qui peuvent vous aider. Les sections suivantes fournissent des approches de conception et des conseils de dépannage pour améliorer les requêtes qui utilisent des entrées multimodales.
+Jeśli masz problem z uzyskaniem oczekiwanych wyników z promptów, które wykorzystują pliki multimedialne, możesz zastosować kilka strategii, które pomogą Ci osiągnąć zamierzone rezultaty. W sekcjach poniżej znajdziesz podejścia do projektowania i wskazówki dotyczące rozwiązywania problemów, które pomogą Ci ulepszyć prompty korzystające z danych wejściowych multimodalnych.
 
-Vous pouvez améliorer vos requêtes multimodales en suivant ces bonnes pratiques :
+Aby ulepszyć prompty multimodalne, postępuj zgodnie z tymi sprawdzonymi metodami:
 
-- ### [Principes de base de la conception d'invites](#specific-instructions)
+- ### [Podstawy projektowania promptów](#specific-instructions)
 
-  - **Soyez précis dans vos instructions** : définissez des instructions claires et concises qui laissent peu de place aux erreurs d'interprétation.
-  - **Ajoutez quelques exemples à votre requête** :utilisez des exemples réalistes pour illustrer votre objectif.
-  - **Décomposez la tâche étape par étape** : divisez les tâches complexes en sous-objectifs gérables pour guider le modèle tout au long du processus.
-  - **Spécifiez le format de sortie** : dans votre requête, demandez la sortie au format souhaité, tel que Markdown, JSON, HTML, etc.
-  - **Mettez en avant votre image pour les requêtes liées à une seule image** : bien que Gemini puisse gérer les entrées d'image et de texte dans n'importe quel ordre, les requêtes qui contiennent une seule image peuvent fonctionner mieux si cette image (ou vidéo) est placée avant la requête de texte. Toutefois, pour les requêtes qui nécessitent que les images soient fortement imbriquées avec le texte pour avoir du sens, utilisez l'ordre le plus naturel.
-- ### [Résoudre les problèmes liés à un prompt multimodal](#troubleshooting)
+  - **Podawaj konkretne instrukcje:** twórz jasne i zwięzłe instrukcje, które pozostawiają jak najmniej miejsca na błędną interpretację.
+  - **Dodaj do prompta kilka przykładów:** użyj realistycznych przykładów few-shot, aby zilustrować, co chcesz osiągnąć.
+  - **Podziel zadanie na mniejsze części:** podziel skomplikowane zadania na mniejsze cele, prowadząc model przez cały proces.
+  - **Określ format wyjściowy:** w prompcie poproś o wygenerowanie danych wyjściowych w wybranym formacie, np. Markdown, JSON, HTML itp.
+  - **W przypadku promptów z jednym obrazem umieść go na pierwszym miejscu:** Gemini może przetwarzać dane wejściowe w postaci obrazów i tekstu w dowolnej kolejności, ale w przypadku promptów zawierających jeden obraz może działać lepiej, jeśli ten obraz (lub film) zostanie umieszczony przed promptem tekstowym. W przypadku promptów, które wymagają, aby obrazy były ściśle powiązane z tekstem, użyj najbardziej naturalnej kolejności.
+- ### [Rozwiązywanie problemów z promptem multimodalnym](#troubleshooting)
 
-  - **Si le modèle n'extrait pas d'informations de la partie pertinente de l'image** : ajoutez des indications sur les aspects de l'image à partir desquels vous souhaitez que la requête puise des informations.
-  - **Si le résultat du modèle est trop générique (non adapté à l'entrée image/vidéo)** : au début de la requête, essayez de demander au modèle de décrire les images ou les vidéos avant de fournir les instructions de la tâche. ou essayez de demander au modèle de faire référence à ce qui est illustré.
-  - **Dépannage** : demandez au modèle de décrire l'image ou demandez au modèle d'expliquer sa raisonnement pour évaluer sa compréhension initiale.
-  - **Si votre requête génère du contenu incohérent**, essayez de réduire le paramétrage de la température ou de demander au modèle des descriptions plus courtes afin de réduire les risques d'extrapolation.
-  - **Réglez les paramètres d'échantillonnage** : testez différents paramètres de température et des sélections en haut de la plage pour ajuster la créativité du modèle.
+  - **Jeśli model nie pobiera informacji z odpowiedniej części obrazu:** podaj wskazówki dotyczące aspektów obrazu, z których prompt ma pobierać informacje.
+  - **Jeśli dane wyjściowe modelu są zbyt ogólne (niedostosowane do danych wejściowych obrazu lub filmu):**  na początku prompta poproś model o opisanie obrazów lub filmu przed podaniem instrukcji zadania albo poproś model o odniesienie się do tego, co znajduje się na obrazie.
+  - **Aby rozwiązać problem z tym, która część zawiodła:** poproś model o opisanie obrazu lub wyjaśnienie jego rozumowania, aby ocenić wstępne zrozumienie modelu.
+  - **Jeśli prompt spowoduje wygenerowanie halucynacji:** spróbuj zmniejszyć ustawienie temperatury lub poproś model o krótsze opisy, aby zmniejszyć prawdopodobieństwo ekstrapolacji dodatkowych szczegółów.
+  - **Dostrajanie parametrów próbkowania:** eksperymentuj z różnymi ustawieniami temperatury i wyborami Top-K, aby dostosować kreatywność modelu.
 
-### Indiquez des instructions précises.
+### Podawaj szczegółowe instrukcje
 
-Les requêtes sont plus efficaces lorsqu'elles sont claires et détaillées. Si vous avez une sortie spécifique en tête, il est préférable d'inclure cette exigence dans la requête pour vous assurer d'obtenir le résultat souhaité.
+Najskuteczniejsze są prompty, które są jasne i szczegółowe. Jeśli masz na myśli konkretny wynik, lepiej uwzględnić to wymaganie w prompcie, aby mieć pewność, że uzyskasz oczekiwany rezultat.
 
-Pour cette image de tableau d'aéroport, demander au modèle de "décrire cette image" peut générer une description générale. Si vous avez besoin du modèle pour analyser une heure et une ville à partir de l'image, vous pouvez inclure cette requête directement dans votre prompt.
+W przypadku tego zdjęcia tablicy na lotnisku poproszenie modelu o „opisanie tego obrazu” może wygenerować ogólny opis. Jeśli chcesz, aby model przeanalizował czas i miasto na obrazie, możesz uwzględnić to żądanie bezpośrednio w prompcie.
 
-| Prompt | Réponse de modèle |
+| Prompt | Odpowiedź modelu |
 | --- | --- |
-| Décrivez cette image. | L'image montre un tableau des arrivées et des départs d'aéroport. |
+| Opisz ten obraz. | Obraz przedstawia tablicę przylotów i odlotów na lotnisku. |
 
-| **Prompt modifié** | **Réponse améliorée** |
+| **Zaktualizowany prompt** | **Ulepszona odpowiedź** |
 | --- | --- |
-| Horaires de transport Analysez les heures et les villes du tableau d'aéroport présent l'image ci-dessous et affichez-les sous forme de liste. | - 10:50 Moscou - 11:05 Édimbourg - 11:05 Londres - 11:10 Bucarest - 11:30 Kiev - 11:35 Dublin - 11:45 Midlands de l'Est - 12:15 Sofia - 12:30 Londres - 12:30 Newcastle - 12:40 Saint-Pétersbourg - 12:40 Londres - 12:45 Manchester |
+| Rozkład podróży Przeanalizuj czas i miasto z tablicy lotniska widocznej na tym obrazie i utwórz z nich listę. | - 10:50 Moskwa - 11:05 Edynburg - 11:05 Londyn - 11:10 Bukareszt - 11:30 Kijów - 11:35 Dublin - 11:45 East Midlands - 12:15 Sofia - 12:30 Londyn - 12:30 Newcastle - 12:40 St Petersburg - 12:40 Londyn - 12:45 Manchester |
 
-### Ajouter quelques exemples
+### Dodaj kilka przykładów
 
-Le modèle Gemini peut accepter plusieurs entrées qu'il peut utiliser comme exemples pour comprendre la sortie que vous souhaitez. L'ajout de ces exemples peut aider le modèle à identifier les schémas et à appliquer la relation entre les images et les réponses fournies au nouvel exemple. C'est ce qu'on appelle l'apprentissage few-shot.
+Model Gemini może akceptować wiele danych wejściowych, których może używać jako przykładów, aby zrozumieć, jakie dane wyjściowe chcesz uzyskać. Dodanie tych przykładów może pomóc modelowi w rozpoznawaniu wzorców i zastosowaniu relacji między podanymi obrazami a odpowiedziami do nowego przykładu. Jest to tzw. uczenie z małą liczbą przykładów.
 
-Dans l'exemple ci-dessous, le résultat initial est rédigé sous forme de phrase et contient également le pays (Brésil). Supposons que vous souhaitiez obtenir le résultat dans un autre format ou style, et que vous ne vouliez que la ville, et non le pays. En ajoutant des exemples few-shot à votre requête, vous pouvez orienter le modèle pour qu'il réponde comme vous le souhaitez.
+W poniższym przykładzie początkowy wynik jest zapisany w formie zdania i zawiera też nazwę kraju (Brazylia). Załóżmy, że chcesz uzyskać dane wyjściowe w innym formacie lub stylu i potrzebujesz tylko nazwy miasta, a nie kraju. Dodanie do promptu przykładów typu „few-shot” może sprawić, że model będzie odpowiadać w odpowiedni sposób.
 
-| **Prompt** (Requête) | **Réponse de modèle** |
+| **Prompt** | **Odpowiedź modelu** |
 | --- | --- |
-| Horaires de transport Déterminez la ville et le repère. | Le repère est la statue du Christ Rédempteur à Rio de Janeiro, au Brésil. |
+| Rozkład podróży Określ miasto wraz z punktem orientacyjnym. | Jest to statua Chrystusa Zbawiciela w Rio de Janeiro w Brazylii. |
 
-| **Prompt modifié** | **Réponse améliorée** |
+| **Zaktualizowany prompt** | **Ulepszona odpowiedź** |
 | --- | --- |
-| Déterminez la ville et le repère. colisée | ville : Rome ; repère : le Colisée. |
-| Cité interdite | ville : Pékin ; repère : la Cité interdite |
-| forbidden-city | Ville : Rio de Janeiro ; repère : statue du Christ Rédempteur |
+| Określ miasto wraz z punktem orientacyjnym. Koloseum | miasto: Rzym, punkt orientacyjny: Koloseum. |
+| Zakazane Miasto | miasto: Pekin, punkt orientacyjny: Zakazane Miasto |
+| zakazane-miasto | miasto: Rio de Janeiro, punkt orientacyjny: Statua Chrystusa Zbawiciela |
 
-### Procéder étape par étape
+### Szczegółowe instrukcje
 
-Pour les tâches complexes telles que celles nécessitant une compréhension visuelle et un raisonnement, il peut être utile de diviser la tâche en étapes plus petites et plus simples. Cela peut également être efficace si vous demandez directement au modèle de "penser étape par étape" dans votre requête.
+W przypadku złożonych zadań, takich jak te, które wymagają zarówno zrozumienia wizualnego, jak i rozumowania, warto podzielić zadanie na mniejsze, prostsze kroki. Możesz też bezpośrednio poprosić model o „myślenie krok po kroku” w prompcie.
 
-| Requête | Réponse de modèle |
+| Prompt | Odpowiedź modelu |
 | --- | --- |
-| Quand vais-je manquer de papier toilette ? | Bientôt, car il ne vous reste que trois rouleaux. |
+| Kiedy skończy mi się papier toaletowy? | Wkrótce zostaną Ci tylko 3 rolki. |
 
-| **Prompt modifié** | **Réponse améliorée** |
+| **Zaktualizowany prompt** | **Ulepszona odpowiedź** |
 | --- | --- |
-| 1. Commencez par compter le nombre de rouleaux de papier toilette apparaissant sur cette photo.  2. Déterminez ensuite la quantité de papier toilette qu'une personne type utilise par jour.  3. Calculez la durée de vie de ces rouleaux de papier toilette. | 1. Sur cette photo, on voit trois rouleaux de papier toilette.  2. Une personne type utilise environ 20 feuilles de papier toilette par jour.  3. Si un rouleau contient 200 feuilles, chaque rouleau dure environ 10 jours. Par conséquent, les trois rouleaux dureront environ un mois. |
+| 1. Najpierw policz, ile rolek papieru toaletowego znajduje się na tym zdjęciu.  2. Następnie określ, ile papieru toaletowego zużywa przeciętna osoba w ciągu dnia.  3. Oblicz, jak długo wystarczą te rolki papieru toaletowego. | 1. Na tym zdjęciu są 3 rolki papieru toaletowego.  2. Przeciętna osoba zużywa około 20 arkuszy papieru toaletowego dziennie.  3. Jeśli każda rolka zawiera 200 arkuszy, wystarczy na około 10 dni. Dlatego 3 rolki wystarczą na około miesiąc. |
 
-Les problèmes mathématiques ou les problèmes basés sur les mots sont d'excellents candidats pour demander au modèle de réfléchir étape par étape.
+Zadania matematyczne i inne zadania tekstowe to świetne przykłady, w przypadku których warto poprosić model o rozwiązanie krok po kroku.
 
-| **Prompt** (Requête) | **Response** (Réponse) |
+| **Prompt** | **Odpowiedź** |
 | --- | --- |
-| Quel est le quatrième terme de la séquence ? | -135 |
+| Jaki jest czwarty wyraz ciągu? | -135 |
 
-La réponse du modèle est incorrecte. Pour améliorer cela, vous pouvez demander au modèle d'analyser le problème avant de répondre à la requête.
+Odpowiedź modelu jest nieprawidłowa. Aby to poprawić, możesz poprosić model o przeanalizowanie problemu przed udzieleniem odpowiedzi na prompt.
 
-| **Prompt** (Requête) | **Response** (Réponse) |
+| **Prompt** | **Odpowiedź** |
 | --- | --- |
-| Commencez par analyser la formule dans l'image.  Ensuite, en fonction de la formule, répondez à la question "Quel est le quatrième terme de la séquence ?". | *Cliquez pour développer le résultat* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. Remplacez "n = 4" dans la formule :  $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. Nous ne connaissons pas la valeur de b(3). Remplacez donc n = 3 dans la formule :  $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. Nous ne connaissons pas la valeur de b(2). Remplacez donc n = 2 dans la formule :  $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. Nous savons que la valeur de b(1) est 15. Remplacez-la par la formule :  $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. Maintenant que nous connaissons la valeur de b(2), remplacez-la dans la formule de b(3) :  $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. Maintenant que nous connaissons la valeur de b(3), remplacez-la dans la formule de b(4) :  $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   Par conséquent, le quatrième terme de la séquence est -405. |
+| Najpierw przeanalizuj formułę na obrazie.  Następnie na podstawie wzoru odpowiedz na pytanie „Jaki jest czwarty wyraz w ciągu?”. | *Kliknij, aby rozwinąć wynik* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. Podstaw n = 4 do wzoru:  $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. Nie znamy wartości b(3), więc podstawiamy n = 3 do wzoru:  $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. Nie znamy wartości b(2), więc wstawiamy n = 2 do wzoru:  $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. Wiemy, że wartość b(1) wynosi 15, więc podstawiamy ją do wzoru:  $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. Teraz, gdy znamy wartość b(2), podstawmy ją do wzoru na b(3):  $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. Znamy już wartość b(3), więc możemy ją podstawić do wzoru na b(4):  $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   Czwarty wyraz ciągu to zatem -405. |
 
-La réponse de ce modèle est correcte. Pour la rendre encore plus simple, vous pouvez lui demander de réfléchir par étapes.
+Odpowiedź modelu jest prawidłowa. Aby ją jeszcze bardziej usprawnić, możesz poprosić model o przemyślenie krok po kroku.
 
-| **Prompt modifié** | **Réponse améliorée** |
+| **Zaktualizowany prompt** | **Ulepszona odpowiedź** |
 | --- | --- |
-| Quel est le quatrième terme de la séquence ? Réfléchir étape par étape | Le premier terme est 15.  Le deuxième terme est b(1) \* (-3) = 15 \* (-3) = -45.  Le troisième terme est b(2) \* (-3) = -45 \* (-3) = 135.  Le quatrième terme est b(3) \* (-3) = 135 \* (-3) = -405. |
+| Jaki jest czwarty wyraz ciągu? Myśl krok po kroku. | Pierwszy wyraz to 15.  Drugi wyraz to b(1) \* (-3) = 15 \* (-3) = -45.  Trzeci wyraz to b(2) \* (-3) = -45 \* (-3) = 135.  Czwarty wyraz to b(3) \* (-3) = 135 \* (-3) = -405. |
 
-### Spécifier le format de sortie
+### Określanie formatu wyjściowego
 
-Un problème courant est le besoin d'avoir un format spécifique pour la sortie du modèle (par exemple, Markdown, JSON, HTML), en particulier si celle-ci doit être ingérée par une tâche en aval. Vous pouvez essayer de produire un résultat dans ce format en demandant au modèle via la requête. Vous trouverez deux exemples ci-dessous :
+Częstym problemem jest konieczność generowania danych wyjściowych modelu w określonym formacie (np. Markdown, JSON, HTML), zwłaszcza jeśli dane wyjściowe modelu mają być wykorzystywane w dalszych zadaniach. Możesz spróbować uzyskać dane wyjściowe w tym formacie, instruując model w prompcie. Oto 2 przykłady:
 
-| Requête | Réponse de modèle |
+| Prompt | Odpowiedź modelu |
 | --- | --- |
-| Analysez le tableau de cette image au format Markdown | | Sujet | État | Heure | Date de début | Date limite |  | ------- | ------ | ---- | ---------- | ------ |  | Math | Done | 1.5 hrs | 11/29/2023 | 12/1/2023 |  | Géographie | Terminé | 30 min | 02/12/2023 | 04/12/2023 |  | Physique | En cours | 2 h | 03/12/2023 | 05/12/2023 |  | Biologie | Non commencé | 6 h | 02/11/2016 | 06/12/2023 | |
+| Przekształć tabelę na tym obrazie w format Markdown | | Temat | Stan | Czas | Data rozpoczęcia | Termin |  | ------- | ------ | ---- | ---------- | ------ |  | Matematyka | Gotowe | 1,5 godz. | 29.11.2023 r. | 1.12.2023 r. |  | Geografia | Gotowe | 30 min | 2.12.2023 r. | 4.12.2023 r. |  | Fizyka | W toku | 2 godz. | 3.12.2023 r. | 5.12.2023 r. |  | Biologia | Nie rozpoczęto | 6 godz. | 2.11.2016 r. | 6.12.2023 r. | |
 
-| **Prompt** (Requête) | **Réponse de modèle** |
+| **Prompt** | **Odpowiedź modelu** |
 | --- | --- |
-| Fournissez la liste de tous les attributs suivants :  ingrédients, type de cuisine, végétarien ou non, au format JSON | ```` ```json ````  `{`  `"ingredients": [`  `"rice",`  `"shrimp",`  `"clams",`  `"mussels",`  `"peas",`  `"tomatoes",`  `"onions",`  `"garlic",`  `"olive oil",`  `"paprika",`  `"salt",`  `"pepper"`  `],`  `"type of cuisine": "Spanish",`  `"vegetarian": false`  `}`  ```` ``` ```` |
+| Podaj listę wszystkich tych atrybutów:  składniki, rodzaj kuchni, czy jest wegetariańska, w formacie JSON. | ```` ```json ````  `{`  `"ingredients": [`  `"rice",`  `"shrimp",`  `"clams",`  `"mussels",`  `"peas",`  `"tomatoes",`  `"onions",`  `"garlic",`  `"olive oil",`  `"paprika",`  `"salt",`  `"pepper"`  `],`  `"type of cuisine": "Spanish",`  `"vegetarian": false`  `}`  ```` ``` ```` |
 
-### Utilisez votre image en premier pour les requêtes liées à une seule image
+### W przypadku promptów z pojedynczym obrazem umieść obraz na pierwszym miejscu
 
-Bien que Gemini puisse interpréter l'image et le texte dans n'importe quel ordre dans une requête, le fait de placer une seule image avant la requête de texte peut offrir de meilleurs résultats.
-Dans les exemples suivants, vous remarquerez que l'image précède le texte dans chaque requête.
+Gemini może interpretować obraz i tekst w dowolnej kolejności w prompcie, ale umieszczenie pojedynczego obrazu przed promptem tekstowym może przynieść lepsze wyniki.
+W poniższych przykładach obraz jest zawsze przed tekstem w każdym promcie.
 
-### Résoudre les problèmes liés à un prompt multimodal
+### Rozwiązywanie problemów z promptem multimodalnym
 
-Si vous n'obtenez pas de réponse utile, vous devrez peut-être résoudre les problèmes liés à votre requête. Voici quelques stratégies que vous pouvez essayer.
+Jeśli nie otrzymujesz pomocnej odpowiedzi, być może musisz rozwiązać problem z promptem. Oto kilka strategii, które możesz wypróbować.
 
-#### Si le modèle n'extrait pas d'informations de la partie pertinente de l'image
+#### Jeśli model nie pobiera informacji z odpowiedniej części obrazu
 
-Pour obtenir une réponse plus spécifique, vous pouvez indiquer les aspects de l'image à partir desquels vous souhaitez que la requête extraie des informations pour éclairer sa réponse.
+Aby uzyskać bardziej szczegółową odpowiedź, możesz wskazać, z których aspektów obrazu ma czerpać informacje prompt, aby na ich podstawie udzielić odpowiedzi.
 
-| Prompt | Réponse de modèle |
+| Prompt | Odpowiedź modelu |
 | --- | --- |
-| Combien de jours ces couches vont-elles durer avec un bébé ? | Les couches vont durer 198 jours avant d'être épuisées. |
+| Na ile dni wystarczą te pieluszki dla dziecka? | Pieluchy wystarczą na 198 dni. |
 
-| **Prompt modifié** | **Réponse améliorée** |
+| **Zaktualizowany prompt** | **Ulepszona odpowiedź** |
 | --- | --- |
-| Combien de temps vont durer ces couches avant d'être épuisées ?  Utilisez le poids indiqué sur la boîte pour déterminer l'âge de l'enfant et le nombre total de couches dans la boîte.  Divisez le nombre total par le nombre de couches utilisées par l'enfant chaque jour. | La boîte contient 198 couches. La boîte indique que les couches sont destinées à un enfant pesant entre 22 et 37 livres.  L'enfant correspondant à cette plage de poids a probablement 1 à 2 ans.  Un enfant de deux ans utilise généralement six couches par jour. Par conséquent, les couches vont durer environ 33 jours (198/6). |
+| Na jak długo wystarczą mi te pieluchy?  Na podstawie wagi podanej na opakowaniu określ wiek dziecka, a następnie podaj łączną liczbę pieluszek w opakowaniu.  Podziel łączną liczbę pieluch przez liczbę pieluch zużywanych przez dziecko dziennie. | Pudełko zawiera 198 pieluszek. Na opakowaniu jest napisane, że pieluszki są przeznaczone dla dziecka o wadze 10–17 kg.  Średnie dziecko w tym przedziale wagowym ma prawdopodobnie od 1 do 2 lat.  2-letnie dziecko zużywa zwykle 6 pieluszek dziennie, więc wystarczą one na około 33 dni (198/6). |
 
-#### Si les résultats du modèle sont trop génériques et ne sont pas suffisamment adaptés à l'entrée de type image
+#### Jeśli dane wyjściowe modelu są zbyt ogólne i niedostosowane do danych wejściowych w postaci obrazu.
 
-Pour aider le modèle à adapter sa réponse à l'image ou aux images, essayez de lui demander de les décrire avant d'effectuer sa tâche de raisonnement.
+Aby pomóc modelowi dostosować odpowiedź do obrazów, poproś go o ich opisanie przed wykonaniem zadania związanego z rozumowaniem.
 
-| Prompt | Réponse de modèle |
+| Prompt | Odpowiedź modelu |
 | --- | --- |
-| Quel est le point commun entre ces images ? | Les quatre images sont des exemples de photographie de paysage. |
+| Co łączy te obrazy? | Wszystkie 4 obrazy to przykłady fotografii krajobrazowej. |
 
-| **Prompt modifié** | **Réponse améliorée** |
+| **Zaktualizowany prompt** | **Ulepszona odpowiedź** |
 | --- | --- |
-| Commencez par décrire en détail le contenu de chaque image. Quel est le point commun entre ces images ? | La première image montre une personne préparant une valise. La deuxième image montre un couloir vide dans un centre commercial. La troisième image montre un rouleau de papier toilette. La quatrième image montre une mer sombre et orageuse.  Le point commun de ces images est qu'elles sont toutes des exemples d'espaces liminaux. Les espaces liminaux sont des lieux ou des situations situés entre deux autres lieux ou situations. Elles sont souvent caractérisées par un sentiment d'incertitude ou d'ambiguïté.  La première image montre une personne entre chez elle et en voyage. La deuxième image montre le couloir entre deux magasins. La troisième image montre du papier toilette, ce qui peut représenter une salle de bain. Une salle de bain est un espace de transition entre les domaines privé et public. C'est un endroit où nous nous préparons à pénétrer ou à quitter le monde extérieur.  La quatrième image montre une mer calme et orageuse.  Les espaces liminaux peuvent être à la fois intéressants et étranges. Ils peuvent constituer un début ou une fin. Ils peuvent représenter un lieu de réflexion ou d'action. |
+| Najpierw szczegółowo opisz, co znajduje się na każdym obrazie. Co łączy te obrazy? | Pierwszy obraz przedstawia osobę pakującą walizkę. Drugi obraz przedstawia pusty korytarz w centrum handlowym. Trzeci obraz przedstawia rolkę papieru toaletowego. Czwarty obraz przedstawia ciemne i sztormowe morze.  Wspólną cechą tych obrazów jest to, że wszystkie są przykładami przestrzeni liminalnych. Przestrzenie liminalne to miejsca lub sytuacje, które znajdują się pomiędzy dwoma innymi miejscami lub sytuacjami. Często charakteryzują się poczuciem niepewności lub niejednoznaczności.  Pierwszy obraz przedstawia osobę, która jest w domu i w podróży. Drugi obraz przedstawia korytarz między dwoma sklepami. Trzeci obraz przedstawia papier toaletowy, który może symbolizować łazienkę. Łazienka to przestrzeń przejściowa między strefą prywatną a publiczną. To miejsce, w którym przygotowujemy się do wejścia do świata zewnętrznego lub wyjścia z niego.  Na czwartym zdjęciu widać morze w stanie pośrednim między spokojnym a sztormowym.  Przestrzenie liminalne mogą być zarówno ekscytujące, jak i niepokojące. Mogą być miejscem nowego początku lub zakończenia. Mogą być miejscem refleksji lub miejscem działania. |
 
-Vous pouvez également essayer de demander explicitement au modèle de faire référence à ce qui est illustré.
+Możesz też wyraźnie poprosić model, aby odnosił się do tego, co znajduje się na obrazie.
 
-| **Prompt modifié** | **Réponse améliorée** |
+| **Zaktualizowany prompt** | **Ulepszona odpowiedź** |
 | --- | --- |
-| Quel est le point commun entre ces images ? Reportez-vous au contenu des images dans votre réponse. | Toutes les images sont liées au voyage. La première image montre une personne préparant une valise, la deuxième montre un couloir vide dans un centre commercial, la troisième une pile de rouleaux de papier toilette, et la quatrième image montre une mer sombre et orageuse.  Ces images sont toutes liées au voyage, car elles correspondent à tout ce dont les gens ont besoin ou utilisent lorsqu'ils voyagent. La première image montre une personne préparant une valise. C'est une chose que font les personnes qui partent en voyage. La deuxième image montre un couloir vide dans un centre commercial. C'est un lieu où les gens se rendent pour acheter les articles dont ils ont besoin pour leur voyage. La troisième image montre une pile de rouleaux de papier toilette. C'est quelque chose que les gens utilisent lorsqu'ils voyagent. La quatrième image montre une mer sombre et orageuse. C'est ce que les gens rencontrent souvent lorsqu'ils voyagent. |
+| Co łączy te obrazy? Odwołuj się do tego, co znajduje się na obrazach, w swojej odpowiedzi. | Wszystkie obrazy są związane z podróżami. Pierwsze zdjęcie przedstawia osobę pakującą walizkę, drugie – pusty korytarz w centrum handlowym, trzecie – stos papieru toaletowego, a czwarte – ciemne i burzliwe morze.  Wszystkie te obrazy są związane z podróżami, ponieważ przedstawiają rzeczy, których ludzie potrzebują lub używają podczas podróży. Pierwszy obraz przedstawia osobę pakującą walizkę, co robią ludzie, gdy wybierają się w podróż. Drugi obrazek przedstawia pusty korytarz w centrum handlowym, czyli miejscu, do którego ludzie często chodzą, aby kupić rzeczy na wyjazdy. Trzeci obraz przedstawia stos papieru toaletowego, który często jest używany podczas podróży. Czwarty obraz przedstawia ciemne i sztormowe morze, które często można spotkać podczas podróży. |
 
-Il en va de même pour les sorties créatives issues des images. Dans l'exemple suivant, avec le lapin, demandez explicitement au modèle d'inclure certains aspects de l'image pouvant améliorer le résultat.
+Te same wskazówki dotyczą wyników kreatywnych generowanych na podstawie obrazów. W tym przykładzie z królikiem wyraźne poproszenie modelu o uwzględnienie aspektów obrazu może poprawić wynik.
 
-| Prompt | Réponse de modèle |
+| Prompt | Odpowiedź modelu |
 | --- | --- |
-| Peux-tu m'écrire un poème sur cette image ? | Petit lapin, si doux et marron,  Sautant à travers champ, de haut en bas.  Tes oreilles sont si longues, ta queue si petite,  tu es la créature la plus mignonne de toutes.  Tu grignotes l'herbe, si verte et douce,  et tu sautes lorsque tu me vois.  Mais je serai toujours ton ami,  Petit lapin, jusqu'à la fin. |
+| Czy możesz napisać wiersz o tym obrazie? | Mały króliczek, miękki i brązowy,  skacze po polu w górę i w dół.  Uszy masz długie, ogon malutki,  Jesteś najsłodszym stworzeniem ze wszystkich.  Skubiesz trawę, taką zieloną i słodką,  I odskakujesz, gdy mnie widzisz.  Ale zawsze będę Twoim przyjacielem,  Króliczku, aż do samego końca. |
 
-| **Prompt modifié** | **Réponse améliorée** |
+| **Zaktualizowany prompt** | **Ulepszona odpowiedź** |
 | --- | --- |
-| Peux-tu m'écrire un poème descriptif et théâtral sur cette image et y inclure le lieu ? | Petit lapin sur la pelouse,  Les oreilles sont si longues, si fines.  Que vois-tu là-bas,  Au loin, là où tu regardes ?  Est-ce le bleu de l'océan,  Étincelant dans la lumière du soleil ?  Ou les vagues qui s'écrasent et rugissent,  Un rythme que tu adores ?  Petit lapin, dis-moi la vérité,  Qu'est-ce qui retient tant ton attention ?  Est-ce la brise salée,  ou les cris des mouettes qui supplient ?  Peut-être est-ce toute cette immensité,  un monde si grand et si petit à la fois.  Un lieu où les rêves peuvent vagabonder  et où les aventures peuvent être créées.  Petit lapin, je me demande à quoi à quoi tu rêves,  Quand tu es assis sur l'herbe, si serein.  As-tu envie d'explorer les profondeurs,  ou de rester sur la terre ferme, là où tu peux sauter ?  Quoi qu'il en soit, petit lapin,  Garde cette étincelle qui brille en toi. Car dans tes rêves et tes aspirations,  se trouve un monde qui n'attend que d'être créé. |
+| Napisz opisowy i dramatyczny wiersz o tym obrazie. Podaj też lokalizację. | Mały króliczek na zielonej łące,  Uszy takie długie, takie bystre.  Co widzisz tam,  W oddali, gdzie wpatrujesz się?  Czy to ocean niebieski,  Błyszczący w słońcu?  A może szum fal,  Który tak bardzo lubisz?  Króliczku, powiedz mi,  Co tak bardzo przyciąga Twoją uwagę?  Czy to słona bryza,  Czy krzyk mew sprawia Ci przyjemność?  Może to ogrom tego wszystkiego,  Świat tak wielki i mały.  Miejsce, gdzie marzenia mogą się spełniać,  A przygody mogą się rodzić.  Mały króliczku, co Ci się śni,  Gdy siedzisz na trawie, taki spokojny.  Czy chcesz odkrywać głębiny,  Czy wolisz zostać na lądzie, gdzie możesz skakać?  Cokolwiek to będzie, króliczku,  niech ta iskra ciekawości płonie jasno.  Bo w Twoich marzeniach i aspiracjach  tkwi świat czekający na Twoje stworzenie. |
 
-#### Savoir quelle partie de la requête a échoué
+#### Rozwiązywanie problemów z nieudaną częścią prompta
 
-Il peut être difficile de savoir si une requête a échoué car le modèle n'a pas **compris l'image** avec laquelle commencer, ou s'il a compris l'image, mais n'a pas effectué les bonnes **étapes de raisonnement**.
-Pour faire la distinction entre les deux, demandez au modèle de décrire le contenu de l'image.
+Trudno stwierdzić, czy prompt nie zadziałał, ponieważ model z założenia **nie zrozumiał obrazu**, czy też zrozumiał obraz, ale nie wykonał prawidłowych **kroków rozumowania**.
+Aby odróżnić te powody, poproś model o opisanie, co znajduje się na obrazie.
 
-Dans l'exemple suivant, si le modèle répond avec un aliment qui ne semble pas correspondre au thé (par exemple, du pop-corn), vous pouvez d'abord chercher à déterminer si le modèle a correctement reconnu que l'image contient du thé.
+Jeśli na przykład model zaproponuje przekąskę, która wydaje się zaskakująca w połączeniu z herbatą (np. popcorn), najpierw sprawdź, czy model prawidłowo rozpoznał, że na obrazie jest herbata.
 
-| Prompt | Requête pour le dépannage |
+| Prompt | Prompt do rozwiązywania problemów |
 | --- | --- |
-| Quel aliment puis-je préparer en une minute qui pourrait être associé à cela ? | Décris ce que représente cette image. |
+| Jaka przekąska, którą mogę przygotować w 1 minutę, będzie do tego pasować? | Opisz, co jest na tym obrazie. |
 
-Une autre stratégie consiste à demander au modèle d'expliquer son raisonnement. Cela peut vous aider à déterminer la partie du raisonnement qui a échoué, le cas échéant.
+Inną strategią jest poproszenie modelu o wyjaśnienie jego rozumowania. Może to pomóc w określeniu, która część rozumowania zawiodła, jeśli w ogóle.
 
-| Prompt | Requête pour le dépannage |
+| Prompt | Prompt do rozwiązywania problemów |
 | --- | --- |
-| Quel aliment puis-je préparer en une minute qui pourrait être associé à cela ? | Quel aliment puis-je préparer en une minute qui pourrait être associé à cela ? Merci d'indiquer pour quelle raison. |
+| Jaka przekąska, którą mogę przygotować w 1 minutę, będzie do tego pasować? | Jaka przekąska, którą mogę przygotować w 1 minutę, będzie do tego pasować? W jaki sposób? |
 
-## Étape suivante
+## Co dalej?
 
-- Essayez d'écrire vos propres requêtes multimodales à l'aide de [Google AI Studio](http://aistudio.google.com?hl=fr).
-- Pour savoir comment utiliser l'API Gemini Files pour importer des fichiers multimédias et les inclure dans vos requêtes, consultez les guides [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=fr), [Audio](https://ai.google.dev/gemini-api/docs/audio?hl=fr) et [Traitement de documents](https://ai.google.dev/gemini-api/docs/document-processing?hl=fr).
-- Pour obtenir d'autres conseils sur la conception de requêtes, comme le réglage des paramètres d'échantillonnage, consultez la page [Stratégies de requête](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=fr).
+- Spróbuj napisać własne prompty multimodalne, korzystając z [Google AI Studio](http://aistudio.google.com?hl=pl).
+- Informacje o korzystaniu z interfejsu Gemini Files API do przesyłania plików multimedialnych i uwzględniania ich w promptach znajdziesz w przewodnikach [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=pl), [Audio](https://ai.google.dev/gemini-api/docs/audio?hl=pl) i [Document processing](https://ai.google.dev/gemini-api/docs/document-processing?hl=pl).
+- Więcej wskazówek dotyczących projektowania promptów, np. dostrajania parametrów próbkowania, znajdziesz na stronie [Strategie tworzenia promptów](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=pl).
 
-Envoyer des commentaires
+Prześlij opinię
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Dernière mise à jour le 2026/05/07 (UTC).
+Ostatnia aktualizacja: 2026-05-13 UTC.
 
-Voulez-vous nous donner plus d'informations ?
+Chcesz przekazać coś jeszcze?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/05/07 (UTC)."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-05-13 UTC."],[],[]]

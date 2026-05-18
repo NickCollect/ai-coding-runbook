@@ -1,45 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=id
-fetched_at: 2026-05-11T04:57:43.043679+00:00
-title: "Interactions API: Panduan migrasi perubahan yang dapat menyebabkan gangguan (Mei 2026) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=hi
+fetched_at: 2026-05-18T05:10:36.979897+00:00
+title: "Interactions API: \u092e\u093e\u0907\u0917\u094d\u0930\u0947\u0936\u0928 \u0917\u093e\u0907\u0921 \u092e\u0947\u0902 \u092c\u0921\u093c\u0947 \u092c\u0926\u0932\u093e\u0935 (\u092e\u0908 2026) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Kirim masukan
+सुझाव भेजें
 
-# Interactions API: Panduan migrasi perubahan yang dapat menyebabkan gangguan (Mei 2026)
+# Interactions API: माइग्रेशन गाइड में बड़े बदलाव (मई 2026)
 
-Interactions API `v1beta` memperkenalkan perubahan yang dapat menyebabkan gangguan yang menata ulang bentuk API untuk mendukung kemampuan mendatang seperti pengarahan di tengah penerbangan dan panggilan alat asinkron. Halaman ini menjelaskan apa yang berubah dan memberikan contoh kode sebelum dan sesudah untuk membantu Anda melakukan migrasi. Ada dua kategori perubahan:
+Interactions API के `v1beta` में अहम बदलाव किए जा रहे हैं. इससे एपीआई के स्ट्रक्चर में बदलाव होगा. साथ ही, फ़्लाइट के दौरान स्टीयरिंग और टूल कॉल को एसिंक्रोनस तरीके से करने जैसी सुविधाएं मिलेंगी. इस पेज पर, किए जा रहे बदलावों के बारे में बताया गया है. साथ ही, माइग्रेट करने में आपकी मदद करने के लिए, कोड के पहले और बाद के उदाहरण दिए गए हैं. बदलावों की दो कैटगरी हैं:
 
-1. [**Skema langkah**](#steps-schema): Array `steps` baru menggantikan array
-   `outputs`, yang menyediakan linimasa terstruktur dari setiap giliran interaksi.
-2. [**Konfigurasi format output**](#output-format-config): `response\_format` polimorfik baru mengonsolidasikan semua kontrol format output dan menghapus `response\_mime\_type`.`response_format``response_mime_type`
+1. [**स्टेप स्कीमा**](#steps-schema): `outputs` कलेक्शन की जगह, नया `steps` कलेक्शन इस्तेमाल किया जाएगा. इससे हर इंटरैक्शन के लिए, स्ट्रक्चर्ड टाइमलाइन मिलेगी.
+2. [**आउटपुट फ़ॉर्मैट कॉन्फ़िगरेशन**](#output-format-config): नया पॉलीमॉर्फिक
+   `response_format` आउटपुट फ़ॉर्मैट के सभी कंट्रोल को एक साथ लाता है. साथ ही,
+   `response_mime_type` को हटाता है.
 
-Ikuti langkah-langkah di [Cara melakukan migrasi ke skema baru](#how-to-migrate) untuk
-memperbarui integrasi Anda.
+अपने इंटिग्रेशन को अपडेट करने के लिए, [नए स्कीमा पर माइग्रेट करने का तरीका](#how-to-migrate) में दिए गए निर्देशों का पालन करें.
 
-## Perubahan inti: `outputs` menjadi `steps`
+## मुख्य बदलाव: `outputs` की जगह `steps` का इस्तेमाल
 
-Skema baru menggantikan array `outputs` dengan array `steps`.
+नए स्कीमा में, `outputs` कलेक्शन की जगह `steps` कलेक्शन का इस्तेमाल किया जाएगा.
 
-- **Lama**: Respons menampilkan array `outputs` datar yang hanya berisi konten yang dibuat model.
-- **Skema baru**: Respons menampilkan array `steps` yang berisi langkah-langkah terstruktur dengan diskriminator jenis.
+- **लेगसी**: जवाबों में, फ़्लैट `outputs` कलेक्शन मिलता था. इसमें सिर्फ़ मॉडल से जनरेट किया गया कॉन्टेंट होता था.
+- **नया स्कीमा**: जवाबों में, `steps` कलेक्शन मिलता है. इसमें टाइप डिस्क्रिमिनेटर के साथ स्ट्रक्चर्ड स्टेप होते हैं.
 
-`POST /interactions` hanya menampilkan langkah-langkah output. `GET /interactions/{id}`
-menampilkan linimasa langkah lengkap, termasuk langkah `user_input` awal.
+`POST /interactions` से सिर्फ़ आउटपुट स्टेप मिलते हैं. `GET /interactions/{id}`
+से, पूरी स्टेप टाइमलाइन मिलती है. इसमें शुरुआती `user_input` स्टेप भी शामिल होता है.
 
-### Input/output dasar (unary)
+### सामान्य इनपुट/आउटपुट (यूनरी)
 
-#### Sebelum (lama)
+#### पहले (लेगसी)
 
 ### Python
 
@@ -91,7 +91,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### Setelah (skema baru)
+#### बाद में (नया स्कीमा)
 
 ### Python
 
@@ -171,11 +171,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### Panggilan fungsi
+### फ़ंक्शन कॉल करना
 
-Struktur permintaan tetap tidak berubah, tetapi respons menggantikan konten `outputs` datar dengan langkah-langkah terstruktur.
+अनुरोध का स्ट्रक्चर पहले जैसा ही रहेगा. हालांकि, जवाब में फ़्लैट `outputs` कॉन्टेंट की जगह, स्ट्रक्चर्ड स्टेप मिलेंगे.
 
-#### Sebelum (lama)
+#### पहले (लेगसी)
 
 ### Python
 
@@ -220,7 +220,7 @@ for (const output of interaction.outputs) {
 }
 ```
 
-#### Setelah (skema baru)
+#### बाद में (नया स्कीमा)
 
 ### Python
 
@@ -268,11 +268,11 @@ for (const step of interaction.steps) {
 }
 ```
 
-### Alat sisi server
+### सर्वर-साइड टूल
 
-Alat sisi server (seperti Google Penelusuran atau Eksekusi Kode) kini menghasilkan jenis langkah tertentu dalam array `steps`. Meskipun skema lama menampilkan operasi ini sebagai jenis konten tertentu dalam array `outputs`, skema baru memindahkannya ke array `steps`. Contoh berikut menggunakan Google Penelusuran.
+सर्वर-साइड टूल (जैसे, Google Search या Code Execution) अब `steps` कलेक्शन में, खास तरह के स्टेप देते हैं. लेगसी स्कीमा में, इन कार्रवाइयों को `outputs` कलेक्शन में खास तरह के कॉन्टेंट के तौर पर दिखाया जाता था. हालांकि, नए स्कीमा में इन्हें `steps` कलेक्शन में ले जाया जाता है. यहां दिए गए उदाहरणों में, Google Search का इस्तेमाल किया गया है.
 
-#### Sebelum (lama)
+#### पहले (लेगसी)
 
 ### Python
 
@@ -346,7 +346,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### Setelah (skema baru)
+#### बाद में (नया स्कीमा)
 
 ### Python
 
@@ -430,41 +430,39 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### Streaming
+### स्ट्रीमिंग
 
-Streaming menampilkan jenis peristiwa baru:
+स्ट्रीमिंग में, इवेंट के नए टाइप दिखते हैं:
 
-#### Jenis peristiwa baru
+#### इवेंट के नए टाइप
 
 - `interaction.created`
 - `interaction.completed`
 - `interaction.in_progress`
 - `interaction.requires_action`
-- `interaction.error`
 - `step.start`
 - `step.delta`
 - `step.stop`
 
-#### Jenis peristiwa yang tidak digunakan lagi
+#### इवेंट के पुराने टाइप
 
-Jenis peristiwa lama berikut digantikan oleh peristiwa baru yang tercantum di atas:
+ऊपर बताए गए नए इवेंट, इवेंट के इन पुराने टाइप की जगह इस्तेमाल किए जाएंगे:
 
 - `interaction.start` → `interaction.created`
 - `content.start` → `step.start`
 - `content.delta` → `step.delta`
 - `content.stop` → `step.stop`
 - `interaction.complete` → `interaction.completed`
-- `error` → `interaction.error`
-- `interaction.status_update` → digantikan oleh `interaction.in_progress`, `interaction.requires_action`, dll.
+- `interaction.status_update` → इसकी जगह `interaction.in_progress`, `interaction.requires_action` वगैरह का इस्तेमाल किया जाएगा.
 
-**Panggilan fungsi streaming**: Saat Anda menggunakan streaming dengan panggilan fungsi,
-peristiwa `step.start` akan menampilkan nama fungsi, dan peristiwa `step.delta` akan
-melakukan streaming argumen sebagai string JSON parsial (menggunakan `arguments_delta`). Anda
-harus mengumpulkan delta ini untuk mendapatkan argumen lengkap. Hal ini berbeda dengan panggilan unary yang memungkinkan Anda menerima objek panggilan fungsi lengkap sekaligus.
+**स्ट्रीमिंग फ़ंक्शन कॉल**: फ़ंक्शन कॉल करने के लिए स्ट्रीमिंग का इस्तेमाल करने पर,
+`step.start` इवेंट में फ़ंक्शन का नाम दिखता है. वहीं, `step.delta` इवेंट में
+आर्ग्युमेंट, JSON स्ट्रिंग के तौर पर स्ट्रीम होते हैं. इसके लिए, `arguments_delta` का इस्तेमाल किया जाता है. पूरे
+आर्ग्युमेंट पाने के लिए, आपको इन डेल्टा को इकट्ठा करना होगा. यह यूनरी कॉल से अलग है. यूनरी कॉल में, आपको फ़ंक्शन कॉल का पूरा ऑब्जेक्ट एक साथ मिलता है.
 
-#### Contoh
+#### उदाहरण
 
-##### Sebelum (Lama)
+##### पहले (लेगसी)
 
 ### Python
 
@@ -531,7 +529,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 // data: {"id": "int_123", "status": "done", "usage": {"total_tokens": 42}}
 ```
 
-##### Setelah (Skema Baru)
+##### बाद में (नया स्कीमा)
 
 ### Python
 
@@ -608,32 +606,31 @@ for await (const event of stream) {
  // data: {"type": "interaction.completed", "interaction": {"id": "int_xyz", "status": "completed", "usage": {"prompt_tokens": 10, "completion_tokens": 5, "total_tokens": 15}}} // NEW: Dedicated completion event
 ```
 
-### Histori Percakapan Tanpa Status
+### स्टेटलेस बातचीत का इतिहास
 
-Jika Anda mengelola histori percakapan secara manual di sisi klien (kasus penggunaan tanpa status), Anda harus memperbarui cara Anda menggabungkan giliran sebelumnya.
+अगर क्लाइंट साइड पर, बातचीत के इतिहास को मैन्युअल तरीके से मैनेज किया जाता है (स्टेटलेस इस्तेमाल का तरीका), तो आपको पिछले टर्न को एक साथ लाने के तरीके को अपडेट करना होगा.
 
-- **Lama**: Developer sering mengumpulkan array `outputs` dari respons dan mengirimkannya kembali di kolom `input` pada giliran berikutnya.
-- **Skema baru**: Sekarang Anda harus mengumpulkan array `steps` dari respons dan meneruskannya di kolom `input` permintaan berikutnya, dengan menambahkan giliran pengguna baru Anda sebagai langkah `user_input`.
+- **लेगसी**: डेवलपर अक्सर जवाबों से `outputs` कलेक्शन इकट्ठा करते थे और अगले टर्न में, उन्हें `input` फ़ील्ड में वापस भेजते थे.
+- **नया स्कीमा**: अब आपको जवाब से `steps` कलेक्शन इकट्ठा करना चाहिए और अगले अनुरोध के `input` फ़ील्ड में इसे पास करना चाहिए. साथ ही, अपने नए उपयोगकर्ता टर्न को `user_input` स्टेप के तौर पर जोड़ना चाहिए.
 
-## Konfigurasi format output: Perubahan `response_format`
+## आउटपुट फ़ॉर्मैट कॉन्फ़िगरेशन: `response_format` में बदलाव
 
-API yang diperbarui mengonsolidasikan semua kontrol format output ke dalam kolom `response_format` polimorfik terpadu. Hal ini memusatkan konfigurasi output di tingkat atas dan membuat `generation_config` berfokus pada perilaku model (seperti temperatur, top\_p, dan pemikiran).
+अपडेट किए गए एपीआई में, आउटपुट फ़ॉर्मैट के सभी कंट्रोल को एक ही पॉलीमॉर्फिक `response_format` फ़ील्ड में शामिल किया गया है. इससे, टॉप लेवल पर आउटपुट कॉन्फ़िगरेशन को केंद्रीकृत किया जाता है. साथ ही, `generation_config` को मॉडल के व्यवहार (जैसे, तापमान, top\_p, और थिंकिंग) पर फ़ोकस किया जाता है.
 
-### Perubahan penting
+### मुख्य बदलाव
 
-- **API menghapus `response_mime_type`.** Sekarang Anda menentukan jenis MIME per entri format di dalam `response_format`.
-- **`response_format` kini merupakan objek (atau array) polimorfik.** Setiap entri memiliki diskriminator `type` (`text`, `audio`, `image`) dan kolom khusus jenis. Untuk meminta beberapa modalitas output, teruskan array entri format.
-- **`image_config` dipindahkan dari `generation_config` ke `response_format`.**
-  Sekarang Anda menentukan setelan output gambar seperti `aspect_ratio` dan `image_size`
-  dalam entri `response_format` dengan `"type": "image"`.
+- **एपीआई, `response_mime_type` को हटाता है.** अब आपको `response_format` में, हर फ़ॉर्मैट की एंट्री के लिए MIME टाइप तय करना होगा.
+- **`response_format` अब पॉलीमॉर्फिक ऑब्जेक्ट (या कलेक्शन) है.** हर एंट्री में, `type` डिस्क्रिमिनेटर (`text`, `audio`, `image`) और टाइप के हिसाब से फ़ील्ड होते हैं. आउटपुट के कई तरीके का अनुरोध करने के लिए, फ़ॉर्मैट की एंट्री का कलेक्शन पास करें.
+- **`image_config`, `generation_config` से `response_format` में चला जाता है.**
+  अब आपको `"type": "image"` के साथ `response_format` एंट्री में, इमेज आउटपुट सेटिंग तय करनी होंगी. जैसे, `aspect_ratio` और `image_size`
+  .
 
-### Output terstruktur (JSON)
+### स्ट्रक्चर्ड आउटपुट (JSON)
 
-Skema baru menghapus kolom `response_mime_type`. Sebagai gantinya, tentukan
-jenis MIME dan skema JSON di dalam objek `response_format` dengan
+नए स्कीमा में, `response_mime_type` फ़ील्ड को हटा दिया गया है. इसके बजाय, `response_format` ऑब्जेक्ट में, MIME टाइप और JSON स्कीमा तय करें
 `"type": "text"`.
 
-#### Sebelum (lama)
+#### पहले (लेगसी)
 
 ### Python
 
@@ -659,8 +656,8 @@ print(interaction.outputs[-1].text)
 const interaction = await client.interactions.create({
     model: 'gemini-3-flash-preview',
     input: 'Summarize this article.',
-    responseMimeType: 'application/json',
-    responseFormat: {
+    response_mime_type: 'application/json',
+    response_format: {
         type: 'object',
         properties: {
             summary: { type: 'string' }
@@ -689,7 +686,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### Setelah (skema baru)
+#### बाद में (नया स्कीमा)
 
 ### Python
 
@@ -719,10 +716,10 @@ print(interaction.steps[-1].content[0].text)
 const interaction = await client.interactions.create({
     model: 'gemini-3-flash-preview',
     input: 'Summarize this article.',
-    // responseMimeType is removed — specify mimeType inside responseFormat
-    responseFormat: {
+    // response_mime_type is removed — specify mime_type inside response_format
+    response_format: {
         type: 'text',
-        mimeType: 'application/json',
+        mime_type: 'application/json',
         schema: {
             type: 'object',
             properties: {
@@ -758,12 +755,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-### Konfigurasi gambar
+### इमेज कॉन्फ़िगरेशन
 
-Skema baru menghapus `image_config` dari `generation_config`. Sekarang Anda menentukan
-setelan output gambar dalam entri `response_format` dengan `"type": "image"`.
+नए स्कीमा में, `generation_config` से `image_config` को हटा दिया गया है. अब आपको `response_format` एंट्री में, इमेज आउटपुट सेटिंग तय करनी होंगी
+`"type": "image"`.
 
-#### Sebelum (lama)
+#### पहले (लेगसी)
 
 ### Python
 
@@ -786,10 +783,10 @@ interaction = client.interactions.create(
 const interaction = await client.interactions.create({
     model: 'gemini-3-flash-preview',
     input: 'Generate an image of a sunset over the ocean.',
-    generationConfig: {
-        imageConfig: {
-            aspectRatio: '1:1',
-            imageSize: '1K'
+    generation_config: {
+        image_config: {
+            aspect_ratio: '1:1',
+            image_size: '1K'
         }
     },
 });
@@ -812,7 +809,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### Setelah (skema baru)
+#### बाद में (नया स्कीमा)
 
 ### Python
 
@@ -824,7 +821,6 @@ interaction = client.interactions.create(
     response_format={
         "type": "image",
         "mime_type": "image/jpeg",
-        "delivery": "inline",
         "aspect_ratio": "1:1",
         "image_size": "1K"
     },
@@ -837,13 +833,12 @@ interaction = client.interactions.create(
 const interaction = await client.interactions.create({
     model: 'gemini-3-flash-preview',
     input: 'Generate an image of a sunset over the ocean.',
-    // imageConfig is removed from generationConfig — use responseFormat
-    responseFormat: {
+    // image_config is removed from generation_config — use response_format
+    response_format: {
         type: 'image',
-        mimeType: 'image/jpeg',
-        delivery: 'inline',
-        aspectRatio: '1:1',
-        imageSize: '1K'
+        mime_type: 'image/jpeg',
+        aspect_ratio: '1:1',
+        image_size: '1K'
     },
 });
 ```
@@ -861,59 +856,58 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
     "response_format": {
       "type": "image",
       "mime_type": "image/jpeg",
-      "delivery": "inline",
       "aspect_ratio": "1:1",
       "image_size": "1K"
     }
   }'
 ```
 
-Untuk meminta beberapa modalitas output (misalnya, teks dan audio bersama-sama), teruskan array entri format ke `response_format`, bukan satu objek.
+आउटपुट के कई तरीके का अनुरोध करने के लिए (उदाहरण के लिए, टेक्स्ट और ऑडियो एक साथ), `response_format` में एक ऑब्जेक्ट के बजाय, फ़ॉर्मैट की एंट्री का कलेक्शन पास करें.
 
-## Cara melakukan migrasi ke skema baru
+## नए स्कीमा पर माइग्रेट करने का तरीका
 
-### Pengguna SDK
+### एसडीके का इस्तेमाल करने वाले लोग
 
-Upgrade ke versi SDK terbaru (Python ≥2.0.0, JavaScript ≥2.0.0). SDK secara otomatis mengikutsertakan Anda ke dalam skema baru — tidak ada perubahan kode yang diperlukan selain memperbarui cara Anda membaca respons (lihat contoh di atas). Perhatikan bahwa hanya skema baru yang didukung dalam versi SDK ini. Versi SDK lama (Python 1.x.x, JavaScript 1.x.x) akan terus berfungsi hingga skema lama dihapus pada **8 Juni 2026**.
+एसडीके के नए वर्शन (Python ≥2.0.0, JavaScript ≥2.0.0) पर अपग्रेड करें. एसडीके, आपको नए स्कीमा में अपने-आप ऑप्ट-इन कर लेता है. इसके लिए, कोड में किसी तरह के बदलाव की ज़रूरत नहीं होती. आपको सिर्फ़ जवाब पढ़ने के तरीके को अपडेट करना होगा. इसके लिए, ऊपर दिए गए उदाहरण देखें. ध्यान दें कि एसडीके के इन वर्शन में, सिर्फ़ नया स्कीमा काम करता है. एसडीके के पुराने वर्शन (Python 1.x.x, JavaScript 1.x.x), **8 जून, 2026** को लेगसी स्कीमा हटाए जाने तक काम करते रहेंगे.
 
-### Pengguna REST API
+### REST API का इस्तेमाल करने वाले लोग
 
-Tambahkan header `Api-Revision: 2026-05-20` ke permintaan Anda untuk ikut serta ke dalam skema baru sekarang. Setelah **26 Mei**, skema baru akan menjadi default untuk semua
-permintaan. Anda dapat memilih tidak ikut serta untuk sementara dengan `Api-Revision: 2026-05-07`
-hingga **8 Juni**, saat API menghapus skema lama secara permanen.
+नए स्कीमा में अभी ऑप्ट-इन करने के लिए, अपने अनुरोधों में `Api-Revision: 2026-05-20` हेडर जोड़ें. **26 मई** के बाद, नया स्कीमा सभी
+अनुरोधों के लिए डिफ़ॉल्ट स्कीमा बन जाएगा. **8 जून** तक, `Api-Revision: 2026-05-07`
+का इस्तेमाल करके, अस्थायी तौर पर ऑप्ट-आउट किया जा सकता है. इसके बाद, एपीआई, लेगसी स्कीमा को हमेशा के लिए हटा देगा.
 
-### Linimasa
+### टाइमलाइन
 
-| Tanggal | Fase | Pengguna SDK | Pengguna REST API |
+| तारीख | फ़ेज़ (चरण) | एसडीके का इस्तेमाल करने वाले लोग | REST API का इस्तेमाल करने वाले लोग |
 | --- | --- | --- | --- |
-| **7 Mei** | Ikut serta | Versi SDK baru tersedia (Python ≥2.0.0, JS ≥2.0.0). Upgrade untuk mendapatkan skema baru secara otomatis. | Tambahkan header `Api-Revision: 2026-05-20` untuk ikut serta. Default tetap lama. |
-| **26 Mei** | Perubahan default | Tidak ada tindakan yang diperlukan jika sudah diupgrade. SDK lama (Python 1.x.x, JS 1.x.x) masih berfungsi, tetapi menampilkan respons lama. | Skema baru kini menjadi default. Kirim header `Api-Revision: 2026-05-07` untuk memilih tidak ikut serta. |
-| **8 Juni** | Senja | Versi SDK Python 1.x.x dan JS 1.x.x akan rusak untuk panggilan Interactions API. | Skema lama dihapus untuk Interactions API. Header `Api-Revision` diabaikan. |
+| **7 मई** | ऑप्ट-इन करें | एसडीके का नया वर्शन उपलब्ध है (Python ≥2.0.0, JS ≥2.0.0). नए स्कीमा को अपने-आप पाने के लिए, अपग्रेड करें. | ऑप्ट-इन करने के लिए, `Api-Revision: 2026-05-20` हेडर जोड़ें. डिफ़ॉल्ट स्कीमा, लेगसी ही रहेगा. |
+| **26 मई** | डिफ़ॉल्ट स्कीमा में बदलाव | अगर पहले ही अपग्रेड कर लिया गया है, तो कुछ करने की ज़रूरत नहीं है. एसडीके के पुराने वर्शन (Python 1.x.x, JS 1.x.x) अब भी काम करेंगे. हालांकि, इनसे लेगसी स्कीमा के जवाब मिलेंगे. | नया स्कीमा अब डिफ़ॉल्ट स्कीमा है. ऑप्ट-आउट करने के लिए, `Api-Revision: 2026-05-07` हेडर भेजें. |
+| **8 जून** | सूर्यास्त | Interactions API कॉल के लिए, Python 1.x.x और JS 1.x.x एसडीके वर्शन काम नहीं करेंगे. | Interactions API के लिए, लेगसी स्कीमा हटा दिया गया है. `Api-Revision` हेडर को नज़रअंदाज़ किया जाएगा. |
 
-## Checklist Migrasi
+## माइग्रेशन की चेकलिस्ट
 
-### Skema langkah (`steps`)
+### स्टेप स्कीमा (`steps`)
 
-- Perbarui kode untuk membaca konten respons dari array `steps`, bukan `outputs`. [Lihat contoh](#basic-unary).
-- Pastikan kode Anda menangani jenis langkah `user_input` dan `model_output`. [Lihat contoh](#basic-unary).
-- (Panggilan Fungsi) Perbarui kode untuk menemukan langkah `function_call` dalam array `steps`. [Lihat contoh](#function-calling).
-- (Alat Sisi Server) Perbarui kode untuk menangani langkah-langkah khusus alat (misalnya, `google_search_call`, `google_search_result`). [Lihat contoh](#server-side-tools).
-- (Histori Tanpa Status) Perbarui pengelolaan histori untuk meneruskan array `steps` di kolom `input` permintaan berikutnya. [Lihat detail](#stateless-history).
-- (Hanya Streaming) Perbarui klien untuk memproses jenis peristiwa SSE baru (`interaction.created`, `step.delta`, dll.). [Lihat contoh](#streaming).
+- जवाब के कॉन्टेंट को `outputs` के बजाय `steps` कलेक्शन से पढ़ने के लिए, कोड अपडेट करें. [उदाहरण देखें](#basic-unary).
+- पक्का करें कि आपका कोड, `user_input` और `model_output` दोनों तरह के स्टेप को हैंडल करता हो. [उदाहरण देखें](#basic-unary).
+- (फ़ंक्शन कॉल करना) `steps` कलेक्शन में `function_call` स्टेप ढूंढने के लिए, कोड अपडेट करें. [उदाहरण देखें](#function-calling).
+- (सर्वर-साइड टूल) टूल के हिसाब से स्टेप (जैसे, `google_search_call`, `google_search_result`) को हैंडल करने के लिए, कोड अपडेट करें. [उदाहरण देखें](#server-side-tools).
+- (स्टेटलेस इतिहास) इतिहास को मैनेज करने के तरीके को अपडेट करें, ताकि अगले अनुरोध के `input` फ़ील्ड में `steps` कलेक्शन पास किया जा सके. [जानकारी देखें](#stateless-history).
+- (सिर्फ़ स्ट्रीमिंग) नए SSE इवेंट टाइप (`interaction.created`, `step.delta` वगैरह) सुनने के लिए, क्लाइंट को अपडेट करें. [उदाहरण देखें](#streaming).
 
-### Konfigurasi format output (`response_format`)
+### आउटपुट फ़ॉर्मैट कॉन्फ़िगरेशन (`response_format`)
 
-- Ganti `response_mime_type` dengan kolom `mime_type` di dalam `response_format`. [Lihat contoh](#structured-output).
-- Gabungkan skema JSON `response_format` yang ada di dalam objek `{"type": "text", "schema": ...}`. [Lihat contoh](#structured-output).
-- (Pembuatan Gambar) Pindahkan `image_config` dari `generation_config` ke entri `{"type": "image", ...}` di `response_format`. [Lihat contoh](#image-config).
-- (Multimodal) Konversi `response_format` dari satu objek ke array saat meminta beberapa modalitas output.
+- `response_mime_type` की जगह, `response_format` में `mime_type` फ़ील्ड का इस्तेमाल करें. [उदाहरण देखें](#structured-output).
+- अपने मौजूदा `response_format` JSON स्कीमा को `{"type": "text", "schema": ...}` ऑब्जेक्ट में रैप करें. [उदाहरण देखें](#structured-output).
+- (इमेज जनरेट करना) `image_config` को `generation_config` से हटाकर, `response_format` में `{"type": "image", ...}` एंट्री में ले जाएं. [उदाहरण देखें](#image-config).
+- (मल्टीमॉडल) आउटपुट के कई तरीके का अनुरोध करते समय, `response_format` को एक ऑब्जेक्ट से कलेक्शन में बदलें.
 
-Kirim masukan
+सुझाव भेजें
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Terakhir diperbarui pada 2026-05-08 UTC.
+आखिरी बार 2026-05-12 (UTC) को अपडेट किया गया.
 
-Ada masukan untuk kami?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-05-08 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-05-12 (UTC) को अपडेट किया गया."],[],[]]

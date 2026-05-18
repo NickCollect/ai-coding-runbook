@@ -1,49 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=vi
-fetched_at: 2026-05-11T04:58:55.206250+00:00
+source_url: https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=ar
+fetched_at: 2026-05-18T05:09:44.181207+00:00
 title: "Ephemeral tokens \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
 # Ephemeral tokens
 
-Mã thông báo tạm thời là mã thông báo xác thực có thời gian tồn tại ngắn để truy cập vào Gemini
-API thông qua [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). Mã thông báo này được thiết kế để tăng cường bảo mật khi
-bạn kết nối trực tiếp từ thiết bị của người dùng đến API (triển khai
-[từ ứng dụng đến máy chủ](https://ai.google.dev/gemini-api/docs/live?hl=vi#implementation-approach)
-). Giống như khoá API tiêu chuẩn, bạn có thể trích xuất mã thông báo tạm thời từ các ứng dụng phía máy khách, chẳng hạn như trình duyệt web hoặc ứng dụng di động. Tuy nhiên, vì mã thông báo tạm thời hết hạn nhanh chóng và có thể bị hạn chế, nên mã thông báo này giúp giảm đáng kể các rủi ro bảo mật trong môi trường phát hành chính thức. Bạn nên sử dụng mã thông báo này khi truy cập trực tiếp vào Live API từ các ứng dụng phía máy khách để tăng cường bảo mật khoá API.
+الرموز المميزة المؤقتة هي رموز مميزة قصيرة الأمد للمصادقة تُستخدَم للوصول إلى Gemini API من خلال [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). وهي مصمَّمة لتعزيز الأمان عند الربط مباشرةً من جهاز المستخدم بواجهة برمجة التطبيقات (تنفيذ [من العميل إلى الخادم](https://ai.google.dev/gemini-api/docs/live?hl=ar#implementation-approach)). مثل مفاتيح واجهة برمجة التطبيقات العادية، يمكن استخراج الرموز المميزة المؤقتة من التطبيقات من جهة العميل، مثل متصفّحات الويب أو تطبيقات الأجهزة الجوّالة. ولكن بما أنّ الرموز المميزة المؤقتة تنتهي صلاحيتها بسرعة ويمكن حصرها، فإنّها تقلّل بشكل كبير من المخاطر الأمنية في بيئة الإنتاج. يجب استخدامها عند الوصول إلى Live API مباشرةً من تطبيقات من جهة العميل لتعزيز أمان مفتاح واجهة برمجة التطبيقات.
 
- 
+## طريقة عمل الرموز المميزة المؤقتة
 
-## Cách hoạt động của mã thông báo tạm thời
+في ما يلي طريقة عمل الرموز المميزة المؤقتة على مستوى عالٍ:
 
-Sau đây là cách hoạt động của mã thông báo tạm thời ở cấp độ cao:
+1. يتم مصادقة العميل (مثل تطبيق الويب) مع الخلفية.
+2. يرسل الخلفية طلبًا للحصول على رمز مميّز مؤقت من خدمة التوفير في Gemini API.
+3. يصدر Gemini API رمزًا مميزًا صالحًا لفترة قصيرة.
+4. يرسل الخلفية الرمز المميّز إلى العميل لعمليات ربط WebSocket بواجهة Live
+   API. يمكنك إجراء ذلك عن طريق استبدال مفتاح واجهة برمجة التطبيقات برمز مميّز مؤقت.
+5. يستخدم العميل بعد ذلك الرمز المميز كما لو كان مفتاح واجهة برمجة تطبيقات.
 
-1. Ứng dụng của bạn (ví dụ: ứng dụng web) xác thực với phần phụ trợ.
-2. Phần phụ trợ của bạn yêu cầu mã thông báo tạm thời từ dịch vụ cung cấp của Gemini API.
-3. Gemini API phát hành mã thông báo có thời gian tồn tại ngắn.
-4. Phần phụ trợ của bạn gửi mã thông báo đến ứng dụng để kết nối WebSocket với Live API. Bạn có thể thực hiện việc này bằng cách đổi khoá API của mình thành mã thông báo tạm thời.
-5. Sau đó, ứng dụng sẽ sử dụng mã thông báo này như thể đó là khoá API.
+![نظرة عامة على الرموز المميزة المؤقتة](https://ai.google.dev/static/gemini-api/docs/images/Live_API_01.png?hl=ar)
 
-![Tổng quan về mã thông báo tạm thời](https://ai.google.dev/static/gemini-api/docs/images/Live_API_01.png?hl=vi)
+ويؤدي ذلك إلى تعزيز الأمان لأنّ الرمز المميّز، حتى إذا تم استخراجه، يكون صالحًا لفترة قصيرة، على عكس مفتاح واجهة برمجة التطبيقات الذي يتم نشره من جهة العميل ويكون صالحًا لفترة طويلة. بما أنّ العميل يرسل البيانات مباشرةً إلى Gemini، يؤدي ذلك أيضًا إلى تحسين وقت الاستجابة وتجنُّب حاجة الأنظمة الخلفية إلى إرسال البيانات في الوقت الفعلي عبر خادم وكيل.
 
-Điều này giúp tăng cường bảo mật vì ngay cả khi được trích xuất, mã thông báo này cũng có thời gian tồn tại ngắn, không giống như khoá API có thời gian tồn tại dài được triển khai ở phía máy khách. Vì ứng dụng gửi dữ liệu trực tiếp đến Gemini, nên điều này cũng giúp cải thiện độ trễ và tránh việc phần phụ trợ của bạn cần phải làm trung gian cho dữ liệu theo thời gian thực.
+## إنشاء رمز مميّز مؤقت
 
-## Tạo mã thông báo tạm thời
-
-Sau đây là ví dụ đơn giản về cách nhận mã thông báo tạm thời từ Gemini.
-Theo mặc định, bạn sẽ có 1 phút để bắt đầu các phiên Live API mới bằng mã thông báo từ yêu cầu này (`newSessionExpireTime`) và 30 phút để gửi thông báo qua kết nối đó (`expireTime`).
+في ما يلي مثال مبسّط على كيفية الحصول على رمز مميّز مؤقت من Gemini.
+بشكلٍ تلقائي، سيكون لديك دقيقة واحدة لبدء جلسات جديدة في Live API باستخدام الرمز المميّز من هذا الطلب (`newSessionExpireTime`)، و30 دقيقة لإرسال الرسائل عبر هذا الاتصال (`expireTime`).
 
 ### Python
 
@@ -87,14 +82,12 @@ const expireTime = new Date(Date.now() + 30 * 60 * 1000).toISOString();
   });
 ```
 
-Để biết các ràng buộc về giá trị `expireTime`, giá trị mặc định và các thông số kỹ thuật khác của trường, hãy xem tài liệu tham khảo về API
-.
-Trong khung thời gian `expireTime`, bạn sẽ cần
-[`sessionResumption`](https://ai.google.dev/gemini-api/docs/live-session?hl=vi#session-resumption) để
-kết nối lại lệnh gọi sau mỗi 10 phút (bạn có thể thực hiện việc này bằng cùng một mã thông báo ngay cả
-khi `uses: 1`).
+للاطّلاع على قيود القيمة `expireTime` والإعدادات التلقائية ومواصفات الحقول الأخرى، يُرجى الرجوع إلى
+[مرجع واجهة برمجة التطبيقات](https://ai.google.dev/api/live?hl=ar#ephemeral-auth-tokens).
+خلال الإطار الزمني `expireTime`، عليك
+[`sessionResumption`](https://ai.google.dev/gemini-api/docs/live-session?hl=ar#session-resumption) إعادة ربط المكالمة كل 10 دقائق (يمكن إجراء ذلك باستخدام الرمز المميز نفسه حتى إذا كان `uses: 1`).
 
-Bạn cũng có thể khoá mã thông báo tạm thời đối với một nhóm cấu hình. Điều này có thể hữu ích để cải thiện thêm tính bảo mật của ứng dụng và giữ các hướng dẫn của hệ thống ở phía máy chủ.
+من الممكن أيضًا حصر استخدام الرمز المميز المؤقت بمجموعة من الإعدادات. قد يكون ذلك مفيدًا لتعزيز أمان تطبيقك بشكل أكبر والحفاظ على تعليمات النظام على الخادم.
 
 ### Python
 
@@ -150,15 +143,14 @@ const token = await client.authTokens.create({
 // You'll need to pass the value under token.name back to your client to use it
 ```
 
-Bạn cũng có thể khoá một nhóm nhỏ các trường. Hãy xem [tài liệu về SDK](https://googleapis.github.io/python-genai/genai.html#genai.types.CreateAuthTokenConfig.lock_additional_fields)
-để biết thêm thông tin.
+يمكنك أيضًا قفل مجموعة فرعية من الحقول، راجِع [مستندات حزمة SDK](https://googleapis.github.io/python-genai/genai.html#genai.types.CreateAuthTokenConfig.lock_additional_fields)
+للحصول على مزيد من المعلومات.
 
-## Kết nối với Live API bằng mã thông báo tạm thời
+## الربط بواجهة Live API باستخدام رمز مميز مؤقت
 
-Sau khi có mã thông báo tạm thời, bạn sẽ sử dụng mã thông báo này như thể đó là khoá API (nhưng hãy nhớ rằng mã thông báo này chỉ hoạt động đối với Live API và chỉ với phiên bản `v1alpha` của API).
+بعد الحصول على رمز مميّز مؤقت، يمكنك استخدامه كما لو كان مفتاح واجهة برمجة تطبيقات (ولكن تذكَّر أنّه يعمل فقط مع واجهة برمجة التطبيقات المباشرة، ومع الإصدار `v1alpha` من واجهة برمجة التطبيقات فقط).
 
-Việc sử dụng mã thông báo tạm thời chỉ mang lại giá trị khi triển khai các ứng dụng
-tuân theo [phương pháp triển khai từ ứng dụng đến máy chủ](https://ai.google.dev/gemini-api/docs/live?hl=vi#implementation-approach).
+لا يضيف استخدام الرموز المميزة المؤقتة قيمة إلا عند نشر التطبيقات التي تتّبع نهج [التنفيذ من العميل إلى الخادم](https://ai.google.dev/gemini-api/docs/live?hl=ar#implementation-approach).
 
 ### JavaScript
 
@@ -188,29 +180,29 @@ async function main() {
 main();
 ```
 
-Hãy xem bài viết [Bắt đầu sử dụng Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi) để biết thêm ví dụ.
+يمكنك الاطّلاع على [بدء استخدام Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar) للحصول على مزيد من الأمثلة.
 
-## Các phương pháp hay nhất
+## أفضل الممارسات
 
-- Đặt thời gian hết hạn ngắn bằng tham số `expire_time`.
-- Mã thông báo sẽ hết hạn, yêu cầu bạn phải khởi động lại quy trình cung cấp.
-- Xác minh quá trình xác thực an toàn cho phần phụ trợ của riêng bạn. Mã thông báo tạm thời sẽ chỉ an toàn như phương thức xác thực phần phụ trợ của bạn.
-- Nói chung, hãy tránh sử dụng mã thông báo tạm thời cho các kết nối từ phần phụ trợ đến Gemini, vì đường dẫn này thường được coi là an toàn.
+- اضبط مدة انتهاء صلاحية قصيرة باستخدام المَعلمة `expire_time`.
+- تنتهي صلاحية الرموز المميزة، ما يتطلّب إعادة بدء عملية توفير المتطلبات اللازمة.
+- إثبات صحة المصادقة الآمنة للخادم الخلفي لن تكون الرموز المميزة المؤقتة آمنة إلا بقدر أمان طريقة المصادقة في الخلفية.
+- بشكل عام، تجنَّب استخدام الرموز المميزة المؤقتة للاتصالات بين الخلفية وGemini، لأنّ هذا المسار يُعدّ آمنًا عادةً.
 
-## Các điểm hạn chế
+## القيود
 
-Hiện tại, mã thông báo tạm thời chỉ tương thích với [Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi).
+تتوافق الرموز المميزة المؤقتة مع [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar) فقط في الوقت الحالي.
 
-## Bước tiếp theo
+## الخطوات التالية
 
-- Đọc tài liệu tham khảo API Live [trên mã thông báo tạm thời](https://ai.google.dev/api/live?hl=vi#ephemeral-auth-tokens) để biết thêm thông tin.
+- يمكنك الاطّلاع على [مرجع](https://ai.google.dev/api/live?hl=ar#ephemeral-auth-tokens) Live API بشأن الرموز المميزة المؤقتة للحصول على مزيد من المعلومات.
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+تاريخ التعديل الأخير: 2026-05-13 (حسب التوقيت العالمي المتفَّق عليه)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-13 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

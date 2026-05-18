@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/interactions?hl=id
-fetched_at: 2026-05-11T05:05:16.301898+00:00
+fetched_at: 2026-05-18T05:14:00.226299+00:00
 title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -24,7 +24,7 @@ Interactions API adalah primitif standar baru untuk membangun dengan Gemini, yan
 
 - **Pengelolaan histori sisi server**: Alur multi-turn yang disederhanakan melalui `previous_interaction_id`. Server mengaktifkan status secara default (`store=true`), tetapi Anda dapat memilih perilaku tanpa status dengan menyetel `store=false`.
 - **Langkah-langkah eksekusi yang dapat diamati**: Langkah-langkah yang diketik memudahkan proses debug alur yang kompleks dan merender UI untuk peristiwa perantara (seperti pemikiran atau widget penelusuran).
-- **Dibuat untuk alur kerja agentic**: Dukungan native untuk penggunaan alat multi-langkah, orkestrasi, dan alur penalaran yang kompleks melalui langkah-langkah eksekusi yang diketik.
+- **Dibuat untuk alur kerja agentic**: Dukungan native untuk penggunaan alat multilangkah, orkestrasi, dan alur penalaran kompleks melalui langkah-langkah eksekusi yang diketik.
 - **Tugas latar belakang dan berjalan lama**: Mendukung operasi yang memakan waktu seperti [Deep Think](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=id) dan [Deep Research](https://ai.google.dev/gemini-api/docs/interactions/deep-research?hl=id) ke proses latar belakang menggunakan `background=true`.
 - **Akses ke model dan kemampuan baru**: Ke depannya, model baru di luar keluarga mainline inti, beserta kemampuan dan alat agentic baru, akan diluncurkan secara eksklusif di Interactions API.
 
@@ -55,6 +55,7 @@ Pelajari kemampuan spesifik Interactions API melalui panduan ini. Anda dapat men
 - [Agen Deep Research](https://ai.google.dev/gemini-api/docs/interactions/deep-research?hl=id)
 - [Inferensi fleksibel](https://ai.google.dev/gemini-api/docs/interactions/flex-inference?hl=id)
 - [Inferensi prioritas](https://ai.google.dev/gemini-api/docs/interactions/priority-inference?hl=id)
+- [Streaming](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=id)
 
 ## Cara kerja Interactions API
 
@@ -89,7 +90,8 @@ Secara default, API menyimpan semua objek Interaksi (`store=true`) untuk menyede
 - **Paket Gratis**: Sistem menyimpan interaksi selama **1 hari**.
 
 Jika tidak menginginkannya, Anda dapat
-menetapkan `store=false` dalam permintaan Anda. Kontrol ini terpisah dari pengelolaan status; Anda dapat menonaktifkan penyimpanan untuk interaksi apa pun. Namun, perhatikan bahwa
+menetapkan `store=false` dalam permintaan Anda. Kontrol ini terpisah dari pengelolaan status
+; Anda dapat menonaktifkan penyimpanan untuk interaksi apa pun. Namun, perhatikan bahwa
 `store=false` tidak kompatibel dengan `background=true` dan mencegah penggunaan
 `previous_interaction_id` untuk giliran berikutnya.
 
@@ -155,14 +157,15 @@ Interactions API:
 
 Interactions API saat ini berada dalam tahap beta awal. Kami secara aktif
 mengembangkan dan menyempurnakan kemampuan API, skema resource, dan antarmuka
-SDK berdasarkan penggunaan di dunia nyata dan masukan developer.
+SDK berdasarkan penggunaan di dunia nyata dan masukan developer. Akibatnya, **perubahan yang menyebabkan gangguan dapat terjadi**.
 
-Akibatnya, **perubahan yang menyebabkan gangguan dapat terjadi**.
-Pembaruan dapat mencakup perubahan pada:
+Perubahan yang dapat menyebabkan gangguan yang ada:
 
-- Skema untuk input dan output.
-- Tanda tangan metode dan struktur objek SDK.
-- Perilaku fitur tertentu.
+- **Skema langkah**: Array langkah baru menggantikan array output, yang memberikan linimasa terstruktur dari setiap giliran interaksi.
+
+Untuk mempelajari perubahan yang dapat menyebabkan gangguan terbaru dan memahami cara bermigrasi, lihat [Panduan migrasi perubahan yang dapat menyebabkan gangguan (Mei 2026)](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=id).
+
+Update potensial lainnya dapat mencakup perubahan pada skema untuk input dan output, tanda tangan metode SDK dan struktur objek, perilaku fitur tertentu.
 
 Untuk workload produksi, Anda harus terus menggunakan API [`generateContent`](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=id) standar. Cara ini tetap menjadi jalur yang direkomendasikan untuk deployment yang stabil, dan kami akan terus mengembangkannya dan memeliharanya secara aktif.
 
@@ -175,14 +178,15 @@ Sampaikan pendapat Anda, laporkan bug, atau minta fitur di
 ## Langkah berikutnya
 
 - Coba [notebook panduan memulai Interactions API](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_interactions_api.ipynb?hl=id).
+- Pelajari [Interaksi streaming](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=id) untuk penanganan respons real-time.
 - Pelajari lebih lanjut [Agen Deep Research Gemini](https://ai.google.dev/gemini-api/docs/interactions/deep-research?hl=id).
 
 Kirim masukan
 
 Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Terakhir diperbarui pada 2026-05-08 UTC.
+Terakhir diperbarui pada 2026-05-16 UTC.
 
 Ada masukan untuk kami?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-05-08 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-05-16 UTC."],[],[]]

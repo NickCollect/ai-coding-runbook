@@ -1,125 +1,134 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api?hl=pl
-fetched_at: 2026-05-11T05:01:12.326551+00:00
+source_url: https://ai.google.dev/gemini-api/docs/live-api?hl=ar
+fetched_at: 2026-05-18T05:17:24.597274+00:00
 title: "Gemini Live API overview \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Prześlij opinię
+إرسال ملاحظات
 
 # Gemini Live API overview
 
-Interfejs Live API umożliwia interakcje głosowe i wizualne z Gemini w czasie rzeczywistym z niewielkimi opóźnieniami. Przetwarza ciągłe strumienie dźwięku, obrazów i tekstu, aby dostarczać natychmiastowe, podobne do ludzkich odpowiedzi głosowe, tworząc naturalne doświadczenie konwersacyjne dla użytkowników.
+تتيح Live API التفاعل مع Gemini صوتيًا ومرئيًا في الوقت الفعلي وبزمن انتقال منخفض. تعالج هذه الواجهة تدفقات مستمرة من الصوت والصور والنصوص لتقديم ردود فورية منطوقة تشبه ردود البشر، ما يتيح للمستخدمين تجربة محادثة طبيعية.
 
-![Omówienie interfejsu Live API](https://ai.google.dev/static/gemini-api/docs/images/live-api-overview.png?hl=pl)
+![نظرة عامة على Live API](https://ai.google.dev/static/gemini-api/docs/images/live-api-overview.png?hl=ar)
 
-[Wypróbuj interfejs Live API w Google AI Studiomic](https://aistudio.google.com/live?hl=pl)
-[Sklonuj przykładowe aplikacje z GitHubcode](https://github.com/google-gemini/gemini-live-api-examples)
-[Korzystaj z umiejętności agenta do kodowaniaterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=pl)
+[تجربة Live API في Google AI Studiomic](https://aistudio.google.com/live?hl=ar)
+[استنساخ تطبيقات نموذجية من GitHubcode](https://github.com/google-gemini/gemini-live-api-examples)
+[استخدام مهارات وكيل الترميزterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=ar)
 
-## Przypadki użycia
+## حالات الاستخدام
 
-Interfejs Live API może być używany do tworzenia agentów głosowych w czasie rzeczywistym w różnych branżach, m.in.:
+يمكن استخدام Live API لإنشاء وكلاء صوتيين في الوقت الفعلي لمجموعة متنوعة من المجالات، بما في ذلك:
 
-- **E-commerce i handel detaliczny:** asystenci zakupów, którzy oferują spersonalizowane rekomendacje, oraz agenci obsługi klienta, którzy rozwiązują problemy klientów.
-- **Gry:** interaktywne postacie niezależne, pomoc w grze i tłumaczenie treści w czasie rzeczywistym.
-- **Interfejsy nowej generacji:** funkcje głosowe i wideo w robotyce, inteligentnych okularach i pojazdach.
-- **Opieka zdrowotna:** towarzysze zdrowia, którzy wspierają pacjentów i edukują ich.
-- **Usługi finansowe:** doradcy AI w zakresie zarządzania kapitałem i inwestycjami.
-- **Edukacja:** mentorzy i towarzysze nauki oparte na AI, którzy zapewniają spersonalizowane instrukcje i opinie.
+- **التجارة الإلكترونية والبيع بالتجزئة:** مساعدو التسوّق الذين يقدّمون اقتراحات مخصّصة ووكلاء الدعم الذين يحلّون مشاكل العملاء
+- **الألعاب:** شخصيات تفاعلية لا يتحكّم بها اللاعب (NPC) ومساعدون داخل اللعبة وترجمة في الوقت الفعلي للمحتوى داخل اللعبة
+- **الجيل التالي من واجهات المستخدم:** تجارب تستخدم الصوت والفيديو في الروبوتات والنظارات الذكية والمركبات
+- **الرعاية الصحية:** رفقاء صحيون لتقديم الدعم للمرضى وتثقيفهم
+- **الخدمات المالية:** مستشارون يعملون بالذكاء الاصطناعي لإدارة الثروات وتقديم إرشادات حول الاستثمار
+- **التعليم:** مرشدون ومرافقون للمتعلّمين يستندون إلى الذكاء الاصطناعي ويقدّمون تعليمات وملاحظات مخصّصة.
 
-## Najważniejsze funkcje
+## الميزات الرئيسية
 
-Interfejs Live API oferuje kompleksowy zestaw funkcji do tworzenia niezawodnych agentów głosowych:
+تقدّم Live API مجموعة شاملة من الميزات لإنشاء وكلاء صوتيين فعّالين:
 
-- [**Obsługa wielu języków:**](https://ai.google.dev/gemini-api/docs/live-guide?hl=pl#supported-languages) rozmawiaj w 70 obsługiwanych językach.
-- [**Przerwanie**](https://ai.google.dev/gemini-api/docs/live-guide?hl=pl#interruptions): użytkownicy mogą w dowolnym momencie przerwać działanie modelu, aby uzyskać interaktywne odpowiedzi.
-- [**Korzystanie z narzędzi:**](https://ai.google.dev/gemini-api/docs/live-tools?hl=pl)
-  integruje narzędzia takie jak wywoływanie funkcji i wyszukiwarka Google, aby umożliwiać dynamiczne interakcje.
-- [**Transkrypcje audio:**](https://ai.google.dev/gemini-api/docs/live-guide?hl=pl#audio-transcription) udostępnia transkrypcje tekstowe zarówno danych wejściowych użytkownika, jak i danych wyjściowych modelu.
-- [**Aktywny dźwięk:**](https://ai.google.dev/gemini-api/docs/live-guide?hl=pl#proactive-audio) pozwala kontrolować, kiedy i w jakich kontekstach model odpowiada.
-- [**Dialog afektywny:**](https://ai.google.dev/gemini-api/docs/live-guide?hl=pl#affective-dialog) dostosowuje styl i ton odpowiedzi do ekspresji użytkownika.
+- [**دعم لغات متعددة**](https://ai.google.dev/gemini-api/docs/live-guide?hl=ar#supported-languages):
+  يمكنك التحدّث بـ 70 لغة متاحة.
+- [**المقاطعة**](https://ai.google.dev/gemini-api/docs/live-guide?hl=ar#interruptions):
+  يمكن للمستخدمين مقاطعة النموذج في أي وقت لإجراء تفاعلات سريعة الاستجابة.
+- [**استخدام الأدوات**](https://ai.google.dev/gemini-api/docs/live-tools?hl=ar):
+  يدمج هذا الخيار أدوات مثل ميزة "طلب تنفيذ وظيفة" و"بحث Google" لإجراء تفاعلات ديناميكية.
+- [**تحويل الصوت إلى نص**](https://ai.google.dev/gemini-api/docs/live-guide?hl=ar#audio-transcription):
+  توفّر هذه الميزة نصوصًا من بيانات أدخلها المستخدم ومن مخرجات النموذج.
+- [**الاستجابة الصوتية الاستباقية**](https://ai.google.dev/gemini-api/docs/live-guide?hl=ar#proactive-audio):
+  تتيح لك التحكّم في وقت استجابة النموذج والسياقات التي يستجيب فيها.
+- [**حوار تفاعلي تعاطفي**](https://ai.google.dev/gemini-api/docs/live-guide?hl=ar#affective-dialog):
+  يعدّل أسلوب الرد ونبرته ليناسبا تعبيرات المستخدم.
 
-## Specyfikacja techniczna
+## المواصفات الفنية
 
-W tabeli poniżej znajdziesz dane techniczne interfejsu Live API:
+يوضّح الجدول التالي المواصفات الفنية لواجهة Live API:
 
-| Kategoria | Szczegóły |
+| الفئة | التفاصيل |
 | --- | --- |
-| Rodzaje danych wejściowych | Audio (surowe 16-bitowe audio PCM, 16 kHz, little-endian), obrazy (JPEG <= 1 kl./s), tekst |
-| Rodzaje danych wyjściowych | Audio (surowe 16-bitowe audio PCM, 24 kHz, little-endian) |
-| Protokół | Połączenie WebSocket z zachowywaniem stanu (WSS) |
+| طرق الإدخال | الصوت (صوت PCM خام بمعدل 16 بت، 16 كيلوهرتز، ترتيب البايتات الأصغر أولاً)، والصور (JPEG <= 1 لقطة في الثانية)، والنصوص |
+| طُرق الإخراج | الصوت (صوت PCM خام بمعدل 16 بت، و24 كيلوهرتز، وترتيب وحدات البايت الأصغر أولاً) |
+| البروتوكول | اتصال WebSocket ذو الحالة (WSS) |
 
-## Wybierz metodę implementacji
+## اختيار طريقة التنفيذ
 
-Podczas integracji z interfejsem Live API musisz wybrać jedną z tych metod implementacji:
+عند الدمج مع Live API، عليك اختيار أحد أساليب التنفيذ التالية:
 
-- **Serwer-serwer:** backend łączy się z interfejsem Live API za pomocą [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). Zwykle klient wysyła dane strumieniowe (audio, wideo, tekst) na serwer, który następnie przekazuje je do interfejsu Live API.
-- **Klient-serwer:** kod frontendu łączy się bezpośrednio z interfejsem Live API za pomocą [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API), aby przesyłać strumieniowo dane z pominięciem backendu.
+- **من الخادم إلى الخادم**: يتصل الخلفية بواجهة Live API باستخدام
+  [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). عادةً، يرسل العميل بيانات البث (الصوت والفيديو والنص) إلى الخادم، الذي يعيد توجيهها إلى Live API.
+- **من العميل إلى الخادم**: يتصل رمز الواجهة الأمامية مباشرةً بواجهة برمجة التطبيقات Live API
+  باستخدام [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) لبث البيانات، ما يؤدي إلى تجاوز الواجهة الخلفية.
 
-## Rozpocznij
+للحد من المخاطر الأمنية.
 
-Wybierz przewodnik odpowiedni dla Twojego środowiska programistycznego:
+## البدء
 
-Serwer-serwer
+اختَر الدليل الذي يتوافق مع بيئة التطوير:
 
-### [Samouczek dotyczący pakietu GenAI SDK](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=pl)
+من خادم إلى خادم
 
-Połącz się z interfejsem Gemini Live API za pomocą pakietu GenAI SDK, aby utworzyć wielomodową aplikację w czasie rzeczywistym z backendem w Pythonie.
+### [برنامج تعليمي حول حزمة تطوير البرامج (SDK) للذكاء الاصطناعي التوليدي](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=ar)
 
-Klient-serwer
+يمكنك الربط بواجهة Gemini Live API باستخدام حزمة GenAI SDK لإنشاء تطبيق متعدّد الوسائط في الوقت الفعلي مع خادم خلفي بلغة Python.
 
-### [Samouczek dotyczący WebSocket](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=pl)
+من العميل إلى الخادم
 
-Połącz się z interfejsem Gemini Live API za pomocą protokołu WebSocket, aby utworzyć multimodalną aplikację w czasie rzeczywistym z interfejsem JavaScript i tokenami tymczasowymi.
+### [برنامج تعليمي حول WebSocket](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=ar)
 
-Pakiet Agent Development Kit
+يمكنك الربط بواجهة Gemini Live API باستخدام WebSockets لإنشاء تطبيق متعدّد الوسائط في الوقت الفعلي مع واجهة أمامية JavaScript ورموز مميزة مؤقتة.
 
-### [Samouczek pakietu ADK](https://google.github.io/adk-docs/streaming/)
+مجموعة أدوات تطوير الوكيل
 
-Tworzenie agenta i korzystanie z pakietu Agent Development Kit (ADK) Streaming w celu włączenia komunikacji głosowej i wideo.
+### [برنامج تعليمي حول حزمة تطوير التطبيقات لنظام Android](https://google.github.io/adk-docs/streaming/)
 
-## Integracje z partnerami
+أنشئ وكيلاً واستخدِم ميزة "البث المباشر" في "مجموعة أدوات تطوير الوكلاء" (ADK) لتفعيل التواصل الصوتي والمرئي.
 
-Aby usprawnić tworzenie aplikacji audio i wideo działających w czasie rzeczywistym, możesz użyć integracji innej firmy, która obsługuje interfejs Gemini Live API przez WebRTC lub WebSockets.
+## عمليات الدمج مع الشركاء
+
+لتسهيل عملية تطوير تطبيقات الصوت والفيديو في الوقت الفعلي، يمكنك استخدام عملية دمج تابعة لجهة خارجية تتوافق مع واجهة برمجة التطبيقات Gemini Live عبر WebRTC أو WebSockets.
 
 [LiveKit
 
-Korzystanie z interfejsu Gemini Live API z agentami LiveKit.](https://docs.livekit.io/agents/models/realtime/plugins/gemini/)
+استخدام Gemini Live API مع LiveKit Agents](https://docs.livekit.io/agents/models/realtime/plugins/gemini/)
 [Pipecat by Daily
 
-Tworzenie czatbota AI działającego w czasie rzeczywistym za pomocą Gemini Live i Pipecat](https://docs.pipecat.ai/guides/features/gemini-live)
-[Fishjam od Software Mansion
+إنشاء روبوت دردشة بالذكاء الاصطناعي في الوقت الفعلي باستخدام Gemini Live وPipecat](https://docs.pipecat.ai/guides/features/gemini-live)
+[‫Fishjam من Software Mansion
 
-Twórz aplikacje do strumieniowego przesyłania obrazu i audio na żywo za pomocą Fishjam.](https://docs.fishjam.io/tutorials/gemini-live-integration)
-[Agenty Vision według strumienia
+يمكنك إنشاء تطبيقات لبث الفيديو المباشر والصوت باستخدام Fishjam.](https://docs.fishjam.io/tutorials/gemini-live-integration)
+[وكلاء Vision حسب البث
 
-Twórz aplikacje AI do obsługi głosu i wideo w czasie rzeczywistym za pomocą agentów Vision.](https://visionagents.ai/integrations/gemini)
+يمكنك إنشاء تطبيقات ذكاء اصطناعي للصوت والفيديو في الوقت الفعلي باستخدام Vision Agents.](https://visionagents.ai/integrations/gemini)
 [Voximplant
 
-Łączenie połączeń przychodzących i wychodzących z interfejsem Live API za pomocą Voximplant.](https://voximplant.com/products/gemini-client)
+ربط المكالمات الواردة والصادرة بواجهة برمجة التطبيقات Live API باستخدام Voximplant](https://voximplant.com/products/gemini-client)
 [Agora
 
-Twórz aplikacje konwersacyjne AI w czasie rzeczywistym za pomocą Agora.](https://docs.agora.io/en/conversational-ai/models/mllm/gemini)
-[Pakiet Firebase AI SDK
+إنشاء تطبيقات ذكاء اصطناعي حوارية في الوقت الفعلي باستخدام Agora](https://docs.agora.io/en/conversational-ai/models/mllm/gemini)
+[Firebase AI SDK
 
-Pierwsze kroki z interfejsem Gemini Live API przy użyciu Firebase AI Logic.](https://firebase.google.com/docs/ai-logic/live-api?api=dev&hl=pl)
+ابدأ استخدام Gemini Live API من خلال Firebase AI Logic.](https://firebase.google.com/docs/ai-logic/live-api?api=dev&hl=ar)
 
-Prześlij opinię
+إرسال ملاحظات
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Ostatnia aktualizacja: 2026-04-29 UTC.
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-Chcesz przekazać coś jeszcze?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

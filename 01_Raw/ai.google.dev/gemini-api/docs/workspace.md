@@ -1,55 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/workspace?hl=ja
-fetched_at: 2026-05-11T04:57:27.341385+00:00
-title: "Workspace \u30a2\u30ab\u30a6\u30f3\u30c8\u3067 Google AI Studio \u306b\u30a2\u30af\u30bb\u30b9\u3059\u308b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/workspace?hl=zh-TW
+fetched_at: 2026-05-18T05:10:07.800393+00:00
+title: "\u900f\u904e Workspace \u5e33\u6236\u5b58\u53d6 Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-フィードバックを送信
+提供意見
 
-# Workspace アカウントで Google AI Studio にアクセスする
+# 透過 Workspace 帳戶存取 Google AI Studio
 
-すべての [Google Workspace](https://workspace.google.com?hl=ja) ユーザーは、デフォルトで AI
-Studio にアクセスできます。Workspace ユーザーで、
-AI Studio の使用を開始する場合は、
-[AI Studio クイックスタート](https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=ja)をご覧ください。
+所有 [Google Workspace](https://workspace.google.com?hl=zh-tw) 使用者預設都能存取 AI Studio。如果您是 Workspace 使用者，想開始使用 AI Studio，請參閱 [AI Studio 快速入門導覽課程](https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=zh-tw)。
 
-## トラブルシューティング
+## 疑難排解
 
-Google Workspace アカウントで AI Studio へのアクセスが無効になっている場合は、次のようなエラーが表示されることがあります。
+如果 Google Workspace 帳戶無法存取 AI Studio，您可能會看到類似下列的錯誤訊息：
 
 `We are sorry, but you do not have access to Google AI Studio. Please contact
 your Organization Administrator for access.`
 
-AI Studio へのアクセス権が必要と思われる場合は、Workspace 管理者にお問い合わせください。
+如果您認為自己應該有權存取 AI Studio，請與 Workspace 管理員聯絡。
 
-## Workspace ユーザーに対して AI Studio を有効にする
+## 為 Workspace 使用者啟用 AI Studio
 
-Google Workspace 管理者は、AI Studio を使用できるユーザーを制御できます。
+Google Workspace 管理員可以控管哪些人能使用 AI Studio：
 
-- AI Studio は、すべてのエディションでデフォルトで有効になっています。
-- 組織部門内または組織部門全体で、ユーザー グループに対して AI Studio を有効または無効にできます。
-- Google Workspace for Education エディション: 18 歳未満のユーザーは、Google Workspace for Education アカウントで AI Studio を使用できません。これは、AI Studio の設定がオンの場合にも当てはまります。詳しくは、[Google サービスへのアクセスを
-  年齢別に管理する方法](https://support.google.com/a/answer/10651918?hl=ja)をご覧ください。
+- 所有版本預設都會啟用 AI Studio。
+- 您可以為機構單位內或跨機構單位的使用者群組開啟或關閉 AI Studio。
+- Google Workspace for Education 版本：未滿 18 歲的使用者無法透過 Google Workspace for Education 帳戶使用 AI Studio。即使「AI Studio」設定已開啟，也無法使用這些應用程式。詳情請參閱「[依年齡層控管存取 Google 服務的權限](https://support.google.com/a/answer/10651918?hl=zh-tw)」。
 
-組織内のユーザーに対して AI Studio を有効または無効にするには、
-[ユーザーに対して Google AI Studio を有効または無効にする](https://support.google.com/a/answer/15004095?hl=ja)をご覧ください。
+如要為機構中的使用者啟用或停用 AI Studio，請參閱「[為使用者啟用或停用 Google AI Studio](https://support.google.com/a/answer/15004095?hl=zh-tw)」。
 
-フィードバックを送信
+提供意見
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-最終更新日 2026-04-29 UTC。
+上次更新時間：2026-04-29 (世界標準時間)。
 
-ご意見をお聞かせください
+想進一步說明嗎？
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-04-29 (世界標準時間)。"],[],[]]

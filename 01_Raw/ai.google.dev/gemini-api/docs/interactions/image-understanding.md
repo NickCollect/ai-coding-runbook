@@ -1,39 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=vi
-fetched_at: 2026-05-11T05:08:01.875965+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=tr
+fetched_at: 2026-05-18T05:07:16.195351+00:00
 title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/overview?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Gửi ý kiến phản hồi
+Geri bildirim gönderin
 
-# Hiểu hình ảnh
+# Görüntü anlama
 
-Các mô hình Gemini được xây dựng từ đầu theo hướng đa phương thức, mở ra nhiều nhiệm vụ xử lý hình ảnh và thị giác máy tính, bao gồm nhưng không giới hạn ở việc chú thích hình ảnh, phân loại và trả lời câu hỏi bằng hình ảnh mà không cần phải huấn luyện các mô hình học máy chuyên biệt.
+Gemini modelleri baştan aşağı çok formatlı olacak şekilde tasarlandığından, özel makine öğrenimi modelleri eğitmenize gerek kalmadan görüntü açıklaması, sınıflandırma ve görsel soru cevaplama gibi çok çeşitli görüntü işleme ve bilgisayarla görme görevlerini yerine getirebilirsiniz.
 
-Ngoài các khả năng đa phương thức chung, các mô hình Gemini còn mang đến **độ chính xác cao hơn** cho các trường hợp sử dụng cụ thể như [phát hiện đối tượng](#object-detection) và [phân đoạn](#segmentation), thông qua quá trình huấn luyện bổ sung.
+Gemini modelleri, genel çok formatlı özelliklerinin yanı sıra ek eğitim sayesinde [nesne algılama](#object-detection) ve [segmentasyon](#segmentation) gibi belirli kullanım alanlarında **daha yüksek doğruluk** sunar.
 
-## Truyền hình ảnh cho Gemini
+## Gemini'a görüntü aktarma
 
-Bạn có thể cung cấp hình ảnh làm dữ liệu đầu vào cho Gemini bằng một số phương thức:
+Gemini'a giriş olarak resim sağlamak için çeşitli yöntemler kullanabilirsiniz:
 
-- [Truyền hình ảnh bằng URL](#url-image): Phù hợp với những hình ảnh có thể truy cập công khai.
-- [Truyền dữ liệu hình ảnh cùng dòng](#inline-image): Đối với dữ liệu hình ảnh được mã hoá base64.
-- [Tải hình ảnh lên bằng File API](#upload-image): Nên dùng cho các tệp lớn hơn hoặc để dùng lại hình ảnh trong nhiều yêu cầu.
+- [URL kullanarak resim iletme](#url-image): Herkese açık resimler için idealdir.
+- [Satır içi görüntü verilerini iletme](#inline-image): Base64 kodlu görüntü verileri için.
+- [File API'yi kullanarak resim yükleme](#upload-image): Daha büyük dosyalar veya resimleri birden çok istekte yeniden kullanmak için önerilir.
 
-### Truyền hình ảnh bằng URL
+### URL kullanarak resim iletme
 
-Bạn có thể tải hình ảnh lên bằng [Files API](https://ai.google.dev/gemini-api/docs/interactions/files?hl=vi) và truyền hình ảnh đó trong yêu cầu:
+[Files API](https://ai.google.dev/gemini-api/docs/interactions/files?hl=tr)'yi kullanarak bir resim yükleyebilir ve isteğe iletebilirsiniz:
 
 ### Python
 
@@ -91,6 +91,7 @@ console.log(interaction.steps.at(-1).content[0].text);
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
+  -H "Api-Revision: 2026-05-20" \
   -d '{
     "model": "gemini-3-flash-preview",
     "input": [
@@ -104,9 +105,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Truyền dữ liệu hình ảnh cùng dòng
+### Satır içi resim verilerini iletme
 
-Bạn có thể cung cấp dữ liệu hình ảnh dưới dạng chuỗi được mã hoá base64:
+Görüntü verilerini base64 kodlu dizeler olarak sağlayabilirsiniz:
 
 ### Python
 
@@ -172,6 +173,7 @@ fi
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
+  -H "Api-Revision: 2026-05-20" \
   -d '{
     "model": "gemini-3-flash-preview",
     "input": [
@@ -185,9 +187,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Tải hình ảnh lên bằng File API
+### File API'yi kullanarak resim yükleme
 
-Đối với các tệp lớn hoặc để có thể sử dụng cùng một tệp hình ảnh nhiều lần, hãy sử dụng Files API. Hãy xem [hướng dẫn về Files API](https://ai.google.dev/gemini-api/docs/interactions/files?hl=vi).
+Büyük dosyalar için veya aynı resim dosyasını tekrar tekrar kullanabilmek için Files API'yi kullanın. [Files API kılavuzuna](https://ai.google.dev/gemini-api/docs/interactions/files?hl=tr) bakın.
 
 ### Python
 
@@ -247,6 +249,7 @@ console.log(interaction.steps.at(-1).content[0].text);
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
+  -H "Api-Revision: 2026-05-20" \
   -d '{
     "model": "gemini-3-flash-preview",
     "input": [
@@ -260,9 +263,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Đưa ra câu lệnh bằng nhiều hình ảnh
+## Birden fazla resimle istem oluşturma
 
-Bạn có thể cung cấp nhiều hình ảnh trong một câu lệnh bằng cách đưa nhiều đối tượng hình ảnh vào mảng `input`:
+`input` dizisine birden fazla resim nesnesi ekleyerek tek bir istemde birden fazla resim sağlayabilirsiniz:
 
 ### Python
 
@@ -322,6 +325,7 @@ console.log(interaction.steps.at(-1).content[0].text);
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
+  -H "Api-Revision: 2026-05-20" \
   -d '{
     "model": "gemini-3-flash-preview",
     "input": [
@@ -340,9 +344,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Phát hiện vật thể
+## Nesne algılama
 
-Các mô hình được huấn luyện để phát hiện các đối tượng trong một hình ảnh và lấy toạ độ hộp giới hạn của các đối tượng đó. Toạ độ, so với kích thước hình ảnh, tỷ lệ thành [0, 1000]. Bạn cần giảm tỷ lệ các toạ độ này dựa trên kích thước hình ảnh gốc.
+Modeller, bir görüntüdeki nesneleri algılayıp sınırlayıcı kutu koordinatlarını almak için eğitilir. Görüntü boyutlarına göre koordinatlar [0, 1000] aralığında ölçeklendirilir. Bu koordinatları orijinal resim boyutunuza göre ölçeklendirmeniz gerekir.
 
 ### Python
 
@@ -393,26 +397,13 @@ import * as z from "zod";
 const client = new GoogleGenAI({});
 const prompt = "Detect the all of the prominent items in the image. The box_2d should be [ymin, xmin, ymax, xmax] normalized to 0-1000.";
 
-const boundingBoxesJsonSchema = {
-  type: "object",
-  properties: {
-    boxes: {
-      type: "array",
-      items: {
-        type: "object",
-        properties: {
-          box_2d: { type: "array", items: { type: "integer" }, description: "The 2D bounding box of the item as [ymin, xmin, ymax, xmax] normalized to 0-1000." },
-          mask: { type: "array", items: { type: "array", items: { type: "integer" } }, description: "The segmentation mask of the item as a polygon of [x,y] coordinates, normalized to 0-1000." },
-          label: { type: "string", description: "A descriptive label for the item." }
-        },
-        required: ["box_2d", "mask", "label"]
-      }
-    }
-  },
-  required: ["boxes"]
-};
-
-const boundingBoxesSchema = z.fromJSONSchema(boundingBoxesJsonSchema);
+const boundingBoxesSchema = z.object({
+  boxes: z.array(z.object({
+    box_2d: z.array(z.number()),
+    mask: z.array(z.array(z.number())),
+    label: z.string()
+  }))
+});
 
 const interaction = await client.interactions.create({
   model: "gemini-3-flash-preview",
@@ -427,7 +418,7 @@ const interaction = await client.interactions.create({
   response_format: {
     type: 'text',
     mime_type: 'application/json',
-    schema: boundingBoxesJsonSchema
+    schema: z.toJSONSchema(boundingBoxesSchema)
   },
 });
 
@@ -441,6 +432,7 @@ console.log(result);
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
+  -H "Api-Revision: 2026-05-20" \
   -d '{
     "model": "gemini-3-flash-preview",
     "input": [
@@ -476,14 +468,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Để xem thêm ví dụ, hãy xem các sổ ghi chú sau trong [Gemini Cookbook](https://github.com/google-gemini/cookbook):
+Daha fazla örnek için [Gemini Cookbook](https://github.com/google-gemini/cookbook)'taki aşağıdaki not defterlerini inceleyin:
 
-## Phân đoạn
+## Segmentasyon
 
-Bắt đầu từ Gemini 2.5, các mô hình không chỉ phát hiện mà còn phân đoạn các mục và cung cấp mặt nạ đường viền của các mục đó.
+Gemini 2.5'ten itibaren modeller yalnızca öğeleri algılamakla kalmaz, aynı zamanda bunları segmentlere ayırır ve kontur maskelerini sağlar.
 
-Mô hình này dự đoán một danh sách JSON, trong đó mỗi mục đại diện cho một mặt nạ phân đoạn.
-Mỗi mục đều có một khung hình chữ nhật ("`box_2d`") ở định dạng `[y0, x0, y1, x1]` với các toạ độ được chuẩn hoá từ 0 đến 1000, một nhãn ("`label`") xác định đối tượng và cuối cùng là mặt nạ phân đoạn bên trong khung hình chữ nhật, dưới dạng png được mã hoá base64 là bản đồ xác suất có giá trị từ 0 đến 255.
+Model, her öğenin bir segmentasyon maskesini temsil ettiği bir JSON listesi tahmin eder.
+Her öğe, 0 ile 1000 arasında normalleştirilmiş koordinatlara sahip `[y0, x0, y1, x1]` biçiminde bir sınırlayıcı kutu ("`box_2d`"), nesneyi tanımlayan bir etiket ("`label`") ve son olarak sınırlayıcı kutunun içindeki segmentasyon maskesini içerir. Bu maske, 0 ile 255 arasında değerlere sahip bir olasılık haritası olan base64 kodlu png biçimindedir.
 
 ### Python
 
@@ -548,26 +540,13 @@ bounding box in the key "box_2d", the segmentation mask in key "mask", and
 the text label in the key "label". Use descriptive labels.
 `;
 
-const boundingBoxesJsonSchema = {
-  type: "object",
-  properties: {
-    boxes: {
-      type: "array",
-      items: {
-        type: "object",
-        properties: {
-          box_2d: { type: "array", items: { type: "integer" }, description: "The 2D bounding box of the item as [ymin, xmin, ymax, xmax] normalized to 0-1000." },
-          mask: { type: "array", items: { type: "array", items: { type: "integer" } }, description: "The segmentation mask of the item as a polygon of [x,y] coordinates, normalized to 0-1000." },
-          label: { type: "string", description: "A descriptive label for the item." }
-        },
-        required: ["box_2d", "mask", "label"]
-      }
-    }
-  },
-  required: ["boxes"]
-};
-
-const boundingBoxesSchema = z.fromJSONSchema(boundingBoxesJsonSchema);
+const boundingBoxesSchema = z.object({
+  boxes: z.array(z.object({
+    box_2d: z.array(z.number()),
+    mask: z.array(z.array(z.number())),
+    label: z.string()
+  }))
+});
 
 const interaction = await client.interactions.create({
   model: "gemini-3-flash-preview",
@@ -582,9 +561,9 @@ const interaction = await client.interactions.create({
   response_format: {
     type: 'text',
     mime_type: 'application/json',
-    schema: boundingBoxesJsonSchema
+    schema: z.toJSONSchema(boundingBoxesSchema)
   },
-  generationConfig: {
+  generation_config: {
     thinking_level: "minimal"
   }
 });
@@ -599,6 +578,7 @@ console.log(result);
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
+  -H "Api-Revision: 2026-05-20" \
   -d '{
     "model": "gemini-3-flash-preview",
     "input": [
@@ -631,80 +611,81 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
         "required": ["boxes"]
       }
     },
-    "config": {
+    "generation_config": {
       "thinking_level": "minimal"
     }
   }'
 ```
 
-![Một chiếc bàn có bánh cupcake, trong đó các vật dụng bằng gỗ và thuỷ tinh được làm nổi bật](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg?hl=vi)
+![Ahşap ve cam nesnelerin vurgulandığı, keklerin bulunduğu bir masa](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg?hl=tr)
 
-Ví dụ về kết quả phân đoạn có các đối tượng và mặt nạ phân đoạn
+Nesneler ve segmentasyon maskeleri içeren örnek bir segmentasyon çıkışı
 
-## Định dạng hình ảnh được hỗ trợ
+## Desteklenen görsel biçimleri
 
-Gemini hỗ trợ các loại MIME sau đây cho định dạng hình ảnh:
+Gemini aşağıdaki resim biçimi MIME türlerini destekler:
 
-- PNG – `image/png`
-- JPEG – `image/jpeg`
-- WEBP – `image/webp`
-- HEIC – `image/heic`
-- HEIF – `image/heif`
+- PNG - `image/png`
+- JPEG - `image/jpeg`
+- WEBP - `image/webp`
+- HEIC - `image/heic`
+- HEIF - `image/heif`
 
-Để tìm hiểu về các phương thức nhập tệp khác, hãy xem hướng dẫn [Phương thức nhập tệp](https://ai.google.dev/gemini-api/docs/interactions/file-input-methods?hl=vi).
+Diğer dosya giriş yöntemleri hakkında bilgi edinmek için [Dosya giriş yöntemleri](https://ai.google.dev/gemini-api/docs/interactions/file-input-methods?hl=tr) kılavuzuna bakın.
 
-## Tính năng
+## Özellikler
 
-Tất cả các phiên bản mô hình Gemini đều là mô hình đa phương thức và có thể được sử dụng trong nhiều tác vụ xử lý hình ảnh và thị giác máy tính, bao gồm nhưng không giới hạn ở việc chú thích hình ảnh, trả lời câu hỏi bằng hình ảnh, phân loại hình ảnh, phát hiện và phân đoạn đối tượng.
+Tüm Gemini modeli sürümleri çok formatlıdır ve görüntü açıklaması, görsel soru ve yanıtlama, görüntü sınıflandırması, nesne algılama ve segmentasyon dahil ancak bunlarla sınırlı olmamak üzere çok çeşitli görüntü işleme ve bilgisayarla görme görevlerinde kullanılabilir.
 
-Gemini có thể giảm nhu cầu sử dụng các mô hình học máy chuyên biệt, tuỳ thuộc vào yêu cầu về chất lượng và hiệu suất của bạn.
+Gemini, kalite ve performans gereksinimlerinize bağlı olarak özel makine öğrenimi modelleri kullanma ihtiyacını azaltabilir.
 
-Các phiên bản mô hình mới nhất được huấn luyện đặc biệt để cải thiện độ chính xác của các tác vụ chuyên biệt ngoài các chức năng chung, chẳng hạn như tính năng [phát hiện đối tượng](#object-detection) và [phân đoạn](#segmentation) nâng cao.
+En yeni model sürümleri, özellikle geliştirilmiş [nesne algılama](#object-detection) ve [segmentasyon](#segmentation) gibi genel özelliklerin yanı sıra uzmanlık gerektiren görevlerin doğruluğunu artırmak için eğitilmiştir.
 
-## Hạn chế và thông tin kỹ thuật chính
+## Sınırlamalar ve temel teknik bilgiler
 
-### Giới hạn về tệp
+### Dosya sınırı
 
-Các mô hình Gemini hỗ trợ tối đa 3.600 tệp hình ảnh cho mỗi yêu cầu.
+Gemini modelleri,istek başına en fazla 3.600 resim dosyasını destekler.
 
-### Cách tính toán mã thông báo
+### Jeton hesaplama
 
-- 258 mã thông báo nếu cả hai chiều đều <= 384 pixel.
-  Các hình ảnh lớn hơn được chia thành các ô có kích thước 768x768 pixel, mỗi ô có giá 258 mã thông báo.
+- Her iki boyut da <= 384 piksel ise 258 jeton.
+  Daha büyük resimler, her biri 258 jeton değerinde olan 768x768 piksellik bloklar halinde düzenlenir.
 
-Công thức sơ bộ để tính số lượng ô như sau:
+Döşeme sayısını hesaplamak için kullanılan yaklaşık formül şöyledir:
 
-- Tính kích thước đơn vị cắt, xấp xỉ bằng: `floor(min(width, height)` / 1,5).
-- Chia từng chiều cho kích thước đơn vị cắt và nhân với nhau để có số lượng ô.
+- Yaklaşık olarak `floor(min(width, height)` / 1,5 olan kırpma birimi boyutunu hesaplayın.
+- Her boyutu kırpma birimi boyutuna bölün ve döşeme sayısını elde etmek için sonuçları çarpın.
 
-Ví dụ: đối với hình ảnh có kích thước 960x540, kích thước đơn vị cắt sẽ là 360. Chia mỗi chiều cho 360 và số lượng ô là 3 \* 2 = 6.
+Örneğin, 960x540 boyutlarındaki bir resmin kırpma birimi boyutu 360 olur. Her boyutu 360'a bölün. Döşeme sayısı 3 \* 2 = 6 olur.
 
-### Độ phân giải của nội dung nghe nhìn
+### Medya çözünürlüğü
 
-Gemini 3 giới thiệu chế độ kiểm soát chi tiết đối với quy trình xử lý hình ảnh đa phương thức bằng tham số `media_resolution`. Tham số `media_resolution` xác định **số lượng mã thông báo tối đa được phân bổ cho mỗi khung hình đầu vào của hình ảnh hoặc video.**
-Độ phân giải cao hơn giúp cải thiện khả năng đọc văn bản nhỏ hoặc xác định các chi tiết nhỏ của mô hình, nhưng làm tăng mức sử dụng mã thông báo và độ trễ.
+Gemini 3, `media_resolution` parametresiyle çok formatlı görüntü işleme üzerinde ayrıntılı kontrol sunar. `media_resolution` parametresi, **giriş resim veya video karesi başına ayrılan maksimum jeton sayısını** belirler.
+Daha yüksek çözünürlükler, modelin ince metinleri okuma veya küçük ayrıntıları tanımlama becerisini artırır ancak jeton kullanımını ve gecikmeyi de artırır.
 
-## Mẹo và phương pháp hay nhất
+## İpuçları ve en iyi uygulamalar
 
-- Xác minh rằng hình ảnh được xoay đúng cách.
-- Sử dụng hình ảnh rõ ràng, không bị mờ.
-- Khi dùng một hình ảnh có văn bản, hãy đặt câu lệnh dạng văn bản *trước* hình ảnh trong mảng `input`.
+- Resimlerin doğru şekilde döndürüldüğünü doğrulayın.
+- Net ve bulanık olmayan resimler kullanın.
+- Metin içeren tek bir resim kullanırken metin istemini `input` dizisinde resmin *önüne* yerleştirin.
 
-## Bước tiếp theo
+## Sırada ne var?
 
-Hướng dẫn này cho bạn biết cách tải tệp hình ảnh lên và tạo đầu ra văn bản từ đầu vào hình ảnh. Để tìm hiểu thêm, hãy xem các tài nguyên sau:
+Bu kılavuzda, resim dosyalarını nasıl yükleyeceğiniz ve resim girişlerinden nasıl metin çıkışları oluşturacağınız açıklanmaktadır. Daha fazla bilgi edinmek için aşağıdaki kaynakları inceleyin:
 
-- [Files API](https://ai.google.dev/gemini-api/docs/interactions/files?hl=vi): Tìm hiểu thêm về cách tải lên và quản lý tệp để sử dụng với Gemini.
-- [Hướng dẫn hệ thống](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=vi#system-instructions): Hướng dẫn hệ thống giúp bạn điều hướng hành vi của mô hình dựa trên nhu cầu và trường hợp sử dụng cụ thể của bạn.
-- [Chiến lược đặt câu lệnh cho tệp](https://ai.google.dev/gemini-api/docs/interactions/files?hl=vi#prompt-guide): Gemini API hỗ trợ đặt câu lệnh bằng dữ liệu văn bản, hình ảnh, âm thanh và video, còn được gọi là đặt câu lệnh đa phương thức.
-- [Hướng dẫn về an toàn](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=vi): Đôi khi, các mô hình AI tạo sinh tạo ra kết quả không mong muốn, chẳng hạn như kết quả không chính xác, thiên vị hoặc phản cảm. Hậu xử lý và đánh giá của con người là những bước cần thiết để hạn chế nguy cơ gây hại từ những kết quả như vậy.
+- [Files API](https://ai.google.dev/gemini-api/docs/interactions/files?hl=tr): Gemini ile kullanılacak dosyaları yükleme ve yönetme hakkında daha fazla bilgi edinin.
+- [Sistem talimatları](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=tr#system-instructions):
+  Sistem talimatları, modelin davranışını özel ihtiyaçlarınıza ve kullanım alanlarınıza göre yönlendirmenizi sağlar.
+- [Dosya istemi stratejileri](https://ai.google.dev/gemini-api/docs/interactions/files?hl=tr#prompt-guide): Gemini API, çok formatlı istem olarak da bilinen metin, resim, ses ve video verileriyle istemi destekler.
+- [Güvenlikle ilgili bilgiler](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=tr): Üretken yapay zeka modelleri bazen yanlış, taraflı veya rahatsız edici gibi beklenmedik çıkışlar üretebilir. Bu tür çıkışlardan kaynaklanan zarar riskini sınırlamak için işleme sonrası ve insan değerlendirmesi gereklidir.
 
-Gửi ý kiến phản hồi
+Geri bildirim gönderin
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Cập nhật lần gần đây nhất: 2026-05-09 UTC.
+Son güncelleme tarihi: 2026-05-11 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-09 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-05-11 UTC."],[],[]]
