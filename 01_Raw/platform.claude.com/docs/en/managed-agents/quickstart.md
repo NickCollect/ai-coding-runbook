@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/quickstart
-fetched_at: 2026-05-18T05:02:43.250578+00:00
+fetched_at: 2026-05-25T05:15:50.649518+00:00
 fetch_method: mintlify_md
 ---
 
@@ -21,7 +21,7 @@ This guide walks you through creating an agent, setting up an environment, start
 | Concept | Description |
 |---------|-------------|
 | **Agent** | The model, system prompt, tools, MCP servers, and skills |
-| **Environment** | A configured container template (packages, network access) |
+| **Environment** | Configuration for where sessions run: an Anthropic-managed cloud container, or a self-hosted sandbox on your own infrastructure |
 | **Session** | A running agent instance within an environment, performing a specific task and generating outputs |
 | **Events** | Messages exchanged between your application and the agent (user turns, tool results, status updates) |
 
@@ -45,7 +45,7 @@ brew install anthropics/tap/ant
 For Linux environments, download the release binary directly.
 
 ```bash nocheck
-VERSION=1.8.0
+VERSION=1.9.1
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 ARCH=$(uname -m | sed -e 's/x86_64/amd64/' -e 's/aarch64/arm64/')
 curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VERSION}/ant_${VERSION}_${OS}_${ARCH}.tar.gz" \
@@ -93,7 +93,7 @@ ant --version
   </Tab>
   <Tab title="Java">
     ```groovy Gradle
-    implementation("com.anthropic:anthropic-java:2.32.0")
+    implementation("com.anthropic:anthropic-java:2.33.0")
     ```
   </Tab>
   <Tab title="Go">
@@ -254,8 +254,7 @@ func main() {
 	agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 		Name: "Coding Assistant",
 		Model: anthropic.BetaManagedAgentsModelConfigParams{
-			ID:   anthropic.BetaManagedAgentsModelClaudeOpus4_7,
-			Type: anthropic.BetaManagedAgentsModelConfigParamsTypeModelConfig,
+			ID: anthropic.BetaManagedAgentsModelClaudeOpus4_7,
 		},
 		System: anthropic.String("You are a helpful coding assistant. Write clean, well-documented code."),
 		Tools: []anthropic.BetaAgentNewParamsToolUnion{{
@@ -279,11 +278,11 @@ import com.anthropic.models.beta.agents.BetaManagedAgentsAgentToolset20260401Par
 import com.anthropic.models.beta.agents.BetaManagedAgentsModel;
 import com.anthropic.models.beta.environments.BetaCloudConfigParams;
 import com.anthropic.models.beta.environments.EnvironmentCreateParams;
-import com.anthropic.models.beta.environments.UnrestrictedNetwork;
+import com.anthropic.models.beta.environments.BetaUnrestrictedNetwork;
 import com.anthropic.models.beta.sessions.SessionCreateParams;
 import com.anthropic.models.beta.sessions.events.BetaManagedAgentsUserMessageEventParams;
 import com.anthropic.models.beta.sessions.events.EventSendParams;
-import com.anthropic.models.beta.sessions.events.StreamEvents;
+import com.anthropic.models.beta.sessions.events.BetaManagedAgentsStreamSessionEvents;
 
 void main() {
     var client = AnthropicOkHttpClient.fromEnv();
@@ -408,7 +407,7 @@ console.log(`Environment ID: ${environment.id}`);
 var environment = await client.Beta.Environments.Create(new()
 {
     Name = "quickstart-env",
-    Config = new() { Networking = new UnrestrictedNetwork() },
+    Config = new BetaCloudConfigParams { Networking = new BetaUnrestrictedNetwork() },
 });
 
 Console.WriteLine($"Environment ID: {environment.ID}");
@@ -418,9 +417,11 @@ Console.WriteLine($"Environment ID: {environment.ID}");
 ````go
 environment, err := client.Beta.Environments.New(ctx, anthropic.BetaEnvironmentNewParams{
 	Name: "quickstart-env",
-	Config: anthropic.BetaCloudConfigParams{
-		Networking: anthropic.BetaCloudConfigParamsNetworkingUnion{
-			OfUnrestricted: &anthropic.UnrestrictedNetworkParam{},
+	Config: anthropic.BetaEnvironmentNewParamsConfigUnion{
+		OfCloud: &anthropic.BetaCloudConfigParams{
+			Networking: anthropic.BetaCloudConfigParamsNetworkingUnion{
+				OfUnrestricted: &anthropic.BetaUnrestrictedNetworkParam{},
+			},
 		},
 	},
 })
@@ -436,7 +437,7 @@ fmt.Printf("Environment ID: %s\n", environment.ID)
 var environment = client.beta().environments().create(EnvironmentCreateParams.builder()
     .name("quickstart-env")
     .config(BetaCloudConfigParams.builder()
-        .networking(UnrestrictedNetwork.builder().build())
+        .networking(BetaUnrestrictedNetwork.builder().build())
         .build())
     .build());
 
@@ -466,6 +467,8 @@ puts "Environment ID: #{environment.id}"
     </CodeGroup>
 
     Save the returned `environment.id`. You'll reference it in every session you create.
+
+    <Tip>To run the sandbox on your own infrastructure instead of a cloud container, see [Self-hosted sandboxes](/docs/en/managed-agents/self-hosted-sandboxes).</Tip>
   </Step>
 
   <Step title="Start a session">
@@ -752,7 +755,7 @@ await foreach (var ev in stream)
 
 	// Send the user message after the stream opens
 	_, err = client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
-		Events: []anthropic.SendEventsParamsUnion{{
+		Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
 			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
 				Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
 				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
@@ -800,7 +803,7 @@ try (var stream = client.beta().sessions().events().streamStreaming(session.id()
         .build());
 
     // Process streaming events
-    for (var event : (Iterable<StreamEvents>) stream.stream()::iterator) {
+    for (var event : (Iterable<BetaManagedAgentsStreamSessionEvents>) stream.stream()::iterator) {
         if (event.isAgentMessage()) {
             event.asAgentMessage().content().forEach(block -> IO.print(block.text()));
         } else if (event.isAgentToolUse()) {

@@ -1,10 +1,10 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/memory_stores/memories/delete
-fetched_at: 2026-05-11T04:55:27.936651+00:00
+fetched_at: 2026-05-25T05:15:54.138317+00:00
 fetch_method: mintlify_md
 ---
 
-## Delete
+## Delete a memory
 
 **delete** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
@@ -28,9 +28,9 @@ Delete a memory
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -80,9 +80,11 @@ Delete a memory
 
     - `"managed-agents-2026-04-01"`
 
+    - `"cache-diagnosis-2026-04-07"`
+
 ### Returns
 
-- `BetaManagedAgentsDeletedMemory = object { id, type }`
+- `BetaManagedAgentsDeletedMemory object { id, type }`
 
   Tombstone returned by [Delete a memory](/docs/en/api/beta/memory_stores/memories/delete). The memory's version history persists and remains listable via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list) until the store itself is deleted.
 
@@ -102,4 +104,13 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "type": "memory_deleted"
+}
 ```

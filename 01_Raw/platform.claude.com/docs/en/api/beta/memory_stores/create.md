@@ -1,10 +1,10 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/memory_stores/create
-fetched_at: 2026-05-11T04:55:27.641229+00:00
+fetched_at: 2026-05-25T05:15:53.930267+00:00
 fetch_method: mintlify_md
 ---
 
-## Create
+## Create a memory store
 
 **post** `/v1/memory_stores`
 
@@ -16,9 +16,9 @@ Create a memory store
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -68,6 +68,8 @@ Create a memory store
 
     - `"managed-agents-2026-04-01"`
 
+    - `"cache-diagnosis-2026-04-07"`
+
 ### Body Parameters
 
 - `name: string`
@@ -84,7 +86,7 @@ Create a memory store
 
 ### Returns
 
-- `BetaManagedAgentsMemoryStore = object { id, created_at, name, 5 more }`
+- `BetaManagedAgentsMemoryStore object { id, created_at, name, 5 more }`
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
@@ -131,4 +133,21 @@ curl https://api.anthropic.com/v1/memory_stores \
     -d '{
           "name": "x"
         }'
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "name": "name",
+  "type": "memory_store",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "metadata": {
+    "foo": "string"
+  }
+}
 ```

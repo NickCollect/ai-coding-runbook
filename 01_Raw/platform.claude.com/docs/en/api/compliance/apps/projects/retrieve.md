@@ -1,10 +1,10 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/projects/retrieve
-fetched_at: 2026-05-11T04:55:30.240641+00:00
+fetched_at: 2026-05-25T05:15:56.890706+00:00
 fetch_method: mintlify_md
 ---
 
-## Retrieve
+## Get project details
 
 **get** `/v1/compliance/apps/projects/{project_id}`
 
@@ -41,6 +41,10 @@ Detailed project information including description, instructions, and counts
 
   Project creation timestamp
 
+- `deleted_at: string`
+
+  Timestamp when the project was deleted by an end user, or null otherwise
+
 - `description: string`
 
   Project description
@@ -60,6 +64,10 @@ Detailed project information including description, instructions, and counts
 - `organization_id: string`
 
   Organization identifier (tagged ID)
+
+- `organization_uuid: string`
+
+  Organization UUID this project belongs to
 
 - `updated_at: string`
 
@@ -82,4 +90,27 @@ Detailed project information including description, instructions, and counts
 ```http
 curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "attachments_count": 0,
+  "chats_count": 0,
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "deleted_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "instructions": "instructions",
+  "is_private": true,
+  "name": "name",
+  "organization_id": "organization_id",
+  "organization_uuid": "organization_uuid",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "user": {
+    "id": "id",
+    "email_address": "email_address"
+  }
+}
 ```

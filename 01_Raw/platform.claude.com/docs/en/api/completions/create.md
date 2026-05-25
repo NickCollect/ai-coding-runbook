@@ -1,10 +1,10 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/completions/create
-fetched_at: 2026-05-11T04:55:25.532087+00:00
+fetched_at: 2026-05-25T05:15:51.742940+00:00
 fetch_method: mintlify_md
 ---
 
-## Create
+## Create a Text Completion
 
 **post** `/v1/complete`
 
@@ -20,9 +20,9 @@ Future models and features will not be compatible with Text Completions. See our
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -72,6 +72,8 @@ Future models and features will not be compatible with Text Completions. See our
 
     - `"managed-agents-2026-04-01"`
 
+    - `"cache-diagnosis-2026-04-07"`
+
 ### Body Parameters
 
 - `max_tokens_to_sample: number`
@@ -86,7 +88,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+  - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
     The model that will complete your prompt.
 
@@ -160,7 +162,7 @@ Future models and features will not be compatible with Text Completions. See our
 
       Fast and cost-effective model
 
-  - `UnionMember1 = string`
+  - `string`
 
 - `prompt: string`
 
@@ -232,7 +234,7 @@ Future models and features will not be compatible with Text Completions. See our
 
 ### Returns
 
-- `Completion = object { id, completion, model, 2 more }`
+- `Completion object { id, completion, model, 2 more }`
 
   - `id: string`
 
@@ -250,7 +252,7 @@ Future models and features will not be compatible with Text Completions. See our
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+    - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
       The model that will complete your prompt.
 
@@ -324,7 +326,7 @@ Future models and features will not be compatible with Text Completions. See our
 
         Fast and cost-effective model
 
-    - `UnionMember1 = string`
+    - `string`
 
   - `stop_reason: string`
 
@@ -359,4 +361,16 @@ curl https://api.anthropic.com/v1/complete \
           "top_k": 5,
           "top_p": 0.7
         }'
+```
+
+#### Response
+
+```json
+{
+  "id": "compl_018CKm6gsux7P8yMcwZbeCPw",
+  "completion": " Hello! My name is Claude.",
+  "model": "claude-2.1",
+  "stop_reason": "stop_sequence",
+  "type": "completion"
+}
 ```

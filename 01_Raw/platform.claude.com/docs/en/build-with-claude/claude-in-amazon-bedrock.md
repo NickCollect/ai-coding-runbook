@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock
-fetched_at: 2026-05-18T05:02:43.183440+00:00
+fetched_at: 2026-05-25T05:15:50.518740+00:00
 fetch_method: mintlify_md
 ---
 
@@ -105,7 +105,7 @@ go get github.com/anthropics/anthropic-sdk-go/bedrock
 <Tabs>
 <Tab title="Gradle">
 ```kotlin
-implementation("com.anthropic:anthropic-java-bedrock:2.32.0")
+implementation("com.anthropic:anthropic-java-bedrock:2.33.0")
 ```
 </Tab>
 <Tab title="Maven">
@@ -113,7 +113,7 @@ implementation("com.anthropic:anthropic-java-bedrock:2.32.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-bedrock</artifactId>
-    <version>2.32.0</version>
+    <version>2.33.0</version>
 </dependency>
 ```
 </Tab>
@@ -341,25 +341,30 @@ Model IDs in Claude in Amazon Bedrock carry an `anthropic.` provider prefix. Mod
 | Claude Haiku 4.5      | `anthropic.claude-haiku-4-5`      | Open                                                                       |
 | Claude Mythos Preview | `anthropic.claude-mythos-preview` | Invitation only ([Project Glasswing](https://anthropic.com/glasswing))     |
 
+<Tip>
+Upgrading to a newer Claude model? In Claude Code, run `/claude-api migrate` to apply model ID swaps and breaking parameter changes across your codebase. The skill detects which cloud platform your code targets and adjusts model ID formats and feature changes for that platform. See [Migrating to a newer Claude model](/docs/en/agents-and-tools/agent-skills/claude-api-skill#migrating-to-a-newer-claude-model).
+</Tip>
+
 ## Feature support
 
-Claude in Amazon Bedrock supports features that run inside the model. Features that require Anthropic-operated infrastructure are not available.
+For the full feature list with Amazon Bedrock availability, see [Features overview](/docs/en/build-with-claude/overview).
 
-**Supported:**
+### Supported feature highlights
 
-- Messages API (`/anthropic/v1/messages`)
-- Prompt caching
-- Extended thinking
-- Tool use (client-defined tools)
-- Citations
-- Structured outputs
+- [Messages API](/docs/en/api/messages/create) (`/anthropic/v1/messages`)
+- [Prompt caching](/docs/en/build-with-claude/prompt-caching)
+- [Extended thinking](/docs/en/build-with-claude/extended-thinking)
+- [Tool use](/docs/en/agents-and-tools/tool-use/overview), including the [Bash tool](/docs/en/agents-and-tools/tool-use/bash-tool), [Computer use tool](/docs/en/agents-and-tools/tool-use/computer-use-tool), [Memory tool](/docs/en/agents-and-tools/tool-use/memory-tool), and [Text editor tool](/docs/en/agents-and-tools/tool-use/text-editor-tool)
+- [Citations](/docs/en/build-with-claude/citations)
+- [Structured outputs](/docs/en/build-with-claude/structured-outputs)
 
-**Not supported:**
+### Features not supported
 
-- Anthropic-defined tools (Web Search, Web Fetch, Remote MCP, Memory, Files API, Computer Use, Skills, Code Execution)
+- Input sources (URL sources for images and documents, Files API)
+- Server-side tools (code execution, web search, web fetch, advisor)
+- Agent infrastructure (Agent Skills, MCP connector, programmatic tool calling)
+- API endpoints (Message Batches, Models, Admin, Compliance, Usage and Cost)
 - Claude Managed Agents
-- Message Batches API
-- `/v1/users` endpoint
 
 ## Regions
 
@@ -407,8 +412,6 @@ Default quota is 2 million input tokens per minute (TPM). You can request up to 
 ## Data retention
 
 Data handling for this offering is governed by Amazon Bedrock. For details, see [Data protection in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html).
-
-Zero data retention (ZDR) is available. To enable ZDR for your account, contact AWS support.
 
 ## Monitoring and logging
 

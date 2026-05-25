@@ -1,10 +1,10 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/workspaces/members/update
-fetched_at: 2026-05-04T16:22:19.533304+00:00
+fetched_at: 2026-05-25T05:15:55.406644+00:00
 fetch_method: mintlify_md
 ---
 
-## Update
+## Update Workspace Member
 
 **post** `/v1/organizations/workspaces/{workspace_id}/members/{user_id}`
 
@@ -38,7 +38,7 @@ Update Workspace Member
 
 ### Returns
 
-- `WorkspaceMember = object { type, user_id, workspace_id, workspace_role }`
+- `WorkspaceMember object { type, user_id, workspace_id, workspace_role }`
 
   - `type: "workspace_member"`
 
@@ -80,4 +80,15 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
     -d '{
           "workspace_role": "workspace_user"
         }'
+```
+
+#### Response
+
+```json
+{
+  "type": "workspace_member",
+  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+  "workspace_role": "workspace_user"
+}
 ```

@@ -1,10 +1,10 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/delete
-fetched_at: 2026-05-11T04:55:26.610054+00:00
+fetched_at: 2026-05-25T05:15:52.707351+00:00
 fetch_method: mintlify_md
 ---
 
-## Delete
+## Delete Environment
 
 **delete** `/v1/environments/{environment_id}`
 
@@ -20,9 +20,9 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -72,9 +72,11 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `"managed-agents-2026-04-01"`
 
+    - `"cache-diagnosis-2026-04-07"`
+
 ### Returns
 
-- `BetaEnvironmentDeleteResponse = object { id, type }`
+- `BetaEnvironmentDeleteResponse object { id, type }`
 
   Response after deleting an environment.
 
@@ -96,4 +98,13 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "type": "environment_deleted"
+}
 ```

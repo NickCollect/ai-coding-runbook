@@ -1,10 +1,10 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/invites/create
-fetched_at: 2026-05-04T16:22:08.906902+00:00
+fetched_at: 2026-05-25T05:15:54.947054+00:00
 fetch_method: mintlify_md
 ---
 
-## Create
+## Create Invite
 
 **post** `/v1/organizations/invites`
 
@@ -30,7 +30,7 @@ Create Invite
 
 ### Returns
 
-- `Invite = object { id, email, expires_at, 4 more }`
+- `Invite object { id, email, expires_at, 4 more }`
 
   - `id: string`
 
@@ -93,4 +93,18 @@ curl https://api.anthropic.com/v1/organizations/invites \
           "email": "user@emaildomain.com",
           "role": "user"
         }'
+```
+
+#### Response
+
+```json
+{
+  "id": "invite_015gWxCN9Hfg2QhZwTK7Mdeu",
+  "email": "user@emaildomain.com",
+  "expires_at": "2024-11-20T23:58:27.427722Z",
+  "invited_at": "2024-10-30T23:58:27.427722Z",
+  "role": "user",
+  "status": "pending",
+  "type": "invite"
+}
 ```

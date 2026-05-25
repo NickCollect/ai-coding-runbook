@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/files
-fetched_at: 2026-05-18T05:02:43.646839+00:00
+fetched_at: 2026-05-25T05:15:51.111173+00:00
 fetch_method: mintlify_md
 ---
 
@@ -324,6 +324,7 @@ resources := []anthropic.BetaSessionNewParamsResourceUnion{
 	{OfFile: &anthropic.BetaManagedAgentsFileResourceParams{Type: "file", FileID: "file_def456", MountPath: anthropic.String("/workspace/config.json")}},
 	{OfFile: &anthropic.BetaManagedAgentsFileResourceParams{Type: "file", FileID: "file_ghi789", MountPath: anthropic.String("/workspace/src/main.py")}},
 }
+_ = resources
 ```
 
 ```java Java
@@ -374,7 +375,7 @@ printf '%s\n' "${resource_id}"  # "sesrsc_01ABC..."
 
   
 ````bash
-RESOURCE_ID=$(ant beta:sessions:resources create \
+RESOURCE_ID=$(ant beta:sessions:resources add \
   --session-id "$SESSION_ID" \
   --type file \
   --file-id "$FILE_ID" \
@@ -508,9 +509,9 @@ await client.beta.sessions.resources.delete(resource.id, {
   
 ````csharp
 var listed = await client.Beta.Sessions.Resources.List(session.ID);
-foreach (var entry in listed.Data)
+await foreach (var entry in listed.Paginate())
 {
-    var type = entry.Match<string>(repository => repository.Type, fileResource => fileResource.Type);
+    var type = entry.Match<string>(repo => repo.Type, fileRes => fileRes.Type, memoryStore => memoryStore.Type);
     Console.WriteLine($"{entry.ID} {type}");
 }
 
@@ -578,7 +579,7 @@ client.beta.sessions.resources.delete(resource.id, session_id: session.id)
 Use the [Files API](/docs/en/build-with-claude/files) to list files scoped to a session and download them.
 
 <CodeGroup>
-```bash curl
+```bash curl nocheck
 # List files associated with a session
 curl -fsSL "https://api.anthropic.com/v1/files?scope_id=sesn_abc123" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -593,7 +594,7 @@ curl -fsSL "https://api.anthropic.com/v1/files/$FILE_ID/content" \
   -o output.txt
 ```
 
-```bash CLI
+```bash CLI nocheck
 # List files associated with a session
 ant beta:files list --scope-id sesn_abc123 \
   --beta files-api-2025-04-14 \
@@ -603,7 +604,7 @@ ant beta:files list --scope-id sesn_abc123 \
 ant beta:files download --file-id "$FILE_ID" --output output.txt
 ```
 
-```python Python
+```python Python nocheck
 # List files associated with a session
 files = client.beta.files.list(
     scope_id="sesn_abc123",
@@ -617,7 +618,7 @@ content = client.beta.files.download(files.data[0].id)
 content.write_to_file("output.txt")
 ```
 
-```typescript TypeScript
+```typescript TypeScript nocheck
 // List files associated with a session
 const files = await client.beta.files.list({
   scope_id: "sesn_abc123",
@@ -632,7 +633,7 @@ const content = await client.beta.files.download(files.data[0].id);
 await content.writeToFile("output.txt");
 ```
 
-```csharp C#
+```csharp C# nocheck
 // List files associated with a session
 var files = await client.Beta.Files.List(new FileListParams
 {
@@ -645,7 +646,7 @@ byte[] content = await client.Beta.Files.Download(files.Data[0].ID);
 await File.WriteAllBytesAsync("output.txt", content);
 ```
 
-```go Go
+```go Go nocheck
 // List files associated with a session
 files, err := client.Beta.Files.List(ctx, anthropic.BetaFileListParams{
 	ScopeID: anthropic.String("sesn_abc123"),
@@ -665,7 +666,7 @@ fileContent, _ := io.ReadAll(resp.Body)
 os.WriteFile("output.txt", fileContent, 0644)
 ```
 
-```java Java
+```java Java nocheck
 // List files associated with a session
 var files = client.beta().files().list(FileListParams.builder()
     .scopeId("sesn_abc123")
@@ -680,7 +681,7 @@ try (HttpResponse response = client.beta().files().download(files.data().get(0).
 }
 ```
 
-```php PHP
+```php PHP nocheck
 // List files associated with a session
 $files = $client->beta->files->list(
     scopeID: 'sesn_abc123',
@@ -692,7 +693,7 @@ $content = $client->beta->files->download($files->data[0]->id);
 file_put_contents('output.txt', $content);
 ```
 
-```ruby Ruby
+```ruby Ruby nocheck
 # List files associated with a session
 files = client.beta.files.list(
   scope_id: "sesn_abc123",

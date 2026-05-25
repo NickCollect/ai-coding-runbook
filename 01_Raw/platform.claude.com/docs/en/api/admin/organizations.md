@@ -1,12 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/organizations
-fetched_at: 2026-05-04T16:22:07.230892+00:00
+fetched_at: 2026-05-25T05:15:54.902241+00:00
 fetch_method: mintlify_md
 ---
 
 # Organizations
 
-## Me
+## Get Current Organization
 
 **get** `/v1/organizations/me`
 
@@ -14,7 +14,7 @@ Retrieve information about the organization associated with the authenticated AP
 
 ### Returns
 
-- `Organization = object { id, name, type }`
+- `Organization object { id, name, type }`
 
   - `id: string`
 
@@ -40,11 +40,21 @@ curl https://api.anthropic.com/v1/organizations/me \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "id": "12345678-1234-5678-1234-567812345678",
+  "name": "Organization Name",
+  "type": "organization"
+}
+```
+
 ## Domain Types
 
 ### Organization
 
-- `Organization = object { id, name, type }`
+- `Organization object { id, name, type }`
 
   - `id: string`
 

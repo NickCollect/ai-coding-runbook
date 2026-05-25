@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/get-started
-fetched_at: 2026-05-18T05:02:41.871093+00:00
+fetched_at: 2026-05-25T05:15:48.889179+00:00
 fetch_method: mintlify_md
 ---
 
@@ -333,7 +333,7 @@ main().catch(console.error);
             }
 
             dependencies {
-                implementation("com.anthropic:anthropic-java:2.32.0")
+                implementation("com.anthropic:anthropic-java:2.33.0")
             }
 
             application {
@@ -358,7 +358,7 @@ main().catch(console.error);
                 <dependency>
                   <groupId>com.anthropic</groupId>
                   <artifactId>anthropic-java</artifactId>
-                  <version>2.32.0</version>
+                  <version>2.33.0</version>
                 </dependency>
               </dependencies>
             </project>

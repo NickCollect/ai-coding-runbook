@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/memory
-fetched_at: 2026-05-18T05:02:43.606272+00:00
+fetched_at: 2026-05-25T05:15:51.120457+00:00
 fetch_method: mintlify_md
 ---
 
@@ -184,7 +184,7 @@ await client.Beta.MemoryStores.Memories.Create(store.ID, new()
 ````go
 _, err = client.Beta.MemoryStores.Memories.New(ctx, store.ID, anthropic.BetaMemoryStoreMemoryNewParams{
 	Path:    "/formatting_standards.md",
-	Content: "All reports use GAAP formatting. Dates are ISO-8601...",
+	Content: anthropic.String("All reports use GAAP formatting. Dates are ISO-8601..."),
 })
 if err != nil {
 	panic(err)
@@ -311,7 +311,7 @@ var session = await client.Beta.Sessions.Create(new()
     EnvironmentID = environment.ID,
     Resources =
     [
-        new BetaManagedAgentsMemoryStoreResourceParams
+        new BetaManagedAgentsMemoryStoreResourceParam
         {
             Type = "memory_store",
             MemoryStoreID = store.ID,
@@ -330,9 +330,10 @@ session, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewParams{
 	},
 	EnvironmentID: environment.ID,
 	Resources: []anthropic.BetaSessionNewParamsResourceUnion{{
-		OfMemoryStore: &anthropic.BetaManagedAgentsMemoryStoreResourceParams{
+		OfMemoryStore: &anthropic.BetaManagedAgentsMemoryStoreResourceParam{
+			Type:          anthropic.BetaManagedAgentsMemoryStoreResourceParamTypeMemoryStore,
 			MemoryStoreID: store.ID,
-			Access:        anthropic.BetaManagedAgentsMemoryStoreResourceParamsAccessReadWrite,
+			Access:        anthropic.BetaManagedAgentsMemoryStoreResourceParamAccessReadWrite,
 			Instructions:  anthropic.String("User preferences and project context. Check before starting any task."),
 		},
 	}},
@@ -349,9 +350,10 @@ var session = client.beta().sessions().create(
         .agent(agent.id())
         .environmentId(environment.id())
         .addResource(
-            BetaManagedAgentsMemoryStoreResourceParams.builder()
+            BetaManagedAgentsMemoryStoreResourceParam.builder()
+                .type(BetaManagedAgentsMemoryStoreResourceParam.Type.MEMORY_STORE)
                 .memoryStoreId(store.id())
-                .access(BetaManagedAgentsMemoryStoreResourceParams.Access.READ_WRITE)
+                .access(BetaManagedAgentsMemoryStoreResourceParam.Access.READ_WRITE)
                 .instructions("User preferences and project context. Check before starting any task.")
                 .build()
         )
@@ -467,9 +469,10 @@ var page = await client.Beta.MemoryStores.Memories.List(store.ID, new()
     OrderBy = "path",
     Depth = 2,
 });
-foreach (var item in page.Data)
+await foreach (var item in page.Paginate())
 {
-    Console.WriteLine($"{item.Type.Raw()}  {item.Path}");
+    var line = item.Match(m => $"memory  {m.Path}", p => $"memory_prefix  {p.Path}");
+    Console.WriteLine(line);
 }
 ````
 
@@ -477,7 +480,7 @@ foreach (var item in page.Data)
 ````go
 page, err := client.Beta.MemoryStores.Memories.List(ctx, store.ID, anthropic.BetaMemoryStoreMemoryListParams{
 	PathPrefix: anthropic.String("/"),
-	OrderBy:    anthropic.BetaMemoryStoreMemoryListParamsOrderByPath,
+	OrderBy:    anthropic.String("path"),
 	Depth:      anthropic.Int(2),
 })
 if err != nil {
@@ -494,12 +497,13 @@ var page = client.beta().memoryStores().memories().list(
     store.id(),
     MemoryListParams.builder()
         .pathPrefix("/")
-        .orderBy(MemoryListParams.OrderBy.PATH)
-        .depth(2L)
+        .orderBy("path")
+        .depth(2)
         .build()
 );
 for (var item : page.data()) {
-    IO.println(item.type() + "  " + item.path());
+    item.memory().ifPresent(m -> IO.println("memory  " + m.path()));
+    item.memoryPrefix().ifPresent(p -> IO.println("memory_prefix  " + p.path()));
 }
 ````
 
@@ -676,7 +680,7 @@ var mem = await client.Beta.MemoryStores.Memories.Create(store.ID, new()
 ````go
 mem, err := client.Beta.MemoryStores.Memories.New(ctx, store.ID, anthropic.BetaMemoryStoreMemoryNewParams{
 	Path:    "/preferences/formatting.md",
-	Content: "Always use tabs, not spaces.",
+	Content: anthropic.String("Always use tabs, not spaces."),
 })
 if err != nil {
 	panic(err)
@@ -865,7 +869,7 @@ await client.Beta.MemoryStores.Memories.Update(mem.ID, new()
 {
     MemoryStoreID = store.ID,
     Content = "CORRECTED: Always use 2-space indentation.",
-    Precondition = new ContentSha256Precondition
+    Precondition = new BetaManagedAgentsPrecondition
     {
         Type = "content_sha256",
         ContentSha256 = mem.ContentSha256,
@@ -878,10 +882,9 @@ await client.Beta.MemoryStores.Memories.Update(mem.ID, new()
 _, err = client.Beta.MemoryStores.Memories.Update(ctx, mem.ID, anthropic.BetaMemoryStoreMemoryUpdateParams{
 	MemoryStoreID: store.ID,
 	Content:       anthropic.String("CORRECTED: Always use 2-space indentation."),
-	Precondition: anthropic.BetaMemoryStoreMemoryUpdateParamsPreconditionUnion{
-		OfContentSha256: &anthropic.BetaManagedAgentsContentSha256PreconditionParams{
-			ContentSha256: mem.ContentSha256,
-		},
+	Precondition: anthropic.BetaManagedAgentsPreconditionParam{
+		Type:          anthropic.BetaManagedAgentsPreconditionTypeContentSha256,
+		ContentSha256: anthropic.String(mem.ContentSha256),
 	},
 })
 if err != nil {
@@ -897,8 +900,8 @@ client.beta().memoryStores().memories().update(
         .memoryStoreId(store.id())
         .content("CORRECTED: Always use 2-space indentation.")
         .precondition(
-            MemoryUpdateParams.Precondition.builder()
-                .type(MemoryUpdateParams.Precondition.Type.CONTENT_SHA256)
+            BetaManagedAgentsPrecondition.builder()
+                .type(BetaManagedAgentsPrecondition.Type.CONTENT_SHA256)
                 .contentSha256(mem.contentSha256())
                 .build()
         )
@@ -1070,12 +1073,14 @@ var versions = await client.Beta.MemoryStores.MemoryVersions.List(store.ID, new(
 {
     MemoryID = mem.ID,
 });
+var versionIds = new List<string>();
 await foreach (var v in versions.Paginate())
 {
     Console.WriteLine($"{v.ID}: {v.Operation.Raw()}");
+    versionIds.Add(v.ID);
 }
 
-var versionId = versions.Data[1].ID;
+var versionId = versionIds[1];
 ````
 
   
@@ -1436,7 +1441,7 @@ await client.Beta.MemoryStores.Archive(store.ID);
 
   
 ````go
-_, err = client.Beta.MemoryStores.Archive(ctx, store.ID)
+_, err = client.Beta.MemoryStores.Archive(ctx, store.ID, anthropic.BetaMemoryStoreArchiveParams{})
 if err != nil {
 	panic(err)
 }

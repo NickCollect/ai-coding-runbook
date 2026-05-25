@@ -1,10 +1,10 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/sessions/resources/add
-fetched_at: 2026-05-11T04:55:26.943884+00:00
+fetched_at: 2026-05-25T05:15:53.298103+00:00
 fetch_method: mintlify_md
 ---
 
-## Add
+## Add Session Resource
 
 **post** `/v1/sessions/{session_id}/resources`
 
@@ -20,9 +20,9 @@ Add Session Resource
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -72,6 +72,8 @@ Add Session Resource
 
     - `"managed-agents-2026-04-01"`
 
+    - `"cache-diagnosis-2026-04-07"`
+
 ### Body Parameters
 
 - `file_id: string`
@@ -88,7 +90,7 @@ Add Session Resource
 
 ### Returns
 
-- `BetaManagedAgentsFileResource = object { id, created_at, file_id, 3 more }`
+- `BetaManagedAgentsFileResource object { id, created_at, file_id, 3 more }`
 
   - `id: string`
 
@@ -121,4 +123,17 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources \
           "type": "file",
           "mount_path": "/uploads/receipt.pdf"
         }'
+```
+
+#### Response
+
+```json
+{
+  "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+  "created_at": "2026-03-15T10:00:00Z",
+  "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "mount_path": "/uploads/receipt.pdf",
+  "type": "file",
+  "updated_at": "2026-03-15T10:00:00Z"
+}
 ```

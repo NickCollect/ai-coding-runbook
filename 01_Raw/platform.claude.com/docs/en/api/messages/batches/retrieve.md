@@ -1,10 +1,10 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages/batches/retrieve
-fetched_at: 2026-05-05T19:40:47.335283+00:00
+fetched_at: 2026-05-25T05:15:51.953760+00:00
 fetch_method: mintlify_md
 ---
 
-## Retrieve
+## Retrieve a Message Batch
 
 **get** `/v1/messages/batches/{message_batch_id}`
 
@@ -20,7 +20,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ### Returns
 
-- `MessageBatch = object { id, archived_at, cancel_initiated_at, 7 more }`
+- `MessageBatch object { id, archived_at, cancel_initiated_at, 7 more }`
 
   - `id: string`
 
@@ -114,4 +114,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "archived_at": "2024-08-20T18:37:24.100435Z",
+  "cancel_initiated_at": "2024-08-20T18:37:24.100435Z",
+  "created_at": "2024-08-20T18:37:24.100435Z",
+  "ended_at": "2024-08-20T18:37:24.100435Z",
+  "expires_at": "2024-08-20T18:37:24.100435Z",
+  "processing_status": "in_progress",
+  "request_counts": {
+    "canceled": 10,
+    "errored": 30,
+    "expired": 10,
+    "processing": 100,
+    "succeeded": 50
+  },
+  "results_url": "https://api.anthropic.com/v1/messages/batches/msgbatch_013Zva2CMHLNnXjNJJKqJ2EF/results",
+  "type": "message_batch"
+}
 ```

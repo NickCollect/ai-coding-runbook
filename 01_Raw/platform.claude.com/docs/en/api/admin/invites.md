@@ -1,12 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/invites
-fetched_at: 2026-05-04T16:22:08.359662+00:00
+fetched_at: 2026-05-25T05:15:54.948585+00:00
 fetch_method: mintlify_md
 ---
 
 # Invites
 
-## Create
+## Create Invite
 
 **post** `/v1/organizations/invites`
 
@@ -32,7 +32,7 @@ Create Invite
 
 ### Returns
 
-- `Invite = object { id, email, expires_at, 4 more }`
+- `Invite object { id, email, expires_at, 4 more }`
 
   - `id: string`
 
@@ -97,7 +97,21 @@ curl https://api.anthropic.com/v1/organizations/invites \
         }'
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "id": "invite_015gWxCN9Hfg2QhZwTK7Mdeu",
+  "email": "user@emaildomain.com",
+  "expires_at": "2024-11-20T23:58:27.427722Z",
+  "invited_at": "2024-10-30T23:58:27.427722Z",
+  "role": "user",
+  "status": "pending",
+  "type": "invite"
+}
+```
+
+## Get Invite
 
 **get** `/v1/organizations/invites/{invite_id}`
 
@@ -111,7 +125,7 @@ Get Invite
 
 ### Returns
 
-- `Invite = object { id, email, expires_at, 4 more }`
+- `Invite object { id, email, expires_at, 4 more }`
 
   - `id: string`
 
@@ -171,7 +185,21 @@ curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "invite_015gWxCN9Hfg2QhZwTK7Mdeu",
+  "email": "user@emaildomain.com",
+  "expires_at": "2024-11-20T23:58:27.427722Z",
+  "invited_at": "2024-10-30T23:58:27.427722Z",
+  "role": "user",
+  "status": "pending",
+  "type": "invite"
+}
+```
+
+## List Invites
 
 **get** `/v1/organizations/invites`
 
@@ -267,7 +295,28 @@ curl https://api.anthropic.com/v1/organizations/invites \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "invite_015gWxCN9Hfg2QhZwTK7Mdeu",
+      "email": "user@emaildomain.com",
+      "expires_at": "2024-11-20T23:58:27.427722Z",
+      "invited_at": "2024-10-30T23:58:27.427722Z",
+      "role": "user",
+      "status": "pending",
+      "type": "invite"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
+
+## Delete Invite
 
 **delete** `/v1/organizations/invites/{invite_id}`
 
@@ -302,11 +351,20 @@ curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "id": "invite_015gWxCN9Hfg2QhZwTK7Mdeu",
+  "type": "invite_deleted"
+}
+```
+
 ## Domain Types
 
 ### Invite
 
-- `Invite = object { id, email, expires_at, 4 more }`
+- `Invite object { id, email, expires_at, 4 more }`
 
   - `id: string`
 
@@ -360,7 +418,7 @@ curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
 
 ### Invite Delete Response
 
-- `InviteDeleteResponse = object { id, type }`
+- `InviteDeleteResponse object { id, type }`
 
   - `id: string`
 

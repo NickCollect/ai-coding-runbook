@@ -1,12 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/cost_report
-fetched_at: 2026-05-04T16:22:26.078532+00:00
+fetched_at: 2026-05-25T05:15:55.655186+00:00
 fetch_method: mintlify_md
 ---
 
 # Cost Report
 
-## Retrieve
+## Get Cost Report
 
 **get** `/v1/organizations/cost_report`
 
@@ -55,7 +55,7 @@ Get Cost Report
 
 ### Returns
 
-- `CostReport = object { data, has_more, next_page }`
+- `CostReport object { data, has_more, next_page }`
 
   - `data: array of object { ending_at, results, starting_at }`
 
@@ -154,11 +154,40 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "ending_at": "2025-08-02T00:00:00Z",
+      "results": [
+        {
+          "amount": "123.78912",
+          "context_window": "0-200k",
+          "cost_type": "tokens",
+          "currency": "USD",
+          "description": "Claude Sonnet 4 Usage - Input Tokens",
+          "inference_geo": "global",
+          "model": "claude-opus-4-6",
+          "service_tier": "standard",
+          "token_type": "uncached_input_tokens",
+          "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+        }
+      ],
+      "starting_at": "2025-08-01T00:00:00Z"
+    }
+  ],
+  "has_more": true,
+  "next_page": "2019-12-27T18:11:19.117Z"
+}
+```
+
 ## Domain Types
 
 ### Cost Report
 
-- `CostReport = object { data, has_more, next_page }`
+- `CostReport object { data, has_more, next_page }`
 
   - `data: array of object { ending_at, results, starting_at }`
 

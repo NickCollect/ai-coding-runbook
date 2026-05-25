@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/api-and-data-retention
-fetched_at: 2026-05-18T05:02:44.114999+00:00
+fetched_at: 2026-05-25T05:15:51.545374+00:00
 fetch_method: mintlify_md
 ---
 
@@ -26,7 +26,7 @@ Different APIs and features have different storage and retention needs. Where an
 - Only what is technically necessary for the API and feature to work is retained. Conversation content (your prompts and Claude's outputs) is never retained unless explicitly noted.
 - Data is purged on the shortest practical TTL, and Anthropic aims to give customers control over how long data is retained. What is held, and the retention duration where a specific TTL applies, is documented on each feature's page.
 
-Data accessible through the [Compliance API](/docs/en/manage-claude/compliance-api) follows its own retention model. The [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) retains data for 6 years. Chat, file, and project content from claude.ai follows your organization's retention policy, set in **claude.ai** > **Organization settings** > **Data and privacy**.
+Data accessible through the [Compliance API](/docs/en/manage-claude/compliance-api) follows its own retention model. The [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) retains data for 6 years. Chat, file, and project content from claude.ai follows your organization's retention policy, set in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls).
 
 In the [feature eligibility table](#feature-eligibility), some features are marked "Yes (qualified)" in the ZDR eligible column. If your organization has a ZDR arrangement, you can use these features with confidence that what Anthropic retains is narrow and is required for optimal performance.
 
@@ -163,6 +163,7 @@ The following table lists which Claude API features are eligible for ZDR and HIP
 | [Fine-grained tool streaming](/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming) | `/v1/messages` | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Streaming tool parameters uses the standard Messages API. |
 | [Prompt caching](/docs/en/build-with-claude/prompt-caching) | `/v1/messages` | <Eligible>Yes</Eligible> | <Eligible>Yes</Eligible> | Your prompts and Claude's outputs are not stored. KV cache representations and cryptographic hashes are held in memory for the cache TTL and promptly deleted after expiry. See [Prompt caching](/docs/en/build-with-claude/prompt-caching#data-retention). |
 | [Structured outputs](/docs/en/build-with-claude/structured-outputs) | `/v1/messages` | <Eligible status="qualified">Yes (qualified)</Eligible> | <Eligible>Yes</Eligible><sup>3</sup> | Your prompts and Claude's outputs are not stored. Only the JSON schema is cached, for up to 24 hours since last use. This also covers [strict tool use](/docs/en/agents-and-tools/tool-use/strict-tool-use) (`strict: true` on tools), which uses the same grammar pipeline. See [Structured outputs](/docs/en/build-with-claude/structured-outputs#data-retention). |
+| [Cache diagnostics](/docs/en/build-with-claude/cache-diagnostics) | `/v1/messages` (with `diagnostics`) | <Eligible status="qualified">Yes (qualified)</Eligible> | <Eligible status="no">No</Eligible> | Your prompts and Claude's outputs are not stored. A fingerprint of cryptographic hashes and token-count estimates is retained briefly to enable comparison against the next request. See [Cache diagnostics](/docs/en/build-with-claude/cache-diagnostics#data-retention). |
 | [Tool search](/docs/en/agents-and-tools/tool-use/tool-search-tool) | `/v1/messages` (with `tool_search` tool) | <Eligible>Yes</Eligible> | <Eligible status="no">No</Eligible> | Tool search uses the standard Messages API. |
 | [Batch processing](/docs/en/build-with-claude/batch-processing) | `/v1/messages/batches` | <Eligible status="no">No</Eligible> | <Eligible status="no">No</Eligible> | 29-day retention; async storage required. See [Batch processing](/docs/en/build-with-claude/batch-processing#data-retention). |
 | [Code execution](/docs/en/agents-and-tools/tool-use/code-execution-tool) | `/v1/messages` (with `code_execution` tool) | <Eligible status="no">No</Eligible> | <Eligible status="no">No</Eligible> | Container data retained up to 30 days. See [Code execution](/docs/en/agents-and-tools/tool-use/code-execution-tool#data-retention). |
@@ -170,6 +171,8 @@ The following table lists which Claude API features are eligible for ZDR and HIP
 | [Files API](/docs/en/build-with-claude/files) | `/v1/files` | <Eligible status="no">No</Eligible> | <Eligible status="no">No</Eligible> | Files retained until explicitly deleted. See [Files API](/docs/en/build-with-claude/files#data-retention). |
 | [Agent skills](/docs/en/agents-and-tools/agent-skills/overview) | `/v1/messages` (with `skills`) / `/v1/skills` | <Eligible status="no">No</Eligible> | <Eligible status="no">No</Eligible> | Skill data retained per standard policy. See [Agent skills](/docs/en/agents-and-tools/agent-skills/overview#data-retention). |
 | [MCP connector](/docs/en/agents-and-tools/mcp-connector) | `/v1/messages` (with `mcp_servers`) | <Eligible status="no">No</Eligible> | <Eligible status="no">No</Eligible> | Data retained per standard policy. See [MCP connector](/docs/en/agents-and-tools/mcp-connector#data-retention). |
+| [Claude Managed Agents](/docs/en/managed-agents/overview) | `/v1/agents`, `/v1/sessions`, `/v1/environments` | <Eligible status="no">No</Eligible> | <Eligible status="no">No</Eligible> | Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including [Self-hosted sandboxes](/docs/en/managed-agents/self-hosted-sandboxes). |
+| [MCP tunnels](/docs/en/agents-and-tools/mcp-tunnels/overview) | `/v1/organizations/tunnels` | <Eligible status="no">No</Eligible> | <Eligible status="no">No</Eligible> | Research preview. See [MCP tunnels security](/docs/en/agents-and-tools/mcp-tunnels/security) for the data-flow boundary and subprocessor details. |
 
 <sup>1</sup> [Dynamic filtering](/docs/en/agents-and-tools/tool-use/web-search-tool#dynamic-filtering) is not eligible for ZDR or HIPAA.
 

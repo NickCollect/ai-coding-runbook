@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai
-fetched_at: 2026-05-18T05:02:43.247430+00:00
+fetched_at: 2026-05-25T05:15:50.635158+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ Anthropic's Claude models are available through [Vertex AI](https://cloud.google
 
 ---
 
-The Vertex API for accessing Claude is nearly-identical to the [Messages API](/docs/en/api/messages/create) and supports all of the same options, with two key differences:
+The Vertex API for accessing Claude is nearly identical to the [Messages API](/docs/en/api/messages/create), with two key differences in request format:
 
 * In Vertex, `model` is not passed in the request body. Instead, it is specified in the Google Cloud endpoint URL.
 * In Vertex, `anthropic_version` is passed in the request body (rather than as a header), and must be set to the value `vertex-2023-10-16`.
@@ -51,14 +51,14 @@ go get github.com/anthropics/anthropic-sdk-go
 <Tab title="Java">
 <CodeGroup>
 ```groovy Gradle
-implementation("com.anthropic:anthropic-java-vertex:2.32.0")
+implementation("com.anthropic:anthropic-java-vertex:2.33.0")
 ```
 
 ```xml Maven
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-vertex</artifactId>
-    <version>2.32.0</version>
+    <version>2.33.0</version>
 </dependency>
 ```
 
@@ -130,6 +130,10 @@ Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](/docs/
 | Claude Opus 4 <br /><small>Deprecated. Retiring September 14, 2026.</small> | claude-opus-4@20250514   |
 | Claude Haiku 4.5               | claude-haiku-4-5@20251001 |
 | Claude Haiku 3.5 <br /><small>Deprecated. Retiring July 5, 2026.</small> | claude-3-5-haiku@20241022 |
+
+<Tip>
+Upgrading to a newer Claude model? In Claude Code, run `/claude-api migrate` to apply model ID swaps and breaking parameter changes across your codebase. The skill detects which cloud platform your code targets and adjusts model ID formats and feature changes for that platform. See [Migrating to a newer Claude model](/docs/en/agents-and-tools/agent-skills/claude-api-skill#migrating-to-a-newer-claude-model).
+</Tip>
 
 ### Making requests
 
@@ -347,6 +351,10 @@ See the [client SDKs](/docs/en/api/client-sdks) and the official [Vertex AI docs
 
 Claude is also available through [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry).
 
+## Data retention
+
+Data handling for this offering is governed by Google Cloud Vertex AI. For details, see [Vertex AI and zero data retention](https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance).
+
 ## Activity logging
 
 Vertex provides a [request-response logging service](https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/request-response-logging) that allows customers to log the prompts and completions associated with your usage.
@@ -358,7 +366,25 @@ Turning on this service does not give Google or Anthropic any access to your con
 </Note>
 
 ## Feature support
-For all currently supported features on Vertex AI, see [API features overview](/docs/en/build-with-claude/overview).
+For the full feature list with Vertex AI availability, see [Features overview](/docs/en/build-with-claude/overview).
+
+### Supported feature highlights
+
+- [Messages API](/docs/en/api/messages/create)
+- [Prompt caching](/docs/en/build-with-claude/prompt-caching)
+- [Extended thinking](/docs/en/build-with-claude/extended-thinking)
+- [Tool use](/docs/en/agents-and-tools/tool-use/overview), including the [Bash tool](/docs/en/agents-and-tools/tool-use/bash-tool), [Computer use tool](/docs/en/agents-and-tools/tool-use/computer-use-tool), [Memory tool](/docs/en/agents-and-tools/tool-use/memory-tool), and [Text editor tool](/docs/en/agents-and-tools/tool-use/text-editor-tool)
+- [Web search tool](/docs/en/agents-and-tools/tool-use/web-search-tool)
+- [Citations](/docs/en/build-with-claude/citations)
+- [Structured outputs](/docs/en/build-with-claude/structured-outputs)
+
+### Features not supported
+
+- Input sources (URL sources for images and documents, Files API)
+- Server-side tools (code execution, web fetch, advisor)
+- Agent infrastructure (Agent Skills, MCP connector, programmatic tool calling)
+- API endpoints (Message Batches, Models, Admin, Compliance, Usage and Cost)
+- Claude Managed Agents
 
 ### Context window
 

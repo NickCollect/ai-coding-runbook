@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy
-fetched_at: 2026-05-18T05:02:43.155901+00:00
+fetched_at: 2026-05-25T05:15:50.545351+00:00
 fetch_method: mintlify_md
 ---
 
@@ -60,14 +60,14 @@ go get github.com/anthropics/anthropic-sdk-go/bedrock
 <Tab title="Java">
 <CodeGroup>
 ```groovy Gradle
-implementation("com.anthropic:anthropic-java-bedrock:2.32.0")
+implementation("com.anthropic:anthropic-java-bedrock:2.33.0")
 ```
 
 ```xml Maven
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-bedrock</artifactId>
-    <version>2.32.0</version>
+    <version>2.33.0</version>
 </dependency>
 ```
 
@@ -154,7 +154,7 @@ Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](/docs/
 | Claude Haiku 4.5 | anthropic.claude-haiku-4-5-20251001-v1:0 | Yes | Yes | Yes | No | No |
 | Claude Haiku 3.5 <br /><small>Deprecated. Retiring June 19, 2026.</small> | anthropic.claude-3-5-haiku-20241022-v1:0 | No | Yes | No | No | No |
 
-For more information about regional vs global model IDs, see the [Global vs regional endpoints](#global-vs-regional-endpoints) section below.
+For more information about regional vs global model IDs, see the [Global vs regional endpoints](#global-vs-regional-endpoints) section.
 
 ### List available models
 
@@ -642,14 +642,31 @@ client.messages().create(params).content().stream()
 
 Bedrock provides an [invocation logging service](https://docs.aws.amazon.com/bedrock/latest/userguide/model-invocation-logging.html) that allows customers to log the prompts and completions associated with your usage.
 
-Anthropic recommends that you log your activity on at least a 30-day rolling basis in order to understand your activity and investigate any potential misuse.
+Anthropic recommends that you log your activity on at least a 30-day rolling basis to understand your activity and investigate any potential misuse.
 
 <Note>
 Turning on this service does not give AWS or Anthropic any access to your content.
 </Note>
 
 ## Feature support
-For all currently supported features on Bedrock, see [Features overview](/docs/en/build-with-claude/overview).
+For the full feature list with Amazon Bedrock availability, see [Features overview](/docs/en/build-with-claude/overview).
+
+### Supported feature highlights
+
+- [Messages API](/docs/en/api/messages/create)
+- [Prompt caching](/docs/en/build-with-claude/prompt-caching)
+- [Extended thinking](/docs/en/build-with-claude/extended-thinking)
+- [Tool use](/docs/en/agents-and-tools/tool-use/overview), including the [Bash tool](/docs/en/agents-and-tools/tool-use/bash-tool), [Computer use tool](/docs/en/agents-and-tools/tool-use/computer-use-tool), [Memory tool](/docs/en/agents-and-tools/tool-use/memory-tool), and [Text editor tool](/docs/en/agents-and-tools/tool-use/text-editor-tool)
+- [Citations](/docs/en/build-with-claude/citations)
+- [Structured outputs](/docs/en/build-with-claude/structured-outputs)
+
+### Features not supported
+
+- Input sources (URL sources for images and documents, Files API)
+- Server-side tools (code execution, web search, web fetch, advisor)
+- Agent infrastructure (Agent Skills, MCP connector, programmatic tool calling)
+- API endpoints (Message Batches, Models, Admin, Compliance, Usage and Cost)
+- Claude Managed Agents
 
 ### PDF support on Bedrock
 

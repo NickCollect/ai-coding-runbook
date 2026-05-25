@@ -1,10 +1,10 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/api_keys/list
-fetched_at: 2026-05-04T16:22:23.305837+00:00
+fetched_at: 2026-05-25T05:15:55.512656+00:00
 fetch_method: mintlify_md
 ---
 
-## List
+## List API Keys
 
 **get** `/v1/organizations/api_keys`
 
@@ -124,4 +124,30 @@ List API Keys
 curl https://api.anthropic.com/v1/organizations/api_keys \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
+      "created_at": "2024-10-30T23:58:27.427722Z",
+      "created_by": {
+        "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+        "type": "user"
+      },
+      "expires_at": "2024-10-30T23:58:27.427722Z",
+      "name": "Developer Key",
+      "partial_key_hint": "sk-ant-api03-R2D...igAA",
+      "status": "active",
+      "type": "api_key",
+      "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
 ```

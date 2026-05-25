@@ -1,10 +1,10 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/sessions/threads/archive
-fetched_at: 2026-05-11T04:55:27.144283+00:00
+fetched_at: 2026-05-25T05:15:53.532345+00:00
 fetch_method: mintlify_md
 ---
 
-## Archive
+## Archive Session Thread
 
 **post** `/v1/sessions/{session_id}/threads/{thread_id}/archive`
 
@@ -22,9 +22,9 @@ Archive Session Thread
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -74,9 +74,11 @@ Archive Session Thread
 
     - `"managed-agents-2026-04-01"`
 
+    - `"cache-diagnosis-2026-04-07"`
+
 ### Returns
 
-- `BetaManagedAgentsSessionThread = object { id, agent, archived_at, 8 more }`
+- `BetaManagedAgentsSessionThread object { id, agent, archived_at, 8 more }`
 
   An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
 
@@ -112,7 +114,7 @@ Archive Session Thread
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
+        - `"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more`
 
           The model that will power your agent.
 
@@ -154,7 +156,7 @@ Archive Session Thread
 
             High-performance model for agents and coding
 
-        - `UnionMember1 = string`
+        - `string`
 
       - `speed: optional "standard" or "fast"`
 
@@ -168,7 +170,7 @@ Archive Session Thread
 
     - `skills: array of BetaManagedAgentsAnthropicSkill or BetaManagedAgentsCustomSkill`
 
-      - `BetaManagedAgentsAnthropicSkill = object { skill_id, type, version }`
+      - `BetaManagedAgentsAnthropicSkill object { skill_id, type, version }`
 
         A resolved Anthropic-managed skill.
 
@@ -180,7 +182,7 @@ Archive Session Thread
 
         - `version: string`
 
-      - `BetaManagedAgentsCustomSkill = object { skill_id, type, version }`
+      - `BetaManagedAgentsCustomSkill object { skill_id, type, version }`
 
         A resolved user-created custom skill.
 
@@ -196,7 +198,7 @@ Archive Session Thread
 
     - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
-      - `BetaManagedAgentsAgentToolset20260401 = object { configs, default_config, type }`
+      - `BetaManagedAgentsAgentToolset20260401 object { configs, default_config, type }`
 
         - `configs: array of BetaManagedAgentsAgentToolConfig`
 
@@ -226,7 +228,7 @@ Archive Session Thread
 
             Permission policy for tool execution.
 
-            - `BetaManagedAgentsAlwaysAllowPolicy = object { type }`
+            - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
 
               Tool calls are automatically approved without user confirmation.
 
@@ -234,7 +236,7 @@ Archive Session Thread
 
                 - `"always_allow"`
 
-            - `BetaManagedAgentsAlwaysAskPolicy = object { type }`
+            - `BetaManagedAgentsAlwaysAskPolicy object { type }`
 
               Tool calls require user confirmation before execution.
 
@@ -252,27 +254,19 @@ Archive Session Thread
 
             Permission policy for tool execution.
 
-            - `BetaManagedAgentsAlwaysAllowPolicy = object { type }`
+            - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy = object { type }`
+            - `BetaManagedAgentsAlwaysAskPolicy object { type }`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `type: "agent_toolset_20260401"`
 
           - `"agent_toolset_20260401"`
 
-      - `BetaManagedAgentsMCPToolset = object { configs, default_config, mcp_server_name, type }`
+      - `BetaManagedAgentsMCPToolset object { configs, default_config, mcp_server_name, type }`
 
         - `configs: array of BetaManagedAgentsMCPToolConfig`
 
@@ -284,21 +278,13 @@ Archive Session Thread
 
             Permission policy for tool execution.
 
-            - `BetaManagedAgentsAlwaysAllowPolicy = object { type }`
+            - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy = object { type }`
+            - `BetaManagedAgentsAlwaysAskPolicy object { type }`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -310,21 +296,13 @@ Archive Session Thread
 
             Permission policy for tool execution.
 
-            - `BetaManagedAgentsAlwaysAllowPolicy = object { type }`
+            - `BetaManagedAgentsAlwaysAllowPolicy object { type }`
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
-            - `BetaManagedAgentsAlwaysAskPolicy = object { type }`
+            - `BetaManagedAgentsAlwaysAskPolicy object { type }`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `mcp_server_name: string`
 
@@ -332,7 +310,7 @@ Archive Session Thread
 
           - `"mcp_toolset"`
 
-      - `BetaManagedAgentsCustomTool = object { description, input_schema, name, type }`
+      - `BetaManagedAgentsCustomTool object { description, input_schema, name, type }`
 
         A custom tool as returned in API responses.
 
@@ -456,4 +434,79 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "id": "sthr_011CZkZVWa6oIjw0rgXZpnBt",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "description": "A focused research subagent.",
+    "mcp_servers": [
+      {
+        "name": "example-mcp",
+        "type": "url",
+        "url": "https://example-server.modelcontextprotocol.io/sse"
+      }
+    ],
+    "model": {
+      "id": "claude-sonnet-4-6",
+      "speed": "standard"
+    },
+    "name": "Researcher",
+    "skills": [
+      {
+        "skill_id": "xlsx",
+        "type": "anthropic",
+        "version": "1"
+      }
+    ],
+    "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
+    "tools": [
+      {
+        "configs": [
+          {
+            "enabled": true,
+            "name": "bash",
+            "permission_policy": {
+              "type": "always_allow"
+            }
+          }
+        ],
+        "default_config": {
+          "enabled": true,
+          "permission_policy": {
+            "type": "always_ask"
+          }
+        },
+        "type": "agent_toolset_20260401"
+      }
+    ],
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "parent_thread_id": null,
+  "session_id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "stats": {
+    "active_seconds": 0,
+    "duration_seconds": 0,
+    "startup_seconds": 0
+  },
+  "status": "idle",
+  "type": "session_thread",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "usage": {
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "output_tokens": 0
+  }
+}
 ```

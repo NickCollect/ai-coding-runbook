@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/pdf-support
-fetched_at: 2026-05-18T05:02:42.894005+00:00
+fetched_at: 2026-05-25T05:15:50.177419+00:00
 fetch_method: mintlify_md
 ---
 
@@ -93,6 +93,10 @@ Let's start with a simple example using the Messages API. You can provide PDFs t
 1. As a URL reference to a PDF hosted online
 2. As a base64-encoded PDF in `document` content blocks
 3. By a `file_id` from the [Files API](/docs/en/build-with-claude/files)
+
+<Note>
+On Amazon Bedrock and Vertex AI, only base64-encoded sources are currently available.
+</Note>
 
 #### Option 1: URL-based PDF document
 

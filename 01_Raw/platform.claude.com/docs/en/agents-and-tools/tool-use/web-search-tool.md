@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool
-fetched_at: 2026-05-18T05:02:42.525868+00:00
+fetched_at: 2026-05-25T05:15:49.580066+00:00
 fetch_method: mintlify_md
 ---
 
@@ -651,13 +651,15 @@ You can include the web search tool in the [Messages Batches API](/docs/en/build
 Web search usage is charged in addition to token usage:
 
 ```json
-"usage": {
-  "input_tokens": 105,
-  "output_tokens": 6039,
-  "cache_read_input_tokens": 7123,
-  "cache_creation_input_tokens": 7345,
-  "server_tool_use": {
-    "web_search_requests": 1
+{
+  "usage": {
+    "input_tokens": 105,
+    "output_tokens": 6039,
+    "cache_read_input_tokens": 7123,
+    "cache_creation_input_tokens": 7345,
+    "server_tool_use": {
+      "web_search_requests": 1
+    }
   }
 }
 ```

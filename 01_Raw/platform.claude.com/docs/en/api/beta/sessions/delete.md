@@ -1,10 +1,10 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/sessions/delete
-fetched_at: 2026-05-11T04:55:26.775543+00:00
+fetched_at: 2026-05-25T05:15:53.074146+00:00
 fetch_method: mintlify_md
 ---
 
-## Delete
+## Delete Session
 
 **delete** `/v1/sessions/{session_id}`
 
@@ -20,9 +20,9 @@ Delete Session
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -72,9 +72,11 @@ Delete Session
 
     - `"managed-agents-2026-04-01"`
 
+    - `"cache-diagnosis-2026-04-07"`
+
 ### Returns
 
-- `BetaManagedAgentsDeletedSession = object { id, type }`
+- `BetaManagedAgentsDeletedSession object { id, type }`
 
   Confirmation that a `session` has been permanently deleted.
 
@@ -92,4 +94,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "type": "session_deleted"
+}
 ```

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin
-fetched_at: 2026-05-04T16:22:06.685524+00:00
+fetched_at: 2026-05-25T05:15:54.828194+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,7 +8,7 @@ fetch_method: mintlify_md
 
 # Organizations
 
-## Me
+## Get Current Organization
 
 **get** `/v1/organizations/me`
 
@@ -16,7 +16,7 @@ Retrieve information about the organization associated with the authenticated AP
 
 ### Returns
 
-- `Organization = object { id, name, type }`
+- `Organization object { id, name, type }`
 
   - `id: string`
 
@@ -42,11 +42,21 @@ curl https://api.anthropic.com/v1/organizations/me \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "id": "12345678-1234-5678-1234-567812345678",
+  "name": "Organization Name",
+  "type": "organization"
+}
+```
+
 ## Domain Types
 
 ### Organization
 
-- `Organization = object { id, name, type }`
+- `Organization object { id, name, type }`
 
   - `id: string`
 
@@ -66,7 +76,7 @@ curl https://api.anthropic.com/v1/organizations/me \
 
 # Invites
 
-## Create
+## Create Invite
 
 **post** `/v1/organizations/invites`
 
@@ -92,7 +102,7 @@ Create Invite
 
 ### Returns
 
-- `Invite = object { id, email, expires_at, 4 more }`
+- `Invite object { id, email, expires_at, 4 more }`
 
   - `id: string`
 
@@ -157,7 +167,21 @@ curl https://api.anthropic.com/v1/organizations/invites \
         }'
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "id": "invite_015gWxCN9Hfg2QhZwTK7Mdeu",
+  "email": "user@emaildomain.com",
+  "expires_at": "2024-11-20T23:58:27.427722Z",
+  "invited_at": "2024-10-30T23:58:27.427722Z",
+  "role": "user",
+  "status": "pending",
+  "type": "invite"
+}
+```
+
+## Get Invite
 
 **get** `/v1/organizations/invites/{invite_id}`
 
@@ -171,7 +195,7 @@ Get Invite
 
 ### Returns
 
-- `Invite = object { id, email, expires_at, 4 more }`
+- `Invite object { id, email, expires_at, 4 more }`
 
   - `id: string`
 
@@ -231,7 +255,21 @@ curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "invite_015gWxCN9Hfg2QhZwTK7Mdeu",
+  "email": "user@emaildomain.com",
+  "expires_at": "2024-11-20T23:58:27.427722Z",
+  "invited_at": "2024-10-30T23:58:27.427722Z",
+  "role": "user",
+  "status": "pending",
+  "type": "invite"
+}
+```
+
+## List Invites
 
 **get** `/v1/organizations/invites`
 
@@ -327,7 +365,28 @@ curl https://api.anthropic.com/v1/organizations/invites \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "invite_015gWxCN9Hfg2QhZwTK7Mdeu",
+      "email": "user@emaildomain.com",
+      "expires_at": "2024-11-20T23:58:27.427722Z",
+      "invited_at": "2024-10-30T23:58:27.427722Z",
+      "role": "user",
+      "status": "pending",
+      "type": "invite"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
+
+## Delete Invite
 
 **delete** `/v1/organizations/invites/{invite_id}`
 
@@ -362,11 +421,20 @@ curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "id": "invite_015gWxCN9Hfg2QhZwTK7Mdeu",
+  "type": "invite_deleted"
+}
+```
+
 ## Domain Types
 
 ### Invite
 
-- `Invite = object { id, email, expires_at, 4 more }`
+- `Invite object { id, email, expires_at, 4 more }`
 
   - `id: string`
 
@@ -420,7 +488,7 @@ curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
 
 ### Invite Delete Response
 
-- `InviteDeleteResponse = object { id, type }`
+- `InviteDeleteResponse object { id, type }`
 
   - `id: string`
 
@@ -436,7 +504,7 @@ curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
 
 # Users
 
-## Retrieve
+## Get User
 
 **get** `/v1/organizations/users/{user_id}`
 
@@ -450,7 +518,7 @@ Get User
 
 ### Returns
 
-- `User = object { id, added_at, email, 3 more }`
+- `User object { id, added_at, email, 3 more }`
 
   - `id: string`
 
@@ -498,7 +566,20 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "added_at": "2024-10-30T23:58:27.427722Z",
+  "email": "user@emaildomain.com",
+  "name": "Jane Doe",
+  "role": "user",
+  "type": "user"
+}
+```
+
+## List Users
 
 **get** `/v1/organizations/users`
 
@@ -586,7 +667,27 @@ curl https://api.anthropic.com/v1/organizations/users \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-## Update
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "added_at": "2024-10-30T23:58:27.427722Z",
+      "email": "user@emaildomain.com",
+      "name": "Jane Doe",
+      "role": "user",
+      "type": "user"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
+
+## Update User
 
 **post** `/v1/organizations/users/{user_id}`
 
@@ -614,7 +715,7 @@ Update User
 
 ### Returns
 
-- `User = object { id, added_at, email, 3 more }`
+- `User object { id, added_at, email, 3 more }`
 
   - `id: string`
 
@@ -666,7 +767,20 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
         }'
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "added_at": "2024-10-30T23:58:27.427722Z",
+  "email": "user@emaildomain.com",
+  "name": "Jane Doe",
+  "role": "user",
+  "type": "user"
+}
+```
+
+## Remove User
 
 **delete** `/v1/organizations/users/{user_id}`
 
@@ -701,11 +815,20 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "type": "user_deleted"
+}
+```
+
 ## Domain Types
 
 ### User
 
-- `User = object { id, added_at, email, 3 more }`
+- `User object { id, added_at, email, 3 more }`
 
   - `id: string`
 
@@ -747,7 +870,7 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
 
 ### User Delete Response
 
-- `UserDeleteResponse = object { id, type }`
+- `UserDeleteResponse object { id, type }`
 
   - `id: string`
 
@@ -763,11 +886,19 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
 
 # Workspaces
 
-## Create
+## Create Workspace
 
 **post** `/v1/organizations/workspaces`
 
 Create Workspace
+
+### Header Parameters
+
+- `"anthropic-beta": optional array of string`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
 ### Body Parameters
 
@@ -783,9 +914,9 @@ Create Workspace
 
     Permitted inference geo values. Defaults to 'unrestricted' if omitted, which allows all geos. Use the string 'unrestricted' to allow all geos, or a list of specific geos.
 
-    - `UnionMember0 = array of string`
+    - `array of string`
 
-    - `UnionMember1 = "unrestricted"`
+    - `"unrestricted"`
 
       - `"unrestricted"`
 
@@ -797,9 +928,13 @@ Create Workspace
 
     Geographic region for workspace data storage. Immutable after creation. Defaults to 'us' if omitted.
 
+- `tags: optional map[string]`
+
+  User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
 ### Returns
 
-- `Workspace = object { id, archived_at, created_at, 4 more }`
+- `Workspace object { id, archived_at, created_at, 5 more }`
 
   - `id: string`
 
@@ -821,9 +956,9 @@ Create Workspace
 
       Permitted inference geo values. 'unrestricted' means all geos are allowed.
 
-      - `UnionMember0 = array of string`
+      - `array of string`
 
-      - `UnionMember1 = "unrestricted"`
+      - `"unrestricted"`
 
         - `"unrestricted"`
 
@@ -842,6 +977,10 @@ Create Workspace
   - `name: string`
 
     Name of the Workspace.
+
+  - `tags: map[string]`
+
+    User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
   - `type: "workspace"`
 
@@ -859,11 +998,37 @@ curl https://api.anthropic.com/v1/organizations/workspaces \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY" \
     -d '{
-          "name": "x"
+          "name": "x",
+          "tags": {
+            "env": "prod",
+            "team": "platform"
+          }
         }'
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+  "archived_at": "2024-11-01T23:59:27.427722Z",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "data_residency": {
+    "allowed_inference_geos": "unrestricted",
+    "default_inference_geo": "default_inference_geo",
+    "workspace_geo": "workspace_geo"
+  },
+  "display_color": "#6C5BB9",
+  "name": "Workspace Name",
+  "tags": {
+    "env": "prod",
+    "team": "platform"
+  },
+  "type": "workspace"
+}
+```
+
+## Get Workspace
 
 **get** `/v1/organizations/workspaces/{workspace_id}`
 
@@ -877,7 +1042,7 @@ Get Workspace
 
 ### Returns
 
-- `Workspace = object { id, archived_at, created_at, 4 more }`
+- `Workspace object { id, archived_at, created_at, 5 more }`
 
   - `id: string`
 
@@ -899,9 +1064,9 @@ Get Workspace
 
       Permitted inference geo values. 'unrestricted' means all geos are allowed.
 
-      - `UnionMember0 = array of string`
+      - `array of string`
 
-      - `UnionMember1 = "unrestricted"`
+      - `"unrestricted"`
 
         - `"unrestricted"`
 
@@ -921,6 +1086,10 @@ Get Workspace
 
     Name of the Workspace.
 
+  - `tags: map[string]`
+
+    User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
   - `type: "workspace"`
 
     Object type.
@@ -937,7 +1106,29 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+  "archived_at": "2024-11-01T23:59:27.427722Z",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "data_residency": {
+    "allowed_inference_geos": "unrestricted",
+    "default_inference_geo": "default_inference_geo",
+    "workspace_geo": "workspace_geo"
+  },
+  "display_color": "#6C5BB9",
+  "name": "Workspace Name",
+  "tags": {
+    "env": "prod",
+    "team": "platform"
+  },
+  "type": "workspace"
+}
+```
+
+## List Workspaces
 
 **get** `/v1/organizations/workspaces`
 
@@ -987,9 +1178,9 @@ List Workspaces
 
       Permitted inference geo values. 'unrestricted' means all geos are allowed.
 
-      - `UnionMember0 = array of string`
+      - `array of string`
 
-      - `UnionMember1 = "unrestricted"`
+      - `"unrestricted"`
 
         - `"unrestricted"`
 
@@ -1008,6 +1199,10 @@ List Workspaces
   - `name: string`
 
     Name of the Workspace.
+
+  - `tags: map[string]`
+
+    User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
   - `type: "workspace"`
 
@@ -1037,7 +1232,36 @@ curl https://api.anthropic.com/v1/organizations/workspaces \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-## Update
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+      "archived_at": "2024-11-01T23:59:27.427722Z",
+      "created_at": "2024-10-30T23:58:27.427722Z",
+      "data_residency": {
+        "allowed_inference_geos": "unrestricted",
+        "default_inference_geo": "default_inference_geo",
+        "workspace_geo": "workspace_geo"
+      },
+      "display_color": "#6C5BB9",
+      "name": "Workspace Name",
+      "tags": {
+        "env": "prod",
+        "team": "platform"
+      },
+      "type": "workspace"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
+
+## Update Workspace
 
 **post** `/v1/organizations/workspaces/{workspace_id}`
 
@@ -1049,10 +1273,6 @@ Update Workspace
 
 ### Body Parameters
 
-- `name: string`
-
-  Name of the Workspace.
-
 - `data_residency: optional object { allowed_inference_geos, default_inference_geo }`
 
   Data residency configuration for the workspace.
@@ -1061,9 +1281,9 @@ Update Workspace
 
     Permitted inference geo values. Use 'unrestricted' to allow all geos, or a list of specific geos.
 
-    - `UnionMember0 = array of string`
+    - `array of string`
 
-    - `UnionMember1 = "unrestricted"`
+    - `"unrestricted"`
 
       - `"unrestricted"`
 
@@ -1071,9 +1291,17 @@ Update Workspace
 
     Default inference geo applied when requests omit the parameter. Must be a member of allowed_inference_geos unless allowed_inference_geos is `"unrestricted"`.
 
+- `name: optional string`
+
+  Name of the Workspace.
+
+- `tags: optional map[string]`
+
+  User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
 ### Returns
 
-- `Workspace = object { id, archived_at, created_at, 4 more }`
+- `Workspace object { id, archived_at, created_at, 5 more }`
 
   - `id: string`
 
@@ -1095,9 +1323,9 @@ Update Workspace
 
       Permitted inference geo values. 'unrestricted' means all geos are allowed.
 
-      - `UnionMember0 = array of string`
+      - `array of string`
 
-      - `UnionMember1 = "unrestricted"`
+      - `"unrestricted"`
 
         - `"unrestricted"`
 
@@ -1116,6 +1344,10 @@ Update Workspace
   - `name: string`
 
     Name of the Workspace.
+
+  - `tags: map[string]`
+
+    User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
   - `type: "workspace"`
 
@@ -1133,11 +1365,36 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY" \
     -d '{
-          "name": "x"
+          "tags": {
+            "env": "prod",
+            "team": "platform"
+          }
         }'
 ```
 
-## Archive
+#### Response
+
+```json
+{
+  "id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+  "archived_at": "2024-11-01T23:59:27.427722Z",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "data_residency": {
+    "allowed_inference_geos": "unrestricted",
+    "default_inference_geo": "default_inference_geo",
+    "workspace_geo": "workspace_geo"
+  },
+  "display_color": "#6C5BB9",
+  "name": "Workspace Name",
+  "tags": {
+    "env": "prod",
+    "team": "platform"
+  },
+  "type": "workspace"
+}
+```
+
+## Archive Workspace
 
 **post** `/v1/organizations/workspaces/{workspace_id}/archive`
 
@@ -1149,7 +1406,7 @@ Archive Workspace
 
 ### Returns
 
-- `Workspace = object { id, archived_at, created_at, 4 more }`
+- `Workspace object { id, archived_at, created_at, 5 more }`
 
   - `id: string`
 
@@ -1171,9 +1428,9 @@ Archive Workspace
 
       Permitted inference geo values. 'unrestricted' means all geos are allowed.
 
-      - `UnionMember0 = array of string`
+      - `array of string`
 
-      - `UnionMember1 = "unrestricted"`
+      - `"unrestricted"`
 
         - `"unrestricted"`
 
@@ -1192,6 +1449,10 @@ Archive Workspace
   - `name: string`
 
     Name of the Workspace.
+
+  - `tags: map[string]`
+
+    User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
   - `type: "workspace"`
 
@@ -1210,9 +1471,31 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/archive
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+  "archived_at": "2024-11-01T23:59:27.427722Z",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "data_residency": {
+    "allowed_inference_geos": "unrestricted",
+    "default_inference_geo": "default_inference_geo",
+    "workspace_geo": "workspace_geo"
+  },
+  "display_color": "#6C5BB9",
+  "name": "Workspace Name",
+  "tags": {
+    "env": "prod",
+    "team": "platform"
+  },
+  "type": "workspace"
+}
+```
+
 # Members
 
-## Create
+## Create Workspace Member
 
 **post** `/v1/organizations/workspaces/{workspace_id}/members`
 
@@ -1244,7 +1527,7 @@ Create Workspace Member
 
 ### Returns
 
-- `WorkspaceMember = object { type, user_id, workspace_id, workspace_role }`
+- `WorkspaceMember object { type, user_id, workspace_id, workspace_role }`
 
   - `type: "workspace_member"`
 
@@ -1289,7 +1572,18 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
         }'
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "type": "workspace_member",
+  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+  "workspace_role": "workspace_user"
+}
+```
+
+## Get Workspace Member
 
 **get** `/v1/organizations/workspaces/{workspace_id}/members/{user_id}`
 
@@ -1307,7 +1601,7 @@ Get Workspace Member
 
 ### Returns
 
-- `WorkspaceMember = object { type, user_id, workspace_id, workspace_role }`
+- `WorkspaceMember object { type, user_id, workspace_id, workspace_role }`
 
   - `type: "workspace_member"`
 
@@ -1347,7 +1641,18 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-## List
+#### Response
+
+```json
+{
+  "type": "workspace_member",
+  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+  "workspace_role": "workspace_user"
+}
+```
+
+## List Workspace Members
 
 **get** `/v1/organizations/workspaces/{workspace_id}/members`
 
@@ -1429,7 +1734,25 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-## Update
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "type": "workspace_member",
+      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+      "workspace_role": "workspace_user"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
+
+## Update Workspace Member
 
 **post** `/v1/organizations/workspaces/{workspace_id}/members/{user_id}`
 
@@ -1463,7 +1786,7 @@ Update Workspace Member
 
 ### Returns
 
-- `WorkspaceMember = object { type, user_id, workspace_id, workspace_role }`
+- `WorkspaceMember object { type, user_id, workspace_id, workspace_role }`
 
   - `type: "workspace_member"`
 
@@ -1507,7 +1830,18 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
         }'
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "type": "workspace_member",
+  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+  "workspace_role": "workspace_user"
+}
+```
+
+## Delete Workspace Member
 
 **delete** `/v1/organizations/workspaces/{workspace_id}/members/{user_id}`
 
@@ -1550,11 +1884,21 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "type": "workspace_member_deleted",
+  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+}
+```
+
 ## Domain Types
 
 ### Workspace Member
 
-- `WorkspaceMember = object { type, user_id, workspace_id, workspace_role }`
+- `WorkspaceMember object { type, user_id, workspace_id, workspace_role }`
 
   - `type: "workspace_member"`
 
@@ -1588,7 +1932,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
 
 ### Member Delete Response
 
-- `MemberDeleteResponse = object { type, user_id, workspace_id }`
+- `MemberDeleteResponse object { type, user_id, workspace_id }`
 
   - `type: "workspace_member_deleted"`
 
@@ -1608,7 +1952,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
 
 # Rate Limits
 
-## List
+## List Workspace Rate Limits
 
 **get** `/v1/organizations/workspaces/{workspace_id}/rate_limits`
 
@@ -1706,11 +2050,35 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/rate_li
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "group_type": "model_group",
+      "limits": [
+        {
+          "org_limit": 0,
+          "type": "type",
+          "value": 0
+        }
+      ],
+      "models": [
+        "string"
+      ],
+      "type": "workspace_rate_limit"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
 ## Domain Types
 
 ### Rate Limit List Response
 
-- `RateLimitListResponse = object { data, next_page }`
+- `RateLimitListResponse object { data, next_page }`
 
   - `data: array of object { group_type, limits, models, type }`
 
@@ -1764,7 +2132,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/rate_li
 
 # API Keys
 
-## Retrieve
+## Get API Key
 
 **get** `/v1/organizations/api_keys/{api_key_id}`
 
@@ -1778,7 +2146,7 @@ Get API Key
 
 ### Returns
 
-- `APIKey = object { id, created_at, created_by, 6 more }`
+- `APIKey object { id, created_at, created_by, 6 more }`
 
   - `id: string`
 
@@ -1844,7 +2212,26 @@ curl https://api.anthropic.com/v1/organizations/api_keys/$API_KEY_ID \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "created_by": {
+    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "type": "user"
+  },
+  "expires_at": "2024-10-30T23:58:27.427722Z",
+  "name": "Developer Key",
+  "partial_key_hint": "sk-ant-api03-R2D...igAA",
+  "status": "active",
+  "type": "api_key",
+  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+}
+```
+
+## List API Keys
 
 **get** `/v1/organizations/api_keys`
 
@@ -1966,7 +2353,33 @@ curl https://api.anthropic.com/v1/organizations/api_keys \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-## Update
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
+      "created_at": "2024-10-30T23:58:27.427722Z",
+      "created_by": {
+        "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+        "type": "user"
+      },
+      "expires_at": "2024-10-30T23:58:27.427722Z",
+      "name": "Developer Key",
+      "partial_key_hint": "sk-ant-api03-R2D...igAA",
+      "status": "active",
+      "type": "api_key",
+      "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
+```
+
+## Update API Key
 
 **post** `/v1/organizations/api_keys/{api_key_id}`
 
@@ -1996,7 +2409,7 @@ Update API Key
 
 ### Returns
 
-- `APIKey = object { id, created_at, created_by, 6 more }`
+- `APIKey object { id, created_at, created_by, 6 more }`
 
   - `id: string`
 
@@ -2064,9 +2477,28 @@ curl https://api.anthropic.com/v1/organizations/api_keys/$API_KEY_ID \
     -d '{}'
 ```
 
+#### Response
+
+```json
+{
+  "id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "created_by": {
+    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "type": "user"
+  },
+  "expires_at": "2024-10-30T23:58:27.427722Z",
+  "name": "Developer Key",
+  "partial_key_hint": "sk-ant-api03-R2D...igAA",
+  "status": "active",
+  "type": "api_key",
+  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+}
+```
+
 # Usage Report
 
-## Retrieve Messages
+## Get Messages Usage Report
 
 **get** `/v1/organizations/usage_report/messages`
 
@@ -2201,7 +2633,7 @@ Get Messages Usage Report
 
 ### Returns
 
-- `MessagesUsageReport = object { data, has_more, next_page }`
+- `MessagesUsageReport object { data, has_more, next_page }`
 
   - `data: array of object { ending_at, results, starting_at }`
 
@@ -2314,7 +2746,44 @@ curl https://api.anthropic.com/v1/organizations/usage_report/messages \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-## Retrieve Claude Code
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "ending_at": "2025-08-02T00:00:00Z",
+      "results": [
+        {
+          "account_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+          "api_key_id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 1000,
+            "ephemeral_5m_input_tokens": 500
+          },
+          "cache_read_input_tokens": 200,
+          "context_window": "0-200k",
+          "inference_geo": "global",
+          "model": "claude-opus-4-6",
+          "output_tokens": 500,
+          "server_tool_use": {
+            "web_search_requests": 10
+          },
+          "service_account_id": "svac_01Hk3R9TWxq7CfQak00OiVw4",
+          "service_tier": "standard",
+          "uncached_input_tokens": 1500,
+          "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+        }
+      ],
+      "starting_at": "2025-08-01T00:00:00Z"
+    }
+  ],
+  "has_more": true,
+  "next_page": "2019-12-27T18:11:19.117Z"
+}
+```
+
+## Get Claude Code Usage Report
 
 **get** `/v1/organizations/usage_report/claude_code`
 
@@ -2337,7 +2806,7 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
 ### Returns
 
-- `ClaudeCodeUsageReport = object { data, has_more, next_page }`
+- `ClaudeCodeUsageReport object { data, has_more, next_page }`
 
   - `data: array of object { actor, core_metrics, customer_type, 6 more }`
 
@@ -2347,7 +2816,7 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
       The user or API key that performed the Claude Code actions.
 
-      - `UserActor = object { email_address, type }`
+      - `UserActor object { email_address, type }`
 
         - `email_address: string`
 
@@ -2357,7 +2826,7 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
           - `"user_actor"`
 
-      - `APIActor = object { api_key_name, type }`
+      - `APIActor object { api_key_name, type }`
 
         - `api_key_name: string`
 
@@ -2491,11 +2960,88 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "actor": {
+        "email_address": "user@emaildomain.com",
+        "type": "user_actor"
+      },
+      "core_metrics": {
+        "commits_by_claude_code": 8,
+        "lines_of_code": {
+          "added": 342,
+          "removed": 128
+        },
+        "num_sessions": 15,
+        "pull_requests_by_claude_code": 2
+      },
+      "customer_type": "api",
+      "date": "2025-08-08T00:00:00Z",
+      "model_breakdown": [
+        {
+          "estimated_cost": {
+            "amount": 186,
+            "currency": "USD"
+          },
+          "model": "claude-sonnet-4-20250514",
+          "tokens": {
+            "cache_creation": 2340,
+            "cache_read": 8790,
+            "input": 45230,
+            "output": 12450
+          }
+        },
+        {
+          "estimated_cost": {
+            "amount": 42,
+            "currency": "USD"
+          },
+          "model": "claude-3-5-haiku-20241022",
+          "tokens": {
+            "cache_creation": 890,
+            "cache_read": 3420,
+            "input": 23100,
+            "output": 5680
+          }
+        }
+      ],
+      "organization_id": "12345678-1234-5678-1234-567812345678",
+      "terminal_type": "iTerm.app",
+      "tool_actions": {
+        "edit_tool": {
+          "accepted": 25,
+          "rejected": 3
+        },
+        "multi_edit_tool": {
+          "accepted": 12,
+          "rejected": 1
+        },
+        "notebook_edit_tool": {
+          "accepted": 5,
+          "rejected": 2
+        },
+        "write_tool": {
+          "accepted": 8,
+          "rejected": 0
+        }
+      },
+      "subscription_type": "enterprise"
+    }
+  ],
+  "has_more": true,
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
+
 ## Domain Types
 
 ### Claude Code Usage Report
 
-- `ClaudeCodeUsageReport = object { data, has_more, next_page }`
+- `ClaudeCodeUsageReport object { data, has_more, next_page }`
 
   - `data: array of object { actor, core_metrics, customer_type, 6 more }`
 
@@ -2505,7 +3051,7 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
 
       The user or API key that performed the Claude Code actions.
 
-      - `UserActor = object { email_address, type }`
+      - `UserActor object { email_address, type }`
 
         - `email_address: string`
 
@@ -2515,7 +3061,7 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
 
           - `"user_actor"`
 
-      - `APIActor = object { api_key_name, type }`
+      - `APIActor object { api_key_name, type }`
 
         - `api_key_name: string`
 
@@ -2643,7 +3189,7 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
 
 ### Messages Usage Report
 
-- `MessagesUsageReport = object { data, has_more, next_page }`
+- `MessagesUsageReport object { data, has_more, next_page }`
 
   - `data: array of object { ending_at, results, starting_at }`
 
@@ -2750,7 +3296,7 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
 
 # Cost Report
 
-## Retrieve
+## Get Cost Report
 
 **get** `/v1/organizations/cost_report`
 
@@ -2799,7 +3345,7 @@ Get Cost Report
 
 ### Returns
 
-- `CostReport = object { data, has_more, next_page }`
+- `CostReport object { data, has_more, next_page }`
 
   - `data: array of object { ending_at, results, starting_at }`
 
@@ -2898,11 +3444,40 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "ending_at": "2025-08-02T00:00:00Z",
+      "results": [
+        {
+          "amount": "123.78912",
+          "context_window": "0-200k",
+          "cost_type": "tokens",
+          "currency": "USD",
+          "description": "Claude Sonnet 4 Usage - Input Tokens",
+          "inference_geo": "global",
+          "model": "claude-opus-4-6",
+          "service_tier": "standard",
+          "token_type": "uncached_input_tokens",
+          "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+        }
+      ],
+      "starting_at": "2025-08-01T00:00:00Z"
+    }
+  ],
+  "has_more": true,
+  "next_page": "2019-12-27T18:11:19.117Z"
+}
+```
+
 ## Domain Types
 
 ### Cost Report
 
-- `CostReport = object { data, has_more, next_page }`
+- `CostReport object { data, has_more, next_page }`
 
   - `data: array of object { ending_at, results, starting_at }`
 
@@ -2995,7 +3570,7 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
 
 # Rate Limits
 
-## List
+## List Organization Rate Limits
 
 **get** `/v1/organizations/rate_limits`
 
@@ -3087,11 +3662,34 @@ curl https://api.anthropic.com/v1/organizations/rate_limits \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "group_type": "model_group",
+      "limits": [
+        {
+          "type": "type",
+          "value": 0
+        }
+      ],
+      "models": [
+        "string"
+      ],
+      "type": "rate_limit"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
 ## Domain Types
 
 ### Rate Limit List Response
 
-- `RateLimitListResponse = object { data, next_page }`
+- `RateLimitListResponse object { data, next_page }`
 
   - `data: array of object { group_type, limits, models, type }`
 
@@ -3138,3 +3736,1078 @@ curl https://api.anthropic.com/v1/organizations/rate_limits \
   - `next_page: string`
 
     Token to provide in as `page` in the subsequent request to retrieve the next page of data.
+
+# MCP Tunnels
+
+## Get Tunnel
+
+**get** `/v1/organizations/tunnels/{tunnel_id}`
+
+Retrieve a single tunnel in the caller's organization by ID.
+
+### Path Parameters
+
+- `tunnel_id: string`
+
+  ID of the Tunnel.
+
+### Header Parameters
+
+- `"anthropic-beta": array of "mcp-tunnels-2026-05-19"`
+
+  Required for all Tunnel endpoints.
+
+  - `"mcp-tunnels-2026-05-19"`
+
+### Returns
+
+- `id: string`
+
+  ID of the Tunnel.
+
+- `archived_at: string`
+
+  RFC 3339 datetime string indicating when the Tunnel was archived, or
+  `null` if it is not archived.
+
+- `created_at: string`
+
+  RFC 3339 datetime string indicating when the Tunnel was created.
+
+- `display_name: string`
+
+  Human-readable name for the Tunnel (1–255 characters), or `null` if unset.
+
+- `domain: string`
+
+  Anthropic-assigned hostname for the Tunnel. MCP server URLs whose host is a
+  subdomain of this value are routed through the Tunnel. Globally unique and
+  never reused, even after the Tunnel is archived.
+
+- `type: "tunnel"`
+
+  Object type. Always `tunnel` for Tunnels.
+
+  - `"tunnel"`
+
+- `workspace_id: string`
+
+  ID of the Workspace this Tunnel belongs to, or `null` for the default
+  Workspace. Immutable after creation.
+
+### Example
+
+```http
+curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+```
+
+#### Response
+
+```json
+{
+  "id": "tnl_01Hx9Kp2RtQvMn3sWbYdLcF8",
+  "archived_at": "2024-11-01T23:59:27.427722Z",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "display_name": "Production",
+  "domain": "a1b2c3d4.tunnel.anthropic.com",
+  "type": "tunnel",
+  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+}
+```
+
+## List Tunnels
+
+**get** `/v1/organizations/tunnels`
+
+List the organization's tunnels.
+
+Results span the caller's organization, ordered by creation time
+(newest first). Use `workspace_id` to filter to a single workspace;
+archived tunnels are excluded unless `include_archived` is set.
+
+### Query Parameters
+
+- `include_archived: optional boolean`
+
+  Include archived tunnels in the results. Archived tunnels are excluded by
+  default.
+
+- `limit: optional number`
+
+  Maximum number of tunnels to return in a single page.
+
+- `page: optional string`
+
+  Opaque pagination cursor from a previous response's `next_page`. Omit to
+  fetch the first page.
+
+- `workspace_id: optional string`
+
+  Return only tunnels in this Workspace. Accepts a `wrkspc_`-prefixed
+  Workspace ID; omit to list tunnels across all Workspaces.
+
+### Header Parameters
+
+- `"anthropic-beta": array of "mcp-tunnels-2026-05-19"`
+
+  Required for all Tunnel endpoints.
+
+  - `"mcp-tunnels-2026-05-19"`
+
+### Returns
+
+- `data: array of object { id, archived_at, created_at, 4 more }`
+
+  - `id: string`
+
+    ID of the Tunnel.
+
+  - `archived_at: string`
+
+    RFC 3339 datetime string indicating when the Tunnel was archived, or
+    `null` if it is not archived.
+
+  - `created_at: string`
+
+    RFC 3339 datetime string indicating when the Tunnel was created.
+
+  - `display_name: string`
+
+    Human-readable name for the Tunnel (1–255 characters), or `null` if unset.
+
+  - `domain: string`
+
+    Anthropic-assigned hostname for the Tunnel. MCP server URLs whose host is a
+    subdomain of this value are routed through the Tunnel. Globally unique and
+    never reused, even after the Tunnel is archived.
+
+  - `type: "tunnel"`
+
+    Object type. Always `tunnel` for Tunnels.
+
+    - `"tunnel"`
+
+  - `workspace_id: string`
+
+    ID of the Workspace this Tunnel belongs to, or `null` for the default
+    Workspace. Immutable after creation.
+
+- `next_page: string`
+
+  Opaque cursor for the next page, or `null` if there are no more results.
+
+### Example
+
+```http
+curl https://api.anthropic.com/v1/organizations/tunnels \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "tnl_01Hx9Kp2RtQvMn3sWbYdLcF8",
+      "archived_at": "2024-11-01T23:59:27.427722Z",
+      "created_at": "2024-10-30T23:58:27.427722Z",
+      "display_name": "Production",
+      "domain": "a1b2c3d4.tunnel.anthropic.com",
+      "type": "tunnel",
+      "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
+
+## Reveal Tunnel Token
+
+**post** `/v1/organizations/tunnels/{tunnel_id}/reveal_token`
+
+Return the tunnel's current connection token.
+
+The value is fetched live on each call; Anthropic does not store it.
+Repeated calls return the same value until the token is rotated.
+Exposed as `POST` so the token does not appear in intermediary
+access logs.
+
+### Path Parameters
+
+- `tunnel_id: string`
+
+  ID of the Tunnel.
+
+### Header Parameters
+
+- `"anthropic-beta": array of "mcp-tunnels-2026-05-19"`
+
+  Required for all Tunnel endpoints.
+
+  - `"mcp-tunnels-2026-05-19"`
+
+### Returns
+
+- `id: string`
+
+  Stable identifier for the current token value. Changes when the token is
+  rotated.
+
+- `tunnel_token: string`
+
+  The tunnel's connection token.
+
+- `type: "tunnel_token"`
+
+  Object type. Always `tunnel_token` for Tunnel Tokens.
+
+  - `"tunnel_token"`
+
+### Example
+
+```http
+curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/reveal_token \
+    -X POST \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+```
+
+#### Response
+
+```json
+{
+  "id": "ttkn_bb97000eaec162831399ca9b6684a4fdf5be49ace5683057b017aab5c87e19e0",
+  "tunnel_token": "eyJhIjoiRVhBTVBMRSIsInQiOiJFWEFNUExFIiwicyI6IkVYQU1QTEUifQ==",
+  "type": "tunnel_token"
+}
+```
+
+## Rotate Tunnel Token
+
+**post** `/v1/organizations/tunnels/{tunnel_id}/rotate_token`
+
+Invalidate the tunnel's current token for new connections and return a fresh value.
+
+Established connections are not severed by rotation; a connector
+restarted after rotation must use the new value. An optional
+`reason` is captured for operational context.
+
+### Path Parameters
+
+- `tunnel_id: string`
+
+  ID of the Tunnel.
+
+### Header Parameters
+
+- `"anthropic-beta": array of "mcp-tunnels-2026-05-19"`
+
+  Required for all Tunnel endpoints.
+
+  - `"mcp-tunnels-2026-05-19"`
+
+### Body Parameters
+
+- `reason: optional string`
+
+  Optional free-text reason for the rotation, recorded for audit.
+
+### Returns
+
+- `id: string`
+
+  Stable identifier for the current token value. Changes when the token is
+  rotated.
+
+- `tunnel_token: string`
+
+  The tunnel's connection token.
+
+- `type: "tunnel_token"`
+
+  Object type. Always `tunnel_token` for Tunnel Tokens.
+
+  - `"tunnel_token"`
+
+### Example
+
+```http
+curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/rotate_token \
+    -X POST \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+```
+
+#### Response
+
+```json
+{
+  "id": "ttkn_bb97000eaec162831399ca9b6684a4fdf5be49ace5683057b017aab5c87e19e0",
+  "tunnel_token": "eyJhIjoiRVhBTVBMRSIsInQiOiJFWEFNUExFIiwicyI6IkVYQU1QTEUifQ==",
+  "type": "tunnel_token"
+}
+```
+
+## Archive Tunnel
+
+**post** `/v1/organizations/tunnels/{tunnel_id}/archive`
+
+Archive a tunnel. Archival is irreversible.
+
+Every non-archived certificate on the tunnel is archived in the same
+operation, the hostname is retired and never re-allocated, and the
+tunnel token is invalidated. Retrying against an already-archived
+tunnel returns the existing record unchanged.
+
+### Path Parameters
+
+- `tunnel_id: string`
+
+  ID of the Tunnel.
+
+### Header Parameters
+
+- `"anthropic-beta": array of "mcp-tunnels-2026-05-19"`
+
+  Required for all Tunnel endpoints.
+
+  - `"mcp-tunnels-2026-05-19"`
+
+### Returns
+
+- `id: string`
+
+  ID of the Tunnel.
+
+- `archived_at: string`
+
+  RFC 3339 datetime string indicating when the Tunnel was archived, or
+  `null` if it is not archived.
+
+- `created_at: string`
+
+  RFC 3339 datetime string indicating when the Tunnel was created.
+
+- `display_name: string`
+
+  Human-readable name for the Tunnel (1–255 characters), or `null` if unset.
+
+- `domain: string`
+
+  Anthropic-assigned hostname for the Tunnel. MCP server URLs whose host is a
+  subdomain of this value are routed through the Tunnel. Globally unique and
+  never reused, even after the Tunnel is archived.
+
+- `type: "tunnel"`
+
+  Object type. Always `tunnel` for Tunnels.
+
+  - `"tunnel"`
+
+- `workspace_id: string`
+
+  ID of the Workspace this Tunnel belongs to, or `null` for the default
+  Workspace. Immutable after creation.
+
+### Example
+
+```http
+curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/archive \
+    -X POST \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+```
+
+#### Response
+
+```json
+{
+  "id": "tnl_01Hx9Kp2RtQvMn3sWbYdLcF8",
+  "archived_at": "2024-11-01T23:59:27.427722Z",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "display_name": "Production",
+  "domain": "a1b2c3d4.tunnel.anthropic.com",
+  "type": "tunnel",
+  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+}
+```
+
+## Domain Types
+
+### MCP Tunnel Retrieve Response
+
+- `MCPTunnelRetrieveResponse object { id, archived_at, created_at, 4 more }`
+
+  - `id: string`
+
+    ID of the Tunnel.
+
+  - `archived_at: string`
+
+    RFC 3339 datetime string indicating when the Tunnel was archived, or
+    `null` if it is not archived.
+
+  - `created_at: string`
+
+    RFC 3339 datetime string indicating when the Tunnel was created.
+
+  - `display_name: string`
+
+    Human-readable name for the Tunnel (1–255 characters), or `null` if unset.
+
+  - `domain: string`
+
+    Anthropic-assigned hostname for the Tunnel. MCP server URLs whose host is a
+    subdomain of this value are routed through the Tunnel. Globally unique and
+    never reused, even after the Tunnel is archived.
+
+  - `type: "tunnel"`
+
+    Object type. Always `tunnel` for Tunnels.
+
+    - `"tunnel"`
+
+  - `workspace_id: string`
+
+    ID of the Workspace this Tunnel belongs to, or `null` for the default
+    Workspace. Immutable after creation.
+
+### MCP Tunnel List Response
+
+- `MCPTunnelListResponse object { data, next_page }`
+
+  - `data: array of object { id, archived_at, created_at, 4 more }`
+
+    - `id: string`
+
+      ID of the Tunnel.
+
+    - `archived_at: string`
+
+      RFC 3339 datetime string indicating when the Tunnel was archived, or
+      `null` if it is not archived.
+
+    - `created_at: string`
+
+      RFC 3339 datetime string indicating when the Tunnel was created.
+
+    - `display_name: string`
+
+      Human-readable name for the Tunnel (1–255 characters), or `null` if unset.
+
+    - `domain: string`
+
+      Anthropic-assigned hostname for the Tunnel. MCP server URLs whose host is a
+      subdomain of this value are routed through the Tunnel. Globally unique and
+      never reused, even after the Tunnel is archived.
+
+    - `type: "tunnel"`
+
+      Object type. Always `tunnel` for Tunnels.
+
+      - `"tunnel"`
+
+    - `workspace_id: string`
+
+      ID of the Workspace this Tunnel belongs to, or `null` for the default
+      Workspace. Immutable after creation.
+
+  - `next_page: string`
+
+    Opaque cursor for the next page, or `null` if there are no more results.
+
+### MCP Tunnel Reveal Token Response
+
+- `MCPTunnelRevealTokenResponse object { id, tunnel_token, type }`
+
+  - `id: string`
+
+    Stable identifier for the current token value. Changes when the token is
+    rotated.
+
+  - `tunnel_token: string`
+
+    The tunnel's connection token.
+
+  - `type: "tunnel_token"`
+
+    Object type. Always `tunnel_token` for Tunnel Tokens.
+
+    - `"tunnel_token"`
+
+### MCP Tunnel Rotate Token Response
+
+- `MCPTunnelRotateTokenResponse object { id, tunnel_token, type }`
+
+  - `id: string`
+
+    Stable identifier for the current token value. Changes when the token is
+    rotated.
+
+  - `tunnel_token: string`
+
+    The tunnel's connection token.
+
+  - `type: "tunnel_token"`
+
+    Object type. Always `tunnel_token` for Tunnel Tokens.
+
+    - `"tunnel_token"`
+
+### MCP Tunnel Archive Response
+
+- `MCPTunnelArchiveResponse object { id, archived_at, created_at, 4 more }`
+
+  - `id: string`
+
+    ID of the Tunnel.
+
+  - `archived_at: string`
+
+    RFC 3339 datetime string indicating when the Tunnel was archived, or
+    `null` if it is not archived.
+
+  - `created_at: string`
+
+    RFC 3339 datetime string indicating when the Tunnel was created.
+
+  - `display_name: string`
+
+    Human-readable name for the Tunnel (1–255 characters), or `null` if unset.
+
+  - `domain: string`
+
+    Anthropic-assigned hostname for the Tunnel. MCP server URLs whose host is a
+    subdomain of this value are routed through the Tunnel. Globally unique and
+    never reused, even after the Tunnel is archived.
+
+  - `type: "tunnel"`
+
+    Object type. Always `tunnel` for Tunnels.
+
+    - `"tunnel"`
+
+  - `workspace_id: string`
+
+    ID of the Workspace this Tunnel belongs to, or `null` for the default
+    Workspace. Immutable after creation.
+
+# Tunnel Certificates
+
+## Create Tunnel Certificate
+
+**post** `/v1/organizations/tunnels/{tunnel_id}/certificates`
+
+Register a public CA certificate for the tunnel.
+
+Anthropic verifies the gateway's server certificate against this CA
+when it terminates the inner TLS session. The PEM body must contain
+exactly one X.509 certificate and no private-key material. A tunnel
+holds at most two non-archived certificates.
+
+### Path Parameters
+
+- `tunnel_id: string`
+
+  ID of the Tunnel.
+
+### Header Parameters
+
+- `"anthropic-beta": array of "mcp-tunnels-2026-05-19"`
+
+  Required for all Tunnel endpoints.
+
+  - `"mcp-tunnels-2026-05-19"`
+
+### Body Parameters
+
+- `ca_certificate_pem: string`
+
+  PEM-encoded X.509 CA certificate. Must contain exactly one certificate and
+  no private-key material.
+
+### Returns
+
+- `id: string`
+
+  ID of the Tunnel Certificate.
+
+- `archived_at: string`
+
+  RFC 3339 datetime string indicating when the certificate was archived, or
+  `null` if it is not archived.
+
+- `created_at: string`
+
+  RFC 3339 datetime string indicating when the certificate was registered.
+
+- `expires_at: string`
+
+  RFC 3339 datetime string indicating when the certificate expires, or
+  `null` if it does not expire.
+
+- `fingerprint: string`
+
+  The certificate's SHA-256 fingerprint, as a lowercase hex string.
+
+- `tunnel_id: string`
+
+  ID of the Tunnel this certificate is registered against.
+
+- `type: "tunnel_certificate"`
+
+  Object type. Always `tunnel_certificate` for Tunnel Certificates.
+
+  - `"tunnel_certificate"`
+
+### Example
+
+```http
+curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates \
+    -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN" \
+    -d '{
+          "ca_certificate_pem": "-----BEGIN CERTIFICATE-----\\nMIIBexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexa\\n...illustrative placeholder, not a real certificate...\\n-----END CERTIFICATE-----\\n"
+        }'
+```
+
+#### Response
+
+```json
+{
+  "id": "tcrt_01JmWq4ZxnBvR7tKpY2sLdH9",
+  "archived_at": "2024-11-01T23:59:27.427722Z",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "expires_at": "2024-10-30T23:58:27.427722Z",
+  "fingerprint": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+  "tunnel_id": "tnl_01Hx9Kp2RtQvMn3sWbYdLcF8",
+  "type": "tunnel_certificate"
+}
+```
+
+## Get Tunnel Certificate
+
+**get** `/v1/organizations/tunnels/{tunnel_id}/certificates/{certificate_id}`
+
+Retrieve a single certificate registered on a tunnel by ID.
+
+### Path Parameters
+
+- `tunnel_id: string`
+
+  ID of the Tunnel.
+
+- `certificate_id: string`
+
+  ID of the Tunnel Certificate.
+
+### Header Parameters
+
+- `"anthropic-beta": array of "mcp-tunnels-2026-05-19"`
+
+  Required for all Tunnel endpoints.
+
+  - `"mcp-tunnels-2026-05-19"`
+
+### Returns
+
+- `id: string`
+
+  ID of the Tunnel Certificate.
+
+- `archived_at: string`
+
+  RFC 3339 datetime string indicating when the certificate was archived, or
+  `null` if it is not archived.
+
+- `created_at: string`
+
+  RFC 3339 datetime string indicating when the certificate was registered.
+
+- `expires_at: string`
+
+  RFC 3339 datetime string indicating when the certificate expires, or
+  `null` if it does not expire.
+
+- `fingerprint: string`
+
+  The certificate's SHA-256 fingerprint, as a lowercase hex string.
+
+- `tunnel_id: string`
+
+  ID of the Tunnel this certificate is registered against.
+
+- `type: "tunnel_certificate"`
+
+  Object type. Always `tunnel_certificate` for Tunnel Certificates.
+
+  - `"tunnel_certificate"`
+
+### Example
+
+```http
+curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates/$CERTIFICATE_ID \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+```
+
+#### Response
+
+```json
+{
+  "id": "tcrt_01JmWq4ZxnBvR7tKpY2sLdH9",
+  "archived_at": "2024-11-01T23:59:27.427722Z",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "expires_at": "2024-10-30T23:58:27.427722Z",
+  "fingerprint": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+  "tunnel_id": "tnl_01Hx9Kp2RtQvMn3sWbYdLcF8",
+  "type": "tunnel_certificate"
+}
+```
+
+## List Tunnel Certificates
+
+**get** `/v1/organizations/tunnels/{tunnel_id}/certificates`
+
+List the certificates registered on a tunnel.
+
+Archived certificates are excluded unless `include_archived` is set.
+
+### Path Parameters
+
+- `tunnel_id: string`
+
+  ID of the Tunnel.
+
+### Query Parameters
+
+- `include_archived: optional boolean`
+
+  Include archived certificates in the results. Archived certificates are
+  excluded by default.
+
+- `limit: optional number`
+
+  Maximum number of certificates to return.
+
+- `page: optional string`
+
+  A tunnel has at most two active certificates, so this list is not
+  paginated.
+
+### Header Parameters
+
+- `"anthropic-beta": array of "mcp-tunnels-2026-05-19"`
+
+  Required for all Tunnel endpoints.
+
+  - `"mcp-tunnels-2026-05-19"`
+
+### Returns
+
+- `data: array of object { id, archived_at, created_at, 4 more }`
+
+  - `id: string`
+
+    ID of the Tunnel Certificate.
+
+  - `archived_at: string`
+
+    RFC 3339 datetime string indicating when the certificate was archived, or
+    `null` if it is not archived.
+
+  - `created_at: string`
+
+    RFC 3339 datetime string indicating when the certificate was registered.
+
+  - `expires_at: string`
+
+    RFC 3339 datetime string indicating when the certificate expires, or
+    `null` if it does not expire.
+
+  - `fingerprint: string`
+
+    The certificate's SHA-256 fingerprint, as a lowercase hex string.
+
+  - `tunnel_id: string`
+
+    ID of the Tunnel this certificate is registered against.
+
+  - `type: "tunnel_certificate"`
+
+    Object type. Always `tunnel_certificate` for Tunnel Certificates.
+
+    - `"tunnel_certificate"`
+
+- `next_page: string`
+
+  Opaque cursor for the next page, or `null` if there are no more results.
+
+### Example
+
+```http
+curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "tcrt_01JmWq4ZxnBvR7tKpY2sLdH9",
+      "archived_at": "2024-11-01T23:59:27.427722Z",
+      "created_at": "2024-10-30T23:58:27.427722Z",
+      "expires_at": "2024-10-30T23:58:27.427722Z",
+      "fingerprint": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+      "tunnel_id": "tnl_01Hx9Kp2RtQvMn3sWbYdLcF8",
+      "type": "tunnel_certificate"
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
+
+## Archive Tunnel Certificate
+
+**post** `/v1/organizations/tunnels/{tunnel_id}/certificates/{certificate_id}/archive`
+
+Archive a certificate, removing it from the set Anthropic trusts for this tunnel.
+
+The certificate record is retained. Archiving the last non-archived
+certificate is permitted; the tunnel rejects MCP traffic until a new
+certificate is added.
+
+### Path Parameters
+
+- `tunnel_id: string`
+
+  ID of the Tunnel.
+
+- `certificate_id: string`
+
+  ID of the Tunnel Certificate.
+
+### Header Parameters
+
+- `"anthropic-beta": array of "mcp-tunnels-2026-05-19"`
+
+  Required for all Tunnel endpoints.
+
+  - `"mcp-tunnels-2026-05-19"`
+
+### Returns
+
+- `id: string`
+
+  ID of the Tunnel Certificate.
+
+- `archived_at: string`
+
+  RFC 3339 datetime string indicating when the certificate was archived, or
+  `null` if it is not archived.
+
+- `created_at: string`
+
+  RFC 3339 datetime string indicating when the certificate was registered.
+
+- `expires_at: string`
+
+  RFC 3339 datetime string indicating when the certificate expires, or
+  `null` if it does not expire.
+
+- `fingerprint: string`
+
+  The certificate's SHA-256 fingerprint, as a lowercase hex string.
+
+- `tunnel_id: string`
+
+  ID of the Tunnel this certificate is registered against.
+
+- `type: "tunnel_certificate"`
+
+  Object type. Always `tunnel_certificate` for Tunnel Certificates.
+
+  - `"tunnel_certificate"`
+
+### Example
+
+```http
+curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates/$CERTIFICATE_ID/archive \
+    -X POST \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+```
+
+#### Response
+
+```json
+{
+  "id": "tcrt_01JmWq4ZxnBvR7tKpY2sLdH9",
+  "archived_at": "2024-11-01T23:59:27.427722Z",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "expires_at": "2024-10-30T23:58:27.427722Z",
+  "fingerprint": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+  "tunnel_id": "tnl_01Hx9Kp2RtQvMn3sWbYdLcF8",
+  "type": "tunnel_certificate"
+}
+```
+
+## Domain Types
+
+### Tunnel Certificate Create Response
+
+- `TunnelCertificateCreateResponse object { id, archived_at, created_at, 4 more }`
+
+  - `id: string`
+
+    ID of the Tunnel Certificate.
+
+  - `archived_at: string`
+
+    RFC 3339 datetime string indicating when the certificate was archived, or
+    `null` if it is not archived.
+
+  - `created_at: string`
+
+    RFC 3339 datetime string indicating when the certificate was registered.
+
+  - `expires_at: string`
+
+    RFC 3339 datetime string indicating when the certificate expires, or
+    `null` if it does not expire.
+
+  - `fingerprint: string`
+
+    The certificate's SHA-256 fingerprint, as a lowercase hex string.
+
+  - `tunnel_id: string`
+
+    ID of the Tunnel this certificate is registered against.
+
+  - `type: "tunnel_certificate"`
+
+    Object type. Always `tunnel_certificate` for Tunnel Certificates.
+
+    - `"tunnel_certificate"`
+
+### Tunnel Certificate Retrieve Response
+
+- `TunnelCertificateRetrieveResponse object { id, archived_at, created_at, 4 more }`
+
+  - `id: string`
+
+    ID of the Tunnel Certificate.
+
+  - `archived_at: string`
+
+    RFC 3339 datetime string indicating when the certificate was archived, or
+    `null` if it is not archived.
+
+  - `created_at: string`
+
+    RFC 3339 datetime string indicating when the certificate was registered.
+
+  - `expires_at: string`
+
+    RFC 3339 datetime string indicating when the certificate expires, or
+    `null` if it does not expire.
+
+  - `fingerprint: string`
+
+    The certificate's SHA-256 fingerprint, as a lowercase hex string.
+
+  - `tunnel_id: string`
+
+    ID of the Tunnel this certificate is registered against.
+
+  - `type: "tunnel_certificate"`
+
+    Object type. Always `tunnel_certificate` for Tunnel Certificates.
+
+    - `"tunnel_certificate"`
+
+### Tunnel Certificate List Response
+
+- `TunnelCertificateListResponse object { data, next_page }`
+
+  - `data: array of object { id, archived_at, created_at, 4 more }`
+
+    - `id: string`
+
+      ID of the Tunnel Certificate.
+
+    - `archived_at: string`
+
+      RFC 3339 datetime string indicating when the certificate was archived, or
+      `null` if it is not archived.
+
+    - `created_at: string`
+
+      RFC 3339 datetime string indicating when the certificate was registered.
+
+    - `expires_at: string`
+
+      RFC 3339 datetime string indicating when the certificate expires, or
+      `null` if it does not expire.
+
+    - `fingerprint: string`
+
+      The certificate's SHA-256 fingerprint, as a lowercase hex string.
+
+    - `tunnel_id: string`
+
+      ID of the Tunnel this certificate is registered against.
+
+    - `type: "tunnel_certificate"`
+
+      Object type. Always `tunnel_certificate` for Tunnel Certificates.
+
+      - `"tunnel_certificate"`
+
+  - `next_page: string`
+
+    Opaque cursor for the next page, or `null` if there are no more results.
+
+### Tunnel Certificate Archive Response
+
+- `TunnelCertificateArchiveResponse object { id, archived_at, created_at, 4 more }`
+
+  - `id: string`
+
+    ID of the Tunnel Certificate.
+
+  - `archived_at: string`
+
+    RFC 3339 datetime string indicating when the certificate was archived, or
+    `null` if it is not archived.
+
+  - `created_at: string`
+
+    RFC 3339 datetime string indicating when the certificate was registered.
+
+  - `expires_at: string`
+
+    RFC 3339 datetime string indicating when the certificate expires, or
+    `null` if it does not expire.
+
+  - `fingerprint: string`
+
+    The certificate's SHA-256 fingerprint, as a lowercase hex string.
+
+  - `tunnel_id: string`
+
+    ID of the Tunnel this certificate is registered against.
+
+  - `type: "tunnel_certificate"`
+
+    Object type. Always `tunnel_certificate` for Tunnel Certificates.
+
+    - `"tunnel_certificate"`

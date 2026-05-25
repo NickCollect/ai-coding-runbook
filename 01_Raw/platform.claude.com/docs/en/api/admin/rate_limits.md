@@ -1,12 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/rate_limits
-fetched_at: 2026-05-04T16:22:27.197640+00:00
+fetched_at: 2026-05-25T05:15:55.696931+00:00
 fetch_method: mintlify_md
 ---
 
 # Rate Limits
 
-## List
+## List Organization Rate Limits
 
 **get** `/v1/organizations/rate_limits`
 
@@ -98,11 +98,34 @@ curl https://api.anthropic.com/v1/organizations/rate_limits \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "group_type": "model_group",
+      "limits": [
+        {
+          "type": "type",
+          "value": 0
+        }
+      ],
+      "models": [
+        "string"
+      ],
+      "type": "rate_limit"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
 ## Domain Types
 
 ### Rate Limit List Response
 
-- `RateLimitListResponse = object { data, next_page }`
+- `RateLimitListResponse object { data, next_page }`
 
   - `data: array of object { group_type, limits, models, type }`
 

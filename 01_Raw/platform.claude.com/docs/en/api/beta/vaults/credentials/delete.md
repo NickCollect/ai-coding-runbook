@@ -1,10 +1,10 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/vaults/credentials/delete
-fetched_at: 2026-05-11T04:55:27.521228+00:00
+fetched_at: 2026-05-25T05:15:53.878008+00:00
 fetch_method: mintlify_md
 ---
 
-## Delete
+## Delete Credential
 
 **delete** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
@@ -22,9 +22,9 @@ Delete Credential
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -74,9 +74,11 @@ Delete Credential
 
     - `"managed-agents-2026-04-01"`
 
+    - `"cache-diagnosis-2026-04-07"`
+
 ### Returns
 
-- `BetaManagedAgentsDeletedCredential = object { id, type }`
+- `BetaManagedAgentsDeletedCredential object { id, type }`
 
   Confirmation of a deleted credential.
 
@@ -96,4 +98,13 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "type": "vault_credential_deleted"
+}
 ```

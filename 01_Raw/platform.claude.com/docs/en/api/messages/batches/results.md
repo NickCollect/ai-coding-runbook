@@ -1,10 +1,10 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages/batches/results
-fetched_at: 2026-05-11T04:55:25.768227+00:00
+fetched_at: 2026-05-25T05:15:51.991634+00:00
 fetch_method: mintlify_md
 ---
 
-## Results
+## Retrieve Message Batch results
 
 **get** `/v1/messages/batches/{message_batch_id}/results`
 
@@ -22,7 +22,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ### Returns
 
-- `MessageBatchIndividualResponse = object { custom_id, result }`
+- `MessageBatchIndividualResponse object { custom_id, result }`
 
   This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
@@ -38,7 +38,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-    - `MessageBatchSucceededResult = object { message, type }`
+    - `MessageBatchSucceededResult object { message, type }`
 
       - `message: Message`
 
@@ -89,7 +89,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           [{"type": "text", "text": "B)"}]
           ```
 
-          - `TextBlock = object { citations, text, type }`
+          - `TextBlock object { citations, text, type }`
 
             - `citations: array of TextCitation`
 
@@ -97,7 +97,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-              - `CitationCharLocation = object { cited_text, document_index, document_title, 4 more }`
+              - `CitationCharLocation object { cited_text, document_index, document_title, 4 more }`
 
                 - `cited_text: string`
 
@@ -115,7 +115,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"char_location"`
 
-              - `CitationPageLocation = object { cited_text, document_index, document_title, 4 more }`
+              - `CitationPageLocation object { cited_text, document_index, document_title, 4 more }`
 
                 - `cited_text: string`
 
@@ -133,7 +133,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"page_location"`
 
-              - `CitationContentBlockLocation = object { cited_text, document_index, document_title, 4 more }`
+              - `CitationContentBlockLocation object { cited_text, document_index, document_title, 4 more }`
 
                 - `cited_text: string`
 
@@ -161,7 +161,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"content_block_location"`
 
-              - `CitationsWebSearchResultLocation = object { cited_text, encrypted_index, title, 2 more }`
+              - `CitationsWebSearchResultLocation object { cited_text, encrypted_index, title, 2 more }`
 
                 - `cited_text: string`
 
@@ -175,7 +175,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `url: string`
 
-              - `CitationsSearchResultLocation = object { cited_text, end_block_index, search_result_index, 4 more }`
+              - `CitationsSearchResultLocation object { cited_text, end_block_index, search_result_index, 4 more }`
 
                 - `cited_text: string`
 
@@ -213,7 +213,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"text"`
 
-          - `ThinkingBlock = object { signature, thinking, type }`
+          - `ThinkingBlock object { signature, thinking, type }`
 
             - `signature: string`
 
@@ -223,7 +223,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"thinking"`
 
-          - `RedactedThinkingBlock = object { data, type }`
+          - `RedactedThinkingBlock object { data, type }`
 
             - `data: string`
 
@@ -231,7 +231,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"redacted_thinking"`
 
-          - `ToolUseBlock = object { id, caller, input, 2 more }`
+          - `ToolUseBlock object { id, caller, input, 2 more }`
 
             - `id: string`
 
@@ -239,7 +239,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Tool invocation directly from the model.
 
-              - `DirectCaller = object { type }`
+              - `DirectCaller object { type }`
 
                 Tool invocation directly from the model.
 
@@ -247,7 +247,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"direct"`
 
-              - `ServerToolCaller = object { tool_id, type }`
+              - `ServerToolCaller object { tool_id, type }`
 
                 Tool invocation generated by a server-side tool.
 
@@ -257,7 +257,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_20250825"`
 
-              - `ServerToolCaller20260120 = object { tool_id, type }`
+              - `ServerToolCaller20260120 object { tool_id, type }`
 
                 - `tool_id: string`
 
@@ -273,7 +273,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"tool_use"`
 
-          - `ServerToolUseBlock = object { id, caller, input, 2 more }`
+          - `ServerToolUseBlock object { id, caller, input, 2 more }`
 
             - `id: string`
 
@@ -281,31 +281,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Tool invocation directly from the model.
 
-              - `DirectCaller = object { type }`
+              - `DirectCaller object { type }`
 
                 Tool invocation directly from the model.
 
-                - `type: "direct"`
-
-                  - `"direct"`
-
-              - `ServerToolCaller = object { tool_id, type }`
+              - `ServerToolCaller object { tool_id, type }`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: string`
-
-                - `type: "code_execution_20250825"`
-
-                  - `"code_execution_20250825"`
-
-              - `ServerToolCaller20260120 = object { tool_id, type }`
-
-                - `tool_id: string`
-
-                - `type: "code_execution_20260120"`
-
-                  - `"code_execution_20260120"`
+              - `ServerToolCaller20260120 object { tool_id, type }`
 
             - `input: map[unknown]`
 
@@ -329,41 +313,25 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"server_tool_use"`
 
-          - `WebSearchToolResultBlock = object { caller, content, tool_use_id, type }`
+          - `WebSearchToolResultBlock object { caller, content, tool_use_id, type }`
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
-              - `DirectCaller = object { type }`
+              - `DirectCaller object { type }`
 
                 Tool invocation directly from the model.
 
-                - `type: "direct"`
-
-                  - `"direct"`
-
-              - `ServerToolCaller = object { tool_id, type }`
+              - `ServerToolCaller object { tool_id, type }`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: string`
-
-                - `type: "code_execution_20250825"`
-
-                  - `"code_execution_20250825"`
-
-              - `ServerToolCaller20260120 = object { tool_id, type }`
-
-                - `tool_id: string`
-
-                - `type: "code_execution_20260120"`
-
-                  - `"code_execution_20260120"`
+              - `ServerToolCaller20260120 object { tool_id, type }`
 
             - `content: WebSearchToolResultBlockContent`
 
-              - `WebSearchToolResultError = object { error_code, type }`
+              - `WebSearchToolResultError object { error_code, type }`
 
                 - `error_code: WebSearchToolResultErrorCode`
 
@@ -383,7 +351,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"web_search_tool_result_error"`
 
-              - `UnionMember1 = array of WebSearchResultBlock`
+              - `array of WebSearchResultBlock`
 
                 - `encrypted_content: string`
 
@@ -403,41 +371,25 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"web_search_tool_result"`
 
-          - `WebFetchToolResultBlock = object { caller, content, tool_use_id, type }`
+          - `WebFetchToolResultBlock object { caller, content, tool_use_id, type }`
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
               Tool invocation directly from the model.
 
-              - `DirectCaller = object { type }`
+              - `DirectCaller object { type }`
 
                 Tool invocation directly from the model.
 
-                - `type: "direct"`
-
-                  - `"direct"`
-
-              - `ServerToolCaller = object { tool_id, type }`
+              - `ServerToolCaller object { tool_id, type }`
 
                 Tool invocation generated by a server-side tool.
 
-                - `tool_id: string`
-
-                - `type: "code_execution_20250825"`
-
-                  - `"code_execution_20250825"`
-
-              - `ServerToolCaller20260120 = object { tool_id, type }`
-
-                - `tool_id: string`
-
-                - `type: "code_execution_20260120"`
-
-                  - `"code_execution_20260120"`
+              - `ServerToolCaller20260120 object { tool_id, type }`
 
             - `content: WebFetchToolResultErrorBlock or WebFetchBlock`
 
-              - `WebFetchToolResultErrorBlock = object { error_code, type }`
+              - `WebFetchToolResultErrorBlock object { error_code, type }`
 
                 - `error_code: WebFetchToolResultErrorCode`
 
@@ -461,7 +413,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"web_fetch_tool_result_error"`
 
-              - `WebFetchBlock = object { content, retrieved_at, type, url }`
+              - `WebFetchBlock object { content, retrieved_at, type, url }`
 
                 - `content: DocumentBlock`
 
@@ -473,7 +425,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `source: Base64PDFSource or PlainTextSource`
 
-                    - `Base64PDFSource = object { data, media_type, type }`
+                    - `Base64PDFSource object { data, media_type, type }`
 
                       - `data: string`
 
@@ -485,7 +437,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                         - `"base64"`
 
-                    - `PlainTextSource = object { data, media_type, type }`
+                    - `PlainTextSource object { data, media_type, type }`
 
                       - `data: string`
 
@@ -523,13 +475,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"web_fetch_tool_result"`
 
-          - `CodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+          - `CodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
             - `content: CodeExecutionToolResultBlockContent`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
-              - `CodeExecutionToolResultError = object { error_code, type }`
+              - `CodeExecutionToolResultError object { error_code, type }`
 
                 - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -545,7 +497,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_tool_result_error"`
 
-              - `CodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+              - `CodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
                 - `content: array of CodeExecutionOutputBlock`
 
@@ -565,7 +517,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"code_execution_result"`
 
-              - `EncryptedCodeExecutionResultBlock = object { content, encrypted_stdout, return_code, 2 more }`
+              - `EncryptedCodeExecutionResultBlock object { content, encrypted_stdout, return_code, 2 more }`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -574,8 +526,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                   - `file_id: string`
 
                   - `type: "code_execution_output"`
-
-                    - `"code_execution_output"`
 
                 - `encrypted_stdout: string`
 
@@ -593,11 +543,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"code_execution_tool_result"`
 
-          - `BashCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+          - `BashCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
             - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
 
-              - `BashCodeExecutionToolResultError = object { error_code, type }`
+              - `BashCodeExecutionToolResultError object { error_code, type }`
 
                 - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -615,7 +565,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"bash_code_execution_tool_result_error"`
 
-              - `BashCodeExecutionResultBlock = object { content, return_code, stderr, 2 more }`
+              - `BashCodeExecutionResultBlock object { content, return_code, stderr, 2 more }`
 
                 - `content: array of BashCodeExecutionOutputBlock`
 
@@ -641,11 +591,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"bash_code_execution_tool_result"`
 
-          - `TextEditorCodeExecutionToolResultBlock = object { content, tool_use_id, type }`
+          - `TextEditorCodeExecutionToolResultBlock object { content, tool_use_id, type }`
 
             - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-              - `TextEditorCodeExecutionToolResultError = object { error_code, error_message, type }`
+              - `TextEditorCodeExecutionToolResultError object { error_code, error_message, type }`
 
                 - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -665,7 +615,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"text_editor_code_execution_tool_result_error"`
 
-              - `TextEditorCodeExecutionViewResultBlock = object { content, file_type, num_lines, 3 more }`
+              - `TextEditorCodeExecutionViewResultBlock object { content, file_type, num_lines, 3 more }`
 
                 - `content: string`
 
@@ -687,7 +637,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"text_editor_code_execution_view_result"`
 
-              - `TextEditorCodeExecutionCreateResultBlock = object { is_file_update, type }`
+              - `TextEditorCodeExecutionCreateResultBlock object { is_file_update, type }`
 
                 - `is_file_update: boolean`
 
@@ -695,7 +645,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"text_editor_code_execution_create_result"`
 
-              - `TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new_lines, new_start, 3 more }`
+              - `TextEditorCodeExecutionStrReplaceResultBlock object { lines, new_lines, new_start, 3 more }`
 
                 - `lines: array of string`
 
@@ -717,11 +667,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"text_editor_code_execution_tool_result"`
 
-          - `ToolSearchToolResultBlock = object { content, tool_use_id, type }`
+          - `ToolSearchToolResultBlock object { content, tool_use_id, type }`
 
             - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
 
-              - `ToolSearchToolResultError = object { error_code, error_message, type }`
+              - `ToolSearchToolResultError object { error_code, error_message, type }`
 
                 - `error_code: ToolSearchToolResultErrorCode`
 
@@ -739,7 +689,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"tool_search_tool_result_error"`
 
-              - `ToolSearchToolSearchResultBlock = object { tool_references, type }`
+              - `ToolSearchToolSearchResultBlock object { tool_references, type }`
 
                 - `tool_references: array of ToolReferenceBlock`
 
@@ -759,7 +709,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"tool_search_tool_result"`
 
-          - `ContainerUploadBlock = object { file_id, type }`
+          - `ContainerUploadBlock object { file_id, type }`
 
             Response model for a file uploaded to the container.
 
@@ -775,7 +725,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+          - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
 
             The model that will complete your prompt.
 
@@ -849,7 +799,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Fast and cost-effective model
 
-          - `UnionMember1 = string`
+          - `string`
 
         - `role: "assistant"`
 
@@ -994,13 +944,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         - `"succeeded"`
 
-    - `MessageBatchErroredResult = object { error, type }`
+    - `MessageBatchErroredResult object { error, type }`
 
       - `error: ErrorResponse`
 
         - `error: ErrorObject`
 
-          - `InvalidRequestError = object { message, type }`
+          - `InvalidRequestError object { message, type }`
 
             - `message: string`
 
@@ -1008,7 +958,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"invalid_request_error"`
 
-          - `AuthenticationError = object { message, type }`
+          - `AuthenticationError object { message, type }`
 
             - `message: string`
 
@@ -1016,7 +966,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"authentication_error"`
 
-          - `BillingError = object { message, type }`
+          - `BillingError object { message, type }`
 
             - `message: string`
 
@@ -1024,7 +974,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"billing_error"`
 
-          - `PermissionError = object { message, type }`
+          - `PermissionError object { message, type }`
 
             - `message: string`
 
@@ -1032,7 +982,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"permission_error"`
 
-          - `NotFoundError = object { message, type }`
+          - `NotFoundError object { message, type }`
 
             - `message: string`
 
@@ -1040,7 +990,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"not_found_error"`
 
-          - `RateLimitError = object { message, type }`
+          - `RateLimitError object { message, type }`
 
             - `message: string`
 
@@ -1048,7 +998,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"rate_limit_error"`
 
-          - `GatewayTimeoutError = object { message, type }`
+          - `GatewayTimeoutError object { message, type }`
 
             - `message: string`
 
@@ -1056,7 +1006,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"timeout_error"`
 
-          - `APIErrorObject = object { message, type }`
+          - `APIErrorObject object { message, type }`
 
             - `message: string`
 
@@ -1064,7 +1014,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `"api_error"`
 
-          - `OverloadedError = object { message, type }`
+          - `OverloadedError object { message, type }`
 
             - `message: string`
 
@@ -1082,13 +1032,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         - `"errored"`
 
-    - `MessageBatchCanceledResult = object { type }`
+    - `MessageBatchCanceledResult object { type }`
 
       - `type: "canceled"`
 
         - `"canceled"`
 
-    - `MessageBatchExpiredResult = object { type }`
+    - `MessageBatchExpiredResult object { type }`
 
       - `type: "expired"`
 
