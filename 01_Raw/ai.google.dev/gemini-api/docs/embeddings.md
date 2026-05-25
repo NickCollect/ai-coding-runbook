@@ -1,39 +1,33 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/embeddings?hl=th
-fetched_at: 2026-05-18T05:18:41.796787+00:00
-title: "\u0e01\u0e32\u0e23\u0e1d\u0e31\u0e07 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/embeddings?hl=pt-BR
+fetched_at: 2026-05-25T05:27:06.050594+00:00
+title: "Embeddings \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-ส่งความคิดเห็น
+Envie comentários
 
-# การฝัง
+# Embeddings
 
-Gemini API มีโมเดลการฝังเพื่อสร้างการฝังสำหรับข้อความ รูปภาพ
-วิดีโอ และเนื้อหาอื่นๆ จากนั้นจะใช้การฝังที่ได้เหล่านี้สำหรับงานต่างๆ ได้
-เช่น การค้นหาเชิงความหมาย การจัดประเภท และการจัดกลุ่ม ซึ่งจะให้ผลลัพธ์ที่แม่นยำมากขึ้น
-และรับรู้บริบทได้ดีกว่าแนวทางที่อิงตามคีย์เวิร์ด
+A API Gemini oferece modelos de incorporação para gerar incorporações de texto, imagens, vídeo e outros conteúdos. Os embeddings resultantes podem ser usados para tarefas como pesquisa semântica, classificação e agrupamento, fornecendo resultados mais precisos e contextualizados do que abordagens baseadas em palavras-chave.
 
-โมเดลล่าสุดอย่าง `gemini-embedding-2` เป็นโมเดลการฝังแบบหลายรูปแบบตัวแรกใน Gemini API โดยจะแมปข้อความ รูปภาพ วิดีโอ เสียง และเอกสารลงในพื้นที่การฝังแบบรวม ซึ่งช่วยให้ค้นหา จัดประเภท และจัดกลุ่มข้ามโมดอลได้ในกว่า 100 ภาษา ดูข้อมูลเพิ่มเติมได้ที่[ส่วนการฝังมัลติโมดัล](#multimodal) สำหรับกรณีการใช้งานที่มีเฉพาะข้อความ
-`gemini-embedding-001` จะยังคงใช้งานได้
+O modelo mais recente, `gemini-embedding-2`, é o primeiro modelo de incorporação multimodal na API Gemini. Ele mapeia texto, imagens, vídeo, áudio e documentos em um espaço de embedding unificado, permitindo pesquisa, classificação e clustering entre modalidades em mais de 100 idiomas. Consulte a [seção de embeddings multimodais](#multimodal) para saber mais. Para casos de uso somente de texto, o `gemini-embedding-001` continua disponível.
 
-การสร้างระบบ Retrieval Augmented Generation (RAG) เป็น Use Case ทั่วไปสำหรับ
-ผลิตภัณฑ์ AI Embedding มีบทบาทสำคัญในการปรับปรุงเอาต์พุตของโมเดลอย่างมาก
-ด้วยความถูกต้องตามข้อเท็จจริง ความสอดคล้อง และความสมบูรณ์ตามบริบทที่ดียิ่งขึ้น หากต้องการใช้โซลูชัน RAG ที่มีการจัดการ เราได้สร้างเครื่องมือ[ค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th)
-ซึ่งช่วยให้การจัดการ RAG ง่ายขึ้นและประหยัดค่าใช้จ่ายมากขึ้น
+A criação de sistemas de geração aumentada de recuperação (RAG) é um caso de uso comum para
+produtos de IA. As incorporações são fundamentais para melhorar significativamente os resultados do modelo com mais acurácia factual, coerência e riqueza contextual. Se preferir usar uma solução de RAG gerenciada, criamos a ferramenta [Pesquisa de arquivos](https://ai.google.dev/gemini-api/docs/file-search?hl=pt-br), que facilita o gerenciamento e reduz os custos da RAG.
 
-## การสร้างการฝัง
+## Gerar embeddings
 
-ใช้`embedContent` วิธีการต่อไปนี้เพื่อสร้างการฝังข้อความ
+Use o método `embedContent` para gerar embeddings de texto:
 
 ### Python
 
@@ -127,34 +121,30 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-## ระบุประเภทงานเพื่อปรับปรุงประสิทธิภาพ
+## Especificar o tipo de tarefa para melhorar a performance
 
-คุณใช้การฝังสำหรับงานที่หลากหลายได้ ตั้งแต่การจัดประเภทไปจนถึงการค้นหาเอกสาร
-การระบุประเภทงานที่ถูกต้องจะช่วยเพิ่มประสิทธิภาพการฝังสำหรับ
-ความสัมพันธ์ที่ต้องการ ซึ่งจะช่วยเพิ่มความแม่นยำและประสิทธิภาพ
+É possível usar embeddings para várias tarefas, desde classificação até pesquisa de documentos. Especificar o tipo de tarefa certo ajuda a otimizar os embeddings para as relações pretendidas, maximizando a precisão e a eficiência.
 
-### ประเภทงานที่มีการฝัง 2
+### Tipos de tarefa com Embeddings 2
 
-สำหรับงานที่มีเฉพาะข้อความซึ่งมี `gemini-embedding-2` เราขอแนะนำอย่างยิ่งให้คุณ
-เพิ่มวิธีการทำงานในพรอมต์ ซึ่งทำได้โดยการจัดรูปแบบ
-คำค้นหาและเอกสารด้วยคำนำหน้าที่ถูกต้องของงาน
+Para tarefas somente de texto com o `gemini-embedding-2`, recomendamos
+adicionar a instrução da tarefa no comando. Para isso, formate a consulta e o documento com o prefixo de tarefa correto.
 
-ตารางต่อไปนี้แสดงตัวอย่างวิธีจัดรูปแบบการค้นหาและเอกสารสำหรับ
-กรณีการใช้งานแบบสมมาตรและอสมมาตรโดยใช้โมเดล `gemini-embedding-2`
+As tabelas a seguir mostram exemplos de como formatar consultas e documentos para casos de uso simétricos e assimétricos usando o modelo `gemini-embedding-2`.
 
-**กรณีการใช้งานการดึงข้อมูล (รูปแบบอสมมาตร)**
+**Casos de uso de recuperação (formato assimétrico)**
 
-ในกรณีการใช้งานแบบอสมมาตร ให้เพิ่มคำนำหน้างานไปยังคำค้นหาและใช้
-โครงสร้างเอกสารกับเนื้อหาที่ต้องการฝังและดึงข้อมูล
+Em casos de uso assimétricos, adicione o prefixo da tarefa à consulta e aplique
+a estrutura do documento ao conteúdo que você quer incorporar e recuperar.
 
-| กรณีการใช้งาน | โครงสร้างการค้นหา | โครงสร้างเอกสาร |
+| Caso de uso | Estrutura da consulta | Estrutura do documento |
 | --- | --- | --- |
-| คำค้นหา | `task: search result | query: {content}` | `title: {title} | text: {content}` หากไม่มีชื่อ ให้ใช้ `title: none` |
-| การตอบคำถาม | `task: question answering | query: {content}` | `title: {title} | text: {content}` |
-| การตรวจสอบข้อเท็จจริง | `task: fact checking | query: {content}` | `title: {title} | text: {content}` |
-| การดึงข้อมูลรหัส | `task: code retrieval | query: {content}` | `title: {title} | text: {content}` |
+| Consulta de pesquisa | `task: search result | query: {content}` | `title: {title} | text: {content}` Se não houver um título, use `title: none`. |
+| Respostas a perguntas | `task: question answering | query: {content}` | `title: {title} | text: {content}` |
+| Checagem de fatos | `task: fact checking | query: {content}` | `title: {title} | text: {content}` |
+| Recuperação de código | `task: code retrieval | query: {content}` | `title: {title} | text: {content}` |
 
-**ตัวอย่างการใช้งาน**
+**Exemplo de uso**
 
 ### Python
 
@@ -173,17 +163,17 @@ def prepare_document(content, title=None):
     return f"title: {title} | text: {content}"
 ```
 
-**Use Case แบบอินพุตเดียว (รูปแบบสมมาตร)**
+**Casos de uso de entrada única (formato simétrico)**
 
-ในกรณีการใช้งานแบบสมมาตร ให้ใช้การจัดรูปแบบเดียวกันสำหรับคำค้นหาและเอกสารในงานเดียวกัน
+Em casos de uso simétricos, para a mesma tarefa, use a mesma formatação para a consulta e o documento.
 
-| กรณีการใช้งาน | โครงสร้างอินพุต |
+| Caso de uso | Estrutura de entrada |
 | --- | --- |
-| การจัดประเภท | `task: classification | query: {content}` |
-| การคลัสเตอร์ | `task: clustering | query: {content}` |
-| ความคล้ายคลึงกันเชิงความหมาย | `task: sentence similarity | query: {content}` อย่าใช้เพื่อการค้นหาหรือการดึงข้อมูล มีไว้สำหรับความคล้ายคลึงกันของข้อความเชิงความหมาย |
+| Classificação | `task: classification | query: {content}` |
+| Clustering | `task: clustering | query: {content}` |
+| Similaridade semântica | `task: sentence similarity | query: {content}` Não use para pesquisa ou recuperação. Ela é destinada à similaridade textual semântica. |
 
-**ตัวอย่างการใช้งาน**
+**Exemplo de uso**
 
 ### Python
 
@@ -195,14 +185,13 @@ def prepare_query_and_document(content):
     return f'task: classification | query: {content}'
 ```
 
-สิ่งสำคัญคือต้องใช้ฟีเจอร์งานอย่างสม่ำเสมอ เช่น หากฝังเอกสารด้วย `f'task: classification | query: {content}'` การค้นหาก็ควรฝังตามรูปแบบงานนี้ด้วย
+É importante que a tarefa seja usada de forma consistente. Por exemplo, se os documentos forem incorporados com `f'task: classification | query: {content}'`, a consulta também precisará ser incorporada seguindo esse formato de tarefa.
 
-### ประเภทงานที่มีการฝัง 1
+### Tipos de tarefa com Embeddings 1
 
-สำหรับ `gemini-embedding-001` คุณระบุ `task_type` ในเมธอด `embedContent`
-ได้ ดูรายการประเภทงานที่รองรับทั้งหมดได้ที่ตาราง[ประเภทงานที่รองรับ](#supported-task-types)
+Para `gemini-embedding-001`, é possível especificar o `task_type` no método `embedContent`. Para uma lista completa dos tipos de tarefas compatíveis, consulte a tabela [Tipos de tarefas compatíveis](#supported-task-types).
 
-ตัวอย่างต่อไปนี้แสดงวิธีใช้ `SEMANTIC_SIMILARITY` เพื่อตรวจสอบว่าสตริงข้อความมีความหมายคล้ายกันมากน้อยเพียงใด
+O exemplo a seguir mostra como usar `SEMANTIC_SIMILARITY` para verificar a semelhança entre strings de texto.
 
 ### Python
 
@@ -364,31 +353,28 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-0
     }'
 ```
 
-ข้อมูลโค้ดจะแสดงให้เห็นว่าข้อความแต่ละส่วนมีความคล้ายคลึงกันมากน้อยเพียงใดเมื่อเรียกใช้
+Os snippets de código vão mostrar o quanto os diferentes trechos de texto são semelhantes entre si quando executados.
 
-#### ประเภทงานที่รองรับ
+#### Tipos de tarefas com suporte
 
-ประเภทงานที่รองรับสำหรับ `gemini-embedding-001` มีดังนี้
+Tipos de tarefas compatíveis com `gemini-embedding-001`:
 
-| ประเภทงาน | คำอธิบาย | ตัวอย่าง |
+| Tipo de tarefa | Descrição | Exemplos |
 | --- | --- | --- |
-| **SEMANTIC\_SIMILARITY** | การฝังที่เพิ่มประสิทธิภาพเพื่อประเมินความคล้ายคลึงของข้อความ | ระบบการแนะนำ การตรวจหาเนื้อหาที่ซ้ำกัน |
-| **การจัดประเภท** | การฝังที่เพิ่มประสิทธิภาพเพื่อจัดประเภทข้อความตามป้ายกำกับที่ตั้งค่าไว้ล่วงหน้า | การวิเคราะห์ความเห็น การตรวจจับสแปม |
-| **การจัดกลุ่ม** | การฝังที่ได้รับการเพิ่มประสิทธิภาพเพื่อจัดกลุ่มข้อความตามความคล้ายคลึงกัน | การจัดระเบียบเอกสาร การวิจัยตลาด การตรวจจับความผิดปกติ |
-| **RETRIEVAL\_DOCUMENT** | การฝังที่เพิ่มประสิทธิภาพสำหรับการค้นหาเอกสาร | จัดทำดัชนีบทความ หนังสือ หรือหน้าเว็บสำหรับการค้นหา |
-| **RETRIEVAL\_QUERY** | การฝังที่เพิ่มประสิทธิภาพสําหรับคําค้นหาทั่วไป ใช้ `RETRIEVAL_QUERY` สำหรับการค้นหา และ `RETRIEVAL_DOCUMENT` สำหรับเอกสารที่จะดึงข้อมูล | โฆษณาการค้นหาที่กำหนดเอง |
-| **CODE\_RETRIEVAL\_QUERY** | การฝังที่เพิ่มประสิทธิภาพสำหรับการดึงข้อมูลโค้ดบล็อกตามคำค้นหาที่เป็นภาษาธรรมชาติ ใช้ `CODE_RETRIEVAL_QUERY` สำหรับคำค้นหา และ `RETRIEVAL_DOCUMENT` สำหรับบล็อกโค้ดที่จะดึงข้อมูล | คำแนะนำและการค้นหาโค้ด |
-| **QUESTION\_ANSWERING** | การฝังสำหรับคำถามในระบบตอบคำถาม ซึ่งได้รับการเพิ่มประสิทธิภาพเพื่อค้นหาเอกสารที่ตอบคำถาม ใช้ `QUESTION_ANSWERING` สำหรับคำถาม และ `RETRIEVAL_DOCUMENT` สำหรับเอกสารที่จะดึงข้อมูล | แชทบ็อกซ์ |
-| **FACT\_VERIFICATION** | การฝังสำหรับข้อความที่ต้องได้รับการยืนยัน ซึ่งได้รับการเพิ่มประสิทธิภาพเพื่อดึงเอกสารที่มีหลักฐานสนับสนุนหรือหักล้างข้อความ ใช้ `FACT_VERIFICATION` สำหรับข้อความเป้าหมาย `RETRIEVAL_DOCUMENT` สำหรับเอกสารที่จะดึงข้อมูล | ระบบตรวจสอบข้อเท็จจริงอัตโนมัติ |
+| **SEMANTIC\_SIMILARITY** | Embeddings otimizados para avaliar a semelhança de texto. | Sistemas de recomendação, detecção de duplicidade |
+| **CLASSIFICAÇÃO** | Embeddings otimizados para classificar textos de acordo com rótulos predefinidos. | Análise de sentimento, detecção de spam |
+| **CLUSTERING** | Embeddings otimizados para agrupar textos com base nas semelhanças deles. | Organização de documentos, pesquisa de mercado, detecção de anomalias |
+| **RETRIEVAL\_DOCUMENT** | Embeddings otimizados para pesquisa de documentos. | Indexação de artigos, livros ou páginas da Web para pesquisa. |
+| **RETRIEVAL\_QUERY** | Embeddings otimizados para consultas de pesquisa gerais. Use `RETRIEVAL_QUERY` para consultas e `RETRIEVAL_DOCUMENT` para documentos a serem recuperados. | Pesquisa personalizada |
+| **CODE\_RETRIEVAL\_QUERY** | Embeddings otimizados para recuperação de blocos de código com base em consultas de linguagem natural. Use `CODE_RETRIEVAL_QUERY` para consultas e `RETRIEVAL_DOCUMENT` para blocos de código a serem recuperados. | Sugestões e pesquisa de código |
+| **QUESTION\_ANSWERING** | Embeddings para perguntas em um sistema de respostas a perguntas, otimizados para encontrar documentos que respondam à pergunta. Use `QUESTION_ANSWERING` para perguntas e `RETRIEVAL_DOCUMENT` para documentos a serem recuperados. | Caixa de chat |
+| **FACT\_VERIFICATION** | Embeddings para declarações que precisam ser verificadas, otimizados para recuperar documentos que contenham evidências que apoiem ou refutem a declaração. Use `FACT_VERIFICATION` para o texto de destino e `RETRIEVAL_DOCUMENT` para os documentos a serem recuperados. | Sistemas automatizados de checagem de fatos |
 
-## การควบคุมขนาดการฝัง
+## Como controlar o tamanho do embedding
 
-ทั้ง `gemini-embedding-001` และ `gemini-embedding-2` ได้รับการฝึกโดยใช้เทคนิค Matryoshka Representation Learning (MRL) ซึ่งสอนโมเดลให้
-เรียนรู้การฝังที่มีมิติสูงซึ่งมีส่วนเริ่มต้น (หรือคำนำหน้า) ที่
-เป็นเวอร์ชันที่ง่ายกว่าและมีประโยชน์เช่นกันของข้อมูลเดียวกัน
+`gemini-embedding-001` e `gemini-embedding-2` são treinados usando a técnica de aprendizado de representação Matryoshka (MRL, na sigla em inglês), que ensina um modelo a aprender incorporações de alta dimensão com segmentos iniciais (ou prefixos) que também são versões úteis e mais simples dos mesmos dados.
 
-ใช้พารามิเตอร์ `output_dimensionality` เพื่อควบคุมขนาดของ
-เวกเตอร์การฝังเอาต์พุต การเลือกมิติข้อมูลเอาต์พุตที่เล็กลงจะช่วยประหยัดพื้นที่เก็บข้อมูลและเพิ่มประสิทธิภาพการคำนวณสำหรับแอปพลิเคชันดาวน์สตรีม โดยที่คุณภาพไม่ลดลงมากนัก โดยค่าเริ่มต้น โมเดลทั้ง 2 จะแสดงผลการฝังที่มีมิติ 3072 แต่คุณสามารถตัดให้มีขนาดเล็กลงได้โดยไม่สูญเสียคุณภาพเพื่อประหยัดพื้นที่เก็บข้อมูล เราขอแนะนำให้ใช้ขนาดเอาต์พุต 768, 1536 หรือ 3072
+Use o parâmetro `output_dimensionality` para controlar o tamanho do vetor de embedding de saída. Selecionar uma dimensionalidade de saída menor pode economizar espaço de armazenamento e aumentar a eficiência computacional para aplicativos downstream, sem sacrificar muito a qualidade. Por padrão, os dois modelos geram uma incorporação de 3.072 dimensões, mas é possível truncá-la para um tamanho menor sem perder qualidade e economizar espaço de armazenamento. Recomendamos usar dimensões de saída de 768, 1536 ou 3072.
 
 ### Python
 
@@ -485,18 +471,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-emb
     }'
 ```
 
-ตัวอย่างเอาต์พุตจากข้อมูลโค้ด
+Exemplo de saída do snippet de código:
 
 ```
 Length of embedding: 768
 ```
 
-## การดูแลคุณภาพสำหรับขนาดที่เล็กลง
+## Como garantir a qualidade para dimensões menores
 
-แม้ว่าการฝังที่มีมิติข้อมูล 3072 ค่าเริ่มต้นจะได้รับการทำให้เป็นมาตรฐานเสมอ แต่ Gemini
-Embedding 2 ก็จะทำให้มิติข้อมูลที่ถูกตัดทอนเป็นมาตรฐานโดยอัตโนมัติเช่นกัน (เช่น 768, 1536) ซึ่งจะช่วยให้มั่นใจได้ว่าระบบจะคำนวณความคล้ายกันเชิงความหมายผ่านทิศทางเวกเตอร์แทนที่จะเป็นขนาด จึงให้ผลลัพธ์ที่แม่นยำยิ่งขึ้นตั้งแต่เริ่มต้น
+Embora os embeddings padrão de 3.072 dimensões sejam sempre normalizados, o Gemini Embedding 2 também normaliza automaticamente as dimensões truncadas (por exemplo, 768, 1536). Isso garante que a similaridade semântica seja calculada por direção vetorial, e não por magnitude, oferecendo resultados mais precisos.
 
-**รุ่นเก่า**: หากใช้ `gemini-embedding-001` คุณต้องปรับขนาดที่ไม่ใช่ 3072 ด้วยตนเองโดยทำดังนี้
+**Modelos mais antigos**: se você estiver usando `gemini-embedding-001`, será necessário normalizar manualmente as dimensões que não sejam 3072 da seguinte maneira:
 
 ### Python
 
@@ -512,50 +497,47 @@ print(f"Normed embedding length: {len(normed_embedding)}")
 print(f"Norm of normed embedding: {np.linalg.norm(normed_embedding):.6f}") # Should be very close to 1
 ```
 
-ตัวอย่างเอาต์พุตจากข้อมูลโค้ดนี้
+Exemplo de saída deste snippet de código:
 
 ```
 Normed embedding length: 768
 Norm of normed embedding: 1.000000
 ```
 
-ตารางต่อไปนี้แสดงคะแนน MTEB ซึ่งเป็นเกณฑ์มาตรฐานที่ใช้กันโดยทั่วไปสำหรับ
-การฝังสำหรับมิติข้อมูลต่างๆ ผลลัพธ์แสดงให้เห็นว่าประสิทธิภาพไม่ได้ขึ้นอยู่กับขนาดของมิติข้อมูลการฝังอย่างเคร่งครัด โดยมิติข้อมูลที่ต่ำกว่าจะให้คะแนนเทียบเท่ากับมิติข้อมูลที่สูงกว่า
+A tabela a seguir mostra as pontuações do MTEB, um comparativo de mercado usado com frequência para incorporações, em diferentes dimensões. O resultado mostra que a performance não está estritamente vinculada ao tamanho da dimensão do embedding. Dimensões menores alcançam pontuações comparáveis às maiores.
 
-| มิติข้อมูล MRL | คะแนน MTEB (การฝัง Gemini 001) |
+| Dimensão MRL | Pontuação do MTEB (incorporação do Gemini 001) |
 | --- | --- |
-| 2048 | 68.16 |
-| 1536 | 68.17 |
-| 768 | 67.99 |
-| 512 | 67.55 |
-| 256 | 66.19 |
-| 128 | 63.31 |
+| 2048 | 68,16 |
+| 1536 | 68,17 |
+| 768 | 67,99 |
+| 512 | 67,55 |
+| 256 | 66,19 |
+| 128 | 63,31 |
 
-## การฝังแบบหลายรูปแบบ
+## Embeddings multimodais
 
-`gemini-embedding-2` โมเดลรองรับอินพุตแบบหลายรูปแบบ ซึ่งช่วยให้คุณ
-ฝังเนื้อหารูปภาพ วิดีโอ เสียง และเอกสารควบคู่ไปกับข้อความได้ ระบบจะแมปรูปแบบข้อมูลทั้งหมด
-ลงในพื้นที่การฝังเดียวกัน ซึ่งช่วยให้ค้นหาและ
-เปรียบเทียบข้ามรูปแบบข้อมูลได้
+O modelo `gemini-embedding-2` aceita entradas multimodais, permitindo que você
+incorpore conteúdo de imagens, vídeos, áudios e documentos junto com texto. Todas as modalidades são mapeadas no mesmo espaço de embedding, permitindo pesquisa e comparação entre modalidades.
 
-### รูปแบบที่รองรับและขีดจำกัด
+### Modalidades e limites compatíveis
 
-ขีดจำกัดโทเค็นอินพุตสูงสุดโดยรวมคือ 8,192 โทเค็น
+O limite máximo geral de tokens de entrada é de 8.192 tokens.
 
-| รูปแบบ | ข้อกำหนดและขีดจำกัด |
+| Modalidade | Especificações e limites |
 | --- | --- |
-| **Text** | รองรับโทเค็นสูงสุด 8,192 รายการ |
-| **รูปภาพ** | สูงสุด 6 รูปภาพต่อคำขอ รูปแบบที่รองรับ: PNG, JPEG |
-| **เสียง** | ระยะเวลาสูงสุด 180 วินาที รูปแบบที่รองรับ: MP3, WAV |
-| **วิดีโอ** | ระยะเวลาสูงสุด 120 วินาที รูปแบบที่รองรับ: MP4, MOV ตัวแปลงรหัสที่รองรับ: H264, H265, AV1, VP9  ระบบจะประมวลผลเฟรมสูงสุด 32 เฟรมต่อวิดีโอ โดยวิดีโอ Shorts (≤32 วินาที) จะสุ่มตัวอย่างที่ 1 FPS ส่วนวิดีโอที่ยาวกว่านั้นจะสุ่มตัวอย่างอย่างสม่ำเสมอเป็น 32 เฟรม ระบบจะไม่ประมวลผลแทร็กเสียงในไฟล์วิดีโอ |
-| **เอกสาร (PDF)** | สูงสุด 6 หน้า |
+| **Texto** | Aceita até 8.192 tokens. |
+| **Imagem** | Máximo de seis imagens por solicitação. Formatos aceitos: PNG e JPEG. |
+| **Áudio** | Duração máxima de 180 segundos. Formatos compatíveis: MP3, WAV. |
+| **Vídeo** | Duração máxima de 120 segundos. Formatos aceitos: MP4, MOV. Codecs compatíveis: H264, H265, AV1 e VP9.  O sistema processa no máximo 32 frames por vídeo: vídeos curtos (≤32s) são amostrados a 1 fps, enquanto vídeos mais longos são amostrados uniformemente em 32 frames. As faixas de áudio não são processadas em arquivos de vídeo. |
+| **Documentos (PDF)** | Máximo de seis páginas. |
 
-### การฝังรูปภาพ
+### Incorporar imagens
 
-ตัวอย่างต่อไปนี้แสดงวิธีฝังรูปภาพโดยใช้
-`gemini-embedding-2`
+O exemplo a seguir mostra como incorporar uma imagem usando
+`gemini-embedding-2`.
 
-คุณระบุรูปภาพเป็นข้อมูลแบบอินไลน์หรือเป็นไฟล์ที่อัปโหลดผ่าน [Files API](https://ai.google.dev/gemini-api/docs/files?hl=th) ได้
+As imagens podem ser fornecidas como dados in-line ou como arquivos enviados por upload pela [API Files](https://ai.google.dev/gemini-api/docs/files?hl=pt-br).
 
 ### Python
 
@@ -629,22 +611,15 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### การรวมการฝัง
+### Agregação de incorporações
 
-เมื่อทำงานกับเนื้อหาหลายรูปแบบ โครงสร้างของอินพุตจะส่งผลต่อ
-เอาต์พุตการฝังดังนี้
+Ao trabalhar com conteúdo multimodal, a forma como você estrutura a entrada afeta a saída de incorporação:
 
-- **หลายส่วน (รวม):** การเพิ่มอินพุตหลายรายการลงในพารามิเตอร์
-  `contents` โดยตรงจะสร้างการฝังแบบรวม 1 รายการสำหรับอินพุตทั้งหมด
-- **ออบเจ็กต์ `Content` หลายรายการ (แยกกัน):** การรวมอินพุตแต่ละรายการไว้ในออบเจ็กต์
-  `Content` และการส่งผ่านอินพุตเหล่านั้นในพารามิเตอร์ `contents` จะส่งคืน
-  การฝังแยกกันสำหรับแต่ละรายการ
-- **การแสดงระดับโพสต์:** สำหรับออบเจ็กต์ที่ซับซ้อน เช่น โพสต์ในโซเชียลมีเดีย
-  ที่มีรายการสื่อหลายรายการ เราขอแนะนำให้รวบรวมการฝังแยกกัน
-  (เช่น โดยการหาค่าเฉลี่ย) เพื่อสร้างการแสดงระดับโพสต์ที่สอดคล้องกัน
+- **Várias partes (agregadas)**: adicionar várias entradas diretamente ao parâmetro `contents` produz uma incorporação agregada para todas as entradas.
+- **Vários objetos `Content` (separados)**: ao encapsular cada entrada em um objeto `Content` e transmiti-los no parâmetro `contents`, você recebe incorporações separadas para cada entrada.
+- **Representação no nível da postagem**:para objetos complexos, como postagens em redes sociais com vários itens de mídia, recomendamos agregar incorporações separadas (por exemplo, fazendo a média) para criar uma representação coerente no nível da postagem.
 
-ตัวอย่างต่อไปนี้แสดงวิธีสร้างการฝังแบบรวมสำหรับข้อความและ
-อินพุตรูปภาพ เพียงเพิ่มอินพุตหลายรายการลงในพารามิเตอร์ `contents` ดังนี้
+O exemplo a seguir mostra como criar um embedding agregado para entrada de texto e imagem. Basta adicionar várias entradas ao parâmetro `contents`:
 
 ### Python
 
@@ -730,8 +705,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-ในทางกลับกัน หากคุณใช้ออบเจ็กต์ `Content` ภายในพารามิเตอร์ `contents`
-ระบบจะแสดงผลการฝังแยกกัน ตัวอย่างนี้สร้างการฝังหลายรายการในการเรียกใช้การฝังครั้งเดียว
+Por outro lado, se você usar objetos `Content` dentro do parâmetro `contents`,
+serão retornados encodings separados. Este exemplo cria vários embeddings em uma
+chamada de embedding:
 
 ### Python
 
@@ -822,12 +798,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### การฝังเสียง
+### Incorporar áudio
 
-ตัวอย่างต่อไปนี้แสดงวิธีฝังไฟล์เสียงโดยใช้
-`gemini-embedding-2`
+O exemplo a seguir mostra como incorporar um arquivo de áudio usando
+`gemini-embedding-2`.
 
-คุณระบุไฟล์เสียงเป็นข้อมูลแบบอินไลน์หรือเป็นไฟล์ที่อัปโหลดผ่าน [Files API](https://ai.google.dev/gemini-api/docs/files?hl=th) ได้
+Os arquivos de áudio podem ser fornecidos como dados inline ou como arquivos enviados por upload
+pela [API Files](https://ai.google.dev/gemini-api/docs/files?hl=pt-br).
 
 ### Python
 
@@ -901,12 +878,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### การฝังวิดีโอ
+### Incorporar vídeo
 
-ตัวอย่างต่อไปนี้แสดงวิธีฝังวิดีโอโดยใช้
-`gemini-embedding-2`
+O exemplo a seguir mostra como incorporar um vídeo usando
+`gemini-embedding-2`.
 
-คุณระบุวิดีโอเป็นข้อมูลแบบอินไลน์หรือเป็นไฟล์ที่อัปโหลดผ่าน [Files API](https://ai.google.dev/gemini-api/docs/files?hl=th) ได้
+Os vídeos podem ser fornecidos como dados inline ou como arquivos enviados por upload
+pela [API Files](https://ai.google.dev/gemini-api/docs/files?hl=pt-br).
 
 ### Python
 
@@ -980,15 +958,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-หากต้องการฝังวิดีโอที่มีความยาวมากกว่า 120 วินาที คุณสามารถแบ่งวิดีโอออกเป็น
-ส่วนที่ทับซ้อนกันและฝังแต่ละส่วนแยกกันได้
+Se você precisar incorporar vídeos com mais de 120 segundos, divida o conteúdo em segmentos sobrepostos e incorpore cada um deles individualmente.
 
-### การฝังเอกสาร
+### Incorporação de documentos
 
-คุณฝังเอกสารในรูปแบบ PDF ได้โดยตรง โมเดลจะประมวลผลเนื้อหาภาพและข้อความ
-ของแต่ละหน้า
+documentos em formato PDF podem ser incorporados diretamente. O modelo processa o conteúdo visual e de texto de cada página.
 
-คุณระบุ PDF เป็นข้อมูลแบบอินไลน์หรือเป็นไฟล์ที่อัปโหลดผ่าน [Files API](https://ai.google.dev/gemini-api/docs/files?hl=th) ได้
+Os PDFs podem ser fornecidos como dados inline ou como arquivos enviados pela [API Files](https://ai.google.dev/gemini-api/docs/files?hl=pt-br).
 
 ### Python
 
@@ -1062,119 +1038,101 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-## กรณีการใช้งาน
+## Casos de uso
 
-การฝังข้อความมีความสําคัญอย่างยิ่งสําหรับกรณีการใช้งาน AI ทั่วไปที่หลากหลาย เช่น
+As incorporações de texto são cruciais para vários casos de uso comuns de IA, como:
 
-- **Retrieval-Augmented Generation (RAG):** การฝังช่วยเพิ่มคุณภาพ
-  ของข้อความที่สร้างขึ้นด้วยการดึงและรวมข้อมูลที่เกี่ยวข้องเข้ากับ
-  บริบทของโมเดล
-- **การดึงข้อมูล:** ค้นหาข้อความหรือเอกสารที่มีความหมายคล้ายกันมากที่สุดเมื่อได้รับข้อความนำเข้า
+- **Geração aumentada por recuperação (RAG)**: os embeddings melhoram a qualidade do texto gerado ao recuperar e incorporar informações relevantes ao contexto de um modelo.
+- **Recuperação de informações**:pesquise o texto ou os documentos mais semelhantes semanticamente com base em um trecho de texto de entrada.
 
-  [บทแนะนำการค้นหาเอกสารtask](https://github.com/google-gemini/cookbook/blob/main/examples/Talk_to_documents_with_embeddings.ipynb)
-- **การจัดอันดับผลการค้นหาใหม่**: จัดลำดับความสำคัญของรายการที่เกี่ยวข้องที่สุดโดยใช้การให้คะแนนความหมายของผลลัพธ์เริ่มต้นเทียบกับคำค้นหา
+  [Tutorial de pesquisa de documentostask](https://github.com/google-gemini/cookbook/blob/main/examples/Talk_to_documents_with_embeddings.ipynb)
+- **Reclassificação da pesquisa**: priorize os itens mais relevantes ao pontuar semanticamente os resultados iniciais em relação à consulta.
 
-  [บทแนะนำการจัดอันดับผลการค้นหาใหม่task](https://github.com/google-gemini/cookbook/blob/main/examples/Search_reranking_using_embeddings.ipynb)
-- **การตรวจจับความผิดปกติ:** การเปรียบเทียบกลุ่มการฝังจะช่วยระบุ
-  แนวโน้มที่ซ่อนอยู่หรือค่าผิดปกติ
+  [Tutorial de reclassificação da pesquisatask](https://github.com/google-gemini/cookbook/blob/main/examples/Search_reranking_using_embeddings.ipynb)
+- **Detecção de anomalias**:comparar grupos de embeddings pode ajudar a identificar tendências ou outliers ocultos.
 
-  [บทแนะนำการตรวจจับความผิดปกติbubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/Anomaly_detection_with_embeddings.ipynb)
-- **การจัดประเภท:** จัดหมวดหมู่ข้อความโดยอัตโนมัติตามเนื้อหา เช่น การวิเคราะห์ความเห็นหรือการตรวจจับสแปม
+  [Tutorial de detecção de anomaliasbubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/Anomaly_detection_with_embeddings.ipynb)
+- **Classificação**:categoriza automaticamente o texto com base no conteúdo, como análise de sentimento ou detecção de spam.
 
-  [บทแนะนำการจัดประเภทtoken](https://github.com/google-gemini/cookbook/blob/main/examples/Classify_text_with_embeddings.ipynb)
-- **การจัดกลุ่ม:** ทำความเข้าใจความสัมพันธ์ที่ซับซ้อนได้อย่างมีประสิทธิภาพโดยการสร้างคลัสเตอร์
-  และการแสดงภาพการฝัง
+  [Tutorial de classificaçãotoken](https://github.com/google-gemini/cookbook/blob/main/examples/Classify_text_with_embeddings.ipynb)
+- **Clustering**:entenda relações complexas criando clusters e visualizações dos seus embeddings.
 
-  [บทแนะนำการแสดงภาพการจัดกลุ่มbubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/clustering_with_embeddings.ipynb)
+  [Tutorial de visualização de clusteringbubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/clustering_with_embeddings.ipynb)
 
-## การจัดเก็บ Embedding
+## Armazenar embeddings
 
-เมื่อนำการฝังไปใช้ในเวอร์ชันที่ใช้งานจริง คุณมักจะใช้**ฐานข้อมูลเวกเตอร์**เพื่อจัดเก็บ จัดทำดัชนี และดึงข้อมูลการฝังที่มีมิติสูงได้อย่างมีประสิทธิภาพ
-Google Cloud มีบริการข้อมูลที่มีการจัดการซึ่ง
-ใช้เพื่อวัตถุประสงค์นี้ได้ ซึ่งรวมถึง
-[Gemini Enterprise Agent Platform Vector Search 2.0](https://docs.cloud.google.com/gemini-enterprise-agent-platform/BUILD/vector-search-2?hl=th)
-[BigQuery](https://cloud.google.com/bigquery/docs/introduction?hl=th)
-[AlloyDB](https://cloud.google.com/alloydb/docs/overview?hl=th) และ
-[Cloud SQL](https://cloud.google.com/sql/docs/postgres/introduction?hl=th)
+Ao levar embeddings para a produção, é comum usar **bancos de dados vetoriais** para armazenar, indexar e recuperar embeddings de alta dimensão com eficiência. O Google Cloud oferece serviços de dados gerenciados que podem ser usados para essa finalidade, incluindo [Pesquisa de vetor da plataforma do agente Gemini Enterprise 2.0](https://docs.cloud.google.com/gemini-enterprise-agent-platform/BUILD/vector-search-2?hl=pt-br), [BigQuery](https://cloud.google.com/bigquery/docs/introduction?hl=pt-br), [AlloyDB](https://cloud.google.com/alloydb/docs/overview?hl=pt-br) e [Cloud SQL](https://cloud.google.com/sql/docs/postgres/introduction?hl=pt-br).
 
-บทแนะนำต่อไปนี้แสดงวิธีใช้ฐานข้อมูลเวกเตอร์ของบุคคลที่สามอื่นๆ
-กับ Gemini Embedding
+Os tutoriais a seguir mostram como usar outros bancos de dados de vetores de terceiros com o Gemini Embedding.
 
-- [บทแนะนำ ChromaDBbolt](https://docs.trychroma.com/integrations/embedding-models/google-gemini)
-- [บทแนะนำ QDrantbolt](https://qdrant.tech/documentation/embeddings/gemini/)
-- [บทแนะนำ Weaviatebolt](https://docs.weaviate.io/weaviate/model-providers/google)
-- [บทแนะนำ Pineconebolt](https://github.com/google-gemini/cookbook/blob/main/examples/langchain/Gemini_LangChain_QA_Pinecone_WebLoad.ipynb)
+- [Tutoriais do ChromaDBbolt](https://docs.trychroma.com/integrations/embedding-models/google-gemini)
+- [Tutoriais do QDrantbolt](https://qdrant.tech/documentation/embeddings/gemini/)
+- [Tutoriais do Weaviatebolt](https://docs.weaviate.io/weaviate/model-providers/google)
+- [Tutoriais do Pineconebolt](https://github.com/google-gemini/cookbook/blob/main/examples/langchain/Gemini_LangChain_QA_Pinecone_WebLoad.ipynb)
 
-## เวอร์ชันของโมเดล
+## Versões do modelo
 
-### การฝัง Gemini 2
+### Embedding do Gemini 2
 
-| พร็อพเพอร์ตี้ | คำอธิบาย |
+| Propriedade | Descrição |
 | --- | --- |
-| รหัสโมเดล id\_card | **Gemini API**  `gemini-embedding-2` |
-| บันทึกประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ, รูปภาพ, วิดีโอ, เสียง, PDF  **เอาต์พุต**  การฝังข้อความ |
-| token\_autoขีดจำกัดของโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  8,192  **ขนาดมิติข้อมูลเอาต์พุต**  ยืดหยุ่น รองรับ: 128 - 3072, แนะนำ: 768, 1536, 3072 |
-| 123เวอร์ชัน | อ่านรายละเอียดเพิ่มเติมได้ใน[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)  - เสถียร: `gemini-embedding-2` |
-| calendar\_monthการอัปเดตล่าสุด | เมษายน 2026 |
+| Código do modelo id\_card | **API Gemini**  `gemini-embedding-2` |
+| saveTipos de dados aceitos | **Entrada**  Texto, imagem, vídeo, áudio, PDF  **Saída**  Embeddings de textos |
+| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de tokens de entrada**  8.192  **Tamanho da dimensão de saída**  Flexível, compatível com: 128 a 3072. Recomendado: 768, 1536, 3072 |
+| Versões do 123 | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Estável: `gemini-embedding-2` |
+| calendar\_monthÚltima atualização | Abril de 2026 |
 
-### การฝัง Gemini
+### Embedding do Gemini
 
-| พร็อพเพอร์ตี้ | คำอธิบาย |
+| Propriedade | Descrição |
 | --- | --- |
-| รหัสโมเดล id\_card | **Gemini API**  `gemini-embedding-001` |
-| บันทึกประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ  **เอาต์พุต**  การฝังข้อความ |
-| token\_autoขีดจำกัดของโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  2,048  **ขนาดมิติข้อมูลเอาต์พุต**  ยืดหยุ่น รองรับ: 128 - 3072, แนะนำ: 768, 1536, 3072 |
-| 123เวอร์ชัน | อ่านรายละเอียดเพิ่มเติมได้ใน[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)  - เสถียร: `gemini-embedding-001` |
-| calendar\_monthการอัปเดตล่าสุด | มิถุนายน 2025 |
+| Código do modelo id\_card | **API Gemini**  `gemini-embedding-001` |
+| saveTipos de dados aceitos | **Entrada**  Texto  **Saída**  Embeddings de textos |
+| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de tokens de entrada**  2.048  **Tamanho da dimensão de saída**  Flexível, compatível com: 128 a 3072. Recomendado: 768, 1536, 3072 |
+| Versões do 123 | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Estável: `gemini-embedding-001` |
+| calendar\_monthÚltima atualização | Junho de 2025 |
 
-สำหรับโมเดลการฝังที่เลิกใช้งานแล้ว โปรดไปที่หน้า[การเลิกใช้งาน](https://ai.google.dev/gemini-api/docs/deprecations?hl=th)
+Para modelos de embeddings descontinuados, acesse a página [Descontinuações](https://ai.google.dev/gemini-api/docs/deprecations?hl=pt-br).
 
-## การย้ายข้อมูลจาก gemini-embedding-001
+## Migração de gemini-embedding-001
 
-พื้นที่ฝังระหว่าง `gemini-embedding-001` กับ
-`gemini-embedding-2` **ใช้ร่วมกันไม่ได้** ซึ่งหมายความว่าคุณไม่สามารถเปรียบเทียบการฝังที่โมเดลหนึ่งสร้างขึ้นกับการฝังที่อีกโมเดลหนึ่งสร้างขึ้นได้โดยตรง หากอัปเกรดเป็น `gemini-embedding-2` คุณต้อง
-ฝังข้อมูลที่มีอยู่ทั้งหมดอีกครั้ง
+Os espaços de incorporação entre `gemini-embedding-001` e `gemini-embedding-2` são **incompatíveis**. Isso significa que não é possível comparar diretamente os embeddings gerados por um modelo com os gerados pelo outro. Se você estiver fazendo upgrade para o `gemini-embedding-2`, será necessário
+reincorporar todos os dados atuais.
 
-นอกเหนือจากความเข้ากันไม่ได้แล้ว ยังมีความแตกต่างที่สำคัญอื่นๆ ระหว่าง
-ทั้ง 2 รุ่น ดังนี้
+Além da incompatibilidade, há várias outras diferenças notáveis entre os dois modelos:
 
-- **ข้อกำหนดประเภทงาน:** เมื่อใช้ `gemini-embedding-001` คุณจะระบุประเภทงานโดยใช้พารามิเตอร์ `task_type` (เช่น `SEMANTIC_SIMILARITY`, `RETRIEVAL_DOCUMENT`) เมื่อใช้ `gemini-embedding-2` ระบบจะไม่รองรับพารามิเตอร์ `task_type` แต่คุณควรระบุวิธีการทำงาน
-  ในพรอมต์สำหรับงานที่เป็นข้อความเท่านั้นโดยตรง ดูรายละเอียดเกี่ยวกับวิธีจัดรูปแบบพรอมต์สำหรับกรณีการใช้งานต่างๆ ได้ที่
-  [ประเภทงานที่มีการฝัง 2](#task-types-embeddings-2)
-- **การรวมการฝัง:** `gemini-embedding-001` สร้างการฝังแต่ละรายการ
-  สำหรับแต่ละสตริงในรายการอินพุต ในทางตรงกันข้าม
-  `gemini-embedding-2` จะสร้างการฝังแบบรวมรายการเดียวเมื่อมีการระบุอินพุตหลายรายการ (เช่น ข้อความและรูปภาพ) โดยตรงในคำขอเดียว หากต้องการสร้างการฝังแยกกันสำหรับอินพุตแต่ละรายการ ให้ห่ออินพุตแต่ละรายการใน`Content` ออบเจ็กต์ หรือใช้[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th#batch-embedding) ดูข้อมูลเพิ่มเติมได้ที่
-  [การฝังการรวม](#embedding-aggregation)
-- **การปรับให้เป็นมาตรฐาน:** หากใช้ `output_dimensionality` เพื่อขอการฝัง
-  ที่มีมิติน้อยกว่า 3072 มิติ `gemini-embedding-2` จะปรับ
-  การฝังที่ถูกตัดทอนเหล่านี้ให้เป็นมาตรฐานโดยอัตโนมัติ เมื่อใช้ `gemini-embedding-001` คุณ
-  ต้องทําการทําให้เป็นมาตรฐานด้วยตนเองสําหรับมิติข้อมูลอื่นๆ นอกเหนือจาก 3072 ดูรายละเอียดได้ที่
-  [การรับประกันคุณภาพสำหรับขนาดที่เล็กลง](#quality-for-smaller-dimensions)
+- **Especificação do tipo de tarefa**:com `gemini-embedding-001`, você especifica o tipo de tarefa usando o parâmetro `task_type` (por exemplo, `SEMANTIC_SIMILARITY`, `RETRIEVAL_DOCUMENT`). Com `gemini-embedding-2`, o parâmetro `task_type` não é compatível. Em vez disso, inclua instruções de tarefa
+  diretamente no comando para tarefas somente de texto. Consulte [Tipos de tarefas com Embeddings 2](#task-types-embeddings-2) para saber como formatar comandos para diferentes casos de uso.
+- **Agregação de embeddings**:o `gemini-embedding-001` gera embeddings individuais para cada string em uma lista de entradas. Por outro lado, o `gemini-embedding-2` produz um único embedding agregado quando várias entradas (como texto e imagens) são fornecidas diretamente em uma solicitação. Para
+  gerar incorporações separadas para entradas individuais, encapsule cada entrada em um
+  objeto `Content` ou use a
+  [API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br#batch-embedding). Consulte
+  [Agregação de incorporações](#embedding-aggregation) para mais informações.
+- **Normalização**:se você usar `output_dimensionality` para solicitar incorporações com menos de 3.072 dimensões, `gemini-embedding-2` normalizará automaticamente essas incorporações truncadas. Com `gemini-embedding-001`, é necessário fazer a normalização manual para dimensões diferentes de 3.072. Consulte
+  [Garantir a qualidade para dimensões menores](#quality-for-smaller-dimensions)
+  para mais detalhes.
 
-## การฝังแบบกลุ่ม
+## Embeddings em lote
 
-หากไม่กังวลเรื่องเวลาในการตอบสนอง ให้ลองใช้โมเดลการฝัง Gemini กับ [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th#batch-embedding) ซึ่งจะช่วยให้มีอัตราการส่งข้อมูลที่สูงขึ้นมากที่ 50% ของราคาการฝังเริ่มต้น
-ดูตัวอย่างวิธีเริ่มต้นใช้งานได้ใน[สูตรการใช้งาน Batch API](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb)
+Se a latência não for um problema, use os modelos de incorporação do Gemini com a [API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br#batch-embedding). Isso permite um throughput muito maior com 50% do preço padrão de incorporação.
+Encontre exemplos de como começar no [livro de receitas da API Batch](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb).
 
-## ประกาศเกี่ยวกับการใช้งานอย่างมีความรับผิดชอบ
+## Aviso sobre o uso responsável
 
-โมเดลการฝัง Gemini มีไว้เพื่อเปลี่ยนรูปแบบข้อมูลที่ป้อนให้เป็นการแสดงตัวเลขเท่านั้น ซึ่งแตกต่างจากโมเดล Generative AI ที่สร้างเนื้อหาใหม่ แม้ว่า Google จะมีหน้าที่รับผิดชอบในการจัดหาโมเดลการฝัง
-ที่แปลงรูปแบบของข้อมูลอินพุตเป็นรูปแบบตัวเลขที่ร้องขอ
-แต่ผู้ใช้ยังคงมีหน้าที่รับผิดชอบอย่างเต็มที่ต่อข้อมูลที่ป้อนและการฝังที่ได้
-การใช้โมเดล Gemini Embedding เป็นการยืนยันว่าคุณมีสิทธิ์ที่จำเป็นในเนื้อหาใดๆ ที่คุณอัปโหลด อย่าสร้างเนื้อหาที่
-ละเมิดสิทธิในทรัพย์สินทางปัญญาหรือสิทธิด้านความเป็นส่วนตัวของผู้อื่น การใช้บริการนี้เป็นไปตาม[นโยบายการใช้งานที่ไม่อนุญาต](https://policies.google.com/terms/generative-ai/use-policy?hl=th)และ[ข้อกำหนดในการให้บริการของ Google](https://ai.google.dev/gemini-api/terms?hl=th)
+Ao contrário dos modelos de IA generativa que criam novos conteúdos, o modelo de incorporação do Gemini
+só transforma o formato dos seus dados de entrada em uma representação
+numérica. Embora o Google seja responsável por fornecer um modelo de incorporação que transforma o formato dos dados de entrada no formato numérico solicitado, os usuários mantêm total responsabilidade pelos dados inseridos e pelas incorporações resultantes. Ao usar o modelo de embedding do Gemini, você confirma que tem os direitos necessários sobre qualquer conteúdo que enviar. Não gere conteúdo que viole a propriedade intelectual ou os direitos de privacidade de terceiros. O uso deste serviço está sujeito à nossa [Política de Uso Proibido](https://policies.google.com/terms/generative-ai/use-policy?hl=pt-br) e aos [Termos de Serviço do Google](https://ai.google.dev/gemini-api/terms?hl=pt-br).
 
-## เริ่มสร้างด้วยการฝัง
+## Comece a criar com embeddings
 
-ดู[สมุดบันทึกการเริ่มต้นใช้งานอย่างรวดเร็วของ Embedding](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Embeddings.ipynb)
-เพื่อสำรวจความสามารถของโมเดลและดูวิธีปรับแต่งและแสดงภาพ Embedding
+Confira o [notebook de início rápido de embeddings](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Embeddings.ipynb) para conhecer os recursos do modelo e aprender a personalizar e visualizar seus embeddings.
 
-ส่งความคิดเห็น
+Envie comentários
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-อัปเดตล่าสุด 2026-05-13 UTC
+Última atualização 2026-05-13 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Quer enviar seu feedback?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-05-13 UTC"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-05-13 UTC."],[],[]]

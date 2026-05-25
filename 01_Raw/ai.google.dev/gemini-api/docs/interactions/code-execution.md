@@ -1,42 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=vi
-fetched_at: 2026-05-18T05:05:11.803848+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=de
+fetched_at: 2026-05-25T05:21:51.164596+00:00
 title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Gửi ý kiến phản hồi
+Feedback geben
 
-# Thực thi mã
+# Codeausführung
 
-Gemini API cung cấp một công cụ thực thi mã cho phép mô hình tạo và chạy mã Python. Sau đó, mô hình có thể học lặp đi lặp lại từ kết quả thực thi mã cho đến khi đạt được kết quả cuối cùng. Bạn có thể sử dụng tính năng thực thi mã để tạo các ứng dụng có lợi từ hoạt động suy luận dựa trên mã. Ví dụ: bạn có thể sử dụng tính năng thực thi mã để giải phương trình hoặc xử lý văn bản. Bạn cũng có thể sử dụng [các thư viện](#supported-libraries) có trong môi trường thực thi mã để thực hiện các tác vụ chuyên biệt hơn.
+Die Gemini API bietet ein Tool zur Codeausführung, mit dem das Modell Python-Code generieren und ausführen kann. Das Modell kann dann iterativ aus den Ergebnissen der Codeausführung lernen, bis es eine endgültige Ausgabe erstellt hat. Sie können die Codeausführung verwenden, um Anwendungen zu erstellen, die von codebasierten Schlussfolgerungen profitieren. Beispielsweise können Sie die Codeausführung verwenden, um Gleichungen zu lösen oder Text zu verarbeiten. Sie können
+auch die [Bibliotheken](#supported-libraries) verwenden, die in der Codeausführungsumgebung
+enthalten sind, um speziellere Aufgaben auszuführen.
 
-Gemini chỉ có thể thực thi mã bằng Python. Bạn vẫn có thể hỏi Gemini tạo mã bằng một ngôn ngữ khác, nhưng mô hình không thể sử dụng công cụ thực thi mã để chạy mã đó.
+Gemini kann Code nur in Python ausführen. Sie können Gemini weiterhin bitten, Code in einer anderen Sprache zu generieren, aber das Modell kann das Tool zur Codeausführung nicht verwenden, um ihn auszuführen.
 
-## Bật tính năng thực thi mã
+## Codeausführung aktivieren
 
-Để bật tính năng thực thi mã, hãy định cấu hình công cụ thực thi mã trên mô hình. Điều này cho phép mô hình tạo và chạy mã.
+Konfigurieren Sie das Tool zur Codeausführung für das Modell, um die Codeausführung zu aktivieren. So kann das Modell Code generieren und ausführen.
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="What is the sum of the first 50 prime numbers? "
           "Generate and run code for the calculation, and make sure you get all 50.",
     tools=[{"type": "code_execution"}]
@@ -56,13 +57,12 @@ for step in interaction.steps:
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     input: "What is the sum of the first 50 prime numbers? " +
            "Generate and run code for the calculation, and make sure you get all 50.",
     tools: [{ type: "code_execution" }]
@@ -86,19 +86,18 @@ for (const step of interaction.steps) {
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -H 'Content-Type: application/json' \
 -H "Api-Revision: 2026-05-20" \
 -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "input": "What is the sum of the first 50 prime numbers? Generate and run code for the calculation, and make sure you get all 50.",
     "tools": [{"type": "code_execution"}]
 }'
 ```
 
-Đầu ra có thể có dạng như sau (đã được định dạng để dễ đọc):
+Die Ausgabe könnte in etwa so aussehen. Sie wurde zur besseren Lesbarkeit formatiert:
 
 ```
 Okay, I need to calculate the sum of the first 50 prime numbers. Here's how I'll
@@ -147,30 +146,32 @@ sum_of_primes=5117
 The sum of the first 50 prime numbers is 5117.
 ```
 
-Đầu ra này kết hợp một số phần nội dung mà mô hình trả về khi sử dụng tính năng thực thi mã:
+Diese Ausgabe kombiniert mehrere Inhaltsteile, die das Modell bei der Codeausführung zurückgibt:
 
-- `text`: Văn bản cùng dòng do mô hình tạo
-- `code_execution_call`: Mã do mô hình tạo ra nhằm mục đích thực thi
-- `code_execution_result`: Kết quả của mã thực thi
+- `text`: Inline-Text, der vom Modell generiert wurde
+- `code_execution_call`: Code, der vom Modell generiert wurde und ausgeführt werden soll
+- `code_execution_result`: Ergebnis des ausführbaren Codes
 
-## Thực thi mã với hình ảnh (Gemini 3)
+## Codeausführung mit Bildern (Gemini 3)
 
-Giờ đây, mô hình Gemini 3 Flash có thể viết và thực thi mã Python để chủ động thao tác và kiểm tra hình ảnh.
+Das Gemini 3 Flash-Modell kann jetzt Python-Code schreiben und ausführen, um Bilder aktiv zu bearbeiten und zu prüfen.
 
-**Trường hợp sử dụng**
+**Anwendungsbeispiele**
 
-- **Thu phóng và kiểm tra**: Mô hình này ngầm phát hiện khi các chi tiết quá nhỏ (ví dụ: đọc một đồng hồ đo ở xa) và viết mã để cắt cũng như kiểm tra lại khu vực ở độ phân giải cao hơn.
-- **Phép tính trực quan**: Mô hình có thể chạy các phép tính nhiều bước bằng cách sử dụng mã (ví dụ: cộng các mục hàng trên biên nhận).
-- **Chú thích hình ảnh**: Mô hình có thể chú thích hình ảnh để trả lời câu hỏi, chẳng hạn như vẽ mũi tên để cho thấy mối quan hệ.
+- **Zoomen und prüfen**: Das Modell erkennt implizit, wenn Details zu klein sind
+  (z.B. beim Lesen eines Messgeräts in der Ferne), und schreibt Code, um den Bereich zuzuschneiden und
+  mit höherer Auflösung noch einmal zu prüfen.
+- **Visuelle Mathematik**: Das Modell kann mit Code mehrstufige Berechnungen ausführen (z.B.
+  Posten auf einer Rechnung summieren).
+- **Bildannotation**: Das Modell kann Bilder annotieren, um Fragen zu beantworten, z. B. Pfeile zeichnen, um Beziehungen darzustellen.
 
-## Bật tính năng Thực thi mã bằng hình ảnh
+## Codeausführung mit Bildern aktivieren
 
-Tính năng Thực thi mã với hình ảnh được hỗ trợ chính thức trong Gemini 3 Flash. Bạn có thể kích hoạt hành vi này bằng cách bật cả tính năng Thực thi mã như một công cụ và Tư duy.
+Die Codeausführung mit Bildern wird in Gemini 3 Flash offiziell unterstützt. Sie können dieses Verhalten aktivieren, indem Sie sowohl die Codeausführung als Tool als auch die Funktion „Thinking“ aktivieren.
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 import requests
 import base64
@@ -183,7 +184,7 @@ image_bytes = requests.get(image_path).content
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input=[
         {"type": "image", "data": base64.b64encode(image_bytes).decode('\utf-8'), "mime_type": "image/jpeg"},
         {"type": "text", "text": "Zoom into the expression pedals and tell me how many pedals are there?"}
@@ -197,7 +198,6 @@ for step in interaction.steps:
             if content_block.type == "text":
                 print(content_block.text)
             elif content_block.type == "image":
-                # Display generated image
                 display(Image.open(io.BytesIO(base64.b64decode(content_block.data))))
     elif step.type == "code_execution_call":
         print(step.arguments.code)
@@ -208,21 +208,18 @@ for step in interaction.steps:
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
 async function main() {
   const client = new GoogleGenAI({});
 
-  // 1. Prepare Image Data
   const imageUrl = "https://goo.gle/instrument-img";
   const response = await fetch(imageUrl);
   const imageArrayBuffer = await response.arrayBuffer();
   const base64ImageData = Buffer.from(imageArrayBuffer).toString('base64');
 
-  // 2. Call the API with Code Execution enabled
   const interaction = await client.interactions.create({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     input: [
       {
         type: "image",
@@ -234,7 +231,6 @@ async function main() {
     tools: [{ type: "code_execution" }]
   });
 
-  // 3. Process the response (Text, Code, and Execution Results)
   for (const step of interaction.steps) {
     if (step.type === "model_output") {
       for (const contentBlock of step.content) {
@@ -257,7 +253,7 @@ main();
 
 ```
 IMG_URL="https://goo.gle/instrument-img"
-MODEL="gemini-3-flash-preview"
+MODEL="gemini-3.5-flash"
 
 MIME_TYPE=$(curl -sIL "$IMG_URL" | grep -i '^content-type:' | awk -F ': ' '{print $2}' | sed 's/\r$//' | head -n 1)
 if [[ -z "$MIME_TYPE" || ! "$MIME_TYPE" == image/* ]]; then
@@ -278,7 +274,7 @@ jq -n \
   --rawfile b64 image_b64.txt \
   --arg mime "$MIME_TYPE" \
   '{
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     input: [
       {type: "image", data: $b64, mime_type: $mime},
       {type: "text", text: "Zoom into the expression pedals and tell me how many pedals are there?"}
@@ -286,7 +282,6 @@ jq -n \
     tools: [{type: "code_execution"}]
   }' > payload.json
 
-# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
@@ -294,29 +289,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -d @payload.json
 ```
 
-## Sử dụng tính năng thực thi mã trong các lượt tương tác nhiều lượt
+## Codeausführung in Multi-Turn-Interaktionen verwenden
 
-Bạn cũng có thể sử dụng tính năng thực thi mã trong một cuộc trò chuyện nhiều lượt bằng cách dùng `previous_interaction_id`.
+Sie können die Codeausführung auch als Teil einer Multi-Turn-Unterhaltung mit `previous_interaction_id` verwenden.
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 
 client = genai.Client()
 
-# First turn
 interaction1 = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="I have a math question for you.",
     tools=[{"type": "code_execution"}]
 )
-print(interaction1.steps[-1].content[0].text)
+print(interaction1.output_text)
 
-# Second turn - follow-up with code execution
 interaction2 = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     previous_interaction_id=interaction1.id,
     input="What is the sum of the first 50 prime numbers? "
           "Generate and run code for the calculation, and make sure you get all 50.",
@@ -337,22 +329,19 @@ for step in interaction2.steps:
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
 const client = new GoogleGenAI({});
 
-// First turn
 const interaction1 = await client.interactions.create({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     input: "I have a math question for you.",
     tools: [{ type: "code_execution" }]
 });
-console.log(interaction1.steps.at(-1).content[0].text);
+console.log(interaction1.output_text);
 
-// Second turn - follow-up with code execution
 const interaction2 = await client.interactions.create({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     previous_interaction_id: interaction1.id,
     input: "What is the sum of the first 50 prime numbers? " +
            "Generate and run code for the calculation, and make sure you get all 50.",
@@ -378,13 +367,12 @@ for (const step of interaction2.steps) {
 
 ```
 # First turn
-# Specifies the API revision to avoid breaking changes when they become default
 RESPONSE1=$(curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -H 'Content-Type: application/json' \
 -H "Api-Revision: 2026-05-20" \
 -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "input": "I have a math question for you.",
     "tools": [{"type": "code_execution"}]
 }')
@@ -392,86 +380,94 @@ RESPONSE1=$(curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/in
 INTERACTION_ID=$(echo $RESPONSE1 | jq -r '.id')
 
 # Second turn with previous_interaction_id
-# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -H 'Content-Type: application/json' \
 -H "Api-Revision: 2026-05-20" \
 -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "previous_interaction_id": "'"$INTERACTION_ID"'",
     "input": "What is the sum of the first 50 prime numbers? Generate and run code for the calculation, and make sure you get all 50.",
     "tools": [{"type": "code_execution"}]
 }'
 ```
 
-## Đầu vào/đầu ra (I/O)
+## Ein- und Ausgabe (E/A)
 
-Bắt đầu từ [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#gemini-2.0-flash), tính năng thực thi mã hỗ trợ đầu vào tệp và đầu ra biểu đồ. Khi sử dụng các khả năng đầu vào và đầu ra này, bạn có thể tải tệp CSV và tệp văn bản lên, đặt câu hỏi về các tệp và nhận được các biểu đồ [Matplotlib](https://matplotlib.org/) được tạo trong câu trả lời. Các tệp đầu ra được trả về dưới dạng hình ảnh cùng dòng trong câu trả lời.
+Ab
+[Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=de#gemini-2.0-flash) unterstützt die Code
+ausführung die Dateieingabe und die Grafikausgabe. Mit diesen Ein- und Ausgabe
+funktionen können Sie CSV- und Textdateien hochladen, Fragen zu den
+Dateien stellen und [Matplotlib](https://matplotlib.org/)-Diagramme als Teil
+der Antwort generieren lassen. Die Ausgabedateien werden als Inline-Bilder in der Antwort zurückgegeben.
 
-### Giá I/O
+### E/A-Preise
 
-Khi sử dụng I/O thực thi mã, bạn sẽ bị tính phí cho mã thông báo đầu vào và mã thông báo đầu ra:
+Bei der Verwendung der Codeausführung für die Ein- und Ausgabe werden Ihnen Eingabe- und Ausgabetokens in Rechnung gestellt:
 
-**Mã thông báo đầu vào:**
+**Eingabetokens**
 
-- Câu lệnh của người dùng
+- Nutzer-Prompt
 
-**Số mã thông báo đầu ra:**
+**Ausgabetokens**
 
-- Mã do mô hình tạo
-- Kết quả thực thi mã trong môi trường mã
-- Mã thông báo tư duy
-- Bản tóm tắt do mô hình tạo
+- Code, der vom Modell generiert wurde
+- Ausgabe der Codeausführung in der Codeumgebung
+- Thinking-Tokens
+- Vom Modell generierte Zusammenfassung
 
-### Thông tin chi tiết về I/O
+### E/A-Details
 
-Khi làm việc với I/O thực thi mã, hãy lưu ý đến các thông tin kỹ thuật sau:
+Beachten Sie die folgenden technischen Details, wenn Sie die Codeausführung für die Ein- und Ausgabe verwenden:
 
-- Thời gian chạy tối đa của môi trường mã là 30 giây.
-- Nếu môi trường mã tạo ra lỗi, mô hình có thể quyết định tạo lại đầu ra mã. Điều này có thể xảy ra tối đa 5 lần.
-- Kích thước tệp đầu vào tối đa bị giới hạn bởi cửa sổ mã thông báo của mô hình. Trong AI Studio, khi sử dụng Gemini Flash 2.0, kích thước tệp đầu vào tối đa là 1 triệu token (khoảng 2 MB đối với tệp văn bản thuộc các loại đầu vào được hỗ trợ). Nếu bạn tải một tệp quá lớn lên, AI Studio sẽ không cho phép bạn gửi tệp đó.
-- Tính năng thực thi mã hoạt động hiệu quả nhất với tệp văn bản và tệp CSV.
-- Bạn có thể truyền tệp đầu vào dưới dạng dữ liệu cùng dòng hoặc tải lên bằng [Files API](https://ai.google.dev/gemini-api/docs/interactions/files?hl=vi) và tệp đầu ra luôn được trả về dưới dạng dữ liệu cùng dòng.
+- Die maximale Laufzeit der Codeumgebung beträgt 30 Sekunden.
+- Wenn die Codeumgebung einen Fehler generiert, kann das Modell die Codeausgabe neu generieren. Dies kann bis zu fünf Mal geschehen.
+- Die maximale Größe der Eingabedatei ist durch das Tokenfenster des Modells begrenzt. In AI Studio mit Gemini Flash 2.0 beträgt die maximale Größe der Eingabedatei 1 Million Tokens (ungefähr 2 MB für Textdateien der unterstützten Eingabetypen). Wenn Sie eine zu große Datei hochladen, können Sie sie in AI Studio nicht senden.
+- Die Codeausführung funktioniert am besten mit Text- und CSV-Dateien.
+- Die Eingabedatei kann als Inline-Daten übergeben oder mit der
+  [Files API](https://ai.google.dev/gemini-api/docs/interactions/files?hl=de) hochgeladen werden.
+  Die Ausgabedatei wird immer als Inline-Daten zurückgegeben.
 
-## Thanh toán
+## Abrechnung
 
-Bạn không phải trả thêm phí khi bật tính năng thực thi mã từ Gemini API.
-Bạn sẽ bị tính phí theo mức giá hiện tại của mã thông báo đầu vào và đầu ra dựa trên mô hình Gemini mà bạn đang sử dụng.
+Für die Aktivierung der Codeausführung über die Gemini API fallen keine zusätzlichen Kosten an.
+Die Abrechnung erfolgt zum aktuellen Preis für Eingabe- und Ausgabetokens basierend auf dem verwendeten Gemini-Modell.
 
-Sau đây là một số thông tin khác bạn cần biết về việc tính phí thực thi mã:
+Weitere Informationen zur Abrechnung der Codeausführung:
 
-- Bạn chỉ bị tính phí một lần cho các mã thông báo đầu vào mà bạn truyền đến mô hình và bạn sẽ bị tính phí cho các mã thông báo đầu ra cuối cùng mà mô hình trả về cho bạn.
-- Các mã thông báo đại diện cho mã được tạo sẽ được tính là mã thông báo đầu ra. Mã được tạo có thể bao gồm văn bản và đầu ra đa phương thức như hình ảnh.
-- Kết quả thực thi mã cũng được tính là mã thông báo đầu ra.
+- Ihnen werden nur die Eingabetokens in Rechnung gestellt, die Sie an das Modell übergeben, und die Ausgabetokens, die Ihnen vom Modell zurückgegeben werden.
+- Tokens, die generierten Code darstellen, werden als Ausgabetokens gezählt. Generierter Code kann Text und multimodale Ausgaben wie Bilder enthalten.
+- Ergebnisse der Codeausführung werden ebenfalls als Ausgabetokens gezählt.
 
-Mô hình thanh toán được minh hoạ trong sơ đồ sau:
+Das Abrechnungsmodell ist im folgenden Diagramm dargestellt:
 
-![mô hình thanh toán thực thi mã](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=vi)
+![Abrechnungsmodell für die Codeausführung](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=de)
 
-- Bạn sẽ bị tính phí theo mức giá hiện tại của mã thông báo đầu vào và đầu ra dựa trên mô hình Gemini mà bạn đang sử dụng.
-- Nếu Gemini sử dụng tính năng thực thi mã khi tạo câu trả lời cho bạn, thì câu lệnh ban đầu, mã được tạo và kết quả của mã đã thực thi sẽ được gắn nhãn là *mã thông báo trung gian* và được tính phí là *mã thông báo đầu vào*.
-- Sau đó, Gemini sẽ tạo bản tóm tắt và trả về mã đã tạo, kết quả của mã đã thực thi và bản tóm tắt cuối cùng. Các mã thông báo này được tính phí dưới dạng *mã thông báo đầu ra*.
-- Gemini API bao gồm số lượng mã thông báo trung gian trong phản hồi API, nhờ đó bạn biết lý do nhận được thêm mã thông báo đầu vào ngoài câu lệnh ban đầu.
+- Die Abrechnung erfolgt zum aktuellen Preis für Eingabe- und Ausgabetokens basierend auf dem verwendeten Gemini-Modell.
+- Wenn Gemini bei der Generierung Ihrer Antwort die Codeausführung verwendet, werden der ursprüngliche Prompt, der generierte Code und das Ergebnis des ausgeführten Codes als *Zwischentokens* bezeichnet und als *Eingabetokens* in Rechnung gestellt.
+- Gemini generiert dann eine Zusammenfassung und gibt den generierten Code, das Ergebnis des ausgeführten Codes und die endgültige Zusammenfassung zurück. Diese werden als *Ausgabetokens* in Rechnung gestellt.
+- Die Gemini API enthält in der API-Antwort eine Anzahl der Zwischentokens, damit Sie wissen, warum Sie zusätzliche Eingabetokens über Ihren ursprünglichen Prompt hinaus erhalten.
 
-## Các điểm hạn chế
+## Beschränkungen
 
-- Mô hình này chỉ có thể tạo và thực thi mã. Phương thức này không thể trả về các cấu phần phần mềm khác như tệp nội dung nghe nhìn.
-- Trong một số trường hợp, việc cho phép thực thi mã có thể dẫn đến sự hồi quy ở các khía cạnh khác của đầu ra của mô hình (ví dụ: viết một câu chuyện).
-- Có một số điểm khác biệt về khả năng sử dụng thành công tính năng thực thi mã của các mô hình.
+- Das Modell kann nur Code generieren und ausführen. Es kann keine anderen Artefakte wie Mediendateien zurückgeben.
+- In einigen Fällen kann die Aktivierung der Codeausführung zu Regressionen in anderen Bereichen der Modellausgabe führen (z. B. beim Schreiben einer Geschichte).
+- Die Fähigkeit der verschiedenen Modelle, die Codeausführung erfolgreich zu nutzen, variiert.
 
-## Các cách kết hợp công cụ được hỗ trợ
+## Unterstützte Toolkombinationen
 
-Bạn có thể kết hợp công cụ thực thi mã với tính năng [Dựa trên kết quả của Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=vi) để hỗ trợ các trường hợp sử dụng phức tạp hơn.
+Das Tool zur Codeausführung kann mit
+[der Fundierung mit der Google Suche](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=de) kombiniert werden, um
+komplexere Anwendungsfälle zu ermöglichen.
 
-Các mô hình Gemini 3 hỗ trợ việc kết hợp các công cụ tích hợp (như Thực thi mã) với các công cụ tuỳ chỉnh (gọi hàm).
+Gemini 3-Modelle unterstützen die Kombination von integrierten Tools (wie der Codeausführung) mit benutzerdefinierten Tools (Funktionsaufrufe).
 
-## Các thư viện được hỗ trợ
+## Unterstützte Bibliotheken
 
-Môi trường thực thi mã bao gồm các thư viện sau:
+Die Codeausführungsumgebung enthält die folgenden Bibliotheken:
 
 - attrs
-- cờ vua
+- chess
 - contourpy
 - fpdf
 - geopandas
@@ -486,9 +482,9 @@ Môi trường thực thi mã bao gồm các thư viện sau:
 - numpy
 - opencv-python
 - openpyxl
-- đóng gói ứng dụng
-- gấu trúc
-- cái gối
+- packaging
+- pandas
+- pillow
 - protobuf
 - pylatex
 - pyparsing
@@ -500,29 +496,29 @@ Môi trường thực thi mã bao gồm các thư viện sau:
 - scikit-learn
 - scipy
 - seaborn
-- sáu
+- six
 - striprtf
 - sympy
-- lập bảng
+- tabulate
 - tensorflow
 - toolz
 - xlrd
 
-Bạn không thể cài đặt thư viện của riêng mình.
+Sie können keine eigenen Bibliotheken installieren.
 
-## Bước tiếp theo
+## Nächste Schritte
 
-- Dùng thử
-- Tìm hiểu về các công cụ khác của Gemini API:
-  - [Gọi hàm](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=vi)
-  - [Dựa trên kết quả của Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=vi)
+- Jetzt wechseln:
+- Weitere Informationen zu anderen Gemini API-Tools:
+  - [Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=de)
+  - [Fundierung mit der Google Suche](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=de)
 
-Gửi ý kiến phản hồi
+Feedback geben
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Cập nhật lần gần đây nhất: 2026-05-12 UTC.
+Zuletzt aktualisiert: 2026-05-19 (UTC).
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Haben Sie Feedback für uns?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-12 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-05-19 (UTC)."],[],[]]

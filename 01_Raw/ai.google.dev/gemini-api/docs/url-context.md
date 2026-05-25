@@ -1,34 +1,33 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/url-context?hl=id
-fetched_at: 2026-05-18T05:09:48.568681+00:00
+source_url: https://ai.google.dev/gemini-api/docs/url-context?hl=vi
+fetched_at: 2026-05-25T05:26:01.933094+00:00
 title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Kirim masukan
+Gửi ý kiến phản hồi
 
-# Konteks URL
+# Ngữ cảnh URL
 
-[Alat konteks URL memungkinkan Anda memberikan konteks tambahan ke model dalam bentuk URL. Dengan menyertakan URL dalam permintaan Anda, model akan mengakses konten dari halaman tersebut (selama tidak termasuk jenis URL yang tercantum di bagian batasan) untuk menginformasikan dan meningkatkan kualitas responsnya.](#limitations)
+Công cụ bối cảnh URL cho phép bạn cung cấp thêm bối cảnh cho các mô hình dưới dạng URL. Bằng cách đưa URL vào yêu cầu, mô hình sẽ truy cập vào nội dung của những trang đó (chừng nào đó không phải là loại URL được liệt kê trong [phần hạn chế](#limitations)) để cung cấp thông tin và cải thiện phản hồi của mô hình.
 
-Alat konteks URL berguna untuk tugas seperti berikut:
+Công cụ ngữ cảnh URL hữu ích cho những tác vụ như sau:
 
-- **Mengekstrak Data**: Menarik informasi tertentu seperti harga, nama, atau temuan utama dari beberapa URL.
-- **Membandingkan Dokumen**: Menganalisis beberapa laporan, artikel, atau PDF untuk
-  mengidentifikasi perbedaan dan melacak tren.
-- **Menyintesis & Membuat Konten**: Menggabungkan informasi dari beberapa URL sumber untuk membuat ringkasan, postingan blog, atau laporan yang akurat.
-- **Analisis Kode & Dokumen**: Merujuk repositori GitHub atau dokumentasi teknis untuk menjelaskan kode, membuat petunjuk penyiapan, atau menjawab pertanyaan.
+- **Trích xuất dữ liệu**: Lấy thông tin cụ thể như giá, tên hoặc phát hiện chính từ nhiều URL.
+- **So sánh tài liệu**: Phân tích nhiều báo cáo, bài viết hoặc tệp PDF để xác định điểm khác biệt và theo dõi xu hướng.
+- **Tổng hợp và tạo nội dung**: Kết hợp thông tin từ nhiều URL nguồn để tạo bản tóm tắt, bài đăng trên blog hoặc báo cáo chính xác.
+- **Phân tích mã và tài liệu**: Chỉ đến một kho lưu trữ trên GitHub hoặc tài liệu kỹ thuật để giải thích mã, tạo hướng dẫn thiết lập hoặc trả lời câu hỏi.
 
-Contoh berikut menunjukkan cara membandingkan dua resep dari situs yang berbeda.
+Ví dụ sau đây cho thấy cách so sánh hai công thức nấu ăn từ các trang web khác nhau.
 
 ### Python
 
@@ -37,7 +36,7 @@ from google import genai
 from google.genai.types import Tool, GenerateContentConfig
 
 client = genai.Client()
-model_id = "gemini-3-flash-preview"
+model_id = "gemini-3.5-flash"
 
 tools = [
   {"url_context": {}},
@@ -70,7 +69,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     contents: [
         "Compare the ingredients and cooking times from the recipes at https://www.foodnetwork.com/recipes/ina-garten/perfect-roast-chicken-recipe-1940592 and https://www.allrecipes.com/recipe/21151/simple-whole-roast-chicken/",
     ],
@@ -90,7 +89,7 @@ await main();
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -111,28 +110,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 cat result.json
 ```
 
-## Cara kerjanya
+## Cách hoạt động
 
-Alat Konteks URL menggunakan proses pengambilan dua langkah untuk menyeimbangkan kecepatan, biaya, dan akses ke data baru. Saat Anda memberikan URL, alat ini
-pertama-tama akan mencoba mengambil konten dari cache indeks internal. Cache ini berfungsi sebagai cache yang sangat dioptimalkan. Jika URL tidak tersedia di indeks (misalnya, jika
-URL tersebut adalah halaman yang sangat baru), alat otomatis akan melakukan pengambilan langsung.
-Alat ini mengakses URL secara langsung untuk mengambil kontennya secara real time.
+Công cụ Bối cảnh URL sử dụng quy trình truy xuất gồm hai bước để cân bằng tốc độ, chi phí và quyền truy cập vào dữ liệu mới. Khi bạn cung cấp một URL, công cụ này sẽ cố gắng tìm nạp nội dung từ bộ nhớ đệm chỉ mục nội bộ trước tiên. Thư mục này đóng vai trò là bộ nhớ đệm được tối ưu hoá cao. Nếu một URL không có trong chỉ mục (ví dụ: nếu đó là một trang rất mới), thì công cụ này sẽ tự động quay lại để thực hiện một lượt tìm nạp trực tiếp.
+Thao tác này truy cập trực tiếp vào URL để truy xuất nội dung của URL đó theo thời gian thực.
 
-## Menggabungkan dengan alat lain
+## Kết hợp với các công cụ khác
 
-Anda dapat menggabungkan alat konteks URL dengan alat lain untuk membuat alur kerja yang lebih canggih.
+Bạn có thể kết hợp công cụ bối cảnh URL với các công cụ khác để tạo quy trình làm việc hiệu quả hơn.
 
-[Model Gemini 3](#supported-models) mendukung penggabungan alat bawaan
-(seperti Konteks URL) dengan alat kustom (pemanggilan fungsi). Pelajari lebih lanjut di halaman
-[kombinasi alat](https://ai.google.dev/gemini-api/docs/tool-combination?hl=id).
+[Các mô hình Gemini 3](#supported-models) hỗ trợ việc kết hợp các công cụ tích hợp (như URL Context) với các công cụ tuỳ chỉnh (gọi hàm). Tìm hiểu thêm trên trang [các tổ hợp công cụ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi).
 
-### Grounding dengan penelusuran
+### Bám sát nguồn bằng tính năng tìm kiếm
 
-Jika konteks URL dan
-[Grounding dengan Google Penelusuran](https://ai.google.dev/gemini-api/docs/grounding?hl=id) diaktifkan,
-model dapat menggunakan kemampuan penelusurannya untuk menemukan
-informasi yang relevan secara online, lalu menggunakan alat konteks URL untuk mendapatkan pemahaman yang lebih
-mendalam tentang halaman yang ditemukannya. Pendekatan ini sangat berguna untuk perintah yang memerlukan penelusuran luas dan analisis mendalam halaman tertentu.
+Khi cả ngữ cảnh URL và tính năng [Bám sát nguồn bằng Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/grounding?hl=vi) đều được bật, mô hình có thể sử dụng các chức năng tìm kiếm của mình để tìm thông tin liên quan trên mạng, sau đó sử dụng công cụ ngữ cảnh URL để hiểu rõ hơn về những trang mà mô hình tìm thấy. Phương pháp này rất hiệu quả đối với những câu lệnh yêu cầu cả tìm kiếm trên diện rộng và phân tích chuyên sâu các trang cụ thể.
 
 ### Python
 
@@ -141,7 +132,7 @@ from google import genai
 from google.genai.types import Tool, GenerateContentConfig, GoogleSearch, UrlContext
 
 client = genai.Client()
-model_id = "gemini-3-flash-preview"
+model_id = "gemini-3.5-flash"
 
 tools = [
       {"url_context": {}},
@@ -171,7 +162,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     contents: [
         "Give me three day events schedule based on YOUR_URL. Also let me know what needs to taken care of considering weather and commute.",
     ],
@@ -193,7 +184,7 @@ await main();
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -217,11 +208,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 cat result.json
 ```
 
-## Memahami respons
+## Hiểu rõ câu trả lời
 
-Saat model menggunakan alat konteks URL, respons akan menyertakan objek `url_context_metadata`. Objek ini mencantumkan URL tempat model mengambil konten dan status setiap upaya pengambilan, yang berguna untuk verifikasi dan proses debug.
+Khi mô hình sử dụng công cụ bối cảnh URL, câu trả lời sẽ bao gồm một đối tượng `url_context_metadata`. Đối tượng này liệt kê các URL mà mô hình đã truy xuất nội dung và trạng thái của từng lần truy xuất. Điều này rất hữu ích cho việc xác minh và gỡ lỗi.
 
-Berikut adalah contoh bagian respons tersebut (bagian respons telah dihilangkan untuk mempersingkat):
+Sau đây là ví dụ về phần phản hồi đó (một số phần của phản hồi đã bị bỏ qua để cho ngắn gọn):
 
 ```
 {
@@ -253,18 +244,15 @@ Berikut adalah contoh bagian respons tersebut (bagian respons telah dihilangkan 
 }
 ```
 
-Untuk mengetahui detail lengkap tentang objek ini , lihat referensi API
-[`UrlContextMetadata`](https://ai.google.dev/api/generate-content?hl=id#UrlContextMetadata).
+Để biết thông tin chi tiết đầy đủ về đối tượng này , hãy xem [tài liệu tham khảo API `UrlContextMetadata`](https://ai.google.dev/api/generate-content?hl=vi#UrlContextMetadata).
 
-### Pemeriksaan keamanan
+### Kiểm tra an toàn
 
-Sistem melakukan pemeriksaan moderasi konten pada URL untuk mengonfirmasi bahwa URL tersebut memenuhi standar keamanan. Jika URL yang Anda berikan gagal dalam pemeriksaan ini, Anda akan mendapatkan `url_retrieval_status` dengan nilai `URL_RETRIEVAL_STATUS_UNSAFE`.
+Hệ thống sẽ kiểm tra nội dung của URL để xác nhận rằng URL đó đáp ứng các tiêu chuẩn an toàn. Nếu URL bạn cung cấp không vượt qua được bước kiểm tra này, bạn sẽ nhận được `url_retrieval_status` trong số `URL_RETRIEVAL_STATUS_UNSAFE`.
 
-### Jumlah token
+### Số lượng mã thông báo
 
-Konten yang diambil dari URL yang Anda tentukan dalam perintah Anda dihitung sebagai bagian dari token input. Anda dapat melihat jumlah token untuk penggunaan perintah dan
-alat di objek [`usage_metadata`](https://ai.google.dev/api/generate-content?hl=id#UsageMetadata)
-dari output model. Berikut adalah contoh output:
+Nội dung được truy xuất từ các URL mà bạn chỉ định trong câu lệnh sẽ được tính là một phần của mã thông báo đầu vào. Bạn có thể xem số lượng token cho câu lệnh và mức sử dụng công cụ trong đối tượng [`usage_metadata`](https://ai.google.dev/api/generate-content?hl=vi#UsageMetadata) của đầu ra mô hình. Sau đây là một ví dụ về kết quả đầu ra:
 
 ```
 'usage_metadata': {
@@ -280,68 +268,61 @@ dari output model. Berikut adalah contoh output:
   }
 ```
 
-Harga per token bergantung pada model yang digunakan. Lihat halaman
-[harga](https://ai.google.dev/gemini-api/docs/pricing?hl=id) untuk mengetahui detailnya.
+Giá mỗi mã thông báo phụ thuộc vào mô hình được dùng, hãy xem trang [định giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi) để biết thông tin chi tiết.
 
-## Model yang didukung
+## Mô hình được hỗ trợ
 
-| Model | Konteks URL |
+| Mô hình | Ngữ cảnh URL |
 | --- | --- |
-| [Pratinjau Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/gemini-3.1-pro-preview?hl=id) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=id) | ✔️ |
-| [Pratinjau Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/gemini-3.1-flash-lite-preview?hl=id) | ✔️ |
-| [Pratinjau Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=id) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=id) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=id) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=id) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=vi) | ✔️ |
+| [Bản dùng thử Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/gemini-3.1-pro-preview?hl=vi) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=vi) | ✔️ |
+| [Bản xem trước Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/gemini-3.1-flash-lite-preview?hl=vi) | ✔️ |
+| [Bản dùng thử Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=vi) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=vi) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=vi) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=vi) | ✔️ |
 
-## Praktik Terbaik
+## Các phương pháp hay nhất
 
-- **Berikan URL spesifik**: Untuk mendapatkan hasil terbaik, berikan URL langsung ke
-  konten yang Anda ingin untuk dianalisis oleh model. Model hanya akan mengambil konten
-  dari URL yang Anda berikan, bukan konten dari link bertingkat.
-- **Periksa aksesibilitas**: Pastikan URL yang Anda berikan tidak mengarah ke
-  halaman yang memerlukan login atau berada di balik paywall.
-- **Gunakan URL lengkap**: Berikan URL lengkap, termasuk protokol
-  (misalnya, https://www.google.com, bukan hanya google.com).
+- **Cung cấp URL cụ thể**: Để có kết quả tốt nhất, hãy cung cấp URL trực tiếp đến nội dung mà bạn muốn mô hình phân tích. Mô hình này sẽ chỉ truy xuất nội dung từ những URL mà bạn cung cấp, chứ không phải nội dung từ các đường liên kết lồng nhau.
+- **Kiểm tra khả năng tiếp cận**: Xác minh rằng các URL bạn cung cấp không dẫn đến những trang yêu cầu đăng nhập hoặc nằm sau tường phí.
+- **Sử dụng URL đầy đủ**: Cung cấp URL đầy đủ, bao gồm cả giao thức (ví dụ: https://www.google.com thay vì chỉ google.com).
 
-## Batasan
+## Các điểm hạn chế
 
-- Pemanggilan fungsi: Penggunaan alat (Konteks URL, Grounding dengan Google Penelusuran, dll.) dengan pemanggilan fungsi saat ini tidak didukung.
-- Batas permintaan: Alat ini dapat memproses hingga 20 URL per permintaan.
-- Ukuran konten URL: Ukuran maksimum untuk konten yang diambil dari satu URL adalah 34 MB.
-- Aksesibilitas publik: URL harus dapat diakses secara publik di web.
-  Alamat localhost (misalnya, localhost, 127.0.0.1), jaringan pribadi, dan layanan tunneling (misalnya, ngrok, pinggy) tidak didukung.
-- Hanya Gemini API: Konteks URL hanya tersedia di Gemini API, bukan melalui Gemini Enterprise Agent Platform.
+- Gọi hàm: Tính năng sử dụng công cụ (Ngữ cảnh URL, Bám sát nguồn bằng Google Tìm kiếm, v.v.) với tính năng gọi hàm hiện không được hỗ trợ.
+- Giới hạn yêu cầu: Công cụ này có thể xử lý tối đa 20 URL cho mỗi yêu cầu.
+- Kích thước nội dung URL: Kích thước tối đa cho nội dung được truy xuất từ một URL duy nhất là 34 MB.
+- Khả năng truy cập công khai: Các URL phải truy cập được công khai trên web.
+  Không được hỗ trợ địa chỉ máy chủ cục bộ (ví dụ: localhost, 127.0.0.1), mạng riêng tư và dịch vụ tạo đường hầm (ví dụ: ngrok, pinggy).
+- Chỉ có trong Gemini API: Bối cảnh URL chỉ có trong Gemini API, chứ không có trong Nền tảng tác nhân Gemini Enterprise.
 
-### Jenis konten yang didukung dan tidak didukung
+### Các loại nội dung được hỗ trợ và không được hỗ trợ
 
-Alat ini dapat mengekstrak konten dari URL dengan jenis konten berikut:
+Công cụ này có thể trích xuất nội dung từ các URL có những loại nội dung sau:
 
-- Teks (text/html, application/json, text/plain, text/xml, text/css, text/javascript , text/csv, text/rtf)
-- Gambar (image/png, image/jpeg, image/bmp, image/webp)
+- Văn bản (text/html, application/json, text/plain, text/xml, text/css, text/javascript , text/csv, text/rtf)
+- Hình ảnh (image/png, image/jpeg, image/bmp, image/webp)
 - PDF (application/pdf)
 
-Jenis konten berikut **tidak** didukung:
+Các loại nội dung sau đây **không** được hỗ trợ:
 
-- Konten berbayar berpenghalang
-- Video YouTube (Lihat
-  [pemahaman video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=id#youtube) untuk mempelajari
-  cara memproses URL YouTube)
-- File Google Workspace seperti dokumen atau spreadsheet Google
-- File video dan audio
+- Nội dung có tường phí
+- Video trên YouTube (Xem phần [hiểu video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi#youtube) để tìm hiểu cách xử lý URL của YouTube)
+- Các tệp trên Google Workspace như tài liệu hoặc bảng tính trên Google
+- Tệp video và âm thanh
 
-## Langkah berikutnya
+## Bước tiếp theo
 
-- Pelajari [cookbook konteks URL](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Grounding.ipynb?hl=id#url-context)
-  untuk contoh lainnya.
+- Hãy khám phá [sổ tay về ngữ cảnh URL](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Grounding.ipynb?hl=vi#url-context) để xem thêm ví dụ.
 
-Kirim masukan
+Gửi ý kiến phản hồi
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Terakhir diperbarui pada 2026-05-13 UTC.
+Cập nhật lần gần đây nhất: 2026-05-19 UTC.
 
-Ada masukan untuk kami?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-05-13 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-19 UTC."],[],[]]

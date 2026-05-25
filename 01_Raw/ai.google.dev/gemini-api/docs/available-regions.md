@@ -1,272 +1,274 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/available-regions?hl=pl
-fetched_at: 2026-05-18T05:14:15.914616+00:00
-title: "Regiony, w kt\u00f3rych dost\u0119pne s\u0105 Google AI Studio i Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/available-regions?hl=ja
+fetched_at: 2026-05-25T05:19:24.008444+00:00
+title: "Google AI Studio \u3068 Gemini API \u3092\u5229\u7528\u3067\u304d\u308b\u30ea\u30fc\u30b8\u30e7\u30f3 \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Prześlij opinię
+フィードバックを送信
 
-# Regiony, w których dostępne są Google AI Studio i Gemini API
+# Google AI Studio と Gemini API を利用できるリージョン
 
-Jeśli ta strona wyświetliła się podczas próby uzyskania dostępu do [Google AI Studio](https://aistudio.google.com/?hl=pl), może to być spowodowane jedną z tych przyczyn:
+[Google AI Studio](https://aistudio.google.com/?hl=ja) にアクセスしようとしたときにこのページが表示された場合は、次のいずれかの原因が考えられます。
 
-- **Ograniczenia regionalne:** Google AI Studio nie jest dostępne w Twoim regionie. Listę obsługiwanych regionów znajdziesz w sekcji poniżej.
-- **Wymagania dotyczące wieku:** nie spełniasz minimalnego wymagania dotyczącego wieku (18 lat), aby uzyskać dostęp do tej usługi.
-- **Potwierdzenie własności konta:** możesz mieć dostęp do usługi, ale nie [zweryfikowano jeszcze Twojego wieku](https://support.google.com/accounts/answer/10071085?hl=pl) na koncie Google.
+- **地域制限**: お住まいの地域では Google AI Studio をご利用いただけません。サポートされているリージョンの一覧については、以下のセクションをご覧ください。
+- **年齢要件**: このサービスを利用するための最低年齢要件（18 歳以上）を満たしていません。
+- **アカウント確認**: サービスにアクセスできる可能性がありますが、Google アカウントで[年齢確認](https://support.google.com/accounts/answer/10071085?hl=ja)がまだ行われていません。
 
-Więcej informacji o wymaganiach znajdziesz w [Warunkach korzystania z usługi](https://ai.google.dev/gemini-api/terms?hl=pl).
+要件について詳しくは、[利用規約](https://ai.google.dev/gemini-api/terms?hl=ja)をご確認ください。
 
-## Regiony, w których działa ta usługa
+## 利用可能なリージョン
 
-Interfejs Gemini API i Google AI Studio są dostępne w tych krajach i regionach. Jeśli nie mieszkasz w jednym z tych krajów lub regionów, wypróbuj [interfejs Gemini API na platformie Agent Platform w Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform?hl=pl):
+を使用して、**Colab インスタンス**のロケーションを確認できます。
 
-- Albania
-- Algieria
-- Samoa Amerykańskie
-- Andora
-- Angola
-- Anguilla
-- Antarktyka
-- Antigua i Barbuda
-- Argentyna
-- Armenia
-- Aruba
-- Australia
-- Austria
-- Azerbejdżan
-- Bahamy
-- Bahrajn
-- Bangladesz
-- Barbados
-- Belgia
-- Belize
-- Benin
-- Bermudy
-- Bhutan
-- Boliwia
-- Bośnia i Hercegowina
-- Botswana
-- Brazylia
-- Brytyjskie Terytorium Oceanu Indyjskiego
-- Brytyjskie Wyspy Dziewicze
-- Brunei
-- Bułgaria
-- Burkina Faso
-- Burundi
-- Republika Zielonego Przylądka
-- Kambodża
-- Kamerun
-- Kanada
-- Holandia Karaibska
-- Kajmany
-- Republika Środkowoafrykańska
-- Czad
-- Chile
-- Wyspa Bożego Narodzenia
-- Wyspy Kokosowe (Keelinga)
-- Kolumbia
-- Komory
-- Wyspy Cooka
-- Kostaryka
-- Wybrzeże Kości Słoniowej
-- Chorwacja
-- Curaçao
-- Czechy
-- Demokratyczna Republika Konga
-- Dania
-- Dżibuti
-- Dominika
-- Dominikana
-- Ekwador
-- Egipt
-- Salwador
-- Gwinea Równikowa
-- Erytrea
-- Estonia
-- Eswatini
-- Etiopia
-- Falklandy (Malwiny)
-- Wyspy Owcze
-- Fidżi
-- Finlandia
-- Francja
-- Gujana Francuska
-- Gabon
-- Gambia
-- Gruzja
-- Niemcy
-- Ghana
-- Gibraltar
-- Grecja
-- Grenlandia
-- Grenada
-- Guam
-- Gwatemala
-- Guernsey
-- Gwinea
-- Gwinea Bissau
-- Gujana
-- Haiti
-- Wyspy Heard i McDonalda
-- Honduras
-- Węgry
-- Islandia
-- Indie
-- Indonezja
-- Irak
-- Irlandia
-- Wyspa Man
-- Izrael
-- Włochy
-- Jamajka
-- Japonia
-- Jersey
-- Jordania
-- Kazachstan
-- Kenia
-- Kiribati
-- Kosowo
-- Kuwejt
-- Kirgistan
-- Laos
-- Łotwa
-- Liban
-- Lesoto
-- Liberia
-- Libia
-- Liechtenstein
-- Litwa
-- Luksemburg
-- Madagaskar
-- Malawi
-- Malezja
-- Malediwy
-- Mali
-- Malta
-- Wyspy Marshalla
-- Mauretania
-- Mauritius
-- Meksyk
-- Mikronezja
-- Mołdawia
-- Monako
-- Mongolia
-- Czarnogóra
-- Montserrat
-- Maroko
-- Mozambik
-- Namibia
-- Nauru
-- Nepal
-- Holandia
-- Nowa Kaledonia
-- Nowa Zelandia
-- Nikaragua
-- Niger
-- Nigeria
-- Niue
-- Wyspa Norfolk
-- Macedonia Północna
-- Mariany Północne
-- Norwegia
-- Oman
-- Pakistan
-- Palau
-- Palestyna
-- Panama
-- Papua-Nowa Gwinea
-- Paragwaj
-- Peru
-- Filipiny
-- Pitcairn
-- Polska
-- Portugalia
-- Portoryko
-- Katar
-- Cypr
-- Republika Konga
-- Rumunia
-- Rwanda
-- Reunion
-- Saint-Barthélemy
-- Wyspa Świętej Heleny, Wyspa Wniebowstąpienia i Tristan da Cunha
-- Saint Kitts i Nevis
-- Saint Lucia
-- Saint-Pierre i Miquelon
-- Saint Vincent i Grenadyny
-- Samoa
-- San Marino
-- Wyspy Świętego Tomasza i Książęca
-- Arabia Saudyjska
-- Senegal
-- Serbia
-- Seszele
-- Sierra Leone
-- Singapur
-- Słowacja
-- Słowenia
-- Wyspy Salomona
-- Somalia
-- Republika Południowej Afryki
-- Georgia Południowa i Sandwich Południowy
-- Korea Południowa
-- Sudan Południowy
-- Hiszpania
-- Sri Lanka
-- Sudan
-- Surinam
-- Szwecja
-- Szwajcaria
-- Tajwan
-- Tadżykistan
-- Tanzania
-- Tajlandia
-- Timor Wschodni
-- Togo
-- Tokelau
-- Tonga
-- Trynidad i Tobago
-- Tunezja
-- Turkmenistan
-- Turks i Caicos
-- Tuvalu
-- Turcja
-- Uganda
-- Ukraina
-- Zjednoczone Emiraty Arabskie
-- Wielka Brytania
-- Stany Zjednoczone
-- Dalekie Wyspy Mniejsze Stanów Zjednoczonych
-- Urugwaj
-- Wyspy Dziewicze Stanów Zjednoczonych
-- Uzbekistan
-- Vanuatu
-- Watykan
-- Wenezuela
-- Wietnam
-- Wallis i Futuna
-- Sahara Zachodnia
-- Jemen
-- Zambia
-- Zimbabwe
-- Wyspy Alandzkie
+Gemini API と Google AI Studio は、以下の国と地域でご利用いただけます。上記の国または地域以外にお住まいの場合は、[Gemini Enterprise Agent Platform の Gemini API](https://cloud.google.com/gemini-enterprise-agent-platform?hl=ja) をお試しください。
 
-Prześlij opinię
+- アルバニア
+- アルジェリア
+- 米領サモア
+- アンドラ
+- アンゴラ
+- アンギラ
+- 南極大陸
+- アンティグア バーブーダ
+- アルゼンチン
+- アルメニア
+- アルバ
+- オーストラリア
+- オーストリア
+- アゼルバイジャン
+- バハマ
+- バーレーン
+- バングラデシュ
+- バルバドス
+- ベルギー
+- ベリーズ
+- ベナン
+- バミューダ
+- ブータン
+- ボリビア
+- ボスニア ヘルツェゴビナ
+- ボツワナ
+- ブラジル
+- 英領インド洋地域
+- 英領バージン諸島
+- ブルネイ
+- ブルガリア
+- ブルキナファソ
+- ブルンジ
+- カボベルデ
+- カンボジア
+- カメルーン
+- カナダ
+- オランダ領カリブ
+- ケイマン諸島
+- 中央アフリカ
+- チャド
+- チリ
+- クリスマス諸島
+- ココス諸島（キーリング諸島）
+- コロンビア
+- コモロ
+- クック諸島
+- コスタリカ
+- コートジボワール
+- クロアチア
+- キュラソー島
+- チェコ共和国
+- コンゴ民主共和国
+- デンマーク
+- ジブチ
+- ドミニカ
+- ドミニカ共和国
+- エクアドル
+- エジプト
+- エルサルバドル
+- 赤道ギニア
+- エリトリア
+- エストニア
+- エスワティニ
+- エチオピア
+- フォークランド諸島（マルビナス諸島）
+- フェロー諸島
+- フィジー
+- フィンランド
+- フランス
+- 仏領ギアナ
+- ガボン
+- ガンビア
+- グルジア
+- ドイツ
+- ガーナ
+- ジブラルタル
+- ギリシャ
+- グリーンランド
+- グレナダ
+- グアム
+- グアテマラ
+- ガーンジー
+- ギニア
+- ギニアビサウ
+- ガイアナ
+- ハイチ
+- ハード島とマクドナルド諸島
+- ホンジュラス
+- ハンガリー
+- アイスランド
+- インド
+- インドネシア
+- イラク
+- アイルランド
+- マン島
+- イスラエル
+- イタリア
+- ジャマイカ
+- 日本
+- ジャージー
+- ヨルダン
+- カザフスタン
+- ケニア
+- キリバス
+- コソボ
+- クウェート
+- キルギス
+- ラオス
+- ラトビア
+- レバノン
+- レソト
+- リベリア
+- リビア
+- リヒテンシュタイン
+- リトアニア
+- ルクセンブルク
+- マダガスカル
+- マラウイ
+- マレーシア
+- モルディブ
+- マリ
+- マルタ
+- マーシャル諸島
+- モーリタニア
+- モーリシャス
+- メキシコ
+- ミクロネシア
+- モルドバ
+- モナコ
+- モンゴル
+- モンテネグロ
+- モントセラト島
+- モロッコ
+- モザンビーク
+- ナミビア
+- ナウル
+- ネパール
+- オランダ
+- ニューカレドニア
+- ニュージーランド
+- ニカラグア
+- ニジェール
+- ナイジェリア
+- ニウエ
+- ノーフォーク島
+- 北マケドニア
+- 北マリアナ諸島
+- ノルウェー
+- オマーン
+- パキスタン
+- パラオ
+- パレスチナ
+- パナマ
+- パプアニューギニア
+- パラグアイ
+- ペルー
+- フィリピン
+- ピトケアン諸島
+- ポーランド
+- ポルトガル
+- プエルトリコ
+- カタール
+- キプロス共和国
+- コンゴ共和国
+- ルーマニア
+- ルワンダ
+- レユニオン
+- サン バルテルミー
+- セントヘレナ、アセンション、トリスタン ダ クーニャ
+- セントクリストファー ネービス
+- セントルシア
+- サンピエール ミクロン
+- セントビンセントおよびグレナディーン諸島
+- サモア
+- サンマリノ
+- サントメ プリンシペ
+- サウジアラビア
+- セネガル
+- セルビア
+- セイシェル
+- シェラレオネ
+- シンガポール
+- スロバキア
+- スロベニア
+- ソロモン諸島
+- ソマリア
+- 南アフリカ
+- 南ジョージア諸島および南サンドウィッチ諸島
+- 韓国
+- 南スーダン
+- スペイン
+- スリランカ
+- スーダン
+- スリナム
+- スウェーデン
+- スイス
+- 台湾
+- タジキスタン
+- タンザニア
+- タイ
+- 東ティモール
+- トーゴ
+- トケラウ諸島
+- トンガ
+- トリニダード トバゴ
+- チュニジア
+- トルクメニスタン
+- タークス カイコス諸島
+- ツバル
+- トルコ
+- ウガンダ
+- ウクライナ
+- アラブ首長国連邦
+- 英国
+- 米国
+- 合衆国周辺離島
+- ウルグアイ
+- 米領バージン諸島
+- ウズベキスタン
+- バヌアツ
+- バチカン
+- ベネズエラ
+- ベトナム
+- ウォリス フツナ諸島
+- 西サハラ
+- イエメン
+- ザンビア
+- ジンバブエ
+- オーランド諸島
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+フィードバックを送信
 
-Ostatnia aktualizacja: 2026-04-29 UTC.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Chcesz przekazać coś jeszcze?
+最終更新日 2026-04-29 UTC。
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]
+ご意見をお聞かせください
+
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]

@@ -1,46 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=ar
-fetched_at: 2026-05-18T05:12:40.904367+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=pt-BR
+fetched_at: 2026-05-25T05:24:14.473073+00:00
 title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-إرسال ملاحظات
+Envie comentários
 
-# فهم الرموز المميّزة وعدّها
+# Entender e contar tokens
 
-تعالج نماذج Gemini ونماذج الذكاء الاصطناعي التوليدي الأخرى الإدخالات والإخراجات بدقة تُعرف باسم *الرمز المميّز*.
+O Gemini e outros modelos de IA generativa processam a entrada e a saída em uma granularidade chamada *token*.
 
-**بالنسبة إلى نماذج Gemini، يعادل الرمز المميّز 4 أحرف تقريبًا.
-ويعادل 100 رمز مميّز من 60 إلى 80 كلمة باللغة الإنجليزية تقريبًا.**
+**Para os modelos Gemini, um token equivale a cerca de quatro caracteres.
+100 tokens equivalem a cerca de 60 a 80 palavras em inglês.**
 
-## لمحة عن الرموز المميّزة
+## Sobre tokens
 
-يمكن أن تكون الرموز المميّزة أحرفًا مفردة، مثل `z`، أو كلمات كاملة، مثل `cat`. ويتم تقسيم الكلمات الطويلة إلى عدة رموز مميّزة. تُعرف مجموعة جميع الرموز المميّزة التي يستخدمها النموذج باسم المفردات، وتُعرف عملية تقسيم النص إلى رموز مميّزة باسم *الترميز*.
+Os tokens podem ser caracteres únicos, como `z`, ou palavras inteiras, como `cat`. Palavras longas são divididas em vários tokens. O conjunto de todos os tokens usados pelo modelo é chamado de vocabulário, e o processo de dividir o texto em tokens é chamado de *tokenização*.
 
-عند تفعيل الفوترة، يتم تحديد [تكلفة طلب البيانات من Gemini API](https://ai.google.dev/pricing?hl=ar) جزئيًا حسب عدد الرموز المميّزة للإدخال والإخراج، لذا قد يكون من المفيد معرفة كيفية
-عدّ الرموز المميّزة.
+Quando o faturamento está ativado, o [custo de uma chamada para a API Gemini](https://ai.google.dev/pricing?hl=pt-br) é
+determinado em parte pelo número de tokens de entrada e saída. Portanto, saber como
+contar tokens pode ser útil.
 
-## عدّ الرموز المميّزة
+## Contar tokens
 
-يتم ترميز جميع الإدخالات والإخراجات من Gemini API، بما في ذلك النصوص وملفات الصور والوسائط الأخرى غير النصية.
+Toda entrada e saída da API Gemini é tokenizada, incluindo texto, arquivos de imagem e outras modalidades não textuais.
 
-يمكنك عدّ الرموز المميّزة بالطرق التالية:
+É possível contar tokens das seguintes maneiras:
 
-- **استدعاء `count_tokens` مع إدخال الطلب** تعرض هذه الدالة إجمالي عدد الرموز المميّزة في *الإدخال فقط*. يمكنك إجراء هذا الاستدعاء قبل إرسال الإدخال للتحقّق من حجم طلباتك.
-- **استخدام `usage` في استجابة التفاعل.** تعرض هذه الدالة أعداد الرموز المميّزة للإدخال (`total_input_tokens`) والإخراج (`total_output_tokens`) والتفكير (`total_thought_tokens`) والمحتوى المخزّن مؤقتًا (`total_cached_tokens`) واستخدام الأدوات (`total_tool_use_tokens`) والإجمالي (`total_tokens`).
+- **Chame `count_tokens` com a entrada da solicitação.** Retorna o número total de tokens *apenas na entrada*. Faça essa chamada antes de enviar a entrada para verificar o tamanho das solicitações.
+- **Use o `usage` na resposta de interação.** Retorna contagens de tokens para entrada (`total_input_tokens`), saída (`total_output_tokens`), pensamento (`total_thought_tokens`), conteúdo armazenado em cache (`total_cached_tokens`), uso de ferramentas (`total_tool_use_tokens`) e total (`total_tokens`).
 
-### عدّ الرموز المميّزة للنص
+### Contar tokens de texto
 
 ### Python
 
@@ -53,14 +54,14 @@ prompt = "The quick brown fox jumps over the lazy dog."
 
 # Count tokens before sending
 total_tokens = client.models.count_tokens(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents=prompt
 )
 print("total_tokens:", total_tokens.total_tokens)
 
 # Get usage from interaction
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input=prompt
 )
 print(interaction.usage)
@@ -77,14 +78,14 @@ const prompt = "The quick brown fox jumps over the lazy dog.";
 
 // Count tokens before sending
 const countResponse = await client.models.countTokens({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     contents: prompt,
 });
 console.log(countResponse.totalTokens);
 
 // Get usage from interaction
 const interaction = await client.interactions.create({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     input: prompt,
 });
 console.log(interaction.usage);
@@ -94,16 +95,16 @@ console.log(interaction.usage);
 
 ```
 # Specifies the API revision to avoid breaking changes when they become default
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:countTokens" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:countTokens" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{"contents": [{"parts": [{"text": "The quick brown fox."}]}]}'
 ```
 
-### عدّ الرموز المميّزة للمحادثات المتعددة الأدوار
+### Contar tokens de várias rodadas
 
-يمكنك عدّ الرموز المميّزة في سجلّ المحادثات باستخدام `previous_interaction_id`:
+Conte os tokens no histórico de conversas usando `previous_interaction_id`:
 
 ### Python
 
@@ -111,13 +112,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-f
 # This will only work for SDK newer than 2.0.0
 # First interaction
 interaction1 = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="Hi, my name is Bob"
 )
 
 # Second interaction continues the conversation
 interaction2 = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="What's my name?",
     previous_interaction_id=interaction1.id
 )
@@ -134,13 +135,13 @@ print(f"Total tokens: {interaction2.usage.total_tokens}")
 // This will only work for SDK newer than 2.0.0
 // First interaction
 const interaction1 = await client.interactions.create({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     input: "Hi, my name is Bob"
 });
 
 // Second interaction continues the conversation
 const interaction2 = await client.interactions.create({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     input: "What's my name?",
     previous_interaction_id: interaction1.id
 });
@@ -149,16 +150,16 @@ console.log(`Input tokens: ${interaction2.usage.total_input_tokens}`);
 console.log(`Output tokens: ${interaction2.usage.total_output_tokens}`);
 ```
 
-### عدّ الرموز المميّزة المتعددة الوسائط
+### Contar tokens multimodais
 
-يتم ترميز جميع الإدخالات إلى Gemini API، بما في ذلك الصور والفيديوهات والمحتوى الصوتي.
-في ما يلي نقاط أساسية حول الترميز:
+Toda entrada da API Gemini é tokenizada, incluindo imagens, vídeo e áudio.
+Pontos principais sobre a tokenização:
 
-- **الصور**: يتم احتساب 258 رمزًا مميّزًا للصور التي يبلغ حجمها ‎384 × 384 بكسل أو أقل في كلا البُعدَين. ويتم تقسيم الصور الأكبر حجمًا إلى مربّعات بحجم ‎768 × 768 بكسل، ويتم احتساب 258 رمزًا مميّزًا لكل مربّع.
-- **الفيديوهات**: 263 رمزًا مميّزًا في الثانية
-- **المحتوى الصوتي**: 32 رمزًا مميّزًا في الثانية
+- **Imagens**: imagens ≤384 pixels em ambas as dimensões contam como 258 tokens. Imagens maiores são divididas em blocos de 768 x 768 pixels, cada um contando como 258 tokens.
+- **Vídeo**: 263 tokens por segundo
+- **Áudio**: 32 tokens por segundo
 
-#### الرموز المميّزة للصور
+#### Tokens de imagem
 
 ### Python
 
@@ -168,14 +169,14 @@ uploaded_file = client.files.upload(file="path/to/image.jpg")
 
 # Count tokens for image + text
 total_tokens = client.models.count_tokens(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents=["Tell me about this image", uploaded_file]
 )
 print(f"Total tokens: {total_tokens}")
 
 # Generate with image
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input=[
         {"type": "text", "text": "Tell me about this image"},
         {"type": "image", "uri": uploaded_file.uri, "mime_type": uploaded_file.mime_type}
@@ -195,7 +196,7 @@ const uploadedFile = await client.files.upload({
 
 // Count tokens
 const countResponse = await client.models.countTokens({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     contents: [
         { text: "Tell me about this image" },
         { fileData: { fileUri: uploadedFile.uri, mimeType: uploadedFile.mimeType } }
@@ -204,7 +205,7 @@ const countResponse = await client.models.countTokens({
 console.log(countResponse.totalTokens);
 ```
 
-**مثال على البيانات المضمّنة:**
+**Exemplo de dados inline:**
 
 ### Python
 
@@ -216,7 +217,7 @@ with open('image.jpg', 'rb') as f:
     image_bytes = f.read()
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input=[
         {"type": "text", "text": "Describe this image"},
         {
@@ -229,7 +230,7 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### الرموز المميّزة للفيديوهات
+#### Tokens de vídeo
 
 ### Python
 
@@ -246,14 +247,14 @@ while not video_file.state or video_file.state.name != "ACTIVE":
 
 # A 60-second video is approximately 263 * 60 = 15,780 tokens
 total_tokens = client.models.count_tokens(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents=["Summarize this video", video_file]
 )
 print(f"Total tokens: {total_tokens}")
 
 # Generate with video
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input=[
         {"type": "text", "text": "Summarize this video"},
         {"type": "video", "uri": video_file.uri, "mime_type": video_file.mime_type}
@@ -262,7 +263,7 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### الرموز المميّزة للمحتوى الصوتي
+#### Tokens de áudio
 
 ### Python
 
@@ -272,14 +273,14 @@ audio_file = client.files.upload(file="path/to/audio.mp3")
 
 # A 60-second audio clip is approximately 32 * 60 = 1,920 tokens
 total_tokens = client.models.count_tokens(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents=["Transcribe this audio", audio_file]
 )
 print(f"Total tokens: {total_tokens}")
 
 # Generate with audio
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input=[
         {"type": "text", "text": "Transcribe this audio"},
         {"type": "audio", "uri": audio_file.uri, "mime_type": audio_file.mime_type}
@@ -288,16 +289,16 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-### عدّ الرموز المميّزة لتعليمات النظام
+### Contar tokens de instruções do sistema
 
-يتم عدّ تعليمات النظام كجزء من الرموز المميّزة للإدخال:
+As instruções do sistema são contadas como parte dos tokens de entrada:
 
 ### Python
 
 ```
 # This will only work for SDK newer than 2.0.0
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="Hello!",
     system_instruction="You are a helpful assistant who speaks like a pirate."
 )
@@ -306,9 +307,9 @@ interaction = client.interactions.create(
 print(f"Input tokens: {interaction.usage.total_input_tokens}")
 ```
 
-### عدّ الرموز المميّزة للأدوات
+### Contar tokens de ferramentas
 
-يتم أيضًا عدّ الأدوات (الدوال وتنفيذ التعليمات البرمجية و"بحث Google"):
+As ferramentas (funções, execução de código, Pesquisa Google) também são contadas:
 
 ### Python
 
@@ -329,7 +330,7 @@ tools = [
 ]
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="What's the weather in Tokyo?",
     tools=tools
 )
@@ -338,17 +339,17 @@ print(f"Input tokens: {interaction.usage.total_input_tokens}")
 print(f"Tool use tokens: {interaction.usage.total_tool_use_tokens}")
 ```
 
-## قدرة الاستيعاب
+## Janela de contexto
 
-لكل نموذج من نماذج Gemini عدد أقصى من الرموز المميّزة التي يمكنه معالجتها. وتحدّد قدرة الاستيعاب الحدّ المجمّع للرموز المميّزة للإدخال والإخراج.
+Cada modelo do Gemini tem um número máximo de tokens que pode processar. A janela de contexto define o limite combinado de tokens de entrada e saída.
 
-### الحصول على حجم قدرة الاستيعاب آليًا
+### Receber o tamanho da janela de contexto de maneira programática
 
 ### Python
 
 ```
 # This will only work for SDK newer than 2.0.0
-model_info = client.models.get(model="gemini-3-flash-preview")
+model_info = client.models.get(model="gemini-3.5-flash")
 print(f"Input token limit: {model_info.input_token_limit}")
 print(f"Output token limit: {model_info.output_token_limit}")
 ```
@@ -357,25 +358,25 @@ print(f"Output token limit: {model_info.output_token_limit}")
 
 ```
 // This will only work for SDK newer than 2.0.0
-const modelInfo = await client.models.get({ model: "gemini-3-flash-preview" });
+const modelInfo = await client.models.get({ model: "gemini-3.5-flash" });
 console.log(`Input token limit: ${modelInfo.inputTokenLimit}`);
 console.log(`Output token limit: ${modelInfo.outputTokenLimit}`);
 ```
 
-يمكنك الاطّلاع على أحجام قدرة الاستيعاب في صفحة [النماذج](https://ai.google.dev/gemini-api/docs/models?hl=ar).
+Encontre os tamanhos da janela de contexto na página de [modelos](https://ai.google.dev/gemini-api/docs/models?hl=pt-br).
 
-## الخطوات التالية
+## A seguir
 
-- [إنشاء النص](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=ar): أساسيات الإنشاء
-- [التخزين المؤقت](https://ai.google.dev/gemini-api/docs/interactions/caching?hl=ar): خفض التكاليف باستخدام التخزين المؤقت
-- [التسعير](https://ai.google.dev/gemini-api/docs/pricing?hl=ar): التعرّف على التكاليف
+- [Geração de texto](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=pt-br): noções básicas de geração
+- [Armazenamento em cache](https://ai.google.dev/gemini-api/docs/interactions/caching?hl=pt-br): reduzir custos com o armazenamento em cache
+- [Preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br): entender os custos
 
-إرسال ملاحظات
+Envie comentários
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-تاريخ التعديل الأخير: 2026-05-12 (حسب التوقيت العالمي المتفَّق عليه)
+Última atualização 2026-05-19 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Quer enviar seu feedback?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-12 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-05-19 UTC."],[],[]]

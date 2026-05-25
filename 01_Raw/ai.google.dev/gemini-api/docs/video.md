@@ -1,43 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/video?hl=vi
-fetched_at: 2026-05-18T05:15:52.441269+00:00
-title: "T\u1ea1o video b\u1eb1ng Veo 3.1 trong Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/video?hl=zh-TW
+fetched_at: 2026-05-25T05:26:52.673441+00:00
+title: "\u5728 Gemini API \u4e2d\u4f7f\u7528 Veo 3.1 \u751f\u6210\u5f71\u7247 \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Gửi ý kiến phản hồi
+提供意見
 
-# Tạo video bằng Veo 3.1 trong Gemini API
+# 在 Gemini API 中使用 Veo 3.1 生成影片
 
-> Để tìm hiểu về tính năng hiểu video, hãy xem hướng dẫn về [Tính năng hiểu video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi).
+> 如要瞭解影片理解功能，請參閱「[影片理解](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-tw)」指南。
 
-[Veo 3.1](https://deepmind.google/models/veo/?hl=vi) là mô hình tiên tiến nhất của Google để tạo video có độ trung thực cao, dài 8 giây, độ phân giải 720p, 1080p hoặc 4k, có độ chân thực ấn tượng và âm thanh được tạo tự nhiên. Bạn có thể truy cập vào mô hình này theo cách lập trình bằng Gemini API. Để tìm hiểu thêm về các biến thể mô hình Veo hiện có, hãy xem phần [Các phiên bản mô hình](#model-versions).
+[Veo 3.1](https://deepmind.google/models/veo/?hl=zh-tw) 是 Google 最先進的模型，可生成 8 秒的 720p、1080p 或 4k 高畫質影片，呈現令人驚豔的逼真效果，並生成原生音訊。您可以使用 Gemini API，以程式輔助方式存取這個模型。如要進一步瞭解可用的 Veo 模型變化版本，請參閱「[模型版本](#model-versions)」一節。
 
-Veo 3.1 có khả năng tạo ra nhiều phong cách hình ảnh và điện ảnh, đồng thời có một số tính năng mới:
+Veo 3.1 擅長各種視覺和電影風格，並推出多項新功能：
 
-- **Video dọc**: Chọn giữa video ngang (`16:9`) và video dọc (`9:16`).
-- **Phần mở rộng video**: Kéo dài những video đã được tạo trước đó bằng Veo.
-- **Tạo theo khung hình cụ thể**: Tạo video bằng cách chỉ định khung hình đầu tiên và khung hình cuối cùng.
-- **Chỉ dẫn dựa trên hình ảnh**: Sử dụng tối đa 3 hình ảnh tham khảo để định hướng nội dung cho video bạn tạo.
+- **直向影片**：選擇橫向 (`16:9`) 或直向 (`9:16`) 影片。
+- **影片擴充功能**：擴充先前使用 Veo 生成的影片。
+- **指定影格生成**：指定影片的開始和結束影格，生成影片。
+- **以圖片為基礎的指引**：使用最多三張參考圖片，引導生成影片的內容。
 
-Để biết thêm thông tin về cách viết câu lệnh dạng văn bản hiệu quả để tạo video, hãy xem [hướng dẫn về câu lệnh cho Veo](#prompt-guide)
+如要進一步瞭解如何撰寫有效的文字提示來生成影片，請參閱 [Veo 提示指南](#prompt-guide)
 
-## Tạo video từ văn bản
+## 文字轉影片生成
 
-Chọn một ví dụ để xem cách tạo video có lời thoại, độ chân thực như phim điện ảnh hoặc ảnh động sáng tạo:
+選擇範例，瞭解如何生成對話、電影寫實或創意動畫影片：
 
-Lời thoại và hiệu ứng âm thanh
-Tính chân thực như phim điện ảnh
-Hoạt hoạ sáng tạo
+對話和音效
+電影般的真實感
+創意動畫
 
 ### Python
 
@@ -229,9 +229,9 @@ while true; do
 done
 ```
 
-### Kiểm soát tỷ lệ khung hình
+### 控制顯示比例
 
-Veo 3.1 cho phép bạn tạo video ở chế độ ngang (`16:9`, chế độ cài đặt mặc định) hoặc dọc (`9:16`). Bạn có thể cho mô hình biết bạn muốn dùng mô hình nào bằng cách sử dụng tham số `aspect_ratio`:
+Veo 3.1 可製作橫向 (`16:9`，預設設定) 或直向 (`9:16`) 影片。您可以使用 `aspect_ratio` 參數，告知模型要使用哪一個：
 
 ### Python
 
@@ -394,13 +394,13 @@ while true; do
 done
 ```
 
-### Kiểm soát độ phân giải
+### 控制解析度
 
-Veo 3.1 cũng có thể trực tiếp tạo video 720p, 1080p hoặc 4k (Veo 3.1 Lite không hỗ trợ video 4k).
+Veo 3.1 也能直接生成 720p、1080p 或 4k 影片 (Veo 3.1 Lite 無法生成 4k 影片)。
 
-Xin lưu ý rằng độ phân giải càng cao thì độ trễ càng lớn. Video 4K cũng có giá cao hơn (xem [giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#veo-3.1)).
+請注意，解析度越高，延遲時間就越長。4K 影片的價格也較高 (請參閱[定價](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw#veo-3.1))。
 
-[Phần mở rộng video](#extending_veo_videos) cũng chỉ hỗ trợ video 720p.
+[影片擴充功能](#extending_veo_videos)也僅支援 720p 影片。
 
 ### Python
 
@@ -563,9 +563,9 @@ while true; do
 done
 ```
 
-## Tạo video từ hình ảnh
+## 以圖片生成影片
 
-Đoạn mã sau đây minh hoạ cách tạo hình ảnh bằng [Gemini 3.1 Flash Image (còn gọi là Nano Banana 2)](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi), sau đó dùng hình ảnh đó làm khung hình bắt đầu để tạo video bằng Veo 3.1.
+下列程式碼示範如何使用 [Gemini 3.1 Flash Image (又稱 Nano Banana 2)](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw) 生成圖片，然後將該圖片做為起始影格，透過 Veo 3.1 生成影片。
 
 ### Python
 
@@ -753,15 +753,15 @@ class GenerateVideoFromImage {
 }
 ```
 
-### Sử dụng hình ảnh tham khảo
+### 使用參考圖片
 
-Giờ đây, Veo 3.1 chấp nhận tối đa 3 hình ảnh tham khảo để hướng dẫn nội dung của video được tạo. Cung cấp hình ảnh về một người, nhân vật hoặc sản phẩm để giữ nguyên diện mạo của chủ thể trong video đầu ra.
+Veo 3.1 現在最多可接受 3 張參考圖像，引導生成影片的內容。提供人物、角色或產品的圖片，確保輸出影片保留主體的外觀。
 
-Ví dụ: khi sử dụng 3 hình ảnh được tạo bằng [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi) làm tài liệu tham khảo cùng với một [câu lệnh được viết rõ ràng](#use-reference-images), bạn sẽ tạo được video sau:
+舉例來說，使用以 [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw) 生成的這三張圖片做為參考，並搭配[撰寫良好的提示](#use-reference-images)，即可製作出下列影片：
 
 | `` `dress_image` `` | `` `woman_image` `` | `` `glasses_image` `` |
 | --- | --- | --- |
-| Đầm hồng hạc cao cấp với nhiều lớp lông màu hồng và màu cánh sen | Người phụ nữ xinh đẹp với mái tóc sẫm màu và đôi mắt nâu ấm áp | Kính râm hình trái tim màu hồng độc đáo |
+| 高時尚火鶴洋裝，以層層粉紅色和紫紅色羽毛製成 | 美麗女子，深色頭髮和暖棕色眼睛 | 粉紅色心形太陽眼鏡，造型奇特 |
 
 ### Python
 
@@ -989,9 +989,9 @@ while true; do
 done
 ```
 
-### Sử dụng khung hình đầu tiên và cuối cùng
+### 使用初始和結束影格
 
-Veo 3.1 cho phép bạn tạo video bằng cách sử dụng phương pháp nội suy hoặc chỉ định khung hình đầu tiên và cuối cùng của video. Để biết thông tin về cách viết câu lệnh dạng văn bản hiệu quả để tạo video, hãy xem [hướng dẫn về câu lệnh cho Veo](#use-reference-images).
+Veo 3.1 可透過插補法製作影片，或指定影片的開頭和結尾畫面。如要瞭解如何撰寫有效的文字提示詞來生成影片，請參閱 [Veo 提示詞指南](#use-reference-images)。
 
 ### Python
 
@@ -1164,31 +1164,31 @@ done
 
 | `` `first_image` `` | `` `last_image` `` | *veo3.1\_with\_interpolation.mp4* |
 | --- | --- | --- |
-| Một người phụ nữ ma quái có mái tóc dài màu trắng và chiếc váy bồng bềnh nhẹ nhàng đu đưa trên chiếc đu dây | Người phụ nữ ma biến mất khỏi xích đu | Một video điện ảnh, ám ảnh về một người phụ nữ kỳ lạ biến mất khỏi chiếc xích đu trong sương mù |
+| 一位留著白色長髮、身穿飄逸洋裝的鬼魅女子，在繩索鞦韆上輕輕擺盪 | 鬼魅女子從鞦韆上消失 | 電影般的詭異影片：一名女子在霧中從鞦韆上消失 |
 
-## Kéo dài video trên Veo
+## 延長 Veo 影片
 
-Sử dụng Veo 3.1 để kéo dài video bạn đã tạo bằng Veo thêm 7 giây và tối đa 20 lần.
+使用 Veo 3.1 將先前以 Veo 生成的影片延長 7 秒，最多可延長 20 次。
 
-Giới hạn đối với video đầu vào:
+輸入影片限制：
 
-- Video do Veo tạo chỉ dài tối đa 141 giây.
-- Gemini API chỉ hỗ trợ tiện ích video cho video do Veo tạo.
-- Video đó phải thuộc thế hệ trước, chẳng hạn như
+- Veo 生成的影片長度上限為 141 秒。
+- Gemini API 僅支援 Veo 生成影片的影片擴充功能。
+- 影片應來自前幾代，例如
   `operation.response.generated_videos[0].video`
-- Video được lưu trữ trong 2 ngày, nhưng nếu được dùng làm tài liệu tham khảo để mở rộng, thì bộ hẹn giờ lưu trữ 2 ngày của video đó sẽ được đặt lại. Bạn chỉ có thể mở rộng những video được tạo hoặc tham chiếu trong 2 ngày qua.
-- Video đầu vào phải có độ dài, tỷ lệ khung hình và kích thước nhất định:
-  - Tỷ lệ khung hình: 9:16 hoặc 16:9
-  - Độ phân giải: 720p
-  - Thời lượng video: 141 giây trở xuống
+- 影片會保留 2 天，但如果影片用於擴充功能，2 天的保留期限就會重設。你只能延長過去兩天內生成或參考的影片。
+- 輸入影片的長度、長寬比和尺寸必須符合特定條件：
+  - 顯示比例：9:16 或 16:9
+  - 解析度：720p
+  - 影片長度：不超過 141 秒
 
-Đầu ra của tiện ích này là một video duy nhất kết hợp video đầu vào của người dùng và video mở rộng được tạo với thời lượng tối đa là 148 giây.
+擴充功能會將使用者輸入的影片和生成的擴增影片合併為單一影片，最長可達 148 秒。
 
-Ví dụ này lấy một video do Veo tạo (được minh hoạ ở đây cùng với câu lệnh gốc) và mở rộng video đó bằng cách sử dụng tham số `video` và một câu lệnh mới:
+這個範例會使用 Veo 生成的影片 (如下所示，附上原始提示)，並透過 `video` 參數和新提示擴充影片：
 
-| Câu lệnh | Đầu ra: `butterfly_video` |
+| 提示詞 | 輸出：`butterfly_video` |
 | --- | --- |
-| Một con bướm làm bằng giấy gấp vỗ cánh và bay ra khỏi cửa sổ kiểu Pháp vào vườn. | Một con bướm làm bằng giấy xếp vỗ cánh và bay ra khỏi cửa sổ kiểu Pháp vào vườn. |
+| 摺紙蝴蝶拍動翅膀，從落地窗飛進花園。 | 摺紙蝴蝶拍動翅膀，從落地窗飛進花園。 |
 
 ### Python
 
@@ -1364,13 +1364,13 @@ while true; do
 done
 ```
 
-Để biết thông tin về cách viết câu lệnh dạng văn bản hiệu quả để tạo video, hãy xem [hướng dẫn về câu lệnh cho Veo](#extend-prompt).
+如要瞭解如何撰寫有效的文字提示來生成影片，請參閱 [Veo 提示詞指南](#extend-prompt)。
 
-## Xử lý các thao tác không đồng bộ
+## 處理非同步作業
 
-Tạo video là một tác vụ đòi hỏi nhiều sức mạnh tính toán. Khi bạn gửi yêu cầu đến API, API này sẽ bắt đầu một công việc chạy trong thời gian dài và trả về ngay một đối tượng `operation`. Sau đó, bạn phải thăm dò cho đến khi video sẵn sàng, được biểu thị bằng trạng thái `done` là true.
+生成影片需要大量運算資源，當您向 API 傳送要求時，系統會啟動長時間執行的工作，並立即傳回 `operation` 物件。接著，您必須輪詢，直到影片就緒為止 (`done` 狀態為 true)。
 
-Cốt lõi của quy trình này là một vòng lặp thăm dò ý kiến, định kỳ kiểm tra trạng thái của công việc.
+這項程序的核心是輪詢迴圈，會定期檢查工作的狀態。
 
 ### Python
 
@@ -1549,301 +1549,298 @@ while true; do
 done
 ```
 
-## Thông số và quy cách của Veo API
+## Veo API 參數和規格
 
-Đây là những tham số bạn có thể đặt trong yêu cầu API để kiểm soát quy trình tạo video.
+您可以在 API 要求中設定這些參數，控管影片生成程序。
 
-| Tham số | Veo 3.1 và Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 và Veo 3 Fast | Veo 2 |
+| 參數 | Veo 3.1 和 Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 和 Veo 3 Fast | Veo 2 |
 | --- | --- | --- | --- | --- |
-| Nhiều mảnh ghép | | | | |
-| `prompt`: Nội dung mô tả bằng văn bản cho video. Hỗ trợ dấu hiệu âm thanh. | `string` | `string` | `string` | `string` |
-| `image`: Hình ảnh ban đầu để tạo ảnh động. | Đối tượng `Image` | Đối tượng `Image` | Đối tượng `Image` | Đối tượng `Image` |
-| `lastFrame`: Hình ảnh cuối cùng của video nội suy để chuyển cảnh. Bạn phải sử dụng thông số này cùng với thông số `image`. | Đối tượng `Image` | Đối tượng `Image` | Đối tượng `Image` | Đối tượng `Image` |
-| `referenceImages`: Tối đa 3 hình ảnh được dùng làm tài liệu tham khảo về kiểu và nội dung. | Đối tượng `VideoGenerationReferenceImage` | Đối tượng `n/a` | Không có | Không có |
-| `video`: Video sẽ được dùng cho tiện ích video. | Đối tượng `Video` thuộc thế hệ trước | Không có | Không áp dụng | Không có |
-| Thông số | | | | |
-| `aspectRatio`: Tỷ lệ khung hình của video. | `"16:9"` (mặc định), `"9:16"` | `"16:9"` (mặc định), `"9:16"` | `"16:9"` (mặc định), `"9:16"` | `"16:9"` (mặc định), `"9:16"` |
-| `durationSeconds`: Thời lượng của video được tạo. | `"4"`, `"6"`, `"8"`.   *Phải là "8" khi sử dụng phần mở rộng, hình ảnh tham khảo hoặc có độ phân giải 1080p và 4K* | `"4"`, `"6"`, `"8"`.   *Phải là "8" khi sử dụng hình ảnh tham khảo hoặc có độ phân giải 1080p* | `"4"`, `"6"`, `"8"`.   *Phải là "8" khi sử dụng phần mở rộng, hình ảnh tham khảo hoặc có độ phân giải 1080p và 4K* | `"5"`, `"6"`, `"8"` |
-| `personGeneration`: Kiểm soát việc tạo người. (Xem phần [Các điểm hạn chế](#limitations) để biết các quy định hạn chế theo khu vực) | Chuyển văn bản thành video và tiện ích: `"allow_all"` chỉ   Chuyển hình ảnh thành video, Nội suy và Hình ảnh tham khảo: `"allow_adult"` chỉ | Chuyển văn bản thành video: `"allow_all"` chỉ   Chuyển hình ảnh thành video, Nội suy và Hình ảnh tham khảo: `"allow_adult"` chỉ | Chuyển văn bản thành video: `"allow_all"` chỉ   Chuyển hình ảnh thành video: `"allow_adult"` chỉ | Văn bản thành video:  `"allow_all"`, `"allow_adult"`, `"dont_allow"`   Hình ảnh thành video:  `"allow_adult"` và `"dont_allow"` |
-| `resolution`: Độ phân giải của video. | `"720p"` (mặc định),  `"1080p"` (chỉ hỗ trợ thời lượng 8 giây), `"4k"` (chỉ hỗ trợ thời lượng 8 giây)   *`"720p"` chỉ dành cho tiện ích* | `"720p"` (mặc định),  `"1080p"` (chỉ hỗ trợ thời lượng 8 giây) | `"720p"` (mặc định),  `"1080p"` (chỉ hỗ trợ thời lượng 8 giây), `"4k"` (chỉ hỗ trợ thời lượng 8 giây)   *`"720p"` chỉ dành cho tiện ích* | Không được hỗ trợ |
+| 執行個體 | | | | |
+| `prompt`： 影片的文字說明。支援音訊提示。 | `string` | `string` | `string` | `string` |
+| `image`： 要製作動畫的初始圖片。 | `Image` 個物件 | `Image` 個物件 | `Image` 個物件 | `Image` 個物件 |
+| `lastFrame`： 插補影片要轉換的最終圖像。必須與 `image` 參數搭配使用。 | `Image` 個物件 | `Image` 個物件 | `Image` 個物件 | `Image` 個物件 |
+| `referenceImages`： 最多三張圖片，做為風格和內容參考。 | `VideoGenerationReferenceImage` 個物件 | `n/a` 個物件 | 不適用 | 不適用 |
+| `video`： 用於影片擴充功能的影片。 | `Video` 物件 (前幾代) | 不適用 | 不適用 | 不適用 |
+| 參數 | | | | |
+| `aspectRatio`： 影片的顯示比例。 | `"16:9"` (預設)、 `"9:16"` | `"16:9"` (預設)、 `"9:16"` | `"16:9"` (預設)、 `"9:16"` | `"16:9"` (預設)、 `"9:16"` |
+| `durationSeconds`： 生成的影片長度。 | `"4"`，`"6"`，`"8"`。   *使用擴充功能、參考圖片或 1080p 和 4k 解析度時，必須為「8」* | `"4"`，`"6"`，`"8"`。   *使用參考圖片或 1080p 時，必須為「8」* | `"4"`，`"6"`，`"8"`。   *使用擴充功能、參考圖片或 1080p 和 4k 解析度時，必須為「8」* | `"5"`、`"6"`、`"8"` |
+| `personGeneration`： 控制人物的生成。(如需地區限制，請參閱「[限制](#limitations)」一節) | 文字轉影片和擴充功能： `"allow_all"`僅限   圖像轉影片、插補和參考圖像： `"allow_adult"`僅限 | 文字轉影片： `"allow_all"`僅限   圖像轉影片、插補和參考圖像： `"allow_adult"`僅限 | 文字轉影片：僅限 `"allow_all"`   圖像轉影片：僅限 `"allow_adult"` | 文字轉影片： `"allow_all"`、`"allow_adult"`、`"dont_allow"`   圖片轉影片： `"allow_adult"`和 `"dont_allow"` |
+| `resolution`： 影片的解析度。 | `"720p"` (預設)、 `"1080p"` (僅支援 8 秒長度)、 `"4k"` (僅支援 8 秒長度)   *`"720p"` 僅適用於擴充功能* | `"720p"` (預設)、 `"1080p"` (僅支援 8 秒長度) | `"720p"` (預設)、 `"1080p"` (僅支援 8 秒長度)、 `"4k"` (僅支援 8 秒長度)   *`"720p"` 僅適用於擴充功能* | 不支援 |
 
-Xin lưu ý rằng tham số `seed` cũng có sẵn cho các mô hình Veo 3.
-Điều này không đảm bảo tính xác định, nhưng sẽ cải thiện một chút.
+請注意，Veo 3 模型也支援 `seed` 參數。這無法保證確定性，但可稍微提升確定性。
 
-## Các tính năng của mô hình
+## 模型功能
 
-| Tính năng | Veo 3.1 và Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 và Veo 3 Fast | Veo 2 |
+| 功能 | Veo 3.1 和 Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 和 Veo 3 Fast | Veo 2 |
 | --- | --- | --- | --- | --- |
-| **Âm thanh:** Tạo âm thanh tự nhiên bằng video. | ✔️ Luôn bật | ✔️ Luôn bật | ✔️ Luôn bật | ❌ Chỉ im lặng |
-| **Phương thức nhập:** Loại phương thức nhập được dùng để tạo. | Chuyển văn bản thành video, chuyển hình ảnh thành video, biến tấu video | Chuyển văn bản thành video, chuyển hình ảnh thành video | Chuyển văn bản thành video, chuyển hình ảnh thành video | Chuyển văn bản thành video, chuyển hình ảnh thành video |
-| **Độ phân giải:** Độ phân giải đầu ra của video. | 720p, 1080p (chỉ dài 8 giây), 4k (chỉ dài 8 giây)  *Chỉ 720p khi sử dụng tiện ích video.* | 720p, 1080p (chỉ dài 8 giây) | 720p và 1080p (chỉ tỷ lệ khung hình 16:9) | 720p |
-| **Tốc độ khung hình:** Tốc độ khung hình đầu ra của video. | 24fps | 24fps | 24fps | 24fps |
-| **Thời lượng video:** Thời lượng của video được tạo. | 8 giây, 6 giây, 4 giây  *8 giây chỉ khi ở độ phân giải 1080p hoặc 4k hoặc sử dụng hình ảnh tham khảo* | 8 giây, 6 giây, 4 giây  *Chỉ 8 giây nếu ở độ phân giải 1080p hoặc sử dụng hình ảnh tham khảo* | 8 giây | 5-8 giây |
-| **Số video trên mỗi yêu cầu:** Số lượng video được tạo trên mỗi yêu cầu. | 1 | 1 | 1 | 1 hoặc 2 |
-| **Trạng thái:** Phạm vi cung cấp mô hình | [Xem trước](https://ai.google.dev/gemini-api/docs/models?hl=vi#preview) | [Xem trước](https://ai.google.dev/gemini-api/docs/models?hl=vi#preview) | [Ổn định](https://ai.google.dev/gemini-api/docs/models?hl=vi#stable) | [Ổn định](https://ai.google.dev/gemini-api/docs/models?hl=vi#latest-stable) |
+| **音訊：** 以原生方式生成影片音訊。 | ✔️ 一律開啟 | ✔️ 一律開啟 | ✔️ 一律開啟 | ❌ 僅限靜音 |
+| **輸入模態：** 用於生成的輸入類型。 | 文字轉影片、圖像轉影片、影片轉影片 | 文字轉影片、圖像轉影片 | 文字轉影片、圖像轉影片 | 文字轉影片、圖像轉影片 |
+| **解析度：** 影片的輸出解析度。 | 720p、1080p (僅限 8 秒長度)、4K (僅限 8 秒長度)  *使用影片擴展時，僅支援 720p。* | 720p、1080p (僅限 8 秒長度) | 720p 和 1080p (僅限 16:9) | 720p |
+| **影格率：** 影片的輸出影格率。 | 24fps | 24fps | 24fps | 24fps |
+| **影片長度：** 生成的影片長度。 | 8 秒、6 秒、4 秒  *只有在 1080p 或 4k 或使用參考圖片時，才能選擇 8 秒* | 8 秒、6 秒、4 秒  *只有在 1080p 或使用參考圖片時，才能選擇 8 秒* | 8 秒 | 5 到 8 秒 |
+| **每次要求的影片數：** 每次要求生成的影片數。 | 1 | 1 | 1 | 1 或 2 |
+| **狀態：** 模型適用情形 | [預覽](https://ai.google.dev/gemini-api/docs/models?hl=zh-tw#preview) | [預覽](https://ai.google.dev/gemini-api/docs/models?hl=zh-tw#preview) | [穩定版](https://ai.google.dev/gemini-api/docs/models?hl=zh-tw#stable) | [穩定版](https://ai.google.dev/gemini-api/docs/models?hl=zh-tw#latest-stable) |
 
-## Các điểm hạn chế
+## 限制
 
-- **Độ trễ của yêu cầu:** Tối thiểu: 11 giây; Tối đa: 6 phút (trong giờ cao điểm).
-- **Giới hạn theo khu vực:** Ở các vị trí thuộc Liên minh Châu Âu, Vương quốc Anh, Thuỵ Sĩ, Trung Đông và Bắc Phi, những giá trị sau đây được phép dùng cho `personGeneration`:
-  - Veo 3 và 3.1: Chỉ có `allow_adult`.
-  - Veo 2: `dont_allow` và `allow_adult`. Giá trị mặc định là `dont_allow`.
-- **Thời gian lưu giữ video:** Các video được tạo sẽ được lưu trữ trên máy chủ trong 2 ngày, sau đó sẽ bị xoá. Để lưu bản sao cục bộ, bạn phải tải video xuống trong vòng 2 ngày kể từ khi tạo. Video mở rộng được coi là video mới tạo.
-- **Thêm hình mờ:** Các video do Veo tạo sẽ được thêm hình mờ bằng [SynthID](https://deepmind.google/technologies/synthid/?hl=vi), công cụ của chúng tôi để thêm hình mờ và xác định nội dung do AI tạo. Bạn có thể xác minh video bằng nền tảng xác minh [SynthID](https://deepmind.google/science/synthid/?hl=vi).
-- **An toàn:** Các video được tạo đều phải trải qua bộ lọc an toàn và quy trình kiểm tra khả năng ghi nhớ để giúp giảm thiểu các rủi ro về quyền riêng tư, bản quyền và thiên kiến.
-- **Lỗi âm thanh:** Đôi khi, Veo 3.1 sẽ chặn video được tạo do bộ lọc an toàn hoặc các vấn đề khác về xử lý âm thanh. Bạn sẽ không bị tính phí nếu video của bạn bị chặn tạo.
+- **要求延遲時間：**最短 11 秒；最長 6 分鐘 (尖峰時段)。
+- **地區限制：**在歐盟、英國、瑞士和中東與北非地區，`personGeneration` 的允許值如下：
+  - Veo 3 和 3.1：`allow_adult`。
+  - Veo 2：`dont_allow` 和 `allow_adult`。預設值為 `dont_allow`。
+- **影片保留期限：**生成的影片會在伺服器上保留 2 天，之後就會移除。如要儲存本機副本，請在影片生成後的 2 天內下載。延長版影片會視為新生成的影片。
+- **浮水印：**Veo 製作的影片會使用 [SynthID](https://deepmind.google/technologies/synthid/?hl=zh-tw) 加上浮水印。SynthID 是我們的工具，可識別 AI 生成內容並加上浮水印。您可以使用 [SynthID](https://deepmind.google/science/synthid/?hl=zh-tw) 驗證平台驗證影片。
+- **安全性：**系統會對生成的影片套用安全篩選器，並進行記憶檢查程序，協助降低隱私權、著作權和偏見風險。
+- **音訊錯誤：**有時 Veo 3.1 會因為安全篩選器或音訊的其他處理問題，而無法生成影片。如果影片無法生成，系統不會向你收費。
 
-## Hướng dẫn về câu lệnh cho Veo
+## Veo 提示詞指南
 
-Phần này chứa các ví dụ về video bạn có thể tạo bằng Veo và hướng dẫn bạn cách sửa đổi câu lệnh để tạo ra kết quả riêng biệt.
+本節提供使用 Veo 製作的影片範例，並說明如何修改提示來產生不同結果。
 
-### Bộ lọc an toàn
+### 安全篩選機制
 
-Veo áp dụng các bộ lọc an toàn trên Gemini để giúp đảm bảo rằng video được tạo và ảnh được tải lên không chứa nội dung phản cảm.
-Những câu lệnh vi phạm [điều khoản và nguyên tắc](https://ai.google.dev/gemini-api/docs/usage-policies?hl=vi#abuse-monitoring) của chúng tôi sẽ bị chặn.
+Veo 會在 Gemini 中套用安全篩選器，確保生成的影片和上傳的相片不含令人反感的內容。系統會封鎖違反[條款和規範](https://ai.google.dev/gemini-api/docs/usage-policies?hl=zh-tw#abuse-monitoring)的提示。
 
-### Kiến thức cơ bản về cách viết câu lệnh
+### 提示撰寫基礎知識
 
-Câu lệnh hiệu quả là câu lệnh mô tả và rõ ràng. Để khai thác tối đa Veo, hãy bắt đầu bằng cách xác định ý tưởng cốt lõi, tinh chỉnh ý tưởng bằng cách thêm từ khoá và bộ sửa đổi, đồng thời đưa thuật ngữ dành riêng cho video vào câu lệnh.
+好的提示詞應具體明確。如要充分發揮 Veo 的效用，請先找出核心概念，然後加入關鍵字和修飾符來修正概念，並在提示詞中加入影片專用術語。
 
-Bạn nên đưa những thành phần sau vào câu lệnh:
+提示應包含下列元素：
 
-- **Đối tượng**: Đối tượng, người, động vật hoặc cảnh vật mà bạn muốn xuất hiện trong video, chẳng hạn như *cảnh thành phố*, *thiên nhiên*, *xe cộ* hoặc *chó con*.
-- **Hành động**: Hành động của chủ thể (ví dụ: *đi bộ*, *chạy* hoặc *quay đầu*).
-- **Phong cách**: Chỉ định hướng sáng tạo bằng cách sử dụng các từ khoá cụ thể về phong cách phim, chẳng hạn như *khoa học viễn tưởng*, *phim kinh dị*, *phim noir* hoặc các phong cách hoạt hình như *phim hoạt hình*.
-- **Vị trí và chuyển động của camera**: [Không bắt buộc] Kiểm soát vị trí và chuyển động của camera bằng các thuật ngữ như *góc nhìn từ trên cao*, *góc ngang tầm mắt*, *cảnh quay từ trên xuống*, *cảnh quay di chuyển* hoặc *góc nhìn từ dưới lên*.
-- **Bố cục**: [Không bắt buộc] Cách bố trí khung hình, chẳng hạn như *cảnh quay rộng*, *cảnh quay cận cảnh*, *cảnh quay một người* hoặc *cảnh quay hai người*.
-- **Hiệu ứng tiêu cự và ống kính**: [Không bắt buộc] Sử dụng các thuật ngữ như *tiêu cự nông*, *tiêu cự sâu*, *tiêu điểm mềm*, *ống kính macro* và *ống kính góc rộng* để đạt được các hiệu ứng hình ảnh cụ thể.
-- **Môi trường**: [Không bắt buộc] Cách màu sắc và ánh sáng góp phần tạo nên cảnh, chẳng hạn như *tông màu xanh dương*, *ban đêm* hoặc *tông màu ấm*.
+- **主題**：影片中要出現的物體、人物、動物或風景，例如*城市景觀*、*自然*、*車輛*或*小狗*。
+- **動作**：主體正在做什麼 (例如*走路*、*跑步*或*轉頭*)。
+- **風格**：使用特定電影風格關鍵字指定創意方向，例如*科幻*、*恐怖片*、*黑色電影*，或是*卡通*等動畫風格。
+- **攝影機位置和動作**：[選用] 使用「鳥瞰」、「平視」、「俯拍」、「推軌鏡頭」或「仰角」等詞彙，控制攝影機的位置和動作。
+- **構圖**：[選用] 取景方式，例如*廣角*、*特寫*、*單人鏡頭*或*雙人鏡頭*。
+- **對焦和鏡頭效果**：[選用] 使用「淺景深」、「深景深」、「柔焦」、「微距鏡頭」和「廣角鏡頭」等詞彙，達到特定視覺效果。
+- **環境光源**：[選填] 色彩和亮度如何營造場景氣氛，例如*藍色調*、*夜晚*或*暖色調*。
 
-#### Các mẹo khác để viết câu lệnh
+#### 撰寫提示的訣竅
 
-- **Sử dụng ngôn ngữ mô tả**: Sử dụng tính từ và trạng từ để giúp Veo hình dung rõ ràng.
-- **Cải thiện chi tiết khuôn mặt**: Chỉ định chi tiết khuôn mặt làm tiêu điểm của bức ảnh, chẳng hạn như dùng từ *chân dung* trong câu lệnh.
+- **使用描述性語言**：使用形容詞和副詞，讓 Veo 清楚瞭解你的需求。
+- **強化臉部細節**：在提示詞中加入「肖像」等字詞，將臉部細節設為相片焦點。
 
-*Để biết các chiến lược tạo câu lệnh toàn diện hơn, hãy truy cập vào bài viết [Giới thiệu về thiết kế câu lệnh](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=vi).*
+*如需更全面的提示策略，請參閱「[提示設計簡介](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=zh-tw)」一文。*
 
-### Nhắc nhở về âm thanh
+### 提示音訊
 
-Bạn có thể cung cấp cho Veo các tín hiệu về hiệu ứng âm thanh, tiếng ồn xung quanh và lời thoại.
-Mô hình này nắm bắt sắc thái của những tín hiệu này để tạo ra một bản nhạc đồng bộ.
+你可以為 Veo 提供音效、環境噪音和對話的提示。模型會擷取這些提示的細微差異，生成同步配樂。
 
-- **Lời thoại:** Sử dụng dấu ngoặc kép cho lời nói cụ thể. (Ví dụ: "Đây chắc chắn là chìa khoá," anh lẩm bẩm.)
-- **Hiệu ứng âm thanh (SFX):** Mô tả rõ ràng âm thanh. (Ví dụ: tiếng lốp xe rít lên, tiếng động cơ gầm rú.)
-- **Tiếng ồn xung quanh:** Mô tả cảnh âm thanh của môi trường. (Ví dụ: Một tiếng ù ù mờ nhạt, rùng rợn vang vọng ở phía sau.)
+- **對話：**特定語音請使用引號。(例如：「這一定是鑰匙，」他低聲說道)。
+- **音效：**明確描述聲音。(例如：輪胎尖銳的摩擦聲、引擎轟隆聲)。
+- **環境噪音：**描述環境的聲音。(例如：背景中傳來微弱的詭異嗡嗡聲。)
 
-Những video này minh hoạ cách nhắc Veo 3 tạo âm thanh với mức độ chi tiết tăng dần.
+這些影片會逐步詳細說明如何提示 Veo 3 生成音訊。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **提示** | **生成內容** |
 | --- | --- |
-| **Chi tiết hơn (Đối thoại và không gian xung quanh)** Cảnh quay rộng về một khu rừng mờ sương ở vùng Tây Bắc Thái Bình Dương. Hai người đi bộ đường dài mệt mỏi, một nam và một nữ, đang cố gắng vượt qua những cây dương xỉ thì người đàn ông đột ngột dừng lại, nhìn chằm chằm vào một cái cây. Cận cảnh: Vỏ cây bị cào xước bằng những vết móng vuốt sâu và còn mới. Người đàn ông: (Tay cầm dao săn) "Đó không phải là một con gấu bình thường." Người phụ nữ: (Giọng lo sợ, nhìn quanh khu rừng) "Vậy đó là gì?" Tiếng sủa thô ráp, tiếng cành cây gãy, tiếng bước chân trên đất ẩm. Một chú chim hót líu lo. | Hai người trong rừng phát hiện dấu hiệu của một con gấu. |
-| **Ít chi tiết (Đối thoại)** Ảnh động cắt giấy. Thủ thư mới: "Bạn cất những cuốn sách bị cấm ở đâu?" Người tuyển chọn cũ: "Không. Họ giữ chúng ta." | Các thủ thư hoạt hình thảo luận về những cuốn sách bị cấm |
+| **更多細節 (對話和環境)** ：鏡頭廣角拍攝美國太平洋西北地區的森林，兩名疲憊的登山客 (一男一女) 穿過蕨類植物時，男子突然停下腳步，盯著一棵樹。特寫：樹皮上留下新鮮的深爪痕。男子：(手放在獵刀上)「那不是普通的熊。」女子：(聲音因恐懼而緊繃，掃視樹林)「那是什麼？」粗糙的樹皮、樹枝斷裂的聲音、潮濕泥土上的腳步聲。一隻鳥發出鳴叫聲。 | 兩人在樹林中發現熊的蹤跡。 |
+| **較不詳細 (對話)** 紙張剪裁動畫。新圖書館員：「禁書放在哪裡？」舊版策展工具：「我們沒有。他們會留住我們。」 | 動畫圖書館員討論禁書 |
 
-Hãy tự mình thử các câu lệnh này để nghe âm thanh!
-[Dùng thử Veo](https://deepmind.google/models/veo/?hl=vi)
+請親自試試這些提示，聽聽音訊！
+[試用 Veo](https://deepmind.google/models/veo/?hl=zh-tw)
 
-### Đặt câu lệnh bằng hình ảnh tham khảo
+### 使用參考圖片提示
 
-Bạn có thể sử dụng một hoặc nhiều hình ảnh làm dữ liệu đầu vào để hướng dẫn video được tạo bằng các tính năng [chuyển đổi hình ảnh sang video](https://ai.google.dev/gemini-api/docs/video?hl=vi#generate-from-images) của Veo. Veo dùng hình ảnh đầu vào làm khung hình ban đầu. Chọn một hình ảnh gần giống nhất với cảnh đầu tiên mà bạn hình dung về video để tạo hiệu ứng chuyển động cho các đồ vật hằng ngày, thổi hồn vào các bức vẽ và bức tranh, đồng thời thêm hiệu ứng chuyển động và âm thanh cho các cảnh thiên nhiên.
+你可以使用一或多張圖片做為輸入內容，透過 Veo 的[圖片轉影片](https://ai.google.dev/gemini-api/docs/video?hl=zh-tw#generate-from-images)功能生成影片。Veo 會將輸入的圖片做為初始影格。選取最符合你想像的影片第一幕影像，為日常物品加上動畫效果、讓繪畫作品動起來，以及為自然景觀增添動感和聲音。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **提示** | **生成內容** |
 | --- | --- |
-| **Hình ảnh đầu vào (Do Nano Banana tạo)** Ảnh chụp macro siêu thực về những người lướt sóng thu nhỏ đang cưỡi sóng biển trong một bồn rửa mặt bằng đá mộc mạc. Vòi nước bằng đồng thau cổ điển đang chảy, tạo ra dòng nước chảy liên tục. Siêu thực, kỳ ảo, ánh sáng tự nhiên tươi sáng. | Những người lướt sóng tí hon đang cưỡi trên những con sóng biển trong một bồn rửa mặt bằng đá mộc mạc. |
-| **Video đầu ra (Do Veo 3.1 tạo)** Một video siêu thực, đậm chất điện ảnh ở chế độ cận cảnh. Những người lướt sóng tí hon cưỡi trên những con sóng liên tục trong một bồn rửa bằng đá trong phòng tắm. Một vòi nước bằng đồng thau cổ điển đang chảy tạo ra tiếng sóng biển bất tận. Máy quay từ từ quét qua cảnh vật độc đáo, ngập tràn ánh nắng khi những nhân vật thu nhỏ khéo léo lướt trên làn nước xanh ngọc. | Những người lướt sóng tí hon đang lướt trên những con sóng trong bồn rửa mặt. |
+| **輸入圖片 (由 Nano Banana 生成)** ：一張超寫實的微距照片，呈現迷你衝浪者在古樸石製浴室洗手台內乘風破浪。復古黃銅水龍頭正在出水，形成永恆的浪花。超現實、異想天開、明亮的自然光。 | 在古樸的石製浴室洗手台中，迷你衝浪者在海浪上衝浪。 |
+| **輸出影片 (由 Veo 3.1 生成)** ：超現實的電影風格微距影片。微型衝浪者在石造浴室洗手台內，乘著永恆的滾滾浪花。老式黃銅水龍頭流出的水聲，就是無止盡的浪濤聲。鏡頭緩緩平移，帶出陽光普照的奇幻場景，微型人偶則在碧綠海水中熟練地雕刻。 | 浴室洗手台的波浪中，有小小的衝浪者在繞圈。 |
 
-Veo 3.1 cho phép bạn [tham khảo hình ảnh](https://ai.google.dev/gemini-api/docs/video?hl=vi#reference-images) hoặc các thành phần để định hướng nội dung của video được tạo. Cung cấp tối đa 3 hình ảnh tài sản của một người, nhân vật hoặc sản phẩm. Veo giữ nguyên diện mạo của chủ thể trong video đầu ra.
+你可以[參考圖像](https://ai.google.dev/gemini-api/docs/video?hl=zh-tw#reference-images)或素材，引導 Veo 3.1 生成影片內容。最多提供三張單一人物、角色或產品的素材資源圖片。Veo 會在輸出影片中保留主體的外觀。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **提示** | **生成內容** |
 | --- | --- |
-| **Hình ảnh tham khảo (Do Nano Banana tạo)** Một con cá vây chân biển sâu ẩn nấp trong vùng nước sâu tối tăm, răng nhe ra và mồi nhử phát sáng. | Một con cá cần câu tối tăm và phát sáng |
-| **Hình ảnh tham khảo (Do Nano Banana tạo)** Trang phục công chúa màu hồng cho trẻ em, có cả đũa phép và vương miện, trên phông nền sản phẩm đơn giản. | Trang phục công chúa màu hồng dành cho trẻ em |
-| **Video đầu ra (Do Veo 3.1 tạo)** Tạo một phiên bản hoạt hình ngộ nghĩnh về chú cá đang mặc trang phục, bơi và vẫy đũa phép. | Một con cá cần câu mặc trang phục công chúa |
+| **參考圖像 (由 Nano Banana 生成)** ：深海鮟鱇魚潛伏在深不見底的黑暗水中，露出牙齒，誘餌發光。 | 發光的深色安康魚 |
+| **參考圖像 (由 Nano Banana 生成)** ：粉紅色兒童公主裝，附有魔杖和皇冠，背景為素色產品。 | 兒童粉紅色公主裝 |
+| **輸出影片 (由 Veo 3.1 生成)** 製作魚穿著服裝、游泳和揮舞魔杖的搞笑卡通版本。 | 穿著公主裝的安康魚 |
 
-Khi dùng Veo 3.1, bạn cũng có thể tạo video bằng cách chỉ định [khung hình đầu tiên và cuối cùng](https://ai.google.dev/gemini-api/docs/video?hl=vi#using-first-and-last-video-frames) của video.
+你也可以使用 Veo 3.1，指定影片的[第一個和最後一個影格](https://ai.google.dev/gemini-api/docs/video?hl=zh-tw#using-first-and-last-video-frames)來生成影片。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **提示** | **生成內容** |
 | --- | --- |
-| **Hình ảnh đầu tiên (Do Nano Banana tạo)** Hình ảnh chân thực, chất lượng cao về một chú mèo tam thể đang lái chiếc xe đua mui trần màu đỏ trên bờ biển Riviera của Pháp. | Một chú mèo vàng lái chiếc xe đua mui trần màu đỏ |
-| **Hình ảnh cuối cùng (Do Nano Banana tạo)** Cho biết điều gì xảy ra khi chiếc xe lao xuống vách đá. | Một chú mèo lông vàng lái chiếc xe mui trần màu đỏ lao xuống vách đá |
-| **Video đầu ra (Do Veo 3.1 tạo)** Không bắt buộc | Một chú mèo lái xe lao xuống vách đá và cất cánh |
+| **第一張圖片 (由 Nano Banana 生成)** ：一隻薑黃色貓咪駕駛紅色敞篷賽車，行駛在法國蔚藍海岸，這張圖片的擬真度極高。 | 一隻薑黃色貓咪駕駛紅色敞篷賽車 |
+| **最後一張圖片 (由 Nano Banana 生成)** ：顯示車輛從懸崖起飛時的情況。 | 一隻薑黃色貓咪駕駛紅色敞篷車衝下懸崖 |
+| **輸出影片 (由 Veo 3.1 生成)** 選填 | 貓咪開車衝下懸崖，然後起飛 |
 
-Tính năng này giúp bạn kiểm soát chính xác bố cục của cảnh quay bằng cách cho phép bạn xác định khung hình bắt đầu và kết thúc. Tải một hình ảnh lên hoặc dùng một khung hình từ video được tạo trước đó để đảm bảo cảnh của bạn bắt đầu và kết thúc đúng như bạn hình dung.
+這項功能可讓你定義開始和結束影格，精確控制鏡頭構圖。上傳圖片或使用先前生成的影片中的影格，確保場景的開頭和結尾完全符合你的想像。
 
-### Câu lệnh cho tiện ích
+### 提示擴充功能
 
-Để [kéo dài](https://ai.google.dev/gemini-api/docs/video?hl=vi#extending_veo_videos) video do Veo tạo bằng Veo 3.1 (không dùng được cho Veo 3.1 Lite), hãy dùng video đó làm dữ liệu đầu vào cùng với một câu lệnh văn bản (không bắt buộc). Tính năng Kéo dài sẽ hoàn tất giây cuối cùng hoặc 24 khung hình cuối cùng của video và tiếp tục hành động.
+如要使用 Veo 3.1 [延長](https://ai.google.dev/gemini-api/docs/video?hl=zh-tw#extending_veo_videos) Veo 生成的影片 (不適用於 Veo 3.1 Lite)，請將影片做為輸入內容，並視需要提供文字提示。「延長」會完成影片最後 1 秒或 24 格畫面，並繼續執行動作。
 
-Xin lưu ý rằng bạn không thể mở rộng giọng nói một cách hiệu quả nếu giọng nói không xuất hiện trong 1 giây cuối cùng của video.
+請注意，如果影片最後 1 秒沒有語音，就無法有效延長語音。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **提示** | **生成內容** |
 | --- | --- |
-| **Video đầu vào (Do Veo 3.1 tạo)** Người chơi dù lượn cất cánh từ đỉnh núi và bắt đầu lượn xuống núi, nhìn ra những thung lũng phủ đầy hoa bên dưới. | Một người dù lượn cất cánh từ đỉnh núi |
-| **Video đầu ra (Do Veo 3.1 tạo)** Kéo dài video này khi người dù lượn từ từ hạ xuống. | Một người dù lượn cất cánh từ đỉnh núi, sau đó từ từ hạ xuống |
+| **輸入影片 (由 Veo 3.1 生成)** 滑翔傘從山頂起飛，開始滑翔下山，俯瞰下方花卉覆蓋的山谷。 | 從山頂起飛的滑翔傘 |
+| **輸出影片 (由 Veo 3.1 生成)** ：延長這部影片，讓滑翔傘緩緩下降。 | 滑翔傘從山頂起飛，然後緩緩下降 |
 
-### Ví dụ về câu lệnh và kết quả
+### 提示和輸出內容範例
 
-Phần này trình bày một số câu lệnh, nêu bật cách thông tin chi tiết mang tính mô tả có thể nâng cao kết quả của mỗi video.
+本節提供幾個提示，說明詳細描述如何提升每個影片的成果。
 
-#### Sôi động
+#### 冰柱
 
-Video này minh hoạ cách bạn có thể sử dụng các thành phần của [kiến thức cơ bản về cách viết câu lệnh](#basics) trong câu lệnh của mình.
+這部影片將示範如何運用[提示詞撰寫基本概念](#basics)，撰寫提示詞。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **提示** | **生成內容** |
 | --- | --- |
-| Cảnh quay cận cảnh (bố cục) của những cột băng tan chảy (đối tượng) trên một bức tường đá đóng băng (bối cảnh) với tông màu xanh dương lạnh (bầu không khí), phóng to (chuyển động của camera) duy trì chi tiết cận cảnh của những giọt nước (hành động). | Những cột băng đang tan chảy trên nền xanh dương. |
+| 融化的冰柱 (主體) 特寫鏡頭 (構圖)，背景是結冰的岩壁 (情境)，整體色調偏冷 (氛圍)，鏡頭拉近 (相機動作)，維持水滴的特寫細節 (動作)。 | 藍色背景上的滴水冰柱。 |
 
-#### Người đàn ông đang nói chuyện điện thoại
+#### 男子講電話
 
-Những video này minh hoạ cách bạn có thể sửa đổi câu lệnh bằng cách cung cấp thông tin chi tiết ngày càng cụ thể để Veo tinh chỉnh kết quả theo ý bạn.
+這些影片會示範如何使用越來越詳細的特定資訊修訂提示，讓 Veo 根據你的喜好調整輸出內容。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **提示** | **生成內容** |
 | --- | --- |
-| **Ít chi tiết hơn** Camera di chuyển để cho thấy cận cảnh một người đàn ông tuyệt vọng mặc áo khoác măng tô màu xanh lục. Anh ấy đang gọi điện thoại quay số gắn trên tường dưới ánh đèn neon màu xanh lục. Có vẻ như đây là một cảnh trong phim. | Người đàn ông đang nói chuyện điện thoại. |
-| **Chi tiết khác** Một cảnh quay cận cảnh đậm chất điện ảnh theo chân một người đàn ông tuyệt vọng mặc áo khoác măng tô màu xanh lục đã sờn cũ khi anh ta quay số trên một chiếc điện thoại quay số gắn trên bức tường gạch thô ráp, chìm trong ánh sáng kỳ lạ của một biển hiệu neon màu xanh lục. Máy quay di chuyển vào gần, cho thấy sự căng thẳng ở quai hàm và vẻ tuyệt vọng hằn trên khuôn mặt khi anh cố gắng gọi điện. Độ sâu trường ảnh nông tập trung vào vầng trán nhăn nhó và chiếc điện thoại quay số màu đen của anh, làm mờ hậu cảnh thành một biển màu neon và bóng tối không rõ ràng, tạo cảm giác cấp bách và cô lập. | Người đàn ông nói chuyện điện thoại |
+| **細節較少** ：攝影機緩慢移動，特寫一名身穿綠色風衣的絕望男子。他正在撥打老式轉盤壁掛電話，電話旁有綠色霓虹燈。就像電影場景。 | 男子講電話。 |
+| **更多詳細資料** ：鏡頭以電影特寫手法，跟隨一名身穿綠色舊風衣的絕望男子，他正在撥打裝在粗糙磚牆上的老式轉盤電話，牆上綠色霓虹燈散發出詭異的光芒。鏡頭拉近，顯示他下巴的緊繃感，以及臉上因努力撥號而顯露的絕望。淺景深效果著重於他緊皺的眉頭和黑色旋轉式電話，背景則模糊成一片霓虹色和模糊陰影，營造出急迫和孤立感。 | 男子講電話 |
 
-#### Báo tuyết
+#### 雪豹
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **提示** | **生成內容** |
 | --- | --- |
-| **Câu lệnh đơn giản:** Một sinh vật dễ thương có bộ lông giống như báo tuyết đang đi bộ trong rừng mùa đông, ảnh kết xuất theo phong cách hoạt hình 3D. | Báo tuyết đang uể oải. |
-| **Câu lệnh chi tiết:** Tạo một cảnh hoạt hình 3D ngắn theo phong cách hoạt hình vui nhộn. Một sinh vật dễ thương có bộ lông giống như báo tuyết, đôi mắt to biểu cảm và dáng vẻ tròn trịa, thân thiện đang vui vẻ tung tăng trong một khu rừng mùa đông kỳ diệu. Cảnh này phải có những cây tròn trịa, phủ đầy tuyết, những bông tuyết rơi nhẹ nhàng và ánh nắng ấm áp xuyên qua các cành cây. Các chuyển động nảy của sinh vật và nụ cười tươi tắn phải truyền tải được niềm vui thuần khiết. Hãy hướng đến một giọng điệu lạc quan, ấm áp với màu sắc tươi sáng, vui vẻ và ảnh động sinh động. | Snow Leopard đang chạy nhanh hơn. |
+| **簡單的提示詞：** 一隻毛皮類似雪豹的可愛生物在冬季森林中行走，3D 卡通風格的算繪圖。 | 雪豹無精打采。 |
+| **詳細提示：** 製作一段短片，以歡樂的卡通風格呈現 3D 動畫場景。這隻可愛的生物有著雪豹般的毛皮、大而有神的眼睛，以及圓潤友善的體型，在充滿奇幻感的冬季森林中歡快地跳躍。場景應有圓潤的雪樹、輕柔飄落的雪花，以及穿過樹枝的溫暖陽光。生物的彈跳動作和燦爛笑容應傳達純粹的喜悅。採用歡樂溫馨的語氣，搭配明亮開朗的色彩和活潑的動畫。 | 雪豹的執行速度更快。 |
 
-### Ví dụ theo thành phần viết
+### 依書寫元素分類的範例
 
-Những ví dụ này cho thấy cách tinh chỉnh câu lệnh theo từng phần tử cơ bản.
+這些範例會依據每個基本元素，說明如何調整提示。
 
-#### Tiêu đề và bối cảnh
+#### 主題和背景資訊
 
-Chỉ định tiêu điểm chính (chủ thể) và nền hoặc môi trường (bối cảnh).
+指定主要焦點 (主體) 和背景或環境 (情境)。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **提示** | **生成內容** |
 | --- | --- |
-| Bản kết xuất kiến trúc của một toà nhà chung cư bằng bê tông trắng với các hình dạng hữu cơ uyển chuyển, hoà quyện liền mạch với cây xanh tươi tốt và các yếu tố tương lai | Phần giữ chỗ. |
-| Một vệ tinh trôi nổi trong không gian vũ trụ, với mặt trăng và một số ngôi sao ở phía sau. | Vệ tinh trôi nổi trong bầu khí quyển. |
+| 白色混凝土公寓大樓的建築彩現圖，具有流動的有機形狀，與茂盛的綠色植物和未來元素完美融合 | 預留位置。 |
+| 衛星漂浮在外太空，背景是月球和一些星星。 | 漂浮在大氣層中的衛星。 |
 
-#### Hành động
+#### 動作
 
-Nêu rõ hành động của chủ thể (ví dụ: đi bộ, chạy hoặc quay đầu).
+指定主體正在做什麼 (例如走路、跑步或轉頭)。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **提示** | **生成內容** |
 | --- | --- |
-| Ảnh chụp toàn cảnh một người phụ nữ đang đi bộ dọc bãi biển, trông có vẻ hài lòng và thư thái khi nhìn về phía đường chân trời lúc hoàng hôn. | Cảnh hoàng hôn tuyệt đẹp. |
+| 廣角鏡頭拍攝的畫面：一名女子在海灘上散步，夕陽西下時，她望向地平線，神情滿足放鬆。 | 日落美景令人驚豔。 |
 
-#### Kiểu
+#### 樣式
 
-Thêm từ khoá để hướng quá trình tạo đến một phong cách thẩm mỹ cụ thể (ví dụ: siêu thực, cổ điển, tương lai, phim đen).
+新增關鍵字，導引生成特定美學風格的圖片 (例如超現實、復古、未來主義、黑色電影)。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **提示** | **生成內容** |
 | --- | --- |
-| Phong cách phim đen trắng, người đàn ông và phụ nữ đi bộ trên đường, bí ẩn, điện ảnh, đen trắng. | Phong cách phim đen trắng vô cùng đẹp mắt. |
+| 黑色電影風格，一男一女走在街上，懸疑、電影感、黑白。 | 黑色電影風格非常優美。 |
 
-#### Chuyển động và bố cục của camera
+#### 攝影機動作和構圖
 
-Nêu rõ cách camera di chuyển (cảnh quay từ góc nhìn thứ nhất, cảnh quay từ trên không, cảnh quay bằng máy bay không người lái theo dõi) và cách khung hình được tạo (cảnh quay rộng, cận cảnh, góc thấp).
+指定攝影機的移動方式 (第一人稱視角、空拍、追蹤無人機視角)，以及取景方式 (廣角、特寫、低角度)。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **提示** | **生成內容** |
 | --- | --- |
-| Cảnh quay theo góc nhìn của nhân vật (POV) từ một chiếc ô tô cổ đang lái xe dưới trời mưa, Canada vào ban đêm, mang phong cách điện ảnh. | Cảnh hoàng hôn tuyệt đẹp. |
-| Cảnh cận cực đại của một con mắt phản chiếu hình ảnh thành phố. | Cảnh hoàng hôn tuyệt đẹp. |
+| 主觀鏡頭：復古車輛在加拿大夜間的雨中行駛，電影感。 | 日落美景令人驚豔。 |
+| 極度特寫的眼睛，反映出城市景象。 | 日落美景令人驚豔。 |
 
-#### Môi trường
+#### 類別
 
-Bảng màu và ánh sáng ảnh hưởng đến tâm trạng. Hãy thử dùng các cụm từ như "tông màu cam nhạt ấm áp", "ánh sáng tự nhiên", "bình minh" hoặc "tông màu xanh dương lạnh".
+調色盤和燈光會影響氛圍。你可以試試「柔和的橘色暖色調」、「自然光」、「日出」或「冷色調藍色」等詞彙。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **提示** | **生成內容** |
 | --- | --- |
-| Ảnh cận cảnh một cô gái đang bế chú chó golden retriever đáng yêu trong công viên, ánh sáng mặt trời. | Một chú cún trong vòng tay của một cô bé. |
-| Cảnh quay cận cảnh theo phong cách điện ảnh về một người phụ nữ buồn bã đang đi xe buýt dưới mưa, tông màu xanh dương lạnh, tâm trạng buồn bã. | Một người phụ nữ đang đi xe buýt cảm thấy buồn. |
+| 特寫：女孩在公園裡抱著可愛的黃金獵犬幼犬，陽光灑落。 | 小女孩抱著小狗。 |
+| 電影風格的特寫鏡頭：一名悲傷的女子在雨中搭乘公車，冷色調，悲傷的氛圍。 | 一名女子坐在公車上，看起來很難過。 |
 
-### Tỷ lệ khung hình
+### 顯示比例
 
-Veo cho phép bạn chỉ định tỷ lệ khung hình cho video.
+你可以使用 Veo 指定影片的顯示比例。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **提示** | **生成內容** |
 | --- | --- |
-| **Màn hình rộng (16:9)** Tạo một video có cảnh quay từ máy bay không người lái theo dõi một người đàn ông lái chiếc xe mui trần màu đỏ ở Palm Springs, thập niên 1970, ánh nắng ấm áp, bóng đổ dài. | Một người đàn ông lái chiếc xe mui trần màu đỏ ở Palm Springs, theo phong cách những năm 1970. |
-| **Dọc (9:16)** Tạo video làm nổi bật chuyển động mượt mà của một thác nước hùng vĩ ở Hawaii trong một khu rừng nhiệt đới tươi tốt. Tập trung vào dòng nước chảy chân thực, tán lá chi tiết và ánh sáng tự nhiên để truyền tải sự yên bình. Ghi lại dòng nước chảy xiết, bầu không khí mờ sương và ánh nắng lốm đốm xuyên qua tán cây rậm rạp. Sử dụng các chuyển động mượt mà và mang tính điện ảnh của camera để giới thiệu thác nước và môi trường xung quanh. Hãy hướng đến một giọng điệu bình dị và chân thực, đưa người xem đến với vẻ đẹp thanh bình của rừng mưa nhiệt đới ở Hawaii. | Một thác nước hùng vĩ ở Hawaii trong một khu rừng mưa tươi tốt. |
+| **寬螢幕 (16:9)** ：製作影片，以追蹤無人機視角拍攝 1970 年代的棕櫚泉，一名男子駕駛紅色敞篷車，陽光溫暖，陰影拉長。 | 一名男子在棕櫚泉駕駛紅色敞篷車，風格為 1970 年代。 |
+| **直向 (9:16)** ：製作影片，凸顯茂密雨林中壯麗夏威夷瀑布的流暢動態。著重呈現逼真的水流、細緻的樹葉和自然光線，營造寧靜氛圍。捕捉奔騰的水流、霧氣瀰漫的氛圍，以及穿過茂密樹冠的點點陽光。使用流暢的電影運鏡，呈現瀑布和周遭環境。請盡量使用平靜寫實的語氣，讓觀眾彷彿置身於夏威夷雨林的寧靜美景。 | 夏威夷的雄偉瀑布，位於茂密的雨林中。 |
 
-## Phiên bản mô hình
+## 模型版本
 
-Hãy xem trang [Định giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#veo-3.1) và [Hạn mức sử dụng](https://aistudio.google.com/rate-limit?hl=vi) để biết thêm thông tin chi tiết về việc sử dụng mô hình Veo.
+如要進一步瞭解 Veo 模型的用量詳情，請參閱「[定價](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw#veo-3.1)」頁面和「[速率限制](https://aistudio.google.com/rate-limit?hl=zh-tw)」。
 
-### Veo 3.1 (Bản dùng thử)
+### Veo 3.1 預先發布版
 
-| Thuộc tính | Mô tả |
+| 屬性 | 說明 |
 | --- | --- |
-| id\_cardMã kiểu máy | **Gemini API**  `veo-3.1-generate-preview` |
-| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, hình ảnh  **Đầu ra**  Video có âm thanh |
-| Giới hạn token\_auto | **Nhập văn bản**  1.024 mã thông báo  **Video đầu ra**  1 |
-| calendar\_monthThông tin cập nhật mới nhất | Tháng 1 năm 2026 |
+| id\_card 模型代碼 | **Gemini API**  `veo-3.1-generate-preview` |
+| save支援的資料類型 | **輸入功率**  文字、圖片  **輸出內容**  有聲影片 |
+| token\_auto 限制 | **文字輸入**  1,024 個權杖  **輸出影片**  1 |
+| calendar\_month最新更新 | 2026 年 1 月 |
 
-### Veo 3.1 Fast Preview
+### Veo 3.1 Fast 預先發布版
 
-| Thuộc tính | Mô tả |
+| 屬性 | 說明 |
 | --- | --- |
-| id\_cardMã kiểu máy | **Gemini API**  `veo-3.1-fast-generate-preview` |
-| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, hình ảnh  **Đầu ra**  Video có âm thanh |
-| Giới hạn token\_auto | **Nhập văn bản**  1.024 mã thông báo  **Video đầu ra**  1 |
-| calendar\_monthThông tin cập nhật mới nhất | Tháng 1 năm 2026 |
+| id\_card 模型代碼 | **Gemini API**  `veo-3.1-fast-generate-preview` |
+| save支援的資料類型 | **輸入功率**  文字、圖片  **輸出內容**  有聲影片 |
+| token\_auto 限制 | **文字輸入**  1,024 個權杖  **輸出影片**  1 |
+| calendar\_month最新更新 | 2026 年 1 月 |
 
-### Veo 3.1 Lite (Bản xem trước)
+### Veo 3.1 Lite 預先發布版
 
-| Thuộc tính | Mô tả |
+| 屬性 | 說明 |
 | --- | --- |
-| id\_cardMã kiểu máy | **Gemini API**  `veo-3.1-lite-generate-preview` |
-| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, hình ảnh  **Đầu ra**  Video có âm thanh |
-| Giới hạn token\_auto | **Nhập văn bản**  1.024 mã thông báo  **Video đầu ra**  1 |
-| calendar\_monthThông tin cập nhật mới nhất | Tháng 3 năm 2026 |
+| id\_card 模型代碼 | **Gemini API**  `veo-3.1-lite-generate-preview` |
+| save支援的資料類型 | **輸入功率**  文字、圖片  **輸出內容**  有聲影片 |
+| token\_auto 限制 | **文字輸入**  1,024 個權杖  **輸出影片**  1 |
+| calendar\_month最新更新 | 2026 年 3 月 |
 
 ### Veo 3
 
-| Thuộc tính | Mô tả |
+| 屬性 | 說明 |
 | --- | --- |
-| id\_cardMã kiểu máy | **Gemini API**  `veo-3.0-generate-001` |
-| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, hình ảnh  **Đầu ra**  Video có âm thanh |
-| Giới hạn token\_auto | **Nhập văn bản**  1.024 mã thông báo  **Video đầu ra**  1 |
-| calendar\_monthThông tin cập nhật mới nhất | Tháng 7 năm 2025 |
+| id\_card 模型代碼 | **Gemini API**  `veo-3.0-generate-001` |
+| save支援的資料類型 | **輸入功率**  文字、圖片  **輸出內容**  有聲影片 |
+| token\_auto 限制 | **文字輸入**  1,024 個權杖  **輸出影片**  1 |
+| calendar\_month最新更新 | 2025 年 7 月 |
 
 ### Veo 3 Fast
 
-| Thuộc tính | Mô tả |
+| 屬性 | 說明 |
 | --- | --- |
-| id\_cardMã kiểu máy | **Gemini API**  `veo-3.0-fast-generate-001` |
-| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, hình ảnh  **Đầu ra**  Video có âm thanh |
-| Giới hạn token\_auto | **Nhập văn bản**  1.024 mã thông báo  **Video đầu ra**  1 |
-| calendar\_monthThông tin cập nhật mới nhất | Tháng 7 năm 2025 |
+| id\_card 模型代碼 | **Gemini API**  `veo-3.0-fast-generate-001` |
+| save支援的資料類型 | **輸入功率**  文字、圖片  **輸出內容**  有聲影片 |
+| token\_auto 限制 | **文字輸入**  1,024 個權杖  **輸出影片**  1 |
+| calendar\_month最新更新 | 2025 年 7 月 |
 
 ### Veo 2
 
-| Thuộc tính | Mô tả |
+| 屬性 | 說明 |
 | --- | --- |
-| id\_cardMã kiểu máy | **Gemini API**  `veo-2.0-generate-001` |
-| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, hình ảnh  **Đầu ra**  Video |
-| Giới hạn token\_auto | **Nhập văn bản**  Không áp dụng  **Đầu vào hình ảnh**  Độ phân giải và tỷ lệ khung hình của hình ảnh bất kỳ, kích thước tệp tối đa là 20 MB  **Video đầu ra**  Tối đa 2 |
-| calendar\_monthThông tin cập nhật mới nhất | Tháng 4 năm 2025 |
+| id\_card 模型代碼 | **Gemini API**  `veo-2.0-generate-001` |
+| save支援的資料類型 | **輸入功率**  文字、圖片  **輸出內容**  影片 |
+| token\_auto 限制 | **文字輸入**  不適用  **圖片輸入**  任何解析度和顯示比例的圖片，檔案大小上限為 20 MB  **輸出影片**  最多 2 個 |
+| calendar\_month最新更新 | 2025 年 4 月 |
 
 ### Veo 2
 
-| Thuộc tính | Mô tả |
+| 屬性 | 說明 |
 | --- | --- |
-| id\_cardMã kiểu máy | **Gemini API**  `veo-2.0-generate-001` |
-| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, hình ảnh  **Đầu ra**  Video |
-| Giới hạn token\_auto | **Nhập văn bản**  Không áp dụng  **Đầu vào hình ảnh**  Độ phân giải và tỷ lệ khung hình của hình ảnh bất kỳ, kích thước tệp tối đa là 20 MB  **Video đầu ra**  Tối đa 2 |
-| calendar\_monthThông tin cập nhật mới nhất | Tháng 4 năm 2025 |
+| id\_card 模型代碼 | **Gemini API**  `veo-2.0-generate-001` |
+| save支援的資料類型 | **輸入功率**  文字、圖片  **輸出內容**  影片 |
+| token\_auto 限制 | **文字輸入**  不適用  **圖片輸入**  任何解析度和顯示比例的圖片，檔案大小上限為 20 MB  **輸出影片**  最多 2 個 |
+| calendar\_month最新更新 | 2025 年 4 月 |
 
-Các phiên bản Veo Fast cho phép nhà phát triển tạo video có âm thanh trong khi vẫn duy trì chất lượng cao và tối ưu hoá tốc độ cũng như các trường hợp sử dụng cho doanh nghiệp. Các công cụ này rất phù hợp với những dịch vụ phụ trợ tạo quảng cáo theo chương trình, các công cụ để kiểm thử A/B nhanh các ý tưởng sáng tạo hoặc những ứng dụng cần nhanh chóng tạo nội dung trên mạng xã hội.
+開發人員可使用 Veo Fast 版本製作有聲影片，兼顧高品質和速度，並滿足業務需求。這類 API 非常適合用於以程式輔助方式產生廣告的後端服務、快速對創意概念進行 A/B 測試的工具，或是需要快速製作社群媒體內容的應用程式。
 
-## Bước tiếp theo
+## 後續步驟
 
-- Bắt đầu sử dụng Veo 3.1 API bằng cách thử nghiệm trong [Veo Quickstart Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Veo.ipynb?hl=vi) và [tiện ích Veo 3.1](https://aistudio.google.com/apps/bundled/veo_studio?hl=vi).
-- Tìm hiểu cách viết câu lệnh hiệu quả hơn nữa qua bài viết [Giới thiệu về thiết kế câu lệnh](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=vi).
+- 如要開始使用 Veo 3.1 API，請在 [Veo 快速入門 Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Veo.ipynb?hl=zh-tw) 和 [Veo 3.1 小程式](https://aistudio.google.com/apps/bundled/veo_studio?hl=zh-tw)中進行實驗。
+- 如要瞭解如何撰寫更有效的提示，請參閱「[提示設計簡介](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=zh-tw)」。
 
-Gửi ý kiến phản hồi
+提供意見
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Cập nhật lần gần đây nhất: 2026-05-13 UTC.
+上次更新時間：2026-05-13 (世界標準時間)。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+想進一步說明嗎？
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-13 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-13 (世界標準時間)。"],[],[]]

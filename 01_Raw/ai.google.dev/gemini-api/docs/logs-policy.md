@@ -1,60 +1,71 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-policy?hl=tr
-fetched_at: 2026-05-18T05:11:33.026780+00:00
-title: "Veri Kayd\u0131 ve Payla\u015f\u0131m\u0131 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-policy?hl=it
+fetched_at: 2026-05-25T05:25:19.897963+00:00
+title: "Registrazione e condivisione dei dati \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Geri bildirim gönderin
+Invia feedback
 
-# Veri Kaydı ve Paylaşımı
+# Registrazione e condivisione dei dati
 
-Bu sayfada, faturalandırmanın etkinleştirildiği projeler için desteklenen Gemini API çağrılarından elde edilen ve geliştiricilere ait API verileri olan [Gemini API günlüklerinin](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=tr) depolanması ve yönetilmesi açıklanmaktadır. Günlükler, kullanıcının isteğinden modelin yanıtına kadar olan tüm süreci kapsar.
+Questa pagina descrive l'archiviazione e la gestione dei
+[log dell'API Gemini](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=it), che sono dati API di proprietà dello sviluppatore
+provenienti da chiamate API Gemini supportate per i progetti con la fatturazione abilitata. I log comprendono l'intero processo, dalla richiesta di un utente alla risposta del modello.
 
-## 1. Paylaşılabilecek veriler
+## 1. Dati che possono essere condivisi
 
-Proje sahibi olarak, kendi kullanımınız için veya modellerimizi sürekli olarak geliştirmemize yardımcı olmak üzere Google ile geri bildirim ve paylaşım amacıyla Gemini API çağrılarının günlüğe kaydedilmesini etkinleştirebilirsiniz.
+In qualità di proprietario del progetto, puoi scegliere di attivare la registrazione delle chiamate API Gemini per uso personale o per fornire feedback e condividerli con Google per aiutarci a migliorare continuamente i nostri modelli.
 
-Günlük kaydı etkinleştirildiğinde, ürün iyileştirmeleri ve model eğitimi için aşağıdaki verileri göndermeyi seçerek çeşitli alanlardaki ve kullanım alanlarındaki geliştiriciler için değerli olmaya devam eden yapay zeka sistemleri oluşturmamıza yardımcı olabilirsiniz:
+Se attivi la registrazione, puoi aiutarci a creare sistemi di AI che continuano a essere utili per gli sviluppatori in vari campi e casi d'uso scegliendo di contribuire con i seguenti dati per i miglioramenti dei prodotti e l'addestramento dei modelli:
 
-- **Veri kümeleri:** Google AI Studio'nun günlükler ve veri kümeleri arayüzünü kullanarak desteklenen Gemini API çağrılarından ilgilendiğiniz günlükleri (istekler, yanıtlar, meta veriler vb.) seçin. Veri kümelerine dahil edilerek katkıda bulunulan bu günlükler, veri kümesi oluşturma sırasında devre dışı bırakılabilir.
-- **Geri bildirim:** Günlükleri incelerken geri bildirimde bulunabilirsiniz. Geri bildirimler arasında olumlu/olumsuz puanlar ve yazdığınız yorumlar yer alır.
+- **Set di dati:** utilizza l'interfaccia Log e set di dati di Google AI Studio per scegliere i log (richieste, risposte, metadati e così via) di interesse dalle chiamate API Gemini supportate; i dati vengono forniti tramite l'inclusione nei set di dati, con la possibilità di disattivare questa opzione durante la creazione del set di dati.
+- **Feedback:** durante la revisione dei log, puoi fornire feedback, inclusi i punteggi con i pollici in su/in giù e tutti i commenti scritti che fornisci.
 
-Google ile bir veri kümesi paylaştığınızda, istekler ve yanıtlar dahil olmak üzere bu veri kümesindeki günlükleriniz, "[Ücretsiz Hizmetler](https://ai.google.dev/gemini-api/terms?hl=tr#data-use-unpaid)" ile ilgili [Şartlarımız](https://developers.google.com/terms?hl=tr) uyarınca işlenir. Bu, veri kümesinin, modellerimizi iyileştirme ve eğitme de dahil olmak üzere Google ürünlerini, hizmetlerini ve makine öğrenimi teknolojilerini geliştirmek ve iyileştirmek için kullanılabileceği anlamına gelir. **Kişisel, hassas veya gizli bilgiler eklemeyin.**
+Quando condividi un set di dati con Google, i log in quel set di dati, incluse
+richieste e risposte, verranno trattati in conformità ai nostri
+[Termini](https://developers.google.com/terms?hl=it) per
+"[Servizi non a pagamento](https://ai.google.dev/gemini-api/terms?hl=it#data-use-unpaid),"
+il che significa che il set di dati potrebbe essere utilizzato per sviluppare e migliorare i
+prodotti, i servizi e le tecnologie di machine learning di Google, inclusi il miglioramento e
+l'addestramento dei nostri modelli. **Non includere informazioni personali, sensibili o riservate.**
 
-## 2. Verilerinizi nasıl kullanırız?
+## 2. Come utilizziamo i tuoi dati
 
-Günlüklerin süresi varsayılan olarak 55 gün sonra dolar. Bu sürenin sonunda kullanılamaz hale gelirler. Aşağı akış kullanım alanları için bu dönemin ötesinde ilgi veya değer günlüklerini saklamak ve model iyileştirmelerine isteğe bağlı olarak katkıda bulunmak üzere veri kümeleri oluşturulabilir. Veri kümelerinde depolanan günlüklerin son kullanma tarihi yoktur ancak her projenin varsayılan depolama sınırı 1.000 günlüktür.
+Per impostazione predefinita, i log scadono dopo 55 giorni. Dopo questo periodo, non saranno più disponibili. È possibile creare set di dati per conservare i log di interesse o di valore oltre questo periodo per i casi d'uso downstream e il contributo facoltativo ai miglioramenti dei modelli. I log archiviati nei set di dati non hanno date di scadenza impostate, ma ogni progetto ha un limite di archiviazione predefinito di un massimo di 1000 log.
 
-Varsayılan olarak, günlük kaydı yalnızca faturalandırmanın etkinleştirildiği projelerde kullanılabildiğinden günlüklerdeki istemler ve yanıtlar, veri kullanımına ilişkin [Şartlarımız](https://developers.google.com/terms?hl=tr) uyarınca ürün iyileştirme veya geliştirme için kullanılmaz.
+Per impostazione predefinita, poiché la registrazione è disponibile solo per i progetti con la fatturazione abilitata,
+i prompt e le risposte nei log non vengono utilizzati per il miglioramento o lo
+sviluppo dei prodotti, in conformità ai nostri [Termini](https://developers.google.com/terms?hl=it)
+sull'utilizzo dei dati.
 
-Günlüklerinizin veri kümelerini Google ile paylaşmayı seçerseniz bu veri kümeleri, yapay zeka sistemlerinin ve uygulamalarının kullanıldığı alanların ve bağlamların çeşitliliğini daha iyi anlamak için gerçek dünya gösterim verileri olarak kullanılır. Bu veriler, model kalitesini artırmak ve gelecekteki modellerin ve hizmetlerin eğitim ve değerlendirme süreçlerine bilgi sağlamak için kullanılabilir. Bu veriler, [Ücretsiz Hizmetler](https://ai.google.dev/gemini-api/terms?hl=tr#data-use-unpaid) için veri kullanım şartlarımıza uygun olarak işlenir.
-Bu nedenle, inceleme uzmanları paylaştığınız API girişlerini ve çıkışlarını okuyabilir, işleyebilir ve bunlara açıklama ekleyebilir. Veriler model geliştirmede kullanılmadan önce Google, bu süreç kapsamında kullanıcı gizliliğini korumak için gerekli önlemleri alır. Örneğin, inceleme uzmanları görmeden veya açıklama eklemeden önce bu verilerin Google Hesabınız, API anahtarınız ve Cloud projenizle bağlantısını kaldırırız.
+Se scegli di condividere i set di dati dei tuoi log con Google, questi set di dati verranno utilizzati come dati dimostrativi reali per comprendere meglio la diversità di domini e contesti in cui vengono utilizzati i sistemi e le applicazioni di AI. Questi dati potrebbero essere utilizzati per migliorare la qualità dei modelli e per informare l'addestramento e la valutazione di modelli e servizi futuri. [Questi dati vengono trattati in conformità ai nostri termini di utilizzo dei dati per i servizi non a pagamento.](https://ai.google.dev/gemini-api/terms?hl=it#data-use-unpaid)
+Di conseguenza, i revisori umani potrebbero leggere, annotare ed elaborare gli input e gli output delle API che condividi. Prima che i dati vengano utilizzati per il miglioramento dei modelli, Google adotta misure volte a proteggere la privacy degli utenti nell'ambito di questa procedura. Ciò include la disconnessione di questi dati dal tuo Account Google, dalla chiave API e dal progetto Cloud prima che i revisori li vedano o li annotino.
 
-## 3. Veri izinleri
+## 3. Autorizzazioni dati
 
-API verilerine katkıda bulunmayı etkinleştirerek Google'ın verileri bu belgede açıklandığı şekilde işlemesi ve kullanması için gerekli izinlere sahip olduğunuzu onaylarsınız. **Lütfen ücretli hizmet aracılığıyla elde edilen hassas, gizli veya özel bilgileri içeren günlükler göndermeyin**.
-API Şartları'ndaki "[İçerik Gönderimi](https://developers.google.com/terms?hl=tr#b_submission_of_content)" bölümü uyarınca Google'a verdiğiniz lisans, Hizmetler'e gönderdiğiniz tüm içerikler (ör.ilişkili sistem talimatları da dahil olmak üzere istemler, önbelleğe alınmış içerikler ve resim, video ya da belge gibi dosyalar) ve oluşturulan tüm yanıtlar için de geçerlidir. Bu geçerlilik, kullanımımız için geçerli yasa kapsamında gerekli olduğu ölçüde geçerlidir.
+Se scegli di contribuire con i dati delle API, confermi di disporre delle autorizzazioni necessarie per consentire a Google di trattare e utilizzare i dati come descritto in questa documentazione. **Non contribuire con log contenenti informazioni sensibili, riservate o proprietarie ottenute tramite il servizio a pagamento**.
+La licenza che concedi a Google ai sensi della sezione "[Invio di contenuti](https://developers.google.com/terms?hl=it#b_submission_of_content)" dei Termini per le API si estende anche, nella misura in cui ciò è richiesto dalle leggi applicabili per il nostro utilizzo, a qualsiasi contenuto (ad es. prompt, incluse le istruzioni di sistema associate, i contenuti memorizzati nella cache e i file come immagini, video o documenti) che invii ai Servizi e a qualsiasi risposta generata.
 
-## 4. Veri paylaşımı ve geri bildirim
+## 4. Condivisione dei dati e feedback
 
-Verilerinizi örnek olarak paylaşmayı kabul ederek yapay zeka araştırmalarının, Gemini API'nin ve Google AI Studio'nun sınırlarını genişletmemize yardımcı olabilirsiniz. Bu sayede, modellerimizi çeşitli bağlamlarda sürekli olarak iyileştirebilir ve farklı alanlardaki ve kullanım alanlarındaki geliştiriciler için değerli olmaya devam edecek yapay zeka sistemleri oluşturabiliriz.
+Puoi aiutarci a far progredire la ricerca sull'AI, l'API Gemini e Google AI Studio scegliendo di condividere i tuoi dati come esempi, consentendoci di migliorare continuamente i nostri modelli in vari contesti e di creare sistemi di AI che continuano a essere utili per gli sviluppatori in vari campi e casi d'uso.
 
-Geri bildirim gönderin
+Invia feedback
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Son güncelleme tarihi: 2026-04-29 UTC.
+Ultimo aggiornamento 2026-04-29 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Vuoi dirci altro?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]

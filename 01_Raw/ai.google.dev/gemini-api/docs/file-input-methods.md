@@ -1,30 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ar
-fetched_at: 2026-05-18T05:13:07.388581+00:00
+source_url: https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-TW
+fetched_at: 2026-05-25T05:18:28.366469+00:00
 title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-إرسال ملاحظات
+提供意見
 
-# طُرق إدخال الملفات
+# 檔案輸入方式
 
-يوضّح هذا الدليل الطرق المختلفة التي يمكنك من خلالها تضمين ملفات الوسائط، مثل الصور والصوت والفيديو والمستندات، عند إرسال طلبات إلى Gemini API.
-تتوفّر الطرق الجديدة في جميع نقاط نهاية Gemini API، بما في ذلك
-Batch وInteractions وLive API.
-يعتمد اختيار الطريقة المناسبة على حجم ملفك ومكان تخزين بياناتك حاليًا ومدى تكرار استخدامك للملف.
+本指南說明向 Gemini API 提出要求時，可採用哪些方式加入圖片、音訊、影片和文件等媒體檔案。所有 Gemini API 端點都支援這些新方法，包括 Batch、Interactions 和 Live API。選擇合適的方法取決於檔案大小、資料目前的儲存位置，以及您預計使用檔案的頻率。
 
-أسهل طريقة لتضمين ملف كإدخال هي قراءة ملف محلي وتضمينه في طلب. يوضّح المثال التالي كيفية قراءة ملف PDF محلي. يقتصر حجم ملفات PDF على 50 ميغابايت في هذه الطريقة. للاطّلاع على قائمة كاملة بأنواع إدخال الملفات والحدود المفروضة عليها، راجِع جدول مقارنة طُرق الإدخال
-.
+如要將檔案做為輸入內容，最簡單的方法是讀取本機檔案，然後將檔案納入提示詞。以下範例說明如何讀取本機 PDF 檔案。透過這個方法上傳的 PDF 檔案大小不得超過 50 MB。如需檔案輸入類型和限制的完整清單，請參閱「[輸入法比較表](#method-comparison)」。
 
 ### Python
 
@@ -39,7 +35,7 @@ filepath = pathlib.Path('my_local_file.pdf')
 
 prompt = "Summarize this document"
 response = client.models.generate_content(
-  model="gemini-3-flash-preview",
+  model="gemini-3.5-flash",
   contents=[
       types.Part.from_bytes(
         data=filepath.read_bytes(),
@@ -74,7 +70,7 @@ async function main() {
     ];
 
     const response = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
+        model: "gemini-3.5-flash",
         contents: contents
     });
     console.log(response.text);
@@ -89,7 +85,7 @@ main();
 # Encode the local file to base64
 B64_CONTENT=$(base64 -w 0 my_local_file.pdf)
 
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
@@ -113,26 +109,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-f
   }'
 ```
 
-## مقارنة طُرق الإدخال
+## 輸入法比較
 
-يقارن الجدول التالي بين كل طريقة إدخال مع حدود الملفات وأفضل حالات الاستخدام. يُرجى العِلم أنّ الحدّ الأقصى لحجم الملف قد يختلف حسب نوع الملف والنموذج/أداة تقسيم الكلمات المستخدَمة لمعالجة الملف.
+下表比較各種輸入方式的檔案限制和最佳用途。請注意，檔案大小上限可能會因檔案類型和用於處理檔案的模型/分詞器而異。
 
-| الطريقة | الأفضل لـ | الحجم الأقصى للملف | الاستمرارية |
+| 方法 | 適用情境 | 檔案大小上限 | 持續性 |
 | --- | --- | --- | --- |
-| **البيانات المضمّنة** | الاختبار السريع والملفات الصغيرة والتطبيقات في الوقت الفعلي | ‫100 ميغابايت لكل طلب/بيانات   (**50 ميغابايت لملفات PDF**) | لا شيء (يتم إرسالها مع كل طلب) |
-| **تحميل الملفات باستخدام File API** | الملفات الكبيرة والملفات المستخدَمة عدة مرات | ‫2 غيغابايت لكل ملف،   ما يصل إلى 20 غيغابايت لكل مشروع | 48 ساعة |
-| **تسجيل معرّف URI لـ Google Cloud Storage باستخدام File API** | الملفات الكبيرة المخزَّنة حاليًا في Google Cloud Storage والملفات المستخدَمة عدة مرات | ‫2 غيغابايت لكل ملف، بدون حدود إجمالية للتخزين | لا شيء (يتم استرجاعها لكل طلب). يمكن أن يمنح التسجيل لمرة واحدة إمكانية الوصول لمدة تصل إلى 30 يومًا. |
-| **عناوين URL الخارجية** | البيانات العلنية أو البيانات في حِزم التخزين السحابي (AWS وAzure وGCS) بدون إعادة تحميلها | ‫100 ميغابايت لكل طلب/بيانات | لا شيء (يتم استرجاعها لكل طلب) |
+| **內嵌資料** | 快速測試、小型檔案、即時應用程式。 | 每個要求/酬載 100 MB   (PDF 檔案為 **50 MB**) | 無 (隨每個要求傳送) |
+| **檔案 API 上傳** | 大型檔案、多次使用的檔案。 | 每個檔案 2 GB， 每個專案最多 20 GB | 48 小時 |
+| **File API GCS URI 註冊** | 已存放在 Google Cloud Storage 的大型檔案、多次使用的檔案。 | 每個檔案 2 GB，沒有總儲存空間限制 | 無 (系統會根據要求擷取)。一次註冊最多可存取 30 天。 |
+| **外部網址** | 公用資料或雲端儲存空間 (AWS、Azure、GCS) 中的資料，不必重新上傳。 | 每個要求/酬載 100 MB | 無 (每次要求都會擷取) |
 
-## البيانات المضمّنة
+## 內嵌資料
 
-بالنسبة إلى الملفات الأصغر حجمًا (أقل من 100 ميغابايت أو 50 ميغابايت لملفات PDF)، يمكنك تمرير البيانات مباشرةً في بيانات الطلب. هذه هي الطريقة الأسهل لإجراء اختبارات سريعة أو إنشاء تطبيقات تعالج البيانات المؤقتة في الوقت الفعلي. يمكنك تقديم البيانات كسلاسل base64 مشفّرة أو من خلال قراءة الملفات المحلية مباشرةً.
+如果是較小的檔案 (小於 100 MB，PDF 檔案則小於 50 MB)，您可以直接在要求酬載中傳遞資料。這是最簡單的方法，適用於快速測試或處理即時暫時性資料的應用程式。您可以提供 base64 編碼字串形式的資料，也可以直接讀取本機檔案。
 
-للاطّلاع على مثال لقراءة ملف محلي، راجِع المثال في بداية هذه الصفحة.
+如需從本機檔案讀取的範例，請參閱本頁開頭的範例。
 
-### استرجاع ملف من عنوان URL
+### 從網址擷取
 
-يمكنك أيضًا استرجاع ملف من عنوان URL وتحويله إلى وحدات بايت وتضمينه في الإدخال.
+您也可以從網址擷取檔案、轉換為位元組，然後納入輸入內容。
 
 ### Python
 
@@ -149,7 +145,7 @@ doc_data = httpx.get(doc_url).content
 prompt = "Summarize this document"
 
 response = client.models.generate_content(
-  model="gemini-3-flash-preview",
+  model="gemini-3.5-flash",
   contents=[
       types.Part.from_bytes(
         data=doc_data,
@@ -185,7 +181,7 @@ async function main() {
     ];
 
     const response = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
+        model: "gemini-3.5-flash",
         contents: contents
     });
     console.log(response.text);
@@ -215,7 +211,7 @@ fi
 ENCODED_PDF=$(base64 $B64FLAGS "${DISPLAY_NAME}.pdf")
 
 # Generate content using the base64 encoded PDF
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -X POST \
@@ -234,13 +230,13 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## ‫Gemini File API
+## Gemini File API
 
-تم تصميم File API للملفات الأكبر حجمًا (ما يصل إلى 2 غيغابايت) أو الملفات التي تنوي استخدامها في طلبات متعددة.
+File API 適用於較大的檔案 (最多 2 GB)，或您打算在多項要求中使用的檔案。
 
-### تحميل الملفات العادي
+### 標準檔案上傳
 
-حمِّل ملفًا محليًا إلى Gemini API. يتم تخزين الملفات التي يتم تحميلها بهذه الطريقة مؤقتًا (48 ساعة) ومعالجتها لاسترجاعها بكفاءة من قِبل النموذج.
+將本機檔案上傳至 Gemini API。以這種方式上傳的檔案會暫時儲存 (48 小時)，並經過處理，方便模型有效率地擷取內容。
 
 ### Python
 
@@ -254,7 +250,7 @@ prompt = "Describe this audio clip"
 
 # Use the uploaded file in a prompt
 response = client.models.generate_content(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents=[prompt, audio_file]
 )
 print(response.text)
@@ -281,7 +277,7 @@ async function main() {
   });
 
   const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     contents: createUserContent([
       prompt,
       createPartFromUri(myfile.uri, myfile.mimeType),
@@ -329,7 +325,7 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 
 # Now generate content using that file
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -X POST \
@@ -347,48 +343,43 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-### تسجيل ملفات Google Cloud Storage
+### 註冊 Google Cloud Storage 檔案
 
-إذا كانت بياناتك مخزَّنة حاليًا في Google Cloud Storage، لن تحتاج إلى تنزيلها وإعادة تحميلها. يمكنك تسجيلها مباشرةً باستخدام File API.
+如果資料已儲存在 Google Cloud Storage，就不需要下載並重新上傳。您可以直接透過 File API 註冊。
 
-1. منح إذن الوصول إلى **وكيل الخدمة** لكل حزمة
+1. 授予**服務代理**每個 bucket 的存取權
 
-   1. فعِّل Gemini API في مشروعك على Google Cloud.
-   2. أنشئ وكيل الخدمة:
+   1. 在 Google Cloud 專案中啟用 Gemini API。
+   2. 建立服務代理：
 
       `gcloud beta services identity create --service=generativelanguage.googleapis.com --project=<your_project>`
-   3. **امنح وكيل خدمة Gemini API أذونات** قراءة حِزم التخزين.
+   3. **授予 Gemini API 服務代理讀取儲存空間 bucket 的權限**。
 
-      على المستخدم منح دور `Storage Object Viewer`
-      [إدارة الهوية والوصول (IAM)](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=ar#storage.objectViewer)
-      لوكيل الخدمة هذا على حِزم التخزين المحدّدة التي ينوي استخدامها.
+      使用者必須在打算使用的特定儲存空間 bucket 中，為這個服務代理指派 `Storage Object Viewer`
+      [IAM 角色](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=zh-tw#storage.objectViewer)。
 
-   لا تنتهي صلاحية إذن الوصول هذا تلقائيًا، ولكن يمكن تغييره في أي وقت. يمكنك
-   أيضًا استخدام
-   [أوامر Google Cloud Storage IAM SDK](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=ar)
-   لمنح الأذونات.
-2. مصادقة خدمتك
+   這項存取權預設不會過期，但隨時可以變更。您也可以使用 [Google Cloud Storage IAM SDK](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=zh-tw) 指令授予權限。
+2. 驗證服務
 
-   **المتطلبات الأساسية**
+   **必要條件**
 
-   - تفعيل واجهة برمجة التطبيقات
-   - إنشاء حساب خدمة/وكيل بأذونات مناسبة
+   - 啟用 API
+   - 建立具備適當權限的服務帳戶/代理程式。
 
-   عليك أولاً المصادقة بصفتك الخدمة التي لديها أذونات عارض عناصر التخزين. يعتمد ذلك على البيئة التي سيتم فيها تشغيل رمز إدارة الملفات.
+   您必須先以具備 Storage 物件檢視者權限的服務身分進行驗證。這取決於檔案管理程式碼的執行環境。
 
-   **خارج Google Cloud**
+   **Google Cloud 以外**
 
-   إذا كان الرمز قيد التشغيل من خارج Google Cloud، مثل جهاز الكمبيوتر، نزِّل بيانات اعتماد الحساب من Google Cloud Console باتّباع الخطوات التالية:
+   如果您的程式碼是在 Google Cloud 以外的位置 (例如桌面) 執行，請按照下列步驟，從 Google Cloud 控制台下載帳戶憑證：
 
-   1. انتقِل إلى [وحدة تحكّم حساب الخدمة](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=ar)
-   2. اختَر حساب الخدمة ذي الصلة
-   3. اختَر علامة التبويب **المفاتيح** واختَر **إضافة مفتاح، إنشاء مفتاح جديد**
-   4. اختَر نوع المفتاح **JSON**، ولاحِظ مكان تنزيل الملف على جهازك.
+   1. 瀏覽至[服務帳戶控制台](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=zh-tw)
+   2. 選取相關服務帳戶
+   3. 選取「金鑰」分頁，然後依序選擇「新增金鑰」和「建立新的金鑰」
+   4. 選擇「JSON」金鑰類型，並記下檔案下載到電腦的位置。
 
-   لمزيد من التفاصيل، راجِع مستندات Google Cloud الرسمية حول [إدارة
-   مفاتيح حسابات الخدمة](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=ar).
+   詳情請參閱 Google Cloud 官方說明文件，瞭解如何[管理服務帳戶金鑰](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=zh-tw)。
 
-   بعد ذلك، استخدِم الأوامر التالية للمصادقة. تفترض هذه الأوامر أنّ ملف حساب الخدمة موجود في الدليل الحالي باسم `service-account.json`.
+   然後使用下列指令進行驗證。這些指令假設您的服務帳戶檔案位於目前目錄中，且名為 `service-account.json`。
 
    ### Python
 
@@ -408,7 +399,7 @@ jq ".candidates[].content.parts[].text" response.json
    )
    ```
 
-   ### Javascript
+   ### JavaScript
 
    ```
    const { GoogleAuth } = require('google-auth-library');
@@ -434,18 +425,13 @@ jq ".candidates[].content.parts[].text" response.json
      --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only'
    ```
 
-   **على Google Cloud**
+   **在 Google Cloud 中**
 
-   إذا كنت تستخدم Google Cloud مباشرةً، مثلاً من خلال استخدام [وظائف Cloud Run](https://cloud.google.com/functions?hl=ar) أو
-   [مثيل Compute Engine](https://cloud.google.com/products/compute?hl=ar)، ستتوفّر لك
-   بيانات اعتماد ضمنية ولكن عليك إعادة المصادقة لمنح
-   النطاقات المناسبة.
+   如果您直接在 Google Cloud 中執行 (例如使用 [Cloud Run 函式](https://cloud.google.com/functions?hl=zh-tw)或 [Compute Engine 執行個體](https://cloud.google.com/products/compute?hl=zh-tw))，您會擁有隱含憑證，但需要重新驗證，才能授予適當的範圍。
 
    ### Python
 
-   يتوقّع هذا الرمز تشغيل الخدمة في بيئة يمكن فيها الحصول تلقائيًا على
-   [بيانات الاعتماد التلقائية للتطبيق](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=ar)
-   ، مثل Cloud Run أو Compute Engine.
+   這段程式碼預期服務會在可自動取得[應用程式預設憑證](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=zh-tw)的環境中執行，例如 Cloud Run 或 Compute Engine。
 
    ```
    import google.auth
@@ -460,9 +446,7 @@ jq ".candidates[].content.parts[].text" response.json
 
    ### JavaScript
 
-   يتوقّع هذا الرمز تشغيل الخدمة في بيئة يمكن فيها الحصول تلقائيًا على
-   [بيانات الاعتماد التلقائية للتطبيق](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=ar)
-   ، مثل Cloud Run أو Compute Engine.
+   這段程式碼預期服務會在可自動取得[應用程式預設憑證](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=zh-tw)的環境中執行，例如 Cloud Run 或 Compute Engine。
 
    ```
    const { GoogleAuth } = require('google-auth-library');
@@ -477,15 +461,15 @@ jq ".candidates[].content.parts[].text" response.json
 
    ### CLI
 
-   هذا أمر تفاعلي. بالنسبة إلى خدمات مثل Compute Engine، يمكنك إرفاق النطاقات بالخدمة قيد التشغيل على مستوى الإعداد. [راجِع مستندات الخدمة التي يديرها المستخدم للحصول على مثال.](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=ar#using)
+   這項指令是互動式指令，對於 Compute Engine 等服務，您可以在設定層級將範圍附加至執行中的服務。如需範例，請參閱[使用者自行管理的服務文件](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=zh-tw#using)。
 
    ```
    gcloud auth application-default login \
    --scopes="https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only"
    ```
-3. تسجيل الملفات (Files API)
+3. 檔案註冊 (Files API)
 
-   استخدِم Files API لتسجيل الملفات وإنشاء مسار Files API يمكن استخدامه مباشرةً في Gemini API.
+   使用 Files API 註冊檔案，並產生可直接在 Gemini API 中使用的 Files API 路徑。
 
    ### Python
 
@@ -508,7 +492,7 @@ jq ".candidates[].content.parts[].text" response.json
    for f in registered_gcs_files.files:
      print(f.name)
      response = client.models.generate_content(
-       model="gemini-3-flash-preview",
+       model="gemini-3.5-flash",
        contents=[Part.from_uri(
          file_uri=f.uri,
          mime_type=f.mime_type,
@@ -530,13 +514,11 @@ jq ".candidates[].content.parts[].text" response.json
        -d '{"uris": ["gs://bucket/object1", "gs://bucket/object2"]}'
    ```
 
-## عناوين URL الخارجية لبروتوكول HTTP / عناوين URL الموقَّعة
+## 外部 HTTP / 已簽章網址
 
-يمكنك تمرير عناوين URL لبروتوكول HTTPS التي يمكن الوصول إليها علنًا أو عناوين URL الموقَّعة مسبقًا (المتوافقة مع
-[عناوين URL الموقَّعة مسبقًا في S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html)
-وعناوين URL لبروتوكول SAS في Azure) مباشرةً في طلب الإنشاء. سيسترجع Gemini API المحتوى بأمان أثناء المعالجة. هذا مثالي للملفات التي يصل حجمها إلى 100 ميغابايت والتي لا تريد إعادة تحميلها.
+您可以在生成要求中直接傳遞可公開存取的 HTTPS 網址或預先簽署的網址 (與 [S3 預先簽署的網址](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html)和 Azure SAS 相容)。Gemini API 會在處理期間安全地擷取內容。如果檔案大小不超過 100 MB，且您不想重新上傳，這個方法就非常適合。
 
-يمكنك استخدام عناوين URL العلنية أو الموقَّعة كإدخال من خلال استخدام عناوين URL في الحقل `file_uri`.
+您可以使用「URLs」(網址) `file_uri` 欄位中的網址，以公開或已簽署的網址做為輸入內容。
 
 ### Python
 
@@ -550,7 +532,7 @@ prompt = "Summarize this file"
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents=[
         Part.from_uri(
             file_uri=uri,
@@ -562,7 +544,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### Javascript
+### JavaScript
 
 ```
 import { GoogleGenAI, createPartFromUri } from '@google/genai';
@@ -573,7 +555,7 @@ const uri = "https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf
 
 async function main() {
   const response = await client.models.generateContent({
-    model: 'gemini-3-flash-preview',
+    model: 'gemini-3.5-flash',
     contents: [
       // equivalent to Part.from_uri(file_uri=uri, mime_type="...")
       createPartFromUri(uri, "application/pdf"),
@@ -590,7 +572,7 @@ main();
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent \
       -H 'x-goog-api-key: $GEMINI_API_KEY' \
       -H 'Content-Type: application/json' \
       -d '{
@@ -610,20 +592,19 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
         }'
 ```
 
-### تسهيل الاستخدام
+### 無障礙設定
 
-تأكَّد من أنّ عناوين URL التي تقدّمها لا تؤدي إلى صفحات تتطلّب تسجيل الدخول أو تستخدم نظام حظر الاشتراك غير المدفوع (جدار الدفع). بالنسبة إلى قواعد البيانات الخاصة، تأكَّد من إنشاء عنوان URL موقَّع بأذونات الوصول الصحيحة وتاريخ انتهاء الصلاحية.
+確認提供的網址不會導向需要登入或位於付費牆後的網頁。如果是私人資料庫，請務必建立具備正確存取權限和有效期限的經簽署網址。
 
-### عمليات فحص الأمان
+### 安全檢查
 
-يُجري النظام فحصًا للإشراف على المحتوى على عنوان URL للتأكّد من استيفائه لمعايير الأمان والسياسات (مثل المحتوى غير المستبعَد والمحتوى المحظور بنظام حظر الاشتراك غير المدفوع). إذا لم يستوفِ عنوان URL الذي قدّمته هذا الفحص، سيظهر لك `url_retrieval_status` بقيمة `URL_RETRIEVAL_STATUS_UNSAFE`.
+系統會對網址執行內容審核檢查，確認網址符合安全和政策標準 (例如未停用及設有付費牆的內容)。如果提供的網址未通過這項檢查，您會收到`url_retrieval_status`的`URL_RETRIEVAL_STATUS_UNSAFE`。
 
-### أنواع المحتوى المتوافقة
+### 支援的內容類型
 
-تهدف قائمة أنواع الملفات المتوافقة والقيود إلى تقديم إرشادات أولية وليست شاملة. قد تتغيّر المجموعة الفعّالة من الأنواع المتوافقة ويمكن أن تختلف حسب النموذج المحدّد وإصدار أداة تقسيم الكلمات المستخدَمة. ستؤدي الأنواع غير المتوافقة إلى ظهور خطأ.
-بالإضافة إلى ذلك، لا يتيح استرجاع المحتوى لأنواع الملفات هذه حاليًا سوى عناوين URL التي يمكن الوصول إليها علنًا.
+這份支援的檔案類型和限制清單僅為初步指引，並未涵蓋所有項目。支援的有效型別組合可能會變更，且會因使用的特定模型和權杖化工具版本而異。如果類型不受支援，系統會顯示錯誤訊息。此外，目前僅支援可公開存取的網址，才能擷取這些檔案類型的內容。
 
-#### أنواع الملفات النصية
+#### 文字檔案類型
 
 - `text/html`
 - `text/css`
@@ -633,19 +614,19 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 - `text/rtf`
 - `text/javascript`
 
-#### أنواع ملفات التطبيقات
+#### 應用程式檔案類型
 
 - `application/json`
 - `application/pdf`
 
-#### أنواع ملفات الصور
+#### 圖片檔案類型
 
 - `image/bmp`
 - `image/jpeg`
 - `image/png`
 - `image/webp`
 
-#### أنواع ملفات الفيديو
+#### 影片檔案類型
 
 - `video/mp4`
 - `video/mpeg`
@@ -657,41 +638,35 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 - `video/wmv`
 - `video/3gpp`
 
-## أفضل الممارسات
+## 最佳做法
 
-- **اختيار الطريقة المناسبة:** استخدِم البيانات المضمّنة للملفات الصغيرة والمؤقتة.
-  استخدِم File API للملفات الأكبر حجمًا أو الملفات المستخدَمة بشكل متكرر. استخدِم عناوين URL الخارجية للبيانات المستضافة حاليًا على الإنترنت.
-- **تحديد أنواع MIME:** قدِّم دائمًا نوع MIME الصحيح لبيانات الملف لضمان معالجتها بشكل سليم.
-- **معالجة الأخطاء:** نفِّذ عملية معالجة الأخطاء في الرمز لإدارة المشاكل المحتمَلة، مثل الأعطال في الشبكة أو مشاكل الوصول إلى الملفات أو أخطاء واجهة برمجة التطبيقات.
-- **إدارة أذونات Google Cloud Storage:** عند استخدام تسجيل Google Cloud Storage، امنح وكيل خدمة Gemini API دور `Storage Object Viewer` اللازم فقط على الحِزم المحدّدة.
-- **أمان عناوين URL الموقَّعة:** تأكَّد من أنّ عناوين URL الموقَّعة لها وقت انتهاء صلاحية مناسب وأذونات محدودة.
+- **選擇合適的方法：**針對小型暫時性檔案使用內嵌資料。如要處理較大或經常使用的檔案，請使用 File API。使用外部網址，
+  取得已在線上代管的資料。
+- **指定 MIME 類型：**請務必為檔案資料提供正確的 MIME 類型，確保系統能正確處理。
+- **處理錯誤：**在程式碼中實作錯誤處理機制，管理網路連線失敗、檔案存取問題或 API 錯誤等潛在問題。
+- **管理 GCS 權限：**使用 GCS 註冊時，請只在特定值區中授予 Gemini API 服務代理必要的 `Storage Object Viewer` 角色。
+- **經簽署的網址安全性：**請確保經簽署的網址的到期時間適當，且權限有限。
 
-## القيود
+## 限制
 
-- تختلف الحدود القصوى لحجم الملف حسب الطريقة (راجِع [جدول المقارنة](#method-comparison))
-  ونوع الملف.
-- تزيد البيانات المضمّنة من حجم بيانات الطلب.
-- تكون عمليات تحميل الملفات باستخدام File API مؤقتة وتنتهي صلاحيتها بعد 48 ساعة.
-- يقتصر استرجاع عناوين URL الخارجية على 100 ميغابايت لكل بيانات ويدعم أنواع محتوى محدّدة.
-- يتطلّب تسجيل Google Cloud Storage إعداد IAM بشكل سليم وإدارة رموز OAuth المميزة.
+- 檔案大小上限會因方法 (請參閱[比較表](#method-comparison)) 和檔案類型而異。
+- 內嵌資料會增加要求酬載大小。
+- File API 上傳的檔案為暫時性質，會在 48 小時後失效。
+- 每個酬載的外部網址擷取上限為 100 MB，且支援特定內容類型。
+- 如要註冊 Google Cloud Storage，必須正確設定 IAM 和 OAuth 權杖管理。
 
-## الخطوات التالية
+## 後續步驟
 
-- جرِّب كتابة طلبات متعددة الوسائط خاصة بك باستخدام
-  [Google AI Studio](http://aistudio.google.com/?hl=ar).
-- للحصول على معلومات حول تضمين الملفات في طلباتك، راجِع أدلة معالجة
-  [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=ar)، و
-  [الصوت](https://ai.google.dev/gemini-api/docs/audio?hl=ar)، و
-  [المستندات](https://ai.google.dev/gemini-api/docs/document-processing?hl=ar).
-- لمزيد من الإرشادات حول تصميم الطلبات، مثل ضبط مَعلمات أخذ العيّنات، راجِع الـ
-  [دليل استراتيجيات الطلبات](https://ai.google.dev/gemini-api/docs/prompt-strategies?hl=ar).
+- 使用 [Google AI Studio](http://aistudio.google.com/?hl=zh-tw) 撰寫自己的多模態提示。
+- 如要瞭解如何在提示中加入檔案，請參閱「[Vision](https://ai.google.dev/gemini-api/docs/vision?hl=zh-tw)」、「[Audio](https://ai.google.dev/gemini-api/docs/audio?hl=zh-tw)」和「[Document processing](https://ai.google.dev/gemini-api/docs/document-processing?hl=zh-tw)」指南。
+- 如要進一步瞭解如何設計提示 (例如微調取樣參數)，請參閱「[提示策略](https://ai.google.dev/gemini-api/docs/prompt-strategies?hl=zh-tw)」指南。
 
-إرسال ملاحظات
+提供意見
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-تاريخ التعديل الأخير: 2026-05-13 (حسب التوقيت العالمي المتفَّق عليه)
+上次更新時間：2026-05-19 (世界標準時間)。
 
-هل تريد مشاركة ملاحظاتك معنا؟
+想進一步說明嗎？
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-13 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-19 (世界標準時間)。"],[],[]]

@@ -1,40 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/files?hl=vi
-fetched_at: 2026-05-18T05:04:48.275064+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/files?hl=ar
+fetched_at: 2026-05-25T05:22:56.539171+00:00
 title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
 # Files API
 
-Gemini có thể xử lý nhiều loại dữ liệu đầu vào, bao gồm cả văn bản, hình ảnh và âm thanh cùng một lúc.
+يمكن لنموذج Gemini التعامل مع أنواع مختلفة من بيانات الإدخال، بما في ذلك النصوص والصور والمقاطع الصوتية، في الوقت نفسه.
 
-Hướng dẫn này trình bày cách xử lý các tệp nội dung nghe nhìn bằng Files API. Các thao tác cơ bản đều giống nhau đối với tệp âm thanh, hình ảnh, video, tài liệu và các loại tệp được hỗ trợ khác.
+يوضّح لك هذا الدليل كيفية التعامل مع ملفات الوسائط باستخدام Files API. تكون العمليات الأساسية هي نفسها بالنسبة إلى الملفات الصوتية والصور والفيديوهات والمستندات وأنواع الملفات الأخرى المتوافقة.
 
-Để biết hướng dẫn về câu lệnh cho tệp, hãy xem phần [Hướng dẫn về câu lệnh cho tệp](https://ai.google.dev/gemini-api/docs/interactions/files?hl=vi#prompt-guide).
+للحصول على إرشادات بشأن كتابة طلبات الملفات، يُرجى الاطّلاع على قسم [دليل كتابة طلبات الملفات](https://ai.google.dev/gemini-api/docs/interactions/files?hl=ar#prompt-guide).
 
-## Tải tệp lên
+## تحميل ملف
 
-Bạn có thể dùng Files API để tải một tệp đa phương tiện lên. Luôn sử dụng Files API khi tổng kích thước yêu cầu (bao gồm cả tệp, câu lệnh văn bản, hướng dẫn hệ thống, v.v.) lớn hơn 100 MB. Đối với tệp PDF, giới hạn là 50 MB.
+يمكنك استخدام Files API لتحميل ملف وسائط. استخدِم دائمًا Files API عندما يتجاوز إجمالي حجم الطلب (بما في ذلك الملفات والنص المطلوب وتعليمات النظام وما إلى ذلك) 100 ميغابايت. بالنسبة إلى ملفات PDF، يبلغ الحدّ الأقصى 50 ميغابايت.
 
-Đoạn mã sau đây tải một tệp lên, sau đó dùng tệp đó trong một lệnh gọi đến `interactions.create`.
+يحمّل الرمز التالي ملفًا ثم يستخدمه في طلب إلى `interactions.create`.
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 
 client = genai.Client()
@@ -42,25 +41,19 @@ client = genai.Client()
 myfile = client.files.upload(file="path/to/sample.mp3")
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input=[
         {"type": "text", "text": "Describe this audio clip"},
         {"type": "audio", "uri": myfile.uri, "mime_type": myfile.mime_type}
     ]
 )
 
-# Print the model's text response
-for step in interaction.steps:
-    if step.type == "model_output":
-        for content_block in step.content:
-            if content_block.type == "text":
-                print(content_block.text)
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
 const client = new GoogleGenAI({});
@@ -72,18 +65,13 @@ async function main() {
   });
 
   const interaction = await client.interactions.create({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     input: [
       { type: "text", text: "Describe this audio clip" },
       { type: "audio", uri: myfile.uri, mime_type: myfile.mimeType }
     ]
   });
-  const modelStep = interaction.steps.find(s => s.type === 'model_output');
-  if (modelStep) {
-    for (const contentBlock of modelStep.content) {
-      if (contentBlock.type === 'text') console.log(contentBlock.text);
-    }
-  }
+  console.log(interaction.output_text);
 }
 
 await main();
@@ -98,7 +86,7 @@ if err != nil {
 }
 defer client.Files.Delete(ctx, file.Name)
 
-interaction, err := client.Interactions.Create(ctx, "gemini-3-flash-preview", &genai.InteractionRequest{
+interaction, err := client.Interactions.Create(ctx, "gemini-3.5-flash", &genai.InteractionRequest{
     Input: []interface{}{
         genai.NewPartFromFile(*file),
         genai.NewPartFromText("Describe this audio clip"),
@@ -157,13 +145,12 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 
 # Now create an interaction using the Interactions API
-# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -H "Api-Revision: 2026-05-20" \
     -d '{
-      "model": "gemini-3-flash-preview",
+      "model": "gemini-3.5-flash",
       "input": [
         {"type": "text", "text": "Describe this audio clip"},
         {"type": "audio", "uri": '$file_uri', "mime_type": "'${MIME_TYPE}'"}
@@ -176,14 +163,13 @@ echo
 jq ".outputs[] | select(.type == \"text\") | .text" response.json
 ```
 
-## Lấy siêu dữ liệu cho một tệp
+## الحصول على البيانات الوصفية لملف
 
-Bạn có thể xác minh rằng API đã lưu trữ thành công tệp được tải lên và lấy siêu dữ liệu của tệp đó bằng cách gọi `files.get`.
+يمكنك التأكّد من أنّ واجهة برمجة التطبيقات خزّنت الملف الذي تم تحميله بنجاح والحصول على بياناته الوصفية من خلال طلب `files.get`.
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 
 client = genai.Client()
@@ -197,7 +183,6 @@ print(myfile)
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import {
   GoogleGenAI,
 } from "@google/genai";
@@ -248,14 +233,13 @@ file_uri=$(jq -r ".uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## Liệt kê các tệp đã tải lên
+## عرض الملفات المحمَّلة
 
-Đoạn mã sau đây lấy danh sách tất cả các tệp đã tải lên:
+يحصل الرمز التالي على قائمة بجميع الملفات التي تم تحميلها:
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 
 client = genai.Client()
@@ -268,7 +252,6 @@ for f in client.files.list():
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import {
   GoogleGenAI,
 } from "@google/genai";
@@ -305,14 +288,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/files" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Xoá tệp đã tải lên
+## حذف الملفات التي تم تحميلها
 
-Các tệp sẽ tự động bị xoá sau 48 giờ. Bạn cũng có thể xoá tệp đã tải lên theo cách thủ công:
+يتم حذف الملفات تلقائيًا بعد 48 ساعة. يمكنك أيضًا حذف ملف تم تحميله يدويًا باتّباع الخطوات التالية:
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 
 client = genai.Client()
@@ -324,7 +306,6 @@ client.files.delete(name=myfile.name)
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import {
   GoogleGenAI,
 } from "@google/genai";
@@ -361,191 +342,198 @@ curl --request "DELETE" https://generativelanguage.googleapis.com/v1beta/$name \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Thông tin về việc sử dụng
+## معلومات الاستخدام
 
-Bạn có thể dùng Files API để tải lên và tương tác với các tệp đa phương tiện. Files API cho phép bạn lưu trữ tối đa 20 GB tệp cho mỗi dự án, với kích thước tối đa cho mỗi tệp là 2 GB. Các tệp được lưu trữ trong 48 giờ. Trong thời gian đó, bạn có thể dùng API để lấy siêu dữ liệu về các tệp, nhưng không thể tải các tệp xuống.
-Files API được cung cấp miễn phí ở mọi khu vực có Gemini API.
+يمكنك استخدام Files API لتحميل ملفات الوسائط والتفاعل معها. تتيح لك Files API تخزين ما يصل إلى 20 غيغابايت من الملفات لكل مشروع، مع حد أقصى لحجم الملف الواحد يبلغ 2 غيغابايت. يتم تخزين الملفات لمدة 48 ساعة. خلال هذه الفترة، يمكنك استخدام واجهة برمجة التطبيقات للحصول على البيانات الوصفية الخاصة بالملفات، ولكن لا يمكنك تنزيل الملفات.
+تتوفّر واجهة Files API مجانًا في جميع المناطق التي تتوفّر فيها واجهة Gemini API.
 
-## Chiến lược nhắc nhở về tệp
+## استراتيجيات طلب الملفات
 
-Phần này cung cấp hướng dẫn và các phương pháp hay nhất để sử dụng tệp đa phương tiện với câu lệnh cho Gemini API.
+يقدّم هذا القسم إرشادات وأفضل الممارسات لاستخدام ملفات الوسائط مع الطلبات في Gemini API.
 
-Việc có thể sử dụng nhiều loại dữ liệu trong câu lệnh giúp bạn linh hoạt hơn về những nhiệm vụ có thể giải quyết bằng Gemini API. Ví dụ: bạn có thể gửi cho mô hình một bức ảnh về một bữa ăn ngon và yêu cầu mô hình viết một bài đăng ngắn trên blog về bữa ăn đó.
+يتيح لك استخدام أنواع مختلفة من البيانات في طلباتك مرونة أكبر في ما يتعلق بالمهام التي يمكنك إنجازها باستخدام Gemini API. على سبيل المثال، يمكنك إرسال صورة وجبة لذيذة إلى النموذج وطلب كتابة مدوّنة قصيرة عنها.
 
 |  |  |
 | --- | --- |
-| **Câu lệnh** | **Đáp** |
-| Viết một bài đăng ngắn gọn và hấp dẫn trên blog dựa trên bức ảnh này. Nội dung này phải có phần mô tả về bữa ăn trong ảnh và nói về hành trình chuẩn bị bữa ăn của tôi.   Bánh quy | Chuẩn bị sẵn bữa ăn là một cách hiệu quả để tiết kiệm thời gian và tiền bạc, đồng thời giúp bạn ăn uống lành mạnh hơn. Bữa ăn này là một ví dụ điển hình về bữa ăn lành mạnh và ngon miệng mà bạn có thể chuẩn bị trước.  Bữa ăn này có cơm gạo lứt, rau củ nướng và gà sốt teriyaki. Gạo lứt là một loại carbohydrate phức tạp và lành mạnh, giúp bạn có năng lượng bền bỉ. Rau củ nướng là một cách tuyệt vời để bổ sung vitamin và khoáng chất hằng ngày, còn gà teriyaki là một lựa chọn ngon miệng và giàu protein.  Món ăn này cũng rất dễ chế biến. Bạn chỉ cần nấu gạo lứt, nướng rau và nấu món gà sốt teriyaki. Sau khi nấu xong, hãy chia thức ăn vào các hộp đựng và bảo quản trong tủ lạnh. Sau đó, bạn có thể lấy hộp đựng và đi làm vào những buổi sáng bận rộn!  Nếu bạn đang tìm một bữa ăn lành mạnh và ngon miệng có thể chuẩn bị trước, thì đây là một lựa chọn tuyệt vời. Món ăn này giàu dinh dưỡng và hương vị, chắc chắn sẽ giúp bạn cảm thấy no và hài lòng.  Chúc bạn chuẩn bị được những bữa ăn lành mạnh và ngon miệng! |
+| **الطلب** | **الردّ** |
+| اكتب منشور مدوّنة قصيرًا وجذّابًا استنادًا إلى هذه الصورة. يجب أن يتضمّن وصفًا للوجبة في الصورة وأن يتحدث عن رحلتي في إعداد الوجبات مسبقًا.   بسكويت | يُعدّ تحضير الوجبات مسبقًا طريقة رائعة لتوفير الوقت والمال، ويمكن أن يساعدك أيضًا في تناول طعام صحي. هذه الوجبة هي مثال رائع على وجبة صحية ولذيذة يمكن تحضيرها مسبقًا.  تتضمّن هذه الوجبة أرزًا أسمر وخضروات مشوية ودجاج ترياكي. الأرز الأسمر هو كربوهيدرات صحية ومعقدة تمنحك الطاقة المستدامة. تُعدّ الخضروات المشوية طريقة رائعة للحصول على الجرعة اليومية من الفيتامينات والمعادن، كما أنّ دجاج الترياكي خيار لذيذ وغني بالبروتين.  هذه الوجبة سهلة التحضير أيضًا. ما عليك سوى طهي الأرز الأسمر وشوي الخضراوات وطهي الدجاج بصلصة الترياكي. بعد الانتهاء من الطهي، قسِّم الطعام إلى عبوات مخصّصة لتجهيز الوجبات وخزِّنها في الثلاجة. يمكنك بعد ذلك أخذ وعاء والانطلاق في الصباحات المزدحمة.  إذا كنت تبحث عن وجبة صحية ولذيذة يمكن تحضيرها مسبقًا، فهذه الوجبة هي الخيار الأمثل. فهي غنية بالعناصر الغذائية والمذاق الرائع، وستمنحك بالتأكيد شعورًا بالشبع والرضا.  نتمنّى لك وجبات صحية ولذيذة! |
 
-Nếu bạn gặp khó khăn khi nhận được kết quả mong muốn từ những câu lệnh sử dụng tệp đa phương tiện, thì có một số chiến lược có thể giúp bạn đạt được kết quả mong muốn. Các phần sau đây cung cấp các phương pháp thiết kế và mẹo khắc phục sự cố để cải thiện những câu lệnh sử dụng dữ liệu đầu vào đa phương thức.
+إذا كنت تواجه مشكلة في الحصول على النتائج المطلوبة من الطلبات التي تستخدم ملفات وسائط، إليك بعض الاستراتيجيات التي يمكن أن تساعدك في الحصول على النتائج التي تريدها. تقدّم الأقسام التالية طرقًا لتصميم الطلبات ونصائح لتحديد المشاكل وحلّها بهدف تحسين الطلبات التي تستخدم الإدخال المتعدّد الوسائط.
 
-Bạn có thể cải thiện câu lệnh đa phương thức bằng cách làm theo các phương pháp hay nhất sau:
+يمكنك تحسين طلباتك المتعدّدة الوسائط باتّباع أفضل الممارسات التالية:
 
-- ### [Kiến thức cơ bản về thiết kế câu lệnh](#specific-instructions)
+- ### [أساسيات تصميم الطلبات](#specific-instructions)
 
-  - **Đưa ra chỉ dẫn cụ thể**: Soạn thảo chỉ dẫn rõ ràng và ngắn gọn để giảm thiểu khả năng hiểu sai.
-  - **Thêm một vài ví dụ vào câu lệnh:** Sử dụng một vài ví dụ thực tế để minh hoạ những gì bạn muốn đạt được.
-  - **Chia nhỏ từng bước**: Chia các việc phức tạp thành những mục tiêu phụ dễ quản lý, hướng dẫn mô hình thực hiện quy trình.
-  - **Chỉ định định dạng đầu ra**: Trong câu lệnh, hãy yêu cầu đầu ra ở định dạng bạn muốn, chẳng hạn như Markdown, JSON, HTML, v.v.
-  - **Đặt hình ảnh lên trước đối với câu lệnh có một hình ảnh**: Mặc dù Gemini có thể xử lý dữ liệu đầu vào là hình ảnh và văn bản theo bất kỳ thứ tự nào, nhưng đối với câu lệnh có một hình ảnh, Gemini có thể hoạt động hiệu quả hơn nếu hình ảnh (hoặc video) đó được đặt trước câu lệnh bằng văn bản. Tuy nhiên, đối với những câu lệnh yêu cầu hình ảnh phải được xen kẽ nhiều với văn bản để có ý nghĩa, hãy sử dụng bất kỳ thứ tự nào tự nhiên nhất.
-- ### [Khắc phục sự cố về câu lệnh đa phương thức](#troubleshooting)
+  - **كن دقيقًا في تعليماتك**: صِغ تعليمات واضحة وموجزة لا تترك مجالاً كبيرًا لسوء الفهم.
+  - **إضافة بعض الأمثلة إلى طلبك:** استخدِم أمثلة واقعية قليلة اللقطات لتوضيح ما تريد تحقيقه.
+  - **التقسيم إلى خطوات**: قسِّم المهام المعقّدة إلى أهداف فرعية يسهل تنفيذها، ما يساعد النموذج في إكمال العملية.
+  - **تحديد تنسيق الإخراج**: في طلبك، اطلب أن يكون الإخراج بالتنسيق الذي تريده، مثل Markdown وJSON وHTML وغير ذلك.
+  - **وضع صورتك أولاً في الطلبات التي تتضمّن صورة واحدة**: على الرغم من أنّ Gemini يمكنه التعامل مع مدخلات الصور والنصوص بأي ترتيب، قد يكون أداؤه أفضل في الطلبات التي تتضمّن صورة واحدة إذا تم وضع هذه الصورة (أو الفيديو) قبل طلب النص. ومع ذلك، بالنسبة إلى الطلبات التي تتطلّب أن تكون الصور متداخلة بشكل كبير مع النصوص لكي تكون مفهومة، استخدِم الترتيب الأكثر طبيعية.
+- ### [تحديد المشاكل في الطلب المتعدّد الوسائط وحلّها](#troubleshooting)
 
-  - **Nếu mô hình không lấy thông tin từ phần có liên quan của hình ảnh:** Đưa ra gợi ý về những khía cạnh của hình ảnh mà bạn muốn câu lệnh lấy thông tin.
-  - **Nếu đầu ra của mô hình quá chung chung (không đủ phù hợp với đầu vào là hình ảnh/video):** Khi bắt đầu câu lệnh, hãy thử yêu cầu mô hình mô tả(các) hình ảnh hoặc video trước khi đưa ra hướng dẫn về nhiệm vụ, hoặc thử yêu cầu mô hình tham khảo nội dung trong hình ảnh.
-  - **Cách khắc phục sự cố về phần bị lỗi:** Yêu cầu mô hình mô tả hình ảnh hoặc giải thích suy luận của mô hình để đánh giá mức độ hiểu biết ban đầu của mô hình.
-  - **Nếu câu lệnh của bạn tạo ra nội dung ảo:** Hãy thử giảm chế độ cài đặt nhiệt độ hoặc yêu cầu mô hình đưa ra nội dung mô tả ngắn hơn để giảm khả năng mô hình ngoại suy thêm thông tin chi tiết.
-  - **Điều chỉnh các tham số lấy mẫu:** Thử nghiệm với các chế độ cài đặt nhiệt độ và lựa chọn top-k khác nhau để điều chỉnh khả năng sáng tạo của mô hình.
+  - **إذا كان النموذج لا يستخلص المعلومات من الجزء ذي الصلة في الصورة:** أضِف تلميحات حول الجوانب التي تريد أن يستخلص الطلب المعلومات منها.
+  - **إذا كانت مخرجات النموذج عامة جدًا (غير مخصّصة بشكل كافٍ للصورة أو الفيديو المُدخَل):** في بداية الطلب، جرِّب أن تطلب من النموذج وصف الصور أو الفيديو قبل تقديم تعليمات المهمة، أو جرِّب أن تطلب من النموذج الإشارة إلى ما يظهر في الصورة.
+  - **لتحديد المشاكل وحلّها في الجزء الذي تعذّر تنفيذه:** اطلب من النموذج وصف الصورة أو شرح أسباب تعذُّر التنفيذ، وذلك لتقييم فهم النموذج الأوّلي.
+  - **إذا أدّى طلبك إلى إنشاء محتوى من نسج الخيال:** جرِّب خفض درجة العشوائية أو اطلب من النموذج تقديم أوصاف أقصر لتقليل احتمالية استقراء تفاصيل إضافية.
+  - **ضبط مَعلَمات اختيار العيّنات:** جرِّب إعدادات مختلفة لدرجة العشوائية وخيارات top-k لضبط مستوى إبداع النموذج.
 
-### Đưa ra hướng dẫn cụ thể
+### كن محدّدًا في تعليماتك
 
-Câu lệnh sẽ hiệu quả nhất khi rõ ràng và chi tiết. Nếu bạn có một kết quả cụ thể trong đầu, thì tốt hơn là bạn nên đưa yêu cầu đó vào câu lệnh để đảm bảo bạn nhận được kết quả mình muốn.
+تكون الطلبات أكثر فعاليةً عندما تكون واضحة ومفصّلة. إذا كان لديك ناتج محدّد في ذهنك، من الأفضل تضمين هذا الشرط في الطلب لضمان الحصول على الناتج المطلوب.
 
-Đối với hình ảnh này về một bảng thông tin tại sân bay, nếu bạn chỉ yêu cầu mô hình "mô tả hình ảnh này", thì mô hình có thể tạo ra một nội dung mô tả chung. Nếu cần mô hình phân tích cú pháp thời gian và thành phố từ hình ảnh, bạn có thể đưa yêu cầu đó trực tiếp vào câu lệnh.
+بالنسبة إلى هذه الصورة التي تعرض لوحة إعلانات في المطار، قد يؤدي الطلب من النموذج "وصف هذه الصورة" إلى إنشاء وصف عام. إذا كنت بحاجة إلى أن يحلّل النموذج الوقت والمدينة من الصورة، يمكنك تضمين هذا الطلب مباشرةً في طلبك.
 
-| Câu lệnh | Câu trả lời của mô hình |
+| الطلب | ردّ النموذج |
 | --- | --- |
-| Mô tả hình ảnh này. | Hình ảnh cho thấy bảng thông tin chuyến bay hạ cánh và khởi hành tại sân bay. |
+| صِف هذه الصورة. | تعرض الصورة لوحة مواعيد الوصول والمغادرة في المطار. |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **طلب معدَّل** | **ردود محسّنة** |
 | --- | --- |
-| Lịch trình du lịch Phân tích thời gian và thành phố từ bảng thông tin sân bay xuất hiện trong hình ảnh này thành một danh sách. | - 10:50 Moscow - 11:05 Edinburgh - 11:05 London - 11:10 Bucharest - 11:30 Kiev - 11:35 Dublin - 11:45 Đông Midlands - 12:15 Sofia - 12:30 London - 12:30 Newcastle - 12:40 St Petersburg - 12:40 London - 12:45 Manchester |
+| جدول مواعيد السفر حوِّل الوقت والمدينة من لوحة المطار الظاهرة في هذه الصورة إلى قائمة. | - ‫10:50 بتوقيت موسكو - ‫11:05 إدنبرة - ‫11:05 لندن - ‫11:10 بوخارست - ‫11:30 صباحًا بتوقيت كييف - ‫11:35 دبلن - ‫11:45 شرق ميدلاندز - ‫12:15 صوفيا - ‫12:30 لندن - ‫12:30 نيوكاسل - ‫12:40 سانت بطرسبرغ - ‫12:40 لندن - ‫12:45 مانشستر |
 
-### Thêm một vài ví dụ
+### إضافة بعض الأمثلة
 
-Mô hình Gemini có thể chấp nhận nhiều dữ liệu đầu vào mà mô hình này có thể dùng làm ví dụ để hiểu được kết quả bạn muốn. Việc thêm những ví dụ này có thể giúp mô hình xác định các mẫu và áp dụng mối quan hệ giữa hình ảnh và câu trả lời đã cho vào ví dụ mới. Đây cũng được gọi là học từ một vài dữ liệu.
+يمكن لنموذج Gemini قبول إدخالات متعددة يمكنه استخدامها كأمثلة لفهم الناتج الذي تريده. يمكن أن تساعد إضافة هذه الأمثلة النموذج في تحديد الأنماط وتطبيق العلاقة بين الصور والردود المقدَّمة على المثال الجديد. يُعرف ذلك أيضًا باسم التعلّم ببضع فُرَص.
 
-Trong ví dụ sau, kết quả ban đầu được viết dưới dạng câu và cũng chứa quốc gia (Brazil). Giả sử bạn muốn đầu ra ở một định dạng hoặc kiểu khác và bạn chỉ muốn thành phố chứ không phải quốc gia. Việc thêm một vài ví dụ vào câu lệnh có thể hướng dẫn mô hình phản hồi theo cách bạn muốn.
+في المثال التالي، تمت كتابة الناتج الأولي في شكل جملة،
+ويحتوي أيضًا على البلد (البرازيل). لنفترض أنّك تريد الناتج بتنسيق أو نمط مختلفين، وأنّك تريد عرض المدينة فقط، وليس البلد. يمكن أن تؤدي إضافة أمثلة قليلة إلى طلبك إلى توجيه النموذج للرد بالطريقة التي تريدها.
 
-| **Câu lệnh** | **Phản hồi của mô hình** |
+| **الطلب** | **ردّ النموذج** |
 | --- | --- |
-| Lịch trình du lịch Xác định thành phố cùng với địa danh. | Địa danh này là tượng Chúa Kitô Cứu thế ở Rio de Janeiro, Brazil. |
+| جدول مواعيد السفر حدِّد المدينة والمعلم. | المعلم البارز هو تمثال "المسيح الفادي" في ريو دي جانيرو، البرازيل. |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **طلب معدَّل** | **ردود محسّنة** |
 | --- | --- |
-| Xác định thành phố cùng với địa danh. đấu trường La Mã | thành phố: Rome, địa danh: Đấu trường La Mã. |
-| Tử Cấm Thành | thành phố: Bắc Kinh, địa danh: Tử Cấm Thành |
-| tử cấm thành | thành phố: Rio de Janeiro, địa danh: Tượng Chúa Kitô Cứu thế |
+| حدِّد المدينة والمعلم. كولوسيوم | المدينة: روما، المعلم: الكولوسيوم |
+| المدينة المحرمة | المدينة: بكين، المعلم: المدينة المحرّمة |
+| forbidden-city | مدينة: ريو دي جانيرو، معلم: تمثال المسيح الفادي |
 
-### Chia nhỏ thành từng bước
+### التقسيم إلى خطوات
 
-Đối với những tác vụ phức tạp như những tác vụ đòi hỏi cả khả năng hiểu biết bằng hình ảnh và khả năng suy luận, bạn nên chia tác vụ thành các bước nhỏ hơn và đơn giản hơn. Ngoài ra, bạn cũng có thể yêu cầu trực tiếp mô hình "suy nghĩ từng bước" trong câu lệnh của mình để đạt được hiệu quả.
+بالنسبة إلى المهام المعقّدة، مثل تلك التي تتطلّب فهمًا بصريًا واستدلالاً، قد يكون من المفيد تقسيم المهمة إلى خطوات أصغر وأكثر وضوحًا. بدلاً من ذلك، قد يكون من المفيد أيضًا أن تطلب من النموذج مباشرةً "التفكير خطوة بخطوة" في طلبك.
 
-| Câu lệnh | Câu trả lời của mô hình |
+| الطلب | ردّ النموذج |
 | --- | --- |
-| Khi nào thì tôi sẽ hết giấy vệ sinh? | Bạn chỉ còn 3 lượt quay. |
+| متى سينتهي ورق المرحاض؟ | سيتبقى لديك قريبًا 3 لفات فقط. |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **طلب معدَّل** | **ردود محسّنة** |
 | --- | --- |
-| 1. Trước tiên, hãy đếm xem có bao nhiêu cuộn giấy vệ sinh trong bức ảnh này. 2. Sau đó, hãy xác định lượng giấy vệ sinh mà một người thường dùng mỗi ngày. 3. Tính toán thời gian sử dụng hết số giấy vệ sinh này. | 1. Có 3 cuộn giấy vệ sinh trong bức ảnh này. 2. Một người thường dùng khoảng 20 tờ giấy vệ sinh mỗi ngày. 3. Nếu mỗi cuộn có 200 tờ, thì mỗi cuộn sẽ dùng được khoảng 10 ngày. Do đó, 3 cuộn giấy sẽ dùng được khoảng một tháng. |
+| 1. أولاً، احسب عدد لفات ورق المرحاض في هذه الصورة. 2. بعد ذلك، حدِّد كمية ورق المرحاض التي يستخدمها الشخص العادي يوميًا. 3. احسب المدة التي ستكفيك فيها لفات ورق المرحاض هذه. | 1. في هذه الصورة، هناك 3 لفات من ورق المرحاض. 2. يستخدم الشخص العادي حوالي 20 ورقة من ورق التواليت يوميًا. 3. إذا كانت كل لفة تحتوي على 200 ورقة، ستدوم كل لفة لمدة 10 أيام تقريبًا. لذلك، ستدوم اللفات الثلاث لمدة شهر تقريبًا. |
 
-Các bài toán hoặc những loại bài toán có lời văn khác là những lựa chọn phù hợp để yêu cầu mô hình suy nghĩ từng bước.
+تُعدّ المسائل الرياضية أو الأنواع الأخرى من المسائل الكلامية خيارًا رائعًا لطلب
+من النموذج التفكير خطوة بخطوة.
 
-| **Câu lệnh** | **Đáp** |
+| **الطلب** | **الردّ** |
 | --- | --- |
-| Số hạng thứ 4 trong dãy số này là bao nhiêu? | -135 |
+| ما هو الحد الرابع في المتسلسلة؟ | -135 |
 
-Câu trả lời của mô hình không chính xác. Một số cách để cải thiện vấn đề này là yêu cầu mô hình phân tích vấn đề trước khi trả lời câu lệnh.
+الردّ الذي قدّمه النموذج غير صحيح. يمكنك تحسين ذلك من خلال الطلب من النموذج تحليل المشكلة قبل الإجابة عن الطلب.
 
-| **Câu lệnh** | **Đáp** |
+| **الطلب** | **الردّ** |
 | --- | --- |
-| Trước tiên, hãy phân tích cú pháp công thức trong hình ảnh.  Sau đó, dựa vào công thức, hãy trả lời câu hỏi "số hạng thứ 4 trong dãy số là gì?". | *Nhấp để mở rộng kết quả* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. Thay n = 4 vào công thức: $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. Chúng ta không biết giá trị của b(3), vì vậy hãy thay n = 3 vào công thức: $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. Chúng ta không biết giá trị của b(2, nên hãy thay n = 2 vào công thức: $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. Chúng ta biết giá trị của b(1) là 15, vì vậy hãy thay thế giá trị này vào công thức: $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. Giờ đây, khi đã biết giá trị của b(2), hãy thay thế giá trị đó vào công thức cho b(3): $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. Giờ đây, khi đã biết giá trị của b(3), hãy thay thế giá trị đó vào công thức cho b(4): $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   Do đó, số hạng thứ 4 trong dãy số là -405. |
+| عليك أولاً تحليل الصيغة في الصورة.  بعد ذلك، استنادًا إلى الصيغة، أجب عن السؤال "ما هو الحد الرابع في المتسلسلة؟". | *انقر لتوسيع النتيجة* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. استبدِل قيمة n بـ 4 في الصيغة: $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. لا نعرف قيمة b(3)، لذا نعوّض عن n = 3 في الصيغة: $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. لا نعرف قيمة b(2)، لذا نعوّض عن n بالقيمة 2 في الصيغة: $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. نعرف أنّ قيمة b(1) هي 15، لذا نعوّض بها في الصيغة: $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. بعد أن عرفنا قيمة b(2)، نعوّض بها في صيغة b(3): $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. بعد أن عرفنا قيمة b(3)، نعوّض بها في صيغة b(4): $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   وبالتالي، يكون الحد الرابع في المتسلسلة هو -405. |
 
-Câu trả lời của mô hình này là chính xác. Giờ đây, để câu trả lời trở nên tinh gọn hơn nữa, bạn có thể yêu cầu mô hình suy nghĩ từng bước.
+ردّ النموذج هذا صحيح، ولكن لجعل الردّ أكثر سلاسة، يمكنك أن تطلب من النموذج التفكير خطوة بخطوة.
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **طلب معدَّل** | **ردود محسّنة** |
 | --- | --- |
-| Số hạng thứ 4 trong dãy số là bao nhiêu? Hãy suy nghĩ từng bước. | Số hạng đầu tiên là 15.  Số hạng thứ hai là b(1) \* (-3) = 15 \* (-3) = -45.  Số hạng thứ ba là b(2) \* (-3) = -45 \* (-3) = 135.  Số hạng thứ tư là b(3) \* (-3) = 135 \* (-3) = -405. |
+| ما هو الحد الرابع في المتسلسلة؟ فكِّر خطوة بخطوة. | الحدّ الأول هو 15.  الحد الثاني هو b(1) \* (-3) = 15 \* (-3) = -45.  الحد الثالث هو b(2) \* (-3) = -45 \* (-3) = 135.  الحد الرابع هو b(3) \* (-3) = 135 \* (-3) = -405. |
 
-### Chỉ định định dạng đầu ra
+### تحديد تنسيق الإخراج
 
-Một vấn đề thường gặp là nhu cầu về đầu ra của mô hình ở một định dạng nhất định (ví dụ: Markdown, JSON, HTML), đặc biệt nếu đầu ra của mô hình cần được một tác vụ hạ nguồn tiếp nhận. Bạn có thể thử tạo đầu ra ở định dạng đó bằng cách hướng dẫn mô hình thực hiện trong câu lệnh. Sau đây là hai ví dụ:
+من المشاكل الشائعة الحاجة إلى أن تكون مخرجات النموذج بتنسيق معيّن (مثل Markdown أو JSON أو HTML)، خاصةً إذا كانت مخرجات النموذج بحاجة إلى أن يتم استيعابها من خلال مهمة لاحقة. يمكنك محاولة إنتاج مخرجات بهذا التنسيق
+من خلال توجيه النموذج إلى ذلك ضمن الطلب. في ما يلي مثالان:
 
-| Câu lệnh | Câu trả lời của mô hình |
+| الطلب | ردّ النموذج |
 | --- | --- |
-| Phân tích bảng trong hình ảnh này thành định dạng Markdown | ```none | Môn học | Trạng thái | Thời gian | Ngày bắt đầu | Đến hạn | | ------- | ------ | ---- | ---------- | ------ | | Toán | Đã hoàn thành | 1,5 giờ | 29/11/2023 | 1/12/2023 | | Địa lý | Đã hoàn thành | 30 phút | 2/12/2023 | 4/12/2023 | | Vật lý | Đang thực hiện | 2 giờ | 3/12/2023 | 5/12/2023 | | Sinh học | Chưa bắt đầu | 6 giờ | 2/11/2016 | 6/12/2023 | ``` |
+| تحليل الجدول في هذه الصورة إلى تنسيق Markdown | ```none | الموضوع | الحالة | الوقت | تاريخ البدء | تاريخ الاستحقاق | | ------- | ------ | ---- | ---------- | ------ | | الرياضيات | مكتمل | 1.5 ساعة | 29/11/2023 | 1/12/2023 | | الجغرافيا | مكتمل | 30 دقيقة | 2/12/2023 | 4/12/2023 | | الفيزياء | قيد التقدّم | ساعتان | 3/12/2023 | 5/12/2023 | | الأحياء | لم يبدأ | 6 ساعات | 2/11/2016 | 6/12/2023 | ``` |
 
-| **Câu lệnh** | **Phản hồi của mô hình** |
+| **الطلب** | **ردّ النموذج** |
 | --- | --- |
-| Cung cấp danh sách tất cả các thuộc tính sau:  thành phần, loại ẩm thực, ăn chay hay không, ở định dạng JSON | ```json { "ingredients": [ "rice", "shrimp", "clams", "mussels", "peas", "tomatoes", "onions", "garlic", "olive oil", "paprika", "salt", "pepper" ], "type of cuisine": "Spanish", "vegetarian": false } ``` |
+| قدِّم قائمة بجميع السمات التالية:  المكوّنات ونوع المطبخ وما إذا كان الطبق نباتيًا أم لا، بتنسيق JSON | ```json { "المكونات": [ "أرز", "جمبري", "محار", "بلح البحر", "بازلاء", "طماطم", "بصل", "ثوم", "زيت زيتون", "بابريكا", "ملح", "فلفل" ], "نوع المطبخ": "إسباني", "نباتي": false } ``` |
 
-### Đặt hình ảnh lên trước cho câu lệnh một hình ảnh
+### وضع صورتك أولاً في الطلبات التي تتضمّن صورة واحدة
 
-Mặc dù Gemini có thể diễn giải hình ảnh và văn bản theo bất kỳ thứ tự nào trong câu lệnh, nhưng việc đặt một hình ảnh duy nhất trước câu lệnh dạng văn bản có thể mang lại kết quả tốt hơn.
-Trong các mẫu sau, bạn sẽ nhận thấy hình ảnh xuất hiện trước văn bản trong mỗi câu lệnh.
+على الرغم من أنّ Gemini يمكنه تفسير الصور والنصوص بأي ترتيب ضمن الطلب، قد يؤدي وضع صورة واحدة قبل الطلب النصي إلى الحصول على نتائج أفضل.
+في الأمثلة التالية، ستلاحظ أنّ الصورة تأتي أولاً قبل النص في كل طلب.
 
-### Khắc phục sự cố với câu lệnh đa phương thức
+### تحديد المشاكل في الطلب المتعدد الوسائط وحلّها
 
-Bạn có thể cần khắc phục sự cố về câu lệnh nếu không nhận được phản hồi hữu ích. Sau đây là một số chiến lược mà bạn có thể thử.
+قد تحتاج إلى تحديد المشاكل في طلبك وحلّها إذا لم تحصل على ردّ مفيد. في ما يلي بعض الاستراتيجيات التي يمكنك تجربتها.
 
-#### Nếu mô hình không lấy thông tin từ phần liên quan của hình ảnh
+#### إذا كان النموذج لا يستمد المعلومات من الجزء ذي الصلة من الصورة
 
-Để nhận được câu trả lời cụ thể hơn, bạn có thể chỉ ra những khía cạnh của hình ảnh mà bạn muốn câu lệnh lấy thông tin để đưa ra câu trả lời.
+للحصول على ردّ أكثر تحديدًا، يمكنك الإشارة إلى الجوانب التي تريد أن يستند إليها الطلب في استخلاص المعلومات لتضمينها في الردّ.
 
-| Câu lệnh | Câu trả lời của mô hình |
+| الطلب | ردّ النموذج |
 | --- | --- |
-| Số lượng tã này sẽ dùng được trong bao nhiêu ngày cho một em bé? | Số tã này sẽ dùng được trong 198 ngày. |
+| كم عدد الأيام التي ستكفي فيها هذه الحفاضات الطفل؟ | ستكفي الحفاضات لمدة 198 يومًا قبل أن تنتهي. |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **طلب معدَّل** | **ردود محسّنة** |
 | --- | --- |
-| Tôi có thể dùng hết số tã này trong bao lâu?  Dùng trọng lượng ghi trên hộp để xác định độ tuổi của trẻ và dùng tổng số tã trong hộp.  Chia tổng số cho số lượng tã mà trẻ dùng mỗi ngày. | Hộp này có 198 chiếc tã. Hộp này ghi rằng tã dành cho trẻ có cân nặng từ 10 đến 17 kg.  Trẻ em trung bình trong khoảng cân nặng này có thể từ 1 đến 2 tuổi.  Một đứa trẻ 2 tuổi thường dùng 6 chiếc tã mỗi ngày, do đó, số tã này sẽ dùng được khoảng 33 ngày (198/6). |
+| كم من الوقت ستدوم هذه الحفاضات قبل أن تنتهي؟  استخدِم الوزن الموضّح على العبوة لتحديد عمر الطفل، واستخدِم إجمالي عدد الحفاضات في العبوة.  قسِّم العدد الإجمالي على عدد الحفاضات التي يستخدمها الطفل في اليوم الواحد. | تحتوي العلبة على 198 حفاضة. يذكر الصندوق أنّ الحفاضات مخصّصة للأطفال الذين يتراوح وزنهم بين 10 و17 كلغ.  من المرجّح أنّ متوسط عمر الطفل في هذا النطاق من الوزن يتراوح بين سنة واحدة وسنتين.  يستخدم الطفل البالغ من العمر عامَين عادةً 6 حفاضات في اليوم، وبالتالي ستدوم الحفاضات حوالي 33 يومًا (198/6). |
 
-#### Nếu đầu ra của mô hình quá chung chung và không đủ phù hợp với dữ liệu đầu vào là hình ảnh
+#### إذا كانت مخرجات النموذج عامة جدًا وغير مخصّصة بشكلٍ كافٍ للصورة المُدخَلة
 
-Để giúp mô hình điều chỉnh câu trả lời cho (các) hình ảnh, hãy thử yêu cầu mô hình mô tả (các) hình ảnh trước khi thực hiện nhiệm vụ suy luận.
+لمساعدة النموذج في تخصيص رده وفقًا للصور، جرِّب أن تطلب منه وصف الصور قبل تنفيذ مهمة الاستنتاج.
 
-| Câu lệnh | Câu trả lời của mô hình |
+| الطلب | ردّ النموذج |
 | --- | --- |
-| Điểm chung giữa những hình ảnh này là gì? | Cả 4 hình ảnh đều là ví dụ về ảnh phong cảnh. |
+| ما هو الشيء المشترك بين هذه الصور؟ | جميع الصور الأربع هي أمثلة على التصوير الفوتوغرافي للمناظر الطبيعية. |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **طلب معدَّل** | **ردود محسّنة** |
 | --- | --- |
-| Trước tiên, hãy mô tả chi tiết nội dung trong từng hình ảnh. Điểm chung giữa những hình ảnh này là gì? | Hình ảnh đầu tiên cho thấy một người đang đóng gói hành lý vào vali. Hình ảnh thứ hai cho thấy một hành lang trống trong trung tâm mua sắm. Hình ảnh thứ ba cho thấy một cuộn giấy vệ sinh. Hình ảnh thứ tư cho thấy một vùng biển tối tăm và giông bão.  Điểm chung giữa những hình ảnh này là chúng đều là ví dụ về không gian trung gian. Không gian liminal là những nơi hoặc tình huống nằm giữa hai nơi hoặc tình huống khác. Chúng thường có đặc điểm là cảm giác không chắc chắn hoặc mơ hồ.  Hình ảnh đầu tiên cho thấy người này đang ở giữa trạng thái ở nhà và đi du lịch. Hình ảnh thứ hai cho thấy hành lang giữa hai cửa hàng. Hình ảnh thứ ba là giấy vệ sinh, có thể tượng trưng cho phòng tắm. Phòng tắm là không gian chuyển tiếp giữa khu vực riêng tư và khu vực công cộng. Đó là nơi chúng ta chuẩn bị bước vào hoặc rời khỏi thế giới bên ngoài.  Hình ảnh thứ tư cho thấy biển ở trạng thái giữa bình lặng và bão tố.  Không gian liminal có thể vừa thú vị vừa bất an. Chúng có thể là nơi bắt đầu hoặc kết thúc. Chúng có thể là nơi để suy ngẫm hoặc nơi để hành động. |
+| ابدأ بوصف محتوى كل صورة بالتفصيل. ما هو الشيء المشترك بين هذه الصور؟ | تعرض الصورة الأولى شخصًا يحزم حقيبة سفر. تعرض الصورة الثانية ممرًا فارغًا في مركز تسوّق. تعرض الصورة الثالثة لفة ورق حمام. تعرض الصورة الرابعة بحرًا مظلمًا وعاصفًا.  القاسم المشترك بين هذه الصور هو أنّها كلها أمثلة على المساحات الحدّية. المساحات الحدّية هي أماكن أو مواقف تقع بين مكانَين أو موقفَين آخرَين. وغالبًا ما تتميّز هذه الألعاب بإحساس بعدم اليقين أو الغموض.  تعرض الصورة الأولى الشخص في مرحلة انتقالية بين المنزل والرحلة. تعرض الصورة الثانية الممر بين متجرَين. الصورة الثالثة هي لورق حمام، ما قد يمثّل حمامًا. الحمّام هو مساحة انتقالية بين المساحات الخاصة والعامة. وهو مكان نجهّز فيه أنفسنا للدخول إلى العالم الخارجي أو مغادرته.  تعرض الصورة الرابعة البحر في حالة بين الهدوء والعاصفة.  يمكن أن تكون المساحات الحدّية مثيرة ومزعجة في الوقت نفسه. يمكن أن تكون مكانًا لبدايات جديدة أو مكانًا للنهايات. يمكن أن تكون مكانًا للتفكير أو مكانًا للعمل. |
 
-Bạn cũng có thể thử yêu cầu mô hình tham khảo nội dung trong hình ảnh một cách rõ ràng.
+يمكنك أيضًا محاولة الطلب من النموذج بشكل صريح الإشارة إلى محتوى الصورة.
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **طلب معدَّل** | **ردود محسّنة** |
 | --- | --- |
-| Điểm chung giữa những hình ảnh này là gì? Tham khảo nội dung trong hình ảnh trong câu trả lời của bạn. | Tất cả hình ảnh đều liên quan đến du lịch. Hình ảnh đầu tiên cho thấy một người đang đóng gói hành lý vào vali, hình ảnh thứ hai cho thấy một hành lang trống trong trung tâm mua sắm, hình ảnh thứ ba cho thấy một chồng giấy vệ sinh và hình ảnh thứ tư cho thấy một vùng biển tối tăm và giông bão.  Tất cả những hình ảnh này đều liên quan đến du lịch vì đây đều là những thứ mà mọi người cần hoặc sử dụng khi đi du lịch. Hình ảnh đầu tiên cho thấy một người đang đóng gói hành lý vào vali. Đây là việc mà mọi người thường làm khi đi du lịch. Hình ảnh thứ hai cho thấy một hành lang trống trong trung tâm mua sắm, đây là nơi mọi người thường đến để mua đồ cho chuyến đi của mình. Hình ảnh thứ ba cho thấy một chồng giấy vệ sinh. Đây là thứ mà mọi người thường dùng khi đi du lịch. Hình ảnh thứ tư cho thấy một vùng biển tối tăm và bão tố. Đây là điều mà mọi người thường gặp phải khi đi du lịch. |
+| ما هو الشيء المشترك بين هذه الصور؟ يجب أن تشير في ردّك إلى محتوى الصور. | جميع الصور مرتبطة بالسفر. تعرض الصورة الأولى شخصًا يحزم حقيبة سفر، وتعرض الصورة الثانية ممرًا فارغًا في مركز تسوّق، وتعرض الصورة الثالثة رزمة من ورق المرحاض، وتعرض الصورة الرابعة بحرًا مظلمًا وعاصفًا.  جميع هذه الصور مرتبطة بالسفر لأنّها تتضمّن أشياء يحتاجها الأشخاص أو يستخدمونها عند السفر. تعرض الصورة الأولى شخصًا يحزم حقيبة سفر، وهو نشاط يمارسه الأشخاص عند الذهاب في رحلة. تعرض الصورة الثانية ممرًا فارغًا في مركز تسوّق، وهو مكان يرتاده الأشخاص غالبًا لشراء مستلزمات رحلاتهم. تعرض الصورة الثالثة حزمة من ورق المرحاض، وهو منتج يستخدمه الأشخاص غالبًا أثناء السفر. تعرض الصورة الرابعة بحرًا مظلمًا وعاصفًا، وهو مشهد يواجهه الأشخاص غالبًا أثناء السفر. |
 
-Các mẹo tương tự cũng áp dụng cho kết quả sáng tạo từ hình ảnh. Trong ví dụ sau đây về chú thỏ, việc yêu cầu rõ ràng mô hình đưa các khía cạnh trong hình ảnh vào có thể cải thiện kết quả.
+تنطبق النصائح نفسها على المحتوى الإبداعي الناتج من الصور. في المثال التالي الذي يتضمّن أرنبًا، يمكن أن يؤدي الطلب من النموذج بشكل صريح تضمين جوانب من الصورة إلى تحسين الناتج.
 
-| Câu lệnh | Câu trả lời của mô hình |
+| الطلب | ردّ النموذج |
 | --- | --- |
-| Bạn có thể viết cho tôi một bài thơ về hình ảnh này không? | Chú thỏ nhỏ, mềm mại và có màu nâu,  Nhảy qua cánh đồng, lên và xuống.  Tai dài, đuôi nhỏ,  Bạn là sinh vật đáng yêu nhất trong tất cả.  Bạn gặm cỏ, cỏ xanh và ngọt,  Và nhảy đi khi thấy tôi.  Nhưng tôi sẽ luôn là bạn của bạn,  Chú thỏ nhỏ, cho đến tận cùng. |
+| هل يمكنك كتابة قصيدة حول هذه الصورة؟ | أرنب صغير، ناعم وبني،  يقفز في الحقل، صعودًا وهبوطًا.  Your ears so long, your tail so small,  You're the cutest creature of them all.  تأكل العشب الأخضر الحلو  وتقفز بعيدًا عندما تراني.  سأبقى صديقك دائمًا،  يا أرنبي الصغير، حتى النهاية. |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **طلب معدَّل** | **ردود محسّنة** |
 | --- | --- |
-| Bạn có thể viết cho tôi một bài thơ giàu hình ảnh và kịch tính về thông tin về hình ảnh này, đồng thời cho biết vị trí không? | Chú thỏ nhỏ trên bãi cỏ xanh,  Đôi tai dài, thính nhạy.  Bạn thấy gì ở nơi đó,  Ở nơi xa xăm mà bạn đang nhìn chằm chằm?  Có phải là màu xanh dương của đại dương,  Lấp lánh dưới ánh mặt trời?  Hay tiếng sóng vỗ và gầm rú,  Một nhịp điệu mà bạn yêu thích?  Thỏ con ơi, hãy nói cho ta biết,  Điều gì thu hút sự chú ý của con đến vậy?  Là làn gió mặn,  Hay tiếng hải âu kêu vang?  Có lẽ là do sự rộng lớn của tất cả,  Một thế giới vừa rộng lớn vừa nhỏ bé.  Một nơi mà những giấc mơ có thể bay bổng,  Và những cuộc phiêu lưu có thể bắt đầu.  Thỏ con ơi, ta tự hỏi giấc mơ của con là gì,  Khi con ngồi trên cỏ, thật thanh bình.  Bạn có khao khát khám phá biển sâu,  Hay ở trên đất liền, nơi bạn có thể nhảy?  Dù là gì đi chăng nữa, thỏ con ơi,  Hãy giữ cho ngọn lửa tò mò luôn cháy sáng.  Trong những ước mơ và khát vọng của bạn,  Có một thế giới đang chờ bạn sáng tạo. |
+| هل يمكنك كتابة قصيدة وصفية مؤثرة حول هذه الصورة وتضمين الموقع الجغرافي فيها؟ | أرنب صغير على العشب الأخضر،  أذناه طويلتان وحادتان.  ماذا ترى في الأفق البعيد،  حيث تتأمل؟  هل هو الأزرق المحيطي،  يتلألأ في ضوء الشمس؟  أم الأمواج التي تتلاطم وتزمجر،  إيقاع تعشقه؟  Little bunny, tell me true,  What captures your attention so?  هل هو النسيم المالح،  أم صرخات النورس التي تسعد؟  ربما بسبب اتساع كل شيء،  عالم كبير وصغير.  مكان تتجوّل فيه الأحلام،  وتُزرع فيه المغامرات.  أريد أن أعرف ما تحلم به  وأنت جالس على العشب، هادئًا وساكنًا.  هل تتوق إلى استكشاف الأعماق،  أم تفضّل البقاء على اليابسة حيث يمكنك القفز؟  مهما كان الأمر، أيها الأرنب الصغير،  حافظ على شرارة الفضول متوهجة.  ففي أحلامك وتطلّعاتك،  يختبئ عالم ينتظر أن تصنعه. |
 
-#### Khắc phục sự cố về phần nào trong câu lệnh không hoạt động
+#### تحديد الجزء الذي تعذّر تنفيذه من الطلب وحلّ المشكلة
 
-Có thể bạn khó biết được liệu một câu lệnh có thất bại là do mô hình **không hiểu hình ảnh** ngay từ đầu hay là do mô hình hiểu hình ảnh nhưng không thực hiện đúng **các bước suy luận** sau đó.
-Để phân biệt những lý do đó, hãy yêu cầu mô hình mô tả nội dung trong hình ảnh.
+قد يصعب معرفة ما إذا كان الطلب قد فشل لأنّ النموذج
+لم **يفهم الصورة** في البداية، أو لأنّه فهم الصورة
+ولكنّه لم ينفّذ **خطوات الاستنتاج** الصحيحة بعد ذلك.
+للتفريق بين هذه الأسباب، اطلب من النموذج وصف محتوى الصورة.
 
-Trong ví dụ sau, nếu mô hình phản hồi bằng một món ăn nhẹ có vẻ bất ngờ khi kết hợp với trà (ví dụ: bỏng ngô), trước tiên, bạn có thể khắc phục sự cố để xác định xem mô hình có nhận dạng chính xác rằng hình ảnh có chứa trà hay không.
+في المثال التالي، إذا ردّ النموذج بوجبة خفيفة تبدو غير متوقعة عند تناولها مع الشاي (مثل الفشار)، يمكنك أولاً تحديد المشكلة لمعرفة ما إذا كان النموذج قد تعرّف بشكل صحيح على أنّ الصورة تحتوي على شاي.
 
-| Câu lệnh | Lời nhắc để khắc phục sự cố |
+| الطلب | طلب تحديد المشاكل وحلّها |
 | --- | --- |
-| Tôi có thể làm món ăn nhẹ nào trong 1 phút để ăn kèm với món này? | Mô tả nội dung trong hình ảnh này. |
+| ما هي الوجبة الخفيفة التي يمكنني إعدادها في دقيقة واحدة وتتناسب مع هذا؟ | صِف محتوى هذه الصورة. |
 
-Một chiến lược khác là yêu cầu mô hình giải thích lý do. Điều này có thể giúp bạn thu hẹp phạm vi để xác định phần nào của lý luận bị sai, nếu có.
+هناك استراتيجية أخرى تتمثل في مطالبة النموذج بتوضيح أسباب استنتاجه. يمكن أن يساعدك ذلك في
+تحديد الجزء الذي حدث فيه خطأ في الاستنتاج، إن وُجد.
 
-| Câu lệnh | Lời nhắc để khắc phục sự cố |
+| الطلب | طلب تحديد المشاكل وحلّها |
 | --- | --- |
-| Tôi có thể làm món ăn nhẹ nào trong 1 phút để ăn kèm với món này? | Tôi có thể làm món ăn nhẹ nào trong 1 phút để ăn kèm với món này? Vui lòng giải thích lý do. |
+| ما هي الوجبة الخفيفة التي يمكنني إعدادها في دقيقة واحدة وتتناسب مع هذا؟ | ما هي الوجبة الخفيفة التي يمكنني إعدادها في دقيقة واحدة وتتناسب مع هذا؟ يُرجى توضيح السبب. |
 
-## Bước tiếp theo
+## الخطوات التالية
 
-- Hãy thử viết câu lệnh đa phương thức của riêng bạn bằng [Google AI Studio](http://aistudio.google.com?hl=vi).
-- Để biết thông tin về cách sử dụng Gemini Files API để tải tệp đa phương tiện lên và đưa tệp đó vào câu lệnh, hãy xem hướng dẫn về [Vision](https://ai.google.dev/gemini-api/docs/interactions/vision?hl=vi), [Âm thanh](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=vi) và [Xử lý tài liệu](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=vi).
-- Để biết thêm hướng dẫn về cách thiết kế câu lệnh, chẳng hạn như điều chỉnh các thông số lấy mẫu, hãy xem trang [Chiến lược về câu lệnh](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=vi).
+- يمكنك تجربة كتابة طلبات متعددة الوسائط باستخدام [Google AI
+  Studio](http://aistudio.google.com?hl=ar).
+- للحصول على معلومات حول استخدام Gemini Files API لتحميل ملفات الوسائط وتضمينها في طلباتك، راجِع أدلة [Vision](https://ai.google.dev/gemini-api/docs/interactions/vision?hl=ar) و[الصوت](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=ar) و[معالجة المستندات](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=ar).
+- للحصول على مزيد من الإرشادات حول تصميم الطلبات، مثل ضبط مَعلمات أخذ العيّنات، يمكنك الاطّلاع على صفحة [استراتيجيات الطلبات](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ar).
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Cập nhật lần gần đây nhất: 2026-05-12 UTC.
+تاريخ التعديل الأخير: 2026-05-19 (حسب التوقيت العالمي المتفَّق عليه)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-12 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-19 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

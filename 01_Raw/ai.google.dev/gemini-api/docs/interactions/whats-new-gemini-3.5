@@ -1,0 +1,467 @@
+---
+source_url: https://ai.google.dev/gemini-api/docs/interactions/whats-new-gemini-3.5?hl=pt-BR
+fetched_at: 2026-05-25T05:21:32.608251+00:00
+title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
+---
+
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+
+Envie comentários
+
+# Novidades do Gemini 3.5 Flash
+
+O Gemini 3.5 Flash está **disponível para todos os usuários (GA)**, é estável e está pronto para uso em produção em grande escala. Como nosso modelo Flash mais inteligente, ele oferece desempenho de ponta sustentado em execução agêntica, programação e tarefas de longo prazo em escala.
+
+Este guia contém uma visão geral das melhorias, mudanças na API e orientações de migração para o Gemini 3.5 Flash.
+
+## Novo modelo
+
+| Modelo | ID do modelo | Descrição |
+| --- | --- | --- |
+| Gemini 3.5 Flash | `gemini-3.5-flash` | Nosso modelo mais inteligente para desempenho de ponta sustentado em tarefas agênticas e de programação. |
+
+O Gemini 3.5 Flash oferece suporte à janela de contexto de 1 milhão de tokens, 65 mil tokens de saída máxima, pensamento e o mesmo conjunto de ferramentas e recursos de plataforma do Gemini 3 Flash.
+[O uso do computador](https://ai.google.dev/gemini-api/docs/computer-use?hl=pt-br) não é aceito no momento.
+
+Para especificações completas, consulte a [visão geral dos modelos](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=pt-br).
+Para preços, consulte a [página de preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br#gemini-3.5-flash).
+
+## Guia de início rápido
+
+Todos os exemplos neste guia usam a API Interactions. A API GenerateContent também é aceita. As mesmas opções de configuração e recomendações se aplicam.
+
+### Python
+
+```
+from google import genai
+
+client = genai.Client()
+
+interaction = client.interactions.create(
+    model="gemini-3.5-flash",
+    input="Explain how parallel agentic execution works in three sentences."
+)
+print(interaction.output_text)
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from "@google/genai";
+
+const client = new GoogleGenAI({});
+
+async function main() {
+  const interaction = await client.interactions.create({
+    model: "gemini-3.5-flash",
+    input: "Explain how parallel agentic execution works in three sentences.",
+  });
+  console.log(interaction.output_text);
+}
+
+main();
+```
+
+### REST
+
+```
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -H "Api-Revision: 2026-05-20" \
+  -d '{
+    "model": "gemini-3.5-flash",
+    "input": "Explain how parallel agentic execution works in three sentences."
+  }'
+```
+
+## O que há de novo
+
+- **Desempenho de ponta sustentado**:nosso modelo Flash mais inteligente, otimizado para tarefas agênticas e de programação em escala.
+- **Execução agêntica**:implantação de subagentes, solução de problemas e loops agênticos rápidos em escala.
+- **Programação**:ciclos de programação iterativos, exploração rápida e prototipagem para testar caminhos alternativos e explorar soluções de forma dinâmica.
+- **Longo prazo**:fluxos de trabalho de várias etapas e uso de ferramentas em escala.
+- **Preservação de pensamento**:o modelo mantém o raciocínio intermediário em conversas multiturno automaticamente. Nenhuma mudança na API é necessária.
+- **Novo nível de esforço padrão**:o esforço de pensamento padrão foi alterado de `high` para `medium`. Consulte [Novo nível de esforço padrão](#default-effort-level) para mais detalhes.
+- **Pensamento `low` aprimorado:** `low` agora está significativamente aprimorado para tarefas de código
+  e agênticas que exigem menos etapas, oferecendo qualidade forte com menor
+  latência e custo.
+- **Versão GA**:modelo estável para uso em produção em grande escala.
+
+## Mudanças no comportamento
+
+### Novo nível de esforço padrão: `medium`
+
+O esforço de pensamento padrão agora é **`medium`**, alterado de `high` na prévia do Gemini 3
+Flash. `medium` produz resultados muito bons em uma ampla variedade de tarefas, além de ser mais rápido e econômico. Para problemas complexos, `high` incentiva o modelo a pensar mais profundamente.
+
+| Nível de esforço | Quando usar |
+| --- | --- |
+| `minimal` | Otimizado para velocidade de resposta. Casos de uso semelhantes a chats, respostas factuais rápidas, chamadas de ferramentas mais simples. |
+| `low` | Tarefas de código e agênticas que exigem menor latência e menos etapas. Também funciona bem para tarefas de análise e escrita que exigem algum pensamento. |
+| **`medium` (padrão)** | **Melhor qualidade para a maioria das tarefas. Recomendado para casos de uso agênticos e de código complexo.** |
+| `high` | Maximiza a capacidade do modelo de pensar e usar ferramentas. Melhor para raciocínio complexo, matemática difícil e as tarefas de código ou agente mais difíceis. Permite pensamentos estendidos e chamadas de função. |
+
+Para substituir o padrão, defina `thinking_level` na configuração:
+
+### Python
+
+```
+from google import genai
+
+client = genai.Client()
+
+interaction = client.interactions.create(
+    model="gemini-3.5-flash",
+    input="Prove that the square root of 2 is irrational.",
+    generation_config={"thinking_level": "high"},
+)
+print(interaction.output_text)
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from "@google/genai";
+
+const client = new GoogleGenAI({});
+
+async function main() {
+  const interaction = await client.interactions.create({
+    model: "gemini-3.5-flash",
+    input: "Prove that the square root of 2 is irrational.",
+    generationConfig: { thinkingLevel: "high" },
+  });
+  console.log(interaction.output_text);
+}
+
+main();
+```
+
+### REST
+
+```
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -H "Api-Revision: 2026-05-20" \
+  -d '{
+    "model": "gemini-3.5-flash",
+    "input": "Prove that the square root of 2 is irrational.",
+    "generation_config": {"thinking_level": "high"}
+  }'
+```
+
+### Preservação de pensamento
+
+O modelo mantém o raciocínio intermediário em conversas multiturno automaticamente. Quando presente no histórico de conversas, o contexto de raciocínio é transferido, o que melhora o desempenho em tarefas complexas de várias etapas, como depuração iterativa e refatoração de código. Nenhuma mudança na API é necessária:
+
+- **API Interactions**: os pensamentos já são preservados automaticamente. Nenhuma mudança no comportamento.
+- **API GenerateContent**: começando com o Gemini 3.5 Flash, o modelo usa
+  o contexto de raciocínio de todos os turnos anteriores quando as assinaturas de pensamento estão
+  presentes no histórico de conversas. Para ativar isso, transmita o histórico de conversas completo,
+  não modificado (incluindo
+  [assinaturas de pensamento](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=pt-br)) em `contents`.
+  Os SDKs processam isso automaticamente.
+
+## Atualizações de parâmetros e práticas recomendadas no Gemini 3.x
+
+O seguinte se aplica a **todos os modelos do Gemini 3.x**, incluindo o Gemini 3.5 Flash.
+
+- **`temperature`, `top_p`, `top_k`**: recomendamos não mudar os valores padrão. Os recursos de raciocínio do Gemini 3 são otimizados para as configurações padrão.
+- Use `thinking_level` em vez de `thinking_budget`.
+- **Correspondência de resposta de chamada de função**: `id`, `name` e contagem de respostas
+  precisam corresponder às chamadas anteriores.
+- **Respostas de função multimodal**: inclua conteúdo multimodal dentro da
+  resposta da função, não fora dela.
+- **Instruções inline em respostas de função**: anexe ao texto de resposta da função, não como partes separadas.
+- **Reduza chamadas de ferramentas desnecessárias**: use níveis de pensamento mais baixos ou faça testes
+  com instruções do sistema para reduzir chamadas de ferramentas em fluxos de trabalho agênticos.
+
+Consulte as seções abaixo para saber como atualizar seu código.
+
+### Parâmetros de amostragem (não recomendados)
+
+`temperature`, `top_p` e `top_k` não são mais recomendados para todos os modelos do Gemini 3.x. Os recursos de raciocínio do Gemini 3 são otimizados para as configurações padrão. **Remova esses parâmetros de todas as solicitações.**
+
+```
+# ⚠️ Remove these parameters (not recommended)
+generation_config = {
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "top_k": 40,
+}
+```
+
+Para garantir o determinismo, recomendamos definir uma instrução do sistema com regras explícitas para seu caso de uso específico.
+
+### `thinking_budget` (não recomendado)
+
+O parâmetro numérico bruto `thinking_budget` não é mais recomendado em todos os modelos do Gemini 3.x. Use a enumeração de string `thinking_level`.
+
+```
+# ⚠️ Before (not recommended)
+generation_config = {
+    "thinking": {"thinking_budget": 7500},
+}
+
+# ✅ After
+generation_config = {
+    "thinking": {"thinking_level": "medium"},
+}
+```
+
+Valores disponíveis: `minimal`, `low`, `medium` (padrão) e `high`.
+
+### Chamada de função: correspondência de resposta estrita
+
+A API Interactions já gera erros em respostas de função incompatíveis. A API GenerateContent ainda não gera erros, mas respostas incompatíveis fazem com que o modelo retorne respostas vazias com `finish_reason: STOP` na maioria dos casos. Siga sempre estas convenções:
+
+| Requisito | Detalhes |
+| --- | --- |
+| Incluir `id` | Cada `FunctionResponse` precisa incluir o `id` do `FunctionCall` correspondente |
+| Correspondência de `name` | O `name` na resposta precisa corresponder ao `name` na chamada |
+| Contagens de correspondências | Retorne exatamente um `FunctionResponse` para cada `FunctionCall` recebido |
+
+### Python
+
+```
+# ✅ Include matching call_id and name in the function_result
+final_interaction = client.interactions.create(
+    model="gemini-3.5-flash",
+    previous_interaction_id=interaction.id,
+    tools=[my_tool],
+    input=[{
+        "type": "function_result",
+        "name": fc_step.name,
+        "call_id": fc_step.id,
+        "result": [{"type": "text", "text": json.dumps(result)}],
+    }],
+)
+```
+
+### JavaScript
+
+```
+// ✅ Include matching call_id and name in the function_result
+const finalInteraction = await client.interactions.create({
+  model: "gemini-3.5-flash",
+  previousInteractionId: interaction.id,
+  tools: [myTool],
+  input: [{
+    type: "function_result",
+    name: fcStep.name,
+    call_id: fcStep.id,
+    result: [{ type: "text", text: JSON.stringify(result) }],
+  }],
+});
+```
+
+### REST
+
+```
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -H "Api-Revision: 2026-05-20" \
+  -d '{
+    "model": "gemini-3.5-flash",
+    "previous_interaction_id": "<INTERACTION_ID>",
+    "tools": [...],
+    "input": [{
+      "type": "function_result",
+      "name": "my_function",
+      "call_id": "<CALL_ID>",
+      "result": [{"type": "text", "text": "..."}]
+    }]
+  }'
+```
+
+### Respostas de função multimodal
+
+Muitas vezes, os clientes fornecem imagens fora da resposta da função. Isso pode levar a um comportamento inesperado do modelo (por exemplo, vazamento de pensamento) e resultar em saídas de qualidade inferior. Siga a recomendação nos
+[documentos da API de respostas de função multimodal](https://ai.google.dev/gemini-api/docs/interactions/function-calling?example=meeting&hl=pt-br#multimodal)
+em vez disso e inclua conteúdo multimodal nas partes de resposta da função que você
+envia ao modelo. O modelo pode processar esse conteúdo multimodal no próximo turno para produzir uma resposta mais informada.
+
+### Python
+
+```
+# ✅ Include multimodal content in the function response
+final_interaction = client.interactions.create(
+    model="gemini-3.5-flash",
+    previous_interaction_id=interaction.id,
+    input=[
+        {
+            "type": "function_result",
+            "name": tool_call.name,
+            "call_id": tool_call.id,
+            "result": [
+                {"type": "text", "text": "instrument.jpg"},
+                {
+                    "type": "image",
+                    "mime_type": "image/jpeg",
+                    "data": base64_image_data,
+                },
+            ],
+        }
+    ],
+)
+```
+
+### JavaScript
+
+```
+// ✅ Include multimodal content in the function response
+const finalInteraction = await client.interactions.create({
+  model: "gemini-3.5-flash",
+  previousInteractionId: interaction.id,
+  input: [{
+    type: "function_result",
+    name: toolCall.name,
+    call_id: toolCall.id,
+    result: [
+      { type: "text", text: "instrument.jpg" },
+      {
+        type: "image",
+        mime_type: "image/jpeg",
+        data: base64ImageData,
+      },
+    ],
+  }],
+});
+```
+
+### Instruções inline em respostas de função
+
+Muitas vezes, os clientes fornecem instruções extras junto com as respostas de função como `Parts` subsequentes. Isso pode levar a um comportamento inesperado do modelo (por exemplo, vazamento de pensamento) e resultar em saídas de qualidade inferior. Em vez disso, anexe instruções extras ao final do texto de resposta da função, separadas por duas novas linhas.
+
+### Python
+
+```
+# ✅ Append inline instructions to the end of the function response separated by two newlines
+result_text = f"{json.dumps(result)}\n\n<your inline instructions>"
+
+final_interaction = client.interactions.create(
+    model="gemini-3.5-flash",
+    previous_interaction_id=interaction.id,
+    tools=[my_tool],
+    input=[{
+        "type": "function_result",
+        "name": fc_step.name,
+        "call_id": fc_step.id,
+        "result": [{"type": "text", "text": result_text}],
+    }],
+)
+```
+
+### JavaScript
+
+```
+// ✅ Append inline instructions to the end of the function response separated by two newlines
+const resultText = `${JSON.stringify(result)}\n\n<your inline instructions>`;
+
+const finalInteraction = await client.interactions.create({
+  model: "gemini-3.5-flash",
+  previousInteractionId: interaction.id,
+  tools: [myTool],
+  input: [{
+    type: "function_result",
+    name: fcStep.name,
+    call_id: fcStep.id,
+    result: [{ type: "text", text: resultText }],
+  }],
+});
+```
+
+### Redução de chamadas de ferramentas desnecessárias
+
+Se você tiver um uso excessivo de chamadas de ferramentas, duas técnicas ajudarão a minimizá-las:
+
+1. **Comece reduzindo o nível de pensamento** (`medium`, `low` ou `minimal`): níveis de pensamento mais altos incentivam o modelo a usar mais ferramentas para explorar e verificar. Portanto, diminuir o nível pode reduzir as chamadas de ferramentas.
+2. **Adicione uma instrução do sistema**:se o uso excessivo persistir após ajustar o nível de pensamento, considere um comando que restrinja o uso de ferramentas. Por exemplo:
+
+   ```
+   You have a limited action budget of <n> tool calls. Use them efficiently.
+   ```
+
+## Lista de verificação de migração
+
+`/gemini-interactions-api migrate my app to Gemini 3.5 Flash`
+
+**Recomendamos fazer a atualização para o SDK `google-genai` v2.0.0 ou mais recente.** Essa versão introduz mudanças interruptivas na API Interactions. Para mais detalhes, consulte o
+[guia de migração de mudanças interruptivas](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=pt-br).
+
+### Migrar da prévia do Gemini 3 Flash
+
+- Atualizar o nome do modelo: `gemini-3-flash-preview` → `gemini-3.5-flash`
+- Conferir preços. O Gemini 3.5 Flash é mais caro do que a prévia do Gemini 3 Flash. Veja detalhes na [página Preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br#gemini-3.5-flash).
+- Remova `temperature`, `top_p`, `top_k` da configuração (não recomendado).
+- Substitua `thinking_budget` por `thinking_level`.
+- Adicione `id` e `name` correspondente a todas as partes `FunctionResponse`.
+- Teste seus comandos. O esforço padrão foi alterado de `high` → `medium`. Verifique a qualidade, a velocidade e o custo.
+- A preservação de pensamento agora está ativada por padrão. O contexto de raciocínio é transferido entre os turnos, o que melhora o desempenho, mas pode aumentar o uso de tokens.
+- Reduza chamadas de ferramentas desnecessárias: comece reduzindo o nível de pensamento (`medium`, `low` ou `minimal`); adicione uma instrução do sistema para restringir o uso de ferramentas se o uso excessivo persistir.
+- [O uso do computador](https://ai.google.dev/gemini-api/docs/computer-use?hl=pt-br) não é aceito no Gemini 3.5
+  Flash no momento. Para cargas de trabalho de uso do computador, continue usando a prévia do Gemini 3 Flash.
+
+### Migrar do Gemini 2.5
+
+Todas as opções acima, além das seguintes:
+
+- Simplifique os comandos. Se você usou a engenharia de comandos de cadeia de pensamento para forçar
+  o raciocínio, tente `thinking_level: "medium"` ou `"high"` com comandos mais simples
+  em vez disso.
+- Teste cargas de trabalho de PDF e mídia. Se você dependeu de um comportamento específico para a análise de documentos densos, teste a configuração `media_resolution_high` para garantir a precisão contínua. A migração para os padrões do Gemini 3 também pode aumentar o uso de tokens para PDFs, mas diminuir para vídeos. Se as solicitações excederem a janela de contexto, reduza explicitamente a `media_resolution`. Consulte os
+  [documentos de resolução de mídia](https://ai.google.dev/gemini-api/docs/interactions/media-resolution?hl=pt-br) para
+  mais detalhes.
+- Aproveite o [uso combinado de ferramentas](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=pt-br).
+  A Pesquisa Google, o contexto de URL, a execução de código e as funções personalizadas podem ser usados na mesma solicitação.
+- Se você estiver usando respostas de função multimodal, mova o conteúdo multimodal para dentro das partes de resposta da função, não ao lado delas.
+- Se você estiver usando instruções inline com respostas de função, adicione-as ao texto de resposta da função, separadas por duas novas linhas, não como partes separadas.
+- A segmentação de imagens está indisponível no Gemini 3.x. Para cargas de trabalho de segmentação
+  , continue usando o Gemini 2.5 Flash com o pensamento desativado ou
+  [o Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=pt-br).
+
+## Recursos da família Gemini 3
+
+O Gemini 3.5 Flash herda todos os recursos da família Gemini 3, exceto o uso do computador.
+Recursos introduzidos no Gemini 3 que são transferidos:
+
+- [****Pensamento****](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=pt-br): contexto de raciocínio criptografado preservado em chamadas de API. Automático na API Interactions; implícito no GenerateContent.
+- [**Saídas estruturadas com ferramentas**](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=pt-br)**:** combine o modo JSON com
+  ferramentas integradas (Pesquisa, contexto de URL, execução de código, chamada de função).
+- [**Respostas de função multimodal**](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=pt-br#multimodal)**:** Retorne
+  imagens, áudio e outras mídias nos resultados da chamada de função.
+- [**Execução de código com imagens**](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=pt-br#images)**:** execute códigos que
+  processam e geram imagens.
+- [**Uso combinado de ferramentas**](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=pt-br)**:** use ferramentas integradas e
+  chamadas de função personalizadas na mesma solicitação.
+
+## Próximas etapas
+
+- Leia mais sobre a família Gemini 3 no
+  [guia para desenvolvedores do Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=pt-br).
+- Saiba mais sobre estratégias de design de comandos no
+  [guia de engenharia de comandos](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=pt-br).
+- Comece a usar o [Cookbook do Gemini 3](https://github.com/google-gemini/cookbook)
+- Saiba mais sobre a [otimização e a inferência da API Gemini](https://ai.google.dev/gemini-api/docs/optimization?hl=pt-br)
+
+Envie comentários
+
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+
+Última atualização 2026-05-19 UTC.
+
+Quer enviar seu feedback?
+
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-05-19 UTC."],[],[]]

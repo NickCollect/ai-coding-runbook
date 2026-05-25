@@ -1,41 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash?hl=fr
-fetched_at: 2026-05-18T05:15:14.607189+00:00
-title: "Gemini\u00a02.0 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash?hl=id
+fetched_at: 2026-05-25T05:29:12.293311+00:00
+title: "Gemini 2.0 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
+[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Envoyer des commentaires
+Kirim masukan
 
-# Gemini 2.0 Flash
+# Gemini 2.0 Flash
 
 ## gemini-2.0-flash
 
-| Propriété | Description |
+| Properti | Deskripsi |
 | --- | --- |
-| Code du modèle id\_card | `gemini-2.0-flash` |
-| Types de données acceptés pour save | **Entrées**  Audio, images, vidéos et texte  **Résultat**  Texte |
-| token\_autoLimites de jetons[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  1 048 576  **Limite de jetons de sortie**  8 192 |
-| handyman Fonctionnalités | **Génération audio**  Not supported  **API Batch**  Compatible  **Mise en cache**  Compatible  **Exécution de code**  Compatible  **Recherche de fichiers**  Not supported  **Appel de fonction**  Compatible  **Ancrage avec Google Maps**  Compatible  **Génération d'images**  Not supported  **API Live**  Not supported  **Ancrage de recherche**  Compatible  **Sorties structurées**  Compatible  **Raisonnement**  Expérimental  **Contexte de l'URL**  Not supported |
-| Versions 123 | Pour en savoir plus, consultez les [schémas de version de modèle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - Obsolète : `gemini-2.0-flash` - Obsolète : `gemini-2.0-flash-001` - Éteindre : `gemini-2.0-flash-exp` |
-| calendar\_monthDernière mise à jour | Février 2025 |
-| cognition\_2Date limite des connaissances | Août 2024 |
+| id\_cardKode model | `gemini-2.0-flash` |
+| saveJenis data yang didukung | **Input**  Audio, gambar, video, dan teks  **Output**  Teks |
+| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Batas token input**  1.048.576  **Batas token output**  8.192 |
+| handymanKemampuan | **Pembuatan audio**  Tidak didukung  **Batch API**  Didukung  **Menyimpan ke cache**  Didukung  **Eksekusi kode**  Didukung  **Penelusuran file**  Tidak didukung  **Panggilan fungsi**  Didukung  **Grounding dengan Google Maps**  Didukung  **Pembuatan gambar**  Tidak didukung  **Live API**  Tidak didukung  **Grounding penelusuran**  Didukung  **Output terstruktur**  Didukung  **Penalaran**  Eksperimental  **Konteks URL**  Tidak didukung |
+| 123Versi | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - Tidak digunakan lagi: `gemini-2.0-flash` - Tidak digunakan lagi: `gemini-2.0-flash-001` - Dihentikan: `gemini-2.0-flash-exp` |
+| calendar\_monthUpdate terbaru | Februari 2025 |
+| cognition\_2Batas pengetahuan | Agustus 2024 |
 
-Envoyer des commentaires
+Kirim masukan
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Dernière mise à jour le 2026/04/29 (UTC).
+Terakhir diperbarui pada 2026-04-29 UTC.
 
-Voulez-vous nous donner plus d'informations ?
+Ada masukan untuk kami?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/04/29 (UTC)."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]

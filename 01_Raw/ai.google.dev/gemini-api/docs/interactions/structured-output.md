@@ -1,44 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=he
-fetched_at: 2026-05-18T05:11:01.355773+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=tr
+fetched_at: 2026-05-25T05:25:44.167607+00:00
 title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-שליחת משוב
+Geri bildirim gönderin
 
-# פלטים מובנים
+# Yapılandırılmış çıkışlar
 
-אתם יכולים להגדיר את מודלי Gemini כך שיפיקו תשובות בהתאם לסכימת JSON שסיפקתם. כך אפשר להבטיח תוצאות צפויות ובטוחות מבחינת סוג הנתונים, ולפשט את תהליך החילוץ של נתונים מובנים מטקסט לא מובנה.
+Gemini modellerini, sağlanan bir JSON şemasına uygun yanıtlar oluşturacak şekilde yapılandırabilirsiniz. Bu sayede tahmin edilebilir ve tür açısından güvenli sonuçlar elde edilir. Ayrıca, yapılandırılmamış metinlerden yapılandırılmış verilerin ayıklanması kolaylaşır.
 
-שימוש בפלט מובנה מתאים במיוחד למקרים הבאים:
+Yapılandırılmış çıkışlar şu durumlarda idealdir:
 
-- **חילוץ נתונים:** חילוץ מידע ספציפי כמו שמות ותאריכים מטקסט.
-- **סיווג מובנה:** סיווג טקסט לקטגוריות מוגדרות מראש.
-- **תהליכי עבודה מבוססי-סוכן:** יצירת קלט מובנה לכלים או לממשקי API.
+- **Veri ayıklama:** Metinden adlar ve tarihler gibi belirli bilgileri alın.
+- **Yapılandırılmış sınıflandırma:** Metni önceden tanımlanmış kategorilere göre sınıflandırın.
+- **Ajan tabanlı iş akışları:** Araçlar veya API'ler için yapılandırılmış girişler oluşturun.
 
-בנוסף לתמיכה בסכימת JSON ב-API בארכיטקטורת REST, ערכות ה-SDK של Google GenAI מאפשרות להגדיר סכימות באמצעות [Pydantic](https://docs.pydantic.dev/latest/) (Python) ו-[Zod](https://zod.dev/) (JavaScript).
+Google GenAI SDK'ları, REST API'de JSON şemasını desteklemenin yanı sıra [Pydantic](https://docs.pydantic.dev/latest/) (Python) ve [Zod](https://zod.dev/) (JavaScript) kullanılarak şemaların tanımlanmasına da olanak tanır.
 
-Recipe Extractor
-Content Moderation
-Recursive Structures
+Yemek Tarifi Çıkarıcı
+İçerik Denetleme
+Özyinelemeli Yapılar
 
-בדוגמה הזו מוסבר איך לחלץ נתונים מוּבְנִים מטקסט באמצעות סוגים בסיסיים של סכימת JSON, כמו `object`, `array`, `string` ו-`integer`.
+Bu örnekte, `object`, `array`, `string` ve `integer` gibi temel JSON şema türlerini kullanarak metinden yapılandırılmış verilerin nasıl ayıklanacağı gösterilmektedir.
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 from pydantic import BaseModel, Field
 from typing import List, Optional
@@ -70,7 +69,7 @@ onto ungreased baking sheets and bake for 9 to 11 minutes.
 """
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input=prompt,
     response_format={
         "type": "text",
@@ -79,14 +78,13 @@ interaction = client.interactions.create(
     },
 )
 
-recipe = Recipe.model_validate_json(interaction.steps[-1].content[0].text)
+recipe = Recipe.model_validate_json(interaction.output_text)
 print(recipe)
 ```
 
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 import * as z from "zod";
 
@@ -139,7 +137,7 @@ onto ungreased baking sheets and bake for 9 to 11 minutes.
 `;
 
 const interaction = await client.interactions.create({
-  model: "gemini-3-flash-preview",
+  model: "gemini-3.5-flash",
   input: prompt,
   response_format: {
     type: 'text',
@@ -148,20 +146,19 @@ const interaction = await client.interactions.create({
   },
 });
 
-const recipe = recipeSchema.parse(JSON.parse(interaction.steps.at(-1).content[0].text));
+const recipe = recipeSchema.parse(JSON.parse(interaction.output_text));
 console.log(recipe);
 ```
 
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -H "Api-Revision: 2026-05-20" \
     -d '{
-      "model": "gemini-3-flash-preview",
+      "model": "gemini-3.5-flash",
       "input": "Please extract the recipe from the following text.\nThe user wants to make delicious chocolate chip cookies.\nThey need 2 and 1/4 cups of all-purpose flour, 1 teaspoon of baking soda,\n1 teaspoon of salt, 1 cup of unsalted butter (softened), 3/4 cup of granulated sugar,\n3/4 cup of packed brown sugar, 1 teaspoon of vanilla extract, and 2 large eggs.\nFor the best part, they will need 2 cups of semisweet chocolate chips.\nFirst, preheat the oven to 375°F (190°C). Then, in a small bowl, whisk together the flour,\nbaking soda, and salt. In a large bowl, cream together the butter, granulated sugar, and brown sugar\nuntil light and fluffy. Beat in the vanilla and eggs, one at a time. Gradually beat in the dry\ningredients until just combined. Finally, stir in the chocolate chips. Drop by rounded tablespoons\nonto ungreased baking sheets and bake for 9 to 11 minutes.",
       "response_format": {
         "type": "text",
@@ -200,7 +197,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**דוגמה לתשובה:**
+**Örnek Yanıt:**
 
 ```
 {
@@ -228,14 +225,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-## תוצאות סטרימינג
+## Yayın sonuçları
 
-אפשר להזרים פלט מובנה, וכך להתחיל לעבד את התשובה בזמן שהיא נוצרת. החלקים שמועברים בסטרימינג הם מחרוזות JSON חלקיות תקינות שאפשר לשרשר כדי ליצור את אובייקט ה-JSON הסופי.
+Yapılandırılmış çıkışları yayınlayarak yanıt oluşturulurken işlemeye başlamanıza olanak tanır. Yayınlanan parçalar, son JSON nesnesini oluşturmak için birleştirilebilen geçerli kısmi JSON dizeleridir.
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 from pydantic import BaseModel
 from typing import Literal
@@ -248,7 +244,7 @@ client = genai.Client()
 prompt = "The new UI is incredibly intuitive. Add a very long summary to test streaming!"
 
 stream = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input=prompt,
     response_format={
         "type": "text",
@@ -265,7 +261,6 @@ for event in stream:
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 import * as z from "zod";
 
@@ -283,7 +278,7 @@ const feedbackSchema = z.fromJSONSchema(feedbackJsonSchema);
 const client = new GoogleGenAI({});
 
 const stream = await client.interactions.create({
-  model: "gemini-3-flash-preview",
+  model: "gemini-3.5-flash",
   input: "The new UI is incredibly intuitive. Add a very long summary!",
   response_format: {
     type: 'text',
@@ -300,14 +295,13 @@ for await (const event of stream) {
 }
 ```
 
-## פלט מובנה עם כלים
+## Araçlarla yapılandırılmış çıkışlar
 
-‫Gemini 3 מאפשר לכם לשלב פלט מובנה עם כלים מובנים, כולל [עיגון באמצעות חיפוש Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=he), [הקשר של כתובת URL](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=he), [הרצת קוד](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=he), [חיפוש קבצים](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=he#structured-output) ו[קריאה לפונקציות](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=he).
+Gemini 3, Yapılandırılmış Çıkışları [Google Arama ile Temellendirme](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=tr), [URL Bağlamı](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=tr), [Kod Yürütme](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=tr), [Dosya Arama](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=tr#structured-output) ve [İşlev Çağırma](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=tr) gibi yerleşik araçlarla birleştirmenize olanak tanır.
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 from pydantic import BaseModel, Field
 from typing import List
@@ -330,14 +324,13 @@ interaction = client.interactions.create(
     },
 )
 
-result = MatchResult.model_validate_json(interaction.steps[-1].content[0].text)
+result = MatchResult.model_validate_json(interaction.output_text)
 print(result)
 ```
 
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 import * as z from "zod";
 
@@ -366,14 +359,13 @@ const interaction = await client.interactions.create({
   },
 });
 
-const match = matchSchema.parse(JSON.parse(interaction.steps.at(-1).content[0].text));
+const match = matchSchema.parse(JSON.parse(interaction.output_text));
 console.log(match);
 ```
 
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -398,79 +390,79 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## תמיכה בסכימת JSON
+## JSON şeması desteği
 
-כדי ליצור אובייקט JSON, מגדירים את `response_format` עם אובייקט (או מערך שמכיל אובייקט) מהסוג `text` ומגדירים את `mime_type` שלו ל-`application/json`. צריך לספק את הסכימה בשדה `schema`.
+JSON nesnesi oluşturmak için `response_format` öğesini `text` türünde bir nesneyle (veya nesne içeren bir diziyle) yapılandırın ve `mime_type` özelliğini `application/json` olarak ayarlayın. Şema, `schema` alanında sağlanmalıdır.
 
-מצב הפלט המובנה של Gemini תומך בחלק ממפרט [JSON Schema](https://json-schema.org/).
+Gemini'ın yapılandırılmış çıkış modu, [JSON şeması](https://json-schema.org/) spesifikasyonunun bir alt kümesini destekler.
 
-יש תמיכה בערכים הבאים של `type`:
+`type` için aşağıdaki değerler desteklenir:
 
-- ‫**`string`**: לטקסט.
-- ‫**`number`**: למספרים בשיטת נקודה צפה.
-- ‫**`integer`**: למספרים שלמים.
-- ‫**`boolean`**: לערכים True או False.
-- ‫**`object`**: לנתונים מובְנים עם צמדי מפתח/ערך.
-- ‫**`array`**: לרשימות של פריטים.
-- ‫**`null`**: כדי לאפשר שמאפיין יהיה null, צריך לכלול את `"null"` במערך הסוגים (לדוגמה, `{"type": ["string", "null"]}`).
+- **`string`**: Metin için.
+- **`number`**: Kayan noktalı sayılar için.
+- **`integer`**: Tam sayılar için.
+- **`boolean`**: Doğru veya yanlış değerler için.
+- **`object`**: Anahtar/değer çiftleri içeren yapılandırılmış veriler için.
+- **`array`**: Öğe listeleri için.
+- **`null`**: Bir özelliğin null olmasına izin vermek için tür dizisine `"null"` değerini ekleyin (ör. `{"type": ["string", "null"]}`).
 
-מאפייני התיאור האלה עוזרים להנחות את המודל:
+Bu açıklayıcı özellikler, modele yol göstermeye yardımcı olur:
 
-- ‫**`title`**: תיאור קצר של מאפיין.
-- ‫**`description`**: תיאור ארוך ומפורט יותר של נכס.
+- **`title`**: Bir mülkün kısa açıklaması.
+- **`description`**: Bir mülkün daha uzun ve ayrıntılı açıklaması.
 
-### מאפיינים ספציפיים לסוג
+### Türe özel özellikler
 
-**לערכים של `object`:**
+**`object` değerleri için:**
 
-- ‫**`properties`**: אובייקט שבו כל מפתח הוא שם מאפיין וכל ערך הוא סכימה של המאפיין הזה.
-- ‫**`required`**: מערך של מחרוזות, שבו מפורטות המאפיינים שהם חובה.
-- ‫**`additionalProperties`**: קובעת אם מותר להשתמש בנכסים שלא מופיעים ב-`properties`. יכול להיות ערך בוליאני או סכמה.
+- **`properties`**: Her anahtarın bir özellik adı, her değerin ise söz konusu özelliğin şeması olduğu bir nesne.
+- **`required`**: Hangi özelliklerin zorunlu olduğunu listeleyen bir dizeler dizisi.
+- **`additionalProperties`**: `properties` içinde listelenmeyen özelliklere izin verilip verilmeyeceğini kontrol eder. Boole veya şema olabilir.
 
-**לערכים של `string`:**
+**`string` değerleri için:**
 
-- ‫**`enum`**: רשימה של קבוצה ספציפית של מחרוזות אפשריות למשימות סיווג.
-- ‫**`format`**: מציין תחביר למחרוזת, כמו `date-time`, ‏`date`, ‏`time`.
+- **`enum`**: Sınıflandırma görevleri için olası dizelerin belirli bir kümesini listeler.
+- **`format`**: Dize için `date-time`, `date`, `time` gibi bir söz dizimi belirtir.
 
-**לערכים `number` ו-`integer`:**
+**`number` ve `integer` değerleri için:**
 
-- ‫**`enum`**: רשימה של קבוצה ספציפית של ערכים נומריים אפשריים.
-- ‫**`minimum`**: ערך המינימום כולל.
-- ‫**`maximum`**: הערך המקסימלי כולל.
+- **`enum`**: Olası sayısal değerlerin belirli bir kümesini listeler.
+- **`minimum`**: Minimum dahil edilen değer.
+- **`maximum`**: Maksimum dahil değer.
 
-**לערכים של `array`:**
+**`array` değerleri için:**
 
-- ‫**`items`**: הגדרת הסכימה של כל הפריטים במערך.
-- ‫**`prefixItems`**: מגדיר רשימה של סכימות עבור הפריטים הראשונים, ומאפשר מבנים דמויי-tuple.
-- ‫**`minItems`**: המספר המינימלי של פריטים במערך.
-- ‫**`maxItems`**: המספר המקסימלי של פריטים במערך.
+- **`items`**: Dizideki tüm öğelerin şemasını tanımlar.
+- **`prefixItems`**: İlk N öğe için bir şema listesi tanımlar ve demet benzeri yapılara izin verir.
+- **`minItems`**: Dizideki minimum öğe sayısı.
+- **`maxItems`**: Dizideki maksimum öğe sayısı.
 
-## פלט מובנה לעומת בקשה להפעלת פונקציה
+## Yapılandırılmış çıkışlar ve işlev çağrısı
 
-| תכונה | תרחיש שימוש ראשי |
+| Özellik | Birincil Kullanım Alanı |
 | --- | --- |
-| **פלט מובנה** | **עיצוב התשובה הסופית.** משתמשים בה כשרוצים ש*התשובה* של המודל תהיה בפורמט מסוים. |
-| **בקשה להפעלת פונקציה** | **ביצוע פעולות במהלך שיחה** משתמשים בה כשצריך שהמודל *יבקש מכם* לבצע משימה לפני שהוא מספק תשובה סופית. |
+| **Yapılandırılmış Çıkışlar** | **Son yanıtı biçimlendirme** Modelin *yanıtını* belirli bir biçimde almak istediğinizde kullanın. |
+| **İşlev Çağırma** | **Sohbet sırasında işlem yapma** Modelin nihai yanıtı vermeden önce bir görevi *yapmanızı istemesi* gerektiğinde kullanılır. |
 
-## שיטות מומלצות
+## En iyi uygulamalar
 
-- **תיאורים ברורים:** השתמשו בשדה `description` כדי להנחות את המודל.
-- **הקלדה חזקה:** שימוש בסוגים ספציפיים (`integer`, ‏`string`, ‏`enum`).
-- **הנדסת הנחיות:** חשוב להצהיר בבירור מה רוצים שהמודל יעשה.
-- **אימות:** למרות שהפלט הוא JSON עם תחביר תקין, תמיד צריך לאמת את הערכים באפליקציה.
-- **טיפול בשגיאות:** צריך להטמיע טיפול בשגיאות כדי לטפל בפלט שתואם לסכימה אבל לא נכון מבחינה סמנטית.
+- **Net açıklamalar:** Modeli yönlendirmek için `description` alanını kullanın.
+- **Güçlü tür:** Belirli türleri (`integer`, `string`, `enum`) kullanın.
+- **İstem mühendisliği:** Modelin ne yapmasını istediğinizi açıkça belirtin.
+- **Doğrulama:** Çıkış söz dizimi açısından doğru JSON olsa da uygulamanızdaki değerleri her zaman doğrulayın.
+- **Hata yönetimi:** Şemaya uygun ancak semantik olarak yanlış çıktılar için etkili hata yönetimi uygulayın.
 
-## מגבלות
+## Sınırlamalar
 
-- **קבוצת משנה של סכימה:** לא כל התכונות של סכימת JSON נתמכות.
-- **מורכבות הסכימה:** יכול להיות שסכימות גדולות מאוד או כאלה עם קינון עמוק יידחו.
+- **Şema alt kümesi:** Tüm JSON şema özellikleri desteklenmez.
+- **Şema karmaşıklığı:** Çok büyük veya derin iç içe yerleştirilmiş şemalar reddedilebilir.
 
-שליחת משוב
+Geri bildirim gönderin
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-עדכון אחרון: 2026-05-12 (שעון UTC).
+Son güncelleme tarihi: 2026-05-19 UTC.
 
-רוצה לתת לנו משוב?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-05-12 (שעון UTC)."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-05-19 UTC."],[],[]]

@@ -1,36 +1,36 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/function-calling?hl=id
-fetched_at: 2026-05-18T05:12:05.219523+00:00
+source_url: https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-BR
+fetched_at: 2026-05-25T05:25:55.006041+00:00
 title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Kirim masukan
+Envie comentários
 
-# Panggilan fungsi dengan Gemini API
+# Chamada de função com a API Gemini
 
-Panggilan fungsi memungkinkan Anda menghubungkan model ke alat dan API eksternal.
-Daripada membuat respons teks, model menentukan kapan harus memanggil fungsi tertentu dan memberikan parameter yang diperlukan untuk menjalankan tindakan di dunia nyata.
-Hal ini memungkinkan model bertindak sebagai jembatan antara bahasa alami dan tindakan serta data dunia nyata. Panggilan fungsi memiliki 3 kasus penggunaan utama:
+Com a chamada de função, é possível conectar modelos a ferramentas e APIs externas.
+Em vez de gerar respostas de texto, o modelo determina quando chamar funções específicas e fornece os parâmetros necessários para executar ações no mundo real.
+Isso permite que o modelo atue como uma ponte entre a linguagem natural e as ações e dados do mundo real. A chamada de função tem três casos de uso principais:
 
-- **Meningkatkan Pengetahuan:** Mengakses informasi dari sumber eksternal seperti database, API, dan pusat informasi.
-- **Memperluas Kemampuan:** Menggunakan alat eksternal untuk melakukan komputasi dan memperluas batasan model, seperti menggunakan kalkulator atau membuat diagram.
-- **Mengambil Tindakan:** Berinteraksi dengan sistem eksternal menggunakan API, seperti
-  menjadwalkan janji temu, membuat invoice, mengirim email, atau mengontrol
-  perangkat smart home.
+- **Aumentar o conhecimento**:acesse informações de fontes externas, como bancos de dados, APIs e bases de conhecimento.
+- **Ampliar recursos**:use ferramentas externas para realizar cálculos e ampliar as limitações do modelo, como usar uma calculadora ou criar gráficos.
+- **Realizar ações**:interaja com sistemas externos usando APIs, como
+  agendar compromissos, criar faturas, enviar e-mails ou controlar
+  dispositivos domésticos inteligentes.
 
-Get Weather
-Schedule Meeting
-Create Chart
+Receber clima
+Agendar reunião
+Criar gráfico
 
 ### Python
 
@@ -74,7 +74,7 @@ config = types.GenerateContentConfig(tools=[tools])
 
 # Send request with function declarations
 response = client.models.generate_content(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents="Schedule a meeting with Bob and Alice for 03/14/2025 at 10:00 AM about the Q3 planning.",
     config=config,
 )
@@ -131,7 +131,7 @@ const scheduleMeetingFunctionDeclaration = {
 
 // Send request with function declarations
 const response = await ai.models.generateContent({
-  model: 'gemini-3-flash-preview',
+  model: 'gemini-3.5-flash',
   contents: 'Schedule a meeting with Bob and Alice for 03/27/2025 at 10:00 AM about the Q3 planning.',
   config: {
     tools: [{
@@ -157,7 +157,7 @@ if (response.functionCalls && response.functionCalls.length > 0) {
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -X POST \
@@ -208,46 +208,36 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
   }'
 ```
 
-## Cara kerja panggilan fungsi
+## Como a chamada de funções funciona
 
-![ringkasan
-panggilan fungsi](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=id)
+![Visão geral das chamadas de função](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=pt-br)
 
-Panggilan fungsi melibatkan interaksi terstruktur antara aplikasi Anda, model, dan fungsi eksternal. Berikut perincian prosesnya:
+A chamada de função envolve uma interação estruturada entre seu aplicativo, o modelo e funções externas. Confira os detalhes do processo:
 
-1. **Tentukan deklarasi fungsi:** Tentukan deklarasi fungsi dalam kode aplikasi Anda. Deklarasi Fungsi menjelaskan nama,
-   parameter, dan tujuan fungsi ke model.
-2. **Memanggil API dengan deklarasi fungsi:** Kirim perintah pengguna beserta
-   deklarasi fungsi ke model. Alat ini menganalisis permintaan dan menentukan
-   apakah panggilan fungsi akan bermanfaat. Jika ya, model akan merespons dengan objek JSON terstruktur
-   yang berisi nama fungsi, argumen, dan `id` unik
-   (`id` ini kini selalu ditampilkan oleh API untuk model Gemini 3\*).
-3. **Jalankan kode fungsi (tanggung jawab Anda):** Model *tidak*
-   menjalankan fungsi itu sendiri. Aplikasi Anda bertanggung jawab untuk
-   memproses respons dan memeriksa panggilan fungsi. Jika
-   - **Ya**: Ekstrak nama, argumen, dan `id` fungsi, lalu jalankan
-     fungsi yang sesuai di aplikasi Anda.
-   - **Tidak:** Model telah memberikan respons teks langsung terhadap perintah
-     (alur ini kurang ditekankan dalam contoh, tetapi merupakan kemungkinan hasil).
-4. **Buat respons yang mudah dipahami pengguna:** Jika fungsi dijalankan, ambil
-   hasilnya dan kirim kembali ke model, pastikan Anda menyertakan `id` yang cocok
-   dalam giliran percakapan berikutnya. LLM akan menggunakan hasilnya untuk membuat respons akhir yang mudah digunakan dan menggabungkan informasi dari panggilan fungsi.
+1. **Definir declaração de função**:defina a declaração de função no código do aplicativo. As declarações de função descrevem o nome, os parâmetros e a finalidade da função para o modelo.
+2. **Chamar a API com declarações de função**:envie o comando do usuário com as declarações de função para o modelo. Ele analisa a solicitação e determina se uma chamada de função seria útil. Se for o caso, ele responde com um objeto JSON estruturado que contém o nome da função, os argumentos e um `id` exclusivo. Esse `id` agora é sempre retornado pela API para modelos do Gemini 3\*.
+3. **Executar o código da função (sua responsabilidade)**: o modelo *não* executa a função em si. É responsabilidade do aplicativo
+   processar a resposta e verificar uma chamada de função. Se
+   - **Sim**: extraia o nome, os argumentos e o `id` da função e execute
+     a função correspondente no seu aplicativo.
+   - **Não**:o modelo forneceu uma resposta de texto direta ao comando.
+     (Esse fluxo é menos enfatizado no exemplo, mas é um resultado possível.)
+4. **Crie uma resposta fácil de usar**:se uma função foi executada, capture o
+   resultado e envie-o de volta ao modelo, incluindo o `id`
+   correspondente em uma próxima vez da conversa. Ele vai usar o resultado para gerar uma resposta final e fácil de usar que incorpora as informações da chamada de função.
 
-Proses ini dapat diulang di beberapa giliran, sehingga memungkinkan interaksi dan alur kerja yang kompleks. Model ini juga mendukung pemanggilan beberapa fungsi
-dalam satu giliran ([panggilan fungsi paralel](#parallel_function_calling)), secara
-berurutan ([panggilan fungsi komposit](#compositional_function_calling)),
-dan dengan alat Gemini bawaan ([penggunaan multi-alat](#native-tools)).
+Esse processo pode ser repetido várias vezes, permitindo interações e fluxos de trabalho complexos. O modelo também permite chamar várias funções
+em um único turno ([chamada de função paralela](#parallel_function_calling)), em
+sequência ([chamada de função composicional](#compositional_function_calling))
+e com ferramentas integradas do Gemini ([uso de várias ferramentas](#native-tools)).
 
-\* **Selalu petakan ID fungsi:** Gemini 3 kini selalu menampilkan
-`id` unik dengan setiap `functionCall`. Sertakan `id` ini persis seperti yang ada di
-`functionResponse` agar model dapat memetakan hasil Anda secara akurat kembali ke
-permintaan asli.
+\* **Sempre mapear IDs de função**:o Gemini 3 sempre retorna um `id` exclusivo com cada `functionCall`. Inclua exatamente este `id` no seu
+`functionResponse` para que o modelo possa mapear com precisão o resultado de volta para a
+solicitação original.
 
-### Langkah 1: Tentukan deklarasi fungsi
+### Etapa 1: definir uma declaração de função
 
-Tentukan fungsi dan deklarasinya dalam kode aplikasi yang memungkinkan
-pengguna menyetel nilai cahaya dan membuat permintaan API. Fungsi ini dapat memanggil
-layanan atau API eksternal.
+Defina uma função e a declaração dela no código do aplicativo para que os usuários possam definir valores de luz e fazer uma solicitação de API. Essa função pode chamar serviços ou APIs externos.
 
 ### Python
 
@@ -328,10 +318,12 @@ function setLightValues(brightness, color_temp) {
 }
 ```
 
-### Langkah 2: Panggil model dengan deklarasi fungsi
+### Etapa 2: chamar o modelo com declarações de função
 
-Setelah menentukan deklarasi fungsi, Anda dapat meminta model untuk
-menggunakannya. Model ini menganalisis perintah dan deklarasi fungsi serta memutuskan apakah akan merespons secara langsung atau memanggil fungsi. Jika fungsi dipanggil, objek respons akan berisi saran panggilan fungsi.
+Depois de definir as declarações de função, você pode pedir ao modelo para
+usá-las. Ele analisa o comando e as declarações de função e decide se
+vai responder diretamente ou chamar uma função. Se uma função for chamada, o objeto de resposta
+vai conter uma sugestão de chamada de função.
 
 ### Python
 
@@ -352,7 +344,7 @@ contents = [
 
 # Send request with function declarations
 response = client.models.generate_content(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents=contents,
     config=config,
 )
@@ -385,7 +377,7 @@ const contents = [
 
 // Send request with function declarations
 const response = await ai.models.generateContent({
-  model: 'gemini-3-flash-preview',
+  model: 'gemini-3.5-flash',
   contents: contents,
   config: config
 });
@@ -393,7 +385,9 @@ const response = await ai.models.generateContent({
 console.log(response.functionCalls[0]);
 ```
 
-Kemudian, model akan menampilkan objek `functionCall` dalam skema yang kompatibel dengan OpenAPI yang menentukan cara memanggil satu atau beberapa fungsi yang dideklarasikan untuk merespons pertanyaan pengguna.
+Em seguida, o modelo retorna um objeto `functionCall` em um esquema compatível com OpenAPI
+especificando como chamar uma ou mais das funções declaradas para
+responder à pergunta do usuário.
 
 ### Python
 
@@ -411,10 +405,10 @@ id='8f2b1a3c' args={'color_temp': 'warm', 'brightness': 25} name='set_light_valu
 }
 ```
 
-### Langkah 3: Jalankan kode fungsi set\_light\_values
+### Etapa 3: executar o código da função set\_light\_values
 
-Ekstrak detail panggilan fungsi dari respons model, uraikan argumen
-, dan jalankan fungsi `set_light_values`.
+Extraia os detalhes da chamada de função da resposta do modelo, analise os argumentos
+e execute a função `set_light_values`.
 
 ### Python
 
@@ -440,9 +434,9 @@ if (tool_call.name === 'set_light_values') {
 }
 ```
 
-### Langkah 4: Buat respons yang mudah dipahami pengguna dengan hasil fungsi dan panggil model lagi
+### Etapa 4: criar uma resposta fácil de usar com o resultado da função e chamar o modelo novamente
 
-Terakhir, kirim hasil eksekusi fungsi kembali ke model agar model dapat menggabungkan informasi ini ke dalam respons akhirnya kepada pengguna.
+Por fim, envie o resultado da execução da função de volta ao modelo para que ele possa incorporar essas informações na resposta final ao usuário.
 
 ### Python
 
@@ -463,7 +457,7 @@ contents.append(types.Content(role="user", parts=[function_response_part])) # Ap
 
 client = genai.Client()
 final_response = client.models.generate_content(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     config=config,
     contents=contents,
 )
@@ -487,7 +481,7 @@ contents.push({ role: 'user', parts: [{ functionResponse: function_response_part
 
 // Get the final response from the model
 const final_response = await ai.models.generateContent({
-  model: 'gemini-3-flash-preview',
+  model: 'gemini-3.5-flash',
   contents: contents,
   config: config
 });
@@ -495,81 +489,65 @@ const final_response = await ai.models.generateContent({
 console.log(final_response.text);
 ```
 
-Tindakan ini menyelesaikan alur panggilan fungsi. Model berhasil menggunakan fungsi `set_light_values` untuk melakukan tindakan permintaan pengguna.
+Isso conclui o fluxo de chamadas de função. O modelo usou a função `set_light_values` para realizar a ação solicitada pelo usuário.
 
-## Deklarasi fungsi
+## Declarações de função
 
-Saat menerapkan panggilan fungsi dalam perintah, Anda membuat objek `tools`,
-yang berisi satu atau beberapa `function declarations`. Anda menentukan fungsi menggunakan
-JSON, khususnya dengan [subset pilihan](https://ai.google.dev/api/caching?hl=id#Schema)
-dari format [skema OpenAPI](https://spec.openapis.org/oas/v3.0.3#schemaw). Deklarasi
-fungsi tunggal dapat mencakup parameter berikut:
+Ao implementar a chamada de função em um comando, você cria um objeto `tools`,
+que contém um ou mais `function declarations`. Você define funções usando
+JSON, especificamente com um [subconjunto selecionado](https://ai.google.dev/api/caching?hl=pt-br#Schema)
+do formato [esquema OpenAPI](https://spec.openapis.org/oas/v3.0.3#schemaw). Uma única declaração de função pode incluir os seguintes parâmetros:
 
-- `name` (string): Nama unik untuk fungsi (`get_weather_forecast`,
-  `send_email`). Gunakan nama deskriptif tanpa spasi atau karakter khusus
-  (gunakan garis bawah atau camelCase).
-- `description` (string): Penjelasan yang jelas dan mendetail tentang tujuan dan kemampuan fungsi. Hal ini sangat penting agar model memahami kapan harus menggunakan fungsi tersebut. Bersikaplah spesifik dan berikan contoh jika diperlukan ("Menemukan bioskop berdasarkan lokasi dan secara opsional judul film yang saat ini diputar di bioskop").
-- `parameters` (objek): Menentukan parameter input yang diharapkan fungsi.
-  - `type` (string): Menentukan jenis data keseluruhan, seperti `object`.
-  - `properties` (objek): Mencantumkan setiap parameter, masing-masing dengan:
-    - `type` (string): Jenis data parameter, seperti `string`,
-      `integer`, `boolean, array`.
-    - `description` (string): Deskripsi tujuan dan format parameter. Berikan contoh dan batasan ("Kota dan negara bagian, misalnya, 'San Francisco, CA' atau kode pos, misalnya, '95616'").
-    - `enum` (array, opsional): Jika nilai parameter berasal dari set
-      tetap, gunakan "enum" untuk mencantumkan nilai yang diizinkan, bukan hanya
-      mendeskripsikannya dalam deskripsi. Hal ini meningkatkan akurasi ("enum":
+- `name` (string): um nome exclusivo para a função (`get_weather_forecast`, `send_email`). Use nomes descritivos sem espaços ou caracteres especiais (use sublinhados ou camelCase).
+- `description` (string): uma explicação clara e detalhada da finalidade e das capacidades da função. Isso é crucial para que o modelo entenda quando usar a função. Seja específico e dê exemplos, se necessário ("Encontra cinemas com base na localização e, opcionalmente, no título do filme que está sendo exibido no momento").
+- `parameters` (objeto): define os parâmetros de entrada que a função espera.
+  - `type` (string): especifica o tipo de dados geral, como `object`.
+  - `properties` (objeto): lista parâmetros individuais, cada um com:
+    - `type` (string): o tipo de dados do parâmetro, como `string`, `integer` e `boolean, array`.
+    - `description` (string): uma descrição da finalidade e do formato do parâmetro. Forneça exemplos e restrições ("A cidade e o estado, por exemplo, 'São Francisco, CA' ou um CEP, por exemplo, '95616'").
+    - `enum` (matriz, opcional): se os valores de parâmetro forem de um conjunto fixo, use "enum" para listar os valores permitidos em vez de apenas descrevê-los na descrição. Isso melhora a precisão ("enum":
       ["daylight", "cool", "warm"]).
-  - `required` (array): Array string yang mencantumkan nama parameter yang
-    wajib agar fungsi dapat beroperasi.
+  - `required` (matriz): uma matriz de strings que lista os nomes dos parâmetros obrigatórios para o funcionamento da função.
 
-Anda juga dapat membuat `FunctionDeclarations` langsung dari fungsi Python menggunakan
+Também é possível criar `FunctionDeclarations` diretamente de funções Python usando
 `types.FunctionDeclaration.from_callable(client=client, callable=your_function)`.
 
-## Panggilan fungsi dengan model penalaran
+## Chamada de função com modelos de pensamento
 
-Model seri Gemini 3 dan 2.5 menggunakan proses ["penalaran"](https://ai.google.dev/gemini-api/docs/thinking?hl=id) internal untuk memproses permintaan. Peningkatan ini secara signifikan meningkatkan performa panggilan fungsi, sehingga model dapat menentukan dengan lebih baik kapan harus memanggil fungsi dan parameter mana yang harus digunakan. Karena Gemini API tidak memiliki status, model menggunakan
-[tanda tangan pemikiran](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=id) untuk mempertahankan konteks
-di seluruh percakapan multi-giliran.
+Os modelos das séries Gemini 3 e 2.5 usam um processo interno de ["raciocínio"](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br) para analisar as solicitações. Isso melhora significativamente o desempenho da chamada de função, permitindo que o modelo determine melhor quando chamar uma função e quais parâmetros usar. Como a API Gemini não tem estado, os modelos usam [assinaturas de pensamento](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=pt-br) para manter o contexto em conversas de vários turnos.
 
-Bagian ini membahas pengelolaan lanjutan tanda tangan pemikiran dan hanya
-diperlukan jika Anda membuat permintaan API secara manual (misalnya, melalui REST) atau
-memanipulasi histori percakapan.
+Esta seção aborda o gerenciamento avançado de assinaturas de pensamento e só é
+necessária se você estiver criando solicitações de API manualmente (por exemplo, via REST) ou
+manipulando o histórico de conversas.
 
-**Jika Anda menggunakan [SDK GenAI Google](https://ai.google.dev/gemini-api/docs/libraries?hl=id) (library resmi kami), Anda tidak perlu mengelola proses ini**. SDK
-secara otomatis menangani langkah-langkah yang diperlukan, seperti yang ditunjukkan dalam
-[contoh](https://ai.google.dev/gemini-api/docs/function-calling?hl=id#step-4) sebelumnya.
+**Se você estiver usando os [SDKs da GenAI do Google](https://ai.google.dev/gemini-api/docs/libraries?hl=pt-br) (nossas bibliotecas oficiais), não será necessário gerenciar esse processo**. Os SDKs
+processam automaticamente as etapas necessárias, conforme mostrado no [exemplo](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br#step-4) anterior.
 
-### Mengelola histori percakapan secara manual
+### Gerenciar o histórico de conversas manualmente
 
-Jika Anda mengubah histori percakapan secara manual, alih-alih mengirimkan
-[respons sebelumnya yang lengkap](https://ai.google.dev/gemini-api/docs/function-calling?hl=id#step-4), Anda
-harus menangani `thought_signature` yang disertakan dalam giliran model dengan benar.
+Se você modificar o histórico de conversas manualmente, em vez de enviar a [resposta anterior completa](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br#step-4), processe corretamente o `thought_signature` incluído na vez do modelo.
 
-Ikuti aturan berikut untuk memastikan konteks model dipertahankan:
+Siga estas regras para garantir que o contexto do modelo seja preservado:
 
-- Selalu kirim `thought_signature` kembali ke model di dalam
-  [`Part`](https://ai.google.dev/api?hl=id#request-body-structure) aslinya.
-- **Selalu sertakan `id` yang persis sama dari `function_call` di
-  `function_response` Anda agar API dapat memetakan hasil ke permintaan yang benar.**
-- Jangan gabungkan `Part` yang berisi tanda tangan dengan `Part` yang tidak berisi tanda tangan. Hal ini
-  merusak konteks posisi pemikiran.
-- Jangan menggabungkan dua `Parts` yang keduanya berisi tanda tangan, karena string
-  tanda tangan tidak dapat digabungkan.
+- Sempre envie o `thought_signature` de volta ao modelo dentro do [`Part`](https://ai.google.dev/api?hl=pt-br#request-body-structure) original.
+- **Sempre inclua o `id` exato do `function_call` no seu
+  `function_response` para que a API possa mapear o resultado para a solicitação correta.**
+- Não mescle um `Part` com uma assinatura e outro sem. Isso quebra o contexto posicional do pensamento.
+- Não combine dois `Parts` que contenham assinaturas, porque as strings de assinatura não podem ser mescladas.
 
-#### Tanda tangan pemikiran Gemini 3
+#### Assinaturas de pensamento do Gemini 3
 
-Di Gemini 3, [`Part`](https://ai.google.dev/api?hl=id#request-body-structure) respons model
-dapat berisi tanda tangan pemikiran.
-Meskipun kami umumnya merekomendasikan menampilkan tanda tangan dari semua jenis `Part`, meneruskan tanda tangan pemikiran kembali adalah wajib untuk panggilan fungsi. Kecuali jika Anda memanipulasi histori percakapan secara manual, Google GenAI SDK akan menangani tanda tangan pemikiran secara otomatis.
+No Gemini 3, qualquer [`Part`](https://ai.google.dev/api?hl=pt-br#request-body-structure) de uma resposta do modelo
+pode conter uma assinatura de pensamento.
+Embora geralmente recomendemos retornar assinaturas de todos os tipos `Part`,
+transmitir assinaturas de pensamento é obrigatório para a chamada de função. A menos que você manipule o histórico de conversas manualmente, o SDK da GenAI do Google vai processar as assinaturas de pensamento automaticamente.
 
-Jika Anda memanipulasi histori percakapan secara manual, lihat halaman
-[Tanda Tangan Pemikiran](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=id) untuk mendapatkan panduan
-dan detail lengkap tentang cara menangani tanda tangan pemikiran untuk Gemini 3.
+Se você estiver manipulando o histórico de conversas manualmente, consulte a página [Assinaturas de pensamento](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=pt-br) para orientações e detalhes completos sobre como lidar com assinaturas de pensamento no Gemini 3.
 
-##### Memeriksa tanda tangan pemikiran
+##### Como inspecionar assinaturas de pensamento
 
-Meskipun tidak diperlukan untuk penerapan, Anda dapat memeriksa respons untuk melihat
-`thought_signature` untuk tujuan proses debug atau edukasi.
+Embora não seja necessário para a implementação, você pode inspecionar a resposta para ver o
+`thought_signature` para fins de depuração ou educacionais.
 
 ### Python
 
@@ -597,17 +575,15 @@ if (part.thoughtSignature) {
 }
 ```
 
-Pelajari lebih lanjut batasan dan penggunaan tanda tangan pemikiran, serta model pemikiran secara umum, di halaman [Pemikiran](https://ai.google.dev/gemini-api/docs/thinking?hl=id#signatures).
+Saiba mais sobre as limitações e o uso de assinaturas de pensamento e sobre modelos de pensamento em geral na página [Pensamento](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br#signatures).
 
-## Panggilan fungsi paralel
+## Chamada de função paralela
 
-Selain panggilan fungsi satu giliran, Anda juga dapat memanggil beberapa fungsi sekaligus. Panggilan fungsi paralel memungkinkan Anda menjalankan beberapa fungsi
-sekaligus dan digunakan saat fungsi tidak saling bergantung. Hal ini berguna dalam skenario seperti mengumpulkan data dari beberapa sumber independen, seperti mengambil detail pelanggan dari berbagai database atau memeriksa tingkat inventaris di berbagai gudang atau melakukan beberapa tindakan seperti mengubah apartemen Anda menjadi disko.
+Além da chamada de função de turno único, também é possível chamar várias
+funções de uma só vez. Com a chamada de função paralela, é possível executar várias funções
+ao mesmo tempo, e ela é usada quando as funções não dependem umas das outras. Isso é útil em cenários como coleta de dados de várias fontes independentes, como recuperação de detalhes de clientes de diferentes bancos de dados ou verificação de níveis de inventário em vários armazéns ou execução de várias ações, como transformar seu apartamento em uma discoteca.
 
-Saat model memulai beberapa panggilan fungsi dalam satu giliran, Anda tidak perlu menampilkan objek `function_result` dalam urutan yang sama dengan objek `function_call` yang diterima. Gemini API memetakan setiap hasil kembali ke
-panggilan yang sesuai menggunakan `id` dari output model. Dengan demikian, Anda dapat
-mengeksekusi fungsi secara asinkron dan menambahkan hasilnya ke daftar saat
-fungsi selesai.
+Quando o modelo inicia várias chamadas de função em uma única interação, não é necessário retornar os objetos `function_result` na mesma ordem em que os objetos `function_call` foram recebidos. A API Gemini mapeia cada resultado de volta para a chamada correspondente usando o `id` da saída do modelo. Isso permite executar as funções de forma assíncrona e anexar os resultados à lista à medida que são concluídos.
 
 ### Python
 
@@ -717,9 +693,9 @@ const dimLights = {
 };
 ```
 
-Konfigurasi mode panggilan fungsi untuk mengizinkan penggunaan semua alat yang ditentukan.
-Untuk mempelajari lebih lanjut, Anda dapat membaca tentang
-[mengonfigurasi panggilan fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id#function_calling_modes).
+Configure o modo de chamada de função para permitir o uso de todas as ferramentas especificadas.
+Para saber mais, leia sobre
+[como configurar a chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br#function_calling_modes).
 
 ### Python
 
@@ -743,7 +719,7 @@ config = types.GenerateContentConfig(
     ),
 )
 
-chat = client.chats.create(model="gemini-3-flash-preview", config=config)
+chat = client.chats.create(model="gemini-3.5-flash", config=config)
 response = chat.send_message("Turn this place into a party!")
 
 # Print out each of the function calls requested from this single call
@@ -778,7 +754,7 @@ const ai = new GoogleGenAI({});
 
 // Create a chat session
 const chat = ai.chats.create({
-    model: 'gemini-3-flash-preview',
+    model: 'gemini-3.5-flash',
     config: config
 });
 const response = await chat.sendMessage({message: 'Turn this place into a party!'});
@@ -793,10 +769,10 @@ for (const fn of response.functionCalls) {
 }
 ```
 
-Setiap hasil yang dicetak mencerminkan satu panggilan fungsi yang telah diminta model. Untuk mengirimkan kembali hasilnya, sertakan respons dalam urutan yang sama seperti
-yang diminta.
+Cada um dos resultados impressos reflete uma única chamada de função que o modelo solicitou. Para enviar os resultados, inclua as respostas na mesma ordem em que foram solicitadas.
 
-Python SDK mendukung [panggilan fungsi otomatis](https://ai.google.dev/gemini-api/docs/function-calling?hl=id#automatic_function_calling_python_only), yang secara otomatis mengonversi fungsi Python menjadi deklarasi, menangani siklus eksekusi panggilan fungsi dan respons untuk Anda. Berikut adalah contoh untuk kasus penggunaan disko.
+O SDK do Python oferece suporte à [chamada automática de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br#automatic_function_calling_python_only), que converte automaticamente funções Python em declarações e processa o ciclo de execução e resposta da chamada de função para você. Confira um exemplo para o caso de uso de
+disco.
 
 ### Python
 
@@ -849,7 +825,7 @@ config = types.GenerateContentConfig(
 
 # Make the request
 response = client.models.generate_content(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents="Do everything you need to this place into party!",
     config=config,
 )
@@ -859,16 +835,18 @@ print(response.text)
 # I've turned on the disco ball, started playing loud and energetic music, and dimmed the lights to 50% brightness. Let's get this party started!
 ```
 
-## Panggilan fungsi komposit
+## Chamada de função composicional
 
-Pemanggilan fungsi komposit atau berurutan memungkinkan Gemini merangkai beberapa panggilan fungsi untuk memenuhi permintaan yang kompleks. Misalnya, untuk menjawab "Dapatkan suhu di lokasi saya saat ini", Gemini API mungkin pertama-tama memanggil fungsi `get_current_location()`, diikuti dengan fungsi `get_weather()` yang menggunakan lokasi sebagai parameter.
+A chamada de função composicional ou sequencial permite que o Gemini encadeie várias
+chamadas de função para atender a uma solicitação complexa. Por exemplo, para responder a "Qual é a temperatura no meu local atual?", a API Gemini pode primeiro invocar uma função `get_current_location()` seguida por uma função `get_weather()` que usa o local como parâmetro.
 
-Contoh berikut menunjukkan cara menerapkan panggilan fungsi komposit menggunakan Python SDK dan panggilan fungsi otomatis.
+O exemplo a seguir demonstra como implementar a chamada de função
+composicional usando o SDK do Python e a chamada de função automática.
 
 ### Python
 
-Contoh ini menggunakan fitur panggilan fungsi otomatis dari
-Python SDK `google-genai`. SDK secara otomatis mengonversi fungsi Python ke skema yang diperlukan, menjalankan panggilan fungsi saat diminta oleh model, dan mengirimkan hasilnya kembali ke model untuk menyelesaikan tugas.
+Este exemplo usa o recurso de chamada de função automática do
+SDK do Python `google-genai`. O SDK converte automaticamente as funções Python no esquema necessário, executa as chamadas de função quando solicitado pelo modelo e envia os resultados de volta para o modelo para concluir a tarefa.
 
 ```
 import os
@@ -898,7 +876,7 @@ config = types.GenerateContentConfig(
 
 # Make the request
 response = client.models.generate_content(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents="If it's warmer than 20°C in London, set the thermostat to 20°C, otherwise set it to 18°C.",
     config=config,
 )
@@ -907,11 +885,9 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-**Output yang Diinginkan**
+**Resposta esperada**
 
-Saat menjalankan kode, Anda akan melihat SDK mengatur panggilan fungsi. Model pertama-tama memanggil `get_weather_forecast`, menerima
-suhu, lalu memanggil `set_thermostat_temperature` dengan
-nilai yang benar berdasarkan logika dalam perintah.
+Ao executar o código, você vai ver o SDK orquestrando as chamadas de função. Primeiro, o modelo chama `get_weather_forecast`, recebe a temperatura e chama `set_thermostat_temperature` com o valor correto com base na lógica do comando.
 
 ```
 Tool Call: get_weather_forecast(location=London)
@@ -923,7 +899,8 @@ OK. I've set the thermostat to 20°C.
 
 ### JavaScript
 
-Contoh ini menunjukkan cara menggunakan JavaScript/TypeScript SDK untuk melakukan panggilan fungsi komposit menggunakan loop eksekusi manual.
+Este exemplo mostra como usar o SDK JavaScript/TypeScript para fazer chamadas de função
+composicionais usando um loop de execução manual.
 
 ```
 import { GoogleGenAI, Type } from "@google/genai";
@@ -1002,7 +979,7 @@ let contents = [
 // Loop until the model has no more function calls to make
 while (true) {
   const result = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     contents,
     config: { tools },
   });
@@ -1052,11 +1029,9 @@ while (true) {
 }
 ```
 
-**Output yang Diinginkan**
+**Resposta esperada**
 
-Saat menjalankan kode, Anda akan melihat SDK mengatur panggilan fungsi. Model pertama-tama memanggil `get_weather_forecast`, menerima
-suhu, lalu memanggil `set_thermostat_temperature` dengan
-nilai yang benar berdasarkan logika dalam perintah.
+Ao executar o código, você vai ver o SDK orquestrando as chamadas de função. Primeiro, o modelo chama `get_weather_forecast`, recebe a temperatura e chama `set_thermostat_temperature` com o valor correto com base na lógica do comando.
 
 ```
 Tool Call: get_weather_forecast(location=London)
@@ -1066,8 +1041,8 @@ Tool Response: {'status': 'success'}
 OK. It's 25°C in London, so I've set the thermostat to 20°C.
 ```
 
-Panggilan fungsi komposit adalah fitur [Live
-API](https://ai.google.dev/gemini-api/docs/live?hl=id) bawaan. Artinya, Live API dapat menangani panggilan fungsi yang mirip dengan Python SDK.
+A chamada de função composicional é um recurso nativo da [API Live](https://ai.google.dev/gemini-api/docs/live?hl=pt-br). Isso significa que a API Live
+pode processar a chamada de função de maneira semelhante ao SDK do Python.
 
 ### Python
 
@@ -1107,24 +1082,21 @@ const tools = [
 await run(prompt, tools=tools, modality="AUDIO")
 ```
 
-## Mode panggilan fungsi
+## Modos de chamada de função
 
-Gemini API memungkinkan Anda mengontrol cara model menggunakan alat yang disediakan (deklarasi fungsi). Secara khusus, Anda dapat menetapkan mode dalam
-the.`function_calling_config`.
+Com a API Gemini, você controla como o modelo usa as ferramentas fornecidas (declarações de função). Especificamente, você pode definir o modo em
+`function_calling_config`.
 
-- `VALIDATED`: Mode default untuk kombinasi alat (saat alat bawaan atau output terstruktur juga diaktifkan). Model dibatasi untuk memprediksi panggilan fungsi atau bahasa alami, dan memastikan kepatuhan skema fungsi. Jika
-  `allowed_function_names` tidak diberikan, model akan memilih dari semua
-  deklarasi fungsi yang tersedia. Jika `allowed_function_names` diberikan, model akan memilih dari kumpulan fungsi yang diizinkan. Mode ini mengurangi panggilan fungsi yang salah format (dibandingkan dengan mode `AUTO`).
-- `AUTO`: Mode default saat hanya alat function\_declarations yang diaktifkan.
-  Model memutuskan apakah akan menghasilkan respons bahasa alami atau menyarankan panggilan fungsi berdasarkan perintah dan konteks.
-- `ANY`: Model dibatasi untuk selalu memprediksi panggilan fungsi dan
-  memastikan kepatuhan skema fungsi. Jika `allowed_function_names` tidak
-  ditentukan, model dapat memilih dari deklarasi fungsi yang diberikan.
-  Jika `allowed_function_names` diberikan sebagai daftar, model hanya dapat memilih
-  dari fungsi dalam daftar tersebut. Gunakan mode ini saat Anda memerlukan respons panggilan
-  fungsi untuk setiap perintah (jika berlaku).
-- `NONE`: Model *dilarang* melakukan panggilan fungsi. Hal ini setara dengan mengirim permintaan tanpa deklarasi fungsi apa pun. Gunakan ini untuk
-  menonaktifkan panggilan fungsi untuk sementara tanpa menghapus definisi alat Anda.
+- `VALIDATED`: modo padrão para combinação de ferramentas (quando as ferramentas integradas ou
+  saídas estruturadas também estão ativadas). O modelo é restrito a prever chamadas de função ou linguagem natural e garante a adesão ao esquema de função. Se `allowed_function_names` não for fornecido, o modelo vai escolher entre todas as declarações de função disponíveis. Se `allowed_function_names` for fornecido, o modelo vai escolher entre o conjunto de funções permitidas. Esse modo reduz as chamadas de função malformadas (em comparação com o modo `AUTO`).
+- `AUTO`: modo padrão quando apenas a ferramenta "function\_declarations" está ativada.
+  O modelo decide se quer gerar uma resposta de linguagem natural ou sugerir
+  uma chamada de função com base no comando e no contexto.
+- `ANY`: o modelo é restrito a sempre prever uma chamada de função e garante a adesão ao esquema de função. Se `allowed_function_names` não for especificado, o modelo poderá escolher qualquer uma das declarações de função fornecidas.
+  Se `allowed_function_names` for fornecido como uma lista, o modelo só poderá escolher entre as funções dessa lista. Use esse modo quando precisar de uma resposta de chamada de função para cada comando (se aplicável).
+- `NONE`: o modelo é *proibido* de fazer chamadas de função. Isso é
+  equivalente a enviar uma solicitação sem declarações de função. Use isso para
+  desativar temporariamente as chamadas de função sem remover as definições de ferramentas.
 
 ### Python
 
@@ -1165,20 +1137,21 @@ const config = {
 };
 ```
 
-## Panggilan fungsi otomatis (khusus Python)
+## Chamada automática de função (somente em Python)
 
-Saat menggunakan Python SDK, Anda dapat menyediakan fungsi Python secara langsung sebagai alat.
-SDK mengonversi fungsi ini menjadi deklarasi, mengelola eksekusi panggilan fungsi, dan menangani siklus respons untuk Anda. Tentukan fungsi Anda dengan
-petunjuk jenis dan docstring. Untuk hasil yang optimal, sebaiknya gunakan
-[string dokumen gaya Google.](https://google.github.io/styleguide/pyguide.html#383-functions-and-methods)
-SDK kemudian akan otomatis:
+Ao usar o SDK para Python, é possível fornecer funções do Python diretamente como ferramentas.
+O SDK converte essas funções em declarações, gerencia a execução da chamada de função
+e processa o ciclo de resposta para você. Defina a função com
+dicas de tipo e uma docstring. Para ter os melhores resultados, recomendamos usar [strings de documentação no estilo do Google](https://google.github.io/styleguide/pyguide.html#383-functions-and-methods).
+Em seguida, o SDK vai fazer o seguinte automaticamente:
 
-1. Mendeteksi respons panggilan fungsi dari model.
-2. Panggil fungsi Python yang sesuai dalam kode Anda.
-3. Kirim respons fungsi kembali ke model.
-4. Menampilkan respons teks akhir model.
+1. Detectar respostas de chamada de função do modelo.
+2. Chame a função Python correspondente no seu código.
+3. Envie a resposta da função de volta ao modelo.
+4. Retorne a resposta de texto final do modelo.
 
-Saat ini, SDK tidak mengurai deskripsi argumen ke dalam slot deskripsi properti deklarasi fungsi yang dihasilkan. Sebagai gantinya, seluruh docstring dikirim sebagai deskripsi fungsi tingkat teratas.
+No momento, o SDK não analisa as descrições de argumentos nos slots de descrição de propriedade da declaração de função gerada. Em vez disso, ele envia a
+docstring inteira como a descrição da função de nível superior.
 
 ### Python
 
@@ -1207,7 +1180,7 @@ config = types.GenerateContentConfig(
 
 # Make the request
 response = client.models.generate_content(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents="What's the temperature in Boston?",
     config=config,
 )
@@ -1215,7 +1188,7 @@ response = client.models.generate_content(
 print(response.text)  # The SDK handles the function call and returns the final text
 ```
 
-Anda dapat menonaktifkan panggilan fungsi otomatis dengan:
+Para desativar a chamada automática de função, use:
 
 ### Python
 
@@ -1226,10 +1199,9 @@ config = types.GenerateContentConfig(
 )
 ```
 
-### Deklarasi skema fungsi otomatis
+### Declaração automática de esquema de função
 
-API ini dapat mendeskripsikan salah satu jenis berikut. Jenis `Pydantic` diizinkan, asalkan kolom yang ditentukan di dalamnya juga terdiri dari jenis yang diizinkan. Jenis dict (seperti `dict[str: int]`) tidak didukung dengan baik di sini, jadi jangan
-menggunakannya.
+A API pode descrever qualquer um dos seguintes tipos. Os tipos `Pydantic` são permitidos, desde que os campos definidos neles também sejam compostos de tipos permitidos. Os tipos de dicionário (como `dict[str: int]`) não são bem aceitos aqui. Não os use.
 
 ### Python
 
@@ -1238,7 +1210,7 @@ AllowedType = (
   int | float | bool | str | list['AllowedType'] | pydantic.BaseModel)
 ```
 
-Untuk melihat tampilan skema yang diinferensikan, Anda dapat mengonversinya menggunakan
+Para ver como é o esquema inferido, converta-o usando
 [`from_callable`](https://googleapis.github.io/python-genai/genai.html#genai.types.FunctionDeclaration.from_callable):
 
 ### Python
@@ -1258,14 +1230,13 @@ fn_decl = types.FunctionDeclaration.from_callable(callable=multiply, client=clie
 print(fn_decl.to_json_dict())
 ```
 
-## Penggunaan multi-alat: Menggabungkan alat bawaan dengan pemanggilan fungsi
+## Uso de várias ferramentas: combine ferramentas integradas com chamadas de função
 
-Anda dapat mengaktifkan beberapa alat, menggabungkan alat bawaan dengan panggilan fungsi dalam
-permintaan yang sama.
+É possível ativar várias ferramentas, combinando as integradas com a chamada de função na mesma solicitação.
 
-Model Gemini 3 dapat menggabungkan alat bawaan dengan panggilan fungsi secara langsung,
-berkat fitur sirkulasi konteks alat. Baca halaman tentang
-[Menggabungkan alat bawaan dan panggilan fungsi](https://ai.google.dev/gemini-api/docs/tool-combination?hl=id) untuk mempelajari lebih lanjut.
+Os modelos do Gemini 3 podem combinar ferramentas integradas com a chamada de função pronta para uso,
+graças ao recurso de circulação de contexto da ferramenta. Leia a página sobre
+[Como combinar ferramentas integradas e chamadas de função](https://ai.google.dev/gemini-api/docs/tool-combination?hl=pt-br) para saber mais.
 
 ### Python
 
@@ -1291,7 +1262,7 @@ getWeather = {
 }
 
 response = client.models.generate_content(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents="What is the northernmost city in the United States? What's the weather like there today?",
     config=types.GenerateContentConfig(
       tools=[
@@ -1323,7 +1294,7 @@ history = [
 ]
 
 response_2 = client.models.generate_content(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents=history,
     config=types.GenerateContentConfig(
       tools=[
@@ -1361,7 +1332,7 @@ const getWeather = {
 
 async function run() {
     const model = client.models.generateContent({
-        model: "gemini-3-flash-preview",
+        model: "gemini-3.5-flash",
     });
 
     const tools = [
@@ -1407,32 +1378,29 @@ async function run() {
 run();
 ```
 
-Untuk model sebelum seri Gemini 3, gunakan
-[Live API](https://ai.google.dev/gemini-api/docs/live-api/tools?hl=id).
+Para modelos anteriores à série Gemini 3, use a
+[API Live](https://ai.google.dev/gemini-api/docs/live-api/tools?hl=pt-br).
 
-## Respons fungsi multimodal
+## Respostas de funções multimodais
 
-Untuk model seri Gemini 3, Anda dapat menyertakan konten multimodal di
-bagian respons fungsi yang Anda kirim ke model. Model dapat memproses konten multimodal ini pada giliran berikutnya untuk menghasilkan respons yang lebih informatif.
-Jenis MIME berikut didukung untuk konten multimodal dalam respons fungsi:
+Para modelos da série Gemini 3, é possível incluir conteúdo multimodal nas partes de resposta da função enviadas ao modelo. O modelo pode processar esse conteúdo multimodal na próxima vez para produzir uma resposta mais completa.
+Os seguintes tipos MIME são compatíveis com conteúdo multimodal em respostas de função:
 
-- **Gambar**: `image/png`, `image/jpeg`, `image/webp`
-- **Dokumen**: `application/pdf`, `text/plain`
+- **Imagens**: `image/png`, `image/jpeg`, `image/webp`
+- **Documentos**: `application/pdf`, `text/plain`
 
-Untuk menyertakan data multimodal dalam respons fungsi, sertakan sebagai satu atau beberapa
-bagian yang berada dalam bagian `functionResponse`. Setiap bagian multimodal harus
-berisi `inlineData`. Jika Anda mereferensikan bagian multimodal dari
-dalam kolom `response` terstruktur, bagian tersebut harus berisi `displayName` unik.
+Para incluir dados multimodais em uma resposta de função, adicione-os como uma ou mais
+partes aninhadas na parte `functionResponse`. Cada parte multimodal precisa
+conter `inlineData`. Se você fizer referência a uma parte multimodal no campo estruturado `response`, ela precisará conter um `displayName` exclusivo.
 
-Anda juga dapat mereferensikan bagian multimodal dari dalam kolom `response`
-terstruktur dari bagian `functionResponse` menggunakan format referensi JSON
-`{"$ref": "<displayName>"}`. Model mengganti referensi dengan konten multimodal saat memproses respons. Setiap `displayName` hanya dapat
-dirujuk satu kali di kolom `response` terstruktur.
+Também é possível referenciar uma parte multimodal no campo `response`
+estruturado da parte `functionResponse` usando o formato de referência JSON
+`{"$ref": "<displayName>"}`. O modelo substitui a referência pelo conteúdo multimodal ao processar a resposta. Cada `displayName` só pode ser referenciado uma vez no campo `response` estruturado.
 
-Contoh berikut menunjukkan pesan yang berisi `functionResponse` untuk
-fungsi bernama `get_image` dan bagian bertingkat yang berisi data gambar dengan
-`displayName: "instrument.jpg"`. Kolom `functionResponse`'s `response`
-mereferensikan bagian gambar ini:
+O exemplo a seguir mostra uma mensagem que contém um `functionResponse` para uma
+função chamada `get_image` e uma parte aninhada com dados de imagem com
+`displayName: "instrument.jpg"`. O campo `response` do `functionResponse`
+faz referência a esta parte da imagem:
 
 ### Python
 
@@ -1466,7 +1434,7 @@ tool_config = types.Tool(function_declarations=[get_image_declaration])
 # 2. Send a message that triggers the tool
 prompt = "Show me the instrument I ordered last month."
 response_1 = client.models.generate_content(
-  model="gemini-3-flash-preview",
+  model="gemini-3.5-flash",
   contents=[prompt],
   config=types.GenerateContentConfig(
       tools=[tool_config],
@@ -1514,7 +1482,7 @@ history = [
 ]
 
 response_2 = client.models.generate_content(
-  model="gemini-3-flash-preview",
+  model="gemini-3.5-flash",
   contents=history,
   config=types.GenerateContentConfig(
       tools=[tool_config],
@@ -1556,7 +1524,7 @@ const toolConfig = {
 // 2. Send a message that triggers the tool
 const prompt = 'Show me the instrument I ordered last month.';
 const response1 = await client.models.generateContent({
-  model: 'gemini-3-flash-preview',
+  model: 'gemini-3.5-flash',
   contents: prompt,
   config: {
     tools: [toolConfig],
@@ -1610,7 +1578,7 @@ const history = [
 ];
 
 const response2 = await client.models.generateContent({
-  model: 'gemini-3-flash-preview',
+  model: 'gemini-3.5-flash',
   contents: history,
   config: {
     tools: [toolConfig],
@@ -1640,7 +1608,7 @@ else
   IMAGE_B64=$(curl -sL "$IMG_URL" | base64 -w0)
 fi
 
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -X POST \
@@ -1676,27 +1644,29 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
   }'
 ```
 
-## Panggilan fungsi dengan Output terstruktur
+## Chamada de função com saída estruturada
 
-Untuk model seri Gemini 3, Anda dapat menggunakan panggilan fungsi dengan
-[output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id). Hal ini memungkinkan model memprediksi panggilan fungsi atau output yang sesuai dengan skema tertentu. Hasilnya, Anda akan menerima respons yang diformat secara konsisten saat model tidak menghasilkan panggilan fungsi.
+Para modelos da série Gemini 3, é possível usar a chamada de função com
+[saída estruturada](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br). Isso permite que o modelo preveja chamadas de função ou saídas que aderem a um esquema específico. Como resultado, você recebe respostas com formatação consistente quando o modelo não gera chamadas de função.
 
-## Model context protocol (MCP)
+## Protocolo de contexto de modelo (MCP)
 
-[Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) adalah
-standar terbuka untuk menghubungkan aplikasi AI dengan alat dan data eksternal.
-MCP menyediakan protokol umum bagi model untuk mengakses konteks, seperti fungsi (alat), sumber data (resource), atau perintah yang telah ditentukan sebelumnya.
+O [Protocolo de Contexto de Modelo (MCP)](https://modelcontextprotocol.io/introduction) é
+um padrão aberto para conectar aplicativos de IA a ferramentas e dados externos.
+O MCP oferece um protocolo comum para que os modelos acessem o contexto, como funções (ferramentas), fontes de dados (recursos) ou comandos predefinidos.
 
-SDK Gemini memiliki dukungan bawaan untuk MCP, sehingga mengurangi kode boilerplate dan
-menawarkan
-[panggilan alat otomatis](https://ai.google.dev/gemini-api/docs/function-calling?hl=id#automatic_function_calling_python_only)
-untuk alat MCP. Saat model membuat panggilan alat MCP, SDK klien Python dan JavaScript dapat otomatis menjalankan alat MCP dan mengirimkan respons kembali ke model dalam permintaan berikutnya, melanjutkan loop ini hingga tidak ada lagi panggilan alat yang dilakukan oleh model.
+Os SDKs do Gemini têm suporte integrado para o MCP, reduzindo o código boilerplate e
+oferecendo
+[chamada automática de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br#automatic_function_calling_python_only)
+para ferramentas do MCP. Quando o modelo gera uma chamada de ferramenta do MCP, o SDK do cliente em Python e JavaScript pode executar automaticamente a ferramenta do MCP e enviar a resposta de volta ao modelo em uma solicitação subsequente, continuando esse loop até que o modelo não faça mais chamadas de ferramenta.
 
-Di sini, Anda dapat menemukan contoh cara menggunakan server MCP lokal dengan Gemini dan SDK `mcp`.
+Aqui, você encontra um exemplo de como usar um servidor MCP local com o Gemini e o SDK `mcp`.
 
 ### Python
 
-Pastikan [SDK `mcp`](https://modelcontextprotocol.io/introduction) versi terbaru diinstal di platform pilihan Anda.
+Verifique se a versão mais recente do
+SDK do [`mcp`](https://modelcontextprotocol.io/introduction) está instalada na
+plataforma escolhida.
 
 ```
 pip install mcp
@@ -1730,7 +1700,7 @@ async def run():
 
             # Send request to the model with MCP function declarations
             response = await client.aio.models.generate_content(
-                model="gemini-3-flash-preview",
+                model="gemini-3.5-flash",
                 contents=prompt,
                 config=genai.types.GenerateContentConfig(
                     temperature=0,
@@ -1749,7 +1719,8 @@ asyncio.run(run())
 
 ### JavaScript
 
-Pastikan `mcp` SDK versi terbaru diinstal di platform pilihan Anda.
+Verifique se a versão mais recente do SDK `mcp` está instalada na plataforma
+de sua escolha.
 
 ```
 npm install @modelcontextprotocol/sdk
@@ -1781,7 +1752,7 @@ await client.connect(serverParams);
 
 // Send request to the model with MCP tools
 const response = await ai.models.generateContent({
-  model: "gemini-3-flash-preview",
+  model: "gemini-3.5-flash",
   contents: `What is the weather in London in ${new Date().toLocaleDateString()}?`,
   config: {
     tools: [mcpToTool(client)],  // uses the session, will automatically call the tool
@@ -1797,85 +1768,73 @@ console.log(response.text)
 await client.close();
 ```
 
-### Batasan dengan dukungan MCP bawaan
+### Limitações com suporte integrado ao MCP
 
-Dukungan MCP bawaan adalah fitur [eksperimental](https://ai.google.dev/gemini-api/docs/models?hl=id#preview)
-di SDK kami dan memiliki batasan berikut:
+O suporte integrado ao MCP é um recurso [experimental](https://ai.google.dev/gemini-api/docs/models?hl=pt-br#preview) nos nossos SDKs e tem as seguintes limitações:
 
-- Hanya alat yang didukung, bukan resource atau perintah
-- Fitur ini tersedia untuk Python dan JavaScript/TypeScript SDK.
-- Perubahan yang menyebabkan gangguan mungkin terjadi dalam rilis mendatang.
+- Somente ferramentas são aceitas, não recursos nem comandos
+- Ele está disponível para os SDKs Python e JavaScript/TypeScript.
+- Mudanças interruptivas podem ocorrer em versões futuras.
 
-Integrasi server MCP secara manual selalu menjadi opsi jika batas ini membatasi apa yang Anda bangun.
+A integração manual de servidores MCP é sempre uma opção se esses limites afetarem o que você está
+criando.
 
-## Model yang didukung
+## Modelos compatíveis
 
-Bagian ini mencantumkan model dan kemampuan panggilan fungsinya. Model eksperimental tidak disertakan. Anda dapat menemukan ringkasan kemampuan yang komprehensif di halaman [ringkasan model](https://ai.google.dev/gemini-api/docs/models?hl=id).
+Esta seção lista os modelos e os recursos de chamada de função deles. Modelos experimentais não estão incluídos. Confira uma visão geral completa dos recursos na página [Visão geral do modelo](https://ai.google.dev/gemini-api/docs/models?hl=pt-br).
 
-| Model | Panggilan fungsi | Panggilan fungsi paralel | Panggilan fungsi komposit |
+| Modelo | Chamadas de função | Chamada de função paralela | Chamada de função composicional |
 | --- | --- | --- | --- |
-| [Pratinjau Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=id) | ✔️ | ✔️ | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=id) | ✔️ | ✔️ | ✔️ |
-| [Pratinjau Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=id) | ✔️ | ✔️ | ✔️ |
-| [Pratinjau Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=id) | ✔️ | ✔️ | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=id) | ✔️ | ✔️ | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=id) | ✔️ | ✔️ | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=id) | ✔️ | ✔️ | ✔️ |
-| [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash?hl=id) | ✔️ | ✔️ | ✔️ |
+| [Pré-lançamento do Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=pt-br) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=pt-br) | ✔️ | ✔️ | ✔️ |
+| [Pré-lançamento do Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=pt-br) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=pt-br) | ✔️ | ✔️ | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=pt-br) | ✔️ | ✔️ | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=pt-br) | ✔️ | ✔️ | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=pt-br) | ✔️ | ✔️ | ✔️ |
+| [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash?hl=pt-br) | ✔️ | ✔️ | ✔️ |
 
-## Praktik terbaik
+## Práticas recomendadas
 
-- **Deskripsi Fungsi dan Parameter:** Jelaskan dengan sangat jelas dan spesifik dalam deskripsi Anda. Model mengandalkan hal ini untuk memilih fungsi yang benar
-  dan memberikan argumen yang sesuai.
-- **Penamaan:** Gunakan nama fungsi deskriptif (tanpa spasi, titik, atau tanda hubung).
-- **Pengetikan Kuat:** Gunakan jenis tertentu (integer, string, enum) untuk parameter guna mengurangi error. Jika parameter memiliki serangkaian nilai valid yang terbatas, gunakan
-  enum.
-- **Pemilihan Alat:** Meskipun model dapat menggunakan sejumlah alat yang tidak terbatas,
-  terlalu banyak alat dapat meningkatkan risiko pemilihan alat yang salah atau
-  tidak optimal. Untuk hasil terbaik, berikan hanya alat yang relevan untuk konteks atau tugas, idealnya menjaga set aktif hingga maksimum 10-20. Pertimbangkan pemilihan alat dinamis berdasarkan konteks percakapan jika Anda memiliki banyak alat.
-- **Rekayasa Perintah:**
-  - Berikan konteks: Beri tahu model perannya (misalnya, "Anda adalah asisten cuaca yang berguna").
-  - Berikan petunjuk: Tentukan cara dan waktu penggunaan fungsi (misalnya, "Jangan
-    menebak tanggal; selalu gunakan tanggal mendatang untuk perkiraan.").
-  - Mendorong klarifikasi: Instruksikan model untuk mengajukan pertanyaan klarifikasi jika diperlukan.
-  - Lihat [Alur kerja agentik](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=id#agentic-workflows)
-    untuk mengetahui strategi lebih lanjut dalam mendesain perintah ini. Berikut adalah contoh [petunjuk sistem](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=id#agentic-si-template) yang telah diuji.
-- **Temperatur:** Gunakan temperatur rendah (misalnya, 0) untuk panggilan fungsi yang lebih deterministik dan andal.
-- **Validasi:** Jika panggilan fungsi memiliki konsekuensi yang signifikan (misalnya,
-  melakukan pemesanan), validasi panggilan dengan pengguna sebelum mengeksekusinya.
-- **Periksa Alasan Selesai:** Selalu periksa [`finishReason`](https://ai.google.dev/api/generate-content?hl=id#FinishReason)
-  dalam respons model untuk menangani kasus saat model gagal membuat
-  panggilan fungsi yang valid.
-- **Penanganan Error**: Terapkan penanganan error yang andal dalam fungsi Anda untuk
-  menangani input yang tidak terduga atau kegagalan API dengan baik. Menampilkan pesan error yang informatif
-  yang dapat digunakan model untuk menghasilkan respons yang bermanfaat bagi
-  pengguna.
-- **Keamanan:** Perhatikan keamanan saat memanggil API eksternal. Gunakan
-  mekanisme autentikasi dan otorisasi yang sesuai. Hindari mengekspos data sensitif dalam panggilan fungsi.
-- **Batas Token:** Deskripsi dan parameter fungsi dihitung dalam batas token input Anda. Jika Anda mencapai batas token, pertimbangkan untuk membatasi jumlah fungsi atau panjang deskripsi, memecah tugas yang kompleks menjadi serangkaian fungsi yang lebih kecil dan lebih terfokus.
-- **Kombinasi bash dan alat kustom** Bagi mereka yang membangun dengan kombinasi bash dan alat kustom, Pratinjau Gemini 3.1 Pro hadir dengan endpoint terpisah yang tersedia melalui API yang disebut [`gemini-3.1-pro-preview-customtools`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=id#gemini-31-pro-preview-customtools).
+- **Descrições de funções e parâmetros**:seja extremamente claro e específico nas descrições. O modelo depende deles para escolher a função correta
+  e fornecer argumentos adequados.
+- **Nomenclatura**:use nomes de função descritivos (sem espaços, pontos ou traços).
+- **Tipagem forte**:use tipos específicos (inteiro, string, enum) para parâmetros e reduza os erros. Se um parâmetro tiver um conjunto limitado de valores válidos, use uma enumeração.
+- **Seleção de ferramentas**:embora o modelo possa usar um número arbitrário de ferramentas, fornecer muitas pode aumentar o risco de selecionar uma ferramenta incorreta ou inadequada. Para ter os melhores resultados, forneça apenas as ferramentas relevantes para o contexto ou a tarefa, mantendo o conjunto ativo em um máximo de 10 a 20. Considere a seleção dinâmica de ferramentas com base no contexto da conversa se você tiver um grande número total de ferramentas.
+- **Engenharia de comando**:
+  - Forneça contexto: diga ao modelo qual é a função dele (por exemplo, "Você é um assistente de clima útil").
+  - Dê instruções: especifique como e quando usar funções (por exemplo, "Não
+    adivinhe datas. Sempre use uma data futura para previsões").
+  - Incentive o esclarecimento: instrua o modelo a fazer perguntas de esclarecimento, se necessário.
+  - Consulte [Fluxos de trabalho com agentes](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=pt-br#agentic-workflows) para mais estratégias de criação desses comandos. Confira um exemplo de uma [instrução do sistema](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=pt-br#agentic-si-template) testada.
+- **Temperatura**:use uma temperatura baixa (por exemplo, 0) para chamadas de função mais deterministas e confiáveis.
+- **Validação**:se uma chamada de função tiver consequências significativas (por exemplo,
+  fazer um pedido), valide a chamada com o usuário antes de executá-la.
+- **Verifique o motivo da conclusão**:sempre verifique o [`finishReason`](https://ai.google.dev/api/generate-content?hl=pt-br#FinishReason)
+  na resposta do modelo para lidar com casos em que ele não gerou uma
+  chamada de função válida.
+- **Tratamento de erros**: implemente um tratamento de erros robusto nas suas funções para
+  lidar com entradas inesperadas ou falhas de API. Retornar mensagens de erro informativas que o modelo pode usar para gerar respostas úteis ao usuário.
+- **Segurança**:tenha cuidado com a segurança ao chamar APIs externas. Use mecanismos de autenticação e autorização adequados. Evite expor dados sensíveis em chamadas de função.
+- **Limites de token**:as descrições e os parâmetros de função contam para o limite de tokens de entrada. Se você estiver atingindo os limites de token, considere limitar o número de funções ou o tamanho das descrições, divida tarefas complexas em conjuntos de funções menores e mais focados.
+- **Combinação de bash e ferramentas personalizadas**: para quem cria com uma combinação de bash e ferramentas personalizadas, o pré-lançamento do Gemini 3.1 Pro vem com um endpoint separado disponível pela API chamado [`gemini-3.1-pro-preview-customtools`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=pt-br#gemini-31-pro-preview-customtools).
 
-## Catatan dan batasan
+## Observações e limitações:
 
-- Penempatan bagian panggilan fungsi: Saat menggunakan deklarasi fungsi kustom
-  [bersama alat bawaan](https://ai.google.dev/gemini-api/docs/tool-combination?hl=id) (seperti Google
-  Penelusuran), model dapat menampilkan campuran bagian `functionCall`, `toolCall`, dan
-  `toolResponse` dalam satu giliran. Oleh karena itu, jangan menganggap
-  `functionCall` akan selalu menjadi item terakhir dalam array bagian. Jika Anda mengurai respons JSON secara manual, selalu lakukan iterasi melalui array bagian, bukan mengandalkan posisi.
-- Hanya [subset skema OpenAPI](https://ai.google.dev/api/caching?hl=id#FunctionDeclaration) yang didukung.
-- Untuk mode `ANY`, API dapat menolak skema yang sangat besar atau bertingkat dalam. Jika
-  Anda mengalami error, coba sederhanakan parameter fungsi dan skema respons
-  dengan mempersingkat nama properti, mengurangi nesting, atau membatasi
-  jumlah deklarasi fungsi.
-- Jenis parameter yang didukung di Python terbatas.
-- Panggilan fungsi otomatis hanya merupakan fitur Python SDK.
+- Posicionamento de partes de chamadas de função: ao usar declarações de função personalizadas [com ferramentas integradas](https://ai.google.dev/gemini-api/docs/tool-combination?hl=pt-br) (como a Pesquisa Google), o modelo pode retornar uma combinação de partes `functionCall`, `toolCall` e `toolResponse` em uma única vez. Por isso, não suponha que o
+  `functionCall` sempre será o último item na matriz de partes. Se você estiver analisando manualmente a resposta JSON, sempre itere pela matriz de partes em vez de confiar na posição.
+- Apenas um [subconjunto do esquema
+  OpenAPI](https://ai.google.dev/api/caching?hl=pt-br#FunctionDeclaration) é compatível.
+- No modo `ANY`, a API pode rejeitar esquemas muito grandes ou profundamente aninhados. Se você encontrar erros, tente simplificar os parâmetros da função e os esquemas de resposta encurtando os nomes das propriedades, reduzindo o aninhamento ou limitando o número de declarações de função.
+- Os tipos de parâmetros compatíveis em Python são limitados.
+- A chamada de função automática é um recurso exclusivo do SDK Python.
 
-Kirim masukan
+Envie comentários
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Terakhir diperbarui pada 2026-05-13 UTC.
+Última atualização 2026-05-19 UTC.
 
-Ada masukan untuk kami?
+Quer enviar seu feedback?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-05-13 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-05-19 UTC."],[],[]]

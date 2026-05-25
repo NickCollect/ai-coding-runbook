@@ -1,45 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/flex-inference?hl=zh-CN
-fetched_at: 2026-05-18T05:09:58.353242+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/flex-inference?hl=ko
+fetched_at: 2026-05-25T05:24:38.672667+00:00
 title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-发送反馈
+의견 보내기
 
-# Flex 推理
+# Flex 추론
 
-Gemini Flex API 是一种推理层级，与标准费率相比，可将成本降低 50%，但延迟时间不确定，并且仅提供尽力而为的可用性。它适用于对延迟容忍度较高的工作负载，这些工作负载需要同步处理，但不需要标准 API 的实时性能。
+Gemini Flex API는 가변 지연 시간과 최선형 가용성을 제공하는 대신 표준 요금보다 50% 저렴한 추론 계층입니다. 동기식 처리가 필요하지만 표준 API의 실시간 성능은 필요하지 않은 지연 시간 허용 워크로드용으로 설계되었습니다.
 
-## 如何使用 Flex
+## Flex 사용 방법
 
-如需使用 Flex 层级，请在请求中将 `service_tier` 指定为 `flex`。默认情况下，如果省略此字段，请求将使用标准层。
+Flex 계층을 사용하려면 요청에서 `service_tier`를 `flex`로 지정하세요. 기본적으로 이 필드를 생략하면 요청에서 표준 계층을 사용합니다.
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 
 client = genai.Client()
 
 try:
     interaction = client.interactions.create(
-        model="gemini-3-flash-preview",
+        model="gemini-3.5-flash",
         input="Analyze this dataset for trends...",
         service_tier='flex'
     )
-    print(interaction.steps[-1].content[0].text)
+    print(interaction.output_text)
 except Exception as e:
     print(f"Flex request failed: {e}")
 ```
@@ -47,7 +46,6 @@ except Exception as e:
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from '@google/genai';
 
 const client = new GoogleGenAI({});
@@ -55,11 +53,11 @@ const client = new GoogleGenAI({});
 async function main() {
     try {
         const interaction = await client.interactions.create({
-            model: 'gemini-3-flash-preview',
+            model: 'gemini-3.5-flash',
             input: 'Analyze this dataset for trends...',
             service_tier: 'flex'
         });
-        console.log(interaction.steps.at(-1).content[0].text);
+        console.log(interaction.output_text);
     } catch (e) {
         console.log(`Flex request failed: ${e}`);
     }
@@ -70,68 +68,70 @@ await main();
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "Content-Type: application/json" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-      "model": "gemini-3-flash-preview",
+      "model": "gemini-3.5-flash",
       "input": "Analyze this dataset for trends...",
       "service_tier": "flex"
   }'
 ```
 
-## 灵活推理的工作原理
+## Flex 추론 작동 방식
 
-Gemini Flex 推理弥合了标准 API 与 [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn) 的 24 小时周转时间之间的差距。它利用非高峰时段的“可分流”计算容量，为后台任务和顺序工作流提供经济高效的解决方案。
+[Gemini Flex 추론은 표준 API와 Batch API의 24시간
+처리 시간 간의 격차를 해소합니다.](https://ai.google.dev/gemini-api/docs/batch-api?hl=ko) 비수기 '삭제 가능한' 컴퓨팅 용량을 활용하여 백그라운드 작업 및 순차적 워크로드에 비용 효율적인 솔루션을 제공합니다.
 
-| 功能 | Flex | 优先级 | 标准 | 批量 |
+| 기능 | Flex | 우선순위 | 표준 | 일괄 |
 | --- | --- | --- | --- | --- |
-| **价格** | 5 折优惠 | 比标准层级高 75-100% | 全价票 | 5 折优惠 |
-| **延迟时间** | 分钟（目标时长为 1-15 分钟） | 低（秒） | 秒到分钟 | 最长 24 小时 |
-| **可靠性** | 尽力而为（可舍弃） | 高（不易掉毛） | 高 / 中高 | 高（针对吞吐量） |
-| **接口** | 同步 | 同步 | 同步 | 异步 |
+| **가격 책정** | 50% 할인 | 표준보다 75~100% 더 높음 | 정상가 | 50% 할인 |
+| **지연 시간** | 분 (1~15분 목표) | 짧음 (초) | 초에서 분 | 최대 24시간 |
+| **안정성** | 최선형 (삭제 가능) | 높음 (삭제 불가) | 높음/보통/높음 | 높음 (처리량) |
+| **인터페이스** | 동기식 | 동기식 | 동기식 | 비동기식 |
 
-### 主要优势
+### 주요 이점
 
-- **成本效益**：可大幅节省非生产评估、后台代理和数据丰富化的费用。
-- **低摩擦**：只需向现有请求添加一个参数即可。
-- **同步工作流**：非常适合顺序 API 链，其中下一个请求取决于上一个请求的输出，因此比批量处理更灵活，适合智能体工作流。
+- **비용 효율성**: 프로덕션 이외 평가, 백그라운드 에이전트, 데이터 보강에 상당한 비용 절감 효과가 있습니다.
+- **낮은 마찰**: 기존 요청에 단일 매개변수를 추가하기만 하면 됩니다.
+- **동기식 워크로드**: 다음 요청이 이전 요청의 출력에 종속되는 순차적 API 체인에 적합하며, 에이전트 워크로드에 일괄보다 더 유연합니다.
 
-### 使用场景
+### 사용 사례
 
-- **离线评估**：运行“LLM 即裁判”回归测试或排行榜。
-- **后台代理**：可接受数分钟延迟的顺序任务，例如 CRM 更新、个人资料构建或内容审核。
-- **受预算限制的研究**：需要在有限的预算下使用大量 token 的学术实验。
+- **오프라인 평가**: 'LLM-as-a-judge' 회귀 테스트 또는 리더보드 실행
+- **백그라운드 에이전트**: 지연 시간이 허용되는 CRM 업데이트, 프로필 작성, 콘텐츠 조정과 같은 순차적 작업
+- **예산 제약이 있는 연구**: 제한된 예산으로 많은 토큰이 필요한 학술 실험
 
-### 速率限制
+### 비율 제한
 
-灵活推理流量会计入常规[速率限制](https://aistudio.google.com/rate-limit?hl=zh-cn)；它不会像 [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn) 那样提供扩展速率限制。
+[Flex 추론 트래픽은 일반 [비율 제한](https://aistudio.google.com/rate-limit?hl=ko)에 포함되며
+Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ko)와 같은 확장된 비율 제한을 제공하지 않습니다.
 
-### 可减少的容量
+### 삭제 가능한 용량
 
-灵活流量的处理优先级较低。如果标准流量出现峰值，为了确保高优先级用户的容量，系统可能会抢占或逐出灵活请求。如果您需要高优先级的推理，请查看[优先推理](https://ai.google.dev/gemini-api/docs/interactions/priority-inference?hl=zh-cn)
+Flex 트래픽은 우선순위가 낮게 처리됩니다. 표준 트래픽이 급증하면 우선순위가 높은 사용자의 용량을 확보하기 위해 Flex 요청이 선점되거나 삭제될 수 있습니다. 우선순위가 높은 추론을 찾고 있다면
+[우선순위 추론](https://ai.google.dev/gemini-api/docs/interactions/priority-inference?hl=ko)을 확인하세요.
 
-### 错误代码
+### 오류 코드
 
-当灵活容量不可用或系统拥塞时，API 将返回标准错误代码：
+Flex 용량을 사용할 수 없거나 시스템이 정체된 경우 API는 표준 오류 코드를 반환합니다.
 
-- **503 服务不可用**：系统目前已达到容量上限。
-- **429 请求过多**：速率限制或资源耗尽。
+- **503 서비스를 사용할 수 없음**: 시스템이 현재 용량에 도달했습니다.
+- **429 요청한 횟수가 너무 많음**: 비율 제한 또는 리소스 소진
 
-### 客户责任
+### 클라이언트 책임
 
-- **无服务器端回退**：为避免产生意外费用，如果 Flex 容量已满，系统不会自动将 Flex 请求升级为标准层级。
-- **重试**：您必须实现自己的客户端重试逻辑，并使用指数退避算法。
-- **超时**：由于 Flex 请求可能会排队，我们建议将客户端超时时间增加到 10 分钟或更长时间，以避免过早关闭连接。
+- **서버 측 대체 없음**: 예기치 않은 요금이 청구되지 않도록 Flex 용량이 가득 찬 경우 시스템에서 Flex 요청을 표준 계층으로 자동 업그레이드하지 않습니다.
+- **재시도**: 지수 백오프를 사용하여 자체 클라이언트 측 재시도 로직을 구현해야 합니다.
+- **제한 시간**: Flex 요청이 대기열에 있을 수 있으므로 조기에 연결이 종료되지 않도록 클라이언트 측 제한 시간을 10분 이상으로 늘리는 것이 좋습니다.
 
-## 调整超时时间范围
+## 제한 시간 창 조정
 
-您可以为 REST API 和客户端库配置每个请求的超时时间。
-请务必确保客户端超时时间涵盖预期的服务器耐心等待时间（例如，对于 Flex 等待队列，超时时间应为 600 秒以上）。SDK 需要以毫秒为单位的超时值。
+REST API 및 클라이언트 라이브러리에 요청별 제한 시간을 구성할 수 있습니다.
+클라이언트 측 제한 시간이 의도한 서버 대기 시간 창 (예: Flex 대기열의 경우 600초 이상)을 항상 포함하도록 하세요. SDK는 제한 시간 값을 밀리초 단위로 예상합니다.
 
-### 每个请求的超时时间
+### 요청별 제한 시간
 
 ### Python
 
@@ -142,7 +142,7 @@ client = genai.Client(http_options={"timeout": 900000})
 
 try:
     interaction = client.interactions.create(
-        model="gemini-3-flash-preview",
+        model="gemini-3.5-flash",
         input="why is the sky blue?",
         service_tier="flex",
     )
@@ -160,7 +160,7 @@ const client = new GoogleGenAI({});
 async function main() {
     try {
         const interaction = await client.interactions.create({
-            model: "gemini-3-flash-preview",
+            model: "gemini-3.5-flash",
             input: "why is the sky blue?",
             service_tier: "flex",
         }, {timeout: 900000});
@@ -172,9 +172,9 @@ async function main() {
 await main();
 ```
 
-## 实现重试
+## 재시도 구현
 
-由于 Flex 是可舍弃的，并且会因失败而返回 503 错误，因此以下示例展示了如何选择性地实现重试逻辑，以继续处理失败的请求：
+Flex는 삭제 가능하고 503 오류로 인해 실패하므로 실패한 요청을 계속하기 위해 재시도 로직을 선택적으로 구현하는 예는 다음과 같습니다.
 
 ### Python
 
@@ -188,7 +188,7 @@ def call_with_retry(max_retries=3, base_delay=5):
     for attempt in range(max_retries):
         try:
             return client.interactions.create(
-                model="gemini-3-flash-preview",
+                model="gemini-3.5-flash",
                 input="Analyze this batch statement.",
                 service_tier="flex",
             )
@@ -198,16 +198,14 @@ def call_with_retry(max_retries=3, base_delay=5):
                 print(f"Flex busy, retrying in {delay}s...")
                 time.sleep(delay)
             else:
-                # Fallback to standard on last strike (Optional)
                 print("Flex exhausted, falling back to Standard...")
                 return client.interactions.create(
-                    model="gemini-3-flash-preview",
+                    model="gemini-3.5-flash",
                     input="Analyze this batch statement."
                 )
 
-# Usage
 interaction = call_with_retry()
-print(interaction.steps[-1].content[0].text)
+print(interaction.output_text)
 ```
 
 ### JavaScript
@@ -226,7 +224,7 @@ async function callWithRetry(maxRetries = 3, baseDelay = 5) {
     try {
       console.log(`Attempt ${attempt + 1}: Calling Flex tier...`);
       const interaction = await ai.interactions.create({
-        model: "gemini-3-flash-preview",
+        model: "gemini-3.5-flash",
         input: "Analyze this batch statement.",
         service_tier: 'flex',
       });
@@ -239,7 +237,7 @@ async function callWithRetry(maxRetries = 3, baseDelay = 5) {
       } else {
         console.log("Flex exhausted, falling back to Standard...");
         return await ai.interactions.create({
-          model: "gemini-3-flash-preview",
+          model: "gemini-3.5-flash",
           input: "Analyze this batch statement.",
         });
       }
@@ -249,41 +247,43 @@ async function callWithRetry(maxRetries = 3, baseDelay = 5) {
 
 async function main() {
     const interaction = await callWithRetry();
-    console.log(interaction.steps.at(-1).content[0].text);
+    console.log(interaction.output_text);
 }
 
 await main();
 ```
 
-## 价格
+## 가격 책정
 
-灵活推理的价格为[标准 API](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn) 的 50%，按 token 收费。
+Flex 추론은 [표준 API](https://ai.google.dev/gemini-api/docs/pricing?hl=ko)의 50% 로 가격이 책정되며
+토큰당 청구됩니다.
 
-## 支持的模型
+## 지원되는 모델
 
-以下模型支持 Flex 推理：
+다음 모델은 Flex 추론을 지원합니다.
 
-| 模型 | Flex 推理 |
+| 모델 | Flex 추론 |
 | --- | --- |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-cn) | ✔️ |
-| [Gemini 3.1 Flash-Lite 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=zh-cn) | ✔️ |
-| [Gemini 3.1 Pro 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-cn) | ✔️ |
-| [Gemini 3 Flash 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-cn) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-cn) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=zh-cn) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-cn) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ko) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ko) | ✔️ |
+| [Gemini 3.1 Flash-Lite 프리뷰](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=ko) | ✔️ |
+| [Gemini 3.1 Pro 프리뷰](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ko) | ✔️ |
+| [Gemini 3 Flash 프리뷰](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ko) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ko) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=ko) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ko) | ✔️ |
 
-## 后续步骤
+## 다음 단계
 
-- [优先推理](https://ai.google.dev/gemini-api/docs/interactions/priority-inference?hl=zh-cn)，实现超低延迟。
-- [token](https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=zh-cn)：了解 token。
+- [매우 짧은 지연 시간을 위한](https://ai.google.dev/gemini-api/docs/interactions/priority-inference?hl=ko) 우선순위 추론
+- [토큰](https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=ko): 토큰 이해하기
 
-发送反馈
+의견 보내기
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-最后更新时间 (UTC)：2026-05-12。
+최종 업데이트: 2026-05-19(UTC)
 
-需要向我们提供更多信息？
+의견을 전달하고 싶나요?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-05-12。"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-05-19(UTC)"],[],[]]

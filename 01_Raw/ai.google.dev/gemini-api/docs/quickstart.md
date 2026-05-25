@@ -1,38 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/quickstart?hl=vi
-fetched_at: 2026-05-18T05:13:30.472577+00:00
-title: "B\u1eaft \u0111\u1ea7u nhanh API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/quickstart?hl=hi
+fetched_at: 2026-05-25T05:18:23.747558+00:00
+title: "Gemini API \u0915\u094d\u0935\u093f\u0915\u0938\u094d\u091f\u093e\u0930\u094d\u091f \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Gửi ý kiến phản hồi
+सुझाव भेजें
 
-# Bắt đầu nhanh API Gemini
+# Gemini API क्विकस्टार्ट
 
-Hướng dẫn bắt đầu nhanh này cho bạn biết cách cài đặt [các thư viện](https://ai.google.dev/gemini-api/docs/libraries?hl=vi) của chúng tôi và thực hiện yêu cầu API đầu tiên đối với Gemini API.
+इस क्विकस्टार्ट में, आपको हमारी
+[लाइब्रेरी](https://ai.google.dev/gemini-api/docs/libraries?hl=hi) इंस्टॉल करने, पहला अनुरोध करने, जवाब स्ट्रीम करने, मल्टी-टर्न बातचीत बनाने, और स्टैंडर्ड
+`generateContent` तरीके का इस्तेमाल करके टूल इस्तेमाल करने का तरीका बताया गया है.
 
-## Trước khi bắt đầu
+## शुरू करने से पहले
 
-Để sử dụng Gemini API, bạn cần có một khoá API để xác thực các yêu cầu, thực thi giới hạn bảo mật và theo dõi mức sử dụng cho tài khoản của bạn.
+Gemini API का इस्तेमाल करने के लिए, आपके पास एपीआई पासकोड होना चाहिए. इससे आपके अनुरोधों की पुष्टि की जाती है, सुरक्षा से जुड़ी सीमाएं लागू की जाती हैं, और आपके खाते के इस्तेमाल को ट्रैक किया जाता है.
 
-Tạo một dự án trên AI Studio miễn phí để bắt đầu:
+शुरू करने के लिए, AI Studio पर मुफ़्त में एक पासकोड बनाएं:
 
-[Tạo khoá Gemini API](https://aistudio.google.com/app/apikey?hl=vi)
+[Gemini API पासकोड बनाना](https://aistudio.google.com/app/apikey?hl=hi)
 
-## Cài đặt Google GenAI SDK
+## Google GenAI SDK इंस्टॉल करना
 
 ### Python
 
-Khi dùng [Python 3.9 trở lên](https://www.python.org/downloads/), hãy cài đặt gói [`google-genai`](https://pypi.org/project/google-genai/) bằng [lệnh pip](https://packaging.python.org/en/latest/tutorials/installing-packages/) sau:
+[Python 3.9 या इसके बाद के वर्शन](https://www.python.org/downloads/) का इस्तेमाल करके,
+[`google-genai` पैकेज](https://pypi.org/project/google-genai/)
+इंस्टॉल करें. इसके लिए,
+[pip का यह कमांड](https://packaging.python.org/en/latest/tutorials/installing-packages/) इस्तेमाल करें:
 
 ```
 pip install -q -U google-genai
@@ -40,80 +45,29 @@ pip install -q -U google-genai
 
 ### JavaScript
 
-Sử dụng [Node.js phiên bản 18 trở lên](https://nodejs.org/en/download/package-manager), hãy cài đặt [Google Gen AI SDK cho TypeScript và JavaScript](https://www.npmjs.com/package/@google/genai) bằng [lệnh npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) sau:
+[[[Node.js v18 या इसके बाद के वर्शन का इस्तेमाल करके, TypeScript और JavaScript के लिए Google Gen AI SDK इंस्टॉल करें. इसके लिए, npm का यह कमांड इस्तेमाल करें:](https://nodejs.org/en/download/package-manager)](https://www.npmjs.com/package/@google/genai)](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 ```
 npm install @google/genai
 ```
 
-### Go
+## टेक्स्ट जनरेट करो
 
-Cài đặt [google.golang.org/genai](https://pkg.go.dev/google.golang.org/genai) trong thư mục mô-đun bằng [lệnh go get](https://go.dev/doc/code):
-
-```
-go get google.golang.org/genai
-```
-
-### Java
-
-Nếu đang sử dụng Maven, bạn có thể cài đặt [google-genai](https://github.com/googleapis/java-genai) bằng cách thêm nội dung sau vào các phần phụ thuộc:
-
-```
-<dependencies>
-  <dependency>
-    <groupId>com.google.genai</groupId>
-    <artifactId>google-genai</artifactId>
-    <version>1.0.0</version>
-  </dependency>
-</dependencies>
-```
-
-### C#
-
-Cài đặt [googleapis/go-genai](https://googleapis.github.io/dotnet-genai/) trong thư mục mô-đun bằng [lệnh dotnet add](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-package-add)
-
-```
-dotnet add package Google.GenAI
-```
-
-### Apps Script
-
-1. Để tạo một dự án Apps Script mới, hãy truy cập vào [script.new](https://script.google.com/u/0/home/projects/create?hl=vi).
-2. Nhấp vào **Dự án chưa có tiêu đề**.
-3. Đổi tên dự án Apps Script thành **AI Studio** rồi nhấp vào **Rename** (Đổi tên).
-4. Đặt [khoá API](https://developers.google.com/apps-script/guides/properties?hl=vi#manage_script_properties_manually)
-   1. Ở bên trái, hãy nhấp vào **Cài đặt dự án** ![Biểu tượng cho chế độ cài đặt dự án](https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/settings/default/24px.svg).
-   2. Trong phần **Script Properties** (Thuộc tính tập lệnh), hãy nhấp vào **Add script property** (Thêm thuộc tính tập lệnh).
-   3. Đối với **Thuộc tính**, hãy nhập tên khoá: `GEMINI_API_KEY`.
-   4. Đối với **Giá trị**, hãy nhập giá trị cho khoá API.
-   5. Nhấp vào **Lưu thuộc tính của tập lệnh**.
-5. Thay thế nội dung tệp `Code.gs` bằng đoạn mã sau:
-
-## Tạo yêu cầu đầu tiên
-
-Bạn có thể dùng 2 cách để gửi yêu cầu đến Gemini API:
-
-- ***(Nên dùng)*** [Interactions API](https://ai.google.dev/api/interactions-api?hl=vi) là một nguyên tắc cơ bản mới có hỗ trợ gốc cho việc sử dụng công cụ nhiều bước, điều phối và các luồng suy luận phức tạp thông qua các bước thực thi được nhập. Trong tương lai, các mô hình mới ngoài dòng sản phẩm cốt lõi, cùng với các công cụ và khả năng của tác nhân AI mới, sẽ chỉ ra mắt trên Interactions API.
-- [`generateContent`](https://ai.google.dev/api/generate-content?hl=vi#method:-models.generatecontent) cung cấp một cách để tạo câu trả lời đơn giản, không có trạng thái từ một mô hình. Mặc dù bạn nên sử dụng Interactions API, nhưng `generateContent` vẫn được hỗ trợ đầy đủ.
-
-Ví dụ này sử dụng phương thức [`generateContent`](https://ai.google.dev/api/generate-content?hl=vi#method:-models.generatecontent) để gửi yêu cầu đến Gemini API bằng mô hình Gemini 2.5 Flash.
-
-Nếu bạn [đặt khoá API](https://ai.google.dev/gemini-api/docs/api-key?hl=vi#set-api-env-var) làm biến môi trường `GEMINI_API_KEY`, thì ứng dụng sẽ tự động chọn khoá này khi sử dụng [Thư viện Gemini API](https://ai.google.dev/gemini-api/docs/libraries?hl=vi).
-Nếu không, bạn sẽ cần [truyền khoá API](https://ai.google.dev/gemini-api/docs/api-key?hl=vi#provide-api-key-explicitly) làm đối số khi khởi chạy ứng dụng.
-
-Xin lưu ý rằng tất cả các mẫu mã trong tài liệu về Gemini API đều giả định rằng bạn đã đặt biến môi trường `GEMINI_API_KEY`.
+टेक्स्ट में जवाब जनरेट करने के लिए, `models.generate_content` तरीके का इस्तेमाल करें
+[जनरेट करें](https://ai.google.dev/gemini-api/docs/text-generation?hl=hi).
 
 ### Python
 
 ```
 from google import genai
 
-# The client gets the API key from the environment variable `GEMINI_API_KEY`.
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3-flash-preview", contents="Explain how AI works in a few words"
+    model="gemini-3.5-flash",
+    contents="Explain how AI works in a few words"
 )
+
 print(response.text)
 ```
 
@@ -122,134 +76,24 @@ print(response.text)
 ```
 import { GoogleGenAI } from "@google/genai";
 
-// The client gets the API key from the environment variable `GEMINI_API_KEY`.
 const ai = new GoogleGenAI({});
 
 async function main() {
   const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     contents: "Explain how AI works in a few words",
   });
+
   console.log(response.text);
 }
 
 main();
 ```
 
-### Go
-
-```
-package main
-
-import (
-    "context"
-    "fmt"
-    "log"
-    "google.golang.org/genai"
-)
-
-func main() {
-    ctx := context.Background()
-    // The client gets the API key from the environment variable `GEMINI_API_KEY`.
-    client, err := genai.NewClient(ctx, nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    result, err := client.Models.GenerateContent(
-        ctx,
-        "gemini-3-flash-preview",
-        genai.Text("Explain how AI works in a few words"),
-        nil,
-    )
-    if err != nil {
-        log.Fatal(err)
-    }
-    fmt.Println(result.Text())
-}
-```
-
-### Java
-
-```
-package com.example;
-
-import com.google.genai.Client;
-import com.google.genai.types.GenerateContentResponse;
-
-public class GenerateTextFromTextInput {
-  public static void main(String[] args) {
-    // The client gets the API key from the environment variable `GEMINI_API_KEY`.
-    Client client = new Client();
-
-    GenerateContentResponse response =
-        client.models.generateContent(
-            "gemini-3-flash-preview",
-            "Explain how AI works in a few words",
-            null);
-
-    System.out.println(response.text());
-  }
-}
-```
-
-### C#
-
-```
-using System.Threading.Tasks;
-using Google.GenAI;
-using Google.GenAI.Types;
-
-public class GenerateContentSimpleText {
-  public static async Task main() {
-    // The client gets the API key from the environment variable `GOOGLE_API_KEY`.
-    var client = new Client();
-    var response = await client.Models.GenerateContentAsync(
-      model: "gemini-3-flash-preview", contents: "Explain how AI works in a few words"
-    );
-    Console.WriteLine(response.Candidates[0].Content.Parts[0].Text);
-  }
-}
-```
-
-### Apps Script
-
-```
-// See https://developers.google.com/apps-script/guides/properties
-// for instructions on how to set the API key.
-const apiKey = PropertiesService.getScriptProperties().getProperty('GEMINI_API_KEY');
-function main() {
-  const payload = {
-    contents: [
-      {
-        parts: [
-          { text: 'Explain how AI works in a few words' },
-        ],
-      },
-    ],
-  };
-
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent';
-  const options = {
-    method: 'POST',
-    contentType: 'application/json',
-    headers: {
-      'x-goog-api-key': apiKey,
-    },
-    payload: JSON.stringify(payload)
-  };
-
-  const response = UrlFetchApp.fetch(url, options);
-  const data = JSON.parse(response);
-  const content = data['candidates'][0]['content']['parts'][0]['text'];
-  console.log(content);
-}
-```
-
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -X POST \
@@ -266,24 +110,405 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
   }'
 ```
 
-## Bước tiếp theo
+## जवाब स्ट्रीम करें
 
-Giờ đây, khi đã thực hiện yêu cầu API đầu tiên, bạn có thể muốn khám phá các hướng dẫn sau đây cho thấy Gemini đang hoạt động:
+डिफ़ॉल्ट रूप से, मॉडल जवाब सिर्फ़ तब दिखाता है, जब जनरेट करने की पूरी प्रोसेस खत्म हो जाती है. तेज़ और ज़्यादा इंटरैक्टिव अनुभव के लिए, आप
+[जवाब के हिस्सों को](https://ai.google.dev/gemini-api/docs/text-generation?hl=hi#stream) जनरेट होने के साथ-साथ
+स्ट्रीम कर सकते हैं.
 
-- [Tạo văn bản](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi)
-- [Tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi)
-- [Hiểu hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi)
-- [Tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi)
-- [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi)
-- [Ngữ cảnh dài](https://ai.google.dev/gemini-api/docs/long-context?hl=vi)
-- [Vectơ nhúng](https://ai.google.dev/gemini-api/docs/embeddings?hl=vi)
+### Python
 
-Gửi ý kiến phản hồi
+```
+response = client.models.generate_content_stream(
+    model="gemini-3.5-flash",
+    contents="Explain how AI works in detail"
+)
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+for chunk in response:
+    print(chunk.text, end="", flush=True)
+```
 
-Cập nhật lần gần đây nhất: 2026-05-11 UTC.
+### JavaScript
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+```
+async function main() {
+  const responseStream = await ai.models.generateContentStream({
+    model: "gemini-3.5-flash",
+    contents: "Explain how AI works in detail",
+  });
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-11 UTC."],[],[]]
+  for await (const chunk of responseStream) {
+    process.stdout.write(chunk.text);
+  }
+}
+
+main();
+```
+
+### REST
+
+```
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:streamGenerateContent" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  --no-buffer \
+  -X POST \
+  -d '{
+    "contents": [
+      {
+        "parts": [
+          {
+            "text": "Explain how AI works in detail"
+          }
+        ]
+      }
+    ]
+  }'
+```
+
+## मल्टी-टर्न बातचीत
+
+मल्टी-टर्न बातचीत के लिए, एसडीके, स्टेटफ़ुल `chats` हेल्पर उपलब्ध कराते हैं. इससे [मल्टी-टर्न चैट का अनुभव](https://ai.google.dev/gemini-api/docs/text-generation?hl=hi#chat) बनाया जा सकता है. यह बातचीत के इतिहास को अपने-आप मैनेज करता है.
+
+### Python
+
+```
+chat = client.chats.create(model="gemini-3.5-flash")
+
+response1 = chat.send_message("I have 2 dogs in my house.")
+print("Response 1:", response1.text)
+
+response2 = chat.send_message("How many paws are in my house?")
+print("Response 2:", response2.text)
+```
+
+### JavaScript
+
+```
+async function main() {
+  const chat = ai.chats.create({ model: "gemini-3.5-flash" });
+
+  let response = await chat.sendMessage({ message: "I have 2 dogs in my house." });
+  console.log("Response 1:", response.text);
+
+  response = await chat.sendMessage({ message: "How many paws are in my house?" });
+  console.log("Response 2:", response.text);
+}
+
+main();
+```
+
+### REST
+
+```
+# REST is stateless. You must pass the full conversation history in the request.
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -X POST \
+  -d '{
+    "contents": [
+      {
+        "role": "user",
+        "parts": [{"text": "I have 2 dogs in my house."}]
+      },
+      {
+        "role": "model",
+        "parts": [{"text": "That is nice! Two dogs mean you have plenty of company."}]
+      },
+      {
+        "role": "user",
+        "parts": [{"text": "How many paws are in my house?"}]
+      }
+    ]
+  }'
+```
+
+## टूल इस्तेमाल करना
+
+[Google Search से सटीक जानकारी पाने की सुविधा का इस्तेमाल करके, मॉडल की क्षमताओं को बढ़ाया जा सकता है. इससे रीयल-टाइम में वेब कॉन्टेंट ऐक्सेस किया जा सकता है.](https://ai.google.dev/gemini-api/docs/google-search?hl=hi) मॉडल अपने-आप तय करता है कि कब खोजना है, क्वेरी को एक्ज़ीक्यूट करना है, और जवाब को सिंथेसाइज़ करना है.
+
+### Python
+
+```
+from google import genai
+from google.genai import types
+
+config = types.GenerateContentConfig(
+    tools=[types.Tool(google_search=types.GoogleSearch())]
+)
+
+response = client.models.generate_content(
+    model="gemini-3.5-flash",
+    contents="Who won the euro 2024?",
+    config=config
+)
+
+print(response.text)
+
+metadata = response.candidates[0].grounding_metadata
+if metadata.web_search_queries:
+    print("\nSearch queries executed:")
+    for query in metadata.web_search_queries:
+        print(f" - {query}")
+
+if metadata.grounding_chunks:
+    print("\nSources:")
+    for chunk in metadata.grounding_chunks:
+        print(f" - [{chunk.web.title}]({chunk.web.uri})")
+```
+
+### JavaScript
+
+```
+async function main() {
+  const response = await ai.models.generateContent({
+    model: "gemini-3.5-flash",
+    contents: "Who won the euro 2024?",
+    config: {
+      tools: [{ googleSearch: {} }]
+    }
+  });
+
+  console.log(response.text);
+
+  const metadata = response.candidates[0]?.groundingMetadata;
+  if (metadata?.webSearchQueries) {
+    console.log("\nSearch queries executed:");
+    for (const query of metadata.webSearchQueries) {
+      console.log(` - ${query}`);
+    }
+  }
+  if (metadata?.groundingChunks) {
+    console.log("\nSources:");
+    for (const chunk of metadata.groundingChunks) {
+      console.log(` - [${chunk.web.title}](${chunk.web.uri})`);
+    }
+  }
+}
+
+main();
+```
+
+### REST
+
+```
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -X POST \
+  -d '{
+    "contents": [
+      {
+        "parts": [
+          {"text": "Who won the euro 2024?"}
+        ]
+      }
+    ],
+    "tools": [
+      {
+        "google_search": {}
+      }
+    ]
+  }'
+```
+
+Gemini API, अन्य इन-बिल्ट टूल भी इस्तेमाल कर सकता है:
+
+- **[कोड एक्ज़ीक्यूशन](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi)**:
+  इसकी मदद से, मॉडल Python कोड लिख सकता है और उसे चलाकर, गणित की मुश्किल समस्याओं को हल कर सकता है.
+- **[यूआरएल कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi)**: इसकी मदद से, आपके दिए गए वेब पेज के खास यूआरएल में सटीक जवाब पाए जा सकते हैं.
+- **[फ़ाइल खोज](https://ai.google.dev/gemini-api/docs/file-search?hl=hi)**: इसकी मदद से, फ़ाइलें अपलोड की जा सकती हैं और सिमैंटिक खोज का इस्तेमाल करके, उनके कॉन्टेंट में सटीक जवाब पाए जा सकते हैं.
+- **[Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi)**: इसकी मदद से, जगह की जानकारी में सटीक जवाब पाए जा सकते हैं. साथ ही, जगहें, रास्ते, और
+  मैप खोजे जा सकते हैं.
+- **[कंप्यूटर का इस्तेमाल](https://ai.google.dev/gemini-api/docs/computer-use?hl=hi)**: इसकी मदद से,
+  मॉडल टास्क पूरा करने के लिए, वर्चुअल कंप्यूटर स्क्रीन, कीबोर्ड, और माउस के साथ इंटरैक्ट कर सकता है.
+
+## पसंद के मुताबिक फ़ंक्शन कॉल करना
+
+मॉडल को अपने पसंद के मुताबिक टूल और एपीआई से कनेक्ट करने के लिए, **[\*\*फ़ंक्शन कॉलिंग\*\*](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi)** का इस्तेमाल करें. मॉडल तय करता है कि आपके फ़ंक्शन को कब कॉल करना है. साथ ही, आपके ऐप्लिकेशन को एक्ज़ीक्यूट करने के लिए, जवाब में `functionCall` दिखाता है.
+
+इस उदाहरण में, तापमान के लिए मॉक फ़ंक्शन का एलान किया गया है. साथ ही, यह देखा गया है कि मॉडल इसे कॉल करना चाहता है या नहीं.
+
+### Python
+
+```
+from google import genai
+from google.genai import types
+
+weather_function = {
+    "name": "get_current_temperature",
+    "description": "Gets the current temperature for a given location.",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "location": {
+                "type": "string",
+                "description": "The city name, e.g. San Francisco",
+            },
+        },
+        "required": ["location"],
+    },
+}
+
+tools = types.Tool(function_declarations=[weather_function])
+config = types.GenerateContentConfig(tools=[tools])
+
+contents = ["What's the temperature in London?"]
+
+response = client.models.generate_content(
+    model="gemini-3.5-flash",
+    contents=contents,
+    config=config,
+)
+
+part = response.candidates[0].content.parts[0]
+if part.function_call:
+    fc = part.function_call
+    print(f"Model requested function: {fc.name} with args {fc.args}")
+
+    mock_result = {"temperature": "15C", "condition": "Cloudy"}
+
+    contents.append(response.candidates[0].content)
+
+    fn_response_part = types.Part.from_function_response(
+        name=fc.name,
+        response=mock_result,
+        id=fc.id
+    )
+    contents.append(types.Content(role="user", parts=[fn_response_part]))
+
+    final_response = client.models.generate_content(
+        model="gemini-3.5-flash",
+        contents=contents,
+        config=config,
+    )
+    print("Final Response:", final_response.text)
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI, Type } from '@google/genai';
+
+async function main() {
+  const weatherFunction = {
+    name: 'get_current_temperature',
+    description: 'Gets the current temperature for a given location.',
+    parameters: {
+      type: Type.OBJECT,
+      properties: {
+        location: {
+          type: Type.STRING,
+          description: 'The city name, e.g. San Francisco',
+        },
+      },
+      required: ['location'],
+    },
+  };
+
+  const contents = [{
+    role: 'user',
+    parts: [{ text: "What's the temperature in London?" }]
+  }];
+
+  const response = await ai.models.generateContent({
+    model: 'gemini-3.5-flash',
+    contents: contents,
+    config: {
+      tools: [{ functionDeclarations: [weatherFunction] }],
+    },
+  });
+
+  if (response.functionCalls && response.functionCalls.length > 0) {
+    const fc = response.functionCalls[0];
+    console.log(`Model requested function: ${fc.name}`);
+
+    const mockResult = { temperature: "15C", condition: "Cloudy" };
+
+    contents.push(response.candidates[0].content);
+
+    contents.push({
+      role: 'user',
+      parts: [{
+        functionResponse: {
+          name: fc.name,
+          response: mockResult,
+          id: fc.id
+        }
+      }]
+    });
+
+    const finalResponse = await ai.models.generateContent({
+      model: 'gemini-3.5-flash',
+      contents: contents,
+      config: {
+        tools: [{ functionDeclarations: [weatherFunction] }],
+      },
+    });
+    console.log("Final Response:", finalResponse.text);
+  }
+}
+
+main();
+```
+
+### REST
+
+```
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -X POST \
+  -d '{
+    "contents": [
+      {
+        "role": "user",
+        "parts": [{"text": "What'\''s the temperature in London?"}]
+      }
+    ],
+    "tools": [
+      {
+        "functionDeclarations": [
+          {
+            "name": "get_current_temperature",
+            "description": "Gets the current temperature for a given location.",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "location": {
+                  "type": "string",
+                  "description": "The city name, e.g. San Francisco"
+                }
+              },
+              "required": ["location"]
+            }
+          }
+        ]
+      }
+    ]
+  }'
+```
+
+## आगे क्या करना है
+
+अब आपने Gemini API का इस्तेमाल करना शुरू कर दिया है. ज़्यादा बेहतर ऐप्लिकेशन बनाने के लिए, यहां दी गई गाइड देखें:
+
+- [टेक्स्ट जनरेट करना](https://ai.google.dev/gemini-api/docs/text-generation?hl=hi)
+- [इमेज जनरेट करना](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi)
+- [इमेज को समझना](https://ai.google.dev/gemini-api/docs/image-understanding?hl=hi)
+- [प्रोसेस दिखाएं](https://ai.google.dev/gemini-api/docs/thinking?hl=hi)
+- [फ़ंक्शन कॉल करना](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi)
+- [Google Search से सटीक जानकारी पाने की सुविधा](https://ai.google.dev/gemini-api/docs/google-search?hl=hi)
+- [ज़्यादा कॉन्टेक्स्ट वाली विंडो](https://ai.google.dev/gemini-api/docs/long-context?hl=hi)
+- [एम्बेडिंग](https://ai.google.dev/gemini-api/docs/embeddings?hl=hi)
+
+सुझाव भेजें
+
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+
+आखिरी बार 2026-05-19 (UTC) को अपडेट किया गया.
+
+क्या आपको हमें और कुछ बताना है?
+
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-05-19 (UTC) को अपडेट किया गया."],[],[]]

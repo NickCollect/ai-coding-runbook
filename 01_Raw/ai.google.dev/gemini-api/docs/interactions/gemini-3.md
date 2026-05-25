@@ -1,34 +1,33 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/gemini-3?hl=zh-TW
-fetched_at: 2026-05-18T05:18:18.767771+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/gemini-3?hl=hi
+fetched_at: 2026-05-25T05:26:35.674705+00:00
 title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=hi)
 
-提供意見
+सुझाव भेजें
 
-# Gemini 3 開發人員指南
+# Gemini 3 की डेवलपर गाइड
 
-Gemini 3 是我們至今最強大的模型系列，以最先進的推論技術為基礎建構而成。這項工具具備代理式工作流程、自主編碼和複雜多模態作業的專業知識，可將任何想法化為現實。本指南將介紹 Gemini 3 模型系列的主要功能，以及如何充分發揮這些功能的作用。
+Gemini 3, अब तक के हमारे सबसे ऐडवांस मॉडल का ग्रुप है. इसे बेहतरीन रीज़निंग के आधार पर बनाया गया है. इसे इस तरह से डिज़ाइन किया गया है कि यह किसी भी आइडिया को हकीकत में बदल सकता है. इसके लिए, यह एजेंटिक वर्कफ़्लो, अपने-आप होने वाली कोडिंग, और मुश्किल मल्टीमॉडल टास्क को बेहतर तरीके से पूरा करता है.
+इस गाइड में, Gemini 3 मॉडल फ़ैमिली की मुख्य सुविधाओं के बारे में बताया गया है. साथ ही, इससे ज़्यादा से ज़्यादा फ़ायदा पाने का तरीका भी बताया गया है.
 
-歡迎瀏覽 [Gemini 3 應用程式系列](https://aistudio.google.com/app/apps?source=showcase&%3BshowcaseTag=gemini-3&hl=zh-tw)，瞭解這款模型如何處理進階推論、自主程式設計和複雜的多模態工作。
+[Gemini 3 की सुविधा वाले ऐप्लिकेशन के हमारे कलेक्शन](https://aistudio.google.com/app/apps?source=showcase&%3BshowcaseTag=gemini-3&hl=hi) को एक्सप्लोर करें. इससे आपको यह पता चलेगा कि यह मॉडल, ऐडवांस रीज़निंग, ऑटोनॉमस कोडिंग, और मुश्किल मल्टीमॉडल टास्क को कैसे हैंडल करता है.
 
-只要編寫幾行程式碼，即可開始使用：
+कोड की कुछ लाइनों के साथ शुरू करें:
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 
 client = genai.Client()
@@ -38,13 +37,12 @@ interaction = client.interactions.create(
     input="Find the race condition in this multi-threaded C++ snippet: [code here]",
 )
 
-print(interaction.steps[-1].content[0].text)
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
 const client = new GoogleGenAI({});
@@ -55,7 +53,7 @@ async function run() {
     input: "Find the race condition in this multi-threaded C++ snippet: [code here]",
   });
 
-  console.log(interaction.steps.at(-1).content[0].text);
+  console.log(interaction.output_text);
 }
 
 run();
@@ -64,7 +62,6 @@ run();
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -75,52 +72,51 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 認識 Gemini 3 系列
+## पेश है Gemini 3 सीरीज़
 
-Gemini 3.1 Pro 最適合處理複雜任務，這類任務需要廣泛的世界知識，以及跨模態的進階推論能力。
+Gemini 3.1 Pro, मुश्किल कामों के लिए सबसे अच्छा है. इसके लिए, दुनिया के बारे में ज़्यादा जानकारी और अलग-अलग मोड में ऐडवांस रिज़निंग की ज़रूरत होती है.
 
-Gemini 3 Flash 是我們最新的 3 系列模型，具備 Pro 級智慧，但處理速度和價格與 Flash 相同。
+Gemini 3 Flash, हमारी 3-सीरीज़ का नया मॉडल है. इसमें Pro-लेवल की इंटेलिजेंस है. साथ ही, यह Flash मॉडल की तरह तेज़ी से काम करता है और इसकी कीमत भी Flash मॉडल जितनी है.
 
-Nano Banana Pro (又稱 Gemini 3 Pro Image) 是 Google 最高品質的圖像生成模型，而 Nano Banana 2 (又稱 Gemini 3.1 Flash Image) 則具備高產量、高效率和低價位等優勢。
+Nano Banana Pro (इसे Gemini 3 Pro Image भी कहा जाता है) इमेज जनरेट करने वाला हमारा सबसे बेहतरीन मॉडल है. वहीं, Nano Banana 2 (इसे Gemini 3.1 Flash Image भी कहा जाता है) एक ऐसा मॉडल है जो कम कीमत में, ज़्यादा इमेज जनरेट करने और बेहतर परफ़ॉर्मेंस देने के मामले में Nano Banana Pro के बराबर है.
 
-Gemini 3.1 Flash-Lite 是我們專為高成本效益模型和大量工作打造的主力模型。
+Gemini 3.1 Flash-Lite, हमारा वर्कहॉर्स मॉडल है. इसे कम लागत में ज़्यादा काम करने के लिए बनाया गया है.
 
-所有 Gemini 3 模型目前皆為預先發布版。
+Gemini 3 के सभी मॉडल फ़िलहाल, झलक के तौर पर उपलब्ध हैं.
 
-| 模型 ID | 背景期間 (進 / 出) | 知識截點 | 定價 (輸入 / 輸出)\* |
+| मॉडल आईडी | कॉन्टेक्स्ट विंडो (इन / आउट) | जानकारी न मिलना | कीमत (इनपुट / आउटपुट)\* |
 | --- | --- | --- | --- |
-| **gemini-3.1-flash-lite-preview** | 100 萬次 / 6.4 萬次 | 2025 年 1 月 | $0.25 美元 (文字、圖片、影片)、$0.50 美元 (音訊) / $1.50 美元 |
-| **gemini-3.1-flash-image-preview** | 128k / 32k | 2025 年 1 月 | $0.25 (文字輸入) / $0.067 (圖片輸出)\*\* |
-| **gemini-3.1-pro-preview** | 100 萬次 / 6.4 萬次 | 2025 年 1 月 | $2 美元 / $12 美元 (少於 20 萬個權杖)   $4 美元 / $18 美元 (超過 20 萬個權杖) |
-| **gemini-3-flash-preview** | 100 萬次 / 6.4 萬次 | 2025 年 1 月 | $0.50 / $3 |
-| **gemini-3-pro-image-preview** | 65,000 / 32,000 | 2025 年 1 月 | $2 (文字輸入) / $0.134 (圖片輸出)\*\* |
+| **gemini-3.1-flash-lite-preview** | 10 लाख / 64 हज़ार | जनवरी 2025 | 0.25 डॉलर (टेक्स्ट, इमेज, वीडियो), 0.50 डॉलर (ऑडियो) / 1.50 डॉलर |
+| **gemini-3.1-flash-image-preview** | 128k / 32k | जनवरी 2025 | 0.25 डॉलर (टेक्स्ट इनपुट) / 0.067 डॉलर (इमेज आउटपुट)\*\* |
+| **gemini-3.1-pro-preview** | 10 लाख / 64 हज़ार | जनवरी 2025 | $2 / $12 (<200 हज़ार टोकन)   $4 / $18 (>200 हज़ार टोकन) |
+| **gemini-3-flash-preview** | 10 लाख / 64 हज़ार | जनवरी 2025 | 0.50 डॉलर / 3 डॉलर |
+| **gemini-3-pro-image-preview** | 65 हज़ार / 32 हज़ार | जनवरी 2025 | $2 (टेक्स्ट इनपुट) / $0.134 (इमेज आउटपुट)\*\* |
 
-*\* 除非另有註明，否則價格以每 100 萬個權杖為單位。*
-*\*\* 圖片價格會因解析度而異。詳情請參閱[定價頁面](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw)。*
+*\* कीमत, 10 लाख टोकन के हिसाब से तय की जाती है. हालांकि, इसमें बदलाव हो सकता है.*
+*\*\* इमेज की कीमत, रिज़ॉल्यूशन के हिसाब से अलग-अलग होती है. ज़्यादा जानकारी के लिए, [कीमत तय करने से जुड़ा पेज](https://ai.google.dev/gemini-api/docs/pricing?hl=hi) देखें.*
 
-如需詳細的限制、定價和其他資訊，請參閱[模型頁面](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-tw)。
+सीमाओं, कीमत, और ज़्यादा जानकारी के लिए, [मॉडल पेज](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi) देखें.
 
-## Gemini 3 的新 API 功能
+## Gemini 3 में नई API सुविधाएं
 
-Gemini 3 推出全新參數，讓開發人員進一步掌控延遲時間、成本和多模態準確度。
+Gemini 3 में नए पैरामीटर जोड़े गए हैं. इन्हें इस तरह से डिज़ाइन किया गया है कि डेवलपर को लेटेन्सी, लागत, और मल्टीमॉडल फ़िडेलिटी पर ज़्यादा कंट्रोल मिल सके.
 
-### 思考程度
+### सोचने का लेवल
 
-Gemini 3 系列模型預設會使用動態思考功能，根據提示進行推論。您可以使用 `thinking_level` 參數，控制模型產生回覆前內部推論過程的**最大**深度。Gemini 3 會將這些層級視為思考的相對配額，而非嚴格的權杖保證。
+Gemini 3 सीरीज़ के मॉडल, डिफ़ॉल्ट रूप से डाइनैमिक थिंकिंग का इस्तेमाल करते हैं, ताकि वे प्रॉम्प्ट के हिसाब से जवाब दे सकें. `thinking_level` पैरामीटर का इस्तेमाल किया जा सकता है. यह पैरामीटर, मॉडल के जवाब देने से पहले, मॉडल की इंटरनल रीज़निंग प्रोसेस की **ज़्यादा से ज़्यादा** डेप्थ को कंट्रोल करता है. Gemini 3, इन लेवल को टोकन की गारंटी के तौर पर नहीं, बल्कि सोचने के लिए उपलब्ध टोकन की संख्या के तौर पर मानता है.
 
-如未指定 `thinking_level`，Gemini 3 會預設為 `high`。如果不需要複雜的推論，可以將模型的思考層級限制為 `low`，加快回覆速度並降低延遲。
+अगर `thinking_level` के लिए कोई वैल्यू नहीं डाली गई है, तो Gemini 3 डिफ़ॉल्ट रूप से `high` पर सेट होगा. अगर आपको जटिल तर्क की ज़रूरत नहीं है और आपको कम समय में जवाब चाहिए, तो मॉडल के सोचने के लेवल को `low` पर सेट करें.
 
-| 思考程度 | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | 說明 |
+| सोचने का लेवल | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | ब्यौरा |
 | --- | --- | --- | --- | --- |
-| **`minimal`** | 不支援 | 支援 (預設) | 支援 | 與大多數查詢的「不思考」設定相符。模型可能會以極簡方式思考複雜的程式碼工作。將聊天或高處理量應用程式的延遲時間降到最低。請注意，`minimal` 無法保證思考功能已關閉。 |
-| **`low`** | 支援 | 支援 | 支援 | 盡量縮短延遲時間並降低成本。適合簡單的指令遵循、即時通訊或高處理量應用程式。 |
-| **`medium`** | 支援 | 支援 | 支援 | 適合處理大多數工作。 |
-| **`high`** | 支援 (預設、動態) | 支援 (動態) | 支援 (預設、動態) | 盡可能深入推論。模型可能需要較長時間才能輸出第一個 (非思考) 輸出權杖，但輸出內容會經過更仔細的推理。 |
+| **`minimal`** | काम नहीं करता है | काम करता है (डिफ़ॉल्ट) | काम करता है | यह सेटिंग, ज़्यादातर क्वेरी के लिए "सोचने की ज़रूरत नहीं है" सेटिंग से मेल खाती है. मुश्किल कोडिंग टास्क के लिए, मॉडल बहुत कम सोच-विचार कर सकता है. यह चैट या ज़्यादा थ्रूपुट वाले ऐप्लिकेशन के लिए, लेटेन्सी को कम करता है. ध्यान दें कि `minimal` इस बात की गारंटी नहीं देता कि सोचने की सुविधा बंद हो गई है. |
+| **`low`** | काम करता है | काम करता है | काम करता है | इससे इंतज़ार का समय और लागत कम हो जाती है. यह मॉडल, आसान निर्देशों का पालन करने, चैट करने या ज़्यादा थ्रूपुट वाले ऐप्लिकेशन के लिए सबसे अच्छा है. |
+| **`medium`** | काम करता है | काम करता है | काम करता है | ज़्यादातर कामों के लिए, सोच-समझकर जवाब देता है. |
+| **`high`** | काम करता है (डिफ़ॉल्ट, डाइनैमिक) | काम करता है (डाइनैमिक) | काम करता है (डिफ़ॉल्ट, डाइनैमिक) | इससे जवाब में ज़्यादा से ज़्यादा जानकारी शामिल की जा सकती है. मॉडल को पहले (बिना सोचे-समझे) आउटपुट टोकन तक पहुंचने में ज़्यादा समय लग सकता है. हालांकि, आउटपुट में ज़्यादा सोच-विचार किया जाएगा. |
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 
 client = genai.Client()
@@ -131,13 +127,12 @@ interaction = client.interactions.create(
     generation_config={"thinking_level": "low"},
 )
 
-print(interaction.steps[-1].content[0].text)
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
 const client = new GoogleGenAI({});
@@ -150,13 +145,12 @@ const interaction = await client.interactions.create({
     },
   });
 
-console.log(interaction.steps.at(-1).content[0].text);
+console.log(interaction.output_text);
 ```
 
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -170,29 +164,28 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### 溫度
+### तापमान
 
-對於所有 Gemini 3 模型，我們強烈建議將溫度參數維持預設值 `1.0`。
+हमारा सुझाव है कि Gemini 3 के सभी मॉडल के लिए, टेंपरेचर पैरामीटर को उसकी डिफ़ॉल्ट वैल्यू `1.0` पर सेट रखें.
 
-先前的模型通常會調整溫度參數，以控制創意與確定性，但 Gemini 3 的推論能力已針對預設設定進行最佳化。變更溫度參數 (設為低於 1.0) 可能會導致非預期的行為，例如迴圈或效能降低，特別是在複雜的數學或推論工作方面。
+पिछले मॉडल में, क्रिएटिविटी और डिटरमिनिज़्म को कंट्रोल करने के लिए, अक्सर टेंपरेचर को ट्यून करने से फ़ायदा मिलता था. हालांकि, Gemini 3 की तर्क करने की क्षमताओं को डिफ़ॉल्ट सेटिंग के लिए ऑप्टिमाइज़ किया गया है. तापमान को बदलने (इसे 1.0 से कम पर सेट करने) से, मॉडल उम्मीद के मुताबिक काम नहीं कर सकता. जैसे, यह एक ही जवाब को बार-बार दोहरा सकता है या इसकी परफ़ॉर्मेंस खराब हो सकती है. ऐसा खास तौर पर, गणित के मुश्किल सवालों या तर्क से जुड़े सवालों के जवाब देते समय हो सकता है.
 
-### 思想簽名
+### सोच के हस्ताक्षर
 
-Gemini 3 模型會使用思維簽章，在 API 呼叫之間維持推理情境。這些簽章是模型內部思考過程的加密表示法。
+Gemini 3 मॉडल, थॉट सिग्नेचर का इस्तेमाल करते हैं. इससे एपीआई कॉल के दौरान, जवाब देने के लिए सही कॉन्टेक्स्ट बनाए रखने में मदद मिलती है. ये सिग्नेचर, मॉडल की इंटरनल थॉट प्रोसेस के एन्क्रिप्ट किए गए वर्शन होते हैं.
 
-- **有狀態模式 (建議)**：在有狀態模式下使用 Interactions API (提供 `previous_interaction_id`)，伺服器會自動管理對話記錄和想法簽章。
-- **無狀態模式**：如果手動管理對話記錄，後續要求必須包含附有簽章的思維方塊，才能驗證真偽。
+- **स्टेटफ़ुल मोड (सुझाया गया)**: स्टेटफ़ुल मोड में Interactions API का इस्तेमाल करते समय (`previous_interaction_id` उपलब्ध कराना), सर्वर बातचीत के इतिहास और थॉट सिग्नेचर को अपने-आप मैनेज करता है.
+- **स्टेटलेस मोड**: अगर बातचीत के इतिहास को मैन्युअल तरीके से मैनेज किया जा रहा है, तो आपको अगले अनुरोधों में थॉट ब्लॉक और उनके हस्ताक्षर शामिल करने होंगे, ताकि उनकी पुष्टि की जा सके.
 
-詳情請參閱「[Thought Signatures](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=zh-tw)」頁面。
+ज़्यादा जानकारी के लिए, [थॉट सिग्नेचर](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=hi) पेज देखें.`
 
-### 使用工具輸出結構化內容
+### टूल के साथ स्ट्रक्चर्ड आउटपुट
 
-Gemini 3 模型可讓您結合[結構化輸出](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=zh-tw)與內建工具，包括[以 Google 搜尋強化事實基礎](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=zh-tw)、[網址脈絡](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=zh-tw)、[程式碼執行](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=zh-tw)和[函式呼叫](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=zh-tw)。
+Gemini 3 मॉडल की मदद से, [स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=hi) को बिल्ट-इन टूल के साथ जोड़ा जा सकता है. इनमें ये टूल शामिल हैं: [Google Search से जानकारी पाना](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=hi), [यूआरएल का कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=hi), [कोड एक्ज़ीक्यूशन](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=hi), और [फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=hi).
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 from pydantic import BaseModel, Field
 from typing import List
@@ -218,14 +211,13 @@ interaction = client.interactions.create(
     },
 )
 
-result = MatchResult.model_validate_json(interaction.steps[-1].content[0].text)
+result = MatchResult.model_validate_json(interaction.output_text)
 print(result)
 ```
 
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 import * as z from "zod";
 
@@ -262,7 +254,7 @@ async function run() {
     },
   });
 
-  const match = matchSchema.parse(JSON.parse(interaction.steps.at(-1).content[0].text));
+  const match = matchSchema.parse(JSON.parse(interaction.output_text));
   console.log(match);
 }
 
@@ -272,7 +264,6 @@ run();
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -304,22 +295,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### 圖像生成
+### Image generation
 
-Gemini 3.1 Flash Image 和 Gemini 3 Pro Image 可根據文字提示生成及編輯圖像。這項功能會運用推論能力「思考」提示詞，並擷取即時資料 (例如天氣預報或股票圖表)，然後使用 [Google 搜尋](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=zh-tw)建立基準，生成高保真圖片。
+Gemini 3.1 Flash Image और Gemini 3 Pro Image की मदद से, टेक्स्ट प्रॉम्प्ट से इमेज जनरेट की जा सकती हैं और उनमें बदलाव किया जा सकता है. यह किसी प्रॉम्प्ट के बारे में "सोचने" के लिए, तर्क का इस्तेमाल करता है. साथ ही, [Google Search](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=hi) से मिली जानकारी का इस्तेमाल करने से पहले, रीयल-टाइम डेटा को ऐक्सेस कर सकता है. जैसे, मौसम का पूर्वानुमान या स्टॉक चार्ट. इसके बाद, यह ज़्यादा सटीक इमेज जनरेट करता है.
 
-**全新和改良功能：**
+**नई और बेहतर सुविधाएँ:**
 
-- **4K 和文字算繪：**生成清晰易讀的文字和圖表，最高可達 2K 和 4K 解析度。
-- **以真實世界為基準生成：**使用 `google_search` 工具驗證事實，並根據真實世界資訊生成圖像。透過 Google *圖片*搜尋建立基準，適用於 Gemini 3.1 Flash Image。
-- **對話式修圖：**只要說出想編輯的內容 (例如「將背景改成日落」)，即可透過多輪對話編輯圖像。這項工作流程會運用**思維簽章**，保留回合之間的視覺情境。
+- **4K और टेक्स्ट रेंडरिंग:** 2K और 4K रिज़ॉल्यूशन तक के टेक्स्ट और डायग्राम जनरेट करें, जो साफ़ तौर पर दिखें और आसानी से पढ़े जा सकें.
+- **भरोसेमंद जानकारी के आधार पर कॉन्टेंट जनरेट करना:** `google_search` टूल का इस्तेमाल करके, तथ्यों की पुष्टि करें और असल दुनिया की जानकारी के आधार पर इमेज जनरेट करें. Google *इमेज*
+  सर्च की मदद से जानकारी पाना. यह सुविधा, Gemini 3.1 Flash Image के लिए उपलब्ध है.
+- **बातचीत करके फ़ोटो में बदलाव करना:** सिर्फ़ बदलाव करने के लिए कहकर, फ़ोटो में कई बार बदलाव करना. जैसे, "बैकग्राउंड को सूर्यास्त वाला सीन बनाओ". यह वर्कफ़्लो, बारी-बारी से बातचीत के दौरान विज़ुअल कॉन्टेक्स्ट को बनाए रखने के लिए, **थॉट सिग्नेचर** पर निर्भर करता है.
 
-如要進一步瞭解長寬比、編輯工作流程和設定選項，請參閱[圖片生成指南](https://ai.google.dev/gemini-api/docs/interactions/image-generation?hl=zh-tw)。
+आस्पेक्ट रेशियो, बदलाव करने के वर्कफ़्लो, और कॉन्फ़िगरेशन के विकल्पों के बारे में पूरी जानकारी के लिए, [इमेज जनरेट करने से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/interactions/image-generation?hl=hi) देखें.
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 import base64
 
@@ -339,9 +330,9 @@ interaction = client.interactions.create(
 from PIL import Image
 import io
 
-image_blocks = [content_block for content_block in interaction.steps[-1].content if content_block.type == "image"]
-if image_blocks:
-    image_data = base64.b64decode(image_blocks[0].data)
+generated_image = interaction.output_image
+if generated_image:
+    image_data = base64.b64decode(generated_image.data)
     image = Image.open(io.BytesIO(image_data))
     image.save('weather_tokyo.png')
     image.show()
@@ -350,7 +341,6 @@ if image_blocks:
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 import * as fs from "node:fs";
 
@@ -368,12 +358,9 @@ async function run() {
     }
   });
 
-  for (const contentBlock of interaction.steps.at(-1).content) {
-    if (contentBlock.type === "image") {
-      const buffer = Buffer.from(contentBlock.data, "base64");
-      fs.writeFileSync("weather_tokyo.png", buffer);
-    }
-  }
+  const buffer = Buffer.from(interaction.output_image.data, 'base64');
+
+  fs.writeFileSync('weather_tokyo.png', buffer);
 }
 
 run();
@@ -382,7 +369,6 @@ run();
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -399,26 +385,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**回覆範例**
+**जवाब का उदाहरण**
 
-![東京天氣](https://ai.google.dev/static/gemini-api/docs/images/weather-tokyo.jpg?hl=zh-tw)
+![टोक्यो का मौसम](https://ai.google.dev/static/gemini-api/docs/images/weather-tokyo.jpg?hl=hi)
 
-### 使用圖片執行程式碼
+### इमेज के साथ कोड चलाने की सुविधा
 
-Gemini 3 Flash 可將影像視為主動調查，而不只是靜態瀏覽。模型會結合推論和[程式碼執行](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=zh-tw)功能，制定計畫，然後編寫及執行 Python 程式碼，逐步放大、裁剪、註解或以其他方式處理圖片，以視覺化方式呈現答案。
+Gemini 3 Flash, विज़न को सिर्फ़ एक स्टैटिक झलक के तौर पर नहीं, बल्कि एक ऐक्टिव जांच के तौर पर देख सकता है. [कोड को लागू करने](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=hi) के साथ-साथ तर्क देने की क्षमता का इस्तेमाल करके, मॉडल एक प्लान बनाता है. इसके बाद, Python कोड लिखता है और उसे लागू करता है. इससे वह इमेज को ज़ूम इन, कांट-छांट, एनोटेट या अन्य तरीके से बदल सकता है. ऐसा वह एक-एक करके करता है, ताकि अपने जवाबों को विज़ुअल तौर पर बेहतर बना सके.
 
-**用途：**
+**इस्तेमाल के उदाहरण:**
 
-- **縮放及檢查：**模型會隱含地偵測細節是否過小 (例如讀取遠處的儀表或序號)，並編寫程式碼來裁剪及重新檢查該區域，提高解析度。
-- **視覺化數學和繪圖：**模型可使用程式碼執行多步驟計算 (例如加總收據上的項目，或從擷取的資料產生 Matplotlib 圖表)。
-- **圖片註解：**模型可以直接在圖片上繪製箭頭、邊界框或其他註解，回答「這個項目應該放在哪裡？」等空間問題。
+- **ज़ूम करना और बारीकी से देखना:** मॉडल अपने-आप यह पता लगा लेता है कि जानकारी बहुत छोटी है.उदाहरण के लिए, दूर से गेज या सीरियल नंबर पढ़ना. इसके बाद, मॉडल कोड लिखता है, ताकि इमेज को काटा जा सके और ज़्यादा रिज़ॉल्यूशन पर उस हिस्से की फिर से जांच की जा सके.
+- **विज़ुअल मैथ और प्लॉटिंग:** मॉडल, कोड का इस्तेमाल करके कई चरणों में हिसाब-किताब कर सकता है. जैसे, रसीद पर मौजूद लाइन आइटम को जोड़ना या निकाले गए डेटा से Matplotlib चार्ट जनरेट करना.
+- **इमेज एनोटेशन:** मॉडल, इमेज पर सीधे तौर पर ऐरो, बाउंडिंग बॉक्स या अन्य एनोटेशन बना सकता है. इससे, वह "इस आइटम को कहां रखना चाहिए?" जैसे सवालों के जवाब दे सकता है.
 
-如要啟用視覺化思考功能，請將「程式碼執行」設定為工具。模型會在必要時自動使用程式碼來處理圖片。
+विज़ुअल थिंकिंग की सुविधा चालू करने के लिए, [कोड एक्ज़ीक्यूशन](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=hi) को टूल के तौर पर कॉन्फ़िगर करें. ज़रूरत पड़ने पर, मॉडल इमेज में बदलाव करने के लिए कोड का इस्तेमाल अपने-आप करेगा.
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 from google.genai import types
 import requests
@@ -461,7 +446,6 @@ for step in interaction.steps:
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
 const client = new GoogleGenAI({});
@@ -525,7 +509,6 @@ else
   IMAGE_B64=$(curl -sL "$IMG_URL" | base64 -w0)
 fi
 
-# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
@@ -544,13 +527,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-如要進一步瞭解如何使用圖片執行程式碼，請參閱「[程式碼執行](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=zh-tw#images)」。
+इमेज के साथ कोड लागू करने के बारे में ज़्यादा जानकारी के लिए, [कोड लागू करना](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=hi#images) लेख पढ़ें.
 
-### 多模態函式回應
+### टेक्स्ट, इमेज, और वीडियो वगैरह का इस्तेमाल करके की गई क्वेरी के जवाब
 
-[多模態函式呼叫](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=zh-tw#multimodal)
-可讓使用者取得包含多模態物件的函式回應，
-進而更充分運用模型的函式呼叫功能。標準函式呼叫功能僅支援以文字為基礎的函式回應：
+[मल्टीमॉडल फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=hi#multimodal) की मदद से, उपयोगकर्ताओं को फ़ंक्शन के ऐसे जवाब मिलते हैं जिनमें मल्टीमॉडल ऑब्जेक्ट शामिल होते हैं. इससे मॉडल की फ़ंक्शन कॉलिंग की क्षमताओं का बेहतर इस्तेमाल किया जा सकता है. स्टैंडर्ड फ़ंक्शन कॉलिंग की सुविधा, सिर्फ़ टेक्स्ट पर आधारित फ़ंक्शन के जवाबों के साथ काम करती है:
 
 ### Python
 
@@ -615,19 +596,16 @@ interaction_2 = client.interactions.create(
     tools=[get_image_tool]
 )
 
-model_output_step = next(s for s in interaction_2.steps if s.type == "model_output")
-print(f"\nFinal model response: {model_output_step.content[0].text}")
+print(f"\nFinal model response: {interaction_2.output_text}")
 ```
 
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from '@google/genai';
 
 const client = new GoogleGenAI({});
 
-// 1. Define the tool
 const getImageTool = {
     type: 'function',
     name: 'get_image',
@@ -644,24 +622,20 @@ const getImageTool = {
     },
 };
 
-// 2. Send the request with tools
 const interaction1 = await client.interactions.create({
     model: 'gemini-3-flash-preview',
     input: 'Use the get_image tool to show me the instrument I ordered last month.',
     tools: [getImageTool],
 });
 
-// 3. Find the function call step
 const fcStep = interaction1.steps.find(s => s.type === 'function_call');
 console.log(`Tool Call: ${fcStep.name}(${JSON.stringify(fcStep.arguments)})`);
 
-// Execute tool (fetch image)
 const imageUrl = 'https://goo.gle/instrument-img';
 const response = await fetch(imageUrl);
 const imageArrayBuffer = await response.arrayBuffer();
 const base64ImageData = Buffer.from(imageArrayBuffer).toString('base64');
 
-// 4. Send multimodal function result back
 const interaction2 = await client.interactions.create({
     model: 'gemini-3-flash-preview',
     previous_interaction_id: interaction1.id,
@@ -681,7 +655,7 @@ const interaction2 = await client.interactions.create({
     tools: [getImageTool]
 });
 
-console.log(`\nFinal model response: ${interaction2.steps.at(-1).content[0].text}`);
+console.log(`\nFinal model response: ${interaction2.output_text}`);
 ```
 
 ### REST
@@ -711,7 +685,6 @@ fi
 #   -d '{ "model": "gemini-3-flash-preview", "input": "Show me the instrument I ordered last month.", "tools": [...] }'
 
 # 2. Send multimodal function result back (Replace INTERACTION_ID and CALL_ID)
-# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -735,14 +708,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### 結合內建工具和函式呼叫
+### पहले से मौजूद टूल और फ़ंक्शन कॉलिंग को एक साथ इस्तेमाल करना
 
-Gemini 3 允許在同一個 API 呼叫中使用內建工具 (例如 Google 搜尋、網址內容和[更多](https://ai.google.dev/gemini-api/docs/tools?hl=zh-tw)) 和自訂[函式呼叫](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=zh-tw)工具，實現更複雜的工作流程。
+Gemini 3 की मदद से, एक ही एपीआई कॉल में बिल्ट-इन टूल (जैसे, Google Search, यूआरएल कॉन्टेक्स्ट, और [अन्य](https://ai.google.dev/gemini-api/docs/tools?hl=hi)) और कस्टम [Function Calling](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=hi) टूल का इस्तेमाल किया जा सकता है. इससे ज़्यादा मुश्किल वर्कफ़्लो को मैनेज किया जा सकता है.
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 from google.genai import types
 
@@ -773,11 +745,9 @@ interaction = client.interactions.create(
     ],
 )
 
-# Find the function call step
 fc_step = next((s for s in interaction.steps if s.type == "function_call"), None)
 
 if fc_step:
-    # Simulate a function result
     result = {"response": "Very cold. 22 degrees Fahrenheit."}
 
     final_interaction = client.interactions.create(
@@ -792,13 +762,12 @@ if fc_step:
         previous_interaction_id=interaction.id,
     )
 
-    print(final_interaction.steps[-1].content[0].text)
+    print(final_interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI, Type } from '@google/genai';
 
 const client = new GoogleGenAI({});
@@ -828,7 +797,6 @@ const interaction = await client.interactions.create({
   ],
 });
 
-// Find the function call step
 const fcStep = interaction.steps.find(s => s.type === 'function_call');
 
 if (fcStep) {
@@ -846,55 +814,56 @@ if (fcStep) {
     previous_interaction_id: interaction.id,
   });
 
-  console.log(finalInteraction.steps.at(-1).content[0].text);
+  console.log(finalInteraction.output_text);
 }
 ```
 
-## 從 Gemini 2.5 遷移
+## Gemini 2.5 से माइग्रेट करना
 
-Gemini 3 是我們迄今最強大的模型系列，相較於 Gemini 2.5，各方面都有顯著進步。遷移時，請注意以下事項：
+Gemini 3, अब तक का हमारा सबसे बेहतरीन मॉडल है. यह Gemini 2.5 से ज़्यादा बेहतर है. माइग्रेट करते समय, इन बातों का ध्यान रखें:
 
-- **思考型：**如果你先前使用複雜的提示工程 (例如思緒鏈) 強迫 Gemini 2.5 推理，請試用 Gemini 3 和 `thinking_level: "high"`，並簡化提示。
-- **溫度設定：**如果現有程式碼明確設定溫度參數 (尤其是將溫度參數設為低值，以產生確定性輸出內容)，建議您移除這個參數，並使用 Gemini 3 的預設值 1.0，以免發生潛在的迴圈問題，或導致複雜工作效能下降。
-- **PDF 和文件理解：**
-  如果您依賴特定行為來剖析密集文件，請測試新的 `media_resolution_high` 設定，確保準確度不受影響。
-- **符記用量：**改用 Gemini 3 預設模型後，PDF 的符記用量可能會**增加**，但影片的符記用量會**減少**。如果預設解析度提高，導致要求超出脈絡窗口，建議您明確降低媒體解析度。
-- **影像分割：**Gemini 3 Pro 或 Gemini 3 Flash 不支援影像分割功能 (傳回物件的像素層級遮罩)。如要處理需要內建影像分割功能的作業，建議繼續使用 Gemini 2.5 Flash (關閉思考功能) 或 [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=zh-tw)。
-- **電腦用途：**Gemini 3 Pro 和 Gemini 3 Flash 支援[電腦用途](https://ai.google.dev/gemini-api/docs/interactions/computer-use?hl=zh-tw)。與 2.5 系列不同，您不必使用其他模型就能存取電腦使用工具。
-- **工具支援**：Gemini 3 模型現在支援[結合內建工具和函式呼叫](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=zh-tw)。Gemini 3 模型現在也支援[地圖基礎](https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=zh-tw)。
+- **सोच-समझकर जवाब देना:** अगर आपने Gemini 2.5 को सोच-समझकर जवाब देने के लिए, पहले मुश्किल प्रॉम्प्ट इंजीनियरिंग (जैसे, चेन ऑफ़ थॉट) का इस्तेमाल किया था, तो `thinking_level: "high"` और आसान प्रॉम्प्ट के साथ Gemini 3 को आज़माएँ.
+- **तापमान की सेटिंग:** अगर आपके मौजूदा कोड में तापमान को साफ़ तौर पर सेट किया गया है (खास तौर पर, भरोसेमंद आउटपुट के लिए कम वैल्यू पर सेट किया गया है), तो हमारा सुझाव है कि आप इस पैरामीटर को हटा दें. साथ ही, Gemini 3 के डिफ़ॉल्ट तापमान 1.0 का इस्तेमाल करें. इससे, लूपिंग से जुड़ी संभावित समस्याओं से बचा जा सकेगा. इसके अलावा, मुश्किल टास्क में परफ़ॉर्मेंस में गिरावट नहीं आएगी.
+- **पीडीएफ़ और दस्तावेज़ को समझना:**
+  अगर आपने दस्तावेज़ को पार्स करने के लिए किसी खास तरीके का इस्तेमाल किया था, तो नई `media_resolution_high` सेटिंग को आज़माएं. इससे यह पक्का किया जा सकेगा कि आपको सटीक नतीजे मिलते रहें.
+- **टोकन का इस्तेमाल:** Gemini 3 डिफ़ॉल्ट पर माइग्रेट करने से, PDF के लिए टोकन का इस्तेमाल **बढ़ सकता है**. हालांकि, वीडियो के लिए टोकन का इस्तेमाल **कम हो सकता है**. अगर डिफ़ॉल्ट रिज़ॉल्यूशन ज़्यादा होने की वजह से, अनुरोध अब कॉन्टेक्स्ट विंडो से ज़्यादा हो जाते हैं, तो हमारा सुझाव है कि मीडिया रिज़ॉल्यूशन को साफ़ तौर पर कम करें.
+- **इमेज सेगमेंटेशन:** इमेज सेगमेंटेशन की सुविधाएं, Gemini 3 Pro या Gemini 3 Flash में काम नहीं करती हैं. इन सुविधाओं की मदद से, ऑब्जेक्ट के लिए पिक्सल-लेवल के मास्क दिखाए जाते हैं. जिन वर्कलोड के लिए इमेज सेगमेंटेशन की सुविधा की ज़रूरत होती है उनके लिए, हमारा सुझाव है कि आप सूझ-बूझ वाली सुविधा बंद करके Gemini 2.5 Flash या [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=hi) का इस्तेमाल जारी रखें.
+- **कंप्यूटर का इस्तेमाल:** Gemini 3 Pro और Gemini 3 Flash, [कंप्यूटर के इस्तेमाल](https://ai.google.dev/gemini-api/docs/interactions/computer-use?hl=hi) की सुविधा के साथ काम करते हैं. 2.5 सीरीज़ के उलट, कंप्यूटर के इस्तेमाल से जुड़े टूल को ऐक्सेस करने के लिए, आपको अलग मॉडल का इस्तेमाल करने की ज़रूरत नहीं है.
+- **टूल के साथ काम करने की सुविधा**: [फ़ंक्शन कॉलिंग के साथ, पहले से मौजूद टूल का इस्तेमाल करने की सुविधा](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=hi) अब Gemini 3 मॉडल के लिए उपलब्ध है. अब Gemini 3 मॉडल के लिए, [Maps की जानकारी का इस्तेमाल करके जवाब देने की सुविधा](https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=hi) भी उपलब्ध है.
 
-## OpenAI 相容性
+## OpenAI के साथ काम करने की सुविधा
 
-如果使用者採用 [OpenAI 相容性層](https://ai.google.dev/gemini-api/docs/openai?hl=zh-tw)，系統會自動將標準參數 (OpenAI 的 `reasoning_effort`) 對應至 Gemini (`thinking_level`) 對等項目。
+[OpenAI कंपैटबिलिटी लेयर](https://ai.google.dev/gemini-api/docs/openai?hl=hi) का इस्तेमाल करने वाले लोगों के लिए, स्टैंडर्ड पैरामीटर (OpenAI के `reasoning_effort`) अपने-आप Gemini (`thinking_level`) के बराबर मैप हो जाते हैं.
 
-## 提示最佳做法
+## प्रॉम्प्ट लिखने के सबसे सही तरीके
 
-Gemini 3 是推論模型，因此提示方式有所不同。
+Gemini 3, रीज़निंग करने वाला मॉडल है. इससे प्रॉम्प्ट देने का तरीका बदल जाता है.
 
-- **明確的指令：**輸入提示時請簡潔扼要。Gemini 3 最適合直接且清楚的指令。如果使用舊版模型，系統可能會過度分析冗長或過於複雜的提示工程技術。
-- **輸出內容詳細程度：**Gemini 3 預設會提供簡潔的回覆，並盡量直接給出答案。如果您的用途需要更具對話感或「健談」的風格，請務必在提示中明確引導模型 (例如「請以友善健談的助理身分說明這件事」)。
-- **脈絡管理：**處理大型資料集 (例如整本書、程式碼集或長篇影片) 時，請將具體指令或問題放在提示結尾的資料脈絡之後。在問題開頭使用「根據上述資訊...」等詞組，將模型的推論過程錨定在提供的資料上。
+- **सटीक निर्देश:** इनपुट प्रॉम्प्ट में कम शब्दों का इस्तेमाल करें. Gemini 3, सीधे और साफ़ तौर पर दिए गए निर्देशों का सबसे सही जवाब देता है. यह पुराने मॉडल के लिए इस्तेमाल की गई, ज़्यादा शब्दों वाली या बहुत ज़्यादा मुश्किल प्रॉम्प्ट इंजीनियरिंग तकनीकों का ज़्यादा विश्लेषण कर सकता है.
+- **जवाब में शब्दों का इस्तेमाल:** डिफ़ॉल्ट रूप से, Gemini 3 कम शब्दों में जवाब देता है. साथ ही, यह सीधे तौर पर सटीक जवाब देने को प्राथमिकता देता है. अगर आपको अपने इस्तेमाल के उदाहरण के लिए, ज़्यादा बातचीत करने वाले या "चैटिंग" वाले पर्सोना की ज़रूरत है, तो आपको प्रॉम्प्ट में मॉडल को साफ़ तौर पर निर्देश देना होगा. उदाहरण के लिए, "इसे एक मददगार और बातचीत करने वाले असिस्टेंट के तौर पर समझाओ".
+- **कॉन्टेक्स्ट मैनेजमेंट:** बड़े डेटासेट (जैसे, पूरी किताबें, कोडबेस या लंबे वीडियो) के साथ काम करते समय, अपने खास निर्देश या सवाल प्रॉम्प्ट के आखिर में रखें. ऐसा डेटा के कॉन्टेक्स्ट के बाद करें. मॉडल के जवाब को दिए गए डेटा के हिसाब से तैयार करने के लिए, अपने सवाल की शुरुआत ऐसे वाक्यांश से करें, "ऊपर दी गई जानकारी के आधार पर...".
 
-如要進一步瞭解提示設計策略，請參閱[提示工程指南](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=zh-tw)。
+[प्रॉम्प्ट इंजीनियरिंग गाइड](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=hi) में, प्रॉम्प्ट डिज़ाइन करने की रणनीतियों के बारे में ज़्यादा जानें.
 
-## 常見問題
+## अक्सर पूछे जाने वाले सवाल
 
-1. **Gemini 3 的知識截點為何？**Gemini 3 模型所具備的知識截點為 2025 年 1 月。如要取得最新資訊，請使用[搜尋基礎](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=zh-tw)工具。
-2. **脈絡窗口的限制為何？**Gemini 3 模型支援 100 萬個詞元的輸入脈絡窗口，以及最多 64,000 個詞元的輸出。
-3. **Gemini 3 是否提供免費方案？**Gemini 3 Flash
-   `gemini-3-flash-preview` 在 Gemini API 中提供免費方案。您可以在 Google AI Studio 免付費試用 Gemini 3.1 Pro 和 3 Flash，但 Gemini API 的 `gemini-3.1-pro-preview` 沒有免付費方案。
-4. **舊的 `thinking_budget` 程式碼是否仍可運作？**可以，`thinking_budget` 仍支援回溯相容性，但建議遷移至 `thinking_level`，以獲得更可預測的效能。請勿在同一項要求中同時使用這兩者。
-5. **Gemini 3 是否支援 Batch API？**可以，Gemini 3 支援 [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-tw)。
-6. **是否支援脈絡快取？**是，Gemini 3 支援[脈絡快取](https://ai.google.dev/gemini-api/docs/interactions/caching?hl=zh-tw)。
-7. **Gemini 3 支援哪些工具？**Gemini 3 支援 [Google 搜尋](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=zh-tw)、[利用 Google 地圖建立基準](https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=zh-tw)、[檔案搜尋](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=zh-tw)、[程式碼執行](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=zh-tw)和[網址內容](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=zh-tw)。此外，也支援標準的[函式呼叫](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=zh-tw)，可搭配自訂工具使用，並[與內建工具一併使用](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=zh-tw)。
-8. **什麼是 `gemini-3.1-pro-preview-customtools`？**如果您使用 `gemini-3.1-pro-preview`，但模型忽略自訂工具，改用 bash 指令，請改用 `gemini-3.1-pro-preview-customtools` 模型。詳情請參閱 [這篇文章][customtools-model]。
+1. **Gemini 3 के लिए, जानकारी अपडेट होने की आखिरी तारीख क्या है?** Gemini 3 मॉडल के लिए, जानकारी अपडेट होने की आखिरी तारीख जनवरी 2025 है. ज़्यादा नई जानकारी के लिए, [खोज के नतीजों से जानकारी पाने](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=hi) वाले टूल का इस्तेमाल करें.
+2. **कॉन्टेक्स्ट विंडो की सीमाएं क्या हैं?** Gemini 3 मॉडल, 10 लाख टोकन वाली कॉन्टेक्स्ट विंडो के साथ काम करते हैं. साथ ही, ये 64 हज़ार टोकन तक का आउटपुट दे सकते हैं.
+3. **क्या Gemini 3 का इस्तेमाल बिना किसी शुल्क के किया जा सकता है?** Gemini 3 Flash
+   `gemini-3-flash-preview`, Gemini API के मुफ़्त टियर में उपलब्ध है. Google AI Studio में, Gemini 3.1 Pro और 3 Flash को बिना किसी शुल्क के आज़माया जा सकता है. हालांकि, Gemini API में `gemini-3.1-pro-preview` के लिए कोई भी मुफ़्त टियर उपलब्ध नहीं है.
+4. **क्या मेरा पुराना `thinking_budget` कोड अब भी काम करेगा?** हां, `thinking_budget` अब भी पुराने सिस्टम के साथ काम करता है. हालांकि, हम आपको `thinking_level` पर माइग्रेट करने का सुझाव देते हैं, ताकि आपको बेहतर परफ़ॉर्मेंस मिल सके. एक ही अनुरोध में दोनों का इस्तेमाल न करें.
+5. **क्या Gemini 3, Batch API के साथ काम करता है?** हाँ, Gemini 3, [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi) के साथ काम करता है.
+6. **क्या कॉन्टेक्स्ट को कैश मेमोरी में सेव करने की सुविधा काम करती है?** हां, Gemini 3 के लिए [कॉन्टेक्स्ट कैश मेमोरी](https://ai.google.dev/gemini-api/docs/interactions/caching?hl=hi) की सुविधा उपलब्ध है.
+7. **Gemini 3 में किन टूल का इस्तेमाल किया जा सकता है?** Gemini 3 इन सुविधाओं के साथ काम करता है: [Google Search](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=hi), [Google Maps से मिली जानकारी के आधार पर जवाब देना](https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=hi), [फ़ाइलें खोजना](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=hi), [कोड को लागू करना](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=hi), और [यूआरएल के कॉन्टेक्स्ट के आधार पर जवाब देना](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=hi). यह आपके कस्टम टूल के लिए, स्टैंडर्ड [फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=hi) की सुविधा भी देता है. साथ ही, [पहले से मौजूद टूल के साथ मिलकर काम करने](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=hi) की सुविधा भी देता है.
+8. **`gemini-3.1-pro-preview-customtools` क्या है?** अगर `gemini-3.1-pro-preview` का इस्तेमाल किया जा रहा है और मॉडल, बैश कमांड के लिए आपके कस्टम टूल को अनदेखा कर रहा है, तो `gemini-3.1-pro-preview-customtools` मॉडल का इस्तेमाल करके देखें.
+   ज़्यादा जानकारी [यहां][customtools-model] दी गई है.
 
-提供意見
+सुझाव भेजें
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-上次更新時間：2026-05-12 (世界標準時間)。
+आखिरी बार 2026-05-19 (UTC) को अपडेट किया गया.
 
-想進一步說明嗎？
+क्या आपको हमें और कुछ बताना है?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-12 (世界標準時間)。"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-05-19 (UTC) को अपडेट किया गया."],[],[]]

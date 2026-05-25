@@ -1,44 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=ar
-fetched_at: 2026-05-18T05:09:44.181207+00:00
+source_url: https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=fr
+fetched_at: 2026-05-25T05:23:56.095924+00:00
 title: "Ephemeral tokens \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-إرسال ملاحظات
+Envoyer des commentaires
 
 # Ephemeral tokens
 
-الرموز المميزة المؤقتة هي رموز مميزة قصيرة الأمد للمصادقة تُستخدَم للوصول إلى Gemini API من خلال [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). وهي مصمَّمة لتعزيز الأمان عند الربط مباشرةً من جهاز المستخدم بواجهة برمجة التطبيقات (تنفيذ [من العميل إلى الخادم](https://ai.google.dev/gemini-api/docs/live?hl=ar#implementation-approach)). مثل مفاتيح واجهة برمجة التطبيقات العادية، يمكن استخراج الرموز المميزة المؤقتة من التطبيقات من جهة العميل، مثل متصفّحات الويب أو تطبيقات الأجهزة الجوّالة. ولكن بما أنّ الرموز المميزة المؤقتة تنتهي صلاحيتها بسرعة ويمكن حصرها، فإنّها تقلّل بشكل كبير من المخاطر الأمنية في بيئة الإنتاج. يجب استخدامها عند الوصول إلى Live API مباشرةً من تطبيقات من جهة العميل لتعزيز أمان مفتاح واجهة برمجة التطبيقات.
+Les jetons éphémères sont des jetons d'authentification de courte durée permettant d'accéder à l'API Gemini
+via [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). Ils sont conçus pour améliorer la sécurité lorsque
+vous vous connectez directement à l'API depuis l'appareil d'un utilisateur (une
+[implémentation client-serveur](https://ai.google.dev/gemini-api/docs/live?hl=fr#implementation-approach)
+). Comme les clés API standards, les jetons éphémères peuvent être extraits d'applications côté client telles que des navigateurs Web ou des applications mobiles. Toutefois, comme ils expirent rapidement et peuvent être limités, ils réduisent considérablement les risques de sécurité dans un environnement de production. Vous devez les utiliser lorsque vous accédez directement à l'API Live à partir d'applications côté client pour améliorer la sécurité des clés API.
 
-## طريقة عمل الرموز المميزة المؤقتة
+ 
 
-في ما يلي طريقة عمل الرموز المميزة المؤقتة على مستوى عالٍ:
+## Fonctionnement des jetons éphémères
 
-1. يتم مصادقة العميل (مثل تطبيق الويب) مع الخلفية.
-2. يرسل الخلفية طلبًا للحصول على رمز مميّز مؤقت من خدمة التوفير في Gemini API.
-3. يصدر Gemini API رمزًا مميزًا صالحًا لفترة قصيرة.
-4. يرسل الخلفية الرمز المميّز إلى العميل لعمليات ربط WebSocket بواجهة Live
-   API. يمكنك إجراء ذلك عن طريق استبدال مفتاح واجهة برمجة التطبيقات برمز مميّز مؤقت.
-5. يستخدم العميل بعد ذلك الرمز المميز كما لو كان مفتاح واجهة برمجة تطبيقات.
+Voici comment fonctionnent les jetons éphémères de manière générale :
 
-![نظرة عامة على الرموز المميزة المؤقتة](https://ai.google.dev/static/gemini-api/docs/images/Live_API_01.png?hl=ar)
+1. Votre client (par exemple, une application Web) s'authentifie auprès de votre backend.
+2. Votre backend demande un jeton éphémère au service de provisionnement de l'API Gemini.
+3. L'API Gemini émet un jeton de courte durée.
+4. Votre backend envoie le jeton au client pour les connexions WebSocket à l'API Live. Pour ce faire, vous pouvez remplacer votre clé API par un jeton éphémère.
+5. Le client utilise ensuite le jeton comme s'il s'agissait d'une clé API.
 
-ويؤدي ذلك إلى تعزيز الأمان لأنّ الرمز المميّز، حتى إذا تم استخراجه، يكون صالحًا لفترة قصيرة، على عكس مفتاح واجهة برمجة التطبيقات الذي يتم نشره من جهة العميل ويكون صالحًا لفترة طويلة. بما أنّ العميل يرسل البيانات مباشرةً إلى Gemini، يؤدي ذلك أيضًا إلى تحسين وقت الاستجابة وتجنُّب حاجة الأنظمة الخلفية إلى إرسال البيانات في الوقت الفعلي عبر خادم وكيل.
+![Présentation des jetons éphémères](https://ai.google.dev/static/gemini-api/docs/images/Live_API_01.png?hl=fr)
 
-## إنشاء رمز مميّز مؤقت
+Cela améliore la sécurité, car même s'il est extrait, le jeton est de courte durée, contrairement à une clé API de longue durée déployée côté client. Comme le client envoie des données directement à Gemini, cela améliore également la latence et évite que vos backends n'aient à proxyfier les données en temps réel.
 
-في ما يلي مثال مبسّط على كيفية الحصول على رمز مميّز مؤقت من Gemini.
-بشكلٍ تلقائي، سيكون لديك دقيقة واحدة لبدء جلسات جديدة في Live API باستخدام الرمز المميّز من هذا الطلب (`newSessionExpireTime`)، و30 دقيقة لإرسال الرسائل عبر هذا الاتصال (`expireTime`).
+## Créer un jeton éphémère
+
+Voici un exemple simplifié de la façon d'obtenir un jeton éphémère de Gemini.
+Par défaut, vous disposez d'une minute pour démarrer de nouvelles sessions de l'API Live à l'aide du jeton de cette requête (`newSessionExpireTime`) et de 30 minutes pour envoyer des messages via cette connexion (`expireTime`).
 
 ### Python
 
@@ -82,12 +87,14 @@ const expireTime = new Date(Date.now() + 30 * 60 * 1000).toISOString();
   });
 ```
 
-للاطّلاع على قيود القيمة `expireTime` والإعدادات التلقائية ومواصفات الحقول الأخرى، يُرجى الرجوع إلى
-[مرجع واجهة برمجة التطبيقات](https://ai.google.dev/api/live?hl=ar#ephemeral-auth-tokens).
-خلال الإطار الزمني `expireTime`، عليك
-[`sessionResumption`](https://ai.google.dev/gemini-api/docs/live-session?hl=ar#session-resumption) إعادة ربط المكالمة كل 10 دقائق (يمكن إجراء ذلك باستخدام الرمز المميز نفسه حتى إذا كان `uses: 1`).
+Pour connaître les contraintes de valeur, les valeurs par défaut et les autres spécifications de champ de `expireTime`, consultez la
+[documentation de référence de l'API](https://ai.google.dev/api/live?hl=fr#ephemeral-auth-tokens).
+Dans le délai `expireTime`, vous aurez besoin
+[`sessionResumption`](https://ai.google.dev/gemini-api/docs/live-session?hl=fr#session-resumption) pour
+reconnecter l'appel toutes les 10 minutes (cela peut être fait avec le même jeton même
+si `uses: 1`).
 
-من الممكن أيضًا حصر استخدام الرمز المميز المؤقت بمجموعة من الإعدادات. قد يكون ذلك مفيدًا لتعزيز أمان تطبيقك بشكل أكبر والحفاظ على تعليمات النظام على الخادم.
+Il est également possible de verrouiller un jeton éphémère sur un ensemble de configurations. Cela peut être utile pour améliorer davantage la sécurité de votre application et conserver les instructions de votre système côté serveur.
 
 ### Python
 
@@ -143,14 +150,15 @@ const token = await client.authTokens.create({
 // You'll need to pass the value under token.name back to your client to use it
 ```
 
-يمكنك أيضًا قفل مجموعة فرعية من الحقول، راجِع [مستندات حزمة SDK](https://googleapis.github.io/python-genai/genai.html#genai.types.CreateAuthTokenConfig.lock_additional_fields)
-للحصول على مزيد من المعلومات.
+Vous pouvez également verrouiller un sous-ensemble de champs. Pour en savoir plus, consultez la [documentation du SDK](https://googleapis.github.io/python-genai/genai.html#genai.types.CreateAuthTokenConfig.lock_additional_fields)
+.
 
-## الربط بواجهة Live API باستخدام رمز مميز مؤقت
+## Se connecter à l'API Live avec un jeton éphémère
 
-بعد الحصول على رمز مميّز مؤقت، يمكنك استخدامه كما لو كان مفتاح واجهة برمجة تطبيقات (ولكن تذكَّر أنّه يعمل فقط مع واجهة برمجة التطبيقات المباشرة، ومع الإصدار `v1alpha` من واجهة برمجة التطبيقات فقط).
+Une fois que vous disposez d'un jeton éphémère, vous l'utilisez comme s'il s'agissait d'une clé API (mais n'oubliez pas qu'il ne fonctionne que pour l'API Live et uniquement avec la version `v1alpha` de l'API).
 
-لا يضيف استخدام الرموز المميزة المؤقتة قيمة إلا عند نشر التطبيقات التي تتّبع نهج [التنفيذ من العميل إلى الخادم](https://ai.google.dev/gemini-api/docs/live?hl=ar#implementation-approach).
+L'utilisation de jetons éphémères n'est utile que lors du déploiement d'applications
+qui suivent une approche d'implémentation [client-serveur](https://ai.google.dev/gemini-api/docs/live?hl=fr#implementation-approach).
 
 ### JavaScript
 
@@ -180,29 +188,30 @@ async function main() {
 main();
 ```
 
-يمكنك الاطّلاع على [بدء استخدام Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar) للحصول على مزيد من الأمثلة.
+Pour obtenir d'autres exemples, consultez [Premiers pas avec l'API Live](https://ai.google.dev/gemini-api/docs/live?hl=fr).
 
-## أفضل الممارسات
+## Bonnes pratiques
 
-- اضبط مدة انتهاء صلاحية قصيرة باستخدام المَعلمة `expire_time`.
-- تنتهي صلاحية الرموز المميزة، ما يتطلّب إعادة بدء عملية توفير المتطلبات اللازمة.
-- إثبات صحة المصادقة الآمنة للخادم الخلفي لن تكون الرموز المميزة المؤقتة آمنة إلا بقدر أمان طريقة المصادقة في الخلفية.
-- بشكل عام، تجنَّب استخدام الرموز المميزة المؤقتة للاتصالات بين الخلفية وGemini، لأنّ هذا المسار يُعدّ آمنًا عادةً.
+- Définissez une courte durée d'expiration à l'aide du paramètre `expire_time`.
+- Les jetons expirent, ce qui nécessite de relancer le processus de provisionnement.
+- Vérifiez l'authentification sécurisée de votre propre backend. Les jetons éphémères ne seront sécurisés que si votre méthode d'authentification backend l'est également.
+- En règle générale, évitez d'utiliser des jetons éphémères pour les connexions backend-Gemini, car ce chemin est généralement considéré comme sécurisé.
 
-## القيود
+## Limites
 
-تتوافق الرموز المميزة المؤقتة مع [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar) فقط في الوقت الحالي.
+Pour le moment, les jetons éphémères ne sont compatibles qu'avec l'[API Live](https://ai.google.dev/gemini-api/docs/live?hl=fr).
 
-## الخطوات التالية
+## Étape suivante
 
-- يمكنك الاطّلاع على [مرجع](https://ai.google.dev/api/live?hl=ar#ephemeral-auth-tokens) Live API بشأن الرموز المميزة المؤقتة للحصول على مزيد من المعلومات.
+- Pour en savoir plus, consultez la documentation de référence de l'API Live [reference](https://ai.google.dev/api/live?hl=fr#ephemeral-auth-tokens)
+  sur les jetons éphémères.
 
-إرسال ملاحظات
+Envoyer des commentaires
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-تاريخ التعديل الأخير: 2026-05-13 (حسب التوقيت العالمي المتفَّق عليه)
+Dernière mise à jour le 2026/05/13 (UTC).
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Voulez-vous nous donner plus d'informations ?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-13 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/05/13 (UTC)."],[],[]]

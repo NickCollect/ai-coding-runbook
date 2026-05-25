@@ -1,212 +1,147 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/safety-guidance?hl=it
-fetched_at: 2026-05-18T05:05:29.898716+00:00
-title: "Linee guida su sicurezza e accuratezza \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/safety-guidance?hl=ar
+fetched_at: 2026-05-25T05:20:32.213751+00:00
+title: "\u0625\u0631\u0634\u0627\u062f\u0627\u062a \u0627\u0644\u0633\u0644\u0627\u0645\u0629 \u0648\u0627\u0644\u062f\u0642\u0629 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Invia feedback
+إرسال ملاحظات
 
-# Linee guida su sicurezza e accuratezza
+# إرشادات السلامة والدقة
 
-I modelli di intelligenza artificiale generativa sono strumenti potenti, ma non
-sono privi di limiti. La loro versatilità e applicabilità a volte possono
-portare a output imprevisti, come output imprecisi, distorti o
-offensivi. Il post-processing e una rigorosa valutazione manuale sono essenziali per
-limitare il rischio di danni derivanti da questi output.
+تعدّ نماذج الذكاء الاصطناعي التوليدي أدوات قوية، ولكنّها ليست خالية من القيود. فقد يؤدي تنوّعها وقابليتها للتطبيق أحيانًا إلى نتائج غير متوقّعة، مثل النتائج غير الدقيقة أو المتحيّزة أو المسيئة. لذلك، من الضروري إجراء معالجة لاحقة وتقييم يدوي دقيق للحدّ من خطر الضرر الناتج عن هذه النتائج.
 
-I modelli forniti dall'API Gemini possono essere utilizzati per un'ampia gamma di applicazioni di AI generativa e di elaborazione del linguaggio naturale (NLP). L'utilizzo di queste
-funzioni è disponibile solo tramite l'API Gemini o l'app web Google AI Studio. L'utilizzo dell'API Gemini è inoltre soggetto alle [Norme relative all'uso vietato dell'AI generativa](https://policies.google.com/terms/generative-ai/use-policy?hl=it) e ai [Termini di servizio dell'API Gemini](https://ai.google.dev/terms?hl=it).
+يمكن استخدام النماذج التي توفّرها Gemini API في مجموعة كبيرة من تطبيقات الذكاء الاصطناعي التوليدي ومعالجة اللغة الطبيعية (NLP). ولا يمكن استخدام هذه
+الوظائف إلا من خلال Gemini API أو تطبيق الويب Google AI Studio. يخضع استخدامك لـ Gemini API أيضًا لـ [سياسة الاستخدام المحظور للذكاء الاصطناعي التوليدي](https://policies.google.com/terms/generative-ai/use-policy?hl=ar) و
+[بنود خدمة Gemini API](https://ai.google.dev/terms?hl=ar).
 
-Ciò che rende i modelli linguistici di grandi dimensioni (LLM) così utili è che sono
-strumenti creativi che possono affrontare molte attività linguistiche diverse. Purtroppo,
-questo significa anche che i modelli linguistici di grandi dimensioni possono generare output inaspettati,
-inclusi testi offensivi, insensibili o oggettivamente errati.
-Inoltre, l'incredibile versatilità di questi modelli rende difficile
-prevedere esattamente quali tipi di output indesiderati potrebbero produrre. Sebbene l'API Gemini sia stata progettata tenendo conto dei [principi di Google in materia di AI](https://ai.google/principles/?hl=it), spetta agli sviluppatori applicare questi modelli in modo responsabile. Per aiutare gli sviluppatori a creare applicazioni sicure e responsabili, l'API Gemini dispone di un filtro dei contenuti integrato e di impostazioni di sicurezza regolabili in quattro dimensioni di rischio. Per saperne di più, consulta la guida alle
-[impostazioni di sicurezza](https://ai.google.dev/gemini-api/docs/safety-settings?hl=it). Offre anche la funzionalità Grounding
-con la Ricerca Google abilitata per migliorare l'oggettività, anche se questa funzionalità può essere disattivata
-per gli sviluppatori i cui casi d'uso sono più creativi e non di ricerca di informazioni.
+من بين الأسباب التي تجعل النماذج اللغوية الكبيرة (LLMs) مفيدة جدًا أنّها أدوات إبداعية يمكنها معالجة العديد من مهام اللغة المختلفة. ولكن هذا يعني أيضًا أنّ النماذج اللغوية الكبيرة يمكنها إنشاء نتائج غير متوقّعة، بما في ذلك نصوص مسيئة أو غير مراعية أو غير صحيحة من الناحية الواقعية.
+علاوةً على ذلك، إنّ التنوّع المذهل لهذه النماذج هو أيضًا ما يجعل من الصعب توقّع أنواع النتائج غير المرغوب فيها التي قد تنتجها. على الرغم من أنّ
+Gemini API تم تصميمه مع مراعاة [مبادئ الذكاء الاصطناعي من Google](https://ai.google/principles/?hl=ar)، فإنّ مسؤولية تطبيق هذه النماذج بشكل مسؤول تقع على عاتق المطوّرين. لمساعدة المطوّرين في إنشاء تطبيقات آمنة ومسؤولة، يتضمّن Gemini API بعض ميزات فلترة المحتوى المضمّنة بالإضافة إلى إعدادات الأمان القابلة للتعديل على مستوى 4 جوانب من الضرر. [يُرجى الرجوع إلى دليل إعدادات الأمان لمزيد من المعلومات.](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ar) توفّر واجهة برمجة التطبيقات أيضًا ميزة Grounding with Google Search التي تم تفعيلها لتحسين الدقة، على الرغم من أنّه يمكن إيقاف هذه الميزة للمطوّرين الذين تكون حالات استخدامهم أكثر إبداعًا ولا تهدف إلى البحث عن المعلومات.
 
-Questo documento ha lo scopo di presentarti alcuni rischi per la sicurezza che possono sorgere quando
-utilizzi i modelli LLM e consigliare le raccomandazioni emergenti per la progettazione e lo sviluppo
-della sicurezza. Tieni presente che anche leggi e normative possono imporre limitazioni,
-ma queste considerazioni non rientrano nell'ambito di questa guida.
+يهدف هذا المستند إلى تعريفك ببعض المخاطر المتعلقة بالسلامة التي يمكن أن تنشأ عند استخدام النماذج اللغوية الكبيرة، وتقديم توصيات ناشئة بشأن تصميم وتطوير ميزات السلامة. (يُرجى العِلم أنّ القوانين واللوائح قد تفرض أيضًا قيودًا، ولكنّ هذه الاعتبارات خارج نطاق هذا الدليل).
 
-Quando crei applicazioni con LLM, ti consigliamo di seguire questi passaggi:
+يُنصح باتّباع الخطوات التالية عند إنشاء تطبيقات باستخدام النماذج اللغوية الكبيرة:
 
-- Comprendere i rischi per la sicurezza della tua applicazione
-- Valutazione di aggiustamenti per mitigare i rischi per la sicurezza
-- Eseguire test di sicurezza appropriati al tuo caso d'uso
-- Richiesta di feedback agli utenti e monitoraggio dell'utilizzo
+- فهم المخاطر المتعلقة بالسلامة في تطبيقك
+- مراعاة التعديلات اللازمة للتخفيف من المخاطر المتعلقة بالسلامة
+- إجراء اختبارات السلامة المناسبة لحالة استخدامك
+- طلب ملاحظات من المستخدمين ومراقبة الاستخدام
 
-Le fasi di aggiustamento e test devono essere iterative finché non raggiungi
-le prestazioni appropriate per la tua applicazione.
+يجب أن تكون مرحلتا التعديل والاختبار متكرّرتَين إلى أن تحقّق الأداء المناسب لتطبيقك.
 
-![Ciclo di implementazione del modello](https://ai.google.dev/static/gemini-api/docs/images/safety_diagram.png?hl=it)
+![دورة تنفيذ النموذج](https://ai.google.dev/static/gemini-api/docs/images/safety_diagram.png?hl=ar)
 
-## Comprendere i rischi per la sicurezza della tua applicazione
+## فهم المخاطر المتعلقة بالسلامة في تطبيقك
 
-In questo contesto, la sicurezza è definita come la capacità di un LLM di evitare
-di causare danni ai suoi utenti, ad esempio generando un linguaggio o contenuti tossici
-che promuovono stereotipi. I modelli disponibili tramite l'API Gemini sono stati
-progettati tenendo presenti i [principi dell'AI di Google](https://ai.google/principles/?hl=it)
-e il loro utilizzo è soggetto alle [Norme relative all'uso vietato dell'AI
-generativa](https://policies.google.com/terms/generative-ai/use-policy?hl=it). L'API
-fornisce filtri di sicurezza integrati per contribuire a risolvere alcuni problemi comuni dei modelli linguistici
-come linguaggio tossico e incitamento all'odio, e si impegna per l'inclusività
-e l'evitare gli stereotipi. Tuttavia, ogni applicazione può comportare una serie diversa
-di rischi per i suoi utenti. Pertanto, in qualità di proprietario dell'applicazione, sei responsabile di
-conoscere i tuoi utenti e i potenziali danni che la tua applicazione potrebbe causare e
-garantire che la tua applicazione utilizzi gli LLM in modo sicuro e responsabile.
+في هذا السياق، يُعرَّف الأمان بأنّه قدرة النموذج اللغوي الكبير على تجنُّب إلحاق الضرر بالمستخدمين، مثلاً من خلال تجنُّب إنشاء لغة مسيئة أو محتوى يروّج للصور النمطية. تم تصميم النماذج المتاحة من خلال Gemini API مع
+مراعاة [مبادئ الذكاء الاصطناعي من Google](https://ai.google/principles/?hl=ar)،
+ويخضع استخدامك لها لـ [سياسة الاستخدام المحظور للذكاء الاصطناعي التوليدي](https://policies.google.com/terms/generative-ai/use-policy?hl=ar). توفّر واجهة برمجة التطبيقات فلاتر أمان مضمّنة للمساعدة في معالجة بعض المشاكل الشائعة في النماذج اللغوية، مثل اللغة المسيئة وكلام يحض على الكراهية، والسعي إلى تحقيق الشمولية وتجنُّب الصور النمطية. ومع ذلك، يمكن أن يطرح كل تطبيق مجموعة مختلفة من المخاطر على المستخدمين. لذلك، بصفتك مالك التطبيق، أنت مسؤول عن معرفة المستخدمين والأضرار المحتمَلة التي قد يتسبّب بها تطبيقك، وعن ضمان استخدام تطبيقك للنماذج اللغوية الكبيرة بأمان ومسؤولية.
 
-Nell'ambito di questa valutazione, devi considerare la probabilità che si verifichi un danno e determinare la sua gravità e le misure di mitigazione. Ad esempio, un'app che genera saggi basati su eventi reali deve prestare maggiore attenzione a evitare la disinformazione rispetto a un'app che genera storie di fantasia per l'intrattenimento. Un buon modo per iniziare a esplorare i potenziali rischi per la sicurezza
-è fare ricerche sugli utenti finali e su altre persone che potrebbero essere interessate dai
-risultati della tua applicazione. Ciò può assumere molte forme, tra cui la ricerca di studi all'avanguardia nel tuo dominio di app, l'osservazione di come le persone utilizzano app simili o l'esecuzione di uno studio sugli utenti, un sondaggio o la conduzione di interviste informali con potenziali utenti.
+كجزء من هذا التقييم، عليك مراعاة احتمالية حدوث الضرر وتحديد مدى خطورته والخطوات اللازمة للتخفيف منه. على سبيل المثال، يجب أن يكون التطبيق الذي ينشئ مقالات استنادًا إلى أحداث واقعية أكثر حذرًا بشأن تجنُّب المعلومات المضلِّلة، مقارنةً بتطبيق ينشئ قصصًا خيالية لأغراض الترفيه. من الطرق الجيدة لبدء استكشاف المخاطر المحتمَلة المتعلقة بالسلامة إجراء بحث عن المستخدمين النهائيين والمستخدمين الآخرين الذين قد يتأثرون بنتائج تطبيقك. يمكن أن يتخذ هذا أشكالاً عديدة، بما في ذلك البحث عن أحدث الدراسات في مجال تطبيقك، أو مراقبة كيفية استخدام المستخدمين لتطبيقات مشابهة، أو إجراء دراسة أو استطلاع للمستخدمين، أو إجراء مقابلات غير رسمية مع المستخدمين المحتمَلين.
 
-#### Suggerimenti avanzati
+#### نصائح متقدمة
 
-- Parla con un mix diversificato di potenziali utenti all'interno della tua popolazione target della tua applicazione e del suo scopo previsto per ottenere una prospettiva più ampia sui potenziali rischi e per adeguare i criteri di diversità in base alle esigenze.
-- Il [framework per la gestione del rischio dell'AI](https://www.nist.gov/itl/ai-risk-management-framework)
-  pubblicato dal National Institute of Standards and Technology (NIST)
-  del governo degli Stati Uniti fornisce indicazioni più dettagliate e risorse di apprendimento aggiuntive per la gestione del rischio dell'AI.
-- La pubblicazione di DeepMind sui
-  [rischi etici e sociali di danni causati dai modelli linguistici](https://arxiv.org/abs/2112.04359)
-  descrive in dettaglio i modi in cui le applicazioni
-  dei modelli linguistici possono causare danni.
+- تحدَّث مع مجموعة متنوعة من المستخدمين المحتمَلين ضمن الفئة المستهدَفة عن تطبيقك والغرض المقصود منه للحصول على منظور أوسع بشأن المخاطر المحتمَلة وتعديل معايير التنوّع حسب الحاجة.
+- يوفر [إطار عمل إدارة المخاطر في الذكاء الاصطناعي](https://www.nist.gov/itl/ai-risk-management-framework) الذي أصدره المعهد الوطني للمعايير والتكنولوجيا (NIST) التابع للحكومة الأمريكية إرشادات أكثر تفصيلاً وموارد تعليمية إضافية لإدارة المخاطر في الذكاء الاصطناعي.
+- يصف منشور DeepMind حول
+  [المخاطر الأخلاقية والاجتماعية للضرر الناتج عن النماذج اللغوية](https://arxiv.org/abs/2112.04359)
+  بالتفصيل الطرق التي يمكن أن تتسبّب بها تطبيقات النماذج اللغوية
+  في إلحاق الضرر.
 
-## Valuta modifiche per mitigare i rischi per la sicurezza e l'accuratezza dei fatti
+## مراعاة التعديلات اللازمة للتخفيف من المخاطر المتعلقة بالسلامة والدقة
 
-Ora che hai compreso i rischi, puoi decidere come mitigarli. Determinare a quali rischi dare la priorità e cosa fare per cercare di
-prevenirli è una decisione fondamentale, simile alla valutazione dei bug in un progetto
-software. Una volta stabilite le priorità, puoi iniziare a pensare ai tipi di misure di mitigazione più appropriati. Spesso semplici modifiche possono
-fare la differenza e ridurre i rischi.
+بعد فهم المخاطر، يمكنك تحديد كيفية التخفيف منها. يُعدّ تحديد المخاطر التي يجب منحها الأولوية ومقدار الإجراءات التي يجب اتّخاذها لمحاولة منعها قرارًا بالغ الأهمية، على غرار تحديد أولويات الأخطاء في مشروع برمجي. بعد تحديد الأولويات، يمكنك البدء في التفكير في أنواع إجراءات التخفيف التي ستكون الأنسب. غالبًا ما يمكن أن تحدث تغييرات بسيطة فرقًا وتحدّ من المخاطر.
 
-Ad esempio, quando progetti un'applicazione, considera:
+على سبيل المثال، عند تصميم تطبيق، ننصحك بمراعاة ما يلي:
 
-- **Ottimizzazione dell'output del modello** per riflettere meglio ciò che è accettabile nel contesto della tua applicazione. La messa a punto può rendere l'output del modello più prevedibile e coerente e quindi può contribuire a mitigare alcuni rischi.
-- **Fornire un metodo di input che faciliti output più sicuri.** L'input esatto
-  che fornisci a un LLM può fare la differenza nella qualità dell'output.
-  Sperimentare con i prompt di input per trovare la soluzione più sicura nel tuo caso d'uso vale la pena, in quanto puoi fornire un'esperienza utente che lo faciliti. Ad esempio, potresti limitare gli utenti alla scelta solo da un
-  elenco a discesa di prompt di input oppure offrire suggerimenti popup con
-  frasi
-  descrittive che hai riscontrato essere sicure nel contesto della tua applicazione.
-- **Blocco degli input non sicuri e filtraggio dell'output prima che venga mostrato all'utente.** In situazioni semplici, le liste bloccate possono essere utilizzate per identificare e bloccare
-  parole o frasi non sicure nei prompt o nelle risposte oppure richiedere a revisori umani
-  di modificare o bloccare manualmente questi contenuti.
-- **Utilizzo di classificatori addestrati per etichettare ogni prompt con potenziali danni o
-  segnali contraddittori.** È poi possibile applicare varie strategie per gestire la richiesta in base al tipo di danno rilevato. Ad esempio, se l'input è apertamente contraddittorio o di natura illecita, potrebbe essere bloccato e fornire una risposta preimpostata.
+- **تعديل مخرجات النموذج** لتعكس بشكل أفضل ما هو مقبول في سياق تطبيقك. يمكن أن يجعل التعديل نتائج النموذج أكثر قابلية للتوقّع والاتساق، وبالتالي يمكن أن يساعد في التخفيف من مخاطر معيّنة.
+- **توفير طريقة إدخال تسهّل الحصول على نتائج أكثر أمانًا.** يمكن أن يؤدي الإدخال الدقيق الذي تقدّمه إلى النموذج اللغوي الكبير إلى إحداث فرق في جودة النتائج.
+  لذلك، ننصحك بتجربة طلبات الإدخال للعثور على ما يحقّق أفضل أداء بأمان في حالة استخدامك، لأنّه يمكنك بعد ذلك توفير تجربة مستخدم تسهّل ذلك. على سبيل المثال، يمكنك منع المستخدمين من الاختيار إلا من قائمة منسدلة لطلبات الإدخال، أو تقديم اقتراحات منبثقة تتضمّن عبارات وصفية تبيّن أنّها تحقّق أداءً آمنًا في سياق تطبيقك.
+- **حظر الإدخالات غير الآمنة وفلترة النتائج قبل عرضها للمستخدم.** في الحالات البسيطة، يمكن استخدام قوائم الحظر لتحديد الكلمات أو العبارات غير الآمنة في الطلبات أو الردود وحظرها، أو مطالبة المراجعين بتعديل هذا المحتوى أو حظره يدويًا.
+- **استخدام المصنّفات المدرَّبة لتصنيف كل طلب على أنّه يتضمّن أضرارًا محتمَلة أو إشارات مخالفة.** يمكن بعد ذلك استخدام استراتيجيات مختلفة حول كيفية معالجة الطلب استنادًا إلى نوع الضرر الذي تم رصده. على سبيل المثال، إذا كان الإدخال مخالفًا أو مسيئًا بشكل واضح، يمكن حظره وعرض ردّ مكتوب مسبقًا بدلاً منه.
 
-  #### Suggerimento avanzato
+  #### نصيحة متقدّمة
 
-  - Se gli indicatori determinano che l'output è dannoso,
-    l'applicazione può utilizzare le seguenti opzioni:
-    - Fornire un messaggio di errore o un output preimpostato.
-    - Prova di nuovo il prompt, nel caso in cui venga generato un output alternativo sicuro, poiché a volte lo stesso prompt genera output diversi.
-- **Implementazione di misure di salvaguardia contro l'uso improprio intenzionale**, ad esempio assegnando a ogni utente un ID univoco e imponendo un limite al volume di query utente che possono essere inviate in un determinato periodo. Un'altra misura di salvaguardia è quella di cercare di
-  proteggere da possibili prompt injection. La prompt injection, proprio come l'SQL injection, è un modo per gli utenti malintenzionati di progettare un prompt di input che manipola l'output del modello, ad esempio inviando un prompt di input che indica al modello di ignorare tutti gli esempi precedenti. Per informazioni dettagliate sull'uso improprio intenzionale, consulta le
-  [Norme relative all'uso vietato dell'IA generativa](https://policies.google.com/terms/generative-ai/use-policy?hl=it).
-- **Modifica della funzionalità in modo che presenti un rischio intrinsecamente inferiore.**
-  Le attività con un ambito più ristretto (ad es. l'estrazione di parole chiave da passaggi di testo) o che prevedono una maggiore supervisione umana (ad es. la generazione di contenuti in formato breve che verranno esaminati da una persona) spesso comportano un rischio inferiore. Ad esempio, invece di creare un'applicazione per scrivere una risposta email da zero, potresti limitarla a espandere una bozza o suggerire formulazioni alternative.
-- **Regolazione delle impostazioni di sicurezza dei contenuti dannosi per ridurre la probabilità di
-  visualizzare risposte potenzialmente dannose.** L'API Gemini fornisce impostazioni di sicurezza
-  che puoi regolare durante la fase di prototipazione per determinare se la tua
-  applicazione richiede una configurazione di sicurezza più o meno restrittiva. Puoi
-  modificare queste impostazioni in cinque categorie di filtri per limitare o consentire
-  determinati tipi di contenuti. Consulta la [guida alle impostazioni di sicurezza](https://ai.google.dev/gemini-api/docs/safety-settings?hl=it) per scoprire di più
-  sulle impostazioni di sicurezza regolabili disponibili tramite l'API Gemini.
-- **Riduci le potenziali imprecisioni fattuali o allucinazioni attivando
-  Grounding con la Ricerca Google**. Tieni presente che molti modelli di AI sono sperimentali
-  e potrebbero presentare informazioni imprecise, avere allucinazioni o produrre
-  output problematici. La funzionalità Grounding con la Ricerca Google collega
-  il modello Gemini a contenuti web in tempo reale e funziona con tutte le lingue
-  disponibili. In questo modo, Gemini può fornire risposte più accurate e citare fonti verificabili oltre il knowledge cutoff dei modelli.
+  - إذا كانت الإشارات تحدّد أنّ النتائج ضارّة،
+    يمكن أن يستخدم التطبيق الخيارات التالية:
+    - عرض رسالة خطأ أو نتائج مكتوبة مسبقًا
+    - إعادة تجربة الطلب، في حال إنشاء نتيجة آمنة بديلة، لأنّ الطلب نفسه قد يؤدي أحيانًا إلى نتائج مختلفة
+- **وضع إجراءات وقائية ضد إساءة الاستخدام المتعمدة** ، مثل تخصيص معرّف فريد لكل مستخدم وفرض حدّ على عدد طلبات المستخدمين التي يمكن إرسالها في فترة معيّنة. من الإجراءات الوقائية الأخرى محاولة الحماية من إمكانية حقن الطلبات. إنّ حقن الطلبات، على غرار حقن تعليمات برمجية في SQL، هو طريقة يمكن للمستخدمين الضارين من خلالها تصميم طلب إدخال يؤدي إلى التلاعب بنتائج النموذج، مثلاً من خلال إرسال طلب إدخال يطلب من النموذج تجاهُل أي أمثلة سابقة. يُرجى الاطّلاع على
+  [سياسة الاستخدام المحظور للذكاء الاصطناعي التوليدي](https://policies.google.com/terms/generative-ai/use-policy?hl=ar)
+  للحصول على تفاصيل حول إساءة الاستخدام المتعمدة.
+- **تعديل الوظائف لتصبح أقل خطورة بطبيعتها.**
+  غالبًا ما تكون المهام ذات النطاق الأضيق (مثل استخراج الكلمات الرئيسية من فقرات نصية) أو التي تخضع لإشراف بشري أكبر (مثل إنشاء محتوى قصير سيراجعه شخص) أقل خطورة. على سبيل المثال، بدلاً من إنشاء تطبيق لكتابة ردّ على رسالة إلكترونية من البداية، يمكنك بدلاً من ذلك قصر استخدامه على توسيع مخطط أو اقتراح عبارات بديلة.
+- **تعديل إعدادات الأمان للمحتوى الضار لتقليل احتمالية ظهور ردود قد تكون ضارّة.** توفّر Gemini API إعدادات أمان يمكنك تعديلها خلال مرحلة إنشاء النموذج الأولي لتحديد ما إذا كان تطبيقك يتطلب إعدادات أمان أكثر أو أقل تقييدًا. يمكنك تعديل هذه الإعدادات على مستوى خمس فئات من الفلاتر لتقييد أنواع معيّنة من المحتوى أو السماح بها. يُرجى الرجوع إلى [دليل إعدادات الأمان](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ar) للتعرّف على
+  إعدادات الأمان القابلة للتعديل المتاحة من خلال Gemini API.
+- **تقليل الأخطاء الواقعية المحتمَلة أو الهلوسات من خلال تفعيل ميزة تحديد المصدر من خلال "بحث Search"**. يُرجى العِلم أنّ العديد من نماذج الذكاء الاصطناعي تجريبية وقد تقدّم معلومات غير دقيقة من الناحية الواقعية أو تهلوس أو تنتج نتائج أخرى إشكالية. تربط ميزة تحديد المصدر من خلال "بحث Search" نموذج Gemini بمحتوى على الويب في الوقت الفعلي وتعمل مع جميع اللغات المتاحة. يسمح ذلك لـ Gemini بتقديم إجابات أكثر دقة والاستشهاد بمصادر يمكن التحقّق منها تتجاوز تاريخ آخر تحديث للبيانات للنماذج.
 
-## Esegui test di sicurezza appropriati al tuo caso d'uso
+## إجراء اختبارات السلامة المناسبة لحالة استخدامك
 
-I test sono una parte fondamentale della creazione di applicazioni robuste e sicure, ma l'entità,
-l'ambito e le strategie di test variano. Ad esempio, un generatore di haiku
-per divertimento probabilmente comporta rischi meno gravi rispetto, ad esempio, a un'applicazione progettata
-per l'utilizzo da parte di studi legali per riassumere documenti legali e contribuire alla stesura di contratti. Tuttavia, il generatore di haiku può essere utilizzato da una gamma più ampia di utenti, il che significa che il potenziale di tentativi ostili o anche di input dannosi non intenzionali può essere maggiore. Anche il contesto di implementazione è importante. Ad esempio, un'applicazione
-con output esaminati da esperti umani prima di intraprendere qualsiasi azione
-potrebbe essere ritenuta meno propensa a produrre output dannosi rispetto all'applicazione
-identica senza tale supervisione.
+يُعدّ الاختبار جزءًا أساسيًا من إنشاء تطبيقات قوية وآمنة، ولكن سيختلف مدى الاختبار ونطاقه واستراتيجياته. على سبيل المثال، من المرجّح أن يكون مولّد قصائد الهايكو الذي يهدف إلى الترفيه فقط أقل خطورة من تطبيق مصمّم مثلاً لاستخدامه من قِبل مكاتب المحاماة لتلخيص المستندات القانونية والمساعدة في صياغة العقود. ولكن قد يستخدم مولّد قصائد الهايكو مجموعة أكبر من المستخدمين، ما يعني أنّ احتمالية محاولات المستخدمين الضارين أو حتى إدخال بيانات ضارّة غير مقصودة يمكن أن تكون أكبر. يُعدّ سياق التنفيذ مهمًا أيضًا. على سبيل المثال، قد يُعتبر تطبيق تتم مراجعة نتائجه من قِبل خبراء بشريين قبل اتّخاذ أي إجراء أقل احتمالية لإنتاج نتائج ضارّة من التطبيق نفسه بدون هذا الإشراف.
 
-Non è raro dover apportare modifiche e testare diverse iterazioni prima di ritenere di essere pronti per il lancio, anche per le applicazioni a rischio relativamente basso. Due tipi di test sono particolarmente utili per le applicazioni di AI:
+من الشائع إجراء عدة تكرارات لإجراء تغييرات واختبارها قبل التأكّد من أنّك مستعد للإطلاق، حتى بالنسبة إلى التطبيقات التي تكون منخفضة المخاطر نسبيًا. هناك نوعان من الاختبارات مفيدان بشكل خاص لتطبيقات الذكاء الاصطناعي:
 
-- Il **benchmarking della sicurezza** prevede la progettazione di metriche di sicurezza che riflettano i modi in cui la tua applicazione potrebbe essere pericolosa nel contesto del suo probabile utilizzo, quindi il test delle prestazioni dell'applicazione in base alle metriche utilizzando set di dati di valutazione. È buona norma pensare ai livelli minimi accettabili delle metriche di sicurezza prima del test, in modo da 1) valutare i risultati del test in base a queste aspettative e 2) raccogliere il set di dati di valutazione in base ai test che valutano le metriche che ti interessano di più.
+- **قياس الأداء في ما يتعلق بالسلامة** : يتضمّن تصميم مقاييس السلامة التي تعكس الطرق التي يمكن أن يكون بها تطبيقك غير آمن في سياق كيفية استخدامه المحتمَلة، ثم اختبار مدى جودة أداء تطبيقك في ما يتعلق بالمقاييس باستخدام مجموعات بيانات التقييم. من الممارسات الجيدة التفكير في الحد الأدنى من المستويات المقبولة لمقاييس السلامة قبل الاختبار حتى تتمكّن من 1) تقييم نتائج الاختبار مقارنةً بهذه التوقعات و2) جمع مجموعة بيانات التقييم استنادًا إلى الاختبارات التي تقيِّم المقاييس التي تهمّك أكثر.
 
-  #### Suggerimenti avanzati
+  #### نصائح متقدمة
 
-  - Fai attenzione a non fare eccessivo affidamento su approcci "pronti all'uso", in quanto è probabile
-    che dovrai creare i tuoi set di dati di test utilizzando valutatori umani per
-    adattarli completamente al contesto della tua applicazione.
-  - Se hai più di una metrica, dovrai decidere come
-    compensare se una modifica comporta miglioramenti per una metrica a
-    detrimento di un'altra. Come per altre tecniche di ingegneria del rendimento, potresti
-    voler concentrarti sul rendimento nel caso peggiore nel set di valutazione
-    anziché sul rendimento medio.
-- I **test contraddittori** consistono nel tentativo proattivo di interrompere il funzionamento dell'applicazione. L'obiettivo è identificare i punti deboli in modo da poter adottare
-  le misure correttive più appropriate. I test avversariali possono richiedere
-  tempo/sforzi significativi da parte di valutatori esperti nella tua applicazione, ma più ne esegui, maggiori sono le possibilità di individuare problemi,
-  soprattutto quelli che si verificano raramente o solo dopo ripetute esecuzioni dell'applicazione.
+  - يُرجى الحذر من الإفراط في الاعتماد على الأساليب "الجاهزة"، لأنّه من المرجّح أن تحتاج إلى إنشاء مجموعات بيانات الاختبار الخاصة بك باستخدام مقيِّمين بشريين لتناسب سياق تطبيقك تمامًا.
+  - إذا كان لديك أكثر من مقياس واحد، عليك تحديد كيفية الموازنة إذا أدّى تغيير إلى تحسينات في مقياس واحد على حساب مقياس آخر. كما هو الحال مع هندسة الأداء الأخرى، قد ترغب في التركيز على أسوأ أداء في مجموعة التقييم بدلاً من الأداء المتوسّط.
+- **الاختبارات الضارة** : تتضمّن محاولة إيقاف تطبيقك بشكل استباقي. الهدف هو تحديد نقاط الضعف حتى تتمكّن من اتّخاذ خطوات لمعالجتها حسب الاقتضاء. يمكن أن تستغرق الاختبارات الضارة وقتًا وجهدًا كبيرَين من المقيِّمين الذين لديهم خبرة في تطبيقك، ولكن كلما أجريت المزيد من الاختبارات، زادت فرصتك في رصد المشاكل، لا سيّما تلك التي تحدث نادرًا أو بعد عمليات تشغيل متكرّرة للتطبيق فقط.
 
-  - un metodo per valutare sistematicamente un modello di ML con l'intento di apprendere come si comporta quando gli viene fornito un input dannoso, intenzionalmente o inavvertitamente:
-    - Un input può essere intenzionalmente dannoso quando è chiaramente progettato per produrre un output non sicuro o pericoloso, ad esempio quando si chiede a un modello di generazione di testo di generare un discorso di incitamento all'odio nei confronti di una particolare religione.
-    - Un input è inavvertitamente dannoso quando l'input stesso può essere
-      innocuo, ma produce un output dannoso. Ad esempio, se si chiede a un modello di
-      generazione di testo di descrivere una persona di una particolare etnia e
-      si riceve un output razzista.
-  - Ciò che distingue un test contraddittorio da una valutazione standard è la
-    composizione dei dati utilizzati per il test. Per i test contraddittori, seleziona
-    dati di test che hanno maggiori probabilità di generare output problematici
-    dal modello. Ciò significa analizzare il comportamento del modello per tutti i tipi di
-    danni possibili, inclusi esempi rari o insoliti e
-    casi limite pertinenti alle norme di sicurezza. Deve inoltre includere
-    la diversità nelle diverse dimensioni di una frase, come struttura,
-    significato e lunghezza. Per ulteriori dettagli su cosa considerare quando crei un set di dati di test, consulta le [best practice di Google per l'AI responsabile in materia di equità](https://ai.google/responsibilities/responsible-ai-practices/?category=fairness&hl=it).
+  - الاختبارات الضارة هي طريقة لتقييم نموذج تعلُّم الآلة بشكل منهجي بهدف معرفة كيفية أدائه عند تزويده ببيانات إدخال ضارة أو غير مقصودة:
+    - قد يكون الإدخال ضارًا عندما يكون مصمّمًا بوضوح لإنتاج نتائج غير آمنة أو ضارّة، مثلاً من خلال الطلب من نموذج إنشاء النصوص إنشاء خطاب كراهية عن دين معيّن.
+    - يكون الإدخال غير مقصود عندما يكون الإدخال نفسه غير ضار، ولكنّه ينتج عنه نتائج ضارّة، مثلاً من خلال الطلب من نموذج إنشاء النصوص وصف شخص من عرق معيّن وتلقّي نتائج عنصرية.
+  - ما يميّز الاختبار الضار عن التقييم العادي هو تكوين البيانات المستخدَمة للاختبار. بالنسبة إلى الاختبارات الضارة، اختَر
+    بيانات الاختبار التي من المرجّح أن تؤدي إلى نتائج إشكالية من
+    النموذج. يعني ذلك فحص سلوك النموذج لجميع أنواع الأضرار المحتمَلة، بما في ذلك الأمثلة النادرة أو غير العادية والحالات القصوى ذات الصلة بسياسات السلامة. يجب أن يشمل ذلك أيضًا التنوّع في الجوانب المختلفة للجملة، مثل البنية والمعنى والطول. يمكنك الرجوع إلى [ممارسات الذكاء الاصطناعي المسؤول من Google
+    في
+    ما يتعلق بالإنصاف](https://ai.google/responsibilities/responsible-ai-practices/?category=fairness&hl=ar)
+    لمزيد من التفاصيل حول ما يجب مراعاته عند إنشاء مجموعة بيانات اختبار.
 
-    #### Suggerimenti avanzati
+    #### نصائح متقدمة
 
-    - Utilizza
-      [test automatici](https://www.deepmind.com/blog/red-teaming-language-models-with-language-models?hl=it)
-      anziché il metodo tradizionale di arruolare persone in "red team"
-      per cercare di compromettere la tua applicazione. Nei test automatizzati, il
-      "red team" è un altro modello linguistico che trova un testo di input che
-      genera output dannosi dal modello in fase di test.
+    - استخدِم
+      [الاختبارات الآلية](https://www.deepmind.com/blog/red-teaming-language-models-with-language-models?hl=ar)
+      بدلاً من الطريقة التقليدية المتمثلة في الاستعانة بمستخدمين في "فرق حمراء"
+      لمحاولة إيقاف تطبيقك. في الاختبارات الآلية، يكون
+      "الفريق الأحمر" نموذجًا لغويًا آخر يعثر على نص إدخال يؤدي إلى نتائج ضارّة من النموذج الذي يتم اختباره.
 
-## Monitorare eventuali problemi
+## مراقبة المشاكل
 
-Non importa quanto tu testi e mitighi, non potrai mai garantire la perfezione, quindi pianifica in anticipo come individuare e affrontare i problemi che si presentano. Gli approcci comuni includono la configurazione di un canale monitorato in cui gli utenti possono condividere feedback (ad es. valutazione Mi piace/Non mi piace) e l'esecuzione di uno studio sugli utenti per sollecitare in modo proattivo feedback da un mix diversificato di utenti, il che è particolarmente utile se i modelli di utilizzo sono diversi dalle aspettative.
+مهما كان مقدار الاختبارات وإجراءات التخفيف التي تتّخذها، لا يمكنك ضمان تحقيق الكمال، لذا عليك التخطيط مسبقًا لكيفية رصد المشاكل التي تنشأ والتعامل معها. تشمل الطرق الشائعة إعداد قناة مراقَبة ليشارك المستخدمون ملاحظاتهم (مثل التقييم بإبهام لأعلى أو لأسفل) وإجراء دراسة للمستخدمين لطلب الملاحظات بشكل استباقي من مجموعة متنوعة من المستخدمين، لا سيّما إذا كانت أنماط الاستخدام مختلفة عن التوقعات.
 
-#### Suggerimenti avanzati
+#### نصائح متقدمة
 
-- Quando gli utenti forniscono feedback sui prodotti AI, nel tempo le prestazioni dell'AI e l'esperienza utente possono migliorare notevolmente, ad esempio, aiutandoti a scegliere esempi migliori per l'ottimizzazione dei prompt. Il
-  [capitolo Feedback e controllo](https://pair.withgoogle.com/chapter/feedback-controls/)
-  della [guida di Google Persone e AI](https://pair.withgoogle.com/guidebook/chapters)
-  mette in evidenza le considerazioni chiave da tenere presenti durante la progettazione
-  dei meccanismi di feedback.
+- عندما يقدّم المستخدمون ملاحظات عن منتجات الذكاء الاصطناعي، يمكن أن يؤدي ذلك إلى تحسين أداء الذكاء الاصطناعي
+  وتجربة المستخدم بشكل كبير بمرور الوقت، مثلاً من خلال مساعدتك في اختيار أمثلة أفضل لتعديل الطلبات. يُبرز فصل
+  ["الملاحظات والتحكّم"](https://pair.withgoogle.com/chapter/feedback-controls/)
+  في [دليل "المستخدمون والذكاء الاصطناعي" من Google](https://pair.withgoogle.com/guidebook/chapters)
+  الاعتبارات الرئيسية التي يجب أخذها في الحسبان عند تصميم
+  آليات تقديم الملاحظات.
 
-## Passaggi successivi
+## الخطوات التالية
 
-- Consulta la guida alle [impostazioni di sicurezza](https://ai.google.dev/gemini-api/docs/safety-settings?hl=it) per scoprire di più sulle impostazioni di sicurezza regolabili disponibili tramite l'API Gemini.
-- Consulta l'[introduzione ai prompt](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=it) per iniziare a scrivere i tuoi primi prompt.
+- يُرجى الرجوع إلى دليل
+  [إعدادات الأمان](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ar) للتعرّف على إعدادات الأمان القابلة للتعديل المتاحة من خلال Gemini API.
+- يُرجى الاطّلاع على [مقدّمة عن كتابة الطلبات](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=ar) للبدء في كتابة طلباتك الأولى.
 
-Invia feedback
+إرسال ملاحظات
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Ultimo aggiornamento 2026-04-29 UTC.
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-Vuoi dirci altro?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

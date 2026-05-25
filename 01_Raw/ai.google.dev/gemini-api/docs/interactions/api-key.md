@@ -1,116 +1,116 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/api-key?hl=th
-fetched_at: 2026-05-18T05:14:26.695207+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/api-key?hl=es-419
+fetched_at: 2026-05-25T05:19:30.863743+00:00
 title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-ส่งความคิดเห็น
+Enviar comentarios
 
-# การใช้คีย์ Gemini API
+# Cómo usar claves de API de Gemini
 
-หากต้องการใช้ Gemini API คุณต้องมีคีย์ API หน้านี้สรุปวิธีสร้างและจัดการคีย์ใน Google AI Studio รวมถึงวิธีตั้งค่าสภาพแวดล้อมเพื่อใช้คีย์ในโค้ด
+Para usar la API de Gemini, necesitas una clave de API. En esta página, se describe cómo crear y administrar tus claves en Google AI Studio, así como configurar tu entorno para usarlas en tu código.
 
-[สร้างหรือดูคีย์ Gemini API](https://aistudio.google.com/app/apikey?hl=th)
+[Cómo crear o ver una clave de API de Gemini](https://aistudio.google.com/app/apikey?hl=es-419)
 
-## คีย์ API
+## Claves de API
 
-คุณสามารถสร้างและจัดการคีย์ Gemini API ทั้งหมดได้จากหน้า
-[Google AI Studio](https://aistudio.google.com/app/apikey?hl=th) **คีย์ API**
+Puedes crear y administrar todas tus claves de API de Gemini desde la
+[página](https://aistudio.google.com/app/apikey?hl=es-419) **Claves de API** de Google AI Studio.
 
-เมื่อมีคีย์ API แล้ว คุณจะมีตัวเลือกต่อไปนี้ในการเชื่อมต่อกับ Gemini API
+Una vez que tengas una clave de API, tendrás las siguientes opciones para conectarte a la API de Gemini:
 
-- [ตั้งค่าคีย์ API เป็นตัวแปรสภาพแวดล้อม](#set-api-env-var)
-- [ระบุคีย์ API อย่างชัดเจน](#provide-api-key-explicitly)
+- [Establecer tu clave de API como una variable de entorno](#set-api-env-var)
+- [Proporcionar tu clave de API de forma explícita](#provide-api-key-explicitly)
 
-สำหรับการทดสอบเบื้องต้น คุณสามารถฮาร์ดโค้ดคีย์ API ได้ แต่ควรใช้ชั่วคราวเท่านั้นเนื่องจากไม่ปลอดภัย คุณดูตัวอย่างการฮาร์ดโค้ดคีย์ API
-ได้ในส่วน[การระบุคีย์ API อย่างชัดเจน](#provide-api-key-explicitly)
+Para las pruebas iniciales, puedes codificar una clave de API, pero esto solo debe ser temporal, ya que no es seguro. Puedes encontrar ejemplos para codificar la clave de API
+en la sección [Proporcionar la clave de API de forma explícita](#provide-api-key-explicitly).
 
-## โปรเจ็กต์ Google Cloud
+## Proyectos de Google Cloud
 
-[โปรเจ็กต์ Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=th)
-เป็นสิ่งสำคัญสำหรับการใช้บริการ Google Cloud (เช่น Gemini API),
-การจัดการการเรียกเก็บเงิน และการควบคุมผู้ทำงานร่วมกันและสิทธิ์ Google AI Studio มีอินเทอร์เฟซแบบเบาสำหรับโปรเจ็กต์ Google Cloud
+Los [proyectos de Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=es-419)
+son fundamentales para usar los servicios de Google Cloud (como la API de Gemini),
+administrar la facturación y controlar los colaboradores y los permisos. Google AI Studio proporciona una interfaz liviana para tus proyectos de Google Cloud.
 
-หากยังไม่ได้สร้างโปรเจ็กต์ คุณต้องสร้างโปรเจ็กต์ใหม่หรือนำเข้าโปรเจ็กต์จาก Google Cloud ไปยัง Google AI Studio หน้า**โปรเจ็กต์** ใน Google AI Studio จะแสดงคีย์ทั้งหมดที่มีสิทธิ์เพียงพอในการใช้ Gemini API ดูวิธีการได้ในส่วนการนำเข้าโปรเจ็กต์
+Si aún no creaste ningún proyecto, debes crear uno nuevo o importar uno de Google Cloud a Google AI Studio. En la página **Proyectos** de Google AI Studio, se mostrarán todas las claves que tengan permiso suficiente para usar la API de Gemini. Consulta la sección [Importar proyectos](#import-projects) para obtener instrucciones.
 
-### โปรเจ็กต์เริ่มต้น
+### Proyecto predeterminado
 
-สำหรับผู้ใช้ใหม่ หลังจากยอมรับข้อกำหนดในการให้บริการแล้ว Google AI Studio จะสร้างโปรเจ็กต์ Google Cloud และคีย์ API เริ่มต้นเพื่อให้ใช้งานได้ง่าย คุณเปลี่ยนชื่อ
-โปรเจ็กต์นี้ใน Google AI Studio ได้โดยไปที่มุมมอง**โปรเจ็กต์** ใน
-**แดชบอร์ด** แล้วคลิกปุ่มการตั้งค่า 3 จุดข้างโปรเจ็กต์และ
-เลือก**เปลี่ยนชื่อโปรเจ็กต์** ผู้ใช้ที่มีอยู่หรือผู้ใช้ที่มีบัญชี Google Cloud อยู่แล้วจะไม่มีโปรเจ็กต์เริ่มต้นที่สร้างขึ้น
+Para los usuarios nuevos, después de aceptar las Condiciones del Servicio, Google AI Studio crea un proyecto de Google Cloud y una clave de API predeterminados para facilitar el uso. Para cambiar el nombre de este
+proyecto en Google AI Studio, navega a la vista **Proyectos** en el
+**Panel**, haz clic en el botón de configuración de 3 puntos junto a un proyecto y
+elige **Cambiar nombre del proyecto**. Los usuarios existentes o los que ya tienen cuentas de Google Cloud no tendrán un proyecto predeterminado creado.
 
-## นำเข้าโปรเจ็กต์
+## Importar proyectos
 
-คีย์ Gemini API แต่ละรายการจะเชื่อมโยงกับโปรเจ็กต์ที่อยู่ในระบบคลาวด์ของ Google Cloud โดยค่าเริ่มต้น Google AI Studio จะไม่แสดงโปรเจ็กต์ในระบบคลาวด์ทั้งหมด คุณต้องนำเข้าโปรเจ็กต์ที่ต้องการโดยค้นหาชื่อหรือรหัสโปรเจ็กต์ในกล่องโต้ตอบ**นำเข้าโปรเจ็กต์** หากต้องการดูรายการโปรเจ็กต์ทั้งหมดที่คุณมีสิทธิ์เข้าถึง ให้ไปที่ Cloud Console
+Cada clave de API de Gemini está asociada a un proyecto de Google Cloud. De forma predeterminada, Google AI Studio no muestra todos tus proyectos de Cloud. Debes importar los proyectos que desees buscando el nombre o el ID del proyecto en el diálogo **Importar proyectos**. Para ver una lista completa de los proyectos a los que tienes acceso, visita Cloud Console.
 
-หากยังไม่ได้นำเข้าโปรเจ็กต์ที่อยู่ในระบบคลาวด์ ให้ทำตามขั้นตอนต่อไปนี้เพื่อนำเข้าโปรเจ็กต์ Google Cloud และสร้างคีย์
+Si aún no importaste ningún proyecto, sigue estos pasos para importar un proyecto de Google Cloud y crear una clave:
 
-1. ไปที่ [Google AI Studio](https://aistudio.google.com?hl=th)
-2. เปิด**แดชบอร์ด** จากแผงด้านซ้าย
-3. เลือก**โปรเจ็กต์**
-4. เลือกปุ่ม**นำเข้าโปรเจ็กต์** ในหน้า**โปรเจ็กต์**
-5. ค้นหาและเลือกโปรเจ็กต์ Google Cloud ที่ต้องการนำเข้า แล้วเลือกปุ่ม**นำเข้า**
+1. Ve a [Google AI Studio](https://aistudio.google.com?hl=es-419).
+2. Abre el **Panel** desde el panel lateral izquierdo.
+3. Selecciona **Proyectos**.
+4. Selecciona el botón **Importar proyectos** en la página **Proyectos**.
+5. Busca y selecciona el proyecto de Google Cloud que deseas importar y selecciona el botón **Importar**.
 
-เมื่อนำเข้าโปรเจ็กต์แล้ว ให้ไปที่หน้า**คีย์ API** จากเมนู**แดชบอร์ด** แล้วสร้างคีย์ API ในโปรเจ็กต์ที่เพิ่งนำเข้า
+Una vez que se importe un proyecto, ve a la página **Claves de API** desde el menú **Panel** y crea una clave de API en el proyecto que acabas de importar.
 
-## ข้อจำกัด
+## Limitaciones
 
-ต่อไปนี้เป็นข้อจำกัดในการจัดการคีย์ API และโปรเจ็กต์ Google Cloud ใน Google AI Studio
+A continuación, se indican las limitaciones de la administración de claves de API y proyectos de Google Cloud en Google AI Studio.
 
-- คุณสร้างโปรเจ็กต์ได้สูงสุดครั้งละ 10 โปรเจ็กต์จากหน้า**โปรเจ็กต์** ของ Google AI Studio
-- คุณสามารถตั้งชื่อและเปลี่ยนชื่อโปรเจ็กต์และคีย์ได้
-- หน้า**คีย์ API** และ**โปรเจ็กต์** จะแสดงคีย์ได้สูงสุด 100 รายการและโปรเจ็กต์ได้สูงสุด 50 รายการ
-- ระบบจะแสดงเฉพาะคีย์ API ที่ไม่มีข้อจำกัดหรือจำกัดไว้สำหรับ Generative Language API
+- Puedes crear un máximo de 10 proyectos a la vez desde la página **Proyectos** de Google AI Studio.
+- Puedes asignar nombres a los proyectos y las claves, y cambiarles el nombre.
+- En las páginas **Claves de API** y **Proyectos** , se muestran un máximo de 100 claves y 50 proyectos.
+- Solo se muestran las claves de API que no tienen restricciones o que están restringidas a la API de Generative Language.
 
-หากต้องการสิทธิ์เข้าถึงเพิ่มเติมในการจัดการโปรเจ็กต์ รวมถึงการแก้ไขและ
-จำกัดคีย์ API ให้ไปที่
-[หน้าข้อมูลเข้าสู่ระบบของคอนโซล Google Cloud](https://console.cloud.google.com/apis/credentials?hl=th)
-ใน Cloud Console คุณสามารถเลือกโปรเจ็กต์ คลิกคีย์ API ที่มีอยู่ แล้วจำกัดคีย์นั้นไว้สำหรับ **Generative Language API**
+Para obtener acceso de administración adicional a tus proyectos, lo que incluye modificar y
+restringir claves de API, visita la
+[página de credenciales de la consola de Google Cloud](https://console.cloud.google.com/apis/credentials?hl=es-419).
+En Cloud Console, puedes seleccionar tu proyecto, hacer clic en una clave de API existente y, luego, restringirla a la **API de Generative Language**.
 
-## การตั้งค่าคีย์ API เป็นตัวแปรสภาพแวดล้อม
+## Cómo establecer la clave de API como una variable de entorno
 
-หากคุณตั้งค่าตัวแปรสภาพแวดล้อม `GEMINI_API_KEY` หรือ `GOOGLE_API_KEY` ไคลเอ็นต์จะเลือกคีย์ API
-โดยอัตโนมัติเมื่อใช้ไลบรารี Gemini API
-[รายการใดรายการหนึ่ง](https://ai.google.dev/gemini-api/docs/libraries?hl=th) เราขอแนะนำให้คุณตั้งค่าตัวแปรเพียงรายการเดียว แต่หากตั้งค่าทั้ง 2 รายการ ระบบจะให้ความสำคัญกับ `GOOGLE_API_KEY`
+Si estableces la variable de entorno `GEMINI_API_KEY` o `GOOGLE_API_KEY`, la
+clave de API se seleccionará automáticamente por el cliente cuando uses una de las
+[bibliotecas de la API de Gemini](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419). Te recomendamos que establezcas solo una de esas variables, pero, si se establecen ambas, `GOOGLE_API_KEY` tiene prioridad.
 
-หากคุณใช้ REST API หรือ JavaScript ในเบราว์เซอร์ คุณจะต้องระบุคีย์ API อย่างชัดเจน
+Si usas la API de REST o JavaScript en el navegador, deberás proporcionar la clave de API de forma explícita.
 
-วิธีตั้งค่าคีย์ API ในเครื่องเป็นตัวแปรสภาพแวดล้อม `GEMINI_API_KEY` ในระบบปฏิบัติการต่างๆ มีดังนี้
+A continuación, se muestra cómo puedes establecer tu clave de API de forma local como la variable de entorno `GEMINI_API_KEY` con diferentes sistemas operativos.
 
 ### Linux/macOS - Bash
 
-Bash เป็นการกำหนดค่าเทอร์มินัลทั่วไปของ Linux และ macOS คุณสามารถตรวจสอบว่ามีไฟล์การกำหนดค่าสำหรับ Bash หรือไม่โดยเรียกใช้คำสั่งต่อไปนี้
+Bash es una configuración de terminal común de Linux y macOS. Para verificar si tienes un archivo de configuración, ejecuta el siguiente comando:
 
 ```
 ~/.bashrc
 ```
 
-หากการตอบกลับเป็น "No such file or directory" คุณจะต้องสร้างไฟล์นี้และเปิดไฟล์โดยเรียกใช้คำสั่งต่อไปนี้ หรือใช้ `zsh`
+Si la respuesta es "No existe ese archivo o directorio", deberás crear este archivo y abrirlo ejecutando los siguientes comandos o usar `zsh`:
 
 ```
 touch ~/.bashrc
 open ~/.bashrc
 ```
 
-จากนั้นคุณต้องตั้งค่าคีย์ API โดยเพิ่มคำสั่งส่งออกต่อไปนี้
+A continuación, debes establecer tu clave de API agregando el siguiente comando de exportación:
 
 ```
 export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
 ```
 
-หลังจากบันทึกไฟล์แล้ว ให้ใช้การเปลี่ยนแปลงโดยเรียกใช้คำสั่งต่อไปนี้
+Después de guardar el archivo, ejecuta lo siguiente para aplicar los cambios:
 
 ```
 source ~/.bashrc
@@ -118,26 +118,26 @@ source ~/.bashrc
 
 ### macOS - Zsh
 
-Zsh เป็นการกำหนดค่าเทอร์มินัลทั่วไปของ Linux และ macOS คุณสามารถตรวจสอบว่ามีไฟล์การกำหนดค่าสำหรับ Zsh หรือไม่โดยเรียกใช้คำสั่งต่อไปนี้
+Zsh es una configuración de terminal común de Linux y macOS. Para verificar si tienes un archivo de configuración, ejecuta el siguiente comando:
 
 ```
 ~/.zshrc
 ```
 
-หากการตอบกลับเป็น "No such file or directory" คุณจะต้องสร้างไฟล์นี้และเปิดไฟล์โดยเรียกใช้คำสั่งต่อไปนี้ หรือใช้ `bash`
+Si la respuesta es "No existe ese archivo o directorio", deberás crear este archivo y abrirlo ejecutando los siguientes comandos o usar `bash`:
 
 ```
 touch ~/.zshrc
 open ~/.zshrc
 ```
 
-จากนั้นคุณต้องตั้งค่าคีย์ API โดยเพิ่มคำสั่งส่งออกต่อไปนี้
+A continuación, debes establecer tu clave de API agregando el siguiente comando de exportación:
 
 ```
 export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
 ```
 
-หลังจากบันทึกไฟล์แล้ว ให้ใช้การเปลี่ยนแปลงโดยเรียกใช้คำสั่งต่อไปนี้
+Después de guardar el archivo, ejecuta lo siguiente para aplicar los cambios:
 
 ```
 source ~/.zshrc
@@ -145,53 +145,51 @@ source ~/.zshrc
 
 ### Windows
 
-1. ค้นหา "ตัวแปรสภาพแวดล้อม" ในแถบค้นหา
-2. เลือกแก้ไข**การตั้งค่าระบบ** คุณอาจต้องยืนยันว่าต้องการดำเนินการนี้
-3. ในกล่องโต้ตอบการตั้งค่าระบบ ให้คลิกปุ่มที่มีป้ายกำกับว่า**ตัวแปรสภาพแวดล้อม**
-4. ในส่วน**ตัวแปรผู้ใช้** (สำหรับผู้ใช้ปัจจุบัน) หรือ**ตัวแปรระบบ** (ใช้กับผู้ใช้ทุกคนที่ใช้เครื่อง) ให้คลิก**ใหม่...**
-5. ระบุชื่อตัวแปรเป็น `GEMINI_API_KEY` ระบุคีย์ Gemini API เป็นค่าตัวแปร
-6. คลิก**ตกลง** เพื่อใช้การเปลี่ยนแปลง
-7. เปิดเซสชันเทอร์มินัลใหม่ (cmd หรือ Powershell) เพื่อรับตัวแปรใหม่
+1. Busca "Variables de entorno" en la barra de búsqueda.
+2. Elige modificar la **Configuración del sistema**. Es posible que debas confirmar que deseas hacerlo.
+3. En el diálogo de configuración del sistema, haz clic en el botón con la etiqueta **Variables de entorno**.
+4. En **Variables de usuario** (para el usuario actual) o **Variables del sistema** (se aplica a todos los usuarios que usan la máquina), haz clic en **Nueva…**
+5. Especifica el nombre de la variable como `GEMINI_API_KEY`. Especifica tu clave de API de Gemini como el valor de la variable.
+6. Haz clic en **Aceptar** para aplicar los cambios.
+7. Abre una nueva sesión de terminal (cmd o Powershell) para obtener la variable nueva.
 
-## การระบุคีย์ API อย่างชัดเจน
+## Cómo proporcionar la clave de API de forma explícita
 
-ในบางกรณี คุณอาจต้องการระบุคีย์ API อย่างชัดเจน เช่น
+En algunos casos, es posible que desees proporcionar una clave de API de forma explícita. Por ejemplo:
 
-- คุณกำลังทำการเรียก API อย่างง่ายและต้องการฮาร์ดโค้ดคีย์ API
-- คุณต้องการควบคุมอย่างชัดเจนโดยไม่ต้องอาศัยการค้นพบตัวแปรสภาพแวดล้อมโดยอัตโนมัติโดยไลบรารี Gemini API
-- คุณกำลังใช้สภาพแวดล้อมที่ไม่รองรับตัวแปรสภาพแวดล้อม (เช่น เว็บ) หรือกำลังเรียกใช้ REST
+- Estás realizando una llamada a la API simple y prefieres codificar la clave de API.
+- Quieres un control explícito sin tener que depender de la detección automática de variables de entorno por parte de las bibliotecas de la API de Gemini.
+- Usas un entorno en el que no se admiten variables de entorno (p. ej., la Web) o realizas llamadas a REST.
 
-ด้านล่างนี้เป็นตัวอย่างวิธีระบุคีย์ API อย่างชัดเจนโดยใช้ Interactions API
+A continuación, se muestran ejemplos de cómo puedes proporcionar una clave de API de forma explícita con la API de Interactions:
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 
 client = genai.Client(api_key="YOUR_API_KEY")
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview", 
+    model="gemini-3.5-flash", 
     input="Explain how AI works in a few words"
 )
-print(interaction.steps[-1].content[0].text)
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({ apiKey: "YOUR_API_KEY" });
 
 async function main() {
   const interaction = await ai.interactions.create({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     input: "Explain how AI works in a few words",
   });
-  console.log(interaction.steps.at(-1).content[0].text);
+  console.log(interaction.output_text);
 }
 
 main();
@@ -200,71 +198,68 @@ main();
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H 'Content-Type: application/json' \
   -H "x-goog-api-key: YOUR_API_KEY" \
   -H "Api-Revision: 2026-05-20" \
   -X POST \
   -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "input": "Explain how AI works in a few words"
   }'
 ```
 
-## รักษาคีย์ API ให้ปลอดภัย
+## Protege tu clave de API
 
-ปฏิบัติต่อคีย์ Gemini API เหมือนรหัสผ่าน หากคีย์ถูกบุกรุก ผู้อื่นจะใช้โควต้าของโปรเจ็กต์ เรียกเก็บเงิน (หากเปิดใช้การเรียกเก็บเงิน) และเข้าถึงข้อมูลส่วนตัวของคุณ เช่น ไฟล์ ได้
+Trata tu clave de API de Gemini como una contraseña. Si se vulnera, otras personas pueden usar la cuota de tu proyecto, generar cargos (si la facturación está habilitada) y acceder a tus datos privados, como archivos.
 
-### กฎความปลอดภัยที่สำคัญ
+### Reglas de seguridad críticas
 
-- **เก็บคีย์ไว้เป็นความลับ**: คีย์ API สำหรับ Gemini อาจเข้าถึงข้อมูลที่ละเอียดอ่อนซึ่ง
-  แอปพลิเคชันของคุณต้องใช้
+- **Mantén las claves confidenciales**: Las claves de API de Gemini pueden acceder a datos sensibles de los que depende tu
+  aplicación.
 
-  - **อย่าคอมมิตคีย์ API ไปยังระบบควบคุมเวอร์ชัน** อย่าตรวจสอบคีย์ API ในระบบควบคุมเวอร์ชัน เช่น Git
-  - **อย่าเปิดเผยคีย์ API ในฝั่งไคลเอ็นต์** อย่าใช้คีย์ API โดยตรงในเว็บหรือแอปบนอุปกรณ์เคลื่อนที่ในสภาพแวดล้อมจริง ระบบอาจดึงคีย์ในโค้ดฝั่งไคลเอ็นต์ (รวมถึงไลบรารี JavaScript/TypeScript และการเรียกใช้ REST) ออกมาได้
-- **จำกัดการเข้าถึง**: จำกัดการใช้งานคีย์ API ไว้สำหรับที่อยู่ IP, ผู้อ้างอิง HTTP
-  หรือแอป Android/iOS ที่เฉพาะเจาะจง หากเป็นไปได้
-- **จำกัดการใช้งาน**: เปิดใช้เฉพาะ API ที่จำเป็นสำหรับคีย์แต่ละรายการ
-- **ทำการตรวจสอบเป็นประจำ**: ตรวจสอบคีย์ API เป็นประจำและหมุนเวียนคีย์
-  เป็นระยะ
+  - **Nunca confirmes las claves de API en el control de versiones.** No registres tu clave de API en sistemas de control de versiones como Git.
+  - **Nunca expongas las claves de API en el cliente.** No uses tu clave de API directamente en apps para dispositivos móviles o web en producción. Se pueden extraer claves en el código del cliente (incluidas nuestras bibliotecas de JavaScript/TypeScript y las llamadas a REST).
+- **Restringe el acceso**: Restringe el uso de la clave de API a direcciones IP, URLs de referencia HTTP
+  o apps para Android o iOS específicas cuando sea posible.
+- **Restringe el uso**: Habilita solo las APIs necesarias para cada clave.
+- **Realiza auditorías periódicas**: Audita tus claves de API con regularidad y rótalas
+  de forma periódica.
 
-### แนวทางปฏิบัติแนะนำ
+### Prácticas recomendadas
 
-- **ใช้การเรียกฝั่งเซิร์ฟเวอร์ด้วยคีย์ API** วิธีที่ปลอดภัยที่สุดในการใช้คีย์ API คือการเรียกใช้ Gemini API จากแอปพลิเคชันฝั่งเซิร์ฟเวอร์ซึ่งสามารถเก็บคีย์ไว้เป็นความลับได้
-- **ใช้โทเค็นชั่วคราวสำหรับการเข้าถึงฝั่งไคลเอ็นต์ (เฉพาะ Live API):** หากต้องการเข้าถึง Live API โดยตรงจากฝั่งไคลเอ็นต์ คุณสามารถใช้โทเค็นชั่วคราวได้ โทเค็นเหล่านี้มีความเสี่ยงด้านความปลอดภัยต่ำกว่าและอาจเหมาะสำหรับการใช้งานจริง ดูข้อมูลเพิ่มเติมได้ในคู่มือ
-  [โทเค็นชั่วคราว](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=th)
-- **พิจารณาเพิ่มข้อจำกัดให้กับคีย์:** คุณสามารถจำกัดสิทธิ์ของคีย์ได้
-  โดยเพิ่ม[ข้อจำกัดคีย์ API](https://cloud.google.com/api-keys/docs/add-restrictions-api-keys?hl=th#add-api-restrictions)
-  ซึ่งจะช่วยลดความเสียหายที่อาจเกิดขึ้นหากคีย์รั่วไหล
+- **Usa llamadas del servidor con claves de API** : La forma más segura de usar tu clave de API es llamar a la API de Gemini desde una aplicación del servidor en la que la clave se pueda mantener confidencial.
+- **Usa tokens efímeros para el acceso del cliente (solo API en vivo):** Para el acceso directo del cliente a la API en vivo, puedes usar tokens efímeros. Tienen riesgos de seguridad más bajos y pueden ser adecuados para el uso en producción. Consulta la guía de
+  [tokens efímeros](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=es-419) para obtener más
+  información.
+- **Considera agregar restricciones a tu clave:** Puedes limitar los permisos de una clave
+  agregando [restricciones de clave de API](https://cloud.google.com/api-keys/docs/add-restrictions-api-keys?hl=es-419#add-api-restrictions).
+  Esto minimiza el daño potencial si la clave se filtra alguna vez.
 
-นอกจากนี้ คุณยังดูแนวทางปฏิบัติแนะนำทั่วไปบางส่วนได้ใน
-[บทความในศูนย์ช่วยเหลือ](https://support.google.com/googleapi/answer/6310037?hl=th)นี้
+Para conocer algunas prácticas recomendadas generales, también puedes consultar este
+[artículo de asistencia](https://support.google.com/googleapi/answer/6310037?hl=es-419).
 
-## การแก้ปัญหาการสร้างคีย์ API
+## Solucionar problemas de creación de claves de API
 
-ใน Google AI Studio ปุ่ม**สร้างคีย์ API** อาจไม่พร้อมใช้งานพร้อม
-ข้อความ: "*คุณไม่มีสิทธิ์สร้างคีย์ในโปรเจ็กต์นี้*"
+En Google AI Studio, es posible que el botón **Crear clave de API** no esté disponible y aparezca
+el mensaje: "*No tienes permiso para crear una clave en este proyecto*".
 
-ปัญหานี้เกิดขึ้นเมื่อคุณไม่มีสิทธิ์ที่จำเป็นภายในโปรเจ็กต์ในการสร้างคีย์ใหม่
+Esto ocurre cuando no tienes los permisos necesarios en el proyecto para generar una clave nueva:
 
-- **`resourcemanager.projects.get`**: อนุญาตให้ AI Studio ยืนยันการมีอยู่ของโปรเจ็กต์
-- **`apikeys.keys.create`**: อนุญาตให้สร้างคีย์ API เอง
-- **`serviceusage.services.enable`**: จำเป็นเพื่อให้แน่ใจว่า Gemini API ทำงานอยู่ในโปรเจ็กต์
+- **`resourcemanager.projects.get`**: Permite que AI Studio verifique la existencia del proyecto.
+- **`apikeys.keys.create`**: Permite la generación de la clave de API.
+- **`serviceusage.services.enable`**: Es necesario para garantizar que la API de Gemini esté activa en el proyecto.
 
-หากต้องการแก้ไขสิทธิ์ โปรดขอให้ผู้ดูแลระบบโปรเจ็กต์ หรือผู้ดูแลระบบขององค์กร
-(หากโปรเจ็กต์เป็นของ[องค์กร](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=th))
-มอบบทบาทที่มีสิทธิ์ตามที่ระบุไว้ข้างต้น (เช่น ผู้แก้ไขโปรเจ็กต์หรือ
-บทบาทที่กำหนดเอง) ให้คุณ
+Para corregir tus permisos, pídele al administrador del proyecto o al administrador de tu organización (si el proyecto pertenece a una [organización](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=es-419)) que te otorgue un rol con los permisos mencionados anteriormente (como Editor del proyecto o un rol personalizado).
 
-หากคุณไม่มีสิทธิ์การเข้าถึงระดับผู้ดูแลระบบของโปรเจ็กต์ คุณสามารถสร้างโปรเจ็กต์ใหม่ที่ไม่เชื่อมโยงกับองค์กรเพื่อสร้างคีย์ได้
+Si no tienes acceso administrativo a un proyecto, puedes crear uno nuevo que no esté asociado con una organización para generar tus claves.
 
-ส่งความคิดเห็น
+Enviar comentarios
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-อัปเดตล่าสุด 2026-05-12 UTC
+Última actualización: 2026-05-19 (UTC)
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+¿Quieres brindar más información?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-05-12 UTC"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-05-19 (UTC)"],[],[]]

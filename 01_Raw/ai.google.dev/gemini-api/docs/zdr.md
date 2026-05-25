@@ -1,75 +1,59 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/zdr?hl=zh-CN
-fetched_at: 2026-05-18T05:06:02.926511+00:00
-title: "Gemini Developer API \u4e2d\u7684\u96f6\u6570\u636e\u4fdd\u7559 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/zdr?hl=he
+fetched_at: 2026-05-25T05:21:04.447681+00:00
+title: "\u05e9\u05de\u05d9\u05e8\u05ea \u05e0\u05ea\u05d5\u05e0\u05d9\u05dd \u05d0\u05e4\u05e1\u05d9\u05ea \u05d1-Gemini Developer API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
+‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-发送反馈
+שליחת משוב
 
-# Gemini Developer API 中的零数据保留
+# שמירת נתונים אפסית ב-Gemini Developer API
 
-本页面详细介绍了 Gemini Developer API 中通常所说的“零数据保留”。
+בדף הזה מפורטים פרטים על מה שנקרא בדרך כלל 'שמירת נתונים אפסית' ב-Gemini Developer API.
 
-## 训练限制
+## הגבלת אימון
 
-如 [Gemini API 服务条款](https://ai.google.dev/gemini-api/terms?hl=zh-cn) 中所述，当您
-使用付费服务时，Google 不会使用您的提示（包括关联的系统
-说明、缓存的内容以及图片、视频或文档等文件）或
-回答来改进我们的产品。付费服务的定义见
-[此处](https://ai.google.dev/gemini-api/terms?hl=zh-cn#paid-services)。
+כפי שמפורט [בתנאים ובהגבלות של Gemini API](https://ai.google.dev/gemini-api/terms?hl=he), כשמשתמשים בשירותים בתשלום, Google לא משתמשת בהנחיות (כולל הוראות מערכת משויכות, תוכן במטמון וקבצים כמו תמונות, סרטונים או מסמכים) או בתשובות כדי לשפר את המוצרים שלה. הגדרת השירותים בתשלום מופיעה [כאן](https://ai.google.dev/gemini-api/terms?hl=he#paid-services).
 
-## 客户数据保留和实现零数据保留
+## שמירת נתוני לקוחות והשגת מצב של אפס שמירת נתונים
 
-在以下场景和条件下，客户数据通常会保留有限的时间。若要实现零数据保留，客户必须在以下各个方面采取特定措施或避免使用特定功能：
+בדרך כלל, נתוני הלקוחות נשמרים לפרקי זמן מוגבלים בתרחישים ובתנאים הבאים. כדי להגיע למצב של אפס שמירת נתונים, הלקוחות צריכים לבצע פעולות ספציפיות או להימנע משימוש בתכונות ספציפיות בכל אחד מהתחומים הבאים:
 
-- **用于滥用行为监控的提示日志记录**：如[Gemini API
-  附加服务条款](https://ai.google.dev/gemini-api/terms?hl=zh-cn)中所述，对于付费服务，Google
-  会在有限的一段时间内记录提示和回答，仅用于检测
-  违反[使用限制
-  政策](https://policies.google.com/terms/generative-ai/use-policy?hl=zh-cn)的行为。当您针对特定项目的 ZDR 请求获得批准后，所有用户内容（提示和回答）和可识别的元数据（例如 IP 地址和 Google 账号 ID）都会在记录之前清除。生成的记录会被标记为已清理，并且不包含任何可识别的用户数据，确保与 Gemini Enterprise Agent Platform 零数据保留保持一致。
-- **依托 Google 搜索进行接地**：如[Gemini API 附加
-  服务条款](https://ai.google.dev/gemini-api/terms?hl=zh-cn#grounding-with-google-search)中所述，Google
-  会存储提示、上下文信息和生成的输出内容三十 (30)
-  天，以用于创建有依据的结果和搜索建议。
-  这些存储的信息可用于调试和测试支持接地的系统。**如果您使用“依托 Google 搜索进行接地”，则无法禁止存储此信息。**
-- **Grounding with Google Maps**：如 [Gemini API 附加服务条款](https://ai.google.dev/gemini-api/terms?hl=zh-cn)中所述，Google 会存储提示、上下文信息和生成的输出内容三十 (30) 天，以用于创建有依据的结果。这些存储的信息可能仅用于可靠性工程，例如在出现服务问题时进行调试。**如果您使用“Grounding with Google Maps”，则无法禁止存储此信息。**
-- **Interactions API**：Interactions API 可管理对话的活跃状态，以实现多轮对话。**默认情况下，Interactions API 会启用状态存储** 。为确保零数据足迹，您必须在 API 请求中将 `store` 参数显式设置为 `false`，以选择停用默认状态保留。
-- **Live API**：此有状态 API 通过存储
-  对话状态来实现实时重新连接。若要实现零数据保留，**请勿配置 SessionResumptionConfig** 。如果生成了会话句柄，对话状态（包括文本、音频和视频）最多会保留 24 小时。
-- **File API 存储**：借助 File API，用户可以上传大型素材资源。
-  文件会以静态方式存储，直到用户删除或过期为止。
-  File API 的使用与 ZDR 日志记录无关；用户必须手动删除文件，以确保零数据足迹。
-- **显式上下文缓存**：用户可以使用 `cached_content` 字段手动缓存大型数据集（例如
-  长视频或文档库）。虽然这些请求的日志遵循 ZDR 丢弃政策，但缓存的上下文本身会使用用户定义的 `ttl` 或 `expire_time` 进行存储。若要实现绝对零数据足迹，请勿使用 cached\_content 功能。
-- **隐式内存缓存**：默认情况下，Gemini 模型会将数据缓存在
-  内存中，以缩短延迟时间并降低开发者的费用。此数据严格存储在 RAM 中（而非静态存储），在项目级层进行隔离，并且 TTL 为 24 小时。
-  **这不会违反零数据保留。**
+- **רישום ביומן של הנחיות לצורך מעקב אחר שימוש לרעה**: כפי שמתואר [בתנאים והגבלות הנוספים למתן שירות של Gemini API](https://ai.google.dev/gemini-api/terms?hl=he), בשירותים בתשלום, Google רושמת ביומן את ההנחיות והתשובות למשך זמן מוגבל, אך ורק לצורך זיהוי הפרות של [המדיניות בנושא שימוש אסור](https://policies.google.com/terms/generative-ai/use-policy?hl=he). כשהבקשה שלכם ל-ZDR עבור פרויקט מסוים מאושרת, כל תוכן המשתמשים (ההנחיות והתשובות) והמטא-נתונים שניתן לזהות (כמו כתובות IP ומזהי חשבון Google) נמחקים לפני הרישום ביומן. הרשומה שמתקבלת מסומנת כרשומה שעברה סניטציה, והיא לא מכילה מידע מזהה של משתמש. כך נשמרת התאימות עם פלטפורמת הסוכנים של Gemini Enterprise, שבה לא מתבצע שימור נתונים.
+- **עיגון באמצעות חיפוש Google**: כמו שמתואר [בתנאים הנוספים של Gemini API](https://ai.google.dev/gemini-api/terms?hl=he#grounding-with-google-search),‏ Google שומרת הנחיות, מידע הקשרי ותוצאות שנוצרו למשך שלושים (30) ימים לצורך יצירת תוצאות מעוגנות והצעות לחיפוש.
+  יכול להיות שנשתמש במידע השמור הזה לצורך ניפוי באגים ובדיקות של מערכות שתומכות בהארקה. **אם משתמשים ב-עיגון באמצעות חיפוש Google, אי אפשר להשבית את השמירה של המידע הזה.**
+- **עיגון בעזרת מפות Google**: כפי שמפורט [בתנאים ובהגבלות הנוספים של Gemini API](https://ai.google.dev/gemini-api/terms?hl=he),‏ Google מאחסנת הנחיות, מידע הקשרי ותוצאות שנוצרו למשך שלושים (30) ימים לצורך יצירת תוצאות מבוססות. אפשר להשתמש במידע הזה רק לצורך הנדסת אמינות, למשל לצורך ניפוי באגים במקרה של בעיות בשירות.
+  **אם משתמשים ב-עיגון בעזרת מפות Google, אין אפשרות להשבית את האחסון של המידע הזה.**
+- ‫**Interactions API**: ‏Interactions API מנהל את המצב הפעיל של שיחה כדי לאפשר שיחות מרובות תורות. **כברירת מחדל, ה-API של האינטראקציות מאפשר אחסון של מצב**. כדי להבטיח שלא יישארו עקבות של נתונים, צריך להגדיר במפורש את הפרמטר `store` לערך `false` בבקשות ה-API כדי לבטל את ההסכמה לשמירת מצב ברירת המחדל.
+- ‫**Live API**: ממשק API עם שמירת מצב שמאפשר התחברות מחדש בזמן אמת על ידי שמירת מצב השיחה. כדי להשיג אפס שמירת נתונים, **אל תגדירו את SessionResumptionConfig**. אם נוצר כינוי לסשן, מצב השיחה (כולל טקסט, אודיו ווידאו) נשמר למשך עד 24 שעות.
+- ‫**File API Storage**: File API מאפשר למשתמשים להעלות נכסים גדולים.
+  הקבצים מאוחסנים במצב לא פעיל עד שהמשתמש מוחק אותם או עד שתוקף שלהם פג.
+  השימוש ב-File API לא תלוי ברישום ביומן של ZDR. כדי לוודא שלא נשארים נתונים, המשתמשים צריכים למחוק את הקבצים באופן ידני.
+- **שמירת הקשר במטמון באופן מפורש**: המשתמשים יכולים לשמור במטמון באופן ידני מערכי נתונים גדולים (למשל, סרטונים ארוכים או ספריות מסמכים) באמצעות השדה `cached_content`. היומנים של הבקשות האלה פועלים לפי מדיניות ההשמטה של ZDR, אבל ההקשר ששמור במטמון מאוחסן עם `ttl` או `expire_time` שהוגדרו על ידי המשתמש. כדי להשיג טביעת רגל של אפס נתונים, אל תשתמשו בתכונה cached\_content.
+- **שמירה במטמון בזיכרון באופן מרומז**: כברירת מחדל, מודלים של Gemini שומרים נתונים במטמון בזיכרון כדי להפחית את זמן האחזור ואת העלות למפתחים. הנתונים האלה נמצאים רק ב-RAM (לא במצב מנוחה), מבודדים ברמת הפרויקט, ויש להם TTL של 24 שעות.
+  **הפעולה הזו לא מהווה הפרה של מדיניות אפס שמירת נתונים.**
 
-## 后续步骤
+## המאמרים הבאים
 
-- 了解[生成式 AI 使用限制
-  政策](https://policies.google.com/terms/generative-ai/use-policy?hl=zh-cn)。
-- 查看 [Gemini API 附加服务条款](https://ai.google.dev/gemini-api/terms?hl=zh-cn)。
-- 如果您需要企业级自助式 ZDR 控制功能，请参阅 [Gemini Enterprise Agent Platform
-  零数据保留
-  指南](https://cloud.google.com/gemini-enterprise-agent-platform/models/vertex-ai-zero-data-retention?hl=zh-cn)。
+- [מידע על המדיניות בנושא שימוש אסור ב-AI גנרטיבי](https://policies.google.com/terms/generative-ai/use-policy?hl=he)
+- קוראים את [התנאים וההגבלות הנוספים של Gemini API](https://ai.google.dev/gemini-api/terms?hl=he).
+- אם אתם צריכים אמצעי בקרה של ZDR ברמה הארגונית בשירות עצמי, כדאי לעיין [במדריך בנושא שמירת נתונים אפסית בפלטפורמת הסוכנים של Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform/models/vertex-ai-zero-data-retention?hl=he).
 
-发送反馈
+שליחת משוב
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-最后更新时间 (UTC)：2026-04-29。
+עדכון אחרון: 2026-04-29 (שעון UTC).
 
-需要向我们提供更多信息？
+רוצה לתת לנו משוב?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]

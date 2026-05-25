@@ -1,43 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=he
-fetched_at: 2026-05-18T05:12:48.000463+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=ja
+fetched_at: 2026-05-25T05:23:11.364025+00:00
 title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-שליחת משוב
+フィードバックを送信
 
-# הבנת מסמכים
+# ドキュメントの理解
 
-מודלים של Gemini יכולים לעבד מסמכים בפורמט PDF, באמצעות ראייה מובנית כדי להבין הקשרים של מסמכים שלמים. היכולת הזו לא מסתכמת בחילוץ טקסט, אלא מאפשרת ל-Gemini:
+Gemini モデルは、ネイティブ ビジョンを使用してドキュメント全体のコンテキストを理解し、PDF 形式のドキュメントを処理できます。これにより、Gemini は単なるテキスト抽出だけでなく、次のことが可能になります。
 
-- לנתח ולפרש תוכן, כולל טקסט, תמונות, דיאגרמות, תרשימים וטבלאות, גם במסמכים ארוכים של עד 1, 000 עמודים.
-- חילוץ מידע לפורמטים של [פלט מובנה](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=he).
-- לסכם מסמכים ולענות על שאלות על סמך הרכיבים החזותיים והטקסטואליים שלהם.
-- תמלול תוכן המסמך (למשל ל-HTML), תוך שמירה על הפריסות והעיצוב, לשימוש באפליקציות במורד הזרם.
+- テキスト、画像、図、グラフ、表などのコンテンツを分析して解釈します。最大 1,000 ページの長いドキュメントでも処理できます。
+- 情報を[構造化された出力](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=ja)形式で抽出します。
+- ドキュメントの視覚要素とテキスト要素の両方に基づいて、質問に要約して回答します。
+- レイアウトと書式設定を維持しながら、ドキュメント コンテンツを（HTML などに）書き起こし、ダウンストリーム アプリケーションで使用します。
 
-אפשר גם להעביר מסמכים שאינם PDF באותו אופן, אבל Gemini יראה אותם כטקסט רגיל, כך שלא יהיה הקשר כמו תרשימים או עיצוב.
+PDF 以外のドキュメントも同じように渡すことができますが、Gemini はそれらを通常のテキストとして認識するため、グラフや書式設定などのコンテキストは失われます。
 
-## העברת נתוני PDF בתוך השורה
+## PDF データをインラインで渡す
 
-אפשר להעביר נתוני PDF בתוך הבקשה. האפשרות הזו מתאימה במיוחד למסמכים קטנים או לעיבוד זמני שבו אין צורך להפנות לקובץ בבקשות הבאות. מומלץ להשתמש ב-[Files API](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=he#large-pdfs) למסמכים גדולים שצריך להתייחס אליהם באינטראקציות מרובות תורות, כדי לשפר את זמן הטעינה של הבקשה ולצמצם את השימוש ברוחב הפס.
+リクエストで PDF データをインラインで渡すことができます。これは、後続のリクエストでファイルを参照する必要がない、小規模なドキュメントや一時的な処理に最適です。リクエストのレイテンシを改善し、帯域幅の使用量を削減するため、複数ターンのインタラクションで参照する必要がある大きなドキュメントには
+[Files API](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=ja#large-pdfs)
+を使用することをおすすめします。
 
-בדוגמה הבאה אפשר לראות איך מעבירים נתוני PDF בשורה:
+次の例は、PDF データをインラインで渡す方法を示しています。
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 import base64
 
@@ -47,7 +48,7 @@ with open('path/to/document.pdf', 'rb') as f:
     pdf_bytes = f.read()
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input=[
         {
             "type": "document",
@@ -58,13 +59,12 @@ interaction = client.interactions.create(
     ]
 )
 
-print(interaction.steps[-1].content[0].text)
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 import * as fs from "node:fs";
 
@@ -76,7 +76,7 @@ async function main() {
     });
 
     const interaction = await ai.interactions.create({
-        model: "gemini-3-flash-preview",
+        model: "gemini-3.5-flash",
         input: [
             { type: "text", text: "Summarize this document" },
             {
@@ -86,7 +86,7 @@ async function main() {
             }
         ]
     });
-    console.log(interaction.steps.at(-1).content[0].text);
+    console.log(interaction.output_text);
 }
 
 main();
@@ -103,13 +103,12 @@ else
   B64FLAGS="-w0"
 fi
 
-# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "input": [
       {
         "type": "document",
@@ -121,12 +120,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-אפשר גם להעלות קובץ PDF מקומי לעיבוד:
+ローカルの PDF ファイルをアップロードして処理することもできます。
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 
 client = genai.Client()
@@ -134,19 +132,18 @@ client = genai.Client()
 uploaded_file = client.files.upload(file="file.pdf")
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input=[
         {"type": "document", "uri": uploaded_file.uri, "mime_type": uploaded_file.mime_type},
         {"type": "text", "text": "Summarize this document"}
     ]
 )
-print(interaction.steps[-1].content[0].text)
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({});
@@ -158,7 +155,7 @@ async function main() {
     });
 
     const interaction = await ai.interactions.create({
-        model: "gemini-3-flash-preview",
+        model: "gemini-3.5-flash",
         input: [
             { type: "text", text: "Summarize this document" },
             {
@@ -168,24 +165,23 @@ async function main() {
             }
         ]
     });
-    console.log(interaction.steps.at(-1).content[0].text);
+    console.log(interaction.output_text);
 }
 
 main();
 ```
 
-## העלאה של קובצי PDF באמצעות Files API
+## Files API を使用して PDF をアップロードする
 
-מומלץ להשתמש ב-Files API לקבצים גדולים יותר או כשרוצים לעשות שימוש חוזר במסמך בכמה בקשות. הפעולה הזו משפרת את זמן האחזור של הבקשות ומצמצמת את השימוש ברוחב הפס, כי היא מפרידה בין העלאת הקובץ לבין בקשות המודל.
+大きなファイルの場合や、複数のリクエストでドキュメントを再利用する場合は、Files API を使用することをおすすめします。これにより、ファイルのアップロードとモデル リクエストが分離され、リクエストのレイテンシが改善され、帯域幅の使用量が削減されます。
 
-### קובצי PDF גדולים מכתובות URL
+### URL からの大きな PDF
 
-אפשר להשתמש ב-File API כדי לפשט את ההעלאה והעיבוד של קובצי PDF גדולים מכתובות URL:
+File API を使用すると、URL から大きな PDF ファイルを簡単にアップロードして処理できます。
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 import io
 import httpx
@@ -194,11 +190,9 @@ client = genai.Client()
 
 long_context_pdf_path = "https://arxiv.org/pdf/2312.11805"
 
-# Retrieve and upload the PDF using the File API
 doc_io = io.BytesIO(httpx.get(long_context_pdf_path).content)
 
 sample_doc = client.files.upload(
-  # You can pass a path or a file-like object here
   file=doc_io,
   config=dict(
     mime_type='application/pdf')
@@ -207,19 +201,18 @@ sample_doc = client.files.upload(
 prompt = "Summarize this document"
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input=[
         {"type": "document", "uri": sample_doc.uri, "mime_type": sample_doc.mime_type},
         {"type": "text", "text": prompt}
     ]
 )
-print(interaction.steps[-1].content[0].text)
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({});
@@ -238,7 +231,6 @@ async function main() {
         },
     });
 
-    // Wait for the file to be processed.
     let getFile = await ai.files.get({ name: file.name });
     while (getFile.state === 'PROCESSING') {
         getFile = await ai.files.get({ name: file.name });
@@ -254,14 +246,14 @@ async function main() {
     }
 
     const interaction = await ai.interactions.create({
-        model: 'gemini-3-flash-preview',
+        model: 'gemini-3.5-flash',
         input: [
             { type: "document", uri: file.uri, mime_type: file.mime_type },
             { type: "text", text: "Summarize this document" }
         ],
     });
 
-    console.log(interaction.steps.at(-1).content[0].text);
+    console.log(interaction.output_text);
 
 }
 
@@ -313,7 +305,7 @@ echo "file_uri: ${file_uri}"
 # Create payload JSON file for safety
 cat << EOF > payload.json
 {
-  "model": "gemini-3-flash-preview",
+  "model": "gemini-3.5-flash",
   "input": [
     {"type": "text", "text": "${PROMPT}"},
     {"type": "document", "uri": "${file_uri}", "mime_type": "application/pdf"}
@@ -322,7 +314,6 @@ cat << EOF > payload.json
 EOF
 
 # Now create an interaction using that file
-# Specifies the API revision to avoid breaking changes when they become default
 curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
@@ -340,37 +331,34 @@ rm "${DISPLAY_NAME}.pdf"
 rm payload.json
 ```
 
-### קובצי PDF גדולים שמאוחסנים באופן מקומי
+### ローカルに保存された大きな PDF
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 import pathlib
 
 client = genai.Client()
 
-# Upload the PDF using the File API
 file_path = pathlib.Path('large_file.pdf')
 sample_file = client.files.upload(
     file=file_path,
 )
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input=[
         {"type": "document", "uri": sample_file.uri, "mime_type": sample_file.mime_type},
         {"type": "text", "text": "Summarize this document"}
     ]
 )
-print(interaction.steps[-1].content[0].text)
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({});
@@ -383,7 +371,6 @@ async function main() {
         },
     });
 
-    // Wait for the file to be processed.
     let getFile = await ai.files.get({ name: file.name });
     while (getFile.state === 'PROCESSING') {
         getFile = await ai.files.get({ name: file.name });
@@ -399,14 +386,14 @@ async function main() {
     }
 
     const interaction = await ai.interactions.create({
-        model: 'gemini-3-flash-preview',
+        model: 'gemini-3.5-flash',
         input: [
             { type: "document", uri: file.uri, mime_type: file.mime_type },
             { type: "text", text: "Summarize this document" }
         ],
     });
 
-    console.log(interaction.steps.at(-1).content[0].text);
+    console.log(interaction.output_text);
 
 }
 
@@ -446,14 +433,13 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 
 # Now create an interaction using that file
-# Specifies the API revision to avoid breaking changes when they become default
 curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -H "Api-Revision: 2026-05-20" \
     -X POST \
     -d '{
-      "model": "gemini-3-flash-preview",
+      "model": "gemini-3.5-flash",
       "input": [
         {"type": "document", "uri": '$file_uri', "mime_type": "application/pdf"},
         {"type": "text", "text": "Can you add a few more lines to this poem?"}
@@ -466,12 +452,12 @@ echo
 jq ".steps[-1].content[0].text" response.json
 ```
 
-כדי לוודא שה-API שמר בהצלחה את הקובץ שהועלה ולקבל את המטא-נתונים שלו, אפשר לקרוא ל-[`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=he). רק `name` (ובאופן עקיף, `uri`) הם ייחודיים.
+`[`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=ja)` を呼び出すと、API がアップロードされたファイルを正常に保存したことを確認し、その
+メタデータを取得できます。`name`（およびその拡張機能である `uri`）のみが一意です。
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 import pathlib
 
@@ -499,14 +485,13 @@ file_uri=$(jq -r ".uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## העברת כמה קובצי PDF
+## 複数の PDF を渡す
 
-‫Gemini API יכול לעבד כמה מסמכי PDF (עד 1,000 דפים) בבקשה אחת, כל עוד הגודל המשולב של המסמכים וההנחיה הטקסטואלית לא חורג מחלון ההקשר של המודל.
+Gemini API は、ドキュメントとテキスト プロンプトの合計サイズがモデルのコンテキスト ウィンドウ内に収まる限り、1 回のリクエストで複数の PDF ドキュメント（最大 1, 000 ページ）を処理できます。
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 import io
 import httpx
@@ -516,7 +501,6 @@ client = genai.Client()
 doc_url_1 = "https://arxiv.org/pdf/2312.11805"
 doc_url_2 = "https://arxiv.org/pdf/2403.05530"
 
-# Retrieve and upload both PDFs using the File API
 doc_data_1 = io.BytesIO(httpx.get(doc_url_1).content)
 doc_data_2 = io.BytesIO(httpx.get(doc_url_2).content)
 
@@ -532,7 +516,7 @@ sample_pdf_2 = client.files.upload(
 prompt = "What is the difference between each of the main benchmarks between these two papers? Output these in a table."
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input=[
         {"type": "document", "uri": sample_pdf_1.uri, "mime_type": sample_pdf_1.mime_type},
         {"type": "document", "uri": sample_pdf_2.uri, "mime_type": sample_pdf_2.mime_type},
@@ -540,13 +524,12 @@ interaction = client.interactions.create(
     ]
 )
 
-print(interaction.steps[-1].content[0].text)
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({});
@@ -564,7 +547,6 @@ async function uploadRemotePDF(url, displayName) {
         },
     });
 
-    // Wait for the file to be processed.
     let getFile = await ai.files.get({ name: file.name });
     while (getFile.state === 'PROCESSING') {
         getFile = await ai.files.get({ name: file.name });
@@ -587,7 +569,7 @@ async function main() {
     const file2 = await uploadRemotePDF("https://arxiv.org/pdf/2403.05530", "PDF 2");
 
     const interaction = await ai.interactions.create({
-        model: 'gemini-3-flash-preview',
+        model: 'gemini-3.5-flash',
         input: [
             { type: "document", uri: file1.uri, mime_type: file1.mime_type },
             { type: "document", uri: file2.uri, mime_type: file2.mime_type },
@@ -595,7 +577,7 @@ async function main() {
         ],
     });
 
-    console.log(interaction.steps.at(-1).content[0].text);
+    console.log(interaction.output_text);
 }
 
 main();
@@ -668,7 +650,7 @@ file_uri_2=$(upload_pdf "${DOC_URL_2}" "${DISPLAY_NAME_2}")
 # Create payload JSON file for safety
 cat << EOF > payload_multi.json
 {
-  "model": "gemini-3-flash-preview",
+  "model": "gemini-3.5-flash",
   "input": [
     {"type": "document", "uri": "${file_uri_1}", "mime_type": "application/pdf"},
     {"type": "document", "uri": "${file_uri_2}", "mime_type": "application/pdf"},
@@ -679,7 +661,6 @@ EOF
 
 # Now create an interaction using both files
 # Using GEMINI_API_KEY instead of GOOGLE_API_KEY
-# Specifies the API revision to avoid breaking changes when they become default
 curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
@@ -698,49 +679,50 @@ rm "file_info_${DISPLAY_NAME_1}.json"
 rm "file_info_${DISPLAY_NAME_2}.json"
 ```
 
-## פרטים טכניים
+## 詳細な技術情報
 
-‫Gemini תומך בקובצי PDF בגודל של עד 50MB או עד 1,000 עמודים. המגבלה הזו חלה על נתונים מוטבעים וגם על העלאות באמצעות Files API. כל דף במסמך שווה ל-258 טוקנים.
+Gemini は、最大 50 MB または 1,000 ページの PDF ファイルをサポートしています。この上限は、インライン データと Files API のアップロードの両方に適用されます。各ドキュメント ページは 258 個のトークンに相当します。
 
-אין מגבלות ספציפיות על מספר הפיקסלים במסמך, מלבד [חלון ההקשר](https://ai.google.dev/gemini-api/docs/long-context?hl=he) של המודל. עם זאת, דפים גדולים יותר מצטמצמים לרזולוציה מקסימלית של 3,072x3,072 תוך שמירה על יחס הגובה-רוחב המקורי שלהם, ודפים קטנים יותר מוגדלים לרזולוציה של 768x768 פיקסלים. אין הפחתה בעלויות של דפים בגדלים קטנים יותר, מלבד רוחב פס, או שיפור בביצועים של דפים ברזולוציה גבוהה יותר.
+[モデルのコンテキスト ウィンドウ以外に、ドキュメント内のピクセル数に具体的な制限はありませんが、大きなページは元のアスペクト比を維持したまま、最大解像度 3, 072 x 3, 072 に縮小され、小さなページは 768 x 768 ピクセルに拡大されます。](https://ai.google.dev/gemini-api/docs/long-context?hl=ja)帯域幅以外の低サイズ ページでのコスト削減や、高解像度ページでのパフォーマンスの向上はありません。
 
-### המודלים של Gemini 3
+### Gemini 3 モデル
 
-‫Gemini 3 מציג שליטה מפורטת בעיבוד של ראייה מולטי-מודאלית באמצעות הפרמטר `media_resolution`. מעכשיו אפשר להגדיר את הרזולוציה לערך נמוך, בינוני או גבוה לכל קטע מדיה בנפרד. בעקבות התוספת הזו, העיבוד של מסמכי PDF עודכן:
+Gemini 3 では、`media_resolution` パラメータを使用して、マルチモーダル ビジョン処理をきめ細かく制御できます。メディア要素ごとに解像度を低、中、高に設定できるようになりました。この追加により、PDF ドキュメントの処理が更新されました。
 
-1. **הכללת טקסט מקורי:** טקסט שמוטמע באופן מקורי ב-PDF מחולץ ומועבר למודל.
-2. **דיווח על חיובים ועל טוקנים:**
-   - **לא תחויבו** על אסימונים שמקורם ב**טקסט מקורי** שחולץ מקובצי PDF.
-   - בקטע `usage_metadata` בתגובה מה-API, טוקנים שנוצרו מעיבוד של דפי PDF (כתמונות) נספרים עכשיו בשיטת `IMAGE`, ולא בשיטת `DOCUMENT` נפרדת כמו בכמה גרסאות קודמות.
+1. **ネイティブ テキストの挿入:** PDF にネイティブに埋め込まれたテキストが抽出され、モデルに提供されます。
+2. **請求とトークンのレポート:**
+   - PDF の抽出された**ネイティブ テキスト** から生成されたトークンは**課金されません** 。
+   - API レスポンスの `usage_metadata` セクションで、PDF ページ（画像として）の処理から生成されたトークンは、以前のバージョンの一部とは異なり、個別の `DOCUMENT` モダリティではなく、`IMAGE` モダリティでカウントされるようになりました。
 
-### סוגי מסמכים
+### ドキュメント タイプ
 
-מבחינה טכנית, אפשר להעביר סוגי MIME אחרים לניתוח מסמכים, כמו TXT,‏ Markdown,‏ HTML,‏ XML וכו'. עם זאת, ***הניתוח של מסמכים מתבצע בצורה משמעותית רק בקובצי PDF***. סוגים אחרים יחולצו כטקסט בלבד, והמודל לא יוכל לפרש את מה שרואים בעיבוד של הקבצים האלה. כל הפרטים הספציפיים לגבי סוג הקובץ, כמו תרשימים, דיאגרמות, תגי HTML, עיצוב Markdown וכו', יאבדו.
+技術的には、TXT、Markdown、HTML、XML など、ドキュメント理解のための他の MIME タイプを渡すことができます。ただし、ドキュメント ビジョンは**PDF のみを意味のある方法で理解します** 。他のタイプはプレーン テキストとして抽出され、モデルはこれらのファイルのレンダリングで表示される内容を解釈できません。グラフ、図、HTML タグ、Markdown の書式設定など、ファイルタイプ固有の情報は失われます。
 
-מידע על שיטות אחרות להזנת קבצים זמין במדריך בנושא [שיטות להזנת קבצים](https://ai.google.dev/gemini-api/docs/interactions/file-input-methods?hl=he).
+他のファイル入力方法については、
+[ファイル入力方法](https://ai.google.dev/gemini-api/docs/interactions/file-input-methods?hl=ja)ガイドをご覧ください。
 
-### שיטות מומלצות
+### ベスト プラクティス
 
-לקבלת התוצאות הטובות ביותר:
+最良の結果を得るために、次のことを行います。
 
-- לפני ההעלאה, מסובבים את הדפים לכיוון הנכון.
-- אל תשתמשו בדפים מטושטשים.
-- אם משתמשים בדף יחיד, צריך להציב את הנחיית הטקסט אחרי הדף.
+- アップロードする前に、ページを正しい向きに回転させます。
+- ぼやけたページは使用しないでください。
+- 単一のページを使用する場合は、ページの後にテキスト プロンプトを配置します。
 
-## המאמרים הבאים
+## 次のステップ
 
-מידע נוסף זמין במקורות המידע הבאים:
+詳細については、次のリソースをご覧ください。
 
-- [אסטרטגיות לכתיבת הנחיות עם קבצים](https://ai.google.dev/gemini-api/docs/interactions/files?hl=he#prompt-guide): Gemini API תומך בכתיבת הנחיות עם נתוני טקסט, תמונה, אודיו ווידאו, שנקראות גם כתיבת הנחיות מולטי-מודאליות.
-- [הוראות למערכת](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=he#system-instructions):
-  הוראות למערכת מאפשרות לכוון את התנהגות המודל בהתאם לצרכים הספציפיים ולתרחישי השימוש שלכם.
+- [ファイルのプロンプト戦略](https://ai.google.dev/gemini-api/docs/interactions/files?hl=ja#prompt-guide): Gemini API は、テキスト、画像、音声、動画データを使用したプロンプト（マルチモーダル プロンプトとも呼ばれます）をサポートしています。
+- [システム指示](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=ja#system-instructions):
+  システム指示を使用すると、特定のニーズやユースケースに基づいてモデルの動作を制御できます。
 
-שליחת משוב
+フィードバックを送信
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-עדכון אחרון: 2026-05-12 (שעון UTC).
+最終更新日 2026-05-19 UTC。
 
-רוצה לתת לנו משוב?
+ご意見をお聞かせください
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-05-12 (שעון UTC)."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-05-19 UTC。"],[],[]]

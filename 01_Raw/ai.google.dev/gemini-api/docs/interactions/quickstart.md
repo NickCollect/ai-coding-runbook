@@ -1,39 +1,57 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/quickstart?hl=tr
-fetched_at: 2026-05-18T05:18:54.753220+00:00
-title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions/quickstart?hl=it
+fetched_at: 2026-05-25T05:26:09.654405+00:00
+title: "Guida rapida all'API Gemini \u00a0|\u00a0 Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Geri bildirim gönderin
+Invia feedback
 
-# Gemini API hızlı başlangıç kılavuzu
+# Guida rapida all'API Gemini
 
-Bu hızlı başlangıç kılavuzunda, [kitaplıklarımızı](https://ai.google.dev/gemini-api/docs/libraries?hl=tr) nasıl yükleyeceğiniz ve Etkileşimler API'sini kullanarak ilk Gemini API isteğinizi nasıl yapacağınız gösterilmektedir.
+Questa guida rapida mostra come installare le nostre [librerie](https://ai.google.dev/gemini-api/docs/libraries?hl=it)
+ed effettuare la prima richiesta, trasmettere in streaming le risposte, creare conversazioni multi-turno
+e utilizzare gli strumenti.
 
-## Başlamadan önce
+Esistono due modi per inviare una richiesta all'API Gemini:
 
-Gemini API'yi kullanmak için isteklerinizin kimliğini doğrulayacak, güvenlik sınırlarını uygulayacak ve hesabınızdaki kullanımı izleyecek bir API anahtarına sahip olmanız gerekir.
+- ***(Consigliato)*** L'[API Interactions](https://ai.google.dev/api/interactions-api?hl=it) è una nuova
+  primitiva con supporto integrato per l'utilizzo di strumenti in più passaggi, l'orchestrazione e
+  flussi di ragionamento complessi tramite passaggi di esecuzione digitati. In futuro, i nuovi
+  modelli oltre alla famiglia principale di base, insieme a nuove capacità agentiche
+  e strumenti, verranno lanciati esclusivamente sull'API Interactions.
+- [`generateContent`](https://ai.google.dev/gemini-api/docs/quickstart?hl=it) fornisce un modo per generare
+  una risposta stateless da un modello. Sebbene consigliamo di utilizzare l'API
+  Interactions, `generateContent` è completamente supportata.
 
-Başlamak için AI Studio'da ücretsiz olarak bir tane oluşturun:
+Questa versione della guida rapida utilizza l'API Interactions per inviare una richiesta all'API Gemini.
 
-[Gemini API anahtarı oluşturma](https://aistudio.google.com/app/apikey?hl=tr)
+## Prima di iniziare
 
-## Google GenAI SDK'yı yükleme
+Per utilizzare l'API Gemini, devi disporre di una chiave API per autenticare le richieste, applicare limiti di sicurezza e monitorare l'utilizzo del tuo account.
+
+Per iniziare, creane uno su AI Studio senza costi:
+
+[Crea una chiave API Gemini](https://aistudio.google.com/app/apikey?hl=it)
+
+## Installa l'SDK Google GenAI
 
 ### Python
 
-[Python 3.9+](https://www.python.org/downloads/) kullanarak aşağıdaki [pip komutunu](https://packaging.python.org/en/latest/tutorials/installing-packages/) kullanarak [`google-genai` paketini](https://pypi.org/project/google-genai/) yükleyin:
+Utilizzando [Python 3.9+](https://www.python.org/downloads/), installa il
+[pacchetto `google-genai`](https://pypi.org/project/google-genai/)
+utilizzando il seguente
+[comando pip](https://packaging.python.org/en/latest/tutorials/installing-packages/):
 
 ```
 pip install -q -U google-genai
@@ -41,67 +59,105 @@ pip install -q -U google-genai
 
 ### JavaScript
 
-[Node.js v18+](https://nodejs.org/en/download/package-manager)'ı kullanarak aşağıdaki [npm komutunu](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) kullanarak [TypeScript ve JavaScript için Google Gen AI SDK](https://www.npmjs.com/package/@google/genai)'yı yükleyin:
+Utilizzando [Node.js v18+](https://nodejs.org/en/download/package-manager),
+installa
+[SDK Google Gen AI per TypeScript e JavaScript](https://www.npmjs.com/package/@google/genai)
+utilizzando il seguente
+[comando npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm):
 
 ```
 npm install @google/genai
 ```
 
-## İlk isteğinizi gönderme
+## Genera testo
 
-Gemini API'ye istek göndermek için kullanabileceğiniz iki yöntem vardır:
-
-- ***(Önerilen)*** [Interactions API](https://ai.google.dev/api/interactions-api?hl=tr), çok adımlı araç kullanımı, düzenleme ve türü belirlenmiş yürütme adımları aracılığıyla karmaşık akıl yürütme akışları için yerel destek sunan yeni bir temeldir. Bundan sonra, ana mainline ailesinin ötesindeki yeni modellerin yanı sıra yeni ajan tabanlı yetenekler ve araçları yalnızca Interactions API'de kullanıma sunulacak.
-- [`generateContent`](https://ai.google.dev/api/generate-content?hl=tr#method:-models.generatecontent), modelden basit ve durum bilgisiz bir yanıt oluşturmanın bir yolunu sunar. Etkileşimler API'sini kullanmanızı önersek de `generateContent` tamamen desteklenir.
-
-Bu örnekte, Gemini 3 Flash modelini kullanarak Gemini API'ye istek göndermek için Etkileşimler API'si kullanılmaktadır.
-
-[API anahtarınızı](https://ai.google.dev/gemini-api/docs/interactions/api-key?hl=tr#set-api-env-var) `GEMINI_API_KEY` ortam değişkeni olarak ayarlarsanız [Gemini API kitaplıkları](https://ai.google.dev/gemini-api/docs/libraries?hl=tr) kullanılırken istemci tarafından otomatik olarak alınır.
-Aksi takdirde, istemciyi başlatırken [API anahtarınızı bağımsız değişken olarak iletmeniz](https://ai.google.dev/gemini-api/docs/interactions/api-key?hl=tr#provide-api-key-explicitly) gerekir.
-
-Gemini API belgelerindeki tüm kod örneklerinde `GEMINI_API_KEY` ortam değişkenini ayarladığınız varsayılır.
+Utilizza il metodo `interactions.create` per
+[generare una risposta di testo](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=it).
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 
-# The client gets the API key from the environment variable `GEMINI_API_KEY`.
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview", 
+    model="gemini-3.5-flash",
     input="Explain how AI works in a few words"
 )
 
-# Print the model's text response
-for step in interaction.steps:
-    if step.type == "model_output":
-        for content_block in step.content:
-            if content_block.type == "text":
-                print(content_block.text)
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
-// The client gets the API key from the environment variable `GEMINI_API_KEY`.
 const ai = new GoogleGenAI({});
 
 async function main() {
   const interaction = await ai.interactions.create({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     input: "Explain how AI works in a few words",
   });
 
-  const modelStep = interaction.steps.find(s => s.type === 'model_output');
-  if (modelStep) {
-    for (const contentBlock of modelStep.content) {
-      if (contentBlock.type === 'text') console.log(contentBlock.text);
+  console.log(interaction.output_text);
+}
+
+main();
+```
+
+### REST
+
+```
+curl -X POST \
+  "https://generativelanguage.googleapis.com/v1beta/interactions" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -H "Api-Revision: 2026-05-20" \
+  -d '{
+    "model": "gemini-3.5-flash",
+    "input": "Explain how AI works in a few words"
+  }'
+```
+
+## Risposte dinamiche
+
+Per impostazione predefinita, il modello restituisce una risposta solo dopo il completamento dell'intero processo di generazione. Per un'esperienza più rapida e interattiva, puoi
+[trasmettere in streaming i blocchi della risposta](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=it) man mano che
+vengono generati.
+
+### Python
+
+```
+stream = client.interactions.create(
+    model="gemini-3.5-flash",
+    input="Explain how AI works in detail",
+    stream=True
+)
+
+for event in stream:
+    if event.event_type == "step.delta":
+        if event.delta.type == "text":
+            print(event.delta.text, end="", flush=True)
+```
+
+### JavaScript
+
+```
+async function main() {
+  const stream = await ai.interactions.create({
+    model: "gemini-3.5-flash",
+    input: "Explain how AI works in detail",
+    stream: true,
+  });
+
+  for await (const event of stream) {
+    if (event.event_type === "step.delta") {
+      if (event.delta.type === "text") {
+        process.stdout.write(event.delta.text);
+      }
     }
   }
 }
@@ -112,41 +168,341 @@ main();
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+# Use alt=sse for streaming
+curl -X POST \
+  "https://generativelanguage.googleapis.com/v1beta/interactions?alt=sse" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -H "Api-Revision: 2026-05-20" \
+  --no-buffer \
   -d '{
-    "model": "gemini-3-flash-preview",
-    "input": "Explain how AI works in a few words"
+    "model": "gemini-3.5-flash",
+    "input": "Explain how AI works in detail",
+    "stream": true
   }'
 ```
 
-### Durumsuz mod
+## Conversazioni a più turni
 
-Varsayılan olarak, `previous_interaction_id` kullanırken Interactions API, görüşme durumunu sunucu tarafında yönetir. Konuşma geçmişini istemci tarafında kendiniz yönetmeyi tercih ederseniz `store=false` değerini ayarlayıp sonraki isteklerin `input` alanında birikmiş adımları ileterek durum bilgisiz modu etkinleştirebilirsiniz.
+L'API Gemini supporta la creazione di
+[conversazioni multi-turno](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=it#multi-turn-conversations).
+Basta passare il valore `id` restituito dall'interazione precedente come parametro `previous_interaction_id` e il server gestisce automaticamente la cronologia delle conversazioni.
 
-Ayrıntılı bilgi ve tam çok turlu durum bilgisi içermeyen örnekler için [Metin oluşturma kılavuzu](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=tr#stateless-conversations)'na bakın.
+### Python
 
-## Sırada ne var?
+```
+interaction1 = client.interactions.create(
+    model="gemini-3.5-flash",
+    input="I have 2 dogs in my house."
+)
+print("Response 1:", interaction1.output_text)
 
-İlk API isteğinizi gönderdiğinize göre, Gemini'ın nasıl çalıştığını gösteren aşağıdaki kılavuzları inceleyebilirsiniz:
+interaction2 = client.interactions.create(
+    model="gemini-3.5-flash",
+    input="How many paws are in my house?",
+    previous_interaction_id=interaction1.id
+)
+print("Response 2:", interaction2.output_text)
+```
 
-- [Metin oluşturma](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=tr)
-- [Görüntü üretme](https://ai.google.dev/gemini-api/docs/interactions/image-generation?hl=tr)
-- [Görüntü anlama](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=tr)
-- [Düşünme](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=tr) (Thinking)
-- [İşlev çağırma](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=tr)
-- [Uzun bağlam](https://ai.google.dev/gemini-api/docs/long-context?hl=tr)
-- [Yerleştirmeler](https://ai.google.dev/gemini-api/docs/embeddings?hl=tr)
+### JavaScript
 
-Geri bildirim gönderin
+```
+async function main() {
+  const interaction1 = await ai.interactions.create({
+    model: "gemini-3-flash-preview",
+    input: "I have 2 dogs in my house.",
+  });
+  console.log("Response 1:", interaction1.output_text);
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+  const interaction2 = await ai.interactions.create({
+    model: "gemini-3-flash-preview",
+    input: "How many paws are in my house?",
+    previous_interaction_id: interaction1.id,
+  });
+  console.log("Response 2:", interaction2.output_text);
+}
 
-Son güncelleme tarihi: 2026-05-12 UTC.
+main();
+```
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+### REST
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-05-12 UTC."],[],[]]
+```
+# Turn 1: Start the conversation
+RESPONSE1=$(curl -s -X POST \
+  "https://generativelanguage.googleapis.com/v1beta/interactions" \
+  -H "Api-Revision: 2026-05-20" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "model": "gemini-3-flash-preview",
+    "input": "I have 2 dogs in my house."
+  }')
+
+# Extract the interaction ID
+INTERACTION_ID=$(echo "$RESPONSE1" | jq -r '.id')
+
+# Turn 2: Continue the conversation
+curl -X POST \
+  "https://generativelanguage.googleapis.com/v1beta/interactions" \
+  -H "Api-Revision: 2026-05-20" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d "{
+    \"model\": \"gemini-3-flash-preview\",
+    \"input\": \"How many paws are in my house?\",
+    \"previous_interaction_id\": \"$INTERACTION_ID\"
+  }"
+```
+
+## Utilizzare gli strumenti
+
+Estendi le funzionalità del modello
+[basando le risposte sulla Ricerca Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=it)
+per accedere a contenuti web in tempo reale. Il modello decide automaticamente quando
+eseguire ricerche, esegue query e sintetizza una risposta con citazioni.
+
+Il seguente esempio mostra come attivare la Ricerca Google:
+
+### Python
+
+```
+interaction = client.interactions.create(
+    model="gemini-3-flash-preview",
+    input="Who won the euro 2024?",
+    tools=[{"type": "google_search"}]
+)
+
+print(interaction.output_text)
+
+for step in interaction.steps:
+    if step.type == "model_output":
+        for content_block in step.content:
+            if content_block.type == "text" and content_block.annotations:
+                print("\nCitations:")
+                for annotation in content_block.annotations:
+                    if annotation.type == "url_citation":
+                        print(f"  - [{annotation.title}]({annotation.url})")
+```
+
+### JavaScript
+
+```
+async function main() {
+  const interaction = await ai.interactions.create({
+    model: "gemini-3-flash-preview",
+    input: "Who won the euro 2024?",
+    tools: [{ type: "google_search" }]
+  });
+
+  console.log(interaction.output_text);
+
+  for (const step of interaction.steps) {
+    if (step.type === 'model_output') {
+      for (const contentBlock of step.content) {
+        if (contentBlock.type === 'text' && contentBlock.annotations) {
+          console.log("\nCitations:");
+          for (const annotation of contentBlock.annotations) {
+            if (annotation.type === 'url_citation') {
+              console.log(`  - [${annotation.title}](${annotation.url})`);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+main();
+```
+
+### REST
+
+```
+curl -X POST \
+  "https://generativelanguage.googleapis.com/v1beta/interactions" \
+  -H "Api-Revision: 2026-05-20" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gemini-3-flash-preview",
+    "input": "Who won the euro 2024?",
+    "tools": [{"type": "google_search"}]
+  }'
+```
+
+L'API Gemini supporta anche altri strumenti integrati:
+
+- **[Esecuzione del codice](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=it)**:
+  Consente al modello di scrivere ed eseguire codice Python per risolvere problemi matematici complessi.
+- **[Contesto URL](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=it)**: consente di
+  basare le risposte su URL di pagine web specifici che fornisci.
+- **[Ricerca di file](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=it)**: ti consente di
+  caricare file e basare le risposte sui loro contenuti utilizzando la ricerca semantica.
+- **[Google Maps](https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=it)**: ti consente di
+  basare le risposte sui dati sulla posizione e cercare luoghi, indicazioni e
+  mappe.
+- **[Utilizzo del computer](https://ai.google.dev/gemini-api/docs/interactions/computer-use?hl=it)**: consente al modello di interagire con uno schermo, una tastiera e un mouse virtuali per eseguire attività.
+
+## Chiamare funzioni personalizzate
+
+Utilizza le **[chiamate di funzione](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=it)**
+per connettere i modelli alle tue API e ai tuoi strumenti personalizzati. Il modello determina quando chiamare la funzione e restituisce un passaggio `function_call` con gli argomenti da eseguire per l'applicazione.
+
+Questo esempio dichiara una funzione di temperatura simulata e verifica se il modello
+vuole chiamarla.
+
+### Python
+
+```
+import json
+
+weather_function = {
+    "type": "function",
+    "name": "get_current_temperature",
+    "description": "Gets the current temperature for a given location.",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "location": {
+                "type": "string",
+                "description": "The city name, e.g. San Francisco",
+            },
+        },
+        "required": ["location"],
+    },
+}
+
+interaction = client.interactions.create(
+    model="gemini-3-flash-preview",
+    input="What's the temperature in London?",
+    tools=[weather_function],
+)
+
+fc_step = None
+for step in interaction.steps:
+    if step.type == "function_call":
+        fc_step = step
+        break
+
+if fc_step:
+    print(f"Model requested function: {fc_step.name} with args {fc_step.arguments}")
+
+    mock_result = {"temperature": "15C", "condition": "Cloudy"}
+
+    final_interaction = client.interactions.create(
+        model="gemini-3-flash-preview",
+        input=[
+            {
+                "type": "function_result",
+                "name": fc_step.name,
+                "call_id": fc_step.id,
+                "result": [{"type": "text", "text": json.dumps(mock_result)}],
+            }
+        ],
+        tools=[weather_function],
+        previous_interaction_id=interaction.id,
+    )
+    print("Final Response:", final_interaction.output_text)
+```
+
+### JavaScript
+
+```
+async function main() {
+  const weatherFunction = {
+    type: 'function',
+    name: 'get_current_temperature',
+    description: 'Gets the current temperature for a given location.',
+    parameters: {
+      type: 'object',
+      properties: {
+        location: {
+          type: 'string',
+          description: 'The city name, e.g. San Francisco',
+        },
+      },
+      required: ['location'],
+    },
+  };
+
+  const interaction = await ai.interactions.create({
+    model: 'gemini-3-flash-preview',
+    input: "What's the temperature in London?",
+    tools: [weatherFunction],
+  });
+
+  const fcStep = interaction.steps.find(s => s.type === 'function_call');
+  if (fcStep) {
+    console.log(`Model requested function: ${fcStep.name}`);
+
+    const mockResult = { temperature: "15C", condition: "Cloudy" };
+
+    const finalInteraction = await ai.interactions.create({
+      model: 'gemini-3-flash-preview',
+      input: [{
+        type: 'function_result',
+        name: fcStep.name,
+        call_id: fcStep.id,
+        result: [{ type: 'text', text: JSON.stringify(mockResult) }]
+      }],
+      tools: [weatherFunction],
+      previous_interaction_id: interaction.id,
+    });
+
+    console.log("Final Response:", finalInteraction.output_text);
+  }
+}
+
+main();
+```
+
+### REST
+
+```
+curl -X POST \
+  "https://generativelanguage.googleapis.com/v1beta/interactions" \
+  -H "Api-Revision: 2026-05-20" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gemini-3-flash-preview",
+    "input": "What'\''s the temperature in London?",
+    "tools": [{
+      "type": "function",
+      "name": "get_current_temperature",
+      "description": "Gets the current temperature for a given location.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "location": {"type": "string", "description": "The city name"}
+        },
+        "required": ["location"]
+      }
+    }]
+  }'
+```
+
+## Passaggi successivi
+
+Ora che hai iniziato a utilizzare l'API Gemini, esplora le seguenti guide per creare applicazioni più avanzate:
+
+- [Generazione di testo](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=it)
+- [Generazione di immagini](https://ai.google.dev/gemini-api/docs/interactions/image-generation?hl=it)
+- [Comprensione delle immagini](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=it)
+- [Pensiero](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=it)
+- [Chiamata di funzione](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=it)
+- [Grounding con la Ricerca Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=it)
+- [Contesto lungo](https://ai.google.dev/gemini-api/docs/long-context?hl=it)
+- [Incorporamenti](https://ai.google.dev/gemini-api/docs/embeddings?hl=it)
+
+Invia feedback
+
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+
+Ultimo aggiornamento 2026-05-19 UTC.
+
+Vuoi dirci altro?
+
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-19 UTC."],[],[]]

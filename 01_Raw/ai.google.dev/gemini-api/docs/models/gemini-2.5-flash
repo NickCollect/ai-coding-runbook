@@ -1,46 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=it
-fetched_at: 2026-05-18T05:11:48.241098+00:00
-title: "Gemini 2.5 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=de
+fetched_at: 2026-05-25T05:25:35.776863+00:00
+title: "Gemini\u00a02.5 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Invia feedback
+Feedback geben
 
-# Gemini 2.5 Flash
+# Gemini 2.5 Flash
 
-Il nostro miglior modello in termini di rapporto prezzo/prestazioni, che offre funzionalità
-complete. 2.5 Flash è ideale per l'elaborazione su larga scala, la bassa latenza, le attività ad alto volume che richiedono ragionamento e i casi d'uso agentici.
+Unser bestes Modell in Bezug auf das Preis-Leistungs-Verhältnis mit umfassenden Funktionen. Gemini 2.5 Flash eignet sich am besten für die Verarbeitung in großem Maßstab, Aufgaben mit niedriger Latenz und hohem Volumen, die Denkprozesse erfordern, sowie für Agent-Anwendungsfälle.
 
-[Prova in Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash&hl=it)
+[In Google AI Studio testen](https://aistudio.google.com?model=gemini-2.5-flash&hl=de)
 
 ## gemini-2.5-flash
 
-| Proprietà | Descrizione |
+| Attribut | Beschreibung |
 | --- | --- |
-| Codice modello id\_card | `gemini-2.5-flash` |
-| saveTipi di dati supportati | **Input**  Testo, immagini, video, audio  **Output**  Testo |
-| token\_autoLimiti dei token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=it) | **Limite di token di input**  1.048.576  **Limite di token di output**  65.536 |
-| handymanFunzionalità | **Generazione di audio**  Non supportato  **API batch**  Supportato  **Memorizzazione nella cache**  Supportato  **Esecuzione di codice**  Supportato  **Ricerca file**  Supportato  **Inferenza flessibile**  Supportato  **Chiamata di funzione**  Supportato  **Grounding con Google Maps**  Supportato  **Generazione di immagini**  Non supportato  **API Live**  Non supportato  **Inferenza della priorità**  Supportato  **Fondatezza della Ricerca**  Supportato  **Output strutturati**  Supportato  **Ragionamento**  Supportato  **Contesto URL**  Supportato |
-| Versioni 123 | Per ulteriori dettagli, leggi i [pattern delle versioni del modello](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it#model-versions).  - Stabile: `gemini-2.5-flash` - Arresto: [`gemini-2.5-flash-preview-09-2025`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-09-2025?hl=it) |
-| calendar\_monthUltimo aggiornamento | Giugno 2025 |
-| cognition\_2Knowledge cutoff | Gennaio 2025 |
+| id\_cardModellcode | `gemini-2.5-flash` |
+| saveUnterstützte Datentypen | **Eingaben**  Text, Bilder, Video, Audio  **Ausgabe**  Text |
+| token\_autoToken limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=de) | **Limit für Eingabetokens**  1.048.576  **Limit für Ausgabetokens**  65.536 |
+| handymanFunktionen | **Audioerstellung**  Nicht unterstützt  **Batch API**  Unterstützt  **Caching**  Unterstützt  **Codeausführung**  Unterstützt  **Dateisuche**  Unterstützt  **Flex-Inferenz**  Unterstützt  **Funktionsaufrufe**  Unterstützt  **Fundierung mit Google Maps**  Unterstützt  **Bildgenerierung**  Nicht unterstützt  **Live API**  Nicht unterstützt  **Inferenz mit Priorität**  Unterstützt  **Suchfundierung**  Unterstützt  **Strukturierte Ausgaben**  Unterstützt  **Denkprozesse**  Unterstützt  **URL-Kontext**  Unterstützt |
+| 123Versionen | Weitere Informationen finden Sie unter [Modellversionsmuster](https://ai.google.dev/gemini-api/docs/models/gemini?hl=de#model-versions).  - Stable: `gemini-2.5-flash` - Herunterfahren: [`gemini-2.5-flash-preview-09-2025`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-09-2025?hl=de) |
+| calendar\_monthLetztes Update | Juni 2025 |
+| cognition\_2Wissensstichtag | Januar 2025 |
 
-Invia feedback
+Feedback geben
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Ultimo aggiornamento 2026-04-29 UTC.
+Zuletzt aktualisiert: 2026-04-29 (UTC).
 
-Vuoi dirci altro?
+Haben Sie Feedback für uns?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-04-29 (UTC)."],[],[]]

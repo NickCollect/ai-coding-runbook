@@ -1,52 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=hi
-fetched_at: 2026-05-18T05:10:36.979897+00:00
-title: "Interactions API: \u092e\u093e\u0907\u0917\u094d\u0930\u0947\u0936\u0928 \u0917\u093e\u0907\u0921 \u092e\u0947\u0902 \u092c\u0921\u093c\u0947 \u092c\u0926\u0932\u093e\u0935 (\u092e\u0908 2026) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=es-419
+fetched_at: 2026-05-25T05:25:03.436485+00:00
+title: "API de Interactions: Gu\u00eda de migraci\u00f3n de cambios rotundos (mayo de 2026) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-सुझाव भेजें
+Enviar comentarios
 
-# Interactions API: माइग्रेशन गाइड में बड़े बदलाव (मई 2026)
+# API de Interactions: Guía de migración de cambios rotundos (mayo de 2026)
 
-Interactions API के `v1beta` में अहम बदलाव किए जा रहे हैं. इससे एपीआई के स्ट्रक्चर में बदलाव होगा. साथ ही, फ़्लाइट के दौरान स्टीयरिंग और टूल कॉल को एसिंक्रोनस तरीके से करने जैसी सुविधाएं मिलेंगी. इस पेज पर, किए जा रहे बदलावों के बारे में बताया गया है. साथ ही, माइग्रेट करने में आपकी मदद करने के लिए, कोड के पहले और बाद के उदाहरण दिए गए हैं. बदलावों की दो कैटगरी हैं:
+La API de `v1beta` Interactions presenta cambios rotundos que reestructuran la forma de la API para admitir capacidades futuras, como la dirección durante el vuelo y las llamadas a herramientas asíncronas. En esta página, se explica qué cambiará y se proporcionan ejemplos de código comparativos para ayudarte con la migración. Existen dos categorías de cambios:
 
-1. [**स्टेप स्कीमा**](#steps-schema): `outputs` कलेक्शन की जगह, नया `steps` कलेक्शन इस्तेमाल किया जाएगा. इससे हर इंटरैक्शन के लिए, स्ट्रक्चर्ड टाइमलाइन मिलेगी.
-2. [**आउटपुट फ़ॉर्मैट कॉन्फ़िगरेशन**](#output-format-config): नया पॉलीमॉर्फिक
-   `response_format` आउटपुट फ़ॉर्मैट के सभी कंट्रोल को एक साथ लाता है. साथ ही,
-   `response_mime_type` को हटाता है.
+1. [**Esquema de pasos**](#steps-schema): Un nuevo array `steps` reemplaza el array `outputs` y proporciona una línea de tiempo estructurada de cada turno de interacción.
+2. [**Configuración del formato de salida**](#output-format-config): Un nuevo `response_format` polimórfico consolida todos los controles de formato de salida y quita `response_mime_type`.
 
-अपने इंटिग्रेशन को अपडेट करने के लिए, [नए स्कीमा पर माइग्रेट करने का तरीका](#how-to-migrate) में दिए गए निर्देशों का पालन करें.
+Sigue los pasos que se indican en [Cómo migrar al esquema nuevo](#how-to-migrate) para actualizar tu integración.
 
-## मुख्य बदलाव: `outputs` की जगह `steps` का इस्तेमाल
+## Cambio principal: De `outputs` a `steps`
 
-नए स्कीमा में, `outputs` कलेक्शन की जगह `steps` कलेक्शन का इस्तेमाल किया जाएगा.
+El esquema nuevo reemplaza el array `outputs` por un array `steps`.
 
-- **लेगसी**: जवाबों में, फ़्लैट `outputs` कलेक्शन मिलता था. इसमें सिर्फ़ मॉडल से जनरेट किया गया कॉन्टेंट होता था.
-- **नया स्कीमा**: जवाबों में, `steps` कलेक्शन मिलता है. इसमें टाइप डिस्क्रिमिनेटर के साथ स्ट्रक्चर्ड स्टेप होते हैं.
+- **Versión heredada**: Las respuestas devolvían un array `outputs` simple que contenía solo el contenido generado por el modelo.
+- **Nuevo esquema**: Las respuestas devuelven un array `steps` que contiene pasos estructurados con discriminadores de tipo.
 
-`POST /interactions` से सिर्फ़ आउटपुट स्टेप मिलते हैं. `GET /interactions/{id}`
-से, पूरी स्टेप टाइमलाइन मिलती है. इसमें शुरुआती `user_input` स्टेप भी शामिल होता है.
+`POST /interactions` solo devuelve pasos de salida. `GET /interactions/{id}` devuelve el cronograma completo de pasos, incluido el paso inicial `user_input`.
 
-### सामान्य इनपुट/आउटपुट (यूनरी)
+### Entrada y salida básicas (unarias)
 
-#### पहले (लेगसी)
+#### Antes (heredado)
 
 ### Python
 
 ```
 # Request
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview", input="Tell me a joke."
+    model="gemini-3.5-flash", input="Tell me a joke."
 )
 
 # Response access
@@ -58,7 +55,7 @@ print(interaction.outputs[-1].text)
 ```
 // Request
 const interaction = await client.interactions.create({
-    model: 'gemini-3-flash-preview',
+    model: 'gemini-3.5-flash',
     input: 'Tell me a joke.'
 });
 
@@ -72,7 +69,7 @@ console.log(interaction.outputs[-1].text);
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "input": "Tell me a joke."
   }'
 ```
@@ -91,18 +88,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### बाद में (नया स्कीमा)
+#### Después (esquema nuevo)
 
 ### Python
 
 ```
 # Request
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview", input="Tell me a joke."
+    model="gemini-3.5-flash", input="Tell me a joke."
 )
 
-# Response access
-print(interaction.steps[-1].content[0].text)  # CHANGED: steps instead of outputs
+# Response access (Recommended sugar)
+print(interaction.output_text)
 ```
 
 ### JavaScript
@@ -110,13 +107,15 @@ print(interaction.steps[-1].content[0].text)  # CHANGED: steps instead of output
 ```
 // Request
 const interaction = await client.interactions.create({
-    model: 'gemini-3-flash-preview',
+    model: 'gemini-3.5-flash',
     input: 'Tell me a joke.'
 });
 
-// Response access
-console.log(interaction.steps.at(-1).content[0].text);
+// Response access (Recommended sugar)
+console.log(interaction.output_text);
 ```
+
+[sdk-convenience]: /gemini-api/docs/interactions#convenience-properties
 
 ### REST
 
@@ -126,7 +125,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "input": "Tell me a joke."
   }'
 ```
@@ -171,11 +170,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### फ़ंक्शन कॉल करना
+### Llamada a función
 
-अनुरोध का स्ट्रक्चर पहले जैसा ही रहेगा. हालांकि, जवाब में फ़्लैट `outputs` कॉन्टेंट की जगह, स्ट्रक्चर्ड स्टेप मिलेंगे.
+La estructura de la solicitud no cambia, pero la respuesta reemplaza el contenido `outputs` plano por pasos estructurados.
 
-#### पहले (लेगसी)
+#### Antes (heredado)
 
 ### Python
 
@@ -220,7 +219,7 @@ for (const output of interaction.outputs) {
 }
 ```
 
-#### बाद में (नया स्कीमा)
+#### Después (esquema nuevo)
 
 ### Python
 
@@ -268,11 +267,11 @@ for (const step of interaction.steps) {
 }
 ```
 
-### सर्वर-साइड टूल
+### Herramientas del servidor
 
-सर्वर-साइड टूल (जैसे, Google Search या Code Execution) अब `steps` कलेक्शन में, खास तरह के स्टेप देते हैं. लेगसी स्कीमा में, इन कार्रवाइयों को `outputs` कलेक्शन में खास तरह के कॉन्टेंट के तौर पर दिखाया जाता था. हालांकि, नए स्कीमा में इन्हें `steps` कलेक्शन में ले जाया जाता है. यहां दिए गए उदाहरणों में, Google Search का इस्तेमाल किया गया है.
+Las herramientas del lado del servidor (como la Búsqueda de Google o la ejecución de código) ahora generan tipos de pasos específicos en el array `steps`. Si bien el esquema heredado devolvía estas operaciones como tipos de contenido específicos dentro del array `outputs`, el esquema nuevo las mueve al array `steps`. En los siguientes ejemplos, se usa la Búsqueda de Google.
 
-#### पहले (लेगसी)
+#### Antes (heredado)
 
 ### Python
 
@@ -304,7 +303,7 @@ for (const output of interaction.outputs) {
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "input": "Who won the last Super Bowl?",
     "tools": [
       { "type": "google_search" }
@@ -346,7 +345,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### बाद में (नया स्कीमा)
+#### Después (esquema nuevo)
 
 ### Python
 
@@ -380,7 +379,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "input": "Who won the last Super Bowl?",
     "tools": [
       { "type": "google_search" }
@@ -430,11 +429,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### स्ट्रीमिंग
+### Transmisión
 
-स्ट्रीमिंग में, इवेंट के नए टाइप दिखते हैं:
+La transmisión expone nuevos tipos de eventos:
 
-#### इवेंट के नए टाइप
+#### Nuevos tipos de eventos
 
 - `interaction.created`
 - `interaction.completed`
@@ -444,32 +443,29 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 - `step.delta`
 - `step.stop`
 
-#### इवेंट के पुराने टाइप
+#### Tipos de eventos obsoletos
 
-ऊपर बताए गए नए इवेंट, इवेंट के इन पुराने टाइप की जगह इस्तेमाल किए जाएंगे:
+Los siguientes tipos de eventos heredados se reemplazan por los nuevos eventos mencionados anteriormente:
 
 - `interaction.start` → `interaction.created`
 - `content.start` → `step.start`
 - `content.delta` → `step.delta`
 - `content.stop` → `step.stop`
 - `interaction.complete` → `interaction.completed`
-- `interaction.status_update` → इसकी जगह `interaction.in_progress`, `interaction.requires_action` वगैरह का इस्तेमाल किया जाएगा.
+- `interaction.status_update` → reemplazado por `interaction.in_progress`, `interaction.requires_action`, etcétera
 
-**स्ट्रीमिंग फ़ंक्शन कॉल**: फ़ंक्शन कॉल करने के लिए स्ट्रीमिंग का इस्तेमाल करने पर,
-`step.start` इवेंट में फ़ंक्शन का नाम दिखता है. वहीं, `step.delta` इवेंट में
-आर्ग्युमेंट, JSON स्ट्रिंग के तौर पर स्ट्रीम होते हैं. इसके लिए, `arguments_delta` का इस्तेमाल किया जाता है. पूरे
-आर्ग्युमेंट पाने के लिए, आपको इन डेल्टा को इकट्ठा करना होगा. यह यूनरी कॉल से अलग है. यूनरी कॉल में, आपको फ़ंक्शन कॉल का पूरा ऑब्जेक्ट एक साथ मिलता है.
+**Llamadas a funciones de transmisión**: Cuando usas la transmisión con la llamada a función, el evento `step.start` entrega el nombre de la función y los eventos `step.delta` transmiten los argumentos como cadenas JSON parciales (con `arguments_delta`). Debes acumular estos deltas para obtener los argumentos completos. Esto difiere de las llamadas unarias, en las que recibes el objeto de llamada a función completo de una vez.
 
-#### उदाहरण
+#### Ejemplos
 
-##### पहले (लेगसी)
+##### Antes (heredado)
 
 ### Python
 
 ```
 # Legacy streaming used content.delta
 stream = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="Explain quantum entanglement in simple terms.",
     stream=True,
 )
@@ -485,7 +481,7 @@ for chunk in stream:
 ```
 // Legacy streaming used content.delta
 const stream = await client.interactions.create({
-    model: 'gemini-3-flash-preview',
+    model: 'gemini-3.5-flash',
     input: 'Explain quantum entanglement in simple terms.',
     stream: true,
 });
@@ -505,7 +501,7 @@ for await (const chunk of stream) {
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "input": "Explain quantum entanglement in simple terms.",
     "stream": true
   }'
@@ -529,14 +525,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 // data: {"id": "int_123", "status": "done", "usage": {"total_tokens": 42}}
 ```
 
-##### बाद में (नया स्कीमा)
+##### Después (esquema nuevo)
 
 ### Python
 
 ```
 # Consuming stream and handling new event types
 for event in client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="Tell me a story.",
     stream=True,
 ):
@@ -550,7 +546,7 @@ for event in client.interactions.create(
 ```
 // Consuming stream and handling new event types
 const stream = await client.interactions.create({
-    model: 'gemini-3-flash-preview',
+    model: 'gemini-3.5-flash',
     input: 'Tell me a story.',
     stream: true,
 });
@@ -573,7 +569,7 @@ for await (const event of stream) {
    -H "Accept: text/event-stream" \
    -H "Api-Revision: 2026-05-20" \
    -d '{
-     "model": "gemini-3-flash-preview",
+     "model": "gemini-3.5-flash",
      "input": "Tell me a story.",
      "stream": true
    }'
@@ -582,7 +578,7 @@ for await (const event of stream) {
 ```
  // Response (SSE Lines)
  // event: interaction.created
- // data: {"interaction": {"id": "int_xyz", "status": "in_progress", "object": "interaction", "model": "gemini-3-flash-preview"}, "event_type": "interaction.created"}
+ // data: {"interaction": {"id": "int_xyz", "status": "in_progress", "object": "interaction", "model": "gemini-3.5-flash"}, "event_type": "interaction.created"}
  //
  // event: interaction.in_progress
  // data: {"interaction_id": "int_xyz", "event_type": "interaction.in_progress"}
@@ -606,37 +602,35 @@ for await (const event of stream) {
  // data: {"type": "interaction.completed", "interaction": {"id": "int_xyz", "status": "completed", "usage": {"prompt_tokens": 10, "completion_tokens": 5, "total_tokens": 15}}} // NEW: Dedicated completion event
 ```
 
-### स्टेटलेस बातचीत का इतिहास
+### Historial de conversaciones sin estado
 
-अगर क्लाइंट साइड पर, बातचीत के इतिहास को मैन्युअल तरीके से मैनेज किया जाता है (स्टेटलेस इस्तेमाल का तरीका), तो आपको पिछले टर्न को एक साथ लाने के तरीके को अपडेट करना होगा.
+Si administras el historial de conversación de forma manual en el cliente (caso de uso sin estado), debes actualizar la forma en que encadenas los turnos anteriores.
 
-- **लेगसी**: डेवलपर अक्सर जवाबों से `outputs` कलेक्शन इकट्ठा करते थे और अगले टर्न में, उन्हें `input` फ़ील्ड में वापस भेजते थे.
-- **नया स्कीमा**: अब आपको जवाब से `steps` कलेक्शन इकट्ठा करना चाहिए और अगले अनुरोध के `input` फ़ील्ड में इसे पास करना चाहिए. साथ ही, अपने नए उपयोगकर्ता टर्न को `user_input` स्टेप के तौर पर जोड़ना चाहिए.
+- **Legado**: Los desarrolladores solían recopilar el array `outputs` de las respuestas y enviarlo de vuelta en el campo `input` en el siguiente turno.
+- **Esquema nuevo**: Ahora debes recopilar el array `steps` de la respuesta y pasarlo en el campo `input` de la próxima solicitud, agregando tu nuevo turno de usuario como un paso `user_input`.
 
-## आउटपुट फ़ॉर्मैट कॉन्फ़िगरेशन: `response_format` में बदलाव
+## Configuración del formato de resultado: cambios en `response_format`
 
-अपडेट किए गए एपीआई में, आउटपुट फ़ॉर्मैट के सभी कंट्रोल को एक ही पॉलीमॉर्फिक `response_format` फ़ील्ड में शामिल किया गया है. इससे, टॉप लेवल पर आउटपुट कॉन्फ़िगरेशन को केंद्रीकृत किया जाता है. साथ ही, `generation_config` को मॉडल के व्यवहार (जैसे, तापमान, top\_p, और थिंकिंग) पर फ़ोकस किया जाता है.
+La API actualizada consolida todos los controles de formato de salida en un campo `response_format` polimórfico unificado. Esto centraliza la configuración de salida en el nivel superior y mantiene `generation_config` enfocado en el comportamiento del modelo (como la temperatura, top\_p y el razonamiento).
 
-### मुख्य बदलाव
+### Cambios clave
 
-- **एपीआई, `response_mime_type` को हटाता है.** अब आपको `response_format` में, हर फ़ॉर्मैट की एंट्री के लिए MIME टाइप तय करना होगा.
-- **`response_format` अब पॉलीमॉर्फिक ऑब्जेक्ट (या कलेक्शन) है.** हर एंट्री में, `type` डिस्क्रिमिनेटर (`text`, `audio`, `image`) और टाइप के हिसाब से फ़ील्ड होते हैं. आउटपुट के कई तरीके का अनुरोध करने के लिए, फ़ॉर्मैट की एंट्री का कलेक्शन पास करें.
-- **`image_config`, `generation_config` से `response_format` में चला जाता है.**
-  अब आपको `"type": "image"` के साथ `response_format` एंट्री में, इमेज आउटपुट सेटिंग तय करनी होंगी. जैसे, `aspect_ratio` और `image_size`
-  .
+- **La API quita `response_mime_type`.** Ahora especificas el tipo de MIME por entrada de formato dentro de `response_format`.
+- **`response_format` ahora es un objeto (o array) polimórfico.** Cada entrada tiene un discriminador `type` (`text`, `audio`, `image`) y campos específicos del tipo. Para solicitar varias modalidades de salida, pasa un array de entradas de formato.
+- **`image_config` se mueve de `generation_config` a `response_format`.**
+  Ahora puedes especificar la configuración de salida de la imagen, como `aspect_ratio` y `image_size`, en una entrada `response_format` con `"type": "image"`.
 
-### स्ट्रक्चर्ड आउटपुट (JSON)
+### Resultados estructurados (JSON)
 
-नए स्कीमा में, `response_mime_type` फ़ील्ड को हटा दिया गया है. इसके बजाय, `response_format` ऑब्जेक्ट में, MIME टाइप और JSON स्कीमा तय करें
-`"type": "text"`.
+El esquema nuevo quita el campo `response_mime_type`. En su lugar, especifica el tipo de MIME y el esquema JSON dentro de un objeto `response_format` con `"type": "text"`.
 
-#### पहले (लेगसी)
+#### Antes (heredado)
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="Summarize this article.",
     response_mime_type="application/json",
     response_format={
@@ -654,7 +648,7 @@ print(interaction.outputs[-1].text)
 
 ```
 const interaction = await client.interactions.create({
-    model: 'gemini-3-flash-preview',
+    model: 'gemini-3.5-flash',
     input: 'Summarize this article.',
     response_mime_type: 'application/json',
     response_format: {
@@ -674,7 +668,7 @@ console.log(interaction.outputs[-1].text);
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "input": "Summarize this article.",
     "response_mime_type": "application/json",
     "response_format": {
@@ -686,13 +680,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### बाद में (नया स्कीमा)
+#### Después (esquema nuevo)
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="Summarize this article.",
     # response_mime_type is removed — specify mime_type inside response_format
     response_format={
@@ -707,14 +701,15 @@ interaction = client.interactions.create(
     },
 )
 
-print(interaction.steps[-1].content[0].text)
+# Print response
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
 const interaction = await client.interactions.create({
-    model: 'gemini-3-flash-preview',
+    model: 'gemini-3.5-flash',
     input: 'Summarize this article.',
     // response_mime_type is removed — specify mime_type inside response_format
     response_format: {
@@ -729,7 +724,8 @@ const interaction = await client.interactions.create({
     },
 });
 
-console.log(interaction.steps.at(-1).content[0].text);
+// Print response
+console.log(interaction.output_text);
 ```
 
 ### REST
@@ -740,7 +736,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "input": "Summarize this article.",
     "response_format": {
       "type": "text",
@@ -755,18 +751,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-### इमेज कॉन्फ़िगरेशन
+### Configuración de la imagen
 
-नए स्कीमा में, `generation_config` से `image_config` को हटा दिया गया है. अब आपको `response_format` एंट्री में, इमेज आउटपुट सेटिंग तय करनी होंगी
-`"type": "image"`.
+El nuevo esquema quita `image_config` de `generation_config`. Ahora especificas la configuración de salida de la imagen en una entrada `response_format` con `"type": "image"`.
 
-#### पहले (लेगसी)
+#### Antes (heredado)
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="Generate an image of a sunset over the ocean.",
     generation_config={
         "image_config": {
@@ -781,7 +776,7 @@ interaction = client.interactions.create(
 
 ```
 const interaction = await client.interactions.create({
-    model: 'gemini-3-flash-preview',
+    model: 'gemini-3.5-flash',
     input: 'Generate an image of a sunset over the ocean.',
     generation_config: {
         image_config: {
@@ -798,7 +793,7 @@ const interaction = await client.interactions.create({
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "input": "Generate an image of a sunset over the ocean.",
     "generation_config": {
       "image_config": {
@@ -809,13 +804,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### बाद में (नया स्कीमा)
+#### Después (esquema nuevo)
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="Generate an image of a sunset over the ocean.",
     # image_config is removed from generation_config — use response_format
     response_format={
@@ -831,7 +826,7 @@ interaction = client.interactions.create(
 
 ```
 const interaction = await client.interactions.create({
-    model: 'gemini-3-flash-preview',
+    model: 'gemini-3.5-flash',
     input: 'Generate an image of a sunset over the ocean.',
     // image_config is removed from generation_config — use response_format
     response_format: {
@@ -851,7 +846,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "input": "Generate an image of a sunset over the ocean.",
     "response_format": {
       "type": "image",
@@ -862,52 +857,50 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-आउटपुट के कई तरीके का अनुरोध करने के लिए (उदाहरण के लिए, टेक्स्ट और ऑडियो एक साथ), `response_format` में एक ऑब्जेक्ट के बजाय, फ़ॉर्मैट की एंट्री का कलेक्शन पास करें.
+Para solicitar varias modalidades de salida (por ejemplo, texto y audio juntos), pasa un array de entradas de formato a `response_format` en lugar de un solo objeto.
 
-## नए स्कीमा पर माइग्रेट करने का तरीका
+## Cómo migrar al nuevo esquema
 
-### एसडीके का इस्तेमाल करने वाले लोग
+### Usuarios del SDK
 
-एसडीके के नए वर्शन (Python ≥2.0.0, JavaScript ≥2.0.0) पर अपग्रेड करें. एसडीके, आपको नए स्कीमा में अपने-आप ऑप्ट-इन कर लेता है. इसके लिए, कोड में किसी तरह के बदलाव की ज़रूरत नहीं होती. आपको सिर्फ़ जवाब पढ़ने के तरीके को अपडेट करना होगा. इसके लिए, ऊपर दिए गए उदाहरण देखें. ध्यान दें कि एसडीके के इन वर्शन में, सिर्फ़ नया स्कीमा काम करता है. एसडीके के पुराने वर्शन (Python 1.x.x, JavaScript 1.x.x), **8 जून, 2026** को लेगसी स्कीमा हटाए जाने तक काम करते रहेंगे.
+Actualiza a la versión más reciente del SDK (Python ≥2.0.0, JavaScript ≥2.0.0). El SDK te habilita automáticamente para usar el nuevo esquema. No se necesitan cambios de código más allá de actualizar la forma en que lees las respuestas (consulta los ejemplos anteriores). Ten en cuenta que solo se admite el esquema nuevo en estas versiones del SDK. Las versiones anteriores del SDK (Python 1.x.x y JavaScript 1.x.x) seguirán funcionando hasta que se quite el esquema heredado el **8 de junio de 2026**.
 
-### REST API का इस्तेमाल करने वाले लोग
+### Usuarios de la API de REST
 
-नए स्कीमा में अभी ऑप्ट-इन करने के लिए, अपने अनुरोधों में `Api-Revision: 2026-05-20` हेडर जोड़ें. **26 मई** के बाद, नया स्कीमा सभी
-अनुरोधों के लिए डिफ़ॉल्ट स्कीमा बन जाएगा. **8 जून** तक, `Api-Revision: 2026-05-07`
-का इस्तेमाल करके, अस्थायी तौर पर ऑप्ट-आउट किया जा सकता है. इसके बाद, एपीआई, लेगसी स्कीमा को हमेशा के लिए हटा देगा.
+Agrega el encabezado `Api-Revision: 2026-05-20` a tus solicitudes para habilitar el nuevo esquema ahora. Después del **26 de mayo**, el esquema nuevo se convertirá en el predeterminado para todas las solicitudes. Puedes inhabilitar temporalmente la API con `Api-Revision: 2026-05-07` hasta el **8 de junio**, fecha en la que la API quitará de forma permanente el esquema heredado.
 
-### टाइमलाइन
+### Cronograma
 
-| तारीख | फ़ेज़ (चरण) | एसडीके का इस्तेमाल करने वाले लोग | REST API का इस्तेमाल करने वाले लोग |
+| Fecha | Fase | Usuarios del SDK | Usuarios de la API de REST |
 | --- | --- | --- | --- |
-| **7 मई** | ऑप्ट-इन करें | एसडीके का नया वर्शन उपलब्ध है (Python ≥2.0.0, JS ≥2.0.0). नए स्कीमा को अपने-आप पाने के लिए, अपग्रेड करें. | ऑप्ट-इन करने के लिए, `Api-Revision: 2026-05-20` हेडर जोड़ें. डिफ़ॉल्ट स्कीमा, लेगसी ही रहेगा. |
-| **26 मई** | डिफ़ॉल्ट स्कीमा में बदलाव | अगर पहले ही अपग्रेड कर लिया गया है, तो कुछ करने की ज़रूरत नहीं है. एसडीके के पुराने वर्शन (Python 1.x.x, JS 1.x.x) अब भी काम करेंगे. हालांकि, इनसे लेगसी स्कीमा के जवाब मिलेंगे. | नया स्कीमा अब डिफ़ॉल्ट स्कीमा है. ऑप्ट-आउट करने के लिए, `Api-Revision: 2026-05-07` हेडर भेजें. |
-| **8 जून** | सूर्यास्त | Interactions API कॉल के लिए, Python 1.x.x और JS 1.x.x एसडीके वर्शन काम नहीं करेंगे. | Interactions API के लिए, लेगसी स्कीमा हटा दिया गया है. `Api-Revision` हेडर को नज़रअंदाज़ किया जाएगा. |
+| **7 de mayo** | Habilitar | Hay una nueva versión del SDK disponible (Python ≥2.0.0, JS ≥2.0.0). Actualiza tu cuenta para obtener el nuevo esquema automáticamente. | Agrega el encabezado `Api-Revision: 2026-05-20` para habilitar la opción. El valor predeterminado sigue siendo el heredado. |
+| **26 de mayo** | Volteo predeterminado | No es necesario que realices ninguna acción si ya realizaste la actualización. Los SDKs anteriores (Python 1.x.x, JS 1.x.x) siguen funcionando, pero devuelven respuestas heredadas. | El nuevo esquema ahora es el predeterminado. Envía el encabezado `Api-Revision: 2026-05-07` para inhabilitar la función. |
+| **8 de junio** | Atardecer | Las versiones 1.x.x de los SDKs de Python y JS dejarán de funcionar para las llamadas a la API de Interactions. | Se quitó el esquema heredado de la API de Interactions. Se ignoró el encabezado `Api-Revision`. |
 
-## माइग्रेशन की चेकलिस्ट
+## Lista de tareas para la migración
 
-### स्टेप स्कीमा (`steps`)
+### Esquema de pasos (`steps`)
 
-- जवाब के कॉन्टेंट को `outputs` के बजाय `steps` कलेक्शन से पढ़ने के लिए, कोड अपडेट करें. [उदाहरण देखें](#basic-unary).
-- पक्का करें कि आपका कोड, `user_input` और `model_output` दोनों तरह के स्टेप को हैंडल करता हो. [उदाहरण देखें](#basic-unary).
-- (फ़ंक्शन कॉल करना) `steps` कलेक्शन में `function_call` स्टेप ढूंढने के लिए, कोड अपडेट करें. [उदाहरण देखें](#function-calling).
-- (सर्वर-साइड टूल) टूल के हिसाब से स्टेप (जैसे, `google_search_call`, `google_search_result`) को हैंडल करने के लिए, कोड अपडेट करें. [उदाहरण देखें](#server-side-tools).
-- (स्टेटलेस इतिहास) इतिहास को मैनेज करने के तरीके को अपडेट करें, ताकि अगले अनुरोध के `input` फ़ील्ड में `steps` कलेक्शन पास किया जा सके. [जानकारी देखें](#stateless-history).
-- (सिर्फ़ स्ट्रीमिंग) नए SSE इवेंट टाइप (`interaction.created`, `step.delta` वगैरह) सुनने के लिए, क्लाइंट को अपडेट करें. [उदाहरण देखें](#streaming).
+- Actualiza el código para leer el contenido de la respuesta del array `steps` en lugar de `outputs`. [Consulta ejemplos](#basic-unary).
+- Verifica que tu código controle los tipos de pasos `user_input` y `model_output`. [Consulta ejemplos](#basic-unary).
+- (Llamada a función) Actualiza el código para encontrar los pasos de `function_call` en el array `steps`. [Consulta ejemplos](#function-calling).
+- (Herramientas del servidor) Actualiza el código para controlar los pasos específicos de la herramienta (p.ej., `google_search_call`, `google_search_result`). [Consulta ejemplos](#server-side-tools).
+- (Historial sin estado) Actualiza la administración del historial para pasar el array `steps` en el campo `input` de la próxima solicitud. [Consulta los detalles](#stateless-history).
+- (Solo para transmisión) Actualiza el cliente para que escuche los nuevos tipos de eventos de SSE (`interaction.created`, `step.delta`, etc.). [Consulta ejemplos](#streaming).
 
-### आउटपुट फ़ॉर्मैट कॉन्फ़िगरेशन (`response_format`)
+### Configuración del formato de salida (`response_format`)
 
-- `response_mime_type` की जगह, `response_format` में `mime_type` फ़ील्ड का इस्तेमाल करें. [उदाहरण देखें](#structured-output).
-- अपने मौजूदा `response_format` JSON स्कीमा को `{"type": "text", "schema": ...}` ऑब्जेक्ट में रैप करें. [उदाहरण देखें](#structured-output).
-- (इमेज जनरेट करना) `image_config` को `generation_config` से हटाकर, `response_format` में `{"type": "image", ...}` एंट्री में ले जाएं. [उदाहरण देखें](#image-config).
-- (मल्टीमॉडल) आउटपुट के कई तरीके का अनुरोध करते समय, `response_format` को एक ऑब्जेक्ट से कलेक्शन में बदलें.
+- Reemplaza `response_mime_type` por un campo `mime_type` dentro de `response_format`. [Consulta ejemplos](#structured-output).
+- Encapsula tu esquema JSON `response_format` existente dentro de un objeto `{"type": "text", "schema": ...}`. [Consulta ejemplos](#structured-output).
+- (Generación de imágenes) Mueve `image_config` de `generation_config` a una entrada `{"type": "image", ...}` en `response_format`. [Consulta ejemplos](#image-config).
+- (Multimodal) Convierte `response_format` de un solo objeto a un array cuando se solicitan varias modalidades de salida.
 
-सुझाव भेजें
+Enviar comentarios
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-आखिरी बार 2026-05-12 (UTC) को अपडेट किया गया.
+Última actualización: 2026-05-19 (UTC)
 
-क्या आपको हमें और कुछ बताना है?
+¿Quieres brindar más información?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-05-12 (UTC) को अपडेट किया गया."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-05-19 (UTC)"],[],[]]

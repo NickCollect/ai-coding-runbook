@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-TW
-fetched_at: 2026-05-18T05:08:53.127040+00:00
+source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=ar
+fetched_at: 2026-05-25T05:19:56.747492+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-提供意見
+إرسال ملاحظات
 
-# 結合內建工具和函式呼叫
+# الجمع بين الأدوات المضمّنة وميزة "استدعاء الدوال"
 
-Gemini 支援在單一生成作業中，結合[內建工具](https://ai.google.dev/gemini-api/docs/tools?hl=zh-tw) (例如 `google_search`) 和[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw) (也稱為*自訂工具*)，方法是保留並公開工具呼叫的內容記錄。內建和自訂工具組合可支援複雜的代理功能工作流程，例如模型可先根據即時網路資料建立基準，再呼叫特定商業邏輯。
+يسمح Gemini بالجمع بين [الأدوات المضمّنة](https://ai.google.dev/gemini-api/docs/tools?hl=ar)، مثل `google_search`، وميزة [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar) (المعروفة أيضًا باسم *الأدوات المخصّصة*) في عملية إنشاء واحدة من خلال الاحتفاظ بسجلّ سياق استدعاءات الأدوات وعرضه. تسمح مجموعات الأدوات المضمّنة والمخصّصة بسير عمل معقّد ومستقل، حيث يمكن للطراز، على سبيل المثال، أن يستند إلى بيانات الويب في الوقت الفعلي قبل استدعاء منطق نشاطك التجاري المحدّد.
 
-以下範例會透過 `google_search` 和自訂函式 `getWeather`，啟用內建和自訂工具組合：
+في ما يلي مثال يوضّح كيفية تفعيل مجموعات الأدوات المضمّنة والمخصّصة باستخدام `google_search` ودالة مخصّصة `getWeather`:
 
 ### Python
 
@@ -47,7 +47,7 @@ getWeather = {
 
 # Turn 1: Initial request with Google Search (built-in) and getWeather (custom) tools enabled
 response = client.models.generate_content(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents="What is the northernmost city in the United States? What's the weather like there today?",
     config=types.GenerateContentConfig(
       tools=[
@@ -90,7 +90,7 @@ history = [
 ]
 
 response_2 = client.models.generate_content(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents=history,
     config=types.GenerateContentConfig(
       tools=[
@@ -133,7 +133,7 @@ const getWeather = {
 
 async function run() {
     const model = client.getGenerativeModel({
-        model: "gemini-3-flash-preview",
+        model: "gemini-3.5-flash",
     });
 
     const tools = [
@@ -203,7 +203,7 @@ async function run() {
 run();
 ```
 
-### Go
+### انتقال
 
 ```
 package main
@@ -241,7 +241,7 @@ func main() {
         },
     }
 
-    model := client.GenerativeModel("gemini-3-flash-preview")
+    model := client.GenerativeModel("gemini-3.5-flash")
     model.Tools = []*genai.Tool{
         {GoogleSearch: &genai.GoogleSearch{}}, // Built-in tool
         {FunctionDeclarations: []*genai.FunctionDeclaration{getWeather}}, // Custom tool
@@ -314,7 +314,7 @@ func main() {
 
 ```
 # Turn 1: Initial request with Google Search (built-in) and getWeather (custom) tools enabled
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
@@ -351,7 +351,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-f
 # The following request assumes you have captured candidates[0].content from Turn 1 response,
 # and extracted function_call.id for getWeather.
 # Replace FUNCTION_CALL_ID and insert candidate content from turn 1.
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
@@ -396,59 +396,69 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-f
 }'
 ```
 
-## 運作方式
+## آلية العمل
 
-Gemini 3 模型使用*工具脈絡循環*，可啟用內建和自訂工具組合。工具內容循環可保留及公開內建工具的內容，並在同一通話中逐輪與自訂工具共用。
+تستخدم طُرز Gemini 3 ميزة *تداول سياق الأداة* لتفعيل مجموعات الأدوات المضمّنة والمخصّصة. تتيح ميزة "تداول سياق الأداة" الاحتفاظ بسياق الأدوات المضمّنة وعرضه ومشاركته مع الأدوات المخصّصة في نفس الاستدعاء من دور إلى آخر.
 
-### 啟用工具組合
+### تفعيل ميزة "الجمع بين الأدوات"
 
-- 您必須將 `include_server_side_tool_invocations` 旗標設為 `true`，才能啟用工具情境流通。
-- 加入 [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw#function-declarations)，以及要使用的內建工具，即可觸發組合行為。
-  - 如果未加入 `function_declarations`，只要設定標記，工具環境流通仍會對內建工具生效。
+- يجب ضبط العلامة `include_server_side_tool_invocations` على `true` لتفعيل ميزة "تداول سياق الأداة".
+- يجب تضمين [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar#function-declarations)، بالإضافة إلى الأدوات المضمّنة التي تريد استخدامها، لتفعيل سلوك الجمع بين الأدوات.
+  - إذا لم يتم تضمين `function_declarations`، ستظل ميزة "تداول سياق الأداة" تعمل على الأدوات المضمّنة المضمّنة، طالما تم ضبط العلامة.
 
-### API 會傳回零件
+### الأجزاء التي تعرضها واجهة برمجة التطبيقات
 
-在單一回應中，API 會傳回內建工具呼叫的 `toolCall` 和 `toolResponse` 部分。如果是函式 (自訂工具) 呼叫，API 會傳回 `functionCall` 呼叫部分，使用者會在下一個回合中提供 `functionResponse` 部分。
+في ردّ واحد، تعرض واجهة برمجة التطبيقات الجزأين `toolCall` و`toolResponse` لاستدعاء الأداة المضمّنة. بالنسبة إلى استدعاء الدالة (الأداة المخصّصة)، تعرض واجهة برمجة التطبيقات جزء استدعاء `functionCall`، الذي يقدّم المستخدم له جزء `functionResponse` في الدور التالي.
 
-- `toolCall` 和 `toolResponse`：API 會傳回這些部分，以保留在伺服器端執行的工具內容，以及這些工具的執行結果，供下一個回合使用。
-- `functionCall` 和 `functionResponse`：API 會將函式呼叫傳送給使用者填寫，使用者則會在函式回應中傳回結果 (這些部分是 Gemini API 中所有[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)的標準做法，並非工具組合功能獨有)。
-- (僅限[程式碼執行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw)工具)
-  `executableCode` 和 `codeExecutionResult`：
-  使用程式碼執行工具時，API 會傳回 `executableCode` (模型生成的程式碼，用於執行) 和 `codeExecutionResult` (可執行程式碼的結果)，而不是 `functionCall` 和 `functionResponse`。
+- `toolCall` و`toolResponse`: تعرض واجهة برمجة التطبيقات هذين الجزأين للاحتفاظ بسياق الأدوات التي يتم تشغيلها من جهة الخادم ونتيجة تنفيذها في الدور التالي.
+- `functionCall` و`functionResponse`: ترسل واجهة برمجة التطبيقات استدعاء الدالة إلى
+  المستخدم لملء البيانات، ويرسل المستخدم النتيجة مرة أخرى في
+  ردّ الدالة (هذه الأجزاء عادية لجميع ميزات [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar) في Gemini API، وليست فريدة لميزة
+  الجمع بين الأدوات).
+- ([أداة تنفيذ الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar) فقط)
+  `executableCode` و`codeExecutionResult`:
+  عند استخدام أداة تنفيذ الرموز البرمجية، بدلاً من `functionCall` و
+  `functionResponse`، تعرض واجهة برمجة التطبيقات `executableCode` (الرمز البرمجي الذي تم إنشاؤه
+  بواسطة الطراز والمقصود تنفيذه) و`codeExecutionResult` (الـ
+  نتيجة الرمز البرمجي القابل للتنفيذ).
 
-您必須在每個回合中將所有部分 (包括所含的所有[欄位](#critical-fields)) 傳回模型，以維持脈絡並啟用工具組合。
+يجب إعادة جميع الأجزاء، بما في ذلك جميع الـ [حقول](#critical-fields) التي
+تحتوي عليها، إلى الطراز في كل دور للحفاظ على السياق وتفعيل ميزة "الجمع بين الأدوات"
+.
 
-### 傳回零件中的重要欄位
+### الحقول المهمة في الأجزاء المعروضة
 
-[API 傳回的特定部分](#api-returns-parts)會包含 `id`、`tool_type` 和 `thought_signature` 欄位。這些欄位對於維護工具內容至關重要 (因此對於工具組合也很重要)，您需要在後續要求中*傳回回應中提供的所有部分*。
+ستتضمّن بعض [الأجزاء التي تعرضها واجهة برمجة التطبيقات](#api-returns-parts) الحقول `id` و
+`tool_type` و`thought_signature`. تُعدّ هذه الحقول مهمة للحفاظ على سياق الأداة (وبالتالي مهمة لميزة "الجمع بين الأدوات")؛ ويجب إعادة جميع الأجزاء *كما هي موضّحة في الردّ* في طلباتك اللاحقة.
 
-- `id`：將呼叫對應至回應的專屬 ID。無論工具脈絡循環與否，所有函式呼叫回應都會`id`**設定**。您*必須*在函式回應中提供與 API 在函式呼叫中提供的相同 `id`。內建工具會自動在工具呼叫和工具回應之間共用 `id`。
-  - 可在所有工具相關部分找到：`toolCall`、`toolResponse`、`functionCall`、`functionResponse`、`executableCode`、`codeExecutionResult`
-- `tool_type`：識別使用的特定工具；內建工具的常值或 (例如 `URL_CONTEXT`) 或函式 (例如 `getWeather`) 名稱。
-  - 位於 `toolCall` 和 `toolResponse` 部分。
-- `thought_signature`：實際加密的內容，內嵌在 **API 傳回的每個部分**。如果沒有想法簽章，就無法重建背景資訊；如果您未在每個回合中傳回所有部分的想法簽章，模型就會發生錯誤。
-  - 在*所有*部分中找到。
+- `id`: معرّف فريد يربط استدعاءً بردّه. `id` يتم **ضبطه في
+  جميع ردود استدعاء الدالة**، بغض النظر عن ميزة "تداول سياق الأداة".
+  يجب *تقديم* `id` نفسه في ردّ الدالة
+  الذي تقدّمه واجهة برمجة التطبيقات في استدعاء الدالة. تشارك الأدوات المضمّنة تلقائيًا `id` بين استدعاء الأداة وردّ الأداة.
+  - يظهر في جميع الأجزاء ذات الصلة بالأداة: `toolCall` و`toolResponse` و`functionCall` و`functionResponse` و`executableCode` و `codeExecutionResult`
+- `tool_type`: يحدّد الأداة المحدّدة المستخدَمة، أي اسم الأداة المضمّنة الحرفي (مثل `URL_CONTEXT`) أو اسم الدالة (مثل `getWeather`).
+  - يظهر في الجزأين `toolCall` و`toolResponse`.
+- `thought_signature`: السياق المشفّر الفعلي المضمّن في **كل جزء تعرضه واجهة برمجة التطبيقات**. لا يمكن إعادة إنشاء السياق بدون توقيعات الأفكار؛ وإذا لم يتم عرض توقيعات الأفكار لجميع الأجزاء في كل دور، سيحدث خطأ في الطراز.
+  - يظهر في *جميع* الأجزاء.
 
-### 工具專屬資料
+### البيانات الخاصة بالأداة
 
-部分內建工具會傳回使用者可見的資料引數，這些引數專屬於工具類型。
+تعرض بعض الأدوات المضمّنة وسيطات بيانات مرئية للمستخدم خاصة بنوع الأداة.
 
-| 工具 | 使用者可見的工具呼叫引數 (如有) | 使用者可見的工具回應 (如有) |
+| الأداة | وسيطات استدعاء الأداة المرئية للمستخدم (إن وُجدت) | ردّ الأداة المرئي للمستخدم (إن وُجد) |
 | --- | --- | --- |
 | **GOOGLE\_SEARCH** | `queries` | `search_suggestions` |
 | **GOOGLE\_MAPS** | `queries` | `places` `google_maps_widget_context_token` |
-| **URL\_CONTEXT** | `urls` 要瀏覽的網址 | `urls_metadata` `retrieved_url`：瀏覽的網址 `url_retrieval_status`：瀏覽狀態 |
-| **FILE\_SEARCH** | 無 | 無 |
+| **URL\_CONTEXT** | `urls` عناوين URL التي سيتم تصفّحها | `urls_metadata` `retrieved_url`: عناوين URL التي تم تصفّحها `url_retrieval_status`: حالة التصفّح |
+| **FILE\_SEARCH** | بدون | بدون |
 
-## 工具組合要求結構範例
+## مثال على بنية طلب الجمع بين الأدوات
 
-下列要求結構顯示提示的要求結構：「美國最北端的城市是哪裡？What's the weather like there
-today?" 這項工具結合了三種工具：內建的 Gemini 工具 `google_search`
-和 `code_execution`，以及自訂函式 `get_weather`。
+تعرض بنية الطلب التالية بنية طلب الرسالة الفورية: "ما هي المدينة الواقعة في أقصى شمال الولايات المتحدة؟ وما حالة الطقس فيها اليوم؟". يجمع هذا الطلب بين ثلاث أدوات: الأداتان المضمّنتان في Gemini `google_search` و`code_execution`، ودالة مخصّصة `get_weather`.
 
 ```
 {
-  "model": "models/gemini-3-flash-preview",
+  "model": "models/gemini-3.5-flash",
   "contents": [{
     "parts": [{
       "text": "What is the northernmost city in the United States? What's the weather like there today?"
@@ -513,48 +523,49 @@ today?" 這項工具結合了三種工具：內建的 Gemini 工具 `google_sear
 }
 ```
 
-## 權杖和價格
+## الرموز المميّزة والأسعار
 
-請注意，要求中的 `toolCall` 和 `toolResponse` 部分會計入 `prompt_token_count`。由於這些中間工具步驟現在會顯示並傳回給您，因此屬於對話記錄的一部分。這只適用於*要求*，不適用於*回應*。
+يُرجى العِلم أنّ الجزأين `toolCall` و`toolResponse` في الطلبات يتم احتسابهما ضمن `prompt_token_count`. بما أنّ خطوات الأداة الوسيطة هذه أصبحت مرئية ويتم عرضها لك، فهي جزء من سجلّ المحادثة. ينطبق ذلك على *الطلبات* فقط، وليس *الردود*.
 
-Google 搜尋工具不在此限。Google 搜尋已在查詢層級套用自己的定價模式，因此不會重複收取權杖費用 (請參閱「[定價](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw)」頁面)。
+تُستثنى أداة "بحث Google" من هذه القاعدة. تطبّق "بحث Google" نموذج التسعير الخاص بها على مستوى طلب البحث، لذا لا يتم تحصيل رسوم مضاعفة على الرموز المميّزة (راجِع صفحة [الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar)).
 
-詳情請參閱「[符記](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw)」頁面。
+يُرجى قراءة صفحة [الرموز المميّزة](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) لمزيد من المعلومات.
 
-## 限制
+## القيود
 
-- 啟用 `include_server_side_tool_invocations` 旗標時，預設為 `VALIDATED` 模式 (不支援 `AUTO` 模式)
-- `google_search` 等內建工具會根據位置和目前時間資訊運作，因此如果 `system_instruction` 或 `function_declaration.description` 的位置和時間資訊有衝突，工具組合功能可能無法正常運作。
+- يتم تلقائيًا استخدام وضع `VALIDATED` (وضع `AUTO` غير متاح) عند تفعيل العلامة `include_server_side_tool_invocations`
+- تعتمد الأدوات المضمّنة، مثل `google_search`، على معلومات الموقع الجغرافي والوقت الحالي، لذا إذا كانت `system_instruction` أو `function_declaration.description` تتضمّن معلومات متضاربة عن الموقع الجغرافي والوقت، قد لا تعمل ميزة "الجمع بين الأدوات" بشكل جيد.
 
-## 支援的工具
+## الأدوات المتاحة
 
-標準工具環境流通適用於伺服器端 (內建) 工具。程式碼執行也是伺服器端工具，但有自己的內建解決方案，可進行脈絡循環。電腦使用和函式呼叫是用戶端工具，也內建解決方案，可循環使用內容。
+ينطبق التداول العادي لسياق الأداة على الأدوات من جهة الخادم (المضمّنة).
+تُعدّ أداة تنفيذ الرموز البرمجية أيضًا أداة من جهة الخادم، ولكنّها تتضمّن حلاً مضمّنًا خاصًا بها لتداول السياق. تُعدّ أداة استخدام الكمبيوتر وميزة "استدعاء الدوال" أدوات من جهة العميل، وتتضمّنان أيضًا حلولاً مضمّنة لتداول السياق.
 
-| 工具 | 執行端 | 支援情境循環 |
+| الأداة | جهة التنفيذ | إتاحة ميزة "تداول السياق" |
 | --- | --- | --- |
-| [Google 搜尋](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw) | 伺服器端 | 有權限 |
-| [Google 地圖](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-tw) | 伺服器端 | 有權限 |
-| [網址環境](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw) | 伺服器端 | 有權限 |
-| [檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw) | 伺服器端 | 有權限 |
-| [程式碼執行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw) | 伺服器端 | 支援 (內建，使用 `executableCode` 和 `codeExecutionResult` 部分) |
-| [電腦使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-tw) | 用戶端 | 支援 (內建，使用 `functionCall` 和 `functionResponse` 部分) |
-| [自訂函式](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw) | 用戶端 | 支援 (內建，使用 `functionCall` 和 `functionResponse` 部分) |
+| [بحث Google](https://ai.google.dev/gemini-api/docs/google-search?hl=ar) | جهة الخادم | متاحة |
+| [خرائط Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ar) | جهة الخادم | متاحة |
+| [سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar) | جهة الخادم | متاحة |
+| [البحث عن الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar) | جهة الخادم | متاحة |
+| [تنفيذ الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar) | جهة الخادم | متاحة (مضمّنة، تستخدم الجزأين `executableCode` و`codeExecutionResult`) |
+| [استخدام الكمبيوتر](https://ai.google.dev/gemini-api/docs/computer-use?hl=ar) | من جهة العميل | متاحة (مضمّنة، تستخدم الجزأين `functionCall` و`functionResponse`) |
+| [الدوال المخصّصة](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar) | من جهة العميل | متاحة (مضمّنة، تستخدم الجزأين `functionCall` و`functionResponse`) |
 
-## 後續步驟
+## الخطوات التالية
 
-- 進一步瞭解 Gemini API 中的[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)。
-- 探索支援的工具：
-  - [Google 搜尋](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)
-  - [Google 地圖](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-tw)
-  - [網址環境](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw)
-  - [檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw)
+- مزيد من المعلومات عن [ميزة "استدعاء الدوال"](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar) في Gemini API
+- استكشاف الأدوات المتاحة:
+  - [بحث Google](https://ai.google.dev/gemini-api/docs/google-search?hl=ar)
+  - [خرائط Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ar)
+  - [سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar)
+  - [البحث عن الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar)
 
-提供意見
+إرسال ملاحظات
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-上次更新時間：2026-05-13 (世界標準時間)。
+تاريخ التعديل الأخير: 2026-05-19 (حسب التوقيت العالمي المتفَّق عليه)
 
-想進一步說明嗎？
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-13 (世界標準時間)。"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-19 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=he
-fetched_at: 2026-05-18T05:09:01.635319+00:00
+source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=id
+fetched_at: 2026-05-25T05:20:11.336948+00:00
 title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=id)
 
-שליחת משוב
+Kirim masukan
 
-# יצירת טקסט
+# Pembuatan teks
 
-‫Gemini API יכול ליצור פלט של טקסט מקלט של טקסט, תמונות, סרטונים ואודיו.
+Gemini API dapat menghasilkan output teks dari input teks, gambar, video, dan audio.
 
-דוגמה בסיסית:
+Berikut contoh dasarnya:
 
 ### Python
 
@@ -30,7 +30,7 @@ from google import genai
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents="How does AI work?"
 )
 print(response.text)
@@ -45,7 +45,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     contents: "How does AI work?",
   });
   console.log(response.text);
@@ -76,7 +76,7 @@ func main() {
 
   result, _ := client.Models.GenerateContent(
       ctx,
-      "gemini-3-flash-preview",
+      "gemini-3.5-flash",
       genai.Text("Explain how AI works in a few words"),
       nil,
   )
@@ -97,7 +97,7 @@ public class GenerateContentWithTextInput {
     Client client = new Client();
 
     GenerateContentResponse response =
-        client.models.generateContent("gemini-3-flash-preview", "How does AI work?", null);
+        client.models.generateContent("gemini-3.5-flash", "How does AI work?", null);
 
     System.out.println(response.text());
   }
@@ -107,7 +107,7 @@ public class GenerateContentWithTextInput {
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -X POST \
@@ -142,7 +142,7 @@ function main() {
     ],
   };
 
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent';
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent';
   const options = {
     method: 'POST',
     contentType: 'application/json',
@@ -159,11 +159,12 @@ function main() {
 }
 ```
 
-## חשיבה עם Gemini
+## Berpikir dengan Gemini
 
-במודלים של Gemini, התכונה ['חשיבה'](https://ai.google.dev/gemini-api/docs/thinking?hl=he) מופעלת בדרך כלל כברירת מחדל, והיא מאפשרת למודל להסיק מסקנות לפני שהוא מגיב לבקשה.
+Model Gemini sering kali mengaktifkan ["penalaran"](https://ai.google.dev/gemini-api/docs/thinking?hl=id) secara default, sehingga model dapat melakukan penalaran sebelum merespons permintaan.
 
-כל מודל תומך בהגדרות שונות של חשיבה, שמאפשרות לכם לשלוט בעלות, בחביון ובאינטליגנציה. מידע נוסף זמין ב[מדריך החשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he#set-budget).
+Setiap model mendukung konfigurasi pemikiran yang berbeda sehingga Anda dapat mengontrol biaya, latensi, dan kecerdasan. Untuk mengetahui detail selengkapnya, lihat
+[panduan pemikiran](https://ai.google.dev/gemini-api/docs/thinking?hl=id#set-budget).
 
 ### Python
 
@@ -174,7 +175,7 @@ from google.genai import types
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents="How does AI work?",
     config=types.GenerateContentConfig(
         thinking_config=types.ThinkingConfig(thinking_level="low")
@@ -192,7 +193,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     contents: "How does AI work?",
     config: {
       thinkingConfig: {
@@ -230,7 +231,7 @@ func main() {
 
   result, _ := client.Models.GenerateContent(
       ctx,
-      "gemini-3-flash-preview",
+      "gemini-3.5-flash",
       genai.Text("How does AI work?"),
       &genai.GenerateContentConfig{
         ThinkingConfig: &genai.ThinkingConfig{
@@ -263,7 +264,7 @@ public class GenerateContentWithThinkingConfig {
             .build();
 
     GenerateContentResponse response =
-        client.models.generateContent("gemini-3-flash-preview", "How does AI work?", config);
+        client.models.generateContent("gemini-3.5-flash", "How does AI work?", config);
 
     System.out.println(response.text());
   }
@@ -273,7 +274,7 @@ public class GenerateContentWithThinkingConfig {
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -X POST \
@@ -318,7 +319,7 @@ function main() {
     }
   };
 
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent';
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent';
   const options = {
     method: 'POST',
     contentType: 'application/json',
@@ -335,9 +336,10 @@ function main() {
 }
 ```
 
-## הוראות מערכת והגדרות אחרות
+## Petunjuk sistem dan konfigurasi lainnya
 
-אתם יכולים להגדיר את ההתנהגות של מודלים של Gemini באמצעות הוראות מערכת. כדי לעשות את זה, מעבירים אובייקט [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=he#v1beta.GenerationConfig).
+Anda dapat memandu perilaku model Gemini dengan petunjuk sistem. Untuk melakukannya,
+teruskan objek [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=id#v1beta.GenerationConfig).
 
 ### Python
 
@@ -348,7 +350,7 @@ from google.genai import types
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     config=types.GenerateContentConfig(
         system_instruction="You are a cat. Your name is Neko."),
     contents="Hello there"
@@ -366,7 +368,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     contents: "Hello there",
     config: {
       systemInstruction: "You are a cat. Your name is Neko.",
@@ -404,7 +406,7 @@ func main() {
 
   result, _ := client.Models.GenerateContent(
       ctx,
-      "gemini-3-flash-preview",
+      "gemini-3.5-flash",
       genai.Text("Hello there"),
       config,
   )
@@ -434,7 +436,7 @@ public class GenerateContentWithSystemInstruction {
             .build();
 
     GenerateContentResponse response =
-        client.models.generateContent("gemini-3-flash-preview", "Hello there", config);
+        client.models.generateContent("gemini-3.5-flash", "Hello there", config);
 
     System.out.println(response.text());
   }
@@ -444,7 +446,7 @@ public class GenerateContentWithSystemInstruction {
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
@@ -492,7 +494,7 @@ function main() {
     ],
   };
 
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent';
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent';
   const options = {
     method: 'POST',
     contentType: 'application/json',
@@ -509,7 +511,9 @@ function main() {
 }
 ```
 
-אובייקט [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=he#v1beta.GenerationConfig) מאפשר גם לשנות פרמטרים של יצירה שמוגדרים כברירת מחדל, כמו [רמת אקראיות](https://ai.google.dev/api/generate-content?hl=he#v1beta.GenerationConfig).
+Objek [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=id#v1beta.GenerationConfig)
+juga memungkinkan Anda mengganti parameter pembuatan default, seperti
+[temperatur](https://ai.google.dev/api/generate-content?hl=id#v1beta.GenerationConfig).
 
 ### Python
 
@@ -520,7 +524,7 @@ from google.genai import types
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents=["Explain how AI works"],
     config=types.GenerateContentConfig(
         temperature=0.1
@@ -538,7 +542,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     contents: "Explain how AI works",
     config: {
       temperature: 0.1,
@@ -583,7 +587,7 @@ func main() {
 
   result, _ := client.Models.GenerateContent(
     ctx,
-    "gemini-3-flash-preview",
+    "gemini-3.5-flash",
     genai.Text("What is the average size of a swallow?"),
     config,
   )
@@ -607,7 +611,7 @@ public class GenerateContentWithConfig {
     GenerateContentConfig config = GenerateContentConfig.builder().temperature(0.1f).build();
 
     GenerateContentResponse response =
-        client.models.generateContent("gemini-3-flash-preview", "Explain how AI works", config);
+        client.models.generateContent("gemini-3.5-flash", "Explain how AI works", config);
 
     System.out.println(response.text());
   }
@@ -617,7 +621,7 @@ public class GenerateContentWithConfig {
 ### REST
 
 ```
-curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent \
+curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -X POST \
@@ -668,7 +672,7 @@ function main() {
     ],
   };
 
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent';
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent';
   const options = {
     method: 'POST',
     contentType: 'application/json',
@@ -685,11 +689,13 @@ function main() {
 }
 ```
 
-רשימה מלאה של הפרמטרים שאפשר להגדיר והתיאורים שלהם מופיעה [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=he#v1beta.GenerationConfig) בהפניית ה-API שלנו.
+Lihat [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=id#v1beta.GenerationConfig)
+di referensi API kami untuk mengetahui daftar lengkap parameter yang dapat dikonfigurasi dan deskripsinya.
 
-## קלטים מרובי מצבים
+## Input multimodal
 
-‫Gemini API תומך בקלט מרובה-אופנים, כך שאפשר לשלב טקסט עם קובצי מדיה. בדוגמה הבאה מוצג איך מספקים תמונה:
+Gemini API mendukung input multimodal, sehingga Anda dapat menggabungkan teks dengan
+file media. Contoh berikut menunjukkan cara memberikan gambar:
 
 ### Python
 
@@ -701,7 +707,7 @@ client = genai.Client()
 
 image = Image.open("/path/to/organ.png")
 response = client.models.generate_content(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents=[image, "Tell me about this instrument"]
 )
 print(response.text)
@@ -723,7 +729,7 @@ async function main() {
     file: "/path/to/organ.png",
   });
   const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     contents: [
       createUserContent([
         "Tell me about this instrument",
@@ -776,7 +782,7 @@ func main() {
 
   result, _ := client.Models.GenerateContent(
       ctx,
-      "gemini-3-flash-preview",
+      "gemini-3.5-flash",
       contents,
       nil,
   )
@@ -804,7 +810,7 @@ public class GenerateContentWithMultiModalInputs {
           Part.fromUri("/path/to/organ.jpg", "image/jpeg"));
 
     GenerateContentResponse response =
-        client.models.generateContent("gemini-3-flash-preview", content, null);
+        client.models.generateContent("gemini-3.5-flash", content, null);
 
     System.out.println(response.text());
   }
@@ -843,7 +849,7 @@ cat > "$TEMP_JSON" << EOF
 }
 EOF
 
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -X POST \
@@ -871,7 +877,7 @@ function main() {
     ],
   };
 
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent';
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent';
   const options = {
     method: 'POST',
     contentType: 'application/json',
@@ -897,14 +903,14 @@ function getImageData(url) {
 }
 ```
 
-שיטות חלופיות להוספת תמונות ומידע נוסף על עיבוד תמונות מתקדם זמינים [במדריך שלנו להבנת תמונות](https://ai.google.dev/gemini-api/docs/image-understanding?hl=he).
-ממשק ה-API תומך גם בהזנות ובפענוח של [מסמכים](https://ai.google.dev/gemini-api/docs/document-processing?hl=he), [סרטונים](https://ai.google.dev/gemini-api/docs/video-understanding?hl=he) ו[אודיו](https://ai.google.dev/gemini-api/docs/audio?hl=he).
+Untuk metode alternatif dalam menyediakan gambar dan pemrosesan gambar yang lebih canggih, lihat [panduan pemahaman gambar](https://ai.google.dev/gemini-api/docs/image-understanding?hl=id) kami.
+API ini juga mendukung input dan pemahaman [dokumen](https://ai.google.dev/gemini-api/docs/document-processing?hl=id), [video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=id), dan [audio](https://ai.google.dev/gemini-api/docs/audio?hl=id).
 
-## הצגת התשובות באופן שוטף
+## Respons aliran data
 
-כברירת מחדל, המודל מחזיר תשובה רק אחרי שתהליך היצירה כולו מסתיים.
+Secara default, model hanya menampilkan respons setelah seluruh proses pembuatan selesai.
 
-כדי לקבל אינטראקציות חלקות יותר, אפשר להשתמש בסטרימינג כדי לקבל מופעים של [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=he#v1beta.GenerateContentResponse) באופן מצטבר בזמן שהם נוצרים.
+Untuk interaksi yang lebih lancar, gunakan streaming untuk menerima instance [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=id#v1beta.GenerateContentResponse) secara bertahap saat instance tersebut dibuat.
 
 ### Python
 
@@ -914,7 +920,7 @@ from google import genai
 client = genai.Client()
 
 response = client.models.generate_content_stream(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents=["Explain how AI works"]
 )
 for chunk in response:
@@ -930,7 +936,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const response = await ai.models.generateContentStream({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     contents: "Explain how AI works",
   });
 
@@ -964,7 +970,7 @@ func main() {
 
   stream := client.Models.GenerateContentStream(
       ctx,
-      "gemini-3-flash-preview",
+      "gemini-3.5-flash",
       genai.Text("Write a story about a magic backpack."),
       nil,
   )
@@ -990,7 +996,7 @@ public class GenerateContentStream {
 
     ResponseStream<GenerateContentResponse> responseStream =
       client.models.generateContentStream(
-          "gemini-3-flash-preview", "Write a story about a magic backpack.", null);
+          "gemini-3.5-flash", "Write a story about a magic backpack.", null);
 
     for (GenerateContentResponse res : responseStream) {
       System.out.print(res.text());
@@ -1006,7 +1012,7 @@ public class GenerateContentStream {
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:streamGenerateContent?alt=sse" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:streamGenerateContent?alt=sse" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   --no-buffer \
@@ -1041,7 +1047,7 @@ function main() {
     ],
   };
 
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:streamGenerateContent';
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:streamGenerateContent';
   const options = {
     method: 'POST',
     contentType: 'application/json',
@@ -1058,9 +1064,9 @@ function main() {
 }
 ```
 
-## שיחות עם זיכרון (צ'אט)
+## Percakapan multi-giliran (chat)
 
-ערכות ה-SDK שלנו מספקות פונקציונליות לאיסוף של כמה סבבים של הנחיות ותשובות בצ'אט, וכך מאפשרות לכם לעקוב בקלות אחר היסטוריית השיחות.
+SDK kami menyediakan fungsi untuk mengumpulkan beberapa putaran perintah dan respons ke dalam percakapan, sehingga memberi Anda cara mudah untuk melacak histori percakapan.
 
 ### Python
 
@@ -1068,7 +1074,7 @@ function main() {
 from google import genai
 
 client = genai.Client()
-chat = client.chats.create(model="gemini-3-flash-preview")
+chat = client.chats.create(model="gemini-3.5-flash")
 
 response = chat.send_message("I have 2 dogs in my house.")
 print(response.text)
@@ -1090,7 +1096,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const chat = ai.chats.create({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     history: [
       {
         role: "user",
@@ -1142,7 +1148,7 @@ func main() {
       genai.NewContentFromText("Great to meet you. What would you like to know?", genai.RoleModel),
   }
 
-  chat, _ := client.Chats.Create(ctx, "gemini-3-flash-preview", nil, history)
+  chat, _ := client.Chats.Create(ctx, "gemini-3.5-flash", nil, history)
   res, _ := chat.SendMessage(ctx, genai.Part{Text: "How many paws are in my house?"})
 
   if len(res.Candidates) > 0 {
@@ -1163,7 +1169,7 @@ public class MultiTurnConversation {
   public static void main(String[] args) {
 
     Client client = new Client();
-    Chat chatSession = client.chats.create("gemini-3-flash-preview");
+    Chat chatSession = client.chats.create("gemini-3.5-flash");
 
     GenerateContentResponse response =
         chatSession.sendMessage("I have 2 dogs in my house.");
@@ -1186,7 +1192,7 @@ public class MultiTurnConversation {
 ### REST
 
 ```
-curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent \
+curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -X POST \
@@ -1251,7 +1257,7 @@ function main() {
     ],
   };
 
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent';
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent';
   const options = {
     method: 'POST',
     contentType: 'application/json',
@@ -1268,7 +1274,7 @@ function main() {
 }
 ```
 
-אפשר להשתמש בסטרימינג גם בשיחות מרובות תפניות.
+Streaming juga dapat digunakan untuk percakapan multi-giliran.
 
 ### Python
 
@@ -1276,7 +1282,7 @@ function main() {
 from google import genai
 
 client = genai.Client()
-chat = client.chats.create(model="gemini-3-flash-preview")
+chat = client.chats.create(model="gemini-3.5-flash")
 
 response = chat.send_message_stream("I have 2 dogs in my house.")
 for chunk in response:
@@ -1300,7 +1306,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const chat = ai.chats.create({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     history: [
       {
         role: "user",
@@ -1358,7 +1364,7 @@ func main() {
       genai.NewContentFromText("Great to meet you. What would you like to know?", genai.RoleModel),
   }
 
-  chat, _ := client.Chats.Create(ctx, "gemini-3-flash-preview", nil, history)
+  chat, _ := client.Chats.Create(ctx, "gemini-3.5-flash", nil, history)
   stream := chat.SendMessageStream(ctx, genai.Part{Text: "How many paws are in my house?"})
 
   for chunk, _ := range stream {
@@ -1380,7 +1386,7 @@ public class MultiTurnConversationWithStreaming {
   public static void main(String[] args) {
 
     Client client = new Client();
-    Chat chatSession = client.chats.create("gemini-3-flash-preview");
+    Chat chatSession = client.chats.create("gemini-3.5-flash");
 
     ResponseStream<GenerateContentResponse> responseStream =
         chatSession.sendMessageStream("I have 2 dogs in my house.", null);
@@ -1405,7 +1411,7 @@ public class MultiTurnConversationWithStreaming {
 ### REST
 
 ```
-curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:streamGenerateContent?alt=sse \
+curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:streamGenerateContent?alt=sse \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -X POST \
@@ -1470,7 +1476,7 @@ function main() {
     ],
   };
 
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:streamGenerateContent';
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:streamGenerateContent';
   const options = {
     method: 'POST',
     contentType: 'application/json',
@@ -1487,23 +1493,23 @@ function main() {
 }
 ```
 
-## טיפים לכתיבת הנחיות
+## Tips menulis perintah
 
-ב[מדריך שלנו להנדסת הנחיות](https://ai.google.dev/gemini/docs/prompting-strategies?hl=he) מופיעות הצעות שיעזרו לכם להפיק את המרב מ-Gemini.
+Lihat [panduan rekayasa perintah](https://ai.google.dev/gemini/docs/prompting-strategies?hl=id) kami untuk mendapatkan saran tentang cara mengoptimalkan penggunaan Gemini.
 
-## המאמרים הבאים
+## Langkah berikutnya
 
-- כדאי לנסות את [Gemini ב-Google AI Studio](https://aistudio.google.com?hl=he).
-- אפשר להתנסות ב[פלט מובנה](https://ai.google.dev/gemini-api/docs/structured-output?hl=he) כדי לקבל תשובות שדומות ל-JSON.
-- אפשר לבדוק את היכולות של Gemini להבנת [תמונות](https://ai.google.dev/gemini-api/docs/image-understanding?hl=he), [סרטונים](https://ai.google.dev/gemini-api/docs/video-understanding?hl=he), [אודיו](https://ai.google.dev/gemini-api/docs/audio?hl=he) ו[מסמכים](https://ai.google.dev/gemini-api/docs/document-processing?hl=he).
-- [מידע על אסטרטגיות להנפקת הנחיות לקבצים](https://ai.google.dev/gemini-api/docs/files?hl=he#prompt-guide)
+- Coba [Gemini di Google AI Studio](https://aistudio.google.com?hl=id).
+- Bereksperimen dengan [output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id) untuk respons mirip JSON.
+- Jelajahi kemampuan pemahaman [gambar](https://ai.google.dev/gemini-api/docs/image-understanding?hl=id), [video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=id), [audio](https://ai.google.dev/gemini-api/docs/audio?hl=id), dan [dokumen](https://ai.google.dev/gemini-api/docs/document-processing?hl=id) Gemini.
+- Pelajari [strategi perintah file](https://ai.google.dev/gemini-api/docs/files?hl=id#prompt-guide) multimodal.
 
-שליחת משוב
+Kirim masukan
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-עדכון אחרון: 2026-05-13 (שעון UTC).
+Terakhir diperbarui pada 2026-05-19 UTC.
 
-רוצה לתת לנו משוב?
+Ada masukan untuk kami?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-05-13 (שעון UTC)."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-05-19 UTC."],[],[]]

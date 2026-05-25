@@ -1,48 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=he
-fetched_at: 2026-05-18T05:15:17.709512+00:00
-title: "\u05d2\u05e8\u05e1\u05ea \u05d8\u05e8\u05d5\u05dd-\u05d4\u05e9\u05e7\u05d4 \u05e9\u05dc Veo 3.1 Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=tr
+fetched_at: 2026-05-25T05:28:55.840453+00:00
+title: "Veo 3.1 Lite \u00d6nizlemesi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-שליחת משוב
+Geri bildirim gönderin
 
-# גרסת טרום-השקה של Veo 3.1 Lite
+# Veo 3.1 Lite Önizlemesi
 
-‫Veo 3.1 Lite Preview הוא מודל וידאו יעיל במיוחד שמתאים במיוחד למפתחים. הוא מאפשר ליצור ולערוך סרטונים באיכות גבוהה, וכולל אמצעי בקרה קולנועיים. הוא מבוסס על מודל Veo 3.1 המתקדם ביותר, ומאפשר ליוצרים ולעסקים ליהנות מ-AI ליצירת סרטונים ברמה מקצועית באמצעות ממשק ניתן לתכנות וניתן להרחבה.
+Veo 3.1 Lite Önizleme, yüksek verimliliğe sahip, geliştiricileri önceliklendiren bir video modelidir. Bu model, yüksek kaliteli video üretme, düzenleme ve sinematik kontrol özellikleri sunar. Bu araç, içerik üreticiler ve işletmeler için ölçeklenebilir ve programlanabilir bir arayüz sunarak profesyonel kalitede video yapay zekasını herkesin erişimine açmak amacıyla en yeni Veo 3.1 modelinden yararlanır.
 
-[לניסיון ב-Google AI Studio](https://aistudio.google.com?model=veo-3.1-lite-generate-preview&hl=he)
+[Google AI Studio'da deneme](https://aistudio.google.com?model=veo-3.1-lite-generate-preview&hl=tr)
 
-## מאמרי עזרה
+## Belgeler
 
-‫Veo 3.1 Lite מציע את המחירים הטובים ביותר למפתחים ולארגונים שיוצרים אפליקציות וסביבות עבודה ליצירת סרטונים בכמויות גדולות ובקנה מידה נרחב. פרטים והשוואה עם מודלים אחרים של Veo 3.1 זמינים בדף [התמחור](https://ai.google.dev/gemini-api/docs/pricing?hl=he#veo-3.1).
+Veo 3.1 Lite, büyük ölçekte yüksek hacimli video uygulamaları ve iş akışları geliştiren geliştiriciler ve işletmeler için en iyi fiyatları sunar. Ayrıntılar ve diğer Veo 3.1 modelleriyle karşılaştırma için [Fiyatlandırma](https://ai.google.dev/gemini-api/docs/pricing?hl=tr#veo-3.1) sayfasını ziyaret edin.
 
-ב[דף בנושא יצירת סרטונים](https://ai.google.dev/gemini-api/docs/video?hl=he) אפשר לקרוא על כל התכונות והיכולות. חשוב לדעת שגרסת הטרום-השקה של Veo 3.1 Lite לא תומכת ב[פלט באיכות 4K](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=he#resolution) או ב[תוספים](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=he#extending_veo_videos).
+Özellikler ve işlevler hakkında kapsamlı bilgi için [Video oluşturma](https://ai.google.dev/gemini-api/docs/video?hl=tr) sayfasını ziyaret edin. Veo 3.1 Lite Önizleme'nin [4K çıkışları](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=tr#resolution) veya [uzantıları](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=tr#extending_veo_videos) desteklemediğini unutmayın.
 
 ## veo-3.1-lite-generate-preview
 
-| נכס | תיאור |
+| Mülk | Açıklama |
 | --- | --- |
-| id\_cardקוד מודל | ‫**Gemini API**  `veo-3.1-lite-generate-preview` |
-| saveסוגי נתונים נתמכים | **קלט**  טקסט, תמונה  **פלט**  סרטון עם אודיו |
-| token\_autoמגבלות | **קלט טקסט**  ‫1,024 טוקנים  **סרטון הפלט**  1 |
-| calendar\_monthהעדכון האחרון | מרץ 2026 |
+| id\_cardModel kodu | **Gemini API**  `veo-3.1-lite-generate-preview` |
+| saveDesteklenen veri türleri | **Giriş**  Metin, Resim  **Çıkış**  Sesli video |
+| token\_autoSınırlar | **Metin girişi**  1.024 jeton  **Çıkış videosu**  1 |
+| calendar\_monthSon güncelleme | Mart 2026 |
 
-שליחת משוב
+Geri bildirim gönderin
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-עדכון אחרון: 2026-04-29 (שעון UTC).
+Son güncelleme tarihi: 2026-04-29 UTC.
 
-רוצה לתת לנו משוב?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]

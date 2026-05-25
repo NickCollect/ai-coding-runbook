@@ -1,46 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=fr
-fetched_at: 2026-05-18T05:10:16.287057+00:00
-title: "Aper\u00e7u de Deep\u00a0Research Max \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=he
+fetched_at: 2026-05-25T05:24:41.897638+00:00
+title: "\u05d2\u05e8\u05e1\u05ea \u05d8\u05e8\u05d5\u05dd-\u05d4\u05e9\u05e7\u05d4 (Preview) \u05e9\u05dc Deep Research Max \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
+‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Envoyer des commentaires
+שליחת משוב
 
-# Aperçu de Deep Research Max
+# גרסת טרום-השקה (Preview) של Deep Research Max
 
-Compréhension maximale pour la collecte et la synthèse automatiques du contexte. Deep Research Max est optimisé pour les investigations de longue durée et critiques en termes de précision, qui synthétisent des informations complexes provenant de centaines de sources Web publiques et de données d'espace de travail privées dans des rapports complets et cités. Il prend en charge la planification collaborative, la visualisation, les serveurs MCP et la recherche de fichiers.
+היקף מקסימלי לאיסוף ולסינתזה אוטומטיים של הקשר. ‫Deep Research Max מותאם לחקירות ארוכות שבהן נדרשת רמת דיוק גבוהה. הוא מסנתז מידע מורכב ממאות מקורות ציבוריים באינטרנט ומנתונים פרטיים מ-Workspace, ויוצר דוחות מקיפים עם ציטוטים. היא תומכת בתכנון שיתופי, בתצוגה חזותית, בשרתי MCP ובחיפוש קבצים.
 
-## Documentation
+## מאמרי עזרה
 
-Consultez la page [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) pour obtenir une couverture complète
-des fonctionnalités.
+מידע מלא על התכונות והיכולות זמין בדף [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he).
 
 ## deep-research-max-preview-04-2026
 
-| Propriété | Description |
+| נכס | תיאור |
 | --- | --- |
-| id\_cardCode de l'agent | **API Interactions**  `deep-research-max-preview-04-2026` |
-| saveTypes de données acceptés | **Entrée**  Texte, image, PDF, audio, vidéo  **Résultat**  Texte (rapports cités), images |
-| token\_auto[Limites de jetons[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Fenêtre de contexte d'entrée**  1 048 576  **Limite de jetons de sortie**  65 536 |
-| 123Versions | Pour en savoir plus, consultez les [modèles de version de modèle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - Aperçu : `deep-research-max-preview-04-2026` |
-| calendar\_monthDernière mise à jour | Avril 2026 |
+| id\_cardקוד הסוכן | **Interactions API**  `deep-research-max-preview-04-2026` |
+| saveסוגי נתונים נתמכים | **קלט**  טקסט, תמונה, PDF, אודיו, וידאו  **פלט**  טקסט (דוחות עם ציטוטים), תמונות |
+| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **חלון הקשר של הקלט**  1,048,576  **מגבלת אסימונים בפלט**  65,536 |
+| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - תצוגה מקדימה: `deep-research-max-preview-04-2026` |
+| calendar\_monthהעדכון האחרון | אפריל 2026 |
 
-Envoyer des commentaires
+שליחת משוב
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Dernière mise à jour le 2026/04/29 (UTC).
+עדכון אחרון: 2026-04-29 (שעון UTC).
 
-Voulez-vous nous donner plus d'informations ?
+רוצה לתת לנו משוב?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/04/29 (UTC)."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]

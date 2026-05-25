@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/usage-policies?hl=vi
-fetched_at: 2026-05-18T05:14:48.799005+00:00
+fetched_at: 2026-05-25T05:18:55.562046+00:00
 title: "Gi\u00e1m s\u00e1t h\u00e0nh vi sai tr\u00e1i \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

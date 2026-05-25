@@ -1,49 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=id
-fetched_at: 2026-05-18T05:13:56.741117+00:00
-title: "Text-to-Speech Gemini 2.5 Pro \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=pt-BR
+fetched_at: 2026-05-25T05:17:25.358679+00:00
+title: "Convers\u00e3o de texto em voz do Gemini 2.5 Pro \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Kirim masukan
+Envie comentários
 
-# Text-to-Speech Gemini 2.5 Pro
+# Conversão de texto em voz do Gemini 2.5 Pro
 
-Mesin premium kami untuk sintesis ucapan berkualitas studio, yang menawarkan pembuatan audio canggih dan berkualitas tinggi. Gemini 2.5 Pro TTS paling cocok untuk konten panjang, narasi profesional, dan alur kerja kreatif yang kompleks yang memerlukan tingkat kejernihan vokal dan prosodi alami tertinggi.
+Nosso mecanismo premium para síntese de voz com qualidade de estúdio, que oferece geração de áudio sofisticada e de alta fidelidade. O Gemini 2.5 Pro TTS é ideal para conteúdo longo, narrações profissionais e fluxos de trabalho criativos complexos que exigem o mais alto nível de clareza vocal e prosódia natural.
 
-[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-2.5-pro-preview-tts&hl=id)
+[Testar no Google AI Studio](https://aistudio.google.com?model=gemini-2.5-pro-preview-tts&hl=pt-br)
 
-## Dokumentasi
+## Documentação
 
-Buka panduan [Text-to-Speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=id) untuk mengetahui cakupan lengkap
-fitur dan kemampuannya.
+Acesse o guia de [conversão de texto em voz](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-br) para conferir a cobertura completa de recursos e funcionalidades.
 
 ## gemini-2.5-pro-preview-tts
 
-| Properti | Deskripsi |
+| Propriedade | Descrição |
 | --- | --- |
-| id\_cardKode model | `gemini-2.5-pro-preview-tts` |
-| saveJenis data yang didukung | **Input**  Teks  **Output**  Audio |
-| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Batas token input**  8.192  **Batas token output**  16.384 |
-| handymanKemampuan | **Pembuatan audio**  Didukung  **Batch API**  Didukung  **Menyimpan ke cache**  Tidak didukung  **Eksekusi kode**  Tidak didukung  **Penelusuran file**  Tidak Didukung  **Panggilan fungsi**  Tidak didukung  **Grounding dengan Google Maps**  Tidak didukung  **Pembuatan gambar**  Tidak didukung  **Live API**  Tidak didukung  **Grounding penelusuran**  Tidak didukung  **Output terstruktur**  Tidak didukung  **Penalaran**  Tidak didukung  **Konteks URL**  Tidak didukung |
-| 123Versi | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - `gemini-2.5-pro-preview-tts` |
-| calendar\_monthPembaruan terbaru | Desember 2025 |
+| id\_cardCódigo do modelo | `gemini-2.5-pro-preview-tts` |
+| saveTipos de dados com suporte | **Entradas (link em inglês)**  Texto  **Saída**  Áudio |
+| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de token de entrada**  8.192  **Limite de token de saída**  16.384 |
+| handymanRecursos | **Geração de áudio**  Compatível  **API em lote**  Compatível  **Armazenamento em cache**  indisponível  **Execução de código**  indisponível  **Pesquisa de arquivos**  incompatível  **Chamadas de função**  indisponível  **Embasamento com o Google Maps**  indisponível  **Geração de imagens**  indisponível  **API Live**  indisponível  **Embasamento da pesquisa**  indisponível  **Respostas estruturadas**  indisponível  **Raciocínio**  indisponível  **Contexto de URL**  indisponível |
+| 123Versões | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - `gemini-2.5-pro-preview-tts` |
+| calendar\_monthAtualização mais recente | Dezembro de 2025 |
 
-Kirim masukan
+Envie comentários
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Terakhir diperbarui pada 2026-04-29 UTC.
+Última atualização 2026-04-29 UTC.
 
-Ada masukan untuk kami?
+Quer enviar seu feedback?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]

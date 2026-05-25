@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/rate-limits?hl=vi
-fetched_at: 2026-05-18T05:17:52.545588+00:00
+fetched_at: 2026-05-25T05:28:23.000275+00:00
 title: "Gi\u1edbi h\u1ea1n s\u1ed1 l\u01b0\u1ee3ng y\u00eau c\u1ea7u \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -30,9 +30,9 @@ Hạn mức tỷ lệ thường được đo lường theo 3 phương diện:
 - Số mã thông báo mỗi phút (đầu vào) (**TPM**)
 - Số yêu cầu mỗi ngày (**RPD**)
 
-Mức sử dụng của bạn được đánh giá dựa trên từng giới hạn và việc vượt quá bất kỳ giới hạn nào trong số đó sẽ kích hoạt lỗi giới hạn về tốc độ. Ví dụ: nếu giới hạn RPM của bạn là 20, thì việc đưa ra 21 yêu cầu trong vòng một phút sẽ dẫn đến lỗi, ngay cả khi bạn chưa vượt quá giới hạn TPM hoặc các giới hạn khác.
+Mức sử dụng của bạn được đánh giá dựa trên từng hạn mức và việc vượt quá bất kỳ hạn mức nào trong số đó sẽ kích hoạt lỗi giới hạn tốc độ. Ví dụ: nếu giới hạn RPM của bạn là 20, thì việc đưa ra 21 yêu cầu trong vòng một phút sẽ dẫn đến lỗi, ngay cả khi bạn chưa vượt quá TPM hoặc các giới hạn khác.
 
-Hạn mức sử dụng được áp dụng cho mỗi dự án, chứ không phải cho mỗi khoá API. Hạn mức yêu cầu mỗi ngày (**RPD**) sẽ được đặt lại vào lúc nửa đêm theo giờ Thái Bình Dương.
+Hạn mức sử dụng được áp dụng cho mỗi dự án, chứ không phải cho mỗi khoá API. Hạn mức số yêu cầu mỗi ngày (**RPD**) sẽ được đặt lại vào lúc nửa đêm theo giờ Thái Bình Dương.
 
 Hạn mức sẽ khác nhau tuỳ thuộc vào mô hình cụ thể đang được sử dụng và một số hạn mức chỉ áp dụng cho một số mô hình cụ thể. Ví dụ: Số hình ảnh mỗi phút (IPM) chỉ được tính cho các mô hình có khả năng tạo hình ảnh (Nano Banana), nhưng về mặt khái niệm thì tương tự như số mã thông báo mỗi phút (TPM). Các mô hình khác có thể có giới hạn về số lượng mã thông báo mỗi ngày (TPD).
 
@@ -65,7 +65,7 @@ Hạn mức tốc độ được chỉ định không được đảm bảo và 
 
 ## Giới hạn số lượng yêu cầu suy luận mức độ ưu tiên
 
-Mức tiêu thụ [mức độ ưu tiên](https://ai.google.dev/gemini-api/docs/priority-inference?hl=vi) có giới hạn tốc độ riêng, mặc dù mức tiêu thụ được tính vào giới hạn tốc độ lưu lượng truy cập tương tác tổng thể. **Giới hạn tốc độ mặc định là: 0,3 lần [giới hạn tốc độ tiêu chuẩn](https://aistudio.google.com/rate-limit?hl=vi) cho mỗi mô hình và cấp**
+[Mức tiêu thụ ưu tiên](https://ai.google.dev/gemini-api/docs/priority-inference?hl=vi) có giới hạn tốc độ riêng, mặc dù mức tiêu thụ được tính vào giới hạn tốc độ lưu lượng truy cập tương tác tổng thể. **Giới hạn tốc độ mặc định là: 0,3 lần [giới hạn tốc độ tiêu chuẩn](https://aistudio.google.com/rate-limit?hl=vi) cho mỗi mô hình và cấp**
 
 ## Hạn mức về tốc độ của Batch API
 
@@ -85,7 +85,8 @@ Các yêu cầu [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=v
 | Bản xem trước Gemini 3.1 Pro | 5.000.000 |
 | Gemini 3.1 Flash-Lite | 10.000.000 |
 | Bản xem trước Gemini 3.1 Flash-Lite | 10.000.000 |
-| Bản xem trước Gemini 3 Flash | 3.000.000 |
+| Gemini 3.5 Flash | 3.000.000 |
+| Gemini 3.5 Flash | 3.000.000 |
 | Gemini 2.5 Pro | 5.000.000 |
 | Gemini 2.5 Pro TTS | 25.000 |
 | Gemini 2.5 Flash | 3.000.000 |
@@ -112,7 +113,8 @@ Các yêu cầu [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=v
 | Bản xem trước Gemini 3.1 Pro | 500.000.000 |
 | Gemini 3.1 Flash-Lite | 500.000.000 |
 | Bản xem trước Gemini 3.1 Flash-Lite | 500.000.000 |
-| Bản xem trước Gemini 3.1 Flash | 400.000.000 |
+| Gemini 3.5 Flash | 400.000.000 |
+| Gemini 3.5 Flash | 400.000.000 |
 | Gemini 2.5 Pro | 500.000.000 |
 | Gemini 2.5 Pro TTS | 100.000 |
 | Gemini 2.5 Flash | 400.000.000 |
@@ -139,7 +141,8 @@ Các yêu cầu [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=v
 | Bản xem trước Gemini 3.1 Pro | 1.000.000.000 |
 | Gemini 3.1 Flash-Lite | 1.000.000.000 |
 | Bản xem trước Gemini 3.1 Flash-Lite | 1.000.000.000 |
-| Bản xem trước Gemini 3.1 Flash | 1.000.000.000 |
+| Gemini 3.5 Flash | 1.000.000.000 |
+| Gemini 3.5 Flash | 1.000.000.000 |
 | Gemini 2.5 Pro | 1.000.000.000 |
 | Gemini 2.5 Pro TTS | 1.000.000 |
 | Gemini 2.5 Flash | 1.000.000.000 |
@@ -176,8 +179,8 @@ Gửi ý kiến phản hồi
 
 Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Cập nhật lần gần đây nhất: 2026-05-07 UTC.
+Cập nhật lần gần đây nhất: 2026-05-19 UTC.
 
 Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-07 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-19 UTC."],[],[]]

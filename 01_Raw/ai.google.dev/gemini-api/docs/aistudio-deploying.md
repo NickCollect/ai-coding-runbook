@@ -1,95 +1,90 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=pt-BR
-fetched_at: 2026-05-18T05:07:18.629308+00:00
-title: "Implanta\u00e7\u00e3o do Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=fr
+fetched_at: 2026-05-25T05:22:44.756024+00:00
+title: "D\u00e9ployer depuis Google AI\u00a0Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Envie comentários
+Envoyer des commentaires
 
-# Implantação do Google AI Studio
+# Déployer depuis Google AI Studio
 
-Com o Google AI Studio, você pode implantar seus aplicativos de pilha completa diretamente
-no modo de criação. Isso oferece um caminho rápido do protótipo para um ambiente de produção gerenciado e escalonável.
+Google AI Studio vous permet de déployer vos applications Full Stack directement depuis le mode Création. Vous pouvez ainsi passer rapidement d'un prototype à un environnement de production géré et évolutif.
 
-## Opções de implantação
+## Options de déploiement
 
-Para implantar seu aplicativo no modo de criação do AI Studio, os requisitos dependem
-do nível que você usa:
+Pour déployer votre application à partir du mode Création d'AI Studio, les exigences dépendent du niveau que vous utilisez :
 
-- [**Nível inicial do Google Cloud**](https://docs.cloud.google.com/docs/starter-tier?hl=pt-br):
-  permite publicar até dois aplicativos full-stack sem configurar um
-  projeto na nuvem ou uma conta de faturamento do Google Cloud.
-- **Implantação padrão**: requer um projeto do Google Cloud vinculado à sua conta do AI Studio e o faturamento ativado nesse projeto.
+- [**Niveau Starter de Google Cloud**](https://docs.cloud.google.com/docs/starter-tier?hl=fr):
+  vous permet de publier jusqu'à deux applications Full Stack sans configurer de
+  projet Google Cloud ni de compte de facturation.
+- **Déploiement standard** : nécessite un projet Google Cloud associé à votre
+  compte AI Studio et la facturation activée pour ce projet.
 
-## Sobre o nível Starter
+## À propos du niveau Starter
 
-O nível inicial do Google Cloud oferece um caminho simplificado para implantar
-aplicativos no Google Cloud diretamente do Google AI Studio sem configurar
-um ambiente completo do Google Cloud ou uma conta de faturamento.
+Le niveau Starter de Google Cloud vous permet de déployer des applications sur Google Cloud directement depuis Google AI Studio sans configurer d'environnement Google Cloud complet ni de compte de facturation.
 
-Cada implantação do Google AI Studio cria um serviço correspondente no
-Cloud Run. Para serviços implantados no Google AI Studio com o nível
-Starter, as seguintes limitações se aplicam:
+Chaque déploiement Google AI Studio crée un service correspondant dans Cloud Run. Pour les services déployés dans Google AI Studio avec le niveau Starter, les limites suivantes s'appliquent :
 
-- É possível implantar até dois serviços.
-- Seus serviços são implantados em uma [única região do Cloud Run](https://docs.cloud.google.com/run/docs/locations?hl=pt-br).
+- Vous pouvez déployer jusqu'à deux services.
+- Vos services sont déployés dans une
+  [seule région Cloud Run](https://docs.cloud.google.com/run/docs/locations?hl=fr).
 
-## Etapas de implantação do nível Starter
+## Étapes de déploiement du niveau Starter
 
-Depois de criar o app no modo de criação, implante-o com o nível Starter:
+Après avoir conçu votre application en mode Création, déployez-la avec le niveau Starter :
 
-1. Clique no botão **Publicar** no canto superior direito.
-2. Clique em **Primeiros passos**.
-3. Clique em **Publicar app**.
+1. Cliquez sur le bouton **Publier** en haut à droite.
+2. Cliquez sur **Commencer**.
+3. Cliquez sur **Publier l'application**.
 
-Quando a implantação for concluída, o AI Studio vai fornecer um URL do Cloud Run em que você pode
-acessar seu aplicativo ativo.
+Une fois le déploiement terminé, AI Studio fournit une URL Cloud Run vous permettant d'accéder à votre application en direct.
 
-## Implantação padrão
+## Déploiement standard
 
-À medida que seus aplicativos evoluem, você pode precisar de recursos além do nível Starter, como cotas mais altas, mais recursos de computação ou outros produtos do Google Cloud não disponíveis nesse nível. Para desbloquear esses recursos, você pode converter seu projeto totalmente gerenciado do nível Starter em um projeto na nuvem padrão do Google.
+À mesure que vos applications évoluent, vous pouvez avoir besoin de fonctionnalités allant au-delà du niveau Starter, telles que des quotas plus élevés, des ressources de calcul accrues ou d'autres produits Google Cloud non disponibles dans le niveau Starter. Pour déverrouiller ces fonctionnalités, vous pouvez convertir votre projet entièrement géré de niveau Starter en projet Google Cloud standard.
 
-Isso garante que você possa dimensionar sem perder o progresso. Siga as etapas para
-[criar uma conta do Cloud Billing](https://docs.cloud.google.com/billing/docs/how-to/create-billing-account?hl=pt-br#create-new-billing-account),
-aceitar formalmente os Termos de Serviço padrão do Google Cloud e
-[fazer upgrade para um projeto na nuvem padrão do Google Cloud](https://docs.cloud.google.com/docs/starter-tier?hl=pt-br#upgradee).
-Para mais informações, consulte
-[Configuração para contas pagas](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=pt-br#paid-setup).
+Vous pouvez ainsi effectuer une mise à l'échelle sans difficulté et sans perdre votre progression. Suivez les étapes pour
+[créer un compte de facturation Cloud](https://docs.cloud.google.com/billing/docs/how-to/create-billing-account?hl=fr#create-new-billing-account),
+accepter formellement les conditions d'utilisation standards de Google Cloud et
+[passer à un projet Google Cloud standard](https://docs.cloud.google.com/docs/starter-tier?hl=fr#upgradee).
+Pour en savoir plus, consultez
+[Configuration des comptes payants](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=fr#paid-setup).
 
-Para saber mais sobre os níveis de faturamento, consulte [Faturamento](https://ai.google.dev/gemini-api/docs/billing?hl=pt-br).
+Pour en savoir plus sur les niveaux de facturation, consultez [Facturation](https://ai.google.dev/gemini-api/docs/billing?hl=fr).
 
-## Excluir sua inscrição
+## Supprimer votre application
 
-Se você não precisar mais do app, siga estas instruções para excluí-lo no Google AI Studio:
+Si vous n'avez plus besoin de votre application, vous pouvez la supprimer dans Google AI Studio en suivant ces instructions :
 
-1. No Google AI Studio, acesse a
-   [página "Apps"](https://aistudio.google.com/app/apps?hl=pt-br).
-2. No menu à esquerda, selecione **Apps**.
-3. Coloque o cursor sobre o app que você quer excluir.
-4. Clique no ícone de lixeira no lado direito da linha para excluir o app.
+1. Dans Google AI Studio, accédez à la page "
+   [Applications](https://aistudio.google.com/app/apps?hl=fr)".
+2. Dans le menu de gauche, sélectionnez **Applications**.
+3. Pointez sur l'application que vous souhaitez supprimer.
+4. Cliquez sur l'icône en forme de corbeille à droite de la ligne pour supprimer l'application.
 
-## A seguir
+## Étape suivante
 
-- Saiba mais sobre o
-  [nível inicial do Google Cloud](https://docs.cloud.google.com/docs/starter-tier?hl=pt-br).
-- Leia sobre o [faturamento](https://ai.google.dev/gemini-api/docs/billing?hl=pt-br) na API Gemini.
+- En savoir plus sur le
+  [niveau Starter de Google Cloud](https://docs.cloud.google.com/docs/starter-tier?hl=fr).
+- En savoir plus sur [la facturation](https://ai.google.dev/gemini-api/docs/billing?hl=fr) dans l'API Gemini
 
-Envie comentários
+Envoyer des commentaires
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Última atualização 2026-05-16 UTC.
+Dernière mise à jour le 2026/05/16 (UTC).
 
-Quer enviar seu feedback?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-05-16 UTC."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/05/16 (UTC)."],[],[]]

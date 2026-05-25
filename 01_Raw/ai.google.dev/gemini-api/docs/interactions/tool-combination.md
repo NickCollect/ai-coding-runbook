@@ -1,30 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=id
-fetched_at: 2026-05-18T05:16:28.432566+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=ar
+fetched_at: 2026-05-25T05:28:41.716098+00:00
 title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Kirim masukan
+إرسال ملاحظات
 
-# Menggabungkan alat bawaan dan panggilan fungsi
+# الجمع بين الأدوات المضمّنة واستدعاء الدوال
 
-Gemini memungkinkan kombinasi [alat bawaan](https://ai.google.dev/gemini-api/docs/tools?hl=id), seperti
-`google_search`, dan [panggilan fungsi](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=id)
-(juga dikenal sebagai *alat kustom*) dalam satu interaksi dengan mempertahankan dan mengekspos
-histori konteks panggilan alat. Kombinasi alat bawaan dan kustom memungkinkan alur kerja agentik yang kompleks, yang modelnya dapat mendasarkan diri pada data web real-time sebelum memanggil logika bisnis spesifik Anda.
+يتيح Gemini الجمع بين [الأدوات المضمّنة](https://ai.google.dev/gemini-api/docs/tools?hl=ar)، مثل `google_search`، و[استدعاء الدوال](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=ar) (المعروفة أيضًا باسم *الأدوات المخصّصة*) في تفاعل واحد من خلال الاحتفاظ بسجلّ سياق استدعاءات الأدوات وعرضه. تتيح مجموعات الأدوات المضمّنة والمخصّصة إمكانية إنشاء سير عمل معقّد يعتمد على الذكاء الاصطناعي، حيث يمكن للنموذج، على سبيل المثال، الاستناد إلى بيانات الويب في الوقت الفعلي قبل استدعاء منطق عملك المحدّد.
 
-Berikut adalah contoh yang mengaktifkan kombinasi alat bawaan dan kustom dengan `google_search` dan fungsi kustom `getWeather`:
+في ما يلي مثال يتيح استخدام توليفات الأدوات المضمّنة والمخصّصة مع `google_search` ودالة مخصّصة `getWeather`:
 
 ### Python
 
@@ -53,7 +50,7 @@ getWeather = {
 # The Interactions API manages context automatically across tool calls.
 # The model will first use Google Search, then call getWeather.
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="What is the northernmost city in the United States? What's the weather like there today?",
     tools=[
         {"type": "google_search"},
@@ -96,7 +93,7 @@ const getWeather = {
 // The Interactions API manages context automatically across tool calls.
 // The model will first use Google Search, then call getWeather.
 const interaction = await client.interactions.create({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     input: "What is the northernmost city in the United States? What's the weather like there today?",
     tools: [
         { type: "google_search" },
@@ -123,7 +120,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -H "Api-Revision: 2026-05-20" \
 -d '{
-  "model": "gemini-3-flash-preview",
+  "model": "gemini-3.5-flash",
   "input": "What is the northernmost city in the United States? What'\''s the weather like there today?",
   "tools": [
     { "type": "google_search" },
@@ -146,92 +143,90 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Cara kerjanya
+## آلية العمل
 
-Model Gemini 3 menggunakan *sirkulasi konteks alat* untuk mengaktifkan kombinasi alat bawaan dan kustom. Sirkulasi konteks alat memungkinkan konteks alat bawaan dipertahankan dan diekspos, serta dibagikan dengan alat kustom dalam interaksi yang sama.
+تستخدم نماذج Gemini 3 *تداول سياق الأدوات* لتفعيل مجموعات الأدوات المضمّنة والمخصّصة. تتيح ميزة "تداول سياق الأداة" الحفاظ على سياق الأدوات المضمّنة وعرضه ومشاركته مع الأدوات المخصّصة في التفاعل نفسه.
 
-### Mengaktifkan kombinasi alat
+### تفعيل دمج الأدوات
 
-- Sertakan [`function_declarations`](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=id#function-declarations), beserta
-  alat bawaan yang ingin Anda gunakan, untuk memicu perilaku kombinasi.
+- أدرِج [`function_declarations`](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=ar#function-declarations) مع الأدوات المضمّنة التي تريد استخدامها لتفعيل السلوك المجمّع.
 
-### Langkah-langkah yang ditampilkan API
+### الخطوات التي تعرضها واجهة برمجة التطبيقات
 
-Dalam respons interaksi, API menampilkan langkah-langkah terpisah untuk panggilan alat bawaan dan panggilan fungsi (alat kustom):
+في ردّ التفاعل، تعرض واجهة برمجة التطبيقات خطوات منفصلة لطلبات البيانات من الأدوات المضمّنة وطلبات البيانات من الدوال (الأدوات المخصّصة):
 
-- **Langkah-langkah alat bawaan**: API mengelola langkah-langkah ini secara otomatis, dengan mempertahankan
-  konteks di seluruh giliran.
-- **Langkah-langkah panggilan fungsi**: API menampilkan langkah-langkah `function_call` untuk fungsi kustom Anda. Anda menjalankan fungsi dan memberikan hasilnya kembali.
+- **خطوات الأداة المضمّنة**: تدير واجهة برمجة التطبيقات هذه الخطوات تلقائيًا، مع الحفاظ على السياق في كل خطوة.
+- **خطوات استدعاء الدوال**: تعرض واجهة برمجة التطبيقات `function_call` خطوة لدوالك المخصّصة. يمكنك تنفيذ الدالة وتقديم النتيجة مرة أخرى.
 
-### Kolom penting dalam langkah-langkah yang ditampilkan
+### الحقول المهمة في الخطوات التي تم عرضها
 
-Kolom tertentu dalam langkah-langkah yang ditampilkan sangat penting untuk mempertahankan konteks alat dan mengaktifkan kombinasi alat:
+تُعدّ بعض الحقول في الخطوات التي يتم إرجاعها ضرورية للحفاظ على سياق الأداة وإتاحة استخدام مجموعات من الأدوات:
 
-- **`id`**: Ditemukan di langkah-langkah `function_call` dan `function_response`. ID unik yang memetakan panggilan ke responsnya.
-- **`signature`**: Ditemukan di langkah-langkah `thought`, serta semua langkah panggilan alat (misalnya, `function_call`) dan hasil (misalnya, `function_response`) untuk model Gemini 3+. Konteks terenkripsi ini memungkinkan **sirkulasi konteks alat** di seluruh interaksi.
+- **`id`**: تظهر في الخطوتَين `function_call` و`function_response`. معرّف فريد يربط طلبًا بردّه.
+- **`signature`**: تظهر في خطوات `thought`، بالإضافة إلى جميع خطوات طلب الأداة (مثل `function_call`) ونتيجتها (مثل `function_response`) لنماذج Gemini 3 والإصدارات الأحدث. يتيح هذا السياق المشفّر **تداول سياق الأداة** في جميع التفاعلات.
 
-**Mengelola kolom ini:**
+**إدارة هذه الحقول:**
 
-- **Mode Stateful (Direkomendasikan)**: Saat Anda menggunakan `previous_interaction_id`, server akan otomatis menangani kolom `id` dan `signature`.
-- **Mode Stateless**: Saat mengelola histori percakapan secara manual, Anda harus memastikan bahwa Anda meneruskan kolom `id` dan `signature` kembali ke model dalam permintaan berikutnya untuk memvalidasi keaslian dan mempertahankan konteks. SDK resmi menangani hal ini secara otomatis jika Anda meneruskan objek respons lengkap kembali ke histori.
+- **الوضع ذو الحالة (مُقترَح)**: عند استخدام `previous_interaction_id`، يعالج الخادم تلقائيًا الحقلَين `id` و`signature`.
+- **وضع عدم الاحتفاظ بالحالة**: عند إدارة سجلّ المحادثات يدويًا، يجب التأكّد من إعادة تمرير الحقلَين `id` و`signature` إلى النموذج في الطلبات اللاحقة للتحقّق من صحة البيانات والحفاظ على السياق. تتعامل حِزم SDK الرسمية مع ذلك تلقائيًا إذا أرسلت عنصر الردّ الكامل إلى السجلّ.
 
-### Data khusus alat
+### البيانات الخاصة بالأداة
 
-Beberapa alat bawaan menampilkan argumen data yang terlihat oleh pengguna dan khusus untuk jenis alat.
+تعرض بعض الأدوات المضمّنة وسيطات بيانات مرئية للمستخدم خاصة بنوع الأداة.
 
-| Alat | Argumen panggilan alat yang terlihat oleh pengguna (jika ada) | Respons alat yang terlihat oleh pengguna (jika ada) |
+| الأداة | وسيطات استدعاء الأداة المرئية للمستخدم (إن وُجدت) | ردّ الأداة المرئي للمستخدم (إن وُجد) |
 | --- | --- | --- |
 | **google\_search** | `queries` | `search_suggestions` |
 | **google\_maps** | `queries` | `places` `google_maps_widget_context_token` |
-| **url\_context** | `urls` URL yang akan dijelajahi | `status`: Status penjelajahan `retrieved_url`: URL yang dijelajahi |
-| **file\_search** | Tidak ada | Tidak ada |
+| **url\_context** | `urls` عناوين URL التي سيتم تصفّحها | ‫`status`: حالة التصفّح `retrieved_url`: عناوين URL التي تم تصفّحها |
+| **file\_search** | بدون | بدون |
 
-## Token dan harga
+## الرموز المميزة والأسعار
 
-Perhatikan bahwa bagian panggilan alat bawaan dalam permintaan dihitung ke dalam `prompt_token_count`. Karena langkah-langkah alat perantara ini kini terlihat dan ditampilkan kepada Anda, langkah-langkah tersebut merupakan bagian dari histori percakapan. Hal ini hanya berlaku untuk
-kasus untuk *permintaan*, bukan *respons*.
+يُرجى العِلم أنّ أجزاء طلبات استدعاء الأدوات المضمّنة يتم احتسابها ضمن
+`prompt_token_count`. بما أنّ خطوات الأدوات الوسيطة هذه أصبحت مرئية
+ويتم إرجاعها إليك، فهي تشكّل جزءًا من سجلّ المحادثات. ينطبق ذلك على *الطلبات* فقط، وليس على *الردود*.
 
-Alat Google Penelusuran adalah pengecualian untuk aturan ini. Google Penelusuran sudah
-menerapkan model harganya sendiri di tingkat kueri, sehingga token tidak
-dikenai biaya dua kali (lihat halaman [Harga](https://ai.google.dev/gemini-api/docs/pricing?hl=id)).
+تُستثنى أداة "بحث Google" من هذه القاعدة. يستخدم محرّك بحث Google نموذج التسعير الخاص به على مستوى طلب البحث، لذا لن يتم تحصيل رسوم مضاعفة مقابل الرموز المميزة (راجِع صفحة [الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar)).
 
-Baca halaman [Token](https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=id) untuk mengetahui informasi selengkapnya.
+يمكنك الاطّلاع على صفحة [الرموز المميزة](https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=ar) للحصول على مزيد من المعلومات.
 
-## Batasan
+## القيود
 
-- Secara default, gunakan mode `validated` (mode `auto` tidak didukung) saat sirkulasi konteks alat diaktifkan.
-- Alat bawaan seperti `google_search` mengandalkan informasi lokasi dan waktu saat ini. Jadi, jika `system_instruction` atau `function_declaration.description` Anda memiliki informasi lokasi dan waktu yang bertentangan, fitur kombinasi alat mungkin tidak berfungsi dengan baik.
+- يتم ضبط الوضع التلقائي على `validated` (الوضع `auto` غير متاح) عند تفعيل ميزة "تداول سياق الأداة".
+- تعتمد الأدوات المضمّنة، مثل `google_search`، على معلومات الموقع الجغرافي والوقت الحالي، لذا إذا كان `system_instruction` أو `function_declaration.description` يتضمّن معلومات متضاربة حول الموقع الجغرافي والوقت، قد لا تعمل ميزة دمج الأدوات بشكل جيد.
 
-## Alat yang didukung
+## الأدوات المتوافقة
 
-Sirkulasi konteks alat standar berlaku untuk alat sisi server (bawaan).
-Eksekusi Kode juga merupakan alat sisi server, tetapi memiliki solusi bawaannya sendiri untuk sirkulasi konteks. Penggunaan Komputer dan panggilan fungsi adalah alat sisi klien, dan juga memiliki solusi bawaan untuk sirkulasi konteks.
+يتم تطبيق تداول سياق الأداة العادي على الأدوات من جهة الخادم (المضمّنة).
+&quot;تنفيذ التعليمات البرمجية&quot; هي أيضًا أداة من جهة الخادم، ولكنّها تتضمّن حلاً مدمجًا خاصًا بها لتداول السياق. إنّ استخدام الكمبيوتر واستدعاء الدوال هما أداتان من جهة العميل،
+وتتضمّنان أيضًا حلولاً مدمجة لتداول السياق.
 
-| Alat | Sisi eksekusi | Dukungan Sirkulasi Konteks |
+| الأداة | جهة التنفيذ | إتاحة تداول السياق |
 | --- | --- | --- |
-| [Google Penelusuran](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=id) | Sisi server | Didukung |
-| [Google Maps](https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=id) | Sisi server | Didukung |
-| [Konteks URL](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=id) | Sisi server | Didukung |
-| [Penelusuran File](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=id) | Sisi server | Didukung |
-| [Eksekusi Kode](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=id) | Sisi server | Didukung (bawaan, menggunakan langkah-langkah `code_execution` dan `code_execution_result`) |
-| [Penggunaan Komputer](https://ai.google.dev/gemini-api/docs/interactions/computer-use?hl=id) | Sisi klien | Didukung (bawaan, menggunakan langkah-langkah `function_call` dan `function_response`) |
-| [Fungsi kustom](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=id) | Sisi klien | Didukung (bawaan, menggunakan langkah-langkah `function_call` dan `function_response`) |
+| [بحث Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=ar) | من جهة الخادم | متاح |
+| [خرائط Google](https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=ar) | من جهة الخادم | متاح |
+| [سياق عنوان URL](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=ar) | من جهة الخادم | متاح |
+| [البحث عن الملفات](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=ar) | من جهة الخادم | متاح |
+| [تنفيذ الرموز البرمجية](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=ar) | من جهة الخادم | متوافق (مضمّن، يستخدم الخطوتَين `code_execution` و`code_execution_result`) |
+| [استخدام الكمبيوتر](https://ai.google.dev/gemini-api/docs/interactions/computer-use?hl=ar) | من جهة العميل | متوافق (مضمّن، يستخدم الخطوتَين `function_call` و`function_response`) |
+| [الدوال المخصّصة](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=ar) | من جهة العميل | متوافق (مضمّن، يستخدم الخطوتَين `function_call` و`function_response`) |
 
-## Langkah berikutnya
+## الخطوات التالية
 
-- Pelajari lebih lanjut [Panggilan fungsi](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=id) di Gemini API.
-- Pelajari alat yang didukung:
-  - [Google Penelusuran](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=id)
-  - [Google Maps](https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=id)
-  - [Konteks URL](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=id)
-  - [Penelusuran File](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=id)
+- [مزيد من المعلومات حول ميزة "استدعاء الدوال"](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=ar) في Gemini API
+- استكشاف الأدوات المتوافقة:
+  - [بحث Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=ar)
+  - [خرائط Google](https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=ar)
+  - [سياق عنوان URL](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=ar)
+  - [البحث عن الملفات](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=ar)
 
-Kirim masukan
+إرسال ملاحظات
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Terakhir diperbarui pada 2026-05-16 UTC.
+تاريخ التعديل الأخير: 2026-05-19 (حسب التوقيت العالمي المتفَّق عليه)
 
-Ada masukan untuk kami?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-05-16 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-19 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

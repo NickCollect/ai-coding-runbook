@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/interactions/image-generation
-fetched_at: 2026-05-18T05:13:02.383123+00:00
+fetched_at: 2026-05-25T05:18:17.485000+00:00
 title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -109,14 +109,9 @@ interaction = client.interactions.create(
     input="Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme",
 )
 
-for step in interaction.steps:
-    if step.type == "model_output":
-        for content_block in step.content:
-            if content_block.type == "text":
-                print(content_block.text)
-            elif content_block.type == "image":
-                with open("generated_image.png", "wb") as f:
-                    f.write(base64.b64decode(content_block.data))
+with open("generated_image.png", "wb") as f:
+
+    f.write(base64.b64decode(interaction.output_image.data))
 ```
 
 ### JavaScript
@@ -136,19 +131,11 @@ async function main() {
     model: "gemini-3.1-flash-image-preview",
     input: prompt,
   });
-  for (const step of interaction.steps) {
-    if (step.type === "model_output") {
-      for (const contentBlock of step.content) {
-        if (contentBlock.type === "text") {
-          console.log(contentBlock.text);
-        } else if (contentBlock.type === "image") {
-          const imageData = contentBlock.data;
-          const buffer = Buffer.from(imageData, "base64");
-          fs.writeFileSync("gemini-native-image.png", buffer);
-          console.log("Image saved as gemini-native-image.png");
-        }
-      }
-    }
+  const generatedImage = interaction.output_image;
+  if (generatedImage) {
+    const buffer = Buffer.from(generatedImage.data, "base64");
+    fs.writeFileSync("gemini-native-image.png", buffer);
+    console.log("Image saved as gemini-native-image.png");
   }
 }
 
@@ -158,7 +145,6 @@ main();
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
@@ -171,6 +157,11 @@ curl -s -X POST \
     ]
   }'
 ```
+
+You can retrieve generated image data by using the `interaction.output_image`
+property, which returns the last generated image block. For details on
+convenience properties, see the
+[Interactions overview](https://ai.google.dev/gemini-api/docs/interactions#convenience-properties).
 
 ## Image editing (text-and-image-to-image)
 
@@ -213,14 +204,9 @@ interaction = client.interactions.create(
     ],
 )
 
-for step in interaction.steps:
-    if step.type == "model_output":
-        for content_block in step.content:
-            if content_block.type == "text":
-                print(content_block.text)
-            elif content_block.type == "image":
-                with open("generated_image.png", "wb") as f:
-                    f.write(base64.b64decode(content_block.data))
+with open("generated_image.png", "wb") as f:
+
+    f.write(base64.b64decode(interaction.output_image.data))
 ```
 
 ### JavaScript
@@ -251,19 +237,11 @@ async function main() {
     model: "gemini-3.1-flash-image-preview",
     input: prompt,
   });
-  for (const step of interaction.steps) {
-    if (step.type === "model_output") {
-      for (const contentBlock of step.content) {
-        if (contentBlock.type === "text") {
-          console.log(contentBlock.text);
-        } else if (contentBlock.type === "image") {
-          const imageData = contentBlock.data;
-          const buffer = Buffer.from(imageData, "base64");
-          fs.writeFileSync("gemini-native-image.png", buffer);
-          console.log("Image saved as gemini-native-image.png");
-        }
-      }
-    }
+  const generatedImage = interaction.output_image;
+  if (generatedImage) {
+    const buffer = Buffer.from(generatedImage.data, "base64");
+    fs.writeFileSync("gemini-native-image.png", buffer);
+    console.log("Image saved as gemini-native-image.png");
   }
 }
 
@@ -273,7 +251,6 @@ main();
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
@@ -312,14 +289,9 @@ interaction = client.interactions.create(
     tools=[{"type": "google_search"}],
 )
 
-for step in interaction.steps:
-    if step.type == "model_output":
-        for content_block in step.content:
-            if content_block.type == "text":
-                print(content_block.text)
-            elif content_block.type == "image":
-                with open("photosynthesis.png", "wb") as f:
-                    f.write(base64.b64decode(content_block.data))
+with open("photosynthesis.png", "wb") as f:
+
+    f.write(base64.b64decode(interaction.output_image.data))
 ```
 
 ### JavaScript
@@ -337,19 +309,11 @@ async function main() {
     tools: [{"type": "google_search"}],
   });
 
-  for (const step of interaction.steps) {
-    if (step.type === "model_output") {
-      for (const contentBlock of step.content) {
-        if (contentBlock.type === "text") {
-          console.log(contentBlock.text);
-        } else if (contentBlock.type === "image") {
-          const imageData = contentBlock.data;
-          const buffer = Buffer.from(imageData, "base64");
-          fs.writeFileSync("photosynthesis.png", buffer);
-          console.log("Image saved as photosynthesis.png");
-        }
-      }
-    }
+  const generatedImage = interaction.output_image;
+  if (generatedImage) {
+    const buffer = Buffer.from(generatedImage.data, "base64");
+    fs.writeFileSync("photosynthesis.png", buffer);
+    console.log("Image saved as photosynthesis.png");
   }
 }
 
@@ -359,7 +323,6 @@ await main();
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
@@ -395,14 +358,10 @@ interaction_2 = client.interactions.create(
     },
 )
 
-for step in interaction_2.steps:
-    if step.type == "model_output":
-        for content_block in step.content:
-            if content_block.type == "text":
-                print(content_block.text)
-            elif content_block.type == "image":
-                with open("photosynthesis_spanish.png", "wb") as f:
-                    f.write(base64.b64decode(content_block.data))
+generated_image = interaction_2.output_image
+if generated_image:
+    with open("photosynthesis_spanish.png", "wb") as f:
+        f.write(base64.b64decode(generated_image.data))
 ```
 
 ### JavaScript
@@ -420,24 +379,16 @@ const interaction2 = await ai.interactions.create({
   },
 });
 
-for (const step of interaction2.steps) {
-  if (step.type === "model_output") {
-    for (const contentBlock of step.content) {
-      if (contentBlock.type === "text") {
-        console.log(contentBlock.text);
-      } else if (contentBlock.type === "image") {
-        const buffer = Buffer.from(contentBlock.data, "base64");
-        fs.writeFileSync("photosynthesis_spanish.png", buffer);
-      }
-    }
-  }
+const generatedImage = interaction2.output_image;
+if (generatedImage) {
+  const buffer = Buffer.from(generatedImage.data, "base64");
+  fs.writeFileSync("photosynthesis_spanish.png", buffer);
 }
 ```
 
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
@@ -549,14 +500,9 @@ interaction = client.interactions.create(
     },
 )
 
-for step in interaction.steps:
-    if step.type == "model_output":
-        for content_block in step.content:
-            if content_block.type == "text":
-                print(content_block.text)
-            elif content_block.type == "image":
-                with open("office.png", "wb") as f:
-                    f.write(base64.b64decode(content_block.data))
+with open("office.png", "wb") as f:
+
+    f.write(base64.b64decode(interaction.output_image.data))
 ```
 
 ### JavaScript
@@ -592,18 +538,9 @@ async function main() {
     ],
   });
 
-  for (const step of interaction.steps) {
-    if (step.type === "model_output") {
-      for (const contentBlock of step.content) {
-        if (contentBlock.type === "text") {
-          console.log(contentBlock.text);
-        } else if (contentBlock.type === "image") {
-          const buffer = Buffer.from(contentBlock.data, "base64");
-          fs.writeFileSync("office.png", buffer);
-        }
-      }
-    }
-  }
+  const buffer = Buffer.from(interaction.output_image.data, 'base64');
+
+  fs.writeFileSync('office.png', buffer);
 }
 
 main();
@@ -612,7 +549,6 @@ main();
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
@@ -672,14 +608,9 @@ interaction = client.interactions.create(
     },
 )
 
-for step in interaction.steps:
-    if step.type == "model_output":
-        for content_block in step.content:
-            if content_block.type == "text":
-                print(content_block.text)
-            elif content_block.type == "image":
-                with open("weather.png", "wb") as f:
-                    f.write(base64.b64decode(content_block.data))
+with open("weather.png", "wb") as f:
+
+    f.write(base64.b64decode(interaction.output_image.data))
 ```
 
 ### JavaScript
@@ -703,18 +634,9 @@ async function main() {
     },
   });
 
-  for (const step of interaction.steps) {
-    if (step.type === "model_output") {
-      for (const contentBlock of step.content) {
-        if (contentBlock.type === "text") {
-          console.log(contentBlock.text);
-        } else if (contentBlock.type === "image") {
-          const buffer = Buffer.from(contentBlock.data, "base64");
-          fs.writeFileSync("weather.png", buffer);
-        }
-      }
-    }
-  }
+  const buffer = Buffer.from(interaction.output_image.data, 'base64');
+
+  fs.writeFileSync('weather.png', buffer);
 }
 
 main();
@@ -723,7 +645,6 @@ main();
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
@@ -807,7 +728,6 @@ main();
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
@@ -868,14 +788,11 @@ interaction = client.interactions.create(
     },
 )
 
-for step in interaction.steps:
-    if step.type == "model_output":
-        for content_block in step.content:
-            if content_block.type == "text":
-                print(content_block.text)
-            elif content_block.type == "image":
-                with open("butterfly.png", "wb") as f:
-                    f.write(base64.b64decode(content_block.data))
+print(interaction.output_text)
+
+with open("butterfly.png", "wb") as f:
+
+    f.write(base64.b64decode(interaction.output_image.data))
 ```
 
 ### JavaScript
@@ -898,18 +815,11 @@ async function main() {
     },
   });
 
-  for (const step of interaction.steps) {
-    if (step.type === "model_output") {
-      for (const contentBlock of step.content) {
-        if (contentBlock.type === "text") {
-          console.log(contentBlock.text);
-        } else if (contentBlock.type === "image") {
-          const buffer = Buffer.from(contentBlock.data, "base64");
-          fs.writeFileSync("butterfly.png", buffer);
-        }
-      }
-    }
-  }
+  console.log(interaction.output_text);
+
+  const buffer = Buffer.from(interaction.output_image.data, 'base64');
+
+  fs.writeFileSync('butterfly.png', buffer);
 }
 
 main();
@@ -918,7 +828,6 @@ main();
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
@@ -984,6 +893,65 @@ for (const step of interaction.steps) {
 }
 ```
 
+#### Interleaved text and images
+
+While standard image generation models only output images, some advanced Gemini
+3 models (such as `gemini-3-pro-image-preview`) can generate interleaved
+content—like stories or instructional guides containing both text blocks and
+illustrations inside the same response.
+
+Because the output is complex and interleaved, convenience properties like
+`.output_image` or `.output_text` will not capture the full sequence. To access
+and save interleaved content, you must manually iterate over `steps`:
+
+### Python
+
+```
+interaction = client.interactions.create(
+    model="gemini-3-pro-image-preview",
+    input="Write the story of the lifecycle of a monarch butterfly, interleave illustrations",
+)
+
+image_counter = 1
+for step in interaction.steps:
+    if step.type == "model_output":
+        for content_block in step.content:
+            if content_block.type == "text":
+                print(content_block.text)
+            elif content_block.type == "image":
+                filename = f"butterfly_lifecycle_{image_counter}.png"
+                with open(filename, "wb") as f:
+                    f.write(base64.b64decode(content_block.data))
+                print(f"\n[Saved illustration: {filename}]\n")
+                image_counter += 1
+```
+
+### JavaScript
+
+```
+const interaction = await ai.interactions.create({
+    model: "gemini-3-pro-image-preview",
+    input: "Write the story of the lifecycle of a monarch butterfly, interleave illustrations",
+});
+
+let imageCounter = 1;
+for (const step of interaction.steps) {
+  if (step.type === "model_output") {
+    for (const contentBlock of step.content) {
+      if (contentBlock.type === "text") {
+        console.log(contentBlock.text);
+      } else if (contentBlock.type === "image") {
+        const buffer = Buffer.from(contentBlock.data, "base64");
+        const filename = `butterfly_lifecycle_${imageCounter}.png`;
+        fs.writeFileSync(filename, buffer);
+        console.log(`\n[Saved illustration: ${filename}]\n`);
+        imageCounter++;
+      }
+    }
+  }
+}
+```
+
 #### Controlling thinking levels
 
 With Gemini 3.1 Flash Image, you can control the amount of thinking the model
@@ -1006,16 +974,11 @@ interaction = client.interactions.create(
     generation_config={"thinking_level": "high"},
 )
 
-for step in interaction.steps:
-    if step.type == "thought":
-      continue
-    if step.type == "model_output":
-        for content_block in step.content:
-            if content_block.type == "text":
-                print(content_block.text)
-            elif content_block.type == "image":
-                image = Image.open(io.BytesIO(base64.b64decode(content_block.data)))
-                image.show()
+print(interaction.output_text)
+
+image = Image.open(io.BytesIO(base64.b64decode(interaction.output_image.data)))
+
+image.show()
 ```
 
 ### JavaScript
@@ -1033,19 +996,11 @@ async function main() {
     generation_config: { thinking_level: "high" },
   });
 
-  for (const step of interaction.steps) {
-    if (step.type === "thought") continue;
-    if (step.type === "model_output") {
-      for (const contentBlock of step.content) {
-        if (contentBlock.type === "text") {
-          console.log(contentBlock.text);
-        } else if (contentBlock.type === "image") {
-          const buffer = Buffer.from(contentBlock.data, "base64");
-          fs.writeFileSync("image.png", buffer);
-        }
-      }
-    }
-  }
+  console.log(interaction.output_text);
+
+  const buffer = Buffer.from(interaction.output_image.data, 'base64');
+
+  fs.writeFileSync('image.png', buffer);
 }
 main();
 ```
@@ -1053,7 +1008,6 @@ main();
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
@@ -1137,14 +1091,11 @@ interaction = client.interactions.create(
     ],
 )
 
-for step in interaction.steps:
-    if step.type == "model_output":
-        for content_block in step.content:
-            if content_block.type == "text":
-                print(content_block.text)
-            elif content_block.type == "image":
-                with open("coral_reef.png", "wb") as f:
-                    f.write(base64.b64decode(content_block.data))
+print(interaction.output_text)
+
+with open("coral_reef.png", "wb") as f:
+
+    f.write(base64.b64decode(interaction.output_image.data))
 ```
 
 ### JavaScript
@@ -1167,18 +1118,11 @@ async function main() {
       }
     ],
   });
-  for (const step of interaction.steps) {
-    if (step.type === "model_output") {
-      for (const contentBlock of step.content) {
-        if (contentBlock.type === "text") {
-          console.log(contentBlock.text);
-        } else if (contentBlock.type === "image") {
-          const buffer = Buffer.from(contentBlock.data, "base64");
-          fs.writeFileSync("coral_reef.png", buffer);
-        }
-      }
-    }
-  }
+  console.log(interaction.output_text);
+
+  const buffer = Buffer.from(interaction.output_image.data, 'base64');
+
+  fs.writeFileSync('coral_reef.png', buffer);
 }
 
 main();
@@ -1187,7 +1131,6 @@ main();
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
@@ -2813,8 +2756,8 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-12 UTC.
+Last updated 2026-05-19 UTC.
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-12 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-19 UTC."],[],[]]

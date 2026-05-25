@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/workspace?hl=zh-TW
-fetched_at: 2026-05-18T05:10:07.800393+00:00
+fetched_at: 2026-05-25T05:23:33.391144+00:00
 title: "\u900f\u904e Workspace \u5e33\u6236\u5b58\u53d6 Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

@@ -1,89 +1,91 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/optimization?hl=fr
-fetched_at: 2026-05-18T05:16:01.372498+00:00
-title: "Optimisation et inf\u00e9rence de l'API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/optimization?hl=pl
+fetched_at: 2026-05-25T05:27:45.908938+00:00
+title: "Optymalizacja i\u00a0wnioskowanie w\u00a0interfejsie Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Envoyer des commentaires
+Prześlij opinię
 
-# Optimisation et inférence de l'API Gemini
+# Optymalizacja i wnioskowanie w interfejsie Gemini API
 
-L'API Gemini propose différents mécanismes d'optimisation pour vous aider à équilibrer la vitesse, le coût et la fiabilité en fonction des besoins spécifiques de vos charges de travail.
-Que vous créiez des robots conversationnels en temps réel ou que vous exécutiez des pipelines de traitement de données hors connexion volumineux, le choix du bon paradigme peut réduire considérablement les coûts ou améliorer les performances.
+Interfejs Gemini API oferuje różne mechanizmy optymalizacji, które pomagają zachować równowagę między szybkością, kosztem i niezawodnością w zależności od konkretnych potrzeb związanych z obciążeniem.
+Niezależnie od tego, czy tworzysz boty konwersacyjne działające w czasie rzeczywistym, czy uruchamiasz złożone potoki przetwarzania danych offline, wybór odpowiedniego paradygmatu może znacznie obniżyć koszty lub zwiększyć wydajność.
 
-| Fonctionnalité | Standard | Flex | Priorité | Lot | Mise en cache |
+| Funkcja | Standardowe | Flex | Priorytet | Wsad | Buforowanie |
 | --- | --- | --- | --- | --- | --- |
-| **Tarifs** | Plein tarif | 50% de remise | 75% à 100% de plus que la valeur standard | 50% de remise | Remise de 90% + stockage des jetons au prorata |
-| **Latence** | De secondes à minutes | Minutes (objectif de 1 à 15 min) | Secondes | Jusqu'à 24 heures | Délai d'émission du premier jeton plus rapide |
-| **Fiabilité** | Élevée / Moyenne-haute | Optimisation limitée (désactivable) | Élevée (non amovible) | Élevée (pour le débit) | N/A |
-| **Interface** | Synchrone | Synchrone | Synchrone | Asynchrone | État enregistré |
-| **Cas d'utilisation idéal** | Workflows généraux des applications | Chaînes séquentielles non urgentes | Applications de production destinées aux utilisateurs | Ensembles de données volumineux, évaluations hors connexion | Requêtes récurrentes sur le même fichier |
+| **Ceny** | Pełna cena | 50% zniżki | 75–100% więcej niż standardowa | 50% zniżki | 90% rabatu + proporcjonalne miejsce na tokeny |
+| **Opóźnienie** | Sekundy na minuty | Minuty (docelowo 1–15 min) | Sekundy | Do 24 godzin | Krótszy czas do pierwszego tokena |
+| **Niezawodność** | Wysoka / dość wysoka | Możliwie najlepsza obsługa (z możliwością odrzucenia) | Wysoka (niezrzucająca sierści) | Wysoki (dla przepustowości) | Nie dotyczy |
+| **Interfejs** | Synchroniczna | Synchroniczna | Synchroniczna | Asynchroniczny | Stan zapisany |
+| **Najlepsze zastosowanie** | Ogólne przepływy pracy aplikacji | Łańcuchy sekwencyjne o niskim priorytecie | Aplikacje produkcyjne przeznaczone dla użytkowników | Ogromne zbiory danych, oceny offline | Powtarzające się zapytania dotyczące tego samego pliku |
 
-## Niveaux de service d'inférence (synchrone)
+## Poziomy usług wnioskowania (synchroniczne)
 
-Vous pouvez passer d'un trafic synchrone optimisé pour la fiabilité à un trafic synchrone optimisé pour les coûts en transmettant le paramètre `service_tier` dans vos appels de génération standards.
+Możesz przełączać się między ruchem synchronicznym zoptymalizowanym pod kątem niezawodności a ruchem synchronicznym zoptymalizowanym pod kątem kosztów, przekazując parametr `service_tier` w standardowych wywołaniach generowania.
 
-### Inférence standard (par défaut)
+### Standardowe wnioskowanie (domyślne)
 
-Le niveau standard est l'option par défaut pour la génération de contenu séquentiel.
-Elle offre des temps de réponse normaux, sans frais supplémentaires ni longues files d'attente.
+Standardowa wersja jest domyślną opcją generowania treści sekwencyjnych.
+Zapewnia normalne czasy reakcji bez dodatkowych opłat ani długich kolejek.
 
-- **Fiabilité** : niveau de gravité standard
-- **Prix** : tarifs standards.
-- **Recommandé pour** : la plupart des applications interactives du quotidien.
+- **Niezawodność:** standardowa krytyczność
+- **Cena:** standardowa.
+- **Najlepsze w przypadku:** najbardziej interaktywnych aplikacji codziennego użytku.
 
-### Inférence prioritaire (optimisée pour la latence)
+### Wnioskowanie priorytetowe (zoptymalizowane pod kątem czasu oczekiwania)
 
-Le traitement [prioritaire](https://ai.google.dev/gemini-api/docs/priority-inference?hl=fr) achemine vos demandes vers des files d'attente de calcul de haute criticité.
-Ce trafic ne peut en aucun cas être supprimé (il n'est jamais interrompu par d'autres niveaux) et offre la fiabilité la plus élevée. Si vous dépassez les limites de priorité dynamique, le système rétrogradera la requête vers un traitement standard au lieu d'échouer avec une erreur.
+Przetwarzanie [priorytetowe](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pl) kieruje Twoje żądania do kolejek obliczeniowych o wysokim znaczeniu.
+Ten ruch jest ściśle niepodlegający przerwaniu (nigdy nie jest wyprzedzany przez inne warstwy) i zapewnia najwyższą niezawodność. Jeśli przekroczysz limity dynamicznego priorytetu, system obniży priorytet żądania do przetwarzania standardowego zamiast zwracać błąd.
 
-- **Fiabilité** : criticité la plus élevée
-- **Prix** : 75% à 100% au-dessus des tarifs standards.
-- **Idéal pour** : les chatbots clients, la détection de fraudes en temps réel et les copilotes essentiels pour l'entreprise.
+- **Niezawodność:** najwyższa krytyczność
+- **Cena:** od 75% do 100% wyższa niż stawki standardowe.
+- **Najlepsze w przypadku:** chatbotów dla klientów, wykrywania oszustw w czasie rzeczywistym i kluczowych dla firmy asystentów.
 
-### Inférence flexible (coût optimisé)
+### Wnioskowanie Flex (optymalizacja pod kątem kosztów)
 
-L'[inférence flexible](https://ai.google.dev/gemini-api/docs/flex-inference?hl=fr) offre une remise de 50% par rapport aux tarifs standards en utilisant une capacité de calcul opportuniste hors pointe. Les requêtes sont traitées de manière synchrone, ce qui signifie que vous n'avez pas besoin de réécrire le code pour gérer les objets de lot.
-Comme il s'agit d'un trafic "éliminable", les requêtes peuvent être préemptées si le système connaît des pics de trafic standards.
+[Elastyczne wnioskowanie](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pl) oferuje 50% rabatu
+w porównaniu ze stawkami standardowymi dzięki wykorzystaniu
+okazjonalnej mocy obliczeniowej poza godzinami szczytu. Żądania są przetwarzane synchronicznie, co oznacza, że nie musisz ponownie pisać kodu, aby zarządzać obiektami zbiorczymi.
+Ponieważ jest to ruch „zrzucany”, żądania mogą zostać wyprzedzone, jeśli system odnotuje standardowe skoki ruchu.
 
-- **Fiabilité** : criticité non garantie et réductible
-- **Prix** : 50% du prix standard (facturé par jeton).
-- **Idéal pour** : les workflows agentiques en plusieurs étapes où l'appel N+1 dépend de la sortie de l'appel N, des mises à jour CRM en arrière-plan et des évaluations hors connexion.
+- **Niezawodność:** niegwarantowana, z możliwością obniżenia priorytetu
+- **Cena:** 50% ceny standardowej (rozliczane za token).
+- **Najlepsze rozwiązanie w przypadku:** wieloetapowych procesów opartych na agentach, w których połączenie N+1 zależy od wyniku połączenia N, aktualizacji systemu CRM w tle i ocen offline.
 
-## API Batch (par lot, asynchrone)
+## Batch API (operacje zbiorcze, asynchroniczne)
 
-L'[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr) est conçue pour traiter de grands volumes de requêtes de manière asynchrone à 50% du coût standard. Vous pouvez envoyer des requêtes sous forme de dictionnaires intégrés ou à l'aide d'un fichier d'entrée JSONL (jusqu'à 2 Go). Il traite les demandes à l'aide de files d'attente de débit en arrière-plan avec un délai de traitement cible de 24 heures.
+[Interfejs Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=pl) został zaprojektowany do asynchronicznego przetwarzania dużych ilości żądań przy 50% standardowego kosztu. Żądania możesz przesyłać jako słowniki wbudowane lub za pomocą pliku wejściowego JSONL (maksymalnie 2 GB). Przetwarza żądania przy użyciu kolejek przepustowości w tle z docelowym czasem realizacji wynoszącym 24 godziny.
 
-- **Fiabilité** : peut être supprimé, mais avec des tentatives automatiques de 24 heures et un système de mise en file d'attente
-- **Prix** : 50% du prix standard.
-- **Idéal pour** : le prétraitement d'ensembles de données volumineux, l'exécution de suites de tests de régression périodiques et la génération d'images ou d'embeddings à grand volume.
+- **Niezawodność:** możliwość odrzucenia, ale z automatycznymi ponownymi próbami wysyłania co 24 godziny i systemem kolejkowania.
+- **Cena:** 50% ceny standardowej.
+- **Najlepsze do:** wstępnego przetwarzania ogromnych zbiorów danych, uruchamiania okresowych pakietów testów regresji i generowania dużej liczby obrazów lub osadzonych danych.
 
-## Mise en cache du contexte (économies d'entrées)
+## Buforowanie kontekstu (oszczędność danych wejściowych)
 
-La [mise en cache de contexte](https://ai.google.dev/gemini-api/docs/caching?hl=fr) est utilisée lorsqu'un contexte initial important est référencé à plusieurs reprises par des requêtes plus courtes.
+[Buforowanie kontekstu](https://ai.google.dev/gemini-api/docs/caching?hl=pl) jest używane, gdy obszerny kontekst początkowy jest wielokrotnie przywoływany przez krótsze żądania.
 
-- **Mise en cache implicite** : activée automatiquement sur les modèles Gemini 2.5 et ultérieurs.
-  Le système répercute les économies si votre demande touche des caches existants basés sur des préfixes d'invite courants.
-- **Mise en cache explicite** : vous pouvez créer manuellement un objet cache avec une valeur TTL (Time-To-Live) spécifique. Une fois les jetons mis en cache, vous pouvez vous y référer pour les requêtes ultérieures afin d'éviter de transmettre plusieurs fois la même charge utile de corpus.
-- **Prix** : facturé en fonction du nombre de jetons de cache et de la durée de stockage (TTL).
-- **Idéal pour** : les chatbots avec des instructions système détaillées, l'analyse répétitive de fichiers vidéo longs ou les requêtes sur des ensembles de documents volumineux.
+- **Pamięć podręczna niejawna:** automatycznie włączona w modelach Gemini 2.5 i nowszych.
+  Jeśli Twoja prośba trafi do istniejących pamięci podręcznych na podstawie wspólnych prefiksów promptów, system przekaże Ci oszczędności.
+- **Jawne buforowanie:** możesz ręcznie utworzyć obiekt pamięci podręcznej z określonym czasem życia (TTL). Po utworzeniu możesz odwoływać się do tokenów w pamięci podręcznej w przypadku kolejnych żądań, aby uniknąć wielokrotnego przekazywania tego samego ładunku korpusu.
+- **Cena:** rozliczana na podstawie liczby tokenów pamięci podręcznej i czasu przechowywania (TTL).
+- **Najlepsze rozwiązanie w przypadku:** chatbotów z rozbudowanymi instrukcjami systemowymi, powtarzalnej analizy długich plików wideo lub zapytań dotyczących dużych zbiorów dokumentów.
 
-Envoyer des commentaires
+Prześlij opinię
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Dernière mise à jour le 2026/04/29 (UTC).
+Ostatnia aktualizacja: 2026-04-29 UTC.
 
-Voulez-vous nous donner plus d'informations ?
+Chcesz przekazać coś jeszcze?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/04/29 (UTC)."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]

@@ -1,56 +1,56 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/libraries?hl=id
-fetched_at: 2026-05-18T05:15:29.396187+00:00
-title: "Library Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/libraries?hl=pl
+fetched_at: 2026-05-25T05:27:48.943985+00:00
+title: "Biblioteki Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Kirim masukan
+Prześlij opinię
 
-# Library Gemini API
+# Biblioteki Gemini API
 
-Saat membuat aplikasi dengan Gemini API, sebaiknya gunakan **Google GenAI SDK**.
-SDK ini adalah library resmi yang siap digunakan dalam produksi yang kami kembangkan dan kelola untuk bahasa yang paling populer. SDK ini tersedia secara [Umum](https://ai.google.dev/gemini-api/docs/libraries?hl=id#new-libraries) dan digunakan di semua
-dokumentasi dan contoh resmi kami.
+Podczas tworzenia aplikacji za pomocą interfejsu Gemini API zalecamy korzystanie z **pakietu Google GenAI SDK**.
+Są to oficjalne biblioteki gotowe do użycia w środowisku produkcyjnym, które tworzymy i utrzymujemy w przypadku najpopularniejszych języków. Są one w [Ogólnej Dostępności](https://ai.google.dev/gemini-api/docs/libraries?hl=pl#new-libraries) i używane we wszystkich naszych oficjalnych
+dokumentach i przykładach.
 
-Jika Anda baru menggunakan Gemini API, ikuti [panduan memulai cepat](https://ai.google.dev/gemini-api/docs/quickstart?hl=id) kami untuk memulai.
+Jeśli dopiero zaczynasz korzystać z interfejsu Gemini API, zapoznaj się z naszym [przewodnikiem szybkiego startu](https://ai.google.dev/gemini-api/docs/quickstart?hl=pl).
 
-## Dukungan dan penginstalan bahasa
+## Obsługa języków i instalacja
 
-Google GenAI SDK tersedia untuk bahasa Python, JavaScript/TypeScript, Go, dan Java. Anda dapat menginstal library setiap bahasa menggunakan pengelola paket, atau mengunjungi repositori GitHub-nya untuk berinteraksi lebih lanjut:
+Pakiet Google GenAI SDK jest dostępny w językach Python, JavaScript/TypeScript, Go i Java. Bibliotekę każdego języka możesz zainstalować za pomocą menedżerów pakietów lub odwiedzić repozytoria GitHub, aby uzyskać więcej informacji:
 
 ### Python
 
-- Library: [`google-genai`](https://pypi.org/project/google-genai)
-- Repositori GitHub: [googleapis/python-genai](https://github.com/googleapis/python-genai)
-- Penginstalan: `pip install google-genai`
+- Biblioteka: [`google-genai`](https://pypi.org/project/google-genai)
+- Repozytorium GitHub: [googleapis/python-genai](https://github.com/googleapis/python-genai)
+- Instalacja: `pip install google-genai`
 
 ### JavaScript
 
-- Library: [`@google/genai`](https://www.npmjs.com/package/@google/genai)
-- Repositori GitHub: [googleapis/js-genai](https://github.com/googleapis/js-genai)
-- Penginstalan: `npm install @google/genai`
+- Biblioteka: [`@google/genai`](https://www.npmjs.com/package/@google/genai)
+- Repozytorium GitHub: [googleapis/js-genai](https://github.com/googleapis/js-genai)
+- Instalacja: `npm install @google/genai`
 
 ### Go
 
-- Library: [`google.golang.org/genai`](https://pkg.go.dev/google.golang.org/genai)
-- Repositori GitHub: [googleapis/go-genai](https://github.com/googleapis/go-genai)
-- Penginstalan: `go get google.golang.org/genai`
+- Biblioteka: [`google.golang.org/genai`](https://pkg.go.dev/google.golang.org/genai)
+- Repozytorium GitHub: [googleapis/go-genai](https://github.com/googleapis/go-genai)
+- Instalacja: `go get google.golang.org/genai`
 
 ### Java
 
-- Library: `google-genai`
-- Repositori GitHub: [googleapis/java-genai](https://github.com/googleapis/java-genai)
-- Penginstalan: Jika Anda menggunakan Maven, tambahkan kode berikut ke dependensi Anda:
+- Biblioteka: `google-genai`
+- Repozytorium GitHub: [googleapis/java-genai](https://github.com/googleapis/java-genai)
+- Instalacja: jeśli używasz Maven, dodaj do zależności ten kod:
 
 ```
 <dependencies>
@@ -64,48 +64,47 @@ Google GenAI SDK tersedia untuk bahasa Python, JavaScript/TypeScript, Go, dan Ja
 
 ### C#
 
-- Library: `Google.GenAI`
-- Repositori GitHub: [googleapis/dotnet-genai](https://googleapis.github.io/dotnet-genai/)
-- Penginstalan: `dotnet add package Google.GenAI`
+- Biblioteka: `Google.GenAI`
+- Repozytorium GitHub: [googleapis/dotnet-genai](https://googleapis.github.io/dotnet-genai/)
+- Instalacja: `dotnet add package Google.GenAI`
 
-## Ketersediaan umum
+## Ogólna dostępność
 
-Mulai Mei 2025, Google GenAI SDK telah mencapai Ketersediaan Umum (GA) di semua platform yang didukung dan merupakan library yang direkomendasikan untuk mengakses Gemini API.
-Library ini stabil, didukung sepenuhnya untuk penggunaan produksi, dan dikelola secara aktif.
-Library ini menyediakan akses ke fitur terbaru, dan menawarkan performa terbaik saat bekerja dengan Gemini.
+Od maja 2025 r. pakiet Google GenAI SDK jest ogólnie dostępny na wszystkich obsługiwanych platformach i jest zalecaną biblioteką do uzyskiwania dostępu do interfejsu Gemini API.
+Jest stabilny, w pełni obsługiwany w środowisku produkcyjnym i aktywnie utrzymywany.
+Zapewnia dostęp do najnowszych funkcji i najlepszą wydajność podczas pracy z Gemini.
 
-Jika Anda menggunakan salah satu library lama kami, sebaiknya bermigrasi agar dapat mengakses fitur terbaru dan mendapatkan performa terbaik saat bekerja dengan Gemini. Tinjau bagian [library lama](https://ai.google.dev/gemini-api/docs/libraries?hl=id#previous-sdks) untuk mengetahui informasi selengkapnya.
+Jeśli używasz jednej z naszych starszych bibliotek, zdecydowanie zalecamy przejście na nową, aby uzyskać dostęp do najnowszych funkcji i najlepszej wydajności podczas pracy z Gemini. Więcej informacji znajdziesz w sekcji [Starsze biblioteki](https://ai.google.dev/gemini-api/docs/libraries?hl=pl#previous-sdks).
 
-## Library lama dan migrasi
+## Starsze biblioteki i migracja
 
-Jika Anda menggunakan salah satu library lama kami, sebaiknya
-[bermigrasi ke library baru](https://ai.google.dev/gemini-api/docs/migrate?hl=id).
+[Jeśli używasz jednej z naszych starszych bibliotek, zalecamy przejście na nowe biblioteki.](https://ai.google.dev/gemini-api/docs/migrate?hl=pl)
 
-Library lama tidak menyediakan akses ke fitur terbaru (seperti
-[Live API](https://ai.google.dev/gemini-api/docs/live?hl=id) dan [Veo](https://ai.google.dev/gemini-api/docs/video?hl=id)) dan
-tidak digunakan lagi mulai 30 November 2025.
+Starsze biblioteki nie zapewniają dostępu do najnowszych funkcji (takich jak
+[Live API](https://ai.google.dev/gemini-api/docs/live?hl=pl) i [Veo](https://ai.google.dev/gemini-api/docs/video?hl=pl)) i są
+wycofywane z dniem 30 listopada 2025 r.
 
-Status dukungan setiap library lama bervariasi, seperti yang dijelaskan dalam tabel berikut:
+Stan obsługi każdej starszej biblioteki jest inny. Szczegółowe informacje znajdziesz w tabeli poniżej:
 
-| Bahasa | Library lama | Status dukungan | Library yang direkomendasikan |
+| Język | Starsza biblioteka | Stan obsługi | Zalecana biblioteka |
 | --- | --- | --- | --- |
-| **Python** | `google-generativeai` | Tidak dikelola secara aktif | `google-genai` |
-| **JavaScript/TypeScript** | `@google/generativeai` | Tidak dikelola secara aktif | `@google/genai` |
-| **Go** | `google.golang.org/generative-ai` | Tidak dikelola secara aktif | `google.golang.org/genai` |
-| **Dart dan Flutter** | `google_generative_ai` | Tidak dikelola secara aktif | Gunakan [Genkit Dart](https://genkit.dev/docs/dart/get-started/) atau [Firebase AI Logic](https://pub.dev/packages/firebase_ai) |
-| **Swift** | `generative-ai-swift` | Tidak dikelola secara aktif | Gunakan [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=id) |
-| **Android** | `generative-ai-android` | Tidak dikelola secara aktif | Gunakan [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=id) |
+| **Python** | `google-generativeai` | Nie jest aktywnie utrzymywana | `google-genai` |
+| **JavaScript/TypeScript** | `@google/generativeai` | Nie jest aktywnie utrzymywana | `@google/genai` |
+| **Go** | `google.golang.org/generative-ai` | Nie jest aktywnie utrzymywana | `google.golang.org/genai` |
+| **Dart i Flutter** | `google_generative_ai` | Nie jest aktywnie utrzymywana | Użyj [Genkit Dart](https://genkit.dev/docs/dart/get-started/) lub [Firebase AI Logic](https://pub.dev/packages/firebase_ai) |
+| **Swift** | `generative-ai-swift` | Nie jest aktywnie utrzymywana | Użyj [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=pl) |
+| **Android** | `generative-ai-android` | Nie jest aktywnie utrzymywana | Użyj [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=pl) |
 
-**Catatan untuk developer Java:** Tidak ada Java SDK lama yang disediakan Google untuk Gemini API, sehingga tidak diperlukan migrasi dari library Google sebelumnya. Anda
-dapat langsung memulai dengan library baru di bagian
-[Dukungan dan penginstalan bahasa](#install).
+**Uwaga dla programistów w Javie:** nie było starszego pakietu Java SDK dostarczonego przez Google dla interfejsu Gemini API, więc nie jest wymagana migracja z poprzedniej biblioteki Google. Możesz
+od razu zacząć korzystać z nowej biblioteki opisanej w
+[sekcji Obsługa języków i instalacja](#install).
 
-Kirim masukan
+Prześlij opinię
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Terakhir diperbarui pada 2026-05-13 UTC.
+Ostatnia aktualizacja: 2026-05-13 UTC.
 
-Ada masukan untuk kami?
+Chcesz przekazać coś jeszcze?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-05-13 UTC."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-05-13 UTC."],[],[]]

@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/interactions/computer-use?hl=fr
-fetched_at: 2026-05-18T05:18:24.638249+00:00
+fetched_at: 2026-05-25T05:28:27.925704+00:00
 title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 

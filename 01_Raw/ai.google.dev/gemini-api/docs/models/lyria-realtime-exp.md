@@ -1,48 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=he
-fetched_at: 2026-05-18T05:04:42.155447+00:00
-title: "\u202bLyria RealTime experimental \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=pt-BR
+fetched_at: 2026-05-25T05:19:52.601611+00:00
+title: "Lyria RealTime experimental \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-שליחת משוב
+Envie comentários
 
-# ‫Lyria RealTime experimental
+# Lyria RealTime experimental
 
-מנוע ניסיוני לסינתזה מוזיקלית באיכות גבוהה, שמציע יכולות חדשניות ליצירה ולשינוי של תוכן אודיו. ‫Lyria RealTime
-הוא הכלי הכי טוב לכתיבת שירים בעזרת AI, ליצירת מוזיקה אינסטרומנטלית ייחודית ולתהליכי עבודה יצירתיים עם אודיו שדורשים שליטה מלאה במלודיה ובקצב, ללא שירה.
+Um mecanismo experimental para síntese musical de alta fidelidade, que oferece recursos inovadores para gerar e transformar conteúdo de áudio. O Lyria RealTime
+é ideal para composição de músicas com assistência de IA, geração de instrumentais exclusivos e
+fluxos de trabalho de áudio criativos que exigem controle total sobre melodia e ritmo, sem
+vocais.
 
-[איך משתמשים ב-Lyria RealTime](https://deepmind.google/models/lyria/lyria-realtime/?hl=he)
+[Testar o Lyria RealTime](https://deepmind.google/models/lyria/lyria-realtime/?hl=pt-br)
 
-## מאמרי עזרה
+## Documentação
 
-למידע מלא על התכונות והיכולות, אפשר לעבור לדף [יצירת מוזיקה בזמן אמת](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=he).
+Acesse a página [Geração de música em tempo real](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=pt-br) para conferir todos os recursos e funcionalidades.
 
 ## lyria-realtime-exp
 
-| נכס | תיאור |
+| Propriedade | Descrição |
 | --- | --- |
-| id\_cardקוד מודל | ‫**Gemini API**  `lyria-realtime-exp` |
-| saveסוגי נתונים נתמכים | **קלט**  טקסט (הנחיות עם משקל)  **פלט**  אודיו (PCM גולמי של 16 ביט) |
-| token\_autoהגבלות סטרימינג | **תדירות הדגימה**  ‫48kHz (סטריאו)  **שליטה בזמן האחזור**  עד 2 שניות |
-| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - ניסיוני: `lyria-realtime-exp` |
-| calendar\_monthהעדכון האחרון | מאי 2025 |
+| Código do modelo id\_card | **API Gemini**  `lyria-realtime-exp` |
+| saveTipos de dados aceitos | **Entrada**  Texto (comandos ponderados)  **Saída**  Áudio (PCM bruto de 16 bits) |
+| token\_autoLimites de transmissão | **Taxa de amostragem**  48 kHz (estéreo)  **Controlar a latência**  Máximo de 2 segundos |
+| Versões do 123 | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Experimental: `lyria-realtime-exp` |
+| calendar\_monthÚltima atualização | Maio de 2025 |
 
-שליחת משוב
+Envie comentários
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-עדכון אחרון: 2026-04-29 (שעון UTC).
+Última atualização 2026-04-29 UTC.
 
-רוצה לתת לנו משוב?
+Quer enviar seu feedback?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]

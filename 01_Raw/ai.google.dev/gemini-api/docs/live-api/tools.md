@@ -1,47 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=ar
-fetched_at: 2026-05-18T05:13:36.615252+00:00
+source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=ko
+fetched_at: 2026-05-25T05:18:04.690691+00:00
 title: "Tool use with Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-إرسال ملاحظات
+의견 보내기
 
 # Tool use with Live API
 
-تتيح ميزة &quot;استخدام الأدوات&quot; لواجهة Live API تجاوز مجرد المحادثة من خلال تمكينها من تنفيذ إجراءات في العالم الحقيقي واستخلاص السياق الخارجي مع الحفاظ على اتصال في الوقت الفعلي.
-يمكنك تحديد أدوات، مثل [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar)
-و[بحث Google](https://ai.google.dev/gemini-api/docs/grounding?hl=ar)، باستخدام Live API.
+도구 사용을 통해 Live API는 실시간 연결을 유지하면서 실제 작업을 수행하고 외부 컨텍스트를 가져올 수 있으므로 단순한 대화를 넘어설 수 있습니다.
+Live API를 사용하여 [함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko) 및 [Google 검색](https://ai.google.dev/gemini-api/docs/grounding?hl=ko)과 같은 도구를 정의할 수 있습니다.
 
-## نظرة عامة على الأدوات المتوافقة
+## 지원되는 도구 개요
 
-في ما يلي نظرة عامة موجزة على الأدوات المتاحة لنماذج Live API:
+다음은 Live API 모델에 사용할 수 있는 도구에 대한 간략한 개요입니다.
 
-| الأداة | معاينة Gemini 3.1 Flash Live | النسخة الحصرية من Gemini 2.5 Flash |
+| 도구 | Gemini 3.1 Flash 실시간 미리보기 | Gemini 2.5 Flash 실시간 미리보기 |
 | --- | --- | --- |
-| **البحث** | متاح | متاح |
-| **استدعاء الدوال** | متاح (متزامن فقط) | متوافق (متزامن و[غير متزامن](#async-function-calling)) |
-| **خرائط Google** | غير متاح | غير متاح |
-| **تنفيذ الرموز البرمجية** | غير متاح | غير متاح |
-| **سياق عنوان URL** | غير متاح | غير متاح |
+| **검색** | 지원됨 | 지원됨 |
+| **함수 호출** | 지원됨 (동기만 해당) | 지원됨 (동기 및 [비동기](#async-function-calling)) |
+| **Google 지도** | 지원되지 않음 | 지원되지 않음 |
+| **코드 실행** | 지원되지 않음 | 지원되지 않음 |
+| **URL 컨텍스트** | 지원되지 않음 | 지원되지 않음 |
 
-## استدعاء الدالة
+## 함수 호출
 
-تتيح Live API استخدام ميزة "استدعاء الدوال"، تمامًا مثل طلبات إنشاء المحتوى العادية. تتيح ميزة &quot;استدعاء الدوال&quot; لواجهة Live API التفاعل مع البيانات والبرامج الخارجية، ما يزيد بشكل كبير من إمكانات تطبيقاتك.
+Live API는 일반 콘텐츠 생성 요청과 마찬가지로 함수 호출을 지원합니다. 함수 호출을 사용하면 Live API가 외부 데이터 및 프로그램과 상호작용하여 애플리케이션이 할 수 있는 작업을 크게 늘릴 수 있습니다.
 
-يمكنك تحديد تعريفات الدوال كجزء من إعدادات الجلسة.
-بعد تلقّي طلبات استخدام الأدوات، على العميل الردّ بقائمة من عناصر `FunctionResponse` باستخدام طريقة `session.send_tool_response`.
+세션 구성의 일부로 함수 선언을 정의할 수 있습니다.
+도구 호출을 수신한 후 클라이언트는 `session.send_tool_response` 메서드를 사용하여 `FunctionResponse` 객체 목록으로 응답해야 합니다.
 
-يمكنك الاطّلاع على [الدليل التعليمي حول استخدام الأدوات](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar) لمعرفة المزيد.
+자세한 내용은 [함수 호출 튜토리얼](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)을 참고하세요.
 
 ### Python
 
@@ -94,7 +93,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI, Modality } from '@google/genai';
@@ -218,13 +217,13 @@ async function main() {
 main();
 ```
 
-من خلال طلب واحد، يمكن للنموذج إنشاء طلبات متعددة للدوال والتعليمات البرمجية اللازمة لربط مخرجاتها. يتم تنفيذ هذا الرمز في بيئة وضع الحماية، ما يؤدي إلى إنشاء رسائل [BidiGenerateContentToolCall](https://ai.google.dev/api/live?hl=ar#bidigeneratecontenttoolcall) لاحقة.
+모델은 단일 프롬프트에서 여러 함수 호출과 출력을 연결하는 데 필요한 코드를 생성할 수 있습니다. 이 코드는 샌드박스 환경에서 실행되어 후속 [BidiGenerateContentToolCall](https://ai.google.dev/api/live?hl=ko#bidigeneratecontenttoolcall) 메시지를 생성합니다.
 
-## استدعاء الدالة بشكل غير متزامن
+## 비동기 함수 호출
 
-يتم تنفيذ ميزة "استدعاء الدوال" بالتسلسل تلقائيًا، ما يعني أنّ التنفيذ يتوقف مؤقتًا إلى أن تتوفّر نتائج كل استدعاء دالة. يضمن ذلك المعالجة التسلسلية، ما يعني أنّه لن يكون بإمكانك مواصلة التفاعل مع النموذج أثناء تنفيذ الدوال.
+함수 호출은 기본적으로 순차적으로 실행됩니다. 즉, 각 함수 호출의 결과가 나올 때까지 실행이 일시중지됩니다. 이렇게 하면 순차적 처리가 보장되므로 함수가 실행되는 동안 모델과 계속 상호작용할 수 없습니다.
 
-إذا كنت لا تريد حظر المحادثة، يمكنك أن تطلب من النموذج تنفيذ الدوال بشكل غير متزامن. لإجراء ذلك، عليك أولاً إضافة `behavior` إلى تعريفات الدوال:
+대화를 차단하지 않으려면 모델에 함수를 비동기적으로 실행하도록 요청하면 됩니다. 이렇게 하려면 먼저 함수 정의에 `behavior`을 추가해야 합니다.
 
 ### Python
 
@@ -234,7 +233,7 @@ turn_on_the_lights = {"name": "turn_on_the_lights", "behavior": "NON_BLOCKING"} 
 turn_off_the_lights = {"name": "turn_off_the_lights"} # turn_off_the_lights will still pause all interactions with the model
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI, Modality, Behavior } from '@google/genai';
@@ -248,15 +247,13 @@ const turn_off_the_lights = {name: "turn_off_the_lights"}
 const tools = [{ functionDeclarations: [turn_on_the_lights, turn_off_the_lights] }]
 ```
 
-تضمن `NON-BLOCKING` تشغيل الدالة بشكل غير متزامن، ما يتيح لك مواصلة التفاعل مع النموذج.
+`NON-BLOCKING`는 함수가 비동기적으로 실행되도록 보장하며, 사용자는 모델과 계속 상호작용할 수 있습니다.
 
-بعد ذلك، عليك إخبار النموذج بكيفية التصرّف عند تلقّي `FunctionResponse` باستخدام المَعلمة `scheduling`. يمكنه تنفيذ أي مما يلي:
+그런 다음 `scheduling` 매개변수를 사용하여 모델이 `FunctionResponse`를 수신할 때 어떻게 작동해야 하는지 알려야 합니다. 다음 중 하나일 수 있습니다.
 
-- مقاطعة ما يفعله وإعلامك بالرد الذي تلقّاه على الفور(`scheduling="INTERRUPT"`)،
-- يُرجى الانتظار حتى ينتهي من تنفيذ الإجراء الحالي
-  (`scheduling="WHEN_IDLE"`)،
-- أو يمكنك عدم اتّخاذ أي إجراء واستخدام هذه المعلومات لاحقًا في المناقشة
-  (`scheduling="SILENT"`)
+- 진행 중인 작업을 중단하고 즉시 받은 대답을 알려줍니다(`scheduling="INTERRUPT"`).
+- 현재 실행 중인 작업(`scheduling="WHEN_IDLE"`)이 완료될 때까지 기다립니다.
+- 또는 아무것도 하지 않고 나중에 토론에서 해당 지식을 사용합니다(`scheduling="SILENT"`).
 
 ### Python
 
@@ -272,7 +269,7 @@ const tools = [{ functionDeclarations: [turn_on_the_lights, turn_off_the_lights]
   )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI, Modality, Behavior, FunctionResponseScheduling } from '@google/genai';
@@ -288,11 +285,9 @@ const functionResponse = {
 }
 ```
 
-## تحديد المصدر من خلال "بحث Google"
+## Google 검색을 사용하는 그라운딩
 
-يمكنك تفعيل ميزة تحديد المصدر من خلال "بحث Search" كجزء من إعدادات الجلسة. يؤدي ذلك إلى زيادة دقة Live API ومنع
-الهلوسات. يمكنك الاطّلاع على [الدليل التوجيهي بشأن Grounding](https://ai.google.dev/gemini-api/docs/grounding?hl=ar)
-لمعرفة المزيد.
+세션 구성의 일부로 Google 검색을 사용한 그라운딩을 사용 설정할 수 있습니다. 이렇게 하면 Live API의 정확도가 높아지고 엉뚱한 대답이 방지됩니다. 자세한 내용은 [그라운딩 튜토리얼](https://ai.google.dev/gemini-api/docs/grounding?hl=ko)을 참고하세요.
 
 ### Python
 
@@ -340,7 +335,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI, Modality } from '@google/genai';
@@ -451,9 +446,9 @@ async function main() {
 main();
 ```
 
-## الجمع بين أدوات متعددة
+## 여러 도구 결합
 
-يمكنك الجمع بين أدوات متعددة ضمن Live API، ما يزيد من إمكانات تطبيقك:
+Live API 내에서 여러 도구를 결합하여 애플리케이션의 기능을 더욱 강화할 수 있습니다.
 
 ### Python
 
@@ -477,7 +472,7 @@ config = {"response_modalities": ["AUDIO"], "tools": tools}
 # ... remaining model call
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const prompt = `Hey, I need you to do two things for me.
@@ -501,18 +496,17 @@ const config = {
 // ... remaining model call
 ```
 
-## الخطوات التالية
+## 다음 단계
 
-- يمكنك الاطّلاع على المزيد من الأمثلة حول استخدام الأدوات مع Live API في [كتاب وصفات استخدام الأدوات](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=ar).
-- يمكنك الاطّلاع على القصة الكاملة حول الميزات والإعدادات من خلال
-  [دليل إمكانات Live API](https://ai.google.dev/gemini-api/docs/live-guide?hl=ar).
+- [도구 사용 쿠크북](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=ko)에서 Live API로 도구를 사용하는 예시를 자세히 확인하세요.
+- [Live API 기능 가이드](https://ai.google.dev/gemini-api/docs/live-guide?hl=ko)에서 기능 및 구성에 관한 전체 내용을 확인하세요.
 
-إرسال ملاحظات
+의견 보내기
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-تاريخ التعديل الأخير: 2026-05-13 (حسب التوقيت العالمي المتفَّق عليه)
+최종 업데이트: 2026-05-13(UTC)
 
-هل تريد مشاركة ملاحظاتك معنا؟
+의견을 전달하고 싶나요?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-13 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-05-13(UTC)"],[],[]]

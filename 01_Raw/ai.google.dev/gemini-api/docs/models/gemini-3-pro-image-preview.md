@@ -1,49 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=pt-BR
-fetched_at: 2026-05-18T05:19:10.547539+00:00
-title: "Pr\u00e9via de imagem do Gemini 3 Pro \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=pl
+fetched_at: 2026-05-25T05:26:55.739110+00:00
+title: "Podgl\u0105d obrazu Gemini\u00a03 Pro \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Envie comentários
+Prześlij opinię
 
-# Prévia de imagem do Gemini 3 Pro
+# Podgląd obrazu Gemini 3 Pro
 
-O **Nano Banana Pro** é um mecanismo sofisticado baseado em raciocínio para edição e geração de imagens de nível profissional, oferecendo precisão de qualidade de estúdio e controle criativo avançado. O Nano Banana Pro é ideal para design gráfico complexo, mockups de produtos de alta fidelidade e visualizações de dados factuais que exigem renderização de texto precisa e embasamento no mundo real pela Pesquisa Google.
+**Nano Banana Pro** to zaawansowany silnik oparty na rozumowaniu, który służy do profesjonalnej edycji i generowania obrazów. Zapewnia precyzję na poziomie studyjnym i zaawansowaną kontrolę kreatywną. Nano Banana Pro najlepiej sprawdza się w przypadku złożonych projektów graficznych, makiet produktów o wysokiej wierności i wizualizacji danych opartych na faktach, które wymagają dokładnego renderowania tekstu i groundingu w świecie rzeczywistym za pomocą wyszukiwarki Google.
 
-[Testar no Google AI Studio](https://aistudio.google.com?model=gemini-3-pro-image-preview&hl=pt-br)
+[Wypróbuj w Google AI Studio](https://aistudio.google.com?model=gemini-3-pro-image-preview&hl=pl)
 
-## Documentação
+## Dokumentacja
 
-Acesse a página [Geração de imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br) para conferir a cobertura completa de recursos e funcionalidades.
+Więcej informacji o funkcjach i możliwościach znajdziesz na stronie [Generowanie obrazów](https://ai.google.dev/gemini-api/docs/image-generation?hl=pl).
 
 ## gemini-3-pro-image-preview
 
-| Propriedade | Descrição |
+| Właściwość | Opis |
 | --- | --- |
-| Código do modelo id\_card | `gemini-3-pro-image-preview` |
-| saveTipos de dados aceitos | **Entradas** (link em inglês)  Imagem e texto  **Saída**  Imagem e texto |
-| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de tokens de entrada**  65.536  **Limite de token de saída**  32.768 |
-| handymanRecursos | **Geração de áudio**  incompatível  **API Batch**  Compatível  **Armazenamento em cache**  incompatível  **Execução de código**  incompatível  **Pesquisa de arquivos**  incompatível  **Inferência flexível**  Compatível  **Chamadas de função**  incompatível  **Embasamento com o Google Maps**  incompatível  **Geração de imagens**  Compatível  **API Live**  incompatível  **Inferência de prioridade**  Compatível  **Embasamento da pesquisa**  Compatível  **Saídas estruturadas**  Compatível  **Raciocínio**  Compatível  **Contexto do URL**  incompatível |
-| Versões do 123 | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - `Preview: gemini-3-pro-image-preview` |
-| calendar\_monthÚltima atualização | Novembro de 2025 |
-| cognition\_2Limite de conhecimento | Janeiro de 2025 |
+| id\_cardKod modelu | `gemini-3-pro-image-preview` |
+| saveObsługiwane typy danych | **Dane wejściowe**  Obraz i tekst  **Dane wyjściowe**  Obraz i tekst |
+| token\_autoLimity tokenów[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | **Limit tokenów wejściowych**  65 536  **Limit tokenów wyjściowych**  32 768 |
+| handymanMożliwości | **Generowanie dźwięku**  Nieobsługiwane  **Interfejs Batch API**  Obsługiwane  **Zapisywanie w pamięci podręcznej**  Nieobsługiwane  **Wykonywanie kodu**  Nieobsługiwane  **Wyszukiwanie plików**  Nieobsługiwane  **Wnioskowanie Flex**  Obsługiwane  **Wywoływanie funkcji**  Nieobsługiwane  **Powiązanie ze źródłem informacji przy użyciu Map Google**  Nieobsługiwane  **Generowanie obrazów**  Obsługiwane  **Interfejs Live API**  Nieobsługiwane  **Wnioskowanie priorytetowe**  Obsługiwane  **Szukaj groundingu**  Obsługiwane  **Ustrukturyzowane dane wyjściowe**  Obsługiwane  **Myślę**  Obsługiwane  **Kontekst adresu URL**  Nieobsługiwane |
+| 123Wersje | Więcej informacji znajdziesz w artykule [Wzorce wersji modelu](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#model-versions).  - `Preview: gemini-3-pro-image-preview` |
+| calendar\_monthOstatnia aktualizacja | Listopad 2025 r. |
+| cognition\_2Granica wiedzy | Styczeń 2025 r. |
 
-Envie comentários
+Prześlij opinię
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Última atualização 2026-04-29 UTC.
+Ostatnia aktualizacja: 2026-04-29 UTC.
 
-Quer enviar seu feedback?
+Chcesz przekazać coś jeszcze?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]

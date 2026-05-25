@@ -1,46 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=pt-BR
-fetched_at: 2026-05-18T05:06:29.927808+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ar
+fetched_at: 2026-05-25T05:22:28.081986+00:00
 title: "Gemini 2.5 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Envie comentários
+إرسال ملاحظات
 
 # Gemini 2.5 Flash-Lite
 
-Nosso modelo multimodal mais econômico, que oferece a performance mais rápida para
-tarefas leves e de alta frequência. O Gemini 2.5 Flash-Lite é ideal para classificação de alto volume, extração de dados simples e aplicativos de latência extremamente baixa em que o orçamento e a velocidade são as principais restrições.
+هذا النموذج هو الأقل تكلفة من بين نماذجنا المتعدّدة الوسائط، وهو يقدّم أسرع أداء للمهام المتكرّرة والخفيفة. إنّ نموذج Gemini 2.5 Flash-Lite هو الأفضل للتصنيف بكميات كبيرة واستخراج البيانات البسيط والتطبيقات التي تتطلّب وقت استجابة منخفضًا جدًا، حيث يمثّل كلّ من الميزانية والسرعة القيود الأساسية.
 
-[Testar no Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=pt-br)
+[تجربة النموذج في Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=ar)
 
 ## gemini-2.5-flash-lite
 
-| Propriedade | Descrição |
+| الموقع | الوصف |
 | --- | --- |
-| Código do modelo id\_card | `gemini-2.5-flash-lite` |
-| saveTipos de dados aceitos | **Entradas** (link em inglês)  Texto, imagem, vídeo, áudio, PDF  **Saída**  Texto |
-| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de tokens de entrada**  1.048.576  **Limite de token de saída**  65.536 |
-| handymanRecursos | **Geração de áudio**  incompatível  **API Batch**  Compatível  **Armazenamento em cache**  Compatível  **Execução de código**  Compatível  **Pesquisa de arquivos**  Compatível  **Inferência flexível**  Compatível  **Chamadas de função**  Compatível  **Embasamento com o Google Maps**  Compatível  **Geração de imagens**  incompatível  **API Live**  incompatível  **Inferência de prioridade**  Compatível  **Embasamento da pesquisa**  Compatível  **Saídas estruturadas**  Compatível  **Raciocínio**  Compatível  **Contexto do URL**  Compatível |
-| Versões do 123 | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Estável: `gemini-2.5-flash-lite` - Desligar: [`gemini-2.5-flash-lite-preview-09-2025`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite-preview-09-2025?hl=pt-br) |
-| calendar\_monthÚltima atualização | Julho de 2025 |
-| cognition\_2Limite de conhecimento | Janeiro de 2025 |
+| id\_cardرمز النموذج | `gemini-2.5-flash-lite` |
+| saveأنواع البيانات المتوافقة | **المدخلات**  نص، صور، فيديو، صوت، ملف PDF  **الناتج**  نص |
+| token\_autoحدود الرموز[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحد الأقصى لرموز الإدخال**  1,048,576  **الحد الأقصى لرموز الإخراج**  65,536 |
+| handymanالإمكانات | **إنشاء الصوت**  غير متاح  **واجهة برمجة التطبيقات المجمّعة**  متاح  **التخزين المؤقت**  متاح  **تنفيذ الرموز البرمجية**  متاح  **البحث عن الملفات**  متاح  **الاستدلال المرن**  متاح  **استدعاء الوظائف**  متاح  **استخدام "خرائط Google" كمصدر**  متاح  **إنشاء الصور**  غير متاح  **واجهة برمجة التطبيقات المباشرة**  غير متاح  **الاستدلال حسب الأولوية**  متاح  **لتحديد المصادر في "بحث Google"**  متاح  **مُخرجات منظَّمة**  متاح  **طريقة التفكير**  متاح  **سياق عنوان URL**  متاح |
+| 123الإصدارات | يمكنك قراءة [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions) لمزيد من التفاصيل.  - الإصدار الثابت: `gemini-2.5-flash-lite` - الإصدار الذي تم إيقافه: [`gemini-2.5-flash-lite-preview-09-2025`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite-preview-09-2025?hl=ar) |
+| calendar\_monthآخر تعديل | يوليو 2025 |
+| cognition\_2تاريخ آخر تحديث للبيانات | يناير 2025 |
 
-Envie comentários
+إرسال ملاحظات
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Última atualização 2026-04-29 UTC.
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-Quer enviar seu feedback?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

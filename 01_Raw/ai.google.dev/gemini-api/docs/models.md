@@ -1,22 +1,22 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models?hl=vi
-fetched_at: 2026-05-18T05:12:30.525077+00:00
-title: "M\u00f4 h\u00ecnh \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models?hl=hi
+fetched_at: 2026-05-25T05:23:19.063300+00:00
+title: "\u092e\u0949\u0921\u0932 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Gửi ý kiến phản hồi
+सुझाव भेजें
 
-# Mô hình
+# मॉडल
 
 ---
 
@@ -26,58 +26,65 @@ Gửi ý kiến phản hồi
 
 ### Gemini 3.1 Pro
 
-Trí tuệ tiên tiến, kỹ năng giải quyết vấn đề phức tạp và khả năng tác nhân và lập trình theo cảm hứng mạnh mẽ.
+बेहतर इंटेलिजेंस, मुश्किल समस्याओं को हल करने का कौशल, और एजेंटिक और वाइब कोडिंग की बेहतरीन क्षमताएं.
 
-Xem trước](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=vi)
+झलक देखें](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=hi)
+[spark
+
+### Gemini 3.5 Flash
+
+यह एजेंटिक और कोडिंग से जुड़े कामों को लगातार बेहतर तरीके से करने के लिए, सबसे बेहतरीन मॉडल है.
+
+स्थिर रुझान](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=hi)
 [spark
 
 ### Gemini 3 Flash
 
-Hiệu suất cấp cao cạnh tranh với các mô hình lớn hơn với chi phí thấp hơn.
+यह फ़्रंटियर क्लास की परफ़ॉर्मेंस देता है. साथ ही, इसकी लागत बड़े मॉडल की तुलना में काफ़ी कम होती है.
 
-Xem trước](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=vi)
+झलक देखें](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=hi)
 [bolt
 
 ### Gemini 3.1 Flash-Lite
 
-Hiệu suất cấp cao cạnh tranh với các mô hình lớn hơn với chi phí thấp hơn.
+यह फ़्रंटियर क्लास की परफ़ॉर्मेंस देता है. साथ ही, इसकी लागत बड़े मॉडल की तुलना में काफ़ी कम होती है.
 
-Ổn định](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=vi)
+स्थिर रुझान](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=hi)
 [bolt
 
 ### Gemini 3.1 Flash-Lite
 
-Hiệu suất cấp cao cạnh tranh với các mô hình lớn hơn với chi phí thấp hơn.
+यह फ़्रंटियर क्लास की परफ़ॉर्मेंस देता है. साथ ही, इसकी लागत बड़े मॉडल की तुलना में काफ़ी कम होती है.
 
-Xem trước](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=vi)
+झलक देखें](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=hi)
 [🍌🍌
 
 ### Nano Banana 2
 
-Tính năng tạo và chỉnh sửa hình ảnh mạnh mẽ, hiệu quả cao, được tối ưu hoá cho tốc độ và các trường hợp sử dụng với số lượng lớn.
+इमेज जनरेट करने और उनमें बदलाव करने की दमदार और बेहतर सुविधा. इसे तेज़ी से काम करने और ज़्यादा से ज़्यादा इस्तेमाल के लिए ऑप्टिमाइज़ किया गया है.
 
-Xem trước](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=vi)
+झलक देखें](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=hi)
 [🍌
 
 ### Nano Banana Pro
 
-Mô hình tạo và chỉnh sửa hình ảnh tiên tiến để tạo hình ảnh gốc có tính ngữ cảnh cao.
+इमेज जनरेट करने और एडिटिंग से उन्हें बेहतर बनाने वाले बेहतरीन मॉडल. इनसे कॉन्टेक्स्ट के हिसाब से नेटिव इमेज बनाई जा सकती हैं.
 
-Xem trước](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=vi)
+झलक देखें](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=hi)
 [settings\_voice
 
 ### Gemini 3.1 Flash Live
 
-Mô hình Live API chất lượng cao, độ trễ thấp cho các ứng dụng AI tương tác bằng giọng nói và đối thoại theo thời gian thực.
+रीयल-टाइम में बातचीत करने और बोलकर बातचीत करने वाले एआई ऐप्लिकेशन के लिए, अच्छी क्वालिटी वाला Live API मॉडल. इसमें कम समय में जवाब मिलता है.
 
-Mới Xem trước](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=vi)
+नई झलक](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=hi)
 [graphic\_eq
 
 ### Gemini 3.1 Flash TTS
 
-Tạo lời nói mạnh mẽ với độ trễ thấp.
+आवाज़ को कम समय में जनरेट करने की सुविधा.
 
-Mới Xem trước](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=vi)
+नई झलक](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=hi)
 
 ---
 
@@ -85,27 +92,27 @@ Mới Xem trước](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flas
 
 bolt
 
-### [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=vi)
+### [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=hi)
 
-Mô hình có hiệu suất trên giá thành tốt nhất của chúng tôi cho các tác vụ có độ trễ thấp, khối lượng lớn và cần có khả năng suy luận.
+यह मॉडल, कम समय में ज़्यादा काम करने के लिए सबसे अच्छा है. साथ ही, यह कम कीमत में उपलब्ध है. यह ऐसे टास्क के लिए सबसे सही है जिनमें तर्क देने की ज़रूरत होती है.
 
 image\_search
 
-### [Nano Banana](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=vi)
+### [Nano Banana](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=hi)
 
-Tính năng tạo và chỉnh sửa ảnh gốc tiên tiến, được thiết kế để mang đến quy trình làm việc sáng tạo và nhanh chóng.
+इमेज जनरेट करने और एडिटिंग से उन्हें बेहतर बनाने वाला शानदार मॉडल. इसे तेज़ी से काम करने और क्रिएटिव वर्कफ़्लो के लिए डिज़ाइन किया गया है.
 
 settings\_voice
 
-### [Bản xem trước Gemini 2.5 Flash Live](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=vi)
+### [Gemini 2.5 Flash Live Preview](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=hi)
 
-Được tối ưu hoá cho các tác nhân đàm thoại theo thời gian thực với tính năng phát trực tiếp âm thanh gốc dưới một giây.
+इसे रीयल-टाइम में बातचीत करने वाले एजेंट के लिए ऑप्टिमाइज़ किया गया है. इसमें एक सेकंड से भी कम समय में, नेटिव ऑडियो स्ट्रीम किया जा सकता है.
 
 record\_voice\_over
 
-### [Bản xem trước tính năng TTS của Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=vi)
+### [Gemini 2.5 Flash टीटीएस प्रीव्यू](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=hi)
 
-Tạo âm thanh chuyển văn bản sang lời nói có thể kiểm soát với khả năng kiểm soát chi tiết về phong cách và tốc độ.
+टेक्स्ट को ऑडियो में बदलने की सुविधा को कंट्रोल किया जा सकता है. साथ ही, स्टाइल और पेसिंग को भी बेहतर तरीके से कंट्रोल किया जा सकता है.
 
 ---
 
@@ -113,9 +120,9 @@ Tạo âm thanh chuyển văn bản sang lời nói có thể kiểm soát với
 
 speed
 
-### [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=vi)
+### [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=hi)
 
-Mô hình đa phương thức nhanh nhất và tiết kiệm chi phí nhất trong dòng 2.5.
+यह 2.5 फ़ैमिली का सबसे तेज़ और किफ़ायती मल्टीमॉडल मॉडल है.
 
 ---
 
@@ -123,224 +130,230 @@ Mô hình đa phương thức nhanh nhất và tiết kiệm chi phí nhất tro
 
 psychology
 
-### [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=vi)
+### [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=hi)
 
-Mô hình tiên tiến nhất của chúng tôi dành cho các nhiệm vụ phức tạp, có khả năng suy luận sâu sắc và lập trình.
+यह मुश्किल टास्क पूरे करने के लिए, हमारा सबसे ऐडवांस मॉडल है. इसमें गहराई से सोचने-समझने और कोडिंग करने की क्षमता है.
 
 record\_voice\_over
 
-### [Bản xem trước](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=vi) TTS của Gemini 2.5 Pro
+### [Gemini 2.5 Pro टीटीएस प्रीव्यू](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=hi)
 
-Tính năng tổng hợp lời nói có độ trung thực cao, được tối ưu hoá để mang lại chất lượng cao trong các quy trình có cấu trúc như podcast và sách nói.
+पॉडकास्ट और ऑडियो बुक जैसे स्ट्रक्चर्ड वर्कफ़्लो में, बेहतर क्वालिटी के लिए ऑप्टिमाइज़ की गई हाई-फ़िडेलिटी स्पीच सिंथेसिस.
 
 ---
 
-## Mẫu âm thanh
+## ऑडियो मॉडल
 
-*Phần này chứa tất cả các mô hình âm thanh, kể cả những mô hình có thể đã được liệt kê trong các phần khác*
+*इस सेक्शन में सभी ऑडियो मॉडल शामिल हैं. इनमें वे मॉडल भी शामिल हैं जो पहले से ही अन्य सेक्शन में मौजूद हो सकते हैं*
 
 settings\_input\_antenna
 
-### [Bản xem trước Gemini 3.1 Flash Live](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=vi)
+### [Gemini 3.1 Flash Live Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=hi)
 
-Mô hình âm thanh sang âm thanh (A2A) chất lượng cao, độ trễ thấp được thiết kế cho các ứng dụng AI dựa trên giọng nói và hộp thoại theo thời gian thực.
+यह अच्छी क्वालिटी वाला, कम समय में काम करने वाला ऑडियो-टू-ऑडियो (A2A) मॉडल है. इसे रीयल-टाइम में बातचीत करने और एआई के ऐसे ऐप्लिकेशन के लिए डिज़ाइन किया गया है जिनमें आवाज़ का इस्तेमाल मुख्य तौर पर किया जाता है.
 
 graphic\_eq
 
-### [Bản dùng thử Gemini 3.1 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=vi)
+### [Gemini 3.1 Flash TTS Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=hi)
 
-Tạo lời nói mạnh mẽ với độ trễ thấp, đầu ra tự nhiên, câu lệnh có thể điều hướng và thẻ âm thanh biểu cảm mới để kiểm soát chính xác lời tường thuật.
+कम समय में, बेहतरीन तरीके से स्पीच जनरेट करने की सुविधा. इसमें नैचुरल आउटपुट, प्रॉम्प्ट को कंट्रोल करने की सुविधा, और सटीक नैरेशन कंट्रोल के लिए नए एक्सप्रेसिव ऑडियो टैग शामिल हैं.
 
 settings\_voice
 
-### [Bản xem trước Gemini 2.5 Flash Live](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=vi)
+### [Gemini 2.5 Flash Live Preview](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=hi)
 
-Mô hình Live API hàng đầu của chúng tôi dành cho các tác nhân thoại và video hai chiều có độ trễ thấp, với khả năng suy luận âm thanh gốc.
+यह हमारा फ़्लैगशिप Live API मॉडल है. इसमें कम समय में दोनों तरफ़ से आवाज़ और वीडियो एजेंट के साथ बातचीत की जा सकती है. साथ ही, इसमें नेटिव ऑडियो रीज़निंग की सुविधा भी मिलती है.
 
 bolt
 
-### [Bản xem trước tính năng TTS của Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=vi)
+### [Gemini 2.5 Flash टीटीएस प्रीव्यू](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=hi)
 
-Tính năng chuyển văn bản sang lời nói nhanh chóng và có thể kiểm soát cho các ứng dụng có độ trễ thấp, tiết kiệm chi phí và trợ lý theo thời gian thực.
+कम इंतज़ार के समय, कम लागत वाले ऐप्लिकेशन, और रीयल-टाइम में मदद करने वाली सुविधाओं के लिए, लिखाई को बोली में बदलने की सुविधा को तेज़ी से और कंट्रोल किया जा सकता है.
 
 record\_voice\_over
 
-### [Bản xem trước](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=vi) TTS của Gemini 2.5 Pro
+### [Gemini 2.5 Pro टीटीएस प्रीव्यू](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=hi)
 
-Tính năng tổng hợp lời nói có độ trung thực cao, được tối ưu hoá để mang lại chất lượng cao trong các quy trình có cấu trúc như podcast và sách nói.
+पॉडकास्ट और ऑडियो बुक जैसे स्ट्रक्चर्ड वर्कफ़्लो में, बेहतर क्वालिटी के लिए ऑप्टिमाइज़ की गई हाई-फ़िडेलिटी स्पीच सिंथेसिस.
 
 ---
 
-## Mô hình nội dung đa phương tiện tạo sinh
+## जनरेटिव मीडिया मॉडल
 
-*Phần này chứa tất cả các mô hình đa phương tiện tạo sinh, kể cả những mô hình có thể đã được liệt kê trong các phần khác*
+*इस सेक्शन में जनरेटिव मीडिया के सभी मॉडल शामिल होते हैं. इनमें वे मॉडल भी शामिल होते हैं जो पहले से ही अन्य सेक्शन में शामिल हो सकते हैं*
 
 blur\_on
 
-### [Nano Banana 2 Xem trước](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=vi)
+### [Nano Banana 2 झलक](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=hi)
 
-Tạo hình ảnh ở quy mô sản xuất với hiệu suất cao, kết hợp trí thông minh của dòng Gemini 3 với tốc độ tạo cực nhanh.
+यह मॉडल, प्रॉडक्शन-स्केल पर विज़ुअल को बहुत कम समय में जनरेट करता है. इसमें Gemini 3 सीरीज़ की इंटेलिजेंस और बहुत कम समय में जनरेट करने की सुविधा शामिल है.
 
 movie\_filter
 
-### [Veo 3.1 Bản xem trước](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=vi)
+### [Veo 3.1 Preview](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=hi)
 
-Công nghệ tạo video điện ảnh tiên tiến với các chế độ kiểm soát mẫu quảng cáo nâng cao và âm thanh được đồng bộ hoá tự nhiên.
+ऐडवांस क्रिएटिव कंट्रोल और नेटिव तौर पर सिंक किए गए ऑडियो के साथ, शानदार वीडियो जनरेट करने की सुविधा.
 
 image\_edit
 
-### [Nano Banana Pro Xem trước](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=vi)
+### [Nano Banana Pro झलक](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=hi)
 
-Một công cụ thiết kế chuyên nghiệp với cốt lõi suy luận cho hình ảnh 4K chất lượng phòng thu, bố cục phức tạp và khả năng hiển thị văn bản chính xác.
+यह एक प्रोफ़ेशनल डिज़ाइन इंजन है. इसमें स्टूडियो-क्वालिटी वाले 4K विज़ुअल, जटिल लेआउट, और सटीक टेक्स्ट रेंडरिंग के लिए, रीज़निंग कोर मौजूद है.
 
 movie\_edit
 
-### [Veo 3.1 Lite Xem trước](https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=vi)
+### [Veo 3.1 Lite Preview](https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=hi)
 
-Tạo, chỉnh sửa video và kiểm soát chất lượng điện ảnh với hiệu suất cao, chi phí thấp, ưu tiên nhà phát triển từ dòng sản phẩm Veo 3.1.
+Veo 3.1 फ़ैमिली के मॉडल, डेवलपर को कम लागत में शानदार वीडियो जनरेट करने, उनमें बदलाव करने, और सिनमैटिक कंट्रोल की सुविधा देते हैं.
 
 image\_search
 
-### [Nano Banana](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=vi)
+### [Nano Banana](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=hi)
 
-Tính năng tạo và chỉnh sửa ảnh gốc tiên tiến, được thiết kế để mang đến quy trình làm việc sáng tạo và nhanh chóng.
+इमेज जनरेट करने और एडिटिंग से उन्हें बेहतर बनाने वाला शानदार मॉडल. इसे तेज़ी से काम करने और क्रिएटिव वर्कफ़्लो के लिए डिज़ाइन किया गया है.
 
 palette
 
-### [Imagen 4](https://ai.google.dev/gemini-api/docs/models/imagen?hl=vi)
+### [Imagen 4](https://ai.google.dev/gemini-api/docs/models/imagen?hl=hi)
 
-Mô hình chuyển văn bản thành hình ảnh, có tốc độ tạo hình ảnh nhanh và siêu nhanh, đồng thời mang lại độ rõ nét vượt trội lên đến độ phân giải 2K.
+यह अब तक का सबसे बेहतरीन टेक्स्ट-टू-इमेज मॉडल है. इसकी मदद से, इमेज को तेज़ी से और बहुत तेज़ी से जनरेट किया जा सकता है. साथ ही, 2K रिज़ॉल्यूशन तक इमेज को बेहतरीन क्वालिटी में जनरेट किया जा सकता है.
 
 ---
 
-## Mô hình tạo nhạc
+## म्यूज़िक जनरेट करने वाले मॉडल
 
-*Phần này chứa tất cả các mô hình tạo nhạc, kể cả những mô hình có thể đã được liệt kê trong các phần khác*
+*इस सेक्शन में संगीत जनरेट करने वाले सभी मॉडल शामिल हैं. इनमें वे मॉडल भी शामिल हैं जो पहले से ही अन्य सेक्शन में शामिल हो सकते हैं*
 
 music\_note
 
-### [Bản xem trước](https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=vi) của Lyria 3 Pro
+### [Lyria 3 Pro Preview](https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=hi)
 
-Mô hình tạo nhạc hàng đầu của chúng tôi, được tối ưu hoá cho các bài hát dài có cấu trúc phức tạp và mạch lạc.
+यह संगीत जनरेट करने वाला हमारा फ़्लैगशिप मॉडल है. इसे पूरे गाने जनरेट करने के लिए ऑप्टिमाइज़ किया गया है. इसमें जटिल स्ट्रक्चरल कोहेरेंस होती है.
 
 music\_note\_2
 
-### [Lyria 3 Clip Preview](https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=vi)
+### [Lyria 3 Clip Preview](https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=hi)
 
-Được tối ưu hoá để tạo các đoạn nhạc ngắn, vòng lặp và bản xem trước có thời lượng tối đa 30 giây.
+इसे 30 सेकंड तक की छोटी म्यूज़िकल क्लिप, लूप, और झलक जनरेट करने के लिए ऑप्टिमाइज़ किया गया है.
 
 music\_history
 
-### [Lyria RealTime Experimental](https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=vi)
+### [Lyria RealTime Experimental](https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=hi)
 
-Mô hình tạo nhạc có độ chân thực cao, cung cấp khả năng kiểm soát sáng tạo chi tiết và khả năng phát trực tuyến theo thời gian thực.
+यह हाई-फ़िडेलिटी संगीत जनरेट करने वाला मॉडल है. इसमें क्रिएटिव कंट्रोल और रीयल-टाइम स्ट्रीमिंग की सुविधाएं मिलती हैं.
 
 ---
 
-## Mô hình công cụ và mô hình tác nhân
+## टूल और एजेंट मॉडल
 
 desktop\_windows
 
-### [Sử dụng máy tính Xem trước](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=vi)
+### [कंप्यूटर के इस्तेमाल की झलक](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=hi)
 
-Một mô hình chuyên biệt có thể "nhìn thấy" màn hình kỹ thuật số và thực hiện các thao tác trên giao diện người dùng như nhấp, nhập và điều hướng để tự động hoá các tác vụ phức tạp trên trình duyệt.
-
-travel\_explore
-
-### [Bản xem trước của Gemini Deep Research](https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=vi)
-
-Một mô hình tác nhân tự động lập kế hoạch và thực hiện nghiên cứu nhiều bước trên hàng trăm nguồn để tạo ra các báo cáo có trích dẫn và mang tính tương tác.
+यह एक खास मॉडल है, जो डिजिटल स्क्रीन को "देख" सकता है. साथ ही, यूज़र इंटरफ़ेस (यूआई) से जुड़ी कार्रवाइयां कर सकता है. जैसे, क्लिक करना, टाइप करना, और ब्राउज़र पर मुश्किल टास्क को अपने-आप पूरा करने के लिए नेविगेट करना.
 
 travel\_explore
 
-### [Gemini Deep Research Max (Bản dùng thử)](https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=vi)
+### [Gemini की Deep Research सुविधा प्रीव्यू](https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=hi)
 
-Tính toàn diện tối đa cho việc thu thập và tổng hợp bối cảnh tự động trên hàng trăm nguồn.
+यह एक एजेंटिक मॉडल है. यह सैकड़ों सोर्स से जानकारी इकट्ठा करके, कई चरणों में रिसर्च करने का प्लान अपने-आप बनाता है और उसे लागू करता है. इससे, सोर्स के साथ इंटरैक्टिव रिपोर्ट तैयार की जाती हैं.
+
+travel\_explore
+
+### [Gemini Deep Research Max Preview](https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=hi)
+
+यह सुविधा, सैकड़ों सोर्स से कॉन्टेक्स्ट इकट्ठा करने और उसे व्यवस्थित करने के लिए, ज़्यादा से ज़्यादा जानकारी का इस्तेमाल करती है.
+
+terminal
+
+### [Antigravity Agent Preview](https://ai.google.dev/gemini-api/docs/models/antigravity-preview-05-2026?hl=hi)
+
+यह एक मैनेज किया गया एजेंट है, जो सामान्य कामों के लिए बनाया गया है. यह अपने-आप प्लान बनाता है, तर्क देता है, कोड चलाता है, फ़ाइलों को मैनेज करता है, और सुरक्षित, अलग किए गए Linux सैंडबॉक्स में वेब ब्राउज़ करता है.
 
 ---
 
-## Mô hình tác vụ chuyên biệt
+## टास्क के हिसाब से मॉडल
 
 hub
 
-### [Gemini Embedding 2](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=vi)
+### [Gemini Embedding 2](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=hi)
 
-Mô hình nhúng đa phương thức đầu tiên của chúng tôi, ánh xạ văn bản, hình ảnh, video, âm thanh và tệp PDF vào một không gian nhúng hợp nhất cho các hệ thống tìm kiếm ngữ nghĩa nâng cao và RAG.
+यह हमारा पहला मल्टीमॉडल एम्बेडिंग मॉडल है. यह टेक्स्ट, इमेज, वीडियो, ऑडियो, और PDF को एक ही एम्बेडिंग स्पेस में मैप करता है. इससे बेहतर सिमेंटिक सर्च और RAG सिस्टम को इस्तेमाल किया जा सकता है.
 
 hub
 
-### [Gemini Embedding](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-001?hl=vi)
+### [Gemini Embedding](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-001?hl=hi)
 
-Biểu diễn vectơ nhiều chiều cho tính năng tìm kiếm ngữ nghĩa nâng cao, phân loại văn bản và hệ thống RAG.
+एडवांस सिमैंटिक सर्च, टेक्स्ट क्लासिफ़िकेशन, और RAG सिस्टम के लिए, ज़्यादा डाइमेंशन वाले वेक्टर रिप्रेजेंटेशन.
 
 precision\_manufacturing
 
-### [Gemini Robotics-ER 1.6Bản dùng thử](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.6-preview?hl=vi)
+### [Gemini Robotics-ER 1.6Preview](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.6-preview?hl=hi)
 
-Mô hình suy luận nâng cao có khả năng hiểu được không gian vật lý và lập kế hoạch cho các tác vụ nhiều bước đối với các tác nhân robot, đồng thời có các chức năng mới như đọc thiết bị, cải thiện khả năng suy luận về không gian và vật lý.
+यह एक अडवांस एम्बॉडीड रीज़निंग मॉडल है. यह फ़िज़िकल स्पेस को समझता है और रोबोटिक एजेंट के लिए कई चरणों वाले टास्क प्लान करता है. इसमें इंस्ट्रुमेंट रीडिंग, बेहतर स्पेशल और फ़िज़िकल रीज़निंग जैसी नई सुविधाएं हैं.
 
 ---
 
-## Các mô hình trước đây
+## पिछले मॉडल
 
 history
 
-### [Gemini 2.0 Flash Không dùng nữa](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash?hl=vi)
+### [Gemini 2.0 Flash बंद कर दिया गया है](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash?hl=hi)
 
-Mô hình nền tảng thế hệ thứ hai của chúng tôi, có các tính năng thế hệ mới và khả năng được cải thiện, bao gồm tốc độ vượt trội, khả năng sử dụng công cụ gốc và cửa sổ ngữ cảnh 1 triệu token.
-
-restore
-
-### [Gemini 2.0 Flash-Lite Không dùng nữa](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash-lite?hl=vi)
-
-Đây là mô hình thế hệ thứ hai nhanh nhất của chúng tôi, được tối ưu hoá để mang lại hiệu quả về chi phí và độ trễ thấp.
+यह हमारा दूसरी जनरेशन का मॉडल है. इसमें अगली जनरेशन की सुविधाएँ और बेहतर क्षमताएँ हैं. जैसे, ज़्यादा तेज़ी से काम करना, नेटिव टूल का इस्तेमाल करना, और 10 लाख टोकन वाली कॉन्टेक्स्ट विंडो.
 
 restore
 
-### [Bản dùng thử Gemini 3 Pro Tắt](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-preview?hl=vi)
+### [Gemini 2.0 Flash-Lite अब उपलब्ध नहीं है](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash-lite?hl=hi)
 
-Mô hình suy luận tiên tiến của chúng tôi, có khả năng hiểu đa phương thức nâng cao.
+यह दूसरी जनरेशन का सबसे तेज़ मॉडल है. इसे कम लागत और कम समय में जवाब देने के लिए ऑप्टिमाइज़ किया गया है.
+
+restore
+
+### [Gemini 3 Pro की झलक बंद करें](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-preview?hl=hi)
+
+यह हमारा सबसे बेहतरीन रीज़निंग मॉडल है. इसमें टेक्स्ट, इमेज वगैरह को प्रोसेस करके गहराई से समझने की ऐडवांस सुविधा है.
 
 ---
 
-## Mẫu tên phiên bản mô hình
+## मॉडल के वर्शन के नाम के पैटर्न
 
-Các mô hình Gemini có ở phiên bản *ổn định*, *xem trước*, *mới nhất* hoặc *thử nghiệm*.
+Gemini के मॉडल, *स्टेबल*, *प्रीव्यू*, *लेटेस्ट* या *एक्सपेरिमेंट के तौर पर उपलब्ध* वर्शन में उपलब्ध होते हैं.
 
-### Ổn định
+### स्थिर रुझान
 
-Chỉ đến một mô hình ổn định cụ thể. Các mô hình ổn định thường không thay đổi. Hầu hết các ứng dụng phát hành công khai đều nên sử dụng một mô hình ổn định cụ thể.
+किसी खास स्टेबल मॉडल की ओर ले जाता है. स्टेबल मॉडल में आम तौर पर बदलाव नहीं होता. ज़्यादातर प्रोडक्शन ऐप्लिकेशन को किसी खास स्टेबल मॉडल का इस्तेमाल करना चाहिए.
 
-Ví dụ: `gemini-2.5-flash`.
+उदाहरण के लिए: `gemini-2.5-flash`.
 
-### Xem trước
+### झलक देखें
 
-Trỏ đến một mô hình xem trước có thể được dùng cho quá trình sản xuất. Các mô hình xem trước thường sẽ được bật tính năng thanh toán, có thể đi kèm với giới hạn về tốc độ hạn chế hơn và sẽ ngừng hoạt động sau khi có thông báo ít nhất 2 tuần.
+यह एक ऐसे प्रीव्यू मॉडल की ओर ले जाता है जिसका इस्तेमाल प्रोडक्शन के लिए किया जा सकता है. आम तौर पर, झलक की सुविधा वाले मॉडल के लिए बिलिंग की सुविधा चालू होती है. साथ ही, इन पर दर से जुड़ी ज़्यादा पाबंदियां लागू हो सकती हैं. इसके अलावा, इन्हें बंद करने से कम से कम दो हफ़्ते पहले सूचना दी जाएगी.
 
-Ví dụ: `gemini-2.5-flash-preview-09-2025`.
+उदाहरण के लिए: `gemini-2.5-flash-preview-09-2025`.
 
-### Mới nhất
+### सबसे नए
 
-Chỉ đến bản phát hành mới nhất của một biến thể mô hình cụ thể. Đây có thể là bản phát hành ổn định, bản xem trước hoặc bản thử nghiệm. Bí danh này sẽ được thay thế nóng bằng mọi bản phát hành mới của một biến thể mô hình cụ thể. Chúng tôi sẽ gửi **thông báo trước 2 tuần** qua email trước khi thay đổi phiên bản cũ nhất.
+किसी मॉडल के अलग-अलग वर्शन के लिए, नए वर्शन के बारे में जानकारी देता है. यह स्टेबल, प्रीव्यू या एक्सपेरिमेंटल रिलीज़ हो सकती है. किसी मॉडल के हर नए वर्शन के रिलीज़ होने पर, यह उपनाम बदल जाएगा. सबसे नए वर्शन से पहले वाले वर्शन को बदलने से पहले, आपको ईमेल से **दो हफ़्ते पहले सूचना** दी जाएगी.
 
-Ví dụ: `gemini-flash-latest`.
+उदाहरण के लिए: `gemini-flash-latest`.
 
-### Thử nghiệm
+### एक्सपेरिमेंट के तौर पर उपलब्ध
 
-Chỉ đến một mô hình thử nghiệm thường không phù hợp để sử dụng trong quá trình sản xuất và có giới hạn tốc độ hạn chế hơn. Chúng tôi phát hành các mô hình thử nghiệm để thu thập ý kiến phản hồi và nhanh chóng cung cấp các bản cập nhật mới nhất cho nhà phát triển.
+यह एक एक्सपेरिमेंटल मॉडल की ओर इशारा करता है. आम तौर पर, यह मॉडल प्रोडक्शन के लिए सही नहीं होता. साथ ही, इसमें अनुरोधों की संख्या पर ज़्यादा पाबंदियां होती हैं. हम एक्सपेरिमेंट के तौर पर उपलब्ध मॉडल रिलीज़ करते हैं, ताकि हमें सुझाव/राय मिल सके. साथ ही, हम अपने नए अपडेट को डेवलपर तक तुरंत पहुंचा सकें.
 
-Các mô hình thử nghiệm không ổn định và khả năng cung cấp các điểm cuối mô hình có thể thay đổi.
+एक्सपेरिमेंट के तौर पर उपलब्ध मॉडल स्थिर नहीं होते हैं. साथ ही, मॉडल एंडपॉइंट की उपलब्धता में बदलाव हो सकता है.
 
-## Ngừng sử dụng mô hình
+## मॉडल बंद होना
 
-Để biết thông tin về các mô hình không dùng nữa, hãy truy cập vào trang [Các mô hình Gemini không dùng nữa](https://ai.google.dev/gemini-api/docs/deprecations?hl=vi).
+मॉडल के काम न करने के बारे में जानकारी पाने के लिए, [Gemini के काम न करने वाले मॉडल](https://ai.google.dev/gemini-api/docs/deprecations?hl=hi) पेज पर जाएं.
 
-Gửi ý kiến phản hồi
+सुझाव भेजें
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Cập nhật lần gần đây nhất: 2026-05-07 UTC.
+आखिरी बार 2026-05-19 (UTC) को अपडेट किया गया.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-07 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-05-19 (UTC) को अपडेट किया गया."],[],[]]

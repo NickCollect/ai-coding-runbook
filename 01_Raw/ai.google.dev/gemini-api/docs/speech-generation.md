@@ -1,48 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/speech-generation?hl=ar
-fetched_at: 2026-05-18T05:11:30.256301+00:00
+source_url: https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi
+fetched_at: 2026-05-25T05:23:15.993289+00:00
 title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-إرسال ملاحظات
+Gửi ý kiến phản hồi
 
-# إنشاء محتوى باستخدام تكنولوجيا تحويل النص إلى كلام (TTS)
+# Tạo lời nói từ văn bản (TTS)
 
-يمكن لواجهة Gemini API تحويل النص إلى صوت أحادي أو متعدّد المتحدثين باستخدام إمكانات إنشاء تحويل النص إلى كلام (TTS) في Gemini.
-إنّ عملية إنشاء الصوت باستخدام ميزة "تحويل النص إلى كلام" *[قابلة للتحكّم](#controllable)*،
-ما يعني أنّه يمكنك استخدام اللغة الطبيعية لتنظيم التفاعلات وتحديد *الأسلوب* و*اللهجة* و*السرعة* و*النبرة* الخاصة بالصوت.
+Gemini API có thể chuyển đổi văn bản đầu vào thành âm thanh của một hoặc nhiều người nói bằng cách sử dụng các chức năng tạo văn bản thành lời nói (TTS) của Gemini.
+Bạn có thể *[kiểm soát](#controllable)* quá trình tạo văn bản sang lời nói (TTS), tức là bạn có thể sử dụng ngôn ngữ tự nhiên để cấu trúc các lượt tương tác và hướng dẫn *phong cách*, *giọng*, *tốc độ* và *giọng điệu* của âm thanh.
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com/apps/bundled/voice-library?showPreview=truew&hl=ar)
+[Dùng thử trong Google AI Studio](https://aistudio.google.com/apps/bundled/voice-library?showPreview=truew&hl=vi)
 
-تختلف إمكانية تحويل النص إلى كلام عن إمكانية إنشاء الكلام المقدَّمة من خلال
-[Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar)، وهي مصمَّمة لتوفير تجربة تفاعلية
-للمحتوى الصوتي غير المنظَّم، وللمدخلات والمخرجات المتعددة الوسائط. في حين أنّ واجهة Live API تتفوّق في سياقات المحادثات الديناميكية، تم تصميم خدمة تحويل النص إلى كلام من خلال Gemini API لتناسب السيناريوهات التي تتطلّب تلاوة نصية دقيقة مع إمكانية التحكّم بدقة في الأسلوب والصوت، مثل إنشاء البودكاست أو الكتب المسموعة.
+Khả năng TTS khác với khả năng tạo lời nói được cung cấp thông qua [Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi). API này được thiết kế cho âm thanh tương tác, không có cấu trúc, cũng như đầu vào và đầu ra đa phương thức. Mặc dù Live API vượt trội trong các ngữ cảnh trò chuyện linh hoạt, nhưng TTS thông qua Gemini API được điều chỉnh cho phù hợp với những trường hợp yêu cầu đọc văn bản chính xác với khả năng kiểm soát chi tiết về phong cách và âm thanh, chẳng hạn như tạo podcast hoặc sách nói.
 
-يوضّح لك هذا الدليل كيفية إنشاء محتوى صوتي يتضمّن متحدثًا واحدًا أو عدة متحدثين من نص.
+Hướng dẫn này trình bày cách tạo âm thanh một người nói và nhiều người nói từ văn bản.
 
-## قبل البدء
+## Trước khi bắt đầu
 
-تأكَّد من استخدام أحد أنواع نماذج Gemini التي تتضمّن ميزة تحويل النص إلى كلام (TTS) من Gemini، كما هو موضّح في قسم [النماذج المتوافقة](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ar#supported-models). للحصول على أفضل النتائج، عليك تحديد النموذج الأنسب لحالة الاستخدام المحدّدة.
+Đảm bảo bạn sử dụng một biến thể mô hình Gemini có các chức năng chuyển văn bản sang lời nói (TTS) của Gemini, như được liệt kê trong phần [Các mô hình được hỗ trợ](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi#supported-models). Để có kết quả tối ưu, hãy cân nhắc xem mô hình nào phù hợp nhất với trường hợp sử dụng cụ thể của bạn.
 
-ننصحك [بتجربة نماذج تحويل النص إلى كلام من Gemini في AI Studio](https://aistudio.google.com/generate-speech?hl=ar) قبل البدء في عملية الإنشاء.
+Bạn nên [kiểm thử các mô hình TTS của Gemini trong AI Studio](https://aistudio.google.com/generate-speech?hl=vi) trước khi bắt đầu xây dựng.
 
-## تحويل النص إلى كلام بصوت شخص واحد
+## TTS một loa
 
-لتحويل النص إلى صوت أحادي المتحدث، اضبط وضع الردّ على "صوت"،
-وأرسِل عنصر `SpeechConfig` مع ضبط `VoiceConfig`.
-عليك اختيار اسم صوت من [الأصوات الجاهزة](#voices).
+Để chuyển văn bản thành âm thanh của một người nói, hãy đặt phương thức phản hồi thành "audio" và truyền một đối tượng `SpeechConfig` có `VoiceConfig` được đặt.
+Bạn cần chọn tên giọng nói trong số [các giọng nói đầu ra](#voices) được tạo sẵn.
 
-يحفظ هذا المثال الصوت الناتج من النموذج في ملف موجي:
+Ví dụ này lưu âm thanh đầu ra từ mô hình vào một tệp sóng:
 
 ### Python
 
@@ -165,11 +161,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-t
 ffmpeg -f s16le -ar 24000 -ac 1 -i out.pcm out.wav
 ```
 
-## تحويل النص إلى كلام لعدة متحدثين
+## TTS nhiều giọng nói
 
-بالنسبة إلى الصوت المتعدّد المصادر، ستحتاج إلى كائن `MultiSpeakerVoiceConfig` يتضمّن كل مكبّر صوت (بحد أقصى 2) تم ضبطه على أنّه `SpeakerVoiceConfig`.
-عليك تحديد كل `speaker` باستخدام الأسماء نفسها المستخدَمة في
-[الطلب](#controllable):
+Đối với âm thanh nhiều loa, bạn sẽ cần một đối tượng `MultiSpeakerVoiceConfig` có mỗi loa (tối đa 2) được định cấu hình dưới dạng `SpeakerVoiceConfig`.
+Bạn sẽ cần xác định từng `speaker` bằng các tên giống nhau được dùng trong [lệnh](#controllable):
 
 ### Python
 
@@ -343,11 +338,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-t
 ffmpeg -f s16le -ar 24000 -ac 1 -i out.pcm out.wav
 ```
 
-## التحكّم في أسلوب الكلام باستخدام الطلبات
+## Kiểm soát phong cách lời nói bằng câu lệnh
 
-يمكنك التحكّم في الأسلوب والنبرة واللهجة والسرعة باستخدام طلبات مكتوبة بلغة طبيعية
-أو [علامات صوتية](#transcript-tags) لكل من ميزة تحويل النص إلى كلام بصوت فردي وبأصوات متعدّدة.
-على سبيل المثال، في طلب يتضمّن متحدثًا واحدًا، يمكنك قول:
+Bạn có thể kiểm soát phong cách, giọng điệu, giọng nói và tốc độ bằng cách sử dụng câu lệnh bằng ngôn ngữ tự nhiên hoặc [thẻ âm thanh](#transcript-tags) cho cả TTS một người nói và nhiều người nói.
+Ví dụ: trong câu lệnh có một người nói, bạn có thể nói:
 
 ```
 Say in an spooky voice:
@@ -355,7 +349,7 @@ Say in an spooky voice:
 [whisper] Something wicked this way comes"
 ```
 
-في طلب يتضمّن عدة متحدثين، قدِّم إلى النموذج اسم كل متحدث والنص المقابل. يمكنك أيضًا تقديم إرشادات لكل متحدث على حدة:
+Trong câu lệnh có nhiều người nói, hãy cung cấp cho mô hình tên của từng người nói và bản chép lời tương ứng. Bạn cũng có thể hướng dẫn riêng cho từng người nói:
 
 ```
 Make Speaker1 sound tired and bored, and Speaker2 sound excited and happy:
@@ -364,11 +358,11 @@ Speaker1: So... [yawn] what's on the agenda today?
 Speaker2: You're never going to guess!
 ```
 
-جرِّب استخدام [خيار صوتي](#voices) يتوافق مع الأسلوب أو المشاعر التي تريد التعبير عنها، وذلك للتأكيد عليها بشكل أكبر. في الطلب السابق، على سبيل المثال، قد يؤكّد صوت *إنسيلادوس* المتهدّج على حالتَي "التعب" و"الملل"، بينما قد تتناسب نبرة *بوك* المبهجة مع حالتَي "الحماس" و"السعادة".
+Hãy thử dùng [lựa chọn giọng nói](#voices) phù hợp với phong cách hoặc cảm xúc mà bạn muốn truyền tải để nhấn mạnh hơn nữa. Ví dụ: trong câu lệnh trước, hơi thở của *Enceladus* có thể nhấn mạnh trạng thái "mệt mỏi" và "buồn chán", trong khi giọng điệu vui vẻ của *Puck* có thể bổ sung cho trạng thái "hào hứng" và "vui vẻ".
 
-## جارٍ إنشاء طلب لتحويل النص إلى صوت
+## Tạo câu lệnh để chuyển đổi thành âm thanh
 
-تنتج نماذج تحويل النص إلى كلام محتوًى صوتيًا فقط، ولكن يمكنك استخدام [نماذج أخرى](https://ai.google.dev/gemini-api/docs/models?hl=ar) لإنشاء نص أولاً، ثم تمرير هذا النص إلى نموذج تحويل النص إلى كلام لقراءته بصوت مرتفع.
+Các mô hình TTS chỉ xuất âm thanh, nhưng bạn có thể dùng [các mô hình khác](https://ai.google.dev/gemini-api/docs/models?hl=vi) để tạo bản chép lời trước, sau đó truyền bản chép lời đó đến mô hình TTS để đọc to.
 
 ### Python
 
@@ -379,7 +373,7 @@ from google.genai import types
 client = genai.Client()
 
 transcript = client.models.generate_content(
-   model="gemini-3-flash-preview",
+   model="gemini-3.5-flash",
    contents="""Generate a short transcript around 100 words that reads
             like it was clipped from a podcast by excited herpetologists.
             The hosts names are Dr. Anya and Liam.""").text
@@ -427,7 +421,7 @@ const ai = new GoogleGenAI({});
 async function main() {
 
 const transcript = await ai.models.generateContent({
-   model: "gemini-3-flash-preview",
+   model: "gemini-3.5-flash",
    contents: "Generate a short transcript around 100 words that reads like it was clipped from a podcast by excited herpetologists. The hosts names are Dr. Anya and Liam.",
    })
 
@@ -462,124 +456,121 @@ const response = await ai.models.generateContent({
 await main();
 ```
 
-## خيارات الصوت
+## Lựa chọn giọng nói
 
-تتيح نماذج "تحويل النص إلى كلام" 30 خيارًا صوتيًا في الحقل `voice_name`:
+Các mô hình TTS hỗ trợ 30 lựa chọn giọng nói sau đây trong trường `voice_name`:
 
 |  |  |  |
 | --- | --- | --- |
-| **Zephyr** -- *ساطع* | **Puck** -- *مفعم بالحيوية* | **Charon** -- *مفيدة* |
-| **كوريا** -- *شركة* | **Fenrir** -- *متحمّس* | **Leda** -- *Youthful* |
-| **Orus** -- *شركة* | **Aoede** -- *Breezy* | **Callirrhoe** -- *مريح* |
-| **Autonoe** -- *Bright* | ‫**Enceladus** -- *Breathy* | **Iapetus** -- *Clear* |
-| **Umbriel**: *شخصية سهلة* | **الجبهة** -- *ناعم* | **Despina** -- *Smooth* |
-| **Erinome** -- *محو* | **Algenib** -- *Gravelly* | **Rasalgethi** -- *مفيدة* |
-| **Laomedeia** -- *Upbeat* | **Achernar** -- *Soft* | **Alnilam** -- *الشركة* |
-| **Schedar** -- *Even* | **Gacrux** -- *محتوى للبالغين* | **Pulcherrima** -- *إعادة توجيه* |
-| **Achird** -- *ودود* | **Zubenelgenubi** -- *غير رسمي* | **Vindemiatrix** -- *لطيف* |
-| **Sadachbia** -- *مفعم بالحيوية* | **Sadaltager** -- *مُلمّ* | **سولفات** -- *دافئ* |
+| **Zephyr** – *Bright* | **Puck** – *Rộn ràng* | **Charon** – *Cung cấp nhiều thông tin* |
+| **Kore** – *Firm* | **Fenrir** – *Dễ kích động* | **Leda** – *Trẻ trung* |
+| **Orus** – *Firm* | **Aoede** – *Breezy* | **Callirrhoe** – *Dễ chịu* |
+| **Autonoe** – *Tươi sáng* | **Enceladus** – *Breathy* | **Iapetus** – *Rõ ràng* |
+| **Umbriel** – *Dễ tính* | **Algieba** – *Làm mịn* | **Despina** – *Smooth* |
+| **Erinome** – *Clear* | **Algenib** – *Gravelly* | **Rasalgethi** – *Cung cấp nhiều thông tin* |
+| **Laomedeia** – *Rộn ràng* | **Achernar** – *Dịu êm* | **Alnilam** – *Firm* |
+| **Schedar** – *Even* | **Gacrux** – *Người trưởng thành* | **Pulcherrima** – *Chuyển tiếp* |
+| **Achird** – *Thân thiện* | **Zubenelgenubi** – *Bình thường* | **Vindemiatrix** – *Dịu dàng* |
+| **Sadachbia** – *Lively* | **Sadaltager** – *Hiểu biết* | **Sulafat** – *Ấm* |
 
-يمكنك الاستماع إلى جميع خيارات الأصوات في [AI Studio](https://aistudio.google.com/generate-speech?hl=ar).
+Bạn có thể nghe tất cả các lựa chọn về giọng nói trong [AI Studio](https://aistudio.google.com/generate-speech?hl=vi).
 
-## اللغات المتاحة
+## Ngôn ngữ được hỗ trợ
 
-ترصد نماذج تحويل النص إلى كلام لغة الإدخال تلقائيًا. تتوفّر اللغات التالية:
+Các mô hình TTS tự động phát hiện ngôn ngữ đầu vào. Các ngôn ngữ sau đây được hỗ trợ:
 
-| اللغة | رمز BCP-47 | اللغة | رمز BCP-47 |
+| Ngôn ngữ | Mã BCP-47 | Ngôn ngữ | Mã BCP-47 |
 | --- | --- | --- | --- |
-| العربية | ar | الفلبينية | fil |
-| البنغالية | bn | الفنلندية | fi |
-| الهولندية | nl | الغليشيانية | gl |
-| الإنجليزية | en | الجورجية | ka |
-| الفرنسية | fr | اليونانية | el |
-| الألمانية | de | الغوجاراتية | gu |
-| الهندية | hi | الكريولية الهايتية | ht |
-| الإندونيسية | id | العبرية | هو |
-| الإيطالية | it | الهنغارية | hu |
-| اليابانية | ja | الأيسلندية | هو |
-| الكورية | ko | الجافانية | jv |
-| المراثية | mr | الكانادا | kn |
-| البولندية | pl | الكونكانية | kok |
-| البرتغالية | pt | لاو | lo |
-| الرومانية | ro | اللاتينية | la |
-| الروسية | ru | اللاتفية | lv |
-| الإسبانية | es | الليتوانية | lt |
-| التاميلية | ta | اللوكسمبورغية | لبنان |
-| التيلوغوية | te | المقدونية | mk |
-| التايلاندية | th | المايثيلي | mai |
-| التركية | tr | الملغاشية | مليغرام |
-| الأوكرانية | uk | الماليزية | مللي ثانية |
-| الفيتنامية | vi | المالايالامية | ml |
-| الأفريقانية | af | المنغولية | mn |
-| الألبانية | sq | النيبالية | ne |
-| الأمهرية | am | النرويجية، بوكمال | nb |
-| الأرمينية | hy | النرويجية، نينورسك | nn |
-| الأذربيجانية | az | الأوديا | أو |
-| الباسك | eu | البشتو | ps |
-| البيلاروسية | be | الفارسية | fa |
-| البلغارية | bg | البنجابية | pa |
-| البورمية | my | الصربية | sr |
-| الكتالانية | ca | السندية | دقة عادية |
-| السيبيوانية | ceb | السنهالية | si |
-| الصينية، المندرينية | cmn | السلوفاكية | sk |
-| الكرواتية | ساعة | السلوفينية | sl |
-| التشيكية | cs | السواحيلية | sw |
-| الدانماركية | da | السويدية | sv |
-| الإستونية | et | الأوردية | ur |
+| Tiếng Ả Rập | ar | Tiếng Philippines | fil |
+| Tiếng Bangla | bn | Tiếng Phần Lan | fi |
+| Tiếng Hà Lan | nl | Tiếng Galicia | gl |
+| Tiếng Anh | vi | Tiếng Gruzia | ka |
+| Tiếng Pháp | fr | Tiếng Hy Lạp | el |
+| Tiếng Đức | de | Tiếng Gujarat | gu |
+| Tiếng Hindi | hi | Tiếng Creole ở Haiti | ht |
+| Tiếng Indonesia | id | Tiếng Do Thái | hi hi |
+| Tiếng Ý | it | Tiếng Hungary | hu |
+| Tiếng Nhật | ja | Tiếng Iceland | is |
+| Tiếng Hàn | ko | Tiếng Java | jv |
+| Tiếng Marathi | mr | Tiếng Kannada | kn |
+| Tiếng Ba Lan | pl | Tiếng Konkani | kok |
+| Tiếng Bồ Đào Nha | pt | Tiếng Lào | lo |
+| Tiếng Rumani | ro | Latinh | la |
+| Tiếng Nga | ru | Tiếng Latvia | lv |
+| Tiếng Tây Ban Nha | es | Tiếng Lithuania | lt |
+| Tiếng Tamil | ta | Tiếng Luxembourg | lb |
+| Tiếng Telugu | te | Tiếng Macedonia | mk |
+| Tiếng Thái | th | Tiếng Maithili | mai |
+| Tiếng Thổ Nhĩ Kỳ | tr | Tiếng Malagasy | mg |
+| Tiếng Ukraina | uk | Tiếng Malay | ms |
+| Tiếng Việt | vi | Tiếng Malayalam | ml |
+| Tiếng Hà Lan ở Nam Phi | af | Tiếng Mông Cổ | mn |
+| Tiếng Albania | sq | Tiếng Nepal | ne |
+| Tiếng Amhara | sáng | Tiếng Na Uy, Bokmål | nb |
+| Tiếng Armenia | hy | Tiếng Na Uy, Nynorsk | nn |
+| Tiếng Azerbaijan | az | Tiếng Odia | hoặc |
+| Tiếng Basque | eu | Tiếng Pashto | ps |
+| Tiếng Belarus | be | Persian | fa |
+| Tiếng Bungary | bg | Tiếng Punjab | pa |
+| Tiếng Myanmar | my | Tiếng Serbia | sr |
+| Tiếng Catalan | ca | Tiếng Sindh | sd |
+| Tiếng Cebuano | ceb | Tiếng Sinhala | si |
+| Tiếng Trung, tiếng Quan thoại | cmn | Tiếng Slovak | sk |
+| Croatian | giờ | Tiếng Slovenia | sl |
+| Tiếng Séc | cs | Tiếng Swahili | sw |
+| Tiếng Đan Mạch | da | Tiếng Thuỵ Điển | sv |
+| Tiếng Estonia | et | Tiếng Urdu | ur |
 
-## النماذج المتوافقة
+## Mô hình được hỗ trợ
 
-| الطراز | متحدّث واحد | ميزة "المتحدثون المتعدّدون" |
+| Mô hình | Loa đơn | Nhiều người nói |
 | --- | --- | --- |
-| [معاينة ميزة تحويل النص إلى كلام في Gemini 3.1 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=ar) | ✔️ | ✔️ |
-| [Gemini 2.5 Flash Preview TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=ar) | ✔️ | ✔️ |
-| [إصدار تجريبي من ميزة "تحويل النص إلى كلام" في Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=ar) | ✔️ | ✔️ |
+| [Bản xem trước TTS của Gemini 3.1 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=vi) | ✔️ | ✔️ |
+| [Bản xem trước Gemini 2.5 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=vi) | ✔️ | ✔️ |
+| [TTS của Gemini 2.5 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=vi) | ✔️ | ✔️ |
 
-## دليل كتابة الطلبات
+## Hướng dẫn đặt câu lệnh
 
-يختلف نموذج **الإنشاء الصوتي المدمج لتحويل النص إلى كلام (TTS) من Gemini** عن نماذج تحويل النص إلى كلام التقليدية من خلال استخدام نموذج لغوي كبير يعرف ***ليس فقط ما يجب قوله، بل أيضًا كيفية قوله***.
+Mô hình **Chuyển văn bản sang lời nói (TTS) tạo âm thanh gốc của Gemini** khác biệt với các mô hình TTS truyền thống bằng cách sử dụng một mô hình ngôn ngữ lớn, ***không chỉ biết những gì cần nói mà còn biết cách nói***.
 
-سيفسّر النموذج تلقائيًا نصًا مكتوبًا ويحدّد الطريقة التي يجب أن يتم بها عرض كلماتك. تكون النصوص البسيطة بدون أي طلبات إضافية طبيعية. لكنّ ميزة &quot;تحويل النص إلى كلام&quot; في Gemini تتضمّن أيضًا أدوات يمكنك استخدامها للتحكّم بها.
+Ngay từ đầu, mô hình này sẽ diễn giải bản chép lời một cách tự nhiên và xác định cách bạn nên truyền tải lời nói. Bản chép lời đơn giản mà không cần thêm câu lệnh nghe có vẻ tự nhiên. Nhưng Gemini TTS cũng đi kèm với các công cụ mà bạn có thể dùng để điều hướng.
 
-يهدف هذا الدليل إلى تقديم توجيهات أساسية وإثارة الأفكار عند تطوير تجارب صوتية. سنبدأ باستخدام **العلامات** للتحكّم السريع المضمّن، ثم نستكشف **بُنى الطلبات** المتقدّمة لتوجيه الأداء بشكل كامل.
+Mục đích của hướng dẫn này là đưa ra chỉ dẫn cơ bản và khơi gợi ý tưởng khi phát triển trải nghiệm âm thanh. Chúng ta sẽ bắt đầu với **Thẻ** để kiểm soát nhanh nội dung, sau đó khám phá **Cấu trúc câu lệnh** nâng cao để hướng dẫn đầy đủ về hiệu suất.
 
-### علامات صوتية
+### Thẻ âm thanh
 
-العلامات هي معدِّلات مضمّنة، مثل `[whispers]` أو `[laughs]`، تمنحك تحكّمًا دقيقًا في العرض. يمكنك استخدامها لتغيير نبرة الصوت وسرعته
-والإحساس العاطفي في سطر أو قسم من النص. يمكنك أيضًا استخدامها
-لإضافة عبارات اعتراضية وبعض الأصوات غير اللفظية الأخرى إلى الأداء، مثل
-`[cough]` أو `[sighs]` أو `[gasp]`.
+Thẻ là các đối tượng sửa đổi cùng dòng như `[whispers]` hoặc `[laughs]` giúp bạn kiểm soát thật chi tiết quá trình phân phối. Bạn có thể dùng các chỉ dẫn này để thay đổi giọng điệu, nhịp độ và cảm xúc của một dòng hoặc đoạn trong bản chép lời. Bạn cũng có thể dùng các biểu tượng này để thêm từ cảm thán và một số âm thanh không lời khác vào màn trình diễn, chẳng hạn như `[cough]`, `[sighs]` hoặc `[gasp]`.
 
-لا تتوفّر قائمة شاملة بالعلامات التي تعمل وتلك التي لا تعمل، وننصحك بتجربة مشاعر وتعبيرات مختلفة لمعرفة كيف يتغيّر الناتج.
+Không có danh sách đầy đủ về những thẻ hoạt động và không hoạt động. Bạn nên thử nghiệm với nhiều cảm xúc và biểu cảm để xem kết quả thay đổi như thế nào.
 
-إذا لم تكن النسخة مكتوبة باللغة الإنجليزية، ننصحك باستخدام علامات صوتية باللغة الإنجليزية للحصول على أفضل النتائج.
+Nếu bản chép lời không phải bằng tiếng Anh, để đạt được kết quả tốt nhất, bạn vẫn nên sử dụng thẻ âm thanh bằng tiếng Anh.
 
-**استخدام علامات صوتية مبتكرة**
+**Sáng tạo với thẻ âm thanh**
 
-لعرض نوع التغيّر الذي يمكن الحصول عليه باستخدام علامات الصوت، إليك مجموعة من الأمثلة التي تعبّر عن المعنى نفسه، ولكن يختلف العرض استنادًا إلى العلامات المستخدَمة.
+Để cho thấy mức độ đa dạng mà bạn có thể đạt được với thẻ âm thanh, sau đây là một bộ ví dụ. Mỗi ví dụ đều nói cùng một điều, nhưng cách truyền tải sẽ thay đổi dựa trên thẻ được dùng.
 
-يمكنك تغيير طريقة إلقاء الكلام من خلال إضافة علامات في بداية السطر لجعل المتحدث يبدو متحمسًا أو متضايقًا أو مترددًا:
+Bạn có thể thay đổi mức độ nhấn mạnh của câu bằng cách thêm thẻ vào đầu dòng để khiến người nói cảm thấy hào hứng, buồn chán hoặc miễn cưỡng:
 
-- `[excitedly]` مرحبًا، أنا نموذج جديد لتحويل النص إلى كلام، ويمكنني التحدّث بطرق مختلفة. كيف يمكنني مساعدتك اليوم؟
-- `[bored]` مرحبًا، أنا نموذج جديد لتحويل النص إلى كلام…
-- `[reluctantly]` مرحبًا، أنا نموذج جديد لتحويل النص إلى كلام…
+- `[excitedly]` Xin chào, tôi là một mô hình chuyển văn bản sang lời nói mới và tôi có thể nói theo nhiều cách. Hôm nay tôi có thể giúp gì cho bạn?
+- `[bored]` Xin chào, tôi là một mô hình chuyển văn bản sang lời nói mới…
+- `[reluctantly]` Xin chào, tôi là một mô hình chuyển văn bản sang lời nói mới…
 
-يمكن أيضًا استخدام العلامات لتغيير سرعة التسليم أو لدمج السرعة مع التأكيد:
+Bạn cũng có thể dùng thẻ để thay đổi tốc độ truyền tải hoặc kết hợp tốc độ với điểm nhấn:
 
-- `[very fast]` مرحبًا، أنا نموذج جديد لتحويل النص إلى كلام…
-- `[very slow]` مرحبًا، أنا نموذج جديد لتحويل النص إلى كلام…
-- `[sarcastically, one painfully slow word at a time]` مرحبًا، أنا نموذج جديد لتحويل النص إلى كلام…
+- `[very fast]` Xin chào, tôi là một mô hình chuyển văn bản sang lời nói mới…
+- `[very slow]` Chào bạn, tôi là một mô hình chuyển văn bản sang lời nói mới…
+- `[sarcastically, one painfully slow word at a time]` Xin chào, tôi là một mô hình chuyển văn bản sang lời nói mới…
 
-يمكنك أيضًا التحكّم بدقة في أقسام معيّنة، ما يعني أنّه يمكنك الهمس بجزء والصراخ بجزء آخر.
+Bạn cũng có thể kiểm soát chính xác các phần cụ thể, tức là bạn có thể nói thì thầm một phần và hét lên một phần khác.
 
-- `[whispers]` مرحبًا، أنا نموذج جديد لتحويل النص إلى كلام، `[shouting]` ويمكنني التحدّث بطرق مختلفة. `[whispers]` كيف يمكنني مساعدتك اليوم؟
+- `[whispers]` Xin chào, tôi là một mô hình chuyển văn bản sang lời nói mới, `[shouting]` và tôi có thể nói theo nhiều cách khác nhau. `[whispers]` Hôm nay tôi có thể giúp gì cho bạn
 
-يمكنك أيضًا تجربة أي فكرة إبداعية تريدها:
+Bạn cũng có thể thử nghiệm mọi ý tưởng sáng tạo mà bạn muốn:
 
-- `[like a cartoon dog]` مرحبًا، أنا نموذج جديد لتحويل النص إلى كلام…
-- `[like dracula]` مرحبًا، أنا نموذج جديد لتحويل النص إلى كلام…
+- `[like a cartoon dog]` Xin chào, tôi là một mô hình chuyển văn bản sang lời nói mới…
+- `[like dracula]` Xin chào, tôi là một mô hình chuyển văn bản sang lời nói mới…
 
-تشمل العلامات الشائعة الاستخدام ما يلي:
+Các thẻ thường dùng bao gồm:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
@@ -588,25 +579,22 @@ await main();
 | `[mischievously]` | `[panicked]` | `[sarcastic]` | `[serious]` |
 | `[shouting]` | `[tired]` | `[trembling]` | `[whispers]` |
 
-تتيح لك العلامات التحكّم بسرعة وسهولة في عملية تسليم نص الفيديو. ولمزيد من التحكّم، يمكنك دمجها مع طلب سياق لتحديد النبرة العامة
-والأجواء التي ستسود الأغنية.
+Thẻ giúp bạn kiểm soát việc phân phối bản chép lời một cách nhanh chóng và dễ dàng. Để có thêm quyền kiểm soát, bạn có thể kết hợp các yếu tố này với một câu lệnh theo bối cảnh để đặt tông giọng và cảm xúc tổng thể cho bản nhạc.
 
-### إنشاء طلبات متقدّمة
+### Câu lệnh nâng cao
 
-يمكنك اعتبار الطلب المتقدّم بمثابة تعليمات نظامية يقدّمها المستخدم للنموذج لكي يتّبعها. وهي طريقة لتزويد النموذج بمزيد من السياق والتحكّم في الأداء.
+Bạn có thể coi câu lệnh nâng cao là một chỉ dẫn hệ thống để mô hình tuân theo. Đây là cách để cung cấp cho mô hình nhiều bối cảnh và quyền kiểm soát hơn đối với hiệu suất.
 
-يتضمّن نص الطلب الفعّال بشكل مثالي العناصر التالية التي تتكامل معًا
-لتحقيق أداء رائع:
+Một câu lệnh hiệu quả lý tưởng sẽ bao gồm các yếu tố sau đây kết hợp với nhau để tạo ra hiệu suất tuyệt vời:
 
-- **الملف الصوتي**: يحدّد شخصية الصوت، ويحدد هوية الشخصية ونمطها وأي خصائص أخرى، مثل العمر والخلفية وما إلى ذلك.
-- **المشهد**: يضبط المشهد. يصف هذا الحقل البيئة المادية والأجواء.
-- **ملاحظات المخرج**: إرشادات الأداء التي يمكنك من خلالها تحديد التعليمات المهمة التي يجب أن يراعيها الممثل الافتراضي. وتشمل الأمثلة
-  الأسلوب والتنفس والسرعة والتعبير واللهجة.
-- **مثال على السياق**: يوفّر هذا الخيار نقطة بداية سياقية للنموذج، ما يتيح للممثل الافتراضي الدخول إلى المشهد الذي أعددته بشكل طبيعي.
-- **النص**: النص الذي سينطقه النموذج. للحصول على أفضل أداء، تذكَّر أنّ موضوع النص وأسلوب الكتابة يجب أن يكونا مرتبطَين بالتعليمات التي تقدّمها.
-- **علامات الصوت**: هي معدِّلات يمكنك إضافتها إلى نص لتغيير طريقة عرض جزء من النص، مثل `[whispers]` أو `[shouting]`.
+- **Hồ sơ âm thanh** – Thiết lập một nhân vật cho giọng nói, xác định danh tính, nguyên mẫu và mọi đặc điểm khác của nhân vật như độ tuổi, bối cảnh, v.v.
+- **Cảnh** – Thiết lập bối cảnh. Mô tả cả môi trường vật chất và "bầu không khí".
+- **Ghi chú của đạo diễn** – Hướng dẫn về hiệu suất, nơi bạn có thể phân tích những chỉ dẫn quan trọng mà tài năng ảo cần lưu ý. Ví dụ: phong cách, nhịp thở, tốc độ, cách phát âm và giọng điệu.
+- **Bối cảnh mẫu** – Cung cấp cho mô hình một điểm xuất phát theo bối cảnh, nhờ đó diễn viên ảo của bạn sẽ xuất hiện một cách tự nhiên trong cảnh mà bạn thiết lập.
+- **Bản chép lời** – Văn bản mà mô hình sẽ đọc to. Để đạt hiệu suất tốt nhất, hãy nhớ rằng chủ đề và phong cách viết của bản chép lời phải tương quan với chỉ dẫn mà bạn đưa ra.
+- **Thẻ âm thanh** – Các đối tượng sửa đổi mà bạn có thể đưa vào bản chép lời để thay đổi cách truyền tải phần văn bản đó, chẳng hạn như `[whispers]` hoặc `[shouting]`.
 
-مثال على الطلب الكامل:
+Ví dụ về câu lệnh đầy đủ:
 
 ```
 # AUDIO PROFILE: Jaz R.
@@ -645,18 +633,18 @@ just sat there pretending to work... stop it. Seriously, I see you.
 two... let's go!
 ```
 
-### استراتيجيات مفصّلة لتقديم الطلبات
+### Chiến lược đưa ra câu lệnh chi tiết
 
-دعونا نحلّل كل عنصر من عناصر الطلب.
+Hãy cùng phân tích từng thành phần của câu lệnh.
 
-#### ملف تعريف الصوت
+#### Cấu hình âm thanh
 
-صف بإيجاز سمات الشخصية.
+Mô tả ngắn gọn về hình tượng của nhân vật.
 
-- **الاسم:** يساعد إعطاء شخصيتك اسمًا في ترسيخ النموذج وتحسين الأداء. لذا، يُرجى الإشارة إلى الشخصية بالاسم عند تحديد المشهد والسياق.
-- **الدور:** تمثّل هذه السمة الهوية الأساسية والنموذج الأصلي للشخصية التي تظهر في المشهد، مثل منسّق موسيقى في الراديو أو مقدّم بودكاست أو مراسل إخباري وما إلى ذلك.
+- **Tên**  Đặt tên cho nhân vật sẽ giúp mô hình và hiệu suất chặt chẽ hơn, Hãy gọi nhân vật bằng tên khi thiết lập cảnh và bối cảnh
+- **Vai trò.** Bản sắc và nguyên mẫu cốt lõi của nhân vật đang xuất hiện trong cảnh. Ví dụ: DJ đài phát thanh, người làm podcast, phóng viên tin tức, v.v.
 
-أمثلة:
+Ví dụ:
 
 ```
 # AUDIO PROFILE: Jaz R.
@@ -668,11 +656,11 @@ two... let's go!
 ## "The Beauty Influencer"
 ```
 
-#### منظر
+#### Scene
 
-حدِّد سياق المشهد، بما في ذلك الموقع الجغرافي والمزاج والتفاصيل البيئية التي تحدّد النبرة والأجواء. صِف ما يحدث حول الشخصية وتأثيره عليها. يوفّر المشهد السياق البيئي للتفاعل بأكمله، ويوجه الأداء التمثيلي بطريقة طبيعية دقيقة.
+Đặt bối cảnh cho cảnh, bao gồm cả vị trí, tâm trạng và các chi tiết về môi trường để thiết lập tông màu và cảm xúc. Mô tả những gì đang xảy ra xung quanh nhân vật và cách điều đó ảnh hưởng đến nhân vật. Khung cảnh cung cấp bối cảnh môi trường cho toàn bộ hoạt động tương tác và hướng dẫn diễn xuất một cách tinh tế và tự nhiên.
 
-أمثلة:
+Ví dụ:
 
 ```
 ## THE SCENE: The London Studio
@@ -691,15 +679,15 @@ deadened by plush velvet curtains and a heavy rug, but there is a
 distinct "proximity effect."
 ```
 
-#### ملاحظات المخرجين
+#### Ghi chú của đạo diễn
 
-يتضمّن هذا القسم المهم إرشادات محدّدة بشأن الأداء. يمكنك تخطّي جميع العناصر الأخرى، ولكن ننصحك بتضمين هذا العنصر.
+Phần quan trọng này bao gồm hướng dẫn cụ thể về hiệu suất. Bạn có thể bỏ qua tất cả các phần tử khác, nhưng bạn nên thêm phần tử này.
 
-حدِّد فقط ما هو مهم للأداء، مع الحرص على عدم المبالغة في التحديد. سيؤدي وضع عدد كبير جدًا من القواعد الصارمة إلى الحدّ من إبداع النماذج وقد يؤدي إلى تراجع الأداء. وازِن بين وصف الدور والمشهد وقواعد الأداء المحدّدة.
+Chỉ xác định những gì quan trọng đối với hiệu suất, cẩn thận để không chỉ định quá mức. Quá nhiều quy tắc nghiêm ngặt sẽ hạn chế khả năng sáng tạo của các mô hình và có thể dẫn đến hiệu suất kém hơn. Cân bằng vai trò và nội dung mô tả cảnh với các quy tắc biểu diễn cụ thể.
 
-إنّ التوجيهات الأكثر شيوعًا هي **الأسلوب والوتيرة واللهجة**، ولكن النموذج لا يقتصر على هذه التوجيهات ولا يتطلّبها. يمكنك تضمين تعليمات مخصّصة لتغطية أي تفاصيل إضافية مهمة لأدائك، ويمكنك تقديم التفاصيل بقدر ما يلزم.
+Các hướng dẫn phổ biến nhất là **Phong cách, Tốc độ và Giọng**, nhưng mô hình này không giới hạn ở những hướng dẫn này và cũng không yêu cầu phải có những hướng dẫn này. Bạn có thể thoải mái thêm hướng dẫn tuỳ chỉnh để trình bày mọi thông tin bổ sung quan trọng đối với hiệu suất của bạn, đồng thời cung cấp nhiều hoặc ít thông tin chi tiết tuỳ theo nhu cầu.
 
-على سبيل المثال:
+Ví dụ:
 
 ```
 ### DIRECTOR'S NOTES
@@ -712,16 +700,15 @@ delivery influencers use in short form videos.
 Accent: Southern california valley girl from Laguna Beach |
 ```
 
-**النمط:**
+**Kiểu:**
 
-يضبط هذا الحقل نبرة الكلام الذي يتم إنشاؤه وأسلوبه. يمكنك تضمين كلمات مثل "مبهج" أو "نشيط" أو "مسترخٍ" أو "ملل" وما إلى ذلك لتوجيه الأداء. يجب أن تكون الأوصاف وافية
-وتتضمّن أكبر قدر ممكن من التفاصيل الضرورية: *"حماس معدٍ. يجب أن يشعر المستمع بأنّه جزء من حدث مجتمعي ضخم ومثير"* أفضل من مجرد القول *"نشيط وحماسي".*
+Đặt âm điệu và phong cách cho lời nói được tạo. Hãy thêm những thông tin như sôi động, tràn đầy năng lượng, thư thái, buồn chán, v.v. để hướng dẫn hiệu suất. Hãy mô tả và cung cấp nhiều thông tin chi tiết nhất có thể: *"Nhiệt tình truyền cảm hứng. Người nghe phải cảm thấy như họ là một phần của một sự kiện cộng đồng lớn và thú vị."* sẽ hiệu quả hơn so với việc chỉ nói *"đầy năng lượng và nhiệt huyết".*
 
-يمكنك حتى تجربة عبارات شائعة في مجال التعليق الصوتي، مثل "ابتسامة صوتية". يمكنك إضافة أي عدد تريده من خصائص الأنماط.
+Bạn thậm chí có thể thử những thuật ngữ phổ biến trong ngành lồng tiếng, chẳng hạn như "nụ cười trong giọng nói". Bạn có thể xếp lớp bao nhiêu đặc điểm về kiểu dáng tuỳ thích.
 
-أمثلة:
+Ví dụ:
 
-Simple Emotion
+Cảm xúc đơn giản
 
 ```
 DIRECTORS NOTES
@@ -730,7 +717,7 @@ Style: Frustrated and angry developer who can't get the build to run.
 ...
 ```
 
-مزيد من العمق
+Độ sâu lớn hơn
 
 ```
 DIRECTORS NOTES
@@ -739,7 +726,7 @@ Style: Sassy GenZ beauty YouTuber, who mostly creates content for YouTube Shorts
 ...
 ```
 
-متقدّم
+Phức tạp
 
 ```
 DIRECTORS NOTES
@@ -750,11 +737,11 @@ always raised to keep the tone bright, sunny, and explicitly inviting.
 elongated vowels on excitement words (e.g., "Beauuutiful morning").
 ```
 
-**اللهجة:**
+**Giọng:**
 
-قدِّم وصفًا للّكنة المطلوبة. كلّما كانت التفاصيل أكثر، كانت النتائج أفضل. على سبيل المثال، استخدِم "*لهجة إنجليزية بريطانية كما تُسمع في كرويدون، إنجلترا*" بدلاً من "*لهجة بريطانية*".
+Mô tả giọng nói bạn muốn. Bạn càng trình bày cụ thể thì kết quả càng tốt. Ví dụ: sử dụng "*Giọng tiếng Anh Anh như nghe thấy ở Croydon, Anh*" thay vì "*Giọng Anh*".
 
-أمثلة:
+Ví dụ:
 
 ```
 ### DIRECTORS NOTES
@@ -770,13 +757,13 @@ Accent: Jaz is a DJ from Brixton, London
 ...
 ```
 
-**معدّل تسجيل مرات الظهور:**
+**Nhịp độ:**
 
-الوتيرة الإجمالية وتفاوت الوتيرة في جميع أنحاء المقطوعة
+Nhịp độ tổng thể và sự thay đổi nhịp độ trong suốt bản nhạc.
 
-أمثلة:
+Ví dụ:
 
-بسيط
+Đơn giản
 
 ```
 ### DIRECTORS NOTES
@@ -785,7 +772,7 @@ Pacing: Speak as fast as possible
 ...
 ```
 
-مزيد من التفاصيل
+Độ sâu lớn hơn
 
 ```
 ### DIRECTORS NOTES
@@ -794,7 +781,7 @@ Pacing: Speaks at a faster, energetic pace, keeping up with fast paced music.
 ...
 ```
 
-متقدّم
+Phức tạp
 
 ```
 ### DIRECTORS NOTES
@@ -803,11 +790,9 @@ Pacing: The "Drift": The tempo is incredibly slow and liquid. Words bleed into e
 ...
 ```
 
-#### النص والعلامات الصوتية
+#### Bản chép lời và thẻ âm thanh
 
-النص هو الكلمات المحدّدة التي سينطق بها النموذج. علامة الصوت هي كلمة
-بين قوسين مربّعين تشير إلى طريقة لفظ كلمة أو عبارة، أو إلى تغيير
-في النبرة، أو إلى عبارة اعتراضية.
+Bản chép lời là những từ chính xác mà mô hình sẽ nói. Thẻ âm thanh là một từ trong dấu ngoặc vuông cho biết cách nói một nội dung nào đó, sự thay đổi về giọng điệu hoặc một câu cảm thán.
 
 ```
 ### TRANSCRIPT
@@ -818,47 +803,40 @@ at that point.
 [cough] Well, [sighs] I guess it doesn't matter now.
 ```
 
-**تجربة الميزة**
+**Hãy thử**
 
-يمكنك تجربة بعض هذه الأمثلة بنفسك على
-[AI Studio](https://aistudio.google.com/generate-speech?hl=ar)، واستخدام
-[تطبيق تحويل النص إلى كلام](http://aistudio.google.com/app/apps/bundled/synergy_intro?hl=ar)،
-والاستفادة من
-ميزات Gemini لتجربة الإخراج. إليك بعض النصائح التي يجب وضعها في الاعتبار لتقديم أداء صوتي رائع:
+Hãy tự mình thử một số ví dụ này trên [AI Studio](https://aistudio.google.com/generate-speech?hl=vi), dùng thử [Ứng dụng TTS](http://aistudio.google.com/app/apps/bundled/synergy_intro?hl=vi) của chúng tôi và để Gemini giúp bạn trở thành đạo diễn. Hãy ghi nhớ những mẹo sau để có màn trình diễn thanh nhạc tuyệt vời:
 
-- تذكَّر أن تحافظ على تماسك الطلب بأكمله، فالنص والإخراج يسيران جنبًا إلى جنب لتقديم أداء رائع.
-- لا تشعر بأنّك مضطر إلى وصف كل شيء، ففي بعض الأحيان، يساعد منح النموذج مساحة لملء الفراغات في الحفاظ على طبيعية النص. (تمامًا مثل الممثل الموهوب)
-- إذا واجهت صعوبة في كتابة نص أو أداء أغنية، يمكن أن يساعدك Gemini في ذلك.
+- Hãy nhớ giữ cho toàn bộ câu lệnh nhất quán – kịch bản và chỉ đạo phải đi đôi với nhau để tạo ra một màn trình diễn tuyệt vời.
+- Bạn không cần phải mô tả mọi thứ, đôi khi việc cho phép mô hình tự điền vào chỗ trống sẽ giúp tạo ra hình ảnh tự nhiên hơn. (Giống như một diễn viên tài năng)
+- Nếu bạn cảm thấy bế tắc, hãy nhờ Gemini giúp bạn soạn kịch bản hoặc bài biểu diễn.
 
-## القيود
+## Các điểm hạn chế
 
-- يمكن لنماذج تحويل النص إلى كلام تلقّي مدخلات نصية فقط وإنشاء مخرجات صوتية.
-- تبلغ قدرة [الاستيعاب](https://ai.google.dev/gemini-api/docs/long-context?hl=ar) لجلسة تحويل النص إلى كلام 32 ألف رمز مميّز.
-- راجِع قسم [اللغات](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ar#languages) لمعرفة اللغات المتاحة.
-- لا تتيح ميزة "تحويل النص إلى كلام" البث.
+- Các mô hình TTS chỉ có thể nhận dữ liệu đầu vào là văn bản và tạo dữ liệu đầu ra là âm thanh.
+- Một phiên TTS có giới hạn [cửa sổ ngữ cảnh](https://ai.google.dev/gemini-api/docs/long-context?hl=vi) là 32.000 token.
+- Xem phần [Ngôn ngữ](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi#languages) để biết thông tin về ngôn ngữ được hỗ trợ.
+- TTS không hỗ trợ tính năng phát trực tiếp.
 
-تنطبق القيود التالية تحديدًا عند استخدام نموذج Gemini 3.1 Flash
-TTS Preview لإنشاء الكلام:
+Các ràng buộc sau đây chỉ áp dụng khi bạn dùng mô hình Gemini 3.1 Flash TTS Preview để tạo lời nói:
 
-- **عدم تطابق الصوت مع تعليمات الطلب:** قد لا يتطابق الناتج الذي يقدّمه النموذج دائمًا مع الصوت الذي تم اختياره، ما يؤدي إلى اختلاف الصوت عن المتوقع. لتجنُّب عدم تطابق النبرات (مثل صوت رجل عميق يحاول التحدّث مثل فتاة صغيرة)، تأكَّد من أنّ النبرة والسياق المكتوبَين في الطلب يتوافقان بشكل طبيعي مع الملف الشخصي للمتحدث المحدّد.
-- **جودة النتائج الأطول:** قد تبدأ جودة الكلام واتساقه في التدهور مع النتائج التي تزيد مدتها عن بضع دقائق. ننصحك بتقسيم النصوص إلى أجزاء أصغر.
-- **عرض رموز نصية بشكل متقطّع:** يعرض النموذج أحيانًا رموزًا نصية بدلاً من رموز صوتية، ما يؤدي إلى تعذُّر تنفيذ الطلب على الخادم وظهور الخطأ `500`. بما أنّ هذا يحدث بشكل عشوائي في نسبة صغيرة جدًا من الطلبات، عليك تنفيذ منطق إعادة المحاولة المبرمَج في تطبيقك للتعامل مع هذه الحالات.
-- **الرفض الخاطئ لمصنّف الطلبات:** قد لا تؤدي الطلبات الغامضة إلى تشغيل مصنّف تركيب الكلام، ما يؤدي إلى رفض الطلب (`PROHIBITED_CONTENT`) أو جعل النموذج يقرأ تعليمات الأسلوب وملاحظات المخرج بصوت عالٍ. يمكنك التحقّق من صحة الطلبات من خلال إضافة مقدمة واضحة
-  تطلب من النموذج تركيب الكلام، وتحديد موضع بدء
-  النص المكتوب الفعلي بوضوح.
+- **Giọng nói không nhất quán với hướng dẫn trong câu lệnh:** Đầu ra của mô hình có thể không phải lúc nào cũng hoàn toàn khớp với người nói đã chọn, khiến âm thanh khác với dự kiến. Để tránh giọng điệu không phù hợp (chẳng hạn như giọng nam trầm cố gắng nói như một cô gái trẻ), hãy đảm bảo giọng điệu và ngữ cảnh được viết trong câu lệnh của bạn phù hợp một cách tự nhiên với hồ sơ của người nói được chọn.
+- **Chất lượng của đầu ra dài hơn:** Chất lượng và tính nhất quán của lời nói có thể bắt đầu giảm sút đối với đầu ra được tạo có thời lượng dài hơn vài phút. Bạn nên chia bản chép lời thành các phần nhỏ hơn.
+- **Thỉnh thoảng trả về mã thông báo văn bản:** Đôi khi, mô hình trả về mã thông báo văn bản thay vì mã thông báo âm thanh, khiến máy chủ không thực hiện được yêu cầu và trả về lỗi `500`. Vì điều này xảy ra ngẫu nhiên trong một tỷ lệ rất nhỏ các yêu cầu, bạn nên triển khai logic thử lại tự động trong ứng dụng của mình để xử lý những yêu cầu này.
+- **Trường hợp thuật toán phân loại câu lệnh từ chối nhầm:** Các câu lệnh mơ hồ có thể không kích hoạt được thuật toán phân loại tổng hợp lời nói, dẫn đến yêu cầu bị từ chối (`PROHIBITED_CONTENT`) hoặc khiến mô hình đọc to hướng dẫn về phong cách và ghi chú của đạo diễn. Xác thực câu lệnh của bạn bằng cách thêm một phần mở đầu rõ ràng hướng dẫn mô hình tổng hợp lời nói và gắn nhãn rõ ràng nơi bắt đầu bản chép lời thực tế.
 
-## الخطوات التالية
+## Bước tiếp theo
 
-- جرِّب [كتاب وصفات إنشاء المحتوى الصوتي](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_TTS.ipynb?hl=ar).
-- توفّر [واجهة برمجة التطبيقات Live](https://ai.google.dev/gemini-api/docs/live?hl=ar) من Gemini خيارات تفاعلية لإنشاء الصوت يمكنك دمجها مع وسائط أخرى.
-- للتعرّف على كيفية التعامل مع *مدخلات* الصوت، يُرجى الانتقال إلى دليل [فهم الصوت](https://ai.google.dev/gemini-api/docs/audio?hl=ar).
+- Hãy thử [sách hướng dẫn tạo âm thanh](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_TTS.ipynb?hl=vi).
+- [Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi) của Gemini cung cấp các lựa chọn tạo âm thanh tương tác mà bạn có thể xen kẽ với các phương thức khác.
+- Để tìm hiểu cách xử lý *đầu vào* âm thanh, hãy xem hướng dẫn [Nhận dạng âm thanh](https://ai.google.dev/gemini-api/docs/audio?hl=vi).
 
-إرسال ملاحظات
+Gửi ý kiến phản hồi
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-تاريخ التعديل الأخير: 2026-05-13 (حسب التوقيت العالمي المتفَّق عليه)
+Cập nhật lần gần đây nhất: 2026-05-19 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-13 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-19 UTC."],[],[]]

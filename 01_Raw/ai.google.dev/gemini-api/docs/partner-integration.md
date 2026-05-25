@@ -1,145 +1,140 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/partner-integration?hl=pt-BR
-fetched_at: 2026-05-18T05:13:43.092468+00:00
-title: "Integra\u00e7\u00f5es de parceiros e bibliotecas \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/partner-integration?hl=zh-TW
+fetched_at: 2026-05-25T05:18:00.207888+00:00
+title: "\u5408\u4f5c\u5925\u4f34\u548c\u7a0b\u5f0f\u5eab\u6574\u5408 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Envie comentários
+提供意見
 
-# Integrações de parceiros e bibliotecas
+# 合作夥伴和程式庫整合
 
-Este guia descreve as estratégias arquitetônicas para criar bibliotecas, plataformas e gateways com base na API Gemini. Ele detalha as compensações técnicas entre o uso dos SDKs oficiais da GenAI, a API direta (REST/gRPC) e a camada de compatibilidade do OpenAI.
+本指南將說明如何運用 Gemini API 建構程式庫、平台和閘道，並提供相關架構策略。內容詳細說明使用官方 GenAI SDK、Direct API (REST/gRPC) 和 OpenAI 相容層之間的技術取捨。
 
-Use este guia se você estiver criando ferramentas para outros desenvolvedores, como frameworks de código aberto, gateways corporativos ou agregadores de SaaS, e precisar otimizar a higiene de dependências, o tamanho do pacote ou a paridade de recursos.
+如果您要為其他開發人員建構工具 (例如開放原始碼架構、企業閘道或 SaaS 聚合器)，並需要針對依附元件衛生、套件大小或功能同位進行最佳化，請參閱本指南。
 
-## O que é a integração de parceiros?
+## 什麼是合作夥伴整合？
 
-Um parceiro é qualquer pessoa que esteja criando uma integração entre a API Gemini e desenvolvedores de usuários finais. Categorizamos os parceiros em quatro arquétipos. Identificar qual deles corresponde mais de perto vai ajudar você a escolher o caminho de integração certo.
+合作夥伴是指在 Gemini API 與使用者開發人員之間建構整合功能的任何人。我們將合作夥伴分為四種原型。找出最符合您需求的整合方式，有助於選擇正確的整合路徑。
 
-#### Framework de ecossistema
+#### 生態系統架構
 
-- **Quem você é**:mantenedor de um framework de código aberto (por exemplo, LangChain, LlamaIndex, Spring AI) ou clientes específicos do idioma.
-- **Seu objetivo**:ampla compatibilidade. Você quer que sua biblioteca funcione em qualquer ambiente escolhido pelo usuário sem forçar conflitos.
+- **適用對象：**開放原始碼架構 (例如 LangChain、LlamaIndex、Spring AI) 或特定語言用戶端的維護人員。
+- **目標：**廣泛相容性。您希望程式庫能在使用者選擇的任何環境中運作，且不會強制發生衝突。
 
-#### Plataforma de execução e de borda
+#### 執行階段和邊緣平台
 
-- **Quem você é**:plataformas SaaS, gateways de IA ou provedores de infraestrutura em nuvem (por exemplo, Vercel, Cloudflare, Zapier) em que a execução de código acontece em ambientes restritos.
-- **Seu objetivo**:performance. Você precisa de baixa latência, tamanho mínimo do pacote e inicializações a frio rápidas.
+- **適用對象：**SaaS 平台、AI 閘道或雲端基礎架構供應商 (例如 Vercel、Cloudflare、Zapier)，這些平台/供應商會在受限環境中執行程式碼。
+- **您的目標：**成效。您需要低延遲、最小的套件大小，以及快速冷啟動。
 
-#### Agregador
+#### 集結網站
 
-- **Quem você é**:plataformas, proxies ou "Model Gardens" internos que normalizam o acesso em muitos provedores de LLM diferentes (por exemplo, OpenAI, Anthropic, Google) em uma única interface.
-- **Seu objetivo**:portabilidade e uniformidade.
+- **您是誰：**平台、Proxy 或內部「模型花園」，可將許多不同 LLM 供應商 (例如 OpenAI、Anthropic、Google) 的存取權標準化為單一介面。
+- **目標：**可攜性和一致性。
 
-#### Gateway corporativo
+#### 企業閘道
 
-- **Quem você é**:equipes internas de engenharia de plataforma em grandes empresas que criam "caminhos ideais" para centenas de desenvolvedores internos.
-- **Seu objetivo**:padronização, governança e autenticação unificada.
+- **適用對象：**大型企業的內部平台工程團隊，為數百名內部開發人員建構「黃金途徑」。
+- **您的目標：**標準化、控管及統一驗證。
 
-## Resumo comparativo
+## 功能比較
 
-**Prática recomendada global:** todos os parceiros precisam enviar o [`x-goog-api-client`
-cabeçalho](#client-id), independentemente do caminho escolhido.
+**全球最佳做法：**無論選擇哪種路徑，所有合作夥伴都必須傳送 [`x-goog-api-client`
+標頭](#client-id)。
 
-| Se você for... | Caminho recomendado | Principal benefício | Principal compensação | Prática recomendada |
+| 如果您是... | 建議路徑 | 主要優點 | 主要缺點 | 最佳做法 |
 | --- | --- | --- | --- | --- |
-| **Gateway corporativo, framework de ecossistema** | **[SDK da GenAI do Google](#genai-sdk)** | **Paridade e velocidade da plataforma de agentes do Gemini Enterprise**. Processamento integrado para tipos, autenticação e recursos complexos (por exemplo, uploads de arquivos). Migração perfeita para o Google Cloud. | **Peso da dependência**. As dependências transitivas podem ser complexas e fora do seu controle. Limitado a linguagens compatíveis (Python/Node/Go/Java). | **Bloquear versões**. Fixe as versões do SDK nas imagens de base internas para garantir a estabilidade entre as equipes. |
-| **Framework de ecossistema, plataformas de borda e agregadores** | **[API direta](#rest)**  *(REST / gRPC)* | **Dependências zero**. Você controla o cliente HTTP e o tamanho exato do pacote. Acesso total a todos os recursos da API e do modelo. | **Alto custo para desenvolvedores**. As estruturas JSON podem ser profundamente aninhadas e exigem validação manual e verificação de tipo rigorosas. | **Usar especificações OpenAPI**. Automatize a geração de tipos usando nossas especificações oficiais em vez de escrevê-las manualmente. |
-| **Agregador que usa SDKs do OpenAI que exigem apenas fluxos de trabalho baseados em texto**  *(Otimização para portabilidade legada)* | **[Compatibilidade com o OpenAI](#openai)** | **Portabilidade instantânea**. Reutilize códigos ou bibliotecas compatíveis com o OpenAI. | **Limite de recursos**. Os recursos específicos do modelo (vídeo nativo, armazenamento em cache) podem não estar disponíveis. | **Plano de migração**. Use isso para validação rápida, mas planeje fazer upgrade para a API direta para ter o recurso completo da API. |
+| **企業閘道、生態系統架構** | **[Google GenAI SDK](#genai-sdk)** | **Gemini Enterprise Agent Platform 的同位和速度。**內建類型、驗證和複雜功能 (例如檔案上傳) 的處理機制。順暢遷移至 Google Cloud。 | **依附元件權重。**遞移依附元件可能很複雜，且不在您的控管範圍內。僅限支援的語言 (Python/Node/Go/Java)。 | **鎖定版本**：在內部基礎映像檔中固定 SDK 版本，確保各團隊的穩定性。 |
+| **生態系統架構、邊緣平台和匯總工具** | **[直接 API](#rest)**  *(REST / gRPC)* | **零依附元件。**您可以控管 HTTP 用戶端和確切的套件大小。具備所有 API 和模型功能的完整存取權。 | **開發人員負擔高。**JSON 結構可能深層巢狀化，需要嚴格的手動驗證和型別檢查。 | **使用 OpenAPI 規格。**使用官方規格自動產生型別，不必手動撰寫。 |
+| **使用 OpenAI SDK 的匯總工具，僅需以文字為基礎的工作流程**  *(針對舊版可攜性進行最佳化)* | **[OpenAI 相容性](#openai)** | **立即轉移資料。**重複使用現有的 OpenAI 相容程式碼或程式庫。 | **功能上限。**你可能無法使用特定機型專屬的功能 (原生影片、快取)。 | **遷移計畫**。您可以使用這項功能快速驗證，但建議升級至 Direct API，以使用完整的 API 功能。 |
 
-## Integração do SDK da GenAI do Google
+## 整合 Google GenAI SDK
 
-Para frameworks, a implementação do [SDK da GenAI do Google](https://ai.google.dev/gemini-api/docs/libraries?hl=pt-br)
-é geralmente o caminho mais simples, considerando o menor número de linhas de código em linguagens compatíveis.
+對於架構，導入 [Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-tw) 通常是最簡單的方法，因為支援的語言程式碼行數最少。
 
-Para equipes de plataforma internas, o principal resultado é geralmente um "caminho ideal" que permite que os engenheiros de produtos se movam rapidamente, obedecendo às políticas de segurança.
+對內部平台團隊而言，主要交付項目通常是「黃金路徑」，可讓產品工程師快速採取行動，同時遵守安全政策。
 
-**Benefícios:**
+**福利：**
 
-- **Interface unificada para migração da plataforma de agentes do Gemini Enterprise**:os desenvolvedores internos geralmente criam protótipos usando chaves de API (API Gemini) e implantam na plataforma de agentes do Gemini Enterprise (IAM) para conformidade de produção. O SDK abstrai essas diferenças de autenticação.
-  Da mesma forma, para frameworks, é possível implementar um caminho de código e oferecer suporte a dois conjuntos de usuários.
-- **Auxiliares do lado do cliente**:o SDK inclui utilitários idiomáticos que reduzem o código boilerplate para tarefas complexas.
-  - *Exemplos*:suporte a objetos de imagem `PIL` diretamente em comandos, chamadas de função automáticas e tipos abrangentes.
-- **Acesso a recursos do dia zero**:novos recursos da API estão disponíveis no momento do lançamento pelos SDKs.
-- **Melhor suporte à geração de código**:a instalação local do SDK expõe definições de tipo e docstrings a assistentes de programação (por exemplo, Cursor, Copilot).
-  Esse contexto melhora a precisão da geração de código em comparação com a geração de solicitações REST brutas.
+- **Gemini Enterprise Agent Platform 遷移作業的統一介面：**內部開發人員通常會使用 API 金鑰 (Gemini API) 製作原型，並部署至 Gemini Enterprise Agent Platform (IAM)，確保符合生產環境的規範。SDK 會將這些驗證差異抽象化。同樣地，您也可以實作一個程式碼路徑，支援兩組使用者。
+- **用戶端輔助程式：**SDK 包含慣用公用程式，可減少複雜工作的樣板。
+  - *示例：*直接在提示中支援 `PIL` 圖片物件、自動呼叫函式，以及全面支援各種型別。
+- **搶先使用新功能：**新 API 功能會在推出時透過 SDK 提供。
+- **改善程式碼生成支援：**安裝本機 SDK 後，型別定義和文件字串會公開給程式碼編寫助理 (例如 Cursor、Copilot)。相較於產生原始 REST 要求，這個脈絡可提高程式碼生成準確度。
 
-**A compensação:**
+**取捨：**
 
-- **Peso e complexidade da dependência**:os SDKs têm as próprias dependências, o que pode aumentar o tamanho do pacote e o risco da cadeia de suprimentos.
-- **Controle de versão**:novos recursos da API são geralmente fixados em versões mínimas do SDK.
-  Talvez seja necessário enviar atualizações aos usuários para acessar novos recursos ou modelos, o que, em alguns casos, pode exigir mudanças em dependências transitivas que afetam os usuários.
-- **Limites de protocolo**:os SDKs oferecem suporte apenas a HTTPS para a API principal e WebSockets (WSS) para a API Live. O gRPC não é compatível com clientes de SDK de alto nível.
-- **Suporte a idiomas**:os SDKs oferecem suporte às versões *atuais* de idiomas. Se você precisar oferecer suporte a versões EOL (por exemplo, Python 3.9), será necessário manter um fork.
+- **依附元件權重和複雜度：**SDK 有自己的依附元件，可能會增加套裝組合大小，並造成供應鏈風險。
+- **版本管理：**新的 API 功能通常會固定在最低 SDK 版本。您可能需要向使用者推送更新，才能存取新功能或模型，有時這可能需要變更影響使用者的轉換依附元件。
+- **通訊協定限制：**SDK 僅支援主要 API 的 HTTPS 和 Live API 的 WebSocket (WSS)。高階 SDK 用戶端不支援 gRPC。
+- **語言支援：**SDK 支援*目前*的語言版本。如需支援產品停產 (EOL) 版本 (例如 Python 3.9)，您必須維護分支版本。
 
-**Prática recomendada:**
+**最佳做法：**
 
-- **Bloquear versões**:fixe a versão do SDK nas imagens de base internas para garantir a estabilidade entre as equipes.
+- **鎖定版本：**在內部基礎映像檔中固定 SDK 版本，確保各團隊的穩定性。
 
-## Integração direta com a API
+## 直接整合 API
 
-Se você estiver distribuindo uma biblioteca para milhares de desenvolvedores, executando em um ambiente restrito ou criando um agregador que exige os recursos de ponta do Gemini, talvez seja necessário fazer a integração diretamente com a API usando REST ou gRPC.
+如果您要將程式庫發布給數千名開發人員、在受限環境中執行，或是建構需要 Gemini 最新功能的匯總工具，可能需要使用 REST 或 gRPC 直接整合 API。
 
-**Benefícios:**
+**福利：**
 
-- **Acesso total aos recursos**:ao contrário da camada de compatibilidade do OpenAI, o uso direto da API ativa recursos específicos do Gemini, como upload para a API File, criação de armazenamento em cache de conteúdo e uso da API Live bidirecional.
-- **Dependências mínimas**:em um ambiente em que as dependências são sensíveis devido ao tamanho ou aos custos de auditoria. O uso direto da API por meio de uma biblioteca padrão, como `fetch`, ou por um wrapper, como `httpx`, garante que a biblioteca permaneça leve.
-- **Independente de linguagem**:esse é o único caminho para linguagens não cobertas pelos SDKs, como Rust, PHP e Ruby, já que não há restrições de linguagem.
-- **Performance**:a API direta não tem custo de inicialização, minimizando as inicializações a frio em funções sem servidor.
+- **完整功能存取權：**與 OpenAI 相容層不同，直接使用 API 可啟用 Gemini 專屬功能，例如上傳至 File API、建立內容快取，以及使用雙向 Live API。
+- **依附元件數量最少：**在依附元件因大小或稽核成本而敏感的環境中，透過 `fetch` 等標準程式庫直接使用 API，或透過 `httpx` 等包裝函式使用 API，可確保程式庫保持輕巧。
+- **不限語言：**這是唯一適用於 SDK 未涵蓋語言的路徑，例如 Rust、PHP 和 Ruby，因為沒有語言限制。
+- **效能：**Direct API 的初始化負擔為零，可將無伺服器函式的冷啟動情形降至最低。
 
-**A compensação:**
+**取捨：**
 
-- **Implementação manual da plataforma de agentes do Gemini Enterprise**:ao contrário do SDK, o uso direto da API não processa automaticamente as diferenças de autenticação entre o AI Studio (chave de API) e a plataforma de agentes do Gemini Enterprise (IAM). É necessário implementar gerenciadores de autenticação separados se você quiser oferecer suporte aos dois ambientes.
-- **Sem tipos ou auxiliares nativos**:você não recebe conclusões de código ou verificações de tempo de compilação para objetos de solicitação, a menos que os implemente por conta própria. Não há "auxiliares" de cliente (por exemplo, conversores de função para esquema), então você precisa escrever essa lógica manualmente.
+- **手動實作 Gemini Enterprise Agent Platform：**與 SDK 不同，直接使用 API 不會自動處理 AI Studio (API 金鑰) 和 Gemini Enterprise Agent Platform (IAM) 之間的驗證差異。如要同時支援這兩個環境，請分別導入驗證處理常式。
+- **沒有原生型別或輔助程式：**除非自行實作，否則您不會取得要求物件的程式碼完成或編譯時間檢查。沒有用戶端「輔助程式」(例如函式到結構定義的轉換器)，因此您必須手動編寫這個邏輯。
 
-**Prática recomendada**
+**最佳做法**
 
-Exibimos uma especificação legível por máquina que pode ser usada para gerar definições de tipo para sua biblioteca, evitando que você as escreva manualmente. Faça o download da especificação durante o processo de build, gere os tipos e envie o código compilado.
+我們提供機器可讀取的規格，您可以用來為程式庫產生型別定義，不必手動編寫。在建構程序中下載規格、產生型別，然後運送編譯的程式碼。
 
-- **Endpoint**:`https://generativelanguage.googleapis.com/$discovery/OPENAPI3_0`
+- **端點：** `https://generativelanguage.googleapis.com/$discovery/OPENAPI3_0`
 
-## Integração do SDK do OpenAI
+## 整合 OpenAI SDK
 
-Se você é uma plataforma que prioriza um esquema unificado (conclusões de chat do OpenAI) em vez de recursos específicos do modelo, esse é o trajeto mais rápido.
+如果您是優先採用統一結構定義 (OpenAI Chat Completions) 的平台，而非特定模型功能，這是最快路線。
 
-**Benefícios:**
+**福利：**
 
-- **Baixa fricção**:geralmente, é possível adicionar suporte ao Gemini mudando o `baseURL` e a `apiKey`. Essa é uma maneira rápida de integrar implementações "Traga sua própria chave", adicionando suporte ao Gemini sem escrever um novo código.
-- **Restrições**:esse caminho só é recomendado se você estiver restrito ao SDK do OpenAI e não precisar de recursos avançados do Gemini, como a API File, ou adicionar manualmente suporte a ferramentas como o embasamento com a Pesquisa Google.
+- **低摩擦：**您通常可以透過變更 `baseURL` 和 `apiKey`，新增 Gemini 支援。這是整合「自備金鑰」實作項目的快速方法，無須編寫新程式碼，即可新增 Gemini 支援。
+- **限制：**如果您只能使用 OpenAI SDK，且不需要進階 Gemini 功能 (例如 File API)，或手動新增對以 Google 搜尋強化事實基礎等工具的支援，建議採用這個路徑。
 
-**A compensação:**
+**取捨：**
 
-- **Limitações de recursos**:a camada de compatibilidade oferece limitações aos recursos principais do Gemini. As ferramentas disponíveis do lado do servidor variam entre as plataformas e podem exigir processamento manual para funcionar com as ferramentas da API Gemini.
-- **Sobrecarga de tradução**:como o esquema do OpenAI não é mapeado 1:1 para a arquitetura do Gemini, a dependência da camada de compatibilidade introduz algumas complexidades que exigem mais trabalho de implementação para serem resolvidas, como mapear uma ferramenta de "pesquisa" do usuário para a ferramenta de plataforma certa.
-  Se você precisar de uma quantidade significativa de casos especiais, talvez seja mais valioso usar um SDK ou API dedicado para cada plataforma.
+- **功能限制：**相容性層會限制 Gemini 的核心功能。不同平台提供的伺服器端工具有所不同，可能需要手動處理，才能與 Gemini API 工具搭配使用。
+- **翻譯負擔：**由於 OpenAI 架構與 Gemini 架構並非 1:1 對應，因此依賴相容性層會產生一些複雜性，需要額外的實作工作才能解決，例如將使用者「搜尋」工具對應至正確的平台工具。如果需要大量特殊情況，建議為每個平台使用專屬的 SDK 或 API。
 
-**Prática recomendada**
+**最佳做法**
 
-Sempre que possível, faça a integração diretamente com a API Gemini. No entanto, para máxima compatibilidade, considere usar uma biblioteca que reconheça diferentes provedores e possa processar o mapeamento de ferramentas e mensagens para você.
+盡可能直接整合 Gemini API。不過，為了達到最高相容性，建議使用可辨識不同供應商的程式庫，並處理工具和訊息對應。
 
-## Prática recomendada para todos os parceiros: identificação do cliente
+## 所有合作夥伴的最佳做法：識別用戶端
 
-Ao fazer chamadas para a API Gemini como uma plataforma ou biblioteca, é necessário identificar o cliente usando o cabeçalho `x-goog-api-client`.
+以平台或程式庫身分呼叫 Gemini API 時，您必須使用 `x-goog-api-client` 標頭識別用戶端。
 
-Isso permite que o Google identifique seus segmentos de tráfego específicos e, se a biblioteca estiver produzindo um padrão de erro específico, podemos entrar em contato para ajudar na depuração.
+這樣一來，Google 就能識別特定流量區隔，如果您的程式庫產生特定錯誤模式，我們就能與您聯絡，協助您進行偵錯。
 
-Use o formato `company-product/version` (por exemplo, `acme-framework/1.2.0`).
+使用 `company-product/version` 格式 (例如 `acme-framework/1.2.0`)。
 
-### Exemplos de implementação
+### 導入範例
 
-### SDK da GenAI
+### GenAI SDK
 
-Ao fornecer o cliente da API, o SDK anexa automaticamente o cabeçalho personalizado aos cabeçalhos internos.
+提供 API 用戶端後，SDK 會自動將自訂標頭附加至內部標頭。
 
 ```
 from google import genai
@@ -154,16 +149,16 @@ client = genai.Client(
 )
 ```
 
-### API direta (REST)
+### Direct API (REST)
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=$GEMINI_API_KEY" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=$GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -H 'x-goog-api-client: acme-framework/1.2.0' \
     -d '{...}'
 ```
 
-### SDK do OpenAI
+### OpenAI SDK
 
 ```
 from openai import OpenAI
@@ -177,19 +172,18 @@ client = OpenAI(
 )
 ```
 
-## Próximas etapas
+## 後續步驟
 
-- Acesse a [visão geral da biblioteca](https://ai.google.dev/gemini-api/docs/libraries?hl=pt-br) para saber mais sobre
-  os SDKs da GenAI.
-- Navegue pela [referência da API](https://ai.google.dev/api?hl=pt-br).
-- Leia o [guia de compatibilidade do OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=pt-br).
+- 請參閱[程式庫總覽](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-tw)，瞭解 GenAI SDK
+- 瀏覽 [API 參考資料](https://ai.google.dev/api?hl=zh-tw)
+- 請參閱 [OpenAI 相容性指南](https://ai.google.dev/gemini-api/docs/openai?hl=zh-tw)
 
-Envie comentários
+提供意見
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Última atualização 2026-05-13 UTC.
+上次更新時間：2026-05-19 (世界標準時間)。
 
-Quer enviar seu feedback?
+想進一步說明嗎？
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-05-13 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-19 (世界標準時間)。"],[],[]]

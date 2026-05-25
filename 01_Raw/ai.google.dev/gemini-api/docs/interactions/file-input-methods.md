@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/interactions/file-input-methods?hl=it
-fetched_at: 2026-05-18T05:19:01.360752+00:00
+fetched_at: 2026-05-25T05:27:31.098811+00:00
 title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -29,7 +29,6 @@ Il modo più semplice per includere un file come input è leggerlo localmente e 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 import pathlib
 import base64
@@ -40,24 +39,18 @@ filepath = pathlib.Path('my_local_file.pdf')
 
 prompt = "Summarize this document"
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input=[
         {"type": "text", "text": prompt},
         {"type": "document", "data": base64.b64encode(filepath.read_bytes()).decode('utf-8'), "mime_type": "application/pdf"}
     ]
 )
-# Print the model's text response
-for step in interaction.steps:
-    if step.type == "model_output":
-        for content_block in step.content:
-            if content_block.type == "text":
-                print(content_block.text)
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 import * as fs from 'node:fs';
 
@@ -68,7 +61,7 @@ async function main() {
     const filePath = 'my_local_file.pdf';
 
     const interaction = await client.interactions.create({
-        model: "gemini-3-flash-preview",
+        model: "gemini-3.5-flash",
         input: [
             { type: "text", text: prompt },
             {
@@ -78,12 +71,7 @@ async function main() {
             }
         ]
     });
-    const modelStep = interaction.steps.find(s => s.type === 'model_output');
-    if (modelStep) {
-      for (const contentBlock of modelStep.content) {
-        if (contentBlock.type === 'text') console.log(contentBlock.text);
-      }
-    }
+    console.log(interaction.output_text);
 }
 
 main();
@@ -95,13 +83,12 @@ main();
 # Encode the local file to base64
 B64_CONTENT=$(base64 -w 0 my_local_file.pdf)
 
-# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "input": [
       {"type": "text", "text": "Summarize this document"},
       {
@@ -137,7 +124,6 @@ Puoi anche recuperare un file da un URL, convertirlo in byte e includerlo nell'i
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 import httpx
 import base64
@@ -150,24 +136,18 @@ doc_data = httpx.get(doc_url).content
 prompt = "Summarize this document"
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input=[
         {"type": "document", "data": base64.b64encode(doc_data).decode('utf-8'), "mime_type": "application/pdf"},
         {"type": "text", "text": prompt}
     ]
 )
-# Print the model's text response
-for step in interaction.steps:
-    if step.type == "model_output":
-        for content_block in step.content:
-            if content_block.type == "text":
-                print(content_block.text)
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
 const client = new GoogleGenAI({});
@@ -179,7 +159,7 @@ async function main() {
       .then((response) => response.arrayBuffer());
 
     const interaction = await client.interactions.create({
-        model: "gemini-3-flash-preview",
+        model: "gemini-3.5-flash",
         input: [
             { type: "text", text: prompt },
             {
@@ -189,12 +169,7 @@ async function main() {
             }
         ]
     });
-    const modelStep = interaction.steps.find(s => s.type === 'model_output');
-    if (modelStep) {
-      for (const contentBlock of modelStep.content) {
-        if (contentBlock.type === 'text') console.log(contentBlock.text);
-      }
-    }
+    console.log(interaction.output_text);
 }
 
 main();
@@ -223,7 +198,7 @@ ENCODED_PDF=$(base64 $B64FLAGS "${DISPLAY_NAME}.pdf")
 # Create JSON payload file
 cat <<EOF > payload.json
 {
-"model": "gemini-3-flash-preview",
+"model": "gemini-3.5-flash",
 "input": [
 {"type": "document", "data": "${ENCODED_PDF}", "mime_type": "application/pdf"},
 {"type": "text", "text": "${PROMPT}"}
@@ -232,7 +207,6 @@ cat <<EOF > payload.json
 EOF
 
 # Generate content using interactions
-# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
@@ -256,35 +230,26 @@ Carica un file locale nell'API Gemini. I file caricati in questo modo vengono ar
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 
 client = genai.Client()
 
-# Upload the file
 doc_file = client.files.upload(file="path/to/your/sample.pdf")
 prompt = "Summarize this document"
 
-# Use the uploaded file in an interaction
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input=[
         {"type": "text", "text": prompt},
         {"type": "document", "uri": doc_file.uri, "mime_type": doc_file.mime_type}
     ]
 )
-# Print the model's text response
-for step in interaction.steps:
-    if step.type == "model_output":
-        for content_block in step.content:
-            if content_block.type == "text":
-                print(content_block.text)
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
 const client = new GoogleGenAI({});
@@ -299,18 +264,13 @@ async function main() {
   });
 
   const interaction = await client.interactions.create({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     input: [
         { type: "text", text: prompt },
         { type: "document", uri: myfile.uri, mime_type: myfile.mimeType }
     ]
   });
-  const modelStep = interaction.steps.find(s => s.type === 'model_output');
-  if (modelStep) {
-    for (const contentBlock of modelStep.content) {
-      if (contentBlock.type === 'text') console.log(contentBlock.text);
-    }
-  }
+  console.log(interaction.output_text);
 }
 
 await main();
@@ -350,13 +310,12 @@ curl "${upload_url}" \
 file_uri=$(jq ".file.uri" file_info.json)
 
 # Now use in an interaction
-# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -H "Api-Revision: 2026-05-20" \
     -d '{
-      "model": "gemini-3-flash-preview",
+      "model": "gemini-3.5-flash",
       "input": [
         {"type": "text", "text": "Summarize this document"},
         {"type": "document", "uri": '$file_uri', "mime_type": "'${MIME_TYPE}'"}
@@ -508,11 +467,8 @@ Se i dati sono già in Google Cloud Storage, non devi scaricarli e ricaricarli. 
    ### Python
 
    ```
-   # This will only work for SDK newer than 2.0.0
    from google import genai
 
-   # Note that you must provide an API key in the GEMINI_API_KEY
-   # environment variable, but it is unused for the registration endpoint.
    client = genai.Client(credentials=credentials)
 
    registered_gcs_files = client.files.register_files(
@@ -520,28 +476,21 @@ Se i dati sono già in Google Cloud Storage, non devi scaricarli e ricaricarli. 
    )
    prompt = "Summarize this file."
 
-   # call interactions.create for each file
    for f in registered_gcs_files.files:
      print(f.name)
      interaction = client.interactions.create(
-       model="gemini-3-flash-preview",
+       model="gemini-3.5-flash",
        input=[
          {"type": "text", "text": prompt},
          {"type": "document", "uri": f.uri, "mime_type": f.mime_type}
        ],
      )
-     # Print the model's text response
-     for step in interaction.steps:
-         if step.type == "model_output":
-             for content_block in step.content:
-                 if content_block.type == "text":
-                     print(content_block.text)
+     print(interaction.output_text)
    ```
 
    ### JavaScript
 
    ```
-   // This will only work for SDK newer than 2.0.0
    import { GoogleGenAI } from "@google/genai";
 
    const ai = new GoogleGenAI({ auth: auth });
@@ -556,19 +505,14 @@ Se i dati sono già in Google Cloud Storage, non devi scaricarli e ricaricarli. 
        for (const file of registeredGcsFiles.files) {
            console.log(file.name);
            const interaction = await ai.interactions.create({
-               model: "gemini-3-flash-preview",
+               model: "gemini-3.5-flash",
                input: [
                    { type: "text", text: prompt },
                    { type: "document", uri: file.uri, mime_type: file.mimeType }
                ]
            });
 
-           const modelStep = interaction.steps.find(s => s.type === 'model_output');
-           if (modelStep) {
-               for (const contentBlock of modelStep.content) {
-                   if (contentBlock.type === 'text') console.log(contentBlock.text);
-               }
-           }
+           console.log(interaction.output_text);
        }
    }
 
@@ -595,7 +539,6 @@ Questa soluzione è ideale per i file fino a 100 MB che non vuoi ricaricare.
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 
 uri = "https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf"
@@ -604,24 +547,18 @@ prompt = "Summarize this file"
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input=[
         {"type": "document", "uri": uri, "mime_type": "application/pdf"},
         {"type": "text", "text": prompt}
     ]
 )
-# Print the model's text response
-for step in interaction.steps:
-    if step.type == "model_output":
-        for content_block in step.content:
-            if content_block.type == "text":
-                print(content_block.text)
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from '@google/genai';
 
 const client = new GoogleGenAI({});
@@ -630,19 +567,14 @@ const uri = "https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf
 
 async function main() {
   const interaction = await client.interactions.create({
-    model: 'gemini-3-flash-preview',
+    model: 'gemini-3.5-flash',
     input: [
       { type: "document", uri: uri, mime_type: "application/pdf" },
       { type: "text", text: "summarize this file" }
     ]
   });
 
-  const modelStep = interaction.steps.find(s => s.type === 'model_output');
-  if (modelStep) {
-    for (const contentBlock of modelStep.content) {
-      if (contentBlock.type === 'text') console.log(contentBlock.text);
-    }
-  }
+  console.log(interaction.output_text);
 }
 
 main();
@@ -651,13 +583,12 @@ main();
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
       -H 'x-goog-api-key: $GEMINI_API_KEY' \
       -H 'Content-Type: application/json' \
       -H "Api-Revision: 2026-05-20" \
       -d '{
-          "model": "gemini-3-flash-preview",
+          "model": "gemini-3.5-flash",
           "input": [
             {"type": "text", "text": "Summarize this pdf"},
             {
@@ -733,8 +664,8 @@ Invia feedback
 
 Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Ultimo aggiornamento 2026-05-12 UTC.
+Ultimo aggiornamento 2026-05-19 UTC.
 
 Vuoi dirci altro?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-12 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-19 UTC."],[],[]]

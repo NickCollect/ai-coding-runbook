@@ -1,32 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/code-execution?hl=ar
-fetched_at: 2026-05-18T05:15:58.110564+00:00
+source_url: https://ai.google.dev/gemini-api/docs/code-execution?hl=id
+fetched_at: 2026-05-25T05:27:42.706750+00:00
 title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=id)
 
-إرسال ملاحظات
+Kirim masukan
 
-# تنفيذ الرمز البرمجي
+# Eksekusi kode
 
-توفّر Gemini API أداة لتنفيذ الرموز البرمجية تتيح للنموذج إنشاء رموز Python البرمجية وتشغيلها. يمكن للنموذج بعد ذلك التعلّم بشكل متكرّر من نتائج تنفيذ الرموز البرمجية إلى أن يصل إلى ناتج نهائي. يمكنك استخدام أداة تنفيذ الرموز البرمجية لإنشاء تطبيقات تستفيد من الاستدلال المستند إلى الرموز البرمجية. على سبيل المثال، يمكنك استخدام أداة تنفيذ الرموز البرمجية لحلّ المعادلات أو معالجة النصوص. يمكنك
-أيضًا استخدام [المكتبات](#supported-libraries) المضمّنة في بيئة تنفيذ الرموز البرمجية
-لإجراء مهام أكثر تخصّصًا.
+Gemini API menyediakan alat eksekusi kode yang memungkinkan model untuk membuat dan menjalankan kode Python. Kemudian, model dapat belajar secara iteratif dari hasil eksekusi kode hingga mencapai output akhir. Anda dapat menggunakan eksekusi kode untuk membangun aplikasi yang memanfaatkan penalaran berbasis kode. Misalnya, Anda dapat menggunakan eksekusi kode untuk menyelesaikan persamaan atau memproses teks. Anda juga dapat menggunakan [library](#supported-libraries) yang disertakan dalam lingkungan eksekusi kode untuk melakukan tugas yang lebih khusus.
 
-لا يمكن لـ Gemini تنفيذ الرموز البرمجية إلا بلغة Python. يمكنك مع ذلك أن تطلب من Gemini إنشاء رموز برمجية بلغة أخرى، ولكن لا يمكن للنموذج استخدام أداة تنفيذ الرموز البرمجية لتشغيلها.
+Gemini hanya dapat mengeksekusi kode di Python. Anda tetap dapat meminta Gemini untuk membuat kode dalam bahasa lain, tetapi model tidak dapat menggunakan alat eksekusi kode untuk menjalankannya.
 
-## تفعيل أداة تنفيذ الرموز البرمجية
+## Mengaktifkan eksekusi kode
 
-لتفعيل أداة تنفيذ الرموز البرمجية، عليك ضبطها على النموذج. يسمح ذلك للنموذج بإنشاء الرموز البرمجية وتشغيلها.
+Untuk mengaktifkan eksekusi kode, konfigurasi alat eksekusi kode pada model. Hal ini
+memungkinkan model membuat dan menjalankan kode.
 
 ### Python
 
@@ -37,7 +36,7 @@ from google.genai import types
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents="What is the sum of the first 50 prime numbers? "
     "Generate and run code for the calculation, and make sure you get all 50.",
     config=types.GenerateContentConfig(
@@ -62,7 +61,7 @@ import { GoogleGenAI } from "@google/genai";
 const ai = new GoogleGenAI({});
 
 let response = await ai.models.generateContent({
-  model: "gemini-3-flash-preview",
+  model: "gemini-3.5-flash",
   contents: [
     "What is the sum of the first 50 prime numbers? " +
       "Generate and run code for the calculation, and make sure you get all 50.",
@@ -88,7 +87,7 @@ parts.forEach((part) => {
 });
 ```
 
-### انتقال
+### Go
 
 ```
 package main
@@ -116,7 +115,7 @@ func main() {
 
     result, _ := client.Models.GenerateContent(
         ctx,
-        "gemini-3-flash-preview",
+        "gemini-3.5-flash",
         genai.Text("What is the sum of the first 50 prime numbers? " +
                   "Generate and run code for the calculation, and make sure you get all 50."),
         config,
@@ -131,7 +130,7 @@ func main() {
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -H 'Content-Type: application/json' \
 -d ' {"tools": [{"code_execution": {}}],
@@ -144,7 +143,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 }'
 ```
 
-قد يبدو الناتج على النحو التالي، وقد تم تنسيقه ليكون أكثر سهولة في القراءة:
+Outputnya mungkin akan terlihat seperti berikut, yang telah diformat agar mudah dibaca:
 
 ```
 Okay, I need to calculate the sum of the first 50 prime numbers. Here's how I'll
@@ -193,29 +192,30 @@ sum_of_primes=5117
 The sum of the first 50 prime numbers is 5117.
 ```
 
-يجمع هذا الناتج عدة أجزاء من المحتوى يعرضها النموذج عند استخدام أداة تنفيذ الرموز البرمجية:
+Output ini menggabungkan beberapa bagian konten yang ditampilkan model saat menggunakan eksekusi kode:
 
-- `text`: نص مضمّن من إنشاء النموذج
-- `executableCode`: رمز من إنشاء النموذج يُفترض تنفيذه
-- `codeExecutionResult`: نتيجة الرمز القابل للتنفيذ
+- `text`: Teks inline yang dihasilkan oleh model
+- `executableCode`: Kode yang dibuat oleh model yang dimaksudkan untuk dieksekusi
+- `codeExecutionResult`: Hasil kode yang dapat dieksekusi
 
-تختلف اصطلاحات التسمية لهذه الأجزاء حسب لغة البرمجة.
+Konvensi penamaan untuk bagian ini bervariasi menurut bahasa pemrograman.
 
-## تنفيذ الرموز البرمجية باستخدام الصور (Gemini 3)
+## Eksekusi Kode dengan gambar (Gemini 3)
 
-يمكن الآن لنموذج Gemini 3 Flash كتابة رموز Python البرمجية وتنفيذها لمعالجة الصور وفحصها بشكل نشط.
+Model Gemini 3 Flash kini dapat menulis dan mengeksekusi kode Python untuk memanipulasi dan memeriksa gambar secara aktif.
 
-**حالات الاستخدام**
+**Kasus penggunaan**
 
-- **التكبير والفحص**: يرصد النموذج ضمنيًا متى تكون التفاصيل صغيرة جدًا (مثل قراءة مقياس بعيد)، ويكتب رمزًا لاقتصاص المنطقة وإعادة فحصها بدقة أعلى.
-- **الرياضيات المرئية**: يمكن للنموذج إجراء عمليات حسابية متعددة الخطوات باستخدام الرمز (مثل
-  جمع بنود في فاتورة).
-- **إضافة تعليقات توضيحية إلى الصور**: يمكن للنموذج إضافة تعليقات توضيحية إلى الصور للإجابة عن الأسئلة، مثل
-  رسم أسهم لإظهار العلاقات.
+- **Zoom dan periksa**: Model secara implisit mendeteksi saat detail terlalu kecil
+  (misalnya, membaca pengukur dari jarak jauh) dan menulis kode untuk memangkas dan memeriksa ulang area
+  pada resolusi yang lebih tinggi.
+- **Matematika visual**: Model dapat menjalankan penghitungan multi-langkah menggunakan kode (misalnya, menjumlahkan item baris pada tanda terima).
+- **Anotasi gambar**: Model dapat menganotasi gambar untuk menjawab pertanyaan, seperti menggambar panah untuk menunjukkan hubungan.
 
-### تفعيل أداة تنفيذ الرموز البرمجية باستخدام الصور
+### Mengaktifkan Eksekusi Kode dengan gambar
 
-تتوفّر أداة تنفيذ الرموز البرمجية باستخدام الصور رسميًا في Gemini 3 Flash. يمكنك تفعيل هذا السلوك من خلال تفعيل كل من "تنفيذ الرموز البرمجية" كأداة و"التفكير".
+Eksekusi Kode dengan gambar secara resmi didukung di Gemini 3 Flash. Anda dapat
+mengaktifkan perilaku ini dengan mengaktifkan Eksekusi Kode sebagai alat dan Pemikiran.
 
 ### Python
 
@@ -236,7 +236,7 @@ image = types.Part.from_bytes(
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     contents=[image, "Zoom into the expression pedals and tell me how many pedals are there?"],
     config=types.GenerateContentConfig(
         tools=[types.Tool(code_execution=types.ToolCodeExecution)]
@@ -269,7 +269,7 @@ async function main() {
 
   // 2. Call the API with Code Execution enabled
   const result = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     contents: [
       {
         inlineData: {
@@ -304,7 +304,7 @@ async function main() {
 main();
 ```
 
-### انتقال
+### Go
 
 ```
 package main
@@ -350,7 +350,7 @@ func main() {
     // 3. Generate Content
     result, err := client.Models.GenerateContent(
         ctx,
-        "gemini-3-flash-preview",
+        "gemini-3.5-flash",
         []*genai.Content{
             {
                 Parts: []*genai.Part{
@@ -391,7 +391,7 @@ func main() {
 
 ```
 IMG_URL="https://goo.gle/instrument-img"
-MODEL="gemini-3-flash-preview"
+MODEL="gemini-3.5-flash"
 
 MIME_TYPE=$(curl -sIL "$IMG_URL" | grep -i '^content-type:' | awk -F ': ' '{print $2}' | sed 's/\r$//' | head -n 1)
 if [[ -z "$MIME_TYPE" || ! "$MIME_TYPE" == image/* ]]; then
@@ -430,9 +430,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/$MODEL:generateCon
     }'
 ```
 
-## استخدام أداة تنفيذ الرموز البرمجية في المحادثة
+## Menggunakan eksekusi kode dalam percakapan
 
-يمكنك أيضًا استخدام أداة تنفيذ الرموز البرمجية كجزء من محادثة.
+Anda juga dapat menggunakan eksekusi kode sebagai bagian dari percakapan.
 
 ### Python
 
@@ -443,7 +443,7 @@ from google.genai import types
 client = genai.Client()
 
 chat = client.chats.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     config=types.GenerateContentConfig(
         tools=[types.Tool(code_execution=types.ToolCodeExecution)]
     ),
@@ -474,7 +474,7 @@ import {GoogleGenAI} from "@google/genai";
 const ai = new GoogleGenAI({});
 
 const chat = ai.chats.create({
-  model: "gemini-3-flash-preview",
+  model: "gemini-3.5-flash",
   history: [
     {
       role: "user",
@@ -497,7 +497,7 @@ const response = await chat.sendMessage({
 console.log("Chat response:", response.text);
 ```
 
-### انتقال
+### Go
 
 ```
 package main
@@ -525,7 +525,7 @@ func main() {
 
     chat, _ := client.Chats.Create(
         ctx,
-        "gemini-3-flash-preview",
+        "gemini-3.5-flash",
         config,
         nil,
     )
@@ -547,7 +547,7 @@ func main() {
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -H 'Content-Type: application/json' \
 -d '{"tools": [{"code_execution": {}}],
@@ -590,80 +590,83 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 }'
 ```
 
-## الإدخال والإخراج
+## Input/output (I/O)
 
-تتيح أداة تنفيذ الرموز البرمجية إدخال الملفات وإخراج الرسوم البيانية. باستخدام إمكانات الإدخال و
-الإخراج هذه، يمكنك تحميل ملفات CSV وملفات نصية وطرح أسئلة حول الـ
-ملفات، وإنشاء رسوم بيانية باستخدام [Matplotlib](https://matplotlib.org/) كجزء
-من الردّ. يتم عرض ملفات الإخراج كصور مضمّنة في الردّ.
+Eksekusi kode mendukung input file dan output grafik. Dengan kemampuan input dan output ini, Anda dapat mengupload file CSV dan teks, mengajukan pertanyaan tentang file, dan membuat grafik [Matplotlib](https://matplotlib.org/) sebagai bagian dari respons. File output ditampilkan sebagai gambar inline dalam respons.
 
-### تسعير الإدخال والإخراج
+### Harga I/O
 
-عند استخدام إمكانات الإدخال والإخراج في أداة تنفيذ الرموز البرمجية، يتم تحصيل رسوم منك مقابل الرموز المميّزة للإدخال والرموز المميّزة للإخراج:
+Saat menggunakan I/O eksekusi kode, Anda akan ditagih untuk token input dan token output:
 
-**الرموز المميّزة للإدخال:**
+**Token input:**
 
-- طلب المستخدم
+- Perintah pengguna
 
-**الرموز المميّزة للإخراج:**
+**Token output:**
 
-- الرمز من إنشاء النموذج
-- ناتج تنفيذ الرمز البرمجي في بيئة الرمز البرمجي
-- الرموز المميّزة للتفكير
-- الملخّص من إنشاء النموذج
+- Kode yang dihasilkan oleh model
+- Output eksekusi kode di lingkungan kode
+- Token pemikiran
+- Ringkasan yang dibuat oleh model
 
-### تفاصيل الإدخال والإخراج
+### Detail I/O
 
-عند استخدام إمكانات الإدخال والإخراج في أداة تنفيذ الرموز البرمجية، يجب الانتباه إلى التفاصيل الفنية التالية:
+Saat Anda menangani I/O eksekusi kode, perhatikan detail teknis berikut:
 
-- الحد الأقصى لوقت تشغيل بيئة الرمز البرمجي هو 30 ثانية.
-- إذا أدت بيئة الرمز البرمجي إلى حدوث خطأ، قد يقرّر النموذج إعادة إنشاء ناتج الرمز البرمجي. ويمكن أن يحدث ذلك ما يصل إلى 5 مرات.
-- يتم تحديد الحد الأقصى لحجم ملف الإدخال من خلال نافذة الرموز المميّزة للنموذج. في AI Studio، يبلغ الحد الأقصى لحجم ملف الإدخال مليون رمز مميّز (حوالي 2 ميغابايت للملفات النصية من أنواع الإدخال المتوافقة). إذا حمّلت ملفًا كبيرًا جدًا، لن يسمح لك AI Studio بإرساله.
-- تعمل أداة تنفيذ الرموز البرمجية بشكل أفضل مع الملفات النصية وملفات CSV.
-- يمكن تمرير ملف الإدخال في `part.inlineData` أو `part.fileData` (الذي يتم تحميله
-  من خلال [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ar))، ويتم دائمًا عرض ملف الإخراج على أنّه `part.inlineData`.
+- Runtime maksimum lingkungan kode adalah 30 detik.
+- Jika lingkungan kode menghasilkan error, model dapat memutuskan untuk
+  membuat ulang output kode. Hal ini dapat terjadi hingga 5 kali.
+- Ukuran input file maksimum dibatasi oleh jendela token model. Di AI Studio, ukuran file input maksimum adalah 1 juta token (kira-kira 2 MB untuk file teks dari jenis input yang didukung). Jika Anda
+  mengupload file yang terlalu besar, AI Studio tidak akan mengizinkan Anda mengirimkannya.
+- Eksekusi kode berfungsi paling baik dengan file teks dan CSV.
+- File input dapat diteruskan dalam `part.inlineData` atau `part.fileData` (diupload
+  melalui [Files API](https://ai.google.dev/gemini-api/docs/files?hl=id)), dan file output selalu
+  ditampilkan sebagai `part.inlineData`.
 
-## الفوترة
+## Penagihan
 
-لا يتم تحصيل أي رسوم إضافية مقابل تفعيل أداة تنفيذ الرموز البرمجية من Gemini API.
-سيتم تحصيل رسوم منك بالسعر الحالي للرموز المميّزة للإدخال والإخراج استنادًا إلى نموذج Gemini الذي تستخدمه.
+Tidak ada biaya tambahan untuk mengaktifkan eksekusi kode dari Gemini API.
+Anda akan ditagih dengan tarif token input dan output saat ini berdasarkan model Gemini yang Anda gunakan.
 
-في ما يلي بعض المعلومات الأخرى التي يجب معرفتها حول الفوترة لتنفيذ الرموز البرمجية:
+Berikut beberapa hal lain yang perlu diketahui tentang penagihan untuk eksekusi kode:
 
-- يتم تحصيل رسوم منك مرة واحدة فقط مقابل الرموز المميّزة للإدخال التي تمرّرها إلى النموذج، ويتم تحصيل رسوم منك مقابل الرموز المميّزة للإخراج النهائي التي يعرضها لك النموذج.
-- يتم احتساب الرموز المميّزة التي تمثّل الرمز البرمجي الذي تم إنشاؤه كرموز مميّزة للإخراج. يمكن أن يشمل الرمز البرمجي الذي تم إنشاؤه نصًا ونتائج متعددة الوسائط، مثل الصور.
-- يتم أيضًا احتساب نتائج تنفيذ الرموز البرمجية كرموز مميّزة للإخراج.
+- Anda hanya ditagih satu kali untuk token input yang Anda teruskan ke model, dan Anda ditagih untuk token output akhir yang dikembalikan kepada Anda oleh model.
+- Token yang merepresentasikan kode yang dihasilkan dihitung sebagai token output. Kode yang dihasilkan dapat mencakup teks dan output multimodal seperti gambar.
+- Hasil eksekusi kode juga dihitung sebagai token output.
 
-يظهر نموذج الفوترة في الرسم البياني التالي:
+Model penagihan ditampilkan dalam diagram berikut:
 
-![نموذج الفوترة الخاص بتنفيذ الرموز البرمجية](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=ar)
+![model penagihan eksekusi kode](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=id)
 
-- سيتم تحصيل رسوم منك بالسعر الحالي للرموز المميّزة للإدخال والإخراج استنادًا إلى نموذج Gemini الذي تستخدمه.
-- إذا استخدم Gemini أداة تنفيذ الرموز البرمجية عند إنشاء ردّك، يتم تصنيف الطلب الأصلي والرمز البرمجي الذي تم إنشاؤه ونتيجة الرمز البرمجي الذي تم تنفيذه على أنّها *رموز مميّزة وسيطة* ويتم تحصيل رسوم منك مقابلها كـ *رموز مميّزة للإدخال*.
-- ينشئ Gemini بعد ذلك ملخّصًا ويعرض الرمز البرمجي الذي تم إنشاؤه ونتيجة الرمز البرمجي الذي تم تنفيذه والملخّص النهائي. ويتم تحصيل رسوم منك مقابل هذه العناصر كـ *رموز مميّزة للإخراج*.
-- تتضمّن Gemini API عدد الرموز المميّزة الوسيطة في الردّ من واجهة برمجة التطبيقات، ما يتيح لك معرفة سبب حصولك على رموز مميّزة إضافية للإدخال بخلاف طلبك الأولي.
+- Anda akan ditagih dengan tarif token input dan output saat ini berdasarkan
+  model Gemini yang Anda gunakan.
+- Jika Gemini menggunakan eksekusi kode saat membuat respons Anda, perintah asli, kode yang dihasilkan, dan hasil kode yang dieksekusi akan diberi label *token perantara* dan ditagih sebagai *token input*.
+- Kemudian, Gemini membuat ringkasan dan menampilkan kode yang dihasilkan, hasil dari
+  kode yang dieksekusi, dan ringkasan akhir. Token ini ditagih sebagai *token output*.
+- Gemini API menyertakan jumlah token perantara dalam respons API, sehingga Anda tahu alasan Anda mendapatkan token input tambahan di luar perintah awal Anda.
 
-## القيود
+## Batasan
 
-- لا يمكن للنموذج سوى إنشاء الرموز البرمجية وتنفيذها. ولا يمكنه عرض عناصر أخرى، مثل ملفات الوسائط.
-- في بعض الحالات، يمكن أن يؤدي تفعيل أداة تنفيذ الرموز البرمجية إلى حدوث تراجع في مجالات أخرى من مخرجات النموذج (على سبيل المثال، كتابة قصة).
-- هناك بعض الاختلاف في قدرة النماذج المختلفة على استخدام أداة تنفيذ الرموز البرمجية بنجاح.
+- Model hanya dapat membuat dan mengeksekusi kode. Metode ini tidak dapat menampilkan artefak lain seperti file media.
+- Dalam beberapa kasus, mengaktifkan eksekusi kode dapat menyebabkan regresi di area output model lainnya (misalnya, menulis cerita).
+- Ada beberapa variasi dalam kemampuan berbagai model untuk berhasil menggunakan eksekusi kode.
 
-## مجموعات الأدوات المتوافقة
+## Kombinasi alat yang didukung
 
-يمكن الجمع بين أداة تنفيذ الرموز البرمجية و
-[تحديد المصدر من خلال "بحث Google"](https://ai.google.dev/gemini-api/docs/google-search?hl=ar) لـ
-تقديم حالات استخدام أكثر تعقيدًا.
+Alat eksekusi kode dapat digabungkan dengan
+[Perujukan dengan Google Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id) untuk
+mendukung kasus penggunaan yang lebih kompleks.
 
-تتيح نماذج Gemini 3 الجمع بين الأدوات المضمّنة (مثل "تنفيذ الرموز البرمجية") والأدوات المخصّصة (استدعاء الدوال). عليك إعادة حقلَي `id` و`thought_signature` لكي يعمل الجمع بين الأدوات. مزيد من المعلومات على صفحة
-[مجموعات الأدوات](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ar)
+Model Gemini 3 mendukung penggabungan alat bawaan (seperti Eksekusi Kode) dengan alat kustom (panggilan fungsi). Anda harus meneruskan kembali kolom `id` dan
+`thought_signature` agar kombinasi alat berfungsi. Pelajari lebih lanjut di halaman
+[kombinasi alat](https://ai.google.dev/gemini-api/docs/tool-combination?hl=id).
 
-## المكتبات المتوافقة
+## Library yang didukung
 
-تتضمّن بيئة تنفيذ الرموز البرمجية المكتبات التالية:
+Lingkungan eksekusi kode mencakup library berikut:
 
 - attrs
-- شطرنج
+- catur
 - contourpy
 - fpdf
 - geopandas
@@ -675,12 +678,12 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 - lxml
 - matplotlib
 - mpmath
-- مكتبة نامبي
+- numpy
 - opencv-python
 - openpyxl
-- حزمة محتوى التطبيق
-- باندا
-- وسادة
+- paket
+- pandas
+- bantal
 - protobuf
 - pylatex
 - pyparsing
@@ -692,29 +695,30 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-pre
 - scikit-learn
 - scipy
 - seaborn
-- ستة
+- enam
 - striprtf
 - sympy
-- tabulate
+- tabulasi
 - tensorflow
 - toolz
 - xlrd
 
-لا يمكنك تثبيت مكتباتك الخاصة.
+Anda tidak dapat menginstal library Anda sendiri.
 
-## الخطوات التالية
+## Langkah berikutnya
 
-- جرِّب أداة تنفيذ الرموز البرمجية في Colab.
-- تعرَّف على أدوات Gemini API الأخرى:
-  - [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar)
-  - [تحديد المصدر من خلال "بحث Google"](https://ai.google.dev/gemini-api/docs/grounding?hl=ar)
+- Coba
+  [Colab eksekusi kode](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Code_Execution.ipynb?hl=id).
+- Pelajari alat Gemini API lainnya:
+  - [Panggilan fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id)
+  - [Melakukan grounding dengan Google Penelusuran](https://ai.google.dev/gemini-api/docs/grounding?hl=id)
 
-إرسال ملاحظات
+Kirim masukan
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-تاريخ التعديل الأخير: 2026-05-13 (حسب التوقيت العالمي المتفَّق عليه)
+Terakhir diperbarui pada 2026-05-19 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Ada masukan untuk kami?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-13 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-05-19 UTC."],[],[]]

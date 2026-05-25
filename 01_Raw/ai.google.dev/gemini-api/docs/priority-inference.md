@@ -1,30 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-CN
-fetched_at: 2026-05-18T05:19:13.760261+00:00
-title: "\u4f18\u5148\u7ea7\u63a8\u7406 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/priority-inference?hl=es-419
+fetched_at: 2026-05-25T05:26:39.695130+00:00
+title: "Inferencia de prioridad \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-发送反馈
+Enviar comentarios
 
-# 优先级推理
+# Inferencia de prioridad
 
-Gemini Priority API 是一种高级推理层级，专为需要低延迟和最高可靠性的业务关键型工作负载而设计，价格较高。优先层级的流量优先于标准 API 和灵活层级的流量。
+La API de Gemini Priority es un nivel de inferencia premium diseñado para cargas de trabajo críticas para el negocio que requieren una latencia más baja y la mayor confiabilidad a un precio premium. El tráfico del nivel de prioridad tiene prioridad sobre el tráfico de la API estándar y del nivel Flex.
 
-GenerateContent API 和 Interactions API 端点支持 [Tier 2 和 Tier 3](https://ai.google.dev/gemini-api/docs/billing?hl=zh-cn#about-billing) 用户进行优先级推理。
+La inferencia de prioridad está disponible para los usuarios de [nivel 2 y nivel 3](https://ai.google.dev/gemini-api/docs/billing?hl=es-419#about-billing) en los extremos de la API de GenerateContent y la API de Interactions.
 
-## 如何使用优先级
+## Cómo usar la prioridad
 
-如需使用“优先”层级，请将请求正文中的 `service_tier` 字段设置为 `priority`。如果省略此字段，则默认层级为标准。
+Para usar el nivel de prioridad, establece el campo `service_tier` en `priority` en el cuerpo de la solicitud. El nivel predeterminado es estándar si se omite el campo.
 
 ### Python
 
@@ -35,7 +35,7 @@ client = genai.Client()
 
 try:
     response = client.models.generate_content(
-        model="gemini-3-flash-preview",
+        model="gemini-3.5-flash",
         contents="Triage this critical customer support ticket immediately.",
         config={"service_tier": "priority"},
     )
@@ -61,7 +61,7 @@ const ai = new GoogleGenAI({});
 async function main() {
   try {
       const result = await ai.models.generateContent({
-          model: "gemini-3-flash-preview",
+          model: "gemini-3.5-flash",
           contents: "Triage this critical customer support ticket immediately.",
           config: {serviceTier: "priority"},
       });
@@ -103,7 +103,7 @@ func main() {
 
     resp, err := client.Models.GenerateContent(
         ctx,
-        "gemini-3-flash-preview",
+        "gemini-3.5-flash",
         genai.Text("Triage this critical customer support ticket immediately."),
         &genai.GenerateContentConfig{
             ServiceTier: "priority",
@@ -125,7 +125,7 @@ func main() {
 ### REST
 
 ```
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=$GEMINI_API_KEY" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=$GEMINI_API_KEY" \
 -H "Content-Type: application/json" \
 -d '{
   "contents": [{
@@ -135,79 +135,80 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-f
 }'
 ```
 
-## 优先级推理的运作方式
+## Cómo funciona la inferencia de prioridad
 
-优先级推理会将请求路由到高严重性计算队列，从而为面向用户的应用提供可预测的快速性能。其主要机制是，当流量超出动态限制时，服务器端会平稳降级为标准处理，从而确保应用稳定性，而不是使请求失败。
+El enrutamiento de inferencia de prioridad dirige las solicitudes a colas de procesamiento de alta criticidad, lo que ofrece un rendimiento rápido y predecible para las aplicaciones orientadas al usuario. Su mecanismo principal es una degradación correcta del servidor al procesamiento estándar para el tráfico que supera los límites dinámicos, lo que garantiza la estabilidad de la aplicación en lugar de rechazar la solicitud.
 
-| 功能 | 优先级 | 标准 | Flex | 批量 |
+| Función | Prioridad | Estándar | Flexible | Lote |
 | --- | --- | --- | --- | --- |
-| **价格** | 比标准层级高 75-100% | 全价票 | 5 折优惠 | 5 折优惠 |
-| **延迟时间** | 秒 | 秒到分钟 | 分钟（目标时长为 1-15 分钟） | 最长 24 小时 |
-| **可靠性** | 高（不易掉毛） | 高 / 中高 | 尽力而为（可舍弃） | 高（针对吞吐量） |
-| **接口** | 同步 | 同步 | 同步 | 异步 |
+| **Precios** | Entre un 75% y un 100% más que el plan Estándar | Precio completo | 50% de descuento | 50% de descuento |
+| **Latencia** | Segundos | De segundos a minutos | Minutos (objetivo de 1 a 15 min) | Hasta 24 horas |
+| **Confiabilidad** | Alta (no se desprende) | Alta / media-alta | Mejor esfuerzo (descartable) | Alta (para la capacidad de procesamiento) |
+| **Interfaz** | Síncrona | Síncrona | Síncrona | Asíncrono |
 
-### 主要优势
+### Ventajas clave
 
-- **低延迟**：专为面向用户的交互式 AI 工具而设计，可实现秒级响应时间。
-- **高可靠性**：流量被视为最高优先级，并且严格不可丢弃。
-- **优雅降级**：如果流量峰值超过动态限制，系统会自动将流量降级到标准层级进行处理，而不是失败，从而防止服务中断。
-- **低摩擦**：使用与标准层级和 Flex 层级相同的同步 `generateContent` 方法。
+- **Latencia baja**: Diseñada para tiempos de respuesta de segundos en herramientas de IA interactivas y orientadas al usuario.
+- **Alta confiabilidad**: El tráfico se trata con la mayor criticidad y no se puede descartar.
+- **Degradación elegante**: Los picos de tráfico que superan los límites dinámicos se degradan automáticamente al nivel Estándar para su procesamiento en lugar de fallar, lo que evita interrupciones del servicio.
+- **Baja fricción**: Usa el mismo método `generateContent` síncrono que los niveles estándar y Flex.
 
-### 使用场景
+### Casos de uso
 
-优先处理非常适合对性能和可靠性要求极高的关键业务工作流。
+El procesamiento prioritario es ideal para los flujos de trabajo fundamentales para la empresa en los que el rendimiento y la confiabilidad son primordiales.
 
-- **互动式 AI 应用**：客户服务聊天机器人和 Copilot，用户支付高价，希望获得快速、一致的回答。
-- **实时决策引擎**：需要高度可靠、低延迟结果的系统，例如实时工单分流或欺诈检测。
-- **高级客户功能**：需要为付费客户保证更高服务等级目标 (SLO) 的开发者。
+- **Aplicaciones interactivas de IA**: Chatbots y copilotos de atención al cliente en los que los usuarios pagan una tarifa premium y esperan respuestas rápidas y coherentes.
+- **Motores de decisiones en tiempo real**: Sistemas que requieren resultados altamente confiables y de baja latencia, como la clasificación de tickets en vivo o la detección de fraude.
+- **Funciones para clientes premium**: Desarrolladores que necesitan garantizar objetivos de nivel de servicio (SLO) más altos para los clientes que pagan.
 
-### 速率限制
+### Límites de frecuencia
 
-即使优先级消耗计入[总体交互式流量速率限制](https://aistudio.google.com/rate-limit?hl=zh-cn)，它也有自己的速率限制。优先级推理的默认速率限制为**模型 / 层级标准速率限制的 0.3 倍**
+El consumo de prioridad tiene sus propios límites de frecuencia, aunque el consumo se contabiliza para los [límites de frecuencia generales del tráfico interactivo](https://aistudio.google.com/rate-limit?hl=es-419). Los límites de frecuencia predeterminados para la inferencia de prioridad son **0.3 veces el límite de frecuencia estándar para el modelo o el nivel**.
 
-### 优雅降级逻辑
+### Lógica de cambio a una versión anterior correcta
 
-如果因拥塞而超出优先级限制，溢出请求会**自动且平稳地**降级为标准处理，而不是因 503 或 429 错误而失败。降级后的请求按标准费率计费，而不是按 Priority Premium 费率计费。
+Si se exceden los límites de prioridad debido a la congestión, las solicitudes de desbordamiento se **degradan de forma automática y correcta** al procesamiento estándar en lugar de fallar con un error 503 o 429. Las solicitudes degradadas se facturan a la tarifa estándar, no a la tarifa premium de prioridad.
 
-### 客户责任
+### Responsabilidad del cliente
 
-- **响应监控**：开发者应监控 API 响应中的 `x-gemini-service-tier` 标头，以检测请求是否经常降级为 `standard`。
-- **重试**：客户端必须针对标准错误（例如 `DEADLINE_EXCEEDED`）实现重试逻辑/指数退避算法。
+- **Supervisión de respuestas**: Los desarrolladores deben supervisar el encabezado `x-gemini-service-tier` en la respuesta de la API para detectar si las solicitudes se degradan con frecuencia a `standard`.
+- **Reintentos**: Los clientes deben implementar una lógica de reintentos o una retirada exponencial para los errores estándar, como `DEADLINE_EXCEEDED`.
 
-## 价格
+## Precios
 
-优先级推理的价格比[标准 API](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn) 高出 75-100%，按令牌数计费。
+La inferencia de prioridad tiene un precio entre un 75% y un 100% más alto que la [API estándar](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419) y se factura por token.
 
-## 支持的模型
+## Modelos compatibles
 
-以下模型支持优先推理：
+Los siguientes modelos admiten la inferencia de prioridad:
 
-| 模型 | 优先级推理 |
+| Modelo | Inferencia de prioridad |
 | --- | --- |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-cn) | ✔️ |
-| [Gemini 3.1 Flash-Lite 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=zh-cn) | ✔️ |
-| [Gemini 3.1 Pro 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-cn) | ✔️ |
-| [Gemini 3 Flash 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-cn) | ✔️ |
-| [Gemini 3 Pro Image 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=zh-cn) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-cn) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=zh-cn) | ✔️ |
-| [Gemini 2.5 Flash 图片](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=zh-cn) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-cn) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=es-419) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=es-419) | ✔️ |
+| [Versión preliminar de Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=es-419) | ✔️ |
+| [Versión preliminar de Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=es-419) | ✔️ |
+| [Versión preliminar de Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=es-419) | ✔️ |
+| [Versión preliminar de Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=es-419) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=es-419) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=es-419) | ✔️ |
+| [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=es-419) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=es-419) | ✔️ |
 
-## 后续步骤
+## ¿Qué sigue?
 
-不妨了解 Gemini 的其他[推理和优化](https://ai.google.dev/gemini-api/docs/optimization?hl=zh-cn)选项：
+Obtén más información sobre otras opciones de [inferencia y optimización](https://ai.google.dev/gemini-api/docs/optimization?hl=es-419) de Gemini:
 
-- [灵活推理](https://ai.google.dev/gemini-api/docs/flex-inference?hl=zh-cn)，可将费用降低 50%。
-- [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn)，可在 24 小时内进行异步处理。
-- [上下文缓存](https://ai.google.dev/gemini-api/docs/caching?hl=zh-cn)，可降低输入 token 费用。
+- [Flex inference](https://ai.google.dev/gemini-api/docs/flex-inference?hl=es-419) para una reducción del 50% en los costos
+- [API de Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=es-419) para el procesamiento asíncrono en un plazo de 24 horas
+- [Almacenamiento en caché de contexto](https://ai.google.dev/gemini-api/docs/caching?hl=es-419) para reducir los costos de los tokens de entrada
 
-发送反馈
+Enviar comentarios
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-最后更新时间 (UTC)：2026-05-13。
+Última actualización: 2026-05-19 (UTC)
 
-需要向我们提供更多信息？
+¿Quieres brindar más información?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-05-13。"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-05-19 (UTC)"],[],[]]

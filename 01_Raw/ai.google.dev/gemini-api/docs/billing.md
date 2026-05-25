@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/billing?hl=vi
-fetched_at: 2026-05-18T05:06:26.572403+00:00
+fetched_at: 2026-05-25T05:22:34.085098+00:00
 title: "L\u1eadp h\u00f3a \u0111\u01a1n \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -33,9 +33,8 @@ Việc tính phí cho Gemini API dựa trên nhật ký thanh toán của bạn.
 
 Các tài khoản mới sẽ bắt đầu ở Cấp miễn phí, cho phép truy cập vào [một số mô hình](https://ai.google.dev/gemini-api/docs/pricing?hl=vi) trong Gemini API và AI Studio, tối đa theo [hạn mức tốc độ](https://aistudio.google.com/rate-limit?hl=vi) của cấp miễn phí của các mô hình.
 
-Để triển khai các ứng dụng ngay từ Chế độ tạo, bạn có thể sử dụng **Bậc khởi đầu của Google Cloud**.
-Cấp này cho phép bạn xuất bản tối đa 2 ứng dụng full stack mà không cần thiết lập dự án trên đám mây của Google hoặc tài khoản thanh toán.
-Hãy xem phần [Triển khai từ Google AI Studio](https://ai.google.dev/gemini-api/docs/deploying?hl=vi) để biết thông tin chi tiết và tham khảo [tài liệu về Bậc khởi đầu của Google Cloud](https://docs.cloud.google.com/docs/starter-tier?hl=vi) để biết thêm thông tin.
+Để triển khai các ứng dụng ngay từ Chế độ tạo, bạn có thể sử dụng **Bậc khởi đầu của Google Cloud**. Cấp này cho phép bạn xuất bản tối đa 2 ứng dụng full-stack mà không cần thiết lập dự án trên đám mây của Google Cloud hoặc tài khoản thanh toán.
+Hãy xem phần [Triển khai từ Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=vi) để biết thông tin chi tiết và tham khảo [tài liệu về Cấp độ dành cho người mới bắt đầu của Google Cloud](https://docs.cloud.google.com/docs/starter-tier?hl=vi) để biết thêm thông tin.
 
 Để truy cập vào hạn mức tốc độ cao hơn, sử dụng các mô hình nâng cao và đảm bảo rằng câu lệnh và câu trả lời của bạn **không** được dùng để cải thiện các sản phẩm của Google\*, bạn có thể [liên kết tài khoản thanh toán](#setup-billing) và [trả trước](#prepay) để chuyển sang Cấp có tính phí.
 Sau đó, bạn sẽ chuyển sang các cấp cao hơn dựa trên tổng mức chi tiêu và tuổi tài khoản. Ở Cấp 3, bạn có thể chuyển sang phương thức thanh toán [trả sau](#postpay).
@@ -384,8 +383,8 @@ Gửi ý kiến phản hồi
 
 Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Cập nhật lần gần đây nhất: 2026-05-16 UTC.
+Cập nhật lần gần đây nhất: 2026-05-22 UTC.
 
 Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-16 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-22 UTC."],[],[]]
