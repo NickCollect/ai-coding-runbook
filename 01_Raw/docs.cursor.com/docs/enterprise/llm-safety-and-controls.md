@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/llm-safety-and-controls
-fetched_at: 2026-05-05T19:55:39.423274+00:00
+fetched_at: 2026-05-25T05:15:51.001831+00:00
 fetch_method: mintlify_md
 ---
 
@@ -42,11 +42,11 @@ You can enable auto-approval for terminal commands, but understand the risks. Ag
 
 #### Auto-run configuration
 
-Enterprise teams can configure auto-run policies in the team dashboard. You can create an allowlist of commands that don't require approval, such as `npm install`, `pip install`, `cargo build`, or `make test`.
+Enterprise teams can configure auto-run policies in the team dashboard. In Cursor 3.5 and above, end users choose between **Allowlist**, **Allowlist (with Sandbox)**, and **Run Everything** modes. You can create an allowlist of commands that don't require approval, such as `npm install`, `pip install`, `cargo build`, or `make test`.
 
 The allowlist is best-effort, not a security boundary. Determined agents or prompt injection might bypass it. Always combine allowlists with other security controls like hooks.
 
-See [Agent Security](https://cursor.com/docs/agent/security.md) for details on terminal command controls.
+See [Terminal auto-run modes](https://cursor.com/docs/agent/tools/terminal.md#auto-run-mode) and [Agent Security](https://cursor.com/docs/agent/security.md) for details.
 
 ### Enforcement hooks
 

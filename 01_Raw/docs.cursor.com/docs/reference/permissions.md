@@ -1,12 +1,12 @@
 ---
 source_url: https://cursor.com/docs/reference/permissions
-fetched_at: 2026-05-05T19:55:43.378405+00:00
+fetched_at: 2026-05-25T05:15:52.277240+00:00
 fetch_method: mintlify_md
 ---
 
 # permissions.json reference
 
-Use `permissions.json` to configure global MCP tool and terminal command allowlists for [auto-run](https://cursor.com/docs/agent/overview.md#auto-run) without approval.
+Use `permissions.json` to configure global MCP tool and terminal command allowlists for [auto-run](https://cursor.com/docs/agent/tools/terminal.md#auto-run-mode) without approval.
 
 When `permissions.json` is present and defines an allowlist, it **overrides** the corresponding in-app allowlist in Cursor Settings. The in-app allowlist editor becomes read-only for that allowlist type.
 
@@ -148,7 +148,7 @@ Any MCP entries previously set in Cursor Settings are ignored while this file is
 
 ## Notes
 
-- **Auto-run mode required**: `permissions.json` only takes effect when auto-run is enabled in Cursor Settings (either "Auto-Run in Sandbox" or "Run Everything"). In "Ask Every Time" mode, the allowlists are not consulted.
+- **Auto-run mode required**: `permissions.json` only takes effect when auto-run is enabled in Cursor Settings (**Allowlist**, **Allowlist (with Sandbox)**, or **Run Everything**). Before Cursor 3.5, allowlists were not consulted in the deprecated **Ask Every Time** mode.
 - **Not a security boundary**: Allowlists are best-effort convenience. They are not a security guarantee. See [Agent Security](https://cursor.com/docs/agent/security.md) for details.
 - **Override, not merge**: When `permissions.json` defines an allowlist key, it fully replaces the in-app allowlist for that type. Entries configured in Cursor Settings are not merged in.
 - **IDE display**: When `permissions.json` controls an allowlist, the corresponding settings section becomes read-only and shows the file-defined entries. The "Add to allowlist" option is hidden.

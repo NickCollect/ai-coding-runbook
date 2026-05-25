@@ -1,17 +1,17 @@
 ---
 source_url: https://cursor.com/docs/sdk/typescript
-fetched_at: 2026-05-18T05:02:45.543255+00:00
+fetched_at: 2026-05-25T05:15:52.468764+00:00
 fetch_method: mintlify_md
 ---
 
-# Cursor SDK
+# Cursor TypeScript SDK
 
 ### Public beta
 
 The TypeScript SDK is in public beta. APIs may change before general
 availability.
 
-The `@cursor/sdk` package lets you call Cursor's agent from your own code. The same agent that runs in the Cursor IDE, CLI, and web app is now scriptable from TypeScript. You can also use Cursor's native `/sdk` skill to help you start building.
+The `@cursor/sdk` package lets you call Cursor's agent from your own code. The same agent that runs in the Cursor IDE, CLI, and web app is now scriptable from TypeScript. Run the `/sdk` skill inside Cursor to get started.
 
 ## Overview
 
@@ -67,7 +67,7 @@ import { Agent } from "@cursor/sdk";
 
 const agent = await Agent.create({
   apiKey: process.env.CURSOR_API_KEY!,
-  model: { id: "composer-2" },
+  model: { id: "composer-2.5" },
   local: { cwd: process.cwd() },
 });
 
@@ -92,14 +92,14 @@ function Agent.create(options: AgentOptions): Promise<SDKAgent>;
 // Local agent
 const agent = await Agent.create({
   apiKey: process.env.CURSOR_API_KEY!,
-  model: { id: "composer-2" },
+  model: { id: "composer-2.5" },
   local: { cwd: "/path/to/repo" },
 });
 
 // Cloud agent
 const agent = await Agent.create({
   apiKey: process.env.CURSOR_API_KEY!,
-  model: { id: "composer-2" },
+  model: { id: "composer-2.5" },
   cloud: {
     repos: [{ url: "https://github.com/your-org/your-repo", startingRef: "main" }],
     autoCreatePR: true,
@@ -140,7 +140,7 @@ When a selected model requires [Max Mode](https://cursor.com/help/ai-features/ma
 const agent = await Agent.create({
   apiKey: process.env.CURSOR_API_KEY!,
   model: {
-    id: "composer-2",
+    id: "composer-2.5",
     params: [{ id: "thinking", value: "high" }],
   },
   local: { cwd: process.cwd() },
@@ -188,7 +188,7 @@ One-shot convenience: creates an agent, sends a single prompt, waits for the run
 ```typescript
 const result = await Agent.prompt("What does the auth middleware do?", {
   apiKey: process.env.CURSOR_API_KEY!,
-  model: { id: "composer-2" },
+  model: { id: "composer-2.5" },
   local: { cwd: process.cwd() },
 });
 ```
@@ -319,13 +319,33 @@ The `model` you pass to `agent.send()` overrides the agent's selection for that 
 
 ```typescript
 const run = await agent.send("Plan the refactor", {
-  model: { id: "composer-2", params: [{ id: "thinking", value: "high" }] },
+  model: { id: "composer-2.5", params: [{ id: "thinking", value: "high" }] },
 });
 
 console.log(agent.model);  // updated to the override after the send succeeds
 ```
 
 `run.model` and `result.model` reflect the selection that this specific run actually used and are immutable once the run starts.
+
+### Conversation mode
+
+Pass `mode: "plan"` or `mode: "agent"` to control whether a run explores and plans first or implements changes directly. See [Plan mode](https://cursor.com/help/ai-features/plan-mode.md) for what plan mode does in the product.
+
+Set `mode` on `Agent.create()` to seed the first run. On follow-up `agent.send()` calls, omit `mode` to keep the conversation's current mode, or pass `mode` to switch for that run only.
+
+```typescript
+const agent = await Agent.create({
+  apiKey: process.env.CURSOR_API_KEY!,
+  model: { id: "composer-2.5" },
+  mode: "plan",
+  cloud: {
+    repos: [{ url: "https://github.com/your-org/your-repo" }],
+  },
+});
+
+await (await agent.send("Design the auth refactor")).wait();
+await (await agent.send("Looks good, start building", { mode: "agent" })).wait();
+```
 
 ### Streaming raw deltas
 
@@ -350,6 +370,7 @@ The callbacks are awaited before the next update is processed, so you can apply 
 | Property      | Type                                          | Description                                                                                                                                                             |
 | :------------ | :-------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `model`       | `ModelSelection`                              | Per-send model override. If omitted, uses `agent.model`. Sticky: a successful send updates `agent.model`.                                                               |
+| `mode`        | `"agent" \| "plan"`                           | Per-send conversation mode override. If omitted on follow-ups, keeps the conversation's current mode.                                                                   |
 | `mcpServers`  | `Record<string, McpServerConfig>`             | Inline MCP server definitions. Fully replaces creation-time servers for this run.                                                                                       |
 | `onStep`      | `(args: { step }) => void \| Promise<void>`   | Callback after each completed conversation step (text, thinking, or tool batch).                                                                                        |
 | `onDelta`     | `(args: { update }) => void \| Promise<void>` | Callback per raw `InteractionUpdate`.                                                                                                                                   |
@@ -831,7 +852,7 @@ Use `Cursor.models.list()` to discover valid `model` ids and per-model `params` 
 
 ```typescript
 const models = await Cursor.models.list();
-const composer = models.find((model) => model.id === "composer-2");
+const composer = models.find((model) => model.id === "composer-2.5");
 
 console.log(composer?.parameters);
 // [
@@ -852,7 +873,7 @@ Pass selected parameter values through `model.params`. Preset `variants` already
 const agent = await Agent.create({
   apiKey: process.env.CURSOR_API_KEY!,
   model: {
-    id: "composer-2",
+    id: "composer-2.5",
     params: [{ id: "thinking", value: "high" }],
   },
   local: { cwd: process.cwd() },
@@ -930,7 +951,7 @@ Cloud agents can receive authenticated MCP configs inline too. Use HTTP auth whe
 ```typescript
 const agent = await Agent.create({
   apiKey: process.env.CURSOR_API_KEY!,
-  model: { id: "composer-2" },
+  model: { id: "composer-2.5" },
   cloud: {
     repos: [{ url: "https://github.com/your-org/your-repo", startingRef: "main" }],
   },
@@ -977,7 +998,7 @@ Define named subagents that the main agent spawns via the `Agent` tool. Pass the
 
 ```typescript
 const agent = await Agent.create({
-  model: { id: "composer-2" },
+  model: { id: "composer-2.5" },
   apiKey: process.env.CURSOR_API_KEY!,
   local: { cwd: process.cwd() },
   agents: {
@@ -1050,16 +1071,17 @@ await agent[Symbol.asyncDispose]();
 
 ### AgentOptions
 
-| Property     | Type                                                                                                    | Default                                                             | Description                                                                                                                            |
-| :----------- | :------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------- |
-| `model`      | `ModelSelection`                                                                                        | Required for local; cloud falls back to the server-resolved default | Model to use. See [`ModelSelection`](https://cursor.com/docs/sdk/typescript.md#modelselection).                                        |
-| `apiKey`     | `string`                                                                                                | `CURSOR_API_KEY` env                                                | User API key or service account key. Team Admin keys are not yet supported.                                                            |
-| `name`       | `string`                                                                                                | Auto-generated                                                      | Human-readable agent name surfaced as `title` in `Agent.list()` / `Agent.get()`.                                                       |
-| `local`      | `{ cwd?: string \| string[]; settingSources?: SettingSource[]; sandboxOptions?: { enabled: boolean } }` |                                                                     | Local agent config. `settingSources` picks ambient settings layers: `"project"`, `"user"`, `"team"`, `"mdm"`, `"plugins"`, or `"all"`. |
-| `cloud`      | `CloudOptions`                                                                                          |                                                                     | Cloud agent config.                                                                                                                    |
-| `mcpServers` | `Record<string, McpServerConfig>`                                                                       |                                                                     | Inline MCP server definitions.                                                                                                         |
-| `agents`     | `Record<string, AgentDefinition>`                                                                       |                                                                     | Subagent definitions.                                                                                                                  |
-| `agentId`    | `string`                                                                                                | Auto-generated                                                      | Durable agent ID. Pass to keep a stable ID across invocations.                                                                         |
+| Property     | Type                                                                                                    | Default                                                             | Description                                                                                                                                |
+| :----------- | :------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------- |
+| `model`      | `ModelSelection`                                                                                        | Required for local; cloud falls back to the server-resolved default | Model to use. See [`ModelSelection`](https://cursor.com/docs/sdk/typescript.md#modelselection).                                            |
+| `apiKey`     | `string`                                                                                                | `CURSOR_API_KEY` env                                                | User API key or service account key. Team Admin keys are not yet supported.                                                                |
+| `name`       | `string`                                                                                                | Auto-generated                                                      | Human-readable agent name surfaced as `title` in `Agent.list()` / `Agent.get()`.                                                           |
+| `local`      | `{ cwd?: string \| string[]; settingSources?: SettingSource[]; sandboxOptions?: { enabled: boolean } }` |                                                                     | Local agent config. `settingSources` picks ambient settings layers: `"project"`, `"user"`, `"team"`, `"mdm"`, `"plugins"`, or `"all"`.     |
+| `cloud`      | `CloudOptions`                                                                                          |                                                                     | Cloud agent config.                                                                                                                        |
+| `mcpServers` | `Record<string, McpServerConfig>`                                                                       |                                                                     | Inline MCP server definitions.                                                                                                             |
+| `agents`     | `Record<string, AgentDefinition>`                                                                       |                                                                     | Subagent definitions.                                                                                                                      |
+| `agentId`    | `string`                                                                                                | Auto-generated                                                      | Durable agent ID. Pass to keep a stable ID across invocations.                                                                             |
+| `mode`       | `"agent" \| "plan"`                                                                                     | `"agent"`                                                           | Initial conversation mode for the agent's first run. See [Conversation mode](https://cursor.com/docs/sdk/typescript.md#conversation-mode). |
 
 ### CloudOptions
 
@@ -1094,7 +1116,7 @@ interface ModelParameterValue {
 }
 ```
 
-`id` is the model identifier (for example, `"composer-2"`). `params` carries per-model parameters such as reasoning effort. Use [`Cursor.models.list()`](https://cursor.com/docs/sdk/typescript.md#cursormodelslist) to discover valid ids, parameter definitions, and preset variants for your account.
+`id` is the model identifier (for example, `"composer-2.5"`). `params` carries per-model parameters such as reasoning effort. Use [`Cursor.models.list()`](https://cursor.com/docs/sdk/typescript.md#cursormodelslist) to discover valid ids, parameter definitions, and preset variants for your account.
 
 ### McpServerConfig
 

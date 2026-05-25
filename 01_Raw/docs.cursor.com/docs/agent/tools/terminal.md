@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/tools/terminal
-fetched_at: 2026-05-05T19:55:36.600995+00:00
+fetched_at: 2026-05-25T05:15:50.350940+00:00
 fetch_method: mintlify_md
 ---
 
@@ -228,17 +228,19 @@ The `${CURSOR_ORIG_UID:-$(id -u)}` fallback ensures the command also works outsi
 
 ## Editor configuration
 
-Configure how Agent runs terminal commands at **Settings > Cursor Settings > Agents > Auto-Run**.
+Configure how Agent runs tools like command execution, MCP, and file writes at **Settings > Cursor Settings > Agents > Auto-Run**.
 
 ### Auto-run mode
 
-Choose how Agent runs tools like command execution, MCP, and file writes:
+Choose how Agent handles tools like command execution, MCP, and file writes:
 
-| Mode               | Behavior                                                                                                      |
-| :----------------- | :------------------------------------------------------------------------------------------------------------ |
-| **Run in Sandbox** | Tools and commands auto-run in the sandbox where possible. Available on macOS, Linux, and Windows (via WSL2). |
-| **Ask Every Time** | All tools and commands require user approval before running.                                                  |
-| **Run Everything** | The agent runs all tools and commands automatically without asking for input.                                 |
+| Mode                         | Behavior                                                                                                                                                                                   |
+| :--------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Allowlist**                | Only tools and commands on your allowlist auto-run without approval. Everything else requires your approval.                                                                               |
+| **Allowlist (with Sandbox)** | Tools and commands on your allowlist auto-run outside the sandbox. All other tools and commands auto-run in the sandbox where possible. Available on macOS, Linux, and Windows (via WSL2). |
+| **Run Everything**           | The agent runs all tools and commands automatically without asking for input.                                                                                                              |
+
+Auto-run uses the modes above. Before Cursor 3.5, the same settings appeared as **Run in Sandbox**, **Ask Every Time**, and **Run Everything**. **Run in Sandbox** maps to **Allowlist (with Sandbox)**. **Ask Every Time** is deprecated — use **Allowlist** with empty allowlists to require approval for every action.
 
 ### Auto-run network access
 
@@ -252,14 +254,14 @@ Choose how sandboxed commands access the network:
 
 ### Protection settings
 
-| Setting                      | Description                                                                                               |
-| :--------------------------- | :-------------------------------------------------------------------------------------------------------- |
-| **Command Allowlist**        | Commands that can run automatically outside of the sandbox.                                               |
-| **MCP Allowlist**            | MCP tools that can run automatically outside of the sandbox.                                              |
-| **Browser Protection**       | Prevent Agent from automatically running [Browser](https://cursor.com/docs/agent/tools/browser.md) tools. |
-| **File-Deletion Protection** | Prevent Agent from deleting files automatically.                                                          |
-| **Dotfile Protection**       | Prevent Agent from modifying dot files like .gitignore automatically.                                     |
-| **External-File Protection** | Prevent Agent from creating or modifying files outside of the workspace automatically.                    |
+| Setting                      | Description                                                                                                                                                                                   |
+| :--------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Command Allowlist**        | Terminal commands that auto-run without approval. In **Allowlist (with Sandbox)** mode, these run outside the sandbox; in **Allowlist** mode, they run normally without sandbox restrictions. |
+| **MCP Allowlist**            | MCP tools that auto-run without approval. In **Allowlist (with Sandbox)** mode, these run outside the sandbox; in **Allowlist** mode, they run normally without sandbox restrictions.         |
+| **Browser Protection**       | Prevent Agent from automatically running [Browser](https://cursor.com/docs/agent/tools/browser.md) tools.                                                                                     |
+| **File-Deletion Protection** | Prevent Agent from deleting files automatically.                                                                                                                                              |
+| **Dotfile Protection**       | Prevent Agent from modifying dot files like .gitignore automatically.                                                                                                                         |
+| **External-File Protection** | Prevent Agent from creating or modifying files outside of the workspace automatically.                                                                                                        |
 
 ## Enterprise controls
 
@@ -267,15 +269,15 @@ Only available for Enterprise subscriptions.
 
 Enterprise admins can override editor configurations or change which settings are visible for end users. Navigate to **Settings > Auto-Run** in the [web dashboard](https://cursor.com/dashboard/settings) to view and change these settings.
 
-| Setting                        | Description                                                                                                                                        |
-| :----------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Auto-Run Controls**          | Enable controls for auto-run and sandbox mode. When disabled, commands auto-run in the sandbox where available, otherwise they ask for permission. |
-| **Sandboxing Mode**            | Control whether sandbox is available for end users. When enabled, commands auto-run in the sandbox even if they are not on the allowlist.          |
-| **Sandbox Networking**         | Choose whether sandboxed commands have network access.                                                                                             |
-| **Delete File Protection**     | Prevent Agent from deleting files automatically.                                                                                                   |
-| **MCP Tool Protection**        | Prevent Agent from automatically running MCP tools.                                                                                                |
-| **Terminal Command Allowlist** | Commands that can run automatically without sandboxing. When sandbox is enabled, commands not on this list auto-run in sandbox mode.               |
-| **Enable Run Everything**      | Give end users the ability to enable the "Run Everything" auto-run mode.                                                                           |
+| Setting                        | Description                                                                                                                      |
+| :----------------------------- | :------------------------------------------------------------------------------------------------------------------------------- |
+| **Auto-Run Controls**          | Enable controls for auto-run mode and allowlists. When disabled, end users get **Allowlist (with Sandbox)** behavior by default. |
+| **Sandboxing Mode**            | Control whether **Allowlist (with Sandbox)** is available. When enabled, commands not on the allowlist auto-run in the sandbox.  |
+| **Sandbox Networking**         | Choose whether sandboxed commands have network access.                                                                           |
+| **Delete File Protection**     | Prevent Agent from deleting files automatically.                                                                                 |
+| **MCP Tool Protection**        | Prevent Agent from automatically running MCP tools.                                                                              |
+| **Terminal Command Allowlist** | Commands that auto-run without sandboxing. In **Allowlist (with Sandbox)** mode, all other commands auto-run in the sandbox.     |
+| **Enable Run Everything**      | Give end users the ability to enable the **Run Everything** auto-run mode.                                                       |
 
 ## Troubleshooting
 

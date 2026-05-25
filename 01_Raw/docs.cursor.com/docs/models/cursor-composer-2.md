@@ -1,8 +1,10 @@
 ---
 source_url: https://cursor.com/docs/models/cursor-composer-2
-fetched_at: 2026-05-05T19:55:41.495559+00:00
+fetched_at: 2026-05-25T05:15:51.578088+00:00
 fetch_method: mintlify_md
 ---
+
+We strongly recommend using [Composer 2.5](https://cursor.com/docs/models/cursor-composer-2-5.md). It's smarter and includes more usage on individual plans.
 
 Composer 2 is Cursor's own agentic model. It reaches frontier-level coding performance with strong results on [CursorBench](https://cursor.com/blog/cursorbench) while using tokens efficiently.
 

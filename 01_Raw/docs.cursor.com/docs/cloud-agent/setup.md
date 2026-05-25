@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/setup
-fetched_at: 2026-05-18T05:02:44.017756+00:00
+fetched_at: 2026-05-25T05:15:50.829275+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,25 @@ Cloud agents run on isolated Ubuntu machines. Configure the environment so the a
 
 Create a new environment in your [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#environments).
 
-## Environment options
+## What is a cloud agent environment?
+
+The development environment for a cloud agent is similar to the setup on your laptop: cloned repos, installed dependencies, secrets, startup commands, and network access.
+
+Effective development environments give agents full context on your codebase and organization, so they can test and verify their work.
+
+![Cloud agent development environment architecture](https://ptht05hbb1ssoooe.public.blob.vercel-storage.com/assets/blog/cloud-agents-architecture-light.png)
+
+## Why does environment configuration matter?
+
+Agents are only as capable as the environments they run in. An agent that can write code but can't run tests, query services, or reach APIs cannot close the loop on its work.
+
+To take engineering tasks from start to finish, cloud agents need a configured development environment with all the repositories, tools, dependencies, and context to stay autonomous and productive.
+
+Development environments also make agent sessions faster because cloud agents start with the tools installed instead of setting up from scratch every time.
+
+Environment setup is the most important step to improve the effectiveness of your cloud agents.
+
+## Environment setup options
 
 There are two main ways to configure the environment for your cloud agent:
 
@@ -148,19 +166,13 @@ See our [AGENTS.md docs](https://cursor.com/docs/rules.md#agentsmd) for more inf
 
 ## Environment variables and secrets
 
-Cloud agents need environment variables and secrets such as API keys and database credentials.
+In order to fully run and test code like a human developer, Cloud agents often need environment variables and secrets such as API keys and database credentials.
 
 ### Recommended: use the Secrets tab in Cursor settings
 
-The easiest way to manage secrets is through [cursor.com](https://cursor.com/dashboard/cloud-agents).
+The easiest way to manage secrets is through [cursor.com](https://cursor.com/dashboard/cloud-agents). These are exposed to the cloud agent as environment variables.
 
-Add secrets as key-value pairs. Secrets are:
-
-- Encrypted at rest with KMS
-- Exposed to cloud agents as environment variables
-- Scoped to the user, team, or environment you choose
-
-As an additional level of security, you have the option to specify secrets as redacted. Redacted secrets are scanned in commits the agent makes to prevent the agent from accidentally committing secrets to the repository. They are also redacted in the tool call results so they are not exposed to the agent, or stored in the chat transcript.
+For more about the different types of secrets, see our [Secrets documentation](https://cursor.com/docs/cloud-agent/security-network.md#secret-protection).
 
 ### Environment-scoped secrets
 
@@ -231,19 +243,6 @@ The AWS CLI and AWS SDKs that use the default credential chain pick up this prof
 
 Cursor assumes the role with STS credentials that expire after 1 hour.
 When the agent wakes, Cursor refreshes credentials that are missing, invalid, or within 15 minutes of expiration.
-
-### Build secrets
-
-During builds of Dockerfiles set in [`.cursor/environment.json`](https://cursor.com/docs/cloud-agent/setup.md#manual-setup-with-dockerfile-advanced), build secrets can be set at the team level from the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents).
-
-Reference them from a `RUN` step in your Dockerfile using a [Docker secret mount](https://docs.docker.com/build/building/secrets/#secret-mounts):
-
-```docker
-RUN --mount=type=secret,id=MY_TOKEN,env=MY_TOKEN,required=true \
-    ./scripts/install-private-deps.sh
-```
-
-Build secrets are scoped to the build step and aren't passed to the running agent's environment.
 
 ## Configuration in code with environment.json
 

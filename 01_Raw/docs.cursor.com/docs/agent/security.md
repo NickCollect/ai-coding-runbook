@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/security
-fetched_at: 2026-05-05T19:55:36.305883+00:00
+fetched_at: 2026-05-25T05:15:50.326897+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,9 +20,11 @@ Agents can modify workspace files without approval, except for configuration fil
 
 **Warning:** If you have auto-reload enabled, agent changes might execute before you can review them.
 
-Terminal commands need your approval by default. Review every command before letting the agent run it.
+By default, terminal commands need your approval. You can either enabled a broader [auto-run mode](https://cursor.com/docs/agent/tools/terminal.md#auto-run-mode), or add them to your allowlist to get them to run without approval.
 
-You can enable auto-approval if you accept the risk. We have an [allowlist](https://cursor.com/docs/agent/overview.md#tools) feature, but it's not a security guarantee. The allowlist is best-effort—bypasses are possible. Never use "Run Everything" mode, which skips all safety checks. You can manage allowlists for both terminal commands and MCP tools through the settings UI or [`~/.cursor/permissions.json`](https://cursor.com/docs/reference/permissions.md).
+You can enable auto-approval if you accept the risk. **Allowlist** and **Allowlist (with Sandbox)** use an [allowlist](https://cursor.com/docs/agent/tools/terminal.md#protection-settings) to control which terminal commands and MCP tools run without asking. The allowlist is best-effort — bypasses are possible. Never use **Run Everything**, which skips all safety checks. Manage allowlists in **Cursor Settings > Agents > Auto-Run** or [`~/.cursor/permissions.json`](https://cursor.com/docs/reference/permissions.md).
+
+Before Cursor 3.5, auto-run used **Run in Sandbox**, **Ask Every Time**, and **Run Everything** under different names.
 
 ## Third-party tool calls
 

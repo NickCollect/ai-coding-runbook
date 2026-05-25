@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/admin-api
-fetched_at: 2026-05-11T04:55:35.555775+00:00
+fetched_at: 2026-05-25T05:15:49.964060+00:00
 fetch_method: mintlify_md
 ---
 
@@ -505,12 +505,18 @@ Number of results per page. Default: `10`
 
 Filter by user email address
 
+`serviceAccountId` string
+
+Filter by service account ID
+
 #### Response Fields
 
 Each object in `usageEvents` contains:
 
 - `timestamp` string - Event timestamp in epoch milliseconds (as a string)
 - `userEmail` string - Email address of the user who made the request
+- `serviceAccountId` string | undefined - ID of the service account that made the request. Omitted for human user events.
+- `serviceAccountName` string | undefined - Display name of the service account that made the request. Omitted for human user events.
 - `model` string - AI model used for the request
 - `kind` string - Billing category (e.g., `Usage-based`, `Included in Business`)
 - `maxMode` boolean - Whether the request used max mode
@@ -527,7 +533,6 @@ Each object in `usageEvents` contains:
   - `discountPercentOff` number | undefined - Discount percentage applied, if any
 - `chargedCents` number - Total amount charged in cents for this event (model cost + Cursor Token Rate if applicable). Use this field to reconcile event-level costs with `/teams/spend` totals. Works for both token-based and request-based billing plans.
 - `cursorTokenFee` number | undefined - The `cursorTokenFee` field contains the Cursor Token Rate in cents (only present for teams with token rate enabled)
-- `isFreeBugbot` boolean - Whether this was a free Bugbot request
 
 ```bash
 curl -X POST https://api.cursor.com/teams/filtered-usage-events \
@@ -573,8 +578,7 @@ curl -X POST https://api.cursor.com/teams/filtered-usage-events \
         "totalCents": 20.18232
       },
       "chargedCents": 21.36232,
-      "cursorTokenFee": 1.18,
-      "isFreeBugbot": false
+      "cursorTokenFee": 1.18
     },
     {
       "timestamp": "1750979173824",
@@ -595,8 +599,7 @@ curl -X POST https://api.cursor.com/teams/filtered-usage-events \
         "discountPercentOff": 10
       },
       "chargedCents": 37.33,
-      "cursorTokenFee": 1.18,
-      "isFreeBugbot": false
+      "cursorTokenFee": 1.18
     },
     {
       "timestamp": "1750978339901",
@@ -608,8 +611,65 @@ curl -X POST https://api.cursor.com/teams/filtered-usage-events \
       "isTokenBasedCall": false,
       "isChargeable": false,
       "isHeadless": false,
-      "chargedCents": 8,
-      "isFreeBugbot": false
+      "chargedCents": 8
+    }
+  ],
+  "period": {
+    "startDate": 1748411762359,
+    "endDate": 1751003762359
+  }
+}
+```
+
+**Service account usage example:**
+
+```bash
+curl -X POST https://api.cursor.com/teams/filtered-usage-events \
+  -u YOUR_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{
+    "startDate": 1748411762359,
+    "endDate": 1751003762359,
+    "serviceAccountId": "sa_abc123",
+    "page": 1,
+    "pageSize": 10
+  }'
+```
+
+**Service account response:**
+
+```json
+{
+  "totalUsageEventsCount": 1,
+  "pagination": {
+    "numPages": 1,
+    "currentPage": 1,
+    "pageSize": 10,
+    "hasNextPage": false,
+    "hasPreviousPage": false
+  },
+  "usageEvents": [
+    {
+      "timestamp": "1750979225854",
+      "userEmail": "agent-runner@company.com",
+      "serviceAccountId": "sa_abc123",
+      "serviceAccountName": "Nightly CI Agent",
+      "model": "claude-4.5-sonnet",
+      "kind": "Usage-based",
+      "maxMode": true,
+      "requestsCosts": 5,
+      "isTokenBasedCall": true,
+      "isChargeable": true,
+      "isHeadless": true,
+      "tokenUsage": {
+        "inputTokens": 126,
+        "outputTokens": 450,
+        "cacheWriteTokens": 6112,
+        "cacheReadTokens": 11964,
+        "totalCents": 20.18232
+      },
+      "chargedCents": 21.36232,
+      "cursorTokenFee": 1.18
     }
   ],
   "period": {

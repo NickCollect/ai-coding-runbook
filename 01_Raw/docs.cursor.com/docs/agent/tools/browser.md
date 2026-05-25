@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/tools/browser
-fetched_at: 2026-05-05T19:55:36.403111+00:00
+fetched_at: 2026-05-25T05:15:50.307468+00:00
 fetch_method: mintlify_md
 ---
 
@@ -148,7 +148,7 @@ Browser tools integrate with Cursor's [security guardrails](https://cursor.com/d
 
 - **Allow list**: Specify trusted actions that skip approval prompts
 - **Block list**: Define actions that should always be blocked
-- Access settings through: `Cursor Settings` → `Chat` → `Auto-Run`
+- Access settings through: **Cursor Settings > Agents > Auto-Run**
 
 The allow/block list system provides best-effort protection. AI behavior can be unpredictable due to prompt injection and other issues. Review auto-approved actions regularly.
 

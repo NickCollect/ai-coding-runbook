@@ -1,12 +1,12 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted-cloud-run
-fetched_at: 2026-05-11T04:55:36.768477+00:00
+fetched_at: 2026-05-25T05:15:50.760976+00:00
 fetch_method: mintlify_md
 ---
 
 # Self-Hosted Cloud: Deploying with Cloud Run Worker Pools
 
-Deploy and manage [Self-Hosted Pool](https://cursor.com/docs/cloud-agent/self-hosted-pool.md) workers on Google Cloud using [Cloud Run Worker Pools](https://cloud.google.com/run/docs/deploying-worker-pools). A second Worker Pool runs a custom autoscaler that polls the Cursor [fleet management API](https://cursor.com/docs/cloud-agent/self-hosted-pool.md#fleet-management-api) and scales the worker pool up or down based on utilization.
+Deploy and manage [Self-Hosted Pool](https://cursor.com/docs/cloud-agent/self-hosted-pool.md) workers on Google Cloud using [Cloud Run Worker Pools](https://cloud.google.com/run/docs/deploy-worker-pools). A second Worker Pool runs a custom autoscaler that polls the Cursor [fleet management API](https://cursor.com/docs/cloud-agent/self-hosted-pool.md#fleet-management-api) and scales the worker pool up or down based on utilization.
 
 This guide covers a minimal reference setup. Adapt the image contents, secrets, and autoscaling logic to match your own infrastructure.
 

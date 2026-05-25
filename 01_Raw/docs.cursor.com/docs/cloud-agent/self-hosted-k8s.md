@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted-k8s
-fetched_at: 2026-05-11T04:55:36.647976+00:00
+fetched_at: 2026-05-25T05:15:50.833485+00:00
 fetch_method: mintlify_md
 ---
 
@@ -271,6 +271,7 @@ Busy workers are never terminated, even during scale-down or rolling updates.
 ## Related
 
 - [Self-Hosted Pool](https://cursor.com/docs/cloud-agent/self-hosted-pool.md)
+- [EKS + Helm reference deployment](https://github.com/cursor/cookbook/tree/main/self-hosted-cloud-agent/eks) (cookbook)
 - [Cloud Agents overview](https://cursor.com/docs/cloud-agent.md)
 - [Service accounts](https://cursor.com/docs/account/enterprise/service-accounts.md)
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/network-configuration
-fetched_at: 2026-05-05T19:55:40.217118+00:00
+fetched_at: 2026-05-25T05:15:51.021701+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,7 +22,7 @@ If you experience issues with streaming, Cursor automatically falls back to HTTP
 
 Many corporate proxies perform SSL man-in-the-middle inspection to scan traffic for security threats or data loss prevention (DLP). This replaces Cursor's SSL certificates with your proxy's certificates.
 
-When Cursor traffic goes through Secure Web Gateways (SWG), SSL inspection, or DLP, it often causes timeouts, slowness, or errors when using Cursor's Agent capabilities. This is one of the most common deployment blockers for enterprise customers.
+When Cursor traffic goes through Secure Web Gateways (SWG), SSL inspection, or DLP, it often causes timeouts, slowness, or errors when using Cursor's Agent capabilities. This is one of the most common deployment blockers for enterprise customers. For endpoint security software (AV, EDR, DLP) that runs on the machine itself rather than at the network level, see [Endpoint Security Configuration](https://cursor.com/docs/enterprise/endpoint-security.md).
 
 Cursor's services are already encrypted end-to-end. We recommend disabling SSL inspection for these domains:
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/deployment-patterns
-fetched_at: 2026-05-05T19:55:39.247477+00:00
+fetched_at: 2026-05-25T05:15:50.941740+00:00
 fetch_method: mintlify_md
 ---
 
@@ -49,10 +49,10 @@ The file path is `~/.cursor/permissions.json`.
 
 The file format is:
 
-| Key                 | Type       | Required | Meaning                                                                                                         |
-| :------------------ | :--------- | :------- | :-------------------------------------------------------------------------------------------------------------- |
-| `terminalAllowlist` | `string[]` | No       | Terminal commands that may auto-run outside the sandbox. Each entry is matched against the full command string. |
-| `mcpAllowlist`      | `string[]` | No       | MCP tools that may auto-run. Each entry uses `server:tool` syntax.                                              |
+| Key                 | Type       | Required | Meaning                                                                                                                                                                           |
+| :------------------ | :--------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `terminalAllowlist` | `string[]` | No       | Terminal commands that may auto-run without approval. In **Allowlist (with Sandbox)** mode, these run outside the sandbox. Each entry is matched against the full command string. |
+| `mcpAllowlist`      | `string[]` | No       | MCP tools that may auto-run without approval. In **Allowlist (with Sandbox)** mode, these run outside the sandbox. Each entry uses `server:tool` syntax.                          |
 
 `mcpAllowlist` entries support these forms:
 

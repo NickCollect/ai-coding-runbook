@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/api/endpoints
-fetched_at: 2026-05-18T05:02:43.760715+00:00
+fetched_at: 2026-05-25T05:15:50.600874+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,7 +13,7 @@ availability.
 
 The Cloud Agents API lets you programmatically launch and manage cloud agents that work on your repositories.
 
-- The Cloud Agents API uses [Basic Authentication](https://cursor.com/docs/api.md#authentication). Generate a user API key from [Cursor Dashboard → Integrations](https://cursor.com/dashboard/integrations), or use a [service account API key](https://cursor.com/docs/account/enterprise/service-accounts.md).
+- The Cloud Agents API accepts both [Basic and Bearer authentication](https://cursor.com/docs/api.md#authentication). Generate a user API key from [Cursor Dashboard → Integrations](https://cursor.com/dashboard/integrations), or use a [service account API key](https://cursor.com/docs/account/enterprise/service-accounts.md).
 - For details on authentication methods, rate limits, and best practices, see the [API Overview](https://cursor.com/docs/api.md).
 - View the full [OpenAPI specification](/docs-static/cloud-agents-openapi.yaml) for detailed schemas and examples.
 - Webhooks are coming soon. The legacy [v0 API](https://cursor.com/docs/cloud-agent/api/v0.md) still supports them — see [Webhooks](https://cursor.com/docs/cloud-agent/api/webhooks.md).
@@ -42,7 +42,7 @@ The instruction text for the agent.
 
 `prompt.images` array (optional)
 
-Array of base64-encoded image inputs. Maximum 5 images, 15 MB each.
+Image inputs for the prompt. Each entry must include either `data` (base64-encoded bytes with a required `mimeType`) or `url` (an http or https URL that Cursor fetches). Maximum 5 images, 15 MB each. Supported MIME types: `image/png`, `image/jpeg`, `image/gif`, `image/webp`.
 
 `model` object (optional)
 
@@ -54,7 +54,11 @@ An explicit model ID returned by `GET /v1/models` (for example, `claude-4-sonnet
 
 `model.params` array (optional)
 
-Per-model parameters to apply to the run, such as reasoning effort or max mode. Each item has an `id` and `value`. Use only parameters supported by the selected model.
+Per-model parameters to apply to the run, such as reasoning effort or max mode. Each item has an `id` and `value`. Use only parameters supported by the selected model — call `GET /v1/models` to discover the valid `id`/`params` combinations.
+
+`name` string (optional)
+
+Display name for the agent. Maximum 100 characters. When omitted, Cursor auto-derives a name from the prompt.
 
 `env` object (optional)
 
@@ -72,25 +76,21 @@ Named Cursor-hosted environment, self-hosted pool, or self-hosted machine name.
 
 Repository configuration. Mutually exclusive with a named cloud environment. Omit both `repos` and `env` to start a no-repo agent. Maximum 20 repositories.
 
-`repos[0].url` string (required unless `prUrl` is provided)
+`repos[0].url` string (required)
 
-GitHub repository URL (for example, `https://github.com/your-org/your-repo`).
+GitHub repository URL (for example, `https://github.com/your-org/your-repo`). Required on every repo entry, including when `prUrl` is provided.
 
 `repos[0].startingRef` string (optional)
 
-Branch, tag, or commit hash to use as the starting point.
+Branch, tag, or commit hash to use as the starting point. Ignored when `prUrl` is provided.
 
 `repos[0].prUrl` string (optional)
 
-GitHub pull request URL. When provided, the agent works on this PR's repository and branches; `url` and `startingRef` are ignored.
+GitHub pull request URL. When provided, the agent works on this PR's repository and branches; `startingRef` is ignored. `url` must still be set on the same `repos` entry.
 
-`branchName` string (optional)
+`workOnCurrentBranch` boolean (optional, default: false)
 
-Custom branch name for the agent to create.
-
-`autoGenerateBranch` boolean (optional, default: true)
-
-Whether to create a new branch (`true`) or push to an existing head branch (`false`). Only applies when `repos[0].prUrl` is provided.
+When `false` (the default), Cursor pushes commits to a new auto-generated branch (`cursor/...`) based on `repos[0].startingRef` (or the PR base ref when `prUrl` is set). When `true`, Cursor pushes directly to that starting ref — for a non-PR create, that's the branch you passed in `startingRef`; for a `prUrl` create, that's the PR's head branch. The branch the agent pushed shows up in the agent's `git.branches[]`.
 
 `autoCreatePR` boolean (optional)
 
@@ -102,7 +102,41 @@ Whether to skip requesting the user as a reviewer when Cursor opens a PR. Only a
 
 `envVars` object (optional)
 
-Session-scoped environment variables for the cloud agent. Values are encrypted at rest, injected into the agent's shell, and deleted with the agent. Names can't start with `CURSOR_`.
+Session-scoped environment variables for the cloud agent. Values are encrypted at rest, injected into the agent's shell, and deleted with the agent. Maximum 50 entries; names up to 255 bytes (can't start with `CURSOR_`), values up to 4096 bytes. Cannot be combined with a client-supplied `agentId`.
+
+**Beta:** `envVars` is rolling out. If it isn't enabled for your account yet, the field is silently ignored on create rather than failing the request — verify the values are present by inspecting the agent shell on a first run before relying on them in production.
+
+`mcpServers` array (optional)
+
+Inline MCP server definitions available to the agent. Maximum 50 servers. Remote servers support `headers` or OAuth `auth`; stdio servers run inside the cloud VM and can receive `env`. Server names must be unique.
+
+`mcpServers[0].name` string (required)
+
+The MCP server name exposed to the agent.
+
+`mcpServers[0].type` string (optional)
+
+Transport type: `http`, `sse`, or `stdio`. Defaults to `http` for remote servers with `url`, and `stdio` for servers with `command`.
+
+`mcpServers[0].url` string (required for remote MCP)
+
+HTTP or HTTPS URL for a remote MCP server. URLs with username or password are not allowed.
+
+`mcpServers[0].command` string (required for stdio MCP)
+
+Command to start a stdio MCP server inside the cloud agent VM. Use `args` and `env` for arguments and runtime secrets.
+
+`customSubagents` array (optional)
+
+Define custom subagents the main agent can delegate to during the run. Maximum 20 subagents. Each entry requires `name`, `description`, and `prompt`, plus an optional `model` (model ID string, `ModelSelection` object, or `"inherit"`). Names must be unique and cannot collide with built-ins (`explore`, `debug`, `shell`, `computerUse`, etc.).
+
+`mode` string (optional, default: agent)
+
+Initial conversation mode for the agent's first run. `plan` explores and drafts a plan before coding ([Plan mode](https://cursor.com/help/ai-features/plan-mode.md)); `agent` implements changes directly.
+
+`agentId` string (optional)
+
+Client-supplied agent identifier in the form `bc-<uuid>`. Useful for idempotent create flows — re-POSTing the same `agentId` returns `409 agent_id_conflict` rather than creating a duplicate. Cannot be combined with `envVars`; omit `agentId` so the server mints one when you need session secrets.
 
 ```bash
 curl --request POST \
@@ -116,13 +150,32 @@ curl --request POST \
     "model": {
       "id": "composer-2",
       "params": [
-        { "id": "thinking", "value": "high" }
+        { "id": "fast", "value": "true" }
       ]
     },
     "repos": [
       {
         "url": "https://github.com/your-org/your-repo",
         "startingRef": "main"
+      }
+    ],
+    "mcpServers": [
+      {
+        "name": "linear",
+        "type": "http",
+        "url": "https://mcp.linear.app/sse",
+        "headers": {
+          "Authorization": "Bearer YOUR_LINEAR_API_KEY"
+        }
+      },
+      {
+        "name": "github",
+        "type": "stdio",
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-github"],
+        "env": {
+          "GITHUB_TOKEN": "YOUR_GITHUB_TOKEN"
+        }
       }
     ],
     "autoCreatePR": true
@@ -146,10 +199,9 @@ curl --request POST \
         "startingRef": "main"
       }
     ],
-    "branchName": "cursor/add-readme",
-    "autoGenerateBranch": true,
+    "workOnCurrentBranch": false,
     "autoCreatePR": true,
-    "url": "https://cursor.com/agents?id=bc-00000000-0000-0000-0000-000000000001",
+    "url": "https://cursor.com/agents/bc-00000000-0000-0000-0000-000000000001",
     "createdAt": "2026-04-13T18:30:00.000Z",
     "updatedAt": "2026-04-13T18:30:00.000Z",
     "latestRunId": "run-00000000-0000-0000-0000-000000000001"
@@ -188,7 +240,9 @@ Filter agents by GitHub pull request URL.
 
 Whether to include archived agents in the response.
 
-List items only include the durable identity fields. Call `GET /v1/agents/{id}` to load the full record (`repos`, `branchName`, `autoCreatePR`, etc.).
+List items only include the durable identity fields. Call `GET /v1/agents/{id}` to load the full record (`repos`, `workOnCurrentBranch`, `autoCreatePR`, etc.).
+
+`nextCursor` is **omitted** from the response when there are no more pages — it is not returned as `null`. Treat its absence as "no more results".
 
 ```bash
 curl --request GET \
@@ -208,7 +262,7 @@ curl --request GET \
       "env": {
         "type": "cloud"
       },
-      "url": "https://cursor.com/agents?id=bc-00000000-0000-0000-0000-000000000001",
+      "url": "https://cursor.com/agents/bc-00000000-0000-0000-0000-000000000001",
       "createdAt": "2026-04-13T18:30:00.000Z",
       "updatedAt": "2026-04-13T18:45:00.000Z",
       "latestRunId": "run-00000000-0000-0000-0000-000000000001"
@@ -252,10 +306,9 @@ curl --request GET \
       "startingRef": "main"
     }
   ],
-  "branchName": "cursor/add-readme",
-  "autoGenerateBranch": true,
+  "workOnCurrentBranch": false,
   "autoCreatePR": true,
-  "url": "https://cursor.com/agents?id=bc-00000000-0000-0000-0000-000000000001",
+  "url": "https://cursor.com/agents/bc-00000000-0000-0000-0000-000000000001",
   "createdAt": "2026-04-13T18:30:00.000Z",
   "updatedAt": "2026-04-13T18:30:00.000Z",
   "latestRunId": "run-00000000-0000-0000-0000-000000000001"
@@ -288,7 +341,15 @@ The follow-up instruction text.
 
 `prompt.images` array (optional)
 
-Array of base64-encoded image inputs. Maximum 5 images, 15 MB each.
+Image inputs for the follow-up. Each entry must include either `data` (base64-encoded bytes with a required `mimeType`) or `url`. Maximum 5 images, 15 MB each. Supported MIME types: `image/png`, `image/jpeg`, `image/gif`, `image/webp`.
+
+`mcpServers` array (optional)
+
+Inline MCP server definitions for this follow-up run. When provided, these replace any create-time inline MCP servers for this run. Omit to keep the agent's current MCP configuration.
+
+`mode` string (optional)
+
+Conversation mode override for this follow-up run: `agent` or `plan`. Omit to keep the conversation's current mode from prior runs.
 
 ```bash
 curl --request POST \
@@ -298,7 +359,14 @@ curl --request POST \
   --data '{
     "prompt": {
       "text": "Also add troubleshooting steps"
-    }
+    },
+    "mcpServers": [
+      {
+        "name": "docs",
+        "type": "http",
+        "url": "https://example.com/mcp"
+      }
+    ]
   }'
 ```
 
@@ -354,10 +422,17 @@ curl --request GET \
       "agentId": "bc-00000000-0000-0000-0000-000000000001",
       "status": "RUNNING",
       "createdAt": "2026-04-13T18:50:00.000Z",
-      "updatedAt": "2026-04-13T18:51:00.000Z"
+      "updatedAt": "2026-04-13T18:51:00.000Z",
+      "git": {
+        "branches": [
+          {
+            "repoUrl": "github.com/your-org/your-repo",
+            "branch": "cursor/add-readme-a1b2"
+          }
+        ]
+      }
     }
-  ],
-  "nextCursor": null
+  ]
 }
 ```
 
@@ -365,7 +440,7 @@ curl --request GET \
 
 /v1/agents//runs/
 
-Retrieve status and timestamps for a specific run.
+Retrieve status, timestamps, and (for terminal runs) the final result, duration, and pushed branches for a specific run.
 
 #### Path Parameters
 
@@ -376,6 +451,26 @@ Unique identifier for the agent.
 `runId` string
 
 Unique identifier for the run (for example, `run-00000000-0000-0000-0000-000000000001`).
+
+#### Response Fields
+
+The base run fields (`id`, `agentId`, `status`, `createdAt`, `updatedAt`) are always present. The following are populated as soon as data is available:
+
+`durationMs` integer (terminal runs)
+
+Wall-clock duration of the run in milliseconds, computed once the run reaches `FINISHED`, `ERROR`, `CANCELLED`, or `EXPIRED`.
+
+`result` string (terminal runs)
+
+Final assistant reply text for a terminated run.
+
+`git` object (when a branch has been pushed)
+
+The agent's current pushed branches and pull requests. `git.branches[]` contains `{ repoUrl, branch?, prUrl? }` entries — one per branch the agent has pushed (stacked agents produce multiple).
+
+**Per-agent state, not per-run.** Every run on the same agent returns the same `git` snapshot. Use the agent's `latestRunId` or the SSE stream to attribute work to a specific run.
+
+`repoUrl` is returned without the scheme (for example, `github.com/your-org/your-repo`) — different from request `repos[].url`, which keeps the `https://` prefix.
 
 ```bash
 curl --request GET \
@@ -391,7 +486,18 @@ curl --request GET \
   "agentId": "bc-00000000-0000-0000-0000-000000000001",
   "status": "FINISHED",
   "createdAt": "2026-04-13T18:30:00.000Z",
-  "updatedAt": "2026-04-13T18:45:00.000Z"
+  "updatedAt": "2026-04-13T18:45:00.000Z",
+  "durationMs": 12357,
+  "result": "Added README.md with installation instructions and usage examples.",
+  "git": {
+    "branches": [
+      {
+        "repoUrl": "github.com/your-org/your-repo",
+        "branch": "cursor/add-readme-a1b2",
+        "prUrl": "https://github.com/your-org/your-repo/pull/123"
+      }
+    ]
+  }
 }
 ```
 
@@ -406,15 +512,46 @@ Stream Server-Sent Events (SSE) for one run. The stream is scoped to the request
 - `status` — run status update. Payload: `{ runId, status }`.
 - `assistant` — assistant text delta. Payload: `{ text }`.
 - `thinking` — thinking text delta. Payload: `{ text }`.
-- `tool_call` — tool call status update.
-- `heartbeat` — keepalive event.
-- `result` — terminal run status. Payload: `{ runId, status }`.
+- `tool_call` — tool call status update. Payload: `{ callId, name, status, args?, result?, truncated? }`.
+- `interaction_update` — optional richer event emitted alongside the simplified events above. Payload matches the `InteractionUpdate` shape consumed by the [TypeScript SDK](https://cursor.com/docs/sdk/typescript.md), with subtypes like `text-delta`, `tool-call-started` / `tool-call-completed`, `step-started` / `step-completed`, and `turn-ended`. If you only need plain text and tool calls, handle the simplified events and ignore `interaction_update`. If you want the full SDK-shape stream, handle `interaction_update` and ignore the simplified events.
+- `heartbeat` — keepalive event. Payload: `{}`.
+- `result` — terminal run status. Payload: `{ runId, status, text?, durationMs?, git? }`. `text` is the final assistant reply, `durationMs` is the wall-clock run duration in milliseconds, and `git` mirrors `Run.git` (the agent's current pushed branches, not just this run's).
 - `error` — stream error. Payload: `{ code, message }`.
 - `done` — stream complete. Payload: `{}`.
 
+#### Tool call payloads
+
+`tool_call` events use a stable envelope around tool-specific inputs and outputs:
+
+```typescript
+type JsonValue =
+  | string
+  | number
+  | boolean
+  | null
+  | JsonValue[]
+  | { [key: string]: JsonValue };
+
+interface ToolCallEventData {
+  callId: string;
+  name: string;
+  status: "running" | "completed";
+  args?: JsonValue;
+  result?: JsonValue;
+  truncated?: {
+    args?: true;
+    result?: true;
+  };
+}
+```
+
+`callId` identifies one tool invocation across updates. `name` is the public tool name, such as `read_file`, `run_terminal_cmd`, or `mcp`. `args` and `result` are tool-specific JSON values. If `args` or `result` is too large to include in the stream, Cursor omits that field and sets the matching `truncated` flag.
+
 #### Resuming a stream
 
-SSE responses include `id` values when available. To resume after a disconnect, reconnect with `Last-Event-ID` set to the most recent received event id. The event id must belong to the requested run; otherwise the request returns `400 invalid_last_event_id`.
+Most events include an `id` line — an opaque string you should not parse (current format looks like `1713033006000-0`, but treat it as opaque). The leading `status` event has no `id` — it is a sticky framing event that is re-sent at the top of every reconnect.
+
+To resume after a disconnect, reconnect with `Last-Event-ID` set to the most recent received event id. The event id must belong to the requested run; otherwise the request returns `400 invalid_last_event_id`. After a successful resume, expect another `status` event before the resumed range begins.
 
 #### Retention
 
@@ -437,9 +574,17 @@ id: 1713033000000-0
 event: assistant
 data: {"text":"I'll update the README now."}
 
+id: 1713033005000-0
+event: tool_call
+data: {"callId":"call-1","name":"read_file","status":"running","args":{"path":"README.md"}}
+
+id: 1713033006000-0
+event: tool_call
+data: {"callId":"call-1","name":"read_file","status":"completed","args":{"path":"README.md"},"result":{"success":{"content":"# Project","totalLines":1,"fileSize":9,"path":"README.md"}}}
+
 id: 1713033010000-0
 event: result
-data: {"runId":"run-00000000-0000-0000-0000-000000000001","status":"FINISHED"}
+data: {"runId":"run-00000000-0000-0000-0000-000000000001","status":"FINISHED","text":"Added README.md with installation instructions.","durationMs":12357,"git":{"branches":[{"repoUrl":"github.com/your-org/your-repo","branch":"cursor/add-readme-a1b2"}]}}
 
 id: 1713033010000-0
 event: done
@@ -557,6 +702,8 @@ curl --request GET \
 
 Archive an agent. Archived agents remain readable but cannot accept new runs until unarchived. Use this for reversible "soft delete" flows.
 
+Archive is idempotent — re-archiving an already-archived agent returns `200` with no change. You don't need to check current state before calling.
+
 #### Path Parameters
 
 `id` string
@@ -569,11 +716,21 @@ curl --request POST \
   -u YOUR_API_KEY:
 ```
 
+**Response:**
+
+```json
+{
+  "id": "bc-00000000-0000-0000-0000-000000000001"
+}
+```
+
 ### Unarchive An Agent
 
 /v1/agents//unarchive
 
 Unarchive an agent so it can accept new runs again.
+
+Unarchive is idempotent — calling it on an already-active agent returns `200` with no change.
 
 #### Path Parameters
 
@@ -585,6 +742,14 @@ Unique identifier for the agent.
 curl --request POST \
   --url https://api.cursor.com/v1/agents/bc-00000000-0000-0000-0000-000000000001/unarchive \
   -u YOUR_API_KEY:
+```
+
+**Response:**
+
+```json
+{
+  "id": "bc-00000000-0000-0000-0000-000000000001"
+}
 ```
 
 ### Delete An Agent Permanently
@@ -603,6 +768,14 @@ Unique identifier for the agent.
 curl --request DELETE \
   --url https://api.cursor.com/v1/agents/bc-00000000-0000-0000-0000-000000000001 \
   -u YOUR_API_KEY:
+```
+
+**Response:**
+
+```json
+{
+  "id": "bc-00000000-0000-0000-0000-000000000001"
+}
 ```
 
 ## Worker Tokens
@@ -664,6 +837,135 @@ curl --request POST \
 }
 ```
 
+## Fleet Management
+
+Monitor pool worker utilization and build autoscaling against self-hosted Cloud Agent pools. See [Self-Hosted Pool](https://cursor.com/docs/cloud-agent/self-hosted-pool.md#fleet-management-api) for background.
+
+Authenticate with the pool's service account API key via Basic auth or Bearer token. Other API key types are rejected.
+
+### List Workers
+
+/v0/private-workers
+
+List self-hosted pool workers for the authenticated service account's team, newest first.
+
+#### Query Parameters
+
+`status` string (optional, default: `all`)
+
+Filter by worker status. One of `all`, `in_use`, or `idle`.
+
+`limit` integer (optional, default: 50)
+
+Results per page. Range: 1 to 100.
+
+`nextPageToken` string (optional)
+
+Pagination cursor from the previous response.
+
+```bash
+curl --request GET \
+  --url "https://api.cursor.com/v0/private-workers?status=idle&limit=50" \
+  -u "$CURSOR_API_KEY:"
+```
+
+### Get Fleet Summary
+
+/v0/private-workers/summary
+
+Return connected and in-use worker counts for the authenticated user and their team. Use this to trigger scaling decisions when utilization is high.
+
+```bash
+curl --request GET \
+  --url "https://api.cursor.com/v0/private-workers/summary" \
+  -u "$CURSOR_API_KEY:"
+```
+
+**Example scaling check:**
+
+```typescript
+const summary = await response.json();
+const team = summary.teamSummary;
+if (team && team.totalConnected > 0) {
+  const utilization = team.inUse / team.totalConnected;
+  if (utilization >= 0.9) {
+    // Scale up: provision additional workers
+  }
+}
+```
+
+### Get Worker By ID
+
+/v0/private-workers/
+
+Retrieve a single self-hosted pool worker by its ID.
+
+#### Path Parameters
+
+`id` string
+
+Unique identifier for the worker (for example, `pw_123`).
+
+```bash
+curl --request GET \
+  --url "https://api.cursor.com/v0/private-workers/pw_123" \
+  -u "$CURSOR_API_KEY:"
+```
+
+### List Pending Pool Requests
+
+/v0/private-workers/pending-requests
+
+List self-hosted pool requests that have not been assigned to a worker yet. Use this endpoint to scale capacity when users are waiting for an available pool worker.
+
+This endpoint requires a service account API key. It returns requests for the key's team and excludes My Machines requests. If the key is scoped to specific repositories, pass `repository`; the repository must be in the key's allowed scope.
+
+#### Query Parameters
+
+`limit` number (optional)
+
+Number of pending requests to return. Default: 50, Max: 100.
+
+`pageToken` string (optional)
+
+Pagination cursor from the previous response.
+
+`repository` string (optional)
+
+Filter by repository URL. Required for repo-scoped service account API keys.
+
+```bash
+curl --request GET \
+  --url "https://api.cursor.com/v0/private-workers/pending-requests?limit=50&repository=https%3A%2F%2Fgithub.com%2Facme%2Fpayments-service" \
+  -u "$CURSOR_API_KEY:"
+```
+
+**Response:**
+
+```json
+{
+  "requests": [
+    {
+      "id": "bc-00000000-0000-0000-0000-000000000002",
+      "userId": 321,
+      "serviceAccountId": "sa_abc123",
+      "repoOwner": "acme",
+      "repoName": "payments-service",
+      "repoUrl": "https://github.com/acme/payments-service",
+      "labels": [
+        { "key": "repo", "value": "acme/payments-service" },
+        { "key": "pool", "value": "gpu" },
+        { "key": "env", "value": "production" }
+      ],
+      "createdAtMs": 1737306880000
+    }
+  ],
+  "nextPageToken": "eyJjcmVhdGVkQXRNcyI6MTczNzMwNjg4MDAwMH0="
+}
+```
+
+`repoUrl` omits embedded credentials when the original repository URL includes userinfo.
+
 ## Metadata Endpoints
 
 ### API Key Info
@@ -672,19 +974,53 @@ curl --request POST \
 
 Retrieve information about the API key being used for authentication.
 
+#### Response Fields
+
+`apiKeyName` string
+
+Display name of the API key.
+
+`createdAt` string
+
+When the API key was created (ISO 8601).
+
+`userId` integer (user-scoped keys)
+
+Numeric Cursor user ID of the API key's owner. Omitted for service-account / team API keys, which aren't tied to a specific user.
+
+`userEmail` string (user-scoped keys)
+
+Email address of the API key's owner.
+
+`userFirstName`, `userLastName` string (user-scoped keys)
+
+First and last name of the API key's owner, when populated.
+
 ```bash
 curl --request GET \
   --url https://api.cursor.com/v1/me \
   -u YOUR_API_KEY:
 ```
 
-**Response:**
+**Response (user-scoped key):**
 
 ```json
 {
   "apiKeyName": "Production API Key",
+  "userId": 42,
   "createdAt": "2026-04-13T18:30:00.000Z",
-  "userEmail": "developer@example.com"
+  "userEmail": "developer@example.com",
+  "userFirstName": "Alex",
+  "userLastName": "Rivera"
+}
+```
+
+**Response (service-account key):**
+
+```json
+{
+  "apiKeyName": "Production Service Account",
+  "createdAt": "2026-04-13T18:30:00.000Z"
 }
 ```
 
@@ -692,9 +1028,37 @@ curl --request GET \
 
 /v1/models
 
-Returns a recommended set of explicit model IDs you can pass to the `model.id` field on [Create An Agent](https://cursor.com/docs/cloud-agent/api/endpoints.md#create-an-agent). Model parameters use the same `model.params` shape as the [TypeScript SDK ModelSelection](https://cursor.com/docs/sdk/typescript.md#modelselection).
+Returns the recommended models you can pass to the `model.id` field on [Create An Agent](https://cursor.com/docs/cloud-agent/api/endpoints.md#create-an-agent), along with the parameters and variants each model accepts. Model parameters use the same `model.params` shape as the [TypeScript SDK ModelSelection](https://cursor.com/docs/sdk/typescript.md#modelselection).
 
-To use the configured default model, omit `model` from the request body. Cursor resolves your user default model, then your team default model, then a system default.
+To use the configured default model, omit `model` from the request body entirely. Cursor resolves your user default model, then your team default model, then a system default.
+
+#### Response Fields
+
+Each item in `items` describes one model:
+
+`id` string
+
+Pass this value as `model.id` when creating an agent.
+
+`displayName` string
+
+Human-readable name shown in the Cursor UI.
+
+`description` string (optional)
+
+Short description of the model.
+
+`aliases` array (optional)
+
+Alternate IDs that resolve to the same model (for example, `composer-latest`).
+
+`parameters` array (optional)
+
+Per-model parameter definitions. Each entry has an `id`, optional `displayName`, and a `values` array of permitted `{ value, displayName? }` entries. Use these to populate `model.params` on the create request.
+
+`variants` array (optional)
+
+Concrete `id`+`params` combinations the model accepts. Each entry has a `params` array (which may be empty), a `displayName`, an optional `description`, and an optional `isDefault` flag.
 
 ```bash
 curl --request GET \
@@ -707,9 +1071,43 @@ curl --request GET \
 ```json
 {
   "items": [
-    "claude-4-sonnet-thinking",
-    "gpt-5.2",
-    "claude-4.5-sonnet-thinking"
+    {
+      "id": "composer-2",
+      "displayName": "Composer 2",
+      "aliases": ["composer-latest", "composer"],
+      "parameters": [
+        {
+          "id": "fast",
+          "displayName": "Fast",
+          "values": [
+            { "value": "false" },
+            { "value": "true", "displayName": "Fast" }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "params": [{ "id": "fast", "value": "true" }],
+          "displayName": "Composer 2",
+          "isDefault": true
+        },
+        {
+          "params": [{ "id": "fast", "value": "false" }],
+          "displayName": "Composer 2"
+        }
+      ]
+    },
+    {
+      "id": "claude-4.6-sonnet-thinking",
+      "displayName": "Claude 4.6 Sonnet (Thinking)",
+      "variants": [
+        {
+          "params": [],
+          "displayName": "Claude 4.6 Sonnet (Thinking)",
+          "isDefault": true
+        }
+      ]
+    }
   ]
 }
 ```

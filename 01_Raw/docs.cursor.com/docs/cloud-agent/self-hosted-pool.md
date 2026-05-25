@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted-pool
-fetched_at: 2026-05-11T04:55:36.720311+00:00
+fetched_at: 2026-05-25T05:15:50.762447+00:00
 fetch_method: mintlify_md
 ---
 
@@ -253,9 +253,19 @@ The [Prerequisites](https://cursor.com/docs/cloud-agent/self-hosted-pool.md#prer
 
 We provide a Helm chart and Kubernetes operator for managing worker pools at scale. See the [Kubernetes deployment guide](https://cursor.com/docs/cloud-agent/self-hosted-k8s.md) for setup instructions.
 
+## Reference deployments
+
+The [self-hosted Cloud Agents cookbook](https://github.com/cursor/cookbook/tree/main/self-hosted-cloud-agent) has Terraform and Helm examples for running worker pools on AWS:
+
+- [EC2 + Docker](https://github.com/cursor/cookbook/tree/main/self-hosted-cloud-agent/ec2): one worker container on a single host. The smallest footprint.
+- [ECS/Fargate](https://github.com/cursor/cookbook/tree/main/self-hosted-cloud-agent/ecs): AWS-native service with CloudWatch metrics and ECS Service Auto Scaling.
+- [EKS + Helm](https://github.com/cursor/cookbook/tree/main/self-hosted-cloud-agent/eks): Kubernetes path using Cursor's worker-set controller and `WorkerDeployment` resources.
+
+Each guide has an architecture overview and a copy-paste setup README.
+
 ## Fleet management API
 
-For non-Kubernetes environments, use the fleet management API to monitor utilization and build autoscaling.
+For non-Kubernetes environments, use the fleet management API to monitor utilization and build autoscaling. See the [Cloud Agents API reference](https://cursor.com/docs/cloud-agent/api/endpoints.md#fleet-management) for the full endpoint list.
 
 Authenticate with the pool's service account API key via Basic auth or Bearer token. Other API key types can't manage pool worker fleet capacity.
 
@@ -267,11 +277,11 @@ curl --request GET \
   -u "$CURSOR_API_KEY:"
 ```
 
-\| Parameter | Type | Default | Description |
-\|---|---|---|
-\| `status` | `all` | `in_use` | `idle` | `all` | Filter by worker status |
-\| `limit` | integer (1-100) | 50 | Results per page |
-\| `nextPageToken` | string | | Pagination cursor |
+| Parameter       | Type                        | Default | Description             |
+| --------------- | --------------------------- | ------- | ----------------------- |
+| `status`        | `all` \| `in_use` \| `idle` | `all`   | Filter by worker status |
+| `limit`         | integer (1-100)             | `50`    | Results per page        |
+| `nextPageToken` | string                      |         | Pagination cursor       |
 
 ### Get summary
 
@@ -409,6 +419,7 @@ Yes. Configure MCP servers through the Cloud Agents dashboard. See the
 
 - [My Machines](https://cursor.com/docs/cloud-agent/my-machines.md)
 - [Kubernetes deployment guide](https://cursor.com/docs/cloud-agent/self-hosted-k8s.md)
+- [Self-hosted Cloud Agents cookbook](https://github.com/cursor/cookbook/tree/main/self-hosted-cloud-agent) (EC2, ECS, EKS reference deployments)
 - [Cloud Agent security and network](https://cursor.com/docs/cloud-agent/security-network.md)
 - [Service accounts](https://cursor.com/docs/account/enterprise/service-accounts.md)
 

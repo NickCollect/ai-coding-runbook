@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/security-network
-fetched_at: 2026-05-18T05:02:43.872251+00:00
+fetched_at: 2026-05-25T05:15:50.738519+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,12 +12,30 @@ Cloud Agents are available in Privacy Mode. We never train on your code and only
 
 Secrets provided to Cloud Agents are encrypted at rest and in transit. They are not visible to anyone other than the Cloud Agent user.
 
-You can classify secrets as "Redacted" for additional protection. Redacted secrets:
+Secrets can be set as Environment Variables, Runtime Secrets, or Build Secrets.
 
-- Are scanned in commit messages and files, which are rejected if they contain the secret
-- Are redacted from model tool calls, so they are not shown to the models or stored in chat transcripts
+### Environment Variables
 
-This prevents accidental exposure of credentials in version control and model context.
+Secrets set with type `Environment Variable` are visible to the cloud agent. These are best used for non-sensitive configuration that is helpful for the agent to view, such as flags or public URLs. They are still encrypted at rest and in transit as with other secret types.
+
+### Runtime secrets
+
+Previously, Runtime Secrets were called Redacted Secrets.
+
+Secrets set with type `Runtime Secret` are still loaded as environment variables, but their contents are redacted from the agent's tool call results, chat transcript, commits, and commit messages, and replaced with the placeholder string `[REDACTED]`. These are best used for sensitive credentials that should not be exposed to the agent and should never be committed to the repository.
+
+Because Runtime Secrets still function internally as environment variables, while they are not shown to the agent, they are still visible to users interacting with the agent's environment via the Terminal.
+
+### Build secrets
+
+Secrets set with type `Build Secret` are only available to the [Docker build process](https://cursor.com/docs/cloud-agent/security-network.md#manual-setup-with-dockerfile-advanced) (if you have configured one) and are not exposed to the running agent's environment. These are best used for private package registries or build-time credentials that should not be exposed to the agent.
+
+In order to securely use a Build Secret within your Dockerfile, reference them from a `RUN` step using a [Docker secret mount](https://docs.docker.com/build/building/secrets/#secret-mounts), for example:
+
+```docker
+RUN --mount=type=secret,id=MY_TOKEN,env=MY_TOKEN,required=true \
+    ./scripts/install-private-deps.sh
+```
 
 ## Signed commits
 
@@ -35,6 +53,31 @@ If your repository enforces branch protection rules that require signed commits,
 4. The agent auto-runs all terminal commands, letting it iterate on tests. This differs from the foreground agent, which requires user approval for every command. Auto-running introduces data exfiltration risk: attackers could execute prompt injection attacks, tricking the agent to upload code to malicious websites. See [OpenAI's explanation about risks of prompt injection for cloud agents](https://platform.openai.com/docs/codex/agent-network#risks-of-agent-internet-access).
 5. If privacy mode is disabled, we collect prompts and dev environments to improve the product.
 6. If you disable privacy mode when starting a cloud agent, then enable it during the agent's run, the agent continues with privacy mode disabled until it completes.
+
+## Data retention
+
+Cloud Agents store two types of data for every run:
+
+- **Conversation history.** The prompts, model responses, tool calls, and demo artifacts that make up the agent's transcript. This is the data you see when you open an agent on the web or from a desktop client.
+- **Environment snapshots.** Encrypted point-in-time copies of the virtual machine disk. Snapshots let you customize VM environments and allow agents to start or resume without recloning the repository or running the setup again.
+
+Conversation history is kept indefinitely by default so you can revisit and resume past runs. Environment snapshots are stored for a maximum of **90 days** and are deleted automatically after, regardless of plan or policy. Any code Cursor stores for a Cloud Agent lives inside these two artifacts and follows the same retention windows.
+
+You can use the [Delete Agent API](https://cursor.com/docs/cloud-agent/api/endpoints.md#delete-an-agent-permanently) to explicitly delete a cloud agent's conversation history.
+
+### Cloud agent retention policies
+
+Custom retention windows are in early access for select Enterprise teams. [Contact sales](https://cursor.com/contact-sales?source=docs-cloud-agent-retention) to request access.
+
+Enterprise team admins can cap how long the team's Cloud Agent data is kept from **Team Settings** on the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents). The available windows are **Indefinite** and **90 days**.
+
+When you set the policy to **90 days**:
+
+- A background job deletes conversations older than the retention policy window.
+- Environment snapshots continue to follow the 90-day platform cap.
+- The policy applies to every agent run the team owns, including runs from saved environments and the [API](https://cursor.com/docs/cloud-agent/api/v0.md).
+
+Switching back to **Indefinite** stops further conversation deletions but doesn't restore data that's already been removed.
 
 ## Network access
 

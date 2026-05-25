@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/configuration/worktrees
-fetched_at: 2026-05-05T19:55:39.036115+00:00
+fetched_at: 2026-05-25T05:15:50.846561+00:00
 fetch_method: mintlify_md
 ---
 
@@ -168,21 +168,29 @@ You can provide different setup commands for different operating systems:
 
 If you want to debug worktree setup, open the Output panel in the editor and select `Worktrees Setup`.
 
-## Worktrees Cleanup
+## How does Cursor discover existing worktrees?
 
-Cursor can clean up older worktrees automatically to limit disk usage. Cleanup runs on an interval and keeps the newest worktrees up to the configured maximum count.
+Cursor 3.5 keeps a modified time checkpoint for the machine worktree root and for each workspace subdirectory. On startup, Cursor re-scans the filesystem unless those timestamps prove nothing changed since the last discovery. This avoids skipping new worktrees that were created while Cursor was closed and eliminates the older `worktree.discoveryComplete` flag.
+
+## Worktrees cleanup
+
+The cleanup behavior in this section reflects Cursor 3.5 and later.
+
+Cursor can clean up older worktrees automatically to limit disk usage. Cleanup runs on an interval and keeps the newest worktrees up to the configured machine-wide maximum count across every workspace on the device.
 
 ```json
 {
   "cursor.worktreeCleanupIntervalHours": 6,
-  "cursor.worktreeMaxCount": 20
+  "cursor.worktreeMaxCount": 25
 }
 ```
 
-Use these settings to control cleanup:
+Use these machine-scoped settings to control cleanup:
 
-- **`cursor.worktreeCleanupIntervalHours`**: how often Cursor checks for old worktrees.
-- **`cursor.worktreeMaxCount`**: the maximum number of worktrees Cursor keeps before cleaning up older ones.
+- **`cursor.worktreeCleanupIntervalHours`**: how often Cursor checks for old worktrees. Cursor 3.5 catches up after restarts by scheduling a delayed cleanup if the last successful run is older than this interval.
+- **`cursor.worktreeMaxCount`**: the maximum number of worktrees Cursor keeps before cleaning up older ones. The default cap is 25 worktrees per machine, and all workspaces contribute toward the same limit.
+
+Cursor re-discovers the worktree root on every cleanup pass, so worktrees created outside the manager (for example, worktrees created by `/worktree` skills or `git worktree add`) are eligible for deletion. When creating a worktree would exceed the cap, Cursor debounces bursts of events and starts an immediate cleanup instead of waiting for the next interval.
 
 ## Worktree Skills in Editor Window
 
