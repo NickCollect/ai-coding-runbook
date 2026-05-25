@@ -1,5 +1,37 @@
 # Changelog
 
+## 0.104.1 (2026-05-21)
+
+Full Changelog: [v0.104.0...v0.104.1](https://github.com/anthropics/anthropic-sdk-python/compare/v0.104.0...v0.104.1)
+
+### Bug Fixes
+
+* **streaming:** carry encrypted_content through beta compaction accumulator ([#1821](https://github.com/anthropics/anthropic-sdk-python/issues/1821)) ([f7a720c](https://github.com/anthropics/anthropic-sdk-python/commit/f7a720c514cc5e428b310f46249ca1c807894c2e))
+
+## 0.104.0 (2026-05-21)
+
+Full Changelog: [v0.103.1...v0.104.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.103.1...v0.104.0)
+
+### Features
+
+* **api:** Add support for thinking-token-count beta for estimated tokens in thinking block deltas when streaming ([80d0fdf](https://github.com/anthropics/anthropic-sdk-python/commit/80d0fdf460d6cd4f190681fd2241baf8ed76cc5f))
+
+## 0.103.1 (2026-05-19)
+
+Full Changelog: [v0.103.0...v0.103.1](https://github.com/anthropics/anthropic-sdk-python/compare/v0.103.0...v0.103.1)
+
+### Bug Fixes
+
+* **runner:** skip tool calls SessionToolRunner does not own ([#1817](https://github.com/anthropics/anthropic-sdk-python/issues/1817)) ([9425c6a](https://github.com/anthropics/anthropic-sdk-python/commit/9425c6a0c6ff5e1d459ac081914f3df496365884))
+
+## 0.103.0 (2026-05-19)
+
+Full Changelog: [v0.102.0...v0.103.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.102.0...v0.103.0)
+
+### Features
+
+* **client:** Add support for self-hosted sandboxes in CMA with sandbox helpers ([e5625b0](https://github.com/anthropics/anthropic-sdk-python/commit/e5625b0ae2a1e9d25847a53217c8fd70fa67c5ed))
+
 ## 0.102.0 (2026-05-13)
 
 Full Changelog: [v0.101.0...v0.102.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.101.0...v0.102.0)

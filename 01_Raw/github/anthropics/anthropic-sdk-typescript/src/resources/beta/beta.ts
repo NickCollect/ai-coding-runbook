@@ -1,26 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as EnvironmentsAPI from './environments';
-import {
-  BetaCloudConfig,
-  BetaCloudConfigParams,
-  BetaEnvironment,
-  BetaEnvironmentDeleteResponse,
-  BetaEnvironmentsPageCursor,
-  BetaLimitedNetwork,
-  BetaLimitedNetworkParams,
-  BetaPackages,
-  BetaPackagesParams,
-  BetaUnrestrictedNetwork,
-  EnvironmentArchiveParams,
-  EnvironmentCreateParams,
-  EnvironmentDeleteParams,
-  EnvironmentListParams,
-  EnvironmentRetrieveParams,
-  EnvironmentUpdateParams,
-  Environments,
-} from './environments';
 import * as FilesAPI from './files';
 import {
   BetaFileScope,
@@ -103,7 +83,13 @@ import {
   BetaManagedAgentsAgentToolConfig,
   BetaManagedAgentsAgentToolConfigParams,
   BetaManagedAgentsAgentToolset20260401,
+  BetaManagedAgentsAgentToolset20260401BashInput,
+  BetaManagedAgentsAgentToolset20260401EditInput,
+  BetaManagedAgentsAgentToolset20260401GlobInput,
+  BetaManagedAgentsAgentToolset20260401GrepInput,
   BetaManagedAgentsAgentToolset20260401Params,
+  BetaManagedAgentsAgentToolset20260401ReadInput,
+  BetaManagedAgentsAgentToolset20260401WriteInput,
   BetaManagedAgentsAgentToolsetDefaultConfig,
   BetaManagedAgentsAgentToolsetDefaultConfigParams,
   BetaManagedAgentsAgentsPageCursor,
@@ -129,9 +115,32 @@ import {
   BetaManagedAgentsMultiagentCoordinator,
   BetaManagedAgentsMultiagentCoordinatorParams,
   BetaManagedAgentsMultiagentSelfParams,
+  BetaManagedAgentsSessionThreadAgent,
   BetaManagedAgentsSkillParams,
   BetaManagedAgentsURLMCPServerParams,
 } from './agents/agents';
+import * as EnvironmentsAPI from './environments/environments';
+import {
+  BetaCloudConfig,
+  BetaCloudConfigParams,
+  BetaEnvironment,
+  BetaEnvironmentDeleteResponse,
+  BetaEnvironmentsPageCursor,
+  BetaLimitedNetwork,
+  BetaLimitedNetworkParams,
+  BetaPackages,
+  BetaPackagesParams,
+  BetaSelfHostedConfig,
+  BetaSelfHostedConfigParams,
+  BetaUnrestrictedNetwork,
+  EnvironmentArchiveParams,
+  EnvironmentCreateParams,
+  EnvironmentDeleteParams,
+  EnvironmentListParams,
+  EnvironmentRetrieveParams,
+  EnvironmentUpdateParams,
+  Environments,
+} from './environments/environments';
 import * as MemoryStoresAPI from './memory-stores/memory-stores';
 import {
   BetaManagedAgentsDeletedMemoryStore,
@@ -378,10 +387,13 @@ import {
   BetaManagedAgentsOutcomeEvaluationResource,
   BetaManagedAgentsSession,
   BetaManagedAgentsSessionAgent,
+  BetaManagedAgentsSessionAgentUpdate,
   BetaManagedAgentsSessionMultiagentCoordinator,
   BetaManagedAgentsSessionStats,
+  BetaManagedAgentsSessionUpdatedEvent,
   BetaManagedAgentsSessionUsage,
   BetaManagedAgentsSessionsPageCursor,
+  BetaManagedAgentsUserToolResultEvent,
   SessionArchiveParams,
   SessionCreateParams,
   SessionDeleteParams,
@@ -457,7 +469,8 @@ export type AnthropicBeta =
   | 'user-profiles-2026-03-24'
   | 'advisor-tool-2026-03-01'
   | 'managed-agents-2026-04-01'
-  | 'cache-diagnosis-2026-04-07';
+  | 'cache-diagnosis-2026-04-07'
+  | 'thinking-token-count-2026-05-13';
 
 export interface BetaAPIError {
   message: string;
@@ -800,7 +813,13 @@ export declare namespace Beta {
     type BetaManagedAgentsAgentToolsetDefaultConfig as BetaManagedAgentsAgentToolsetDefaultConfig,
     type BetaManagedAgentsAgentToolsetDefaultConfigParams as BetaManagedAgentsAgentToolsetDefaultConfigParams,
     type BetaManagedAgentsAgentToolset20260401 as BetaManagedAgentsAgentToolset20260401,
+    type BetaManagedAgentsAgentToolset20260401BashInput as BetaManagedAgentsAgentToolset20260401BashInput,
+    type BetaManagedAgentsAgentToolset20260401EditInput as BetaManagedAgentsAgentToolset20260401EditInput,
+    type BetaManagedAgentsAgentToolset20260401GlobInput as BetaManagedAgentsAgentToolset20260401GlobInput,
+    type BetaManagedAgentsAgentToolset20260401GrepInput as BetaManagedAgentsAgentToolset20260401GrepInput,
     type BetaManagedAgentsAgentToolset20260401Params as BetaManagedAgentsAgentToolset20260401Params,
+    type BetaManagedAgentsAgentToolset20260401ReadInput as BetaManagedAgentsAgentToolset20260401ReadInput,
+    type BetaManagedAgentsAgentToolset20260401WriteInput as BetaManagedAgentsAgentToolset20260401WriteInput,
     type BetaManagedAgentsAlwaysAllowPolicy as BetaManagedAgentsAlwaysAllowPolicy,
     type BetaManagedAgentsAlwaysAskPolicy as BetaManagedAgentsAlwaysAskPolicy,
     type BetaManagedAgentsAnthropicSkill as BetaManagedAgentsAnthropicSkill,
@@ -823,6 +842,7 @@ export declare namespace Beta {
     type BetaManagedAgentsMultiagentCoordinator as BetaManagedAgentsMultiagentCoordinator,
     type BetaManagedAgentsMultiagentCoordinatorParams as BetaManagedAgentsMultiagentCoordinatorParams,
     type BetaManagedAgentsMultiagentSelfParams as BetaManagedAgentsMultiagentSelfParams,
+    type BetaManagedAgentsSessionThreadAgent as BetaManagedAgentsSessionThreadAgent,
     type BetaManagedAgentsSkillParams as BetaManagedAgentsSkillParams,
     type BetaManagedAgentsURLMCPServerParams as BetaManagedAgentsURLMCPServerParams,
     type BetaManagedAgentsAgentsPageCursor as BetaManagedAgentsAgentsPageCursor,
@@ -843,6 +863,8 @@ export declare namespace Beta {
     type BetaLimitedNetworkParams as BetaLimitedNetworkParams,
     type BetaPackages as BetaPackages,
     type BetaPackagesParams as BetaPackagesParams,
+    type BetaSelfHostedConfig as BetaSelfHostedConfig,
+    type BetaSelfHostedConfigParams as BetaSelfHostedConfigParams,
     type BetaUnrestrictedNetwork as BetaUnrestrictedNetwork,
     type BetaEnvironmentsPageCursor as BetaEnvironmentsPageCursor,
     type EnvironmentCreateParams as EnvironmentCreateParams,
@@ -869,9 +891,12 @@ export declare namespace Beta {
     type BetaManagedAgentsOutcomeEvaluationResource as BetaManagedAgentsOutcomeEvaluationResource,
     type BetaManagedAgentsSession as BetaManagedAgentsSession,
     type BetaManagedAgentsSessionAgent as BetaManagedAgentsSessionAgent,
+    type BetaManagedAgentsSessionAgentUpdate as BetaManagedAgentsSessionAgentUpdate,
     type BetaManagedAgentsSessionMultiagentCoordinator as BetaManagedAgentsSessionMultiagentCoordinator,
     type BetaManagedAgentsSessionStats as BetaManagedAgentsSessionStats,
+    type BetaManagedAgentsSessionUpdatedEvent as BetaManagedAgentsSessionUpdatedEvent,
     type BetaManagedAgentsSessionUsage as BetaManagedAgentsSessionUsage,
+    type BetaManagedAgentsUserToolResultEvent as BetaManagedAgentsUserToolResultEvent,
     type BetaManagedAgentsSessionsPageCursor as BetaManagedAgentsSessionsPageCursor,
     type SessionCreateParams as SessionCreateParams,
     type SessionRetrieveParams as SessionRetrieveParams,
