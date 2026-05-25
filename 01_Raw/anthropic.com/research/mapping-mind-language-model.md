@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/mapping-mind-language-model
-fetched_at: 2026-05-18T05:03:39.018268+00:00
+fetched_at: 2026-05-25T05:17:08.239379+00:00
 title: "Mapping the Mind of a Large Language Model \\ Anthropic"
 ---
 
@@ -30,7 +30,7 @@ There was both an engineering challenge (the raw sizes of the models involved re
 
 As for the scientific risk, the proof is in the pudding.
 
-We successfully extracted millions of features from the middle layer of Claude 3.0 Sonnet, (a member of our current, state-of-the-art model family, currently available on [claude.ai](https://claude.ai/redirect/website.v1.b1e91954-cb9c-4711-8653-65844b570815)), providing a rough conceptual map of its internal states halfway through its computation. This is the first ever detailed look inside a modern, production-grade large language model.
+We successfully extracted millions of features from the middle layer of Claude 3.0 Sonnet, (a member of our current, state-of-the-art model family, currently available on [claude.ai](https://claude.ai/redirect/website.v1.8a61aeb9-9f06-4eb8-8b21-9a436c383d89)), providing a rough conceptual map of its internal states halfway through its computation. This is the first ever detailed look inside a modern, production-grade large language model.
 
 Whereas the features we found in the toy language model were rather superficial, the features we found in Sonnet have a depth, breadth, and abstraction reflecting Sonnet's advanced capabilities.
 
@@ -92,6 +92,12 @@ For full details, please read our paper, "[Scaling Monosemanticity: Extracting I
 
 ## Related content
 
+### Project Glasswing: An initial update
+
+An early update on what we've learned from Project Glasswing.
+
+[Read more](https://www.anthropic.com/research/glasswing-initial-update)
+
 ### 2028: Two scenarios for global AI leadership
 
 Our views on the AI competition between the US and China.
@@ -103,9 +109,3 @@ Our views on the AI competition between the US and China.
 New research on how we've reduced agentic misalignment.
 
 [Read more](https://www.anthropic.com/research/teaching-claude-why)
-
-### Natural Language Autoencoders: Turning Claude’s thoughts into text
-
-AI models like Claude talk in words but think in numbers. In this study we train Claude to translate its thoughts into human-readable text.
-
-[Read more](https://www.anthropic.com/research/natural-language-autoencoders)

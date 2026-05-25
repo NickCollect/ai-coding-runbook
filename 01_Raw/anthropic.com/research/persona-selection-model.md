@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/persona-selection-model
-fetched_at: 2026-05-18T05:03:43.329273+00:00
+fetched_at: 2026-05-25T05:17:11.797838+00:00
 title: "The persona selection model \\ Anthropic"
 ---
 
@@ -66,6 +66,12 @@ Read the [full post](https://alignment.anthropic.com/2026/psm).
 
 ## Related content
 
+### Project Glasswing: An initial update
+
+An early update on what we've learned from Project Glasswing.
+
+[Read more](https://www.anthropic.com/research/glasswing-initial-update)
+
 ### 2028: Two scenarios for global AI leadership
 
 Our views on the AI competition between the US and China.
@@ -77,9 +83,3 @@ Our views on the AI competition between the US and China.
 New research on how we've reduced agentic misalignment.
 
 [Read more](https://www.anthropic.com/research/teaching-claude-why)
-
-### Natural Language Autoencoders: Turning Claude’s thoughts into text
-
-AI models like Claude talk in words but think in numbers. In this study we train Claude to translate its thoughts into human-readable text.
-
-[Read more](https://www.anthropic.com/research/natural-language-autoencoders)

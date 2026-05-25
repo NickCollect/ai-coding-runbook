@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/teaching-claude-why
-fetched_at: 2026-05-18T05:04:00.666106+00:00
+fetched_at: 2026-05-25T05:17:28.381087+00:00
 title: "Teaching Claude why \\ Anthropic"
 ---
 
@@ -26,7 +26,7 @@ In this post, we’ll discuss a few of the updates we’ve made to alignment tra
 
 **The quality and diversity of data is crucial.** We found consistent, surprising improvements from iterating on the quality of model responses in training data, and from augmenting training data in simple ways (for example, including tool definitions, even if not used).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/d381a934380d3c6035b6c82c1b36068a970a52f2-1920x1080.png)
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4b620bad4cb1fdc886b8d13c4c6d3f1f50453901-1920x1080.png)
 
 We align Claude by training on constitutionally aligned documents, high-quality chat data that demonstrates constitutional responses to difficult questions, and a diverse set of environments. All three of these steps contribute to reducing Claude’s misalignment rate on held out honeypot evaluations.
 
@@ -114,6 +114,12 @@ We are optimistic about further efforts to discover alignment failures in curren
 
 ## Related content
 
+### Project Glasswing: An initial update
+
+An early update on what we've learned from Project Glasswing.
+
+[Read more](https://www.anthropic.com/research/glasswing-initial-update)
+
 ### 2028: Two scenarios for global AI leadership
 
 Our views on the AI competition between the US and China.
@@ -122,10 +128,6 @@ Our views on the AI competition between the US and China.
 
 ### Natural Language Autoencoders: Turning Claude’s thoughts into text
 
-AI models like Claude talk in words but think in numbers. In this study we train Claude to translate its thoughts into human-readable text.
+AI models like Claude talk in words but think in numbers. In this study, we train Claude to translate its thoughts into human-readable text.
 
 [Read more](https://www.anthropic.com/research/natural-language-autoencoders)
-
-### Donating our open-source alignment tool
-
-[Read more](https://www.anthropic.com/research/donating-open-source-petri)

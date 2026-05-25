@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/engineering-challenges-interpretability
-fetched_at: 2026-05-18T05:03:25.820166+00:00
+fetched_at: 2026-05-25T05:16:49.434359+00:00
 title: "The engineering challenges of scaling interpretability \\ Anthropic"
 ---
 
@@ -72,6 +72,12 @@ If you’re an engineer who fits this bill, and who is passionate about AI safet
 
 ## Related content
 
+### Project Glasswing: An initial update
+
+An early update on what we've learned from Project Glasswing.
+
+[Read more](https://www.anthropic.com/research/glasswing-initial-update)
+
 ### 2028: Two scenarios for global AI leadership
 
 Our views on the AI competition between the US and China.
@@ -83,9 +89,3 @@ Our views on the AI competition between the US and China.
 New research on how we've reduced agentic misalignment.
 
 [Read more](https://www.anthropic.com/research/teaching-claude-why)
-
-### Natural Language Autoencoders: Turning Claude’s thoughts into text
-
-AI models like Claude talk in words but think in numbers. In this study we train Claude to translate its thoughts into human-readable text.
-
-[Read more](https://www.anthropic.com/research/natural-language-autoencoders)

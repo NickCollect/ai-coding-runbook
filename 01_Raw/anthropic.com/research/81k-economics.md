@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/81k-economics
-fetched_at: 2026-05-18T05:02:57.434238+00:00
+fetched_at: 2026-05-25T05:16:06.204383+00:00
 title: "What 81,000 people told us about the economics of AI \\ Anthropic"
 ---
 
@@ -126,6 +126,12 @@ Additionally, we thank Miriam Chaum, Ankur Rathi, Santi Ruiz, and David Saunders
 
 ## Related content
 
+### Project Glasswing: An initial update
+
+An early update on what we've learned from Project Glasswing.
+
+[Read more](https://www.anthropic.com/research/glasswing-initial-update)
+
 ### 2028: Two scenarios for global AI leadership
 
 Our views on the AI competition between the US and China.
@@ -137,9 +143,3 @@ Our views on the AI competition between the US and China.
 New research on how we've reduced agentic misalignment.
 
 [Read more](https://www.anthropic.com/research/teaching-claude-why)
-
-### Natural Language Autoencoders: Turning Claude’s thoughts into text
-
-AI models like Claude talk in words but think in numbers. In this study we train Claude to translate its thoughts into human-readable text.
-
-[Read more](https://www.anthropic.com/research/natural-language-autoencoders)
