@@ -1263,6 +1263,14 @@ fn compaction_event_serializes_expected_shape() {
 }
 
 #[test]
+fn compaction_implementation_serializes_remote_v2() {
+    let payload = serde_json::to_value(CompactionImplementation::ResponsesCompactionV2)
+        .expect("serialize compaction implementation");
+
+    assert_eq!(payload, json!("responses_compaction_v2"));
+}
+
+#[test]
 fn app_used_dedupe_is_keyed_by_turn_and_connector() {
     let (sender, _receiver) = mpsc::channel(1);
     let queue = AnalyticsEventsQueue {
@@ -3628,6 +3636,7 @@ async fn turn_event_counts_completed_tool_items() {
             status: McpToolCallStatus::Completed,
             arguments: json!({}),
             mcp_app_resource_uri: None,
+            plugin_id: None,
             result: None,
             error: None,
             duration_ms: Some(2),

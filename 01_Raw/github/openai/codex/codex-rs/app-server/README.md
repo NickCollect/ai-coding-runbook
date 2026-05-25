@@ -140,6 +140,7 @@ Example with notification opt-out:
 - `thread/turns/list` — experimental; page through a stored thread’s turn history without resuming it; supports cursor-based pagination with `sortDirection`, `itemsView`, `nextCursor`, and `backwardsCursor`.
 - `thread/turns/items/list` — experimental; reserved for paging full items for one turn. The API shape is present, but app-server currently returns an unsupported-method JSON-RPC error.
 - `thread/metadata/update` — patch stored thread metadata in sqlite; currently supports updating persisted `gitInfo` fields and returns the refreshed `thread`.
+- `thread/settings/update` — experimental; queue a partial update to a loaded thread’s next-turn settings without starting a turn or adding transcript items. Omitted fields leave settings unchanged; `serviceTier: null` clears the tier; `sandboxPolicy` and `permissions` cannot be combined. Returns `{}` when the update is accepted and emits `thread/settings/updated` with the full effective settings only if they actually change. `turn/start` settings overrides emit the same notification when they change the stored settings.
 - `thread/memoryMode/set` — experimental; set a thread’s persisted memory eligibility to `"enabled"` or `"disabled"` for either a loaded thread or a stored rollout; returns `{}` on success.
 - `memory/reset` — experimental; clear the current `CODEX_HOME/memories` directory and reset persisted memory stage data in sqlite while preserving existing thread memory modes; returns `{}` on success.
 - `thread/goal/set` — create or update the single persisted goal for a materialized thread; returns the current goal and emits `thread/goal/updated`.
@@ -147,6 +148,7 @@ Example with notification opt-out:
 - `thread/goal/clear` — clear the current persisted goal for a materialized thread; returns whether a goal was removed and emits `thread/goal/cleared` when state changes.
 - `thread/goal/updated` — notification emitted whenever a thread goal changes; includes the full current goal.
 - `thread/goal/cleared` — notification emitted whenever a thread goal is removed.
+- `thread/settings/updated` — experimental notification emitted to subscribed clients when a loaded thread’s effective next-turn settings change; includes `threadId` and the full `threadSettings`.
 - `thread/status/changed` — notification emitted when a loaded thread’s status changes (`threadId` + new `status`).
 - `thread/archive` — move a thread’s rollout file into the archived directory and attempt to move any spawned descendant thread rollout files; returns `{}` on success and emits `thread/archived` for each archived thread.
 - `thread/unsubscribe` — unsubscribe this connection from thread turn/item events. If this was the last subscriber, the server keeps the thread loaded and unloads it only after it has had no subscribers and no thread activity for 30 minutes, then emits `thread/closed`.
@@ -186,10 +188,11 @@ Example with notification opt-out:
 - `fs/watch` — subscribe this connection to filesystem change notifications for an absolute file or directory path and caller-provided `watchId`; returns the canonicalized `path`.
 - `fs/unwatch` — stop sending notifications for a prior `fs/watch`; returns `{}`.
 - `fs/changed` — notification emitted when watched paths change, including the `watchId` and `changedPaths`.
-- `model/list` — list available models (set `includeHidden: true` to include entries with `hidden: true`), with reasoning effort options, `additionalSpeedTiers`, optional legacy `upgrade` model ids, optional `upgradeInfo` metadata (`model`, `upgradeCopy`, `modelLink`, `migrationMarkdown`), and optional `availabilityNux` metadata.
+- `model/list` — list available models (set `includeHidden: true` to include entries with `hidden: true`), with reasoning effort options, `additionalSpeedTiers`, `serviceTiers`, optional `defaultServiceTier`, optional legacy `upgrade` model ids, optional `upgradeInfo` metadata (`model`, `upgradeCopy`, `modelLink`, `migrationMarkdown`), and optional `availabilityNux` metadata.
 - `modelProvider/capabilities/read` — read provider-level capabilities for the currently configured model provider.
-- `experimentalFeature/list` — list feature flags with stage metadata (`beta`, `underDevelopment`, `stable`, etc.), enabled/default-enabled state, and cursor pagination. For non-beta flags, `displayName`/`description`/`announcement` are `null`.
-- `experimentalFeature/enablement/set` — patch the in-memory process-wide runtime feature enablement for the currently supported feature keys (`apps`, `memories`, `plugins`, `tool_search`, `tool_suggest`, `tool_call_mcp_elicitation`). For each feature, precedence is: cloud requirements > --enable <feature_name> > config.toml > experimentalFeature/enablement/set (new) > code default.
+- `experimentalFeature/list` — list feature flags with stage metadata (`beta`, `underDevelopment`, `stable`, etc.), enabled/default-enabled state, and cursor pagination. Pass `threadId` when showing feature state for an existing loaded thread so `enabled` is computed from that thread's refreshed config, including project-local config for the thread's cwd; if omitted, the server uses its default config resolution context. For non-beta flags, `displayName`/`description`/`announcement` are `null`.
+- `permissionProfile/list` — beta; list available permission profile ids with optional display `description` text, using cursor pagination. Pass `cwd` when the caller needs project-local `[permissions.<id>]` entries to be included in the current catalog view.
+- `experimentalFeature/enablement/set` — patch the in-memory process-wide runtime feature enablement for the currently supported feature keys (`apps`, `memories`, `plugins`, `tool_suggest`, `tool_call_mcp_elicitation`). For each feature, precedence is: cloud requirements > --enable <feature_name> > config.toml > experimentalFeature/enablement/set (new) > code default.
 - `environment/add` — experimental; add or replace a named remote environment by `environmentId` and `execServerUrl` for later selection by `thread/start` or `turn/start`; returns `{}` and does not change the default environment.
 - `collaborationMode/list` — list available collaboration mode presets (experimental, no pagination). Built-in presets do not select a model; the Plan preset selects medium reasoning effort. This response omits built-in developer instructions; clients should either pass `settings.developer_instructions: null` when setting a mode to use Codex's built-in instructions, or provide their own instructions explicitly.
 - `skills/list` — list skills for one or more `cwd` values (optional `forceReload`).
@@ -198,6 +201,7 @@ Example with notification opt-out:
 - `marketplace/remove` — remove a configured marketplace by name from the user marketplace config, and delete its installed marketplace root when one exists.
 - `marketplace/upgrade` — upgrade all configured Git plugin marketplaces, or one named marketplace when `marketplaceName` is provided. Returns selected marketplace names, upgraded roots, and per-marketplace errors.
 - `plugin/list` — list discovered plugin marketplaces and plugin state, including effective marketplace install/auth policy metadata, plugin `availability` (`AVAILABLE` by default or `DISABLED_BY_ADMIN` for remote plugins blocked upstream), fail-open `marketplaceLoadErrors` entries for marketplace files that could not be parsed or loaded, and best-effort `featuredPluginIds` for the official curated marketplace. `interface.category` uses the marketplace category when present; otherwise it falls back to the plugin manifest category (**under development; do not call from production clients yet**).
+- `plugin/installed` — list installed plugin rows plus any explicitly requested local install-suggestion plugin names, without fetching the broader remote catalog. Mention surfaces can use this narrower view when they need plugin mention payloads rather than plugin-page discovery data (**under development; do not call from production clients yet**).
 - `plugin/read` — read one plugin by `marketplacePath` plus `pluginName`, returning marketplace info, a list-style `summary`, manifest descriptions/interface metadata, and bundled skills/hooks/apps/MCP server names. Returned plugin skills include their current `enabled` state after local config filtering; bundled hooks are returned as lightweight declaration summaries keyed for correlation with `hooks/list`. Plugin app summaries also include `needsAuth` when the server can determine connector accessibility (**under development; do not call from production clients yet**).
 - `plugin/skill/read` — read remote plugin skill markdown on demand by `remoteMarketplaceName`, `remotePluginId`, and `skillName`. This lets clients preview uninstalled remote plugin skills without downloading the plugin bundle.
 - `skills/changed` — notification emitted when watched local skill files change.
@@ -222,7 +226,7 @@ Example with notification opt-out:
 - `externalAgentConfig/import` — apply selected external-agent migration items by passing explicit `migrationItems` with `cwd` (`null` for home) and any plugin/session `details` returned by detect. When a request includes migration items, the server emits `externalAgentConfig/import/completed` once after the full import finishes (immediately after the response when everything completed synchronously, or after background imports finish).
 - `config/value/write` — write a single config key/value to the user's config.toml on disk; dotted paths such as `desktop.someKey` use the same generic write surface.
 - `config/batchWrite` — apply multiple config edits atomically to the user's config.toml on disk, with optional `reloadUserConfig: true` to hot-reload loaded threads, including multiple `desktop.*` edits.
-- `configRequirements/read` — fetch loaded requirements constraints from `requirements.toml` and/or MDM (or `null` if none are configured), including allow-lists (`allowedApprovalPolicies`, `allowedSandboxModes`, `allowedWebSearchModes`), lifecycle hook lockdown (`allowManagedHooksOnly`), pinned feature values (`featureRequirements`), managed lifecycle hooks (`hooks`), `enforceResidency`, and `network` constraints such as canonical domain/socket permissions plus `managedAllowedDomainsOnly` and `dangerFullAccessDenylistOnly`.
+- `configRequirements/read` — fetch loaded requirements constraints from `requirements.toml` and/or MDM (or `null` if none are configured), including allow-lists (`allowedApprovalPolicies`, `allowedSandboxModes`, `allowedWebSearchModes`, `allowedPermissions`), lifecycle hook lockdown (`allowManagedHooksOnly`), computer use policy (`computerUse`), pinned feature values (`featureRequirements`), managed lifecycle hooks (`hooks`), `enforceResidency`, and `network` constraints such as canonical domain/socket permissions plus `managedAllowedDomainsOnly` and `dangerFullAccessDenylistOnly`.
 
 ### Example: Start or resume a thread
 
@@ -495,7 +499,7 @@ Experimental: use `memory/reset` to clear local memory artifacts and sqlite-back
 
 ### Example: Set and update a thread goal
 
-Use `thread/goal/set` to create or update the current goal for a materialized thread. Clients can set `budgetLimited` when they stop because a token budget is exhausted or nearly exhausted; the system also sets it when accounting crosses a configured token budget.
+Use `thread/goal/set` to create or update the current goal for a materialized thread. Clients can set `budgetLimited` when they stop because a token budget is exhausted or nearly exhausted, `blocked` when progress is waiting on outside intervention, and `usageLimited` when usage availability stops further work. The system also sets `budgetLimited` when accounting crosses a configured token budget and `usageLimited` when a turn ends on a hard usage-limit error.
 
 ```json
 { "method": "thread/goal/set", "id": 27, "params": {
@@ -528,12 +532,12 @@ Use `thread/goal/set` to create or update the current goal for a materialized th
 ```json
 { "method": "thread/goal/set", "id": 28, "params": {
     "threadId": "thr_123",
-    "status": "paused"
+    "status": "blocked"
 } }
 { "id": 28, "result": { "goal": {
     "threadId": "thr_123",
     "objective": "Keep improving the benchmark until p95 latency is under 120ms",
-    "status": "paused",
+    "status": "blocked",
     "tokenBudget": 200000,
     "tokensUsed": 10000,
     "timeUsedSeconds": 60,
@@ -718,7 +722,7 @@ Invoke an app by including `$<app-slug>` in the text input and adding a `mention
 
 ### Example: Start a turn (invoke a plugin)
 
-Invoke a plugin by including a UI mention token such as `@sample` in the text input and adding a `mention` input item with the exact `plugin://<plugin-name>@<marketplace-name>` path returned by `plugin/list`.
+Invoke a plugin by including a UI mention token such as `@sample` in the text input and adding a `mention` input item with the exact `plugin://<plugin-name>@<marketplace-name>` path returned by `plugin/installed` or `plugin/list`.
 
 ```json
 { "method": "turn/start", "id": 35, "params": {
@@ -831,7 +835,7 @@ Use `thread/backgroundTerminals/clean` to terminate all running background termi
 ### Example: Steer an active turn
 
 Use `turn/steer` to append additional user input to the currently active regular turn. This does
-not emit `turn/started` and does not accept turn context overrides.
+not emit `turn/started` and does not accept thread settings overrides.
 
 ```json
 { "method": "turn/steer", "id": 32, "params": {
@@ -926,7 +930,7 @@ Run a standalone command (argv vector) in the server’s sandbox without creatin
     "cwd": "/Users/me/project",                    // optional; defaults to server cwd
     "env": { "FOO": "override" },                  // optional; merges into the server env and overrides matching names
     "size": { "rows": 40, "cols": 120 },           // optional; PTY size in character cells, only valid with tty=true
-    "permissionProfile": { "id": ":workspace", "extends": null }, // optional; defaults to user config
+    "permissionProfile": ":workspace",             // optional profile id; defaults to user config
     "outputBytesCap": 1048576,                     // optional; per-stream capture cap
     "disableOutputCap": false,                     // optional; cannot be combined with outputBytesCap
     "timeoutMs": 10000,                            // optional; ms timeout; defaults to server timeout
@@ -1227,7 +1231,7 @@ Today both notifications carry an empty `items` array even when item events were
 - `reasoning` — `{id, summary, content}` where `summary` holds streamed reasoning summaries (applicable for most OpenAI models) and `content` holds raw reasoning blocks (applicable for e.g. open source models).
 - `commandExecution` — `{id, command, cwd, status, commandActions, aggregatedOutput?, exitCode?, durationMs?}` for sandboxed commands; `status` is `inProgress`, `completed`, `failed`, or `declined`.
 - `fileChange` — `{id, changes, status}` describing proposed edits; `changes` list `{path, kind, diff}` and `status` is `inProgress`, `completed`, `failed`, or `declined`.
-- `mcpToolCall` — `{id, server, tool, status, arguments, result?, error?}` describing MCP calls; `status` is `inProgress`, `completed`, or `failed`.
+- `mcpToolCall` — `{id, server, tool, status, arguments, mcpAppResourceUri?, pluginId, result?, error?}` describing MCP calls; `status` is `inProgress`, `completed`, or `failed`.
 - `collabToolCall` — `{id, tool, status, senderThreadId, receiverThreadId?, newThreadId?, prompt?, agentStatus?}` describing collab tool calls (`spawn_agent`, `send_input`, `resume_agent`, `wait`, `close_agent`); `status` is `inProgress`, `completed`, or `failed`.
 - `webSearch` — `{id, query, action?}` for a web search request issued by the agent; `action` mirrors the Responses API web_search action payload (`search`, `open_page`, `find_in_page`) and may be omitted until completion.
 - `imageView` — `{id, path}` emitted when the agent invokes the image viewer tool.
@@ -1676,7 +1680,7 @@ The server also emits `app/list/updated` notifications whenever either source (a
 }
 ```
 
-Invoke an app by inserting `$<app-slug>` in the text input. The slug is derived from the app name and lowercased with non-alphanumeric characters replaced by `-` (for example, "Demo App" becomes `$demo-app`). Add a `mention` input item (recommended) so the server uses the exact `app://<connector-id>` path rather than guessing by name. Plugins use the same `mention` item shape, but with `plugin://<plugin-name>@<marketplace-name>` paths from `plugin/list`.
+Invoke an app by inserting `$<app-slug>` in the text input. The slug is derived from the app name and lowercased with non-alphanumeric characters replaced by `-` (for example, "Demo App" becomes `$demo-app`). Add a `mention` input item (recommended) so the server uses the exact `app://<connector-id>` path rather than guessing by name. Plugins use the same `mention` item shape, but with `plugin://<plugin-name>@<marketplace-name>` paths from `plugin/installed` or `plugin/list`.
 
 Example:
 
@@ -1927,7 +1931,7 @@ reason up through the containing type:
 
 ```rust
 #[derive(ExperimentalApi)]
-struct ProfileV2 {
+struct Config {
     #[experimental(nested)]
     approval_policy: Option<AskForApproval>,
 }
@@ -1946,5 +1950,5 @@ For server-initiated request payloads, annotate the field the same way so schema
 5. Verify the protocol crate:
 
    ```bash
-   cargo test -p codex-app-server-protocol
+   just test -p codex-app-server-protocol
    ```

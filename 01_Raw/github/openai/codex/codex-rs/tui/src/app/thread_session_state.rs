@@ -8,6 +8,30 @@ use codex_protocol::models::ActivePermissionProfile;
 use codex_protocol::models::PermissionProfile;
 
 impl App {
+    pub(super) async fn sync_active_thread_service_tier_to_cached_session(&mut self) {
+        let Some(active_thread_id) = self.active_thread_id else {
+            return;
+        };
+
+        let service_tier = self.chat_widget.current_service_tier().map(str::to_string);
+        let update_session = |session: &mut ThreadSessionState| {
+            session.service_tier = service_tier.clone();
+        };
+
+        if self.primary_thread_id == Some(active_thread_id)
+            && let Some(session) = self.primary_session_configured.as_mut()
+        {
+            update_session(session);
+        }
+
+        if let Some(channel) = self.thread_event_channels.get(&active_thread_id) {
+            let mut store = channel.store.lock().await;
+            if let Some(session) = store.session.as_mut() {
+                update_session(session);
+            }
+        }
+    }
+
     pub(super) async fn sync_active_thread_permission_settings_to_cached_session(&mut self) {
         let Some(active_thread_id) = self.active_thread_id else {
             return;
@@ -54,10 +78,16 @@ impl App {
     ) -> ThreadSessionState {
         let permission_profile = self.current_permission_profile();
         let active_permission_profile = self.current_active_permission_profile();
-        let mut session = self
-            .primary_session_configured
-            .clone()
-            .unwrap_or(ThreadSessionState {
+        let mut session = if let Some(mut session) = self.primary_session_configured.clone() {
+            if session.thread_id != thread_id {
+                // `thread/read` does not include thread settings, so do not carry
+                // thread-scoped state from the currently active session.
+                session.collaboration_mode = None;
+                session.personality = None;
+            }
+            session
+        } else {
+            ThreadSessionState {
                 thread_id,
                 forked_from_id: None,
                 fork_parent_title: None,
@@ -75,10 +105,13 @@ impl App {
                 runtime_workspace_roots: self.config.workspace_roots.clone(),
                 instruction_source_paths: Vec::new(),
                 reasoning_effort: self.chat_widget.current_reasoning_effort(),
+                collaboration_mode: None,
+                personality: None,
                 message_history: None,
                 network_proxy: None,
                 rollout_path: thread.path.clone(),
-            });
+            }
+        };
         session.thread_id = thread_id;
         session.thread_name = thread.name.clone();
         session.model_provider_id = thread.model_provider.clone();
@@ -125,6 +158,7 @@ mod tests {
     use crate::test_support::test_path_buf;
     use codex_app_server_protocol::AskForApproval;
     use codex_config::types::ApprovalsReviewer;
+    use codex_protocol::config_types::ServiceTier;
     use codex_protocol::models::BUILT_IN_PERMISSION_PROFILE_WORKSPACE;
     use codex_protocol::models::ManagedFileSystemPermissions;
     use codex_protocol::models::PermissionProfile;
@@ -153,6 +187,8 @@ mod tests {
             runtime_workspace_roots: vec![cwd.abs()],
             instruction_source_paths: Vec::new(),
             reasoning_effort: None,
+            collaboration_mode: None,
+            personality: None,
             message_history: None,
             network_proxy: None,
             rollout_path: Some(PathBuf::new()),
@@ -269,7 +305,7 @@ mod tests {
                         path: FileSystemPath::GlobPattern {
                             pattern: "**/.env".to_string(),
                         },
-                        access: FileSystemAccessMode::None,
+                        access: FileSystemAccessMode::Deny,
                     },
                 ],
                 glob_scan_max_depth: None,
@@ -298,6 +334,50 @@ mod tests {
             approval_policy: AskForApproval::OnRequest,
             permission_profile: profile,
             ..session
+        };
+        assert_eq!(
+            app.primary_session_configured,
+            Some(expected_session.clone())
+        );
+
+        let store_session = app
+            .thread_event_channels
+            .get(&thread_id)
+            .expect("thread channel")
+            .store
+            .lock()
+            .await
+            .session
+            .clone();
+        assert_eq!(store_session, Some(expected_session));
+    }
+
+    #[tokio::test]
+    async fn service_tier_sync_updates_active_cached_session() {
+        let mut app = make_test_app().await;
+        let thread_id =
+            ThreadId::from_string("00000000-0000-0000-0000-000000000406").expect("valid thread");
+        let session = ThreadSessionState {
+            service_tier: Some(ServiceTier::Fast.request_value().to_string()),
+            ..test_thread_session(thread_id, test_path_buf("/tmp/main"))
+        };
+
+        app.primary_thread_id = Some(thread_id);
+        app.active_thread_id = Some(thread_id);
+        app.primary_session_configured = Some(session.clone());
+        app.thread_event_channels.insert(
+            thread_id,
+            ThreadEventChannel::new_with_session(/*capacity*/ 4, session.clone(), Vec::new()),
+        );
+        app.chat_widget.handle_thread_session(session);
+        app.chat_widget.set_service_tier(/*service_tier*/ None);
+
+        app.sync_active_thread_service_tier_to_cached_session()
+            .await;
+
+        let expected_session = ThreadSessionState {
+            service_tier: None,
+            ..test_thread_session(thread_id, test_path_buf("/tmp/main"))
         };
         assert_eq!(
             app.primary_session_configured,

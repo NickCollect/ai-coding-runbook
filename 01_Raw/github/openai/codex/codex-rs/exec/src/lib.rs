@@ -24,7 +24,6 @@ use codex_app_server_protocol::ConfigWarningNotification;
 use codex_app_server_protocol::JSONRPCErrorError;
 use codex_app_server_protocol::McpServerElicitationAction;
 use codex_app_server_protocol::McpServerElicitationRequestResponse;
-use codex_app_server_protocol::PermissionProfileSelectionParams;
 use codex_app_server_protocol::RequestId;
 use codex_app_server_protocol::ReviewStartParams;
 use codex_app_server_protocol::ReviewStartResponse;
@@ -40,6 +39,7 @@ use codex_app_server_protocol::ThreadReadResponse;
 use codex_app_server_protocol::ThreadResumeParams;
 use codex_app_server_protocol::ThreadResumeResponse;
 use codex_app_server_protocol::ThreadSortKey;
+use codex_app_server_protocol::ThreadSource;
 use codex_app_server_protocol::ThreadSourceKind;
 use codex_app_server_protocol::ThreadStartParams;
 use codex_app_server_protocol::ThreadStartResponse;
@@ -134,7 +134,6 @@ pub use exec_events::TurnStartedEvent;
 pub use exec_events::Usage;
 pub use exec_events::WebSearchItem;
 use serde_json::Value;
-use std::collections::HashMap;
 use std::io::IsTerminal;
 use std::io::Read;
 use std::path::Path;
@@ -262,7 +261,6 @@ pub async fn run_main(cli: Cli, arg0_paths: Arg0DispatchPaths) -> anyhow::Result
         model: model_cli_arg,
         oss,
         oss_provider,
-        config_profile,
         config_profile_v2,
         sandbox_mode: sandbox_mode_cli_arg,
         dangerously_bypass_approvals_and_sandbox,
@@ -376,11 +374,7 @@ pub async fn run_main(cli: Cli, arg0_paths: Arg0DispatchPaths) -> anyhow::Result
     let run_cloud_requirements = cloud_requirements.clone();
 
     let model_provider = if oss {
-        let resolved = resolve_oss_provider(
-            oss_provider.as_deref(),
-            &config_toml,
-            config_profile.clone(),
-        );
+        let resolved = resolve_oss_provider(oss_provider.as_deref(), &config_toml);
 
         if let Some(provider) = resolved {
             Some(provider)
@@ -409,7 +403,6 @@ pub async fn run_main(cli: Cli, arg0_paths: Arg0DispatchPaths) -> anyhow::Result
     let overrides = ConfigOverrides {
         model,
         review_model: None,
-        config_profile,
         // Default to never ask for approvals in headless mode. Feature flags can override.
         approval_policy: Some(AskForApproval::Never),
         approvals_reviewer: None,
@@ -423,7 +416,7 @@ pub async fn run_main(cli: Cli, arg0_paths: Arg0DispatchPaths) -> anyhow::Result
         codex_self_exe: arg0_paths.codex_self_exe.clone(),
         codex_linux_sandbox_exe: arg0_paths.codex_linux_sandbox_exe.clone(),
         main_execve_wrapper_exe: arg0_paths.main_execve_wrapper_exe.clone(),
-        zsh_path: None,
+        default_zsh_path: None,
         base_instructions: None,
         developer_instructions: None,
         personality: None,
@@ -522,9 +515,10 @@ pub async fn run_main(cli: Cli, arg0_paths: Arg0DispatchPaths) -> anyhow::Result
     )?;
     let state_db = codex_core::init_state_db(&config).await;
     let environment_manager = if run_loader_overrides.ignore_user_config {
-        EnvironmentManager::from_env(local_runtime_paths).await?
+        EnvironmentManager::from_env(Some(local_runtime_paths)).await?
     } else {
-        EnvironmentManager::from_codex_home(config.codex_home.clone(), local_runtime_paths).await?
+        EnvironmentManager::from_codex_home(config.codex_home.clone(), Some(local_runtime_paths))
+            .await?
     };
     let in_process_start_args = InProcessClientStartArgs {
         arg0_paths,
@@ -972,8 +966,9 @@ fn thread_start_params_from_config(config: &Config) -> ThreadStartParams {
         approvals_reviewer: approvals_reviewer_override_from_config(config),
         sandbox: sandbox.flatten(),
         permissions,
-        config: config_request_overrides_from_config(config),
+        config: None,
         ephemeral: Some(config.ephemeral),
+        thread_source: Some(ThreadSource::User),
         ..ThreadStartParams::default()
     }
 }
@@ -1002,22 +997,20 @@ fn thread_resume_params_from_config(config: &Config, thread_id: String) -> Threa
         approvals_reviewer: approvals_reviewer_override_from_config(config),
         sandbox: sandbox.flatten(),
         permissions,
-        config: config_request_overrides_from_config(config),
+        config: None,
         ..ThreadResumeParams::default()
     }
 }
 
-fn permissions_selection_from_config(config: &Config) -> Option<PermissionProfileSelectionParams> {
+fn permissions_selection_from_config(config: &Config) -> Option<String> {
     config
         .permissions
         .active_permission_profile()
-        .map(permissions_selection_from_active_profile)
+        .map(permission_profile_id_from_active_profile)
 }
 
-fn permissions_selection_from_active_profile(
-    active: ActivePermissionProfile,
-) -> PermissionProfileSelectionParams {
-    PermissionProfileSelectionParams::new(active.id)
+fn permission_profile_id_from_active_profile(active: ActivePermissionProfile) -> String {
+    active.id
 }
 
 fn sandbox_mode_from_permission_profile(
@@ -1043,13 +1036,6 @@ fn sandbox_mode_from_permission_profile(
             }
         }
     }
-}
-
-fn config_request_overrides_from_config(config: &Config) -> Option<HashMap<String, Value>> {
-    config
-        .active_profile
-        .as_ref()
-        .map(|profile| HashMap::from([("profile".to_string(), Value::String(profile.clone()))]))
 }
 
 fn approvals_reviewer_override_from_config(
@@ -1082,6 +1068,7 @@ fn session_configured_from_thread_start_response(
     session_configured_from_thread_response(
         &response.thread.session_id,
         &response.thread.id,
+        response.thread.thread_source.map(Into::into),
         response.thread.name.clone(),
         response.thread.path.clone(),
         response.model.clone(),
@@ -1103,6 +1090,7 @@ fn session_configured_from_thread_resume_response(
     session_configured_from_thread_response(
         &response.thread.session_id,
         &response.thread.id,
+        response.thread.thread_source.map(Into::into),
         response.thread.name.clone(),
         response.thread.path.clone(),
         response.model.clone(),
@@ -1133,6 +1121,7 @@ fn review_target_to_api(target: ReviewTarget) -> ApiReviewTarget {
 fn session_configured_from_thread_response(
     session_id: &str,
     thread_id: &str,
+    thread_source: Option<codex_protocol::protocol::ThreadSource>,
     thread_name: Option<String>,
     rollout_path: Option<PathBuf>,
     model: String,
@@ -1154,7 +1143,7 @@ fn session_configured_from_thread_response(
         session_id,
         thread_id,
         forked_from_id: None,
-        thread_source: None,
+        thread_source,
         thread_name,
         model,
         model_provider_id,
