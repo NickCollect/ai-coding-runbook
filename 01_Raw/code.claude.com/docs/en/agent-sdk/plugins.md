@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/plugins
-fetched_at: 2026-05-18T05:02:44.378424+00:00
+fetched_at: 2026-05-25T05:15:52.764791+00:00
 fetch_method: mintlify_md
 ---
 
@@ -105,7 +105,7 @@ When plugins load successfully, they appear in the system initialization message
 
       // Check available commands from plugins
       console.log("Commands:", message.slash_commands);
-      // Example: ["/help", "/compact", "my-plugin:custom-command"]
+      // Example: ["compact", "context", "my-plugin:custom-command"]
     }
   }
   ```
@@ -129,7 +129,7 @@ When plugins load successfully, they appear in the system initialization message
 
               # Check available commands from plugins
               print("Commands:", message.data.get("slash_commands"))
-              # Example: ["/help", "/compact", "my-plugin:custom-command"]
+              # Example: ["compact", "context", "my-plugin:custom-command"]
 
 
   asyncio.run(main())

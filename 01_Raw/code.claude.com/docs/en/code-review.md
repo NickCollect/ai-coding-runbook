@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/code-review
-fetched_at: 2026-05-05T19:40:39.190949+00:00
+fetched_at: 2026-05-25T05:15:52.965670+00:00
 fetch_method: mintlify_md
 ---
 
@@ -31,11 +31,15 @@ This page covers:
 * [Pricing](#pricing)
 * [Troubleshooting](#troubleshooting) failed runs and missing comments
 
+<Note>
+  To review a diff locally in your terminal without installing the GitHub App, run the [`/code-review` command](/en/commands) in any Claude Code session. It reports correctness bugs in the current diff at a chosen effort level and can post findings as inline PR comments with `--comment`. The command was named `/simplify` before v2.1.147.
+</Note>
+
 ## How reviews work
 
 Once an admin [enables Code Review](#set-up-code-review) for your organization, reviews trigger when a PR opens, on every push, or when manually requested, depending on the repository's configured behavior. Commenting `@claude review` [starts reviews on a PR](#manually-trigger-reviews) in any mode.
 
-When a review runs, multiple agents analyze the diff and surrounding code in parallel on Anthropic infrastructure. Each agent looks for a different class of issue, then a verification step checks candidates against actual code behavior to filter out false positives. The results are deduplicated, ranked by severity, and posted as inline comments on the specific lines where issues were found, with a summary in the review body. If no issues are found, Claude posts a short confirmation comment on the PR.
+When a review runs, multiple agents analyze the diff and surrounding code in parallel on Anthropic infrastructure. Each agent looks for a different class of issue, then a verification step checks candidates against actual code behavior to filter out false positives. The results are deduplicated, ranked by severity, and posted as inline comments on the specific lines where issues were found, with a summary in the review body. If no issues are found, Code Review updates the GitHub check run to show that no issues were detected. Claude may also post a short confirmation comment on the PR.
 
 Reviews scale in cost with PR size and complexity, completing in 20 minutes on average. Admins can monitor review activity and spend via the [analytics dashboard](#view-usage).
 
@@ -238,7 +242,7 @@ The repositories table in admin settings also shows average cost per review for 
 
 ## Pricing
 
-Code Review is billed based on token usage. Each review averages \$15-25 in cost, scaling with PR size, codebase complexity, and how many issues require verification. Code Review usage is billed separately through [extra usage](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans) and does not count against your plan's included usage.
+Code Review is billed based on token usage. Each review averages \$15-25 in cost, scaling with PR size, codebase complexity, and how many issues require verification. Code Review usage is billed separately through [usage credits](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans) and does not count against your plan's included usage.
 
 The review trigger you choose affects total cost:
 
@@ -280,7 +284,7 @@ If the check run title says issues were found but you don't see inline review co
 
 Code Review is designed to work alongside the rest of Claude Code. If you want to run reviews locally before opening a PR, need a self-hosted setup, or want to go deeper on how `CLAUDE.md` shapes Claude's behavior across tools, these pages are good next stops:
 
-* [Plugins](/en/discover-plugins): browse the plugin marketplace, including a `code-review` plugin for running on-demand reviews locally before pushing
+* [Commands](/en/commands): run `/code-review` in a local Claude Code session to check a diff before pushing
 * [GitHub Actions](/en/github-actions): run Claude in your own GitHub Actions workflows for custom automation beyond code review
 * [GitLab CI/CD](/en/gitlab-ci-cd): self-hosted Claude integration for GitLab pipelines
 * [Memory](/en/memory): how `CLAUDE.md` files work across Claude Code

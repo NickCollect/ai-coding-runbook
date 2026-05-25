@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/quickstart
-fetched_at: 2026-05-18T05:02:44.938093+00:00
+fetched_at: 2026-05-25T05:15:53.309054+00:00
 fetch_method: mintlify_md
 ---
 
@@ -87,16 +87,16 @@ You can also install with [apt, dnf, or apk](/en/setup#install-with-linux-packag
 
 ## Step 2: Log in to your account
 
-Claude Code requires an account to use. When you start an interactive session with the `claude` command, you'll need to log in:
+Claude Code requires an account to use. Start an interactive session with the `claude` command and you'll be prompted to log in on first use:
 
 ```bash theme={null}
 claude
-# You'll be prompted to log in on first use
 ```
 
-```bash theme={null}
+For Claude subscription or Console accounts, follow the prompts to complete authentication in your browser. To switch accounts later or re-authenticate, type `/login` inside the running session:
+
+```text theme={null}
 /login
-# Follow the prompts to log in with your account
 ```
 
 You can log in using any of these account types:
@@ -105,7 +105,7 @@ You can log in using any of these account types:
 * [Claude Console](https://console.anthropic.com/) (API access with pre-paid credits). On first login, a "Claude Code" workspace is automatically created in the Console for centralized cost tracking.
 * [Amazon Bedrock, Google Vertex AI, or Microsoft Foundry](/en/third-party-integrations) (enterprise cloud providers)
 
-Once logged in, your credentials are stored and you won't need to log in again. To switch accounts later, use the `/login` command.
+Once logged in, your credentials are stored and you won't need to log in again.
 
 ## Step 3: Start your first session
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/mcp
-fetched_at: 2026-05-18T05:02:44.840339+00:00
+fetched_at: 2026-05-25T05:15:53.201328+00:00
 fetch_method: mintlify_md
 ---
 
@@ -149,6 +149,8 @@ claude mcp remove github
 
 The `/mcp` panel shows the tool count next to each connected server and flags servers that advertise the tools capability but expose no tools.
 
+If your request needs tools from a server that is still connecting in the background, Claude waits for that server before continuing. With [tool search](#scale-with-mcp-tool-search) enabled, which is the default, the wait happens inside the `ToolSearch` call. In configurations without tool search, such as Vertex AI, a custom `ANTHROPIC_BASE_URL`, or `ENABLE_TOOL_SEARCH=false`, Claude uses the `WaitForMcpServers` tool instead.
+
 The server name `workspace` is reserved for internal use. If your configuration defines a server with that name, Claude Code skips it at load time and shows a warning asking you to rename it.
 
 ### Dynamic tool updates
@@ -174,9 +176,12 @@ An MCP server can also push messages directly into your session so Claude can re
     * `user`: Available to you across all projects (was called `global` in older versions)
   * Set environment variables with `--env` flags (for example, `--env KEY=value`)
   * Configure MCP server startup timeout using the MCP\_TIMEOUT environment variable (for example, `MCP_TIMEOUT=10000 claude` sets a 10-second timeout)
+  * Set a per-server tool execution timeout by adding a `timeout` field in milliseconds to that server's `.mcp.json` entry, for example `"timeout": 600000` for ten minutes. This overrides the `MCP_TOOL_TIMEOUT` environment variable for that server only
   * Claude Code will display a warning when MCP tool output exceeds 10,000 tokens. To increase this limit, set the `MAX_MCP_OUTPUT_TOKENS` environment variable (for example, `MAX_MCP_OUTPUT_TOKENS=50000`)
   * Use `/mcp` to authenticate with remote servers that require OAuth 2.0 authentication
 </Tip>
+
+The per-server `timeout` is a hard wall-clock limit per tool call, and progress notifications from the server do not extend it. Values below 1000 are floored to one second. For HTTP and SSE servers, the per-request fetch first-byte budget has a 60-second minimum regardless of this value, so only the tool-call watchdog honors smaller values.
 
 ### Plugin-provided MCP servers
 
@@ -770,6 +775,8 @@ If you've logged into Claude Code with a [Claude.ai](https://claude.ai) account,
   </Step>
 </Steps>
 
+Claude.ai connectors are fetched only when your active [authentication method](/en/authentication#authentication-precedence) is your Claude.ai subscription. They are not loaded when `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, `apiKeyHelper`, or a third-party provider such as Bedrock or Vertex is active, even if you previously ran `/login`. If `/mcp` does not list a connector you added, run `/status` to confirm which authentication method is active, unset that environment variable or remove the `apiKeyHelper` setting, then run `/login` to select your Claude.ai account.
+
 A server you've added in Claude Code takes [precedence](#scope-hierarchy-and-precedence) over a claude.ai connector that points at the same URL. When this happens, `/mcp` lists the connector as hidden and shows how to remove the duplicate if you'd rather use the connector.
 
 To disable claude.ai MCP servers in Claude Code, set the `ENABLE_CLAUDEAI_MCP_SERVERS` environment variable to `false`:
@@ -1013,7 +1020,7 @@ The following `.mcp.json` entry exempts one HTTP server while leaving other serv
 
 The `alwaysLoad` field is available on all server types and requires Claude Code v2.1.121 or later. An MCP server can also mark individual tools as always-loaded by including `"anthropic/alwaysLoad": true` in the tool's `_meta` object, which has the same effect for that tool only.
 
-Setting `alwaysLoad: true` also blocks startup until the server connects, capped at the standard 5-second connect timeout. This applies even when [`MCP_CONNECTION_NONBLOCKING=1`](/en/env-vars) is set, since the tools must be present when the first prompt is built. Other servers still connect in the background when nonblocking is enabled.
+Setting `alwaysLoad: true` also blocks startup until the server connects, capped at the standard 5-second connect timeout. This applies even though MCP startup is otherwise [non-blocking by default](/en/env-vars), since the tools must be present when the first prompt is built. Other servers continue to connect in the background.
 
 ## Use MCP prompts as commands
 
@@ -1056,230 +1063,4 @@ MCP servers can expose prompts that become available as commands in Claude Code.
 
 ## Managed MCP configuration
 
-For organizations that need centralized control over MCP servers, Claude Code supports two configuration options:
-
-1. **Exclusive control with `managed-mcp.json`**: Deploy a fixed set of MCP servers that users cannot modify or extend
-2. **Policy-based control with allowlists/denylists**: Allow users to add their own servers, but restrict which ones are permitted
-
-These options allow IT administrators to:
-
-* **Control which MCP servers employees can access**: Deploy a standardized set of approved MCP servers across the organization
-* **Prevent unauthorized MCP servers**: Restrict users from adding unapproved MCP servers
-* **Disable MCP entirely**: Remove MCP functionality completely if needed
-
-### Option 1: Exclusive control with managed-mcp.json
-
-When you deploy a `managed-mcp.json` file, it takes **exclusive control** over all MCP servers. Users cannot add, modify, or use any MCP servers other than those defined in this file. This is the simplest approach for organizations that want complete control.
-
-System administrators deploy the configuration file to a system-wide directory:
-
-* macOS: `/Library/Application Support/ClaudeCode/managed-mcp.json`
-* Linux and WSL: `/etc/claude-code/managed-mcp.json`
-* Windows: `C:\Program Files\ClaudeCode\managed-mcp.json`
-
-<Note>
-  These are system-wide paths (not user home directories like `~/Library/...`) that require administrator privileges. They are designed to be deployed by IT administrators.
-</Note>
-
-The `managed-mcp.json` file uses the same format as a standard `.mcp.json` file:
-
-```json theme={null}
-{
-  "mcpServers": {
-    "github": {
-      "type": "http",
-      "url": "https://api.githubcopilot.com/mcp/"
-    },
-    "sentry": {
-      "type": "http",
-      "url": "https://mcp.sentry.dev/mcp"
-    },
-    "company-internal": {
-      "type": "stdio",
-      "command": "/usr/local/bin/company-mcp-server",
-      "args": ["--config", "/etc/company/mcp-config.json"],
-      "env": {
-        "COMPANY_API_URL": "https://internal.company.com"
-      }
-    }
-  }
-}
-```
-
-### Option 2: Policy-based control with allowlists and denylists
-
-Instead of taking exclusive control, administrators can allow users to configure their own MCP servers while enforcing restrictions on which servers are permitted. This approach uses `allowedMcpServers` and `deniedMcpServers` in the [managed settings file](/en/settings#settings-files).
-
-<Note>
-  **Choosing between options**: Use Option 1 (`managed-mcp.json`) when you want to deploy a fixed set of servers with no user customization. Use Option 2 (allowlists/denylists) when you want to allow users to add their own servers within policy constraints.
-</Note>
-
-#### Restriction options
-
-Each entry in the allowlist or denylist can restrict servers in three ways:
-
-1. **By server name** (`serverName`): Matches the configured name of the server
-2. **By command** (`serverCommand`): Matches the exact command and arguments used to start stdio servers
-3. **By URL pattern** (`serverUrl`): Matches remote server URLs with wildcard support
-
-**Important**: Each entry must have exactly one of `serverName`, `serverCommand`, or `serverUrl`.
-
-#### Example configuration
-
-```json theme={null}
-{
-  "allowedMcpServers": [
-    // Allow by server name
-    { "serverName": "github" },
-    { "serverName": "sentry" },
-
-    // Allow by exact command (for stdio servers)
-    { "serverCommand": ["npx", "-y", "@modelcontextprotocol/server-filesystem"] },
-    { "serverCommand": ["python", "/usr/local/bin/approved-server.py"] },
-
-    // Allow by URL pattern (for remote servers)
-    { "serverUrl": "https://mcp.company.com/*" },
-    { "serverUrl": "https://*.internal.corp/*" }
-  ],
-  "deniedMcpServers": [
-    // Block by server name
-    { "serverName": "dangerous-server" },
-
-    // Block by exact command (for stdio servers)
-    { "serverCommand": ["npx", "-y", "unapproved-package"] },
-
-    // Block by URL pattern (for remote servers)
-    { "serverUrl": "https://*.untrusted.com/*" }
-  ]
-}
-```
-
-#### How command-based restrictions work
-
-**Exact matching**:
-
-* Command arrays must match **exactly** - both the command and all arguments in the correct order
-* Example: `["npx", "-y", "server"]` will NOT match `["npx", "server"]` or `["npx", "-y", "server", "--flag"]`
-
-**Stdio server behavior**:
-
-* When the allowlist contains **any** `serverCommand` entries, stdio servers **must** match one of those commands
-* Stdio servers cannot pass by name alone when command restrictions are present
-* This ensures administrators can enforce which commands are allowed to run
-
-**Non-stdio server behavior**:
-
-* Remote servers (HTTP, SSE, WebSocket) use URL-based matching when `serverUrl` entries exist in the allowlist
-* If no URL entries exist, remote servers fall back to name-based matching
-* Command restrictions do not apply to remote servers
-
-#### How URL-based restrictions work
-
-URL patterns support wildcards using `*` to match any sequence of characters. This is useful for allowing entire domains or subdomains.
-
-**Wildcard examples**:
-
-* `https://mcp.company.com/*` - Allow all paths on a specific domain
-* `https://*.example.com/*` - Allow any subdomain of example.com
-* `http://localhost:*/*` - Allow any port on localhost
-
-Hostname matching is case-insensitive and ignores a trailing FQDN dot, matching DNS semantics. A pattern like `*://Mcp.Example.com/*` matches `https://mcp.example.com/api`, and `https://mcp.example.com.` is treated the same as `https://mcp.example.com`. Paths remain case-sensitive.
-
-**Remote server behavior**:
-
-* When the allowlist contains **any** `serverUrl` entries, remote servers **must** match one of those URL patterns
-* Remote servers cannot pass by name alone when URL restrictions are present
-* This ensures administrators can enforce which remote endpoints are allowed
-
-<Accordion title="Example: URL-only allowlist">
-  ```json theme={null}
-  {
-    "allowedMcpServers": [
-      { "serverUrl": "https://mcp.company.com/*" },
-      { "serverUrl": "https://*.internal.corp/*" }
-    ]
-  }
-  ```
-
-  **Result**:
-
-  * HTTP server at `https://mcp.company.com/api`: ✅ Allowed (matches URL pattern)
-  * HTTP server at `https://api.internal.corp/mcp`: ✅ Allowed (matches wildcard subdomain)
-  * HTTP server at `https://external.com/mcp`: ❌ Blocked (doesn't match any URL pattern)
-  * Stdio server with any command: ❌ Blocked (no name or command entries to match)
-</Accordion>
-
-<Accordion title="Example: Command-only allowlist">
-  ```json theme={null}
-  {
-    "allowedMcpServers": [
-      { "serverCommand": ["npx", "-y", "approved-package"] }
-    ]
-  }
-  ```
-
-  **Result**:
-
-  * Stdio server with `["npx", "-y", "approved-package"]`: ✅ Allowed (matches command)
-  * Stdio server with `["node", "server.js"]`: ❌ Blocked (doesn't match command)
-  * HTTP server named "my-api": ❌ Blocked (no name entries to match)
-</Accordion>
-
-<Accordion title="Example: Mixed name and command allowlist">
-  ```json theme={null}
-  {
-    "allowedMcpServers": [
-      { "serverName": "github" },
-      { "serverCommand": ["npx", "-y", "approved-package"] }
-    ]
-  }
-  ```
-
-  **Result**:
-
-  * Stdio server named "local-tool" with `["npx", "-y", "approved-package"]`: ✅ Allowed (matches command)
-  * Stdio server named "local-tool" with `["node", "server.js"]`: ❌ Blocked (command entries exist but doesn't match)
-  * Stdio server named "github" with `["node", "server.js"]`: ❌ Blocked (stdio servers must match commands when command entries exist)
-  * HTTP server named "github": ✅ Allowed (matches name)
-  * HTTP server named "other-api": ❌ Blocked (name doesn't match)
-</Accordion>
-
-<Accordion title="Example: Name-only allowlist">
-  ```json theme={null}
-  {
-    "allowedMcpServers": [
-      { "serverName": "github" },
-      { "serverName": "internal-tool" }
-    ]
-  }
-  ```
-
-  **Result**:
-
-  * Stdio server named "github" with any command: ✅ Allowed (no command restrictions)
-  * Stdio server named "internal-tool" with any command: ✅ Allowed (no command restrictions)
-  * HTTP server named "github": ✅ Allowed (matches name)
-  * Any server named "other": ❌ Blocked (name doesn't match)
-</Accordion>
-
-#### Allowlist behavior (`allowedMcpServers`)
-
-* `undefined` (default): No restrictions - users can configure any MCP server
-* Empty array `[]`: Complete lockdown - users cannot configure any MCP servers
-* List of entries: Users can only configure servers that match by name, command, or URL pattern
-
-#### Denylist behavior (`deniedMcpServers`)
-
-* `undefined` (default): No servers are blocked
-* Empty array `[]`: No servers are blocked
-* List of entries: Specified servers are explicitly blocked across all scopes
-
-#### Important notes
-
-* **Option 1 and Option 2 can be combined**: If `managed-mcp.json` exists, it has exclusive control and users cannot add servers. Allowlists/denylists still apply to the managed servers themselves.
-* **Denylist takes absolute precedence**: If a server matches a denylist entry (by name, command, or URL), it will be blocked even if it's on the allowlist
-* Name-based, command-based, and URL-based restrictions work together: a server passes if it matches **either** a name entry, a command entry, or a URL pattern (unless blocked by denylist)
-
-<Note>
-  **When using `managed-mcp.json`**: Users cannot add MCP servers through `claude mcp add` or configuration files. The `allowedMcpServers` and `deniedMcpServers` settings still apply to filter which managed servers are actually loaded.
-</Note>
+For organizations that need centralized control over which MCP servers users can connect to, see [Managed MCP configuration](/en/managed-mcp). It covers deploying a fixed server set with `managed-mcp.json`, restricting servers with `allowedMcpServers` and `deniedMcpServers`, and what users see when a server is blocked.

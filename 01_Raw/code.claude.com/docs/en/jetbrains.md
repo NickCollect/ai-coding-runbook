@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/jetbrains
-fetched_at: 2026-05-05T19:40:39.452292+00:00
+fetched_at: 2026-05-25T05:15:53.174387+00:00
 fetch_method: mintlify_md
 ---
 
@@ -29,7 +29,7 @@ The Claude Code plugin works with most JetBrains IDEs, including:
 
 * **Quick launch**: use `Cmd+Esc` (Mac) or `Ctrl+Esc` (Windows/Linux) to open Claude Code directly from your editor, or click the Claude Code button in the UI
 * **Diff viewing**: code changes can be displayed directly in the IDE diff viewer instead of the terminal
-* **Selection context**: the current selection or tab in the IDE is automatically shared with Claude Code
+* **Selection context**: the current selection or tab in the IDE is automatically shared with Claude Code. [`Read` deny rules](/en/permissions#read-and-edit) block this sharing for matching files
 * **File reference shortcuts**: use `Cmd+Option+K` (Mac) or `Alt+Ctrl+K` (Linux/Windows) to insert file references such as `@src/auth.ts#L1-99`
 * **Diagnostic sharing**: diagnostic errors from the IDE, such as lint and syntax errors, are automatically shared with Claude as you work
 

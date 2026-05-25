@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/overview
-fetched_at: 2026-05-18T05:02:44.365340+00:00
+fetched_at: 2026-05-25T05:15:52.753400+00:00
 fetch_method: mintlify_md
 ---
 
@@ -264,7 +264,7 @@ Everything that makes Claude Code powerful is available in the SDK:
   <Tab title="Subagents">
     Spawn specialized agents to handle focused subtasks. Your main agent delegates work, and subagents report back with results.
 
-    Define custom agents with specialized instructions. Include `Agent` in `allowedTools` since subagents are invoked via the Agent tool:
+    Define custom agents with specialized instructions. Subagents are invoked via the Agent tool, so include `Agent` in `allowedTools` to auto-approve those invocations:
 
     <CodeGroup>
       ```python Python theme={null}

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/context-window
-fetched_at: 2026-05-05T19:40:39.231105+00:00
+fetched_at: 2026-05-25T05:15:53.011396+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1617,4 +1617,5 @@ For deeper coverage of the features shown in the timeline, see these pages:
 * [Store instructions and memories](/en/memory): CLAUDE.md hierarchy and auto memory
 * [Subagents](/en/sub-agents): delegate research to a separate context window
 * [Best practices](/en/best-practices): managing context as your primary constraint
+* [Prompt caching](/en/prompt-caching): which actions invalidate the cached prefix
 * [Reduce token usage](/en/costs#reduce-token-usage): strategies for keeping context usage low

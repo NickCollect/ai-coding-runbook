@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/permission-modes
-fetched_at: 2026-05-18T05:02:44.892410+00:00
+fetched_at: 2026-05-25T05:15:53.250928+00:00
 fetch_method: mintlify_md
 ---
 
@@ -79,7 +79,7 @@ You can switch modes mid-session, at startup, or as a persistent default. The mo
     | Auto mode          | `auto`              |
     | Bypass permissions | `bypassPermissions` |
 
-    Auto mode appears in the mode indicator after you enable **Allow dangerously skip permissions** in the extension settings, but it stays unavailable until your account meets every requirement listed in the [auto mode section](#eliminate-prompts-with-auto-mode). The `claudeCode.initialPermissionMode` setting does not accept `auto`; to start in auto mode by default, set `defaultMode` in your Claude Code [`settings.json`](/en/settings#settings-files) instead.
+    Auto mode appears in the mode indicator after you enable **Allow dangerously skip permissions** in the extension settings, but it stays unavailable until your account meets every requirement listed in the [auto mode section](#eliminate-prompts-with-auto-mode). The `claudeCode.initialPermissionMode` setting does not accept `auto`. To start in auto mode by default, set `defaultMode` in your [user settings](/en/settings#settings-files) instead. Claude Code ignores `defaultMode: "auto"` in project and local settings.
 
     Bypass permissions also requires the **Allow dangerously skip permissions** toggle before it appears in the mode indicator.
 
@@ -170,7 +170,7 @@ To make plan mode the default for a project, set `defaultMode` in `.claude/setti
 
 Auto mode lets Claude execute without permission prompts. A separate classifier model reviews actions before they run, blocking anything that escalates beyond your request, targets unrecognized infrastructure, or appears driven by hostile content Claude read.
 
-Auto mode also instructs Claude to execute immediately and minimize clarifying questions. To get that behavior while keeping permission prompts, set the [Proactive output style](/en/output-styles) instead.
+Auto mode also nudges Claude to keep working without stopping for clarifying questions, though Claude still asks when your prompt or a skill explicitly relies on it. For stronger autonomous behavior while keeping permission prompts, set the [Proactive output style](/en/output-styles) instead.
 
 <Warning>
   Auto mode is a research preview. It reduces prompts but does not guarantee safety. Use it for tasks where you trust the general direction, not as a replacement for review on sensitive operations.
@@ -178,12 +178,14 @@ Auto mode also instructs Claude to execute immediately and minimize clarifying q
 
 Auto mode is available only when your account meets all of these requirements:
 
-* **Plan**: Max, Team, Enterprise, or API. Not available on Pro.
+* **Plan**: All plans.
 * **Admin**: on Team and Enterprise, an admin must enable it in [Claude Code admin settings](https://claude.ai/admin-settings/claude-code) before users can turn it on. Admins can also lock it off by setting `permissions.disableAutoMode` to `"disable"` in [managed settings](/en/permissions#managed-settings).
-* **Model**: Claude Sonnet 4.6, Opus 4.6, or Opus 4.7 on Team, Enterprise, and API plans; Claude Opus 4.7 only on Max plans. Other models, including Haiku and claude-3 models, are not supported.
+* **Model**: Claude Sonnet 4.6, Opus 4.6, or Opus 4.7. Older models, including Sonnet 4.5, Opus 4.5, Haiku, and claude-3 models, are not supported.
 * **Provider**: Anthropic API only. Not available on Bedrock, Vertex, or Foundry.
 
 If Claude Code reports auto mode as unavailable, one of these requirements is unmet; this is not a transient outage. A separate message that names a model and says auto mode "cannot determine the safety" of an action is a transient classifier outage; see the [error reference](/en/errors#auto-mode-cannot-determine-the-safety-of-an-action).
+
+If you set `defaultMode: "auto"` in [settings](/en/settings#available-settings) and the session starts in `default` mode with no error, the setting is likely in `.claude/settings.json` or `.claude/settings.local.json`. Claude Code ignores `auto` from those files so a repository cannot grant itself auto mode. Move it to `~/.claude/settings.json`.
 
 ### What the classifier blocks by default
 

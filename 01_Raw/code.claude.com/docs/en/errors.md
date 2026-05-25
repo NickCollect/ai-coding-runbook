@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/errors
-fetched_at: 2026-05-18T05:02:44.705688+00:00
+fetched_at: 2026-05-25T05:15:53.154242+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,39 +24,42 @@ These errors and recovery commands apply across the CLI, the [Desktop app](/en/d
 
 Match the message you see in your terminal to a section below.
 
-| Message                                                                              | Section                                                                                                                       |
-| :----------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------- |
-| `API Error: 500 ... Internal server error`                                           | [Server errors](#api-error-500-internal-server-error)                                                                         |
-| `API Error: Repeated 529 Overloaded errors`                                          | [Server errors](#api-error-repeated-529-overloaded-errors)                                                                    |
-| `Request timed out`                                                                  | [Server errors](#request-timed-out), or [Network](#unable-to-connect-to-api) if the message mentions your internet connection |
-| `<model> is temporarily unavailable, so auto mode cannot determine the safety of...` | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action)                                                          |
-| `Auto mode could not evaluate this action and is blocking it for safety`             | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action)                                                          |
-| `Auto mode classifier transcript exceeded context window`                            | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action)                                                          |
-| `You've hit your session limit` / `You've hit your weekly limit`                     | [Usage limits](#youve-hit-your-session-limit)                                                                                 |
-| `Server is temporarily limiting requests`                                            | [Usage limits](#server-is-temporarily-limiting-requests)                                                                      |
-| `Request rejected (429)`                                                             | [Usage limits](#request-rejected-429)                                                                                         |
-| `Credit balance is too low`                                                          | [Usage limits](#credit-balance-is-too-low)                                                                                    |
-| `Not logged in · Please run /login`                                                  | [Authentication](#not-logged-in)                                                                                              |
-| `Invalid API key`                                                                    | [Authentication](#invalid-api-key)                                                                                            |
-| `This organization has been disabled`                                                | [Authentication](#this-organization-has-been-disabled)                                                                        |
-| `Routines are disabled by your organization's policy`                                | [Authentication](#routines-are-disabled-by-your-organizations-policy)                                                         |
-| `OAuth token revoked` / `OAuth token has expired`                                    | [Authentication](#oauth-token-revoked-or-expired)                                                                             |
-| `does not meet scope requirement user:profile`                                       | [Authentication](#oauth-scope-requirement)                                                                                    |
-| `Unable to connect to API`                                                           | [Network](#unable-to-connect-to-api)                                                                                          |
-| `SSL certificate verification failed`                                                | [Network](#ssl-certificate-errors)                                                                                            |
-| `403` with `x-deny-reason: host_not_allowed` in a cloud or routine session           | [Network](#host-not-allowed-in-a-cloud-session)                                                                               |
-| `Prompt is too long`                                                                 | [Request errors](#prompt-is-too-long)                                                                                         |
-| `Error during compaction: Conversation too long`                                     | [Request errors](#error-during-compaction-conversation-too-long)                                                              |
-| `Request too large`                                                                  | [Request errors](#request-too-large)                                                                                          |
-| `Image was too large`                                                                | [Request errors](#image-was-too-large)                                                                                        |
-| `PDF too large` / `PDF is password protected`                                        | [Request errors](#pdf-errors)                                                                                                 |
-| `Extra inputs are not permitted`                                                     | [Request errors](#extra-inputs-are-not-permitted)                                                                             |
-| `There's an issue with the selected model`                                           | [Request errors](#theres-an-issue-with-the-selected-model)                                                                    |
-| `Claude Opus is not available with the Claude Pro plan`                              | [Request errors](#claude-opus-is-not-available-with-the-claude-pro-plan)                                                      |
-| `thinking.type.enabled is not supported for this model`                              | [Request errors](#thinking-type-enabled-is-not-supported-for-this-model)                                                      |
-| `max_tokens must be greater than thinking.budget_tokens`                             | [Request errors](#thinking-budget-exceeds-output-limit)                                                                       |
-| `API Error: 400 due to tool use concurrency issues`                                  | [Request errors](#tool-use-or-thinking-block-mismatch)                                                                        |
-| Responses seem lower quality than usual                                              | [Response quality](#responses-seem-lower-quality-than-usual)                                                                  |
+| Message                                                                                       | Section                                                                                                                       |
+| :-------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| `API Error: 500 Internal server error`                                                        | [Server errors](#api-error-500-internal-server-error)                                                                         |
+| `API Error: Repeated 529 Overloaded errors`                                                   | [Server errors](#api-error-repeated-529-overloaded-errors)                                                                    |
+| `Request timed out`                                                                           | [Server errors](#request-timed-out), or [Network](#unable-to-connect-to-api) if the message mentions your internet connection |
+| `<model> is temporarily unavailable, so auto mode cannot determine the safety of...`          | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action)                                                          |
+| `Auto mode could not evaluate this action and is blocking it for safety`                      | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action)                                                          |
+| `Auto mode classifier transcript exceeded context window`                                     | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action)                                                          |
+| `You've hit your session limit` / `You've hit your weekly limit`                              | [Usage limits](#youve-hit-your-session-limit)                                                                                 |
+| `Server is temporarily limiting requests`                                                     | [Usage limits](#server-is-temporarily-limiting-requests)                                                                      |
+| `Request rejected (429)`                                                                      | [Usage limits](#request-rejected-429)                                                                                         |
+| `Credit balance is too low`                                                                   | [Usage limits](#credit-balance-is-too-low)                                                                                    |
+| `Not logged in · Please run /login`                                                           | [Authentication](#not-logged-in)                                                                                              |
+| `Invalid API key`                                                                             | [Authentication](#invalid-api-key)                                                                                            |
+| `This organization has been disabled`                                                         | [Authentication](#this-organization-has-been-disabled)                                                                        |
+| `Your organization has disabled Claude subscription access`                                   | [Authentication](#your-organization-has-disabled-claude-subscription-access)                                                  |
+| `Routines are disabled by your organization's policy`                                         | [Authentication](#routines-are-disabled-by-your-organizations-policy)                                                         |
+| `OAuth token revoked` / `OAuth token has expired`                                             | [Authentication](#oauth-token-revoked-or-expired)                                                                             |
+| `does not meet scope requirement user:profile`                                                | [Authentication](#oauth-scope-requirement)                                                                                    |
+| `Unable to connect to API`                                                                    | [Network](#unable-to-connect-to-api)                                                                                          |
+| `SSL certificate verification failed`                                                         | [Network](#ssl-certificate-errors)                                                                                            |
+| `403` with `x-deny-reason: host_not_allowed` in a cloud or routine session                    | [Network](#host-not-allowed-in-a-cloud-session)                                                                               |
+| `Prompt is too long`                                                                          | [Request errors](#prompt-is-too-long)                                                                                         |
+| `Error during compaction: Conversation too long`                                              | [Request errors](#error-during-compaction-conversation-too-long)                                                              |
+| `Request too large`                                                                           | [Request errors](#request-too-large)                                                                                          |
+| `Image was too large`                                                                         | [Request errors](#image-was-too-large)                                                                                        |
+| `Unable to resize image`                                                                      | [Request errors](#unable-to-resize-image)                                                                                     |
+| `PDF too large` / `PDF is password protected`                                                 | [Request errors](#pdf-errors)                                                                                                 |
+| `Extra inputs are not permitted`                                                              | [Request errors](#extra-inputs-are-not-permitted)                                                                             |
+| `There's an issue with the selected model`                                                    | [Request errors](#theres-an-issue-with-the-selected-model)                                                                    |
+| `Claude Opus is not available with the Claude Pro plan`                                       | [Request errors](#claude-opus-is-not-available-with-the-claude-pro-plan)                                                      |
+| `thinking.type.enabled is not supported for this model`                                       | [Request errors](#thinking-type-enabled-is-not-supported-for-this-model)                                                      |
+| `max_tokens must be greater than thinking.budget_tokens`                                      | [Request errors](#thinking-budget-exceeds-output-limit)                                                                       |
+| `API Error: 400 due to tool use concurrency issues`                                           | [Request errors](#tool-use-or-thinking-block-mismatch)                                                                        |
+| `Claude Code is unable to respond to this request, which appears to violate our Usage Policy` | [Request errors](#usage-policy-refusal)                                                                                       |
+| Responses seem lower quality than usual                                                       | [Response quality](#responses-seem-lower-quality-than-usual)                                                                  |
 
 ## Automatic retries
 
@@ -71,21 +74,23 @@ When you see one of the errors on this page, those retries have already been exh
 
 ## Server errors
 
-These errors come from Anthropic infrastructure rather than your account or request.
+These errors come from the inference provider rather than your account or request. On the Anthropic API that means Anthropic infrastructure. On Bedrock, Vertex AI, Foundry, or a custom gateway it means that provider's infrastructure.
 
 ### API Error: 500 Internal server error
 
-Claude Code shows the raw API response body for any 5xx status. The example below shows a 500 response:
+Claude Code shows the status code and the API's error message for any 5xx response. The example below shows a 500 response on the Anthropic API:
 
 ```text theme={null}
-API Error: 500 {"type":"error","error":{"type":"api_error","message":"Internal server error"}} · check status.claude.com
+API Error: 500 Internal server error. This is a server-side issue, usually temporary — try again in a moment. If it persists, check status.claude.com.
 ```
+
+The trailing sentence names where to check service health and varies by provider. Bedrock, Vertex AI, and Foundry configurations name that provider's service status. A custom `ANTHROPIC_BASE_URL` names the gateway host.
 
 This indicates an unexpected failure inside the API. It is not caused by your prompt, settings, or account.
 
 **What to do:**
 
-* Check [status.claude.com](https://status.claude.com) for active incidents
+* Check [status.claude.com](https://status.claude.com), or the provider status page named in the message, for active incidents
 * Wait a minute, then send your message again. Your original message is still in the conversation, so for a long prompt you can type `try again` instead of pasting the whole thing.
 * If the error persists with no posted incident, run `/feedback` so Anthropic can investigate with your request details. See [Report an error](#report-an-error) if `/feedback` is unavailable in your environment.
 
@@ -94,14 +99,14 @@ This indicates an unexpected failure inside the API. It is not caused by your pr
 The API is temporarily at capacity across all users. Claude Code has already retried several times before showing this message:
 
 ```text theme={null}
-API Error: Repeated 529 Overloaded errors · check status.claude.com
+API Error: Repeated 529 Overloaded errors. The API is at capacity — this is usually temporary. Try again in a moment. If it persists, check status.claude.com.
 ```
 
-A 529 is not your usage limit and does not count against your quota.
+The trailing sentence varies by provider in the same way as the 500 error above. A 529 is not your usage limit and does not count against your quota.
 
 **What to do:**
 
-* Check [status.claude.com](https://status.claude.com) for capacity notices
+* Check [status.claude.com](https://status.claude.com), or the provider status page named in the message, for capacity notices
 * Try again in a few minutes
 * Run `/model` and switch to a different model to keep working, since capacity is tracked per model. Claude Code prompts you to do this when one model is under particularly high load, for example `Opus is experiencing high load, please use /model to switch to Sonnet`.
 
@@ -184,7 +189,7 @@ Claude Code blocks further requests until the reset time shown in the message.
 
 * Wait for the reset time shown in the error
 * Run `/usage` to see your plan limits and when they reset
-* Run `/extra-usage` to buy additional usage on Pro and Max, or to request it from your admin on Team and Enterprise. See [Extra usage for paid plans](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans) for how this is billed.
+* Run `/usage-credits` to buy additional usage on Pro and Max, or to request it from your admin on Team and Enterprise. See [usage credits for paid plans](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans) for how this is billed.
 * To upgrade your plan for higher base limits, see [claude.com/pricing](https://claude.com/pricing)
 
 To watch your remaining allowance before you hit the limit, add the `rate_limits` fields to a [custom status line](/en/statusline#rate-limit-usage), or in the Desktop app click the [usage ring](/en/desktop#check-usage) next to the model picker.
@@ -209,8 +214,10 @@ This is [retried automatically](#automatic-retries) before being shown.
 You have hit the rate limit configured for your API key, Amazon Bedrock project, or Google Vertex AI project.
 
 ```text theme={null}
-API Error: Request rejected (429) · this may be a temporary capacity issue
+API Error: Request rejected (429) · this may be a temporary capacity issue. If it persists, check status.claude.com.
 ```
+
+The trailing sentence names where to check service health and varies by provider. Bedrock, Vertex AI, and Foundry configurations name that provider's service status instead of the Anthropic status page. A custom `ANTHROPIC_BASE_URL` names the gateway host.
 
 **What to do:**
 
@@ -286,6 +293,22 @@ Environment variables take precedence over `/login`, so a key exported in your s
 * Unset `ANTHROPIC_API_KEY` in the current shell and remove it from your shell profile, then relaunch `claude`
 * Run `/status` afterward to confirm the active credential is your subscription
 * If no environment variable is set and the error persists, the disabled organization is the one tied to your `/login`. Contact support or sign in with a different account.
+
+### Your organization has disabled Claude subscription access
+
+Your Claude organization does not allow signing in to Claude Code with a subscription login. Running `/login` again with the same account returns the same error.
+
+```text theme={null}
+Your organization has disabled Claude subscription access for Claude Code · Use an Anthropic API key instead, or ask your admin to enable access
+```
+
+This is a server-side organization setting, so it cannot be overridden from local settings, environment variables, or CLI flags. The Agent SDK and `-p` non-interactive mode surface this as the `oauth_org_not_allowed` error code.
+
+**What to do:**
+
+* Ask your admin to enable Claude Code access for your organization
+* Authenticate with a Console API key instead of your subscription. See [Claude Console authentication](/en/authentication#claude-console-authentication) for setup.
+* If you are the admin and do not see an option to enable access, contact [Anthropic support](https://support.claude.com)
 
 ### Routines are disabled by your organization's policy
 
@@ -471,6 +494,24 @@ The image stays in conversation history after the error, so every subsequent mes
 * Resize the image before pasting. The API accepts images up to 8000 pixels on the longest edge for a single image, or 2000 pixels when many images are in context.
 * Take a tighter screenshot of the relevant region instead of the full screen
 
+### Unable to resize image
+
+Claude Code could not downscale an attached image before sending it to the API.
+
+```text theme={null}
+Unable to resize image — image processing is unavailable and dimensions could not be read from the file header. Please convert the image to PNG, JPEG, GIF, or WebP.
+Unable to resize image — dimensions exceed the 2000x2000px limit and image processing failed. Please resize the image to reduce its pixel dimensions.
+Unable to resize image (… raw, … base64). The image exceeds the … API limit and compression failed. Please resize the image manually or use a smaller image.
+Unable to resize image — could not verify image dimensions are within the 2000x2000px API limit.
+```
+
+Claude Code normally resizes large images automatically. These errors mean the native image processor failed to load or returned an error, so the image could not be resized to fit within API limits.
+
+**What to do:**
+
+* If the message asks you to convert the image, convert it to PNG, JPEG, GIF, or WebP and attach it again. Claude Code can verify dimensions for these formats without the image processor.
+* If the message reports a dimension or size limit, resize or recompress the image below that limit before attaching.
+
 ### PDF errors
 
 The PDF you attached could not be processed.
@@ -576,6 +617,22 @@ All three variants mean the same thing: the sequence of `tool_use`, `tool_result
 **What to do:**
 
 * Run `/rewind`, or press Esc twice, to step back to a checkpoint before the corrupted turn and continue from there. See [Checkpointing](/en/checkpointing) for how checkpoints are created and restored.
+
+### Usage Policy refusal
+
+The API declined to respond because content in the conversation triggered a [Usage Policy](https://www.anthropic.com/legal/aup) check. The message includes a Request ID you can quote to support if you believe the refusal is incorrect.
+
+```text theme={null}
+API Error: Claude Code is unable to respond to this request, which appears to violate our Usage Policy (https://www.anthropic.com/legal/aup). Please double press esc to edit your last message or start a new session for Claude Code to assist with a different task.
+```
+
+The check evaluates the full conversation, not only your latest prompt, so sending a new message in the same session usually re-triggers the same refusal. The same applies after exiting and reopening the session with `--continue` or `--resume`, since the transcript on disk still contains the triggering content.
+
+**What to do:**
+
+* Press Esc twice or run `/rewind` to step back to a checkpoint before the turn that triggered the refusal, then rephrase or take a different approach. See [Checkpointing](/en/checkpointing).
+* If you cannot identify which turn caused it, run `/clear` to start a fresh conversation in the same project. Your previous conversation is preserved on disk and remains available in `/resume`.
+* In [non-interactive mode](/en/headless) (`-p`), where rewind is unavailable, retry with a rephrased prompt or start a new session without `--continue`.
 
 ## Responses seem lower quality than usual
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/overview
-fetched_at: 2026-05-18T05:02:44.878371+00:00
+fetched_at: 2026-05-25T05:15:53.243022+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,7 +8,7 @@ fetch_method: mintlify_md
 > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt
 > Use this file to discover all available pages before exploring further.
 
-# Claude Code overview
+# Overview
 
 > Claude Code is an agentic coding tool that reads your codebase, edits files, runs commands, and integrates with your development tools. Available in your terminal, IDE, desktop app, and browser.
 

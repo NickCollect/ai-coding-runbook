@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/keybindings
-fetched_at: 2026-05-18T05:02:44.818957+00:00
+fetched_at: 2026-05-25T05:15:53.198967+00:00
 fetch_method: mintlify_md
 ---
 
@@ -155,9 +155,9 @@ Actions available in the `Confirmation` context:
 
 Actions available in the `Confirmation` context for permission dialogs:
 
-| Action                   | Default | Description                  |
-| :----------------------- | :------ | :--------------------------- |
-| `permission:toggleDebug` | Ctrl+D  | Toggle permission debug info |
+| Action                   | Default   | Description                                                                                                         |
+| :----------------------- | :-------- | :------------------------------------------------------------------------------------------------------------------ |
+| `permission:toggleDebug` | (unbound) | Toggle permission debug info. The previous default of Ctrl+D was removed in v2.1.146 because it shadowed `app:exit` |
 
 ### Transcript actions
 
@@ -267,10 +267,11 @@ Actions available in the `DiffDialog` context:
 
 Actions available in the `ModelPicker` context:
 
-| Action                       | Default | Description           |
-| :--------------------------- | :------ | :-------------------- |
-| `modelPicker:decreaseEffort` | Left    | Decrease effort level |
-| `modelPicker:increaseEffort` | Right   | Increase effort level |
+| Action                       | Default | Description                                       |
+| :--------------------------- | :------ | :------------------------------------------------ |
+| `modelPicker:decreaseEffort` | Left    | Decrease effort level                             |
+| `modelPicker:increaseEffort` | Right   | Increase effort level                             |
+| `modelPicker:setAsDefault`   | d       | Set highlighted model as default for new sessions |
 
 ### Select actions
 
