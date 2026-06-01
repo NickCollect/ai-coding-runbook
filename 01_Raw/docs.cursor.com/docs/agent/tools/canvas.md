@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/tools/canvas
-fetched_at: 2026-05-05T19:55:36.648698+00:00
+fetched_at: 2026-06-01T05:54:48.205288+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,6 +24,14 @@ Each canvas appears in your workspace's canvas list, so you can jump back to pas
 - **From Cursor**: when Cursor creates a canvas, a card appears at the end of the response. Click it to open.
 - **Command Palette**: run **Open Canvas** from the palette, listed under View.
 - **Agents Window**: open a canvas tab directly from the new tab menu in the [Agents Window](https://cursor.com/docs/agent/agents-window.md).
+
+## Sharing canvases
+
+Shared canvases turn an interactive artifact into something your whole team can open, not just you. When you share a canvas, Cursor uploads a live snapshot of the view and gives you a link teammates can open in the browser — same layout, charts, and tables, without rerunning the agent or digging through chat history. Use **Publish** from the canvas toolbar to publish or refresh a share; browse everything your team has published from **Shared Canvases** on the [dashboard](https://cursor.com/dashboard).
+
+Shared canvases are available on paid plans (Pro, Teams, and Enterprise). Free accounts cannot create shares. Because each share is team-visible, you need to be on a team — Pro users on a team can share too. Sharing also requires a privacy mode that allows data storage (Legacy Privacy Mode blocks it).
+
+Team admins can turn shared canvases off for the organization from [team settings](https://cursor.com/dashboard/settings#shared-canvases) under **Shared Canvases**.
 
 ## Iterating on a canvas
 

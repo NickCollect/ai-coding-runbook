@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/api/endpoints
-fetched_at: 2026-05-25T05:15:50.600874+00:00
+fetched_at: 2026-06-01T05:54:48.484368+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,7 +13,7 @@ availability.
 
 The Cloud Agents API lets you programmatically launch and manage cloud agents that work on your repositories.
 
-- The Cloud Agents API accepts both [Basic and Bearer authentication](https://cursor.com/docs/api.md#authentication). Generate a user API key from [Cursor Dashboard → Integrations](https://cursor.com/dashboard/integrations), or use a [service account API key](https://cursor.com/docs/account/enterprise/service-accounts.md).
+- The Cloud Agents API accepts both [Basic and Bearer authentication](https://cursor.com/docs/api.md#authentication). Generate a user API key from [Cursor Dashboard → API Keys](https://cursor.com/dashboard/api), or use a [service account API key](https://cursor.com/docs/account/enterprise/service-accounts.md).
 - For details on authentication methods, rate limits, and best practices, see the [API Overview](https://cursor.com/docs/api.md).
 - View the full [OpenAPI specification](/docs-static/cloud-agents-openapi.yaml) for detailed schemas and examples.
 - Webhooks are coming soon. The legacy [v0 API](https://cursor.com/docs/cloud-agent/api/v0.md) still supports them — see [Webhooks](https://cursor.com/docs/cloud-agent/api/webhooks.md).
@@ -82,7 +82,7 @@ GitHub repository URL (for example, `https://github.com/your-org/your-repo`). Re
 
 `repos[0].startingRef` string (optional)
 
-Branch, tag, or commit hash to use as the starting point. Ignored when `prUrl` is provided.
+Branch name or commit SHA to use as the starting point. Ignored when `prUrl` is provided.
 
 `repos[0].prUrl` string (optional)
 

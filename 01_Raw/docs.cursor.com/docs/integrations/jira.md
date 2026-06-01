@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/jira
-fetched_at: 2026-05-25T05:15:51.126296+00:00
+fetched_at: 2026-06-01T05:54:49.012753+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,6 +18,9 @@ Before you install the Jira integration, make sure you have:
 - Admin access to the Jira site where you want to install the app
 - Cursor admin access to the team you want to connect
 - GitHub or GitLab connected to Cursor for repository access and pull requests
+
+The Cursor Jira integration is currently available only on Cursor Teams and
+Enterprise plans.
 
 The Cursor Jira integration is not currently supported in Atlassian HIPAA or
 FedRAMP (including Government Cloud) instances.

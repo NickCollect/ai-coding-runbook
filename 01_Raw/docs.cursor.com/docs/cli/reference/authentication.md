@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/reference/authentication
-fetched_at: 2026-05-05T19:55:37.191223+00:00
+fetched_at: 2026-06-01T05:54:48.312297+00:00
 fetch_method: mintlify_md
 ---
 
@@ -31,7 +31,7 @@ For automation, scripts, or CI/CD environments, use API key authentication:
 
 ### Step 1: Generate an API key
 
-Generate a user API key from [Cursor Dashboard → Integrations](https://cursor.com/dashboard/integrations) under **API Keys**.
+Generate a user API key from [Cursor Dashboard → API Keys](https://cursor.com/dashboard/api).
 
 ### Step 2: Set the API key
 

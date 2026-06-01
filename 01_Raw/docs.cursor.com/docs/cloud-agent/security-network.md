@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/security-network
-fetched_at: 2026-05-25T05:15:50.738519+00:00
+fetched_at: 2026-06-01T05:54:48.639517+00:00
 fetch_method: mintlify_md
 ---
 
@@ -212,6 +212,13 @@ If you need to add the proxy IPs directly to an allowlist, use these addresses:
 184.73.225.134
 3.209.66.12
 52.44.113.131
+34.192.39.182
+50.16.106.255
+44.217.29.124
+3.223.245.201
+54.164.185.10
+34.194.133.23
+35.170.116.221
 ```
 
 These IP addresses are stable. If the list ever changes, teams using IP allow

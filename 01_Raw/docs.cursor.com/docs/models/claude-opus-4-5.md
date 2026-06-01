@@ -1,10 +1,10 @@
 ---
 source_url: https://cursor.com/docs/models/claude-opus-4-5
-fetched_at: 2026-05-05T19:55:41.002856+00:00
+fetched_at: 2026-06-01T05:54:49.212424+00:00
 fetch_method: mintlify_md
 ---
 
-We recommend using [Claude 4.7 Opus](https://cursor.com/docs/models/claude-opus-4-7.md). It's the latest Opus with stronger reasoning and code quality.
+We recommend using [Claude Opus 4.8](https://cursor.com/docs/models/claude-opus-4-8.md). It's the latest Opus with stronger reasoning and code quality.
 
 ## Tools
 

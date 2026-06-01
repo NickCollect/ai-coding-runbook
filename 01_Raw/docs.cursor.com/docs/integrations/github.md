@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/github
-fetched_at: 2026-05-05T19:55:40.080212+00:00
+fetched_at: 2026-06-01T05:54:48.978348+00:00
 fetch_method: mintlify_md
 ---
 
@@ -42,6 +42,13 @@ Add these IP addresses to your allowlist:
 184.73.225.134
 3.209.66.12
 52.44.113.131
+34.192.39.182
+50.16.106.255
+44.217.29.124
+3.223.245.201
+54.164.185.10
+34.194.133.23
+35.170.116.221
 ```
 
 For other connection options beyond IP whitelisting, see [Advanced networking](https://cursor.com/docs/integrations/github.md#advanced-networking).
@@ -110,13 +117,16 @@ Available for Enterprise customers. Run a reverse proxy tunnel on-premises that 
 
 The GitHub app requests the following permissions to support Cursor features:
 
-| Permission                | Purpose                                        |
-| ------------------------- | ---------------------------------------------- |
-| **Repository access**     | Clone your code and create working branches    |
-| **Pull requests**         | Create PRs and leave review comments           |
-| **Issues**                | Track bugs and tasks discovered during reviews |
-| **Checks and statuses**   | Report on code quality and test results        |
-| **Actions and workflows** | Monitor CI/CD pipelines and deployment status  |
+| Permission                         | Purpose                                                                      |
+| ---------------------------------- | ---------------------------------------------------------------------------- |
+| **Repository access**              | Clone your code and create working branches                                  |
+| **Pull requests**                  | Create PRs and leave review comments                                         |
+| **Issues**                         | Track bugs and tasks discovered during reviews                               |
+| **Checks and statuses**            | Report on code quality and test results                                      |
+| **Actions and workflows**          | Monitor CI/CD pipelines and trigger CI re-runs from pull requests            |
+| **Administration**                 | Read branch protection and required check rules to determine PR mergeability |
+| **Custom repository roles**        | Determine user access levels so the correct merge and review options appear  |
+| **Organization custom properties** | Surface organization-defined repository metadata in filtering                |
 
 All permissions follow the principle of least privilege.
 

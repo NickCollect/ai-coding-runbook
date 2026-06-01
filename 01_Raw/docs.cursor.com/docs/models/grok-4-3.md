@@ -1,8 +1,10 @@
 ---
 source_url: https://cursor.com/docs/models/grok-4-3
-fetched_at: 2026-05-11T04:55:38.249555+00:00
+fetched_at: 2026-06-01T05:54:49.806012+00:00
 fetch_method: mintlify_md
 ---
+
+We recommend using [Grok Build 0.1](https://cursor.com/docs/models/grok-build-0-1.md) for agentic coding in Cursor. It is xAI's dedicated coding model with tiered pricing through 256k context.
 
 Grok 4.3 is xAI's fastest and most capable model. It uses thinking mode by default, and supports a 200k context window (up to 1M in Max Mode).
 

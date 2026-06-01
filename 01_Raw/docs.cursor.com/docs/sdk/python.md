@@ -1,14 +1,10 @@
 ---
 source_url: https://cursor.com/docs/sdk/python
-fetched_at: 2026-05-25T05:15:52.450671+00:00
+fetched_at: 2026-06-01T05:54:49.971584+00:00
 fetch_method: mintlify_md
 ---
 
 # Cursor Python SDK
-
-### Public beta
-
-The Python SDK is in public beta. APIs may change before general availability.
 
 The `cursor-sdk` package lets you call Cursor's agent from your own Python code. The same agent that runs in the Cursor IDE, CLI, and web app is scriptable from Python with sync and async clients, typed dataclasses, and ordinary iteration for streams and pages. Run the `/sdk` skill inside Cursor to get started.
 
@@ -32,7 +28,7 @@ Set `CURSOR_API_KEY` or pass `api_key` before creating an agent.
 
 The SDK accepts user API keys and service account API keys for both local and cloud runs. Team Admin API keys are not yet supported.
 
-- **User API key** from [Cursor Dashboard -> Integrations](https://cursor.com/dashboard/integrations)
+- **User API key** from [Cursor Dashboard -> API Keys](https://cursor.com/dashboard/api)
 - **Service account API key** from [Team settings](https://cursor.com/dashboard/team-settings). See [Service accounts](https://cursor.com/docs/account/enterprise/service-accounts.md)
 
 ```bash

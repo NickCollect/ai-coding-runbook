@@ -1,17 +1,26 @@
 ---
 source_url: https://cursor.com/docs/sdk/typescript
-fetched_at: 2026-05-25T05:15:52.468764+00:00
+fetched_at: 2026-06-01T05:54:49.966244+00:00
 fetch_method: mintlify_md
 ---
 
 # Cursor TypeScript SDK
 
-### Public beta
-
-The TypeScript SDK is in public beta. APIs may change before general
-availability.
-
 The `@cursor/sdk` package lets you call Cursor's agent from your own code. The same agent that runs in the Cursor IDE, CLI, and web app is now scriptable from TypeScript. Run the `/sdk` skill inside Cursor to get started.
+
+### Cookbook
+
+End-to-end examples live in the [Cursor
+Cookbook](https://github.com/cursor/cookbook): a [SDK
+quickstart](https://github.com/cursor/cookbook/tree/main/sdk/quickstart), an
+[app-builder prototyping
+tool](https://github.com/cursor/cookbook/tree/main/sdk/app-builder), a [kanban
+board for cloud
+agents](https://github.com/cursor/cookbook/tree/main/sdk/agent-kanban), and a
+[coding-agent
+CLI](https://github.com/cursor/cookbook/tree/main/sdk/coding-agent-cli). Good
+starting points for CI auto-fix bots, bug triage workers, code-review passes,
+embedded in-product agents, and orchestrators.
 
 ## Overview
 
@@ -19,9 +28,16 @@ The SDK wraps local and cloud runtimes behind one interface. You write the same 
 
 | Runtime                   | What it does                                                                                                       | When to use                                                                                                                |
 | :------------------------ | :----------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------- |
-| **Local**                 | Runs the agent inline in your Node process. Files come from disk.                                                  | Dev scripts and CI checks against a working tree.                                                                          |
+| **Local**                 | Runs the agent loop inline in your Node process. Files come from disk.                                             | Dev scripts and CI checks against a working tree.                                                                          |
 | **Cloud (Cursor-hosted)** | Runs in an isolated VM with your repo cloned in. Cursor runs the VMs.                                              | When the caller doesn't have the repo, you want many agents in parallel, or runs need to survive the caller disconnecting. |
 | **Cloud (self-hosted)**   | Same shape, but you run the VMs via a [self-hosted pool](https://cursor.com/docs/cloud-agent/self-hosted-pool.md). | Same reasons as Cursor-hosted, plus code, secrets, and build artifacts must stay in your environment.                      |
+
+### Local means local agent loop, not local model
+
+"Local" describes where the agent loop and filesystem access run, not where
+the model runs. All inference goes through Cursor's hosted models in both
+modes. Local mode keeps your files on your machine; cloud mode runs in a
+Cursor environment. The model itself is hosted in either case.
 
 Runtime is picked by which key you pass to `Agent.create()` (`local` or `cloud`). Use the same `CURSOR_API_KEY` for either.
 
@@ -33,7 +49,7 @@ Set `CURSOR_API_KEY` (or pass `apiKey`) before creating an agent.
 
 The SDK accepts user API keys and service account API keys for both local and cloud runs. Team Admin API keys are not yet supported.
 
-- **User API key** from [Cursor Dashboard → Integrations](https://cursor.com/dashboard/integrations)
+- **User API key** from [Cursor Dashboard → API Keys](https://cursor.com/dashboard/api)
 - **Service account API key** from [Team settings](https://cursor.com/dashboard/team-settings). See [Service accounts](https://cursor.com/docs/account/enterprise/service-accounts.md)
 
 ```bash
@@ -43,6 +59,8 @@ export CURSOR_API_KEY="your-key"
 ## Usage and billing
 
 SDK runs follow the same pricing, request pools, and Privacy Mode rules as runs from the IDE and Cloud Agents. Spend shows up in your team's [usage dashboard](https://cursor.com/dashboard/usage) under the SDK tag.
+
+Service account API keys bill to the team that owns the service account. User API keys bill to that user's plan.
 
 ## Core concepts
 
@@ -57,6 +75,12 @@ SDK runs follow the same pricing, request pools, and Privacy Mode rules as runs 
 ```bash
 npm install @cursor/sdk
 ```
+
+The package name starts with `@`. The bare `cursor/sdk` doesn't exist on npm.
+
+### Runtime support
+
+The SDK ships native dependencies (`sqlite3` for the local checkpoint store, plus a per-platform `@cursor/sdk-<os>-<arch>` binary for sandboxing and ripgrep). That makes it a Node-first package.
 
 ## Quick start
 
@@ -79,6 +103,14 @@ for await (const event of run.stream()) {
 ```
 
 Each event is a discriminated `SDKMessage`. [Streaming](https://cursor.com/docs/sdk/typescript.md#streaming) shows how to extract assistant text, handle tool calls, and clean up with `await using`. For a one-shot prompt (create, run, dispose), see [Agent.prompt()](https://cursor.com/docs/sdk/typescript.md#agentprompt).
+
+### Quickstart approves tool calls automatically
+
+The default local agent runs tool calls (shell, edit, write, etc.) without
+asking for approval; there's no human-in-the-loop prompt in headless mode. To
+gate tool calls, configure [hooks](https://cursor.com/docs/sdk/typescript.md#hooks) (such as `beforeShellExecution` or
+`preToolUse`) or run with [`local.sandboxOptions.enabled:
+  true`](https://cursor.com/docs/sdk/typescript.md#sandbox-options).
 
 ## Creating agents
 
@@ -261,7 +293,8 @@ for await (const event of run.stream()) {
   }
 }
 
-// Follow-up. Full context is retained.
+// Follow-up on the same agent. Conversation state from the previous
+// run is loaded automatically.
 const run2 = await agent.send("Fix it and add a regression test");
 await run2.wait();
 ```
@@ -285,6 +318,21 @@ console.log(result.result);      // final assistant text, if any
 console.log(result.model);       // resolved ModelSelection used for this run
 console.log(result.durationMs);
 console.log(result.git);         // { branches: [{ repoUrl, branch?, prUrl? }] } on cloud
+```
+
+The final assistant text is on `result.result` as a string. There's no `text`, `message`, `messages`, or `content` field to dig through. If you need the per-step transcript instead, call `run.conversation()` for a structured `ConversationTurn[]` view:
+
+```typescript
+const result = await run.wait();
+const finalText = result.result ?? "";
+
+const turns = await run.conversation();
+const lastAssistant = turns
+  .flatMap((t) => (t.type === "agentConversationTurn" ? t.turn.steps : []))
+  .filter((s) => s.type === "assistantMessage")
+  .at(-1);
+
+console.log(lastAssistant?.message.text);
 ```
 
 ### Cancelling a run
@@ -880,6 +928,28 @@ const agent = await Agent.create({
 });
 ```
 
+#### Best practices
+
+- **Discover, don't hard-code.** Call `Cursor.models.list()` at startup (or once per process) and cache the result. Model ids and parameter shapes can change as new models ship.
+- **Pass parameters explicitly when the model expects them.** A model whose `parameters` array is non-empty is a parameterized model. Send the params you want; otherwise the run uses each parameter's first allowed value, which may not match what you intend.
+- **Resolve by capability, not id.** If you want "the current default with high reasoning" rather than a specific model, look it up:
+
+  ```typescript
+  const models = await Cursor.models.list();
+  const composer = models.find((m) => m.id === "composer-2");
+  const reasoning = composer?.parameters?.find((p) => p.id === "thinking");
+  const high = reasoning?.values.find((v) => v.value === "high")?.value;
+
+  const model = composer
+    ? {
+        id: composer.id,
+        params: high ? [{ id: "thinking", value: high }] : undefined,
+      }
+    : { id: "auto" };
+  ```
+
+  Falling back to `{ id: "auto" }` when a target model isn't available keeps scripts working as the catalog evolves.
+
 ### Cursor.repositories.list()
 
 ```typescript
@@ -891,6 +961,19 @@ interface SDKRepository {
 ```
 
 Returns the GitHub repositories connected for the calling user's team. Cloud only.
+
+## Configuration sources at a glance
+
+MCP servers, subagents, and hooks all resolve from a mix of inline options and on-disk config. The precedence is the same shape across the three: per-send inline > creation-time inline > project files > user files > team / dashboard config.
+
+| Feature              | Inline option                                               | Local file (project)                                                       | Local file (user)                        | Cloud / dashboard                                                                      | Precedence                                                                                              |
+| :------------------- | :---------------------------------------------------------- | :------------------------------------------------------------------------- | :--------------------------------------- | :------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------ |
+| **MCP servers**      | `mcpServers` on `Agent.create()` and `agent.send()`         | `.cursor/mcp.json` (gated by `local.settingSources` including `"project"`) | `~/.cursor/mcp.json` (gated by `"user"`) | Servers configured at [cursor.com/agents](https://cursor.com/agents) (cloud only)      | Send > create > plugins > project > user (local); Send > create > dashboard (cloud)                     |
+| **Subagents**        | `agents` on `Agent.create()`                                | `.cursor/agents/*.md` (frontmatter: `name`, `description`, `model?`)       | n/a                                      | Cloud picks up the same project files when the agent runs against the cloned repo      | Inline overrides file-based with the same name                                                          |
+| **Hooks**            | None — file-based only                                      | `.cursor/hooks.json` (+ scripts)                                           | `~/.cursor/hooks.json`                   | Cloud runs project hooks. On Enterprise plans, also team and enterprise-managed hooks. | File-based; project layered with user / team / enterprise per [Hooks](https://cursor.com/docs/hooks.md) |
+| **Settings sources** | `local.settingSources` selects which on-disk layers to load | `.cursor/`                                                                 | `~/.cursor/`                             | n/a                                                                                    | Cloud always loads `project` / `team` / `plugins` and ignores `local.settingSources`.                   |
+
+Inline values are good for secrets that should never touch disk (per-run API keys, tenant-scoped tokens). File-based config is good for policy: hooks especially are a project boundary, not a per-run knob.
 
 ## MCP servers
 
@@ -1026,6 +1109,31 @@ Hooks are file-based only. There is no programmatic hook callback. Hooks are a p
 
 See [Hooks](https://cursor.com/docs/hooks.md) for the configuration format and [Cloud Agents hooks support](https://cursor.com/docs/cloud-agent.md#hooks-support) for cloud behavior.
 
+## Sandbox options
+
+Local agents run with `local.sandboxOptions.enabled: false` by default. The agent can read and write the working directory, execute shell commands, and reach the network without restriction. There's no human-in-the-loop approval flow in headless SDK runs, so a sandbox-by-default would either block legitimate tool calls silently or require a callback that doesn't fit a script.
+
+When you enable the sandbox, the SDK constrains every shell tool call and shell-spawned process:
+
+- **Filesystem** — Writes are limited to the working directory (`local.cwd`) and a small set of allowed paths. Reads outside the workspace are blocked.
+- **Shell** — Commands run inside a platform sandbox (`bubblewrap` on Linux, `seatbelt` on macOS, the bundled `@cursor/sdk-<os>-<arch>` helper). Privileged operations are denied.
+- **Network** — Outbound network is denied by default. To allow specific hosts, drop a `.cursor/sandbox.json` in the workspace listing the allowed hosts. The SDK reads the same per-user policy at `~/.cursor/sandbox.json` if present.
+
+```typescript
+const agent = await Agent.create({
+  apiKey: process.env.CURSOR_API_KEY!,
+  model: { id: "composer-2" },
+  local: {
+    cwd: process.cwd(),
+    sandboxOptions: { enabled: true },
+  },
+});
+```
+
+If sandboxing isn't supported on the host (older Linux without `bubblewrap`, missing helper binary), the SDK throws a `ConfigurationError` with a message that names the missing dependency. Disable `sandboxOptions.enabled` or run in cloud mode to recover.
+
+Cloud runs always execute inside an isolated VM, so `sandboxOptions` doesn't apply.
+
 ## Artifacts
 
 List and download files from the agent's workspace.
@@ -1065,7 +1173,72 @@ To dispose explicitly:
 await agent[Symbol.asyncDispose]();
 ```
 
-`agent.close()` starts disposal without awaiting. `agent.reload()` picks up filesystem config changes (hooks, project MCP, subagents) without disposing.
+`agent.close()` is the documented way to start disposal without awaiting. `Symbol.asyncDispose` works (`await using` is built on it) but `close()` is the path you should reach for in code that doesn't use the `await using` syntax. `agent.reload()` picks up filesystem config changes (hooks, project MCP, subagents) without disposing.
+
+## Agent lifecycle
+
+### Reattach to an existing agent
+
+`Agent.resume(agentId)` returns a fresh handle to an agent that already exists. The runtime is auto-detected from the ID prefix (`bc-` is cloud, anything else is local), and conversation state is loaded from the cloud (cloud) or the local checkpoint store (local). This is how you continue work after a process restart, or how a different worker picks up an agent another process started.
+
+```typescript
+const agent = await Agent.resume("bc-abc123", {
+  apiKey: process.env.CURSOR_API_KEY!,
+});
+
+const run = await agent.send("Apply the suggested fix");
+const result = await run.wait();
+```
+
+If the run was already running when you reattached, `Agent.getRun(runId, { runtime: "cloud", agentId })` (or the local equivalent) returns a `Run` you can `stream()`, `wait()`, or `cancel()` against.
+
+### Conversation context
+
+Local agents persist conversation state in a SQLite checkpoint store under your home directory. Each call to `agent.send()` loads the latest checkpoint for that agent and passes it to the model, so follow-ups see the same context the previous run finished with. The store survives process restarts, which means `Agent.resume(agentId)` from a brand-new process picks up where the previous one left off.
+
+Cloud agents persist state server-side. Reattaching from anywhere returns the same conversation.
+
+A few things that look like context loss but aren't:
+
+- A new `Agent.create()` always starts a fresh agent with a new `agentId`. To continue an existing conversation, capture `agent.agentId` from the first call and use `Agent.resume(agentId)` later.
+- `Agent.prompt()` creates, runs, and disposes in one shot. There's no second turn; that's the contract.
+- Inline `mcpServers` aren't persisted across `Agent.resume()` because they often carry secrets. Pass them again on resume, or use file-based MCP config.
+
+### Dispatcher pattern
+
+A dispatcher owns a pool of agents and hands work to them as it arrives. The shape is straightforward: keep a map of `agentId` to long-lived `SDKAgent`, route incoming prompts by some key (user, repo, ticket), and `Agent.resume()` from disk if a process restart wiped the in-memory map.
+
+```typescript
+import { Agent, type SDKAgent } from "@cursor/sdk";
+
+const agents = new Map<string, SDKAgent>();
+
+async function getAgent(key: string, savedId?: string): Promise<SDKAgent> {
+  const existing = agents.get(key);
+  if (existing) return existing;
+
+  const agent = savedId
+    ? await Agent.resume(savedId, {
+        apiKey: process.env.CURSOR_API_KEY!,
+      })
+    : await Agent.create({
+        apiKey: process.env.CURSOR_API_KEY!,
+        model: { id: "composer-2" },
+        local: { cwd: process.cwd() },
+      });
+
+  agents.set(key, agent);
+  return agent;
+}
+
+async function handleMessage(key: string, prompt: string, savedId?: string) {
+  const agent = await getAgent(key, savedId);
+  const run = await agent.send(prompt);
+  return run.wait();
+}
+```
+
+Cloud SSE streams retain backlog for a window after the run starts, so a dispatcher that streams to many subscribers can call `run.stream()` from each subscriber without losing earlier events. For really long-running cloud runs, dispatchers usually fan out to `run.wait()` and let subscribers poll `run.conversation()` if they need the structured transcript.
 
 ## Configuration reference
 
@@ -1207,26 +1380,37 @@ Returned by `Agent.list()` and `Agent.listRuns()`. `nextCursor` is absent when t
 
 ## Errors
 
-All SDK errors extend `CursorAgentError`. Use `isRetryable` to drive retry logic.
+All SDK errors extend `CursorSdkError` (re-exported as `CursorAgentError` for backwards compatibility). Use `isRetryable` to drive retry logic, and `code` / `status` / `requestId` for diagnostics.
 
 ```typescript
-class CursorAgentError extends Error {
-  readonly isRetryable: boolean;
-  readonly code?: string;
-  readonly cause?: unknown;
-  readonly protoErrorCode?: string;
+class CursorSdkError extends Error {
+All SDK errors extend `CursorSdkError`. Use `isRetryable` to drive retry logic, and `code` / `status` / `requestId` for diagnostics.
+  readonly code?: string;       // stable SDK / backend code
+  readonly status?: number;     // HTTP status if available
+  readonly cause?: unknown;     // wrapped underlying error
+  readonly endpoint?: string;
+  readonly requestId?: string;
+  readonly operation?: string;  // SDK operation that produced the error
 }
 ```
 
-| Error                          | When                                                                                                                    |
-| :----------------------------- | :---------------------------------------------------------------------------------------------------------------------- |
-| `AuthenticationError`          | Invalid API key, not logged in, insufficient permissions.                                                               |
-| `RateLimitError`               | Too many requests or usage limits exceeded.                                                                             |
-| `ConfigurationError`           | Invalid model, bad request parameters.                                                                                  |
-| `AgentBusyError`               | Sending a follow-up while the agent already has a run in `CREATING` or `RUNNING` state (HTTP `409`, code `agent_busy`). |
-| `IntegrationNotConnectedError` | Creating a cloud agent for a repo whose SCM provider is not connected.                                                  |
-| `NetworkError`                 | Service unavailable, timeout.                                                                                           |
-| `UnknownAgentError`            | Catch-all for unclassified server or runtime errors.                                                                    |
+| Error class                    | Typical message                                               | Likely cause                                                                                                               | Recommended fix                                                                                                                                                                                                 |
+| :----------------------------- | :------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AuthenticationError`          | "Invalid API key"                                             | Missing or wrong `CURSOR_API_KEY`, expired token, or admin disabled the key.                                               | Generate a new key from [API Keys](https://cursor.com/dashboard/api) (user) or [Team settings](https://cursor.com/dashboard/team-settings) (service account). Confirm the key has permission for the operation. |
+| `RateLimitError`               | "Rate limit exceeded" or "Usage limit exceeded"               | Burst limit or monthly usage cap.                                                                                          | Back off using exponential delay (the SDK reports `isRetryable: true` for transient cases). For monthly cap, raise the plan's [usage limit](https://cursor.com/docs/account/usage.md).                          |
+| `ConfigurationError`           | "Bad model name", "API key not supported", "File unsupported" | Invalid `model.id`, missing required `params`, unsupported file in a tool call, or an admin policy blocking the request.   | Call `Cursor.models.list()` to confirm the id and params. Check repo / file paths exist.                                                                                                                        |
+| `AgentBusyError`               | "Agent is busy"                                               | Sending a follow-up while the same cloud agent already has a run in `CREATING` or `RUNNING` state.                         | Wait for the active run to finish, cancel it, or poll `Agent.listRuns()` before sending again.                                                                                                                  |
+| `IntegrationNotConnectedError` | "\[provider] integration is not connected"                    | Creating a cloud agent for a repo whose SCM provider isn't connected to your Cursor team.                                  | Open `error.helpUrl` to reconnect the provider, then retry.                                                                                                                                                     |
+| `NetworkError`                 | "Service unavailable", "Timeout"                              | Transient backend issue, network partition, or deadline exceeded.                                                          | Retry with backoff. Inspect `error.requestId` if you need to file a support ticket.                                                                                                                             |
+| `UnsupportedRunOperationError` | "Operation "stream" is not supported on this runtime"         | Calling a `Run` method the current runtime can't satisfy (e.g. streaming on a re-fetched local run that already finished). | Guard with `run.supports(operation)` / `run.unsupportedReason(operation)` first.                                                                                                                                |
+| `UnknownAgentError`            | Server-defined message                                        | Unclassified backend or runtime error.                                                                                     | Inspect `error.code`, `error.protoErrorCode`, and `error.cause` for the underlying detail.                                                                                                                      |
+
+### Check error.helpUrl
+
+Some errors carry a one-click resolution link. The most common is
+`IntegrationNotConnectedError`, but more error types may add `helpUrl` over
+time. When you catch an error, log `error.helpUrl` if present and surface it
+to the user.
 
 ### IntegrationNotConnectedError
 
@@ -1237,19 +1421,17 @@ class IntegrationNotConnectedError extends ConfigurationError {
 }
 ```
 
-Use `helpUrl` to point the user at the right reconnect flow. New providers will be added without an SDK release.
+The default error message doesn't include `helpUrl`, so log it explicitly:
 
-### AgentBusyError
-
-Cloud agents allow only one active run at a time. `AgentBusyError` is thrown when you call `agent.send()` (or otherwise create a run) while another run on the same agent is still `CREATING` or `RUNNING`.
-
+````typescript
+import { Agent, IntegrationNotConnectedError } from "@cursor/sdk";
 ```typescript
 class AgentBusyError extends CursorAgentError {
   readonly code: "agent_busy";
   readonly status: 409;
   readonly isRetryable: false;
 }
-```
+````
 
 `isRetryable` is `false`. Retrying immediately will keep failing until the active run reaches a terminal status or you cancel it. Other `409` responses, such as `agent_archived`, throw `ConfigurationError` instead.
 
@@ -1281,12 +1463,12 @@ Local agents do not return `agent_busy`. Use `send({ local: { force: true } })` 
 ### UnsupportedRunOperationError
 
 ```typescript
-class UnsupportedRunOperationError extends Error {
+class UnsupportedRunOperationError extends ConfigurationError {
   readonly operation: RunOperation;
 }
 ```
 
-Thrown when a `Run` operation is not available on the current runtime. Use `run.supports(operation)` and `run.unsupportedReason(operation)` to check before calling.
+Thrown when a `Run` operation isn't available on the current runtime. Use `run.supports(operation)` and `run.unsupportedReason(operation)` to check before calling.
 
 ## Known limitations
 
@@ -1294,6 +1476,8 @@ Thrown when a `Run` operation is not available on the current runtime. Use `run.
 - Artifact download is not implemented for local agents (`agent.listArtifacts()` returns an empty list and `agent.downloadArtifact()` throws).
 - `local.settingSources` (and the file-based MCP / subagent paths it gates) does not apply to cloud agents. Cloud always loads `project` / `team` / `plugins`.
 - Hooks are file-based only (`.cursor/hooks.json`). No programmatic callbacks.
+- The SDK doesn't auto-discover credentials from a local Cursor app installation. Set `CURSOR_API_KEY` (or pass `apiKey`) explicitly.
+- Local mode requires Node-runtime support for `sqlite3` and the platform sandbox helper.
 
 
 ---

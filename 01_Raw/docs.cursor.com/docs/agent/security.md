@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/security
-fetched_at: 2026-05-25T05:15:50.326897+00:00
+fetched_at: 2026-06-01T05:54:48.153458+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,11 +20,11 @@ Agents can modify workspace files without approval, except for configuration fil
 
 **Warning:** If you have auto-reload enabled, agent changes might execute before you can review them.
 
-By default, terminal commands need your approval. You can either enabled a broader [auto-run mode](https://cursor.com/docs/agent/tools/terminal.md#auto-run-mode), or add them to your allowlist to get them to run without approval.
+By default, terminal commands need your approval. You can either enable a broader [Run Mode](https://cursor.com/docs/agent/tools/terminal.md#run-mode), or add them to your allowlist to get them to run without approval.
 
-You can enable auto-approval if you accept the risk. **Allowlist** and **Allowlist (with Sandbox)** use an [allowlist](https://cursor.com/docs/agent/tools/terminal.md#protection-settings) to control which terminal commands and MCP tools run without asking. The allowlist is best-effort — bypasses are possible. Never use **Run Everything**, which skips all safety checks. Manage allowlists in **Cursor Settings > Agents > Auto-Run** or [`~/.cursor/permissions.json`](https://cursor.com/docs/reference/permissions.md).
+You can enable auto-approval if you accept the risk. On Cursor 3.6 and above, **Auto-review** is the recommended default. It runs allowlisted calls, sandboxes what it can, and sends anything else through an LLM classifier that decides allow or block based on safety and how well the call matches your intent. To see the step-by-step flow, read [how Auto-review decides](https://cursor.com/docs/agent/tools/terminal.md#how-auto-review-works). **Run Everything** runs every call without screening; pick it when you want zero prompting and no classifier in the loop. **Allowlist** and **Allowlist (with Sandbox)** are the older modes and rely on an [allowlist](https://cursor.com/docs/agent/tools/terminal.md#protection-settings) of terminal commands and MCP tools. All four modes are best-effort; bypasses are possible. Manage modes and allowlists in **Cursor Settings > Agents > Run Mode** or [`permissions.json`](https://cursor.com/docs/reference/permissions.md).
 
-Before Cursor 3.5, auto-run used **Run in Sandbox**, **Ask Every Time**, and **Run Everything** under different names.
+Cursor 3.6 adds **Auto-review** as the default Run Mode. Before Cursor 3.5, the older modes appeared as **Run in Sandbox**, **Ask Every Time**, and **Run Everything**.
 
 ## Third-party tool calls
 

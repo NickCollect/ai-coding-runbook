@@ -1,16 +1,16 @@
 ---
 source_url: https://cursor.com/docs/agent/tools/terminal
-fetched_at: 2026-05-25T05:15:50.350940+00:00
+fetched_at: 2026-06-01T05:54:48.264842+00:00
 fetch_method: mintlify_md
 ---
 
 # Terminal
 
-Agent runs shell commands directly in your terminal, with safe sandbox execution on macOS, Linux, and Windows.
+Cursor runs shell commands directly in your terminal, with safe sandbox execution on macOS, Linux, and Windows.
 
 ## Sandbox
 
-By default, Agent runs terminal commands in a restricted environment that blocks unauthorized file access and network activity. Commands execute automatically while staying confined to your workspace.
+By default, Cursor runs terminal commands in a restricted environment that blocks unauthorized file access and network activity. Commands execute automatically while staying confined to your workspace.
 
 For a deep dive into how sandboxing is implemented on each platform, see [Implementing a secure sandbox for local agents](/blog/agent-sandboxing).
 
@@ -31,7 +31,7 @@ For a deep dive into how sandboxing is implemented on each platform, see [Implem
 - **Kernel 6.2 or later** with Landlock v3 support (`CONFIG_SECURITY_LANDLOCK=y`)
 - **Unprivileged user namespaces** enabled (most distributions enable this by default)
 
-If your kernel doesn't meet these requirements, Agent falls back to asking for approval before running commands.
+If your kernel doesn't meet these requirements, Cursor falls back to asking for approval before running commands.
 
 **AppArmor setup**
 
@@ -67,7 +67,7 @@ The sandbox prevents unauthorized access while allowing workspace operations:
 
 The `.cursor` configuration directory stays protected regardless of allowlist settings.
 
-Some commands need full system access and bypass the sandbox. Agent will indicate when a command runs outside the sandbox and ask for your approval.
+Some commands need full system access and bypass the sandbox. Cursor will indicate when a command runs outside the sandbox and ask for your approval.
 
 ### Allowlist
 
@@ -77,7 +77,7 @@ When a sandboxed command fails due to restrictions, you can:
 
 | Option               | Description                                                          |
 | :------------------- | :------------------------------------------------------------------- |
-| **Skip**             | Cancel the command and let Agent try something else                  |
+| **Skip**             | Cancel the command and let Cursor try something else                 |
 | **Run**              | Execute the command without sandbox restrictions                     |
 | **Add to allowlist** | Run without restrictions and automatically approve it for future use |
 
@@ -228,21 +228,36 @@ The `${CURSOR_ORIG_UID:-$(id -u)}` fallback ensures the command also works outsi
 
 ## Editor configuration
 
-Configure how Agent runs tools like command execution, MCP, and file writes at **Settings > Cursor Settings > Agents > Auto-Run**.
+Configure how Cursor runs tools like command execution, MCP, and file writes at **Settings > Cursor Settings > Agents > Run Mode**.
 
-### Auto-run mode
+### Run Mode
 
-Choose how Agent handles tools like command execution, MCP, and file writes:
+Choose how Cursor handles tools like command execution, MCP, and file writes:
 
-| Mode                         | Behavior                                                                                                                                                                                   |
-| :--------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Allowlist**                | Only tools and commands on your allowlist auto-run without approval. Everything else requires your approval.                                                                               |
-| **Allowlist (with Sandbox)** | Tools and commands on your allowlist auto-run outside the sandbox. All other tools and commands auto-run in the sandbox where possible. Available on macOS, Linux, and Windows (via WSL2). |
-| **Run Everything**           | The agent runs all tools and commands automatically without asking for input.                                                                                                              |
+| Mode                         | Behavior                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| :--------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Auto-review**              | Allowlisted calls run immediately. Other calls run in the sandbox when possible. Anything that can't be sandboxed (or isn't on the allowlist) goes through an LLM classifier that returns allow or block based on safety and how well the call matches your intent. On a block, Cursor can try a different approach or ask you to approve the call. The classifier isn't deterministic and isn't a guarantee, so it can make mistakes. Recommended default on Cursor 3.6 and above. |
+| **Allowlist**                | Only tools and commands on your allowlist run without approval. Everything else requires your approval.                                                                                                                                                                                                                                                                                                                                                                             |
+| **Allowlist (with Sandbox)** | Tools and commands on your allowlist run outside the sandbox. All other tools and commands run in the sandbox where possible. Available on macOS, Linux, and Windows (via WSL2).                                                                                                                                                                                                                                                                                                    |
+| **Run Everything**           | Every tool and command runs automatically, with no classifier or sandbox in the loop. Pick this when you want zero prompting and fully deterministic pass-through, and you accept that nothing gets screened first.                                                                                                                                                                                                                                                                 |
 
-Auto-run uses the modes above. Before Cursor 3.5, the same settings appeared as **Run in Sandbox**, **Ask Every Time**, and **Run Everything**. **Run in Sandbox** maps to **Allowlist (with Sandbox)**. **Ask Every Time** is deprecated — use **Allowlist** with empty allowlists to require approval for every action.
+Cursor 3.6 introduces **Auto-review** as the new default. Before Cursor 3.5, the same settings appeared as **Run in Sandbox**, **Ask Every Time**, and **Run Everything**. **Run in Sandbox** maps to **Allowlist (with Sandbox)**. **Ask Every Time** is deprecated. Use **Allowlist** with empty allowlists to require approval for every action.
 
-### Auto-run network access
+We are currently not charging for the Auto-review classifier token costs.
+
+#### How Auto-review works
+
+**Auto-review** applies to Shell, MCP, and Fetch tool calls on every platform. Every call goes through three checks in order:
+
+1. **Allowlist.** If the call matches your [terminal](https://cursor.com/docs/agent/tools/terminal.md#protection-settings) or [MCP](https://cursor.com/docs/agent/tools/terminal.md#protection-settings) allowlist, it runs immediately.
+2. **Sandbox.** If the call can run inside the sandbox, it runs there with the network and filesystem restrictions described above. The sandbox step is only available on macOS, Linux, and Windows (via WSL2); on other platforms the call skips straight to the classifier.
+3. **Classifier.** Anything else is sent to an LLM classifier with the current user request and your `autoRun` instructions from [`permissions.json`](https://cursor.com/docs/reference/permissions.md#autorun-configuration). The classifier returns **allow** or **block**.
+
+When the classifier blocks a call, Cursor can pick a different approach or insist and surface a standard approval prompt to you. The classifier adds no extra cost on top of your existing agent usage.
+
+The classifier is non-deterministic and can make mistakes in both directions. It can allow a call you would have blocked, and it can block a call that was safe. Treat **Auto-review** as best-effort convenience, not a security boundary. For strict control, use **Allowlist** and approve calls yourself.
+
+### Run Mode network access
 
 Choose how sandboxed commands access the network:
 
@@ -254,44 +269,44 @@ Choose how sandboxed commands access the network:
 
 ### Protection settings
 
-| Setting                      | Description                                                                                                                                                                                   |
-| :--------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Command Allowlist**        | Terminal commands that auto-run without approval. In **Allowlist (with Sandbox)** mode, these run outside the sandbox; in **Allowlist** mode, they run normally without sandbox restrictions. |
-| **MCP Allowlist**            | MCP tools that auto-run without approval. In **Allowlist (with Sandbox)** mode, these run outside the sandbox; in **Allowlist** mode, they run normally without sandbox restrictions.         |
-| **Browser Protection**       | Prevent Agent from automatically running [Browser](https://cursor.com/docs/agent/tools/browser.md) tools.                                                                                     |
-| **File-Deletion Protection** | Prevent Agent from deleting files automatically.                                                                                                                                              |
-| **Dotfile Protection**       | Prevent Agent from modifying dot files like .gitignore automatically.                                                                                                                         |
-| **External-File Protection** | Prevent Agent from creating or modifying files outside of the workspace automatically.                                                                                                        |
+| Setting                      | Description                                                                                                                                                                              |
+| :--------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Command Allowlist**        | Terminal commands that run without approval. In **Allowlist (with Sandbox)** mode, these run outside the sandbox; in **Allowlist** mode, they run normally without sandbox restrictions. |
+| **MCP Allowlist**            | MCP tools that run without approval. In **Allowlist (with Sandbox)** mode, these run outside the sandbox; in **Allowlist** mode, they run normally without sandbox restrictions.         |
+| **Browser Protection**       | Prevent Cursor from automatically running [Browser](https://cursor.com/docs/agent/tools/browser.md) tools.                                                                               |
+| **File-Deletion Protection** | Prevent Cursor from deleting files automatically.                                                                                                                                        |
+| **Dotfile Protection**       | Prevent Cursor from modifying dot files like .gitignore automatically.                                                                                                                   |
+| **External-File Protection** | Prevent Cursor from creating or modifying files outside of the workspace automatically.                                                                                                  |
 
 ## Enterprise controls
 
 Only available for Enterprise subscriptions.
 
-Enterprise admins can override editor configurations or change which settings are visible for end users. Navigate to **Settings > Auto-Run** in the [web dashboard](https://cursor.com/dashboard/settings) to view and change these settings.
+Enterprise admins can override editor configurations or change which settings are visible for end users. Navigate to **Settings > Run Mode** in the [web dashboard](https://cursor.com/dashboard/settings) to view and change these settings.
 
-| Setting                        | Description                                                                                                                      |
-| :----------------------------- | :------------------------------------------------------------------------------------------------------------------------------- |
-| **Auto-Run Controls**          | Enable controls for auto-run mode and allowlists. When disabled, end users get **Allowlist (with Sandbox)** behavior by default. |
-| **Sandboxing Mode**            | Control whether **Allowlist (with Sandbox)** is available. When enabled, commands not on the allowlist auto-run in the sandbox.  |
-| **Sandbox Networking**         | Choose whether sandboxed commands have network access.                                                                           |
-| **Delete File Protection**     | Prevent Agent from deleting files automatically.                                                                                 |
-| **MCP Tool Protection**        | Prevent Agent from automatically running MCP tools.                                                                              |
-| **Terminal Command Allowlist** | Commands that auto-run without sandboxing. In **Allowlist (with Sandbox)** mode, all other commands auto-run in the sandbox.     |
-| **Enable Run Everything**      | Give end users the ability to enable the **Run Everything** auto-run mode.                                                       |
+| Setting                        | Description                                                                                                                 |
+| :----------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| **Run Mode controls**          | Enable controls for Run Mode and allowlists. When disabled, end users get **Allowlist (with Sandbox)** behavior by default. |
+| **Sandboxing Mode**            | Control whether **Allowlist (with Sandbox)** is available. When enabled, commands not on the allowlist run in the sandbox.  |
+| **Sandbox Networking**         | Choose whether sandboxed commands have network access.                                                                      |
+| **Delete File Protection**     | Prevent Cursor from deleting files automatically.                                                                           |
+| **MCP Tool Protection**        | Prevent Cursor from automatically running MCP tools.                                                                        |
+| **Terminal Command Allowlist** | Commands that run without sandboxing. In **Allowlist (with Sandbox)** mode, all other commands run in the sandbox.          |
+| **Enable Run Everything**      | Give end users the ability to enable the **Run Everything** mode.                                                           |
 
 ## Troubleshooting
 
 Some shell themes (for example, Powerlevel9k/Powerlevel10k) can interfere with
 the inline terminal output. If your command output looks truncated or
-misformatted, disable the theme or switch to a simpler prompt when Agent runs.
+misformatted, disable the theme or switch to a simpler prompt when Cursor runs.
 
-### Disable heavy prompts for Agent sessions
+### Disable heavy prompts for Cursor sessions
 
 Use the `CURSOR_AGENT` environment variable in your shell config to detect when
-the Agent is running and skip initializing fancy prompts/themes.
+Cursor is running and skip initializing fancy prompts/themes.
 
 ```zsh
-# ~/.zshrc — disable Powerlevel10k when Cursor Agent runs
+# ~/.zshrc — disable Powerlevel10k when Cursor runs
 if [[ -n "$CURSOR_AGENT" ]]; then
   # Skip theme initialization for better compatibility
 else
@@ -300,7 +315,7 @@ fi
 ```
 
 ```bash
-# ~/.bashrc — fall back to a simple prompt in Agent sessions
+# ~/.bashrc — fall back to a simple prompt in Cursor sessions
 if [[ -n "$CURSOR_AGENT" ]]; then
   PS1='\u@\h \W \$ '
 fi

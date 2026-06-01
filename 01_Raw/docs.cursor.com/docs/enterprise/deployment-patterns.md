@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/deployment-patterns
-fetched_at: 2026-05-25T05:15:50.941740+00:00
+fetched_at: 2026-06-01T05:54:48.806562+00:00
 fetch_method: mintlify_md
 ---
 
@@ -41,18 +41,19 @@ Cursor currently provides policies to control the following admin-controlled fea
 | UpdateMode                 | Controls automatic update behavior. Set to 'none' to disable updates.                                      | `update.mode`                      |
 | WorkspaceTrustEnabled      | Controls whether Workspace Trust is enabled.                                                               | `security.workspace.trust.enabled` |
 
-#### Managing auto-run allowlists with MDM
+#### Managing Run Mode allowlists with MDM
 
-You can also deploy Cursor's permissions file through MDM to manage which terminal commands and MCP tools auto-run without prompting.
+You can also deploy Cursor's permissions file through MDM to manage which terminal commands and MCP tools run without prompting and to steer the **Auto-review** mode classifier.
 
-The file path is `~/.cursor/permissions.json`.
+The file path is `~/.cursor/permissions.json`. Users can layer a per-repo file at `<workspace>/.cursor/permissions.json`; entries from both files are concatenated.
 
 The file format is:
 
-| Key                 | Type       | Required | Meaning                                                                                                                                                                           |
-| :------------------ | :--------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `terminalAllowlist` | `string[]` | No       | Terminal commands that may auto-run without approval. In **Allowlist (with Sandbox)** mode, these run outside the sandbox. Each entry is matched against the full command string. |
-| `mcpAllowlist`      | `string[]` | No       | MCP tools that may auto-run without approval. In **Allowlist (with Sandbox)** mode, these run outside the sandbox. Each entry uses `server:tool` syntax.                          |
+| Key                 | Type       | Required | Meaning                                                                                                                                                                                                                                                                                              |
+| :------------------ | :--------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `terminalAllowlist` | `string[]` | No       | Terminal commands that may run without approval. In **Allowlist (with Sandbox)** mode, these run outside the sandbox. Each entry is matched against the full command string.                                                                                                                         |
+| `mcpAllowlist`      | `string[]` | No       | MCP tools that may run without approval. In **Allowlist (with Sandbox)** mode, these run outside the sandbox. Each entry uses `server:tool` syntax.                                                                                                                                                  |
+| `autoRun`           | `object`   | No       | Steers the **Auto-review** mode classifier with natural-language `allow_instructions` and `block_instructions` arrays. Applies to Shell, MCP, and Fetch calls in Cursor 3.6 and above. See the [permissions.json reference](https://cursor.com/docs/reference/permissions.md#autorun-configuration). |
 
 `mcpAllowlist` entries support these forms:
 
@@ -63,7 +64,7 @@ The file format is:
 | `*:tool`      | One tool name from any MCP server            |
 | `*:*`         | All MCP tools                                |
 
-`terminalAllowlist` and `mcpAllowlist` are both optional. If either key is omitted or set to an empty array, Cursor falls back to the editor-managed allowlist for that category.
+`terminalAllowlist`, `mcpAllowlist`, and `autoRun` are all optional. If a key is omitted or empty (after concatenating per-user and per-repo files), Cursor falls back to the editor-managed allowlist for that category.
 
 Example:
 
@@ -78,7 +79,12 @@ Example:
     "linear:*",
     "github:create_pull_request",
     "*:search"
-  ]
+  ],
+  "autoRun": {
+    "block_instructions": [
+      "Block any command that drops or truncates a database table."
+    ]
+  }
 }
 ```
 
@@ -87,12 +93,12 @@ Because this is a regular file, you can distribute it with Jamf, Kandji, Intune,
 Allowlist precedence is:
 
 1. Team dashboard or other admin-controlled settings
-2. Managed `~/.cursor/permissions.json`
+2. Managed `~/.cursor/permissions.json` concatenated with `<workspace>/.cursor/permissions.json`
 3. Editor settings and inline **Add to allowlist**
 
-Higher-priority sources replace lower-priority allowlists for that category. They do not merge.
+Admin-controlled settings replace the file-defined values for that category. Per-user and per-repo files merge by concatenation; editor settings do not merge with either.
 
-Cursor watches `permissions.json`, so updates apply automatically without requiring a restart.
+Cursor watches both `permissions.json` paths, so updates apply automatically without requiring a restart.
 
 #### Windows Group Policy
 

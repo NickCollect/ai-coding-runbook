@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/llm-safety-and-controls
-fetched_at: 2026-05-25T05:15:51.001831+00:00
+fetched_at: 2026-06-01T05:54:48.866480+00:00
 fetch_method: mintlify_md
 ---
 
@@ -40,13 +40,13 @@ When an agent wants to run a command, you see a prompt showing the full command.
 
 You can enable auto-approval for terminal commands, but understand the risks. Agents might run destructive commands without your knowledge, commands execute before you can review them, and bugs or prompt injection could cause unintended operations.
 
-#### Auto-run configuration
+#### Run Mode configuration
 
-Enterprise teams can configure auto-run policies in the team dashboard. In Cursor 3.5 and above, end users choose between **Allowlist**, **Allowlist (with Sandbox)**, and **Run Everything** modes. You can create an allowlist of commands that don't require approval, such as `npm install`, `pip install`, `cargo build`, or `make test`.
+Enterprise teams can configure Run Mode policies in the team dashboard. In Cursor 3.6 and above, end users choose between **Auto-review** (the default), **Allowlist**, **Allowlist (with Sandbox)**, and **Run Everything** modes. **Auto-review** runs allowlisted calls, sandboxes what it can, and routes the rest through an LLM classifier that returns allow or block based on safety and how well the call matches the user's intent. The older modes are still available, and you can create an allowlist of commands that don't require approval, such as `npm install`, `pip install`, `cargo build`, or `make test`.
 
 The allowlist is best-effort, not a security boundary. Determined agents or prompt injection might bypass it. Always combine allowlists with other security controls like hooks.
 
-See [Terminal auto-run modes](https://cursor.com/docs/agent/tools/terminal.md#auto-run-mode) and [Agent Security](https://cursor.com/docs/agent/security.md) for details.
+See [Terminal Run Mode](https://cursor.com/docs/agent/tools/terminal.md#run-mode) and [Agent Security](https://cursor.com/docs/agent/security.md) for details.
 
 ### Enforcement hooks
 
