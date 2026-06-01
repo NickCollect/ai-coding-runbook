@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/multi-agent
-fetched_at: 2026-05-25T05:15:51.129116+00:00
+fetched_at: 2026-06-01T05:54:51.239355+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 ## How it works
 
-All agents share the same container, filesystem, and [vault credentials](/docs/en/managed-agents/vaults), but each agent runs in its own **session thread**, a context-isolated event stream with its own conversation history. The coordinator reports activity in the **primary thread** (which is the same as the session-level [event stream](/docs/en/managed-agents/events-and-streaming)); additional threads are spawned at runtime when the coordinator delegates work.
+All agents share the same sandbox, filesystem, and [vault credentials](/docs/en/managed-agents/vaults), but each agent runs in its own **session thread**, a context-isolated event stream with its own conversation history. The coordinator reports activity in the **primary thread** (which is the same as the session-level [event stream](/docs/en/managed-agents/events-and-streaming)); additional threads are spawned at runtime when the coordinator delegates work.
 
 Threads are persistent: the coordinator can send a follow-up to an agent it called earlier, and that agent retains everything from its previous turns.
 
@@ -49,7 +49,7 @@ coordinator=$(curl -fsS https://api.anthropic.com/v1/agents \
   -d @- <<EOF
 {
   "name": "Engineering Lead",
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "system": "You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
   "tools": [
     {
@@ -72,7 +72,7 @@ EOF
 ````bash
 ant beta:agents create <<YAML
 name: Engineering Lead
-model: claude-opus-4-7
+model: claude-opus-4-8
 system: You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.
 tools:
   - type: agent_toolset_20260401
@@ -90,7 +90,7 @@ YAML
 ````python
 coordinator = client.beta.agents.create(
     name="Engineering Lead",
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     system="You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
     tools=[
         {"type": "agent_toolset_20260401"},
@@ -109,7 +109,7 @@ coordinator = client.beta.agents.create(
 ````typescript
 const coordinator = await client.beta.agents.create({
   name: "Engineering Lead",
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   system:
     "You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
   tools: [{ type: "agent_toolset_20260401" }],
@@ -128,7 +128,7 @@ const coordinator = await client.beta.agents.create({
 var coordinator = await client.Beta.Agents.Create(new()
 {
     Name = "Engineering Lead",
-    Model = BetaManagedAgentsModel.ClaudeOpus4_7,
+    Model = BetaManagedAgentsModel.ClaudeOpus4_8,
     System = "You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
     Tools =
     [
@@ -149,7 +149,7 @@ var coordinator = await client.Beta.Agents.Create(new()
 ````go
 coordinator, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Name:   "Engineering Lead",
-	Model:  anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeOpus4_7},
+	Model:  anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeOpus4_8},
 	System: anthropic.String("You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent."),
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
 		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
@@ -174,7 +174,7 @@ if err != nil {
 var coordinator = client.beta().agents().create(
     AgentCreateParams.builder()
         .name("Engineering Lead")
-        .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_7)
+        .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
         .system("You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.")
         .addTool(
             BetaManagedAgentsAgentToolset20260401Params.builder()
@@ -200,7 +200,7 @@ var coordinator = client.beta().agents().create(
 ````php
 $coordinator = $client->beta->agents->create(
     name: 'Engineering Lead',
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
     system: 'You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.',
     tools: [
         ['type' => 'agent_toolset_20260401'],
@@ -219,7 +219,7 @@ $coordinator = $client->beta->agents->create(
 ````ruby
 coordinator = client.beta.agents.create(
   name: "Engineering Lead",
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   system: "You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
   tools: [
     {type: "agent_toolset_20260401"}
@@ -237,9 +237,11 @@ coordinator = client.beta.agents.create(
 </CodeGroup>
 
 `multiagent.agents` can accept any of the following:
-* `{"type": "agent", "id": agent.id}` references a previously created `agent` by ID. Defaults to pinning the latest agent version if no `version` is specified.
+* `{"type": "agent", "id": agent.id}` references a previously created `agent` by ID. If no `version` is specified, the reference is pinned to the latest version of that agent at the time the coordinator is created.
 * `{"type": "agent", "id": agent.id, "version": agent.version}` pins a specific agent version.
 * `{"type": "self"}` allows the coordinator to spawn copies of itself.
+
+The coordinator's configuration, including its `multiagent.agents` roster, is snapshotted when the coordinator is created or updated. Referenced agents stay pinned to the versions resolved at that time and do not automatically pick up later updates to their definitions. To delegate to a newer version of a referenced agent, [update the coordinator](/docs/en/managed-agents/agent-setup#update-an-agent) so its roster references that version.
 
 The coordinator can only delegate to one level of agents; depth > 1 is ignored. A maximum of 20 unique agents can be listed in `multiagent.agents`, but the coordinator can call multiple copies of each agent.
 
@@ -358,7 +360,7 @@ EOF
 coordinator_id=$(curl --fail-with-body -sS "$BASE/v1/agents" "${H[@]}" --data @- <<EOF | jq -er '.id'
 {
   "name": "coordinator",
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "tools": [{"type": "agent_toolset_20260401"}],
   "multiagent": {
     "type": "coordinator",
@@ -396,7 +398,7 @@ YAML
 
 coordinator_id=$(ant beta:agents create --transform id --raw-output <<YAML
 name: coordinator
-model: claude-opus-4-7
+model: claude-opus-4-8
 tools:
   - type: agent_toolset_20260401
 multiagent:
@@ -428,7 +430,7 @@ research_agent = client.beta.agents.create(
 
 coordinator = client.beta.agents.create(
     name="coordinator",
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     tools=[{"type": "agent_toolset_20260401"}],
     multiagent={
         "type": "coordinator",
@@ -457,7 +459,7 @@ const researchAgent = await client.beta.agents.create({
 
 const coordinator = await client.beta.agents.create({
   name: "coordinator",
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   tools: [{ type: "agent_toolset_20260401" }],
   multiagent: {
     type: "coordinator",
@@ -501,7 +503,7 @@ var researchAgent = await client.Beta.Agents.Create(new()
 var coordinator = await client.Beta.Agents.Create(new()
 {
     Name = "coordinator",
-    Model = BetaManagedAgentsModel.ClaudeOpus4_7,
+    Model = BetaManagedAgentsModel.ClaudeOpus4_8,
     Tools =
     [
         new BetaManagedAgentsAgentToolset20260401Params
@@ -555,7 +557,7 @@ if err != nil {
 
 coordinator, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Name:  "coordinator",
-	Model: anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeOpus4_7},
+	Model: anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeOpus4_8},
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
 		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
 			Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
@@ -609,7 +611,7 @@ var researcher = client.beta().agents().create(
 var coordinator = client.beta().agents().create(
     AgentCreateParams.builder()
         .name("coordinator")
-        .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_7)
+        .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
         .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
             .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
             .build())
@@ -646,7 +648,7 @@ $researchAgent = $client->beta->agents->create(
 
 $coordinator = $client->beta->agents->create(
     name: 'coordinator',
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
     tools: [
         ['type' => 'agent_toolset_20260401'],
     ],
@@ -681,7 +683,7 @@ research_agent = client.beta.agents.create(
 
 coordinator = client.beta.agents.create(
   name: "coordinator",
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   tools: [
     {type: "agent_toolset_20260401"}
   ],
@@ -1355,7 +1357,7 @@ for (var event : client.beta().sessions().threads().events().list(
         thread.id(),
         EventListParams.builder().sessionId(session.id()).build()
     ).autoPager()) {
-    var json = (Map<String, JsonValue>) event._json().orElseThrow().asObject().orElseThrow();
+    var json = event._json().orElseThrow().asObject().orElseThrow();
     var type = json.get("type").asStringOrThrow();
     var processedAt = json.containsKey("processed_at")
         ? json.get("processed_at").asStringOrThrow()

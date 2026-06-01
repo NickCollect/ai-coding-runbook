@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals
-fetched_at: 2026-05-18T05:02:42.187898+00:00
+fetched_at: 2026-06-01T05:54:49.322627+00:00
 fetch_method: mintlify_md
 ---
 
@@ -61,7 +61,7 @@ response=$(curl -N https://api.anthropic.com/v1/messages \
   --header "content-type: application/json" \
   --header "x-api-key: $ANTHROPIC_API_KEY" \
   --data '{
-    "model": "claude-opus-4-7",
+    "model": "claude-opus-4-8",
     "messages": [{"role": "user", "content": "Hello"}],
     "max_tokens": 1024,
     "stream": true
@@ -92,7 +92,7 @@ try:
     with client.messages.stream(
         max_tokens=1024,
         messages=messages + [{"role": "user", "content": "Hello"}],
-        model="claude-opus-4-7",
+        model="claude-opus-4-8",
     ) as stream:
         for event in stream:
             # Check for refusal in message delta
@@ -119,7 +119,7 @@ function resetConversation() {
 try {
   const stream = await client.messages.stream({
     messages: [...messages, { role: "user", content: "Hello" }],
-    model: "claude-opus-4-7",
+    model: "claude-opus-4-8",
     max_tokens: 1024
   });
 
@@ -152,7 +152,7 @@ class Program
 
         var parameters = new MessageCreateParams
         {
-            Model = Model.ClaudeOpus4_7,
+            Model = Model.ClaudeOpus4_8,
             MaxTokens = 1024,
             Messages = [new() { Role = Role.User, Content = "Hello" }]
         };
@@ -204,7 +204,7 @@ func main() {
 	client := anthropic.NewClient()
 
 	stream := client.Messages.NewStreaming(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_7,
+		Model:     anthropic.ModelClaudeOpus4_8,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello")),
@@ -247,7 +247,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_7)
+        .model(Model.CLAUDE_OPUS_4_8)
         .maxTokens(1024L)
         .addUserMessage("Hello")
         .build();
@@ -292,7 +292,7 @@ try {
         messages: [
             ['role' => 'user', 'content' => 'Hello']
         ],
-        model: 'claude-opus-4-7',
+        model: 'claude-opus-4-8',
     );
 
     foreach ($stream as $event) {
@@ -321,7 +321,7 @@ end
 
 begin
   stream = client.messages.stream(
-    model: :"claude-opus-4-7",
+    model: :"claude-opus-4-8",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello" }]
   )

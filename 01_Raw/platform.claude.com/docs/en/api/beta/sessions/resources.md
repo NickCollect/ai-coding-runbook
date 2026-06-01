@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/sessions/resources
-fetched_at: 2026-05-25T05:15:53.242141+00:00
+fetched_at: 2026-06-01T05:54:53.325843+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,7 +24,7 @@ Add Session Resource
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -75,6 +75,10 @@ Add Session Resource
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -168,7 +172,7 @@ List Session Resources
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -219,6 +223,10 @@ List Session Resources
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -387,7 +395,7 @@ Get Session Resource
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -438,6 +446,10 @@ Get Session Resource
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -585,7 +597,7 @@ Update Session Resource
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -636,6 +648,10 @@ Update Session Resource
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -793,7 +809,7 @@ Delete Session Resource
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -844,6 +860,10 @@ Delete Session Resource
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 

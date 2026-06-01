@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/memory
-fetched_at: 2026-05-25T05:15:51.120457+00:00
+fetched_at: 2026-06-01T05:54:51.171293+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 ## Overview
 
-A **memory store** is a workspace-scoped collection of text documents optimized for Claude. When you attach a store to a session, it is mounted as a directory inside the session's container. The agent reads and writes it with the same file tools it uses for the rest of the filesystem, and a note describing each mount is automatically added to the system prompt, telling the agent where to look. The [agent toolset](/docs/en/managed-agents/tools) is required for these interactions; make sure to enable it during [agent creation](/docs/en/managed-agents/agent-setup).
+A **memory store** is a workspace-scoped collection of text documents optimized for Claude. When you attach a store to a session, it is mounted as a directory inside the session's sandbox. The agent reads and writes it with the same file tools it uses for the rest of the filesystem, and a note describing each mount is automatically added to the system prompt, telling the agent where to look. The [agent toolset](/docs/en/managed-agents/tools) is required for these interactions; make sure to enable it during [agent creation](/docs/en/managed-agents/agent-setup).
 
 Each **memory** in a store is addressed by a path and can be read and edited directly via the API or Console, allowing for tuning, importing, and exporting.
 
@@ -223,7 +223,7 @@ client.beta.memory_stores.memories.create(
 </CodeGroup>
 
 <Tip>
-Individual memories within the store are capped at 100 kB (~25k tokens). Structure memory as many small focused files, not a few large ones.
+Individual memories within the store are capped at 100 kB (~25k tokens). A store holds a maximum of 2,000 memories. Structure memory as many small focused files, not a few large ones.
 </Tip>
 
 ## Attach a memory store to a session
@@ -407,7 +407,7 @@ A maximum of **8 memory stores** are supported per session. Attach multiple stor
 
 ### How the agent accesses memory
 
-Each attached store is mounted inside the session's container as a directory under `/mnt/memory/`, and the agent reads and writes it with the standard [agent toolset](/docs/en/managed-agents/tools). Writes are persisted back to the store and stay in sync across sessions that share it. A short description of each mount (path, access mode, store `description`, and any `instructions`) is automatically added to the system prompt.
+Each attached store is mounted inside the session's sandbox as a directory under `/mnt/memory/`, and the agent reads and writes it with the standard [agent toolset](/docs/en/managed-agents/tools). Writes are persisted back to the store and stay in sync across sessions that share it. A short description of each mount (path, access mode, store `description`, and any `instructions`) is automatically added to the system prompt.
 
 `access` is enforced at the filesystem level: a `read_only` mount rejects writes, while writes to a `read_write` mount produce [memory versions](#audit-memory-changes) attributed to the session.
 
@@ -1468,6 +1468,14 @@ See the [Archive a memory store reference](/docs/en/api/beta/memory_stores/archi
 
 To permanently remove a store along with all of its memories and versions, use [`memory_stores.delete`](/docs/en/api/beta/memory_stores/delete).
 
-## Limits
+## Best practices for memory management
 
-Default capacity and rate limits apply to memory stores while this feature is in beta. [Contact support](https://support.claude.com) if you need higher limits.
+When a store reaches its 2,000-memory limit, writes to new memories fail: both direct `memories.create` calls and the agent's file writes to unmapped paths. Existing memories remain readable and editable. The following practices help you stay well under the limit and recover gracefully if you reach it.
+
+- **Use focused stores.** Rather than one large general-purpose store, use smaller purpose-built stores — one per user, one for shared domain knowledge, and one for project-specific context. Each store has its own 2,000-memory limit, so keeping stores scoped reduces the chance any single one fills up.
+
+- **Condense or prune before the store fills up.** Delete stale or redundant memories with `memories.delete`. You can also run a [dreaming session](/docs/en/managed-agents/dreams), which consolidates fragmented content into a separate new output store rather than modifying the original. Switch your sessions over to that output store, then archive or delete the original.
+
+- **Attach a new store when it makes sense.** If a store has grown beyond its useful scope, attach a fresh one for new content and attach the original with `read_only` access. The agent can read from both while only writing to the new one.
+
+- **Limit write access where appropriate.** Sessions that only read shared reference material don't need `read_write`. Keeping write access scoped to sessions that actually add new memories makes it easier to track where growth is coming from.

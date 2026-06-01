@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/define-outcomes
-fetched_at: 2026-05-18T05:02:43.624070+00:00
+fetched_at: 2026-06-01T05:54:51.077169+00:00
 fetch_method: mintlify_md
 ---
 
@@ -573,7 +573,7 @@ end
 
 ## Retrieving deliverables
 
-The agent writes output files to `/mnt/session/outputs/` inside the container. Once the session is idle, fetch them via the [Files API](/docs/en/build-with-claude/files) scoped to the session:
+The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Once the session is idle, fetch them via the [Files API](/docs/en/build-with-claude/files) scoped to the session:
 
 <CodeGroup>
   

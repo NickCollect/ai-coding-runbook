@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/quickstart
-fetched_at: 2026-05-25T05:15:50.649518+00:00
+fetched_at: 2026-06-01T05:54:50.763466+00:00
 fetch_method: mintlify_md
 ---
 
@@ -21,7 +21,7 @@ This guide walks you through creating an agent, setting up an environment, start
 | Concept | Description |
 |---------|-------------|
 | **Agent** | The model, system prompt, tools, MCP servers, and skills |
-| **Environment** | Configuration for where sessions run: an Anthropic-managed cloud container, or a self-hosted sandbox on your own infrastructure |
+| **Environment** | Configuration for where sessions run: an Anthropic-managed cloud sandbox, or a self-hosted sandbox on your own infrastructure |
 | **Session** | A running agent instance within an environment, performing a specific task and generating outputs |
 | **Events** | Messages exchanged between your application and the agent (user turns, tool results, status updates) |
 
@@ -45,7 +45,7 @@ brew install anthropics/tap/ant
 For Linux environments, download the release binary directly.
 
 ```bash nocheck
-VERSION=1.9.1
+VERSION=1.10.0
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 ARCH=$(uname -m | sed -e 's/x86_64/amd64/' -e 's/aarch64/arm64/')
 curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VERSION}/ant_${VERSION}_${OS}_${ARCH}.tar.gz" \
@@ -93,7 +93,7 @@ ant --version
   </Tab>
   <Tab title="Java">
     ```groovy Gradle
-    implementation("com.anthropic:anthropic-java:2.33.0")
+    implementation("com.anthropic:anthropic-java:2.35.0")
     ```
   </Tab>
   <Tab title="Go">
@@ -149,7 +149,7 @@ agent=$(
     -d @- <<'EOF'
 {
   "name": "Coding Assistant",
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "system": "You are a helpful coding assistant. Write clean, well-documented code.",
   "tools": [
     {"type": "agent_toolset_20260401"}
@@ -168,7 +168,7 @@ echo "Agent ID: $AGENT_ID, version: $AGENT_VERSION"
 ````bash
 ant beta:agents create \
   --name "Coding Assistant" \
-  --model '{id: claude-opus-4-7}' \
+  --model '{id: claude-opus-4-8}' \
   --system "You are a helpful coding assistant. Write clean, well-documented code." \
   --tool '{type: agent_toolset_20260401}'
 ````
@@ -181,7 +181,7 @@ client = Anthropic()
 
 agent = client.beta.agents.create(
     name="Coding Assistant",
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     system="You are a helpful coding assistant. Write clean, well-documented code.",
     tools=[
         {"type": "agent_toolset_20260401"},
@@ -199,7 +199,7 @@ const client = new Anthropic();
 
 const agent = await client.beta.agents.create({
   name: "Coding Assistant",
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   system: "You are a helpful coding assistant. Write clean, well-documented code.",
   tools: [
     { type: "agent_toolset_20260401" },
@@ -222,7 +222,7 @@ var client = new AnthropicClient();
 var agent = await client.Beta.Agents.Create(new()
 {
     Name = "Coding Assistant",
-    Model = BetaManagedAgentsModel.ClaudeOpus4_7,
+    Model = BetaManagedAgentsModel.ClaudeOpus4_8,
     System = "You are a helpful coding assistant. Write clean, well-documented code.",
     Tools =
     [
@@ -254,7 +254,7 @@ func main() {
 	agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 		Name: "Coding Assistant",
 		Model: anthropic.BetaManagedAgentsModelConfigParams{
-			ID: anthropic.BetaManagedAgentsModelClaudeOpus4_7,
+			ID: anthropic.BetaManagedAgentsModelClaudeOpus4_8,
 		},
 		System: anthropic.String("You are a helpful coding assistant. Write clean, well-documented code."),
 		Tools: []anthropic.BetaAgentNewParamsToolUnion{{
@@ -277,19 +277,19 @@ import com.anthropic.models.beta.agents.AgentCreateParams;
 import com.anthropic.models.beta.agents.BetaManagedAgentsAgentToolset20260401Params;
 import com.anthropic.models.beta.agents.BetaManagedAgentsModel;
 import com.anthropic.models.beta.environments.BetaCloudConfigParams;
-import com.anthropic.models.beta.environments.EnvironmentCreateParams;
 import com.anthropic.models.beta.environments.BetaUnrestrictedNetwork;
+import com.anthropic.models.beta.environments.EnvironmentCreateParams;
 import com.anthropic.models.beta.sessions.SessionCreateParams;
+import com.anthropic.models.beta.sessions.events.BetaManagedAgentsStreamSessionEvents;
 import com.anthropic.models.beta.sessions.events.BetaManagedAgentsUserMessageEventParams;
 import com.anthropic.models.beta.sessions.events.EventSendParams;
-import com.anthropic.models.beta.sessions.events.BetaManagedAgentsStreamSessionEvents;
 
 void main() {
     var client = AnthropicOkHttpClient.fromEnv();
 
     var agent = client.beta().agents().create(AgentCreateParams.builder()
         .name("Coding Assistant")
-        .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_7)
+        .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
         .system("You are a helpful coding assistant. Write clean, well-documented code.")
         .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
             .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
@@ -307,7 +307,7 @@ $client = new Client();
 
 $agent = $client->beta->agents->create(
     name: 'Coding Assistant',
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
     system: 'You are a helpful coding assistant. Write clean, well-documented code.',
     tools: [
         ['type' => 'agent_toolset_20260401'],
@@ -325,7 +325,7 @@ client = Anthropic::Client.new
 
 agent = client.beta.agents.create(
   name: "Coding Assistant",
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   system_: "You are a helpful coding assistant. Write clean, well-documented code.",
   tools: [{type: "agent_toolset_20260401"}]
 )
@@ -342,7 +342,7 @@ puts "Agent ID: #{agent.id}, version: #{agent.version}"
   </Step>
 
   <Step title="Create an environment">
-    An environment defines the container where your agent runs.
+    An environment defines the sandbox where your agent runs.
 
     <CodeGroup defaultLanguage="CLI">
     
@@ -468,7 +468,7 @@ puts "Environment ID: #{environment.id}"
 
     Save the returned `environment.id`. You'll reference it in every session you create.
 
-    <Tip>To run the sandbox on your own infrastructure instead of a cloud container, see [Self-hosted sandboxes](/docs/en/managed-agents/self-hosted-sandboxes).</Tip>
+    <Tip>To run the sandbox on your own infrastructure instead of a cloud sandbox, see [Self-hosted sandboxes](/docs/en/managed-agents/self-hosted-sandboxes).</Tip>
   </Step>
 
   <Step title="Start a session">
@@ -878,7 +878,7 @@ end
 
     </CodeGroup>
 
-    The agent will write a Python script, execute it in the container, and verify the output file was created. Your output will look similar to this:
+    The agent will write a Python script, execute it in the sandbox, and verify the output file was created. Your output will look similar to this:
 
     ```text
     I'll create a Python script that generates the first 20 Fibonacci numbers and saves them to a file.
@@ -897,9 +897,9 @@ end
 
 When you send a user event, Claude Managed Agents:
 
-1. **Provisions a container:** Your environment configuration determines how it's built.
+1. **Provisions a sandbox:** Your environment configuration determines how it's built.
 2. **Runs the agent loop:** Claude decides which tools to use based on your message
-3. **Executes tools:** File writes, bash commands, and other tool calls run inside the container
+3. **Executes tools:** File writes, bash commands, and other tool calls run inside the sandbox
 4. **Streams events:** You receive real-time updates as the agent works
 5. **Goes idle:** The agent emits a `session.status_idle` event when it has nothing more to do
 
@@ -910,7 +910,7 @@ When you send a user event, Claude Managed Agents:
     Create reusable, versioned agent configurations
   </Card>
   <Card title="Configure environments" icon="settings" href="/docs/en/managed-agents/environments">
-    Customize networking and container settings
+    Customize networking and sandbox settings
   </Card>
   <Card title="Agent tools" icon="tool" href="/docs/en/managed-agents/tools">
     Enable specific tools for your agent

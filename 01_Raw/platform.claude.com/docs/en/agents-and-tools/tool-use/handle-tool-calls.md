@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls
-fetched_at: 2026-05-18T05:02:42.431456+00:00
+fetched_at: 2026-06-01T05:54:49.541423+00:00
 fetch_method: mintlify_md
 ---
 
@@ -31,7 +31,7 @@ The response will have a `stop_reason` of `tool_use` and one or more `tool_use` 
 ```json JSON
 {
   "id": "msg_01Aq9w938a90dw8q",
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "stop_reason": "tool_use",
   "role": "assistant",
   "content": [

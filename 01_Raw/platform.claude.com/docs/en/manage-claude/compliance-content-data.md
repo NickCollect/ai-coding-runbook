@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/compliance-content-data
-fetched_at: 2026-05-25T05:15:51.660257+00:00
+fetched_at: 2026-06-01T05:54:51.733852+00:00
 fetch_method: mintlify_md
 ---
 
@@ -60,7 +60,7 @@ curl --fail-with-body -sS -G \
       "updated_at": "2026-04-10T09:10:11Z",
       "deleted_at": null,
       "href": "https://claude.ai/chat/abcdef01-2345-6789-abcd-ef0123456789",
-      "model": "claude-opus-4-7",
+      "model": "claude-opus-4-8",
       "organization_uuid": "91012d09-e48b-438e-a489-1bebfd8fa6f9",
       "project_id": "claude_proj_01KGp4eZNug9ri4kE35RSppq",
       "user": {
@@ -101,7 +101,7 @@ The messages endpoint returns the chat's metadata plus a `chat_messages` array s
   "updated_at": "2026-04-10T09:10:11Z",
   "deleted_at": null,
   "href": "https://claude.ai/chat/abcdef01-2345-6789-abcd-ef0123456789",
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "organization_uuid": "91012d09-e48b-438e-a489-1bebfd8fa6f9",
   "project_id": "claude_proj_01KGp4eZNug9ri4kE35RSppq",
   "user": {

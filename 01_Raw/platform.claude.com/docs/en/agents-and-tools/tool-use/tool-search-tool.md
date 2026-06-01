@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool
-fetched_at: 2026-05-18T05:02:42.736326+00:00
+fetched_at: 2026-06-01T05:54:49.964671+00:00
 fetch_method: mintlify_md
 ---
 
@@ -70,7 +70,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-version: 2023-06-01" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-opus-4-7",
+        "model": "claude-opus-4-8",
         "max_tokens": 2048,
         "messages": [
             {
@@ -121,7 +121,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-4-7
+model: claude-opus-4-8
 max_tokens: 2048
 messages:
   - role: user
@@ -163,7 +163,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=2048,
     messages=[{"role": "user", "content": "What is the weather in San Francisco?"}],
     tools=[
@@ -206,7 +206,7 @@ import Anthropic from "@anthropic-ai/sdk";
 const client = new Anthropic();
 
 const response = await client.messages.create({
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 2048,
   messages: [
     {
@@ -267,7 +267,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus4_7,
+    Model = Model.ClaudeOpus4_8,
     MaxTokens = 2048,
     Messages = [
         new() {
@@ -332,7 +332,7 @@ func main() {
 	client := anthropic.NewClient()
 
 	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_7,
+		Model:     anthropic.ModelClaudeOpus4_8,
 		MaxTokens: 2048,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("What is the weather in San Francisco?")),
@@ -414,7 +414,7 @@ void main() {
         .build();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_7)
+        .model(Model.CLAUDE_OPUS_4_8)
         .maxTokens(2048L)
         .addUserMessage("What is the weather in San Francisco?")
         .addTool(ToolSearchToolRegex20251119.builder()
@@ -451,7 +451,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'What is the weather in San Francisco?'],
     ],
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
     tools: [
         [
             'type' => 'tool_search_tool_regex_20251119',
@@ -501,7 +501,7 @@ require "anthropic"
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 2048,
   messages: [
     { role: "user", content: "What is the weather in San Francisco?" }

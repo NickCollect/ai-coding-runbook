@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool
-fetched_at: 2026-05-18T05:02:42.587989+00:00
+fetched_at: 2026-06-01T05:54:49.781821+00:00
 fetch_method: mintlify_md
 ---
 
@@ -39,12 +39,13 @@ The advisor is a weaker fit for single-turn Q&A (nothing to plan), pure pass-thr
 
 The executor model (the top-level `model` field) and the advisor model (the `model` field inside the tool definition) must form a valid pair. The advisor must be at least as capable as the executor.
 
-| Executor models                                | Advisor models                      |
-| ---------------------------------------------- | ----------------------------------- |
-| Claude Haiku 4.5 (`claude-haiku-4-5-20251001`) | Claude Opus 4.7 (`claude-opus-4-7`) |
-| Claude Sonnet 4.6 (`claude-sonnet-4-6`)        | Claude Opus 4.7 (`claude-opus-4-7`) |
-| Claude Opus 4.6 (`claude-opus-4-6`)            | Claude Opus 4.7 (`claude-opus-4-7`) |
-| Claude Opus 4.7 (`claude-opus-4-7`)            | Claude Opus 4.7 (`claude-opus-4-7`) |
+| Executor models                                               | Advisor models                                                                                         |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Claude Haiku 4.5 (claude-haiku-4-5-20251001) | Claude Opus 4.8 (claude-opus-4-8), Claude Opus 4.7 (claude-opus-4-7) |
+| Claude Sonnet 4.6 (claude-sonnet-4-6)        | Claude Opus 4.8 (claude-opus-4-8), Claude Opus 4.7 (claude-opus-4-7) |
+| Claude Opus 4.6 (claude-opus-4-6)            | Claude Opus 4.8 (claude-opus-4-8), Claude Opus 4.7 (claude-opus-4-7) |
+| Claude Opus 4.7 (claude-opus-4-7)            | Claude Opus 4.8 (claude-opus-4-8), Claude Opus 4.7 (claude-opus-4-7) |
+| Claude Opus 4.8 (claude-opus-4-8)            | Claude Opus 4.8 (claude-opus-4-8)                                                     |
 
 If you request an invalid pair, the API returns a `400 invalid_request_error` naming the unsupported combination.
 
@@ -68,7 +69,7 @@ curl https://api.anthropic.com/v1/messages \
             {
                 "type": "advisor_20260301",
                 "name": "advisor",
-                "model": "claude-opus-4-7"
+                "model": "claude-opus-4-8"
             }
         ],
         "messages": [{
@@ -85,7 +86,7 @@ max_tokens: 4096
 tools:
   - type: advisor_20260301
     name: advisor
-    model: claude-opus-4-7
+    model: claude-opus-4-8
 messages:
   - role: user
     content: Build a concurrent worker pool in Go with graceful shutdown.
@@ -105,7 +106,7 @@ response = client.beta.messages.create(
         {
             "type": "advisor_20260301",
             "name": "advisor",
-            "model": "claude-opus-4-7",
+            "model": "claude-opus-4-8",
         }
     ],
     messages=[
@@ -133,7 +134,7 @@ async function main() {
       {
         type: "advisor_20260301",
         name: "advisor",
-        model: "claude-opus-4-7"
+        model: "claude-opus-4-8"
       }
     ],
     messages: [
@@ -165,7 +166,7 @@ var parameters = new MessageCreateParams
     {
         new BetaAdvisorTool20260301
         {
-            Model = Messages::Model.ClaudeOpus4_7
+            Model = Messages::Model.ClaudeOpus4_8
         }
     },
     Messages =
@@ -202,7 +203,7 @@ func main() {
 		MaxTokens: 4096,
 		Tools: []anthropic.BetaToolUnionParam{
 			{OfAdvisorTool20260301: &anthropic.BetaAdvisorTool20260301Param{
-				Model: anthropic.ModelClaudeOpus4_7,
+				Model: anthropic.ModelClaudeOpus4_8,
 			}},
 		},
 		Messages: []anthropic.BetaMessageParam{
@@ -239,7 +240,7 @@ $response = $client->beta->messages->create(
         [
             'type' => 'advisor_20260301',
             'name' => 'advisor',
-            'model' => 'claude-opus-4-7',
+            'model' => 'claude-opus-4-8',
         ],
     ],
     betas: ['advisor-tool-2026-03-01'],
@@ -260,7 +261,7 @@ response = client.beta.messages.create(
     {
       type: "advisor_20260301",
       name: "advisor",
-      model: "claude-opus-4-7"
+      model: "claude-opus-4-8"
     }
   ],
   messages: [
@@ -296,7 +297,7 @@ The advisor itself runs without tools and without context management. Its thinki
 | ----------------------- | -------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `type`                  | string         | _required_   | Must be `"advisor_20260301"`.                                                                                                                      |
 | `name`                  | string         | _required_   | Must be `"advisor"`.                                                                                                                               |
-| `model`                 | string         | _required_   | The advisor model ID, such as `"claude-opus-4-7"`. Billed at this model's rates for the sub-inference.                                             |
+| `model`                 | string         | _required_   | The advisor model ID, such as `"claude-opus-4-8"`. Billed at this model's rates for the sub-inference.                                             |
 | `max_uses`              | integer        | unlimited    | Maximum number of advisor calls allowed in a single request. Once the executor reaches this cap, further advisor calls return an `advisor_tool_result_error` with `error_code: "max_uses_exceeded"` and the executor continues without further advice. This is a per-request cap, not a per-conversation cap; see [Cost control](#cost-control) for conversation-level limits. |
 | `caching`               | object \| null | `null` (off) | Enables prompt caching for the advisor's own transcript across calls within a conversation. See [Advisor prompt caching](#advisor-prompt-caching). |
 
@@ -346,7 +347,7 @@ The `advisor_tool_result.content` field is a discriminated union. For successful
 
 | Variant                   | Fields              | Returned when                                                       |
 | ------------------------- | ------------------- | ------------------------------------------------------------------- |
-| `advisor_result`          | `text`              | The advisor model returns plaintext (for example, Claude Opus 4.7). |
+| `advisor_result`          | `text`              | The advisor model returns plaintext (for example, Claude Opus 4.8). |
 | `advisor_redacted_result` | `encrypted_content` | The advisor model returns encrypted output.                         |
 
 With `advisor_result`, the `text` field contains human-readable advice. With `advisor_redacted_result`, the `encrypted_content` field contains an opaque blob that you cannot read; on the next turn, the server decrypts it and renders the plaintext into the executor's prompt.
@@ -394,7 +395,7 @@ tools = [
     {
         "type": "advisor_20260301",
         "name": "advisor",
-        "model": "claude-opus-4-7",
+        "model": "claude-opus-4-8",
     }
 ]
 
@@ -469,7 +470,7 @@ Advisor calls run as a separate sub-inference billed at the advisor model's rate
       },
       {
         "type": "advisor_message",
-        "model": "claude-opus-4-7",
+        "model": "claude-opus-4-8",
         "input_tokens": 823,
         "cache_read_input_tokens": 0,
         "cache_creation_input_tokens": 0,
@@ -512,7 +513,7 @@ tools = [
     {
         "type": "advisor_20260301",
         "name": "advisor",
-        "model": "claude-opus-4-7",
+        "model": "claude-opus-4-8",
         "caching": {"type": "ephemeral", "ttl": "5m"},
     }
 ]
@@ -550,7 +551,7 @@ tools = [
     {
         "type": "advisor_20260301",
         "name": "advisor",
-        "model": "claude-opus-4-7",
+        "model": "claude-opus-4-8",
     },
     {
         "name": "run_bash",
@@ -587,7 +588,7 @@ If your agent exposes other planner-like tools (for example, a todo list tool), 
 
 #### Suggested system prompt for coding tasks
 
-For coding tasks where you want consistent advisor timing and around two to three calls per task, prepend the following blocks to your executor system prompt before any other sentences that mention the advisor. On internal coding evaluations this pattern produced the highest intelligence at near-Sonnet cost.
+Without system-prompt steering, the executor tends to under-call the advisor in some domains — coding tasks in particular. For coding tasks where you want consistent advisor timing and around two to three calls per task, prepend the following blocks to your executor system prompt before any other sentences that mention the advisor.
 
 Timing guidance:
 

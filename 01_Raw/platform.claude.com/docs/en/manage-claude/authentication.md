@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/authentication
-fetched_at: 2026-05-11T04:55:24.955232+00:00
+fetched_at: 2026-06-01T05:54:51.269094+00:00
 fetch_method: mintlify_md
 ---
 
@@ -43,7 +43,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-4-7",
+    "model": "claude-opus-4-8",
     "max_tokens": 1024,
     "messages": [{"role": "user", "content": "Hello, Claude"}]
   }'

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta
-fetched_at: 2026-05-25T05:15:52.124027+00:00
+fetched_at: 2026-06-01T05:54:52.209541+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,11 +10,11 @@ fetch_method: mintlify_md
 
 ### Anthropic Beta
 
-- `AnthropicBeta = string or "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+- `AnthropicBeta = string or "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -65,6 +65,10 @@ fetch_method: mintlify_md
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Beta API Error
 
@@ -350,7 +354,7 @@ The Models API response can be used to determine which models are available for 
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -401,6 +405,10 @@ The Models API response can be used to determine which models are available for 
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -657,7 +665,7 @@ The Models API response can be used to determine information about a specific mo
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -708,6 +716,10 @@ The Models API response can be used to determine information about a specific mo
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -1293,7 +1305,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1344,6 +1356,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -1929,6 +1945,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"url_not_allowed"`
 
+              - `"url_not_in_prior_context"`
+
               - `"url_not_accessible"`
 
               - `"unsupported_content_type"`
@@ -2007,7 +2025,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"advisor_tool_result_error"`
 
-          - `BetaAdvisorResultBlockParam object { text, type }`
+          - `BetaAdvisorResultBlockParam object { text, type, stop_reason }`
 
             - `text: string`
 
@@ -2015,7 +2033,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"advisor_result"`
 
-          - `BetaAdvisorRedactedResultBlockParam object { encrypted_content, type }`
+            - `stop_reason: optional string`
+
+          - `BetaAdvisorRedactedResultBlockParam object { encrypted_content, type, stop_reason }`
 
             - `encrypted_content: string`
 
@@ -2024,6 +2044,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
             - `type: "advisor_redacted_result"`
 
               - `"advisor_redacted_result"`
+
+            - `stop_reason: optional string`
 
         - `tool_use_id: string`
 
@@ -2350,7 +2372,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-      - `BetaCompactionBlockParam object { content, type, cache_control, encrypted_content }`
+      - `BetaCompactionBlockParam object { type, cache_control, content, encrypted_content }`
 
         A compaction block containing summary of previous context.
 
@@ -2360,10 +2382,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         When content is None, the block represents a failed compaction. The server
         treats these as no-ops. Empty string content is not allowed.
 
-        - `content: string`
-
-          Summary of previously compacted content, or null if compaction failed
-
         - `type: "compaction"`
 
           - `"compaction"`
@@ -2372,15 +2390,50 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
+        - `content: optional string`
+
+          Summary of previously compacted content, or null if compaction failed
+
         - `encrypted_content: optional string`
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-  - `role: "user" or "assistant"`
+      - `BetaMidConversationSystemBlockParam object { content, type, cache_control }`
+
+        System instructions that appear mid-conversation.
+
+        Use this block to provide or update system-level instructions at a specific
+        point in the conversation, rather than only via the top-level `system` parameter.
+
+        - `content: array of BetaTextBlockParam`
+
+          System instruction text blocks.
+
+          - `text: string`
+
+          - `type: "text"`
+
+          - `cache_control: optional BetaCacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
+
+          - `citations: optional array of BetaTextCitationParam`
+
+        - `type: "mid_conv_system"`
+
+          - `"mid_conv_system"`
+
+        - `cache_control: optional BetaCacheControlEphemeral`
+
+          Create a cache control breakpoint at this content block.
+
+  - `role: "user" or "assistant" or "system"`
 
     - `"user"`
 
     - `"assistant"`
+
+    - `"system"`
 
 - `model: Model`
 
@@ -2388,11 +2441,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+  - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"`
 
@@ -4345,6 +4402,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `"url_not_allowed"`
 
+            - `"url_not_in_prior_context"`
+
             - `"url_not_accessible"`
 
             - `"unsupported_content_type"`
@@ -4459,7 +4518,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `"advisor_tool_result_error"`
 
-        - `BetaAdvisorResultBlock object { text, type }`
+        - `BetaAdvisorResultBlock object { stop_reason, text, type }`
+
+          - `stop_reason: string`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
           - `text: string`
 
@@ -4467,11 +4530,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `"advisor_result"`
 
-        - `BetaAdvisorRedactedResultBlock object { encrypted_content, type }`
+        - `BetaAdvisorRedactedResultBlock object { encrypted_content, stop_reason, type }`
 
           - `encrypted_content: string`
 
             Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `stop_reason: string`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
           - `type: "advisor_redacted_result"`
 
@@ -4900,11 +4967,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+    - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"`
 
@@ -5203,6 +5274,26 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       The number of output tokens which were used.
 
+    - `output_tokens_details: object { thinking_tokens }`
+
+      Breakdown of output tokens by category.
+
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
+
+      - `thinking_tokens: number`
+
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
+
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
     - `server_tool_use: BetaServerToolUsage`
 
       The number of server tool requests.
@@ -5361,6 +5452,9 @@ curl https://api.anthropic.com/v1/messages \
       }
     ],
     "output_tokens": 503,
+    "output_tokens_details": {
+      "thinking_tokens": 0
+    },
     "server_tool_use": {
       "web_fetch_requests": 2,
       "web_search_requests": 0
@@ -5389,7 +5483,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -5440,6 +5534,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -6015,6 +6113,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"url_not_allowed"`
 
+              - `"url_not_in_prior_context"`
+
               - `"url_not_accessible"`
 
               - `"unsupported_content_type"`
@@ -6093,7 +6193,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"advisor_tool_result_error"`
 
-          - `BetaAdvisorResultBlockParam object { text, type }`
+          - `BetaAdvisorResultBlockParam object { text, type, stop_reason }`
 
             - `text: string`
 
@@ -6101,7 +6201,9 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"advisor_result"`
 
-          - `BetaAdvisorRedactedResultBlockParam object { encrypted_content, type }`
+            - `stop_reason: optional string`
+
+          - `BetaAdvisorRedactedResultBlockParam object { encrypted_content, type, stop_reason }`
 
             - `encrypted_content: string`
 
@@ -6110,6 +6212,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
             - `type: "advisor_redacted_result"`
 
               - `"advisor_redacted_result"`
+
+            - `stop_reason: optional string`
 
         - `tool_use_id: string`
 
@@ -6436,7 +6540,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-      - `BetaCompactionBlockParam object { content, type, cache_control, encrypted_content }`
+      - `BetaCompactionBlockParam object { type, cache_control, content, encrypted_content }`
 
         A compaction block containing summary of previous context.
 
@@ -6446,10 +6550,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
         When content is None, the block represents a failed compaction. The server
         treats these as no-ops. Empty string content is not allowed.
 
-        - `content: string`
-
-          Summary of previously compacted content, or null if compaction failed
-
         - `type: "compaction"`
 
           - `"compaction"`
@@ -6458,15 +6558,50 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
+        - `content: optional string`
+
+          Summary of previously compacted content, or null if compaction failed
+
         - `encrypted_content: optional string`
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-  - `role: "user" or "assistant"`
+      - `BetaMidConversationSystemBlockParam object { content, type, cache_control }`
+
+        System instructions that appear mid-conversation.
+
+        Use this block to provide or update system-level instructions at a specific
+        point in the conversation, rather than only via the top-level `system` parameter.
+
+        - `content: array of BetaTextBlockParam`
+
+          System instruction text blocks.
+
+          - `text: string`
+
+          - `type: "text"`
+
+          - `cache_control: optional BetaCacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
+
+          - `citations: optional array of BetaTextCitationParam`
+
+        - `type: "mid_conv_system"`
+
+          - `"mid_conv_system"`
+
+        - `cache_control: optional BetaCacheControlEphemeral`
+
+          Create a cache control breakpoint at this content block.
+
+  - `role: "user" or "assistant" or "system"`
 
     - `"user"`
 
     - `"assistant"`
+
+    - `"system"`
 
 - `model: Model`
 
@@ -6474,11 +6609,15 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+  - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"`
 
@@ -8060,11 +8199,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+    - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"`
 
@@ -8148,11 +8291,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Beta Advisor Redacted Result Block
 
-- `BetaAdvisorRedactedResultBlock object { encrypted_content, type }`
+- `BetaAdvisorRedactedResultBlock object { encrypted_content, stop_reason, type }`
 
   - `encrypted_content: string`
 
     Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+  - `stop_reason: string`
+
+    The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
   - `type: "advisor_redacted_result"`
 
@@ -8160,7 +8307,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Beta Advisor Redacted Result Block Param
 
-- `BetaAdvisorRedactedResultBlockParam object { encrypted_content, type }`
+- `BetaAdvisorRedactedResultBlockParam object { encrypted_content, type, stop_reason }`
 
   - `encrypted_content: string`
 
@@ -8170,9 +8317,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"advisor_redacted_result"`
 
+  - `stop_reason: optional string`
+
 ### Beta Advisor Result Block
 
-- `BetaAdvisorResultBlock object { text, type }`
+- `BetaAdvisorResultBlock object { stop_reason, text, type }`
+
+  - `stop_reason: string`
+
+    The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
   - `text: string`
 
@@ -8182,13 +8335,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Beta Advisor Result Block Param
 
-- `BetaAdvisorResultBlockParam object { text, type }`
+- `BetaAdvisorResultBlockParam object { text, type, stop_reason }`
 
   - `text: string`
 
   - `type: "advisor_result"`
 
     - `"advisor_result"`
+
+  - `stop_reason: optional string`
 
 ### Beta Advisor Tool 20260301
 
@@ -8200,11 +8355,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+    - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"`
 
@@ -8361,7 +8520,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"advisor_tool_result_error"`
 
-    - `BetaAdvisorResultBlock object { text, type }`
+    - `BetaAdvisorResultBlock object { stop_reason, text, type }`
+
+      - `stop_reason: string`
+
+        The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
       - `text: string`
 
@@ -8369,11 +8532,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"advisor_result"`
 
-    - `BetaAdvisorRedactedResultBlock object { encrypted_content, type }`
+    - `BetaAdvisorRedactedResultBlock object { encrypted_content, stop_reason, type }`
 
       - `encrypted_content: string`
 
         Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+      - `stop_reason: string`
+
+        The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
       - `type: "advisor_redacted_result"`
 
@@ -8411,7 +8578,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"advisor_tool_result_error"`
 
-    - `BetaAdvisorResultBlockParam object { text, type }`
+    - `BetaAdvisorResultBlockParam object { text, type, stop_reason }`
 
       - `text: string`
 
@@ -8419,7 +8586,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"advisor_result"`
 
-    - `BetaAdvisorRedactedResultBlockParam object { encrypted_content, type }`
+      - `stop_reason: optional string`
+
+    - `BetaAdvisorRedactedResultBlockParam object { encrypted_content, type, stop_reason }`
 
       - `encrypted_content: string`
 
@@ -8428,6 +8597,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `type: "advisor_redacted_result"`
 
         - `"advisor_redacted_result"`
+
+      - `stop_reason: optional string`
 
   - `tool_use_id: string`
 
@@ -9980,7 +10151,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Beta Compaction Block Param
 
-- `BetaCompactionBlockParam object { content, type, cache_control, encrypted_content }`
+- `BetaCompactionBlockParam object { type, cache_control, content, encrypted_content }`
 
   A compaction block containing summary of previous context.
 
@@ -9989,10 +10160,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   When content is None, the block represents a failed compaction. The server
   treats these as no-ops. Empty string content is not allowed.
-
-  - `content: string`
-
-    Summary of previously compacted content, or null if compaction failed
 
   - `type: "compaction"`
 
@@ -10020,6 +10187,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `"5m"`
 
       - `"1h"`
+
+  - `content: optional string`
+
+    Summary of previously compacted content, or null if compaction failed
 
   - `encrypted_content: optional string`
 
@@ -10495,6 +10666,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"url_not_allowed"`
 
+          - `"url_not_in_prior_context"`
+
           - `"url_not_accessible"`
 
           - `"unsupported_content_type"`
@@ -10609,7 +10782,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"advisor_tool_result_error"`
 
-      - `BetaAdvisorResultBlock object { text, type }`
+      - `BetaAdvisorResultBlock object { stop_reason, text, type }`
+
+        - `stop_reason: string`
+
+          The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
         - `text: string`
 
@@ -10617,11 +10794,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"advisor_result"`
 
-      - `BetaAdvisorRedactedResultBlock object { encrypted_content, type }`
+      - `BetaAdvisorRedactedResultBlock object { encrypted_content, stop_reason, type }`
 
         - `encrypted_content: string`
 
           Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+        - `stop_reason: string`
+
+          The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
         - `type: "advisor_redacted_result"`
 
@@ -10943,7 +11124,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Beta Content Block Param
 
-- `BetaContentBlockParam = BetaTextBlockParam or BetaImageBlockParam or BetaRequestDocumentBlock or 17 more`
+- `BetaContentBlockParam = BetaTextBlockParam or BetaImageBlockParam or BetaRequestDocumentBlock or 18 more`
 
   Regular text content.
 
@@ -11462,6 +11643,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"url_not_allowed"`
 
+          - `"url_not_in_prior_context"`
+
           - `"url_not_accessible"`
 
           - `"unsupported_content_type"`
@@ -11540,7 +11723,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"advisor_tool_result_error"`
 
-      - `BetaAdvisorResultBlockParam object { text, type }`
+      - `BetaAdvisorResultBlockParam object { text, type, stop_reason }`
 
         - `text: string`
 
@@ -11548,7 +11731,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"advisor_result"`
 
-      - `BetaAdvisorRedactedResultBlockParam object { encrypted_content, type }`
+        - `stop_reason: optional string`
+
+      - `BetaAdvisorRedactedResultBlockParam object { encrypted_content, type, stop_reason }`
 
         - `encrypted_content: string`
 
@@ -11557,6 +11742,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `type: "advisor_redacted_result"`
 
           - `"advisor_redacted_result"`
+
+        - `stop_reason: optional string`
 
     - `tool_use_id: string`
 
@@ -11883,7 +12070,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
-  - `BetaCompactionBlockParam object { content, type, cache_control, encrypted_content }`
+  - `BetaCompactionBlockParam object { type, cache_control, content, encrypted_content }`
 
     A compaction block containing summary of previous context.
 
@@ -11893,10 +12080,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     When content is None, the block represents a failed compaction. The server
     treats these as no-ops. Empty string content is not allowed.
 
-    - `content: string`
-
-      Summary of previously compacted content, or null if compaction failed
-
     - `type: "compaction"`
 
       - `"compaction"`
@@ -11905,9 +12088,42 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Create a cache control breakpoint at this content block.
 
+    - `content: optional string`
+
+      Summary of previously compacted content, or null if compaction failed
+
     - `encrypted_content: optional string`
 
       Opaque metadata from prior compaction, to be round-tripped verbatim
+
+  - `BetaMidConversationSystemBlockParam object { content, type, cache_control }`
+
+    System instructions that appear mid-conversation.
+
+    Use this block to provide or update system-level instructions at a specific
+    point in the conversation, rather than only via the top-level `system` parameter.
+
+    - `content: array of BetaTextBlockParam`
+
+      System instruction text blocks.
+
+      - `text: string`
+
+      - `type: "text"`
+
+      - `cache_control: optional BetaCacheControlEphemeral`
+
+        Create a cache control breakpoint at this content block.
+
+      - `citations: optional array of BetaTextCitationParam`
+
+    - `type: "mid_conv_system"`
+
+      - `"mid_conv_system"`
+
+    - `cache_control: optional BetaCacheControlEphemeral`
+
+      Create a cache control breakpoint at this content block.
 
 ### Beta Content Block Source
 
@@ -12854,11 +13070,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+      - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"`
 
@@ -13871,6 +14091,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"url_not_allowed"`
 
+            - `"url_not_in_prior_context"`
+
             - `"url_not_accessible"`
 
             - `"unsupported_content_type"`
@@ -13985,7 +14207,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"advisor_tool_result_error"`
 
-        - `BetaAdvisorResultBlock object { text, type }`
+        - `BetaAdvisorResultBlock object { stop_reason, text, type }`
+
+          - `stop_reason: string`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
           - `text: string`
 
@@ -13993,11 +14219,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"advisor_result"`
 
-        - `BetaAdvisorRedactedResultBlock object { encrypted_content, type }`
+        - `BetaAdvisorRedactedResultBlock object { encrypted_content, stop_reason, type }`
 
           - `encrypted_content: string`
 
             Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `stop_reason: string`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
           - `type: "advisor_redacted_result"`
 
@@ -14426,11 +14656,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+    - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"`
 
@@ -14729,6 +14963,26 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       The number of output tokens which were used.
 
+    - `output_tokens_details: object { thinking_tokens }`
+
+      Breakdown of output tokens by category.
+
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
+
+      - `thinking_tokens: number`
+
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
+
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
     - `server_tool_use: BetaServerToolUsage`
 
       The number of server tool requests.
@@ -14761,7 +15015,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Beta Message Delta Usage
 
-- `BetaMessageDeltaUsage object { cache_creation_input_tokens, cache_read_input_tokens, input_tokens, 3 more }`
+- `BetaMessageDeltaUsage object { cache_creation_input_tokens, cache_read_input_tokens, input_tokens, 4 more }`
 
   - `cache_creation_input_tokens: number`
 
@@ -14879,11 +15133,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+        - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"`
 
@@ -14968,6 +15226,26 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `output_tokens: number`
 
     The cumulative number of output tokens which were used.
+
+  - `output_tokens_details: object { thinking_tokens }`
+
+    Breakdown of output tokens by category.
+
+    `output_tokens` remains the inclusive, authoritative total used for billing.
+    This object provides a read-only decomposition for observability — for example,
+    how many of the billed output tokens were spent on internal reasoning that may
+    have been summarized before being returned to you.
+
+    - `thinking_tokens: number`
+
+      Number of output tokens the model generated as internal reasoning, including
+      the thinking-block delimiter tokens.
+
+      Reflects the raw reasoning the model produced, not the (possibly shorter)
+      summarized thinking text returned in the response body. Computed by
+      re-tokenizing the raw reasoning text, so it may differ from the model's exact
+      generation count by a small number of tokens. Always ≤ `output_tokens`;
+      `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
   - `server_tool_use: BetaServerToolUsage`
 
@@ -15546,6 +15824,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"url_not_allowed"`
 
+              - `"url_not_in_prior_context"`
+
               - `"url_not_accessible"`
 
               - `"unsupported_content_type"`
@@ -15624,7 +15904,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"advisor_tool_result_error"`
 
-          - `BetaAdvisorResultBlockParam object { text, type }`
+          - `BetaAdvisorResultBlockParam object { text, type, stop_reason }`
 
             - `text: string`
 
@@ -15632,7 +15912,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"advisor_result"`
 
-          - `BetaAdvisorRedactedResultBlockParam object { encrypted_content, type }`
+            - `stop_reason: optional string`
+
+          - `BetaAdvisorRedactedResultBlockParam object { encrypted_content, type, stop_reason }`
 
             - `encrypted_content: string`
 
@@ -15641,6 +15923,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             - `type: "advisor_redacted_result"`
 
               - `"advisor_redacted_result"`
+
+            - `stop_reason: optional string`
 
         - `tool_use_id: string`
 
@@ -15967,7 +16251,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
-      - `BetaCompactionBlockParam object { content, type, cache_control, encrypted_content }`
+      - `BetaCompactionBlockParam object { type, cache_control, content, encrypted_content }`
 
         A compaction block containing summary of previous context.
 
@@ -15977,10 +16261,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         When content is None, the block represents a failed compaction. The server
         treats these as no-ops. Empty string content is not allowed.
 
-        - `content: string`
-
-          Summary of previously compacted content, or null if compaction failed
-
         - `type: "compaction"`
 
           - `"compaction"`
@@ -15989,15 +16269,50 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
+        - `content: optional string`
+
+          Summary of previously compacted content, or null if compaction failed
+
         - `encrypted_content: optional string`
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-  - `role: "user" or "assistant"`
+      - `BetaMidConversationSystemBlockParam object { content, type, cache_control }`
+
+        System instructions that appear mid-conversation.
+
+        Use this block to provide or update system-level instructions at a specific
+        point in the conversation, rather than only via the top-level `system` parameter.
+
+        - `content: array of BetaTextBlockParam`
+
+          System instruction text blocks.
+
+          - `text: string`
+
+          - `type: "text"`
+
+          - `cache_control: optional BetaCacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
+
+          - `citations: optional array of BetaTextCitationParam`
+
+        - `type: "mid_conv_system"`
+
+          - `"mid_conv_system"`
+
+        - `cache_control: optional BetaCacheControlEphemeral`
+
+          Create a cache control breakpoint at this content block.
+
+  - `role: "user" or "assistant" or "system"`
 
     - `"user"`
 
     - `"assistant"`
+
+    - `"system"`
 
 ### Beta Message Tokens Count
 
@@ -16024,6 +16339,162 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     An external identifier for the user who is associated with the request.
 
     This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
+
+### Beta Mid Conversation System Block Param
+
+- `BetaMidConversationSystemBlockParam object { content, type, cache_control }`
+
+  System instructions that appear mid-conversation.
+
+  Use this block to provide or update system-level instructions at a specific
+  point in the conversation, rather than only via the top-level `system` parameter.
+
+  - `content: array of BetaTextBlockParam`
+
+    System instruction text blocks.
+
+    - `text: string`
+
+    - `type: "text"`
+
+      - `"text"`
+
+    - `cache_control: optional BetaCacheControlEphemeral`
+
+      Create a cache control breakpoint at this content block.
+
+      - `type: "ephemeral"`
+
+        - `"ephemeral"`
+
+      - `ttl: optional "5m" or "1h"`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"`
+
+        - `"1h"`
+
+    - `citations: optional array of BetaTextCitationParam`
+
+      - `BetaCitationCharLocationParam object { cited_text, document_index, document_title, 3 more }`
+
+        - `cited_text: string`
+
+        - `document_index: number`
+
+        - `document_title: string`
+
+        - `end_char_index: number`
+
+        - `start_char_index: number`
+
+        - `type: "char_location"`
+
+          - `"char_location"`
+
+      - `BetaCitationPageLocationParam object { cited_text, document_index, document_title, 3 more }`
+
+        - `cited_text: string`
+
+        - `document_index: number`
+
+        - `document_title: string`
+
+        - `end_page_number: number`
+
+        - `start_page_number: number`
+
+        - `type: "page_location"`
+
+          - `"page_location"`
+
+      - `BetaCitationContentBlockLocationParam object { cited_text, document_index, document_title, 3 more }`
+
+        - `cited_text: string`
+
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+        - `document_index: number`
+
+        - `document_title: string`
+
+        - `end_block_index: number`
+
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+        - `start_block_index: number`
+
+          0-based index of the first cited block in the source's `content` array.
+
+        - `type: "content_block_location"`
+
+          - `"content_block_location"`
+
+      - `BetaCitationWebSearchResultLocationParam object { cited_text, encrypted_index, title, 2 more }`
+
+        - `cited_text: string`
+
+        - `encrypted_index: string`
+
+        - `title: string`
+
+        - `type: "web_search_result_location"`
+
+          - `"web_search_result_location"`
+
+        - `url: string`
+
+      - `BetaCitationSearchResultLocationParam object { cited_text, end_block_index, search_result_index, 4 more }`
+
+        - `cited_text: string`
+
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+        - `end_block_index: number`
+
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+        - `search_result_index: number`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
+
+        - `source: string`
+
+        - `start_block_index: number`
+
+          0-based index of the first cited block in the source's `content` array.
+
+        - `title: string`
+
+        - `type: "search_result_location"`
+
+          - `"search_result_location"`
+
+  - `type: "mid_conv_system"`
+
+    - `"mid_conv_system"`
+
+  - `cache_control: optional BetaCacheControlEphemeral`
+
+    Create a cache control breakpoint at this content block.
 
 ### Beta Output Config
 
@@ -16225,7 +16696,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"citations_delta"`
 
-  - `BetaThinkingDelta object { thinking, type }`
+  - `BetaThinkingDelta object { estimated_tokens, thinking, type }`
+
+    - `estimated_tokens: number`
+
+      Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
     - `thinking: string`
 
@@ -16393,7 +16868,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"citations_delta"`
 
-    - `BetaThinkingDelta object { thinking, type }`
+    - `BetaThinkingDelta object { estimated_tokens, thinking, type }`
+
+      - `estimated_tokens: number`
+
+        Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
       - `thinking: string`
 
@@ -16733,6 +17212,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"url_not_allowed"`
 
+            - `"url_not_in_prior_context"`
+
             - `"url_not_accessible"`
 
             - `"unsupported_content_type"`
@@ -16847,7 +17328,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"advisor_tool_result_error"`
 
-        - `BetaAdvisorResultBlock object { text, type }`
+        - `BetaAdvisorResultBlock object { stop_reason, text, type }`
+
+          - `stop_reason: string`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
           - `text: string`
 
@@ -16855,11 +17340,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"advisor_result"`
 
-        - `BetaAdvisorRedactedResultBlock object { encrypted_content, type }`
+        - `BetaAdvisorRedactedResultBlock object { encrypted_content, stop_reason, type }`
 
           - `encrypted_content: string`
 
             Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `stop_reason: string`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
           - `type: "advisor_redacted_result"`
 
@@ -17449,11 +17938,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+          - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
 
             - `"claude-opus-4-7"`
 
@@ -17538,6 +18031,26 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `output_tokens: number`
 
       The cumulative number of output tokens which were used.
+
+    - `output_tokens_details: object { thinking_tokens }`
+
+      Breakdown of output tokens by category.
+
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
+
+      - `thinking_tokens: number`
+
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
+
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
     - `server_tool_use: BetaServerToolUsage`
 
@@ -17922,6 +18435,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"url_not_allowed"`
 
+              - `"url_not_in_prior_context"`
+
               - `"url_not_accessible"`
 
               - `"unsupported_content_type"`
@@ -18036,7 +18551,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"advisor_tool_result_error"`
 
-          - `BetaAdvisorResultBlock object { text, type }`
+          - `BetaAdvisorResultBlock object { stop_reason, text, type }`
+
+            - `stop_reason: string`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
             - `text: string`
 
@@ -18044,11 +18563,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"advisor_result"`
 
-          - `BetaAdvisorRedactedResultBlock object { encrypted_content, type }`
+          - `BetaAdvisorRedactedResultBlock object { encrypted_content, stop_reason, type }`
 
             - `encrypted_content: string`
 
               Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `stop_reason: string`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
             - `type: "advisor_redacted_result"`
 
@@ -18477,11 +19000,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+      - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"`
 
@@ -18779,6 +19306,26 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `output_tokens: number`
 
         The number of output tokens which were used.
+
+      - `output_tokens_details: object { thinking_tokens }`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
+
+        - `thinking_tokens: number`
+
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
+
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
       - `server_tool_use: BetaServerToolUsage`
 
@@ -19195,6 +19742,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"url_not_allowed"`
 
+                - `"url_not_in_prior_context"`
+
                 - `"url_not_accessible"`
 
                 - `"unsupported_content_type"`
@@ -19309,7 +19858,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"advisor_tool_result_error"`
 
-            - `BetaAdvisorResultBlock object { text, type }`
+            - `BetaAdvisorResultBlock object { stop_reason, text, type }`
+
+              - `stop_reason: string`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
               - `text: string`
 
@@ -19317,11 +19870,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"advisor_result"`
 
-            - `BetaAdvisorRedactedResultBlock object { encrypted_content, type }`
+            - `BetaAdvisorRedactedResultBlock object { encrypted_content, stop_reason, type }`
 
               - `encrypted_content: string`
 
                 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+              - `stop_reason: string`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
               - `type: "advisor_redacted_result"`
 
@@ -19750,11 +20307,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+        - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"`
 
@@ -20053,6 +20614,26 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           The number of output tokens which were used.
 
+        - `output_tokens_details: object { thinking_tokens }`
+
+          Breakdown of output tokens by category.
+
+          `output_tokens` remains the inclusive, authoritative total used for billing.
+          This object provides a read-only decomposition for observability — for example,
+          how many of the billed output tokens were spent on internal reasoning that may
+          have been summarized before being returned to you.
+
+          - `thinking_tokens: number`
+
+            Number of output tokens the model generated as internal reasoning, including
+            the thinking-block delimiter tokens.
+
+            Reflects the raw reasoning the model produced, not the (possibly shorter)
+            summarized thinking text returned in the response body. Computed by
+            re-tokenizing the raw reasoning text, so it may differ from the model's exact
+            generation count by a small number of tokens. Always ≤ `output_tokens`;
+            `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
         - `server_tool_use: BetaServerToolUsage`
 
           The number of server tool requests.
@@ -20148,6 +20729,26 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `output_tokens: number`
 
         The cumulative number of output tokens which were used.
+
+      - `output_tokens_details: object { thinking_tokens }`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
+
+        - `thinking_tokens: number`
+
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
+
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
       - `server_tool_use: BetaServerToolUsage`
 
@@ -20249,7 +20850,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"citations_delta"`
 
-      - `BetaThinkingDelta object { thinking, type }`
+      - `BetaThinkingDelta object { estimated_tokens, thinking, type }`
+
+        - `estimated_tokens: number`
+
+          Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
         - `thinking: string`
 
@@ -22137,7 +22742,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Beta Thinking Delta
 
-- `BetaThinkingDelta object { thinking, type }`
+- `BetaThinkingDelta object { estimated_tokens, thinking, type }`
+
+  - `estimated_tokens: number`
+
+    Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
   - `thinking: string`
 
@@ -24510,11 +25119,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+      - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"`
 
@@ -24886,7 +25499,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Beta Usage
 
-- `BetaUsage object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 7 more }`
+- `BetaUsage object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 8 more }`
 
   - `cache_creation: BetaCacheCreation`
 
@@ -25012,11 +25625,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+        - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"`
 
@@ -25101,6 +25718,26 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `output_tokens: number`
 
     The number of output tokens which were used.
+
+  - `output_tokens_details: object { thinking_tokens }`
+
+    Breakdown of output tokens by category.
+
+    `output_tokens` remains the inclusive, authoritative total used for billing.
+    This object provides a read-only decomposition for observability — for example,
+    how many of the billed output tokens were spent on internal reasoning that may
+    have been summarized before being returned to you.
+
+    - `thinking_tokens: number`
+
+      Number of output tokens the model generated as internal reasoning, including
+      the thinking-block delimiter tokens.
+
+      Reflects the raw reasoning the model produced, not the (possibly shorter)
+      summarized thinking text returned in the response body. Computed by
+      re-tokenizing the raw reasoning text, so it may differ from the model's exact
+      generation count by a small number of tokens. Always ≤ `output_tokens`;
+      `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
   - `server_tool_use: BetaServerToolUsage`
 
@@ -25738,6 +26375,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"url_not_allowed"`
 
+        - `"url_not_in_prior_context"`
+
         - `"url_not_accessible"`
 
         - `"unsupported_content_type"`
@@ -25859,6 +26498,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `"url_too_long"`
 
         - `"url_not_allowed"`
+
+        - `"url_not_in_prior_context"`
 
         - `"url_not_accessible"`
 
@@ -26195,6 +26836,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"url_not_allowed"`
 
+    - `"url_not_in_prior_context"`
+
     - `"url_not_accessible"`
 
     - `"unsupported_content_type"`
@@ -26221,6 +26864,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"url_not_allowed"`
 
+    - `"url_not_in_prior_context"`
+
     - `"url_not_accessible"`
 
     - `"unsupported_content_type"`
@@ -26237,13 +26882,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Beta Web Fetch Tool Result Error Code
 
-- `BetaWebFetchToolResultErrorCode = "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 5 more`
+- `BetaWebFetchToolResultErrorCode = "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
 
   - `"invalid_tool_input"`
 
   - `"url_too_long"`
 
   - `"url_not_allowed"`
+
+  - `"url_not_in_prior_context"`
 
   - `"url_not_accessible"`
 
@@ -26800,7 +27447,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -26851,6 +27498,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -27452,6 +28103,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"url_not_allowed"`
 
+                  - `"url_not_in_prior_context"`
+
                   - `"url_not_accessible"`
 
                   - `"unsupported_content_type"`
@@ -27530,7 +28183,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"advisor_tool_result_error"`
 
-              - `BetaAdvisorResultBlockParam object { text, type }`
+              - `BetaAdvisorResultBlockParam object { text, type, stop_reason }`
 
                 - `text: string`
 
@@ -27538,7 +28191,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"advisor_result"`
 
-              - `BetaAdvisorRedactedResultBlockParam object { encrypted_content, type }`
+                - `stop_reason: optional string`
+
+              - `BetaAdvisorRedactedResultBlockParam object { encrypted_content, type, stop_reason }`
 
                 - `encrypted_content: string`
 
@@ -27547,6 +28202,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 - `type: "advisor_redacted_result"`
 
                   - `"advisor_redacted_result"`
+
+                - `stop_reason: optional string`
 
             - `tool_use_id: string`
 
@@ -27873,7 +28530,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-          - `BetaCompactionBlockParam object { content, type, cache_control, encrypted_content }`
+          - `BetaCompactionBlockParam object { type, cache_control, content, encrypted_content }`
 
             A compaction block containing summary of previous context.
 
@@ -27883,10 +28540,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             When content is None, the block represents a failed compaction. The server
             treats these as no-ops. Empty string content is not allowed.
 
-            - `content: string`
-
-              Summary of previously compacted content, or null if compaction failed
-
             - `type: "compaction"`
 
               - `"compaction"`
@@ -27895,15 +28548,50 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
+            - `content: optional string`
+
+              Summary of previously compacted content, or null if compaction failed
+
             - `encrypted_content: optional string`
 
               Opaque metadata from prior compaction, to be round-tripped verbatim
 
-      - `role: "user" or "assistant"`
+          - `BetaMidConversationSystemBlockParam object { content, type, cache_control }`
+
+            System instructions that appear mid-conversation.
+
+            Use this block to provide or update system-level instructions at a specific
+            point in the conversation, rather than only via the top-level `system` parameter.
+
+            - `content: array of BetaTextBlockParam`
+
+              System instruction text blocks.
+
+              - `text: string`
+
+              - `type: "text"`
+
+              - `cache_control: optional BetaCacheControlEphemeral`
+
+                Create a cache control breakpoint at this content block.
+
+              - `citations: optional array of BetaTextCitationParam`
+
+            - `type: "mid_conv_system"`
+
+              - `"mid_conv_system"`
+
+            - `cache_control: optional BetaCacheControlEphemeral`
+
+              Create a cache control breakpoint at this content block.
+
+      - `role: "user" or "assistant" or "system"`
 
         - `"user"`
 
         - `"assistant"`
+
+        - `"system"`
 
     - `model: Model`
 
@@ -27911,11 +28599,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+      - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"`
 
@@ -29661,7 +30353,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -29712,6 +30404,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -29867,7 +30563,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -29918,6 +30614,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -30084,7 +30784,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -30135,6 +30835,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -30283,7 +30987,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -30334,6 +31038,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -30394,7 +31102,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -30445,6 +31153,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -30833,6 +31545,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"url_not_allowed"`
 
+                  - `"url_not_in_prior_context"`
+
                   - `"url_not_accessible"`
 
                   - `"unsupported_content_type"`
@@ -30947,7 +31661,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"advisor_tool_result_error"`
 
-              - `BetaAdvisorResultBlock object { text, type }`
+              - `BetaAdvisorResultBlock object { stop_reason, text, type }`
+
+                - `stop_reason: string`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
                 - `text: string`
 
@@ -30955,11 +31673,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"advisor_result"`
 
-              - `BetaAdvisorRedactedResultBlock object { encrypted_content, type }`
+              - `BetaAdvisorRedactedResultBlock object { encrypted_content, stop_reason, type }`
 
                 - `encrypted_content: string`
 
                   Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+                - `stop_reason: string`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
                 - `type: "advisor_redacted_result"`
 
@@ -31388,11 +32110,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+          - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
 
             - `"claude-opus-4-7"`
 
@@ -31690,6 +32416,26 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `output_tokens: number`
 
             The number of output tokens which were used.
+
+          - `output_tokens_details: object { thinking_tokens }`
+
+            Breakdown of output tokens by category.
+
+            `output_tokens` remains the inclusive, authoritative total used for billing.
+            This object provides a read-only decomposition for observability — for example,
+            how many of the billed output tokens were spent on internal reasoning that may
+            have been summarized before being returned to you.
+
+            - `thinking_tokens: number`
+
+              Number of output tokens the model generated as internal reasoning, including
+              the thinking-block delimiter tokens.
+
+              Reflects the raw reasoning the model produced, not the (possibly shorter)
+              summarized thinking text returned in the response body. Computed by
+              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              generation count by a small number of tokens. Always ≤ `output_tokens`;
+              `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
           - `server_tool_use: BetaServerToolUsage`
 
@@ -32435,6 +33181,8 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                   - `"url_not_allowed"`
 
+                  - `"url_not_in_prior_context"`
+
                   - `"url_not_accessible"`
 
                   - `"unsupported_content_type"`
@@ -32549,7 +33297,11 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                   - `"advisor_tool_result_error"`
 
-              - `BetaAdvisorResultBlock object { text, type }`
+              - `BetaAdvisorResultBlock object { stop_reason, text, type }`
+
+                - `stop_reason: string`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
                 - `text: string`
 
@@ -32557,11 +33309,15 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                   - `"advisor_result"`
 
-              - `BetaAdvisorRedactedResultBlock object { encrypted_content, type }`
+              - `BetaAdvisorRedactedResultBlock object { encrypted_content, stop_reason, type }`
 
                 - `encrypted_content: string`
 
                   Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+                - `stop_reason: string`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
                 - `type: "advisor_redacted_result"`
 
@@ -32990,11 +33746,15 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+          - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
 
             - `"claude-opus-4-7"`
 
@@ -33292,6 +34052,26 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
           - `output_tokens: number`
 
             The number of output tokens which were used.
+
+          - `output_tokens_details: object { thinking_tokens }`
+
+            Breakdown of output tokens by category.
+
+            `output_tokens` remains the inclusive, authoritative total used for billing.
+            This object provides a read-only decomposition for observability — for example,
+            how many of the billed output tokens were spent on internal reasoning that may
+            have been summarized before being returned to you.
+
+            - `thinking_tokens: number`
+
+              Number of output tokens the model generated as internal reasoning, including
+              the thinking-block delimiter tokens.
+
+              Reflects the raw reasoning the model produced, not the (possibly shorter)
+              summarized thinking text returned in the response body. Computed by
+              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              generation count by a small number of tokens. Always ≤ `output_tokens`;
+              `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
           - `server_tool_use: BetaServerToolUsage`
 
@@ -33836,6 +34616,8 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 - `"url_not_allowed"`
 
+                - `"url_not_in_prior_context"`
+
                 - `"url_not_accessible"`
 
                 - `"unsupported_content_type"`
@@ -33950,7 +34732,11 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 - `"advisor_tool_result_error"`
 
-            - `BetaAdvisorResultBlock object { text, type }`
+            - `BetaAdvisorResultBlock object { stop_reason, text, type }`
+
+              - `stop_reason: string`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
               - `text: string`
 
@@ -33958,11 +34744,15 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 - `"advisor_result"`
 
-            - `BetaAdvisorRedactedResultBlock object { encrypted_content, type }`
+            - `BetaAdvisorRedactedResultBlock object { encrypted_content, stop_reason, type }`
 
               - `encrypted_content: string`
 
                 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+              - `stop_reason: string`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
               - `type: "advisor_redacted_result"`
 
@@ -34391,11 +35181,15 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+        - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"`
 
@@ -34693,6 +35487,26 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
         - `output_tokens: number`
 
           The number of output tokens which were used.
+
+        - `output_tokens_details: object { thinking_tokens }`
+
+          Breakdown of output tokens by category.
+
+          `output_tokens` remains the inclusive, authoritative total used for billing.
+          This object provides a read-only decomposition for observability — for example,
+          how many of the billed output tokens were spent on internal reasoning that may
+          have been summarized before being returned to you.
+
+          - `thinking_tokens: number`
+
+            Number of output tokens the model generated as internal reasoning, including
+            the thinking-block delimiter tokens.
+
+            Reflects the raw reasoning the model produced, not the (possibly shorter)
+            summarized thinking text returned in the response body. Computed by
+            re-tokenizing the raw reasoning text, so it may differ from the model's exact
+            generation count by a small number of tokens. Always ≤ `output_tokens`;
+            `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
         - `server_tool_use: BetaServerToolUsage`
 
@@ -35199,6 +36013,8 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"url_not_allowed"`
 
+              - `"url_not_in_prior_context"`
+
               - `"url_not_accessible"`
 
               - `"unsupported_content_type"`
@@ -35313,7 +36129,11 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"advisor_tool_result_error"`
 
-          - `BetaAdvisorResultBlock object { text, type }`
+          - `BetaAdvisorResultBlock object { stop_reason, text, type }`
+
+            - `stop_reason: string`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
             - `text: string`
 
@@ -35321,11 +36141,15 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"advisor_result"`
 
-          - `BetaAdvisorRedactedResultBlock object { encrypted_content, type }`
+          - `BetaAdvisorRedactedResultBlock object { encrypted_content, stop_reason, type }`
 
             - `encrypted_content: string`
 
               Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `stop_reason: string`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
             - `type: "advisor_redacted_result"`
 
@@ -35754,11 +36578,15 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+      - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"`
 
@@ -36057,6 +36885,26 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         The number of output tokens which were used.
 
+      - `output_tokens_details: object { thinking_tokens }`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
+
+        - `thinking_tokens: number`
+
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
+
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
       - `server_tool_use: BetaServerToolUsage`
 
         The number of server tool requests.
@@ -36107,7 +36955,7 @@ Create Agent
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -36158,6 +37006,10 @@ Create Agent
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -36939,7 +37791,7 @@ List Agents
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -36990,6 +37842,10 @@ List Agents
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -37403,7 +38259,7 @@ Get Agent
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -37454,6 +38310,10 @@ Get Agent
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -37852,7 +38712,7 @@ Update Agent
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -37903,6 +38763,10 @@ Update Agent
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -38660,7 +39524,7 @@ Archive Agent
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -38711,6 +39575,10 @@ Archive Agent
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -40854,7 +41722,7 @@ List Agent Versions
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -40905,6 +41773,10 @@ List Agent Versions
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -41310,7 +42182,7 @@ Create a new environment with the specified configuration.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -41361,6 +42233,10 @@ Create a new environment with the specified configuration.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -41735,7 +42611,7 @@ List environments with pagination support.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -41786,6 +42662,10 @@ List environments with pagination support.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -42014,7 +42894,7 @@ Retrieve a specific environment by ID.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -42065,6 +42945,10 @@ Retrieve a specific environment by ID.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -42284,7 +43168,7 @@ Update an existing environment's configuration.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -42335,6 +43219,10 @@ Update an existing environment's configuration.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -42682,7 +43570,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -42733,6 +43621,10 @@ Delete an environment by ID. Returns a confirmation of the deletion.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -42787,7 +43679,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -42838,6 +43730,10 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -43557,7 +44453,7 @@ Retrieve detailed information about a specific work item.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -43608,6 +44504,10 @@ Retrieve detailed information about a specific work item.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -43752,7 +44652,7 @@ Long poll for work items in the queue.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -43803,6 +44703,10 @@ Long poll for work items in the queue.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 - `"Anthropic-Worker-ID": optional string`
 
@@ -43943,7 +44847,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -43994,6 +44898,10 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -44141,7 +45049,7 @@ Record a heartbeat for a work item to maintain the lease.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -44192,6 +45100,10 @@ Record a heartbeat for a work item to maintain the lease.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -44275,7 +45187,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -44326,6 +45238,10 @@ Stop a work item, initiating graceful or forced shutdown.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -44478,7 +45394,7 @@ List work items in an environment.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -44529,6 +45445,10 @@ List work items in an environment.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -44674,7 +45594,7 @@ Update work item metadata with merge semantics.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -44725,6 +45645,10 @@ Update work item metadata with merge semantics.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -44869,7 +45793,7 @@ Get statistics about the work queue for an environment.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -44920,6 +45844,10 @@ Get statistics about the work queue for an environment.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -45261,7 +46189,7 @@ Create Session
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -45312,6 +46240,10 @@ Create Session
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -46235,7 +47167,7 @@ List Sessions
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -46286,6 +47218,10 @@ List Sessions
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -47026,7 +47962,7 @@ Get Session
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -47077,6 +48013,10 @@ Get Session
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -47808,7 +48748,7 @@ Update Session
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -47859,6 +48799,10 @@ Update Session
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -48798,7 +49742,7 @@ Delete Session
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -48849,6 +49793,10 @@ Delete Session
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -48899,7 +49847,7 @@ Archive Session
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -48950,6 +49898,10 @@ Archive Session
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -51928,7 +52880,7 @@ List Events
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -51979,6 +52931,10 @@ List Events
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -53767,7 +54723,7 @@ Send Events
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -53818,6 +54774,10 @@ Send Events
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -54636,7 +55596,7 @@ Stream Events
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -54687,6 +55647,10 @@ Stream Events
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -64225,7 +65189,7 @@ Add Session Resource
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -64276,6 +65240,10 @@ Add Session Resource
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -64369,7 +65337,7 @@ List Session Resources
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -64420,6 +65388,10 @@ List Session Resources
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -64588,7 +65560,7 @@ Get Session Resource
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -64639,6 +65611,10 @@ Get Session Resource
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -64786,7 +65762,7 @@ Update Session Resource
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -64837,6 +65813,10 @@ Update Session Resource
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -64994,7 +65974,7 @@ Delete Session Resource
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -65045,6 +66025,10 @@ Delete Session Resource
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -65537,7 +66521,7 @@ List Session Threads
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -65588,6 +66572,10 @@ List Session Threads
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -66052,7 +67040,7 @@ Get Session Thread
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -66103,6 +67091,10 @@ Get Session Thread
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -66558,7 +67550,7 @@ Archive Session Thread
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -66609,6 +67601,10 @@ Archive Session Thread
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -69215,7 +70211,7 @@ List Session Thread Events
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -69266,6 +70262,10 @@ List Session Thread Events
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -71045,7 +72045,7 @@ Stream Session Thread Events
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -71096,6 +72096,10 @@ Stream Session Thread Events
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -72862,7 +73866,7 @@ Create Vault
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -72913,6 +73917,10 @@ Create Vault
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -73018,7 +74026,7 @@ List Vaults
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -73069,6 +74077,10 @@ List Vaults
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -73156,7 +74168,7 @@ Get Vault
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -73207,6 +74219,10 @@ Get Vault
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -73285,7 +74301,7 @@ Update Vault
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -73336,6 +74352,10 @@ Update Vault
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -73431,7 +74451,7 @@ Delete Vault
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -73482,6 +74502,10 @@ Delete Vault
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -73534,7 +74558,7 @@ Archive Vault
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -73585,6 +74609,10 @@ Archive Vault
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -73716,7 +74744,7 @@ Create Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -73767,6 +74795,10 @@ Create Credential
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -74070,7 +75102,7 @@ List Credentials
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -74121,6 +75153,10 @@ List Credentials
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -74299,7 +75335,7 @@ Get Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -74350,6 +75386,10 @@ Get Credential
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -74519,7 +75559,7 @@ Update Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -74570,6 +75610,10 @@ Update Credential
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -74828,7 +75872,7 @@ Delete Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -74879,6 +75923,10 @@ Delete Credential
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -74933,7 +75981,7 @@ Archive Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -74984,6 +76032,10 @@ Archive Credential
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -75154,7 +76206,7 @@ Validate Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -75205,6 +76257,10 @@ Validate Credential
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -76169,7 +77225,7 @@ Create a memory store
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -76220,6 +77276,10 @@ Create a memory store
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -76339,7 +77399,7 @@ List memory stores
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -76390,6 +77450,10 @@ List memory stores
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -76482,7 +77546,7 @@ Retrieve a memory store
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -76533,6 +77597,10 @@ Retrieve a memory store
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -76616,7 +77684,7 @@ Update a memory store
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -76667,6 +77735,10 @@ Update a memory store
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -76766,7 +77838,7 @@ Delete a memory store
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -76817,6 +77889,10 @@ Delete a memory store
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -76869,7 +77945,7 @@ Archive a memory store
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -76920,6 +77996,10 @@ Archive a memory store
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -77070,7 +78150,7 @@ Create a memory
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -77121,6 +78201,10 @@ Create a memory
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -77265,7 +78349,7 @@ List memories
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -77316,6 +78400,10 @@ List memories
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -77444,7 +78532,7 @@ Retrieve a memory
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -77495,6 +78583,10 @@ Retrieve a memory
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -77598,7 +78690,7 @@ Update a memory
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -77649,6 +78741,10 @@ Update a memory
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -77772,7 +78868,7 @@ Delete a memory
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -77823,6 +78919,10 @@ Delete a memory
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -78239,7 +79339,7 @@ List memory versions
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -78290,6 +79390,10 @@ List memory versions
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -78465,7 +79569,7 @@ Retrieve a memory version
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -78516,6 +79620,10 @@ Retrieve a memory version
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -78672,7 +79780,7 @@ Redact a memory version
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -78723,6 +79831,10 @@ Redact a memory version
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -79074,7 +80186,7 @@ Upload File
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -79125,6 +80237,10 @@ Upload File
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -79241,7 +80357,7 @@ List Files
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -79292,6 +80408,10 @@ List Files
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -79413,7 +80533,7 @@ Download File
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -79464,6 +80584,10 @@ Download File
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Example
 
@@ -79494,7 +80618,7 @@ Get File Metadata
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -79545,6 +80669,10 @@ Get File Metadata
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -79645,7 +80773,7 @@ Delete File
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -79696,6 +80824,10 @@ Delete File
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -79832,7 +80964,7 @@ Create Skill
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -79883,6 +81015,10 @@ Create Skill
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -79988,7 +81124,7 @@ List Skills
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -80039,6 +81175,10 @@ List Skills
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -80150,7 +81290,7 @@ Get Skill
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -80201,6 +81341,10 @@ Get Skill
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -80290,7 +81434,7 @@ Delete Skill
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -80341,6 +81485,10 @@ Delete Skill
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -80552,7 +81700,7 @@ Create Skill Version
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -80603,6 +81751,10 @@ Create Skill Version
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -80709,7 +81861,7 @@ List Skill Versions
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -80760,6 +81912,10 @@ List Skill Versions
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -80877,7 +82033,7 @@ Download a skill version's content as a zip archive.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -80928,6 +82084,10 @@ Download a skill version's content as a zip archive.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Example
 
@@ -80966,7 +82126,7 @@ Get Skill Version
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -81017,6 +82177,10 @@ Get Skill Version
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -81116,7 +82280,7 @@ Delete Skill Version
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -81167,6 +82331,10 @@ Delete Skill Version
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -81379,7 +82547,7 @@ Create User Profile
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -81430,6 +82598,10 @@ Create User Profile
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -81579,7 +82751,7 @@ List User Profiles
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -81630,6 +82802,10 @@ List User Profiles
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -81747,7 +82923,7 @@ Get User Profile
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -81798,6 +82974,10 @@ Get User Profile
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -81904,7 +83084,7 @@ Update User Profile
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -81955,6 +83135,10 @@ Update User Profile
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Body Parameters
 
@@ -82089,7 +83273,7 @@ Create Enrollment URL
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -82140,6 +83324,10 @@ Create Enrollment URL
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 

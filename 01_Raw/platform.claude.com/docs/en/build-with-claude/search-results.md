@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/search-results
-fetched_at: 2026-05-18T05:02:42.248125+00:00
+fetched_at: 2026-06-01T05:54:49.358407+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,6 +18,7 @@ Search result content blocks enable natural citations with proper source attribu
 
 The search results feature is available on the following models:
 
+- <NextOpus /> (<NextOpusId />)
 - Claude Opus 4.7 (`claude-opus-4-7`)
 - Claude Opus 4.6 (`claude-opus-4-6`)
 - Claude Sonnet 4.6 (`claude-sonnet-4-6`)
@@ -154,7 +155,7 @@ def search_knowledge_base(query):
 
 # Create a message with the tool
 response = client.messages.create(
-    model="claude-opus-4-7",  # Works with all supported models
+    model="claude-opus-4-8",  # Works with all supported models
     max_tokens=1024,
     tools=[knowledge_base_tool],
     messages=[
@@ -168,7 +169,7 @@ if response.content[0].type == "tool_use":
 
     # Send the tool result back
     final_response = client.messages.create(
-        model="claude-opus-4-7",  # Works with all supported models
+        model="claude-opus-4-8",  # Works with all supported models
         max_tokens=1024,
         messages=[
             MessageParam(
@@ -244,7 +245,7 @@ function searchKnowledgeBase(query: string) {
 
 // Create a message with the tool
 const response = await anthropic.messages.create({
-  model: "claude-opus-4-7", // Works with all supported models
+  model: "claude-opus-4-8", // Works with all supported models
   max_tokens: 1024,
   tools: [knowledgeBaseTool],
   messages: [
@@ -261,7 +262,7 @@ if (response.content[0].type === "tool_use") {
   const toolResult = searchKnowledgeBase(input.query);
 
   const finalResponse = await anthropic.messages.create({
-    model: "claude-opus-4-7", // Works with all supported models
+    model: "claude-opus-4-8", // Works with all supported models
     max_tokens: 1024,
     messages: [
       { role: "user", content: "How do I configure the timeout settings?" },
@@ -315,7 +316,7 @@ public class Program
 
         var parameters = new MessageCreateParams
         {
-            Model = Model.ClaudeOpus4_7,
+            Model = Model.ClaudeOpus4_8,
             MaxTokens = 1024,
             Tools = new[] { knowledgeBaseTool },
             Messages = new[]
@@ -336,7 +337,7 @@ public class Program
 
             var finalParameters = new MessageCreateParams
             {
-                Model = Model.ClaudeOpus4_7,
+                Model = Model.ClaudeOpus4_8,
                 MaxTokens = 1024,
                 Messages = new[]
                 {
@@ -429,7 +430,7 @@ func main() {
 	}
 
 	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_7,
+		Model:     anthropic.ModelClaudeOpus4_8,
 		MaxTokens: 1024,
 		Tools:     []anthropic.ToolUnionParam{knowledgeBaseTool},
 		Messages: []anthropic.MessageParam{
@@ -455,7 +456,7 @@ func main() {
 			assistantParam := response.ToParam()
 
 			finalResponse, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-				Model:     anthropic.ModelClaudeOpus4_7,
+				Model:     anthropic.ModelClaudeOpus4_8,
 				MaxTokens: 1024,
 				Messages: []anthropic.MessageParam{
 					anthropic.NewUserMessage(anthropic.NewTextBlock("How do I configure the timeout settings?")),
@@ -535,7 +536,7 @@ public class SearchKnowledgeBaseExample {
             .build();
 
         MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_7)
+            .model(Model.CLAUDE_OPUS_4_8)
             .maxTokens(1024L)
             .addTool(knowledgeBaseTool)
             .addUserMessage("How do I configure the timeout settings?")
@@ -549,7 +550,7 @@ public class SearchKnowledgeBaseExample {
             );
 
             MessageCreateParams finalParams = MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_4_7)
+                .model(Model.CLAUDE_OPUS_4_8)
                 .maxTokens(1024L)
                 .addUserMessage("How do I configure the timeout settings?")
                 .addAssistantMessageOfBlockParams(List.of(
@@ -661,7 +662,7 @@ $response = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'How do I configure the timeout settings?']
     ],
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
     tools: [$knowledgeBaseTool],
 );
 
@@ -692,7 +693,7 @@ if ($toolUseBlock !== null) {
                 ]
             ]
         ],
-        model: 'claude-opus-4-7',
+        model: 'claude-opus-4-8',
     );
     echo $finalResponse;
 } else {
@@ -747,7 +748,7 @@ def search_knowledge_base(query)
 end
 
 response = client.messages.create(
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 1024,
   tools: [knowledge_base_tool],
   messages: [
@@ -759,7 +760,7 @@ if response.content.first.type == :tool_use
   tool_result = search_knowledge_base(response.content.first.input["query"])
 
   final_response = client.messages.create(
-    model: "claude-opus-4-7",
+    model: "claude-opus-4-8",
     max_tokens: 1024,
     messages: [
       { role: "user", content: "How do I configure the timeout settings?" },
@@ -800,7 +801,7 @@ curl https://api.anthropic.com/v1/messages \
      --header "content-type: application/json" \
      --data \
 '{
-    "model": "claude-opus-4-7",
+    "model": "claude-opus-4-8",
     "max_tokens": 1024,
     "messages": [
         {
@@ -846,7 +847,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-4-7
+model: claude-opus-4-8
 max_tokens: 1024
 messages:
   - role: user
@@ -888,7 +889,7 @@ client = Anthropic()
 
 # Provide search results directly in the user message
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[
         MessageParam(
@@ -937,7 +938,7 @@ const anthropic = new Anthropic();
 
 // Provide search results directly in the user message
 const response = await anthropic.messages.create({
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 1024,
   messages: [
     {
@@ -993,7 +994,7 @@ class Program
 
         var parameters = new MessageCreateParams
         {
-            Model = Model.ClaudeOpus4_7,
+            Model = Model.ClaudeOpus4_8,
             MaxTokens = 1024,
             Messages =
             [
@@ -1058,7 +1059,7 @@ func main() {
 	client := anthropic.NewClient()
 
 	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_7,
+		Model:     anthropic.ModelClaudeOpus4_8,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(
@@ -1106,7 +1107,7 @@ public class SearchResultExample {
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
         MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_7)
+            .model(Model.CLAUDE_OPUS_4_8)
             .maxTokens(1024L)
             .addUserMessageOfBlockParams(List.of(
                 ContentBlockParam.ofSearchResult(
@@ -1191,7 +1192,7 @@ $message = $client->messages->create(
             ]
         ]
     ],
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
 );
 
 echo json_encode($message, JSON_PRETTY_PRINT);
@@ -1203,7 +1204,7 @@ require "anthropic"
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 1024,
   messages: [
     {

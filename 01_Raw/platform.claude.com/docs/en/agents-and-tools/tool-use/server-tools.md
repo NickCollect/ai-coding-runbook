@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools
-fetched_at: 2026-05-18T05:02:42.545411+00:00
+fetched_at: 2026-06-01T05:54:49.679961+00:00
 fetch_method: mintlify_md
 ---
 
@@ -41,7 +41,7 @@ client = anthropic.Anthropic()
 
 # Initial request with web search
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[
         {
@@ -65,7 +65,7 @@ if response.stop_reason == "pause_turn":
 
     # Send the continuation request
     continuation = client.messages.create(
-        model="claude-opus-4-7",
+        model="claude-opus-4-8",
         max_tokens=1024,
         messages=messages,
         tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 10}],
@@ -84,7 +84,7 @@ const client = new Anthropic();
 async function main() {
   // Initial request with web search
   const response = await client.messages.create({
-    model: "claude-opus-4-7",
+    model: "claude-opus-4-8",
     max_tokens: 1024,
     messages: [
       {
@@ -116,7 +116,7 @@ async function main() {
 
     // Send the continuation request
     const continuation = await client.messages.create({
-      model: "claude-opus-4-7",
+      model: "claude-opus-4-8",
       max_tokens: 1024,
       messages: messages,
       tools: [
@@ -152,7 +152,7 @@ class Program
 
         var parameters = new MessageCreateParams
         {
-            Model = "claude-opus-4-7",
+            Model = "claude-opus-4-8",
             MaxTokens = 1024,
             Messages = [
                 new() {
@@ -169,7 +169,7 @@ class Program
         {
             var continuationParams = new MessageCreateParams
             {
-                Model = "claude-opus-4-7",
+                Model = "claude-opus-4-8",
                 MaxTokens = 1024,
                 Messages = [
                     new() {
@@ -216,7 +216,7 @@ func main() {
 	}
 
 	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_7,
+		Model:     anthropic.ModelClaudeOpus4_8,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("Search for comprehensive information about quantum computing breakthroughs in 2025")),
@@ -235,7 +235,7 @@ func main() {
 		}
 
 		continuation, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-			Model:     anthropic.ModelClaudeOpus4_7,
+			Model:     anthropic.ModelClaudeOpus4_8,
 			MaxTokens: 1024,
 			Messages: []anthropic.MessageParam{
 				anthropic.NewUserMessage(anthropic.NewTextBlock("Search for comprehensive information about quantum computing breakthroughs in 2025")),
@@ -265,7 +265,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model("claude-opus-4-7")
+        .model("claude-opus-4-8")
         .maxTokens(1024L)
         .addUserMessage("Search for comprehensive information about quantum computing breakthroughs in 2025")
         .addTool(WebSearchTool20250305.builder()
@@ -278,7 +278,7 @@ void main() {
     if (response.stopReason().isPresent()
             && response.stopReason().get().equals(StopReason.PAUSE_TURN)) {
         MessageCreateParams continuationParams = MessageCreateParams.builder()
-            .model("claude-opus-4-7")
+            .model("claude-opus-4-8")
             .maxTokens(1024L)
             .addUserMessage("Search for comprehensive information about quantum computing breakthroughs in 2025")
             .addMessage(response)
@@ -310,7 +310,7 @@ $response = $client->messages->create(
             'content' => 'Search for comprehensive information about quantum computing breakthroughs in 2025'
         ]
     ],
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
     tools: [
         [
             'type' => 'web_search_20250305',
@@ -335,7 +335,7 @@ if ($response->stopReason === 'pause_turn') {
     $continuation = $client->messages->create(
         maxTokens: 1024,
         messages: $messages,
-        model: 'claude-opus-4-7',
+        model: 'claude-opus-4-8',
         tools: [
             [
                 'type' => 'web_search_20250305',
@@ -357,7 +357,7 @@ require "anthropic"
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 1024,
   messages: [
     {
@@ -388,7 +388,7 @@ if response.stop_reason == :pause_turn
   ]
 
   continuation = client.messages.create(
-    model: "claude-opus-4-7",
+    model: "claude-opus-4-8",
     max_tokens: 1024,
     messages: messages,
     tools: [
@@ -484,7 +484,9 @@ See [Streaming](/docs/en/build-with-claude/streaming) for the full event referen
 
 ## Batch requests
 
-All server tools support batch processing. See [Batch processing](/docs/en/build-with-claude/batch-processing).
+All server tools support batch processing. In a batch, the agentic loop runs just as it does for synchronous requests, with a higher per-turn iteration limit. If the loop reaches that limit, the response ends with `stop_reason: "pause_turn"`; you can continue it by submitting a follow-up request with the returned content. See [Server tools and the agentic loop](/docs/en/build-with-claude/batch-processing#server-tools-and-the-agentic-loop) for details.
+
+Common batch workloads for server tools include enriching a dataset or catalog with information pulled from the web, checking a large set of documents against current sources, monitoring a list of pages or topics over time, and running analysis code over many files.
 
 ## Next steps
 

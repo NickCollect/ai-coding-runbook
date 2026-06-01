@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages
-fetched_at: 2026-05-25T05:15:51.831202+00:00
+fetched_at: 2026-06-01T05:54:51.860720+00:00
 fetch_method: mintlify_md
 ---
 
@@ -582,6 +582,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"url_not_allowed"`
 
+              - `"url_not_in_prior_context"`
+
               - `"url_not_accessible"`
 
               - `"unsupported_content_type"`
@@ -901,11 +903,42 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
-  - `role: "user" or "assistant"`
+      - `MidConversationSystemBlockParam object { content, type, cache_control }`
+
+        System instructions that appear mid-conversation.
+
+        Use this block to provide or update system-level instructions at a specific
+        point in the conversation, rather than only via the top-level `system` parameter.
+
+        - `content: array of TextBlockParam`
+
+          System instruction text blocks.
+
+          - `text: string`
+
+          - `type: "text"`
+
+          - `cache_control: optional CacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
+
+          - `citations: optional array of TextCitationParam`
+
+        - `type: "mid_conv_system"`
+
+          - `"mid_conv_system"`
+
+        - `cache_control: optional CacheControlEphemeral`
+
+          Create a cache control breakpoint at this content block.
+
+  - `role: "user" or "assistant" or "system"`
 
     - `"user"`
 
     - `"assistant"`
+
+    - `"system"`
 
 - `model: Model`
 
@@ -913,11 +946,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+  - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"`
 
@@ -2348,6 +2385,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `"url_not_allowed"`
 
+            - `"url_not_in_prior_context"`
+
             - `"url_not_accessible"`
 
             - `"unsupported_content_type"`
@@ -2674,11 +2713,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+    - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"`
 
@@ -2867,6 +2910,26 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       The number of output tokens which were used.
 
+    - `output_tokens_details: object { thinking_tokens }`
+
+      Breakdown of output tokens by category.
+
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
+
+      - `thinking_tokens: number`
+
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
+
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
     - `server_tool_use: ServerToolUsage`
 
       The number of server tool requests.
@@ -2982,6 +3045,9 @@ curl https://api.anthropic.com/v1/messages \
     "inference_geo": "inference_geo",
     "input_tokens": 2095,
     "output_tokens": 503,
+    "output_tokens_details": {
+      "thinking_tokens": 0
+    },
     "server_tool_use": {
       "web_fetch_requests": 2,
       "web_search_requests": 0
@@ -3557,6 +3623,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"url_not_allowed"`
 
+              - `"url_not_in_prior_context"`
+
               - `"url_not_accessible"`
 
               - `"unsupported_content_type"`
@@ -3876,11 +3944,42 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
-  - `role: "user" or "assistant"`
+      - `MidConversationSystemBlockParam object { content, type, cache_control }`
+
+        System instructions that appear mid-conversation.
+
+        Use this block to provide or update system-level instructions at a specific
+        point in the conversation, rather than only via the top-level `system` parameter.
+
+        - `content: array of TextBlockParam`
+
+          System instruction text blocks.
+
+          - `text: string`
+
+          - `type: "text"`
+
+          - `cache_control: optional CacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
+
+          - `citations: optional array of TextCitationParam`
+
+        - `type: "mid_conv_system"`
+
+          - `"mid_conv_system"`
+
+        - `cache_control: optional CacheControlEphemeral`
+
+          Create a cache control breakpoint at this content block.
+
+  - `role: "user" or "assistant" or "system"`
 
     - `"user"`
 
     - `"assistant"`
+
+    - `"system"`
 
 - `model: Model`
 
@@ -3888,11 +3987,15 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+  - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"`
 
@@ -6576,6 +6679,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"url_not_allowed"`
 
+          - `"url_not_in_prior_context"`
+
           - `"url_not_accessible"`
 
           - `"unsupported_content_type"`
@@ -6898,7 +7003,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Content Block Param
 
-- `ContentBlockParam = TextBlockParam or ImageBlockParam or DocumentBlockParam or 13 more`
+- `ContentBlockParam = TextBlockParam or ImageBlockParam or DocumentBlockParam or 14 more`
 
   Regular text content.
 
@@ -7399,6 +7504,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"url_not_allowed"`
 
+          - `"url_not_in_prior_context"`
+
           - `"url_not_accessible"`
 
           - `"unsupported_content_type"`
@@ -7713,6 +7820,35 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `type: "container_upload"`
 
       - `"container_upload"`
+
+    - `cache_control: optional CacheControlEphemeral`
+
+      Create a cache control breakpoint at this content block.
+
+  - `MidConversationSystemBlockParam object { content, type, cache_control }`
+
+    System instructions that appear mid-conversation.
+
+    Use this block to provide or update system-level instructions at a specific
+    point in the conversation, rather than only via the top-level `system` parameter.
+
+    - `content: array of TextBlockParam`
+
+      System instruction text blocks.
+
+      - `text: string`
+
+      - `type: "text"`
+
+      - `cache_control: optional CacheControlEphemeral`
+
+        Create a cache control breakpoint at this content block.
+
+      - `citations: optional array of TextCitationParam`
+
+    - `type: "mid_conv_system"`
+
+      - `"mid_conv_system"`
 
     - `cache_control: optional CacheControlEphemeral`
 
@@ -8928,6 +9064,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"url_not_allowed"`
 
+            - `"url_not_in_prior_context"`
+
             - `"url_not_accessible"`
 
             - `"unsupported_content_type"`
@@ -9254,11 +9392,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+    - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"`
 
@@ -9446,6 +9588,26 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `output_tokens: number`
 
       The number of output tokens which were used.
+
+    - `output_tokens_details: object { thinking_tokens }`
+
+      Breakdown of output tokens by category.
+
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
+
+      - `thinking_tokens: number`
+
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
+
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
     - `server_tool_use: ServerToolUsage`
 
@@ -10204,7 +10366,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Message Delta Usage
 
-- `MessageDeltaUsage object { cache_creation_input_tokens, cache_read_input_tokens, input_tokens, 2 more }`
+- `MessageDeltaUsage object { cache_creation_input_tokens, cache_read_input_tokens, input_tokens, 3 more }`
 
   - `cache_creation_input_tokens: number`
 
@@ -10221,6 +10383,26 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `output_tokens: number`
 
     The cumulative number of output tokens which were used.
+
+  - `output_tokens_details: object { thinking_tokens }`
+
+    Breakdown of output tokens by category.
+
+    `output_tokens` remains the inclusive, authoritative total used for billing.
+    This object provides a read-only decomposition for observability — for example,
+    how many of the billed output tokens were spent on internal reasoning that may
+    have been summarized before being returned to you.
+
+    - `thinking_tokens: number`
+
+      Number of output tokens the model generated as internal reasoning, including
+      the thinking-block delimiter tokens.
+
+      Reflects the raw reasoning the model produced, not the (possibly shorter)
+      summarized thinking text returned in the response body. Computed by
+      re-tokenizing the raw reasoning text, so it may differ from the model's exact
+      generation count by a small number of tokens. Always ≤ `output_tokens`;
+      `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
   - `server_tool_use: ServerToolUsage`
 
@@ -10741,6 +10923,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"url_not_allowed"`
 
+              - `"url_not_in_prior_context"`
+
               - `"url_not_accessible"`
 
               - `"unsupported_content_type"`
@@ -11060,11 +11244,42 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Create a cache control breakpoint at this content block.
 
-  - `role: "user" or "assistant"`
+      - `MidConversationSystemBlockParam object { content, type, cache_control }`
+
+        System instructions that appear mid-conversation.
+
+        Use this block to provide or update system-level instructions at a specific
+        point in the conversation, rather than only via the top-level `system` parameter.
+
+        - `content: array of TextBlockParam`
+
+          System instruction text blocks.
+
+          - `text: string`
+
+          - `type: "text"`
+
+          - `cache_control: optional CacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
+
+          - `citations: optional array of TextCitationParam`
+
+        - `type: "mid_conv_system"`
+
+          - `"mid_conv_system"`
+
+        - `cache_control: optional CacheControlEphemeral`
+
+          Create a cache control breakpoint at this content block.
+
+  - `role: "user" or "assistant" or "system"`
 
     - `"user"`
 
     - `"assistant"`
+
+    - `"system"`
 
 ### Message Tokens Count
 
@@ -11084,19 +11299,179 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
+### Mid Conversation System Block Param
+
+- `MidConversationSystemBlockParam object { content, type, cache_control }`
+
+  System instructions that appear mid-conversation.
+
+  Use this block to provide or update system-level instructions at a specific
+  point in the conversation, rather than only via the top-level `system` parameter.
+
+  - `content: array of TextBlockParam`
+
+    System instruction text blocks.
+
+    - `text: string`
+
+    - `type: "text"`
+
+      - `"text"`
+
+    - `cache_control: optional CacheControlEphemeral`
+
+      Create a cache control breakpoint at this content block.
+
+      - `type: "ephemeral"`
+
+        - `"ephemeral"`
+
+      - `ttl: optional "5m" or "1h"`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `"5m"`
+
+        - `"1h"`
+
+    - `citations: optional array of TextCitationParam`
+
+      - `CitationCharLocationParam object { cited_text, document_index, document_title, 3 more }`
+
+        - `cited_text: string`
+
+        - `document_index: number`
+
+        - `document_title: string`
+
+        - `end_char_index: number`
+
+        - `start_char_index: number`
+
+        - `type: "char_location"`
+
+          - `"char_location"`
+
+      - `CitationPageLocationParam object { cited_text, document_index, document_title, 3 more }`
+
+        - `cited_text: string`
+
+        - `document_index: number`
+
+        - `document_title: string`
+
+        - `end_page_number: number`
+
+        - `start_page_number: number`
+
+        - `type: "page_location"`
+
+          - `"page_location"`
+
+      - `CitationContentBlockLocationParam object { cited_text, document_index, document_title, 3 more }`
+
+        - `cited_text: string`
+
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+        - `document_index: number`
+
+        - `document_title: string`
+
+        - `end_block_index: number`
+
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+        - `start_block_index: number`
+
+          0-based index of the first cited block in the source's `content` array.
+
+        - `type: "content_block_location"`
+
+          - `"content_block_location"`
+
+      - `CitationWebSearchResultLocationParam object { cited_text, encrypted_index, title, 2 more }`
+
+        - `cited_text: string`
+
+        - `encrypted_index: string`
+
+        - `title: string`
+
+        - `type: "web_search_result_location"`
+
+          - `"web_search_result_location"`
+
+        - `url: string`
+
+      - `CitationSearchResultLocationParam object { cited_text, end_block_index, search_result_index, 4 more }`
+
+        - `cited_text: string`
+
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+        - `end_block_index: number`
+
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+        - `search_result_index: number`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
+
+        - `source: string`
+
+        - `start_block_index: number`
+
+          0-based index of the first cited block in the source's `content` array.
+
+        - `title: string`
+
+        - `type: "search_result_location"`
+
+          - `"search_result_location"`
+
+  - `type: "mid_conv_system"`
+
+    - `"mid_conv_system"`
+
+  - `cache_control: optional CacheControlEphemeral`
+
+    Create a cache control breakpoint at this content block.
+
 ### Model
 
-- `Model = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string`
+- `Model = "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
 
   The model that will complete your prompt.
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+  - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"`
 
@@ -11846,6 +12221,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `"url_not_allowed"`
 
+            - `"url_not_in_prior_context"`
+
             - `"url_not_accessible"`
 
             - `"unsupported_content_type"`
@@ -12272,6 +12649,26 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       The cumulative number of output tokens which were used.
 
+    - `output_tokens_details: object { thinking_tokens }`
+
+      Breakdown of output tokens by category.
+
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
+
+      - `thinking_tokens: number`
+
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
+
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
     - `server_tool_use: ServerToolUsage`
 
       The number of server tool requests.
@@ -12647,6 +13044,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `"url_not_allowed"`
 
+              - `"url_not_in_prior_context"`
+
               - `"url_not_accessible"`
 
               - `"unsupported_content_type"`
@@ -12973,11 +13372,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+      - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"`
 
@@ -13165,6 +13568,26 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `output_tokens: number`
 
         The number of output tokens which were used.
+
+      - `output_tokens_details: object { thinking_tokens }`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
+
+        - `thinking_tokens: number`
+
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
+
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
       - `server_tool_use: ServerToolUsage`
 
@@ -13565,6 +13988,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `"url_not_allowed"`
 
+                - `"url_not_in_prior_context"`
+
                 - `"url_not_accessible"`
 
                 - `"unsupported_content_type"`
@@ -13891,11 +14316,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+        - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"`
 
@@ -14084,6 +14513,26 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           The number of output tokens which were used.
 
+        - `output_tokens_details: object { thinking_tokens }`
+
+          Breakdown of output tokens by category.
+
+          `output_tokens` remains the inclusive, authoritative total used for billing.
+          This object provides a read-only decomposition for observability — for example,
+          how many of the billed output tokens were spent on internal reasoning that may
+          have been summarized before being returned to you.
+
+          - `thinking_tokens: number`
+
+            Number of output tokens the model generated as internal reasoning, including
+            the thinking-block delimiter tokens.
+
+            Reflects the raw reasoning the model produced, not the (possibly shorter)
+            summarized thinking text returned in the response body. Computed by
+            re-tokenizing the raw reasoning text, so it may differ from the model's exact
+            generation count by a small number of tokens. Always ≤ `output_tokens`;
+            `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
         - `server_tool_use: ServerToolUsage`
 
           The number of server tool requests.
@@ -14157,6 +14606,26 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `output_tokens: number`
 
         The cumulative number of output tokens which were used.
+
+      - `output_tokens_details: object { thinking_tokens }`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
+
+        - `thinking_tokens: number`
+
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
+
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
       - `server_tool_use: ServerToolUsage`
 
@@ -17631,7 +18100,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Usage
 
-- `Usage object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 5 more }`
+- `Usage object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 6 more }`
 
   - `cache_creation: CacheCreation`
 
@@ -17664,6 +18133,26 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `output_tokens: number`
 
     The number of output tokens which were used.
+
+  - `output_tokens_details: object { thinking_tokens }`
+
+    Breakdown of output tokens by category.
+
+    `output_tokens` remains the inclusive, authoritative total used for billing.
+    This object provides a read-only decomposition for observability — for example,
+    how many of the billed output tokens were spent on internal reasoning that may
+    have been summarized before being returned to you.
+
+    - `thinking_tokens: number`
+
+      Number of output tokens the model generated as internal reasoning, including
+      the thinking-block delimiter tokens.
+
+      Reflects the raw reasoning the model produced, not the (possibly shorter)
+      summarized thinking text returned in the response body. Computed by
+      re-tokenizing the raw reasoning text, so it may differ from the model's exact
+      generation count by a small number of tokens. Always ≤ `output_tokens`;
+      `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
   - `server_tool_use: ServerToolUsage`
 
@@ -18307,6 +18796,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"url_not_allowed"`
 
+        - `"url_not_in_prior_context"`
+
         - `"url_not_accessible"`
 
         - `"unsupported_content_type"`
@@ -18398,6 +18889,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `"url_too_long"`
 
         - `"url_not_allowed"`
+
+        - `"url_not_in_prior_context"`
 
         - `"url_not_accessible"`
 
@@ -18718,6 +19211,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"url_not_allowed"`
 
+    - `"url_not_in_prior_context"`
+
     - `"url_not_accessible"`
 
     - `"unsupported_content_type"`
@@ -18744,6 +19239,8 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"url_not_allowed"`
 
+    - `"url_not_in_prior_context"`
+
     - `"url_not_accessible"`
 
     - `"unsupported_content_type"`
@@ -18760,13 +19257,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Web Fetch Tool Result Error Code
 
-- `WebFetchToolResultErrorCode = "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 5 more`
+- `WebFetchToolResultErrorCode = "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
 
   - `"invalid_tool_input"`
 
   - `"url_too_long"`
 
   - `"url_not_allowed"`
+
+  - `"url_not_in_prior_context"`
 
   - `"url_not_accessible"`
 
@@ -19897,6 +20396,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"url_not_allowed"`
 
+                  - `"url_not_in_prior_context"`
+
                   - `"url_not_accessible"`
 
                   - `"unsupported_content_type"`
@@ -20216,11 +20717,42 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
-      - `role: "user" or "assistant"`
+          - `MidConversationSystemBlockParam object { content, type, cache_control }`
+
+            System instructions that appear mid-conversation.
+
+            Use this block to provide or update system-level instructions at a specific
+            point in the conversation, rather than only via the top-level `system` parameter.
+
+            - `content: array of TextBlockParam`
+
+              System instruction text blocks.
+
+              - `text: string`
+
+              - `type: "text"`
+
+              - `cache_control: optional CacheControlEphemeral`
+
+                Create a cache control breakpoint at this content block.
+
+              - `citations: optional array of TextCitationParam`
+
+            - `type: "mid_conv_system"`
+
+              - `"mid_conv_system"`
+
+            - `cache_control: optional CacheControlEphemeral`
+
+              Create a cache control breakpoint at this content block.
+
+      - `role: "user" or "assistant" or "system"`
 
         - `"user"`
 
         - `"assistant"`
+
+        - `"system"`
 
     - `model: Model`
 
@@ -20228,11 +20760,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+      - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"`
 
@@ -22323,6 +22859,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"url_not_allowed"`
 
+                  - `"url_not_in_prior_context"`
+
                   - `"url_not_accessible"`
 
                   - `"unsupported_content_type"`
@@ -22649,11 +23187,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+          - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
 
             - `"claude-opus-4-7"`
 
@@ -22841,6 +23383,26 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `output_tokens: number`
 
             The number of output tokens which were used.
+
+          - `output_tokens_details: object { thinking_tokens }`
+
+            Breakdown of output tokens by category.
+
+            `output_tokens` remains the inclusive, authoritative total used for billing.
+            This object provides a read-only decomposition for observability — for example,
+            how many of the billed output tokens were spent on internal reasoning that may
+            have been summarized before being returned to you.
+
+            - `thinking_tokens: number`
+
+              Number of output tokens the model generated as internal reasoning, including
+              the thinking-block delimiter tokens.
+
+              Reflects the raw reasoning the model produced, not the (possibly shorter)
+              summarized thinking text returned in the response body. Computed by
+              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              generation count by a small number of tokens. Always ≤ `output_tokens`;
+              `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
           - `server_tool_use: ServerToolUsage`
 
@@ -23569,6 +24131,8 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                   - `"url_not_allowed"`
 
+                  - `"url_not_in_prior_context"`
+
                   - `"url_not_accessible"`
 
                   - `"unsupported_content_type"`
@@ -23895,11 +24459,15 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+          - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
 
             - `"claude-opus-4-7"`
 
@@ -24087,6 +24655,26 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
           - `output_tokens: number`
 
             The number of output tokens which were used.
+
+          - `output_tokens_details: object { thinking_tokens }`
+
+            Breakdown of output tokens by category.
+
+            `output_tokens` remains the inclusive, authoritative total used for billing.
+            This object provides a read-only decomposition for observability — for example,
+            how many of the billed output tokens were spent on internal reasoning that may
+            have been summarized before being returned to you.
+
+            - `thinking_tokens: number`
+
+              Number of output tokens the model generated as internal reasoning, including
+              the thinking-block delimiter tokens.
+
+              Reflects the raw reasoning the model produced, not the (possibly shorter)
+              summarized thinking text returned in the response body. Computed by
+              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              generation count by a small number of tokens. Always ≤ `output_tokens`;
+              `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
           - `server_tool_use: ServerToolUsage`
 
@@ -24615,6 +25203,8 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
                 - `"url_not_allowed"`
 
+                - `"url_not_in_prior_context"`
+
                 - `"url_not_accessible"`
 
                 - `"unsupported_content_type"`
@@ -24941,11 +25531,15 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+        - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"`
 
@@ -25133,6 +25727,26 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
         - `output_tokens: number`
 
           The number of output tokens which were used.
+
+        - `output_tokens_details: object { thinking_tokens }`
+
+          Breakdown of output tokens by category.
+
+          `output_tokens` remains the inclusive, authoritative total used for billing.
+          This object provides a read-only decomposition for observability — for example,
+          how many of the billed output tokens were spent on internal reasoning that may
+          have been summarized before being returned to you.
+
+          - `thinking_tokens: number`
+
+            Number of output tokens the model generated as internal reasoning, including
+            the thinking-block delimiter tokens.
+
+            Reflects the raw reasoning the model produced, not the (possibly shorter)
+            summarized thinking text returned in the response body. Computed by
+            re-tokenizing the raw reasoning text, so it may differ from the model's exact
+            generation count by a small number of tokens. Always ≤ `output_tokens`;
+            `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
         - `server_tool_use: ServerToolUsage`
 
@@ -25623,6 +26237,8 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `"url_not_allowed"`
 
+              - `"url_not_in_prior_context"`
+
               - `"url_not_accessible"`
 
               - `"unsupported_content_type"`
@@ -25949,11 +26565,15 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more`
+      - `"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"`
 
@@ -26141,6 +26761,26 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
       - `output_tokens: number`
 
         The number of output tokens which were used.
+
+      - `output_tokens_details: object { thinking_tokens }`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
+
+        - `thinking_tokens: number`
+
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
+
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
       - `server_tool_use: ServerToolUsage`
 
