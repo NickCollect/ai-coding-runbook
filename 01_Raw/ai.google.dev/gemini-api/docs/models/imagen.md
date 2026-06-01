@@ -1,46 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/imagen?hl=vi
-fetched_at: 2026-05-25T05:19:32.596125+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/imagen?hl=tr
+fetched_at: 2026-06-01T06:09:49.077560+00:00
 title: "Imagen 4 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Gửi ý kiến phản hồi
+Geri bildirim gönderin
 
 # Imagen 4
 
-Một công cụ hiệu suất cao để tổng hợp hình ảnh nâng cao, cung cấp khả năng kiểm soát sáng tạo tinh vi và đầu ra chân thực như ảnh. Hãy sử dụng Imagen 4 để xây dựng thương hiệu chuyên nghiệp, tạo bố cục cảnh phức tạp và thực hiện các tác vụ thiết kế có độ trung thực cao, đòi hỏi khả năng kết xuất văn bản chính xác và ánh sáng phức tạp.
+Gelişmiş görsel sentez için yüksek performanslı bir motor. Sofistike yaratıcı kontrol ve fotogerçekçi çıkış sunar. Profesyonel markalama, karmaşık sahne kompozisyonu ve hassas metin oluşturma ile karmaşık aydınlatma gerektiren yüksek kaliteli tasarım görevleri için Imagen 4'ü kullanın.
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=imagen-4.0-generate-001&hl=vi)
+[Google AI Studio'da deneme](https://aistudio.google.com?model=imagen-4.0-generate-001&hl=tr)
 
-## Tài liệu
+## Belgeler
 
-Truy cập vào trang [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=vi) để xem toàn bộ các tính năng và khả năng.
+Özellikler ve işlevler hakkında kapsamlı bilgi için [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=tr) sayfasını ziyaret edin.
 
 ## imagen-4.0-generate-001
 
-| Thuộc tính | Mô tả |
+| Mülk | Açıklama |
 | --- | --- |
-| id\_cardMã mô hình | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
-| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản  **Đầu ra**  Hình ảnh |
-| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  480 mã thông báo (văn bản)  **Hình ảnh đầu ra**  Từ 1 đến 4 (Ultra/Standard/Fast) |
-| calendar\_monthNội dung cập nhật mới nhất | Tháng 6 năm 2025 |
+| id\_cardModel kodu | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
+| saveDesteklenen veri türleri | **Giriş**  Metin  **Çıkış**  Resimler |
+| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  480 jeton (metin)  **Çıkış resimleri**  1 ila 4 (Ultra/Standart/Hızlı) |
+| calendar\_monthSon güncelleme | Haziran 2025 |
 
-Gửi ý kiến phản hồi
+Geri bildirim gönderin
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+Son güncelleme tarihi: 2026-04-29 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]

@@ -1,14 +1,14 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/interactions/image-generation
-fetched_at: 2026-05-25T05:18:17.485000+00:00
-title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
+fetched_at: 2026-06-01T06:09:19.822899+00:00
+title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
 [Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research) is now available in preview with collaborative planning, visualization, MCP support, and more.
 
 - [Home](https://ai.google.dev/)
 - [Gemini API](https://ai.google.dev/gemini-api)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview)
 - [Docs](https://ai.google.dev/gemini-api/docs)
 
 Send feedback
@@ -79,12 +79,12 @@ iterate on visuals with unprecedented control.
 
 Nano Banana refers to two distinct models available in the Gemini API:
 
-- **Nano Banana 2**: The [Gemini 3.1 Flash Image Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview)
-  model (`gemini-3.1-flash-image-preview`). This model serves as the
+- **Nano Banana 2**: The [Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image)
+  model (`gemini-3.1-flash-image`). This model serves as the
   high-efficiency counterpart to Gemini 3 Pro Image, optimized for speed and
   high-volume developer use cases.
-- **Nano Banana Pro**: The [Gemini 3 Pro Image Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview) model
-  (`gemini-3-pro-image-preview`). This model is designed for professional
+- **Nano Banana Pro**: The [Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image) model
+  (`gemini-3-pro-image`). This model is designed for professional
   asset production, utilizing advanced reasoning ("Thinking") to follow complex
   instructions and render high-fidelity text.
 - **Nano Banana**: The [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image) model
@@ -105,7 +105,7 @@ import base64
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input="Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme",
 )
 
@@ -128,7 +128,7 @@ async function main() {
     "Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme";
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: prompt,
   });
   const generatedImage = interaction.output_image;
@@ -151,7 +151,7 @@ curl -s -X POST \
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3.1-flash-image-preview",
+    "model": "gemini-3.1-flash-image",
     "input": [
       {"type": "text", "text": "Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme"}
     ]
@@ -190,7 +190,7 @@ with open("/path/to/cat_image.png", "rb") as f:
     image_bytes = f.read()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input=[
         {
           "type": "text",
@@ -234,7 +234,7 @@ async function main() {
   ];
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: prompt,
   });
   const generatedImage = interaction.output_image;
@@ -257,7 +257,7 @@ curl -s -X POST \
     -H 'Content-Type: application/json' \
     -H "Api-Revision: 2026-05-20" \
     -d "{
-      \"model\": \"gemini-3.1-flash-image-preview\",
+      \"model\": \"gemini-3.1-flash-image\",
       \"input\": [
         {\"type\": \"text\", \"text\": \"Create a picture of my cat eating a nano-banana in a fancy restaurant under the Gemini constellation\"},
         {
@@ -284,7 +284,7 @@ import base64
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input="Create a vibrant infographic that explains photosynthesis as if it were a recipe for a plant's favorite food. Show the \"ingredients\" (sunlight, water, CO2) and the \"finished dish\" (sugar/energy). The style should be like a page from a colorful kids' cookbook, suitable for a 4th grader.",
     tools=[{"type": "google_search"}],
 )
@@ -304,7 +304,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: "Create a vibrant infographic that explains photosynthesis as if it were a recipe for a plant's favorite food. Show the \"ingredients\" (sunlight, water, CO2) and the \"finished dish\" (sugar/energy). The style should be like a page from a colorful kids' cookbook, suitable for a 4th grader.",
     tools: [{"type": "google_search"}],
   });
@@ -329,7 +329,7 @@ curl -s -X POST \
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3.1-flash-image-preview",
+    "model": "gemini-3.1-flash-image",
     "input": [
       {"type": "text", "text": "Create a vibrant infographic that explains photosynthesis as if it were a recipe for a plants favorite food. Show the \"ingredients\" (sunlight, water, CO2) and the \"finished dish\" (sugar/energy). The style should be like a page from a colorful kids cookbook, suitable for a 4th grader."}
     ],
@@ -347,7 +347,7 @@ You can then use the `previous_interaction_id` to change the language on the gra
 
 ```
 interaction_2 = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input="Update this infographic to be in Spanish. Do not change any other elements of the image.",
     previous_interaction_id=interaction.id,
     response_format={
@@ -368,7 +368,7 @@ if generated_image:
 
 ```
 const interaction2 = await ai.interactions.create({
-  model: "gemini-3.1-flash-image-preview",
+  model: "gemini-3.1-flash-image",
   input: "Update this infographic to be in Spanish. Do not change any other elements of the image.",
   previous_interaction_id: interaction.id,
   response_format: {
@@ -395,7 +395,7 @@ curl -s -X POST \
   -H 'Content-Type: application/json' \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3.1-flash-image-preview",
+    "model": "gemini-3.1-flash-image",
     "input": "Update this infographic to be in Spanish. Do not change any other elements of the image.",
     "previous_interaction_id": "<PREVIOUS_INTERACTION_ID>",
     "response_format": {
@@ -434,7 +434,7 @@ they excel at complex, multi-turn creation and modification tasks.
   high-quality output.
 - **Up to 14 reference images**: You can now mix up to 14 reference images to
   produce the final image.
-- **New aspect ratios**: Gemini 3.1 Flash Image Preview adds 1:4, 4:1, 1:8, and
+- **New aspect ratios**: Gemini 3.1 Flash Image adds 1:4, 4:1, 1:8, and
   8:1 [aspect ratios](#aspect_ratios_and_image_size).
 
 ### Use up to 14 reference images
@@ -442,7 +442,7 @@ they excel at complex, multi-turn creation and modification tasks.
 Gemini 3 image models let you to mix up to 14 reference images. These 14 images
 can include the following:
 
-| Gemini 3.1 Flash Image Preview | Gemini 3 Pro Image Preview |
+| Gemini 3.1 Flash Image | Gemini 3 Pro Image |
 | --- | --- |
 | Up to 10 images of objects with high-fidelity to include in the final image | Up to 6 images of objects with high-fidelity to include in the final image |
 | Up to 4 images of characters to maintain character consistency | Up to 5 images of characters to maintain character consistency |
@@ -460,7 +460,7 @@ prompt = "An office group photo of these people, they are making funny faces."
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input=[
         {
             "type": "text",
@@ -493,10 +493,9 @@ interaction = client.interactions.create(
         },
     ],
     response_format={
-        "image": {
-            "aspect_ratio": "5:4",
-            "image_size": "2K"
-        }
+        "type": "image",
+        "aspect_ratio": "5:4",
+        "image_size": "2K"
     },
 )
 
@@ -527,15 +526,13 @@ async function main() {
   ];
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: input,
-    response_format: [
-      {
-        type: "image",
-        aspect_ratio: "5:4",
-        image_size: "2K",
-      }
-    ],
+    response_format: {
+      type: "image",
+      aspect_ratio: "5:4",
+      image_size: "2K",
+    },
   });
 
   const buffer = Buffer.from(interaction.output_image.data, 'base64');
@@ -555,7 +552,7 @@ curl -s -X POST \
     -H 'Content-Type: application/json' \
     -H "Api-Revision: 2026-05-20" \
     -d "{
-      \"model\": \"gemini-3.1-flash-image-preview\",
+      \"model\": \"gemini-3.1-flash-image\",
       \"input\": [
         {\"type\": \"text\", \"text\": \"An office group photo of these people, they are making funny faces.\"},
         {\"type\": \"image\", \"mime_type\": \"image/png\", \"data\": \"<BASE64_DATA_IMG_1>\"},
@@ -565,10 +562,9 @@ curl -s -X POST \
         {\"type\": \"image\", \"mime_type\": \"image/png\", \"data\": \"<BASE64_DATA_IMG_5>\"}
       ],
       \"response_format\": {
-        \"image\": {
-          \"aspect_ratio\": \"5:4\",
-          \"image_size\": \"2K\"
-        }
+        \"type\": \"image\",
+        \"aspect_ratio\": \"5:4\",
+        \"image_size\": \"2K\"
       }
     }"
 ```
@@ -598,7 +594,7 @@ prompt = "Visualize the current weather forecast for the next 5 days in San Fran
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input=prompt,
     tools=[{"type": "google_search"}],
     response_format={
@@ -623,7 +619,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: "Visualize the current weather forecast for the next 5 days in San Francisco as a clean, modern weather chart. Add a visual on what I should wear each day",
     tools: [{"type": "google_search"}],
     response_format: {
@@ -651,7 +647,7 @@ curl -s -X POST \
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3.1-flash-image-preview",
+    "model": "gemini-3.1-flash-image",
     "input": [
       {"type": "text", "text": "Visualize the current weather forecast for the next 5 days in San Francisco as a clean, modern weather chart. Add a visual on what I should wear each day"}
     ],
@@ -695,7 +691,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input="A detailed painting of a Timareta butterfly resting on a flower",
     tools=[{
       "type": "google_search",
@@ -713,7 +709,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: "A detailed painting of a Timareta butterfly resting on a flower",
     tools: [{
       "type": "google_search",
@@ -734,7 +730,7 @@ curl -s -X POST \
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3.1-flash-image-preview",
+    "model": "gemini-3.1-flash-image",
     "input": "A detailed painting of a Timareta butterfly resting on a flower",
     "tools": [{"type": "google_search", "search_types": ["web_search", "image_search"]}]
   }'
@@ -757,6 +753,128 @@ and attribution metadata as part of the response steps:
 - **`google_search_result`**: Contains `search_suggestions`, an HTML
   snippet for rendering search suggestions in your UI.
 
+### Video-to-image generation (3.1 Flash)
+
+Video-to-image generation allows you to generate new images using a video's context
+as a multimodal reference. This is useful for creating high-quality video thumbnails, cinematic
+posters, summary infographics, or new artwork inspired by a video scene.
+
+During generation, the model analyzes the video frames in context to extract visual themes
+and key events, then uses them alongside your text prompt to synthesize the output image.
+
+You can pass public [YouTube URLs](https://ai.google.dev/gemini-api/docs/video-understanding#youtube)
+directly in your API request or upload local video files using the
+[Files API](https://ai.google.dev/gemini-api/docs/interactions/files).
+
+### Python
+
+```
+from google import genai
+from google.genai import types
+import base64
+
+client = genai.Client()
+
+interaction = client.interactions.create(
+    model="gemini-3.1-flash-image",
+    input=[
+        {
+            "type": "video",
+            "uri": "https://www.youtube.com/watch?v=UTdfxFyOQTI",
+            "mime_type": "video/mp4"
+        },
+        {"type": "text", "text": "Generate a poster image that captures the key themes of this video."}
+    ],
+    response_format={"type": "image", "aspect_ratio": "16:9"}
+)
+
+# Save the generated image part
+for step in interaction.steps:
+    if step.type == "model_output":
+        for content_block in step.content:
+            if content_block.type == "text":
+                print(content_block.text)
+            elif content_block.type == "image":
+                with open("video_poster.png", "wb") as f:
+                    f.write(base64.b64decode(content_block.data))
+                print("Image saved as video_poster.png")
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from "@google/genai";
+import * as fs from "node:fs";
+
+async function main() {
+  const ai = new GoogleGenAI({});
+
+  const interaction = await ai.interactions.create({
+    model: "gemini-3.1-flash-image",
+    input: [
+      {
+        type: "video",
+        uri: "https://www.youtube.com/watch?v=UTdfxFyOQTI",
+        mime_type: "video/mp4"
+      },
+      { type: "text", text: "Generate a poster image that captures the key themes of this video." }
+    ],
+    response_format: {
+      type: "image",
+      aspect_ratio: "16:9"
+    }
+  });
+
+  for (const step of interaction.steps) {
+    if (step.type === "model_output") {
+      for (const contentBlock of step.content) {
+        if (contentBlock.type === "text") {
+          console.log(contentBlock.text);
+        } else if (contentBlock.type === "image") {
+          const buffer = Buffer.from(contentBlock.data, "base64");
+          fs.writeFileSync("video_poster.png", buffer);
+          console.log("Image saved as video_poster.png");
+        }
+      }
+    }
+  }
+}
+
+main();
+```
+
+### REST
+
+```
+curl -s -X POST \
+  "https://generativelanguage.googleapis.com/v1beta/interactions" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -H "Api-Revision: 2026-05-20" \
+  -d '{
+    "model": "gemini-3.1-flash-image",
+    "input": [
+      {
+        "type": "video",
+        "uri": "https://www.youtube.com/watch?v=UTdfxFyOQTI",
+        "mime_type": "video/mp4"
+      },
+      {
+        "type": "text",
+        "text": "Generate a poster image that captures the key themes of this video."
+      }
+    ],
+    "response_format": {
+      "type": "image",
+      "aspect_ratio": "16:9"
+    }
+  }'
+```
+
+![AI-generated infographic from a youtube video](https://ai.google.dev/static/gemini-api/docs/images/youtube_infographics.png)
+
+AI-generated infographic from a youtube video
+
 ### Generate images up to 4K resolution
 
 Gemini 3 image models generate 1K images by default but can also output 2K,
@@ -778,7 +896,7 @@ prompt = "Da Vinci style anatomical sketch of a dissected Monarch butterfly. Det
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input=prompt,
     response_format={
         "type": "image",
@@ -805,7 +923,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: "Da Vinci style anatomical sketch of a dissected Monarch butterfly. Detailed drawings of the head, wings, and legs on textured parchment with notes in English.",
     response_format: {
       type: "image",
@@ -834,7 +952,7 @@ curl -s -X POST \
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3.1-flash-image-preview",
+    "model": "gemini-3.1-flash-image",
     "input": "Da Vinci style anatomical sketch of a dissected Monarch butterfly. Detailed drawings of the head, wings, and legs on textured parchment with notes in English.",
     "response_format": {
       "type": "image",
@@ -896,7 +1014,7 @@ for (const step of interaction.steps) {
 #### Interleaved text and images
 
 While standard image generation models only output images, some advanced Gemini
-3 models (such as `gemini-3-pro-image-preview`) can generate interleaved
+3 models (such as `gemini-3-pro-image`) can generate interleaved
 content—like stories or instructional guides containing both text blocks and
 illustrations inside the same response.
 
@@ -908,7 +1026,7 @@ and save interleaved content, you must manually iterate over `steps`:
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3-pro-image-preview",
+    model="gemini-3-pro-image",
     input="Write the story of the lifecycle of a monarch butterfly, interleave illustrations",
 )
 
@@ -930,7 +1048,7 @@ for step in interaction.steps:
 
 ```
 const interaction = await ai.interactions.create({
-    model: "gemini-3-pro-image-preview",
+    model: "gemini-3-pro-image",
     input: "Write the story of the lifecycle of a monarch butterfly, interleave illustrations",
 });
 
@@ -969,7 +1087,7 @@ import io
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input="A futuristic city built inside a giant glass bottle floating in space",
     generation_config={"thinking_level": "high"},
 )
@@ -991,7 +1109,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: "A futuristic city built inside a giant glass bottle floating in space",
     generation_config: { thinking_level: "high" },
   });
@@ -1014,7 +1132,7 @@ curl -s -X POST \
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3.1-flash-image-preview",
+    "model": "gemini-3.1-flash-image",
     "input": "A futuristic city built inside a giant glass bottle floating in space",
     "generation_config": {
       "thinking_level": "high"
@@ -1080,7 +1198,7 @@ import base64
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input="A photorealistic wide-angle shot of a vibrant coral reef teeming with tropical fish. Crystal-clear turquoise water with sunbeams filtering down from the surface, illuminating a sea turtle gliding gracefully over the coral. Shot from a low perspective with a wide-angle lens. Aspect ratio 16:9.",
     response_format=[
         {
@@ -1108,7 +1226,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: "A photorealistic wide-angle shot of a vibrant coral reef teeming with tropical fish. Crystal-clear turquoise water with sunbeams filtering down from the surface, illuminating a sea turtle gliding gracefully over the coral. Shot from a low perspective with a wide-angle lens. Aspect ratio 16:9.",
     response_format: [
       {
@@ -1137,7 +1255,7 @@ curl -s -X POST \
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3.1-flash-image-preview",
+    "model": "gemini-3.1-flash-image",
     "input": "A photorealistic wide-angle shot of a vibrant coral reef teeming with tropical fish. Crystal-clear turquoise water with sunbeams filtering down from the surface, illuminating a sea turtle gliding gracefully over the coral. Shot from a low perspective with a wide-angle lens. Aspect ratio 16:9.",
     "response_format": {
       "type": "image",
@@ -1179,7 +1297,7 @@ import base64
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input="A kawaii-style sticker of a happy red panda wearing a tiny bamboo hat. It's munching on a green bamboo leaf. The design features bold, clean outlines, simple cel-shading, and a vibrant color palette. The background must be white.",
 )
 
@@ -1203,7 +1321,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: "A kawaii-style sticker of a happy red panda wearing a tiny bamboo hat. It's munching on a green bamboo leaf. The design features bold, clean outlines, simple cel-shading, and a vibrant color palette. The background must be white.",
   });
   for (const step of interaction.steps) {
@@ -1231,7 +1349,7 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.1-flash-image-preview",
+    "model": "gemini-3.1-flash-image",
     "input": "A kawaii-style sticker of a happy red panda wearing a tiny bamboo hat. It is munching on a green bamboo leaf. The design features bold, clean outlines, simple cel-shading, and a vibrant color palette. The background must be white."
   }'
 ```
@@ -1243,7 +1361,7 @@ A kawaii-style sticker of a happy red panda...
 #### 3. Accurate text in images
 
 Gemini excels at rendering text. Be clear about the text, the font style
-(descriptively), and the overall design. Use Gemini 3 Pro Image Preview for
+(descriptively), and the overall design. Use Gemini 3 Pro Image for
 professional asset production.
 
 ### Template
@@ -1269,7 +1387,7 @@ import base64
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input="Create a modern, minimalist logo for a coffee shop called 'The Daily Grind'. The text should be in a clean, bold, sans-serif font. The color scheme is black and white. Put the logo in a circle. Use a coffee bean in a clever way.",
     response_format={"type": "image", "aspect_ratio": "1:1"},
 )
@@ -1294,7 +1412,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: "Create a modern, minimalist logo for a coffee shop called 'The Daily Grind'. The text should be in a clean, bold, sans-serif font. The color scheme is black and white. Put the logo in a circle. Use a coffee bean in a clever way.",
     response_format: { type: "image", aspect_ratio: "1:1" },
   });
@@ -1323,7 +1441,7 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.1-flash-image-preview",
+    "model": "gemini-3.1-flash-image",
     "input": "Create a modern, minimalist logo for a coffee shop called The Daily Grind. The text should be in a clean, bold, sans-serif font. The color scheme is black and white. Put the logo in a circle. Use a coffee bean in a clever way.",
     "response_format": {
       "type": "image",
@@ -1371,7 +1489,7 @@ import base64
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input="A high-resolution, studio-lit product photograph of a minimalist ceramic coffee mug in matte black, presented on a polished concrete surface. The lighting is a three-point softbox setup designed to create soft, diffused highlights and eliminate harsh shadows. The camera angle is a slightly elevated 45-degree shot to showcase its clean lines. Ultra-realistic, with sharp focus on the steam rising from the coffee. Square image.",
 )
 
@@ -1395,7 +1513,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: "A high-resolution, studio-lit product photograph of a minimalist ceramic coffee mug in matte black, presented on a polished concrete surface. The lighting is a three-point softbox setup designed to create soft, diffused highlights and eliminate harsh shadows. The camera angle is a slightly elevated 45-degree shot to showcase its clean lines. Ultra-realistic, with sharp focus on the steam rising from the coffee. Square image.",
   });
   for (const step of interaction.steps) {
@@ -1423,7 +1541,7 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.1-flash-image-preview",
+    "model": "gemini-3.1-flash-image",
     "input": "A high-resolution, studio-lit product photograph of a minimalist ceramic coffee mug in matte black, presented on a polished concrete surface. The lighting is a three-point softbox setup designed to create soft, diffused highlights and eliminate harsh shadows. The camera angle is a slightly elevated 45-degree shot to showcase its clean lines. Ultra-realistic, with sharp focus on the steam rising from the coffee. Square image."
   }'
 ```
@@ -1464,7 +1582,7 @@ import base64
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input="A minimalist composition featuring a single, delicate red maple leaf positioned in the bottom-right of the frame. The background is a vast, empty off-white canvas, creating significant negative space for text. Soft, diffused lighting from the top left. Square image.",
 )
 
@@ -1488,7 +1606,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: "A minimalist composition featuring a single, delicate red maple leaf positioned in the bottom-right of the frame. The background is a vast, empty off-white canvas, creating significant negative space for text. Soft, diffused lighting from the top left. Square image.",
   });
   for (const step of interaction.steps) {
@@ -1516,7 +1634,7 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.1-flash-image-preview",
+    "model": "gemini-3.1-flash-image",
     "input": "A minimalist composition featuring a single, delicate red maple leaf positioned in the bottom-right of the frame. The background is a vast, empty off-white canvas, creating significant negative space for text. Soft, diffused lighting from the top left. Square image."
   }'
 ```
@@ -1529,7 +1647,7 @@ A minimalist composition featuring a single, delicate red maple leaf...
 
 Builds on character consistency and scene description to create panels for
 visual storytelling. For accuracy with text and storytelling ability, these
-prompts work best with Gemini 3 Pro and Gemini 3.1 Flash Image Preview.
+prompts work best with Gemini 3 Pro and Gemini 3.1 Flash Image.
 
 ### Template
 
@@ -1557,7 +1675,7 @@ with open('/path/to/your/man_in_white_glasses.jpg', 'rb') as f:
 text_input = "Make a 3 panel comic in a gritty, noir art style with high-contrast black and white inks. Put the character in a humurous scene."
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input=[
         {"type": "text", "text": text_input},
         {
@@ -1601,7 +1719,7 @@ async function main() {
   ];
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: input,
   });
   for (const step of interaction.steps) {
@@ -1629,7 +1747,7 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.1-flash-image-preview",
+    "model": "gemini-3.1-flash-image",
     "input": [
       {"type": "text", "text": "Make a 3 panel comic in a gritty, noir art style with high-contrast black and white inks. Put the character in a humurous scene."},
       {"type": "image", "data": "<BASE64_IMAGE_DATA>", "mime_type": "image/jpeg"}
@@ -1663,7 +1781,7 @@ import base64
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input="Make a simple but stylish graphic of last night's Arsenal game in the Champion's League",
     tools=[{"type": "google_search"}],
     response_format={"type": "image", "aspect_ratio": "16:9"},
@@ -1689,7 +1807,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: "Make a simple but stylish graphic of last night's Arsenal game in the Champion's League",
     tools: [{ type: "google_search" }],
     response_format: { type: "image", aspect_ratio: "16:9", image_size: "2K" },
@@ -1720,7 +1838,7 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.1-flash-image-preview",
+    "model": "gemini-3.1-flash-image",
     "input": "Make a simple but stylish graphic of last nights Arsenal game in the Champions League",
     "tools": [{"type": "google_search"}],
     "response_format": {
@@ -1774,7 +1892,7 @@ with open('/path/to/your/cat_photo.png', 'rb') as f:
 text_input = """Using the provided image of my cat, please add a small, knitted wizard hat on its head. Make it look like it's sitting comfortably and not falling off."""
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input=[
         {"type": "text", "text": text_input},
         {
@@ -1818,7 +1936,7 @@ async function main() {
   ];
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: input,
   });
   for (const step of interaction.steps) {
@@ -1846,7 +1964,7 @@ curl -s -X POST \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d "{
-      \"model\": \"gemini-3.1-flash-image-preview\",
+      \"model\": \"gemini-3.1-flash-image\",
       \"input\": [
             {\"type\": \"text\", \"text\": \"Using the provided image of my cat, please add a small, knitted wizard hat on its head. Make it look like it's sitting comfortably and not falling off.\"},
             {\"type\": \"image\", \"mime_type\":\"image/png\", \"data\": \"<BASE64_IMAGE_DATA>\"}
@@ -1894,7 +2012,7 @@ with open('/path/to/your/living_room.png', 'rb') as f:
 text_input = """Using the provided image of a living room, change only the blue sofa to be a vintage, brown leather chesterfield sofa. Keep the rest of the room, including the pillows on the sofa and the lighting, unchanged."""
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input=[
         {
             "type": "image",
@@ -1938,7 +2056,7 @@ async function main() {
   ];
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: input,
   });
   for (const step of interaction.steps) {
@@ -1966,7 +2084,7 @@ curl -s -X POST \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d "{
-      \"model\": \"gemini-3.1-flash-image-preview\",
+      \"model\": \"gemini-3.1-flash-image\",
       \"input\": [
         {\"type\": \"image\", \"mime_type\":\"image/png\", \"data\": \"<BASE64_IMAGE_DATA>\"},
         {\"type\": \"text\", \"text\": \"Using the provided image of a living room, change only the blue sofa to be a vintage, brown leather chesterfield sofa. Keep the rest of the room, including the pillows on the sofa and the lighting, unchanged.\"}
@@ -2010,7 +2128,7 @@ with open('/path/to/your/city.png', 'rb') as f:
 text_input = """Transform the provided photograph of a modern city street at night into the artistic style of Vincent van Gogh's 'Starry Night'. Preserve the original composition of buildings and cars, but render all elements with swirling, impasto brushstrokes and a dramatic palette of deep blues and bright yellows."""
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input=[
         {
             "type": "image",
@@ -2043,7 +2161,7 @@ async function main() {
   const base64Image = imageData.toString("base64");
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: [
       {
         type: "image",
@@ -2078,7 +2196,7 @@ curl -s -X POST \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d "{
-      \"model\": \"gemini-3.1-flash-image-preview\",
+      \"model\": \"gemini-3.1-flash-image\",
       \"input\": [
         {\"type\": \"image\", \"mime_type\":\"image/png\", \"data\": \"<BASE64_IMAGE_DATA>\"},
         {\"type\": \"text\", \"text\": \"Transform the provided photograph of a modern city street at night into the artistic style of Vincent van Gogh's 'Starry Night'. Preserve the original composition of buildings and cars, but render all elements with swirling, impasto brushstrokes and a dramatic palette of deep blues and bright yellows.\"}
@@ -2129,7 +2247,7 @@ with open('/path/to/your/model.png', 'rb') as f:
 text_input = """Create a professional e-commerce fashion photo. Take the blue floral dress from the first image and let the woman from the second image wear it. Generate a realistic, full-body shot of the woman wearing the dress, with the lighting and shadows adjusted to match the outdoor environment."""
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input=[
         {
             "type": "image",
@@ -2186,7 +2304,7 @@ async function main() {
   ];
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: input,
   });
   for (const step of interaction.steps) {
@@ -2214,7 +2332,7 @@ curl -s -X POST \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d "{
-      \"model\": \"gemini-3.1-flash-image-preview\",
+      \"model\": \"gemini-3.1-flash-image\",
       \"input\": [
             {\"type\": \"image\", \"mime_type\":\"image/png\", \"data\": \"<BASE64_IMAGE_DATA_1>\"},
             {\"type\": \"image\", \"mime_type\":\"image/png\", \"data\": \"<BASE64_IMAGE_DATA_2>\"},
@@ -2268,7 +2386,7 @@ with open('/path/to/your/logo.png', 'rb') as f:
 text_input = """Take the first image of the woman with brown hair, blue eyes, and a neutral expression. Add the logo from the second image onto her black t-shirt. Ensure the woman's face and features remain completely unchanged. The logo should look like it's naturally printed on the fabric, following the folds of the shirt."""
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input=[
       {"type": "image", "mime_type":"image/png", "data": base64.b64encode(woman_bytes).decode('utf-8')},
       {"type": "image", "mime_type":"image/png", "data": base64.b64encode(logo_bytes).decode('utf-8')},
@@ -2309,7 +2427,7 @@ async function main() {
   ];
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: input,
   });
   for (const step of interaction.steps) {
@@ -2337,7 +2455,7 @@ curl -s -X POST \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d "{
-      \"model\": \"gemini-3.1-flash-image-preview\",
+      \"model\": \"gemini-3.1-flash-image\",
       \"input\": [
         {\"type\": \"image\", \"mime_type\":\"image/png\", \"data\": \"<BASE64_IMAGE_DATA_1>\"},
         {\"type\": \"image\", \"mime_type\":\"image/png\", \"data\": \"<BASE64_IMAGE_DATA_2>\"},
@@ -2383,7 +2501,7 @@ with open('/path/to/your/car_sketch.png', 'rb') as f:
 text_input = """Turn this rough pencil sketch of a futuristic car into a polished photo of the finished concept car in a showroom. Keep the sleek lines and low profile from the sketch but add metallic blue paint and neon rim lighting."""
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input=[
       {"type": "image", "mime_type":"image/png", "data": base64.b64encode(sketch_bytes).decode('utf-8')},
       {"type": "text", "text": text_input}
@@ -2419,7 +2537,7 @@ async function main() {
   ];
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: input,
   });
   for (const step of interaction.steps) {
@@ -2447,7 +2565,7 @@ curl -s -X POST \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d "{
-      \"model\": \"gemini-3.1-flash-image-preview\",
+      \"model\": \"gemini-3.1-flash-image\",
       \"input\": [
         {\"type\": \"image\", \"mime_type\":\"image/png\", \"data\": \"<BASE64_IMAGE_DATA>\"},
         {\"type\": \"text\", \"text\": \"Turn this rough pencil sketch of a futuristic car into a polished photo of the finished concept car in a showroom. Keep the sleek lines and low profile from the sketch but add metallic blue paint and neon rim lighting.\"}
@@ -2493,7 +2611,7 @@ with open('/path/to/your/man_in_white_glasses.jpg', 'rb') as f:
 text_input = """A studio portrait of this man against white, in profile looking right"""
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input={
       {"type": "text", "text": text_input},
       {"type": "image", "mime_type":"image/png", "data": base64.b64encode(image_bytes).decode('utf-8')}
@@ -2548,37 +2666,39 @@ strategies into your workflow.
 
 - For best performance, use the following languages: EN, ar-EG, de-DE, es-MX,
   fr-FR, hi-IN, id-ID, it-IT, ja-JP, ko-KR, pt-BR, ru-RU, ua-UA, vi-VN, zh-CN.
-- Image generation does not support audio or video inputs.
+- Image generation does not support audio inputs. Video inputs are only supported for Gemini 3.1 Flash Image.
 - The model won't always follow the exact number of image outputs that the
   user explicitly asks for.
 - `gemini-2.5-flash-image` works best with up to 3 images as input, while
-  `gemini-3-pro-image-preview` supports 5 images with high fidelity, and up to
-  14 images in total. `gemini-3.1-flash-image-preview` supports character
+  `gemini-3-pro-image` supports 5 images with high fidelity, and up to
+  14 images in total. `gemini-3.1-flash-image` supports character
   resemblance of up to 4 characters and the fidelity of up to 10 objects in a
   single workflow.
 - When generating text for an image, Gemini works best if you first generate
   the text and then ask for an image with the text.
-- `gemini-3.1-flash-image-preview` Grounding with Google Search does not support using real-world images of people from web search at this time.
+- `gemini-3.1-flash-image` Grounding with Google Search does not support using real-world images of people from web search at this time.
 - All generated images include a [SynthID watermark](https://ai.google.dev/responsible/docs/safeguards/synthid).
 
 ## Optional configurations
 
-You can optionally configure the response modalities and aspect ratio of the
-model's output.
+You can optionally configure the output format, aspect ratio, and image size using the `response_format` parameter.
 
-### Output types
+### Output format
 
-The model defaults to returning text and image responses.
-You can configure the response to return only images without text using
-`response_modalities=['image']`.
+The model defaults to returning both text and image responses. You can configure the response to return only the generated images (omitting the conversational text) by specifying an image format in the `response_format` parameter.
+
+To request multiple modalities (for example, both text and the generated image), pass an array of format entries to `response_format` instead.
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
-    input=prompt,
-    response_modalities=['image'],
+    model="gemini-3.1-flash-image",
+    input="Write a short poem about a starry night and generate an image of it.",
+    response_format=[
+        {"type": "text"},
+        {"type": "image"},
+    ],
 )
 ```
 
@@ -2586,10 +2706,13 @@ interaction = client.interactions.create(
 
 ```
 const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
-    input: prompt,
-    response_modalities: ['image'],
-  });
+  model: "gemini-3.1-flash-image",
+  input: "Write a short poem about a starry night and generate an image of it.",
+  response_format: [
+    { type: "text" },
+    { type: "image" },
+  ],
+});
 ```
 
 ### REST
@@ -2598,32 +2721,32 @@ const interaction = await ai.interactions.create({
 curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
-  -H "Content-Type: application/json" \
+  -H 'Content-Type: application/json' \
+  -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3.1-flash-image-preview",
-    "input": "Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme",
-    "response_modalities": ["IMAGE"]
+    "model": "gemini-3.1-flash-image",
+    "input": "Write a short poem about a starry night and generate an image of it.",
+    "response_format": [
+      { "type": "text" },
+      { "type": "image" }
+    ]
   }'
 ```
 
 ### Aspect ratios and image size
 
-The model defaults to matching the output image size to that of your input
-image, or otherwise generates 1:1 squares.
-You can control the aspect ratio of the output image using the `aspect_ratio`
-field under `response_format`.
+By default, the model matches the output image size to that of your input image, or otherwise generates 1:1 squares. You can control the aspect ratio and the size of the output image using the `aspect_ratio` and `image_size` fields under `response_format` when `type` is set to `"image"`.
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     input=prompt,
     response_format={
-        "image": {
-            "aspect_ratio": "16:9",
-            "image_size": "2K",
-        }
+        "type": "image",
+        "aspect_ratio": "16:9",
+        "image_size": "2K",
     },
 )
 ```
@@ -2632,15 +2755,13 @@ interaction = client.interactions.create(
 
 ```
 const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     input: prompt,
-    response_format: [
-      {
-        type: "image",
-        aspect_ratio: "16:9",
-        image_size: "2K",
-      }
-    ],
+    response_format: {
+      type: "image",
+      aspect_ratio: "16:9",
+      image_size: "2K",
+    },
   });
 ```
 
@@ -2651,14 +2772,14 @@ curl -s -X POST \
   "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
+  -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3.1-flash-image-preview",
+    "model": "gemini-3.1-flash-image",
     "input": "Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme",
     "response_format": {
-      "image": {
-        "aspect_ratio": "16:9",
-        "image_size": "2K"
-      }
+      "type": "image",
+      "aspect_ratio": "16:9",
+      "image_size": "2K"
     }
   }'
 ```
@@ -2666,7 +2787,7 @@ curl -s -X POST \
 The different ratios available and the size of the image generated are listed in
 the following tables:
 
-### 3.1 Flash Image Preview
+### 3.1 Flash Image
 
 | Aspect ratio | 512px resolution | 0.5K tokens | 1K resolution | 1K tokens | 2K resolution | 2K tokens | 4K resolution | 4K tokens |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -2685,7 +2806,7 @@ the following tables:
 | **16:9** | 688x384 | 747 | 1376x768 | 1120 | 2752x1536 | 1120 | 5504x3072 | 2000 |
 | **21:9** | 792x168 | 747 | 1584x672 | 1120 | 3168x1344 | 1120 | 6336x2688 | 2000 |
 
-### 3 Pro Image Preview
+### 3 Pro Image
 
 | Aspect ratio | 1K resolution | 1K tokens | 2K resolution | 2K tokens | 4K resolution | 4K tokens |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -2719,15 +2840,15 @@ the following tables:
 
 Choose the model best suited for your specific use case.
 
-- **Gemini 3.1 Flash Image Preview (Nano Banana 2 Preview)** should be your
+- **Gemini 3.1 Flash Image (Nano Banana 2)** should be your
   go-to image generation model, as the best all around performance and
-  intelligence to cost and latency balance. Check the model [pricing](https://ai.google.dev/gemini-api/docs/pricing#gemini-3.1-flash-image-preview) and [capabilities](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview) page for more
+  intelligence to cost and latency balance. Check the model [pricing](https://ai.google.dev/gemini-api/docs/pricing#gemini-3.1-flash-image) and [capabilities](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image) page for more
   details.
-- **Gemini 3 Pro Image Preview (Nano Banana Pro Preview)** is designed for
+- **Gemini 3 Pro Image (Nano Banana Pro)** is designed for
   professional asset production and complex instructions. This model features
   real-world grounding using Google Search, a default "Thinking" process that
   refines composition prior to generation, and can generate images of up to 4K
-  resolutions. Check the model [pricing](https://ai.google.dev/gemini-api/docs/pricing#gemini-3-pro-image-preview) and [capabilities](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview) page for more
+  resolutions. Check the model [pricing](https://ai.google.dev/gemini-api/docs/pricing#gemini-3-pro-image) and [capabilities](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image) page for more
   details.
 - **Gemini 2.5 Flash Image (Nano Banana)** is designed for speed and
   efficiency. This model is optimized for high-volume, low-latency tasks and
@@ -2756,8 +2877,8 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-05-19 UTC.
+Last updated 2026-05-29 UTC.
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-19 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-05-29 UTC."],[],[]]

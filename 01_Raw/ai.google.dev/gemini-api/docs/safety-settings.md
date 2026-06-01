@@ -1,102 +1,107 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/safety-settings?hl=zh-TW
-fetched_at: 2026-05-25T05:27:15.179442+00:00
-title: "\u5b89\u5168\u8a2d\u5b9a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/safety-settings?hl=he
+fetched_at: 2026-06-01T05:59:59.888125+00:00
+title: "\u05d4\u05d2\u05d3\u05e8\u05d5\u05ea \u05d1\u05d8\u05d9\u05d7\u05d5\u05ea \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-提供意見
+שליחת משוב
 
-# 安全設定
+# הגדרות בטיחות
 
-您可以在原型設計階段調整 Gemini API 的安全設定，判斷應用程式是否需要更嚴謹或寬鬆的安全設定。您可以調整這四個篩選器類別的設定，藉此限制或允許特定類型的內容。
+ממשק Gemini API מספק הגדרות בטיחות שאפשר לשנות בשלב יצירת אב טיפוס, כדי לקבוע אם האפליקציה דורשת הגדרת בטיחות מגבילה יותר או פחות. אתם יכולים לשנות את ההגדרות האלה בארבע קטגוריות של מסננים כדי להגביל סוגים מסוימים של תוכן או לאפשר אותם.
 
-本指南說明 Gemini API 如何處理安全設定和篩選，以及如何變更應用程式的安全設定。
+במדריך הזה מוסבר איך Gemini API מטפל בהגדרות בטיחות ובסינון, ואיך אפשר לשנות את הגדרות הבטיחות של האפליקציה.
 
-## 安全篩選機制
+## מסנני בטיחות
 
-Gemini API 的可調整安全篩選機制涵蓋下列類別：
+מסנני הבטיחות המתכווננים של Gemini API מכסים את הקטגוריות הבאות:
 
-| 類別 | 說明 |
+| קטגוריה | תיאור |
 | --- | --- |
-| 騷擾 | 針對特定身分和/或受保護特質發表負面或有害言論。 |
-| 仇恨言論 | 粗俗、不尊重或不雅的內容。 |
-| 煽情露骨內容 | 提及性行為或其他猥褻情事的內容。 |
-| 危險內容 | 宣傳、鼓吹或助長有害舉動。 |
+| הטרדה | תגובות שליליות או פוגעניות שמכוונות לזהות ו/או למאפיינים מוגנים. |
+| דברי שטנה | תוכן גס, לא מכבד או חילול קודש. |
+| תוכן מיני בוטה | מכיל התייחסויות למעשים מיניים או לתוכן מגונה אחר. |
+| תוכן מסוכן | מקדם גרימת נזק, מעודד גרימת נזק או עוזר לבצע פעולות מזיקות. |
 
-這些類別定義於 [`HarmCategory`](https://ai.google.dev/api/rest/v1/HarmCategory?hl=zh-tw)。您可以運用這些篩選機制，根據使用情境將模型調整為適當的狀態。舉例來說，如果您要製作電玩遊戲對白，可能為配合遊戲風格，而允許較多遭評為「危險」的內容。
+הקטגוריות האלה מוגדרות ב[`HarmCategory`](https://ai.google.dev/api/rest/v1/HarmCategory?hl=he). אפשר להשתמש במסננים האלה כדי להתאים את התוצאות למקרה השימוש שלכם. לדוגמה, אם אתם יוצרים דיאלוג למשחק וידאו, יכול להיות שתחליטו לאפשר יותר תוכן שסווג כ*מסוכן* בגלל אופי המשחק.
 
-除了可調整的安全篩選機制，Gemini API 也內建核心危害內容防護措施，例如危害兒童安全的內容。系統一律會封鎖這類有害內容，無法調整。
+בנוסף למסנני הבטיחות שניתנים להתאמה, ל-Gemini API יש אמצעי הגנה מובנים מפני נזקים מהותיים, כמו תוכן שמסכן את בטיחות הילדים.
+סוגי הנזק האלה תמיד נחסמים ואי אפשר לשנות את זה.
 
-### 內容安全篩選等級
+### רמת הסינון של בטיחות התוכן
 
-Gemini API 會將內容不安全的機率分為 `HIGH`、`MEDIUM`、`LOW` 或 `NEGLIGIBLE`。
+‫Gemini API מסווג את רמת ההסתברות לכך שהתוכן לא בטוח כ-`HIGH`, `MEDIUM`, `LOW` או `NEGLIGIBLE`.
 
-Gemini API 會根據內容不安全的機率封鎖內容，而非嚴重程度。請務必考慮這點，因為即使某些內容造成嚴重傷害的機率不高，舉例來說，比較以下句子：
+‫Gemini API חוסם תוכן על סמך הסבירות שהתוכן לא בטוח, ולא על סמך חומרת הבעיה. חשוב לקחת את זה בחשבון כי יש תכנים שהסיכוי שהם לא בטוחים הוא נמוך, אבל חומרת הנזק שעלולה להיגרם מהם עדיין גבוהה. לדוגמה, אם משווים בין המשפטים:
 
-1. 機器人打了我。
-2. 機器人把我砍傷了。
+1. הרובוט נתן לי אגרוף.
+2. הרובוט חתך אותי.
 
-第一句可能較容易被判定為不安全，但就暴力程度而言，您可能會認為第二句較為嚴重。因此，請務必仔細測試及考量適當的封鎖層級，以支援主要用途，同時盡量減少對使用者的傷害。
+המשפט הראשון עלול להוביל לסבירות גבוהה יותר של תוצאה לא בטוחה, אבל יכול להיות שהמשפט השני ייחשב לחמור יותר מבחינת אלימות.
+לכן, חשוב לבדוק בקפידה ולשקול מהי רמת החסימה המתאימה שנדרשת כדי לתמוך בתרחישי השימוש העיקריים שלכם, תוך מזעור הפגיעה במשתמשי הקצה.
 
-### 每個要求的安全篩選
+### סינון בטיחות לכל בקשה
 
-在向 API 發出的每項要求，都可以調整安全設定。提出要求後，系統會分析內容並給予安全評分。安全評分指的是 Gemini 判斷內容屬於特定危害類別的機率。舉例來說，如果內容因屬於騷擾類別的機率高而遭到封鎖，系統傳回的安全評分會將類別設為 `HARASSMENT`，危害機率則設為 `HIGH`。
+אתם יכולים לשנות את הגדרות הבטיחות לכל בקשה שאתם שולחים ל-API. כששולחים בקשה, התוכן נותח ומוקצה לו סיווג בטיחות. דירוג הבטיחות כולל את הקטגוריה ואת הסיווג של הסבירות לפגיעה. לדוגמה, אם התוכן נחסם כי הסבירות שהוא משתייך לקטגוריית ההטרדה גבוהה, דירוג הבטיחות שיוחזר יהיה עם קטגוריה ששווה ל-`HARASSMENT` וסבירות לפגיעה שמוגדרת כ-`HIGH`.
 
-由於模型本身具有安全性，因此預設會**關閉**額外的篩選器。
-如果選擇啟用，您可以設定系統根據內容不安全的機率封鎖內容。預設模型行為適用於大多數用途，因此建議不要隨意調整，除非這對應用程式而言是必要之舉。
+בגלל הבטיחות המובנית של המודל, מסננים נוספים **מושבתים** כברירת מחדל.
+אם תבחרו להפעיל אותן, תוכלו להגדיר את המערכת לחסימת תוכן על סמך הסבירות שהוא לא בטוח. התנהגות ברירת המחדל של המודל מתאימה לרוב תרחישי השימוש, ולכן כדאי לשנות את ההגדרות האלה רק אם נדרשת עקביות באפליקציה.
 
-下表說明各類別可調整的封鎖設定。舉例來說，如果將「仇恨言論」類別的封鎖設定設為「封鎖極少數內容」，系統就會封鎖仇恨言論機率高的內容。但機率較低的字詞則可使用。
+בטבלה הבאה מתוארות הגדרות החסימה שאפשר לשנות לכל קטגוריה. לדוגמה, אם מגדירים את הגדרת החסימה ל**חסימה של חלק מהתוכן** בקטגוריה **דברי שטנה**, כל מה שיש לו סיכוי גבוה להיות תוכן של דברי שטנה ייחסם. אבל מותר להשתמש בכל ערך עם הסתברות נמוכה יותר.
 
-| 門檻 (Google AI Studio) | 閾值 (API) | 說明 |
+| סף (Google AI Studio) | סף (API) | תיאור |
 | --- | --- | --- |
-| 關閉 | `OFF` | 關閉安全篩選器 |
-| 不封鎖任何內容 | `BLOCK_NONE` | 無論不安全的機率為何，一律顯示內容 |
-| 封鎖極少數內容 | `BLOCK_ONLY_HIGH` | 封鎖不安全機率高的內容 |
-| 封鎖一些 | `BLOCK_MEDIUM_AND_ABOVE` | 封鎖有害機率中等或較高的內容 |
-| 封鎖多數內容 | `BLOCK_LOW_AND_ABOVE` | 封鎖有害機率低、中等或高的內容 |
-| 不適用 | `HARM_BLOCK_THRESHOLD_UNSPECIFIED` | 未指定門檻，使用預設門檻封鎖 |
+| מושבת | `OFF` | השבתת מסנן הבטיחות |
+| לא לחסום אף אחד | `BLOCK_NONE` | הצגה תמיד, ללא קשר להסתברות של תוכן לא בטוח |
+| חסימה של כמה אנשים | `BLOCK_ONLY_HIGH` | חסימה כשיש סבירות גבוהה לתוכן לא בטוח |
+| חסימת חלק מהמשתמשים | `BLOCK_MEDIUM_AND_ABOVE` | חסימה כשיש הסתברות בינונית או גבוהה לתוכן לא בטוח |
+| חסימה של רוב האנשים | `BLOCK_LOW_AND_ABOVE` | חסימה כשההסתברות לתוכן לא בטוח נמוכה, בינונית או גבוהה |
+| לא רלוונטי | `HARM_BLOCK_THRESHOLD_UNSPECIFIED` | לא צוין סף, חסימה באמצעות סף ברירת המחדל |
 
-如未設定門檻，Gemini 2.5 和 3 模型預設會**停用**封鎖門檻。
+אם לא מגדירים את הסף, ברירת המחדל של סף החסימה היא **מושבת** למודלים של Gemini 2.5 ו-3.
 
-您可以針對向生成服務發出的每項要求設定這些設定。
-詳情請參閱 [`HarmBlockThreshold`](https://ai.google.dev/api/generate-content?hl=zh-tw#harmblockthreshold) API 參考資料。
+אפשר להגדיר את ההגדרות האלה לכל בקשה ששולחים לשירות הגנרטיבי.
+פרטים נוספים זמינים במאמר בנושא [`HarmBlockThreshold`](https://ai.google.dev/api/generate-content?hl=he#harmblockthreshold) API.
 
-### 安全意見回饋
+### משוב בנושא בטיחות
 
-[`generateContent`](https://ai.google.dev/api/generate-content?hl=zh-tw#method:-models.generatecontent) 會傳回 [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=zh-tw#generatecontentresponse)，其中包含安全意見回饋。
+‫[`generateContent`](https://ai.google.dev/api/generate-content?hl=he#method:-models.generatecontent)
+מחזירה את
+‫[`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=he#generatecontentresponse) שכוללת משוב בנושא בטיחות.
 
-提示意見回饋會計入 [`promptFeedback`](https://ai.google.dev/api/generate-content?hl=zh-tw#promptfeedback)。如果設定 `promptFeedback.blockReason`，表示提示內容遭到封鎖。
+המשוב על ההנחיות כלול ב-[`promptFeedback`](https://ai.google.dev/api/generate-content?hl=he#promptfeedback). אם הערך של `promptFeedback.blockReason` מוגדר, סימן שהתוכן של ההנחיה נחסם.
 
-回應候選人意見回饋會納入 [`Candidate.finishReason`](https://ai.google.dev/api/generate-content?hl=zh-tw#candidate) 和 [`Candidate.safetyRatings`](https://ai.google.dev/api/generate-content?hl=zh-tw#candidate)。如果回應內容遭到封鎖，且 `finishReason` 為 `SAFETY`，您可以檢查 `safetyRatings` 來瞭解詳情。但不會傳回遭封鎖的內容。
+המשוב על המועמדים לתשובה נכלל ב-[`Candidate.finishReason`](https://ai.google.dev/api/generate-content?hl=he#candidate) וב-[`Candidate.safetyRatings`](https://ai.google.dev/api/generate-content?hl=he#candidate). אם תוכן התשובה נחסם והערך של `finishReason` היה `SAFETY`, אפשר לבדוק את `safetyRatings` כדי לקבל פרטים נוספים. התוכן שנחסם לא יוחזר.
 
-## 調整安全性設定
+## שינוי הגדרות הבטיחות
 
-本節說明如何在 Google AI Studio 和程式碼中調整安全設定。
+בקטע הזה מוסבר איך לשנות את הגדרות הבטיחות ב-Google AI Studio ובקוד.
 
 ### Google AI Studio
 
-您可以在 Google AI Studio 中調整安全設定。
+אתם יכולים לשנות את הגדרות הבטיחות ב-Google AI Studio.
 
-在「執行設定」面板中，按一下「進階設定」下方的「安全設定」，開啟「執行安全設定」模式。在強制回應中，您可以使用滑桿，依安全類別調整內容篩選等級：
+לוחצים על **הגדרות בטיחות** בקטע **הגדרות מתקדמות** בחלונית **הגדרות ההרצה** כדי לפתוח את תיבת הדו-שיח **הגדרות בטיחות של ההרצה**. בחלון הקופץ, אפשר להשתמש בפסי ההזזה כדי לשנות את רמת סינון התוכן לפי קטגוריית בטיחות:
 
-![](https://ai.google.dev/static/gemini-api/docs/images/safety_settings_ui.png?hl=zh-tw)
+![](https://ai.google.dev/static/gemini-api/docs/images/safety_settings_ui.png?hl=he)
 
-當您傳送要求 (例如向模型提問) 時，如果要求內容遭到封鎖，系統會顯示「內容遭到封鎖」warning
-訊息。如要查看更多詳細資料，請將指標懸停在「內容已封鎖」文字上，即可查看類別和危害分類的機率。
+כששולחים בקשה (למשל, שואלים את המודל שאלה), מופיעה ההודעה warning
+**התוכן חסום** אם התוכן של הבקשה חסום. כדי לראות פרטים נוספים, מעבירים את מצביע העכבר מעל הטקסט **התוכן נחסם** כדי לראות את הקטגוריה ואת הסבירות לסיווג הנזק.
 
-### 程式碼範例
+### דוגמאות לקוד
 
-下列程式碼片段顯示如何在 `GenerateContent` 呼叫中設定安全設定。這會設定仇恨言論 (`HARM_CATEGORY_HATE_SPEECH`) 類別的門檻。將這類內容設為「封鎖」`BLOCK_LOW_AND_ABOVE`，系統就會封鎖任何仇恨言論機率偏高的內容。如要瞭解門檻設定，請參閱「[依要求進行安全篩選](#safety-filtering-per-request)」。
+בקטע הקוד הבא מוצג איך מגדירים הגדרות בטיחות בקריאה ל-`GenerateContent`. הפעולה הזו מגדירה את ערך הסף לקטגוריה 'דברי שטנה' (`HARM_CATEGORY_HATE_SPEECH`). אם מגדירים את הקטגוריה הזו לערך
+`BLOCK_LOW_AND_ABOVE`, כל תוכן שיש לו סבירות נמוכה או גבוהה יותר להיות דברי שטנה ייחסם. כדי להבין את הגדרות הסף, אפשר לעיין במאמר [סינון בטיחותי לכל בקשה](#safety-filtering-per-request).
 
 ### Python
 
@@ -226,19 +231,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 }'
 ```
 
-## 後續步驟
+## השלבים הבאים
 
-- 如要進一步瞭解完整 API，請參閱 [API 參考資料](https://ai.google.dev/api?hl=zh-tw)。
-- 如要瞭解使用 LLM 開發時應注意的安全事項，請參閱[安全指南](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=zh-tw)。
-- 如要進一步瞭解如何評估機率與嚴重程度，請參閱 [Jigsaw 團隊](https://developers.perspectiveapi.com/s/about-the-api-score)的說明
-- 進一步瞭解有助於安全解決方案的產品，例如 [Perspective API](https://medium.com/jigsaw/reducing-toxicity-in-large-language-models-with-perspective-api-c31c39b7a4d7)。\* 您可以使用這些安全設定建立毒性分類器。如要開始使用，請參閱[分類範例](https://ai.google.dev/examples/train_text_classifier_embeddings?hl=zh-tw)。
+- מידע נוסף על ה-API המלא מופיע ב[הפניית ה-API](https://ai.google.dev/api?hl=he).
+- כדאי לעיין ב[הנחיות הבטיחות](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=he) כדי לקבל סקירה כללית של שיקולי הבטיחות כשמפתחים באמצעות מודלים של שפה גדולה (LLM).
+- מידע נוסף על הערכת ההסתברות לעומת חומרת הבעיה זמין ב[צוות Jigsaw](https://developers.perspectiveapi.com/s/about-the-api-score)
+- מידע נוסף על המוצרים שמשמשים לפתרונות בטיחות כמו [Perspective API](https://medium.com/jigsaw/reducing-toxicity-in-large-language-models-with-perspective-api-c31c39b7a4d7).
+  \* אפשר להשתמש בהגדרות הבטיחות האלה כדי ליצור מסווג רעילות. כדי להתחיל, אפשר לעיין [בדוגמה של סיווג](https://ai.google.dev/examples/train_text_classifier_embeddings?hl=he).
 
-提供意見
+שליחת משוב
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-上次更新時間：2026-05-19 (世界標準時間)。
+עדכון אחרון: 2026-05-19 (שעון UTC).
 
-想進一步說明嗎？
+רוצה לתת לנו משוב?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-19 (世界標準時間)。"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-05-19 (שעון UTC)."],[],[]]

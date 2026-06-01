@@ -1,178 +1,163 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/long-context?hl=th
-fetched_at: 2026-05-25T05:24:04.060161+00:00
-title: "\u0e1a\u0e23\u0e34\u0e1a\u0e17\u0e41\u0e1a\u0e1a\u0e22\u0e32\u0e27 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/long-context?hl=id
+fetched_at: 2026-06-01T06:02:15.669827+00:00
+title: "Konteks panjang \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
+[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-ส่งความคิดเห็น
+Kirim masukan
 
-# บริบทแบบยาว
+# Konteks panjang
 
-โมเดล Gemini หลายรุ่นมีหน้าต่างบริบทขนาดใหญ่ถึง 1 ล้านโทเค็นขึ้นไป
-ในอดีต โมเดลภาษาขนาดใหญ่ (LLM) มีข้อจำกัดอย่างมากในเรื่อง
-ปริมาณข้อความ (หรือโทเค็น) ที่ส่งไปยังโมเดลได้ในครั้งเดียว
-หน้าต่างบริบทแบบยาวของ Gemini ปลดล็อกกรณีการใช้งานใหม่ๆ และกระบวนทัศน์ของนักพัฒนาแอป
-มากมาย
+Banyak model Gemini dilengkapi dengan jendela konteks besar sebesar 1 juta token atau lebih.
+Sebelumnya, model bahasa besar (LLM) sangat dibatasi oleh
+jumlah teks (atau token) yang dapat diteruskan ke model dalam satu waktu.
+Jendela konteks panjang Gemini memungkinkan banyak kasus penggunaan baru dan paradigma developer.
 
-โค้ดที่คุณใช้ในกรณีต่างๆ เช่น [การสร้างข้อความ](https://ai.google.dev/gemini-api/docs/text-generation?hl=th)หรือ[อินพุตหลายรูปแบบ](https://ai.google.dev/gemini-api/docs/vision?hl=th)จะทำงานได้โดยไม่ต้องเปลี่ยนแปลงใดๆ เมื่อใช้กับบริบทแบบยาว
+Kode yang sudah Anda gunakan untuk kasus seperti [pembuatan
+teks](https://ai.google.dev/gemini-api/docs/text-generation?hl=id) atau [input multimodal](https://ai.google.dev/gemini-api/docs/vision?hl=id) akan berfungsi tanpa perubahan apa pun dengan konteks panjang.
 
-เอกสารนี้จะให้ภาพรวมของสิ่งที่คุณทำได้โดยใช้โมเดลที่มีหน้าต่างบริบทขนาด 1 ล้านโทเค็นขึ้นไป
-หน้านี้จะให้ภาพรวมโดยย่อของหน้าต่างบริบท และสำรวจวิธีที่นักพัฒนาซอฟต์แวร์ควรพิจารณาบริบทแบบยาว กรณีการใช้งานจริงต่างๆ สำหรับบริบทแบบยาว และวิธีเพิ่มประสิทธิภาพการใช้งานบริบทแบบยาว
+Dokumen ini memberi Anda ringkasan tentang apa yang dapat Anda capai menggunakan model dengan jendela konteks 1 juta token dan lebih banyak lagi. Halaman ini memberikan ringkasan singkat tentang jendela konteks, dan mempelajari cara developer harus memikirkan konteks panjang, berbagai kasus penggunaan dunia nyata untuk konteks panjang, dan cara mengoptimalkan penggunaan konteks panjang.
 
-ดูขนาดหน้าต่างบริบทของโมเดลที่เฉพาะเจาะจงได้ที่หน้า[โมเดล](https://ai.google.dev/gemini-api/docs/models?hl=th)
+Untuk ukuran jendela konteks model tertentu, lihat halaman [Model](https://ai.google.dev/gemini-api/docs/models?hl=id).
 
-## หน้าต่างบริบทคืออะไร
+## Apa itu jendela konteks?
 
-วิธีพื้นฐานในการใช้โมเดล Gemini คือการส่งข้อมูล (บริบท)
-ไปยังโมเดล ซึ่งจะสร้างคำตอบในภายหลัง การเปรียบเทียบหน้าต่างบริบทคือหน่วยความจำระยะสั้น หน่วยความจำระยะสั้นของบุคคลหนึ่งๆ สามารถจัดเก็บข้อมูลได้ในปริมาณที่จำกัด
-และโมเดล Generative ก็เช่นกัน
+Cara dasar Anda menggunakan model Gemini adalah dengan meneruskan informasi (konteks) ke model, yang selanjutnya akan menghasilkan respons. Analogi untuk jendela konteks adalah memori jangka pendek. Jumlah informasi yang dapat disimpan dalam memori jangka pendek seseorang terbatas, dan hal yang sama berlaku untuk model generatif.
 
-อ่านเพิ่มเติมเกี่ยวกับวิธีการทำงานของโมเดลเบื้องหลังได้ใน[คำแนะนำเกี่ยวกับโมเดล Generative](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=th#under-the-hood)
+Anda dapat membaca lebih lanjut cara kerja model di balik layar dalam [panduan model generatif](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=id#under-the-hood) kami.
 
-## เริ่มต้นใช้งานบริบทแบบยาว
+## Mulai menggunakan konteks panjang
 
-โมเดล Generative เวอร์ชันก่อนหน้าประมวลผลได้ครั้งละ 8,000 โทเค็นเท่านั้น โมเดลรุ่นใหม่ๆ ได้ขยายขีดจำกัดนี้ออกไปอีกโดยยอมรับโทเค็น 32,000 หรือแม้แต่ 128,000 โทเค็น Gemini เป็นโมเดลแรกที่รับโทเค็นได้ 1 ล้านโทเค็น
+Versi model generatif sebelumnya hanya dapat memproses 8.000 token sekaligus. Model yang lebih baru mendorong batas ini lebih jauh dengan menerima 32.000 atau bahkan 128.000 token. Gemini adalah model pertama yang mampu menerima 1 juta token.
 
-ในทางปฏิบัติ โทเค็น 1 ล้านรายการจะมีลักษณะดังนี้
+Dalam praktiknya, 1 juta token akan terlihat seperti:
 
-- โค้ด 50,000 บรรทัด (มีอักขระมาตรฐาน 80 ตัวต่อบรรทัด)
-- ข้อความทั้งหมดที่คุณส่งในช่วง 5 ปีที่ผ่านมา
-- นวนิยายภาษาอังกฤษความยาวโดยเฉลี่ย 8 เล่ม
-- ข้อความถอดเสียงของตอนพอดแคสต์ที่มีความยาวโดยเฉลี่ยกว่า 200 ตอน
+- 50.000 baris kode (dengan 80 karakter per baris standar)
+- Semua pesan teks yang telah Anda kirim dalam 5 tahun terakhir
+- 8 novel berbahasa Inggris dengan panjang rata-rata
+- Transkrip lebih dari 200 episode podcast dengan durasi rata-rata
 
-หน้าต่างบริบทที่จำกัดมากขึ้นซึ่งพบได้ทั่วไปในโมเดลอื่นๆ อีกมากมายมักต้องใช้กลยุทธ์ต่างๆ เช่น การทิ้งข้อความเก่าโดยพลการ การสรุปเนื้อหา การใช้ RAG กับฐานข้อมูลเวกเตอร์ หรือการกรองพรอมต์เพื่อประหยัดโทเค็น
+Jendela konteks yang lebih terbatas yang umum di banyak model lain sering kali memerlukan
+strategi seperti menghapus pesan lama secara acak, meringkas konten, menggunakan
+RAG dengan database vektor, atau memfilter perintah untuk menghemat token.
 
-แม้ว่าเทคนิคเหล่านี้จะยังคงมีประโยชน์ในบางสถานการณ์ แต่หน้าต่างบริบทที่กว้างขวางของ Gemini
-ก็ช่วยให้เราใช้วิธีการที่ตรงไปตรงมามากขึ้นได้ นั่นคือการให้ข้อมูลที่เกี่ยวข้องทั้งหมด
-ตั้งแต่แรก เนื่องจากโมเดล Gemini สร้างขึ้นโดยมีวัตถุประสงค์เพื่อความสามารถด้านบริบทขนาดใหญ่ จึงแสดงให้เห็นถึงการเรียนรู้ในบริบทที่มีประสิทธิภาพ ตัวอย่างเช่น การใช้เฉพาะสื่อการเรียนการสอนในบริบท (ไวยากรณ์อ้างอิง 500 หน้า พจนานุกรม และประโยคคู่ขนานประมาณ 400 ประโยค) ทำให้ Gemini [เรียนรู้ที่จะแปล](https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf)จากภาษาอังกฤษเป็นภาษากาลามัง ซึ่งเป็นภาษาปาปัวที่มีผู้พูดน้อยกว่า 200 คน โดยมีคุณภาพคล้ายกับผู้เรียนที่เป็นมนุษย์ซึ่งใช้วัสดุเดียวกัน ซึ่งแสดงให้เห็นถึงการเปลี่ยนแปลงกระบวนทัศน์ที่เกิดขึ้นจากบริบทที่ยาวของ Gemini ซึ่งช่วยเพิ่มความเป็นไปได้ใหม่ๆ ผ่านการเรียนรู้ในบริบทที่แข็งแกร่ง
+Meskipun teknik ini tetap berharga dalam skenario tertentu, jendela konteks Gemini yang luas mendorong pendekatan yang lebih langsung: memberikan semua informasi yang relevan di awal. Karena model Gemini dibuat khusus dengan kemampuan konteks yang sangat besar, model ini menunjukkan pembelajaran dalam konteks yang efektif. Misalnya, hanya dengan menggunakan materi pengajaran dalam konteks (tata bahasa referensi 500 halaman, kamus, dan ≈400 kalimat paralel), Gemini [belajar menerjemahkan](https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf) dari bahasa Inggris ke Kalamang—bahasa Papua dengan kurang dari 200 penutur—dengan kualitas yang serupa dengan kualitas pelajar manusia yang menggunakan materi yang sama. Hal ini menggambarkan perubahan paradigma yang dimungkinkan oleh konteks panjang Gemini, yang membuka kemungkinan baru melalui pembelajaran dalam konteks yang andal.
 
-## กรณีการใช้งานบริบทแบบยาว
+## Kasus penggunaan konteks panjang
 
-แม้ว่ากรณีการใช้งานมาตรฐานสำหรับโมเดล Generative ส่วนใหญ่ยังคงเป็นการป้อนข้อความ แต่ตระกูลโมเดล Gemini ก็เปิดตัวกระบวนทัศน์ใหม่ของกรณีการใช้งานแบบมัลติโมดัล โมเดลเหล่านี้เข้าใจข้อความ วิดีโอ เสียง และรูปภาพได้โดยกำเนิด โดยมาพร้อมกับ [Gemini API ที่รับไฟล์มัลติโมดัล](https://ai.google.dev/gemini-api/docs/prompting_with_media?hl=th)เพื่อความสะดวก
+Meskipun kasus penggunaan standar untuk sebagian besar model generatif masih berupa input teks, serangkaian model Gemini memungkinkan paradigma baru kasus penggunaan multimodal. Model ini dapat memahami teks, video, audio, dan gambar secara native. File tersebut
+disertai dengan [Gemini API yang menerima jenis file multi-modal](https://ai.google.dev/gemini-api/docs/prompting_with_media?hl=id) untuk
+memudahkan.
 
-### ข้อความแบบยาว
+### Teks panjang
 
-ข้อความพิสูจน์ให้เห็นแล้วว่าเป็นเลเยอร์ของข้อมูลอัจฉริยะที่รองรับโมเมนตัมส่วนใหญ่เกี่ยวกับ LLM ดังที่ได้กล่าวไปก่อนหน้านี้ ข้อจำกัดในทางปฏิบัติของ LLM ส่วนใหญ่เกิดจากการไม่มีหน้าต่างบริบทที่ใหญ่พอที่จะทำงานบางอย่างได้ ซึ่งนำไปสู่การนำ Retrieval Augmented Generation (RAG)
-และเทคนิคอื่นๆ มาใช้กันอย่างรวดเร็ว ซึ่งจะให้ข้อมูลเชิงบริบทที่เกี่ยวข้องแก่โมเดลแบบไดนามิก
-ปัจจุบันหน้าต่างบริบทมีขนาดใหญ่ขึ้นเรื่อยๆ จึงมีเทคนิคใหม่ๆ ที่พร้อมใช้งานซึ่งจะช่วยให้สามารถใช้กับ Use Case ใหม่ๆ ได้
+Teks telah terbukti menjadi lapisan kecerdasan yang mendasari sebagian besar momentum seputar LLM. Seperti yang disebutkan sebelumnya, sebagian besar batasan praktis LLM disebabkan oleh tidak adanya jendela konteks yang cukup besar untuk melakukan tugas tertentu. Hal ini menyebabkan adopsi cepat retrieval augmented generation (RAG) dan teknik lainnya yang secara dinamis memberikan informasi kontekstual yang relevan kepada model. Sekarang, dengan jendela konteks yang semakin besar, ada teknik baru yang tersedia dan memungkinkan kasus penggunaan baru.
 
-กรณีการใช้งานที่กำลังมาแรงและมาตรฐานสำหรับบริบทแบบยาวที่เป็นข้อความมีดังนี้
+Beberapa kasus penggunaan baru dan standar untuk konteks panjang berbasis teks meliputi:
 
-- สรุปคลังข้อความขนาดใหญ่
-  - ตัวเลือกการสรุปก่อนหน้านี้ที่มีโมเดลบริบทขนาดเล็กกว่าจะต้องใช้
-    หน้าต่างแบบเลื่อนหรือเทคนิคอื่นๆ เพื่อรักษาสถานะของส่วนก่อนหน้า
-    เมื่อมีการส่งโทเค็นใหม่ไปยังโมเดล
-- การถามและตอบ
-  - ในอดีต การดำเนินการนี้ทำได้ด้วย RAG เท่านั้น เนื่องจากบริบทมีจำนวนจำกัดและโมเดลเรียกคืนข้อเท็จจริงได้ต่ำ
-- เวิร์กโฟลว์ของเอเจนต์
-  - ข้อความเป็นรากฐานของวิธีที่เอเจนต์รักษาสถานะของสิ่งที่ทำไปแล้ว
-    และสิ่งที่ต้องทำ การมีข้อมูลเกี่ยวกับโลก
-    และเป้าหมายของเอเจนต์ไม่เพียงพอเป็นข้อจำกัดด้านความน่าเชื่อถือของเอเจนต์
+- Meringkas korpus teks besar
+  - Opsi ringkasan sebelumnya dengan model konteks yang lebih kecil akan memerlukan
+    jendela geser atau teknik lain untuk mempertahankan status bagian sebelumnya
+    saat token baru diteruskan ke model
+- Tanya jawab
+  - Sebelumnya, hal ini hanya dapat dilakukan dengan RAG mengingat jumlah konteks yang terbatas dan ingatan faktual model yang rendah
+- Alur kerja agentic
+  - Teks adalah dasar dari cara agen mempertahankan status tindakan yang telah dilakukan dan yang perlu dilakukan; tidak memiliki informasi yang cukup tentang dunia dan tujuan agen adalah batasan pada keandalan agen
 
-[การเรียนรู้ในบริบทแบบหลายตัวอย่าง](https://arxiv.org/pdf/2404.11018)เป็นหนึ่งในความสามารถที่โดดเด่นที่สุดที่โมเดลบริบทแบบยาวปลดล็อก งานวิจัยแสดงให้เห็นว่า
-การใช้กระบวนทัศน์ตัวอย่าง "แบบช็อตเดียว" หรือ "แบบหลายช็อต" ทั่วไป ซึ่ง
-โมเดลจะได้รับตัวอย่างงาน 1 หรือ 2 ตัวอย่าง และการขยายขนาดตัวอย่างเหล่านั้นเป็น
-หลายร้อย หลายพัน หรือแม้แต่หลายแสนตัวอย่าง อาจนำไปสู่
-ความสามารถใหม่ๆ ของโมเดลได้ นอกจากนี้ แนวทางแบบหลายนัดยังแสดงให้เห็นว่ามีประสิทธิภาพ
-คล้ายกับโมเดลที่ได้รับการปรับแต่งสำหรับงานที่เฉพาะเจาะจง สำหรับกรณีการใช้งาน
-ที่ประสิทธิภาพของโมเดล Gemini ยังไม่เพียงพอสำหรับการเปิดตัว
-ในเวอร์ชันที่ใช้งานจริง คุณสามารถลองใช้แนวทางแบบหลายช็อตได้ ดังที่คุณอาจได้เห็นในส่วนการเพิ่มประสิทธิภาพบริบทแบบยาวในภายหลัง การแคชบริบททำให้ภาระงานของโทเค็นอินพุตสูงประเภทนี้มีความเป็นไปได้ทางเศรษฐศาสตร์มากขึ้น และยังช่วยลดเวลาในการตอบสนองในบางกรณีอีกด้วย
+[Pembelajaran dalam konteks banyak contoh](https://arxiv.org/pdf/2404.11018) adalah salah satu kemampuan paling unik yang dihadirkan oleh model konteks panjang. Riset telah menunjukkan
+bahwa mengambil paradigma contoh "sekali coba" atau "beberapa kali coba" yang umum, di mana
+model disajikan dengan satu atau beberapa contoh tugas, dan menskalakannya hingga
+ratusan, ribuan, atau bahkan ratusan ribu contoh, dapat menghasilkan
+kemampuan model baru. Pendekatan multi-shot ini juga terbukti berperforma
+serupa dengan model yang disesuaikan untuk tugas tertentu. Untuk kasus penggunaan yang performa model Gemini-nya belum cukup untuk peluncuran produksi, Anda dapat mencoba pendekatan banyak contoh. Seperti yang mungkin Anda pelajari nanti di bagian pengoptimalan konteks panjang, penyiapan cache konteks membuat jenis workload token input tinggi ini jauh lebih layak secara ekonomis dan bahkan memiliki latensi yang lebih rendah dalam beberapa kasus.
 
-### วิดีโอแบบยาว
+### Video panjang
 
-ประโยชน์ของเนื้อหาวิดีโอถูกจำกัดมานานเนื่องจากสื่อดังกล่าวขาดการช่วยเหลือพิเศษ
-ในตัว การดูเนื้อหาคร่าวๆ ทำได้ยาก ข้อความถอดเสียงมักจับภาพความแตกต่างของวิดีโอไม่ได้ และเครื่องมือส่วนใหญ่ไม่ประมวลผลรูปภาพ ข้อความ และเสียงพร้อมกัน ความสามารถด้านข้อความที่มีบริบทขนาดยาวของ Gemini จะเปลี่ยนเป็น
-ความสามารถในการให้เหตุผลและตอบคำถามเกี่ยวกับอินพุตแบบมัลติโมดอลพร้อม
-ประสิทธิภาพที่สม่ำเสมอ
+Kegunaan konten video telah lama dibatasi oleh kurangnya aksesibilitas media itu sendiri. Konten sulit dibaca sekilas, transkrip sering gagal
+menangkap nuansa video, dan sebagian besar alat tidak memproses gambar, teks, dan
+audio secara bersamaan. Dengan Gemini, kemampuan teks panjang konteks diterjemahkan menjadi
+kemampuan untuk memahami dan menjawab pertanyaan tentang input multimodal dengan
+performa yang berkelanjutan.
 
-กรณีการใช้งานที่กำลังมาแรงและมาตรฐานสำหรับบริบทแบบยาวของวิดีโอมีดังนี้
+Beberapa kasus penggunaan baru dan standar untuk konteks panjang video mencakup:
 
-- การถามและตอบคำถามในวิดีโอ
-- หน่วยความจำวิดีโอตามที่แสดงใน [Project Astra ของ Google](https://deepmind.google/technologies/gemini/project-astra/?hl=th)
-- การใส่คำบรรยายแทนเสียงในวิดีโอ
-- ระบบวิดีโอแนะนำโดยการเพิ่มข้อมูลเมตาที่มีอยู่ด้วยความเข้าใจแบบมัลติโมดัลใหม่
-- การปรับแต่งวิดีโอโดยดูจากคลังข้อมูลและข้อมูลเมตาวิดีโอที่เกี่ยวข้อง แล้วนำส่วนของวิดีโอที่ไม่เกี่ยวข้องกับผู้ชมออก
-- การกลั่นกรองเนื้อหาวิดีโอ
-- การประมวลผลวิดีโอแบบเรียลไทม์
+- Pertanyaan dan jawaban video
+- Memori video, seperti yang ditunjukkan dengan [Project Astra Google](https://deepmind.google/technologies/gemini/project-astra/?hl=id)
+- Teks video
+- Sistem rekomendasi video, dengan memperkaya metadata yang ada menggunakan pemahaman multimodal baru
+- Penyesuaian video, dengan melihat kumpulan data dan metadata video terkait, lalu menghapus bagian video yang tidak relevan bagi penonton
+- Moderasi konten video
+- Pemrosesan video real-time
 
-เมื่อทำงานกับวิดีโอ สิ่งสำคัญคือต้องพิจารณาว่า[วิดีโอได้รับการ
-ประมวลผลเป็นโทเค็น](https://ai.google.dev/gemini-api/docs/tokens?hl=th#media-token)อย่างไร ซึ่งจะส่งผลต่อ
-การเรียกเก็บเงินและโควต้าการใช้งาน ดูข้อมูลเพิ่มเติมเกี่ยวกับการแจ้งโดยใช้ไฟล์วิดีโอได้ใน[คำแนะนำในการแจ้ง](https://ai.google.dev/gemini-api/docs/prompting_with_media?lang=python&hl=th#prompting-with-videos)
+Saat bekerja dengan video, penting untuk mempertimbangkan cara [video diproses menjadi token](https://ai.google.dev/gemini-api/docs/tokens?hl=id#media-token), yang memengaruhi penagihan dan batas penggunaan. Anda dapat mempelajari lebih lanjut cara membuat perintah dengan file video di
+[panduan
+Perintah](https://ai.google.dev/gemini-api/docs/prompting_with_media?lang=python&hl=id#prompting-with-videos).
 
-### เสียงแบบยาว
+### Audio panjang
 
-โมเดล Gemini เป็นโมเดลภาษาขนาดใหญ่ตัวแรกที่ทำงานได้กับข้อมูลหลายรูปแบบแบบเนทีฟ
-ซึ่งสามารถเข้าใจเสียงได้ โดยปกติแล้ว เวิร์กโฟลว์ของนักพัฒนาซอฟต์แวร์มักจะ
-เกี่ยวข้องกับการเชื่อมโยงโมเดลเฉพาะโดเมนหลายรายการเข้าด้วยกัน เช่น
-โมเดลเสียงพูดเป็นข้อความและโมเดลข้อความเป็นข้อความ เพื่อประมวลผลเสียง ซึ่งส่งผลให้เกิดเวลาในการตอบสนองเพิ่มเติมที่จำเป็นโดยการส่งคำขอแบบไปกลับหลายครั้ง
-และประสิทธิภาพลดลงซึ่งมักเกิดจากสถาปัตยกรรมที่ไม่ได้เชื่อมต่อของ
-การตั้งค่าโมเดลหลายรายการ
+Model Gemini adalah model bahasa besar multimodal pertama yang secara native dapat memahami audio. Sebelumnya, alur kerja developer yang umum akan melibatkan penggabungan beberapa model khusus domain, seperti model speech-to-text dan model text-to-text, untuk memproses audio. Hal ini menyebabkan latensi tambahan yang diperlukan dengan melakukan beberapa permintaan pulang-pergi dan penurunan performa yang biasanya disebabkan oleh arsitektur yang terputus dari penyiapan beberapa model.
 
-กรณีการใช้งานที่กำลังเกิดขึ้นและเป็นมาตรฐานสำหรับบริบทเสียงมีดังนี้
+Beberapa kasus penggunaan baru dan standar untuk konteks audio mencakup:
 
-- การถอดเสียงเป็นคำและการแปลภาษาแบบเรียลไทม์
-- การถามและตอบคำถามเกี่ยวกับพอดแคสต์ / วิดีโอ
-- การถอดเสียงเป็นคำและสรุปการประชุม
-- ผู้ช่วยแบบเสียง
+- Transkripsi dan terjemahan real-time
+- Tanya jawab podcast / video
+- Transkripsi dan peringkasan rapat
+- Asisten suara
 
-ดูข้อมูลเพิ่มเติมเกี่ยวกับการแจ้งด้วยไฟล์เสียงได้ใน[คำแนะนำ
-การแจ้ง](https://ai.google.dev/gemini-api/docs/prompting_with_media?lang=python&hl=th#prompting-with-videos)
+Anda dapat mempelajari lebih lanjut cara membuat perintah dengan file audio di [panduan
+Perintah](https://ai.google.dev/gemini-api/docs/prompting_with_media?lang=python&hl=id#prompting-with-videos).
 
-## การเพิ่มประสิทธิภาพบริบทแบบยาว
+## Pengoptimalan konteks panjang
 
-การเพิ่มประสิทธิภาพหลักเมื่อทำงานกับบริบทที่ยาวและโมเดล Gemini
-คือการใช้[แคชบริบท](https://ai.google.dev/gemini-api/docs/caching?hl=th) นอกจาก การประมวลผลโทเค็นจำนวนมากในคำขอเดียวเป็นไปไม่ได้แล้ว ข้อจำกัดหลักอีกอย่าง หนึ่งคือค่าใช้จ่าย หากคุณมีแอป "แชทกับข้อมูลของคุณ" ที่ผู้ใช้
-อัปโหลด PDF 10 รายการ วิดีโอ และเอกสารงานบางส่วน ในอดีตคุณจะต้อง
-ทำงานกับเครื่องมือ/เฟรมเวิร์กการสร้างการดึงข้อมูลที่เพิ่มประสิทธิภาพ (RAG) ที่ซับซ้อนมากขึ้น
-เพื่อประมวลผลคำขอเหล่านี้และจ่ายค่าโทเค็นจำนวนมาก
-ที่ย้ายไปยังหน้าต่างบริบท ตอนนี้คุณสามารถแคชไฟล์ที่ผู้ใช้
-อัปโหลดและชำระเงินเพื่อจัดเก็บไฟล์เหล่านั้นตามรายชั่วโมงได้แล้ว ตัวอย่างเช่น ต้นทุนอินพุต / เอาต์พุตต่อคำขอที่มี Gemini Flash จะน้อยกว่าต้นทุนอินพุต / เอาต์พุตมาตรฐานประมาณ 4 เท่า ดังนั้นหากผู้ใช้แชทกับข้อมูลของตนมากพอ คุณในฐานะนักพัฒนาซอฟต์แวร์จะประหยัดค่าใช้จ่ายได้มาก
+Pengoptimalan utama saat bekerja dengan konteks panjang dan model Gemini adalah menggunakan [penyimpanan cache konteks](https://ai.google.dev/gemini-api/docs/caching?hl=id). Selain tidak mungkinnya memproses banyak token dalam satu permintaan, batasan utama lainnya adalah biaya. Jika Anda memiliki aplikasi "chat dengan data Anda" tempat pengguna mengupload 10 PDF, satu video, dan beberapa dokumen kerja, Anda harus menggunakan alat/framework pembuatan dengan pengoptimalan pengambilan (RAG) yang lebih kompleks untuk memproses permintaan ini dan membayar sejumlah besar token yang dipindahkan ke jendela konteks. Sekarang, Anda dapat menyimpan dalam cache file yang diupload pengguna dan membayar untuk menyimpannya per jam. Biaya input / output per permintaan dengan Gemini Flash, misalnya, ~4x lebih rendah daripada biaya input / output standar. Jadi, jika pengguna cukup sering melakukan percakapan dengan datanya, Anda sebagai developer akan menghemat biaya yang sangat besar.
 
-## ข้อจำกัดของบริบทแบบยาว
+## Batasan konteks panjang
 
-ในส่วนต่างๆ ของคู่มือนี้ เราได้พูดถึงวิธีที่โมเดล Gemini บรรลุ
-ประสิทธิภาพสูงในการประเมินการดึงข้อมูลแบบเข็มในกองฟางต่างๆ การทดสอบเหล่านี้พิจารณาการตั้งค่าพื้นฐานที่สุด ซึ่งคุณมีเข็มเพียงเล่มเดียวที่กำลังมองหา
-ในกรณีที่คุณอาจมี "เข็ม" หลายเล่มหรือข้อมูลเฉพาะ
-ที่คุณกำลังมองหา โมเดลจะไม่ทำงานด้วยความแม่นยำเท่าเดิม
-ประสิทธิภาพอาจแตกต่างกันอย่างมากตามบริบท คุณควรพิจารณาเรื่องนี้เนื่องจากมีข้อแลกเปลี่ยนโดยธรรมชาติระหว่างการดึงข้อมูลที่ถูกต้องกับการดึงข้อมูลและค่าใช้จ่าย คุณอาจได้รับผลลัพธ์ประมาณ 99% จากการค้นหาครั้งเดียว แต่
-คุณต้องจ่ายค่าโทเค็นอินพุตทุกครั้งที่ส่งคำค้นหานั้น ดังนั้น หากต้องการดึงข้อมูล 100 รายการ และต้องการประสิทธิภาพ 99% คุณก็อาจต้องส่งคำขอ 100 รายการ นี่เป็นตัวอย่างที่ดีที่การแคชบริบท
-สามารถลดต้นทุนที่เกี่ยวข้องกับการใช้โมเดล Gemini ได้อย่างมาก
-ในขณะที่ยังคงรักษาประสิทธิภาพไว้ในระดับสูง
+Di berbagai bagian panduan ini, kami membahas cara model Gemini mencapai performa tinggi di berbagai evaluasi pengambilan informasi dalam tugas mencari jarum dalam tumpukan jerami. Pengujian
+ini mempertimbangkan penyiapan paling dasar, yaitu Anda memiliki satu jarum yang
+Anda cari. Dalam kasus di mana Anda mungkin memiliki beberapa "jarum" atau informasi spesifik yang Anda cari, model tidak akan berperforma dengan akurasi yang sama. Performa dapat sangat bervariasi, bergantung pada konteksnya. Hal ini
+penting untuk dipertimbangkan karena ada pertukaran yang melekat antara mendapatkan
+informasi yang tepat yang diambil dan biaya. Anda bisa mendapatkan akurasi ~99% pada satu kueri, tetapi Anda harus membayar biaya token input setiap kali Anda mengirim kueri tersebut. Jadi, untuk mengambil 100 informasi, jika Anda memerlukan performa 99%, Anda mungkin perlu mengirim 100 permintaan. Ini adalah contoh yang baik tentang tempat penyimpanan cache konteks dapat secara signifikan mengurangi biaya yang terkait dengan penggunaan model Gemini sekaligus menjaga performa tetap tinggi.
 
-## คำถามที่พบบ่อย
+## FAQ
 
-### ฉันควรวางคำค้นหาไว้ที่ใดในหน้าต่างบริบท
+### Di mana tempat terbaik untuk menempatkan kueri saya di jendela konteks?
 
-ในกรณีส่วนใหญ่ โดยเฉพาะอย่างยิ่งหากบริบททั้งหมดมีความยาว โมเดลจะทำงานได้ดีขึ้นหากคุณวางคำค้นหา / คำถามไว้ที่ส่วนท้ายของพรอมต์ (หลังจากบริบทอื่นๆ ทั้งหมด)
+Dalam sebagian besar kasus, terutama jika total konteksnya panjang, performa model akan lebih baik jika Anda menempatkan kueri / pertanyaan di akhir perintah (setelah semua konteks lainnya).
 
-### ประสิทธิภาพของโมเดลจะลดลงไหมเมื่อฉันเพิ่มโทเค็นลงในคำค้นหา
+### Apakah performa model menurun saat saya menambahkan lebih banyak token ke kueri?
 
-โดยทั่วไป หากไม่จำเป็นต้องส่งโทเค็นไปยังโมเดล คุณควรหลีกเลี่ยงการส่งโทเค็น อย่างไรก็ตาม หากคุณมีโทเค็นจำนวนมากที่มีข้อมูลบางอย่างและต้องการถามคำถามเกี่ยวกับข้อมูลนั้น โมเดลจะมีความสามารถสูงในการดึงข้อมูลดังกล่าว (ความแม่นยำสูงสุด 99% ในหลายกรณี)
+Secara umum, jika Anda tidak memerlukan token untuk diteruskan ke model, sebaiknya
+hindari meneruskannya. Namun, jika Anda memiliki sejumlah besar token dengan beberapa
+informasi dan ingin mengajukan pertanyaan tentang informasi tersebut, model ini
+sangat mampu mengekstrak informasi tersebut (dengan akurasi hingga 99% dalam banyak
+kasus).
 
-### ฉันจะลดต้นทุนด้วยการค้นหาที่มีบริบทแบบยาวได้อย่างไร
+### Bagaimana cara menurunkan biaya dengan kueri konteks panjang?
 
-หากคุณมีชุดโทเค็น / บริบทที่คล้ายกันซึ่งต้องการนำกลับมาใช้หลายครั้ง [การแคชบริบท](https://ai.google.dev/gemini-api/docs/caching?hl=th)จะช่วยลดค่าใช้จ่ายที่เกี่ยวข้องกับการถามคำถามเกี่ยวกับข้อมูลนั้นได้
+Jika Anda memiliki kumpulan token / konteks serupa yang ingin digunakan kembali berkali-kali, [penyimpanan cache konteks](https://ai.google.dev/gemini-api/docs/caching?hl=id) dapat membantu mengurangi biaya yang terkait dengan mengajukan pertanyaan tentang informasi tersebut.
 
-### ความยาวบริบทส่งผลต่อเวลาในการตอบสนองของโมเดลไหม
+### Apakah panjang konteks memengaruhi latensi model?
 
-คำขอใดก็ตามจะมีเวลาในการตอบสนองที่แน่นอนไม่มากก็น้อย ไม่ว่าจะมีขนาดเท่าใด แต่โดยทั่วไปแล้ว คำขอที่ยาวกว่าจะมีเวลาในการตอบสนองที่สูงกว่า (เวลาในการแสดงโทเค็นแรก)
+Ada sejumlah latensi tetap dalam setiap permintaan tertentu, terlepas dari
+ukurannya, tetapi umumnya kueri yang lebih panjang akan memiliki latensi yang lebih tinggi (waktu untuk token pertama).
 
-ส่งความคิดเห็น
+Kirim masukan
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-อัปเดตล่าสุด 2026-04-29 UTC
+Terakhir diperbarui pada 2026-04-29 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Ada masukan untuk kami?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-29 UTC"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]

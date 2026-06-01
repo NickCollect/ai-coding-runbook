@@ -1,30 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/file-search?hl=ar
-fetched_at: 2026-05-25T05:20:57.959731+00:00
-title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/file-search?hl=ko
+fetched_at: 2026-06-01T06:04:04.834153+00:00
+title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-إرسال ملاحظات
+의견 보내기
 
-# البحث عن الملفات
+# 파일 검색
 
-تتيح Gemini API ميزة "التوليد المعزّز بالاسترجاع" ("RAG") من خلال أداة "البحث في الملفات". تستورد ميزة "البحث عن الملفات" بياناتك وتقسّمها إلى أجزاء وتفهرسها لتتيح استرجاع المعلومات ذات الصلة بسرعة استنادًا إلى طلب مقدَّم. يتم بعد ذلك استخدام هذه المعلومات المسترجَعة كسياق للنموذج، ما يتيح له تقديم إجابات أكثر دقة وملاءمةً. تتوفّر أيضًا إمكانات البحث المتعدّد الوسائط في ميزة &quot;البحث عن الملفات&quot;، وذلك من خلال تضمين النصوص المتوافق مع `gemini-embedding-001`، وتضمين الصور والوسائط المتعددة المتوافق مع `gemini-embedding-2`.
+Gemini API를 사용하면 파일 검색 도구를 통해 검색 증강 생성 ('RAG')을 사용할 수 있습니다. 파일 검색은 제공된 프롬프트를 기반으로 관련 정보를 빠르게 검색할 수 있도록 데이터를 가져오고, 청크로 나누고, 색인을 생성합니다. 이렇게 검색된 정보는 모델의 컨텍스트로 사용되어 더 정확하고 관련성 있는 답변을 제공할 수 있습니다. 파일 검색은 `gemini-embedding-001`에서 지원하는 텍스트 임베딩과 `gemini-embedding-2`에서 지원하는 이미지/멀티모달 임베딩을 통해 멀티모달 기능을 제공할 수도 있습니다.
 
-تكون عملية تخزين الملفات وإنشاء عمليات التضمين عند وقت طلب البحث مجانية، ولن تدفع إلا مقابل إنشاء عمليات التضمين عند فهرسة ملفاتك للمرة الأولى وتكلفة الرموز المميزة العادية الخاصة بمدخلات ومخرجات نموذج Gemini. يساهم نموذج الفوترة الجديد هذا في تسهيل عملية إنشاء &quot;أداة البحث عن الملفات&quot; وتوسيع نطاقها، كما يجعلها أكثر فعالية من حيث التكلفة. راجِع قسم [الأسعار](#pricing) لمعرفة التفاصيل.
+쿼리 시 파일 저장 및 임베딩 생성은 무료이며, 파일을 처음 색인화할 때 임베딩 생성 비용과 일반 Gemini 모델 입력 / 출력 토큰 비용만 지불하면 됩니다. 이 새로운 청구 패러다임 덕분에 파일 검색 도구를 더 쉽고 비용 효율적으로 빌드하고 확장할 수 있습니다. 자세한 내용은 [가격 책정](#pricing) 섹션을 참고하세요.
 
-## التحميل مباشرةً إلى "متجر البحث عن الملفات"
+## 파일 검색 스토어에 직접 업로드
 
-يوضّح هذا المثال كيفية تحميل ملف مباشرةً إلى [مستودع البحث عن الملفات](https://ai.google.dev/api/file-search/file-search-stores?hl=ar#method:-media.uploadtofilesearchstore):
+다음은 [파일 검색 스토어](https://ai.google.dev/api/file-search/file-search-stores?hl=ko#method:-media.uploadtofilesearchstore)에 파일을 직접 업로드하는 방법을 보여주는 예시입니다.
 
 ### Python
 
@@ -72,7 +73,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const { GoogleGenAI } = require('@google/genai');
@@ -121,11 +122,11 @@ async function run() {
 run();
 ```
 
-راجِع مرجع واجهة برمجة التطبيقات [`uploadToFileSearchStore`](https://ai.google.dev/api/file-search/file-search-stores?hl=ar#method:-media.uploadtofilesearchstore) للحصول على مزيد من المعلومات.
+자세한 내용은 [`uploadToFileSearchStore`](https://ai.google.dev/api/file-search/file-search-stores?hl=ko#method:-media.uploadtofilesearchstore) API 참조를 확인하세요.
 
-## استيراد الملفات
+## 파일 가져오기
 
-بدلاً من ذلك، يمكنك تحميل ملف حالي و[استيراده إلى مساحة تخزين البحث عن الملفات](https://ai.google.dev/api/file-search/file-search-stores?hl=ar#method:-filesearchstores.importfile) باتّباع الخطوات التالية:
+또는 기존 파일을 업로드하고 [파일 검색 저장소로 가져올 수 있습니다](https://ai.google.dev/api/file-search/file-search-stores?hl=ko#method:-filesearchstores.importfile).
 
 ### Python
 
@@ -172,7 +173,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const { GoogleGenAI } = require('@google/genai');
@@ -223,11 +224,11 @@ async function run() {
 run();
 ```
 
-راجِع مرجع واجهة برمجة التطبيقات [`importFile`](https://ai.google.dev/api/file-search/file-search-stores?hl=ar#method:-filesearchstores.importfile) للحصول على مزيد من المعلومات.
+자세한 내용은 [`importFile`](https://ai.google.dev/api/file-search/file-search-stores?hl=ko#method:-filesearchstores.importfile) API 참조를 확인하세요.
 
-## إعدادات تقسيم المحتوى
+## 청크 구성
 
-عند استيراد ملف إلى مستودع &quot;البحث عن الملفات&quot;، يتم تقسيمه تلقائيًا إلى أجزاء، وتضمينه، وفهرسته، وتحميله إلى مستودع &quot;البحث عن الملفات&quot;. إذا كنت بحاجة إلى المزيد من التحكّم في استراتيجية التقسيم، يمكنك تحديد إعداد [`chunking_config`](https://ai.google.dev/api/file-search/file-search-stores?hl=ar#request-body_5) لضبط الحد الأقصى لعدد الرموز المميزة لكل جزء والحد الأقصى لعدد الرموز المميزة المتداخلة.
+파일을 파일 검색 스토어로 가져오면 파일이 자동으로 청크로 분할되고, 삽입되고, 색인이 생성되고, 파일 검색 스토어로 업로드됩니다. 청크 전략을 더 세부적으로 관리해야 하는 경우 [`chunking_config`](https://ai.google.dev/api/file-search/file-search-stores?hl=ko#request-body_5) 설정을 지정하여 청크당 최대 토큰 수와 중복되는 최대 토큰 수를 설정할 수 있습니다.
 
 ### Python
 
@@ -258,7 +259,7 @@ while not operation.done:
 print("Custom chunking complete.")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const { GoogleGenAI } = require('@google/genai');
@@ -286,41 +287,36 @@ while (!operation.done) {
 console.log("Custom chunking complete.");
 ```
 
-لاستخدام متجر "بحث الملفات"، مرِّره كأداة إلى طريقة `generateContent`، كما هو موضّح في المثالَين [تحميل](#upload) و[استيراد](#importing-files).
+파일 검색 저장소를 사용하려면 [업로드](#upload) 및 [가져오기](#importing-files) 예시에 표시된 대로 `generateContent` 메서드에 도구로 전달합니다.
 
-## آلية العمل
+## 작동 방식
 
-تستخدم ميزة &quot;البحث عن الملفات&quot; أسلوبًا يُعرف باسم البحث الدلالي للعثور على معلومات ذات صلة بطلب المستخدم. على عكس البحث العادي المستند إلى الكلمات الرئيسية، يفهم البحث الدلالي المعنى والسياق الخاصين بطلب البحث.
+파일 검색은 시맨틱 검색이라는 기법을 사용하여 사용자 프롬프트와 관련된 정보를 찾습니다. 표준 키워드 기반 검색과 달리 시맨틱 검색은 질문의 의미와 컨텍스트를 이해합니다.
 
-عند استيراد ملف، يتم تحويله إلى تمثيلات رقمية تُعرف باسم
-[التضمينات](https://ai.google.dev/gemini-api/docs/embeddings?hl=ar)، وهي تلتقط المعنى الدلالي للمحتوى الذي تم تحميله. يتم تخزين هذه التضمينات في قاعدة بيانات متخصصة في "البحث عن الملفات".
-عند إجراء طلب بحث، يتم تحويله أيضًا إلى تضمين. بعد ذلك، يجري النظام عملية &quot;بحث في الملفات&quot; للعثور على أجزاء المستندات الأكثر تشابهًا وملاءمةً من مستودع &quot;بحث في الملفات&quot;.
+파일을 가져오면 업로드된 콘텐츠의 시맨틱 의미를 포착하는 [임베딩](https://ai.google.dev/gemini-api/docs/embeddings?hl=ko)이라는 숫자 표현으로 변환됩니다. 이러한 임베딩은 특수 파일 검색 데이터베이스에 저장됩니다.
+쿼리를 입력하면 쿼리도 임베딩으로 변환됩니다. 그런 다음 시스템은 파일 검색을 실행하여 파일 검색 저장소에서 가장 유사하고 관련성 높은 문서 청크를 찾습니다.
 
-لا تتوفّر مدة بقاء (TTL) للتضمينات، بل تبقى متاحة إلى أن يتم حذفها يدويًا أو عند إيقاف النموذج نهائيًا. أما الملفات، فيتم حذفها بعد 48 ساعة.
+삽입에는 TTL (수명)이 없습니다. 수동으로 삭제하거나 모델이 지원 중단될 때까지 유지됩니다. 파일은 48시간 후에 삭제됩니다.
 
-في ما يلي تفصيل لعملية استخدام واجهة برمجة التطبيقات File Search
-`uploadToFileSearchStore`:
+파일 검색 `uploadToFileSearchStore` API를 사용하는 과정은 다음과 같습니다.
 
-1. **إنشاء مستودع "بحث في الملفات"**: يحتوي مستودع "بحث في الملفات" على البيانات المعالَجة من ملفاتك. وهي الحاوية الدائمة لعمليات التضمين التي سيتم إجراء البحث الدلالي عليها.
-2. **تحميل ملف واستيراده إلى مستودع &quot;البحث عن الملفات&quot;**: يمكنك تحميل ملف واستيراد النتائج إلى مستودع &quot;البحث عن الملفات&quot; في الوقت نفسه. يؤدي ذلك إلى إنشاء كائن `File` مؤقت، وهو مرجع إلى مستندك الأولي. بعد ذلك، يتم تقسيم هذه البيانات إلى أجزاء وتحويلها إلى تضمينات &quot;بحث الملفات&quot; وفهرستها. يتم حذف عنصر `File` بعد 48 ساعة، بينما يتم تخزين البيانات التي تم استيرادها إلى مساحة تخزين &quot;البحث عن الملفات&quot; إلى أجل غير مسمى إلى أن تختار حذفها.
-3. **طلب البحث باستخدام "البحث عن الملفات"**: أخيرًا، يمكنك استخدام أداة `FileSearch` في مكالمة `generateContent`. في إعدادات الأداة، يمكنك تحديد
-   `FileSearchRetrievalResource`، الذي يشير إلى `FileSearchStore` الذي تريد البحث فيه. يطلب ذلك من النموذج إجراء بحث دلالي في مخزن &quot;بحث الملفات&quot; المحدّد للعثور على معلومات ذات صلة يستند إليها في رده.
+1. **파일 검색 스토어 만들기**: 파일 검색 스토어에는 파일에서 처리된 데이터가 포함됩니다. 시맨틱 검색이 작동하는 임베딩의 영구 컨테이너입니다.
+2. **파일을 업로드하고 파일 검색 스토어로 가져오기**: 파일을 동시에 업로드하고 결과를 파일 검색 스토어로 가져옵니다. 이렇게 하면 원시 문서를 참조하는 임시 `File` 객체가 생성됩니다. 그런 다음 데이터가 청크로 분할되고, 파일 검색 임베딩으로 변환되고, 색인이 생성됩니다. `File`
+   객체는 48시간 후에 삭제되지만 파일 검색 스토어로 가져온 데이터는 삭제할 때까지 무기한 저장됩니다.
+3. **파일 검색으로 쿼리**: 마지막으로 `generateContent` 호출에서 `FileSearch` 도구를 사용합니다. 도구 구성에서 검색할 `FileSearchStore`를 가리키는 `FileSearchRetrievalResource`를 지정합니다. 이렇게 하면 모델이 해당 특정 파일 검색 스토어에서 시맨틱 검색을 실행하여 대답의 근거가 될 관련 정보를 찾습니다.
 
-![عملية الفهرسة وطلب البحث في &quot;بحث الملفات&quot;](https://ai.google.dev/static/gemini-api/docs/images/File-search.png?hl=ar)
+![파일 검색의 색인 생성 및 쿼리 프로세스](https://ai.google.dev/static/gemini-api/docs/images/File-search.png?hl=ko)
 
-عملية الفهرسة والبحث في &quot;بحث الملفات&quot;
+파일 검색의 색인 생성 및 쿼리 프로세스
 
-في هذا الرسم التخطيطي، يمثّل الخط المتقطّع من *المستندات* إلى *نموذج التضمين*
-(باستخدام [`gemini-embedding-001`](https://ai.google.dev/gemini-api/docs/embeddings?hl=ar))
-واجهة برمجة التطبيقات `uploadToFileSearchStore` (مع تجاوز *تخزين الملفات*).
-في ما عدا ذلك، يؤدي استخدام [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ar) لإنشاء الملفات بشكل منفصل ثم استيرادها إلى نقل عملية الفهرسة من *المستندات* إلى *مساحة تخزين الملفات* ثم إلى *نموذج التضمين*.
+이 다이어그램에서 *문서*에서 *임베딩 모델*([`gemini-embedding-001`](https://ai.google.dev/gemini-api/docs/embeddings?hl=ko) 사용)로 연결되는 점선은 `uploadToFileSearchStore` API (*파일 저장소* 우회)를 나타냅니다.
+그렇지 않으면 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ko)를 사용하여 파일을 별도로 만든 후 가져오면 색인 생성 프로세스가 *Documents*에서 *File storage*로 이동한 후 *Embedding model*로 이동합니다.
 
-## متاجر "بحث الملفات"
+## 파일 검색 스토어
 
-مخزن "البحث عن الملفات" هو حاوية لتضمينات المستندات. في حين يتم حذف الملفات الأولية التي تم تحميلها من خلال File API بعد 48 ساعة، يتم تخزين البيانات التي تم استيرادها إلى مستودع "بحث الملفات" إلى أجل غير مسمى إلى أن تحذفها يدويًا. يمكنك إنشاء عدة مستودعات بحث في الملفات لتنظيم مستنداتك. تتيح لك واجهة برمجة التطبيقات
-`FileSearchStore` إنشاء قوائم بملفاتك وحذفها والبحث عنها وإدارتها. تكون أسماء متاجر "بحث الملفات" محدّدة النطاق على مستوى العالم.
+파일 검색 저장소는 문서 임베딩의 컨테이너입니다. 파일 API를 통해 업로드된 원시 파일은 48시간 후에 삭제되지만 파일 검색 스토어로 가져온 데이터는 수동으로 삭제할 때까지 무기한 저장됩니다. 문서를 정리하기 위해 여러 파일 검색 저장소를 만들 수 있습니다. `FileSearchStore` API를 사용하면 파일 검색 저장소를 생성, 나열, 가져오기, 삭제하여 관리할 수 있습니다. 파일 검색 스토어 이름은 전역 범위입니다.
 
-في ما يلي بعض الأمثلة على كيفية إدارة متاجر "بحث الملفات":
+파일 검색 저장소를 관리하는 방법의 몇 가지 예는 다음과 같습니다.
 
 ### Python
 
@@ -340,7 +336,7 @@ my_file_search_store = client.file_search_stores.get(name='fileSearchStores/my-f
 client.file_search_stores.delete(name='fileSearchStores/my-file_search-store-123', config={'force': True})
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const fileSearchStore = await ai.fileSearchStores.create({
@@ -379,12 +375,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/my-file_
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/my-file_search-store-123?key=${GEMINI_API_KEY}"
 ```
 
-## مستندات "البحث في الملفات"
+## 파일 검색 문서
 
-يمكنك إدارة المستندات الفردية في مخازن الملفات باستخدام واجهة برمجة التطبيقات
-[File Search Documents](https://ai.google.dev/api/file-search/documents?hl=ar) من أجل `list` كل مستند
-في مخزن بحث الملفات، و`get` معلومات حول مستند، و`delete` مستند
-حسب الاسم.
+[파일 검색 문서](https://ai.google.dev/api/file-search/documents?hl=ko) API를 사용하여 파일 저장소의 개별 문서를 관리하여 파일 검색 저장소에서 각 문서를 `list`하고, 문서에 관한 정보를 `get`하고, 이름으로 문서를 `delete`할 수 있습니다.
 
 ### Python
 
@@ -398,7 +391,7 @@ print(file_search_document)
 client.file_search_stores.documents.delete(name='fileSearchStores/my-file_search-store-123/documents/my_doc')
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const documents = await ai.fileSearchStores.documents.list({
@@ -427,9 +420,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/my-file_
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/my-file_search-store-123/documents/my_doc?key=${GEMINI_API_KEY}"
 ```
 
-## البيانات الوصفية للملف
+## 파일 메타데이터
 
-يمكنك إضافة بيانات وصفية مخصّصة إلى ملفاتك للمساعدة في فلترتها أو تقديم سياق إضافي. بيانات التعريف هي مجموعة من أزواج المفاتيح والقيم.
+파일을 필터링하거나 추가 컨텍스트를 제공하기 위해 파일에 맞춤 메타데이터를 추가할 수 있습니다. 메타데이터는 키-값 쌍의 집합입니다.
 
 ### Python
 
@@ -444,7 +437,7 @@ op = client.file_search_stores.import_file(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 let operation = await ai.fileSearchStores.importFile({
@@ -459,7 +452,7 @@ let operation = await ai.fileSearchStores.importFile({
 });
 ```
 
-يكون ذلك مفيدًا عندما يكون لديك مستندات متعددة في متجر "بحث الملفات" وتريد البحث في مجموعة فرعية منها فقط.
+이는 파일 검색 저장소에 여러 문서가 있고 그중 일부만 검색하려는 경우에 유용합니다.
 
 ### Python
 
@@ -482,7 +475,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const response = await ai.models.generateContent({
@@ -524,15 +517,15 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 cat response.json
 ```
 
-يمكن العثور على إرشادات حول تنفيذ بنية فلتر القائمة الخاصة بـ `metadata_filter` على الرابط [google.aip.dev/160](https://google.aip.dev/160).
+`metadata_filter`의 목록 필터 문법 구현에 관한 안내는 [google.aip.dev/160](https://google.aip.dev/160)에서 확인할 수 있습니다.
 
-## البحث المتعدد الوسائط في الملفات
+## 멀티모달 파일 검색
 
-تتيح لك ميزة "البحث في الملفات" المتعدّد الوسائط تضمين الصور والبحث فيها بشكلٍ أصلي، ما يتيح إنشاء تطبيقات غنية ومتعدّدة الوسائط تستخدم "التوليد المعزّز بالاسترجاع".
+멀티모달 파일 검색을 사용하면 이미지를 기본적으로 삽입하고 검색하여 풍부한 멀티모달 RAG 애플리케이션을 사용할 수 있습니다.
 
-### ضبط نموذج التضمين
+### 임베딩 모델 구성
 
-عند إنشاء `FileSearchStore`، عليك تجاهل نموذج التضمين التلقائي النصي فقط واستخدام نموذج متعدد الوسائط. استخدِم `models/gemini-embedding-2` لمعالجة كل من النص والصور.
+`FileSearchStore`을 만들 때 멀티모달 모델을 사용하려면 기본 텍스트 전용 임베딩 모델을 재정의해야 합니다. `models/gemini-embedding-2`를 사용하여 텍스트와 이미지를 모두 처리합니다.
 
 ### Python
 
@@ -545,7 +538,7 @@ store = client.file_search_stores.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const fileSearchStore = await ai.fileSearchStores.create({
@@ -567,20 +560,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/fileSearchStores?
     }'
 ```
 
-### تحميل صور
+### 이미지 업로드
 
-بعد إنشاء المتجر باستخدام نموذج التضمين المتعدّد الوسائط، يمكنك تحميل ملفات الصور مباشرةً باستخدام واجهات برمجة التطبيقات نفسها الخاصة بالتحميل والموضّحة في [التحميل مباشرةً إلى متجر "بحث الملفات"](#upload) أو [استيراد الملفات](#importing-files).
+멀티모달 임베딩 모델로 스토어를 만든 후 [파일 검색 스토어에 직접 업로드](#upload) 또는 [파일 가져오기](#importing-files)에 설명된 것과 동일한 업로드 API를 사용하여 이미지 파일을 직접 업로드할 수 있습니다.
 
-**متطلبات ملف الصورة:**
+**이미지 파일 요구사항:**
 
-- يجب ألا تزيد دقة ملفات الصور عن 4K x 4K بكسل.
-- التنسيقات المتوافقة هي PNG وJPEG.
+- 이미지 파일의 해상도는 4K x 4K 픽셀 이하여야 합니다.
+- 지원되는 형식은 PNG, JPEG입니다.
 
-## الاقتباسات
+## 인용
 
-عند استخدام &quot;البحث عن الملفات&quot;، قد يتضمّن ردّ النموذج اقتباسات تحدّد الأجزاء من المستندات التي حمّلتها والتي تم استخدامها لإنشاء الإجابة. ويساعد ذلك في التحقّق من صحة المعلومات.
+파일 검색을 사용하면 모델의 대답에 업로드된 문서 중 대답을 생성하는 데 사용된 부분을 지정하는 인용이 포함될 수 있습니다. 이는 사실 확인 및 검증에 도움이 됩니다.
 
-يمكنك الوصول إلى معلومات الاقتباس من خلال السمة `grounding_metadata` في الرد.
+응답의 `grounding_metadata` 속성을 통해 인용 정보에 액세스할 수 있습니다.
 
 ### Python
 
@@ -588,18 +581,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/fileSearchStores?
 print(response.candidates[0].grounding_metadata)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 console.log(JSON.stringify(response.candidates?.[0]?.groundingMetadata, null, 2));
 ```
 
-للحصول على معلومات مفصّلة حول بنية البيانات الوصفية الخاصة بالاستناد إلى مصادر، يمكنك الاطّلاع على الأمثلة في [كتاب الطبخ الخاص بميزة &quot;البحث عن الملفات&quot;](https://github.com/google-gemini/cookbook/blob/main/quickstarts/File_Search.ipynb) أو [قسم &quot;الاستناد إلى مصادر&quot; في مستندات &quot;الاستناد إلى مصادر مع بحث Google&quot;](https://ai.google.dev/gemini-api/docs/google-search?hl=ar#attributing_sources_with_inline_citations).
+그라운딩 메타데이터의 구조에 관한 자세한 내용은 [파일 검색 쿡북](https://github.com/google-gemini/cookbook/blob/main/quickstarts/File_Search.ipynb) 또는 [Google 검색으로 그라운딩](https://ai.google.dev/gemini-api/docs/google-search?hl=ko#attributing_sources_with_inline_citations) 문서의 그라운딩 섹션에 있는 예를 참고하세요.
 
-### أرقام الصفحات
+### 페이지 번호
 
-عند استخدام ميزة "البحث في الملفات" مع المستندات التي تتضمّن صفحات (مثل ملفات PDF)، قد يتضمّن ردّ النموذج رقم الصفحة التي تم العثور على المعلومات فيها.
-يمكنك الوصول إلى هذه المعلومات من خلال السمة `page_number` الخاصة بـ `retrieved_context`.
+페이지가 있는 문서 (예: PDF)로 파일 검색을 사용하면 모델의 대답에 정보가 발견된 페이지 번호가 포함될 수 있습니다.
+이 정보는 `retrieved_context`의 `page_number` 속성을 통해 액세스할 수 있습니다.
 
 ### Python
 
@@ -610,7 +603,7 @@ for chunk in response.grounding_metadata.grounding_chunks:
        print(f"Cited Page: {chunk.retrieved_context.page_number}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const groundingMetadata = response.candidates[0].groundingMetadata;
@@ -621,11 +614,11 @@ for (const chunk of groundingMetadata.groundingChunks) {
 }
 ```
 
-### اقتباسات من الوسائط
+### 미디어 인용
 
-عندما يشير النموذج إلى جزء من صورة أثناء عملية الإنشاء، تعرض واجهة برمجة التطبيقات اقتباسًا في البيانات الوصفية لتحديد المصدر يتضمّن `media_id`. يمكنك استخدام هذا المعرّف لتنزيل جزء الصورة الذي أشار إليه النموذج بالضبط. يكون هذا `media_id` ثابتًا في طلبات البحث المتعددة، ما يتيح لك استرداد الصورة نفسها أو تخزينها مؤقتًا بشكل موثوق باستخدام المعرّف.
+모델이 생성 중에 이미지 청크를 참조하면 API는 `media_id`가 포함된 그라운딩 메타데이터에 인용을 반환합니다. 이 ID를 사용하여 모델이 참조한 정확한 이미지 청크를 다운로드할 수 있습니다. 이 `media_id`는 여러 검색 호출에서 지속되므로 ID를 사용하여 동일한 이미지를 안정적으로 가져오거나 캐시할 수 있습니다.
 
-المقتطف التالي هو مثال على استجابة REST:
+다음 스니펫은 REST 응답의 예입니다.
 
 ```
 "groundingMetadata": {
@@ -641,7 +634,7 @@ for (const chunk of groundingMetadata.groundingChunks) {
 }
 ```
 
-توضّح مقتطفات الرموز البرمجية التالية كيفية استرداد `media_id` وتنزيل الوسائط:
+다음 코드 스니펫은 `media_id`를 가져오고 미디어를 다운로드하는 방법을 보여줍니다.
 
 ### Python
 
@@ -657,7 +650,7 @@ for chunk in response.grounding_metadata.grounding_chunks:
        # Save blob_content to file...
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const groundingMetadata = response.candidates[0].groundingMetadata;
@@ -677,10 +670,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1/fileSearchStores/my-st
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## البيانات الوصفية المخصّصة في بيانات التأسيس
+## 그라운딩 데이터의 맞춤 메타데이터
 
-إذا أضفت بيانات وصفية مخصّصة إلى ملفاتك، يمكنك الوصول إليها في البيانات الوصفية الخاصة بالمستندات الأساسية التي استند إليها ردّ النموذج. ويكون ذلك مفيدًا لتمرير سياق إضافي (مثل عناوين URL أو أرقام الصفحات أو المؤلّفين) من المستندات المصدر إلى منطق التطبيق. يحتوي كل `grounding_chunk` في
-`retrieved_context` على هذه البيانات الوصفية المخصّصة.
+파일에 맞춤 메타데이터를 추가한 경우 모델 응답의 그라운딩 메타데이터에서 액세스할 수 있습니다. 이는 소스 문서에서 애플리케이션 로직으로 URL, 페이지 번호, 작성자와 같은 추가 컨텍스트를 전달하는 데 유용합니다. `retrieved_context`의 각 `grounding_chunk`에는 이 맞춤 메타데이터가 포함됩니다.
 
 ### Python
 
@@ -708,7 +700,7 @@ for chunk in response.candidates[0].grounding_metadata.grounding_chunks:
                 print(f"Value: {metadata.string_value or metadata.numeric_value}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const response = await ai.models.generateContent({
@@ -773,10 +765,9 @@ groundingMetadata.groundingChunks.forEach((chunk) => {
 }
 ```
 
-## الناتج المنظَّم
+## 구조화된 출력
 
-بدءًا من نماذج Gemini 3، يمكنك دمج أداة البحث عن الملفات مع
-[النتائج المنظَّمة](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar).
+Gemini 3 모델부터 파일 검색 도구를 [구조화된 출력](https://ai.google.dev/gemini-api/docs/structured-output?hl=ko)과 결합할 수 있습니다.
 
 ### Python
 
@@ -805,7 +796,7 @@ result = Money.model_validate_json(response.text)
 print(result)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { z } from "zod";
@@ -874,29 +865,28 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-## النماذج المتوافقة
+## 지원되는 모델
 
-تتيح الطُرز التالية استخدام ميزة "البحث عن الملفات":
+다음 모델은 파일 검색을 지원합니다.
 
-| الطراز | البحث عن الملفات |
+| 모델 | 파일 검색 |
 | --- | --- |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ar) | ✔️ |
-| [إصدار تجريبي من Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/gemini-3.1-pro-preview?hl=ar) | ✔️ |
-| [‫Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ar) | ✔️ |
-| [معاينة Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=ar) | ✔️ |
-| [معاينة Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ar) | ✔️ |
-| [‫Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ar) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ar) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ko) | ✔️ |
+| [Gemini 3.1 Pro 프리뷰](https://ai.google.dev/gemini-api/docs/gemini-3.1-pro-preview?hl=ko) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ko) | ✔️ |
+| [Gemini 3 Flash 프리뷰](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ko) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ko) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ko) | ✔️ |
 
-## مجموعات الأدوات المتوافقة
+## 지원되는 도구 조합
 
-تتيح نماذج Gemini 3 الجمع بين الأدوات المضمّنة (مثل "البحث عن الملفات") والأدوات المخصّصة (استدعاء الدالة). يمكنك الاطّلاع على مزيد من المعلومات في صفحة [مجموعات الأدوات](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ar).
+Gemini 3 모델은 기본 제공 도구 (예: 파일 검색)와 맞춤 도구 (함수 호출)의 조합을 지원합니다. [도구 조합](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ko) 페이지에서 자세히 알아보세요.
 
-## أنواع الملفات المعتمدة
+## 지원되는 파일 형식
 
-يتيح &quot;بحث الملفات&quot; مجموعة كبيرة من تنسيقات الملفات، كما هو موضّح في الأقسام التالية.
+파일 검색은 다음 섹션에 나열된 다양한 파일 형식을 지원합니다.
 
-### أنواع ملفات التطبيقات
+### 애플리케이션 파일 형식
 
 - `application/dart`
 - `application/ecmascript`
@@ -929,7 +919,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 - `application/xml`
 - `application/zip`
 
-### أنواع الملفات النصية
+### 텍스트 파일 형식
 
 - `text/1d-interleaved-parityfec`
 - `text/RED`
@@ -1088,42 +1078,40 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 - `text/xml-external-parsed-entity`
 - `text/yaml`
 
-## القيود
+## 제한사항
 
-- **واجهة برمجة التطبيقات المباشرة:** لا تتوفّر ميزة &quot;البحث عن الملفات&quot; في
-  [واجهة برمجة التطبيقات المباشرة](https://ai.google.dev/gemini-api/docs/live?hl=ar).
-- **عدم التوافق مع أدوات أخرى:** لا يمكن استخدام &quot;البحث عن ملف&quot; مع أدوات أخرى، مثل [تحديد المصدر من خلال &quot;بحث Search&quot;](https://ai.google.dev/gemini-api/docs/google-search?hl=ar) و[سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar) وغيرها في الوقت الحالي.
+- **Live API:** [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ko)에서는 파일 검색이 지원되지 않습니다.
+- **도구 비호환성:** 현재 파일 검색은 [Google 검색을 사용한 그라운딩](https://ai.google.dev/gemini-api/docs/google-search?hl=ko), [URL 컨텍스트](https://ai.google.dev/gemini-api/docs/url-context?hl=ko) 등의 다른 도구와 결합할 수 없습니다.
 
-### حدود معدّل الاستخدام
+### 비율 제한
 
-تفرض واجهة برمجة التطبيقات "بحث الملفات" الحدود التالية لضمان استقرار الخدمة:
+File Search API에는 서비스 안정성을 위해 다음과 같은 한도가 적용됩니다.
 
-- **الحدّ الأقصى لحجم الملف / الحدّ الأقصى لكل مستند**: 100 ميغابايت
-- **إجمالي حجم مساحات تخزين "البحث عن الملفات" في المشروع** (استنادًا إلى فئة المستخدم):
-  - **مجانًا**: 1 غيغابايت
-  - **المستوى 1**: 10 غيغابايت
-  - **المستوى 2**: ‏100 غيغابايت
-  - **المستوى 3**: 1 تيرابايت
-- **اقتراح**: يجب ألا يتجاوز حجم كل مستودع بيانات في "بحث الملفات" 20 غيغابايت لضمان أفضل أوقات استرجاع.
+- **최대 파일 크기 / 문서당 한도**: 100MB
+- **프로젝트 파일 검색 저장소의 총 크기** (사용자 등급 기준):
+  - **무료**: 1GB
+  - **Tier 1**: 10 GB
+  - **Tier 2**: 100 GB
+  - **Tier 3**: 1 TB
+- **권장사항**: 최적의 검색 지연 시간을 보장하려면 각 파일 검색 스토어의 크기를 20GB 미만으로 제한하세요.
 
-## الأسعار
+## 가격 책정
 
-- يتم تحصيل رسوم منك مقابل التضمينات في وقت الفهرسة استنادًا إلى [أسعار التضمينات](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#gemini-embedding-2) الحالية.
-- تتوفر مساحة التخزين بدون أي رسوم.
-- إنّ تضمينات وقت طلب البحث مجانية.
-- يتم تحصيل رسوم من الرموز المميزة للمستندات التي تم استرجاعها باعتبارها
-  [رموزًا مميزة للسياق](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) عادية.
+- 기존 [임베딩 가격 책정](https://ai.google.dev/gemini-api/docs/pricing?hl=ko#gemini-embedding-2)에 따라 색인 생성 시 임베딩 비용이 청구됩니다.
+- 저장 공간은 무료입니다.
+- 쿼리 시간 임베딩은 무료입니다.
+- 검색된 문서 토큰은 일반 [컨텍스트 토큰](https://ai.google.dev/gemini-api/docs/tokens?hl=ko)으로 청구됩니다.
 
-## الخطوات التالية
+## 다음 단계
 
-- انتقِل إلى مرجع واجهة برمجة التطبيقات [File Search Stores](https://ai.google.dev/api/file-search/file-search-stores?hl=ar) و[Documents](https://ai.google.dev/api/file-search/documents?hl=ar) في File Search.
+- [파일 검색 스토어](https://ai.google.dev/api/file-search/file-search-stores?hl=ko) 및 파일 검색 [문서](https://ai.google.dev/api/file-search/documents?hl=ko)의 API 참조를 확인하세요.
 
-إرسال ملاحظات
+의견 보내기
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-تاريخ التعديل الأخير: 2026-05-19 (حسب التوقيت العالمي المتفَّق عليه)
+최종 업데이트: 2026-05-28(UTC)
 
-هل تريد مشاركة ملاحظاتك معنا؟
+의견을 전달하고 싶나요?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-19 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-05-28(UTC)"],[],[]]

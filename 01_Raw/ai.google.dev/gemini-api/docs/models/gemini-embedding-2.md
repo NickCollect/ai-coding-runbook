@@ -1,45 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=ja
-fetched_at: 2026-05-25T05:23:02.224554+00:00
-title: "Gemini Embedding 2 \u30e2\u30c7\u30eb \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=he
+fetched_at: 2026-06-01T06:00:43.813643+00:00
+title: "\u05de\u05d5\u05d3\u05dc Gemini Embedding 2 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-フィードバックを送信
+שליחת משוב
 
-# Gemini Embedding 2 モデル
+# מודל Gemini Embedding 2
 
-テキスト、画像、動画、音声、PDF を単一の統合エンベディング空間に効率的に数値マッピングする、初のマルチモーダル エンベディング モデル。Gemini Embedding 2 モデルは、大規模なマルチモーダル データセット全体で高速でスケーラブルな類似性計算を必要とする、クロスモーダル セマンティック検索、ドキュメント検索、レコメンデーション システムに最適です。
+מודל ההטמעה המולטי-מודאלי הראשון שלנו, שמספק מיפוי מספרי יעיל של טקסט, תמונות, סרטונים, אודיו וקובצי PDF למרחב הטמעה מאוחד אחד. מודל Gemini Embedding 2 הוא המודל הכי טוב לחיפוש סמנטי חוצה-אופנים, לאחזור מסמכים ולמערכות המלצות שדורשות חישובי דמיון מהירים וניתנים להרחבה על קבוצות גדולות של נתונים מולטי-מודאליים.
 
-## ドキュメント
+## מאמרי עזרה
 
-機能と機能の全容については、[エンベディング](https://ai.google.dev/gemini-api/docs/embeddings?hl=ja)のページをご覧ください。
+למידע מלא על התכונות והיכולות, אפשר לעבור לדף [Embeddings](https://ai.google.dev/gemini-api/docs/embeddings?hl=he).
 
 ## gemini-embedding-2
 
-| プロパティ | 説明 |
+| נכס | תיאור |
 | --- | --- |
-| id\_cardモデルコード | **Gemini API**  `gemini-embedding-2` |
-| save でサポートされるデータ型 | **入力**  テキスト、画像、動画、音声、PDF  **出力**  テキスト エンベディング |
-| token\_autoトークン上限[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ja) | **入力トークンの上限**  8,192  **出力ディメンションのサイズ**  柔軟、サポート: 128 ～ 3072、推奨: 768、1536、3072 |
-| 123 バージョン | 詳細については、[モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja#model-versions)をご覧ください。  - 安定版: `gemini-embedding-2` |
-| calendar\_month最終更新日 | 2026 年 4 月 |
+| id\_cardקוד מודל | ‫**Gemini API**  `gemini-embedding-2` |
+| saveסוגי נתונים נתמכים | **קלט**  טקסט, תמונה, סרטון, אודיו, PDF  **פלט**  הטמעות של טקסט |
+| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  8,192  **גודל מאפיין הפלט**  גמיש, תומך בערכים: 128 עד 3072, מומלץ: 768, ‏ 1536, ‏ 3072 |
+| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - יציב: `gemini-embedding-2` |
+| calendar\_monthהעדכון האחרון | אפריל 2026 |
 
-フィードバックを送信
+שליחת משוב
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-最終更新日 2026-04-29 UTC。
+עדכון אחרון: 2026-04-29 (שעון UTC).
 
-ご意見をお聞かせください
+רוצה לתת לנו משוב?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]

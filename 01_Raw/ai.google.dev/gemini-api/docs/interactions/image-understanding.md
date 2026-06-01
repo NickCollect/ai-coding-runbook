@@ -1,39 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=es-419
-fetched_at: 2026-05-25T05:22:41.546159+00:00
-title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=ko
+fetched_at: 2026-06-01T06:07:05.287283+00:00
+title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Enviar comentarios
+의견 보내기
 
-# Comprensión de imágenes
+# 이미지 이해
 
-Los modelos de Gemini se diseñaron para ser multimodales desde cero, lo que permite realizar una amplia variedad de tareas de procesamiento de imágenes y visión artificial, como la creación de leyendas de imágenes, la clasificación y la respuesta a preguntas visuales, sin tener que entrenar modelos de AA especializados.
+Gemini 모델은 처음부터 멀티모달로 빌드되어 전문 ML 모델을 학습시키지 않고도 이미지 캡션, 분류, 시각적 질의 응답을 비롯한 다양한 이미지 처리 및 컴퓨터 비전 작업을 수행할 수 있습니다.
 
-Además de sus capacidades multimodales generales, los modelos de Gemini ofrecen una **mayor precisión** para casos de uso específicos, como la [detección de objetos](#object-detection) y la [segmentación](#segmentation), a través de entrenamiento adicional.
+Gemini 모델은 일반적인 멀티모달 기능 외에도 추가
+학습을 통해 [객체 감지](#object-detection) 및 [세분화](#segmentation)와 같은 특정 사용 사례에 대해
+**향상된 정확성**을 제공합니다.
 
-## Cómo pasar imágenes a Gemini
+## Gemini에 이미지 전달
 
-Puedes proporcionar imágenes como entrada a Gemini de varias maneras:
+다음과 같은 여러 가지 방법을 사용하여 Gemini에 이미지를 입력으로 제공할 수 있습니다.
 
-- [Pasa la imagen con la URL](#url-image): Es ideal para imágenes de acceso público.
-- [Cómo pasar datos de imágenes intercalados](#inline-image): Para datos de imágenes codificados en base64
-- [Cómo subir imágenes con la API de File](#upload-image): Se recomienda para archivos más grandes o para reutilizar imágenes en varias solicitudes.
+- [URL을 사용하여 이미지 전달](#url-image): 공개적으로 액세스할 수 있는 이미지에 적합합니다.
+- [인라인 이미지 데이터 전달](#inline-image): base64로 인코딩된 이미지 데이터의 경우
+- [File API를 사용하여 이미지 업로드](#upload-image): 대용량 파일 또는 여러 요청에서 이미지를 재사용하는 데 권장됩니다.
 
-### Cómo pasar una imagen con una URL
+### URL을 사용하여 이미지 전달
 
-Puedes subir una imagen con la [API de Files](https://ai.google.dev/gemini-api/docs/interactions/files?hl=es-419) y pasarla en la solicitud:
+[Files API](https://ai.google.dev/gemini-api/docs/interactions/files?hl=ko)를 사용하여 이미지를 업로드하고 요청에 전달할 수 있습니다
+.
 
 ### Python
 
@@ -105,9 +108,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Cómo pasar datos de imágenes intercaladas
+### 인라인 이미지 데이터 전달
 
-Puedes proporcionar datos de imagen como cadenas codificadas en base64:
+이미지 데이터를 base64로 인코딩된 문자열로 제공할 수 있습니다.
 
 ### Python
 
@@ -187,9 +190,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Cómo subir imágenes con la API de File
+### File API를 사용하여 이미지 업로드
 
-Para archivos grandes o para poder usar el mismo archivo de imagen varias veces, usa la API de Files. Consulta la [guía de la API de Files](https://ai.google.dev/gemini-api/docs/interactions/files?hl=es-419).
+대용량 파일의 경우 또는 동일한 이미지 파일을 반복적으로 사용하려면 Files API를 사용하세요. [Files API 가이드](https://ai.google.dev/gemini-api/docs/interactions/files?hl=ko)를 참고하세요.
 
 ### Python
 
@@ -263,9 +266,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Instrucciones con varias imágenes
+## 여러 이미지로 프롬프트
 
-Puedes proporcionar varias imágenes en una sola instrucción incluyendo varios objetos de imagen en el array `input`:
+`input` 배열에 여러 이미지 객체를 포함하여 단일 프롬프트에 여러 이미지를 제공할 수 있습니다.
 
 ### Python
 
@@ -344,9 +347,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Detección de objetos
+## 객체 감지
 
-Los modelos se entrenan para detectar objetos en una imagen y obtener las coordenadas de sus cuadros delimitadores. Las coordenadas, relativas a las dimensiones de la imagen, se ajustan a una escala de [0, 1000]. Debes ajustar estas coordenadas según el tamaño de la imagen original.
+모델은 이미지에서 객체를 감지하고 경계 상자 좌표를 가져오도록 학습됩니다. 이미지 크기에 상대적인 좌표는 [0, 1000]으로 확장됩니다. 원래 이미지 크기에 따라 이러한 좌표의 크기를 조정해야 합니다.
 
 ### Python
 
@@ -468,14 +471,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Para obtener más ejemplos, consulta los siguientes notebooks en la [guía de soluciones de Gemini](https://github.com/google-gemini/cookbook):
+자세한 예는 [Gemini Cookbook](https://github.com/google-gemini/cookbook)의 다음 노트북을 참고하세요.
 
-## Segmentación
+## 세분화
 
-A partir de Gemini 2.5, los modelos no solo detectan elementos, sino que también los segmentan y proporcionan sus máscaras de contorno.
+Gemini 2.5부터 모델은 항목을 감지할 뿐만 아니라 항목을 세분화하고 윤곽 마스크를 제공합니다.
 
-El modelo predice una lista JSON, en la que cada elemento representa una máscara de segmentación.
-Cada elemento tiene un cuadro delimitador (“`box_2d`”) en el formato `[y0, x0, y1, x1]` con coordenadas normalizadas entre 0 y 1,000, una etiqueta (“`label`”) que identifica el objeto y, por último, la máscara de segmentación dentro del cuadro delimitador, como un PNG codificado en base64 que es un mapa de probabilidad con valores entre 0 y 255.
+모델은 각 항목이 세분화 마스크를 나타내는 JSON 목록을 예측합니다.
+각 항목에는 0~1000 사이의 정규화된 좌표가 있는 `[y0, x0, y1, x1]` 형식의 경계 상자(`box_2d`), 객체를 식별하는 라벨(`label`), 마지막으로 0~255 사이의 값을 갖는 확률 맵인 base64로 인코딩된 png로 경계 상자 내의 세분화 마스크가 있습니다.
 
 ### Python
 
@@ -617,75 +620,80 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-![Una mesa con cupcakes, con los objetos de madera y vidrio destacados](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg?hl=es-419)
+![컵케이크가 놓인 테이블, 목재 및 유리 물체가 강조 표시됨](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg?hl=ko)
 
-Un ejemplo de resultado de segmentación con objetos y máscaras de segmentación
+객체 및 세분화 마스크가 있는 세분화 출력 예
 
-## Formatos de imagen compatibles
+## 지원되는 이미지 형식
 
-Gemini admite los siguientes tipos de MIME de formato de imagen:
+Gemini는 다음과 같은 이미지 형식 MIME 유형을 지원합니다.
 
 - PNG - `image/png`
 - JPEG - `image/jpeg`
 - WEBP - `image/webp`
-- HEIC: `image/heic`
+- HEIC - `image/heic`
 - HEIF - `image/heif`
 
-Para obtener información sobre otros métodos de entrada de archivos, consulta la guía [Métodos de entrada de archivos](https://ai.google.dev/gemini-api/docs/interactions/file-input-methods?hl=es-419).
+다른 파일 입력 방법에 관해 알아보려면
+[파일 입력 방법](https://ai.google.dev/gemini-api/docs/interactions/file-input-methods?hl=ko) 가이드를 참고하세요.
 
-## Funciones
+## 기능
 
-Todas las versiones de los modelos de Gemini son multimodales y se pueden utilizar en una amplia variedad de tareas de procesamiento de imágenes y visión artificial, como la generación de subtítulos de imágenes, la búsqueda de respuestas visuales, la clasificación de imágenes, la detección de objetos y la segmentación.
+모든 Gemini 모델 버전은 멀티모달이며 이미지 캡션, 시각적 질의 응답, 이미지 분류, 객체 감지 및 세분화를 비롯한 다양한 이미지 처리 및 컴퓨터 비전 작업에 활용할 수 있습니다.
 
-Gemini puede reducir la necesidad de usar modelos de AA especializados según tus requisitos de calidad y rendimiento.
+Gemini는 품질 및 성능 요구사항에 따라 전문 ML 모델을 사용할 필요성을 줄일 수 있습니다.
 
-Las versiones de modelos más recientes se entrenan específicamente para mejorar la precisión de las tareas especializadas, además de las capacidades genéricas, como la [detección de objetos](#object-detection) y la [segmentación](#segmentation) mejoradas.
+최신 모델 버전은 향상된
+[객체 감지](#object-detection) 및 [세분화](#segmentation)와 같은 일반적인 기능 외에도
+전문 작업의 정확성을 개선하도록 특별히 학습됩니다.
 
-## Limitaciones e información técnica clave
+## 제한사항 및 주요 기술 정보
 
-### Límite de archivos
+### 파일 한도
 
-Los modelos de Gemini admiten un máximo de 3,600 archivos de imagen por solicitud.
+Gemini 모델은 요청당 최대 3,600개의 이미지 파일을 지원합니다.
 
-### Cálculo de tokens
+### 토큰 계산
 
-- 258 tokens si ambas dimensiones son <= 384 píxeles
-  Las imágenes más grandes se dividen en mosaicos de 768 x 768 píxeles, y cada uno cuesta 258 tokens.
+- 두 치수가 모두 384픽셀 이하인 경우 258개의 토큰이 사용됩니다.
+  더 큰 이미지는 768x768픽셀 타일로 바둑판식으로 배열되며 각 타일에는 258개의 토큰이 사용됩니다.
 
-Una fórmula aproximada para calcular la cantidad de mosaicos es la siguiente:
+타일 수를 계산하는 대략적인 공식은 다음과 같습니다.
 
-- Calcula el tamaño de la unidad de recorte, que es aproximadamente `floor(min(width, height)` / 1.5.
-- Divide cada dimensión por el tamaño de la unidad de recorte y multiplícalas para obtener la cantidad de mosaicos.
+- 자르기 단위 크기를 계산합니다. 대략 `floor(min(width, height)` / 1.5)입니다.
+- 각 치수를 자르기 단위 크기로 나누고 곱하여 타일 수를 구합니다.
 
-Por ejemplo, una imagen de 960 x 540 tendría un tamaño de unidad de recorte de 360. Divide cada dimensión por 360, y la cantidad de mosaicos es 3 \* 2 = 6.
+예를 들어 크기가 960x540인 이미지의 자르기 단위 크기는 360입니다. 각 치수를 360으로 나누면 타일 수는 3 \* 2 = 6입니다.
 
-### Resolución de medios
+### 미디어 해상도
 
-Gemini 3 introduce un control detallado sobre el procesamiento de la visión multimodal con el parámetro `media_resolution`. El parámetro `media_resolution` determina la **cantidad máxima de tokens asignados por imagen de entrada o fotograma de video.**
-Las resoluciones más altas mejoran la capacidad del modelo para leer texto pequeño o identificar detalles menores, pero aumentan el uso de tokens y la latencia.
+Gemini 3는 `media_resolution` 파라미터를 통해 멀티모달 비전 처리에 대한 세밀한 제어 기능을 제공합니다. `media_resolution` 파라미터는 **입력 이미지 또는 동영상 프레임당 할당되는 최대 토큰 수** 를 결정합니다.
+해상도가 높을수록 모델이 작은 텍스트를 읽거나 세부 요소를 식별하는 능력을 향상시키지만, 토큰 사용량과 지연 시간이 증가합니다.
 
-## Sugerencias y prácticas recomendadas
+## 팁 및 권장사항
 
-- Verifica que las imágenes se roten correctamente.
-- Usa imágenes claras y no borrosas.
-- Cuando uses una sola imagen con texto, coloca la instrucción de texto *antes* de la imagen en el array `input`.
+- 이미지가 올바르게 회전되었는지 확인합니다.
+- 선명하고 흐릿하지 않은 이미지를 사용합니다.
+- 텍스트가 포함된 단일 이미지를 사용하는 경우 `input` 배열에서 이미지 *앞에* 텍스트 프롬프트를 배치합니다.
 
-## ¿Qué sigue?
+## 다음 단계
 
-En esta guía, se muestra cómo subir archivos de imagen y generar resultados de texto a partir de entradas de imágenes. Para obtener más información, consulta los siguientes recursos:
+이 가이드에서는 이미지 파일을 업로드하고 이미지 입력에서 텍스트 출력을 생성하는 방법을 보여줍니다. 자세한 내용은 다음 리소스를 참고하세요.
 
-- [API de Files](https://ai.google.dev/gemini-api/docs/interactions/files?hl=es-419): Obtén más información para subir y administrar archivos para usarlos con Gemini.
-- [Instrucciones del sistema](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=es-419#system-instructions):
-  Las instrucciones del sistema te permiten dirigir el comportamiento del modelo según tus necesidades y casos de uso específicos.
-- [Estrategias de instrucciones con archivos](https://ai.google.dev/gemini-api/docs/interactions/files?hl=es-419#prompt-guide): La API de Gemini admite instrucciones con datos de texto, imagen, audio y video, lo que también se conoce como instrucciones multimodales.
-- [Orientación sobre seguridad](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=es-419): A veces, los modelos de IA generativa producen resultados inesperados, como resultados inexactos, sesgados u ofensivos. El procesamiento posterior y la evaluación humana son fundamentales para limitar el riesgo de daño que pueden causar estos resultados.
+- [Files API](https://ai.google.dev/gemini-api/docs/interactions/files?hl=ko): Gemini에서 사용할 파일을 업로드하고 관리하는 방법을 자세히 알아보세요.
+- [시스템 안내](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=ko#system-instructions):
+  시스템 안내를 사용하면 특정 요구사항 및 사용 사례에 따라 모델의 동작을 조정할 수 있습니다.
+- [파일 프롬프트 전략](https://ai.google.dev/gemini-api/docs/interactions/files?hl=ko#prompt-guide): Gemini API는 멀티모달 프롬프트 사용이라고도 하는 텍스트, 이미지, 오디오, 동영상 데이터로 프롬프트를 지원합니다.
+- [안전 가이드](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=ko): 생성형
+  AI 모델은 때때로 부정확하거나
+  편향되거나 불쾌감을 주는 출력과 같은 예기치 않은 출력을 생성합니다. 이러한 출력으로 인한 피해 위험을 제한하려면 후처리 및 인간 평가가 필수적입니다.
 
-Enviar comentarios
+의견 보내기
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Última actualización: 2026-05-19 (UTC)
+최종 업데이트: 2026-05-28(UTC)
 
-¿Quieres brindar más información?
+의견을 전달하고 싶나요?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-05-19 (UTC)"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-05-28(UTC)"],[],[]]

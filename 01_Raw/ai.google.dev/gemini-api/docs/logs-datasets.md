@@ -1,92 +1,92 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=hi
-fetched_at: 2026-05-25T05:22:25.545722+00:00
-title: "\u0932\u0949\u0917 \u0914\u0930 \u0921\u0947\u091f\u093e\u0938\u0947\u091f \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=es-419
+fetched_at: 2026-06-01T06:06:28.747467+00:00
+title: "Registros y conjuntos de datos \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-सुझाव भेजें
+Enviar comentarios
 
-# लॉग और डेटासेट
+# Registros y conjuntos de datos
 
-इस गाइड में, Gemini API के मौजूदा ऐप्लिकेशन के लिए लॉगिंग की सुविधा चालू करने से जुड़ी सभी ज़रूरी जानकारी दी गई है. इस गाइड में, Google AI Studio के डैशबोर्ड में मौजूद किसी मौजूदा या नए ऐप्लिकेशन के लॉग देखने का तरीका बताया गया है. इससे मॉडल के व्यवहार और इस बारे में बेहतर तरीके से समझा जा सकता है कि लोग आपके ऐप्लिकेशन के साथ कैसे इंटरैक्ट कर रहे हैं. *लॉगिंग की सुविधा का इस्तेमाल करके, डेवलपर इस्तेमाल के अलग-अलग मामलों में Gemini को बेहतर बनाने के लिए, Google के साथ इस्तेमाल से जुड़ा सुझाव/राय या शिकायत शेयर कर सकते हैं.इसके अलावा, लॉगिंग की सुविधा का इस्तेमाल करके, ऐप्लिकेशन में मौजूद गड़बड़ियों को ठीक किया जा सकता है और ऐप्लिकेशन के इस्तेमाल के पैटर्न को समझा जा सकता है[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=hi)*
+Esta guía contiene todo lo que necesitas para comenzar a habilitar el registro para tus aplicaciones existentes de la API de Gemini. En esta guía, aprenderás a ver los registros de una aplicación existente o nueva en el panel de Google AI Studio para comprender mejor el comportamiento del modelo y cómo los usuarios pueden interactuar con tus aplicaciones. Usa el registro para observar, depurar y *compartir de forma opcional comentarios de uso
+con Google para ayudar a mejorar Gemini en los casos de uso de los desarrolladores*.[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=es-419)
 
-सभी `GenerateContent` और `StreamGenerateContent` एपीआई कॉल काम करते हैं,
-इनमें [OpenAI के साथ काम करने वाले](https://ai.google.dev/gemini-api/docs/openai?hl=hi)
-एंडपॉइंट के ज़रिए किए गए कॉल भी शामिल हैं.
+Se admiten todas las llamadas a la API de `GenerateContent` y `StreamGenerateContent`,
+incluidas las que se realizan a través de extremos de compatibilidad de [OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=es-419).
 
-## 1. Google AI Studio में लॉगिंग की सुविधा चालू करना
+## 1. Habilita el registro en Google AI Studio
 
-शुरू करने से पहले, पक्का करें कि आपके पास बिलिंग की सुविधा वाला कोई प्रोजेक्ट हो.
+Antes de comenzar, asegúrate de tener un proyecto habilitado para la facturación que sea de tu propiedad.
 
-1. Google [AI Studio](https://aistudio.google.com/logs?hl=hi) में, लॉग वाला पेज खोलें.
-2. ड्रॉप-डाउन से अपना प्रोजेक्ट चुनें और डिफ़ॉल्ट रूप से सभी अनुरोधों के लिए लॉगिंग की सुविधा चालू करने के लिए, चालू करें बटन दबाएं.
+1. Abre la página de registros en Google [AI Studio](https://aistudio.google.com/logs?hl=es-419).
+2. Elige tu proyecto en el menú desplegable y presiona el botón de habilitar para habilitar el registro de todas las solicitudes de forma predeterminada.
 
-![](https://ai.google.dev/static/gemini-api/docs/images/logs-state.png?hl=hi)
+![](https://ai.google.dev/static/gemini-api/docs/images/logs-state.png?hl=es-419)
 
-सभी प्रोजेक्ट या चुनिंदा प्रोजेक्ट के लिए, लॉगिंग की सुविधा चालू या बंद की जा सकती है. साथ ही, Google AI Studio के ज़रिए, इन सेटिंग में कभी भी बदलाव किया जा सकता है.
+Puedes habilitar o inhabilitar el registro para todos los proyectos o para proyectos específicos, y cambiar estas preferencias en cualquier momento a través de Google AI Studio.
 
-## 2. AI Studio में लॉग देखना
+## 2. Visualiza los registros en AI Studio
 
-1. [AI Studio](https://aistudio.google.com/logs?hl=hi) पर जाएं.
-2. वह प्रोजेक्ट चुनें जिसके लिए आपने लॉगिंग की सुविधा चालू की है.
-3. आपको टेबल में, समय के हिसाब से उल्टे क्रम में अपने लॉग दिखने चाहिए.
+1. Ve a [AI Studio](https://aistudio.google.com/logs?hl=es-419).
+2. Selecciona el proyecto para el que habilitaste el registro.
+3. Deberías ver tus registros en la tabla en orden cronológico inverso.
 
 ![](https://storage.googleapis.com/generativeai-downloads/images/nano-banana-logs.gif)
 
-अनुरोध और जवाब के जोड़े को पूरे पेज पर देखने के लिए, किसी एंट्री पर क्लिक करें. पूरा प्रॉम्प्ट, Gemini का पूरा जवाब, और पिछले टर्न का कॉन्टेक्स्ट देखा जा सकता है. ध्यान दें कि हर प्रोजेक्ट के लिए, डिफ़ॉल्ट रूप से 1,000 लॉग सेव करने की सीमा होती है. साथ ही, डेटासेट में सेव न किए गए लॉग, 55 दिनों के बाद मिट जाएंगे. अगर आपका प्रोजेक्ट, सेव करने की सीमा तक पहुंच जाता है, तो आपको लॉग मिटाने के लिए कहा जाएगा.
+Haz clic en una entrada para ver la vista de página completa del par de solicitud y respuesta. Puedes inspeccionar la instrucción completa, la respuesta completa de Gemini y el contexto del turno anterior. Ten en cuenta que cada proyecto tiene un límite de almacenamiento predeterminado de hasta 1,000 registros, y los registros que no se guarden en conjuntos de datos vencerán después de 55 días. Si tu proyecto alcanza su límite de almacenamiento, se te pedirá que borres los registros.
 
-## 3. डेटासेट तैयार करना और शेयर करना
+## 3. Selecciona y comparte conjuntos de datos
 
-- लॉग की टेबल में, सबसे ऊपर मौजूद फ़िल्टर बार ढूंढें. इसके बाद, फ़िल्टर करने के लिए कोई प्रॉपर्टी चुनें.
-- लॉग के फ़िल्टर किए गए व्यू में, सभी या कुछ लॉग चुनने के लिए चेकबॉक्स का इस्तेमाल करें.
-- सूची में सबसे ऊपर दिखने वाले, "डेटासेट बनाएं" बटन पर क्लिक करें.
-- अपने नए डेटासेट को जानकारी देने वाला नाम दें. साथ ही, इसके बारे में जानकारी भी दी जा सकती है. हालांकि, यह ज़रूरी नहीं है.
-- आपको बनाया गया डेटासेट, लॉग के तैयार किए गए सेट के साथ दिखेगा.
-- अपने डेटासेट को CSV, JSONL फ़ाइलों के तौर पर या Google Sheets में एक्सपोर्ट करें, ताकि इसका विश्लेषण किया जा सके.
+- En la tabla de registros, ubica la barra de filtros en la parte superior para seleccionar una propiedad por la que filtrar.
+- En la vista filtrada de los registros, usa las casillas de verificación para seleccionar todos o algunos de los registros.
+- Haz clic en el botón "Crear conjunto de datos" que aparece en la parte superior de la lista.
+- Asigna un nombre descriptivo a tu nuevo conjunto de datos y una descripción opcional.
+- Verás el conjunto de datos que acabas de crear con el conjunto seleccionado de registros.
+- Exporta tu conjunto de datos para realizar un análisis más detallado como archivos CSV, JSONL o a Hojas de cálculo de Google.
 
 ![](https://storage.googleapis.com/generativeai-downloads/images/sales-dataset.gif)
 
-डेटासेट, अलग-अलग कामों के लिए मददगार साबित हो सकते हैं.
+Los conjuntos de datos pueden ser útiles para varios casos de uso diferentes.
 
-- **चैलेंज सेट तैयार करना:** आने वाले समय में, उन क्षेत्रों में सुधार करें जहां आपको अपने एआई को बेहतर बनाना है.
-- **सैंपल सेट तैयार करना:** उदाहरण के लिए, किसी दूसरे मॉडल से जवाब जनरेट करने के लिए, असल इस्तेमाल का कोई सैंपल या डिप्लॉयमेंट से पहले, रूटीन चेक के लिए कुछ खास मामलों का कलेक्शन.
-- **इवैलुएशन सेट:** ऐसे सेट जो अहम क्षमताओं के लिए, असल इस्तेमाल के पैटर्न को दिखाते हैं. इनका इस्तेमाल, अन्य मॉडल या सिस्टम इंस्ट्रक्शन के अलग-अलग वर्शन की तुलना करने के लिए किया जाता है.
+- **Selecciona conjuntos de desafíos:** Impulsa mejoras futuras que se enfoquen en las áreas en las que deseas que mejore tu IA.
+- **Selecciona conjuntos de muestras:** Por ejemplo, una muestra del uso real para generar respuestas de otro modelo o una colección de casos extremos para verificaciones de rutina antes de la implementación.
+- **Conjuntos de evaluación:** Conjuntos que son representativos del uso real en capacidades importantes, para la comparación entre otros modelos o iteraciones de instrucciones del sistema.
 
-उदाहरण के तौर पर अपने डेटासेट शेयर करके, एआई रिसर्च, Gemini API, और Google AI Studio में होने वाली प्रोग्रेस में मदद की जा सकती है. इससे हमें अलग-अलग कॉन्टेक्स्ट में अपने मॉडल को बेहतर बनाने और ऐसे एआई सिस्टम बनाने में मदद मिलती है जो कई फ़ील्ड और ऐप्लिकेशन में डेवलपर के लिए काम के साबित होते हैं
+Puedes ayudar a impulsar el progreso en la investigación de IA, la API de Gemini y Google AI Studio si eliges compartir tus conjuntos de datos como ejemplos de demostración. Esto nos permite refinar nuestros modelos en diversos contextos y crear sistemas de IA que sigan siendo útiles para los desarrolladores en muchos campos y aplicaciones.
 
-## अगले चरण और किन चीज़ों की जांच करनी है
+## Próximos pasos y qué probar
 
-लॉगिंग की सुविधा चालू करने के बाद, ये काम किए जा सकते हैं:
+Ahora que tienes habilitado el registro, puedes probar lo siguiente:
 
-- **सेशन के इतिहास के साथ प्रोटोटाइप बनाना:** कोड वाले ऐप्लिकेशन बनाने के लिए, [AI Studio Build](https://aistudio.google.com/apps?hl=hi) का इस्तेमाल करें. साथ ही, उपयोगकर्ता के लॉग का इतिहास दिखाने के लिए, अपनी एपीआई पासकोड जोड़ें.
-- **Gemini Batch API की मदद से लॉग फिर से चलाना:** Gemini Batch API की मदद से लॉग फिर से चलाकर, जवाब के सैंपल लेने
-  और मॉडल या ऐप्लिकेशन लॉजिक का आकलन करने के लिए, डेटासेट का इस्तेमाल करें
-  .
+- **Crea prototipos con el historial de sesiones:** Aprovecha la función de compilación de [AI Studio](https://aistudio.google.com/apps?hl=es-419) para crear aplicaciones de código y agregar tu clave de API para habilitar un historial de registros de usuarios.
+- **Vuelve a ejecutar registros con la API de Gemini Batch:** Usa conjuntos de datos para el muestreo de respuestas
+  y la evaluación de modelos o la lógica de la aplicación volviendo a ejecutar registros a través de la
+  [API de Gemini Batch](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb).
 
-## इनके साथ काम करता है
+## Compatibilidad
 
-फ़िलहाल, इनके लिए लॉगिंग की सुविधा उपलब्ध नहीं है:
+Actualmente, el registro no es compatible con lo siguiente:
 
-- Imagen और Veo मॉडल
-- Gemini एम्बेडिंग मॉडल
-- वीडियो, GIF या PDF वाले इनपुट
+- Modelos de Imagen y Veo
+- Modelo de incorporación de Gemini
+- Entradas que contienen videos, GIFs o PDFs
 
-सुझाव भेजें
+Enviar comentarios
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया.
+Última actualización: 2026-04-29 (UTC)
 
-क्या आपको हमें और कुछ बताना है?
+¿Quieres brindar más información?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]

@@ -1,167 +1,167 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=de
-fetched_at: 2026-05-25T05:20:42.911259+00:00
-title: "Full-Stack-Apps in Google\u00a0AI Studio entwickeln \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=hi
+fetched_at: 2026-06-01T06:07:01.384251+00:00
+title: "Google AI Studio \u092e\u0947\u0902 \u092b\u093c\u0941\u0932-\u0938\u094d\u091f\u0948\u0915 \u0910\u092a\u094d\u0932\u093f\u0915\u0947\u0936\u0928 \u0921\u0947\u0935\u0932\u092a \u0915\u0930\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
+[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Feedback geben
+सुझाव भेजें
 
-# Full-Stack-Apps in Google AI Studio entwickeln
+# Google AI Studio में फ़ुल-स्टैक ऐप्लिकेशन डेवलप करना
 
-Google AI Studio unterstützt jetzt die Full-Stack-Entwicklung. So können Sie Anwendungen erstellen, die über clientseitige Prototypen hinausgehen. Mit einer serverseitigen Laufzeit können Sie Secrets verwalten, eine Verbindung zu externen APIs herstellen und Echtzeit-Multiplayer-Erlebnisse entwickeln.
+Google AI Studio अब फ़ुल-स्टैक डेवलपमेंट के साथ काम करता है. इससे आपको ऐसे ऐप्लिकेशन बनाने में मदद मिलती है जो क्लाइंट-साइड प्रोटोटाइप से आगे बढ़ते हैं. सर्वर-साइड रनटाइम की मदद से, सीक्रेट मैनेज किए जा सकते हैं, बाहरी एपीआई से कनेक्ट किया जा सकता है, और रीयल-टाइम मल्टीप्लेयर अनुभव बनाए जा सकते हैं.
 
-## Serverseitige Laufzeit
+## सर्वर-साइड रनटाइम
 
-Google AI Studio-Anwendungen können jetzt eine serverseitige Komponente (Node.js) enthalten.
-Damit können Sie
+Google AI Studio के ऐप्लिकेशन में अब सर्वर-साइड कॉम्पोनेंट (Node.js) शामिल किया जा सकता है.
+इससे आप यह कर पाएंगे:
 
-- **Serverseitige Logik ausführen**: Führen Sie Code aus, der nicht für den Client sichtbar sein soll.
-- **Auf npm-Pakete zugreifen**: Der [Antigravity-Agent](https://antigravity.google/docs/agent?hl=de) kann Pakete aus dem umfangreichen npm-Ökosystem installieren und verwenden.
-- **Secrets verwalten**: API-Schlüssel und Anmeldedaten sicher verwenden.
+- **सर्वर-साइड लॉजिक लागू करना**: ऐसा कोड चलाना जिसे क्लाइंट को नहीं दिखाया जाना चाहिए.
+- **npm पैकेज ऐक्सेस करना**: [Antigravity Agent](https://antigravity.google/docs/agent?hl=hi), npm के बड़े नेटवर्क से पैकेज इंस्टॉल और इस्तेमाल कर सकता है.
+- **सीक्रेट मैनेज करना**: एपीआई पासकोड और क्रेडेंशियल का सुरक्षित तरीके से इस्तेमाल करें.
 
-### npm-Pakete verwenden
+### npm पैकेज का इस्तेमाल करना
 
-Sie müssen `npm install` nicht manuell ausführen. Bitten Sie den Agent einfach, Funktionen hinzuzufügen, für die ein Paket erforderlich ist. Er kümmert sich dann um die Installation und den Import.
+आपको `npm install` को मैन्युअल तरीके से चलाने की ज़रूरत नहीं है. बस एजेंट से उस सुविधा को जोड़ने के लिए कहें जिसके लिए पैकेज की ज़रूरत है. एजेंट, पैकेज को इंस्टॉल और इंपोर्ट कर देगा.
 
-**Beispiel**: > „Verwende `axios`, um Daten aus der externen API abzurufen.“
+**उदाहरण**: > "एक्सटर्नल एपीआई से डेटा फ़ेच करने के लिए, `axios` का इस्तेमाल करें."
 
-## Secrets sicher verwalten
+## सीक्रेट को सुरक्षित तरीके से मैनेज करना
 
-Mit serverseitigem Code und der Verwaltung von Secrets können Sie jetzt Apps entwickeln, die mit der Welt interagieren.
+सर्वर-साइड कोड और सीक्रेट मैनेजमेंट की मदद से, अब ऐसे ऐप्लिकेशन बनाए जा सकते हैं जो दुनिया भर के लोगों के साथ इंटरैक्ट कर सकें.
 
-### Gemini API-Schlüssel
+### Gemini API पासकोड
 
-Wenn Sie eine neue App erstellen, die die Gemini API verwendet, konfiguriert AI Studio Ihren `GEMINI_API_KEY` automatisch als serverseitiges Secret. Eine manuelle Einrichtung ist nicht erforderlich. Sie können diesen Schlüssel in den Einstellungen im Bereich **Secrets** aufrufen. Die Gemini API-Aufrufe Ihrer App werden mit diesem Schlüssel über serverseitigen Code ausgeführt. Er wird also nie im Browser angezeigt.
+Gemini API का इस्तेमाल करने वाला नया ऐप्लिकेशन बनाने पर, AI Studio आपके `GEMINI_API_KEY` को सर्वर-साइड सीक्रेट के तौर पर अपने-आप कॉन्फ़िगर कर देता है. इसके लिए, आपको मैन्युअल तरीके से सेटअप करने की ज़रूरत नहीं होती. सेटिंग में जाकर, **सीक्रेट** पैनल में इस कुंजी को देखा जा सकता है. आपके ऐप्लिकेशन के Gemini API कॉल, इस पासकोड का इस्तेमाल करके सर्वर-साइड कोड से किए जाते हैं. इसलिए, यह ब्राउज़र में कभी नहीं दिखता.
 
-### API-Schlüssel von Drittanbietern
+### तीसरे पक्ष के एपीआई पासकोड
 
-Bei anderen Diensten können Sie API-Schlüssel manuell hinzufügen:
+अन्य सेवाओं के लिए, एपीआई कुंजियां मैन्युअल तरीके से जोड़ी जा सकती हैं:
 
-- **Drittanbieter-APIs**: Stellen Sie eine Verbindung zu Diensten wie Stripe, SendGrid oder benutzerdefinierten REST-APIs her.
-- **Datenbanken**: Stellen Sie eine Verbindung zu externen Datenbanken her (z.B. über Supabase, Firebase oder MongoDB Atlas), um Daten über die Sitzung hinaus zu speichern.
+- **तीसरे पक्ष के एपीआई**: Stripe, SendGrid या कस्टम REST API जैसी सेवाओं से कनेक्ट करें.
+- **डेटाबेस**: सेशन के बाद भी डेटा बनाए रखने के लिए, बाहरी डेटाबेस से कनेक्ट करें. जैसे, Supabase, Firebase या MongoDB Atlas के ज़रिए.
 
-Wenn Sie Apps für die reale Welt entwickeln, müssen Sie oft eine Verbindung zu Drittanbieterdiensten wie Twilio, Slack oder Datenbanken herstellen, für die API-Schlüssel erforderlich sind. Sie können Schlüssel manuell hinzufügen. Gehen Sie dazu so vor:
+असल दुनिया के ऐप्लिकेशन बनाते समय, आपको अक्सर तीसरे पक्ष की सेवाओं (जैसे, Twilio, Slack या डेटाबेस) से कनेक्ट करने की ज़रूरत होती है. इसके लिए, एपीआई कुंजियों की ज़रूरत होती है. इन चरणों को पूरा करके, मैन्युअल तरीके से कुंजियां जोड़ी जा सकती हैं:
 
-1. **Secret hinzufügen**: Rufen Sie in Google AI Studio das Menü **Einstellungen** auf und suchen Sie nach dem Bereich „Secrets“.
-2. **Schlüssel speichern**: Fügen Sie hier Ihre API-Schlüssel oder geheimen Tokens hinzu.
-3. **Zugriff im Code**: Der Agent kann serverseitigen Code schreiben, der sicher auf diese vertraulichen Informationen zugreift (in der Regel über Umgebungsvariablen). So wird sichergestellt, dass sie niemals im clientseitigen Browser offengelegt werden.
+1. **सीक्रेट जोड़ना**: Google AI Studio में **सेटिंग** मेन्यू पर जाएं और सीक्रेट सेक्शन ढूंढें.
+2. **अपनी कुंजी सेव करें**: यहां अपने एपीआई पासकोड या सीक्रेट टोकन जोड़ें.
+3. **कोड में ऐक्सेस**: एजेंट, सर्वर-साइड कोड लिख सकता है. यह कोड, इन सीक्रेट को सुरक्षित तरीके से ऐक्सेस करता है. आम तौर पर, ऐसा एनवायरमेंट वैरिएबल के ज़रिए किया जाता है. इससे यह पक्का होता है कि ये सीक्रेट, क्लाइंट-साइड ब्राउज़र को कभी नहीं दिखते.
 
-Bei Bedarf wird im Chat auch eine Karte angezeigt, in der Sie aufgefordert werden, Schlüssel hinzuzufügen, wenn ein neues Secret erforderlich ist oder wenn in den Umgebungsvariablen des Projekts ein neuer Schlüssel erkannt wird.
+ज़रूरत पड़ने पर, एजेंट चैट में एक कार्ड भी दिखाएगा. इसमें आपको कुंजियां जोड़ने के लिए कहा जाएगा. ऐसा तब होगा, जब किसी नए सीक्रेट की ज़रूरत होगी या प्रोजेक्ट के एनवायरमेंट वैरिएबल में कोई नई कुंजी दिखेगी.
 
-### Firebase-Integration für Datenbank und Authentifizierung
+### डेटाबेस और पुष्टि करने के लिए Firebase इंटिग्रेशन
 
-Mit Google AI Studio können Sie Ihrer App jetzt ganz einfach eine Datenbank oder Authentifizierung über eine [Firebase-Integration](https://firebase.google.com/docs/ai-assistance/ai-studio-integration?hl=de) hinzufügen.
-Der Antigravity-Agent kann die folgenden Dienste automatisch für Sie bereitstellen und einrichten:
+Google AI Studio की मदद से, अब अपने ऐप्लिकेशन में डेटाबेस या पुष्टि करने की सुविधा को आसानी से जोड़ा जा सकता है. इसके लिए, आपको [Firebase इंटिग्रेशन](https://firebase.google.com/docs/ai-assistance/ai-studio-integration?hl=hi) का इस्तेमाल करना होगा.
+Antigravity Agent, आपके लिए इन सेवाओं को अपने-आप उपलब्ध करा सकता है और उन्हें सेट अप कर सकता है:
 
-- **Firestore-Datenbank**: Eine flexible, skalierbare NoSQL-Cloud-Datenbank zum Speichern und Synchronisieren von Daten für die client- und serverseitige Entwicklung.
-- **Firebase Authentication**: Ermöglichen Sie Ihren Nutzern, sich sicher in Ihrer Anwendung anzumelden, indem Sie die Abläufe für „Mit Google anmelden“ verwenden.
+- **Firestore डेटाबेस**: यह एक फ़्लेक्सिबल और स्केलेबल NoSQL क्लाउड डेटाबेस है. इसका इस्तेमाल क्लाइंट-साइड और सर्वर-साइड डेवलपमेंट के लिए डेटा सेव और सिंक करने के लिए किया जाता है.
+- **Firebase Authentication**: इससे उपयोगकर्ताओं को "Google से साइन इन करें" फ़्लो का इस्तेमाल करके, आपके ऐप्लिकेशन में सुरक्षित तरीके से साइन इन करने की अनुमति मिलती है.
 
-Bitten Sie den Agenten einfach, „meiner App eine Datenbank hinzuzufügen“ oder „Google-Anmeldung einzurichten“. Er übernimmt dann die erforderliche Konfiguration und Codegenerierung für Sie.
+एजेंट से "मेरे ऐप्लिकेशन में डेटाबेस जोड़ो" या "Google से साइन इन करने की सुविधा सेट अप करो" के लिए कहें. इसके बाद, एजेंट आपके लिए ज़रूरी कॉन्फ़िगरेशन और कोड जनरेट करेगा.
 
-Mit Firebase können Sie kostenlos starten und optional mit einem kostenpflichtigen Konto skalieren, wenn Sie mehr Kontingent benötigen oder kostenpflichtige Funktionen nutzen möchten.
+Firebase को बिना किसी शुल्क के इस्तेमाल किया जा सकता है. हालांकि, अगर आपको ज़्यादा कोटा चाहिए या पैसे चुकाकर ली जाने वाली सुविधाओं का इस्तेमाल करना है, तो आपके पास पैसे चुकाकर खाता अपग्रेड करने का विकल्प होता है.
 
 ## Google Workspace APIs
 
-Mit Google AI Studio können Sie Apps erstellen, die eine Verbindung zu Google Workspace-APIs herstellen, damit Ihre Nutzer in Ihrer App mit ihren echten Daten arbeiten können: E-Mails, Tabellen, Dokumente, Kalendertermine und mehr. Sie müssen kein Google Cloud-Projekt mehr einrichten, OAuth konfigurieren oder Ihre API manuell verwalten.
+Google AI Studio की मदद से, ऐसे ऐप्लिकेशन बनाए जा सकते हैं जो Google Workspace API से कनेक्ट होते हैं. इससे आपके उपयोगकर्ताओं को अपने असली डेटा के साथ काम करने का मौका मिलता है. जैसे, ईमेल, स्प्रेडशीट, दस्तावेज़, कैलेंडर इवेंट वगैरह. यह सब आपके ऐप्लिकेशन में ही किया जा सकता है. अब आपको Google Cloud प्रोजेक्ट सेट अप करने, OAuth कॉन्फ़िगर करने या एपीआई को मैन्युअल तरीके से मैनेज करने की ज़रूरत नहीं है.
 
-### Funktionsweise
+### यह कैसे काम करता है
 
-Sie haben zwei Möglichkeiten, eine Workspace-Integration hinzuzufügen:
+Workspace इंटिग्रेशन को दो तरीकों से जोड़ा जा सकता है:
 
-- **Im Chatfeld beschreiben**: Teilen Sie dem Agent einfach im Chatfeld unten mit, was Sie möchten. Beispiele: *„Erstelle einen Ausgaben-Tracker, der Belege in meiner Google-Tabelle protokolliert.“* oder *„Erstelle ein Dashboard, das meine ungelesenen Gmail-Nachrichten zusammenfasst.“*
-- **Über den Bereich „Integrationen“ auswählen**: Öffnen Sie im Build-Modus in der rechten Seitenleiste den Bereich **Integrationen** und aktivieren Sie die Workspace-App, die Sie verbinden möchten.
+- **चैट पैनल में इसके बारे में जानकारी दें**: सबसे नीचे मौजूद चैट पैनल में, एजेंट को बताएँ कि आपको क्या चाहिए. उदाहरण के लिए, *"खर्च ट्रैक करने वाला ऐसा टूल बनाओ जो रसीदों को मेरी Google शीट में लॉग करे"* या *"ऐसा डैशबोर्ड बनाओ जो मेरे Gmail खाते में मौजूद, नहीं पढ़े गए ईमेल की खास जानकारी दे."*
+- **इंटिग्रेशन पैनल से चुनें**: बिल्ड मोड की दाईं ओर मौजूद साइडबार में, **इंटिग्रेशन** पैनल खोलें. इसके बाद, उस Workspace ऐप्लिकेशन को चालू करें जिससे आपको कनेक्ट करना है.
 
-Wenn Sie eine Workspace-App hinzufügen, wird in AI Studio automatisch Folgendes ausgeführt:
+Workspace ऐप्लिकेशन जोड़ने पर, AI Studio अपने-आप ये काम करता है:
 
-1. Verbindet die erforderliche Google API für Ihre App.
-2. Generiert den serverseitigen Code zum Aufrufen der API.
-3. Fügt einen sicheren „Über Google anmelden“-Ablauf hinzu, damit Endnutzer Ihrer App den Zugriff auf ihre eigenen Daten autorisieren können.
+1. यह आपके ऐप्लिकेशन के लिए ज़रूरी Google API को चालू करता है.
+2. यह एपीआई को कॉल करने के लिए, सर्वर-साइड कोड जनरेट करता है.
+3. "Google से साइन इन करें" की सुरक्षित सुविधा जोड़ता है, ताकि आपके ऐप्लिकेशन के असली उपयोगकर्ता अपने डेटा को ऐक्सेस करने की अनुमति दे सकें.
 
-### Unterstützte Apps
+### इस सुविधा के साथ काम करने वाले ऐप
 
-Die folgenden Google Workspace-Apps sind verfügbar:
+Google Workspace के ये ऐप्लिकेशन उपलब्ध हैं:
 
-| App | Was Sie erstellen können |
+| ऐप्लिकेशन | क्या बनाया जा सकता है |
 | --- | --- |
-| Google Kalender | Termine und Kalender lesen, erstellen und verwalten |
-| Google Chat | Unterhaltungen und Gruppenbereiche lesen und mit ihnen interagieren |
-| Google Docs | Dokumente erstellen, lesen, aktualisieren und formatieren |
-| Google Drive | Dateien und Ordner organisieren, suchen und verwalten |
-| Google Formulare | Umfragen erstellen, Fragen aktualisieren und Antworten abrufen |
-| Gmail | E‑Mail-Inhalte lesen, senden und verwalten |
-| Google Notizen | Notizen, Listen und Anhänge verwalten |
-| Google Meet | Videoanrufe planen und verwalten |
-| Kontakte | Kontakte synchronisieren und verwalten |
-| Google Sheets | Tabellendaten lesen, schreiben und formatieren |
-| Google Präsentationen | Präsentationen erstellen und bearbeiten |
-| Google Tasks | Aufgaben erstellen, verwalten und organisieren |
+| Google Calendar | इवेंट और कैलेंडर को पढ़ने, बनाने, और मैनेज करने की अनुमति |
+| Google Chat | बातचीत और ग्रुप स्पेस को पढ़ना और उनमें हिस्सा लेना |
+| Google Docs | दस्तावेज़ बनाना, पढ़ना, अपडेट करना, और फ़ॉर्मैट करना |
+| Google Drive | फ़ाइलें और फ़ोल्डर व्यवस्थित करना, खोजना, और मैनेज करना |
+| Google Forms | सर्वे बनाना, सवालों को अपडेट करना, और जवाब पाना |
+| Gmail | ईमेल का कॉन्टेंट पढ़ना, भेजना, और मैनेज करना |
+| Google Keep | नोट, सूचियाँ, और अटैचमेंट मैनेज करना |
+| Google Meet | वीडियो कॉल शेड्यूल करना और उन्हें मैनेज करना |
+| संपर्क | संपर्कों को सिंक और मैनेज करना |
+| Google Sheets | स्प्रेडशीट डेटा को पढ़ना, लिखना, और फ़ॉर्मैट करना |
+| Google Slides | प्रज़ेंटेशन बनाना और उनमें बदलाव करना |
+| Google Tasks | टास्क बनाना, उन्हें मैनेज करना, और व्यवस्थित करना |
 
-### Authentifizierung und Berechtigungen
+### पुष्टि करने और अनुमतियां देने की सुविधा
 
-Als Ersteller müssen Sie keine OAuth-Clients konfigurieren, Anmeldedaten verwalten oder ein Google Cloud-Projekt einrichten. AI Studio übernimmt das alles für Sie.
+बिल्डर के तौर पर, आपको OAuth क्लाइंट कॉन्फ़िगर करने, क्रेडेंशियल मैनेज करने या Google Cloud प्रोजेक्ट सेट अप करने की ज़रूरत नहीं है. AI Studio, आपके लिए यह सब मैनेज करता है.
 
-Apps, in die Workspace APIs integriert sind, verwenden „Über Google anmelden“, um Endnutzer zu authentifizieren. Wenn ein Nutzer Ihre App öffnet, wird er aufgefordert, sich anzumelden und die spezifischen Berechtigungen zu erteilen, die Ihre App benötigt, z. B. schreibgeschützter Zugriff auf seinen Kalender oder die Möglichkeit, eine Tabelle zu bearbeiten. Ihre App greift nur auf die Daten der Person zu, die sie verwendet. Jeder Nutzer autorisiert den Zugriff auf sein eigenes Konto.
+Workspace API के साथ इंटिग्रेट किए गए ऐप्लिकेशन, "Google से साइन इन करें" सुविधा का इस्तेमाल करके, उपयोगकर्ताओं की पुष्टि करते हैं. जब कोई उपयोगकर्ता आपका ऐप्लिकेशन खोलता है, तो उसे साइन इन करने और आपके ऐप्लिकेशन के लिए ज़रूरी अनुमतियां देने का प्रॉम्प्ट मिलता है. उदाहरण के लिए, उनके कैलेंडर का रीड-ओनली ऐक्सेस या किसी स्प्रेडशीट में बदलाव करने की अनुमति. आपका ऐप्लिकेशन, सिर्फ़ उस व्यक्ति का डेटा ऐक्सेस करता है जो इसका इस्तेमाल कर रहा है. हर उपयोगकर्ता, अपने खाते का ऐक्सेस देता है.
 
-### Beispiele für Prompts
+### प्रॉम्प्ट के उदाहरण
 
-Hier sind einige Ideen für den Einstieg in Workspace-Integrationen:
+Workspace इंटिग्रेशन का इस्तेमाल शुरू करने के लिए, यहां कुछ आइडिया दिए गए हैं:
 
-- *„Erstelle eine App, die meinen Google-Kalender liest und für jede Besprechung Vorbereitungs-E‑Mails in Gmail entwirft.“*
-- *„Erstelle ein Tool, das ein Google-Dokument nimmt und daraus eine Zusammenfassungspräsentation mit fünf Folien in Google Präsentationen generiert.“*
-- *„Erstelle eine Ausgabenübersicht, in die ich einen Beleg hochlade. Gemini extrahiert die Details und fügt eine neue Zeile in mein Google-Tabellenblatt ein.“*
+- *"एक ऐसा ऐप्लिकेशन बनाओ जो मेरे Google Calendar को पढ़े और हर मीटिंग के लिए, Gmail में तैयारी से जुड़े ईमेल ड्राफ़्ट करे."*
+- *"एक ऐसा टूल बनाओ जो Google दस्तावेज़ से जानकारी लेकर, Google Slides में पांच स्लाइड का खास जानकारी वाला प्रज़ेंटेशन तैयार करे."*
+- *"खर्च ट्रैक करने वाला एक ऐसा टूल बनाओ जिसमें मैं रसीद अपलोड कर सकूं. Gemini उससे जानकारी निकाल सके और उसे मेरी Google शीट में नई लाइन के तौर पर लॉग कर सके."*
 
-### OAuth einrichten
+### OAuth सेट अप करना
 
-Ein wichtiger Anwendungsfall für die Verwaltung von Secrets ist die Einrichtung von OAuth, um eine Verbindung zu anderen Websites oder Apps herzustellen. Wenn Ihr Prompt Anweisungen zum Herstellen einer Verbindung zu einer Drittanbieter-App enthält, für die eine OAuth-Authentifizierung erforderlich ist, gibt der Agent Anweisungen zum Einrichten von OAuth für diese Anwendung. Diese Anleitung enthält die erforderlichen Callback-URLs zum Konfigurieren Ihrer OAuth-Anwendung.
-Sie finden die Callback-URLs auch im Bereich „Einstellungen“ unter **Integrationen**.
+सीक्रेट मैनेजमेंट का एक मुख्य इस्तेमाल, OAuth को सेट अप करना है. इससे अन्य वेबसाइटों या ऐप्लिकेशन से कनेक्ट किया जा सकता है. अगर आपके प्रॉम्प्ट में, किसी ऐसे तीसरे पक्ष के ऐप्लिकेशन से कनेक्ट करने के निर्देश शामिल हैं जिसके लिए OAuth से पुष्टि करना ज़रूरी है, तो एजेंट उस ऐप्लिकेशन के लिए OAuth सेट अप करने के तरीके के बारे में निर्देश देगा. इन निर्देशों में, OAuth ऐप्लिकेशन को कॉन्फ़िगर करने के लिए ज़रूरी कॉलबैक यूआरएल शामिल होंगे.
+सेटिंग पैनल में **इंटिग्रेशन** में जाकर भी, कॉलबैक यूआरएल देखे जा सकते हैं.
 
-## Mehrspielerfunktionen entwickeln
+## मल्टीप्लेयर गेम बनाना
 
-Die Full-Stack-Laufzeit ermöglicht Funktionen für die Zusammenarbeit in Echtzeit.
+फ़ुल-स्टैक रनटाइम, रीयल-टाइम में साथ मिलकर काम करने की सुविधाएं चालू करता है.
 
-- **Echtzeitstatus**: Sie können den Agent bitten, Funktionen wie „ein Live-Chat“, „ein gemeinsames Whiteboard“ oder „ein Mehrspielerspiel“ zu erstellen.
-- **Synchronisierte Sitzungen**: Der Server verwaltet den Status, sodass mehrere Nutzer in Echtzeit mit derselben Anwendungsinstanz interagieren können.
+- **रीयल-टाइम में होने वाली बातचीत**: एजेंट से "लाइव चैट," "साथ मिलकर काम करने के लिए व्हाइटबोर्ड" या "मल्टीप्लेयर गेम" जैसी सुविधाएं बनाने के लिए कहा जा सकता है.
+- **सिंक किए गए सेशन**: सर्वर, सेशन की स्थिति को मैनेज करता है. इससे कई उपयोगकर्ता, एक ही ऐप्लिकेशन इंस्टेंस के साथ रीयल-टाइम में इंटरैक्ट कर पाते हैं.
 
-**Beispiel-Prompt**: > „Mache daraus ein Multiplayer-Spiel, in dem die Spieler die Cursor der anderen sehen können.“
+**प्रॉम्प्ट का उदाहरण**: > "इसे एक मल्टीप्लेयर गेम बनाओ, जिसमें खिलाड़ी एक-दूसरे के कर्सर देख सकें."
 
-### Tipps zum Testen von Apps im Mehrspielermodus
+### एक से ज़्यादा खिलाड़ियों के साथ खेले जाने वाले ऐप्लिकेशन की टेस्टिंग के लिए सलाह
 
-Sie haben zwei Möglichkeiten, den Mehrspielermodus zu testen, bevor Sie Ihre App bereitstellen.
+ऐप्लिकेशन को डिप्लॉय करने से पहले, मल्टीप्लेयर मोड की जांच दो तरीकों से की जा सकती है.
 
-1. Öffnen Sie Ihre App im Build-Modus von Google AI Studio auf mehreren Tabs. Wenn Sie im Build-Modus entwickeln, befindet sich Ihre App in einem Entwicklercontainer. Wenn Sie die App in mehreren Tabs öffnen, können Sie mehrere Spieler simulieren, die Ihre App verwenden.
-2. Teilen Sie die App mit anderen über das Menü **Teilen** oben rechts.
-   Verwenden Sie dann die **freigegebene URL** auf dem Tab **Integrationen** des Menüs **Teilen**, um die App mit den Spielern zu verwenden, mit denen Sie Ihre App geteilt haben.
+1. Google AI Studio में, अपने ऐप्लिकेशन को एक से ज़्यादा टैब में बिल्ड मोड में खोलें. बिल्ड मोड में डेवलपमेंट करते समय, आपका ऐप्लिकेशन देव कंटेनर में होता है. ऐप्लिकेशन को एक से ज़्यादा टैब में खोलने से, आपको यह सिम्युलेट करने में मदद मिलेगी कि कई खिलाड़ी आपके ऐप्लिकेशन का इस्तेमाल कर रहे हैं.
+2. सबसे ऊपर दाईं ओर मौजूद, **शेयर करें** मेन्यू का इस्तेमाल करके, ऐप्लिकेशन को अन्य लोगों के साथ शेयर करें.
+   इसके बाद, **शेयर करें** मेन्यू के **इंटिग्रेशन** टैब में जाकर, **शेयर किया गया यूआरएल** का इस्तेमाल करें. इससे, उन खिलाड़ियों के साथ ऐप्लिकेशन का इस्तेमाल किया जा सकेगा जिनके साथ आपने ऐप्लिकेशन शेयर किया है.
 
-## Best Practices
+## सबसे सही तरीके
 
-- **Gemini API-Aufrufe**: Ihr `GEMINI_API_KEY` wird automatisch als serverseitiges Secret konfiguriert. Führen Sie Gemini API-Aufrufe über Ihren serverseitigen Code mit diesem Schlüssel aus. Sie können sie im Bereich **Secrets** aufrufen.
-- **Sicherheit von Secrets**: Verwenden Sie für vertrauliche Schlüssel immer den Secrets Manager.
-  Sie dürfen niemals in Ihren Dateien hartcodiert werden.
-- **Trennung von Belangen**: Die UI-Logik sollte im clientseitigen Framework (React/Angular) und die Geschäftslogik/Datenverarbeitung auf dem Server erfolgen.
-- **Fehlerbehandlung**: Achten Sie darauf, dass Ihr serverseitiger Code Fehler aus externen API-Aufrufen robust behandelt, um Abstürze der App zu verhindern.
+- **Gemini API कॉल**: आपका `GEMINI_API_KEY`, सर्वर-साइड सीक्रेट के तौर पर अपने-आप कॉन्फ़िगर हो जाता है. इस पासकोड का इस्तेमाल करके, अपने सर्वर-साइड कोड से Gemini API कॉल करें. इसे **सीक्रेट** पैनल में देखा जा सकता है.
+- **सीक्रेट की सुरक्षा**: संवेदनशील कुंजियों के लिए, हमेशा Secrets Manager का इस्तेमाल करें.
+  उन्हें कभी भी अपनी फ़ाइलों में हार्डकोड न करें.
+- **ज़िम्मेदारियों को अलग-अलग करना**: अपने यूज़र इंटरफ़ेस (यूआई) लॉजिक को क्लाइंट-साइड फ़्रेमवर्क (React/Angular) में रखें. साथ ही, अपने कारोबार के लॉजिक/डेटा हैंडलिंग को सर्वर साइड पर रखें.
+- **गड़बड़ी ठीक करना**: पक्का करें कि आपका सर्वर-साइड कोड, बाहरी एपीआई कॉल से होने वाली गड़बड़ियों को ठीक से हैंडल करता हो, ताकि ऐप्लिकेशन क्रैश न हो.
 
-## Wie geht es weiter?
+## अगला चरण?
 
-- [Apps in Google AI Studio entwickeln](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=de)
-- [Über Google AI Studio bereitstellen](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=de)
-- [App Gallery](https://aistudio.google.com/apps?source=showcase&hl=de)
+- [Google AI Studio में ऐप्लिकेशन बनाना](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=hi)
+- [Google AI Studio से डिप्लॉय करना](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=hi)
+- [App Gallery](https://aistudio.google.com/apps?source=showcase&hl=hi)
 
-Feedback geben
+सुझाव भेजें
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Zuletzt aktualisiert: 2026-05-19 (UTC).
+आखिरी बार 2026-05-19 (UTC) को अपडेट किया गया.
 
-Haben Sie Feedback für uns?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-05-19 (UTC)."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-05-19 (UTC) को अपडेट किया गया."],[],[]]

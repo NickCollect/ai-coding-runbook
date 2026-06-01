@@ -1,30 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/file-input-methods?hl=it
-fetched_at: 2026-05-25T05:27:31.098811+00:00
-title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions/file-input-methods?hl=pl
+fetched_at: 2026-06-01T05:58:45.265139+00:00
+title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Invia feedback
+Prześlij opinię
 
-# Metodi di input dei file
+# Metody wprowadzania plików
 
-Questa guida spiega i diversi modi in cui puoi includere file multimediali come immagini, audio, video e documenti quando effettui richieste all'API Gemini.
-I nuovi metodi sono supportati in tutti gli endpoint dell'API Gemini, tra cui le API Batch, Interactions e Live.
-La scelta del metodo giusto dipende dalle dimensioni del file, dalla posizione in cui sono archiviati i dati e dalla frequenza con cui prevedi di utilizzare il file.
+W tym przewodniku opisujemy różne sposoby dołączania plików multimedialnych, takich jak obrazy, dźwięk, wideo i dokumenty, podczas wysyłania żądań do Gemini API.
+Nowe metody są obsługiwane we wszystkich punktach końcowych Gemini API, w tym w interfejsach Batch, Interactions i Live API.
+Wybór odpowiedniej metody zależy od rozmiaru pliku, miejsca przechowywania danych i częstotliwości korzystania z pliku.
 
-Il modo più semplice per includere un file come input è leggerlo localmente e includerlo in un prompt. L'esempio seguente mostra come leggere un file PDF locale. Per questo metodo, i PDF sono limitati a 50 MB. Per un elenco completo dei tipi e dei limiti di input dei file, consulta la
-[tabella di confronto dei metodi di input](#method-comparison).
+Najprostszym sposobem na dołączenie pliku jako danych wejściowych jest odczytanie pliku lokalnego i dołączenie go do prompta. Poniższy przykład pokazuje, jak odczytać lokalny plik PDF. W przypadku tej metody pliki PDF są ograniczone do 50 MB. Pełną listę typów plików wejściowych i limitów znajdziesz w
+[tabeli porównania metod wprowadzania danych](#method-comparison).
 
 ### Python
 
@@ -100,26 +100,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Confronto dei metodi di input
+## Porównanie metod wprowadzania danych
 
-La tabella seguente confronta ogni metodo di input con i limiti dei file e i casi d'uso ottimali. Tieni presente che il limite delle dimensioni dei file può variare a seconda del tipo di file e del modello o del tokenizer utilizzato per elaborare il file.
+W tabeli poniżej porównujemy poszczególne metody wprowadzania danych z limitami plików i najlepszymi przypadkami użycia. Pamiętaj, że limit rozmiaru pliku może się różnić w zależności od typu pliku oraz modelu lub tokenizera używanego do przetwarzania pliku.
 
-| Metodo | Ideale per | Dimensione massima file | Persistenza |
+| Metoda | Urządzenia | Maks. rozmiar pliku | Trwałość |
 | --- | --- | --- | --- |
-| **Dati in linea** | Test rapidi, file di piccole dimensioni, applicazioni in tempo reale. | 100 MB per richiesta o payload   (**50 MB per i PDF**) | Nessuna (inviata con ogni richiesta) |
-| **Caricamento tramite l'API File** | File di grandi dimensioni, file utilizzati più volte. | 2 GB per file,   fino a 20 GB per progetto | 48 ore |
-| **Registrazione dell'URI GCS tramite l'API File** | File di grandi dimensioni già presenti in Google Cloud Storage, file utilizzati più volte. | 2 GB per file, nessun limite di spazio di archiviazione complessivo | Nessuna (recuperata per richiesta). La registrazione una tantum può consentire l'accesso per un massimo di 30 giorni. |
-| **URL esterni** | Dati pubblici o dati in bucket cloud (AWS, Azure, GCS) senza ricaricarli. | 100 MB per richiesta/payload | Nessuna (recuperata per richiesta) |
+| **Dane w tekście** | Szybkie testowanie, małe pliki, aplikacje działające w czasie rzeczywistym. | 100 MB na żądanie lub ładunek   (**50 MB w przypadku plików PDF**) | Brak (wysyłane z każdym żądaniem) |
+| **Przesyłanie plików za pomocą interfejsu File API** | Duże pliki, pliki używane wielokrotnie. | 2 GB na plik,   do 20 GB na projekt | 48 godzin |
+| **Rejestracja URI GCS za pomocą interfejsu File API** | Duże pliki, które są już w Google Cloud Storage, pliki używane wielokrotnie. | 2 GB na plik, brak ogólnych limitów miejsca na dane | Brak (pobierane na żądanie). Jednorazowa rejestracja może zapewnić dostęp na maksymalnie 30 dni. |
+| **Zewnętrzne adresy URL** | Dane publiczne lub dane w zasobnikach w chmurze (AWS, Azure, GCS) bez ponownego przesyłania. | 100 MB na żądanie lub ładunek | Brak (pobierane na żądanie) |
 
-## Dati in linea
+## Dane w tekście
 
-Per i file più piccoli (meno di 100 MB o 50 MB per i PDF), puoi passare i dati direttamente nel payload della richiesta. Questo è il metodo più semplice per test rapidi o applicazioni che gestiscono dati transitori in tempo reale. Puoi fornire i dati come stringhe con codifica base64 o leggendo direttamente i file locali.
+W przypadku mniejszych plików (poniżej 100 MB lub 50 MB w przypadku plików PDF) możesz przekazywać dane bezpośrednio w ładunku żądania. Jest to najprostsza metoda do szybkich testów lub aplikacji obsługujących dane tymczasowe w czasie rzeczywistym. Dane możesz podawać jako ciągi zakodowane w formacie base64 lub odczytując bezpośrednio pliki lokalne.
 
-Per un esempio di lettura da un file locale, consulta l'esempio all'inizio di questa pagina.
+Przykład odczytywania z pliku lokalnego znajdziesz na początku tej strony.
 
-### Recupero da un URL
+### Pobieranie z adresu URL
 
-Puoi anche recuperare un file da un URL, convertirlo in byte e includerlo nell'input.
+Możesz też pobrać plik z adresu URL, przekonwertować go na bajty i dołączyć do danych wejściowych.
 
 ### Python
 
@@ -219,13 +219,13 @@ echo
 jq ".outputs[] | select(.type == \"text\") | .text" response.json
 ```
 
-## API File di Gemini
+## Gemini File API
 
-L'API File è progettata per file di dimensioni maggiori (fino a 2 GB) o file che intendi utilizzare in più richieste.
+Interfejs File API jest przeznaczony do większych plików (do 2 GB) lub plików, których chcesz używać w wielu żądaniach.
 
-### Caricamento standard dei file
+### Standardowe przesyłanie plików
 
-Carica un file locale nell'API Gemini. I file caricati in questo modo vengono archiviati temporaneamente (48 ore) ed elaborati per un recupero efficiente da parte del modello.
+Prześlij plik lokalny do Gemini API. Pliki przesłane w ten sposób są przechowywane tymczasowo (48 godzin) i przetwarzane w celu efektywnego pobierania przez model.
 
 ### Python
 
@@ -323,48 +323,47 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-### Registrazione dei file di Google Cloud Storage
+### Rejestrowanie plików w Google Cloud Storage
 
-Se i dati sono già in Google Cloud Storage, non devi scaricarli e ricaricarli. Puoi registrarli direttamente con l'API File.
+Jeśli Twoje dane są już w Google Cloud Storage, nie musisz ich pobierać ani przesyłać ponownie. Możesz je zarejestrować bezpośrednio za pomocą interfejsu File API.
 
-1. Concedi l'accesso **Service Agent** a ogni bucket
+1. Przyznaj **agentowi usługi** dostęp do każdego zasobnika
 
-   1. Abilita l'API Gemini nel tuo progetto Google Cloud.
-   2. Crea il service agent:
+   1. Włącz Gemini API w projekcie w chmurze Google.
+   2. Utwórz agenta usługi:
 
       `gcloud beta services identity create --service=generativelanguage.googleapis.com --project=<your_project>`
-   3. **Concedi le autorizzazioni del service agent dell'API Gemini** per leggere i bucket di archiviazione.
+   3. **Przyznaj agentowi usługi Gemini API uprawnienia** do odczytu zasobników pamięci masowej.
 
-      L'utente deve assegnare il `Storage Object Viewer`
-      [ruolo IAM](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=it#storage.objectViewer)
-      a questo service agent nei bucket di archiviazione specifici che intende utilizzare.
+      Użytkownik musi przypisać agentowi usługi rolę `Storage Object Viewer`
+      [IAM](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=pl#storage.objectViewer)
+      w konkretnych zasobnikach, których chce używać.
 
-   Per impostazione predefinita, questo accesso non scade, ma può essere modificato in qualsiasi momento. Puoi
-   anche utilizzare i
-   [comandi dell'SDK IAM di Google Cloud Storage](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=it)
-   per concedere le autorizzazioni.
-2. Autentica il tuo servizio
+   Ten dostęp domyślnie nie wygasa, ale można go w każdej chwili zmienić. Do przyznawania uprawnień możesz
+   też używać
+   [poleceń pakietu SDK IAM Google Cloud Storage](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=pl).
+2. Uwierzytelnij usługę
 
-   **Prerequisiti**
+   **Wymagania wstępne**
 
-   - Abilita API
-   - Crea un service account o un agente con le autorizzazioni appropriate.
+   - Włącz API
+   - Utwórz konto usługi lub agenta z odpowiednimi uprawnieniami.
 
-   Innanzitutto, devi autenticarti come il servizio che dispone delle autorizzazioni di visualizzazione degli oggetti di archiviazione. La modalità di autenticazione dipende dall'ambiente in cui verrà eseguito il codice di gestione dei file.
+   Najpierw musisz się uwierzytelnić jako usługa, która ma uprawnienia do wyświetlania obiektów Cloud Storage. Sposób uwierzytelniania zależy od środowiska, w którym będzie działać kod zarządzania plikami.
 
-   **Al di fuori di Google Cloud**
+   **Poza Google Cloud**
 
-   Se il codice viene eseguito al di fuori di Google Cloud, ad esempio dal computer, scarica le credenziali dell'account dalla console Google Cloud seguendo questi passaggi:
+   Jeśli Twój kod działa poza Google Cloud, np. na komputerze, pobierz dane logowania konta z konsoli Google Cloud, wykonując te czynności:
 
-   1. Vai alla [console Account di servizio](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=it)
-   2. Seleziona il service account pertinente
-   3. Seleziona la scheda **Chiavi** e scegli **Aggiungi chiave, Crea nuova chiave**
-   4. Scegli il tipo di chiave **JSON** e prendi nota della posizione in cui è stato scaricato il file sul tuo computer.
+   1. Otwórz konsolę [kont usługi](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=pl).
+   2. Wybierz odpowiednie konto usługi.
+   3. Kliknij kartę **Klucze i wybierz **Dodaj klucz** > Utwórz nowy klucz**.
+   4. Wybierz typ klucza **JSON** i zanotuj, gdzie plik został pobrany na komputerze.
 
-   Per maggiori dettagli, consulta la documentazione ufficiale di Google Cloud sulla
-   [gestione delle chiavi dei service account](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=it).
+   Więcej informacji znajdziesz w oficjalnej dokumentacji Google Cloud na temat
+   [zarządzania kluczami kont usługi](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=pl).
 
-   Quindi, utilizza i seguenti comandi per l'autenticazione. Questi comandi presuppongono che il file del service account si trovi nella directory corrente e che sia denominato `service-account.json`.
+   Następnie użyj tych poleceń, aby się uwierzytelnić. Zakładamy, że plik konta usługi znajduje się w bieżącym katalogu i ma nazwę `service-account.json`.
 
    ### Python
 
@@ -384,7 +383,7 @@ Se i dati sono già in Google Cloud Storage, non devi scaricarli e ricaricarli. 
    )
    ```
 
-   ### JavaScript
+   ### Javascript
 
    ```
    const { GoogleAuth } = require('google-auth-library');
@@ -410,19 +409,19 @@ Se i dati sono già in Google Cloud Storage, non devi scaricarli e ricaricarli. 
      --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only'
    ```
 
-   **Su Google Cloud**
+   **W Google Cloud**
 
-   Se esegui l'applicazione direttamente in Google Cloud, ad esempio utilizzando le funzioni di [Cloud
-   Run](https://cloud.google.com/functions?hl=it) o un'
-   [istanza di Compute Engine](https://cloud.google.com/products/compute?hl=it), avrai
-   credenziali implicite, ma dovrai eseguire nuovamente l'autenticazione per concedere gli
-   ambiti appropriati.
+   Jeśli korzystasz bezpośrednio z Google Cloud, np. używasz funkcji [Cloud
+   Run](https://cloud.google.com/functions?hl=pl) lub instancji
+   [Compute Engine](https://cloud.google.com/products/compute?hl=pl), będziesz
+   mieć niejawne dane logowania, ale musisz się ponownie uwierzytelnić, aby przyznać
+   odpowiednie zakresy.
 
    ### Python
 
-   Questo codice prevede che il servizio venga eseguito in un ambiente in cui
-   [le credenziali predefinite dell'applicazione](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=it)
-   possono essere ottenute automaticamente, ad esempio Cloud Run o Compute Engine.
+   Ten kod oczekuje, że usługa działa w środowisku, w którym
+   [domyślne uwierzytelnianie aplikacji](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=pl)
+   można automatycznie uzyskać, np. w Cloud Run lub Compute Engine.
 
    ```
    import google.auth
@@ -437,9 +436,9 @@ Se i dati sono già in Google Cloud Storage, non devi scaricarli e ricaricarli. 
 
    ### JavaScript
 
-   Questo codice prevede che il servizio venga eseguito in un ambiente in cui
-   [le credenziali predefinite dell'applicazione](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=it)
-   possono essere ottenute automaticamente, ad esempio Cloud Run o Compute Engine.
+   Ten kod oczekuje, że usługa działa w środowisku, w którym
+   [domyślne uwierzytelnianie aplikacji](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=pl)
+   można automatycznie uzyskać, np. w Cloud Run lub Compute Engine.
 
    ```
    const { GoogleAuth } = require('google-auth-library');
@@ -454,15 +453,15 @@ Se i dati sono già in Google Cloud Storage, non devi scaricarli e ricaricarli. 
 
    ### CLI
 
-   Questo è un comando interattivo. Per i servizi come Compute Engine, puoi collegare gli ambiti al servizio in esecuzione a livello di configurazione. [Per un esempio, consulta la documentazione relativa ai servizi gestiti dall'utente.](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=it#using)
+   Jest to polecenie interaktywne. W przypadku usług takich jak Compute Engine możesz dołączyć zakresy do działającej usługi na poziomie konfiguracji. [Przykład znajdziesz w dokumentacji usługi zarządzanej przez użytkownika.](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=pl#using)
 
    ```
    gcloud auth application-default login \
    --scopes="https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only"
    ```
-3. Registrazione dei file (API File)
+3. Rejestracja pliku (File API)
 
-   Utilizza l'API File per registrare i file e generare un percorso dell'API File che può essere utilizzato direttamente nell'API Gemini.
+   Użyj interfejsu Files API, aby zarejestrować pliki i utworzyć ścieżkę Files API, której można bezpośrednio używać w Gemini API.
 
    ### Python
 
@@ -531,10 +530,10 @@ Se i dati sono già in Google Cloud Storage, non devi scaricarli e ricaricarli. 
        -d '{"uris": ["gs://bucket/object1", "gs://bucket/object2"]}'
    ```
 
-## URL HTTP esterni / firmati
+## Zewnętrzne adresy URL HTTP / podpisane adresy URL
 
-Puoi passare gli URL HTTPS accessibili pubblicamente o gli URL pre-firmati direttamente nella richiesta. L'API Gemini recupererà i contenuti in modo sicuro durante l'elaborazione.
-Questa soluzione è ideale per i file fino a 100 MB che non vuoi ricaricare.
+Możesz przekazywać publicznie dostępne adresy URL HTTPS lub wstępnie podpisane adresy URL bezpośrednio w żądaniu. Gemini API bezpiecznie pobierze treści podczas przetwarzania.
+Jest to idealne rozwiązanie w przypadku plików o rozmiarze do 100 MB, których nie chcesz przesyłać ponownie.
 
 ### Python
 
@@ -556,7 +555,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### Javascript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -600,20 +599,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
         }'
 ```
 
-### Accessibilità
+### Ułatwienia dostępu
 
-Verifica che gli URL forniti non rimandino a pagine che richiedono l'accesso o che si trovino dietro un paywall. Per i database privati, assicurati di creare un URL firmato con le autorizzazioni di accesso e la scadenza corrette.
+Sprawdź, czy podane adresy URL nie prowadzą do stron, które wymagają logowania lub są płatne. W przypadku prywatnych baz danych utwórz podpisany adres URL z odpowiednimi uprawnieniami dostępu i datą ważności.
 
-### Controlli di sicurezza
+### Kontrole bezpieczeństwa
 
-Il sistema esegue un controllo di moderazione dei contenuti sull'URL per verificare che soddisfi gli standard di sicurezza e delle norme. Se l'URL non supera questo controllo, riceverai un `url_retrieval_status` di `URL_RETRIEVAL_STATUS_UNSAFE`.
+System przeprowadza kontrolę moderacji treści pod adresem URL, aby potwierdzić, że są one zgodne ze standardami bezpieczeństwa i zasadami. Jeśli adres URL nie przejdzie tej kontroli, otrzymasz `url_retrieval_status` o wartości `URL_RETRIEVAL_STATUS_UNSAFE`.
 
-### Tipi di contenuti supportati
+### Obsługiwane typy treści
 
-Questo elenco di tipi di file e limitazioni supportati è inteso come guida iniziale e non è esaustivo. L'insieme effettivo di tipi supportati è soggetto a modifiche e può variare in base alla versione specifica del modello e del tokenizer in uso. I tipi non supportati genereranno un errore.
-Inoltre, il recupero dei contenuti per questi tipi di file supporta solo gli URL accessibili pubblicamente.
+Ta lista obsługiwanych typów plików i ograniczeń ma charakter wstępny i nie jest wyczerpująca. Efektywny zestaw obsługiwanych typów może się zmieniać i różnić w zależności od konkretnego modelu oraz wersji tokenizera. Nieobsługiwane typy spowodują błąd.
+Ponadto pobieranie treści w przypadku tych typów plików obsługuje tylko publicznie dostępne adresy URL.
 
-#### Tipi di file di testo
+#### Typy plików tekstowych
 
 - `text/html`
 - `text/css`
@@ -623,49 +622,48 @@ Inoltre, il recupero dei contenuti per questi tipi di file supporta solo gli URL
 - `text/rtf`
 - `text/javascript`
 
-#### Tipi di file di applicazione
+#### Typy plików aplikacji
 
 - `application/json`
 - `application/pdf`
 
-#### Tipi di file immagine
+#### Typy plików graficznych
 
 - `image/bmp`
 - `image/jpeg`
 - `image/png`
 - `image/webp`
 
-## Best practice
+## Sprawdzone metody
 
-- **Scegli il metodo giusto**:utilizza i dati in linea per i file piccoli e transitori.
-  Utilizza l'API File per i file di dimensioni maggiori o utilizzati di frequente. Utilizza gli URL esterni per i dati già ospitati online.
-- **Specifica i tipi MIME**:fornisci sempre il tipo MIME corretto per i dati dei file per garantire un'elaborazione corretta.
-- **Gestisci gli errori**:implementa la gestione degli errori nel codice per gestire potenziali problemi come errori di rete, problemi di accesso ai file o errori dell'API.
+- **Wybierz odpowiednią metodę:** w przypadku małych, tymczasowych plików używaj danych w tekście.
+  W przypadku większych lub często używanych plików używaj interfejsu File API. W przypadku danych, które są już hostowane online, używaj zewnętrznych adresów URL.
+- **Określ typy MIME:** zawsze podawaj prawidłowy typ MIME danych pliku, aby zapewnić prawidłowe przetwarzanie.
+- **Obsługuj błędy:** zaimplementuj obsługę błędów w kodzie, aby zarządzać potencjalnymi problemami, takimi jak awarie sieci, problemy z dostępem do plików lub błędy interfejsu API.
 
-## Limitazioni
+## Ograniczenia
 
-- I limiti delle dimensioni dei file variano in base al metodo (vedi [tabella di confronto](#method-comparison))
-  e al tipo di file.
-- I dati in linea aumentano le dimensioni del payload della richiesta.
-- I caricamenti tramite l'API File sono temporanei e scadono dopo 48 ore.
-- Il recupero degli URL esterni è limitato a 100 MB per payload e supporta tipi di contenuti specifici.
+- Limity rozmiaru pliku różnią się w zależności od metody (patrz [tabela porównania](#method-comparison))
+  i typu pliku.
+- Dane w tekście zwiększają rozmiar ładunku żądania.
+- Przesyłanie plików za pomocą interfejsu File API jest tymczasowe i wygasa po 48 godzinach.
+- Pobieranie z zewnętrznych adresów URL jest ograniczone do 100 MB na ładunek i obsługuje określone typy treści.
 
-## Passaggi successivi
+## Co dalej?
 
-- Prova a scrivere i tuoi prompt multimodali utilizzando
-  [Google AI Studio](http://aistudio.google.com/?hl=it).
-- Per informazioni sull'inclusione dei file nei prompt, consulta le
-  [Vision](https://ai.google.dev/gemini-api/docs/interactions/vision?hl=it) all'elaborazione di
-  [immagini](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=it),
-  [audio](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=it) e
-  documenti.
+- Spróbuj napisać własne prompty multimodalne za pomocą
+  [Google AI Studio](http://aistudio.google.com/?hl=pl).
+- Informacje o dołączaniu plików do promptów znajdziesz w
+  [Vision](https://ai.google.dev/gemini-api/docs/interactions/vision?hl=pl),
+  [dźwięku](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=pl) i
+  [dokumentów](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=pl).
 
-Invia feedback
+Prześlij opinię
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Ultimo aggiornamento 2026-05-19 UTC.
+Ostatnia aktualizacja: 2026-05-28 UTC.
 
-Vuoi dirci altro?
+Chcesz przekazać coś jeszcze?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-19 UTC."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-05-28 UTC."],[],[]]

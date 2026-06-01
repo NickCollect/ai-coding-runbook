@@ -1,62 +1,68 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=ja
-fetched_at: 2026-05-25T05:20:26.288232+00:00
-title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=ar
+fetched_at: 2026-06-01T06:07:12.814318+00:00
+title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-フィードバックを送信
+إرسال ملاحظات
 
-# トークンを理解してカウントする
+# فهم الرموز المميّزة وعدّها
 
-Gemini などの生成 AI モデルは、入力と出力をトークンという粒度で処理します。
+تعالج نماذج Gemini ونماذج الذكاء الاصطناعي التوليدي الأخرى الإدخالات والنتائج بدقة تُعرف باسم *الرمز المميز*.
 
-**Gemini モデルの場合、1 個のトークンは約 4 文字に相当します。100 個のトークンは、約 60 ～ 80 ワード（英語）に相当します。**
+**بالنسبة إلى نماذج Gemini، يعادل الرمز المميز الواحد 4 أحرف تقريبًا.
+ويعادل 100 رمز مميز من 60 إلى 80 كلمة باللغة الإنجليزية تقريبًا.**
 
-## トークンについて
+## لمحة عن الرموز المميّزة
 
-トークンは、`z` などの単一の文字、`cat` などの単語全体にすることができます。長い単語は複数のトークンに分割されます。モデルで使用されるすべてのトークンのセットを語彙と呼び、テキストをトークンに分割するプロセスをトークン化と呼びます。
+يمكن أن تكون الرموز المميّزة أحرفًا مفردة، مثل `z`، أو كلمات كاملة، مثل `cat`. ويتم تقسيم الكلمات الطويلة إلى عدة رموز مميّزة. تُعرف مجموعة جميع الرموز المميّزة التي يستخدمها النموذج باسم المفردات، وتُعرف عملية تقسيم النص إلى رموز مميّزة باسم *الترميز*.
 
-課金が有効になっている場合、[Gemini API の呼び出し費用](https://ai.google.dev/pricing?hl=ja)は入力トークンと出力トークンの数によって決まるため、トークンのカウント方法を知っておくと便利です。
+عند تفعيل الفوترة، يتم تحديد [تكلفة طلب إلى Gemini API](https://ai.google.dev/pricing?hl=ar) جزئيًا من خلال عدد الرموز المميّزة للإدخال والإخراج، لذا قد يكون من المفيد معرفة كيفية
+عدّ الرموز المميّزة.
 
-Colab でトークン数を試すことができます。
+يمكنك تجربة عدّ الرموز المميّزة في Colab.
 
 |  |  |  |
 | --- | --- | --- |
-| [ai.google.dev で表示](https://ai.google.dev/gemini-api/docs/tokens?hl=ja) | [Colab ノートブックを試す](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ja) | [GitHub でノートブックを表示](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ja) |
+| [عرض على ai.google.dev](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | [تجربة ورقة ملاحظات Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ar) | [عرض ورقة الملاحظات على GitHub](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ar) |
 
-## トークンのカウント
+## عدّ الرموز المميّزة
 
-Gemini API へのすべての入力と Gemini API からのすべての出力は、テキスト、画像ファイル、テキスト以外のモダリティを含めてトークン化されます。
+يتم ترميز جميع الإدخالات والنتائج من Gemini API، بما في ذلك النصوص وملفات الصور والوسائط الأخرى غير النصية.
 
-トークンは次の方法でカウントできます。
+يمكنك عدّ الرموز المميّزة بالطرق التالية:
 
-- **リクエストの入力を使用して [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=ja) を呼び出します。**  
-  : *入力のみ*のトークンの合計数を返します。この呼び出しは、リクエストのサイズを確認するために、入力をモデルに送信する前に行うことができます。
-- **`generate_content` を呼び出した後、`response` オブジェクトの `usage_metadata` 属性を使用します。**  
-  : *入力と出力の両方*のトークンの合計数 `total_token_count` を返します。  
-   また、入力トークンと出力トークンの数を別々に返します。`prompt_token_count`（入力トークン）と `candidates_token_count`（出力トークン）。
+- **استدعاء [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=ar) باستخدام إدخال
+  الطلب.**  
+   تعرض هذه الطريقة إجمالي عدد الرموز المميّزة في *الإدخال فقط*. يمكنك إجراء هذا الاستدعاء قبل إرسال الإدخال إلى النموذج للتحقّق من حجم طلباتك.
+- **استخدام السمة `usage_metadata` في عنصر `response` بعد
+  استدعاء `generate_content`.**  
+   تعرض هذه الطريقة إجمالي عدد الرموز المميّزة في *كل من الإدخال والإخراج*: `total_token_count`.  
+   تعرض أيضًا عدد الرموز المميّزة للإدخال والإخراج بشكل منفصل: `prompt_token_count` (رموز الإدخال المميّزة) و`candidates_token_count` (رموز الإخراج المميّزة).
 
-  [思考モデル](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)を使用している場合、思考プロセスで使用されたトークンは `thoughts_token_count` で返されます。[コンテキスト キャッシュ保存](https://ai.google.dev/gemini-api/docs/caching?hl=ja)を使用している場合、キャッシュに保存されているトークンの数は `cached_content_token_count` になります。
+  [إذا كنت تستخدم نموذجًا للتفكير، يتم عرض الرموز المميّزة المستخدَمة أثناء عملية التفكير في `thoughts_token_count`.](https://ai.google.dev/gemini-api/docs/thinking?hl=ar) وإذا كنت تستخدم
+  [ميزة "تخزين السياق مؤقتًا"](https://ai.google.dev/gemini-api/docs/caching?hl=ar)، سيكون عدد الرموز المميّزة المخزّنة مؤقتًا في `cached_content_token_count`.
 
-### テキスト トークンをカウントする
+### عدّ الرموز المميّزة للنص
 
-テキストのみの入力で `count_tokens` を呼び出すと、*入力のみ*のテキストのトークン数（`total_tokens`）が返されます。この呼び出しは、`generate_content` を呼び出してリクエストのサイズを確認する前に行うことができます。
+إذا استدعيت `count_tokens` باستخدام إدخال نصي فقط، ستعرض هذه الطريقة عدد الرموز المميّزة للنص في *الإدخال فقط* (`total_tokens`). يمكنك إجراء هذا الاستدعاء قبل استدعاء `generate_content` للتحقّق من حجم طلباتك.
 
-別の方法としては、`generate_content` を呼び出し、`response` オブジェクトの `usage_metadata` 属性を使用して次の情報を取得します。
+هناك خيار آخر وهو استدعاء `generate_content` ثم استخدام السمة `usage_metadata` في عنصر `response` للحصول على ما يلي:
 
-- 入力（`prompt_token_count`）、キャッシュに保存されたコンテンツ（`cached_content_token_count`）、出力（`candidates_token_count`）のトークン数の内訳
-- 思考プロセスのトークン数（`thoughts_token_count`）
-- *入力と出力の両方*のトークンの合計数（`total_token_count`）
+- عدد الرموز المميّزة المنفصلة للإدخال (`prompt_token_count`) والمحتوى المخزّن مؤقتًا (`cached_content_token_count`) والإخراج (`candidates_token_count`)
+- عدد الرموز المميّزة لعملية التفكير (`thoughts_token_count`)
+- إجمالي عدد الرموز المميّزة في *كل من الإدخال والإخراج* (`total_token_count`)
 
 ### Python
 
@@ -103,7 +109,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### انتقال
 
 ```
 ctx := context.Background()
@@ -131,17 +137,17 @@ fmt.Println(string(usageMetadata))
     ```
 ```
 
-### マルチターン（チャット）トークンをカウントする
+### عدّ الرموز المميّزة للمحادثات المتعدّدة الجولات (المحادثة)
 
-チャット履歴を指定して `count_tokens` を呼び出すと、チャット内の各ロールのテキストの合計トークン数（`total_tokens`）が返されます。
+إذا استدعيت `count_tokens` باستخدام سجلّ المحادثة، ستعرض هذه الطريقة إجمالي عدد الرموز المميّزة للنص من كل دور في المحادثة (`total_tokens`).
 
-別の方法としては、`send_message` を呼び出し、`response` オブジェクトの `usage_metadata` 属性を使用して次の情報を取得します。
+هناك خيار آخر وهو استدعاء `send_message` ثم استخدام السمة `usage_metadata` في عنصر `response` للحصول على ما يلي:
 
-- 入力（`prompt_token_count`）、キャッシュに保存されたコンテンツ（`cached_content_token_count`）、出力（`candidates_token_count`）のトークン数の内訳
-- 思考プロセスのトークン数（`thoughts_token_count`）
-- *入力と出力の両方*のトークンの合計数（`total_token_count`）
+- عدد الرموز المميّزة المنفصلة للإدخال (`prompt_token_count`) والمحتوى المخزّن مؤقتًا (`cached_content_token_count`) والإخراج (`candidates_token_count`)
+- عدد الرموز المميّزة لعملية التفكير (`thoughts_token_count`)
+- إجمالي عدد الرموز المميّزة في *كل من الإدخال والإخراج* (`total_token_count`)
 
-次の会話のターンがどの程度の大きさになるかを把握するには、`count_tokens` を呼び出すときに、会話のターンを履歴に追加する必要があります。
+لفهم حجم جولة المحادثة التالية، عليك إلحاقها بالسجلّ عند استدعاء `count_tokens`.
 
 ### Python
 
@@ -229,7 +235,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### انتقال
 
 ```
 ctx := context.Background()
@@ -267,30 +273,33 @@ if err != nil {
 fmt.Println(secondTokenResp.TotalTokens)
 ```
 
-### マルチモーダル トークンをカウントする
+### عدّ الرموز المميّزة المتعددة الوسائط
 
-Gemini API への入力はすべてトークン化されます。これには、テキスト、画像ファイル、その他のテキスト以外のモダリティが含まれます。Gemini API による処理中のマルチモーダル入力のトークン化に関する重要なポイントは次のとおりです。
+يتم ترميز جميع الإدخالات إلى Gemini API، بما في ذلك النصوص وملفات الصور والوسائط الأخرى غير النصية. يُرجى العِلم بالنقاط الرئيسية التالية حول ترميز الإدخالات المتعددة الوسائط أثناء معالجتها من قِبل Gemini API:
 
-- 両方の寸法が 384 ピクセル以下の画像入力は、258 個のトークンとしてカウントされます。1 つまたは両方の寸法が大きい画像は、必要に応じて 768x768 ピクセルのタイルに切り抜かれ、スケーリングされます。各タイルは 258 個のトークンとしてカウントされます。
-- 動画ファイルと音声ファイルは、次の固定レートでトークンに変換されます。動画は 1 秒あたり 263 トークン、音声は 1 秒あたり 32 トークン。
+- يتم عدّ إدخالات الصور التي يكون كلا بُعدَيها ≤384 بكسل على أنّها 258 رمزًا مميّزًا. يتم اقتصاص الصور التي يكون أحد بُعدَيها أو كلاهما أكبر من ذلك وتغيير حجمها حسب الحاجة إلى مربّعات بحجم 768 × 768 بكسل، ويتم عدّ كل منها على أنّه 258 رمزًا مميّزًا.
+- يتم تحويل ملفات الفيديو والصوت إلى رموز مميّزة بالمعدّلات الثابتة التالية: الفيديو بمعدّل 263 رمزًا مميّزًا في الثانية والصوت بمعدّل 32 رمزًا مميّزًا في الثانية.
 
-#### メディアの解像度
+#### دقة الوسائط
 
-[Gemini 3 モデル](https://ai.google.dev/gemini-api/docs/models?hl=ja#gemini-3)では、`media_resolution` パラメータを使用して、マルチモーダル ビジョン処理をきめ細かく制御できます。`media_resolution` パラメータは、**入力画像または動画フレームごとに割り当てられるトークンの最大数**を決定します。解像度が高いほど、モデルが細かいテキストを読み取ったり、小さな詳細を識別する能力が向上しますが、トークンの使用量とレイテンシが増加します。
+[توفّر نماذج Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=ar#gemini-3) تحكّمًا دقيقًا في
+معالجة الصور المتعددة الوسائط باستخدام المَعلمة `media_resolution`. تحدّد المَعلمة `media_resolution` **الحد الأقصى لعدد الرموز المميّزة المخصّصة لكل صورة إدخال أو إطار فيديو.**
+تُحسِّن الدقة العالية قدرة النموذج على قراءة النصوص الدقيقة أو تحديد التفاصيل الصغيرة، ولكنها تزيد من استخدام الرموز المميّزة والمدة الزمنية المستغرَقة.
 
-パラメータとそのトークン計算への影響について詳しくは、[メディアの解像度](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ja)ガイドをご覧ください。
+لمزيد من التفاصيل حول المَعلمة وكيفية تأثيرها في عمليات احتساب الرموز المميّزة،
+يُرجى الاطّلاع على دليل [دقة الوسائط](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ar).
 
-#### 画像ファイル
+#### ملفات الصور
 
-テキストと画像の入力を使用して `count_tokens` を呼び出すと、*入力のみ*のテキストと画像のトークン数の合計（`total_tokens`）が返されます。この呼び出しは、`generate_content` を呼び出す前にリクエストのサイズを確認するために行うことができます。必要に応じて、テキストとファイルに対して `count_tokens` を個別に呼び出すこともできます。
+إذا استدعيت `count_tokens` باستخدام إدخال نصي وصورة، ستعرض هذه الطريقة عدد الرموز المميّزة المجمّع للنص والصورة في *الإدخال فقط* (`total_tokens`). يمكنك إجراء هذا الاستدعاء قبل استدعاء `generate_content` للتحقّق من حجم طلباتك. يمكنك أيضًا اختياريًا استدعاء `count_tokens` على النص والملف بشكل منفصل.
 
-別の方法としては、`generate_content` を呼び出し、`response` オブジェクトの `usage_metadata` 属性を使用して次の情報を取得します。
+هناك خيار آخر وهو استدعاء `generate_content` ثم استخدام السمة `usage_metadata` في عنصر `response` للحصول على ما يلي:
 
-- 入力（`prompt_token_count`）、キャッシュに保存されたコンテンツ（`cached_content_token_count`）、出力（`candidates_token_count`）のトークン数の内訳
-- 思考プロセスのトークン数（`thoughts_token_count`）
-- *入力と出力の両方*のトークンの合計数（`total_token_count`）
+- عدد الرموز المميّزة المنفصلة للإدخال (`prompt_token_count`) والمحتوى المخزّن مؤقتًا (`cached_content_token_count`) والإخراج (`candidates_token_count`)
+- عدد الرموز المميّزة لعملية التفكير (`thoughts_token_count`)
+- إجمالي عدد الرموز المميّزة في *كل من الإدخال والإخراج* (`total_token_count`)
 
-File API からアップロードされた画像を使用する例:
+مثال يستخدم صورة تم تحميلها من File API:
 
 ### Python
 
@@ -349,7 +358,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### انتقال
 
 ```
 ctx := context.Background()
@@ -390,7 +399,7 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-画像をインライン データとして提供する例:
+مثال يقدّم الصورة كبيانات مضمّنة:
 
 ### Python
 
@@ -447,7 +456,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### انتقال
 
 ```
 ctx := context.Background()
@@ -487,20 +496,20 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-#### 動画ファイルまたは音声ファイル
+#### ملفات الفيديو أو الصوت
 
-音声と動画は、次の固定レートでトークンに変換されます。
+يتم تحويل كل من الصوت والفيديو إلى رموز مميّزة بالمعدّلات الثابتة التالية:
 
-- 動画: 1 秒あたり 263 トークン
-- 音声: 1 秒あたり 32 トークン
+- الفيديو: 263 رمزًا مميّزًا في الثانية
+- الصوت: 32 رمزًا مميّزًا في الثانية
 
-テキストと動画/音声の入力を使用して `count_tokens` を呼び出すと、テキストと動画/音声ファイルの結合されたトークン数が*入力のみ*で返されます（`total_tokens`）。この呼び出しは、`generate_content` を呼び出してリクエストのサイズを確認する前に行うことができます。必要に応じて、テキストとファイルに対して個別に `count_tokens` を呼び出すこともできます。
+إذا استدعيت `count_tokens` باستخدام إدخال نصي وفيديو/صوت، ستعرض هذه الطريقة عدد الرموز المميّزة المجمّع للنص وملف الفيديو/الصوت في *الإدخال فقط* (`total_tokens`). يمكنك إجراء هذا الاستدعاء قبل استدعاء `generate_content` للتحقّق من حجم طلباتك. يمكنك أيضًا اختياريًا استدعاء `count_tokens` على النص والملف بشكل منفصل.
 
-別の方法としては、`generate_content` を呼び出し、`response` オブジェクトの `usage_metadata` 属性を使用して次の情報を取得します。
+هناك خيار آخر وهو استدعاء `generate_content` ثم استخدام السمة `usage_metadata` في عنصر `response` للحصول على ما يلي:
 
-- 入力（`prompt_token_count`）、キャッシュに保存されたコンテンツ（`cached_content_token_count`）、出力（`candidates_token_count`）のトークン数の内訳
-- 思考プロセスのトークン数（`thoughts_token_count`）
-- *入力と出力の両方*のトークンの合計数（`total_token_count`）。
+- عدد الرموز المميّزة المنفصلة للإدخال (`prompt_token_count`) والمحتوى المخزّن مؤقتًا (`cached_content_token_count`) والإخراج (`candidates_token_count`)
+- عدد الرموز المميّزة لعملية التفكير (`thoughts_token_count`)
+- إجمالي عدد الرموز المميّزة في *كل من الإدخال والإخراج* (`total_token_count`).
 
 ### Python
 
@@ -573,7 +582,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### انتقال
 
 ```
 ctx := context.Background()
@@ -625,9 +634,9 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-## コンテキスト ウィンドウ
+## قدرات الاستيعاب
 
-Gemini API で使用可能なモデルには、トークンで測定されるコンテキスト ウィンドウがあります。コンテキスト ウィンドウは、提供できる入力の量と、モデルが生成できる出力の量を定義します。コンテキスト ウィンドウのサイズは、[`models.get` エンドポイント](https://ai.google.dev/api/rest/v1/models/get?hl=ja)を呼び出すか、[モデルのドキュメント](https://ai.google.dev/gemini-api/docs/models?hl=ja)で確認できます。
+تتضمّن النماذج المتاحة من خلال Gemini API قدرات استيعاب يتم قياسها بالرموز المميّزة. تحدّد قدرة الاستيعاب حجم الإدخال الذي يمكنك تقديمه وحجم الإخراج الذي يمكن للنموذج إنشاؤه. يمكنك تحديد حجم قدرة الاستيعاب من خلال استدعاء نقطة النهاية [`models.get`](https://ai.google.dev/api/rest/v1/models/get?hl=ar)أو الاطّلاع على [مستندات النماذج](https://ai.google.dev/gemini-api/docs/models?hl=ar).
 
 ### Python
 
@@ -656,7 +665,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### انتقال
 
 ```
 ctx := context.Background()
@@ -672,12 +681,12 @@ fmt.Println("input token limit:", modelInfo.InputTokenLimit)
 fmt.Println("output token limit:", modelInfo.OutputTokenLimit)
 ```
 
-フィードバックを送信
+إرسال ملاحظات
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-最終更新日 2026-05-19 UTC。
+تاريخ التعديل الأخير: 2026-05-19 (حسب التوقيت العالمي المتفَّق عليه)
 
-ご意見をお聞かせください
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-05-19 UTC。"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-19 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

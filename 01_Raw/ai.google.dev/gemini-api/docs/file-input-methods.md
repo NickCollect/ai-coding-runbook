@@ -1,7 +1,7 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-TW
-fetched_at: 2026-05-25T05:18:28.366469+00:00
-title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
+fetched_at: 2026-06-01T06:08:24.246272+00:00
+title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
 [Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
@@ -12,7 +12,8 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 - [首頁](https://ai.google.dev/?hl=zh-tw)
 - [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
 提供意見
 

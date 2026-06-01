@@ -1,7 +1,7 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=zh-CN
-fetched_at: 2026-05-25T05:29:44.445809+00:00
-title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
+fetched_at: 2026-06-01T05:59:21.127601+00:00
+title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
 [Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
@@ -12,16 +12,16 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 - [首页](https://ai.google.dev/?hl=zh-cn)
 - [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=zh-cn)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=zh-cn)
 - [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
 发送反馈
 
 # 文件搜索
 
-Gemini API 通过文件搜索工具启用检索增强生成 (RAG)。文件搜索会导入您的数据、将其分块并编制索引，以便根据提供的提示快速检索相关信息。然后，检索到的信息会用作模型的上下文，使其能够提供更准确、更相关的答案。文件搜索还能够提供多模态功能，支持 `gemini-embedding-001` 提供的文本嵌入，以及 `gemini-embedding-2` 提供的图片/多模态嵌入。
+Gemini API 通过文件搜索工具启用检索增强生成 (RAG)。文件搜索会导入您的数据、将其分块并编入索引，以便根据提供的提示快速检索相关信息。然后，检索到的信息会用作模型的上下文，使其能够提供更准确、更相关的回答。文件搜索还能够提供多模态功能，支持 `gemini-embedding-001` 提供的文本嵌入，以及 `gemini-embedding-2` 提供的图片/多模态嵌入。
 
-查询时的文件存储和嵌入生成是免费的，您只需在首次为文件编制索引时支付创建嵌入的费用，以及正常的 Gemini 模型输入 / 输出令牌费用。这种新的结算模式使得文件搜索工具的构建和扩缩变得更简单、更经济实惠。如需了解详情，请参阅
+在查询时，文件存储和嵌入生成是免费的，您只需在首次为文件编制索引时支付创建嵌入的费用，以及正常的 Gemini 模型输入 / 输出令牌费用。这种新的结算模式使得文件搜索工具的构建和扩缩变得更加简单且更具成本效益。如需了解详情，请参阅
 [价格](#pricing)部分。
 
 ## 直接上传到文件搜索存储区
@@ -32,14 +32,12 @@ Gemini API 通过文件搜索工具启用检索增强生成 (RAG)。文件搜索
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 from google.genai import types
 import time
 
 client = genai.Client()
 
-# File name will be visible in citations
 file_search_store = client.file_search_stores.create(
     config={
         'display_name': 'your-fileSearchStore-name',
@@ -60,7 +58,7 @@ while not operation.done:
     operation = client.operations.get(operation)
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="Can you tell me about [insert question]",
     tools=[{
         "type": "file_search",
@@ -83,13 +81,11 @@ for step in interaction.steps:
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 const { GoogleGenAI } = require('@google/genai');
 
 const ai = new GoogleGenAI({});
 
 async function run() {
-  // File name will be visible in citations
   const fileSearchStore = await ai.fileSearchStores.create({
     config: {
       displayName: 'your-fileSearchStore-name',
@@ -111,7 +107,7 @@ async function run() {
   }
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     input: "Can you tell me about [insert question]",
     tools: [{
       type: "file_search",
@@ -150,14 +146,12 @@ run();
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 from google.genai import types
 import time
 
 client = genai.Client()
 
-# File name will be visible in citations
 sample_file = client.files.upload(file='sample.txt', config={'display_name': 'display_file_name'})
 
 file_search_store = client.file_search_stores.create(
@@ -177,7 +171,7 @@ while not operation.done:
     operation = client.operations.get(operation)
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="Can you tell me about [insert question]",
     tools=[{
         "type": "file_search",
@@ -195,13 +189,11 @@ for step in interaction.steps:
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 const { GoogleGenAI } = require('@google/genai');
 
 const ai = new GoogleGenAI({});
 
 async function run() {
-  // File name will be visible in citations
   const sampleFile = await ai.files.upload({
     file: 'sample.txt',
     config: { displayName: 'file-name' }
@@ -225,7 +217,7 @@ async function run() {
   }
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     input: "Can you tell me about [insert question]",
     tools: [{
       type: "file_search",
@@ -251,7 +243,7 @@ run();
 
 ## 分块配置
 
-将文件导入文件搜索存储区时，系统会自动将文件分解为多个块，然后进行嵌入、编制索引并上传到文件搜索存储区。如果您
+将文件导入文件搜索存储区时，系统会自动将文件分解为多个块，然后将这些块嵌入、编入索引并上传到您的文件搜索存储区。如果您
 需要更好地控制分块策略，可以指定
 [`chunking_config`](https://ai.google.dev/api/file-search/file-search-stores?hl=zh-cn#request-body_5) 设置
 ，以设置每个块的令牌数量上限和重叠
@@ -260,7 +252,6 @@ run();
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from google import genai
 from google.genai import types
 import time
@@ -290,7 +281,6 @@ print("Custom chunking complete.")
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 const { GoogleGenAI } = require('@google/genai');
 
 const ai = new GoogleGenAI({});
@@ -326,16 +316,16 @@ console.log("Custom chunking complete.");
 导入文件时，系统会将其转换为称为
 [嵌入](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-cn)的数值表示形式，这些嵌入会捕获
 上传内容的语义含义。这些嵌入存储在专用的文件搜索数据库中。
-当您进行查询时，系统也会将其转换为嵌入。然后，系统会执行文件搜索，以从文件搜索存储区中找到最相似、最相关的文档块。
+当您进行查询时，系统也会将其转换为嵌入。然后，系统会执行文件搜索，以从文件搜索存储区中找到最相似且最相关的文档块。
 
-嵌入没有存留时间 (TTL)，它们会一直保留，直到手动删除或模型被废弃。不过，文件会在 48 小时后被删除。
+嵌入没有生存时间 (TTL)；它们会一直保留，直到手动删除或模型被废弃为止。不过，文件会在 48 小时后被删除。
 
 下面详细介绍了使用文件搜索 `uploadToFileSearchStore` API 的流程：
 
 1. **创建文件搜索存储区**：文件搜索存储区包含文件中经过处理的
    数据。它是语义搜索将对其进行操作的嵌入的持久容器。
 2. **上传文件并导入到文件搜索存储区**：同时上传
-   文件并将结果导入到文件搜索存储区。这会创建一个临时 `File` 对象，该对象是对原始文档的引用。然后，系统会对该数据进行分块、转换为文件搜索嵌入并编制索引。`File` 对象会在 48 小时后被删除，而导入到文件搜索存储区的数据将无限期存储，直到您选择将其删除为止。
+   文件并将结果导入到文件搜索存储区。这会创建一个临时 `File` 对象，该对象是对原始文档的引用。然后，系统会对该数据进行分块、转换为文件搜索嵌入并编入索引。`File` 对象会在 48 小时后被删除，而导入到文件搜索存储区的数据将无限期存储，直到您选择将其删除为止。
 3. **使用文件搜索进行查询**：最后，您可以在
    `FileSearch`工具`generateContent`调用中使用。在工具配置中，您可以指定 `FileSearchRetrievalResource`，该资源指向您要搜索的 `FileSearchStore`。这会告知模型对该特定文件搜索存储区执行语义搜索，以查找相关信息来支持其回答。
 
@@ -358,7 +348,6 @@ console.log("Custom chunking complete.");
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 file_search_store = client.file_search_stores.create(
     config={
         'display_name': 'my-file_search-store-123',
@@ -377,7 +366,6 @@ client.file_search_stores.delete(name='fileSearchStores/my-file_search-store-123
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 const fileSearchStore = await ai.fileSearchStores.create({
   config: {
     displayName: 'my-file_search-store-123',
@@ -422,7 +410,6 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/fileSearchStore
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 for document_in_store in client.file_search_stores.documents.list(parent='fileSearchStores/my-file_search-store-123'):
   print(document_in_store)
 
@@ -435,7 +422,6 @@ client.file_search_stores.documents.delete(name='fileSearchStores/my-file_search
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 const documents = await ai.fileSearchStores.documents.list({
   parent: 'fileSearchStores/my-file_search-store-123'
 });
@@ -469,7 +455,6 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/fileSearchStore
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 op = client.file_search_stores.import_file(
     file_search_store_name=file_search_store.name,
     file_name=sample_file.name,
@@ -485,7 +470,6 @@ op = client.file_search_stores.import_file(
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 let operation = await ai.fileSearchStores.importFile({
   fileSearchStoreName: fileSearchStore.name,
   fileName: sampleFile.name,
@@ -498,14 +482,13 @@ let operation = await ai.fileSearchStores.importFile({
 });
 ```
 
-当文件搜索存储区中有多个文档，并且您只想搜索其中的一部分时，此功能非常有用。
+当文件搜索存储区中有多个文档，并且您只想搜索其中的一部分时，这非常有用。
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="Tell me about the book 'I, Claudius'",
     tools=[{
         "type": "file_search",
@@ -524,9 +507,8 @@ for step in interaction.steps:
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 const interaction = await ai.interactions.create({
-  model: "gemini-3-flash-preview",
+  model: "gemini-3.5-flash",
   input: "Tell me about the book 'I, Claudius'",
   tools: [{
     type: "file_search",
@@ -549,14 +531,13 @@ for (const step of interaction.steps) {
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -H "Api-Revision: 2026-05-20" \
     -X POST \
     -d '{
-            "model": "gemini-3-flash-preview",
+            "model": "gemini-3.5-flash",
             "input": [{"type": "text", "text": "Tell me about the book I, Claudius"}],
             "tools": [{
                 "type": "file_search",
@@ -568,8 +549,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
 cat response.json
 ```
 
-如需了解有关为 `metadata_filter` 实现列表过滤语法的指南，请访问
-[google.aip.dev/160](https://google.aip.dev/160)
+如需了解如何为 `metadata_filter` 实现列表过滤条件语法，请访问 [google.aip.dev/160](https://google.aip.dev/160)
 
 ## 多模态文件搜索
 
@@ -625,14 +605,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/fileSearchStores?
 
 ## 引用
 
-使用文件搜索时，模型的回答可能包含引用，用于指定生成答案时使用了上传文档的哪些部分。这有助于进行事实核查和验证。
+使用文件搜索时，模型的回答可能包含引用，用于指定生成回答时使用了上传文档的哪些部分。这有助于进行事实核查和验证。
 
 您可以通过响应的 `model_output` 步骤的 `content` 块内的 `annotations` 属性访问引用信息。
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 for step in interaction.steps:
     if step.type == 'model_output':
         for content in step.content:
@@ -643,7 +622,6 @@ for step in interaction.steps:
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 for (const step of interaction.steps) {
   if (step.type === 'model_output') {
     for (const contentBlock of step.content) {
@@ -666,7 +644,6 @@ for (const step of interaction.steps) {
 ### Python
 
 ```
-# Iterate through citations and check for page numbers
 for step in interaction.steps:
     if step.type == "model_output":
         for content in step.content:
@@ -696,7 +673,7 @@ for (const step of interaction.steps) {
 
 ### 媒体引用
 
-当模型在生成过程中引用图片块时，API 会在包含 `media_id` 的注解中返回类型为 `file_citation` 的注解。您可以使用此 ID 下载模型引用的确切图片块。此 `media_id` 在多次搜索调用中保持不变，因此您可以可靠地检索同一图片或使用该 ID 缓存图片。
+当模型在生成期间引用图片块时，API 会在注解中返回类型为 `file_citation` 的注解，其中包含 `media_id`。您可以使用此 ID 下载模型引用的确切图片块。此 `media_id` 在多次搜索调用中保持不变，因此您可以可靠地检索同一图片或使用该 ID 缓存图片。
 
 以下代码段是一个 REST 响应步骤示例：
 
@@ -724,7 +701,6 @@ for (const step of interaction.steps) {
 ### Python
 
 ```
-# Iterate through citations and download media if present
 for step in interaction.steps:
     if step.type == "model_output":
         for content in step.content:
@@ -732,11 +708,9 @@ for step in interaction.steps:
                 for annotation in content.annotations:
                     if annotation.type == "file_citation" and annotation.media_id:
                         print(f"Cited Media ID: {annotation.media_id}")
-                        # Download the blob using the SDK
                         blob_content = client.file_search_stores.download_media(
                             media_id=annotation.media_id
                         )
-                        # Save blob_content to file...
 ```
 
 ### JavaScript
@@ -750,7 +724,6 @@ for (const step of interaction.steps) {
           if (annotation.type === 'file_citation' && annotation.mediaId) {
             console.log(`Cited Media ID: ${annotation.mediaId}`);
             const blobContent = await ai.fileSearchStores.downloadMedia(annotation.mediaId);
-            // Save blobContent to file...
           }
         }
       }
@@ -768,14 +741,13 @@ curl -X GET "https://generativelanguage.googleapis.com/v1/fileSearchStores/my-st
 
 ## 自定义元数据
 
-如果您已为文件添加自定义元数据，则可以在模型响应的注解中访问该元数据。这对于将其他上下文（例如网址、页码或作者）从源文档传递到应用逻辑非常有用。类型为 `file_citation` 的每个引用注解都包含此自定义元数据。
+如果您已为文件添加自定义元数据，则可以在模型回答的注解中访问该元数据。这对于将其他上下文（例如网址、页码或作者）从源文档传递到应用逻辑非常有用。类型为 `file_citation` 的每个引用注解都包含此自定义元数据。
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="Tell me about [insert question]",
     tools=[{
         "type": "file_search",
@@ -794,9 +766,8 @@ for step in interaction.steps:
 ### JavaScript
 
 ```
-  // This will only work for SDK newer than 2.0.0
   const interaction = await ai.interactions.create({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     input: "Tell me about [insert question]",
     tools: [{
       type: "file_search",
@@ -854,12 +825,11 @@ for step in interaction.steps:
 ## 结构化输出
 
 从 Gemini 3 模型开始，您可以将文件搜索工具与
-[结构化输出](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=zh-cn)结合使用。
+[结构化输出](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=zh-cn)相结合。
 
 ### Python
 
 ```
-# This will only work for SDK newer than 2.0.0
 from pydantic import BaseModel, Field
 
 class Money(BaseModel):
@@ -867,7 +837,7 @@ class Money(BaseModel):
     currency: str = Field(description="The currency of amount.")
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="What is the minimum hourly wage in Tokyo right now?",
     tools=[{
         "type": "file_search",
@@ -879,14 +849,13 @@ interaction = client.interactions.create(
         "schema": Money.model_json_schema()
     },
 )
-result = Money.model_validate_json(interaction.steps[-1].content[0].text)
+result = Money.model_validate_json(interaction.output_text)
 print(result)
 ```
 
 ### JavaScript
 
 ```
-// This will only work for SDK newer than 2.0.0
 import { z } from "zod";
 
 const moneyJsonSchema = {
@@ -902,7 +871,7 @@ const moneySchema = z.fromJSONSchema(moneyJsonSchema);
 
 async function run() {
   const interaction = await ai.interactions.create({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     input: "What is the minimum hourly wage in Tokyo right now?",
     tools: [{
       type: "file_search",
@@ -915,7 +884,7 @@ async function run() {
     },
   });
 
-  const result = moneySchema.parse(JSON.parse(interaction.steps.at(-1).content[0].text));
+  const result = moneySchema.parse(JSON.parse(interaction.output_text));
   console.log(result);
 }
 
@@ -925,14 +894,13 @@ run();
 ### REST
 
 ```
-# Specifies the API revision to avoid breaking changes when they become default
 curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -H "Api-Revision: 2026-05-20" \
   -X POST \
   -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "input": "What is the minimum hourly wage in Tokyo right now?",
     "tools": [{
       "type": "file_search",
@@ -959,16 +927,16 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 | 模型 | 文件搜索 |
 | --- | --- |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=zh-cn) | ✔️ |
 | [Gemini 3.1 Pro 预览版](https://ai.google.dev/gemini-api/docs/gemini-3.1-pro-preview?hl=zh-cn) | ✔️ |
 | [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-cn) | ✔️ |
-| [Gemini 3.1 Flash-Lite 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=zh-cn) | ✔️ |
 | [Gemini 3 Flash 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-cn) | ✔️ |
 | [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-cn) | ✔️ |
 | [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-cn) | ✔️ |
 
 ## 支持的工具组合
 
-Gemini 3 模型支持将内置工具（例如文件搜索）与自定义工具（函数调用）结合使用。如需了解详情，请参阅
+Gemini 3 模型支持将内置工具（例如文件搜索）与自定义工具（函数调用）相结合。如需了解详情，请参阅
 [工具组合](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-cn)页面。
 
 ## 支持的文件类型
@@ -1181,9 +1149,9 @@ Gemini 3 模型支持将内置工具（例如文件搜索）与自定义工具�
 - **文件大小上限 / 每个文档的限制**：100 MB
 - **项目文件搜索存储区的总大小** （基于用户层级）：
   - **免费**：1 GB
-  - **第 1 层级**：10 GB
-  - **第 2 层级**：100 GB
-  - **第 3 层级**：1 TB
+  - **1 级**：10 GB
+  - **2 级**：100 GB
+  - **3 级**：1 TB
 - **建议**：将每个文件搜索存储区的大小限制在 20 GB 以下，以确保最佳检索延迟时间。
 
 ## 价格
@@ -1191,7 +1159,7 @@ Gemini 3 模型支持将内置工具（例如文件搜索）与自定义工具�
 - 系统会在编制索引时根据现有的
   [嵌入价格](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn#gemini-embedding-2)向您收取嵌入费用。
 - 存储空间免费。
-- 查询时的嵌入免费。
+- 查询时嵌入免费。
 - 检索到的文档令牌按常规
   [上下文令牌](https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=zh-cn)收费。
 
@@ -1203,8 +1171,8 @@ Gemini 3 模型支持将内置工具（例如文件搜索）与自定义工具�
 
 如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-最后更新时间 (UTC)：2026-05-12。
+最后更新时间 (UTC)：2026-05-28。
 
 需要向我们提供更多信息？
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-05-12。"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-05-28。"],[],[]]

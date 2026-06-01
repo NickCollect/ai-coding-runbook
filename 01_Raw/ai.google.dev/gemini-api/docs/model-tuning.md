@@ -1,36 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/model-tuning?hl=ja
-fetched_at: 2026-05-25T05:22:01.136366+00:00
-title: "Gemini API \u3067\u30d5\u30a1\u30a4\u30f3\u30c1\u30e5\u30fc\u30cb\u30f3\u30b0\u3059\u308b \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/model-tuning?hl=pt-BR
+fetched_at: 2026-06-01T06:05:07.742548+00:00
+title: "Como fazer ajustes com a API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
 
-フィードバックを送信
+Envie comentários
 
-# Gemini API でファインチューニングする
+# Como fazer ajustes com a API Gemini
 
-Gemini 1.5 Flash-001 は 2025 年 5 月に非推奨となるため、Gemini API または AI Studio でのファイン チューニングをサポートする
-モデルは提供されなくなりますが、
-[Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform/models/gemini-use-supervised-tuning?hl=ja)ではサポートされます。
+Com a descontinuação do Gemini 1.5 Flash-001 em maio de 2025, não teremos mais um modelo disponível que ofereça suporte ao ajuste fino na API Gemini ou no AI Studio, mas ele é compatível com a [plataforma de agentes do Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform/models/gemini-use-supervised-tuning?hl=pt-br).
 
-現時点ではファイン チューニングのサポートを提供する予定はありませんが、お客様のユースケースでファイン チューニングが重要である場合は、デベロッパー フォーラムで[お知らせ
-ください](https://discuss.ai.google.dev/c/gemini-api/4?hl=ja)
-。
+Não temos planos imediatos para oferecer suporte ao ajuste refinado, mas gostaríamos de [saber sua opinião no fórum de desenvolvedores](https://discuss.ai.google.dev/c/gemini-api/4?hl=pt-br) se esse recurso for importante para seu caso de uso.
 
-フィードバックを送信
+Envie comentários
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-最終更新日 2026-04-29 UTC。
+Última atualização 2026-04-29 UTC.
 
-ご意見をお聞かせください
+Quer enviar seu feedback?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]

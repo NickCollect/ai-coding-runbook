@@ -1,39 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/document-processing?hl=ar
-fetched_at: 2026-05-25T05:25:13.958131+00:00
-title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/document-processing?hl=zh-TW
+fetched_at: 2026-06-01T06:03:58.148826+00:00
+title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-إرسال ملاحظات
+提供意見
 
-# فهم المستندات
+# 文件解讀
 
-يمكن لنماذج Gemini معالجة المستندات بتنسيق PDF باستخدام ميزة &quot;الرؤية الأصلية&quot; لفهم سياقات المستندات بأكملها. يتجاوز ذلك مجرد استخراج النص، ما يتيح لـ Gemini ما يلي:
+Gemini 模型可處理 PDF 格式的文件，並運用原生視覺功能瞭解整份文件的內容。這項功能不僅能擷取文字，還可讓 Gemini 執行下列動作：
 
-- تحليل المحتوى وتفسيره، بما في ذلك النصوص والصور والمخططات والرسومات البيانية والجداول، حتى في المستندات الطويلة التي تصل إلى 1,000 صفحة
-- استخراج المعلومات بتنسيقات [النتائج المنظَّمة](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar)
-- تلخيص المستندات والإجابة عن الأسئلة استنادًا إلى العناصر المرئية والنصية فيها
-- تحويل محتوى المستند إلى نص (مثل HTML)، مع الحفاظ على التنسيقات والتصميمات، لاستخدامه في التطبيقات اللاحقة
+- 分析及解讀內容，包括文字、圖片、圖表、圖表和表格，即使是長達 1000 頁的文件也沒問題。
+- 以[結構化輸出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-tw)格式擷取資訊。
+- 根據文件中的圖像和文字元素，摘要內容並回答問題。
+- 轉錄文件內容 (例如轉錄為 HTML)，保留版面配置和格式，供下游應用程式使用。
 
-يمكنك أيضًا ضبط مستندات غير PDF بالطريقة نفسها، ولكن سيتعامل معها Gemini كنص عادي، ما سيؤدي إلى إزالة السياق، مثل الرسوم البيانية أو التنسيق.
+您也可以傳送非 PDF 文件，但 Gemini 會將其視為一般文字，因此圖表或格式等脈絡資訊會消失。
 
-## تمرير بيانات ملف PDF مضمّنة
+## 內嵌傳遞 PDF 資料
 
-يمكنك تمرير بيانات PDF مضمّنة في الطلب إلى `generateContent`. هذه الطريقة هي الأنسب للمستندات الصغيرة أو المعالجة المؤقتة التي لا تحتاج فيها إلى الرجوع إلى الملف في الطلبات اللاحقة. ننصحك باستخدام [Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=ar#large-pdfs)
-للمستندات الأكبر حجمًا التي تحتاج إلى الرجوع إليها في المحادثات المتعددة الأدوار
-لتحسين وقت استجابة الطلب وتقليل معدل نقل البيانات.
+您可以在對 `generateContent` 的要求中，內嵌傳遞 PDF 資料。這種方法最適合用於小型文件或臨時處理，因為您不需要在後續要求中參照該檔案。如果要在多輪互動中參照較大的文件，建議使用 [Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=zh-tw#large-pdfs)，以縮短要求延遲時間並減少頻寬用量。
 
-يوضّح المثال التالي كيفية استرداد ملف PDF من عنوان URL وتحويله إلى وحدات بايت لمعالجته:
+以下範例說明如何從網址擷取 PDF，並轉換為位元組以供處理：
 
 ### Python
 
@@ -191,7 +190,7 @@ jq ".candidates[].content.parts[].text" response.json
 rm "${DISPLAY_NAME}.pdf"
 ```
 
-يمكنك أيضًا قراءة ملف PDF من ملف محلي للمعالجة:
+您也可以從本機檔案讀取 PDF 進行處理：
 
 ### Python
 
@@ -292,13 +291,13 @@ func main() {
 }
 ```
 
-## تحميل ملفات PDF باستخدام Files API
+## 使用 Files API 上傳 PDF
 
-ننصحك باستخدام واجهة برمجة التطبيقات Files API للملفات الأكبر حجمًا أو عندما تريد إعادة استخدام مستند في طلبات متعددة. يؤدي ذلك إلى تحسين وقت استجابة الطلبات وتقليل معدّل نقل البيانات من خلال فصل عملية تحميل الملف عن طلبات النموذج.
+如果檔案較大，或是打算在多個要求中重複使用文件，建議使用 Files API。這項做法可將檔案上傳作業與模型要求分離，進而縮短要求延遲時間並減少頻寬用量。
 
-### ملفات PDF كبيرة من عناوين URL
+### 透過網址上傳大型 PDF
 
-استخدِم File API لتسهيل تحميل ملفات PDF الكبيرة ومعالجتها من عناوين URL:
+使用 File API 簡化從網址上傳及處理大型 PDF 檔案的程序：
 
 ### Python
 
@@ -506,7 +505,7 @@ jq ".candidates[].content.parts[].text" response.json
 rm "${DISPLAY_NAME}.pdf"
 ```
 
-### ملفات PDF كبيرة مخزَّنة على الجهاز
+### 儲存在本機的大型 PDF
 
 ### Python
 
@@ -678,8 +677,7 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-يمكنك التأكّد من أنّ واجهة برمجة التطبيقات خزّنت الملف الذي تم تحميله بنجاح والحصول على بياناته الوصفية من خلال طلب [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=ar). `name`
-(وبالتالي `uri`) فقط هما المعرّفان الفريدان.
+您可以呼叫 [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=zh-tw)，確認 API 是否已成功儲存上傳的檔案並取得其相關中繼資料。只有 `name` (以及延伸的 `uri`) 是獨一無二。
 
 ### Python
 
@@ -711,9 +709,9 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## تمرير ملفات PDF متعددة
+## 傳遞多個 PDF
 
-بإمكان Gemini API معالجة مستندات PDF متعددة (تصل إلى 1, 000 صفحة) في طلب واحد، طالما أنّ الحجم المجمّع للمستندات وطلب النص يقع ضمن قدرة الاستيعاب للنموذج.
+只要文件和文字提示的總大小不超過模型的脈絡窗口，Gemini API 就能在單一要求中處理多個 PDF 文件 (最多 1000 頁)。
 
 ### Python
 
@@ -965,52 +963,51 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## التفاصيل الفنية
+## 技術詳細資料
 
-يمكن استخدام ملفات PDF بحجم يصل إلى 50 ميغابايت أو 1,000 صفحة في Gemini. وينطبق هذا الحد الأقصى على كلّ من البيانات المضمّنة وعمليات التحميل باستخدام Files API. تعادل كل صفحة مستند 258 رمزًا مميزًا.
+Gemini 支援的 PDF 檔案大小上限為 50 MB 或 1000 頁。這項限制適用於內嵌資料和 Files API 上傳作業。每頁文件相當於 258 個權杖。
 
-مع أنّه لا توجد حدود معيّنة لعدد وحدات البكسل في المستند باستثناء [قدرة استيعاب](https://ai.google.dev/gemini-api/docs/long-context?hl=ar) النموذج، يتم تصغير حجم الصفحات الأكبر إلى دقة قصوى تبلغ 3072 × 3072 مع الحفاظ على نسبة العرض إلى الارتفاع الأصلية، بينما يتم تكبير حجم الصفحات الأصغر إلى 768 × 768 بكسل. لا يتم خفض التكلفة للصفحات ذات الأحجام الأصغر، باستثناء معدل نقل البيانات، ولا يتم تحسين الأداء للصفحات ذات الدقة الأعلى.
+除了模型的[內容視窗](https://ai.google.dev/gemini-api/docs/long-context?hl=zh-tw)外，文件中的像素數量沒有具體限制，但較大的頁面會縮放至 3072 x 3072 像素的最大解析度，同時保留原始長寬比，較小的頁面則會放大至 768 x 768 像素。如果頁面較小，除了頻寬外，不會有任何成本降低；如果頁面解析度較高，也不會提升效能。
 
-### نماذج Gemini 3
+### Gemini 3 模型
 
-يقدّم Gemini 3 تحكّمًا دقيقًا في معالجة الصور المتعددة الوسائط باستخدام المَعلمة
-`media_resolution`. يمكنك الآن ضبط دقة العرض على منخفضة أو متوسطة أو عالية لكل جزء من الوسائط. بعد إضافة هذه الميزة، تم تعديل طريقة معالجة مستندات PDF على النحو التالي:
+Gemini 3 推出 `media_resolution` 參數，可精細控管多模態視覺處理作業。現在可以為每個媒體元件設定低、中或高解析度。新增這項功能後，處理 PDF 文件的方式也隨之更新：
 
-1. **تضمين النص الأصلي:** يتم استخراج النص المضمّن في ملف PDF وتقديمه إلى النموذج.
-2. **الفوترة وإعداد التقارير عن الرموز المميزة:**
-   - **لا يتم تحصيل رسوم** منك مقابل الرموز المميزة التي مصدرها **النص الأصلي** المستخرَج من ملفات PDF.
-   - في قسم `usage_metadata` من استجابة واجهة برمجة التطبيقات، يتم الآن احتساب الرموز المميزة التي تم إنشاؤها من معالجة صفحات PDF (كصور) ضمن طريقة العرض `IMAGE`، وليس ضمن طريقة العرض المنفصلة `DOCUMENT` كما كان الحال في بعض الإصدارات السابقة.
+1. **內建文字納入：**系統會擷取 PDF 中內建的文字，並提供給模型。
+2. **帳單與權杖報表：**
+   - 從 PDF 擷取的**原生文字**產生的詞元**不會計費**。
+   - 在 API 回應的 `usage_metadata` 部分，處理 PDF 頁面 (以圖片形式) 時產生的權杖現在會計入 `IMAGE` 模態，而不是像某些舊版一樣計入獨立的 `DOCUMENT` 模態。
 
-لمزيد من التفاصيل حول مَعلمة دقة الوسائط، راجِع دليل [دقة الوسائط](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ar).
+如要進一步瞭解媒體解析度參數，請參閱[媒體解析度](https://ai.google.dev/gemini-api/docs/media-resolution?hl=zh-tw)指南。
 
-### أنواع المستندات
+### 文件類型
 
-من الناحية الفنية، يمكنك ضبط أنواع MIME أخرى لفهم المستندات، مثل TXT وMarkdown وHTML وXML وما إلى ذلك، ولكن خدمة &quot;التعرّف البصري على المستندات&quot; ***لا تفهم سوى ملفات PDF***. سيتم استخراج الأنواع الأخرى كنص عادي، ولن يتمكّن النموذج من تفسير ما نراه في عرض هذه الملفات. سيتم فقدان أي تفاصيل خاصة بنوع الملف، مثل الرسوم البيانية والمخططات وعلامات HTML وتنسيق Markdown وما إلى ذلك.
+從技術上來說，您可以傳遞其他 MIME 類型，以供文件理解功能使用，例如 TXT、Markdown、HTML、XML 等。不過，文件視覺 ***只會解讀 PDF 檔案的內容***。其他類型會以純文字形式擷取，模型無法解讀這些檔案的算繪內容。所有檔案類型專屬內容都會遺失，例如圖表、HTML 標記、Markdown 格式等。
 
-للتعرّف على طرق إدخال الملفات الأخرى، يُرجى الاطّلاع على دليل [طرق إدخال الملفات](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ar).
+如要瞭解其他檔案輸入方式，請參閱「[檔案輸入方式](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-tw)」指南。
 
-### أفضل الممارسات
+### 最佳做法
 
-للحصول على أفضل النتائج:
+為確保最佳成效：
 
-- يمكنك تدوير الصفحات إلى الاتجاه الصحيح قبل تحميلها.
-- تجنَّب الصفحات غير الواضحة.
-- في حال استخدام صفحة واحدة، ضَع طلب النص بعد الصفحة.
+- 上傳前，請先將頁面旋轉至正確方向。
+- 避免模糊的頁面。
+- 如果使用單一頁面，請將文字提示詞放在該頁面之後。
 
-## الخطوات التالية
+## 後續步驟
 
-لمزيد من المعلومات، يُرجى الاطّلاع على المراجع التالية:
+如要進一步瞭解相關內容，請參閱下列資源：
 
-- [استراتيجيات إنشاء الطلبات](https://ai.google.dev/gemini-api/docs/files?hl=ar#prompt-guide): تتيح واجهة Gemini API إمكانية إنشاء الطلبات باستخدام بيانات نصية وصور وملفات صوتية وفيديوهات، ويُعرف ذلك أيضًا باسم إنشاء الطلبات المتعددة الوسائط.
-- [تعليمات النظام](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar#system-instructions):
-  تتيح لك تعليمات النظام توجيه سلوك النموذج استنادًا إلى احتياجاتك وحالات الاستخدام المحدّدة.
+- [檔案提示策略](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw#prompt-guide)：Gemini API 支援使用文字、圖片、音訊和影片資料提示，也就是多模態提示。
+- [系統指令](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-tw#system-instructions)：
+  系統指令可根據特定需求和用途，引導模型行為。
 
-إرسال ملاحظات
+提供意見
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-تاريخ التعديل الأخير: 2026-05-19 (حسب التوقيت العالمي المتفَّق عليه)
+上次更新時間：2026-05-19 (世界標準時間)。
 
-هل تريد مشاركة ملاحظاتك معنا؟
+想進一步說明嗎？
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-19 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-19 (世界標準時間)。"],[],[]]

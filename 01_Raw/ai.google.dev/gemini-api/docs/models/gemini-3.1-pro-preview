@@ -1,55 +1,55 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-CN
-fetched_at: 2026-05-25T05:23:41.530711+00:00
-title: "Gemini 3.1 Pro\uff08\u9884\u89c8\u7248\uff09 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=hi
+fetched_at: 2026-06-01T06:02:11.787369+00:00
+title: "Gemini 3.1 Pro \u0915\u0940 \u091d\u0932\u0915 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
+[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-发送反馈
+सुझाव भेजें
 
-# Gemini 3.1 Pro（预览版）
+# Gemini 3.1 Pro की झलक
 
-Gemini 3.1 Pro 预览版旨在提升 Gemini 3 Pro 系列的性能和可靠性，可提供更出色的思维能力、更高的令牌效率，以及更贴近实际、事实一致性更强的体验。它针对软件工程行为和易用性进行了优化，还针对需要在现实世界领域中精确使用工具并可靠执行多步操作的智能体工作流进行了优化。
+Gemini 3 Pro सीरीज़ की परफ़ॉर्मेंस और भरोसेमंद होने की क्षमता को बेहतर बनाने के लिए, Gemini 3.1 Pro Preview को बनाया गया है. यह बेहतर तरीके से सोचता है, टोकन को ज़्यादा असरदार तरीके से इस्तेमाल करता है, और तथ्यों के हिसाब से ज़्यादा सटीक जवाब देता है. इसे सॉफ़्टवेयर इंजीनियरिंग के व्यवहार और इस्तेमाल करने में आसानी के लिए ऑप्टिमाइज़ किया गया है. साथ ही, यह एजेंटिक वर्कफ़्लो के लिए भी ऑप्टिमाइज़ किया गया है. इसके लिए, टूल का सटीक इस्तेमाल और असली दुनिया के अलग-अलग डोमेन में कई चरणों में भरोसेमंद तरीके से काम करना ज़रूरी है.
 
-[在 Google AI Studio 中试用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=zh-cn)
+[Google AI Studio में आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=hi)
 
-## 文档
+## दस्तावेज़
 
-如需全面了解功能和特性，请访问 [Gemini 3 开发者指南](https://ai.google.dev/gemini-api/docs/gemini-3?hl=zh-cn)页面。
+सुविधाओं और क्षमताओं के बारे में पूरी जानकारी पाने के लिए, [Gemini 3 की डेवलपर गाइड](https://ai.google.dev/gemini-api/docs/gemini-3?hl=hi) पेज पर जाएं.
 
 ## gemini-3.1-pro-preview
 
-| 属性 | 说明 |
+| प्रॉपर्टी | ब्यौरा |
 | --- | --- |
-| id\_card 模型代码 | `gemini-3.1-pro-preview` |
-| 保存支持的数据类型 | **输入源**  文本、图片、视频、音频和 PDF  **输出**  文本 |
-| token\_auto令牌限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入 token 限制**  1,048,576  **输出 token 限制**  65536 |
-| handyman功能 | **音频生成**  不受支持  **批量 API**  支持  **缓存**  支持  **代码执行**  支持  **文件搜索**  受支持（仅限 AI Studio）  **Flex 推理**  支持  **函数调用**  支持  **依托 Google 地图进行接地**  支持  **图片生成**  不受支持  **Live API**  不受支持  **优先推断**  支持  **搜索接地**  支持  **结构化输出**  支持  **思考型**  支持  **网址上下文**  支持 |
-| 123 版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 预览：`gemini-3.1-pro-preview` - 预览：`gemini-3.1-pro-preview-customtools` \* |
-| calendar\_month最新更新 | 2026 年 2 月 |
-| cognition\_2知识截点 | 2025 年 1 月 |
+| id\_cardमॉडल कोड | `gemini-3.1-pro-preview` |
+| saveइस्तेमाल किए जा सकने वाले डेटा टाइप | **इनपुट**  टेक्स्ट, इमेज, वीडियो, ऑडियो, और PDF  **आउटपुट**  टेक्स्ट |
+| token\_autoटोकन की सीमाएं[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट टोकन की सीमा**  1,048,576  **आउटपुट टोकन की सीमा**  65,536 |
+| handymanसुविधाएँ | **ऑडियो जनरेट करने की सुविधा**  काम नहीं करता है  **Batch API**  काम करता है  **कैश मेमोरी में सेव होना**  काम करता है  **कोड को चलाने की सुविधा**  काम करता है  **फ़ाइल खोजना**  काम करता है (सिर्फ़ AI Studio में)  **फ़्लेक्स इन्फ़रेंस**  काम करता है  **फ़ंक्शन कॉलिंग**  काम करता है  **Google Maps की मदद से जवाब पाना**  काम करता है  **इमेज जनरेट करना**  काम नहीं करता है  **Live API**  काम नहीं करता है  **प्राथमिकता का अनुमान लगाना**  काम करता है  **भरोसेमंद स्रोतों से जानकारी लेना**  काम करता है  **स्ट्रक्चर्ड आउटपुट**  काम करता है  **सोच-विचार करना**  काम करता है  **यूआरएल का कॉन्टेक्स्ट**  काम करता है |
+| 123वर्शन | ज़्यादा जानकारी के लिए, [मॉडल वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) पढ़ें.  - झलक देखें: `gemini-3.1-pro-preview` - झलक देखें: `gemini-3.1-pro-preview-customtools` \* |
+| calendar\_monthनया अपडेट | फ़रवरी 2026 |
+| cognition\_2जानकारी न मिलना | जनवरी 2025 |
 
 #### gemini-3.1-pro-preview-customtools
 
-\* *对于那些使用 bash 和自定义工具混合构建应用的用户，Gemini 3.1 Pro 预览版通过 API 提供了一个单独的端点，称为 `gemini-3.1-pro-preview-customtools`。此端点更擅长优先处理您的自定义工具（例如 `view_file` 或 `search_code`）。*
+\* *Bash और कस्टम टूल, दोनों का इस्तेमाल करके ऐप्लिकेशन बनाने वाले लोगों के लिए, Gemini 3.1 Pro Preview में एक अलग एंडपॉइंट उपलब्ध है. इसे एपीआई के ज़रिए ऐक्सेस किया जा सकता है. इसे `gemini-3.1-pro-preview-customtools` कहा जाता है. यह एंडपॉइंट, आपके कस्टम टूल (जैसे कि `view_file` या `search_code`) को प्राथमिकता देने के लिए बेहतर है.*
 
-*请注意，虽然 `gemini-3.1-pro-preview-customtools` 针对使用自定义工具和 Bash 的代理工作流进行了优化，但在某些无法从这些工具中受益的用例中，您可能会发现质量波动。*
+*ध्यान दें कि `gemini-3.1-pro-preview-customtools` को, कस्टम टूल और बैश का इस्तेमाल करने वाले एजेंटिक वर्कफ़्लो के लिए ऑप्टिमाइज़ किया गया है. हालांकि, कुछ ऐसे इस्तेमाल के उदाहरणों में आपको क्वालिटी में उतार-चढ़ाव दिख सकता है जिनमें इन टूल का इस्तेमाल नहीं किया जाता.*
 
-发送反馈
+सुझाव भेजें
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-最后更新时间 (UTC)：2026-04-29。
+आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया.
 
-需要向我们提供更多信息？
+क्या आपको हमें और कुछ बताना है?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया."],[],[]]

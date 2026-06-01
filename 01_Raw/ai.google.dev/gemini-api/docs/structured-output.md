@@ -1,38 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=vi
-fetched_at: 2026-05-25T05:17:49.484159+00:00
-title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=ar
+fetched_at: 2026-06-01T06:10:23.071506+00:00
+title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
-# Kết quả có cấu trúc
+# مُخرجات منظَّمة
 
-Bạn có thể định cấu hình các mô hình Gemini để tạo câu trả lời tuân thủ một JSON Schema được cung cấp. Điều này đảm bảo kết quả có thể dự đoán và an toàn về kiểu, đồng thời đơn giản hoá việc trích xuất dữ liệu có cấu trúc từ văn bản không có cấu trúc.
+يمكنك ضبط نماذج Gemini لإنشاء ردود تتوافق مع مخطط JSON المقدَّم. يضمن ذلك الحصول على نتائج متوقّعة وآمنة من حيث النوع، كما يسهّل استخراج البيانات المنظَّمة من النصوص غير المنظَّمة.
 
-Sử dụng đầu ra có cấu trúc là lựa chọn lý tưởng cho:
+يُعدّ استخدام المُخرجات المنظَّمة مثاليًا للحالات التالية:
 
-- **Trích xuất dữ liệu:** Lấy thông tin cụ thể như tên và ngày tháng từ văn bản.
-- **Phân loại có cấu trúc:** Phân loại văn bản thành các danh mục được xác định trước.
-- **Quy trình công việc dựa trên tác nhân:** Tạo thông tin đầu vào có cấu trúc cho các công cụ hoặc API.
+- **استخراج البيانات:** استخراج معلومات محدّدة، مثل الأسماء والتواريخ، من النص
+- **التصنيف المنظَّم:** تصنيف النص ضِمن فئات محدَّدة مسبقًا
+- **سير عمل الذكاء الاصطناعي الوكيل:** إنشاء مدخلات منظَّمة للأدوات أو واجهات برمجة التطبيقات
 
-Ngoài việc hỗ trợ Giản đồ JSON trong API REST, Google GenAI SDK còn giúp bạn dễ dàng xác định giản đồ bằng [Pydantic](https://docs.pydantic.dev/latest/) (Python) và [Zod](https://zod.dev/) (JavaScript).
+بالإضافة إلى إتاحة استخدام JSON Schema في REST API، تسهّل حِزم تطوير البرامج (SDK) من Google للذكاء الاصطناعي التوليدي تحديد المخططات باستخدام [Pydantic](https://docs.pydantic.dev/latest/) (لغة Python) و[Zod](https://zod.dev/) (لغة JavaScript).
 
-Recipe Extractor
-Content Moderation
-Recursive Structures
+أداة استخراج الوصفات
+الإشراف على المحتوى
+البُنى المتكرّرة
 
-Ví dụ này minh hoạ cách trích xuất dữ liệu có cấu trúc từ văn bản bằng các loại Giản đồ JSON cơ bản như `object`, `array`, `string` và `integer`.
+يوضّح هذا المثال كيفية استخراج البيانات المنظَّمة من نص باستخدام أنواع JSON Schema الأساسية، مثل `object` و`array` و`string` و`integer`.
 
 ### Python
 
@@ -263,7 +264,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
     }'
 ```
 
-**Ví dụ về câu trả lời:**
+**مثال على الرد:**
 
 ```
 {
@@ -318,11 +319,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 }
 ```
 
-## Phát trực tiếp
+## البث
 
-Bạn có thể truyền trực tuyến các đầu ra có cấu trúc, cho phép bạn bắt đầu xử lý phản hồi khi phản hồi đang được tạo mà không cần phải đợi toàn bộ đầu ra hoàn tất. Điều này có thể cải thiện hiệu suất cảm nhận của ứng dụng.
+يمكنك بث النتائج المنظَّمة، ما يتيح لك بدء معالجة الرد أثناء إنشائه، بدون الحاجة إلى انتظار اكتمال الناتج بالكامل. يمكن أن يؤدي ذلك إلى تحسين الأداء المُدرَك لتطبيقك.
 
-Các khối được truyền trực tuyến sẽ là các chuỗi JSON hợp lệ một phần, có thể được nối để tạo thành đối tượng JSON hoàn chỉnh cuối cùng.
+ستكون الأجزاء التي يتم بثها عبارة عن سلاسل JSON جزئية صالحة، ويمكن ربطها لتكوين كائن JSON النهائي الكامل.
 
 ### Python
 
@@ -378,9 +379,10 @@ for await (const chunk of stream) {
 }
 ```
 
-## Đầu ra có cấu trúc bằng các công cụ
+## مُخرجات منظَّمة باستخدام الأدوات
 
-Gemini 3 cho phép bạn kết hợp Đầu ra có cấu trúc với các công cụ tích hợp, bao gồm [Bám sát nguồn bằng Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi), [Ngữ cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi), [Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi), [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi#structured-output) và [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi).
+يتيح لك Gemini 3 الجمع بين "النتائج المنظَّمة" والأدوات المضمّنة، بما في ذلك
+[تحديد المصدر من خلال "بحث Search"](https://ai.google.dev/gemini-api/docs/google-search?hl=ar) و[سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar) و[تنفيذ الرمز البرمجي](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar) و[البحث عن الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar#structured-output) و[استدعاء الدوال البرمجية](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar).
 
 ### Python
 
@@ -485,101 +487,101 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-pre
   }'
 ```
 
-## Hỗ trợ giản đồ JSON
+## التوافق مع مخطّط JSON
 
-Để tạo một đối tượng JSON, hãy đặt `response_format` trong cấu hình tạo. Giản đồ phải là một [Giản đồ JSON](https://json-schema.org/) hợp lệ mô tả định dạng đầu ra mong muốn.
+لإنشاء عنصر JSON، اضبط `response_format` في إعدادات الإنشاء. يجب أن يكون المخطط [مخطط JSON](https://json-schema.org/) صالحًا يصف تنسيق الإخراج المطلوب.
 
-Sau đó, mô hình sẽ tạo một phản hồi là chuỗi JSON hợp lệ về mặt cú pháp, khớp với giản đồ được cung cấp. Khi sử dụng dữ liệu đầu ra có cấu trúc, mô hình sẽ tạo ra dữ liệu đầu ra theo cùng thứ tự với các khoá trong giản đồ.
+سينشئ النموذج بعد ذلك استجابة عبارة عن سلسلة JSON صالحة نحويًا وتتطابق مع المخطط المقدَّم. عند استخدام مخرجات منظَّمة، سينتج النموذج مخرجات بالترتيب نفسه الذي تظهر به المفاتيح في المخطط.
 
-Chế độ đầu ra có cấu trúc của Gemini hỗ trợ một phần của quy cách [Giản đồ JSON](https://json-schema.org).
+يتوافق وضع الإخراج المنظَّم في Gemini مع مجموعة فرعية من مواصفات [مخطط JSON](https://json-schema.org).
 
-Sau đây là các giá trị được hỗ trợ của `type`:
+يمكن استخدام القيم التالية لسمة `type`:
 
-- **`string`**: Đối với văn bản.
-- **`number`**: Đối với số dấu phẩy động.
-- **`integer`**: Đối với số nguyên.
-- **`boolean`**: Đối với giá trị đúng/sai.
-- **`object`**: Đối với dữ liệu có cấu trúc có các cặp khoá-giá trị.
-- **`array`**: Đối với danh sách các mục.
-- **`null`**: Để cho phép một thuộc tính có giá trị rỗng, hãy thêm `"null"` vào mảng loại (ví dụ: `{"type": ["string", "null"]}`).
+- **`string`**: للنص
+- **`number`**: للأرقام ذات الفاصلة العائمة
+- **`integer`**: للأعداد الصحيحة
+- ‫**`boolean`**: للقيم الصحيحة أو الخاطئة
+- **`object`**: للبيانات المنظَّمة التي تتضمّن أزواجًا من المفاتيح والقيم
+- **`array`**: لقوائم العناصر
+- **`null`**: للسماح بأن تكون قيمة السمة فارغة، أدرِج `"null"` في مصفوفة النوع (مثل `{"type": ["string", "null"]}`).
 
-Những thuộc tính mô tả này giúp hướng dẫn mô hình:
+تساعد هذه الخصائص الوصفية في توجيه النموذج:
 
-- **`title`**: Nội dung mô tả ngắn về một tài sản.
-- **`description`**: Nội dung mô tả dài hơn và chi tiết hơn về một cơ sở lưu trú.
+- ‫**`title`**: وصف مختصر لخاصية.
+- ‫**`description`**: وصف أطول وأكثر تفصيلاً للمكان المخصّص للاستئجار
 
-### Thuộc tính cụ thể theo loại
+### السمات الخاصة بأنواع محدّدة
 
-**Đối với các giá trị `object`:**
+**بالنسبة إلى قيم `object`:**
 
-- **`properties`**: Một đối tượng trong đó mỗi khoá là tên thuộc tính và mỗi giá trị là một giản đồ cho thuộc tính đó.
-- **`required`**: Một mảng gồm các chuỗi, liệt kê những thuộc tính bắt buộc.
-- **`additionalProperties`**: Kiểm soát việc có cho phép các thuộc tính không có trong `properties` hay không. Có thể là một boolean hoặc một giản đồ.
+- **`properties`**: عنصر يكون فيه كل مفتاح هو اسم خاصية وكل قيمة هي مخطط لتلك الخاصية.
+- ‫**`required`**: مصفوفة من السلاسل، تسرد السمات الإلزامية.
+- ‫**`additionalProperties`**: يتحكّم هذا الإعداد في ما إذا كان مسموحًا باستخدام المواقع غير المدرَجة في `properties`. يمكن أن تكون قيمة منطقية أو مخططًا.
 
-**Đối với các giá trị `string`:**
+**بالنسبة إلى قيم `string`:**
 
-- **`enum`**: Liệt kê một tập hợp cụ thể gồm các chuỗi có thể có cho các tác vụ phân loại.
-- **`format`**: Chỉ định cú pháp cho chuỗi, chẳng hạn như `date-time`, `date`, `time`.
+- ‫**`enum`**: تعرض هذه السمة مجموعة محدّدة من السلاسل المحتملة لمهام التصنيف.
+- **`format`**: تحدّد هذه السمة بنية السلسلة، مثل `date-time` أو `date` أو `time`.
 
-**Đối với các giá trị `number` và `integer`:**
+**بالنسبة إلى القيمتَين `number` و`integer`:**
 
-- **`enum`**: Liệt kê một tập hợp cụ thể gồm các giá trị bằng số có thể có.
-- **`minimum`**: Giá trị tối thiểu bao gồm.
-- **`maximum`**: Giá trị tối đa (bao gồm).
+- **`enum`**: تعرض مجموعة معيّنة من القيم الرقمية المحتملة.
+- ‫**`minimum`**: تمثّل الحد الأدنى للقيمة الشاملة.
+- ‫**`maximum`**: تمثّل الحدّ الأقصى للقيمة الشاملة.
 
-**Đối với các giá trị `array`:**
+**بالنسبة إلى قيم `array`:**
 
-- **`items`**: Xác định giản đồ cho tất cả các mục trong mảng.
-- **`prefixItems`**: Xác định danh sách giản đồ cho N mục đầu tiên, cho phép các cấu trúc giống như bộ giá trị.
-- **`minItems`**: Số lượng tối thiểu của các mục trong mảng.
-- **`maxItems`**: Số lượng tối đa của các mục trong mảng.
+- ‫**`items`**: تحدّد هذه السمة المخطط لجميع العناصر في المصفوفة.
+- ‫**`prefixItems`**: تحدّد هذه الكلمة الرئيسية قائمة بمخططات أول N عناصر، ما يسمح بإنشاء بنى تشبه الصفوف.
+- ‫**`minItems`**: الحد الأدنى لعدد العناصر في المصفوفة
+- ‫**`maxItems`**: الحد الأقصى لعدد العناصر في المصفوفة
 
-## Hỗ trợ mô hình
+## التوافق مع الطُرز
 
-Các mô hình sau đây hỗ trợ đầu ra có cấu trúc:
+تتيح النماذج التالية إخراج بيانات منظَّمة:
 
-| Mô hình | Đầu ra có cấu trúc |
+| الطراز | المخرجات المنظَّمة |
 | --- | --- |
 | Gemini 3.1 Flash-Lite | ✔️ |
-| Bản xem trước Gemini 3.1 Pro | ✔️ |
-| Gemini 3.5 Flash | ✔️ |
-| Bản xem trước Gemini 3.1 Flash-Lite | ✔️ |
+| معاينة Gemini 3.1 Pro | ✔️ |
+| ‫Gemini 3.5 Flash | ✔️ |
+| معاينة Gemini 3.1 Flash-Lite | ✔️ |
 | Gemini 2.5 Pro | ✔️ |
 | Gemini 2.5 Flash | ✔️ |
-| Gemini 2.5 Flash-Lite | ✔️ |
-| Gemini 2.0 Flash | ✔️\* |
+| ‫Gemini 2.5 Flash-Lite | ✔️ |
+| ‫Gemini 2.0 Flash | ✔️\* |
 | Gemini 2.0 Flash-Lite | ✔️\* |
 
-*\* Xin lưu ý rằng Gemini 2.0 yêu cầu danh sách `propertyOrdering` rõ ràng trong dữ liệu đầu vào JSON để xác định cấu trúc ưu tiên. Bạn có thể xem ví dụ trong [sổ tay này](https://github.com/google-gemini/cookbook/blob/main/examples/Pdf_structured_outputs_on_invoices_and_forms.ipynb).*
+*\* يُرجى العِلم أنّ Gemini 2.0 يتطلّب قائمة `propertyOrdering` صريحة ضمن إدخال JSON لتحديد البنية المفضّلة. يمكنك الاطّلاع على مثال في [كتاب الطبخ](https://github.com/google-gemini/cookbook/blob/main/examples/Pdf_structured_outputs_on_invoices_and_forms.ipynb) هذا.*
 
-## Đầu ra có cấu trúc so với gọi hàm
+## المخرجات المنظَّمة مقارنةً باستدعاء الدالة
 
-Cả đầu ra có cấu trúc và lệnh gọi hàm đều sử dụng giản đồ JSON, nhưng chúng phục vụ các mục đích khác nhau:
+تستخدم كل من النتائج المنظَّمة واستدعاء الدوال مخططات JSON، ولكنها تخدم أغراضًا مختلفة:
 
-| Tính năng | Trường hợp sử dụng chính |
+| الميزة | حالة الاستخدام الأساسية |
 | --- | --- |
-| **Đầu ra có cấu trúc** | **Định dạng phản hồi cuối cùng cho người dùng.** Hãy sử dụng tham số này khi bạn muốn *câu trả lời* của mô hình ở một định dạng cụ thể (ví dụ: trích xuất dữ liệu từ một tài liệu để lưu vào cơ sở dữ liệu). |
-| **Lệnh gọi hàm** | **Thực hiện hành động trong cuộc trò chuyện.** Hãy sử dụng chức năng này khi mô hình cần *hỏi bạn* thực hiện một việc (ví dụ: "xem thời tiết hiện tại") trước khi có thể đưa ra câu trả lời cuối cùng. |
+| **المخرجات المنظَّمة** | **تنسيق الرد النهائي للمستخدم:** استخدِم هذه الأداة عندما تريد أن يكون *ردّ* النموذج بتنسيق معيّن (مثل استخراج البيانات من مستند لحفظها في قاعدة بيانات). |
+| **استدعاء الدوال** | **اتّخاذ إجراء أثناء المحادثة** استخدِم هذه السمة عندما يحتاج النموذج إلى *أن يطلب منك* تنفيذ مهمة (مثل "الحصول على حالة الطقس الحالية") قبل أن يتمكّن من تقديم إجابة نهائية. |
 
-## Các phương pháp hay nhất
+## أفضل الممارسات
 
-- **Nội dung mô tả rõ ràng:** Sử dụng trường `description` trong giản đồ để cung cấp hướng dẫn rõ ràng cho mô hình về ý nghĩa của từng thuộc tính. Điều này rất quan trọng để hướng dẫn đầu ra của mô hình.
-- **Nhập mạnh:** Sử dụng các loại cụ thể (`integer`, `string`, `enum`) bất cứ khi nào có thể. Nếu một tham số có một tập hợp giới hạn các giá trị hợp lệ, hãy sử dụng `enum`.
-- **Thiết kế câu lệnh:** Nêu rõ trong câu lệnh những gì bạn muốn mô hình thực hiện. Ví dụ: "Trích xuất thông tin sau đây từ văn bản..." hoặc "Phân loại ý kiến phản hồi này theo giản đồ được cung cấp...".
-- **Xác thực:** Mặc dù đầu ra có cấu trúc đảm bảo JSON chính xác về mặt cú pháp, nhưng không đảm bảo các giá trị chính xác về mặt ngữ nghĩa. Luôn xác thực đầu ra cuối cùng trong mã xử lý ứng dụng trước khi sử dụng.
-- **Xử lý lỗi:** Triển khai quy trình xử lý lỗi mạnh mẽ trong ứng dụng của bạn để quản lý một cách thích hợp các trường hợp mà đầu ra của mô hình, mặc dù tuân thủ giản đồ, nhưng có thể không đáp ứng các yêu cầu về logic nghiệp vụ của bạn.
+- **أوصاف واضحة:** استخدِم الحقل `description` في المخطط لتقديم تعليمات واضحة للنموذج حول ما تمثّله كل سمة. هذا أمر بالغ الأهمية لتوجيه ناتج النموذج.
+- **الكتابة القوية:** استخدِم أنواعًا محدّدة (`integer` و`string` و`enum`) كلما أمكن ذلك. إذا كانت إحدى المَعلمات تتضمّن مجموعة محدودة من القيم الصالحة، استخدِم `enum`.
+- **هندسة الطلبات:** حدِّد بوضوح في طلبك ما تريد أن يفعله النموذج، مثل "استخرِج المعلومات التالية من النص..." أو "صنِّف هذه الملاحظات وفقًا للمخطط المقدَّم...".
+- **التحقّق من الصحة:** على الرغم من أنّ الناتج المنظَّم يضمن أن يكون ملف JSON صحيحًا من الناحية النحوية، إلا أنّه لا يضمن أن تكون القيم صحيحة من الناحية الدلالية. يجب دائمًا التحقّق من صحة الناتج النهائي في الرمز البرمجي لتطبيقك قبل استخدامه.
+- **معالجة الأخطاء:** نفِّذ إجراءات فعالة لمعالجة الأخطاء في تطبيقك من أجل إدارة الحالات التي قد لا يستوفي فيها ناتج النموذج متطلبات منطق نشاطك التجاري، على الرغم من توافقه مع المخطط.
 
-## Các điểm hạn chế
+## القيود
 
-- **Tập hợp con của giản đồ:** Không phải tất cả các tính năng của quy cách Giản đồ JSON đều được hỗ trợ. Mô hình này bỏ qua các thuộc tính không được hỗ trợ.
-- **Độ phức tạp của giản đồ:** API có thể từ chối các giản đồ quá lớn hoặc được lồng sâu. Nếu bạn gặp lỗi, hãy thử đơn giản hoá giản đồ bằng cách rút ngắn tên thuộc tính, giảm số lượng lớp lồng nhau hoặc giới hạn số lượng ràng buộc.
+- **مجموعة فرعية من المخطط:** لا تتوافق بعض ميزات مواصفات JSON Schema. يتجاهل النموذج الخصائص غير المتوافقة.
+- **تعقيد المخطط:** قد ترفض واجهة برمجة التطبيقات المخططات الكبيرة جدًا أو المتداخلة بشكل كبير. في حال مواجهة أخطاء، جرِّب تبسيط المخطط عن طريق تقصير أسماء السمات أو تقليل التداخل أو الحدّ من عدد القيود.
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Cập nhật lần gần đây nhất: 2026-05-19 UTC.
+تاريخ التعديل الأخير: 2026-05-19 (حسب التوقيت العالمي المتفَّق عليه)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-19 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-19 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/zdr?hl=he
-fetched_at: 2026-05-25T05:21:04.447681+00:00
+fetched_at: 2026-06-01T06:05:38.352293+00:00
 title: "\u05e9\u05de\u05d9\u05e8\u05ea \u05e0\u05ea\u05d5\u05e0\u05d9\u05dd \u05d0\u05e4\u05e1\u05d9\u05ea \u05d1-Gemini Developer API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -46,14 +46,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 - [מידע על המדיניות בנושא שימוש אסור ב-AI גנרטיבי](https://policies.google.com/terms/generative-ai/use-policy?hl=he)
 - קוראים את [התנאים וההגבלות הנוספים של Gemini API](https://ai.google.dev/gemini-api/terms?hl=he).
-- אם אתם צריכים אמצעי בקרה של ZDR ברמה הארגונית בשירות עצמי, כדאי לעיין [במדריך בנושא שמירת נתונים אפסית בפלטפורמת הסוכנים של Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform/models/vertex-ai-zero-data-retention?hl=he).
+- אם אתם צריכים אמצעי בקרה של ZDR ברמה הארגונית בשירות עצמי, כדאי לעיין [במדריך בנושא שמירת נתונים אפסית בפלטפורמת הסוכנים של Gemini Enterprise](https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/zero-data-retention?hl=he).
 
 שליחת משוב
 
 אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-עדכון אחרון: 2026-04-29 (שעון UTC).
+עדכון אחרון: 2026-05-28 (שעון UTC).
 
 רוצה לתת לנו משוב?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-05-28 (שעון UTC)."],[],[]]

@@ -1,41 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-09-2025?hl=th
-fetched_at: 2026-05-25T05:26:05.389897+00:00
-title: "Gemini 2.5 Flash (\u0e40\u0e27\u0e2d\u0e23\u0e4c\u0e0a\u0e31\u0e19\u0e15\u0e31\u0e27\u0e2d\u0e22\u0e48\u0e32\u0e07) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-09-2025?hl=it
+fetched_at: 2026-06-01T06:03:03.861480+00:00
+title: "Anteprima di Gemini 2.5 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-ส่งความคิดเห็น
+Invia feedback
 
-# Gemini 2.5 Flash (เวอร์ชันตัวอย่าง)
+# Anteprima di Gemini 2.5 Flash
 
 ## gemini-2.5-flash-preview-09-2025
 
-| พร็อพเพอร์ตี้ | คำอธิบาย |
+| Proprietà | Descrizione |
 | --- | --- |
-| รหัสโมเดล id\_card | `gemini-2.5-flash-preview-09-2025` |
-| บันทึกประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ รูปภาพ วิดีโอ เสียง  **เอาต์พุต**  ข้อความ |
-| token\_autoขีดจำกัดของโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  1,048,576  **ขีดจำกัดโทเค็นเอาต์พุต**  65,536 |
-| handymanความสามารถ | **การสร้างเสียง**  สิ่งที่ทำไม่ได้  **Batch API**  สิ่งที่ทำได้  **การแคช**  สิ่งที่ทำได้  **การรันโค้ด**  สิ่งที่ทำได้  **ค้นหาไฟล์**  สิ่งที่ทำได้  **การเรียกใช้ฟังก์ชัน**  สิ่งที่ทำได้  **การเชื่อมต่อแหล่งข้อมูลกับ Google Maps**  สิ่งที่ทำไม่ได้  **การสร้างรูปภาพ**  สิ่งที่ทำไม่ได้  **Live API**  สิ่งที่ทำไม่ได้  **การเชื่อมต่อแหล่งข้อมูลของ Search**  สิ่งที่ทำได้  **เอาต์พุตที่มีโครงสร้าง**  สิ่งที่ทำได้  **การคิด**  สิ่งที่ทำได้  **บริบท URL**  สิ่งที่ทำได้ |
-| 123เวอร์ชัน | อ่านรายละเอียดเพิ่มเติมได้ใน[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)  - เสถียร: [`gemini-2.5-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=th) - ปิด: `gemini-2.5-flash-preview-09-2025` |
-| calendar\_monthการอัปเดตล่าสุด | กันยายน 2025 |
-| cognition\_2การตัดข้อมูล | มกราคม 2025 |
+| Codice modello id\_card | `gemini-2.5-flash-preview-09-2025` |
+| saveTipi di dati supportati | **Input**  Testo, immagini, video, audio  **Output**  Testo |
+| token\_autoLimiti dei token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=it) | **Limite di token di input**  1.048.576  **Limite di token di output**  65.536 |
+| handymanFunzionalità | **Generazione di audio**  Non supportato  **API batch**  Supportato  **Memorizzazione nella cache**  Supportato  **Esecuzione di codice**  Supportato  **Ricerca file**  Supportato  **Chiamata di funzione**  Supportato  **Grounding con Google Maps**  Non supportato  **Generazione di immagini**  Non supportato  **API Live**  Non supportato  **Fondatezza della Ricerca**  Supportato  **Output strutturati**  Supportato  **Ragionamento**  Supportato  **Contesto URL**  Supportato |
+| Versioni 123 | Per ulteriori dettagli, leggi i [pattern delle versioni del modello](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it#model-versions).  - Stabile: [`gemini-2.5-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=it) - Arresto: `gemini-2.5-flash-preview-09-2025` |
+| calendar\_monthUltimo aggiornamento | Settembre 2025 |
+| cognition\_2Knowledge cutoff | Gennaio 2025 |
 
-ส่งความคิดเห็น
+Invia feedback
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-อัปเดตล่าสุด 2026-04-29 UTC
+Ultimo aggiornamento 2026-04-29 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Vuoi dirci altro?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-29 UTC"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]

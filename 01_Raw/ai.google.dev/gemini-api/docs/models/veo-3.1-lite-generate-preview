@@ -1,48 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=tr
-fetched_at: 2026-05-25T05:28:55.840453+00:00
-title: "Veo 3.1 Lite \u00d6nizlemesi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=vi
+fetched_at: 2026-06-01T05:58:00.189587+00:00
+title: "B\u1ea3n xem tr\u01b0\u1edbc Veo 3.1 Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Geri bildirim gönderin
+Gửi ý kiến phản hồi
 
-# Veo 3.1 Lite Önizlemesi
+# Bản xem trước Veo 3.1 Lite
 
-Veo 3.1 Lite Önizleme, yüksek verimliliğe sahip, geliştiricileri önceliklendiren bir video modelidir. Bu model, yüksek kaliteli video üretme, düzenleme ve sinematik kontrol özellikleri sunar. Bu araç, içerik üreticiler ve işletmeler için ölçeklenebilir ve programlanabilir bir arayüz sunarak profesyonel kalitede video yapay zekasını herkesin erişimine açmak amacıyla en yeni Veo 3.1 modelinden yararlanır.
+Veo 3.1 Lite Preview là một mô hình video có hiệu suất cao, ưu tiên cho nhà phát triển, cung cấp khả năng tạo, chỉnh sửa video có độ trung thực cao và kiểm soát chất lượng điện ảnh. Công cụ này tận dụng mô hình Veo 3.1 tiên tiến để phổ biến AI tạo video chuyên nghiệp bằng cách cung cấp một giao diện có thể mở rộng và lập trình cho nhà sáng tạo và doanh nghiệp.
 
-[Google AI Studio'da deneme](https://aistudio.google.com?model=veo-3.1-lite-generate-preview&hl=tr)
+[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=veo-3.1-lite-generate-preview&hl=vi)
 
-## Belgeler
+## Tài liệu
 
-Veo 3.1 Lite, büyük ölçekte yüksek hacimli video uygulamaları ve iş akışları geliştiren geliştiriciler ve işletmeler için en iyi fiyatları sunar. Ayrıntılar ve diğer Veo 3.1 modelleriyle karşılaştırma için [Fiyatlandırma](https://ai.google.dev/gemini-api/docs/pricing?hl=tr#veo-3.1) sayfasını ziyaret edin.
+Veo 3.1 Lite mang đến mức giá tốt nhất cho các nhà phát triển và doanh nghiệp xây dựng các ứng dụng và quy trình làm việc có số lượng lớn video ở quy mô lớn. Hãy truy cập vào trang [Mức giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#veo-3.1) để biết thông tin chi tiết và so sánh với các mô hình Veo 3.1 khác.
 
-Özellikler ve işlevler hakkında kapsamlı bilgi için [Video oluşturma](https://ai.google.dev/gemini-api/docs/video?hl=tr) sayfasını ziyaret edin. Veo 3.1 Lite Önizleme'nin [4K çıkışları](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=tr#resolution) veya [uzantıları](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=tr#extending_veo_videos) desteklemediğini unutmayın.
+Truy cập trang [Tạo video](https://ai.google.dev/gemini-api/docs/video?hl=vi) để xem thông tin đầy đủ về các tính năng và khả năng. Xin lưu ý rằng Veo 3.1 Lite Preview không hỗ trợ [đầu ra 4K](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=vi#resolution) hoặc [Tiện ích](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=vi#extending_veo_videos).
 
 ## veo-3.1-lite-generate-preview
 
-| Mülk | Açıklama |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardModel kodu | **Gemini API**  `veo-3.1-lite-generate-preview` |
-| saveDesteklenen veri türleri | **Giriş**  Metin, Resim  **Çıkış**  Sesli video |
-| token\_autoSınırlar | **Metin girişi**  1.024 jeton  **Çıkış videosu**  1 |
-| calendar\_monthSon güncelleme | Mart 2026 |
+| id\_cardMã kiểu máy | **Gemini API**  `veo-3.1-lite-generate-preview` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, hình ảnh  **Đầu ra**  Video có âm thanh |
+| Giới hạn token\_auto | **Nhập văn bản**  1.024 mã thông báo  **Video đầu ra**  1 |
+| calendar\_monthThông tin cập nhật mới nhất | Tháng 3 năm 2026 |
 
-Geri bildirim gönderin
+Gửi ý kiến phản hồi
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Son güncelleme tarihi: 2026-04-29 UTC.
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

@@ -1,142 +1,135 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-key?hl=pt-BR
-fetched_at: 2026-05-25T05:19:17.115968+00:00
-title: "Como usar chaves da API Gemini \u00a0|\u00a0 Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-key?hl=ar
+fetched_at: 2026-06-01T06:08:47.094064+00:00
+title: "\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0645\u0641\u0627\u062a\u064a\u062d \u0648\u0627\u062c\u0647\u0629 \u0628\u0631\u0645\u062c\u0629 \u0627\u0644\u062a\u0637\u0628\u064a\u0642\u0627\u062a \u0641\u064a Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Envie comentários
+إرسال ملاحظات
 
-# Como usar chaves da API Gemini
+# استخدام مفاتيح واجهة برمجة التطبيقات في Gemini
 
-Para usar a API Gemini, você precisa de uma chave de API. Nesta página, você vai aprender a criar e gerenciar chaves no Google AI Studio, além de configurar seu ambiente para usá-las no código.
+لاستخدام Gemini API، يجب أن يكون لديك مفتاح واجهة برمجة التطبيقات. توضّح هذه الصفحة كيفية إنشاء مفاتيحك وإدارتها في Google AI Studio، بالإضافة إلى كيفية إعداد بيئتك لاستخدامها في الرمز البرمجي.
 
-[Criar ou visualizar uma chave da API Gemini](https://aistudio.google.com/app/apikey?hl=pt-br)
+[إنشاء مفتاح واجهة Gemini API أو عرضه](https://aistudio.google.com/app/apikey?hl=ar)
 
-## Chaves de API
+## مفاتيح واجهة برمجة التطبيقات
 
-**Você pode criar e gerenciar todas as suas chaves de API Gemini na página [Chaves de API](https://aistudio.google.com/app/apikey?hl=pt-br)** do Google AI Studio.
+يمكنك إنشاء جميع مفاتيح Gemini API وإدارتها من صفحة [مفاتيح API](https://aistudio.google.com/app/apikey?hl=ar) في **Google AI Studio**.
 
-Depois de ter uma chave de API, você tem as seguintes opções para se conectar à
-API Gemini:
+بعد الحصول على مفتاح واجهة برمجة التطبيقات، تتوفّر لك الخيارات التالية للربط بواجهة Gemini API:
 
-- [Definir sua chave de API como uma variável de ambiente](#set-api-env-var)
-- [Fornecer sua chave de API explicitamente](#provide-api-key-explicitly)
+- [ضبط مفتاح واجهة برمجة التطبيقات كمتغيّر بيئة](#set-api-env-var)
+- [تقديم مفتاح واجهة برمجة التطبيقات بشكلٍ صريح](#provide-api-key-explicitly)
 
-Para testes iniciais, você pode codificar uma chave de API, mas isso só deve ser
-temporário, já que não é seguro. Confira exemplos de codificação da chave de API na seção [Fornecer a chave de API explicitamente](#provide-api-key-explicitly).
+لإجراء الاختبار الأوّلي، يمكنك ترميز مفتاح واجهة برمجة التطبيقات بشكل ثابت، ولكن يجب أن يكون ذلك مؤقتًا فقط لأنّه غير آمن. يمكنك العثور على أمثلة على الترميز الثابت لمفتاح واجهة برمجة التطبيقات في قسم [توفير مفتاح واجهة برمجة التطبيقات بشكل صريح](#provide-api-key-explicitly).
 
-## Projetos do Google Cloud
+## مشاريع Google Cloud
 
-Os [projetos do Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=pt-br)
-são fundamentais para usar os serviços do Google Cloud (como a API Gemini),
-gerenciar o faturamento e controlar colaboradores e permissões. O Google AI Studio oferece uma interface leve para seus projetos do Google Cloud.
+تُعد [مشاريع Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=ar) أساسية لاستخدام خدمات Google Cloud (مثل Gemini API) وإدارة الفوترة والتحكّم في المتعاونين والأذونات. يوفّر Google AI
+Studio واجهة بسيطة لمشاريعك على Google Cloud.
 
-Se você ainda não tiver criado nenhum projeto, crie um ou importe um do Google Cloud para o Google AI Studio. A página **Projetos** no Google AI
-Studio mostra todas as chaves com permissão suficiente para usar a API
-Gemini. Consulte a seção [Importar projetos](#import-projects) para instruções.
+إذا لم يسبق لك إنشاء أي مشاريع، عليك إنشاء مشروع جديد أو استيراد مشروع من Google Cloud إلى Google AI Studio. ستعرض صفحة **المشاريع** في Google AI Studio جميع المفاتيح التي لديها الإذن الكافي لاستخدام Gemini API. راجِع قسم [استيراد المشاريع](#import-projects) للحصول على التعليمات.
 
-### Projeto padrão
+### المشروع التلقائي
 
-Para novos usuários, depois de aceitar os Termos de Serviço, o Google AI Studio cria um
-projeto do Google Cloud e uma chave de API padrão para facilitar o uso. Para renomear esse projeto no Google AI Studio, acesse a visualização **Projetos** no **Painel**, clique no botão de configurações de três pontos ao lado de um projeto e escolha **Renomear projeto**. Os usuários atuais ou que já têm contas do Google Cloud não terão um projeto padrão criado.
+بالنسبة إلى المستخدمين الجدد، بعد قبول بنود الخدمة، ينشئ Google AI Studio مشروعًا ومفتاحًا تلقائيًا على Google Cloud لتسهيل الاستخدام. يمكنك إعادة تسمية هذا المشروع في Google AI Studio من خلال الانتقال إلى طريقة عرض **المشاريع** في **لوحة البيانات**، والنقر على زر الإعدادات المكوّن من 3 نقاط بجانب أحد المشاريع، ثم اختيار **إعادة تسمية المشروع**. لن يتم إنشاء مشروع تلقائي للمستخدمين الحاليين أو المستخدمين الذين لديهم حسابات على Google Cloud.
 
-## Importar projetos
+## استيراد المشاريع
 
-Cada chave de API Gemini está associada a um projeto na nuvem do Google. Por padrão, o Google AI Studio não mostra todos os seus projetos do Cloud. Para importar os projetos desejados, pesquise o nome ou ID do projeto na caixa de diálogo **Importar projetos**. Para conferir uma lista completa dos projetos a que você tem acesso, acesse o console do Cloud.
+يرتبط كل مفتاح لواجهة Gemini API بمشروع على Google Cloud. لا يعرض Google AI Studio تلقائيًا كل مشاريعك على السحابة الإلكترونية. يجب استيراد المشاريع التي تريدها من خلال البحث عن الاسم أو رقم تعريف المشروع في مربّع الحوار **استيراد المشاريع**. للاطّلاع على قائمة كاملة بالمشاريع التي يمكنك الوصول إليها، انتقِل إلى Cloud Console.
 
-Se você ainda não importou nenhum projeto na nuvem, siga estas etapas para importar um projeto do Google Cloud e criar uma chave:
+إذا لم تستورد أي مشاريع على السحابة الإلكترونية بعد، اتّبِع الخطوات التالية لاستيراد مشروع Google Cloud وإنشاء مفتاح:
 
-1. Acesse o [Google AI Studio](https://aistudio.google.com?hl=pt-br).
-2. Abra o **Painel** no painel lateral.
-3. Selecione **Projetos**.
-4. Selecione o botão **Importar projetos** na página **Projetos**.
-5. Pesquise e selecione o projeto na nuvem do Google que você quer importar e clique no botão **Importar**.
+1. انتقِل إلى [Google AI Studio](https://aistudio.google.com?hl=ar).
+2. افتح **لوحة البيانات** من اللوحة الجانبية على يمين الصفحة.
+3. اختَر **المشاريع**.
+4. انقر على الزر **استيراد المشاريع** في صفحة **المشاريع**.
+5. ابحث عن مشروع Google Cloud الذي تريد استيراده واختَره، ثم انقر على الزر **استيراد**.
 
-Depois que um projeto for importado, acesse a página **Chaves de API** no menu **Painel** e crie uma chave de API no projeto que você acabou de importar.
+بعد استيراد مشروع، انتقِل إلى صفحة **مفاتيح واجهة برمجة التطبيقات** من قائمة **لوحة البيانات**، ثم أنشِئ مفتاح واجهة برمجة تطبيقات في المشروع الذي استوردته للتو.
 
-## Limitações
+## القيود
 
-Confira abaixo as limitações do gerenciamento de chaves de API e projetos do Google Cloud no
-Google AI Studio.
+في ما يلي القيود المفروضة على إدارة مفاتيح واجهة برمجة التطبيقات ومشاريع Google Cloud في Google AI Studio.
 
-- É possível criar no máximo 10 projetos por vez na página **Projetos** do Google AI Studio.
-- É possível nomear e renomear projetos e chaves.
-- As páginas **Chaves de API** e **Projetos** mostram um máximo de 100 chaves e 50 projetos.
-- Somente as chaves de API sem restrições ou restritas à API
-  Generative Language são mostradas.
+- يمكنك إنشاء 10 مشاريع كحدّ أقصى في كل مرة من صفحة **المشاريع** في Google AI Studio.
+- يمكنك تسمية المشاريع والمفاتيح وإعادة تسميتها.
+- تعرض صفحتا **مفاتيح واجهة برمجة التطبيقات** و**المشاريع** 100 مفتاح و50 مشروعًا كحد أقصى.
+- لا يتم عرض سوى مفاتيح واجهة برمجة التطبيقات التي لا تتضمّن أي قيود أو التي تقتصر على Generative Language API.
 
-Para ter mais acesso de gerenciamento aos seus projetos, incluindo a modificação e a restrição de chaves de API, acesse a [página de credenciais do console do Google Cloud](https://console.cloud.google.com/apis/credentials?hl=pt-br).
-No console do Cloud, selecione seu projeto, clique em uma chave de API e restrinja o acesso à **API Generative Language**.
+للحصول على إذن إضافي بإدارة مشاريعك، بما في ذلك تعديل مفاتيح واجهة برمجة التطبيقات وتقييدها، انتقِل إلى
+[صفحة بيانات الاعتماد في Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=ar).
+في Cloud Console، يمكنك اختيار مشروعك والنقر على مفتاح واجهة برمجة تطبيقات حالي، ثم حصر استخدامه على **Generative Language API**.
 
-## Definir a chave de API como uma variável de ambiente
+## ضبط مفتاح واجهة برمجة التطبيقات كمتغيّر بيئي
 
-Se você definir a variável de ambiente `GEMINI_API_KEY` ou `GOOGLE_API_KEY`, a chave de API será capturada automaticamente pelo cliente ao usar uma das [bibliotecas da API Gemini](https://ai.google.dev/gemini-api/docs/libraries?hl=pt-br). Recomendamos que você defina apenas uma dessas variáveis, mas, se as duas forem definidas, `GOOGLE_API_KEY` terá precedência.
+في حال ضبطت متغيّر البيئة `GEMINI_API_KEY` أو `GOOGLE_API_KEY`، سيختار العميل مفتاح واجهة برمجة التطبيقات تلقائيًا عند استخدام إحدى [مكتبات Gemini API](https://ai.google.dev/gemini-api/docs/libraries?hl=ar). ننصحك بضبط أحد المتغيرَين فقط، ولكن في حال ضبط كليهما، ستكون الأولوية للمتغير `GOOGLE_API_KEY`.
 
-Se você estiver usando a API REST ou JavaScript no navegador, será necessário
-fornecer a chave de API explicitamente.
+إذا كنت تستخدم REST API أو JavaScript على المتصفّح، عليك تقديم مفتاح واجهة برمجة التطبيقات بشكل صريح.
 
-Veja como definir sua chave de API localmente como a variável de ambiente
-`GEMINI_API_KEY` com diferentes sistemas operacionais.
+في ما يلي كيفية ضبط مفتاح واجهة برمجة التطبيقات محليًا كمتغيّر بيئة
+`GEMINI_API_KEY` باستخدام أنظمة تشغيل مختلفة.
 
-### Linux/macOS: Bash
+### ‫Linux/macOS - Bash
 
-O Bash é uma configuração comum de terminal do Linux e do macOS. Para verificar se você tem um arquivo de configuração para ele, execute o seguinte comando:
+‫Bash هو إعداد شائع للوحدة الطرفية في نظامَي التشغيل Linux وmacOS. يمكنك التحقّق ممّا إذا كان لديك ملف إعدادات من خلال تنفيذ الأمر التالي:
 
 ```
 ~/.bashrc
 ```
 
-Se a resposta for "No such file or directory", crie e abra o arquivo executando os seguintes comandos ou use `zsh`:
+إذا كان الردّ هو "No such file or directory"، عليك إنشاء هذا الملف وفتحه من خلال تنفيذ الأوامر التالية، أو استخدام `zsh`:
 
 ```
 touch ~/.bashrc
 open ~/.bashrc
 ```
 
-Em seguida, defina sua chave de API adicionando o seguinte comando de exportação:
+بعد ذلك، عليك ضبط مفتاح واجهة برمجة التطبيقات من خلال إضافة أمر التصدير التالي:
 
 ```
 export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
 ```
 
-Depois de salvar o arquivo, aplique as mudanças executando:
+بعد حفظ الملف، طبِّق التغييرات من خلال تنفيذ الأمر التالي:
 
 ```
 source ~/.bashrc
 ```
 
-### macOS: Zsh
+### ‫macOS - Zsh
 
-O Zsh é uma configuração comum de terminal do Linux e do macOS. Para verificar se você tem um arquivo de configuração para ele, execute o seguinte comando:
+‫Zsh هو إعداد شائع للوحدة الطرفية في نظامَي التشغيل Linux وmacOS. يمكنك التحقّق ممّا إذا كان لديك ملف إعدادات من خلال تنفيذ الأمر التالي:
 
 ```
 ~/.zshrc
 ```
 
-Se a resposta for "No such file or directory", crie e abra o arquivo executando os seguintes comandos ou use `bash`:
+إذا كان الردّ هو "No such file or directory"، عليك إنشاء هذا الملف وفتحه من خلال تنفيذ الأوامر التالية، أو استخدام `bash`:
 
 ```
 touch ~/.zshrc
 open ~/.zshrc
 ```
 
-Em seguida, defina sua chave de API adicionando o seguinte comando de exportação:
+بعد ذلك، عليك ضبط مفتاح واجهة برمجة التطبيقات من خلال إضافة أمر التصدير التالي:
 
 ```
 export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
 ```
 
-Depois de salvar o arquivo, aplique as mudanças executando:
+بعد حفظ الملف، طبِّق التغييرات من خلال تنفيذ الأمر التالي:
 
 ```
 source ~/.zshrc
@@ -144,24 +137,23 @@ source ~/.zshrc
 
 ### Windows
 
-1. Pesquise "Variáveis de ambiente" na barra de pesquisa.
-2. Escolha modificar as **Configurações do sistema**. Talvez seja necessário confirmar que você quer fazer isso.
-3. Na caixa de diálogo de configurações do sistema, clique no botão **Variáveis de ambiente**.
-4. Em **Variáveis de usuário** (para o usuário atual) ou **Variáveis do sistema** (aplicável a todos os usuários que usam a máquina), clique em **Nova...**
-5. Especifique o nome da variável como `GEMINI_API_KEY`. Especifique sua chave de API Gemini como o valor da variável.
-6. Clique em **OK** para aplicar as mudanças.
-7. Abra uma nova sessão de terminal (cmd ou PowerShell) para receber a nova variável.
+1. ابحث عن "متغيرات البيئة" في شريط البحث.
+2. اختَر تعديل **إعدادات النظام**. قد يُطلب منك تأكيد رغبتك في إجراء ذلك.
+3. في مربّع حوار إعدادات النظام، انقر على الزر الذي يحمل التصنيف **متغيرات البيئة**.
+4. ضمن **متغيّرات المستخدم** (للمستخدم الحالي) أو **متغيّرات النظام** (تنطبق على جميع المستخدمين الذين يستخدمون الجهاز)، انقر على **جديد...**
+5. حدِّد اسم المتغيّر على النحو التالي: `GEMINI_API_KEY`. حدِّد مفتاح Gemini API كقيمة المتغيّر.
+6. انقر على **حسنًا** لتطبيق التغييرات.
+7. افتح جلسة طرفية جديدة (cmd أو Powershell) للحصول على المتغير الجديد.
 
-## Fornecer a chave de API explicitamente
+## توفير مفتاح واجهة برمجة التطبيقات بشكل صريح
 
-Em alguns casos, talvez seja necessário fornecer uma chave de API explicitamente. Exemplo:
+في بعض الحالات، قد تحتاج إلى تقديم مفتاح واجهة برمجة التطبيقات بشكل صريح. على سبيل المثال:
 
-- Você está fazendo uma chamada de API simples e prefere codificar a chave de API.
-- Você quer controle explícito sem precisar depender da descoberta automática de
-  variáveis de ambiente pelas bibliotecas da API Gemini.
-- Você está usando um ambiente em que as variáveis de ambiente não são compatíveis (por exemplo, a Web) ou está fazendo chamadas REST.
+- إذا كنت بصدد إجراء طلب بيانات من واجهة برمجة التطبيقات بسيط وتفضّل ترميز مفتاح واجهة برمجة التطبيقات بشكل ثابت.
+- تريد التحكّم بشكل صريح بدون الحاجة إلى الاعتماد على الاكتشاف التلقائي لمتغيرات البيئة من خلال مكتبات Gemini API
+- أنت تستخدم بيئة لا تتوافق مع متغيرات البيئة (مثل الويب) أو تجري طلبات REST.
 
-Confira abaixo exemplos de como fornecer uma chave de API explicitamente:
+في ما يلي أمثلة على كيفية تقديم مفتاح واجهة برمجة التطبيقات بشكلٍ صريح:
 
 ### Python
 
@@ -229,7 +221,7 @@ func main() {
 }
 ```
 
-### Java
+### جافا
 
 ```
 package com.example;
@@ -272,99 +264,95 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-## Mantenha sua chave de API segura
+## الحفاظ على أمان مفتاح واجهة برمجة التطبيقات
 
-Trate sua chave da API Gemini como uma senha. Se ela for comprometida, outras pessoas poderão usar a cota do seu projeto, gerar cobranças (se o faturamento estiver ativado) e acessar seus dados particulares, como arquivos.
+عامِل مفتاح Gemini API مثل كلمة المرور. في حال تعرّض مشروعك للاختراق، يمكن للآخرين استخدام حصته، وتحمّل الرسوم (في حال تفعيل الفوترة)، والوصول إلى بياناتك الخاصة، مثل الملفات.
 
-### Regras de segurança críticas
+### قواعد الأمان المهمة
 
-- **Mantenha as chaves confidenciais**: as chaves de API do Gemini podem acessar dados sensíveis de que seu aplicativo depende.
+- **الحفاظ على سرية المفاتيح**: قد تتيح مفاتيح واجهة برمجة التطبيقات الخاصة بـ Gemini الوصول إلى بيانات حساسة يعتمد عليها تطبيقك.
 
-  - **Nunca confirme chaves de API no controle de origem.** Não faça check-in da chave de API em sistemas de controle de versões como o Git.
-  - **Nunca exponha chaves de API no lado do cliente.** Não use sua chave de API diretamente em apps da Web ou para dispositivos móveis em produção. As chaves no código do lado do cliente (incluindo nossas bibliotecas JavaScript/TypeScript e chamadas REST) podem ser extraídas.
-- **Restrinja o acesso**: limite o uso da chave de API a endereços IP, referenciadores HTTP ou apps para Android/iOS específicos, sempre que possível.
-- **Restrinja o uso**: ative apenas as APIs necessárias para cada chave.
-- **Faça auditorias regulares**: audite e alterne as chaves de API periodicamente.
+  - **لا تُدرِج مفاتيح واجهة برمجة التطبيقات في نظام التحكّم بالمصادر أبدًا.** لا تحفَظ مفتاح واجهة برمجة التطبيقات في أنظمة التحكم في الإصدارات، مثل Git.
+  - **يجب عدم عرض مفاتيح واجهة برمجة التطبيقات من جهة العميل.** لا تستخدِم مفتاح واجهة برمجة التطبيقات مباشرةً
+    في تطبيقات الويب أو الأجهزة الجوّالة في مرحلة الإنتاج. يمكن استخراج المفاتيح في الرمز البرمجي من جهة العميل (بما في ذلك مكتبات JavaScript/TypeScript وطلبات REST).
+- **تقييد الوصول**: يمكنك تقييد استخدام مفتاح واجهة برمجة التطبيقات بعناوين IP أو مراجع HTTP أو تطبيقات Android/iOS معيّنة حيثما أمكن ذلك.
+- **تقييد الاستخدام**: فعِّل واجهات برمجة التطبيقات الضرورية فقط لكل مفتاح.
+- **إجراء عمليات تدقيق منتظمة**: يجب تدقيق مفاتيح واجهة برمجة التطبيقات بانتظام وتغييرها بشكل دوري.
 
-### Práticas recomendadas
+### أفضل الممارسات
 
-- **Use chamadas do lado do servidor com chaves de API**: a maneira mais segura de usar sua chave de API é chamar a API Gemini de um aplicativo do lado do servidor em que a chave pode ser mantida em sigilo.
-- **Use tokens efêmeros para acesso do lado do cliente (somente API Live)**: para acesso direto do lado do cliente à API Live, use tokens efêmeros. Elas têm menos riscos de segurança e podem ser adequadas para uso em produção. Consulte o guia de
-  [tokens efêmeros](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=pt-br) para mais
-  informações.
-- **Considere adicionar restrições à sua chave**:é possível limitar as permissões de uma chave
-  adicionando [restrições de chave de API](https://cloud.google.com/api-keys/docs/add-restrictions-api-keys?hl=pt-br#add-api-restrictions).
-  Isso minimiza os possíveis danos se a chave vazar.
+- **استخدام طلبات من جهة الخادم مع مفاتيح واجهة برمجة التطبيقات** إنّ الطريقة الأكثر أمانًا لاستخدام مفتاح واجهة برمجة التطبيقات هي طلب Gemini API من تطبيق من جهة الخادم حيث يمكن الحفاظ على سرية المفتاح.
+- **استخدام رموز مميزة مؤقتة للوصول من جهة العميل (Live API فقط):** للوصول مباشرةً إلى Live API من جهة العميل، يمكنك استخدام رموز مميزة مؤقتة. وتكون هذه النماذج أقل عرضة للمخاطر الأمنية ويمكن استخدامها في عملية الإنتاج. راجِع دليل [الرموز المميزة المؤقتة](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=ar) لمزيد من المعلومات.
+- **ننصحك بإضافة قيود إلى مفتاحك:** يمكنك الحدّ من أذونات المفتاح
+  من خلال إضافة [قيود على مفتاح واجهة برمجة التطبيقات](https://cloud.google.com/api-keys/docs/add-restrictions-api-keys?hl=ar#add-api-restrictions).
+  ويقلّل ذلك من الأضرار المحتملة في حال تسرُّب المفتاح.
 
-Para conferir algumas práticas recomendadas gerais, consulte este
-[artigo de suporte](https://support.google.com/googleapi/answer/6310037?hl=pt-br).
+للاطّلاع على بعض أفضل الممارسات العامة، يمكنك أيضًا مراجعة [مقالة الدعم](https://support.google.com/googleapi/answer/6310037?hl=ar) هذه.
 
-## Proteger chaves de API irrestritas
+## تأمين مفاتيح واجهة برمجة التطبيقات غير المقيدة
 
-As chaves de API sem restrições são vulneráveis a usuários mal-intencionados e uso não autorizado. A partir de 19 de junho de 2026, para melhorar a segurança, a API Gemini vai
-descontinuar o suporte para chaves de tráfego sem restrições.
+تكون مفاتيح واجهة برمجة التطبيقات غير المشروطة عرضة للجهات المسيئة والاستخدام غير المصرّح به. اعتبارًا من 19 يونيو 2026، سيتم إيقاف مفاتيح الزيارات غير المقيّدة في Gemini API بهدف تحسين الأمان.
 
-**Isso significa que suas solicitações da API Gemini vão falhar se você não fizer nada.**
+**هذا يعني أنّ طلباتك إلى Gemini API ستفشل إذا لم تتّخذ أي إجراء.**
 
-Para continuar usando a API Gemini sem interrupções, proteja suas chaves de tráfego
-adicionando restrições no
-[AI Studio](https://aistudio.google.com/api-keys?hl=pt-br).
+لمواصلة استخدام Gemini API بدون انقطاع، عليك تأمين مفاتيح حركة المرور
+من خلال إضافة قيود في
+[AI Studio](https://aistudio.google.com/api-keys?hl=ar).
 
-Em [aistudio.google.com/api-keys](https://aistudio.google.com/api-keys?hl=pt-br), você
-vai encontrar um banner para avisar quando as chaves de API não tiverem restrições. Você pode ver
-quais chaves não têm restrições e o uso do serviço nos últimos 90 dias.
+في [aistudio.google.com/api-keys](https://aistudio.google.com/api-keys?hl=ar)، سيظهر لك بانر لإعلامك عندما تكون مفاتيح واجهة برمجة التطبيقات غير مقيّدة. يمكنك الاطّلاع على المفاتيح غير المشروطة واستخدام الخدمة خلال آخر 90 يومًا.
 
-Para chaves sem restrições, escolha uma das seguintes opções:
+بالنسبة إلى المفاتيح غير المحظورة، عليك اختيار أحد الخيارَين التاليَين:
 
-- Use a chave apenas para a API Gemini.
-- Use a chave para uso de APIs que não são do Gemini.
+- استخدِم المفتاح مع Gemini API فقط.
+- استخدِم المفتاح في واجهات برمجة التطبيقات الأخرى غير Gemini.
 
-### Restringir a chave somente à API Gemini
+### حصر استخدام المفتاح في Gemini API فقط
 
-Se quiser restringir a chave apenas à API Gemini, proteja-a no
-[AI Studio](https://aistudio.google.com/api-keys?hl=pt-br) clicando no botão
-**Restringir à API Gemini**.
+إذا أردت حصر استخدام المفتاح في Gemini API فقط، يمكنك حماية مفتاحك في
+[AI Studio](https://aistudio.google.com/api-keys?hl=ar) من خلال النقر على الزر
+**حصر الاستخدام في Gemini API**.
 
-### Restringir a chave para uso de APIs que não são do Gemini
+### فرض قيود على استخدام المفتاح في واجهات برمجة التطبيقات غير التابعة لـ Gemini
 
-Se você quiser restringir a chave para uso de APIs que não são do Gemini:
+إذا أردت حصر استخدام المفتاح على غير Gemini API، اتّبِع الخطوات التالية:
 
-1. Acesse a
-   [página de credenciais do console do Google Cloud](https://console.cloud.google.com/apis/credentials?hl=pt-br).
-2. Verifique se o projeto está selecionado corretamente.
-3. Selecione uma chave de API.
-4. Abra o menu suspenso **Restrições de API** e aplique restrições de serviço à chave de API.
+1. انتقِل إلى
+   [صفحة بيانات الاعتماد في Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=ar).
+2. تأكَّد من اختيار المشروع بشكل صحيح.
+3. اختَر مفتاح واجهة برمجة التطبيقات.
+4. وسِّع القائمة المنسدلة **قيود واجهة برمجة التطبيقات**، وطبِّق قيود الخدمة على مفتاح واجهة برمجة التطبيقات.
 
-Se quiser modificar chaves com restrições atuais ou recém-adicionadas, acesse
-o
-[Console do Google Cloud](https://console.cloud.google.com/apis/credentials?hl=pt-br).
+إذا أردت تعديل المفاتيح باستخدام قيود حالية أو قيود تمت إضافتها حديثًا، انتقِل إلى [Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=ar).
 
-## Chaves bloqueadas
+## المفاتيح المحظورة
 
-A partir de 7 de maio de 2026, a API Gemini vai bloquear chaves de API irrestritas
-que estiverem inativas por um longo período. Esses usuários vão encontrar uma tag **Bloqueada** para a chave em [aistudio.google.com/api-keys](https://aistudio.google.com/api-keys?hl=pt-br) e precisarão gerar uma nova chave ou usar uma chave restrita alternativa para continuar usando a API Gemini.
+اعتبارًا من 7 مايو 2026، ستحظر واجهة Gemini API مفاتيح واجهة برمجة التطبيقات غير المقيدة
+التي لم يتم استخدامها لفترة طويلة. سيظهر للمستخدمين علامة **محظور** بجانب مفتاحهم على [aistudio.google.com/api-keys](https://aistudio.google.com/api-keys?hl=ar)، وسيكون عليهم إنشاء مفتاح جديد أو استخدام مفتاح بديل مقيّد لمواصلة استخدام Gemini API.
 
-## Solução de problemas na criação de chaves de API
+## تحديد المشاكل في إنشاء مفتاح واجهة برمجة التطبيقات وحلّها
 
-No Google AI Studio, o botão **Criar chave de API** pode aparecer indisponível, com a mensagem: *Você não tem permissão para criar uma chave neste projeto*.
+في Google AI Studio، قد يظهر زر **إنشاء مفتاح واجهة برمجة تطبيقات** غير متاح، مع الرسالة: "*ليس لديك الإذن بإنشاء مفتاح في هذا المشروع*".
 
-Isso ocorre quando você não tem as permissões necessárias no projeto para gerar uma nova chave:
+يحدث ذلك عندما لا تتوفّر لديك الأذونات اللازمة داخل المشروع لإنشاء مفتاح جديد:
 
-- **`resourcemanager.projects.get`**: permite que o AI Studio verifique a existência do projeto.
-- **`apikeys.keys.create`**: permite a geração da própria chave de API.
-- **`serviceusage.services.enable`**: necessário para garantir que a API Gemini esteja
-  ativa no projeto.
+- **`resourcemanager.projects.get`**: تسمح هذه الإذن لـ AI Studio بالتحقّق من توفّر المشروع.
+- **`apikeys.keys.create`**: يسمح بإنشاء مفتاح واجهة برمجة التطبيقات نفسه.
+- **`serviceusage.services.enable`**: مطلوبة لضمان تفعيل Gemini API في المشروع.
+- **`iam.serviceAccounts.create`**: يتطلّب كل مفتاح جديد لواجهة برمجة التطبيقات الآن [حساب خدمة](https://docs.cloud.google.com/docs/authentication/api-keys?hl=ar#api-keys-bound-sa) مرتبطًا، ويتم إنشاؤه عند إنشاء مفتاح واجهة برمجة التطبيقات.
+- **`iam.serviceAccountApiKeyBindings.create`**: مطلوب لربط حساب الخدمة الذي تم إنشاؤه حديثًا بمفتاح واجهة برمجة التطبيقات.
 
-Para corrigir suas permissões, peça ao administrador do projeto ou da organização (se o projeto pertencer a uma [organização](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=pt-br)) para conceder a você um papel com as permissões listadas acima, como Editor de projetos ou um papel personalizado.
+لحلّ مشكلة الأذونات، اطلب من مشرف المشروع أو مشرف مؤسستك إذا كان المشروع تابعًا [لمؤسسة](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=ar) منحك دورًا يتضمّن الأذونات المذكورة أعلاه (مثل "محرّر المشروع" أو دور مخصّص).
 
-Se você não tiver acesso administrativo a um projeto, crie um novo que não esteja associado a uma organização para gerar suas chaves.
+إذا لم يكن لديك إذن وصول إداري إلى مشروع، يمكنك إنشاء مشروع جديد غير مرتبط بمؤسسة لإنشاء مفاتيحك.
 
-Envie comentários
+للاطّلاع على قائمة كاملة بأذونات "إدارة الهوية وإمكانية الوصول" المطلوبة لجميع ميزات Google AI Studio (مثل عرض الاستخدام أو حدود المعدّل أو الفوترة)، راجِع [دليل تحديد المشاكل وحلّها في AI Studio](https://ai.google.dev/gemini-api/docs/troubleshoot-ai-studio?hl=ar#iam-permissions).
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+إرسال ملاحظات
 
-Última atualização 2026-05-19 UTC.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Quer enviar seu feedback?
+تاريخ التعديل الأخير: 2026-05-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-05-19 UTC."],[],[]]
+هل تريد مشاركة ملاحظاتك معنا؟
+
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

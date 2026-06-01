@@ -1,50 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/caching?hl=hi
-fetched_at: 2026-05-25T05:18:07.296318+00:00
-title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions/caching?hl=pl
+fetched_at: 2026-06-01T06:09:00.292255+00:00
+title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-सुझाव भेजें
+Prześlij opinię
 
-# कॉन्टेक्स्ट को कैश में सेव करना
+# Buforowanie kontekstu
 
-एआई के सामान्य वर्कफ़्लो में, किसी मॉडल को एक ही इनपुट टोकन बार-बार पास किया जा सकता है. Gemini API, परफ़ॉर्मेंस और लागत को ऑप्टिमाइज़ करने के लिए, इंप्लिसिट कैशिंग की सुविधा देता है.
+W typowym procesie AI możesz wielokrotnie przekazywać te same tokeny wejściowe do modelu. Interfejs Gemini API oferuje niejawne buforowanie, które optymalizuje wydajność i koszty.
 
-## इंप्लिसिट कैशिंग
+## Niejawne buforowanie
 
-Gemini 2.5 और इसके बाद के सभी मॉडल के लिए, इंप्लिसिट कैशिंग की सुविधा डिफ़ॉल्ट रूप से चालू होती है. अगर आपका अनुरोध कैश से मैच होता है, तो हम लागत में होने वाली बचत को अपने-आप पास कर देते हैं. इसे चालू करने के लिए, आपको कुछ भी करने की ज़रूरत नहीं है. कॉन्टेक्स्ट कैशिंग के लिए, हर मॉडल के लिए इनपुट टोकन की कम से कम संख्या यहां दी गई है:
+Niejawne buforowanie jest domyślnie włączone w przypadku wszystkich modeli Gemini 2.5 i nowszych. Jeśli Twoje żądanie trafi do pamięci podręcznej, automatycznie przekażemy Ci oszczędności. Aby włączyć tę funkcję, nie musisz nic robić. Minimalna liczba tokenów wejściowych w przypadku buforowania kontekstu jest podana w tabeli poniżej dla każdego modelu:
 
-| मॉडल | टोकन की कम से कम सीमा |
+| Model | Minimalny limit tokenów |
 | --- | --- |
 | Gemini 3.5 Flash | 1024 |
-| Gemini 3 Pro की झलक | 4096 |
+| Gemini 3 Pro (wersja testowa) | 4096 |
 | Gemini 2.5 Flash | 1024 |
 | Gemini 2.5 Pro | 4096 |
 
-इंप्लिसिट कैश हिट होने की संभावना बढ़ाने के लिए:
+Aby zwiększyć szansę na trafienie w niejawnej pamięci podręcznej:
 
-- अपने प्रॉम्प्ट की शुरुआत में, बड़ा और सामान्य कॉन्टेंट शामिल करें
-- कम समय में, एक जैसे प्रीफ़िक्स वाले अनुरोध भेजने की कोशिश करें
+- Spróbuj umieścić duże i popularne treści na początku prompta.
+- Spróbuj wysyłać żądania z podobnym prefiksem w krótkim czasie.
 
-रिस्पॉन्स ऑब्जेक्ट के `usage_metadata` (Python) या `usageMetadata` (JavaScript) फ़ील्ड में, कैश हिट होने वाले टोकन की संख्या देखी जा सकती है.
+Liczbę tokenów, które zostały trafione do pamięci podręcznej, możesz sprawdzić w polu `usage_metadata` (Python) lub `usageMetadata` (JavaScript) obiektu odpowiedzi.
 
-सुझाव भेजें
+Prześlij opinię
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-आखिरी बार 2026-05-19 (UTC) को अपडेट किया गया.
+Ostatnia aktualizacja: 2026-05-28 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Chcesz przekazać coś jeszcze?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-05-19 (UTC) को अपडेट किया गया."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-05-28 UTC."],[],[]]

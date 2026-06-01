@@ -1,33 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/google-search?hl=it
-fetched_at: 2026-05-25T05:29:23.282965+00:00
-title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/google-search?hl=pt-BR
+fetched_at: 2026-06-01T05:57:38.107756+00:00
+title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Invia feedback
+Envie comentários
 
-# Grounding con la Ricerca Google
+# Embasamento com a Pesquisa Google
 
-Il grounding con la Ricerca Google collega il modello Gemini ai contenuti web in tempo reale
-e funziona con tutte le lingue disponibili. In questo modo,
-Gemini può fornire risposte più accurate e citare fonti verificabili oltre il suo knowledge cutoff.
+O embasamento com a Pesquisa Google conecta o modelo do Gemini ao conteúdo da Web em tempo real e funciona com todos os idiomas disponíveis. Isso permite que o Gemini forneça respostas mais precisas e cite fontes verificáveis além do limite de conhecimento.
 
-La base di riferimento ti aiuta a creare applicazioni che possono:
+O embasamento ajuda a criar aplicativos que podem:
 
-- **Aumentare l'accuratezza fattuale:** ridurre le allucinazioni del modello basando
-  le risposte su informazioni del mondo reale.
-- **Accedere a informazioni in tempo reale:** rispondere a domande su eventi e argomenti recenti.
-- **Fornisci citazioni**:crea fiducia negli utenti mostrando le fonti delle affermazioni del modello.
+- **Aumentar a precisão factual**:reduza as alucinações do modelo com base em informações do mundo real.
+- **Acessar informações em tempo real**:responda a perguntas sobre eventos e tópicos recentes.
+- **Fornecer citações**:crie confiança do usuário mostrando as fontes das declarações do modelo.
 
 ### Python
 
@@ -101,28 +99,23 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-Per saperne di più, prova il [notebook
-dello strumento di ricerca](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=it).
+Saiba mais testando o [notebook da ferramenta de pesquisa](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=pt-br).
 
-## Come funziona il grounding con la Ricerca Google
+## Como funciona o embasamento com a Pesquisa Google
 
-Quando attivi lo strumento `google_search`, il modello gestisce automaticamente l'intero flusso di lavoro di ricerca, elaborazione e citazione delle informazioni.
+Quando você ativa a ferramenta `google_search`, o modelo processa todo o fluxo de trabalho de pesquisa, processamento e citação de informações automaticamente.
 
-![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=it)
+![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=pt-br)
 
-1. **Prompt utente**:la tua applicazione invia un prompt dell'utente all'API Gemini
-   con lo strumento `google_search` abilitato.
-2. **Analisi del prompt**:il modello analizza il prompt e determina se una ricerca Google può migliorare la risposta.
-3. **Ricerca Google**:se necessario, il modello genera automaticamente una o più query di ricerca e le esegue.
-4. **Elaborazione dei risultati di ricerca:** il modello elabora i risultati di ricerca,
-   sintetizza le informazioni e formula una risposta.
-5. **Risposta fondata**:l'API restituisce una risposta finale e di facile utilizzo
-   basata sui risultati di ricerca. Questa risposta include il testo della risposta del modello e `groundingMetadata` con le query di ricerca, i risultati web e le citazioni.
+1. **Comando do usuário**:seu aplicativo envia um comando do usuário para a API Gemini com a ferramenta `google_search` ativada.
+2. **Análise de comandos**:o modelo analisa o comando e determina se uma Pesquisa Google pode melhorar a resposta.
+3. **Pesquisa Google**:se necessário, o modelo gera automaticamente uma ou várias consultas de pesquisa e as executa.
+4. **Processamento de resultados da pesquisa**:o modelo processa os resultados da pesquisa, sintetiza as informações e formula uma resposta.
+5. **Resposta embasada**:a API retorna uma resposta final e fácil de usar que é baseada nos resultados da pesquisa. Essa resposta inclui a resposta de texto do modelo e `groundingMetadata` com as consultas de pesquisa, os resultados da Web e as citações.
 
-## Informazioni sulla risposta di grounding
+## Entender a resposta de embasamento
 
-Quando una risposta viene fondata correttamente, include un campo `groundingMetadata`. Questi dati strutturati sono essenziali per verificare
-le rivendicazioni e creare un'esperienza di citazione avanzata nella tua applicazione.
+Quando uma resposta é embasada, ela inclui um campo `groundingMetadata`. Esses dados estruturados são essenciais para verificar declarações e criar uma experiência de citação avançada no aplicativo.
 
 ```
 {
@@ -164,25 +157,20 @@ le rivendicazioni e creare un'esperienza di citazione avanzata nella tua applica
 }
 ```
 
-L'API Gemini restituisce le seguenti informazioni con `groundingMetadata`:
+A API Gemini retorna as seguintes informações com `groundingMetadata`:
 
-- `webSearchQueries` : array delle query di ricerca utilizzate. Questo è utile per
-  il debug e la comprensione del processo di ragionamento del modello.
-- `searchEntryPoint` : contiene HTML e CSS per il rendering dei suggerimenti di ricerca richiesti. I requisiti di utilizzo completi sono descritti in dettaglio nei [Termini di
-  servizio](https://ai.google.dev/gemini-api/terms?hl=it#grounding-with-google-search).
-- `groundingChunks` : array di oggetti contenenti le origini web (`uri` e `title`).
-- `groundingSupports` : array di blocchi per collegare la risposta del modello `text` alle fonti in `groundingChunks`. Ogni blocco collega un testo `segment` (definito
-  da `startIndex` e `endIndex`) a uno o più `groundingChunkIndices`. Questa
-  è la chiave per creare citazioni in linea.
+- `webSearchQueries` : matriz das consultas de pesquisa usadas. Isso é útil para depurar e entender o processo de raciocínio do modelo.
+- `searchEntryPoint` : contém o HTML e o CSS para renderizar as sugestões de pesquisa necessárias. Os requisitos de uso completos estão detalhados nos [Termos de
+  Serviço](https://ai.google.dev/gemini-api/terms?hl=pt-br#grounding-with-google-search).
+- `groundingChunks` : matriz de objetos que contêm as fontes da Web (`uri` e `title`).
+- `groundingSupports` : matriz de blocos para conectar a resposta do modelo `text` às fontes em `groundingChunks`. Cada bloco vincula um `segment` de texto (definido por `startIndex` e `endIndex`) a um ou mais `groundingChunkIndices`. Essa é a chave para criar citações inline.
 
-Il grounding con la Ricerca Google può essere utilizzato anche in combinazione con lo [strumento di contesto
-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it) per basare le risposte sia sui dati web pubblici sia sugli URL specifici che fornisci.
+O embasamento com a Pesquisa Google também pode ser usado em combinação com a ferramenta de contexto de [URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br) para embasar respostas em dados da Web públicos
+e nos URLs específicos que você fornece.
 
-## Attribuire le fonti con le citazioni in linea
+## Atribuir fontes com citações inline
 
-L'API restituisce dati strutturati sulle citazioni, offrendoti il controllo completo su come
-visualizzare le fonti nell'interfaccia utente. Puoi utilizzare i campi `groundingSupports` e `groundingChunks` per collegare le affermazioni del modello direttamente alle relative fonti. Di seguito è riportato un pattern comune per l'elaborazione dei metadati per creare una
-risposta con citazioni in linea e cliccabili.
+A API retorna dados de citação estruturados, oferecendo controle total sobre como você mostra as fontes na interface do usuário. É possível usar os campos `groundingSupports` e `groundingChunks` para vincular as declarações do modelo diretamente às fontes. Confira um padrão comum para processar os metadados e criar uma resposta com citações inline clicáveis.
 
 ### Python
 
@@ -257,65 +245,62 @@ const textWithCitations = addCitations(response);
 console.log(textWithCitations);
 ```
 
-La nuova risposta con citazioni in linea sarà simile alla seguente:
+A nova resposta com citações inline será assim:
 
 ```
 Spain won Euro 2024, defeating England 2-1 in the final.[1](https:/...), [2](https:/...), [4](https:/...), [5](https:/...) This victory marks Spain's record-breaking fourth European Championship title.[5]((https:/...), [2](https:/...), [3](https:/...), [4](https:/...)
 ```
 
-## Prezzi
+## Preços
 
-Quando utilizzi Grounding con la Ricerca Google con Gemini 3, il tuo progetto viene fatturato
-per ogni query di ricerca che il modello decide di eseguire. Se il modello decide di
-eseguire più query di ricerca per rispondere a un singolo prompt (ad esempio,
-cercando `"UEFA Euro 2024 winner"` e `"Spain vs England Euro 2024 final
-score"` nella stessa chiamata API), questo viene conteggiato come due utilizzi fatturabili dello strumento
-per quella richiesta. Ai fini della fatturazione, ignoriamo le query di ricerca web vuote
-quando conteggiamo le query uniche. Questo modello di fatturazione si applica solo ai modelli Gemini 3. Quando utilizzi la ricerca basata su grounding con Gemini 2.5 o modelli precedenti, il tuo progetto viene fatturato per prompt.
+Quando você usa o embasamento com a Pesquisa Google com o Gemini 3, seu projeto é cobrado por cada consulta de pesquisa que o modelo decide executar. Se o modelo decidir
+executar várias consultas de pesquisa para responder a um único comando (por exemplo,
+pesquisar `"UEFA Euro 2024 winner"` e `"Spain vs England Euro 2024 final
+score"` na mesma chamada de API), isso será contabilizado como dois usos faturáveis da ferramenta
+para essa solicitação. Para fins de faturamento, ignoramos as consultas de pesquisa na Web vazias ao contar consultas exclusivas. Esse modelo de faturamento só se aplica aos modelos do Gemini 3. Ao usar o embasamento de pesquisa com o Gemini 2.5 ou modelos mais antigos, seu projeto é cobrado por comando.
 
-Per informazioni più dettagliate sui prezzi, consulta la [pagina dei prezzi dell'API Gemini](https://ai.google.dev/gemini-api/docs/pricing?hl=it).
+Para informações detalhadas sobre preços, consulte a [página de preços da API Gemini](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br).
 
-## Modelli supportati
+## Modelos compatíveis
 
-Puoi trovare le funzionalità complete nella pagina [Panoramica
-modello](https://ai.google.dev/gemini-api/docs/models?hl=it).
+Você pode encontrar recursos completos na página de visão geral do [modelo](https://ai.google.dev/gemini-api/docs/models?hl=pt-br).
 
-| Modello | Grounding con la Ricerca Google |
+| Modelo | Embasamento com a Pesquisa Google |
 | --- | --- |
 | Gemini 3.5 Flash | ✔️ |
 | Gemini 3.1 Flash-Lite | ✔️ |
-| Gemini 3.1 Flash Image (anteprima) | ✔️ |
-| Gemini 3.1 Pro (anteprima) | ✔️ |
-| Gemini 3 Pro Image (anteprima) | ✔️ |
-| Gemini 3 Flash (anteprima) | ✔️ |
-| Gemini 3.1 Flash-Lite (anteprima) | ✔️ |
+| Pré-lançamento da imagem do Gemini 3.1 Flash | ✔️ |
+| Pré-lançamento do Gemini 3.1 Pro | ✔️ |
+| Pré-lançamento da imagem do Gemini 3 Pro | ✔️ |
+| Pré-lançamento do Gemini 3 Flash | ✔️ |
+| Pré-lançamento do Gemini 3.1 Flash-Lite | ✔️ |
 | Gemini 2.5 Pro | ✔️ |
 | Gemini 2.5 Flash | ✔️ |
 | Gemini 2.5 Flash-Lite | ✔️ |
 | Gemini 2.0 Flash | ✔️ |
 
-## Combinazioni di strumenti supportate
+## Combinações de ferramentas compatíveis
 
-Puoi utilizzare Grounding con la Ricerca Google con altri strumenti come
-[l'esecuzione di codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it) e
-[il contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it) per supportare casi d'uso più complessi.
+Você pode usar o embasamento com a Pesquisa Google com outras ferramentas, como
+[execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br) e
+[contexto de URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br), para oferecer suporte a casos de uso mais complexos.
 
-I modelli Gemini 3 supportano la combinazione di strumenti integrati (come il grounding con la Ricerca Google) con strumenti personalizzati (chiamata di funzioni). Scopri di più nella pagina
-[Combinazioni di strumenti](https://ai.google.dev/gemini-api/docs/tool-combination?hl=it).
+Os modelos do Gemini 3 oferecem suporte à combinação de ferramentas integradas (como o embasamento com a Pesquisa Google) com ferramentas personalizadas (chamada de função). Saiba mais na
+[página de combinações de ferramentas](https://ai.google.dev/gemini-api/docs/tool-combination?hl=pt-br).
 
-## Passaggi successivi
+## A seguir
 
-- Prova la funzionalità [Grounding con la Ricerca Google nel cookbook dell'API Gemini](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=it).
-- Scopri altri strumenti disponibili, come la [chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it).
-- Scopri come arricchire i prompt con URL specifici utilizzando lo [strumento
-  Contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it).
+- Teste o [embasamento com a Pesquisa Google no manual da API Gemini
+  Gemini](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=pt-br).
+- Saiba mais sobre outras ferramentas disponíveis, como a [chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br).
+- Saiba como aumentar os comandos com URLs específicos usando a [ferramenta de contexto de URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br).
 
-Invia feedback
+Envie comentários
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Ultimo aggiornamento 2026-05-19 UTC.
+Última atualização 2026-05-19 UTC.
 
-Vuoi dirci altro?
+Quer enviar seu feedback?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-19 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-05-19 UTC."],[],[]]

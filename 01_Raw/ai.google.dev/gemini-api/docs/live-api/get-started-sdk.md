@@ -1,42 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=hi
-fetched_at: 2026-05-25T05:27:22.806617+00:00
-title: "Get started with Gemini Live API using the Google GenAI SDK \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=vi
+fetched_at: 2026-06-01T05:59:55.974841+00:00
+title: "B\u1eaft \u0111\u1ea7u s\u1eed d\u1ee5ng Gemini Live API b\u1eb1ng Google GenAI SDK \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-सुझाव भेजें
+Gửi ý kiến phản hồi
 
-# Get started with Gemini Live API using the Google GenAI SDK
+# Bắt đầu sử dụng Gemini Live API bằng Google GenAI SDK
 
-Gemini Live API की मदद से, Gemini मॉडल के साथ रीयल-टाइम में दोनों तरफ़ से इंटरैक्ट किया जा सकता है. यह API, ऑडियो, वीडियो, और टेक्स्ट इनपुट के साथ-साथ, नेटिव ऑडियो आउटपुट को भी सपोर्ट करता है. इस गाइड में, अपने सर्वर पर Google GenAI SDK का इस्तेमाल करके, एपीआई के साथ इंटिग्रेट करने का तरीका बताया गया है.
+Gemini Live API cho phép tương tác hai chiều theo thời gian thực với các mô hình Gemini, hỗ trợ đầu vào âm thanh, video và văn bản cũng như đầu ra âm thanh gốc. Hướng dẫn này giải thích cách tích hợp với API bằng Google GenAI SDK trên máy chủ của bạn.
 
-[Google AI Studio में Live API आज़माएँmic](https://aistudio.google.com/live?hl=hi)
-[उदाहरण के तौर पर दिए गए ऐप्लिकेशन को GitHub से क्लोन करेंcode](https://github.com/google-gemini/gemini-live-api-examples/tree/main/gemini-live-genai-python-sdk)
-[कोडिंग एजेंट की सुविधाओं का इस्तेमाल करेंterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=hi)
+[Dùng Live API trong Google AI Studiomic](https://aistudio.google.com/live?hl=vi)
+[Sao chép ứng dụng mẫu từ GitHubcode](https://github.com/google-gemini/gemini-live-api-examples/tree/main/gemini-live-genai-python-sdk)
+[Sử dụng các kỹ năng của tác nhân lập trìnhterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=vi)
 
-## खास जानकारी
+## Tổng quan
 
-Gemini Live API, रीयल-टाइम में बातचीत के लिए WebSockets का इस्तेमाल करता है. `google-genai` SDK, इन कनेक्शन को मैनेज करने के लिए, हाई-लेवल एसिंक्रोनस इंटरफ़ेस उपलब्ध कराता है.
+Gemini Live API sử dụng WebSockets để giao tiếp theo thời gian thực. SDK `google-genai` cung cấp một giao diện không đồng bộ cấp cao để quản lý các kết nối này.
 
-मुख्य सिद्धांत:
+Các khái niệm chính:
 
-- **सेशन**: मॉडल से लगातार बना रहने वाला कनेक्शन.
-- **कॉन्फ़िगरेशन**: मोडैलिटी (ऑडियो/टेक्स्ट), आवाज़, और सिस्टम के निर्देशों को सेट अप करना.
-- **रीयल-टाइम इनपुट**: ऑडियो और वीडियो फ़्रेम को ब्लॉब के तौर पर भेजना.
+- **Phiên**: Kết nối liên tục với mô hình.
+- **Config**: Thiết lập phương thức (âm thanh/văn bản), giọng nói và hướng dẫn hệ thống.
+- **Đầu vào theo thời gian thực**: Gửi các khung hình âm thanh và video dưới dạng blob.
 
-## Live API से कनेक्ट करना
+## Kết nối với Live API
 
-एपीआई पासकोड की मदद से, Live API का सेशन शुरू करना:
+Bắt đầu phiên Live API bằng khoá API:
 
 ### Python
 
@@ -97,9 +97,9 @@ async function main() {
 main();
 ```
 
-## टेक्स्ट भेजना
+## Đang gửi tin nhắn
 
-`send_realtime_input` (Python) या `sendRealtimeInput` (JavaScript) का इस्तेमाल करके, टेक्स्ट भेजा जा सकता है.
+Bạn có thể gửi văn bản bằng `send_realtime_input` (Python) hoặc `sendRealtimeInput` (JavaScript).
 
 ### Python
 
@@ -115,9 +115,9 @@ session.sendRealtimeInput({
 });
 ```
 
-## ऑडियो भेजना
+## Đang gửi âm thanh
 
-ऑडियो को रॉ पीसीएम डेटा (रॉ 16-बिट पीसीएम ऑडियो, 16kHz, लिटिल-एंडियन) के तौर पर भेजना ज़रूरी है.
+Bạn cần gửi âm thanh dưới dạng dữ liệu PCM thô (âm thanh PCM thô 16 bit, 16 kHz, little-endian).
 
 ### Python
 
@@ -143,11 +143,11 @@ session.sendRealtimeInput({
 });
 ```
 
-क्लाइंट डिवाइस (जैसे, ब्राउज़र) से ऑडियो पाने का तरीका जानने के लिए, [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L31-L70) पर दिया गया एंड-टू-एंड उदाहरण देखें.
+Để biết ví dụ về cách lấy âm thanh từ thiết bị của khách hàng (ví dụ: trình duyệt), hãy xem ví dụ toàn diện trên [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L31-L70).
 
-## वीडियो भेजना
+## Đang gửi video
 
-वीडियो फ़्रेम को अलग-अलग इमेज (जैसे, JPEG या PNG) के तौर पर, तय की गई फ़्रेम रेट (हर सेकंड में ज़्यादा से ज़्यादा एक फ़्रेम) पर भेजा जाता है.
+Khung hình video được gửi dưới dạng hình ảnh riêng lẻ (ví dụ: JPEG hoặc PNG) ở một tốc độ khung hình cụ thể (tối đa 1 khung hình/giây).
 
 ### Python
 
@@ -173,12 +173,11 @@ session.sendRealtimeInput({
 });
 ```
 
-क्लाइंट डिवाइस (जैसे, ब्राउज़र) से वीडियो पाने का तरीका जानने के लिए,
-[GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L84-L120) पर दिया गया एंड-टू-एंड उदाहरण देखें.
+Để biết ví dụ về cách lấy video từ thiết bị của khách hàng (ví dụ: trình duyệt), hãy xem ví dụ toàn diện trên [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L84-L120).
 
-## ऑडियो पाना
+## Nhận âm thanh
 
-मॉडल के ऑडियो रिस्पॉन्स, डेटा के हिस्सों के तौर पर मिलते हैं.
+Các câu trả lời bằng âm thanh của mô hình được nhận dưới dạng các khối dữ liệu.
 
 ### Python
 
@@ -206,11 +205,11 @@ if (content?.modelTurn?.parts) {
 }
 ```
 
-अपने सर्वर पर ऑडियो पाने [और उसे ब्राउज़र में चलाने](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/gemini_live.py#L86-L98) का तरीका जानने के लिए, GitHub पर दिया गया [उदाहरण के तौर पर बनाया गया ऐप्लिकेशन देखें](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L145-L174).
+Hãy xem ứng dụng mẫu trên GitHub để tìm hiểu cách [nhận âm thanh trên máy chủ](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/gemini_live.py#L86-L98) và [phát âm thanh đó trong trình duyệt](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L145-L174).
 
-## टेक्स्ट पाना
+## Đang nhận tin nhắn
 
-सर्वर के कॉन्टेंट में, उपयोगकर्ता के इनपुट और मॉडल के आउटपुट, दोनों के ट्रांसक्रिप्ट उपलब्ध होते हैं.
+Bản chép lời cho cả dữ liệu đầu vào của người dùng và dữ liệu đầu ra của mô hình đều có trong nội dung trên máy chủ.
 
 ### Python
 
@@ -237,9 +236,9 @@ if (content?.outputTranscription) {
 }
 ```
 
-## टूल कॉल मैनेज करना
+## Xử lý lệnh gọi công cụ
 
-एपीआई, टूल कॉल (फ़ंक्शन कॉल) की सुविधा को सपोर्ट करता है. जब मॉडल, टूल कॉल का अनुरोध करता है, तो आपको फ़ंक्शन को एक्ज़ीक्यूट करना होगा और रिस्पॉन्स वापस भेजना होगा.
+API này hỗ trợ lệnh gọi công cụ (lệnh gọi hàm). Khi mô hình yêu cầu một lệnh gọi công cụ, bạn phải thực thi hàm và gửi phản hồi trở lại.
 
 ### Python
 
@@ -280,20 +279,20 @@ if (response.toolCall) {
 }
 ```
 
-## आगे क्या करना है
+## Bước tiếp theo
 
-- अहम क्षमताओं और कॉन्फ़िगरेशन के बारे में जानने के लिए, Live API की [क्षमताओं](https://ai.google.dev/gemini-api/docs/live-guide?hl=hi) से जुड़ी पूरी गाइड पढ़ें. इसमें, आवाज़ की गतिविधि का पता लगाने और नेटिव ऑडियो सुविधाओं के बारे में भी बताया गया है.
-- टूल के इस्तेमाल से जुड़ी [गाइड](https://ai.google.dev/gemini-api/docs/live-tools?hl=hi) पढ़ें. इससे आपको Live API को टूल और फ़ंक्शन कॉल के साथ इंटिग्रेट करने का तरीका पता चलेगा.
-- लंबे समय तक चलने वाली बातचीत को मैनेज करने के लिए, [सेशन मैनेजमेंट](https://ai.google.dev/gemini-api/docs/live-session?hl=hi) गाइड पढ़ें.
-- [[क्लाइंट-टू-सर्वर ऐप्लिकेशन में सुरक्षित तरीके से पुष्टि करने के लिए, कुछ समय के लिए मान्य टोकन से जुड़ी गाइड पढ़ें.](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=hi)](#implementation-approach)
-- WebSockets API के बारे में ज़्यादा जानने के लिए, [WebSockets API का रेफ़रंस देखें](https://ai.google.dev/api/live?hl=hi).
+- Đọc hướng dẫn đầy đủ về [Các chức năng](https://ai.google.dev/gemini-api/docs/live-guide?hl=vi) của Live API để biết các chức năng và cấu hình chính, bao gồm cả tính năng Phát hiện hoạt động bằng giọng nói và các tính năng âm thanh gốc.
+- Đọc hướng dẫn về [Sử dụng công cụ](https://ai.google.dev/gemini-api/docs/live-tools?hl=vi) để tìm hiểu cách tích hợp Live API với các công cụ và lệnh gọi hàm.
+- Hãy đọc hướng dẫn [Quản lý phiên](https://ai.google.dev/gemini-api/docs/live-session?hl=vi) để quản lý các cuộc trò chuyện kéo dài.
+- Đọc hướng dẫn về [Mã thông báo tạm thời](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=vi) để xác thực an toàn trong các ứng dụng [từ ứng dụng đến máy chủ](#implementation-approach).
+- Để biết thêm thông tin về API WebSockets cơ bản, hãy xem [Tài liệu tham khảo về API WebSockets](https://ai.google.dev/api/live?hl=vi).
 
-सुझाव भेजें
+Gửi ý kiến phản hồi
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-आखिरी बार 2026-05-13 (UTC) को अपडेट किया गया.
+Cập nhật lần gần đây nhất: 2026-05-29 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-05-13 (UTC) को अपडेट किया गया."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-29 UTC."],[],[]]

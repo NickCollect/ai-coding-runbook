@@ -1,50 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=pt-BR
-fetched_at: 2026-05-25T05:19:52.601611+00:00
-title: "Lyria RealTime experimental \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=tr
+fetched_at: 2026-06-01T06:06:24.532999+00:00
+title: "Lyria RealTime deneysel \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Envie comentários
+Geri bildirim gönderin
 
-# Lyria RealTime experimental
+# Lyria RealTime deneysel
 
-Um mecanismo experimental para síntese musical de alta fidelidade, que oferece recursos inovadores para gerar e transformar conteúdo de áudio. O Lyria RealTime
-é ideal para composição de músicas com assistência de IA, geração de instrumentais exclusivos e
-fluxos de trabalho de áudio criativos que exigem controle total sobre melodia e ritmo, sem
-vocais.
+Ses içeriği oluşturma ve dönüştürme konusunda yenilikçi özellikler sunan, yüksek kaliteli müzik sentezi için deneysel bir motor. Lyria RealTime; yapay zeka destekli şarkı yazma, benzersiz enstrümantal müzik üretme ve melodi ile ritim üzerinde derin kontrol gerektiren, vokal içermeyen yaratıcı ses iş akışları için en uygun seçenektir.
 
-[Testar o Lyria RealTime](https://deepmind.google/models/lyria/lyria-realtime/?hl=pt-br)
+[Lyria RealTime'ı deneyin](https://deepmind.google/models/lyria/lyria-realtime/?hl=tr)
 
-## Documentação
+## Belgeler
 
-Acesse a página [Geração de música em tempo real](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=pt-br) para conferir todos os recursos e funcionalidades.
+Özellikler ve işlevler hakkında kapsamlı bilgi için [Anlık müzik üretimi](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=tr) sayfasını ziyaret edin.
 
 ## lyria-realtime-exp
 
-| Propriedade | Descrição |
+| Mülk | Açıklama |
 | --- | --- |
-| Código do modelo id\_card | **API Gemini**  `lyria-realtime-exp` |
-| saveTipos de dados aceitos | **Entrada**  Texto (comandos ponderados)  **Saída**  Áudio (PCM bruto de 16 bits) |
-| token\_autoLimites de transmissão | **Taxa de amostragem**  48 kHz (estéreo)  **Controlar a latência**  Máximo de 2 segundos |
-| Versões do 123 | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Experimental: `lyria-realtime-exp` |
-| calendar\_monthÚltima atualização | Maio de 2025 |
+| id\_cardModel kodu | **Gemini API**  `lyria-realtime-exp` |
+| saveDesteklenen veri türleri | **Giriş**  Metin (Ağırlıklı istemler)  **Çıkış**  Ses (Raw 16 bit PCM) |
+| token\_autoYayın sınırları | **Örnekleme hızı**  48kHz (Stereo)  **Gecikmeyi kontrol etme**  Maksimum 2 saniye |
+| 123Sürümleri | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - Deneysel: `lyria-realtime-exp` |
+| calendar\_monthSon güncelleme | Mayıs 2025 |
 
-Envie comentários
+Geri bildirim gönderin
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Última atualização 2026-04-29 UTC.
+Son güncelleme tarihi: 2026-04-29 UTC.
 
-Quer enviar seu feedback?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]

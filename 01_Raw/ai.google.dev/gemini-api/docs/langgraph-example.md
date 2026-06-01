@@ -1,44 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/langgraph-example?hl=ja
-fetched_at: 2026-05-25T05:23:50.997575+00:00
-title: "Gemini \u3068 LangGraph \u3092\u4f7f\u7528\u3057\u3066 ReAct \u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u3092\u30bc\u30ed\u304b\u3089\u4f5c\u6210\u3059\u308b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/langgraph-example?hl=ko
+fetched_at: 2026-06-01T06:03:00.884295+00:00
+title: "Gemini \ubc0f LangGraph\ub97c \uc0ac\uc6a9\ud558\uc5ec \ucc98\uc74c\ubd80\ud130 ReAct \uc5d0\uc774\uc804\ud2b8 \ub9cc\ub4e4\uae30 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-フィードバックを送信
+의견 보내기
 
-# Gemini と LangGraph を使用して ReAct エージェントをゼロから作成する
+# Gemini 및 LangGraph를 사용하여 처음부터 ReAct 에이전트 만들기
 
-LangGraph はステートフルな LLM アプリケーションを構築するためのフレームワークであり、ReAct（推論と行動）エージェントの構築に適しています。
+LangGraph는 상태 저장 LLM 애플리케이션을 빌드하기 위한 프레임워크이므로 ReAct (추론 및 행동) 에이전트를 구성하는 데 적합합니다.
 
-ReAct エージェントは、LLM の推論とアクションの実行を組み合わせます。ユーザーの目標を達成するために、反復的に思考し、ツールを使用し、観察に基づいて行動し、アプローチを動的に適応させます。「["ReAct: Synergizing Reasoning and Acting
-in Language Models"](https://arxiv.org/abs/2210.03629)」（2023 年）で紹介されたこのパターンは、厳格なワークフローではなく、人間のような柔軟な問題解決を反映しようとしています。
+ReAct 에이전트는 LLM 추론과 작업 실행을 결합합니다. 사용자 목표를 달성하기 위해 반복적으로 생각하고 도구를 사용하며 관찰에 따라 행동하여 접근 방식을 동적으로 조정합니다. '["ReAct: Synergizing Reasoning and Acting
+in Language Models"](https://arxiv.org/abs/2210.03629)'(2023)에서 소개된 이 패턴은
+엄격한 워크플로를 통해 인간과 유사한 유연한 문제 해결을 반영하려고 합니다.
 
-LangGraph には、ReAct エージェント（[`create_react_agent`](https://langchain-ai.github.io/langgraph/reference/prebuilt/#langgraph.prebuilt.chat_agent_executor.create_react_agent)）が組み込まれています。これは、ReAct 実装の制御とカスタマイズを強化する必要がある場合に役立ちます。このガイドでは、簡略化されたバージョンを示します。
+LangGraph는 ReAct 구현에 더 많은 제어 및 맞춤설정이 필요한 경우에 유용한 사전 빌드된 ReAct 에이전트 ([`create_react_agent`](https://langchain-ai.github.io/langgraph/reference/prebuilt/#langgraph.prebuilt.chat_agent_executor.create_react_agent))를 제공합니다. 이 가이드에서는 간소화된 버전을 보여줍니다.
 
-LangGraph は、次の 3 つの主要なコンポーネントを使用してエージェントをグラフとしてモデル化します。
+LangGraph는 세 가지 주요 구성요소를 사용하여 에이전트를 그래프로 모델링합니다.
 
-- `State`: アプリケーションの現在のスナップショットを表す共有データ構造（通常は `TypedDict` または `Pydantic BaseModel`）。
-- `Nodes`: エージェントのロジックをエンコードします。現在の State を入力として受け取り、計算または副作用を実行して、更新された State（LLM 呼び出しやツール呼び出しなど）を返します。
-- `Edges`: 現在の `State` に基づいて実行する次の `Node` を定義し、条件付きロジックと固定遷移を可能にします。
+- `State`: 애플리케이션의 현재 스냅샷을 나타내는 공유 데이터 구조 (일반적으로 `TypedDict` 또는 `Pydantic BaseModel`).
+- `Nodes`: 에이전트의 로직을 인코딩합니다. 현재 상태를 입력으로 받고 일부 계산 또는 부작용을 실행하며 LLM 호출 또는 도구 호출과 같은 업데이트된 상태를 반환합니다.
+- `Edges`: 현재 `State`를 기반으로 실행할 다음 `Node`를 정의하여 조건부 로직 및 고정 전환을 허용합니다.
 
-API キーをまだ取得していない場合は、[Google AI
-Studio](https://aistudio.google.com/app/apikey?hl=ja) から取得できます。
+아직 API 키가 없는 경우 [Google AI
+Studio](https://aistudio.google.com/app/apikey?hl=ko)에서 API 키를 가져올 수 있습니다.
 
 ```
 pip install langgraph langchain-google-genai geopy requests
 ```
 
-環境変数 `GEMINI_API_KEY` に API キーを設定します。
+환경 변수 `GEMINI_API_KEY`에서 API 키를 설정합니다.
 
 ```
 import os
@@ -47,12 +48,11 @@ import os
 api_key = os.getenv("GEMINI_API_KEY")
 ```
 
-LangGraph を使用して ReAct エージェントを実装する方法をよりよく理解するために、このガイドでは実践的な例を紹介します。ツールを使用して、指定された場所の現在の天気を調べるエージェントを作成します。
+LangGraph를 사용하여 ReAct 에이전트를 구현하는 방법을 더 잘 이해할 수 있도록 이 가이드에서는 실제 예시를 안내합니다. 목표가 도구를 사용하여 지정된 위치의 현재 날씨를 찾는 에이전트를 만듭니다.
 
-この天気エージェントでは、`State` は継続的な会話履歴（メッセージのリストとして）と、実行されたステップ数のカウンタ（整数として）を保持します。これは説明のためのものです。
+이 날씨 에이전트의 경우 `State`는 진행 중인 대화 기록(메시지 목록)과 수행된 단계 수의 카운터(정수)를 유지합니다(설명을 위해).
 
-LangGraph には、状態メッセージ リストを更新するためのヘルパー関数 `add_messages` が用意されています。これは[リデューサー](https://langchain-ai.github.io/langgraph/concepts/low_level/#reducers)として機能し、
-現在のリストと新しいメッセージを受け取り、結合されたリストを返します。メッセージ ID で更新を処理し、新しい未確認のメッセージに対してはデフォルトで「追加のみ」の動作になります。
+LangGraph는 상태 메시지 목록을 업데이트하기 위한 도우미 함수 `add_messages`를 제공합니다. 현재 목록과 새 메시지를 가져와 결합된 목록을 반환하는 [리듀서](https://langchain-ai.github.io/langgraph/concepts/low_level/#reducers) 역할을 합니다. 메시지 ID별로 업데이트를 처리하고 기본적으로 새 메시지에는 '추가 전용' 동작을 사용합니다.
 
 ```
 from typing import Annotated,Sequence, TypedDict
@@ -66,7 +66,7 @@ class AgentState(TypedDict):
     number_of_steps: int
 ```
 
-次に、天気ツールを定義します。
+다음으로 날씨 도구를 정의합니다.
 
 ```
 from langchain_core.tools import tool
@@ -105,7 +105,7 @@ def get_weather_forecast(location: str, date: str):
 tools = [get_weather_forecast]
 ```
 
-次に、モデルを初期化し、ツールをモデルにバインドします。
+이제 모델을 초기화하고 도구를 모델에 바인딩합니다.
 
 ```
 from datetime import datetime
@@ -128,14 +128,14 @@ res=model.invoke(f"What is the weather in Berlin on {datetime.today()}?")
 print(res)
 ```
 
-エージェントを実行する前の最後のステップは、ノードとエッジを定義することです。
-この例では、2 つのノードと 1 つのエッジがあります。
+에이전트를 실행하기 전에 마지막 단계는 노드와 가장자리를 정의하는 것입니다.
+이 예시에는 노드 2개와 가장자리 1개가 있습니다.
 
-- ツールメソッドを実行する `call_tool` ノード。[ToolNode](https://langchain-ai.github.io/langgraph/how-tos/tool-calling/)
-- `model_with_tools` を使用してモデルを呼び出す `call_model` ノード。
-- ツールを呼び出すかモデルを呼び出すかを決定する `should_continue` エッジ。
+- 도구 메서드를 실행하는 `call_tool` 노드. [ToolNode](https://langchain-ai.github.io/langgraph/how-tos/tool-calling/)
+- `model_with_tools`를 사용하여 모델을 호출하는 `call_model` 노드.
+- 도구를 호출할지 모델을 호출할지 결정하는 `should_continue` 가장자리.
 
-ノードとエッジの数は固定されていません。グラフには必要な数のノードとエッジを追加できます。たとえば、構造化された出力を追加するノードや、ツールまたはモデルを呼び出す前にモデルの出力を確認する自己検証/反射ノードを追加できます。
+노드와 가장자리의 수는 고정되어 있지 않습니다. 그래프에 원하는 만큼 노드와 가장자리를 추가할 수 있습니다. 예를 들어 도구 또는 모델을 호출하기 전에 모델 출력을 확인하기 위해 구조화된 출력을 추가하는 노드 또는 자체 검증/반영 노드를 추가할 수 있습니다.
 
 ```
 from langchain_core.messages import ToolMessage
@@ -179,7 +179,7 @@ def should_continue(state: AgentState):
     return "continue"
 ```
 
-エージェントのすべてのコンポーネントが準備できたので、組み立てることができます。
+모든 에이전트 구성요소가 준비되면 이제 이를 조합할 수 있습니다.
 
 ```
 from langgraph.graph import StateGraph, END
@@ -215,7 +215,7 @@ workflow.add_edge("tools", "llm")
 graph = workflow.compile()
 ```
 
-`draw_mermaid_png` メソッドを使用してグラフを可視化できます。
+`draw_mermaid_png` 메서드를 사용하여 그래프를 시각화할 수 있습니다.
 
 ```
 from IPython.display import Image, display
@@ -223,9 +223,9 @@ from IPython.display import Image, display
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-![png](https://ai.google.dev/static/gemini-api/docs/images/langgraph-react-agent_16_0.png?hl=ja)
+![png](https://ai.google.dev/static/gemini-api/docs/images/langgraph-react-agent_16_0.png?hl=ko)
 
-エージェントを実行します。
+이제 에이전트를 실행합니다.
 
 ```
 from datetime import datetime
@@ -238,7 +238,7 @@ for state in graph.stream(inputs, stream_mode="values"):
     last_message.pretty_print()
 ```
 
-会話を続けたり、別の都市の天気を尋ねたり、比較をリクエストしたりできます。
+이제 대화를 계속하거나 다른 도시의 날씨를 묻거나 비교를 요청할 수 있습니다.
 
 ```
 state["messages"].append(("user", "Would it be warmer in Munich?"))
@@ -248,12 +248,12 @@ for state in graph.stream(state, stream_mode="values"):
     last_message.pretty_print()
 ```
 
-フィードバックを送信
+의견 보내기
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-最終更新日 2026-05-19 UTC。
+최종 업데이트: 2026-05-19(UTC)
 
-ご意見をお聞かせください
+의견을 전달하고 싶나요?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-05-19 UTC。"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-05-19(UTC)"],[],[]]

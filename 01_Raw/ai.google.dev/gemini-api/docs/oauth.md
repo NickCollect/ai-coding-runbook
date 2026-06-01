@@ -1,88 +1,85 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/oauth?hl=ko
-fetched_at: 2026-05-25T05:19:42.209364+00:00
-title: "OAuth\ub97c \ud1b5\ud55c \uc778\uc99d \ube60\ub978 \uc2dc\uc791 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/oauth?hl=ar
+fetched_at: 2026-06-01T06:07:58.948940+00:00
+title: "\u0627\u0644\u0645\u0635\u0627\u062f\u0642\u0629 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u062a\u0634\u063a\u064a\u0644 \u0627\u0644\u0633\u0631\u064a\u0639 \u0644\u0628\u0631\u0648\u062a\u0648\u0643\u0648\u0644 OAuth \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-의견 보내기
+إرسال ملاحظات
 
-# OAuth를 통한 인증 빠른 시작
+# المصادقة باستخدام التشغيل السريع لبروتوكول OAuth
 
-[Gemini API에 인증하는 가장 쉬운 방법은 Gemini API 빠른 시작에 설명된 대로 API 키를 구성하는 것입니다.](https://ai.google.dev/gemini-api/docs/quickstart?hl=ko) 더 엄격한 액세스 제어가 필요한 경우 OAuth를 대신 사용할 수 있습니다. 이 가이드는 OAuth를 사용하여 인증을 설정하는 데 도움이 됩니다.
+أسهل طريقة للمصادقة على Gemini API هي إعداد مفتاح واجهة برمجة التطبيقات، كما هو موضّح في [دليل البدء السريع لواجهة Gemini API](https://ai.google.dev/gemini-api/docs/quickstart?hl=ar). إذا كنت بحاجة إلى عناصر تحكّم أكثر صرامة في الوصول، يمكنك استخدام OAuth بدلاً من ذلك. سيساعدك هذا الدليل في إعداد المصادقة باستخدام OAuth.
 
-이 가이드에서는 테스트 환경에 적합한 간소화된 인증 접근 방식을 사용합니다. [[프로덕션 환경의 경우 앱에 적합한 액세스 사용자 인증 정보를 선택하기 전에 인증 및 승인에 대해 알아보세요.](https://developers.google.com/workspace/guides/auth-overview?hl=ko)](https://developers.google.com/workspace/guides/create-credentials?hl=ko#choose_the_access_credential_that_is_right_for_you)
+يستخدم هذا الدليل أسلوبًا مبسطًا للمصادقة مناسبًا لبيئة الاختبار. بالنسبة إلى بيئة الإنتاج، تعرَّف على [المصادقة والتفويض](https://developers.google.com/workspace/guides/auth-overview?hl=ar) قبل [اختيار بيانات الاعتماد الخاصة بالوصول](https://developers.google.com/workspace/guides/create-credentials?hl=ar#choose_the_access_credential_that_is_right_for_you) المناسبة لتطبيقك.
 
-## 목표
+## الأهداف
 
-- OAuth용 클라우드 프로젝트 설정
-- 애플리케이션 기본 사용자 인증 정보 설정
-- `gcloud auth`를 사용하는 대신 프로그램에서 사용자 인증 정보 관리
+- إعداد مشروعك على السحابة الإلكترونية لاستخدام OAuth
+- إعداد بيانات الاعتماد التلقائية للتطبيق
+- إدارة بيانات الاعتماد في برنامجك بدلاً من استخدام "`gcloud auth`"
 
-## 기본 요건
+## المتطلبات الأساسية
 
-이 빠른 시작을 실행하려면 다음이 필요합니다.
+لتشغيل هذا الدليل السريع، يجب توفُّر ما يلي:
 
-- [Google Cloud 프로젝트](https://developers.google.com/workspace/guides/create-project?hl=ko)
-- [gcloud CLI의 로컬 설치](https://cloud.google.com/sdk/docs/install?hl=ko)
+- [مشروع على السحابة الإلكترونية من Google Cloud](https://developers.google.com/workspace/guides/create-project?hl=ar)
+- [تثبيت gcloud CLI على الجهاز](https://cloud.google.com/sdk/docs/install?hl=ar)
 
-## 클라우드 프로젝트 설정
+## إعداد مشروعك على السحابة الإلكترونية
 
-이 빠른 시작을 완료하려면 먼저 Cloud 프로젝트를 설정해야 합니다.
+لإكمال هذا الدليل السريع، عليك أولاً إعداد مشروعك على السحابة الإلكترونية.
 
-### 1. API 사용 설정
+### 1. تفعيل واجهة برمجة التطبيقات
 
-Google API를 사용하려면 먼저 Google Cloud 프로젝트에서 API를 사용 설정해야 합니다.
+قبل استخدام واجهات Google APIs، عليك تفعيلها في مشروع على Google Cloud.
 
-- Google Cloud 콘솔에서 Google Generative Language API를 사용 설정합니다.
+- في Google Cloud Console، فعِّل Google Generative Language API.
 
-  [API 사용 설정](https://console.cloud.google.com/flows/enableapi?apiid=generativelanguage.googleapis.com&hl=ko)
+  [تفعيل واجهة برمجة التطبيقات](https://console.cloud.google.com/flows/enableapi?apiid=generativelanguage.googleapis.com&hl=ar)
 
-### 2. OAuth 동의 화면 구성
+### 2. إعداد شاشة طلب الموافقة المتعلّقة ببروتوكول OAuth
 
-다음으로 프로젝트의 OAuth 동의 화면을 구성하고 자신을 테스트 사용자로 추가합니다. Cloud 프로젝트에서 이 단계를 이미 완료했다면 다음 섹션으로 건너뛰세요.
+بعد ذلك، اضبط شاشة طلب الموافقة المتعلّقة ببروتوكول OAuth في المشروع وأضِف نفسك كمستخدم اختباري. إذا سبق لك إكمال هذه الخطوة لمشروعك على السحابة الإلكترونية، انتقِل إلى القسم التالي.
 
-1. Google Cloud 콘솔에서 **메뉴** > **Google 인증 플랫폼** > **개요** 로 이동합니다.
+1. في وحدة تحكّم Google Cloud، انتقِل إلى **القائمة** > **منصة Google Auth** > **نظرة عامة**.
 
-   [Google 인증 플랫폼으로 이동](https://console.developers.google.com/auth/overview?hl=ko)
-2. 프로젝트 구성 양식을 작성하고 **잠재고객** 섹션에서 사용자 유형을 **외부** 로 설정합니다.
-3. 양식의 나머지 부분을 작성하고 사용자 데이터 정책 약관에 동의한 후 **만들기** 를 클릭합니다.
-4. 지금은 범위를 추가하지 않아도 되며 **저장하고 계속하기** 를 클릭합니다. 나중에 Google Workspace 조직 외부에서 사용할 앱을 만들 때는 앱에 필요한 승인 범위를 추가하고 확인해야 합니다.
-5. 테스트 사용자 추가:
+   [الانتقال إلى منصة Google Auth](https://console.developers.google.com/auth/overview?hl=ar)
+2. أكمِل نموذج إعداد المشروع واضبط نوع المستخدم على **خارجي** في قسم **الجمهور**.
+3. أكمِل بقية النموذج، واقبَل بنود سياسة بيانات المستخدِم، ثم انقر على **إنشاء**.
+4. في الوقت الحالي، يمكنك تخطّي إضافة النطاقات والنقر على **حفظ ومتابعة**. في المستقبل، عندما تنشئ تطبيقًا لاستخدامه خارج مؤسستك على Google Workspace، عليك إضافة نطاقات الأذونات التي يتطلبها تطبيقك وإثبات ملكيتها.
+5. إضافة مستخدمين اختباريين:
 
-   1. Google 인증 플랫폼의
-      [잠재고객 페이지](https://console.developers.google.com/auth/audience?hl=ko)로 이동합니다.
-   2. ****\*\*테스트 사용자\*\* 에서 \*\*사용자 추가\*\* 를 클릭합니다.****
-   3. 이메일 주소와 기타 승인된 테스트 사용자를 입력한 후 **저장** 을 클릭합니다.
+   1. انتقِل إلى [صفحة الجمهور](https://console.developers.google.com/auth/audience?hl=ar) في منصة Google Auth.
+   2. ضمن **المستخدمون التجريبيون**، انقر على **إضافة مستخدمين**.
+   3. أدخِل عنوان بريدك الإلكتروني وأي مستخدمين اختباريين آخرين معتمَدين، ثم انقر على **حفظ**.
 
-### 3. 데스크톱 애플리케이션의 사용자 인증 정보 승인
+### 3- تفويض بيانات اعتماد لتطبيق على الكمبيوتر
 
-최종 사용자로 인증하고 앱에서 사용자 데이터에 액세스하려면 OAuth 2.0 클라이언트 ID를 하나 이상 만들어야 합니다. 클라이언트 ID는 Google OAuth 서버에서 단일 앱을 식별하는 데 사용됩니다. 앱이 여러 플랫폼에서 실행되는 경우 각 플랫폼에 대해 별도의 클라이언트 ID를 만들어야 합니다.
+لإجراء المصادقة كمستخدم نهائي والوصول إلى بيانات المستخدم في تطبيقك، عليك إنشاء معرّف عميل واحد أو أكثر من معرّفات عملاء OAuth 2.0. يُستخدم معرّف العميل لتعريف تطبيق واحد على خوادم OAuth من Google. إذا كان تطبيقك يعمل على منصات متعددة، عليك إنشاء معرّف عميل منفصل لكل منصة.
 
-1. Google Cloud 콘솔에서 **메뉴** > **Google 인증 플랫폼** > **클라이언트** 로 이동합니다.
+1. في وحدة تحكّم Google Cloud، انتقِل إلى **القائمة** > **منصة Google Auth** > **العملاء**.
 
-   [사용자 인증 정보로 이동](https://console.developers.google.com/auth/clients?hl=ko)
-2. **클라이언트 만들기** 를 클릭합니다.
-3. **애플리케이션 유형** > **데스크톱 앱** 을 클릭합니다.
-4. **이름** 필드에 사용자 인증 정보의 이름을 입력합니다. 이 이름은 Google Cloud 콘솔에만 표시됩니다.
-5. **만들기** 를 클릭합니다. OAuth 클라이언트 생성됨 화면이 표시되고 여기에 새 클라이언트 ID와 클라이언트 보안 비밀번호가 표시됩니다.
-6. **확인** 을 클릭합니다. 새로 만든 사용자 인증 정보가 **OAuth 2.0 클라이언트 ID** 아래에 표시됩니다.
-7. 다운로드 버튼을 클릭하여 JSON 파일을 저장합니다. 파일은
-   `client_secret_<identifier>.json`으로 저장되며 이름을 `client_secret.json`
-   으로 바꾸고 작업 디렉터리로 이동합니다.
+   [الانتقال إلى "بيانات الاعتماد"](https://console.developers.google.com/auth/clients?hl=ar)
+2. انقر على **إنشاء عميل**.
+3. انقر على **نوع التطبيق** > **تطبيق على الكمبيوتر**.
+4. في حقل **الاسم**، اكتب اسمًا لبيانات الاعتماد. ولا يظهر هذا الاسم إلا في Google Cloud Console.
+5. انقر على **إنشاء**. تظهر شاشة إنشاء عميل OAuth، وتعرض معرّف العميل وسر العميل الجديدَين.
+6. انقر على **موافق**. تظهر بيانات الاعتماد التي تم إنشاؤها حديثًا ضمن **معرّفات عملاء OAuth 2.0**.
+7. انقر على زر التنزيل لحفظ ملف JSON. سيتم حفظه باسم `client_secret_<identifier>.json`، ثم عليك إعادة تسميته إلى `client_secret.json` ونقله إلى دليل العمل.
 
-## 애플리케이션 기본 사용자 인증 정보 설정
+## إعداد "بيانات الاعتماد التلقائية للتطبيق"
 
-`client_secret.json` 파일을 사용 가능한 사용자 인증 정보로 변환하려면 해당 위치를 `gcloud auth application-default login` 명령어의 `--client-id-file` 인수에 전달합니다.
+لتحويل ملف `client_secret.json` إلى بيانات اعتماد قابلة للاستخدام، مرِّر موقعه الجغرافي إلى وسيطة `--client-id-file` الخاصة بالأمر `gcloud auth application-default login`.
 
 ```
 gcloud auth application-default login \
@@ -90,10 +87,9 @@ gcloud auth application-default login \
     --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/generative-language.retriever'
 ```
 
-이 가이드의 간소화된 프로젝트 설정은 **"Google에서
-이 앱을 확인하지 않았습니다."** 대화상자를 트리거합니다. 이는 정상적인 현상이므로 **"계속"**을 선택합니다.
+يؤدي إعداد المشروع المبسَّط في هذا البرنامج التعليمي إلى ظهور مربّع الحوار **"لم تتحقّق Google من هذا التطبيق"**. هذا أمر طبيعي، لذا اختَر **"متابعة"**.
 
-이렇게 하면 결과 토큰이 잘 알려진 위치에 배치되므로 `gcloud` 또는 클라이언트 라이브러리에서 액세스할 수 있습니다.
+يؤدي ذلك إلى وضع الرمز المميز الناتج في مكان معروف جيدًا ليتمكّن `gcloud` أو مكتبات البرامج من الوصول إليه.
 
 ```` ```
 gcloud auth application-default login   
@@ -104,11 +100,11 @@ gcloud auth application-default login
     --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/generative-language.retriever'
 ``` ````
 
-애플리케이션 기본 사용자 인증 정보 (ADC)를 설정하면 대부분의 언어에서 클라이언트 라이브러리가 이를 찾는 데 최소한의 도움만 필요합니다.
+بعد ضبط بيانات الاعتماد التلقائية للتطبيق (ADC)، لن تحتاج مكتبات البرامج في معظم اللغات إلى مساعدة كبيرة أو أي مساعدة للعثور عليها.
 
 ### Curl
 
-이 기능이 작동하는지 테스트하는 가장 빠른 방법은 curl을 사용하여 REST API에 액세스하는 것입니다.
+أسرع طريقة لاختبار عمل ذلك هي استخدامها للوصول إلى واجهة برمجة تطبيقات REST باستخدام curl:
 
 ```
 access_token=$(gcloud auth application-default print-access-token)
@@ -121,13 +117,13 @@ curl -X GET https://generativelanguage.googleapis.com/v1/models \
 
 ### Python
 
-Python에서 클라이언트 라이브러리는 자동으로 이를 찾아야 합니다.
+في Python، من المفترض أن تعثر عليها مكتبات البرامج تلقائيًا:
 
 ```
 pip install google-genai
 ```
 
-테스트를 위한 최소 스크립트는 다음과 같습니다.
+في ما يلي نص برمجي بسيط لاختبارها:
 
 ```
 from google import genai
@@ -136,30 +132,29 @@ client = genai.Client()
 print('Available base models:', [m.name for m in client.models.list()])
 ```
 
-## 다음 단계
+## الخطوات التالية
 
-작동하는 경우 텍스트 데이터에서
-[시맨틱 검색을 시도할 수 있습니다](https://ai.google.dev/docs/semantic_retriever?hl=ko).
+إذا كان ذلك يعمل، يمكنك تجربة
+[الاسترجاع الدلالي لبياناتك النصية](https://ai.google.dev/docs/semantic_retriever?hl=ar).
 
-## 사용자 인증 정보 직접 관리 [Python]
+## إدارة بيانات الاعتماد بنفسك [Python]
 
-대부분의 경우 클라이언트 ID (`client_secret.json`)에서 액세스 토큰을 만드는 데 사용할 수 있는 `gcloud` 명령어가 없습니다. Google은 앱 내에서 이 프로세스를 관리할 수 있도록 여러 언어로 라이브러리를 제공합니다. 이 섹션에서는 Python에서 이 프로세스를 보여줍니다. 다른 언어의 경우 이와 유사한 절차의 예가
-[Drive API 문서](https://developers.google.com/drive/api/quickstart/python?hl=ko)에 나와 있습니다.
+في كثير من الحالات، لن يتوفّر لك الأمر `gcloud` لإنشاء رمز الدخول من معرّف العميل (`client_secret.json`). توفّر Google مكتبات بلغات عديدة تتيح لك إدارة هذه العملية داخل تطبيقك. يوضّح هذا القسم العملية بلغة Python. تتوفّر أمثلة مكافئة لهذا النوع من الإجراءات بلغات أخرى في [مستندات Drive API](https://developers.google.com/drive/api/quickstart/python?hl=ar).
 
-### 1. 필요한 라이브러리 설치
+### 1. تثبيت المكتبات اللازمة
 
-Python용 Google 클라이언트 라이브러리와 Gemini 클라이언트 라이브러리를 설치합니다.
+ثبِّت مكتبة برامج Google للغة Python ومكتبة برامج Gemini.
 
 ```
 pip install --upgrade -q google-api-python-client google-auth-httplib2 google-auth-oauthlib
 pip install google-genai
 ```
 
-### 2. 사용자 인증 정보 관리자 작성
+### 2. كتابة بيانات اعتماد مدير
 
-승인 화면을 클릭해야 하는 횟수를 최소화하려면 작업 디렉터리에 `load_creds.py`라는 파일을 만들어 나중에 재사용하거나 만료된 경우 새로고침할 수 있는 `token.json` 파일을 캐시합니다.
+للحدّ من عدد المرات التي عليك فيها النقر على شاشات التفويض، أنشئ ملفًا باسم `load_creds.py` في دليل العمل لتخزين ملف `token.json` مؤقتًا يمكن إعادة استخدامه لاحقًا، أو إعادة تحميله إذا انتهت صلاحيته.
 
-다음 코드를 사용하여 `client_secret.json` 파일을 `genai.configure`에서 사용할 수 있는 토큰으로 변환합니다.
+ابدأ باستخدام الرمز التالي لتحويل ملف `client_secret.json` إلى رمز مميز يمكن استخدامه مع `genai.configure`:
 
 ```
 import os.path
@@ -196,9 +191,9 @@ def load_creds():
     return creds
 ```
 
-### 3. 프로그램 작성
+### 3- كتابة برنامجك
 
-이제 `script.py`를 만듭니다.
+الآن، أنشئ `script.py`:
 
 ```
 import pprint
@@ -213,27 +208,28 @@ print()
 print('Available base models:', [m.name for m in client.models.list()])
 ```
 
-### 4. 프로그램 실행
+### 4. تشغيل برنامجك
 
-작업 디렉터리에서 다음 샘플을 실행합니다.
+في دليل العمل، شغِّل النموذج:
 
 ```
 python script.py
 ```
 
-스크립트를 처음 실행하면 브라우저 창이 열리고 액세스 권한을 부여하라는 메시지가 표시됩니다.
+في المرة الأولى التي تنفّذ فيها النص البرمجي، سيفتح نافذة متصفّح ويطلب منك
+منح إذن الوصول.
 
-1. 아직 Google 계정에 로그인하지 않았으면 로그인하라는 메시지가 표시됩니다. 여러 계정에 로그인되어 있는 경우 **프로젝트를 구성할 때 '테스트 계정'으로 설정한 계정을 선택해야 합니다.**
-2. 승인 정보가 파일 시스템에 저장되므로 다음에 샘플 코드를 실행할 때는 승인하라는 메시지가 표시되지 않습니다.
+1. إذا لم تكن مسجِّلاً الدخول إلى حساب Google، سيُطلب منك تسجيل الدخول. إذا كنت مسجّلاً الدخول إلى حسابات متعددة، **احرص على اختيار الحساب الذي ضبطته كـ "حساب اختبار" عند إعداد مشروعك.**
+2. يتم تخزين معلومات التفويض في نظام الملفات، لذا لن يُطلب منك تقديم تفويض في المرة التالية التي تشغّل فيها الرمز النموذجي.
 
-인증을 설정했습니다.
+لقد أعددت المصادقة بنجاح.
 
-의견 보내기
+إرسال ملاحظات
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-최종 업데이트: 2026-04-29(UTC)
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-의견을 전달하고 싶나요?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

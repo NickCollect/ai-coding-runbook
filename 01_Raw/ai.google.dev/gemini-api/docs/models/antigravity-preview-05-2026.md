@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/models/antigravity-preview-05-2026?hl=vi
-fetched_at: 2026-05-25T05:18:50.212569+00:00
+fetched_at: 2026-06-01T06:09:42.563260+00:00
 title: "B\u1ea3n xem tr\u01b0\u1edbc Antigravity \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

@@ -1,43 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-TW
-fetched_at: 2026-05-25T05:25:24.624116+00:00
-title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/video-understanding?hl=de
+fetched_at: 2026-06-01T06:02:24.677849+00:00
+title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-提供意見
+Feedback geben
 
-# 影片解讀
+# Videos verstehen
 
-> 如要瞭解如何生成影片，請參閱 [Veo](https://ai.google.dev/gemini-api/docs/video?hl=zh-tw) 指南。
+> Weitere Informationen zur Videogenerierung finden Sie im [Veo](https://ai.google.dev/gemini-api/docs/video?hl=de).
 
-Gemini 模型可處理影片，因此許多前沿開發人員可使用這些模型，不必再像過去一樣，需要特定領域的模型。Gemini 的部分視覺功能包括：描述、區隔及擷取影片資訊、回答影片內容相關問題，以及參照影片中的特定時間戳記。
+Gemini-Modelle können Videos verarbeiten und ermöglichen so viele innovative Entwickler-Anwendungsfälle, für die in der Vergangenheit domänenspezifische Modelle erforderlich gewesen wären.
+Gemini kann unter anderem: Videos beschreiben, segmentieren und Informationen daraus extrahieren, Fragen zu Videoinhalten beantworten und auf bestimmte Zeitstempel in einem Video verweisen.
 
-你可以透過下列方式將影片提供給 Gemini：
+Sie haben folgende Möglichkeiten, Videos als Eingabe für Gemini zu verwenden:
 
-| 輸入法 | 大小上限 | 建議用途 |
+| Eingabemethode | Max. Größe | Empfohlener Anwendungsfall |
 | --- | --- | --- |
-| [檔案 API](#upload-video) | 20 GB (付費) / 2 GB (免費) | 大型檔案 (100 MB 以上)、長影片 (10 分鐘以上)、可重複使用的檔案。 |
-| [Cloud Storage 註冊](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-tw#registration) | 2 GB (每個檔案，無儲存空間限制) | 大型檔案 (100 MB 以上)、長影片 (10 分鐘以上)、可重複使用的永久檔案。 |
-| [內嵌資料](#inline-video) | < 100MB | 小型檔案 (小於 100 MB)、短時間 (小於 1 分鐘)、一次性輸入。 |
-| [YouTube 網址](#youtube) | 不適用 | 公開的 YouTube 影片。 |
+| [File API](#upload-video) | 20 GB (kostenpflichtig) / 2 GB (kostenlos) | Große Dateien (über 100 MB), lange Videos (über 10 Minuten), wiederverwendbare Dateien. |
+| [Cloud Storage-Registrierung](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=de#registration) | 2 GB (pro Datei, keine Speicherplatzbeschränkungen) | Große Dateien (über 100 MB), lange Videos (über 10 Minuten), dauerhafte, wiederverwendbare Dateien. |
+| [Inlinedaten](#inline-video) | < 100 MB | Kleine Dateien (< 100 MB), kurze Dauer (< 1 Minute), einmalige Eingaben. |
+| [YouTube-URLs](#youtube) | – | Öffentliche YouTube-Videos. |
 
-> **注意：**建議在大多數情況下使用 [File API](#upload-video)，尤其是檔案大小超過 100 MB，或是您想在多個要求中重複使用檔案時。
+> **Hinweis**:Die [File API](#upload-video) wird für die meisten Anwendungsfälle empfohlen, insbesondere für Dateien, die größer als 100 MB sind, oder wenn Sie die Datei in mehreren Anfragen wiederverwenden möchten.
 
-如要瞭解其他檔案輸入方法，例如使用外部網址或儲存在 Google Cloud 中的檔案，請參閱[檔案輸入方法](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-tw)指南。
+Informationen zu anderen Dateieingabemethoden, z. B. zur Verwendung externer URLs oder in Google Cloud gespeicherter Dateien, finden Sie im Leitfaden [Dateieingabemethoden](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=de).
 
-### 上傳影片檔案
+### Videodatei hochladen
 
-下列程式碼會下載影片樣本、使用 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw) 上傳影片、等待處理完成，然後使用上傳的檔案參照來總結影片內容。
+Im folgenden Code wird ein Beispielvideo heruntergeladen, mit der [Files API](https://ai.google.dev/gemini-api/docs/files?hl=de) hochgeladen, auf die Verarbeitung gewartet und dann die hochgeladene Dateireferenz verwendet, um das Video zusammenzufassen.
 
 ### Python
 
@@ -85,7 +87,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### Ok
 
 ```
 uploadedFile, _ := client.Files.UploadFromPath(ctx, "path/to/sample.mp4", nil)
@@ -162,15 +164,16 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 jq -r ".candidates[].content.parts[].text" response.json
 ```
 
-如果要求總大小 (包括檔案、文字提示詞、系統指令等) 超過 20 MB、影片時間長度較長，或您打算在多個提示詞中使用相同影片，請一律使用 Files API。File API 可直接接受影片檔案格式。
+Verwenden Sie immer die Files API, wenn die Gesamtgröße der Anfrage (einschließlich Datei, Text-Prompt, Systemanweisungen usw.) mehr als 20 MB beträgt, die Videodauer lang ist oder wenn Sie dasselbe Video in mehreren Prompts verwenden möchten.
+Die File API akzeptiert Videodateiformate direkt.
 
-如要進一步瞭解如何處理媒體檔案，請參閱 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw)。
+Weitere Informationen zum Arbeiten mit Media-Dateien finden Sie unter [Files API](https://ai.google.dev/gemini-api/docs/files?hl=de).
 
-### 內嵌傳遞影片資料
+### Videodaten inline übergeben
 
-您可以直接在 `generateContent` 的要求中傳遞較小的影片，不必使用 File API 上傳影片檔案。這適合總要求大小小於 20 MB 的短片。
+Anstatt eine Videodatei mit der File API hochzuladen, können Sie kleinere Videos direkt in der Anfrage an `generateContent` übergeben. Diese Methode eignet sich für kürzere Videos mit einer Gesamtanfragegröße von unter 20 MB.
 
-以下是提供內嵌影片資料的範例：
+Hier ein Beispiel für die Bereitstellung von Inline-Videodaten:
 
 ### Python
 
@@ -255,9 +258,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
     }' 2> /dev/null
 ```
 
-### 傳送 YouTube 網址
+### YouTube-URLs für Tickets
 
-您可以將 YouTube 網址直接傳遞至 Gemini API，做為要求的一部分，如下所示：
+Sie können YouTube-URLs direkt als Teil Ihrer Anfrage an die Gemini API übergeben:
 
 ### Python
 
@@ -303,7 +306,7 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -363,20 +366,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
     }' 2> /dev/null
 ```
 
-**限制：**
+**Beschränkungen:**
 
-- 免費方案每天最多只能上傳 8 小時的 YouTube 影片。
-- 付費方案則沒有影片長度限制。
-- 如果是 Gemini 2.5 之前的模型，每次要求只能上傳 1 部影片。如果是 Gemini 2.5 以上版本，每個要求最多可上傳 10 部影片。
-- 你只能上傳公開影片，無法上傳私人或不公開影片。
+- In der kostenlosen Version können Sie nicht mehr als 8 Stunden YouTube-Video pro Tag hochladen.
+- Bei der kostenpflichtigen Stufe gibt es keine Begrenzung der Videolänge.
+- Bei Modellen vor Gemini 2.5 können Sie nur ein Video pro Anfrage hochladen. Bei Gemini 2.5 und späteren Modellen können Sie pro Anfrage maximal 10 Videos hochladen.
+- Du kannst nur öffentliche Videos hochladen, keine privaten oder nicht gelisteten Videos.
 
-## 在長片中使用脈絡快取功能
+## Kontext-Caching für lange Videos verwenden
 
-如果影片長度超過 10 分鐘，或您打算對同一個影片檔案提出多項要求，請使用[內容快取](https://ai.google.dev/gemini-api/docs/caching?hl=zh-tw)，以降低成本並縮短延遲時間。脈絡快取功能可讓您處理一次影片，並在後續查詢中重複使用權杖，非常適合用於對話工作階段或重複分析長篇內容。
+Bei Videos, die länger als 10 Minuten sind, oder wenn Sie mehrere Anfragen für dieselbe Videodatei stellen möchten, sollten Sie [Context Caching](https://ai.google.dev/gemini-api/docs/caching?hl=de) verwenden, um die Kosten zu senken und die Latenz zu verbessern. Mit dem Kontext-Caching können Sie das Video einmal verarbeiten und die Tokens für nachfolgende Anfragen wiederverwenden. Das ist ideal für Chats oder wiederholte Analysen von Inhalten im Langformat.
 
-## 參考內容中的時間戳記
+## Auf Zeitstempel im Inhalt verweisen
 
-你可以使用 `MM:SS` 格式的時間戳記，詢問影片中特定時間點的問題。
+Sie können Fragen zu bestimmten Zeitpunkten im Video stellen, indem Sie Zeitstempel im Format `MM:SS` verwenden.
 
 ### Python
 
@@ -390,7 +393,7 @@ prompt = "What are the examples given at 00:05 and 00:10 supposed to show us?" #
 const prompt = "What are the examples given at 00:05 and 00:10 supposed to show us?";
 ```
 
-### Go
+### Ok
 
 ```
     prompt := []*genai.Part{
@@ -407,11 +410,12 @@ const prompt = "What are the examples given at 00:05 and 00:10 supposed to show 
 PROMPT="What are the examples given at 00:05 and 00:10 supposed to show us?"
 ```
 
-## 從影片擷取詳細洞察資料
+## Detaillierte Informationen aus Videos extrahieren
 
-Gemini 模型可處理**音訊和影像**串流中的資訊，因此具備強大的影片內容解讀能力。這項功能可讓你擷取豐富的詳細資料，包括生成影片內容的說明，以及回答影片內容相關問題。
+Gemini-Modelle bieten leistungsstarke Funktionen zum Verstehen von Videoinhalten, indem sie Informationen aus **Audio- und visuellen Streams** verarbeiten. So können Sie eine Vielzahl von Details extrahieren, z. B. Beschreibungen der Vorgänge in einem Video generieren und Fragen zu den Inhalten beantworten lassen.
 
-如果是視覺描述，模型會以 **每秒 1 個影格**的速率對影片取樣。這個預設取樣率適用於大多數內容，但請注意，如果影片有快速動作或場景快速變換，可能就會錯過細節。對於這類高動態內容，建議[設定自訂影格率](#custom-frame-rate)。
+Für visuelle Beschreibungen wird das Video mit einer Rate von **1 Bild pro Sekunde** (FPS) gesampelt. Diese Standard-Samplingrate eignet sich gut für die meisten Inhalte. Bei Videos mit schnellen Bewegungen oder schnellen Szenenwechseln können jedoch Details verloren gehen.
+Bei solchen Inhalten mit vielen Bewegungen sollten Sie [eine benutzerdefinierte Framerate festlegen](#custom-frame-rate).
 
 ### Python
 
@@ -425,7 +429,7 @@ prompt = "Describe the key events in this video, providing both audio and visual
 const prompt = "Describe the key events in this video, providing both audio and visual details. Include timestamps for salient moments.";
 ```
 
-### Go
+### Ok
 
 ```
     prompt := []*genai.Part{
@@ -441,13 +445,13 @@ const prompt = "Describe the key events in this video, providing both audio and 
 PROMPT="Describe the key events in this video, providing both audio and visual details. Include timestamps for salient moments."
 ```
 
-## 自訂影片處理方式
+## Videoverarbeitung anpassen
 
-您可以設定剪輯間隔或提供自訂影格速率取樣，在 Gemini API 中自訂影片處理作業。
+Sie können die Videoverarbeitung in der Gemini API anpassen, indem Sie Clipping-Intervalle festlegen oder benutzerdefiniertes Sampling der Framerate bereitstellen.
 
-### 設定剪輯間隔
+### Ausschnittintervalle festlegen
 
-您可以指定 `videoMetadata`，並提供開始和結束偏移量，藉此剪輯影片。
+Sie können Videos zuschneiden, indem Sie `videoMetadata` mit Start- und End-Offsets angeben.
 
 ### Python
 
@@ -514,9 +518,9 @@ console.log(response.text)
 await main();
 ```
 
-### 設定自訂影格率
+### Benutzerdefinierte Bildrate festlegen
 
-您可以將 `fps` 引數傳遞至 `videoMetadata`，藉此設定自訂影格率取樣。
+Sie können die benutzerdefinierte Frame-Rate-Erfassung festlegen, indem Sie ein `fps`-Argument an `videoMetadata` übergeben.
 
 ### Python
 
@@ -545,11 +549,11 @@ response = client.models.generate_content(
 )
 ```
 
-系統預設會從影片中取樣每秒 1 個影格。如果是長片，建議將 FPS 設為低於 1。這項功能特別適合大部分為靜態的影片 (例如講座)。如果影片需要精細的時間分析，例如瞭解快速動作或追蹤高速動作，請使用較高的每秒影格數。
+Standardmäßig wird aus dem Video ein Frame pro Sekunde (FPS) gesampelt. Bei langen Videos empfiehlt es sich, eine niedrige Framerate (< 1) festzulegen. Das ist besonders nützlich für Videos, die größtenteils statisch sind, z.B. Vorträge. Verwenden Sie eine höhere Framerate für Videos, die eine detaillierte zeitliche Analyse erfordern, z. B. zum Erfassen von schnellen Aktionen oder zum Verfolgen von Bewegungen mit hoher Geschwindigkeit.
 
-## 支援的影片格式
+## Unterstützte Videoformate
 
-Gemini 支援下列影片格式 MIME 類型：
+Gemini unterstützt die folgenden MIME-Typen für Videoformate:
 
 - `video/mp4`
 - `video/mpeg`
@@ -561,46 +565,47 @@ Gemini 支援下列影片格式 MIME 類型：
 - `video/wmv`
 - `video/3gpp`
 
-## 影片技術詳細資料
+## Technische Details zu Videos
 
-- **支援的模型和脈絡**：所有 Gemini 模型都能處理影片資料。
-  - 支援 100 萬個詞元的脈絡窗口模型，可以處理長達 1 小時的影片 (預設媒體解析度)，或長達 3 小時的影片 (低媒體解析度)。
-- **File API 處理**：使用 File API 時，影片會以每秒 1 個影格 (FPS) 的速度儲存，音訊則會以 1 Kbps (單一聲道) 的速度處理。系統每秒都會新增時間戳記。
-  - 為提升推論品質，這些費率日後可能會有所變動。
-  - 如要覆寫 1 FPS 的取樣率，請[設定自訂影格率](#custom-frame-rate)。
-- **符記計算**：每秒影片會轉換為以下符記：
-  - 個別影格 (以 1 FPS 取樣)：
-    - 如果 [`mediaResolution`](https://ai.google.dev/api/generate-content?hl=zh-tw#MediaResolution) 設為低，每個影格會產生 66 個權杖。
-    - 否則，每個影格會以 258 個權杖進行權杖化。
-  - 音訊：每秒 32 個權杖。
-  - 也包含中繼資料。
-  - 總計：預設媒體解析度下，每秒影片約 300 個權杖；低媒體解析度下，每秒影片約 100 個權杖。
-- **中等解析度**：Gemini 3 推出 `media_resolution` 參數，可精細控管多模態視覺處理。`media_resolution` 參數會決定每個輸入圖片或影片影格分配的詞元數量上限。解析度越高，模型就越能辨識細小文字或細節，但也會增加詞元用量和延遲時間。
+- **Unterstützte Modelle und Kontext**: Alle Gemini-Modelle können Videodaten verarbeiten.
+  - Modelle mit einem Kontextfenster für 1 Million Tokens können Videos mit einer Länge von bis zu einer Stunde in der Standardmedienauflösung oder mit einer Länge von bis zu drei Stunden in niedriger Medienauflösung verarbeiten.
+- **Verarbeitung über die File API**: Bei Verwendung der File API werden Videos mit 1 Frame pro Sekunde (FPS) gespeichert und Audio mit 1 Kbit/s (Einzelkanal) verarbeitet.
+  Zeitstempel werden jede Sekunde hinzugefügt.
+  - Diese Raten können sich in Zukunft ändern, um die Inferenz zu verbessern.
+  - Sie können die Abtastrate von 1 FPS überschreiben, indem Sie [eine benutzerdefinierte Framerate festlegen](#custom-frame-rate).
+- **Tokenberechnung**: Jede Sekunde des Videos wird so tokenisiert:
+  - Einzelne Frames (mit 1 FPS):
+    - Wenn [`mediaResolution`](https://ai.google.dev/api/generate-content?hl=de#MediaResolution) auf „Niedrig“ festgelegt ist, werden Frames mit 66 Tokens pro Frame tokenisiert.
+    - Andernfalls werden Frames mit 258 Tokens pro Frame tokenisiert.
+  - Audio: 32 Tokens pro Sekunde.
+  - Metadaten sind ebenfalls enthalten.
+  - Insgesamt: etwa 300 Tokens pro Sekunde Video bei Standardauflösung oder 100 Tokens pro Sekunde Video bei niedriger Auflösung.
+- **Medienauflösung**: Mit dem Parameter `media_resolution` bietet Gemini 3 eine detaillierte Steuerung der multimodalen Bildverarbeitung. Der Parameter `media_resolution` bestimmt die **maximale Anzahl von Tokens, die pro Eingabebild oder Videoframes zugewiesen werden**.
+  Höhere Auflösungen verbessern die Fähigkeit des Modells, feinen Text zu lesen oder kleine Details zu erkennen, erhöhen aber die Token-Nutzung und die Latenz.
 
-  如要進一步瞭解參數及其對權杖計算的影響，請參閱[媒體解析度](https://ai.google.dev/gemini-api/docs/media-resolution?hl=zh-tw)指南。
-- **時間戳記格式**：在提示中提及影片的特定時間點時，請使用 `MM:SS` 格式 (例如 `01:15` 代表 1 分 15 秒)。
-- **最佳做法**：
+  Weitere Informationen zum Parameter und dazu, wie er sich auf die Tokenberechnungen auswirken kann, finden Sie im Leitfaden zur [Media-Auflösung](https://ai.google.dev/gemini-api/docs/media-resolution?hl=de).
+- **Zeitstempelformat**: Wenn Sie in Ihrem Prompt auf bestimmte Momente in einem Video verweisen, verwenden Sie das Format `MM:SS` (z.B. `01:15` für 1 Minute und 15 Sekunden).
+- **Best Practices**:
 
-  - 為獲得最佳結果，每個提示要求只能使用一部影片。
-  - 如果結合文字和單一影片，請將文字提示放在 `contents` 陣列的影片部分*之後*。
-  - 請注意，由於取樣率為每秒 1 幀，快速動作序列可能會遺失細節。如有需要，請考慮放慢這類片段的速度。
+  - Verwenden Sie für optimale Ergebnisse nur ein Video pro Prompt-Anfrage.
+  - Wenn Sie Text und ein einzelnes Video kombinieren, platzieren Sie den Text-Prompt im `contents`-Array *nach* dem Videoteil.
+  - Bei schnellen Aktionssequenzen können aufgrund der Abtastrate von 1 FPS Details verloren gehen. Verlangsame solche Clips bei Bedarf.
 
-## 後續步驟
+## Nächste Schritte
 
-本指南說明如何上傳影片檔案，並從影片輸入內容生成文字輸出內容。如要進一步瞭解相關內容，請參閱下列資源：
+In diesem Leitfaden wird beschrieben, wie Sie Videodateien hochladen und Textausgaben aus Videoeingaben generieren. Weitere Informationen finden Sie in den folgenden Ressourcen:
 
-- [系統指令](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-tw#system-instructions)：
-  系統指令可根據特定需求和用途，引導模型行為。
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw)：進一步瞭解如何上傳及管理檔案，以便搭配 Gemini 使用。
-- [檔案提示策略](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw#prompt-guide)：Gemini API 支援使用文字、圖片、音訊和影片資料提示，也就是多模態提示。
-- [安全注意事項](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=zh-tw)：有時生成式 AI 模型會產生出乎意料的輸出內容，例如不正確、有偏誤或令人反感的內容。後續處理和人工評估是不可或缺的環節，有助於降低這類輸出內容造成危害的風險。
+- [Systemanweisungen](https://ai.google.dev/gemini-api/docs/text-generation?hl=de#system-instructions): Mit Systemanweisungen können Sie das Verhalten des Modells entsprechend Ihren spezifischen Anforderungen und Anwendungsfällen steuern.
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=de): Hier erfahren Sie mehr zum Hochladen und Verwalten von Dateien für die Verwendung mit Gemini.
+- [Strategien für Dateiprompts](https://ai.google.dev/gemini-api/docs/files?hl=de#prompt-guide): Die Gemini API unterstützt Prompts mit Text-, Bild-, Audio- und Videodaten, auch bekannt als multimodale Prompts.
+- [Sicherheitshinweise](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=de): Generative KI-Modelle können manchmal unerwartete Ausgaben liefern, z. B. Ausgaben, die ungenau, voreingenommen oder anstößig sind. Nachbearbeitung und menschliche Bewertung sind unerlässlich, um das Risiko von Schäden durch solche Ausgaben zu begrenzen.
 
-提供意見
+Feedback geben
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-上次更新時間：2026-05-19 (世界標準時間)。
+Zuletzt aktualisiert: 2026-05-19 (UTC).
 
-想進一步說明嗎？
+Haben Sie Feedback für uns?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-19 (世界標準時間)。"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-05-19 (UTC)."],[],[]]

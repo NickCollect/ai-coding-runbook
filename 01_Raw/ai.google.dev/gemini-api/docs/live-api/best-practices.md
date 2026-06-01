@@ -1,111 +1,95 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/best-practices?hl=it
-fetched_at: 2026-05-25T05:25:29.622291+00:00
-title: "Live API best practices \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/best-practices?hl=he
+fetched_at: 2026-06-01T06:02:45.333554+00:00
+title: "\u05e9\u05d9\u05d8\u05d5\u05ea \u05de\u05d5\u05de\u05dc\u05e6\u05d5\u05ea \u05dc\u05e9\u05d9\u05de\u05d5\u05e9 \u05d1-Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Invia feedback
+שליחת משוב
 
-# Live API best practices
+# שיטות מומלצות לשימוש ב-Live API
 
-Questa guida illustra le best practice che puoi seguire per ottimizzare l'utilizzo dell'API Live.
-Per una panoramica e un codice campione per i casi d'uso comuni, consulta la
-pagina [Inizia a utilizzare l'API Live](https://ai.google.dev/gemini-api/docs/live?hl=it).
+במדריך הזה מפורטות שיטות מומלצות שיעזרו לכם לייעל את השימוש ב-Live API.
+במאמר [תחילת העבודה עם Live API](https://ai.google.dev/gemini-api/docs/live?hl=he) יש סקירה כללית וקוד לדוגמה לתרחישי שימוש נפוצים.
 
-## Progettare istruzioni di sistema chiare
+## תכנון הוראות מערכת ברורות
 
-Per ottenere le migliori prestazioni dall'API Live, ti consigliamo di avere un insieme di istruzioni di sistema (SI) chiaramente definito che definisca la persona dell'agente, le regole conversazionali e le barriere di protezione, in questo ordine.
+כדי להפיק את הביצועים הטובים ביותר מ-Live API, מומלץ להגדיר קבוצה ברורה של הוראות מערכת (SI) שמגדירות את פרסונת הסוכן, את כללי השיחה ואת אמצעי הבקרה, בסדר הזה.
 
-Per risultati ottimali, separa ogni agente in un SI distinto.
+כדי לקבל את התוצאות הטובות ביותר, מומלץ להפריד כל סוכן ל-SI נפרד.
 
-1. **Specifica la persona dell'agente:** fornisci dettagli sul nome, sul ruolo e su eventuali caratteristiche preferite dell'agente. Se vuoi specificare l'accento, assicurati di specificare anche la lingua di output preferita (ad esempio, un accento britannico per un madrelingua inglese).
-2. **Specifica le regole conversazionali:** inserisci queste regole nell'ordine in cui prevedi che il modello le segua. Delimita gli elementi una tantum della conversazione e i loop conversazionali. Ad esempio:
+1. **מציינים את פרסונת הנציג:** מספקים פרטים על שם הנציג, התפקיד שלו וכל מאפיין מועדף. אם רוצים לציין את המבטא, צריך לציין גם את שפת הפלט המועדפת (לדוגמה, מבטא בריטי למי שמדבר אנגלית).
+2. **מציינים את כללי השיחה:** מזינים את הכללים בסדר שבו רוצים שהמודל יפעל. הבחנה בין אלמנטים חד-פעמיים בשיחה לבין לולאות שיחה. לדוגמה:
 
-   - **Elemento una tantum:** raccogli i dettagli di un cliente una sola volta (ad esempio nome, località, numero di carta fedeltà).
-   - **Loop conversazionale:** l'utente può discutere di consigli, prezzi, resi e consegne e potrebbe voler passare da un argomento all'altro. Comunica al modello che può partecipare a questo loop conversazionale per tutto il tempo che l'utente desidera.
-3. **Specifica le chiamate di strumenti all'interno di un flusso in frasi distinte:** ad esempio, se un passaggio una tantum per raccogliere i dettagli di un cliente richiede l'invocazione di una funzione `get_user_info`, potresti dire: *Il primo passaggio consiste nel raccogliere le informazioni dell'utente. Innanzitutto, chiedi all'utente di fornire il suo nome, la sua località e il numero della sua carta fedeltà. Poi
-   invoca `get_user_info` con questi dettagli.*
-4. ***Aggiungi le barriere di protezione necessarie:** fornisci eventuali barriere di protezione conversazionali
-   generali che non vuoi che il modello esegua. Non esitare a fornire esempi specifici
-   di cosa vuoi che il modello faccia se si verifica *x*.* Se non ottieni ancora il livello di precisione preferito, utilizza la parola *inequivocabilmente* per guidare il modello a essere preciso.
+   - **רכיב חד-פעמי:** איסוף פרטי לקוח פעם אחת (כמו שם, מיקום, מספר כרטיס מועדון לקוחות).
+   - **לולאת שיחה:** המשתמש יכול לדון בהמלצות, בתמחור, בהחזרות ובמשלוח, ולעבור מנושא לנושא. אומרים למודל שמותר לו להשתתף בלולאת השיחה הזו כל עוד המשתמש רוצה.
+3. **מציינים את הקריאות לכלים בתוך זרימת השיחה במשפטים נפרדים:** לדוגמה, אם שלב חד-פעמי לאיסוף פרטי לקוח דורש הפעלה של פונקציה `get_user_info`, אפשר לומר: *השלב הראשון הוא איסוף פרטי המשתמש. קודם,
+   תבקש מהמשתמש לציין את השם, המיקום ומספר כרטיס מועדון הלקוחות שלו. אחר כך
+   מפעילים את `get_user_info` עם הפרטים האלה.*
+4. **מוסיפים אמצעי הגנה נדרשים:** מציינים אמצעי הגנה כלליים לשיחה שלא רוצים שהמודל יבצע. אפשר גם לספק דוגמאות ספציפיות: אם *x* קורה, רוצים שהמודל יבצע *y*. אם עדיין לא מקבלים את רמת הדיוק הרצויה, אפשר להשתמש במילה *unmistakably* (בלי טעות) כדי להנחות את המודל להיות מדויק.
 
-## Definire gli strumenti con precisione
+## הגדרת כלים בצורה מדויקת
 
-Quando utilizzi gli strumenti con l'API Live, sii specifico nelle definizioni degli strumenti.
-Assicurati di comunicare a Gemini in quali condizioni deve essere invocata una chiamata di strumenti. Per maggiori dettagli, consulta le [definizioni degli strumenti](#tool-definitions-example) in
-ella sezione degli esempi.
+כשמשתמשים בכלים עם Live API, צריך להיות ספציפיים בהגדרות של הכלים.
+חשוב להגדיר ל-Gemini באילו תנאים צריך להפעיל קריאה לכלי. פרטים נוספים זמינים בקטע [הגדרות של כלים](#tool-definitions-example) בדוגמה.
 
-## Creare prompt efficaci
+## יצירת הנחיות אפקטיביות
 
-- **Utilizza prompt chiari:** fornisci esempi di ciò che i modelli devono e non devono fare nei prompt e cerca di limitare i prompt a un prompt per persona o ruolo alla volta. Anziché prompt lunghi e multipagina, valuta la possibilità di utilizzare l'incatenamento dei prompt. Il modello funziona meglio per le attività con chiamate di singole funzioni.
-- **Fornisci comandi e informazioni iniziali:** l'API Live si aspetta l'input dell'utente prima di rispondere. Per fare in modo che l'API Live avvii la conversazione, includi un prompt che le chieda di salutare l'utente o di iniziare la conversazione. Includi informazioni sull'utente per fare in modo che l'API Live personalizzi il saluto.
+- **משתמשים בהנחיות ברורות:** בהנחיות, כדאי לתת דוגמאות למה שהמודלים צריכים לעשות ולמה שהם לא צריכים לעשות, ולנסות להגביל את ההנחיות להנחיה אחת לכל פרסונה או תפקיד בכל פעם. במקום הנחיות ארוכות עם כמה עמודים, כדאי להשתמש בשרשור הנחיות. המודל פועל בצורה הכי טובה במשימות עם בקשות יחידות להפעלת פונקציה.
+- **מספקים פקודות ומידע להתחלה:** Live API מצפה לקלט של משתמשים לפני שהוא מגיב. כדי שה-API של Live יתחיל את השיחה, צריך לכלול הנחיה שמבקשת ממנו לברך את המשתמש או להתחיל את השיחה. הכללת מידע על המשתמש כדי שה-API בזמן אמת יתאים אישית את הברכה.
 
-## Specificare la lingua
+## ציון שפה
 
-Per prestazioni ottimali su `gemini-live-2.5-flash` in cascata dell'API Live, assicurati che `language_code` dell'API corrisponda alla lingua parlata dall'utente.
+כדי להשיג ביצועים אופטימליים ב-API `gemini-live-2.5-flash`, צריך לוודא שהשפה של ה-API‏ `language_code` תואמת לשפה שמדברים בה המשתמשים.
 
-Se prevedi che il modello risponda in una lingua diversa dall'inglese, includi quanto segue nelle istruzioni di sistema:
+אם רוצים שהמודל ישיב בשפה שאינה אנגלית, צריך לכלול את ההוראות הבאות כחלק מההוראות למערכת:
 
 ```
 RESPOND IN {OUTPUT_LANGUAGE}. YOU MUST RESPOND UNMISTAKABLY IN {OUTPUT_LANGUAGE}.
 ```
 
-## Streaming
+## סטרימינג
 
-Quando implementi l'audio in tempo reale, segui queste best practice:
+כשמטמיעים אודיו בזמן אמת, כדאי לפעול לפי השיטות המומלצות הבאות:
 
-- **Dimensione dei blocchi e latenza**: invia l'audio in blocchi da 20 ms a 40 ms.
-- **Gestione delle interruzioni**: quando l'utente parla mentre il modello risponde,
-  il server invia un messaggio `server_content` con `"interrupted": true`. Devi eliminare immediatamente il buffer audio lato client per impedire all'agente di continuare a parlare con l'utente.
+- **גודל קבוצת הנתונים וזמן האחזור**: שליחת אודיו בקבוצות נתונים של 20 עד 40 אלפיות השנייה.
+- **טיפול בהפרעות**: אם המשתמש מדבר בזמן שהמודל משיב, השרת שולח הודעה מסוג `server_content` עם `"interrupted": true`. כדי שהסוכן לא ימשיך לדבר על המשתמש, צריך להשליך מיידית את מאגר השמע בצד הלקוח.
 
-## Gestione del contesto
+## ניהול ההקשרים
 
-Utilizza `ContextWindowCompressionConfig` per le sessioni lunghe, poiché i token audio nativi si accumulano rapidamente (circa 25 token al secondo di audio).
+מומלץ להשתמש ב-`ContextWindowCompressionConfig` לסשנים ארוכים, כי האסימונים המקוריים של האודיו מצטברים במהירות (בערך 25 אסימונים לשנייה של אודיו).
 
-## Buffering client
+## אגירת נתונים בצד הלקוח
 
-Non eseguire il buffering significativo dell'audio di input (ad esempio 1 secondo) prima dell'invio. Invia piccoli blocchi (20 ms - 100 ms) per ridurre al minimo la latenza.
+אל תאגרו את קלט האודיו באופן משמעותי (למשל למשך שנייה אחת) לפני השליחה. כדי לצמצם את זמן האחזור, מומלץ לשלוח נתונים במנות קטנות (20ms עד 100ms).
 
-## Creazione del nuovo campione
+## Resampling
 
-Assicurati che l'applicazione client esegua il resampling dell'input del microfono (spesso 44,1 kHz o 48 kHz) a 16 kHz prima della trasmissione.
+חשוב לוודא שאפליקציית הלקוח מבצעת דגימה מחדש של קלט המיקרופון (לרוב 44.1kHz או 48kHz) ל-16kHz לפני השידור.
 
-## Gestione sessione
+## ניהול סשנים
 
-Segui queste linee guida per gestire il ciclo di vita della sessione e garantire un'esperienza utente affidabile:
+כדי לנהל את מחזור החיים של הסשן ולהבטיח חוויית משתמש אמינה, כדאי לפעול לפי ההנחיות הבאות:
 
-- **Attiva la compressione della finestra contestuale:** i token audio si accumulano a circa 25 token al secondo. Senza compressione, le sessioni solo audio sono limitate a 15 minuti e le sessioni audio-video a 2 minuti. Attiva
-  [la compressione della finestra contestuale](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=it#context-window-compression)
-  per estendere le sessioni a una durata illimitata.
-- **Implementa la ripresa della sessione:** il server potrebbe reimpostare periodicamente la connessione WebSocket. Utilizza
-  [la ripresa della sessione](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=it#session-resumption)
-  per riconnetterti senza problemi senza perdere il contesto. Conserva il token di ripresa più recente dai messaggi `SessionResumptionUpdate` e passalo come handle durante la riconnessione. I token di ripresa sono validi per 2 ore dopo la chiusura dell'ultima sessione.
-- **Gestisci i messaggi GoAway:** il server invia un
-  [GoAway](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=it#goaway-message)
-  prima di chiudere una connessione. Ascolta questo messaggio e utilizza il campo `timeLeft` per completare o riconnetterti prima della chiusura della connessione.
-- **Gestisci i segnali generationComplete:** utilizza il
-  [`generationComplete`](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=it#generation-complete-message)
-  messaggio per sapere quando il modello ha terminato di generare una risposta, in modo che la tua
-  applicazione possa aggiornare la sua UI o procedere con l'azione successiva.
+- **הפעלת דחיסה של חלון ההקשר:** טוקנים של אודיו מצטברים בקצב של כ-25 טוקנים לשנייה. בלי דחיסה, משך הפגישות עם אודיו בלבד מוגבל ל-15 דקות, ומשך הפגישות עם אודיו ווידאו מוגבל ל-2 דקות. הפעלת [דחיסה של חלון ההקשר](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=he#context-window-compression) כדי להאריך את הסשנים לזמן בלתי מוגבל.
+- **הטמעה של חידוש סשן:** יכול להיות שהשרת יאפס מעת לעת את חיבור ה-WebSocket. אפשר להשתמש ב[חידוש הפעילות של הסשן](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=he#session-resumption) כדי להתחבר מחדש בצורה חלקה בלי לאבד את ההקשר. שומרים את טוקן ההמשך האחרון מתוך `SessionResumptionUpdate` הודעות ומעבירים אותו כ-handle כשמתחברים מחדש. התוקף של אסימוני חידוש הוא שעתיים אחרי סיום הסשן האחרון.
+- **טיפול בהודעות GoAway:** השרת שולח הודעת [GoAway](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=he#goaway-message) לפני סיום החיבור. צריך להאזין להודעה הזו ולהשתמש בשדה `timeLeft` כדי לסיים את השיחה בצורה מסודרת או להתחבר מחדש לפני שהחיבור ייסגר.
+- **טיפול באותות generationComplete:** אפשר להשתמש בהודעה [`generationComplete`](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=he#generation-complete-message) כדי לדעת מתי המודל סיים ליצור תשובה, וכך האפליקציה תוכל לעדכן את ממשק המשתמש או להמשיך לפעולה הבאה.
 
-Per i dettagli sull'implementazione, consulta
-[Gestione sessione](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=it).
+פרטים נוספים על ההטמעה מופיעים במאמר בנושא [ניהול סשנים](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=he).
 
-## Esempi
+## דוגמאות
 
-Questo esempio combina le best practice e
-[le linee guida per la progettazione delle istruzioni di sistema](#system-instruction-guidelines) per
-guidare le prestazioni del modello come career coach.
+בדוגמה הזו משולבים גם השיטות המומלצות וגם [ההנחיות לעיצוב הוראות למערכת](#system-instruction-guidelines) כדי לשפר את הביצועים של המודל כמאמן קריירה.
 
 ```
 **Persona:**
@@ -157,10 +141,10 @@ Remember that your ultimate goal is to create a supportive environment for your
 clients to thrive.
 ```
 
-### Definizioni degli strumenti
+### הגדרות של כלים
 
-Questo JSON definisce le funzioni pertinenti chiamate nell'esempio di career coach.
-Per risultati ottimali durante la definizione delle funzioni, includi i nomi, le descrizioni, i parametri e le condizioni di invocazione.
+קובץ ה-JSON הזה מגדיר את הפונקציות הרלוונטיות שמופעלות בדוגמה של מאמן הקריירה.
+כדי לקבל את התוצאות הטובות ביותר כשמגדירים פונקציות, כדאי לכלול את השמות, התיאורים, הפרמטרים ותנאי ההפעלה שלהן.
 
 ```
 [
@@ -250,44 +234,44 @@ Per risultati ottimali durante la definizione delle funzioni, includi i nomi, le
 ]
 ```
 
-## Prezzi e fatturazione
+## תמחור וחיוב
 
-L'API Gemini Live viene fatturata rigorosamente in base all'utilizzo dei token. Poiché l'API Live mantiene una sessione WebSocket persistente, la fatturazione segue un modello di compounding basato sulla finestra contestuale attiva.
+החיוב ב-Gemini Live API מתבסס אך ורק על השימוש בטוקנים. ממשק ה-API בזמן אמת שומר על סשן WebSocket מתמשך, ולכן החיוב מתבצע לפי מודל מצטבר שמבוסס על חלון ההקשר הפעיל.
 
-### La finestra contestuale della sessione (costi di compounding)
+### חלון ההקשר של הסשן (עלויות מצטברות)
 
-L'API ti addebita per turno tutti i token presenti nella finestra contestuale della sessione. Un "turno" è definito come un input dell'utente e la risposta corrispondente del modello.
+החיוב ב-API הוא לפי תור, על כל הטוקנים שמופיעים בחלון ההקשר של הסשן. "תור" מוגדר כקלט של משתמשים והתשובה התואמת של המודל.
 
-- **Accumulo:** la finestra contestuale include i nuovi token del turno corrente più tutti i token accumulati dai turni precedenti.
-- **Rifatturazione:** i token precedenti vengono rielaborati e contabilizzati in ogni nuovo turno, fino alla dimensione della finestra contestuale configurata. Man mano che una sessione si allunga, il costo per turno aumenta perché la cronologia delle conversazioni viene rielaborata.
+- **הצטברות:** חלון ההקשר כולל טוקנים חדשים מהתור הנוכחי וגם את כל הטוקנים שהצטברו מהתורות הקודמים.
+- **חיוב מחדש:** טוקנים קודמים מעובדים מחדש ונכללים בכל תור חדש, עד לגודל חלון ההקשר שהגדרתם. ככל שהשיחה מתארכת, העלות לכל תור עולה כי היסטוריית השיחה עוברת עיבוד מחדש.
 
-### Token audio e trascrizioni
+### אסימוני אודיו ותמלילים
 
-L'API Live è nativamente multimodale. Conserva la cronologia delle conversazioni come token audio non elaborati per preservare le sfumature e il tono acustici.
+‫Live API הוא multi-modal באופן מובנה. הוא שומר את היסטוריית השיחות כטוקנים של אודיו גולמי כדי לשמר את הניואנסים והטון האקוסטיים.
 
-- **Fatturazione audio:** l'API ti addebita i token audio nativi accumulati alla tariffa di input audio standard a ogni turno.
-- **Supplemento per la trascrizione:** quando la trascrizione da audio a testo è attivata (`inputAudioTranscription` o `outputAudioTranscription`), l'API addebita tutti i token di testo generati per la trascrizione alla tariffa di output dei token di testo, oltre ai costi standard dei token audio.
+- **חיוב על אודיו:** ה-API מחייב אתכם על הטוקנים המצטברים של אודיו מקורי לפי התעריף הרגיל של קלט אודיו בכל תור.
+- **תשלום נוסף על תמלול:** כשמפעילים תמלול מאודיו לטקסט (`inputAudioTranscription` או `outputAudioTranscription`), ה-API מחייב על כל טוקן טקסט שנוצר לתמלול לפי התעריף של טוקן טקסט בפלט, בנוסף לעלויות הרגילות של טוקן אודיו.
 
-### Gestire i costi con i limiti di contesto
+### ניהול עלויות באמצעות מגבלות הקשר
 
-Per evitare una crescita illimitata dei costi nelle sessioni lunghe, configura la dimensione della finestra contestuale utilizzando `contextWindowCompression`.
+כדי למנוע עלייה בלתי מוגבלת בעלויות במהלך סשנים ארוכים, צריך להגדיר את גודל חלון ההקשר באמצעות `contextWindowCompression`.
 
-Impostando un trigger di compressione (ad es. 25.000 token) e una finestra scorrevole (ad es. 8000 token), l'API elimina automaticamente i token precedenti una volta raggiunto il limite. L'API addebita quindi i turni successivi solo per la cronologia conservata più eventuali nuovi token.
+אם מגדירים טריגר דחיסה (למשל, 25,000 טוקנים) וחלון נע (למשל, 8,000 טוקנים), ה-API מסלק באופן אוטומטי טוקנים ישנים יותר ברגע שמגיעים לסף. לאחר מכן, ה-API מחייב על תפניות עתידיות רק על ההיסטוריה שנשמרה בתוספת אסימונים חדשים.
 
-### Modalità audio proattiva
+### מצב אודיו פרואקטיבי
 
-Quando la modalità audio proattiva è attivata, i token di input vengono addebitati per tutto il tempo in cui l'API Live è in ascolto, mentre i token di output vengono addebitati solo quando l'API risponde.
+כשמצב שמע פרואקטיבי מופעל, על טוקנים של קלט מחויבים כל הזמן שבו ה-Live API מקשיב, ואילו על טוקנים של פלט מחויבים רק כשה-API מגיב.
 
-- **Nota per Gemini 3.1:** la modalità audio proattiva non è supportata in `gemini-3.1-flash-live-preview`. Per questo modello, l'audio viene addebitato solo durante lo streaming attivo dell'input.
+- **הערה לגבי Gemini 3.1:** מצב אודיו פרואקטיבי לא נתמך ב-`gemini-3.1-flash-live-preview`. במודל הזה, החיוב על אודיו מתבצע רק כשמתבצע סטרימינג פעיל של קלט.
 
-Per informazioni dettagliate sui prezzi, consulta la [pagina dei prezzi dell'API Gemini](https://ai.google.dev/gemini-api/docs/pricing?hl=it).
+מידע מפורט על התמחור זמין ב[דף התמחור של Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=he).
 
-Invia feedback
+שליחת משוב
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Ultimo aggiornamento 2026-05-11 UTC.
+עדכון אחרון: 2026-05-29 (שעון UTC).
 
-Vuoi dirci altro?
+רוצה לתת לנו משוב?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-11 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-05-29 (שעון UTC)."],[],[]]

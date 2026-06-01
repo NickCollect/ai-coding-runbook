@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=de
-fetched_at: 2026-05-25T05:21:46.585957+00:00
-title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=ar
+fetched_at: 2026-06-01T06:07:46.391316+00:00
+title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Feedback geben
+إرسال ملاحظات
 
-# Fundierung mit der Google Suche
+# تحديد المصدر من خلال "بحث Google"
 
-Die Fundierung mit der Google Suche verbindet das Gemini-Modell mit Web-Inhalten in Echtzeit und funktioniert mit allen verfügbaren Sprachen. So kann Gemini genauere Antworten geben und überprüfbare Quellen über den Wissensstand hinaus zitieren.
+تتيح ميزة تحديد المصدر من خلال "بحث Google" ربط نموذج Gemini بمحتوى على الويب في الوقت الفعلي، وهي متوافقة مع جميع اللغات المتاحة. يتيح ذلك لـ Gemini تقديم إجابات أكثر دقة والاستشهاد بمصادر يمكن التحقّق منها تتجاوز تاريخ آخر تحديث للبيانات.
 
-Mit der Fundierung können Sie Anwendungen erstellen, die Folgendes können:
+تساعدك عملية التأسيس على إنشاء تطبيقات يمكنها إجراء ما يلي:
 
-- **Sachliche Richtigkeit erhöhen**:Reduzieren Sie Modellhalluzinationen, indem Sie Antworten auf realen Informationen basieren.
-- **Auf Echtzeitinformationen zugreifen**:Beantworten Sie Fragen zu aktuellen Ereignissen und Themen.
-- **Zitate angeben**:Bauen Sie Vertrauen bei Nutzern auf, indem Sie die Quellen für die Aussagen des Modells angeben.
+- **زيادة الدقة الواقعية:** يمكنك تقليل حالات الهلوسة في النموذج من خلال الاستناد إلى معلومات واقعية عند إنشاء الردود.
+- **الوصول إلى معلومات في الوقت الفعلي:** الإجابة عن أسئلة حول الأحداث والمواضيع الحديثة
+- **توفير اقتباسات:** يمكنك كسب ثقة المستخدمين من خلال عرض مصادر المعلومات التي يقدّمها النموذج.
 
 ### Python
 
@@ -73,21 +73,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## So funktioniert die Fundierung mit der Google Suche
+## طريقة عمل ميزة "تحديد المصدر من خلال بحث Google"
 
-Wenn Sie das Tool `google_search` aktivieren, verarbeitet das Modell den gesamten Workflow der Suche, Verarbeitung und Zitation von Informationen automatisch.
+عند تفعيل أداة `google_search`، يتولّى النموذج تلقائيًا سير العمل الكامل المتمثل في البحث عن المعلومات ومعالجتها والاقتباس منها.
 
-![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=de)
+![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=ar)
 
-1. **Nutzer-Prompt**:Ihre Anwendung sendet einen Nutzer-Prompt an die Gemini API, wobei das Tool `google_search` aktiviert ist.
-2. **Promptanalyse**:Das Modell analysiert den Prompt und ermittelt, ob eine Google Suche die Antwort verbessern kann.
-3. **Google Suche**:Bei Bedarf generiert das Modell automatisch eine oder mehrere Suchanfragen und führt sie aus.
-4. **Verarbeitung der Suchergebnisse**:Das Modell verarbeitet die Suchergebnisse, fasst die Informationen zusammen und formuliert eine Antwort.
-5. **Fundierte Antwort**:Die API gibt eine endgültige, nutzerfreundliche Antwort zurück, die auf den Suchergebnissen basiert. Diese Antwort enthält die Textantwort des Modells mit Inline-`annotations`, die die Zitate enthalten, sowie die Schritte `google_search_call` und `google_search_result` mit den Suchanfragen und Suchvorschlägen.
+1. **طلب المستخدم:** يرسل تطبيقك طلب المستخدم إلى Gemini API مع تفعيل الأداة `google_search`.
+2. **تحليل الطلب:** يحلّل النموذج الطلب ويحدّد ما إذا كان بإمكان &quot;بحث Google&quot; تحسين الإجابة.
+3. **بحث Google:** إذا لزم الأمر، ينشئ النموذج تلقائيًا طلب بحث واحدًا أو أكثر وينفّذها.
+4. **معالجة نتائج البحث:** يعالج النموذج نتائج البحث، ويصنّف المعلومات، ويصوغ ردًا.
+5. **الردّ المستند إلى معلومات موثوقة:** تعرض واجهة برمجة التطبيقات ردًا نهائيًا سهل الاستخدام يستند إلى نتائج البحث. تتضمّن هذه الاستجابة الإجابة النصية التي قدّمها النموذج مع `annotations` مضمّنة تحتوي على الاقتباسات، بالإضافة إلى الخطوتَين `google_search_call` و`google_search_result` اللتين تتضمّنان طلبات البحث واقتراحات البحث.
 
-## Antwort zur Fundierung verstehen
+## فهم الردّ المستند إلى معلومات خارجية
 
-Wenn eine Antwort erfolgreich fundiert wurde, enthält die Textausgabe des Modells Inline-`annotations` direkt im Textinhaltsblock. Diese Annotationen enthalten Zitationsinformationen, die Teile der Antwort mit ihren Quellen verknüpfen.
+عندما يتم استناد الردّ بنجاح إلى المستند المصدر، يتضمّن الناتج النصي للنموذج `annotations` مضمّنًا مباشرةً في مقطع المحتوى النصي. توفّر هذه التعليقات التوضيحية معلومات الاقتباس التي تربط أجزاء الرد بمصادرها.
 
 ```
 {
@@ -146,21 +146,20 @@ Wenn eine Antwort erfolgreich fundiert wurde, enthält die Textausgabe des Model
 }
 ```
 
-Die wichtigsten Felder in der Antwort:
+الحقول الرئيسية في الردّ:
 
-- `google_search_call` : Enthält die `queries`, die das Modell ausgeführt hat.
-- `google_search_result` : Enthält `search_suggestions`, ein HTML-Snippet zum Rendern von Suchvorschlägen in Ihrer UI. Die vollständigen Nutzungsanforderungen sind
-  in den [Nutzungsbedingungen](https://ai.google.dev/gemini-api/terms?hl=de#grounding-with-google-search) aufgeführt.
-- `text` mit `annotations` : Die synthetisierte Antwort des Modells mit Inline-Zitaten. Jede `url_citation`-Annotation verknüpft ein Textsegment (definiert durch `start_index` und `end_index`) mit einer Quell-URL. Dies ist der Schlüssel zum Erstellen von Inline-Zitaten.
+- ‫`google_search_call` : يحتوي على طلب البحث `queries` الذي نفّذه النموذج.
+- ‫`google_search_result` : يحتوي على `search_suggestions`، وهو مقتطف HTML
+  لعرض اقتراحات البحث في واجهة المستخدم. يمكن الاطّلاع على متطلبات الاستخدام الكاملة في [بنود الخدمة](https://ai.google.dev/gemini-api/terms?hl=ar#grounding-with-google-search).
+- ‫`text` مع `annotations` : الإجابة التي تم إنشاؤها بواسطة النموذج مع الاقتباسات المضمّنة يربط كل تعليق توضيحي من النوع `url_citation` مقطعًا نصيًا (محدّدًا بواسطة `start_index` و`end_index`) بعنوان URL للمصدر. هذا هو مفتاح
+  إنشاء الاقتباسات المضمّنة.
 
-Die Fundierung mit der Google Suche kann auch in Kombination mit dem [URL
-Kontexttool](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=de) verwendet werden, um Antworten sowohl auf
-öffentlichen Webdaten als auch auf den von Ihnen angegebenen URLs zu fundieren.
+يمكن أيضًا استخدام ميزة "تحديد المصدر من خلال "بحث Search"" مع [أداة سياق عنوان URL](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=ar) لتحديد المصدر من كلّ من بيانات الويب العلنية وعناوين URL المحدّدة التي تقدّمها.
 
-## Quellen mit Inline-Zitaten angeben
+## تحديد مصادر المحتوى من خلال اقتباسات مضمّنة
 
-Die API gibt Inline-`url_citation`-Annotationen für den Textinhaltsblock zurück, sodass Sie die vollständige Kontrolle darüber haben, wie Sie Quellen in Ihrer Benutzeroberfläche anzeigen.
-Jede Annotation enthält `start_index` und `end_index`, um anzugeben, auf welchen Teil des Texts sie sich bezieht. So können Sie sie extrahieren und anzeigen.
+تعرض واجهة برمجة التطبيقات تعليقات توضيحية `url_citation` مضمّنة في كتلة المحتوى النصي، ما يمنحك تحكّمًا كاملاً في طريقة عرض المصادر في واجهة المستخدم.
+تتضمّن كل تعليق توضيحي `start_index` و`end_index` لتحديد الجزء الذي يشير إليه من النص. في ما يلي كيفية استخراجها وعرضها.
 
 ### Python
 
@@ -203,7 +202,7 @@ for (const step of interaction.steps) {
 }
 ```
 
-Die Ausgabe zeigt den Text gefolgt von den Zitaten:
+ستعرض النتائج النص متبوعًا بالاقتباسات:
 
 ```
 Spain won Euro 2024, defeating England 2-1 in the final. This victory marks Spain's record fourth European Championship title.
@@ -215,55 +214,46 @@ Citations:
     Cited text: "This victory marks Spain's record fourth European Championship title."
 ```
 
-## Preise
+## الأسعار
 
-Wenn Sie die Fundierung mit der Google Suche mit Gemini 3 verwenden, wird Ihrem Projekt jede Suchanfrage in Rechnung gestellt, die das Modell ausführt. Wenn das Modell beschließt,
-mehrere Suchanfragen auszuführen, um eine einzelne Anfrage zu beantworten (z. B.
-die Suche nach `"UEFA Euro 2024 winner"` und `"Spain vs England Euro 2024 final
-score"` im selben API-Aufruf), zählt dies als zwei kostenpflichtige Nutzungen des Tools
-für diese Anfrage. Für Abrechnungszwecke werden leere Websuchanfragen bei der Zählung eindeutiger Anfragen ignoriert. Dieses Abrechnungsmodell gilt nur für Gemini 3-Modelle. Wenn Sie die Suchfundierung mit Gemini 2.5 oder älteren Modellen verwenden, wird Ihrem Projekt pro Prompt in Rechnung gestellt.
+عند استخدام ميزة "الاستناد إلى مصادر خارجية" مع "بحث Google" في Gemini 3، يتم تحصيل رسوم من مشروعك مقابل كل طلب بحث يقرّر النموذج تنفيذه. إذا قرر النموذج تنفيذ طلبات بحث متعددة للإجابة عن طلب واحد (على سبيل المثال، البحث عن `"UEFA Euro 2024 winner"` و`"Spain vs England Euro 2024 final
+score"` ضمن طلب بيانات واحد من واجهة برمجة التطبيقات)، سيتم احتساب ذلك كاستخدامَين قابلَين للفوترة للأداة لهذا الطلب. لأغراض الفوترة، نتجاهل طلبات البحث الفارغة على الويب عند احتساب طلبات البحث الفريدة. لا ينطبق نموذج الفوترة هذا إلا على نماذج Gemini 3، وعند استخدام ميزة "الاستناد إلى البحث" مع Gemini 2.5 أو النماذج الأقدم، تتم فوترة مشروعك لكل طلب.
 
-Ausführliche Preisinformationen finden Sie auf der Seite [Gemini API-Preise
-page](https://ai.google.dev/gemini-api/docs/pricing?hl=de).
+للحصول على معلومات مفصّلة حول الأسعار، يُرجى الاطّلاع على [صفحة أسعار Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=ar).
 
-## Unterstützte Modelle
+## النماذج المتوافقة
 
-Die vollständigen Funktionen finden Sie auf der [Modell
-übersichts](https://ai.google.dev/gemini-api/docs/models?hl=de)seite.
+يمكنك الاطّلاع على الإمكانات الكاملة في صفحة [نظرة عامة على الطراز](https://ai.google.dev/gemini-api/docs/models?hl=ar).
 
-| Modell | Fundierung mit der Google Suche |
+| الطراز | تحديد المصدر من خلال "بحث Google" |
 | --- | --- |
-| Gemini 3.5 Flash | ✔️ |
-| Gemini 3.1 Flash Image (Vorabversion) | ✔️ |
-| Gemini 3.1 Pro (Vorabversion) | ✔️ |
-| Gemini 3 Pro Image (Vorabversion) | ✔️ |
-| Gemini 3 Flash (Vorabversion) | ✔️ |
+| ‫Gemini 3.5 Flash | ✔️ |
+| معاينة Gemini 3.1 Flash Image | ✔️ |
+| معاينة Gemini 3.1 Pro | ✔️ |
+| معاينة الصور في Gemini 3 Pro | ✔️ |
+| معاينة Gemini 3 Flash | ✔️ |
 | Gemini 2.5 Pro | ✔️ |
 | Gemini 2.5 Flash | ✔️ |
-| Gemini 2.5 Flash Lite | ✔️ |
-| Gemini 2.0 Flash | ✔️ |
+| ‫Gemini 2.5 Flash-Lite | ✔️ |
+| ‫Gemini 2.0 Flash | ✔️ |
 
-## Unterstützte Toolkombinationen
+## مجموعات الأدوات المتوافقة
 
-Sie können die Fundierung mit der Google Suche mit anderen Tools wie
-[der Codeausführung](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=de) und
-[dem URL-Kontext](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=de) kombinieren, um komplexere
-Anwendungsfälle zu ermöglichen.
+يمكنك استخدام ميزة تحديد المصدر من خلال "بحث Search" مع أدوات أخرى، مثل [تنفيذ الرمز](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=ar) و[سياق عنوان URL](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=ar)، لتفعيل المزيد من حالات الاستخدام المعقّدة.
 
-Gemini 3-Modelle unterstützen die Kombination von integrierten Tools (z. B. Fundierung mit der Google Suche) mit benutzerdefinierten Tools (Funktionsaufrufe). Weitere Informationen finden Sie auf der
-[Seite Toolkombinationen](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=de).
+تتيح نماذج Gemini 3 الجمع بين الأدوات المضمّنة (مثل ميزة "تحديد المصدر" باستخدام "بحث Google") والأدوات المخصّصة (استدعاء الدوال البرمجية). يمكنك الاطّلاع على مزيد من المعلومات في صفحة [مجموعات الأدوات](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=ar).
 
-## Nächste Schritte
+## الخطوات التالية
 
-- Weitere Informationen zu anderen verfügbaren Tools wie [Funktionsaufrufen](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=de)
-- Informationen zum Erweitern von Prompts mit bestimmten URLs mithilfe des [URL-Kontexttools](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=de)
+- يمكنك التعرّف على الأدوات الأخرى المتاحة، مثل [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=ar).
+- تعرَّف على كيفية تحسين الطلبات باستخدام عناوين URL محدّدة من خلال [أداة "سياق عنوان URL"](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=ar).
 
-Feedback geben
+إرسال ملاحظات
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Zuletzt aktualisiert: 2026-05-19 (UTC).
+تاريخ التعديل الأخير: 2026-05-28 (حسب التوقيت العالمي المتفَّق عليه)
 
-Haben Sie Feedback für uns?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-05-19 (UTC)."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-28 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

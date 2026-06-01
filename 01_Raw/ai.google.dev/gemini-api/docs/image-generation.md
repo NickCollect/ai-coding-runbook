@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-BR
-fetched_at: 2026-05-25T05:22:22.705769+00:00
+fetched_at: 2026-06-01T06:05:35.390140+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -18,7 +18,7 @@ Envie comentários
 
 # Geração de imagens com o Nano Banana
 
-Use comandos para criar protótipos de apps totalmente funcionais e com interface
+Use comandos para prototipar apps totalmente funcionais e com interface
 completa. Veja o Nano Banana 2 integrado a ferramentas, dados e o ecossistema
 do Gemini. Tudo isso antes de escrever uma única linha de código.
 
@@ -35,58 +35,58 @@ do Gemini. Tudo isso antes de escrever uma única linha de código.
 
   **Comando**: "Uma foto da capa brilhante de uma revista. A capa azul minimalista tem as palavras Nano Banana em negrito e grandes. O texto está em uma fonte serifada e preenche a visualização. Nenhum outro texto. Na frente do texto, há um retrato de uma pessoa com um vestido elegante e minimalista. Ela está segurando o número 2, que é o ponto focal.
     
-  Coloque o número de referência e a data "Fev 2026" no canto junto com um código de barras. A revista está em uma prateleira contra uma parede laranja rebocada, dentro de uma loja de design".
+  Coloque o número de referência e a data "Fev 2026" no canto junto com um código de barras. A revista está em uma prateleira contra uma parede laranja rebocada, dentro de uma loja de design.
 
-  Criar [fotos profissionais de produtos](#4_product_mockups_commercial_photography) no [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=pt-br)
+  Criar [fotos profissionais de produtos](#4_product_mockups_commercial_photography) no [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=pt-br)
 - ![Londres](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
 
   Gerado pelo Nano Banana Pro
 
   **Comando**: "Apresente uma cena de desenho animado 3D em miniatura isométrica clara, vista de cima para baixo com 45° de inclinação, de Londres, com os marcos e elementos arquitetônicos mais icônicos. Use texturas suaves e refinadas com materiais PBR realistas e iluminação e sombras suaves e realistas. Integre as condições climáticas atuais diretamente ao ambiente da cidade para criar uma atmosfera imersiva. Use uma composição limpa e minimalista com um fundo macio e de cor sólida. Na parte superior central, coloque o título "Londres" em texto grande e em negrito, um ícone de clima em destaque abaixo dele e, em seguida, a data (texto pequeno) e a temperatura (texto médio). Todo o texto precisa estar centralizado com espaçamento consistente e pode se sobrepor sutilmente aos topos dos edifícios".
 
-  Saiba mais sobre o [embasamento de pesquisa](#use-with-grounding) e teste no [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=pt-br)
+  Saiba mais sobre o [embasamento de pesquisa](#use-with-grounding) e teste no [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=pt-br)
 - ![quetzal](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
 
   Gerado pelo Nano Banana 2
 
   **Comando**: "Use a pesquisa por imagens para encontrar imagens precisas de um pássaro quetzal resplandecente. Crie um plano de fundo 3:2 lindo dessa ave, com um gradiente natural de cima para baixo e composição minimalista."
 
-  Use a [Pesquisa de imagens](#image-search) do Google com o Nano Banana 2. Teste no [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=pt-br)
+  Use a ancoragem da [Pesquisa de imagens](#image-search) do Google com o Nano Banana 2. Teste no [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=pt-br)
 - ![banana](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
 
   Gerado pelo Nano Banana Pro
 
   **Comando**: "Coloque este logotipo em um anúncio sofisticado de um perfume com aroma de banana. O logotipo está perfeitamente integrado à garrafa".
 
-  Teste a [preservação de detalhes de alta fidelidade](#5_high-fidelity_detail_preservation) do Nano Banana no [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=pt-br)
+  Teste a [preservação de detalhes de alta fidelidade](#5_high-fidelity_detail_preservation) do Nano Banana no [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=pt-br)
 - ![café](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
 
   Gerado pelo Nano Banana Pro
 
   **Comando**: "Uma foto de uma cena cotidiana em um café movimentado que serve café da manhã. Em primeiro plano, um homem de anime com cabelo azul, uma das pessoas é um esboço a lápis, outra é uma pessoa de animação com massa de modelar"
 
-  Teste diferentes [estilos artísticos](#3_style_transfer) com o Nano Banana no [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=pt-br)
+  Teste diferentes [estilos artísticos](#3_style_transfer) com o Nano Banana no [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=pt-br)
 - ![artigo](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
 
   Gerado pelo Nano Banana Pro
 
   **Comando**: "Use a pesquisa para saber como foi recebido o lançamento do Gemini 3 Flash. Use essas informações para escrever um pequeno artigo sobre o assunto (com títulos). Retorne uma foto do artigo como ele apareceu em uma revista brilhante focada em design. É uma foto de uma única página dobrada, mostrando o artigo sobre o Gemini 3 Flash. Uma foto principal. Título em serifada."
 
-  Gerar [texto preciso](#3_accurate_text_in_images) com base na [pesquisa](#use-with-grounding). Teste o Nano Banana no [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=pt-br)
+  Gerar [texto preciso](#3_accurate_text_in_images) com base na [pesquisa](#use-with-grounding). Teste o Nano Banana no [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=pt-br)
 - ![cachorro](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
 
   Gerado pelo Nano Banana Pro
 
   **Comando**: "Um ícone representando um cachorro fofo. O fundo é branco. Faça os ícones em um estilo 3D colorido e tátil. Sem texto."
 
-  Crie [ícones, adesivos e recursos](#2_stylized_illustrations_stickers) com o Nano Banana no [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing%2Csearch_grounding&hl=pt-br)
+  Crie [ícones, adesivos e recursos](#2_stylized_illustrations_stickers) com o Nano Banana no [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=pt-br)
 - ![isométrico](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
 
   Gerado pelo Nano Banana 2
 
-  **Comando**: "Crie uma foto perfeitamente isométrica. Não é uma miniatura, é uma foto que foi tirada e ficou perfeitamente isométrica. É uma foto de um lindo jardim moderno. Há uma piscina grande em forma de 2 e as palavras: Nano Banana 2."
+  **Comando**: "Crie uma foto perfeitamente isométrica. Não é uma miniatura, é uma foto que foi tirada e ficou perfeitamente isométrica. É uma foto de um lindo jardim moderno. Há uma grande piscina em forma de 2 e as palavras: Nano Banana 2."
 
-  Teste a [geração de imagens fotorrealistas](#1_photorealistic_scenes) no [AI Studio](https://aistudio.google.com/apps?features=chat_based_image_editing&hl=pt-br)
+  Teste a [geração de imagens fotorrealistas](#1_photorealistic_scenes) no [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=pt-br)
 
 **Nano Banana** é o nome dos recursos nativos de geração de imagens do Gemini.
 O Gemini pode gerar e processar imagens de forma conversacional
@@ -95,8 +95,8 @@ fazer iterações em recursos visuais com controle incomparável.
 
 Nano Banana se refere a três modelos distintos disponíveis na API Gemini:
 
-- **Nano Banana 2**: o modelo [pré-lançamento do Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=pt-br) (`gemini-3.1-flash-image-preview`). Esse modelo serve como a contrapartida de alta eficiência do Gemini 3 Pro Image, otimizado para velocidade e casos de uso de desenvolvedores de alto volume.
-- **Nano Banana Pro**: o modelo [Prévia de imagens no Gemini 3 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=pt-br) (`gemini-3-pro-image-preview`). Ele foi projetado para produção de recursos profissionais, usando raciocínio avançado ("Pensamento") para seguir instruções complexas e renderizar texto de alta fidelidade.
+- **Nano Banana 2**: o modelo [Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=pt-br) (`gemini-3.1-flash-image`). Esse modelo serve como a contraparte de alta eficiência do Gemini 3.1 Pro Image, otimizado para velocidade e casos de uso de desenvolvedores de alto volume.
+- **Nano Banana Pro**: o modelo [Imagens no Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=pt-br) (`gemini-3-pro-image`). Ele foi projetado para produção profissional de recursos, usando raciocínio avançado ("Pensamento") para seguir instruções complexas e renderizar texto de alta fidelidade.
 - **Nano Banana**: o modelo [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=pt-br) (`gemini-2.5-flash-image`) foi projetado para velocidade e eficiência, otimizado para tarefas de alto volume e baixa latência.
 
 Todas as imagens geradas incluem uma [marca-d'água do SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=pt-br).
@@ -114,7 +114,7 @@ client = genai.Client()
 
 prompt = ("Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme")
 response = client.models.generate_content(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     contents=[prompt],
 )
 
@@ -140,7 +140,7 @@ async function main() {
     "Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme";
 
   const response = await ai.models.generateContent({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     contents: prompt,
   });
   for (const part of response.candidates[0].content.parts) {
@@ -181,7 +181,7 @@ func main() {
 
   result, _ := client.Models.GenerateContent(
       ctx,
-      "gemini-3.1-flash-image-preview",
+      "gemini-3.1-flash-image",
       genai.Text("Create a picture of a nano banana dish in a " +
                  " fancy restaurant with a Gemini theme"),
   )
@@ -219,7 +219,7 @@ public class TextToImage {
           .build();
 
       GenerateContentResponse response = client.models.generateContent(
-          "gemini-3.1-flash-image-preview",
+          "gemini-3.1-flash-image",
           "Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme",
           config);
 
@@ -238,11 +238,47 @@ public class TextToImage {
 }
 ```
 
+### C#
+
+```
+using Google.GenAI;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+public class TextToImage {
+  public static async Task Main(string[] args) {
+    var client = new Client();
+
+    var response = await client.Models.GenerateContentAsync(
+        model: "gemini-3.1-flash-image",
+        contents: new List<Part>
+        {
+            new Part { Text = "Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme" }
+        }
+    );
+
+    foreach (var candidate in response.Candidates) {
+        foreach (var part in candidate.Content.Parts) {
+            if (part.Text != null) {
+                Console.WriteLine(part.Text);
+            } else if (part.InlineData != null) {
+                var imageBytes = Convert.FromBase64String(part.InlineData.Data);
+                await File.WriteAllBytesAsync("generated_image.png", imageBytes);
+                Console.WriteLine("Image saved as generated_image.png");
+            }
+        }
+    }
+  }
+}
+```
+
 ### REST
 
 ```
 curl -s -X POST \
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent" \
+  "https://generativelanguage.googleapis.com/v1/models/gemini-3.1-flash-image:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -282,7 +318,7 @@ prompt = (
 image = Image.open("/path/to/cat_image.png")
 
 response = client.models.generate_content(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     contents=[prompt, image],
 )
 
@@ -320,7 +356,7 @@ async function main() {
   ];
 
   const response = await ai.models.generateContent({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     contents: prompt,
   });
   for (const part of response.candidates[0].content.parts) {
@@ -378,7 +414,7 @@ func main() {
 
  result, _ := client.Models.GenerateContent(
      ctx,
-     "gemini-3.1-flash-image-preview",
+     "gemini-3.1-flash-image",
      contents,
  )
 
@@ -417,7 +453,7 @@ public class TextAndImageToImage {
           .build();
 
       GenerateContentResponse response = client.models.generateContent(
-          "gemini-3.1-flash-image-preview",
+          "gemini-3.1-flash-image",
           Content.fromParts(
               Part.fromText("""
                   Create a picture of my cat eating a nano-banana in
@@ -444,11 +480,51 @@ public class TextAndImageToImage {
 }
 ```
 
+### C#
+
+```
+using Google.GenAI;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+public class TextAndImageToImage {
+  public static async Task Main(string[] args) {
+    var client = new Client();
+
+    var response = await client.Models.GenerateContentAsync(
+        model: "gemini-3.1-flash-image",
+        contents: new List<Part>
+        {
+            new Part { Text = "Create a picture of my cat eating a nano-banana in a fancy restaurant under the Gemini constellation" },
+            new Part
+            {
+                FileData = new FileData { FileUri = "file:///path/to/cat_image.png" }
+            }
+        }
+    );
+
+    foreach (var candidate in response.Candidates) {
+        foreach (var part in candidate.Content.Parts) {
+            if (part.Text != null) {
+                Console.WriteLine(part.Text);
+            } else if (part.InlineData != null) {
+                var imageBytes = Convert.FromBase64String(part.InlineData.Data);
+                await File.WriteAllBytesAsync("gemini_generated_image.png", imageBytes);
+                Console.WriteLine("Image saved as gemini_generated_image.png");
+            }
+        }
+    }
+  }
+}
+```
+
 ### REST
 
 ```
 curl -s -X POST \
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent" \
+  "https://generativelanguage.googleapis.com/v1/models/gemini-3.1-flash-image:generateContent" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d "{
@@ -479,7 +555,7 @@ from google.genai import types
 client = genai.Client()
 
 chat = client.chats.create(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     config=types.GenerateContentConfig(
         response_modalities=['TEXT', 'IMAGE'],
         tools=[{"google_search": {}}]
@@ -506,7 +582,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const chat = ai.chats.create({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     config: {
       responseModalities: ['TEXT', 'IMAGE'],
       tools: [{googleSearch: {}}],
@@ -554,7 +630,7 @@ func main() {
     }
     defer client.Close()
 
-    model := client.GenerativeModel("gemini-3.1-flash-image-preview")
+    model := client.GenerativeModel("gemini-3.1-flash-image")
     model.GenerationConfig = &pb.GenerationConfig{
         ResponseModalities: []pb.ResponseModality{genai.Text, genai.Image},
     }
@@ -612,7 +688,7 @@ public class MultiturnImageEditing {
               .build())
           .build();
 
-      Chat chat = client.chats.create("gemini-3.1-flash-image-preview", config);
+      Chat chat = client.chats.create("gemini-3.1-flash-image", config);
 
       GenerateContentResponse response = chat.sendMessage("""
           Create a vibrant infographic that explains photosynthesis
@@ -639,11 +715,52 @@ public class MultiturnImageEditing {
 }
 ```
 
+### C#
+
+```
+using Google.GenAI;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+public class MultiturnImageEditing {
+  public static async Task Main(string[] args) {
+    var client = new Client();
+
+    var response = await client.Models.GenerateContentAsync(
+        model: "gemini-3.1-flash-image",
+        contents: new List<Part>
+        {
+            new Part { Text = "Create a vibrant infographic that explains photosynthesis as if it were a recipe for a plant's favorite food. Show the \"ingredients\" (sunlight, water, CO2) and the \"finished dish\" (sugar/energy). The style should be like a page from a colorful kids' cookbook, suitable for a 4th grader." }
+        },
+        config: new GenerateContentConfig
+        {
+            ResponseModalities = new List<string> { "TEXT", "IMAGE" },
+            Tools = new List<Tool> { new Tool { GoogleSearch = new GoogleSearch() } }
+        }
+    );
+
+    foreach (var candidate in response.Candidates) {
+        foreach (var part in candidate.Content.Parts) {
+            if (part.Text != null) {
+                Console.WriteLine(part.Text);
+            } else if (part.InlineData != null) {
+                var imageBytes = Convert.FromBase64String(part.InlineData.Data);
+                await File.WriteAllBytesAsync("photosynthesis.png", imageBytes);
+                Console.WriteLine("Image saved as photosynthesis.png");
+            }
+        }
+    }
+  }
+}
+```
+
 ### REST
 
 ```
 curl -s -X POST \
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent" \
+  "https://generativelanguage.googleapis.com/v1/models/gemini-3.1-flash-image:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -777,11 +894,56 @@ for (Part part : response.parts()) {
 }
 ```
 
+### C#
+
+```
+using Google.GenAI;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+public class MultiturnImageEditingSpanish {
+  public static async Task Main(string[] args) {
+    var client = new Client();
+
+    var response = await client.Models.GenerateContentAsync(
+        model: "gemini-3.1-flash-image",
+        contents: new List<Part>
+        {
+            new Part { Text = "Update this infographic to be in Spanish. Do not change any other elements of the image." }
+        },
+        config: new GenerateContentConfig
+        {
+            ResponseModalities = new List<string> { "TEXT", "IMAGE" },
+            ImageConfig = new ImageConfig
+            {
+                AspectRatio = "16:9",
+                ImageSize = "2K"
+            }
+        }
+    );
+
+    foreach (var candidate in response.Candidates) {
+        foreach (var part in candidate.Content.Parts) {
+            if (part.Text != null) {
+                Console.WriteLine(part.Text);
+            } else if (part.InlineData != null) {
+                var imageBytes = Convert.FromBase64String(part.InlineData.Data);
+                await File.WriteAllBytesAsync("photosynthesis_spanish.png", imageBytes);
+                Console.WriteLine("Image saved as photosynthesis_spanish.png");
+            }
+        }
+    }
+  }
+}
+```
+
 ### REST
 
 ```
 curl -s -X POST \
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent" \
+  "https://generativelanguage.googleapis.com/v1/models/gemini-3.1-flash-image:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
@@ -819,7 +981,7 @@ Infográfico gerado com IA sobre a fotossíntese em espanhol
 ## Novidade com os modelos de imagem do Gemini 3
 
 O Gemini 3 oferece modelos de edição e geração de imagens de última geração. O Gemini 3.1 Flash Image é otimizado para velocidade e casos de uso de alto volume, e o Gemini 3 Pro Image é otimizado para produção de recursos profissionais.
-Criados para lidar com os fluxos de trabalho mais desafiadores usando raciocínio avançado, eles são excelentes em tarefas complexas de criação e modificação em várias etapas.
+Criados para lidar com os fluxos de trabalho mais desafiadores usando raciocínio avançado, eles são excelentes em tarefas complexas de criação e modificação com várias etapas.
 
 - **Saída de alta resolução**: recursos de geração integrados para visuais de 1K, 2K e 4K.
   - O **Gemini 3.1 Flash Image** adiciona a resolução menor de 512 (0,5K).
@@ -828,16 +990,16 @@ Criados para lidar com os fluxos de trabalho mais desafiadores usando raciocíni
   - O **Gemini 3.1 Flash Image** adiciona a integração do embasamento com a Pesquisa Google para imagens e a Pesquisa na Web.
 - **Modo de raciocínio**: o modelo usa um processo de "raciocínio" para analisar comandos complexos. Ele gera "imagens de pensamento" provisórias (visíveis no back-end, mas sem cobrança) para refinar a composição antes de produzir a saída final de alta qualidade.
 - **Até 14 imagens de referência**: agora você pode misturar até 14 imagens de referência para produzir a imagem final.
-- [**Novas proporções**: o pré-lançamento do Gemini 3.1 Flash Image adiciona proporções 1:4, 4:1, 1:8 e 8:1.](#aspect_ratios_and_image_size)
+- **Novas proporções**: o Gemini 3.1 Flash Image adiciona as [proporções](#aspect_ratios_and_image_size) 1:4, 4:1, 1:8 e 8:1.
 
 ### Usar até 14 imagens de referência
 
 Com os modelos de imagem do Gemini 3, você pode misturar até 14 imagens de referência. Essas 14 imagens podem incluir o seguinte:
 
-| Pré-lançamento da imagem do Gemini 3.1 Flash | Pré-lançamento do Gemini 3 Pro Image |
+| Imagem do Gemini 3.1 Flash | Gemini 3.1 Pro Image |
 | --- | --- |
 | Até 10 imagens de objetos com alta fidelidade para incluir na imagem final | Até seis imagens de objetos com alta fidelidade para incluir na imagem final |
-| Até quatro imagens de personagens para manter a consistência deles | Até cinco imagens de personagens para manter a consistência |
+| Até quatro imagens de personagens para manter a consistência | Até cinco imagens de personagens para manter a consistência |
 
 ### Python
 
@@ -853,7 +1015,7 @@ resolution = "2K" # "512", "1K", "2K", "4K"
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     contents=[
         prompt,
         Image.open('person1.png'),
@@ -925,7 +1087,7 @@ const contents = [
 ];
 
 const response = await ai.models.generateContent({
-    model: 'gemini-3.1-flash-image-preview',
+    model: 'gemini-3.1-flash-image',
     contents: contents,
     config: {
       responseModalities: ['TEXT', 'IMAGE'],
@@ -976,7 +1138,7 @@ func main() {
     }
     defer client.Close()
 
-    model := client.GenerativeModel("gemini-3.1-flash-image-preview")
+    model := client.GenerativeModel("gemini-3.1-flash-image")
     model.GenerationConfig = &pb.GenerationConfig{
         ResponseModalities: []pb.ResponseModality{genai.Text, genai.Image},
         ImageConfig: &pb.ImageConfig{
@@ -1051,7 +1213,7 @@ public class GroupPhoto {
           .build();
 
       GenerateContentResponse response = client.models.generateContent(
-          "gemini-3.1-flash-image-preview",
+          "gemini-3.1-flash-image",
           Content.fromParts(
               Part.fromText("An office group photo of these people, they are making funny faces."),
               Part.fromBytes(Files.readAllBytes(Path.of("person1.png")), "image/png"),
@@ -1076,11 +1238,61 @@ public class GroupPhoto {
 }
 ```
 
+### C#
+
+```
+using Google.GenAI;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+public class GroupPhoto {
+  public static async Task Main(string[] args) {
+    var client = new Client();
+
+    var response = await client.Models.GenerateContentAsync(
+        model: "gemini-3.1-flash-image",
+        contents: new List<Part>
+        {
+            new Part { Text = "An office group photo of these people, they are making funny faces." },
+            new Part { FileData = new FileData { FileUri = "file:///person1.png" } },
+            new Part { FileData = new FileData { FileUri = "file:///person2.png" } },
+            new Part { FileData = new FileData { FileUri = "file:///person3.png" } },
+            new Part { FileData = new FileData { FileUri = "file:///person4.png" } },
+            new Part { FileData = new FileData { FileUri = "file:///person5.png" } }
+        },
+        config: new GenerateContentConfig
+        {
+            ResponseModalities = new List<string> { "TEXT", "IMAGE" },
+            ImageConfig = new ImageConfig
+            {
+                AspectRatio = "5:4",
+                ImageSize = "2K"
+            }
+        }
+    );
+
+    foreach (var candidate in response.Candidates) {
+        foreach (var part in candidate.Content.Parts) {
+            if (part.Text != null) {
+                Console.WriteLine(part.Text);
+            } else if (part.InlineData != null) {
+                var imageBytes = Convert.FromBase64String(part.InlineData.Data);
+                await File.WriteAllBytesAsync("office.png", imageBytes);
+                Console.WriteLine("Image saved as office.png");
+            }
+        }
+    }
+  }
+}
+```
+
 ### REST
 
 ```
 curl -s -X POST \
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent" \
+  "https://generativelanguage.googleapis.com/v1/models/gemini-3.1-flash-image:generateContent" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d "{
@@ -1112,7 +1324,7 @@ Foto de grupo do escritório gerada com IA
 
 ### Embasamento com a Pesquisa Google
 
-Use a [ferramenta Pesquisa Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br) para gerar imagens com base em informações em tempo real, como previsões do tempo, gráficos de ações ou eventos recentes.
+Use a [ferramenta da Pesquisa Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br) para gerar imagens com base em informações em tempo real, como previsões do tempo, gráficos de ações ou eventos recentes.
 
 Observe que, ao usar o embasamento com a Pesquisa Google para geração de imagens, os resultados da pesquisa baseados em imagens não são transmitidos ao modelo de geração e são excluídos da resposta. Consulte [Embasamento com a Pesquisa Google para imagens](#image-search).
 
@@ -1126,7 +1338,7 @@ aspect_ratio = "16:9" # "1:1","1:4","1:8","2:3","3:2","3:4","4:1","4:3","4:5","5
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     contents=prompt,
     config=types.GenerateContentConfig(
         response_modalities=['Text', 'Image'],
@@ -1157,7 +1369,7 @@ async function main() {
   const resolution = '2K';
 
 const response = await ai.models.generateContent({
-    model: 'gemini-3.1-flash-image-preview',
+    model: 'gemini-3.1-flash-image',
     contents: prompt,
     config: {
       responseModalities: ['TEXT', 'IMAGE'],
@@ -1217,7 +1429,7 @@ public class SearchGrounding {
           .build();
 
       GenerateContentResponse response = client.models.generateContent(
-          "gemini-3.1-flash-image-preview", """
+          "gemini-3.1-flash-image", """
               Visualize the current weather forecast for the next 5 days
               in San Francisco as a clean, modern weather chart.
               Add a visual on what I should wear each day
@@ -1239,11 +1451,56 @@ public class SearchGrounding {
 }
 ```
 
+### C#
+
+```
+using Google.GenAI;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+public class SearchGrounding {
+  public static async Task Main(string[] args) {
+    var client = new Client();
+
+    var response = await client.Models.GenerateContentAsync(
+        model: "gemini-3.1-flash-image",
+        contents: new List<Part>
+        {
+            new Part { Text = "Visualize the current weather forecast for the next 5 days in San Francisco as a clean, modern weather chart. Add a visual on what I should wear each day" }
+        },
+        config: new GenerateContentConfig
+        {
+            ResponseModalities = new List<string> { "TEXT", "IMAGE" },
+            ImageConfig = new ImageConfig
+            {
+                AspectRatio = "16:9"
+            },
+            Tools = new List<Tool> { new Tool { GoogleSearch = new GoogleSearch() } }
+        }
+    );
+
+    foreach (var candidate in response.Candidates) {
+        foreach (var part in candidate.Content.Parts) {
+            if (part.Text != null) {
+                Console.WriteLine(part.Text);
+            } else if (part.InlineData != null) {
+                var imageBytes = Convert.FromBase64String(part.InlineData.Data);
+                await File.WriteAllBytesAsync("weather.png", imageBytes);
+                Console.WriteLine("Image saved as weather.png");
+            }
+        }
+    }
+  }
+}
+```
+
 ### REST
 
 ```
 curl -s -X POST \
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent" \
+  "https://generativelanguage.googleapis.com/v1/models/gemini-3.1-flash-image:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -1258,7 +1515,7 @@ curl -s -X POST \
   }'
 ```
 
-![Gráfico de previsão do tempo de cinco dias gerado com IA para São Francisco](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=pt-br)
+![Gráfico de clima de cinco dias gerado com IA para São Francisco](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=pt-br)
 
 Gráfico de previsão do tempo de cinco dias gerado por IA para São Francisco
 
@@ -1286,7 +1543,7 @@ prompt = "A detailed painting of a Timareta butterfly resting on a flower"
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     contents=prompt,
     config=types.GenerateContentConfig(
         response_modalities=["IMAGE"],
@@ -1318,7 +1575,7 @@ async function main() {
   const prompt = "A detailed painting of a Timareta butterfly resting on a flower";
 
   const response = await ai.models.generateContent({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     contents: prompt,
     config: {
       responseModalities: ["IMAGE"],
@@ -1366,7 +1623,7 @@ func main() {
   }
   defer client.Close()
 
-  model := client.GenerativeModel("gemini-3.1-flash-image-preview")
+  model := client.GenerativeModel("gemini-3.1-flash-image")
   model.Tools = []*pb.Tool{
     {
       GoogleSearch: &pb.GoogleSearch{
@@ -1393,11 +1650,104 @@ func main() {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.GenerateContentConfig;
+import com.google.genai.types.GenerateContentResponse;
+import com.google.genai.types.GoogleSearch;
+import com.google.genai.types.ImageSearch;
+import com.google.genai.types.SearchTypes;
+import com.google.genai.types.Tool;
+import com.google.genai.types.WebSearch;
+
+import java.io.IOException;
+
+public class ImageSearchGrounding {
+  public static void main(String[] args) throws IOException {
+
+    try (Client client = new Client()) {
+      GenerateContentConfig config = GenerateContentConfig.builder()
+          .responseModalities("IMAGE")
+          .tools(Tool.builder()
+              .googleSearch(GoogleSearch.builder()
+                  .searchTypes(SearchTypes.builder()
+                      .webSearch(WebSearch.builder().build())
+                      .imageSearch(ImageSearch.builder().build())
+                      .build())
+                  .build())
+              .build())
+          .build();
+
+      GenerateContentResponse response = client.models.generateContent(
+          "gemini-3.1-flash-image",
+          "A detailed painting of a Timareta butterfly resting on a flower",
+          config);
+
+      if (response.candidates().isPresent() && !response.candidates().get().isEmpty()) {
+        var candidate = response.candidates().get().get(0);
+        if (candidate.groundingMetadata().isPresent() && candidate.groundingMetadata().get().searchEntryPoint().isPresent()) {
+          System.out.println(candidate.groundingMetadata().get().searchEntryPoint().get().renderedContent().orElse(""));
+        }
+      }
+    }
+  }
+}
+```
+
+### C#
+
+```
+using Google.GenAI;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+public class ImageSearchGrounding {
+  public static async Task Main(string[] args) {
+    var client = new Client();
+
+    var response = await client.Models.GenerateContentAsync(
+        model: "gemini-3.1-flash-image",
+        contents: new List<Part>
+        {
+            new Part { Text = "A detailed painting of a Timareta butterfly resting on a flower" }
+        },
+        config: new GenerateContentConfig
+        {
+            ResponseModalities = new List<string> { "IMAGE" },
+            Tools = new List<Tool>
+            {
+                new Tool
+                {
+                    GoogleSearch = new GoogleSearch
+                    {
+                        SearchTypes = new SearchTypes
+                        {
+                            WebSearch = new WebSearch(),
+                            ImageSearch = new ImageSearch()
+                        }
+                    }
+                }
+            }
+        }
+    );
+
+    foreach (var candidate in response.Candidates) {
+        if (candidate.GroundingMetadata != null && candidate.GroundingMetadata.SearchEntryPoint != null) {
+            Console.WriteLine(candidate.GroundingMetadata.SearchEntryPoint.RenderedContent);
+        }
+    }
+  }
+}
+```
+
 ### REST
 
 ```
 curl -s -X POST \
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent" \
+  "https://generativelanguage.googleapis.com/v1/models/gemini-3.1-flash-image:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -1431,7 +1781,253 @@ Para respostas embasadas usando a pesquisa por imagens, a API fornece atribuiç�
   - **`uri`**: o URL da página da Web para atribuição (a página de destino).
   - **`image_uri`**: o URL direto da imagem.
 - **`groundingSupports`**: fornece mapeamentos específicos que vinculam o conteúdo gerado à fonte de citação relevante nos trechos.
-- **`searchEntryPoint`**: inclui o ícone "Pesquisa Google" com HTML e CSS compatíveis para renderizar as sugestões de pesquisa.
+- **`searchEntryPoint`**: inclui o ícone "Pesquisa Google" com
+  HTML e CSS compatíveis para renderizar as sugestões de pesquisa.
+
+### Geração de vídeo para imagem (3.1 Flash)
+
+A geração de vídeo para imagem permite criar novas imagens usando o contexto de um vídeo como referência multimodal. Isso é útil para criar miniaturas de vídeo de alta qualidade, pôsteres cinematográficos, infográficos de resumo ou novas artes inspiradas em uma cena de vídeo.
+
+Durante a geração, o modelo analisa os frames do vídeo no contexto (até o limite de tokens de entrada do modelo,que é de 131.072 tokens) para extrair temas visuais e eventos principais. Em seguida, ele usa essas informações com seu comando de texto para sintetizar a imagem de saída.
+
+Você pode transmitir [URLs públicos do YouTube](https://ai.google.dev/gemini-api/docs/video-understanding?hl=pt-br#youtube) diretamente na solicitação de API ou fazer upload de arquivos de vídeo locais usando a [API Files](https://ai.google.dev/gemini-api/docs/files?hl=pt-br).
+
+### Python
+
+```
+from google import genai
+from google.genai import types
+
+client = genai.Client()
+
+# Pass a public YouTube video URL as part of the contents
+response = client.models.generate_content(
+    model="gemini-3.1-flash-image",
+    contents=[
+        types.Part(
+          file_data=types.FileData(file_uri="https://www.youtube.com/watch?v=UTdfxFyOQTI"),
+          video_metadata=types.VideoMetadata(fps=0.5)
+        ),
+        "Can you create an infographics that explains what this video is about?"
+    ]
+)
+
+# Save the generated image part
+for part in response.parts:
+    if part.inline_data is not None:
+        image = part.as_image()
+        image.save("video_poster.png")
+        print("Image saved as video_poster.png")
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from "@google/genai";
+import * as fs from "node:fs";
+
+async function main() {
+  const ai = new GoogleGenAI({});
+
+  const response = await ai.models.generateContent({
+    model: "gemini-3.1-flash-image",
+    contents: [
+      {
+        fileData: {
+          fileUri: "https://www.youtube.com/watch?v=UTdfxFyOQTI",
+        },
+        videoMetadata: {
+          fps: 0.5
+        }
+      },
+      { text: "Can you create an infographics that explains what this video is about?" }
+    ]
+  });
+
+  for (const part of response.candidates[0].content.parts) {
+    if (part.inlineData) {
+      const imageData = part.inlineData.data;
+      const buffer = Buffer.from(imageData, "base64");
+      fs.writeFileSync("video_poster.png", buffer);
+      console.log("Image saved as video_poster.png");
+    }
+  }
+}
+
+main();
+```
+
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "log"
+    "os"
+    "google.golang.org/genai"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    videoPart := genai.NewPartFromURI("https://www.youtube.com/watch?v=UTdfxFyOQTI", "video/mp4")
+    videoPart.VideoMetadata = &genai.VideoMetadata{FPS: genai.Ptr(0.5)}
+
+    parts := []*genai.Part{
+        videoPart,
+        genai.NewPartFromText("Can you create an infographics that explains what this video is about?"),
+    }
+
+    contents := []*genai.Content{
+        genai.NewContentFromParts(parts, genai.RoleUser),
+    }
+
+    result, err := client.Models.GenerateContent(
+        ctx,
+        "gemini-3.1-flash-image",
+        contents,
+        nil,
+    )
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, part := range result.Candidates[0].Content.Parts {
+        if part.InlineData != nil {
+            imageBytes := part.InlineData.Data
+            _ = os.WriteFile("video_poster.png", imageBytes, 0644)
+            log.Println("Image saved as video_poster.png")
+        }
+    }
+}
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.Content;
+import com.google.genai.types.FileData;
+import com.google.genai.types.GenerateContentResponse;
+import com.google.genai.types.Part;
+import com.google.genai.types.VideoMetadata;
+import com.google.common.collect.ImmutableList;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class VideoToImage {
+  public static void main(String[] args) throws IOException {
+
+    try (Client client = new Client()) {
+      Part videoPart = Part.builder()
+          .fileData(FileData.builder()
+              .fileUri("https://www.youtube.com/watch?v=UTdfxFyOQTI")
+              .build())
+          .videoMetadata(VideoMetadata.builder()
+              .fps(0.5)
+              .build())
+          .build();
+
+      Part textPart = Part.builder()
+          .text("Can you create an infographics that explains what this video is about?")
+          .build();
+
+      GenerateContentResponse response = client.models.generateContent(
+          "gemini-3.1-flash-image",
+          Content.builder()
+              .role("user")
+              .parts(ImmutableList.of(videoPart, textPart))
+              .build());
+
+      for (Part part : response.parts()) {
+        if (part.inlineData().isPresent()) {
+          var blob = part.inlineData().get();
+          if (blob.data().isPresent()) {
+            Files.write(Paths.get("video_poster.png"), blob.data().get());
+            System.out.println("Image saved as video_poster.png");
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### C#
+
+```
+using Google.GenAI;
+using Google.GenAI.Types;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+public class VideoToImage {
+  public static async Task Main(string[] args) {
+    var client = new Client();
+
+    var response = await client.Models.GenerateContentAsync(
+        model: "gemini-3.1-flash-image",
+        contents: new List<Part>
+        {
+            new Part
+            {
+                FileData = new FileData { FileUri = "https://www.youtube.com/watch?v=UTdfxFyOQTI" },
+                VideoMetadata = new VideoMetadata { Fps = 0.5 }
+            },
+            new Part { Text = "Can you create an infographics that explains what this video is about?" }
+        }
+    );
+
+    foreach (var candidate in response.Candidates) {
+        foreach (var part in candidate.Content.Parts) {
+            if (part.InlineData != null) {
+                var imageBytes = Convert.FromBase64String(part.InlineData.Data);
+                await File.WriteAllBytesAsync("video_poster.png", imageBytes);
+                Console.WriteLine("Image saved as video_poster.png");
+            }
+        }
+    }
+  }
+}
+```
+
+### REST
+
+```
+curl -s -X POST \
+  "https://generativelanguage.googleapis.com/v1/models/gemini-3.1-flash-image:generateContent" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "contents": [{
+      "parts": [
+        {
+          "file_data": {
+            "file_uri": "https://www.youtube.com/watch?v=UTdfxFyOQTI"
+          },
+          "video_metadata": {
+            "fps": 0.5
+          }
+        },
+        {"text": "Can you create an infographics that explains what this video is about?"}
+      ]
+    }]
+  }'
+```
+
+![Infográfico gerado por IA de um vídeo do YouTube](https://ai.google.dev/static/gemini-api/docs/images/youtube_infographics.png?hl=pt-br)
+
+Infográfico gerado com IA de um vídeo do YouTube
 
 ### Gerar imagens com resolução de até 4K
 
@@ -1452,7 +2048,7 @@ resolution = "1K" # "512", "1K", "2K", "4K"
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     contents=prompt,
     config=types.GenerateContentConfig(
         response_modalities=['TEXT', 'IMAGE'],
@@ -1483,7 +2079,7 @@ async function main() {
   const resolution = '1K';
 
   const response = await ai.models.generateContent({
-    model: 'gemini-3.1-flash-image-preview',
+    model: 'gemini-3.1-flash-image',
     contents: prompt,
     config: {
       responseModalities: ['TEXT', 'IMAGE'],
@@ -1534,7 +2130,7 @@ func main() {
     }
     defer client.Close()
 
-    model := client.GenerativeModel("gemini-3.1-flash-image-preview")
+    model := client.GenerativeModel("gemini-3.1-flash-image")
     model.GenerationConfig = &pb.GenerationConfig{
         ResponseModalities: []pb.ResponseModality{genai.Text, genai.Image},
         ImageConfig: &pb.ImageConfig{
@@ -1590,7 +2186,7 @@ public class HiRes {
             .build();
 
         GenerateContentResponse response = client.models.generateContent(
-            "gemini-3.1-flash-image-preview", """
+            "gemini-3.1-flash-image", """
               Da Vinci style anatomical sketch of a dissected Monarch butterfly.
               Detailed drawings of the head, wings, and legs on textured
               parchment with notes in English.
@@ -1612,11 +2208,56 @@ public class HiRes {
 }
 ```
 
+### C#
+
+```
+using Google.GenAI;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+public class HiRes {
+  public static async Task Main(string[] args) {
+    var client = new Client();
+
+    var response = await client.Models.GenerateContentAsync(
+        model: "gemini-3.1-flash-image",
+        contents: new List<Part>
+        {
+            new Part { Text = "Da Vinci style anatomical sketch of a dissected Monarch butterfly. Detailed drawings of the head, wings, and legs on textured parchment with notes in English." }
+        },
+        config: new GenerateContentConfig
+        {
+            ResponseModalities = new List<string> { "TEXT", "IMAGE" },
+            ImageConfig = new ImageConfig
+            {
+                AspectRatio = "1:1",
+                ImageSize = "1K"
+            }
+        }
+    );
+
+    foreach (var candidate in response.Candidates) {
+        foreach (var part in candidate.Content.Parts) {
+            if (part.Text != null) {
+                Console.WriteLine(part.Text);
+            } else if (part.InlineData != null) {
+                var imageBytes = Convert.FromBase64String(part.InlineData.Data);
+                await File.WriteAllBytesAsync("butterfly.png", imageBytes);
+                Console.WriteLine("Image saved as butterfly.png");
+            }
+        }
+    }
+  }
+}
+```
+
 ### REST
 
 ```
 curl -s -X POST \
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent" \
+  "https://generativelanguage.googleapis.com/v1/models/gemini-3.1-flash-image:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -1640,9 +2281,9 @@ Esboço anatômico de uma borboleta monarca dissecada no estilo de Da Vinci gera
 ### Processo de raciocínio
 
 Os modelos de imagem do Gemini 3 são modelos de raciocínio que usam um processo de inferência ("Raciocínio") para comandos complexos. Esse recurso é ativado por padrão e
-não pode ser desativado na API. Para saber mais sobre o processo de raciocínio, consulte o guia [Raciocínio do Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br).
+não pode ser desativado na API. Para saber mais sobre o processo de pensamento, consulte o guia [Pensamento do Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br).
 
-O modelo gera até duas imagens provisórias para testar a composição e a lógica. A última imagem em "Raciocínio" também é a imagem renderizada final.
+O modelo gera até duas imagens provisórias para testar a composição e a lógica. A última imagem em "Pensando" também é a imagem renderizada final.
 
 Você pode conferir as ideias que levaram à produção da imagem final.
 
@@ -1674,9 +2315,45 @@ for (const part of response.candidates[0].content.parts) {
 }
 ```
 
+### Java
+
+```
+for (Part part : response.parts()) {
+  if (part.thought().orElse(false)) {
+    if (part.text().isPresent()) {
+      System.out.println(part.text().get());
+    } else if (part.inlineData().isPresent()) {
+      var blob = part.inlineData().get();
+      if (blob.data().isPresent()) {
+        Files.write(Paths.get("image.png"), blob.data().get());
+        System.out.println("Image saved as image.png");
+      }
+    }
+  }
+}
+```
+
+### C#
+
+```
+foreach (var candidate in response.Candidates) {
+    foreach (var part in candidate.Content.Parts) {
+        if (part.Thought) {
+            if (part.Text != null) {
+                Console.WriteLine(part.Text);
+            } else if (part.InlineData != null) {
+                var imageBytes = Convert.FromBase64String(part.InlineData.Data);
+                await File.WriteAllBytesAsync("image.png", imageBytes);
+                Console.WriteLine("Image saved as image.png");
+            }
+        }
+    }
+}
+```
+
 #### Como controlar os níveis de pensamento
 
-Com o Gemini 3.1 Flash Image, você controla a quantidade de raciocínio que o modelo usa para equilibrar qualidade e latência. O `thinkingLevel` padrão é `minimal`, e os níveis aceitos são `minimal` e `high`. Definir o `thinkingLevel` como `minimal` oferece respostas com a menor latência. Observe que o pensamento mínimo não significa que o modelo não usa nenhum pensamento.
+Com o Gemini 3.1 Flash Image, você controla a quantidade de raciocínio que o modelo usa para equilibrar qualidade e latência. O `thinkingLevel` padrão é `minimal`, e os níveis compatíveis são `minimal` e `high`. Definir o `thinkingLevel` como `minimal` oferece respostas com a menor latência. Observe que o raciocínio mínimo não significa que o modelo não usa nenhum raciocínio.
 
 Você pode adicionar o booleano `includeThoughts` para determinar se os pensamentos gerados pelo modelo são retornados na resposta ou permanecem ocultos.
 
@@ -1686,7 +2363,7 @@ Você pode adicionar o booleano `includeThoughts` para determinar se os pensamen
 from google import genai
 
 response = client.models.generate_content(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     contents="A futuristic city built inside a giant glass bottle floating in space",
     config=types.GenerateContentConfig(
         response_modalities=["IMAGE"],
@@ -1717,7 +2394,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const response = await ai.models.generateContent({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     contents: "A futuristic city built inside a giant glass bottle floating in space",
     config: {
       responseModalities: ["IMAGE"],
@@ -1768,7 +2445,7 @@ func main() {
     }
     defer client.Close()
 
-    model := client.GenerativeModel("gemini-3.1-flash-image-preview")
+    model := client.GenerativeModel("gemini-3.1-flash-image")
     model.GenerationConfig = &pb.GenerationConfig{
         ResponseModalities: []pb.ResponseModality{genai.Image},
         ThinkingConfig: &pb.ThinkingConfig{
@@ -1799,11 +2476,110 @@ func main() {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.GenerateContentConfig;
+import com.google.genai.types.GenerateContentResponse;
+import com.google.genai.types.Part;
+import com.google.genai.types.ThinkingConfig;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class ThinkingLevels {
+  public static void main(String[] args) throws IOException {
+
+    try (Client client = new Client()) {
+      GenerateContentConfig config = GenerateContentConfig.builder()
+          .responseModalities("IMAGE")
+          .thinkingConfig(ThinkingConfig.builder()
+              .thinkingLevel("High")
+              .includeThoughts(true)
+              .build())
+          .build();
+
+      GenerateContentResponse response = client.models.generateContent(
+          "gemini-3.1-flash-image",
+          "A futuristic city built inside a giant glass bottle floating in space",
+          config);
+
+      for (Part part : response.parts()) {
+        if (part.thought().orElse(false)) {
+          // Skip outputting thoughts
+          continue;
+        }
+        if (part.text().isPresent()) {
+          System.out.println(part.text().get());
+        } else if (part.inlineData().isPresent()) {
+          var blob = part.inlineData().get();
+          if (blob.data().isPresent()) {
+            Files.write(Paths.get("image.png"), blob.data().get());
+            System.out.println("Image saved as image.png");
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### C#
+
+```
+using Google.GenAI;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+public class ThinkingLevels {
+  public static async Task Main(string[] args) {
+    var client = new Client();
+
+    var response = await client.Models.GenerateContentAsync(
+        model: "gemini-3.1-flash-image",
+        contents: new List<Part>
+        {
+            new Part { Text = "A futuristic city built inside a giant glass bottle floating in space" }
+        },
+        config: new GenerateContentConfig
+        {
+            ResponseModalities = new List<string> { "IMAGE" },
+            ThinkingConfig = new ThinkingConfig
+            {
+                ThinkingLevel = "High",
+                IncludeThoughts = true
+            }
+        }
+    );
+
+    foreach (var candidate in response.Candidates) {
+        foreach (var part in candidate.Content.Parts) {
+            if (part.Thought) {
+                // Skip outputting thoughts
+                continue;
+            }
+            if (part.Text != null) {
+                Console.WriteLine(part.Text);
+            } else if (part.InlineData != null) {
+                var imageBytes = Convert.FromBase64String(part.InlineData.Data);
+                await File.WriteAllBytesAsync("image.png", imageBytes);
+                Console.WriteLine("Image saved as image.png");
+            }
+        }
+    }
+  }
+}
+```
+
 ### REST
 
 ```
 curl -s -X POST \
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent" \
+  "https://generativelanguage.googleapis.com/v1/models/gemini-3.1-flash-image:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -1822,7 +2598,7 @@ Os tokens de raciocínio são faturados, independente de `includeThoughts` estar
 
 #### Assinaturas de pensamento
 
-As assinaturas de pensamento são representações criptografadas do processo de raciocínio interno do modelo e são usadas para preservar o contexto de raciocínio em interações de várias rodadas. Todas as respostas incluem um campo `thought_signature`. Como regra geral, se você receber uma assinatura de pensamento em uma resposta do modelo, transmita-a exatamente como recebida ao enviar o histórico da conversa na próxima vez. Se não fizer isso, a resposta poderá falhar. Consulte a documentação sobre [assinatura de pensamento](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=pt-br) para mais explicações sobre assinaturas em geral.
+As assinaturas de pensamento são representações criptografadas do processo de pensamento interno do modelo e são usadas para preservar o contexto de raciocínio em interações de várias rodadas. Todas as respostas incluem um campo `thought_signature`. Como regra geral, se você receber uma assinatura de pensamento em uma resposta do modelo, transmita-a exatamente como foi recebida ao enviar o histórico da conversa na próxima vez. Se não fizer isso, a resposta poderá falhar. Consulte a documentação sobre [assinatura de pensamento](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=pt-br) para mais explicações sobre assinaturas em geral.
 
 Confira como elas funcionam:
 
@@ -1898,12 +2674,12 @@ O Gemini oferece suporte a outros modos de interação com imagens com base na e
 - **Texto para imagens e texto (intercalado)**: gera imagens com texto relacionado.
   - Exemplo de comando: "Gere uma receita ilustrada de paella".
 - **Imagens e texto para imagens e texto (intercalados)**: usa imagens e texto de entrada para criar novas imagens e texto relacionados.
-  - Comando de exemplo: (com uma imagem de um quarto mobiliado) "Quais outras cores de sofás ficariam boas no meu espaço? Você pode atualizar a imagem?"
+  - Comando de exemplo: (com uma imagem de um quarto mobiliado) "Quais outros sofás de cores ficariam bons no meu espaço? Você pode atualizar a imagem?"
 
 ## Gerar imagens em lote
 
 Se você precisar gerar muitas imagens, use a
-[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br). Você recebe [limites de taxa](https://ai.google.dev/gemini-api/docs/rate-limits?hl=pt-br) mais altos em troca de um tempo de resposta de até 24 horas.
+[API em lote](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br). Você recebe [limites de taxa](https://ai.google.dev/gemini-api/docs/rate-limits?hl=pt-br) mais altos em troca de um tempo de resposta de até 24 horas.
 
 Confira a [documentação da API Batch para geração de imagens](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br#image-generation) e o [cookbook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=pt-br)
 para exemplos e código de imagens da API Batch.
@@ -1925,7 +2701,7 @@ Para imagens realistas, use termos de fotografia. Mencione ângulos de câmera, 
 
 | **Comando** | **Saída gerada** |
 | --- | --- |
-| Uma foto em close de um ceramista japonês idoso com rugas profundas e marcadas pelo sol e um sorriso caloroso e cúmplice. Ele está inspecionando cuidadosamente uma xícara de chá recém-esmaltada. O cenário é a oficina rústica e ensolarada dele. A cena é iluminada por uma luz suave e dourada que entra por uma janela, destacando a textura fina da argila. A imagem é capturada com uma lente de 85 mm, própria para retratos, resultando em um fundo suave e desfocado (bokeh). O clima geral é sereno e magistral. Orientação retrato vertical. | Ceramista japonês idoso |
+| Uma foto em close de um ceramista japonês idoso com rugas profundas e marcadas pelo sol e um sorriso caloroso e cúmplice. Ele está inspecionando cuidadosamente uma xícara de chá recém-esmaltada. O cenário é a oficina rústica e ensolarada dele. A cena é iluminada por uma luz suave da hora mágica que entra por uma janela, destacando a textura fina da argila. A imagem foi capturada com uma lente de 85 mm, própria para retratos, resultando em um fundo suave e desfocado (bokeh). O clima geral é sereno e magistral. Orientação retrato vertical. | Ceramista japonês idoso |
 
 #### Ilustrações e adesivos estilizados
 
@@ -1937,8 +2713,7 @@ Para criar adesivos, ícones ou recursos, seja explícito sobre o estilo e peça
 
 #### Texto preciso em imagens
 
-O Gemini é excelente em renderização de texto. Seja claro sobre o texto, o estilo da fonte (de forma descritiva) e o design geral. Use a prévia de imagens do Gemini 3 Pro para
-produção de recursos profissionais.
+O Gemini é excelente em renderização de texto. Seja claro sobre o texto, o estilo da fonte (de forma descritiva) e o design geral. Use o Gemini 3.1 Pro Image para produção de recursos profissionais.
 
 | **Comando** | **Saída gerada** |
 | --- | --- |
@@ -1958,11 +2733,11 @@ Excelente para criar planos de fundo para sites, apresentações ou materiais de
 
 | **Comando** | **Saída gerada** |
 | --- | --- |
-| Uma composição minimalista com uma única folha delicada de bordo vermelho posicionada na parte inferior direita da imagem. O fundo é uma tela branca vazia, criando um espaço negativo significativo para o texto. Iluminação suave e difusa do canto superior esquerdo. Imagem quadrada. | Design minimalista com folha de bordo vermelha |
+| Uma composição minimalista com uma única e delicada folha de bordo vermelho posicionada na parte inferior direita da imagem. O fundo é uma tela branca vazia, criando um espaço negativo significativo para o texto. Iluminação suave e difusa do canto superior esquerdo. Imagem quadrada. | Design minimalista com folha de bordo vermelha |
 
 #### Arte sequencial (painel de quadrinhos / storyboard)
 
-Cria painéis para contar histórias visuais com base na consistência dos personagens e na descrição das cenas. Para ter mais precisão com texto e capacidade de narrativa, esses comandos funcionam melhor com o Gemini 3 Pro e o pré-lançamento do Gemini 3.1 Flash Image.
+Cria painéis para contar histórias visuais com base na consistência dos personagens e na descrição das cenas. Para precisão com texto e capacidade de contar histórias, esses comandos funcionam melhor com o Gemini 3.1 Pro e o Gemini 3.1 Flash Image.
 
 | **Comando** | **Saída gerada** |
 | --- | --- |
@@ -1970,7 +2745,7 @@ Cria painéis para contar histórias visuais com base na consistência dos perso
 
 #### Embasamento com a Pesquisa Google
 
-Usar a Pesquisa Google para gerar imagens com base em informações recentes ou em tempo real.
+Use a Pesquisa Google para gerar imagens com base em informações recentes ou em tempo real.
 Isso é útil para notícias, clima e outros assuntos urgentes.
 
 | **Comando** | **Saída gerada** |
@@ -2011,7 +2786,7 @@ Forneça várias imagens como contexto para criar uma cena nova e composta. Isso
 
 | **Comando** | **Saída gerada** |
 | --- | --- |
-| **Imagens de entrada:**  Uma foto profissional de um vestido de verão azul floral...   Entrada 1: vestido   Foto de corpo inteiro de uma mulher com o cabelo preso em um coque...   Entrada 2: modelo   **Comando**:crie uma foto profissional de moda para e-commerce. Pegue o vestido floral azul da primeira imagem e deixe a mulher da segunda imagem usá-lo. Gere uma foto realista de corpo inteiro da mulher usando o vestido, com a iluminação e as sombras ajustadas para corresponder ao ambiente externo. | Foto de e-commerce de moda |
+| **Imagens de entrada:**  Uma foto profissional de um vestido de verão azul com estampa floral...   Entrada 1: vestido   Foto de corpo inteiro de uma mulher com o cabelo preso em um coque...   Entrada 2: modelo   **Comando**:crie uma foto profissional de moda para e-commerce. Pegue o vestido floral azul da primeira imagem e deixe a mulher da segunda imagem usá-lo. Gere uma foto realista de corpo inteiro da mulher usando o vestido, com a iluminação e as sombras ajustadas para corresponder ao ambiente externo. | Foto de e-commerce de moda |
 
 #### Preservação de detalhes de alta fidelidade
 
@@ -2019,7 +2794,7 @@ Para garantir que detalhes importantes (como um rosto ou um logotipo) sejam pres
 
 | **Comando** | **Saída gerada** |
 | --- | --- |
-| **Imagens de entrada:**  Um retrato profissional de uma mulher com cabelo castanho e olhos azuis...   Entrada 1: mulher   Um logotipo simples e moderno com as letras &quot;G&quot; e &quot;A&quot;...   Entrada 2: logotipo   **Comando**:pegue a primeira imagem da mulher com cabelo castanho, olhos azuis e uma expressão neutra. Adicione o logo da segunda imagem à camiseta preta dela. O rosto e as características da mulher não podem ser alterados. O logotipo precisa parecer impresso naturalmente no tecido, seguindo as dobras da camisa. | Mulher com logotipo na camiseta |
+| **Imagens de entrada:**  Um retrato profissional de uma mulher com cabelo castanho e olhos azuis...   Entrada 1: mulher   Um logotipo simples e moderno com as letras &quot;G&quot; e &quot;A&quot;...   Entrada 2: logotipo   **Comando**:pegue a primeira imagem da mulher com cabelo castanho, olhos azuis e uma expressão neutra. Adicione o logo da segunda imagem à camiseta preta dela. Mantenha o rosto e as características da mulher completamente inalterados. O logotipo precisa parecer impresso naturalmente no tecido, seguindo as dobras da camisa. | Mulher com logotipo na camiseta |
 
 #### Dar vida a algo
 
@@ -2029,7 +2804,7 @@ Faça upload de um esboço ou desenho e peça ao modelo para refinar e criar uma
 | --- | --- |
 | **Imagem de entrada**:  Esboço de um carro   Esboço de um carro   **Comando**:transforme este esboço a lápis de um carro futurista em uma foto refinada do carro-conceito finalizado em um showroom. Mantenha as linhas elegantes e o perfil baixo do esboço, mas adicione tinta azul metálica e iluminação neon na borda. | Foto polida de um carro conceito |
 
-#### Consistência de personagens: visualização em 360 graus
+#### Consistência de personagens: visualização completa
 
 É possível gerar visualizações de 360 graus de um personagem pedindo ângulos diferentes de forma iterativa. Para ter os melhores resultados, inclua imagens geradas anteriormente em comandos subsequentes para manter a consistência. Para poses complexas, inclua uma imagem de referência da pose desejada.
 
@@ -2041,8 +2816,8 @@ Faça upload de um esboço ou desenho e peça ao modelo para refinar e criar uma
 
 Para melhorar ainda mais seus resultados, incorpore estas estratégias profissionais ao seu fluxo de trabalho.
 
-- **Seja hiperespecífico**:quanto mais detalhes você fornecer, mais controle terá. Em vez de "armadura de fantasia", descreva: "armadura de placas élfica ornamentada, gravada com padrões de folhas de prata, com um colar alto e ombreiras em forma de asas de falcão".
-- **Forneça contexto e intenção**:explique o *propósito* da imagem. A compreensão do contexto pelo modelo influencia o resultado final. Por exemplo, "Crie um logotipo para uma marca de skincare minimalista e sofisticada" vai gerar resultados melhores do que apenas "Crie um logotipo".
+- **Seja muito específico**:quanto mais detalhes você fornecer, mais controle terá. Em vez de "armadura de fantasia", descreva: "armadura de placas élfica ornamentada, gravada com padrões de folhas de prata, com um colar alto e ombreiras em forma de asas de falcão".
+- **Forneça contexto e intenção**:explique o *propósito* da imagem. A compreensão do contexto pelo modelo influencia a saída final. Por exemplo, "Crie um logotipo para uma marca de skincare minimalista e sofisticada" vai gerar resultados melhores do que apenas "Crie um logotipo".
 - **Itere e refine**:não espere uma imagem perfeita na primeira tentativa. Use a natureza conversacional do modelo para fazer pequenas mudanças. Faça perguntas complementares como: "Ótimo, mas você pode deixar a iluminação um pouco mais quente?" ou "Mantenha tudo igual, mas mude a expressão do personagem para algo mais sério".
 - **Use instruções detalhadas**:para cenas complexas com muitos elementos, divida o comando em etapas. "Primeiro, crie um plano de fundo de uma floresta serena e enevoada ao amanhecer. Em seguida, em primeiro plano, adicione um altar de pedra antigo coberto de musgo.
   Por fim, coloque uma espada brilhante em cima do altar."
@@ -2055,9 +2830,9 @@ Para melhorar ainda mais seus resultados, incorpore estas estratégias profissio
 - Para ter o melhor desempenho, use os seguintes idiomas: EN, ar-EG, de-DE, es-MX, fr-FR, hi-IN, id-ID, it-IT, ja-JP, ko-KR, pt-BR, ru-RU, ua-UA, vi-VN, zh-CN.
 - A geração de imagens não aceita entradas de áudio ou vídeo.
 - O modelo nem sempre segue o número exato de imagens que o usuário pede explicitamente.
-- O `gemini-2.5-flash-image` funciona melhor com até três imagens como entrada, enquanto o `gemini-3-pro-image-preview` aceita cinco imagens com alta fidelidade e até 14 imagens no total. O `gemini-3.1-flash-image-preview` oferece suporte à semelhança de até quatro caracteres e à fidelidade de até 10 objetos em um único fluxo de trabalho.
+- O `gemini-2.5-flash-image` funciona melhor com até três imagens como entrada, enquanto o `gemini-3-pro-image` aceita cinco imagens com alta fidelidade e até 14 imagens no total. O `gemini-3.1-flash-image` oferece suporte à semelhança de até quatro caracteres e à fidelidade de até 10 objetos em um único fluxo de trabalho.
 - Ao gerar texto para uma imagem, o Gemini funciona melhor se você primeiro gerar o texto e depois pedir uma imagem com ele.
-- `gemini-3.1-flash-image-preview` No momento, o embasamento com a Pesquisa Google não é compatível com o uso de imagens de pessoas do mundo real na pesquisa na Web.
+- `gemini-3.1-flash-image` No momento, o embasamento com a Pesquisa Google não é compatível com o uso de imagens de pessoas do mundo real na pesquisa na Web.
 - Todas as imagens geradas incluem uma [marca-d'água do SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=pt-br).
 
 ## Configurações opcionais
@@ -2072,7 +2847,7 @@ Por padrão, o modelo retorna respostas de texto e imagem (ou seja, `response_mo
 
 ```
 response = client.models.generate_content(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     contents=[prompt],
     config=types.GenerateContentConfig(
         response_modalities=['Image']
@@ -2084,7 +2859,7 @@ response = client.models.generate_content(
 
 ```
 const response = await ai.models.generateContent({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     contents: prompt,
     config: {
         responseModalities: ['Image']
@@ -2097,7 +2872,7 @@ const response = await ai.models.generateContent({
 ```
 result, _ := client.Models.GenerateContent(
     ctx,
-    "gemini-3.1-flash-image-preview",
+    "gemini-3.1-flash-image",
     genai.Text("Create a picture of a nano banana dish in a " +
                 " fancy restaurant with a Gemini theme"),
     &genai.GenerateContentConfig{
@@ -2110,18 +2885,31 @@ result, _ := client.Models.GenerateContent(
 
 ```
 response = client.models.generateContent(
-    "gemini-3.1-flash-image-preview",
+    "gemini-3.1-flash-image",
     prompt,
     GenerateContentConfig.builder()
         .responseModalities("IMAGE")
         .build());
 ```
 
+### C#
+
+```
+var response = await client.Models.GenerateContentAsync(
+    model: "gemini-3.1-flash-image",
+    contents: new List<Part> { new Part { Text = prompt } },
+    config: new GenerateContentConfig
+    {
+        ResponseModalities = new List<string> { "IMAGE" }
+    }
+);
+```
+
 ### REST
 
 ```
 curl -s -X POST \
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent" \
+  "https://generativelanguage.googleapis.com/v1/models/gemini-3.1-flash-image:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -2154,9 +2942,9 @@ response = client.models.generate_content(
     )
 )
 
-# For gemini-3.1-flash-image-preview and gemini-3-pro-image-preview
+# For gemini-3.1-flash-image and gemini-3-pro-image
 response = client.models.generate_content(
-    model="gemini-3.1-flash-image-preview",
+    model="gemini-3.1-flash-image",
     contents=[prompt],
     config=types.GenerateContentConfig(
         response_format={"image": {aspect_ratio: "16:9",                 image_size: "2K",}}
@@ -2180,9 +2968,9 @@ const response = await ai.models.generateContent({
     }
   });
 
-// For gemini-3.1-flash-image-preview and gemini-3-pro-image-preview
+// For gemini-3.1-flash-image and gemini-3-pro-image
 const response_gemini3 = await ai.models.generateContent({
-    model: "gemini-3.1-flash-image-preview",
+    model: "gemini-3.1-flash-image",
     contents: prompt,
     config: {
       responseFormat: {
@@ -2211,10 +2999,10 @@ result, _ := client.Models.GenerateContent(
     }
   )
 
-// For gemini-3.1-flash-image-preview and gemini-3-pro-image-preview
+// For gemini-3.1-flash-image and gemini-3-pro-image
 result_gemini3, _ := client.Models.GenerateContent(
     ctx,
-    "gemini-3.1-flash-image-preview",
+    "gemini-3.1-flash-image",
     genai.Text("Create a picture of a nano banana dish in a " +
                 " fancy restaurant with a Gemini theme"),
     &genai.GenerateContentConfig{
@@ -2239,9 +3027,9 @@ response = client.models.generateContent(
             .build())
         .build());
 
-// For gemini-3.1-flash-image-preview and gemini-3-pro-image-preview
+// For gemini-3.1-flash-image and gemini-3-pro-image
 response_gemini3 = client.models.generateContent(
-    "gemini-3.1-flash-image-preview",
+    "gemini-3.1-flash-image",
     prompt,
     GenerateContentConfig.builder()
         .imageConfig(ImageConfig.builder()
@@ -2251,12 +3039,43 @@ response_gemini3 = client.models.generateContent(
         .build());
 ```
 
+### C#
+
+```
+// For gemini-2.5-flash-image
+var response = await client.Models.GenerateContentAsync(
+    model: "gemini-2.5-flash-image",
+    contents: new List<Part> { new Part { Text = prompt } },
+    config: new GenerateContentConfig
+    {
+        ImageConfig = new ImageConfig
+        {
+            AspectRatio = "16:9"
+        }
+    }
+);
+
+// For gemini-3.1-flash-image and gemini-3-pro-image
+var response_gemini3 = await client.Models.GenerateContentAsync(
+    model: "gemini-3.1-flash-image",
+    contents: new List<Part> { new Part { Text = prompt } },
+    config: new GenerateContentConfig
+    {
+        ImageConfig = new ImageConfig
+        {
+            AspectRatio = "16:9",
+            ImageSize = "2K"
+        }
+    }
+);
+```
+
 ### REST
 
 ```
 # For gemini-2.5-flash-image
 curl -s -X POST \
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent" \
+  "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash-image:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
@@ -2274,9 +3093,9 @@ curl -s -X POST \
     }
   }'
 
-# For gemini-3-pro-image-preview
+# For gemini-3-pro-image
 curl -s -X POST \
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent" \
+  "https://generativelanguage.googleapis.com/v1/models/gemini-3.1-flash-image:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
@@ -2298,7 +3117,7 @@ curl -s -X POST \
 
 As diferentes proporções disponíveis e o tamanho da imagem gerada estão listados nas tabelas a seguir:
 
-### 3.1 Prévia de imagem do Flash
+### 3.1 Imagem em Flash
 
 | Proporção | Resolução 512 | 0,5 mil tokens | Resolução 1K | 1.000 tokens | Resolução 2K | 2 mil tokens | Resolução 4K | 4 mil tokens |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -2317,7 +3136,7 @@ As diferentes proporções disponíveis e o tamanho da imagem gerada estão list
 | **16:9** | 688x384 | 747 | 1376x768 | 1120 | 2752x1536 | 1680 | 5504x3072 | 2520 |
 | **21:9** | 792x168 | 747 | 1584x672 | 1120 | 3168x1344 | 1680 | 6336x2688 | 2520 |
 
-### Visualização de imagem do 3 Pro
+### 3.1 Pro Image
 
 | Proporção | Resolução 1K | 1.000 tokens | Resolução 2K | 2 mil tokens | Resolução 4K | 4 mil tokens |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -2351,9 +3170,9 @@ As diferentes proporções disponíveis e o tamanho da imagem gerada estão list
 
 Escolha o modelo mais adequado ao seu caso de uso específico.
 
-- A **prévia da imagem do Gemini 3.1 Flash (prévia do Nano Banana 2)** é o modelo de geração de imagens ideal, já que oferece o melhor desempenho geral e equilíbrio entre custo e latência. Confira mais detalhes na página de [preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br#gemini-3.1-flash-image-preview) e [recursos](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=pt-br) do modelo.
-- O **pré-lançamento do Gemini 3 Pro Image (pré-lançamento do Nano Banana Pro)** foi criado para
-  produção de recursos profissionais e instruções complexas. Esse modelo tem embasamento no mundo real usando a Pesquisa Google, um processo padrão de "Raciocínio" que refina a composição antes da geração e pode gerar imagens com resoluções de até 4K. Confira mais detalhes na página de [preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br#gemini-3-pro-image-preview) e [recursos](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=pt-br) do modelo.
+- O **Gemini 3.1 Flash Image (Nano Banana 2)** é o modelo de geração de imagens ideal, já que oferece o melhor desempenho e inteligência em geral para equilibrar custo e latência. Confira mais detalhes na página de [preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br#gemini-3.1-flash-image) e [recursos](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=pt-br) do modelo.
+- O **Gemini 3.1 Pro Image (Nano Banana Pro)** foi desenvolvido para
+  produção de recursos profissionais e instruções complexas. Esse modelo tem embasamento no mundo real usando a Pesquisa Google, um processo padrão de "Pensamento" que refina a composição antes da geração e pode gerar imagens com resoluções de até 4K. Confira mais detalhes na página de [preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br#gemini-3-pro-image) e [recursos](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=pt-br) do modelo.
 - O **Gemini 2.5 Flash Image (Nano Banana)** foi projetado para ser rápido e eficiente. Ele é otimizado para tarefas de alto volume e baixa latência e gera imagens com resolução de 1024 px. Confira a página de [preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br#gemini-2.5-flash-image) e [recursos](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=pt-br) do modelo para mais detalhes.
 
 ### Quando usar o Imagen
@@ -2372,8 +3191,8 @@ Envie comentários
 
 Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Última atualização 2026-05-13 UTC.
+Última atualização 2026-05-28 UTC.
 
 Quer enviar seu feedback?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-05-13 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-05-28 UTC."],[],[]]

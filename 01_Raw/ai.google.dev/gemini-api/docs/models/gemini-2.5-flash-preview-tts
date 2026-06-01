@@ -1,48 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=zh-CN
-fetched_at: 2026-05-25T05:28:38.788451+00:00
-title: "Gemini 2.5 Flash \u6587\u5b57\u8f6c\u8bed\u97f3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=tr
+fetched_at: 2026-06-01T05:57:23.938080+00:00
+title: "Gemini 2.5 Flash Metin Okuma \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-发送反馈
+Geri bildirim gönderin
 
-# Gemini 2.5 Flash 文字转语音
+# Gemini 2.5 Flash Metin Okuma
 
-我们速度最快的引擎，可实现高保真语音合成，提供低延迟且经济实惠的音频生成功能。Gemini 2.5 Flash TTS 最适合实时助理、大批量旁白和对话用例，这些用例需要对语音风格和节奏进行精细控制。
+Düşük gecikme süresi ve uygun maliyetli ses üretimi sunan, yüksek kaliteli konuşma sentezi için en hızlı motorumuz. Gemini 2.5 Flash TTS; anlık asistanlar, yüksek hacimli anlatım ve ses stili ile hız üzerinde ayrıntılı kontrol gerektiren sohbet kullanım alanları için en uygun çözümdür.
 
-[在 Google AI Studio 中试用](https://aistudio.google.com?model=gemini-2.5-flash-preview-tts&hl=zh-cn)
+[Google AI Studio'da deneme](https://aistudio.google.com?model=gemini-2.5-flash-preview-tts&hl=tr)
 
-## 文档
+## Belgeler
 
-如需全面了解功能和能力，请参阅[文字转语音](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-cn)指南。
+Özellikler ve işlevler hakkında kapsamlı bilgi için [Metin Okuma](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr) kılavuzunu ziyaret edin.
 
 ## gemini-2.5-flash-preview-tts
 
-| 属性 | 说明 |
+| Mülk | Açıklama |
 | --- | --- |
-| id\_card模型代码 | `gemini-2.5-flash-preview-tts` |
-| save支持的数据类型 | **输入源**  文本  **输出**  音频 |
-| token\_autoToken 限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入 token 限制**  8,192  **输出 token 限制**  16,384 |
-| handyman功能 | **音频生成**  支持  **批量 API**  支持  **缓存**  不支持  **代码执行**  不支持  **文件搜索**  不支持  **函数调用**  不支持  **Grounding with Google Maps**  不支持  **图片生成**  不支持  **Live API**  不支持  **搜索接地**  不支持  **结构化输出**  不支持  **思考型**  不支持  **网址上下文**  不支持 |
-| 123版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - `gemini-2.5-flash-preview-tts` |
-| calendar\_month最后更新时间 | 2025 年 12 月 |
+| id\_cardModel kodu | `gemini-2.5-flash-preview-tts` |
+| saveDesteklenen veri türleri | **Girişler**  Metin  **Çıkış**  Ses |
+| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  8.192  **Çıkış jetonu sınırı**  16.384 |
+| handymanÖzellikler | **Ses üretimi**  Destekleniyor  **Batch API**  Destekleniyor  **Önbelleğe alma**  Desteklenmiyor  **Kod yürütme**  Desteklenmiyor  **Dosya arama**  Desteklenmiyor  **İşlev çağırma**  Desteklenmiyor  **Google Haritalar ile Temellendirme**  Desteklenmiyor  **Görüntü üretme**  Desteklenmiyor  **Live API**  Desteklenmiyor  **Arama temellendirme**  Desteklenmiyor  **Yapılandırılmış çıkışlar**  Desteklenmiyor  **Düşünme** (Thinking)  Desteklenmiyor  **URL bağlamı**  Desteklenmiyor |
+| 123Sürümleri | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - `gemini-2.5-flash-preview-tts` |
+| calendar\_monthSon güncelleme | Aralık 2025 |
 
-发送反馈
+Geri bildirim gönderin
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-最后更新时间 (UTC)：2026-04-29。
+Son güncelleme tarihi: 2026-04-29 UTC.
 
-需要向我们提供更多信息？
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]

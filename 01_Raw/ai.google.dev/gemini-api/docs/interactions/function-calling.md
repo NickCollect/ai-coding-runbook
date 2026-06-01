@@ -1,35 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=pl
-fetched_at: 2026-05-25T05:29:09.424312+00:00
-title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=ja
+fetched_at: 2026-06-01T06:00:37.048812+00:00
+title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Prześlij opinię
+フィードバックを送信
 
-# Wywoływanie funkcji za pomocą interfejsu Gemini API
+# Gemini API を使用した関数呼び出し
 
-Wywoływanie funkcji umożliwia łączenie modeli z narzędziami i interfejsami API innych firm.
-Zamiast generować odpowiedzi tekstowe, model określa, kiedy wywołać konkretne funkcje, i podaje niezbędne parametry do wykonania działań w rzeczywistym świecie.
-Dzięki temu model może stanowić pomost między językiem naturalnym a rzeczywistymi działaniami i danymi. Wywoływanie funkcji ma 3 główne zastosowania:
+関数呼び出しを使用すると、モデルを外部ツールや API に接続できます。
+モデルは、テキスト レスポンスを生成する代わりに、特定の関数を呼び出すタイミングを判断し、現実世界のアクションを実行するために必要なパラメータを提供します。
+これにより、モデルは自然言語と現実世界のアクションやデータの間のブリッジとして機能します。関数呼び出しには、次の 3 つの主なユースケースがあります。
 
-- **Wzbogacanie wiedzy:** dostęp do informacji ze źródeł zewnętrznych, takich jak bazy danych, interfejsy API i bazy wiedzy.
-- **Rozszerzanie możliwości:** używaj narzędzi zewnętrznych do wykonywania obliczeń i przekraczania ograniczeń modelu, np. korzystaj z kalkulatora lub twórz wykresy.
-- **Podejmowanie działań:** wchodzenie w interakcję z systemami zewnętrznymi za pomocą interfejsów API, np. planowanie spotkań, tworzenie faktur, wysyłanie e-maili czy sterowanie inteligentnymi urządzeniami domowymi.
+- **知識の拡張:** データベース、API、ナレッジベースなどの外部ソースから情報にアクセスします。
+- **機能の拡張:** 外部ツールを使用して計算を行い、電卓の使用やグラフの作成など、モデルの制限を拡張します。
+- **アクションの実行:** API を使用して外部システムとやり取りします。たとえば、予定のスケジュール設定、請求書の作成、メールの送信、スマートホーム デバイスの制御などです。
 
-Sprawdź pogodę
-Zaplanuj spotkanie
-Utwórz wykres
+天気を取得する
+会議をスケジュールする
+グラフを作成する
 
 ### Python
 
@@ -131,20 +131,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Jak działa wywoływanie funkcji
+## 関数呼び出しの仕組み
 
-![Omówienie wywoływania funkcji](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=pl)
+![関数呼び出しの概要](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=ja)
 
-Wywoływanie funkcji obejmuje strukturalną interakcję między aplikacją, modelem i funkcjami zewnętrznymi:
+関数呼び出しには、アプリケーション、モデル、外部関数間の構造化されたインタラクションが含まれます。
 
-1. **Zdefiniuj deklarację funkcji:** podaj modelowi nazwę, parametry i przeznaczenie funkcji.
-2. **Wywołaj LLM za pomocą deklaracji funkcji:** wyślij prompt użytkownika wraz z deklaracjami funkcji do modelu.
-3. **Wykonywanie kodu funkcji (Twoja odpowiedzialność):** model *nie* wykonuje funkcji samodzielnie. Wyodrębnij nazwę i argumenty, a następnie wykonaj je w aplikacji.
-4. **Utwórz odpowiedź przyjazną dla użytkownika:** wyślij wynik z powrotem do modelu, aby uzyskać ostateczną odpowiedź przyjazną dla użytkownika.
+1. **関数宣言を定義する:** 関数の名前、パラメータ、目的をモデルに定義します。
+2. **関数宣言を使用して LLM を呼び出す:** ユーザー プロンプトと関数宣言をモデルに送信します。
+3. **関数コードを実行する（ユーザーの責任）:** モデルは*関数自体を実行しません。*名前と引数を抽出し、アプリケーションで実行します。
+4. **ユーザー フレンドリーなレスポンスを作成する:** 最終的なユーザー フレンドリーなレスポンスを得るために、結果をモデルに返します。
 
-Ten proces można powtarzać w wielu turach. Model obsługuje wywoływanie wielu funkcji w ramach jednej tury ([równoległe wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=pl#parallel_function_calling)) i sekwencyjnie ([kompozycyjne wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=pl#compositional_function_calling)).
+このプロセスは、複数回繰り返すことができます。モデルは、1 回のターンで
+複数の関数を呼び出す（[並列関数呼び出し](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=ja#parallel_function_calling)）ことと、
+順番に呼び出す（[コンポジション関数呼び出し](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=ja#compositional_function_calling)）ことをサポートしています。
 
-### Krok 1. Zdefiniuj deklarację funkcji
+### ステップ 1: 関数宣言を定義する
 
 ### Python
 
@@ -197,7 +199,7 @@ function setLightValues(brightness, color_temp) {
 }
 ```
 
-### Krok 2. Wywołaj model z deklaracjami funkcji
+### ステップ 2: 関数宣言を使用してモデルを呼び出す
 
 ### Python
 
@@ -233,7 +235,7 @@ const fcStep = interaction.steps.find(s => s.type === 'function_call');
 console.log(fcStep);
 ```
 
-Model zwraca krok `function_call` z wartościami `type`, `name` i `arguments`:
+モデルは、`type`、`name`、`arguments` を含む `function_call` ステップを返します。
 
 ```
 type='function_call'
@@ -241,7 +243,7 @@ name='set_light_values'
 arguments={'color_temp': 'warm', 'brightness': 25}
 ```
 
-### Krok 3. Wykonaj funkcję
+### ステップ 3: 関数を実行する
 
 ### Python
 
@@ -265,7 +267,7 @@ if (fcStep.name === 'set_light_values') {
 }
 ```
 
-### Krok 4. Prześlij wynik z powrotem do modelu
+### ステップ 4: 結果をモデルに返す
 
 ### Python
 
@@ -305,14 +307,14 @@ const finalInteraction = await client.interactions.create({
 console.log(finalInteraction.output_text);
 ```
 
-### Wywoływanie funkcji bezstanowych
+### ステートレス関数呼び出し
 
-Możesz też używać wywoływania funkcji w trybie bezstanowym, zarządzając historią rozmów po stronie klienta i ustawiając wartość `store=false`.
+クライアント側で会話履歴を管理し、`store=false` を設定することで、ステートレス モードで関数呼び出しを使用することもできます。
 
-W trybie bezstanowym musisz przekazywać pełną historię rozmowy w polu `input` każdej kolejnej prośby. Historia musi zawierać:
-1. Początkowy krok `user_input`.
-2. Wszystkie wygenerowane przez model kroki zwrócone w turze 1 (w tym kroki `thought` i `function_call`) w takiej postaci, w jakiej zostały otrzymane.
-3. Krok `function_result` zawierający dane wyjściowe wykonanej funkcji.
+ステートレス モードでは、後続のリクエストの `input` フィールドに会話の完全な履歴を渡す必要があります。この履歴には、次のものが含まれている必要があります。
+1. 最初の `user_input` ステップ。
+2. ターン 1 で返されたモデル生成ステップ（`thought` ステップと `function_call` ステップを含む）をすべて、受信したとおりに。
+3. 実行された関数の出力を含む `function_result` ステップ。
 
 ### Python
 
@@ -486,26 +488,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## Deklaracje funkcji
+## 関数宣言
 
-Deklaracja funkcji jest przekazywana jako narzędzie i zawiera:
+関数宣言はツールとして渡され、次のものが含まれます。
 
-- `type` (ciąg znaków): w przypadku funkcji niestandardowych musi mieć wartość `"function"`.
-- `name` (ciąg znaków): unikalna nazwa funkcji (używaj podkreśleń lub notacji camelCase).
-- `description` (string): jasne wyjaśnienie celu funkcji.
-- `parameters` (obiekt): parametry wejściowe, których oczekuje funkcja.
-  - `type` (string): ogólny typ danych, np. `object`.
-  - `properties` (obiekt): poszczególne parametry z typem i opisem.
-  - `required` (tablica): nazwy parametrów obowiązkowych.
+- `type`（文字列）: カスタム関数の場合は `"function"` である必要があります。
+- `name`（文字列）: 一意の関数名（アンダースコアまたはキャメルケースを使用）。
+- `description`（文字列）: 関数の目的を明確に説明します。
+- `parameters` （オブジェクト）: 関数が想定する入力パラメータ。
+  - `type`（文字列）: 全体的なデータ型（`object` など）。
+  - `properties`（オブジェクト）: 型と説明を含む個々のパラメータ。
+  - `required`（配列）: 必須のパラメータ名。
 
-## Wywoływanie funkcji za pomocą modeli myślących
+## 思考モデルを使用した関数呼び出し
 
-Modele z serii Gemini 3 i 2.5 korzystają z wewnętrznego procesu [„myślenia”](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=pl), który ulepsza wywoływanie funkcji.
-Zestawy SDK automatycznie obsługują [sygnatury myśli](https://ai.google.dev/gemini-api/docs/interactions/thought-signatures?hl=pl).
+Gemini 3 シリーズと 2.5 シリーズのモデルでは、関数呼び出しを改善する内部の["思考"](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=ja)プロセスが使用されます。
+SDK は[思考シグネチャ](https://ai.google.dev/gemini-api/docs/interactions/thought-signatures?hl=ja)を自動的に処理します。
 
-## Równoległe wywoływanie funkcji
+## 並列関数呼び出し
 
-Wywołuj wiele funkcji jednocześnie, jeśli są od siebie niezależne:
+複数の関数が独立している場合は、一度に複数の関数を呼び出します。
 
 ### Python
 
@@ -556,9 +558,9 @@ for (const step of interaction.steps) {
 }
 ```
 
-## Wywoływanie funkcji kompozycyjnych
+## コンポジション関数呼び出し
 
-Łącz ze sobą wiele wywołań funkcji w przypadku złożonych żądań (np. najpierw pobierz lokalizację, a potem prognozę pogody dla tej lokalizacji).
+複雑なリクエストの場合は、複数の関数呼び出しを連結します（最初にロケーションを取得し、次にそのロケーションの天気を取得するなど）。
 
 ### Python
 
@@ -613,14 +615,14 @@ for step in interaction.steps:
                  print(part.text)
 ```
 
-## Tryby wywoływania funkcji
+## 関数呼び出しモード
 
-Kontroluj sposób, w jaki model korzysta z narzędzi, używając `tool_choice` w `generation_config`:
+`generation_config` の `tool_choice` を使用して、モデルがツールを使用する方法を制御します。
 
-- `auto` (domyślnie): model decyduje, czy wywołać funkcję, czy odpowiedzieć bezpośrednio.
-- `any`: model jest ograniczony do zawsze przewidywania wywołania funkcji.
-- `none`: model nie może wywoływać funkcji.
-- `validated` (wersja testowa): model zapewnia zgodność ze schematem funkcji.
+- `auto`（デフォルト）: 関数を呼び出すか、直接レスポンスを返すかをモデルが決定します。
+- `any`: モデルは常に関数呼び出しを予測するように制約されます。
+- `none`: モデルは関数呼び出しを行うことが禁止されています。
+- `validated`（プレビュー）: モデルは関数スキーマの準拠を保証します。
 
 ### Python
 
@@ -681,10 +683,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Korzystanie z narzędzi
+## マルチツールを使用する
 
-W tym samym żądaniu możesz włączyć kilka narzędzi, łącząc narzędzia wbudowane z wywoływaniem funkcji. Modele Gemini 3 mogą łączyć wbudowane narzędzia z wywoływaniem funkcji w interakcjach. Przekazywanie `previous_interaction_id`
-automatycznie rozpowszechnia wbudowany kontekst narzędzia.
+複数のツールを有効にして、組み込みツールと関数呼び出しを同じリクエストで組み合わせることができます。Gemini 3 モデルでは、Interactions で組み込みツールと関数呼び出しをすぐに組み合わせることができます。`previous_interaction_id` を渡すと、組み込みツールのコンテキストが自動的に循環します。
 
 ### Python
 
@@ -792,13 +793,13 @@ for (const step of interaction.steps) {
 }
 ```
 
-## Odpowiedzi funkcji multimodalnych
+## マルチモーダル関数レスポンス
 
-W przypadku modeli z serii Gemini 3 możesz uwzględniać treści multimodalne w częściach odpowiedzi funkcji, które wysyłasz do modelu. Model może przetworzyć te treści multimodalne w kolejnej turze, aby wygenerować bardziej szczegółową odpowiedź.
+Gemini 3 シリーズのモデルでは、モデルに送信する関数レスポンス部分にマルチモーダル コンテンツを含めることができます。モデルは、次のターンでこのマルチモーダル コンテンツを処理して、より多くの情報に基づいたレスポンスを生成できます。
 
-Aby uwzględnić dane multimodalne w odpowiedzi funkcji, dodaj je jako co najmniej 1 blok treści w polu `result` kroku `function_result`. Każdy blok treści musi określać swój `type` (np. `"text"`, `"image"`).
+関数レスポンスにマルチモーダル データを含めるには、`result` フィールドの `function_result` ステップに 1 つ以上のコンテンツ ブロックとして含めます。各コンテンツ ブロックで `type`（`"text"`、`"image"` など）を指定する必要があります。
 
-Ten przykład pokazuje, jak w ramach interakcji wysłać do modelu odpowiedź funkcji zawierającą dane obrazu:
+次の例は、画像データを含む関数レスポンスをインタラクションでモデルに送り返す方法を示しています。
 
 ### Python
 
@@ -899,29 +900,31 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Wywoływanie funkcji z uporządkowanymi danymi wyjściowymi
+## 構造化出力を使用した関数呼び出し
 
-W przypadku modeli z serii Gemini 3 połącz wywoływanie funkcji z [danymi wyjściowymi w formacie strukturalnym](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=pl), aby uzyskiwać odpowiedzi w jednolitym formacie.
+Gemini 3 シリーズのモデルでは、関数呼び出しと
+[構造化出力](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=ja)を組み合わせて、
+一貫した形式のレスポンスを実現します。
 
-## Zdalny MCP (Model Context Protocol)
+## リモート MCP（Model Context Protocol）
 
-Interfejs API interakcji obsługuje łączenie się ze zdalnymi serwerami MCP, aby zapewnić modelowi dostęp do narzędzi i usług zewnętrznych. Serwer `name` i `url` podajesz w konfiguracji narzędzi.
+Interactions API は、リモート MCP サーバーに接続して、モデルが外部ツールやサービスにアクセスできるようにします。ツール構成でサーバーの `name` と `url` を指定します。
 
-Podczas korzystania z usługi Remote MCP pamiętaj o tych ograniczeniach:
+リモート MCP を使用する場合は、次の制約に注意してください。
 
-- **Typy serwerów:** zdalny MCP działa tylko z serwerami HTTP obsługującymi strumieniowanie. Serwery SSE (Server-Sent Events) nie są obsługiwane.
-- **Obsługa modeli:** zdalny MCP nie działa obecnie z modelami Gemini 3. Obsługa Gemini 3 będzie dostępna wkrótce.
-- **Nazewnictwo:** nazwy serwerów MCP nie powinny zawierać znaku `-`. Użyj w zamian nazw serwerów `snake_case`.
+- **サーバータイプ**: リモート MCP は、ストリーミング可能な HTTP サーバーでのみ動作します。SSE（Server-Sent Events）サーバーは対象外です。
+- **モデルのサポート**: 現在、リモート MCP は Gemini 3 モデルでは動作しません。Gemini 3 のサポートは近日提供予定です。
+- **命名**: MCP サーバー名に `-` 文字を含めることはできません。代わりに `snake_case` サーバー名を使用してください。
 
-| Pole | Typ | Wymagane | Opis |
+| フィールド | 型 | 必須 / 省略可 | 説明 |
 | --- | --- | --- | --- |
-| `type` | `string` | Tak | Musi to być `"mcp_server"`. |
-| `name` | `string` | Nie | Wyświetlana nazwa serwera MCP. |
-| `url` | `string` | Nie | Pełny adres URL punktu końcowego serwera MCP. |
-| `headers` | `object` | Nie | Pary klucz-wartość wysyłane jako nagłówki HTTP z każdym żądaniem do serwera (np. tokeny uwierzytelniania). |
-| `allowed_tools` | `array` | Nie | Ogranicz narzędzia, z których agent może korzystać na serwerze. |
+| `type` | `string` | はい | `"mcp_server"` を指定します。 |
+| `name` | `string` | いいえ | MCP サーバーの表示名。 |
+| `url` | `string` | いいえ | MCP サーバー エンドポイントの完全な URL。 |
+| `headers` | `object` | いいえ | サーバーへのリクエストごとに HTTP ヘッダーとして送信される Key-Value ペア（認証トークンなど）。 |
+| `allowed_tools` | `array` | いいえ | エージェントが呼び出すことができるサーバーのツールを制限します。 |
 
-### Przykład
+### 例
 
 ### Python
 
@@ -986,9 +989,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Strumieniowanie wywołań narzędzi
+## ツールの呼び出しをストリーミングする
 
-Gdy korzystasz z narzędzi ze strumieniowaniem, model generuje wywołania funkcji jako sekwencję zdarzeń `step.delta` w strumieniu. Argumenty narzędzia można przesyłać strumieniowo jako argumenty częściowe za pomocą funkcji `arguments`. Przed wykonaniem wywołań narzędzi musisz zagregować te zmiany, aby odtworzyć pełne wywołania.
+ストリーミングでツールを使用する場合、モデルはストリーム上の `step.delta` イベントのシーケンスとして関数呼び出しを生成します。ツールの引数は、`arguments` を使用して部分引数としてストリーミングできます。これらのデルタを集計して、完全なツールの呼び出しを再構築してから実行する必要があります。
 
 ### Python
 
@@ -1154,29 +1157,29 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
 }'
 ```
 
-## Sprawdzone metody
+## ベスト プラクティス
 
-- **Opisy funkcji i parametrów:** podawaj jasne i konkretne informacje.
-- **Nazewnictwo:** używaj opisowych nazw bez spacji i znaków specjalnych.
-- **Silne typowanie:** używaj konkretnych typów (liczba całkowita, ciąg znaków, wyliczenie).
-- **Wybór narzędzi:** utrzymuj aktywny zestaw na poziomie maksymalnie 10–20 narzędzi.
-- **Inżynieria promptów:** podaj kontekst i instrukcje.
-- **Weryfikacja:** weryfikuj wywołania funkcji przed ich wykonaniem.
-- **Obsługa błędów:** wdróż niezawodną obsługę błędów.
-- **Bezpieczeństwo:** używaj odpowiedniego uwierzytelniania w przypadku zewnętrznych interfejsów API.
+- **関数とパラメータの説明:** 明確かつ具体的に説明する。
+- **命名:** スペースや特殊文字を使用しない説明的な名前を使用する。
+- **厳密な型付け:** 特定の型（整数、文字列、enum）を使用する。
+- **ツールの選択:** アクティブなツールセットは最大 10 ～ 20 個にする。
+- **プロンプト エンジニアリング:** コンテキストと手順を提供する。
+- **検証:** 関数呼び出しを実行する前に検証する。
+- **エラー処理:** 堅牢なエラー処理を実装する。
+- **セキュリティ:** 外部 API に適切な認証を使用する。
 
-## Uwagi i ograniczenia
+## 注意と制限事項
 
-- Obsługiwany jest tylko [podzbiór schematu OpenAPI](https://ai.google.dev/api/rest/v1beta/cachedContents?hl=pl#FunctionDeclaration).
-- W przypadku trybu `any` interfejs API może odrzucać bardzo duże lub głęboko zagnieżdżone schematy.
-- Obsługiwane typy parametrów w Pythonie są ograniczone.
+- OpenAPI スキーマの[サブセット](https://ai.google.dev/api/rest/v1beta/cachedContents?hl=ja#FunctionDeclaration)のみがサポートされています。
+- `any` モードの場合、API は非常に大きいスキーマやネストが深いスキーマを拒否することがあります。
+- Python でサポートされているパラメータの型は限られています。
 
-Prześlij opinię
+フィードバックを送信
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Ostatnia aktualizacja: 2026-05-19 UTC.
+最終更新日 2026-05-28 UTC。
 
-Chcesz przekazać coś jeszcze?
+ご意見をお聞かせください
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-05-19 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-05-28 UTC。"],[],[]]

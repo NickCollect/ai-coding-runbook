@@ -1,38 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=ko
-fetched_at: 2026-05-25T05:20:51.625865+00:00
-title: "Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=pt-BR
+fetched_at: 2026-06-01T06:04:50.372630+00:00
+title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-의견 보내기
+Envie comentários
 
-# Gemini가 생각 중
+# Raciocínio do Gemini
 
-[Gemini 3 및 2.5 시리즈 모델](https://ai.google.dev/gemini-api/docs/models?hl=ko)은 추론 및 다단계 계획 수립 능력을 크게 향상시키는 '사고 과정'을 사용하므로 코딩, 고급 수학, 데이터 분석과 같은 복잡한 작업에 매우 효과적입니다.
+Os modelos das séries [Gemini 3 e 2.5](https://ai.google.dev/gemini-api/docs/models?hl=pt-br) usam um
+"processo de raciocínio" que melhora significativamente as habilidades de raciocínio e planejamento em várias etapas, tornando-os altamente eficazes para tarefas complexas, como
+programação, matemática avançada e análise de dados.
 
-사고 모델을 사용하면 Gemini가 대답하기 전에 내부적으로 추론합니다. Interactions API는 `thought` 단계, 즉 `steps` 배열의 함수 호출, 사용자 입력 또는 모델 출력과 함께 시간순으로 표시되는 전용 단계를 통해 이 추론을 표시합니다.
+Quando você usa um modelo de raciocínio, o Gemini raciocina internamente antes de responder. A API Interactions mostra esse raciocínio por meio de etapas `thought`, etapas dedicadas que aparecem cronologicamente ao lado de chamadas de função, entradas do usuário ou saídas do modelo na matriz `steps`.
 
-모든 사고 단계에는 다음 두 필드가 포함됩니다.
+Cada etapa de raciocínio contém dois campos:
 
-| 필드 | 필수 | 설명 |
+| Campo | Obrigatório | Descrição |
 | --- | --- | --- |
-| `signature` | ✅ 예 | 모델의 내부 추론 상태의 암호화된 표현입니다. 모델이 최소한의 추론을 수행하는 경우에도 항상 표시됩니다. |
-| `summary` | ❌ 아니요 | 추론을 요약하는 콘텐츠 (텍스트 및/또는 이미지) 배열입니다. [`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=ko) 구성, 모델이 충분한 추론을 수행했는지, 콘텐츠 유형에 따라 비어 있을 수 있습니다 (예: 이미지 잠재 변수에는 텍스트 요약이 없을 수 있음). |
+| `signature` | ✅ Sim | Uma representação criptografada do estado de raciocínio interno do modelo. Sempre presente, mesmo quando o modelo realiza um raciocínio mínimo. |
+| `summary` | ❌ Não | Uma matriz de conteúdo (texto e/ou imagens) que resume o raciocínio. Pode estar vazia dependendo da configuração [`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=pt-br), se o modelo realizou raciocínio suficiente ou do tipo de conteúdo (por exemplo, latentes de imagem podem não ter resumos de texto). |
 
-## 생각과의 상호작용
+## Interações com raciocínio
 
-사고 모델과의 상호작용을 시작하는 것은 다른 상호작용 요청과 유사합니다. `model` 필드에 [사고 지원 모델](#thinking-levels) 중 하나를 지정합니다.
+Iniciar uma interação com um modelo de raciocínio é semelhante a qualquer outra solicitação de interação. Especifique um dos [modelos com suporte de raciocínio](#thinking-levels) no campo `model`:
 
 ### Python
 
@@ -48,7 +50,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -75,10 +77,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 생각 요약
+## Resumos de raciocínio
 
-사고 요약은 모델의 내부 추론 프로세스에 대한 인사이트를 제공합니다.
-기본적으로 최종 출력만 반환됩니다. `thinking_summaries`로 생각 요약을 사용 설정할 수 있습니다.
+Os resumos de raciocínio fornecem insights sobre o processo de raciocínio interno do modelo.
+Por padrão, apenas a saída final é retornada. É possível ativar resumos de raciocínio com `thinking_summaries`:
 
 ### Python
 
@@ -111,7 +113,7 @@ for step in interaction.steps:
                 print()
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -161,23 +163,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-다음과 같은 경우 생각 블록에는 **요약이 없는 서명만** 포함될 수 있습니다.
+Um bloco de raciocínio pode conter **apenas uma assinatura sem resumo** nestes casos:
 
-- 모델이 요약을 생성할 만큼 충분히 추론하지 않은 간단한 요청
-- `thinking_summaries: "none"`: 요약이 명시적으로 사용 중지된 경우
-- 이미지와 같은 특정 생각 콘텐츠 유형에는 텍스트 요약이 없을 수 있습니다.
+- Solicitações simples, em que o modelo não raciocinou o suficiente para gerar um resumo
+- `thinking_summaries: "none"`, em que os resumos são explicitamente desativados
+- Alguns tipos de conteúdo de raciocínio, como imagens, podem não ter resumos de texto
 
-`summary`이 비어 있거나 없는 경우 코드는 항상 사고 블록을 처리해야 합니다.
+O código sempre precisa processar blocos de raciocínio em que `summary` está vazio ou ausente.
 
-## 사고를 포함한 스트리밍
+## Streaming com raciocínio
 
-생성 중에 스트리밍을 사용하여 증분 생각 요약을 수신합니다.
-사고 블록은 두 가지 고유한 델타 유형과 함께 서버 전송 이벤트 (SSE)를 사용하여 전송됩니다.
+Use o streaming para receber resumos de raciocínio incrementais durante a geração.
+Os blocos de raciocínio são entregues usando eventos enviados pelo servidor (SSE, na sigla em inglês) com dois tipos de delta distintos:
 
-| 델타 유형 | 포함 | 전송 시점 |
+| Tipo de delta | Contém | Quando o envio é feito |
 | --- | --- | --- |
-| `thought_summary` | 텍스트 또는 이미지 요약 콘텐츠 | 증분 요약이 포함된 하나 이상의 델타 |
-| `thought_signature` | 암호화 서명 | `step.stop` 전의 마지막 델타 |
+| `thought_summary` | Conteúdo de resumo de texto ou imagem | Um ou mais deltas com resumo incremental |
+| `thought_signature` | A assinatura criptográfica | o último delta antes de `step.stop` |
 
 ### Python
 
@@ -221,7 +223,7 @@ for event in stream:
             answer += event.delta.text
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -280,7 +282,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-스트리밍 응답은 서버 전송 이벤트 (SSE)를 사용하며 다음과 같이 단계와 이벤트로 구성됩니다.
+A resposta de streaming usa eventos enviados pelo servidor (SSE) e é composta de etapas e eventos, por exemplo:
 
 ```
 event: interaction.created
@@ -311,18 +313,18 @@ event: done
 data: [DONE]
 ```
 
-## 사고 제어
+## Controlar o raciocínio
 
-Gemini 모델은 기본적으로 동적 사고를 수행하여 요청의 복잡성에 따라 추론 노력의 양을 자동으로 조정합니다. `thinking_level` 매개변수를 사용하여 이 동작을 제어할 수 있습니다.
+Os modelos do Gemini se envolvem no raciocínio dinâmico por padrão, ajustando automaticamente a quantidade de esforço de raciocínio com base na complexidade da solicitação. É possível controlar esse comportamento usando o parâmetro `thinking_level`.
 
-| 모델 | 기본 사고방식 | 지원되는 수준 |
+| Modelo | Raciocínio padrão | Níveis aceitos |
 | --- | --- | --- |
-| gemini-3.1-pro-preview | 사용 설정 (높음) | 낮음, 중간, 높음 |
-| gemini-3-flash-preview | 사용 설정 (높음) | 최소, 낮음, 중간, 높음 |
-| gemini-3-pro-preview | 켜짐 (높음) | 낮음, 높음 |
-| gemini-2.5-pro | 사용 | 낮음, 중간, 높음 |
-| gemini-2.5-flash | 사용 | 낮음, 중간, 높음 |
-| gemini-2.5-flash-lite | 사용 안함 | 낮음, 중간, 높음 |
+| gemini-3.1-pro-preview | Ativado (alto) | baixo, médio, alto |
+| gemini-3-flash-preview | Ativado (alto) | mínimo, baixo, médio, alto |
+| gemini-3-pro-preview | Ativado (alto) | baixo, alto |
+| gemini-2.5-pro | Ativado | baixo, médio, alto |
+| gemini-2.5-flash | Ativado | baixo, médio, alto |
+| gemini-2.5-flash-lite | Desativado | baixo, médio, alto |
 
 ### Python
 
@@ -341,7 +343,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -374,27 +376,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 생각 서명
+## Assinaturas de raciocínio
 
-사고 서명은 모델의 내부 추론을 암호화한 표현입니다. 멀티턴 상호작용 전반에서 추론 연속성을 유지해야 합니다.
+As assinaturas de raciocínio são representações criptografadas do raciocínio interno do modelo. Elas são necessárias para manter a continuidade do raciocínio em interações de várias etapas.
 
-Interactions API를 사용하면 `generateContent` API보다 훨씬 간단하게 생각 서명을 처리할 수 있습니다.
+A API Interactions simplifica muito o processamento de assinaturas de raciocínio em comparação com a API `generateContent`.
 
-### 상태 저장 모드 (권장)
+### Modo com estado (recomendado)
 
-기본적으로 상태 저장 모드에서 Interactions API를 사용하면 (`store: true`를 설정하고 후속 턴에서 `previous_interaction_id`를 전달) 서버에서 모든 생각 블록과 서명을 포함한 대화 상태를 자동으로 관리합니다. 이 모드에서는 서명과 관련하여 아무것도 할 필요가 없습니다. 서버 측에서 완전히 처리됩니다.
+Por padrão, quando você usa a API Interactions no modo com estado (definindo `store: true` e transmitindo o `previous_interaction_id` em turnos subsequentes), o servidor gerencia automaticamente o estado da conversa, incluindo todos os blocos e assinaturas de raciocínio. Nesse modo, você não precisa fazer nada em relação às assinaturas. Elas são processadas totalmente no lado do servidor.
 
-### 스테이트리스 모드
+### Modo sem estado
 
-대화 상태를 직접 관리하고 (스테이트리스 모드) 각 요청에서 입력 및 출력의 전체 기록을 전달하는 경우:
+Se você estiver gerenciando o estado da conversa (modo sem estado) e transmitindo o histórico completo de entradas e saídas em cada solicitação:
 
-- 항상 모델에서 수신한 그대로 모든 `thought` 블록을 다시 전송**해야 합니다**(MUST).
-- 모델이 추론을 계속하는 데 필요한 서명이 포함되어 있으므로 기록에서 사고 블록을 삭제하거나 수정해서는 **안 됩니다**.
-- 세션 내에서 모델을 전환할 때도 이전 모델의 사고 블록을 다시 전송해야 합니다. 백엔드에서 호환성을 관리합니다.
+- Você **PRECISA** sempre reenviar todos os blocos `thought` exatamente como foram recebidos do modelo.
+- Você **NÃO** deve remover ou modificar blocos de raciocínio do histórico, porque eles contêm as assinaturas necessárias para que o modelo continue o raciocínio.
+- Ao mudar de modelo em uma sessão, ainda é necessário reenviar os blocos de raciocínio do modelo anterior. O back-end gerencia a compatibilidade.
 
-## 가격 책정
+## Preços
 
-사고가 사용 설정된 경우 대답 가격은 출력 토큰과 사고 토큰의 합계입니다. 생성된 사고 토큰의 총수는 `total_thought_tokens` 필드에서 확인할 수 있습니다.
+Quando o raciocínio está ativado, o preço da resposta é a soma dos tokens de saída e de raciocínio. É possível acessar o número total de tokens de raciocínio gerados no campo `total_thought_tokens`.
 
 ### Python
 
@@ -403,39 +405,41 @@ print("Thoughts tokens:", interaction.usage.total_thought_tokens)
 print("Output tokens:", interaction.usage.total_output_tokens)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 console.log(`Thoughts tokens: ${interaction.usage.total_thought_tokens}`);
 console.log(`Output tokens: ${interaction.usage.total_output_tokens}`);
 ```
 
-사고 모델은 최종 대답의 품질을 개선하기 위해 전체 사고를 생성한 다음 [요약](#summaries)을 출력하여 사고 과정에 대한 통계를 제공합니다. 가격은 API에서 요약만 출력되더라도 모델이 생성해야 하는 전체 생각 토큰을 기준으로 합니다.
+Os modelos de raciocínio geram raciocínios completos para melhorar a qualidade da resposta final
+e, em seguida, resumos de saída para fornecer insights sobre o
+processo de raciocínio. O preço é baseado nos tokens de raciocínio completos que o modelo precisa gerar, embora apenas o resumo seja gerado pela API.
 
-토큰에 관한 자세한 내용은 [토큰 수 계산](https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=ko) 가이드를 참고하세요.
+Saiba mais sobre tokens no guia [Contagem de tokens](https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=pt-br).
 
-## 권장사항
+## Práticas recomendadas
 
-다음 가이드라인에 따라 사고 모델을 효율적으로 사용하세요.
+Use modelos de raciocínio de maneira eficiente seguindo estas diretrizes.
 
-- **추론 검토**: 생각 요약을 분석하여 실패를 이해하고 프롬프트를 개선합니다.
-- **사고 예산 관리**: 토큰을 절약하기 위해 긴 출력의 경우 모델이 생각을 덜 하도록 프롬프트를 작성합니다.
-- **간단한 작업**: 사실 검색 또는 분류에 최소한의 사고를 사용합니다 (예: 'DeepMind는 어디에서 설립되었어?').
-- **적당한 작업**: 개념 비교 또는 창의적인 추론 (예: 전기 자동차와 하이브리드 자동차 비교)에는 기본 사고를 사용합니다.
-- **복잡한 작업**: 고급 코딩, 수학 또는 다단계 계획 (예: AIME 수학 문제 풀기)을 위해 최대한의 사고력을 사용합니다.
+- **Analisar o raciocínio**: analise os resumos de raciocínio para entender falhas e melhorar os comandos.
+- **Controlar o orçamento de raciocínio**: peça ao modelo para pensar menos em saídas longas para economizar tokens.
+- **Tarefas simples**: use o raciocínio mínimo para recuperação de fatos ou classificação (por exemplo, "Onde a DeepMind foi fundada?").
+- **Tarefas moderadas**: use o raciocínio padrão para comparar conceitos ou raciocínio criativo (por exemplo, compare carros elétricos e híbridos).
+- **Tarefas complexas**: use o raciocínio máximo para programação avançada, matemática ou planejamento em várias etapas (por exemplo, resolva problemas de matemática AIME).
 
-## 다음 단계
+## A seguir
 
-- [텍스트 생성](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=ko): 기본 텍스트 응답
-- [함수 호출](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=ko): 도구에 연결
-- [Gemini 3 가이드](https://ai.google.dev/gemini-api/docs/interactions/gemini-3?hl=ko): 모델별 기능
+- [Geração de texto](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=pt-br): respostas de texto básicas
+- [Chamada de função](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=pt-br): conectar-se a ferramentas
+- [Guia do Gemini 3](https://ai.google.dev/gemini-api/docs/interactions/gemini-3?hl=pt-br): recursos específicos do modelo
 
-의견 보내기
+Envie comentários
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-최종 업데이트: 2026-05-19(UTC)
+Última atualização 2026-05-28 UTC.
 
-의견을 전달하고 싶나요?
+Quer enviar seu feedback?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-05-19(UTC)"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-05-28 UTC."],[],[]]

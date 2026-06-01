@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-pro-preview-12-2025?hl=ar
-fetched_at: 2026-05-25T05:22:59.978536+00:00
+fetched_at: 2026-06-01T06:02:19.279323+00:00
 title: "\u0645\u0639\u0627\u064a\u0646\u0629 Deep Research \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

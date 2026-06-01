@@ -1,150 +1,151 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/troubleshooting?hl=pl
-fetched_at: 2026-05-25T05:19:05.162183+00:00
-title: "Przewodnik rozwi\u0105zywania problem\u00f3w \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/troubleshooting?hl=es-419
+fetched_at: 2026-06-01T06:08:56.576780+00:00
+title: "Gu\u00eda de soluci\u00f3n de problemas \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-Prześlij opinię
+Enviar comentarios
 
-# Przewodnik rozwiązywania problemów
+# Guía de solución de problemas
 
-Ten przewodnik pomoże Ci zdiagnozować i rozwiązać typowe problemy, które mogą wystąpić podczas wywoływania interfejsu Gemini API. Problemy mogą występować zarówno w usłudze backendu Gemini API, jak i w pakietach SDK klienta. Nasze pakiety SDK klienta są udostępniane na licencji open source w tych repozytoriach:
+Usa esta guía para diagnosticar y resolver problemas comunes que surgen cuando llamas a la API de Gemini. Es posible que encuentres problemas en el servicio de backend de la API de Gemini o en los SDKs de cliente. Nuestros SDKs para clientes son de código abierto y se encuentran en los siguientes repositorios:
 
 - [python-genai](https://github.com/googleapis/python-genai)
 - [js-genai](https://github.com/googleapis/js-genai)
 - [go-genai](https://github.com/googleapis/go-genai)
 
-Jeśli napotkasz problemy z kluczem interfejsu API, sprawdź, czy został on prawidłowo skonfigurowany zgodnie z [przewodnikiem konfiguracji klucza interfejsu API](https://ai.google.dev/gemini-api/docs/api-key?hl=pl).
+Si tienes problemas con la clave de API, verifica que la hayas configurado correctamente según la [guía de configuración de la clave de API](https://ai.google.dev/gemini-api/docs/api-key?hl=es-419).
 
-## Kody błędów usługi backendu Gemini API
+## Códigos de error del servicio de backend de la API de Gemini
 
-W tabeli poniżej znajdziesz listę typowych kodów błędów backendu, które możesz napotkać, wraz z wyjaśnieniami ich przyczyn i sposobami rozwiązywania problemów:
+En la siguiente tabla, se enumeran los códigos de error de backend comunes que puedes encontrar, junto con explicaciones de sus causas y pasos para solucionar problemas:
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Kod HTTP** | **Stan** | **Opis** | **Przykład** | **Rozwiązanie** |
-| 400 | INVALID\_ARGUMENT | Treść żądania jest błędnie sformatowana. | W żądaniu jest błąd w pisowni lub brakuje wymaganego pola. | Format żądania, przykłady i obsługiwane wersje znajdziesz w [dokumentacji interfejsu API](https://ai.google.dev/api?hl=pl). Używanie funkcji z nowszej wersji interfejsu API ze starszym punktem końcowym może powodować błędy. |
-| 400 | FAILED\_PRECONDITION | Bezpłatny poziom Gemini API nie jest dostępny w Twoim kraju. Włącz płatności w projekcie w Google AI Studio. | Wysyłasz żądanie w regionie, w którym poziom bezpłatny nie jest obsługiwany, a w Google AI Studio nie masz włączonych rozliczeń w projekcie. | Aby korzystać z Gemini API, musisz skonfigurować abonament w [Google AI Studio](https://aistudio.google.com/app/apikey?hl=pl). |
-| 403 | PERMISSION\_DENIED | Twój klucz API nie ma wymaganych uprawnień. | Używasz nieprawidłowego klucza interfejsu API. Próbujesz użyć dostosowanego modelu bez [prawidłowego uwierzytelniania](https://ai.google.dev/gemini-api/docs/model-tuning?hl=pl). | Sprawdź, czy klucz interfejsu API jest ustawiony i ma odpowiedni dostęp. Aby korzystać z dostosowanych modeli, musisz przejść odpowiednią weryfikację. |
-| 404 | NOT\_FOUND | Nie znaleziono żądanego zasobu. | Nie znaleziono pliku obrazu, audio ani wideo, do którego odwołuje się Twoja prośba. | Sprawdź, czy wszystkie [parametry w żądaniu są prawidłowe](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=pl#check-api) w przypadku Twojej wersji interfejsu API. |
-| 429 | RESOURCE\_EXHAUSTED | Przekroczono limit częstotliwości. | Wysyłasz zbyt wiele żądań na minutę za pomocą bezpłatnego poziomu Gemini API. | Sprawdź, czy nie przekraczasz [limitu żądań](https://ai.google.dev/gemini-api/docs/rate-limits?hl=pl) modelu. W razie potrzeby [poproś o zwiększenie limitu](https://ai.google.dev/gemini-api/docs/rate-limits?hl=pl#request-rate-limit-increase). |
-| 500 | INTERNAL | Po stronie Google wystąpił nieoczekiwany błąd. | Kontekst wejściowy jest za długi. | Sprawdź [stronę stanu Gemini API](https://aistudio.google.com/status?hl=pl), aby dowiedzieć się o bieżących incydentach. Zmniejsz kontekst wejściowy lub tymczasowo przełącz się na inny model (np. z Gemini 2.5 Pro na Gemini 2.5 Flash) i sprawdź, czy to pomoże. Możesz też poczekać chwilę i ponowić prośbę. Jeśli problem będzie się powtarzać, zgłoś go, klikając przycisk **Prześlij opinię** w Google AI Studio. |
-| 503 | PRODUKT NIEDOSTĘPNY | Usługa może być tymczasowo przeciążona lub niedostępna. | Usługa tymczasowo nie ma wystarczającej mocy obliczeniowej. | Sprawdź [stronę stanu Gemini API](https://aistudio.google.com/status?hl=pl), aby dowiedzieć się o bieżących incydentach. Tymczasowo przełącz się na inny model (np. z Gemini 2.5 Pro na Gemini 2.5 Flash) i sprawdź, czy działa. Możesz też poczekać chwilę i ponowić prośbę. Jeśli problem będzie się powtarzać, zgłoś go, klikając przycisk **Prześlij opinię** w Google AI Studio. |
-| 504 | DEADLINE\_EXCEEDED | Usługa nie może zakończyć przetwarzania w terminie. | Prompt (lub kontekst) jest zbyt duży, aby można go było przetworzyć na czas. | Aby uniknąć tego błędu, ustaw w żądaniu klienta dłuższy „limit czasu”. |
+| **Código HTTP** | **Estado** | **Descripción** | **Ejemplo** | **Solución** |
+| 400 | INVALID\_ARGUMENT | El cuerpo de la solicitud tiene un formato incorrecto. | Hay un error de escritura o falta un campo obligatorio en tu solicitud. | Consulta la [referencia de la API](https://ai.google.dev/api?hl=es-419) para conocer el formato de la solicitud, los ejemplos y las versiones compatibles. Usar funciones de una versión de API más reciente con un extremo anterior puede causar errores. |
+| 400 | FAILED\_PRECONDITION | El nivel gratuito de la API de Gemini no está disponible en tu país. Habilita la facturación en tu proyecto de Google AI Studio. | Estás realizando una solicitud en una región en la que no se admite el nivel gratuito y no habilitaste la facturación en tu proyecto en Google AI Studio. | Para usar la API de Gemini, deberás configurar un plan pagado con [Google AI Studio](https://aistudio.google.com/app/apikey?hl=es-419). |
+| 403 | PERMISSION\_DENIED | Tu clave de API no tiene los permisos necesarios. | Estás usando la clave de API incorrecta o intentas usar un modelo ajustado sin pasar por la [autenticación adecuada](https://ai.google.dev/gemini-api/docs/model-tuning?hl=es-419). | Verifica que tu clave de API esté configurada y tenga el acceso correcto. Además, asegúrate de realizar la autenticación adecuada para usar los modelos ajustados. |
+| 404 | NOT\_FOUND | No se encontró el recurso solicitado. | No se encontró un archivo de imagen, audio o video al que se hace referencia en tu solicitud. | Verifica si todos los [parámetros de tu solicitud son válidos](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=es-419#check-api) para tu versión de la API. |
+| 429 | RESOURCE\_EXHAUSTED | Superaste el límite de frecuencia. | Estás enviando demasiadas solicitudes por minuto con el nivel gratuito de la API de Gemini. | Verifica que estés dentro del [límite de frecuencia](https://ai.google.dev/gemini-api/docs/rate-limits?hl=es-419) del modelo. [Solicita un aumento de la cuota](https://ai.google.dev/gemini-api/docs/rate-limits?hl=es-419#request-rate-limit-increase) si es necesario. |
+| 499 | CANCELADO | La operación se canceló (por lo general, la cancela el emisor). | El cliente cerró la conexión antes de que la API pudiera terminar de responder. | Verifica si tu cliente o infraestructura de red están cerrando la conexión de forma prematura (p.ej., debido a un tiempo de espera del cliente). |
+| 500 | INTERNAL | Se produjo un error inesperado en Google. | El contexto de entrada es demasiado largo. | Consulta la [página de estado de la API de Gemini](https://aistudio.google.com/status?hl=es-419) para ver si hay incidentes en curso. Reduce el contexto de entrada o cambia temporalmente a otro modelo (p.ej., de Gemini 2.5 Pro a Gemini 2.5 Flash) y comprueba si funciona. O bien espera un momento y vuelve a intentarlo. Si el problema persiste después de volver a intentarlo, infórmalo con el botón **Enviar comentarios** en Google AI Studio. |
+| 503 | NO DISPONIBLE | Es posible que el servicio esté inactivo o temporalmente sobrecargado. | El servicio se está quedando sin capacidad temporalmente. | Consulta la [página de estado de la API de Gemini](https://aistudio.google.com/status?hl=es-419) para ver si hay incidentes en curso. Cambia temporalmente a otro modelo (p.ej., de Gemini 2.5 Pro a Gemini 2.5 Flash) y observa si funciona. O bien espera un momento y vuelve a intentarlo. Si el problema persiste después de volver a intentarlo, infórmalo con el botón **Enviar comentarios** en Google AI Studio. |
+| 504 | DEADLINE\_EXCEEDED | El servicio no puede terminar el procesamiento dentro de la fecha límite. | Tu instrucción (o contexto) es demasiado grande para procesarse a tiempo. | Establece un "tiempo de espera" más largo en la solicitud del cliente para evitar este error. |
 
-## Sprawdzanie wywołań interfejsu API pod kątem błędów parametrów modelu
+## Verifica si hay errores en los parámetros del modelo en tus llamadas a la API
 
-Sprawdź, czy parametry modelu mieszczą się w tych zakresach wartości:
+Verifica que los parámetros del modelo se encuentren dentro de los siguientes valores:
 
 |  |  |
 | --- | --- |
-| **Parametr modelu** | **Wartości (zakres)** |
-| Liczba kandydatów | 1–8 (liczba całkowita) |
-| Temperatura | 0,0–1,0 |
-| Maksymalna liczba tokenów wyjściowych | Na [stronie modeli](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl) możesz sprawdzić maksymalną liczbę tokenów dla używanego modelu. |
-| TopP | 0,0–1,0 |
+| **Parámetro del modelo** | **Valores (rango)** |
+| Recuento de candidatos | 1 a 8 (número entero) |
+| Temperatura | 0.0-1.0 |
+| Cantidad máxima de tokens de salida | Usa la [página de modelos](https://ai.google.dev/gemini-api/docs/models/gemini?hl=es-419) para determinar la cantidad máxima de tokens del modelo que usas. |
+| TopP | 0.0-1.0 |
 
-Oprócz sprawdzania wartości parametrów upewnij się, że używasz prawidłowej [wersji interfejsu API](https://ai.google.dev/gemini-api/docs/api-versions?hl=pl) (np. `/v1` lub `/v1beta`) i modelu, który obsługuje potrzebne Ci funkcje. Jeśli na przykład funkcja jest w wersji beta, będzie dostępna tylko w wersji interfejsu API `/v1beta`.
+Además de verificar los valores de los parámetros, asegúrate de usar la [versión de la API](https://ai.google.dev/gemini-api/docs/api-versions?hl=es-419) correcta (p.ej., `/v1` o `/v1beta`) y el modelo que admite las funciones que necesitas. Por ejemplo, si una función está en versión beta, solo estará disponible en la versión de la API de `/v1beta`.
 
-## Sprawdź, czy masz odpowiedni model
+## Comprueba si tienes el modelo correcto
 
-Sprawdź, czy używasz obsługiwanego modelu wymienionego na naszej [stronie z modelami](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl).
+Verifica que estés usando un modelo compatible que se encuentre en nuestra [página de modelos](https://ai.google.dev/gemini-api/docs/models/gemini?hl=es-419).
 
-## Większe opóźnienie lub wykorzystanie tokenów w przypadku modeli 2.5
+## Mayor latencia o uso de tokens con los modelos 2.5
 
-Jeśli zauważysz większe opóźnienia lub zużycie tokenów w przypadku modeli 2.5 Flash i Pro, może to być spowodowane tym, że **myślenie jest w nich domyślnie włączone**, aby zwiększyć jakość. Jeśli priorytetem jest szybkość lub chcesz zminimalizować koszty, możesz dostosować lub wyłączyć myślenie.
+Si observas una mayor latencia o uso de tokens con los modelos 2.5 Flash y Pro, esto puede deberse a que vienen con la **función de pensamiento habilitada de forma predeterminada** para mejorar la calidad. Si priorizas la velocidad o necesitas minimizar los costos, puedes ajustar o inhabilitar el pensamiento.
 
-Wskazówki i przykładowy kod znajdziesz na [stronie z informacjami](https://ai.google.dev/gemini-api/docs/thinking?hl=pl#set-budget).
+Consulta la [página de sugerencias](https://ai.google.dev/gemini-api/docs/thinking?hl=es-419#set-budget) para obtener orientación y código de muestra.
 
-## Problemy z bezpieczeństwem
+## Problemas de seguridad
 
-Jeśli zobaczysz komunikat o tym, że prompt został zablokowany z powodu ustawienia bezpieczeństwa w wywołaniu interfejsu API, sprawdź, czy jest on zgodny z filtrami ustawionymi w wywołaniu interfejsu API.
+Si ves que se bloqueó una instrucción debido a un parámetro de configuración de seguridad en la llamada a la API, revisa la instrucción en relación con los filtros que estableciste en la llamada a la API.
 
-Jeśli zobaczysz symbol `BlockedReason.OTHER`, zapytanie lub odpowiedź mogą naruszać [warunki korzystania z usługi](https://ai.google.dev/terms?hl=pl) lub być w inny sposób nieobsługiwane.
+Si ves `BlockedReason.OTHER`, es posible que la búsqueda o la respuesta incumplan las [condiciones del servicio](https://ai.google.dev/terms?hl=es-419) o que no se admitan.
 
-## Problem z odczytywaniem
+## Problema de recitación
 
-Jeśli zobaczysz, że model przestał generować dane wyjściowe z powodu RECITATION, oznacza to, że dane wyjściowe modelu mogą przypominać określone dane. Aby to naprawić, spróbuj jak najbardziej urozmaicić prompt lub kontekst i użyj wyższej temperatury.
+Si ves que el modelo deja de generar resultados debido al motivo de RECITACIÓN, significa que el resultado del modelo puede parecerse a ciertos datos. Para solucionar este problema, intenta que la instrucción o el contexto sean lo más únicos posible y usa una temperatura más alta.
 
-## Problem z powtarzającymi się tokenami
+## Problema de tokens repetitivos
 
-Jeśli widzisz powtarzające się tokeny wyjściowe, wypróbuj te sugestie, aby je ograniczyć lub wyeliminować.
+Si ves tokens de salida repetidos, prueba las siguientes sugerencias para reducirlos o eliminarlos.
 
-| Opis | Przyczyna | Sugerowane obejście |
+| Descripción | Causa | Solución alternativa sugerida |
 | --- | --- | --- |
-| Powtórzone łączniki w tabelach Markdown | Może się to zdarzyć, gdy zawartość tabeli jest długa, ponieważ model próbuje utworzyć wizualnie wyrównaną tabelę Markdown. Wyrównanie w Markdownie nie jest jednak konieczne do prawidłowego renderowania. | Dodaj do prompta instrukcje, aby podać modelowi konkretne wytyczne dotyczące generowania tabel w formacie Markdown. Podaj przykłady zgodne z tymi wytycznymi. Możesz też spróbować dostosować temperaturę. W przypadku generowania kodu lub bardzo uporządkowanych danych wyjściowych, takich jak tabele w formacie Markdown, lepiej sprawdzają się wysokie wartości parametru temperatura (≥ 0,8).  Oto przykładowy zestaw wytycznych, które możesz dodać do prompta, aby zapobiec temu problemowi:     ```           # Markdown Table Format                      * Separator line: Markdown tables must include a separator line below             the header row. The separator line must use only 3 hyphens per             column, for example: |---|---|---|. Using more hypens like             ----, -----, ------ can result in errors. Always             use |:---|, |---:|, or |---| in these separator strings.              For example:              | Date | Description | Attendees |             |---|---|---|             | 2024-10-26 | Annual Conference | 500 |             | 2025-01-15 | Q1 Planning Session | 25 |            * Alignment: Do not align columns. Always use |---|.             For three columns, use |---|---|---| as the separator line.             For four columns use |---|---|---|---| and so on.            * Conciseness: Keep cell content brief and to the point.            * Never pad column headers or other cells with lots of spaces to             match with width of other content. Only a single space on each side             is needed. For example, always do "| column name |" instead of             "| column name                |". Extra spaces are wasteful.             A markdown renderer will automatically take care displaying             the content in a visually appealing form. ``` |
-| Powtarzające się tokeny w tabelach Markdown | Podobnie jak w przypadku powtarzających się łączników, dzieje się tak, gdy model próbuje wizualnie wyrównać zawartość tabeli. Wyrównanie w Markdown nie jest wymagane do prawidłowego renderowania. | - Spróbuj dodać do promptu systemowego instrukcje takie jak te:      ```               FOR TABLE HEADINGS, IMMEDIATELY ADD ' |' AFTER THE TABLE HEADING.   ``` - Spróbuj dostosować temperaturę. Wyższe temperatury (>= 0,8) zwykle pomagają wyeliminować powtórzenia w wyniku. |
-| Powtórzone znaki nowego wiersza (`\n`) w uporządkowanych danych wyjściowych | Jeśli dane wejściowe modelu zawierają znaki Unicode lub sekwencje ucieczki, takie jak `\u` lub `\t`, może to prowadzić do powtarzających się znaków nowego wiersza. | - Sprawdź, czy w prompcie nie ma zabronionych sekwencji ucieczki, i zastąp je znakami UTF-8. Na przykład sekwencja ucieczki `\u` w przykładach JSON może spowodować, że model będzie jej używać również w danych wyjściowych. - Poinformuj model o dozwolonych znakach ucieczki. Dodaj instrukcję systemową, np. taką:      ```               In quoted strings, the only allowed escape sequences are \\, \n, and \". Instead of \u escapes, use UTF-8.   ``` |
-| Powtarzający się tekst w przypadku korzystania z uporządkowanych danych wyjściowych | Jeśli dane wyjściowe modelu mają inną kolejność pól niż zdefiniowany schemat strukturalny, może to prowadzić do powtarzania się tekstu. | - Nie określaj kolejności pól w prompcie. - Ustaw wszystkie pola wyjściowe jako wymagane. |
-| Powtarzające się wywołania narzędzi | Może się tak zdarzyć, jeśli model utraci kontekst poprzednich przemyśleń lub wywoła niedostępny punkt końcowy, do którego jest zmuszony. | Poinstruuj model, aby zachowywał stan w procesie myślowym. Dodaj ten tekst na końcu instrukcji systemowych:    ```         When thinking silently: ALWAYS start the thought with a brief         (one sentence) recap of the current progress on the task. In         particular, consider whether the task is already done. ``` |
-| Powtarzający się tekst, który nie jest częścią uporządkowanych danych wyjściowych | Może się tak zdarzyć, jeśli model utknie na żądaniu, którego nie może rozwiązać. | - Jeśli myślenie jest włączone, w instrukcjach unikaj podawania wyraźnych poleceń dotyczących tego, jak rozwiązać problem. Po prostu poproś o ostateczny wynik. - Wypróbuj wyższą temperaturę >= 0,8. - Dodaj instrukcje, np. „Bądź zwięzły”, „Nie powtarzaj się” lub „Podaj odpowiedź tylko raz”. |
+| Guiones repetidos en tablas de Markdown | Esto puede ocurrir cuando el contenido de la tabla es largo, ya que el modelo intenta crear una tabla de Markdown alineada visualmente. Sin embargo, la alineación en Markdown no es necesaria para el procesamiento correcto. | Agrega instrucciones en tu instrucción para darle al modelo lineamientos específicos para generar tablas de Markdown. Proporciona ejemplos que sigan esos lineamientos. También puedes intentar ajustar la temperatura. Para generar código o resultados muy estructurados, como tablas de Markdown, se ha demostrado que una temperatura alta funciona mejor (≥ 0.8).  A continuación, se incluye un ejemplo de un conjunto de lineamientos que puedes agregar a tu instrucción para evitar este problema:     ```           # Markdown Table Format                      * Separator line: Markdown tables must include a separator line below             the header row. The separator line must use only 3 hyphens per             column, for example: |---|---|---|. Using more hypens like             ----, -----, ------ can result in errors. Always             use |:---|, |---:|, or |---| in these separator strings.              For example:              | Date | Description | Attendees |             |---|---|---|             | 2024-10-26 | Annual Conference | 500 |             | 2025-01-15 | Q1 Planning Session | 25 |            * Alignment: Do not align columns. Always use |---|.             For three columns, use |---|---|---| as the separator line.             For four columns use |---|---|---|---| and so on.            * Conciseness: Keep cell content brief and to the point.            * Never pad column headers or other cells with lots of spaces to             match with width of other content. Only a single space on each side             is needed. For example, always do "| column name |" instead of             "| column name                |". Extra spaces are wasteful.             A markdown renderer will automatically take care displaying             the content in a visually appealing form. ``` |
+| Tokens repetidos en tablas de Markdown | Al igual que con los guiones repetidos, esto ocurre cuando el modelo intenta alinear visualmente el contenido de la tabla. La alineación en Markdown no es necesaria para el procesamiento correcto. | - Intenta agregar instrucciones como las siguientes a tu instrucción del sistema:      ```               FOR TABLE HEADINGS, IMMEDIATELY ADD ' |' AFTER THE TABLE HEADING.   ``` - Intenta ajustar la temperatura. Las temperaturas más altas (≥ 0.8) suelen ayudar a eliminar las repeticiones o la duplicación en el resultado. |
+| Saltos de línea repetidos (`\n`) en el resultado estructurado | Cuando la entrada del modelo contiene secuencias de escape o Unicode, como `\u` o `\t`, puede generar saltos de línea repetidos. | - Verifica y reemplaza las secuencias de escape prohibidas por caracteres UTF-8 en tu instrucción. Por ejemplo, la secuencia de escape `\u` de tus ejemplos de JSON puede hacer que el modelo también la use en su resultado. - Indica al modelo los escapes permitidos. Agrega una instrucción del sistema como esta:      ```               In quoted strings, the only allowed escape sequences are \\, \n, and \". Instead of \u escapes, use UTF-8.   ``` |
+| Texto repetido con salida estructurada | Cuando el resultado del modelo tiene un orden diferente para los campos que el esquema estructurado definido, esto puede generar texto repetido. | - No especifiques el orden de los campos en tu instrucción. - Haz que todos los campos de salida sean obligatorios. |
+| Llamadas a herramientas repetitivas | Esto puede ocurrir si el modelo pierde el contexto de pensamientos anteriores o llama a un extremo no disponible al que se ve obligado a llamar. | Indícale al modelo que mantenga el estado dentro de su proceso de pensamiento. Agrega lo siguiente al final de las instrucciones del sistema:    ```         When thinking silently: ALWAYS start the thought with a brief         (one sentence) recap of the current progress on the task. In         particular, consider whether the task is already done. ``` |
+| Texto repetitivo que no forma parte de la salida estructurada | Esto puede ocurrir si el modelo se atasca en una solicitud que no puede resolver. | - Si el pensamiento está activado, evita dar órdenes explícitas sobre cómo pensar en un problema en las instrucciones. Solo pide el resultado final. - Prueba con una temperatura más alta, mayor o igual a 0.8. - Agrega instrucciones como "Sé conciso", "No te repitas" o "Proporciona la respuesta una sola vez". |
 
-## Zablokowane lub niedziałające klucze interfejsu API
+## Claves de API bloqueadas o que no funcionan
 
-Z tej sekcji dowiesz się, jak sprawdzić, czy Twój klucz interfejsu Gemini API jest zablokowany, i co w takiej sytuacji zrobić.
+En esta sección, se describe cómo verificar si tu clave de la API de Gemini está bloqueada y qué hacer al respecto.
 
-### Dlaczego klucze są blokowane
+### Comprende por qué se bloquean las llaves
 
-Wykryliśmy lukę w zabezpieczeniach, w wyniku której niektóre klucze interfejsu API mogły zostać publicznie ujawnione. Aby chronić Twoje dane i zapobiegać nieautoryzowanemu dostępowi, aktywnie blokujemy dostęp do interfejsu Gemini API za pomocą tych znanych, ujawnionych kluczy.
+Identificamos una vulnerabilidad por la que algunas claves de API podrían haberse expuesto públicamente. Para proteger tus datos y evitar el acceso no autorizado, bloqueamos de forma proactiva el acceso a la API de Gemini de estas claves filtradas conocidas.
 
-### Sprawdź, czy zmiana dotyczy Twoich kluczy
+### Confirma si tus llaves están afectadas
 
-Jeśli Twój klucz został ujawniony, nie możesz już używać go w interfejsie Gemini API. W [Google AI Studio](https://ai.google.dev/gemini-api/docs/api-keys?hl=pl) możesz sprawdzić, czy któryś z Twoich kluczy API jest zablokowany i nie może wywoływać Gemini API, a także wygenerować nowe klucze. Podczas próby użycia tych kluczy może też pojawić się ten błąd:
+Si se sabe que se filtró tu clave, ya no podrás usarla con la API de Gemini. Puedes usar [Google AI Studio](https://ai.google.dev/gemini-api/docs/api-keys?hl=es-419) para ver si alguna de tus claves de API está bloqueada para llamar a la API de Gemini y generar claves nuevas. También es posible que veas el siguiente error cuando intentes usar estas claves:
 
 ```
 Your API key was reported as leaked. Please use another API key.
 ```
 
-### Działanie w przypadku zablokowanych kluczy interfejsu API
+### Acción para las claves de API bloqueadas
 
-Nowe klucze interfejsu API do integracji z Gemini API należy generować za pomocą [Google AI Studio](https://ai.google.dev/gemini-api/docs/api-keys?hl=pl). Zdecydowanie zalecamy sprawdzenie metod zarządzania kluczami interfejsu API, aby upewnić się, że nowe klucze są bezpieczne i nie są publicznie udostępniane.
+Debes generar nuevas claves de API para tus integraciones de la API de Gemini con [Google AI Studio](https://ai.google.dev/gemini-api/docs/api-keys?hl=es-419). Te recomendamos que revises tus prácticas de administración de claves de API para asegurarte de que las claves nuevas estén protegidas y no se expongan públicamente.
 
-### Nieoczekiwane opłaty z powodu luki w zabezpieczeniach
+### Cargos inesperados debido a vulnerabilidades
 
-[Prześlij zgłoszenie do zespołu pomocy ds. płatności](https://console.cloud.google.com/support/chat?hl=pl)
-Nasz zespół ds. płatności pracuje nad tym problemem i jak najszybciej poinformujemy Cię o postępach.
+[Envía un caso de asistencia para la facturación](https://console.cloud.google.com/support/chat?hl=es-419).
+Nuestro equipo de facturación está trabajando en este problema y te comunicaremos las actualizaciones lo antes posible.
 
-### Środki bezpieczeństwa Google w przypadku wycieku kluczy
+### Medidas de seguridad de Google para las claves filtradas
 
-**Jak Google pomoże mi zabezpieczyć konto przed przekroczeniem kosztów i nadużyciami, jeśli moje klucze interfejsu API wyciekną?**
+**¿Cómo me ayudará Google a proteger mi cuenta del abuso y el exceso de costos si se filtran mis claves de API?**
 
-- Wprowadzamy zmianę, która polega na tym, że gdy poprosisz o nowy klucz w [Google AI Studio](https://ai.google.dev/gemini-api/docs/api-keys?hl=pl), będziemy wydawać klucze API, które domyślnie będą ograniczone tylko do Google AI Studio i nie będą akceptować kluczy z innych usług.
-  Pomoże to zapobiec niezamierzonemu użyciu klucza krzyżowego.
-- Domyślnie blokujemy klucze interfejsu API, które wyciekły i są używane z interfejsem Gemini API, co pomaga zapobiegać nadużyciom związanym z kosztami i danymi aplikacji.
-- Stan kluczy interfejsu API możesz sprawdzić w [Google AI Studio](https://ai.google.dev/gemini-api/docs/api-keys?hl=pl). Jeśli wykryjemy, że Twoje klucze interfejsu API zostały ujawnione, będziemy Cię o tym informować, aby umożliwić Ci podjęcie natychmiastowych działań.
+- Estamos trabajando para emitir claves de API cuando solicites una nueva con [Google AI Studio](https://ai.google.dev/gemini-api/docs/api-keys?hl=es-419), que, de forma predeterminada, se limitará solo a Google AI Studio y no aceptará claves de otros servicios.
+  Esto ayudará a evitar el uso no deseado de teclas cruzadas.
+- De forma predeterminada, bloqueamos las claves de API que se filtran y se usan con la API de Gemini, lo que ayuda a evitar el abuso de los costos y los datos de tu aplicación.
+- Podrás encontrar el estado de tus claves de API en [Google AI Studio](https://ai.google.dev/gemini-api/docs/api-keys?hl=es-419), y trabajaremos para comunicarnos de forma proactiva cuando identifiquemos que se filtraron tus claves de API para que tomes medidas de inmediato.
 
-## Ulepszanie danych wyjściowych modelu
+## Mejora el resultado del modelo
 
-Aby uzyskać wyższą jakość wyników modelu, spróbuj pisać bardziej ustrukturyzowane prompty. Na stronie [Przewodnik po inżynierii promptów](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=pl) znajdziesz podstawowe koncepcje, strategie i sprawdzone metody, które pomogą Ci zacząć.
+Para obtener resultados de mayor calidad, explora la escritura de instrucciones más estructuradas. En la página de la [guía de ingeniería de instrucciones](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=es-419), se presentan algunos conceptos básicos, estrategias y prácticas recomendadas para comenzar.
 
-## Limity tokenów
+## Información sobre los límites de tokens
 
-Aby dowiedzieć się więcej o liczeniu tokenów i ich limitach, przeczytaj nasz [przewodnik po tokenach](https://ai.google.dev/gemini-api/docs/tokens?hl=pl).
+Lee nuestra [Guía de tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419) para comprender mejor cómo contar tokens y sus límites.
 
-## Znane problemy
+## Problemas conocidos
 
-- Interfejs API obsługuje tylko wybrane języki. Przesyłanie promptów w nieobsługiwanych językach może skutkować nieoczekiwanymi lub nawet zablokowanymi odpowiedziami. Aktualne informacje o [dostępnych językach](https://ai.google.dev/gemini-api/docs/models?hl=pl#supported-languages) znajdziesz na tej stronie.
+- La API solo admite una cantidad de idiomas seleccionados. Si envías instrucciones en idiomas no admitidos, es posible que se generen respuestas inesperadas o incluso bloqueadas. Consulta los [idiomas disponibles](https://ai.google.dev/gemini-api/docs/models?hl=es-419#supported-languages) para ver las actualizaciones.
 
-## Zgłoś błąd
+## Informa un error
 
-Jeśli masz pytania, dołącz do dyskusji na [forum dla deweloperów Google AI](https://discuss.ai.google.dev?hl=pl).
+Si tienes preguntas, únete al debate en el [foro para desarrolladores de IA de Google](https://discuss.ai.google.dev?hl=es-419).
 
-Prześlij opinię
+Enviar comentarios
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-Ostatnia aktualizacja: 2026-04-30 UTC.
+Última actualización: 2026-05-28 (UTC)
 
-Chcesz przekazać coś jeszcze?
+¿Quieres brindar más información?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-30 UTC."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-05-28 (UTC)"],[],[]]

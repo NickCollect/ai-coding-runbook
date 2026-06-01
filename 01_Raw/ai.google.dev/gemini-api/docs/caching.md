@@ -1,65 +1,66 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/caching?hl=id
-fetched_at: 2026-05-25T05:20:47.775534+00:00
-title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/caching?hl=es-419
+fetched_at: 2026-06-01T06:06:01.337896+00:00
+title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-Kirim masukan
+Enviar comentarios
 
-# Context caching
+# Almacenamiento en caché de contexto
 
-Dalam alur kerja AI yang umum, Anda mungkin meneruskan token input yang sama berulang kali ke model. Gemini API menawarkan dua mekanisme caching yang berbeda:
+En un flujo de trabajo de IA típico, es posible que pases los mismos tokens de entrada una y otra vez a un modelo. La API de Gemini ofrece dos mecanismos de almacenamiento en caché diferentes:
 
-- Caching implisit (diaktifkan secara otomatis di Gemini 2.5 dan model yang lebih baru, tanpa jaminan penghematan biaya)
-- Caching eksplisit (dapat diaktifkan secara manual di sebagian besar model, dengan jaminan penghematan biaya)
+- Almacenamiento en caché implícito (habilitado automáticamente en Gemini 2.5 y modelos más recientes, sin garantía de ahorro de costos)
+- Almacenamiento en caché explícito (se puede habilitar de forma manual en la mayoría de los modelos, garantía de ahorro de costos)
 
-Caching eksplisit berguna jika Anda ingin menjamin penghematan biaya, tetapi dengan beberapa pekerjaan developer tambahan.
+El almacenamiento en caché explícito es útil en los casos en los que deseas garantizar el ahorro de costos, pero con un poco más de trabajo para el desarrollador.
 
-## Caching implisit
+## Almacenamiento en caché implícito
 
-Caching implisit diaktifkan secara default untuk semua model Gemini 2.5 dan yang lebih baru. Kami otomatis meneruskan penghematan biaya jika permintaan Anda cocok dengan cache. Anda tidak perlu melakukan apa pun untuk mengaktifkan fitur ini. Jumlah token input minimum untuk context caching tercantum dalam tabel berikut untuk setiap model:
+El almacenamiento en caché implícito está habilitado de forma predeterminada para todos los modelos de Gemini 2.5 y versiones posteriores. Pasamos automáticamente los ahorros de costos si tu solicitud alcanza las cachés. No es necesario que hagas nada para habilitar esta opción. El recuento mínimo de tokens de entrada para el almacenamiento en caché de contexto se indica en la siguiente tabla para cada modelo:
 
-| Model | Batas token minimum |
+| Modelo | Límite mínimo de tokens |
 | --- | --- |
 | Gemini 3.5 Flash | 1024 |
-| Gemini 3 Pro Preview | 4096 |
+| Versión preliminar de Gemini 3 Pro | 4096 |
 | Gemini 2.5 Flash | 1024 |
 | Gemini 2.5 Pro | 4096 |
 
-Untuk meningkatkan peluang kecocokan cache implisit:
+Para aumentar las posibilidades de un acierto de caché implícito, haz lo siguiente:
 
-- Coba tempatkan konten besar dan umum di awal perintah Anda
-- Coba kirim permintaan dengan awalan yang serupa dalam waktu singkat
+- Intenta colocar contenido grande y común al comienzo de tu mensaje.
+- Intenta enviar solicitudes con un prefijo similar en un período breve.
 
-Anda dapat melihat jumlah token yang cocok dengan cache di kolom `usage_metadata` objek respons.
+Puedes ver la cantidad de tokens que fueron aciertos de caché en el campo `usage_metadata` del objeto de respuesta.
 
-## Caching eksplisit
+## Almacenamiento en caché explícito
 
-Dengan menggunakan fitur caching eksplisit Gemini API, Anda dapat meneruskan beberapa konten ke model sekali, menyimpan token input ke cache, lalu merujuk ke token yang di-cache untuk permintaan berikutnya. Pada volume tertentu, penggunaan token yang di-cache lebih murah daripada meneruskan korpus token yang sama berulang kali.
+Con la función de almacenamiento en caché explícito de la API de Gemini, puedes pasar contenido al modelo una vez, almacenar en caché los tokens de entrada y, luego, hacer referencia a los tokens almacenados en caché para las solicitudes posteriores. En ciertos volúmenes, usar tokens almacenados en caché es más económico que pasar el mismo corpus de tokens de forma repetida.
 
-Saat menyimpan kumpulan token ke cache, Anda dapat memilih berapa lama cache akan ada sebelum token dihapus secara otomatis. Durasi caching ini disebut *time to live* (TTL). Jika tidak disetel, TTL akan ditetapkan secara default ke 1 jam. Biaya untuk caching bergantung pada ukuran token input dan berapa lama Anda ingin token tetap ada.
+Cuando almacenas en caché un conjunto de tokens, puedes elegir cuánto tiempo deseas que exista la caché antes de que se borren automáticamente los tokens. Esta duración del almacenamiento en caché se denomina *tiempo de actividad* (TTL). Si no se establece, el TTL se establece de forma predeterminada en 1 hora. El costo del almacenamiento en caché depende del tamaño del token de entrada y del tiempo que deseas que persistan los tokens.
 
-Bagian ini mengasumsikan bahwa Anda telah menginstal Gemini SDK (atau telah menginstal curl)
-dan bahwa Anda telah mengonfigurasi kunci API, seperti yang ditunjukkan dalam
-[panduan memulai](https://ai.google.dev/gemini-api/docs/quickstart?hl=id).
+En esta sección, se supone que instalaste un SDK de Gemini (o tienes curl instalado)
+y que configuraste una clave de API, como se muestra en la
+[guía de inicio rápido](https://ai.google.dev/gemini-api/docs/quickstart?hl=es-419).
 
-### Membuat konten menggunakan cache
+### Genera contenido con una caché
 
 ### Python
 
-Contoh berikut menunjukkan cara membuat konten menggunakan petunjuk sistem dan file video yang di-cache.
+En el siguiente ejemplo, se muestra cómo generar contenido con una instrucción del sistema almacenada en caché y un archivo de video.
 
-### Video
+### Videos
 
 ```
 import os
@@ -166,7 +167,7 @@ print('\n\n', response.text)
 
 ### JavaScript
 
-Contoh berikut menunjukkan cara membuat konten menggunakan petunjuk sistem dan file teks yang di-cache.
+En el siguiente ejemplo, se muestra cómo generar contenido con una instrucción del sistema almacenada en caché y un archivo de texto.
 
 ```
 import {
@@ -207,7 +208,7 @@ await main();
 
 ### Go
 
-Contoh berikut menunjukkan cara membuat konten menggunakan cache.
+En el siguiente ejemplo, se muestra cómo generar contenido con una caché.
 
 ```
 package main
@@ -277,9 +278,9 @@ func main() {
 
 ### REST
 
-Contoh berikut menunjukkan cara membuat cache, lalu menggunakannya untuk membuat konten.
+En el siguiente ejemplo, se muestra cómo crear una caché y, luego, usarla para generar contenido.
 
-### Video
+### Videos
 
 ```
 wget https://storage.googleapis.com/generativeai-downloads/data/a11.txt
@@ -428,22 +429,22 @@ cat response.json
 echo jq ".candidates[].content.parts[].text" response.json
 ```
 
-### Mencantumkan cache
+### Enumera cachés
 
-Anda tidak dapat mengambil atau melihat konten yang di-cache, tetapi Anda dapat mengambil
-metadata cache (`name`, `model`, `display_name`, `usage_metadata`,
-`create_time`, `update_time`, dan `expire_time`).
+No es posible recuperar ni ver el contenido almacenado en caché, pero puedes recuperar
+los metadatos de la caché (`name`, `model`, `display_name`, `usage_metadata`,
+`create_time`, `update_time` y `expire_time`).
 
 ### Python
 
-Untuk mencantumkan metadata untuk semua cache yang diupload, gunakan `CachedContent.list()`:
+Para enumerar los metadatos de todas las cachés subidas, usa `CachedContent.list()`:
 
 ```
 for cache in client.caches.list():
   print(cache)
 ```
 
-Untuk mengambil metadata untuk satu objek cache, jika Anda mengetahui namanya, gunakan `get`:
+Para recuperar los metadatos de un objeto de caché, si conoces su nombre, usa `get`:
 
 ```
 client.caches.get(name=name)
@@ -451,7 +452,7 @@ client.caches.get(name=name)
 
 ### JavaScript
 
-Untuk mencantumkan metadata untuk semua cache yang diupload, gunakan `GoogleGenAI.caches.list()`:
+Para enumerar los metadatos de todas las cachés subidas, usa `GoogleGenAI.caches.list()`:
 
 ```
 console.log("My caches:");
@@ -468,7 +469,7 @@ while (true) {
 
 ### Go
 
-Contoh berikut mencantumkan semua cache.
+En el siguiente ejemplo, se enumeran todas las cachés.
 
 ```
 caches, err := client.Caches.All(ctx)
@@ -481,7 +482,7 @@ for _, item := range caches {
 }
 ```
 
-Contoh berikut mencantumkan cache menggunakan ukuran halaman 2.
+En el siguiente ejemplo, se enumeran las cachés con un tamaño de página de 2.
 
 ```
 page, err := client.Caches.List(ctx, &genai.ListCachedContentsConfig{PageSize: 2})
@@ -514,13 +515,13 @@ for {
 curl "https://generativelanguage.googleapis.com/v1beta/cachedContents?key=$GEMINI_API_KEY"
 ```
 
-### Memperbarui cache
+### Actualiza una caché
 
-Anda dapat menetapkan `ttl` atau `expire_time` baru untuk cache. Perubahan pada hal lain terkait cache tidak didukung.
+Puedes establecer un nuevo `ttl` o `expire_time` para una caché. No se admite cambiar nada más sobre la caché.
 
 ### Python
 
-Contoh berikut menunjukkan cara memperbarui `ttl` cache menggunakan `client.caches.update()`.
+En el siguiente ejemplo, se muestra cómo actualizar el `ttl` de una caché con `client.caches.update()`.
 
 ```
 from google import genai
@@ -534,11 +535,11 @@ client.caches.update(
 )
 ```
 
-Untuk menetapkan waktu habis masa berlaku, Anda dapat menerima objek `datetime`
-atau string datetime berformat ISO (`dt.isoformat()`, seperti
-`2025-01-27T16:02:36.473528+00:00`). Waktu Anda harus menyertakan zona waktu
-(`datetime.utcnow()` tidak melampirkan zona waktu,
-`datetime.now(datetime.timezone.utc)` melampirkan zona waktu).
+Para establecer la hora de vencimiento, se aceptará un objeto `datetime`
+o una cadena de fecha y hora con formato ISO (`dt.isoformat()`, como
+`2025-01-27T16:02:36.473528+00:00`). Tu hora debe incluir una zona horaria
+(`datetime.utcnow()` no adjunta una zona horaria,
+`datetime.now(datetime.timezone.utc)` sí adjunta una zona horaria).
 
 ```
 from google import genai
@@ -558,7 +559,7 @@ client.caches.update(
 
 ### JavaScript
 
-Contoh berikut menunjukkan cara memperbarui `ttl` cache menggunakan `GoogleGenAI.caches.update()`.
+En el siguiente ejemplo, se muestra cómo actualizar el `ttl` de una caché con `GoogleGenAI.caches.update()`.
 
 ```
 const ttl = `${2 * 3600}s`; // 2 hours in seconds
@@ -571,7 +572,7 @@ console.log("After update (TTL):", updatedCache);
 
 ### Go
 
-Contoh berikut menunjukkan cara memperbarui `TTL` cache.
+En el siguiente ejemplo, se muestra cómo actualizar el `TTL` de una caché.
 
 ```
 // Update the TTL (2 hours).
@@ -587,7 +588,7 @@ fmt.Println(cache)
 
 ### REST
 
-Contoh berikut menunjukkan cara memperbarui `ttl` cache.
+En el siguiente ejemplo, se muestra cómo actualizar el `ttl` de una caché.
 
 ```
 curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY" \
@@ -595,9 +596,9 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=
 -d '{"ttl": "600s"}'
 ```
 
-### Menghapus cache
+### Borra una caché
 
-Layanan caching menyediakan operasi penghapusan untuk menghapus konten dari cache secara manual. Contoh berikut menunjukkan cara menghapus cache:
+El servicio de almacenamiento en caché proporciona una operación de eliminación para quitar contenido de la caché de forma manual. En el siguiente ejemplo, se muestra cómo borrar una caché:
 
 ### Python
 
@@ -627,49 +628,48 @@ fmt.Println("Cache deleted:", cache.Name)
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY"
 ```
 
-### Caching eksplisit menggunakan library OpenAI
+### Almacenamiento en caché explícito con la biblioteca de OpenAI
 
-Jika menggunakan [library OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=id), Anda dapat mengaktifkan
-caching eksplisit menggunakan properti `cached_content` di
-[`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=id#extra-body).
+Si usas una [biblioteca de OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=es-419), puedes habilitar
+el almacenamiento en caché explícito con la propiedad `cached_content` en
+[`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=es-419#extra-body).
 
-## Kapan harus menggunakan caching eksplisit
+## Cuándo usar el almacenamiento en caché explícito
 
-Context caching sangat cocok untuk skenario saat konteks awal yang substansial dirujuk berulang kali oleh permintaan yang lebih singkat. Pertimbangkan untuk menggunakan context caching untuk kasus penggunaan seperti:
+El almacenamiento en caché de contexto es especialmente adecuado para situaciones en las que las solicitudes más cortas hacen referencia de forma repetida a un contexto inicial sustancial. Considera usar el almacenamiento en caché de contexto para casos de uso como los siguientes:
 
-- Chatbot dengan petunjuk [sistem](https://ai.google.dev/gemini-api/docs/system-instructions?hl=id) yang ekstensif
-- Analisis berulang pada file video yang panjang
-- Kueri berulang terhadap kumpulan dokumen besar
-- Analisis repositori kode atau perbaikan bug yang sering dilakukan
+- [Chatbots con instrucciones del sistema extensas](https://ai.google.dev/gemini-api/docs/system-instructions?hl=es-419)
+- Análisis repetitivo de archivos de video largos
+- Consultas recurrentes en grandes conjuntos de documentos
+- Análisis frecuente del repositorio de código o corrección de errores
 
-### Cara caching eksplisit mengurangi biaya
+### Cómo el almacenamiento en caché explícito reduce los costos
 
-Context caching adalah fitur berbayar yang dirancang untuk mengurangi biaya. Penagihan didasarkan pada faktor-faktor berikut:
+El almacenamiento en caché de contexto es una función pagada diseñada para reducir los costos. La facturación se basa en los siguientes factores:
 
-1. **Jumlah token cache:** Jumlah token input yang di-cache, ditagih dengan tarif yang lebih rendah jika disertakan dalam perintah berikutnya.
-2. **Durasi penyimpanan:** Jumlah waktu token yang di-cache disimpan (TTL), ditagih berdasarkan durasi TTL jumlah token yang di-cache. Tidak ada batas minimum atau maksimum pada TTL.
-3. **Faktor lainnya:** Biaya lain berlaku, seperti untuk token input dan token output yang tidak di-cache.
+1. **Recuento de tokens de caché:** Es la cantidad de tokens de entrada almacenados en caché, que se facturan a una tarifa reducida cuando se incluyen en mensajes posteriores.
+2. **Duración del almacenamiento:** Es la cantidad de tiempo que se almacenan los tokens almacenados en caché (TTL), que se factura según la duración del TTL del recuento de tokens almacenados en caché. No hay límites mínimos ni máximos en el TTL.
+3. **Otros factores:** Se aplican otros cargos, como los de los tokens de entrada y salida no almacenados en caché.
 
-Untuk mengetahui detail harga terbaru, lihat halaman harga Gemini API [pricing
-page](https://ai.google.dev/pricing?hl=id). Untuk mempelajari cara menghitung token, lihat [Panduan
-token](https://ai.google.dev/gemini-api/docs/tokens?hl=id).
+Para obtener información actualizada sobre los precios, consulta la página de precios de la API de Gemini [pricing
+page](https://ai.google.dev/pricing?hl=es-419). Para obtener información sobre cómo contar tokens, consulta la [guía de tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419).
 
-### Pertimbangan tambahan
+### Consideraciones adicionales
 
-Perhatikan pertimbangan berikut saat menggunakan context caching:
+Ten en cuenta las siguientes consideraciones cuando uses el almacenamiento en caché de contexto:
 
-- Jumlah token input *minimum* untuk context caching bervariasi menurut model. Jumlah *maksimum* sama dengan jumlah maksimum untuk model tertentu. (Untuk mengetahui informasi selengkapnya tentang cara menghitung token,
-  lihat [Panduan token](https://ai.google.dev/gemini-api/docs/tokens?hl=id)).
-- Model tidak membedakan antara token yang di-cache dan token input reguler. Konten yang di-cache adalah awalan untuk perintah.
-- Tidak ada batasan tarif atau penggunaan khusus untuk context caching; batasan tarif standar untuk `GenerateContent` berlaku, dan batas token mencakup token yang di-cache.
-- Jumlah token yang di-cache ditampilkan di `usage_metadata` dari operasi pembuatan, pengambilan, dan pencantuman layanan cache, serta di `GenerateContent` saat menggunakan cache.
+- El recuento de tokens de entrada *mínimo* para el almacenamiento en caché de contexto varía según el modelo. El *máximo* es el mismo que el máximo para el modelo determinado. (Para obtener más información sobre el recuento de tokens,
+  consulta la [guía de tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419)).
+- El modelo no distingue entre los tokens almacenados en caché y los tokens de entrada normales. El contenido almacenado en caché es un prefijo para el mensaje.
+- No hay tarifas especiales ni límites de uso para el almacenamiento en caché de contexto; se aplican los límites de frecuencia estándar para `GenerateContent`, y los límites de tokens incluyen tokens almacenados en caché.
+- La cantidad de tokens almacenados en caché se muestra en `usage_metadata` de las operaciones de creación, obtención y enumeración del servicio de caché, y también en `GenerateContent` cuando se usa la caché.
 
-Kirim masukan
+Enviar comentarios
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-Terakhir diperbarui pada 2026-05-19 UTC.
+Última actualización: 2026-05-19 (UTC)
 
-Ada masukan untuk kami?
+¿Quieres brindar más información?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-05-19 UTC."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-05-19 (UTC)"],[],[]]

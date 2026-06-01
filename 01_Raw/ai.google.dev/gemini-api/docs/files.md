@@ -1,34 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/files?hl=hi
-fetched_at: 2026-05-25T05:19:45.979956+00:00
-title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/files?hl=vi
+fetched_at: 2026-06-01T06:09:38.434244+00:00
+title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-सुझाव भेजें
+Gửi ý kiến phản hồi
 
 # Files API
 
-Gemini एक साथ कई तरह के इनपुट डेटा को प्रोसेस कर सकता है. जैसे, टेक्स्ट, इमेज, और ऑडियो.
+Gemini có thể xử lý nhiều loại dữ liệu đầu vào, bao gồm cả văn bản, hình ảnh và âm thanh cùng một lúc.
 
-इस गाइड में, Files API का इस्तेमाल करके मीडिया फ़ाइलों के साथ काम करने का तरीका बताया गया है. ऑडियो फ़ाइलों, इमेज, वीडियो, दस्तावेज़ों, और इस्तेमाल की जा सकने वाली अन्य फ़ाइल टाइप के लिए, बुनियादी कार्रवाइयां एक जैसी होती हैं.
+Hướng dẫn này trình bày cách xử lý các tệp nội dung nghe nhìn bằng Files API. Các thao tác cơ bản đều giống nhau đối với tệp âm thanh, hình ảnh, video, tài liệu và các loại tệp được hỗ trợ khác.
 
-फ़ाइल प्रॉम्प्ट करने से जुड़े दिशा-निर्देशों के लिए, [फ़ाइल प्रॉम्प्ट करने से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/files?hl=hi#prompt-guide) सेक्शन देखें.
+Để biết hướng dẫn về câu lệnh cho tệp, hãy xem phần [Hướng dẫn về câu lệnh cho tệp](https://ai.google.dev/gemini-api/docs/files?hl=vi#prompt-guide).
 
-## फ़ाइल अपलोड करें
+## Tải tệp lên
 
-मीडिया फ़ाइल अपलोड करने के लिए, Files API का इस्तेमाल किया जा सकता है. जब अनुरोध का कुल साइज़ (इसमें फ़ाइलें, टेक्स्ट प्रॉम्प्ट, सिस्टम के निर्देश वगैरह शामिल हैं) 100 एमबी से ज़्यादा हो, तब हमेशा Files API का इस्तेमाल करें. पीडीएफ़ फ़ाइलों के लिए, यह सीमा 50 एमबी है.
+Bạn có thể dùng Files API để tải một tệp đa phương tiện lên. Luôn sử dụng Files API khi tổng kích thước yêu cầu (bao gồm cả tệp, câu lệnh văn bản, hướng dẫn hệ thống, v.v.) lớn hơn 100 MB. Đối với tệp PDF, giới hạn là 50 MB.
 
-नीचे दिए गए कोड में, एक फ़ाइल अपलोड की जाती है. इसके बाद, इस फ़ाइल का इस्तेमाल `generateContent` को कॉल करने के लिए किया जाता है.
+Đoạn mã sau đây tải một tệp lên, sau đó dùng tệp đó trong một lệnh gọi đến `generateContent`.
 
 ### Python
 
@@ -76,7 +77,7 @@ async function main() {
 await main();
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 file, err := client.Files.UploadFromPath(ctx, "path/to/sample.mp3", nil)
@@ -155,9 +156,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## किसी फ़ाइल का मेटाडेटा पाना
+## Lấy siêu dữ liệu cho một tệp
 
-`files.get` को कॉल करके, यह पुष्टि की जा सकती है कि एपीआई ने अपलोड की गई फ़ाइल को सेव कर लिया है. साथ ही, इसका मेटाडेटा भी पाया जा सकता है.
+Bạn có thể xác minh rằng API đã lưu trữ thành công tệp được tải lên và lấy siêu dữ liệu của tệp đó bằng cách gọi `files.get`.
 
 ### Python
 
@@ -195,7 +196,7 @@ async function main() {
 await main();
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 file, err := client.Files.UploadFromPath(ctx, "path/to/sample.mp3", nil)
@@ -225,9 +226,9 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## अपलोड की गई फ़ाइलों की सूची
+## Liệt kê các tệp đã tải lên
 
-यहां दिया गया कोड, अपलोड की गई सभी फ़ाइलों की सूची दिखाता है:
+Đoạn mã sau đây lấy danh sách tất cả các tệp đã tải lên:
 
 ### Python
 
@@ -260,7 +261,7 @@ async function main() {
 await main();
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 for file, err := range client.Files.All(ctx) {
@@ -280,9 +281,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/files" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## अपलोड की गई फ़ाइलें मिटाना
+## Xoá tệp đã tải lên
 
-फ़ाइलें 48 घंटे बाद अपने-आप मिट जाती हैं. अपलोड की गई किसी फ़ाइल को मैन्युअल तरीके से भी मिटाया जा सकता है:
+Các tệp sẽ tự động bị xoá sau 48 giờ. Bạn cũng có thể xoá tệp đã tải lên theo cách thủ công:
 
 ### Python
 
@@ -317,7 +318,7 @@ async function main() {
 await main();
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 file, err := client.Files.UploadFromPath(ctx, "path/to/sample.mp3", nil)
@@ -334,191 +335,191 @@ curl --request "DELETE" https://generativelanguage.googleapis.com/v1beta/files/$
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## इस्तेमाल से जुड़ी जानकारी
+## Thông tin về việc sử dụng
 
-मीडिया फ़ाइलों को अपलोड करने और उनसे इंटरैक्ट करने के लिए, Files API का इस्तेमाल किया जा सकता है. Files API की मदद से, हर प्रोजेक्ट के लिए 20 जीबी तक की फ़ाइलें सेव की जा सकती हैं. हालांकि, हर फ़ाइल का साइज़ ज़्यादा से ज़्यादा 2 जीबी होना चाहिए. फ़ाइलों को 48 घंटों तक सेव किया जाता है. इस दौरान, एपीआई का इस्तेमाल करके फ़ाइलों के बारे में मेटाडेटा पाया जा सकता है. हालांकि, फ़ाइलों को डाउनलोड नहीं किया जा सकता.
-Files API, उन सभी देशों या इलाकों में बिना किसी शुल्क के उपलब्ध है जहां Gemini API उपलब्ध है.
+Bạn có thể dùng Files API để tải lên và tương tác với các tệp đa phương tiện. Files API cho phép bạn lưu trữ tối đa 20 GB tệp cho mỗi dự án, với kích thước tối đa cho mỗi tệp là 2 GB. Các tệp được lưu trữ trong 48 giờ. Trong thời gian đó, bạn có thể dùng API để lấy siêu dữ liệu về các tệp, nhưng không thể tải các tệp xuống.
+Files API được cung cấp miễn phí ở mọi khu vực có Gemini API.
 
-## फ़ाइल के लिए प्रॉम्प्ट देने की रणनीतियां
+## Chiến lược nhắc nhở về tệp
 
-इस सेक्शन में, Gemini API के लिए प्रॉम्प्ट के साथ मीडिया फ़ाइलों का इस्तेमाल करने के बारे में दिशा-निर्देश और सबसे सही तरीके दिए गए हैं.
+Phần này cung cấp hướng dẫn và các phương pháp hay nhất để sử dụng tệp đa phương tiện với câu lệnh cho Gemini API.
 
-अपने प्रॉम्प्ट में अलग-अलग तरह का डेटा इस्तेमाल करने की सुविधा से, आपको यह तय करने में ज़्यादा आसानी होती है कि Gemini API की मदद से कौन-कौनसे काम किए जा सकते हैं. उदाहरण के लिए, मॉडल को किसी स्वादिष्ट खाने की फ़ोटो भेजकर, उसके बारे में एक छोटा ब्लॉग लिखने के लिए कहा जा सकता है.
+Việc có thể sử dụng nhiều loại dữ liệu trong câu lệnh giúp bạn linh hoạt hơn về những nhiệm vụ có thể giải quyết bằng Gemini API. Ví dụ: bạn có thể gửi cho mô hình một bức ảnh về một bữa ăn ngon và yêu cầu mô hình viết một bài đăng ngắn trên blog về bữa ăn đó.
 
 |  |  |
 | --- | --- |
-| **प्रॉम्प्ट** | **जवाब** |
-| इस तस्वीर के आधार पर, एक छोटी और दिलचस्प ब्लॉग पोस्ट लिखो. इसमें फ़ोटो में मौजूद खाने के बारे में जानकारी होनी चाहिए. साथ ही, इसमें खाने की तैयारी से जुड़ी मेरी यात्रा के बारे में भी बताया जाना चाहिए.   कुकी | खाना तैयार करके रखना, समय और पैसे बचाने का एक बेहतरीन तरीका है. इससे आपको सेहतमंद खाना खाने में भी मदद मिल सकती है. यह खाना, सेहतमंद और स्वादिष्ट खाने का एक बेहतरीन उदाहरण है. इसे आसानी से पहले से तैयार किया जा सकता है.  इस खाने में ब्राउन राइस, भुनी हुई सब्ज़ियां, और चिकन टेरियाकी शामिल है. ब्राउन राइस एक सेहतमंद और कॉम्प्लेक्स कार्बोहाइड्रेट है. इससे आपको लंबे समय तक एनर्जी मिलती है. भुनी हुई सब्ज़ियों से, आपको रोज़ाना के विटामिन और खनिज मिलते हैं. साथ ही, चिकन टेरियाकी एक स्वादिष्ट और प्रोटीन से भरपूर विकल्प है.  इस खाने को बनाना भी बहुत आसान है. ब्राउन राइस को पकाएं, सब्ज़ियों को भूनें, और चिकन टेरियाकी को पकाएं. जब सब कुछ पक जाए, तो उसे खाने के लिए तैयार किए गए कंटेनर में डालें और फ़्रिज में स्टोर करें. इसके बाद, कंटेनर को उठाकर सुबह के समय आसानी से नाश्ता किया जा सकता है!  अगर आपको सेहत के लिए अच्छा और स्वादिष्ट खाना चाहिए, जिसे आसानी से पहले से तैयार किया जा सके, तो यह खाना आपके लिए सबसे सही विकल्प है. इसमें पोषक तत्व और स्वाद भरपूर होता है. इसे खाने के बाद, आपको पेट भरा होने का एहसास होगा और आप संतुष्ट महसूस करेंगे.  सेहतमंद और स्वादिष्ट खाना तैयार करने के लिए, यहां कुछ सुझाव दिए गए हैं! |
+| **Câu lệnh** | **Đáp** |
+| Viết một bài đăng ngắn gọn và hấp dẫn trên blog dựa trên bức ảnh này. Nội dung này phải có phần mô tả về bữa ăn trong ảnh và nói về hành trình chuẩn bị bữa ăn của tôi.   Bánh quy | Chuẩn bị sẵn bữa ăn là một cách hiệu quả để tiết kiệm thời gian và tiền bạc, đồng thời giúp bạn ăn uống lành mạnh hơn. Bữa ăn này là một ví dụ điển hình về bữa ăn lành mạnh và ngon miệng mà bạn có thể dễ dàng chuẩn bị trước.  Bữa ăn này có cơm gạo lứt, rau củ nướng và gà sốt teriyaki. Gạo lứt là một loại carbohydrate phức tạp và lành mạnh, giúp bạn có năng lượng bền bỉ. Rau củ nướng là một cách tuyệt vời để bổ sung vitamin và khoáng chất hằng ngày, còn gà teriyaki là một lựa chọn ngon miệng và giàu protein.  Món ăn này cũng rất dễ chế biến. Bạn chỉ cần nấu gạo lứt, nướng rau và nấu món gà sốt teriyaki. Sau khi nấu xong, hãy chia thức ăn vào các hộp đựng và bảo quản trong tủ lạnh. Sau đó, bạn có thể lấy hộp đựng và đi làm vào những buổi sáng bận rộn!  Nếu bạn đang tìm kiếm một bữa ăn lành mạnh và ngon miệng mà có thể dễ dàng chuẩn bị trước, thì đây là một lựa chọn tuyệt vời. Món ăn này giàu dinh dưỡng và hương vị, chắc chắn sẽ giúp bạn cảm thấy no và hài lòng.  Chúc bạn chuẩn bị được những bữa ăn lành mạnh và ngon miệng! |
 
-अगर आपको मीडिया फ़ाइलों का इस्तेमाल करने वाले प्रॉम्प्ट से, अपनी पसंद के मुताबिक आउटपुट नहीं मिल रहा है, तो यहां कुछ रणनीतियां दी गई हैं. इनकी मदद से, आपको अपनी पसंद के मुताबिक नतीजे मिल सकते हैं. यहां दिए गए सेक्शन में, मल्टीमॉडल इनपुट का इस्तेमाल करने वाले प्रॉम्प्ट को बेहतर बनाने के लिए, डिज़ाइन के तरीके और समस्या हल करने से जुड़े सुझाव दिए गए हैं.
+Nếu bạn gặp khó khăn khi nhận được kết quả mong muốn từ những câu lệnh sử dụng tệp đa phương tiện, thì có một số chiến lược có thể giúp bạn đạt được kết quả mong muốn. Các phần sau đây cung cấp các phương pháp thiết kế và mẹo khắc phục sự cố để cải thiện những câu lệnh sử dụng dữ liệu đầu vào đa phương thức.
 
-इन सबसे सही तरीकों को अपनाकर, मल्टीमॉडल प्रॉम्प्ट को बेहतर बनाया जा सकता है:
+Bạn có thể cải thiện câu lệnh đa phương thức bằng cách làm theo các phương pháp hay nhất sau:
 
-- ### [प्रॉम्प्ट डिज़ाइन करने से जुड़ी बुनियादी बातें](#specific-instructions)
+- ### [Kiến thức cơ bản về thiết kế câu lệnh](#specific-instructions)
 
-  - **निर्देशों में खास जानकारी दें**: साफ़ तौर पर और कम शब्दों में निर्देश दें, ताकि उन्हें समझने में कोई गड़बड़ी न हो.
-  - **अपने प्रॉम्प्ट में कुछ उदाहरण जोड़ें:** आपको जो नतीजे चाहिए उन्हें पाने के लिए, असल में खींची गई फ़ोटो जैसे कुछ उदाहरणों का इस्तेमाल करें.
-  - **इसे सिलसिलेवार तरीके से समझाएं**: मुश्किल टास्क को छोटे-छोटे सब-लक्ष्यों में बांटें और मॉडल को प्रोसेस के बारे में बताएं.
-  - **आउटपुट का फ़ॉर्मैट तय करें**: अपने प्रॉम्प्ट में, आउटपुट को अपनी पसंद के फ़ॉर्मैट में देने के लिए कहें. जैसे, मार्कडाउन, JSON, एचटीएमएल वगैरह.
-  - **एक इमेज वाले प्रॉम्प्ट के लिए, इमेज को सबसे पहले रखें**: Gemini, इमेज और टेक्स्ट वाले इनपुट को किसी भी क्रम में प्रोसेस कर सकता है. हालांकि, एक इमेज वाले प्रॉम्प्ट के लिए, इमेज (या वीडियो) को टेक्स्ट प्रॉम्प्ट से पहले रखने पर, Gemini बेहतर परफ़ॉर्म कर सकता है. हालांकि, ऐसे प्रॉम्प्ट के लिए जिनमें टेक्स्ट के साथ इमेज को इस तरह से इंटरलीव करना ज़रूरी होता है कि वे एक-दूसरे से जुड़े हुए लगें, उस क्रम का इस्तेमाल करें जो सबसे सही हो.
-- ### [टेक्स्ट, इमेज वग़ैरह को प्रोसेस करने वाले मॉडल के लिए दिए गए प्रॉम्प्ट से जुड़ी समस्या हल करना](#troubleshooting)
+  - **Đưa ra chỉ dẫn cụ thể**: Soạn thảo chỉ dẫn rõ ràng và ngắn gọn để giảm thiểu khả năng hiểu sai.
+  - **Thêm một vài ví dụ vào câu lệnh:** Sử dụng một vài ví dụ thực tế để minh hoạ những gì bạn muốn đạt được.
+  - **Chia nhỏ từng bước**: Chia các việc phức tạp thành những mục tiêu phụ dễ quản lý, hướng dẫn mô hình thực hiện quy trình.
+  - **Chỉ định định dạng đầu ra**: Trong câu lệnh, hãy yêu cầu đầu ra ở định dạng bạn muốn, chẳng hạn như markdown, JSON, HTML, v.v.
+  - **Đặt hình ảnh lên trước đối với câu lệnh có một hình ảnh**: Mặc dù Gemini có thể xử lý dữ liệu đầu vào là hình ảnh và văn bản theo bất kỳ thứ tự nào, nhưng đối với câu lệnh có một hình ảnh, Gemini có thể hoạt động hiệu quả hơn nếu hình ảnh (hoặc video) đó được đặt trước câu lệnh bằng văn bản. Tuy nhiên, đối với những câu lệnh yêu cầu hình ảnh phải được xen kẽ nhiều với văn bản để có ý nghĩa, hãy sử dụng bất kỳ thứ tự nào tự nhiên nhất.
+- ### [Khắc phục sự cố về câu lệnh đa phương thức](#troubleshooting)
 
-  - **अगर मॉडल, इमेज के काम के हिस्से से जानकारी नहीं ले रहा है, तो:** प्रॉम्प्ट में इमेज के उन पहलुओं के बारे में जानकारी दें जिनसे आपको जानकारी चाहिए.
-  - **अगर मॉडल का जवाब बहुत सामान्य है (इमेज/वीडियो के हिसाब से नहीं है):** प्रॉम्प्ट की शुरुआत में, मॉडल को इमेज या वीडियो के बारे में बताने के लिए कहें. इसके बाद, उसे टास्क के बारे में निर्देश दें. इसके अलावा, मॉडल को इमेज में मौजूद चीज़ों के बारे में बताने के लिए कहें.
-  - **यह पता लगाने के लिए कि इमेज की पहचान करने में कहां गड़बड़ी हुई:** मॉडल से इमेज के बारे में बताने के लिए कहें या मॉडल से यह बताने के लिए कहें कि उसने इमेज की पहचान किस आधार पर की है. इससे आपको यह पता चलेगा कि मॉडल ने इमेज को किस तरह समझा है.
-  - **अगर आपके प्रॉम्प्ट के जवाब में, तथ्यों के हिसाब से गलत जानकारी मिलती है, तो:** तापमान की सेटिंग को कम करके देखें या मॉडल से छोटे जवाब देने के लिए कहें. इससे, मॉडल के अतिरिक्त जानकारी देने की संभावना कम हो जाएगी.
-  - **सैंपलिंग पैरामीटर को ट्यून करना:** मॉडल की क्रिएटिविटी को अपने हिसाब से बनाने के लिए, अलग-अलग तापमान सेटिंग और टॉप-के सिलेक्शन के साथ एक्सपेरिमेंट करें.
+  - **Nếu mô hình không lấy thông tin từ phần có liên quan của hình ảnh:** Đưa ra gợi ý về những khía cạnh của hình ảnh mà bạn muốn câu lệnh lấy thông tin.
+  - **Nếu đầu ra của mô hình quá chung chung (không đủ phù hợp với đầu vào là hình ảnh/video):** Khi bắt đầu câu lệnh, hãy thử yêu cầu mô hình mô tả(các) hình ảnh hoặc video trước khi đưa ra hướng dẫn về nhiệm vụ, hoặc thử yêu cầu mô hình tham khảo nội dung trong hình ảnh.
+  - **Cách khắc phục sự cố về phần bị lỗi:** Yêu cầu mô hình mô tả hình ảnh hoặc giải thích suy luận của mô hình để đánh giá mức độ hiểu biết ban đầu của mô hình.
+  - **Nếu câu lệnh của bạn tạo ra nội dung ảo:** Hãy thử giảm chế độ cài đặt nhiệt độ hoặc yêu cầu mô hình đưa ra nội dung mô tả ngắn hơn để giảm khả năng mô hình ngoại suy thêm thông tin chi tiết.
+  - **Điều chỉnh các tham số lấy mẫu:** Thử nghiệm với các chế độ cài đặt nhiệt độ và lựa chọn top-k khác nhau để điều chỉnh khả năng sáng tạo của mô hình.
 
-### निर्देशों में सटीक जानकारी दें
+### Đưa ra hướng dẫn cụ thể
 
-प्रॉम्प्ट तब सबसे ज़्यादा असरदार होते हैं, जब वे साफ़ तौर पर और पूरी जानकारी के साथ दिए गए हों. अगर आपको कोई खास आउटपुट चाहिए, तो बेहतर होगा कि आप उस ज़रूरत को प्रॉम्प्ट में शामिल करें. इससे आपको मनमुताबिक आउटपुट मिलेगा.
+Câu lệnh sẽ hiệu quả nhất khi rõ ràng và chi tiết. Nếu bạn có một kết quả cụ thể trong đầu, thì tốt hơn là bạn nên đưa yêu cầu đó vào câu lệnh để đảm bảo bạn nhận được kết quả mình muốn.
 
-हवाई अड्डे के बोर्ड की इस इमेज के लिए, मॉडल से सिर्फ़ "इस इमेज के बारे में जानकारी दो" कहने पर, सामान्य जानकारी जनरेट हो सकती है. अगर आपको मॉडल से इमेज में मौजूद समय और शहर की जानकारी पार्स करवानी है, तो अपने प्रॉम्प्ट में सीधे तौर पर वह अनुरोध शामिल करें.
+Đối với hình ảnh này về một bảng thông tin tại sân bay, nếu bạn chỉ yêu cầu mô hình "mô tả hình ảnh này", thì mô hình có thể tạo ra một nội dung mô tả chung. Nếu cần mô hình phân tích cú pháp thời gian và thành phố từ hình ảnh, bạn có thể đưa yêu cầu đó trực tiếp vào câu lệnh.
 
-| प्रॉम्प्ट | मॉडल का जवाब |
+| Câu lệnh | Câu trả lời của mô hình |
 | --- | --- |
-| इस इमेज के बारे में बताएं. | इस इमेज में, हवाई अड्डे पर फ़्लाइट के आने और जाने की जानकारी देने वाला बोर्ड दिखाया गया है. |
+| Mô tả hình ảnh này. | Hình ảnh cho thấy bảng thông tin chuyến bay hạ cánh và khởi hành tại sân bay. |
 
-| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
+| **Câu lệnh mới** | **Cải thiện phản hồi** |
 | --- | --- |
-| यात्रा का टाइमटेबल इस इमेज में दिखाए गए एयरपोर्ट बोर्ड से, समय और शहर की जानकारी को सूची में शामिल करो. | - 10:50 मॉस्को - एडिनबर्ग 11:05 - 11:05 लंदन - बुखारेस्ट में रात 11:10 बजे - सुबह 11:30 बजे कीव - डब्लिन में रात 11:35 बजे - 11:45 ईस्ट मिडलैंड्स - 12:15 सोफ़िया - लंदन में दोपहर 12:30 बजे - 12:30 न्यूकैसल - 12:40 सेंट पीटर्सबर्ग - दोपहर 12:40 बजे लंदन - 12:45 मैनचेस्टर |
+| Lịch trình du lịch Phân tích thời gian và thành phố từ bảng thông tin sân bay xuất hiện trong hình ảnh này thành một danh sách. | - 10:50 Moscow - 11:05 Edinburgh - 11:05 London - 11:10 Bucharest - 11:30 Kiev - 11:35 Dublin - 11:45 Đông Midlands - 12:15 Sofia - 12:30 London - 12:30 Newcastle - 12:40 St Petersburg - 12:40 London - 12:45 Manchester |
 
-### कुछ उदाहरण जोड़ना
+### Thêm một vài ví dụ
 
-Gemini मॉडल, कई इनपुट स्वीकार कर सकता है. इनका इस्तेमाल वह उदाहरण के तौर पर कर सकता है, ताकि यह समझ सके कि आपको किस तरह का आउटपुट चाहिए. इन उदाहरणों को जोड़ने से, मॉडल को पैटर्न की पहचान करने में मदद मिल सकती है. साथ ही, दी गई इमेज और जवाबों के बीच के संबंध को नए उदाहरण पर लागू करने में मदद मिल सकती है. इसे "फ़्यू-शॉट" लर्निंग भी कहा जाता है.
+Mô hình Gemini có thể chấp nhận nhiều dữ liệu đầu vào mà mô hình có thể dùng làm ví dụ để hiểu được đầu ra bạn muốn. Việc thêm những ví dụ này có thể giúp mô hình xác định các mẫu và áp dụng mối quan hệ giữa hình ảnh và câu trả lời đã cho vào ví dụ mới. Đây còn được gọi là học "từ một vài dữ liệu".
 
-नीचे दिए गए उदाहरण में, शुरुआती आउटपुट को वाक्य के तौर पर लिखा गया है. इसमें देश (ब्राज़ील) का नाम भी शामिल है. मान लें कि आपको आउटपुट किसी दूसरे फ़ॉर्मैट या स्टाइल में चाहिए. साथ ही, आपको सिर्फ़ शहर का नाम चाहिए, देश का नाम नहीं. अपने प्रॉम्प्ट में कुछ उदाहरण जोड़कर, मॉडल को अपनी पसंद के मुताबिक जवाब देने के लिए कहा जा सकता है.
+Trong ví dụ bên dưới, kết quả ban đầu được viết dưới dạng câu và cũng chứa quốc gia (Brazil). Giả sử bạn muốn đầu ra ở một định dạng hoặc kiểu khác và bạn chỉ muốn có thành phố chứ không phải quốc gia. Việc thêm một vài ví dụ ít lượt tương tác vào câu lệnh có thể hướng mô hình phản hồi theo cách bạn muốn.
 
-| **प्रॉम्प्ट** | **मॉडल का जवाब** |
+| **Câu lệnh** | **Phản hồi của mô hình** |
 | --- | --- |
-| यात्रा का टाइमटेबल शहर और मशहूर जगह की जानकारी का पता लगाएं. | यह लैंडमार्क, ब्राज़ील के रियो डि जेनेरो में मौजूद क्राइस्ट द रीडीमर की मूर्ति है. |
+| Lịch trình du lịch Xác định thành phố cùng với địa danh. | Địa danh này là tượng Chúa Kitô Cứu thế ở Rio de Janeiro, Brazil. |
 
-| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
+| **Câu lệnh mới** | **Cải thiện phản hồi** |
 | --- | --- |
-| शहर और मशहूर जगह की जानकारी का पता लगाएं. कोलोसियम | शहर: रोम, लैंडमार्क: कलॉसियम. |
-| फ़ॉर्बिडन सिटी | शहर: बीजिंग, मशहूर जगह: फ़ॉर्बिडन सिटी |
-| forbidden-city | शहर: रियो डि जेनेरो, लैंडमार्क: क्राइस्ट द रीडीमर की मूर्ति |
+| Xác định thành phố cùng với địa danh. đấu trường La Mã | thành phố: Rome, địa danh: Đấu trường La Mã. |
+| Tử Cấm Thành | thành phố: Bắc Kinh, địa danh: Tử Cấm Thành |
+| tử cấm thành | thành phố: Rio de Janeiro, địa danh: Tượng Chúa Kitô Cứu thế |
 
-### इसे सिलसिलेवार तरीके से समझें
+### Chia nhỏ thành từng bước
 
-मुश्किल टास्क के लिए, टास्क को छोटे-छोटे और आसान चरणों में बांटना मददगार हो सकता है. जैसे, ऐसे टास्क जिनमें विज़ुअल को समझने के साथ-साथ तर्क देने की भी ज़रूरत होती है. इसके अलावा, अगर आपने प्रॉम्प्ट में सीधे तौर पर मॉडल से “एक-एक करके सोचो” कहा है, तो भी यह तरीका असरदार हो सकता है.
+Đối với những tác vụ phức tạp như những tác vụ đòi hỏi cả khả năng hiểu biết trực quan và suy luận, bạn nên chia tác vụ thành các bước nhỏ hơn và đơn giản hơn. Ngoài ra, bạn cũng có thể yêu cầu trực tiếp mô hình "suy nghĩ từng bước" trong câu lệnh của mình để đạt được hiệu quả.
 
-| प्रॉम्प्ट | मॉडल का जवाब |
+| Câu lệnh | Câu trả lời của mô hình |
 | --- | --- |
-| मेरा टॉयलेट पेपर कब खत्म होगा? | जल्द ही, आपके पास सिर्फ़ तीन रोल बचे होंगे. |
+| Khi nào thì tôi sẽ hết giấy vệ sinh? | Bạn chỉ còn 3 lượt quay. |
 
-| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
+| **Câu lệnh mới** | **Cải thiện phản hồi** |
 | --- | --- |
-| 1. सबसे पहले, इस तस्वीर में मौजूद टॉयलेट पेपर रोल की संख्या गिनें.  2. इसके बाद, यह तय करें कि एक सामान्य व्यक्ति हर दिन कितना टॉयलेट पेपर इस्तेमाल करता है.  3. यह हिसाब लगाओ कि टॉयलेट पेपर के ये रोल कितने दिन तक चलेंगे. | 1. इस तस्वीर में टॉयलेट पेपर के तीन रोल हैं.  2. आम तौर पर, एक व्यक्ति हर दिन करीब 20 शीट टॉयलेट पेपर का इस्तेमाल करता है.  3. अगर हर रोल में 200 शीट हैं, तो हर रोल करीब 10 दिनों तक चलेगा. इसलिए, ये तीन रोल करीब एक महीने तक चलेंगे. |
+| 1. Trước tiên, hãy đếm xem có bao nhiêu cuộn giấy vệ sinh trong bức ảnh này.  2. Sau đó, hãy xác định lượng giấy vệ sinh mà một người thường dùng mỗi ngày.  3. Tính xem những cuộn giấy vệ sinh này sẽ dùng được trong bao lâu. | 1. Có 3 cuộn giấy vệ sinh trong bức ảnh này.  2. Một người thường dùng khoảng 20 tờ giấy vệ sinh mỗi ngày.  3. Nếu mỗi cuộn có 200 tờ, thì mỗi cuộn sẽ dùng được khoảng 10 ngày. Do đó, 3 cuộn giấy sẽ dùng được khoảng một tháng. |
 
-गणित के सवालों या अन्य तरह के इबारती सवालों के लिए, मॉडल को सिलसिलेवार तरीके से सोचने के लिए कहा जा सकता है.
+Các bài toán hoặc những loại bài toán có lời văn khác là những lựa chọn phù hợp để yêu cầu mô hình suy nghĩ từng bước.
 
-| **प्रॉम्प्ट** | **जवाब** |
+| **Câu lệnh** | **Đáp** |
 | --- | --- |
-| इस क्रम में चौथा पद क्या है? | -135 |
+| Số hạng thứ 4 trong dãy số này là bao nhiêu? | -135 |
 
-मॉडल से मिला जवाब गलत है. इसे बेहतर बनाने के लिए, मॉडल से प्रॉम्प्ट का जवाब देने से पहले समस्या को पार्स करने के लिए कहा जा सकता है.
+Câu trả lời của mô hình không chính xác. Một số cách để cải thiện vấn đề này là yêu cầu mô hình phân tích vấn đề trước khi trả lời câu lệnh.
 
-| **प्रॉम्प्ट** | **जवाब** |
+| **Câu lệnh** | **Đáp** |
 | --- | --- |
-| सबसे पहले, इमेज में दिए गए फ़ॉर्मूले को पार्स करो.  इसके बाद, फ़ॉर्मूले के आधार पर जवाब दें कि "सीक्वेंस में चौथा पद क्या है?". | *नतीजे को बड़ा करने के लिए क्लिक करें* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. फ़ॉर्मूले में n = 4 को बदलें:  $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. हमें b(3) की वैल्यू नहीं पता है. इसलिए, फ़ॉर्मूले में n = 3 को बदलें:  $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. हमें b(2) की वैल्यू नहीं पता है. इसलिए, फ़ॉर्मूले में n = 2 को बदलें:  $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. हमें पता है कि b(1) की वैल्यू 15 है. इसलिए, इसे फ़ॉर्मूले में इस तरह से बदलें:  $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. अब हमें b(2) की वैल्यू पता है. इसलिए, इसे b(3) के फ़ॉर्मूले में बदलें:  $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. अब हमें b(3) की वैल्यू पता है. इसलिए, इसे b(4) के फ़ॉर्मूले में बदलें:  $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   इसलिए, क्रम में चौथा पद -405 है. |
+| Trước tiên, hãy phân tích cú pháp công thức trong hình ảnh.  Sau đó, dựa vào công thức, hãy trả lời câu hỏi "số hạng thứ 4 trong dãy số là gì?". | *Nhấp để mở rộng kết quả* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. Thay n = 4 vào công thức:  $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. Chúng ta không biết giá trị của b(3), vì vậy hãy thay n = 3 vào công thức:  $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. Chúng ta không biết giá trị của b(2, nên hãy thay n = 2 vào công thức:  $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. Chúng ta biết giá trị của b(1) là 15, vì vậy hãy thay thế giá trị này vào công thức:  $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. Giờ đây, khi đã biết giá trị của b(2), hãy thay thế giá trị đó vào công thức cho b(3):  $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. Giờ đây, khi đã biết giá trị của b(3), hãy thay thế giá trị đó vào công thức cho b(4):  $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   Do đó, số hạng thứ 4 trong dãy số là -405. |
 
-इस मॉडल का जवाब सही है. अब जवाब को और भी बेहतर बनाने के लिए, मॉडल को चरण-दर-चरण सोचने के लिए कहा जा सकता है.
+Câu trả lời của mô hình này là chính xác. Giờ đây, để câu trả lời trở nên tinh gọn hơn nữa, bạn có thể yêu cầu mô hình suy nghĩ từng bước.
 
-| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
+| **Câu lệnh mới** | **Cải thiện phản hồi** |
 | --- | --- |
-| इस क्रम में चौथा पद क्या है? एक-एक करके सोचें. | पहला शब्द 15 है.  दूसरा पद b(1) \* (-3) = 15 \* (-3) = -45 है.  तीसरा पद b(2) \* (-3) = -45 \* (-3) = 135 है.  चौथा पद b(3) \* (-3) = 135 \* (-3) = -405 है. |
+| Số hạng thứ 4 trong dãy số này là bao nhiêu? Hãy suy nghĩ từng bước. | Số hạng đầu tiên là 15.  Số hạng thứ hai là b(1) \* (-3) = 15 \* (-3) = -45.  Số hạng thứ ba là b(2) \* (-3) = -45 \* (-3) = 135.  Số hạng thứ tư là b(3) \* (-3) = 135 \* (-3) = -405. |
 
-### आउटपुट का फ़ॉर्मैट तय करना
+### Chỉ định định dạng đầu ra
 
-एक आम समस्या यह है कि मॉडल के आउटपुट को किसी खास फ़ॉर्मैट (जैसे, मार्कडाउन, JSON, एचटीएमएल) में होना चाहिए. ऐसा खास तौर पर तब होता है, जब मॉडल के आउटपुट को डाउनस्ट्रीम टास्क में शामिल करना हो. मॉडल को प्रॉम्प्ट में ऐसा करने का निर्देश देकर, उस फ़ॉर्मैट में आउटपुट जनरेट करने की कोशिश की जा सकती है. यहां दो उदाहरण दिए गए हैं:
+Một vấn đề thường gặp là nhu cầu về đầu ra của mô hình ở một định dạng nhất định (ví dụ: Markdown, JSON, HTML), đặc biệt là nếu đầu ra của mô hình cần được một tác vụ hạ nguồn tiếp nhận. Bạn có thể thử tạo đầu ra ở định dạng đó bằng cách hướng dẫn mô hình thực hiện trong câu lệnh. Dưới đây là hai ví dụ:
 
-| प्रॉम्प्ट | मॉडल का जवाब |
+| Câu lệnh | Câu trả lời của mô hình |
 | --- | --- |
-| इस इमेज में मौजूद टेबल को मार्कडाउन फ़ॉर्मैट में पार्स करो | | विषय | स्थिति | समय | शुरू होने की तारीख | इस तारीख तक पूरा करना है |  | ------- | ------ | ---- | ---------- | ------ |  | गणित | हो गया | डेढ़ घंटे | 29/11/2023 | 1/12/2023 |  | भूगोल | हो गया | 30 मिनट | 2/12/2023 | 4/12/2023 |  | भौतिक विज्ञान | जारी है | 2 घंटे | 3/12/2023 | 5/12/2023 |  | जीव विज्ञान | शुरू नहीं किया गया | 6 घंटे | 2/11/2016 | 6/12/2023 | |
+| Phân tích bảng trong hình ảnh này thành định dạng đánh dấu | | Chủ đề | Trạng thái | Thời gian | Ngày bắt đầu | Đến hạn |  | ------- | ------ | ---- | ---------- | ------ |  | Toán học | Đã hoàn thành | 1,5 giờ | 29/11/2023 | 1/12/2023 |  | Địa lý | Đã hoàn tất | 30 phút | 2/12/2023 | 4/12/2023 |  | Vật lý | Đang tiến hành | 2 giờ | 3/12/2023 | 5/12/2023 |  | Sinh học | Chưa bắt đầu | 6 giờ | 2/11/2016 | 6/12/2023 | |
 
-| **प्रॉम्प्ट** | **मॉडल का जवाब** |
+| **Câu lệnh** | **Phản hồi của mô hình** |
 | --- | --- |
-| यहां दिए गए सभी एट्रिब्यूट की सूची दें:  सामग्री, पकवान का टाइप, शाकाहारी है या नहीं, JSON फ़ॉर्मैट में | ```` ```json ````  `{`  `"ingredients": [`  `"rice",`  `"shrimp",`  `"clams",`  `"mussels",`  `"peas",`  `"tomatoes",`  `"onions",`  `"garlic",`  `"olive oil",`  `"paprika",`  `"salt",`  `"pepper"`  `],`  `"type of cuisine": "Spanish",`  `"vegetarian": false`  `}`  ```` ``` ```` |
+| Cung cấp danh sách tất cả các thuộc tính sau:  thành phần, loại ẩm thực, ăn chay hay không, ở định dạng JSON | ```` ```json ````  `{`  `"ingredients": [`  `"rice",`  `"shrimp",`  `"clams",`  `"mussels",`  `"peas",`  `"tomatoes",`  `"onions",`  `"garlic",`  `"olive oil",`  `"paprika",`  `"salt",`  `"pepper"`  `],`  `"type of cuisine": "Spanish",`  `"vegetarian": false`  `}`  ```` ``` ```` |
 
-### एक इमेज वाले प्रॉम्प्ट के लिए, इमेज को सबसे पहले रखें
+### Đặt hình ảnh lên trước cho câu lệnh một hình ảnh
 
-Gemini, प्रॉम्प्ट में इमेज और टेक्स्ट को किसी भी क्रम में समझ सकता है. हालांकि, टेक्स्ट प्रॉम्प्ट से पहले एक इमेज रखने से बेहतर नतीजे मिल सकते हैं.
-यहां दिए गए सैंपल में, आपको दिखेगा कि हर प्रॉम्प्ट में टेक्स्ट से पहले इमेज दी गई है.
+Mặc dù Gemini có thể diễn giải hình ảnh và văn bản theo bất kỳ thứ tự nào trong câu lệnh, nhưng việc đặt một hình ảnh duy nhất trước câu lệnh dạng văn bản có thể mang lại kết quả tốt hơn.
+Trong các mẫu sau, bạn sẽ nhận thấy hình ảnh xuất hiện trước văn bản trong mỗi câu lệnh.
 
-### टेक्स्ट, इमेज वग़ैरह को प्रोसेस करने वाले मॉडल की मदद से प्रॉम्प्ट बनाने से जुड़ी समस्या हल करना
+### Khắc phục sự cố với câu lệnh đa phương thức
 
-अगर आपको काम का जवाब नहीं मिल रहा है, तो हो सकता है कि आपको अपने प्रॉम्प्ट से जुड़ी समस्या हल करनी पड़े. यहां कुछ रणनीतियां दी गई हैं, जिन्हें आज़माया जा सकता है.
+Bạn có thể cần khắc phục sự cố về câu lệnh nếu không nhận được phản hồi hữu ích. Sau đây là một số chiến lược mà bạn có thể thử.
 
-#### अगर मॉडल, इमेज के काम के हिस्से से जानकारी नहीं ले रहा है
+#### Nếu mô hình không lấy thông tin từ phần liên quan của hình ảnh
 
-ज़्यादा सटीक जवाब पाने के लिए, यह बताया जा सकता है कि आपको इमेज के किन पहलुओं के बारे में जानकारी चाहिए, ताकि प्रॉम्प्ट के जवाब में वह जानकारी शामिल की जा सके.
+Để nhận được câu trả lời cụ thể hơn, bạn có thể chỉ ra những khía cạnh của hình ảnh mà bạn muốn câu lệnh lấy thông tin để đưa ra câu trả lời.
 
-| प्रॉम्प्ट | मॉडल का जवाब |
+| Câu lệnh | Câu trả lời của mô hình |
 | --- | --- |
-| ये डायपर, बच्चे के लिए कितने दिनों तक चलेंगे? | ये डायपर 198 दिनों तक चलेंगे. |
+| Số lượng tã này sẽ dùng được trong bao nhiêu ngày cho một em bé? | Số tã này sẽ dùng được trong 198 ngày. |
 
-| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
+| **Câu lệnh mới** | **Cải thiện phản hồi** |
 | --- | --- |
-| ये डायपर कितने समय तक चलेंगे?  बच्चे की उम्र का पता लगाने के लिए, बॉक्स पर दिया गया वज़न देखें. साथ ही, बॉक्स में मौजूद डायपर की कुल संख्या का इस्तेमाल करें.  कुल संख्या को इस बात से भाग दें कि बच्चा हर दिन कितने डायपर इस्तेमाल करता है. | इस बॉक्स में 198 डायपर हैं. बॉक्स पर लिखा है कि ये डायपर, 22 से 37 पाउंड वज़न वाले बच्चे के लिए हैं.  इस वज़न सीमा वाले बच्चे की उम्र एक से दो साल के बीच हो सकती है.  आम तौर पर, दो साल का बच्चा हर दिन छह डायपर इस्तेमाल करता है. इसलिए, 198 डायपर करीब 33 दिन (198/6) तक चलेंगे. |
+| Tôi có thể dùng hết số tã này trong bao lâu?  Dùng trọng lượng ghi trên hộp để xác định độ tuổi của trẻ và dùng tổng số tã trong hộp.  Chia tổng số cho số lượng tã mà trẻ dùng mỗi ngày. | Hộp này có 198 chiếc tã. Hộp này ghi rằng tã dành cho trẻ có cân nặng từ 10 đến 17 kg.  Trẻ em trung bình trong khoảng cân nặng này có thể từ 1 đến 2 tuổi.  Một đứa trẻ 2 tuổi thường dùng 6 chiếc tã mỗi ngày, do đó, số tã này sẽ dùng được khoảng 33 ngày (198/6). |
 
-#### अगर मॉडल का आउटपुट बहुत सामान्य है और इमेज इनपुट के हिसाब से नहीं है
+#### Nếu đầu ra của mô hình quá chung chung và không đủ phù hợp với dữ liệu đầu vào là hình ảnh
 
-मॉडल को इमेज के हिसाब से जवाब देने में मदद करने के लिए, उससे तर्क देने से पहले इमेज के बारे में बताने के लिए कहें.
+Để giúp mô hình điều chỉnh câu trả lời cho (các) hình ảnh, hãy thử yêu cầu mô hình mô tả (các) hình ảnh trước khi thực hiện nhiệm vụ suy luận.
 
-| प्रॉम्प्ट | मॉडल का जवाब |
+| Câu lệnh | Câu trả lời của mô hình |
 | --- | --- |
-| इन इमेज में क्या चीज़ें कॉमन हैं? | ये चारों इमेज, लैंडस्केप फ़ोटोग्राफ़ी के उदाहरण हैं. |
+| Điểm chung giữa những hình ảnh này là gì? | Cả 4 hình ảnh đều là ví dụ về ảnh phong cảnh. |
 
-| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
+| **Câu lệnh mới** | **Cải thiện phản hồi** |
 | --- | --- |
-| सबसे पहले, हर इमेज में मौजूद चीज़ों के बारे में पूरी जानकारी दो. इन इमेज में क्या कॉमन है? | पहली इमेज में, एक व्यक्ति को सूटकेस पैक करते हुए दिखाया गया है. दूसरी इमेज में, शॉपिंग मॉल का खाली हॉलवे दिखाया गया है. तीसरी इमेज में टॉयलेट पेपर का रोल दिख रहा है. चौथी इमेज में, तूफ़ानी समुद्र दिखाया गया है.  इन सभी इमेज में एक बात समान है. ये सभी इमेज, लिमिनल स्पेस के उदाहरण हैं. लिमिनल स्पेस ऐसी जगहें या स्थितियां होती हैं जो दो अन्य जगहों या स्थितियों के बीच में होती हैं. इनमें अक्सर अनिश्चितता या अस्पष्टता होती है.  पहली इमेज में दिखाया गया है कि व्यक्ति घर पर है और यात्रा पर है. दूसरी इमेज में, दो स्टोर के बीच का हॉलवे दिखाया गया है. तीसरी इमेज टॉयलेट पेपर की है, जो बाथरूम को दिखा सकती है. बाथरूम, निजी और सार्वजनिक जगहों के बीच की जगह होती है. यह एक ऐसी जगह है जहां हम बाहर की दुनिया में जाने या वहां से आने के लिए खुद को तैयार करते हैं.  चौथी इमेज में, समुद्र को शांत और तूफ़ानी दिखाया गया है.  लिमिनल स्पेस, रोमांचक और परेशान करने वाले, दोनों हो सकते हैं. ये नई शुरुआत या अंत की जगह हो सकती हैं. ये जगहें, सोचने-समझने या कुछ करने की जगह हो सकती हैं. |
+| Trước tiên, hãy mô tả chi tiết nội dung trong từng hình ảnh. Điểm chung giữa những hình ảnh này là gì? | Hình ảnh đầu tiên cho thấy một người đang đóng gói hành lý vào vali. Hình ảnh thứ hai cho thấy một hành lang trống trong trung tâm mua sắm. Hình ảnh thứ ba cho thấy một cuộn giấy vệ sinh. Hình ảnh thứ tư cho thấy một vùng biển tối tăm và giông bão.  Điểm chung giữa những hình ảnh này là chúng đều là ví dụ về không gian trung gian. Không gian liminal là những nơi hoặc tình huống nằm giữa hai nơi hoặc tình huống khác. Chúng thường có đặc điểm là cảm giác không chắc chắn hoặc mơ hồ.  Hình ảnh đầu tiên cho thấy người này đang ở giữa trạng thái ở nhà và đi du lịch. Hình ảnh thứ hai cho thấy hành lang giữa hai cửa hàng. Hình ảnh thứ ba là giấy vệ sinh, có thể tượng trưng cho phòng tắm. Phòng tắm là không gian chuyển tiếp giữa khu vực riêng tư và khu vực công cộng. Đó là nơi chúng ta chuẩn bị bước vào hoặc rời khỏi thế giới bên ngoài.  Hình ảnh thứ tư cho thấy biển ở trạng thái giữa bình lặng và bão tố.  Không gian liminal có thể vừa thú vị vừa bất an. Chúng có thể là nơi bắt đầu hoặc kết thúc. Chúng có thể là nơi để suy ngẫm hoặc nơi để hành động. |
 
-मॉडल से साफ़ तौर पर यह भी कहा जा सकता है कि वह इमेज में मौजूद जानकारी का इस्तेमाल करे.
+Bạn cũng có thể thử yêu cầu mô hình tham khảo nội dung trong hình ảnh một cách rõ ràng.
 
-| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
+| **Câu lệnh mới** | **Cải thiện phản hồi** |
 | --- | --- |
-| इन इमेज में क्या चीज़ें कॉमन हैं? अपने जवाब में, इमेज में मौजूद जानकारी का इस्तेमाल करें. | सभी इमेज, यात्रा से जुड़ी हैं. पहली इमेज में एक व्यक्ति को सूटकेस पैक करते हुए दिखाया गया है. दूसरी इमेज में शॉपिंग मॉल का खाली हॉलवे दिखाया गया है. तीसरी इमेज में टॉयलेट पेपर का ढेर दिखाया गया है. चौथी इमेज में तूफ़ानी समुद्र दिखाया गया है.  ये सभी इमेज यात्रा से जुड़ी हैं, क्योंकि ये सभी ऐसी चीज़ें हैं जिनकी लोगों को यात्रा के दौरान ज़रूरत होती है या जिनका वे इस्तेमाल करते हैं. पहली इमेज में एक व्यक्ति को सूटकेस पैक करते हुए दिखाया गया है. लोग ऐसा तब करते हैं, जब वे यात्रा पर जा रहे हों. दूसरी इमेज में, शॉपिंग मॉल का खाली हॉलवे दिखाया गया है. यह ऐसी जगह है जहां लोग अक्सर यात्रा के लिए सामान खरीदने जाते हैं. तीसरी इमेज में टॉयलेट पेपर का एक बंडल दिखाया गया है. लोग अक्सर यात्रा के दौरान इसका इस्तेमाल करते हैं. चौथी इमेज में तूफ़ानी समुद्र दिखाया गया है. यह ऐसी चीज़ है जो लोगों को अक्सर यात्रा के दौरान दिखती है. |
+| Điểm chung giữa những hình ảnh này là gì? Tham khảo nội dung trong hình ảnh trong câu trả lời của bạn. | Tất cả hình ảnh đều liên quan đến du lịch. Hình ảnh đầu tiên cho thấy một người đang đóng gói hành lý vào vali, hình ảnh thứ hai cho thấy một hành lang trống trong trung tâm mua sắm, hình ảnh thứ ba cho thấy một chồng giấy vệ sinh và hình ảnh thứ tư cho thấy một vùng biển tối tăm và giông bão.  Tất cả những hình ảnh này đều liên quan đến du lịch vì đây đều là những thứ mà mọi người cần hoặc sử dụng khi đi du lịch. Hình ảnh đầu tiên cho thấy một người đang đóng gói hành lý vào vali. Đây là việc mà mọi người thường làm khi đi du lịch. Hình ảnh thứ hai cho thấy một hành lang trống trong trung tâm mua sắm, đây là nơi mọi người thường đến để mua đồ cho chuyến đi của mình. Hình ảnh thứ ba cho thấy một chồng giấy vệ sinh. Đây là thứ mà mọi người thường dùng khi đi du lịch. Hình ảnh thứ tư cho thấy một vùng biển tối tăm và bão tố. Đây là điều mà mọi người thường gặp phải khi đi du lịch. |
 
-इमेज से क्रिएटिव आउटपुट पाने के लिए भी यही सलाह काम करती है. खरगोश वाली इस इमेज के उदाहरण में, मॉडल से साफ़ तौर पर इमेज के पहलुओं को शामिल करने के लिए कहने से, आउटपुट को बेहतर बनाया जा सकता है.
+Các mẹo tương tự cũng áp dụng cho kết quả sáng tạo từ hình ảnh. Trong ví dụ sau đây về chú thỏ, việc yêu cầu rõ ràng mô hình đưa các khía cạnh trong hình ảnh vào có thể cải thiện kết quả.
 
-| प्रॉम्प्ट | मॉडल का जवाब |
+| Câu lệnh | Câu trả lời của mô hình |
 | --- | --- |
-| क्या तुम इस इमेज के बारे में मेरे लिए एक कविता लिख सकते हो? | छोटा खरगोश, इतना नरम और भूरा,  खेत में ऊपर और नीचे कूद रहा है.  तुम्हारे कान इतने लंबे, तुम्हारी पूंछ इतनी छोटी,  तुम सबसे प्यारे जानवर हो.  तुम हरी-भरी और मीठी घास खाते हो,  और मुझे देखते ही कूदकर भाग जाते हो.  लेकिन मैं हमेशा तुम्हारा दोस्त रहूंगा,  छोटे खरगोश, आखिर तक. |
+| Bạn có thể viết cho tôi một bài thơ về hình ảnh này không? | Chú thỏ nhỏ, mềm mại và có màu nâu,  Nhảy qua cánh đồng, lên và xuống.  Tai dài, đuôi nhỏ,  Bạn là sinh vật đáng yêu nhất trong tất cả.  Bạn gặm cỏ, cỏ xanh và ngọt,  Và nhảy đi khi thấy tôi.  Nhưng tôi sẽ luôn là bạn của bạn,  Chú thỏ nhỏ, cho đến tận cùng. |
 
-| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
+| **Câu lệnh mới** | **Cải thiện phản hồi** |
 | --- | --- |
-| क्या तुम इस इमेज के बारे में एक कविता लिख सकते हो, जिसमें इस जगह के बारे में जानकारी दी गई हो और जो काफ़ी दिलचस्प हो? | हरा-भरा मैदान, छोटा खरगोश,  कान इतने लंबे, इतने तेज़.  तुम्हें वहां क्या दिख रहा है,  दूर, जहां तुम देख रहे हो?  क्या यह समुद्र का नीला रंग है,  जो सूरज की रोशनी में चमक रहा है?  या फिर, लहरों के टकराने और गरजने की आवाज़,  कोई ऐसी धुन जो आपको पसंद हो?  छोटे खरगोश, मुझे सच बताओ,  किस चीज़ ने तुम्हारा ध्यान खींचा है?  क्या यह नमकीन हवा है,  या सीगल की आवाज़ है जो आपको पसंद है?  शायद यह सब कुछ बहुत बड़ा है,  एक दुनिया इतनी बड़ी और छोटी.  एक ऐसी जगह जहां सपने घूम सकते हैं,  और रोमांच बोया जा सकता है.  छोटे खरगोश, मुझे लगता है कि तुम सपने देख रहे हो,  जब तुम घास पर इतने शांत बैठे हो.  क्या आपको गहराई में गोता लगाना है,  या ज़मीन पर ही रहना है, जहां आप कूद सकते हैं?  चाहे कुछ भी हो, छोटे खरगोश,  अपने अंदर की जिज्ञासा को हमेशा ज़िंदा रखो.  तुम्हारे सपनों और इच्छाओं में,  एक ऐसी दुनिया छिपी है जो तुम्हारे बनाए जाने का इंतज़ार कर रही है. |
+| Bạn có thể viết cho tôi một bài thơ giàu hình ảnh và kịch tính về thông tin về hình ảnh này, đồng thời cho biết vị trí không? | Chú thỏ nhỏ trên bãi cỏ xanh,  Đôi tai dài, thính nhạy.  Bạn thấy gì ở nơi đó,  Ở nơi xa xăm mà bạn đang nhìn chằm chằm?  Có phải là màu xanh dương của đại dương,  Lấp lánh dưới ánh mặt trời?  Hay tiếng sóng vỗ và gầm rú,  Một nhịp điệu mà bạn yêu thích?  Thỏ con ơi, hãy nói cho ta biết,  Điều gì thu hút sự chú ý của con đến vậy?  Là làn gió mặn,  Hay tiếng hải âu kêu vang?  Có lẽ là do sự rộng lớn của tất cả,  Một thế giới vừa rộng lớn vừa nhỏ bé.  Một nơi mà những giấc mơ có thể bay bổng,  Và những cuộc phiêu lưu có thể bắt đầu.  Thỏ con ơi, ta tự hỏi giấc mơ của con là gì,  Khi con ngồi trên cỏ, thật thanh bình.  Bạn có khao khát khám phá biển sâu,  Hay ở trên đất liền, nơi bạn có thể nhảy?  Dù là gì đi chăng nữa, thỏ con ơi,  Hãy giữ cho ngọn lửa tò mò luôn cháy sáng.  Trong những ước mơ và khát vọng của bạn,  Có một thế giới đang chờ bạn sáng tạo. |
 
-#### यह पता लगाना कि प्रॉम्प्ट का कौन-सा हिस्सा काम नहीं कर रहा है
+#### Khắc phục sự cố về phần nào trong câu lệnh không hoạt động
 
-यह जानना मुश्किल हो सकता है कि प्रॉम्प्ट इसलिए पूरा नहीं हुआ, क्योंकि मॉडल **इमेज को समझ नहीं पाया** या इसलिए पूरा नहीं हुआ, क्योंकि मॉडल इमेज को समझ तो गया, लेकिन **तर्क के सही चरण** पूरे नहीं कर पाया.
-इन वजहों के बीच अंतर करने के लिए, मॉडल से पूछें कि इमेज में क्या है.
+Có thể bạn khó biết được liệu một câu lệnh có thất bại là do mô hình **không hiểu hình ảnh** ngay từ đầu hay là do mô hình hiểu hình ảnh nhưng không thực hiện đúng **các bước suy luận** sau đó.
+Để phân biệt những lý do đó, hãy yêu cầu mô hình mô tả nội dung trong hình ảnh.
 
-यहां दिए गए उदाहरण में, अगर मॉडल चाय के साथ खाने के लिए कोई ऐसी चीज़ सुझाता है जो हैरान करने वाली है (जैसे, पॉपकॉर्न), तो पहले यह पता लगाएं कि मॉडल ने इमेज में चाय की पहचान सही तरीके से की है या नहीं.
+Trong ví dụ sau, nếu mô hình phản hồi bằng một món ăn nhẹ có vẻ bất ngờ khi kết hợp với trà (ví dụ: bỏng ngô), trước tiên, bạn có thể khắc phục sự cố để xác định xem mô hình có nhận dạng chính xác rằng hình ảnh có chứa trà hay không.
 
-| प्रॉम्प्ट | समस्या हल करने के लिए प्रॉम्प्ट |
+| Câu lệnh | Lời nhắc để khắc phục sự cố |
 | --- | --- |
-| इसके साथ खाने के लिए, एक मिनट में कौनसा स्नैक बनाया जा सकता है? | इस इमेज के बारे में बताओ. |
+| Tôi có thể làm món ăn nhẹ nào trong 1 phút để ăn kèm với món này? | Mô tả nội dung trong hình ảnh này. |
 
-एक और रणनीति यह है कि मॉडल से, जवाब देने की वजह पूछी जाए. इससे आपको यह पता लगाने में मदद मिल सकती है कि जवाब देने के दौरान, किस हिस्से में गड़बड़ी हुई है.
+Một chiến lược khác là yêu cầu mô hình giải thích lý do. Điều này có thể giúp bạn thu hẹp phạm vi để xác định phần nào của lý luận bị sai, nếu có.
 
-| प्रॉम्प्ट | समस्या हल करने के लिए प्रॉम्प्ट |
+| Câu lệnh | Lời nhắc để khắc phục sự cố |
 | --- | --- |
-| इसके साथ खाने के लिए, एक मिनट में कौनसा स्नैक बनाया जा सकता है? | इसके साथ खाने के लिए, एक मिनट में कौनसा स्नैक बनाया जा सकता है? कृपया इसकी वजह बताएं. |
+| Tôi có thể làm món ăn nhẹ nào trong 1 phút để ăn kèm với món này? | Tôi có thể làm món ăn nhẹ nào trong 1 phút để ăn kèm với món này? Vui lòng giải thích lý do. |
 
-## आगे क्या करना है
+## Bước tiếp theo
 
-- [Google AI Studio](http://aistudio.google.com?hl=hi) का इस्तेमाल करके, मल्टीमॉडल प्रॉम्प्ट लिखें.
-- मीडिया फ़ाइलें अपलोड करने और उन्हें अपने प्रॉम्प्ट में शामिल करने के लिए, Gemini Files API का इस्तेमाल करने के बारे में जानने के लिए, [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=hi), [Audio](https://ai.google.dev/gemini-api/docs/audio?hl=hi), और [Document processing](https://ai.google.dev/gemini-api/docs/document-processing?hl=hi) गाइड देखें.
-- प्रॉम्प्ट डिज़ाइन करने के बारे में ज़्यादा जानकारी के लिए, जैसे कि सैंपलिंग पैरामीटर को ट्यून करना, [प्रॉम्प्ट से जुड़ी रणनीतियां](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=hi) पेज देखें.
+- Hãy thử viết câu lệnh đa phương thức của riêng bạn bằng [Google AI Studio](http://aistudio.google.com?hl=vi).
+- Để biết thông tin về cách sử dụng Gemini Files API để tải tệp đa phương tiện lên và đưa tệp đó vào câu lệnh, hãy xem hướng dẫn về [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=vi), [Âm thanh](https://ai.google.dev/gemini-api/docs/audio?hl=vi) và [Xử lý tài liệu](https://ai.google.dev/gemini-api/docs/document-processing?hl=vi).
+- Để biết thêm hướng dẫn về cách thiết kế câu lệnh, chẳng hạn như điều chỉnh các thông số lấy mẫu, hãy xem trang [Chiến lược về câu lệnh](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=vi).
 
-सुझाव भेजें
+Gửi ý kiến phản hồi
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-आखिरी बार 2026-05-19 (UTC) को अपडेट किया गया.
+Cập nhật lần gần đây nhất: 2026-05-19 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-05-19 (UTC) को अपडेट किया गया."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-19 UTC."],[],[]]

@@ -1,32 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=it
-fetched_at: 2026-05-25T05:24:20.425705+00:00
-title: "Gemini generateContent API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=th
+fetched_at: 2026-06-01T06:02:00.576186+00:00
+title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [generateContent API](https://ai.google.dev/gemini-api/docs?hl=it)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Invia feedback
+ส่งความคิดเห็น
 
-# Ragionamento di Gemini
+# การคิดของ Gemini
 
-I modelli delle serie [Gemini 3 e 2.5](https://ai.google.dev/gemini-api/docs/models?hl=it) utilizzano un "processo di ragionamento" interno che migliora notevolmente le loro capacità di ragionamento e pianificazione in più passaggi, rendendoli altamente efficaci per attività complesse come la programmazione, la matematica avanzata e l'analisi dei dati.
+โมเดลในซีรีส์ [Gemini 3 และ 2.5](https://ai.google.dev/gemini-api/docs/models?hl=th) ใช้ "กระบวนการคิด" ภายในที่ช่วยปรับปรุงความสามารถในการให้เหตุผลและการวางแผนหลายขั้นตอนได้อย่างมาก ทำให้โมเดลมีประสิทธิภาพสูงสำหรับงานที่ซับซ้อน เช่น การเขียนโค้ด คณิตศาสตร์ขั้นสูง และการวิเคราะห์ข้อมูล
 
-Questa guida mostra come utilizzare le funzionalità di ragionamento di Gemini utilizzando l'API Gemini.
+คู่มือนี้จะแสดงวิธีใช้ความสามารถด้านการคิดของ Gemini โดยใช้ Gemini API
 
-## Generare contenuti con il ragionamento
+## การสร้างเนื้อหาด้วยการคิด
 
-L'avvio di una richiesta con un modello di ragionamento è simile a qualsiasi altra richiesta di generazione di contenuti. La differenza fondamentale consiste nello specificare uno dei
-[modelli con supporto per il ragionamento](#supported-models) nel campo `model`, come
-illustrato nel seguente [esempio di generazione di testo](https://ai.google.dev/gemini-api/docs/text-generation?hl=it#text-input):
+การเริ่มคำขอด้วยโมเดลการคิดจะคล้ายกับการเริ่มคำขอสร้างเนื้อหาอื่นๆ [[ความแตกต่างที่สำคัญคือการระบุโมเดลที่รองรับการคิดในช่อง `model` ดังที่แสดงในตัวอย่างการสร้างข้อความต่อไปนี้](#supported-models)](https://ai.google.dev/gemini-api/docs/text-generation?hl=th#text-input)
 
 ### Python
 
@@ -64,7 +63,7 @@ async function main() {
 main();
 ```
 
-### Vai
+### Go
 
 ```
 package main
@@ -114,13 +113,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
  ```
 ```
 
-## Riepiloghi del ragionamento
+## ข้อมูลสรุปความคิด
 
-I riepiloghi del ragionamento sono versioni riassuntive dei ragionamenti non elaborati del modello e offrono informazioni sul processo di ragionamento interno del modello. Tieni presente che i livelli e i budget di ragionamento si applicano ai ragionamenti non elaborati del modello e non ai riepiloghi del ragionamento.
+ข้อมูลสรุปความคิดคือเวอร์ชันสรุปของความคิดดิบของโมเดล และให้ข้อมูลเชิงลึกเกี่ยวกับกระบวนการให้เหตุผลภายในของโมเดล โปรดทราบว่าระดับการคิดและงบประมาณมีผลกับความคิดดิบของโมเดล ไม่ใช่ข้อมูลสรุปความคิด
 
-Puoi attivare i riepiloghi del ragionamento impostando `includeThoughts` su `true` nella configurazione della richiesta. Puoi quindi accedere al riepilogo scorrendo i `parts` del parametro `response` e controllando il valore booleano `thought`.
+คุณเปิดใช้ข้อมูลสรุปความคิดได้โดยตั้งค่า `includeThoughts` เป็น `true` ในการกำหนดค่าคำขอ จากนั้นคุณจะเข้าถึงข้อมูลสรุปได้โดยการวนซ้ำ `parts` ของพารามิเตอร์ `response` และตรวจสอบบูลีน `thought`
 
-Ecco un esempio che mostra come attivare e recuperare i riepiloghi del ragionamento senza streaming, che restituisce un singolo riepilogo del ragionamento finale con la risposta:
+ตัวอย่างต่อไปนี้แสดงวิธีเปิดใช้และดึงข้อมูลสรุปความคิดโดยไม่ใช้การสตรีม ซึ่งจะแสดงข้อมูลสรุปความคิดสุดท้ายรายการเดียวพร้อมกับการตอบกลับ
 
 ### Python
 
@@ -189,7 +188,7 @@ async function main() {
 main();
 ```
 
-### Vai
+### Go
 
 ```
 package main
@@ -230,7 +229,7 @@ func main() {
 }
 ```
 
-Ecco un esempio di utilizzo del ragionamento con lo streaming, che restituisce riepiloghi incrementali durante la generazione:
+และนี่คือตัวอย่างการใช้การคิดกับการสตรีม ซึ่งจะแสดงข้อมูลสรุปแบบเพิ่มทีละส่วนในระหว่างการสร้าง
 
 ### Python
 
@@ -328,7 +327,7 @@ async function main() {
 await main();
 ```
 
-### Vai
+### Go
 
 ```
 package main
@@ -383,25 +382,25 @@ func main() {
 }
 ```
 
-## Controllare il ragionamento
+## การควบคุมการคิด
 
-Per impostazione predefinita, i modelli Gemini eseguono un ragionamento dinamico, regolando automaticamente la quantità di ragionamento in base alla complessità della richiesta dell'utente.
-Tuttavia, se hai vincoli di latenza specifici o richiedi che il modello esegua un ragionamento più approfondito del solito, puoi utilizzare facoltativamente i parametri per controllare il comportamento del ragionamento.
+โมเดล Gemini จะคิดแบบไดนามิกโดยค่าเริ่มต้น ซึ่งจะปรับความพยายามในการให้เหตุผลโดยอัตโนมัติตามความซับซ้อนของคำขอของผู้ใช้
+อย่างไรก็ตาม หากคุณมีข้อจำกัดด้านเวลาในการตอบสนองที่เฉพาะเจาะจงหรือต้องการให้โมเดลให้เหตุผลที่ลึกซึ้งกว่าปกติ คุณสามารถใช้พารามิเตอร์เพื่อควบคุมลักษณะการทำงานของการคิดได้
 
-### Livelli di ragionamento (Gemini 3)
+### ระดับการคิด (Gemini 3)
 
-Il parametro `thinkingLevel`, consigliato per i modelli Gemini 3 e versioni successive, consente di controllare il comportamento del ragionamento.
+พารามิเตอร์ `thinkingLevel` ซึ่งแนะนำให้ใช้กับโมเดล Gemini 3 ขึ้นไป ช่วยให้คุณควบคุมลักษณะการทำงานของการให้เหตุผลได้
 
-La tabella seguente descrive in dettaglio le impostazioni di `thinkingLevel` per ogni tipo di modello:
+ตารางต่อไปนี้แสดงรายละเอียดการตั้งค่า `thinkingLevel` สำหรับโมเดลแต่ละประเภท
 
-| Livello di ragionamento | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | Gemini 3.5 Flash | Descrizione |
+| ระดับการคิด | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | Gemini 3.5 Flash | คำอธิบาย |
 | --- | --- | --- | --- | --- | --- |
-| **`minimal`** | Non supportato | Supportato (valore predefinito) | Supportato | Supportato | Corrisponde all'impostazione "nessun ragionamento" per la maggior parte delle query. Il modello potrebbe ragionare in modo molto minimo per attività di programmazione complesse. Riduce al minimo la latenza per le applicazioni di chat o con throughput elevato. Tieni presente che `minimal` non garantisce che il ragionamento sia disattivato. |
-| **`low`** | Supportato | Supportato | Supportato | Supportato | Riduce al minimo la latenza e i costi. Ideale per istruzioni semplici, chat o applicazioni con velocità effettiva elevata. |
-| **`medium`** | Supportato | Supportato | Supportato | Supportato (valore predefinito) | Ragionamento bilanciato per la maggior parte delle attività. |
-| **`high`** | Supportato (valore predefinito, dinamico) | Supportato (dinamico) | Supportato (valore predefinito, dinamico) | Supportato (dinamico) | Massimizza la profondità del ragionamento. Il modello potrebbe impiegare molto più tempo per raggiungere un primo token di output (non di ragionamento), ma l'output sarà più accurato. |
+| **`minimal`** | ไม่รองรับ | สิ่งที่ทำได้ (ค่าเริ่มต้น) | สิ่งที่ทำได้ | สิ่งที่ทำได้ | ตรงกับการตั้งค่า "ไม่คิด" สำหรับคำค้นหาส่วนใหญ่ โมเดลอาจคิดน้อยมากสำหรับงานเขียนโค้ดที่ซับซ้อน ลดเวลาในการตอบสนองสำหรับแอปพลิเคชันแชทหรือแอปพลิเคชันที่มีการส่งข้อความปริมาณมาก โปรดทราบว่า `minimal` ไม่ได้รับประกันว่าจะปิดการคิด |
+| **`low`** | สิ่งที่ทำได้ | สิ่งที่ทำได้ | สิ่งที่ทำได้ | สิ่งที่ทำได้ | ลดเวลาในการตอบสนองและค่าใช้จ่าย เหมาะที่สุดสำหรับการทำตามคำแนะนำง่ายๆ การแชท หรือแอปพลิเคชันที่มีปริมาณงานสูง |
+| **`medium`** | สิ่งที่ทำได้ | สิ่งที่ทำได้ | สิ่งที่ทำได้ | สิ่งที่ทำได้ (ค่าเริ่มต้น) | การคิดที่สมดุลสำหรับงานส่วนใหญ่ |
+| **`high`** | สิ่งที่ทำได้ (ค่าเริ่มต้น, ไดนามิก) | สิ่งที่ทำได้ (ไดนามิก) | สิ่งที่ทำได้ (ค่าเริ่มต้น, ไดนามิก) | สิ่งที่ทำได้ (ไดนามิก) | เพิ่มความลึกในการให้เหตุผลให้สูงสุด โมเดลอาจใช้เวลานานขึ้นอย่างมากในการ แสดงโทเค็นเอาต์พุตแรก (ที่ไม่ใช่การคิด) แต่เอาต์พุตจะได้รับการพิจารณาอย่างรอบคอบมากขึ้น |
 
-Il seguente esempio mostra come impostare il livello di ragionamento.
+ตัวอย่างต่อไปนี้แสดงวิธีตั้งค่าระดับการคิด
 
 ### Python
 
@@ -446,7 +445,7 @@ async function main() {
 main();
 ```
 
-### Vai
+### Go
 
 ```
 package main
@@ -504,28 +503,30 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 }'
 ```
 
-Non puoi disattivare il ragionamento per Gemini 3.1 Pro. Anche Gemini 3 Flash e Flash-Lite non supportano la disattivazione completa del ragionamento, ma l'impostazione `minimal` indica che il modello probabilmente non ragionerà (anche se potenzialmente può farlo).
-Se non specifichi un livello di ragionamento, Gemini utilizzerà il livello di ragionamento predefinito dei modelli Gemini 3 (ad es. `"high"` per Gemini 3.1 Pro e `"medium"` per Gemini 3.5 Flash).
+คุณปิดใช้การคิดสำหรับ Gemini 3.1 Pro ไม่ได้ นอกจากนี้ Gemini 3 Flash และ Flash-Lite ยังไม่รองรับการปิดการคิดอย่างสมบูรณ์ แต่การตั้งค่า `minimal` หมายความว่าโมเดลอาจจะไม่คิด (แม้ว่าอาจจะยังคิดได้)
+หากคุณไม่ได้ระบุระดับการคิด Gemini จะใช้ระดับการคิดเริ่มต้นของโมเดล Gemini 3 (เช่น `"high"` สำหรับ Gemini 3.1 Pro และ `"medium"` สำหรับ Gemini 3.5 Flash)
 
-I modelli della serie Gemini 2.5 non supportano `thinkingLevel`; utilizza invece `thinkingBudget`.
+โมเดลในซีรีส์ Gemini 2.5 ไม่รองรับ `thinkingLevel` ให้ใช้ `thinkingBudget` แทน
 
-### Budget di ragionamento
+### งบประมาณการคิด
 
-Il parametro `thinkingBudget`, introdotto con la serie Gemini 2.5, indica al modello il numero specifico di token di ragionamento da utilizzare per il ragionamento.
+พารามิเตอร์ `thinkingBudget` ซึ่งเปิดตัวพร้อมกับซีรีส์ Gemini 2.5 จะแนะนำโมเดลเกี่ยวกับจำนวนโทเค็นการคิดที่เฉพาะเจาะจงที่จะใช้ในการให้เหตุผล
 
-Di seguito sono riportati i dettagli di configurazione di `thinkingBudget` per ogni tipo di modello.
-Puoi disattivare il ragionamento impostando `thinkingBudget` su 0.
-Se imposti `thinkingBudget` su -1, viene attivato il **ragionamento dinamico**, il che significa che il modello regolerà il budget in base alla complessità della richiesta.
+รายละเอียดการกำหนดค่า `thinkingBudget` สำหรับโมเดลแต่ละประเภทมีดังนี้
+คุณปิดใช้การคิดได้โดยตั้งค่า `thinkingBudget` เป็น 0
+การตั้งค่า `thinkingBudget` เป็น -1 จะเปิด
+ใช้ **การคิดแบบไดนามิก** ซึ่งหมายความว่าโมเดลจะปรับงบประมาณตาม
+ความซับซ้อนของคำขอ
 
-| Modello | Impostazione predefinita (il budget di ragionamento non è impostato) | Intervallo | Disattiva il ragionamento | Attiva il ragionamento dinamico |
+| โมเดล | การตั้งค่าเริ่มต้น (ไม่ได้ตั้งค่า งบประมาณการคิด) | ช่วง | ปิดใช้การคิด | เปิดใช้การคิดแบบไดนามิก |
 | --- | --- | --- | --- | --- |
-| **2.5 Pro** | Ragionamento dinamico | Da `128` a `32768` | N/A: non è possibile disattivare il ragionamento | `thinkingBudget = -1` (valore predefinito) |
-| **2.5 Flash** | Ragionamento dinamico | Da `0` a `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (valore predefinito) |
-| **2.5 Flash (anteprima)** | Ragionamento dinamico | Da `0` a `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (valore predefinito) |
-| **2.5 Flash Lite** | Il modello non ragiona | Da `512` a `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
-| **2.5 Flash Lite (anteprima)** | Il modello non ragiona | Da `512` a `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
-| **Robotics-ER 1.6 (anteprima)** | Ragionamento dinamico | Da `0` a `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (valore predefinito) |
-| **2.5 Flash Live Native Audio (anteprima) (09-2025)** | Ragionamento dinamico | Da `0` a `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (valore predefinito) |
+| **2.5 Pro** | การคิดแบบไดนามิก | `128` ถึง `32768` | ไม่มี: ปิดใช้การคิดไม่ได้ | `thinkingBudget = -1` (ค่าเริ่มต้น) |
+| **2.5 Flash** | การคิดแบบไดนามิก | `0` ถึง `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (ค่าเริ่มต้น) |
+| **2.5 Flash เวอร์ชันตัวอย่าง** | การคิดแบบไดนามิก | `0` ถึง `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (ค่าเริ่มต้น) |
+| **2.5 Flash Lite** | โมเดลไม่คิด | `512` ถึง `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
+| **2.5 Flash Lite เวอร์ชันตัวอย่าง** | โมเดลไม่คิด | `512` ถึง `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
+| **Robotics-ER 1.6 เวอร์ชันตัวอย่าง** | การคิดแบบไดนามิก | `0` ถึง `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (ค่าเริ่มต้น) |
+| **2.5 Flash Live Native Audio เวอร์ชันตัวอย่าง (09-2025)** | การคิดแบบไดนามิก | `0` ถึง `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (ค่าเริ่มต้น) |
 
 ### Python
 
@@ -578,7 +579,7 @@ async function main() {
 main();
 ```
 
-### Vai
+### Go
 
 ```
 package main
@@ -640,32 +641,31 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:g
 }'
 ```
 
-A seconda del prompt, il modello potrebbe superare o non raggiungere il budget di token.
+โมเดลอาจใช้โทเค็นเกินงบประมาณหรือใช้โทเค็นน้อยกว่างบประมาณ ทั้งนี้ขึ้นอยู่กับพรอมต์
 
-## Firme del ragionamento
+## ลายเซ็นความคิด
 
-L'API Gemini è senza stato, quindi il modello tratta ogni richiesta API in modo indipendente e non ha accesso al contesto di ragionamento dei turni precedenti nelle interazioni in più turni.
+Gemini API เป็นแบบไม่เก็บสถานะ ดังนั้นโมเดลจะถือว่าคำขอ API ทุกรายการเป็นอิสระจากกัน และไม่มีสิทธิ์เข้าถึงบริบทความคิดจากรอบก่อนหน้าในการโต้ตอบหลายรอบ
 
-Per consentire il mantenimento del contesto di ragionamento nelle interazioni in più turni, Gemini restituisce le firme del ragionamento, che sono rappresentazioni criptate del processo di ragionamento interno del modello.
+Gemini จะแสดงลายเซ็นความคิด ซึ่งเป็นการแสดงกระบวนการคิดภายในของโมเดลที่เข้ารหัสไว้ เพื่อให้สามารถรักษาบริบทความคิดในการโต้ตอบหลายรอบ
 
-- **I modelli Gemini 2.5** restituiscono le firme del ragionamento quando il ragionamento è attivato e
-  la richiesta include [la chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it#thinking),
-  in particolare [le dichiarazioni di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it#step-2).
-- I **modelli Gemini 3** possono restituire le firme del ragionamento per tutti i tipi di [parti](https://ai.google.dev/api/caching?hl=it#Part).
-  Ti consigliamo di restituire sempre tutte le firme così come le hai ricevute, ma è *obbligatorio* per le firme di chiamata di funzione. Per saperne di più, consulta la pagina
-  [Firme del ragionamento](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=it).
+- **โมเดล Gemini 2.5** จะแสดงลายเซ็นความคิดเมื่อเปิดใช้การคิดและ
+  คำขอมีการเรียกใช้[ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th#thinking) โดยเฉพาะ[การประกาศฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th#step-2)
+- **โมเดล Gemini 3** อาจแสดงลายเซ็นความคิดสำหรับ [ชิ้นส่วน](https://ai.google.dev/api/caching?hl=th#Part) ทุกประเภท
+  เราขอแนะนำให้ส่งลายเซ็นทั้งหมดกลับตามที่ได้รับเสมอ แต่การส่งลายเซ็นการเรียกใช้ฟังก์ชันกลับเป็นสิ่งที่ *จำเป็น* อ่านข้อมูลเพิ่มเติมได้ในหน้า
+  [ลายเซ็นความคิด](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=th)
 
-Altre limitazioni di utilizzo da considerare con la chiamata di funzione includono:
+ข้อจำกัดในการใช้งานอื่นๆ ที่ควรพิจารณาเกี่ยวกับการเรียกใช้ฟังก์ชัน ได้แก่
 
-- Le firme vengono restituite dal modello all'interno di altre parti della risposta, ad esempio le parti di chiamata di funzione o di testo.
-  [Restituisci l'intera risposta](https://ai.google.dev/gemini-api/docs/function-calling?hl=it#step-4)
-  con tutte le parti al modello nei turni successivi.
-- Non concatenare le parti con le firme.
-- Non unire una parte con una firma con un'altra parte senza firma.
+- ระบบจะแสดงลายเซ็นจากโมเดลภายในส่วนอื่นๆ ในการตอบกลับ เช่น การเรียกใช้ฟังก์ชันหรือส่วนข้อความ
+  [ส่งการตอบกลับทั้งหมด](https://ai.google.dev/gemini-api/docs/function-calling?hl=th#step-4)
+  พร้อมส่วนทั้งหมดกลับไปยังโมเดลในรอบถัดไป
+- อย่าเชื่อมส่วนต่างๆ เข้าด้วยกันด้วยลายเซ็น
+- อย่าผสานส่วนหนึ่งที่มีลายเซ็นกับอีกส่วนหนึ่งที่ไม่มีลายเซ็น
 
-## Prezzi
+## ราคา
 
-Quando il ragionamento è attivato, il prezzo della risposta è la somma dei token di output e dei token di ragionamento. Puoi ottenere il numero totale di token di ragionamento generati dal campo `thoughtsTokenCount`.
+เมื่อเปิดใช้การคิด ราคาการตอบกลับจะเป็นผลรวมของโทเค็นเอาต์พุตและโทเค็นการคิด คุณดูจำนวนโทเค็นการคิดทั้งหมดที่สร้างขึ้นได้จากช่อง `thoughtsTokenCount`
 
 ### Python
 
@@ -683,7 +683,7 @@ console.log(`Thoughts tokens: ${response.usageMetadata.thoughtsTokenCount}`);
 console.log(`Output tokens: ${response.usageMetadata.candidatesTokenCount}`);
 ```
 
-### Vai
+### Go
 
 ```
 // ...
@@ -695,60 +695,61 @@ fmt.Println("Thoughts tokens:", string(usageMetadata.thoughts_token_count))
 fmt.Println("Output tokens:", string(usageMetadata.candidates_token_count))
 ```
 
-I modelli di ragionamento generano ragionamenti completi per migliorare la qualità della risposta finale
-e poi restituiscono i [riepiloghi](#summaries) per fornire informazioni sul
-processo di ragionamento. Pertanto, il prezzo si basa sui token di ragionamento completi che il modello deve generare per creare un riepilogo, anche se dall'API viene restituito solo il riepilogo.
+โมเดลการคิดจะสร้างความคิดทั้งหมดเพื่อปรับปรุงคุณภาพของการตอบกลับสุดท้าย
+แล้วแสดงข้อมูลสรุปเพื่อแสดงข้อมูลเชิงลึกเกี่ยวกับกระบวนการคิด
+ดังนั้น ราคาจึงอิงตามโทเค็นความคิดทั้งหมดที่โมเดลต้องสร้างขึ้นเพื่อสร้างข้อมูลสรุป แม้ว่า API จะแสดงเฉพาะข้อมูลสรุปก็ตาม
 
-Per saperne di più sui token, consulta la [guida](https://ai.google.dev/gemini-api/docs/tokens?hl=it)
-al conteggio dei token.
+ดูข้อมูลเพิ่มเติมเกี่ยวกับโทเค็นได้ใน[คู่มือการนับโทเค็น](https://ai.google.dev/gemini-api/docs/tokens?hl=th)
 
-## Best practice
+## แนวทางปฏิบัติแนะนำ
 
-Questa sezione include alcune indicazioni per l'utilizzo efficiente dei modelli di ragionamento.
-Come sempre, seguendo le nostre [indicazioni e best practice per i prompt](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=it) otterrai i risultati migliori.
+ส่วนนี้มีคำแนะนำบางอย่างสำหรับการใช้โมเดลการคิดอย่างมีประสิทธิภาพ
+เช่นเคย การทำตาม[คำแนะนำในการเขียนพรอมต์และแนวทางปฏิบัติแนะนำ](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=th)จะช่วยให้คุณได้ผลลัพธ์ที่ดีที่สุด
 
-### Debug e guida
+### การแก้ไขข้อบกพร่องและการควบคุม
 
-- **Esamina il ragionamento**: quando non ricevi la risposta prevista dai
-  modelli di ragionamento, può essere utile analizzare attentamente i riepiloghi del ragionamento di Gemini.
-  Puoi vedere come ha suddiviso l'attività e come è arrivato alla sua conclusione e utilizzare queste informazioni per correggere i risultati corretti.
-- **Fornisci indicazioni nel ragionamento**: se prevedi un output particolarmente lungo, potresti voler fornire indicazioni nel prompt per limitare la
-  [quantità di ragionamento](#set-budget) utilizzata dal modello. In questo modo, puoi riservare più token di output per la risposta.
+- **ตรวจสอบการให้เหตุผล**: เมื่อคุณไม่ได้รับการตอบกลับที่คาดไว้จาก
+  โมเดลการคิด การวิเคราะห์ข้อมูลสรุปความคิดของ Gemini อย่างละเอียดอาจช่วยได้
+  คุณจะเห็นวิธีที่โมเดลแบ่งงานและได้ข้อสรุป และใช้ข้อมูลนั้นเพื่อแก้ไขให้ได้ผลลัพธ์ที่ถูกต้อง
+- **ให้คำแนะนำในการให้เหตุผล**: หากต้องการเอาต์พุตที่ยาวเป็นพิเศษ
+  คุณอาจต้องการให้คำแนะนำในพรอมต์เพื่อจำกัด
+  [จำนวนการคิด](#set-budget)ที่โมเดลใช้ ซึ่งจะช่วยให้คุณสงวนโทเค็นเอาต์พุตไว้สำหรับการตอบกลับได้มากขึ้น
 
-### Complessità dell'attività
+### ความซับซ้อนของงาน
 
-- **Attività semplici (il ragionamento potrebbe essere disattivato):** per le richieste semplici in cui non è richiesto un ragionamento complesso, come il recupero o la classificazione dei fatti, il ragionamento non è necessario. Di seguito trovi alcuni esempi.
-  - "Dove è stata fondata DeepMind?"
-  - "Questa email chiede una riunione o fornisce solo informazioni?"
-- **Attività di media difficoltà (ragionamento predefinito/parziale):** molte richieste comuni traggono vantaggio da un certo grado di elaborazione passo passo o da una comprensione più approfondita. Gemini può utilizzare in modo flessibile la funzionalità di ragionamento per attività come:
-  - Analogizzare la fotosintesi e la crescita.
-  - Confrontare e contrapporre auto elettriche e auto ibride.
-- **Attività difficili (capacità di ragionamento massima):** per le sfide veramente complesse, come la risoluzione di problemi di matematica complessi o attività di programmazione, ti consigliamo di impostare un budget di ragionamento elevato. Questi tipi di attività richiedono che il modello utilizzi tutte le sue capacità di ragionamento e pianificazione, spesso coinvolgendo molti passaggi interni prima di fornire una risposta. Di seguito trovi alcuni esempi.
-  - Risolvi il problema 1 in AIME 2025: trova la somma di tutte le basi intere b > 9 per
-    le quali 17b è un divisore di 97b.
-  - Scrivi codice Python per un'applicazione web che visualizzi i dati del mercato azionario in tempo reale, inclusa l'autenticazione utente. Rendilo il più efficiente possibile.
+- **งานง่าย (อาจปิดการคิดได้):** สำหรับคำขอตรงไปตรงมาที่ไม่จำเป็นต้องมีการให้เหตุผลที่ซับซ้อน เช่น การดึงข้อมูลข้อเท็จจริงหรือการจัดประเภท ไม่จำเป็นต้องมีการคิด ตัวอย่างเช่น
+  - "DeepMind ก่อตั้งขึ้นที่ไหน"
+  - "อีเมลนี้ขอให้มีการประชุมหรือเพียงให้ข้อมูล"
+- **งานปานกลาง (การคิดเริ่มต้น/การคิดบางส่วน):** คำขอทั่วไปจำนวนมากได้รับประโยชน์จากการประมวลผลแบบทีละขั้นตอนหรือความเข้าใจที่ลึกซึ้งยิ่งขึ้น Gemini สามารถใช้ความสามารถด้านการคิดได้อย่างยืดหยุ่นสำหรับงานต่างๆ เช่น
+  - เปรียบเทียบการสังเคราะห์แสงกับการเติบโต
+  - เปรียบเทียบความเหมือนและความแตกต่างของรถยนต์ไฟฟ้าและรถยนต์ไฮบริด
+- **งานยาก (ความสามารถด้านการคิดสูงสุด):** สำหรับความท้าทายที่ซับซ้อนอย่างแท้จริง เช่น การแก้ปัญหาคณิตศาสตร์ที่ซับซ้อนหรืองานเขียนโค้ด เราขอแนะนำให้ตั้งงบประมาณการคิดไว้สูง งานประเภทนี้กำหนดให้โมเดลต้องใช้ความสามารถด้านการให้เหตุผลและการวางแผนอย่างเต็มที่ ซึ่งมักเกี่ยวข้องกับขั้นตอนภายในหลายขั้นตอนก่อนที่จะให้คำตอบ ตัวอย่างเช่น
+  - แก้ปัญหาข้อที่ 1 ใน AIME 2025: หาผลรวมของฐานจำนวนเต็มทั้งหมด b > 9 สำหรับ
+    ซึ่ง 17b เป็นตัวหารของ 97b
+  - เขียนโค้ด Python สำหรับเว็บแอปพลิเคชันที่แสดงข้อมูลตลาดหุ้นแบบเรียลไทม์ รวมถึงการตรวจสอบสิทธิ์ของผู้ใช้ ทำให้มีประสิทธิภาพมากที่สุด
 
-## Modelli, strumenti e funzionalità supportati
+## โมเดล เครื่องมือ และความสามารถที่รองรับ
 
-Le funzionalità di ragionamento sono supportate su tutti i modelli delle serie 3 e 2.5.
-Puoi trovare tutte le funzionalità del modello nella
-[pagina di panoramica del modello](https://ai.google.dev/gemini-api/docs/models?hl=it).
+ฟีเจอร์การคิดรองรับในโมเดลซีรีส์ 3 และ 2.5 ทั้งหมด
+คุณดูความสามารถทั้งหมดของโมเดลได้ในหน้า
+[ภาพรวมของโมเดล](https://ai.google.dev/gemini-api/docs/models?hl=th)
 
-I modelli di ragionamento funzionano con tutti gli strumenti e le funzionalità di Gemini. In questo modo, i modelli possono interagire con sistemi esterni, eseguire codice o accedere a informazioni in tempo reale, incorporando i risultati nel loro ragionamento e nella risposta finale.
+โมเดลการคิดทำงานร่วมกับเครื่องมือและความสามารถทั้งหมดของ Gemini ซึ่งช่วยให้โมเดลโต้ตอบกับระบบภายนอก ดำเนินการโค้ด หรือเข้าถึงข้อมูลแบบเรียลไทม์ โดยรวมผลลัพธ์ไว้ในการให้เหตุผลและการตอบกลับสุดท้าย
 
-Puoi provare esempi di utilizzo degli strumenti con i modelli di ragionamento nel
-[ricettario di ragionamento](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_thinking.ipynb?hl=it).
+คุณลองดูตัวอย่างการใช้เครื่องมือกับโมเดลการคิดได้ใน [คู่มือการใช้งานการคิด][Colab]
 
-## Passaggi successivi
+## ขั้นตอนต่อไปคืออะไร
 
-- La copertura del ragionamento è disponibile nella nostra guida alla compatibilità con [OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=it#thinking).
+- ความครอบคลุมของการคิดมีอยู่ในคู่มือ[ความเข้ากันได้กับ OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=th#thinking)
 
-Invia feedback
+[Colab]: https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get\_started\_thinking.ipynb
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+ส่งความคิดเห็น
 
-Ultimo aggiornamento 2026-05-19 UTC.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Vuoi dirci altro?
+อัปเดตล่าสุด 2026-05-29 UTC
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-19 UTC."],[],[]]
+หากต้องการบอกให้เราทราบเพิ่มเติม
+
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-05-29 UTC"],[],[]]

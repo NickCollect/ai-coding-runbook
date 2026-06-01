@@ -1,49 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=vi
-fetched_at: 2026-05-25T05:26:58.633790+00:00
-title: "B\u1ea3n xem tr\u01b0\u1edbc Gemini 3 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=es-419
+fetched_at: 2026-06-01T05:57:48.668982+00:00
+title: "Versi\u00f3n preliminar de Gemini 3 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-Gửi ý kiến phản hồi
+Enviar comentarios
 
-# Bản xem trước Gemini 3 Flash
+# Versión preliminar de Gemini 3 Flash
 
-Mô hình tốt nhất trên thế giới về khả năng hiểu đa phương thức, đồng thời là mô hình tác nhân và mô hình mã hoá cảm xúc mạnh mẽ nhất từ trước đến nay của chúng tôi, mang đến hình ảnh phong phú hơn và khả năng tương tác sâu sắc hơn, tất cả đều được xây dựng trên nền tảng suy luận tiên tiến hàng đầu.
+Es el mejor modelo del mundo para la comprensión multimodal, así como nuestro modelo de agente y vibe coding más potente hasta la fecha, que ofrece imágenes más detalladas y más interactividad, todo basado en un razonamiento de vanguardia.
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3-flash-preview&hl=vi)
+[Probar en Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3-flash-preview&hl=es-419)
 
-## Tài liệu
+## Documentación
 
-Truy cập vào trang [Hướng dẫn dành cho nhà phát triển Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=vi) để xem thông tin đầy đủ về các tính năng và chức năng.
+Visita la página [Guía para desarrolladores de Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=es-419) para obtener información completa sobre las
+funciones y capacidades.
 
 ## gemini-3-flash-preview
 
-| Thuộc tính | Mô tả |
+| Propiedad | Descripción |
 | --- | --- |
-| id\_cardMã mô hình | `gemini-3-flash-preview` |
-| saveCác loại dữ liệu được hỗ trợ | **Thông tin đầu vào**  Văn bản, Hình ảnh, Video, Âm thanh và PDF  **Đầu ra**  Văn bản |
-| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  1.048.576  **Giới hạn mã thông báo đầu ra**  65.536 |
-| handymanChức năng | **Tạo âm thanh**  Không được hỗ trợ  **API hàng loạt**  Được hỗ trợ  **Lưu vào bộ nhớ đệm**  Được hỗ trợ  **Thực thi mã**  Được hỗ trợ  **Sử dụng máy tính**  Được hỗ trợ  **Tìm kiếm tệp**  Được hỗ trợ  **Suy luận linh hoạt**  Được hỗ trợ  **Gọi hàm**  Được hỗ trợ  **Kết nối với Google Maps**  Được hỗ trợ  **Tạo hình ảnh**  Không được hỗ trợ  **API trực tiếp**  Không được hỗ trợ  **Suy luận ưu tiên**  Được hỗ trợ  **Tìm trong phần liên kết thực tế**  Được hỗ trợ  **Đầu ra có cấu trúc**  Được hỗ trợ  **Tư duy**  Được hỗ trợ  **Ngữ cảnh URL**  Được hỗ trợ |
-| 123Phiên bản | Đọc các [mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm thông tin.  - `Preview: gemini-3-flash-preview` |
-| calendar\_monthNội dung cập nhật mới nhất | Tháng 12 năm 2025 |
-| cognition\_2Điểm cắt kiến thức | Tháng 1 năm 2025 |
+| id\_cardCódigo del modelo | `gemini-3-flash-preview` |
+| saveTipos de datos admitidos | **Entradas**  Texto, imagen, video, audio y PDF  **Resultado**  Texto |
+| token\_autoLímites de tokens[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419) | **Límite de tokens de entrada**  1,048,576  **Límite de tokens de salida**  65,536 |
+| handymanCapacidades | **Generación de audio**  No admitido  **API de lotes**  Admitido  **Almacenamiento en caché**  Admitido  **Ejecución de código**  Admitido  **Uso de la computadora**  Admitido  **Búsqueda de archivos**  Admitido  **Inferencia flexible**  Admitido  **Llamada a función**  Admitido  **Fundamentación con Google Maps**  Admitido  **Generación de imágenes**  No admitido  **API en vivo**  No admitido  **Inferencia prioritaria**  Admitido  **Fundamentación con la Búsqueda**  Admitido  **Salidas estructuradas**  Admitido  **Razonamiento**  Admitido  **Contexto de URL**  Admitido |
+| 123Versiones | Lee los [patrones de versiones de modelos](https://ai.google.dev/gemini-api/docs/models/gemini?hl=es-419#model-versions) para obtener más detalles.  - `Preview: gemini-3-flash-preview` |
+| calendar\_monthÚltima actualización | Diciembre de 2025 |
+| cognition\_2Fecha límite de conocimiento | Enero de 2025 |
 
-Gửi ý kiến phản hồi
+Enviar comentarios
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+Última actualización: 2026-04-29 (UTC)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+¿Quieres brindar más información?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]

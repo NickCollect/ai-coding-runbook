@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=zh-CN
-fetched_at: 2026-05-25T05:25:32.283963+00:00
+source_url: https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ko
+fetched_at: 2026-06-01T06:02:41.654952+00:00
 title: "Antigravity Agent \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-发送反馈
+의견 보내기
 
 # Antigravity Agent
 
-Antigravity 智能体是 Gemini API 上的通用型托管智能体。只需一次 API 调用，您就可以获得一个智能体，该智能体可以在 Google 托管的您自己的安全 Linux 沙盒中进行推理、执行代码、管理文件和浏览网页。
+Antigravity 에이전트는 Gemini API의 범용 관리형 에이전트입니다. 단일 API 호출을 통해 Google에서 호스팅하는 자체 보안 Linux 샌드박스 내에서 추론하고, 코드를 실행하고, 파일을 관리하고, 웹을 탐색하는 에이전트를 얻을 수 있습니다.
 
-它由 Gemini 3.5 Flash 提供支持，并使用与 Antigravity IDE 相同的 harness。可通过 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=zh-cn) 和 [Google AI Studio](https://aistudio.google.com?hl=zh-cn) 使用。
+Gemini 3.5 Flash로 구동되며 Antigravity IDE와 동일한 하네스를 사용합니다. [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=ko) 및 [Google AI Studio](https://aistudio.google.com?hl=ko)를 통해 사용할 수 있습니다.
 
 ### Python
 
@@ -68,29 +68,29 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 功能
+## 기능
 
-每次调用都可以预配 Linux 沙盒并启动工具使用循环。智能体会进行规划、执行操作、观察结果，并重复此过程，直到任务完成。
+각 호출은 Linux 샌드박스를 프로비저닝하고 도구 사용 루프를 시작할 수 있습니다. 에이전트는 태스크가 완료될 때까지 계획하고, 행동하고, 결과를 관찰하고, 반복합니다.
 
-- **代码执行**： 运行 Bash、Python 和 Node.js 命令。安装软件包、运行测试、构建应用。
-- **文件管理**： 在沙盒中读取、写入、修改、搜索和列出文件。文件在多次交互中保持不变。
-- **网络访问**： Google 搜索和网址提取，用于获取数据。
-- **上下文压缩**： 自动上下文压缩（在约 13.5 万个令牌时触发），以支持长时间运行的多轮会话，而不会丢失上下文或达到令牌限制。
+- **코드 실행:** Bash, Python, Node.js 명령어를 실행합니다. 패키지를 설치하고, 테스트를 실행하고, 앱을 빌드합니다.
+- **파일 관리:** 샌드박스에서 파일을 읽고, 쓰고, 수정하고, 검색하고, 나열합니다. 파일은 상호작용 전반에 걸쳐 유지됩니다.
+- **웹 액세스:** 데이터용 Google 검색 및 URL 가져오기.
+- **컨텍스트 압축:** 컨텍스트를 잃거나 토큰 한도에 도달하지 않고 장기 실행 다중 턴 세션을 지원하기 위한 자동 컨텍스트 압축 (~135, 000개 토큰에서 트리거됨).
 
-如需了解多轮使用和流式传输，请参阅[快速入门](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=zh-cn)。
+다중 턴 사용 및 스트리밍에 관한 [빠른 시작](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ko)을 참고하세요.
 
-## 支持的工具
+## 지원되는 도구
 
-默认情况下，智能体可以访问 `code_execution`、`google_search` 和 `url_context`。当您指定 `environment` 参数时，文件系统工具会自动启用。只有在自定义或限制默认集时，您才需要指定 `tools` 参数。
+기본적으로 에이전트는 `code_execution`, `google_search`, `url_context`에 액세스할 수 있습니다. `environment` 매개변수를 지정하면 파일 시스템 도구가 자동으로 사용 설정됩니다. 기본 집합을 맞춤설정하거나 제한할 때만 `tools` 매개변수를 지정하면 됩니다.
 
-| 工具 | 类型值 | 说明 |
+| 도구 | 유형 값 | 설명 |
 | --- | --- | --- |
-| 代码执行 | `code_execution` | 运行 shell 命令（bash、Python、Node），并捕获 stdout/stderr。 |
-| Google 搜索 | `google_search` | 搜索公共网络。 |
-| 网址上下文 | `url_context` | 提取和读取网页。 |
-| 文件系统 | *（通过 `environment` 启用）* | 在沙盒中读取、写入、修改、搜索和列出文件。没有单独的工具类型；在设置 `environment` 时自动启用。 |
+| 코드 실행 | `code_execution` | stdout/stderr 캡처를 사용하여 셸 명령어 (bash, Python, Node)를 실행합니다. |
+| Google 검색 | `google_search` | 공개 웹을 검색합니다. |
+| URL 컨텍스트 | `url_context` | 웹페이지를 가져오고 읽습니다. |
+| 파일 시스템 | *(`environment`를 통해 사용 설정됨)* | 샌드박스에서 파일을 읽고, 쓰고, 수정하고, 검색하고, 나열합니다. 별도의 도구 유형이 없으며 `environment`가 설정되면 자동으로 사용 설정됩니다. |
 
-如需将智能体限制为特定工具，请仅传递所需的工具：
+에이전트를 특정 도구로 제한하려면 필요한 도구만 전달하세요.
 
 ### Python
 
@@ -150,9 +150,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 多模态输入
+## 멀티모달 입력
 
-Antigravity 智能体支持多模态输入。目前，仅支持 `text` 和 `image` 输入。图片必须以内嵌 base64 编码字符串 (`data`) 的形式提供。
+Antigravity 에이전트는 멀티모달 입력을 지원합니다. 현재는 `text` 및 `image` 입력만 지원됩니다. 이미지는 인라인 base64 인코딩 문자열 (`data`)로 제공되어야 합니다.
 
 ### Python
 
@@ -226,69 +226,69 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }"
 ```
 
-## 自定义智能体
+## 에이전트 맞춤설정
 
-您可以通过自定义 Antigravity 智能体的说明、工具和环境来扩展它。智能体支持文件系统原生自定义方法：您可以将 `AGENTS.md` 等文件装载到 `.agents/skills/` 下，以获取说明和技能，也可以在交互时内嵌传递配置。您可以内嵌迭代配置，然后在准备就绪后将其保存为托管智能体。
+안내, 도구, 환경을 맞춤설정하여 Antigravity 에이전트를 확장할 수 있습니다. 에이전트는 파일 시스템 기본 맞춤설정 접근 방식을 지원합니다. 안내 및 기술을 위한 `AGENTS.md`와 같은 파일을 `.agents/skills/` 아래의 샌드박스에 직접 마운트하거나 상호작용 시 인라인으로 구성을 전달할 수 있습니다. 구성을 인라인으로 반복한 후 준비가 되면 관리형 에이전트로 저장할 수 있습니다.
 
-如需详细了解如何构建自定义智能体，请参阅[构建托管智能体](https://ai.google.dev/gemini-api/docs/custom-agents?hl=zh-cn)。
+커스텀 에이전트를 빌드하는 방법에 관한 자세한 내용은 [관리형 에이전트 빌드](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ko)를 참고하세요.
 
-## 环境
+## 환경
 
-每次调用都会创建或重复使用 Linux 沙盒。`environment` 参数采用三种形式：
+각 호출은 Linux 샌드박스를 만들거나 재사용합니다. `environment` 매개변수는 세 가지 형식을 취합니다.
 
-| 姿势 | 说明 |
+| 자세 | 설명 |
 | --- | --- |
-| `"remote"` | 使用默认设置预配新的沙盒。 |
-| `"env_abc123"` | 按 ID 重复使用现有环境，保留所有文件和状态。 |
-| `{...}` | 包含自定义来源和网络规则的完整 `EnvironmentConfig`。 |
+| `"remote"` | 기본 설정으로 새 샌드박스를 프로비저닝합니다. |
+| `"env_abc123"` | 모든 파일과 상태를 보존하여 기존 환경을 ID별로 재사용합니다. |
+| `{...}` | 커스텀 소스 및 네트워크 규칙이 포함된 전체 `EnvironmentConfig`입니다. |
 
-如需详细了解来源（Git、GCS、内嵌）、网络、生命周期和资源限制，请参阅[环境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-cn)。
+소스 (Git, GCS, 인라인), 네트워킹, 수명 주기, 리소스 한도에 관한 자세한 내용은 [환경](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko)을 참고하세요.
 
-## 适用范围和定价
+## 사용 가능 여부 및 가격 책정
 
-Antigravity 智能体可通过 Google AI Studio 和 Gemini API 中的 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=zh-cn) 以预览版形式提供。
+Antigravity 에이전트는 Google AI Studio 및 Gemini API의 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=ko)를 통해 프리뷰로 제공됩니다.
 
-定价遵循[随用随付模式](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn#pricing-for-agents)，具体取决于底层 Gemini 模型令牌和智能体使用的工具。与生成单个输出的标准聊天请求不同，Antigravity 交互是一种智能体工作流。单个请求会触发推理、工具执行、代码运行和文件管理的自主循环。
+가격은 기본 Gemini 모델 토큰과 에이전트가 사용하는 도구를 기반으로 [사용한 만큼만 지불 모델](https://ai.google.dev/gemini-api/docs/pricing?hl=ko#pricing-for-agents)을 따릅니다. 단일 출력을 생성하는 표준 채팅 요청과 달리 Antigravity 상호작용은 에이전트형 워크플로입니다. 단일 요청은 추론, 도구 실행, 코드 실행, 파일 관리의 자율 루프를 트리거합니다.
 
-### 估算费用
+### 예상 비용
 
-费用因任务复杂性而异。智能体会自主确定需要多少工具调用、代码执行和文件操作。以下估算基于运行情况。
+비용은 태스크 복잡성에 따라 다릅니다. 에이전트는 필요한 도구 호출, 코드 실행, 파일 작업 수를 자율적으로 결정합니다. 다음 예상치는 실행을 기반으로 합니다.
 
-| 任务类别 | 输入令牌 | 输出令牌 | 一般费用 |
+| 태스크 카테고리 | 입력 토큰 | 출력 토큰 | 일반적인 비용 |
 | --- | --- | --- | --- |
-| **研究和信息合成** | 10 万–50 万 | 1 万–4 万 | $0.30–$1.00 |
-| **文档和内容生成** | 10 万–50 万 | 1.5 万–5 万 | $0.30–$1.30 |
-| **流程和系统设计** | 10 万–40 万 | 1 万–3 万 | $0.25–$0.80 |
-| **数据处理和分析** | 30 万–300 万 | 3 万–15 万 | $0.70–$3.25 |
+| **연구 및 정보 합성** | 100,000~500,000 | 10,000~40,000 | $0.30~$1.00 |
+| **문서 및 콘텐츠 생성** | 100,000~500,000 | 15,000~50,000 | $0.30~$1.30 |
+| **프로세스 및 시스템 설계** | 100,000~400,000 | 10,000~30,000 | $0.25~$0.80 |
+| **데이터 처리 및 분석** | 300,000~3,000,000 | 30,000~150,000 | $0.70~$3.25 |
 
-通常会缓存 50%–70% 的输入令牌。包含许多工具调用的复杂智能体工作流在一次交互中可能会累积 300 万–500 万个令牌，费用高达约 5 美元。
+일반적으로 입력 토큰의 50~70% 가 캐시됩니다. 도구 호출이 많은 복잡한 에이전트 워크플로는 단일 상호작용에서 300만~500만 개의 토큰을 누적할 수 있으며 비용은 최대 약$5입니다.
 
-在预览版期间，**环境计算** （CPU、内存、沙盒执行）**不会收费** 。
+프리뷰 기간에는 **환경 컴퓨팅** (CPU, 메모리, 샌드박스 실행)에 **요금이 청구되지 않습니다**.
 
-## 限制
+## 제한사항
 
-- **预览版状态**： Antigravity 智能体和 Interactions API 均为预览版。功能和架构可能会发生变化。
-- **不支持的生成配置**： 以下参数不受支持，并返回 400 错误：`temperature`、`top_p`、`top_k`、`stop_sequences`、`max_output_tokens`。
-- **结构化输出**： Antigravity 智能体不支持结构化输出。
-- **不可用的工具**： 尚不支持 `file_search`、`computer_use`、`google_maps`、`function_calling` 和 `mcp`。
-- **文件系统工具**： 目前没有文件系统工具。它是 `environment` 的一部分。
-- **背景**： 智能体不支持使用 `background=True`，并且需要 `store=True`。
-- **不支持的多模态类型。**目前不支持音频、视频和文档输入。仅允许使用文本和图片。
+- **프리뷰 상태:** Antigravity 에이전트와 Interactions API는 프리뷰로 제공됩니다. 기능과 스키마는 변경될 수 있습니다.
+- **지원되지 않는 생성 구성:** 다음 매개변수는 지원되지 않으며 400 오류를 반환합니다. `temperature`, `top_p`, `top_k`, `stop_sequences`, `max_output_tokens`.
+- **구조화된 출력:** Antigravity 에이전트는 구조화된 출력을 지원하지 않습니다.
+- **사용할 수 없는 도구:** `file_search`, `computer_use`, `google_maps`, `function_calling`, `mcp`는 아직 지원되지 않습니다.
+- **파일 시스템 도구:** 현재 파일 시스템 도구가 없습니다. 이는 `environment`의 일부입니다.
+- **백그라운드:** 에이전트는 `background=True` 사용을 지원하지 않으며 `store=True`가 필요합니다.
+- **지원되지 않는 멀티모달 유형.** 현재 오디오, 동영상, 문서 입력은 지원되지 않습니다. 텍스트와 이미지만 허용됩니다.
 
-## 后续步骤
+## 다음 단계
 
-- [快速入门](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=zh-cn)：多轮对话和流式传输。
-- [构建自定义智能体](https://ai.google.dev/gemini-api/docs/custom-agents?hl=zh-cn)：自定义说明、技能和保存智能体。
-- [环境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-cn)：沙盒配置、来源、网络。
-- [Deep Research](https://ai.google.dev/gemini-api/docs/interactions/deep-research?hl=zh-cn)：长篇研究任务。
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=zh-cn)：底层 API。
+- [빠른 시작](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ko): 다중 턴 대화 및 스트리밍.
+- [커스텀 에이전트 빌드](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ko): 커스텀 안내, 기술, 에이전트 저장.
+- [환경](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko): 샌드박스 구성, 소스, 네트워킹.
+- [Deep Research Agent](https://ai.google.dev/gemini-api/docs/interactions/deep-research?hl=ko): 장문 연구 태스크.
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=ko): 기본 API.
 
-发送反馈
+의견 보내기
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-最后更新时间 (UTC)：2026-05-20。
+최종 업데이트: 2026-05-20(UTC)
 
-需要向我们提供更多信息？
+의견을 전달하고 싶나요?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-05-20。"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-05-20(UTC)"],[],[]]

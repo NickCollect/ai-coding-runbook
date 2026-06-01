@@ -1,50 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=ar
-fetched_at: 2026-05-25T05:21:54.231245+00:00
-title: "\u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u062d\u0635\u0631\u064a\u0629 \u0645\u0646 Gemini 2.5 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=pl
+fetched_at: 2026-06-01T06:04:20.544338+00:00
+title: "Podgl\u0105d na \u017cywo Gemini\u00a02.5 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-إرسال ملاحظات
+Prześlij opinię
 
-# النسخة الحصرية من Gemini 2.5 Flash
+# Podgląd na żywo Gemini 2.5 Flash
 
-تتيح Live API التفاعلات الصوتية والمرئية في الوقت الفعلي مع Gemini 2.5 Flash، مع تأخير منخفض. تعالج هذه الواجهة تدفقات مستمرة من الصوت أو الفيديو أو النص لتقديم ردود منطوقة فورية تشبه الردود البشرية، ما يمنح المستخدمين التجربة الحوارية الطبيعية.
+Interfejs Live API umożliwia interakcje głosowe i wideo w czasie rzeczywistym z niewielkimi opóźnieniami dzięki Gemini 2.5 Flash. Przetwarza on ciągłe strumienie audio, wideo lub tekstu, aby dostarczać natychmiastowe odpowiedzi głosowe przypominające ludzką mowę, co zapewnia użytkownikom naturalny tryb konwersacyjny.
 
-[تجربة في Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-native-audio-preview-12-2025&hl=ar)
+[Wypróbuj w Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-native-audio-preview-12-2025&hl=pl)
 
-## الوثائق
+## Dokumentacja
 
-يُرجى الانتقال إلى دليل [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar) للاطّلاع على تغطية كاملة
-للميزات والإمكانات.
+Więcej informacji o funkcjach i możliwościach znajdziesz w przewodniku po interfejsie [Live API](https://ai.google.dev/gemini-api/docs/live?hl=pl).
 
 ## gemini-2.5-flash-native-audio-preview-12-2025
 
-| الموقع | الوصف |
+| Właściwość | Opis |
 | --- | --- |
-| id\_cardرمز النموذج | `gemini-2.5-flash-native-audio-preview-12-2025` |
-| saveأنواع البيانات المتوافقة | **المدخلات**  الصوت والفيديو والنص  **الناتج**  الصوت والنص |
-| token\_autoالحدود القصوى للرموز المميزة[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحد الأقصى لرموز الإدخال المميزة**  131,072  **الحد الأقصى لرموز الإخراج المميزة**  8,192 |
-| handymanالإمكانات | **إنشاء الصوت**  متاح  **Batch API**  غير متاح  **التخزين المؤقت**  غير متاح  **تنفيذ الرموز البرمجية**  غير متاح  **البحث عن الملفات**  غير متاح  **استدعاء الوظائف**  متاح  **استخدام "خرائط Google" كمصدر**  غير متاح  **إنشاء الصور**  غير متاح  **Live API**  متاح  **لتحديد المصادر في "بحث Google"**  متاح  **مُخرجات منظَّمة**  غير متاح  **طريقة التفكير**  متاح  **سياق عنوان URL**  غير متاح |
-| 123الإصدارات | يُرجى قراءة [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions) لمزيد من التفاصيل.  - معاينة: `gemini-2.5-flash-native-audio-preview-12-2025` |
-| calendar\_monthآخر تعديل | سبتمبر 2025 |
-| cognition\_2تاريخ آخر تحديث للبيانات | يناير 2025 |
+| id\_cardKod modelu | `gemini-2.5-flash-native-audio-preview-12-2025` |
+| saveObsługiwane typy danych | **Dane wejściowe**  Audio, wideo, tekst  **Dane wyjściowe**  Audio i tekst |
+| token\_autoLimity tokenów[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | **Limit tokenów wejściowych**  131 072  **Limit tokenów wyjściowych**  8192 |
+| handymanMożliwości | **Generowanie dźwięku**  Obsługiwane  **Interfejs Batch API**  Nieobsługiwane  **Zapisywanie w pamięci podręcznej**  Nieobsługiwane  **Wykonywanie kodu**  Nieobsługiwane  **Wyszukiwanie plików**  Nieobsługiwane  **Wywoływanie funkcji**  Obsługiwane  **Powiązanie ze źródłem informacji przy użyciu Map Google**  Nieobsługiwane  **Generowanie obrazów**  Nieobsługiwane  **Interfejs Live API**  Obsługiwane  **Szukaj groundingu**  Obsługiwane  **Ustrukturyzowane dane wyjściowe**  Nieobsługiwane  **Myślę**  Obsługiwane  **Kontekst adresu URL**  Nieobsługiwane |
+| 123Wersje | Więcej informacji znajdziesz w artykule [Wzorce wersji modelu](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#model-versions).  - Wersja testowa: `gemini-2.5-flash-native-audio-preview-12-2025` |
+| calendar\_monthNajnowsza aktualizacja | Wrzesień 2025 r. |
+| cognition\_2Granica wiedzy | Styczeń 2025 r. |
 
-إرسال ملاحظات
+Prześlij opinię
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
+Ostatnia aktualizacja: 2026-04-29 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Chcesz przekazać coś jeszcze?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]

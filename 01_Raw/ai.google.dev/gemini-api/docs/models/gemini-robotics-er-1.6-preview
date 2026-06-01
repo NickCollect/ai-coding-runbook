@@ -1,49 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.6-preview?hl=ko
-fetched_at: 2026-05-25T05:20:13.835892+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.6-preview?hl=he
+fetched_at: 2026-06-01T06:04:38.942693+00:00
 title: "Gemini Robotics-ER 1.6 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-의견 보내기
+שליחת משוב
 
 # Gemini Robotics-ER 1.6
 
-Gemini Robotics-ER 1.6은 Gemini의 에이전트 기능을 로봇공학에 도입하는 시각-언어 모델 (VLM)입니다. 이 모델은 실제 세계에서 고급 추론을 수행하도록 설계되어 로봇이 복잡한 시각적 데이터를 해석하고, 공간 추론을 실행하고, 자연어 명령어에서 작업을 계획할 수 있도록 지원합니다.
+‫Gemini Robotics-ER 1.6 הוא מודל ראייה ושפה (VLM) שמביא את יכולות ה-AI האקטיבי של Gemini לרובוטיקה. הוא מיועד לחשיבה רציונלית משופרת בעולם הפיזי, ומאפשר לרובוטים לפרש נתונים חזותיים מורכבים, לבצע חשיבה רציונלית מרחבית ולתכנן פעולות מפקודות בשפה טבעית.
 
-[Google AI Studio에서 사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-1.6-preview&hl=ko)
+[לניסיון ב-Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-1.6-preview&hl=he)
 
-## 문서
+## מאמרי עזרה
 
-기능 및 기능에 대한 전체 내용은 [로봇공학](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=ko) 페이지를 참고하세요.
+ב[דף בנושא רובוטיקה](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=he) אפשר לקרוא על כל התכונות והיכולות.
 
 ## gemini-robotics-er-1.6-preview
 
-| 속성 | 설명 |
+| נכס | תיאור |
 | --- | --- |
-| id\_card모델 코드 | `gemini-robotics-er-1.6-preview` |
-| save지원되는 데이터 유형 | **입력**  텍스트, 이미지, 동영상, 오디오  **출력**  텍스트 |
-| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 토큰 한도**  131,072  **출력 토큰 한도**  65,536 |
-| handyman기능 | **오디오 생성**  지원되지 않음  **Batch API**  지원됨  **캐싱**  지원됨  **코드 실행**  지원됨  **컴퓨터 사용**  지원됨  **파일 검색**  지원됨  **가변 추론**  지원됨  **함수 호출**  지원됨  **Google 지도 기반 그라운딩**  지원됨  **이미지 생성**  지원되지 않음  **Live API**  지원되지 않음  **우선순위 추론**  지원됨  **검색 그라운딩**  지원됨  **구조화된 출력**  지원됨  **사고**  지원됨  **URL 컨텍스트**  지원됨 |
-| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - 미리보기: `gemini-robotics-er-1.6-preview` |
-| calendar\_month최신 업데이트 | 2025년 12월 |
-| cognition\_2지식 단절 | 2025년 1월 |
+| id\_cardקוד מודל | `gemini-robotics-er-1.6-preview` |
+| saveסוגי נתונים נתמכים | **קלטים**  טקסט, תמונות, סרטונים, אודיו  **פלט**  טקסט |
+| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  131,072  **מגבלת אסימונים בפלט**  65,536 |
+| handymanיכולות | **יצירת אודיו**  לא נתמך  ‫**Batch API**  נתמך  **שמירת נתונים במטמון**  נתמך  **ביצוע קוד**  נתמך  **שימוש במחשב**  נתמך  **חיפוש קבצים**  נתמך  **הסקת מסקנות גמישה**  נתמך  **בקשה להפעלת פונקציה**  נתמך  **עיגון בעזרת מפות Google**  נתמך  **יצירת תמונות**  לא נתמך  ‫**Live API**  לא נתמך  **היקש בעדיפות גבוהה**  נתמך  **חיפוש עם עיגון בנתונים**  נתמך  **פלטים מובְנים**  נתמך  **תהליך החשיבה**  נתמך  **הקשר של כתובת ה-URL**  נתמך |
+| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - תצוגה מקדימה: `gemini-robotics-er-1.6-preview` |
+| calendar\_monthהעדכון האחרון | דצמבר 2025 |
+| cognition\_2תאריך סף הידע | ינואר 2025 |
 
-의견 보내기
+שליחת משוב
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-최종 업데이트: 2026-04-30(UTC)
+עדכון אחרון: 2026-04-30 (שעון UTC).
 
-의견을 전달하고 싶나요?
+רוצה לתת לנו משוב?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-30(UTC)"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-30 (שעון UTC)."],[],[]]

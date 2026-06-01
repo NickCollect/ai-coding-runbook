@@ -1,41 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-preview?hl=ko
-fetched_at: 2026-05-25T05:17:45.532062+00:00
-title: "Gemini 3 Pro \ud504\ub9ac\ubdf0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-preview?hl=ar
+fetched_at: 2026-06-01T06:08:27.825950+00:00
+title: "\u0645\u0639\u0627\u064a\u0646\u0629 Gemini 3 Pro \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-의견 보내기
+إرسال ملاحظات
 
-# Gemini 3 Pro 프리뷰
+# معاينة Gemini 3 Pro
 
 ## gemini-3-pro-preview
 
-| 속성 | 설명 |
+| الموقع | الوصف |
 | --- | --- |
-| id\_card모델 코드 | `gemini-3-pro-preview` |
-| save지원되는 데이터 유형 | **입력**  텍스트, 이미지, 동영상, 오디오, PDF  **출력**  텍스트 |
-| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 토큰 한도**  1,048,576  **출력 토큰 한도**  65,536 |
-| handyman기능 | **오디오 생성**  지원되지 않음  **Batch API**  지원됨  **캐싱**  지원됨  **코드 실행**  지원됨  **컴퓨터 사용**  지원되지 않음  **파일 검색**  지원됨  **함수 호출**  지원됨  **Google 지도 기반 그라운딩**  지원되지 않음  **이미지 생성**  지원되지 않음  **Live API**  지원되지 않음  **검색 그라운딩**  지원됨  **구조화된 출력**  지원됨  **사고**  지원됨  **URL 컨텍스트**  지원됨 |
-| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 읽어보세요.  - *종료*: `gemini-3-pro-preview` |
-| calendar\_month최근 업데이트 | 2025년 11월 |
-| cognition\_2지식 단절 | 2025년 1월 |
+| id\_cardرمز النموذج | `gemini-3-pro-preview` |
+| saveأنواع البيانات المتوافقة | **المدخلات**  النصوص والصور والفيديوهات والمحتوى الصوتي وملفات PDF  **الناتج**  نص |
+| token\_autoحدود الرموز المميزة[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحدّ الأقصى لعدد الرموز المميزة التي يمكن إدخالها**  1,048,576  **الحد الأقصى لعدد الرموز المميزة في الناتج**  65,536 |
+| handymanالإمكانات | **إنشاء الصوت**  غير متاح  **Batch API**  متاح  **التخزين المؤقت**  متاح  **تنفيذ الرموز البرمجية**  متاح  **استخدام الكمبيوتر**  غير متاح  **البحث عن الملفات**  متاح  **استدعاء الدوال**  متاح  **استخدام "خرائط Google" كمصدر**  غير متاح  **إنشاء الصور**  غير متاح  ‫**Live API**  غير متاح  **تحديد المصادر في "بحث Google"**  متاح  **المخرجات المنظَّمة**  متاح  **التفكير**  متاح  **سياق عنوان URL**  متاح |
+| 123الإصدارات | يمكنك الاطّلاع على [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions) لمزيد من التفاصيل.  - *إيقاف*: `gemini-3-pro-preview` |
+| calendar\_monthآخر تعديل | نوفمبر 2025 |
+| cognition\_2تاريخ آخر تحديث للبيانات | يناير 2025 |
 
-의견 보내기
+إرسال ملاحظات
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-최종 업데이트: 2026-04-29(UTC)
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-의견을 전달하고 싶나요?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

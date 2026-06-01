@@ -1,27 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=th
-fetched_at: 2026-05-25T05:18:34.152075+00:00
-title: "\u0e2a\u0e20\u0e32\u0e1e\u0e41\u0e27\u0e14\u0e25\u0e49\u0e2d\u0e21\u0e43\u0e19 Agent \u0e17\u0e35\u0e48\u0e21\u0e35\u0e01\u0e32\u0e23\u0e08\u0e31\u0e14\u0e01\u0e32\u0e23 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=id
+fetched_at: 2026-06-01T06:10:06.120290+00:00
+title: "Lingkungan di Agen Terkelola \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
+[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-ส่งความคิดเห็น
+Kirim masukan
 
-# สภาพแวดล้อมใน Agent ที่มีการจัดการ
+# Lingkungan di Agen Terkelola
 
-สภาพแวดล้อมคือแซนด์บ็อกซ์ Linux ที่มีการจัดการซึ่งช่วยให้เอเจนต์มีพื้นที่แยกต่างหากสำหรับ
-เรียกใช้โค้ดและคงไฟล์ไว้ โดยจะแยกออกจากบริบทการโต้ตอบ คุณจึงนำสภาพแวดล้อมเดียวกันไปใช้ซ้ำในการโต้ตอบหลายครั้งหรือเริ่มใหม่ได้ทุกเมื่อ
+Lingkungan adalah sandbox Linux terkelola yang memberi agen tempat terisolasi untuk
+mengeksekusi kode dan mempertahankan file. Lingkungan ini tidak terkait dengan konteks interaksi, sehingga Anda dapat menggunakan kembali lingkungan yang sama di beberapa interaksi atau memulai dari awal kapan saja.
 
-ตัวอย่างต่อไปนี้แสดงวิธีสร้างการโต้ตอบกับสภาพแวดล้อมระยะไกลใหม่และดึงข้อมูลรหัส
+Contoh berikut menunjukkan cara membuat interaksi dengan lingkungan jarak jauh
+baru dan mengambil ID-nya:
 
 ### Python
 
@@ -69,18 +70,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## พารามิเตอร์ `environment`
+## Parameter `environment`
 
-พารามิเตอร์ `environment` ยอมรับ 3 รูปแบบ ได้แก่
+Parameter `environment` menerima tiga bentuk:
 
-| แบบฟอร์ม | ตัวอย่าง | กรณีที่ควรใช้ |
+| Formulir | Contoh | Kapan digunakan |
 | --- | --- | --- |
-| `"remote"` | `environment="remote"` | จัดสรรแซนด์บ็อกซ์ใหม่ |
-| รหัสสภาพแวดล้อม | `environment="env_abc123"` | นำแซนด์บ็อกซ์ที่มีอยู่พร้อมไฟล์และแพ็กเกจทั้งหมดมาใช้ซ้ำ |
-| ออบเจ็กต์การกำหนดค่า | `environment={...}` | จัดสรรแซนด์บ็อกซ์ใหม่ที่มีแหล่งที่มา กฎเครือข่าย หรือทั้งสองอย่าง |
+| `"remote"` | `environment="remote"` | Sediakan sandbox baru. |
+| ID Lingkungan | `environment="env_abc123"` | Menggunakan kembali sandbox yang ada dengan semua file dan paketnya. |
+| Objek konfigurasi | `environment={...}` | Sediakan sandbox baru dengan sumber, aturan jaringan, atau keduanya. |
 
-ตัวอย่างต่อไปนี้แสดงวิธีใช้พารามิเตอร์ `environment`
-3 วิธี
+Contoh berikut menunjukkan tiga cara menggunakan parameter `environment`.
 
 ### Python
 
@@ -211,10 +211,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## กำหนดค่าสภาพแวดล้อม
+## Mengonfigurasi lingkungan
 
-วิธีหนึ่งในการตั้งค่าสภาพแวดล้อมคือการบอก Agent ว่าคุณต้องการติดตั้งอะไร
-โดยจะจัดการการแก้ปัญหาการขึ้นต่อกันและการแก้ปัญหา เมื่อสภาพแวดล้อมพร้อมแล้ว ให้บันทึก `environment_id` แล้วนำไปใช้ซ้ำ
+Salah satu cara untuk menyiapkan lingkungan adalah dengan memberi tahu agen apa yang perlu diinstal.
+Plugin ini menangani penyelesaian dan pemecahan masalah dependensi. Setelah lingkungan siap, simpan `environment_id` dan gunakan kembali.
 
 ### Python
 
@@ -292,17 +292,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### เมานต์จากแหล่งที่มา
+### Memasang dari sumber
 
-หากคุณทราบว่าเอเจนต์ต้องการไฟล์ใดบ้าง ให้ติดตั้งไฟล์เหล่านั้นในการเรียกใช้ครั้งเดียว
-แทนที่จะทำซ้ำ `environment`ออบเจ็กต์การกำหนดค่ารับ`sources`อาร์เรย์
-ที่มี 3 ประเภท ดังนี้
+Jika Anda tahu persis file yang dibutuhkan agen, pasang file tersebut dalam satu panggilan, bukan melakukan iterasi. Objek konfigurasi `environment` menerima array `sources`
+dengan tiga jenis:
 
-| ประเภทแหล่งที่มา | ค่า `type` | คำอธิบาย | ขีดจำกัด |
+| Jenis sumber | Nilai `type` | Deskripsi | Batas |
 | --- | --- | --- | --- |
-| ที่เก็บ Git | `repository` | โคลนที่เก็บจาก URL ลงในแซนด์บ็อกซ์ที่ `target` | 500 MB |
-| Cloud Storage | `gcs` | คัดลอกไฟล์หรือไดเรกทอรีจาก Cloud Storage ไปยังแซนด์บ็อกซ์ที่ `target` | 2 GB |
-| เนื้อหาในบรรทัด | `inline` | เขียนเนื้อหาข้อความดิบไปยังไฟล์ในแซนด์บ็อกซ์ที่ `target` | 1 MB ต่อไฟล์ รวม 2 MB |
+| Repositori Git | `repository` | Meng-clone repositori dari URL ke sandbox di `target`. | 500 MB |
+| Cloud Storage | `gcs` | Menyalin file atau direktori dari Cloud Storage ke sandbox di `target`. | 2 GB |
+| Konten inline | `inline` | Menulis konten teks mentah ke file di sandbox di `target`. | 1 MB per file, total 2 MB |
 
 ### Python
 
@@ -408,20 +407,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-คุณสามารถใช้ทั้ง 2 วิธีร่วมกันได้ โดยประกาศแหล่งที่มาที่รู้จัก จากนั้นทำซ้ำ
-ด้วยการโต้ตอบติดตามผลเพื่อติดตั้งแพ็กเกจหรือเรียกใช้สคริปต์การตั้งค่า คุณไม่สามารถ
-ตั้งค่ารูท (`/`) เป็นเป้าหมายเมื่อเพิ่มแหล่งที่มาที่กำหนดเองได้ คุณต้องระบุ
-ไดเรกทอรีย่อยเสมอ
+Anda dapat menggabungkan kedua pendekatan: pasang sumber yang diketahui secara deklaratif, lalu lakukan iterasi dengan interaksi lanjutan untuk menginstal paket atau menjalankan skrip penyiapan. Anda tidak dapat
+menetapkan root (`/`) sebagai target saat menambahkan sumber kustom, Anda harus selalu menentukan
+subdirektori.
 
-### แหล่งข้อมูลส่วนตัว
+### Sumber pribadi
 
-นอกจากนี้ คุณยังดาวน์โหลดจากที่เก็บ GitHub ส่วนตัวหรือที่เก็บข้อมูล Cloud
-Storage ส่วนตัวได้โดยเพิ่มข้อมูลเข้าสู่ระบบในการกำหนดค่าเครือข่าย ดังนี้
+Anda juga dapat mendownload dari repositori Github pribadi atau bucket Cloud Storage pribadi dengan menambahkan kredensial dalam konfigurasi jaringan:
 
-สำหรับ**ที่เก็บ Git ส่วนตัว** ให้ใช้การตรวจสอบสิทธิ์ `Basic` ด้วย
-[โทเค็นการเข้าถึงส่วนตัวของ GitHub
-(PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
-เข้ารหัสโทเค็นโดยใช้ `x-oauth-basic` เป็นชื่อผู้ใช้
+Untuk **repositori Git pribadi**, gunakan autentikasi `Basic` dengan
+[Token Akses Pribadi GitHub
+(PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
+Encode token menggunakan `x-oauth-basic` sebagai nama pengguna:
 
 ```
 echo -n "x-oauth-basic:ghp_YourPATHere" | base64
@@ -527,7 +524,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-สำหรับ**ที่เก็บข้อมูล Cloud Storage แบบส่วนตัว** ให้ใช้โทเค็นสำหรับผู้ถือ OAuth 2.0 มาตรฐาน
+Untuk **bucket Cloud Storage pribadi**, gunakan token Bearer OAuth 2.0 standar:
 
 ```
 gcloud auth print-access-token
@@ -633,30 +630,28 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## ซอฟต์แวร์ที่ติดตั้งไว้ล่วงหน้า
+## Software yang sudah diinstal sebelumnya
 
-แซนด์บ็อกซ์ทำงานบน Ubuntu และมาพร้อมกับรันไทม์และแพ็กเกจทั่วไปที่
-ติดตั้งไว้ล่วงหน้า เอเจนต์สามารถติดตั้งแพ็กเกจเพิ่มเติมในขณะรันไทม์ได้โดยใช้ `pip
-install` หรือ `npm install` แพ็กเกจที่ติดตั้งระหว่างการโต้ตอบจะยังคงอยู่เมื่อ
-คุณใช้ `environment_id` เดิมซ้ำ
+Sandbox berjalan di Ubuntu dan dilengkapi dengan runtime dan paket umum yang telah diinstal sebelumnya. Agen dapat menginstal paket tambahan saat runtime menggunakan `pip
+install` atau `npm install`. Paket yang diinstal selama interaksi akan tetap ada saat Anda menggunakan kembali `environment_id` yang sama.
 
-| หมวดหมู่ | แพ็กเกจที่ติดตั้งไว้ล่วงหน้า |
+| Kategori | Paket yang telah diinstal sebelumnya |
 | --- | --- |
-| **เครื่องมือ UNIX** | `curl`, `wget`, `git`, `rsync`, `unzip`, `ripgrep`, `fd-find`, `gawk`, `bc`, `tree`, `which`, `lsof`, `htop`, `jq`, `iproute2`, `procps`, `gcloud CLI` |
+| **Alat UNIX** | `curl`, `wget`, `git`, `rsync`, `unzip`, `ripgrep`, `fd-find`, `gawk`, `bc`, `tree`, `which`, `lsof`, `htop`, `jq`, `iproute2`, `procps`, `gcloud CLI` |
 | **Python 3.12** | `numpy`, `pandas`, `requests`, `google-genai`, `beautifulsoup4`, `pyyaml`, `ast-grep-cli` |
 | **Node.js 22** | `create-next-app`, `create-vite`, `typescript` |
 
-## การกำหนดค่าเครือข่าย
+## Konfigurasi jaringan
 
-โดยค่าเริ่มต้น สภาพแวดล้อมจะมีสิทธิ์เข้าถึงเครือข่ายขาออกแบบไม่จำกัด ใช้ฟิลด์
-`network` เพื่อจำกัดการรับส่งขาออกไปยังโดเมนที่เฉพาะเจาะจง แต่ละกฎ
-จะระบุออบเจ็กต์ `domain` และออบเจ็กต์ `transform` ที่ไม่บังคับเพื่อแทรกส่วนหัวลงในคำขอที่ตรงกัน
-ส่วนหัวเหล่านี้อาจไม่ซ้ำกันต่อการโต้ตอบแต่ละครั้ง และคุณสามารถอัปเดตส่วนหัวสำหรับสภาพแวดล้อมเดียวกันได้
+Secara default, lingkungan memiliki akses jaringan keluar yang tidak dibatasi. Gunakan kolom
+`network` untuk membatasi traffic keluar ke domain tertentu. Setiap aturan
+menentukan objek `domain` dan `transform` opsional untuk menyisipkan header ke dalam
+permintaan yang cocok. Header ini dapat bersifat unik per interaksi, dan Anda dapat memperbaruinya untuk lingkungan yang sama.
 
-| ช่อง | ประเภท | คำอธิบาย |
+| Kolom | Jenis | Deskripsi |
 | --- | --- | --- |
-| `domain` | `string` | โดเมนที่จะจับคู่ ใช้ชื่อโฮสต์ที่แน่นอนหรือ `*` สำหรับโดเมนทั้งหมด |
-| `transform` | `object` | ออบเจ็กต์ที่มีคู่คีย์-ค่าแบบเรียบซึ่งแสดงถึงส่วนหัวที่จะแทรกลงในคำขอที่ตรงกัน เช่น `{"Authorization": "Bearer ..."}` |
+| `domain` | `string` | Domain yang akan dicocokkan. Gunakan nama host yang sama persis atau `*` untuk semua domain. |
+| `transform` | `object` | Objek yang berisi pasangan nilai kunci datar yang merepresentasikan header untuk disisipkan ke dalam permintaan yang cocok, misalnya `{"Authorization": "Bearer ..."}`. |
 
 ### Python
 
@@ -746,14 +741,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-เมื่อตั้งค่ารายการที่อนุญาต ระบบจะอนุญาตเฉพาะคำขอไปยังโดเมนที่ระบุไว้อย่างชัดเจนเท่านั้น
-คุณใช้ไวลด์การ์ดเพื่อจับคู่โดเมนย่อยได้ (เช่น `{"domain":
-"*.example.com"}`) แต่โปรดทราบว่าไวลด์การ์ดนี้จะไม่จับคู่โดเมนราก
-`example.com` ซึ่งต้องเพิ่มแยกต่างหาก หากต้องการอนุญาตการรับส่งอื่นๆ ทั้งหมด เช่น การกำหนดเส้นทางโดเมนที่ไม่ได้อยู่ในรายการโดยไม่มีส่วนหัวที่แทรก ให้เพิ่ม `{"domain": "*"}` เป็นรายการที่ครอบคลุมทั้งหมด
+Jika daftar yang diizinkan ditetapkan, hanya permintaan ke domain yang tercantum secara eksplisit yang diizinkan. Anda dapat menggunakan karakter pengganti untuk mencocokkan subdomain (misalnya, `{"domain":
+"*.example.com"}`), tetapi perhatikan bahwa karakter ini tidak cocok dengan domain root `example.com`, yang harus ditambahkan secara terpisah. Untuk mengizinkan semua traffic lainnya, seperti merutekan domain yang tidak tercantum tanpa header yang disisipkan, tambahkan `{"domain": "*"}` sebagai entri catch-all.
 
-### ข้อมูลเข้าสู่ระบบ
+### Kredensial
 
-คุณเพิ่มข้อมูลเข้าสู่ระบบเพื่อให้เอเจนต์ใช้ได้โดยการเพิ่มการเปลี่ยนส่วนหัว พร็อกซีขาออกจะแทรกข้อมูลเข้าสู่ระบบในส่วนหัว HTTP ที่เกี่ยวข้อง แต่จะไม่แสดงข้อมูลดังกล่าวภายในแซนด์บ็อกซ์เป็นตัวแปรสภาพแวดล้อมหรือไฟล์
+Anda dapat menambahkan kredensial yang akan digunakan agen dengan menambahkan transformasi header. Kredensial disisipkan di header HTTP masing-masing oleh proxy keluar, dan tidak pernah diekspos di dalam sandbox sebagai variabel lingkungan atau file.
 
 ### Python
 
@@ -847,9 +840,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### ปิดใช้การเข้าถึงเครือข่าย
+### Menonaktifkan akses jaringan
 
-หากต้องการบล็อกการเข้าถึงเครือข่ายขาออกทั้งหมด ให้ตั้งค่า `network` เป็น `disabled`
+Untuk memblokir semua akses jaringan keluar, tetapkan `network` ke `disabled`:
 
 ### Python
 
@@ -906,21 +899,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## วงจรของสภาพแวดล้อม
+## Siklus proses lingkungan
 
-สภาพแวดล้อมมีวงจรดังนี้
+Lingkungan mengikuti siklus proses ini:
 
-| รัฐ | พฤติกรรม |
+| Negara bagian/Provinsi | Perilaku |
 | --- | --- |
-| **สร้างแล้ว** | จัดสรรเมื่อการโต้ตอบระบุ `environment: "remote"` หรือออบเจ็กต์การกำหนดค่า |
-| **ใช้งานอยู่** | การเรียกใช้ขณะที่การโต้ตอบกำลังดำเนินการ |
-| **ไม่มีการใช้งาน** | ถ่ายภาพอัตโนมัติและหยุดหลังจากไม่มีการใช้งาน 15 นาที |
-| **ออฟไลน์** | เก็บไว้เป็นเวลา 7 วันนับตั้งแต่ใช้งานครั้งล่าสุด กลับมาทำงานต่อได้โดยส่งรหัส |
-| **ลบแล้ว** | นำออกจากระบบแล้ว |
+| **Dibuat** | Disediakan saat interaksi menentukan `environment: "remote"` atau objek konfigurasi. |
+| **Aktif** | Berjalan saat interaksi sedang berlangsung. |
+| **Tidak ada aktivitas** | Snapshot otomatis dan dihentikan setelah 15 menit tidak ada aktivitas. |
+| **Offline** | Dipertahankan selama 7 hari sejak terakhir aktif. Dapat dilanjutkan dengan meneruskan ID-nya. |
+| **Dihapus** | Dihapus dari sistem. |
 
-## ดาวน์โหลดไฟล์จากสภาพแวดล้อม
+## Mendownload file dari lingkungan
 
-Agent จะสร้างไฟล์ภายในแซนด์บ็อกซ์ระหว่างการดำเนินการ คุณดาวน์โหลดภาพรวมสภาพแวดล้อมทั้งหมดเป็นไฟล์ tar ได้โดยใช้ Files API ดังนี้
+Agen membuat file di dalam sandbox selama eksekusi. Anda dapat mendownload snapshot lingkungan lengkap sebagai file tar menggunakan Files API:
 
 ### Python
 
@@ -1016,41 +1009,42 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 #   -o snapshot.tar
 ```
 
-## ราคาและแหล่งข้อมูล
+## Harga & referensi
 
-แต่ละสภาพแวดล้อมจะทำงานโดยมีการจัดสรรทรัพยากรแบบคงที่ ดังนี้
+Setiap lingkungan berjalan dengan alokasi resource tetap:
 
-| ทรัพยากร | ค่า |
+| Resource | Nilai |
 | --- | --- |
-| **CPU** | 4 แกน |
-| **หน่วยความจำ** | 16 GB |
+| **CPU** | 4 core |
+| **Memori** | 16 GB |
 
-ระบบจะ**ไม่เรียกเก็บเงิน**สำหรับการประมวลผลสภาพแวดล้อม (CPU, หน่วยความจำ, การดำเนินการในแซนด์บ็อกซ์) ในช่วงระยะเวลาแสดงตัวอย่าง
-ดู[ราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th#pricing-for-agents)สำหรับ
-ค่าใช้จ่ายของโทเค็นเอเจนต์
+Komputasi lingkungan (CPU, memori, eksekusi sandbox) **tidak ditagih** selama
+periode pratinjau. Lihat
+[Harga](https://ai.google.dev/gemini-api/docs/pricing?hl=id#pricing-for-agents) untuk
+biaya token agen.
 
-## ข้อจำกัด
+## Batasan
 
-- **สถานะเวอร์ชันตัวอย่าง:** สภาพแวดล้อมและตัวแทนที่มีการจัดการอยู่ในเวอร์ชันตัวอย่าง ฟีเจอร์และสคีมาอาจมีการเปลี่ยนแปลง
-- **ขนาดแหล่งข้อมูลในบรรทัด:** แหล่งข้อมูลในบรรทัดจำกัดไว้ที่ 1 MB ต่อไฟล์ และ 2 MB โดยรวมในทุกไฟล์
-- **ขนาดแหล่งข้อมูล**: ที่เก็บ Git มีขนาดจำกัดอยู่ที่ 500 MB และที่เก็บ Cloud Storage มีขนาดจำกัดอยู่ที่ 2 GB
-- **การเริ่มต้นสภาพแวดล้อม:** การจัดสรรสภาพแวดล้อมใหม่จะใช้เวลาไม่เกิน 5 วินาทีโดยประมาณ ที่เก็บแหล่งข้อมูลขนาดใหญ่อาจทำให้เวลาในการดำเนินการนานขึ้น
-- **การรองรับไฟล์:** ปัจจุบันเอเจนต์อ่านได้เฉพาะไฟล์ข้อความและรูปภาพ ยังไม่พร้อมให้บริการรองรับไฟล์ไบนารี
-- **ไม่สามารถติดตั้งจากรูท:** คุณไม่สามารถตั้งค่ารูท (`/`) เป็นเป้าหมายเมื่อเพิ่มแหล่งที่มาที่กำหนดเองได้ คุณต้องระบุไดเรกทอรีย่อยเสมอ
+- **Status pratinjau:** Lingkungan dan agen terkelola dalam pratinjau. Fitur dan skema dapat berubah.
+- **Ukuran sumber inline:** Sumber inline dibatasi hingga 1 MB per file, dan total 2 MB di semua file.
+- **Ukuran sumber**: Repositori Git dibatasi hingga 500 MB dan repositori Cloud Storage hingga 2 GB.
+- **Startup lingkungan:** Penyediaan lingkungan baru membutuhkan waktu hingga ~5 detik. Repositori sumber yang besar dapat memperpanjang waktu ini.
+- **Dukungan file:** Agen saat ini dibatasi untuk membaca file teks dan gambar. Dukungan file biner belum tersedia.
+- **Tidak ada pemasangan dari root:** Anda tidak dapat menetapkan root (`/`) sebagai target saat menambahkan sumber kustom, Anda harus selalu menentukan subdirektori.
 
-## ขั้นตอนถัดไป
+## Langkah berikutnya
 
-- [ภาพรวมของ Agent](https://ai.google.dev/gemini-api/docs/agents?hl=th): ดูข้อมูลเกี่ยวกับแนวคิดหลักของ Agent ที่มีการจัดการ
-- [เริ่มต้นใช้งานฉบับย่อ](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=th): เริ่มสร้างด้วยการสนทนาแบบหลายรอบและการสตรีม
-- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th): สำรวจความสามารถ เครื่องมือ และราคาของเอเจนต์เริ่มต้น
-- [การสร้าง Agent ที่กำหนดเอง](https://ai.google.dev/gemini-api/docs/custom-agents?hl=th): กำหนด Agent ของคุณเองโดยใช้ `AGENTS.md` และ `SKILL.md`
+- [Ringkasan Agen](https://ai.google.dev/gemini-api/docs/agents?hl=id): Pelajari konsep inti agen terkelola.
+- [Panduan memulai](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=id): Mulai membangun dengan percakapan multi-turn dan streaming.
+- [Agen Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=id): Pelajari kemampuan, alat, dan harga untuk agen default.
+- [Membangun Agen Kustom](https://ai.google.dev/gemini-api/docs/custom-agents?hl=id): Tentukan agen Anda sendiri menggunakan `AGENTS.md` dan `SKILL.md`.
 
-ส่งความคิดเห็น
+Kirim masukan
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-อัปเดตล่าสุด 2026-05-20 UTC
+Terakhir diperbarui pada 2026-05-20 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Ada masukan untuk kami?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-05-20 UTC"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-05-20 UTC."],[],[]]

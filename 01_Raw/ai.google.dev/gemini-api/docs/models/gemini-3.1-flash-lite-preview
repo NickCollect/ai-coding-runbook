@@ -1,196 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=vi
-fetched_at: 2026-05-25T05:26:13.069348+00:00
-title: "B\u1ea3n xem tr\u01b0\u1edbc Gemini 3.1 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=ar
+fetched_at: 2026-06-01T05:58:58.191664+00:00
+title: "\u0645\u0639\u0627\u064a\u0646\u0629 Gemini 3.1 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
-# Bản xem trước Gemini 3.1 Flash-Lite
+# معاينة Gemini 3.1 Flash-Lite
 
-Mô hình đa phương thức tiết kiệm chi phí nhất của chúng tôi, mang lại hiệu suất nhanh nhất cho các tác vụ tần suất cao, dung lượng nhẹ. Gemini 3.1 Flash-Lite phù hợp nhất cho các tác vụ đại diện có khối lượng lớn, trích xuất dữ liệu đơn giản và các ứng dụng có độ trễ cực thấp, trong đó ngân sách và tốc độ là những ràng buộc chính.
-
-[Dùng thử trong Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-preview&hl=vi)
+يُرجى الترحيل إلى [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ar) لتجنُّب انقطاع الخدمة.
 
 ## gemini-3.1-flash-lite-preview
 
-| Thuộc tính | Mô tả |
+| الموقع | الوصف |
 | --- | --- |
-| id\_cardMã mô hình | `gemini-3.1-flash-lite-preview` |
-| saveCác loại dữ liệu được hỗ trợ | **Thông tin đầu vào**  Văn bản, Hình ảnh, Video, Âm thanh và PDF  **Đầu ra**  Văn bản |
-| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  1.048.576  **Giới hạn mã thông báo đầu ra**  65.536 |
-| handymanKhả năng | **Tạo âm thanh**  Không được hỗ trợ  **API hàng loạt**  Được hỗ trợ  **Lưu vào bộ nhớ đệm**  Được hỗ trợ  **Thực thi mã**  Được hỗ trợ  **Sử dụng máy tính**  Không được hỗ trợ  **Tìm kiếm tệp**  Được hỗ trợ  **Suy luận linh hoạt**  Được hỗ trợ  **Gọi hàm**  Được hỗ trợ  **Kết nối với Google Maps**  Được hỗ trợ  **Tạo hình ảnh**  Không được hỗ trợ  **API trực tiếp**  Không được hỗ trợ  **Suy luận mức độ ưu tiên**  Được hỗ trợ  **Tìm trong phần liên kết thực tế**  Được hỗ trợ  **Đầu ra có cấu trúc**  Được hỗ trợ  **Tư duy**  Được hỗ trợ  **Ngữ cảnh URL**  Được hỗ trợ |
-| 123Phiên bản | Đọc các [mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm thông tin.  - `Preview: gemini-3.1-flash-lite-preview` |
-| calendar\_monthNội dung cập nhật mới nhất | Tháng 3 năm 2026 |
-| cognition\_2Điểm cắt kiến thức | Tháng 1 năm 2025 |
+| id\_card رمز id\_cardModel | `gemini-3.1-flash-lite-preview` |
+| أنواع البيانات المتوافقة مع save | **المدخلات**  النص والصورة والفيديو والصوت وملف PDF  **الناتج**  نص |
+| token\_autoToken limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحدّ الأقصى لرموز الإدخال**  1,048,576  **الحدّ الأقصى لرموز الإخراج**  65,536 |
+| handymanCapabilities | **إنشاء الصوت**  غير متاح  **واجهة برمجة التطبيقات المجمّعة**  متاحة  **التخزين المؤقت**  متاح  **تنفيذ الرموز البرمجية**  متاح  **الاستخدام على الكمبيوتر**  غير متاح  **البحث عن الملفات**  متاح  **الاستدلال المرن**  متاح  **استدعاء الدوال**  متاح  **استخدام "خرائط Google" كمصدر**  متاح  **إنشاء الصور**  غير متاح  **واجهة برمجة التطبيقات المباشرة**  غير متاح  **الاستدلال حسب الأولوية**  متاح  **لتحديد المصادر في "بحث Google"**  متاح  **مُخرجات منظَّمة**  متاحة  **طريقة التفكير**  متاحة  **سياق عنوان URL**  متاح |
+| 123Versions | يمكنك قراءة [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions) لمزيد من التفاصيل.  - *إيقاف نهائي*: `gemini-3.1-flash-lite-preview` |
+| calendar\_monthآخر تحديث | مارس 2026 |
+| cognition\_2تاريخ آخر تحديث للبيانات | يناير 2025 |
 
-## Hướng dẫn cho nhà phát triển
+إرسال ملاحظات
 
-Gemini 3.1 Flash-Lite phù hợp nhất để xử lý các tác vụ đơn giản ở quy mô lớn. Sau đây là một số trường hợp sử dụng phù hợp nhất cho Gemini 3.1 Flash-Lite:
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-- **Dịch**: Dịch nhanh, rẻ, khối lượng lớn, chẳng hạn như xử lý
-  tin nhắn trò chuyện, bài đánh giá và phiếu yêu cầu hỗ trợ ở quy mô lớn. Bạn có thể sử dụng hướng dẫn hệ thống để giới hạn đầu ra chỉ ở văn bản đã dịch mà không có bình luận bổ sung:
+تاريخ التعديل الأخير: 2026-05-28 (حسب التوقيت العالمي المتفَّق عليه)
 
-  ```
-  text = "Hey, are you down to grab some pizza later? I'm starving!"
+هل تريد مشاركة ملاحظاتك معنا؟
 
-  response = client.models.generate_content(
-      model="gemini-3.1-flash-lite-preview",
-      config={
-          "system_instruction": "Only output the translated text"
-      },
-      contents=f"Translate the following text to German: {text}"
-  )
-
-  print(response.text)
-  ```
-- **Chép lời**: Xử lý bản ghi âm, ghi chú bằng giọng nói hoặc bất kỳ nội dung âm thanh nào mà bạn cần bản chép lời văn bản mà không cần tạo một quy trình chuyển lời nói thành văn bản riêng biệt. Hỗ trợ thông tin đầu vào đa phương thức, vì vậy, bạn có thể truyền trực tiếp tệp âm thanh để chuyển ghi âm thành văn bản:
-
-  ```
-  # URL = "https://storage.googleapis.com/generativeai-downloads/data/State_of_the_Union_Address_30_January_1961.mp3"
-
-  # Upload the audio file to the GenAI File API
-  uploaded_file = client.files.upload(file='sample.mp3')
-
-  prompt = 'Generate a transcript of the audio.'
-
-  response = client.models.generate_content(
-    model="gemini-3.1-flash-lite-preview",
-    contents=[prompt, uploaded_file]
-  )
-
-  print(response.text)
-  ```
-- **Tác vụ đại diện dung lượng nhẹ và trích xuất dữ liệu**: Trích xuất thực thể,
-  phân loại và quy trình xử lý dữ liệu dung lượng nhẹ được hỗ trợ bằng
-  đầu ra JSON có cấu trúc. Ví dụ: trích xuất dữ liệu có cấu trúc từ bài đánh giá của khách hàng về thương mại điện tử:
-
-  ```
-  from pydantic import BaseModel, Field
-
-  prompt = "Analyze the user review and determine the aspect, sentiment score, summary quote, and return risk"
-  input_text = "The boots look amazing and the leather is high quality, but they run way too small. I'm sending them back."
-
-  class ReviewAnalysis(BaseModel):
-      aspect: str = Field(description="The feature mentioned (e.g., Price, Comfort, Style, Shipping)")
-      summary_quote: str = Field(description="The specific phrase from the review about this aspect")
-      sentiment_score: int = Field(description="1 to 5 (1=worst, 5=best)")
-      is_return_risk: bool = Field(description="True if the user mentions returning the item")
-
-  response = client.models.generate_content(
-      model="gemini-3.1-flash-lite-preview",
-      contents=[prompt, input_text],
-      config={
-          "response_mime_type": "application/json",
-          "response_json_schema": ReviewAnalysis.model_json_schema(),
-      },
-  )
-
-  print(response.text)
-  ```
-- **Xử lý và tóm tắt tài liệu**: Phân tích cú pháp tệp PDF và trả về bản tóm tắt ngắn gọn, chẳng hạn như để xây dựng quy trình xử lý tài liệu hoặc nhanh chóng
-  phân loại các tệp đến:
-
-  ```
-  import httpx
-
-  # Download a sample PDF document
-  doc_url = "https://storage.googleapis.com/generativeai-downloads/data/med_gemini.pdf"
-  doc_data = httpx.get(doc_url).content
-
-  prompt = "Summarize this document"
-  response = client.models.generate_content(
-      model="gemini-3.1-flash-lite-preview",
-      contents=[
-          types.Part.from_bytes(
-              data=doc_data,
-              mime_type='application/pdf',
-          ),
-          prompt
-      ]
-  )
-
-  print(response.text)
-  ```
-- **Định tuyến mô hình**: Sử dụng mô hình có độ trễ thấp và chi phí thấp làm bộ phân loại để định tuyến các truy vấn đến mô hình phù hợp dựa trên mức độ phức tạp của tác vụ. Đây là một mẫu thực tế trong quá trình sản xuất – [Gemini CLI](https://geminicli.com/docs/core/#model-fallback) nguồn mở sử dụng Flash-Lite để phân loại mức độ phức tạp của tác vụ và định tuyến đến Flash hoặc Pro cho phù hợp.
-
-  ```
-  FLASH_MODEL = 'flash'
-  PRO_MODEL = 'pro'
-
-  CLASSIFIER_SYSTEM_PROMPT = f"""
-  You are a specialized Task Routing AI. Your sole function is to analyze the user's request and classify its complexity. Choose between `{FLASH_MODEL}` (SIMPLE) or `{PRO_MODEL}` (COMPLEX).
-  1.  `{FLASH_MODEL}`: A fast, efficient model for simple, well-defined tasks.
-  2.  `{PRO_MODEL}`: A powerful, advanced model for complex, open-ended, or multi-step tasks.
-
-  A task is COMPLEX if it meets ONE OR MORE of the following criteria:
-  1.  High Operational Complexity (Est. 4+ Steps/Tool Calls)
-  2.  Strategic Planning and Conceptual Design
-  3.  High Ambiguity or Large Scope
-  4.  Deep Debugging and Root Cause Analysis
-
-  A task is SIMPLE if it is highly specific, bounded, and has Low Operational Complexity (Est. 1-3 tool calls).
-  """
-
-  user_input = "I'm getting an error 'Cannot read property 'map' of undefined' when I click the save button. Can you fix it?"
-
-  response_schema = {
-    "type": "object",
-    "properties": {
-      "reasoning": {
-        "type": "string",
-        "description": "A brief, step-by-step explanation for the model choice, referencing the rubric."
-      },
-      "model_choice": {
-        "type": "string",
-        "enum": [FLASH_MODEL, PRO_MODEL]
-      }
-    },
-    "required": ["reasoning", "model_choice"]
-  }
-
-  response = client.models.generate_content(
-      model="gemini-3.1-flash-lite-preview",
-      contents=user_input,
-      config={
-          "system_instruction": CLASSIFIER_SYSTEM_PROMPT,
-          "response_mime_type": "application/json",
-          "response_json_schema": response_schema
-      },
-  )
-
-  print(response.text)
-  ```
-- **Tư duy**: Để tăng độ chính xác cho các tác vụ được hưởng lợi từ quy trình suy luận từng bước, hãy định cấu hình tư duy để mô hình dành thêm thời gian tính toán cho quá trình suy luận nội bộ trước khi tạo ra đầu ra cuối cùng:
-
-  ```
-  response = client.models.generate_content(
-      model="gemini-3.1-flash-lite-preview",
-      contents="How does AI work?",
-      config=types.GenerateContentConfig(
-          thinking_config=types.ThinkingConfig(thinking_level="high")
-      ),
-  )
-
-  print(response.text)
-  ```
-
-Gửi ý kiến phản hồi
-
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
-
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
-
-Bạn muốn chia sẻ thêm với chúng tôi?
-
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-28 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

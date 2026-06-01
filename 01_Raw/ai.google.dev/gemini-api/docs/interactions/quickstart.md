@@ -1,57 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/quickstart?hl=it
-fetched_at: 2026-05-25T05:26:09.654405+00:00
-title: "Guida rapida all'API Gemini \u00a0|\u00a0 Gemini Interactions API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions/quickstart?hl=vi
+fetched_at: 2026-06-01T05:57:28.564043+00:00
+title: "B\u1eaft \u0111\u1ea7u nhanh API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Invia feedback
+Gửi ý kiến phản hồi
 
-# Guida rapida all'API Gemini
+# Bắt đầu nhanh API Gemini
 
-Questa guida rapida mostra come installare le nostre [librerie](https://ai.google.dev/gemini-api/docs/libraries?hl=it)
-ed effettuare la prima richiesta, trasmettere in streaming le risposte, creare conversazioni multi-turno
-e utilizzare gli strumenti.
+Hướng dẫn nhanh này sẽ hướng dẫn bạn cách cài đặt [các thư viện](https://ai.google.dev/gemini-api/docs/libraries?hl=vi) của chúng tôi và đưa ra yêu cầu đầu tiên, hiện câu trả lời theo thời gian thực các phản hồi, xây dựng cuộc trò chuyện nhiều lượt và sử dụng các công cụ.
 
-Esistono due modi per inviare una richiesta all'API Gemini:
+Bạn có thể dùng 2 cách để gửi yêu cầu đến Gemini API:
 
-- ***(Consigliato)*** L'[API Interactions](https://ai.google.dev/api/interactions-api?hl=it) è una nuova
-  primitiva con supporto integrato per l'utilizzo di strumenti in più passaggi, l'orchestrazione e
-  flussi di ragionamento complessi tramite passaggi di esecuzione digitati. In futuro, i nuovi
-  modelli oltre alla famiglia principale di base, insieme a nuove capacità agentiche
-  e strumenti, verranno lanciati esclusivamente sull'API Interactions.
-- [`generateContent`](https://ai.google.dev/gemini-api/docs/quickstart?hl=it) fornisce un modo per generare
-  una risposta stateless da un modello. Sebbene consigliamo di utilizzare l'API
-  Interactions, `generateContent` è completamente supportata.
+- ***(Nên dùng)*** [Interactions API](https://ai.google.dev/api/interactions-api?hl=vi) là một nguyên tắc cơ bản mới có hỗ trợ tích hợp cho việc sử dụng công cụ nhiều bước, điều phối và các luồng suy luận phức tạp thông qua các bước thực thi được nhập. Trong tương lai, các mô hình mới ngoài dòng chính cốt lõi, cùng với các khả năng của tác nhân AI và công cụ mới, sẽ chỉ ra mắt trên Interactions API.
+- [`generateContent`](https://ai.google.dev/gemini-api/docs/quickstart?hl=vi) cung cấp một cách để tạo phản hồi không trạng thái từ một mô hình. Mặc dù bạn nên sử dụng Interactions API, nhưng `generateContent` vẫn được hỗ trợ đầy đủ.
 
-Questa versione della guida rapida utilizza l'API Interactions per inviare una richiesta all'API Gemini.
+Phiên bản hướng dẫn nhanh này sử dụng Interactions API để gửi yêu cầu đến Gemini API.
 
-## Prima di iniziare
+## Trước khi bắt đầu
 
-Per utilizzare l'API Gemini, devi disporre di una chiave API per autenticare le richieste, applicare limiti di sicurezza e monitorare l'utilizzo del tuo account.
+Để sử dụng Gemini API, bạn cần có khoá API để xác thực các yêu cầu, thực thi giới hạn bảo mật và theo dõi mức sử dụng cho tài khoản của bạn.
 
-Per iniziare, creane uno su AI Studio senza costi:
+Hãy tạo một dự án trên AI Studio miễn phí để bắt đầu:
 
-[Crea una chiave API Gemini](https://aistudio.google.com/app/apikey?hl=it)
+[Tạo khoá Gemini API](https://aistudio.google.com/app/apikey?hl=vi)
 
-## Installa l'SDK Google GenAI
+## Cài đặt Google GenAI SDK
 
 ### Python
 
-Utilizzando [Python 3.9+](https://www.python.org/downloads/), installa il
-[pacchetto `google-genai`](https://pypi.org/project/google-genai/)
-utilizzando il seguente
-[comando pip](https://packaging.python.org/en/latest/tutorials/installing-packages/):
+Khi dùng [Python 3.9 trở lên](https://www.python.org/downloads/), hãy cài đặt gói [`google-genai`](https://pypi.org/project/google-genai/) bằng [lệnh pip](https://packaging.python.org/en/latest/tutorials/installing-packages/) sau:
 
 ```
 pip install -q -U google-genai
@@ -59,20 +48,15 @@ pip install -q -U google-genai
 
 ### JavaScript
 
-Utilizzando [Node.js v18+](https://nodejs.org/en/download/package-manager),
-installa
-[SDK Google Gen AI per TypeScript e JavaScript](https://www.npmjs.com/package/@google/genai)
-utilizzando il seguente
-[comando npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm):
+Sử dụng [Node.js phiên bản 18 trở lên](https://nodejs.org/en/download/package-manager), hãy cài đặt [Google Gen AI SDK cho TypeScript và JavaScript](https://www.npmjs.com/package/@google/genai) bằng [lệnh npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) sau:
 
 ```
 npm install @google/genai
 ```
 
-## Genera testo
+## Tạo văn bản
 
-Utilizza il metodo `interactions.create` per
-[generare una risposta di testo](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=it).
+Sử dụng phương thức `interactions.create` để [tạo câu trả lời bằng văn bản](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=vi).
 
 ### Python
 
@@ -122,11 +106,9 @@ curl -X POST \
   }'
 ```
 
-## Risposte dinamiche
+## Hiện câu trả lời theo thời gian thực
 
-Per impostazione predefinita, il modello restituisce una risposta solo dopo il completamento dell'intero processo di generazione. Per un'esperienza più rapida e interattiva, puoi
-[trasmettere in streaming i blocchi della risposta](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=it) man mano che
-vengono generati.
+Theo mặc định, mô hình chỉ trả về câu trả lời sau khi toàn bộ quy trình tạo hoàn tất. Để có trải nghiệm nhanh hơn và mang tính tương tác hơn, bạn có thể [truyền trực tuyến các phần phản hồi](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=vi) khi chúng được tạo.
 
 ### Python
 
@@ -182,11 +164,10 @@ curl -X POST \
   }'
 ```
 
-## Conversazioni a più turni
+## Cuộc trò chuyện nhiều lượt
 
-L'API Gemini supporta la creazione di
-[conversazioni multi-turno](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=it#multi-turn-conversations).
-Basta passare il valore `id` restituito dall'interazione precedente come parametro `previous_interaction_id` e il server gestisce automaticamente la cronologia delle conversazioni.
+Gemini API có tính năng hỗ trợ tích hợp để tạo [cuộc trò chuyện nhiều lượt](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=vi#multi-turn-conversations).
+Bạn chỉ cần truyền `id` được trả về từ lượt tương tác trước đó làm tham số `previous_interaction_id` và máy chủ sẽ tự động quản lý nhật ký cuộc trò chuyện.
 
 ### Python
 
@@ -256,14 +237,11 @@ curl -X POST \
   }"
 ```
 
-## Utilizzare gli strumenti
+## Sử dụng công cụ
 
-Estendi le funzionalità del modello
-[basando le risposte sulla Ricerca Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=it)
-per accedere a contenuti web in tempo reale. Il modello decide automaticamente quando
-eseguire ricerche, esegue query e sintetizza una risposta con citazioni.
+Mở rộng các chức năng của mô hình bằng cách [đưa ra câu trả lời dựa trên Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=vi) để truy cập vào nội dung trên web theo thời gian thực. Mô hình này tự động quyết định thời điểm tìm kiếm, thực hiện các truy vấn và tổng hợp câu trả lời kèm theo trích dẫn.
 
-Il seguente esempio mostra come attivare la Ricerca Google:
+Ví dụ sau đây minh hoạ cách bật Google Tìm kiếm:
 
 ### Python
 
@@ -332,26 +310,19 @@ curl -X POST \
   }'
 ```
 
-L'API Gemini supporta anche altri strumenti integrati:
+Gemini API cũng hỗ trợ các công cụ tích hợp khác:
 
-- **[Esecuzione del codice](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=it)**:
-  Consente al modello di scrivere ed eseguire codice Python per risolvere problemi matematici complessi.
-- **[Contesto URL](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=it)**: consente di
-  basare le risposte su URL di pagine web specifici che fornisci.
-- **[Ricerca di file](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=it)**: ti consente di
-  caricare file e basare le risposte sui loro contenuti utilizzando la ricerca semantica.
-- **[Google Maps](https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=it)**: ti consente di
-  basare le risposte sui dati sulla posizione e cercare luoghi, indicazioni e
-  mappe.
-- **[Utilizzo del computer](https://ai.google.dev/gemini-api/docs/interactions/computer-use?hl=it)**: consente al modello di interagire con uno schermo, una tastiera e un mouse virtuali per eseguire attività.
+- **[Thực thi mã](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=vi)**: Cho phép mô hình viết và chạy mã Python để giải các bài toán phức tạp về toán học.
+- **[Bối cảnh URL](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=vi)**: Cho phép bạn đưa ra câu trả lời dựa trên các URL cụ thể của trang web mà bạn cung cấp.
+- **[Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=vi)**: Cho phép bạn tải tệp lên và đưa ra câu trả lời dựa trên nội dung của tệp bằng tính năng tìm kiếm ngữ nghĩa.
+- **[Google Maps](https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=vi)**: Cho phép bạn đưa ra câu trả lời dựa trên dữ liệu vị trí và tìm kiếm địa điểm, chỉ đường và bản đồ.
+- **[Sử dụng máy tính](https://ai.google.dev/gemini-api/docs/interactions/computer-use?hl=vi)**: Cho phép mô hình tương tác với màn hình, bàn phím và chuột ảo của máy tính để thực hiện các tác vụ.
 
-## Chiamare funzioni personalizzate
+## Gọi hàm tuỳ chỉnh
 
-Utilizza le **[chiamate di funzione](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=it)**
-per connettere i modelli alle tue API e ai tuoi strumenti personalizzati. Il modello determina quando chiamare la funzione e restituisce un passaggio `function_call` con gli argomenti da eseguire per l'applicazione.
+Sử dụng **[chức năng gọi](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=vi)** để kết nối các mô hình với các công cụ và API tuỳ chỉnh của bạn. Mô hình xác định thời điểm gọi hàm của bạn và trả về một bước `function_call` cùng với các đối số để ứng dụng của bạn thực thi.
 
-Questo esempio dichiara una funzione di temperatura simulata e verifica se il modello
-vuole chiamarla.
+Ví dụ này khai báo một hàm nhiệt độ mô phỏng và kiểm tra xem mô hình có muốn gọi hàm đó hay không.
 
 ### Python
 
@@ -484,25 +455,25 @@ curl -X POST \
   }'
 ```
 
-## Passaggi successivi
+## Bước tiếp theo
 
-Ora che hai iniziato a utilizzare l'API Gemini, esplora le seguenti guide per creare applicazioni più avanzate:
+Giờ đây, bạn đã bắt đầu sử dụng Gemini API, hãy khám phá các hướng dẫn sau để tạo các ứng dụng nâng cao hơn:
 
-- [Generazione di testo](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=it)
-- [Generazione di immagini](https://ai.google.dev/gemini-api/docs/interactions/image-generation?hl=it)
-- [Comprensione delle immagini](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=it)
-- [Pensiero](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=it)
-- [Chiamata di funzione](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=it)
-- [Grounding con la Ricerca Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=it)
-- [Contesto lungo](https://ai.google.dev/gemini-api/docs/long-context?hl=it)
-- [Incorporamenti](https://ai.google.dev/gemini-api/docs/embeddings?hl=it)
+- [Tạo văn bản](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=vi)
+- [Tạo hình ảnh](https://ai.google.dev/gemini-api/docs/interactions/image-generation?hl=vi)
+- [Hiểu hình ảnh](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=vi)
+- [Tư duy](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=vi)
+- [Gọi hàm](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=vi)
+- [Bám sát nguồn bằng Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=vi)
+- [Ngữ cảnh dài](https://ai.google.dev/gemini-api/docs/long-context?hl=vi)
+- [Vectơ nhúng](https://ai.google.dev/gemini-api/docs/embeddings?hl=vi)
 
-Invia feedback
+Gửi ý kiến phản hồi
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Ultimo aggiornamento 2026-05-19 UTC.
+Cập nhật lần gần đây nhất: 2026-05-28 UTC.
 
-Vuoi dirci altro?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-19 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-28 UTC."],[],[]]

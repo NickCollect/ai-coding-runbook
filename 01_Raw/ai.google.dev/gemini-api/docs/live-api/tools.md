@@ -1,7 +1,7 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=ko
-fetched_at: 2026-05-25T05:18:04.690691+00:00
-title: "Tool use with Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+fetched_at: 2026-06-01T06:08:37.056794+00:00
+title: "Live API\ub97c \uc0ac\uc6a9\ud55c \ub3c4\uad6c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
 [Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
@@ -16,7 +16,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 의견 보내기
 
-# Tool use with Live API
+# Live API를 사용한 도구
 
 도구 사용을 통해 Live API는 실시간 연결을 유지하면서 실제 작업을 수행하고 외부 컨텍스트를 가져올 수 있으므로 단순한 대화를 넘어설 수 있습니다.
 Live API를 사용하여 [함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko) 및 [Google 검색](https://ai.google.dev/gemini-api/docs/grounding?hl=ko)과 같은 도구를 정의할 수 있습니다.
@@ -505,8 +505,8 @@ const config = {
 
 달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-최종 업데이트: 2026-05-13(UTC)
+최종 업데이트: 2026-05-29(UTC)
 
 의견을 전달하고 싶나요?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-05-13(UTC)"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-05-29(UTC)"],[],[]]

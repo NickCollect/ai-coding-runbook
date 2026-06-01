@@ -1,43 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite-preview-09-2025?hl=hi
-fetched_at: 2026-05-25T05:18:37.254361+00:00
-title: "Gemini 2.5 Flash-Lite \u0915\u0940 \u091d\u0932\u0915 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite-preview-09-2025?hl=it
+fetched_at: 2026-06-01T06:07:51.040528+00:00
+title: "Anteprima di Gemini 2.5 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-सुझाव भेजें
+Invia feedback
 
-# Gemini 2.5 Flash-Lite की झलक
-
-इस मॉडल को
+# Anteprima di Gemini 2.5 Flash-Lite
 
 ## gemini-2.5-flash-lite-preview-09-2025
 
-| प्रॉपर्टी | ब्यौरा |
+| Proprietà | Descrizione |
 | --- | --- |
-| id\_cardModel कोड | `gemini-2.5-flash-lite-preview-09-2025` |
-| saveSupported डेटा टाइप | **इनपुट**  टेक्स्ट, इमेज, वीडियो, ऑडियो, PDF  **आउटपुट**  टेक्स्ट |
-| token\_autoToken सीमाएं[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट टोकन की सीमा**  1,048,576  **आउटपुट टोकन की सीमा**  65,536 |
-| handymanCapabilities | **ऑडियो जनरेट करने की सुविधा**  काम नहीं करता है  **बैच एपीआई**  काम करता है  **कैश मेमोरी में सेव होना**  काम करता है  **कोड चलाने की सुविधा**  काम करता है  **फ़ाइल खोजने की सुविधा**  काम करता है  **फ़ंक्शन कॉल करने की सुविधा**  काम करता है  **Google Maps से जानकारी पाने की सुविधा**  काम नहीं करता है  **इमेज जनरेट करने की सुविधा**  काम नहीं करता है  **लाइव एपीआई**  काम नहीं करता है  **भरोसेमंद स्रोतों से जानकारी लें**  काम करता है  **स्ट्रक्चर्ड आउटपुट**  काम करता है  **सोचने की सुविधा**  काम करता है  **यूआरएल के कॉन्टेक्स्ट की सुविधा**  काम करता है |
-| 123वर्शन | ज़्यादा जानकारी के लिए, [मॉडल के वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) पढ़ें.  - स्टेबल: [`gemini-2.5-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=hi) - शट डाउन: `gemini-2.5-flash-lite-preview-09-2025` |
-| calendar\_monthअपडेट की तारीख | सितंबर 2025 |
-| cognition\_2जानकारी की कटऑफ़ तारीख | जनवरी 2025 |
+| id\_cardModel codice | `gemini-2.5-flash-lite-preview-09-2025` |
+| saveSupported tipi di dati | **Input**  Testo, immagine, video, audio, PDF  **Output**  Testo |
+| token\_autoLimiti di token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=it) | **Limite di token di input**  1.048.576  **Limite di token di output**  65.536 |
+| handymanFunzionalità | **Generazione di audio**  Non supportato  **API batch**  Supportato  **Memorizzazione nella cache**  Supportato  **Esecuzione del codice**  Supportato  **Ricerca di file**  Supportato  **Chiamata di funzione**  Supportato  **Fondatezza con Google Maps**  Non supportato  **Generazione di immagini**  Non supportato  **API live**  Non supportato  **Fondatezza della Ricerca**  Supportato  **Output strutturati**  Supportato  **Ragionamento**  Supportato  **Contesto URL**  Supportato |
+| 123Versioni | Per ulteriori dettagli, leggi i [pattern delle versioni del modello](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it#model-versions).  - Stabile: [`gemini-2.5-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=it) - Arresto: `gemini-2.5-flash-lite-preview-09-2025` |
+| calendar\_monthUltimo aggiornamento | Settembre 2025 |
+| cognition\_2Data di interruzione della conoscenza | Gennaio 2025 |
 
-सुझाव भेजें
+Invia feedback
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-आखिरी बार 2026-05-08 (UTC) को अपडेट किया गया.
+Ultimo aggiornamento 2026-05-08 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Vuoi dirci altro?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-05-08 (UTC) को अपडेट किया गया."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-08 UTC."],[],[]]

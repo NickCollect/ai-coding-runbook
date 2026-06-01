@@ -1,44 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2-preview?hl=hi
-fetched_at: 2026-05-25T05:27:52.332225+00:00
-title: "Gemini Embedding 2 \u0915\u093e Preview \u092e\u0949\u0921\u0932 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2-preview?hl=pt-BR
+fetched_at: 2026-06-01T05:57:52.729971+00:00
+title: "Modelo de pr\u00e9-lan\u00e7amento do Gemini Embedding 2 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
 
-सुझाव भेजें
+Envie comentários
 
-# Gemini Embedding 2 का Preview मॉडल
+# Modelo de pré-lançamento do Gemini Embedding 2
 
-यह हमारा पहला मल्टीमॉडल एम्बेडिंग मॉडल है. यह टेक्स्ट, इमेज, वीडियो, ऑडियो, और PDF को एक ही यूनिफ़ाइड एम्बेडिंग स्पेस में, संख्या के हिसाब से मैप करता है. Gemini Embedding 2 मॉडल, क्रॉस-मॉडल सिमैंटिक खोज, दस्तावेज़ वापस पाने, और सुझाव देने वाले सिस्टम के लिए सबसे सही है. इन सिस्टम को, बड़े मल्टीमॉडल डेटासेट में समानता की गणना तेज़ी से और बड़े पैमाने पर करनी होती है.
+Nosso primeiro modelo de embeddings multimodais, que oferece um mapeamento numérico eficiente de texto, imagens, vídeo, áudio e PDFs em um único espaço de embeddings unificado. O modelo Gemini Embedding 2 é ideal para pesquisa semântica entre modalidades, recuperação de documentos e sistemas de recomendação que exigem cálculos de similaridade rápidos e escalonáveis em grandes conjuntos de dados multimodais.
 
-## दस्तावेज़
+## Documentação
 
-सुविधाओं और क्षमताओं के बारे में पूरी जानकारी पाने के लिए, [एम्बेडिंग](https://ai.google.dev/gemini-api/docs/embeddings?hl=hi) पेज पर जाएं.
+Acesse a página [Embeddings](https://ai.google.dev/gemini-api/docs/embeddings?hl=pt-br) para conferir a cobertura completa
+de recursos e funcionalidades.
 
 ## gemini-embedding-2-preview
 
-| प्रॉपर्टी | ब्यौरा |
+| Propriedade | Descrição |
 | --- | --- |
-| id\_cardModel code | **Gemini API**  `gemini-embedding-2-preview` |
-| saveSupported data types | **इनपुट**  टेक्स्ट, इमेज, वीडियो, ऑडियो, PDF  **आउटपुट**  टेक्स्ट एम्बेडिंग |
-| token\_autoToken limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट टोकन की सीमा**  8,192  **आउटपुट डाइमेंशन का साइज़**  फ़्लेक्सिबल, इसके साथ काम करता है: 128 - 3072, सुझाया गया साइज़: 768, 1536, 3072 |
-| 123Versions | ज़्यादा जानकारी के लिए, [मॉडल के वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) पढ़ें.  - झलक देखें: `gemini-embedding-2-preview` |
-| calendar\_monthसबसे नया अपडेट | मार्च 2026 |
+| id\_cardCódigo do modelo | **API Gemini**  `gemini-embedding-2-preview` |
+| saveTipos de dados com suporte | **Entrada**  Texto, imagem, vídeo, áudio, PDF  **Saída**  Embeddings de textos |
+| token\_autoLimites de tokens[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de tokens de entrada**  8.192  **Tamanho da dimensão de saída**  Flexível, com suporte a: 128 a 3072. Recomendado: 768, 1536, 3072 |
+| 123Versões | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Visualização: `gemini-embedding-2-preview` |
+| calendar\_monthAtualização mais recente | Março de 2026 |
 
-सुझाव भेजें
+Envie comentários
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया.
+Última atualização 2026-04-29 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Quer enviar seu feedback?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]

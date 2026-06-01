@@ -1,50 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=th
-fetched_at: 2026-05-25T05:25:06.405822+00:00
-title: "\u0e15\u0e31\u0e27\u0e2d\u0e22\u0e48\u0e32\u0e07\u0e04\u0e25\u0e34\u0e1b Lyria 3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=ko
+fetched_at: 2026-06-01T06:02:08.326169+00:00
+title: "Lyria 3 \ud074\ub9bd \ubbf8\ub9ac\ubcf4\uae30 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-ส่งความคิดเห็น
+의견 보내기
 
-# ตัวอย่างคลิป Lyria 3
+# Lyria 3 클립 미리보기
 
-Lyria 3 Clip Preview เป็นโมเดลของ Google ที่ได้รับการเพิ่มประสิทธิภาพเพื่อสร้างคลิป
-ดนตรีสั้นๆ ลูป และตัวอย่าง โดยจะสร้างเสียงสเตอริโอ 48kHz คุณภาพสูงความยาว 30 วินาที
-จากพรอมต์ข้อความหรืออินพุตรูปภาพ
+Lyria 3 Clip Preview는 짧은 음악 클립, 루프, 미리보기를 생성하는 데 최적화된 Google의 모델입니다. 텍스트 프롬프트 또는 이미지 입력에서 30초 길이의 고품질 48kHz 스테레오 오디오를 생성합니다.
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=lyria-3-clip-preview&hl=th)
+[Google AI Studio에서 사용해 보기](https://aistudio.google.com/prompts/new_chat?model=lyria-3-clip-preview&hl=ko)
 
-## เอกสารประกอบ
+## 문서
 
-ไปที่คู่มือ[การสร้างเพลง](https://ai.google.dev/gemini-api/docs/music-generation?hl=th)เพื่อดูข้อมูลทั้งหมดเกี่ยวกับฟีเจอร์และความสามารถ
+기능 및 성능에 관한 전체 내용은 [음악 생성](https://ai.google.dev/gemini-api/docs/music-generation?hl=ko) 가이드를 참고하세요.
 
 ## lyria-3-clip-preview
 
-| พร็อพเพอร์ตี้ | คำอธิบาย |
+| 속성 | 설명 |
 | --- | --- |
-| รหัสโมเดล id\_card | `lyria-3-clip-preview` |
-| บันทึกประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความและรูปภาพ  **เอาต์พุต**  เสียง (MP3), ข้อความ (เนื้อเพลง) |
-| token\_autoขีดจำกัดของโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  131,072 |
-| handymanความสามารถ | **การสร้างเสียง**  สิ่งที่ทำได้  **Batch API**  สิ่งที่ทำไม่ได้  **การแคช**  สิ่งที่ทำไม่ได้  **การรันโค้ด**  สิ่งที่ทำไม่ได้  **ค้นหาไฟล์**  สิ่งที่ทำไม่ได้  **การเรียกใช้ฟังก์ชัน**  สิ่งที่ทำไม่ได้  **การเชื่อมต่อแหล่งข้อมูลกับ Google Maps**  สิ่งที่ทำไม่ได้  **การสร้างรูปภาพ**  สิ่งที่ทำไม่ได้  **Live API**  สิ่งที่ทำไม่ได้  **การเชื่อมต่อแหล่งข้อมูลของ Search**  สิ่งที่ทำไม่ได้  **เอาต์พุตที่มีโครงสร้าง**  สิ่งที่ทำไม่ได้  **การคิด**  สิ่งที่ทำไม่ได้  **บริบทของ URL**  สิ่งที่ทำไม่ได้ |
-| 123เวอร์ชัน | อ่านรายละเอียดเพิ่มเติมได้ใน[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)  - ตัวอย่าง: `lyria-3-clip-preview` - ตัวอย่าง: `lyria-3-pro-preview` |
-| calendar\_monthการอัปเดตล่าสุด | มีนาคม 2026 |
+| id\_card모델 코드 | `lyria-3-clip-preview` |
+| save지원되는 데이터 유형 | **입력**  텍스트 및 이미지  **출력**  오디오 (MP3), 텍스트 (가사) |
+| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 토큰 한도**  131,072 |
+| handyman기능 | **오디오 생성**  지원됨  **Batch API**  지원되지 않음  **캐싱**  지원되지 않음  **코드 실행**  지원되지 않음  **파일 검색**  지원되지 않음  **함수 호출**  지원되지 않음  **Google 지도 기반 그라운딩**  지원되지 않음  **이미지 생성**  지원되지 않음  **Live API**  지원되지 않음  **검색 그라운딩**  지원되지 않음  **구조화된 출력**  지원되지 않음  **사고**  지원되지 않음  **URL 컨텍스트**  지원되지 않음 |
+| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - 미리보기: `lyria-3-clip-preview` - 미리보기: `lyria-3-pro-preview` |
+| calendar\_month최신 업데이트 | 2026년 3월 |
 
-ส่งความคิดเห็น
+의견 보내기
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-อัปเดตล่าสุด 2026-04-29 UTC
+최종 업데이트: 2026-04-29(UTC)
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+의견을 전달하고 싶나요?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-29 UTC"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]

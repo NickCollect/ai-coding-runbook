@@ -1,34 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/custom-agents?hl=it
-fetched_at: 2026-05-25T05:18:16.097607+00:00
-title: "Creare agenti gestiti \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/custom-agents?hl=tr
+fetched_at: 2026-06-01T06:09:09.759636+00:00
+title: "Y\u00f6netilen Ajanlar Olu\u015fturma \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Invia feedback
+Geri bildirim gönderin
 
-# Creare agenti gestiti
+# Yönetilen Ajanlar Oluşturma
 
-Gli agenti gestiti nell'API Gemini ti consentono di estendere l'agente Antigravity con le tue istruzioni, competenze e dati. Puoi [personalizzare l'agente in linea](#customize-inline) al momento dell'interazione o [salvare la configurazione](#save-agent) come agente gestito che richiami per ID.
+Gemini API'deki yönetilen ajanlar, Antigravity ajanını kendi talimatlarınız, becerileriniz ve verilerinizle genişletmenize olanak tanır. Etkileşim sırasında [aracıyı satır içinde özelleştirebilir](#customize-inline) veya [yapılandırmayı kaydedebilirsiniz](#save-agent). Bu durumda, aracıyı kimliğe göre çağırarak yönetebilirsiniz.
 
-## Personalizzare l'agente Antigravity
+## Antigravity aracısını özelleştirme
 
-Il modo più rapido per creare un agente personalizzato è passare la configurazione in linea durante la creazione di una nuova interazione senza dover eseguire la registrazione. Puoi estendere l'agente in tre modi:
+Özel bir aracı oluşturmanın en hızlı yolu, yeni bir etkileşim oluştururken yapılandırmanızı satır içi olarak iletmektir. Kayıt adımı gerekmez. Aracıyı üç şekilde genişletebilirsiniz:
 
-- **Istruzioni di sistema**: passa il testo in linea tramite `system_instruction` per definire il comportamento.
-- **Strumenti**: esegui l'override degli strumenti predefiniti (esecuzione del codice, ricerca, contesto URL).
-- **File e competenze**: monta file come `AGENTS.md` e `SKILL.md` nell'ambiente.
+- **Sistem talimatları**: Davranışı şekillendirmek için satır içi metni `system_instruction` ile iletin.
+- **Araçlar**: Varsayılan araçları (Kod Yürütme, Arama, URL Bağlamı) geçersiz kılın.
+- **Dosyalar ve beceriler**: `AGENTS.md` ve `SKILL.md` gibi dosyaları ortama yerleştirin.
 
-Ecco un esempio di passaggio di tutti e tre in linea:
+Üçünün de satır içi olarak iletilmesine ilişkin bir örneği aşağıda bulabilirsiniz:
 
 ### Python
 
@@ -121,22 +121,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Tutto è definito al momento dell'interazione. Non è necessario registrare nulla in anticipo. L'agente Antigravity fornisce il runtime (esecuzione del codice, gestione dei file, accesso web) e i livelli di configurazione.
+Her şey etkileşim sırasında tanımlanır. Önceden herhangi bir kayıt işlemi yapmanız gerekmez. Antigravity aracı donanımı, çalışma zamanını (kod yürütme, dosya yönetimi, web erişimi) sağlar ve yapılandırma katmanlarınız bu donanımın üzerinde yer alır.
 
-### Strumenti e istruzioni di sistema
+### Araçlar ve sistem talimatları
 
-Puoi personalizzare il comportamento e le funzionalità dell'agente per un'interazione specifica utilizzando i parametri `system_instruction` e `tools`.
+`system_instruction` ve `tools` parametrelerini kullanarak aracının davranışını ve özelliklerini belirli bir etkileşim için özelleştirebilirsiniz.
 
-- **Istruzioni di sistema**: utilizza il parametro `system_instruction` per passare il testo in linea che definisce il comportamento dell'agente. Questa opzione è ideale per le modifiche rapide che vuoi apportare a ogni chiamata. I parametri `system_instruction` e `AGENTS.md` sono additivi; entrambi si applicano quando sono presenti.
-- **Strumenti**: per impostazione predefinita, l'agente Antigravity ha accesso a `code_execution`, `google_search` e `url_context`. Puoi eseguire l'override di questo elenco passando il parametro `tools` al momento dell'interazione. Per informazioni dettagliate sugli strumenti disponibili e su come utilizzarli, consulta [Agente Antigravity: strumenti supportati](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it#supported-tools).
+- **Sistem talimatları**: Aracının davranışını şekillendiren satır içi metni iletmek için `system_instruction` parametresini kullanın. Bu özellik, her görüşmede değiştirmek istediğiniz hızlı düzenlemeler için idealdir. `system_instruction` ve `AGENTS.md` toplamsaldır. Her ikisi de mevcut olduğunda geçerlidir.
+- **Araçlar**: Antigravity aracısı varsayılan olarak `code_execution`, `google_search` ve `url_context`'e erişebilir. Etkileşim sırasında `tools` parametresini ileterek bu listeyi geçersiz kılabilirsiniz. Kullanılabilir araçlar ve bunların nasıl kullanılacağıyla ilgili tüm ayrıntılar için [Antigravity Agent: Desteklenen araçlar](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=tr#supported-tools) başlıklı makaleyi inceleyin.
 
-### Personalizzazione basata su file
+### Dosyaya dayalı özelleştirme
 
-#### Struttura della directory dell'agente
+#### Aracı dizin yapısı
 
-Anche se puoi passare la configurazione in linea, ti consigliamo di organizzare i file dell'agente in una directory strutturata. In questo modo è più facile gestire, controllare la versione e montare i file nell'ambiente dell'agente.
+Yapılandırmayı satır içi olarak iletebilirsiniz ancak aracınızın dosyalarını yapılandırılmış bir dizinde düzenlemenizi öneririz. Bu sayede yönetmek, sürüm denetimi yapmak ve aracının ortamına monte etmek daha kolay olur.
 
-Una tipica directory di progetto dell'agente ha questo aspetto:
+Tipik bir aracı projesi dizini şu şekilde görünür:
 
 ```
 my-agent/
@@ -147,13 +147,13 @@ my-agent/
 └── workspace/       # Initial data files and knowledge
 ```
 
-Il runtime di Antigravity esegue la scansione di `.agents/` (e della root dell'ambiente) per questi file.
+Antigravity çalışma zamanı, bu dosyalar için `.agents/` (ve ortamın kökünü) tarar.
 
 #### AGENTS.md
 
-L'agente carica automaticamente `.agents/AGENTS.md` (o `/.agents/AGENTS.md`) dall'ambiente come istruzioni di sistema all'avvio. Utilizza `AGENTS.md` per definizioni di persona di lunga durata, linee guida dettagliate e istruzioni di cui vuoi controllare la versione insieme al codice.
+Aracı, başlatıldığında ortamdan `.agents/AGENTS.md` (veya `/.agents/AGENTS.md`) öğesini sistem talimatları olarak otomatik olarak yükler. Uzun persona tanımları, ayrıntılı yönergeler ve kodunuzla birlikte sürüm denetimi yapmak istediğiniz talimatlar için `AGENTS.md` kullanın.
 
-Monta un file `AGENTS.md` utilizzando un'origine in linea:
+Satır içi kaynak kullanarak `AGENTS.md` bağlama:
 
 ### Python
 
@@ -231,9 +231,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-#### Competenze: SKILL.md
+#### Beceriler: SKILL.md
 
-Le competenze sono file che estendono le funzionalità dell'agente. Inseriscili in `.agents/skills/<skill-name>/SKILL.md` e l'agente li rileva e li registra automaticamente.
+Beceriler, aracının yeteneklerini genişleten dosyalardır. Bunları `.agents/skills/<skill-name>/SKILL.md` altına yerleştirin. Böylece, koşum otomatik olarak keşfedip kaydeder.
 
 ```
 .agents/
@@ -243,7 +243,7 @@ Le competenze sono file che estendono le funzionalità dell'agente. Inseriscili 
         └── SKILL.md
 ```
 
-Monta una competenza utilizzando un'origine in linea:
+Satır içi kaynak kullanarak beceri bağlama:
 
 ### Python
 
@@ -321,15 +321,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Le competenze caricate da `.agents/skills/` e `/.agents/skills/` vengono rilevate automaticamente.
+`.agents/skills/` ve `/.agents/skills/` kaynaklarından yüklenen beceriler otomatik olarak keşfedilir.
 
-## Creare un agente gestito
+## Yönetilen aracı oluşturma
 
-Una volta eseguite le iterazioni sulla configurazione, puoi crearla come agente gestito con `agents.create`. In questo modo puoi richiamare l'agente per ID senza ripetere la configurazione ogni volta.
+Yapılandırmanızı yineledikten sonra `agents.create` ile yönetilen bir aracı olarak oluşturabilirsiniz. Bu sayede, yapılandırmayı her seferinde tekrarlamadan aracıyı kimliğe göre çağırabilirsiniz.
 
-### Dalle origini
+### Kaynaklardan
 
-Specifica `base_agent`, `id`, `system_instruction` e `base_environment` con le origini. La piattaforma esegue il provisioning di una nuova sandbox con i tuoi file a ogni chiamata. Consulta la sezione [Ambienti](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it) per i tipi di origine disponibili (Git, GCS, in linea).
+Kaynaklarla birlikte `base_agent`, `id`, `system_instruction` ve `base_environment` değerlerini belirtin. Platform, her çağırmada dosyalarınızla yeni bir sanal alan sağlar. Kullanılabilir kaynak türleri (Git, GCS, satır içi) için [Ortamlar](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr) bölümüne bakın.
 
 ### Python
 
@@ -437,9 +437,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 }'
 ```
 
-### Da un ambiente esistente (fork)
+### Mevcut bir ortamdan (fork)
 
-Esegui l'iterazione con l'agente Antigravity di base finché l'ambiente non è corretto (pacchetti installati, file presenti), quindi crea un fork in un agente gestito.
+Ortam doğru olana kadar (paketler yüklendi, dosyalar yerinde) temel Antigravity aracısıyla yineleme yapın, ardından bunu yönetilen bir aracıya çatallayın.
 
 ### Python
 
@@ -504,11 +504,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Con le regole di rete
+### Ağ kurallarıyla
 
-Puoi bloccare l'accesso in uscita o inserire le credenziali quando salvi un agente gestito. Per lo schema completo della lista consentita, i pattern delle credenziali e i caratteri jolly, consulta [Ambienti: configurazione di rete](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it#network-configuration).
+Yönetilen bir aracı kaydederken giden erişimi kilitleyebilir veya kimlik bilgilerini ekleyebilirsiniz. İzin verilenler listesi şemasının, kimlik bilgisi kalıplarının ve joker karakterlerin tam listesi için [Ortamlar: Ağ yapılandırması](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr#network-configuration) başlıklı makaleyi inceleyin.
 
-L'esempio seguente crea un agente `issue-resolver` che può accedere solo a GitHub e PyPI, con le credenziali inserite per GitHub:
+Aşağıdaki örnekte, GitHub ve PyPI'ye erişebilen ve GitHub için kimlik bilgilerinin yerleştirildiği bir `issue-resolver` aracısı oluşturuluyor:
 
 ### Python
 
@@ -619,9 +619,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
   }'
 ```
 
-## Richiamare l'agente
+## Temsilciyi çağırma
 
-Chiama l'agente gestito con il suo ID creando una nuova interazione. Ogni chiamata esegue il fork dell'ambiente di base, quindi ogni esecuzione inizia da zero.
+Yeni bir etkileşim oluşturarak yönetilen aracınızı arayın. Her çağırma işlemi temel ortamı çatalladığından her çalıştırma temiz bir şekilde başlar.
 
 ### Python
 
@@ -661,11 +661,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-[Per le conversazioni e lo streaming in più turni, consulta la guida rapida.](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=it) Gli stessi pattern `previous_interaction_id` e `environment` si applicano agli agenti gestiti.
+Çok adımlı görüşmeler ve yayın için [Hızlı Başlangıç](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=tr) bölümüne bakın. Aynı `previous_interaction_id` ve `environment` kalıpları, yönetilen temsilciler için de geçerlidir.
 
-## Eseguire l'override della configurazione al momento della chiamata
+## Çağırma sırasında yapılandırmayı geçersiz kılma
 
-Puoi eseguire l'override di `system_instruction` e `tools` predefiniti dell'agente quando crei un'interazione. In questo modo puoi modificare il comportamento o le funzionalità dell'agente per un'esecuzione specifica senza modificare la definizione dell'agente memorizzata.
+Etkileşim oluştururken aracının varsayılan `system_instruction` ve `tools` değerlerini geçersiz kılabilirsiniz. Bu sayede, depolanan aracı tanımını değiştirmeden belirli bir çalıştırma için aracının davranışını veya özelliklerini değiştirebilirsiniz.
 
 ### Python
 
@@ -710,11 +710,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Gestire gli agenti
+## Aracıları yönet
 
-Puoi elencare, recuperare ed eliminare gli agenti.
+Aracıları listeleyebilir, alabilir ve silebilirsiniz.
 
-### Elencare gli agenti
+### Aracıları listeleyin
 
 ### Python
 
@@ -742,7 +742,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/agents" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Recuperare un agente
+### Müşteri temsilcisine bağlanma
 
 ### Python
 
@@ -765,9 +765,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/agents/data-analys
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Eliminare un agente
+### Temsilci silme
 
-L'eliminazione rimuove la configurazione. Gli ambienti e le interazioni esistenti creati dall'agente non sono interessati.
+Silme işlemi, yapılandırmayı kaldırır. Mevcut ortamlar ve aracının oluşturduğu etkileşimler etkilenmez.
 
 ### Python
 
@@ -788,45 +788,45 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/agents/data-ana
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Riferimento alla definizione dell'agente
+## Aracı tanımı referansı
 
-| Campo | Tipo | Obbligatorio | Descrizione |
+| Alan | Tür | Zorunlu | Açıklama |
 | --- | --- | --- | --- |
-| `id` | stringa | Sì | Identificatore univoco dell'agente. Utilizzato per richiamare l'agente. |
-| `description` | stringa | No | Descrizione dell'agente leggibile da una persona. |
-| `base_agent` | stringa | Sì | ID agente di base (ad es. `antigravity-preview-05-2026`). |
-| `system_instruction` | stringa | No | Prompt di sistema che definisce il comportamento e il personaggio. |
-| `tools` | stringa o oggetto | No | Strumenti che l'agente può utilizzare; se omessi, l'agente avrà accesso a `code_execution`, `google_search` e `url_context`. |
-| `base_environment` | stringa o oggetto | No | `"remote"`, un `environment_id`, o un oggetto di configurazione con `sources` e `network`. Consulta la sezione Ambienti. |
+| `id` | dize | Evet | Benzersiz aracı tanımlayıcısı. Ajanı çağırmak için kullanılır. |
+| `description` | dize | Hayır | Temsilcinin, kullanıcılar tarafından okunabilir açıklaması. |
+| `base_agent` | dize | Evet | Temel temsilci kimliği (ör. `antigravity-preview-05-2026`). |
+| `system_instruction` | dize | Hayır | Davranışı ve kullanıcı profilini tanımlayan sistem istemi. |
+| `tools` | dize veya nesne | Hayır | Temsilcinin kullanabileceği araçlar. Bu araçlar `code_execution`, `google_search` ve `url_context` erişimine sahip olacak. |
+| `base_environment` | dize veya nesne | Hayır | `"remote"`, `environment_id` veya `sources` ve `network` içeren bir yapılandırma nesnesi. Ortamlar bölümüne bakın. |
 
-## Flusso di lavoro di iterazione
+## Yineleme iş akışı
 
-1. **Prototipo** con l'agente Antigravity di base. Passa le origini delle istruzioni di sistema e dell'ambiente in linea. Testa in modo interattivo le istruzioni, le competenze e la configurazione dell'ambiente.
-2. **Stabilizza** l'ambiente. Installa i pacchetti, monta le origini e verifica che tutto funzioni.
-3. **Persisti** come agente gestito creando un nuovo agente, dalle origini o eseguendo il fork dell'ambiente.
-4. **Aggiorna** la definizione dell'agente. Modifica le istruzioni di sistema, scambia le competenze o aggiungi le origini. La chiamata successiva rileva la nuova configurazione.
+1. Temel Antigravity temsilcisiyle **prototip oluşturun**. Sistem talimatını ve ortam kaynaklarını satır içi olarak iletin. Talimatları, becerileri ve ortam kurulumunu etkileşimli olarak test edin.
+2. Ortamı **dengeleyin**. Paketleri yükleyin, kaynakları bağlayın ve her şeyin çalıştığını doğrulayın.
+3. Kaynaklardan veya ortamı çatallayarak yeni bir aracı oluşturup yönetilen aracı olarak **kalıcı hale getirin**.
+4. Temsilci tanımını **güncelleyin**. Sistem talimatını değiştirme, becerileri değiştirme veya kaynak ekleme Bir sonraki çağırma işleminde yeni yapılandırma kullanılır.
 
-## Limitazioni
+## Sınırlamalar
 
-- **Stato dell'anteprima**: gli agenti gestiti sono in anteprima. Le funzionalità e gli schemi possono cambiare.
-- **Agente di base**: solo `antigravity-preview-05-2026` è supportato come `base_agent`.
-- **Nessun controllo delle versioni**: il controllo delle versioni e il rollback degli agenti non sono ancora disponibili.
-- **Nessun annidamento di subagenti**: la delega dei subagenti non è ancora supportata.
-- Puoi avere fino a 1000 agenti gestiti.
+- **Önizleme durumu**: Yönetilen aracılar önizleme aşamasındadır. Özellikler ve şemalar değişebilir.
+- **Temel aracı**: `base_agent` olarak yalnızca `antigravity-preview-05-2026` desteklenir.
+- **Sürüm oluşturma yok**: Temsilci sürüm oluşturma ve geri alma henüz kullanılamıyor.
+- **Alt temsilci iç içe yerleştirme yok**: Alt temsilci yetkilendirme henüz desteklenmemektedir.
+- En fazla 1.000 yönetilen aracınız olabilir.
 
-## Passaggi successivi
+## Sırada ne var?
 
-- [Panoramica degli agenti](https://ai.google.dev/gemini-api/docs/agents?hl=it): scopri i concetti fondamentali degli agenti gestiti.
-- [Guida rapida](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=it): inizia a creare con conversazioni e streaming in più turni.
-- [Agente Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it): esplora le funzionalità, gli strumenti e i prezzi dell'agente predefinito.
-- [Ambienti degli agenti](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it): configura sandbox, origini e rete.
+- [Temsilcilere Genel Bakış](https://ai.google.dev/gemini-api/docs/agents?hl=tr): Yönetilen temsilcilerin temel kavramları hakkında bilgi edinin.
+- [Hızlı başlangıç](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=tr): Çok adımlı görüşmeler ve akışla geliştirmeye başlayın.
+- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=tr): Varsayılan temsilcinin özelliklerini, araçlarını ve fiyatlandırmasını keşfedin.
+- [Aracı Ortamları](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr): Sanal alanları, kaynakları ve ağı yapılandırın.
 
-Invia feedback
+Geri bildirim gönderin
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Ultimo aggiornamento 2026-05-20 UTC.
+Son güncelleme tarihi: 2026-05-20 UTC.
 
-Vuoi dirci altro?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-20 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-05-20 UTC."],[],[]]
