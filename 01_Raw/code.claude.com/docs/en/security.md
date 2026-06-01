@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/security
-fetched_at: 2026-05-25T05:15:53.342482+00:00
+fetched_at: 2026-06-01T05:54:53.355107+00:00
 fetch_method: mintlify_md
 ---
 
@@ -143,6 +143,7 @@ If you discover a security vulnerability in Claude Code:
 
 ## Related resources
 
+* [Security guidance plugin](/en/security-guidance): have Claude review and fix vulnerabilities in its own code changes during the session
 * [Sandbox environments](/en/sandbox-environments): compare isolation approaches and choose one for your threat model
 * [Sandboxing](/en/sandboxing): filesystem and network isolation for Bash commands
 * [Permissions](/en/permissions): configure permissions and access controls

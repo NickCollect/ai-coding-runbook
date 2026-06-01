@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-directory
-fetched_at: 2026-05-18T05:02:44.581292+00:00
+fetched_at: 2026-06-01T05:54:50.297641+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ fetch_method: mintlify_md
 
 # Explore the .claude directory
 
-> Where Claude Code reads CLAUDE.md, settings.json, hooks, skills, commands, subagents, rules, and auto memory. Explore the .claude directory in your project and ~/.claude in your home directory.
+> Where Claude Code reads CLAUDE.md, settings.json, hooks, skills, commands, subagents, workflows, rules, and auto memory. Explore the .claude directory in your project and ~/.claude in your home directory.
 
 export const ClaudeExplorer = () => {
   const A = useMemo(() => ({href, children}) => <a href={href} style={{
@@ -368,6 +368,17 @@ You are a senior code reviewer. Review for:
 Every finding must include a concrete fix.`
           }]
         }, {
+          id: 'workflows',
+          label: 'workflows/',
+          type: 'folder',
+          icon: 'folder',
+          color: '#C46686',
+          oneLiner: 'Dynamic workflow scripts that orchestrate many subagents',
+          when: 'Loaded at startup; each file becomes a /<name> command',
+          description: <>Each <C>.js</C> file is a <A href="/en/workflows">dynamic workflow</A>: a script the runtime executes to spawn and coordinate many subagents. Workflows are written by Claude and saved here from <C>/workflows</C> rather than authored from scratch.</>,
+          tips: [<>Save a run from <C>/workflows</C> with <C>s</C> to create one of these</>, <>A project workflow takes precedence over a personal one in <C>~/.claude/workflows/</C> with the same name</>],
+          docsLink: '/en/workflows'
+        }, {
           id: 'agent-memory',
           label: 'agent-memory/',
           type: 'folder',
@@ -669,6 +680,17 @@ themselves by leaving a TODO(human) marker instead of writing it.`
           when: 'Claude delegates or you @-mention in any project',
           description: 'Subagents defined here are available across all your projects. Same format as project agents.',
           docsLink: '/en/sub-agents',
+          children: []
+        }, {
+          id: 'global-workflows',
+          label: 'workflows/',
+          type: 'folder',
+          icon: 'folder',
+          color: '#C46686',
+          oneLiner: 'Personal dynamic workflows available in every project',
+          when: 'Loaded at startup; each file becomes a /<name> command',
+          description: <>Workflow scripts saved here are available across all your projects. A project workflow with the same name in <C>.claude/workflows/</C> takes precedence.</>,
+          docsLink: '/en/workflows',
           children: []
         }, {
           id: 'global-agent-memory',
@@ -1451,6 +1473,7 @@ Different kinds of customization live in different files. Use this table to find
 | Keep personal overrides out of git                 | `settings.local.json`                    | project only      | [Settings scopes](/en/settings#settings-files)     |
 | Add a prompt or capability you invoke with `/name` | `skills/<name>/SKILL.md`                 | project or global | [Skills](/en/skills)                               |
 | Define a specialized subagent with its own tools   | `agents/*.md`                            | project or global | [Subagents](/en/sub-agents)                        |
+| Orchestrate many subagents from a script           | `workflows/*.js`                         | project or global | [Dynamic workflows](/en/workflows)                 |
 | Connect external tools over MCP                    | `.mcp.json`                              | project only      | [MCP](/en/mcp)                                     |
 | Change how Claude formats responses                | `output-styles/*.md`                     | project or global | [Output styles](/en/output-styles)                 |
 
@@ -1470,23 +1493,24 @@ This table lists every file the explorer covers. Project-scope files live in you
 
 Click a filename to open that node in the explorer above.
 
-| File                                                | Scope              | Commit | What it does                                          | Reference                                                       |
-| --------------------------------------------------- | ------------------ | ------ | ----------------------------------------------------- | --------------------------------------------------------------- |
-| [`CLAUDE.md`](#ce-claude-md)                        | Project and global | ✓      | Instructions loaded every session                     | [Memory](/en/memory)                                            |
-| [`rules/*.md`](#ce-rules)                           | Project and global | ✓      | Topic-scoped instructions, optionally path-gated      | [Rules](/en/memory#organize-rules-with-claude/rules/)           |
-| [`settings.json`](#ce-settings-json)                | Project and global | ✓      | Permissions, hooks, env vars, model defaults          | [Settings](/en/settings)                                        |
-| [`settings.local.json`](#ce-settings-local-json)    | Project only       |        | Your personal overrides, auto-gitignored              | [Settings scopes](/en/settings#settings-files)                  |
-| [`.mcp.json`](#ce-mcp-json)                         | Project only       | ✓      | Team-shared MCP servers                               | [MCP scopes](/en/mcp#mcp-installation-scopes)                   |
-| [`.worktreeinclude`](#ce-worktreeinclude)           | Project only       | ✓      | Gitignored files to copy into new worktrees           | [Worktrees](/en/worktrees#copy-gitignored-files-into-worktrees) |
-| [`skills/<name>/SKILL.md`](#ce-skills)              | Project and global | ✓      | Reusable prompts invoked with `/name` or auto-invoked | [Skills](/en/skills)                                            |
-| [`commands/*.md`](#ce-commands)                     | Project and global | ✓      | Single-file prompts; same mechanism as skills         | [Skills](/en/skills)                                            |
-| [`output-styles/*.md`](#ce-output-styles)           | Project and global | ✓      | Custom system-prompt sections                         | [Output styles](/en/output-styles)                              |
-| [`agents/*.md`](#ce-agents)                         | Project and global | ✓      | Subagent definitions with their own prompt and tools  | [Subagents](/en/sub-agents)                                     |
-| [`agent-memory/<name>/`](#ce-agent-memory)          | Project and global | ✓      | Persistent memory for subagents                       | [Persistent memory](/en/sub-agents#enable-persistent-memory)    |
-| [`~/.claude.json`](#ce-claude-json)                 | Global only        |        | App state, OAuth, UI toggles, personal MCP servers    | [Global config](/en/settings#global-config-settings)            |
-| [`projects/<project>/memory/`](#ce-global-projects) | Global only        |        | Auto memory: Claude's notes to itself across sessions | [Auto memory](/en/memory#auto-memory)                           |
-| [`keybindings.json`](#ce-keybindings)               | Global only        |        | Custom keyboard shortcuts                             | [Keybindings](/en/keybindings)                                  |
-| [`themes/*.json`](#ce-themes)                       | Global only        |        | Custom color themes                                   | [Custom themes](/en/terminal-config#create-a-custom-theme)      |
+| File                                                | Scope              | Commit | What it does                                                                                                  | Reference                                                       |
+| --------------------------------------------------- | ------------------ | ------ | ------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| [`CLAUDE.md`](#ce-claude-md)                        | Project and global | ✓      | Instructions loaded every session                                                                             | [Memory](/en/memory)                                            |
+| [`rules/*.md`](#ce-rules)                           | Project and global | ✓      | Topic-scoped instructions, optionally path-gated                                                              | [Rules](/en/memory#organize-rules-with-claude/rules/)           |
+| [`settings.json`](#ce-settings-json)                | Project and global | ✓      | Permissions, hooks, env vars, model defaults                                                                  | [Settings](/en/settings)                                        |
+| [`settings.local.json`](#ce-settings-local-json)    | Project only       |        | Your personal overrides, auto-gitignored                                                                      | [Settings scopes](/en/settings#settings-files)                  |
+| [`.mcp.json`](#ce-mcp-json)                         | Project only       | ✓      | Team-shared MCP servers                                                                                       | [MCP scopes](/en/mcp#mcp-installation-scopes)                   |
+| [`.worktreeinclude`](#ce-worktreeinclude)           | Project only       | ✓      | Gitignored files to copy into new worktrees                                                                   | [Worktrees](/en/worktrees#copy-gitignored-files-into-worktrees) |
+| [`skills/<name>/SKILL.md`](#ce-skills)              | Project and global | ✓      | Reusable prompts invoked with `/name` or auto-invoked                                                         | [Skills](/en/skills)                                            |
+| [`commands/*.md`](#ce-commands)                     | Project and global | ✓      | Single-file prompts; same mechanism as skills                                                                 | [Skills](/en/skills)                                            |
+| [`output-styles/*.md`](#ce-output-styles)           | Project and global | ✓      | Custom system-prompt sections                                                                                 | [Output styles](/en/output-styles)                              |
+| [`agents/*.md`](#ce-agents)                         | Project and global | ✓      | Subagent definitions with their own prompt and tools                                                          | [Subagents](/en/sub-agents)                                     |
+| [`workflows/*.js`](#ce-workflows)                   | Project and global | ✓      | Dynamic workflow scripts written by Claude and saved from `/workflows`; each file becomes a `/<name>` command | [Dynamic workflows](/en/workflows)                              |
+| [`agent-memory/<name>/`](#ce-agent-memory)          | Project and global | ✓      | Persistent memory for subagents                                                                               | [Persistent memory](/en/sub-agents#enable-persistent-memory)    |
+| [`~/.claude.json`](#ce-claude-json)                 | Global only        |        | App state, OAuth, UI toggles, personal MCP servers                                                            | [Global config](/en/settings#global-config-settings)            |
+| [`projects/<project>/memory/`](#ce-global-projects) | Global only        |        | Auto memory: Claude's notes to itself across sessions                                                         | [Auto memory](/en/memory#auto-memory)                           |
+| [`keybindings.json`](#ce-keybindings)               | Global only        |        | Custom keyboard shortcuts                                                                                     | [Keybindings](/en/keybindings)                                  |
+| [`themes/*.json`](#ce-themes)                       | Global only        |        | Custom color themes                                                                                           | [Custom themes](/en/terminal-config#create-a-custom-theme)      |
 
 ## Troubleshoot configuration
 
@@ -1500,20 +1524,21 @@ Beyond the config you author, `~/.claude` holds data Claude Code writes during s
 
 Files in the paths below are deleted on startup once they're older than [`cleanupPeriodDays`](/en/settings#available-settings). The default is 30 days.
 
-| Path under `~/.claude/`                      | Contents                                                                                                                 |
-| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `projects/<project>/<session>.jsonl`         | Full conversation transcript: every message, tool call, and tool result                                                  |
-| `projects/<project>/<session>/subagents/`    | [Subagent](/en/sub-agents) conversation transcripts, removed with the parent session transcript when it ages out         |
-| `projects/<project>/<session>/tool-results/` | Large tool outputs spilled to separate files                                                                             |
-| `file-history/<session>/`                    | Pre-edit snapshots of files Claude changed, used for [checkpoint restore](/en/checkpointing)                             |
-| `plans/`                                     | Plan files written during [plan mode](/en/permission-modes#analyze-before-you-edit-with-plan-mode)                       |
-| `debug/`                                     | Per-session debug logs, written only when you start with `--debug` or run `/debug`                                       |
-| `paste-cache/`, `image-cache/`               | Contents of large pastes and attached images                                                                             |
-| `session-env/`                               | Per-session environment metadata                                                                                         |
-| `tasks/`                                     | Per-session task lists written by the task tools                                                                         |
-| `shell-snapshots/`                           | Captured shell environment used by the Bash tool. Removed on clean exit. The sweep clears any left after a crash.        |
-| `backups/`                                   | Timestamped copies of `~/.claude.json` taken before config migrations                                                    |
-| `feedback-bundles/`                          | Redacted transcript archives written by `/feedback` on third-party providers, for sending to your Anthropic account team |
+| Path under `~/.claude/`                      | Contents                                                                                                                  |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `projects/<project>/<session>.jsonl`         | Full conversation transcript: every message, tool call, and tool result                                                   |
+| `projects/<project>/<session>/subagents/`    | [Subagent](/en/sub-agents) conversation transcripts, removed with the parent session transcript when it ages out          |
+| `projects/<project>/<session>/tool-results/` | Large tool outputs spilled to separate files                                                                              |
+| `file-history/<session>/`                    | Pre-edit snapshots of files Claude changed, used for [checkpoint restore](/en/checkpointing)                              |
+| `plans/`                                     | Plan files written during [plan mode](/en/permission-modes#analyze-before-you-edit-with-plan-mode)                        |
+| `debug/`                                     | Per-session debug logs, written only when you start with `--debug` or run `/debug`                                        |
+| `paste-cache/`, `image-cache/`               | Contents of large pastes and attached images                                                                              |
+| `session-env/`                               | Per-session environment metadata                                                                                          |
+| `tasks/`                                     | Per-session task lists written by the task tools                                                                          |
+| `shell-snapshots/`                           | Captured shell environment used by the Bash tool. Removed on clean exit. The sweep clears any left after a crash.         |
+| `backups/`                                   | Timestamped copies of `~/.claude.json` taken before config migrations                                                     |
+| `feedback-bundles/`                          | Redacted transcript archives written by `/feedback` on third-party providers, for sending to your Anthropic account team  |
+| `todos/`, `statsig/`, `logs/`                | Legacy directories from older versions. No longer written. The sweep removes their contents and then the empty directory. |
 
 ### Kept until you delete them
 
@@ -1524,7 +1549,6 @@ The following paths are not covered by automatic cleanup and persist indefinitel
 | `history.jsonl`         | Every prompt you've typed, with timestamp and project path. Used for up-arrow recall.                                                                                           |
 | `stats-cache.json`      | Aggregated token and cost counts shown by `/usage`                                                                                                                              |
 | `remote-settings.json`  | Cached copy of [server-managed settings](/en/server-managed-settings) for your organization. Only present when your organization has configured them. Refreshed on each launch. |
-| `todos/`                | Legacy per-session task lists. No longer written by current versions; safe to delete.                                                                                           |
 
 Other small cache and lock files appear depending on which features you use and are safe to delete.
 
@@ -1573,15 +1597,15 @@ The command leaves `shell-snapshots/` and `backups/` alone because those are not
 
 You can also delete any of the application-data paths above by hand. New sessions are unaffected. The table below shows what you lose for past sessions.
 
-| Delete                                                                                                                                                                                       | You lose                                                   |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| `~/.claude/projects/`                                                                                                                                                                        | Resume, continue, and rewind for past sessions             |
-| `~/.claude/history.jsonl`                                                                                                                                                                    | Up-arrow prompt recall                                     |
-| `~/.claude/file-history/`                                                                                                                                                                    | Checkpoint restore for past sessions                       |
-| `~/.claude/stats-cache.json`                                                                                                                                                                 | Historical totals shown by `/usage`                        |
-| `~/.claude/remote-settings.json`                                                                                                                                                             | Nothing. Re-fetched on next launch.                        |
-| `~/.claude/debug/`, `~/.claude/plans/`, `~/.claude/paste-cache/`, `~/.claude/image-cache/`, `~/.claude/session-env/`, `~/.claude/tasks/`, `~/.claude/shell-snapshots/`, `~/.claude/backups/` | Nothing user-facing                                        |
-| `~/.claude/todos/`                                                                                                                                                                           | Nothing. Legacy directory not written by current versions. |
+| Delete                                                                                                                                                                                       | You lose                                                     |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| `~/.claude/projects/`                                                                                                                                                                        | Resume, continue, and rewind for past sessions               |
+| `~/.claude/history.jsonl`                                                                                                                                                                    | Up-arrow prompt recall                                       |
+| `~/.claude/file-history/`                                                                                                                                                                    | Checkpoint restore for past sessions                         |
+| `~/.claude/stats-cache.json`                                                                                                                                                                 | Historical totals shown by `/usage`                          |
+| `~/.claude/remote-settings.json`                                                                                                                                                             | Nothing. Re-fetched on next launch.                          |
+| `~/.claude/debug/`, `~/.claude/plans/`, `~/.claude/paste-cache/`, `~/.claude/image-cache/`, `~/.claude/session-env/`, `~/.claude/tasks/`, `~/.claude/shell-snapshots/`, `~/.claude/backups/` | Nothing user-facing                                          |
+| `~/.claude/todos/`, `~/.claude/statsig/`, `~/.claude/logs/`                                                                                                                                  | Nothing. Legacy directories not written by current versions. |
 
 Don't delete `~/.claude.json`, `~/.claude/settings.json`, or `~/.claude/plugins/`: those hold your auth, preferences, and installed plugins.
 

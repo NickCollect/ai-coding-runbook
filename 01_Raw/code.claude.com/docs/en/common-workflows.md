@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/common-workflows
-fetched_at: 2026-05-18T05:02:44.608189+00:00
+fetched_at: 2026-06-01T05:54:50.391937+00:00
 fetch_method: mintlify_md
 ---
 
@@ -28,6 +28,8 @@ This page covers:
 These are prompt patterns for everyday tasks like exploring unfamiliar code, debugging, refactoring, writing tests, and creating PRs. Each works in any Claude Code surface; adapt the wording to your project.
 
 ### Understand new codebases
+
+For configuring Claude Code in a monorepo or large codebase, see [Monorepos and large repos](/en/large-codebases).
 
 #### Get a quick codebase overview
 

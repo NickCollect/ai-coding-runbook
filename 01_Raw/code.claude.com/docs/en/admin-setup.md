@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/admin-setup
-fetched_at: 2026-05-25T05:15:52.713749+00:00
+fetched_at: 2026-06-01T05:54:48.092024+00:00
 fetch_method: mintlify_md
 ---
 
@@ -138,5 +138,6 @@ With provider and delivery mechanism chosen, move on to detailed configuration:
 
 * [Server-managed settings](/en/server-managed-settings): deliver managed policy from the Claude admin console
 * [Settings reference](/en/settings): every setting key, file location, and precedence rule
+* [Monorepos and large repos](/en/large-codebases): per-directory configuration patterns for organizations deploying into a monorepo
 * [Amazon Bedrock](/en/amazon-bedrock), [Google Vertex AI](/en/google-vertex-ai), [Microsoft Foundry](/en/microsoft-foundry): provider-specific deployment
 * [Claude Enterprise Administrator Guide](https://claude.com/resources/tutorials/claude-enterprise-administrator-guide): SSO, SCIM, seat management, and rollout playbook

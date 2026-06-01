@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/mcp
-fetched_at: 2026-05-25T05:15:53.201328+00:00
+fetched_at: 2026-06-01T05:54:52.116581+00:00
 fetch_method: mintlify_md
 ---
 
@@ -47,7 +47,7 @@ You can also have Claude scaffold a server for you with the official [`mcp-serve
     /plugin install mcp-server-dev@claude-plugins-official
     ```
 
-    Then run `/reload-plugins` to activate it in the current session.
+    If Claude Code reports that the marketplace is not found, run `/plugin marketplace add anthropics/claude-plugins-official` first, then retry the install. Once installed, run `/reload-plugins` to activate it in the current session.
   </Step>
 
   <Step title="Run the build skill">
@@ -61,7 +61,7 @@ You can also have Claude scaffold a server for you with the official [`mcp-serve
 
 ## Installing MCP servers
 
-MCP servers can be configured in three different ways depending on your needs:
+MCP servers can be configured in several ways depending on your needs:
 
 ### Option 1: Add a remote HTTP server
 
@@ -129,6 +129,19 @@ claude mcp add --transport stdio --env AIRTABLE_API_KEY=YOUR_KEY airtable \
   This prevents conflicts between Claude's flags and the server's flags.
 </Note>
 
+### Option 4: Add a remote WebSocket server
+
+WebSocket servers hold a persistent bidirectional connection, which suits remote MCP servers that push events to Claude unprompted. Use HTTP instead when your server only responds to requests, since HTTP supports OAuth and the `claude mcp add --transport` flag, while WebSocket supports neither.
+
+Configure WebSocket servers in `.mcp.json` or with `claude mcp add-json`:
+
+```bash theme={null}
+claude mcp add-json events-server \
+  '{"type":"ws","url":"wss://mcp.example.com/socket","headers":{"Authorization":"Bearer YOUR_TOKEN"}}'
+```
+
+The `type: "ws"` entry accepts the same `url`, `headers`, `headersHelper`, `timeout`, and `alwaysLoad` fields as `http`. Authentication is header-only, so pass a static token in `headers` or generate one at connect time with [`headersHelper`](#use-dynamic-headers-for-custom-authentication). The `claude mcp add --transport` flag does not accept `ws`.
+
 ### Managing your servers
 
 Once configured, you can manage your MCP servers with these commands:
@@ -146,6 +159,8 @@ claude mcp remove github
 # (within Claude Code) Check server status
 /mcp
 ```
+
+Project-scoped servers from `.mcp.json` that are awaiting your approval appear in `claude mcp list` as `⏸ Pending approval`. Run `claude` interactively to review and approve them. `claude mcp get <name>` shows pending servers as `⏸ Pending approval` and rejected servers as `✗ Rejected`.
 
 The `/mcp` panel shows the tool count next to each connected server and flags servers that advertise the tools capability but expose no tools.
 
@@ -231,7 +246,7 @@ Or inline in `plugin.json`:
 * **Automatic lifecycle**: At session startup, servers for enabled plugins connect automatically. If you enable or disable a plugin during a session, run `/reload-plugins` to connect or disconnect its MCP servers
 * **Environment variables**: use `${CLAUDE_PLUGIN_ROOT}` for bundled plugin files, `${CLAUDE_PLUGIN_DATA}` for [persistent state](/en/plugins-reference#persistent-data-directory) that survives plugin updates, and `${CLAUDE_PROJECT_DIR}` for the stable project root
 * **User environment access**: Access to same environment variables as manually configured servers
-* **Multiple transport types**: Support stdio, SSE, and HTTP transports (transport support may vary by server)
+* **Multiple transport types**: Support stdio, SSE, HTTP, and WebSocket transports (transport support may vary by server)
 
 **Viewing plugin MCP servers**:
 
@@ -329,7 +344,7 @@ claude mcp add --transport http hubspot --scope user https://mcp.hubspot.com/ant
 
 ### Scope hierarchy and precedence
 
-When the same server is defined in more than one place, Claude Code connects to it once, using the definition from the highest-precedence source:
+When the same server is defined in more than one place, Claude Code connects to it once, using the definition from the highest-precedence source. The entire server entry from that source is used; fields are not merged across scopes.
 
 1. Local scope
 2. Project scope
@@ -470,6 +485,8 @@ Find customers who haven't made a purchase in 90 days
 Many cloud-based MCP servers require authentication. Claude Code supports OAuth 2.0 for secure connections.
 
 Claude Code marks a remote server as needing authentication when the server responds with `401 Unauthorized` or `403 Forbidden`. Either status code flags the server in `/mcp` so you can complete the OAuth flow. A custom server that returns a `WWW-Authenticate` header pointing to its authorization server gets the same automatic discovery as any other remote server.
+
+If you configured `headers.Authorization` for the server and the server rejects that header, Claude Code reports the connection as failed instead of falling back to OAuth. Check that the token is valid for the MCP endpoint, or remove the header to use the OAuth flow.
 
 <Steps>
   <Step title="Add the server that requires authentication">

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/output-styles
-fetched_at: 2026-05-25T05:15:53.236268+00:00
+fetched_at: 2026-06-01T05:54:52.365676+00:00
 fetch_method: mintlify_md
 ---
 
@@ -33,6 +33,8 @@ There are three additional built-in output styles:
 ## Change your output style
 
 Run `/config` and select **Output style** to pick a style from a menu. Your selection is saved to `.claude/settings.local.json` at the [local project level](/en/settings).
+
+<Note>{/* max-version: 2.1.90 */}The standalone `/output-style` command was deprecated in v2.1.73 and removed in v2.1.91. Use `/config` or edit the `outputStyle` setting directly.</Note>
 
 To set a style without the menu, edit the `outputStyle` field directly in a settings file:
 

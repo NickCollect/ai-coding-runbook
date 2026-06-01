@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/agent-loop
-fetched_at: 2026-05-25T05:15:52.681831+00:00
+fetched_at: 2026-06-01T05:54:48.132607+00:00
 fetch_method: mintlify_md
 ---
 
@@ -229,7 +229,7 @@ You can customize compaction behavior in several ways:
 
 * **Summarization instructions in CLAUDE.md:** The compactor reads your CLAUDE.md like any other context, so you can include a section telling it what to preserve when summarizing. The section header is free-form (not a magic string); the compactor matches on intent.
 * **`PreCompact` hook:** Run custom logic before compaction occurs, for example to archive the full transcript. The hook receives a `trigger` field (`manual` or `auto`). See [hooks](/en/agent-sdk/hooks).
-* **Manual compaction:** Send `/compact` as a prompt string to trigger compaction on demand. (Slash commands sent this way are SDK inputs, not CLI-only shortcuts. See [slash commands in the SDK](/en/agent-sdk/slash-commands).)
+* **Manual compaction:** Send `/compact` as a prompt string to trigger compaction on demand. Commands sent this way are SDK inputs, not CLI-only shortcuts. See [commands in the SDK](/en/agent-sdk/slash-commands).
 
 <Accordion title="Example: Summarization instructions in CLAUDE.md">
   Add a section to your project's CLAUDE.md telling the compactor what to preserve. The header name isn't special; use any clear label.

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/terminal-config
-fetched_at: 2026-05-11T04:55:25.921627+00:00
+fetched_at: 2026-06-01T05:54:53.581459+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,7 +35,9 @@ In most terminals you can also press Shift+Enter, but support varies by terminal
 | VS Code, Cursor, Windsurf, Alacritty, Zed                               | Run `/terminal-setup` once                  |
 | gnome-terminal, JetBrains IDEs such as PyCharm and Android Studio       | Not available; use Ctrl+J or `\` then Enter |
 
-For VS Code, Cursor, Windsurf, Alacritty, and Zed, `/terminal-setup` writes Shift+Enter and other keybindings into the terminal's configuration file. In VS Code, Cursor, and Windsurf it also sets `terminal.integrated.mouseWheelScrollSensitivity` in the editor settings for smoother scrolling in [fullscreen mode](/en/fullscreen). Existing bindings and settings are left in place; if you see a message such as `VSCode terminal Shift+Enter key binding already configured`, no change was made. Run `/terminal-setup` directly in the host terminal rather than inside tmux or screen, since it needs to write to the host terminal's configuration.
+For VS Code, Cursor, Windsurf, Alacritty, and Zed, `/terminal-setup` writes Shift+Enter and other keybindings into the terminal's configuration file. Existing bindings are left in place; if you see a message such as `VSCode terminal Shift+Enter key binding already configured`, no change was made. Run `/terminal-setup` directly in the host terminal rather than inside tmux or screen, since it needs to write to the host terminal's configuration.
+
+In VS Code, Cursor, and Windsurf, `/terminal-setup` also updates two editor settings: it sets `terminal.integrated.gpuAcceleration` to `"off"` to prevent garbled text in the integrated terminal, and it sets `terminal.integrated.mouseWheelScrollSensitivity` for smoother scrolling in [fullscreen mode](/en/fullscreen). To undo the GPU acceleration change, set it back to `"auto"` and reload the editor window.
 
 If you are running inside tmux, Shift+Enter also requires the [tmux configuration below](#configure-tmux) even when the outer terminal supports it.
 

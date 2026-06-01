@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/headless
-fetched_at: 2026-05-25T05:15:53.137954+00:00
+fetched_at: 2026-06-01T05:54:51.714797+00:00
 fetch_method: mintlify_md
 ---
 
@@ -218,7 +218,7 @@ claude -p "Look at my staged changes and create an appropriate commit" \
 The `--allowedTools` flag uses [permission rule syntax](/en/settings#permission-rule-syntax). The trailing ` *` enables prefix matching, so `Bash(git diff *)` allows any command starting with `git diff`. The space before `*` is important: without it, `Bash(git diff*)` would also match `git diff-index`.
 
 <Note>
-  User-invoked [skills](/en/skills) like `/commit` and [built-in commands](/en/commands) are only available in interactive mode. In `-p` mode, describe the task you want to accomplish instead.
+  User-invoked [skills](/en/skills) like `/code-review` and [built-in commands](/en/commands) are only available in interactive mode. In `-p` mode, describe the task you want to accomplish instead.
 </Note>
 
 ### Customize the system prompt

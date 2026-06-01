@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugin-dependencies
-fetched_at: 2026-05-25T05:15:53.272519+00:00
+fetched_at: 2026-06-01T05:54:52.753524+00:00
 fetch_method: mintlify_md
 ---
 
@@ -132,6 +132,8 @@ When you enable a plugin, Claude Code also enables its dependencies at the same 
 | A dependency is blocked by your organization's plugin policy                           | Enable fails and names the blocked dependency.                                                                         |
 | A dependency is set to `false` at a scope with higher precedence than the target scope | Enable fails. Enable the dependency at that scope, or pass `--scope` to write there.                                   |
 | All dependencies are installed and allowed                                             | Enable succeeds and writes `true` for the plugin and each dependency that was not already enabled at the target scope. |
+
+This holds even when a dependency sets [`defaultEnabled: false`](/en/plugins-reference#default-enablement) in its manifest, because Claude Code writes an explicit `true` for it. The same applies at install: a dependency pulled in to satisfy an active plugin installs with `true` regardless of its own default.
 
 When you disable a plugin, Claude Code refuses if another enabled plugin still depends on it. The error names the plugins that depend on it and gives you a chained command that disables them in the right order, ending with the one you asked for.
 

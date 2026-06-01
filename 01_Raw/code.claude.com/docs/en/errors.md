@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/errors
-fetched_at: 2026-05-25T05:15:53.154242+00:00
+fetched_at: 2026-06-01T05:54:51.300707+00:00
 fetch_method: mintlify_md
 ---
 
@@ -81,7 +81,7 @@ These errors come from the inference provider rather than your account or reques
 Claude Code shows the status code and the API's error message for any 5xx response. The example below shows a 500 response on the Anthropic API:
 
 ```text theme={null}
-API Error: 500 Internal server error. This is a server-side issue, usually temporary — try again in a moment. If it persists, check status.claude.com.
+API Error: 500 Internal server error. This is a server-side issue, usually temporary — try again in a moment. If it persists, check https://status.claude.com.
 ```
 
 The trailing sentence names where to check service health and varies by provider. Bedrock, Vertex AI, and Foundry configurations name that provider's service status. A custom `ANTHROPIC_BASE_URL` names the gateway host.
@@ -99,7 +99,7 @@ This indicates an unexpected failure inside the API. It is not caused by your pr
 The API is temporarily at capacity across all users. Claude Code has already retried several times before showing this message:
 
 ```text theme={null}
-API Error: Repeated 529 Overloaded errors. The API is at capacity — this is usually temporary. Try again in a moment. If it persists, check status.claude.com.
+API Error: Repeated 529 Overloaded errors. The API is at capacity — this is usually temporary. Try again in a moment. If it persists, check https://status.claude.com.
 ```
 
 The trailing sentence varies by provider in the same way as the 500 error above. A 529 is not your usage limit and does not count against your quota.
@@ -214,7 +214,7 @@ This is [retried automatically](#automatic-retries) before being shown.
 You have hit the rate limit configured for your API key, Amazon Bedrock project, or Google Vertex AI project.
 
 ```text theme={null}
-API Error: Request rejected (429) · this may be a temporary capacity issue. If it persists, check status.claude.com.
+API Error: Request rejected (429) · this may be a temporary capacity issue. If it persists, check https://status.claude.com.
 ```
 
 The trailing sentence names where to check service health and varies by provider. Bedrock, Vertex AI, and Foundry configurations name that provider's service status instead of the Anthropic status page. A custom `ANTHROPIC_BASE_URL` names the gateway host.
@@ -575,7 +575,7 @@ Claude Opus is not available with the Claude Pro plan · Select a different mode
 
 ### thinking.type.enabled is not supported for this model
 
-Your Claude Code version is older than the minimum for Opus 4.7. The CLI sent a thinking configuration the model no longer accepts.
+Your Claude Code version is older than the minimum for Opus 4.7 or Opus 4.8. The CLI sent a thinking configuration the model no longer accepts.
 
 ```text theme={null}
 API Error: 400 ... "thinking.type.enabled" is not supported for this model. Use "thinking.type.adaptive" and "output_config.effort" to control thinking behavior.
@@ -583,7 +583,7 @@ API Error: 400 ... "thinking.type.enabled" is not supported for this model. Use 
 
 **What to do:**
 
-* Run `claude update` to upgrade to v2.1.111 or later, then restart Claude Code
+* Run `claude update` and restart Claude Code. Opus 4.7 needs v2.1.111 or later. Opus 4.8 needs v2.1.154 or later
 * If you cannot upgrade, run `/model` and select Opus 4.6 or Sonnet instead
 * If you hit this in the Agent SDK, see [SDK troubleshooting](/en/agent-sdk/quickstart#troubleshooting)
 
@@ -616,6 +616,7 @@ All three variants mean the same thing: the sequence of `tool_use`, `tool_result
 
 **What to do:**
 
+* {/* max-version: 2.1.155 */}If you are using Opus 4.7 or Opus 4.8, run `claude update` first. Versions before v2.1.156 can trigger this error during normal tool use, and `/rewind` does not clear it.
 * Run `/rewind`, or press Esc twice, to step back to a checkpoint before the corrupted turn and continue from there. See [Checkpointing](/en/checkpointing) for how checkpoints are created and restored.
 
 ### Usage Policy refusal

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/github-actions
-fetched_at: 2026-05-18T05:02:44.745995+00:00
+fetched_at: 2026-06-01T05:54:51.462389+00:00
 fetch_method: mintlify_md
 ---
 
@@ -19,7 +19,7 @@ Claude Code GitHub Actions brings AI-powered automation to your GitHub workflow.
 </Note>
 
 <Info>
-  **Claude Opus 4.7 is now available.** Claude Code GitHub Actions default to Sonnet. To use Opus 4.7, configure the [model parameter](#breaking-changes-reference) to use `claude-opus-4-7`.
+  **Claude Opus 4.8 is now available.** Claude Code GitHub Actions default to Sonnet. To use Opus 4.8, configure the [model parameter](#breaking-changes-reference) to use `claude-opus-4-8`.
 </Info>
 
 ## Why use Claude Code GitHub Actions?

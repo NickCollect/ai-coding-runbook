@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/voice-dictation
-fetched_at: 2026-05-25T05:15:53.449112+00:00
+fetched_at: 2026-06-01T05:54:54.103089+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,7 +20,7 @@ Speak your prompts instead of typing them in the Claude Code CLI. Your speech is
 
 ## Requirements
 
-Voice dictation streams your recorded audio to Anthropic's servers for transcription. Audio is not processed locally. The speech-to-text service is only available when you authenticate with a Claude.ai account, and is not available when Claude Code is configured to use an Anthropic API key directly, Amazon Bedrock, Google Vertex AI, or Microsoft Foundry. Transcription does not consume Claude messages or tokens and does not count toward the limits shown in `/usage`. See [data usage](/en/data-usage) for how Anthropic handles your data.
+Voice dictation streams your recorded audio to Anthropic's servers for transcription. Audio is not processed locally. The speech-to-text service is only available when you authenticate with a Claude.ai account, and is not available when Claude Code is configured to use an Anthropic API key directly, Amazon Bedrock, Google Vertex AI, or Microsoft Foundry. Voice dictation is also not available when your organization has HIPAA compliance enabled. Transcription does not consume Claude messages or tokens and does not count toward the limits shown in `/usage`. See [data usage](/en/data-usage) for how Anthropic handles your data.
 
 Voice dictation also needs local microphone access, so it does not work in remote environments such as [Claude Code on the web](/en/claude-code-on-the-web) or SSH sessions. In WSL, voice dictation requires WSLg for audio access. WSLg is included with WSL2 when installed from the Microsoft Store on Windows 10 or 11. If WSLg is not available, for example on WSL1, run Claude Code in native Windows instead.
 
