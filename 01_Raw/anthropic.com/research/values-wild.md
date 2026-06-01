@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/values-wild
-fetched_at: 2026-05-25T05:17:34.177726+00:00
+fetched_at: 2026-06-01T05:56:09.847967+00:00
 title: "Values in the wild: Discovering and analyzing values in real-world language model interactions \\ Anthropic"
 ---
 
@@ -82,6 +82,12 @@ If you’re interested in working with us on these or related questions, you sho
 
 ## Related content
 
+### Coding agents in the social sciences
+
+Results from a survey of 1,260 social scientists about AI and coding agent use.
+
+[Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
+
 ### Project Glasswing: An initial update
 
 An early update on what we've learned from Project Glasswing.
@@ -93,9 +99,3 @@ An early update on what we've learned from Project Glasswing.
 Our views on the AI competition between the US and China.
 
 [Read more](https://www.anthropic.com/research/2028-ai-leadership)
-
-### Teaching Claude why
-
-New research on how we've reduced agentic misalignment.
-
-[Read more](https://www.anthropic.com/research/teaching-claude-why)

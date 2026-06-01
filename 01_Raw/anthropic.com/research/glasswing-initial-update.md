@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/glasswing-initial-update
-fetched_at: 2026-05-25T05:16:54.476038+00:00
+fetched_at: 2026-06-01T05:55:28.922903+00:00
 title: "Project Glasswing: An initial update \\ Anthropic"
 ---
 
@@ -114,6 +114,12 @@ On the far side of these risks, there’s an encouraging world available to us: 
 
 ## Related content
 
+### Coding agents in the social sciences
+
+Results from a survey of 1,260 social scientists about AI and coding agent use.
+
+[Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
+
 ### 2028: Two scenarios for global AI leadership
 
 Our views on the AI competition between the US and China.
@@ -125,9 +131,3 @@ Our views on the AI competition between the US and China.
 New research on how we've reduced agentic misalignment.
 
 [Read more](https://www.anthropic.com/research/teaching-claude-why)
-
-### Natural Language Autoencoders: Turning Claude’s thoughts into text
-
-AI models like Claude talk in words but think in numbers. In this study, we train Claude to translate its thoughts into human-readable text.
-
-[Read more](https://www.anthropic.com/research/natural-language-autoencoders)

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback
-fetched_at: 2026-05-25T05:16:32.748840+00:00
+fetched_at: 2026-06-01T05:55:19.194768+00:00
 title: "Constitutional AI: Harmlessness from AI Feedback \\ Anthropic"
 ---
 
@@ -22,6 +22,12 @@ As AI systems become more capable, we would like to enlist their help to supervi
 
 ## Related content
 
+### Coding agents in the social sciences
+
+Results from a survey of 1,260 social scientists about AI and coding agent use.
+
+[Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
+
 ### Project Glasswing: An initial update
 
 An early update on what we've learned from Project Glasswing.
@@ -33,9 +39,3 @@ An early update on what we've learned from Project Glasswing.
 Our views on the AI competition between the US and China.
 
 [Read more](https://www.anthropic.com/research/2028-ai-leadership)
-
-### Teaching Claude why
-
-New research on how we've reduced agentic misalignment.
-
-[Read more](https://www.anthropic.com/research/teaching-claude-why)

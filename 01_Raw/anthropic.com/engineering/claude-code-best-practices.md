@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/engineering/claude-code-best-practices
-fetched_at: 2026-05-18T05:02:45.908484+00:00
+fetched_at: 2026-06-01T05:54:47.620227+00:00
 title: "Best practices for Claude Code - Claude Code Docs"
 ---
 
@@ -25,10 +25,10 @@ This matters since LLM performance degrades as context fills. When the context w
 
 ## [​](#give-claude-a-way-to-verify-its-work) Give Claude a way to verify its work
 
-Include tests, screenshots, or expected outputs so Claude can check itself. This is the single highest-leverage thing you can do.
+Give Claude a check it can run: tests, a build, a screenshot to compare. It’s the difference between a session you watch and one you walk away from.
 
-Claude performs dramatically better when it can verify its own work, like run tests, compare screenshots, and validate outputs.
-Without clear success criteria, it might produce something that looks right but actually doesn’t work. You become the only feedback loop, and every mistake requires your attention.
+Claude stops when the work looks done. Without a check it can run, “looks done” is the only signal available, and you become the verification loop: every mistake waits for you to notice it. Give Claude something that produces a pass or fail, and the loop closes on its own. Claude does the work, runs the check, reads the result, and iterates until the check passes.
+The check is anything that returns a signal Claude can read in the conversation: a test suite, a build exit code, a linter, a script that diffs output against a fixture, or a [browser screenshot](https://www.anthropic.com/docs/en/chrome) compared against a design.
 
 | Strategy | Before | After |
 | --- | --- | --- |
@@ -36,8 +36,15 @@ Without clear success criteria, it might produce something that looks right but 
 | **Verify UI changes visually** | *”make the dashboard look better"* | *"[paste screenshot] implement this design. take a screenshot of the result and compare it to the original. list differences and fix them”* |
 | **Address root causes, not symptoms** | *”the build is failing"* | *"the build fails with this error: [paste error]. fix it and verify the build succeeds. address the root cause, don’t suppress the error”* |
 
-UI changes can be verified using the [Claude in Chrome extension](https://www.anthropic.com/docs/en/chrome). It opens new tabs in your browser, tests the UI, and iterates until the code works.
-Your verification can also be a test suite, a linter, or a Bash command that checks output. Invest in making your verification rock-solid.
+Once the check exists, decide how hard it gates the stop:
+
+- **In one prompt**: ask Claude to run the check and iterate in the same message, as in the table above.
+- **Across a session**: set the check as a [`/goal` condition](https://www.anthropic.com/docs/en/goal). A separate evaluator re-checks it after every turn and Claude keeps working until it holds.
+- **As a deterministic gate**: a [Stop hook](https://www.anthropic.com/docs/en/hooks#stop) runs your check as a script and blocks the turn from ending until it passes. Claude Code overrides the hook and ends the turn after 8 consecutive blocks.
+- **By a second opinion**: a [verification subagent](https://www.anthropic.com/docs/en/sub-agents) or a [dynamic workflow](https://www.anthropic.com/docs/en/workflows) that checks its own findings has a fresh model try to refute the result, so the agent doing the work isn’t the one grading it.
+
+Each step trades setup for attention. The prompt version works on any task today. The `/goal` and Stop hook versions are what let an unattended run finish correctly without you.
+Have Claude show evidence rather than asserting success: the test output, the command it ran and what it returned, or a screenshot of the result. Reviewing evidence is faster than re-running the verification yourself, and it works for sessions you weren’t watching.
 
 ---
 
@@ -191,7 +198,7 @@ You can place CLAUDE.md files in several locations:
 - **Project root (`./CLAUDE.md`)**: check into git to share with your team
 - **Project root (`./CLAUDE.local.md`)**: personal project-specific notes; add this file to your `.gitignore` so it isn’t shared with your team
 - **Parent directories**: useful for monorepos where both `root/CLAUDE.md` and `root/foo/CLAUDE.md` are pulled in automatically
-- **Child directories**: Claude pulls in child CLAUDE.md files on demand when working with files in those directories
+- **Child directories**: Claude pulls in child CLAUDE.md files on demand when it reads a file in those directories
 
 ### [​](#configure-permissions) Configure permissions
 
@@ -338,6 +345,7 @@ Keep interviewing until we've covered everything, then write a complete spec to 
 ```
 
 Once the spec is complete, start a fresh session to execute it. The new session has clean context focused entirely on implementation, and you have a written spec to reference.
+The most useful specs are self-contained: they name the files and interfaces involved, state what is out of scope, and end with an end-to-end verification step that proves the feature works. Time spent making the spec precise pays off more than time spent watching the implementation.
 
 ---
 
@@ -414,7 +422,7 @@ Everything so far assumes one human, one Claude, and one conversation. But Claud
 
 ### [​](#run-non-interactive-mode) Run non-interactive mode
 
-Use `claude -p "prompt"` in CI, pre-commit hooks, or scripts. Add `--output-format stream-json` for streaming JSON output.
+Use `claude -p "prompt"` in CI, pre-commit hooks, or scripts. Add `--output-format stream-json --verbose` for streaming JSON output.
 
 With `claude -p "your prompt"`, you can run Claude non-interactively, without a session. [Non-interactive mode](https://www.anthropic.com/docs/en/headless) is how you integrate Claude into CI pipelines, pre-commit hooks, or any automated workflow. The output formats let you parse results programmatically: plain text, JSON, or streaming JSON.
 
@@ -426,7 +434,7 @@ claude -p "Explain what this project does"
 claude -p "List all API endpoints" --output-format json
 
 # Streaming for real-time processing
-claude -p "Analyze this log file" --output-format stream-json
+claude -p "Analyze this log file" --output-format stream-json --verbose
 ```
 
 ### [​](#run-multiple-claude-sessions) Run multiple Claude sessions
@@ -498,6 +506,23 @@ claude --permission-mode auto -p "fix all lint errors"
 
 For non-interactive runs with the `-p` flag, auto mode aborts if the classifier repeatedly blocks actions, since there is no user to fall back to. See [when auto mode falls back](https://www.anthropic.com/docs/en/permission-modes#when-auto-mode-falls-back) for thresholds.
 
+### [​](#add-an-adversarial-review-step) Add an adversarial review step
+
+Before treating a task as done, have a subagent review the diff in a fresh context and report gaps.
+
+The longer Claude works unattended, the more an independent check matters before you count the work as done. A reviewer running in a fresh [subagent](https://www.anthropic.com/docs/en/sub-agents) context sees only the diff and the criteria you give it, not the reasoning that produced the change, so it evaluates the result on its own terms.
+For a correctness check, run the bundled [`/code-review` skill](https://www.anthropic.com/docs/en/commands), which reviews the current diff for bugs in a fresh subagent and returns findings to the session. To check the diff against your plan instead, write the review prompt yourself. Name the work to check, the plan to check it against, and what counts as a finding:
+
+```
+Use a subagent to review the rate limiter diff against PLAN.md. Check that
+every requirement is implemented, the listed edge cases have tests, and
+nothing outside the task's scope changed. Report gaps, not style preferences.
+```
+
+Because the reviewer runs as a subagent, the implementing session receives the gaps directly and can fix them and re-review without you copying findings between windows. For longer autonomous runs, an [agent team](https://www.anthropic.com/docs/en/agent-teams) can keep this loop going across many tasks while you spot-check the recorded findings.
+
+A reviewer prompted to find gaps will usually report some, even when the work is sound, because that is what it was asked to do. Chasing every finding leads to over-engineering: extra abstraction layers, defensive code, and tests for cases that can’t happen. Tell the reviewer to flag only gaps that affect correctness or the stated requirements, and treat the rest as optional.
+
 ---
 
 ## [​](#avoid-common-failure-patterns) Avoid common failure patterns
@@ -530,3 +555,11 @@ Over time, you’ll develop intuition that no guide can capture. You’ll know w
 - [Extend Claude Code](https://www.anthropic.com/docs/en/features-overview): skills, hooks, MCP, subagents, and plugins
 - [Common workflows](https://www.anthropic.com/docs/en/common-workflows): step-by-step recipes for debugging, testing, PRs, and more
 - [CLAUDE.md](https://www.anthropic.com/docs/en/memory): store project conventions and persistent context
+
+Was this page helpful?
+
+YesNo
+
+[Prompt library](https://www.anthropic.com/docs/en/prompt-library)[Overview](https://www.anthropic.com/docs/en/platforms)
+
+⌘I

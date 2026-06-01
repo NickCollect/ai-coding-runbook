@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/economic-research
-fetched_at: 2026-05-05T19:42:07.731064+00:00
+fetched_at: 2026-06-01T05:56:03.546139+00:00
 title: "Economic Research \\ Anthropic"
 ---
 
@@ -52,6 +52,9 @@ Search
 
 DateCategoryTitle
 
+- [May 27, 2026Economic Research
+
+  Coding agents in the social sciences](https://www.anthropic.com/research/coding-agents-social-sciences)
 - [Apr 22, 2026Economic Research
 
   Announcing the Anthropic Economic Index Survey](https://www.anthropic.com/research/economic-index-survey-announcement)
@@ -79,8 +82,5 @@ DateCategoryTitle
 - [Nov 25, 2025Economic Research
 
   Estimating AI productivity gains from Claude conversations](https://www.anthropic.com/research/estimating-productivity-gains)
-- [Sep 15, 2025Economic Research
-
-  Anthropic Economic Index report: Uneven geographic and enterprise AI adoption](https://www.anthropic.com/research/anthropic-economic-index-september-2025-report)
 
 [See more](#)

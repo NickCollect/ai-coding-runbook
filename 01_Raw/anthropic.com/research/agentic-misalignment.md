@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/agentic-misalignment
-fetched_at: 2026-05-25T05:16:09.918618+00:00
+fetched_at: 2026-06-01T05:54:58.945179+00:00
 title: "Agentic Misalignment: How LLMs could be insider threats \\ Anthropic"
 ---
 
@@ -389,6 +389,12 @@ Copy
 
 ## Related content
 
+### Coding agents in the social sciences
+
+Results from a survey of 1,260 social scientists about AI and coding agent use.
+
+[Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
+
 ### Project Glasswing: An initial update
 
 An early update on what we've learned from Project Glasswing.
@@ -400,9 +406,3 @@ An early update on what we've learned from Project Glasswing.
 Our views on the AI competition between the US and China.
 
 [Read more](https://www.anthropic.com/research/2028-ai-leadership)
-
-### Teaching Claude why
-
-New research on how we've reduced agentic misalignment.
-
-[Read more](https://www.anthropic.com/research/teaching-claude-why)

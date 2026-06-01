@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/how-ai-is-transforming-work-at-anthropic
-fetched_at: 2026-05-25T05:16:58.130616+00:00
+fetched_at: 2026-06-01T05:55:33.792520+00:00
 title: "How AI Is Transforming Work at Anthropic \\ Anthropic"
 ---
 
@@ -313,6 +313,12 @@ Finally, this research was conducted in August 2025 when Claude Sonnet 4 and Cla
 
 ## Related content
 
+### Coding agents in the social sciences
+
+Results from a survey of 1,260 social scientists about AI and coding agent use.
+
+[Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
+
 ### Project Glasswing: An initial update
 
 An early update on what we've learned from Project Glasswing.
@@ -324,9 +330,3 @@ An early update on what we've learned from Project Glasswing.
 Our views on the AI competition between the US and China.
 
 [Read more](https://www.anthropic.com/research/2028-ai-leadership)
-
-### Teaching Claude why
-
-New research on how we've reduced agentic misalignment.
-
-[Read more](https://www.anthropic.com/research/teaching-claude-why)

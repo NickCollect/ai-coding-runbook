@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/teaching-claude-why
-fetched_at: 2026-05-25T05:17:28.381087+00:00
+fetched_at: 2026-06-01T05:56:00.466354+00:00
 title: "Teaching Claude why \\ Anthropic"
 ---
 
@@ -114,6 +114,12 @@ We are optimistic about further efforts to discover alignment failures in curren
 
 ## Related content
 
+### Coding agents in the social sciences
+
+Results from a survey of 1,260 social scientists about AI and coding agent use.
+
+[Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
+
 ### Project Glasswing: An initial update
 
 An early update on what we've learned from Project Glasswing.
@@ -125,9 +131,3 @@ An early update on what we've learned from Project Glasswing.
 Our views on the AI competition between the US and China.
 
 [Read more](https://www.anthropic.com/research/2028-ai-leadership)
-
-### Natural Language Autoencoders: Turning Claude’s thoughts into text
-
-AI models like Claude talk in words but think in numbers. In this study, we train Claude to translate its thoughts into human-readable text.
-
-[Read more](https://www.anthropic.com/research/natural-language-autoencoders)

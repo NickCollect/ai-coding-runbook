@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/sabotage-evaluations
-fetched_at: 2026-05-25T05:17:24.528166+00:00
+fetched_at: 2026-06-01T05:55:55.657065+00:00
 title: "Sabotage evaluations for frontier models \\ Anthropic"
 ---
 
@@ -95,6 +95,12 @@ All our results, and further discussion, can be found in the full paper [at this
 
 ## Related content
 
+### Coding agents in the social sciences
+
+Results from a survey of 1,260 social scientists about AI and coding agent use.
+
+[Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
+
 ### Project Glasswing: An initial update
 
 An early update on what we've learned from Project Glasswing.
@@ -106,9 +112,3 @@ An early update on what we've learned from Project Glasswing.
 Our views on the AI competition between the US and China.
 
 [Read more](https://www.anthropic.com/research/2028-ai-leadership)
-
-### Teaching Claude why
-
-New research on how we've reduced agentic misalignment.
-
-[Read more](https://www.anthropic.com/research/teaching-claude-why)
