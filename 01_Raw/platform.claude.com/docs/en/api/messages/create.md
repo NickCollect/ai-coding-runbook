@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages/create
-fetched_at: 2026-06-01T05:54:51.847313+00:00
+fetched_at: 2026-06-08T05:25:01.138202+00:00
 fetch_method: mintlify_md
 ---
 
@@ -2908,7 +2908,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       The number of output tokens which were used.
 
-    - `output_tokens_details: object { thinking_tokens }`
+    - `output_tokens_details: OutputTokensDetails`
 
       Breakdown of output tokens by category.
 

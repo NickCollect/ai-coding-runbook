@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/context-editing
-fetched_at: 2026-06-01T05:54:50.072092+00:00
+fetched_at: 2026-06-08T05:24:58.438035+00:00
 fetch_method: mintlify_md
 ---
 
@@ -54,7 +54,7 @@ The `clear_thinking_20251015` strategy manages `thinking` blocks in conversation
 
 | Model class | Keep all prior thinking | Keep only the last turn's thinking |
 | --- | --- | --- |
-| Opus | Claude Opus 4.5 and later | Claude Opus 4.1 and earlier |
+| Opus | Claude Opus 4.5 and later | Claude Opus 4.1 (deprecated) and earlier |
 | Sonnet | Claude Sonnet 4.6 and later | Claude Sonnet 4.5 and earlier |
 | Haiku | (none) | All models through Claude Haiku 4.5 |
 
@@ -273,7 +273,7 @@ public class WebSearchExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response = $client->beta->messages->create(
     maxTokens: 4096,
@@ -689,7 +689,7 @@ public class ContextManagementExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $message = $client->beta->messages->create(
     maxTokens: 4096,
@@ -1020,7 +1020,7 @@ public class Main {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $message = $client->beta->messages->create(
     maxTokens: 16000,
@@ -1375,7 +1375,7 @@ public class ContextManagementExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $message = $client->beta->messages->create(
     maxTokens: 16000,
@@ -1787,7 +1787,7 @@ public class TokenCountExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response = $client->beta->messages->countTokens(
     messages: [
@@ -2044,7 +2044,7 @@ public class Main {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response = $client->beta->messages->create(
     maxTokens: 4096,

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/compaction
-fetched_at: 2026-06-01T05:54:50.017436+00:00
+fetched_at: 2026-06-08T05:24:58.428255+00:00
 fetch_method: mintlify_md
 ---
 
@@ -39,7 +39,7 @@ Compaction is in beta. Include the [beta header](/docs/en/api/beta-headers) `com
 Compaction is supported on the following models:
 
 - [Claude Mythos Preview](https://anthropic.com/glasswing) (claude-mythos-preview)
-- <NextOpus /> (<NextOpusId />)
+- Claude Opus 4.8 (claude-opus-4-8)
 - Claude Opus 4.7 (claude-opus-4-7)
 - Claude Opus 4.6 (claude-opus-4-6)
 - Claude Sonnet 4.6 (claude-sonnet-4-6)
@@ -270,7 +270,7 @@ public class CompactionExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $messages = [
     ['role' => 'user', 'content' => 'Help me build a website']
@@ -503,7 +503,7 @@ public class CompactionExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 $messages = [['role' => 'user', 'content' => 'Hello, Claude']];
 
 $message = $client->beta->messages->create(
@@ -736,7 +736,7 @@ public class CompactionExample {
 <?php
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response = $client->beta->messages->create(
     maxTokens: 4096,
@@ -1083,7 +1083,7 @@ public class CompactionPauseExample {
 use Anthropic\Client;
 
 // The PHP SDK does not yet expose a typed constant for the `compaction` stop reason; compare the string value directly.
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 $messages = [['role' => 'user', 'content' => 'Hello, Claude']];
 
 $response = $client->beta->messages->create(
@@ -1484,7 +1484,7 @@ public class CompactionExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $messages = [
     ['role' => 'user', 'content' => 'Help me build a web scraper']
@@ -1807,7 +1807,7 @@ public class CompactionStreamingExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 $messages = [['role' => 'user', 'content' => 'Hello, Claude']];
 
 $stream = $client->beta->messages->createStream(
@@ -2087,7 +2087,7 @@ public class CompactionExample {
 <?php
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response = $client->beta->messages->create(
     maxTokens: 4096,
@@ -2345,7 +2345,7 @@ public class Main {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 $messages = [['role' => 'user', 'content' => 'Hello, Claude']];
 
 $countResponse = $client->beta->messages->countTokens(
@@ -2656,7 +2656,7 @@ public class CompactionExample {
 <?php
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 $messages = [];
 
 function chat($client, &$messages, $userMessage) {
@@ -3164,7 +3164,7 @@ public class CompactionExample {
 use Anthropic\Client;
 
 // The PHP SDK does not yet expose a typed constant for the `compaction` stop reason; compare the string value directly.
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 $messages = [];
 
 function chat($client, &$messages, $userMessage) {

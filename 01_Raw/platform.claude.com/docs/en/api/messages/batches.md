@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages/batches
-fetched_at: 2026-06-01T05:54:51.968929+00:00
+fetched_at: 2026-06-08T05:25:01.225666+00:00
 fetch_method: mintlify_md
 ---
 
@@ -3586,7 +3586,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             The number of output tokens which were used.
 
-          - `output_tokens_details: object { thinking_tokens }`
+          - `output_tokens_details: OutputTokensDetails`
 
             Breakdown of output tokens by category.
 
@@ -4858,7 +4858,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             The number of output tokens which were used.
 
-          - `output_tokens_details: object { thinking_tokens }`
+          - `output_tokens_details: OutputTokensDetails`
 
             Breakdown of output tokens by category.
 
@@ -5930,7 +5930,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           The number of output tokens which were used.
 
-        - `output_tokens_details: object { thinking_tokens }`
+        - `output_tokens_details: OutputTokensDetails`
 
           Breakdown of output tokens by category.
 
@@ -6964,7 +6964,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         The number of output tokens which were used.
 
-      - `output_tokens_details: object { thinking_tokens }`
+      - `output_tokens_details: OutputTokensDetails`
 
         Breakdown of output tokens by category.
 

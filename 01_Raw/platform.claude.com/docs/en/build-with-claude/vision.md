@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/vision
-fetched_at: 2026-06-01T05:54:50.301448+00:00
+fetched_at: 2026-06-08T05:24:58.719026+00:00
 fetch_method: mintlify_md
 ---
 
@@ -37,6 +37,11 @@ The maximal number of images per message or request is:
 
 The maximal dimensions per image are 8000x8000 px. If you submit more than 20 images in one API request, this limit is reduced to 2000x2000 px.
 
+The maximal size per image is:
+  - 10&nbsp;MB (base64-encoded) when using the Claude API directly.
+  - 5&nbsp;MB (base64-encoded) on Amazon Bedrock and Vertex AI.
+  - 10&nbsp;MB on [claude.ai](https://claude.ai/).
+
 <Note>
 While the API supports up to 600 images per request, [request size limits](/docs/en/api/overview#request-size-limits) (32&nbsp;MB for standard endpoints; lower on some partner-operated platforms, for example, Amazon Bedrock and Vertex AI) can be reached first. For many images, consider uploading with the [Files API](#files-api-image-example) and referencing by `file_id` to keep request payloads small.
 
@@ -49,7 +54,7 @@ An image uses approximately `width * height / 750` tokens, where the width and h
 
 The maximal native image resolution is:
 
-- For <NextOpus />: 4784 tokens, and at most 2576 pixels on the long edge.
+- For Claude Opus 4.8: 4784 tokens, and at most 2576 pixels on the long edge.
 - For Claude Opus 4.7: 4784 tokens, and at most 2576 pixels on the long edge.
 - For other models: 1568 tokens, and at most 1568 pixels on the long edge.
 
@@ -79,13 +84,13 @@ Note that the last three images are downscaled before processing.
 
 #### High-resolution image support \{#high-resolution-image-support-on-claude-opus-4-7}
 
-Claude Opus 4.7 is the first Claude model with high-resolution image support; <NextOpus /> and later models also support it. The maximum image resolution is 2576 pixels on the long edge, up from 1568 px on prior models. This unlocks performance gains on vision-heavy workloads and is particularly valuable for computer use, screenshot understanding, and document analysis.
+Claude Opus 4.7 is the first Claude model with high-resolution image support; Claude Opus 4.8 and later models also support it. The maximum image resolution is 2576 pixels on the long edge, up from 1568 px on prior models. This unlocks performance gains on vision-heavy workloads and is particularly valuable for computer use, screenshot understanding, and document analysis.
 
 High-resolution support is automatic on Claude Opus 4.7 and later models and requires no beta header or client-side opt-in.
 
-High-resolution images on Claude Opus 4.7 and <NextOpus /> can use up to approximately 3x more image tokens than on prior models (4784 versus 1568 tokens per image). If you don't need the additional fidelity, downsample images before sending to control token costs.
+High-resolution images on Claude Opus 4.7 and Claude Opus 4.8 can use up to approximately 3x more image tokens than on prior models (4784 versus 1568 tokens per image). If you don't need the additional fidelity, downsample images before sending to control token costs.
 
-Here are the same image sizes tokenized for Claude Opus 4.7 and <NextOpus />, based on their per-token price of $5 per million input tokens:
+Here are the same image sizes tokenized for Claude Opus 4.7 and Claude Opus 4.8, based on their per-token price of $5 per million input tokens:
 
 | Image size                    | \# of Tokens | Cost / image | Cost / 1k images |
 | ----------------------------- | ------------ | ------------ | ---------------- |
@@ -537,7 +542,7 @@ Below are examples of how to include images in a Messages API request using base
 
     use Anthropic\Client;
 
-    $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+    $client = new Client();
 
     $imageData = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC";
 
@@ -808,7 +813,7 @@ Below are examples of how to include images in a Messages API request using base
 
     use Anthropic\Client;
 
-    $client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+    $client = new Client();
 
     $message = $client->messages->create(
         maxTokens: 1024,
@@ -1154,7 +1159,7 @@ public class ImageFilesExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 // Upload the image file
 $fileUpload = $client->beta->files->upload(
@@ -1529,10 +1534,13 @@ Always carefully review and verify Claude's image interpretations, especially fo
   <section title="Is there a limit to the image file size I can upload?">
 
     Yes, there are limits:
-    - API: Maximum 5&nbsp;MB per image
+    - Claude API: Maximum 10&nbsp;MB per image
+    - Amazon Bedrock and Vertex AI: Maximum 5&nbsp;MB per image
     - claude.ai: Maximum 10&nbsp;MB per image
 
     Images larger than these limits are rejected and return an error when using the API.
+
+    These are per-image limits. The overall [request size limit](/docs/en/api/overview#request-size-limits) (32&nbsp;MB on the Claude API; lower on Amazon Bedrock and Vertex AI) also applies, so requests with many large images can exceed it before reaching the per-image cap. On the Claude API, upload with the [Files API](/docs/en/build-with-claude/files) and reference by `file_id` to keep request payloads small. The Files API is not currently available on Amazon Bedrock or Vertex AI, so reduce image size on those platforms instead.
 
   
 </section>

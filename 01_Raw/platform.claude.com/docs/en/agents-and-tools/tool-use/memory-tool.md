@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool
-fetched_at: 2026-06-01T05:54:49.788769+00:00
+fetched_at: 2026-06-08T05:24:58.083626+00:00
 fetch_method: mintlify_md
 ---
 
@@ -308,7 +308,7 @@ public class MemoryToolExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $message = $client->messages->create(
     maxTokens: 2048,

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/permission-policies
-fetched_at: 2026-06-01T05:54:50.912024+00:00
+fetched_at: 2026-06-08T05:24:59.584584+00:00
 fetch_method: mintlify_md
 ---
 
@@ -189,7 +189,7 @@ agent = client.beta.agents.create(
 ```
 </CodeGroup>
 
-`default_config` is an optional setting. If you omit it, the agent toolset will be enabled with the default permission policy, `always_allow`.
+`default_config` is an optional setting. If you omit it, the agent toolset is enabled with the default permission policy, `always_allow`.
 
 ### MCP toolset permissions
 

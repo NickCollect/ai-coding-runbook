@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/files
-fetched_at: 2026-06-01T05:54:50.231809+00:00
+fetched_at: 2026-06-08T05:24:58.664920+00:00
 fetch_method: mintlify_md
 ---
 
@@ -625,7 +625,7 @@ public class FileUploadExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 // Example: Reading a text file
 $textContent = file_get_contents("document.txt");
@@ -804,7 +804,7 @@ public class ListFiles {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $files = $client->beta->files->list();
 print_r($files);

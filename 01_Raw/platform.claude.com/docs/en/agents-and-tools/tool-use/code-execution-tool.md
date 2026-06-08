@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool
-fetched_at: 2026-06-01T05:54:49.785775+00:00
+fetched_at: 2026-06-08T05:24:58.122463+00:00
 fetch_method: mintlify_md
 ---
 
@@ -37,7 +37,7 @@ The code execution tool is available on the following models:
 | Claude Opus 4.5 (claude-opus-4-5-20251101) | `code_execution_20250825`, `code_execution_20260120` |
 | Claude Sonnet 4.5 (claude-sonnet-4-5-20250929) | `code_execution_20250825`, `code_execution_20260120` |
 | Claude Haiku 4.5 (claude-haiku-4-5-20251001) | `code_execution_20250825` |
-| Claude Opus 4.1 (claude-opus-4-1-20250805) | `code_execution_20250825` |
+| Claude Opus 4.1 (claude-opus-4-1-20250805) ([deprecated](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825` |
 | Claude Opus 4 (claude-opus-4-20250514) ([deprecated](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825` |
 | Claude Sonnet 4 (claude-sonnet-4-20250514) ([deprecated](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825` |
 
@@ -238,7 +238,7 @@ public class CodeExecution {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $message = $client->messages->create(
     maxTokens: 4096,
@@ -297,6 +297,23 @@ When you add the code execution tool to your API request:
 3. Claude can use any combination of these capabilities in a single request
 4. All operations run in a secure sandbox environment
 5. Claude provides results with any generated charts, calculations, or analysis
+
+### When Claude runs code
+
+Claude runs code when the request benefits from computation or file handling:
+
+- Non-trivial math (large numbers, many steps, precision-sensitive results)
+- Data analysis, file parsing, or visualization
+- Algorithm execution or simulation
+- Explicit requests to "run", "compute", or "execute"
+
+Claude answers directly without running code for:
+
+- Simple arithmetic and well-known math facts
+- Factual, conversational, or creative requests
+- Simple unit conversions or translations
+
+If you want Claude to run code for a borderline request, ask explicitly (for example, "run code to verify this").
 
 ## Using code execution with other execution tools
 
@@ -623,7 +640,7 @@ public class CodeExecutionWithFiles {
 use Anthropic\Client;
 use Anthropic\Core\FileParam;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 // Upload a file
 $fileObject = $client->beta->files->upload(
@@ -1021,7 +1038,7 @@ List<String> extractFileIds(BetaMessage response) {
 use Anthropic\Beta\Messages\BetaMessage;
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response = $client->beta->messages->create(
     maxTokens: 4096,
@@ -1623,7 +1640,7 @@ public class ContainerReuse {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response1 = $client->messages->create(
     maxTokens: 4096,

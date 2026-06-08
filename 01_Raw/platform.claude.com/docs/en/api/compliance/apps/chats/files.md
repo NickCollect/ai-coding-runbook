@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/chats/files
-fetched_at: 2026-05-25T05:15:56.618439+00:00
+fetched_at: 2026-06-08T05:25:08.204430+00:00
 fetch_method: mintlify_md
 ---
 
@@ -29,6 +29,10 @@ download the bytes.
 - `id: string`
 
   File ID
+
+- `claude_chat_ids: array of string`
+
+  Chats this file is attached to. A file can be referenced by messages across multiple chats.
 
 - `created_at: string`
 
@@ -73,6 +77,9 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID \
   "created_at": "2024-01-15T10:30:00Z",
   "message_ids": [
     "claude_chat_msg_abc123"
+  ],
+  "claude_chat_ids": [
+    "claude_chat_def456"
   ]
 }
 ```
@@ -150,7 +157,7 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID/co
 
 ### File Retrieve Response
 
-- `FileRetrieveResponse object { id, created_at, filename, 4 more }`
+- `FileRetrieveResponse object { id, claude_chat_ids, created_at, 5 more }`
 
   File metadata for GET /v1/compliance/apps/chats/files/{claude_file_id}.
 
@@ -160,6 +167,10 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID/co
   - `id: string`
 
     File ID
+
+  - `claude_chat_ids: array of string`
+
+    Chats this file is attached to. A file can be referenced by messages across multiple chats.
 
   - `created_at: string`
 

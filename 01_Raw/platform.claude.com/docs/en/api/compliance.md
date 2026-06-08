@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance
-fetched_at: 2026-05-25T05:15:56.312277+00:00
+fetched_at: 2026-06-08T05:25:07.362574+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
 ### Query Parameters
 
-- `activity_types: optional array of "account_deleted" or "admin_api_key_created" or "admin_api_key_deleted" or 302 more`
+- `activity_types: optional array of "account_deleted" or "admin_api_key_created" or "admin_api_key_deleted" or 310 more`
 
   Filter activities by type. See the response `data` schema for the additional fields each type returns.
 
@@ -92,7 +92,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
   - `"claude_chat_access_failed"`
 
-    An attempt to access a chat failed.
+    A user was denied access to a Claude.ai chat conversation.
 
   - `"claude_chat_created"`
 
@@ -100,11 +100,11 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
   - `"claude_chat_deleted"`
 
-    User deleted a chat.
+    A user deleted a Claude.ai chat conversation.
 
   - `"claude_chat_deletion_failed"`
 
-    A request to delete a chat failed.
+    A request to delete a Claude.ai chat conversation failed.
 
   - `"claude_chat_settings_updated"`
 
@@ -113,6 +113,10 @@ Returns a paginated list of compliance activities that can be filtered by variou
   - `"claude_chat_snapshot_created"`
 
     User created/shared a chat snapshot.
+
+  - `"claude_chat_snapshot_deleted"`
+
+    User deleted/unshared a chat snapshot.
 
   - `"claude_chat_snapshot_viewed"`
 
@@ -124,7 +128,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
   - `"claude_chat_viewed"`
 
-    User viewed a chat.
+    A user viewed a Claude.ai chat conversation.
 
   - `"claude_code_review_config_updated"`
 
@@ -154,6 +158,10 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     A Claude Code Security scan project was archived or unarchived.
 
+  - `"claude_code_security_scan_run_updated"`
+
+    A single Claude Code Security scan run was archived or unarchived.
+
   - `"claude_code_security_scan_schedule_deleted"`
 
     A recurring scan schedule was deleted for a Claude Code Security project.
@@ -164,11 +172,11 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
   - `"claude_code_security_webhook_created"`
 
-    An outbound webhook was created for a Claude Code Security scan project.
+    A Claude Code Security outbound webhook was created.
 
   - `"claude_code_security_webhook_deleted"`
 
-    An outbound webhook for a Claude Code Security scan project was deleted.
+    A Claude Code Security outbound webhook was deleted.
 
   - `"claude_code_security_webhook_secret_updated"`
 
@@ -176,7 +184,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
   - `"claude_code_security_webhook_updated"`
 
-    An outbound webhook for a Claude Code Security scan project was updated.
+    A Claude Code Security outbound webhook was updated.
 
   - `"claude_code_team_memory_acl_updated"`
 
@@ -196,7 +204,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
   - `"claude_file_access_failed"`
 
-    An attempt to access a file failed.
+    A user was denied access to a file in Claude.ai.
 
   - `"claude_file_deleted"`
 
@@ -208,7 +216,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
   - `"claude_file_viewed"`
 
-    A file was viewed.
+    A user viewed a file in Claude.ai.
 
   - `"claude_gdrive_integration_created"`
 
@@ -500,11 +508,11 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
   - `"lti_platform_created"`
 
-    Admin created an LTI platform integration.
+    Anthropic staff created an LTI platform integration on behalf of an org.
 
   - `"lti_platform_updated"`
 
-    Admin updated an LTI platform integration.
+    Anthropic staff updated an LTI platform integration on behalf of an org.
 
   - `"magic_link_login_failed"`
 
@@ -1079,9 +1087,16 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     Admin added a permission to an RBAC custom role.
 
+    Emitted once per requested permission, including permissions the role
+    already had, so a retried request still produces a complete audit record.
+
   - `"rbac_role_permission_removed"`
 
     Admin removed a permission from an RBAC custom role.
+
+    Emitted once per requested permission, including permissions the role
+    already lacked, so a retried request still produces a complete audit
+    record.
 
   - `"rbac_role_unassigned"`
 
@@ -1203,13 +1218,40 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     Subscription plan was upgraded (e.g. Team to Enterprise).
 
+  - `"tunnel_archived"`
+
+    An MCP tunnel was archived.
+
+  - `"tunnel_certificate_added"`
+
+    An inner-TLS CA certificate was added to a tunnel.
+
+  - `"tunnel_certificate_revoked"`
+
+    An inner-TLS CA certificate was revoked from a tunnel.
+
+  - `"tunnel_created"`
+
+    An MCP tunnel was created.
+
   - `"tunnel_token_minted"`
 
     An OAuth bearer token for the tunnel management API was minted.
 
+  - `"tunnel_token_revealed"`
+
+    The Cloudflare connector secret for a tunnel was revealed to the caller.
+
   - `"tunnel_token_revoked"`
 
     An OAuth bearer token for the tunnel management API was revoked.
+
+  - `"tunnel_token_rotated"`
+
+    The Cloudflare connector secret for a tunnel was rotated.
+
+    `tunnel_token_id` is the id of the *newly-issued* token. The previous
+    token is invalidated by the rotation and its id is not recorded here.
 
   - `"user_consent_recorded"`
 
@@ -1287,7 +1329,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
 ### Returns
 
-- `data: optional array of object { actor, id, created_at, 3 more }  or object { actor, admin_api_key_id, scopes, 5 more }  or object { actor, admin_api_key_id, id, 4 more }  or 302 more`
+- `data: optional array of object { actor, id, created_at, 3 more }  or object { actor, admin_api_key_id, scopes, 5 more }  or object { actor, admin_api_key_id, id, 4 more }  or 310 more`
 
   List of activity records. Each element's `type` field identifies which activity it is and which additional fields are present.
 
@@ -1323,7 +1365,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "account_deleted"`
 
@@ -1369,7 +1411,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "admin_api_key_created"`
 
@@ -1411,7 +1453,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "admin_api_key_deleted"`
 
@@ -1465,7 +1507,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "admin_api_key_updated"`
 
@@ -1513,7 +1555,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "admin_connector_request_resolved"`
 
@@ -1553,7 +1595,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "admin_request_created"`
 
@@ -1591,7 +1633,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "age_verified"`
 
@@ -1627,7 +1669,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "anonymous_mobile_login_attempted"`
 
@@ -1673,7 +1715,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "api_key_created"`
 
@@ -1729,7 +1771,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_artifact_access_failed"`
 
@@ -1769,7 +1811,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_artifact_created"`
 
@@ -1809,7 +1851,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_published_artifact_deleted"`
 
@@ -1857,7 +1899,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_artifact_published"`
 
@@ -1907,7 +1949,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_artifact_sharing_updated"`
 
@@ -1947,7 +1989,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_artifact_viewed"`
 
@@ -1985,7 +2027,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "audit_log_export_accessed"`
 
@@ -2027,7 +2069,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `to_date: optional string`
 
@@ -2073,7 +2115,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `primary_email_set: optional boolean`
 
@@ -2086,202 +2128,6 @@ Returns a paginated list of compliance activities that can be filtered by variou
     - `type: optional "billing_emails_updated"`
 
       - `"billing_emails_updated"`
-
-  - `ClaudeChatAccessFailed object { actor, claude_chat_id, id, 4 more }`
-
-    An attempt to access a chat failed.
-
-    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
-
-      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
-
-        - `email_address: string`
-
-        - `ip_address: string`
-
-        - `user_agent: string`
-
-        - `user_id: string`
-
-        - `type: optional "user_actor"`
-
-          - `"user_actor"`
-
-      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
-
-        - `ip_address: string`
-
-        - `user_agent: string`
-
-        - `type: optional "unauthenticated_user_actor"`
-
-          - `"unauthenticated_user_actor"`
-
-        - `unauthenticated_email_address: optional string`
-
-    - `claude_chat_id: string`
-
-    - `id: optional string`
-
-      Unique identifier for the activity e.g. 'activity_abcd1234'
-
-    - `created_at: optional string`
-
-      When this activity occurred.
-
-    - `organization_id: optional string`
-
-      Organization ID this activity is associated with
-
-    - `organization_uuid: optional string`
-
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
-
-    - `type: optional "claude_chat_access_failed"`
-
-      - `"claude_chat_access_failed"`
-
-  - `ClaudeChatCreated object { actor, claude_chat_id, id, 5 more }`
-
-    User created a chat.
-
-    - `actor: object { email_address, ip_address, user_agent, 2 more }`
-
-      - `email_address: string`
-
-      - `ip_address: string`
-
-      - `user_agent: string`
-
-      - `user_id: string`
-
-      - `type: optional "user_actor"`
-
-        - `"user_actor"`
-
-    - `claude_chat_id: string`
-
-    - `id: optional string`
-
-      Unique identifier for the activity e.g. 'activity_abcd1234'
-
-    - `claude_project_id: optional string`
-
-      Project ID this chat belongs to, if any
-
-    - `created_at: optional string`
-
-      When this activity occurred.
-
-    - `organization_id: optional string`
-
-      Organization ID this activity is associated with
-
-    - `organization_uuid: optional string`
-
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
-
-    - `type: optional "claude_chat_created"`
-
-      - `"claude_chat_created"`
-
-  - `ClaudeChatDeleted object { actor, claude_chat_id, id, 5 more }`
-
-    User deleted a chat.
-
-    - `actor: object { email_address, ip_address, user_agent, 2 more }`
-
-      - `email_address: string`
-
-      - `ip_address: string`
-
-      - `user_agent: string`
-
-      - `user_id: string`
-
-      - `type: optional "user_actor"`
-
-        - `"user_actor"`
-
-    - `claude_chat_id: string`
-
-    - `id: optional string`
-
-      Unique identifier for the activity e.g. 'activity_abcd1234'
-
-    - `claude_project_id: optional string`
-
-      Project ID this chat belongs to, if any
-
-    - `created_at: optional string`
-
-      When this activity occurred.
-
-    - `organization_id: optional string`
-
-      Organization ID this activity is associated with
-
-    - `organization_uuid: optional string`
-
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
-
-    - `type: optional "claude_chat_deleted"`
-
-      - `"claude_chat_deleted"`
-
-  - `ClaudeChatDeletionFailed object { actor, claude_chat_id, id, 4 more }`
-
-    A request to delete a chat failed.
-
-    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
-
-      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
-
-        - `email_address: string`
-
-        - `ip_address: string`
-
-        - `user_agent: string`
-
-        - `user_id: string`
-
-        - `type: optional "user_actor"`
-
-          - `"user_actor"`
-
-      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
-
-        - `ip_address: string`
-
-        - `user_agent: string`
-
-        - `type: optional "unauthenticated_user_actor"`
-
-          - `"unauthenticated_user_actor"`
-
-        - `unauthenticated_email_address: optional string`
-
-    - `claude_chat_id: string`
-
-    - `id: optional string`
-
-      Unique identifier for the activity e.g. 'activity_abcd1234'
-
-    - `created_at: optional string`
-
-      When this activity occurred.
-
-    - `organization_id: optional string`
-
-      Organization ID this activity is associated with
-
-    - `organization_uuid: optional string`
-
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
-
-    - `type: optional "claude_chat_deletion_failed"`
-
-      - `"claude_chat_deletion_failed"`
 
   - `ClaudeChatSettingsUpdated object { actor, claude_chat_id, id, 5 more }`
 
@@ -2321,7 +2167,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_chat_settings_updated"`
 
@@ -2363,11 +2209,53 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_chat_snapshot_created"`
 
       - `"claude_chat_snapshot_created"`
+
+  - `ClaudeChatSnapshotDeleted object { actor, claude_chat_snapshot_id, id, 5 more }`
+
+    User deleted/unshared a chat snapshot.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }`
+
+      - `email_address: string`
+
+      - `ip_address: string`
+
+      - `user_agent: string`
+
+      - `user_id: string`
+
+      - `type: optional "user_actor"`
+
+        - `"user_actor"`
+
+    - `claude_chat_snapshot_id: string`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `claude_chat_id: optional string`
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_chat_snapshot_deleted"`
+
+      - `"claude_chat_snapshot_deleted"`
 
   - `ClaudeChatSnapshotViewed object { actor, claude_chat_snapshot_id, id, 5 more }`
 
@@ -2419,39 +2307,133 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_chat_snapshot_viewed"`
 
       - `"claude_chat_snapshot_viewed"`
 
-  - `ClaudeChatUpdated object { actor, claude_chat_id, id, 5 more }`
+  - `ClaudeChatAccessFailed object { actor, claude_chat_id, id, 4 more }`
 
-    User updated the chat metadata (e.g name, model).
+    A user was denied access to a Claude.ai chat conversation.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
 
-      - `email_address: string`
+      A federated external workload authenticated via a verified OIDC token.
 
-      - `ip_address: string`
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
 
-      - `user_agent: string`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
-      - `user_id: string`
+        - `api_key_id: string`
 
-      - `type: optional "user_actor"`
+        - `ip_address: string`
 
-        - `"user_actor"`
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
 
     - `claude_chat_id: string`
+
+      The chat conversation the user was denied access to, e.g. "claude_chat_01Ab...".
 
     - `id: optional string`
 
       Unique identifier for the activity e.g. 'activity_abcd1234'
-
-    - `claude_project_id: optional string`
-
-      Project ID this chat belongs to, if any
 
     - `created_at: optional string`
 
@@ -2463,7 +2445,571 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_chat_access_failed"`
+
+      - `"claude_chat_access_failed"`
+
+  - `ClaudeChatCreated object { actor, claude_chat_id, id, 5 more }`
+
+    User created a chat.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `claude_chat_id: string`
+
+      Tagged ID of the created conversation, e.g. "claude_chat_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `claude_project_id: optional string`
+
+      Tagged ID of the project the chat was created in, if any, e.g. "claude_proj_01HX...".
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_chat_created"`
+
+      - `"claude_chat_created"`
+
+  - `ClaudeChatDeleted object { actor, claude_chat_id, id, 5 more }`
+
+    A user deleted a Claude.ai chat conversation.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `claude_chat_id: string`
+
+      The chat conversation that was deleted, e.g. "claude_chat_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `claude_project_id: optional string`
+
+      The project the chat belonged to, if any, e.g. "claude_proj_01HX...".
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_chat_deleted"`
+
+      - `"claude_chat_deleted"`
+
+  - `ClaudeChatDeletionFailed object { actor, claude_chat_id, id, 4 more }`
+
+    A request to delete a Claude.ai chat conversation failed.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `claude_chat_id: string`
+
+      The chat conversation the user attempted to delete, e.g. "claude_chat_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_chat_deletion_failed"`
+
+      - `"claude_chat_deletion_failed"`
+
+  - `ClaudeChatUpdated object { actor, claude_chat_id, id, 5 more }`
+
+    User updated the chat metadata (e.g name, model).
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `claude_chat_id: string`
+
+      Tagged ID of the updated conversation, e.g. "claude_chat_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `claude_project_id: optional string`
+
+      Tagged ID of the project the chat belongs to, if any, e.g. "claude_proj_01HX...".
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_chat_updated"`
 
@@ -2471,23 +3017,121 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
   - `ClaudeChatViewed object { actor, claude_chat_id, id, 5 more }`
 
-    User viewed a chat.
+    A user viewed a Claude.ai chat conversation.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
 
-      - `email_address: string`
+      A federated external workload authenticated via a verified OIDC token.
 
-      - `ip_address: string`
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
 
-      - `user_agent: string`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
-      - `user_id: string`
+        - `api_key_id: string`
 
-      - `type: optional "user_actor"`
+        - `ip_address: string`
 
-        - `"user_actor"`
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
 
     - `claude_chat_id: string`
+
+      The chat conversation that was viewed, e.g. "claude_chat_01Ab...".
 
     - `id: optional string`
 
@@ -2495,7 +3139,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `claude_project_id: optional string`
 
-      Project ID this chat belongs to, if any
+      The project the chat belongs to, if any, e.g. "claude_proj_01Ab...".
 
     - `created_at: optional string`
 
@@ -2507,7 +3151,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_chat_viewed"`
 
@@ -2557,7 +3201,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `per_review_limit_usd: optional string`
 
@@ -2615,7 +3259,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_code_review_repository_added"`
 
@@ -2665,7 +3309,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_code_review_repository_removed"`
 
@@ -2715,7 +3359,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `status: optional string`
 
@@ -2769,7 +3413,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_code_security_center_config_updated"`
 
@@ -2813,7 +3457,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_code_security_scan_cancelled"`
 
@@ -2824,6 +3468,8 @@ Returns a paginated list of compliance activities that can be filtered by variou
     A Claude Code Security scan project was archived or unarchived.
 
     - `action: "archived" or "unarchived"`
+
+      The state change applied to the scan project.
 
       - `"archived"`
 
@@ -2861,11 +3507,61 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_code_security_scan_project_updated"`
 
       - `"claude_code_security_scan_project_updated"`
+
+  - `ClaudeCodeSecurityScanRunUpdated object { action, actor, scan_id, 5 more }`
+
+    A single Claude Code Security scan run was archived or unarchived.
+
+    - `action: "archived" or "unarchived"`
+
+      The state change applied to the scan run
+
+      - `"archived"`
+
+      - `"unarchived"`
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }`
+
+      - `email_address: string`
+
+      - `ip_address: string`
+
+      - `user_agent: string`
+
+      - `user_id: string`
+
+      - `type: optional "user_actor"`
+
+        - `"user_actor"`
+
+    - `scan_id: string`
+
+      Tagged ID of the scan the request named — any scan in the archived run, not necessarily its canonical (run_index=0) scan
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_code_security_scan_run_updated"`
+
+      - `"claude_code_security_scan_run_updated"`
 
   - `ClaudeCodeSecurityScanScheduleDeleted object { actor, scan_project_id, id, 4 more }`
 
@@ -2903,7 +3599,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_code_security_scan_schedule_deleted"`
 
@@ -2947,15 +3643,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_code_security_scan_schedule_updated"`
 
       - `"claude_code_security_scan_schedule_updated"`
 
-  - `ClaudeCodeSecurityWebhookCreated object { actor, scan_project_id, url, 6 more }`
+  - `ClaudeCodeSecurityWebhookCreated object { actor, url, webhook_id, 6 more }`
 
-    An outbound webhook was created for a Claude Code Security scan project.
+    A Claude Code Security outbound webhook was created.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }`
 
@@ -2970,10 +3666,6 @@ Returns a paginated list of compliance activities that can be filtered by variou
       - `type: optional "user_actor"`
 
         - `"user_actor"`
-
-    - `scan_project_id: string`
-
-      Tagged ID of the scan project
 
     - `url: string`
 
@@ -2995,15 +3687,19 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `scan_project_id: optional string`
+
+      Tagged ID of the scan project (null for organization-wide webhooks)
 
     - `type: optional "claude_code_security_webhook_created"`
 
       - `"claude_code_security_webhook_created"`
 
-  - `ClaudeCodeSecurityWebhookDeleted object { actor, scan_project_id, webhook_id, 5 more }`
+  - `ClaudeCodeSecurityWebhookDeleted object { actor, webhook_id, id, 5 more }`
 
-    An outbound webhook for a Claude Code Security scan project was deleted.
+    A Claude Code Security outbound webhook was deleted.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }`
 
@@ -3018,10 +3714,6 @@ Returns a paginated list of compliance activities that can be filtered by variou
       - `type: optional "user_actor"`
 
         - `"user_actor"`
-
-    - `scan_project_id: string`
-
-      Tagged ID of the scan project
 
     - `webhook_id: string`
 
@@ -3041,13 +3733,17 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `scan_project_id: optional string`
+
+      Tagged ID of the scan project (null for organization-wide webhooks)
 
     - `type: optional "claude_code_security_webhook_deleted"`
 
       - `"claude_code_security_webhook_deleted"`
 
-  - `ClaudeCodeSecurityWebhookSecretUpdated object { actor, scan_project_id, webhook_id, 5 more }`
+  - `ClaudeCodeSecurityWebhookSecretUpdated object { actor, webhook_id, id, 5 more }`
 
     The HMAC signing secret for a Claude Code Security webhook was rotated.
 
@@ -3065,10 +3761,6 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
         - `"user_actor"`
 
-    - `scan_project_id: string`
-
-      Tagged ID of the scan project
-
     - `webhook_id: string`
 
       Tagged ID of the webhook
@@ -3087,15 +3779,19 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `scan_project_id: optional string`
+
+      Tagged ID of the scan project (null for organization-wide webhooks)
 
     - `type: optional "claude_code_security_webhook_secret_updated"`
 
       - `"claude_code_security_webhook_secret_updated"`
 
-  - `ClaudeCodeSecurityWebhookUpdated object { actor, scan_project_id, webhook_id, 5 more }`
+  - `ClaudeCodeSecurityWebhookUpdated object { actor, webhook_id, id, 5 more }`
 
-    An outbound webhook for a Claude Code Security scan project was updated.
+    A Claude Code Security outbound webhook was updated.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }`
 
@@ -3111,10 +3807,6 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
         - `"user_actor"`
 
-    - `scan_project_id: string`
-
-      Tagged ID of the scan project
-
     - `webhook_id: string`
 
       Tagged ID of the webhook
@@ -3133,7 +3825,11 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `scan_project_id: optional string`
+
+      Tagged ID of the scan project (null for organization-wide webhooks)
 
     - `type: optional "claude_code_security_webhook_updated"`
 
@@ -3187,11 +3883,311 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_code_team_memory_acl_updated"`
 
       - `"claude_code_team_memory_acl_updated"`
+
+  - `ClaudeFileAccessFailed object { actor, claude_file_id, id, 7 more }`
+
+    A user was denied access to a file in Claude.ai.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `claude_file_id: string`
+
+      The file the user was denied access to, e.g. "claude_file_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `claude_artifact_id: optional string`
+
+      The artifact the file was accessed through, if any, e.g. "claude_artifact_01HX...".
+
+    - `claude_project_id: optional string`
+
+      The project the file was accessed through, if any, e.g. "claude_proj_01HX...".
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `filename: optional string`
+
+      Deprecated — DO NOT USE. Always empty; the file's display name is intentionally omitted.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_file_access_failed"`
+
+      - `"claude_file_access_failed"`
+
+  - `ClaudeFileViewed object { actor, claude_file_id, id, 7 more }`
+
+    A user viewed a file in Claude.ai.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `claude_file_id: string`
+
+      The file that was viewed, e.g. "claude_file_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `claude_artifact_id: optional string`
+
+      The artifact the file was accessed through, if any, e.g. "claude_artifact_01HX...".
+
+    - `claude_project_id: optional string`
+
+      The project the file was accessed through, if any, e.g. "claude_proj_01HX...".
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `filename: optional string`
+
+      Deprecated — DO NOT USE. Always empty; the file's display name is intentionally omitted.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_file_viewed"`
+
+      - `"claude_file_viewed"`
 
   - `CliPluginExecPolicyUpdated object { actor, cli_name, marketplace_id, 9 more }`
 
@@ -3249,7 +4245,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "cli_plugin_exec_policy_updated"`
 
@@ -3291,7 +4287,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_command_created"`
 
@@ -3333,7 +4329,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_command_deleted"`
 
@@ -3375,7 +4371,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_command_replaced"`
 
@@ -3429,7 +4425,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `request_body: optional string`
 
@@ -3475,7 +4471,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "desktop_extension_allowlisted"`
 
@@ -3517,7 +4513,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "desktop_extension_blocklisted"`
 
@@ -3559,7 +4555,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "desktop_extension_deleted"`
 
@@ -3605,7 +4601,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "desktop_extension_removed_from_allowlist"`
 
@@ -3647,7 +4643,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "desktop_extension_unblocked"`
 
@@ -3693,7 +4689,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "desktop_extension_uploaded"`
 
@@ -3739,7 +4735,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "desktop_extension_version_uploaded"`
 
@@ -3777,7 +4773,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "domain_claim_initiated"`
 
@@ -3817,7 +4813,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "end_user_invite_requested"`
 
@@ -3865,7 +4861,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "extra_usage_billing_enabled"`
 
@@ -3913,7 +4909,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "extra_usage_credit_granted"`
 
@@ -3985,7 +4981,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `spend_limit_id: optional string`
 
@@ -3997,7 +4993,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `user_id: optional string`
 
-      Tagged ID of the user who performed the action.
+      Deprecated. Tagged ID of the admin who performed the action — not the target member. Use `spend_limit_id` to look up the target member.
 
   - `ExtraUsageSpendLimitDeleted object { actor, id, created_at, 5 more }`
 
@@ -4053,7 +5049,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `spend_limit_id: optional string`
 
@@ -4065,7 +5061,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `user_id: optional string`
 
-      Tagged ID of the user who performed the action.
+      Deprecated. Tagged ID of the admin who performed the action — not the target member. Use `spend_limit_id` to look up the target member.
 
   - `ExtraUsageSpendLimitIncreaseRequestApproved object { actor, id, amount, 7 more }`
 
@@ -4099,7 +5095,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `requester_user_id: optional string`
 
@@ -4141,7 +5137,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `requester_user_id: optional string`
 
@@ -4217,7 +5213,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `spend_limit_id: optional string`
 
@@ -4229,71 +5225,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `user_id: optional string`
 
-      Tagged ID of the user who performed the action.
-
-  - `ClaudeFileAccessFailed object { actor, claude_file_id, filename, 7 more }`
-
-    An attempt to access a file failed.
-
-    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
-
-      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
-
-        - `email_address: string`
-
-        - `ip_address: string`
-
-        - `user_agent: string`
-
-        - `user_id: string`
-
-        - `type: optional "user_actor"`
-
-          - `"user_actor"`
-
-      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
-
-        - `ip_address: string`
-
-        - `user_agent: string`
-
-        - `type: optional "unauthenticated_user_actor"`
-
-          - `"unauthenticated_user_actor"`
-
-        - `unauthenticated_email_address: optional string`
-
-    - `claude_file_id: string`
-
-    - `filename: string`
-
-    - `id: optional string`
-
-      Unique identifier for the activity e.g. 'activity_abcd1234'
-
-    - `claude_artifact_id: optional string`
-
-      Artifact ID if file was accessed via an artifact
-
-    - `claude_project_id: optional string`
-
-      Project ID if file was accessed via a project
-
-    - `created_at: optional string`
-
-      When this activity occurred.
-
-    - `organization_id: optional string`
-
-      Organization ID this activity is associated with
-
-    - `organization_uuid: optional string`
-
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
-
-    - `type: optional "claude_file_access_failed"`
-
-      - `"claude_file_access_failed"`
+      Deprecated. Tagged ID of the admin who performed the action — not the target member. Use `spend_limit_id` to look up the target member.
 
   - `ClaudeFileDeleted object { actor, claude_file_id, filename, 5 more }`
 
@@ -4331,7 +5263,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_file_deleted"`
 
@@ -4365,7 +5297,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `claude_chat_id: optional string`
 
-      Chat ID if file was uploaded to a chat
+      Chat ID if known at upload time (null for the upload-then-attach flow). To find which chats a file was later attached to, use `GET /v1/compliance/apps/chats/files/{claude_file_id}`.
 
     - `claude_project_id: optional string`
 
@@ -4381,61 +5313,11 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_file_uploaded"`
 
       - `"claude_file_uploaded"`
-
-  - `ClaudeFileViewed object { actor, claude_file_id, filename, 7 more }`
-
-    A file was viewed.
-
-    - `actor: object { email_address, ip_address, user_agent, 2 more }`
-
-      - `email_address: string`
-
-      - `ip_address: string`
-
-      - `user_agent: string`
-
-      - `user_id: string`
-
-      - `type: optional "user_actor"`
-
-        - `"user_actor"`
-
-    - `claude_file_id: string`
-
-    - `filename: string`
-
-    - `id: optional string`
-
-      Unique identifier for the activity e.g. 'activity_abcd1234'
-
-    - `claude_artifact_id: optional string`
-
-      Artifact ID if file was accessed via an artifact
-
-    - `claude_project_id: optional string`
-
-      Project ID if file was accessed via a project
-
-    - `created_at: optional string`
-
-      When this activity occurred.
-
-    - `organization_id: optional string`
-
-      Organization ID this activity is associated with
-
-    - `organization_uuid: optional string`
-
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
-
-    - `type: optional "claude_file_viewed"`
-
-      - `"claude_file_viewed"`
 
   - `GheConfigurationCreated object { actor, ghe_configuration_id, id, 4 more }`
 
@@ -4473,7 +5355,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "ghe_configuration_created"`
 
@@ -4515,7 +5397,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "ghe_configuration_deleted"`
 
@@ -4557,7 +5439,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "ghe_configuration_updated"`
 
@@ -4599,7 +5481,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "ghe_user_connected"`
 
@@ -4641,7 +5523,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "ghe_user_disconnected"`
 
@@ -4681,7 +5563,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "ghe_webhook_signature_invalid"`
 
@@ -4723,7 +5605,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `repository_name: optional string`
 
@@ -4767,7 +5649,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `repository_name: optional string`
 
@@ -4811,7 +5693,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `repository_name: optional string`
 
@@ -4855,7 +5737,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_gdrive_integration_created"`
 
@@ -4897,7 +5779,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_gdrive_integration_deleted"`
 
@@ -4939,7 +5821,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_gdrive_integration_updated"`
 
@@ -5011,7 +5893,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "group_created"`
 
@@ -5079,7 +5961,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "group_deleted"`
 
@@ -5117,7 +5999,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "group_list_viewed"`
 
@@ -5189,7 +6071,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "group_member_added"`
 
@@ -5231,7 +6113,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "group_member_list_viewed"`
 
@@ -5303,7 +6185,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "group_member_removed"`
 
@@ -5371,7 +6253,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "group_updated"`
 
@@ -5427,7 +6309,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "group_viewed"`
 
@@ -5467,7 +6349,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "integration_user_connected"`
 
@@ -5507,7 +6389,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "integration_user_disconnected"`
 
@@ -5549,7 +6431,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "invoice_collection_method_updated"`
 
@@ -5587,7 +6469,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "user_logged_out"`
 
@@ -5639,7 +6521,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "lti_launch_initiated"`
 
@@ -5691,7 +6573,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "lti_launch_success"`
 
@@ -5699,21 +6581,31 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
   - `LtiPlatformCreated object { actor, lti_platform_id, lti_platform_issuer, 5 more }`
 
-    Admin created an LTI platform integration.
+    Anthropic staff created an LTI platform integration on behalf of an org.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }`
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `email_address: string`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
-      - `ip_address: string`
+        - `email_address: string`
 
-      - `user_agent: string`
+        - `ip_address: string`
 
-      - `user_id: string`
+        - `user_agent: string`
 
-      - `type: optional "user_actor"`
+        - `user_id: string`
 
-        - `"user_actor"`
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
 
     - `lti_platform_id: string`
 
@@ -5737,7 +6629,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "lti_platform_created"`
 
@@ -5745,21 +6637,31 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
   - `LtiPlatformUpdated object { actor, lti_platform_id, id, 5 more }`
 
-    Admin updated an LTI platform integration.
+    Anthropic staff updated an LTI platform integration on behalf of an org.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }`
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `email_address: string`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
-      - `ip_address: string`
+        - `email_address: string`
 
-      - `user_agent: string`
+        - `ip_address: string`
 
-      - `user_id: string`
+        - `user_agent: string`
 
-      - `type: optional "user_actor"`
+        - `user_id: string`
 
-        - `"user_actor"`
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
 
     - `lti_platform_id: string`
 
@@ -5783,7 +6685,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "lti_platform_updated"`
 
@@ -5819,7 +6721,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "magic_link_login_failed"`
 
@@ -5855,7 +6757,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "magic_link_login_initiated"`
 
@@ -5905,7 +6807,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "magic_link_login_succeeded"`
 
@@ -5943,7 +6845,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "managed_organization_setup_completed"`
 
@@ -5985,7 +6887,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "marketplace_created"`
 
@@ -6027,7 +6929,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "marketplace_deleted"`
 
@@ -6069,7 +6971,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "marketplace_updated"`
 
@@ -6111,7 +7013,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "marketplace_webhook_deleted"`
 
@@ -6157,7 +7059,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "marketplace_webhook_provisioned"`
 
@@ -6203,7 +7105,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "mcp_server_created"`
 
@@ -6249,7 +7151,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "mcp_server_deleted"`
 
@@ -6295,7 +7197,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "mcp_server_updated"`
 
@@ -6349,7 +7251,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "mcp_tool_policy_updated"`
 
@@ -6397,7 +7299,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_analytics_api_capability_updated"`
 
@@ -6445,7 +7347,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_bulk_delete_initiated"`
 
@@ -6493,7 +7395,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_claude_code_data_sharing_disabled"`
 
@@ -6541,7 +7443,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_claude_code_data_sharing_enabled"`
 
@@ -6579,7 +7481,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_claude_code_desktop_disabled"`
 
@@ -6617,7 +7519,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_claude_code_desktop_enabled"`
 
@@ -6681,7 +7583,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_compliance_api_settings_updated"`
 
@@ -6719,7 +7621,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_cowork_agent_disabled"`
 
@@ -6757,7 +7659,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_cowork_agent_enabled"`
 
@@ -6795,7 +7697,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_cowork_disabled"`
 
@@ -6833,7 +7735,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_cowork_enabled"`
 
@@ -6881,7 +7783,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `reason: optional string`
 
@@ -6921,7 +7823,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_data_export_accessed"`
 
@@ -6969,7 +7871,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_data_export_completed"`
 
@@ -7017,7 +7919,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_data_export_started"`
 
@@ -7065,7 +7967,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_deleted_via_bulk"`
 
@@ -7103,7 +8005,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_deletion_requested"`
 
@@ -7153,7 +8055,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_directory_resync_completed"`
 
@@ -7203,7 +8105,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_directory_resync_failed"`
 
@@ -7255,7 +8157,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_directory_resync_started"`
 
@@ -7315,7 +8217,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_directory_sync_activated"`
 
@@ -7363,7 +8265,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_directory_sync_add_initiated"`
 
@@ -7423,7 +8325,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_directory_sync_deleted"`
 
@@ -7461,7 +8363,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_discoverability_disabled"`
 
@@ -7499,7 +8401,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_discoverability_enabled"`
 
@@ -7537,7 +8439,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_discoverability_settings_updated"`
 
@@ -7585,7 +8487,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_domain_add_initiated"`
 
@@ -7635,7 +8537,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_domain_removed"`
 
@@ -7685,7 +8587,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_domain_verified"`
 
@@ -7730,7 +8632,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_hipaa_self_serve_enabled"`
 
@@ -7778,7 +8680,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_ip_restriction_created"`
 
@@ -7826,7 +8728,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_ip_restriction_deleted"`
 
@@ -7874,7 +8776,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_ip_restriction_updated"`
 
@@ -7912,7 +8814,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_invite_link_disabled"`
 
@@ -7950,7 +8852,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_invite_link_generated"`
 
@@ -7988,7 +8890,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_invite_link_regenerated"`
 
@@ -8044,7 +8946,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_invite_viewed"`
 
@@ -8096,7 +8998,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_invites_listed"`
 
@@ -8136,7 +9038,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_join_proposal_decided"`
 
@@ -8174,7 +9076,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_join_request_approved"`
 
@@ -8212,7 +9114,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_join_request_created"`
 
@@ -8250,7 +9152,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_join_request_dismissed"`
 
@@ -8288,7 +9190,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_join_request_instant_approved"`
 
@@ -8326,7 +9228,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_join_requests_bulk_dismissed"`
 
@@ -8376,7 +9278,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_magic_link_second_factor_toggled"`
 
@@ -8414,7 +9316,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_member_invites_disabled"`
 
@@ -8452,7 +9354,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_member_invites_enabled"`
 
@@ -8500,7 +9402,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_members_exported"`
 
@@ -8548,7 +9450,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_parent_join_proposal_created"`
 
@@ -8596,7 +9498,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_parent_search_performed"`
 
@@ -8644,7 +9546,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_sso_add_initiated"`
 
@@ -8708,7 +9610,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_sso_connection_activated"`
 
@@ -8770,7 +9672,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_sso_connection_deactivated"`
 
@@ -8832,7 +9734,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_sso_connection_deleted"`
 
@@ -8880,7 +9782,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_sso_group_role_mappings_updated"`
 
@@ -8930,7 +9832,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `previous_mode: optional string`
 
@@ -8982,7 +9884,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_sso_seat_tier_assignment_toggled"`
 
@@ -9030,7 +9932,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_sso_seat_tier_mappings_updated"`
 
@@ -9080,7 +9982,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_sso_toggled"`
 
@@ -9128,7 +10030,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_sync_deleting_synchronized_files_started"`
 
@@ -9176,7 +10078,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_sync_synchronized_files_deleted"`
 
@@ -9224,7 +10126,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `taint: optional string`
 
@@ -9274,7 +10176,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `taint: optional string`
 
@@ -9340,7 +10242,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_user_deleted"`
 
@@ -9380,7 +10282,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_user_invite_accepted"`
 
@@ -9442,7 +10344,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_user_invite_deleted"`
 
@@ -9492,7 +10394,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_user_invite_re_sent"`
 
@@ -9532,7 +10434,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_user_invite_rejected"`
 
@@ -9596,7 +10498,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_user_invite_sent"`
 
@@ -9634,7 +10536,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `previous_role: optional string`
 
@@ -9692,7 +10594,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_user_viewed"`
 
@@ -9744,7 +10646,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_users_listed"`
 
@@ -9782,7 +10684,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_work_across_apps_disabled"`
 
@@ -9820,7 +10722,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_work_across_apps_enabled"`
 
@@ -9862,7 +10764,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `shipping_address_updated: optional boolean`
 
@@ -9904,7 +10806,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "organization_icon_deleted"`
 
@@ -9942,7 +10844,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "organization_icon_updated"`
 
@@ -9976,13 +10878,19 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"anthropic_actor"`
 
-    - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 38 more`
+    - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 50 more`
 
       - `OrganizationName object { current_value, previous_value, type }`
 
+        The organization name setting was changed.
+
         - `current_value: string`
 
+          Setting value immediately after this change
+
         - `previous_value: string`
+
+          Setting value immediately before this change
 
         - `type: optional "name"`
 
@@ -9990,9 +10898,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `OrganizationCapabilities object { current_value, previous_value, type }`
 
+        The organization capabilities setting was changed.
+
         - `current_value: array of string`
 
+          Setting value immediately after this change
+
         - `previous_value: array of string`
+
+          Setting value immediately before this change
 
         - `type: optional "capabilities"`
 
@@ -10000,9 +10914,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `OrganizationRedactContent object { current_value, previous_value, type }`
 
+        The organization content-redaction setting was changed.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "redact_content"`
 
@@ -10010,9 +10930,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `PublicProjectsEnabled object { current_value, previous_value, type }`
 
+        The public projects setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "public_projects_enabled"`
 
@@ -10020,9 +10946,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `WebSearchEnabled object { current_value, previous_value, type }`
 
+        The web search setting was changed.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "web_search_enabled"`
 
@@ -10030,9 +10962,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `GeolocationEnabled object { current_value, previous_value, type }`
 
+        The geolocation setting was changed.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "geolocation_enabled"`
 
@@ -10040,9 +10978,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `OrgMemoryEnabledSetting object { current_value, previous_value, type }`
 
+        The memory setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "enabled_saffron"`
 
@@ -10050,7 +10994,11 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `DataRetentionPeriods object { current_value, previous_value, type }`
 
+        The data retention periods setting was changed for the organization.
+
         - `current_value: array of object { data_type, duration, timescale }`
+
+          Setting value immediately after this change
 
           - `data_type: "all" or "chat" or "project"`
 
@@ -10071,6 +11019,8 @@ Returns a paginated list of compliance activities that can be filtered by variou
             - `"month"`
 
         - `previous_value: array of object { data_type, duration, timescale }`
+
+          Setting value immediately before this change
 
           - `data_type: "all" or "chat" or "project"`
 
@@ -10096,9 +11046,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `MembersLimit object { current_value, previous_value, type }`
 
+        The members limit setting was changed for the organization.
+
         - `current_value: number`
 
+          Setting value immediately after this change
+
         - `previous_value: number`
+
+          Setting value immediately before this change
 
         - `type: optional "members_limit"`
 
@@ -10106,9 +11062,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `ClaudeAPIInArtifactsEnabled object { current_value, previous_value, type }`
 
+        The Claude API in Artifacts setting was changed.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_api_in_artifacts_enabled"`
 
@@ -10116,9 +11078,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `WorkbenchCompletionFeedbackEnabled object { current_value, previous_value, type }`
 
+        The Workbench completion feedback setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "workbench_completion_feedback_enabled"`
 
@@ -10126,9 +11094,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `ClaudeAICompletionFeedbackEnabled object { current_value, previous_value, type }`
 
+        The Claude.ai completion feedback setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_ai_completion_feedback_enabled"`
 
@@ -10136,9 +11110,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `ClaudeAIIntegrationSharingEnabled object { current_value, previous_value, type }`
 
+        The Claude.ai integration sharing setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_ai_integration_sharing_enabled"`
 
@@ -10146,9 +11126,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `ClaudeAIChatSharingEnabled object { current_value, previous_value, type }`
 
+        The Claude.ai chat sharing setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_ai_chat_sharing_enabled"`
 
@@ -10156,9 +11142,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `ClaudeAiccrSharingEnabled object { current_value, previous_value, type }`
 
+        The Claude.ai CCR sharing setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_ai_ccr_sharing_enabled"`
 
@@ -10166,7 +11158,11 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `BatchesDownloadUiVisibility object { current_value, previous_value, type }`
 
+        The batches download UI visibility setting was changed for the organization.
+
         - `current_value: "all" or "none" or "selected"`
+
+          Setting value immediately after this change
 
           - `"all"`
 
@@ -10175,6 +11171,8 @@ Returns a paginated list of compliance activities that can be filtered by variou
           - `"selected"`
 
         - `previous_value: "all" or "none" or "selected"`
+
+          Setting value immediately before this change
 
           - `"all"`
 
@@ -10188,9 +11186,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `AllowedInviteDomains object { current_value, previous_value, type }`
 
+        The allowed invite domains setting was changed for the organization.
+
         - `current_value: array of string`
 
+          Setting value immediately after this change
+
         - `previous_value: array of string`
+
+          Setting value immediately before this change
 
         - `type: optional "allowed_invite_domains"`
 
@@ -10198,7 +11202,11 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `WebSearchAPISettingsChanged object { current_value, previous_value, type }`
 
+        The web search API setting was changed for the organization.
+
         - `current_value: object { domain_filters, is_enabled }`
+
+          Setting value immediately after this change
 
           - `domain_filters: object { allowed_domains, blocked_domains }`
 
@@ -10211,6 +11219,8 @@ Returns a paginated list of compliance activities that can be filtered by variou
           - `is_enabled: boolean`
 
         - `previous_value: object { domain_filters, is_enabled }`
+
+          Setting value immediately before this change
 
           - `domain_filters: object { allowed_domains, blocked_domains }`
 
@@ -10228,7 +11238,11 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `WebFetchAPISettingsChanged object { current_value, previous_value, type }`
 
+        The web fetch API setting was changed for the organization.
+
         - `current_value: object { domain_filters, is_enabled }`
+
+          Setting value immediately after this change
 
           - `domain_filters: object { allowed_domains, blocked_domains }`
 
@@ -10241,6 +11255,8 @@ Returns a paginated list of compliance activities that can be filtered by variou
           - `is_enabled: boolean`
 
         - `previous_value: object { domain_filters, is_enabled }`
+
+          Setting value immediately before this change
 
           - `domain_filters: object { allowed_domains, blocked_domains }`
 
@@ -10258,11 +11274,17 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `DefaultWorkspaceSettings object { current_value, previous_value, type }`
 
+        The default workspace setting was changed for the organization.
+
         - `current_value: object { enable_api_keys }`
+
+          Setting value immediately after this change
 
           - `enable_api_keys: optional boolean`
 
         - `previous_value: object { enable_api_keys }`
+
+          Setting value immediately before this change
 
           - `enable_api_keys: optional boolean`
 
@@ -10272,9 +11294,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `BatchesDownloadUiEnabledWorkspaceIDs object { current_value, previous_value, type }`
 
+        The batches download UI enabled workspace IDs setting was changed for the organization.
+
         - `current_value: array of string`
 
+          Setting value immediately after this change
+
         - `previous_value: array of string`
+
+          Setting value immediately before this change
 
         - `type: optional "batches_download_ui_enabled_workspace_ids"`
 
@@ -10307,7 +11335,11 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
         - `current_value: number`
 
+          Setting value immediately after this change
+
         - `previous_value: number`
+
+          Setting value immediately before this change
 
         - `type: optional "account_session_duration_seconds"`
 
@@ -10318,6 +11350,8 @@ Returns a paginated list of compliance activities that can be filtered by variou
         Tracks changes to VCS (GitHub, etc.) organization connections.
 
         - `current_value: array of object { org_name, type, metadata, org_id }`
+
+          Setting value immediately after this change
 
           - `org_name: string`
 
@@ -10332,6 +11366,8 @@ Returns a paginated list of compliance activities that can be filtered by variou
           - `org_id: optional string`
 
         - `previous_value: array of object { org_name, type, metadata, org_id }`
+
+          Setting value immediately before this change
 
           - `org_name: string`
 
@@ -10355,7 +11391,11 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
         - `current_value: array of string`
 
+          Setting value immediately after this change
+
         - `previous_value: array of string`
+
+          Setting value immediately before this change
 
         - `type: optional "disabled_admin_request_types"`
 
@@ -10363,9 +11403,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `CodeExecutionNetworkEgressEnabled object { current_value, previous_value, type }`
 
+        The code execution network egress setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "code_execution_network_egress_enabled"`
 
@@ -10373,9 +11419,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `CodeExecutionDomainAllowlistChanged object { current_value, previous_value, type }`
 
+        The code execution domain allowlist setting was changed for the organization.
+
         - `current_value: array of string`
 
+          Setting value immediately after this change
+
         - `previous_value: array of string`
+
+          Setting value immediately before this change
 
         - `type: optional "code_execution_domain_allowlist_changed"`
 
@@ -10383,7 +11435,11 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `CodeExecutionDomainAllowlistTemplateChanged object { current_value, previous_value, type }`
 
+        The code execution domain allowlist template setting was changed for the organization.
+
         - `current_value: "custom" or "full_egress" or "package_managers"`
+
+          Setting value immediately after this change
 
           - `"custom"`
 
@@ -10392,6 +11448,8 @@ Returns a paginated list of compliance activities that can be filtered by variou
           - `"package_managers"`
 
         - `previous_value: "custom" or "full_egress" or "package_managers"`
+
+          Setting value immediately before this change
 
           - `"custom"`
 
@@ -10405,9 +11463,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `ChatEnabled object { current_value, previous_value, type }`
 
+        The chat setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "chat_enabled"`
 
@@ -10415,9 +11479,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `ClaudeCodeQuickWebSetupEnabled object { current_value, previous_value, type }`
 
+        The Claude Code quick web setup setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_code_quick_web_setup_enabled"`
 
@@ -10425,7 +11495,11 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `ClaudeCodeTeamMemoryMode object { current_value, previous_value, type }`
 
+        The Claude Code team memory mode setting was changed for the organization.
+
         - `current_value: "all_org_members" or "github_repo" or "off" or "specific_groups"`
+
+          Setting value immediately after this change
 
           - `"all_org_members"`
 
@@ -10436,6 +11510,8 @@ Returns a paginated list of compliance activities that can be filtered by variou
           - `"specific_groups"`
 
         - `previous_value: "all_org_members" or "github_repo" or "off" or "specific_groups"`
+
+          Setting value immediately before this change
 
           - `"all_org_members"`
 
@@ -10451,9 +11527,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `BrowserExtensionSettingsUpdated object { current_value, previous_value, type }`
 
+        The browser extension setting was changed for the organization.
+
         - `current_value: map[unknown]`
 
+          Setting value immediately after this change
+
         - `previous_value: map[unknown]`
+
+          Setting value immediately before this change
 
         - `type: optional "browser_extension_settings"`
 
@@ -10461,9 +11543,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `DesktopExtensionAllowlistEnabled object { current_value, previous_value, type }`
 
+        The desktop extension allowlist setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "is_desktop_extension_allowlist_enabled"`
 
@@ -10471,9 +11559,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `ClaudeDesignEnabled object { current_value, previous_value, type }`
 
+        The Claude Design setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_ai_design_enabled"`
 
@@ -10481,9 +11575,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `ClaudeAISkillSharingEnabled object { current_value, previous_value, type }`
 
+        The Claude.ai skill sharing setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_ai_skill_sharing_enabled"`
 
@@ -10491,9 +11591,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `ClaudeAISkillSharingOrgEnabled object { current_value, previous_value, type }`
 
+        The Claude.ai organization-wide skill sharing setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_ai_skill_sharing_org_enabled"`
 
@@ -10501,9 +11607,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `ClaudeCodeRemoteControlEnabled object { current_value, previous_value, type }`
 
+        The Claude Code remote control setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_code_remote_control_enabled"`
 
@@ -10511,19 +11623,47 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `ClaudeCodeRoutinesEnabled object { current_value, previous_value, type }`
 
+        The Claude Code routines setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_code_routines_enabled"`
 
           - `"claude_code_routines_enabled"`
 
-      - `FrontierServicesDataUseEnabled object { current_value, previous_value, type }`
+      - `ClaudeCodeWorkflowsEnabled object { current_value, previous_value, type }`
+
+        The Claude Code Workflows setting was changed for the organization.
 
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_workflows_enabled"`
+
+          - `"claude_code_workflows_enabled"`
+
+      - `FrontierServicesDataUseEnabled object { current_value, previous_value, type }`
+
+        The frontier services data use setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "frontier_services_data_use_enabled"`
 
@@ -10531,19 +11671,207 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `LtiCourseProjectsEnabled object { current_value, previous_value, type }`
 
+        The LTI course projects setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "lti_course_projects_enabled"`
 
           - `"lti_course_projects_enabled"`
 
-      - `ManagedAgentsEnabled object { current_value, previous_value, type }`
+      - `ClaudeAISkillCreationEnabled object { current_value, previous_value, type }`
+
+        The Claude.ai skill creation setting was changed for the organization.
 
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_ai_skill_creation_enabled"`
+
+          - `"claude_ai_skill_creation_enabled"`
+
+      - `ClaudeCodeGitHubAnalyticsEnabled object { current_value, previous_value, type }`
+
+        The Claude Code GitHub analytics setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_github_analytics_enabled"`
+
+          - `"claude_code_github_analytics_enabled"`
+
+      - `ClaudeCodeHideManagedEnvironments object { current_value, previous_value, type }`
+
+        The Claude Code hide managed environments setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_hide_managed_environments"`
+
+          - `"claude_code_hide_managed_environments"`
+
+      - `ClaudeCodeMetricsLoggingEnabled object { current_value, previous_value, type }`
+
+        The Claude Code metrics logging setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_metrics_logging_enabled"`
+
+          - `"claude_code_metrics_logging_enabled"`
+
+      - `ClaudeCodeFastModeEnabled object { current_value, previous_value, type }`
+
+        The Claude Code fast mode setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_fast_mode_enabled"`
+
+          - `"claude_code_fast_mode_enabled"`
+
+      - `ClaudeCodeTrustedDevicesRequired object { current_value, previous_value, type }`
+
+        The Claude Code trusted devices setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_trusted_devices_required"`
+
+          - `"claude_code_trusted_devices_required"`
+
+      - `InlineVisualizationsEnabled object { current_value, previous_value, type }`
+
+        The inline visualizations setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "inline_visualizations_enabled"`
+
+          - `"inline_visualizations_enabled"`
+
+      - `OrganizationBannerSettingsUpdated object { current_value, previous_value, type }`
+
+        The organization banner setting was changed.
+
+        - `current_value: map[unknown]`
+
+          Setting value immediately after this change
+
+        - `previous_value: map[unknown]`
+
+          Setting value immediately before this change
+
+        - `type: optional "organization_banner_settings"`
+
+          - `"organization_banner_settings"`
+
+      - `ClaudeInSlackSettingsUpdated object { current_value, previous_value, type }`
+
+        The Claude in Slack setting was changed for the organization.
+
+        - `current_value: map[unknown]`
+
+          Setting value immediately after this change
+
+        - `previous_value: map[unknown]`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_in_slack_settings"`
+
+          - `"claude_in_slack_settings"`
+
+      - `ClaudeCodeDefaultWorkerEnvironmentID object { current_value, previous_value, type }`
+
+        The Claude Code default worker environment setting was changed for the organization.
+
+        - `current_value: string`
+
+          Setting value immediately after this change
+
+        - `previous_value: string`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_default_worker_environment_id"`
+
+          - `"claude_code_default_worker_environment_id"`
+
+      - `ClaudeCodeDefaultWorkerPoolID object { current_value, previous_value, type }`
+
+        The Claude Code default worker pool setting was changed for the organization.
+
+        - `current_value: string`
+
+          Setting value immediately after this change
+
+        - `previous_value: string`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_default_worker_pool_id"`
+
+          - `"claude_code_default_worker_pool_id"`
+
+      - `ManagedAgentsEnabled object { current_value, previous_value, type }`
+
+        The managed agents setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "managed_agents_enabled"`
 
@@ -10563,7 +11891,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_organization_settings_updated"`
 
@@ -10611,7 +11939,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "owned_projects_access_restored"`
 
@@ -10651,7 +11979,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "payment_method_updated"`
 
@@ -10703,7 +12031,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "phone_code_sent"`
 
@@ -10741,7 +12069,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "phone_code_verified"`
 
@@ -10797,7 +12125,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_api_key_created"`
 
@@ -10867,7 +12195,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_api_key_updated"`
 
@@ -10919,7 +12247,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_cost_report_viewed"`
 
@@ -10975,7 +12303,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_federation_issuer_archived"`
 
@@ -11059,7 +12387,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_federation_issuer_updated"`
 
@@ -11115,7 +12443,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_federation_rule_archived"`
 
@@ -11207,7 +12535,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_federation_rule_updated"`
 
@@ -11267,7 +12595,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_federation_rule_workspace_added"`
 
@@ -11327,7 +12655,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_federation_rule_workspace_removed"`
 
@@ -11383,7 +12711,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_file_content_downloaded"`
 
@@ -11439,7 +12767,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_file_deleted"`
 
@@ -11495,7 +12823,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `session_id: optional string`
 
@@ -11555,7 +12883,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_service_account_archived"`
 
@@ -11621,7 +12949,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_service_account_updated"`
 
@@ -11681,7 +13009,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_service_account_workspace_member_added"`
 
@@ -11741,7 +13069,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_service_account_workspace_member_removed"`
 
@@ -11811,7 +13139,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_service_account_workspace_member_updated"`
 
@@ -11865,7 +13193,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_signing_key_created"`
 
@@ -11919,7 +13247,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_signing_key_deleted"`
 
@@ -11973,7 +13301,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_signing_key_rotated"`
 
@@ -12033,7 +13361,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_skill_version_created"`
 
@@ -12093,7 +13421,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_skill_version_deleted"`
 
@@ -12139,7 +13467,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_spend_limit_alert_emails_updated"`
 
@@ -12185,7 +13513,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_spend_limit_created"`
 
@@ -12223,7 +13551,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `spend_limit_id: optional string`
 
@@ -12269,7 +13597,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `spend_limit_id: optional string`
 
@@ -12325,7 +13653,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_usage_report_claude_code_viewed"`
 
@@ -12377,7 +13705,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_usage_report_messages_viewed"`
 
@@ -12433,7 +13761,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_workspace_archived"`
 
@@ -12489,7 +13817,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_workspace_created"`
 
@@ -12549,7 +13877,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_workspace_member_added"`
 
@@ -12609,7 +13937,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_workspace_member_removed"`
 
@@ -12679,7 +14007,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_workspace_member_updated"`
 
@@ -12739,7 +14067,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_workspace_member_viewed"`
 
@@ -12795,7 +14123,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_workspace_members_listed"`
 
@@ -12845,7 +14173,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_workspace_rate_limit_deleted"`
 
@@ -12899,7 +14227,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_workspace_rate_limit_updated"`
 
@@ -12945,6 +14273,8 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `type: "allowed_inference_geos" or "default_inference_geo" or "display_color" or "name"`
 
+        The workspace property that was changed
+
         - `"allowed_inference_geos"`
 
         - `"default_inference_geo"`
@@ -12971,7 +14301,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_workspace_updated"`
 
@@ -13009,7 +14339,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `plugin_id: optional string`
 
@@ -13051,7 +14381,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `plugin_id: optional string`
 
@@ -13117,7 +14447,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "plugin_installation_preference_updated"`
 
@@ -13155,7 +14485,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `plugin_id: optional string`
 
@@ -13197,7 +14527,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `plugin_id: optional string`
 
@@ -13239,7 +14569,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "prepaid_auto_recharge_disabled"`
 
@@ -13277,7 +14607,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `target_amount: optional number`
 
@@ -13333,7 +14663,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "prepaid_extra_usage_auto_reload_disabled"`
 
@@ -13381,7 +14711,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "prepaid_extra_usage_auto_reload_enabled"`
 
@@ -13429,7 +14759,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "prepaid_extra_usage_auto_reload_settings_updated"`
 
@@ -13471,7 +14801,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "primary_owner_transferred"`
 
@@ -13511,7 +14841,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_archived"`
 
@@ -13551,7 +14881,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_created"`
 
@@ -13591,7 +14921,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_deleted"`
 
@@ -13649,7 +14979,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_document_access_failed"`
 
@@ -13693,7 +15023,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_document_deleted"`
 
@@ -13751,7 +15081,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_document_deletion_failed"`
 
@@ -13795,7 +15125,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_document_uploaded"`
 
@@ -13839,7 +15169,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_document_viewed"`
 
@@ -13895,7 +15225,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_file_access_failed"`
 
@@ -13951,7 +15281,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_file_deleted"`
 
@@ -14007,7 +15337,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_file_deletion_failed"`
 
@@ -14065,7 +15395,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_file_uploaded"`
 
@@ -14105,7 +15435,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_reported"`
 
@@ -14161,7 +15491,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_sharing_updated"`
 
@@ -14201,7 +15531,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `preview_only: optional boolean`
 
@@ -14247,7 +15577,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_pubsec_identity_configured"`
 
@@ -14297,7 +15627,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "rbac_role_assigned"`
 
@@ -14343,7 +15673,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "rbac_role_created"`
 
@@ -14385,7 +15715,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "rbac_role_deleted"`
 
@@ -14394,6 +15724,9 @@ Returns a paginated list of compliance activities that can be filtered by variou
   - `RbacRolePermissionAdded object { action, actor, resource_id, 7 more }`
 
     Admin added a permission to an RBAC custom role.
+
+    Emitted once per requested permission, including permissions the role
+    already had, so a retried request still produces a complete audit record.
 
     - `action: string`
 
@@ -14439,7 +15772,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "rbac_role_permission_added"`
 
@@ -14448,6 +15781,10 @@ Returns a paginated list of compliance activities that can be filtered by variou
   - `RbacRolePermissionRemoved object { action, actor, resource_id, 7 more }`
 
     Admin removed a permission from an RBAC custom role.
+
+    Emitted once per requested permission, including permissions the role
+    already lacked, so a retried request still produces a complete audit
+    record.
 
     - `action: string`
 
@@ -14493,7 +15830,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "rbac_role_permission_removed"`
 
@@ -14543,7 +15880,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "rbac_role_unassigned"`
 
@@ -14585,7 +15922,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "rbac_role_updated"`
 
@@ -14633,7 +15970,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `resource_id: optional string`
 
@@ -14691,7 +16028,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `resource_id: optional string`
 
@@ -14737,7 +16074,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "sso_login_failed"`
 
@@ -14773,7 +16110,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "sso_login_initiated"`
 
@@ -14823,7 +16160,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "sso_login_succeeded"`
 
@@ -14875,7 +16212,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "sso_second_factor_magic_link"`
 
@@ -14927,7 +16264,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "scim_user_created"`
 
@@ -14979,7 +16316,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "scim_user_deleted"`
 
@@ -15031,7 +16368,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "scim_user_updated"`
 
@@ -15081,7 +16418,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "scoped_api_key_deleted"`
 
@@ -15135,7 +16472,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "scoped_api_key_updated"`
 
@@ -15173,7 +16510,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "seat_tier_changes_cancelled"`
 
@@ -15215,7 +16552,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "seat_tiers_purchased"`
 
@@ -15257,7 +16594,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "service_created"`
 
@@ -15299,7 +16636,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "service_deleted"`
 
@@ -15357,7 +16694,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "service_key_created"`
 
@@ -15403,7 +16740,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "service_key_revoked"`
 
@@ -15441,7 +16778,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "session_revoked"`
 
@@ -15493,7 +16830,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `share_id: optional string`
 
@@ -15547,7 +16884,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `share_id: optional string`
 
@@ -15601,7 +16938,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `share_id: optional string`
 
@@ -15655,7 +16992,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `skill_id: optional string`
 
@@ -15711,7 +17048,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `skill_id: optional string`
 
@@ -15753,7 +17090,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `skill_id: optional string`
 
@@ -15795,7 +17132,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `skill_id: optional string`
 
@@ -15851,7 +17188,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `skill_id: optional string`
 
@@ -15913,7 +17250,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "social_login_succeeded"`
 
@@ -15951,7 +17288,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "subscription_cancellation_scheduled"`
 
@@ -15993,7 +17330,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `previous_quantity: optional number`
 
@@ -16037,7 +17374,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `plan_type: optional string`
 
@@ -16079,7 +17416,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "subscription_resumed"`
 
@@ -16121,7 +17458,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `plan_type: optional string`
 
@@ -16175,11 +17512,339 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "subscription_upgraded"`
 
       - `"subscription_upgraded"`
+
+  - `TunnelArchived object { actor, tunnel_id, id, 4 more }`
+
+    An MCP tunnel was archived.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, service_account_id, user_agent, type }  or object { issuer, subject, audience, 3 more }`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `tunnel_id: string`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "tunnel_archived"`
+
+      - `"tunnel_archived"`
+
+  - `TunnelCertificateAdded object { actor, certificate_id, tunnel_id, 6 more }`
+
+    An inner-TLS CA certificate was added to a tunnel.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, service_account_id, user_agent, type }  or object { issuer, subject, audience, 3 more }`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `certificate_id: string`
+
+    - `tunnel_id: string`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `certificate_fingerprint: optional string`
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "tunnel_certificate_added"`
+
+      - `"tunnel_certificate_added"`
+
+  - `TunnelCertificateRevoked object { actor, certificate_id, tunnel_id, 6 more }`
+
+    An inner-TLS CA certificate was revoked from a tunnel.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, service_account_id, user_agent, type }  or object { issuer, subject, audience, 3 more }`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `certificate_id: string`
+
+    - `tunnel_id: string`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `certificate_fingerprint: optional string`
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "tunnel_certificate_revoked"`
+
+      - `"tunnel_certificate_revoked"`
+
+  - `TunnelCreated object { actor, tunnel_id, id, 4 more }`
+
+    An MCP tunnel was created.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, service_account_id, user_agent, type }  or object { issuer, subject, audience, 3 more }`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `tunnel_id: string`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "tunnel_created"`
+
+      - `"tunnel_created"`
 
   - `TunnelTokenMinted object { actor, token_id, id, 5 more }`
 
@@ -16215,13 +17880,95 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `token_name: optional string`
 
     - `type: optional "tunnel_token_minted"`
 
       - `"tunnel_token_minted"`
+
+  - `TunnelTokenRevealed object { actor, tunnel_id, tunnel_token_id, 5 more }`
+
+    The Cloudflare connector secret for a tunnel was revealed to the caller.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, service_account_id, user_agent, type }  or object { issuer, subject, audience, 3 more }`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `tunnel_id: string`
+
+    - `tunnel_token_id: string`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "tunnel_token_revealed"`
+
+      - `"tunnel_token_revealed"`
 
   - `TunnelTokenRevoked object { actor, token_id, id, 4 more }`
 
@@ -16257,11 +18004,98 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "tunnel_token_revoked"`
 
       - `"tunnel_token_revoked"`
+
+  - `TunnelTokenRotated object { actor, tunnel_id, tunnel_token_id, 6 more }`
+
+    The Cloudflare connector secret for a tunnel was rotated.
+
+    `tunnel_token_id` is the id of the *newly-issued* token. The previous
+    token is invalidated by the rotation and its id is not recorded here.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, service_account_id, user_agent, type }  or object { issuer, subject, audience, 3 more }`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `tunnel_id: string`
+
+    - `tunnel_token_id: string`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `reason: optional string`
+
+    - `type: optional "tunnel_token_rotated"`
+
+      - `"tunnel_token_rotated"`
 
   - `UserConsentRecorded object { actor, consent_type, entity_id, 6 more }`
 
@@ -16301,7 +18135,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "user_consent_recorded"`
 
@@ -16347,7 +18181,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "user_consent_revoked"`
 
@@ -16415,7 +18249,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_user_role_updated"`
 
@@ -16439,7 +18273,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
         - `"user_actor"`
 
-    - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 19 more`
+    - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 18 more`
 
       - `FullName object { current_value, previous_value, type }`
 
@@ -16521,21 +18355,17 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"gdrive_enabled"`
 
-      - `GDriveIndexingEnabled object { current_value, previous_value, type }`
-
-        - `current_value: boolean`
-
-        - `previous_value: boolean`
-
-        - `type: optional "gdrive_indexing_enabled"`
-
-          - `"gdrive_indexing_enabled"`
-
       - `WebSearchEnabled object { current_value, previous_value, type }`
 
+        The web search setting was changed.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "web_search_enabled"`
 
@@ -16543,9 +18373,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `GeolocationEnabled object { current_value, previous_value, type }`
 
+        The geolocation setting was changed.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "geolocation_enabled"`
 
@@ -16655,9 +18491,15 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `ClaudeAPIInArtifactsEnabled object { current_value, previous_value, type }`
 
+        The Claude API in Artifacts setting was changed.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_api_in_artifacts_enabled"`
 
@@ -16685,7 +18527,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_user_settings_updated"`
 
@@ -16735,7 +18577,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "workspace_member_spend_limit_created"`
 
@@ -16781,7 +18623,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `spend_limit_id: optional string`
 
@@ -16835,7 +18677,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `spend_limit_id: optional string`
 
@@ -16889,7 +18731,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "workspace_spend_limit_created"`
 
@@ -16931,7 +18773,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `spend_limit_id: optional string`
 
@@ -16988,7 +18830,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
 ### Activity List Response
 
-- `ActivityListResponse = object { actor, id, created_at, 3 more }  or object { actor, admin_api_key_id, scopes, 5 more }  or object { actor, admin_api_key_id, id, 4 more }  or 302 more`
+- `ActivityListResponse = object { actor, id, created_at, 3 more }  or object { actor, admin_api_key_id, scopes, 5 more }  or object { actor, admin_api_key_id, id, 4 more }  or 310 more`
 
   User-initiated self-service account deletion.
 
@@ -17024,7 +18866,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "account_deleted"`
 
@@ -17070,7 +18912,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "admin_api_key_created"`
 
@@ -17112,7 +18954,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "admin_api_key_deleted"`
 
@@ -17166,7 +19008,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "admin_api_key_updated"`
 
@@ -17214,7 +19056,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "admin_connector_request_resolved"`
 
@@ -17254,7 +19096,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "admin_request_created"`
 
@@ -17292,7 +19134,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "age_verified"`
 
@@ -17328,7 +19170,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "anonymous_mobile_login_attempted"`
 
@@ -17374,7 +19216,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "api_key_created"`
 
@@ -17430,7 +19272,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_artifact_access_failed"`
 
@@ -17470,7 +19312,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_artifact_created"`
 
@@ -17510,7 +19352,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_published_artifact_deleted"`
 
@@ -17558,7 +19400,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_artifact_published"`
 
@@ -17608,7 +19450,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_artifact_sharing_updated"`
 
@@ -17648,7 +19490,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_artifact_viewed"`
 
@@ -17686,7 +19528,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "audit_log_export_accessed"`
 
@@ -17728,7 +19570,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `to_date: optional string`
 
@@ -17774,7 +19616,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `primary_email_set: optional boolean`
 
@@ -17787,202 +19629,6 @@ curl https://api.anthropic.com/v1/compliance/activities \
     - `type: optional "billing_emails_updated"`
 
       - `"billing_emails_updated"`
-
-  - `ClaudeChatAccessFailed object { actor, claude_chat_id, id, 4 more }`
-
-    An attempt to access a chat failed.
-
-    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
-
-      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
-
-        - `email_address: string`
-
-        - `ip_address: string`
-
-        - `user_agent: string`
-
-        - `user_id: string`
-
-        - `type: optional "user_actor"`
-
-          - `"user_actor"`
-
-      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
-
-        - `ip_address: string`
-
-        - `user_agent: string`
-
-        - `type: optional "unauthenticated_user_actor"`
-
-          - `"unauthenticated_user_actor"`
-
-        - `unauthenticated_email_address: optional string`
-
-    - `claude_chat_id: string`
-
-    - `id: optional string`
-
-      Unique identifier for the activity e.g. 'activity_abcd1234'
-
-    - `created_at: optional string`
-
-      When this activity occurred.
-
-    - `organization_id: optional string`
-
-      Organization ID this activity is associated with
-
-    - `organization_uuid: optional string`
-
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
-
-    - `type: optional "claude_chat_access_failed"`
-
-      - `"claude_chat_access_failed"`
-
-  - `ClaudeChatCreated object { actor, claude_chat_id, id, 5 more }`
-
-    User created a chat.
-
-    - `actor: object { email_address, ip_address, user_agent, 2 more }`
-
-      - `email_address: string`
-
-      - `ip_address: string`
-
-      - `user_agent: string`
-
-      - `user_id: string`
-
-      - `type: optional "user_actor"`
-
-        - `"user_actor"`
-
-    - `claude_chat_id: string`
-
-    - `id: optional string`
-
-      Unique identifier for the activity e.g. 'activity_abcd1234'
-
-    - `claude_project_id: optional string`
-
-      Project ID this chat belongs to, if any
-
-    - `created_at: optional string`
-
-      When this activity occurred.
-
-    - `organization_id: optional string`
-
-      Organization ID this activity is associated with
-
-    - `organization_uuid: optional string`
-
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
-
-    - `type: optional "claude_chat_created"`
-
-      - `"claude_chat_created"`
-
-  - `ClaudeChatDeleted object { actor, claude_chat_id, id, 5 more }`
-
-    User deleted a chat.
-
-    - `actor: object { email_address, ip_address, user_agent, 2 more }`
-
-      - `email_address: string`
-
-      - `ip_address: string`
-
-      - `user_agent: string`
-
-      - `user_id: string`
-
-      - `type: optional "user_actor"`
-
-        - `"user_actor"`
-
-    - `claude_chat_id: string`
-
-    - `id: optional string`
-
-      Unique identifier for the activity e.g. 'activity_abcd1234'
-
-    - `claude_project_id: optional string`
-
-      Project ID this chat belongs to, if any
-
-    - `created_at: optional string`
-
-      When this activity occurred.
-
-    - `organization_id: optional string`
-
-      Organization ID this activity is associated with
-
-    - `organization_uuid: optional string`
-
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
-
-    - `type: optional "claude_chat_deleted"`
-
-      - `"claude_chat_deleted"`
-
-  - `ClaudeChatDeletionFailed object { actor, claude_chat_id, id, 4 more }`
-
-    A request to delete a chat failed.
-
-    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
-
-      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
-
-        - `email_address: string`
-
-        - `ip_address: string`
-
-        - `user_agent: string`
-
-        - `user_id: string`
-
-        - `type: optional "user_actor"`
-
-          - `"user_actor"`
-
-      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
-
-        - `ip_address: string`
-
-        - `user_agent: string`
-
-        - `type: optional "unauthenticated_user_actor"`
-
-          - `"unauthenticated_user_actor"`
-
-        - `unauthenticated_email_address: optional string`
-
-    - `claude_chat_id: string`
-
-    - `id: optional string`
-
-      Unique identifier for the activity e.g. 'activity_abcd1234'
-
-    - `created_at: optional string`
-
-      When this activity occurred.
-
-    - `organization_id: optional string`
-
-      Organization ID this activity is associated with
-
-    - `organization_uuid: optional string`
-
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
-
-    - `type: optional "claude_chat_deletion_failed"`
-
-      - `"claude_chat_deletion_failed"`
 
   - `ClaudeChatSettingsUpdated object { actor, claude_chat_id, id, 5 more }`
 
@@ -18022,7 +19668,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_chat_settings_updated"`
 
@@ -18064,11 +19710,53 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_chat_snapshot_created"`
 
       - `"claude_chat_snapshot_created"`
+
+  - `ClaudeChatSnapshotDeleted object { actor, claude_chat_snapshot_id, id, 5 more }`
+
+    User deleted/unshared a chat snapshot.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }`
+
+      - `email_address: string`
+
+      - `ip_address: string`
+
+      - `user_agent: string`
+
+      - `user_id: string`
+
+      - `type: optional "user_actor"`
+
+        - `"user_actor"`
+
+    - `claude_chat_snapshot_id: string`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `claude_chat_id: optional string`
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_chat_snapshot_deleted"`
+
+      - `"claude_chat_snapshot_deleted"`
 
   - `ClaudeChatSnapshotViewed object { actor, claude_chat_snapshot_id, id, 5 more }`
 
@@ -18120,39 +19808,133 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_chat_snapshot_viewed"`
 
       - `"claude_chat_snapshot_viewed"`
 
-  - `ClaudeChatUpdated object { actor, claude_chat_id, id, 5 more }`
+  - `ClaudeChatAccessFailed object { actor, claude_chat_id, id, 4 more }`
 
-    User updated the chat metadata (e.g name, model).
+    A user was denied access to a Claude.ai chat conversation.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
 
-      - `email_address: string`
+      A federated external workload authenticated via a verified OIDC token.
 
-      - `ip_address: string`
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
 
-      - `user_agent: string`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
-      - `user_id: string`
+        - `api_key_id: string`
 
-      - `type: optional "user_actor"`
+        - `ip_address: string`
 
-        - `"user_actor"`
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
 
     - `claude_chat_id: string`
+
+      The chat conversation the user was denied access to, e.g. "claude_chat_01Ab...".
 
     - `id: optional string`
 
       Unique identifier for the activity e.g. 'activity_abcd1234'
-
-    - `claude_project_id: optional string`
-
-      Project ID this chat belongs to, if any
 
     - `created_at: optional string`
 
@@ -18164,7 +19946,571 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_chat_access_failed"`
+
+      - `"claude_chat_access_failed"`
+
+  - `ClaudeChatCreated object { actor, claude_chat_id, id, 5 more }`
+
+    User created a chat.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `claude_chat_id: string`
+
+      Tagged ID of the created conversation, e.g. "claude_chat_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `claude_project_id: optional string`
+
+      Tagged ID of the project the chat was created in, if any, e.g. "claude_proj_01HX...".
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_chat_created"`
+
+      - `"claude_chat_created"`
+
+  - `ClaudeChatDeleted object { actor, claude_chat_id, id, 5 more }`
+
+    A user deleted a Claude.ai chat conversation.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `claude_chat_id: string`
+
+      The chat conversation that was deleted, e.g. "claude_chat_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `claude_project_id: optional string`
+
+      The project the chat belonged to, if any, e.g. "claude_proj_01HX...".
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_chat_deleted"`
+
+      - `"claude_chat_deleted"`
+
+  - `ClaudeChatDeletionFailed object { actor, claude_chat_id, id, 4 more }`
+
+    A request to delete a Claude.ai chat conversation failed.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `claude_chat_id: string`
+
+      The chat conversation the user attempted to delete, e.g. "claude_chat_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_chat_deletion_failed"`
+
+      - `"claude_chat_deletion_failed"`
+
+  - `ClaudeChatUpdated object { actor, claude_chat_id, id, 5 more }`
+
+    User updated the chat metadata (e.g name, model).
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `claude_chat_id: string`
+
+      Tagged ID of the updated conversation, e.g. "claude_chat_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `claude_project_id: optional string`
+
+      Tagged ID of the project the chat belongs to, if any, e.g. "claude_proj_01HX...".
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_chat_updated"`
 
@@ -18172,23 +20518,121 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
   - `ClaudeChatViewed object { actor, claude_chat_id, id, 5 more }`
 
-    User viewed a chat.
+    A user viewed a Claude.ai chat conversation.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }`
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
 
-      - `email_address: string`
+      A federated external workload authenticated via a verified OIDC token.
 
-      - `ip_address: string`
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
 
-      - `user_agent: string`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
-      - `user_id: string`
+        - `api_key_id: string`
 
-      - `type: optional "user_actor"`
+        - `ip_address: string`
 
-        - `"user_actor"`
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
 
     - `claude_chat_id: string`
+
+      The chat conversation that was viewed, e.g. "claude_chat_01Ab...".
 
     - `id: optional string`
 
@@ -18196,7 +20640,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `claude_project_id: optional string`
 
-      Project ID this chat belongs to, if any
+      The project the chat belongs to, if any, e.g. "claude_proj_01Ab...".
 
     - `created_at: optional string`
 
@@ -18208,7 +20652,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_chat_viewed"`
 
@@ -18258,7 +20702,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `per_review_limit_usd: optional string`
 
@@ -18316,7 +20760,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_code_review_repository_added"`
 
@@ -18366,7 +20810,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_code_review_repository_removed"`
 
@@ -18416,7 +20860,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `status: optional string`
 
@@ -18470,7 +20914,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_code_security_center_config_updated"`
 
@@ -18514,7 +20958,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_code_security_scan_cancelled"`
 
@@ -18525,6 +20969,8 @@ curl https://api.anthropic.com/v1/compliance/activities \
     A Claude Code Security scan project was archived or unarchived.
 
     - `action: "archived" or "unarchived"`
+
+      The state change applied to the scan project.
 
       - `"archived"`
 
@@ -18562,11 +21008,61 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_code_security_scan_project_updated"`
 
       - `"claude_code_security_scan_project_updated"`
+
+  - `ClaudeCodeSecurityScanRunUpdated object { action, actor, scan_id, 5 more }`
+
+    A single Claude Code Security scan run was archived or unarchived.
+
+    - `action: "archived" or "unarchived"`
+
+      The state change applied to the scan run
+
+      - `"archived"`
+
+      - `"unarchived"`
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }`
+
+      - `email_address: string`
+
+      - `ip_address: string`
+
+      - `user_agent: string`
+
+      - `user_id: string`
+
+      - `type: optional "user_actor"`
+
+        - `"user_actor"`
+
+    - `scan_id: string`
+
+      Tagged ID of the scan the request named — any scan in the archived run, not necessarily its canonical (run_index=0) scan
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_code_security_scan_run_updated"`
+
+      - `"claude_code_security_scan_run_updated"`
 
   - `ClaudeCodeSecurityScanScheduleDeleted object { actor, scan_project_id, id, 4 more }`
 
@@ -18604,7 +21100,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_code_security_scan_schedule_deleted"`
 
@@ -18648,15 +21144,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_code_security_scan_schedule_updated"`
 
       - `"claude_code_security_scan_schedule_updated"`
 
-  - `ClaudeCodeSecurityWebhookCreated object { actor, scan_project_id, url, 6 more }`
+  - `ClaudeCodeSecurityWebhookCreated object { actor, url, webhook_id, 6 more }`
 
-    An outbound webhook was created for a Claude Code Security scan project.
+    A Claude Code Security outbound webhook was created.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }`
 
@@ -18671,10 +21167,6 @@ curl https://api.anthropic.com/v1/compliance/activities \
       - `type: optional "user_actor"`
 
         - `"user_actor"`
-
-    - `scan_project_id: string`
-
-      Tagged ID of the scan project
 
     - `url: string`
 
@@ -18696,15 +21188,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `scan_project_id: optional string`
+
+      Tagged ID of the scan project (null for organization-wide webhooks)
 
     - `type: optional "claude_code_security_webhook_created"`
 
       - `"claude_code_security_webhook_created"`
 
-  - `ClaudeCodeSecurityWebhookDeleted object { actor, scan_project_id, webhook_id, 5 more }`
+  - `ClaudeCodeSecurityWebhookDeleted object { actor, webhook_id, id, 5 more }`
 
-    An outbound webhook for a Claude Code Security scan project was deleted.
+    A Claude Code Security outbound webhook was deleted.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }`
 
@@ -18719,10 +21215,6 @@ curl https://api.anthropic.com/v1/compliance/activities \
       - `type: optional "user_actor"`
 
         - `"user_actor"`
-
-    - `scan_project_id: string`
-
-      Tagged ID of the scan project
 
     - `webhook_id: string`
 
@@ -18742,13 +21234,17 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `scan_project_id: optional string`
+
+      Tagged ID of the scan project (null for organization-wide webhooks)
 
     - `type: optional "claude_code_security_webhook_deleted"`
 
       - `"claude_code_security_webhook_deleted"`
 
-  - `ClaudeCodeSecurityWebhookSecretUpdated object { actor, scan_project_id, webhook_id, 5 more }`
+  - `ClaudeCodeSecurityWebhookSecretUpdated object { actor, webhook_id, id, 5 more }`
 
     The HMAC signing secret for a Claude Code Security webhook was rotated.
 
@@ -18766,10 +21262,6 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
         - `"user_actor"`
 
-    - `scan_project_id: string`
-
-      Tagged ID of the scan project
-
     - `webhook_id: string`
 
       Tagged ID of the webhook
@@ -18788,15 +21280,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `scan_project_id: optional string`
+
+      Tagged ID of the scan project (null for organization-wide webhooks)
 
     - `type: optional "claude_code_security_webhook_secret_updated"`
 
       - `"claude_code_security_webhook_secret_updated"`
 
-  - `ClaudeCodeSecurityWebhookUpdated object { actor, scan_project_id, webhook_id, 5 more }`
+  - `ClaudeCodeSecurityWebhookUpdated object { actor, webhook_id, id, 5 more }`
 
-    An outbound webhook for a Claude Code Security scan project was updated.
+    A Claude Code Security outbound webhook was updated.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }`
 
@@ -18812,10 +21308,6 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
         - `"user_actor"`
 
-    - `scan_project_id: string`
-
-      Tagged ID of the scan project
-
     - `webhook_id: string`
 
       Tagged ID of the webhook
@@ -18834,7 +21326,11 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `scan_project_id: optional string`
+
+      Tagged ID of the scan project (null for organization-wide webhooks)
 
     - `type: optional "claude_code_security_webhook_updated"`
 
@@ -18888,11 +21384,311 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_code_team_memory_acl_updated"`
 
       - `"claude_code_team_memory_acl_updated"`
+
+  - `ClaudeFileAccessFailed object { actor, claude_file_id, id, 7 more }`
+
+    A user was denied access to a file in Claude.ai.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `claude_file_id: string`
+
+      The file the user was denied access to, e.g. "claude_file_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `claude_artifact_id: optional string`
+
+      The artifact the file was accessed through, if any, e.g. "claude_artifact_01HX...".
+
+    - `claude_project_id: optional string`
+
+      The project the file was accessed through, if any, e.g. "claude_proj_01HX...".
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `filename: optional string`
+
+      Deprecated — DO NOT USE. Always empty; the file's display name is intentionally omitted.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_file_access_failed"`
+
+      - `"claude_file_access_failed"`
+
+  - `ClaudeFileViewed object { actor, claude_file_id, id, 7 more }`
+
+    A user viewed a file in Claude.ai.
+
+    - `actor: object { api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }  or 5 more`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "api_actor"`
+
+          - `"api_actor"`
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          - `"unauthenticated_user_actor"`
+
+        - `unauthenticated_email_address: optional string`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
+
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `type: optional "admin_api_key_actor"`
+
+          - `"admin_api_key_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          - `"scim_directory_sync_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `claude_file_id: string`
+
+      The file that was viewed, e.g. "claude_file_01HX...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `claude_artifact_id: optional string`
+
+      The artifact the file was accessed through, if any, e.g. "claude_artifact_01HX...".
+
+    - `claude_project_id: optional string`
+
+      The project the file was accessed through, if any, e.g. "claude_proj_01HX...".
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `filename: optional string`
+
+      Deprecated — DO NOT USE. Always empty; the file's display name is intentionally omitted.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "claude_file_viewed"`
+
+      - `"claude_file_viewed"`
 
   - `CliPluginExecPolicyUpdated object { actor, cli_name, marketplace_id, 9 more }`
 
@@ -18950,7 +21746,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "cli_plugin_exec_policy_updated"`
 
@@ -18992,7 +21788,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_command_created"`
 
@@ -19034,7 +21830,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_command_deleted"`
 
@@ -19076,7 +21872,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_command_replaced"`
 
@@ -19130,7 +21926,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `request_body: optional string`
 
@@ -19176,7 +21972,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "desktop_extension_allowlisted"`
 
@@ -19218,7 +22014,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "desktop_extension_blocklisted"`
 
@@ -19260,7 +22056,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "desktop_extension_deleted"`
 
@@ -19306,7 +22102,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "desktop_extension_removed_from_allowlist"`
 
@@ -19348,7 +22144,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "desktop_extension_unblocked"`
 
@@ -19394,7 +22190,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "desktop_extension_uploaded"`
 
@@ -19440,7 +22236,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "desktop_extension_version_uploaded"`
 
@@ -19478,7 +22274,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "domain_claim_initiated"`
 
@@ -19518,7 +22314,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "end_user_invite_requested"`
 
@@ -19566,7 +22362,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "extra_usage_billing_enabled"`
 
@@ -19614,7 +22410,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "extra_usage_credit_granted"`
 
@@ -19686,7 +22482,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `spend_limit_id: optional string`
 
@@ -19698,7 +22494,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `user_id: optional string`
 
-      Tagged ID of the user who performed the action.
+      Deprecated. Tagged ID of the admin who performed the action — not the target member. Use `spend_limit_id` to look up the target member.
 
   - `ExtraUsageSpendLimitDeleted object { actor, id, created_at, 5 more }`
 
@@ -19754,7 +22550,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `spend_limit_id: optional string`
 
@@ -19766,7 +22562,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `user_id: optional string`
 
-      Tagged ID of the user who performed the action.
+      Deprecated. Tagged ID of the admin who performed the action — not the target member. Use `spend_limit_id` to look up the target member.
 
   - `ExtraUsageSpendLimitIncreaseRequestApproved object { actor, id, amount, 7 more }`
 
@@ -19800,7 +22596,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `requester_user_id: optional string`
 
@@ -19842,7 +22638,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `requester_user_id: optional string`
 
@@ -19918,7 +22714,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `spend_limit_id: optional string`
 
@@ -19930,71 +22726,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `user_id: optional string`
 
-      Tagged ID of the user who performed the action.
-
-  - `ClaudeFileAccessFailed object { actor, claude_file_id, filename, 7 more }`
-
-    An attempt to access a file failed.
-
-    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
-
-      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
-
-        - `email_address: string`
-
-        - `ip_address: string`
-
-        - `user_agent: string`
-
-        - `user_id: string`
-
-        - `type: optional "user_actor"`
-
-          - `"user_actor"`
-
-      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
-
-        - `ip_address: string`
-
-        - `user_agent: string`
-
-        - `type: optional "unauthenticated_user_actor"`
-
-          - `"unauthenticated_user_actor"`
-
-        - `unauthenticated_email_address: optional string`
-
-    - `claude_file_id: string`
-
-    - `filename: string`
-
-    - `id: optional string`
-
-      Unique identifier for the activity e.g. 'activity_abcd1234'
-
-    - `claude_artifact_id: optional string`
-
-      Artifact ID if file was accessed via an artifact
-
-    - `claude_project_id: optional string`
-
-      Project ID if file was accessed via a project
-
-    - `created_at: optional string`
-
-      When this activity occurred.
-
-    - `organization_id: optional string`
-
-      Organization ID this activity is associated with
-
-    - `organization_uuid: optional string`
-
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
-
-    - `type: optional "claude_file_access_failed"`
-
-      - `"claude_file_access_failed"`
+      Deprecated. Tagged ID of the admin who performed the action — not the target member. Use `spend_limit_id` to look up the target member.
 
   - `ClaudeFileDeleted object { actor, claude_file_id, filename, 5 more }`
 
@@ -20032,7 +22764,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_file_deleted"`
 
@@ -20066,7 +22798,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `claude_chat_id: optional string`
 
-      Chat ID if file was uploaded to a chat
+      Chat ID if known at upload time (null for the upload-then-attach flow). To find which chats a file was later attached to, use `GET /v1/compliance/apps/chats/files/{claude_file_id}`.
 
     - `claude_project_id: optional string`
 
@@ -20082,61 +22814,11 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_file_uploaded"`
 
       - `"claude_file_uploaded"`
-
-  - `ClaudeFileViewed object { actor, claude_file_id, filename, 7 more }`
-
-    A file was viewed.
-
-    - `actor: object { email_address, ip_address, user_agent, 2 more }`
-
-      - `email_address: string`
-
-      - `ip_address: string`
-
-      - `user_agent: string`
-
-      - `user_id: string`
-
-      - `type: optional "user_actor"`
-
-        - `"user_actor"`
-
-    - `claude_file_id: string`
-
-    - `filename: string`
-
-    - `id: optional string`
-
-      Unique identifier for the activity e.g. 'activity_abcd1234'
-
-    - `claude_artifact_id: optional string`
-
-      Artifact ID if file was accessed via an artifact
-
-    - `claude_project_id: optional string`
-
-      Project ID if file was accessed via a project
-
-    - `created_at: optional string`
-
-      When this activity occurred.
-
-    - `organization_id: optional string`
-
-      Organization ID this activity is associated with
-
-    - `organization_uuid: optional string`
-
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
-
-    - `type: optional "claude_file_viewed"`
-
-      - `"claude_file_viewed"`
 
   - `GheConfigurationCreated object { actor, ghe_configuration_id, id, 4 more }`
 
@@ -20174,7 +22856,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "ghe_configuration_created"`
 
@@ -20216,7 +22898,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "ghe_configuration_deleted"`
 
@@ -20258,7 +22940,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "ghe_configuration_updated"`
 
@@ -20300,7 +22982,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "ghe_user_connected"`
 
@@ -20342,7 +23024,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "ghe_user_disconnected"`
 
@@ -20382,7 +23064,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "ghe_webhook_signature_invalid"`
 
@@ -20424,7 +23106,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `repository_name: optional string`
 
@@ -20468,7 +23150,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `repository_name: optional string`
 
@@ -20512,7 +23194,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `repository_name: optional string`
 
@@ -20556,7 +23238,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_gdrive_integration_created"`
 
@@ -20598,7 +23280,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_gdrive_integration_deleted"`
 
@@ -20640,7 +23322,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_gdrive_integration_updated"`
 
@@ -20712,7 +23394,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "group_created"`
 
@@ -20780,7 +23462,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "group_deleted"`
 
@@ -20818,7 +23500,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "group_list_viewed"`
 
@@ -20890,7 +23572,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "group_member_added"`
 
@@ -20932,7 +23614,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "group_member_list_viewed"`
 
@@ -21004,7 +23686,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "group_member_removed"`
 
@@ -21072,7 +23754,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "group_updated"`
 
@@ -21128,7 +23810,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "group_viewed"`
 
@@ -21168,7 +23850,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "integration_user_connected"`
 
@@ -21208,7 +23890,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "integration_user_disconnected"`
 
@@ -21250,7 +23932,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "invoice_collection_method_updated"`
 
@@ -21288,7 +23970,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "user_logged_out"`
 
@@ -21340,7 +24022,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "lti_launch_initiated"`
 
@@ -21392,7 +24074,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "lti_launch_success"`
 
@@ -21400,21 +24082,31 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
   - `LtiPlatformCreated object { actor, lti_platform_id, lti_platform_issuer, 5 more }`
 
-    Admin created an LTI platform integration.
+    Anthropic staff created an LTI platform integration on behalf of an org.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }`
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `email_address: string`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
-      - `ip_address: string`
+        - `email_address: string`
 
-      - `user_agent: string`
+        - `ip_address: string`
 
-      - `user_id: string`
+        - `user_agent: string`
 
-      - `type: optional "user_actor"`
+        - `user_id: string`
 
-        - `"user_actor"`
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
 
     - `lti_platform_id: string`
 
@@ -21438,7 +24130,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "lti_platform_created"`
 
@@ -21446,21 +24138,31 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
   - `LtiPlatformUpdated object { actor, lti_platform_id, id, 5 more }`
 
-    Admin updated an LTI platform integration.
+    Anthropic staff updated an LTI platform integration on behalf of an org.
 
-    - `actor: object { email_address, ip_address, user_agent, 2 more }`
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `email_address: string`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
-      - `ip_address: string`
+        - `email_address: string`
 
-      - `user_agent: string`
+        - `ip_address: string`
 
-      - `user_id: string`
+        - `user_agent: string`
 
-      - `type: optional "user_actor"`
+        - `user_id: string`
 
-        - `"user_actor"`
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `AnthropicActor object { email_address, type }`
+
+        - `email_address: optional string`
+
+        - `type: optional "anthropic_actor"`
+
+          - `"anthropic_actor"`
 
     - `lti_platform_id: string`
 
@@ -21484,7 +24186,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "lti_platform_updated"`
 
@@ -21520,7 +24222,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "magic_link_login_failed"`
 
@@ -21556,7 +24258,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "magic_link_login_initiated"`
 
@@ -21606,7 +24308,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "magic_link_login_succeeded"`
 
@@ -21644,7 +24346,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "managed_organization_setup_completed"`
 
@@ -21686,7 +24388,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "marketplace_created"`
 
@@ -21728,7 +24430,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "marketplace_deleted"`
 
@@ -21770,7 +24472,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "marketplace_updated"`
 
@@ -21812,7 +24514,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "marketplace_webhook_deleted"`
 
@@ -21858,7 +24560,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "marketplace_webhook_provisioned"`
 
@@ -21904,7 +24606,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "mcp_server_created"`
 
@@ -21950,7 +24652,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "mcp_server_deleted"`
 
@@ -21996,7 +24698,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "mcp_server_updated"`
 
@@ -22050,7 +24752,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "mcp_tool_policy_updated"`
 
@@ -22098,7 +24800,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_analytics_api_capability_updated"`
 
@@ -22146,7 +24848,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_bulk_delete_initiated"`
 
@@ -22194,7 +24896,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_claude_code_data_sharing_disabled"`
 
@@ -22242,7 +24944,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_claude_code_data_sharing_enabled"`
 
@@ -22280,7 +24982,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_claude_code_desktop_disabled"`
 
@@ -22318,7 +25020,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_claude_code_desktop_enabled"`
 
@@ -22382,7 +25084,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_compliance_api_settings_updated"`
 
@@ -22420,7 +25122,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_cowork_agent_disabled"`
 
@@ -22458,7 +25160,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_cowork_agent_enabled"`
 
@@ -22496,7 +25198,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_cowork_disabled"`
 
@@ -22534,7 +25236,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_cowork_enabled"`
 
@@ -22582,7 +25284,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `reason: optional string`
 
@@ -22622,7 +25324,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_data_export_accessed"`
 
@@ -22670,7 +25372,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_data_export_completed"`
 
@@ -22718,7 +25420,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_data_export_started"`
 
@@ -22766,7 +25468,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_deleted_via_bulk"`
 
@@ -22804,7 +25506,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_deletion_requested"`
 
@@ -22854,7 +25556,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_directory_resync_completed"`
 
@@ -22904,7 +25606,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_directory_resync_failed"`
 
@@ -22956,7 +25658,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_directory_resync_started"`
 
@@ -23016,7 +25718,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_directory_sync_activated"`
 
@@ -23064,7 +25766,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_directory_sync_add_initiated"`
 
@@ -23124,7 +25826,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_directory_sync_deleted"`
 
@@ -23162,7 +25864,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_discoverability_disabled"`
 
@@ -23200,7 +25902,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_discoverability_enabled"`
 
@@ -23238,7 +25940,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_discoverability_settings_updated"`
 
@@ -23286,7 +25988,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_domain_add_initiated"`
 
@@ -23336,7 +26038,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_domain_removed"`
 
@@ -23386,7 +26088,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_domain_verified"`
 
@@ -23431,7 +26133,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_hipaa_self_serve_enabled"`
 
@@ -23479,7 +26181,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_ip_restriction_created"`
 
@@ -23527,7 +26229,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_ip_restriction_deleted"`
 
@@ -23575,7 +26277,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_ip_restriction_updated"`
 
@@ -23613,7 +26315,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_invite_link_disabled"`
 
@@ -23651,7 +26353,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_invite_link_generated"`
 
@@ -23689,7 +26391,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_invite_link_regenerated"`
 
@@ -23745,7 +26447,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_invite_viewed"`
 
@@ -23797,7 +26499,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_invites_listed"`
 
@@ -23837,7 +26539,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_join_proposal_decided"`
 
@@ -23875,7 +26577,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_join_request_approved"`
 
@@ -23913,7 +26615,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_join_request_created"`
 
@@ -23951,7 +26653,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_join_request_dismissed"`
 
@@ -23989,7 +26691,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_join_request_instant_approved"`
 
@@ -24027,7 +26729,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_join_requests_bulk_dismissed"`
 
@@ -24077,7 +26779,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_magic_link_second_factor_toggled"`
 
@@ -24115,7 +26817,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_member_invites_disabled"`
 
@@ -24153,7 +26855,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_member_invites_enabled"`
 
@@ -24201,7 +26903,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_members_exported"`
 
@@ -24249,7 +26951,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_parent_join_proposal_created"`
 
@@ -24297,7 +26999,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_parent_search_performed"`
 
@@ -24345,7 +27047,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_sso_add_initiated"`
 
@@ -24409,7 +27111,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_sso_connection_activated"`
 
@@ -24471,7 +27173,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_sso_connection_deactivated"`
 
@@ -24533,7 +27235,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_sso_connection_deleted"`
 
@@ -24581,7 +27283,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_sso_group_role_mappings_updated"`
 
@@ -24631,7 +27333,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `previous_mode: optional string`
 
@@ -24683,7 +27385,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_sso_seat_tier_assignment_toggled"`
 
@@ -24731,7 +27433,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_sso_seat_tier_mappings_updated"`
 
@@ -24781,7 +27483,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_sso_toggled"`
 
@@ -24829,7 +27531,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_sync_deleting_synchronized_files_started"`
 
@@ -24877,7 +27579,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_sync_synchronized_files_deleted"`
 
@@ -24925,7 +27627,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `taint: optional string`
 
@@ -24975,7 +27677,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `taint: optional string`
 
@@ -25041,7 +27743,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_user_deleted"`
 
@@ -25081,7 +27783,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_user_invite_accepted"`
 
@@ -25143,7 +27845,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_user_invite_deleted"`
 
@@ -25193,7 +27895,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_user_invite_re_sent"`
 
@@ -25233,7 +27935,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_user_invite_rejected"`
 
@@ -25297,7 +27999,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_user_invite_sent"`
 
@@ -25335,7 +28037,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `previous_role: optional string`
 
@@ -25393,7 +28095,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_user_viewed"`
 
@@ -25445,7 +28147,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_users_listed"`
 
@@ -25483,7 +28185,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_work_across_apps_disabled"`
 
@@ -25521,7 +28223,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "org_work_across_apps_enabled"`
 
@@ -25563,7 +28265,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `shipping_address_updated: optional boolean`
 
@@ -25605,7 +28307,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "organization_icon_deleted"`
 
@@ -25643,7 +28345,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "organization_icon_updated"`
 
@@ -25677,13 +28379,19 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
           - `"anthropic_actor"`
 
-    - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 38 more`
+    - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 50 more`
 
       - `OrganizationName object { current_value, previous_value, type }`
 
+        The organization name setting was changed.
+
         - `current_value: string`
 
+          Setting value immediately after this change
+
         - `previous_value: string`
+
+          Setting value immediately before this change
 
         - `type: optional "name"`
 
@@ -25691,9 +28399,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `OrganizationCapabilities object { current_value, previous_value, type }`
 
+        The organization capabilities setting was changed.
+
         - `current_value: array of string`
 
+          Setting value immediately after this change
+
         - `previous_value: array of string`
+
+          Setting value immediately before this change
 
         - `type: optional "capabilities"`
 
@@ -25701,9 +28415,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `OrganizationRedactContent object { current_value, previous_value, type }`
 
+        The organization content-redaction setting was changed.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "redact_content"`
 
@@ -25711,9 +28431,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `PublicProjectsEnabled object { current_value, previous_value, type }`
 
+        The public projects setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "public_projects_enabled"`
 
@@ -25721,9 +28447,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `WebSearchEnabled object { current_value, previous_value, type }`
 
+        The web search setting was changed.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "web_search_enabled"`
 
@@ -25731,9 +28463,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `GeolocationEnabled object { current_value, previous_value, type }`
 
+        The geolocation setting was changed.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "geolocation_enabled"`
 
@@ -25741,9 +28479,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `OrgMemoryEnabledSetting object { current_value, previous_value, type }`
 
+        The memory setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "enabled_saffron"`
 
@@ -25751,7 +28495,11 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `DataRetentionPeriods object { current_value, previous_value, type }`
 
+        The data retention periods setting was changed for the organization.
+
         - `current_value: array of object { data_type, duration, timescale }`
+
+          Setting value immediately after this change
 
           - `data_type: "all" or "chat" or "project"`
 
@@ -25772,6 +28520,8 @@ curl https://api.anthropic.com/v1/compliance/activities \
             - `"month"`
 
         - `previous_value: array of object { data_type, duration, timescale }`
+
+          Setting value immediately before this change
 
           - `data_type: "all" or "chat" or "project"`
 
@@ -25797,9 +28547,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `MembersLimit object { current_value, previous_value, type }`
 
+        The members limit setting was changed for the organization.
+
         - `current_value: number`
 
+          Setting value immediately after this change
+
         - `previous_value: number`
+
+          Setting value immediately before this change
 
         - `type: optional "members_limit"`
 
@@ -25807,9 +28563,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `ClaudeAPIInArtifactsEnabled object { current_value, previous_value, type }`
 
+        The Claude API in Artifacts setting was changed.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_api_in_artifacts_enabled"`
 
@@ -25817,9 +28579,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `WorkbenchCompletionFeedbackEnabled object { current_value, previous_value, type }`
 
+        The Workbench completion feedback setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "workbench_completion_feedback_enabled"`
 
@@ -25827,9 +28595,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `ClaudeAICompletionFeedbackEnabled object { current_value, previous_value, type }`
 
+        The Claude.ai completion feedback setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_ai_completion_feedback_enabled"`
 
@@ -25837,9 +28611,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `ClaudeAIIntegrationSharingEnabled object { current_value, previous_value, type }`
 
+        The Claude.ai integration sharing setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_ai_integration_sharing_enabled"`
 
@@ -25847,9 +28627,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `ClaudeAIChatSharingEnabled object { current_value, previous_value, type }`
 
+        The Claude.ai chat sharing setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_ai_chat_sharing_enabled"`
 
@@ -25857,9 +28643,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `ClaudeAiccrSharingEnabled object { current_value, previous_value, type }`
 
+        The Claude.ai CCR sharing setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_ai_ccr_sharing_enabled"`
 
@@ -25867,7 +28659,11 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `BatchesDownloadUiVisibility object { current_value, previous_value, type }`
 
+        The batches download UI visibility setting was changed for the organization.
+
         - `current_value: "all" or "none" or "selected"`
+
+          Setting value immediately after this change
 
           - `"all"`
 
@@ -25876,6 +28672,8 @@ curl https://api.anthropic.com/v1/compliance/activities \
           - `"selected"`
 
         - `previous_value: "all" or "none" or "selected"`
+
+          Setting value immediately before this change
 
           - `"all"`
 
@@ -25889,9 +28687,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `AllowedInviteDomains object { current_value, previous_value, type }`
 
+        The allowed invite domains setting was changed for the organization.
+
         - `current_value: array of string`
 
+          Setting value immediately after this change
+
         - `previous_value: array of string`
+
+          Setting value immediately before this change
 
         - `type: optional "allowed_invite_domains"`
 
@@ -25899,7 +28703,11 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `WebSearchAPISettingsChanged object { current_value, previous_value, type }`
 
+        The web search API setting was changed for the organization.
+
         - `current_value: object { domain_filters, is_enabled }`
+
+          Setting value immediately after this change
 
           - `domain_filters: object { allowed_domains, blocked_domains }`
 
@@ -25912,6 +28720,8 @@ curl https://api.anthropic.com/v1/compliance/activities \
           - `is_enabled: boolean`
 
         - `previous_value: object { domain_filters, is_enabled }`
+
+          Setting value immediately before this change
 
           - `domain_filters: object { allowed_domains, blocked_domains }`
 
@@ -25929,7 +28739,11 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `WebFetchAPISettingsChanged object { current_value, previous_value, type }`
 
+        The web fetch API setting was changed for the organization.
+
         - `current_value: object { domain_filters, is_enabled }`
+
+          Setting value immediately after this change
 
           - `domain_filters: object { allowed_domains, blocked_domains }`
 
@@ -25942,6 +28756,8 @@ curl https://api.anthropic.com/v1/compliance/activities \
           - `is_enabled: boolean`
 
         - `previous_value: object { domain_filters, is_enabled }`
+
+          Setting value immediately before this change
 
           - `domain_filters: object { allowed_domains, blocked_domains }`
 
@@ -25959,11 +28775,17 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `DefaultWorkspaceSettings object { current_value, previous_value, type }`
 
+        The default workspace setting was changed for the organization.
+
         - `current_value: object { enable_api_keys }`
+
+          Setting value immediately after this change
 
           - `enable_api_keys: optional boolean`
 
         - `previous_value: object { enable_api_keys }`
+
+          Setting value immediately before this change
 
           - `enable_api_keys: optional boolean`
 
@@ -25973,9 +28795,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `BatchesDownloadUiEnabledWorkspaceIDs object { current_value, previous_value, type }`
 
+        The batches download UI enabled workspace IDs setting was changed for the organization.
+
         - `current_value: array of string`
 
+          Setting value immediately after this change
+
         - `previous_value: array of string`
+
+          Setting value immediately before this change
 
         - `type: optional "batches_download_ui_enabled_workspace_ids"`
 
@@ -26008,7 +28836,11 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
         - `current_value: number`
 
+          Setting value immediately after this change
+
         - `previous_value: number`
+
+          Setting value immediately before this change
 
         - `type: optional "account_session_duration_seconds"`
 
@@ -26019,6 +28851,8 @@ curl https://api.anthropic.com/v1/compliance/activities \
         Tracks changes to VCS (GitHub, etc.) organization connections.
 
         - `current_value: array of object { org_name, type, metadata, org_id }`
+
+          Setting value immediately after this change
 
           - `org_name: string`
 
@@ -26033,6 +28867,8 @@ curl https://api.anthropic.com/v1/compliance/activities \
           - `org_id: optional string`
 
         - `previous_value: array of object { org_name, type, metadata, org_id }`
+
+          Setting value immediately before this change
 
           - `org_name: string`
 
@@ -26056,7 +28892,11 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
         - `current_value: array of string`
 
+          Setting value immediately after this change
+
         - `previous_value: array of string`
+
+          Setting value immediately before this change
 
         - `type: optional "disabled_admin_request_types"`
 
@@ -26064,9 +28904,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `CodeExecutionNetworkEgressEnabled object { current_value, previous_value, type }`
 
+        The code execution network egress setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "code_execution_network_egress_enabled"`
 
@@ -26074,9 +28920,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `CodeExecutionDomainAllowlistChanged object { current_value, previous_value, type }`
 
+        The code execution domain allowlist setting was changed for the organization.
+
         - `current_value: array of string`
 
+          Setting value immediately after this change
+
         - `previous_value: array of string`
+
+          Setting value immediately before this change
 
         - `type: optional "code_execution_domain_allowlist_changed"`
 
@@ -26084,7 +28936,11 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `CodeExecutionDomainAllowlistTemplateChanged object { current_value, previous_value, type }`
 
+        The code execution domain allowlist template setting was changed for the organization.
+
         - `current_value: "custom" or "full_egress" or "package_managers"`
+
+          Setting value immediately after this change
 
           - `"custom"`
 
@@ -26093,6 +28949,8 @@ curl https://api.anthropic.com/v1/compliance/activities \
           - `"package_managers"`
 
         - `previous_value: "custom" or "full_egress" or "package_managers"`
+
+          Setting value immediately before this change
 
           - `"custom"`
 
@@ -26106,9 +28964,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `ChatEnabled object { current_value, previous_value, type }`
 
+        The chat setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "chat_enabled"`
 
@@ -26116,9 +28980,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `ClaudeCodeQuickWebSetupEnabled object { current_value, previous_value, type }`
 
+        The Claude Code quick web setup setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_code_quick_web_setup_enabled"`
 
@@ -26126,7 +28996,11 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `ClaudeCodeTeamMemoryMode object { current_value, previous_value, type }`
 
+        The Claude Code team memory mode setting was changed for the organization.
+
         - `current_value: "all_org_members" or "github_repo" or "off" or "specific_groups"`
+
+          Setting value immediately after this change
 
           - `"all_org_members"`
 
@@ -26137,6 +29011,8 @@ curl https://api.anthropic.com/v1/compliance/activities \
           - `"specific_groups"`
 
         - `previous_value: "all_org_members" or "github_repo" or "off" or "specific_groups"`
+
+          Setting value immediately before this change
 
           - `"all_org_members"`
 
@@ -26152,9 +29028,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `BrowserExtensionSettingsUpdated object { current_value, previous_value, type }`
 
+        The browser extension setting was changed for the organization.
+
         - `current_value: map[unknown]`
 
+          Setting value immediately after this change
+
         - `previous_value: map[unknown]`
+
+          Setting value immediately before this change
 
         - `type: optional "browser_extension_settings"`
 
@@ -26162,9 +29044,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `DesktopExtensionAllowlistEnabled object { current_value, previous_value, type }`
 
+        The desktop extension allowlist setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "is_desktop_extension_allowlist_enabled"`
 
@@ -26172,9 +29060,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `ClaudeDesignEnabled object { current_value, previous_value, type }`
 
+        The Claude Design setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_ai_design_enabled"`
 
@@ -26182,9 +29076,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `ClaudeAISkillSharingEnabled object { current_value, previous_value, type }`
 
+        The Claude.ai skill sharing setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_ai_skill_sharing_enabled"`
 
@@ -26192,9 +29092,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `ClaudeAISkillSharingOrgEnabled object { current_value, previous_value, type }`
 
+        The Claude.ai organization-wide skill sharing setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_ai_skill_sharing_org_enabled"`
 
@@ -26202,9 +29108,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `ClaudeCodeRemoteControlEnabled object { current_value, previous_value, type }`
 
+        The Claude Code remote control setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_code_remote_control_enabled"`
 
@@ -26212,19 +29124,47 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `ClaudeCodeRoutinesEnabled object { current_value, previous_value, type }`
 
+        The Claude Code routines setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_code_routines_enabled"`
 
           - `"claude_code_routines_enabled"`
 
-      - `FrontierServicesDataUseEnabled object { current_value, previous_value, type }`
+      - `ClaudeCodeWorkflowsEnabled object { current_value, previous_value, type }`
+
+        The Claude Code Workflows setting was changed for the organization.
 
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_workflows_enabled"`
+
+          - `"claude_code_workflows_enabled"`
+
+      - `FrontierServicesDataUseEnabled object { current_value, previous_value, type }`
+
+        The frontier services data use setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "frontier_services_data_use_enabled"`
 
@@ -26232,19 +29172,207 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `LtiCourseProjectsEnabled object { current_value, previous_value, type }`
 
+        The LTI course projects setting was changed for the organization.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "lti_course_projects_enabled"`
 
           - `"lti_course_projects_enabled"`
 
-      - `ManagedAgentsEnabled object { current_value, previous_value, type }`
+      - `ClaudeAISkillCreationEnabled object { current_value, previous_value, type }`
+
+        The Claude.ai skill creation setting was changed for the organization.
 
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_ai_skill_creation_enabled"`
+
+          - `"claude_ai_skill_creation_enabled"`
+
+      - `ClaudeCodeGitHubAnalyticsEnabled object { current_value, previous_value, type }`
+
+        The Claude Code GitHub analytics setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_github_analytics_enabled"`
+
+          - `"claude_code_github_analytics_enabled"`
+
+      - `ClaudeCodeHideManagedEnvironments object { current_value, previous_value, type }`
+
+        The Claude Code hide managed environments setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_hide_managed_environments"`
+
+          - `"claude_code_hide_managed_environments"`
+
+      - `ClaudeCodeMetricsLoggingEnabled object { current_value, previous_value, type }`
+
+        The Claude Code metrics logging setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_metrics_logging_enabled"`
+
+          - `"claude_code_metrics_logging_enabled"`
+
+      - `ClaudeCodeFastModeEnabled object { current_value, previous_value, type }`
+
+        The Claude Code fast mode setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_fast_mode_enabled"`
+
+          - `"claude_code_fast_mode_enabled"`
+
+      - `ClaudeCodeTrustedDevicesRequired object { current_value, previous_value, type }`
+
+        The Claude Code trusted devices setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_trusted_devices_required"`
+
+          - `"claude_code_trusted_devices_required"`
+
+      - `InlineVisualizationsEnabled object { current_value, previous_value, type }`
+
+        The inline visualizations setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
+
+        - `type: optional "inline_visualizations_enabled"`
+
+          - `"inline_visualizations_enabled"`
+
+      - `OrganizationBannerSettingsUpdated object { current_value, previous_value, type }`
+
+        The organization banner setting was changed.
+
+        - `current_value: map[unknown]`
+
+          Setting value immediately after this change
+
+        - `previous_value: map[unknown]`
+
+          Setting value immediately before this change
+
+        - `type: optional "organization_banner_settings"`
+
+          - `"organization_banner_settings"`
+
+      - `ClaudeInSlackSettingsUpdated object { current_value, previous_value, type }`
+
+        The Claude in Slack setting was changed for the organization.
+
+        - `current_value: map[unknown]`
+
+          Setting value immediately after this change
+
+        - `previous_value: map[unknown]`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_in_slack_settings"`
+
+          - `"claude_in_slack_settings"`
+
+      - `ClaudeCodeDefaultWorkerEnvironmentID object { current_value, previous_value, type }`
+
+        The Claude Code default worker environment setting was changed for the organization.
+
+        - `current_value: string`
+
+          Setting value immediately after this change
+
+        - `previous_value: string`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_default_worker_environment_id"`
+
+          - `"claude_code_default_worker_environment_id"`
+
+      - `ClaudeCodeDefaultWorkerPoolID object { current_value, previous_value, type }`
+
+        The Claude Code default worker pool setting was changed for the organization.
+
+        - `current_value: string`
+
+          Setting value immediately after this change
+
+        - `previous_value: string`
+
+          Setting value immediately before this change
+
+        - `type: optional "claude_code_default_worker_pool_id"`
+
+          - `"claude_code_default_worker_pool_id"`
+
+      - `ManagedAgentsEnabled object { current_value, previous_value, type }`
+
+        The managed agents setting was changed for the organization.
+
+        - `current_value: boolean`
+
+          Setting value immediately after this change
+
+        - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "managed_agents_enabled"`
 
@@ -26264,7 +29392,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_organization_settings_updated"`
 
@@ -26312,7 +29440,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "owned_projects_access_restored"`
 
@@ -26352,7 +29480,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "payment_method_updated"`
 
@@ -26404,7 +29532,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "phone_code_sent"`
 
@@ -26442,7 +29570,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "phone_code_verified"`
 
@@ -26498,7 +29626,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_api_key_created"`
 
@@ -26568,7 +29696,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_api_key_updated"`
 
@@ -26620,7 +29748,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_cost_report_viewed"`
 
@@ -26676,7 +29804,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_federation_issuer_archived"`
 
@@ -26760,7 +29888,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_federation_issuer_updated"`
 
@@ -26816,7 +29944,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_federation_rule_archived"`
 
@@ -26908,7 +30036,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_federation_rule_updated"`
 
@@ -26968,7 +30096,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_federation_rule_workspace_added"`
 
@@ -27028,7 +30156,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_federation_rule_workspace_removed"`
 
@@ -27084,7 +30212,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_file_content_downloaded"`
 
@@ -27140,7 +30268,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_file_deleted"`
 
@@ -27196,7 +30324,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `session_id: optional string`
 
@@ -27256,7 +30384,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_service_account_archived"`
 
@@ -27322,7 +30450,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_service_account_updated"`
 
@@ -27382,7 +30510,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_service_account_workspace_member_added"`
 
@@ -27442,7 +30570,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_service_account_workspace_member_removed"`
 
@@ -27512,7 +30640,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_service_account_workspace_member_updated"`
 
@@ -27566,7 +30694,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_signing_key_created"`
 
@@ -27620,7 +30748,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_signing_key_deleted"`
 
@@ -27674,7 +30802,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_signing_key_rotated"`
 
@@ -27734,7 +30862,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_skill_version_created"`
 
@@ -27794,7 +30922,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_skill_version_deleted"`
 
@@ -27840,7 +30968,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_spend_limit_alert_emails_updated"`
 
@@ -27886,7 +31014,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_spend_limit_created"`
 
@@ -27924,7 +31052,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `spend_limit_id: optional string`
 
@@ -27970,7 +31098,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `spend_limit_id: optional string`
 
@@ -28026,7 +31154,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_usage_report_claude_code_viewed"`
 
@@ -28078,7 +31206,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_usage_report_messages_viewed"`
 
@@ -28134,7 +31262,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_workspace_archived"`
 
@@ -28190,7 +31318,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_workspace_created"`
 
@@ -28250,7 +31378,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_workspace_member_added"`
 
@@ -28310,7 +31438,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_workspace_member_removed"`
 
@@ -28380,7 +31508,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_workspace_member_updated"`
 
@@ -28440,7 +31568,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_workspace_member_viewed"`
 
@@ -28496,7 +31624,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_workspace_members_listed"`
 
@@ -28546,7 +31674,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_workspace_rate_limit_deleted"`
 
@@ -28600,7 +31728,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_workspace_rate_limit_updated"`
 
@@ -28646,6 +31774,8 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `type: "allowed_inference_geos" or "default_inference_geo" or "display_color" or "name"`
 
+        The workspace property that was changed
+
         - `"allowed_inference_geos"`
 
         - `"default_inference_geo"`
@@ -28672,7 +31802,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "platform_workspace_updated"`
 
@@ -28710,7 +31840,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `plugin_id: optional string`
 
@@ -28752,7 +31882,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `plugin_id: optional string`
 
@@ -28818,7 +31948,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "plugin_installation_preference_updated"`
 
@@ -28856,7 +31986,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `plugin_id: optional string`
 
@@ -28898,7 +32028,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `plugin_id: optional string`
 
@@ -28940,7 +32070,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "prepaid_auto_recharge_disabled"`
 
@@ -28978,7 +32108,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `target_amount: optional number`
 
@@ -29034,7 +32164,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "prepaid_extra_usage_auto_reload_disabled"`
 
@@ -29082,7 +32212,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "prepaid_extra_usage_auto_reload_enabled"`
 
@@ -29130,7 +32260,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "prepaid_extra_usage_auto_reload_settings_updated"`
 
@@ -29172,7 +32302,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "primary_owner_transferred"`
 
@@ -29212,7 +32342,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_archived"`
 
@@ -29252,7 +32382,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_created"`
 
@@ -29292,7 +32422,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_deleted"`
 
@@ -29350,7 +32480,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_document_access_failed"`
 
@@ -29394,7 +32524,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_document_deleted"`
 
@@ -29452,7 +32582,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_document_deletion_failed"`
 
@@ -29496,7 +32626,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_document_uploaded"`
 
@@ -29540,7 +32670,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_document_viewed"`
 
@@ -29596,7 +32726,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_file_access_failed"`
 
@@ -29652,7 +32782,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_file_deleted"`
 
@@ -29708,7 +32838,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_file_deletion_failed"`
 
@@ -29766,7 +32896,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_file_uploaded"`
 
@@ -29806,7 +32936,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_reported"`
 
@@ -29862,7 +32992,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_project_sharing_updated"`
 
@@ -29902,7 +33032,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `preview_only: optional boolean`
 
@@ -29948,7 +33078,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_pubsec_identity_configured"`
 
@@ -29998,7 +33128,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "rbac_role_assigned"`
 
@@ -30044,7 +33174,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "rbac_role_created"`
 
@@ -30086,7 +33216,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "rbac_role_deleted"`
 
@@ -30095,6 +33225,9 @@ curl https://api.anthropic.com/v1/compliance/activities \
   - `RbacRolePermissionAdded object { action, actor, resource_id, 7 more }`
 
     Admin added a permission to an RBAC custom role.
+
+    Emitted once per requested permission, including permissions the role
+    already had, so a retried request still produces a complete audit record.
 
     - `action: string`
 
@@ -30140,7 +33273,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "rbac_role_permission_added"`
 
@@ -30149,6 +33282,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
   - `RbacRolePermissionRemoved object { action, actor, resource_id, 7 more }`
 
     Admin removed a permission from an RBAC custom role.
+
+    Emitted once per requested permission, including permissions the role
+    already lacked, so a retried request still produces a complete audit
+    record.
 
     - `action: string`
 
@@ -30194,7 +33331,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "rbac_role_permission_removed"`
 
@@ -30244,7 +33381,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "rbac_role_unassigned"`
 
@@ -30286,7 +33423,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "rbac_role_updated"`
 
@@ -30334,7 +33471,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `resource_id: optional string`
 
@@ -30392,7 +33529,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `resource_id: optional string`
 
@@ -30438,7 +33575,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "sso_login_failed"`
 
@@ -30474,7 +33611,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "sso_login_initiated"`
 
@@ -30524,7 +33661,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "sso_login_succeeded"`
 
@@ -30576,7 +33713,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "sso_second_factor_magic_link"`
 
@@ -30628,7 +33765,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "scim_user_created"`
 
@@ -30680,7 +33817,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "scim_user_deleted"`
 
@@ -30732,7 +33869,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "scim_user_updated"`
 
@@ -30782,7 +33919,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "scoped_api_key_deleted"`
 
@@ -30836,7 +33973,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "scoped_api_key_updated"`
 
@@ -30874,7 +34011,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "seat_tier_changes_cancelled"`
 
@@ -30916,7 +34053,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "seat_tiers_purchased"`
 
@@ -30958,7 +34095,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "service_created"`
 
@@ -31000,7 +34137,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "service_deleted"`
 
@@ -31058,7 +34195,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "service_key_created"`
 
@@ -31104,7 +34241,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "service_key_revoked"`
 
@@ -31142,7 +34279,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "session_revoked"`
 
@@ -31194,7 +34331,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `share_id: optional string`
 
@@ -31248,7 +34385,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `share_id: optional string`
 
@@ -31302,7 +34439,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `share_id: optional string`
 
@@ -31356,7 +34493,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `skill_id: optional string`
 
@@ -31412,7 +34549,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `skill_id: optional string`
 
@@ -31454,7 +34591,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `skill_id: optional string`
 
@@ -31496,7 +34633,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `skill_id: optional string`
 
@@ -31552,7 +34689,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `skill_id: optional string`
 
@@ -31614,7 +34751,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "social_login_succeeded"`
 
@@ -31652,7 +34789,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "subscription_cancellation_scheduled"`
 
@@ -31694,7 +34831,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `previous_quantity: optional number`
 
@@ -31738,7 +34875,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `plan_type: optional string`
 
@@ -31780,7 +34917,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "subscription_resumed"`
 
@@ -31822,7 +34959,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `plan_type: optional string`
 
@@ -31876,11 +35013,339 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "subscription_upgraded"`
 
       - `"subscription_upgraded"`
+
+  - `TunnelArchived object { actor, tunnel_id, id, 4 more }`
+
+    An MCP tunnel was archived.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, service_account_id, user_agent, type }  or object { issuer, subject, audience, 3 more }`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `tunnel_id: string`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "tunnel_archived"`
+
+      - `"tunnel_archived"`
+
+  - `TunnelCertificateAdded object { actor, certificate_id, tunnel_id, 6 more }`
+
+    An inner-TLS CA certificate was added to a tunnel.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, service_account_id, user_agent, type }  or object { issuer, subject, audience, 3 more }`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `certificate_id: string`
+
+    - `tunnel_id: string`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `certificate_fingerprint: optional string`
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "tunnel_certificate_added"`
+
+      - `"tunnel_certificate_added"`
+
+  - `TunnelCertificateRevoked object { actor, certificate_id, tunnel_id, 6 more }`
+
+    An inner-TLS CA certificate was revoked from a tunnel.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, service_account_id, user_agent, type }  or object { issuer, subject, audience, 3 more }`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `certificate_id: string`
+
+    - `tunnel_id: string`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `certificate_fingerprint: optional string`
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "tunnel_certificate_revoked"`
+
+      - `"tunnel_certificate_revoked"`
+
+  - `TunnelCreated object { actor, tunnel_id, id, 4 more }`
+
+    An MCP tunnel was created.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, service_account_id, user_agent, type }  or object { issuer, subject, audience, 3 more }`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `tunnel_id: string`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "tunnel_created"`
+
+      - `"tunnel_created"`
 
   - `TunnelTokenMinted object { actor, token_id, id, 5 more }`
 
@@ -31916,13 +35381,95 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `token_name: optional string`
 
     - `type: optional "tunnel_token_minted"`
 
       - `"tunnel_token_minted"`
+
+  - `TunnelTokenRevealed object { actor, tunnel_id, tunnel_token_id, 5 more }`
+
+    The Cloudflare connector secret for a tunnel was revealed to the caller.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, service_account_id, user_agent, type }  or object { issuer, subject, audience, 3 more }`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `tunnel_id: string`
+
+    - `tunnel_token_id: string`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `type: optional "tunnel_token_revealed"`
+
+      - `"tunnel_token_revealed"`
 
   - `TunnelTokenRevoked object { actor, token_id, id, 4 more }`
 
@@ -31958,11 +35505,98 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "tunnel_token_revoked"`
 
       - `"tunnel_token_revoked"`
+
+  - `TunnelTokenRotated object { actor, tunnel_id, tunnel_token_id, 6 more }`
+
+    The Cloudflare connector secret for a tunnel was rotated.
+
+    `tunnel_token_id` is the id of the *newly-issued* token. The previous
+    token is invalidated by the rotation and its id is not recorded here.
+
+    - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, service_account_id, user_agent, type }  or object { issuer, subject, audience, 3 more }`
+
+      A federated external workload authenticated via a verified OIDC token.
+
+      Carries the verified issuer, subject, and audience claims from the
+      presented JWT.
+
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
+
+        - `email_address: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+        - `type: optional "user_actor"`
+
+          - `"user_actor"`
+
+      - `ServiceAccountActor object { ip_address, service_account_id, user_agent, type }`
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+        - `type: optional "service_account_actor"`
+
+          - `"service_account_actor"`
+
+      - `FederatedIdentityActor object { issuer, subject, audience, 3 more }`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string`
+
+        - `type: optional "federated_identity_actor"`
+
+          - `"federated_identity_actor"`
+
+        - `user_agent: optional string`
+
+    - `tunnel_id: string`
+
+    - `tunnel_token_id: string`
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+    - `organization_id: optional string`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `reason: optional string`
+
+    - `type: optional "tunnel_token_rotated"`
+
+      - `"tunnel_token_rotated"`
 
   - `UserConsentRecorded object { actor, consent_type, entity_id, 6 more }`
 
@@ -32002,7 +35636,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "user_consent_recorded"`
 
@@ -32048,7 +35682,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "user_consent_revoked"`
 
@@ -32116,7 +35750,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_user_role_updated"`
 
@@ -32140,7 +35774,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
         - `"user_actor"`
 
-    - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 19 more`
+    - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 18 more`
 
       - `FullName object { current_value, previous_value, type }`
 
@@ -32222,21 +35856,17 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
           - `"gdrive_enabled"`
 
-      - `GDriveIndexingEnabled object { current_value, previous_value, type }`
-
-        - `current_value: boolean`
-
-        - `previous_value: boolean`
-
-        - `type: optional "gdrive_indexing_enabled"`
-
-          - `"gdrive_indexing_enabled"`
-
       - `WebSearchEnabled object { current_value, previous_value, type }`
 
+        The web search setting was changed.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "web_search_enabled"`
 
@@ -32244,9 +35874,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `GeolocationEnabled object { current_value, previous_value, type }`
 
+        The geolocation setting was changed.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "geolocation_enabled"`
 
@@ -32356,9 +35992,15 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       - `ClaudeAPIInArtifactsEnabled object { current_value, previous_value, type }`
 
+        The Claude API in Artifacts setting was changed.
+
         - `current_value: boolean`
 
+          Setting value immediately after this change
+
         - `previous_value: boolean`
+
+          Setting value immediately before this change
 
         - `type: optional "claude_api_in_artifacts_enabled"`
 
@@ -32386,7 +36028,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "claude_user_settings_updated"`
 
@@ -32436,7 +36078,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "workspace_member_spend_limit_created"`
 
@@ -32482,7 +36124,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `spend_limit_id: optional string`
 
@@ -32536,7 +36178,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `spend_limit_id: optional string`
 
@@ -32590,7 +36232,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `type: optional "workspace_spend_limit_created"`
 
@@ -32632,7 +36274,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `organization_uuid: optional string`
 
-      Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibility. Prefer `organization_id`.
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
     - `spend_limit_id: optional string`
 
@@ -32732,9 +36374,6 @@ curl https://api.anthropic.com/v1/compliance/organizations \
 **get** `/v1/compliance/organizations/{org_uuid}/users`
 
 List current user members of an organization.
-
-Returns:
-List of user members with pagination info
 
 ### Path Parameters
 
@@ -33882,6 +37521,14 @@ Retrieves message history and file metadata for a specific chat.
 
   - `"desc"`
 
+- `tool_result_max_chars: optional number`
+
+  Maximum characters returned per tool-result text item. Items longer than this are shortened and the block's `truncated` field is set. Pass -1 to disable the limit.
+
+- `tool_use_input_max_chars: optional number`
+
+  Maximum characters of JSON-encoded tool input returned per tool_use block. Inputs longer than this are shortened and the block's `truncated` field is set. Pass -1 to disable the limit.
+
 - `updated_at: optional object { gt, gte, lt, lte }`
 
   - `gt: optional string`
@@ -33938,17 +37585,97 @@ Retrieves message history and file metadata for a specific chat.
 
       Artifact version ID e.g. 'claude_artifact_version_abc123'
 
-  - `content: array of object { text, type }`
+  - `content: array of object { text, type }  or object { id, input, integration_name, 4 more }  or object { content, integration_name, is_error, 5 more }`
 
     Content blocks within the message
 
-    - `text: string`
+    - `Text object { text, type }`
 
-      Text content from human or assistant
+      Text content block.
 
-    - `type: "text"`
+      - `text: string`
 
-      - `"text"`
+        Text content from human or assistant
+
+      - `type: "text"`
+
+        - `"text"`
+
+    - `ToolUse object { id, input, integration_name, 4 more }`
+
+      Tool invocation requested by the assistant.
+
+      - `id: string`
+
+        Tool-use ID, e.g. 'toolu_01AbC...'
+
+      - `input: string`
+
+        Arguments passed to the tool, as a JSON-encoded string. May be shortened — see the `truncated` field
+
+      - `integration_name: string`
+
+        Name of the integration that provides this tool, when applicable
+
+      - `mcp_server_url: string`
+
+        Base URL (scheme, host, and path only) of the MCP server that provides this tool, when applicable
+
+      - `name: string`
+
+        Name of the tool invoked
+
+      - `truncated: boolean`
+
+        True when `input` was shortened. Pass tool_use_input_max_chars=-1 to disable the limit
+
+      - `type: "tool_use"`
+
+        - `"tool_use"`
+
+    - `ToolResult object { content, integration_name, is_error, 5 more }`
+
+      Result returned by a tool invocation.
+
+      - `content: array of object { text, type }`
+
+        Text content returned by the tool. Generated files are surfaced via the message's `generated_files` list; other non-text item types (including images and links) are omitted.
+
+        - `text: string`
+
+          Text returned by the tool
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `integration_name: string`
+
+        Name of the integration that provides this tool, when applicable
+
+      - `is_error: boolean`
+
+        True when the tool reported an error
+
+      - `mcp_server_url: string`
+
+        Base URL (scheme, host, and path only) of the MCP server that provides this tool, when applicable
+
+      - `name: string`
+
+        Name of the tool that produced this result
+
+      - `tool_use_id: string`
+
+        ID of the tool_use block this result responds to
+
+      - `truncated: boolean`
+
+        True when one or more text items in `content` were shortened. Pass tool_result_max_chars=-1 to retrieve full content.
+
+      - `type: "tool_result"`
+
+        - `"tool_result"`
 
   - `created_at: string`
 
@@ -34155,17 +37882,97 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID/messages
 
       Artifact version ID e.g. 'claude_artifact_version_abc123'
 
-  - `content: array of object { text, type }`
+  - `content: array of object { text, type }  or object { id, input, integration_name, 4 more }  or object { content, integration_name, is_error, 5 more }`
 
     Content blocks within the message
 
-    - `text: string`
+    - `Text object { text, type }`
 
-      Text content from human or assistant
+      Text content block.
 
-    - `type: "text"`
+      - `text: string`
 
-      - `"text"`
+        Text content from human or assistant
+
+      - `type: "text"`
+
+        - `"text"`
+
+    - `ToolUse object { id, input, integration_name, 4 more }`
+
+      Tool invocation requested by the assistant.
+
+      - `id: string`
+
+        Tool-use ID, e.g. 'toolu_01AbC...'
+
+      - `input: string`
+
+        Arguments passed to the tool, as a JSON-encoded string. May be shortened — see the `truncated` field
+
+      - `integration_name: string`
+
+        Name of the integration that provides this tool, when applicable
+
+      - `mcp_server_url: string`
+
+        Base URL (scheme, host, and path only) of the MCP server that provides this tool, when applicable
+
+      - `name: string`
+
+        Name of the tool invoked
+
+      - `truncated: boolean`
+
+        True when `input` was shortened. Pass tool_use_input_max_chars=-1 to disable the limit
+
+      - `type: "tool_use"`
+
+        - `"tool_use"`
+
+    - `ToolResult object { content, integration_name, is_error, 5 more }`
+
+      Result returned by a tool invocation.
+
+      - `content: array of object { text, type }`
+
+        Text content returned by the tool. Generated files are surfaced via the message's `generated_files` list; other non-text item types (including images and links) are omitted.
+
+        - `text: string`
+
+          Text returned by the tool
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `integration_name: string`
+
+        Name of the integration that provides this tool, when applicable
+
+      - `is_error: boolean`
+
+        True when the tool reported an error
+
+      - `mcp_server_url: string`
+
+        Base URL (scheme, host, and path only) of the MCP server that provides this tool, when applicable
+
+      - `name: string`
+
+        Name of the tool that produced this result
+
+      - `tool_use_id: string`
+
+        ID of the tool_use block this result responds to
+
+      - `truncated: boolean`
+
+        True when one or more text items in `content` were shortened. Pass tool_result_max_chars=-1 to retrieve full content.
+
+      - `type: "tool_result"`
+
+        - `"tool_result"`
 
   - `created_at: string`
 
@@ -34237,6 +38044,10 @@ download the bytes.
 
   File ID
 
+- `claude_chat_ids: array of string`
+
+  Chats this file is attached to. A file can be referenced by messages across multiple chats.
+
 - `created_at: string`
 
   File creation timestamp
@@ -34280,6 +38091,9 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID \
   "created_at": "2024-01-15T10:30:00Z",
   "message_ids": [
     "claude_chat_msg_abc123"
+  ],
+  "claude_chat_ids": [
+    "claude_chat_def456"
   ]
 }
 ```
@@ -34357,7 +38171,7 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID/co
 
 ### File Retrieve Response
 
-- `FileRetrieveResponse object { id, created_at, filename, 4 more }`
+- `FileRetrieveResponse object { id, claude_chat_ids, created_at, 5 more }`
 
   File metadata for GET /v1/compliance/apps/chats/files/{claude_file_id}.
 
@@ -34367,6 +38181,10 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID/co
   - `id: string`
 
     File ID
+
+  - `claude_chat_ids: array of string`
+
+    Chats this file is attached to. A file can be referenced by messages across multiple chats.
 
   - `created_at: string`
 
@@ -34635,7 +38453,11 @@ are sorted chronologically (time ascending) by created_at.
 
   - `user: object { id, email_address }`
 
-    User information for project creator.
+    The user who created a project or project document.
+
+    Fields that reference this type are null when the creator's account has
+    been deleted or the creator is no longer a member of any organization
+    under the parent organization.
 
     - `id: string`
 
@@ -34689,9 +38511,6 @@ curl https://api.anthropic.com/v1/compliance/apps/projects \
 **get** `/v1/compliance/apps/projects/{project_id}`
 
 Get detailed information for a specific project.
-
-Returns:
-Detailed project information including description, instructions, and counts
 
 ### Path Parameters
 
@@ -34755,7 +38574,11 @@ Detailed project information including description, instructions, and counts
 
 - `user: object { id, email_address }`
 
-  User information for project creator.
+  The user who created a project or project document.
+
+  Fields that reference this type are null when the creator's account has
+  been deleted or the creator is no longer a member of any organization
+  under the parent organization.
 
   - `id: string`
 
@@ -34809,13 +38632,6 @@ Hard-deletes the project and all its associated data including:
 - Sync sources
 
 Project must have no attached chats - returns 409 if chats exist.
-
-Returns:
-ClaudeProjectDeleteResponse confirming the deletion
-
-Raises:
-ConflictException: If project has chats attached
-NotFoundException: If project doesn't exist or already deleted
 
 ### Path Parameters
 
@@ -34898,7 +38714,11 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
 
   - `user: object { id, email_address }`
 
-    User information for project creator.
+    The user who created a project or project document.
+
+    Fields that reference this type are null when the creator's account has
+    been deleted or the creator is no longer a member of any organization
+    under the parent organization.
 
     - `id: string`
 
@@ -34964,7 +38784,11 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
 
   - `user: object { id, email_address }`
 
-    User information for project creator.
+    The user who created a project or project document.
+
+    Fields that reference this type are null when the creator's account has
+    been deleted or the creator is no longer a member of any organization
+    under the parent organization.
 
     - `id: string`
 
@@ -35006,12 +38830,6 @@ GET /v1/compliance/apps/chats/files/{claude_file_id}/content endpoint.
 
 The text content of attached project documents can be fetched using the
 GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
-
-Returns:
-List of project attachments with pagination info
-
-Raises:
-NotFoundException: If project doesn't exist or project_id format is invalid
 
 ### Path Parameters
 
@@ -35196,9 +39014,6 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachmen
 
 Get detailed information for a specific project document.
 
-Returns:
-Project document information including content and metadata
-
 ### Path Parameters
 
 - `document_id: string`
@@ -35229,7 +39044,11 @@ Project document information including content and metadata
 
 - `user: object { id, email_address }`
 
-  User information for project creator.
+  The user who created a project or project document.
+
+  Fields that reference this type are null when the creator's account has
+  been deleted or the creator is no longer a member of any organization
+  under the parent organization.
 
   - `id: string`
 
@@ -35316,7 +39135,11 @@ consumer can dedupe or match hashes without downloading every document.
 
 - `user: object { id, email_address }`
 
-  User information for project creator.
+  The user who created a project or project document.
+
+  Fields that reference this type are null when the creator's account has
+  been deleted or the creator is no longer a member of any organization
+  under the parent organization.
 
   - `id: string`
 
@@ -35358,9 +39181,6 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 Delete a project document for compliance purposes.
 
 Hard-deletes the project document permanently.
-
-Returns:
-ComplianceProjectDocumentDeleteResponse confirming the deletion
 
 ### Path Parameters
 
@@ -35427,7 +39247,11 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 
   - `user: object { id, email_address }`
 
-    User information for project creator.
+    The user who created a project or project document.
+
+    Fields that reference this type are null when the creator's account has
+    been deleted or the creator is no longer a member of any organization
+    under the parent organization.
 
     - `id: string`
 
@@ -35478,7 +39302,11 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 
   - `user: object { id, email_address }`
 
-    User information for project creator.
+    The user who created a project or project document.
+
+    Fields that reference this type are null when the creator's account has
+    been deleted or the creator is no longer a member of any organization
+    under the parent organization.
 
     - `id: string`
 

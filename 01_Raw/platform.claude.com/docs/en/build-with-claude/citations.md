@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/citations
-fetched_at: 2026-06-01T05:54:49.194888+00:00
+fetched_at: 2026-06-08T05:24:57.454636+00:00
 fetch_method: mintlify_md
 ---
 
@@ -436,7 +436,7 @@ Plain text documents are automatically chunked into sentences. You can provide t
 
 ### PDF documents
 
-PDF documents can be provided as base64-encoded data or by `file_id`. PDF text is extracted and chunked into sentences. As image citations are not yet supported, PDFs that are scans of documents and do not contain extractable text will not be citable.
+PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PDF text is extracted and chunked into sentences. As image citations are not yet supported, PDFs that are scans of documents and do not contain extractable text will not be citable.
 
 <Tabs>
 <Tab title="Base64">
@@ -448,6 +448,17 @@ PDF documents can be provided as base64-encoded data or by `file_id`. PDF text i
         "media_type": "application/pdf",
         "data": base64_encoded_pdf_data,
     },
+    "title": "Document Title",  # optional
+    "context": "Context about the document that will not be cited from",  # optional
+    "citations": {"enabled": True},
+}
+```
+</Tab>
+<Tab title="URL">
+```python
+{
+    "type": "document",
+    "source": {"type": "url", "url": "https://example.com/document.pdf"},
     "title": "Document Title",  # optional
     "context": "Context about the document that will not be cited from",  # optional
     "citations": {"enabled": True},

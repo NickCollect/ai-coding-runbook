@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/projects/documents/delete
-fetched_at: 2026-05-25T05:15:57.056144+00:00
+fetched_at: 2026-06-08T05:25:08.848289+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,9 +11,6 @@ fetch_method: mintlify_md
 Delete a project document for compliance purposes.
 
 Hard-deletes the project document permanently.
-
-Returns:
-ComplianceProjectDocumentDeleteResponse confirming the deletion
 
 ### Path Parameters
 

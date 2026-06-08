@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools
-fetched_at: 2026-06-01T05:54:49.679961+00:00
+fetched_at: 2026-06-08T05:24:57.925959+00:00
 fetch_method: mintlify_md
 ---
 
@@ -300,7 +300,7 @@ void main() {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response = $client->messages->create(
     maxTokens: 1024,

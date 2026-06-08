@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/github
-fetched_at: 2026-06-01T05:54:51.101005+00:00
+fetched_at: 2026-06-08T05:24:59.838553+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ GitHub repositories are cached, so future sessions that use the same repository 
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 </Note>
 
-## GitHub MCP and Session Resources
+## GitHub MCP and session resources
 
 First, create an agent that declares the GitHub MCP server. The agent definition holds the server URL but no auth token:
 
@@ -595,7 +595,7 @@ resources = [
 
 ## Managing repositories on a running session
 
-After a session is created, you can list its repository resources and rotate their authorization tokens. Each resource has an `id` returned at session creation time (or via `resources.list`) that you use for updates. Repositories are attached for the lifetime of the session; to change which repositories are mounted, create a new session.
+After a session is created, you can list its repository resources and rotate their authorization tokens. Each resource has an `id` returned at session creation time (or through `resources.list`) that you use for updates. Repositories are attached for the lifetime of the session; to change which repositories are mounted, create a new session.
 
 <CodeGroup>
   
@@ -918,3 +918,17 @@ client.beta.sessions.events.send_(
 ````
 
 </CodeGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Session event stream" icon="lightning" href="/docs/en/managed-agents/events-and-streaming">
+    Stream events and steer the agent while it opens the pull request
+  </Card>
+  <Card title="MCP connector" icon="link" href="/docs/en/managed-agents/mcp-connector">
+    Connect more MCP servers to give the agent additional tools
+  </Card>
+  <Card title="Adding files" icon="file" href="/docs/en/managed-agents/files">
+    Mount files in the sandbox alongside your repositories
+  </Card>
+</CardGroup>

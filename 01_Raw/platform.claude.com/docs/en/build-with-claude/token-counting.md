@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/token-counting
-fetched_at: 2026-06-01T05:54:50.204905+00:00
+fetched_at: 2026-06-08T05:24:58.556683+00:00
 fetch_method: mintlify_md
 ---
 
@@ -176,7 +176,7 @@ public class CountTokensExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response = $client->messages->countTokens(
     messages: [
@@ -472,7 +472,7 @@ public class CountTokensWithToolsExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response = $client->messages->countTokens(
     messages: [
@@ -826,7 +826,7 @@ $imageUrl = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flav
 $imageMediaType = "image/jpeg";
 $imageData = base64_encode(file_get_contents($imageUrl));
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response = $client->messages->countTokens(
     messages: [
@@ -1184,7 +1184,7 @@ public class CountTokensThinkingExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response = $client->messages->countTokens(
     messages: [
@@ -1531,7 +1531,7 @@ public class CountTokensPdfExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $pdfBase64 = base64_encode(file_get_contents("document.pdf"));
 

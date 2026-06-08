@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/dreams
-fetched_at: 2026-06-01T05:54:51.187899+00:00
+fetched_at: 2026-06-08T05:24:59.972257+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,7 +11,7 @@ Let Claude reflect on past sessions to curate an agent's memory and surface new 
 ---
 
 <Tip>
-Dreaming is a Research Preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
+Dreaming is a research preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
 </Tip>
 
 Agents write to their [memory stores](/docs/en/managed-agents/memory) as they work, but these writes are local and incremental: over many sessions a memory store accumulates duplicates, contradictions, and stale entries.
@@ -180,7 +180,7 @@ puts dream.id # drm_01...
 
 </CodeGroup>
 
-Dreaming inputs include the pre-existing memory store and an array of sessions. The model selected will run the dreaming pipeline; during the research preview `claude-opus-4-8`, `claude-opus-4-7`, and `claude-sonnet-4-6` are supported. You can also provide additional guidance on dreaming run execution in `instructions`.
+Dreaming inputs include the pre-existing memory store and an array of sessions. The model selected will run the dreaming pipeline; during the research preview `claude-opus-4-8`, `claude-opus-4-7`, and `claude-sonnet-4-6` are supported. You can optionally pass `instructions` to steer the dreaming process; see [Steer with instructions](#steer-with-instructions).
 
 The response is the full `dream` resource with `status: "pending"`:
 
@@ -213,6 +213,12 @@ The response is the full `dream` resource with `status: "pending"`:
 <Tip>
 If you only have session transcripts and no existing store, [create an empty memory store](/docs/en/managed-agents/memory#create-a-memory-store) first and pass it as the `memory_store` input.
 </Tip>
+
+### Steer with instructions
+
+The optional `instructions` field steers what the dreaming pipeline synthesizes. It is applied throughout the pipeline: what to read closely, what to merge or drop, and how to structure the output store.
+
+Use `instructions` for high-level synthesis guidance such as focus areas ("focus on coding-style preferences"), content to preserve unchanged, or output conventions you want applied across the store. The pipeline is a synthesis pass over the inputs, not an editor applied to the text of the store, so imperative directives that target specific lines ("change sentence X to Y", "fix the count in section Z") generally produce no change. To make targeted edits to individual memories, use the [Memory Stores API](/docs/en/managed-agents/memory#view-and-edit-memories) on the output store directly.
 
 ## Track progress
 

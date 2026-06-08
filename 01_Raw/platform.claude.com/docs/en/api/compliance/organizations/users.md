@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/organizations/users
-fetched_at: 2026-05-25T05:15:56.188445+00:00
+fetched_at: 2026-06-08T05:25:07.567742+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,9 +11,6 @@ fetch_method: mintlify_md
 **get** `/v1/compliance/organizations/{org_uuid}/users`
 
 List current user members of an organization.
-
-Returns:
-List of user members with pagination info
 
 ### Path Parameters
 
