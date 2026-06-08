@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/features-overview
-fetched_at: 2026-06-01T05:54:51.291342+00:00
+fetched_at: 2026-06-08T05:25:03.700913+00:00
 fetch_method: mintlify_md
 ---
 
@@ -336,7 +336,7 @@ Each feature has its own guide with setup instructions, examples, and configurat
   </Card>
 
   <Card title="Hooks" icon="bolt" href="/en/hooks-guide">
-    Automate workflows with hooks
+    Automate actions with hooks
   </Card>
 
   <Card title="Plugins" icon="puzzle-piece" href="/en/plugins">

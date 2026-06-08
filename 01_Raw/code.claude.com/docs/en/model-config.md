@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/model-config
-fetched_at: 2026-06-01T05:54:52.615253+00:00
+fetched_at: 2026-06-08T05:25:06.404723+00:00
 fetch_method: mintlify_md
 ---
 
@@ -322,7 +322,7 @@ Note: `ANTHROPIC_SMALL_FAST_MODEL` is deprecated in favor of
 
 When deploying Claude Code through [Bedrock](/en/amazon-bedrock), [Vertex AI](/en/google-vertex-ai), [Foundry](/en/microsoft-foundry), or [Claude Platform on AWS](/en/claude-platform-on-aws), pin model versions before rolling out to users.
 
-Without pinning, Claude Code uses model aliases (`sonnet`, `opus`, `haiku`) that resolve to the latest version. When Anthropic releases a new model that isn't yet enabled in a user's account, Bedrock and Vertex AI users see a notice and fall back to the previous version for that session, while Foundry users see errors because Foundry has no equivalent startup check.
+Without pinning, Claude Code uses model aliases such as `sonnet`, `opus`, and `haiku` that resolve to a built-in default model ID for each provider. That default can lag the newest Anthropic release, and the model it points to may not yet be enabled in a user's account. When the default is unavailable, Bedrock and Vertex AI users see a notice and fall back to the previous version for that session, while Foundry users see errors because Foundry has no equivalent startup check.
 
 <Warning>
   Set all three model environment variables to specific version IDs as part of your initial setup. Pinning lets you control when your users move to a new model.
@@ -344,7 +344,7 @@ To enable [extended context](#extended-context) for a pinned model, append `[1m]
 export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-8[1m]'
 ```
 
-The `[1m]` suffix applies the 1M context window to all usage of that alias, including `opusplan`.
+The `[1m]` suffix applies the 1M context window to all usage of the `opus` and `sonnet` aliases. It does not extend the plan-mode Opus phase of `opusplan`, which [remains capped at 200K](#opusplan-model-setting).
 
 * Claude Code strips the suffix before sending the model ID to your provider.
 * Only append `[1m]` when the underlying model [supports 1M context](https://platform.claude.com/docs/en/build-with-claude/context-windows#1m-token-context-window).

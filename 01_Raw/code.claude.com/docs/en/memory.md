@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/memory
-fetched_at: 2026-06-01T05:54:52.114427+00:00
+fetched_at: 2026-06-08T05:25:05.921441+00:00
 fetch_method: mintlify_md
 ---
 
@@ -146,7 +146,7 @@ ln -s AGENTS.md CLAUDE.md
 
 On Windows, creating a symlink requires Administrator privileges or Developer Mode, so use the `@AGENTS.md` import instead.
 
-Running [`/init`](/en/commands) in a repo that already has an `AGENTS.md` reads it and incorporates the relevant parts into the generated `CLAUDE.md`. It also reads other tool configs like `.cursorrules` and `.windsurfrules`.
+Running [`/init`](/en/commands) in a repo that already has an `AGENTS.md` reads it and incorporates the relevant parts into the generated `CLAUDE.md`. It also reads other tool configs like `.cursorrules`, `.devin/rules/`, and `.windsurfrules`.
 
 ### How CLAUDE.md files load
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/tools-reference
-fetched_at: 2026-06-01T05:54:53.638167+00:00
+fetched_at: 2026-06-08T05:25:09.173388+00:00
 fetch_method: mintlify_md
 ---
 
@@ -139,9 +139,9 @@ Three checks must pass for an edit to apply:
 * **Match**: `old_string` must appear in the file exactly as written. A single character of whitespace or indentation difference is enough to miss.
 * **Uniqueness**: `old_string` must appear exactly once. When it appears more than once, Claude either supplies a longer string with enough surrounding context to pin down one occurrence, or sets `replace_all: true` to replace them all.
 
-Viewing a file with Bash also satisfies the read-before-edit requirement when the command is `cat`, `head`, `tail`, or `sed -n 'X,Yp'` on a single file with no pipes, redirects, or other flags. Piped output and other Bash commands do not count, and Claude must use Read before editing in those cases.
+Viewing a file with Bash also satisfies the read-before-edit requirement when the command is `cat`, `head`, `tail`, `sed -n 'X,Yp'`, `grep`, `egrep`, or `fgrep` on a single file with no pipes or redirects. Piped output and other Bash commands do not count, and Claude must use Read before editing in those cases.
 
-This affects edit eligibility only, not permissions. [Read and Edit deny rules](/en/permissions#tool-specific-permission-rules) also apply to file commands Claude Code recognizes in Bash, such as `cat`, `head`, `tail`, and `sed`, but not to arbitrary subprocesses that read or write files indirectly, like a Python or Node script that opens files itself. For OS-level enforcement that covers every process, [enable the sandbox](/en/sandboxing).
+This affects edit eligibility only, not permissions. [Read and Edit deny rules](/en/permissions#tool-specific-permission-rules) also apply to file commands Claude Code recognizes in Bash, such as `cat`, `head`, `tail`, `sed`, and `grep`, but not to arbitrary subprocesses that read or write files indirectly, like a Python or Node script that opens files itself. The set of commands recognized for deny rules is not the same as the read-before-edit list above: for example, `egrep` and `fgrep` count for read-before-edit but are not checked against Read deny rules. For OS-level enforcement that covers every process, [enable the sandbox](/en/sandboxing).
 
 ## Glob tool behavior
 
@@ -178,7 +178,8 @@ The LSP tool gives Claude code intelligence from a running language server. Afte
 * Jump to a symbol's definition
 * Find all references to a symbol
 * Get type information at a position
-* List symbols in a file or workspace
+* List symbols in a file
+* Search for a symbol by name across the workspace
 * Find implementations of an interface
 * Trace call hierarchies
 
@@ -281,7 +282,9 @@ A few behaviors shape the response Claude receives:
 * Responses are cached for 15 minutes, so repeated fetches of the same URL return quickly.
 * When a URL redirects to a different host, WebFetch returns a text result that names the original URL and the redirect target instead of following it. Claude then fetches the new URL with a second WebFetch call.
 
-In the default and `acceptEdits` permission modes, WebFetch prompts the first time it reaches a new domain. To allow a domain in advance without a prompt, add a permission rule like `WebFetch(domain:example.com)`. The `auto` and `bypassPermissions` [permission modes](/en/permissions#permission-modes) skip the prompt entirely.
+In the default and `acceptEdits` permission modes, WebFetch prompts the first time it reaches a new domain, except for a built-in set of preapproved documentation domains that fetch without a prompt. To allow another domain in advance without a prompt, add a permission rule like `WebFetch(domain:example.com)`. The `auto` and `bypassPermissions` [permission modes](/en/permissions#permission-modes) skip the prompt entirely.
+
+An explicit `WebFetch(domain:...)` rule in `deny`, `ask`, or `allow` takes precedence over the preapproved set, so you can block a preapproved domain or require a prompt for it.
 
 WebFetch sets a `User-Agent` header beginning with `Claude-User`, and an `Accept` header that prefers Markdown over HTML so servers that support content negotiation can return Markdown directly. [Sandbox](/en/sandboxing) network rules are configured separately, so a domain you want a sandboxed process to reach still needs an explicit sandbox permission rule.
 

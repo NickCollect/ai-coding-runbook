@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/troubleshoot-install
-fetched_at: 2026-05-25T05:15:53.413819+00:00
+fetched_at: 2026-06-08T05:25:09.078774+00:00
 fetch_method: mintlify_md
 ---
 
@@ -60,6 +60,8 @@ The installer downloads from `downloads.claude.ai`. Verify you can reach it:
 ```bash theme={null}
 curl -sI https://downloads.claude.ai/claude-code-releases/latest
 ```
+
+In PowerShell, run `curl.exe -sI` instead. PowerShell aliases `curl` to `Invoke-WebRequest`, which rejects the `-sI` flags.
 
 An `HTTP/2 200` line means you reached the server. If you see no output, `Could not resolve host`, or a connection timeout, your network is blocking the connection. Common causes:
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins-reference
-fetched_at: 2026-06-01T05:54:52.867731+00:00
+fetched_at: 2026-06-08T05:25:07.390770+00:00
 fetch_method: mintlify_md
 ---
 
@@ -249,18 +249,16 @@ LSP integration provides:
 
 **Optional fields:**
 
-| Field                   | Description                                               |
-| :---------------------- | :-------------------------------------------------------- |
-| `args`                  | Command-line arguments for the LSP server                 |
-| `transport`             | Communication transport: `stdio` (default) or `socket`    |
-| `env`                   | Environment variables to set when starting the server     |
-| `initializationOptions` | Options passed to the server during initialization        |
-| `settings`              | Settings passed via `workspace/didChangeConfiguration`    |
-| `workspaceFolder`       | Workspace folder path for the server                      |
-| `startupTimeout`        | Max time to wait for server startup (milliseconds)        |
-| `shutdownTimeout`       | Max time to wait for graceful shutdown (milliseconds)     |
-| `restartOnCrash`        | Whether to automatically restart the server if it crashes |
-| `maxRestarts`           | Maximum number of restart attempts before giving up       |
+| Field                   | Description                                            |
+| :---------------------- | :----------------------------------------------------- |
+| `args`                  | Command-line arguments for the LSP server              |
+| `transport`             | Communication transport: `stdio` (default) or `socket` |
+| `env`                   | Environment variables to set when starting the server  |
+| `initializationOptions` | Options passed to the server during initialization     |
+| `settings`              | Settings passed via `workspace/didChangeConfiguration` |
+| `workspaceFolder`       | Workspace folder path for the server                   |
+| `startupTimeout`        | Max time to wait for server startup (milliseconds)     |
+| `maxRestarts`           | Maximum number of restart attempts before giving up    |
 
 <Warning>
   **You must install the language server binary separately.** LSP plugins configure how Claude Code connects to a language server, but they don't include the server itself. If you see `Executable not found in $PATH` in the `/plugin` Errors tab, install the required binary for your language.
@@ -1033,6 +1031,8 @@ claude plugin list [options]
 | `--json`      | Output as JSON                                                 |         |
 | `--available` | Include available plugins from marketplaces. Requires `--json` |         |
 | `-h, --help`  | Display help for command                                       |         |
+
+Within an interactive session, `/plugin list` prints the same listing inline. The interactive form accepts `--enabled` or `--disabled` to show only plugins in that state, and `ls` as a shorthand for `list`.
 
 ### plugin details
 

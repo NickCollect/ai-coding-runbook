@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/security-guidance
-fetched_at: 2026-06-01T05:54:53.465684+00:00
+fetched_at: 2026-06-08T05:25:08.240727+00:00
 fetch_method: mintlify_md
 ---
 
@@ -241,5 +241,5 @@ Common reasons a review layer skips without a message in the conversation:
 To go deeper on the pieces this page touches:
 
 * [Code Review](/en/code-review): set up the PR-time multi-agent review
-* [Automate workflows with hooks](/en/hooks-guide): build your own checks at the same lifecycle points
+* [Automate actions with hooks](/en/hooks-guide): build your own checks at the same lifecycle points
 * [Discover and install plugins](/en/discover-plugins#official-anthropic-marketplace): browse other official plugins

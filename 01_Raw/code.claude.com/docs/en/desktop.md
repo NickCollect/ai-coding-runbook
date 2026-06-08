@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/desktop
-fetched_at: 2026-06-01T05:54:50.754053+00:00
+fetched_at: 2026-06-08T05:25:02.985054+00:00
 fetch_method: mintlify_md
 ---
 
@@ -84,7 +84,7 @@ The `dontAsk` permission mode is available only in the [CLI](/en/permission-mode
 
 <span id="auto-mode-availability" />
 
-Auto mode is a research preview available to all users on the Anthropic API. It is not available on third-party providers. It requires Claude Opus 4.6 or later, or Sonnet 4.6.
+Auto mode is a research preview available to all users on the Anthropic API and requires Claude Opus 4.6 or later, or Sonnet 4.6. In Enterprise deployments that route Desktop to Google Cloud Vertex AI, auto mode is off until you [set `CLAUDE_CODE_ENABLE_AUTO_MODE`](/en/permission-modes#enable-auto-mode-on-bedrock-vertex-ai-or-foundry), and only Claude Opus 4.7 and Opus 4.8 are supported there.
 
 <Tip title="Best practice">
   Start complex tasks in Plan mode so Claude maps out an approach before making changes. Once you approve the plan, switch to Auto accept edits or Ask permissions to execute it. See [explore first, then plan, then code](/en/best-practices#explore-first-then-plan-then-code) for more on this workflow.
@@ -682,7 +682,9 @@ Desktop and CLI read the same configuration files, so your setup carries over:
 * **Models**: Sonnet, Opus, and Haiku are available in both. In Desktop, select the model from the dropdown next to the send button. You can change the model mid-session from the same dropdown.
 
 <Note>
-  **MCP servers: desktop chat app vs Claude Code**: MCP servers configured for the Claude Desktop chat app in `claude_desktop_config.json` are separate from Claude Code and will not appear in the Code tab. To use MCP servers in Claude Code, configure them in `~/.claude.json` or your project's `.mcp.json` file. See [MCP configuration](/en/mcp#installing-mcp-servers) for details.
+  **MCP servers from the Claude Desktop chat app**: the Desktop app loads MCP servers from `claude_desktop_config.json` into Code tab sessions, alongside servers from `~/.claude.json` and `.mcp.json`. A server defined in `claude_desktop_config.json` is available in both the Desktop chat surface and the Code tab.
+
+  The standalone CLI does not read `claude_desktop_config.json`. On macOS and WSL, run `claude mcp add-from-claude-desktop` to copy those servers into `~/.claude.json`. See [Import MCP servers from Claude Desktop](/en/mcp#import-mcp-servers-from-claude-desktop) for the import flow and scope options.
 </Note>
 
 ### Feature comparison

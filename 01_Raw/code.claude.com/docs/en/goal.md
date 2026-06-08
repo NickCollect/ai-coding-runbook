@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/goal
-fetched_at: 2026-05-18T05:02:44.760776+00:00
+fetched_at: 2026-06-08T05:25:04.537785+00:00
 fetch_method: mintlify_md
 ---
 
@@ -27,12 +27,12 @@ Use a goal for substantial work with a verifiable end state:
 
 This page covers how to:
 
-* [Compare autonomous workflow approaches](#compare-to-other-autonomous-workflows): `/loop`, Stop hooks, and auto mode
+* [Compare ways to keep a session running](#compare-ways-to-keep-a-session-running): `/loop`, Stop hooks, and auto mode
 * [Set a goal](#set-a-goal) and [write an effective condition](#write-an-effective-condition)
 * [Check status](#check-status), [clear early](#clear-a-goal), and [run non-interactively](#run-non-interactively)
 * See [how evaluation works](#how-evaluation-works) and [requirements](#requirements)
 
-## Compare to other autonomous workflows
+## Compare ways to keep a session running
 
 Three approaches keep the current session running between prompts. Pick based on what should start the next turn:
 

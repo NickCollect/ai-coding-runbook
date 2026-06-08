@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/quickstart
-fetched_at: 2026-06-01T05:54:48.725411+00:00
+fetched_at: 2026-06-08T05:24:58.935259+00:00
 fetch_method: mintlify_md
 ---
 
@@ -210,15 +210,23 @@ The message handling inside the loop filters for human-readable output. Without 
 Your agent is ready. Run it with the following command:
 
 <Tabs>
-  <Tab title="Python">
-    ```bash theme={null}
-    python3 agent.py
-    ```
-  </Tab>
-
   <Tab title="TypeScript">
     ```bash theme={null}
     npx tsx agent.ts
+    ```
+  </Tab>
+
+  <Tab title="Python (uv)">
+    ```bash theme={null}
+    uv run agent.py
+    ```
+  </Tab>
+
+  <Tab title="Python (pip)">
+    With your virtual environment still activated:
+
+    ```bash theme={null}
+    python agent.py
     ```
   </Tab>
 </Tabs>

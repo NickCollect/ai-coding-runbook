@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/discover-plugins
-fetched_at: 2026-06-01T05:54:51.197028+00:00
+fetched_at: 2026-06-08T05:25:03.487951+00:00
 fetch_method: mintlify_md
 ---
 
@@ -304,6 +304,14 @@ When you install a plugin that declares dependencies, the install output lists w
 
 You can also manage plugins with direct commands.
 
+List installed plugins without opening the menu:
+
+```shell theme={null}
+/plugin list
+```
+
+Pass `--enabled` or `--disabled` to show only plugins in that state.
+
 Disable a plugin without uninstalling:
 
 ```shell theme={null}
@@ -338,6 +346,8 @@ When you install, enable, or disable plugins during a session, run `/reload-plug
 ```
 
 Claude Code reloads all active plugins and shows counts for plugins, skills, agents, hooks, plugin MCP servers, and plugin LSP servers.
+
+Reloading has a token cost on the next request: newly loaded components announce themselves in content appended to the conversation, while the existing history still reads from the prompt cache. A plugin that provides MCP servers costs more when its tools aren't deferred by [tool search](/en/mcp#scale-with-mcp-tool-search): the change invalidates the cache and the next request re-reads the entire conversation. See [enabling or disabling a plugin](/en/prompt-caching#enabling-or-disabling-a-plugin) for details.
 
 ## Manage marketplaces
 

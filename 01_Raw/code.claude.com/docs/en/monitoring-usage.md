@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/monitoring-usage
-fetched_at: 2026-06-01T05:54:52.518128+00:00
+fetched_at: 2026-06-08T05:25:06.237834+00:00
 fetch_method: mintlify_md
 ---
 
@@ -112,12 +112,13 @@ For `grpc`, the OpenTelemetry SDK reads the standard OTLP variables directly, so
 
 The following environment variables control which attributes are included in metrics to manage cardinality:
 
-| Environment Variable                | Description                                                           | Default Value | Example to Disable |
-| ----------------------------------- | --------------------------------------------------------------------- | ------------- | ------------------ |
-| `OTEL_METRICS_INCLUDE_SESSION_ID`   | Include session.id attribute in metrics                               | `true`        | `false`            |
-| `OTEL_METRICS_INCLUDE_VERSION`      | Include app.version attribute in metrics                              | `false`       | `true`             |
-| `OTEL_METRICS_INCLUDE_ACCOUNT_UUID` | Include user.account\_uuid and user.account\_id attributes in metrics | `true`        | `false`            |
-| `OTEL_METRICS_INCLUDE_ENTRYPOINT`   | Include app.entrypoint attribute in metrics                           | `false`       | `true`             |
+| Environment Variable                       | Description                                                                     | Default Value | Example to Disable |
+| ------------------------------------------ | ------------------------------------------------------------------------------- | ------------- | ------------------ |
+| `OTEL_METRICS_INCLUDE_SESSION_ID`          | Include session.id attribute in metrics                                         | `true`        | `false`            |
+| `OTEL_METRICS_INCLUDE_VERSION`             | Include app.version attribute in metrics                                        | `false`       | `true`             |
+| `OTEL_METRICS_INCLUDE_ACCOUNT_UUID`        | Include user.account\_uuid and user.account\_id attributes in metrics           | `true`        | `false`            |
+| `OTEL_METRICS_INCLUDE_ENTRYPOINT`          | Include app.entrypoint attribute in metrics                                     | `false`       | `true`             |
+| `OTEL_METRICS_INCLUDE_RESOURCE_ATTRIBUTES` | Include keys from `OTEL_RESOURCE_ATTRIBUTES` as attributes on metric datapoints | `true`        | `false`            |
 
 These variables help control the cardinality of metrics, which affects storage requirements and query performance in your metrics backend. Lower cardinality generally means better performance and lower storage costs but less granular data for analysis.
 
@@ -207,17 +208,19 @@ Each retry attempt is also recorded as a `gen_ai.request.attempt` span event wit
 
 **`claude_code.tool`**
 
-| Attribute         | Description                                                                                                        | Gated by                |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------ | ----------------------- |
-| `tool_name`       | Tool name                                                                                                          |                         |
-| `duration_ms`     | Wall-clock duration including permission wait and execution                                                        |                         |
-| `result_tokens`   | Approximate token size of the tool result                                                                          |                         |
-| `agent_id`        | Identifier of the subagent or teammate that ran the tool. Absent on the main session                               |                         |
-| `parent_agent_id` | Identifier of the agent that spawned this one. Absent for the main session and for agents spawned directly from it |                         |
-| `file_path`       | Target file path for Read, Edit, and Write tools                                                                   | `OTEL_LOG_TOOL_DETAILS` |
-| `full_command`    | Command string for the Bash tool                                                                                   | `OTEL_LOG_TOOL_DETAILS` |
-| `skill_name`      | Skill name for the Skill tool                                                                                      | `OTEL_LOG_TOOL_DETAILS` |
-| `subagent_type`   | Subagent type for the Agent tool or legacy Task tool                                                               | `OTEL_LOG_TOOL_DETAILS` |
+| Attribute             | Description                                                                                                                                                                                                                          | Gated by                |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------- |
+| `tool_name`           | Tool name                                                                                                                                                                                                                            |                         |
+| `duration_ms`         | Wall-clock duration including permission wait and execution                                                                                                                                                                          |                         |
+| `result_tokens`       | Approximate token size of the tool result                                                                                                                                                                                            |                         |
+| `agent_id`            | Identifier of the subagent or teammate that ran the tool. Absent on the main session                                                                                                                                                 |                         |
+| `parent_agent_id`     | Identifier of the agent that spawned this one. Absent for the main session and for agents spawned directly from it                                                                                                                   |                         |
+| `tool_use_id`         | The model's `tool_use` block id for this call. Matches the `tool_use_id` on the [tool\_result](#tool-result-event) and [tool\_decision](#tool-decision-event) events and in hook payloads, so you can join the span to those records |                         |
+| `gen_ai.tool.call.id` | Same value as `tool_use_id`. OpenTelemetry GenAI semantic convention                                                                                                                                                                 |                         |
+| `file_path`           | Target file path for Read, Edit, and Write tools                                                                                                                                                                                     | `OTEL_LOG_TOOL_DETAILS` |
+| `full_command`        | Command string for the Bash tool                                                                                                                                                                                                     | `OTEL_LOG_TOOL_DETAILS` |
+| `skill_name`          | Skill name for the Skill tool                                                                                                                                                                                                        | `OTEL_LOG_TOOL_DETAILS` |
+| `subagent_type`       | Subagent type for the Agent tool or legacy Task tool                                                                                                                                                                                 | `OTEL_LOG_TOOL_DETAILS` |
 
 When `OTEL_LOG_TOOL_CONTENT=1`, this span also records a `tool.output` span event whose attributes contain the tool's input and output bodies, truncated at 60 KB per attribute.
 
@@ -231,11 +234,13 @@ When `OTEL_LOG_TOOL_CONTENT=1`, this span also records a `tool.output` span even
 
 **`claude_code.tool.execution`**
 
-| Attribute     | Description                                                                                                                                       | Gated by                |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| `duration_ms` | Time spent running the tool body                                                                                                                  |                         |
-| `success`     | `true` or `false`                                                                                                                                 |                         |
-| `error`       | Error category string when execution failed, such as `Error:ENOENT` or `ShellError`. Contains the full error message instead when the gate is set | `OTEL_LOG_TOOL_DETAILS` |
+| Attribute             | Description                                                                                                                                       | Gated by                |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| `duration_ms`         | Time spent running the tool body                                                                                                                  |                         |
+| `tool_use_id`         | Same value as on the parent `claude_code.tool` span                                                                                               |                         |
+| `gen_ai.tool.call.id` | Same value as `tool_use_id`. OpenTelemetry GenAI semantic convention                                                                              |                         |
+| `success`             | `true` or `false`                                                                                                                                 |                         |
+| `error`               | Error category string when execution failed, such as `Error:ENOENT` or `ShellError`. Contains the full error message instead when the gate is set | `OTEL_LOG_TOOL_DETAILS` |
 
 **`claude_code.hook`**
 
@@ -308,6 +313,10 @@ These custom attributes will be included in all metrics and events, allowing you
 * Track costs per cost center
 * Create team-specific dashboards
 * Set up alerts for specific teams
+
+Claude Code attaches these values as attributes on every metric datapoint and event record, in addition to sending them in the OTLP resource block. Because most metrics backends expose datapoint attributes as queryable labels, you can group and filter metrics by your custom keys directly. Custom keys never override the [standard attributes](#standard-attributes) such as `user.id` or `session.id`: when a key collides, Claude Code keeps the built-in value.
+
+Each custom key becomes a label on every metric series, so high-cardinality values increase storage cost in your metrics backend. To send custom attributes in the resource block only and omit them from datapoint labels, set `OTEL_METRICS_INCLUDE_RESOURCE_ATTRIBUTES=false`. See [Metrics cardinality control](#metrics-cardinality-control).
 
 <Warning>
   **Important formatting requirements for OTEL\_RESOURCE\_ATTRIBUTES:**
@@ -389,17 +398,18 @@ export OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317
 
 All metrics and events share these standard attributes:
 
-| Attribute           | Description                                                                                                 | Controlled By                                       |
-| ------------------- | ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| `session.id`        | Unique session identifier                                                                                   | `OTEL_METRICS_INCLUDE_SESSION_ID` (default: true)   |
-| `app.version`       | Current Claude Code version                                                                                 | `OTEL_METRICS_INCLUDE_VERSION` (default: false)     |
-| `app.entrypoint`    | How the session was launched, such as `cli`, `sdk-cli`, `sdk-ts`, `sdk-py`, or `claude-vscode`              | `OTEL_METRICS_INCLUDE_ENTRYPOINT` (default: false)  |
-| `organization.id`   | Organization UUID (when authenticated)                                                                      | Always included when available                      |
-| `user.account_uuid` | Account UUID (when authenticated)                                                                           | `OTEL_METRICS_INCLUDE_ACCOUNT_UUID` (default: true) |
-| `user.account_id`   | Account ID in tagged format matching Anthropic admin APIs (when authenticated), such as `user_01BWBeN28...` | `OTEL_METRICS_INCLUDE_ACCOUNT_UUID` (default: true) |
-| `user.id`           | Anonymous device/installation identifier, generated per Claude Code installation                            | Always included                                     |
-| `user.email`        | User email address (when authenticated via OAuth)                                                           | Always included when available                      |
-| `terminal.type`     | Terminal type, such as `iTerm.app`, `vscode`, `cursor`, or `tmux`                                           | Always included when detected                       |
+| Attribute                            | Description                                                                                                                           | Controlled By                                              |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `session.id`                         | Unique session identifier                                                                                                             | `OTEL_METRICS_INCLUDE_SESSION_ID` (default: true)          |
+| `app.version`                        | Current Claude Code version                                                                                                           | `OTEL_METRICS_INCLUDE_VERSION` (default: false)            |
+| `app.entrypoint`                     | How the session was launched, such as `cli`, `sdk-cli`, `sdk-ts`, `sdk-py`, or `claude-vscode`                                        | `OTEL_METRICS_INCLUDE_ENTRYPOINT` (default: false)         |
+| `organization.id`                    | Organization UUID (when authenticated)                                                                                                | Always included when available                             |
+| `user.account_uuid`                  | Account UUID (when authenticated)                                                                                                     | `OTEL_METRICS_INCLUDE_ACCOUNT_UUID` (default: true)        |
+| `user.account_id`                    | Account ID in tagged format matching Anthropic admin APIs (when authenticated), such as `user_01BWBeN28...`                           | `OTEL_METRICS_INCLUDE_ACCOUNT_UUID` (default: true)        |
+| `user.id`                            | Anonymous device/installation identifier, generated per Claude Code installation                                                      | Always included                                            |
+| `user.email`                         | User email address (when authenticated via OAuth)                                                                                     | Always included when available                             |
+| `terminal.type`                      | Terminal type, such as `iTerm.app`, `vscode`, `cursor`, or `tmux`                                                                     | Always included when detected                              |
+| Keys from `OTEL_RESOURCE_ATTRIBUTES` | Custom attributes you set, such as `department` or `team.id`. See [Multi-team organization support](#multi-team-organization-support) | `OTEL_METRICS_INCLUDE_RESOURCE_ATTRIBUTES` (default: true) |
 
 Events additionally include the following attributes. These are never attached to metrics because they would cause unbounded cardinality:
 
@@ -626,6 +636,21 @@ Logged when an API request to Claude fails.
 * `effort`: [Effort level](/en/model-config#adjust-effort-level) applied to the request. Absent when the model does not support effort.
 * `agent.name`, `skill.name`, `plugin.name`, `marketplace.name`, `mcp_server.name`, `mcp_tool.name`: Skill, plugin, agent, and MCP attribution for the request. See [Cost counter](#cost-counter) for definitions and redaction behavior.
 
+#### API refusal event
+
+Logged when an API request returns `stop_reason: "refusal"`. Refusals arrive on a successful response stream rather than as an HTTP error, so the `api_error` event does not fire for them. This event lets you track refusal frequency.
+
+**Event Name**: `claude_code.api_refusal`
+
+**Attributes**:
+
+* All [standard attributes](#standard-attributes)
+* `event.name`: `"api_refusal"`
+* `event.timestamp`: ISO 8601 timestamp
+* `event.sequence`: monotonically increasing counter for ordering events within a session
+* `model`: Model identifier from the request
+* `request_id`: Anthropic API request ID from the response's `request-id` header, such as `"req_011..."`. Present only when the API returns one.
+
 #### API request body event
 
 Logged for each API request attempt when `OTEL_LOG_RAW_API_BODIES` is set. One event is emitted per attempt, so retries with adjusted parameters each produce their own event.
@@ -745,6 +770,9 @@ Logged when an MCP server connects, disconnects, or fails to connect.
 * `server_scope`: Scope the server is configured at, such as `"user"`, `"project"`, or `"local"`
 * `duration_ms`: Connection attempt duration in milliseconds
 * `error_code`: Error code when the connection failed
+* `is_plugin`: `true` when the server is provided by a plugin, `false` otherwise
+* `plugin_id_hash` (when `is_plugin` is `true`): Stable hash of the plugin name and marketplace, for grouping events by plugin without exposing the name
+* `plugin.name` (when `is_plugin` is `true`): Name of the plugin that provides the server. For third-party plugins this is the literal string `"third-party"` unless `OTEL_LOG_TOOL_DETAILS=1`; this protects third-party plugin names from appearing in logs by default. Plugins from official Anthropic sources are always identified by name. The `plugin_id_hash` and `plugin.name` attributes flow to your own monitoring backend and are not sent to Anthropic
 * `server_name` (when `OTEL_LOG_TOOL_DETAILS=1`): Configured server name
 * `error` (when `OTEL_LOG_TOOL_DETAILS=1`): Full error message when the connection failed
 
@@ -820,6 +848,7 @@ Logged when a skill is invoked, whether Claude calls it through the Skill tool o
 * `skill.name`: Name of the skill. For user-defined and third-party plugin skills the value is the placeholder `"custom_skill"` unless `OTEL_LOG_TOOL_DETAILS=1`
 * `invocation_trigger`: How the skill was triggered (`"user-slash"`, `"claude-proactive"`, or `"nested-skill"`)
 * `skill.source`: Where the skill was loaded from (for example, `"bundled"`, `"userSettings"`, `"projectSettings"`, `"plugin"`)
+* `skill.kind`: `"workflow"` when the skill is a workflow skill. Absent otherwise
 * `plugin.name` (when `OTEL_LOG_TOOL_DETAILS=1` or the plugin is from an official marketplace): Name of the owning plugin when the skill is provided by a plugin
 * `marketplace.name` (when `OTEL_LOG_TOOL_DETAILS=1` or the plugin is from an official marketplace): Marketplace the owning plugin was installed from, when the skill is provided by a plugin
 
@@ -1059,7 +1088,7 @@ Without `OTEL_LOG_TOOL_DETAILS`, these events drop the identifying detail:
 
 * `tool_result`: keeps `tool_name` and `mcp_server_scope`, omits `mcp_server_name`, `mcp_tool_name`, and arguments
 * `tool_decision`: keeps `tool_name`, omits `tool_parameters`
-* `mcp_server_connection`: omits `server_name` and the error message
+* `mcp_server_connection`: omits `server_name` and the error message, but keeps `is_plugin`, `plugin_id_hash`, and `plugin.name`, with non-Anthropic plugin names redacted to the literal `"third-party"`, so plugin-provided servers remain distinguishable without detailed logging
 
 ### Map security questions to events
 
@@ -1071,7 +1100,7 @@ When building detection rules, look up the signal you want to monitor and query 
 | Permission mode escalation                | `permission_mode_changed`                                                             | `from_mode`, `to_mode`, `trigger`                            |
 | Policy hook blocked an action             | `hook_execution_complete`                                                             | `hook_event`, `num_blocking`                                 |
 | Login, logout, and authentication failure | `auth`                                                                                | `action`, `success`, `error_category`                        |
-| MCP server connect or failure             | `mcp_server_connection`                                                               | `status`, `server_name`, `error_code`                        |
+| MCP server connect or failure             | `mcp_server_connection`                                                               | `status`, `server_name`, `is_plugin`, `error_code`           |
 | Plugin installed and its source           | `plugin_installed`                                                                    | `plugin.name`, `marketplace.name`, `marketplace.is_official` |
 | Commands run and files touched            | `tool_result` (executed) or `tool_decision` (rejected) with `OTEL_LOG_TOOL_DETAILS=1` | `tool_parameters`; `tool_input` (`tool_result` only)         |
 

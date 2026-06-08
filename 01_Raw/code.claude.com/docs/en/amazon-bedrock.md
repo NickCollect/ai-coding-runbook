@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/amazon-bedrock
-fetched_at: 2026-06-01T05:54:49.847282+00:00
+fetched_at: 2026-06-08T05:25:00.469679+00:00
 fetch_method: mintlify_md
 ---
 
@@ -230,12 +230,13 @@ When enabling Bedrock for Claude Code, keep the following in mind:
 
 * `AWS_REGION` is a required environment variable. Claude Code does not read from the `.aws` config file for this setting.
 * When using Bedrock, the `/logout` command is unavailable since authentication is handled through AWS credentials.
+* The WebSearch tool is not available on Bedrock. See [WebSearch tool behavior](/en/tools-reference#websearch-tool-behavior).
 * You can use settings files for environment variables like `AWS_PROFILE` that you don't want to leak to other processes. See [Settings](/en/settings) for more information.
 
 ### 4. Pin model versions
 
 <Warning>
-  Pin specific model versions when deploying to multiple users. Without pinning, model aliases such as `sonnet` and `opus` resolve to the latest version, which may not yet be available in your Bedrock account when Anthropic releases an update. Claude Code [falls back](#startup-model-checks) to the previous version at startup when the latest is unavailable, but pinning lets you control when your users move to a new model.
+  Pin specific model versions when deploying to multiple users. Without pinning, model aliases such as `sonnet` and `opus` resolve to Claude Code's built-in default for Bedrock, which can lag the newest release and may not yet be available in your account. Claude Code [falls back](#startup-model-checks) to the previous version at startup when the default is unavailable, but pinning lets you control when your users move to a new model.
 </Warning>
 
 Set these environment variables to specific Bedrock model IDs.

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins
-fetched_at: 2026-06-01T05:54:53.032189+00:00
+fetched_at: 2026-06-08T05:25:07.193769+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,10 +20,10 @@ Looking to install existing plugins? See [Discover and install plugins](/en/disc
 
 Claude Code supports two ways to add custom skills, agents, and hooks:
 
-| Approach                                                    | Skill names          | Best for                                                                                        |
-| :---------------------------------------------------------- | :------------------- | :---------------------------------------------------------------------------------------------- |
-| **Standalone** (`.claude/` directory)                       | `/hello`             | Personal workflows, project-specific customizations, quick experiments                          |
-| **Plugins** (directories with `.claude-plugin/plugin.json`) | `/plugin-name:hello` | Sharing with teammates, distributing to community, versioned releases, reusable across projects |
+| Approach                                                                                                        | Skill names          | Best for                                                                                        |
+| :-------------------------------------------------------------------------------------------------------------- | :------------------- | :---------------------------------------------------------------------------------------------- |
+| **Standalone** (`.claude/` directory)                                                                           | `/hello`             | Personal workflows, project-specific customizations, quick experiments                          |
+| **Plugins** (self-contained directories with skills, agents, hooks, or a `.claude-plugin/plugin.json` manifest) | `/plugin-name:hello` | Sharing with teammates, distributing to community, versioned releases, reusable across projects |
 
 **Use standalone configuration when**:
 
@@ -60,7 +60,7 @@ This quickstart walks you through creating a plugin with a custom skill. You'll 
 
 <Steps>
   <Step title="Create the plugin directory">
-    Every plugin lives in its own directory containing a manifest and your skills, agents, or hooks. Create one now:
+    Every plugin lives in its own directory containing your skills, agents, or hooks, optionally alongside a `.claude-plugin/plugin.json` manifest. Create one now:
 
     ```bash theme={null}
     mkdir my-first-plugin

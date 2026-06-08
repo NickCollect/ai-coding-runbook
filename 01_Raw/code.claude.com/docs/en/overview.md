@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/overview
-fetched_at: 2026-05-25T05:15:53.243022+00:00
+fetched_at: 2026-06-08T05:25:06.417741+00:00
 fetch_method: mintlify_md
 ---
 
@@ -164,7 +164,7 @@ Here are some of the ways you can use Claude Code:
   </Accordion>
 
   <Accordion title="Connect your tools with MCP" icon="plug">
-    The [Model Context Protocol (MCP)](/en/mcp) is an open standard for connecting AI tools to external data sources. With MCP, Claude Code can read your design docs in Google Drive, update tickets in Jira, pull data from Slack, or use your own custom tooling.
+    The [Model Context Protocol (MCP)](/en/mcp) is an open standard for connecting AI tools to external data sources. With MCP, Claude Code can read your design docs in Google Drive, update tickets in Jira, pull data from Slack, or use your own custom tooling. The [MCP quickstart](/en/mcp-quickstart) connects your first server end to end.
   </Accordion>
 
   <Accordion title="Customize with instructions, skills, and hooks" icon="sliders">

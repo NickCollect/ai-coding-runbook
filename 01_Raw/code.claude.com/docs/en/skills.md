@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/skills
-fetched_at: 2026-06-01T05:54:53.451073+00:00
+fetched_at: 2026-06-08T05:25:08.588453+00:00
 fetch_method: mintlify_md
 ---
 
@@ -267,6 +267,8 @@ Skills support string substitution for dynamic values in the skill content:
 | `${CLAUDE_SKILL_DIR}`  | The directory containing the skill's `SKILL.md` file. For plugin skills, this is the skill's subdirectory within the plugin, not the plugin root. Use this in bash injection commands to reference scripts or files bundled with the skill, regardless of the current working directory. |
 
 Indexed arguments use shell-style quoting, so wrap multi-word values in quotes to pass them as a single argument. For example, `/my-skill "hello world" second` makes `$0` expand to `hello world` and `$1` to `second`. The `$ARGUMENTS` placeholder always expands to the full argument string as typed.
+
+To include a literal `$` before a digit, `ARGUMENTS`, or a declared argument name, such as `$1.00` in prose, escape it with a backslash: `\$1.00`. A backslash before any other `$` is left unchanged. Only a single backslash directly before the token escapes it; a doubled backslash such as `\\$1` keeps both backslashes and substitutes as before.
 
 **Example using substitutions:**
 

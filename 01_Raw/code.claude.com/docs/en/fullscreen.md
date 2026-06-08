@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/fullscreen
-fetched_at: 2026-05-25T05:15:53.095767+00:00
+fetched_at: 2026-06-08T05:25:03.859223+00:00
 fetch_method: mintlify_md
 ---
 
@@ -155,9 +155,26 @@ tmux does not support synchronized output, so you may see more flicker during re
 
 Mouse capture is the most common friction point, especially over SSH or inside tmux. When Claude Code captures mouse events, your terminal's native copy-on-select stops working. The selection you make with click-and-drag exists inside Claude Code, not in your terminal's selection buffer, so tmux copy mode, Kitty hints, and similar tools don't see it.
 
-Claude Code tries to write the selection to your clipboard, but the path it uses depends on your setup. Inside tmux it writes to the tmux paste buffer. Over SSH it falls back to OSC 52 escape sequences, which some terminals block by default. iTerm2 blocks them until you turn on Settings → General → Selection → Applications in terminal may access clipboard. Running [`/terminal-setup`](/en/terminal-config) in iTerm2 enables this for you. Claude Code prints a toast after each copy telling you which path it used.
+Claude Code writes the selection to your system clipboard, and the path it uses depends on your setup. On a local session it runs a native clipboard tool:
 
-For a one-off native selection, hold your terminal's bypass modifier while you click and drag: `Option` in iTerm2, or `Shift` in most Linux and Windows terminals. The modifier tells your terminal to handle the selection itself instead of forwarding mouse events to Claude Code, so `Cmd+C` and your terminal's other copy shortcuts work on it.
+* **macOS**: `pbcopy`
+* **Linux**: `wl-copy` on Wayland, or `xclip` or `xsel` on X11, whichever is installed. Claude Code writes both the clipboard and the PRIMARY selection, so middle-click paste works.
+* **Windows and WSL**: PowerShell `Set-Clipboard`
+
+Inside tmux it also writes to the tmux paste buffer. Over SSH it falls back to OSC 52 escape sequences. Claude Code prints a toast after each copy telling you which path it used.
+
+Some terminals block OSC 52 by default. iTerm2 blocks it until you turn on Settings → General → Selection → Applications in terminal may access clipboard; running [`/terminal-setup`](/en/terminal-config) in iTerm2 enables this for you.
+
+For a one-off native selection, the key to use depends on your terminal:
+
+* **Terminal.app**: `Fn`
+* **iTerm2**: `Option`
+* **VS Code, Cursor, and Devin Desktop**: `Shift`, or `Option` on macOS with the `terminal.integrated.macOptionClickForcesSelection` setting enabled
+* **Most other terminals**: `Shift`
+
+Hold that key while you click and drag. Your terminal handles the selection itself instead of passing it to Claude Code, so copy shortcuts like `Cmd+C` work on what you select. Claude Code also shows the correct key in its on-screen hint.
+
+Over SSH or inside tmux, Claude Code can't always detect the terminal you're connecting from, so the hint lists the candidate keys instead.
 
 If you rely on native selection all the time, set `CLAUDE_CODE_DISABLE_MOUSE=1` to opt out of mouse capture while keeping the flicker-free rendering and flat memory:
 
@@ -174,3 +191,5 @@ Fullscreen rendering is a research preview feature. It has been tested on common
 If you encounter a problem, run `/feedback` inside Claude Code to report it, or open an issue on the [claude-code GitHub repo](https://github.com/anthropics/claude-code/issues). Include your terminal emulator name and version.
 
 To turn fullscreen rendering off, run `/tui default`, or unset `CLAUDE_CODE_NO_FLICKER` if you enabled it that way. To force the classic renderer regardless of the saved `tui` setting, set `CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1`. The classic renderer keeps the conversation in your terminal's native scrollback so `Cmd+f` and tmux copy mode work as usual.
+
+Background sessions opened from [agent view](/en/agent-view) or `claude attach` always use fullscreen rendering. The attaching terminal enters the alternate screen buffer to show the session, and the classic renderer has no scrollback or mouse handling there, so the `tui` setting and `CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN` do not apply to them.

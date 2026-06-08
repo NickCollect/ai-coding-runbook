@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/chrome
-fetched_at: 2026-06-01T05:54:50.165582+00:00
+fetched_at: 2026-06-08T05:25:01.272816+00:00
 fetch_method: mintlify_md
 ---
 
@@ -174,7 +174,7 @@ Claude records the interaction sequence and saves it as a GIF file.
 
 ### Extension not detected
 
-If Claude Code shows "Chrome extension not detected":
+If Claude Code's setup-issues line lists `chrome`:
 
 1. Verify the Chrome extension is installed and enabled in `chrome://extensions`
 2. Verify Claude Code is up to date by running `claude --version`

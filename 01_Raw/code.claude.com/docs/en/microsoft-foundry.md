@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/microsoft-foundry
-fetched_at: 2026-06-01T05:54:52.319429+00:00
+fetched_at: 2026-06-08T05:25:06.074700+00:00
 fetch_method: mintlify_md
 ---
 
@@ -93,7 +93,7 @@ Before configuring Claude Code with Microsoft Foundry, ensure you have:
 * Azure CLI installed and configured (optional - only needed if you don't have another mechanism for getting credentials)
 
 <Note>
-  If you are deploying Claude Code to multiple users, [pin your model versions](#4-pin-model-versions) to prevent breakage when Anthropic releases new models.
+  If you are deploying Claude Code to multiple users, [pin your model versions](#4-pin-model-versions) before rolling out.
 </Note>
 
 ## Setup
@@ -156,7 +156,7 @@ export ANTHROPIC_FOUNDRY_RESOURCE={resource}
 ### 4. Pin model versions
 
 <Warning>
-  Pin specific model versions for every deployment. If you use model aliases (`sonnet`, `opus`, `haiku`) without pinning, Claude Code may attempt to use a newer model version that isn't available in your Foundry account, breaking existing users when Anthropic releases updates. When you create Azure deployments, select a specific model version rather than "auto-update to latest."
+  Pin specific model versions for every deployment. Without pinning, model aliases such as `sonnet` and `opus` resolve to Claude Code's built-in default for Foundry, which can lag the newest release and may not yet be available in your account. Foundry has no startup model check, so requests fail when the default is unavailable. When you create Azure deployments, select a specific model version rather than "auto-update to latest."
 </Warning>
 
 Set the model variables to match the deployment names you created in step 1.

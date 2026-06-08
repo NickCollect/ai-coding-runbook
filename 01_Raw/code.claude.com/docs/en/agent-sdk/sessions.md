@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/sessions
-fetched_at: 2026-05-25T05:15:52.791017+00:00
+fetched_at: 2026-06-08T05:24:59.089792+00:00
 fetch_method: mintlify_md
 ---
 
@@ -52,7 +52,7 @@ Both SDKs offer an interface that tracks session state for you across calls, so 
 
 ### Python: `ClaudeSDKClient`
 
-[`ClaudeSDKClient`](/en/agent-sdk/python#claudesdkclient) handles session IDs internally. Each call to `client.query()` automatically continues the same session. Call [`client.receive_response()`](/en/agent-sdk/python#claudesdkclient) to iterate over the messages for the current query. The client is typically used as an async context manager.
+[`ClaudeSDKClient`](/en/agent-sdk/python#claudesdkclient) handles session IDs internally. Each call to `client.query()` automatically continues the same session. Call [`client.receive_response()`](/en/agent-sdk/python#claudesdkclient) to iterate over the messages for the current query. Use the client as an async context manager so connection setup and teardown are handled for you, or call `connect()` and `disconnect()` manually.
 
 This example runs two queries against the same `client`. The first asks the agent to analyze a module; the second asks it to refactor that module. Because both calls go through the same client instance, the second query has full context from the first without any explicit `resume` or session ID:
 
@@ -325,6 +325,6 @@ Both SDKs also expose functions for looking up and mutating individual sessions:
 ## Related resources
 
 * [How the agent loop works](/en/agent-sdk/agent-loop): Understand turns, messages, and context accumulation within a session
-* [File checkpointing](/en/agent-sdk/file-checkpointing): Track and revert file changes across sessions
+* [File checkpointing](/en/agent-sdk/file-checkpointing): Snapshot and revert file changes the agent made within a session
 * [Python `ClaudeAgentOptions`](/en/agent-sdk/python#claudeagentoptions): Full session option reference for Python
 * [TypeScript `Options`](/en/agent-sdk/typescript#options): Full session option reference for TypeScript
