@@ -1,5 +1,47 @@
 # Changelog
 
+## 0.2.93
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.167
+
+## 0.2.92
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.166
+
+## 0.2.91
+
+### Internal/Other Changes
+
+- Switched test suite from `pytest-asyncio` to anyio's pytest plugin, running every async test under both asyncio and trio backends to catch backend-specific regressions in CI (#1021)
+- Updated bundled Claude CLI to version 2.1.165
+
+## 0.2.90
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.163
+
+## 0.2.89
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.162
+
+## 0.2.88
+
+### Bug Fixes
+
+- **Trio compatibility for session stores**: Ported `session_store` code paths (`TranscriptMirrorBatcher`, `session_resume`, `sessions`) from raw `asyncio` primitives to `anyio`, fixing a crash (`TypeError: trio.run received unrecognized yield message`) when passing `session_store=` to `query()` or `ClaudeSDKClient` under trio (#990)
+
+### Internal/Other Changes
+
+- Switched e2e CI jobs (`test-e2e`, `test-e2e-docker`, `test-examples`) from static API key to workload identity federation, using short-lived OIDC tokens with automatic refresh (#1018)
+- Updated bundled Claude CLI to version 2.1.161
+
 ## 0.2.87
 
 ### Internal/Other Changes
