@@ -1,28 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=zh-CN
-fetched_at: 2026-06-01T05:59:44.508894+00:00
-title: "\u4f7f\u7528 Imagen \u751f\u6210\u56fe\u7247 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=de
+fetched_at: 2026-06-08T05:39:45.927528+00:00
+title: "Bilder mit Imagen generieren \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-发送反馈
+Feedback geben
 
-# 使用 Imagen 生成图片
+# Bilder mit Imagen generieren
 
-Imagen 是 Google 的高保真图片生成模型，能够根据文本提示生成逼真且高质量的图片。生成的所有图片都包含 SynthID 水印。如需详细了解可用的 Imagen 模型变体，请参阅[模型版本](#model-versions)部分。
+Imagen ist das High-Fidelity-Modell zur Bildgenerierung von Google, mit dem sich realistische und hochwertige Bilder aus Text-Prompts generieren lassen. Alle generierten Bilder enthalten ein SynthID-Wasserzeichen. Weitere Informationen zu den verfügbaren Imagen-Modellvarianten finden Sie im Abschnitt [Modellversionen](#model-versions).
 
-## 使用 Imagen 模型生成图片
+## Bilder mit den Imagen-Modellen generieren
 
-此示例演示了如何使用 [Imagen 模型](https://deepmind.google/technologies/imagen/?hl=zh-cn)生成图片：
+In diesem Beispiel wird gezeigt, wie Sie Bilder mit einem [Imagen-Modell](https://deepmind.google/technologies/imagen/?hl=de) generieren:
 
 ### Python
 
@@ -75,7 +75,7 @@ async function main() {
 main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -132,361 +132,364 @@ curl -X POST \
       }'
 ```
 
-![AI 生成的图片：一个机器人拿着红色滑板](https://ai.google.dev/static/gemini-api/docs/images/robot-skateboard.png?hl=zh-cn)
+![KI-generiertes Bild eines Roboters mit einem roten Skateboard](https://ai.google.dev/static/gemini-api/docs/images/robot-skateboard.png?hl=de)
 
-AI 生成的机器人手持红色滑板的图片
+KI-generiertes Bild eines Roboters, der ein rotes Skateboard hält
 
-### Imagen 配置
+### Imagen-Konfiguration
 
-Imagen 目前仅支持英语提示和以下参数：
+Imagen unterstützt derzeit nur Prompts in englischer Sprache und die folgenden Parameter:
 
-- `numberOfImages`：要生成的图片数量，范围为 1 到 4（含）。
-  默认值为 4。
-- `imageSize`：生成的图片的大小。仅 Standard 和 Ultra 模型支持此功能。支持的值为 `1K` 和 `2K`。
-  默认值为 `1K`。
-- `aspectRatio`：更改所生成图片的宽高比。支持的值包括 `"1:1"`、`"3:4"`、`"4:3"`、`"9:16"` 和 `"16:9"`。默认值为 `"1:1"`。
-- `personGeneration`：允许模型生成人物图片。支持以下值：
+- `numberOfImages`: Die Anzahl der zu generierenden Bilder, von 1 bis 4 (einschließlich).
+  Der Standardwert ist 4.
+- `imageSize`: Die Größe des generierten Bildes. Dies wird nur für die Modelle „Standard“ und „Ultra“ unterstützt. Die unterstützten Werte sind `1K` und `2K`.
+  Der Standardwert ist `1K`.
+- `aspectRatio`: Ändert das Seitenverhältnis des generierten Bildes. Unterstützte Werte sind `"1:1"`, `"3:4"`, `"4:3"`, `"9:16"` und `"16:9"`. Der Standardwert ist `"1:1"`.
+- `personGeneration`: Das Modell darf Bilder von Personen generieren. Folgende Werte werden unterstützt:
 
-  - `"dont_allow"`：禁止生成人物图片。
-  - `"allow_adult"`：生成成人的图像，但不生成儿童的图像。这是默认值。
-  - `"allow_all"`：生成包含成人和儿童的图片。
+  - `"dont_allow"`: Generierung von Bildern von Personen blockieren.
+  - `"allow_adult"`: Bilder von Erwachsenen, aber nicht von Kindern generieren. Das ist die Standardeinstellung.
+  - `"allow_all"`: Bilder generieren, die Erwachsene und Kinder enthalten.
 
-## Imagen 提示指南
+## Imagen-Prompt-Anleitung
 
-本部分 Imagen 指南介绍了修改文本转图片提示会如何产生不同的结果，并举例说明了您可以创建的图片。
+In diesem Abschnitt des Imagen-Leitfadens erfahren Sie, wie sich durch Ändern einer Text-zu-Bild-Eingabeaufforderung unterschiedliche Ergebnisse erzielen lassen. Außerdem finden Sie Beispiele für Bilder, die Sie erstellen können.
 
-### 提示撰写的基础知识
+### Grundlagen zum Schreiben von Prompts
 
-好的提示应具有描述性、清晰明了，并使用有意义的关键字和修饰符。首先，请考虑**主题**、**背景**和**风格**。
+Ein guter Prompt ist beschreibend und klar und verwendet aussagekräftige Keywords und Modifikatoren. Beginnen Sie mit dem **Motiv**, dem **Kontext** und dem **Stil**.
 
-![强调主体、背景和风格的提示](https://ai.google.dev/static/gemini-api/docs/images/imagen/style-subject-context.png?hl=zh-cn)
+![Eingabeaufforderung mit Akzent auf Motiv, Kontext und Stil](https://ai.google.dev/static/gemini-api/docs/images/imagen/style-subject-context.png?hl=de)
 
-图片文本：一幅草图（**风格**），现代风格的公寓楼（**主体**），周围摩天大楼环绕（**背景和环境**）。
+Bildtext: Eine *Skizze* (**Stil**) eines *modernen Wohngebäudes* (**Motiv**) umgeben von *Wolkenkratzern* (**Kontext und Hintergrund**).
 
-1. **主体**：对于任何提示，首先要考虑的都是主体：对象、人物、动物或场景。
-2. **背景和环境**：与主体所处的背景或环境一样重要。请尝试将主体置于各种背景下。例如，白色背景、户外或室内环境下的工作室。
-3. **样式**：最后，添加所需图片的样式。*样式*可以是常规内容（绘画、照片、草图），也可以是非常具体的内容（色粉画、木炭画、无透视三维绘图）。您还可以组合使用多种样式。
+1. **Thema:** Das Erste, woran Sie bei jeder Eingabeaufforderung denken müssen, ist das *Motiv*. Das Objekt, eine Person, ein Tier oder eine Landschaft, von der Sie ein Bild möchten.
+2. **Kontext und Hintergrund:** Ebenso wichtig ist der *Hintergrund oder Kontext*, in dem das Motiv platziert wird. Platzieren Sie das Motiv vor verschiedenen Hintergründen. Zum Beispiel ein Studio mit weißem Hintergrund, im Freien oder in Gebäuden.
+3. **Stil:** Fügen Sie abschließend den Stil des gewünschten Bildes hinzu. *Stile* können allgemein (Malerei, Fotografie, Skizzen) oder sehr spezifisch sein (Pastel, Kohlezeichnung, isometrische 3D-Perspektive). Sie können auch Stile kombinieren.
 
-在撰写第一版提示后，请通过添加更多详细信息来优化提示，直到您获得所需的图片为止。迭代很重要。首先确定核心概念，然后在此核心概念的基础上进行优化和扩展，直到生成的图片接近您的构想为止。
+Nachdem Sie eine erste Version Ihres Prompts geschrieben haben, können Sie ihn verfeinern, indem Sie weitere Details hinzufügen, bis Sie das gewünschte Bild erhalten. Iteration ist wichtig.
+Beginnen Sie mit Ihrer Kernidee und verfeinern und erweitern Sie diese dann, bis das generierte Bild Ihrer Vision entspricht.
 
 |  |  |  |
 | --- | --- | --- |
-| 逼真的示例图片 1   提示：A park in the spring next to a lake | 逼真的示例图片 2   提示：A park in the spring next to a lake, **the sun sets across the lake, golden hour** | 逼真的示例图片 3   提示：A park in the spring next to a lake, ***the sun sets across the lake, golden hour, red wildflowers*** |
+| Fotorealistisches Beispielbild 1   Eingabeaufforderung: Ein Park im Frühling neben einem See | Fotorealistisches Beispielbild 2   Prompt: Ein Park im Frühling neben einem See, **die Sonne geht über dem See unter, goldene Stunde** | Fotorealistisches Beispielbild 3   Prompt: Ein Park im Frühling neben einem See, ***die Sonne geht über dem See unter, goldene Stunde, rote Wildblumen*** |
 
-无论您的提示是简短的还是较长且详细的，Imagen 模型都可以将您的想法转换为详细的图片。通过迭代提示和添加详细信息来优化您的构想，直到您获得理想的结果。
+Imagen-Modelle können Ihre Ideen in detaillierte Bilder umwandeln, unabhängig davon, ob Ihre Prompts kurz oder lang und detailliert sind. Verfeinern Sie Ihre Vision durch iterative Prompts und fügen Sie Details hinzu, bis Sie das perfekte Ergebnis erzielen.
 
 |  |  |
 | --- | --- |
-| 您可以使用短提示快速生成图片。  Imagen 4 短提示示例   提示：close-up photo of a woman in her 20s, street photography, movie still, muted orange warm tones | 您可以使用较长提示添加具体详细信息并构建图片。  Imagen 4 长提示示例   提示：captivating photo of a woman in her 20s utilizing a street photography style. The image should look like a movie still with muted orange warm tones. |
+| Mit kurzen Prompts können Sie schnell ein Bild generieren.  Beispiel für einen kurzen Prompt für Imagen 4   Prompt: Nahaufnahme einer Frau in ihren 20ern, Straßenfotografie, Standbild, gedeckte warme Orangetöne | Mit längeren Prompts können Sie spezifische Details hinzufügen und Ihr Bild erstellen.  Beispiel für einen langen Prompt für Imagen 4   Prompt: Beeindruckendes Foto einer Frau in ihren 20ern, das einen Straßenfotografie-Stil verwendet. Das Bild sollte wie ein Standfoto mit gedeckten, orangefarbenen, warmen Tönen aussehen. |
 
-关于 Imagen 提示撰写的其他建议：
+Zusätzliche Tipps zum Verfassen von Prompts für Imagen:
 
-- **使用描述性语言**：使用详细的形容词和副词，为 Imagen 描绘清晰的画面。
-- **提供背景信息**：根据需要，添加背景信息以帮助 AI 理解。
-- **参考特定艺术家或风格**：如果您有特定的审美观，参考特定艺术家或艺术运动可能会有所帮助。
-- **使用提示工程工具**：可考虑探索提示工程工具或资源，以帮助您优化提示并实现最佳结果。
-- **增强个人和群组图片中的面部细节**：指定面部细节作为照片的焦点（例如，在提示中使用“portrait”一词）。
+- **Beschreibende Sprache verwenden**: Verwenden Sie detaillierte Adjektive und Adverbien, um Imagen ein klares Bild zu vermitteln.
+- **Kontext angeben**: Fügen Sie bei Bedarf Hintergrundinformationen hinzu, damit die KI den Prompt besser versteht.
+- **Auf bestimmte Künstler oder Stile verweisen**: Wenn Sie eine bestimmte Ästhetik im Sinn haben, kann es hilfreich sein, auf bestimmte Künstler oder Kunstrichtungen zu verweisen.
+- **Tools für Prompt Engineering verwenden**: Sie können Tools oder Ressourcen für Prompt Engineering nutzen, um Ihre Prompts zu optimieren und optimale Ergebnisse zu erzielen.
+- **Gesichtsdetails in Ihren persönlichen Fotos und Gruppenfotos optimieren**: Geben Sie Gesichtsdetails als Fokus des Fotos an (z. B. mit dem Wort „Porträt“ im Prompt).
 
-### 在图片中生成文本
+### Text in Bildern generieren
 
-Imagen 模型可以在图片中添加文字，从而为创造性图片生成提供了更多可能性。请按照以下指南来充分利用此功能：
+Imagen-Modelle können Text in Bilder einfügen und so mehr kreative Möglichkeiten für die Bildgenerierung eröffnen. Mit den folgenden Tipps können Sie diese Funktion optimal nutzen:
 
-- **自信地迭代**：您可能需要重新生成图片，直到实现所需的外观为止。Imagen 的文本集成仍在不断发展，有时多次尝试才能获得最佳结果。
-- **简短明了**：为获得最佳生成效果，请将文本长度限制在 25 个字符以内。
-- **多个短语**：尝试使用两三个不同的词组来提供更多信息。为了让组合更清晰，请避免超过三个短语。
+- **Sicher iterieren**: Möglicherweise müssen Sie Bilder mehrmals neu generieren, bis Sie das gewünschte Ergebnis erhalten. Die Textintegration von Imagen wird ständig weiterentwickelt. Manchmal sind mehrere Versuche erforderlich, um die besten Ergebnisse zu erzielen.
+- **Kurz fassen**: Der Text sollte maximal 25 Zeichen umfassen, damit er optimal generiert werden kann.
+- **Mehrere Formulierungen**: Testen Sie zwei oder drei unterschiedliche Formulierungen, um zusätzliche Informationen bereitzustellen. Verwenden Sie nicht mehr als drei Begriffe, um die Komposition übersichtlicher zu gestalten.
 
-  ![Imagen 4 生成文本示例](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_generate-text.png?hl=zh-cn)
+  ![Beispiel für die Textgenerierung mit Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_generate-text.png?hl=de)
 
-  提示：A poster with the text "Summerland" in bold font as a
-  title, underneath this text is the slogan "Summer never felt so good"
-- **指导放置**：虽然 Imagen 可以尝试按指示放置文本，但您应该预料到偶尔会出现一些变化。此功能正在不断改进。
-- **启发性字体样式**：指定一种常规字体样式，以巧妙地影响 Imagen 的选择。不要依赖精确的字体复制，而是期待富有创意的诠释。
-- **字体大小**：指定字体大小或有关大小的一般指示（例如，小、中、大）以影响字体大小生成。
+  Prompt: Ein Poster mit dem Text „Summerland“ in fetter Schrift als Titel. Darunter befindet sich der Slogan „Summer never felt so good“ (Der Sommer hat sich noch nie so gut angefühlt).
+- **Platzierung von Anleitungen**: Imagen kann versuchen, Text wie angegeben zu positionieren, aber es kann zu Abweichungen kommen. Diese Funktion wird kontinuierlich verbessert.
+- **Schriftstil für Inspiration**: Geben Sie einen allgemeinen Schriftstil an, um die Auswahl von Imagen subtil zu beeinflussen. Verlassen Sie sich nicht auf eine genaue Schriftartreplikation, sondern rechnen Sie mit kreativen Interpretationen.
+- **Schriftgröße**: Geben Sie eine Schriftgröße oder eine allgemeine Größenangabe (z. B. *klein*, *mittel*, *groß*) an, um die Generierung der Schriftgröße zu beeinflussen.
 
-### 提示参数化
+### Prompt-Parametrisierung
 
-为了更好地控制输出结果，将发送给 Imagen 的输入参数化可能会有所帮助。例如，假设您希望客户能够为自己的企业生成徽标，并且希望确保徽标始终在纯色背景上生成。您还想限制客户端可以从菜单中选择的选项。
+Um die Ausgaberesultate besser zu steuern, kann es hilfreich sein, die Eingaben in Imagen zu parametrisieren. Angenommen, Sie möchten, dass Ihre Kunden Logos für ihr Unternehmen generieren können, und Sie möchten sicherstellen, dass Logos immer auf einem einfarbigen Hintergrund generiert werden. Außerdem möchten Sie die Optionen einschränken, die der Kunde in einem Menü auswählen kann.
 
-在此示例中，您可以创建一个类似于以下内容的参数化提示：
+In diesem Beispiel können Sie einen parametrisierten Prompt ähnlich dem folgenden erstellen:
 
 ```
 A {logo_style} logo for a {company_area} company on a solid color background. Include the text {company_name}.
 ```
 
-在自定义界面中，客户可以使用菜单输入参数，并且他们选择的值会填充 Imagen 收到的提示。
+In Ihrer benutzerdefinierten Benutzeroberfläche kann der Kunde die Parameter über ein Menü eingeben. Der ausgewählte Wert wird dann in den Prompt eingefügt, den Imagen erhält.
 
-例如：
+Beispiel:
 
-1. 提示：`A minimalist logo for a health care company on a solid color background. Include the text Journey.`
+1. Prompt: `A minimalist logo for a health care company on a solid color background. Include the text Journey.`
 
-   ![Imagen 4 提示参数化示例 1](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_healthcare.png?hl=zh-cn)
-2. 提示：`A modern logo for a software company on a solid color background. Include the text Silo.`
+   ![Beispiel 1 für die Parameterisierung von Prompts für Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_healthcare.png?hl=de)
+2. Prompt: `A modern logo for a software company on a solid color background. Include the text Silo.`
 
-   ![Imagen 4 提示参数化示例 2](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_software.png?hl=zh-cn)
-3. 提示：`A traditional logo for a baking company on a solid color background. Include the text Seed.`
+   ![Beispiel 2 für die Parametrisierung von Prompts für Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_software.png?hl=de)
+3. Prompt: `A traditional logo for a baking company on a solid color background. Include the text Seed.`
 
-   ![Imagen 4 提示参数化示例 3](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_baking.png?hl=zh-cn)
+   ![Beispiel 3 für die Parameterisierung von Prompts für Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_baking.png?hl=de)
 
-### 高级提示撰写技术
+### Erweiterte Techniken zum Schreiben von Eingabeaufforderungen
 
-使用以下示例根据属性（例如摄影描述符、形状和材料、历史艺术运动和图像质量修饰符）创建更具体的提示。
+Anhand der folgenden Beispiele können Sie anhand von Attributen wie Bilddeskriptoren, Formen und Materialien, historischen Kunstbewegungen und Bildqualitätsmodifikatoren spezifischere Prompts erstellen.
 
-#### 摄影
+#### Fotografie
 
-- 提示包括：“...的照片”
+- Eingabeaufforderung enthält: *„Ein Foto von...”*
 
-如需使用此风格，请先使用关键字，明确告诉 Imagen 您所需要的是照片。提示开头是*“一张. . . 的照片”*。例如：
-
-|  |  |  |
-| --- | --- | --- |
-| 逼真的示例图片 1   提示：一张厨房里木板上所放的咖啡豆的**照片** | 逼真的示例图片 2   提示：一张厨房柜台上的巧克力棒的**照片** | 逼真的示例图片 3   提示：一张背景为水的现代建筑的**照片** |
-
-图片来源：每张图片都是使用相应的文本提示通过 Imagen 4 模型生成的。
-
-##### 摄影修饰符
-
-在以下示例中，您可以看到多个专用于照片的修饰符和参数。您可以组合使用多个修饰符，以便更精确地控制。
-
-1. **相机邻近性** - 特写，从远处拍摄
-
-   |  |  |
-   | --- | --- |
-   | 特写镜头示例图片   提示：A **close-up** photo of coffee beans | 缩小的镜头示例图片   提示：A **zoomed out** photo of a small bag of  coffee beans in a messy kitchen |
-2. **相机位置** - 航拍、仰拍
-
-   |  |  |
-   | --- | --- |
-   | 航拍照片示例图片   提示：**aerial photo** of urban city with skyscrapers | 仰拍示例图片   提示：A photo of a forest canopy with blue skies **from below** |
-3. **光线** - 自然、舞台、暖、冷
-
-   |  |  |
-   | --- | --- |
-   | 自然光线示例图片   提示：studio photo of a modern arm chair, **natural lighting** | 舞台灯光示例图片   提示：studio photo of a modern arm chair, **dramatic lighting** |
-4. **相机设置** - 运动模糊、柔焦、焦外成像、人像
-
-   |  |  |
-   | --- | --- |
-   | 运动模糊示例图片   提示：photo of a city with skyscrapers from the inside of a car with **motion blur** | 柔焦示例图片   提示：**柔焦** photograph of a bridge in an urban city at night |
-5. **镜头类型** - 35 毫米、50 毫米、鱼眼、广角、微距
-
-   |  |  |
-   | --- | --- |
-   | 微距镜头示例图片   提示：叶子的照片，**微距镜头** | 鱼眼镜头示例图片   提示：街道摄影、纽约市、**鱼眼镜头** |
-6. **胶片类型** - 黑白、拍立得
-
-   |  |  |
-   | --- | --- |
-   | 拍立得照片示例图片   提示：a **polaroid portrait** of a dog wearing sunglasses | 黑白照片示例图片   提示：**black and white photo** of a dog wearing sunglasses |
-
-图片来源：每张图片都是使用相应的文本提示通过 Imagen 4 模型生成的。
-
-### 插图和艺术
-
-- 提示包括：“...的 painting”、“...的 sketch”
-
-艺术风格各不相同，从铅笔素描等单色风格到超现实的数字艺术均有。例如，以下图片使用相同提示而使用不同风格：
-
-一辆背景是摩天大楼的棱角分明的运动型电动轿车的 [art style or creation technique]
+Um diesen Stil zu verwenden, beginnen Sie mit der Verwendung von Keywords, die Imagen klar mitteilen, dass Sie nach einem Foto suchen. Starten Sie die Eingabeaufforderungen mit *„Ein Foto von. . .”*. Beispiel:
 
 |  |  |  |
 | --- | --- | --- |
-| 艺术示例图片   提示：A **technical pencil drawing** of an angular... | 艺术示例图片   提示：A **charcoal drawing** of an angular... | 艺术示例图片   提示：A **color pencil drawing** of an angular... |
+| Fotorealistisches Beispielbild 1   **Eingabeaufforderung:** Ein Foto von   Kaffeebohnen auf einer Holzoberfläche in einer Küche | Fotorealistisches Beispielbild 2   **Eingabeaufforderung:** Ein Foto von   einer Schokolade auf einem Küchentresen. | Fotorealistisches Beispielbild 3   Prompt: **Ein Foto eines** modernen Gebäudes mit Wasser im Hintergrund |
+
+Bildquelle: Jedes Bild wurde mit dem entsprechenden Text-Prompt mit dem Imagen 4-Modell generiert.
+
+##### Fotografische Modifikatotionen
+
+In den folgenden Beispielen sehen Sie mehrere fotospezifische Modifikatoren und Parameter. Sie können mehrere Modifikatoren kombinieren, um eine genauere Steuerung zu erreichen.
+
+1. **Kameranähe**: *aus der Nähe, von weit weg*
+
+   |  |  |
+   | --- | --- |
+   | Beispiel für Bild aus der Nähe   Eingabeaufforderung: Ein Foto von Kaffeebohnen **aus der Nähe** | Beispiel für herausgezoomtes Bild   Eingabeaufforderung: Ein **herausgezoomtes** Foto eines kleinen Beutels mit  Kaffeebohnen in einer unaufgeräumten Küche |
+2. **Kameraposition**: *Luftaufnahme, von unten*
+
+   |  |  |
+   | --- | --- |
+   | Beispielbild für Luftaufnahme   Eingabeaufforderung: **Luftaufnahme** einer Stadt mit Wolkenkratzern | Beispielbild von unten   Eingabeaufforderung: Ein Foto eines Waldstamms mit blauem Himmel **von unten** |
+3. **Beleuchtung**: *natürlich, dramatisch, warm, kalt*
+
+   |  |  |
+   | --- | --- |
+   | Beispielbild für natürliche Beleuchtung   Prompt: Studiofoto eines modernen Sessels, **natürliche Beleuchtung** | Beispielbild für dramatische Beleuchtung   Eingabeaufforderung: Studiofoto eines modernen Sessels, **dramatische Beleuchtung** |
+4. **Kameraeinstellungen**:  *Bewegungsunschärfe, Weichzeichnung, Bokeh, Hochformat*
+
+   |  |  |
+   | --- | --- |
+   | Beispielbild für Bewegungsunschärfe   Prompt: Foto einer Stadt mit Wolkenkratzern aus dem Inneren eines Autos mit **Bewegungsunschärfe** | Beispielbild für Weichzeichnung   Prompt: **Weichzeichnung** eines Fotos einer Brücke in einer Stadt bei Nacht |
+5. **Objektive**: *35 mm, 50 mm, Fischauge, Weitwinkel, Makro*
+
+   |  |  |
+   | --- | --- |
+   | Beispielbild für Makro   Eingabeaufforderung: Foto eines Blattes, **Makroobjektiv** | Beispielbild für Fischaugenobjektiv   Eingabeaufforderung: Straßenansicht, New York City, **Fischaugenobjektiv** |
+6. **Filmtypen**: *Schwarz-Weiß, Polaroid*
+
+   |  |  |
+   | --- | --- |
+   | Beispielbild für Polaroid   Prompt: Ein **Polaroid-Hochformatbild** eines Hundes mit Sonnenbrille | Beispielbild für Schwarz-Weiß-Foto   Eingabeaufforderung: **Schwarz-Weiß-Foto** eines Hundes mit Sonnenbrille |
+
+Bildquelle: Jedes Bild wurde mit dem entsprechenden Text-Prompt mit dem Imagen 4-Modell generiert.
+
+### Illustration und Kunst
+
+- Eingabeaufforderung enthält: *„Eine painting von...”*, *„Eine sketch von...”*
+
+Die Stile variieren von monochromen Stilen wie Bleistift bis hin zu hyperrealistischer digitaler Kunst. Die folgenden Bilder verwenden beispielsweise dieselbe Eingabeaufforderung mit unterschiedlichen Stilen:
+
+*„Eine [art style or creation technique] einer kantigen elektrischen Limousine mit Wolkenkratzern im Hintergrund“*
 
 |  |  |  |
 | --- | --- | --- |
-| 艺术示例图片   提示：A **pastel painting** of an angular... | 艺术示例图片   提示：A **digital art** of an angular... | 艺术示例图片   提示：An **art deco (poster)** of an angular... |
-
-图片来源：每张图片都是使用相应的文本提示通过 Imagen 2 模型生成的。
-
-##### 形状和材料
-
-- 提示包括：“...制作的...”、“...形状的…”
-
-这项技术的一大优势是您可以创建以其他方式难以实现或无法实现的图像。例如，您可以用不同的材料和纹理重新创建公司徽标。
+| Beispielbilder für Kunst   Eingabeaufforderung: Eine **technische Bleistiftskizze** eines kantigen... | Beispielbilder für Kunst   Eingabeaufforderung: Eine **Kohlezeichnung** eines kantigen... | Beispielbilder für Kunst   Prompt: Eine **Farbstiftzeichnung** eines kantigen... |
 
 |  |  |  |
 | --- | --- | --- |
-| 形状和材料示例图片 1   提示：a duffle bag **made of** cheese | 形状和材料示例 2   提示：neon tubes **in the shape** of a bird | 形状和材料示例 3   提示：an armchair **made of paper**, studio photo, origami style |
+| Beispielbilder für Kunst   Eingabeaufforderung: Ein **Pastelbild** eines kantigen... | Beispielbilder für Kunst   Eingabeaufforderung: Eine **digitale Kunst** eines kantigen... | Beispielbilder für Kunst   Eingabeaufforderung: Ein **Art-dèco-Poster** eines kantigen... |
 
-图片来源：每张图片都是使用相应的文本提示通过 Imagen 4 模型生成的。
+Bildquelle: Jedes Bild wurde mit dem Imagen 2-Modell über den entsprechenden Text-Prompt generiert.
 
-#### 历史艺术参考
+##### Formen und Materialien
 
-- 提示包括：“...风格的...”
+- Eingabeaufforderung: *„...aus...”*, *„...in Form von...”*
 
-多年来，某些风格已经成为标志。以下是一些您可以尝试的历史绘图或艺术风格想法。
-
-*“generate an image in the style of [art period or movement]
-: a wind farm”*
+Eine der Stärken dieser Technologie ist, dass Sie Bilder erstellen können, die andernfalls schwer oder unmöglich wären. Sie können beispielsweise Ihr Firmenlogo in verschiedenen Materialien und Texturen neu erstellen.
 
 |  |  |  |
 | --- | --- | --- |
-| 印象派示例图片   提示：generate an image **in the style of *an impressionist painting***: a wind farm | 文艺复兴示例图片   提示：generate an image **in the style of *a renaissance painting***: a wind farm | 流行艺术示例图片   提示：generate an image **in the style of *pop art***: a wind farm |
+| Beispielbild 1 für Formen und Materialien   Eingabeaufforderung: Duffle Bag**aus** Käse | Beispielbild 2 für Formen und Materialien   Prompt: Neonröhren **in Form** eines Vogels | Beispielbild 3 für Formen und Materialien   Eingabeaufforderung: Ein Sessel **aus Papier**, Studiofoto, Origami-Stil |
 
-图片来源：每张图片都是使用相应的文本提示通过 Imagen 4 模型生成的。
+Bildquelle: Jedes Bild wurde mit dem entsprechenden Text-Prompt mit dem Imagen 4-Modell generiert.
 
-#### 图片质量修饰符
+#### Bezüge auf historische Kunst
 
-某些关键字可使模型知道您正在寻找高质量的资源。质量修饰符的示例包括：
+- Eingabeaufforderung: *„...im Stil von...”*
 
-- **常规修饰符** - 高品质、精美、风格化
-- **照片** - 4K、HDR、摄影棚照片
-- **艺术、插图** - 由专业的、详细的
+Bestimmte Stile haben sich im Laufe der Jahre zu einem Mythos entwickelt. Im Folgenden finden Sie einige Ideen für historische Gemälde oder Kunststile, die Sie ausprobieren können.
 
-以下是几个不带质量修饰符的提示以及带有质量修饰符的相同提示的示例。
+*„Erstelle ein Bild im Stil von [art period or movement]
+: ein Windpark“*
+
+|  |  |  |
+| --- | --- | --- |
+| Beispielbild für Impressionsismus   Eingabeaufforderung: Generiere ein Bild **im Stil von *einem Gemälde des Impressionismus***: ein Windpark | Beispielbild für Renaissance   Prompt: generate an image **in the style of *a renaissance painting***: a wind farm | Beispielbild für Pop Art   Eingabeaufforderung: Erstelle ein Bild **im Stil von *Pop-Art***: ein Windpark |
+
+Bildquelle: Jedes Bild wurde mit dem entsprechenden Text-Prompt mit dem Imagen 4-Modell generiert.
+
+#### Modifikatoren für die Bildqualität
+
+Bestimmte Keywords können dem Modell mitteilen, dass Sie nach einem qualitativ hochwertigen Bild suchen. Beispiele für Qualitätsmodifikatoren:
+
+- **Allgemeine Modifikatoren**: *hohe Qualität, ansprechend, stilisiert*
+- **Fotos**: *4K, HDR, Studiofoto*
+- **Kunst, Illustration**: *von einem Profi, detailliert*
+
+Im Folgenden finden Sie einige Beispiele für Eingabeaufforderungen ohne Qualitätsmodifikatoren und die gleiche Aufforderung mit Qualitätsmodifikatoren.
 
 |  |  |
 | --- | --- |
-| 无修饰符的玉米示例图片   提示（无质量修饰符）：a photo of a corn stalk | 带修饰符的玉米示例图片   提示（带有质量修饰符）：**4k HDR beautiful**   photo of a corn stalk **taken by a   professional photographer** |
+| Getreide-Beispielbild ohne Modifikatoren   Eingabeaufforderung (keine Qualitätsmodifikatoren): Ein Foto von einem Getreidehalm | Getreide-Beispielbild mit Modifikatoren   Eingabeaufforderung (mit Qualitätsmodifikatoren): **Schönes 4K-**   Foto eines Getreidehalms **von einem  Profi-Fotografen aufgenommen** |
 
-图片来源：每张图片都是使用相应的文本提示通过 Imagen 4 模型生成的。
+Bildquelle: Jedes Bild wurde mit dem entsprechenden Text-Prompt mit dem Imagen 4-Modell generiert.
 
-#### 宽高比
+#### Seitenverhältnisse
 
-借助 Imagen 图片生成，您可以设置五种不同的图片宽高比。
+Mit der Imagen-Bildgenerierung können Sie fünf verschiedene Bild-Seitenverhältnisse festlegen.
 
-1. **方形**（1:1，默认值）- 标准方形照片。这种宽高比的常见用途包括社交媒体帖子。
-2. **全屏** (4:3) - 这种宽高比通常用于媒体或电影。它也是大多数旧款（非宽屏）电视和中等格式相机的尺寸。它可水平拍摄更多场景（与 1:1 相比），因而成为摄影的首选宽高比。
-
-   |  |  |
-   | --- | --- |
-   | 宽高比示例   提示：close up of a musician's fingers playing the piano, black and white film, vintage (4:3 aspect ratio) | 宽高比示例   提示：高档餐厅的炸薯条的专业工作室照片，采用美食杂志的风格（宽高比为 4:3） |
-3. **纵向全屏** (3:4) - 这是旋转 90 度的全屏宽高比。与 1:1 宽高比相比，这种宽高比可垂直拍摄更多场景。
+1. **Quadrat** (1:1, Standard) - Ein quadratisches Standardfoto. Typische Anwendungsfälle für dieses Seitenverhältnis sind Beiträge in sozialen Medien.
+2. **Vollbild** (4:3) - Dieses Seitenverhältnis wird häufig in Medien oder in Filmen verwendet.
+   Es bezeichnet auch die Abmessungen der meisten alten (Nicht-Breitbild-)Fernseher und Mittelformatkameras. Es erfasst horizontal mehr von der Szene (im Vergleich zu 1:1), dadurch gehört es zu den bevorzugten Seitenverhältnissen für die Fotografie.
 
    |  |  |
    | --- | --- |
-   | 宽高比示例   提示：一位徒步旅行的女士，靴子的近处倒映在水坑中，背景是大山，广告风格，戏剧性的角度（宽高比为 3:4） | 宽高比示例   提示：aerial shot of a river flowing up a mystical valley (3:4 aspect ratio) |
-4. **宽屏** (16:9) - 此宽高比已取代 4:3，现在是电视、显示器和手机屏幕（横向）的最常用宽高比。如果您想拍摄更多背景（例如风景），请使用这种宽高比。
+   | Seitenverhältnis-Beispiel   Prompt: Nahaufnahme der Finger eines Musikers, der Klavier spielt, Schwarz-Weiß-Film, Vintage (Seitenverhältnis 4:3) | Seitenverhältnis-Beispiel   Prompt: Ein professionelles Studiofoto von Pommes Frites für ein High-End-Restaurant im Stil einer Lebensmittelzeitschrift (Seitenverhältnis 4:3). |
+3. **Vollbild-Vollbild** (3:4) – Dies ist das um 90 Grad gedrehte Vollbild-Seitenverhältnis. So kann vertikal im Vergleich zum Seitenverhältnis 1:1 mehr von der Szene erfasst werden.
 
-   ![宽高比示例](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_16-9_man.png?hl=zh-cn)
+   |  |  |
+   | --- | --- |
+   | Seitenverhältnis-Beispiel   Prompt: Eine Frau wandert, Nahaufnahme ihrer Stiefel, die sich in einer Pfütze spiegeln, große Berge im Hintergrund, im Stil einer Werbung, dramatische Blickwinkel (Seitenverhältnis 3:4) | Seitenverhältnis-Beispiel   Prompt: Luftaufnahme eines Flusses, der in einem mystischen Tal fließt (Seitenverhältnis 3:4) |
+4. **Breitbild** (16:9): Dieses Seitenverhältnis hat 4:3 ersetzt und ist heute das gängigste Seitenverhältnis für Fernseher, Monitore und Bildschirme von Smartphones (Querformat).
+   Verwenden Sie dieses Seitenverhältnis, wenn Sie mehr vom Hintergrund erfassen möchten (z. B. malerische Landschaften).
 
-   提示：a man wearing all white clothing sitting on the beach, close up, golden hour lighting (16:9 aspect ratio)
-5. **纵向** (9:16) - 这种宽高比是宽屏，但进行了旋转。这是一种相对较新的宽高比，深受短视频应用（例如 YouTube Shorts）的欢迎。可将这种宽高比用于具有强烈垂直方向的较高对象，例如建筑物、树、瀑布或其他类似对象。
+   ![Seitenverhältnis-Beispiel](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_16-9_man.png?hl=de)
 
-   ![宽高比示例](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_9-16_skyscraper.png?hl=zh-cn)
+   Prompt: Ein Mann ganz in weißer Kleidung, der am Strand sitzt, Nahaufnahme, Lichtverhältnisse einer goldenen Stunde (Seitenverhältnis 16:9)
+5. **Hochformat** (9:16): Dieses Seitenverhältnis entspricht dem Breitbild, aber gedreht. Dabei handelt es sich um ein relativ neues Seitenverhältnis, das in Kurzvideo-Apps beliebt ist (z. B. YouTube Shorts). Verwenden Sie es für hohe Objekte mit stark vertikalen Ausrichtungen wie Gebäude, Bäume, Wasserfälle oder ähnliche Objekte.
 
-   提示：a digital render of a massive skyscraper, modern, grand, epic with a beautiful sunset in the background (9:16 aspect ratio)
+   ![Seitenverhältnis-Beispiel](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_9-16_skyscraper.png?hl=de)
 
-#### 逼真图片
+   Prompt: ein digitales Rendering eines riesigen Wolkenkratzers, modern,
+   groß, monumental, mit einem schönen Sonnenuntergang im Hintergrund (Seitenverhältnis 9:16)
 
-图片生成模型的不同版本可以同时提供具有艺术效果的输出和逼真的输出。根据要生成的主题，在提示中使用以下措辞，以生成更逼真的输出。
+#### Fotorealistische Bilder
 
-| 使用场景 | 镜头类型 | 焦距 | 其他详情 |
+Verschiedene Versionen des Bildgenerierungsmodells können eine Mischung aus künstlerischer und fotorealistischer Ausgabe bieten. Verwenden Sie die folgende Formulierung in Prompts, um je nach dem zu generierenden Thema eine fotorealistischere Ausgabe zu generieren.
+
+| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
 | --- | --- | --- | --- |
-| 人物（人像） | 定焦、变焦 | 24-35 毫米 | 黑白胶片、黑色电影、景深、双色调（提及两种颜色） |
-| 食品、昆虫、植物（物体、静物） | 宏 | 60-105 毫米 | 高精度、精准聚焦、控制照明 |
-| 体育运动、野生动物（运动） | 远摄变焦 | 100-400 毫米 | 高速快门、动作或运动追踪 |
-| 天文、风光（广角） | 广角 | 10-24 毫米 | 长曝光、清晰对焦、长曝光、平滑的水或云 |
+| Personen (Hochformat) | Prime, Zoom | 24-35mm | Schwarz-Weiß-Film, Film Noir, Tiefenschärfe, Duotone (erwähnt zwei Farben) |
+| Essen, Insekten, Pflanzen (Objekte, Stilleben) | Makro | 60-105mm | Hohe Details, präzise Fokussierung, kontrollierte Beleuchtung |
+| Sport, Tiere (Bewegung) | Telefotozoom | 100-400mm | Schnelle Belichtungszeit, Aktions- oder Bewegungsverfolgung |
+| Astronomisch, Landschaft (Weitwinkel) | Weitwinkel | 10-24mm | Langzeitbelichtung, scharfe Fokussierung, Langzeitbelichtung, glattes Wasser oder Wolken |
 
-##### 人像
+##### Porträts
 
-| 使用场景 | 镜头类型 | 焦距 | 其他详情 |
+| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
 | --- | --- | --- | --- |
-| 人物（人像） | 定焦、变焦 | 24-35 毫米 | 黑白胶片、黑色电影、景深、双色调（提及两种颜色） |
+| Personen (Hochformat) | Prime, Zoom | 24-35mm | Schwarz-Weiß-Film, Film Noir, Tiefenschärfe, Duotone (erwähnt zwei Farben) |
 
-使用表中的多个关键字，Imagen 可以生成以下人像图片：
+Mit mehreren Suchbegriffen aus der Tabelle kann Imagen die folgenden Porträts generieren:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| 人像摄影示例 | 人像摄影示例 | 人像摄影示例 | 人像摄影示例 |
+| Beispiel für Porträtfotos | Beispiel für Porträtfotos | Beispiel für Porträtfotos | Beispiel für Porträtfotos |
 
-提示：A woman, 35mm portrait, blue and grey duotones  
-模型：`imagen-4.0-generate-001`
-
-|  |  |  |  |
-| --- | --- | --- | --- |
-| 人像摄影示例 | 人像摄影示例 | 人像摄影示例 | 人像摄影示例 |
-
-提示：A woman, 35mm portrait, film noir  
-模型：`imagen-4.0-generate-001`
-
-##### 对象
-
-| 使用场景 | 镜头类型 | 焦距 | 其他详情 |
-| --- | --- | --- | --- |
-| 食品、昆虫、植物（物体、静物） | 宏 | 60-105 毫米 | 高精度、精准聚焦、控制照明 |
-
-使用表中的多个关键字，Imagen 可以生成以下静物图片：
+Prompt: *Eine Frau, 35 mm Hochformat, blaue und graue Duotones*  
+Modell: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| 静物摄影示例 | 静物摄影示例 | 静物摄影示例 | 静物摄影示例 |
+| Beispiel für Porträtfotos | Beispiel für Porträtfotos | Beispiel für Porträtfotos | Beispiel für Porträtfotos |
 
-提示：竹芋的叶子、微距镜头、60 毫米  
-模型：`imagen-4.0-generate-001`
+Eingabeaufforderung: *Eine Frau, 35 mm Hochformat, Film Noir*  
+Modell: `imagen-4.0-generate-001`
+
+##### Objekte
+
+| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
+| --- | --- | --- | --- |
+| Essen, Insekten, Pflanzen (Objekte, Stilleben) | Makro | 60-105mm | Hohe Details, präzise Fokussierung, kontrollierte Beleuchtung |
+
+Mit mehreren Suchbegriffen aus der Tabelle kann Imagen die folgenden Objektbilder generieren:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| 静物摄影示例 | 静物摄影示例 | 静物摄影示例 | 静物摄影示例 |
+| Beispiel für Objektfotografie | Beispiel für Objektfotografie | Beispiel für Objektfotografie | Beispiel für Objektfotografie |
 
-提示：一盘意大利面、100 毫米微距镜头  
-模型：`imagen-4.0-generate-001`
-
-##### 动画
-
-| 使用场景 | 镜头类型 | 焦距 | 其他详情 |
-| --- | --- | --- | --- |
-| 体育运动、野生动物（运动） | 远摄变焦 | 100-400 毫米 | 高速快门、动作或运动追踪 |
-
-使用表中的多个关键字，Imagen 可以生成以下运动图片：
+Eingabeaufforderung: *Blatt einer Gebetspflanze, Makroobjektiv, 60 mm*  
+Modell: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| 运动摄影示例 | 运动摄影示例 | 运动摄影示例 | 运动摄影示例 |
+| Beispiel für Objektfotografie | Beispiel für Objektfotografie | Beispiel für Objektfotografie | Beispiel für Objektfotografie |
 
-提示：a winning touchdown, fast 快门速度, movement tracking  
-模型：`imagen-4.0-generate-001`
+Eingabeaufforderung: *Eine Nudelplatte, 100-mm-Makroobjektiv*  
+Modell: `imagen-4.0-generate-001`
+
+##### Bewegung
+
+| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
+| --- | --- | --- | --- |
+| Sport, Tiere (Bewegung) | Telefotozoom | 100-400mm | Schnelle Belichtungszeit, Aktions- oder Bewegungsverfolgung |
+
+Mit mehreren Suchbegriffen aus der Tabelle kann Imagen die folgenden Bewegungsbilder generieren:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| 运动摄影示例 | 运动摄影示例 | 运动摄影示例 | 运动摄影示例 |
+| Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild |
 
-提示：森林中奔跑的鹿、高速快门速度、运动追踪  
-模型：`imagen-4.0-generate-001`
-
-##### 广角
-
-| 使用场景 | 镜头类型 | 焦距 | 其他详情 |
-| --- | --- | --- | --- |
-| 天文、风光（广角） | 广角 | 10-24 毫米 | 长曝光、清晰对焦、长曝光、平滑的水或云 |
-
-使用表中的多个关键字，Imagen 可以生成以下广角图片：
+Prompt: *Ein erfolgreicher Touchdown, schnelle Belichtungszeit, Bewegungsverfolgung*  
+Modell: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| 广角拍摄示例 | 广角拍摄示例 | 广角拍摄示例 | 广角拍摄示例 |
+| Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild |
 
-提示：广阔的山脉、10 毫米风光广角  
-模型：`imagen-4.0-generate-001`
+Eingabeaufforderung: *Ein Reh läuft im Wald, schnelle Belichtungszeit, Bewegungsverfolgung*  
+Modell: `imagen-4.0-generate-001`
+
+##### Weitwinkel
+
+| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
+| --- | --- | --- | --- |
+| Astronomisch, Landschaft (Weitwinkel) | Weitwinkel | 10-24mm | Langzeitbelichtung, scharfe Fokussierung, Langzeitbelichtung, glattes Wasser oder Wolken |
+
+Mit mehreren Suchbegriffen aus der Tabelle kann Imagen die folgenden Weitwinkelbilder generieren:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| 广角拍摄示例 | 广角拍摄示例 | 广角拍摄示例 | 广角拍摄示例 |
+| Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie |
 
-提示：月亮的照片、天文摄影、10 毫米广角  
-模型：`imagen-4.0-generate-001`
+Eingabeaufforderung: *Großer Bergbereich, Querwinkel 10 mm*  
+Modell: `imagen-4.0-generate-001`
 
-## 模型版本
+|  |  |  |  |
+| --- | --- | --- | --- |
+| Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie |
 
-### Imagen 4
+Prompt: *ein Foto des Mondes, Astrofotografie, Weitwinkel 10 mm*  
+Modell: `imagen-4.0-generate-001`
 
-| 属性 | 说明 |
+## Modellversionen
+
+### Imagen 4
+
+| Attribut | Beschreibung |
 | --- | --- |
-| id\_card 模型代码 | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
-| 保存支持的数据类型 | **输入**  文字  **输出**  图片 |
-| token\_auto令牌限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入 token 限制**  480 个 token（文本）  **输出图片**  1 至 4（超快/标准/快） |
-| calendar\_month最新更新 | 2025 年 6 月 |
+| id\_cardModellcode | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
+| saveUnterstützte Datentypen | **Eingabe**  Text  **Ausgabe**  Bilder |
+| token\_autoToken-Limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=de) | **Eingabetokenlimit**  480 Tokens (Text)  **Ausgabe von Bildern**  1 bis 4 (Ultra/Standard/Schnell) |
+| calendar\_monthLetzte Aktualisierung | Juni 2025 |
 
-### Imagen 3
+### Imagen 3
 
-Imagen 3 模型已[停止服务](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn)。
+Das Imagen 3-Modell wurde [eingestellt](https://ai.google.dev/gemini-api/docs/deprecations?hl=de).
 
-发送反馈
+Feedback geben
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-最后更新时间 (UTC)：2026-05-13。
+Zuletzt aktualisiert: 2026-05-13 (UTC).
 
-需要向我们提供更多信息？
+Haben Sie Feedback für uns?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-05-13。"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-05-13 (UTC)."],[],[]]

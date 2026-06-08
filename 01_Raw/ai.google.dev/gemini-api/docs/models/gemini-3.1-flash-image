@@ -1,61 +1,61 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=he
-fetched_at: 2026-06-01T05:58:15.962457+00:00
-title: "\u05ea\u05de\u05d5\u05e0\u05d4 \u05e9\u05dc Gemini 3.1 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=zh-TW
+fetched_at: 2026-06-08T05:28:46.275317+00:00
+title: "Gemini 3.1 Flash Image \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-שליחת משוב
+提供意見
 
-# תמונה של Gemini 3.1 Flash
+# Gemini 3.1 Flash Image
 
-‫**Nano Banana 2** מאפשר ליצור תמונות באיכות גבוהה ולערוך אותן בשיחה, במחיר סביר ובזמן אחזור נמוך. הוא משמש כמודל מקביל ויעיל ל-[Gemini 3.1 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-image?hl=he), שעבר אופטימיזציה למהירות ולתרחישי שימוש של מפתחים שכוללים נפח גבוה של נתונים.
+**Nano Banana 2** 價格實惠，延遲時間短，可生成高品質圖像，並提供對話式編輯功能。這是 [Gemini 3.1 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-image?hl=zh-tw) 的高效率替代方案，專為速度和大量開發人員使用案例而設計。
 
-**העדכונים העיקריים:**
+**異動重點如下：**
 
-- אפשרויות חדשות לרזולוציית הפלט:
-  - הוספנו תמיכה ב-0.5K, ב-2K וב-4K, ברירת המחדל היא 1K
-- הארקה חדשה של חיפוש תמונות:
-  - שילוב של תוצאות חיפוש טקסט ותמונות כדי לספק מידע ליצירה באמצעות נתונים מהאינטרנט בזמן אמת
-  - כוללת הסברים ורציונל
-- יחסי גובה-רוחב חדשים: 1:4, ‏ 4:1, ‏ 1:8 ו-8:1
-- שיפור ההתאמה ליחס הגובה-רוחב
-- שיפור האיכות והעקביות של התמונות
-- שיפור ברינדור של טקסט i18n
+- 新增輸出解析度選項：
+  - 新增支援 0.5K、2K 和 4K，預設為 1K
+- 全新圖片搜尋基礎：
+  - 整合文字和圖片搜尋結果，並運用即時網頁資料生成內容
+  - 支援開啟或關閉「思考」功能
+- 新增 1:4、4:1、1:8 和 8:1 顯示比例
+- 改善顯示比例遵循情況
+- 提升圖片品質和一致性
+- 改善 i18n 文字算繪
 
-[לניסיון ב-Google AI Studio](https://aistudio.google.com?model=gemini-3.1-flash-image&hl=he)
+[在 Google AI Studio 中試用](https://aistudio.google.com?model=gemini-3.1-flash-image&hl=zh-tw)
 
-## מאמרי עזרה
+## 說明文件
 
-בדף [יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he) אפשר לקרוא על כל התכונות והיכולות.
+如要全面瞭解功能和特色，請前往「[圖像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw)」頁面。
 
 ## gemini-3.1-flash-image
 
-| נכס | תיאור |
+| 屬性 | 說明 |
 | --- | --- |
-| id\_cardקוד מודל | `gemini-3.1-flash-image` |
-| saveסוגי נתונים נתמכים | **קלטים**  טקסט ותמונה / קובץ PDF  **פלט**  תמונה וטקסט |
-| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  131,072  **מגבלת אסימונים בפלט**  32,768 |
-| handymanיכולות | **יצירת אודיו**  לא נתמך  ‫**Batch API**  נתמך  **שמירת נתונים במטמון**  לא נתמך  **ביצוע קוד**  לא נתמך  **חיפוש קבצים**  לא נתמך  **בקשה להפעלת פונקציה**  לא נתמך  **עיגון בעזרת מפות Google**  לא נתמך  **יצירת תמונות**  נתמך  ‫**Live API**  לא נתמך  **חיפוש עם עיגון בנתונים**  נתמך  **פלטים מובְנים**  לא נתמך  **חשיבה**  נתמך  **הקשר של כתובת ה-URL**  לא נתמך |
-| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - יציב: `gemini-3.1-flash-image` |
-| calendar\_monthהעדכון האחרון | פברואר 2026 |
-| cognition\_2תאריך סף הידע | ינואר 2025 |
+| id\_card 模型代碼 | `gemini-3.1-flash-image` |
+| save支援的資料類型 | **輸入裝置**  文字和圖片 / PDF  **輸出內容**  圖片和文字 |
+| token\_auto 代幣限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw) | **輸入權杖限制**  131,072  **輸出詞元限制**  32,768 |
+| handyman功能 | **語音生成**  不支援  **批次 API**  支援  **快取**  不支援  **程式碼執行**  不支援  **檔案搜尋**  不支援  **函式呼叫**  不支援  **利用 Google 地圖建立基準**  不支援  **圖像生成**  支援  **Live API**  不支援  **以搜尋為基準**  支援  **結構化輸出內容**  不支援  **思考**  支援  **網址內容**  不支援 |
+| 123 個版本 | 如要瞭解詳情，請參閱[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-tw#model-versions)。  - 穩定：`gemini-3.1-flash-image` |
+| calendar\_month最新更新 | 2026 年 2 月 |
+| cognition\_2知識截點 | 2025 年 1 月 |
 
-שליחת משוב
+提供意見
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-עדכון אחרון: 2026-05-28 (שעון UTC).
+上次更新時間：2026-05-28 (世界標準時間)。
 
-רוצה לתת לנו משוב?
+想進一步說明嗎？
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-05-28 (שעון UTC)."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-28 (世界標準時間)。"],[],[]]

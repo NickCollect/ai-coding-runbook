@@ -1,32 +1,29 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/gemini-3?hl=it
-fetched_at: 2026-06-01T05:58:23.044619+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/gemini-3?hl=pl
+fetched_at: 2026-06-08T05:30:49.728396+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=it)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=pl)
 
-Invia feedback
+Prześlij opinię
 
-# Guida per gli sviluppatori di Gemini 3
+# Przewodnik dla programistów Gemini 3
 
-Gemini 3 è la nostra famiglia di modelli più intelligente di sempre, basata su un ragionamento all'avanguardia. È progettato per dare vita a qualsiasi idea
-padroneggiando workflow agentici, programmazione autonoma e attività multimodali complesse.
-Questa guida illustra le funzionalità principali della famiglia di modelli Gemini 3 e come ottenere il massimo.
+Gemini 3 to nasza najbardziej inteligentna rodzina modeli, która opiera się na najnowocześniejszym rozumowaniu. Została zaprojektowana tak, aby realizować każdy pomysł dzięki opanowaniu przepływów pracy agentów, autonomicznego kodowania i złożonych zadań multimodalnych.
+Z tego przewodnika dowiesz się, jakie są najważniejsze funkcje rodziny modeli Gemini 3 i jak je wykorzystać.
 
-Esplora la nostra [raccolta di app Gemini 3](https://aistudio.google.com/app/apps?source=showcase&%3BshowcaseTag=gemini-3&hl=it) per
-vedere come il modello gestisce il ragionamento avanzato, la programmazione autonoma e le attività
-multimodali complesse.
+Zapoznaj się z naszą [kolekcją aplikacji Gemini 3](https://aistudio.google.com/app/apps?source=showcase&%3BshowcaseTag=gemini-3&hl=pl), aby zobaczyć, jak model radzi sobie z zaawansowanym wnioskowaniem, autonomicznym kodowaniem i złożonymi zadaniami multimodalnymi.
 
-Inizia con poche righe di codice:
+Zacznij od kilku wierszy kodu:
 
 ### Python
 
@@ -75,56 +72,48 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Scopri la serie Gemini 3
+## Poznaj serię Gemini 3
 
-Gemini 3.1 Pro è ideale per le attività complesse che
-richiedono un'ampia conoscenza del mondo e un ragionamento avanzato tra le varie modalità.
+Gemini 3.1 Pro najlepiej sprawdza się w przypadku złożonych zadań, które wymagają szerokiej wiedzy o świecie i zaawansowanego wnioskowania w różnych modalnościach.
 
-Gemini 3 Flash è il nostro ultimo modello della serie 3, con intelligenza di livello Pro alla velocità e al prezzo di Flash.
+Gemini 3 Flash to nasz najnowszy model z serii 3, który oferuje inteligencję na poziomie Pro z szybkością i ceną Flash.
 
-Nano Banana Pro (noto anche come Gemini 3 Pro Image) è il nostro modello di generazione di immagini di qualità più elevata, mentre Nano Banana 2 (noto anche come Gemini 3.1 Flash Image) è l'equivalente ad alto volume, alta efficienza e prezzo più basso.
+Nano Banana Pro (znany też jako Gemini 3 Pro Image) to nasz model generowania obrazów o najwyższej jakości, a Nano Banana 2 (znany też jako Gemini 3.1 Flash Image) to odpowiednik o dużej wydajności i niższej cenie.
 
-Gemini 3.1 Flash-Lite è il nostro modello più efficiente, progettato per attività a costi contenuti e
-con volumi elevati.
+Gemini 3.1 Flash-Lite to nasz model do pracy, który został stworzony z myślą o oszczędności i zadaniach o dużej skali.
 
-Al momento, tutti i modelli Gemini 3 sono in anteprima.
+Wszystkie modele Gemini 3 są obecnie dostępne w wersji testowej.
 
-| ID modello | Finestra contestuale (in entrata / in uscita) | Knowledge Cutoff | Prezzi (input / output)\* |
+| Identyfikator modelu | Okno kontekstu (wejście / wyjście) | Granica wiedzy | Ceny (wejście / wyjście)\* |
 | --- | --- | --- | --- |
-| **gemini-3.1-flash-lite** | 1 milione / 64.000 | Gennaio 2025 | 0,25 $ (testo, immagine, video), 0,50 $ (audio) / 1,50 $ |
-| **gemini-3.1-flash-image-preview** | 128.000 / 32.000 | Gennaio 2025 | 0,25 $ (input di testo) / 0,067 $ (output di immagine)\*\* |
-| **gemini-3.1-pro-preview** | 1 milione / 64.000 | Gennaio 2025 | $2 / $12 (<200.000 token)   $4 / $18 (>200.000 token) |
-| **gemini-3-flash-preview** | 1 milione / 64.000 | Gennaio 2025 | 0,50 $ / 3 $ |
-| **gemini-3-pro-image-preview** | 65.000 / 32.000 | Gennaio 2025 | 2 $ (input di testo) / 0,134 $ (output di immagine)\*\* |
+| **gemini-3.1-flash-lite** | 1 mln / 64 tys. | Styczeń 2025 r. | 0,25 USD (tekst, obraz, film), 0,50 USD (dźwięk) / 1,50 USD |
+| **gemini-3.1-flash-image-preview** | 128 tys. / 32 tys. | Styczeń 2025 r. | 0,25 USD (wejście tekstowe) / 0,067 USD (wyjście obrazowe)\*\* |
+| **gemini-3.1-pro-preview** | 1 mln / 64 tys. | Styczeń 2025 r. | 2 USD / 12 USD (< 200 tys. tokenów)   4 USD / 18 USD (> 200 tys. tokenów) |
+| **gemini-3-flash-preview** | 1 mln / 64 tys. | Styczeń 2025 r. | 0,50 USD / 3 USD |
+| **gemini-3-pro-image-preview** | 65 tys. / 32 tys. | Styczeń 2025 r. | 2 USD (wejście tekstowe) / 0,134 USD (wyjście obrazowe)\*\* |
 
-*\* I prezzi si riferiscono a 1 milione di token, se non diversamente indicato.*
-*\*\* Il prezzo delle immagini varia in base alla risoluzione. Per maggiori dettagli, consulta la [pagina dei prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it).*
+*\* Ceny dotyczą 1 miliona tokenów, o ile nie wskazano inaczej.*
+*\*\* Ceny obrazów zależą od rozdzielczości. Szczegółowe informacje znajdziesz na [stronie z cennikiem](https://ai.google.dev/gemini-api/docs/pricing?hl=pl).*
 
-Per limiti, prezzi e informazioni aggiuntive dettagliati, consulta la
-[pagina dei modelli](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it).
+Szczegółowe limity, ceny i dodatkowe informacje znajdziesz na
+[stronie modeli](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl).
 
-## Nuove funzionalità dell'API in Gemini 3
+## Nowe funkcje interfejsu API w Gemini 3
 
-Gemini 3 introduce nuovi parametri progettati per offrire agli sviluppatori un maggiore controllo su
-latenza, costi e fedeltà multimodale.
+W Gemini 3 wprowadzamy nowe parametry, które zapewniają programistom większą kontrolę nad opóźnieniem, kosztami i wiernością multimodalną.
 
-### Livello di pensiero
+### Poziom myślenia
 
-I modelli della serie Gemini 3 utilizzano per impostazione predefinita il ragionamento dinamico per analizzare i prompt. Puoi utilizzare il parametro `thinking_level`, che controlla la
-**profondità massima** del processo di ragionamento interno del modello prima che produca una
-risposta. Gemini 3 tratta questi livelli come quote relative per il ragionamento
-piuttosto che come garanzie di token rigorose.
+Modele z serii Gemini 3 domyślnie używają myślenia dynamicznego do analizowania promptów. Możesz użyć parametru `thinking_level`, który określa **maksymalną** głębokość wewnętrznego procesu rozumowania modelu przed wygenerowaniem odpowiedzi. Gemini 3 traktuje te poziomy jako względne limity myślenia, a nie ścisłe gwarancje tokenów.
 
-Se `thinking_level` non è specificato, Gemini 3 utilizzerà `high` come valore predefinito. Per
-risposte più rapide e a bassa latenza quando non è necessario un ragionamento complesso, puoi
-limitare il livello di pensiero del modello a `low`.
+Jeśli parametr `thinking_level` nie zostanie określony, Gemini 3 domyślnie ustawi wartość `high`. Aby uzyskać szybsze odpowiedzi z mniejszym opóźnieniem, gdy nie jest wymagane złożone rozumowanie, możesz ograniczyć poziom myślenia modelu do `low`.
 
-| Livello di pensiero | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | Descrizione |
+| Poziom myślenia | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | Opis |
 | --- | --- | --- | --- | --- |
-| **`minimal`** | Non supportato | Supportato (valore predefinito) | Supportato | Corrisponde all'impostazione "Nessun pensiero" per la maggior parte delle query. Il modello potrebbe pensare in modo molto minimale per attività di programmazione complesse. Riduce al minimo la latenza per le applicazioni di chat o a throughput elevato. Tieni presente che `minimal` non garantisce che la funzionalità di pensiero sia disattivata. |
-| **`low`** | Supportato | Supportato | Supportato | Riduce al minimo la latenza e i costi. Ideale per applicazioni semplici di follow-up delle istruzioni, chat o ad alto rendimento. |
-| **`medium`** | Supportato | Supportato | Supportato | Pensiero equilibrato per la maggior parte delle attività. |
-| **`high`** | Supportato (predefinito, dinamico) | Supportato (dinamico) | Supportato (predefinito, dinamico) | Massimizza la profondità del ragionamento. Il modello potrebbe impiegare molto più tempo per raggiungere un primo token di output (non di pensiero), ma l'output sarà più ragionato. |
+| **`minimal`** | Nieobsługiwane | Obsługiwane (domyślnie) | Obsługiwane | W przypadku większości zapytań odpowiada ustawieniu „bez myślenia”. W przypadku złożonych zadań związanych z kodowaniem model może myśleć bardzo minimalnie. Minimalizuje opóźnienie w przypadku aplikacji do czatowania lub aplikacji o wysokiej przepustowości. Pamiętaj, że `minimal` nie gwarantuje, że myślenie jest wyłączone. |
+| **`low`** | Obsługiwane | Obsługiwane | Obsługiwane | Minimalizuje opóźnienie i koszty. Najlepsze rozwiązanie w przypadku prostych instrukcji, czatów lub aplikacji o wysokiej przepustowości. |
+| **`medium`** | Obsługiwane | Obsługiwane | Obsługiwane | Zrównoważone myślenie w przypadku większości zadań. |
+| **`high`** | Obsługiwane (domyślnie, dynamiczne) | Obsługiwane (dynamiczne) | Obsługiwane (domyślnie, dynamiczne) | Maksymalizuje głębokość rozumowania. Model może znacznie dłużej generować pierwszy token wyjściowy (bez myślenia), ale wynik będzie bardziej przemyślany. |
 
 ### Python
 
@@ -178,28 +167,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 ### Temperatura
 
-Per tutti i modelli Gemini 3, ti consigliamo vivamente di mantenere il parametro di temperatura
-sul valore predefinito di `1.0`.
+W przypadku wszystkich modeli Gemini 3 zdecydowanie zalecamy pozostawienie parametru temperatury na jego domyślnej wartości `1.0`.
 
-Mentre i modelli precedenti spesso traevano vantaggio dalla regolazione della temperatura per controllare
-la creatività rispetto al determinismo, le capacità di ragionamento di Gemini 3 sono ottimizzate
-per l'impostazione predefinita. La modifica della temperatura (impostandola su un valore inferiore a 1.0) potrebbe
-comportare un comportamento imprevisto, ad esempio un ciclo o un rendimento ridotto,
-in particolare in attività matematiche o di ragionamento complesse.
+W przypadku poprzednich modeli często warto było dostosować temperaturę, aby kontrolować kreatywność i determinizm, ale możliwości rozumowania Gemini 3 są zoptymalizowane pod kątem ustawienia domyślnego. Zmiana temperatury (ustawienie jej poniżej 1.0) może prowadzić do nieoczekiwanych zachowań, takich jak pętle lub pogorszenie wydajności, szczególnie w przypadku złożonych zadań matematycznych lub związanych z rozumowaniem.
 
-### Firme dei ragionamenti
+### Podpisy myśli
 
-I modelli Gemini 3 utilizzano le firme del pensiero per mantenere il contesto del ragionamento tra le chiamate API. Queste firme sono rappresentazioni criptate del processo di pensiero interno del modello.
+Modele Gemini 3 używają podpisów myśli, aby zachować kontekst rozumowania w wywołaniach interfejsu API. Te podpisy to zaszyfrowane reprezentacje wewnętrznego procesu myślowego modelu.
 
-- **Modalità con stato (consigliata)**: quando utilizzi l'API Interactions in modalità con stato (fornendo `previous_interaction_id`), il server gestisce automaticamente la cronologia delle conversazioni e le firme dei pensieri.
-- **Modalità stateless**: se gestisci manualmente la cronologia delle conversazioni, devi includere i blocchi di pensiero con le relative firme nelle richieste successive per convalidare l'autenticità.
+- **Tryb stanowy (zalecany)**: gdy używasz interfejsu Interactions API w trybie stanowym (podając `previous_interaction_id`), serwer automatycznie zarządza historią rozmów i podpisami myśli.
+- **Tryb bezstanowy**: jeśli zarządzasz historią rozmów ręcznie, musisz uwzględnić bloki myśli z ich podpisami w kolejnych żądaniach, aby zweryfikować autentyczność.
 
-Per informazioni dettagliate, consulta la pagina [Thought Signatures](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=it).
+Szczegółowe informacje znajdziesz na stronie [Podpisy myśli](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=pl).
 
-### Output strutturati con strumenti
+### Uporządkowane dane wyjściowe z narzędziami
 
-I modelli Gemini 3 ti consentono di combinare gli [output strutturati](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=it) con strumenti integrati, tra cui
-[Grounding con la Ricerca Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=it), [Contesto URL](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=it), [Esecuzione di codice](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=it) e [Chiamata di funzione](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=it).
+Modele Gemini 3 umożliwiają łączenie [uporządkowanych danych wyjściowych](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=pl) z wbudowanymi narzędziami, takimi jak
+[powiązanie ze źródłami informacji przy użyciu wyszukiwarki Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=pl), [kontekst adresu URL](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=pl), [wykonywanie kodu](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=pl) i [wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=pl).
 
 ### Python
 
@@ -313,25 +297,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Generazione di immagini
+### Generowanie obrazów
 
-Gemini 3.1 Flash Image e Gemini 3 Pro Image ti consentono di generare e modificare immagini
-a partire da prompt di testo. Utilizza
-il ragionamento per "pensare" a un prompt e può recuperare dati in tempo reale, come
-previsioni meteo o grafici azionari, prima di utilizzare la [Ricerca Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=it) per la generazione di immagini
-ad alta fedeltà.
+Gemini 3.1 Flash Image i Gemini 3 Pro Image umożliwiają generowanie i edytowanie obrazów na podstawie promptów tekstowych. Model używa
+rozumowania do "przemyślenia" prompta i może pobierać dane w czasie rzeczywistym, takie jak
+prognozy pogody czy wykresy giełdowe, zanim użyje [Grounding z wyszukiwarką Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=pl) do wygenerowania obrazów o wysokiej wierności.
 
-**Funzionalità nuove e migliorate:**
+**Nowe i ulepszone możliwości:**
 
-- **Rendering di testo e 4K:** genera testo e diagrammi nitidi e leggibili con risoluzioni fino a 2K e 4K.
-- **Generazione fondata:** utilizza lo strumento `google_search` per verificare i fatti e
-  generare immagini basate su informazioni del mondo reale. Grounding con la Ricerca *Immagini*
-  Google disponibile per Gemini 3.1 Flash Image.
-- **Modifica conversazionale**:modifica di immagini in più passaggi semplicemente chiedendo
-  di apportare modifiche (ad es. "Crea uno sfondo con un tramonto"). Questo flusso di lavoro si basa sulle
-  **Firme del pensiero** per preservare il contesto visivo tra i turni.
+- **Renderowanie tekstu i obrazów w rozdzielczości 4K:** generuj wyraźny, czytelny tekst i diagramy w rozdzielczości do 2K i 4K.
+- **Generowanie z Grounding:** użyj narzędzia `google_search`, aby weryfikować fakty i generować obrazy na podstawie informacji z rzeczywistego świata. Grounding z wyszukiwarką *grafiki* Google jest dostępny w Gemini 3.1 Flash Image.
+- **Edytowanie w trybie konwersacyjnym:** wieloetapowa edycja obrazów przez proste poproszenie o zmiany (np. „Zmień tło na zachód słońca”). Ten przepływ pracy opiera się na **podpisach myśli** , aby zachować kontekst wizualny między etapami.
 
-Per informazioni dettagliate su proporzioni, flussi di lavoro di modifica e opzioni di configurazione, consulta la [guida alla generazione di immagini](https://ai.google.dev/gemini-api/docs/interactions/image-generation?hl=it).
+Szczegółowe informacje o proporcjach, przepływach pracy związanych z edycją i opcjach konfiguracji
+znajdziesz w przewodniku [Generowanie obrazów](https://ai.google.dev/gemini-api/docs/interactions/image-generation?hl=pl).
 
 ### Python
 
@@ -410,26 +389,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**Risposta di esempio**
+**Przykładowa odpowiedź**
 
-![Meteo Tokyo](https://ai.google.dev/static/gemini-api/docs/images/weather-tokyo.jpg?hl=it)
+![Pogoda w Tokio](https://ai.google.dev/static/gemini-api/docs/images/weather-tokyo.jpg?hl=pl)
 
-### Esecuzione del codice con immagini
+### Wykonywanie kodu z obrazami
 
-Gemini 3 Flash può trattare la visione come un'indagine attiva, non solo come uno sguardo statico. Combinando il ragionamento con l'[esecuzione del codice](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=it), il modello formula un piano, quindi scrive ed esegue codice Python per ingrandire, ritagliare, annotare o manipolare in altro modo le immagini passo dopo passo per basare visivamente le sue risposte.
+Gemini 3 Flash może traktować widzenie jako aktywne badanie, a nie tylko statyczne spojrzenie. Łącząc rozumowanie z [wykonywaniem kodu](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=pl), model formułuje plan, a następnie pisze i
+wykonuje kod w Pythonie, aby powiększać, przycinać, dodawać adnotacje lub w inny sposób manipulować obrazami
+krok po kroku, aby wizualnie uzasadnić swoje odpowiedzi.
 
-**Casi d'uso:**
+**Możesz na przykład:**
 
-- **Zoom e ispezione**:il modello rileva implicitamente quando i dettagli sono troppo
-  piccoli (ad es. la lettura di un indicatore o di un numero di serie distante) e scrive codice per ritagliare
-  e riesaminare l'area a una risoluzione più elevata.
-- **Matematica visiva e grafici**:il modello può eseguire calcoli in più passaggi utilizzando
-  il codice (ad es. la somma delle voci di una ricevuta o la generazione di un grafico Matplotlib
-  dai dati estratti).
-- **Annotazione delle immagini:** il modello può disegnare frecce, rettangoli di selezione o altre annotazioni direttamente sulle immagini per rispondere a domande spaziali come "Dove va questo oggetto?".
+- **Powiększanie i sprawdzanie:** model niejawnie wykrywa, kiedy szczegóły są zbyt małe (np. odczytywanie odległego wskaźnika lub numeru seryjnego), i pisze kod, aby przyciąć i ponownie sprawdzić obszar w wyższej rozdzielczości.
+- **Matematyka wizualna i wykresy:** model może wykonywać wieloetapowe obliczenia za pomocą kodu (np. sumowanie pozycji na paragonie lub generowanie wykresu Matplotlib na podstawie wyodrębnionych danych).
+- **Dodawanie adnotacji do obrazów:** model może rysować strzałki, ramki ograniczające lub inne adnotacje bezpośrednio na obrazach, aby odpowiadać na pytania przestrzenne, takie jak „Gdzie powinien znajdować się ten element?”.
 
-Per attivare il pensiero visivo, configura [Esecuzione del codice](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=it) come strumento. Il modello utilizzerà automaticamente
-il codice per manipolare le immagini quando necessario.
+Aby włączyć myślenie wizualne, skonfiguruj [wykonywanie kodu](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=pl) jako narzędzie. W razie potrzeby model automatycznie użyje kodu do manipulowania obrazami.
 
 ### Python
 
@@ -557,14 +533,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-Per ulteriori dettagli sull'esecuzione del codice con le immagini, vedi [Esecuzione del codice](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=it#images).
+Więcej informacji o wykonywaniu kodu z obrazami znajdziesz w artykule [Wykonywanie kodu](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=pl#images).
 
-### Risposte della funzione multimodale
+### Odpowiedzi funkcji multimodalnych
 
-[Chiamata di funzione multimodale](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=it#multimodal)
-consente agli utenti di avere risposte di funzione contenenti
-oggetti multimodali, consentendo un migliore utilizzo delle funzionalità
-di chiamata di funzione del modello. La chiamata di funzione standard supporta solo risposte di funzione basate su testo:
+[Wywoływanie funkcji multimodalnych](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=pl#multimodal)
+umożliwia użytkownikom uzyskiwanie odpowiedzi funkcji zawierających
+obiekty multimodalne, co pozwala na lepsze wykorzystanie możliwości wywoływania funkcji
+przez model. Standardowe wywoływanie funkcji obsługuje tylko odpowiedzi funkcji tekstowych:
 
 ### Python
 
@@ -741,9 +717,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Combinare strumenti integrati e chiamata di funzione
+### Łączenie wbudowanych narzędzi i wywoływania funkcji
 
-Gemini 3 consente l'utilizzo di strumenti integrati (come la Ricerca Google, il contesto dell'URL e [altro](https://ai.google.dev/gemini-api/docs/tools?hl=it)) e di strumenti di [chiamata di funzione](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=it) personalizzati nella stessa chiamata API, consentendo workflow più complessi.
+Gemini 3 umożliwia używanie wbudowanych narzędzi (takich jak wyszukiwarka Google, kontekst adresu URL
+i [inne](https://ai.google.dev/gemini-api/docs/tools?hl=pl)) oraz niestandardowych narzędzi do [wywoływania funkcji](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=pl) w tym samym wywołaniu interfejsu API, co pozwala na
+bardziej złożone przepływy pracy.
 
 ### Python
 
@@ -851,86 +829,73 @@ if (fcStep) {
 }
 ```
 
-## Migrazione da Gemini 2.5
+## Migracja z Gemini 2.5
 
-Gemini 3 è la nostra famiglia di modelli più potente finora e offre un miglioramento graduale rispetto a Gemini 2.5. Quando esegui la migrazione, tieni presente quanto segue:
+Gemini 3 to nasza najbardziej zaawansowana rodzina modeli, która oferuje stopniowe ulepszenia w porównaniu z Gemini 2.5. Podczas migracji weź pod uwagę te kwestie:
 
-- **Ragionamento**:se in precedenza utilizzavi l'ingegneria dei prompt complessa (come
-  la catena di pensiero) per forzare Gemini 2.5 a ragionare, prova Gemini 3 con
-  `thinking_level: "high"` e prompt semplificati.
-- **Impostazioni della temperatura**:se il codice esistente imposta esplicitamente la temperatura
-  (soprattutto su valori bassi per output deterministici), ti consigliamo di rimuovere questo
-  parametro e utilizzare il valore predefinito di Gemini 3 pari a 1,0 per evitare potenziali problemi di loop
-  o un peggioramento delle prestazioni per attività complesse.
-- **Comprensione di PDF e documenti**:se ti affidavi a un comportamento specifico per l'analisi dei documenti densi, testa la nuova
-  impostazione `media_resolution_high` per garantire una precisione continua.
-- **Utilizzo dei token**:la migrazione alle impostazioni predefinite di Gemini 3 potrebbe **aumentare** l'utilizzo dei token per i PDF, ma **diminuirlo** per i video. Se le richieste ora superano
-  la finestra contestuale a causa di risoluzioni predefinite più elevate, ti consigliamo di
-  ridurre esplicitamente la risoluzione dei contenuti multimediali.
-- **Segmentazione delle immagini**:le funzionalità di segmentazione delle immagini (che restituiscono maschere a livello di pixel per gli oggetti) non sono supportate in Gemini 3 Pro o Gemini 3 Flash. Per i
-  carichi di lavoro che richiedono la segmentazione delle immagini integrata, consigliamo di continuare a
-  utilizzare Gemini 2.5 Flash con la funzionalità di ragionamento disattivata o [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=it).
-- **Utilizzo del computer**:Gemini 3 Pro e Gemini 3 Flash supportano l'[utilizzo del computer](https://ai.google.dev/gemini-api/docs/interactions/computer-use?hl=it). A differenza della serie 2.5, non è necessario
-  utilizzare un modello separato per accedere allo strumento Utilizzo del computer.
-- **Supporto degli strumenti**: [la combinazione di strumenti integrati con la chiamata di funzione](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=it) è ora supportata per i modelli Gemini 3. Ora è supportato anche il [grounding di Maps](https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=it) per i modelli Gemini 3.
+- **Myślenie:** jeśli wcześniej używałeś złożonego inżynierii promptów (np.
+  łańcucha myśli), aby zmusić Gemini 2.5 do rozumowania, wypróbuj Gemini 3 z
+  `thinking_level: "high"` i uproszczonymi promptami.
+- **Ustawienia temperatury:** jeśli Twój dotychczasowy kod wyraźnie ustawia temperaturę (szczególnie na niskie wartości w przypadku deterministycznych danych wyjściowych), zalecamy usunięcie tego parametru i użycie domyślnej wartości 1.0 w Gemini 3, aby uniknąć potencjalnych problemów z pętlami lub pogorszenia wydajności w przypadku złożonych zadań.
+- **Rozumienie plików PDF i dokumentów:** jeśli polegasz na określonym zachowaniu podczas analizowania gęstych dokumentów, przetestuj nowe ustawienie `media_resolution_high`, aby zapewnić dalszą dokładność.
+- **Zużycie tokenów:** migracja do domyślnych ustawień Gemini 3 może **zwiększyć** zużycie tokenów w przypadku plików PDF, ale **zmniejszyć** zużycie tokenów w przypadku filmów. Jeśli żądania przekraczają teraz okno kontekstu ze względu na wyższe domyślne rozdzielczości, zalecamy wyraźne zmniejszenie rozdzielczości multimediów.
+- **Segmentacja obrazów:** możliwości segmentacji obrazów (zwracanie masek obiektów na poziomie pikseli) nie są obsługiwane w Gemini 3 Pro ani Gemini 3 Flash. W przypadku
+  zadań wymagających wbudowanej segmentacji obrazów zalecamy dalsze korzystanie z
+  Gemini 2.5 Flash z wyłączonym myśleniem lub [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=pl).
+- **Korzystanie z komputera:** Gemini 3 Pro i Gemini 3 Flash obsługują [korzystanie
+  z komputera](https://ai.google.dev/gemini-api/docs/interactions/computer-use?hl=pl). W przeciwieństwie do serii 2.5 nie musisz używać osobnego modelu, aby uzyskać dostęp do narzędzia Korzystanie z komputera.
+- **Obsługa narzędzi**: [łączenie wbudowanych narzędzi z wywoływaniem funkcji](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=pl) jest teraz obsługiwane w przypadku modeli Gemini 3. [Grounding z Mapami Google
+  jest też teraz obsługiwany w przypadku modeli Gemini 3
+  .](https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=pl)
 
-## Compatibilità con OpenAI
+## Zgodność z OpenAI
 
-Per gli utenti che utilizzano il [livello di compatibilità OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=it),
-i parametri standard (`reasoning_effort` di OpenAI) vengono mappati automaticamente
-agli equivalenti di Gemini (`thinking_level`).
+W przypadku użytkowników korzystających z [warstwy zgodności z OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=pl),
+standardowe parametry (parametr `reasoning_effort` OpenAI) są automatycznie mapowane na
+odpowiedniki w Gemini (`thinking_level`).
 
-## Best practice per la creazione di prompt
+## Sprawdzone metody tworzenia promptów
 
-Gemini 3 è un modello di ragionamento che cambia il modo in cui devi formulare i prompt.
+Gemini 3 to model rozumowania, który zmienia sposób tworzenia promptów.
 
-- **Istruzioni precise:** sii conciso nei prompt di input. Gemini 3 risponde
-  meglio a istruzioni dirette e chiare. Potrebbe analizzare in modo eccessivo tecniche di prompt engineering complesse o troppo dettagliate utilizzate per i modelli precedenti.
-- **Livello di dettaglio dell'output:** per impostazione predefinita, Gemini 3 è meno prolisso e preferisce
-  fornire risposte dirette ed efficienti. Se il tuo caso d'uso richiede una persona più
-  conversazionale o "loquace", devi indirizzare esplicitamente il modello nel
-  prompt (ad es. "Spiega questo come un assistente amichevole e loquace").
-- **Gestione del contesto**:quando lavori con set di dati di grandi dimensioni (ad es. libri interi, codebase o video lunghi), inserisci le istruzioni o le domande specifiche alla fine del prompt, dopo il contesto dei dati. Ancora il ragionamento del modello ai
-  dati forniti iniziando la domanda con una frase come "In base alle
-  informazioni precedenti...".
+- **Precyzyjne instrukcje:** w promptach wejściowych używaj zwięzłych instrukcji. Gemini 3 najlepiej reaguje na bezpośrednie, jasne instrukcje. Może nadmiernie analizować rozbudowane lub zbyt złożone techniki inżynierii promptów używane w przypadku starszych modeli.
+- **Szczegółowość danych wyjściowych:** Gemini 3 jest domyślnie mniej szczegółowy i woli podawać bezpośrednie, skuteczne odpowiedzi. Jeśli Twój przypadek użycia wymaga bardziej konwersacyjnej lub „gadatliwej” osobowości, musisz wyraźnie nakierować model w prompcie (np. „Wyjaśnij to jako przyjazny, rozmowny asystent”).
+- **Zarządzanie kontekstem:** podczas pracy z dużymi zbiorami danych (np. całymi książkami,
+  bazami kodu lub długimi filmami) umieść konkretne instrukcje lub pytania na
+  końcu prompta, po kontekście danych. Aby zakotwiczyć rozumowanie modelu w podanych danych, zacznij pytanie od frazy takiej jak „Na podstawie powyższych informacji...”.
 
-Scopri di più sulle strategie di progettazione dei prompt nella [guida all'ingegneria dei prompt](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=it).
+Więcej informacji o strategiach projektowania promptów znajdziesz w przewodniku [Inżynieria promptów](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=pl).
 
-## Domande frequenti
+## Najczęstsze pytania
 
-1. **Qual è il knowledge cutoff per Gemini 3?** I modelli Gemini 3 hanno un knowledge cutoff di gennaio 2025. Per informazioni più recenti, utilizza lo strumento
-   [Search Grounding](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=it).
-2. **Quali sono i limiti della finestra contestuale?** I modelli Gemini 3 supportano una finestra contestuale di input di 1 milione di token e fino a 64.000 token di output.
-3. **Esiste un livello senza costi per Gemini 3?** Gemini 3 Flash
-   `gemini-3-flash-preview` ha un livello senza costi nell'API Gemini. Puoi provare
-   Gemini 3.1 Pro e 3 Flash senza costi in Google AI Studio, ma non
-   è disponibile un livello senza costi per `gemini-3.1-pro-preview` nell'API Gemini.
-4. **Il mio vecchio codice `thinking_budget` continuerà a funzionare?** Sì, `thinking_budget` è
-   ancora supportato per la compatibilità con le versioni precedenti, ma ti consigliamo di eseguire la migrazione a
-   `thinking_level` per un rendimento più prevedibile. Non utilizzare entrambi nella stessa
-   richiesta.
-5. **Gemini 3 supporta l'API Batch?** Sì, Gemini 3 supporta l'[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=it).
-6. **La memorizzazione nella cache del contesto è supportata?** Sì, la [memorizzazione nella cache del contesto](https://ai.google.dev/gemini-api/docs/interactions/caching?hl=it) è supportata per Gemini 3.
-7. **Quali strumenti sono supportati in Gemini 3?** Gemini 3 supporta
-   [Ricerca Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=it),
-   [Grounding con Google Maps](https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=it),
-   [Ricerca file](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=it),
-   [Esecuzione di codice](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=it) e
-   [Contesto URL](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=it). Supporta anche
-   la [chiamata di funzioni](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=it) standard per
-   i tuoi strumenti personalizzati e in
-   [combinazione con strumenti integrati](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=it).
-8. **Che cos'è `gemini-3.1-pro-preview-customtools`?** Se utilizzi
-   `gemini-3.1-pro-preview` e il modello ignora i tuoi strumenti personalizzati a favore dei
-   comandi bash, prova invece il modello `gemini-3.1-pro-preview-customtools`.
-   Scopri di più [qui][customtools-model].
+1. **Jaka jest granica wiedzy w przypadku Gemini 3?** Modele Gemini 3 mają granicę wiedzy w styczniu 2025 r. Aby uzyskać najnowsze informacje, użyj narzędzia
+   [Grounding z wyszukiwarką](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=pl).
+2. **Jakie są limity okna kontekstu?** Modele Gemini 3 obsługują okno kontekstu wejściowego o wielkości 1 miliona tokenów i do 64 tys. tokenów wyjściowych.
+3. **Czy w przypadku Gemini 3 jest dostępny bezpłatny poziom?** Gemini 3 Flash `gemini-3-flash-preview` ma bezpłatny poziom w interfejsie Gemini API. Możesz bezpłatnie wypróbować Gemini 3.1 Pro i 3 Flash w Google AI Studio, ale w interfejsie Gemini API nie jest dostępny bezpłatny poziom dla `gemini-3.1-pro-preview`.
+4. **Czy mój stary kod `thinking_budget` będzie nadal działać?** Tak, `thinking_budget` jest nadal obsługiwany w celu zapewnienia zgodności wstecznej, ale zalecamy migrację do `thinking_level`, aby uzyskać bardziej przewidywalną wydajność. Nie używaj obu tych parametrów w tym samym żądaniu.
+5. **Czy Gemini 3 obsługuje interfejs Batch API?** Tak, Gemini 3 obsługuje interfejs
+   [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=pl).
+6. **Czy buforowanie kontekstu jest obsługiwane?** Tak, [buforowanie kontekstu](https://ai.google.dev/gemini-api/docs/interactions/caching?hl=pl) jest obsługiwane w przypadku Gemini 3.
+7. **Które narzędzia są obsługiwane w Gemini 3?** Gemini 3 obsługuje
+   [wyszukiwarkę Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=pl),
+   [powiązanie ze źródłami informacji przy użyciu Map Google](https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=pl),
+   [wyszukiwanie plików](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=pl),
+   [wykonywanie kodu](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=pl) i
+   [kontekst adresu URL](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=pl). Obsługuje też
+   standardowe [wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=pl) w
+   przypadku własnych narzędzi niestandardowych oraz w
+   [połączeniu z wbudowanymi narzędziami](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=pl).
+8. **Co to jest `gemini-3.1-pro-preview-customtools`?** Jeśli używasz
+   `gemini-3.1-pro-preview` a model ignoruje Twoje narzędzia niestandardowe na rzecz
+   poleceń bash, wypróbuj model `gemini-3.1-pro-preview-customtools` zamiast.
+   Więcej informacji [tutaj][customtools-model].
 
-Invia feedback
+Prześlij opinię
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Ultimo aggiornamento 2026-05-29 UTC.
+Ostatnia aktualizacja: 2026-05-29 UTC.
 
-Vuoi dirci altro?
+Chcesz przekazać coś jeszcze?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-29 UTC."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-05-29 UTC."],[],[]]

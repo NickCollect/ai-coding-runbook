@@ -1,38 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/llama-index?hl=ja
-fetched_at: 2026-06-01T06:07:55.016517+00:00
-title: "Gemini \u3068 LlamaIndex \u3092\u4f7f\u7528\u3057\u305f\u30ea\u30b5\u30fc\u30c1 \u30a8\u30fc\u30b8\u30a7\u30f3\u30c8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/llama-index?hl=vi
+fetched_at: 2026-06-08T05:39:32.298659+00:00
+title: "T\u00e1c nh\u00e2n nghi\u00ean c\u1ee9u b\u1eb1ng Gemini v\u00e0 LlamaIndex \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-フィードバックを送信
+Gửi ý kiến phản hồi
 
-# Gemini と LlamaIndex を使用したリサーチ エージェント
+# Tác nhân nghiên cứu bằng Gemini và LlamaIndex
 
-LlamaIndex は、データに接続された LLM を使用してナレッジ エージェントを構築するためのフレームワークです。この例では、リサーチ エージェント用のマルチエージェント ワークフローを構築する方法を示します。LlamaIndex では、[`Workflows`](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)
-はエージェント システムとマルチエージェント システムの構成要素です。
+LlamaIndex là một khung để xây dựng các tác nhân tri thức bằng cách sử dụng các mô hình ngôn ngữ lớn (LLM) được kết nối với dữ liệu của bạn. Ví dụ này cho bạn thấy cách xây dựng quy trình công việc nhiều tác nhân cho Tác nhân nghiên cứu. Trong LlamaIndex, [`Workflows`](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)
+là các khối xây dựng của hệ thống tác nhân và nhiều tác nhân.
 
-Gemini API キーが必要です。キーがない場合は、Google AI Studio で
-[取得できます](https://aistudio.google.com/app/apikey?hl=ja)。
-まず、必要な LlamaIndex ライブラリをすべてインストールします。LlamaIndex は、内部で `google-genai` パッケージを使用します。
+Bạn cần có khoá Gemini API. Nếu chưa có, bạn có thể
+[lấy khoá này trong Google AI Studio](https://aistudio.google.com/app/apikey?hl=vi).
+Trước tiên, hãy cài đặt tất cả các thư viện LlamaIndex cần thiết. LlamaIndex sử dụng gói `google-genai` nâng cao.
 
 ```
 pip install llama-index llama-index-utils-workflow llama-index-llms-google-genai llama-index-tools-google
 ```
 
-## LlamaIndex で Gemini を設定する
+## Thiết lập Gemini trong LlamaIndex
 
-LlamaIndex エージェントのエンジンは、推論とテキスト処理を処理する LLM です。この例では、Gemini 3 Flash を使用します。API キーを環境変数として[設定してください
-。](https://ai.google.dev/gemini-api/docs/api-key?hl=ja)
+Công cụ của bất kỳ tác nhân LlamaIndex nào cũng là một LLM (mô hình ngôn ngữ lớn) xử lý quá trình suy luận và xử lý văn bản. Ví dụ này sử dụng Gemini 3 Flash. Hãy nhớ [đặt khoá API làm
+biến môi trường](https://ai.google.dev/gemini-api/docs/api-key?hl=vi).
 
 ```
 import os
@@ -44,11 +44,11 @@ assert 'GEMINI_API_KEY' in os.environ
 llm = GoogleGenAI(model="gemini-3.5-flash")
 ```
 
-## ビルドツール
+## Công cụ xây dựng
 
-エージェントはツールを使用して、ウェブの検索や情報の保存など、外部の世界とやり取りします。[LlamaIndex のツール](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/tools/)
-は、通常の Python 関数にすることも、既存の `ToolSpecs` からインポートすることもできます。
-Gemini には、Google 検索を使用するための組み込みツールが用意されています。ここでは、このツールを使用します。
+Các tác nhân sử dụng công cụ để tương tác với thế giới bên ngoài, chẳng hạn như tìm kiếm trên web hoặc lưu trữ thông tin. [Các công cụ trong LlamaIndex](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/tools/)
+có thể là các hàm Python thông thường hoặc được nhập từ `ToolSpecs`.
+Gemini đi kèm với một công cụ tích hợp để sử dụng Google Tìm kiếm, được sử dụng ở đây.
 
 ```
 from google.genai import types
@@ -63,21 +63,21 @@ llm_with_search = GoogleGenAI(
 )
 ```
 
-検索が必要なクエリを使用して、LLM インスタンスをテストします。このガイドでは、実行中のイベント ループ（`python -m asyncio` や Google Colab など）を想定しています。
+Bây giờ, hãy kiểm thử thực thể LLM bằng một truy vấn yêu cầu tìm kiếm. Hướng dẫn này giả định một vòng lặp sự kiện đang chạy (chẳng hạn như `python -m asyncio` hoặc Google Colab).
 
 ```
 response = await llm_with_search.acomplete("What's the weather like today in Biarritz?")
 print(response)
 ```
 
-リサーチ エージェントは、Python 関数をツールとして使用します。このタスクを実行するシステムを構築する方法はたくさんあります。この例では、次のものを使用します。
+Tác nhân nghiên cứu sẽ sử dụng các hàm Python làm công cụ. Có rất nhiều cách để bạn xây dựng một hệ thống thực hiện tác vụ này. Trong ví dụ này, bạn sẽ sử dụng những nội dung sau:
 
-1. `search_web` は、Gemini と Google 検索を使用して、指定されたトピックに関する情報をウェブで検索します。
-2. `record_notes` は、ウェブで見つかった調査結果を状態に保存して、他のツールで使用できるようにします。
-3. `write_report` は、`ResearchAgent` が見つけた情報を使用してレポートを作成します。
-4. `review_report` はレポートを確認し、フィードバックを提供します。
+1. `search_web` sử dụng Gemini với Google Tìm kiếm để tìm kiếm thông tin trên web về chủ đề đã cho.
+2. `record_notes` lưu kết quả nghiên cứu tìm thấy trên web vào trạng thái để các công cụ khác có thể sử dụng.
+3. `write_report` viết báo cáo bằng thông tin do `ResearchAgent` tìm thấy
+4. `review_report` xem xét báo cáo và đưa ra ý kiến phản hồi.
 
-`Context` クラスは、エージェントとツールの間で状態を渡します。各エージェントは、システムの現在の状態にアクセスできます。
+Lớp `Context` chuyển trạng thái giữa các tác nhân/công cụ và mỗi tác nhân sẽ có quyền truy cập vào trạng thái hiện tại của hệ thống.
 
 ```
 from llama_index.core.workflow import Context
@@ -112,18 +112,18 @@ async def review_report(ctx: Context, review: str) -> str:
     return "Report reviewed."
 ```
 
-## マルチエージェント アシスタントを構築する
+## Xây dựng trợ lý nhiều tác nhân
 
-マルチエージェント システムを構築するには、エージェントとそのインタラクションを定義します。
-システムには 3 つのエージェントがあります。
+Để xây dựng hệ thống nhiều tác nhân, bạn hãy xác định các tác nhân và tương tác của chúng.
+Hệ thống của bạn sẽ có 3 tác nhân:
 
-1. `ResearchAgent` は、指定されたトピックに関する情報をウェブで検索します。
-2. `WriteAgent` は、`ResearchAgent` が見つけた情報を使用してレポートを作成します。
-3. `ReviewAgent` はレポートを確認し、フィードバックを提供します。
+1. `ResearchAgent` tìm kiếm thông tin trên web về chủ đề đã cho.
+2. `WriteAgent` viết báo cáo bằng thông tin do `ResearchAgent` tìm thấy.
+3. `ReviewAgent` xem xét báo cáo và đưa ra ý kiến phản hồi.
 
-この例では、`AgentWorkflow` クラスを使用して、これらのエージェントを順番に実行するマルチエージェント システムを作成します。各エージェントは、実行する内容を指示する `system_prompt` を受け取り、他のエージェントとの連携方法を提案します。
+Ví dụ này sử dụng lớp `AgentWorkflow` để tạo một hệ thống nhiều tác nhân sẽ thực thi các tác nhân này theo thứ tự. Mỗi tác nhân lấy một `system_prompt` cho biết tác nhân đó nên làm gì và đề xuất cách làm việc với các tác nhân khác.
 
-必要に応じて、`can_handoff_to` を使用して、マルチエージェント システムが通信できる他のエージェントを指定できます（指定しない場合、システムは独自に判断しようとします）。
+Bạn có thể tuỳ ý hỗ trợ hệ thống nhiều tác nhân bằng cách chỉ định những tác nhân khác mà hệ thống có thể trao đổi bằng `can_handoff_to` (nếu không, hệ thống sẽ tự tìm hiểu).
 
 ```
 from llama_index.core.agent.workflow import (
@@ -173,7 +173,7 @@ review_agent = FunctionAgent(
 )
 ```
 
-エージェントが定義されたので、`AgentWorkflow` を作成して実行できます。
+Các tác nhân đã được xác định, giờ đây bạn có thể tạo `AgentWorkflow` và kích hoạt.
 
 ```
 from llama_index.core.agent.workflow import AgentWorkflow
@@ -189,7 +189,7 @@ agent_workflow = AgentWorkflow(
 )
 ```
 
-ワークフローの実行中に、イベント、ツール呼び出し、更新をコンソールにストリーミングできます。
+Trong quá trình thực thi quy trình công việc, bạn có thể truyền trực tuyến các sự kiện, lệnh gọi công cụ và bản cập nhật vào bảng điều khiển.
 
 ```
 from llama_index.core.agent.workflow import (
@@ -237,7 +237,7 @@ async for event in handler.stream_events():
         print(f"  With arguments: {event.tool_kwargs}")
 ```
 
-ワークフローが完了したら、レポートの最終出力と、レビュー エージェントからの最終レビューの状態を出力できます。
+Sau khi quy trình công việc hoàn tất, bạn có thể in kết quả cuối cùng của báo cáo, cũng như trạng thái xem xét cuối cùng của tác nhân xem xét.
 
 ```
 state = await handler.ctx.store.get("state")
@@ -245,26 +245,28 @@ print("Report Content:\n", state["report_content"])
 print("\n------------\nFinal Review:\n", state["review"])
 ```
 
-## カスタム ワークフローでさらに活用する
+## Tiến xa hơn với quy trình công việc tuỳ chỉnh
 
-`AgentWorkflow` は、マルチエージェント システムを始めるのに最適な方法です。ただし、より詳細な制御が必要な場合はどうすればよいでしょうか。 ワークフローを最初から構築できます。独自のワークフローを構築する理由としては、次のようなものがあります。
+`AgentWorkflow` là một cách tuyệt vời để bắt đầu với hệ thống nhiều tác nhân. Nhưng nếu bạn cần kiểm soát nhiều hơn thì sao? Bạn có thể xây dựng quy trình công việc từ đầu. Dưới đây là một số lý do bạn nên xây dựng quy trình làm việc của riêng mình:
 
-- **プロセスをより詳細に制御する**: エージェントがたどる正確なパスを決定できます。これには、ループの作成、特定の時点での意思決定、エージェントが異なるタスクを並行して実行することが含まれます。
-- **複雑なデータを使用する**: プレーン テキストを超えて、カスタム ワークフローでは、入力と出力に JSON オブジェクトやカスタム クラスなど、より構造化されたデータを使用できます。
-- **さまざまなメディアを扱う**: テキストだけでなく、画像、音声、動画も理解して処理できるエージェントを構築します。
-- **よりスマートな計画**: エージェントが作業を開始する前に
-  詳細な計画を作成するワークフローを設計できます。これは、複数のステップを必要とする複雑なタスクに便利です。
-- **自己修正を有効にする**: 自分の作業を確認できるエージェントを作成します。出力が十分でない場合、エージェントは結果が完璧になるまで改善を繰り返します。
+- **Kiểm soát nhiều hơn đối với quy trình**: Bạn có thể quyết định chính xác đường dẫn mà các tác nhân của bạn
+  sẽ thực hiện. Điều này bao gồm việc tạo vòng lặp, đưa ra quyết định tại một số điểm nhất định hoặc để các tác nhân làm việc song song trên các tác vụ khác nhau.
+- **Sử dụng dữ liệu phức tạp**: Vượt ra ngoài văn bản thuần tuý. Quy trình công việc tuỳ chỉnh cho phép bạn sử dụng dữ liệu có cấu trúc hơn, chẳng hạn như đối tượng JSON hoặc lớp tuỳ chỉnh, cho dữ liệu đầu vào và đầu ra.
+- **Làm việc với nhiều loại nội dung đa phương tiện**: Xây dựng các tác nhân có thể hiểu và xử lý
+  không chỉ văn bản mà còn cả hình ảnh, âm thanh và video.
+- **Lập kế hoạch thông minh hơn**: Bạn có thể thiết kế một quy trình công việc trước tiên tạo một
+  kế hoạch chi tiết trước khi các tác nhân bắt đầu làm việc. Điều này hữu ích cho các tác vụ phức tạp đòi hỏi nhiều bước.
+- **Cho phép tự sửa lỗi**: Tạo các tác nhân có thể xem xét công việc của chính mình. Nếu kết quả đầu ra không đủ tốt, tác nhân có thể thử lại, tạo một vòng lặp cải thiện cho đến khi kết quả hoàn hảo.
 
-LlamaIndex Workflows の詳細については、[LlamaIndex Workflows
-ドキュメント](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)をご覧ください。
+Để tìm hiểu thêm về Quy trình công việc của LlamaIndex, hãy xem [Tài liệu
+về quy trình công việc của LlamaIndex](https://docs.llamaindex.ai/en/stable/module_guides/workflow/).
 
-フィードバックを送信
+Gửi ý kiến phản hồi
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-最終更新日 2026-05-19 UTC。
+Cập nhật lần gần đây nhất: 2026-05-19 UTC.
 
-ご意見をお聞かせください
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-05-19 UTC。"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-19 UTC."],[],[]]

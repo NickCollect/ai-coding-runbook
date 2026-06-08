@@ -1,28 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=id
-fetched_at: 2026-06-01T06:10:06.120290+00:00
-title: "Lingkungan di Agen Terkelola \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=ar
+fetched_at: 2026-06-08T05:34:00.255784+00:00
+title: "\u0627\u0644\u0628\u064a\u0626\u0627\u062a \u0641\u064a \u0627\u0644\u0648\u0643\u0644\u0627\u0621 \u0627\u0644\u0645\u064f\u062f\u0627\u0631\u064a\u0646 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Kirim masukan
+إرسال ملاحظات
 
-# Lingkungan di Agen Terkelola
+# البيئات في الوكلاء المُدارين
 
-Lingkungan adalah sandbox Linux terkelola yang memberi agen tempat terisolasi untuk
-mengeksekusi kode dan mempertahankan file. Lingkungan ini tidak terkait dengan konteks interaksi, sehingga Anda dapat menggunakan kembali lingkungan yang sama di beberapa interaksi atau memulai dari awal kapan saja.
+البيئات هي صناديق حماية مُدارة في Linux تمنح الوكلاء مكانًا معزولاً لتنفيذ الرموز البرمجية والاحتفاظ بالملفات. وهي منفصلة عن سياق التفاعل، لذا يمكنك إعادة استخدام البيئة نفسها في تفاعلات متعددة أو البدء من جديد في أي وقت.
 
-Contoh berikut menunjukkan cara membuat interaksi dengan lingkungan jarak jauh
-baru dan mengambil ID-nya:
+يوضّح المثال التالي كيفية إنشاء تفاعل مع بيئة بعيدة جديدة واسترداد رقم تعريفها:
 
 ### Python
 
@@ -70,17 +68,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Parameter `environment`
+## المَعلمة `environment`
 
-Parameter `environment` menerima tiga bentuk:
+تقبل المَعلمة `environment` ثلاثة أشكال:
 
-| Formulir | Contoh | Kapan digunakan |
+| النموذج | مثال | حالات الاستخدام |
 | --- | --- | --- |
-| `"remote"` | `environment="remote"` | Sediakan sandbox baru. |
-| ID Lingkungan | `environment="env_abc123"` | Menggunakan kembali sandbox yang ada dengan semua file dan paketnya. |
-| Objek konfigurasi | `environment={...}` | Sediakan sandbox baru dengan sumber, aturan jaringan, atau keduanya. |
+| `"remote"` | `environment="remote"` | توفير صندوق حماية جديد |
+| رقم تعريف البيئة | `environment="env_abc123"` | إعادة استخدام صندوق حماية حالي مع جميع ملفاته وحِزمه |
+| كائن الإعداد | `environment={...}` | توفير صندوق حماية جديد مع مصادر أو قواعد شبكة أو كليهما |
 
-Contoh berikut menunjukkan tiga cara menggunakan parameter `environment`.
+توضّح الأمثلة التالية الطرق الثلاث لاستخدام المَعلمة `environment`.
 
 ### Python
 
@@ -211,10 +209,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Mengonfigurasi lingkungan
+## ضبط بيئة
 
-Salah satu cara untuk menyiapkan lingkungan adalah dengan memberi tahu agen apa yang perlu diinstal.
-Plugin ini menangani penyelesaian dan pemecahan masalah dependensi. Setelah lingkungan siap, simpan `environment_id` dan gunakan kembali.
+إحدى طرق إعداد بيئة هي إخبار الوكيل بما تحتاج إلى تثبيته.
+يتولّى الوكيل حلّ التبعيات وتحديد المشاكل وحلّها. بعد أن تصبح البيئة جاهزة، احفظ `environment_id` وأعِد استخدامه.
 
 ### Python
 
@@ -292,16 +290,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Memasang dari sumber
+### الربط من مصدر
 
-Jika Anda tahu persis file yang dibutuhkan agen, pasang file tersebut dalam satu panggilan, bukan melakukan iterasi. Objek konfigurasi `environment` menerima array `sources`
-dengan tiga jenis:
+إذا كنت تعرف الملفات التي يحتاجها الوكيل بالضبط، يمكنك ربطها في طلب واحد بدلاً من تكرار العملية. يقبل كائن إعداد `environment` مصفوفة `sources` تتضمّن ثلاثة أنواع:
 
-| Jenis sumber | Nilai `type` | Deskripsi | Batas |
+| نوع المصدر | قيمة `type` | الوصف | الحدّ |
 | --- | --- | --- | --- |
-| Repositori Git | `repository` | Meng-clone repositori dari URL ke sandbox di `target`. | 500 MB |
-| Cloud Storage | `gcs` | Menyalin file atau direktori dari Cloud Storage ke sandbox di `target`. | 2 GB |
-| Konten inline | `inline` | Menulis konten teks mentah ke file di sandbox di `target`. | 1 MB per file, total 2 MB |
+| مستودع Git | `repository` | يستنسخ مستودعًا من عنوان URL إلى صندوق الحماية في `target`. | 500 ميغابايت |
+| Cloud Storage | `gcs` | ينسخ ملفًا أو دليلًا من Cloud Storage إلى صندوق الحماية في `target`. | 2 غيغابايت |
+| محتوى مضمّن | `inline` | يكتب محتوى نصيًا خامًا في ملف في صندوق الحماية في `target`. | 1 ميغابايت لكل ملف، و2 ميغابايت إجمالاً |
 
 ### Python
 
@@ -407,18 +404,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Anda dapat menggabungkan kedua pendekatan: pasang sumber yang diketahui secara deklaratif, lalu lakukan iterasi dengan interaksi lanjutan untuk menginstal paket atau menjalankan skrip penyiapan. Anda tidak dapat
-menetapkan root (`/`) sebagai target saat menambahkan sumber kustom, Anda harus selalu menentukan
-subdirektori.
+يمكنك الجمع بين الطريقتَين: ربط المصادر المعروفة بشكلٍ إعلاني، ثم تكرار العملية باستخدام تفاعلات المتابعة لتثبيت الحِزم أو تشغيل النصوص البرمجية للإعداد. لا يمكنك ضبط الجذر (`/`) كهدف عند إضافة مصدر مخصّص، ويجب دائمًا تحديد دليل فرعي.
 
-### Sumber pribadi
+### المصادر الخاصة
 
-Anda juga dapat mendownload dari repositori Github pribadi atau bucket Cloud Storage pribadi dengan menambahkan kredensial dalam konfigurasi jaringan:
+يمكنك أيضًا التنزيل من مستودعات Github الخاصة أو حِزم Cloud Storage الخاصة عن طريق إضافة بيانات الاعتماد في إعدادات الشبكة:
 
-Untuk **repositori Git pribadi**, gunakan autentikasi `Basic` dengan
-[Token Akses Pribadi GitHub
+بالنسبة إلى **مستودعات Git الخاصة**، استخدِم `Basic` المصادقة مع
+[رمز الوصول الشخصي في GitHub
 (PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
-Encode token menggunakan `x-oauth-basic` sebagai nama pengguna:
+يمكنك ترميز الرمز المميّز باستخدام `x-oauth-basic` كاسم المستخدم:
 
 ```
 echo -n "x-oauth-basic:ghp_YourPATHere" | base64
@@ -524,7 +519,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Untuk **bucket Cloud Storage pribadi**, gunakan token Bearer OAuth 2.0 standar:
+بالنسبة إلى **حِزم Cloud Storage الخاصة**، استخدِم رمزًا مميّزًا عاديًا من نوع OAuth 2.0 Bearer:
 
 ```
 gcloud auth print-access-token
@@ -630,28 +625,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Software yang sudah diinstal sebelumnya
+## البرامج المثبَّتة مسبقًا
 
-Sandbox berjalan di Ubuntu dan dilengkapi dengan runtime dan paket umum yang telah diinstal sebelumnya. Agen dapat menginstal paket tambahan saat runtime menggunakan `pip
-install` atau `npm install`. Paket yang diinstal selama interaksi akan tetap ada saat Anda menggunakan kembali `environment_id` yang sama.
+يعمل صندوق الحماية على Ubuntu ويأتي مع أوقات تشغيل وحِزم شائعة مثبَّتة مسبقًا. يمكن للوكيل تثبيت حِزم إضافية في وقت التشغيل باستخدام `pip
+install` أو `npm install`. تظل الحِزم المثبَّتة أثناء التفاعل محفوظة عند إعادة استخدام `environment_id` نفسه.
 
-| Kategori | Paket yang telah diinstal sebelumnya |
+| الفئة | الحِزم المثبَّتة مسبقًا |
 | --- | --- |
-| **Alat UNIX** | `curl`, `wget`, `git`, `rsync`, `unzip`, `ripgrep`, `fd-find`, `gawk`, `bc`, `tree`, `which`, `lsof`, `htop`, `jq`, `iproute2`, `procps`, `gcloud CLI` |
-| **Python 3.12** | `numpy`, `pandas`, `requests`, `google-genai`, `beautifulsoup4`, `pyyaml`, `ast-grep-cli` |
-| **Node.js 22** | `create-next-app`, `create-vite`, `typescript` |
+| **أدوات UNIX** | `curl` و`wget` و`git` و`rsync` و`unzip` و`ripgrep` و`fd-find` و`gawk` و`bc` و`tree` و`which` و`lsof` و`htop` و`jq` و`iproute2` و`procps` و`gcloud CLI` |
+| **Python 3.12** | `numpy` و`pandas` و`requests` و`google-genai` و`beautifulsoup4` و`pyyaml` و`ast-grep-cli` |
+| **Node.js 22** | `create-next-app` و`create-vite` و`typescript` |
 
-## Konfigurasi jaringan
+## إعدادات الشبكة
 
-Secara default, lingkungan memiliki akses jaringan keluar yang tidak dibatasi. Gunakan kolom
-`network` untuk membatasi traffic keluar ke domain tertentu. Setiap aturan
-menentukan objek `domain` dan `transform` opsional untuk menyisipkan header ke dalam
-permintaan yang cocok. Header ini dapat bersifat unik per interaksi, dan Anda dapat memperbaruinya untuk lingkungan yang sama.
+تتضمّن البيئات تلقائيًا إمكانية الوصول إلى الشبكة الصادرة بدون أي قيود. استخدِم الحقل `network` لحظر الزيارات الصادرة إلى نطاقات معيّنة. تحدّد كل قاعدة `domain` وكائن `transform` اختياريًا لإضافة عناوين إلى الطلبات المطابقة. يمكن أن تكون هذه العناوين فريدة لكل تفاعل، ويمكنك تعديلها للبيئة نفسها.
 
-| Kolom | Jenis | Deskripsi |
+| الحقل | النوع | الوصف |
 | --- | --- | --- |
-| `domain` | `string` | Domain yang akan dicocokkan. Gunakan nama host yang sama persis atau `*` untuk semua domain. |
-| `transform` | `object` | Objek yang berisi pasangan nilai kunci datar yang merepresentasikan header untuk disisipkan ke dalam permintaan yang cocok, misalnya `{"Authorization": "Bearer ..."}`. |
+| `domain` | `string` | النطاق المطلوب مطابقته استخدِم اسم مضيف مطابقًا أو `*` لجميع النطاقات. |
+| `transform` | `object` | كائن يحتوي على أزواج مفتاح/قيمة مسطّحة تمثّل العناوين المطلوب إضافتها إلى الطلبات المطابقة، مثلاً `{"Authorization": "Bearer ..."}`. |
 
 ### Python
 
@@ -741,12 +733,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Jika daftar yang diizinkan ditetapkan, hanya permintaan ke domain yang tercantum secara eksplisit yang diizinkan. Anda dapat menggunakan karakter pengganti untuk mencocokkan subdomain (misalnya, `{"domain":
-"*.example.com"}`), tetapi perhatikan bahwa karakter ini tidak cocok dengan domain root `example.com`, yang harus ditambahkan secara terpisah. Untuk mengizinkan semua traffic lainnya, seperti merutekan domain yang tidak tercantum tanpa header yang disisipkan, tambahkan `{"domain": "*"}` sebagai entri catch-all.
+عند ضبط قائمة مسموح بها، لا يُسمح إلا بالطلبات الموجّهة إلى النطاقات المُدرَجة بشكلٍ صريح. يمكنك استخدام أحرف البدل لمطابقة النطاقات الفرعية (مثلاً، `{"domain":
+"*.example.com"}`)، ولكن يُرجى العِلم أنّ ذلك لا يطابق النطاق الرئيسي
+`example.com`، الذي يجب إضافته بشكلٍ منفصل. للسماح بجميع الزيارات الأخرى، مثل
+توجيه النطاقات غير المُدرَجة بدون إضافة عناوين، أضِف `{"domain": "*"}` كإدخال
+شامل.
 
-### Kredensial
+### بيانات الاعتماد
 
-Anda dapat menambahkan kredensial yang akan digunakan agen dengan menambahkan transformasi header. Kredensial disisipkan di header HTTP masing-masing oleh proxy keluar, dan tidak pernah diekspos di dalam sandbox sebagai variabel lingkungan atau file.
+يمكنك إضافة بيانات اعتماد ليستخدمها وكيلك عن طريق إضافة عمليات تحويل العناوين. يتم إدخال بيانات الاعتماد في عناوين HTTP المعنيّة من خلال وكيل الخروج، ولا يتم عرضها مطلقًا داخل صندوق الحماية كمتغيّرات بيئية أو ملفات.
 
 ### Python
 
@@ -840,9 +835,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Menonaktifkan akses jaringan
+### إيقاف إمكانية الوصول إلى الشبكة
 
-Untuk memblokir semua akses jaringan keluar, tetapkan `network` ke `disabled`:
+لحظر جميع إمكانية الوصول إلى الشبكة الصادرة، اضبط `network` على `disabled`:
 
 ### Python
 
@@ -899,21 +894,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Siklus proses lingkungan
+## دورة حياة البيئة
 
-Lingkungan mengikuti siklus proses ini:
+تتّبِع البيئات دورة الحياة التالية:
 
-| Negara bagian/Provinsi | Perilaku |
+| الحالة | السلوك |
 | --- | --- |
-| **Dibuat** | Disediakan saat interaksi menentukan `environment: "remote"` atau objek konfigurasi. |
-| **Aktif** | Berjalan saat interaksi sedang berlangsung. |
-| **Tidak ada aktivitas** | Snapshot otomatis dan dihentikan setelah 15 menit tidak ada aktivitas. |
-| **Offline** | Dipertahankan selama 7 hari sejak terakhir aktif. Dapat dilanjutkan dengan meneruskan ID-nya. |
-| **Dihapus** | Dihapus dari sistem. |
+| **تم الإنشاء** | يتم توفيرها عندما يحدّد أحد التفاعلات `environment: "remote"` أو كائن إعداد. |
+| **نشطة** | تكون قيد التشغيل أثناء تقدّم التفاعل. |
+| **غير مستخدَم من قِبل أي برنامج حاليًا** | يتم أخذ لقطة تلقائية وإيقافها بعد 15 دقيقة من عدم النشاط. |
+| **بلا إنترنت** | يتم الاحتفاظ بها لمدة 7 أيام منذ آخر نشاط. يمكن استئنافها عن طريق تمرير رقم تعريفها. |
+| **تم الحذف** | تمت إزالتها من النظام. |
 
-## Mendownload file dari lingkungan
+## تنزيل الملفات من البيئة
 
-Agen membuat file di dalam sandbox selama eksekusi. Anda dapat mendownload snapshot lingkungan lengkap sebagai file tar menggunakan Files API:
+ينشئ الوكيل ملفات داخل صندوق الحماية أثناء التنفيذ. يمكنك تنزيل لقطة البيئة الكاملة كملف tar باستخدام Files API:
 
 ### Python
 
@@ -1009,42 +1004,41 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 #   -o snapshot.tar
 ```
 
-## Harga & referensi
+## الأسعار والمراجع
 
-Setiap lingkungan berjalan dengan alokasi resource tetap:
+تعمل كل بيئة مع تخصيصات موارد ثابتة:
 
-| Resource | Nilai |
+| المورد | القيمة |
 | --- | --- |
-| **CPU** | 4 core |
-| **Memori** | 16 GB |
+| **وحدة المعالجة المركزية** | 4 أنوية |
+| **الذاكرة** | 16 غيغابايت |
 
-Komputasi lingkungan (CPU, memori, eksekusi sandbox) **tidak ditagih** selama
-periode pratinjau. Lihat
-[Harga](https://ai.google.dev/gemini-api/docs/pricing?hl=id#pricing-for-agents) untuk
-biaya token agen.
+**لا يتم تحصيل رسوم** مقابل حوسبة البيئة (وحدة المعالجة المركزية والذاكرة وتنفيذ صندوق الحماية) خلال فترة المعاينة. راجِع
+[الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#pricing-for-agents) لمعرفة
+تكاليف الرموز المميّزة للوكيل.
 
-## Batasan
+## القيود
 
-- **Status pratinjau:** Lingkungan dan agen terkelola dalam pratinjau. Fitur dan skema dapat berubah.
-- **Ukuran sumber inline:** Sumber inline dibatasi hingga 1 MB per file, dan total 2 MB di semua file.
-- **Ukuran sumber**: Repositori Git dibatasi hingga 500 MB dan repositori Cloud Storage hingga 2 GB.
-- **Startup lingkungan:** Penyediaan lingkungan baru membutuhkan waktu hingga ~5 detik. Repositori sumber yang besar dapat memperpanjang waktu ini.
-- **Dukungan file:** Agen saat ini dibatasi untuk membaca file teks dan gambar. Dukungan file biner belum tersedia.
-- **Tidak ada pemasangan dari root:** Anda tidak dapat menetapkan root (`/`) sebagai target saat menambahkan sumber kustom, Anda harus selalu menentukan subdirektori.
+- **حالة المعاينة:** البيئات والوكلاء المُدارون في مرحلة المعاينة. قد تتغيّر الميزات والمخططات.
+- **حجم المصدر المضمّن:** يقتصر حجم المصادر المضمّنة على 1 ميغابايت لكل ملف، و2 ميغابايت إجمالاً لجميع الملفات.
+- **حجم المصدر**: يقتصر حجم مستودعات Git على 500 ميغابايت ومستودعات Cloud Storage على 2 غيغابايت.
+- **بدء تشغيل البيئة:** يستغرق توفير بيئة جديدة ما يصل إلى 5 ثوانٍ تقريبًا. قد يؤدي استخدام مستودعات مصادر كبيرة إلى زيادة هذا الوقت.
+- **تنسيقات الملفات المتوافقة:** يقتصر الوكيل حاليًا على قراءة الملفات النصية وملفات الصور. ولا تتوفّر بعد إمكانية قراءة الملفات الثنائية.
+- **لا يمكن الربط من الجذر:** لا يمكنك ضبط الجذر (`/`) كهدف عند إضافة مصدر مخصّص، ويجب دائمًا تحديد دليل فرعي.
 
-## Langkah berikutnya
+## الخطوات التالية
 
-- [Ringkasan Agen](https://ai.google.dev/gemini-api/docs/agents?hl=id): Pelajari konsep inti agen terkelola.
-- [Panduan memulai](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=id): Mulai membangun dengan percakapan multi-turn dan streaming.
-- [Agen Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=id): Pelajari kemampuan, alat, dan harga untuk agen default.
-- [Membangun Agen Kustom](https://ai.google.dev/gemini-api/docs/custom-agents?hl=id): Tentukan agen Anda sendiri menggunakan `AGENTS.md` dan `SKILL.md`.
+- [نظرة عامة على الوكلاء](https://ai.google.dev/gemini-api/docs/agents?hl=ar): تعرَّف على المفاهيم الأساسية للوكلاء المُدارين.
+- [دليل البدء السريع](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ar): ابدأ في إنشاء محادثات متعددة الأدوار وبث المحتوى.
+- [وكيل Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ar): استكشِف الإمكانات والأدوات والأسعار للوكيل التلقائي.
+- [إنشاء وكلاء مخصّصين](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ar): حدِّد الوكلاء الخاصين بك باستخدام `AGENTS.md` و`SKILL.md`.
 
-Kirim masukan
+إرسال ملاحظات
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Terakhir diperbarui pada 2026-05-20 UTC.
+تاريخ التعديل الأخير: 2026-05-20 (حسب التوقيت العالمي المتفَّق عليه)
 
-Ada masukan untuk kami?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-05-20 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-20 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

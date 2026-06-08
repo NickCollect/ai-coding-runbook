@@ -1,49 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.5-preview?hl=he
-fetched_at: 2026-06-01T06:08:09.895329+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.5-preview?hl=zh-CN
+fetched_at: 2026-06-08T05:38:13.275095+00:00
 title: "Gemini Robotics-ER 1.5 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-שליחת משוב
+发送反馈
 
 # Gemini Robotics-ER 1.5
 
-‫Gemini Robotics-ER 1.5 הוא מודל ראייה ושפה (VLM) שמביא את יכולות של AI אקטיבי של Gemini לרובוטיקה. הוא מיועד לחשיבה רציונלית משופרת בעולם הפיזי, ומאפשר לרובוטים לפרש נתונים חזותיים מורכבים, לבצע חשיבה רציונלית מרחבית ולתכנן פעולות מפקודות בשפה טבעית.
+Gemini Robotics-ER 1.5 是一款视觉-语言模型 (VLM)，可将 Gemini 的智能体功能引入机器人技术。它专为物理世界中的高级推理而设计，可让机器人解读复杂的视觉数据、执行空间推理，并根据自然语言命令规划行动。
 
-[לניסיון ב-Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-1.5-preview&hl=he)
+[在 Google AI Studio 中试用](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-1.5-preview&hl=zh-cn)
 
-## מאמרי עזרה
+## 文档
 
-ב[דף בנושא רובוטיקה](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=he) אפשר לקרוא על כל התכונות והיכולות.
+如需全面了解功能和功能，请访问[机器人](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=zh-cn)页面。
 
 ## gemini-robotics-er-1.5-preview
 
-| נכס | תיאור |
+| 属性 | 说明 |
 | --- | --- |
-| id\_cardקוד מודל | `gemini-robotics-er-1.5-preview` |
-| saveסוגי נתונים נתמכים | **קלטים**  טקסט, תמונות, סרטונים, אודיו  **פלט**  טקסט |
-| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  1,048,576  **מגבלת אסימונים בפלט**  65,536 |
-| handymanיכולות | **יצירת אודיו**  לא נתמך  ‫**Batch API**  לא נתמך  **שמירת נתונים במטמון**  לא נתמך  **ביצוע קוד**  נתמך  **בקשה להפעלת פונקציה**  נתמך  **עיגון בעזרת מפות Google**  לא נתמך  **יצירת תמונות**  לא נתמך  ‫**Live API**  לא נתמך  **חיפוש עם עיגון בנתונים**  נתמך  **פלטים מובְנים**  נתמך  **תהליך החשיבה**  נתמך  **הקשר של כתובת ה-URL**  נתמך |
-| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - תצוגה מקדימה: `gemini-robotics-er-1.5-preview` |
-| calendar\_monthהעדכון האחרון | ספטמבר 2025 |
-| cognition\_2תאריך סף הידע | ינואר 2025 |
+| id\_card 模型代码 | `gemini-robotics-er-1.5-preview` |
+| 保存支持的数据类型 | **输入源**  文本、图片、视频、音频  **输出**  文本 |
+| token\_auto令牌限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入 token 限制**  1,048,576  **输出 token 限制**  65536 |
+| handyman功能 | **音频生成**  不受支持  **批量 API**  不受支持  **缓存**  不受支持  **代码执行**  支持  **函数调用**  支持  **依托 Google 地图进行接地**  不受支持  **图片生成**  不受支持  **Live API**  不受支持  **搜索接地**  支持  **结构化输出**  支持  **思考型**  支持  **网址上下文**  支持 |
+| 123 版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 预览：`gemini-robotics-er-1.5-preview` |
+| calendar\_month最新更新 | 2025 年 9 月 |
+| cognition\_2知识截点 | 2025 年 1 月 |
 
-שליחת משוב
+发送反馈
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-עדכון אחרון: 2026-04-29 (שעון UTC).
+最后更新时间 (UTC)：2026-04-29。
 
-רוצה לתת לנו משוב?
+需要向我们提供更多信息？
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]

@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=hi
-fetched_at: 2026-06-01T06:07:01.384251+00:00
+fetched_at: 2026-06-08T05:37:33.197853+00:00
 title: "Google AI Studio \u092e\u0947\u0902 \u092b\u093c\u0941\u0932-\u0938\u094d\u091f\u0948\u0915 \u0910\u092a\u094d\u0932\u093f\u0915\u0947\u0936\u0928 \u0921\u0947\u0935\u0932\u092a \u0915\u0930\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

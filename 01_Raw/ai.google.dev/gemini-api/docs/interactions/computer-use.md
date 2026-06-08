@@ -1,123 +1,139 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/computer-use?hl=tr
-fetched_at: 2026-06-01T05:58:50.549197+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/computer-use?hl=id
+fetched_at: 2026-06-08T05:31:51.134520+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Geri bildirim gönderin
+Kirim masukan
 
-# Bilgisayar Kullanımı
+# Penggunaan Komputer
 
-Bilgisayar Kullanımı, görevlerle etkileşime giren ve görevleri otomatikleştiren tarayıcı kontrol temsilcileri oluşturmanıza olanak tanır. Model, ekran görüntülerini kullanarak bilgisayar ekranını "görebilir" ve fare tıklamaları ile klavye girişleri gibi belirli kullanıcı arayüzü işlemleri oluşturarak "hareket edebilir". İşlev çağrısına benzer şekilde, Bilgisayar Kullanımı işlemlerini almak ve yürütmek için istemci tarafı uygulama kodunu yazmanız gerekir.
+Penggunaan Komputer memungkinkan Anda membuat agen kontrol browser yang berinteraksi dengan dan mengotomatiskan tugas. Dengan menggunakan screenshot, model dapat "melihat" layar komputer, dan "bertindak" dengan membuat tindakan UI tertentu seperti klik mouse dan input keyboard. Mirip dengan panggilan fungsi, Anda perlu menulis kode aplikasi sisi klien untuk menerima dan mengeksekusi tindakan Penggunaan Komputer.
 
-Bilgisayar Kullanımı ile aşağıdaki özelliklere sahip temsilciler oluşturabilirsiniz:
+Dengan Penggunaan Komputer, Anda dapat membuat agen yang:
 
-- Web sitelerinde tekrarlayan veri girişini veya form doldurma işlemlerini otomatikleştirin.
-- Web uygulamalarının ve kullanıcı akışlarının otomatik testini gerçekleştirme
-- Çeşitli web sitelerinde araştırma yapma (ör. satın alma işlemi hakkında bilgi vermek için e-ticaret sitelerinden ürün bilgileri, fiyatlar ve yorumlar toplama)
+- Mengotomatiskan entri data atau pengisian formulir yang berulang di situs.
+- Melakukan pengujian otomatis aplikasi web dan alur pengguna
+- Melakukan riset di berbagai situs (misalnya, mengumpulkan informasi produk, harga, dan ulasan dari situs e-commerce untuk membantu pembelian)
 
-Bilgisayar Kullanımı özelliğini test etmenin en kolay yolu [referans uygulama](https://github.com/google/computer-use-preview/) veya [Browserbase demo ortamı](http://gemini.browserbase.com) üzerinden test etmektir.
+Cara termudah untuk menguji kemampuan Penggunaan Komputer adalah melalui [implementasi
+referensi](https://github.com/google/computer-use-preview/) atau
+[lingkungan demo Browserbase](http://gemini.browserbase.com).
 
-## Bilgisayar Kullanımı nasıl çalışır?
+## Cara kerja Penggunaan Komputer
 
-Bilgisayar Kullanımı modeliyle bir tarayıcı kontrolü aracısı oluşturmak için aşağıdakileri yapan bir aracı döngüsü uygulayın:
+Untuk membuat agen kontrol browser dengan model Penggunaan Komputer, terapkan loop agen yang melakukan hal berikut:
 
-1. [**Modele istek gönderme**](#send-request)
+1. [**Mengirim permintaan ke model**](#send-request)
 
-   - Bilgisayar Kullanımı aracını ve isteğe bağlı olarak özel kullanıcı tanımlı işlevleri veya hariç tutulan işlevleri API isteğinize ekleyin.
-   - Bilgisayar Kullanımı modeline kullanıcının isteğini girin.
-2. [**Model yanıtını alma**](#model-response)
+   - Tambahkan alat Penggunaan Komputer dan secara opsional fungsi yang ditentukan pengguna kustom atau fungsi yang dikecualikan ke permintaan API Anda.
+   - Berikan perintah pada model Penggunaan Komputer dengan permintaan pengguna.
+2. [**Menerima respons model**](#model-response)
 
-   - Bilgisayar Kullanımı modeli, kullanıcı isteğini ve ekran görüntüsünü analiz eder ve bir kullanıcı arayüzü işlemini temsil eden önerilen `function_call`'ı içeren bir yanıt oluşturur (ör. "(x,y) koordinatına tıklayın" veya "metin yazın"). ComputerUse modeli tarafından desteklenen tüm kullanıcı arayüzü işlemlerinin açıklaması için [Desteklenen işlemler](#supported-actions) başlıklı makaleyi inceleyin.
-   - API yanıtı, modelin önerdiği işlemi kontrol eden dahili bir güvenlik sisteminden gelen `safety_decision` de içerebilir. Bu
-     `safety_decision` işlemi şu şekilde sınıflandırır:
-     - **Normal / izin verilen:** İşlem güvenli olarak kabul edilir. Bu durum, `safety_decision` simgesinin olmamasıyla da gösterilebilir.
-     - **Onay gerektiriyor (`require_confirmation`):** Model, riskli olabilecek bir işlem (ör. "çerez banner'ını kabul et" seçeneğini tıklama) gerçekleştirmek üzere.
-3. [**Alınan işlemi yürütün**](#execute-actions)
+   - Model Penggunaan Komputer menganalisis permintaan dan screenshot pengguna, lalu membuat respons yang mencakup `function_call` yang disarankan yang merepresentasikan tindakan UI (misalnya, "klik di koordinat (x,y)" atau "ketik 'text'"). Untuk deskripsi semua tindakan UI yang didukung oleh model Penggunaan
+     Komputer, lihat [Tindakan yang didukung](#supported-actions).
+   - Respons API juga dapat menyertakan `safety_decision` dari sistem keamanan internal yang memeriksa tindakan yang diusulkan model. `safety_decision` ini mengklasifikasikan tindakan sebagai:
+     - **Reguler / diizinkan:** Tindakan dianggap aman. Hal ini juga dapat
+       ditampilkan dengan tidak adanya `safety_decision`.
+     - **Memerlukan konfirmasi (`require_confirmation`):** Model akan
+       melakukan tindakan
+       yang mungkin berisiko (misalnya, mengklik "banner setuju cookie").
+3. [**Menjalankan tindakan yang diterima**](#execute-actions)
 
-   - İstemci tarafı kodunuz `function_call` ve beraberindeki `safety_decision` değerini alır.
-     - **Normal / izin verilen:** `safety_decision` simgesi normal/izin verilen olarak gösteriliyorsa (veya `safety_decision` simgesi yoksa) istemci tarafı kodunuz, hedef ortamınızda (ör. web tarayıcısı) belirtilen `function_call` işlevini yürütebilir.
-     - **Onay gerektirir:** `safety_decision`, onay gerektirdiğini gösteriyorsa uygulamanız, `function_call` yürütülmeden önce son kullanıcıdan onay istemelidir. Kullanıcı onaylarsa işlemi yürütmeye devam edin. Kullanıcı reddederse işlemi yürütmeyin.
-4. [**Yeni ortam durumunu yakalama**](#capture-state)
+   - Kode sisi klien Anda menerima `function_call` dan `safety_decision` yang menyertainya.
+     - **Reguler / diizinkan:** Jika `safety_decision` menunjukkan reguler/diizinkan (atau jika tidak ada `safety_decision`), kode sisi klien Anda dapat mengeksekusi `function_call` yang ditentukan di lingkungan target Anda (misalnya, browser web).
+     - **Memerlukan konfirmasi:** Jika `safety_decision` menunjukkan
+       memerlukan konfirmasi, aplikasi Anda harus meminta konfirmasi dari pengguna akhir
+       sebelum mengeksekusi `function_call`. Jika pengguna
+       mengonfirmasi, lanjutkan untuk menjalankan tindakan. Jika pengguna menolak, jangan
+       jalankan tindakan.
+4. [**Merekam status lingkungan baru**](#capture-state)
 
-   - İşlem yürütüldüyse istemciniz, `function_result` kapsamında Bilgisayar Kullanımı modeline geri göndermek için GUI'nin ve mevcut URL'nin yeni bir ekran görüntüsünü alır.
-   - Bir işlem güvenlik sistemi tarafından engellendiyse veya kullanıcı tarafından onaylanmadıysa uygulamanız modele farklı bir geri bildirim biçimi gönderebilir ya da etkileşimi sonlandırabilir.
+   - Jika tindakan telah dieksekusi, klien Anda akan mengambil screenshot baru
+     GUI dan URL saat ini untuk dikirim kembali ke model Penggunaan Komputer sebagai
+     bagian dari `function_result`.
+   - Jika tindakan diblokir oleh sistem keamanan atau konfirmasi ditolak oleh
+     pengguna, aplikasi Anda dapat mengirimkan bentuk masukan yang berbeda ke
+     model atau mengakhiri interaksi.
 
-Bu işlem, sonraki işlemi önermek için yeni ekran görüntüsünü ve devam eden hedefi kullanan modelle 2. adımdan itibaren tekrarlanır. Döngü, görev tamamlanana, bir hata oluşana veya işlem sonlandırılana kadar (ör. "engelleme" güvenlik yanıtı veya kullanıcı kararı nedeniyle) devam eder.
+Proses ini berulang dari langkah 2 dengan model yang menggunakan screenshot baru dan tujuan yang sedang berlangsung untuk menyarankan tindakan berikutnya. Loop berlanjut hingga tugas selesai, terjadi error, atau proses dihentikan (misalnya, karena respons keamanan "blokir" atau keputusan pengguna).
 
-![Bilgisayar Kullanımına Genel Bakış](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=tr)
+![Gambaran umum Penggunaan Komputer](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=id)
 
-## Bilgisayar Kullanımı nasıl uygulanır?
+## Cara menerapkan Penggunaan Komputer
 
-Bilgisayar Kullanımı aracıyla oluşturmaya başlamadan önce aşağıdakileri ayarlamanız gerekir:
+Sebelum membangun dengan alat Penggunaan Komputer, Anda harus menyiapkan hal-hal berikut:
 
-- **Güvenli yürütme ortamı:** Güvenlik nedeniyle, Bilgisayar Kullanımı aracınızı güvenli ve kontrollü bir ortamda (ör. sınırlı izinlere sahip bir sanal makine, kapsayıcı veya özel tarayıcı profili) çalıştırmanız gerekir.
-- **İstemci tarafı işlem işleyici:** Model tarafından oluşturulan işlemleri yürütmek ve her işlemden sonra ortamın ekran görüntülerini almak için istemci tarafı mantığını uygulamanız gerekir.
+- **Lingkungan eksekusi yang aman:** Untuk alasan keamanan, Anda harus menjalankan agen Penggunaan Komputer di lingkungan yang aman dan terkontrol (misalnya, virtual machine sandbox, penampung, atau profil browser khusus dengan izin terbatas).
+- **Handler tindakan sisi klien:** Anda harus menerapkan logika sisi klien
+  untuk menjalankan tindakan yang dihasilkan oleh model dan
+  mengambil screenshot lingkungan setelah setiap tindakan.
 
-Bu bölümdeki örneklerde, yürütme ortamı olarak tarayıcı, istemci taraflı işlem işleyici olarak ise [Playwright](https://playwright.dev/) kullanılır. Bu örnekleri çalıştırmak için gerekli bağımlılıkları yüklemeniz ve bir Playwright tarayıcı örneği başlatmanız gerekir.
+Contoh di bagian ini menggunakan browser sebagai lingkungan eksekusi dan [Playwright](https://playwright.dev/) sebagai pengendali tindakan sisi klien. Untuk
+menjalankan contoh ini, Anda harus menginstal dependensi yang diperlukan dan menginisialisasi instance browser
+Playwright:
 
-#### Playwright'ı yükleme
+### 0. Menginstal Playwright
 
 ```
-    pip install google-genai playwright
-    playwright install chromium
+pip install google-genai playwright
+playwright install chromium
 ```
 
-#### Playwright tarayıcı örneğini başlatma
+### 0. Lakukan inisialisasi instance browser Playwright
 
 ```
-    from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright
 
-    # 1. Configure screen dimensions for the target environment
-    SCREEN_WIDTH = 1440
-    SCREEN_HEIGHT = 900
+# 1. Configure screen dimensions for the target environment
+SCREEN_WIDTH = 1440
+SCREEN_HEIGHT = 900
 
-    # 2. Start the Playwright browser
-    # In production, utilize a sandboxed environment.
-    playwright = sync_playwright().start()
-    # Set headless=False to see the actions performed on your screen
-    browser = playwright.chromium.launch(headless=False)
+# 2. Start the Playwright browser
+# In production, utilize a sandboxed environment.
+playwright = sync_playwright().start()
+# Set headless=False to see the actions performed on your screen
+browser = playwright.chromium.launch(headless=False)
 
-    # 3. Create a context and page with the specified dimensions
-    context = browser.new_context(
-        viewport={"width": SCREEN_WIDTH, "height": SCREEN_HEIGHT}
-    )
-    page = context.new_page()
+# 3. Create a context and page with the specified dimensions
+context = browser.new_context(
+    viewport={"width": SCREEN_WIDTH, "height": SCREEN_HEIGHT}
+)
+page = context.new_page()
 
-    # 4. Navigate to an initial page to start the task
-    page.goto("https://www.google.com")
+# 4. Navigate to an initial page to start the task
+page.goto("https://www.google.com")
 
-    # The 'page', 'SCREEN_WIDTH', and 'SCREEN_HEIGHT' variables
-    # will be used in the steps below.
+# The 'page', 'SCREEN_WIDTH', and 'SCREEN_HEIGHT' variables
+# will be used in the steps below.
 ```
 
-Android ortamına genişletmeye yönelik örnek kod, [Özel kullanıcı tanımlı işlevleri kullanma](#custom-functions) bölümünde yer almaktadır.
+Kode contoh untuk memperluas ke lingkungan Android disertakan di bagian [Menggunakan fungsi yang ditentukan pengguna kustom](#custom-functions).
 
-### 1. Modele istek gönderme
+### 1. Mengirim permintaan ke model
 
-API isteğinize Computer Use (Bilgisayar Kullanımı) aracını ekleyin ve modele, kullanıcının hedefini içeren bir istem gönderin. Bilgisayar Kullanımı desteklenen modellerden birini kullanmanız gerekir. Aksi takdirde hata alırsınız:
+Tambahkan alat Penggunaan Komputer ke permintaan API Anda dan kirim perintah ke model yang menyertakan tujuan pengguna. Anda harus menggunakan salah satu model yang didukung Penggunaan Komputer atau Anda akan mendapatkan error:
 
 - `gemini-2.5-computer-use-preview-10-2025`
 - `gemini-3-flash-preview`
 
-İsteğe bağlı olarak aşağıdaki parametreleri de ekleyebilirsiniz:
+Anda juga dapat menambahkan parameter berikut secara opsional:
 
-- **Hariç tutulan işlemler:** [Desteklenen kullanıcı arayüzü işlemleri](#supported-actions) listesinde, modelin yapmasını istemediğiniz işlemler varsa bu işlemleri `excluded_predefined_functions` olarak belirtin.
-- **Kullanıcı tanımlı işlevler:** Bilgisayar Kullanımı aracına ek olarak özel kullanıcı tanımlı işlevler de eklemek isteyebilirsiniz.
+- **Tindakan yang dikecualikan:** Jika ada tindakan dari daftar [Tindakan UI yang didukung](#supported-actions) yang tidak ingin Anda lakukan oleh model, tentukan tindakan ini sebagai `excluded_predefined_functions`.
+- **Fungsi yang ditentukan pengguna:** Selain alat Penggunaan Komputer, Anda mungkin ingin menyertakan fungsi kustom yang ditentukan pengguna.
 
-İstek gönderirken görüntü boyutunu belirtmenize gerek olmadığını unutmayın.
-Model, piksel koordinatlarını ekranın yüksekliğine ve genişliğine göre ölçekleyerek tahmin eder.
+Perhatikan bahwa tidak perlu menentukan ukuran tampilan saat mengeluarkan permintaan; model memprediksi koordinat piksel yang diskalakan ke tinggi dan lebar layar.
 
 ### Python
 
@@ -144,14 +160,16 @@ interaction = client.interactions.create(
 print(interaction)
 ```
 
-Özel işlevlerin kullanıldığı bir örnek için [Özel kullanıcı tanımlı işlevleri kullanma](#custom-functions) başlıklı makaleye bakın.
+Untuk contoh dengan fungsi kustom, lihat [Menggunakan fungsi
+yang ditentukan pengguna kustom](#custom-functions).
 
-### 2. Model yanıtını alma
+### 2. Menerima respons model
 
-Bilgisayar Kullanımı aracı etkinleştirildiğinde model, görevi tamamlamak için kullanıcı arayüzü işlemlerinin gerekli olduğunu belirlerse bir veya daha fazla `function_call` adımla yanıt verir.
-Bilgisayar Kullanımı, paralel işlev çağrısını destekler. Bu sayede model, tek bir dönüşte birden fazla işlem döndürebilir.
+Jika alat Penggunaan Komputer diaktifkan, model akan merespons dengan satu atau beberapa langkah `function_call` jika menentukan bahwa tindakan UI diperlukan untuk menyelesaikan tugas.
+Penggunaan Komputer mendukung panggilan fungsi paralel, yang berarti model dapat menampilkan
+beberapa tindakan dalam satu giliran.
 
-Örnek bir model yanıtı aşağıda verilmiştir.
+Berikut adalah contoh respons model.
 
 ```
 {
@@ -179,16 +197,19 @@ Bilgisayar Kullanımı, paralel işlev çağrısını destekler. Bu sayede model
 }
 ```
 
-### 3. Alınan işlemleri yürütme
+### 3. Menjalankan tindakan yang diterima
 
-Uygulama kodunuzun model yanıtını ayrıştırması, işlemleri yürütmesi ve sonuçları toplaması gerekir.
+Kode aplikasi Anda perlu mengurai respons model, menjalankan tindakan, dan mengumpulkan hasilnya.
 
-Aşağıdaki örnek kod, Computer Use model yanıtından işlev çağrılarını ayıklar ve bunları Playwright ile yürütülebilecek işlemlere çevirir.
-Model, giriş resminin boyutlarından bağımsız olarak normalleştirilmiş koordinatlar (0-999) çıkarır. Bu nedenle, çeviri adımının bir parçası da bu normalleştirilmiş koordinatları tekrar gerçek piksel değerlerine dönüştürmektir.
+Contoh kode berikut mengekstrak panggilan fungsi dari respons model Penggunaan Komputer, dan menerjemahkannya menjadi tindakan yang dapat dieksekusi dengan Playwright.
+Model menghasilkan koordinat yang dinormalisasi (0-999) terlepas dari dimensi gambar input, sehingga bagian dari langkah terjemahan adalah mengonversi kembali koordinat yang dinormalisasi ini ke nilai piksel sebenarnya.
 
-Bilgisayar Kullanımı modeliyle kullanım için önerilen ekran boyutu (1440, 900)'dür. Model, sonuçların kalitesi etkilenebilse de herhangi bir çözünürlükte çalışır.
+Ukuran layar yang direkomendasikan untuk digunakan dengan model Penggunaan Komputer adalah (1440, 900). Model ini akan berfungsi dengan resolusi apa pun, meskipun kualitas hasilnya dapat terpengaruh.
 
-Bu örnekte yalnızca en yaygın 3 kullanıcı arayüzü işlemi (`open_web_browser`, `click_at` ve `type_text_at`) için uygulama yer aldığını unutmayın. Üretim kullanım alanları için, `excluded_predefined_functions` olarak açıkça eklemediğiniz sürece [Desteklenen işlemler](#supported-actions) listesindeki diğer tüm kullanıcı arayüzü işlemlerini uygulamanız gerekir.
+Perhatikan bahwa contoh ini hanya mencakup penerapan untuk 3 tindakan UI yang paling umum: `open_web_browser`, `click_at`, dan `type_text_at`. Untuk
+kasus penggunaan produksi, Anda harus menerapkan semua tindakan UI lainnya dari daftar
+[Tindakan yang didukung](#supported-actions) kecuali jika Anda menambahkannya secara eksplisit sebagai
+`excluded_predefined_functions`.
 
 ### Python
 
@@ -252,9 +273,11 @@ def execute_function_calls(interaction, page, screen_width, screen_height):
     return results
 ```
 
-### 4. Yeni ortam durumunu yakalama
+### 4. Merekam status lingkungan baru
 
-İşlemleri yürüttükten sonra, işlev yürütme sonucunu modele geri gönderin. Böylece model, bu bilgileri kullanarak sonraki işlemi oluşturabilir. Birden fazla işlem (paralel çağrı) yürütüldüyse sonraki kullanıcı dönüşünde her biri için bir `function_result` göndermeniz gerekir.
+Setelah menjalankan tindakan, kirim hasil eksekusi fungsi kembali ke model agar model dapat menggunakan informasi ini untuk membuat tindakan berikutnya. Jika
+beberapa tindakan (panggilan paralel) dijalankan, Anda harus mengirimkan
+`function_result` untuk setiap tindakan pada giliran pengguna berikutnya.
 
 ### Python
 
@@ -286,15 +309,15 @@ def get_function_responses(page, results):
     return function_responses
 ```
 
-## Aracı döngüsü oluşturma
+## Membangun loop agen
 
-Çok adımlı etkileşimleri etkinleştirmek için [Bilgisayar kullanımını uygulama](#implement-computer-use) bölümündeki dört adımı bir döngüde birleştirin.
-Hem model yanıtlarını hem de işlev yanıtlarınızı ekleyerek görüşme geçmişini doğru şekilde yönetmeyi unutmayın.
+Untuk mengaktifkan interaksi multi-langkah, gabungkan empat langkah dari bagian [Cara menerapkan Penggunaan Komputer](#implement-computer-use) ke dalam loop.
+Jangan lupa untuk mengelola histori percakapan dengan benar dengan menambahkan respons model dan respons fungsi Anda.
 
-Bu kod örneğini çalıştırmak için:
+Untuk menjalankan contoh kode ini, Anda harus:
 
-- [Gerekli Playwright bağımlılıklarını](#implement-computer-use) yükleyin.
-- [(3) Alınan işlemleri yürütün](#execute-actions) ve [(4) Yeni ortam durumunu yakalayın](#capture-state) adımlarındaki yardımcı işlevleri tanımlayın.
+- Instal [dependensi Playwright yang diperlukan](#implement-computer-use).
+- Tentukan fungsi helper dari langkah [(3) Jalankan tindakan yang diterima](#execute-actions) dan [(4) Ambil status lingkungan baru](#capture-state).
 
 ### Python
 
@@ -387,9 +410,9 @@ finally:
     playwright.stop()
 ```
 
-## Özel kullanıcı tanımlı işlevleri kullanma
+## Menggunakan fungsi kustom yang ditentukan pengguna
 
-İsteğinize, modelin işlevselliğini genişletmek için isteğe bağlı olarak özel kullanıcı tanımlı işlevler ekleyebilirsiniz. Aşağıdaki örnekte, tarayıcıya özgü işlemler hariç tutulurken `open_app`, `long_press_at` ve `go_home` gibi özel kullanıcı tanımlı işlemler eklenerek Bilgisayar Kullanımı modeli ve aracı mobil kullanım alanlarına uyarlanmıştır. Model, tarayıcı dışı ortamlarda görevleri tamamlamak için bu özel işlevleri standart kullanıcı arayüzü işlemleriyle birlikte akıllıca çağırabilir.
+Secara opsional, Anda dapat menyertakan fungsi yang ditentukan pengguna kustom dalam permintaan untuk memperluas fungsi model. Contoh berikut mengadaptasi model dan alat Penggunaan Komputer untuk kasus penggunaan seluler dengan menyertakan tindakan yang ditentukan pengguna kustom seperti `open_app`, `long_press_at`, dan `go_home`, sekaligus mengecualikan tindakan khusus browser. Model dapat memanggil fungsi kustom ini secara cerdas bersama dengan tindakan UI standar untuk menyelesaikan tugas di lingkungan non-browser.
 
 ### Python
 
@@ -477,32 +500,36 @@ interaction = client.interactions.create(
 print(interaction)
 ```
 
-## Desteklenen kullanıcı arayüzü işlemleri
+## Tindakan UI yang didukung
 
-Model, `function_call` kullanarak aşağıdaki kullanıcı arayüzü işlemlerini isteyebilir. İstemci tarafı kodunuz, bu işlemlerin yürütme mantığını uygulamalıdır. Örnekler için [referans
-uygulamaya](https://github.com/google/computer-use-preview) bakın.
+Model dapat meminta tindakan UI berikut menggunakan
+`function_call`. Kode sisi klien Anda harus menerapkan logika eksekusi untuk
+tindakan ini. Lihat [implementasi
+referensi](https://github.com/google/computer-use-preview) untuk
+contoh.
 
-| Komut Adı | Açıklama | Bağımsız değişkenler (işlev çağrısında) | Örnek İşlev Çağrısı |
+| Command Name | Deskripsi | Argumen (dalam Panggilan Fungsi) | Contoh Panggilan Fungsi |
 | --- | --- | --- | --- |
-| **open\_web\_browser** | Web tarayıcısını açar. | Yok | `{"name": "open_web_browser", "arguments": {}}` |
-| **wait\_5\_seconds** | Dinamik içeriğin yüklenmesine veya animasyonların tamamlanmasına olanak tanımak için yürütmeyi 5 saniye duraklatır. | Yok | `{"name": "wait_5_seconds", "arguments": {}}` |
-| **go\_back** | Tarayıcının geçmişinde önceki sayfaya gider. | Yok | `{"name": "go_back", "arguments": {}}` |
-| **go\_forward** | Tarayıcının geçmişinde sonraki sayfaya gider. | Yok | `{"name": "go_forward", "arguments": {}}` |
-| **search** | Varsayılan arama motorunun ana sayfasına (ör. Google) gider. Yeni bir arama görevine başlamak için kullanışlıdır. | Yok | `{"name": "search", "arguments": {}}` |
-| **navigate** | Tarayıcıyı doğrudan belirtilen URL'ye yönlendirir. | `url`: str | `{"name": "navigate", "arguments": {"url": "https://www.wikipedia.org"}}` |
-| **click\_at** | Web sayfasında belirli bir koordinattaki tıklamalar. X ve Y değerleri 1.000 x 1.000'lik bir ızgaraya dayanır ve ekran boyutlarına göre ölçeklendirilir. | `y`: int (0-999), `x`: int (0-999) | `{"name": "click_at", "arguments": {"y": 300, "x": 500}}` |
-| **hover\_at** | Fareyi web sayfasında belirli bir koordinata getirir. Alt menüleri göstermek için kullanışlıdır. x ve y, 1000x1000'lik bir ızgaraya dayanır. | `y`: int (0-999) `x`: int (0-999) | `{"name": "hover_at", "arguments": {"y": 150, "x": 250}}` |
-| **type\_text\_at** | Belirli bir koordinata metin yazar. Varsayılan olarak önce alanı temizler ve yazdıktan sonra ENTER tuşuna basar ancak bunlar devre dışı bırakılabilir. x ve y, 1000x1000'lik bir ızgaraya dayanır. | `y`: int (0-999), `x`: int (0-999), `text`: str, `press_enter`: bool (isteğe bağlı, varsayılan değer True), `clear_before_typing`: bool (isteğe bağlı, varsayılan değer True) | `{"name": "type_text_at", "arguments": {"y": 250, "x": 400, "text": "search query", "press_enter": false}}` |
-| **key\_combination** | "Control+C" veya "Enter" gibi klavye tuşlarına ya da kombinasyonlarına basın. İşlemleri (ör. "Enter" tuşuyla form gönderme) veya pano işlemlerini tetiklemek için kullanışlıdır. | `keys`: str (ör. "enter", "control+c"). | `{"name": "key_combination", "arguments": {"keys": "Control+A"}}` |
-| **scroll\_document** | Tüm web sayfasını "yukarı", "aşağı", "sola" veya "sağa" kaydırır. | `direction`: str ("up", "down", "left" veya "right") | `{"name": "scroll_document", "arguments": {"direction": "down"}}` |
-| **scroll\_at** | Belirli bir öğeyi veya alanı, belirtilen yönde belirli bir büyüklükte (x, y) koordinatında kaydırır. Koordinatlar ve büyüklük (varsayılan 800), 1000x1000'lik bir ızgaraya dayanır. | `y`: int (0-999), `x`: int (0-999), `direction`: str ("up", "down", "left", "right"), `magnitude`: int (0-999, İsteğe bağlı, varsayılan 800) | `{"name": "scroll_at", "arguments": {"y": 500, "x": 500, "direction": "down", "magnitude": 400}}` |
-| **drag\_and\_drop** | Bir öğeyi başlangıç koordinatından (x, y) sürükleyip hedef koordinata (destination\_x, destination\_y) bırakır. Tüm koordinatlar 1000x1000'lik bir ızgaraya dayanır. | `y`: int (0-999), `x`: int (0-999), `destination_y`: int (0-999), `destination_x`: int (0-999) | `{"name": "drag_and_drop", "arguments": {"y": 100, "x": 100, "destination_y": 500, "destination_x": 500}}` |
+| **open\_web\_browser** | Membuka browser web. | Tidak ada | `{"name": "open_web_browser", "arguments": {}}` |
+| **wait\_5\_seconds** | Menjeda eksekusi selama 5 detik untuk memungkinkan konten dinamis dimuat atau animasi selesai. | Tidak ada | `{"name": "wait_5_seconds", "arguments": {}}` |
+| **go\_back** | Membuka halaman sebelumnya dalam histori browser. | Tidak ada | `{"name": "go_back", "arguments": {}}` |
+| **go\_forward** | Membuka halaman berikutnya dalam histori browser. | Tidak ada | `{"name": "go_forward", "arguments": {}}` |
+| **search** | Membuka halaman beranda mesin telusur default (misalnya, Google). Berguna untuk memulai tugas penelusuran baru. | Tidak ada | `{"name": "search", "arguments": {}}` |
+| **navigate** | Membuka URL yang ditentukan secara langsung di browser. | `url`: str | `{"name": "navigate", "arguments": {"url": "https://www.wikipedia.org"}}` |
+| **click\_at** | Mengklik pada koordinat tertentu di halaman web. Nilai x dan y didasarkan pada petak 1000x1000 dan diskalakan ke dimensi layar. | `y`: int (0-999), `x`: int (0-999) | `{"name": "click_at", "arguments": {"y": 300, "x": 500}}` |
+| **hover\_at** | Mengarahkan kursor ke koordinat tertentu di halaman web. Berguna untuk menampilkan sub-menu. x dan y didasarkan pada petak 1000x1000. | `y`: int (0-999) `x`: int (0-999) | `{"name": "hover_at", "arguments": {"y": 150, "x": 250}}` |
+| **type\_text\_at** | Mengetik teks pada koordinat tertentu, secara default menghapus kolom terlebih dahulu dan menekan ENTER setelah mengetik, tetapi hal ini dapat dinonaktifkan. x dan y didasarkan pada petak 1000x1000. | `y`: int (0-999), `x`: int (0-999), `text`: str, `press_enter`: bool (Opsional, default Benar), `clear_before_typing`: bool (Opsional, default Benar) | `{"name": "type_text_at", "arguments": {"y": 250, "x": 400, "text": "search query", "press_enter": false}}` |
+| **key\_combination** | Tekan tombol atau kombinasi tombol keyboard, seperti "Control+C" atau "Enter". Berguna untuk memicu tindakan (seperti mengirimkan formulir dengan "Enter") atau operasi papan klip. | `keys`: str (misalnya, 'enter', 'control+c'). | `{"name": "key_combination", "arguments": {"keys": "Control+A"}}` |
+| **scroll\_document** | Men-scroll seluruh halaman web "ke atas", "ke bawah", "ke kiri", atau "ke kanan". | `direction`: str ("up", "down", "left", atau "right") | `{"name": "scroll_document", "arguments": {"direction": "down"}}` |
+| **scroll\_at** | Men-scroll elemen atau area tertentu pada koordinat (x, y) ke arah yang ditentukan dengan besaran tertentu. Koordinat dan besaran (default 800) didasarkan pada petak 1000x1000. | `y`: int (0-999), `x`: int (0-999), `direction`: str ("up", "down", "left", "right"), `magnitude`: int (0-999, Opsional, default 800) | `{"name": "scroll_at", "arguments": {"y": 500, "x": 500, "direction": "down", "magnitude": 400}}` |
+| **drag\_and\_drop** | Menarik elemen dari koordinat awal (x, y) dan melepaskannya di koordinat tujuan (destination\_x, destination\_y). Semua koordinat didasarkan pada petak 1000x1000. | `y`: int (0-999), `x`: int (0-999), `destination_y`: int (0-999), `destination_x`: int (0-999) | `{"name": "drag_and_drop", "arguments": {"y": 100, "x": 100, "destination_y": 500, "destination_x": 500}}` |
 
-## Güvenlik
+## Keselamatan dan keamanan
 
-### Güvenlik kararını onaylama
+### Mengonfirmasi keputusan keamanan
 
-Modele verilen yanıt, işleme bağlı olarak modelin önerdiği işlemi kontrol eden dahili bir güvenlik sisteminden gelen `safety_decision` de içerebilir.
+Bergantung pada tindakan, respons model juga dapat menyertakan
+`safety_decision` dari sistem keamanan internal yang memeriksa tindakan yang diusulkan model.
 
 ```
 {
@@ -532,9 +559,14 @@ Modele verilen yanıt, işleme bağlı olarak modelin önerdiği işlemi kontrol
 }
 ```
 
-`safety_decision` `require_confirmation` ise işleme devam etmeden önce son kullanıcıdan onayını almanız gerekir. [Hizmet şartlarına](https://ai.google.dev/gemini-api/terms?hl=tr) göre, insan onayı isteklerini atlamanıza izin verilmez.
+Jika `safety_decision` adalah `require_confirmation`, Anda harus meminta pengguna akhir untuk mengonfirmasi sebelum melanjutkan dengan menjalankan tindakan. Berdasarkan
+[persyaratan layanan](https://ai.google.dev/gemini-api/terms?hl=id), Anda tidak diizinkan
+melewati permintaan konfirmasi manusia.
 
-Bu kod örneği, işlemi yürütmeden önce son kullanıcıdan onay ister. Kullanıcı işlemi onaylamazsa döngü sonlandırılır. Kullanıcı işlemi onaylarsa işlem yürütülür ve `safety_acknowledgement` alanı `True` olarak işaretlenir.
+Contoh kode ini meminta konfirmasi pengguna akhir sebelum menjalankan
+tindakan. Jika pengguna tidak mengonfirmasi tindakan, loop akan berakhir. Jika
+pengguna mengonfirmasi tindakan, tindakan akan dijalankan dan
+kolom `safety_acknowledgement` ditandai sebagai `True`.
 
 ### Python
 
@@ -572,7 +604,8 @@ def execute_function_calls(interaction, page, screen_width, screen_height):
         # ... Execute function call and append to results ...
 ```
 
-Kullanıcı onaylarsa güvenlik onayını `function_result` bölümüne eklemeniz gerekir.
+Jika pengguna mengonfirmasi, Anda harus menyertakan konfirmasi keselamatan dalam
+`function_result` Anda.
 
 ```
 ```python
@@ -599,145 +632,150 @@ function_responses.append({
 ```
 ```
 
-### Güvenlikle ilgili en iyi uygulamalar
+### Praktik terbaik keamanan
 
-Bilgisayar Kullanımı, geliştiricilerin dikkat etmesi gereken yeni riskler sunan yeni bir araçtır:
+Penggunaan Komputer adalah alat baru yang menimbulkan risiko baru yang harus diperhatikan oleh developer:
 
-- **Güvenilmeyen içerikler ve dolandırıcılık:** Model, kullanıcının amacına ulaşmaya çalışırken güvenilmeyen bilgi kaynaklarına ve ekrandaki talimatlara güvenebilir. Örneğin, kullanıcının hedefi Pixel telefon satın almaksa ve model "Anketi tamamlarsanız ücretsiz Pixel" dolandırıcılığıyla karşılaşırsa modeli anketi tamamlama ihtimali vardır.
-- **Bazen istenmeyen işlemler:** Model, kullanıcının amacını veya web sayfası içeriğini yanlış yorumlayarak yanlış düğmeyi tıklama ya da yanlış formu doldurma gibi hatalı işlemler yapabilir. Bu durum, görevlerin başarısız olmasına veya veri hırsızlığına yol açabilir.
-- **Politika ihlalleri:** API'nin özellikleri, Google'ın politikalarını ([Üretken Yapay Zeka Yasaklanan Kullanım Politikası](https://policies.google.com/terms/generative-ai/use-policy?hl=tr) ve [Gemini API Ek Hizmet Şartları](https://ai.google.dev/gemini-api/terms?hl=tr)) ihlal eden faaliyetlere yönlendirilebilir (kasıtlı veya kasıtsız olarak). Bu tanım, bir sistemin bütünlüğünü etkileyebilecek, güvenliği tehlikeye atabilecek, güvenlik önlemlerini atlayabilecek, tıbbi cihazları kontrol edebilecek vb. işlemleri içerir.
+- **Konten yang tidak tepercaya & penipuan:** Saat mencoba mencapai tujuan pengguna, model mungkin mengandalkan sumber informasi dan petunjuk yang tidak tepercaya dari layar. Misalnya, jika sasaran pengguna adalah membeli ponsel Pixel dan model menemukan penipuan "Pixel Gratis jika Anda menyelesaikan survei", ada kemungkinan model akan menyelesaikan survei.
+- **Tindakan yang tidak disengaja sesekali:** Model dapat salah menafsirkan tujuan pengguna atau konten halaman web, sehingga menyebabkan model melakukan tindakan yang salah seperti mengklik tombol yang salah atau mengisi formulir yang salah. Hal ini dapat menyebabkan kegagalan tugas atau pemindahan data yang tidak sah.
+- **Pelanggaran kebijakan:** Kemampuan API dapat diarahkan, baik secara sengaja maupun tidak sengaja, ke aktivitas yang melanggar kebijakan Google ([Kebijakan Penggunaan Terlarang untuk AI Generatif](https://policies.google.com/terms/generative-ai/use-policy?hl=id) dan [Persyaratan Layanan Tambahan Gemini API](https://ai.google.dev/gemini-api/terms?hl=id). Hal ini mencakup tindakan yang dapat mengganggu integritas sistem, membahayakan keamanan, melewati langkah-langkah keamanan, mengontrol perangkat medis, dll.
 
-Bu riskleri gidermek için aşağıdaki güvenlik önlemlerini ve en iyi uygulamaları kullanabilirsiniz:
+Untuk mengatasi risiko ini, Anda dapat menerapkan langkah-langkah keamanan dan praktik terbaik berikut:
 
-1. **İnsanların dahil edilmesi (HITL):**
+1. **Human-in-the-Loop (HITL):**
 
-   - **Kullanıcı onayını uygulayın:** Güvenlik yanıtı `require_confirmation` gösterdiğinde yürütmeden önce kullanıcı onayını uygulamanız gerekir. Örnek kod için [Güvenlik kararını onaylama](#safety-decisions) başlıklı makaleyi inceleyin.
-   - **Özel güvenlik talimatları sağlama:** Geliştiriciler, yerleşik kullanıcı onay kontrollerine ek olarak, kendi güvenlik politikalarını zorunlu kılan özel bir [sistem talimatı](https://ai.google.dev/gemini-api/docs/text-generation?hl=tr#system-instructions) ekleyebilir. Bu talimat, belirli model işlemlerini engellemek veya modelin belirli yüksek riskli geri döndürülemez işlemleri yapmadan önce kullanıcı onayı almak için kullanılabilir. Modelle etkileşimde bulunurken ekleyebileceğiniz özel bir güvenlik sistemi talimatı örneğini aşağıda bulabilirsiniz.
+   - **Terapkan konfirmasi pengguna:** Jika respons keamanan menunjukkan
+     `require_confirmation`, Anda harus menerapkan konfirmasi pengguna sebelum
+     eksekusi. Lihat [Mengonfirmasi keputusan keamanan](#safety-decisions) untuk
+     contoh kode.
+   - **Memberikan petunjuk keamanan kustom:** Selain pemeriksaan konfirmasi pengguna bawaan, developer dapat secara opsional menambahkan [petunjuk sistem](https://ai.google.dev/gemini-api/docs/text-generation?hl=id#system-instructions) kustom yang menerapkan kebijakan keamanan mereka sendiri, baik untuk memblokir tindakan model tertentu atau mewajibkan konfirmasi pengguna sebelum model melakukan tindakan tidak dapat diubah yang berisiko tinggi. Berikut adalah contoh instruksi sistem keamanan kustom yang dapat Anda sertakan saat berinteraksi dengan model.
 
-     #### Güvenlik talimatı örnekleri
+     **Contoh petunjuk keselamatan:**
 
-     Özel güvenlik kurallarınızı sistem talimatı olarak ayarlayın:
+     Tetapkan aturan keamanan kustom Anda sebagai petunjuk sistem:
 
      ```
-         ## **RULE 1: Seek User Confirmation (USER_CONFIRMATION)**
+     ## **RULE 1: Seek User Confirmation (USER_CONFIRMATION)**
 
-         This is your first and most important check. If the next required action falls
-         into any of the following categories, you MUST stop immediately, and seek the
-         user's explicit permission.
+     This is your first and most important check. If the next required action falls
+     into any of the following categories, you MUST stop immediately, and seek the
+     user's explicit permission.
 
-         **Procedure for Seeking Confirmation:**  * **For Consequential Actions:**
-         Perform all preparatory steps (e.g., navigating, filling out forms, typing a
-         message). You will ask for confirmation **AFTER** all necessary information is
-         entered on the screen, but **BEFORE** you perform the final, irreversible action
-         (e.g., before clicking "Send", "Submit", "Confirm Purchase", "Share").  * **For
-         Prohibited Actions:** If the action is strictly forbidden (e.g., accepting legal
-         terms, solving a CAPTCHA), you must first inform the user about the required
-         action and ask for their confirmation to proceed.
+     **Procedure for Seeking Confirmation:**  * **For Consequential Actions:**
+     Perform all preparatory steps (e.g., navigating, filling out forms, typing a
+     message). You will ask for confirmation **AFTER** all necessary information is
+     entered on the screen, but **BEFORE** you perform the final, irreversible action
+     (e.g., before clicking "Send", "Submit", "Confirm Purchase", "Share").  * **For
+     Prohibited Actions:** If the action is strictly forbidden (e.g., accepting legal
+     terms, solving a CAPTCHA), you must first inform the user about the required
+     action and ask for their confirmation to proceed.
 
-         **USER_CONFIRMATION Categories:**
+     **USER_CONFIRMATION Categories:**
 
-         *   **Consent and Agreements:** You are FORBIDDEN from accepting, selecting, or
-             agreeing to any of the following on the user's behalf. You must ask the
-             user to confirm before performing these actions.
-             *   Terms of Service
-             *   Privacy Policies
-             *   Cookie consent banners
-             *   End User License Agreements (EULAs)
-             *   Any other legally significant contracts or agreements.
-         *   **Robot Detection:** You MUST NEVER attempt to solve or bypass the
-             following. You must ask the user to confirm before performing these actions.
-         *   CAPTCHAs (of any kind)
-             *   Any other anti-robot or human-verification mechanisms, even if you are
-                 capable.
-         *   **Financial Transactions:**
-             *   Completing any purchase.
-             *   Managing or moving money (e.g., transfers, payments).
-             *   Purchasing regulated goods or participating in gambling.
-         *   **Sending Communications:**
-             *   Sending emails.
-             *   Sending messages on any platform (e.g., social media, chat apps).
-             *   Posting content on social media or forums.
-         *   **Accessing or Modifying Sensitive Information:**
-             *   Health, financial, or government records (e.g., medical history, tax
-                 forms, passport status).
-             *   Revealing or modifying sensitive personal identifiers (e.g., SSN, bank
-                 account number, credit card number).
-         *   **User Data Management:**
-             *   Accessing, downloading, or saving files from the web.
-             *   Sharing or sending files/data to any third party.
-             *   Transferring user data between systems.
-         *   **Browser Data Usage:**
-             *   Accessing or managing Chrome browsing history, bookmarks, autofill data,
-                 or saved passwords.
-         *   **Security and Identity:**
-             *   Logging into any user account.
-             *   Any action that involves misrepresentation or impersonation (e.g.,
-                 creating a fan account, posting as someone else).
-         *   **Insurmountable Obstacles:** If you are technically unable to interact with
-             a user interface element or are stuck in a loop you cannot resolve, ask the
-             user to take over.
-         ---
+     *   **Consent and Agreements:** You are FORBIDDEN from accepting, selecting, or
+         agreeing to any of the following on the user's behalf. You must ask the
+         user to confirm before performing these actions.
+         *   Terms of Service
+         *   Privacy Policies
+         *   Cookie consent banners
+         *   End User License Agreements (EULAs)
+         *   Any other legally significant contracts or agreements.
+     *   **Robot Detection:** You MUST NEVER attempt to solve or bypass the
+         following. You must ask the user to confirm before performing these actions.
+     *   CAPTCHAs (of any kind)
+         *   Any other anti-robot or human-verification mechanisms, even if you are
+             capable.
+     *   **Financial Transactions:**
+         *   Completing any purchase.
+         *   Managing or moving money (e.g., transfers, payments).
+         *   Purchasing regulated goods or participating in gambling.
+     *   **Sending Communications:**
+         *   Sending emails.
+         *   Sending messages on any platform (e.g., social media, chat apps).
+         *   Posting content on social media or forums.
+     *   **Accessing or Modifying Sensitive Information:**
+         *   Health, financial, or government records (e.g., medical history, tax
+             forms, passport status).
+         *   Revealing or modifying sensitive personal identifiers (e.g., SSN, bank
+             account number, credit card number).
+     *   **User Data Management:**
+         *   Accessing, downloading, or saving files from the web.
+         *   Sharing or sending files/data to any third party.
+         *   Transferring user data between systems.
+     *   **Browser Data Usage:**
+         *   Accessing or managing Chrome browsing history, bookmarks, autofill data,
+             or saved passwords.
+     *   **Security and Identity:**
+         *   Logging into any user account.
+         *   Any action that involves misrepresentation or impersonation (e.g.,
+             creating a fan account, posting as someone else).
+     *   **Insurmountable Obstacles:** If you are technically unable to interact with
+         a user interface element or are stuck in a loop you cannot resolve, ask the
+         user to take over.
+     ---
 
-         ## **RULE 2: Default Behavior (ACTUATE)**
+     ## **RULE 2: Default Behavior (ACTUATE)**
 
-         If an action does **NOT** fall under the conditions for `USER_CONFIRMATION`,
-         your default behavior is to **Actuate**.
+     If an action does **NOT** fall under the conditions for `USER_CONFIRMATION`,
+     your default behavior is to **Actuate**.
 
-         **Actuation Means:**  You MUST proactively perform all necessary steps to move
-         the user's request forward. Continue to actuate until you either complete the
-         non-consequential task or encounter a condition defined in Rule 1.
+     **Actuation Means:**  You MUST proactively perform all necessary steps to move
+     the user's request forward. Continue to actuate until you either complete the
+     non-consequential task or encounter a condition defined in Rule 1.
 
-         *   **Example 1:** If asked to send money, you will navigate to the payment
-             portal, enter the recipient's details, and enter the amount. You will then
-             **STOP** as per Rule 1 and ask for confirmation before clicking the final
-             "Send" button.
-         *   **Example 2:** If asked to post a message, you will navigate to the site,
-             open the post composition window, and write the full message. You will then
-             **STOP** as per Rule 1 and ask for confirmation before clicking the final
-             "Post" button.
+     *   **Example 1:** If asked to send money, you will navigate to the payment
+         portal, enter the recipient's details, and enter the amount. You will then
+         **STOP** as per Rule 1 and ask for confirmation before clicking the final
+         "Send" button.
+     *   **Example 2:** If asked to post a message, you will navigate to the site,
+         open the post composition window, and write the full message. You will then
+         **STOP** as per Rule 1 and ask for confirmation before clicking the final
+         "Post" button.
 
-             After the user has confirmed, remember to get the user's latest screen
-             before continuing to perform actions.
+         After the user has confirmed, remember to get the user's latest screen
+         before continuing to perform actions.
 
-         # Final Response Guidelines:
-         Write final response to the user in the following cases:
-         - User confirmation
-         - When the task is complete or you have enough information to respond to the user
+     # Final Response Guidelines:
+     Write final response to the user in the following cases:
+     - User confirmation
+     - When the task is complete or you have enough information to respond to the user
      ```
-2. **Güvenli yürütme ortamı:** Aracınızı, olası etkisini sınırlamak için güvenli ve korumalı bir ortamda (ör. korumalı bir sanal makine (VM), kapsayıcı (ör. Docker) veya sınırlı izinlere sahip özel bir tarayıcı profili) çalıştırın.
-3. **Giriş temizleme:** İstenmeyen talimatlar veya istem enjeksiyonu riskini azaltmak için istemlerdeki kullanıcı tarafından oluşturulan tüm metinleri temizleyin. Bu, faydalı bir güvenlik katmanı olsa da güvenli bir yürütme ortamının yerini almaz.
-4. **İçerik koruma sınırları:** Kullanıcı girişlerini, araç giriş ve çıkışını, aracının yanıtını uygunluk, istem ekleme ve jailbreak algılama açısından değerlendirmek için koruma sınırlarını ve [içerik güvenliği API'lerini](https://ai.google.dev/gemma/docs/shieldgemma?hl=tr) kullanın.
-5. **İzin verilenler ve engellenenler listeleri:** Modelin nereye gidebileceğini ve neler yapabileceğini kontrol etmek için filtreleme mekanizmalarını uygulayın. Yasaklanmış web sitelerinin engellenenler listesi iyi bir başlangıç noktasıdır. Daha kısıtlayıcı bir izin verilenler listesi ise daha da güvenlidir.
-6. **Gözlemlenebilirlik ve günlük kaydı:** Hata ayıklama, denetleme ve olaylara müdahale için ayrıntılı günlükler tutun. Müşteriniz istemleri, ekran görüntülerini, model tarafından önerilen işlemleri (function\_call), güvenlik yanıtlarını ve nihayetinde müşteri tarafından gerçekleştirilen tüm işlemleri günlüğe kaydetmelidir.
-7. **Ortam yönetimi:** GUI ortamının tutarlı olmasını sağlayın.
-   Beklenmedik pop-up'lar, bildirimler veya düzendeki değişiklikler modelin kafasını karıştırabilir. Mümkünse her yeni görev için bilinen ve temiz bir durumdan başlayın.
+2. **Lingkungan eksekusi yang aman:** Jalankan agen Anda di lingkungan sandbox yang aman untuk membatasi potensi dampaknya (misalnya, Virtual machine (VM) dalam sandbox, container (misalnya, Docker), atau profil browser khusus dengan izin terbatas).
+3. **Pembersihan input:** Bersihkan semua teks buatan pengguna dalam perintah untuk mengurangi risiko perintah yang tidak diinginkan atau serangan injeksi perintah. Ini adalah lapisan keamanan yang berguna, tetapi bukan pengganti lingkungan eksekusi yang aman.
+4. **Pembatasan konten:** Gunakan pembatasan dan [API keamanan konten](https://ai.google.dev/gemma/docs/shieldgemma?hl=id) untuk mengevaluasi input pengguna, input dan output alat, respons agen untuk kesesuaian, injeksi perintah, dan deteksi pelarian dari batasan.
+5. **Daftar yang diizinkan dan daftar yang tidak diizinkan:** Terapkan mekanisme pemfilteran untuk mengontrol ke mana model dapat membuka dan apa yang dapat dilakukannya. Daftar situs yang dilarang yang tidak diizinkan adalah titik awal yang baik, sementara daftar yang diizinkan yang lebih ketat akan lebih aman.
+6. **Observabilitas dan logging:** Pertahankan log mendetail untuk proses debug, audit, dan respons insiden. Klien Anda harus mencatat perintah, screenshot, tindakan yang disarankan model (function\_call), respons keamanan, dan semua tindakan yang akhirnya dieksekusi oleh klien.
+7. **Pengelolaan lingkungan:** Pastikan lingkungan GUI konsisten.
+   Pop-up, notifikasi, atau perubahan tata letak yang tidak terduga dapat membingungkan model. Mulai dari status bersih yang diketahui untuk setiap tugas baru jika memungkinkan.
 
-## Model sürümleri
+## Versi model
 
-`gemini-3-flash-preview`'da Bilgisayar Kullanımı için yerleşik destek bulunduğunu unutmayın. Araca erişmek için ayrı bir modele ihtiyacınız yoktur.
+Perhatikan bahwa `gemini-3-flash-preview` memiliki dukungan bawaan untuk Penggunaan Komputer; Anda tidak memerlukan model terpisah untuk mengakses alat ini.
 
-| Mülk | Açıklama |
+| Properti | Deskripsi |
 | --- | --- |
-| id\_cardModel kodu | **Gemini API**  `gemini-2.5-computer-use-preview-10-2025` |
-| saveDesteklenen veri türleri | **Giriş**  Resim, metin  **Çıkış**  Metin |
-| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  128.000  **Çıkış jetonu sınırı**  64.000 |
-| 123Sürümleri | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - Önizleme: `gemini-2.5-computer-use-preview-10-2025` |
-| calendar\_monthSon güncelleme | Ekim 2025 |
+| Kode model id\_card | **Gemini API**  `gemini-2.5-computer-use-preview-10-2025` |
+| saveJenis data yang didukung | **Input**  Gambar, teks  **Output**  Teks |
+| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Batas token input**  128.000  **Batas token output**  64.000 |
+| Versi 123 | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - Pratinjau: `gemini-2.5-computer-use-preview-10-2025` |
+| calendar\_monthPembaruan terbaru | Oktober 2025 |
 
-## Sırada ne var?
+## Langkah berikutnya
 
-- [Browserbase demo ortamında](http://gemini.browserbase.com) bilgisayar kullanımıyla ilgili denemeler yapın.
-- Örnek kod için [Referans uygulama](https://github.com/google/computer-use-preview) bölümüne göz atın.
-- Diğer Gemini API araçları hakkında bilgi edinin:
-  - [İşlev çağırma](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=tr)
-  - [Google Arama ile temellendirme](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=tr)
+- Bereksperimen dengan Penggunaan Komputer di lingkungan [demo Browserbase](http://gemini.browserbase.com).
+- Lihat [Implementasi
+  referensi](https://github.com/google/computer-use-preview) untuk contoh
+  kode.
+- Pelajari alat Gemini API lainnya:
+  - [Panggilan fungsi](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=id)
+  - [Melakukan grounding dengan Google Penelusuran](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=id)
 
-Geri bildirim gönderin
+Kirim masukan
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Son güncelleme tarihi: 2026-05-28 UTC.
+Terakhir diperbarui pada 2026-06-05 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Ada masukan untuk kami?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-05-28 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-05 UTC."],[],[]]

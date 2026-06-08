@@ -1,38 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=zh-TW
-fetched_at: 2026-06-01T06:01:31.389033+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=hi
+fetched_at: 2026-06-08T05:28:12.469089+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-提供意見
+सुझाव भेजें
 
-# 文件解讀
+# दस्तावेज़ को समझना
 
-Gemini 模型可處理 PDF 格式的文件，並運用原生視覺功能瞭解整份文件的內容。這項功能不僅能擷取文字，還可讓 Gemini 執行下列動作：
+Gemini मॉडल, PDF फ़ॉर्मैट में मौजूद दस्तावेज़ों को प्रोसेस कर सकते हैं. इसके लिए, वे दस्तावेज़ के पूरे कॉन्टेक्स्ट को समझने के लिए, नेटिव विज़न का इस्तेमाल करते हैं. यह सिर्फ़ टेक्स्ट निकालने से कहीं ज़्यादा है. इससे Gemini ये काम कर सकता है:
 
-- 分析及解讀內容，包括文字、圖片、圖表、圖表和表格，即使是長達 1000 頁的文件也沒問題。
-- 以[結構化輸出](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=zh-tw)格式擷取資訊。
-- 根據文件中的圖像和文字元素，摘要內容並回答問題。
-- 轉錄文件內容 (例如轉錄為 HTML)，保留版面配置和格式，供下游應用程式使用。
+- टेक्स्ट, इमेज, डायग्राम, चार्ट, और टेबल के साथ-साथ कॉन्टेंट का विश्लेषण और व्याख्या करना. यह काम, 1, 000 पेजों तक के बड़े दस्तावेज़ों के लिए भी किया जा सकता है.
+- जानकारी को [स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=hi) फ़ॉर्मैट में निकालना.
+- किसी दस्तावेज़ में मौजूद विज़ुअल और टेक्स्ट वाले एलिमेंट, दोनों के आधार पर खास जानकारी देना और सवालों के जवाब देना.
+- दस्तावेज़ के कॉन्टेंट को ट्रांसक्रिप्ट करना.जैसे, एचटीएमएल में. साथ ही, लेआउट और फ़ॉर्मैटिंग को बनाए रखना, ताकि डाउनस्ट्रीम ऐप्लिकेशन में इसका इस्तेमाल किया जा सके.
 
-您也可以傳送非 PDF 文件，但 Gemini 會將其視為一般文字，因此圖表或格式等脈絡資訊會消失。
+आपके पास, PDF के अलावा दूसरे फ़ॉर्मैट वाले दस्तावेज़ों को भी उसी तरीके से पास करने का विकल्प है. हालांकि, Gemini उन्हें सामान्य टेक्स्ट के तौर पर देखेगा. इससे चार्ट या फ़ॉर्मैटिंग जैसे कॉन्टेक्स्ट नहीं दिखेंगे.
 
-## 內嵌傳遞 PDF 資料
+## पीडीएफ़ डेटा को इनलाइन पास करना
 
-您可以在要求中內嵌傳遞 PDF 資料。這種方法最適合用於小型文件或臨時處理，因為您不需要在後續要求中參照該檔案。如果需要參照大型文件進行多輪互動，建議使用 [Files API](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=zh-tw#large-pdfs)，以縮短要求延遲時間並減少頻寬用量。
+आपके पास अनुरोध में, पीडीएफ़ डेटा को इनलाइन पास करने का विकल्प है. यह छोटे दस्तावेज़ों या अस्थायी प्रोसेसिंग के लिए सबसे सही है. इसमें आपको बाद के अनुरोधों में फ़ाइल का रेफ़रंस देने की ज़रूरत नहीं होती. हमारा सुझाव है कि बड़े दस्तावेज़ों के लिए,
+[Files API](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=hi#large-pdfs)
+का इस्तेमाल करें. इससे अनुरोध की लेटेन्सी कम होगी और बैंडविड्थ का इस्तेमाल भी कम होगा. साथ ही, आपको कई बार होने वाले इंटरैक्शन में, इन दस्तावेज़ों का रेफ़रंस देना होगा.
 
-以下範例說明如何內嵌傳遞 PDF 資料：
+यहां दिए गए उदाहरण में, पीडीएफ़ डेटा को इनलाइन पास करने का तरीका बताया गया है:
 
 ### Python
 
@@ -118,7 +120,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-您也可以上傳本機 PDF 檔案進行處理：
+प्रोसेसिंग के लिए, स्थानीय तौर पर सेव की गई पीडीएफ़ फ़ाइल को भी अपलोड किया जा सकता है:
 
 ### Python
 
@@ -169,13 +171,13 @@ async function main() {
 main();
 ```
 
-## 使用 Files API 上傳 PDF
+## Files API का इस्तेमाल करके पीडीएफ़ अपलोड करना
 
-如果檔案較大，或是打算在多個要求中重複使用文件，建議使用 Files API。這項做法可將檔案上傳作業與模型要求分離，進而縮短要求延遲時間並減少頻寬用量。
+हमारा सुझाव है कि बड़ी फ़ाइलों के लिए या एक ही दस्तावेज़ को कई अनुरोधों में फिर से इस्तेमाल करने के लिए, Files API का इस्तेमाल करें. इससे अनुरोध की लेटेन्सी कम होती है और बैंडविड्थ का इस्तेमाल भी कम होता है. ऐसा इसलिए, क्योंकि फ़ाइल अपलोड करने की प्रोसेस, मॉडल के अनुरोधों से अलग होती है.
 
-### 透過網址上傳大型 PDF
+### यूआरएल से बड़ी पीडीएफ़ फ़ाइलें
 
-使用 File API 簡化從網址上傳及處理大型 PDF 檔案的程序：
+यूआरएल से बड़ी पीडीएफ़ फ़ाइलें अपलोड और प्रोसेस करने के लिए, File API का इस्तेमाल करें:
 
 ### Python
 
@@ -329,7 +331,7 @@ rm "${DISPLAY_NAME}.pdf"
 rm payload.json
 ```
 
-### 儲存在本機的大型 PDF
+### स्थानीय तौर पर सेव की गई बड़ी पीडीएफ़ फ़ाइलें
 
 ### Python
 
@@ -450,7 +452,8 @@ echo
 jq ".steps[-1].content[0].text" response.json
 ```
 
-您可以呼叫 [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=zh-tw)，確認 API 是否已成功儲存上傳的檔案並取得其相關中繼資料。只有 `name` (以及延伸的 `uri`) 是獨一無二。
+`[`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=hi)` को कॉल करके, यह पुष्टि की जा सकती है कि एपीआई ने अपलोड की गई फ़ाइल को सेव कर लिया है. साथ ही, इसका
+मेटाडेटा भी पाया जा सकता है. सिर्फ़ `name` (और इसके साथ ही, `uri`) यूनीक होते हैं.
 
 ### Python
 
@@ -482,9 +485,9 @@ file_uri=$(jq -r ".uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## 傳遞多個 PDF
+## एक से ज़्यादा पीडीएफ़ पास करना
 
-只要文件和文字提示的總大小不超過模型的脈絡窗口，Gemini API 就能在單一要求中處理多個 PDF 文件 (最多 1000 頁)。
+Gemini API, एक ही अनुरोध में एक से ज़्यादा पीडीएफ़ दस्तावेज़ों (ज़्यादा से ज़्यादा 1,000 पेज) को प्रोसेस कर सकता है. हालांकि, इसके लिए ज़रूरी है कि दस्तावेज़ों और टेक्स्ट प्रॉम्प्ट का कुल साइज़, मॉडल के कॉन्टेक्स्ट विंडो में तय सीमा के अंदर हो.
 
 ### Python
 
@@ -676,49 +679,49 @@ rm "file_info_${DISPLAY_NAME_1}.json"
 rm "file_info_${DISPLAY_NAME_2}.json"
 ```
 
-## 技術詳細資料
+## तकनीकी जानकारी
 
-Gemini 支援的 PDF 檔案大小上限為 50 MB 或 1000 頁。這項限制適用於內嵌資料和 Files API 上傳作業。每頁文件相當於 258 個權杖。
+Gemini, 50 एमबी या 1,000 पेजों तक की पीडीएफ़ फ़ाइलों के साथ काम करता है. यह सीमा, इनलाइन डेटा और Files API से अपलोड किए गए डेटा, दोनों पर लागू होती है. दस्तावेज़ का हर पेज, 258 टोकन के बराबर होता है.
 
-除了模型的[內容視窗](https://ai.google.dev/gemini-api/docs/long-context?hl=zh-tw)外，文件中的像素數量沒有具體限制，但較大的頁面會縮放至 3072 x 3072 像素的最大解析度，同時保留原始長寬比，較小的頁面則會放大至 768 x 768 像素。如果頁面較小，除了頻寬外，不會有任何成本降低；如果頁面解析度較高，也不會提升效能。
+मॉडल के [कॉन्टेक्स्ट विंडो](https://ai.google.dev/gemini-api/docs/long-context?hl=hi) के अलावा, किसी दस्तावेज़ में पिक्सल की संख्या की कोई खास सीमा नहीं होती. हालांकि, बड़े पेजों को ज़्यादा से ज़्यादा 3072 x 3072 रिज़ॉल्यूशन तक स्केल डाउन किया जाता है. इस दौरान, उनके ओरिजनल आसपेक्ट रेशियो को बनाए रखा जाता है. वहीं, छोटे पेजों को 768 x 768 पिक्सल तक स्केल अप किया जाता है. कम साइज़ वाले पेजों के लिए, बैंडविड्थ के अलावा कोई शुल्क कम नहीं किया जाता. वहीं, ज़्यादा रिज़ॉल्यूशन वाले पेजों के लिए, परफ़ॉर्मेंस में कोई सुधार नहीं किया जाता.
 
-### Gemini 3 模型
+### Gemini 3 के मॉडल
 
-Gemini 3 推出 `media_resolution` 參數，可精細控管多模態視覺處理作業。現在可以為每個媒體元件設定低、中或高解析度。新增這項功能後，處理 PDF 文件的方式也隨之更新：
+Gemini 3 में, `media_resolution` पैरामीटर की मदद से, मल्टीमॉडल विज़न प्रोसेसिंग पर ज़्यादा कंट्रोल मिलता है. अब हर मीडिया पार्ट के लिए, रिज़ॉल्यूशन को कम, सामान्य या ज़्यादा पर सेट किया जा सकता है. इस सुविधा के जुड़ने के बाद, पीडीएफ़ दस्तावेज़ों की प्रोसेसिंग को अपडेट कर दिया गया है:
 
-1. **內建文字納入：**系統會擷取 PDF 中內建的文字，並提供給模型。
-2. **帳單與權杖報表：**
-   - 從 PDF 擷取的**原生文字**產生的詞元**不會計費**。
-   - 在 API 回應的 `usage_metadata` 部分，處理 PDF 頁面 (以圖片形式) 時產生的權杖現在會計入 `IMAGE` 模態，而不是像某些舊版一樣計入獨立的 `DOCUMENT` 模態。
+1. **नेटिव टेक्स्ट शामिल करना:** पीडीएफ़ में नेटिव तौर पर एम्बेड किए गए टेक्स्ट को निकालकर, मॉडल को उपलब्ध कराया जाता है.
+2. **बिलिंग और टोकन की रिपोर्टिंग:**
+   - पीडीएफ़ में मौजूद **नेटिव टेक्स्ट** से जनरेट होने वाले टोकन के लिए, **कोई शुल्क नहीं लिया जाता**.
+   - एपीआई के जवाब के `usage_metadata` सेक्शन में, पीडीएफ़ पेजों को (इमेज के तौर पर) प्रोसेस करने से जनरेट होने वाले टोकन को अब `IMAGE` मोडैलिटी में गिना जाता है. पहले के कुछ वर्शन में, इन्हें `DOCUMENT` मोडैलिटी में गिना जाता था.
 
-### 文件類型
+### दस्तावेज़ के टाइप
 
-從技術上來說，您可以傳遞其他 MIME 類型，以供文件理解功能使用，例如 TXT、Markdown、HTML、XML 等。不過，文件視覺 ***只會解讀 PDF 檔案的內容***。其他類型會以純文字形式擷取，模型無法解讀這些檔案的算繪內容。所有檔案類型專屬內容都會遺失，例如圖表、HTML 標記、Markdown 格式等。
+तकनीकी तौर पर, दस्तावेज़ को समझने के लिए, TXT, Markdown, HTML, XML वगैरह जैसे अन्य MIME टाइप पास किए जा सकते हैं. हालांकि, दस्तावेज़ का विज़न ***सिर्फ़ पीडीएफ़ को समझ पाता है***. अन्य टाइप को सिर्फ़ टेक्स्ट के तौर पर निकाला जाएगा. साथ ही, मॉडल उन फ़ाइलों के रेंडरिंग में दिखने वाले कॉन्टेंट की व्याख्या नहीं कर पाएगा. चार्ट, डायग्राम, एचटीएमएल टैग, Markdown फ़ॉर्मैटिंग वगैरह जैसे फ़ाइल टाइप से जुड़ी कोई भी जानकारी नहीं दिखेगी.
 
-如要瞭解其他檔案輸入方式，請參閱「[檔案輸入方式](https://ai.google.dev/gemini-api/docs/interactions/file-input-methods?hl=zh-tw)」指南。
+फ़ाइल इनपुट के अन्य तरीकों के बारे में जानने के लिए, [फ़ाइल इनपुट के तरीके](https://ai.google.dev/gemini-api/docs/interactions/file-input-methods?hl=hi) से जुड़ा लेख पढ़ें.
 
-### 最佳做法
+### सबसे सही तरीके
 
-為確保最佳成效：
+सर्वोत्तम परिणामों के लिएः
 
-- 上傳前，請先將頁面旋轉至正確方向。
-- 避免模糊的頁面。
-- 如果使用單一頁面，請將文字提示詞放在該頁面之後。
+- अपलोड करने से पहले, पेजों को सही ओरिएंटेशन में घुमाएं.
+- धुंधले पेजों का इस्तेमाल न करें.
+- अगर एक ही पेज का इस्तेमाल किया जा रहा है, तो टेक्स्ट प्रॉम्प्ट को पेज के बाद रखें.
 
-## 後續步驟
+## आगे क्या करना है
 
-如要進一步瞭解相關內容，請參閱下列資源：
+ज़्यादा जानने के लिए, ये लेख पढ़ें और वीडियो देखें:
 
-- [檔案提示策略](https://ai.google.dev/gemini-api/docs/interactions/files?hl=zh-tw#prompt-guide)：Gemini API 支援使用文字、圖片、音訊和影片資料提示，也就是多模態提示。
-- [系統指令](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=zh-tw#system-instructions)：
-  系統指令可根據特定需求和用途，引導模型行為。
+- [फ़ाइल प्रॉम्प्ट करने की रणनीतियां](https://ai.google.dev/gemini-api/docs/interactions/files?hl=hi#prompt-guide): Gemini API, टेक्स्ट, इमेज, ऑडियो, और वीडियो डेटा के साथ प्रॉम्प्ट करने की सुविधा देता है. इसे मल्टीमॉडल प्रॉम्प्टिंग भी कहा जाता है.
+- [सिस्टम के निर्देश](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=hi#system-instructions):
+  सिस्टम के निर्देशों की मदद से, अपनी खास ज़रूरतों और इस्तेमाल के उदाहरणों के हिसाब से, मॉडल के व्यवहार को कंट्रोल किया जा सकता है.
 
-提供意見
+सुझाव भेजें
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-上次更新時間：2026-05-28 (世界標準時間)。
+आखिरी बार 2026-06-01 (UTC) को अपडेट किया गया.
 
-想進一步說明嗎？
+क्या आपको हमें और कुछ बताना है?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-28 (世界標準時間)。"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-06-01 (UTC) को अपडेट किया गया."],[],[]]

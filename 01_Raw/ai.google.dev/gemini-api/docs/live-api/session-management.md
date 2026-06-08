@@ -1,48 +1,52 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ar
-fetched_at: 2026-06-01T06:06:33.175523+00:00
-title: "\u0625\u062f\u0627\u0631\u0629 \u0627\u0644\u062c\u0644\u0633\u0627\u062a \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=es-419
+fetched_at: 2026-06-08T05:26:57.980957+00:00
+title: "Administraci\u00f3n de sesiones con la API de Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-إرسال ملاحظات
+Enviar comentarios
 
-# إدارة الجلسات باستخدام Live API
+# Administración de sesiones con la API de Live
 
-في Live API، تشير الجلسة إلى اتصال مستمر يتم فيه بث الإدخال والإخراج بشكل مستمر عبر الاتصال نفسه (مزيد من المعلومات حول [طريقة عمله](https://ai.google.dev/gemini-api/docs/live?hl=ar)).
-يتيح تصميم الجلسة الفريد هذا وقت استجابة منخفضًا ويدعم ميزات فريدة، ولكن يمكن أن يطرح أيضًا تحديات، مثل حدود وقت الجلسة والإنهاء المبكر.
-يغطي هذا الدليل استراتيجيات للتغلّب على تحديات إدارة الجلسات التي يمكن أن تنشأ عند استخدام Live API.
+En la API de Live, una sesión hace referencia a una conexión persistente
+en la que la entrada y la salida se transmiten de forma continua a través de la misma
+conexión (obtén más información sobre [cómo funciona](https://ai.google.dev/gemini-api/docs/live?hl=es-419)).
+Este diseño de sesión único permite una latencia baja y admite funciones únicas, pero también puede presentar desafíos, como límites de tiempo de sesión y finalización anticipada.
+En esta guía, se describen estrategias para superar los desafíos de administración de sesiones que pueden surgir cuando se usa la API de Live.
 
-## مدة الجلسة
+## Duración de la sesión
 
-بدون ضغط، تقتصر الجلسات الصوتية فقط على 15 دقيقة، وتقتصر الجلسات الصوتية والمرئية على دقيقتَين. سيؤدي تجاوز هذه الحدود
-إلى إنهاء الجلسة (وبالتالي، الاتصال)، ولكن يمكنك استخدام
-[ضغط قدرة استيعاب](#context-window-compression) لتمديد الجلسات إلى
-مدة غير محدودة.
+Sin compresión, las sesiones solo de audio se limitan a 15 minutos y las sesiones de audio y video se limitan a 2 minutos. Si se superan estos límites
+se finalizará la sesión (y, por lo tanto, la conexión), pero puedes usar
+[la compresión de la ventana de contexto](#context-window-compression) para extender las sesiones por
+un tiempo ilimitado.
 
-تقتصر مدة الاتصال أيضًا على 10 دقائق تقريبًا. عند انتهاء الاتصال، تنتهي الجلسة أيضًا. في هذه الحالة، يمكنك
-ضبط جلسة واحدة لتظل نشطة على عدة اتصالات باستخدام
-[استئناف الجلسة](#session-resumption).
-ستتلقّى أيضًا رسالة [GoAway](#goaway-message) قبل انتهاء
-الاتصال، ما يتيح لك اتّخاذ إجراءات إضافية.
+La duración de una conexión también está limitada a unos 10 minutos. Cuando finaliza la conexión, también finaliza la sesión. En este caso, puedes
+configurar una sola sesión para que permanezca activa en varias conexiones mediante la
+[reanudación de la sesión](#session-resumption).
+También recibirás un [mensaje de GoAway](#goaway-message) antes de que finalice la
+conexión, lo que te permitirá realizar más acciones.
 
-## ضغط قدرة استيعاب السياق
+## Compresión de la ventana de contexto
 
-لإتاحة جلسات أطول وتجنُّب إنهاء الاتصال المفاجئ، يمكنك تفعيل ضغط قدرة الاستيعاب من خلال ضبط الحقل [contextWindowCompression](https://ai.google.dev/api/live?hl=ar#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression) كجزء من إعداد الجلسة.
+Para habilitar sesiones más largas y evitar la finalización abrupta de la conexión, puedes
+habilitar la compresión de la ventana de contexto configurando el campo [contextWindowCompression](https://ai.google.dev/api/live?hl=es-419#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression)
+como parte de la configuración de la sesión.
 
-في [ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=ar#contextwindowcompressionconfig)، يمكنك ضبط آلية
-[النافذة المنزلقة](https://ai.google.dev/api/live?hl=ar#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window)
-و[عدد الرموز المميّزة](https://ai.google.dev/api/live?hl=ar#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens)
-التي تؤدي إلى الضغط.
+En [ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=es-419#contextwindowcompressionconfig), puedes configurar un
+[mecanismo de ventana deslizante](https://ai.google.dev/api/live?hl=es-419#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window)
+y la [cantidad de tokens](https://ai.google.dev/api/live?hl=es-419#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens)
+que activan la compresión.
 
 ### Python
 
@@ -69,15 +73,18 @@ const config = {
 };
 ```
 
-## استئناف الجلسة
+## Reanudación de sesión
 
-لمنع إنهاء الجلسة عندما يعيد الخادم ضبط اتصال WebSocket
-، اضبط الحقل [sessionResumption](https://ai.google.dev/api/live?hl=ar#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption)
-ضمن [إعداد الإعداد](https://ai.google.dev/api/live?hl=ar#BidiGenerateContentSetup).
+Para evitar la finalización de la sesión cuando el servidor restablece periódicamente la conexión WebSocket, configura el campo [sessionResumption](https://ai.google.dev/api/live?hl=es-419#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption)
+dentro de la [configuración de configuración](https://ai.google.dev/api/live?hl=es-419#BidiGenerateContentSetup).
 
-يؤدي تمرير هذا الإعداد إلى إرسال الخادم رسائل [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=ar#SessionResumptionUpdate)، التي يمكن استخدامها لاستئناف الجلسة من خلال تمرير آخر رمز مميّز للاستئناف كـ [`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=ar#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle) للاتصال اللاحق.
+Si pasas esta configuración, el
+servidor enviará mensajes de [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=es-419#SessionResumptionUpdate)
+, que se pueden usar para reanudar la sesión pasando el último token de reanudación
+como el [`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=es-419#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle)
+de la conexión posterior.
 
-تكون الرموز المميّزة للاستئناف صالحة لمدة ساعتَين بعد إنهاء الجلسات الأخيرة.
+Los tokens de reanudación son válidos durante 2 horas después de la finalización de la última sesión.
 
 ### Python
 
@@ -212,12 +219,11 @@ async function main() {
 main();
 ```
 
-## تلقّي رسالة قبل قطع اتصال الجلسة
+## Cómo recibir un mensaje antes de que se desconecte la sesión
 
-يرسل الخادم رسالة [GoAway](https://ai.google.dev/api/live?hl=ar#GoAway) تشير إلى أنّ الاتصال الحالي
-سيتم إنهاؤه قريبًا. تتضمّن هذه الرسالة الحقل [timeLeft](https://ai.google.dev/api/live?hl=ar#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left)،
-الذي يشير إلى الوقت المتبقي ويسمح لك باتّخاذ إجراءات إضافية قبل
-إنهاء الاتصال كـ ABORTED.
+El servidor envía un mensaje de [GoAway](https://ai.google.dev/api/live?hl=es-419#GoAway) que indica que la conexión actual finalizará pronto. Este mensaje incluye [timeLeft](https://ai.google.dev/api/live?hl=es-419#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left),
+que indica el tiempo restante y te permite realizar más acciones antes de que la
+conexión finalice como ABORTED.
 
 ### Python
 
@@ -240,10 +246,10 @@ for (const turn of turns) {
 }
 ```
 
-## تلقّي رسالة عند اكتمال الإنشاء
+## Cómo recibir un mensaje cuando se completa la generación
 
-يرسل الخادم رسالة [generationComplete](https://ai.google.dev/api/live?hl=ar#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete)
-تشير إلى أنّ النموذج انتهى من إنشاء الردّ.
+El servidor envía un mensaje de [generationComplete](https://ai.google.dev/api/live?hl=es-419#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete)
+que indica que el modelo terminó de generar la respuesta.
 
 ### Python
 
@@ -265,19 +271,19 @@ for (const turn of turns) {
 }
 ```
 
-## الخطوات التالية
+## ¿Qué sigue?
 
-يمكنك استكشاف المزيد من الطرق لاستخدام Live API في دليل
-[الإمكانات](https://ai.google.dev/gemini-api/docs/live?hl=ar) الكامل أو
-صفحة [استخدام الأدوات](https://ai.google.dev/gemini-api/docs/live-tools?hl=ar) أو
-[دليل Live API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=ar).
+Explora más formas de trabajar con la API de Live en la guía completa de
+[capacidades](https://ai.google.dev/gemini-api/docs/live?hl=es-419),
+la página [Uso de herramientas](https://ai.google.dev/gemini-api/docs/live-tools?hl=es-419) o el
+[libro de recetas de la API de Live](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=es-419).
 
-إرسال ملاحظات
+Enviar comentarios
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-تاريخ التعديل الأخير: 2026-05-29 (حسب التوقيت العالمي المتفَّق عليه)
+Última actualización: 2026-06-01 (UTC)
 
-هل تريد مشاركة ملاحظاتك معنا؟
+¿Quieres brindar más información?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-01 (UTC)"],[],[]]

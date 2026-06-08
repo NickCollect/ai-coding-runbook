@@ -1,188 +1,186 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/rate-limits?hl=ar
-fetched_at: 2026-06-01T05:57:09.178577+00:00
-title: "\u062d\u062f\u0648\u062f \u0627\u0644\u0645\u0639\u062f\u0644 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/rate-limits?hl=es-419
+fetched_at: 2026-06-08T05:30:37.372399+00:00
+title: "L\u00edmites de frecuencia \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-إرسال ملاحظات
+Enviar comentarios
 
-# حدود المعدل
+# Límites de frecuencia
 
-تتحكّم حدود المعدّل في عدد الطلبات التي يمكنك إرسالها إلى Gemini API
-خلال إطار زمني محدّد. تساعد هذه الحدود في الحفاظ على الاستخدام العادل والحماية من إساءة الاستخدام والحفاظ على أداء النظام لجميع المستخدمين.
+Los límites de frecuencia regulan la cantidad de solicitudes que puedes realizar a la API de Gemini en un período determinado. Estos límites ayudan a mantener un uso justo, proteger contra el abuso y mantener el rendimiento del sistema para todos los usuarios.
 
-[الاطّلاع على حدود المعدّل النشطة في AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=ar)
+[Consulta tus límites de frecuencia activos en AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=es-419)
 
-## طريقة عمل حدود المعدّل
+## Cómo funcionan los límites de frecuencia
 
-يتم عادةً قياس حدود المعدّل على مستوى ثلاثة جوانب:
+Por lo general, los límites de frecuencia se miden en tres dimensiones:
 
-- الطلبات في الدقيقة (**RPM**)
-- الرموز المميزة في الدقيقة (الإدخال) (**TPM**)
-- الطلبات في اليوم (**RPD**)
+- Solicitudes por minuto (**RPM**)
+- Tokens por minuto (entrada) (**TPM**)
+- Solicitudes por día (**RPD**)
 
-يتم تقييم استخدامك مقارنةً بكل حد، وسيؤدي تجاوز أي منها إلى ظهور خطأ في الحد الأقصى لمعدّل الطلبات. على سبيل المثال، إذا كان الحدّ الأقصى لعدد الطلبات في الدقيقة هو 20، سيؤدي تقديم 21 طلبًا خلال دقيقة واحدة إلى حدوث خطأ، حتى إذا لم تتجاوز الحدّ الأقصى لعدد الطلبات في الدقيقة أو الحدود الأخرى.
+Tu uso se evalúa en función de cada límite, y si superas alguno de ellos, se activará un error de límite de frecuencia. Por ejemplo, si tu límite de RPM es de 20, realizar 21 solicitudes en un minuto generará un error, incluso si no superaste tu límite de TPM ni otros límites.
 
-يتم تطبيق حدود المعدّل لكل مشروع، وليس لكل مفتاح API. تتم إعادة ضبط حصص الطلبات في اليوم (**RPD**) في منتصف الليل بتوقيت المحيط الهادئ.
+Los límites de frecuencia se aplican por proyecto, no por clave de API. Las cuotas de solicitudes por día (**RPD**) se restablecen a medianoche, hora del Pacífico.
 
-تختلف الحدود القصوى حسب النموذج المحدّد، ولا تنطبق بعض الحدود إلا على نماذج محدّدة. على سبيل المثال، يتم احتساب &quot;الصور في الدقيقة&quot; (IPM) فقط للنماذج القادرة على إنشاء الصور (Nano Banana)، ولكنها تتشابه من الناحية النظرية مع &quot;الرموز المميزة في الدقيقة&quot; (TPM). قد تفرض النماذج الأخرى حدًا أقصى لعدد الرموز المميزة في اليوم (TPD).
+Los límites varían según el modelo específico que se use, y algunos límites solo se aplican a modelos específicos. Por ejemplo, las imágenes por minuto (IPM) solo se calculan para los modelos capaces de generar imágenes (Nano Banana), pero son conceptualmente similares a las TPM. Otros modelos pueden tener un límite de tokens por día (TPD).
 
-تكون حدود الاستخدام أكثر تقييدًا للنماذج التجريبية ونماذج المعاينة.
+Los límites de frecuencia son más estrictos para los modelos experimentales y de vista previa.
 
-## فئات الاستخدام
+## Niveles de uso
 
-ترتبط حدود المعدّل بفئة استخدام المشروع. مع زيادة استخدامك لواجهة برمجة التطبيقات وإنفاقك، ستتم ترقيتك تلقائيًا إلى فئة أعلى تتضمّن سقفًا أعلى لوتيرة الطلبات.
+Los límites de frecuencia están vinculados al nivel de uso del proyecto. A medida que aumente tu uso y gasto de la API, se te actualizará automáticamente a un nivel superior con límites de frecuencia más altos.
 
-تستند مؤهلات المستوى 2 والمستوى 3 إلى إجمالي الإنفاق التراكمي على خدمات Google Cloud (بما في ذلك، على سبيل المثال لا الحصر، Gemini API) لحساب الفوترة المرتبط بمشروعك.
+Los requisitos para los niveles 2 y 3 se basan en la inversión acumulada total en los servicios de Google Cloud (incluida, sin limitaciones, la API de Gemini) para la cuenta de facturación vinculada a tu proyecto.
 
-| فئة الاستخدام | التصفيات | [الحد الأقصى لفئة الفوترة](https://ai.google.dev/gemini-api/docs/billing?hl=ar#tier-spend-caps) |
+| Nivel de uso | Calificación | [Límite del nivel de facturación](https://ai.google.dev/gemini-api/docs/billing?hl=es-419#tier-spend-caps) |
 | --- | --- | --- |
-| **Free** | [مشروع نشط](https://ai.google.dev/gemini-api/docs/api-key?hl=ar#google-cloud-projects) أو فترة تجريبية مجانية | لا ينطبق |
-| **المستوى 1** | [إعداد حساب فوترة نشط وربطه](https://ai.google.dev/gemini-api/docs/billing?hl=ar#setup-billing) | ‫250 دولار أمريكي |
-| **المستوى 2** | تم دفع 100 دولار أمريكي + 3 أيام من أول عملية دفع ناجحة | 2000 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
-| **المستوى 3** | تم دفع 1,000 دولار أمريكي + 30 يومًا من أول عملية دفع ناجحة | ‫20,000 دولار أمريكي - 100,000 دولار أمريكي أو أكثر |
+| **Gratis** | [Proyecto activo](https://ai.google.dev/gemini-api/docs/api-key?hl=es-419#google-cloud-projects) o prueba gratuita | N/A |
+| **Nivel 1** | [Configura y vincula una cuenta de facturación activa](https://ai.google.dev/gemini-api/docs/billing?hl=es-419#setup-billing) | $250 |
+| **Nivel 2** | Se pagaron USD 100 y pasaron 3 días desde el primer pago exitoso. | $2,000 |
+| **Nivel 3** | Se pagaron USD 1,000 y pasaron 30 días desde el primer pago exitoso | De USD 20,000 a más de USD 100,000 |
 
-على الرغم من أنّ استيفاء معايير الأهلية المحدّدة يكون بشكل عام كافيًا للحصول على الموافقة، قد يتم رفض طلب الترقية في حالات نادرة استنادًا إلى عوامل أخرى يتم تحديدها أثناء عملية المراجعة.
+Si bien cumplir con los criterios de calificación establecidos suele ser suficiente para la aprobación, en casos excepcionales, se puede rechazar una solicitud de actualización en función de otros factores identificados durante el proceso de revisión.
 
-يساعد هذا النظام في الحفاظ على أمان منصة Gemini API وسلامتها لجميع المستخدمين.
+Este sistema ayuda a mantener la seguridad y la integridad de la plataforma de la API de Gemini para todos los usuarios.
 
-## الحدود القصوى لعدد الطلبات في الدقيقة في Gemini API
+## Límites de frecuencia de la API de Gemini
 
-تعتمد حدود المعدّل على مجموعة متنوّعة من العوامل (مثل مستوى الاستخدام)، ويمكن الاطّلاع عليها في Google AI Studio. مع تغيُّر مستوى حسابك وحالته بمرور الوقت، سيتم تعديل حدود المعدّل تلقائيًا.
+Los límites de frecuencia dependen de diversos factores (como tu nivel de uso) y se pueden consultar en Google AI Studio. A medida que cambien tu nivel y el estado de tu cuenta con el tiempo, los límites de frecuencia se actualizarán automáticamente.
 
-[الاطّلاع على حدود المعدّل النشطة في AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=ar)
+[Consulta tus límites de frecuencia activos en AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=es-419)
 
-لا يمكن ضمان حدود المعدّل المحدّدة، وقد تختلف السعة الفعلية.
+Los límites de frecuencia especificados no están garantizados y la capacidad real puede variar.
 
-## الحدود القصوى لمعدّل الاستنتاج حسب الأولوية
+## Límites de frecuencia de la inferencia de prioridad
 
-تخضع عمليات الاستهلاك [ذات الأولوية](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ar) لحدود معدّل خاصة بها، على الرغم من أنّ عمليات الاستهلاك تُحتسب ضمن حدود معدّل إجمالي عدد الزيارات التفاعلية. **حدود المعدّل التلقائية هي: 0.3 مرة [حد المعدّل العادي](https://aistudio.google.com/rate-limit?hl=ar) لكل نموذج ومستوى**
+El consumo de [prioridad](https://ai.google.dev/gemini-api/docs/priority-inference?hl=es-419) tiene sus propios límites de frecuencia, aunque el consumo se contabiliza para los límites de frecuencia generales del tráfico interactivo. **Los límites de frecuencia predeterminados son 0.3 veces el [límite de frecuencia estándar](https://aistudio.google.com/rate-limit?hl=es-419) para cada modelo y nivel**
 
-## الحدود القصوى لمعدل الزيارات في واجهة Batch API
+## Límites de frecuencia de la API de Batch
 
-تخضع طلبات [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ar) لحدود معدّل خاصة بها، وهي منفصلة عن طلبات API غير المجمّعة.
+Las solicitudes a la [API por lotes](https://ai.google.dev/gemini-api/docs/batch-api?hl=es-419) están sujetas a sus propios límites de frecuencia, que son independientes de las llamadas a la API que no son por lotes.
 
-- **طلبات الدفعات المتزامنة:** 100
-- **الحد الأقصى لحجم ملف الإدخال:** 2 غيغابايت
-- **الحد الأقصى لمساحة تخزين الملفات:** 20 غيغابايت
-- **الرموز المميزة التي تمت إضافتها إلى قائمة الانتظار لكل نموذج:** يسرد جدول **الرموز المميزة التي تمت إضافتها إلى قائمة الانتظار للمعالجة على دفعات** الحد الأقصى لعدد الرموز المميزة التي يمكن إضافتها إلى قائمة الانتظار للمعالجة على دفعات في جميع مهام المعالجة المجمّعة النشطة لنموذج معيّن.
+- **Solicitudes por lotes simultáneas:** 100
+- **Límite de tamaño del archivo de entrada:** 2 GB
+- **Límite de almacenamiento de archivos:** 20 GB
+- **Tokens en cola por modelo:** En la tabla **Tokens en cola por lotes**, se indica la cantidad máxima de tokens que se pueden poner en cola para el procesamiento por lotes en todos los trabajos por lotes activos para un modelo determinado.
 
-### صف 1
+### Nivel 1
 
-| الطراز | الرموز المميزة التي تمت إضافتها إلى قائمة الانتظار بشكل مجمّع |
+| Modelo | Tokens en cola por lotes |
 | --- | --- |
-| نماذج تحويل النص إلى صوت | | | | |
+| Modelos de texto de salida | | | | |
 | --- | --- | --- | --- | --- |
-| معاينة Gemini 3.1 Pro | 5,000,000 |
-| Gemini 3.1 Flash-Lite | ‫10,000,000 |
-| معاينة Gemini 3.1 Flash-Lite | ‫10,000,000 |
+| Versión preliminar de Gemini 3.1 Pro | 5,000,000 |
+| Gemini 3.1 Flash-Lite | 10,000,000 |
+| Versión preliminar de Gemini 3.1 Flash-Lite | 10,000,000 |
 | Gemini 3.5 Flash | 3,000,000 |
 | Gemini 3.5 Flash | 3,000,000 |
 | Gemini 2.5 Pro | 5,000,000 |
 | Gemini 2.5 Pro TTS | 25,000 |
 | Gemini 2.5 Flash | 3,000,000 |
-| معاينة Gemini 2.5 Flash | 3,000,000 |
-| معاينة Gemini 2.5 Flash Image | 3,000,000 |
-| Gemini 2.5 Flash TTS | 100,000 |
-| ‫Gemini 2.5 Flash-Lite | ‫10,000,000 |
-| ‫Gemini 2.5 Flash-Lite (نسخة حصرية) | ‫10,000,000 |
-| ‫Gemini 2.0 Flash | ‫10,000,000 |
-| صورة لـ ‎2.0 Flash في Gemini | 3,000,000 |
-| Gemini 2.0 Flash-Lite | ‫10,000,000 |
-| نماذج الإنشاء المتعددة الوسائط | | | | |
-| معاينة Gemini 3.1 Flash Image 🍌 | 1,000,000 |
-| معاينة صورة Gemini 3 Pro 🍌 | 2,000,000 |
-| نماذج التضمين | | | | |
+| Versión preliminar de Gemini 2.5 Flash | 3,000,000 |
+| Versión preliminar de Gemini 2.5 Flash Image | 3,000,000 |
+| TTS de Gemini 2.5 Flash | 100,000 |
+| Gemini 2.5 Flash-Lite | 10,000,000 |
+| Versión preliminar de Gemini 2.5 Flash-Lite | 10,000,000 |
+| Gemini 2.0 Flash | 10,000,000 |
+| Gemini 2.0 Flash Image | 3,000,000 |
+| Gemini 2.0 Flash-Lite | 10,000,000 |
+| Modelos de generación multimodal | | | | |
+| Versión preliminar de Gemini 3.1 Flash Image 🍌 | 1,000,000 |
+| Versión preliminar de Gemini 3 Pro Image 🍌 | 2,000,000 |
+| Modelos de embeddings | | | | |
 | Gemini Embedding | 500,000 |
 
-### صف 2
+### Nivel 2
 
-| الطراز | الرموز المميزة التي تمت إضافتها إلى قائمة الانتظار بشكل مجمّع |
+| Modelo | Tokens en cola por lotes |
 | --- | --- |
-| نماذج تحويل النص إلى صوت | | | | |
+| Modelos de texto de salida | | | | |
 | --- | --- | --- | --- | --- |
-| معاينة Gemini 3.1 Pro | ‫500,000,000 |
-| Gemini 3.1 Flash-Lite | ‫500,000,000 |
-| معاينة Gemini 3.1 Flash-Lite | ‫500,000,000 |
+| Versión preliminar de Gemini 3.1 Pro | 500,000,000 |
+| Gemini 3.1 Flash-Lite | 500,000,000 |
+| Versión preliminar de Gemini 3.1 Flash-Lite | 500,000,000 |
 | Gemini 3.5 Flash | 400,000,000 |
 | Gemini 3.5 Flash | 400,000,000 |
-| Gemini 2.5 Pro | ‫500,000,000 |
+| Gemini 2.5 Pro | 500,000,000 |
 | Gemini 2.5 Pro TTS | 100,000 |
 | Gemini 2.5 Flash | 400,000,000 |
-| معاينة Gemini 2.5 Flash | 400,000,000 |
-| معاينة Gemini 2.5 Flash Image | 400,000,000 |
-| Gemini 2.5 Flash TTS | 100,000 |
-| ‫Gemini 2.5 Flash-Lite | ‫500,000,000 |
-| ‫Gemini 2.5 Flash-Lite (نسخة حصرية) | ‫500,000,000 |
-| ‫Gemini 2.0 Flash | 1,000,000,000 |
-| صورة لـ ‎2.0 Flash في Gemini | 400,000,000 |
+| Versión preliminar de Gemini 2.5 Flash | 400,000,000 |
+| Versión preliminar de Gemini 2.5 Flash Image | 400,000,000 |
+| TTS de Gemini 2.5 Flash | 100,000 |
+| Gemini 2.5 Flash-Lite | 500,000,000 |
+| Versión preliminar de Gemini 2.5 Flash-Lite | 500,000,000 |
+| Gemini 2.0 Flash | 1,000,000,000 |
+| Gemini 2.0 Flash Image | 400,000,000 |
 | Gemini 2.0 Flash-Lite | 1,000,000,000 |
-| نماذج الإنشاء المتعددة الوسائط | | | | |
-| معاينة Gemini 3.1 Flash Image 🍌 | 250,000,000 |
-| معاينة صورة Gemini 3 Pro 🍌 | ‫270,000,000 |
-| نماذج التضمين | | | | |
+| Modelos de generación multimodal | | | | |
+| Versión preliminar de Gemini 3.1 Flash Image 🍌 | 250,000,000 |
+| Versión preliminar de Gemini 3 Pro Image 🍌 | 270,000,000 |
+| Modelos de embeddings | | | | |
 | Gemini Embedding | 5,000,000 |
 
-### مستوى ثالث
+### Nivel 3
 
-| الطراز | الرموز المميزة التي تمت إضافتها إلى قائمة الانتظار بشكل مجمّع |
+| Modelo | Tokens en cola por lotes |
 | --- | --- |
-| نماذج تحويل النص إلى صوت | | | | |
+| Modelos de texto de salida | | | | |
 | --- | --- | --- | --- | --- |
-| معاينة Gemini 3.1 Pro | 1,000,000,000 |
+| Versión preliminar de Gemini 3.1 Pro | 1,000,000,000 |
 | Gemini 3.1 Flash-Lite | 1,000,000,000 |
-| معاينة Gemini 3.1 Flash-Lite | 1,000,000,000 |
+| Versión preliminar de Gemini 3.1 Flash-Lite | 1,000,000,000 |
 | Gemini 3.5 Flash | 1,000,000,000 |
 | Gemini 3.5 Flash | 1,000,000,000 |
 | Gemini 2.5 Pro | 1,000,000,000 |
 | Gemini 2.5 Pro TTS | 1,000,000 |
 | Gemini 2.5 Flash | 1,000,000,000 |
-| معاينة Gemini 2.5 Flash | 1,000,000,000 |
-| معاينة Gemini 2.5 Flash Image | 1,000,000,000 |
-| Gemini 2.5 Flash TTS | 4,000,000 |
-| ‫Gemini 2.5 Flash-Lite | 1,000,000,000 |
-| ‫Gemini 2.5 Flash-Lite (نسخة حصرية) | 1,000,000,000 |
-| ‫Gemini 2.0 Flash | ‫5,000,000,000 |
-| صورة لـ ‎2.0 Flash في Gemini | 1,000,000,000 |
-| Gemini 2.0 Flash-Lite | ‫5,000,000,000 |
-| نماذج الإنشاء المتعددة الوسائط | | | | |
-| معاينة Gemini 3.1 Flash Image 🍌 | 750,000,000 |
-| معاينة صورة Gemini 3 Pro 🍌 | 1,000,000,000 |
-| نماذج التضمين | | | | |
-| Gemini Embedding | ‫10,000,000 |
+| Versión preliminar de Gemini 2.5 Flash | 1,000,000,000 |
+| Versión preliminar de Gemini 2.5 Flash Image | 1,000,000,000 |
+| TTS de Gemini 2.5 Flash | 4,000,000 |
+| Gemini 2.5 Flash-Lite | 1,000,000,000 |
+| Versión preliminar de Gemini 2.5 Flash-Lite | 1,000,000,000 |
+| Gemini 2.0 Flash | 5,000,000,000 |
+| Gemini 2.0 Flash Image | 1,000,000,000 |
+| Gemini 2.0 Flash-Lite | 5,000,000,000 |
+| Modelos de generación multimodal | | | | |
+| Versión preliminar de Gemini 3.1 Flash Image 🍌 | 750,000,000 |
+| Versión preliminar de Gemini 3 Pro Image 🍌 | 1,000,000,000 |
+| Modelos de embeddings | | | | |
+| Gemini Embedding | 10,000,000 |
 
-## كيفية الترقية إلى المستوى التالي
+## Cómo actualizar al siguiente nivel
 
-للانتقال من المستوى المجاني إلى مستوى مدفوع، عليك أولاً
-[إعداد الفوترة في AI Studio](https://ai.google.dev/gemini-api/docs/billing?hl=ar).
+Para cambiar del nivel gratuito a un nivel pagado, primero debes [configurar la facturación en AI Studio](https://ai.google.dev/gemini-api/docs/billing?hl=es-419).
 
-بعد أن يستوفي مشروعك [المعايير المحدّدة](#usage-tiers)، سيتم تلقائيًا ترقيته إلى المستوى التالي. عادةً ما يتم تطبيق ترقيات المستوى من الإصدار المجاني إلى المستوى 1 على الفور، ويتم تطبيق ترقيات المستوى اللاحقة في غضون 10 دقائق. انتقِل إلى [صفحة "المشاريع"](https://aistudio.google.com/projects?hl=ar) في AI Studio للاطّلاع على مستوياتك.
+Una vez que tu proyecto cumpla con los [criterios especificados](#usage-tiers), se actualizará automáticamente al siguiente nivel. Las actualizaciones de nivel del plan gratuito al nivel 1 suelen aplicarse de inmediato, y las actualizaciones de nivel posteriores se aplicarán en un plazo de 10 minutos. Navega a la [página Proyectos](https://aistudio.google.com/projects?hl=es-419) en AI Studio para verificar tus niveles.
 
-## طلب زيادة حدّ معدّل الطلبات
+## Solicita un aumento del límite de frecuencia
 
-يتضمّن كل نوع من النماذج حدًا أقصى لعدد الطلبات (طلبات في الدقيقة، RPM).
-للحصول على تفاصيل حول حدود المعدّل هذه، يُرجى الاطّلاع على صفحة [حدود المعدّل في AI Studio](https://aistudio.google.com/rate-limit?hl=ar).
+Cada variación del modelo tiene un límite de frecuencia asociado (solicitudes por minuto, RPM).
+Para obtener detalles sobre esos límites de frecuencia, consulta la página [Límites de frecuencia de AI Studio](https://aistudio.google.com/rate-limit?hl=es-419).
 
-[طلب زيادة حدّ معدّل الاستخدام في الفئة المدفوعة](https://forms.gle/ETzX94k8jf7iSotH9)
+[Solicita un aumento del límite de la tarifa del nivel pagado](https://forms.gle/ETzX94k8jf7iSotH9)
 
-لا يمكننا تقديم أي ضمانات بشأن زيادة الحدّ الأقصى لعدد الطلبات، ولكننا سنبذل قصارى جهدنا لمراجعة طلبك.
+No ofrecemos garantías sobre el aumento del límite de frecuencia, pero haremos todo lo posible para revisar tu solicitud.
 
-إرسال ملاحظات
+Enviar comentarios
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-تاريخ التعديل الأخير: 2026-05-28 (حسب التوقيت العالمي المتفَّق عليه)
+Última actualización: 2026-05-28 (UTC)
 
-هل تريد مشاركة ملاحظاتك معنا؟
+¿Quieres brindar más información?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-28 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-05-28 (UTC)"],[],[]]

@@ -1,134 +1,135 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api?hl=vi
-fetched_at: 2026-06-01T06:00:02.590435+00:00
-title: "T\u1ed5ng quan v\u1ec1 Gemini Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api?hl=ja
+fetched_at: 2026-06-08T05:36:39.668223+00:00
+title: "Gemini Live API \u306e\u6982\u8981 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
-# Tổng quan về Gemini Live API
+# Gemini Live API の概要
 
-Live API cho phép tương tác bằng giọng nói và hình ảnh theo thời gian thực với độ trễ thấp với Gemini. API này xử lý các luồng âm thanh, hình ảnh và văn bản liên tục để đưa ra các câu trả lời bằng giọng nói tức thì, giống như con người, tạo ra trải nghiệm trò chuyện tự nhiên cho người dùng.
+Live API を使用すると、Gemini と音声とビジョンによるやり取りを低レイテンシかつリアルタイムで行うことができます。音声、画像、テキストの連続ストリームを処理して、人間のような音声による応答を即座に提供し、ユーザーに自然な会話エクスペリエンスを提供します。
 
-![Tổng quan về Live API](https://ai.google.dev/static/gemini-api/docs/images/live-api-overview.png?hl=vi)
+![Live API の概要](https://ai.google.dev/static/gemini-api/docs/images/live-api-overview.png?hl=ja)
 
-[Dùng thử Live API trong Google AI Studiomic](https://aistudio.google.com/live?hl=vi)
-[Dùng thử các ứng dụng ví dụ từ GitHubcode](https://github.com/google-gemini/gemini-live-api-examples)
-[Sử dụng các kỹ năng của tác nhân mã hoáterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=vi)
+[Google AI Studio で Live API を試すmic](https://aistudio.google.com/live?hl=ja)
+[GitHub からサンプルアプリをクローンするcode](https://github.com/google-gemini/gemini-live-api-examples)
+[コーディング エージェントのスキルを使用するterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=ja)
 
-## Trường hợp sử dụng
+## ユースケース
 
-Bạn có thể sử dụng Live API để xây dựng các tác nhân giọng nói theo thời gian thực cho nhiều ngành, bao gồm:
+Live API を使用すると、次のようなさまざまな業界向けのリアルタイム音声エージェントを構築できます。
 
-- **Thương mại điện tử và bán lẻ:** Trợ lý mua sắm đưa ra các đề xuất được cá nhân hoá và các tác nhân hỗ trợ giải quyết vấn đề cho khách hàng.
-- **Trò chơi:** Các nhân vật không phải người chơi (NPC) tương tác, trợ lý trợ giúp trong trò chơi và bản dịch theo thời gian thực của nội dung trong trò chơi.
-- **Giao diện thế hệ tiếp theo:** Trải nghiệm hỗ trợ giọng nói và video trong lĩnh vực robot, kính thông minh và xe.
-- **Chăm sóc sức khoẻ:** Trợ lý sức khoẻ hỗ trợ và giáo dục bệnh nhân.
-- **Dịch vụ tài chính:** Cố vấn AI để quản lý tài sản và hướng dẫn đầu tư.
-- **Giáo dục:** Người hướng dẫn AI và trợ lý học tập cung cấp hướng dẫn và ý kiến phản hồi được cá nhân hoá.
+- **e コマースと小売:** パーソナライズされたおすすめを提供するショッピング アシスタントや、お客様の問題を解決するサポート エージェント。
+- **ゲーム:** インタラクティブなノンプレーヤー キャラクター（NPC）、ゲーム内ヘルプ アシスタント、ゲーム内コンテンツのリアルタイム翻訳。
+- **次世代インターフェース:** ロボット、スマートグラス、車両での音声と動画に対応したエクスペリエンス。
+- **ヘルスケア:** 患者のサポートと教育のためのヘルス コンパニオン。
+- **金融サービス:** 資産管理と投資ガイダンスのための AI アドバイザー。
+- **教育:** パーソナライズされた指導とフィードバックを提供する AI メンターと学習者コンパニオン。
 
-## Các tính năng chính
+## 主な機能
 
-Live API cung cấp một bộ tính năng toàn diện để xây dựng các tác nhân giọng nói mạnh mẽ:
+Live API は、堅牢な音声エージェントを構築するための包括的な機能セットを提供します。
 
-- [**Hỗ trợ đa ngôn ngữ**](https://ai.google.dev/gemini-api/docs/live-guide?hl=vi#supported-languages):
-  Trò chuyện bằng 70 ngôn ngữ được hỗ trợ.
-- [**Barge-in**](https://ai.google.dev/gemini-api/docs/live-guide?hl=vi#interruptions):
-  Người dùng có thể ngắt lời mô hình bất cứ lúc nào để tương tác phản hồi.
-- [**Sử dụng công cụ**](https://ai.google.dev/gemini-api/docs/live-tools?hl=vi):
-  Tích hợp các công cụ như gọi hàm và Google Tìm kiếm để tương tác linh hoạt.
-- [**Bản chép lời âm thanh**](https://ai.google.dev/gemini-api/docs/live-guide?hl=vi#audio-transcription):
-  Cung cấp bản chép lời dạng văn bản của cả hoạt động đầu vào của người dùng và đầu ra của mô hình.
-- [**Âm thanh chủ động**](https://ai.google.dev/gemini-api/docs/live-guide?hl=vi#proactive-audio):
-  Cho phép bạn kiểm soát thời điểm mô hình phản hồi và trong những ngữ cảnh nào.
-- [**Đối thoại cảm xúc**](https://ai.google.dev/gemini-api/docs/live-guide?hl=vi#affective-dialog):
-  Điều chỉnh kiểu phản hồi và giọng điệu cho phù hợp với biểu cảm đầu vào của người dùng.
+- [**多言語サポート**](https://ai.google.dev/gemini-api/docs/live-guide?hl=ja#supported-languages):
+  70 の言語で会話できます。
+- [**割り込み**](https://ai.google.dev/gemini-api/docs/live-guide?hl=ja#interruptions):
+  ユーザーはいつでもモデルを中断して、応答性の高いやり取りを行うことができます。
+- [**ツールの使用**](https://ai.google.dev/gemini-api/docs/live-tools?hl=ja):
+  関数呼び出しや Google 検索などのツールを統合して、動的な
+  やり取りを実現します。
+- [**音声文字変換**](https://ai.google.dev/gemini-api/docs/live-guide?hl=ja#audio-transcription):
+  ユーザー入力とモデル出力の両方のテキスト文字変換を提供します。
+- [**プロアクティブ音声**](https://ai.google.dev/gemini-api/docs/live-guide?hl=ja#proactive-audio):
+  モデルが応答するタイミングやコンテキストを制御できます。
+- [**アフェクティブ ダイアログ**](https://ai.google.dev/gemini-api/docs/live-guide?hl=ja#affective-dialog):
+  ユーザーの入力表現に合わせて、回答のスタイルとトーンを調整します。
 
-## Quy cách kỹ thuật
+## 技術仕様
 
-Bảng sau đây trình bày quy cách kỹ thuật của Live API:
+次の表に、Live API の技術仕様の概要を示します。
 
-| Danh mục | Thông tin chi tiết |
+| カテゴリ | 詳細 |
 | --- | --- |
-| Phương thức đầu vào | Âm thanh (âm thanh PCM 16 bit thô, 16 kHz, little-endian), hình ảnh (JPEG <= 1 FPS), văn bản |
-| Phương thức đầu ra | Âm thanh (âm thanh PCM 16 bit thô, 24 kHz, little-endian) |
-| Giao thức | Kết nối WebSocket có trạng thái (WSS) |
+| 入力モダリティ | 音声（RAW 16 ビット PCM 音声、16kHz、リトル エンディアン）、画像（JPEG <= 1FPS）、テキスト |
+| 出力モダリティ | 音声（RAW 16 ビット PCM 音声、24kHz、リトル エンディアン） |
+| プロトコル | ステートフル WebSocket 接続（WSS） |
 
-## Chọn phương pháp triển khai
+## 実装方法を選択する
 
-Khi tích hợp với Live API, bạn cần chọn một trong các phương pháp triển khai sau:
+Live API と統合する場合は、次のいずれかの実装方法を選択する必要があります。
 
-- **Máy chủ đến máy chủ**: Phần phụ trợ của bạn kết nối với Live API bằng
-  [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). Thông thường, ứng dụng gửi dữ liệu luồng (âm thanh, video, văn bản) đến máy chủ của bạn, sau đó chuyển tiếp dữ liệu đó đến Live API.
-- **Ứng dụng đến máy chủ**: Mã giao diện người dùng kết nối trực tiếp với Live API
-  sử dụng [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) để truyền trực tuyến dữ liệu, bỏ qua phần phụ trợ.
+- **サーバー間**: バックエンドは Live API に
+  [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) を使用して接続します。通常、クライアントはストリーム データ（音声、動画、テキスト）をサーバーに送信し、サーバーはそれを Live API に転送します。
+- **クライアントからサーバー**: フロントエンド コードは Live API
+  に直接接続し、[WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) を使用してバックエンドをバイパスしてデータをストリーミングします。
 
-## Bắt đầu
+## 始める
 
-Chọn hướng dẫn phù hợp với môi trường phát triển của bạn:
+開発環境に一致するガイドを選択してください。
 
-Máy chủ đến máy chủ
+サーバー間
 
-### [Hướng dẫn về GenAI SDK](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=vi)
+### [GenAI SDK のチュートリアル](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=ja)
 
-Kết nối với Gemini Live API bằng GenAI SDK để xây dựng một ứng dụng đa phương thức theo thời gian thực với phần phụ trợ Python.
+GenAI SDK を使用して Gemini Live API に接続し、Python バックエンドでリアルタイムのマルチモーダル アプリケーションを構築します。
 
-Ứng dụng đến máy chủ
+クライアントからサーバー
 
-### [Hướng dẫn về WebSocket](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=vi)
+### [WebSocket のチュートリアル](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=ja)
 
-Kết nối với Gemini Live API bằng WebSocket để xây dựng một ứng dụng đa phương thức theo thời gian thực với giao diện người dùng JavaScript và mã thông báo tạm thời.
+WebSocket を使用して Gemini Live API に接続し、JavaScript フロントエンドとエフェメラル トークンを使用してリアルタイムのマルチモーダル アプリケーションを構築します。
 
-Bộ công cụ phát triển tác nhân
+Agent Development Kit
 
-### [Hướng dẫn về ADK](https://google.github.io/adk-docs/streaming/)
+### [ADK のチュートリアル](https://google.github.io/adk-docs/streaming/)
 
-Tạo một tác nhân và sử dụng tính năng Truyền trực tuyến của Bộ công cụ phát triển tác nhân (ADK) để bật tính năng giao tiếp bằng giọng nói và video.
+エージェントを作成し、Agent Development Kit（ADK）ストリーミングを使用して音声と動画の通信を有効にします。
 
-## Nền tảng tích hợp của đối tác
+## パートナーとの統合
 
-Để đơn giản hoá quá trình phát triển các ứng dụng âm thanh và video theo thời gian thực, bạn có thể sử dụng
-một nền tảng tích hợp của bên thứ ba hỗ trợ Gemini Live
-API qua WebRTC hoặc WebSocket.
+リアルタイムの音声アプリと動画アプリの開発を効率化するには、
+WebRTC または WebSocket 経由で Gemini Live
+API をサポートするサードパーティ統合を使用します。
 
 [LiveKit
 
-Sử dụng Gemini Live API với các tác nhân LiveKit.](https://docs.livekit.io/agents/models/realtime/plugins/gemini/)
-[Pipecat của Daily
+Gemini Live API を LiveKit エージェントで使用します。](https://docs.livekit.io/agents/models/realtime/plugins/gemini/)
+[Daily の Pipecat
 
-Tạo một chatbot AI theo thời gian thực bằng Gemini Live và Pipecat.](https://docs.pipecat.ai/guides/features/gemini-live)
-[Fishjam của Software Mansion
+Gemini Live と Pipecat を使用してリアルタイムの AI チャットボットを作成します。](https://docs.pipecat.ai/guides/features/gemini-live)
+[Software Mansion の Fishjam
 
-Tạo các ứng dụng truyền trực tuyến video trực tiếp và âm thanh bằng Fishjam.](https://docs.fishjam.io/tutorials/gemini-live-integration)
-[Tác nhân Vision của Stream
+Fishjam を使用してライブ動画と音声のストリーミング アプリケーションを作成します。](https://docs.fishjam.io/tutorials/gemini-live-integration)
+[Stream の Vision Agents
 
-Xây dựng các ứng dụng AI bằng giọng nói và video theo thời gian thực bằng Tác nhân Vision.](https://visionagents.ai/integrations/gemini)
+Vision Agents を使用してリアルタイムの音声と動画の AI アプリケーションを構築します。](https://visionagents.ai/integrations/gemini)
 [Voximplant
 
-Kết nối các cuộc gọi đến và đi với Live API bằng Voximplant.](https://voximplant.com/products/gemini-client)
+Voximplant を使用して、インバウンド通話とアウトバウンド通話を Live API に接続します。](https://voximplant.com/products/gemini-client)
 [Agora
 
-Xây dựng các ứng dụng AI đàm thoại theo thời gian thực bằng Agora.](https://docs.agora.io/en/conversational-ai/models/mllm/gemini)
+Agora を使用してリアルタイムの会話型 AI アプリケーションを構築します。](https://docs.agora.io/en/conversational-ai/models/mllm/gemini)
 [Firebase AI SDK
 
-Bắt đầu sử dụng Gemini Live API bằng Firebase AI Logic.](https://firebase.google.com/docs/ai-logic/live-api?api=dev&hl=vi)
+Firebase AI Logic を使用して Gemini Live API を使ってみましょう。](https://firebase.google.com/docs/ai-logic/live-api?api=dev&hl=ja)
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Cập nhật lần gần đây nhất: 2026-05-29 UTC.
+最終更新日 2026-06-01 UTC。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+ご意見をお聞かせください
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-29 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-01 UTC。"],[],[]]

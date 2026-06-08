@@ -1,41 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=ja
-fetched_at: 2026-06-01T06:02:29.566679+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=de
+fetched_at: 2026-06-08T05:33:28.542801+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-フィードバックを送信
+Feedback geben
 
-# 構造化出力
+# Strukturierte Ausgaben
 
-指定された JSON スキーマに準拠したレスポンスを生成するように Gemini モデルを構成できます。これにより、予測可能でタイプセーフな結果が得られ、構造化されていないテキストから構造化データを簡単に抽出できます。
+Sie können Gemini-Modelle so konfigurieren, dass sie Antworten generieren, die einem bereitgestellten JSON-Schema entsprechen. Dadurch werden vorhersagbare, typsichere Ergebnisse erzielt und die Extraktion strukturierter Daten aus unstrukturiertem Text vereinfacht.
 
-構造化出力の使用は、次のような場合に最適です。
+Strukturierte Ausgaben eignen sich ideal für folgende Anwendungsfälle:
 
-- **データ抽出:** テキストから名前や日付などの特定の情報を抽出します。
-- **構造化分類:** テキストを事前定義されたカテゴリに分類します。
-- **エージェント ワークフロー:** ツールまたは API の構造化された入力を生成します。
+- **Datenextraktion**:Bestimmte Informationen wie Namen und Datumsangaben aus Text extrahieren.
+- **Strukturierte Klassifizierung**:Text in vordefinierte Kategorien klassifizieren.
+- **Agentenbasierte Workflows**:Strukturierte Eingaben für Tools oder APIs generieren.
 
-Google GenAI SDK では、REST API での JSON スキーマのサポートに加えて、
-[Pydantic](https://docs.pydantic.dev/latest/)（Python）と
-[Zod](https://zod.dev/)（JavaScript）を使用してスキーマを定義できます。
+Neben der Unterstützung von JSON-Schemas in der REST API ermöglichen die Google GenAI SDKs
+die Definition von Schemas mit
+[Pydantic](https://docs.pydantic.dev/latest/) (Python) und
+[Zod](https://zod.dev/) (JavaScript).
 
-レシピ抽出ツール
-コンテンツ モデレーション
-再帰構造
+## Beispiele für strukturierte Ausgaben
 
-この例では、`object`、`array`、`string`、`integer` などの基本的な JSON スキーマタイプを使用して、テキストから構造化データを抽出する方法を示します。
+### Schema für Rezept-Extraktion
+
+In diesem Beispiel wird gezeigt, wie Sie strukturierte Daten aus Text extrahieren. Dabei werden grundlegende JSON-Schema-Typen wie `object`, `array`, `string` und `integer` verwendet.
 
 ### Python
 
@@ -199,7 +200,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**レスポンスの例:**
+**Beispielantwort** :
 
 ```
 {
@@ -227,9 +228,317 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-## 結果のストリーミング
+### Inhalte moderieren
 
-構造化出力をストリーミングして、レスポンスの生成中に処理を開始できます。ストリーミングされたチャンクは有効な部分 JSON 文字列であり、連結して最終的な JSON オブジェクトを形成できます。
+In diesem Beispiel werden `anyOf` für bedingte Schemas und `enum` für die Klassifizierung verwendet. So kann die Ausgabestruktur je nach Inhalt variieren.
+
+### Python
+
+```
+from google import genai
+from pydantic import BaseModel, Field
+from typing import Union, Literal
+
+class SpamDetails(BaseModel):
+    reason: str = Field(description="The reason why the content is considered spam.")
+    spam_type: Literal["phishing", "scam", "unsolicited promotion", "other"] = Field(description="The type of spam.")
+
+class NotSpamDetails(BaseModel):
+    summary: str = Field(description="A brief summary of the content.")
+    is_safe: bool = Field(description="Whether the content is safe for all audiences.")
+
+class ModerationResult(BaseModel):
+    decision: Union[SpamDetails, NotSpamDetails]
+
+client = genai.Client()
+
+prompt = """
+Please moderate the following content and provide a decision.
+Content: 'Congratulations! You''ve won a free cruise to the Bahamas. Click here to claim your prize: www.definitely-not-a-scam.com'
+"""
+
+interaction = client.interactions.create(
+    model="gemini-3.5-flash",
+    input=prompt,
+    response_format={
+        "type": "text",
+        "mime_type": "application/json",
+        "schema": ModerationResult.model_json_schema()
+    },
+)
+
+result = ModerationResult.model_validate_json(interaction.output_text)
+print(result)
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from "@google/genai";
+import * as z from "zod";
+
+const moderationResultJsonSchema = {
+  type: "object",
+  properties: {
+    decision: {
+      anyOf: [
+        {
+          type: "object",
+          title: "SpamDetails",
+          description: "Details for content classified as spam.",
+          properties: {
+            reason: { type: "string", description: "The reason why the content is considered spam." },
+            spam_type: { type: "string", enum: ["phishing", "scam", "unsolicited promotion", "other"], description: "The type of spam." }
+          },
+          required: ["reason", "spam_type"]
+        },
+        {
+          type: "object",
+          title: "NotSpamDetails",
+          description: "Details for content classified as not spam.",
+          properties: {
+            summary: { type: "string", description: "A brief summary of the content." },
+            is_safe: { type: "boolean", description: "Whether the content is safe for all audiences." }
+          },
+          required: ["summary", "is_safe"]
+        }
+      ]
+    }
+  },
+  required: ["decision"]
+};
+
+const moderationResultSchema = z.fromJSONSchema(moderationResultJsonSchema);
+
+const client = new GoogleGenAI({});
+
+const prompt = `
+Please moderate the following content and provide a decision.
+Content: 'Congratulations! You''ve won a free cruise to the Bahamas. Click here to claim your prize: www.definitely-not-a-scam.com'
+`;
+
+const interaction = await client.interactions.create({
+  model: "gemini-3.5-flash",
+  input: prompt,
+  response_format: {
+    type: 'text',
+    mime_type: 'application/json',
+    schema: moderationResultJsonSchema
+  },
+});
+
+const result = moderationResultSchema.parse(JSON.parse(interaction.output_text));
+console.log(result);
+```
+
+### REST
+
+```
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+    -H "x-goog-api-key: $GEMINI_API_KEY" \
+    -H 'Content-Type: application/json' \
+    -H "Api-Revision: 2026-05-20" \
+    -d '{
+      "model": "gemini-3.5-flash",
+      "input": "Please moderate the following content and provide a decision.\nContent: '\''Congratulations! You have won a free cruise to the Bahamas. Click here to claim your prize: www.definitely-not-a-scam.com'\''",
+      "response_format": {
+        "type": "text",
+        "mime_type": "application/json",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "decision": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "title": "SpamDetails",
+                  "description": "Details for content classified as spam.",
+                  "properties": {
+                    "reason": { "type": "string", "description": "The reason why the content is considered spam." },
+                    "spam_type": { "type": "string", "enum": ["phishing", "scam", "unsolicited promotion", "other"], "description": "The type of spam." }
+                  },
+                  "required": ["reason", "spam_type"]
+                },
+                {
+                  "type": "object",
+                  "title": "NotSpamDetails",
+                  "description": "Details for content classified as not spam.",
+                  "properties": {
+                    "summary": { "type": "string", "description": "A brief summary of the content." },
+                    "is_safe": { "type": "boolean", "description": "Whether the content is safe for all audiences." }
+                  },
+                  "required": ["summary", "is_safe"]
+                }
+              ]
+            }
+          },
+          "required": ["decision"]
+        }
+      }
+      }
+    }'
+```
+
+**Beispielantwort** :
+
+```
+{
+  "decision": {
+    "reason": "The content is an unsolicited prize notification attempting to trick the user into clicking a suspicious link.",
+    "spam_type": "scam"
+  }
+}
+```
+
+### Rekursive Strukturen
+
+In diesem Beispiel wird gezeigt, wie Sie ein rekursives Schema wie ein Organigramm definieren.
+
+### Python
+
+```
+from google import genai
+from pydantic import BaseModel, Field
+from typing import List
+
+class Employee(BaseModel):
+    """Represents an employee in an organization."""
+    name: str
+    employee_id: int
+    reports: List["Employee"] = Field(
+        default_factory=list,
+        description="A list of employees reporting to this employee."
+    )
+
+client = genai.Client()
+
+prompt = """
+Generate an organization chart for a small team.
+The manager is Alice, who manages Bob and Charlie. Bob manages David.
+"""
+
+interaction = client.interactions.create(
+    model="gemini-3.5-flash",
+    input=prompt,
+    response_format={
+        "type": "text",
+        "mime_type": "application/json",
+        "schema": Employee.model_json_schema()
+    },
+)
+
+employee = Employee.model_validate_json(interaction.output_text)
+print(employee)
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from "@google/genai";
+import * as z from "zod";
+
+const employeeJsonSchema = {
+  type: "object",
+  properties: {
+    name: { type: "string" },
+    employee_id: { type: "integer" },
+    reports: {
+      type: "array",
+      description: "A list of employees reporting to this employee.",
+      items: {
+        "$ref": "#"
+      }
+    }
+  },
+  required: ["name", "employee_id", "reports"]
+};
+
+const employeeSchema = z.fromJSONSchema(employeeJsonSchema);
+
+const client = new GoogleGenAI({});
+
+const prompt = `
+Generate an organization chart for a small team.
+The manager is Alice, who manages Bob and Charlie. Bob manages David.
+`;
+
+const interaction = await client.interactions.create({
+  model: "gemini-3.5-flash",
+  input: prompt,
+  response_format: {
+    type: 'text',
+    mime_type: 'application/json',
+    schema: employeeJsonSchema
+  },
+});
+
+const employee = employeeSchema.parse(JSON.parse(interaction.output_text));
+console.log(employee);
+```
+
+### REST
+
+```
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+    -H "x-goog-api-key: $GEMINI_API_KEY" \
+    -H 'Content-Type: application/json' \
+    -H "Api-Revision: 2026-05-20" \
+    -d '{
+      "model": "gemini-3.5-flash",
+      "input": "Generate an organization chart for a small team.\nThe manager is Alice, who manages Bob and Charlie. Bob manages David.",
+      "response_format": {
+        "type": "text",
+        "mime_type": "application/json",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "employee_id": { "type": "integer" },
+            "reports": {
+              "type": "array",
+              "description": "A list of employees reporting to this employee.",
+              "items": {
+                "$ref": "#"
+              }
+            }
+          },
+          "required": ["name", "employee_id", "reports"]
+        }
+      }
+      }
+    }'
+```
+
+**Beispielantwort** :
+
+```
+{
+  "name": "Alice",
+  "employee_id": 101,
+  "reports": [
+    {
+      "name": "Bob",
+      "employee_id": 102,
+      "reports": [
+        {
+          "name": "David",
+          "employee_id": 104,
+          "reports": []
+        }
+      ]
+    },
+    {
+      "name": "Charlie",
+      "employee_id": 103,
+      "reports": []
+    }
+  ]
+}
+```
+
+## Ergebnisse streamen
+
+Sie können strukturierte Ausgaben streamen, sodass Sie die Antwort verarbeiten können, während sie generiert wird. Die gestreamten Blöcke sind gültige partielle JSON-Strings, die zum endgültigen JSON-Objekt verkettet werden können.
 
 ### Python
 
@@ -297,9 +606,14 @@ for await (const event of stream) {
 }
 ```
 
-## ツールを使用した構造化出力
+## Strukturierte Ausgaben mit Tools
 
-[[[[[Gemini 3 では、構造化出力を、Google 検索によるグラウンディング、URL コンテキスト、コード実行、ファイル検索、関数呼び出しなどの組み込みツールと組み合わせることができます。](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=ja)](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=ja)](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=ja)](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=ja#structured-output)](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=ja)
+Mit Gemini 3 können Sie strukturierte Ausgaben mit integrierten Tools kombinieren, darunter
+[Fundierung mit der Google Suche](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=de),
+[URL-Kontext](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=de),
+[Codeausführung](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=de),
+[Dateisuche](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=de#structured-output) und
+[Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=de).
 
 ### Python
 
@@ -392,80 +706,80 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## JSON スキーマのサポート
+## JSON-Schema-Unterstützung
 
-JSON オブジェクトを生成するには、`response_format` を `text` タイプのオブジェクト（またはオブジェクトを含む配列）で構成し、その `mime_type` を `application/json` に設定します。スキーマは `schema` フィールドに指定する必要があります。
+Wenn Sie ein JSON-Objekt generieren möchten, konfigurieren Sie `response_format` mit einem Objekt (oder einem Array, das ein Objekt enthält) vom Typ `text` und legen Sie `mime_type` auf `application/json` fest. Das Schema sollte im Feld `schema` angegeben werden.
 
-Gemini の構造化出力モードでは、
-[JSON スキーマ](https://json-schema.org/)仕様のサブセットがサポートされています。
+Der Modus für strukturierte Ausgaben von Gemini unterstützt eine Teilmenge der
+[JSON-Schema](https://json-schema.org/)-Spezifikation.
 
-次の `type` 値がサポートされています。
+Die folgenden Werte von `type` werden unterstützt:
 
-- **`string`**: テキストの場合。
-- **`number`**: 浮動小数点数の場合。
-- **`integer`**: 整数の場合。
-- **`boolean`**: true または false の値の場合。
-- **`object`**: Key-Value ペアを含む構造化データの場合。
-- **`array`**: 項目のリストの場合。
-- **`null`**: プロパティを null にする場合は、タイプ配列に `"null"` を含めます（例: `{"type": ["string", "null"]}`）。
+- **`string`**: Für Text.
+- **`number`**: Für Gleitkommazahlen.
+- **`integer`**: Für ganze Zahlen.
+- **`boolean`**: Für „true“- oder „false“-Werte.
+- **`object`**: Für strukturierte Daten mit Schlüssel/Wert-Paaren.
+- **`array`**: Für Listen von Elementen.
+- **`null`**: Wenn eine Property „null“ sein darf, fügen Sie dem Typ-Array `"null"` hinzu (z.B. `{"type": ["string", "null"]}`).
 
-これらの説明プロパティは、モデルのガイドに役立ちます。
+Diese beschreibenden Properties helfen, das Modell zu steuern:
 
-- **`title`**: プロパティの簡単な説明。
-- **`description`**: プロパティの詳細な説明。
+- **`title`**: Eine kurze Beschreibung einer Property.
+- **`description`**: Eine längere und detailliertere Beschreibung einer Property.
 
-### タイプ固有のプロパティ
+### Typspezifische Properties
 
-**`object` 値の場合:**
+**Für `object` Werte:**
 
-- **`properties`**: 各キーがプロパティ名で、各値がそのプロパティのスキーマであるオブジェクト。
-- **`required`**: 必須プロパティを一覧表示する文字列の配列。
-- **`additionalProperties`**: `properties` にリストされていないプロパティを許可するかどうかを制御します。ブール値またはスキーマを指定できます。
+- **`properties`**: Ein Objekt, bei dem jeder Schlüssel ein Property-Name und jeder Wert ein Schema für diese Property ist.
+- **`required`**: Ein Array von Strings, in dem die obligatorischen Properties aufgeführt sind.
+- **`additionalProperties`**: Steuert, ob Properties, die nicht in `properties` aufgeführt sind, zulässig sind. Kann ein boolescher Wert oder ein Schema sein.
 
-**`string` 値の場合:**
+**Für `string` Werte:**
 
-- **`enum`**: 分類タスクに使用できる特定の文字列のセットを一覧表示します。
-- **`format`**: 文字列の構文（`date-time`、`date`、`time` など）を指定します。
+- **`enum`**: Listet eine bestimmte Menge möglicher Strings für Klassifizierungsaufgaben auf.
+- **`format`**: Gibt eine Syntax für den String an, z. B. `date-time`, `date` oder `time`.
 
-**`number` 値と `integer` 値の場合:**
+**Für `number` und `integer` Werte:**
 
-- **`enum`**: 使用できる特定の数値のセットを一覧表示します。
-- **`minimum`**: 最小値（包括的）。
-- **`maximum`**: 最大値（包括的）。
+- **`enum`**: Listet eine bestimmte Menge möglicher numerischer Werte auf.
+- **`minimum`**: Der kleinste zulässige Wert.
+- **`maximum`**: Der größte zulässige Wert.
 
-**`array` 値の場合:**
+**Für `array` Werte:**
 
-- **`items`**: 配列内のすべての項目のスキーマを定義します。
-- **`prefixItems`**: 最初の N 個の項目のスキーマのリストを定義し、タプルに似た構造を可能にします。
-- **`minItems`**: 配列内の項目の最小数。
-- **`maxItems`**: 配列内の項目の最大数。
+- **`items`**: Definiert das Schema für alle Elemente im Array.
+- **`prefixItems`**: Definiert eine Liste von Schemas für die ersten N Elemente und ermöglicht so tupelähnliche Strukturen.
+- **`minItems`**: Die Mindestanzahl von Elementen im Array.
+- **`maxItems`**: Die maximale Anzahl von Elementen im Array.
 
-## 構造化出力と関数呼び出し
+## Strukturierte Ausgaben im Vergleich zu Funktionsaufrufen
 
-| 機能 | 主なユースケース |
+| Funktion | Primärer Anwendungsfall |
 | --- | --- |
-| **構造化出力** | **最終的なレスポンスのフォーマット。**特定の形式でモデルの回答を取得する場合に使用します。 |
-| **関数呼び出し** | **会話中のアクション。**最終的な回答を提供する前に、モデルにタスクの実行を依頼する必要がある場合に使用します。 |
+| **Strukturierte Ausgaben** | **Endgültige Antwort formatieren.** Verwenden Sie diese Funktion, wenn Sie die *Antwort* des Modells in einem bestimmten Format wünschen. |
+| **Funktionsaufrufe** | **Während der Unterhaltung Maßnahmen ergreifen.** Verwenden Sie diese Funktion, wenn das Modell Sie *auffordern* muss, eine Aufgabe auszuführen, bevor es eine endgültige Antwort gibt. |
 
-## ベスト プラクティス
+## Best Practices
 
-- **明確な説明:** `description` フィールドを使用してモデルをガイドします。
-- **厳密な型指定:** 特定の型（`integer`、`string`、`enum`）を使用します。
-- **プロンプト エンジニアリング:** モデルに実行させたいことを明確に記述します。
-- **検証:** 出力は構文的に正しい JSON ですが、アプリケーションで常に値を検証してください。
-- **エラー処理:** スキーマに準拠しているが意味的に正しくない出力に対して、堅牢なエラー処理を実装します。
+- **Klare Beschreibungen**:Verwenden Sie das Feld `description`, um das Modell zu steuern.
+- **Strenge Typisierung**:Verwenden Sie bestimmte Typen (`integer`, `string`, `enum`).
+- **Prompt-Engineering**:Geben Sie klar an, was das Modell tun soll.
+- **Validierung**:Obwohl die Ausgabe syntaktisch korrektes JSON ist, sollten Sie die Werte immer in Ihrer Anwendung validieren.
+- **Fehlerbehandlung**:Implementieren Sie eine robuste Fehlerbehandlung für schemakonforme, aber semantisch falsche Ausgaben.
 
-## 制限事項
+## Beschränkungen
 
-- **スキーマのサブセット:** JSON スキーマのすべての機能がサポートされているわけではありません。
-- **スキーマの複雑さ:** 非常に大きいスキーマやネストが深いスキーマは拒否されることがあります。
+- **Teilmenge des Schemas**:Nicht alle JSON-Schema-Funktionen werden unterstützt.
+- **Schemakomplexität**:Sehr große oder tief verschachtelte Schemas werden möglicherweise abgelehnt.
 
-フィードバックを送信
+Feedback geben
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-最終更新日 2026-05-28 UTC。
+Zuletzt aktualisiert: 2026-06-05 (UTC).
 
-ご意見をお聞かせください
+Haben Sie Feedback für uns?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-05-28 UTC。"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-06-05 (UTC)."],[],[]]

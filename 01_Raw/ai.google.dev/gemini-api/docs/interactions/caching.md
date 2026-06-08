@@ -1,50 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/caching?hl=pl
-fetched_at: 2026-06-01T06:09:00.292255+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/caching?hl=ko
+fetched_at: 2026-06-08T05:36:43.020649+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Prześlij opinię
+의견 보내기
 
-# Buforowanie kontekstu
+# 컨텍스트 캐싱
 
-W typowym procesie AI możesz wielokrotnie przekazywać te same tokeny wejściowe do modelu. Interfejs Gemini API oferuje niejawne buforowanie, które optymalizuje wydajność i koszty.
+일반적인 AI 워크플로에서는 동일한 입력 토큰을 모델에 반복적으로 전달할 수 있습니다. Gemini API는 성능과 비용을 최적화하기 위해 암시적 캐싱을 제공합니다.
 
-## Niejawne buforowanie
+## 암시적 캐싱
 
-Niejawne buforowanie jest domyślnie włączone w przypadku wszystkich modeli Gemini 2.5 i nowszych. Jeśli Twoje żądanie trafi do pamięci podręcznej, automatycznie przekażemy Ci oszczędności. Aby włączyć tę funkcję, nie musisz nic robić. Minimalna liczba tokenów wejściowych w przypadku buforowania kontekstu jest podana w tabeli poniżej dla każdego modelu:
+암시적 캐싱은 모든 Gemini 2.5 이상 모델에서 기본적으로 사용 설정됩니다. 요청이 캐시에 적중하면 비용 절감액이 자동으로 전달됩니다. 이를 사용 설정하기 위해 별도로 취해야 할 조치는 없습니다. 컨텍스트 캐싱의 최소 입력 토큰 수는 각 모델의 다음 표에 나와 있습니다.
 
-| Model | Minimalny limit tokenów |
+| 모델 | 최소 토큰 한도 |
 | --- | --- |
-| Gemini 3.5 Flash | 1024 |
-| Gemini 3 Pro (wersja testowa) | 4096 |
-| Gemini 2.5 Flash | 1024 |
-| Gemini 2.5 Pro | 4096 |
+| Gemini 3.5 Flash | 4096 |
+| Gemini 3.1 Pro 프리뷰 | 4096 |
+| Gemini 2.5 Flash | 2048 |
+| Gemini 2.5 Pro | 2048 |
 
-Aby zwiększyć szansę na trafienie w niejawnej pamięci podręcznej:
+암시적 캐시 적중 가능성을 높이려면 다음 안내를 따르세요.
 
-- Spróbuj umieścić duże i popularne treści na początku prompta.
-- Spróbuj wysyłać żądania z podobnym prefiksem w krótkim czasie.
+- 프롬프트 시작 부분에 크고 공통적인 콘텐츠를 배치해 보세요.
+- 짧은 시간 내에 유사한 프리픽스를 가진 요청을 전송해 보세요.
 
-Liczbę tokenów, które zostały trafione do pamięci podręcznej, możesz sprawdzić w polu `usage_metadata` (Python) lub `usageMetadata` (JavaScript) obiektu odpowiedzi.
+응답 객체의 `usage_metadata` (Python) 또는 `usageMetadata` (JavaScript) 필드에서 캐시 적중된 토큰 수를 확인할 수 있습니다.
 
-Prześlij opinię
+의견 보내기
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Ostatnia aktualizacja: 2026-05-28 UTC.
+최종 업데이트: 2026-06-02(UTC)
 
-Chcesz przekazać coś jeszcze?
+의견을 전달하고 싶나요?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-05-28 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-02(UTC)"],[],[]]

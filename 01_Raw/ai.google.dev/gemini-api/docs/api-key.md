@@ -1,135 +1,132 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-key?hl=ar
-fetched_at: 2026-06-01T06:08:47.094064+00:00
-title: "\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0645\u0641\u0627\u062a\u064a\u062d \u0648\u0627\u062c\u0647\u0629 \u0628\u0631\u0645\u062c\u0629 \u0627\u0644\u062a\u0637\u0628\u064a\u0642\u0627\u062a \u0641\u064a Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-key?hl=vi
+fetched_at: 2026-06-08T05:37:00.142862+00:00
+title: "S\u1eed d\u1ee5ng kho\u00e1 API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-إرسال ملاحظات
+Gửi ý kiến phản hồi
 
-# استخدام مفاتيح واجهة برمجة التطبيقات في Gemini
+# Sử dụng khoá API Gemini
 
-لاستخدام Gemini API، يجب أن يكون لديك مفتاح واجهة برمجة التطبيقات. توضّح هذه الصفحة كيفية إنشاء مفاتيحك وإدارتها في Google AI Studio، بالإضافة إلى كيفية إعداد بيئتك لاستخدامها في الرمز البرمجي.
+Để sử dụng Gemini API, bạn cần có khoá API. Trang này trình bày cách tạo và quản lý khoá trong Google AI Studio, cũng như cách thiết lập môi trường để sử dụng các khoá đó trong mã của bạn.
 
-[إنشاء مفتاح واجهة Gemini API أو عرضه](https://aistudio.google.com/app/apikey?hl=ar)
+[Tạo hoặc xem khoá Gemini API](https://aistudio.google.com/app/apikey?hl=vi)
 
-## مفاتيح واجهة برمجة التطبيقات
+## Khoá API
 
-يمكنك إنشاء جميع مفاتيح Gemini API وإدارتها من صفحة [مفاتيح API](https://aistudio.google.com/app/apikey?hl=ar) في **Google AI Studio**.
+Bạn có thể tạo và quản lý tất cả khoá Gemini API trên trang [Khoá API của **Google AI Studio**](https://aistudio.google.com/app/apikey?hl=vi).
 
-بعد الحصول على مفتاح واجهة برمجة التطبيقات، تتوفّر لك الخيارات التالية للربط بواجهة Gemini API:
+Sau khi có khoá API, bạn có thể kết nối với Gemini API theo những cách sau:
 
-- [ضبط مفتاح واجهة برمجة التطبيقات كمتغيّر بيئة](#set-api-env-var)
-- [تقديم مفتاح واجهة برمجة التطبيقات بشكلٍ صريح](#provide-api-key-explicitly)
+- [Đặt khoá API làm biến môi trường](#set-api-env-var)
+- [Cung cấp khoá API một cách rõ ràng](#provide-api-key-explicitly)
 
-لإجراء الاختبار الأوّلي، يمكنك ترميز مفتاح واجهة برمجة التطبيقات بشكل ثابت، ولكن يجب أن يكون ذلك مؤقتًا فقط لأنّه غير آمن. يمكنك العثور على أمثلة على الترميز الثابت لمفتاح واجهة برمجة التطبيقات في قسم [توفير مفتاح واجهة برمجة التطبيقات بشكل صريح](#provide-api-key-explicitly).
+Đối với hoạt động kiểm thử ban đầu, bạn có thể mã hoá cứng một khoá API, nhưng đây chỉ là giải pháp tạm thời vì không an toàn. Bạn có thể tìm thấy các ví dụ về việc mã hoá cứng khoá API trong phần [Cung cấp khoá API một cách rõ ràng](#provide-api-key-explicitly).
 
-## مشاريع Google Cloud
+## Dự án trên Google Cloud
 
-تُعد [مشاريع Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=ar) أساسية لاستخدام خدمات Google Cloud (مثل Gemini API) وإدارة الفوترة والتحكّم في المتعاونين والأذونات. يوفّر Google AI
-Studio واجهة بسيطة لمشاريعك على Google Cloud.
+[Dự án Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=vi) là yếu tố cơ bản để sử dụng các dịch vụ của Google Cloud (chẳng hạn như Gemini API), quản lý việc thanh toán và kiểm soát cộng tác viên cũng như quyền. Google AI Studio cung cấp một giao diện đơn giản cho các dự án của bạn trên Google Cloud.
 
-إذا لم يسبق لك إنشاء أي مشاريع، عليك إنشاء مشروع جديد أو استيراد مشروع من Google Cloud إلى Google AI Studio. ستعرض صفحة **المشاريع** في Google AI Studio جميع المفاتيح التي لديها الإذن الكافي لاستخدام Gemini API. راجِع قسم [استيراد المشاريع](#import-projects) للحصول على التعليمات.
+Nếu chưa tạo dự án nào, bạn phải tạo một dự án mới hoặc nhập một dự án từ Google Cloud vào Google AI Studio. Trang **Dự án** trong Google AI Studio sẽ hiển thị tất cả các khoá có đủ quyền sử dụng Gemini API. Hãy tham khảo phần [nhập dự án](#import-projects) để biết hướng dẫn.
 
-### المشروع التلقائي
+### Dự án mặc định
 
-بالنسبة إلى المستخدمين الجدد، بعد قبول بنود الخدمة، ينشئ Google AI Studio مشروعًا ومفتاحًا تلقائيًا على Google Cloud لتسهيل الاستخدام. يمكنك إعادة تسمية هذا المشروع في Google AI Studio من خلال الانتقال إلى طريقة عرض **المشاريع** في **لوحة البيانات**، والنقر على زر الإعدادات المكوّن من 3 نقاط بجانب أحد المشاريع، ثم اختيار **إعادة تسمية المشروع**. لن يتم إنشاء مشروع تلقائي للمستخدمين الحاليين أو المستخدمين الذين لديهم حسابات على Google Cloud.
+Đối với người dùng mới, sau khi chấp nhận Điều khoản dịch vụ, Google AI Studio sẽ tạo một Dự án Google Cloud và Khoá API mặc định để người dùng dễ dàng sử dụng. Bạn có thể đổi tên dự án này trong Google AI Studio bằng cách chuyển đến chế độ xem **Projects** (Dự án) trong **Dashboard** (Trang tổng quan), nhấp vào nút cài đặt có biểu tượng 3 dấu chấm bên cạnh một dự án rồi chọn **Rename project** (Đổi tên dự án). Người dùng hiện tại hoặc người dùng đã có Tài khoản Google Cloud sẽ không có dự án mặc định được tạo.
 
-## استيراد المشاريع
+## Nhập dự án
 
-يرتبط كل مفتاح لواجهة Gemini API بمشروع على Google Cloud. لا يعرض Google AI Studio تلقائيًا كل مشاريعك على السحابة الإلكترونية. يجب استيراد المشاريع التي تريدها من خلال البحث عن الاسم أو رقم تعريف المشروع في مربّع الحوار **استيراد المشاريع**. للاطّلاع على قائمة كاملة بالمشاريع التي يمكنك الوصول إليها، انتقِل إلى Cloud Console.
+Mỗi khoá API Gemini đều được liên kết với một dự án trên Google Cloud. Theo mặc định, Google AI Studio không hiển thị tất cả Dự án trên đám mây của bạn. Bạn phải nhập các dự án mình muốn bằng cách tìm tên hoặc mã dự án trong hộp thoại **Nhập dự án**. Để xem danh sách đầy đủ các dự án mà bạn có quyền truy cập, hãy truy cập vào Cloud Console.
 
-إذا لم تستورد أي مشاريع على السحابة الإلكترونية بعد، اتّبِع الخطوات التالية لاستيراد مشروع Google Cloud وإنشاء مفتاح:
+Nếu bạn chưa nhập dự án nào, hãy làm theo các bước sau để nhập một dự án trên Google Cloud và tạo khoá:
 
-1. انتقِل إلى [Google AI Studio](https://aistudio.google.com?hl=ar).
-2. افتح **لوحة البيانات** من اللوحة الجانبية على يمين الصفحة.
-3. اختَر **المشاريع**.
-4. انقر على الزر **استيراد المشاريع** في صفحة **المشاريع**.
-5. ابحث عن مشروع Google Cloud الذي تريد استيراده واختَره، ثم انقر على الزر **استيراد**.
+1. Truy cập vào [Google AI Studio](https://aistudio.google.com?hl=vi).
+2. Mở **Trang tổng quan** trong bảng điều khiển bên trái.
+3. Chọn **Dự án**.
+4. Chọn nút **Nhập dự án** trên trang **Dự án**.
+5. Tìm và chọn dự án trên đám mây của Google Cloud mà bạn muốn nhập, rồi chọn nút **Nhập**.
 
-بعد استيراد مشروع، انتقِل إلى صفحة **مفاتيح واجهة برمجة التطبيقات** من قائمة **لوحة البيانات**، ثم أنشِئ مفتاح واجهة برمجة تطبيقات في المشروع الذي استوردته للتو.
+Sau khi nhập một dự án, hãy chuyển đến trang **API Keys** (Khoá API) trong trình đơn **Dashboard** (Trang tổng quan) rồi tạo một khoá API trong dự án mà bạn vừa nhập.
 
-## القيود
+## Các điểm hạn chế
 
-في ما يلي القيود المفروضة على إدارة مفاتيح واجهة برمجة التطبيقات ومشاريع Google Cloud في Google AI Studio.
+Sau đây là những hạn chế khi quản lý khoá API và dự án Google Cloud trong Google AI Studio.
 
-- يمكنك إنشاء 10 مشاريع كحدّ أقصى في كل مرة من صفحة **المشاريع** في Google AI Studio.
-- يمكنك تسمية المشاريع والمفاتيح وإعادة تسميتها.
-- تعرض صفحتا **مفاتيح واجهة برمجة التطبيقات** و**المشاريع** 100 مفتاح و50 مشروعًا كحد أقصى.
-- لا يتم عرض سوى مفاتيح واجهة برمجة التطبيقات التي لا تتضمّن أي قيود أو التي تقتصر على Generative Language API.
+- Bạn có thể tạo tối đa 10 dự án cùng một lúc trên trang **Dự án** của Google AI Studio.
+- Bạn có thể đặt tên và đổi tên dự án cũng như khoá.
+- Trang **Khoá API** và **Dự án** hiển thị tối đa 100 khoá và 50 dự án.
+- Chỉ những khoá API không có quy tắc hạn chế hoặc bị hạn chế đối với Generative Language API mới xuất hiện.
 
-للحصول على إذن إضافي بإدارة مشاريعك، بما في ذلك تعديل مفاتيح واجهة برمجة التطبيقات وتقييدها، انتقِل إلى
-[صفحة بيانات الاعتماد في Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=ar).
-في Cloud Console، يمكنك اختيار مشروعك والنقر على مفتاح واجهة برمجة تطبيقات حالي، ثم حصر استخدامه على **Generative Language API**.
+Để có thêm quyền quản lý đối với các dự án của bạn, bao gồm cả việc sửa đổi và hạn chế khoá API, hãy truy cập vào [trang thông tin xác thực của Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=vi).
+Trong Cloud Console, bạn có thể chọn dự án của mình, nhấp vào một khoá API hiện có, rồi hạn chế khoá đó đối với **Generative Language API**.
 
-## ضبط مفتاح واجهة برمجة التطبيقات كمتغيّر بيئي
+## Đặt khoá API làm biến môi trường
 
-في حال ضبطت متغيّر البيئة `GEMINI_API_KEY` أو `GOOGLE_API_KEY`، سيختار العميل مفتاح واجهة برمجة التطبيقات تلقائيًا عند استخدام إحدى [مكتبات Gemini API](https://ai.google.dev/gemini-api/docs/libraries?hl=ar). ننصحك بضبط أحد المتغيرَين فقط، ولكن في حال ضبط كليهما، ستكون الأولوية للمتغير `GOOGLE_API_KEY`.
+Nếu bạn đặt biến môi trường `GEMINI_API_KEY` hoặc `GOOGLE_API_KEY`, khoá API sẽ tự động được ứng dụng chọn khi sử dụng một trong các [thư viện Gemini API](https://ai.google.dev/gemini-api/docs/libraries?hl=vi). Bạn chỉ nên đặt một trong các biến đó, nhưng nếu đặt cả hai, thì `GOOGLE_API_KEY` sẽ được ưu tiên.
 
-إذا كنت تستخدم REST API أو JavaScript على المتصفّح، عليك تقديم مفتاح واجهة برمجة التطبيقات بشكل صريح.
+Nếu đang sử dụng API REST hoặc JavaScript trên trình duyệt, bạn sẽ cần cung cấp khoá API một cách rõ ràng.
 
-في ما يلي كيفية ضبط مفتاح واجهة برمجة التطبيقات محليًا كمتغيّر بيئة
-`GEMINI_API_KEY` باستخدام أنظمة تشغيل مختلفة.
+Sau đây là cách bạn có thể đặt khoá API cục bộ làm biến môi trường `GEMINI_API_KEY` bằng các hệ điều hành khác nhau.
 
-### ‫Linux/macOS - Bash
+### Linux/macOS – Bash
 
-‫Bash هو إعداد شائع للوحدة الطرفية في نظامَي التشغيل Linux وmacOS. يمكنك التحقّق ممّا إذا كان لديك ملف إعدادات من خلال تنفيذ الأمر التالي:
+Bash là một cấu hình thiết bị đầu cuối phổ biến trên Linux và macOS. Bạn có thể kiểm tra xem mình có tệp cấu hình cho ứng dụng đó hay không bằng cách chạy lệnh sau:
 
 ```
 ~/.bashrc
 ```
 
-إذا كان الردّ هو "No such file or directory"، عليك إنشاء هذا الملف وفتحه من خلال تنفيذ الأوامر التالية، أو استخدام `zsh`:
+Nếu phản hồi là "No such file or directory" (Không có tệp hoặc thư mục như vậy), bạn sẽ cần tạo tệp này và mở tệp bằng cách chạy các lệnh sau hoặc sử dụng `zsh`:
 
 ```
 touch ~/.bashrc
 open ~/.bashrc
 ```
 
-بعد ذلك، عليك ضبط مفتاح واجهة برمجة التطبيقات من خلال إضافة أمر التصدير التالي:
+Tiếp theo, bạn cần đặt khoá API bằng cách thêm lệnh xuất sau:
 
 ```
 export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
 ```
 
-بعد حفظ الملف، طبِّق التغييرات من خلال تنفيذ الأمر التالي:
+Sau khi lưu tệp, hãy áp dụng các thay đổi bằng cách chạy:
 
 ```
 source ~/.bashrc
 ```
 
-### ‫macOS - Zsh
+### macOS – Zsh
 
-‫Zsh هو إعداد شائع للوحدة الطرفية في نظامَي التشغيل Linux وmacOS. يمكنك التحقّق ممّا إذا كان لديك ملف إعدادات من خلال تنفيذ الأمر التالي:
+Zsh là một cấu hình phổ biến của thiết bị đầu cuối Linux và macOS. Bạn có thể kiểm tra xem mình có tệp cấu hình cho ứng dụng đó hay không bằng cách chạy lệnh sau:
 
 ```
 ~/.zshrc
 ```
 
-إذا كان الردّ هو "No such file or directory"، عليك إنشاء هذا الملف وفتحه من خلال تنفيذ الأوامر التالية، أو استخدام `bash`:
+Nếu phản hồi là "No such file or directory" (Không có tệp hoặc thư mục như vậy), bạn sẽ cần tạo tệp này và mở tệp bằng cách chạy các lệnh sau hoặc sử dụng `bash`:
 
 ```
 touch ~/.zshrc
 open ~/.zshrc
 ```
 
-بعد ذلك، عليك ضبط مفتاح واجهة برمجة التطبيقات من خلال إضافة أمر التصدير التالي:
+Tiếp theo, bạn cần đặt khoá API bằng cách thêm lệnh xuất sau:
 
 ```
 export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
 ```
 
-بعد حفظ الملف، طبِّق التغييرات من خلال تنفيذ الأمر التالي:
+Sau khi lưu tệp, hãy áp dụng các thay đổi bằng cách chạy:
 
 ```
 source ~/.zshrc
@@ -137,23 +134,23 @@ source ~/.zshrc
 
 ### Windows
 
-1. ابحث عن "متغيرات البيئة" في شريط البحث.
-2. اختَر تعديل **إعدادات النظام**. قد يُطلب منك تأكيد رغبتك في إجراء ذلك.
-3. في مربّع حوار إعدادات النظام، انقر على الزر الذي يحمل التصنيف **متغيرات البيئة**.
-4. ضمن **متغيّرات المستخدم** (للمستخدم الحالي) أو **متغيّرات النظام** (تنطبق على جميع المستخدمين الذين يستخدمون الجهاز)، انقر على **جديد...**
-5. حدِّد اسم المتغيّر على النحو التالي: `GEMINI_API_KEY`. حدِّد مفتاح Gemini API كقيمة المتغيّر.
-6. انقر على **حسنًا** لتطبيق التغييرات.
-7. افتح جلسة طرفية جديدة (cmd أو Powershell) للحصول على المتغير الجديد.
+1. Tìm "Environment Variables" (Biến môi trường) trong thanh tìm kiếm.
+2. Chọn sửa đổi **Cài đặt hệ thống**. Bạn có thể phải xác nhận rằng bạn muốn thực hiện việc này.
+3. Trong hộp thoại cài đặt hệ thống, hãy nhấp vào nút có nhãn **Environment Variables** (Biến môi trường).
+4. Trong mục **User variables** (Biến người dùng) (dành cho người dùng hiện tại) hoặc **System variables** (Biến hệ thống) (áp dụng cho tất cả người dùng sử dụng máy), hãy nhấp vào **New...** (Mới...)
+5. Chỉ định tên biến là `GEMINI_API_KEY`. Chỉ định Khoá Gemini API làm giá trị biến.
+6. Nhấp vào **OK** để áp dụng các thay đổi.
+7. Mở một phiên thiết bị đầu cuối mới (cmd hoặc Powershell) để lấy biến mới.
 
-## توفير مفتاح واجهة برمجة التطبيقات بشكل صريح
+## Cung cấp khoá API một cách rõ ràng
 
-في بعض الحالات، قد تحتاج إلى تقديم مفتاح واجهة برمجة التطبيقات بشكل صريح. على سبيل المثال:
+Trong một số trường hợp, bạn có thể muốn cung cấp khoá API một cách rõ ràng. Ví dụ:
 
-- إذا كنت بصدد إجراء طلب بيانات من واجهة برمجة التطبيقات بسيط وتفضّل ترميز مفتاح واجهة برمجة التطبيقات بشكل ثابت.
-- تريد التحكّم بشكل صريح بدون الحاجة إلى الاعتماد على الاكتشاف التلقائي لمتغيرات البيئة من خلال مكتبات Gemini API
-- أنت تستخدم بيئة لا تتوافق مع متغيرات البيئة (مثل الويب) أو تجري طلبات REST.
+- Bạn đang thực hiện một lệnh gọi API đơn giản và muốn mã hoá khoá API.
+- Bạn muốn kiểm soát rõ ràng mà không cần dựa vào tính năng tự động phát hiện các biến môi trường của thư viện Gemini API
+- Bạn đang sử dụng một môi trường không hỗ trợ các biến môi trường (ví dụ: web) hoặc bạn đang thực hiện các lệnh gọi REST.
 
-في ما يلي أمثلة على كيفية تقديم مفتاح واجهة برمجة التطبيقات بشكلٍ صريح:
+Dưới đây là ví dụ về cách bạn có thể cung cấp khoá API một cách rõ ràng:
 
 ### Python
 
@@ -221,7 +218,7 @@ func main() {
 }
 ```
 
-### جافا
+### Java
 
 ```
 package com.example;
@@ -264,95 +261,87 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-## الحفاظ على أمان مفتاح واجهة برمجة التطبيقات
+## Bảo mật khoá API
 
-عامِل مفتاح Gemini API مثل كلمة المرور. في حال تعرّض مشروعك للاختراق، يمكن للآخرين استخدام حصته، وتحمّل الرسوم (في حال تفعيل الفوترة)، والوصول إلى بياناتك الخاصة، مثل الملفات.
+Hãy coi khoá Gemini API như một mật khẩu. Nếu bị xâm nhập, những người khác có thể sử dụng hạn mức của dự án, phát sinh phí (nếu bạn bật tính năng thanh toán) và truy cập vào dữ liệu riêng tư của bạn, chẳng hạn như tệp.
 
-### قواعد الأمان المهمة
+### Quy tắc bảo mật quan trọng
 
-- **الحفاظ على سرية المفاتيح**: قد تتيح مفاتيح واجهة برمجة التطبيقات الخاصة بـ Gemini الوصول إلى بيانات حساسة يعتمد عليها تطبيقك.
+- **Giữ bí mật các khoá**: Khoá API cho Gemini có thể truy cập vào dữ liệu nhạy cảm mà ứng dụng của bạn phụ thuộc vào.
 
-  - **لا تُدرِج مفاتيح واجهة برمجة التطبيقات في نظام التحكّم بالمصادر أبدًا.** لا تحفَظ مفتاح واجهة برمجة التطبيقات في أنظمة التحكم في الإصدارات، مثل Git.
-  - **يجب عدم عرض مفاتيح واجهة برمجة التطبيقات من جهة العميل.** لا تستخدِم مفتاح واجهة برمجة التطبيقات مباشرةً
-    في تطبيقات الويب أو الأجهزة الجوّالة في مرحلة الإنتاج. يمكن استخراج المفاتيح في الرمز البرمجي من جهة العميل (بما في ذلك مكتبات JavaScript/TypeScript وطلبات REST).
-- **تقييد الوصول**: يمكنك تقييد استخدام مفتاح واجهة برمجة التطبيقات بعناوين IP أو مراجع HTTP أو تطبيقات Android/iOS معيّنة حيثما أمكن ذلك.
-- **تقييد الاستخدام**: فعِّل واجهات برمجة التطبيقات الضرورية فقط لكل مفتاح.
-- **إجراء عمليات تدقيق منتظمة**: يجب تدقيق مفاتيح واجهة برمجة التطبيقات بانتظام وتغييرها بشكل دوري.
+  - **Tuyệt đối không chuyển khoá API vào tính năng kiểm soát nguồn.** Đừng kiểm tra khoá API của bạn trong các hệ thống kiểm soát phiên bản như Git.
+  - **Tuyệt đối không để lộ khoá API ở phía máy khách.** Không sử dụng trực tiếp khoá API trong các ứng dụng web hoặc di động đang hoạt động. Các khoá trong mã phía máy khách (bao gồm cả thư viện JavaScript/TypeScript và lệnh gọi REST) có thể được trích xuất.
+- **Hạn chế quyền truy cập**: Hạn chế việc sử dụng khoá API ở các địa chỉ IP, HTTP referrer hoặc ứng dụng Android/iOS cụ thể (nếu có thể).
+- **Hạn chế việc sử dụng**: Chỉ bật những API cần thiết cho mỗi khoá.
+- **Thực hiện kiểm tra thường xuyên**: Thường xuyên kiểm tra và định kỳ xoay vòng các khoá API.
 
-### أفضل الممارسات
+### Các phương pháp hay nhất
 
-- **استخدام طلبات من جهة الخادم مع مفاتيح واجهة برمجة التطبيقات** إنّ الطريقة الأكثر أمانًا لاستخدام مفتاح واجهة برمجة التطبيقات هي طلب Gemini API من تطبيق من جهة الخادم حيث يمكن الحفاظ على سرية المفتاح.
-- **استخدام رموز مميزة مؤقتة للوصول من جهة العميل (Live API فقط):** للوصول مباشرةً إلى Live API من جهة العميل، يمكنك استخدام رموز مميزة مؤقتة. وتكون هذه النماذج أقل عرضة للمخاطر الأمنية ويمكن استخدامها في عملية الإنتاج. راجِع دليل [الرموز المميزة المؤقتة](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=ar) لمزيد من المعلومات.
-- **ننصحك بإضافة قيود إلى مفتاحك:** يمكنك الحدّ من أذونات المفتاح
-  من خلال إضافة [قيود على مفتاح واجهة برمجة التطبيقات](https://cloud.google.com/api-keys/docs/add-restrictions-api-keys?hl=ar#add-api-restrictions).
-  ويقلّل ذلك من الأضرار المحتملة في حال تسرُّب المفتاح.
+- **Sử dụng các lệnh gọi phía máy chủ bằng khoá API** Cách an toàn nhất để sử dụng khoá API là gọi Gemini API từ một ứng dụng phía máy chủ, nơi khoá có thể được giữ bí mật.
+- **Sử dụng mã thông báo tạm thời để truy cập phía máy khách (chỉ Live API):** Để truy cập trực tiếp vào Live API phía máy khách, bạn có thể sử dụng mã thông báo tạm thời. Chúng có rủi ro bảo mật thấp hơn và có thể phù hợp để sử dụng trong bản phát hành chính thức. Hãy xem hướng dẫn về [mã thông báo tạm thời](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=vi) để biết thêm thông tin.
+- **Cân nhắc việc thêm các quy tắc hạn chế đối với khoá:** Bạn có thể giới hạn các quyền của khoá bằng cách thêm [các quy tắc hạn chế đối với khoá API](https://cloud.google.com/api-keys/docs/add-restrictions-api-keys?hl=vi#add-api-restrictions).
+  Điều này giúp giảm thiểu thiệt hại tiềm ẩn nếu khoá bị rò rỉ.
 
-للاطّلاع على بعض أفضل الممارسات العامة، يمكنك أيضًا مراجعة [مقالة الدعم](https://support.google.com/googleapi/answer/6310037?hl=ar) هذه.
+Để biết một số phương pháp hay nhất chung, bạn cũng có thể xem [bài viết hỗ trợ](https://support.google.com/googleapi/answer/6310037?hl=vi) này.
 
-## تأمين مفاتيح واجهة برمجة التطبيقات غير المقيدة
+## Bảo mật khoá API không bị hạn chế
 
-تكون مفاتيح واجهة برمجة التطبيقات غير المشروطة عرضة للجهات المسيئة والاستخدام غير المصرّح به. اعتبارًا من 19 يونيو 2026، سيتم إيقاف مفاتيح الزيارات غير المقيّدة في Gemini API بهدف تحسين الأمان.
+Khoá API không bị hạn chế rất dễ bị kẻ xấu lợi dụng và sử dụng trái phép. Kể từ ngày 19 tháng 6 năm 2026, để cải thiện tính bảo mật, Gemini API sẽ ngừng hỗ trợ các khoá lưu lượng truy cập không hạn chế.
 
-**هذا يعني أنّ طلباتك إلى Gemini API ستفشل إذا لم تتّخذ أي إجراء.**
+**Điều này có nghĩa là các yêu cầu của bạn đối với Gemini API sẽ không thành công nếu bạn không thực hiện hành động.**
 
-لمواصلة استخدام Gemini API بدون انقطاع، عليك تأمين مفاتيح حركة المرور
-من خلال إضافة قيود في
-[AI Studio](https://aistudio.google.com/api-keys?hl=ar).
+Để tiếp tục sử dụng Gemini API mà không bị gián đoạn, hãy bảo mật các khoá lưu lượng truy cập bằng cách thêm các quy tắc hạn chế trong [AI Studio](https://aistudio.google.com/api-keys?hl=vi).
 
-في [aistudio.google.com/api-keys](https://aistudio.google.com/api-keys?hl=ar)، سيظهر لك بانر لإعلامك عندما تكون مفاتيح واجهة برمجة التطبيقات غير مقيّدة. يمكنك الاطّلاع على المفاتيح غير المشروطة واستخدام الخدمة خلال آخر 90 يومًا.
+Trong [aistudio.google.com/api-keys](https://aistudio.google.com/api-keys?hl=vi), bạn sẽ thấy một biểu ngữ thông báo cho bạn khi khoá API không bị hạn chế. Bạn có thể xem những khoá không bị hạn chế và mức sử dụng dịch vụ trong 90 ngày qua.
 
-بالنسبة إلى المفاتيح غير المحظورة، عليك اختيار أحد الخيارَين التاليَين:
+Đối với các khoá không hạn chế, bạn cần chọn một trong những lựa chọn sau:
 
-- استخدِم المفتاح مع Gemini API فقط.
-- استخدِم المفتاح في واجهات برمجة التطبيقات الأخرى غير Gemini.
+- Chỉ sử dụng khoá cho Gemini API.
+- Sử dụng khoá này cho mục đích không phải là Gemini API.
 
-### حصر استخدام المفتاح في Gemini API فقط
+### Hạn chế để chỉ sử dụng khoá cho Gemini API
 
-إذا أردت حصر استخدام المفتاح في Gemini API فقط، يمكنك حماية مفتاحك في
-[AI Studio](https://aistudio.google.com/api-keys?hl=ar) من خلال النقر على الزر
-**حصر الاستخدام في Gemini API**.
+Nếu chỉ muốn hạn chế khoá cho Gemini API, hãy bảo mật khoá trong [AI Studio](https://aistudio.google.com/api-keys?hl=vi) bằng cách nhấp vào nút **Hạn chế cho Gemini API**.
 
-### فرض قيود على استخدام المفتاح في واجهات برمجة التطبيقات غير التابعة لـ Gemini
+### Hạn chế khoá để sử dụng cho các API không phải Gemini
 
-إذا أردت حصر استخدام المفتاح على غير Gemini API، اتّبِع الخطوات التالية:
+Nếu bạn muốn hạn chế việc sử dụng khoá cho các API không phải Gemini:
 
-1. انتقِل إلى
-   [صفحة بيانات الاعتماد في Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=ar).
-2. تأكَّد من اختيار المشروع بشكل صحيح.
-3. اختَر مفتاح واجهة برمجة التطبيقات.
-4. وسِّع القائمة المنسدلة **قيود واجهة برمجة التطبيقات**، وطبِّق قيود الخدمة على مفتاح واجهة برمجة التطبيقات.
+1. Truy cập vào [trang thông tin đăng nhập của Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=vi).
+2. Đảm bảo bạn đã chọn đúng dự án.
+3. Chọn một khoá API.
+4. Mở rộng trình đơn thả xuống **API restrictions** (Hạn chế cho API) rồi áp dụng các quy tắc hạn chế về dịch vụ cho khoá API.
 
-إذا أردت تعديل المفاتيح باستخدام قيود حالية أو قيود تمت إضافتها حديثًا، انتقِل إلى [Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=ar).
+Nếu bạn muốn sửa đổi các khoá có hạn chế hiện tại hoặc mới thêm, hãy truy cập vào [Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=vi).
 
-## المفاتيح المحظورة
+## Khoá bị chặn
 
-اعتبارًا من 7 مايو 2026، ستحظر واجهة Gemini API مفاتيح واجهة برمجة التطبيقات غير المقيدة
-التي لم يتم استخدامها لفترة طويلة. سيظهر للمستخدمين علامة **محظور** بجانب مفتاحهم على [aistudio.google.com/api-keys](https://aistudio.google.com/api-keys?hl=ar)، وسيكون عليهم إنشاء مفتاح جديد أو استخدام مفتاح بديل مقيّد لمواصلة استخدام Gemini API.
+Kể từ ngày 7 tháng 5 năm 2026, Gemini API sẽ chặn các khoá API không bị hạn chế và không hoạt động trong một thời gian dài. Những người dùng này sẽ thấy thẻ **Bị chặn** cho khoá của họ trên [aistudio.google.com/api-keys](https://aistudio.google.com/api-keys?hl=vi) và cần tạo khoá mới hoặc sử dụng khoá bị hạn chế thay thế để tiếp tục dùng Gemini API.
 
-## تحديد المشاكل في إنشاء مفتاح واجهة برمجة التطبيقات وحلّها
+## Khắc phục sự cố khi tạo khoá API
 
-في Google AI Studio، قد يظهر زر **إنشاء مفتاح واجهة برمجة تطبيقات** غير متاح، مع الرسالة: "*ليس لديك الإذن بإنشاء مفتاح في هذا المشروع*".
+Trong Google AI Studio, nút **Tạo khoá API** có thể không hoạt động và xuất hiện thông báo: "*Bạn không có quyền tạo khoá trong dự án này*".
 
-يحدث ذلك عندما لا تتوفّر لديك الأذونات اللازمة داخل المشروع لإنشاء مفتاح جديد:
+Lỗi này xảy ra khi bạn không có các quyền cần thiết trong dự án để tạo khoá mới:
 
-- **`resourcemanager.projects.get`**: تسمح هذه الإذن لـ AI Studio بالتحقّق من توفّر المشروع.
-- **`apikeys.keys.create`**: يسمح بإنشاء مفتاح واجهة برمجة التطبيقات نفسه.
-- **`serviceusage.services.enable`**: مطلوبة لضمان تفعيل Gemini API في المشروع.
-- **`iam.serviceAccounts.create`**: يتطلّب كل مفتاح جديد لواجهة برمجة التطبيقات الآن [حساب خدمة](https://docs.cloud.google.com/docs/authentication/api-keys?hl=ar#api-keys-bound-sa) مرتبطًا، ويتم إنشاؤه عند إنشاء مفتاح واجهة برمجة التطبيقات.
-- **`iam.serviceAccountApiKeyBindings.create`**: مطلوب لربط حساب الخدمة الذي تم إنشاؤه حديثًا بمفتاح واجهة برمجة التطبيقات.
+- **`resourcemanager.projects.get`**: Cho phép AI Studio xác minh sự tồn tại của dự án.
+- **`apikeys.keys.create`**: Cho phép tạo chính khoá API.
+- **`serviceusage.services.enable`**: Bắt buộc để đảm bảo Gemini API đang hoạt động trên dự án.
+- **`iam.serviceAccounts.create`**: Mỗi khoá API mới hiện đều yêu cầu một [tài khoản dịch vụ](https://docs.cloud.google.com/docs/authentication/api-keys?hl=vi#api-keys-bound-sa) được liên kết, được tạo khi tạo khoá API.
+- **`iam.serviceAccountApiKeyBindings.create`**: Bắt buộc để liên kết tài khoản dịch vụ mới tạo với khoá API.
 
-لحلّ مشكلة الأذونات، اطلب من مشرف المشروع أو مشرف مؤسستك إذا كان المشروع تابعًا [لمؤسسة](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=ar) منحك دورًا يتضمّن الأذونات المذكورة أعلاه (مثل "محرّر المشروع" أو دور مخصّص).
+Để sửa quyền, hãy yêu cầu quản trị viên dự án hoặc quản trị viên của tổ chức (nếu dự án thuộc về một [tổ chức](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access?hl=vi)) cấp cho bạn một vai trò có các quyền nêu trên (chẳng hạn như vai trò Người chỉnh sửa dự án hoặc vai trò tùy chỉnh).
 
-إذا لم يكن لديك إذن وصول إداري إلى مشروع، يمكنك إنشاء مشروع جديد غير مرتبط بمؤسسة لإنشاء مفاتيحك.
+Nếu không có quyền quản trị đối với một dự án, bạn có thể tạo một dự án mới không liên kết với tổ chức để tạo khoá.
 
-للاطّلاع على قائمة كاملة بأذونات "إدارة الهوية وإمكانية الوصول" المطلوبة لجميع ميزات Google AI Studio (مثل عرض الاستخدام أو حدود المعدّل أو الفوترة)، راجِع [دليل تحديد المشاكل وحلّها في AI Studio](https://ai.google.dev/gemini-api/docs/troubleshoot-ai-studio?hl=ar#iam-permissions).
+Để xem danh sách đầy đủ các quyền IAM cần thiết cho tất cả tính năng của Google AI Studio (chẳng hạn như xem mức sử dụng, hạn mức hoặc thông tin thanh toán), hãy xem [hướng dẫn khắc phục sự cố của AI Studio](https://ai.google.dev/gemini-api/docs/troubleshoot-ai-studio?hl=vi#iam-permissions).
 
-إرسال ملاحظات
+Gửi ý kiến phản hồi
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-تاريخ التعديل الأخير: 2026-05-29 (حسب التوقيت العالمي المتفَّق عليه)
+Cập nhật lần gần đây nhất: 2026-05-29 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-29 UTC."],[],[]]

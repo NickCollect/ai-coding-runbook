@@ -1,86 +1,78 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/troubleshoot-ai-studio?hl=id
-fetched_at: 2026-06-01T05:57:05.406714+00:00
-title: "Memecahkan masalah Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/troubleshoot-ai-studio?hl=pl
+fetched_at: 2026-06-08T05:27:08.927833+00:00
+title: "Rozwi\u0105zywanie problem\u00f3w z Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Kirim masukan
+Prześlij opinię
 
-# Memecahkan masalah Google AI Studio
+# Rozwiązywanie problemów z Google AI Studio
 
-Halaman ini memberikan saran untuk memecahkan masalah Google AI Studio jika Anda
-mengalami masalah.
+Na tej stronie znajdziesz sugestie dotyczące rozwiązywania problemów z Google AI Studio.
 
-## Memahami error 403 Akses Dibatasi
+## Informacje o błędach 403 Access Restricted
 
-Jika Anda melihat error 403 Akses Dibatasi, Anda menggunakan Google AI Studio dengan cara yang tidak mematuhi [Persyaratan Layanan](https://ai.google.dev/terms?hl=id). Salah satu alasan umumnya adalah Anda tidak berada di [wilayah yang didukung](https://ai.google.dev/available_regions?hl=id).
+Jeśli zobaczysz błąd 403 – Access Restricted (Ograniczony dostęp), oznacza to, że korzystasz z Google AI Studio w sposób niezgodny z [Warunkami korzystania z usługi](https://ai.google.dev/terms?hl=pl). Jednym z częstych powodów jest to, że nie mieszkasz w [obsługiwanym regionie](https://ai.google.dev/available_regions?hl=pl).
 
-## Menyelesaikan respons Tanpa Konten di Google AI Studio
+## Rozwiązywanie problemu z odpowiedziami „Brak treści” w Google AI Studio
 
-Pesan warning **Tidak Ada Konten** muncul di
-Google AI Studio jika konten diblokir karena alasan apa pun. Untuk melihat detail selengkapnya,
-arahkan kursor ke **Tidak Ada Konten** dan klik
-warning **Keamanan**.
+Jeśli treść zostanie zablokowana z jakiegokolwiek powodu, w Google AI Studio pojawi się komunikat warning **Brak treści**. Aby wyświetlić więcej szczegółów, najedź wskaźnikiem na **Brak treści** i kliknij warning **Bezpieczeństwo**.
 
-Jika respons diblokir karena [setelan keamanan](https://ai.google.dev/docs/safety_setting?hl=id) dan
-Anda mempertimbangkan [risiko keamanan](https://ai.google.dev/docs/safety_guidance?hl=id) untuk kasus penggunaan Anda, Anda
-dapat mengubah
-[setelan keamanan](https://ai.google.dev/docs/safety_setting?hl=id#safety_settings_in_makersuite)
-untuk memengaruhi respons yang ditampilkan.
+Jeśli odpowiedź została zablokowana z powodu [ustawień bezpieczeństwa](https://ai.google.dev/docs/safety_setting?hl=pl), a Ty wziąłeś(-aś) pod uwagę [ryzyko związane z bezpieczeństwem](https://ai.google.dev/docs/safety_guidance?hl=pl) w swoim przypadku użycia, możesz zmodyfikować [ustawienia bezpieczeństwa](https://ai.google.dev/docs/safety_setting?hl=pl#safety_settings_in_makersuite), aby wpłynąć na zwróconą odpowiedź.
 
-Jika respons diblokir, tetapi bukan karena setelan keamanan, kueri atau respons mungkin melanggar [Persyaratan Layanan](https://ai.google.dev/terms?hl=id) atau tidak didukung.
+Jeśli odpowiedź została zablokowana, ale nie z powodu ustawień bezpieczeństwa, zapytanie lub odpowiedź mogą naruszać [Warunki korzystania z usługi](https://ai.google.dev/terms?hl=pl) lub być w inny sposób nieobsługiwane.
 
-## Memeriksa penggunaan dan batas token
+## Sprawdzanie wykorzystania tokenów i limitów
 
-Saat Anda membuka perintah, tombol **Pratinjau Teks** di bagian bawah layar akan menampilkan token saat ini yang digunakan untuk konten perintah Anda dan jumlah token maksimum untuk model yang digunakan.
+Gdy otworzysz prompt, przycisk **Podgląd tekstu** u dołu ekranu pokazuje aktualną liczbę tokenów użytych w treści promptu oraz maksymalną liczbę tokenów dla używanego modelu.
 
-## Izin IAM Google Cloud untuk AI Studio
+## Uprawnienia Google Cloud IAM w AI Studio
 
-Anggota project Google Cloud memerlukan izin Identity and Access Management (IAM) tertentu untuk melakukan tindakan di Google AI Studio. Untuk mengetahui informasi selengkapnya tentang identitas ini, lihat [Ringkasan principal IAM](https://cloud.google.com/iam/docs/principals?hl=id).
+Członkowie projektu w chmurze Google Cloud potrzebują określonych uprawnień Identity and Access Management (IAM), aby wykonywać działania w Google AI Studio. Więcej informacji o tych tożsamościach znajdziesz w [omówieniu podmiotów zabezpieczeń IAM](https://cloud.google.com/iam/docs/principals?hl=pl).
 
-Pengguna dengan peran **Editor** atau **Pemilik** di project Google Cloud terkait memiliki izin penuh untuk melihat dasbor dan mengelola kunci API Gemini. Pengguna dengan peran **Pelihat** dapat melihat dasbor dan kunci API, tetapi tidak dapat membuat, memperbarui, atau menghapusnya.
+Użytkownicy z rolami **Edytujący** lub **Właściciel** w powiązanym projekcie Google Cloud mają pełne uprawnienia do wyświetlania paneli i zarządzania kluczami interfejsu Gemini API. Użytkownicy z rolą **Przeglądający** mogą wyświetlać panele i klucze interfejsu API, ale nie mogą ich tworzyć, aktualizować ani usuwać.
 
-Untuk kontrol yang lebih terperinci, lihat tabel berikut untuk mengetahui izin spesifik yang diperlukan untuk setiap fitur AI Studio. Untuk mengetahui petunjuk tentang cara memberikan izin ini, lihat [Memberikan, mengubah, dan mencabut akses ke resource](https://cloud.google.com/iam/docs/granting-changing-revoking-access?hl=id) dalam dokumentasi Google Cloud.
+Aby uzyskać większą kontrolę, zapoznaj się z tabelą poniżej, w której znajdziesz konkretne uprawnienia wymagane w przypadku poszczególnych funkcji AI Studio. Instrukcje dotyczące przyznawania tych uprawnień znajdziesz w sekcji [Przyznawanie, zmienianie i odbieranie uprawnień do zasobów](https://cloud.google.com/iam/docs/granting-changing-revoking-access?hl=pl) w dokumentacji Google Cloud.
 
-| Fitur AI Studio | Izin IAM yang diperlukan | Persyaratan tambahan |
+| Funkcja AI Studio | Wymagane uprawnienia | Dodatkowe wymagania |
 | --- | --- | --- |
-| **Telusuri project** (impor project) | `resourcemanager.projects.get` |  |
-| **Mengganti nama project** | `resourcemanager.projects.update` |  |
-| **Menampilkan tingkat kuota** | T/A |  |
-| **Buat kunci API** | Memiliki izin **Cari project**, dan:  `apikeys.keys.create` `serviceusage.services.enable` `iam.serviceAccountApiKeyBindings.create` `iam.serviceAccounts.create` |  |
-| **Mencantumkan kunci API** | Memiliki izin **Telusuri project**, dan:  `apikeys.keys.list` `serviceusage.services.get` | Project Google Cloud harus mengaktifkan [Generative Language API](https://console.cloud.google.com/apis/library/generativelanguage.googleapis.com?hl=id). |
-| **Mengganti nama kunci API** | `apikeys.keys.update` |  |
-| **Menghapus kunci API** | `apikeys.keys.delete` |  |
-| **Dasbor penggunaan** | Memiliki izin **Cari project**, dan:  `monitoring.timeSeries.list` |  |
-| **Dasbor batas kecepatan** | Memiliki izin **Dasbor penggunaan**, dan:  `cloudquotas.quotas.get` |  |
-| **Pengeluaran (Batas penagihan)** | `billing.resourceCosts.get` (untuk melihat pembelanjaan) `billing.resourcebudgets.read` (untuk melihat batas) `billing.resourcebudgets.write` (untuk menetapkan batas) |  |
-| **Dasbor penagihan** | `billing.accounts.get` |  |
+| **Wyszukaj projekt** (importowanie projektów) | `resourcemanager.projects.get` |  |
+| **Zmień nazwę projektu** | `resourcemanager.projects.update` |  |
+| **Wyświetlanie poziomu limitu** | Nie dotyczy |  |
+| **Utwórz klucz interfejsu API** | Musisz mieć uprawnienia **Wyszukiwanie projektu** i:  `apikeys.keys.create` `serviceusage.services.enable` `iam.serviceAccountApiKeyBindings.create` `iam.serviceAccounts.create` |  |
+| **Wyświetlanie listy kluczy interfejsu API** | Musisz mieć uprawnienia **Wyszukiwanie projektu** i:  `apikeys.keys.list` `serviceusage.services.get` | W projekcie Google Cloud musi być włączony [interfejs Generative Language API](https://console.cloud.google.com/apis/library/generativelanguage.googleapis.com?hl=pl). |
+| **Zmiana nazwy kluczy interfejsu API** | `apikeys.keys.update` |  |
+| **Usuwanie kluczy interfejsu API** | `apikeys.keys.delete` |  |
+| **Panel wykorzystania** | mieć uprawnienia **Wyszukiwanie projektu** i:  `monitoring.timeSeries.list` |  |
+| **Panel limitu żądań** | mieć uprawnienia do **panelu użycia** i:  `cloudquotas.quotas.get` |  |
+| **Wydatki (limit płatności)** | `billing.resourceCosts.get` (aby wyświetlić wydatki) `billing.resourcebudgets.read` (aby wyświetlić limit) `billing.resourcebudgets.write` (aby ustawić limit) |  |
+| **Panel płatności** | `billing.accounts.get` |  |
 
-### Pemeriksaan akses lainnya
+### Inne kontrole dostępu
 
-Selain izin IAM Google Cloud, AI Studio juga melakukan pemeriksaan keamanan dan kepatuhan. Anda mungkin mengalami error `PERMISSION_DENIED` atau error pembatasan akses di antarmuka AI Studio atau dalam respons API jika Anda tidak memenuhi persyaratan berikut:
+Oprócz uprawnień Google Cloud IAM AI Studio przeprowadza też kontrole zabezpieczeń i zgodności. Jeśli nie spełniasz tych wymagań, w interfejsie AI Studio lub w odpowiedziach interfejsu API może pojawić się błąd `PERMISSION_DENIED` lub błąd ograniczenia dostępu:
 
-- **Pemeriksaan keamanan:** Permintaan Anda harus lulus pemeriksaan keamanan otomatis.
-- **Persyaratan Layanan:** Anda harus menyetujui Persyaratan Layanan Google dan Persyaratan Layanan Tambahan AI Generatif.
-- **Wilayah yang didukung:** Anda harus berada di [wilayah yang didukung](https://ai.google.dev/gemini-api/docs/available-regions?hl=id).
-- **Kepercayaan & Keamanan:** Project Google Cloud tidak boleh ditandai karena penyalahgunaan.
+- **Kontrole zabezpieczeń:** Twoja prośba musi przejść automatyczne kontrole zabezpieczeń.
+- **Warunki korzystania z usługi:** musisz zaakceptować Warunki korzystania z usług Google oraz Dodatkowe warunki korzystania z generatywnej AI.
+- **Obsługiwany region:** musisz znajdować się w [obsługiwanym regionie](https://ai.google.dev/gemini-api/docs/available-regions?hl=pl).
+- **Zaufanie i bezpieczeństwo:** projekt Google Cloud nie może być oznaczony jako nadużycie.
 
-Kirim masukan
+Prześlij opinię
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Terakhir diperbarui pada 2026-05-29 UTC.
+Ostatnia aktualizacja: 2026-05-29 UTC.
 
-Ada masukan untuk kami?
+Chcesz przekazać coś jeszcze?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-05-29 UTC."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-05-29 UTC."],[],[]]

@@ -1,50 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=ja
-fetched_at: 2026-06-01T05:59:05.587158+00:00
-title: "Lyria 3 Pro \u30d7\u30ec\u30d3\u30e5\u30fc\u7248 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=zh-CN
+fetched_at: 2026-06-08T05:36:33.883045+00:00
+title: "Lyria 3 Pro\uff08\u9884\u89c8\u7248\uff09 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-フィードバックを送信
+发送反馈
 
-# Lyria 3 Pro プレビュー版
+# Lyria 3 Pro（预览版）
 
-Lyria 3 Pro Preview は、Google のフラッグシップ音楽生成モデルです。複数の A
-メロ、サビ、ブリッジなど、複雑な構造の一貫性を持つフル楽曲の生成に最適化されています。テキスト プロンプトまたは画像入力から、高品質の 48kHz
-ステレオ オーディオを生成します。
+Lyria 3 Pro Preview 是 Google 的旗舰级音乐生成模型。它经过优化，可生成具有复杂结构连贯性的完整歌曲，包括多个主歌、副歌和桥段。它可以根据文本提示或图片输入生成高质量的 48kHz 立体声音频。
 
-[Google AI Studio で試す](https://aistudio.google.com/prompts/new_chat?model=lyria-3-pro-preview&hl=ja)
+[在 Google AI Studio 中试用](https://aistudio.google.com/prompts/new_chat?model=lyria-3-pro-preview&hl=zh-cn)
 
-## ドキュメント
+## 文档
 
-機能と機能の詳細については、[音楽生成](https://ai.google.dev/gemini-api/docs/music-generation?hl=ja)ガイドをご覧ください。
+如需全面了解功能和能力，请参阅[音乐生成](https://ai.google.dev/gemini-api/docs/music-generation?hl=zh-cn)指南。
 
 ## lyria-3-pro-preview
 
-| プロパティ | 説明 |
+| 属性 | 说明 |
 | --- | --- |
-| id\_cardモデルコード | `lyria-3-clip-preview` |
-| saveサポートされているデータ型 | **入力**  テキストと画像  **出力**  音声（MP3）、テキスト（歌詞） |
-| token\_autoトークン上限[[\*](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)] | **入力トークンの上限**  131,072 |
-| handyman機能 | **音声生成**  サポート対象  **Batch API**  サポート対象外  **キャッシュ保存**  サポート対象外  **コードの実行**  サポート対象外  **ファイル検索**  サポート対象外  **関数呼び出し**  サポート対象外  **Google マップによるグラウンディング**  サポート対象外  **画像生成**  サポート対象外  **Live API**  サポート対象外  **検索によるグラウンディング**  サポート対象外  **構造化出力**  サポート対象外  **思考モード**  サポート対象外  **URL コンテキスト**  サポート対象外 |
-| 123バージョン | 詳細については、[モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja#model-versions)をご覧ください。  - プレビュー: `lyria-3-clip-preview` - プレビュー: `lyria-3-pro-preview` |
-| calendar\_month最新の更新 | 2026 年 3 月 |
+| id\_card模型代码 | `lyria-3-clip-preview` |
+| save支持的数据类型 | **输入**  文本和图片  **输出**  音频 (MP3)、文本（歌词） |
+| token\_auto | **输入令牌限制**  131,072 |
+| handyman功能 | **音频生成**  支持  **批量 API**  不支持  **缓存**  不支持  **代码执行**  不支持  **文件搜索**  不支持  **函数调用**  不支持  **Grounding with Google Maps**  不支持  **图片生成**  不支持  **Live API**  不支持  **搜索接地**  不支持  **结构化输出**  不支持  **思考型**  不支持  **网址上下文**  不支持 |
+| 123版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 预览：`lyria-3-clip-preview` - 预览：`lyria-3-pro-preview` |
+| calendar\_month最新更新 | 2026 年 3 月 |
 
-フィードバックを送信
+发送反馈
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-最終更新日 2026-04-29 UTC。
+最后更新时间 (UTC)：2026-04-29。
 
-ご意見をお聞かせください
+需要向我们提供更多信息？
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]

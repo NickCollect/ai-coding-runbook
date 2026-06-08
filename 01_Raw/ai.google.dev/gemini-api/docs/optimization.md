@@ -1,89 +1,94 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/optimization?hl=tr
-fetched_at: 2026-06-01T05:59:32.132628+00:00
-title: "Gemini API optimizasyonu ve \u00e7\u0131kar\u0131m\u0131 \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/optimization?hl=pt-BR
+fetched_at: 2026-06-08T05:33:49.792492+00:00
+title: "Otimiza\u00e7\u00e3o e infer\u00eancia da API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Geri bildirim gönderin
+Envie comentários
 
-# Gemini API optimizasyonu ve çıkarımı
+# Otimização e inferência da API Gemini
 
-Gemini API, belirli iş yükü ihtiyaçlarınıza göre hız, maliyet ve güvenilirlik arasında denge kurmanıza yardımcı olacak çeşitli optimizasyon mekanizmaları sunar.
-İster gerçek zamanlı sohbet botları oluşturuyor ister yoğun çevrimdışı veri işleme işlem hatları çalıştırıyor olun, doğru paradigmayı seçmek maliyetleri önemli ölçüde azaltabilir veya performansı artırabilir.
+A API Gemini oferece vários mecanismos de otimização para ajudar você a equilibrar velocidade, custo e confiabilidade com base nas necessidades específicas da carga de trabalho.
+Se você estiver criando bots conversacionais em tempo real ou executando pipelines de processamento de dados off-line pesados, escolher o paradigma certo pode reduzir significativamente os custos ou aumentar a performance.
 
-| Özellik | Standart | Yaratıcılığınızı | Öncelik | Toplu | Önbelleğe alma |
+| Recurso | Padrão | Flex | Prioridade | Lote | Armazenamento em cache |
 | --- | --- | --- | --- | --- | --- |
-| **Fiyatlandırma** | Tam Fiyat | %50 indirim | Standarttan% 75 ila% 100 daha fazla | %50 indirim | %90 indirim + Kullanıma göre hesaplanan jeton depolama alanı |
-| **Gecikme** | Saniyelerden dakikalara | Dakikalar (1-15 dakika hedef) | Saniye | En fazla 24 saat | Daha hızlı ilk jeton süresi |
-| **Güvenilirlik** | Yüksek / Biraz yüksek | En iyi sonuç (Sheddable) | Yüksek (tüy dökmeyen) | Yüksek (işleme hızı için) | Yok |
-| **Arayüz** | Senkronize | Senkronize | Senkronize | Eşzamansız | Kaydedilmiş durum |
-| **En iyi kullanım alanı** | Genel uygulama iş akışları | Acil olmayan sıralı zincirler | Üretim, kullanıcıya yönelik uygulamalar | Büyük veri kümeleri, çevrimdışı değerlendirmeler | Aynı dosya üzerinde yinelenen sorgular |
+| **Preços** | Preço total | 50% de desconto | 75% a 100% a mais do que o padrão | 50% de desconto | 90% de desconto + armazenamento de tokens proporcional |
+| **Latência** | Segundos a minutos | Minutos (1 a 15 min de destino) | Segundos | Até 24 horas | Tempo até o primeiro token mais rápido |
+| **Confiabilidade** | Alta / média-alta | Melhor esforço (descartável) | Alta (não descartável) | Alta (para capacidade de processamento) | N/A |
+| **Interface** | Síncrona | Síncrona | Síncrona | Assíncrona | Estado salvo |
+| **Melhor caso de uso** | Fluxos de trabalho de aplicativos gerais | Cadeias sequenciais não urgentes | Apps de produção voltados ao usuário | Conjuntos de dados massivos, avaliações off-line | Consultas recorrentes no mesmo arquivo |
 
-## Çıkarım hizmeti katmanları (Eşzamanlı)
+## Níveis de serviço de inferência (síncrono)
 
-Standart oluşturma çağrılarınızda `service_tier` parametresini ileterek güvenilirlik için optimize edilmiş ve maliyet için optimize edilmiş senkron trafik arasında geçiş yapabilirsiniz.
+É possível alternar entre o tráfego síncrono otimizado para confiabilidade e o otimizado para custos transmitindo o parâmetro `service_tier` nas chamadas de geração padrão.
 
-### Standart çıkarım (varsayılan)
+### Inferência padrão (padrão)
 
-Standart katman, sıralı içerik oluşturma için varsayılan seçenektir.
-Ek primler veya yoğun kuyruklar olmadan normal yanıt süreleri sağlar.
+O nível padrão é a opção padrão para geração de conteúdo sequencial.
+Ele oferece tempos de resposta normais sem prêmios extras ou filas pesadas.
 
-- **Güvenilirlik:** Standart önem düzeyi
-- **Fiyat:** Standart fiyatlandırma.
-- **En uygun kullanım alanı:** En etkileşimli günlük uygulamalar.
+- **Confiabilidade**:criticidade padrão
+- **Preço**:preços padrão.
+- **Ideal para**:a maioria dos aplicativos interativos do dia a dia.
 
-### Öncelikli çıkarım (Gecikme için optimize edilmiş)
+### Inferência de prioridade (otimizada para latência)
 
-[Öncelikli](https://ai.google.dev/gemini-api/docs/priority-inference?hl=tr) işleme, isteklerinizi yüksek önem dereceli bilgi işlem kuyruklarına yönlendirir.
-Bu trafik kesinlikle öncelikli değildir (diğer katmanlar tarafından asla önceliklendirilmez) ve en yüksek güvenilirliği sunar. Dinamik öncelik sınırlarını aşarsanız sistem, isteği hatayla başarısız kılmak yerine sorunsuz bir şekilde standart işleme düşürür.
+[O processamento de](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pt-br)prioridade encaminha suas solicitações
+para filas de computação de alta criticidade.
+Esse tráfego é estritamente não descartável (nunca substituído por outros níveis) e oferece a maior confiabilidade. Se você exceder os limites de prioridade dinâmica, o sistema vai fazer o downgrade da solicitação para o processamento padrão em vez de falhar com um erro.
 
-- **Güvenilirlik:** En yüksek önem düzeyi
-- **Fiyat:** Standart ücretlerin% 75 ila% 100 üzerinde.
-- **En uygun kullanım alanları:** Müşteri sohbet botları, gerçek zamanlı sahtekarlık tespiti ve işletme açısından kritik öneme sahip yardımcılar.
+- **Confiabilidade**:maior criticidade
+- **Preço**:75% a 100% acima das taxas padrão.
+- **Ideal para**:chatbots de clientes, detecção de fraudes em tempo real e copilotos essenciais para os negócios.
 
-### Esnek çıkarım (maliyet açısından optimize edilmiş)
+### Inferência flexível (otimizada para custos)
 
-[Esnek çıkarım](https://ai.google.dev/gemini-api/docs/flex-inference?hl=tr), fırsatçı ve yoğun olmayan zamanlardaki işlem kapasitesini kullanarak standart ücretlere kıyasla% 50 indirim sunar. İstekler eşzamanlı olarak işlenir. Bu nedenle, toplu nesneleri yönetmek için kodu yeniden yazmanız gerekmez.
-Bu trafik "kaldırılabilir" bir trafik olduğundan, sistemde standart trafik artışları yaşanırsa istekler öncelikli olarak işlenebilir.
+[A inferência flexível](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pt-br) oferece um desconto de 50% em comparação com as taxas padrão, utilizando
+capacidade de computação oportunista fora do horário de pico. As solicitações são processadas de forma síncrona, o que significa que não é necessário reescrever o código para gerenciar objetos em lote.
+Como é um tráfego "descartável", as solicitações podem ser substituídas se o sistema tiver picos de tráfego padrão.
 
-- **Güvenilirlik:** Garanti edilmeyen, azaltılabilir önem düzeyi
-- **Fiyat:** Standart fiyatlandırmanın% 50'si (jeton başına faturalandırılır).
-- **En uygun olduğu durumlar:** N+1 çağrısının N çağrısının çıkışına, arka plandaki CRM güncellemelerine ve çevrimdışı değerlendirmelere bağlı olduğu çok adımlı aracı iş akışları.
+- **Confiabilidade**:criticidade não garantida e descartável
+- **Preço**:50% do preço padrão (cobrado por token).
+- **Ideal para**:fluxos de trabalho de agentes de várias etapas em que a chamada N+1 depende da saída da chamada N, atualizações de CRM em segundo plano e avaliações off-line.
 
-## Batch API (Toplu, eşzamansız)
+## API Batch (em massa, assíncrona)
 
-[Toplu İşlem API'si](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr), büyük hacimli istekleri standart maliyetin% 50'si karşılığında eşzamansız olarak işlemek için tasarlanmıştır. İstekleri satır içi sözlükler olarak veya JSONL giriş dosyası (en fazla 2 GB) kullanarak gönderebilirsiniz. İstekleri, 24 saatlik hedef yanıt süresiyle arka plan işleme hızına sahip kuyrukları kullanarak işler.
+[A API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br) foi projetada para processar grandes volumes
+de solicitações de forma assíncrona a
+50% do custo padrão. É possível enviar solicitações como dicionários inline ou usando um arquivo de entrada JSONL (até 2 GB). Ele processa solicitações usando filas de capacidade de processamento em segundo plano com um tempo de resposta de 24 horas.
 
-- **Güvenilirlik:** 24 saatlik otomatik yeniden deneme ve kuyruk sistemiyle birlikte, dökülebilir
-- **Fiyat:** Standart fiyatın% 50'si.
-- **En uygun olduğu durumlar:** Büyük veri kümelerini önceden işleme, düzenli regresyon test paketleri çalıştırma ve yüksek hacimli resim veya yerleştirme oluşturma.
+- **Confiabilidade**:descartável, mas com novas tentativas automatizadas de 24 horas e sistema de filas
+- **Preço**:50% do preço padrão.
+- **Ideal para**:pré-processamento de conjuntos de dados massivos, execução de conjuntos de testes de regressão periódicos e gerações de imagens ou incorporações de alto volume.
 
-## Bağlamı önbelleğe alma (giriş tasarrufu)
+## Armazenamento em cache de contexto (economia de entrada)
 
-[Bağlamı önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr), önemli bir ilk bağlama kısa isteklerle tekrar tekrar başvurulduğunda kullanılır.
+[O armazenamento em cache de contexto](https://ai.google.dev/gemini-api/docs/caching?hl=pt-br) é usado quando um contexto inicial substancial
+é referenciado repetidamente por solicitações mais curtas.
 
-- **Örtülü önbelleğe alma:** Gemini 2.5 ve daha yeni modellerde otomatik olarak etkinleştirilir.
-  İsteğiniz, yaygın istem ön eklerine dayalı olarak mevcut önbelleklerle eşleşirse sistem maliyet tasarruflarını aktarır.
-- **Açık Önbelleğe Alma:** Belirli bir geçerlilik süresine (TTL) sahip bir önbellek nesnesini manuel olarak oluşturabilirsiniz. Oluşturulduktan sonra, aynı gövde yükünün tekrar tekrar iletilmesini önlemek için sonraki isteklerde önbelleğe alınmış jetonlara başvurursunuz.
-- **Fiyat:** Önbellek jetonu sayısı ve depolama süresine (TTL) göre faturalandırılır.
-- **En İyi Kullanım Alanları:** Kapsamlı sistem talimatları içeren chatbot'lar, uzun video dosyalarının tekrarlanan analizi veya büyük doküman kümelerine yönelik sorgular.
+- **Armazenamento em cache implícito**:ativado automaticamente no Gemini 2.5 e em modelos mais recentes.
+  O sistema transmite economias de custos se a solicitação atingir caches atuais com base em prefixos de comandos comuns.
+- **Armazenamento em cache explícito**:é possível criar manualmente um objeto de cache com um tempo de vida (TTL) específico. Depois de criado, você se refere aos tokens armazenados em cache para solicitações subsequentes para evitar a transmissão repetida do mesmo payload do corpus.
+- **Preço**:cobrado com base na contagem de tokens de cache e na duração do armazenamento (TTL).
+- **Ideal para**:chatbots com instruções abrangentes do sistema, análise repetitiva de arquivos de vídeo longos ou consultas em grandes conjuntos de documentos.
 
-Geri bildirim gönderin
+Envie comentários
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Son güncelleme tarihi: 2026-04-29 UTC.
+Última atualização 2026-04-29 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Quer enviar seu feedback?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]

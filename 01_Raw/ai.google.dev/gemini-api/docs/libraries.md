@@ -1,56 +1,55 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/libraries?hl=id
-fetched_at: 2026-06-01T05:59:24.325386+00:00
-title: "Library Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/libraries?hl=ko
+fetched_at: 2026-06-08T05:38:25.908662+00:00
+title: "Gemini API \ub77c\uc774\ube0c\ub7ec\ub9ac \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Kirim masukan
+의견 보내기
 
-# Library Gemini API
+# Gemini API 라이브러리
 
-Saat membuat aplikasi dengan Gemini API, sebaiknya gunakan **Google GenAI SDK**.
-SDK ini adalah library resmi yang siap digunakan dalam produksi yang kami kembangkan dan kelola untuk bahasa yang paling populer. SDK ini tersedia secara [Umum](https://ai.google.dev/gemini-api/docs/libraries?hl=id#new-libraries) dan digunakan di semua
-dokumentasi dan contoh resmi kami.
+Gemini API로 빌드할 때는 **Google 생성형 AI SDK**를 사용하는 것이 좋습니다.
+프로덕션에 즉시 사용 가능한 공식 라이브러리인 Google 생성형 AI SDK는 가장 널리 사용되는 프로그래밍 언어용으로 개발 및 유지보수됩니다. [일반 제공](https://ai.google.dev/gemini-api/docs/libraries?hl=ko#new-libraries)되며 모든 공식 문서와 예시에 사용됩니다.
 
-Jika Anda baru menggunakan Gemini API, ikuti [panduan memulai cepat](https://ai.google.dev/gemini-api/docs/quickstart?hl=id) kami untuk memulai.
+Gemini API를 처음 사용하는 경우 [빠른 시작 가이드](https://ai.google.dev/gemini-api/docs/quickstart?hl=ko)에 따라 시작하세요.
 
-## Dukungan dan penginstalan bahasa
+## 언어 지원 및 설치
 
-Google GenAI SDK tersedia untuk bahasa Python, JavaScript/TypeScript, Go, dan Java. Anda dapat menginstal library setiap bahasa menggunakan pengelola paket, atau mengunjungi repositori GitHub-nya untuk berinteraksi lebih lanjut:
+Google GenAI SDK는 Python, JavaScript/TypeScript, Go, Java 언어로 제공됩니다. 패키지 관리자를 사용하여 각 언어의 라이브러리를 설치하거나 GitHub 저장소를 방문하여 자세히 알아볼 수 있습니다.
 
 ### Python
 
-- Library: [`google-genai`](https://pypi.org/project/google-genai)
-- Repositori GitHub: [googleapis/python-genai](https://github.com/googleapis/python-genai)
-- Penginstalan: `pip install google-genai`
+- 라이브러리: [`google-genai`](https://pypi.org/project/google-genai)
+- GitHub 저장소: [googleapis/python-genai](https://github.com/googleapis/python-genai)
+- 설치: `pip install google-genai`
 
-### JavaScript
+### 자바스크립트
 
-- Library: [`@google/genai`](https://www.npmjs.com/package/@google/genai)
-- Repositori GitHub: [googleapis/js-genai](https://github.com/googleapis/js-genai)
-- Penginstalan: `npm install @google/genai`
+- 라이브러리: [`@google/genai`](https://www.npmjs.com/package/@google/genai)
+- GitHub 저장소: [googleapis/js-genai](https://github.com/googleapis/js-genai)
+- 설치: `npm install @google/genai`
 
 ### Go
 
-- Library: [`google.golang.org/genai`](https://pkg.go.dev/google.golang.org/genai)
-- Repositori GitHub: [googleapis/go-genai](https://github.com/googleapis/go-genai)
-- Penginstalan: `go get google.golang.org/genai`
+- 라이브러리: [`google.golang.org/genai`](https://pkg.go.dev/google.golang.org/genai)
+- GitHub 저장소: [googleapis/go-genai](https://github.com/googleapis/go-genai)
+- 설치: `go get google.golang.org/genai`
 
-### Java
+### 자바
 
-- Library: `google-genai`
-- Repositori GitHub: [googleapis/java-genai](https://github.com/googleapis/java-genai)
-- Penginstalan: Jika Anda menggunakan Maven, tambahkan kode berikut ke dependensi Anda:
+- 라이브러리: `google-genai`
+- GitHub 저장소: [googleapis/java-genai](https://github.com/googleapis/java-genai)
+- 설치: Maven을 사용하는 경우 종속 항목에 다음을 추가합니다.
 
 ```
 <dependencies>
@@ -64,48 +63,43 @@ Google GenAI SDK tersedia untuk bahasa Python, JavaScript/TypeScript, Go, dan Ja
 
 ### C#
 
-- Library: `Google.GenAI`
-- Repositori GitHub: [googleapis/dotnet-genai](https://googleapis.github.io/dotnet-genai/)
-- Penginstalan: `dotnet add package Google.GenAI`
+- 라이브러리: `Google.GenAI`
+- GitHub 저장소: [googleapis/dotnet-genai](https://googleapis.github.io/dotnet-genai/)
+- 설치: `dotnet add package Google.GenAI`
 
-## Ketersediaan umum
+## 정식 버전
 
-Mulai Mei 2025, Google GenAI SDK telah mencapai Ketersediaan Umum (GA) di semua platform yang didukung dan merupakan library yang direkomendasikan untuk mengakses Gemini API.
-Library ini stabil, didukung sepenuhnya untuk penggunaan produksi, dan dikelola secara aktif.
-Library ini menyediakan akses ke fitur terbaru, dan menawarkan performa terbaik saat bekerja dengan Gemini.
+2025년 5월 현재 Google GenAI SDK는 지원되는 모든 플랫폼에서 정식 버전 (GA)에 도달했으며 Gemini API에 액세스하는 데 권장되는 라이브러리입니다.
+안정적이고 프로덕션 용도로 완전히 지원되며 적극적으로 유지 관리됩니다.
+최신 기능에 액세스할 수 있으며 Gemini와 함께 작동할 때 최고의 성능을 제공합니다.
 
-Jika Anda menggunakan salah satu library lama kami, sebaiknya bermigrasi agar dapat mengakses fitur terbaru dan mendapatkan performa terbaik saat bekerja dengan Gemini. Tinjau bagian [library lama](https://ai.google.dev/gemini-api/docs/libraries?hl=id#previous-sdks) untuk mengetahui informasi selengkapnya.
+기존 라이브러리 중 하나를 사용하는 경우 Gemini를 사용하여 최신 기능에 액세스하고 최상의 성능을 얻을 수 있도록 마이그레이션하는 것이 좋습니다. 자세한 내용은 [기존 라이브러리](https://ai.google.dev/gemini-api/docs/libraries?hl=ko#previous-sdks) 섹션을 참고하세요.
 
-## Library lama dan migrasi
+## 기존 라이브러리 및 이전
 
-Jika Anda menggunakan salah satu library lama kami, sebaiknya
-[bermigrasi ke library baru](https://ai.google.dev/gemini-api/docs/migrate?hl=id).
+기존 라이브러리 중 하나를 사용하는 경우 [새 라이브러리로 마이그레이션](https://ai.google.dev/gemini-api/docs/migrate?hl=ko)하는 것이 좋습니다.
 
-Library lama tidak memberikan akses ke fitur terbaru (seperti
-[Live API](https://ai.google.dev/gemini-api/docs/live?hl=id) dan [Veo](https://ai.google.dev/gemini-api/docs/video?hl=id)) dan
-tidak digunakan lagi mulai 30 November 2025.
+기존 라이브러리는 최신 기능 (예: [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ko) 및 [Veo](https://ai.google.dev/gemini-api/docs/video?hl=ko))에 대한 액세스를 제공하지 않으며 2025년 11월 30일부로 지원 중단됩니다.
 
-Status dukungan setiap library lama bervariasi, yang dijelaskan dalam tabel berikut:
+각 기존 라이브러리의 지원 상태는 다음 표에 자세히 설명되어 있습니다.
 
-| Bahasa | Library lama | Status dukungan | Library yang direkomendasikan |
+| 언어 | 기존 라이브러리 | 지원 상태 | 권장 라이브러리 |
 | --- | --- | --- | --- |
-| **Python** | `google-generativeai` | Tidak dikelola secara aktif | `google-genai` |
-| **JavaScript/TypeScript** | `@google/generativeai` | Tidak dikelola secara aktif | `@google/genai` |
-| **Go** | `google.golang.org/generative-ai` | Tidak dikelola secara aktif | `google.golang.org/genai` |
-| **Dart dan Flutter** | `google_generative_ai` | Tidak dikelola secara aktif | Gunakan [Genkit Dart](https://genkit.dev/docs/dart/get-started/) atau [Firebase AI Logic](https://pub.dev/packages/firebase_ai) |
-| **Swift** | `generative-ai-swift` | Tidak dikelola secara aktif | Gunakan [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=id) |
-| **Android** | `generative-ai-android` | Tidak dikelola secara aktif | Gunakan [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=id) |
+| **Python** | `google-generativeai` | 활성 상태로 유지되지 않음 | `google-genai` |
+| **JavaScript/TypeScript** | `@google/generativeai` | 활성 상태로 유지되지 않음 | `@google/genai` |
+| **Go** | `google.golang.org/generative-ai` | 활발하게 유지되지 않음 | `google.golang.org/genai` |
+| **Dart 및 Flutter** | `google_generative_ai` | 활발하게 유지되지 않음 | [Genkit Dart](https://genkit.dev/docs/dart/get-started/) 또는 [Firebase AI Logic](https://pub.dev/packages/firebase_ai) 사용 |
+| **Swift** | `generative-ai-swift` | 활성 상태로 유지되지 않음 | [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=ko) 사용 |
+| **Android** | `generative-ai-android` | 활발하게 유지되지 않음 | [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=ko) 사용 |
 
-**Catatan untuk developer Java:** Tidak ada Java SDK lama yang disediakan Google untuk Gemini API, sehingga tidak diperlukan migrasi dari library Google sebelumnya. Anda
-dapat langsung memulai dengan library baru di bagian
-[Dukungan dan penginstalan bahasa](#install).
+**Java 개발자 참고:** Gemini API용 기존 Google 제공 Java SDK가 없으므로 이전 Google 라이브러리에서 이전할 필요가 없습니다. [언어 지원 및 설치](#install) 섹션에서 새 라이브러리를 바로 시작할 수 있습니다.
 
-Kirim masukan
+의견 보내기
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Terakhir diperbarui pada 2026-05-28 UTC.
+최종 업데이트: 2026-05-28(UTC)
 
-Ada masukan untuk kami?
+의견을 전달하고 싶나요?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-05-28 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-05-28(UTC)"],[],[]]

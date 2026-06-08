@@ -1,45 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=ar
-fetched_at: 2026-06-01T06:01:47.712660+00:00
-title: "\u0648\u0627\u062c\u0647\u0629 \u0628\u0631\u0645\u062c\u0629 \u0627\u0644\u062a\u0637\u0628\u064a\u0642\u0627\u062a Interactions API: \u062f\u0644\u064a\u0644 \u0646\u0642\u0644 \u0627\u0644\u062a\u063a\u064a\u064a\u0631\u0627\u062a \u063a\u064a\u0631 \u0627\u0644\u0645\u062a\u0648\u0627\u0641\u0642\u0629 (\u0645\u0627\u064a\u0648 2026) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=zh-TW
+fetched_at: 2026-06-08T05:30:10.773024+00:00
+title: "Interactions API\uff1a\u91cd\u5927\u8b8a\u66f4\u9077\u79fb\u6307\u5357 (2026 \u5e74 5 \u6708) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-إرسال ملاحظات
+提供意見
 
-# واجهة برمجة التطبيقات Interactions API: دليل نقل التغييرات غير المتوافقة (مايو 2026)
+# Interactions API：重大變更遷移指南 (2026 年 5 月)
 
-تُجري واجهة برمجة التطبيقات `v1beta` من Interactions API تغييرات غير متوافقة مع الإصدارات السابقة تعيد هيكلة شكل واجهة برمجة التطبيقات لدعم الإمكانات المستقبلية، مثل التوجيه أثناء الرحلة واستدعاءات الأدوات غير المتزامنة. توضّح هذه الصفحة التغييرات التي يتم إجراؤها وتقدّم أمثلة على الرموز البرمجية قبل وبعد التغيير لمساعدتك في نقل البيانات. هناك فئتان من التغييرات:
+`v1beta` Interactions API 導入破壞性變更，重新架構 API 形狀，以支援飛行中導引和非同步工具呼叫等未來能力。本頁說明異動內容，並提供異動前後的程式碼範例，協助您完成遷移。變更分為兩類：
 
-1. [**مخطط الخطوات**](#steps-schema): تحلّ مصفوفة `steps` جديدة محلّ مصفوفة
-   `outputs`، ما يوفّر مخططًا زمنيًا منظّمًا لكل دورة تفاعل.
-2. [**إعداد تنسيق الإخراج**](#output-format-config): يوحّد متعدد الأشكال الجديد
-   `response_format` جميع عناصر التحكّم في تنسيق الإخراج ويزيل
-   `response_mime_type`.
+1. [**步驟結構定義**](#steps-schema)：新的 `steps` 陣列會取代 `outputs` 陣列，提供每個互動回合的結構化時間軸。
+2. [**輸出格式設定**](#output-format-config)：新的多型 `response_format` 會整合所有輸出格式控制項，並移除 `response_mime_type`。
 
-اتّبِع الخطوات الواردة في [كيفية نقل البيانات إلى المخطط الجديد](#how-to-migrate) لتعديل عملية التكامل.
+請按照「[如何遷移至新版結構定義](#how-to-migrate)」一文中的步驟，更新整合服務。
 
-## التغيير الأساسي: من `outputs` إلى `steps`
+## 核心異動：`outputs` 改為 `steps`
 
-يستبدل المخطط الجديد مصفوفة `outputs` بمصفوفة `steps`.
+新結構定義會將 `outputs` 陣列替換為 `steps` 陣列。
 
-- **الإصدار القديم**: كانت الردود تعرض مصفوفة `outputs` مسطّحة لا تحتوي إلا على المحتوى الذي تم إنشاؤه بواسطة النموذج.
-- **المخطط الجديد**: تعرض الردود مصفوفة `steps` تحتوي على خطوات منظّمة مع مميّزات النوع.
+- **舊版**：回覆會傳回平面 `outputs` 陣列，只包含模型生成的內容。
+- **新結構定義**：回覆會傳回 `steps` 陣列，其中包含具有型別鑑別器的結構化步驟。
 
-لا يعرض `POST /interactions` سوى خطوات الإخراج. يعرض `GET /interactions/{id}` المخطط الزمني الكامل للخطوات، بما في ذلك خطوة `user_input` الأولية.
+`POST /interactions` 只會傳回輸出步驟。`GET /interactions/{id}`
+會傳回完整步驟時間軸，包括初始 `user_input` 步驟。
 
-### الإدخال/الإخراج الأساسي (أحادي)
+### 基本輸入/輸出 (一元)
 
-#### قبل (الإصدار القديم)
+#### 之前 (舊版)
 
 ### Python
 
@@ -66,7 +64,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.outputs[-1].text);
 ```
 
-### راحة
+### REST
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
@@ -91,7 +89,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### بعد (المخطط الجديد)
+#### 之後 (新結構定義)
 
 ### Python
 
@@ -118,9 +116,9 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-[sdk-convenience]: /gemini-api/docs/interactions#convenience-properties
+[sdk-convenience]：/gemini-api/docs/interactions#convenience-properties
 
-### راحة
+### REST
 
 ```
 # Opt-in needed before May 26th
@@ -173,11 +171,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### استدعاء الدالة
+### 函式呼叫
 
-يبقى هيكل الطلب بدون تغيير، ولكن يستبدل الردّ محتوى `outputs` المسطّح بخطوات منظّمة.
+要求結構維持不變，但回應會以結構化步驟取代平面 `outputs` 內容。
 
-#### قبل (الإصدار القديم)
+#### 之前 (舊版)
 
 ### Python
 
@@ -199,7 +197,7 @@ for (const output of interaction.outputs) {
 }
 ```
 
-### راحة
+### REST
 
 ```
 // Response
@@ -222,7 +220,7 @@ for (const output of interaction.outputs) {
 }
 ```
 
-#### بعد (المخطط الجديد)
+#### 之後 (新結構定義)
 
 ### Python
 
@@ -244,7 +242,7 @@ for (const step of interaction.steps) {
 }
 ```
 
-### راحة
+### REST
 
 ```
 // POST Response
@@ -270,11 +268,11 @@ for (const step of interaction.steps) {
 }
 ```
 
-### أدوات من جهة الخادم
+### 伺服器端工具
 
-تنتج الأدوات من جهة الخادم (مثل "بحث Google" أو "تنفيذ الرموز البرمجية") الآن أنواعًا معيّنة من الخطوات في مصفوفة `steps`. في حين أنّ المخطط القديم كان يعرض هذه العمليات كأنواع محتوى معيّنة ضِمن مصفوفة `outputs`، ينقلها المخطط الجديد إلى مصفوفة `steps`. تستخدم الأمثلة التالية "بحث Google".
+伺服器端工具 (例如 Google 搜尋或程式碼執行) 現在會在 `steps` 陣列中產生特定步驟類型。舊版架構會在 `outputs` 陣列中將這些作業傳回為特定內容類型，新版架構則會將這些作業移至 `steps` 陣列。下列範例使用 Google 搜尋。
 
-#### قبل (الإصدار القديم)
+#### 之前 (舊版)
 
 ### Python
 
@@ -300,7 +298,7 @@ for (const output of interaction.outputs) {
 }
 ```
 
-### راحة
+### REST
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
@@ -348,7 +346,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### بعد (المخطط الجديد)
+#### 之後 (新結構定義)
 
 ### Python
 
@@ -374,7 +372,7 @@ for (const step of interaction.steps) {
 }
 ```
 
-### راحة
+### REST
 
 ```
 # Opt-in needed before May 26th
@@ -432,11 +430,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### البث
+### 串流
 
-يكشف البث عن أنواع أحداث جديدة:
+串流會公開新的事件類型：
 
-#### أنواع الأحداث الجديدة
+#### 新事件類型
 
 - `interaction.created`
 - `interaction.completed`
@@ -446,25 +444,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 - `step.delta`
 - `step.stop`
 
-#### أنواع الأحداث التي تم إيقافها
+#### 已淘汰的事件類型
 
-تم استبدال أنواع الأحداث القديمة التالية بالأحداث الجديدة المذكورة أعلاه:
+上述新事件會取代下列舊版事件類型：
 
-- `interaction.start` ← `interaction.created`
-- `content.start` ← `step.start`
-- `content.delta` ← `step.delta`
-- `content.stop` ← `step.stop`
-- `interaction.complete` ← `interaction.completed`
-- `interaction.status_update` ← تم استبدالها بـ `interaction.in_progress` و`interaction.requires_action` وما إلى ذلك
+- `interaction.start` → `interaction.created`
+- `content.start` → `step.start`
+- `content.delta` → `step.delta`
+- `content.stop` → `step.stop`
+- `interaction.complete` → `interaction.completed`
+- `interaction.status_update` → 取代為 `interaction.in_progress`、`interaction.requires_action` 等。
 
-**استدعاءات الدوال في البث**: عند استخدام البث مع استدعاء الدوال،
-يقدّم الحدث `step.start` اسم الدالة، وتعمل أحداث `step.delta` على
-بثّ الوسيطات كسلاسل JSON جزئية (باستخدام `arguments_delta`). يجب
-تجميع هذه التغييرات الجزئية للحصول على الوسيطات الكاملة. يختلف ذلك عن الاستدعاءات الأحادية التي تتلقّى فيها كائن استدعاء الدالة الكامل مرة واحدة.
+**串流函式呼叫**：使用串流函式呼叫時，`step.start` 事件會傳送函式名稱，而 `step.delta` 事件會將引數串流為部分 JSON 字串 (使用 `arguments_delta`)。您必須累計這些差異，才能取得完整引數。這與一元呼叫不同，因為您會一次收到完整的函式呼叫物件。
 
-#### أمثلة
+#### 範例
 
-##### قبل (الإصدار القديم)
+##### 之前 (舊版)
 
 ### Python
 
@@ -501,7 +496,7 @@ for await (const chunk of stream) {
 }
 ```
 
-### راحة
+### REST
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
@@ -531,7 +526,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 // data: {"id": "int_123", "status": "done", "usage": {"total_tokens": 42}}
 ```
 
-##### بعد (المخطط الجديد)
+##### 之後 (新結構定義)
 
 ### Python
 
@@ -566,7 +561,7 @@ for await (const event of stream) {
 }
 ```
 
-### راحة
+### REST
 
 ```
  # Opt-in needed before May 26th
@@ -608,30 +603,29 @@ for await (const event of stream) {
  // data: {"type": "interaction.completed", "interaction": {"id": "int_xyz", "status": "completed", "usage": {"prompt_tokens": 10, "completion_tokens": 5, "total_tokens": 15}}} // NEW: Dedicated completion event
 ```
 
-### سجلّ المحادثات بدون حالة
+### 無狀態對話記錄
 
-إذا كنت تدير سجلّ المحادثات يدويًا على جانب العميل (حالة استخدام بدون حالة)، عليك تعديل طريقة ربط الأدوار السابقة.
+如果您在用戶端手動管理對話記錄 (無狀態用途)，就必須更新先前回合的串連方式。
 
-- **الإصدار القديم**: غالبًا ما كان المطوّرون يجمعون مصفوفة `outputs` من الردود ويعيدون إرسالها في حقل `input` في الدور التالي.
-- **المخطط الجديد**: عليك الآن جمع مصفوفة `steps` من الردّ وتمريرها في حقل `input` للطلب التالي، مع إلحاق دور المستخدم الجديد كخطوة `user_input`.
+- **舊版**：開發人員通常會從回覆中收集 `outputs` 陣列，並在下一個回合中將其傳回 `input` 欄位。
+- **新架構**：現在您應該從回應中收集 `steps` 陣列，並將其傳遞至下一個要求的 `input` 欄位，將新的使用者輪流轉移附加為 `user_input` 步驟。
 
-## إعداد تنسيق الإخراج: تغييرات `response_format`
+## 輸出格式設定：`response_format` 變更
 
-يوحّد الإصدار المعدَّل من واجهة برمجة التطبيقات جميع عناصر التحكّم في تنسيق الإخراج في حقل `response_format` موحّد ومتعدد الأشكال. يؤدي ذلك إلى مركزة إعدادات الإخراج على المستوى الأعلى ويحافظ على تركيز `generation_config` على سلوك النموذج (مثل درجة العشوائية وأعلى احتمال تراكمي والتفكير).
+更新後的 API 會將所有輸出格式控制項整合為統一的多型 `response_format` 欄位。這項做法可集中管理頂層的輸出設定，並讓 `generation_config` 專注於模型行為 (例如溫度參數、Top-P 和思考)。
 
-### أهم التغييرات
+### 主要異動
 
-- **تزيل واجهة برمجة التطبيقات `response_mime_type`.** عليك الآن تحديد نوع MIME لكل إدخال تنسيق ضِمن `response_format`.
-- **أصبح `response_format` الآن كائنًا (أو مصفوفة) متعدد الأشكال.** يحتوي كل إدخال على مميّز `type` (`text` أو `audio` أو `image`) وحقول خاصة بالنوع. لطلب وسائط إخراج متعددة، مرِّر مصفوفة من إدخالات التنسيق.
-- **تنتقل `image_config` من `generation_config` إلى `response_format`.**
-  عليك الآن تحديد إعدادات إخراج الصور، مثل `aspect_ratio` و`image_size`
-  في إدخال `response_format` مع `"type": "image"`.
+- **API 會移除 `response_mime_type`。**現在，您可以在 `response_format` 內為每個格式項目指定 MIME 類型。
+- **`response_format` 現在是多型物件 (或陣列)。**每個項目都有 `type` 鑑別器 (`text`、`audio`、`image`) 和類型專屬欄位。如要要求多種輸出模態，請傳遞格式項目的陣列。
+- **`image_config`已從「`generation_config`」移至「`response_format`」。**
+  現在，您可以在 `response_format` 項目中指定圖片輸出設定，例如 `aspect_ratio` 和 `image_size`，並使用 `"type": "image"`。
 
-### ناتج منظَّم (JSON)
+### 結構化輸出內容 (JSON)
 
-يزيل المخطط الجديد حقل `response_mime_type`. بدلاً من ذلك، حدِّد نوع MIME ومخطط JSON ضِمن كائن `response_format` مع `"type": "text"`.
+新結構定義會移除 `response_mime_type` 欄位。請改為在 `response_format` 物件中指定 MIME 類型和 JSON 結構定義，並使用 `"type": "text"`。
 
-#### قبل (الإصدار القديم)
+#### 之前 (舊版)
 
 ### Python
 
@@ -669,7 +663,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.outputs[-1].text);
 ```
 
-### راحة
+### REST
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
@@ -687,7 +681,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### بعد (المخطط الجديد)
+#### 之後 (新結構定義)
 
 ### Python
 
@@ -735,7 +729,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### راحة
+### REST
 
 ```
 # Opt-in needed before May 26th
@@ -758,12 +752,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-### إعدادات الصور
+### 圖片設定
 
-يزيل المخطط الجديد `image_config` من `generation_config`. عليك الآن تحديد
-إعدادات إخراج الصور في إدخال `response_format` مع `"type": "image"`.
+新結構定義會從 `generation_config` 中移除 `image_config`。您現在可以在 `"type": "image"` 的 `response_format` 項目中指定圖片輸出設定。
 
-#### قبل (الإصدار القديم)
+#### 之前 (舊版)
 
 ### Python
 
@@ -795,7 +788,7 @@ const interaction = await client.interactions.create({
 });
 ```
 
-### راحة
+### REST
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
@@ -812,7 +805,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### بعد (المخطط الجديد)
+#### 之後 (新結構定義)
 
 ### Python
 
@@ -846,7 +839,7 @@ const interaction = await client.interactions.create({
 });
 ```
 
-### راحة
+### REST
 
 ```
 # Opt-in needed before May 26th
@@ -865,52 +858,50 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-لطلب وسائط إخراج متعددة (على سبيل المثال، النص والصوت معًا)، مرِّر مصفوفة من إدخالات التنسيق إلى `response_format` بدلاً من كائن واحد.
+如要要求多種輸出模態 (例如同時輸出文字和音訊)，請將格式項目陣列傳遞至 `response_format`，而非單一物件。
 
-## كيفية نقل البيانات إلى المخطط الجديد
+## 如何遷移至新結構定義
 
-### مستخدِمو حزمة تطوير البرامج (SDK)
+### SDK 使用者
 
-رقِّ إلى أحدث إصدار من حزمة تطوير البرامج (SDK) (‫Python ≥2.0.0 وJavaScript ≥2.0.0). تختار حزمة تطوير البرامج (SDK) تلقائيًا المخطط الجديد، ولا تحتاج إلى إجراء أي تغييرات على الرمز البرمجي بخلاف تعديل طريقة قراءة الردود (راجِع الأمثلة أعلاه). يُرجى العِلم أنّه لا يتم دعم سوى المخطط الجديد في إصدارات حزمة تطوير البرامج (SDK) هذه. ستستمر إصدارات حزمة تطوير البرامج (SDK) الأقدم (‫Python 1.x.x وJavaScript 1.x.x) في العمل إلى أن تتم إزالة المخطط القديم في **8 يونيو 2026**.
+升級至最新版 SDK (Python ≥2.0.0、JavaScript ≥2.0.0)。SDK 會自動選擇採用新架構，您只需要更新讀取回應的方式 (請參閱上方的範例)，不必變更任何程式碼。請注意，這些 SDK 版本僅支援新結構定義。在 2026 年 6 月 8 日移除舊版結構定義前，舊版 SDK (Python 1.x.x、JavaScript 1.x.x) 仍可繼續運作。
 
-### مستخدِمو REST API
+### REST API 使用者
 
-أضِف العنوان `Api-Revision: 2026-05-20` إلى طلباتك للاشتراك في المخطط الجديد الآن. بعد **26 مايو** ، سيصبح المخطط الجديد هو المخطط التلقائي لجميع
-الطلبات. يمكنك إيقاف الاشتراك مؤقتًا باستخدام `Api-Revision: 2026-05-07`
-حتى **8 يونيو**، عندما تزيل واجهة برمجة التطبيقات المخطط القديم نهائيًا.
+在要求中加入 `Api-Revision: 2026-05-20` 標頭，即可立即採用新結構定義。**5 月 26 日**後，所有要求都會預設使用新結構定義。您可以使用 `Api-Revision: 2026-05-07` 暫時停用，但 **6 月 8 日**後，API 就會永久移除舊版結構定義。
 
-### المخطط الزمني
+### 時間軸
 
-| التاريخ | المرحلة | مستخدِمو حزمة تطوير البرامج (SDK) | مستخدِمو REST API |
+| 日期 | 階段 | SDK 使用者 | REST API 使用者 |
 | --- | --- | --- | --- |
-| ‫**7 مايو** | اشتراك | يتوفّر إصدار جديد من حزمة تطوير البرامج (SDK) (‫Python ≥2.0.0 وJS ≥2.0.0). رقِّ للحصول على المخطط الجديد تلقائيًا. | أضِف العنوان `Api-Revision: 2026-05-20` للاشتراك. يبقى المخطط القديم هو المخطط التلقائي. |
-| ‫**26 مايو** | قلب تلقائي | ليس عليك اتّخاذ أي إجراء إذا كنت قد رقّيت بالفعل. تستمر حزم تطوير البرامج (SDK) الأقدم (‫Python 1.x.x وJS 1.x.x) في العمل، ولكنها تعرض الردود القديمة. | أصبح المخطط الجديد هو المخطط التلقائي الآن. أرسِل العنوان `Api-Revision: 2026-05-07` لإيقاف الاشتراك. |
-| ‫**8 يونيو** | الغروب | ستتوقف إصدارات حزمة تطوير البرامج (SDK) ‫Python 1.x.x وJS 1.x.x عن العمل لاستدعاءات Interactions API. | تمت إزالة المخطط القديم من Interactions API. تم تجاهل العنوان `Api-Revision`. |
+| **5 月 7 日** | 啟用 | 推出新版 SDK (Python ≥2.0.0、JS ≥2.0.0)。升級即可自動取得新結構定義。 | 新增 `Api-Revision: 2026-05-20` 標頭即可選擇加入。預設值仍為舊版。 |
+| **5 月 26 日** | 預設翻轉 | 如果已升級，則無須採取任何行動。舊版 SDK (Python 1.x.x、JS 1.x.x) 仍可運作，但會傳回舊版的回覆。 | 新結構定義現在為預設值。傳送 `Api-Revision: 2026-05-07` 標頭即可停用。 |
+| **6 月 8 日** | 日落 | Python 1.x.x 和 JS 1.x.x SDK 版本會中斷 Interactions API 呼叫。 | 已移除 Interactions API 的舊版結構定義。系統會忽略 `Api-Revision` 標頭。 |
 
-## قائمة التحقق من الترحيل
+## 遷移檢查清單
 
-### مخطط الخطوات (`steps`)
+### 步驟結構定義 (`steps`)
 
-- عدِّل الرمز البرمجي لقراءة محتوى الردّ من مصفوفة `steps` بدلاً من `outputs`. [راجِع الأمثلة](#basic-unary).
-- تأكَّد من أنّ الرمز البرمجي يعالج نوعَي الخطوات `user_input` و`model_output`. [راجِع الأمثلة](#basic-unary).
-- (استدعاء الدالة) عدِّل الرمز البرمجي للعثور على خطوات `function_call` في مصفوفة `steps`. [راجِع الأمثلة](#function-calling).
-- (أدوات من جهة الخادم) عدِّل الرمز البرمجي لمعالجة الخطوات الخاصة بالأداة (مثل `google_search_call` و`google_search_result`). [راجِع الأمثلة](#server-side-tools).
-- (السجلّ بدون حالة) عدِّل إدارة السجلّ لتمرير مصفوفة `steps` في حقل `input` للطلب التالي. [راجِع التفاصيل](#stateless-history).
-- (البث فقط) عدِّل العميل للاستماع إلى أنواع أحداث SSE الجديدة (`interaction.created` و`step.delta` وما إلى ذلك). [راجِع الأمثلة](#streaming).
+- 更新程式碼，從 `steps` 陣列而非 `outputs` 讀取回應內容。[查看範例](#basic-unary)。
+- 確認程式碼可處理 `user_input` 和 `model_output` 步驟類型。[查看範例](#basic-unary)。
+- (函式呼叫) 更新程式碼，在 `steps` 陣列中找出 `function_call` 步驟。[查看範例](#function-calling)。
+- (伺服器端工具) 更新程式碼，處理工具專屬步驟 (例如 `google_search_call`、`google_search_result`)。[查看範例](#server-side-tools)。
+- (無狀態記錄) 更新記錄管理，在下一個要求的 `input` 欄位中傳遞 `steps` 陣列。[查看詳細資料](#stateless-history)。
+- (僅限串流) 更新用戶端，監聽新的 SSE 事件類型 (`interaction.created`、`step.delta` 等)。[查看範例](#streaming)。
 
-### إعداد تنسيق الإخراج (`response_format`)
+### 輸出格式設定 (`response_format`)
 
-- استبدِل `response_mime_type` بحقل `mime_type` ضِمن `response_format`. [راجِع الأمثلة](#structured-output).
-- غلِّف مخطط JSON الحالي لـ `response_format` ضِمن كائن `{"type": "text", "schema": ...}`. [راجِع الأمثلة](#structured-output).
-- (إنشاء الصور) انقل `image_config` من `generation_config` إلى إدخال `{"type": "image", ...}` في `response_format`. [راجِع الأمثلة](#image-config).
-- (متعدد الوسائط) حوِّل `response_format` من كائن واحد إلى مصفوفة عند طلب وسائط إخراج متعددة.
+- 將 `response_format` 內的 `mime_type` 欄位替換為 `response_mime_type`。[查看範例](#structured-output)。
+- 將現有的 `response_format` JSON 結構定義包裝在 `{"type": "text", "schema": ...}` 物件中。[查看範例](#structured-output)。
+- (圖像生成) 將 `image_config` 從 `generation_config` 移至 `response_format` 中的 `{"type": "image", ...}` 項目。[查看範例](#image-config)。
+- (多模態) 要求多個輸出模態時，請將 `response_format` 從單一物件轉換為陣列。
 
-إرسال ملاحظات
+提供意見
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-تاريخ التعديل الأخير: 2026-05-19 (حسب التوقيت العالمي المتفَّق عليه)
+上次更新時間：2026-06-01 (世界標準時間)。
 
-هل تريد مشاركة ملاحظاتك معنا؟
+想進一步說明嗎？
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-19 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-01 (世界標準時間)。"],[],[]]

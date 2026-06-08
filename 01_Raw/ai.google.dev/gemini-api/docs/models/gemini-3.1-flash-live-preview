@@ -1,79 +1,82 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=pt-BR
-fetched_at: 2026-06-01T06:08:43.879230+00:00
-title: "Pr\u00e9via din\u00e2mica do Gemini 3.1 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=fr
+fetched_at: 2026-06-08T05:27:44.723987+00:00
+title: "Aper\u00e7u en direct de Gemini\u00a03.1 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Envie comentários
+Envoyer des commentaires
 
-# Prévia dinâmica do Gemini 3.1 Flash
+# Aperçu en direct de Gemini 3.1 Flash
 
-A prévia do Gemini 3.1 Flash Live é nosso modelo de baixa latência, áudio para áudio, otimizado para diálogo em tempo real e aplicativos de IA que priorizam a voz com detecção de nuances acústicas, precisão numérica e reconhecimento multimodal.
+Gemini 3.1 Flash Live Preview est notre modèle audio-audio à faible latence, optimisé pour les dialogues en temps réel et les applications d'IA vocales avec détection des nuances acoustiques, précision numérique et conscience multimodale.
 
-[Testar no Google AI Studio](https://aistudio.google.com/live?model=gemini-3.1-flash-live-preview&hl=pt-br)
+[Essayer dans Google AI Studio](https://aistudio.google.com/live?model=gemini-3.1-flash-live-preview&hl=fr)
 
-## Documentação
+## Documentation
 
-Acesse o guia da [API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=pt-br) para conferir a cobertura completa
-de recursos e funcionalidades.
+Consultez le guide de l'[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=fr) pour obtenir une couverture complète
+des fonctionnalités.
 
 ## gemini-3.1-flash-live-preview
 
-| Propriedade | Descrição |
+| Propriété | Description |
 | --- | --- |
-| Código do modelo id\_card | `gemini-3.1-flash-live-preview` |
-| saveTipos de dados aceitos | **Entradas** (link em inglês)  Texto, imagens, áudio, vídeo  **Saída**  Texto e áudio |
-| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de tokens de entrada**  131.072  **Limite de token de saída**  65.536 |
-| handymanRecursos | **Geração de áudio**  Compatível  **API Batch**  incompatível  **Armazenamento em cache**  incompatível  **Execução de código**  incompatível  **Pesquisa de arquivos**  Não aceito  **Chamadas de função**  Compatível  **Embasamento com o Google Maps**  incompatível  **Geração de imagens**  incompatível  **API Live**  Compatível  **Embasamento da pesquisa**  Compatível  **Saídas estruturadas**  incompatível  **Raciocínio**  Compatível  **Contexto do URL**  incompatível |
-| Versões do 123 | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Visualização: `gemini-3.1-flash-live-preview` |
-| calendar\_monthÚltima atualização | Março de 2026 |
-| cognition\_2Limite de conhecimento | Janeiro de 2025 |
+| id\_cardCode du modèle | `gemini-3.1-flash-live-preview` |
+| saveTypes de données acceptés | **Entrées**  Texte, images, audio, vidéo  **Résultat**  Texte et audio |
+| token\_auto[Limites de jetons[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  131 072  **Limite de jetons de sortie**  65 536 |
+| handymanFonctionnalités | **Génération audio**  Compatible  **API par lot**  Non compatible  **Mise en cache**  Non compatible  **Exécution de code**  Non compatible  **Recherche de fichiers**  Non compatible  **Appel de fonction**  Compatible  **Ancrage avec Google Maps**  Non compatible  **Génération d'images**  Non compatible  **API Live**  Compatible  **Ancrage de recherche**  Compatible  **Sorties structurées**  Non compatible  **Raisonnement**  Compatible  **Contexte d'URL**  Non compatible |
+| 123Versions | Pour en savoir plus, consultez la section [Schémas de version de modèle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - Aperçu : `gemini-3.1-flash-live-preview` |
+| calendar\_monthDernière mise à jour | Mars 2026 |
+| cognition\_2Date limite des connaissances (ou "knowledge cutoff") | Janvier 2025 |
 
-## Migrar do Gemini 2.5 Flash Live
+## Migrer depuis Gemini 2.5 Flash Live
 
-O pré-lançamento do Gemini 3.1 Flash Live é otimizado para diálogo em tempo real e baixa latência.
-Ao migrar do `gemini-2.5-flash-native-audio-preview-12-2025`, considere o seguinte:
+Gemini 3.1 Flash Live Preview est optimisé pour les dialogues en temps réel à faible latence.
+Lorsque vous migrez depuis `gemini-2.5-flash-native-audio-preview-12-2025`, tenez compte des points suivants :
 
-- **String do modelo**: atualize a string do modelo de
-  `gemini-2.5-flash-native-audio-preview-12-2025` para
+- **Chaîne de modèle** : remplacez votre chaîne de modèle
+  `gemini-2.5-flash-native-audio-preview-12-2025` par
   `gemini-3.1-flash-live-preview`.
-- **Configuração de raciocínio**: o Gemini 3.1 usa `thinkingLevel` (com configurações como `minimal`, `low`, `medium` e `high`) em vez de `thinkingBudget`.
-  O padrão é `minimal` para otimizar a menor latência. Consulte [Níveis de raciocínio e orçamentos](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br#levels-budgets).
-- **Eventos do servidor**: um único evento
-  [`BidiGenerateContentServerContent`](https://ai.google.dev/api/live?hl=pt-br#bidigeneratecontentservercontent)
-  agora pode conter várias partes de conteúdo simultaneamente (por exemplo,
-  trechos de áudio e transcrição). Atualize seu código para processar todas as partes em cada
-  evento e evitar a perda de conteúdo.
-- **Conteúdo do cliente**: o `send_client_content` só é compatível com o preenchimento do histórico de contexto inicial (requer a definição de [`initial_history_in_client_content`](https://ai.google.dev/api/live?hl=pt-br#HistoryConfig) em [`history_config`](https://ai.google.dev/api/live?hl=pt-br#BidiGenerateContentSetup)). Use [`send_realtime_input`](https://ai.google.dev/api/live?hl=pt-br#bidigeneratecontentrealtimeinput) para enviar atualizações de texto durante a conversa. Consulte
-  [Atualizações incrementais de conteúdo](https://ai.google.dev/gemini-api/docs/live-guide?hl=pt-br#incremental-updates).
-- **Cobertura de curva**: o padrão é
-  [`TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO`](https://ai.google.dev/api/live?hl=pt-br#turncoverage) em vez de
-  `TURN_INCLUDES_ONLY_ACTIVITY`. Agora, a vez do modelo inclui a atividade de áudio detectada e todos os frames de vídeo. Se o aplicativo envia um fluxo constante de frames de vídeo, atualize-o para enviar frames apenas quando houver atividade de áudio e evitar custos adicionais.
-- **Chamada de função assíncrona**: ainda não disponível. A chamada de função é
-  síncrona apenas. O modelo só vai começar a responder depois que você enviar a resposta da ferramenta. Consulte
-  [Chamada de função assíncrona](https://ai.google.dev/gemini-api/docs/live-tools?hl=pt-br#async-function-calling).
-- **Áudio proativo e diálogo afetivo**: esses recursos ainda não são compatíveis com o Gemini 3.1 Flash Live. Remova qualquer configuração desses recursos do seu código. Consulte [Áudio proativo](https://ai.google.dev/gemini-api/docs/live-guide?hl=pt-br#proactive-audio) e [Diálogo afetivo](https://ai.google.dev/gemini-api/docs/live-guide?hl=pt-br#affective-dialog).
+- **Configuration du raisonnement** : Gemini 3.1 utilise `thinkingLevel` (avec des paramètres
+  tels que `minimal`, `low`, `medium`, et `high`) au lieu de `thinkingBudget`.
+  La valeur par défaut est `minimal` pour optimiser la latence la plus faible. Consultez
+  [Niveaux et budgets de raisonnement](https://ai.google.dev/gemini-api/docs/thinking?hl=fr#levels-budgets).
+- **Événements de serveur** : un seul
+  [`BidiGenerateContentServerContent`](https://ai.google.dev/api/live?hl=fr#bidigeneratecontentservercontent)
+  événement peut désormais contenir plusieurs parties de contenu simultanément (par exemple,
+  des segments audio et une transcription). Mettez à jour votre code pour traiter toutes les parties de chaque événement afin d'éviter de manquer du contenu.
+- **Contenu client** : `send_client_content` n'est compatible que pour l'amorçage de l'historique du contexte initial (nécessite de définir [`initial_history_in_client_content`](https://ai.google.dev/api/live?hl=fr#HistoryConfig) dans [`history_config`](https://ai.google.dev/api/live?hl=fr#BidiGenerateContentSetup)). Utilisez [`send_realtime_input`](https://ai.google.dev/api/live?hl=fr#bidigeneratecontentrealtimeinput) pour envoyer des mises à jour de texte pendant la conversation. Consultez
+  [Mises à jour incrémentielles du contenu](https://ai.google.dev/gemini-api/docs/live-guide?hl=fr#incremental-updates).
+- **Couverture des tours** : la valeur par défaut est
+  [`TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO`](https://ai.google.dev/api/live?hl=fr#turncoverage) au lieu de
+  `TURN_INCLUDES_ONLY_ACTIVITY`. Le tour du modèle inclut désormais l'activité audio détectée et toutes les images vidéo. Si votre application envoie actuellement un flux constant d'images vidéo, vous pouvez la mettre à jour pour n'envoyer des images vidéo que lorsqu'il y a une activité audio afin d'éviter des coûts supplémentaires.
+- **Appel de fonction asynchrone** : pas encore compatible. L'appel de fonction n'est que synchrone. Le modèle ne commencera à répondre que lorsque vous aurez envoyé la réponse de l'outil. Consultez
+  [Appel de fonction asynchrone](https://ai.google.dev/gemini-api/docs/live-tools?hl=fr#async-function-calling).
+- **Audio proactif et dialogue affectif** : ces fonctionnalités ne sont pas encore
+  compatibles avec Gemini 3.1 Flash Live. Supprimez toute configuration de ces fonctionnalités de votre code. Consultez
+  [Audio proactif](https://ai.google.dev/gemini-api/docs/live-guide?hl=fr#proactive-audio) et
+  [Dialogue affectif](https://ai.google.dev/gemini-api/docs/live-guide?hl=fr#affective-dialog).
 
-Para uma comparação detalhada de recursos, consulte a tabela
-[Comparação de modelos](https://ai.google.dev/gemini-api/docs/live-guide?hl=pt-br#model-comparison) no
-guia de recursos.
+Pour une comparaison détaillée des fonctionnalités, consultez le
+[tableau de comparaison des modèles](https://ai.google.dev/gemini-api/docs/live-guide?hl=fr#model-comparison) dans le
+guide des fonctionnalités.
 
-Envie comentários
+Envoyer des commentaires
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Última atualização 2026-04-29 UTC.
+Dernière mise à jour le 2026/04/29 (UTC).
 
-Quer enviar seu feedback?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/04/29 (UTC)."],[],[]]

@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=ja
-fetched_at: 2026-06-01T06:00:37.048812+00:00
+fetched_at: 2026-06-08T05:35:13.236087+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -19,17 +19,17 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # Gemini API を使用した関数呼び出し
 
-関数呼び出しを使用すると、モデルを外部ツールや API に接続できます。
-モデルは、テキスト レスポンスを生成する代わりに、特定の関数を呼び出すタイミングを判断し、現実世界のアクションを実行するために必要なパラメータを提供します。
-これにより、モデルは自然言語と現実世界のアクションやデータの間のブリッジとして機能します。関数呼び出しには、次の 3 つの主なユースケースがあります。
+関数呼び出しを使用すると、モデルを外部ツールや API に接続できます。モデルは、テキスト レスポンスを生成する代わりに、特定の関数を呼び出すタイミングを判断し、現実世界のアクションを実行するために必要なパラメータを提供します。これにより、モデルは自然言語と現実世界のアクションやデータの間のブリッジとして機能できます。関数呼び出しには、主に次の 3 つのユースケースがあります。
 
-- **知識の拡張:** データベース、API、ナレッジベースなどの外部ソースから情報にアクセスします。
-- **機能の拡張:** 外部ツールを使用して計算を行い、電卓の使用やグラフの作成など、モデルの制限を拡張します。
-- **アクションの実行:** API を使用して外部システムとやり取りします。たとえば、予定のスケジュール設定、請求書の作成、メールの送信、スマートホーム デバイスの制御などです。
+- [**アクションを実行する:**](#meeting) API を使用して外部システムとやり取りします。たとえば、予定のスケジュール設定、請求書の作成、メールの送信、スマートホーム デバイスの制御などです。
+- [**知識の補強:**](#weather) データベース、API、ナレッジベースなどの外部ソースから情報にアクセスします。
+- [**機能の拡張:**](#chart) 外部ツールを使用して計算を実行し、モデルの制限を拡張します（電卓の使用やグラフの作成など）。
 
-天気を取得する
-会議をスケジュールする
-グラフを作成する
+これらのユースケースの例については、以下をご覧ください。
+
+### 会議のスケジュール
+
+この例では、特定の時間に会議をスケジュールする関数を定義する方法を示します。これにより、モデルはユーザー リクエストを解析し、構造化された引数を返して外部システムでアクションをトリガーできます。
 
 ### Python
 
@@ -131,20 +131,219 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
+### 天気情報を取得する
+
+この例では、ある場所の気温データを取得する関数を定義する方法を示します。これにより、モデルはリアルタイムまたは外部情報を必要とするクエリに回答するために外部 API を呼び出すことができます。
+
+### Python
+
+```
+from google import genai
+
+weather_function = {
+    "type": "function",
+    "name": "get_current_temperature",
+    "description": "Gets the current temperature for a given location.",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "location": {
+                "type": "string",
+                "description": "The city name, e.g. San Francisco",
+            },
+        },
+        "required": ["location"],
+    },
+}
+
+client = genai.Client()
+
+interaction = client.interactions.create(
+    model="gemini-3-flash-preview",
+    input="What's the temperature in London?",
+    tools=[weather_function],
+)
+
+for step in interaction.steps:
+    if step.type == "function_call":
+        print(f"Function to call: {step.name}")
+        print(f"Arguments: {step.arguments}")
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from '@google/genai';
+
+const client = new GoogleGenAI({});
+
+const weatherFunctionDeclaration = {
+  type: 'function',
+  name: 'get_current_temperature',
+  description: 'Gets the current temperature for a given location.',
+  parameters: {
+    type: 'object',
+    properties: {
+      location: {
+        type: 'string',
+        description: 'The city name, e.g. San Francisco',
+      },
+    },
+    required: ['location'],
+  },
+};
+
+const interaction = await client.interactions.create({
+  model: 'gemini-3-flash-preview',
+  input: "What's the temperature in London?",
+  tools: [weatherFunctionDeclaration],
+});
+
+for (const step of interaction.steps) {
+  if (step.type === 'function_call') {
+    console.log(`Function to call: ${step.name}`);
+    console.log(`Arguments: ${JSON.stringify(step.arguments)}`);
+  }
+}
+```
+
+### REST
+
+```
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -H "Api-Revision: 2026-05-20" \
+  -d '{
+    "model": "gemini-3-flash-preview",
+    "input": "What'\''s the temperature in London?",
+    "tools": [{
+      "type": "function",
+      "name": "get_current_temperature",
+      "description": "Gets the current temperature for a given location.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "location": {"type": "string", "description": "The city name"}
+        },
+        "required": ["location"]
+      }
+    }]
+  }'
+```
+
+### グラフを作成
+
+次の例は、構造化データから棒グラフを生成する関数を定義する方法を示しています。この例では、モデルが外部ツールを使用して計算を実行したり、ビジュアル アセットを作成したりする方法を示しています。
+
+### Python
+
+```
+from google import genai
+
+create_chart_function = {
+    "type": "function",
+    "name": "create_bar_chart",
+    "description": "Creates a bar chart given a title, labels, and values.",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "title": {"type": "string", "description": "The title for the chart."},
+            "labels": {"type": "array", "items": {"type": "string"}},
+            "values": {"type": "array", "items": {"type": "number"}},
+        },
+        "required": ["title", "labels", "values"],
+    },
+}
+
+client = genai.Client()
+
+interaction = client.interactions.create(
+    model="gemini-3-flash-preview",
+    input="Create a bar chart titled 'Quarterly Sales' with Q1: 50000, Q2: 75000, Q3: 60000.",
+    tools=[create_chart_function],
+)
+
+for step in interaction.steps:
+    if step.type == "function_call":
+        print(f"Function to call: {step.name}")
+        print(f"Arguments: {step.arguments}")
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from '@google/genai';
+
+const client = new GoogleGenAI({});
+
+const createChartFunctionDeclaration = {
+  type: 'function',
+  name: 'create_bar_chart',
+  description: 'Creates a bar chart given a title, labels, and values.',
+  parameters: {
+    type: 'object',
+    properties: {
+      title: { type: 'string', description: 'The title for the chart.' },
+      labels: { type: 'array', items: { type: 'string' } },
+      values: { type: 'array', items: { type: 'number' } },
+    },
+    required: ['title', 'labels', 'values'],
+  },
+};
+
+const interaction = await client.interactions.create({
+  model: 'gemini-3-flash-preview',
+  input: "Create a bar chart titled 'Quarterly Sales' with Q1: 50000, Q2: 75000, Q3: 60000.",
+  tools: [createChartFunctionDeclaration],
+});
+
+for (const step of interaction.steps) {
+  if (step.type === 'function_call') {
+    console.log(`${step.name}(${JSON.stringify(step.arguments)})`);
+  }
+}
+```
+
+### REST
+
+```
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -H "Api-Revision: 2026-05-20" \
+  -d '{
+    "model": "gemini-3-flash-preview",
+    "input": "Create a bar chart titled '\''Quarterly Sales'\'' with Q1: 50000, Q2: 75000, Q3: 60000.",
+    "tools": [{
+        "type": "function",
+        "name": "create_bar_chart",
+        "description": "Creates a bar chart given a title, labels, and values.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "title": {"type": "string"},
+            "labels": {"type": "array", "items": {"type": "string"}},
+            "values": {"type": "array", "items": {"type": "number"}}
+          },
+          "required": ["title", "labels", "values"]
+        }
+    }]
+  }'
+```
+
 ## 関数呼び出しの仕組み
 
 ![関数呼び出しの概要](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=ja)
 
-関数呼び出しには、アプリケーション、モデル、外部関数間の構造化されたインタラクションが含まれます。
+関数呼び出しには、アプリケーション、モデル、外部関数の間の構造化されたやり取りが含まれます。
 
-1. **関数宣言を定義する:** 関数の名前、パラメータ、目的をモデルに定義します。
-2. **関数宣言を使用して LLM を呼び出す:** ユーザー プロンプトと関数宣言をモデルに送信します。
-3. **関数コードを実行する（ユーザーの責任）:** モデルは*関数自体を実行しません。*名前と引数を抽出し、アプリケーションで実行します。
-4. **ユーザー フレンドリーなレスポンスを作成する:** 最終的なユーザー フレンドリーなレスポンスを得るために、結果をモデルに返します。
+1. **関数宣言を定義する:** モデルに関数名、パラメータ、目的を定義します。
+2. **関数宣言を使用して LLM を呼び出す:** ユーザーのプロンプトと関数宣言をモデルに送信します。
+3. **関数コードの実行（ユーザーの責任）:** モデルは関数自体を実行しません。名前と引数を抽出し、アプリケーションで実行します。
+4. **ユーザー フレンドリーなレスポンスを作成する:** 最終的なユーザー フレンドリーなレスポンスを得るために、結果をモデルに送り返します。
 
-このプロセスは、複数回繰り返すことができます。モデルは、1 回のターンで
-複数の関数を呼び出す（[並列関数呼び出し](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=ja#parallel_function_calling)）ことと、
-順番に呼び出す（[コンポジション関数呼び出し](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=ja#compositional_function_calling)）ことをサポートしています。
+このプロセスは複数回繰り返すことができます。このモデルは、1 回のターンで複数の関数を並列（[並列関数呼び出し](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=ja#parallel_function_calling)）または順番（[コンポジション関数呼び出し](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=ja#compositional_function_calling)）に呼び出すことをサポートしています。
 
 ### ステップ 1: 関数宣言を定義する
 
@@ -267,7 +466,7 @@ if (fcStep.name === 'set_light_values') {
 }
 ```
 
-### ステップ 4: 結果をモデルに返す
+### ステップ 4: 結果をモデルに送り返す
 
 ### Python
 
@@ -311,10 +510,8 @@ console.log(finalInteraction.output_text);
 
 クライアント側で会話履歴を管理し、`store=false` を設定することで、ステートレス モードで関数呼び出しを使用することもできます。
 
-ステートレス モードでは、後続のリクエストの `input` フィールドに会話の完全な履歴を渡す必要があります。この履歴には、次のものが含まれている必要があります。
-1. 最初の `user_input` ステップ。
-2. ターン 1 で返されたモデル生成ステップ（`thought` ステップと `function_call` ステップを含む）をすべて、受信したとおりに。
-3. 実行された関数の出力を含む `function_result` ステップ。
+ステートレス モードでは、後続の各リクエストの `input` フィールドで会話の履歴全体を渡す必要があります。この履歴には、以下の情報が含まれている必要があります。
+1. 最初の `user_input` ステップ。2. ターン 1 で返されたモデル生成のすべてのステップ（`thought` ステップと `function_call` ステップを含む）が、受信したとおりに返されます。3. 実行された関数の出力を含む `function_result` ステップ。
 
 ### Python
 
@@ -493,21 +690,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 関数宣言はツールとして渡され、次のものが含まれます。
 
 - `type`（文字列）: カスタム関数の場合は `"function"` である必要があります。
-- `name`（文字列）: 一意の関数名（アンダースコアまたはキャメルケースを使用）。
-- `description`（文字列）: 関数の目的を明確に説明します。
-- `parameters` （オブジェクト）: 関数が想定する入力パラメータ。
+- `name`（文字列）: 一意の関数名（アンダースコアまたは camelCase を使用）。
+- `description`（文字列）: 関数の目的についての明確な説明。
+- `parameters`（オブジェクト）: 関数が想定する入力パラメータ。
   - `type`（文字列）: 全体的なデータ型（`object` など）。
   - `properties`（オブジェクト）: 型と説明を含む個々のパラメータ。
-  - `required`（配列）: 必須のパラメータ名。
+  - `required`（配列）: 必須パラメータ名。
 
 ## 思考モデルを使用した関数呼び出し
 
-Gemini 3 シリーズと 2.5 シリーズのモデルでは、関数呼び出しを改善する内部の["思考"](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=ja)プロセスが使用されます。
-SDK は[思考シグネチャ](https://ai.google.dev/gemini-api/docs/interactions/thought-signatures?hl=ja)を自動的に処理します。
+[Gemini 3 および 2.5 シリーズのモデルは、関数呼び出しを改善する内部の「思考」プロセスを使用します。SDK は、[思考シグネチャ](https://ai.google.dev/gemini-api/docs/interactions/thought-signatures?hl=ja)を自動的に処理します。](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=ja)
 
 ## 並列関数呼び出し
 
-複数の関数が独立している場合は、一度に複数の関数を呼び出します。
+独立した複数の関数を一度に呼び出す:
 
 ### Python
 
@@ -560,7 +756,7 @@ for (const step of interaction.steps) {
 
 ## コンポジション関数呼び出し
 
-複雑なリクエストの場合は、複数の関数呼び出しを連結します（最初にロケーションを取得し、次にそのロケーションの天気を取得するなど）。
+複雑なリクエスト（最初に位置情報を取得してから、その位置情報の天気を取得するなど）のために、複数の関数呼び出しを連結します。
 
 ### Python
 
@@ -619,7 +815,7 @@ for step in interaction.steps:
 
 `generation_config` の `tool_choice` を使用して、モデルがツールを使用する方法を制御します。
 
-- `auto`（デフォルト）: 関数を呼び出すか、直接レスポンスを返すかをモデルが決定します。
+- `auto`（デフォルト）: 関数を呼び出すか、直接応答するかをモデルが決定します。
 - `any`: モデルは常に関数呼び出しを予測するように制約されます。
 - `none`: モデルは関数呼び出しを行うことが禁止されています。
 - `validated`（プレビュー）: モデルは関数スキーマの準拠を保証します。
@@ -683,9 +879,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## マルチツールを使用する
+## マルチツールの使用
 
-複数のツールを有効にして、組み込みツールと関数呼び出しを同じリクエストで組み合わせることができます。Gemini 3 モデルでは、Interactions で組み込みツールと関数呼び出しをすぐに組み合わせることができます。`previous_interaction_id` を渡すと、組み込みツールのコンテキストが自動的に循環します。
+複数のツールを有効にして、組み込みツールと関数呼び出しを同じリクエストで組み合わせることができます。Gemini 3 モデルでは、インタラクションで組み込みツールと関数呼び出しをすぐに組み合わせることができます。`previous_interaction_id` を渡すと、組み込みツールのコンテキストが自動的に循環します。
 
 ### Python
 
@@ -797,9 +993,9 @@ for (const step of interaction.steps) {
 
 Gemini 3 シリーズのモデルでは、モデルに送信する関数レスポンス部分にマルチモーダル コンテンツを含めることができます。モデルは、次のターンでこのマルチモーダル コンテンツを処理して、より多くの情報に基づいたレスポンスを生成できます。
 
-関数レスポンスにマルチモーダル データを含めるには、`result` フィールドの `function_result` ステップに 1 つ以上のコンテンツ ブロックとして含めます。各コンテンツ ブロックで `type`（`"text"`、`"image"` など）を指定する必要があります。
+関数レスポンスにマルチモーダル データを含めるには、`function_result` ステップの `result` フィールドに 1 つ以上のコンテンツ ブロックとしてデータを含めます。各コンテンツ ブロックで `type`（`"text"`、`"image"` など）を指定する必要があります。
 
-次の例は、画像データを含む関数レスポンスをインタラクションでモデルに送り返す方法を示しています。
+次の例は、画像データを含む関数レスポンスをインタラクションでモデルに送信する方法を示しています。
 
 ### Python
 
@@ -902,26 +1098,24 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 ## 構造化出力を使用した関数呼び出し
 
-Gemini 3 シリーズのモデルでは、関数呼び出しと
-[構造化出力](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=ja)を組み合わせて、
-一貫した形式のレスポンスを実現します。
+Gemini 3 シリーズのモデルでは、関数呼び出しと[構造化出力](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=ja)を組み合わせて、一貫した形式のレスポンスを取得します。
 
 ## リモート MCP（Model Context Protocol）
 
-Interactions API は、リモート MCP サーバーに接続して、モデルが外部ツールやサービスにアクセスできるようにします。ツール構成でサーバーの `name` と `url` を指定します。
+Interactions API は、リモート MCP サーバーへの接続をサポートしており、モデルが外部ツールやサービスにアクセスできるようにします。サーバーの `name` と `url` は、ツールの構成で指定します。
 
-リモート MCP を使用する場合は、次の制約に注意してください。
+リモート MCP を使用する場合は、次の制約事項に注意してください。
 
-- **サーバータイプ**: リモート MCP は、ストリーミング可能な HTTP サーバーでのみ動作します。SSE（Server-Sent Events）サーバーは対象外です。
-- **モデルのサポート**: 現在、リモート MCP は Gemini 3 モデルでは動作しません。Gemini 3 のサポートは近日提供予定です。
-- **命名**: MCP サーバー名に `-` 文字を含めることはできません。代わりに `snake_case` サーバー名を使用してください。
+- **サーバータイプ**: リモート MCP はストリーミング可能な HTTP サーバーでのみ動作します。SSE（サーバー送信イベント）サーバーは対象外です。
+- **モデルのサポート**: 現在、リモート MCP は Gemini 3 モデルでは動作しません。Gemini 3 のサポートは近日中に提供予定です。
+- **命名**: MCP サーバー名に `-` 文字を含めないでください。代わりに `snake_case` サーバー名を使用してください。
 
 | フィールド | 型 | 必須 / 省略可 | 説明 |
 | --- | --- | --- | --- |
 | `type` | `string` | はい | `"mcp_server"` を指定します。 |
 | `name` | `string` | いいえ | MCP サーバーの表示名。 |
 | `url` | `string` | いいえ | MCP サーバー エンドポイントの完全な URL。 |
-| `headers` | `object` | いいえ | サーバーへのリクエストごとに HTTP ヘッダーとして送信される Key-Value ペア（認証トークンなど）。 |
+| `headers` | `object` | いいえ | サーバーへのすべてのリクエストとともに HTTP ヘッダーとして送信される Key-Value ペア（認証トークンなど）。 |
 | `allowed_tools` | `array` | いいえ | エージェントが呼び出すことができるサーバーのツールを制限します。 |
 
 ### 例
@@ -989,9 +1183,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## ツールの呼び出しをストリーミングする
+## ツール呼び出しをストリーミングする
 
-ストリーミングでツールを使用する場合、モデルはストリーム上の `step.delta` イベントのシーケンスとして関数呼び出しを生成します。ツールの引数は、`arguments` を使用して部分引数としてストリーミングできます。これらのデルタを集計して、完全なツールの呼び出しを再構築してから実行する必要があります。
+ストリーミングでツールを使用する場合、モデルはストリーム上の `step.delta` イベントのシーケンスとして関数呼び出しを生成します。ツール引数は、`arguments` を使用して部分引数としてストリーミングできます。これらのデルタを集計して、実行前に完全なツール呼び出しを再構築する必要があります。
 
 ### Python
 
@@ -1159,27 +1353,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
 
 ## ベスト プラクティス
 
-- **関数とパラメータの説明:** 明確かつ具体的に説明する。
-- **命名:** スペースや特殊文字を使用しない説明的な名前を使用する。
-- **厳密な型付け:** 特定の型（整数、文字列、enum）を使用する。
-- **ツールの選択:** アクティブなツールセットは最大 10 ～ 20 個にする。
-- **プロンプト エンジニアリング:** コンテキストと手順を提供する。
-- **検証:** 関数呼び出しを実行する前に検証する。
-- **エラー処理:** 堅牢なエラー処理を実装する。
-- **セキュリティ:** 外部 API に適切な認証を使用する。
+- **関数とパラメータの説明:** 明確かつ具体的に記述します。
+- **命名:** スペースや特殊文字を含まない説明的な名前を使用します。
+- **強い型付け:** 特定の型（整数、文字列、列挙型）を使用します。
+- **ツールの選択:** アクティブなセットを最大 10 ～ 20 個のツールに保ちます。
+- **プロンプト エンジニアリング:** コンテキストと指示を提供します。
+- **検証:** 実行前に関数呼び出しを検証します。
+- **エラー処理:** 堅牢なエラー処理を実装します。
+- **セキュリティ:** 外部 API に適切な認証を使用します。
 
 ## 注意と制限事項
 
-- OpenAPI スキーマの[サブセット](https://ai.google.dev/api/rest/v1beta/cachedContents?hl=ja#FunctionDeclaration)のみがサポートされています。
-- `any` モードの場合、API は非常に大きいスキーマやネストが深いスキーマを拒否することがあります。
+- サポートされているのは、[OpenAPI スキーマのサブセット](https://ai.google.dev/api/rest/v1beta/cachedContents?hl=ja#FunctionDeclaration)のみです。
+- `any` モードの場合、API は非常に大きなスキーマやネストが深いスキーマを拒否することがあります。
 - Python でサポートされているパラメータの型は限られています。
 
 フィードバックを送信
 
 特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-最終更新日 2026-05-28 UTC。
+最終更新日 2026-06-05 UTC。
 
 ご意見をお聞かせください
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-05-28 UTC。"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-05 UTC。"],[],[]]

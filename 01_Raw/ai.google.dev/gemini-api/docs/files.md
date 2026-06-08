@@ -1,35 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/files?hl=vi
-fetched_at: 2026-06-01T06:09:38.434244+00:00
+source_url: https://ai.google.dev/gemini-api/docs/files?hl=ko
+fetched_at: 2026-06-08T05:37:40.186589+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Gửi ý kiến phản hồi
+의견 보내기
 
 # Files API
 
-Gemini có thể xử lý nhiều loại dữ liệu đầu vào, bao gồm cả văn bản, hình ảnh và âm thanh cùng một lúc.
+Gemini는 텍스트, 이미지, 오디오 등 다양한 유형의 입력 데이터를 동시에 처리할 수 있습니다.
 
-Hướng dẫn này trình bày cách xử lý các tệp nội dung nghe nhìn bằng Files API. Các thao tác cơ bản đều giống nhau đối với tệp âm thanh, hình ảnh, video, tài liệu và các loại tệp được hỗ trợ khác.
+이 가이드에서는 Files API를 사용하여 미디어 파일을 처리하는 방법을 보여줍니다. 기본 작업은 오디오 파일, 이미지, 동영상, 문서, 기타 지원되는 파일 형식에 동일하게 적용됩니다.
 
-Để biết hướng dẫn về câu lệnh cho tệp, hãy xem phần [Hướng dẫn về câu lệnh cho tệp](https://ai.google.dev/gemini-api/docs/files?hl=vi#prompt-guide).
+파일 프롬프트 안내는 [파일 프롬프트 가이드](https://ai.google.dev/gemini-api/docs/files?hl=ko#prompt-guide) 섹션을 참고하세요.
 
-## Tải tệp lên
+## 파일 업로드
 
-Bạn có thể dùng Files API để tải một tệp đa phương tiện lên. Luôn sử dụng Files API khi tổng kích thước yêu cầu (bao gồm cả tệp, câu lệnh văn bản, hướng dẫn hệ thống, v.v.) lớn hơn 100 MB. Đối với tệp PDF, giới hạn là 50 MB.
+Files API를 사용하여 미디어 파일을 업로드할 수 있습니다. 파일, 텍스트 프롬프트, 시스템 안내 등을 포함한 총 요청 크기가 100MB보다 큰 경우 항상 Files API를 사용하세요. PDF 파일의 경우 한도는 50MB입니다.
 
-Đoạn mã sau đây tải một tệp lên, sau đó dùng tệp đó trong một lệnh gọi đến `generateContent`.
+다음 코드는 파일을 업로드한 다음 `generateContent` 호출에서 파일을 사용합니다.
 
 ### Python
 
@@ -47,7 +47,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import {
@@ -156,9 +156,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## Lấy siêu dữ liệu cho một tệp
+## 파일의 메타데이터 가져오기
 
-Bạn có thể xác minh rằng API đã lưu trữ thành công tệp được tải lên và lấy siêu dữ liệu của tệp đó bằng cách gọi `files.get`.
+`files.get`를 호출하여 API가 업로드된 파일을 성공적으로 저장했는지 확인하고 메타데이터를 가져올 수 있습니다.
 
 ### Python
 
@@ -173,7 +173,7 @@ myfile = client.files.get(name=file_name)
 print(myfile)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import {
@@ -226,9 +226,9 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## Liệt kê các tệp đã tải lên
+## 업로드된 파일 목록
 
-Đoạn mã sau đây lấy danh sách tất cả các tệp đã tải lên:
+다음 코드는 업로드된 모든 파일의 목록을 가져옵니다.
 
 ### Python
 
@@ -242,7 +242,7 @@ for f in client.files.list():
     print(' ', f.name)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import {
@@ -281,9 +281,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/files" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Xoá tệp đã tải lên
+## 업로드된 파일 삭제
 
-Các tệp sẽ tự động bị xoá sau 48 giờ. Bạn cũng có thể xoá tệp đã tải lên theo cách thủ công:
+파일은 48시간 후에 자동으로 삭제됩니다. 업로드된 파일을 수동으로 삭제할 수도 있습니다.
 
 ### Python
 
@@ -296,7 +296,7 @@ myfile = client.files.upload(file='path/to/sample.mp3')
 client.files.delete(name=myfile.name)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import {
@@ -335,191 +335,191 @@ curl --request "DELETE" https://generativelanguage.googleapis.com/v1beta/files/$
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Thông tin về việc sử dụng
+## 사용량 정보
 
-Bạn có thể dùng Files API để tải lên và tương tác với các tệp đa phương tiện. Files API cho phép bạn lưu trữ tối đa 20 GB tệp cho mỗi dự án, với kích thước tối đa cho mỗi tệp là 2 GB. Các tệp được lưu trữ trong 48 giờ. Trong thời gian đó, bạn có thể dùng API để lấy siêu dữ liệu về các tệp, nhưng không thể tải các tệp xuống.
-Files API được cung cấp miễn phí ở mọi khu vực có Gemini API.
+Files API를 사용하여 미디어 파일을 업로드하고 상호작용할 수 있습니다. Files API를 사용하면 프로젝트당 최대 20GB의 파일을 저장할 수 있으며 파일당 최대 크기는 2GB입니다. 파일은 48시간 동안 저장됩니다. 이 기간 동안 API를 사용하여 파일에 관한 메타데이터를 가져올 수는 있지만 파일을 다운로드할 수는 없습니다.
+Files API는 Gemini API가 제공되는 모든 지역에서 무료로 사용할 수 있습니다.
 
-## Chiến lược nhắc nhở về tệp
+## 파일 프롬프트 작성 전략
 
-Phần này cung cấp hướng dẫn và các phương pháp hay nhất để sử dụng tệp đa phương tiện với câu lệnh cho Gemini API.
+이 섹션에서는 Gemini API의 프롬프트와 함께 미디어 파일을 사용하는 방법에 관한 가이드와 권장사항을 제공합니다.
 
-Việc có thể sử dụng nhiều loại dữ liệu trong câu lệnh giúp bạn linh hoạt hơn về những nhiệm vụ có thể giải quyết bằng Gemini API. Ví dụ: bạn có thể gửi cho mô hình một bức ảnh về một bữa ăn ngon và yêu cầu mô hình viết một bài đăng ngắn trên blog về bữa ăn đó.
+프롬프트에서 다양한 유형의 데이터를 사용할 수 있으면 Gemini API로 처리할 수 있는 작업의 유연성이 높아집니다. 예를 들어 모델에 맛있는 식사 사진을 보내고 식사에 관한 짧은 블로그를 작성해 달라고 요청할 수 있습니다.
 
 |  |  |
 | --- | --- |
-| **Câu lệnh** | **Đáp** |
-| Viết một bài đăng ngắn gọn và hấp dẫn trên blog dựa trên bức ảnh này. Nội dung này phải có phần mô tả về bữa ăn trong ảnh và nói về hành trình chuẩn bị bữa ăn của tôi.   Bánh quy | Chuẩn bị sẵn bữa ăn là một cách hiệu quả để tiết kiệm thời gian và tiền bạc, đồng thời giúp bạn ăn uống lành mạnh hơn. Bữa ăn này là một ví dụ điển hình về bữa ăn lành mạnh và ngon miệng mà bạn có thể dễ dàng chuẩn bị trước.  Bữa ăn này có cơm gạo lứt, rau củ nướng và gà sốt teriyaki. Gạo lứt là một loại carbohydrate phức tạp và lành mạnh, giúp bạn có năng lượng bền bỉ. Rau củ nướng là một cách tuyệt vời để bổ sung vitamin và khoáng chất hằng ngày, còn gà teriyaki là một lựa chọn ngon miệng và giàu protein.  Món ăn này cũng rất dễ chế biến. Bạn chỉ cần nấu gạo lứt, nướng rau và nấu món gà sốt teriyaki. Sau khi nấu xong, hãy chia thức ăn vào các hộp đựng và bảo quản trong tủ lạnh. Sau đó, bạn có thể lấy hộp đựng và đi làm vào những buổi sáng bận rộn!  Nếu bạn đang tìm kiếm một bữa ăn lành mạnh và ngon miệng mà có thể dễ dàng chuẩn bị trước, thì đây là một lựa chọn tuyệt vời. Món ăn này giàu dinh dưỡng và hương vị, chắc chắn sẽ giúp bạn cảm thấy no và hài lòng.  Chúc bạn chuẩn bị được những bữa ăn lành mạnh và ngon miệng! |
+| **프롬프트** | **응답** |
+| 이 사진을 바탕으로 마음을 사로잡는 짧은 블로그 게시물을 작성합니다. 사진에 있는 음식에 대한 설명과 식사 준비 과정을 설명해야 합니다.   쿠키 | 도시락 싸기는 시간과 비용을 절약하는 좋은 방법이며, 건강한 식습관을 기르는 데도 도움이 됩니다. 이 식사는 미리 쉽게 준비할 수 있는 건강하고 맛있는 식사의 좋은 예입니다.  이 식사에는 현미, 구운 채소, 닭고기 데리야키가 포함되어 있습니다. 현미는 지속적인 에너지를 공급하는 건강한 복합 탄수화물입니다. 구운 채소는 일일 비타민과 미네랄을 섭취하는 좋은 방법이며, 닭고기 데리야키는 맛있고 단백질이 풍부한 선택입니다.  이 식사는 준비하기도 매우 쉽습니다. 현미를 짓고, 채소를 구우며, 닭고기 데리야키를 요리하면 됩니다. 모든 재료가 익으면 밀프렙 용기에 나누어 담아 냉장고에 보관합니다. 그런 다음 용기를 들고 바쁜 아침을 시작할 수 있습니다.  미리 쉽게 준비할 수 있는 건강하고 맛있는 식사를 찾고 있다면 이 식사가 좋은 선택입니다. 영양과 풍미가 가득하며 포만감과 만족감을 확실히 느낄 수 있습니다.  건강하고 맛있는 식사 준비를 기원합니다. |
 
-Nếu bạn gặp khó khăn khi nhận được kết quả mong muốn từ những câu lệnh sử dụng tệp đa phương tiện, thì có một số chiến lược có thể giúp bạn đạt được kết quả mong muốn. Các phần sau đây cung cấp các phương pháp thiết kế và mẹo khắc phục sự cố để cải thiện những câu lệnh sử dụng dữ liệu đầu vào đa phương thức.
+미디어 파일을 사용하는 프롬프트에서 원하는 출력을 얻는 데 문제가 있는 경우 원하는 결과를 얻는 데 도움이 되는 몇 가지 전략이 있습니다. 다음 섹션에서는 멀티모달 입력을 사용하는 프롬프트를 개선하기 위한 설계 접근 방식과 문제 해결 팁을 제공합니다.
 
-Bạn có thể cải thiện câu lệnh đa phương thức bằng cách làm theo các phương pháp hay nhất sau:
+다음 권장사항에 따라 멀티모달 프롬프트를 향상시킬 수 있습니다.
 
-- ### [Kiến thức cơ bản về thiết kế câu lệnh](#specific-instructions)
+- ### [프롬프트 설계 기초](#specific-instructions)
 
-  - **Đưa ra chỉ dẫn cụ thể**: Soạn thảo chỉ dẫn rõ ràng và ngắn gọn để giảm thiểu khả năng hiểu sai.
-  - **Thêm một vài ví dụ vào câu lệnh:** Sử dụng một vài ví dụ thực tế để minh hoạ những gì bạn muốn đạt được.
-  - **Chia nhỏ từng bước**: Chia các việc phức tạp thành những mục tiêu phụ dễ quản lý, hướng dẫn mô hình thực hiện quy trình.
-  - **Chỉ định định dạng đầu ra**: Trong câu lệnh, hãy yêu cầu đầu ra ở định dạng bạn muốn, chẳng hạn như markdown, JSON, HTML, v.v.
-  - **Đặt hình ảnh lên trước đối với câu lệnh có một hình ảnh**: Mặc dù Gemini có thể xử lý dữ liệu đầu vào là hình ảnh và văn bản theo bất kỳ thứ tự nào, nhưng đối với câu lệnh có một hình ảnh, Gemini có thể hoạt động hiệu quả hơn nếu hình ảnh (hoặc video) đó được đặt trước câu lệnh bằng văn bản. Tuy nhiên, đối với những câu lệnh yêu cầu hình ảnh phải được xen kẽ nhiều với văn bản để có ý nghĩa, hãy sử dụng bất kỳ thứ tự nào tự nhiên nhất.
-- ### [Khắc phục sự cố về câu lệnh đa phương thức](#troubleshooting)
+  - **구체적인 지침 설정**: 오해의 소지가 거의 없도록 명확하고 간결한 지침을 제시합니다.
+  - **프롬프트에 몇 가지 예시 추가:** 달성하려는 목표를 쉽게 이해할 수 있도록 실질적인 퓨샷 예시를 사용합니다.
+  - **단계별 분류**: 복잡한 태스크를 관리 가능한 하위 목표로 분할하고 프로세스 전반에 걸쳐서 모델을 안내합니다.
+  - **출력 형식 지정**: 프롬프트에서 마크다운, JSON, HTML 등 원하는 형식으로 출력을 요청합니다.
+  - **단일 이미지 프롬프트의 경우 이미지를 먼저 배치**: Gemini는 어떤 순서로든 이미지 및 텍스트 입력을 처리할 수 있지만 단일 이미지가 포함된 프롬프트의 경우 해당 이미지(또는 동영상)를 텍스트 프롬프트 앞에 배치할 경우 성능이 향상될 수 있습니다. 그러나 상황에 따라 이미지와 텍스트를 밀접하게 혼합해야 할 경우에는 무엇이든 가장 자연스러운 순서를 따릅니다.
+- ### [멀티모달 프롬프트 문제 해결](#troubleshooting)
 
-  - **Nếu mô hình không lấy thông tin từ phần có liên quan của hình ảnh:** Đưa ra gợi ý về những khía cạnh của hình ảnh mà bạn muốn câu lệnh lấy thông tin.
-  - **Nếu đầu ra của mô hình quá chung chung (không đủ phù hợp với đầu vào là hình ảnh/video):** Khi bắt đầu câu lệnh, hãy thử yêu cầu mô hình mô tả(các) hình ảnh hoặc video trước khi đưa ra hướng dẫn về nhiệm vụ, hoặc thử yêu cầu mô hình tham khảo nội dung trong hình ảnh.
-  - **Cách khắc phục sự cố về phần bị lỗi:** Yêu cầu mô hình mô tả hình ảnh hoặc giải thích suy luận của mô hình để đánh giá mức độ hiểu biết ban đầu của mô hình.
-  - **Nếu câu lệnh của bạn tạo ra nội dung ảo:** Hãy thử giảm chế độ cài đặt nhiệt độ hoặc yêu cầu mô hình đưa ra nội dung mô tả ngắn hơn để giảm khả năng mô hình ngoại suy thêm thông tin chi tiết.
-  - **Điều chỉnh các tham số lấy mẫu:** Thử nghiệm với các chế độ cài đặt nhiệt độ và lựa chọn top-k khác nhau để điều chỉnh khả năng sáng tạo của mô hình.
+  - **모델이 관련 이미지 부분에서 정보를 가져오지 않는 경우:** 프롬프트로 정보를 가져오려는 이미지 부분에 대한 힌트를 제공합니다.
+  - **모델 출력이 너무 일반적인 경우(이미지/동영상 출력에 맞게 충분히 맞춤화되지 않은 경우):** 프롬프트 시작 시 태스크 지침을 제공하기 전 이미지 또는 동영상을 기술하도록 모델에 요청하거나 이미지에 포함된 항목을 참조하도록 모델에 요청합니다.
+  - **실패한 부분 문제 해결:** 이미지를 기술하거나, 이유를 설명하거나, 모델의 초기 이해 수준을 측정하도록 모델에 요청합니다.
+  - **프롬프트 결과 비현실적인 콘텐츠가 발생하는 경우:** 강도 설정을 낮추거나 추가 세부정보를 추정할 가능성이 적도록 모델에 더 짧은 설명을 요청합니다.
+  - **샘플링 매개변수 조정:** 여러 다른 강도 설정 및 최상위 K 선택으로 실험해서 모델 창의성을 조정합니다.
 
-### Đưa ra hướng dẫn cụ thể
+### 구체적인 지침 설정
 
-Câu lệnh sẽ hiệu quả nhất khi rõ ràng và chi tiết. Nếu bạn có một kết quả cụ thể trong đầu, thì tốt hơn là bạn nên đưa yêu cầu đó vào câu lệnh để đảm bảo bạn nhận được kết quả mình muốn.
+프롬프트는 명확하고 세부적일 때 가장 성공적입니다. 특정 출력이 필요하다면 해당 요구사항을 프롬프트에 직접 포함하여 원하는 출력을 얻을 가능성을 높이세요.
 
-Đối với hình ảnh này về một bảng thông tin tại sân bay, nếu bạn chỉ yêu cầu mô hình "mô tả hình ảnh này", thì mô hình có thể tạo ra một nội dung mô tả chung. Nếu cần mô hình phân tích cú pháp thời gian và thành phố từ hình ảnh, bạn có thể đưa yêu cầu đó trực tiếp vào câu lệnh.
+공항 보드 이미지의 경우 "이미지 설명"이라고만 모델에 요청하면 일반적인 설명이 생성될 수 있습니다. 모델이 이미지에서 시간과 도시를 파싱하도록 하려면 프롬프트에 해당 요청을 직접 포함할 수 있습니다.
 
-| Câu lệnh | Câu trả lời của mô hình |
+| 프롬프트 | 모델 응답 |
 | --- | --- |
-| Mô tả hình ảnh này. | Hình ảnh cho thấy bảng thông tin chuyến bay hạ cánh và khởi hành tại sân bay. |
+| 이 이미지를 설명해 주세요. | 이 이미지는 공항 도착 및 출발 보드를 보여줍니다. |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **업데이트된 프롬프트** | **개선된 응답** |
 | --- | --- |
-| Lịch trình du lịch Phân tích thời gian và thành phố từ bảng thông tin sân bay xuất hiện trong hình ảnh này thành một danh sách. | - 10:50 Moscow - 11:05 Edinburgh - 11:05 London - 11:10 Bucharest - 11:30 Kiev - 11:35 Dublin - 11:45 Đông Midlands - 12:15 Sofia - 12:30 London - 12:30 Newcastle - 12:40 St Petersburg - 12:40 London - 12:45 Manchester |
+| 여행 일정 이 이미지에 표시된 공항 보드에서 시간과 도시를 분석해서 목록으로 표시해 주세요. | - 10:50 모스크바 - 11:05 에든버러 - 11:05 런던 - 11:10 부카레스트 - 11:30 키예프 - 11:35 더블린 - 11:45 이스트 미들랜즈 - 12:15 소피아 - 12:30 런던 - 12:30 뉴캐슬 - 12:40 상트페테르부르크 - 12:40 런던 - 12:45 맨체스터 |
 
-### Thêm một vài ví dụ
+### 몇 가지 예시 추가
 
-Mô hình Gemini có thể chấp nhận nhiều dữ liệu đầu vào mà mô hình có thể dùng làm ví dụ để hiểu được đầu ra bạn muốn. Việc thêm những ví dụ này có thể giúp mô hình xác định các mẫu và áp dụng mối quan hệ giữa hình ảnh và câu trả lời đã cho vào ví dụ mới. Đây còn được gọi là học "từ một vài dữ liệu".
+Gemini 모델은 원하는 출력을 이해하기 위해 예시로 사용할 수 있는 여러 입력을 수락할 수 있습니다. 이러한 예시를 추가하면 모델이 패턴을 식별하고 제공된 이미지와 응답 사이의 관계를 새 예시에 적용할 수 있습니다. 이를 '퓨샷' 학습이라고도 합니다.
 
-Trong ví dụ bên dưới, kết quả ban đầu được viết dưới dạng câu và cũng chứa quốc gia (Brazil). Giả sử bạn muốn đầu ra ở một định dạng hoặc kiểu khác và bạn chỉ muốn có thành phố chứ không phải quốc gia. Việc thêm một vài ví dụ ít lượt tương tác vào câu lệnh có thể hướng mô hình phản hồi theo cách bạn muốn.
+아래 예시에서 최초 출력은 문장 형식으로 작성되었으며 국가(브라질)를 포함합니다. 다른 형식 또는 스타일로 출력을 표시하고 국가가 아닌 도시만 포함한다고 가정해 보세요. 프롬프트에 퓨샷 예시를 추가하면 원하는 방식으로 응답하도록 모델을 조정할 수 있습니다.
 
-| **Câu lệnh** | **Phản hồi của mô hình** |
+| **프롬프트** | **모델 응답** |
 | --- | --- |
-| Lịch trình du lịch Xác định thành phố cùng với địa danh. | Địa danh này là tượng Chúa Kitô Cứu thế ở Rio de Janeiro, Brazil. |
+| 여행 일정 명소와 함께 도시를 설명해 주세요. | 이 랜드마크는 브라질 리우데자네이루에 있는 구세주 예수상입니다. |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **업데이트된 프롬프트** | **개선된 응답** |
 | --- | --- |
-| Xác định thành phố cùng với địa danh. đấu trường La Mã | thành phố: Rome, địa danh: Đấu trường La Mã. |
-| Tử Cấm Thành | thành phố: Bắc Kinh, địa danh: Tử Cấm Thành |
-| tử cấm thành | thành phố: Rio de Janeiro, địa danh: Tượng Chúa Kitô Cứu thế |
+| 명소와 함께 도시를 설명해 주세요. 콜로세움 | 도시: 로마, 랜드마크: 콜로세움 |
+| 자금성 | 도시: 베이징, 랜드마크: 자금성 |
+| 자금성 | 도시: 리우데자네이루, 랜드마크: 구세주 예수상 |
 
-### Chia nhỏ thành từng bước
+### 단계별 분류
 
-Đối với những tác vụ phức tạp như những tác vụ đòi hỏi cả khả năng hiểu biết trực quan và suy luận, bạn nên chia tác vụ thành các bước nhỏ hơn và đơn giản hơn. Ngoài ra, bạn cũng có thể yêu cầu trực tiếp mô hình "suy nghĩ từng bước" trong câu lệnh của mình để đạt được hiệu quả.
+시각적 이해와 추론이 모두 필요한 복잡한 태스크의 경우 태스크를 더 작고 직관적인 단계로 나누는 것이 유용할 수 있습니다. 또는 프롬프트에서 "단계별로 생각"하도록 모델에 직접 요청하는 것도 효과적일 수 있습니다.
 
-| Câu lệnh | Câu trả lời của mô hình |
+| 프롬프트 | 모델 응답 |
 | --- | --- |
-| Khi nào thì tôi sẽ hết giấy vệ sinh? | Bạn chỉ còn 3 lượt quay. |
+| 화장지가 언제 다 떨어질까요? | 이제 3개 밖에 없으니 곧 떨어집니다. |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **업데이트된 프롬프트** | **개선된 응답** |
 | --- | --- |
-| 1. Trước tiên, hãy đếm xem có bao nhiêu cuộn giấy vệ sinh trong bức ảnh này.  2. Sau đó, hãy xác định lượng giấy vệ sinh mà một người thường dùng mỗi ngày.  3. Tính xem những cuộn giấy vệ sinh này sẽ dùng được trong bao lâu. | 1. Có 3 cuộn giấy vệ sinh trong bức ảnh này.  2. Một người thường dùng khoảng 20 tờ giấy vệ sinh mỗi ngày.  3. Nếu mỗi cuộn có 200 tờ, thì mỗi cuộn sẽ dùng được khoảng 10 ngày. Do đó, 3 cuộn giấy sẽ dùng được khoảng một tháng. |
+| 1. 먼저 이 사진에서 화장실 휴지 개수를 세어 보세요.  2. 그런 다음 일반적인 사람이 하루에 화장실 휴지를 얼마나 사용하는지 확인해 주세요.  3. 여기 있는 화장실 휴지가 얼마나 오래갈지 계산해 주세요. | 1. 이 사진에는 화장실 휴지가 3개 있습니다.  2. 사람은 일반적으로 화장실 휴지를 하루에 20칸 정도 사용합니다.  3. 한 롤에 휴지가 200칸 있으면 각 롤이 약 10일 정도 지속됩니다. 따라서 3개 롤은 한 달 정도 지속됩니다. |
 
-Các bài toán hoặc những loại bài toán có lời văn khác là những lựa chọn phù hợp để yêu cầu mô hình suy nghĩ từng bước.
+수학 문제나 기타 유형의 단어 문제는 모델이 단계별로 생각하도록 요청하기에 적합한 후보입니다.
 
-| **Câu lệnh** | **Đáp** |
+| **프롬프트** | **응답** |
 | --- | --- |
-| Số hạng thứ 4 trong dãy số này là bao nhiêu? | -135 |
+| 이 시퀀스에서 네 번째 항은 무엇인가요? | -135 |
 
-Câu trả lời của mô hình không chính xác. Một số cách để cải thiện vấn đề này là yêu cầu mô hình phân tích vấn đề trước khi trả lời câu lệnh.
+모델의 응답은 잘못되었습니다. 이를 개선하기 위한 몇 가지 방법은 모델이 프롬프트에 답변하기 전 문제를 파싱하도록 요청하는 것입니다.
 
-| **Câu lệnh** | **Đáp** |
+| **프롬프트** | **응답** |
 | --- | --- |
-| Trước tiên, hãy phân tích cú pháp công thức trong hình ảnh.  Sau đó, dựa vào công thức, hãy trả lời câu hỏi "số hạng thứ 4 trong dãy số là gì?". | *Nhấp để mở rộng kết quả* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. Thay n = 4 vào công thức:  $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. Chúng ta không biết giá trị của b(3), vì vậy hãy thay n = 3 vào công thức:  $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. Chúng ta không biết giá trị của b(2, nên hãy thay n = 2 vào công thức:  $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. Chúng ta biết giá trị của b(1) là 15, vì vậy hãy thay thế giá trị này vào công thức:  $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. Giờ đây, khi đã biết giá trị của b(2), hãy thay thế giá trị đó vào công thức cho b(3):  $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. Giờ đây, khi đã biết giá trị của b(3), hãy thay thế giá trị đó vào công thức cho b(4):  $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   Do đó, số hạng thứ 4 trong dãy số là -405. |
+| 먼저 이미지에서 수식을 분석해 주세요.  그런 후 수식을 기준으로 "시퀀스에서 네 번째 항은 무엇"인지 대답해 주세요. | *클릭하여 결과 확장* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. n = 4를 수식에 대체합니다.  $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. b(3)의 값을 알지 못하므로 n = 3을 수식에 대체합니다.  $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. b(2)의 값을 알지 못하므로 n = 2를 수식에 대체합니다.  $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. b(1)의 값이 15인 것을 알고 있으므로 이를 수식에 대체합니다.  $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. 이제 b(2)의 값을 알았으므로 이를 b(3) 수식에 대체합니다.  $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. 이제 b(3)의 값을 알았으므로 이를 b(4) 수식에 대체합니다.  $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   따라서 시퀀스에서 네 번째 항은 -405입니다. |
 
-Câu trả lời của mô hình này là chính xác. Giờ đây, để câu trả lời trở nên tinh gọn hơn nữa, bạn có thể yêu cầu mô hình suy nghĩ từng bước.
+이번에는 모델 응답이 올바릅니다. 이제 응답을 보다 효율적으로 만들기 위해 모델에 단계별로 생각하도록 요청할 수 있습니다.
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **업데이트된 프롬프트** | **개선된 응답** |
 | --- | --- |
-| Số hạng thứ 4 trong dãy số này là bao nhiêu? Hãy suy nghĩ từng bước. | Số hạng đầu tiên là 15.  Số hạng thứ hai là b(1) \* (-3) = 15 \* (-3) = -45.  Số hạng thứ ba là b(2) \* (-3) = -45 \* (-3) = 135.  Số hạng thứ tư là b(3) \* (-3) = 135 \* (-3) = -405. |
+| 이 시퀀스에서 네 번째 항은 무엇인가요? 단계별로 생각해 주세요. | 첫 번째 항은 15입니다.  두 번째 항은 b(1) \* (-3) = 15 \* (-3) = -45입니다.  세 번째 항은 b(2) \* (-3) = -45 \* (-3) = 135입니다.  네 번째 항은 b(3) \* (-3) = 135 \* (-3) = -405입니다. |
 
-### Chỉ định định dạng đầu ra
+### 출력 형식 지정
 
-Một vấn đề thường gặp là nhu cầu về đầu ra của mô hình ở một định dạng nhất định (ví dụ: Markdown, JSON, HTML), đặc biệt là nếu đầu ra của mô hình cần được một tác vụ hạ nguồn tiếp nhận. Bạn có thể thử tạo đầu ra ở định dạng đó bằng cách hướng dẫn mô hình thực hiện trong câu lệnh. Dưới đây là hai ví dụ:
+일반적인 문제는 모델 출력을 다운스트림 태스크로 수집해야 할 경우 특히 모델 출력을 특정 형식(예: 마크다운, JSON, HTML)으로 지정해야 한다는 것입니다. 프롬프트 내에서 이를 수행하도록 모델을 안내하여 해당 형식으로 출력을 생성할 수 있습니다. 다음은 두 가지 예시입니다.
 
-| Câu lệnh | Câu trả lời của mô hình |
+| 프롬프트 | 모델 응답 |
 | --- | --- |
-| Phân tích bảng trong hình ảnh này thành định dạng đánh dấu | | Chủ đề | Trạng thái | Thời gian | Ngày bắt đầu | Đến hạn |  | ------- | ------ | ---- | ---------- | ------ |  | Toán học | Đã hoàn thành | 1,5 giờ | 29/11/2023 | 1/12/2023 |  | Địa lý | Đã hoàn tất | 30 phút | 2/12/2023 | 4/12/2023 |  | Vật lý | Đang tiến hành | 2 giờ | 3/12/2023 | 5/12/2023 |  | Sinh học | Chưa bắt đầu | 6 giờ | 2/11/2016 | 6/12/2023 | |
+| 이 이미지의 표를 마크다운 형식으로 분석해 주세요. | | 과목 | 상태 | 시간 | 시작일 | 만료일 |  | ------- | ------ | ---- | ---------- | ------ |  | 수학 | 완료 | 1.5시간 | 2023/11/29 | 2023/12/1 |  | 지리 | 완료 | 30분 | 2023/12/2 | 2023/12/4 |  | 물리 | 진행 중 | 2시간 | 2023/12/3 | 2023/12/5 |  | 생물 | 시작 안 함 | 6시간 | 2016/11/2 | 2023/12/6 | |
 
-| **Câu lệnh** | **Phản hồi của mô hình** |
+| **프롬프트** | **모델 응답** |
 | --- | --- |
-| Cung cấp danh sách tất cả các thuộc tính sau:  thành phần, loại ẩm thực, ăn chay hay không, ở định dạng JSON | ```` ```json ````  `{`  `"ingredients": [`  `"rice",`  `"shrimp",`  `"clams",`  `"mussels",`  `"peas",`  `"tomatoes",`  `"onions",`  `"garlic",`  `"olive oil",`  `"paprika",`  `"salt",`  `"pepper"`  `],`  `"type of cuisine": "Spanish",`  `"vegetarian": false`  `}`  ```` ``` ```` |
+| 다음 모든 속성:  재료, 요리 종류, 채식주의 식단 여부의 목록을 JSON 형식으로 제공해 주세요. | ```` ```json ````  `{`  `"ingredients": [`  `"rice",`  `"shrimp",`  `"clams",`  `"mussels",`  `"peas",`  `"tomatoes",`  `"onions",`  `"garlic",`  `"olive oil",`  `"paprika",`  `"salt",`  `"pepper"`  `],`  `"type of cuisine": "Spanish",`  `"vegetarian": false`  `}`  ```` ``` ```` |
 
-### Đặt hình ảnh lên trước cho câu lệnh một hình ảnh
+### 단일 이미지 프롬프트에 이미지 먼저 배치
 
-Mặc dù Gemini có thể diễn giải hình ảnh và văn bản theo bất kỳ thứ tự nào trong câu lệnh, nhưng việc đặt một hình ảnh duy nhất trước câu lệnh dạng văn bản có thể mang lại kết quả tốt hơn.
-Trong các mẫu sau, bạn sẽ nhận thấy hình ảnh xuất hiện trước văn bản trong mỗi câu lệnh.
+Gemini는 프롬프트 내에서 어떤 순서로든 이미지와 텍스트를 해석할 수 있지만 텍스트 프롬프트 앞에 단일 이미지를 배치하는 것이 더 나은 결과로 이어질 수 있습니다.
+다음 샘플에서는 각 프롬프트에서 이미지가 텍스트 앞에 오는 것을 알 수 있습니다.
 
-### Khắc phục sự cố với câu lệnh đa phương thức
+### 멀티모달 프롬프트 문제 해결
 
-Bạn có thể cần khắc phục sự cố về câu lệnh nếu không nhận được phản hồi hữu ích. Sau đây là một số chiến lược mà bạn có thể thử.
+유용한 대답을 얻지 못할 경우 프롬프트를 문제 해결해야 할 수 있습니다. 이를 위해서는 몇 가지 전략을 시도해볼 수 있습니다.
 
-#### Nếu mô hình không lấy thông tin từ phần liên quan của hình ảnh
+#### 모델이 관련 이미지 부분에서 정보를 가져오지 않는 경우
 
-Để nhận được câu trả lời cụ thể hơn, bạn có thể chỉ ra những khía cạnh của hình ảnh mà bạn muốn câu lệnh lấy thông tin để đưa ra câu trả lời.
+보다 구체적인 대답을 얻기 위해서는 해당 대답에 정보를 제공하도록 프롬프트가 정보를 가져올 이미지 특정 부분을 지적할 수 있습니다.
 
-| Câu lệnh | Câu trả lời của mô hình |
+| 프롬프트 | 모델 응답 |
 | --- | --- |
-| Số lượng tã này sẽ dùng được trong bao nhiêu ngày cho một em bé? | Số tã này sẽ dùng được trong 198 ngày. |
+| 아기 한 명이 사용할 때 이 기저귀는 며칠이나 갈까요? | 기저귀가 모두 소진되려면 198일 걸립니다. |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **업데이트된 프롬프트** | **개선된 응답** |
 | --- | --- |
-| Tôi có thể dùng hết số tã này trong bao lâu?  Dùng trọng lượng ghi trên hộp để xác định độ tuổi của trẻ và dùng tổng số tã trong hộp.  Chia tổng số cho số lượng tã mà trẻ dùng mỗi ngày. | Hộp này có 198 chiếc tã. Hộp này ghi rằng tã dành cho trẻ có cân nặng từ 10 đến 17 kg.  Trẻ em trung bình trong khoảng cân nặng này có thể từ 1 đến 2 tuổi.  Một đứa trẻ 2 tuổi thường dùng 6 chiếc tã mỗi ngày, do đó, số tã này sẽ dùng được khoảng 33 ngày (198/6). |
+| 기저귀가 소진되려면 며칠이나 걸릴까요?  상자에 표시된 무게를 사용해서 아기의 나이를 확인하고 상자에 적힌 총 기저귀 개수를 사용해 주세요.  총 개수를 아기 한 명이 하루에 사용하는 기저귀 수로 나눠주세요. | 상자에는 198개의 기저귀가 있습니다. 상자에는 체중이 22-37lbs인 아기를 위한 기저귀라고 씌여져 있습니다.  이 몸무게 범위의 평균 아기는 만 1~2세 사이입니다.  만 2세 아기는 일반적으로 하루 6개 정도 기저귀를 사용합니다. 따라서 기저귀는 33일(198/6) 정도 지속됩니다. |
 
-#### Nếu đầu ra của mô hình quá chung chung và không đủ phù hợp với dữ liệu đầu vào là hình ảnh
+#### 모델 출력이 너무 일반적이고 이미지 입력에 충분히 조정되지 않은 경우
 
-Để giúp mô hình điều chỉnh câu trả lời cho (các) hình ảnh, hãy thử yêu cầu mô hình mô tả (các) hình ảnh trước khi thực hiện nhiệm vụ suy luận.
+모델이 이미지에 따라 응답을 조정할 수 있게 하려면 추론 태스크를 수행하기 전 이미지를 기술하도록 요청합니다.
 
-| Câu lệnh | Câu trả lời của mô hình |
+| 프롬프트 | 모델 응답 |
 | --- | --- |
-| Điểm chung giữa những hình ảnh này là gì? | Cả 4 hình ảnh đều là ví dụ về ảnh phong cảnh. |
+| 이러한 이미지 사이의 공통점은 무엇인가요? | 4개 이미지 모두 풍경 사진을 보여줍니다. |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **업데이트된 프롬프트** | **개선된 응답** |
 | --- | --- |
-| Trước tiên, hãy mô tả chi tiết nội dung trong từng hình ảnh. Điểm chung giữa những hình ảnh này là gì? | Hình ảnh đầu tiên cho thấy một người đang đóng gói hành lý vào vali. Hình ảnh thứ hai cho thấy một hành lang trống trong trung tâm mua sắm. Hình ảnh thứ ba cho thấy một cuộn giấy vệ sinh. Hình ảnh thứ tư cho thấy một vùng biển tối tăm và giông bão.  Điểm chung giữa những hình ảnh này là chúng đều là ví dụ về không gian trung gian. Không gian liminal là những nơi hoặc tình huống nằm giữa hai nơi hoặc tình huống khác. Chúng thường có đặc điểm là cảm giác không chắc chắn hoặc mơ hồ.  Hình ảnh đầu tiên cho thấy người này đang ở giữa trạng thái ở nhà và đi du lịch. Hình ảnh thứ hai cho thấy hành lang giữa hai cửa hàng. Hình ảnh thứ ba là giấy vệ sinh, có thể tượng trưng cho phòng tắm. Phòng tắm là không gian chuyển tiếp giữa khu vực riêng tư và khu vực công cộng. Đó là nơi chúng ta chuẩn bị bước vào hoặc rời khỏi thế giới bên ngoài.  Hình ảnh thứ tư cho thấy biển ở trạng thái giữa bình lặng và bão tố.  Không gian liminal có thể vừa thú vị vừa bất an. Chúng có thể là nơi bắt đầu hoặc kết thúc. Chúng có thể là nơi để suy ngẫm hoặc nơi để hành động. |
+| 첫째, 각 이미지에 무엇이 있는지 자세히 설명해 주세요. 이러한 이미지 사이의 공통점은 무엇인가요? | 첫 번째 이미지는 여행 가방을 싸고 있는 사람을 보여줍니다. 두 번째 이미지는 쇼핑몰의 빈 통로를 보여줍니다. 세 번째 이미지는 화장실 휴지 한 롤을 보여줍니다. 네 번째 이미지는 어둡고 거친 바다를 보여줍니다.  이러한 이미지 간의 공통점은 이미지가 모두 경계 공간의 예시라는 점입니다. 경계 공간은 두 가지 서로 다른 공간 또는 상황 사이에 있는 공간 또는 상황을 의미합니다. 경계 공간의 특성은 불확실성이나 모호한 감정에 있습니다.  첫 번째 이미지는 집과 여행 사이에 있는 사람을 보여줍니다. 두 번째 이미지는 두 매장 사이의 통로를 보여줍니다. 세 번째 이미지는 욕실을 나타낼 수 있는 화장실 휴지를 보여줍니다. 욕실은 전통적으로 개인성과 공공성을 모두 갖고 있는 공간입니다. 그리고 우리가 외부 세계로 들어오고 나가기 위해 스스로를 준비하는 장소이기도 합니다.  네 번째 이미지는 고요함과 거침 사이에 있는 바다를 보여줍니다.  경계 공간은 흥미로움과 불편함을 모두 일으킬 수 있습니다. 이러한 공간은 무언가 시작되는 장소이거나 끝나는 장소일 수 있습니다. 사색하는 장소이거나 행동하는 장소일 수도 있습니다. |
 
-Bạn cũng có thể thử yêu cầu mô hình tham khảo nội dung trong hình ảnh một cách rõ ràng.
+또한 모델이 이미지에 포함된 내용을 참조하도록 명확하게 요청할 수도 있습니다.
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **업데이트된 프롬프트** | **개선된 응답** |
 | --- | --- |
-| Điểm chung giữa những hình ảnh này là gì? Tham khảo nội dung trong hình ảnh trong câu trả lời của bạn. | Tất cả hình ảnh đều liên quan đến du lịch. Hình ảnh đầu tiên cho thấy một người đang đóng gói hành lý vào vali, hình ảnh thứ hai cho thấy một hành lang trống trong trung tâm mua sắm, hình ảnh thứ ba cho thấy một chồng giấy vệ sinh và hình ảnh thứ tư cho thấy một vùng biển tối tăm và giông bão.  Tất cả những hình ảnh này đều liên quan đến du lịch vì đây đều là những thứ mà mọi người cần hoặc sử dụng khi đi du lịch. Hình ảnh đầu tiên cho thấy một người đang đóng gói hành lý vào vali. Đây là việc mà mọi người thường làm khi đi du lịch. Hình ảnh thứ hai cho thấy một hành lang trống trong trung tâm mua sắm, đây là nơi mọi người thường đến để mua đồ cho chuyến đi của mình. Hình ảnh thứ ba cho thấy một chồng giấy vệ sinh. Đây là thứ mà mọi người thường dùng khi đi du lịch. Hình ảnh thứ tư cho thấy một vùng biển tối tăm và bão tố. Đây là điều mà mọi người thường gặp phải khi đi du lịch. |
+| 이러한 이미지 사이의 공통점은 무엇인가요? 이미지에 포함된 내용을 참조해서 답변해 주세요. | 모든 이미지는 여행과 관련이 있습니다. 첫 번째 이미지는 여행 가방을 싸고 있는 사람을 보여줍니다. 두 번째 이미지는 쇼핑몰의 빈 통로를 보여줍니다. 세 번째 이미지는 쌓여 있는 화장실 휴지를 보여줍니다. 네 번째 이미지는 어둡고 거친 바다를 보여줍니다.  이러한 이미지는 모두 여행할 때 필요하거나 사용하는 것들이기 때문에 모두 여행과 관련이 있습니다. 첫 번째 이미지는 여행 가방을 싸고 있는 사람을 보여줍니다. 이것은 사람들이 여행을 떠날 때 하는 행동입니다. 두 번째 이미지는 쇼핑몰의 빈 통로를 보여줍니다. 이것은 사람들이 여행에 필요한 물건을 구입하기 위해 자주 이동하는 장소입니다. 세 번째 이미지는 쌓여 있는 화장실 휴지를 보여줍니다. 이것은 사람들이 여행할 때 자주 사용하는 물건입니다. 네 번째 이미지는 어둡고 거친 바다를 보여줍니다. 이것은 사람들이 여행할 때 가끔 만나게 되는 것입니다. |
 
-Các mẹo tương tự cũng áp dụng cho kết quả sáng tạo từ hình ảnh. Trong ví dụ sau đây về chú thỏ, việc yêu cầu rõ ràng mô hình đưa các khía cạnh trong hình ảnh vào có thể cải thiện kết quả.
+이미지에서 창의적인 출력을 얻을 때도 동일한 팁이 사용됩니다. 토끼를 사용한 다음 예시에서 특히 모델에 이미지 특성을 포함하도록 요청하면 출력을 개선시킬 수 있습니다.
 
-| Câu lệnh | Câu trả lời của mô hình |
+| 프롬프트 | 모델 응답 |
 | --- | --- |
-| Bạn có thể viết cho tôi một bài thơ về hình ảnh này không? | Chú thỏ nhỏ, mềm mại và có màu nâu,  Nhảy qua cánh đồng, lên và xuống.  Tai dài, đuôi nhỏ,  Bạn là sinh vật đáng yêu nhất trong tất cả.  Bạn gặm cỏ, cỏ xanh và ngọt,  Và nhảy đi khi thấy tôi.  Nhưng tôi sẽ luôn là bạn của bạn,  Chú thỏ nhỏ, cho đến tận cùng. |
+| 이 이미지에 관한 시를 지어줄 수 있나요? | 작은 토끼, 너무 부드럽고 갈색이야,  위로, 아래로 들판을 뛰어 다녀.  네 귀는 너무 길어, 네 꼬리는 너무 작아,  너는 모든 것들 중 가장 귀여운 생명체.  물고 뜯는 잔디 속, 너무 파랗고, 달콤해,  그리고 날 보면 깡총 떠나버려.  하지만 난 항상 네 친구야,  작은 토끼야, 세상 끝날 때까지. |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **업데이트된 프롬프트** | **개선된 응답** |
 | --- | --- |
-| Bạn có thể viết cho tôi một bài thơ giàu hình ảnh và kịch tính về thông tin về hình ảnh này, đồng thời cho biết vị trí không? | Chú thỏ nhỏ trên bãi cỏ xanh,  Đôi tai dài, thính nhạy.  Bạn thấy gì ở nơi đó,  Ở nơi xa xăm mà bạn đang nhìn chằm chằm?  Có phải là màu xanh dương của đại dương,  Lấp lánh dưới ánh mặt trời?  Hay tiếng sóng vỗ và gầm rú,  Một nhịp điệu mà bạn yêu thích?  Thỏ con ơi, hãy nói cho ta biết,  Điều gì thu hút sự chú ý của con đến vậy?  Là làn gió mặn,  Hay tiếng hải âu kêu vang?  Có lẽ là do sự rộng lớn của tất cả,  Một thế giới vừa rộng lớn vừa nhỏ bé.  Một nơi mà những giấc mơ có thể bay bổng,  Và những cuộc phiêu lưu có thể bắt đầu.  Thỏ con ơi, ta tự hỏi giấc mơ của con là gì,  Khi con ngồi trên cỏ, thật thanh bình.  Bạn có khao khát khám phá biển sâu,  Hay ở trên đất liền, nơi bạn có thể nhảy?  Dù là gì đi chăng nữa, thỏ con ơi,  Hãy giữ cho ngọn lửa tò mò luôn cháy sáng.  Trong những ước mơ và khát vọng của bạn,  Có một thế giới đang chờ bạn sáng tạo. |
+| 이 이미지에 대해 위치를 포함해서 설명적이고 극적인 시를 지어줄 수 있나요? | 초록 위 작은 토끼,  귀가 너무 길고, 너무 예리해.  저 멀리 무엇을 보고 있니,  저 멀리, 어딜 그렇게 보고 있어?  파란색 바다인가,  태양빛에 반짝이는?  아니면 성내고 부서지는 파도인가,  네가 좋아하는 그 리듬?  작은 토끼야, 사실을 말해줘,  널 사로잡은 것이 무엇이니?  짭짤한 바닷 바람이니?  혹은 낄낄대는 갈매기 울음이니?  어쩌면 그 모든 것을 품은 광활함일지도,  세상은 너무 크고도 너무 작아.  꿈들이 돌아다닐 수 있는 곳,  그리고 모험을 뿌릴 수 있는 곳이야.  작은 토끼야, 네 꿈은 무엇일까,  풀밭에 앉으면 너무나 고요해.  깊은 곳을 탐험하고 싶니,  아니면 마음껏 뛸 수 있는 땅 위에 서고 싶니?  그것이 무엇이든, 작은 토끼야,  그 놀라움의 불꽃이 밝게 계속 타오르게 하렴.  너의 꿈과 열망 속에서,  너의 창조를 기다리는 세상 속에서. |
 
-#### Khắc phục sự cố về phần nào trong câu lệnh không hoạt động
+#### 실패한 프롬프트 부분 문제 해결
 
-Có thể bạn khó biết được liệu một câu lệnh có thất bại là do mô hình **không hiểu hình ảnh** ngay từ đầu hay là do mô hình hiểu hình ảnh nhưng không thực hiện đúng **các bước suy luận** sau đó.
-Để phân biệt những lý do đó, hãy yêu cầu mô hình mô tả nội dung trong hình ảnh.
+모델이 처음에 **이미지를 이해**하지 못해서 프롬프트가 실패했는지, 아니면 이미지를 이해했지만 이후 올바른 **추론 단계**를 수행하지 못했는지 알기 어려울 수 있습니다.
+이러한 이유들을 구분하기 위해서는 모델에 이미지에 포함된 것이 무엇인지 기술하도록 요청하세요.
 
-Trong ví dụ sau, nếu mô hình phản hồi bằng một món ăn nhẹ có vẻ bất ngờ khi kết hợp với trà (ví dụ: bỏng ngô), trước tiên, bạn có thể khắc phục sự cố để xác định xem mô hình có nhận dạng chính xác rằng hình ảnh có chứa trà hay không.
+다음 예시에서 모델이 차와 함께 할 때 어울리지 않는 간식 (예: 팝콘)으로 응답할 경우에는 먼저 모델이 이미지에 차가 포함된 것을 올바르게 인식했는지 확인하는 방식으로 문제 해결을 시작할 수 있습니다.
 
-| Câu lệnh | Lời nhắc để khắc phục sự cố |
+| 프롬프트 | 문제 해결을 위한 프롬프트 |
 | --- | --- |
-| Tôi có thể làm món ăn nhẹ nào trong 1 phút để ăn kèm với món này? | Mô tả nội dung trong hình ảnh này. |
+| 이 사진과 어울리는 것 중 1분 내에 만들 수 있는 간식은 무엇이 있나요? | 이 이미지의 내용을 설명해 주세요. |
 
-Một chiến lược khác là yêu cầu mô hình giải thích lý do. Điều này có thể giúp bạn thu hẹp phạm vi để xác định phần nào của lý luận bị sai, nếu có.
+또 다른 전략은 모델에 그 이유를 설명하도록 요청하는 것입니다. 이렇게 하면 (만약 있다면) 추론의 어떤 부분이 잘못되었는지를 좁혀 파악하는 데 도움이 될 수 있습니다.
 
-| Câu lệnh | Lời nhắc để khắc phục sự cố |
+| 프롬프트 | 문제 해결을 위한 프롬프트 |
 | --- | --- |
-| Tôi có thể làm món ăn nhẹ nào trong 1 phút để ăn kèm với món này? | Tôi có thể làm món ăn nhẹ nào trong 1 phút để ăn kèm với món này? Vui lòng giải thích lý do. |
+| 이 사진과 어울리는 것 중 1분 내에 만들 수 있는 간식은 무엇이 있나요? | 이 사진과 어울리는 것 중 1분 내에 만들 수 있는 간식은 무엇이 있나요? 이유를 설명해 주세요. |
 
-## Bước tiếp theo
+## 다음 단계
 
-- Hãy thử viết câu lệnh đa phương thức của riêng bạn bằng [Google AI Studio](http://aistudio.google.com?hl=vi).
-- Để biết thông tin về cách sử dụng Gemini Files API để tải tệp đa phương tiện lên và đưa tệp đó vào câu lệnh, hãy xem hướng dẫn về [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=vi), [Âm thanh](https://ai.google.dev/gemini-api/docs/audio?hl=vi) và [Xử lý tài liệu](https://ai.google.dev/gemini-api/docs/document-processing?hl=vi).
-- Để biết thêm hướng dẫn về cách thiết kế câu lệnh, chẳng hạn như điều chỉnh các thông số lấy mẫu, hãy xem trang [Chiến lược về câu lệnh](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=vi).
+- [Google AI Studio](http://aistudio.google.com?hl=ko)를 사용하여 나만의 멀티모달 프롬프트를 작성해 보세요.
+- 미디어 파일을 업로드하고 프롬프트에 포함하기 위해 Gemini Files API를 사용하는 방법에 관한 자세한 내용은 [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=ko), [오디오](https://ai.google.dev/gemini-api/docs/audio?hl=ko), [문서 처리](https://ai.google.dev/gemini-api/docs/document-processing?hl=ko) 가이드를 참고하세요.
+- 샘플링 매개변수 조정과 같은 프롬프트 설계에 관한 자세한 안내는 [프롬프트 전략](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ko) 페이지를 참고하세요.
 
-Gửi ý kiến phản hồi
+의견 보내기
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Cập nhật lần gần đây nhất: 2026-05-19 UTC.
+최종 업데이트: 2026-06-01(UTC)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+의견을 전달하고 싶나요?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-19 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-01(UTC)"],[],[]]

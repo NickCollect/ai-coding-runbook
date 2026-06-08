@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=th
-fetched_at: 2026-06-01T05:59:40.051854+00:00
-title: "\u0e01\u0e32\u0e23\u0e40\u0e23\u0e34\u0e48\u0e21\u0e15\u0e49\u0e19\u0e43\u0e0a\u0e49\u0e07\u0e32\u0e19 Agent \u0e17\u0e35\u0e48\u0e21\u0e35\u0e01\u0e32\u0e23\u0e08\u0e31\u0e14\u0e01\u0e32\u0e23\u0e2d\u0e22\u0e48\u0e32\u0e07\u0e23\u0e27\u0e14\u0e40\u0e23\u0e47\u0e27 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=it
+fetched_at: 2026-06-08T05:29:19.856128+00:00
+title: "Guida rapida di Managed Agents \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-ส่งความคิดเห็น
+Invia feedback
 
-# การเริ่มต้นใช้งาน Agent ที่มีการจัดการอย่างรวดเร็ว
+# Guida rapida di Managed Agents
 
-คู่มือนี้จะแนะนำขั้นตอนการสร้างและใช้ Managed Agent ใน Gemini API โดยใช้ [Antigravity Agent](https://ai.google.dev/gemini-api/docs/agents/antigravity-agent?hl=th) คุณจะได้ทำการเรียก Agent ครั้งแรก สนทนาต่อแบบหลายรอบ สตรีมคำตอบ ดาวน์โหลดไฟล์จากแซนด์บ็อกซ์ และใช้ Antigravity Managed Agent
+Questa guida ti illustra come creare e utilizzare gli agenti gestiti nell'API Gemini utilizzando l'agente [Antigravity](https://ai.google.dev/gemini-api/docs/agents/antigravity-agent?hl=it). Eseguirai la tua prima chiamata all'agente, continuerai una conversazione a più turni, visualizzerai in streaming la risposta, scaricherai i file dalla sandbox e lavorerai con l'agente gestito Antigravity.
 
-## เรียกใช้การโต้ตอบกับ Agent ครั้งแรก
+## Esegui la tua prima interazione con l'agente
 
-การเรียกใช้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=th) เพียงครั้งเดียวจะจัดเตรียมแซนด์บ็อกซ์ Linux เรียกใช้ลูปของ Agent และแสดงผลลัพธ์ คุณจะต้องกำหนดพารามิเตอร์ 3 รายการ ดังนี้
+Una singola chiamata all'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=it) esegue il provisioning di una sandbox Linux, esegue il loop dell'agente e restituisce il risultato. Definirai tre parametri:
 
-- ส่ง `agent` เป็น `"antigravity-preview-05-2026",` ซึ่งเป็นเวอร์ชันปัจจุบันของ Managed Agent ที่กำหนดไว้ล่วงหน้าและมีวัตถุประสงค์ทั่วไป
-- กำหนด `environment="remote"` เพื่อจัดเตรียมสภาพแวดล้อมแซนด์บ็อกซ์ใหม่
-- สร้างอินพุตเพื่อกำหนดสิ่งที่คุณต้องการให้ Agent ทำ
+- Trasmetti il `agent` come `"antigravity-preview-05-2026",` che è la versione attuale del nostro agente gestito predefinito e per uso generico.
+- Definisci `environment="remote"` per eseguire il provisioning di un nuovo ambiente sandbox.
+- Crea un input che definisca cosa vuoi che faccia l'agente.
 
 ### Python
 
@@ -80,16 +80,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-การตอบกลับจะแสดงออบเจ็กต์ `Interaction` จัดเก็บ `interaction.id` และ `interaction.environment_id` เพื่อสนทนาต่อในแซนด์บ็อกซ์เดียวกัน ใช้ `interaction.output_text` เพื่อเข้าถึงการตอบกลับสุดท้ายของ Agent `interaction.steps` จะแสดงรายการแต่ละขั้นตอนที่ Agent ดำเนินการ (การให้เหตุผล การเรียกใช้เครื่องมือ การดำเนินการโค้ด)
+La risposta restituisce un oggetto `Interaction`. Memorizza `interaction.id` e `interaction.environment_id` per continuare la conversazione nella stessa sandbox. Utilizza `interaction.output_text` per accedere alla risposta finale dell'agente. `interaction.steps` elenca ogni passaggio eseguito dall'agente (ragionamento, chiamate di strumenti, esecuzione del codice).
 
-## สนทนาต่อ (หลายรอบ)
+## Continua la conversazione (più turni)
 
-API จะติดตามมิติข้อมูลสถานะ 2 รายการแยกกัน ดังนี้
+L'API tiene traccia di due dimensioni di stato indipendenti:
 
-- **บริบทการสนทนา:** ประวัติการแชท การติดตามการให้เหตุผล การใช้เครื่องมือ โดยใช้ `previous_interaction_id`
-- [**สถานะสภาพแวดล้อม:**](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th) ไฟล์ แพ็กเกจที่ติดตั้ง และสถานะแซนด์บ็อกซ์ โดยใช้ `environment`
+- **Contesto della conversazione:** cronologia chat, traccia del ragionamento, utilizzo degli strumenti, utilizzo di `previous_interaction_id`.
+- [**Stato dell'ambiente:**](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it) file, pacchetti installati e stato della sandbox, utilizzando `environment`.
 
-ส่งทั้ง 2 รายการในตำแหน่งที่เกี่ยวข้องเพื่อดำเนินการต่อ
+Trasmetti entrambi nel rispettivo posto per riprendere:
 
 ### Python
 
@@ -132,20 +132,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-ไฟล์จากรอบที่ 1 (`fibonacci.txt`) จะยังคงอยู่ในรอบที่ 2 นอกจากนี้ Agent ยังเก็บรักษาบริบทการสนทนาไว้ด้วย
+I file del turno 1 (`fibonacci.txt`) persistono nel turno 2. L'agente conserva anche il contesto della conversazione.
 
-คุณสามารถผสมและจับคู่รายการต่อไปนี้ได้อย่างอิสระ
+Puoi combinarli e abbinarli in modo indipendente:
 
-- **ล้างการสนทนา แต่เก็บไฟล์ไว้:** ละเว้น `previous_interaction_id` และส่งเฉพาะรหัสสภาพแวดล้อมโดยใช้ `environment` เพื่อเริ่มการสนทนาใหม่ในพื้นที่ทำงานเดียวกัน
-- **เก็บการสนทนาไว้ แต่ใช้พื้นที่ทำงานใหม่:** ส่ง `previous_interaction_id` และตั้งค่า `environment="remote"` เพื่อใช้แซนด์บ็อกซ์ใหม่
+- **Cancella conversazione, conserva i file:** ometti `previous_interaction_id`, trasmetti solo l'ID ambiente utilizzando `environment` per una nuova conversazione nella stessa area di lavoro.
+- **Conserva la conversazione, nuova area di lavoro:** trasmetti `previous_interaction_id`, imposta `environment="remote"` per una nuova sandbox.
 
-### การบีบอัดบริบทอัตโนมัติ
+### Compattazione automatica del contesto
 
-ในการสนทนาแบบหลายรอบที่ใช้เวลานาน ประวัติการให้เหตุผล การเรียกใช้เครื่องมือ และเนื้อหาไฟล์ขนาดใหญ่จะเพิ่มขึ้นอย่างรวดเร็วและใช้พื้นที่บริบทจำนวนมาก เพื่อป้องกันข้อผิดพลาดเกี่ยวกับขีดจำกัดโทเค็นและรักษาโฟกัสของ Agent (ป้องกัน "บริบทเสื่อม") Managed Agents API จึงมีขั้นตอนการบีบอัดบริบทในตัวเมื่อมีโทเค็นประมาณ 135,000 รายการ ซึ่งจะเกิดขึ้นโดยอัตโนมัติ
+Nelle conversazioni a più turni di lunga durata, la cronologia non elaborata dei passaggi di ragionamento, delle chiamate di strumenti e dei contenuti di file di grandi dimensioni può crescere rapidamente e consumare uno spazio di contesto significativo. Per evitare errori di limite di token e mantenere l'attenzione dell'agente (prevenendo il "deterioramento del contesto"), l'API Managed Agents include un passaggio di compattazione del contesto nativo a circa 135.000 token. Ciò avviene automaticamente.
 
-## สตรีมคำตอบ
+## Visualizza in streaming la risposta
 
-สำหรับงานที่ใช้เวลานาน คุณสามารถสตรีมคำตอบเพื่อดูการทำงานของ Agent แบบเรียลไทม์ได้
+Per le attività di lunga durata, puoi visualizzare in streaming la risposta per vedere l'agente lavorare in tempo reale:
 
 ### Python
 
@@ -199,11 +199,11 @@ curl -N -s -X POST "https://generativelanguage.googleapis.com/v1beta/interaction
 }'
 ```
 
-การสตรีมจะแสดงผลการเปลี่ยนแปลงทีละขั้นตอน ซึ่งเป็นข้อความที่เพิ่มขึ้น โทเค็นการให้เหตุผล และการอัปเดตการเรียกใช้เครื่องมือ ดูข้อมูลเพิ่มเติมเกี่ยวกับวิธีสตรีมคำตอบใน[คู่มือการสตรีม](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=th)
+Lo streaming restituisce un oggetto iterabile di delta di passaggi, ovvero testo incrementale, token di ragionamento e aggiornamenti delle chiamate di strumenti. Scopri di più su come visualizzare in streaming le risposte nella [guida allo streaming](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=it).
 
-## ดาวน์โหลดไฟล์จากสภาพแวดล้อม
+## Scarica i file dall'ambiente
 
-เมื่อ Agent สร้างไฟล์ภายในแซนด์บ็อกซ์ ให้ดาวน์โหลดไฟล์โดยใช้ Files API ด้วยคำขอ HTTP โดยตรง (ยังไม่มีเมธอด SDK)
+Quando l'agente crea file all'interno della sandbox. Scaricali utilizzando l'API Files con una richiesta HTTP diretta (non è ancora disponibile alcun metodo SDK):
 
 ### Python
 
@@ -270,13 +270,13 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/files/environme
 tar -xf snapshot.tar -C extracted_snapshot
 ```
 
-## บันทึก Managed Agent
+## Salva un agente gestito
 
-ในขั้นตอนก่อนหน้า เราใช้ Antigravity Agent เริ่มต้นและปรับแต่ง Agent แบบอินไลน์ เมื่อทำซ้ำการกำหนดค่า (คำแนะนำ สกิล และสภาพแวดล้อม) แล้ว คุณจะบันทึกการกำหนดค่าเป็น Managed Agent ได้ ซึ่งจะช่วยให้คุณเรียกใช้ Agent ตามรหัสได้โดยไม่ต้องกำหนดค่าซ้ำ
+Nei passaggi precedenti, abbiamo utilizzato l'agente Antigravity predefinito e lo abbiamo personalizzato in linea. Una volta eseguite le iterazioni sulla configurazione (istruzioni, competenze e ambiente), puoi salvarla come agente gestito. In questo modo, puoi richiamarlo per ID senza ripetere la configurazione.
 
-เมื่อบันทึก Agent คุณจะต้องกำหนด `base_environment` (จากแหล่งที่มาหรือโดยการแยกสภาพแวดล้อมที่มีอยู่ออกเป็นอีกสภาพแวดล้อมหนึ่ง) Agent จะใช้สภาพแวดล้อมนี้สำหรับการโต้ตอบใหม่ทุกครั้ง
+Quando salvi un agente, definisci un `base_environment` (da origini o eseguendo il fork di un ambiente esistente). L'agente utilizzerà questo ambiente per ogni nuova interazione.
 
-**จากแหล่งที่มา:** กำหนดแหล่งที่มาแบบอินไลน์ หรือจากแหล่งที่มาอื่นๆ เช่น GitHub หรือ Cloud Storage
+**Da origini:** definisci le origini in linea o da altre origini come GitHub o Cloud Storage.
 
 ### Python
 
@@ -361,9 +361,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 }'
 ```
 
-## เรียกใช้ Managed Agent
+## Richiama l'agente gestito
 
-เมื่อบันทึก Managed Agent แล้ว คุณจะเรียกใช้ Agent ตามรหัสได้ การเรียกใช้แต่ละครั้งจะแยกสภาพแวดล้อมพื้นฐานออกเป็นอีกสภาพแวดล้อมหนึ่ง ดังนั้นการเรียกใช้ทุกครั้งจึงเริ่มต้นด้วยสภาพแวดล้อมที่สะอาด
+Una volta salvato un agente gestito, puoi richiamarlo per ID. Ogni chiamata esegue il fork dell'ambiente di base, quindi ogni esecuzione inizia da zero:
 
 ### Python
 
@@ -405,19 +405,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## ขั้นตอนถัดไป
+## Passaggi successivi
 
-- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th): ความสามารถ เครื่องมือที่รองรับ อินพุตมัลติโมดัล การกำหนดราคา และข้อจำกัด
-- [การสร้าง Managed Agent](https://ai.google.dev/gemini-api/docs/custom-agents?hl=th): ขยาย Antigravity ด้วยคำแนะนำ สกิล และข้อมูลของคุณเอง
-- [สภาพแวดล้อม](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th): แหล่งที่มา เครือข่าย วงจรชีวิต ขีดจำกัดของทรัพยากร
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=th): API พื้นฐานสำหรับโมเดลและ Agent
+- [Agente Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it): funzionalità, strumenti supportati, input multimodale, prezzi e limitazioni.
+- [Creazione di agenti gestiti](https://ai.google.dev/gemini-api/docs/custom-agents?hl=it): estendi Antigravity con le tue istruzioni, competenze e dati.
+- [Ambienti](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it): origini, networking, ciclo di vita, limiti delle risorse.
+- [API Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=it): l'API sottostante per modelli e agenti.
 
-ส่งความคิดเห็น
+Invia feedback
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-อัปเดตล่าสุด 2026-05-20 UTC
+Ultimo aggiornamento 2026-05-20 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Vuoi dirci altro?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-05-20 UTC"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-20 UTC."],[],[]]

@@ -1,68 +1,68 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=ar
-fetched_at: 2026-06-01T06:07:12.814318+00:00
+source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=ko
+fetched_at: 2026-06-08T05:29:03.952031+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-إرسال ملاحظات
+의견 보내기
 
-# فهم الرموز المميّزة وعدّها
+# 토큰 이해 및 집계
 
-تعالج نماذج Gemini ونماذج الذكاء الاصطناعي التوليدي الأخرى الإدخالات والنتائج بدقة تُعرف باسم *الرمز المميز*.
+Gemini 및 기타 생성형 AI 모델은 *토큰* 이라는 세분화된 수준에서 입력 및 출력을 처리합니다.
 
-**بالنسبة إلى نماذج Gemini، يعادل الرمز المميز الواحد 4 أحرف تقريبًا.
-ويعادل 100 رمز مميز من 60 إلى 80 كلمة باللغة الإنجليزية تقريبًا.**
+**Gemini 모델의 경우 토큰은 약 4자에 해당합니다.
+100개의 토큰은 약 60~80개의 영어 단어와 같습니다.**
 
-## لمحة عن الرموز المميّزة
+## 토큰 정보
 
-يمكن أن تكون الرموز المميّزة أحرفًا مفردة، مثل `z`، أو كلمات كاملة، مثل `cat`. ويتم تقسيم الكلمات الطويلة إلى عدة رموز مميّزة. تُعرف مجموعة جميع الرموز المميّزة التي يستخدمها النموذج باسم المفردات، وتُعرف عملية تقسيم النص إلى رموز مميّزة باسم *الترميز*.
+토큰은 단일 문자(예: `z`) 또는 전체 단어(예: `cat`)일 수 있습니다. 긴 단어는 여러 토큰으로 나뉩니다. 모델에서 사용하는 모든 토큰 집합을 어휘라고 하며, 텍스트를 토큰으로 분할하는 프로세스를 *토큰화* 라고 합니다.
 
-عند تفعيل الفوترة، يتم تحديد [تكلفة طلب إلى Gemini API](https://ai.google.dev/pricing?hl=ar) جزئيًا من خلال عدد الرموز المميّزة للإدخال والإخراج، لذا قد يكون من المفيد معرفة كيفية
-عدّ الرموز المميّزة.
+결제가 사용 설정된 경우 Gemini API 호출의 [비용](https://ai.google.dev/pricing?hl=ko)은
+입력 및 출력 토큰 수에 따라 결정되므로 토큰을
+집계하는 방법을 알아두면 유용합니다.
 
-يمكنك تجربة عدّ الرموز المميّزة في Colab.
+Colab에서 토큰 집계를 사용해 볼 수 있습니다.
 
 |  |  |  |
 | --- | --- | --- |
-| [عرض على ai.google.dev](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | [تجربة ورقة ملاحظات Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ar) | [عرض ورقة الملاحظات على GitHub](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ar) |
+| [ai.google.dev에서 보기](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | [Colab 노트북 사용해 보기](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ko) | [GitHub에서 노트북 보기](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ko) |
 
-## عدّ الرموز المميّزة
+## 토큰 집계
 
-يتم ترميز جميع الإدخالات والنتائج من Gemini API، بما في ذلك النصوص وملفات الصور والوسائط الأخرى غير النصية.
+텍스트, 이미지 파일, 기타 텍스트가 아닌 모달리티를 비롯한 Gemini API의 모든 입력 및 출력은 토큰화됩니다.
 
-يمكنك عدّ الرموز المميّزة بالطرق التالية:
+다음과 같은 방법으로 토큰을 집계할 수 있습니다.
 
-- **استدعاء [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=ar) باستخدام إدخال
-  الطلب.**  
-   تعرض هذه الطريقة إجمالي عدد الرموز المميّزة في *الإدخال فقط*. يمكنك إجراء هذا الاستدعاء قبل إرسال الإدخال إلى النموذج للتحقّق من حجم طلباتك.
-- **استخدام السمة `usage_metadata` في عنصر `response` بعد
-  استدعاء `generate_content`.**  
-   تعرض هذه الطريقة إجمالي عدد الرموز المميّزة في *كل من الإدخال والإخراج*: `total_token_count`.  
-   تعرض أيضًا عدد الرموز المميّزة للإدخال والإخراج بشكل منفصل: `prompt_token_count` (رموز الإدخال المميّزة) و`candidates_token_count` (رموز الإخراج المميّزة).
+- **요청의 입력
+  으로 [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=ko)를 호출합니다.**  
+   이렇게 하면 *입력에만* 있는 총 토큰 수가 반환됩니다. 모델에 입력을 보내기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다.
+- **`generate_content`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용합니다.**  
+   이렇게 하면
+  토큰의 총 수(*입력과 출력 모두*)가 반환됩니다. `total_token_count`.  
+   또한 입력 및 출력의 토큰 수를 별도로 반환합니다. `prompt_token_count` (입력 토큰) 및 `candidates_token_count`(출력 토큰)
 
-  [إذا كنت تستخدم نموذجًا للتفكير، يتم عرض الرموز المميّزة المستخدَمة أثناء عملية التفكير في `thoughts_token_count`.](https://ai.google.dev/gemini-api/docs/thinking?hl=ar) وإذا كنت تستخدم
-  [ميزة "تخزين السياق مؤقتًا"](https://ai.google.dev/gemini-api/docs/caching?hl=ar)، سيكون عدد الرموز المميّزة المخزّنة مؤقتًا في `cached_content_token_count`.
+  [사고 모델을 사용하는 경우 사고 과정에서 사용된 토큰이 `thoughts_token_count`에 반환됩니다.](https://ai.google.dev/gemini-api/docs/thinking?hl=ko) [컨텍스트 캐싱을 사용하는 경우 캐시된 토큰 수는 `cached_content_token_count`에 있습니다.](https://ai.google.dev/gemini-api/docs/caching?hl=ko)
 
-### عدّ الرموز المميّزة للنص
+### 텍스트 토큰 집계
 
-إذا استدعيت `count_tokens` باستخدام إدخال نصي فقط، ستعرض هذه الطريقة عدد الرموز المميّزة للنص في *الإدخال فقط* (`total_tokens`). يمكنك إجراء هذا الاستدعاء قبل استدعاء `generate_content` للتحقّق من حجم طلباتك.
+텍스트 전용 입력으로 `count_tokens`를 호출하면 *입력에만* 있는 텍스트의 토큰 수 (`total_tokens`)가 반환됩니다. `generate_content`를 호출하기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다.
 
-هناك خيار آخر وهو استدعاء `generate_content` ثم استخدام السمة `usage_metadata` في عنصر `response` للحصول على ما يلي:
+또 다른 방법은 `generate_content`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
 
-- عدد الرموز المميّزة المنفصلة للإدخال (`prompt_token_count`) والمحتوى المخزّن مؤقتًا (`cached_content_token_count`) والإخراج (`candidates_token_count`)
-- عدد الرموز المميّزة لعملية التفكير (`thoughts_token_count`)
-- إجمالي عدد الرموز المميّزة في *كل من الإدخال والإخراج* (`total_token_count`)
+- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 개별 토큰 수
+- 사고 과정의 토큰 수 (`thoughts_token_count`)
+- *입력과 출력 모두* 의 총 토큰 수(`total_token_count`)
 
 ### Python
 
@@ -109,7 +109,7 @@ async function main() {
 await main();
 ```
 
-### انتقال
+### Go
 
 ```
 ctx := context.Background()
@@ -137,17 +137,17 @@ fmt.Println(string(usageMetadata))
     ```
 ```
 
-### عدّ الرموز المميّزة للمحادثات المتعدّدة الجولات (المحادثة)
+### 멀티턴 (채팅) 토큰 집계
 
-إذا استدعيت `count_tokens` باستخدام سجلّ المحادثة، ستعرض هذه الطريقة إجمالي عدد الرموز المميّزة للنص من كل دور في المحادثة (`total_tokens`).
+채팅 기록으로 `count_tokens`를 호출하면 채팅의 각 역할에서 텍스트의 총 토큰 수 (`total_tokens`)가 반환됩니다.
 
-هناك خيار آخر وهو استدعاء `send_message` ثم استخدام السمة `usage_metadata` في عنصر `response` للحصول على ما يلي:
+또 다른 방법은 `send_message`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
 
-- عدد الرموز المميّزة المنفصلة للإدخال (`prompt_token_count`) والمحتوى المخزّن مؤقتًا (`cached_content_token_count`) والإخراج (`candidates_token_count`)
-- عدد الرموز المميّزة لعملية التفكير (`thoughts_token_count`)
-- إجمالي عدد الرموز المميّزة في *كل من الإدخال والإخراج* (`total_token_count`)
+- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 개별 토큰 수
+- 사고 과정의 토큰 수 (`thoughts_token_count`)
+- *입력과 출력 모두* 의 총 토큰 수(`total_token_count`)
 
-لفهم حجم جولة المحادثة التالية، عليك إلحاقها بالسجلّ عند استدعاء `count_tokens`.
+다음 대화 턴의 크기를 파악하려면 `count_tokens`를 호출할 때 기록에 추가해야 합니다.
 
 ### Python
 
@@ -235,7 +235,7 @@ async function main() {
 await main();
 ```
 
-### انتقال
+### Go
 
 ```
 ctx := context.Background()
@@ -273,33 +273,33 @@ if err != nil {
 fmt.Println(secondTokenResp.TotalTokens)
 ```
 
-### عدّ الرموز المميّزة المتعددة الوسائط
+### 멀티모달 토큰 집계
 
-يتم ترميز جميع الإدخالات إلى Gemini API، بما في ذلك النصوص وملفات الصور والوسائط الأخرى غير النصية. يُرجى العِلم بالنقاط الرئيسية التالية حول ترميز الإدخالات المتعددة الوسائط أثناء معالجتها من قِبل Gemini API:
+텍스트, 이미지 파일, 기타 텍스트가 아닌 모달리티를 비롯한 Gemini API의 모든 입력은 토큰화됩니다. Gemini API에서 처리하는 동안 멀티모달 입력의 토큰화에 관한 다음 주요사항을 참고하세요.
 
-- يتم عدّ إدخالات الصور التي يكون كلا بُعدَيها ≤384 بكسل على أنّها 258 رمزًا مميّزًا. يتم اقتصاص الصور التي يكون أحد بُعدَيها أو كلاهما أكبر من ذلك وتغيير حجمها حسب الحاجة إلى مربّعات بحجم 768 × 768 بكسل، ويتم عدّ كل منها على أنّه 258 رمزًا مميّزًا.
-- يتم تحويل ملفات الفيديو والصوت إلى رموز مميّزة بالمعدّلات الثابتة التالية: الفيديو بمعدّل 263 رمزًا مميّزًا في الثانية والصوت بمعدّل 32 رمزًا مميّزًا في الثانية.
+- 두 치수가 모두 384픽셀 이하인 이미지 입력은 258개의 토큰으로 집계됩니다. 한쪽 또는 양쪽 치수가 더 큰 이미지는 필요에 따라 768x768픽셀의 타일로 잘리고 크기가 조정되며, 각 타일은 258개의 토큰으로 집계됩니다.
+- 동영상 및 오디오 파일은 다음과 같은 고정 비율로 토큰으로 변환됩니다. 동영상은 초당 263개의 토큰, 오디오는 초당 32개의 토큰입니다.
 
-#### دقة الوسائط
+#### 미디어 해상도
 
-[توفّر نماذج Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=ar#gemini-3) تحكّمًا دقيقًا في
-معالجة الصور المتعددة الوسائط باستخدام المَعلمة `media_resolution`. تحدّد المَعلمة `media_resolution` **الحد الأقصى لعدد الرموز المميّزة المخصّصة لكل صورة إدخال أو إطار فيديو.**
-تُحسِّن الدقة العالية قدرة النموذج على قراءة النصوص الدقيقة أو تحديد التفاصيل الصغيرة، ولكنها تزيد من استخدام الرموز المميّزة والمدة الزمنية المستغرَقة.
+[Gemini 3 모델](https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-3)은
+멀티모달 비전 처리에 대한 세밀한 제어 기능을 `media_resolution` 파라미터를 사용하여 제공합니다. `media_resolution` 파라미터는 **입력 이미지 또는 동영상 프레임당 할당되는 최대 토큰 수** 를 결정합니다.
+해상도가 높을수록 모델이 작은 텍스트를 읽거나 세부 요소를 식별하는 능력을 향상시키지만, 토큰 사용량과 지연 시간이 증가합니다.
 
-لمزيد من التفاصيل حول المَعلمة وكيفية تأثيرها في عمليات احتساب الرموز المميّزة،
-يُرجى الاطّلاع على دليل [دقة الوسائط](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ar).
+파라미터 및 토큰 계산에 미치는 영향에 관한 자세한 내용은
+[미디어 해상도](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ko) 가이드를 참고하세요.
 
-#### ملفات الصور
+#### 이미지 파일
 
-إذا استدعيت `count_tokens` باستخدام إدخال نصي وصورة، ستعرض هذه الطريقة عدد الرموز المميّزة المجمّع للنص والصورة في *الإدخال فقط* (`total_tokens`). يمكنك إجراء هذا الاستدعاء قبل استدعاء `generate_content` للتحقّق من حجم طلباتك. يمكنك أيضًا اختياريًا استدعاء `count_tokens` على النص والملف بشكل منفصل.
+텍스트 및 이미지 입력으로 `count_tokens`를 호출하면 *입력에만* 있는 텍스트와 이미지의 결합된 토큰 수 (`total_tokens`)가 반환됩니다. `generate_content`를 호출하기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다. 선택적으로 텍스트와 파일에서 `count_tokens`를 별도로 호출할 수도 있습니다.
 
-هناك خيار آخر وهو استدعاء `generate_content` ثم استخدام السمة `usage_metadata` في عنصر `response` للحصول على ما يلي:
+또 다른 방법은 `generate_content`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
 
-- عدد الرموز المميّزة المنفصلة للإدخال (`prompt_token_count`) والمحتوى المخزّن مؤقتًا (`cached_content_token_count`) والإخراج (`candidates_token_count`)
-- عدد الرموز المميّزة لعملية التفكير (`thoughts_token_count`)
-- إجمالي عدد الرموز المميّزة في *كل من الإدخال والإخراج* (`total_token_count`)
+- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 개별 토큰 수
+- 사고 과정의 토큰 수 (`thoughts_token_count`)
+- *입력과 출력 모두* 의 총 토큰 수(`total_token_count`)
 
-مثال يستخدم صورة تم تحميلها من File API:
+File API에서 업로드된 이미지를 사용하는 예:
 
 ### Python
 
@@ -358,7 +358,7 @@ async function main() {
 await main();
 ```
 
-### انتقال
+### Go
 
 ```
 ctx := context.Background()
@@ -399,7 +399,7 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-مثال يقدّم الصورة كبيانات مضمّنة:
+이미지를 인라인 데이터로 제공하는 예:
 
 ### Python
 
@@ -456,7 +456,7 @@ async function main() {
 await main();
 ```
 
-### انتقال
+### Go
 
 ```
 ctx := context.Background()
@@ -496,20 +496,20 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-#### ملفات الفيديو أو الصوت
+#### 동영상 또는 오디오 파일
 
-يتم تحويل كل من الصوت والفيديو إلى رموز مميّزة بالمعدّلات الثابتة التالية:
+오디오와 동영상은 각각 다음과 같은 고정 비율로 토큰으로 변환됩니다.
 
-- الفيديو: 263 رمزًا مميّزًا في الثانية
-- الصوت: 32 رمزًا مميّزًا في الثانية
+- 동영상: 초당 토큰 263개
+- 오디오: 초당 토큰 32개
 
-إذا استدعيت `count_tokens` باستخدام إدخال نصي وفيديو/صوت، ستعرض هذه الطريقة عدد الرموز المميّزة المجمّع للنص وملف الفيديو/الصوت في *الإدخال فقط* (`total_tokens`). يمكنك إجراء هذا الاستدعاء قبل استدعاء `generate_content` للتحقّق من حجم طلباتك. يمكنك أيضًا اختياريًا استدعاء `count_tokens` على النص والملف بشكل منفصل.
+텍스트 및 동영상/오디오 입력으로 `count_tokens`를 호출하면 *입력에만* 있는 텍스트와 동영상/오디오 파일의 결합된 토큰 수(`total_tokens`)가 반환됩니다. `generate_content`를 호출하기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다. 선택적으로 텍스트와 파일에서 `count_tokens`를 별도로 호출할 수도 있습니다.
 
-هناك خيار آخر وهو استدعاء `generate_content` ثم استخدام السمة `usage_metadata` في عنصر `response` للحصول على ما يلي:
+또 다른 방법은 `generate_content`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
 
-- عدد الرموز المميّزة المنفصلة للإدخال (`prompt_token_count`) والمحتوى المخزّن مؤقتًا (`cached_content_token_count`) والإخراج (`candidates_token_count`)
-- عدد الرموز المميّزة لعملية التفكير (`thoughts_token_count`)
-- إجمالي عدد الرموز المميّزة في *كل من الإدخال والإخراج* (`total_token_count`).
+- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 개별 토큰 수
+- 사고 과정의 토큰 수 (`thoughts_token_count`)
+- *입력과 출력 모두* 의 총 토큰 수(`total_token_count`).
 
 ### Python
 
@@ -582,7 +582,7 @@ async function main() {
 await main();
 ```
 
-### انتقال
+### Go
 
 ```
 ctx := context.Background()
@@ -634,9 +634,43 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-## قدرات الاستيعاب
+### 사고 토큰 집계
 
-تتضمّن النماذج المتاحة من خلال Gemini API قدرات استيعاب يتم قياسها بالرموز المميّزة. تحدّد قدرة الاستيعاب حجم الإدخال الذي يمكنك تقديمه وحجم الإخراج الذي يمكن للنموذج إنشاؤه. يمكنك تحديد حجم قدرة الاستيعاب من خلال استدعاء نقطة النهاية [`models.get`](https://ai.google.dev/api/rest/v1/models/get?hl=ar)أو الاطّلاع على [مستندات النماذج](https://ai.google.dev/gemini-api/docs/models?hl=ar).
+사고를 사용 설정하면 응답 가격은 출력 토큰과 사고 토큰의 합계입니다. `thoughtsTokenCount` 필드 (또는 SDK에 상응하는 필드)에서 생성된 총 사고 토큰 수를 가져올 수 있습니다.
+
+### Python
+
+```
+# ...
+print("Thoughts tokens:", response.usage_metadata.thoughts_token_count)
+print("Output tokens:", response.usage_metadata.candidates_token_count)
+```
+
+### JavaScript
+
+```
+// ...
+console.log(`Thoughts tokens: ${response.usageMetadata.thoughtsTokenCount}`);
+console.log(`Output tokens: ${response.usageMetadata.candidatesTokenCount}`);
+```
+
+### Go
+
+```
+// ...
+fmt.Println("Thoughts tokens:", response.UsageMetadata.ThoughtsTokenCount)
+fmt.Println("Output tokens:", response.UsageMetadata.CandidatesTokenCount)
+```
+
+사고 모델은 최종 응답의 품질을 개선하기 위해 전체 사고를 생성한 후 사고 과정을 파악할 수 있도록 [요약](https://ai.google.dev/gemini-api/docs/thinking?hl=ko#summaries)을 출력합니다. 따라서 API는 요약만 출력하더라도 모델이 요약을 만들기 위해 생성하는 전체 사고 토큰을 기준으로 가격을 책정합니다.
+
+[Gemini 사고](https://ai.google.dev/gemini-api/docs/thinking?hl=ko) 가이드에서 사고를 구성하는 방법을 자세히 알아보세요.
+
+## 컨텍스트 윈도우
+
+Gemini API를 통해 사용할 수 있는 모델에는 토큰으로 측정되는 컨텍스트 윈도우가 있습니다. 컨텍스트 윈도우는 제공할 수 있는 입력의 양과 모델이 생성할 수 있는 출력의 양을 정의합니다.
+컨텍스트 윈도우의 크기를 [`models.get` 엔드포인트](https://ai.google.dev/api/rest/v1/models/get?hl=ko)
+를 호출하거나 [모델 문서](https://ai.google.dev/gemini-api/docs/models?hl=ko)에서 확인할 수 있습니다.
 
 ### Python
 
@@ -665,7 +699,7 @@ async function main() {
 await main();
 ```
 
-### انتقال
+### Go
 
 ```
 ctx := context.Background()
@@ -681,12 +715,12 @@ fmt.Println("input token limit:", modelInfo.InputTokenLimit)
 fmt.Println("output token limit:", modelInfo.OutputTokenLimit)
 ```
 
-إرسال ملاحظات
+의견 보내기
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-تاريخ التعديل الأخير: 2026-05-19 (حسب التوقيت العالمي المتفَّق عليه)
+최종 업데이트: 2026-06-04(UTC)
 
-هل تريد مشاركة ملاحظاتك معنا؟
+의견을 전달하고 싶나요?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-19 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-04(UTC)"],[],[]]

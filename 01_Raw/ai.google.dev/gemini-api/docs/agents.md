@@ -1,116 +1,100 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agents?hl=es-419
-fetched_at: 2026-06-01T05:58:31.456225+00:00
-title: "Descripci\u00f3n general de los agentes \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agents?hl=vi
+fetched_at: 2026-06-08T05:27:13.551969+00:00
+title: "T\u1ed5ng quan v\u1ec1 nh\u00e2n vi\u00ean h\u1ed7 tr\u1ee3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Enviar comentarios
+Gửi ý kiến phản hồi
 
-# Descripción general de los agentes
+# Tổng quan về nhân viên hỗ trợ
 
-Los agentes administrados en la API de Gemini te brindan un arnés de agente configurable. Una sola llamada a la API aprovisiona una zona de pruebas de Linux en la que el agente razona, ejecuta código, administra archivos y navega por la Web de forma autónoma.
+Các tác nhân được quản lý trên Gemini API cung cấp cho bạn một bộ công cụ tác nhân có thể định cấu hình. Một lệnh gọi API duy nhất sẽ cung cấp một hộp cát Linux, nơi tác nhân suy luận, thực thi mã, quản lý tệp và duyệt web một cách tự động.
 
 [rocket\_launch
 
-Guía de inicio rápido
+Bắt đầu nhanh
 
-Realiza tu primera llamada al agente, transmite respuestas y crea un agente personalizado.](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=es-419)
+Thực hiện cuộc gọi đầu tiên cho tác nhân, truyền trực tuyến các câu trả lời và tạo tác nhân tuỳ chỉnh.](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=vi)
 [smart\_toy
 
-Agente de Antigravity
+Tác nhân Antigravity
 
-Funciones, herramientas, entrada multimodal y precios para el agente predeterminado.](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=es-419)
+Các chức năng, công cụ, chế độ nhập đa phương thức và giá của tác nhân mặc định.](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=vi)
 [experiment
 
-Agentes en AI Studio
+Tác nhân trong AI Studio
 
-Entorno de pruebas visual para crear prototipos de agentes sin escribir código.](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=es-419)
+Sân chơi trực quan để tạo nguyên mẫu cho các tác nhân mà không cần viết mã.](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=vi)
 
-## Agentes administrados disponibles
+## Các tác nhân được quản lý có sẵn
 
-- **[Agente de Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=es-419)**: Agente administrado
-  de uso general con tecnología de Gemini 3.5 Flash. Ejecuta código, administra archivos y busca en la Web dentro de una zona de pruebas segura de Linux alojada por Google. Puedes
-  extenderlo con tus propias instrucciones, habilidades y datos para
-  [crear un agente personalizado](https://ai.google.dev/gemini-api/docs/custom-agents?hl=es-419).
-- **[Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419)**: Agente de investigación autónomo
-  que planifica, ejecuta y sintetiza tareas de investigación de varios pasos para casos de uso
-  como análisis de mercado, diligencia debida y revisiones de literatura.
+- **[Tác nhân Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=vi)**: Tác nhân được quản lý đa năng dựa trên Gemini 3.5 Flash. Chạy mã, quản lý tệp và tìm kiếm trên web trong một hộp cát Linux an toàn do Google lưu trữ. Bạn có thể mở rộng Gemini bằng các hướng dẫn, kỹ năng và dữ liệu của riêng mình để [xây dựng một tác nhân tuỳ chỉnh](https://ai.google.dev/gemini-api/docs/custom-agents?hl=vi).
+- **[Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi)**: Tác nhân nghiên cứu tự động lập kế hoạch, thực hiện và tổng hợp các nhiệm vụ nghiên cứu nhiều bước cho các trường hợp sử dụng như phân tích thị trường, thẩm định và đánh giá tài liệu.
 
-## Seguridad y prácticas recomendadas
+## Bảo mật và các phương pháp hay nhất
 
-Cada agente se ejecuta en un entorno de zona de pruebas aislado a nivel del SO.
-De forma predeterminada, la zona de pruebas tiene acceso de red saliente sin restricciones. Puedes restringir o inhabilitar el acceso a la red con una lista de entidades permitidas.
+Mọi tác nhân đều chạy trong một môi trường hộp cát được cách ly ở cấp hệ điều hành.
+Theo mặc định, hộp cát có quyền truy cập không hạn chế vào mạng bên ngoài. Bạn có thể hạn chế hoặc tắt quyền truy cập vào mạng bằng danh sách cho phép.
 
-### Acceso a la red
+### Quyền truy cập mạng
 
-De forma predeterminada, los entornos tienen acceso de red saliente sin restricciones. Usa una lista de entidades permitidas `network` para restringir el tráfico saliente a dominios específicos o patrones comodín. Para obtener detalles sobre la configuración, consulta
-[Lista de entidades permitidas de red](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=es-419#network_allow_list) (AI
-Studio) o [Reglas de red](https://ai.google.dev/gemini-api/docs/custom-agents?hl=es-419#with_network_rules)
-(API).
+Theo mặc định, các môi trường có quyền truy cập mạng đi không hạn chế. Sử dụng danh sách cho phép `network` để hạn chế lưu lượng truy cập đi đến các miền cụ thể hoặc mẫu ký tự đại diện. Để biết thông tin chi tiết về cấu hình, hãy xem [Danh sách cho phép mạng](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=vi#network_allow_list) (AI Studio) hoặc [Quy tắc mạng](https://ai.google.dev/gemini-api/docs/custom-agents?hl=vi#with_network_rules) (API).
 
-### Herramientas y APIs externas
+### Công cụ và API bên ngoài
 
-Puedes conectar herramientas y APIs externas para extender el agente. Usa solo herramientas de fuentes confiables y permisos de alcance al mínimo requerido. Las credenciales se pueden insertar de forma segura a través de transformaciones de encabezado de proxy de salida y nunca se exponen dentro de la zona de pruebas. El agente puede usar cualquier credencial a la que tenga acceso, por lo que solo debes proporcionar credenciales cuyo alcance completo estés dispuesto a otorgar.
+Bạn có thể kết nối các công cụ và API bên ngoài để mở rộng phạm vi hoạt động của trợ lý. Chỉ sử dụng các công cụ từ các nguồn đáng tin cậy và giới hạn quyền ở mức tối thiểu cần thiết. Thông tin đăng nhập có thể được chèn một cách an toàn thông qua các biến đổi tiêu đề proxy truyền dữ liệu ra và không bao giờ bị lộ trong hộp cát. Tác nhân có thể sử dụng mọi thông tin đăng nhập mà tác nhân có quyền truy cập, vì vậy, bạn chỉ nên cung cấp thông tin đăng nhập mà bạn sẵn sàng cấp toàn bộ phạm vi.
 
-- Usa cuentas de servicio o claves de API con privilegios mínimos.
-- Prefiere los tokens de corta duración a las claves de larga duración.
-- Solo proporciona credenciales cuyo alcance completo estés dispuesto a otorgar.
-- Rota las credenciales con regularidad.
+- Sử dụng tài khoản dịch vụ hoặc khoá API có đặc quyền tối thiểu.
+- Ưu tiên mã thông báo có thời gian tồn tại ngắn hơn khoá có thời gian tồn tại dài.
+- Chỉ cung cấp thông tin đăng nhập mà bạn sẵn sàng cấp toàn bộ phạm vi.
+- Thay đổi thông tin xác thực theo lịch trình đều đặn.
 
-Para obtener detalles sobre la configuración de las transformaciones de encabezado, consulta
-[Credenciales](https://ai.google.dev/gemini-api/docs/agent-environment?hl=es-419#credentials).
+Để biết thông tin chi tiết về cách định cấu hình các phép biến đổi tiêu đề, hãy xem phần [Thông tin đăng nhập](https://ai.google.dev/gemini-api/docs/agent-environment?hl=vi#credentials).
 
-### Supervisión humana
+### Sự giám sát của con người
 
-Siempre verifica los resultados (código generado, transformaciones de datos, cambios de configuración) antes de implementarlos, en especial para las tareas que modifican datos o interactúan con sistemas externos.
+Luôn xác minh kết quả (mã được tạo, các phép biến đổi dữ liệu, thay đổi cấu hình) trước khi triển khai, đặc biệt là đối với những tác vụ sửa đổi dữ liệu hoặc tương tác với các hệ thống bên ngoài.
 
-## Precios
+## Giá
 
-Los agentes administrados usan un [modelo de pago por uso](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419#pricing-for-agents) basado en tokens del modelo de Gemini y uso de herramientas. Una sola interacción puede activar varios bucles de razonamiento, que suelen consumir entre 100,000 y 3 millones de tokens. El procesamiento del entorno **no se factura** durante la versión preliminar. Consulta los [costos estimados](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=es-419#availability-and-pricing) para los desgloses por tarea.
+Các tác nhân được quản lý sử dụng [mô hình trả tiền theo mức dùng](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#pricing-for-agents) dựa trên số lượng token của mô hình Gemini và mức sử dụng công cụ. Một lượt tương tác có thể kích hoạt nhiều vòng lặp suy luận, thường tiêu thụ từ 100.000 đến 3.000.000 mã thông báo. Bạn sẽ **không bị tính phí** cho tài nguyên điện toán môi trường trong thời gian dùng thử. Xem [chi phí ước tính](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=vi#availability-and-pricing) cho từng phần công việc.
 
-## Límites
+## Giới hạn
 
-| Límite | Descripción |
+| Hạn mức | Mô tả |
 | --- | --- |
-| **Tiempo de actividad del entorno** | Los entornos se borran de forma permanente después de 7 días de inactividad. |
-| **Apagado de VM** | Las VMs se apagan después de un breve período de inactividad para conservar los recursos. La siguiente solicitud restablece el estado (con un inicio en frío). |
-| **Software preinstalado** | Entorno basado en Ubuntu con Python 3.12 y Node.js 22. Para obtener más información sobre la imagen base del entorno, consulta [Software preinstalado](https://ai.google.dev/gemini-api/docs/agent-environment?hl=es-419#pre-installed-software). |
-| **Cantidad máxima de agentes** | Puedes tener hasta 1,000 agentes administrados. |
+| **Vòng đời môi trường** | Các môi trường sẽ bị xoá vĩnh viễn sau 7 ngày không hoạt động. |
+| **Tắt máy ảo** | Các VM sẽ tắt sau một khoảng thời gian ngắn không hoạt động để tiết kiệm tài nguyên. Yêu cầu tiếp theo sẽ khôi phục trạng thái (với một lần khởi động nguội). |
+| **Phần mềm cài đặt sẵn** | Môi trường dựa trên Ubuntu có Python 3.12 và Node.js 22. Để biết thêm thông tin về hình ảnh cơ sở của môi trường, hãy xem phần [Phần mềm được cài đặt sẵn](https://ai.google.dev/gemini-api/docs/agent-environment?hl=vi#pre-installed-software). |
+| **Số nhân viên tối đa** | Bạn có thể có tối đa 1.000 nhân viên hỗ trợ được quản lý. |
 
-## Frameworks de agentes
+## Khung tác nhân
 
-También puedes crear agentes con Gemini usando estos frameworks y SDKs:
+Bạn cũng có thể tạo tác nhân bằng Gemini thông qua các khung và SDK sau:
 
-- [**\*\*LangChain / LangGraph\*\***](https://ai.google.dev/gemini-api/docs/langgraph-example?hl=es-419): Crea
-  flujos de aplicaciones complejos con estado y sistemas multiagente con estructuras de gráficos.
-- [**LlamaIndex**](https://ai.google.dev/gemini-api/docs/llama-index?hl=es-419): Conecta agentes de Gemini a
-  tus datos privados para flujos de trabajo mejorados con RAG.
-- [**CrewAI**](https://ai.google.dev/gemini-api/docs/crewai-example?hl=es-419): Organiza agentes de IA autónomos y colaborativos que interpretan roles.
-- [**SDK de IA de Vercel**](https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=es-419): Crea
-  interfaces de usuario y agentes con tecnología de IA en JavaScript o TypeScript.
-- [**\*\*ADK de Google\*\***](https://google.github.io/adk-docs/get-started/python/): Es un
-  framework de código abierto para crear y organizar agentes de IA
-  interoperables.
-- [**SDK de Antigravity**](https://antigravity.google/product/antigravity-sdk?hl=es-419): Crea
-  agentes de IA autónomos con las mismas herramientas, bucle de agente y administración de contexto
-  que impulsan Google Antigravity, programable en Python.
+- [**LangChain / LangGraph**](https://ai.google.dev/gemini-api/docs/langgraph-example?hl=vi): Xây dựng các luồng ứng dụng phức tạp, có trạng thái và hệ thống đa tác nhân bằng cách sử dụng cấu trúc đồ thị.
+- [**LlamaIndex**](https://ai.google.dev/gemini-api/docs/llama-index?hl=vi): Kết nối các tác nhân Gemini với dữ liệu riêng tư của bạn để có quy trình làm việc nâng cao bằng RAG.
+- [**CrewAI**](https://ai.google.dev/gemini-api/docs/crewai-example?hl=vi): Điều phối các tác nhân AI tự động, cộng tác và đóng vai.
+- [**Vercel AI SDK**](https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=vi): Xây dựng giao diện người dùng và tác nhân dựa trên AI bằng JavaScript/TypeScript.
+- [**Google ADK**](https://google.github.io/adk-docs/get-started/python/): Một khung mã nguồn mở để xây dựng và điều phối các tác nhân AI có khả năng tương tác.
+- [**Antigravity SDK**](https://antigravity.google/product/antigravity-sdk?hl=vi): Xây dựng các tác nhân AI tự động bằng cách sử dụng cùng các công cụ, vòng lặp tác nhân và tính năng quản lý bối cảnh hỗ trợ Google Antigravity, có thể lập trình bằng Python.
 
-Enviar comentarios
+Gửi ý kiến phản hồi
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Última actualización: 2026-05-20 (UTC)
+Cập nhật lần gần đây nhất: 2026-05-20 UTC.
 
-¿Quieres brindar más información?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-05-20 (UTC)"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-20 UTC."],[],[]]

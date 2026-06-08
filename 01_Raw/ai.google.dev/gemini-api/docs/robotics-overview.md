@@ -1,50 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-overview?hl=ko
-fetched_at: 2026-06-01T06:10:00.211660+00:00
+source_url: https://ai.google.dev/gemini-api/docs/robotics-overview?hl=he
+fetched_at: 2026-06-08T05:37:17.855461+00:00
 title: "Gemini Robotics-ER 1.6 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-의견 보내기
+שליחת משוב
 
 # Gemini Robotics-ER 1.6
 
-Gemini Robotics-ER 1.6은 Gemini의 에이전트 기능을 로봇공학에 도입하는 비전 언어 모델 (VLM)입니다. 물리적 세계에서 고급 추론을 할 수 있도록 설계되어 로봇이 복잡한 시각적 데이터를 해석하고, 공간 추론을 실행하고, 자연어 명령에서 작업을 계획할 수 있습니다.
+‫Gemini Robotics-ER 1.6 הוא מודל ראייה ושפה (VLM) שמביא את היכולות של סוכני Gemini לרובוטיקה. הוא מיועד לחשיבה רציונלית משופרת בעולם הפיזי, ומאפשר לרובוטים לפרש נתונים חזותיים מורכבים, לבצע חשיבה רציונלית מרחבית ולתכנן פעולות מפקודות בשפה טבעית.
 
-Gemini Robotics-ER 1.5를 사용한 경우 API 호출에서 모델 이름을 `model="gemini-robotics-er-1.5-preview"`에서 `model="gemini-robotics-er-1.6-preview"`로 바꿔 1.6 모델을 사용할 수 있습니다.
+שימו לב: אם השתמשתם ב-Gemini Robotics-ER 1.5, אתם יכולים להתחיל להשתמש במודל 1.6 על ידי החלפת שם המודל מ-`model="gemini-robotics-er-1.5-preview"` ל-`model="gemini-robotics-er-1.6-preview"` בקריאה ל-API.
 
-주요 기능 및 혜택:
+התכונות והיתרונות העיקריים:
 
-- **자율성 향상:** 로봇은 개방형 환경에서 변화에 대해 추론하고, 적응하고, 대응할 수 있습니다.
-- **자연어 상호작용:** 자연어를 사용하여 복잡한 작업 할당을 지원하여 로봇을 더 쉽게 사용할 수 있습니다.
-- **작업 오케스트레이션:** 자연어 명령을 하위 작업으로 분해하고 기존 로봇 컨트롤러 및 동작과 통합하여 장기적인 작업을 완료합니다.
-- **다재다능한 기능:** 객체를 찾아 식별하고, 객체 관계를 이해하고, 잡기 및 궤적을 계획하고, 동적 장면을 해석합니다.
+- **אוטונומיה משופרת:** רובוטים יכולים להסיק מסקנות, להסתגל ולתת מענה לשינויים בסביבות פתוחות.
+- **אינטראקציה בשפה טבעית:** מאפשרת להשתמש בשפה טבעית כדי להקצות משימות מורכבות, וכך להקל על השימוש ברובוטים.
+- **תיאום משימות:** פירוק פקודות בשפה טבעית למשימות משנה ושילוב עם התנהגויות ובקרי רובוטים קיימים כדי להשלים משימות ארוכות טווח.
+- **יכולות מגוונות:** איתור וזיהוי של אובייקטים, הבנה של קשרי גומלין בין אובייקטים, תכנון של אחיזות ומסלולים ופרשנות של סצנות דינמיות.
 
-이 문서에서는 [모델이 하는 일](#how-it-works)을 설명하고 모델의 에이전트 기능을 강조하는 여러 [예](#standard-spatial-reasoning)를 살펴봅니다.
+במסמך הזה מוסבר [מה המודל עושה](#how-it-works) ומוצגות כמה [דוגמאות](#standard-spatial-reasoning) שממחישות את היכולות של המודל.
 
-바로 시작하려면 Google AI Studio에서 모델을 사용해 보세요.
+אם אתם רוצים להתחיל מיד, אתם יכולים לנסות את המודל ב-Google AI Studio.
 
-[Google AI Studio에서 사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-1.6-preview&hl=ko)
+[לניסיון ב-Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-1.6-preview&hl=he)
 
-## 안전
+## בטיחות
 
-Gemini Robotics-ER 1.6은 안전을 고려하여 제작되었지만 로봇 주변의 안전한 환경을 유지하는 것은 사용자의 책임입니다. 생성형 AI 모델은 실수를 할 수 있으며, 물리적 로봇은 손상을 일으킬 수 있습니다. 안전은 최우선 과제이며, 실제 로봇 공학에서 사용할 때 생성형 AI 모델을 안전하게 만드는 것은 Google 연구의 활발하고 중요한 영역입니다. 자세한 내용은 [Google DeepMind 로봇 공학 안전 페이지](https://deepmind.google/models/gemini-robotics/safety?hl=ko)를 참고하세요.
+‫Gemini Robotics-ER 1.6 פותח תוך הקפדה על בטיחות, אבל האחריות לשמירה על סביבה בטוחה סביב הרובוט היא שלכם. מודלים של AI גנרטיבי עלולים לטעות, ורובוטים פיזיים עלולים לגרום נזק. הבטיחות היא בראש סדר העדיפויות שלנו, ואנחנו משקיעים מאמצים רבים במחקר כדי להבטיח שהמודלים של AI גנרטיבי יהיו בטוחים לשימוש ברובוטיקה בעולם האמיתי. מידע נוסף זמין ב[דף הבטיחות של Google DeepMind בנושא רובוטיקה](https://deepmind.google/models/gemini-robotics/safety?hl=he).
 
-## 시작하기: 장면에서 객체 찾기
+## תחילת העבודה: איתור אובייקטים בסצנה
 
-다음 예에서는 일반적인 로봇 공학 사용 사례를 보여줍니다. [`generateContent`](https://ai.google.dev/api/generate-content?hl=ko#method:-models.generatecontent) 메서드를 사용하여 이미지와 텍스트 프롬프트를 모델에 전달하여 식별된 객체와 해당 2D 포인트 목록을 가져오는 방법을 보여줍니다.
-모델은 이미지에서 식별된 항목의 포인트를 반환하여 정규화된 2D 좌표와 라벨을 반환합니다.
+בדוגמה הבאה מוצג תרחיש שימוש נפוץ ברובוטיקה. הדוגמה מראה איך להעביר תמונה והנחיית טקסט למודל באמצעות השיטה [`generateContent`](https://ai.google.dev/api/generate-content?hl=he#method:-models.generatecontent) כדי לקבל רשימה של אובייקטים מזוהים עם הנקודות הדו-ממדיות התואמות שלהם.
+המודל מחזיר נקודות עבור פריטים שהוא זיהה בתמונה, ומחזיר את הקואורדינטות הדו-ממדיות והתוויות שלהם אחרי נרמול.
 
-이 출력을 로봇공학 API와 함께 사용하거나 시각-언어-행동(VLA) 모델 또는 기타 서드 파티 사용자 정의 함수를 호출하여 로봇이 실행할 작업을 생성할 수 있습니다.
+אפשר להשתמש בפלט הזה עם API של רובוטיקה, או להפעיל מודל של ראייה-שפה-פעולה (VLA) או כל פונקציה אחרת שמוגדרת על ידי המשתמש של צד שלישי כדי ליצור פעולות לביצוע על ידי רובוט.
 
 ### Python
 
@@ -119,7 +119,7 @@ curl -X POST \
   }'
 ```
 
-출력은 객체를 포함하는 JSON 배열이며, 각 객체에는 `point`(정규화된 `[y, x]` 좌표)와 객체를 식별하는 `label`가 있습니다.
+הפלט יהיה מערך JSON שמכיל אובייקטים, שלכל אחד מהם יש `point` (קואורדינטות `[y, x]` מנורמלות) ו-`label` שמזהה את האובייקט.
 
 ### JSON
 
@@ -138,43 +138,43 @@ curl -X POST \
 ]
 ```
 
-다음 이미지는 이러한 점이 표시되는 방식을 보여주는 예입니다.
+בתמונה הבאה אפשר לראות דוגמה לאופן שבו הנקודות האלה יכולות להופיע:
 
-![이미지에서 객체의 점을 표시하는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=ko)
+![דוגמה שמציגה את הנקודות של אובייקטים בתמונה](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=he)
 
-## 작동 방식
+## איך זה עובד
 
-Gemini Robotics-ER 1.6을 사용하면 로봇이 공간 이해를 통해 물리적 세계를 맥락화하고 작업할 수 있습니다. 이미지/동영상/오디오 입력과 자연어 프롬프트를 사용하여 다음 작업을 실행합니다.
+‫Gemini Robotics-ER 1.6 מאפשר לרובוטים שלכם להבין את ההקשר ולעבוד בעולם הפיזי באמצעות הבנה מרחבית. הוא מקבל קלט של תמונות, סרטונים או אודיו, וגם הנחיות בשפה טבעית, כדי:
 
-- **객체 및 장면 컨텍스트 이해**: 객체를 식별하고 어포던스를 비롯한 장면과의 관계를 추론합니다.
-- **작업 요청 이해**: '바나나 찾아줘'와 같은 자연어로 제공된 작업을 해석합니다.
-- **공간적, 시간적 추론**: 일련의 작업과 시간이 지남에 따라 객체가 장면과 상호작용하는 방식을 이해합니다.
-- **구조화된 출력 제공**: 객체 위치를 나타내는 좌표 (점 또는 경계 상자)를 반환합니다.
+- **הבנת אובייקטים והקשר של הסצנה**: זיהוי אובייקטים והסבר על הקשר שלהם לסצנה, כולל האפשרויות שהם מציעים.
+- **הבנת הוראות למשימות**: פירוש משימות שניתנות בשפה טבעית, כמו 'תמצא את הבננה'.
+- **הסקת מסקנות מרחבית וזמנית**: הבנת רצפים של פעולות ואיך אובייקטים מקיימים אינטראקציה עם סצנה לאורך זמן.
+- **יצירת פלט מובנה**: מחזירה קואורדינטות (נקודות או תיבות תוחמות) שמייצגות את מיקומי האובייקטים.
 
-이를 통해 로봇은 프로그래매틱 방식으로 환경을 '보고' '이해'할 수 있습니다.
+כך רובוטים יכולים "לראות" את הסביבה שלהם ו "להבין" אותה באופן פרוגרמטי.
 
-Gemini Robotics-ER 1.6은 에이전트형이기도 합니다. 즉, '사과를 그릇에 넣어'와 같은 복잡한 작업을 하위 작업으로 분류하여 장기 작업을 조정할 수 있습니다.
+‫Gemini Robotics-ER 1.6 הוא גם סוכן, כלומר הוא יכול לפרק משימות מורכבות (כמו "שים את התפוח בקערה") למשימות משנה כדי לתזמן משימות לטווח ארוך:
 
-- **하위 작업 순서 지정**: 명령어를 논리적 단계 순서로 분해합니다.
-- **함수 호출/코드 실행**: 기존 로봇 함수/도구를 호출하거나 생성된 코드를 실행하여 단계를 실행합니다.
+- **חלוקת משימות משנה לרצף**: פירוק פקודות לרצף הגיוני של שלבים.
+- **קריאות לפונקציות/הרצת קוד**: הרצת השלבים באמצעות קריאה לפונקציות/כלים קיימים של הרובוט או הרצת קוד שנוצר.
 
-[함수 호출 페이지](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=ko#how-it-works)에서 Gemini의 함수 호출 작동 방식을 자세히 알아보세요.
+מידע נוסף על בקשות להפעלת פונקציות באמצעות Gemini זמין [בדף בנושא בקשות להפעלת פונקציות](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=he#how-it-works).
 
-### Gemini Robotics-ER 1.6에서 사고 예산 사용
+### שימוש בתקציב החשיבה עם Gemini Robotics-ER 1.6
 
-Gemini Robotics-ER 1.6에는 지연 시간과 정확도 간의 절충을 제어할 수 있는 유연한 사고 예산이 있습니다. 물체 감지와 같은 공간 이해 작업의 경우 모델은 작은 사고 예산으로 높은 성능을 달성할 수 있습니다. 더 큰 사고 예산은 개수 세기 및 무게 추정과 같은 더 복잡한 추론 작업에 도움이 됩니다. 이를 통해 지연 시간이 짧은 응답과 더 어려운 작업에 대한 정확도가 높은 결과를 균형 있게 유지할 수 있습니다.
+ל-Gemini Robotics-ER 1.6 יש תקציב גמיש של חשיבה שמאפשר לכם לשלוט בפשרות בין זמן האחזור לבין הדיוק. במשימות של הבנה מרחבית כמו זיהוי אובייקטים, המודל יכול להשיג ביצועים גבוהים עם תקציב קטן של חשיבה. משימות מורכבות יותר של חשיבה רציונלית כמו ספירה והערכת משקל נהנות מתקציב גדול יותר של חשיבה. כך אתם יכולים לאזן בין הצורך בתשובות עם זמן אחזור נמוך לבין תוצאות עם דיוק גבוה במשימות מאתגרות יותר.
 
-생각 예산에 대해 자세히 알아보려면 [생각하기](https://ai.google.dev/gemini-api/docs/thinking?hl=ko) 핵심 기능 페이지를 참고하세요.
+מידע נוסף על תקציבים זמין בדף [Thinking](https://ai.google.dev/gemini-api/docs/thinking?hl=he).
 
-## 표준 공간 추론
+## חשיבה מרחבית רגילה
 
-다음 예에서는 이미지에서 객체를 가리키고 찾는 것부터 궤적을 계획하는 것까지 자연어 프롬프트를 사용한 **로봇 인식** 및 공간 추론 작업을 보여줍니다. 간단하게 하기 위해 이 예의 코드 스니펫은 프롬프트와 `generate_content` API 호출만 표시하도록 축소되었습니다.
+בדוגמאות הבאות מוצגות משימות של **תפיסה רובוטית** ושל חשיבה מרחבית באמצעות הנחיות בשפה טבעית, החל מהצבעה על אובייקטים בתמונה ומציאתם ועד לתכנון מסלולים. כדי לפשט את הדברים, קטעי הקוד בדוגמאות האלה צומצמו כך שיוצגו רק ההנחיה והקריאה ל-`generate_content` API.
 
-실행 가능한 전체 코드와 추가 예는 [로보틱스 쿡북](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)에서 확인할 수 있습니다.
+קוד מלא שניתן להרצה ודוגמאות נוספות זמינים ב[ספר המתכונים של Robotics](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-### 객체 가리키기
+### הצבעה על אובייקטים
 
-이미지 또는 동영상 프레임에서 객체를 가리키고 찾는 것은 로봇 공학에서 비전-언어 모델 (VLM)의 일반적인 사용 사례입니다. 다음 예에서는 모델에 이미지 내의 특정 객체를 찾아 좌표를 반환하도록 요청합니다.
+הצבעה על אובייקטים ומציאת אובייקטים בתמונות או בפריים של סרטונים הם תרחישי שימוש נפוצים במודלים של ראייה ושפה (VLMs) ברובוטיקה. בדוגמה הבאה, המודל מתבקש למצוא אובייקטים ספציפיים בתמונה ולהחזיר את הקואורדינטות שלהם.
 
 ### Python
 
@@ -222,7 +222,7 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-출력은 시작하기 예와 유사하며, 발견된 객체의 좌표와 라벨이 포함된 JSON입니다.
+הפלט יהיה דומה לדוגמה של תחילת העבודה, קובץ JSON שמכיל את הקואורדינטות של האובייקטים שנמצאו ואת התוויות שלהם.
 
 ```
 [
@@ -236,9 +236,9 @@ print(image_response.text)
 ]
 ```
 
-![이미지에서 식별된 객체의 점을 표시하는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/pointing-objects.png?hl=ko)
+![דוגמה שבה מוצגות הנקודות של אובייקטים שזוהו בתמונה](https://ai.google.dev/static/gemini-api/docs/images/robotics/pointing-objects.png?hl=he)
 
-다음 프롬프트를 사용하여 모델이 특정 객체 대신 '과일'과 같은 추상적인 카테고리를 해석하고 이미지의 모든 인스턴스를 찾도록 요청합니다.
+משתמשים בהנחיה הבאה כדי לבקש מהמודל לפרש קטגוריות מופשטות כמו 'פרי' במקום אובייקטים ספציפיים, ולאתר את כל המקרים בתמונה.
 
 ### Python
 
@@ -251,13 +251,13 @@ prompt = f"""
         [y, x] format normalized to 0-1000."""
 ```
 
-다른 이미지 처리 기법은 [이미지 이해](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ko) 페이지를 참고하세요.
+ב[דף בנושא הבנת תמונות](https://ai.google.dev/gemini-api/docs/image-understanding?hl=he) אפשר למצוא טכניקות נוספות לעיבוד תמונות.
 
-### 동영상에서 객체 추적
+### מעקב אחרי אובייקטים בסרטון
 
-Gemini Robotics-ER 1.6은 동영상 프레임을 분석하여 시간 경과에 따른 객체를 추적할 수도 있습니다. 지원되는 동영상 형식 목록은 [동영상 입력](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ko#supported-formats)을 참고하세요.
+‫Gemini Robotics-ER 1.6 יכול גם לנתח פריימים של סרטונים כדי לעקוב אחרי אובייקטים לאורך זמן. רשימה של פורמטים נתמכים של וידאו זמינה במאמר בנושא [קלט וידאו](https://ai.google.dev/gemini-api/docs/video-understanding?hl=he#supported-formats).
 
-다음은 모델이 분석하는 각 프레임에서 특정 객체를 찾는 데 사용되는 기본 프롬프트입니다.
+זוהי הנחיית הבסיס שמשמשת למציאת אובייקטים ספציפיים בכל פריים שהמודל מנתח:
 
 ### Python
 
@@ -281,17 +281,17 @@ base_prompt = f"""
   """
 ```
 
-출력에는 동영상 프레임에서 추적되는 펜과 노트북이 표시됩니다.
+הפלט מראה עט ומחשב נייד במעקב לאורך פריים הסרטון.
 
-![GIF의 프레임을 통해 추적되는 객체를 보여주는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/object-tracking.gif?hl=ko)
+![דוגמה שבה רואים אובייקטים במעקב דרך פריימים בקובץ GIF](https://ai.google.dev/static/gemini-api/docs/images/robotics/object-tracking.gif?hl=he)
 
-실행 가능한 전체 코드는 [로보틱스 쿡북](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)을 참고하세요.
+קוד מלא שאפשר להריץ מופיע ב-[Robotics cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-### 객체 감지 및 경계 상자
+### זיהוי אובייקטים ותיבות תוחמות
 
-단일 점 외에도 모델은 객체를 둘러싸는 직사각형 영역을 제공하는 2D 경계 상자를 반환할 수 있습니다.
+בנוסף לנקודות בודדות, המודל יכול גם להחזיר תיבות תוחמות דו-ממדיות, שמספקות אזור מלבני שמקיף אובייקט.
 
-이 예에서는 테이블에서 식별 가능한 객체의 2D 경계 상자를 요청합니다. 모델은 출력을 25개 객체로 제한하고 여러 인스턴스의 이름을 고유하게 지정하도록 지시받습니다.
+בדוגמה הזו נשלחת בקשה לתיבות תוחמות דו-ממדיות לאובייקטים שניתן לזהות בטבלה. המודל מקבל הוראה להגביל את הפלט ל-25 אובייקטים ולתת שם ייחודי לכמה מופעים.
 
 ### Python
 
@@ -334,18 +334,18 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-다음은 모델에서 반환된 상자를 보여줍니다.
+בתמונה הבאה מוצגות התיבות שהוחזרו מהמודל.
 
-![발견된 객체의 경계 상자를 보여주는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/bounding-boxes.png?hl=ko)
+![דוגמה להצגת תיבות תוחמות לאובייקטים שנמצאו](https://ai.google.dev/static/gemini-api/docs/images/robotics/bounding-boxes.png?hl=he)
 
-실행 가능한 전체 코드는 [로보틱스 쿡북](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)을 참고하세요.
-[이미지 이해](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ko) 페이지에는 객체 감지, 경계 상자 예시와 같은 시각적 작업의 추가 예도 있습니다.
+קוד מלא שניתן להרצה מופיע ב[ספר המתכונים בנושא רובוטיקה](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+בדף [Image understanding](https://ai.google.dev/gemini-api/docs/image-understanding?hl=he) יש גם דוגמאות נוספות למשימות ויזואליות כמו זיהוי אובייקטים ודוגמאות לתיבות תוחמות.
 
-### 궤적
+### מסלולים
 
-Gemini Robotics-ER 1.6은 로봇 움직임을 안내하는 데 유용한 궤적을 정의하는 점의 시퀀스를 생성할 수 있습니다.
+‫Gemini Robotics-ER 1.6 יכול ליצור רצפים של נקודות שמגדירות מסלול, וזה שימושי להנחיית תנועת הרובוט.
 
-이 예에서는 시작점과 일련의 중간 지점을 포함하여 빨간색 펜을 정리함으로 이동하는 궤적을 요청합니다.
+בדוגמה הזו מבוקשת טרַקְטוֹרְיָה להזזת עט אדום למארגן, כולל נקודת ההתחלה וסדרה של נקודות ביניים.
 
 ### Python
 
@@ -387,7 +387,7 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-대답은 빨간색 펜이 주최자 위로 이동하는 작업을 완료하기 위해 따라야 하는 경로의 궤적을 설명하는 좌표 집합입니다.
+התשובה היא קבוצת קואורדינטות שמתארות את המסלול של הנתיב שעט אדום צריך לעבור כדי להשלים את המשימה של העברתו מעל הארגונית:
 
 ```
 [
@@ -410,15 +410,15 @@ print(image_response.text)
 ]
 ```
 
-![계획된 궤적을 보여주는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/trajectories.png?hl=ko)
+![דוגמה שמציגה את המסלול המתוכנן](https://ai.google.dev/static/gemini-api/docs/images/robotics/trajectories.png?hl=he)
 
-## 에이전트 기능
+## יכולות של AI אקטיבי
 
-다음 예에서는 모델의 에이전트 기능, 특히 **코드 실행**을 사용하여 고급 **로봇 추론**을 보여줍니다. 이러한 시나리오에서 모델은 대답하기 전에 모호성을 해결하거나 정확도를 높이기 위해 Python 코드를 작성하고 실행하여 이미지 (예: 확대, 자르기, 회전)를 조작할 수 있습니다.
+בדוגמאות הבאות מוצגות יכולות מתקדמות של **חשיבה רציונלית רובוטית** באמצעות יכולות של AI אקטיבי של המודל, במיוחד **הרצת קוד**. במקרים כאלה, המודל יכול להחליט לכתוב ולהריץ קוד Python כדי לערוך תמונות (למשל, להגדיל, לחתוך או לסובב) כדי לפתור אי בהירות או לשפר את הדיוק לפני שהוא עונה.
 
-### 객체 감지 (확대/축소 및 자르기)
+### זיהוי אובייקטים (שינוי גודל וחיתוך)
 
-다음 예에서는 객체를 감지하고 경계 상자를 반환할 때 코드 실행을 사용하여 이미지를 확대/축소하고 자르는 방법을 보여줍니다.
+בדוגמה הבאה אפשר לראות איך משתמשים בהרצת קוד כדי להגדיל ולחתוך תמונה לתצוגה ברורה יותר כשמזהים אובייקטים ומחזירים תיבות תוחמות.
 
 ### Python
 
@@ -457,7 +457,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-모델 출력은 다음과 비슷합니다.
+הפלט של המודל ייראה כך:
 
 ```
 [
@@ -469,13 +469,13 @@ print(response.text)
 ]
 ```
 
-다음은 모델에서 반환된 상자를 보여줍니다.
+בתמונה הבאה מוצגות התיבות שהוחזרו מהמודל.
 
-![발견된 객체의 경계 상자를 보여주는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=ko)
+![דוגמה להצגת תיבות תוחמות לאובייקטים שנמצאו](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=he)
 
-### 아날로그 게이지 읽기 및 로직 적용
+### קריאת מד אנלוגי ויישום לוגיקה
 
-다음 예에서는 모델을 사용하여 아날로그 게이지를 읽고 시간 계산을 실행하는 방법을 보여줍니다. 시스템 명령어를 사용하여 JSON 출력을 강제 적용합니다.
+בדוגמה הבאה מוצג איך להשתמש במודל כדי לקרוא מד אנלוגי ולבצע חישובי זמן. נעשה שימוש בהוראת מערכת כדי לאכוף פלט JSON.
 
 ### Python
 
@@ -512,11 +512,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-다음은 이미지 입력의 예입니다.
+זוהי דוגמה לקלט של תמונה.
 
-![읽을 시계를 보여주는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-clock-reading.png?hl=ko)
+![דוגמה שמציגה שעון לקריאה](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-clock-reading.png?hl=he)
 
-모델 출력은 다음과 비슷합니다.
+הפלט של המודל ייראה כך:
 
 ```
 Time Response:  {
@@ -525,9 +525,9 @@ Time Response:  {
  }
 ```
 
-### 컨테이너의 유체 측정
+### מדידת נוזל במיכל
 
-다음 예에서는 코드 실행을 사용하여 미터를 읽고 액체 수준을 백분율로 계산하는 방법을 보여줍니다.
+בדוגמה הבאה אפשר לראות איך משתמשים בהרצת קוד כדי לקרוא מדד ולחשב את מפלס הנוזל באחוזים.
 
 ### Python
 
@@ -567,13 +567,13 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-다음은 입력의 확대 이미지입니다.
+זוהי תמונה מוגדלת של הקלט.
 
-![읽을 시계를 보여주는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-fluid-container.png?hl=ko)
+![דוגמה שמציגה שעון לקריאה](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-fluid-container.png?hl=he)
 
-### 회로판의 표시 읽기
+### קריאת סימונים בלוח מעגלים
 
-다음 예에서는 코드 실행을 사용하여 회로판 칩의 텍스트를 읽는 방법을 보여줍니다. 이렇게 하면 모델이 필요에 따라 이미지를 확대/축소하고 자르고 회전할 수 있습니다.
+בדוגמה הבאה אפשר לראות איך משתמשים בהרצת קוד כדי לקרוא טקסט בשבב של לוח מעגלים, וכך המודל יכול לבצע זום, לחתוך ולסובב את התמונה לפי הצורך.
 
 ### Python
 
@@ -607,13 +607,13 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-다음은 입력의 확대 이미지입니다.
+זוהי תמונה מוגדלת של הקלט.
 
-![읽을 시계를 보여주는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=ko)
+![דוגמה שמציגה שעון לקריאה](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=he)
 
-### 이미지 주석
+### הערה לתמונה
 
-다음 예에서는 코드 실행을 사용하여 이미지에 주석을 달고 (예: 폐기 안내 화살표 그리기) 수정된 이미지를 반환하는 방법을 보여줍니다.
+בדוגמה הבאה אפשר לראות איך משתמשים בהרצת קוד כדי להוסיף הערות לתמונה (למשל, ציור של חצים להוראות סילוק) ולהחזיר את התמונה ששונתה.
 
 ### Python
 
@@ -651,11 +651,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-다음은 이미지 입력의 예입니다.
+זוהי דוגמה לקלט של תמונה.
 
-![읽을 시계를 보여주는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=ko)
+![דוגמה שמציגה שעון לקריאה](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=he)
 
-모델 출력은 다음과 비슷합니다.
+הפלט של המודל ייראה כך:
 
 ```
 The annotated image shows the suggested disposal locations for the items on the table:
@@ -664,13 +664,13 @@ The annotated image shows the suggested disposal locations for the items on the 
 - **Black bin (Trash)**: Chocolate bar wrapper, Welch's packet, and white tissue.
 ```
 
-## 조정
+## תזמור
 
-Gemini Robotics-ER 1.6은 **작업 계획** 및 상위 수준의 공간 추론을 실행하여 컨텍스트 이해를 기반으로 작업을 추론하거나 최적의 위치를 식별하여 장기 작업을 조정할 수 있습니다.
+‫Gemini Robotics-ER 1.6 יכול לבצע **תכנון משימות** וחשיבה רציונלית מרחבית ברמה גבוהה יותר, להסיק פעולות או לזהות מיקומים אופטימליים על סמך הבנה הקשרית כדי לתזמן משימות לטווח ארוך.
 
-### 노트북을 위한 공간 만들기
+### מפנים מקום למחשב נייד
 
-이 예시에서는 Gemini Robotics-ER이 공간에 대해 추론하는 방법을 보여줍니다. 프롬프트는 다른 항목을 위한 공간을 만들기 위해 이동해야 하는 객체를 식별하도록 모델에 요청합니다.
+בדוגמה הזו אפשר לראות איך Gemini Robotics-ER מנתח מרחב. בהנחיה, המודל מתבקש לזהות איזה אובייקט צריך להזיז כדי לפנות מקום לפריט אחר.
 
 ### Python
 
@@ -708,7 +708,7 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-대답에는 사용자의 질문에 답변하는 객체의 2D 좌표가 포함됩니다. 이 경우 노트북을 놓을 공간을 만들기 위해 이동해야 하는 객체입니다.
+התגובה מכילה קואורדינטה דו-ממדית של האובייקט שנותן מענה לשאלה של המשתמש. במקרה הזה, האובייקט שצריך להזיז כדי לפנות מקום למחשב נייד.
 
 ```
 [
@@ -716,11 +716,11 @@ print(image_response.text)
 ]
 ```
 
-![다른 객체를 위해 이동해야 하는 객체를 보여주는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=ko)
+![דוגמה שמראה איזה אובייקט צריך להעביר כדי שאובייקט אחר](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=he)
 
-### 점심 도시락 싸기
+### אריזת ארוחת צהריים
 
-또한 모델은 여러 단계로 구성된 작업에 대한 안내를 제공하고 각 단계에 관련된 객체를 가리킬 수 있습니다. 이 예시에서는 모델이 점심 가방을 싸기 위한 일련의 단계를 계획하는 방법을 보여줍니다.
+המודל יכול גם לספק הוראות למשימות מרובות שלבים, ולהצביע על אובייקטים רלוונטיים לכל שלב. בדוגמה הזו אפשר לראות איך המודל מתכנן סדרה של שלבים לאריזת תיק לארוחת צהריים.
 
 ### Python
 
@@ -759,13 +759,13 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-이 프롬프트의 대답은 이미지 입력에서 점심 가방을 포장하는 방법에 관한 단계별 안내입니다.
+התשובה להנחיה הזו היא סדרה של הוראות מפורטות לאריזת תיק לארוחת צהריים על סמך קלט התמונה.
 
-**입력 이미지**
+**תמונת קלט**
 
-![도시락과 도시락에 넣을 물건의 이미지](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=ko)
+![תמונה של קופסת אוכל ופריטים שאפשר להכניס לתוכה](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=he)
 
-**모델 출력**
+**פלט המודל**
 
 ```
 Based on the image, here is a plan to pack the lunch box and lunch bag:
@@ -788,15 +788,15 @@ Here is the list of objects and their locations:
 *   [{"point": [448, 501], "label": "brown lunch bag"}]
 ```
 
-### 맞춤 로봇 API 호출
+### קריאה ל-API של רובוט בהתאמה אישית
 
-이 예시에서는 맞춤 로봇 API를 사용한 작업 오케스트레이션을 보여줍니다. 픽앤플레이스 작업을 위해 설계된 모의 API를 도입합니다. 파란색 블록을 집어 주황색 그릇에 넣는 것이 작업입니다.
+בדוגמה הזו מוצגת תזמור משימות באמצעות API של רובוט בהתאמה אישית. הוא כולל API מדומה שנועד לפעולת הרמה והנחה. המשימה היא להרים קובייה כחולה ולהניח אותה בקערה בצבע כתום:
 
-![블록과 그릇 이미지](https://ai.google.dev/static/gemini-api/docs/images/robotics/robot-api-example.png?hl=ko)
+![תמונה של הבלוק והקערה](https://ai.google.dev/static/gemini-api/docs/images/robotics/robot-api-example.png?hl=he)
 
-이 페이지의 다른 예와 마찬가지로 실행 가능한 전체 코드는 [로보틱스 쿡북](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)에서 확인할 수 있습니다.
+בדומה לדוגמאות האחרות בדף הזה, קוד מלא שניתן להפעלה זמין ב[ספר המתכונים בנושא רובוטיקה](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-첫 번째 단계는 다음 프롬프트로 두 항목을 모두 찾는 것입니다.
+השלב הראשון הוא לאתר את שני הפריטים באמצעות ההנחיה הבאה:
 
 ### Python
 
@@ -809,7 +809,7 @@ prompt = """
           """
 ```
 
-모델 응답에는 블록과 그릇의 정규화된 좌표가 포함됩니다.
+התשובה של המודל כוללת את הקואורדינטות המנורמלות של הבלוק והקערה:
 
 ```
 [
@@ -818,7 +818,7 @@ prompt = """
 ]
 ```
 
-이 예시에서는 다음 모의 로봇 API를 사용합니다.
+בדוגמה הזו נעשה שימוש ב-API מדומה של רובוט:
 
 ### Python
 
@@ -833,7 +833,7 @@ def returnToOrigin():
   print("Returning to origin pose")
 ```
 
-다음 단계는 작업을 실행하는 데 필요한 논리로 API 함수 시퀀스를 호출하는 것입니다. 다음 프롬프트에는 모델이 이 작업을 오케스트레이션할 때 사용해야 하는 로봇 API에 관한 설명이 포함되어 있습니다.
+השלב הבא הוא קריאה לרצף של פונקציות API עם הלוגיקה הנדרשת לביצוע הפעולה. ההנחיה הבאה כוללת תיאור של רובוט API שהמודל צריך להשתמש בו כדי לתזמן את המשימה הזו.
 
 ### Python
 
@@ -877,7 +877,7 @@ prompt = f"""
 """
 ```
 
-다음은 프롬프트와 모의 로봇 API를 기반으로 한 모델의 가능한 출력을 보여줍니다. 출력에는 모델의 사고 과정과 그 결과로 계획한 작업이 포함됩니다. 또한 모델이 함께 시퀀싱한 로봇 함수 호출의 출력도 표시됩니다.
+בהמשך מוצג פלט אפשרי של המודל על סמך ההנחיה ו-API הרובוט המדומה. הפלט כולל את תהליך החשיבה של המודל ואת המשימות שהוא תכנן כתוצאה מכך. הוא כולל גם את הפלט של הקריאות לפונקציות הרובוט שהמודל יצר ברצף.
 
 ```
 Reasoning: To perform the pick and place operation, I will first move the
@@ -977,71 +977,71 @@ moving to coordinates: -247, 90, 15
 Returning to origin pose
 ```
 
-## 권장사항
+## שיטות מומלצות
 
-로봇 공학 애플리케이션의 성능과 정확도를 최적화하려면 Gemini 모델과 효과적으로 상호작용하는 방법을 이해하는 것이 중요합니다. 이 섹션에서는 가장 신뢰할 수 있는 결과를 얻기 위해 프롬프트를 작성하고, 시각적 데이터를 처리하고, 작업을 구조화하는 데 필요한 권장사항과 주요 전략을 간략히 설명합니다.
+כדי לשפר את הביצועים והדיוק של אפליקציות הרובוטיקה, חשוב להבין איך ליצור אינטראקציה יעילה עם מודל Gemini. בחלק הזה מפורטות שיטות מומלצות ואסטרטגיות מרכזיות ליצירת הנחיות, לטיפול בנתונים חזותיים ולבניית משימות כדי להשיג את התוצאות הכי מהימנות.
 
-1. 명확하고 간단한 표현을 사용합니다.
+1. הקפידו על שפה ברורה ופשוטה.
 
-   - **자연어 사용**: Gemini 모델은 자연스러운 대화형 언어를 이해하도록 설계되었습니다. 의미적으로 명확하고 사람이 자연스럽게 지시를 내리는 방식을 반영하는 방식으로 프롬프트를 구성하세요.
-   - **일상적인 용어 사용**: 기술적 또는 전문적인 용어 대신 일반적인 일상 언어를 사용합니다. 모델이 특정 용어에 예상대로 응답하지 않으면 더 일반적인 동의어로 바꿔 보세요.
-2. 시각적 입력을 최적화합니다.
+   - **משתמשים בשפה טבעית**: מודל Gemini נועד להבין שפה טבעית, כמו בשיחה רגילה. כדאי לנסח את ההנחיות בצורה ברורה מבחינה סמנטית, שתשקף את האופן שבו אדם ייתן הוראות באופן טבעי.
+   - **שימוש בטרמינולוגיה יומיומית**: עדיף להשתמש בשפה יומיומית נפוצה ולא בז'רגון טכני או מקצועי. אם המודל לא מגיב למונח מסוים כמו שציפיתם, נסו לנסח אותו מחדש באמצעות מילה נרדפת נפוצה יותר.
+2. אופטימיזציה של הקלט החזותי.
 
-   - **세부정보를 위해 확대**: 작은 객체나 넓은 샷에서 식별하기 어려운 객체를 다룰 때는 경계 상자 기능을 사용하여 관심 객체를 분리합니다. 그런 다음 이미지를 이 선택 영역에 맞게 자르고 새로운 초점 이미지를 모델에 보내 더 자세한 분석을 받을 수 있습니다.
-   - **조명 및 색상 실험**: 모델의 인식은 까다로운 조명 조건과 열악한 색상 대비의 영향을 받을 수 있습니다.
-3. 복잡한 문제를 더 작은 단계로 나눕니다. 각 작은 단계를 개별적으로 해결하면 모델을 더 정확하고 성공적인 결과로 안내할 수 있습니다.
-4. 합의를 통해 정확성 개선 높은 수준의 정확도가 필요한 작업의 경우 동일한 프롬프트로 모델을 여러 번 쿼리할 수 있습니다. 반환된 결과를 평균화하면 더 정확하고 신뢰할 수 있는 '컨센서스'에 도달할 수 있습니다.
+   - **התמקדות בפרטים**: כשמדובר באובייקטים קטנים או שקשה להבחין בהם בצילום רחב, אפשר להשתמש בפונקציית תיבת תוחמת כדי לבודד את האובייקט הרצוי. לאחר מכן אפשר לחתוך את התמונה לפי הבחירה הזו ולשלוח את התמונה החדשה והממוקדת למודל כדי לקבל ניתוח מפורט יותר.
+   - **ניסוי עם תאורה וצבע**: התפיסה של המודל יכולה להיות מושפעת מתנאי תאורה מאתגרים ומניגודיות צבעים נמוכה.
+3. כדאי לפצל בעיות מורכבות לשלבים קטנים יותר. אם תתייחסו לכל שלב קטן בנפרד, תוכלו להנחות את המודל להגיע לתוצאה מדויקת ומוצלחת יותר.
+4. שיפור הדיוק באמצעות קונצנזוס. למשימות שדורשות רמת דיוק גבוהה, אפשר לשלוח שאילתה למודל כמה פעמים עם אותה הנחיה. חישוב ממוצע של התוצאות שמתקבלות מאפשר להגיע ל "הסכמה" שהיא לרוב מדויקת ואמינה יותר.
 
-## 제한사항
+## מגבלות
 
-Gemini Robotics-ER 1.6으로 개발할 때는 다음 제한사항을 고려하세요.
+כשמפתחים באמצעות Gemini Robotics-ER 1.6, חשוב להביא בחשבון את המגבלות הבאות:
 
-- **미리보기 상태:** 모델이 현재 **미리보기** 상태입니다. API와 기능이 변경될 수 있으며, 철저한 테스트 없이 프로덕션에 중요한 애플리케이션에 적합하지 않을 수 있습니다.
-- **지연 시간:** 복잡한 질문, 고해상도 입력 또는 광범위한 `thinking_budget`로 인해 처리 시간이 늘어날 수 있습니다.
-- **할루시네이션:** 모든 대규모 언어 모델과 마찬가지로 Gemini Robotics-ER 1.6도 때때로 '할루시네이션'을 일으키거나 잘못된 정보를 제공할 수 있습니다. 특히 모호한 프롬프트나 분포 외 입력의 경우에 그렇습니다.
-- **프롬프트 품질에 대한 의존성:** 모델 출력의 품질은 입력 프롬프트의 명확성과 구체성에 따라 크게 달라집니다. 모호하거나 구조가 좋지 않은 프롬프트는 최적의 결과를 얻지 못할 수 있습니다.
-- **계산 비용:** 특히 동영상 입력 또는 높은 `thinking_budget`로 모델을 실행하면 컴퓨팅 리소스가 소비되고 비용이 발생합니다.
-  자세한 내용은 [생각하기](https://ai.google.dev/gemini-api/docs/thinking?hl=ko) 페이지를 참고하세요.
-- **입력 유형:** 각 모드의 제한사항에 관한 자세한 내용은 다음 주제를 참고하세요.
-  - [이미지 입력](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ko#technical-details-image)
-  - [동영상 입력](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ko#supported-formats)
-  - [오디오 입력](https://ai.google.dev/gemini-api/docs/audio?hl=ko#supported-formats)
+- **סטטוס טרום-השקה (Preview):** המודל נמצא כרגע בסטטוס **טרום-השקה**. יכול להיות שיהיו שינויים בממשקי ה-API וביכולות, ולכן יכול להיות שהוא לא מתאים לאפליקציות קריטיות לייצור בלי בדיקה יסודית.
+- **זמן אחזור:** שאילתות מורכבות, קלט ברזולוציה גבוהה או נתונים נרחבים
+  `thinking_budget` יכולים להוביל לזמני עיבוד ארוכים יותר.
+- **הזיות:** כמו כל המודלים הגדולים של שפה, Gemini Robotics-ER 1.6 יכול לפעמים "להזות" או לספק מידע שגוי, במיוחד כשמדובר בהנחיות מעורפלות או בקלט שלא תואם את הנתונים שעליהם המודל אומן.
+- **תלות באיכות ההנחיה:** איכות הפלט של המודל תלויה מאוד בבהירות ובספציפיות של ההנחיה. הנחיות עמומות או לא מובְנות עלולות להוביל לתוצאות לא אופטימליות.
+- **עלות החישוב:** הפעלת המודל, במיוחד עם קלט של סרטונים או עם `thinking_budget` גבוה, צורכת משאבי מחשוב וגוררת עלויות. פרטים נוספים זמינים בדף [חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he).
+- **סוגי קלט:** בקישורים הבאים מפורטות המגבלות של כל מצב.
+  - [הוספת תמונות](https://ai.google.dev/gemini-api/docs/image-understanding?hl=he#technical-details-image)
+  - [קלט של סרטונים](https://ai.google.dev/gemini-api/docs/video-understanding?hl=he#supported-formats)
+  - [הוספת אודיו](https://ai.google.dev/gemini-api/docs/audio?hl=he#supported-formats)
 
-## 개인정보처리방침
+## הודעת פרטיות
 
-귀하는 이 문서에 언급된 모델('로봇 공학 모델')이 귀하의 지시에 따라 하드웨어를 작동하고 이동하기 위해 동영상 및 오디오 데이터를 활용한다는 점을 인정합니다. 따라서 음성, 이미지, 유사성 데이터 ('개인 정보')와 같은 식별 가능한 개인의 데이터가 로봇 모델에 의해 수집되도록 로봇 모델을 작동할 수 있습니다. 귀하가 개인 정보를 수집하는 방식으로 로봇 모델을 운영하기로 선택한 경우, 식별 가능한 개인이 [https://ai.google.dev/gemini-api/terms](https://ai.google.dev/gemini-api/terms?hl=ko)에 있는 Gemini API 추가 서비스 약관('약관')에 설명된 대로, 'Google에서 데이터를 사용하는 방식' 섹션에 따라 Google에 개인 정보가 제공되고 사용될 수 있다는 사실을 충분히 통지받고 이에 동의하지 않는 한, 식별 가능한 개인이 로봇 모델과 상호작용하거나 로봇 모델 주변에 있는 것을 허용하지 않는 데 동의합니다. 귀하는 이러한 알림이 '약관'에 명시된 대로 '개인 정보'의 수집 및 사용을 허용하도록 보장하며, 얼굴 흐리게 처리와 같이 식별 가능한 사람이 포함되지 않은 영역에서 '로봇 모델'을 운영하는 등의 기법을 사용하여 '개인 정보'의 수집 및 배포를 최소화하기 위해 상업적으로 합당한 노력을 기울입니다.
+אתם מאשרים שהמודלים שמצוינים במסמך הזה ('מודלים של רובוטיקה') משתמשים בנתוני וידאו ואודיו כדי לפעול ולהזיז את החומרה בהתאם להוראות שלכם. לכן, יכול להיות שתפעילו את המודלים של הרובוטיקה כך שהם יאספו נתונים מאנשים שאפשר לזהות, כמו נתונים של קול, תמונות ודמיון ("מידע אישי"). אם תבחרו להפעיל את המודלים הרובוטיים באופן שיאסוף מידע אישי, אתם מסכימים שלא תאפשרו לאנשים שניתן לזהות אותם ליצור אינטראקציה עם המודלים הרובוטיים או להיות נוכחים באזור שמסביבם, אלא אם ועד שאנשים כאלה יקבלו הודעה מספקת על כך שהמידע האישי שלהם עשוי להימסר ל-Google ולשמש אותה כפי שמפורט בתנאים והגבלות נוספים למתן שירות של Gemini API שזמינים בכתובת [https://ai.google.dev/gemini-api/terms](https://ai.google.dev/gemini-api/terms?hl=he) (התנאים), כולל בהתאם לקטע שכותרתו 'איך Google משתמשת בנתונים שלך'. תדאגו שההודעה תאפשר איסוף ושימוש במידע אישי כפי שמפורט בתנאים, ותפעלו באופן סביר מבחינה מסחרית כדי לצמצם את האיסוף וההפצה של מידע אישי באמצעות טכניקות כמו טשטוש פנים והפעלת מודלים רובוטיים באזורים שלא מכילים אנשים שניתן לזהות, במידת האפשר.
 
-## 가격 책정
+## תמחור
 
-가격 및 사용 가능한 지역에 관한 자세한 내용은 [가격](https://ai.google.dev/gemini-api/docs/pricing?hl=ko) 페이지를 참고하세요.
+מידע מפורט על התמחור והאזורים הזמינים מופיע בדף [התמחור](https://ai.google.dev/gemini-api/docs/pricing?hl=he).
 
-## 모델 버전
+## גרסאות המודלים
 
-### Robotics-ER 1.6 프리뷰
+### ‫Robotics-ER 1.6 Preview
 
-| 속성 | 설명 |
+| נכס | תיאור |
 | --- | --- |
-| id\_card모델 코드 | `gemini-robotics-er-1.6-preview` |
-| save지원되는 데이터 유형 | **입력**  텍스트, 이미지, 동영상, 오디오  **출력**  텍스트 |
-| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 토큰 한도**  131,072  **출력 토큰 한도**  65,536 |
-| handyman기능 | **오디오 생성**  지원되지 않음  **Batch API**  지원됨  **캐싱**  지원됨  **코드 실행**  지원됨  **컴퓨터 사용**  지원됨  **파일 검색**  지원됨  **유연한 추론**  지원됨  **함수 호출**  지원됨  **Google 지도 그라운딩**  지원됨  **이미지 생성**  지원되지 않음  **Live API**  지원되지 않음  **우선순위 추론**  지원됨  **검색 그라운딩**  지원됨  **구조화된 출력**  지원됨  **사고**  지원됨  **URL 컨텍스트**  지원됨 |
-| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - 미리보기: `gemini-robotics-er-1.6-preview` |
-| calendar\_month최신 업데이트 | 2025년 12월 |
-| cognition\_2지식 단절 | 2025년 1월 |
+| id\_cardקוד המודל | `gemini-robotics-er-1.6-preview` |
+| saveסוגי נתונים נתמכים | **קלטים**  טקסט, תמונות, סרטונים, אודיו  **פלט**  טקסט |
+| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  131,072  **מגבלת אסימונים בפלט**  65,536 |
+| handymanיכולות | **יצירת אודיו**  לא נתמך  ‫**Batch API**  נתמך  **שמירת נתונים במטמון**  נתמך  **הרצת קוד**  נתמך  **שימוש במחשב**  נתמך  **חיפוש קבצים**  נתמך  **הסקת מסקנות גמישה**  נתמך  **בקשה להפעלת פונקציה**  נתמך  **עיגון בעזרת מפות Google**  נתמך  **יצירת תמונות**  לא נתמך  ‫**Live API**  לא נתמך  **היקש בעדיפות גבוהה**  נתמך  **חיפוש עם עיגון בנתונים**  נתמך  **פלטים מובְנים**  נתמך  **חשיבה**  נתמך  **הקשר של כתובת ה-URL**  נתמך |
+| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - תצוגה מקדימה: `gemini-robotics-er-1.6-preview` |
+| calendar\_monthהעדכון האחרון | דצמבר 2025 |
+| cognition\_2תאריך סף הידע | ינואר 2025 |
 
-## 다음 단계
+## השלבים הבאים
 
-- 다른 기능을 살펴보고 다양한 프롬프트와 입력을 계속 실험하여 Gemini Robotics-ER 1.6의 더 많은 애플리케이션을 알아보세요.
-  더 많은 예는 [로보틱스 시작하기 Colab](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)을 참고하세요.
-- 안전을 고려하여 Gemini Robotics 모델이 빌드된 방식을 알아보려면 [Google DeepMind 로봇 공학 안전 페이지](https://deepmind.google/models/gemini-robotics/safety?hl=ko)를 방문하세요.
-- [Gemini Robotics 방문 페이지](https://deepmind.google/robotics?hl=ko)에서 Gemini Robotics 모델의 최신 업데이트에 대해 알아보세요.
+- כדאי לנסות עוד יכולות ולהמשיך להתנסות בהנחיות ובקלט שונים כדי לגלות עוד שימושים ב-Gemini Robotics-ER 1.6.
+  דוגמאות נוספות זמינות ב-[Colab לתחילת העבודה עם רובוטיקה](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+- מידע על האופן שבו נוצרו מודלים של Gemini Robotics תוך התחשבות בבטיחות זמין [בדף בנושא בטיחות רובוטיקה של Google DeepMind](https://deepmind.google/models/gemini-robotics/safety?hl=he).
+- אפשר לקרוא על העדכונים האחרונים במודלים של Gemini Robotics ב[דף הנחיתה של Gemini Robotics](https://deepmind.google/robotics?hl=he).
 
-의견 보내기
+שליחת משוב
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-최종 업데이트: 2026-05-28(UTC)
+עדכון אחרון: 2026-06-04 (שעון UTC).
 
-의견을 전달하고 싶나요?
+רוצה לתת לנו משוב?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-05-28(UTC)"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-04 (שעון UTC)."],[],[]]

@@ -1,29 +1,29 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/flex-inference?hl=vi
-fetched_at: 2026-06-01T06:01:24.415056+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/flex-inference?hl=zh-CN
+fetched_at: 2026-06-08T05:32:52.433442+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Gửi ý kiến phản hồi
+发送反馈
 
-# Suy luận linh hoạt
+# Flex 推理
 
-Gemini Flex API là một cấp suy luận giúp giảm 50% chi phí so với mức giá tiêu chuẩn, đổi lại độ trễ thay đổi và khả năng cung cấp tốt nhất có thể. API này được thiết kế cho các khối lượng công việc có độ trễ cao, yêu cầu xử lý đồng bộ nhưng không cần hiệu suất theo thời gian thực của API tiêu chuẩn.
+Gemini Flex API 是一种推理层级，与标准费率相比，可将成本降低 50%，但延迟时间不确定，并且仅提供尽力而为的可用性。它适用于对延迟容忍度较高的工作负载，这些工作负载需要同步处理，但不需要标准 API 的实时性能。
 
-## Cách sử dụng cấp linh hoạt
+## 如何使用 Flex
 
-Để sử dụng cấp linh hoạt, hãy chỉ định `service_tier` là `flex` trong yêu cầu của bạn. Theo mặc định, các yêu cầu sẽ sử dụng cấp tiêu chuẩn nếu bạn bỏ qua trường này.
+如需使用 Flex 层级，请在请求中将 `service_tier` 指定为 `flex`。默认情况下，如果省略此字段，请求将使用标准层。
 
 ### Python
 
@@ -79,62 +79,56 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Cách hoạt động của suy luận linh hoạt
+## 灵活推理的工作原理
 
-Suy luận linh hoạt của Gemini giúp thu hẹp khoảng cách giữa API tiêu chuẩn và thời gian xử lý 24 giờ
-của [API theo nhóm](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi). API này tận dụng công suất tính toán "có thể giảm" ngoài giờ cao điểm để cung cấp một giải pháp tiết kiệm chi phí cho các tác vụ trong nền và quy trình làm việc tuần tự.
+Gemini Flex 推理弥合了标准 API 与 [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn) 的 24 小时周转时间之间的差距。它利用非高峰时段的“可分流”计算容量，为后台任务和顺序工作流提供经济高效的解决方案。
 
-| Tính năng | Linh hoạt | Mức độ ưu tiên | Tiêu chuẩn | Theo nhóm |
+| 功能 | Flex | 优先级 | 标准 | 批量 |
 | --- | --- | --- | --- | --- |
-| **Định giá** | Chiết khấu 50% | Cao hơn 75 – 100% so với cấp tiêu chuẩn | Giá đầy đủ | Chiết khấu 50% |
-| **Độ trễ** | Phút (mục tiêu 1 – 15 phút) | Thấp (giây) | Giây đến phút | Tối đa 24 giờ |
-| **Độ tin cậy** | Tốt nhất có thể (có thể giảm) | Cao (không thể giảm) | Cao / Trung bình cao | Cao (đối với thông lượng) |
-| **Giao diện** | Đồng bộ | Đồng bộ | Đồng bộ | Không đồng bộ |
+| **价格** | 5 折优惠 | 比标准版多 75-100% | 全价票 | 5 折优惠 |
+| **延迟时间** | 分钟（目标时长为 1-15 分钟） | 低（秒） | 秒到分钟 | 最长 24 小时 |
+| **可靠性** | 尽力而为（可舍弃） | 高（不掉毛） | 高 / 中高 | 高（针对吞吐量） |
+| **接口** | 同步 | 同步 | 同步 | 异步 |
 
-### Lợi ích chính
+### 主要优势
 
-- **Tiết kiệm chi phí**: Tiết kiệm đáng kể cho các hoạt động đánh giá không chính thức, tác nhân trong nền và làm phong phú dữ liệu.
-- **Dễ dàng**: Chỉ cần thêm một tham số vào các yêu cầu hiện có.
-- **Quy trình làm việc đồng bộ**: Lý tưởng cho các chuỗi API tuần tự, trong đó yêu cầu tiếp theo phụ thuộc vào kết quả của yêu cầu trước đó, giúp quy trình này linh hoạt hơn so với quy trình theo nhóm đối với các quy trình làm việc theo tác nhân.
+- **成本效益**：可大幅节省非生产评估、后台代理和数据丰富化的费用。
+- **低摩擦**：只需向现有请求添加一个参数即可。
+- **同步工作流**：非常适合顺序 API 链，其中下一个请求取决于上一个请求的输出，因此比批量处理更灵活，适合智能体工作流。
 
-### Trường hợp sử dụng
+### 使用场景
 
-- **Đánh giá ngoại tuyến**: Chạy các bài kiểm thử hồi quy hoặc bảng xếp hạng "LLM-as-a-judge".
-- **Tác nhân trong nền**: Các tác vụ tuần tự như cập nhật CRM, xây dựng hồ sơ hoặc kiểm duyệt nội dung, trong đó có thể chấp nhận độ trễ vài phút.
-- **Nghiên cứu ràng buộc ngân sách**: Các thí nghiệm học thuật yêu cầu số lượng token lớn trong một ngân sách hạn chế.
+- **离线评估**：运行“LLM 即裁判”回归测试或排行榜。
+- **后台代理**：可接受数分钟延迟的顺序任务，例如 CRM 更新、个人资料构建或内容审核。
+- **受预算限制的研究**：需要在有限的预算下使用大量 token 的学术实验。
 
-### Giới hạn số lượng yêu cầu
+### 速率限制
 
-Lưu lượng truy cập suy luận linh hoạt được tính vào [giới hạn số lượng yêu cầu](https://aistudio.google.com/rate-limit?hl=vi) chung; API này không
-cung cấp giới hạn số lượng yêu cầu mở rộng như [API theo nhóm](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi).
+灵活推理流量会计入常规[速率限制](https://aistudio.google.com/rate-limit?hl=zh-cn)；它不会像 [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn) 那样提供扩展速率限制。
 
-### Công suất có thể giảm
+### 可减少的容量
 
-Lưu lượng truy cập linh hoạt được xử lý với mức độ ưu tiên thấp hơn. Nếu lưu lượng truy cập tiêu chuẩn tăng đột biến, các yêu cầu linh hoạt có thể bị ưu tiên hoặc bị loại bỏ để đảm bảo công suất cho người dùng có mức độ ưu tiên cao. Nếu bạn đang tìm kiếm suy luận có mức độ ưu tiên cao, hãy xem phần
-[Suy luận có mức độ ưu tiên cao](https://ai.google.dev/gemini-api/docs/interactions/priority-inference?hl=vi)
+灵活流量的处理优先级较低。如果标准流量出现峰值，为了确保高优先级用户的容量，系统可能会抢占或逐出灵活请求。如果您需要高优先级的推理，请查看[优先推理](https://ai.google.dev/gemini-api/docs/interactions/priority-inference?hl=zh-cn)
 
-### Mã lỗi
+### 错误代码
 
-Khi không có công suất linh hoạt hoặc hệ thống bị tắc nghẽn, API sẽ trả về mã lỗi tiêu chuẩn:
+当灵活容量不可用或系统拥塞时，API 将返回标准错误代码：
 
-- **503 Không có dịch vụ**: Hệ thống hiện đang hoạt động hết công suất.
-- **429 Quá nhiều yêu cầu**: Giới hạn số lượng yêu cầu hoặc hết tài nguyên.
+- **503 服务不可用**：系统目前已达到容量上限。
+- **429 请求过多**：速率限制或资源耗尽。
 
-### Trách nhiệm của ứng dụng
+### 客户责任
 
-- **Không có phương án dự phòng phía máy chủ**: Để tránh các khoản phí không mong muốn, hệ thống sẽ không
-  tự động nâng cấp yêu cầu linh hoạt lên cấp tiêu chuẩn nếu công suất linh hoạt đã
-  đầy.
-- **Thử lại**: Bạn phải triển khai logic thử lại phía máy khách của riêng mình với
-  thuật toán đợi luỹ tuyến.
-- **Thời gian chờ**: Vì các yêu cầu linh hoạt có thể nằm trong hàng đợi, bạn nên tăng thời gian chờ phía máy khách lên 10 phút trở lên để tránh đóng kết nối sớm.
+- **无服务器端回退**：为避免产生意外费用，如果 Flex 容量已满，系统不会自动将 Flex 请求升级为标准层级。
+- **重试**：您必须实现自己的客户端重试逻辑，并使用指数退避算法。
+- **超时**：由于 Flex 请求可能会排队，我们建议将客户端超时时间增加到 10 分钟或更长时间，以避免过早关闭连接。
 
-## Điều chỉnh khoảng thời gian chờ
+## 调整超时时间范围
 
-Bạn có thể định cấu hình thời gian chờ cho từng yêu cầu đối với API REST và thư viện ứng dụng.
-Luôn đảm bảo thời gian chờ phía máy khách bao gồm khoảng thời gian chờ dự kiến của máy chủ (ví dụ: 600 giây trở lên đối với hàng đợi chờ linh hoạt). SDK dự kiến các giá trị thời gian chờ tính bằng mili giây.
+您可以为 REST API 和客户端库配置每个请求的超时时间。
+请务必确保客户端超时时间涵盖预期的服务器耐心等待时间（例如，对于 Flex 等待队列，超时时间应为 600 秒以上）。SDK 需要以毫秒为单位的超时值。
 
-### Thời gian chờ cho từng yêu cầu
+### 每个请求的超时时间
 
 ### Python
 
@@ -175,9 +169,9 @@ async function main() {
 await main();
 ```
 
-## Triển khai tính năng thử lại
+## 实现重试
 
-Vì cấp linh hoạt có thể giảm và gặp lỗi 503, nên bạn có thể triển khai logic thử lại để tiếp tục với các yêu cầu không thành công:
+由于 Flex 是可舍弃的，并且会因失败而返回 503 错误，因此以下示例展示了如何选择性地实现重试逻辑，以继续处理失败的请求：
 
 ### Python
 
@@ -256,36 +250,35 @@ async function main() {
 await main();
 ```
 
-## Định giá
+## 价格
 
-Suy luận linh hoạt được định giá bằng 50% [API tiêu chuẩn](https://ai.google.dev/gemini-api/docs/pricing?hl=vi)
-và được tính phí theo mã thông báo.
+灵活推理的价格为[标准 API](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn) 的 50%，按 token 数计费。
 
-## Mô hình được hỗ trợ
+## 支持的模型
 
-Các mô hình sau đây hỗ trợ suy luận linh hoạt:
+以下模型支持 Flex 推理：
 
-| Mô hình | Suy luận linh hoạt |
+| 模型 | Flex 推理 |
 | --- | --- |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=vi) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=vi) | ✔️ |
-| [Gemini 3.1 Pro (Bản dùng thử)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=vi) | ✔️ |
-| [Gemini 3 Flash (Bản dùng thử)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=vi) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=vi) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=vi) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=vi) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=zh-cn) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-cn) | ✔️ |
+| [Gemini 3.1 Pro 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-cn) | ✔️ |
+| [Gemini 3 Flash 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-cn) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-cn) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=zh-cn) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-cn) | ✔️ |
 
-## Bước tiếp theo
+## 后续步骤
 
-- [Suy luận có mức độ ưu tiên](https://ai.google.dev/gemini-api/docs/interactions/priority-inference?hl=vi) để có độ trễ thấp nhất.
-- [Mã thông báo](https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=vi): Tìm hiểu về mã thông báo.
+- [优先推理](https://ai.google.dev/gemini-api/docs/interactions/priority-inference?hl=zh-cn)，实现超低延迟。
+- [token](https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=zh-cn)：了解 token。
 
-Gửi ý kiến phản hồi
+发送反馈
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Cập nhật lần gần đây nhất: 2026-05-28 UTC.
+最后更新时间 (UTC)：2026-05-28。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+需要向我们提供更多信息？
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-28 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-05-28。"],[],[]]

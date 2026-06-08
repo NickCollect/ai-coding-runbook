@@ -1,31 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=he
-fetched_at: 2026-06-01T06:04:54.697768+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=it
+fetched_at: 2026-06-08T05:29:49.765373+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-שליחת משוב
+Invia feedback
 
-# הרצת קוד
+# Esecuzione del codice
 
-‫Gemini API כולל כלי להרצת קוד שמאפשר למודל ליצור ולהריץ קוד Python. לאחר מכן המודל יכול ללמוד באופן איטרטיבי מתוצאות הביצוע של הקוד עד שהוא מגיע לפלט סופי. אתם יכולים להשתמש בהרצת קוד כדי ליצור אפליקציות שמרוויחות מחשיבה רציונלית מבוססת קוד. לדוגמה, אפשר להשתמש בהרצת קוד כדי לפתור משוואות או לעבד טקסט. אפשר גם להשתמש ב[ספריות](#supported-libraries) שכלולות בסביבת ההפעלה של הקוד כדי לבצע משימות ספציפיות יותר.
+L'API Gemini fornisce uno strumento di esecuzione del codice che consente al modello di
+generare ed eseguire codice Python. Il modello può quindi apprendere in modo iterativo dai risultati dell'esecuzione del codice fino a ottenere un output finale. Puoi utilizzare l'esecuzione di codice per creare applicazioni che sfruttano il ragionamento basato sul codice. Ad esempio, puoi utilizzare l'esecuzione del codice per risolvere equazioni o elaborare testo. Puoi anche utilizzare le [librerie](#supported-libraries) incluse nell'ambiente di esecuzione del codice per eseguire attività più specializzate.
 
-‫Gemini יכול להריץ קוד ב-Python בלבד. עדיין אפשר לבקש מ-Gemini ליצור קוד בשפה אחרת, אבל המודל לא יכול להשתמש בכלי להרצת קוד כדי להריץ אותו.
+Gemini è in grado di eseguire codice solo in Python. Puoi comunque chiedere a Gemini di
+generare codice in un'altra lingua, ma il modello non può utilizzare lo strumento di esecuzione del codice
+per eseguirlo.
 
-## הפעלת ביצוע קוד
+## Attiva l'esecuzione del codice
 
-כדי להפעיל את הרצת הקוד, צריך להגדיר את כלי הרצת הקוד במודל. כך המודל יכול ליצור ולהריץ קוד.
+Per attivare l'esecuzione del codice, configura lo strumento di esecuzione del codice sul modello. Ciò
+consente al modello di generare ed eseguire codice.
 
 ### Python
 
@@ -95,7 +99,8 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-הפלט יכול להיראות כך, אחרי שעיצבנו אותו כדי שיהיה קל לקריאה:
+L'output potrebbe essere simile al seguente, formattato per
+una maggiore leggibilità:
 
 ```
 Okay, I need to calculate the sum of the first 50 prime numbers. Here's how I'll
@@ -144,25 +149,30 @@ sum_of_primes=5117
 The sum of the first 50 prime numbers is 5117.
 ```
 
-הפלט הזה משלב כמה חלקי תוכן שהמודל מחזיר כשמשתמשים בהרצת קוד:
+Questo output combina diverse parti di contenuti restituite dal modello quando si utilizza
+l'esecuzione di codice:
 
-- ‫`text`: טקסט מוטבע שנוצר על ידי המודל
-- ‫`code_execution_call`: קוד שנוצר על ידי המודל ומיועד להרצה
-- `code_execution_result`: התוצאה של קוד ההפעלה
+- `text`: Testo in linea generato dal modello
+- `code_execution_call`: codice generato dal modello che deve essere eseguito
+- `code_execution_result`: Risultato del codice eseguibile
 
-## הפעלת קוד עם תמונות (Gemini 3)
+## Esecuzione del codice con le immagini (Gemini 3)
 
-מודל Gemini 3 Flash יכול עכשיו לכתוב ולהריץ קוד Python כדי לשנות ולבדוק תמונות באופן פעיל.
+Il modello Gemini 3 Flash ora può scrivere ed eseguire codice Python per manipolare e ispezionare attivamente le immagini.
 
-**תרחישים לדוגמה**
+**Casi d'uso**
 
-- **זום ובדיקה**: המודל מזהה באופן מובנה מתי הפרטים קטנים מדי (למשל, קריאת מד מרחק) וכותב קוד לחיתוך ולבדיקה מחדש של האזור ברזולוציה גבוהה יותר.
-- **מתמטיקה ויזואלית**: המודל יכול לבצע חישובים מרובי-שלבים באמצעות קוד (למשל, סיכום פריטים בקבלה).
-- **הערות לתמונות**: המודל יכול להוסיף הערות לתמונות כדי לענות על שאלות, למשל לצייר חצים כדי להראות קשרים.
+- **Zoom e ispezione**: il modello rileva implicitamente quando i dettagli sono troppo piccoli
+  (ad es. la lettura di un indicatore distante) e scrive il codice per ritagliare ed esaminare nuovamente l'area
+  a una risoluzione più elevata.
+- **Matematica visiva**: il modello può eseguire calcoli in più passaggi utilizzando il codice (ad es.
+  sommare le voci di un scontrino).
+- **Annotazione delle immagini**: il modello può annotare le immagini per rispondere alle domande, ad esempio disegnando frecce per mostrare le relazioni.
 
-## הפעלת ביצוע קוד באמצעות תמונות
+## Attivare l'esecuzione del codice con le immagini
 
-החל מ-Gemini 3 Flash, יש תמיכה רשמית בהרצת קוד עם תמונות. כדי להפעיל את ההתנהגות הזו, צריך להפעיל את ההגדרה 'הפעלת קוד ככלי' ואת ההגדרה 'חשיבה'.
+L'esecuzione del codice con le immagini è ufficialmente supportata in Gemini 3 Flash. Puoi
+attivare questo comportamento abilitando sia Esecuzione del codice come strumento sia Ragionamento.
 
 ### Python
 
@@ -284,9 +294,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -d @payload.json
 ```
 
-## שימוש בהרצת קוד באינטראקציות עוקבות
+## Utilizzare l'esecuzione del codice nelle interazioni a più turni
 
-אפשר גם להשתמש בהרצת קוד כחלק משיחה מרובת תפניות באמצעות `previous_interaction_id`.
+Puoi anche utilizzare l'esecuzione di codice nellƏambito di una conversazione multi-turn utilizzando
+`previous_interaction_id`.
 
 ### Python
 
@@ -387,73 +398,88 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## קלט/פלט (I/O)
+## Input/output (I/O)
 
-החל מ-[Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#gemini-2.0-flash), ביצוע הקוד תומך בקלט של קבצים ובפלט של גרפים. בעזרת היכולות האלה של קלט ופלט, אתם יכולים להעלות קובצי CSV וקובצי טקסט, לשאול שאלות לגבי הקבצים ולקבל תשובה שכוללת גרפים של [Matplotlib](https://matplotlib.org/). קבצי הפלט מוחזרים כתמונות מוטמעות בתשובה.
+A partire da
+[Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it#gemini-2.0-flash), l'esecuzione
+del codice supporta l'input di file e l'output di grafici. Utilizzando queste funzionalità di input e output, puoi caricare file CSV e di testo, porre domande sui file e generare grafici [Matplotlib](https://matplotlib.org/) come parte della risposta. I file di output vengono restituiti come immagini in linea nella risposta.
 
-### תמחור של קלט/פלט
+### Prezzi I/O
 
-כשמשתמשים ב-I/O של ביצוע קוד, התשלום הוא על טוקנים של קלט וטוקנים של פלט:
+Quando utilizzi l'I/O di esecuzione del codice, ti vengono addebitati i token di input e di output:
 
-**טוקנים של קלט:**
+**Token di input:**
 
-- הנחיה למשתמש
+- Prompt dell'utente
 
-**טוקנים בפלט:**
+**Token di output:**
 
-- קוד שנוצר על ידי המודל
-- פלט של הרצת קוד בסביבת הקוד
-- טוקנים של חשיבה
-- סיכום שנוצר על ידי המודל
+- Codice generato dal modello
+- Output dell'esecuzione del codice nell'ambiente di codice
+- Token di ragionamento
+- Riepilogo generato dal modello
 
-### פרטי I/O
+### Dettagli I/O
 
-כשעובדים עם קלט/פלט של הרצת קוד, חשוב לשים לב לפרטים הטכניים הבאים:
+Quando lavori con l'I/O di esecuzione del codice, tieni presente i seguenti dettagli tecnici:
 
-- זמן הריצה המקסימלי של סביבת הקוד הוא 30 שניות.
-- אם סביבת הקוד יוצרת שגיאה, יכול להיות שהמודל יחליט ליצור מחדש את פלט הקוד. המצב הזה יכול לקרות עד 5 פעמים.
-- הגודל המקסימלי של קובץ קלט מוגבל על ידי חלון הטוקנים של המודל. ב-AI Studio, באמצעות Gemini Flash 2.0, הגודל המקסימלי של קובץ קלט הוא מיליון טוקנים (בערך 2MB לקובצי טקסט מסוגי הקלט הנתמכים). אם תעלו קובץ גדול מדי, לא תוכלו לשלוח אותו ב-AI Studio.
-- הכי טוב להשתמש בהרצת קוד עם קובצי טקסט ו-CSV.
-- אפשר להעביר את קובץ הקלט כנתונים מוטבעים או להעלות אותו באמצעות [Files API](https://ai.google.dev/gemini-api/docs/interactions/files?hl=he), וקובץ הפלט תמיד מוחזר כנתונים מוטבעים.
+- Il tempo di esecuzione massimo dell'ambiente di codice è di 30 secondi.
+- Se l'ambiente di codice genera un errore, il modello potrebbe decidere di
+  rigenerare l'output del codice. Questa operazione può essere eseguita fino a 5 volte.
+- La dimensione massima dell'input del file è limitata dalla finestra dei token del modello. In
+  AI Studio, utilizzando Gemini Flash 2.0, la dimensione massima del file di input è 1 milione
+  di token (circa 2 MB per i file di testo dei tipi di input supportati). Se carichi un file troppo grande, AI Studio non ti consentirà di inviarlo.
+- L'esecuzione del codice funziona meglio con file di testo e CSV.
+- Il file di input può essere trasmesso come dati incorporati o caricato utilizzando l'[API Files](https://ai.google.dev/gemini-api/docs/interactions/files?hl=it) e il file di output viene sempre restituito come dati incorporati.
 
-## חיוב
+## Fatturazione
 
-אין עלות נוספת על הפעלת ביצוע קוד מ-Gemini API.
-תחויבו לפי התעריף הנוכחי של טוקנים של קלט ופלט, בהתאם למודל Gemini שבו אתם משתמשים.
+Non sono previsti costi aggiuntivi per l'abilitazione dell'esecuzione del codice dall'API Gemini.
+Ti verrà addebitato il costo alla tariffa attuale dei token di input e output in base al modello Gemini che stai utilizzando.
 
-ריכזנו כאן כמה דברים נוספים שכדאי לדעת על חיוב על הפעלת קוד:
+Ecco alcune altre informazioni da sapere sulla fatturazione per l'esecuzione del codice:
 
-- אתם מחויבים רק פעם אחת על טוקני הקלט שאתם מעבירים למודל, ועל טוקני הפלט הסופי שהמודל מחזיר לכם.
-- טוקנים שמייצגים קוד שנוצר נספרים כטוקנים של פלט. הקוד שנוצר יכול לכלול טקסט ופלט מולטי-מודאלי כמו תמונות.
-- תוצאות של הרצת קוד נספרות גם הן כאסימוני פלט.
+- Ti viene addebitato un costo una sola volta per i token di input che passi al modello e
+  per i token di output finali restituiti dal modello.
+- I token che rappresentano il codice generato vengono conteggiati come token di output. Il codice
+  generato può includere testo e output multimodali come immagini.
+- Anche i risultati dell'esecuzione del codice vengono conteggiati come token di output.
 
-מודל החיוב מוצג בתרשים הבא:
+Il modello di fatturazione è mostrato nel seguente diagramma:
 
-![מודל חיוב על הרצת קוד](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=he)
+![modello di fatturazione dell&#39;esecuzione del codice](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=it)
 
-- החיוב מתבצע לפי התעריף הנוכחי של טוקנים של קלט ופלט, בהתאם למודל Gemini שבו אתם משתמשים.
-- אם Gemini משתמש בהרצת קוד כדי ליצור את התשובה, ההנחיה המקורית, הקוד שנוצר והתוצאה של הקוד שהורץ מסומנים בתווית *intermediate tokens* (טוקנים ביניים) והחיוב עליהם הוא כ*input tokens* (טוקנים של קלט).
-- ‫Gemini יוצר סיכום ומחזיר את הקוד שנוצר, את התוצאה של הקוד שהופעל ואת הסיכום הסופי. הם מחויבים כ*אסימוני פלט*.
-- תגובת ה-API של Gemini כוללת ספירה של אסימוני ביניים, כדי שתדעו למה אתם מקבלים אסימוני קלט נוספים מעבר להנחיה הראשונית.
+- Ti viene addebitato il costo alla tariffa attuale dei token di input e output in base al modello Gemini che utilizzi.
+- Se Gemini utilizza l'esecuzione del codice durante la generazione della risposta, il prompt originale, il codice generato e il risultato del codice eseguito vengono etichettati come *token intermedi* e vengono fatturati come *token di input*.
+- Gemini genera quindi un riepilogo e restituisce il codice generato, il risultato
+  del codice eseguito e il riepilogo finale. Questi vengono fatturati come *token di output*.
+- L'API Gemini include un conteggio dei token intermedi nella risposta dell'API, in modo da
+  sapere perché ricevi token di input aggiuntivi oltre al prompt
+  iniziale.
 
-## מגבלות
+## Limitazioni
 
-- המודל יכול רק ליצור ולהריץ קוד. הוא לא יכול להחזיר פריטים אחרים, כמו קובצי מדיה.
-- במקרים מסוימים, הפעלת ביצוע קוד עלולה להוביל לרגרסיות בתחומים אחרים של פלט המודל (לדוגמה, כתיבת סיפור).
-- יש הבדלים בין המודלים השונים ביכולת שלהם להשתמש בהרצת קוד בהצלחה.
+- Il modello può solo generare ed eseguire codice. Non può restituire altri artefatti
+  come i file multimediali.
+- In alcuni casi, l'attivazione dell'esecuzione del codice può portare a regressioni in altre aree
+  dell'output del modello (ad esempio, la scrittura di una storia).
+- Esiste una certa variazione nella capacità dei diversi modelli di utilizzare l'esecuzione del codice.
 
-## שילובים נתמכים של כלים
+## Combinazioni di strumenti supportate
 
-אפשר לשלב את הכלי להרצת קוד עם [עיגון באמצעות חיפוש Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=he) כדי להפעיל תרחישי שימוש מורכבים יותר.
+Lo strumento di esecuzione del codice può essere combinato con
+[Grounding con la Ricerca Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=it) per
+supportare casi d'uso più complessi.
 
-מודלים של Gemini 3 תומכים בשילוב של כלים מובנים (כמו הפעלת קוד) עם כלים מותאמים אישית (הפעלת פונקציות).
+I modelli Gemini 3 supportano la combinazione di strumenti integrati (come l'esecuzione del codice) con
+strumenti personalizzati (chiamata di funzione).
 
-## ספריות נתמכות
+## Librerie supportate
 
-סביבת ההפעלה של הקוד כוללת את הספריות הבאות:
+L'ambiente di esecuzione del codice include le seguenti librerie:
 
 - attrs
-- שחמט
+- scacchi
 - contourpy
 - fpdf
 - geopandas
@@ -468,9 +494,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 - numpy
 - opencv-python
 - openpyxl
-- מארז
-- פנדות
-- כרית
+- pacchettizzazione
+- panda
+- cuscino
 - protobuf
 - pylatex
 - pyparsing
@@ -482,29 +508,29 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 - scikit-learn
 - scipy
 - seaborn
-- שש
+- sei
 - striprtf
 - sympy
-- לרכז בטבלה
+- tabulare
 - tensorflow
 - toolz
 - xlrd
 
-אי אפשר להתקין ספריות משלכם.
+Non puoi installare le tue librerie.
 
-## המאמרים הבאים
+## Passaggi successivi
 
-- אני רוצה לנסות את
-- מידע על כלים אחרים של Gemini API:
-  - [בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=he)
-  - [עיגון באמצעות חיפוש Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=he)
+- Prova a
+- Scopri di più sugli altri strumenti dell'API Gemini:
+  - [Chiamata di funzione](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=it)
+  - [Grounding con la Ricerca Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=it)
 
-שליחת משוב
+Invia feedback
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-עדכון אחרון: 2026-05-28 (שעון UTC).
+Ultimo aggiornamento 2026-06-01 UTC.
 
-רוצה לתת לנו משוב?
+Vuoi dirci altro?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-05-28 (שעון UTC)."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-06-01 UTC."],[],[]]

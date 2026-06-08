@@ -1,46 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=ko
-fetched_at: 2026-06-01T06:08:37.056794+00:00
-title: "Live API\ub97c \uc0ac\uc6a9\ud55c \ub3c4\uad6c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=zh-TW
+fetched_at: 2026-06-08T05:37:06.197066+00:00
+title: "\u4f7f\u7528\u5de5\u5177\u642d\u914d Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-의견 보내기
+提供意見
 
-# Live API를 사용한 도구
+# 使用工具搭配 Live API
 
-도구 사용을 통해 Live API는 실시간 연결을 유지하면서 실제 작업을 수행하고 외부 컨텍스트를 가져올 수 있으므로 단순한 대화를 넘어설 수 있습니다.
-Live API를 사용하여 [함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko) 및 [Google 검색](https://ai.google.dev/gemini-api/docs/grounding?hl=ko)과 같은 도구를 정의할 수 있습니다.
+使用工具可讓 Live API 不只是對話，還能執行實際動作並擷取外部內容，同時維持即時連線。您可以使用 Live API 定義工具，例如[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)和 [Google 搜尋](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-tw)。
 
-## 지원되는 도구 개요
+## 支援的工具總覽
 
-다음은 Live API 모델에 사용할 수 있는 도구에 대한 간략한 개요입니다.
+以下簡要介紹 Live API 模型可用的工具：
 
-| 도구 | Gemini 3.1 Flash 실시간 미리보기 | Gemini 2.5 Flash 실시간 미리보기 |
+| 工具 | Gemini 3.1 Flash Live Preview | Gemini 2.5 Flash Live Preview |
 | --- | --- | --- |
-| **검색** | 지원됨 | 지원됨 |
-| **함수 호출** | 지원됨 (동기만 해당) | 지원됨 (동기 및 [비동기](#async-function-calling)) |
-| **Google 지도** | 지원되지 않음 | 지원되지 않음 |
-| **코드 실행** | 지원되지 않음 | 지원되지 않음 |
-| **URL 컨텍스트** | 지원되지 않음 | 지원되지 않음 |
+| **搜尋** | 支援 | 支援 |
+| **函式呼叫** | 支援 (僅限同步) | 支援 (同步和[非同步](#async-function-calling)) |
+| **Google 地圖** | 不支援 | 不支援 |
+| **程式碼執行** | 不支援 | 不支援 |
+| **網址內容** | 不支援 | 不支援 |
 
-## 함수 호출
+## 函式呼叫
 
-Live API는 일반 콘텐츠 생성 요청과 마찬가지로 함수 호출을 지원합니다. 함수 호출을 사용하면 Live API가 외부 데이터 및 프로그램과 상호작용하여 애플리케이션이 할 수 있는 작업을 크게 늘릴 수 있습니다.
+Live API 支援函式呼叫，就像一般內容生成要求一樣。透過函式呼叫，Live API 可以與外部資料和程式互動，大幅提升應用程式的功能。
 
-세션 구성의 일부로 함수 선언을 정의할 수 있습니다.
-도구 호출을 수신한 후 클라이언트는 `session.send_tool_response` 메서드를 사용하여 `FunctionResponse` 객체 목록으로 응답해야 합니다.
+您可以在工作階段設定中定義函式宣告。收到工具呼叫後，用戶端應使用 `session.send_tool_response` 方法，以 `FunctionResponse` 物件清單回應。
 
-자세한 내용은 [함수 호출 튜토리얼](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)을 참고하세요.
+詳情請參閱[函式呼叫教學課程](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)。
 
 ### Python
 
@@ -93,7 +91,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI, Modality } from '@google/genai';
@@ -217,13 +215,13 @@ async function main() {
 main();
 ```
 
-모델은 단일 프롬프트에서 여러 함수 호출과 출력을 연결하는 데 필요한 코드를 생성할 수 있습니다. 이 코드는 샌드박스 환경에서 실행되어 후속 [BidiGenerateContentToolCall](https://ai.google.dev/api/live?hl=ko#bidigeneratecontenttoolcall) 메시지를 생성합니다.
+模型可以根據單一提示產生多個函式呼叫，以及串連輸出內容所需的程式碼。這段程式碼會在沙箱環境中執行，產生後續的 [BidiGenerateContentToolCall](https://ai.google.dev/api/live?hl=zh-tw#bidigeneratecontenttoolcall) 訊息。
 
-## 비동기 함수 호출
+## 非同步函式呼叫
 
-함수 호출은 기본적으로 순차적으로 실행됩니다. 즉, 각 함수 호출의 결과가 나올 때까지 실행이 일시중지됩니다. 이렇게 하면 순차적 처리가 보장되므로 함수가 실행되는 동안 모델과 계속 상호작용할 수 없습니다.
+根據預設，函式呼叫會依序執行，也就是說，系統會暫停執行作業，直到每個函式呼叫的結果都可用為止。這可確保系統依序處理函式，也就是說，函式執行期間，您無法繼續與模型互動。
 
-대화를 차단하지 않으려면 모델에 함수를 비동기적으로 실행하도록 요청하면 됩니다. 이렇게 하려면 먼저 함수 정의에 `behavior`을 추가해야 합니다.
+如果不想封鎖對話，可以要求模型非同步執行函式。如要這麼做，請先在函式定義中新增 `behavior`：
 
 ### Python
 
@@ -233,7 +231,7 @@ turn_on_the_lights = {"name": "turn_on_the_lights", "behavior": "NON_BLOCKING"} 
 turn_off_the_lights = {"name": "turn_off_the_lights"} # turn_off_the_lights will still pause all interactions with the model
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI, Modality, Behavior } from '@google/genai';
@@ -247,13 +245,14 @@ const turn_off_the_lights = {name: "turn_off_the_lights"}
 const tools = [{ functionDeclarations: [turn_on_the_lights, turn_off_the_lights] }]
 ```
 
-`NON-BLOCKING`는 함수가 비동기적으로 실행되도록 보장하며, 사용자는 모델과 계속 상호작용할 수 있습니다.
+`NON-BLOCKING` 可確保函式以非同步方式執行，同時您可繼續與模型互動。
 
-그런 다음 `scheduling` 매개변수를 사용하여 모델이 `FunctionResponse`를 수신할 때 어떻게 작동해야 하는지 알려야 합니다. 다음 중 하나일 수 있습니다.
+接著，您需要使用 `scheduling` 參數，告知模型在收到 `FunctionResponse` 時的行為。你可以選擇：
 
-- 진행 중인 작업을 중단하고 즉시 받은 대답을 알려줍니다(`scheduling="INTERRUPT"`).
-- 현재 실행 중인 작업(`scheduling="WHEN_IDLE"`)이 완료될 때까지 기다립니다.
-- 또는 아무것도 하지 않고 나중에 토론에서 해당 지식을 사용합니다(`scheduling="SILENT"`).
+- 中斷目前執行的動作，並立即告知你收到的回覆 (`scheduling="INTERRUPT"`)，
+- 請等待裝置完成目前執行的作業 (`scheduling="WHEN_IDLE"`)，
+- 或者，您也可以不採取任何行動，稍後在討論中使用該知識
+  (`scheduling="SILENT"`)
 
 ### Python
 
@@ -269,7 +268,7 @@ const tools = [{ functionDeclarations: [turn_on_the_lights, turn_off_the_lights]
   )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI, Modality, Behavior, FunctionResponseScheduling } from '@google/genai';
@@ -285,9 +284,9 @@ const functionResponse = {
 }
 ```
 
-## Google 검색을 사용하는 그라운딩
+## 以 Google 搜尋建立基準
 
-세션 구성의 일부로 Google 검색을 사용한 그라운딩을 사용 설정할 수 있습니다. 이렇게 하면 Live API의 정확도가 높아지고 엉뚱한 대답이 방지됩니다. 자세한 내용은 [그라운딩 튜토리얼](https://ai.google.dev/gemini-api/docs/grounding?hl=ko)을 참고하세요.
+您可以在工作階段設定中啟用「以 Google 搜尋強化事實基礎」。這有助於提高 Live API 的準確度，並避免產生錯覺。詳情請參閱[基礎教學課程](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-tw)。
 
 ### Python
 
@@ -335,7 +334,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI, Modality } from '@google/genai';
@@ -446,9 +445,9 @@ async function main() {
 main();
 ```
 
-## 여러 도구 결합
+## 結合多種工具
 
-Live API 내에서 여러 도구를 결합하여 애플리케이션의 기능을 더욱 강화할 수 있습니다.
+您可以在 Live API 中結合多種工具，進一步提升應用程式的功能：
 
 ### Python
 
@@ -472,7 +471,7 @@ config = {"response_modalities": ["AUDIO"], "tools": tools}
 # ... remaining model call
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const prompt = `Hey, I need you to do two things for me.
@@ -496,17 +495,17 @@ const config = {
 // ... remaining model call
 ```
 
-## 다음 단계
+## 後續步驟
 
-- [도구 사용 쿠크북](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=ko)에서 Live API로 도구를 사용하는 예시를 자세히 확인하세요.
-- [Live API 기능 가이드](https://ai.google.dev/gemini-api/docs/live-guide?hl=ko)에서 기능 및 구성에 관한 전체 내용을 확인하세요.
+- 如要查看更多搭配 Live API 使用工具的範例，請參閱[工具使用食譜](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=zh-tw)。
+- 如要瞭解功能和設定的完整資訊，請參閱[即時 API 功能指南](https://ai.google.dev/gemini-api/docs/live-guide?hl=zh-tw)。
 
-의견 보내기
+提供意見
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-최종 업데이트: 2026-05-29(UTC)
+上次更新時間：2026-06-01 (世界標準時間)。
 
-의견을 전달하고 싶나요?
+想進一步說明嗎？
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-05-29(UTC)"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-01 (世界標準時間)。"],[],[]]

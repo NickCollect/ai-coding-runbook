@@ -1,216 +1,211 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=id
-fetched_at: 2026-06-01T06:08:31.462074+00:00
-title: "Membangun aplikasi di Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=es-419
+fetched_at: 2026-06-08T05:27:49.155930+00:00
+title: "Crea apps en Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-Kirim masukan
+Enviar comentarios
 
-# Membangun aplikasi di Google AI Studio
+# Crea apps en Google AI Studio
 
-Halaman ini menjelaskan cara menggunakan Google AI Studio untuk membuat (atau "mengodekan vibe") dan men-deploy aplikasi dengan cepat yang menguji kemampuan terbaru Gemini seperti [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=id) dan [Live API](https://ai.google.dev/gemini-api/docs/live?hl=id). Google AI Studio mendukung pembuatan **aplikasi web** dengan runtime full-stack dan **aplikasi Android native** dengan Kotlin dan Jetpack Compose — semuanya melalui perintah bahasa alami.
+En esta página, se describe cómo usar Google AI Studio para compilar rápidamente (o "vibe
+code") y, luego, implementar apps que prueben las capacidades más recientes de Gemini, como
+[Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=es-419) y la [API
+de Live](https://ai.google.dev/gemini-api/docs/live?hl=es-419). Google AI Studio admite la compilación de **apps web** con entornos de ejecución full stack y **apps nativas para Android** con Kotlin y Jetpack Compose, todo a través de instrucciones en lenguaje natural.
 
-## Mulai
+## Comenzar
 
-Mulai vibe coding di [Mode build](https://aistudio.google.com/apps?hl=id) Google AI Studio. Anda dapat
-mulai membangun dengan beberapa cara:
+Comienza a usar el vibe coding en el [modo de compilación](https://aistudio.google.com/apps?hl=es-419) de Google AI Studio. Puedes comenzar a compilar de varias maneras:
 
-- **Mulai dengan perintah**: Dalam mode Buat, gunakan kotak input untuk memasukkan deskripsi tentang apa yang ingin Anda buat. Pilih Chip AI untuk menambahkan fitur tertentu seperti pembuatan gambar atau data Google Maps ke perintah Anda. Anda bahkan dapat mengucapkan apa yang Anda inginkan menggunakan tombol speech-to-text.
-- **Tombol "Saya Lagi Beruntung"**: Jika Anda membutuhkan ide kreatif, gunakan tombol "Saya Lagi Beruntung", dan Gemini akan membuat perintah dengan ide project untuk membantu Anda memulai.
-- **Me-remix project dari galeri**: Buka project dari [Galeri
-  Aplikasi](https://aistudio.google.com/apps?source=showcase&hl=id), lalu pilih **Salin Aplikasi**.
+- **Comienza con una instrucción**: En el modo de compilación, usa la casilla de entrada para ingresar una
+  descripción de lo que quieres compilar. Selecciona AI Chips para agregar funciones específicas, como la generación de imágenes o los datos de Google Maps, a tu instrucción. Incluso puedes decir lo que quieres con el botón de voz a texto.
+- **Botón "Voy a tener suerte"**: Si necesitas una chispa creativa, usa el botón "Voy a
+  tener suerte" y Gemini generará una instrucción con una idea de proyecto
+  para que comiences.
+- **Remezcla un proyecto de la galería**: Abre un proyecto de la [Galería
+  de apps](https://aistudio.google.com/apps?source=showcase&hl=es-419) y selecciona **Copiar app**.
 
-Setelah Anda menjalankan perintahnya, Anda akan melihat kode dan file yang diperlukan dibuat,
-dengan pratinjau live aplikasi Anda yang muncul di sisi kanan.
+Una vez que ejecutes la instrucción, verás que se generan el código y los archivos necesarios, con una vista previa en vivo de tu app que aparece en el lado derecho.
 
-## Apa yang dibuat?
+## ¿Qué se crea?
 
-Saat Anda menjalankan perintah, AI Studio akan membuat aplikasi lengkap. Anda dapat memilih untuk membuat **aplikasi web** atau **aplikasi Android native** menggunakan pemilih platform.
+Cuando ejecutas la instrucción, AI Studio crea una aplicación completa. Puedes elegir compilar una **app web** o una **app para Android nativa** con el selector de plataformas.
 
-Untuk **aplikasi web** (default), AI Studio membuat lingkungan full stack yang mencakup:
+Para las **apps web** (opción predeterminada), AI Studio crea un entorno full stack que incluye lo siguiente:
 
-- **Sisi klien**: frontend web (React adalah default).
-- **Sisi server**: runtime Node.js yang memungkinkan panggilan API yang aman, koneksi database, dan penggunaan paket npm.
+- **Cliente**: Un frontend web (React es la opción predeterminada)
+- **Servidor**: Un entorno de ejecución de Node.js que permite llamadas seguras a la API,
+  conexiones de bases de datos y el uso de paquetes npm
 
-Untuk **aplikasi Android**, AI Studio membuat project Kotlin dan Jetpack Compose
-yang dapat Anda lihat pratinjaunya di emulator berbasis browser, diinstal di perangkat fisik,
-dan dipublikasikan ke Play Store untuk pengujian. [Pelajari lebih lanjut cara membuat aplikasi Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=id).
+Para las **apps para Android**, AI Studio genera un proyecto de Kotlin y Jetpack Compose
+que puedes obtener una vista previa en un emulador basado en el navegador, instalar en un dispositivo físico
+y publicar en Play Store para realizar pruebas. [Obtén más información para compilar apps para Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=es-419).
 
-Anda dapat melihat kode yang dibuat dengan memilih tab **Kode** di panel pratinjau sebelah kanan. **Antigravity Agent** secara cerdas mengelola beberapa file di seluruh stack Anda, memastikan perubahan disebarkan dengan benar.
+Para ver el código que se genera, selecciona la pestaña **Código** en el panel de vista previa de la derecha. El **agente de Antigravity** administra de forma inteligente varios archivos en tu pila, lo que garantiza que los cambios se propaguen correctamente.
 
-### The Antigravity Agent
+### El agente de Antigravity
 
-**Antigravity Agent** adalah fungsi AI utama dalam [Google Antigravity](https://antigravity.google?hl=id) dan kini komponen inti dari framework agen mendukung pengalaman mode Build di Google AI Studio. Gemini
-melampaui pembuatan kode sederhana dengan mempertahankan konteks seluruh project Anda,
-mengelola beberapa file, dan memahami petunjuk yang kompleks untuk membangun aplikasi full-stack yang andal.
+El **agente de Antigravity** es la principal funcionalidad de IA dentro de [Google
+Antigravity](https://antigravity.google?hl=es-419), y ahora los componentes principales del
+arnés del agente potencian la experiencia del modo de compilación en Google AI Studio. Va más allá de la simple generación de código, ya que mantiene el contexto de todo el proyecto, administra varios archivos y comprende instrucciones complejas para compilar aplicaciones full stack sólidas.
 
-Kemampuan utama meliputi:
+Las siguientes son algunas de las funciones clave:
 
-- **Pemahaman konteks**: mempertahankan konteks perintah dan status file sebelumnya.
-- **Pengelolaan multi-file**: menangani dependensi di beberapa file.
-- **Eksekusi terverifikasi**: memverifikasi update kode untuk mengurangi halusinasi.
+- **Reconocimiento del contexto**: Mantiene el contexto de las instrucciones anteriores y los estados de los archivos.
+- **Administración de varios archivos**: Controla las dependencias en varios archivos.
+- **Ejecución verificada**: Verifica las actualizaciones de código para reducir las alucinaciones.
 
-## Kemampuan full-stack
+## Capacidades full stack
 
-Google AI Studio membuka potensi ekosistem web modern, sehingga Anda dapat membangun lebih dari sekadar prototipe sisi klien.
+Google AI Studio libera el poder del ecosistema web moderno, lo que te permite compilar más que solo prototipos del cliente.
 
-- **Runtime sisi server & npm**: gunakan library paket npm yang luas. Agen
-  akan otomatis mengidentifikasi dan menginstal paket sesuai kebutuhan untuk
-  aplikasi Anda (misalnya, library tertentu untuk visualisasi data atau klien API). Anda
-  juga dapat meminta paket tertentu jika diinginkan.
-- **Pengelolaan secret**: menyimpan kunci API dan secret dengan aman di menu
-  **Setelan**. Nilai ini dapat diakses dalam kode sisi server Anda, sehingga aman dari eksposur sisi klien.
-- **Multiplayer**: bangun pengalaman kolaboratif real-time langsung di dalam AI Studio. Runtime sisi server mengelola status dan koneksi yang diperlukan agar pengguna dapat berinteraksi bersama.
-- **Firebase Firestore dan Authentication**: menyediakan dan menyiapkan Firebase secara otomatis, termasuk database Firestore (penyimpanan data persisten) dan Firebase Authentication (alur login, khususnya "Login dengan Google").
-  Agen menangani seluruh proses penyiapan dan bahkan menulis kode di aplikasi Anda untuk layanan ini.
-- **Integrasi Google Workspace**: Hubungkan aplikasi Anda ke API Google Workspace seperti Gmail, Spreadsheet, Dokumen, Drive, Kalender, dan lainnya. AI Studio menangani
-  semua konfigurasi OAuth secara otomatis.
+- **Entorno de ejecución del servidor y npm**: Usa la amplia biblioteca de paquetes npm. El agente identificará e instalará automáticamente los paquetes según sea necesario para tu app (p.ej., bibliotecas específicas para la visualización de datos o clientes de la API). También puedes solicitar paquetes específicos si lo deseas.
+- **Administración de datos secretos**: Almacena de forma segura claves de API y datos secretos en el
+  **menú Configuración**. Se puede acceder a ellos en el código del servidor, lo que los mantiene a salvo de la exposición del cliente.
+- **Multijugador**: Crea experiencias colaborativas en tiempo real directamente en
+  AI Studio. El entorno de ejecución del servidor administra el estado y las conexiones necesarias para que los usuarios interactúen entre sí.
+- **Firebase Firestore y Authentication**: Aprovisiona y configura automáticamente Firebase,
+  incluida la base de datos de Firestore (almacenamiento de datos persistente) y
+  Firebase Authentication (flujos de acceso, específicamente "Acceder con Google").
+  El agente controla todo el proceso de configuración y hasta escribe el código en tu app para estos servicios.
+- **Integraciones de Google Workspace**: Conecta tu app a las APIs de Google Workspace, como Gmail, Hojas de cálculo, Documentos, Drive, Calendario y mucho más. AI Studio controla automáticamente toda la configuración de OAuth.
 
-[Pelajari lebih lanjut pengembangan aplikasi full-stack](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=id)
+[Obtén más información para desarrollar apps full stack](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=es-419)
 
-### Aplikasi Android
+### Apps para Android
 
-Anda juga dapat membuat aplikasi Android native menggunakan Kotlin dan Jetpack Compose.
-Pratinjau aplikasi Anda di emulator Android berbasis browser, instal di perangkat fisik menggunakan ADB di browser, dan publikasikan ke Play Store untuk pengujian internal.
+También puedes compilar apps nativas para Android con Kotlin y Jetpack Compose.
+Obtén una vista previa de tu app en un emulador de Android basado en el navegador, instálala en un dispositivo físico con ADB en el navegador y publícala en Play Store para realizar pruebas internas.
 
-[Pelajari lebih lanjut cara membangun aplikasi Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=id)
+[Obtén más información para compilar apps para Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=es-419)
 
-## Lanjutkan pembuatan
+## Continúa con la compilación
 
-Setelah Google AI Studio membuat kode awal untuk aplikasi Anda, Anda
-dapat terus menyempurnakannya:
+Una vez que Google AI Studio genere el código inicial de tu aplicación, puedes seguir perfeccionándolo:
 
-### Membangun solusi di Google AI Studio
+### Compila en Google AI Studio
 
-- **Melakukan iterasi dengan Gemini**: Gunakan panel chat dalam **Mode pembuatan** untuk meminta Gemini
-  membuat modifikasi, menambahkan fitur baru, atau mengubah gaya.
-- **Mengedit kode secara langsung**: Buka **tab Kode** di panel pratinjau untuk melakukan pengeditan langsung.
+- **Itera con Gemini**: Usa el panel de chat en el **modo de compilación** para pedirle a Gemini
+  que realice modificaciones, agregue funciones nuevas o cambie el estilo.
+- **Edita el código directamente**: Abre la **pestaña Código** en el panel de vista previa para
+  realizar ediciones en vivo.
 
-### Mengembangkan secara eksternal
+### Desarrolla externamente
 
-Untuk alur kerja yang lebih canggih, Anda dapat mengekspor kode dan bekerja di lingkungan pilihan Anda:
+Para flujos de trabajo más avanzados, puedes exportar el código y trabajar en el entorno que prefieras:
 
-- **Download dan kembangkan secara lokal**: Ekspor kode yang dihasilkan sebagai **file
-  ZIP** dan impor ke editor kode Anda.
-- **Kirim ke GitHub**: Integrasikan kode dengan proses pengembangan dan
-  deployment yang ada dengan mengirimkannya ke **repositori GitHub**.
+- **Descarga y desarrolla de forma local**: Exporta el código generado como un **archivo
+  ZIP** y, luego, impórtalo en tu editor de código.
+- **Envía a GitHub**: Integra el código con tus procesos de desarrollo e
+  implementación existentes. Para ello, envíalo a un **repositorio de GitHub**.
 
-## Fitur utama
+## Características clave
 
-Google AI Studio menyertakan beberapa fitur untuk membuat proses pembangunan menjadi intuitif dan visual:
+Google AI Studio incluye varias funciones para que el proceso de compilación sea intuitivo y visual:
 
-- **Buat dan lakukan iterasi pada aplikasi full stack**: Buat aplikasi full stack hanya dengan
-  perintah dan lakukan iterasi melalui chat atau **mode anotasi**. Mode anotasi
-  memungkinkan Anda menandai bagian mana pun dari UI aplikasi dan menjelaskan
-  perubahan yang Anda inginkan.
-- **Membagikan dan men-deploy aplikasi**: Anda dapat membagikan kreasi Anda kepada orang lain untuk berkolaborasi atau memamerkan hasil karya Anda. Saat berbagi, panggilan API akan mengurangi batas penggunaan Anda. Jika Anda menggunakan model berbayar, biaya mungkin berlaku. Kemudian, saat aplikasi Anda siap, deploy ke Cloud Run.
-- **Galeri aplikasi**: Galeri Aplikasi menyediakan library visual ide project.
-  Anda dapat menjelajahi berbagai kemungkinan yang dapat dilakukan Gemini, melihat pratinjau aplikasi secara instan, dan mengombinasikannya untuk menjadikannya milik Anda.
+- **Crea apps full stack y realiza iteraciones en ellas**: Crea apps full stack con solo
+  una instrucción y realiza iteraciones a través del chat o el **modo de anotación**. El modo de anotación te permite destacar cualquier parte de la IU de tu app y describir el cambio que deseas.
+- **Comparte e implementa tu app**: Puedes compartir tus creaciones con otras personas para
+  colaborar o mostrar tu trabajo. Cuando compartes, las llamadas a la API se incluyen en tus límites de uso. Si usas modelos pagados, es posible que se apliquen costos. Luego, cuando tu app esté lista, impleméntala en Cloud Run.
+- **Galería de apps**: La Galería de apps proporciona una biblioteca visual de ideas de proyectos.
+  Puedes explorar lo que es posible con Gemini, obtener una vista previa de las aplicaciones al instante y remezclarlas para hacerlas tuyas.
 
-## Men-deploy atau mengarsipkan aplikasi
+## Implementa o archiva tu app
 
-Setelah aplikasi Anda siap, Anda dapat men-deploy-nya:
+Una vez que tu aplicación esté lista, puedes implementarla:
 
-- **Cloud Run**: men-deploy aplikasi Anda sebagai layanan yang dapat diskalakan.
-  Harga untuk [Google Cloud Run](https://cloud.google.com/run?hl=id) dapat berlaku berdasarkan
-  penggunaan. Untuk mempelajari deployment lebih lanjut, lihat
-  [Men-deploy dari Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=id).
-- **GitHub**: mengekspor project Anda ke repositori GitHub.
+- **Cloud Run**: Implementa tu aplicación como un servicio escalable.
+  Es posible que se apliquen precios para [Google Cloud Run](https://cloud.google.com/run?hl=es-419) según el uso. Para obtener más información sobre la implementación, consulta
+  [Cómo implementar desde Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=es-419).
+- **GitHub**: Exporta tu proyecto a un repositorio de GitHub.
 
-## Batasan
+## Limitaciones
 
-Bagian ini mencantumkan batasan mode build saat ini di Google AI Studio.
+En esta sección, se enumeran las limitaciones actuales del modo de compilación en Google AI Studio.
 
-### Pengelolaan Kunci API
+### Administración de claves de API
 
-Saat Anda membuat aplikasi baru yang menggunakan Gemini API, AI Studio akan otomatis
-mengonfigurasi kunci Gemini API Anda sebagai rahasia di lingkungan sisi server aplikasi.
-Anda dapat melihat dan mengelola kunci ini di panel **Secrets**.
+Cuando creas una app nueva que usa la API de Gemini, AI Studio configura automáticamente tu clave de API de Gemini como un secreto en el entorno del servidor de la app.
+Puedes ver y administrar esta clave en el panel **Secretos**.
 
-- **Penyiapan otomatis**: `GEMINI_API_KEY` Anda disiapkan untuk Anda — tidak diperlukan konfigurasi manual untuk mulai membangun.
-- **Khusus sisi server**: Kunci API disisipkan ke runtime sisi server dan tidak pernah disertakan dalam kode sisi klien.
-- **Aplikasi yang sudah ada**: Untuk aplikasi yang dibuat sebelum 14 Mei 2026, agen akan
-  mengupgrade integrasi Gemini API Anda secara otomatis ke pendekatan
-  sisi server yang direkomendasikan saat Anda mengubah fitur Gemini aplikasi tersebut pada waktu berikutnya.
+- **Configuración automática**: Tu `GEMINI_API_KEY` está configurada para ti. No se requiere configuración manual
+  para comenzar a compilar.
+- **Solo del servidor**: Las claves de API se insertan en el entorno de ejecución del servidor y
+  nunca se incluyen en el código del cliente.
+- **Apps existentes**: En el caso de las apps compiladas antes del 14 de mayo de 2026, el agente actualizará
+  automáticamente tu integración de la API de Gemini al enfoque recomendado del
+  servidor la próxima vez que modifiques las funciones de Gemini de la app.
 
-### Deployment di luar Google AI Studio
+### Implementación fuera de Google AI Studio
 
-- **Cloud Run**: Saat Anda men-deploy ke Cloud Run dari AI Studio, kunci API Anda disertakan dengan aman di lingkungan sisi server. Aplikasi yang di-deploy akan menggunakan kunci API Anda untuk semua panggilan Gemini API pengguna.
-- **Download ZIP**: Jika Anda mendownload aplikasi sebagai file ZIP untuk menjalankannya di tempat lain, Anda harus menyiapkan `GEMINI_API_KEY`variabel lingkungan di lingkungan hosting. Karena panggilan Gemini API aplikasi Anda dilakukan dari
-  kode sisi server, kunci tidak diekspos ke pengguna akhir.
+- **Cloud Run**: Cuando implementas en Cloud Run desde AI Studio, tu clave de API se
+  incluye de forma segura en el entorno del servidor. La app implementada usará tu clave de API para todas las llamadas a la API de Gemini de los usuarios.
+- **Descarga de ZIP**: Si descargas tu app como un archivo ZIP para ejecutarla
+  en otro lugar, deberás configurar la variable de entorno `GEMINI_API_KEY`en tu entorno de hosting. Dado que las llamadas a la API de Gemini de tu app se realizan desde el código del servidor, la clave no se expone a los usuarios finales.
 
-### Error saat berbagi aplikasi
+### Error al compartir apps
 
-Jika Anda membagikan aplikasi dan pengguna akhir Anda mengalami error **403 Akses Dibatasi**
-saat menggunakan URL yang dibagikan, hal ini mungkin disebabkan oleh salah satu hal berikut:
+Si compartes tu app y el usuario final se encuentra con un error **403 Access Restricted** cuando usa la URL compartida, puede deberse a uno de los siguientes motivos:
 
-- **Ekstensi browser**: ekstensi privasi seperti Privacy Badger dapat memblokir aplikasi. Nonaktifkan ekstensi untuk menghindari error.
-- **Masalah build**: mungkin ada masalah dengan kode saat ini. Minta
-  agen untuk "memperbaiki masalah build dengan kode saat ini", lalu bagikan ulang
-  URL.
+- **Extensiones del navegador**: Es posible que las extensiones de privacidad, como Privacy Badger, bloqueen la app. Inhabilita la extensión para evitar el error.
+- **Problemas de compilación**: Es posible que haya problemas con el código actual. Pídele al agente que "corrija cualquier problema de compilación con el código actual" y, luego, vuelve a compartir la URL.
 
-## FAQ
+## Preguntas frecuentes
 
-### Apa itu Build di AI Studio?
+### ¿Qué es la compilación en AI Studio?
 
-AI Studio Build adalah platform yang dirancang untuk membantu Anda mengubah perintah sederhana menjadi aplikasi berteknologi AI yang siap produksi menggunakan Gemini. Deskripsikan apa yang ingin Anda buat dengan perintah, dan Gemini akan membuat aplikasi untuk Anda. Anda juga dapat menjelajahi galeri kami untuk melihat kemungkinan yang dapat dilakukan dengan Gemini API, dan me-remix aplikasi untuk menjadikannya milik Anda.
+AI Studio Build es una plataforma diseñada para llevarte de una simple instrucción a una aplicación potenciada por IA lista para producción con Gemini. Describe lo que quieres compilar con una instrucción y Gemini generará una app por ti. También puedes explorar nuestra galería para ver lo que es posible con la API de Gemini y remezclar apps para hacerlas tuyas.
 
-### Bagaimana cara Build menangani kunci Gemini API saya?
+### ¿Cómo controla la compilación mi clave de API de Gemini?
 
-Saat Anda membuat aplikasi yang menggunakan Gemini API, AI Studio akan otomatis
-menyiapkan kunci Gemini API Anda sebagai rahasia sisi server. Panggilan Gemini API aplikasi Anda dilakukan dari kode sisi server menggunakan kunci ini, sehingga kunci ini tidak pernah diekspos di browser. Anda dapat melihat kunci API di panel **Secrets** di
-Settings.
+Cuando creas una app que usa la API de Gemini, AI Studio configura automáticamente tu clave de API de Gemini como un secreto del servidor. Las llamadas a la API de Gemini de tu app se realizan desde el código del servidor con esta clave, por lo que nunca se expone en el navegador. Puedes ver tu clave de API en el panel **Secretos** de Configuración.
 
-### Apakah kunci API saya terekspos saat membagikan aplikasi?
+### ¿Se expone mi clave de API cuando comparto apps?
 
-Tidak. Kunci API Anda disimpan sebagai rahasia sisi server dan tidak pernah disertakan dalam kode sisi klien. Saat Anda membagikan aplikasi, pengguna lain dapat menggunakannya, tetapi mereka tidak dapat melihat kunci API Anda.
+No. Tu clave de API se almacena como un secreto del servidor y nunca se incluye en el código del cliente. Cuando compartes tu app, otros usuarios pueden usarla, pero no pueden ver tu clave de API.
 
-Saat membagikan aplikasi Anda kepada orang lain, panggilan API dihitung dalam batas penggunaan Anda.
-Jika Anda menggunakan model berbayar, biaya mungkin berlaku. AI Studio akan memberi tahu Anda
-selama penyiapan dan sebelum Anda membagikan jika aplikasi Anda dapat menimbulkan biaya.
+Cuando compartes tus apps con otras personas, las llamadas a la API se incluyen en tus límites de uso.
+Si usas modelos pagados, es posible que se apliquen costos. AI Studio te avisará durante la configuración y antes de compartir si tu app podría generar costos.
 
-### Siapa yang dapat melihat aplikasi saya?
+### ¿Quién puede ver mis apps?
 
-Secara default, aplikasi Anda bersifat pribadi. Anda dapat membagikan aplikasi Anda kepada pengguna lain agar mereka dapat menggunakannya. Pengguna yang Anda ajak berbagi aplikasi dapat melihat kodenya dan membuat fork untuk tujuan mereka sendiri. Jika Anda membagikan aplikasi dengan izin edit, pengguna lain dapat mengedit kode aplikasi Anda.
+De forma predeterminada, tu app es privada. Puedes compartir tu app con otros usuarios para que la usen. Los usuarios con los que compartes tu app pueden ver su código y bifurcarlo para sus propios fines. Si compartes tu app con permiso de edición, los otros usuarios pueden editar el código de tu app.
 
-### Dapatkah saya menjalankan aplikasi di luar AI Studio?
+### ¿Puedo ejecutar apps fuera de AI Studio?
 
-Ya. Anda dapat men-deploy aplikasi ke
-[Cloud Run](https://cloud.google.com/run?hl=id) dari AI Studio, yang
-memberi aplikasi Anda URL publik dengan kunci API yang dikonfigurasi secara aman di
-lingkungan sisi server. Anda juga dapat mendownload aplikasi sebagai file ZIP dan
-menghostingnya di tempat lain — Anda harus menyetel variabel
-lingkungan `GEMINI_API_KEY` di lingkungan hosting Anda. Karena panggilan Gemini API dilakukan dari kode sisi server, kunci Anda tetap aman.
+Sí. Puedes implementar tu app en
+[Cloud Run](https://cloud.google.com/run?hl=es-419) desde AI Studio, lo que
+le otorga una URL pública con tu clave de API configurada de forma segura en el
+entorno del servidor. También puedes descargar tu app como un archivo ZIP y alojarla en otro lugar. Deberás configurar la variable de entorno `GEMINI_API_KEY` en tu entorno de hosting. Dado que las llamadas a la API de Gemini se realizan desde el código del servidor, tu clave permanece segura.
 
-Untuk mempelajari opsi deployment lebih lanjut, lihat [Men-deploy dari Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=id).
+Para obtener más información sobre las opciones de implementación, consulta [Cómo implementar desde Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=es-419).
 
-### Dapatkah saya mengembangkan aplikasi secara lokal dengan alat saya sendiri, lalu membagikannya di sini?
+### ¿Puedo desarrollar apps de forma local con mis propias herramientas y, luego, compartirlas aquí?
 
-Fungsi ini belum tersedia. Kami senang dapat mendukung lebih banyak kasus penggunaan aplikasi pada masa mendatang. Berikan masukan kepada kami jika Anda memiliki sesuatu yang spesifik.
+Esta funcionalidad aún no está disponible. Nos entusiasma admitir más casos de uso para apps en el futuro. Considera enviarnos comentarios si tienes algo específico en mente.
 
-### Bagaimana cara menggunakan database atau penyimpanan lain dengan aplikasi saya?
+### ¿Cómo puedo usar una base de datos o algún otro almacenamiento con mis apps?
 
-Aplikasi AI Studio adalah aplikasi standar yang berjalan dalam container Cloud Run. Anda dapat
-menggunakan solusi penyimpanan apa pun yang dapat Anda hubungkan melalui jaringan, selama
-tidak ada firewall yang mencegah akses dari rentang IP dinamis.
+Las apps de AI Studio son apps estándar que se ejecutan en un contenedor de Cloud Run. Puedes usar cualquier solución de almacenamiento a la que puedas conectarte a través de una red, siempre que no haya un firewall que impida el acceso desde un rango de IP dinámico.
 
-Kami sedang berupaya menambahkan dukungan langsung untuk penyimpanan pada masa mendatang, yang dapat Anda konfigurasi langsung dalam AI Studio.
+Estamos trabajando para agregar compatibilidad directa con el almacenamiento en el futuro, que podrás configurar directamente en AI Studio.
 
-### Bagaimana cara mengakses mikrofon, webcam, dan Navigator API lainnya?
+### ¿Cómo puedo acceder al micrófono, la cámara web y otras APIs de Navigator?
 
-Untuk memastikan bahwa penonton mengetahui penggunaan webcam atau perangkat lain oleh aplikasi, kami mewajibkan pengesahan tambahan sebelum aplikasi dapat mengakses [Navigator API](https://developer.mozilla.org/en-US/docs/Web/API/Navigator) ini.
-Pembuat aplikasi dapat menambahkan permintaan izin ini ke file
-`metadata.json` aplikasi mereka. Contoh:
+Para asegurarnos de que los usuarios estén al tanto del uso que hace una app de su cámara web o de otros
+dispositivos, requerimos un reconocimiento adicional antes de que la app pueda acceder
+a estas [APIs de Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator).
+Los creadores de apps pueden agregar estas solicitudes de permiso al archivo `metadata.json` de su app. Por ejemplo:
 
 ```
 {
@@ -228,64 +223,66 @@ Pembuat aplikasi dapat menambahkan permintaan izin ini ke file
 }
 ```
 
-Nilai yang didukung untuk `requestFramePermissions` adalah bagian dari
-[fitur yang dikontrol kebijakan](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md) standar.
+Los valores admitidos para `requestFramePermissions` son un subconjunto de las
+funciones estándar [controladas por políticas](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md).
 
-### Bagaimana cara menggunakan GitHub dengan aplikasi saya?
+### ¿Cómo puedo usar GitHub con mis apps?
 
-Integrasi GitHub AI Studio memungkinkan Anda membuat repositori untuk pekerjaan Anda dan meng-commit perubahan terbaru. Saat ini kami tidak mendukung penarikan perubahan jarak jauh.
+La integración de GitHub de AI Studio te permite crear un repositorio para tu trabajo y confirmar tus cambios más recientes. Actualmente, no admitimos la extracción de cambios remotos.
 
-### Dapatkah saya memberikan akses edit ke aplikasi saya kepada pengguna lain?
+### ¿Puedo otorgar a otros usuarios acceso de edición a mi app?
 
-Fitur ini belum didukung, tetapi akan segera tersedia.
+Todavía no se admite esta opción, pero estará disponible pronto.
 
-### Mengapa aplikasi saya ditandai karena pelanggaran kebijakan?
+### ¿Por qué se marcó mi app por incumplimiento de política?
 
-Kami memiliki sistem yang secara otomatis meninjau aplikasi untuk memastikan aplikasi tersebut mematuhi kebijakan kami. Jika kami mendapati bahwa suatu aplikasi melanggar kebijakan kami, aplikasi tersebut akan dihapus dari AI Studio. Pelanggaran kebijakan dapat mencakup, tetapi tidak terbatas pada, hal-hal berikut:
+Tenemos sistemas que revisan automáticamente las apps para garantizar que cumplan con nuestras políticas. Si determinamos que una app incumple nuestras políticas, se quitará de AI Studio. Los incumplimientos de política pueden incluir, entre otros, lo siguiente:
 
-- Aplikasi yang berisi malware, phishing, atau peniruan identitas
-- Aplikasi yang menampilkan atau mendistribusikan konten yang melanggar kebijakan gambar pelecehan seksual terhadap anak-anak
-- Aplikasi yang menampilkan atau mendistribusikan konten yang melanggar kebijakan pelecehan
-- Aplikasi yang menampilkan atau mendistribusikan konten yang melanggar kebijakan ujaran kebencian
-- Aplikasi yang menampilkan atau mendistribusikan konten yang melanggar kebijakan perdagangan manusia
-- Aplikasi yang menampilkan atau mendistribusikan konten yang melanggar kebijakan konten seksual vulgar
-- Aplikasi yang menampilkan atau mendistribusikan konten yang melanggar kebijakan kekerasan dan adegan sadis
-- Aplikasi yang menampilkan atau mendistribusikan konten yang melanggar kebijakan konten berbahaya atau berbahaya
+- Apps que contienen software malicioso, phishing o suplantación de identidad
+- Apps que muestran o distribuyen contenido que incumple la política de imágenes de abuso sexual infantil
+- Apps que muestran o distribuyen contenido que incumple la política de acoso
+- Apps que muestran o distribuyen contenido que incumple la política sobre la incitación al odio o a la violencia
+- Apps que muestran o distribuyen contenido que incumple la política de trata de personas
+- Apps que muestran o distribuyen contenido que incumple la política de contenido sexual explícito
+- Apps que muestran o distribuyen contenido que incumple la política de Contenido violento o sangriento
+- Apps que muestran o distribuyen contenido que incumple la política de contenido peligroso o dañino
 
-Jika aplikasi Anda ditandai karena pelanggaran kebijakan, dan Anda yakin hal ini merupakan kekeliruan, Anda dapat mengajukan banding. Pelanggaran berulang terhadap kebijakan kami dapat mengakibatkan penghentian akses Anda ke AI Studio.
+Si tu app se marcó por incumplimiento de política y crees que se trata de un error, puedes enviar una apelación. Los incumplimientos reiterados de nuestras políticas pueden ocasionar la rescisión de tu acceso a AI Studio.
 
-### Apa tanggung jawab saya sebagai developer aplikasi?
+### ¿Cuáles son mis responsabilidades como desarrollador de apps?
 
-Sebagai pengingat, sebagai pemilik aplikasi, Anda bertanggung jawab atas
-perilakunya dan semua data yang ditanganinya. Hal ini mencakup:
+Como recordatorio, como propietario de tu aplicación, eres responsable de su comportamiento y de todos los datos que maneja. Esto incluye lo siguiente:
 
-- **Kepatuhan Hukum dan Hak Pihak Ketiga:** Memastikan aplikasi Anda mematuhi semua hukum dan peraturan yang berlaku serta tidak melanggar hak orang lain, termasuk hak atas kekayaan intelektual dan hak privasi.
-- **Pemantauan Konten:** Kepatuhan terhadap persyaratan tambahan dapat berlaku untuk
-  layanan lain yang digunakan oleh aplikasi Anda. Misalnya,
-  [Persyaratan Layanan Google Cloud](https://cloud.google.com/terms?hl=id),
-  yang berlaku untuk Firestore, mewajibkan pelanggan yang menghosting konten pihak ketiga untuk
-  memublikasikan kebijakan yang menentukan konten apa yang dilarang (misalnya, konten ilegal) dan memantau keberadaan konten ilegal tersebut.
-- **Penerapan yang Aman:** Menerapkan alat pengamanan dan moderasi yang diperlukan untuk mencegah penyalahgunaan aplikasi Anda.
+- **Cumplimiento legal y derechos de terceros:** Asegurarte de que tu app cumpla con todas las leyes y reglamentaciones aplicables y no infrinja los derechos de otras personas, incluidos los derechos de propiedad intelectual y derechos de privacidad.
+- **Supervisión de contenido:** Es posible que se aplique el cumplimiento de condiciones adicionales a
+  otros servicios que usa tu app. Por ejemplo,
+  [las Condiciones del Servicio de Google Cloud](https://cloud.google.com/terms?hl=es-419),
+  aplicables a Firestore, requieren que los clientes que alojan contenido de terceros
+  publiquen políticas que definan qué contenido está prohibido (p.ej., contenido
+  ilegal) y supervisen la presencia de ese contenido ilegal.
+- **Implementación segura:** Implementar las medidas de seguridad y las herramientas de moderación necesarias para evitar que se use de forma inadecuada tu aplicación
 
-Perhatikan [pembatasan penggunaan](https://ai.google.dev/gemini-api/terms?hl=id#use-restrictions)
-dalam Persyaratan Layanan.
+Ten en cuenta las [restricciones de uso](https://ai.google.dev/gemini-api/terms?hl=es-419#use-restrictions)
+en las Condiciones del Servicio.
 
-### Persyaratan apa yang berlaku untuk aplikasi di galeri aplikasi di AI Studio?
+### ¿Qué condiciones se aplican a las apps de la galería de apps en AI Studio?
 
-[Persyaratan Layanan Tambahan Gemini API](https://ai.google.dev/gemini-api/terms?hl=id) berlaku untuk penggunaan aplikasi yang ditampilkan di galeri aplikasi di AI Studio, kecuali dinyatakan lain.
+Las [Condiciones del Servicio Adicionales de la API de Gemini](https://ai.google.dev/gemini-api/terms?hl=es-419)
+se aplican al uso de las apps que aparecen en la galería de apps en AI Studio, a menos que
+se indique lo contrario.
 
-## Langkah berikutnya
+## ¿Qué sigue?
 
-- [Mengembangkan Aplikasi Full-Stack](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=id) (web)
-- [Membangun Aplikasi Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=id)
-- Lihat contoh di [Galeri Aplikasi](https://aistudio.google.com/apps?source=showcase&hl=id).
+- [Desarrolla apps full stack](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=es-419) (web)
+- [Compila apps para Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=es-419)
+- Consulta ejemplos en la [Galería de apps](https://aistudio.google.com/apps?source=showcase&hl=es-419).
 
-Kirim masukan
+Enviar comentarios
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-Terakhir diperbarui pada 2026-05-19 UTC.
+Última actualización: 2026-05-19 (UTC)
 
-Ada masukan untuk kami?
+¿Quieres brindar más información?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-05-19 UTC."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-05-19 (UTC)"],[],[]]

@@ -1,29 +1,29 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/deep-research?hl=vi
-fetched_at: 2026-06-01T06:10:13.867166+00:00
-title: "T\u00e1c nh\u00e2n Deep Research c\u1ee7a Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions/deep-research?hl=he
+fetched_at: 2026-06-08T05:40:18.507012+00:00
+title: "Gemini Deep Research Agent \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Gửi ý kiến phản hồi
+שליחת משוב
 
-# Tác nhân Deep Research của Gemini
+# Gemini Deep Research Agent
 
-Tác nhân Deep Research của Gemini tự động lập kế hoạch, thực hiện và tổng hợp các nhiệm vụ nghiên cứu nhiều bước. Được hỗ trợ bởi Gemini, công cụ này có thể tìm hiểu thông tin phức tạp để tạo ra các báo cáo chi tiết có trích dẫn. Các chức năng mới cho phép bạn cùng nhau lập kế hoạch với tác nhân, kết nối với các công cụ bên ngoài bằng máy chủ MCP, bao gồm cả hình ảnh trực quan (chẳng hạn như biểu đồ và đồ thị) và cung cấp trực tiếp tài liệu làm dữ liệu đầu vào.
+סוכן Deep Research של Gemini מתכנן, מבצע ומסכם באופן אוטונומי משימות מחקר מרובות שלבים. הוא מבוסס על Gemini, ולכן הוא יכול לנווט בין מערכי מידע מורכבים כדי ליצור דוחות מפורטים עם ציטוטים. יכולות חדשות מאפשרות לכם לתכנן בשיתוף עם הסוכן, להתחבר לכלים חיצוניים באמצעות שרתי MCP, לכלול ויזואליזציות (כמו תרשימים וגרפים) ולספק מסמכים ישירות כקלט.
 
-Các tác vụ nghiên cứu bao gồm việc tìm kiếm và đọc lặp đi lặp lại và có thể mất vài phút để hoàn thành. Bạn phải sử dụng tính năng thực thi ở chế độ nền (đặt `background=true`) để chạy tác nhân không đồng bộ và thăm dò kết quả hoặc truyền trực tuyến thông tin cập nhật. Hãy xem phần [Xử lý các tác vụ chạy trong thời gian dài](#long-running-tasks) để biết thêm thông tin chi tiết.
+משימות מחקר כוללות חיפוש וקריאה חוזרים, והן יכולות להימשך כמה דקות. כדי להריץ את הסוכן באופן אסינכרוני ולבדוק אם יש תוצאות או עדכונים בסטרימינג, צריך להשתמש בהרצת רקע (הגדרה `background=true`). פרטים נוספים זמינים במאמר בנושא [טיפול במשימות ארוכות טווח](#long-running-tasks).
 
-Ví dụ sau đây cho thấy cách bắt đầu một tác vụ nghiên cứu ở chế độ nền và thăm dò kết quả.
+בדוגמה הבאה אפשר לראות איך מתחילים משימת מחקר ברקע ומבצעים סקר כדי לקבל את התוצאות.
 
 ### Python
 
@@ -99,20 +99,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Các phiên bản được hỗ trợ
+## גרסאות נתמכות
 
-Trợ lý Deep Research có 2 phiên bản:
+סוכן Deep Research זמין בשתי גרסאות:
 
-- **Deep Research** (`deep-research-preview-04-2026`): Được thiết kế để đạt tốc độ và hiệu quả cao, lý tưởng để truyền trực tuyến trở lại giao diện người dùng của ứng dụng.
-- **Deep Research Max** (`deep-research-max-preview-04-2026`): Mức độ toàn diện tối đa để tự động thu thập và tổng hợp bối cảnh.
+- ‫**Deep Research** (`deep-research-preview-04-2026`): מודל שנועד לפעול במהירות וביעילות, ומתאים במיוחד להזרמה חזרה לממשק משתמש של לקוח.
+- ‫**Deep Research Max** (`deep-research-max-preview-04-2026`): מקיף ביותר לאיסוף וסינתוז אוטומטיים של הקשר.
 
-## Lập kế hoạch cộng tác
+## תכנון שיתופי
 
-Lập kế hoạch cộng tác giúp bạn kiểm soát hướng nghiên cứu trước khi tác nhân bắt đầu công việc. Khi được bật, tác nhân sẽ trả về một kế hoạch nghiên cứu đề xuất thay vì thực thi ngay lập tức. Sau đó, bạn có thể xem xét, sửa đổi hoặc phê duyệt kế hoạch thông qua các lượt tương tác nhiều vòng.
+תכנון שיתופי מאפשר לכם לשלוט בכיוון המחקר לפני שהסוכן מתחיל לעבוד. כשהאפשרות הזו מופעלת, הנציג מחזיר תוכנית מחקר מוצעת במקום לבצע את המחקר באופן מיידי. לאחר מכן תוכלו לבדוק, לשנות או לאשר את התוכנית באמצעות אינטראקציות עוקבות.
 
-### Bước 1: Yêu cầu tạo kế hoạch
+### שלב 1: שליחת בקשה לתוכנית
 
-Đặt `collaborative_planning=True` trong lượt tương tác đầu tiên. Thay vì trả về một báo cáo đầy đủ, tác nhân sẽ trả về một kế hoạch nghiên cứu.
+מגדירים `collaborative_planning=True` באינטראקציה הראשונה. הסוכן
+מחזיר תוכנית מחקר במקום דוח מלא.
 
 ### Python
 
@@ -177,9 +178,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Bước 2: Tinh chỉnh kế hoạch (không bắt buộc)
+### שלב 2: שיפור התוכנית (אופציונלי)
 
-Sử dụng `previous_interaction_id` để tiếp tục cuộc trò chuyện và lặp lại kế hoạch. Giữ `collaborative_planning=True` để tiếp tục ở chế độ lập kế hoạch.
+כדי להמשיך את השיחה ולשפר את התוכנית, אפשר להשתמש ב-`previous_interaction_id`. מחזיקים את המקש `collaborative_planning=True` כדי להישאר במצב תכנון.
 
 ### Python
 
@@ -243,9 +244,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Bước 3: Phê duyệt và thực hiện
+### שלב 3: אישור וביצוע
 
-Đặt `collaborative_planning=False` (hoặc bỏ qua) để phê duyệt kế hoạch và bắt đầu nghiên cứu.
+מגדירים את הערך `collaborative_planning=False` (או משמיטים אותו) כדי לאשר את התוכנית ולהתחיל את המחקר.
 
 ### Python
 
@@ -309,10 +310,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Hình ảnh trực quan
+## הצגה חזותית
 
-Khi `visualization` được đặt thành `"auto"`, tác nhân có thể tạo biểu đồ, đồ thị và các phần tử trực quan khác để hỗ trợ các kết quả nghiên cứu của mình.
-Hình ảnh được tạo sẽ có trong các bước phản hồi và được truyền dưới dạng các delta `image`. Để có kết quả tốt nhất, hãy yêu cầu rõ ràng về hình ảnh trong câu hỏi của bạn – ví dụ: "Đưa biểu đồ cho thấy xu hướng theo thời gian" hoặc "Tạo hình ảnh so sánh thị phần". Việc đặt `visualization` thành `"auto"` sẽ bật khả năng này, nhưng tác nhân chỉ tạo hình ảnh khi câu lệnh yêu cầu.
+כשההגדרה `visualization` מוגדרת לערך `"auto"`, הסוכן יכול ליצור תרשימים, גרפים ורכיבים ויזואליים אחרים כדי לתמוך בממצאי המחקר שלו.
+תמונות שנוצרו נכללות בשלבי התשובה ומוזרמות כדלתאות של `image`. כדי לקבל את התוצאות הטובות ביותר, כדאי לבקש באופן מפורש תמונות חזותיות בשאילתה – לדוגמה, "תכלול תרשימים שמציגים מגמות לאורך זמן" או "תייצר גרפיקה להשוואה של נתח השוק". ההגדרה `visualization` לערך `"auto"` מפעילה את היכולת, אבל הסוכן יוצר תמונות רק כשמבקשים זאת בהנחיה.
 
 ### Python
 
@@ -399,21 +400,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Các công cụ được hỗ trợ
+## כלים נתמכים
 
-Deep Research hỗ trợ nhiều công cụ tích hợp và công cụ bên ngoài. Theo mặc định (khi không có tham số `tools` nào được cung cấp), tác nhân có quyền truy cập vào Google Tìm kiếm, Bối cảnh URL và Thực thi mã. Bạn có thể chỉ định rõ ràng các công cụ để hạn chế hoặc mở rộng khả năng của tác nhân.
+‫Deep Research תומך בכמה כלים מובנים וחיצוניים. כברירת מחדל (כשלא מציינים פרמטר `tools`), לסוכן יש גישה לחיפוש Google, להקשר של כתובת האתר ולביצוע קוד. אתם יכולים לציין באופן מפורש כלים כדי להגביל או להרחיב את היכולות של הסוכן.
 
-| Công cụ | Giá trị loại | Mô tả |
+| כלי | הקלדת ערך | תיאור |
 | --- | --- | --- |
-| Google Tìm kiếm | `google_search` | Tìm kiếm trên web công khai. Bật theo mặc định. |
-| Ngữ cảnh URL | `url_context` | Đọc và tóm tắt nội dung trang web. Bật theo mặc định. |
-| Thực thi mã | `code_execution` | Thực thi mã để thực hiện các phép tính và phân tích dữ liệu. Bật theo mặc định. |
-| Máy chủ MCP | `mcp_server` | Kết nối với các máy chủ MCP từ xa để truy cập vào công cụ bên ngoài. |
-| Tìm kiếm tệp | `file_search` | Tìm kiếm tập hợp tài liệu đã tải lên. |
+| חיפוש Google | `google_search` | חיפוש באינטרנט הציבורי. מופעל כברירת מחדל. |
+| ההקשר של כתובת ה-URL | `url_context` | לקרוא ולסכם את התוכן בדף אינטרנט. מופעל כברירת מחדל. |
+| הרצת קוד | `code_execution` | להריץ קוד כדי לבצע חישובים וניתוח נתונים. מופעל כברירת מחדל. |
+| שרת MCP | `mcp_server` | להתחבר לשרתי MCP מרוחקים כדי לגשת לכלי חיצוניים. |
+| חיפוש קבצים | `file_search` | חיפוש במאגרי המסמכים שהועלו. |
 
-### Google Tìm kiếm
+### חיפוש Google
 
-Bật Google Tìm kiếm một cách rõ ràng làm công cụ duy nhất:
+מפעילים במפורש את חיפוש Google ככלי היחיד:
 
 ### Python
 
@@ -452,9 +453,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Ngữ cảnh URL
+### ההקשר של כתובת ה-URL
 
-Cho phép tác nhân đọc và tóm tắt các trang web cụ thể:
+לתת לסוכן את היכולת לקרוא ולסכם דפי אינטרנט ספציפיים:
 
 ### Python
 
@@ -493,9 +494,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Thực thi mã
+### הרצת קוד
 
-Cho phép tác nhân thực thi mã để tính toán và phân tích dữ liệu:
+ההרשאה לסוכן להריץ קוד לחישובים ולניתוח נתונים:
 
 ### Python
 
@@ -534,19 +535,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Máy chủ MCP
+### שרתי MCP
 
-Cung cấp `name` và `url` của máy chủ trong cấu hình công cụ. Bạn cũng có thể truyền thông tin xác thực và hạn chế những công cụ mà trợ lý ảo có thể gọi.
+מזינים את השרת `name` ואת `url` בהגדרות של הכלי. אפשר גם להעביר פרטי אימות ולהגביל את הכלים שהסוכן יכול להפעיל.
 
-| Trường | Loại | Bắt buộc | Mô tả |
+| שדה | סוג | נדרש | תיאור |
 | --- | --- | --- | --- |
-| `type` | `string` | Có | Phải là `"mcp_server"`. |
-| `name` | `string` | Không | Tên hiển thị của máy chủ MCP. |
-| `url` | `string` | Không | URL đầy đủ cho điểm cuối của máy chủ MCP. |
-| `headers` | `object` | Không | Các cặp khoá-giá trị được gửi dưới dạng tiêu đề HTTP trong mỗi yêu cầu đến máy chủ (ví dụ: mã thông báo xác thực). |
-| `allowed_tools` | `array` | Không | Hạn chế những công cụ mà tác nhân có thể gọi từ máy chủ. |
+| `type` | `string` | כן | חייב להיות `"mcp_server"`. |
+| `name` | `string` | לא | השם המוצג של שרת ה-MCP. |
+| `url` | `string` | לא | כתובת ה-URL המלאה של נקודת הקצה של שרת ה-MCP. |
+| `headers` | `object` | לא | צמדי מפתח/ערך שנשלחים ככותרות HTTP עם כל בקשה לשרת (לדוגמה, אסימוני אימות). |
+| `allowed_tools` | `array` | לא | הגבלת הכלים שהסוכן יכול להשתמש בהם בשרת. |
 
-#### Cách sử dụng cơ bản
+#### שימוש בסיסי
 
 ### Python
 
@@ -606,9 +607,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Tìm kiếm tệp
+### חיפוש קבצים
 
-Cấp cho tác nhân quyền truy cập vào dữ liệu của riêng bạn bằng cách sử dụng công cụ [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=vi).
+כדי לתת לסוכן גישה לנתונים שלכם, משתמשים בכלי [חיפוש קבצים](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=he).
 
 ### Python
 
@@ -661,11 +662,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Khả năng điều hướng và định dạng
+## הכוונה ועיצוב
 
-Bạn có thể điều hướng đầu ra của tác nhân bằng cách cung cấp hướng dẫn định dạng cụ thể trong câu lệnh. Nhờ đó, bạn có thể sắp xếp báo cáo thành các phần và tiểu mục cụ thể, thêm bảng dữ liệu hoặc điều chỉnh giọng điệu cho các đối tượng khác nhau (ví dụ: "chuyên môn", "điều hành", "thông thường").
+אתם יכולים להנחות את הפלט של הסוכן על ידי מתן הוראות עיצוב ספציפיות בהנחיה. כך תוכלו לבנות דוחות עם חלקים ותתי-חלקים ספציפיים, לכלול טבלאות נתונים או להתאים את הטון לקהלים שונים (למשל, 'טכני', 'מנהלים', 'לא רשמי').
 
-Xác định rõ định dạng đầu ra mong muốn trong văn bản đầu vào.
+מגדירים במפורש את פורמט הפלט הרצוי בטקסט הקלט.
 
 ### Python
 
@@ -719,9 +720,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Thông tin đầu vào đa phương thức
+## קלטים מרובי מצבים
 
-Tính năng Deep Research hỗ trợ nhiều phương thức nhập, bao gồm cả hình ảnh và tài liệu (tệp PDF), cho phép tác nhân phân tích nội dung trực quan và tiến hành nghiên cứu dựa trên nền tảng web theo bối cảnh của thông tin đầu vào được cung cấp.
+התכונה 'Deep Research' תומכת בקלט מולטי-מודאלי, כולל תמונות ומסמכים (קובצי PDF), ומאפשרת לסוכן לנתח תוכן חזותי ולבצע מחקר מבוסס-אינטרנט בהקשר של הקלט שסופק.
 
 ### Python
 
@@ -828,9 +829,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Hiểu tài liệu
+### הבנת מסמכים
 
-Truyền trực tiếp tài liệu dưới dạng dữ liệu đầu vào đa phương thức. Trợ lý sẽ phân tích các tài liệu được cung cấp và tiến hành nghiên cứu dựa trên nội dung của các tài liệu đó.
+להעביר מסמכים ישירות כקלט מרובה מצבים. הסוכן מנתח את המסמכים שסיפקתם ומבצע מחקר שמבוסס על התוכן שלהם.
 
 ### Python
 
@@ -892,28 +893,28 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Xử lý các tác vụ chạy trong thời gian dài
+## טיפול במשימות לטווח ארוך
 
-Deep Research là một quy trình gồm nhiều bước, bao gồm lập kế hoạch, tìm kiếm, đọc và viết. Chu kỳ này thường vượt quá giới hạn thời gian chờ tiêu chuẩn của các lệnh gọi API đồng bộ.
+‫Deep Research הוא תהליך רב-שלבי שכולל תכנון, חיפוש, קריאה וכתיבה. המחזור הזה בדרך כלל חורג ממגבלות הזמן הקצוב לתפוגה של קריאות API סינכרוניות.
 
-Nhân viên hỗ trợ bắt buộc phải sử dụng `background=True`. API này sẽ trả về ngay một đối tượng `Interaction` một phần. Bạn có thể dùng thuộc tính `id` để truy xuất một lượt tương tác cho hoạt động thăm dò ý kiến. Trạng thái tương tác sẽ chuyển từ `in_progress` sang `completed` hoặc `failed`.
+הסוכנים חייבים להשתמש ב-`background=True`. ה-API מחזיר אובייקט `Interaction` חלקי באופן מיידי. אפשר להשתמש במאפיין `id` כדי לאחזר אינטראקציה לצורך בדיקה. מצב האינטראקציה ישתנה מ`in_progress` ל`completed` או ל`failed`.
 
-### Phát trực tiếp
+### סטרימינג
 
-Tính năng Deep Research hỗ trợ truyền trực tuyến để nhận thông tin cập nhật theo thời gian thực về tiến trình nghiên cứu, bao gồm cả bản tóm tắt ý tưởng, văn bản đầu ra và hình ảnh được tạo.
-Bạn phải đặt `stream=True` và `background=True`. Để xem hướng dẫn toàn diện về tính năng truyền trực tuyến, bao gồm cả các loại sự kiện, tính năng truyền trực tuyến công cụ và suy nghĩ, hãy xem phần [Tương tác truyền trực tuyến](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=vi).
+התכונה Deep Research תומכת בהזרמת נתונים כדי לקבל עדכונים בזמן אמת על התקדמות המחקר, כולל סיכומי מחשבות, פלט טקסט ותמונות שנוצרו.
+צריך להגדיר את `stream=True` ואת `background=True`. מדריך מקיף בנושא סטרימינג, כולל סוגי אירועים, סטרימינג של כלים ושיקולים, זמין במאמר [סטרימינג של אינטראקציות](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=he).
 
-Để nhận các bước suy luận trung gian (tư duy) và thông tin cập nhật về tiến trình, bạn phải bật **bản tóm tắt tư duy** bằng cách đặt `thinking_summaries` thành `"auto"` trong `agent_config`. Nếu không có tham số này, luồng có thể chỉ cung cấp kết quả cuối cùng.
+כדי לקבל שלבי ביניים של חשיבה רציונלית (מחשבות) ועדכוני התקדמות, צריך להפעיל **סיכומי חשיבה** על ידי הגדרת `thinking_summaries` לערך `"auto"` ב-`agent_config`. בלי זה, יכול להיות שהזרם יספק רק את התוצאות הסופיות.
 
-#### Loại sự kiện phát trực tuyến
+#### סוגי אירועים במקור נתונים
 
-| Loại sự kiện | Loại delta | Mô tả |
+| סוג אירוע | סוג הדלתא | תיאור |
 | --- | --- | --- |
-| `step.delta` | `thought` | Bước suy luận trung gian của tác nhân. |
-| `step.delta` | `text` | Một phần của văn bản đầu ra cuối cùng. |
-| `step.delta` | `image` | Một hình ảnh được tạo (được mã hoá bằng base64). |
+| `step.delta` | `thought` | שלב ביניים של הסוכן בתהליך החשיבה. |
+| `step.delta` | `text` | חלק מפלט הטקסט הסופי. |
+| `step.delta` | `image` | תמונה שנוצרה (בקידוד Base64). |
 
-Ví dụ sau đây bắt đầu một tác vụ nghiên cứu và xử lý luồng bằng tính năng tự động kết nối lại. Thao tác này theo dõi `interaction_id` và `last_event_id` để nếu kết nối bị gián đoạn (ví dụ: sau khi hết thời gian chờ 600 giây), thao tác này có thể tiếp tục từ nơi bị gián đoạn.
+בדוגמה הבאה מתחילים משימת מחקר ומעבדים את הסטרימינג עם חיבור מחדש אוטומטי. הוא עוקב אחרי `interaction_id` ו-`last_event_id`, כך שאם החיבור ייפסק (לדוגמה, אחרי זמן קצוב לתפוגה של 600 שניות), אפשר יהיה להמשיך מהמקום שבו הוא נעצר.
 
 ### Python
 
@@ -1032,9 +1033,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/INTER
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Câu hỏi nối tiếp và lượt tương tác
+## שאלות המשך ואינטראקציות
 
-Bạn có thể tiếp tục cuộc trò chuyện sau khi nhân viên hỗ trợ gửi báo cáo cuối cùng bằng cách sử dụng `previous_interaction_id`. Nhờ đó, bạn có thể yêu cầu làm rõ, tóm tắt hoặc giải thích chi tiết về các phần cụ thể của nghiên cứu mà không cần khởi động lại toàn bộ tác vụ.
+אחרי שהנציג או הנציגה ישלחו את הדוח הסופי, תוכלו להמשיך את השיחה באמצעות `previous_interaction_id`. כך תוכלו לבקש הבהרה, סיכום או פירוט של קטעים ספציפיים במחקר בלי להפעיל מחדש את כל המשימה.
 
 ### Python
 
@@ -1077,28 +1078,28 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Trường hợp nên dùng Tác nhân Deep Research của Gemini
+## מתי כדאי להשתמש ב-Gemini Deep Research Agent
 
-Deep Research là một **tác nhân**, chứ không chỉ là một mô hình. Công cụ này phù hợp nhất với những khối lượng công việc yêu cầu phương pháp "nhà phân tích trong hộp" thay vì trò chuyện có độ trễ thấp.
+‫Deep Research הוא **סוכן**, ולא רק מודל. היא מתאימה במיוחד לעומסי עבודה שדורשים גישה של "אנליסט בקופסה" ולא צ'אט עם זמן אחזור נמוך.
 
-| Tính năng | Các mô hình Gemini tiêu chuẩn | Tác nhân Deep Research của Gemini |
+| תכונה | מודלים רגילים של Gemini | Gemini Deep Research Agent |
 | --- | --- | --- |
-| **Độ trễ** | Giây | Số phút (Không đồng bộ/Nền) |
-| **Quy trình** | Tạo -> Đầu ra | Lập kế hoạch -> Tìm kiếm -> Đọc -> Lặp lại -> Đầu ra |
-| **Đầu ra** | Văn bản trò chuyện, mã, bản tóm tắt ngắn | Báo cáo chi tiết, phân tích dài, bảng so sánh |
-| **Phù hợp nhất cho** | Chatbot, trích xuất, viết sáng tạo | Phân tích thị trường, thẩm định, đánh giá tài liệu, bối cảnh cạnh tranh |
+| **זמן אחזור** | שניות | דקות (אסינכרוני/ברקע) |
+| **Process** | יצירה -> פלט | תכנון -> חיפוש -> קריאה -> חזרה על הפעולה -> פלט |
+| **פלט** | טקסט שיחה, קוד, סיכומים קצרים | דוחות מפורטים, ניתוח ארוך, טבלאות השוואה |
+| **מתאים במיוחד ל** | צ'אטבוטים, חילוץ, כתיבה יוצרת | ניתוח שוק, בדיקת נאותות, סקירת ספרות, ניתוח התחרות |
 
-## Cấu hình tác nhân
+## הגדרת הסוכן
 
-Deep Research sử dụng tham số `agent_config` để kiểm soát hành vi.
-Truyền nó dưới dạng một từ điển có các trường sau:
+הפרמטר `agent_config` משמש לשליטה בהתנהגות של Deep Research.
+מעבירים אותו כמילון עם השדות הבאים:
 
-| Trường | Loại | Mặc định | Mô tả |
+| שדה | סוג | ברירת מחדל | תיאור |
 | --- | --- | --- | --- |
-| `type` | `string` | Bắt buộc | Phải là `"deep-research"`. |
-| `thinking_summaries` | `string` | `"none"` | Đặt thành `"auto"` để nhận các bước suy luận trung gian trong quá trình truyền phát trực tiếp. Đặt thành `"none"` để tắt. |
-| `visualization` | `string` | `"auto"` | Đặt thành `"auto"` để cho phép tạo biểu đồ và hình ảnh do tác nhân tạo. Đặt thành `"off"` để tắt. |
-| `collaborative_planning` | `boolean` | `false` | Đặt thành `true` để bật tính năng xem xét kế hoạch nhiều lượt trước khi bắt đầu nghiên cứu. |
+| `type` | `string` | חובה | חייב להיות `"deep-research"`. |
+| `thinking_summaries` | `string` | `"none"` | מגדירים את הערך `"auto"` כדי לקבל שלבי ביניים של חשיבה רציונלית במהלך השידור. כדי להשבית, מגדירים את הערך `"none"`. |
+| `visualization` | `string` | `"auto"` | מגדירים את הערך `"auto"` כדי להפעיל תרשימים ותמונות שנוצרו על ידי סוכן. כדי להשבית, מגדירים את הערך `"off"`. |
+| `collaborative_planning` | `boolean` | `false` | מגדירים את האפשרות `true` כדי להפעיל בדיקה של תוכנית המחקר בכמה שלבים לפני תחילת המחקר. |
 
 ### Python
 
@@ -1153,58 +1154,59 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Tình trạng còn hàng và giá
+## זמינות ומחירים
 
-Bạn có thể truy cập vào Gemini Deep Research Agent bằng Interactions API trong Google AI Studio và Gemini API.
+אפשר לגשת לסוכן Deep Research של Gemini באמצעות Interactions API ב-Google AI Studio וב-Gemini API.
 
-Giá tuân theo [mô hình trả tiền theo mức dùng](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#pricing-for-agents) dựa trên các mô hình Gemini cơ bản và các công cụ cụ thể mà tác nhân sử dụng. Không giống như các yêu cầu trò chuyện thông thường (một yêu cầu dẫn đến một kết quả đầu ra), tác vụ Deep Research là một quy trình làm việc dựa trên tác nhân. Một yêu cầu duy nhất sẽ kích hoạt một vòng lặp tự động gồm lập kế hoạch, tìm kiếm, đọc và suy luận.
+התמחור מבוסס על [מודל של תשלום לפי שימוש](https://ai.google.dev/gemini-api/docs/pricing?hl=he#pricing-for-agents), בהתאם למודלים הבסיסיים של Gemini ולכלים הספציפיים שבהם הסוכן משתמש. בניגוד לבקשות רגילות בצ'אט, שבהן בקשה מובילה לפלט אחד, משימת Deep Research היא תהליך עבודה של AI אקטיבי. בקשה אחת מפעילה לולאה אוטונומית של תכנון, חיפוש, קריאה והסקת מסקנות.
 
-### Chi phí ước tính
+### עלויות משוערות
 
-Chi phí sẽ khác nhau tuỳ thuộc vào mức độ nghiên cứu cần thiết. Trợ lý tự động xác định mức độ đọc và tìm kiếm cần thiết để trả lời câu lệnh của bạn.
+העלויות משתנות בהתאם לעומק המחקר הנדרש. הסוכן קובע באופן אוטונומי כמה קריאה וחיפוש נדרשים כדי לענות על ההנחיה.
 
-- **Deep Research** (`deep-research-preview-04-2026`): Đối với một cụm từ tìm kiếm thông thường đòi hỏi mức độ phân tích vừa phải, tác nhân có thể sử dụng khoảng 80 cụm từ tìm kiếm, khoảng 250.000 mã thông báo đầu vào (khoảng 50-70% được lưu vào bộ nhớ đệm) và khoảng 60.000 mã thông báo đầu ra.
-  - **Tổng số tiền ước tính:** Khoảng 10.000 VND – 30.000 VND cho mỗi nhiệm vụ
-- **Deep Research Max** (`deep-research-max-preview-04-2026`): Để phân tích sâu về môi trường cạnh tranh hoặc thẩm định kỹ lưỡng, tác nhân có thể sử dụng tối đa khoảng 160 cụm từ tìm kiếm, khoảng 900.000 mã thông báo đầu vào (khoảng 50-70% được lưu vào bộ nhớ đệm) và khoảng 80.000 mã thông báo đầu ra.
-  - **Tổng số tiền ước tính:** Khoảng 30.000 VND – 70.000 VND cho mỗi nhiệm vụ
+- ‫**Deep Research** (`deep-research-preview-04-2026`): בשאילתה טיפוסית שדורשת ניתוח מתון, יכול להיות שהסוכן ישתמש בכ-80 שאילתות חיפוש, בכ-250,000 טוקנים של קלט (כ-50-70% במטמון) ובכ-60,000 טוקנים של פלט.
+  - **סך הכול משוער:** כ-4 ש"ח עד 12 ש"ח לכל משימה
+- ‫**Deep Research Max**‏ (`deep-research-max-preview-04-2026`): לניתוח מעמיק של הסביבה התחרותית או לבדיקת נאותות מקיפה, יכול להיות שהסוכן ישתמש בעד 160 שאילתות חיפוש, עד 900,000 טוקנים של קלט (כ-50-70% במטמון) ועד 80,000 טוקנים של פלט.
+  - **סכום משוער כולל:** כ-3.00$עד 7.00$ לכל משימה
 
-## Lưu ý về sự an toàn
+## שיקולי בטיחות
 
-Việc cấp cho một đặc vụ quyền truy cập vào web và các tệp riêng tư của bạn đòi hỏi bạn phải cân nhắc kỹ lưỡng các rủi ro về an toàn.
+כדי לתת לסוכן גישה לאינטרנט ולקבצים הפרטיים שלכם, צריך לשקול היטב את סיכוני הבטיחות.
 
-- **Tiêm câu lệnh (prompt injection) sử dụng tệp:** Trợ lý sẽ đọc nội dung của các tệp mà bạn cung cấp. Đảm bảo rằng các tài liệu đã tải lên (tệp PDF, tệp văn bản) đến từ các nguồn đáng tin cậy. Một tệp độc hại có thể chứa văn bản ẩn được thiết kế để thao túng đầu ra của tác nhân.
-- **Rủi ro về nội dung trên web:** Đặc vụ tìm kiếm trên web công khai. Mặc dù chúng tôi triển khai các bộ lọc an toàn mạnh mẽ, nhưng vẫn có nguy cơ là tác nhân có thể gặp phải và xử lý các trang web độc hại. Bạn nên xem xét `citations` được cung cấp trong câu trả lời để xác minh các nguồn.
-- **Trích xuất:** Hãy thận trọng khi yêu cầu tác nhân tóm tắt dữ liệu nội bộ nhạy cảm nếu bạn cũng cho phép tác nhân duyệt web.
+- **החדרת הנחיות באמצעות קבצים:** הסוכן קורא את התוכן של הקבצים שאתם מספקים. חשוב לוודא שהמסמכים שהועלו (קובצי PDF, קובצי טקסט) מגיעים ממקורות מהימנים. קובץ זדוני יכול להכיל טקסט מוסתר שנועד לתמרן את הפלט של הסוכן.
+- **סיכונים שקשורים לתוכן באינטרנט:** הסוכן מחפש באינטרנט הציבורי. אנחנו מטמיעים מסנני בטיחות חזקים, אבל קיים סיכון שהסוכן ייתקל בדפי אינטרנט זדוניים ויעבד אותם. מומלץ לעיין ב`citations` שצוינו בתשובה כדי לאמת את המקורות.
+- **העברת נתונים:** חשוב לנקוט משנה זהירות כשמבקשים מהסוכן לסכם נתונים פנימיים רגישים אם מאפשרים לו גם לגלוש באינטרנט.
 
-## Các phương pháp hay nhất
+## שיטות מומלצות
 
-- **Hỏi về những thông tin chưa biết:** Hướng dẫn nhân viên hỗ trợ cách xử lý dữ liệu bị thiếu.
-  Ví dụ: hãy thêm *"Nếu không có số liệu cụ thể cho năm 2025, hãy nêu rõ rằng đó là số liệu dự đoán hoặc không có sẵn thay vì ước tính"* vào câu lệnh của bạn.
-- **Cung cấp bối cảnh:** Đưa ra thông tin cơ bản hoặc các ràng buộc trực tiếp trong câu lệnh đầu vào để giúp tác nhân nghiên cứu.
-- **Sử dụng tính năng lập kế hoạch cộng tác:** Đối với các câu hỏi phức tạp, hãy bật tính năng lập kế hoạch cộng tác để xem xét và tinh chỉnh kế hoạch nghiên cứu trước khi thực hiện.
-- **Thông tin đầu vào đa phương thức:** Deep Research Agent hỗ trợ thông tin đầu vào đa phương thức.
-  Hãy sử dụng một cách thận trọng vì điều này làm tăng chi phí và nguy cơ tràn cửa sổ ngữ cảnh.
+- **הנחיה לגבי נתונים לא ידועים:** הנחיה של הסוכן לגבי אופן הטיפול בנתונים חסרים.
+  לדוגמה, אפשר להוסיף את ההנחיה *"אם נתונים ספציפיים לשנת 2025 לא זמינים,
+  ציין במפורש שהם תחזיות או לא זמינים, במקום להעריך"*.
+- **מספקים הקשר:** כדי שהמחקר של הסוכן יהיה מבוסס על מידע רלוונטי, כדאי לספק הנחיות או מידע רקע ישירות בהנחיית הקלט.
+- **שימוש בתכנון שיתופי:** בשאילתות מורכבות, מומלץ להפעיל תכנון שיתופי כדי לבדוק ולשפר את תוכנית המחקר לפני הביצוע.
+- ‫**Multimodal inputs:** Deep Research Agent supports multi-modal inputs.
+  צריך להשתמש בזה בזהירות, כי זה מגדיל את העלויות ואת הסיכון לחריגה מחלון ההקשר.
 
-## Các điểm hạn chế
+## מגבלות
 
-- **Trạng thái thử nghiệm**: Interactions API đang ở giai đoạn thử nghiệm công khai. Các tính năng và lược đồ có thể thay đổi.
-- **Công cụ tuỳ chỉnh:** Hiện tại, bạn không thể cung cấp các công cụ tuỳ chỉnh cho Lệnh gọi hàm nhưng có thể sử dụng các máy chủ MCP (Giao thức ngữ cảnh mô hình) từ xa với tác nhân Nghiên cứu chuyên sâu.
-- **Đầu ra có cấu trúc:** Hiện tại, Deep Research Agent không hỗ trợ đầu ra có cấu trúc.
-- **Thời gian nghiên cứu tối đa:** Trợ lý Deep Research có thời gian nghiên cứu tối đa là 60 phút. Hầu hết các tác vụ sẽ hoàn tất trong vòng 20 phút.
-- **Yêu cầu về cửa hàng:** Việc thực thi tác nhân bằng `background=True` yêu cầu `store=True`.
-- **Google Tìm kiếm:** [Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=vi) được bật theo mặc định và [các hạn chế cụ thể](https://ai.google.dev/gemini-api/terms?hl=vi#use-restrictions2) áp dụng cho kết quả có căn cứ.
+- **סטטוס בטא**: ממשק Interactions API נמצא בגרסת בטא ציבורית. יכול להיות שיהיו שינויים בתכונות ובסכימות.
+- **כלים בהתאמה אישית:** נכון לעכשיו אי אפשר לספק כלים מותאמים אישית להפעלת פונקציות, אבל אפשר להשתמש בשרתי MCP (Model Context Protocol) מרוחקים עם סוכן המחקר המעמיק.
+- **פלט מובנה:** כרגע, סוכן Deep Research לא תומך בפלט מובנה.
+- **זמן המחקר המקסימלי:** לסוכן Deep Research יש זמן מחקר מקסימלי של 60 דקות. רוב המשימות אמורות להסתיים תוך 20 דקות.
+- **דרישה לחנות:** כדי להפעיל את הנציג באמצעות `background=True`, צריך `store=True`.
+- **חיפוש Google:** [חיפוש Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=he) מופעל כברירת מחדל, ויש [הגבלות ספציפיות](https://ai.google.dev/gemini-api/terms?hl=he#use-restrictions2) על התוצאות שמוצגות.
 
-## Bước tiếp theo
+## המאמרים הבאים
 
-- Tìm hiểu thêm về [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=vi).
-- Tìm hiểu cách sử dụng dữ liệu của riêng bạn bằng công cụ [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=vi).
+- [מידע נוסף על Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=he)
+- [כך משתמשים בנתונים שלכם באמצעות הכלי 'חיפוש קבצים'](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=he).
 
-Gửi ý kiến phản hồi
+שליחת משוב
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Cập nhật lần gần đây nhất: 2026-05-29 UTC.
+עדכון אחרון: 2026-05-29 (שעון UTC).
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+רוצה לתת לנו משוב?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-29 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-05-29 (שעון UTC)."],[],[]]

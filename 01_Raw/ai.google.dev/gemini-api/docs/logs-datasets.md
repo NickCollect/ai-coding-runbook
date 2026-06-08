@@ -1,92 +1,93 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=es-419
-fetched_at: 2026-06-01T06:06:28.747467+00:00
-title: "Registros y conjuntos de datos \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=ja
+fetched_at: 2026-06-08T05:34:27.125793+00:00
+title: "\u30ed\u30b0\u3068\u30c7\u30fc\u30bf\u30bb\u30c3\u30c8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Enviar comentarios
+フィードバックを送信
 
-# Registros y conjuntos de datos
+# ログとデータセット
 
-Esta guía contiene todo lo que necesitas para comenzar a habilitar el registro para tus aplicaciones existentes de la API de Gemini. En esta guía, aprenderás a ver los registros de una aplicación existente o nueva en el panel de Google AI Studio para comprender mejor el comportamiento del modelo y cómo los usuarios pueden interactuar con tus aplicaciones. Usa el registro para observar, depurar y *compartir de forma opcional comentarios de uso
-con Google para ayudar a mejorar Gemini en los casos de uso de los desarrolladores*.[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=es-419)
+このガイドでは、既存の Gemini API アプリケーションのロギングを有効にするために必要なすべての情報を提供します。このガイドでは、Google AI Studio ダッシュボードで既存のアプリケーションまたは新しいアプリケーションのログを表示して、モデルの動作やユーザーがアプリケーションを操作する方法を把握する方法について説明します。ロギングを使用して、デベロッパーのユースケース全体で Gemini の改善に役立つように、*使用状況のフィードバック
+を Google と共有します（省略可）*。[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=ja)
 
-Se admiten todas las llamadas a la API de `GenerateContent` y `StreamGenerateContent`,
-incluidas las que se realizan a través de extremos de compatibilidad de [OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=es-419).
+すべての `GenerateContent` および `StreamGenerateContent` API 呼び出しがサポートされています。
+[OpenAI 互換](https://ai.google.dev/gemini-api/docs/openai?hl=ja)
+エンドポイントを介して行われたものを含みます。
 
-## 1. Habilita el registro en Google AI Studio
+## 1. Google AI Studio でロギングを有効にする
 
-Antes de comenzar, asegúrate de tener un proyecto habilitado para la facturación que sea de tu propiedad.
+始める前に、課金が有効になっているプロジェクトを所有していることを確認してください。
 
-1. Abre la página de registros en Google [AI Studio](https://aistudio.google.com/logs?hl=es-419).
-2. Elige tu proyecto en el menú desplegable y presiona el botón de habilitar para habilitar el registro de todas las solicitudes de forma predeterminada.
+1. Google [AI Studio](https://aistudio.google.com/logs?hl=ja) で [ログ] ページを開きます。
+2. プルダウンからプロジェクトを選択し、[有効にする] ボタンを押して、デフォルトですべてのリクエストのロギングを有効にします。
 
-![](https://ai.google.dev/static/gemini-api/docs/images/logs-state.png?hl=es-419)
+![](https://ai.google.dev/static/gemini-api/docs/images/logs-state.png?hl=ja)
 
-Puedes habilitar o inhabilitar el registro para todos los proyectos o para proyectos específicos, y cambiar estas preferencias en cualquier momento a través de Google AI Studio.
+すべてのプロジェクトまたは特定のプロジェクトのロギングを有効または無効にできます。これらの設定は、Google AI Studio でいつでも変更できます。
 
-## 2. Visualiza los registros en AI Studio
+## 2. AI Studio でログを表示する
 
-1. Ve a [AI Studio](https://aistudio.google.com/logs?hl=es-419).
-2. Selecciona el proyecto para el que habilitaste el registro.
-3. Deberías ver tus registros en la tabla en orden cronológico inverso.
+1. [AI Studio](https://aistudio.google.com/logs?hl=ja) に移動します。
+2. ロギングを有効にしたプロジェクトを選択します。
+3. ログがテーブルに新しい順に表示されます。
 
 ![](https://storage.googleapis.com/generativeai-downloads/images/nano-banana-logs.gif)
 
-Haz clic en una entrada para ver la vista de página completa del par de solicitud y respuesta. Puedes inspeccionar la instrucción completa, la respuesta completa de Gemini y el contexto del turno anterior. Ten en cuenta que cada proyecto tiene un límite de almacenamiento predeterminado de hasta 1,000 registros, y los registros que no se guarden en conjuntos de datos vencerán después de 55 días. Si tu proyecto alcanza su límite de almacenamiento, se te pedirá que borres los registros.
+エントリをクリックすると、リクエストとレスポンスのペアが全ページに表示されます。完全なプロンプト、Gemini からの完了した回答、前のターンのコンテキストを確認できます。各プロジェクトのデフォルトのストレージ上限は 1,000 ログです。データセットに保存されていないログは 55 日後に期限切れになります。プロジェクトがストレージ上限に達すると、ログを削除するように求められます。
 
-## 3. Selecciona y comparte conjuntos de datos
+## 3. データセットをキュレートして共有する
 
-- En la tabla de registros, ubica la barra de filtros en la parte superior para seleccionar una propiedad por la que filtrar.
-- En la vista filtrada de los registros, usa las casillas de verificación para seleccionar todos o algunos de los registros.
-- Haz clic en el botón "Crear conjunto de datos" que aparece en la parte superior de la lista.
-- Asigna un nombre descriptivo a tu nuevo conjunto de datos y una descripción opcional.
-- Verás el conjunto de datos que acabas de crear con el conjunto seleccionado de registros.
-- Exporta tu conjunto de datos para realizar un análisis más detallado como archivos CSV, JSONL o a Hojas de cálculo de Google.
+- ログテーブルの上部にあるフィルタバーで、フィルタするプロパティを選択します。
+- フィルタされたログビューで、チェックボックスを使用して、すべてのログまたは一部のログを選択します。
+- リストの上部に表示される [データセットを作成] ボタンをクリックします。
+- 新しいデータセットにわかりやすい名前と説明（省略可）を付けます。
+- キュレートされたログセットを含む、作成したデータセットが表示されます。
+- データセットを CSV、JSONL ファイルとして、または Google スプレッドシートにエクスポートして、さらに分析します。
 
 ![](https://storage.googleapis.com/generativeai-downloads/images/sales-dataset.gif)
 
-Los conjuntos de datos pueden ser útiles para varios casos de uso diferentes.
+データセットは、さまざまなユースケースで役立ちます。
 
-- **Selecciona conjuntos de desafíos:** Impulsa mejoras futuras que se enfoquen en las áreas en las que deseas que mejore tu IA.
-- **Selecciona conjuntos de muestras:** Por ejemplo, una muestra del uso real para generar respuestas de otro modelo o una colección de casos extremos para verificaciones de rutina antes de la implementación.
-- **Conjuntos de evaluación:** Conjuntos que son representativos del uso real en capacidades importantes, para la comparación entre otros modelos o iteraciones de instrucciones del sistema.
+- **チャレンジ セットをキュレートする:** AI の改善が必要な領域をターゲットとする今後の改善を推進します。
+- **サンプルセットをキュレートする:** たとえば、実際の使用状況のサンプルを使用して別のモデルからレスポンスを生成したり、デプロイ前のルーチン チェック用のエッジケースのコレクションを作成したりします。
+- **評価セット:** 重要な機能全体で実際の使用状況を表すセット。他のモデルやシステム命令の反復処理と比較します。
 
-Puedes ayudar a impulsar el progreso en la investigación de IA, la API de Gemini y Google AI Studio si eliges compartir tus conjuntos de datos como ejemplos de demostración. Esto nos permite refinar nuestros modelos en diversos contextos y crear sistemas de IA que sigan siendo útiles para los desarrolladores en muchos campos y aplicaciones.
+デモンストレーションの例としてデータセットを共有することで、AI 研究、Gemini API、Google AI Studio の進歩に貢献できます。これにより、さまざまなコンテキストでモデルを改良し、多くの分野やアプリケーションでデベロッパーにとって有用な AI システムを作成できます。
 
-## Próximos pasos y qué probar
+## 次のステップとテスト内容
 
-Ahora que tienes habilitado el registro, puedes probar lo siguiente:
+ロギングを有効にしたら、次のことを試してください。
 
-- **Crea prototipos con el historial de sesiones:** Aprovecha la función de compilación de [AI Studio](https://aistudio.google.com/apps?hl=es-419) para crear aplicaciones de código y agregar tu clave de API para habilitar un historial de registros de usuarios.
-- **Vuelve a ejecutar registros con la API de Gemini Batch:** Usa conjuntos de datos para el muestreo de respuestas
-  y la evaluación de modelos o la lógica de la aplicación volviendo a ejecutar registros a través de la
-  [API de Gemini Batch](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb).
+- **セッション履歴でプロトタイプを作成する:** [AI Studio Build](https://aistudio.google.com/apps?hl=ja) を活用してコードアプリをバイブさせ、API キーを追加してユーザーログの履歴を有効にします。
+- **Gemini Batch API でログを再実行する:** Gemini Batch API を介してログを再実行し、レスポンスのサンプリング
+  とモデルまたはアプリケーション ロジックの評価にデータセットを使用します
+  。
 
-## Compatibilidad
+## 互換性
 
-Actualmente, el registro no es compatible con lo siguiente:
+現在、次の機能ではロギングはサポートされていません。
 
-- Modelos de Imagen y Veo
-- Modelo de incorporación de Gemini
-- Entradas que contienen videos, GIFs o PDFs
+- Imagen モデルと Veo モデル
+- Gemini エンベディング モデル
+- 動画、GIF、PDF を含む入力
 
-Enviar comentarios
+フィードバックを送信
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Última actualización: 2026-04-29 (UTC)
+最終更新日 2026-06-01 UTC。
 
-¿Quieres brindar más información?
+ご意見をお聞かせください
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-01 UTC。"],[],[]]

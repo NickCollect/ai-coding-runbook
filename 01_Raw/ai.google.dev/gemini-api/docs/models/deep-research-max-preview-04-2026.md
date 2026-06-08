@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=vi
-fetched_at: 2026-06-01T06:03:43.517867+00:00
+fetched_at: 2026-06-08T05:33:47.131682+00:00
 title: "B\u1ea3n xem tr\u01b0\u1edbc Deep Research Max \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

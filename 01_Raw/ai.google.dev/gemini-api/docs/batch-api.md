@@ -1,39 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/batch-api?hl=vi
-fetched_at: 2026-06-01T06:04:34.560265+00:00
-title: "API x\u1eed l\u00fd h\u00e0ng lo\u1ea1t \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/batch-api?hl=ar
+fetched_at: 2026-06-08T05:36:04.718503+00:00
+title: "Batch API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
-# API xử lý hàng loạt
+# Batch API
 
-Gemini Batch API được thiết kế để xử lý một lượng lớn yêu cầu không đồng bộ với [50% chi phí tiêu chuẩn](https://ai.google.dev/gemini-api/docs/pricing?hl=vi).
-Thời gian xử lý mục tiêu là 24 giờ, nhưng trong phần lớn các trường hợp, thời gian xử lý sẽ nhanh hơn nhiều.
+تم تصميم Gemini Batch API لمعالجة كميات كبيرة من الطلبات
+بشكل غير متزامن بنسبة [% 50 من التكلفة العادية](https://ai.google.dev/gemini-api/docs/pricing?hl=ar).
+يبلغ وقت الاستجابة المستهدَف 24 ساعة، ولكن في معظم الحالات، يكون أسرع بكثير.
 
-Sử dụng Batch API cho các tác vụ quy mô lớn, không khẩn cấp, chẳng hạn như xử lý trước dữ liệu hoặc chạy các quy trình đánh giá mà không cần phản hồi ngay lập tức.
+استخدِم Batch API للمهام غير العاجلة على نطاق واسع، مثل المعالجة المسبقة للبيانات أو إجراء التقييمات التي لا تتطلّب استجابة فورية.
 
-## Tạo một công việc hàng loạt
+## إنشاء مهمة مجمّعة
 
-Bạn có thể gửi yêu cầu theo 2 cách trong Batch API:
+تتوفّر طريقتان لإرسال طلباتك في Batch API:
 
-- **[Yêu cầu nội tuyến](#inline-requests):** Danh sách các đối tượng [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=vi#GenerateContentRequest) được đưa trực tiếp vào yêu cầu tạo hàng loạt của bạn. Phương thức này phù hợp với các lô nhỏ hơn có tổng kích thước yêu cầu dưới 20 MB. **Đầu ra** do mô hình trả về là một danh sách các đối tượng `inlineResponse`.
-- **[Tệp đầu vào](#input-file):** Tệp [JSON Lines (JSONL)](https://jsonlines.org/), trong đó mỗi dòng chứa một đối tượng [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=vi#GenerateContentRequest) hoàn chỉnh.
-  Bạn nên dùng phương thức này cho các yêu cầu lớn hơn. **Đầu ra** mà mô hình trả về là một tệp JSONL, trong đó mỗi dòng là một `GenerateContentResponse` hoặc một đối tượng trạng thái.
+- **[الطلبات المضمّنة](#inline-requests):** قائمة بعناصر
+  [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=ar#GenerateContentRequest) مضمّنة مباشرةً في طلب إنشاء المجموعة. هذا مناسب للمجموعات الأصغر التي تحافظ على إجمالي حجم الطلب أقل من 20 ميغابايت. **الناتج** الذي يعرضه النموذج هو قائمة بعناصر `inlineResponse`.
+- **[ملف الإدخال](#input-file):** ملف [JSON Lines (JSONL)](https://jsonlines.org/)
+  يحتوي كل سطر فيه على عنصر
+  [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=ar#GenerateContentRequest) كامل.
+  ننصح باستخدام هذه الطريقة للطلبات الأكبر. **الناتج** الذي يعرضه النموذج هو ملف JSONL يكون كل سطر فيه إما `GenerateContentResponse` أو عنصر حالة.
 
-### Yêu cầu nội tuyến
+### الطلبات المضمّنة
 
-Đối với một số ít yêu cầu, bạn có thể nhúng trực tiếp các đối tượng [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=vi#GenerateContentRequest) trong [`BatchGenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=vi#request-body). Ví dụ sau đây gọi phương thức [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=vi#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent) bằng các yêu cầu nội tuyến:
+بالنسبة إلى عدد صغير من الطلبات، يمكنك تضمين عناصر
+[`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=ar#GenerateContentRequest) مباشرةً في [`BatchGenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=ar#request-body). يستدعي المثال التالي طريقة
+[`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=ar#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent)
+باستخدام طلبات مضمّنة:
 
 ### Python
 
@@ -135,22 +142,25 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:ba
 }'
 ```
 
-### Tệp đầu vào
+### ملف الإدخال
 
-Đối với các tập hợp yêu cầu lớn hơn, hãy chuẩn bị một tệp JSON Lines (JSONL). Mỗi dòng trong tệp này phải là một đối tượng JSON chứa một khoá do người dùng xác định và một đối tượng yêu cầu, trong đó yêu cầu là một đối tượng [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=vi#GenerateContentRequest) hợp lệ. Khoá do người dùng xác định được dùng trong phản hồi để cho biết đầu ra nào là kết quả của yêu cầu nào. Ví dụ: yêu cầu có khoá được xác định là `request-1` sẽ có phản hồi được chú thích bằng cùng tên khoá.
+بالنسبة إلى مجموعات الطلبات الأكبر، يمكنك إعداد ملف JSON Lines (JSONL). يجب أن يكون كل سطر في
+هذا الملف عنصر JSON يحتوي على مفتاح يحدّده المستخدم وعنصر طلب، حيث يكون الطلب عنصر
+[`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=ar#GenerateContentRequest) صالحًا. يتم استخدام المفتاح الذي يحدّده المستخدم في الردّ للإشارة إلى الناتج الذي يمثّل نتيجة الطلب. على سبيل المثال، سيتم وضع علامة على الردّ على الطلب الذي تم تحديد المفتاح له على أنّه `request-1` باستخدام اسم المفتاح نفسه.
 
-Tệp này được tải lên bằng [File API](https://ai.google.dev/gemini-api/docs/files?hl=vi). Kích thước tệp tối đa được phép cho một tệp đầu vào là 2 GB.
+يتم تحميل هذا الملف باستخدام [File API](https://ai.google.dev/gemini-api/docs/files?hl=ar). الحد الأقصى المسموح به لحجم ملف الإدخال هو 2 غيغابايت.
 
-Sau đây là ví dụ về một tệp JSONL. Bạn có thể lưu tệp này vào một tệp có tên là `my-batch-requests.json`:
+في ما يلي مثال على ملف JSONL. يمكنك حفظه في ملف باسم `my-batch-requests.json`:
 
 ```
 {"key": "request-1", "request": {"contents": [{"parts": [{"text": "Describe the process of photosynthesis."}]}], "generation_config": {"temperature": 0.7}}}
 {"key": "request-2", "request": {"contents": [{"parts": [{"text": "What are the main ingredients in a Margherita pizza?"}]}]}}
 ```
 
-Tương tự như các yêu cầu nội tuyến, bạn có thể chỉ định các tham số khác như hướng dẫn hệ thống, công cụ hoặc các cấu hình khác trong mỗi JSON yêu cầu.
+على غرار الطلبات المضمّنة، يمكنك تحديد مَعلمات أخرى، مثل تعليمات النظام أو الأدوات أو الإعدادات الأخرى في كل طلب JSON.
 
-Bạn có thể tải tệp này lên bằng [File API](https://ai.google.dev/gemini-api/docs/files?hl=vi) như trong ví dụ sau. Nếu đang làm việc với dữ liệu đầu vào đa phương thức, bạn có thể tham chiếu các tệp khác đã tải lên trong tệp JSONL.
+يمكنك تحميل هذا الملف باستخدام [File API](https://ai.google.dev/gemini-api/docs/files?hl=ar) كما
+هو موضّح في المثال التالي. إذا كنت تعمل على إدخال متعدد الوسائط، يمكنك الإشارة إلى ملفات أخرى تم تحميلها ضمن ملف JSONL.
 
 ### Python
 
@@ -271,7 +281,9 @@ curl "${upload_url}" \
 file_uri=$(jq ".file.uri" file_info.json)
 ```
 
-Ví dụ sau đây gọi phương thức [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=vi#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent) bằng tệp đầu vào được tải lên bằng File API:
+يستدعي المثال التالي طريقة
+[`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=ar#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent)
+باستخدام ملف الإدخال الذي تم تحميله باستخدام File API:
 
 ### Python
 
@@ -325,18 +337,22 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:ba
 }"
 ```
 
-Khi tạo một lô công việc, bạn sẽ nhận được tên công việc được trả về. Sử dụng tên này để [giám sát](#batch-job-status) trạng thái của công việc cũng như [truy xuất kết quả](#retrieve-batch-results) sau khi công việc hoàn tất.
+عند إنشاء مهمة مجمّعة، سيتم عرض اسم المهمة. استخدِم هذا الاسم
+لـ [تتبُّع](#batch-job-status) حالة المهمة واسترداد النتائج
+[بعد اكتمالها](#retrieve-batch-results).
 
-Sau đây là một ví dụ về kết quả chứa tên công việc:
+في ما يلي مثال على الناتج الذي يحتوي على اسم المهمة:
 
 ```
 Created batch job from file: batches/123456789
 ```
 
-### Hỗ trợ nhúng theo lô
+### دعم التضمين المجمّع
 
-Bạn có thể sử dụng Batch API để tương tác với [mô hình embeddings](https://ai.google.dev/gemini-api/docs/embeddings?hl=vi) nhằm đạt được thông lượng cao hơn.
-Để tạo một lô công việc nhúng bằng [yêu cầu nội tuyến](#inline-requests) hoặc [tệp đầu vào](#input-file), hãy sử dụng API `batches.create_embeddings` và chỉ định mô hình nhúng.
+يمكنك استخدام Batch API للتفاعل مع الـ
+[Embeddings model](https://ai.google.dev/gemini-api/docs/embeddings?hl=ar) من أجل زيادة معدّل النقل.
+لإنشاء مهمة مجمّعة للتضمينات باستخدام [طلبات مضمّنة](#inline-requests)
+أو [ملفات إدخال](#input-file)، استخدِم واجهة برمجة التطبيقات `batches.create_embeddings` وحدِّد نموذج التضمينات.
 
 ### Python
 
@@ -384,11 +400,12 @@ batchJob = await client.batches.createEmbeddings({
 console.log(`Created batch job: ${batchJob.name}`);
 ```
 
-Hãy đọc phần Embeddings (Nhúng) trong [Batch API cookbook](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb) (Sổ tay về Batch API) để xem thêm ví dụ.
+يمكنك الاطّلاع على قسم Embeddings في [Batch API cookbook](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb)
+لمزيد من الأمثلة.
 
-### Yêu cầu về cấu hình
+### تهيئة الطلب
 
-Bạn có thể thêm mọi cấu hình yêu cầu mà bạn sẽ sử dụng trong một yêu cầu không theo lô tiêu chuẩn. Ví dụ: bạn có thể chỉ định nhiệt độ, hướng dẫn hệ thống hoặc thậm chí truyền vào các phương thức khác. Ví dụ sau đây cho thấy một ví dụ về yêu cầu nội tuyến có chứa một chỉ dẫn hệ thống cho một trong các yêu cầu:
+يمكنك تضمين أيّ إعدادات للطلب تستخدمها في طلب عادي غير مجمّع. على سبيل المثال، يمكنك تحديد درجة العشوائية أو تعليمات النظام أو حتى تمرير وسائط أخرى. يوضّح المثال التالي طلبًا مضمّنًا يحتوي على تعليمات النظام لأحد الطلبات:
 
 ### Python
 
@@ -416,7 +433,8 @@ inlineRequestsList = [
 ]
 ```
 
-Tương tự, bạn có thể chỉ định các công cụ cần dùng cho một yêu cầu. Ví dụ sau đây cho thấy một yêu cầu bật [công cụ Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi):
+يمكنك أيضًا تحديد الأدوات التي تريد استخدامها لطلب معيّن. يوضّح المثال التالي
+طلبًا يفعِّل أداة [بحث Google](https://ai.google.dev/gemini-api/docs/google-search?hl=ar):
 
 ### Python
 
@@ -437,8 +455,8 @@ inlineRequestsList = [
 ]
 ```
 
-Bạn cũng có thể chỉ định [đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi).
-Ví dụ sau đây cho thấy cách chỉ định cho các yêu cầu hàng loạt.
+يمكنك أيضًا تحديد [ناتج منظَّم](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar).
+يوضّح المثال التالي كيفية تحديد ذلك لطلباتك المجمّعة.
 
 ### Python
 
@@ -589,7 +607,7 @@ const inlinedBatchJob = await ai.batches.create({
 });
 ```
 
-Sau đây là ví dụ về kết quả của lệnh này:
+في ما يلي مثال على ناتج هذه المهمة:
 
 ```
 --- Response 1 ---
@@ -685,20 +703,20 @@ Sau đây là ví dụ về kết quả của lệnh này:
 ]
 ```
 
-## Theo dõi trạng thái của lệnh
+## تتبُّع حالة المهمة
 
-Sử dụng tên thao tác nhận được khi tạo lô công việc để thăm dò trạng thái của lô công việc đó.
-Trường trạng thái của lệnh hàng loạt sẽ cho biết trạng thái hiện tại của lệnh đó. Một lô công việc có thể ở một trong các trạng thái sau:
+استخدِم اسم العملية الذي تم الحصول عليه عند إنشاء المهمة المجمّعة لإجراء استطلاع حول حالتها.
+سيشير حقل الحالة في المهمة المجمّعة إلى حالتها الحالية. يمكن أن تكون المهمة المجمّعة في إحدى الحالات التالية:
 
-- `JOB_STATE_PENDING`: Công việc đã được tạo và đang chờ dịch vụ xử lý.
-- `JOB_STATE_RUNNING`: Công việc đang diễn ra.
-- `JOB_STATE_SUCCEEDED`: Công việc hoàn tất thành công. Giờ đây, bạn có thể truy xuất kết quả.
-- `JOB_STATE_FAILED`: Công việc không thành công. Hãy xem thông tin chi tiết về lỗi để biết thêm thông tin.
-- `JOB_STATE_CANCELLED`: Người dùng đã huỷ lệnh.
-- `JOB_STATE_EXPIRED`: Công việc đã hết hạn vì đang chạy hoặc đang chờ xử lý trong hơn 48 giờ. Công việc sẽ không có kết quả nào để truy xuất.
-  Bạn có thể thử gửi lại công việc hoặc chia các yêu cầu thành các lô nhỏ hơn.
+- `JOB_STATE_PENDING`: تم إنشاء المهمة وتنتظر أن تعالجها الخدمة.
+- `JOB_STATE_RUNNING`: المهمة قيد التقدّم.
+- `JOB_STATE_SUCCEEDED`: اكتملت المهمة بنجاح. يمكنك الآن استرداد النتائج.
+- `JOB_STATE_FAILED`: تعذّر إكمال المهمة. يمكنك الاطّلاع على تفاصيل الخطأ لمزيد من المعلومات.
+- `JOB_STATE_CANCELLED`: ألغاها المستخدم.
+- `JOB_STATE_EXPIRED`: انتهت صلاحية المهمة لأنّها كانت قيد التشغيل أو في انتظار المراجعة لأكثر من 48 ساعة. لن تتضمّن المهمة أي نتائج لاستردادها.
+  يمكنك محاولة إرسال المهمة مرة أخرى أو تقسيم الطلبات إلى مجموعات أصغر.
 
-Bạn có thể định kỳ thăm dò trạng thái của công việc để kiểm tra xem công việc đã hoàn tất hay chưa.
+يمكنك إجراء استطلاع حول حالة المهمة بشكل دوري لمعرفة ما إذا اكتملت.
 
 ### Python
 
@@ -764,10 +782,11 @@ try {
 }
 ```
 
-### Thăm dò ý kiến và webhook
+### الاستطلاعات والويب هوك
 
-**Bạn đã chán việc thăm dò ý kiến?** Giờ đây, Gemini hỗ trợ [Webhooks](https://ai.google.dev/gemini-api/docs/webhooks?hl=vi) để xử lý các câu hoàn thành một cách không đồng bộ.
-Thay vì liên tục gọi `GET / operations`, hãy đăng ký trực tiếp `batch.succeeded` để cho phép Gemini API gửi thông báo theo thời gian thực đến máy chủ của bạn khi các thao tác không đồng bộ hoặc kéo dài hoàn tất.
+**هل سئمت من إجراء الاستطلاعات؟** تتيح Gemini الآن استخدام
+[Webhooks](https://ai.google.dev/gemini-api/docs/webhooks?hl=ar) لمعالجة عمليات الإكمال بشكل غير متزامن.
+بدلاً من استدعاء `GET / operations` باستمرار، يمكنك الاشتراك في `batch.succeeded` مباشرةً للسماح لواجهة Gemini API بإرسال إشعارات في الوقت الفعلي إلى الخادم عند اكتمال العمليات غير المتزامنة أو الطويلة الأمد.
 
 ### Python
 
@@ -819,9 +838,9 @@ curl -X POST \
   }'
 ```
 
-## Đang truy xuất kết quả
+## استرداد النتائج
 
-Sau khi trạng thái công việc cho biết công việc hàng loạt của bạn đã thành công, kết quả sẽ có trong trường `response`.
+بعد أن تشير حالة المهمة إلى أنّ مهمتك المجمّعة قد اكتملت بنجاح، ستتوفّر النتائج في حقل `response`.
 
 ### Python
 
@@ -974,9 +993,9 @@ elif [[ $batch_state == "JOB_STATE_EXPIRED" ]]; then
 fi
 ```
 
-## Liệt kê các công việc theo lô
+## إدراج المهام المجمّعة
 
-Bạn có thể liệt kê các công việc hàng loạt gần đây.
+يمكنك إدراج مهامك المجمّعة الأخيرة.
 
 ### Python
 
@@ -1010,9 +1029,9 @@ curl https://generativelanguage.googleapis.com/v1beta/batches \
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Huỷ một công việc hàng loạt
+## إلغاء مهمة مجمّعة
 
-Bạn có thể huỷ một tác vụ hàng loạt đang diễn ra bằng tên của tác vụ đó. Khi bị huỷ, lệnh này sẽ ngừng xử lý các yêu cầu mới.
+يمكنك إلغاء مهمة مجمّعة قيد التقدّم باستخدام اسمها. عند إلغاء مهمة، تتوقّف معالجة الطلبات الجديدة.
 
 ### Python
 
@@ -1041,9 +1060,9 @@ curl https://generativelanguage.googleapis.com/v1beta/$BATCH_NAME \
 -H "Content-Type:application/json" 2> /dev/null | jq -r '.metadata.state'
 ```
 
-## Xoá một công việc hàng loạt
+## حذف مهمة مجمّعة
 
-Bạn có thể xoá một lô công việc hiện có bằng tên của lô công việc đó. Khi một công việc bị xoá, công việc đó sẽ ngừng xử lý các yêu cầu mới và bị xoá khỏi danh sách công việc hàng loạt.
+يمكنك حذف مهمة مجمّعة حالية باستخدام اسمها. عند حذف مهمة، تتوقّف معالجة الطلبات الجديدة وتتم إزالتها من قائمة المهام المجمّعة.
 
 ### Python
 
@@ -1067,14 +1086,228 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/$BATCH_NAME" \
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Tạo hàng loạt hình ảnh
+## إنشاء صور مجمّعة
 
-Nếu đang sử dụng [Gemini Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi) và cần tạo nhiều hình ảnh, bạn có thể sử dụng Batch API để nhận được [hạn mức tốc độ](https://ai.google.dev/gemini-api/docs/rate-limits?hl=vi) cao hơn trong thời gian xử lý tối đa 24 giờ.
+إذا كنت تستخدم [Gemini Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar) وتحتاج إلى إنشاء الكثير
+من الصور، يمكنك استخدام Batch API للحصول على حدود أعلى
+[لمعدّل النقل](https://ai.google.dev/gemini-api/docs/rate-limits?hl=ar) مقابل وقت استجابة يصل
+إلى 24 ساعة.
 
-Bạn có thể sử dụng các yêu cầu nội tuyến cho các lô yêu cầu nhỏ (dưới 20 MB) hoặc tệp đầu vào JSONL cho các lô lớn (nên dùng cho tính năng tạo hình ảnh):
+يمكنك استخدام [الطلبات المضمّنة](#inline-requests-images) للمجموعات الصغيرة من الطلبات (أقل من 20 ميغابايت) أو
+[ملف إدخال JSONL](#input-file-images) للمجموعات الكبيرة (ننصح به لإنشاء الصور):
 
-Yêu cầu trong cùng dòng
-Tệp đầu vào
+### الطلبات المضمّنة للصور
+
+### Python
+
+```
+import time
+import base64
+import json
+from google import genai
+from google.genai import types
+from PIL import Image
+
+client = genai.Client()
+
+# 1. Create batch job with inline requests
+inline_requests = [
+    {
+        'contents': [{'parts': [{'text': 'A big letter A surrounded by animals starting with the A letter'}]}],
+        'config': {'response_modalities': ['TEXT', 'IMAGE']}
+    },
+    {
+        'contents': [{'parts': [{'text': 'A big letter B surrounded by animals starting with the B letter'}]}],
+        'config': {'response_modalities': ['TEXT', 'IMAGE']}
+    }
+]
+
+inline_batch_job = client.batches.create(
+    model="gemini-3-pro-image-preview",
+    src=inline_requests,
+    config={
+        'display_name': "inlined-image-requests-job-1",
+    },
+)
+
+print(f"Created batch job: {inline_batch_job.name}")
+
+# 2. Monitor job status
+job_name = inline_batch_job.name
+print(f"Polling status for job: {job_name}")
+
+completed_states = set([
+    'JOB_STATE_SUCCEEDED',
+    'JOB_STATE_FAILED',
+    'JOB_STATE_CANCELLED',
+    'JOB_STATE_EXPIRED',
+])
+
+batch_job = client.batches.get(name=job_name) # Initial get
+while batch_job.state.name not in completed_states:
+  print(f"Current state: {batch_job.state.name}")
+  time.sleep(10) # Wait for 10 seconds before polling again
+  batch_job = client.batches.get(name=job_name)
+
+print(f"Job finished with state: {batch_job.state.name}")
+
+# 3. Retrieve results
+if batch_job.state.name == 'JOB_STATE_SUCCEEDED':
+    print("Results are inline:")
+    for i, inline_response in enumerate(batch_job.dest.inlined_responses):
+        print(f"Response {i+1}:")
+        if inline_response.response:
+            for part in inline_response.response.candidates[0].content.parts:
+                if part.text:
+                    print(part.text)
+                elif part.inline_data:
+                    print(f"Image mime type: {part.inline_data.mime_type}")
+                    image = part.as_image()
+                    image.save(f"image_{i+1}.png")
+        elif inline_response.error:
+            print(f"Error: {inline_response.error}")
+elif batch_job.state.name == 'JOB_STATE_FAILED':
+    print(f"Error: {batch_job.error}")
+```
+
+### JavaScript
+
+```
+import {GoogleGenAI} from '@google/genai';
+
+const ai = new GoogleGenAI({});
+
+async function run() {
+    // 1. Create batch job with inline requests
+    const inlinedRequests = [
+        {
+            contents: [{parts: [{text: 'A big letter A surrounded by animals starting with the A letter'}]}],
+            config: {responseModalities: ['TEXT', 'IMAGE']}
+        },
+        {
+            contents: [{parts: [{text: 'A big letter B surrounded by animals starting with the B letter'}]}],
+            config: {responseModalities: ['TEXT', 'IMAGE']}
+        }
+    ]
+
+    const inlineBatchJob = await ai.batches.create({
+        model: 'gemini-3-pro-image-preview',
+        src: inlinedRequests,
+        config: {
+            displayName: 'inlined-image-requests-job-1',
+        }
+    });
+
+    console.log(inlineBatchJob);
+
+    // 2. Monitor job status
+    let batchJob;
+    const completedStates = new Set([
+        'JOB_STATE_SUCCEEDED',
+        'JOB_STATE_FAILED',
+        'JOB_STATE_CANCELLED',
+        'JOB_STATE_EXPIRED',
+    ]);
+
+    try {
+        batchJob = await ai.batches.get({name: inlineBatchJob.name});
+        while (!completedStates.has(batchJob.state)) {
+            console.log(`Current state: ${batchJob.state}`);
+            // Wait for 10 seconds before polling again
+            await new Promise(resolve => setTimeout(resolve, 10000));
+            batchJob = await ai.batches.get({ name: batchJob.name });
+        }
+        console.log(`Job finished with state: ${batchJob.state}`);
+    } catch (error) {
+        console.error(`An error occurred while polling job ${inlineBatchJob.name}:`, error);
+        return;
+    }
+
+    // 3. Retrieve results
+    if (batchJob.state === 'JOB_STATE_SUCCEEDED') {
+        if (batchJob.dest?.inlinedResponses) {
+            console.log("Results are inline:");
+            for (let i = 0; i < batchJob.dest.inlinedResponses.length; i++) {
+                const inlineResponse = batchJob.dest.inlinedResponses[i];
+                console.log(`Response ${i + 1}:`);
+                if (inlineResponse.response) {
+                    for (const part of inlineResponse.response.candidates[0].content.parts) {
+                        if (part.text) {
+                            console.log(part.text);
+                        } else if (part.inlineData) {
+                            console.log(`Image mime type: ${part.inlineData.mimeType}`);
+                        }
+                    }
+                } else if (inlineResponse.error) {
+                    console.error(`Error: ${inlineResponse.error}`);
+                }
+            }
+        } else {
+            console.log("No inline results found.");
+        }
+    } else if (batchJob.state === 'JOB_STATE_FAILED') {
+         console.error(`Error: ${typeof batchJob.error === 'string' ? batchJob.error : batchJob.error.message || JSON.stringify(batchJob.error)}`);
+    }
+}
+run();
+```
+
+### REST
+
+```
+# 1. Create batch job
+printf -v request_data '{
+    "batch": {
+        "display_name": "my-batch-image-requests",
+        "input_config": {
+            "requests": {
+                "requests": [
+                    {
+                        "request": {
+                            "contents": [{"parts": [{"text": "A big letter A surrounded by animals starting with the A letter"}]}],
+                            "generation_config": {"responseModalities": ["TEXT", "IMAGE"]}
+                        },
+                        "metadata": { "key": "request-1" }
+                    },
+                    {
+                        "request": {
+                            "contents": [{"parts": [{"text": "A big letter B surrounded by animals starting with the B letter"}]}],
+                            "generation_config": {"responseModalities": ["TEXT", "IMAGE"]}
+                        },
+                        "metadata": { "key": "request-2" }
+                    }
+                ]
+            }
+        }
+    }
+}'
+curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-image-preview:batchGenerateContent \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -X POST \
+  -H "Content-Type:application/json" \
+  -d "$request_data" > created_batch.json
+
+BATCH_NAME=$(jq -r '.name' created_batch.json)
+echo "Created batch job: $BATCH_NAME"
+
+# 2. Poll job status until completion by repeating the following command
+# Replace $BATCH_NAME with the name returned above.
+curl https://generativelanguage.googleapis.com/v1beta/$BATCH_NAME \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H "Content-Type:application/json" > batch_status.json
+
+echo "Current status:"
+jq '.' batch_status.json
+
+# 3. If state is JOB_STATE_SUCCEEDED, retrieve results from batch_status.json
+batch_state=$(jq -r '.state' batch_status.json)
+if [[ $batch_state = "JOB_STATE_SUCCEEDED" ]]; then
+    echo "Job succeeded. Results:"
+    jq -r '.dest.inlinedResponses' batch_status.json
+fi
+```
+
+### ملف الإدخال للصور
 
 ### Python
 
@@ -1306,35 +1539,46 @@ if [[ $batch_state = "JOB_STATE_SUCCEEDED" ]]; then
 fi
 ```
 
-## Chi tiết kỹ thuật
+## التفاصيل الفنية
 
-- **Các mô hình được hỗ trợ:** Batch API hỗ trợ nhiều mô hình Gemini.
-  Hãy tham khảo [trang Mô hình](https://ai.google.dev/gemini-api/docs/models?hl=vi) để biết thông tin hỗ trợ của từng mô hình đối với Batch API. Các phương thức được hỗ trợ cho Batch API cũng giống như các phương thức được hỗ trợ trên API tương tác (hoặc không theo lô).
-- **Giá:** Mức giá sử dụng Batch API bằng 50% chi phí API tương tác tiêu chuẩn cho mô hình tương đương. Hãy xem [trang giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi) để biết thông tin chi tiết. Hãy tham khảo [trang giới hạn tốc độ](https://ai.google.dev/gemini-api/docs/rate-limits?hl=vi#batch-mode) để biết thông tin chi tiết về giới hạn tốc độ của tính năng này.
-- **Mục tiêu mức độ dịch vụ (SLO):** Các lệnh hàng loạt được thiết kế để hoàn tất trong vòng 24 giờ. Nhiều công việc có thể hoàn tất nhanh hơn nhiều tuỳ thuộc vào kích thước và mức tải hiện tại của hệ thống.
-- **Lưu vào bộ nhớ đệm:** [Tính năng lưu vào bộ nhớ đệm theo bối cảnh](https://ai.google.dev/gemini-api/docs/caching?hl=vi) được hỗ trợ cho các yêu cầu hàng loạt. Sử dụng lại nội dung được lưu vào bộ nhớ đệm bằng cách chỉ định tên tài nguyên `cached_content` trong cấu hình của từng yêu cầu trong lô.
-  Nếu một yêu cầu trong lô của bạn dẫn đến một lượt truy cập vào bộ nhớ đệm, thì bạn sẽ trả [mức giá tiêu chuẩn cho việc lưu vào bộ nhớ đệm theo bối cảnh](https://ai.google.dev/gemini-api/docs/pricing?hl=vi).
+- **النماذج المتوافقة:** تتيح Batch API استخدام مجموعة من نماذج Gemini.
+  يمكنك الاطّلاع على [صفحة النماذج](https://ai.google.dev/gemini-api/docs/models?hl=ar) لمعرفة ما إذا كان كل نموذج يتيح استخدام Batch API. تتطابق الوسائط المتوافقة مع Batch API مع الوسائط المتوافقة مع واجهة برمجة التطبيقات التفاعلية (أو غير المجمّعة).
+- **الأسعار:** يتم احتساب تكلفة استخدام Batch API بنسبة% 50 من التكلفة العادية لواجهة برمجة التطبيقات التفاعلية للنموذج المكافئ. يمكنك الاطّلاع على [صفحة الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar)
+  لمعرفة التفاصيل. يمكنك الاطّلاع على [صفحة حدود معدّل النقل](https://ai.google.dev/gemini-api/docs/rate-limits?hl=ar#batch-mode)
+  لمعرفة تفاصيل حدود معدّل النقل لهذه الميزة.
+- **هدف مستوى الخدمة (SLO):** تم تصميم المهام المجمّعة بحيث تكتمل خلال 24 ساعة. قد تكتمل العديد من المهام بشكل أسرع بكثير حسب حجمها وحِمل النظام الحالي.
+- **التخزين المؤقت:** [يتيح استخدام التخزين المؤقت للسياق](https://ai.google.dev/gemini-api/docs/caching?hl=ar) للطلبات المجمّعة. يمكنك إعادة استخدام المحتوى المخزّن مؤقتًا من خلال تحديد اسم مورد `cached_content` في إعدادات الطلبات الفردية ضمن المجموعة.
+  إذا أدّى طلب في المجموعة إلى نتيجة ذاكرة التخزين المؤقت، ستدفع
+  [المعدّلات العادية للتخزين المؤقت للسياق](https://ai.google.dev/gemini-api/docs/pricing?hl=ar).
 
-## Các phương pháp hay nhất
+## أفضل الممارسات
 
-- **Sử dụng tệp đầu vào cho các yêu cầu lớn:** Đối với một số lượng lớn yêu cầu, hãy luôn sử dụng phương thức đầu vào tệp để quản lý tốt hơn và tránh vượt quá giới hạn kích thước yêu cầu cho chính lệnh gọi [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=vi#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent). Xin lưu ý rằng mỗi tệp đầu vào có giới hạn kích thước là 2 GB.
-- **Xử lý lỗi:** Kiểm tra `batchStats` để tìm `failedRequestCount` sau khi một công việc hoàn tất. Nếu sử dụng đầu ra tệp, hãy phân tích cú pháp từng dòng để kiểm tra xem đó có phải là `GenerateContentResponse` hay một đối tượng trạng thái cho biết lỗi cho yêu cầu cụ thể đó hay không. Hãy xem [hướng dẫn khắc phục sự cố](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=vi#error-codes) để biết toàn bộ tập hợp mã lỗi.
-- **Gửi công việc một lần:** Việc tạo một công việc hàng loạt không phải là thao tác bất biến.
-  Nếu bạn gửi cùng một yêu cầu tạo hai lần, thì hai công việc hàng loạt riêng biệt sẽ được tạo.
-- **Chia các lô rất lớn thành nhiều lô nhỏ:** Mặc dù thời gian xử lý mục tiêu là 24 giờ, nhưng thời gian xử lý thực tế có thể thay đổi tuỳ thuộc vào tải hệ thống và quy mô công việc.
-  Đối với các công việc lớn, hãy cân nhắc việc chia chúng thành các lô nhỏ hơn nếu bạn cần kết quả trung gian sớm hơn.
+- **استخدِم ملفات الإدخال للطلبات الكبيرة:** بالنسبة إلى عدد كبير من الطلبات،
+  استخدِم دائمًا طريقة إدخال الملفات
+  لتحسين إمكانية الإدارة وتجنُّب بلوغ حدود حجم الطلب لاستدعاء
+  [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=ar#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent)
+  نفسه. يُرجى العِلم أنّ الحد الأقصى لحجم الملف لكل ملف إدخال هو 2 غيغابايت.
+- **التعامل مع الأخطاء:** بعد اكتمال المهمة، اطّلِع على `batchStats` لمعرفة `failedRequestCount`. في حال استخدام ناتج الملف، يمكنك تحليل كل سطر لمعرفة ما إذا كان `GenerateContentResponse` أو عنصر حالة يشير إلى خطأ في هذا الطلب المحدّد. يمكنك الاطّلاع على دليل [تحديد المشاكل
+  وحلّها](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=ar#error-codes) للحصول على مجموعة كاملة من
+  رموز الخطأ.
+- **إرسال المهام مرة واحدة:** لا يمكن تكرار عملية إنشاء مهمة مجمّعة.
+  إذا أرسلت طلب الإنشاء نفسه مرّتين، سيتم إنشاء مهمتَين مجمّعتَين منفصلتَين.
+- **تقسيم المجموعات الكبيرة جدًا:** على الرغم من أنّ وقت الاستجابة المستهدَف هو 24 ساعة، يمكن أن يختلف وقت المعالجة الفعلي استنادًا إلى حِمل النظام وحجم المهمة.
+  بالنسبة إلى المهام الكبيرة، ننصحك بتقسيمها إلى مجموعات أصغر إذا كنت بحاجة إلى نتائج وسيطة في وقت أقرب.
 
-## Bước tiếp theo
+## الخطوات التالية
 
-- Hãy xem [sổ tay Batch API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=vi) để biết thêm ví dụ.
-- Lớp tương thích OpenAI hỗ trợ Batch API. Đọc các ví dụ trên trang [Khả năng tương thích với OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=vi#batch).
+- يمكنك الاطّلاع على دفتر ملاحظات [Batch API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=ar)
+  لمزيد من الأمثلة.
+- تتيح طبقة التوافق مع OpenAI استخدام Batch API. يمكنك قراءة الأمثلة في صفحة التوافق مع
+  [OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=ar#batch).
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Cập nhật lần gần đây nhất: 2026-05-28 UTC.
+تاريخ التعديل الأخير: 2026-06-05 (حسب التوقيت العالمي المتفَّق عليه)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-28 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-05 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

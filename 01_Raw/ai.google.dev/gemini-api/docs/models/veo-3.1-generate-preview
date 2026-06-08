@@ -1,47 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=pl
-fetched_at: 2026-06-01T05:58:35.040744+00:00
-title: "Veo\u00a03.1 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=zh-CN
+fetched_at: 2026-06-08T05:36:13.280006+00:00
+title: "Veo 3.1 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Prześlij opinię
+发送反馈
 
-# Veo 3.1
+# Veo 3.1
 
-Najnowocześniejszy silnik filmowy zaprojektowany z myślą o zaawansowanym opowiadaniu historii
-i eksperymentalnej produkcji wideo. Veo 3.1 najlepiej sprawdza się w przypadku profesjonalnych filmów w rozdzielczości 4K, natywnie zsynchronizowanego generowania dźwięku i złożonych ruchów kamery, które wymagają najwyższego poziomu spójności czasowej i kontroli artystycznej.
+一种先进的电影引擎，专为高端创意叙事和实验性视频制作而设计。Veo 3.1 最适合专业级 4K 输出、原生同步音频生成以及需要最高级别的时间一致性和艺术控制的复杂镜头运动。
 
-[Wypróbuj w Google AI Studio](https://aistudio.google.com?model=veo-3.1-generate-preview&hl=pl)
+[在 Google AI Studio 中试用](https://aistudio.google.com?model=veo-3.1-generate-preview&hl=zh-cn)
 
-## Dokumentacja
+## 文档
 
-Więcej informacji o funkcjach i możliwościach znajdziesz na stronie [Generowanie filmów](https://ai.google.dev/gemini-api/docs/video?hl=pl).
+如需全面了解
+功能，请访问[视频生成](https://ai.google.dev/gemini-api/docs/video?hl=zh-cn)页面。
 
 ## veo-3.1-generate-preview
 
-| Właściwość | Opis |
+| 属性 | 说明 |
 | --- | --- |
-| id\_cardKod modelu | **Gemini API**  `veo-3.1-generate-preview`  `veo-3.1-fast-generate-preview` |
-| saveObsługiwane typy danych | **Wejście**  Tekst, obraz  **Dane wyjściowe**  Film z dźwiękiem |
-| Limity token\_auto | **Wpisywanie tekstu**  1024 tokeny  **Film wyjściowy**  1 |
-| calendar\_monthOstatnia aktualizacja | Styczeń 2026 |
+| id\_card模型代码 | **Gemini API**  `veo-3.1-generate-preview`  `veo-3.1-fast-generate-preview` |
+| save支持的数据类型 | **输入**  文字广告、图片广告  **输出**  带音频的视频 |
+| token\_auto限制 | **文本输入**  1,024 个令牌  **输出视频**  1 |
+| calendar\_month最后更新时间 | 2026 年 1 月 |
 
-Prześlij opinię
+发送反馈
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Ostatnia aktualizacja: 2026-04-29 UTC.
+最后更新时间 (UTC)：2026-04-29。
 
-Chcesz przekazać coś jeszcze?
+需要向我们提供更多信息？
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]

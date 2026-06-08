@@ -1,49 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=it
-fetched_at: 2026-06-01T06:07:29.550434+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=he
+fetched_at: 2026-06-08T05:26:54.487604+00:00
 title: "Gemini 3.1 Pro Image \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Invia feedback
+שליחת משוב
 
 # Gemini 3.1 Pro Image
 
-**Nano Banana Pro** è un motore sofisticato basato sul ragionamento per la generazione e la modifica di immagini di livello professionale, che offre precisione di qualità professionale e controllo creativo avanzato. Nano Banana Pro è ideale per la progettazione grafica complessa, i mockup di prodotti ad alta fedeltà e le visualizzazioni di dati oggettivi che richiedono un rendering accurato del testo e un grounding nel mondo reale tramite la Ricerca Google.
+‫**Nano Banana Pro** הוא מנוע מתוחכם שמבוסס על נימוקים, לעריכה וליצירה של תמונות ברמה מקצועית. הוא מציע דיוק באיכות סטודיו ושליטה מתקדמת בתהליך היצירה. ‫Nano Banana Pro הוא המודל הכי טוב לעיצוב גרפי מורכב, להדמיות מוצר ברמת דיוק גבוהה ולתצוגות חזותיות של נתונים עובדתיים שדורשות עיבוד מדויק של טקסט וביסוס על נתונים מהעולם האמיתי באמצעות חיפוש Google.
 
-[Prova in Google AI Studio](https://aistudio.google.com?model=gemini-3.1-pro-image&hl=it)
+[לניסיון ב-Google AI Studio](https://aistudio.google.com?model=gemini-3.1-pro-image&hl=he)
 
-## Documentazione
+## מאמרי עזרה
 
-Visita la pagina [Generazione di immagini](https://ai.google.dev/gemini-api/docs/image-generation?hl=it) per una copertura completa di funzionalità e capacità.
+בדף [יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he) אפשר לקרוא על כל התכונות והיכולות.
 
 ## gemini-3.1-pro-image
 
-| Proprietà | Descrizione |
+| נכס | תיאור |
 | --- | --- |
-| Codice modello id\_card | `gemini-3.1-pro-image` |
-| saveTipi di dati supportati | **Input**  Immagine e testo  **Output**  Immagine e testo |
-| token\_autoLimiti dei token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=it) | **Limite di token di input**  65.536  **Limite di token di output**  32.768 |
-| handymanFunzionalità | **Generazione di audio**  Non supportato  **API batch**  Supportato  **Memorizzazione nella cache**  Non supportato  **Esecuzione di codice**  Non supportato  **Ricerca file**  Non supportato  **Inferenza flessibile**  Supportato  **Chiamata di funzione**  Non supportato  **Grounding con Google Maps**  Non supportato  **Generazione di immagini**  Supportato  **API Live**  Non supportato  **Inferenza della priorità**  Supportato  **Fondatezza della Ricerca**  Supportato  **Output strutturati**  Supportato  **Pensiero**  Supportato  **Contesto URL**  Non supportato |
-| Versioni 123 | Per ulteriori dettagli, leggi i [pattern delle versioni del modello](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it#model-versions).  - Stabile: `gemini-3.1-pro-image` |
-| calendar\_monthUltimo aggiornamento | Novembre 2025 |
-| cognition\_2Knowledge cutoff | Gennaio 2025 |
+| id\_cardקוד מודל | `gemini-3.1-pro-image` |
+| saveסוגי נתונים נתמכים | **קלטים**  תמונה וטקסט  **פלט**  תמונה וטקסט |
+| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  65,536  **מגבלת אסימונים בפלט**  32,768 |
+| handymanיכולות | **יצירת אודיו**  לא נתמך  ‫**Batch API**  נתמך  **שמירת נתונים במטמון**  לא נתמך  **ביצוע קוד**  לא נתמך  **חיפוש קבצים**  לא נתמך  **הסקת מסקנות גמישה**  נתמך  **בקשה להפעלת פונקציה**  לא נתמך  **עיגון בעזרת מפות Google**  לא נתמך  **יצירת תמונות**  נתמך  ‫**Live API**  לא נתמך  **היקש בעדיפות גבוהה**  נתמך  **חיפוש עם עיגון בנתונים**  נתמך  **פלטים מובְנים**  נתמך  **חשיבה**  נתמך  **הקשר של כתובת ה-URL**  לא נתמך |
+| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - יציב: `gemini-3.1-pro-image` |
+| calendar\_monthהעדכון האחרון | נובמבר 2025 |
+| cognition\_2תאריך סף הידע | ינואר 2025 |
 
-Invia feedback
+שליחת משוב
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Ultimo aggiornamento 2026-05-28 UTC.
+עדכון אחרון: 2026-05-28 (שעון UTC).
 
-Vuoi dirci altro?
+רוצה לתת לנו משוב?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-28 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-05-28 (שעון UTC)."],[],[]]

@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=tr
-fetched_at: 2026-06-01T06:07:38.060553+00:00
+source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=it
+fetched_at: 2026-06-08T05:38:49.663665+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Geri bildirim gönderin
+Invia feedback
 
-# Yerleşik araçları ve işlev çağrılarını birleştirme
+# Combinare strumenti integrati e chiamate di funzione
 
-Gemini, araç çağrılarının bağlam geçmişini koruyup ortaya çıkararak `google_search` gibi [yerleşik araçların](https://ai.google.dev/gemini-api/docs/tools?hl=tr) ve [işlev çağrılarının](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) (*özel araçlar* olarak da bilinir) tek bir üretimde birleştirilmesine olanak tanır. Yerleşik ve özel araç kombinasyonları, karmaşık ve etkili iş akışlarına olanak tanır. Örneğin, model, belirli iş mantığınızı çağırmadan önce kendisini gerçek zamanlı web verileriyle temellendirebilir.
+Gemini consente di combinare [strumenti integrati](https://ai.google.dev/gemini-api/docs/tools?hl=it), come `google_search`, e [chiamate di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it) (note anche come *strumenti personalizzati*) in una singola generazione conservando ed esponendo la cronologia del contesto delle chiamate allo strumento. Le combinazioni di strumenti integrati e personalizzati consentono workflow complessi e agentivi in cui, ad esempio, il modello può basarsi sui dati web in tempo reale prima di chiamare la logica di business specifica.
 
-Aşağıda, `google_search` ile yerleşik ve özel araç kombinasyonlarının ve özel bir işlevin `getWeather` etkinleştirildiği bir örnek verilmiştir:
+Ecco un esempio che consente combinazioni di strumenti integrati e personalizzati con `google_search` e una funzione personalizzata `getWeather`:
 
 ### Python
 
@@ -110,7 +110,7 @@ for part in response_2.candidates[0].content.parts:
         print(part.text)
 ```
 
-### JavaScript
+### Javascript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -198,7 +198,7 @@ async function run() {
 run();
 ```
 
-### Go
+### Vai
 
 ```
 package main
@@ -387,55 +387,65 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
 }'
 ```
 
-## İşleyiş şekli
+## Come funziona
 
-Gemini 3 modelleri, yerleşik ve özel araç kombinasyonlarını etkinleştirmek için *araç bağlamı dolaşımını* kullanır. Araç bağlamı dolaşımı, yerleşik araçların bağlamını korumayı ve kullanıma sunmayı, ayrıca bu bağlamı aynı çağrıdaki özel araçlarla paylaşmayı mümkün kılar.
+I modelli Gemini 3 utilizzano la *circolazione del contesto dello strumento* per consentire combinazioni di strumenti integrati e personalizzati. La circolazione del contesto dello strumento consente di conservare ed esporre il contesto degli strumenti integrati e condividerlo con gli strumenti personalizzati nella stessa chiamata da un turno all'altro.
 
-### Araç kombinasyonunu etkinleştirme
+### Attivare la combinazione di strumenti
 
-- Araç bağlamı dolaşımını etkinleştirmek için `include_server_side_tool_invocations` işaretini `true` olarak ayarlamanız gerekir.
-- Birleştirme davranışını tetiklemek için kullanmak istediğiniz yerleşik araçlarla birlikte [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr#function-declarations) öğesini ekleyin.
-  - `function_declarations` dahil etmezseniz işaret ayarlandığı sürece araç bağlamı dolaşımı, dahil edilen yerleşik araçlar üzerinde çalışmaya devam eder.
+- Devi impostare il flag `include_server_side_tool_invocations` su `true` per attivare la circolazione del contesto dello strumento.
+- Includi [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=it#function-declarations), insieme agli
+  strumenti integrati che vuoi utilizzare, per attivare il comportamento di combinazione.
+  - Se non includi `function_declarations`, la circolazione del contesto dello strumento continuerà ad agire sugli strumenti integrati inclusi, a condizione che il flag sia impostato.
 
-### API, parçaları döndürür
+### Parti restituite dall'API
 
-API, tek bir yanıtta yerleşik araç çağrısı için `toolCall` ve `toolResponse` bölümlerini döndürür. İşlev (özel araç) çağrısı için API, `functionCall` çağrı bölümünü döndürür. Kullanıcı, bir sonraki dönüşte `functionResponse` bölümünü sağlar.
+In una singola risposta, l'API restituisce le parti `toolCall` e `toolResponse` per la chiamata allo strumento integrato. Per la chiamata di funzione (strumento personalizzato), l'API restituisce la parte di chiamata `functionCall`, a cui l'utente fornisce la parte `functionResponse` nel turno successivo.
 
-- `toolCall` ve `toolResponse`: API, sunucu tarafında hangi araçların çalıştırıldığının bağlamını ve bunların yürütülmesinin sonucunu bir sonraki dönüş için korumak amacıyla bu bölümleri döndürür.
-- `functionCall` ve `functionResponse`: API, işlev çağrısını kullanıcının doldurması için gönderir ve kullanıcı sonucu işlev yanıtında geri gönderir (bu bölümler, Gemini API'deki tüm [işlev çağrıları](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) için standarttır ve araç kombinasyonu özelliğine özgü değildir).
-- (Yalnızca [kod yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr) aracı)
-  `executableCode` ve `codeExecutionResult`:
-  Kod yürütme aracı kullanılırken `functionCall` ve `functionResponse` yerine API, `executableCode` (model tarafından oluşturulan ve yürütülmesi amaçlanan kod) ve `codeExecutionResult` (yürütülebilir kodun sonucu) değerlerini döndürür.
+- `toolCall` e `toolResponse`: l'API restituisce queste parti per conservare il contesto degli strumenti eseguiti sul lato server e il risultato della loro esecuzione per il turno successivo.
+- `functionCall` e `functionResponse`: l'API invia la chiamata di funzione all'
+  utente per completarla e l'utente restituisce il risultato nella
+  risposta della funzione (queste parti sono standard per tutte le [chiamate di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it) nell'API Gemini, non sono specifiche della
+  funzionalità di combinazione di strumenti).
+- ([Solo strumento di esecuzione del codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it))
+  `executableCode` e `codeExecutionResult`:
+  Quando utilizzi lo strumento di esecuzione del codice, anziché `functionCall` e
+  `functionResponse`, l'API restituisce `executableCode` (il codice generato
+  dal modello che deve essere eseguito) e `codeExecutionResult` (il
+  risultato del codice eseguibile).
 
-Bağlamı korumak ve araç kombinasyonlarını etkinleştirmek için, içerdiği tüm [alanlar](#critical-fields) dahil olmak üzere tüm parçaları her dönüşte modele geri göndermeniz gerekir.
+Devi restituire tutte le parti, inclusi tutti i [campi](#critical-fields) che
+contengono, al modello a ogni turno per mantenere il contesto e attivare le combinazioni di strumenti.
 
-### Döndürülen bölümlerdeki kritik alanlar
+### Campi critici nelle parti restituite
 
-[API tarafından döndürülen belirli bölümler](#api-returns-parts) `id`, `tool_type` ve `thought_signature` alanlarını içerir. Bu alanlar, araç bağlamının korunması (ve dolayısıyla araç kombinasyonları) için kritik öneme sahiptir. Sonraki isteklerinizde tüm bölümleri *yanıtta verildiği şekilde* döndürmeniz gerekir.
+Alcune [parti restituite dall'API](#api-returns-parts) includeranno i campi `id`,
+`tool_type` e `thought_signature`. Questi campi sono fondamentali per mantenere il contesto dello strumento (e quindi per le combinazioni di strumenti); devi restituire tutte le parti *come indicato nella risposta* nelle richieste successive.
 
-- `id`: Bir çağrıyı yanıtıyla eşleyen benzersiz tanımlayıcı. `id`, araç bağlamı dolaşımından bağımsız olarak **tüm işlev çağrısı yanıtlarında ayarlanır**.
-  İşlev yanıtında, API'nin işlev çağrısında sağladığı `id` ile aynı *değeri sağlamanız gerekir*. Yerleşik araçlar, araç çağrısı ile araç yanıtı arasındaki `id` değerini otomatik olarak paylaşır.
-  - Tüm araçla ilgili bölümlerde bulunur: `toolCall`, `toolResponse`,
-    `functionCall`, `functionResponse`, `executableCode`, `codeExecutionResult`
-- `tool_type`: Kullanılan aracı, yerleşik aracı (ör. `URL_CONTEXT`) veya işlev adını (ör. `getWeather`) tanımlar.
-  - `toolCall` ve `toolResponse` bölümlerinde bulunur.
-- `thought_signature`: **API tarafından döndürülen her parçaya** yerleştirilmiş gerçek şifrelenmiş bağlam. Düşünce imzaları olmadan bağlam yeniden oluşturulamaz. Her dönüşte tüm bölümler için düşünce imzalarını döndürmezseniz model hata verir.
-  - *Tüm* bölümlerde bulunur.
+- `id`: un identificatore univoco che mappa una chiamata alla relativa risposta. `id` viene **impostato su
+  tutte le risposte alle chiamate di funzione**, indipendentemente dalla circolazione del contesto dello strumento.
+  Devi *fornire* lo stesso `id` nella risposta della funzione
+  che l'API fornisce nella chiamata di funzione. Gli strumenti integrati condividono automaticamente l'`id` tra la chiamata allo strumento e la risposta dello strumento.
+  - Trovato in tutte le parti correlate allo strumento: `toolCall`, `toolResponse`, `functionCall`, `functionResponse`, `executableCode`, `codeExecutionResult`
+- `tool_type`: identifica lo strumento specifico in uso; il nome letterale dello strumento integrato (ad es. `URL_CONTEXT`) o della funzione (ad es. `getWeather`).
+  - Trovato nelle parti `toolCall` e `toolResponse`.
+- `thought_signature`: il contesto criptato effettivo incorporato in **ogni parte restituita dall'API**. Il contesto non può essere ricostruito senza le firme di pensiero; se non restituisci le firme di pensiero per tutte le parti in ogni turno, il modello genererà un errore.
+  - Trovato in *tutte* le parti.
 
-### Araca özgü veriler
+### Dati specifici dello strumento
 
-Bazı yerleşik araçlar, araç türüne özel ve kullanıcı tarafından görülebilen veri bağımsız değişkenleri döndürür.
+Alcuni strumenti integrati restituiscono argomenti di dati visibili all'utente specifici per il tipo di strumento.
 
-| Araç | Kullanıcının görebileceği araç çağrısı bağımsız değişkenleri (varsa) | Kullanıcı tarafından görülebilen araç yanıtı (varsa) |
+| Strumento | Argomenti della chiamata allo strumento visibili all'utente (se presenti) | Risposta dello strumento visibile all'utente (se presente) |
 | --- | --- | --- |
 | **GOOGLE\_SEARCH** | `queries` | `search_suggestions` |
 | **GOOGLE\_MAPS** | `queries` | `places` `google_maps_widget_context_token` |
-| **URL\_CONTEXT** | `urls` Göz atılacak URL'ler | `urls_metadata` `retrieved_url`: Göz atılan URL'ler `url_retrieval_status`: Göz atma durumu |
-| **FILE\_SEARCH** | Yok | Yok |
+| **URL\_CONTEXT** | `urls` URL da sfogliare | `urls_metadata` `retrieved_url`: URL sfogliati `url_retrieval_status`: stato di navigazione |
+| **FILE\_SEARCH** | Nessuno | Nessuno |
 
-## Örnek araç kombinasyonu isteği yapısı
+## Esempio di struttura della richiesta di combinazione di strumenti
 
-Aşağıdaki istek yapısında, "ABD'deki en kuzeydeki şehir hangisidir?" isteminin istek yapısı gösterilmektedir. Bugün hava nasıl?" Bu çözümde üç araç bir araya getirilmiştir: yerleşik Gemini araçları `google_search` ve `code_execution` ile özel bir işlev `get_weather`.
+La seguente struttura della richiesta mostra la struttura della richiesta del prompt: "Qual è la città più a nord degli Stati Uniti? Che tempo fa oggi?". Combina tre strumenti: gli strumenti integrati di Gemini `google_search` e `code_execution` e una funzione personalizzata `get_weather`.
 
 ```
 {
@@ -504,50 +514,52 @@ Aşağıdaki istek yapısında, "ABD'deki en kuzeydeki şehir hangisidir?" istem
 }
 ```
 
-## Token'lar ve fiyatlandırma
+## Token e prezzi
 
-İsteklerdeki `toolCall` ve `toolResponse` bölümlerinin `prompt_token_count` kapsamında sayıldığını unutmayın. Bu ara araç adımları artık görünür olduğundan ve size geri döndürüldüğünden sohbet geçmişinin bir parçasıdır. Bu durum yalnızca *istekler* için geçerlidir, *yanıtlar* için geçerli değildir.
+Tieni presente che le parti `toolCall` e `toolResponse` nelle richieste vengono conteggiate nel `prompt_token_count`. Poiché questi passaggi intermedi dello strumento sono ora visibili e ti vengono restituiti, fanno parte della cronologia delle conversazioni. Questo vale solo per il
+caso per *richieste*, non per *risposte*.
 
-Google Arama aracı bu kuralın istisnasıdır. Google Arama, sorgu düzeyinde kendi fiyatlandırma modelini zaten uyguladığından jetonlar iki kez ücretlendirilmez ([Fiyatlandırma](https://ai.google.dev/gemini-api/docs/pricing?hl=tr) sayfasına bakın).
+Lo strumento Ricerca Google è un'eccezione a questa regola. La Ricerca Google applica già
+il proprio modello di prezzi a livello di query, quindi i token non sono
+addebitati due volte (vedi la pagina [dei prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it)).
 
-Daha fazla bilgi için [Parçalar](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) sayfasını okuyun.
+Per ulteriori informazioni, consulta la pagina [Token](https://ai.google.dev/gemini-api/docs/tokens?hl=it).
 
-## Sınırlamalar
+## Limitazioni
 
-- `include_server_side_tool_invocations` işareti etkinleştirildiğinde varsayılan olarak `VALIDATED` modu kullanılır (`AUTO` modu desteklenmez).
-- `google_search` gibi yerleşik araçlar konum ve mevcut saat bilgilerini kullandığından `system_instruction` veya `function_declaration.description` cihazınızda çakışan konum ve saat bilgileri varsa araç kombinasyonu özelliği iyi çalışmayabilir.
+- Impostazione predefinita della modalità `VALIDATED` (la modalità `AUTO` non è supportata) quando il flag `include_server_side_tool_invocations` è attivato
+- Gli strumenti integrati come `google_search` si basano sulle informazioni relative alla località e all'ora corrente, quindi se `system_instruction` o `function_declaration.description` contengono informazioni su località e ora in conflitto, la funzionalità di combinazione di strumenti potrebbe non funzionare correttamente.
 
-## Desteklenen araçlar
+## Strumenti supportati
 
-Standart araç bağlamı dolaşımı, sunucu tarafı (yerleşik) araçlar için geçerlidir.
-Kod Yürütme de sunucu tarafı bir araçtır ancak bağlam dolaşımı için kendi yerleşik çözümüne sahiptir. Bilgisayar Kullanımı ve işlev çağırma, istemci tarafı araçlardır.
-Ayrıca bağlam dolaşımı için yerleşik çözümleri vardır.
+La circolazione del contesto dello strumento standard si applica agli strumenti lato server (integrati).
+L'esecuzione del codice è anche uno strumento lato server, ma ha una propria soluzione integrata per la circolazione del contesto. L'utilizzo del computer e le chiamate di funzione sono strumenti lato client e hanno anche soluzioni integrate per la circolazione del contesto.
 
-| Araç | Yürütme tarafı | Bağlam Dolaşımı Desteği |
+| Strumento | Lato di esecuzione | Supporto per la circolazione del contesto |
 | --- | --- | --- |
-| [Google Arama](https://ai.google.dev/gemini-api/docs/google-search?hl=tr) | Sunucu tarafı | Destekleniyor |
-| [Google Haritalar](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr) | Sunucu tarafı | Destekleniyor |
-| [URL Bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr) | Sunucu tarafı | Destekleniyor |
-| [Dosya Arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr) | Sunucu tarafı | Destekleniyor |
-| [Kod Yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr) | Sunucu tarafı | Desteklenir (yerleşik, `executableCode` ve `codeExecutionResult` parçaları kullanılır) |
-| [Bilgisayar Kullanımı](https://ai.google.dev/gemini-api/docs/computer-use?hl=tr) | İstemci tarafı | Desteklenir (yerleşik, `functionCall` ve `functionResponse` parçaları kullanılır) |
-| [Özel işlevler](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) | İstemci tarafı | Desteklenir (yerleşik, `functionCall` ve `functionResponse` parçaları kullanılır) |
+| [Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it) | Lato server | Supportato |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it) | Lato server | Supportato |
+| [Contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it) | Lato server | Supportato |
+| [Ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it) | Lato server | Supportato |
+| [Esecuzione del codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it) | Lato server | Supportato (integrato, utilizza le parti `executableCode` e `codeExecutionResult`) |
+| [Utilizzo del computer](https://ai.google.dev/gemini-api/docs/computer-use?hl=it) | Lato client | Supportato (integrato, utilizza le parti `functionCall` e `functionResponse`) |
+| [Funzioni personalizzate](https://ai.google.dev/gemini-api/docs/function-calling?hl=it) | Lato client | Supportato (integrato, utilizza le parti `functionCall` e `functionResponse`) |
 
-## Sırada ne var?
+## Passaggi successivi
 
-- Gemini API'deki [işlev çağrısı](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) hakkında daha fazla bilgi edinin.
-- Desteklenen araçları keşfedin:
-  - [Google Arama](https://ai.google.dev/gemini-api/docs/google-search?hl=tr)
-  - [Google Haritalar](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr)
-  - [URL Bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr)
-  - [Dosya Arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr)
+- Scopri di più sulle [chiamate di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it) nell'API Gemini.
+- Esplora gli strumenti supportati:
+  - [Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it)
+  - [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it)
+  - [Contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it)
+  - [Ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it)
 
-Geri bildirim gönderin
+Invia feedback
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Son güncelleme tarihi: 2026-05-29 UTC.
+Ultimo aggiornamento 2026-05-29 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Vuoi dirci altro?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-05-29 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-29 UTC."],[],[]]

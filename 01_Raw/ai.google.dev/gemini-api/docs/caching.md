@@ -1,66 +1,64 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/caching?hl=es-419
-fetched_at: 2026-06-01T06:06:01.337896+00:00
+source_url: https://ai.google.dev/gemini-api/docs/caching?hl=zh-TW
+fetched_at: 2026-06-08T05:29:57.709456+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Enviar comentarios
+提供意見
 
-# Almacenamiento en caché de contexto
+# 脈絡快取
 
-En un flujo de trabajo de IA típico, es posible que pases los mismos tokens de entrada una y otra vez a un modelo. La API de Gemini ofrece dos mecanismos de almacenamiento en caché diferentes:
+在典型的 AI 工作流程中，您可能會重複將相同的輸入權杖傳遞至模型。Gemini API 提供兩種不同的快取機制：
 
-- Almacenamiento en caché implícito (habilitado automáticamente en Gemini 2.5 y modelos más recientes, sin garantía de ahorro de costos)
-- Almacenamiento en caché explícito (se puede habilitar de forma manual en la mayoría de los modelos, garantía de ahorro de costos)
+- 隱式快取 (Gemini 2.5 和更新的模型會自動啟用，不保證能節省費用)
+- 明確快取 (大多數模型可手動啟用，保證節省費用)
 
-El almacenamiento en caché explícito es útil en los casos en los que deseas garantizar el ahorro de costos, pero con un poco más de trabajo para el desarrollador.
+如果您想確保節省成本，但願意增加一些開發人員工作，明確快取就非常實用。
 
-## Almacenamiento en caché implícito
+## 隱含快取
 
-El almacenamiento en caché implícito está habilitado de forma predeterminada para todos los modelos de Gemini 2.5 y versiones posteriores. Pasamos automáticamente los ahorros de costos si tu solicitud alcanza las cachés. No es necesario que hagas nada para habilitar esta opción. El recuento mínimo de tokens de entrada para el almacenamiento en caché de contexto se indica en la siguiente tabla para cada modelo:
+根據預設，所有 Gemini 2.5 以上版本模型都會啟用隱式快取功能。如果要求命中快取，系統會自動傳送節省的費用。您無須執行任何操作即可啟用這項功能。下表列出各模型內容快取功能的輸入權杖數量下限：
 
-| Modelo | Límite mínimo de tokens |
+| 模型 | 最低權杖限制 |
 | --- | --- |
-| Gemini 3.5 Flash | 1024 |
-| Versión preliminar de Gemini 3 Pro | 4096 |
-| Gemini 2.5 Flash | 1024 |
-| Gemini 2.5 Pro | 4096 |
+| Gemini 3.5 Flash | 4096 |
+| Gemini 3.1 Pro 預先發布版 | 4096 |
+| Gemini 2.5 Flash | 2048 |
+| Gemini 2.5 Pro | 2048 |
 
-Para aumentar las posibilidades de un acierto de caché implícito, haz lo siguiente:
+如要提高隱含快取命中的機率，請採取下列行動：
 
-- Intenta colocar contenido grande y común al comienzo de tu mensaje.
-- Intenta enviar solicitudes con un prefijo similar en un período breve.
+- 請嘗試在提示開頭放入大型和常見內容
+- 嘗試在短時間內傳送具有類似前置字串的要求
 
-Puedes ver la cantidad de tokens que fueron aciertos de caché en el campo `usage_metadata` del objeto de respuesta.
+您可以在回應物件的 `usage_metadata` 欄位中，查看快取命中次數。
 
-## Almacenamiento en caché explícito
+## 明確快取
 
-Con la función de almacenamiento en caché explícito de la API de Gemini, puedes pasar contenido al modelo una vez, almacenar en caché los tokens de entrada y, luego, hacer referencia a los tokens almacenados en caché para las solicitudes posteriores. En ciertos volúmenes, usar tokens almacenados en caché es más económico que pasar el mismo corpus de tokens de forma repetida.
+使用 Gemini API 的明確快取功能，您可以將部分內容傳遞至模型一次、快取輸入權杖，然後在後續要求中參照快取的權杖。在特定量級下，使用快取權杖的成本比重複傳遞相同權杖主體更低。
 
-Cuando almacenas en caché un conjunto de tokens, puedes elegir cuánto tiempo deseas que exista la caché antes de que se borren automáticamente los tokens. Esta duración del almacenamiento en caché se denomina *tiempo de actividad* (TTL). Si no se establece, el TTL se establece de forma predeterminada en 1 hora. El costo del almacenamiento en caché depende del tamaño del token de entrada y del tiempo que deseas que persistan los tokens.
+快取一組符記時，您可以選擇快取的存留時間，系統會在期限過後自動刪除符記。這段快取時間稱為「存留時間」(TTL)。如未設定，TTL 預設為 1 小時。快取費用取決於輸入符記的大小，以及符記的保存時間。
 
-En esta sección, se supone que instalaste un SDK de Gemini (o tienes curl instalado)
-y que configuraste una clave de API, como se muestra en la
-[guía de inicio rápido](https://ai.google.dev/gemini-api/docs/quickstart?hl=es-419).
+本節假設您已安裝 Gemini SDK (或已安裝 curl)，並已設定 API 金鑰，如[快速入門](https://ai.google.dev/gemini-api/docs/quickstart?hl=zh-tw)所示。
 
-### Genera contenido con una caché
+### 使用快取生成內容
 
 ### Python
 
-En el siguiente ejemplo, se muestra cómo generar contenido con una instrucción del sistema almacenada en caché y un archivo de video.
+以下範例說明如何使用快取的系統指令和影片檔案生成內容。
 
-### Videos
+### 影片
 
 ```
 import os
@@ -167,7 +165,7 @@ print('\n\n', response.text)
 
 ### JavaScript
 
-En el siguiente ejemplo, se muestra cómo generar contenido con una instrucción del sistema almacenada en caché y un archivo de texto.
+以下範例說明如何使用快取的系統指令和文字檔生成內容。
 
 ```
 import {
@@ -208,7 +206,7 @@ await main();
 
 ### Go
 
-En el siguiente ejemplo, se muestra cómo generar contenido con una caché.
+以下範例說明如何使用快取產生內容。
 
 ```
 package main
@@ -278,9 +276,9 @@ func main() {
 
 ### REST
 
-En el siguiente ejemplo, se muestra cómo crear una caché y, luego, usarla para generar contenido.
+以下範例說明如何建立快取，然後用來產生內容。
 
-### Videos
+### 影片
 
 ```
 wget https://storage.googleapis.com/generativeai-downloads/data/a11.txt
@@ -429,22 +427,20 @@ cat response.json
 echo jq ".candidates[].content.parts[].text" response.json
 ```
 
-### Enumera cachés
+### 列出快取
 
-No es posible recuperar ni ver el contenido almacenado en caché, pero puedes recuperar
-los metadatos de la caché (`name`, `model`, `display_name`, `usage_metadata`,
-`create_time`, `update_time` y `expire_time`).
+您無法擷取或查看快取內容，但可以擷取快取中繼資料 (`name`、`model`、`display_name`、`usage_metadata`、`create_time`、`update_time` 和 `expire_time`)。
 
 ### Python
 
-Para enumerar los metadatos de todas las cachés subidas, usa `CachedContent.list()`:
+如要列出所有上傳快取的中繼資料，請使用 `CachedContent.list()`：
 
 ```
 for cache in client.caches.list():
   print(cache)
 ```
 
-Para recuperar los metadatos de un objeto de caché, si conoces su nombre, usa `get`:
+如要擷取一個快取物件的中繼資料 (如果知道物件名稱)，請使用 `get`：
 
 ```
 client.caches.get(name=name)
@@ -452,7 +448,7 @@ client.caches.get(name=name)
 
 ### JavaScript
 
-Para enumerar los metadatos de todas las cachés subidas, usa `GoogleGenAI.caches.list()`:
+如要列出所有上傳快取的中繼資料，請使用 `GoogleGenAI.caches.list()`：
 
 ```
 console.log("My caches:");
@@ -469,7 +465,7 @@ while (true) {
 
 ### Go
 
-En el siguiente ejemplo, se enumeran todas las cachés.
+以下範例會列出所有快取。
 
 ```
 caches, err := client.Caches.All(ctx)
@@ -482,7 +478,7 @@ for _, item := range caches {
 }
 ```
 
-En el siguiente ejemplo, se enumeran las cachés con un tamaño de página de 2.
+以下範例會列出快取，頁面大小為 2。
 
 ```
 page, err := client.Caches.List(ctx, &genai.ListCachedContentsConfig{PageSize: 2})
@@ -515,13 +511,13 @@ for {
 curl "https://generativelanguage.googleapis.com/v1beta/cachedContents?key=$GEMINI_API_KEY"
 ```
 
-### Actualiza una caché
+### 更新快取
 
-Puedes establecer un nuevo `ttl` o `expire_time` para una caché. No se admite cambiar nada más sobre la caché.
+您可以為快取設定新的 `ttl` 或 `expire_time`，但不支援變更快取的其他任何項目。
 
 ### Python
 
-En el siguiente ejemplo, se muestra cómo actualizar el `ttl` de una caché con `client.caches.update()`.
+以下範例說明如何使用 `client.caches.update()` 更新快取的 `ttl`。
 
 ```
 from google import genai
@@ -535,11 +531,7 @@ client.caches.update(
 )
 ```
 
-Para establecer la hora de vencimiento, se aceptará un objeto `datetime`
-o una cadena de fecha y hora con formato ISO (`dt.isoformat()`, como
-`2025-01-27T16:02:36.473528+00:00`). Tu hora debe incluir una zona horaria
-(`datetime.utcnow()` no adjunta una zona horaria,
-`datetime.now(datetime.timezone.utc)` sí adjunta una zona horaria).
+如要設定到期時間，請接受 `datetime` 物件或 ISO 格式的日期時間字串 (`dt.isoformat()`，例如 `2025-01-27T16:02:36.473528+00:00`)。時間必須包含時區 (`datetime.utcnow()` 不會附加時區，`datetime.now(datetime.timezone.utc)` 則會附加時區)。
 
 ```
 from google import genai
@@ -559,7 +551,7 @@ client.caches.update(
 
 ### JavaScript
 
-En el siguiente ejemplo, se muestra cómo actualizar el `ttl` de una caché con `GoogleGenAI.caches.update()`.
+以下範例說明如何使用 `GoogleGenAI.caches.update()` 更新快取的 `ttl`。
 
 ```
 const ttl = `${2 * 3600}s`; // 2 hours in seconds
@@ -572,7 +564,7 @@ console.log("After update (TTL):", updatedCache);
 
 ### Go
 
-En el siguiente ejemplo, se muestra cómo actualizar el `TTL` de una caché.
+以下範例說明如何更新快取的 `TTL`。
 
 ```
 // Update the TTL (2 hours).
@@ -588,7 +580,7 @@ fmt.Println(cache)
 
 ### REST
 
-En el siguiente ejemplo, se muestra cómo actualizar el `ttl` de una caché.
+以下範例說明如何更新快取的 `ttl`。
 
 ```
 curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY" \
@@ -596,9 +588,9 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=
 -d '{"ttl": "600s"}'
 ```
 
-### Borra una caché
+### 刪除快取
 
-El servicio de almacenamiento en caché proporciona una operación de eliminación para quitar contenido de la caché de forma manual. En el siguiente ejemplo, se muestra cómo borrar una caché:
+快取服務提供刪除作業，可手動從快取中移除內容。以下範例說明如何刪除快取：
 
 ### Python
 
@@ -628,48 +620,44 @@ fmt.Println("Cache deleted:", cache.Name)
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY"
 ```
 
-### Almacenamiento en caché explícito con la biblioteca de OpenAI
+### 使用 OpenAI 程式庫進行明確快取
 
-Si usas una [biblioteca de OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=es-419), puedes habilitar
-el almacenamiento en caché explícito con la propiedad `cached_content` en
-[`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=es-419#extra-body).
+如果您使用 [OpenAI 程式庫](https://ai.google.dev/gemini-api/docs/openai?hl=zh-tw)，可以透過 [`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=zh-tw#extra-body) 的 `cached_content` 屬性啟用明確快取。
 
-## Cuándo usar el almacenamiento en caché explícito
+## 使用明確快取的時機
 
-El almacenamiento en caché de contexto es especialmente adecuado para situaciones en las que las solicitudes más cortas hacen referencia de forma repetida a un contexto inicial sustancial. Considera usar el almacenamiento en caché de contexto para casos de uso como los siguientes:
+如果較短的要求會重複參照大量初始脈絡，就特別適合使用脈絡快取。請考慮在下列用途使用內容快取：
 
-- [Chatbots con instrucciones del sistema extensas](https://ai.google.dev/gemini-api/docs/system-instructions?hl=es-419)
-- Análisis repetitivo de archivos de video largos
-- Consultas recurrentes en grandes conjuntos de documentos
-- Análisis frecuente del repositorio de código o corrección de errores
+- 具有大量[系統指令](https://ai.google.dev/gemini-api/docs/system-instructions?hl=zh-tw)的聊天機器人
+- 重複分析冗長的影片檔案
+- 針對大量文件集重複查詢
+- 經常分析程式碼存放區或修正錯誤
 
-### Cómo el almacenamiento en caché explícito reduce los costos
+### 明確快取如何降低成本
 
-El almacenamiento en caché de contexto es una función pagada diseñada para reducir los costos. La facturación se basa en los siguientes factores:
+脈絡快取是付費功能，旨在降低成本。計費依據為下列因素：
 
-1. **Recuento de tokens de caché:** Es la cantidad de tokens de entrada almacenados en caché, que se facturan a una tarifa reducida cuando se incluyen en mensajes posteriores.
-2. **Duración del almacenamiento:** Es la cantidad de tiempo que se almacenan los tokens almacenados en caché (TTL), que se factura según la duración del TTL del recuento de tokens almacenados en caché. No hay límites mínimos ni máximos en el TTL.
-3. **Otros factores:** Se aplican otros cargos, como los de los tokens de entrada y salida no almacenados en caché.
+1. **快取詞元數：**快取的輸入詞元數，納入後續提示時會以較低的費率計費。
+2. **儲存時間：**系統儲存快取權杖的時間長度 (存留時間)，費用會根據快取權杖數量的存留時間長度計費。存留時間沒有下限或上限。
+3. **其他因素：**系統會收取其他費用，例如非快取輸入權杖和輸出權杖的費用。
 
-Para obtener información actualizada sobre los precios, consulta la página de precios de la API de Gemini [pricing
-page](https://ai.google.dev/pricing?hl=es-419). Para obtener información sobre cómo contar tokens, consulta la [guía de tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419).
+如需最新定價詳細資料，請參閱 Gemini API [定價頁面](https://ai.google.dev/pricing?hl=zh-tw)。如要瞭解如何計算符記，請參閱[符記指南](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw)。
 
-### Consideraciones adicionales
+### 其他注意事項
 
-Ten en cuenta las siguientes consideraciones cuando uses el almacenamiento en caché de contexto:
+使用內容快取時，請注意下列事項：
 
-- El recuento de tokens de entrada *mínimo* para el almacenamiento en caché de contexto varía según el modelo. El *máximo* es el mismo que el máximo para el modelo determinado. (Para obtener más información sobre el recuento de tokens,
-  consulta la [guía de tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419)).
-- El modelo no distingue entre los tokens almacenados en caché y los tokens de entrada normales. El contenido almacenado en caché es un prefijo para el mensaje.
-- No hay tarifas especiales ni límites de uso para el almacenamiento en caché de contexto; se aplican los límites de frecuencia estándar para `GenerateContent`, y los límites de tokens incluyen tokens almacenados en caché.
-- La cantidad de tokens almacenados en caché se muestra en `usage_metadata` de las operaciones de creación, obtención y enumeración del servicio de caché, y también en `GenerateContent` cuando se usa la caché.
+- 脈絡快取的*最低*輸入權杖數會因模型而異，*最高*權杖數則與指定模型的上限相同。(如要進一步瞭解如何計算權杖，請參閱[權杖指南](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw))。
+- 模型不會區分快取權杖和一般輸入權杖。快取內容是提示的前置字元。
+- 內容快取沒有特殊費率或用量限制，適用 `GenerateContent` 的標準費率限制，且權杖限制包含快取的權杖。
+- 快取服務的建立、取得和列出作業，以及使用快取時的 `GenerateContent`，都會傳回快取權杖數量。`usage_metadata`
 
-Enviar comentarios
+提供意見
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Última actualización: 2026-05-19 (UTC)
+上次更新時間：2026-06-02 (世界標準時間)。
 
-¿Quieres brindar más información?
+想進一步說明嗎？
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-05-19 (UTC)"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-02 (世界標準時間)。"],[],[]]

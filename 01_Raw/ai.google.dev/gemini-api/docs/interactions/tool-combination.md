@@ -1,27 +1,29 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=fr
-fetched_at: 2026-06-01T05:59:02.244890+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=zh-CN
+fetched_at: 2026-06-08T05:36:16.474159+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Envoyer des commentaires
+发送反馈
 
-# Combiner les outils intégrés et l'appel de fonction
+# 结合使用内置工具和函数调用
 
-Gemini permet de combiner des [outils intégrés](https://ai.google.dev/gemini-api/docs/tools?hl=fr), tels que `google_search`, et l'[appel de fonction](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=fr) (également appelé *outils personnalisés*) dans une seule interaction en conservant et en exposant l'historique du contexte des appels d'outils. Les combinaisons d'outils intégrées et personnalisées permettent de créer des workflows complexes et agentiques où, par exemple, le modèle peut s'ancrer dans des données Web en temps réel avant d'appeler votre logique métier spécifique.
+Gemini 允许在单个互动中组合使用 [内置工具](https://ai.google.dev/gemini-api/docs/tools?hl=zh-cn)（例如 `google_search`）和 [函数调用](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=zh-cn)
+（也称为 *自定义工具*），方法是保留和公开
+工具调用的上下文历史记录。内置工具和自定义工具组合支持复杂的代理工作流，例如，模型可以在调用您的特定业务逻辑之前，根据实时网络数据进行自我定位。
 
-Voici un exemple qui permet des combinaisons d'outils intégrés et personnalisés avec `google_search` et une fonction personnalisée `getWeather` :
+以下示例展示了如何使用 `google_search` 和自定义函数 `getWeather` 启用内置工具和自定义工具组合：
 
 ### Python
 
@@ -143,87 +145,91 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Fonctionnement
+## 运作方式
 
-Les modèles Gemini 3 utilisent la *circulation du contexte des outils* pour permettre les combinaisons d'outils intégrés et personnalisés. La circulation du contexte des outils permet de préserver et d'exposer le contexte des outils intégrés, et de le partager avec les outils personnalisés lors de la même interaction.
+Gemini 3 模型使用工具上下文循环来启用内置工具和自定义工具组合。 借助工具上下文循环，您可以保留和公开内置工具的上下文，并在同一互动中与自定义工具共享该上下文。
 
-### Activer la combinaison d'outils
+### 启用工具组合
 
-- Incluez [`function_declarations`](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=fr#function-declarations), ainsi que les outils intégrés que vous souhaitez utiliser, pour déclencher le comportement de combinaison.
+- 添加 [`function_declarations`](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=zh-cn#function-declarations) 以及
+  您要使用的内置工具，以触发组合行为。
 
-### Étapes de retour de l'API
+### API 返回步骤
 
-Dans une réponse d'interaction, l'API renvoie des étapes distinctes pour les appels d'outils intégrés et les appels de fonctions (outils personnalisés) :
+在互动响应中，API 会为内置工具调用和函数（自定义工具）调用返回单独的步骤：
 
-- **Étapes de l'outil intégré** : l'API les gère automatiquement, en préservant le contexte à chaque tour.
-- **Étapes d'appel de fonction** : l'API renvoie des étapes `function_call` pour vos fonctions personnalisées. Vous exécutez la fonction et renvoyez le résultat.
+- **内置工具步骤**：API 会自动管理这些步骤，并在各个轮次中保留
+  上下文。
+- **函数调用步骤**：API 会为您的
+  自定义函数返回 `function_call` 步骤。您需要执行该函数并将结果返回。
 
-### Champs essentiels dans les étapes renvoyées
+### 返回步骤中的关键字段
 
-Certains champs des étapes renvoyées sont essentiels pour maintenir le contexte de l'outil et permettre les combinaisons d'outils :
+返回步骤中的某些字段对于维护工具上下文和启用工具组合至关重要：
 
-- **`id`** : se trouve dans les étapes `function_call` et `function_response`. Identifiant unique qui associe un appel à sa réponse.
-- **`signature`** : disponible dans les étapes `thought`, ainsi que dans toutes les étapes d'appel d'outil (par exemple, `function_call`) et de résultat (par exemple, `function_response`) pour les modèles Gemini 3 et versions ultérieures. Ce contexte chiffré permet la **circulation du contexte de l'outil** lors des interactions.
+- **`id`**：位于 `function_call` 和 `function_response` 步骤中。一个唯一标识符，用于将调用映射到其响应。
+- **`signature`**：位于 `thought` 步骤中，以及 Gemini 3 及更高版本的所有工具调用（例如 `function_call`）和结果（例如 `function_response`）步骤中。此加密上下文支持跨互动的**工具上下文循环** 。
 
-**Gérer ces champs :**
+**管理这些字段**：
 
-- **Mode avec état (recommandé)** : lorsque vous utilisez `previous_interaction_id`, le serveur gère automatiquement les champs `id` et `signature`.
-- **Mode sans état** : lorsque vous gérez manuellement l'historique des conversations, vous devez vous assurer de renvoyer les champs `id` et `signature` au modèle dans les requêtes suivantes pour valider l'authenticité et maintenir le contexte. Les SDK officiels gèrent cela automatiquement si vous renvoyez l'objet de réponse complet à l'historique.
+- **有状态模式（推荐）**：当您使用 `previous_interaction_id` 时，服务器会自动处理 `id` 和 `signature` 字段。
+- **无状态模式**：手动管理对话历史记录时，您必须确保在后续请求中将 `id` 和 `signature` 字段都传递回模型，以验证真实性并维护上下文。如果您将完整的响应对象传递回历史记录，官方 SDK 会自动处理此问题。
 
-### Données spécifiques à l'outil
+### 工具专用数据
 
-Certains outils intégrés renvoient des arguments de données visibles par l'utilisateur, spécifiques au type d'outil.
+某些内置工具会返回特定于工具类型的用户可见数据实参。
 
-| Outil | Arguments d'appel d'outil visibles par l'utilisateur (le cas échéant) | Réponse de l'outil visible par l'utilisateur (le cas échéant) |
+| 工具 | 用户可见的工具调用实参（如果有） | 用户可见的工具响应（如果有） |
 | --- | --- | --- |
 | **google\_search** | `queries` | `search_suggestions` |
 | **google\_maps** | `queries` | `places` `google_maps_widget_context_token` |
-| **url\_context** | `urls`  URL à parcourir | `status` : état de l'exploration `retrieved_url` : URL explorées |
-| **file\_search** | Aucun | Aucun |
+| **url\_context** | `urls` 要浏览的网址 | `status`：浏览状态 `retrieved_url`：已浏览的网址 |
+| **file\_search** | 无 | 无 |
 
-## Jetons et tarifs
+## 令牌和价格
 
-Notez que les parties d'appel d'outil intégrées dans les requêtes sont comptabilisées dans `prompt_token_count`. Étant donné que ces étapes intermédiaires de l'outil sont désormais visibles et vous sont renvoyées, elles font partie de l'historique des conversations. Cela ne s'applique qu'aux *requêtes*, et non aux *réponses*.
+请注意，请求中的内置工具调用部分会计入 `prompt_token_count`。由于这些中间工具步骤现在可见并返回给您，因此它们是对话历史记录的一部分。这种情况仅适用于
+*请求*，而不适用于*响应*。
 
-L'outil Recherche Google est une exception à cette règle. La recherche Google applique déjà son propre modèle de tarification au niveau des requêtes. Les jetons ne sont donc pas facturés deux fois (consultez la page [Tarifs](https://ai.google.dev/gemini-api/docs/pricing?hl=fr)).
+Google 搜索工具是此规则的例外。Google 搜索已在查询级别应用自己的定价模式，因此不会重复收取令牌费用（请参阅[价格](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn)页面）。
 
-Pour en savoir plus, consultez la page [Jetons](https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=fr).
+如需了解详情，请参阅[令牌](https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=zh-cn)页面。
 
-## Limites
+## 限制
 
-- Par défaut, le mode `validated` (le mode `auto` n'est pas pris en charge) est utilisé lorsque la circulation du contexte de l'outil est activée.
-- Les outils intégrés tels que `google_search` s'appuient sur des informations de localisation et d'heure actuelle. Par conséquent, si votre `system_instruction` ou votre `function_declaration.description` comporte des informations de localisation et d'heure incohérentes, la fonctionnalité de combinaison d'outils risque de ne pas fonctionner correctement.
+- 启用工具上下文循环时，默认使用 `validated` 模式（不支持 `auto` 模式）。
+- `google_search` 等内置工具依赖于位置和当前时间信息，因此，如果您的 `system_instruction` 或 `function_declaration.description` 包含冲突的位置和时间信息，工具组合功能可能无法正常运行。
 
-## Outils compatibles
+## 支持的工具
 
-La circulation standard du contexte d'outil s'applique aux outils côté serveur (intégrés).
-L'exécution de code est également un outil côté serveur, mais elle dispose de sa propre solution intégrée pour la circulation du contexte. L'utilisation de l'ordinateur et l'appel de fonctions sont des outils côté client qui disposent également de solutions intégrées pour la circulation du contexte.
+标准工具上下文循环适用于服务器端（内置）工具。
+代码执行也是服务器端工具，但有自己的内置上下文循环解决方案。计算机使用和函数调用是客户端工具，也有内置的上下文循环解决方案。
 
-| Outil | Côté exécution | Compatibilité avec la circulation du contexte |
+| 工具 | 执行端 | 上下文循环支持 |
 | --- | --- | --- |
-| [La recherche Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=fr) | Côté serveur | Compatible |
-| [Google Maps](https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=fr) | Côté serveur | Compatible |
-| [Contexte de l'URL](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=fr) | Côté serveur | Compatible |
-| [Recherche de fichiers](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=fr) | Côté serveur | Compatible |
-| [Exécution de code](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=fr) | Côté serveur | Pris en charge (intégré, utilise les étapes `code_execution` et `code_execution_result`) |
-| [Utilisation de l'ordinateur](https://ai.google.dev/gemini-api/docs/interactions/computer-use?hl=fr) | Côté client | Pris en charge (intégré, utilise les étapes `function_call` et `function_response`) |
-| [Fonctions personnalisées](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=fr) | Côté client | Pris en charge (intégré, utilise les étapes `function_call` et `function_response`) |
+| [Google 搜索](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=zh-cn) | 服务器端 | 支持 |
+| [Google 地图](https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=zh-cn) | 服务器端 | 支持 |
+| [网址上下文](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=zh-cn) | 服务器端 | 支持 |
+| [文件搜索](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=zh-cn) | 服务器端 | 支持 |
+| [代码执行](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=zh-cn) | 服务器端 | 支持（内置，使用 `code_execution` 和 `code_execution_result` 步骤） |
+| [计算机使用](https://ai.google.dev/gemini-api/docs/interactions/computer-use?hl=zh-cn) | 客户端 | 支持（内置，使用 `function_call` 和 `function_response` 步骤） |
+| [自定义函数](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=zh-cn) | 客户端 | 支持（内置，使用 `function_call` 和 `function_response` 步骤） |
 
-## Étape suivante
+## 后续步骤
 
-- En savoir plus sur l'[appel de fonction](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=fr) dans l'API Gemini
-- Découvrez les outils compatibles :
-  - [La recherche Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=fr)
-  - [Google Maps](https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=fr)
-  - [Contexte de l'URL](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=fr)
-  - [Recherche de fichiers](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=fr)
+- 详细了解 Gemini API 中的[函数调用](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=zh-cn)。
+- 探索支持的工具：
+  - [Google 搜索](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=zh-cn)
+  - [Google 地图](https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=zh-cn)
+  - [网址上下文](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=zh-cn)
+  - [文件搜索](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=zh-cn)
 
-Envoyer des commentaires
+发送反馈
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Dernière mise à jour le 2026/05/28 (UTC).
+最后更新时间 (UTC)：2026-06-01。
 
-Voulez-vous nous donner plus d'informations ?
+需要向我们提供更多信息？
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/05/28 (UTC)."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-01。"],[],[]]

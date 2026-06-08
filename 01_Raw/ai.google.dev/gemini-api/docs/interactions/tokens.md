@@ -1,45 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=hi
-fetched_at: 2026-06-01T06:02:05.026837+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=ar
+fetched_at: 2026-06-08T05:38:20.401821+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-सुझाव भेजें
+إرسال ملاحظات
 
-# टोकन की संख्या समझना और गिनना
+# فهم الرموز المميّزة وعدّها
 
-Gemini और जनरेटिव एआई के अन्य मॉडल, इनपुट और आउटपुट को *टोकन* नाम की ग्रैनुलैरिटी पर प्रोसेस करते हैं.
+تعالج نماذج Gemini ونماذج الذكاء الاصطناعي التوليدي الأخرى الإدخالات والإخراجات بدقة تُعرف باسم *الرمز المميّز*.
 
-**Gemini मॉडल के लिए, एक टोकन करीब-करीब चार वर्णों के बराबर होता है.
-100 टोकन, अंग्रेज़ी के करीब 60 से 80 शब्दों के बराबर होते हैं.**
+**بالنسبة إلى نماذج Gemini، يعادل الرمز المميّز 4 أحرف تقريبًا.
+ويعادل 100 رمز مميّز من 60 إلى 80 كلمة باللغة الإنجليزية تقريبًا.**
 
-## टोकन के बारे में जानकारी
+## لمحة عن الرموز المميّزة
 
-टोकन, `z` जैसे सिंगल वर्ण या `cat` जैसे पूरे शब्द हो सकते हैं. लंबे शब्दों को कई टोकन में बांटा जाता है. मॉडल के इस्तेमाल किए जाने वाले सभी टोकन के सेट को शब्दावली कहा जाता है. वहीं, टेक्स्ट को टोकन में बांटने की प्रोसेस को *टोकनाइज़ेशन* कहा जाता है.
+يمكن أن تكون الرموز المميّزة أحرفًا مفردة، مثل `z`، أو كلمات كاملة، مثل `cat`. ويتم تقسيم الكلمات الطويلة إلى عدة رموز مميّزة. تُعرف مجموعة جميع الرموز المميّزة التي يستخدمها النموذج باسم المفردات، وتُعرف عملية تقسيم النص إلى رموز مميّزة باسم *الترميز*.
 
-बिलिंग की सुविधा चालू होने पर, [Gemini API को कॉल करने की लागत](https://ai.google.dev/pricing?hl=hi) इनपुट और आउटपुट टोकन की संख्या के आधार पर तय की जाती है. इसलिए, टोकन की संख्या गिनने का तरीका जानना मददगार साबित हो सकता है.
+عند تفعيل الفوترة، يتم تحديد [تكلفة طلب البيانات من Gemini API](https://ai.google.dev/pricing?hl=ar) جزئيًا حسب عدد الرموز المميّزة للإدخال والإخراج، لذا قد يكون من المفيد معرفة كيفية
+عدّ الرموز المميّزة.
 
-## टोकन की संख्या गिनना
+## عدّ الرموز المميّزة
 
-Gemini API के सभी इनपुट और आउटपुट को टोकनाइज़ किया जाता है. इनमें टेक्स्ट, इमेज फ़ाइलें, और टेक्स्ट के अलावा अन्य मोडैलिटी शामिल हैं.
+يتم ترميز جميع الإدخالات والإخراجات من Gemini API، بما في ذلك النصوص وملفات الصور والوسائط الأخرى غير النصية.
 
-टोकन की संख्या इन तरीकों से गिनी जा सकती है:
+يمكنك عدّ الرموز المميّزة بالطرق التالية:
 
-- **अनुरोध के इनपुट के साथ `count_tokens` को कॉल करें.** इससे, *सिर्फ़ इनपुट* में मौजूद टोकन की कुल संख्या मिलती है. अनुरोधों का साइज़ देखने के लिए, इनपुट भेजने से पहले यह कॉल करें.
-- **इंटरैक्शन के जवाब में, `usage` का इस्तेमाल करें.** इससे, इनपुट (`total_input_tokens`), आउटपुट (`total_output_tokens`), थिंकिंग (`total_thought_tokens`), कैश मेमोरी में सेव किए गए कॉन्टेंट (`total_cached_tokens`), टूल के इस्तेमाल (`total_tool_use_tokens`), और कुल (`total_tokens`) के लिए टोकन की संख्या मिलती है.
+- **استدعاء `count_tokens` مع إدخال الطلب** تعرض هذه الدالة إجمالي عدد الرموز المميّزة في *الإدخال فقط*. يمكنك إجراء هذا الاستدعاء قبل إرسال الإدخال للتحقّق من حجم طلباتك.
+- **استخدام `usage` في استجابة التفاعل.** تعرض هذه الدالة أعداد الرموز المميّزة للإدخال (`total_input_tokens`) والإخراج (`total_output_tokens`) والتفكير (`total_thought_tokens`) والمحتوى المخزّن مؤقتًا (`total_cached_tokens`) واستخدام الأدوات (`total_tool_use_tokens`) والإجمالي (`total_tokens`).
 
-### टेक्स्ट टोकन की संख्या गिनना
+### عدّ الرموز المميّزة للنص
 
 ### Python
 
@@ -100,9 +101,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   -d '{"contents": [{"parts": [{"text": "The quick brown fox."}]}]}'
 ```
 
-### मल्टी-टर्न टोकन की संख्या गिनना
+### عدّ الرموز المميّزة للمحادثات المتعددة الأدوار
 
-`previous_interaction_id` का इस्तेमाल करके, बातचीत के इतिहास में मौजूद टोकन की संख्या गिनें:
+يمكنك عدّ الرموز المميّزة في سجلّ المحادثات باستخدام `previous_interaction_id`:
 
 ### Python
 
@@ -148,16 +149,16 @@ console.log(`Input tokens: ${interaction2.usage.total_input_tokens}`);
 console.log(`Output tokens: ${interaction2.usage.total_output_tokens}`);
 ```
 
-### मल्टीमॉडल टोकन की संख्या गिनना
+### عدّ الرموز المميّزة المتعددة الوسائط
 
-Gemini API के सभी इनपुट को टोकनाइज़ किया जाता है. इनमें इमेज, वीडियो, और ऑडियो शामिल हैं.
-टोकनाइज़ेशन के बारे में अहम बातें:
+يتم ترميز جميع الإدخالات إلى Gemini API، بما في ذلك الصور والفيديوهات والمحتوى الصوتي.
+في ما يلي نقاط أساسية حول الترميز:
 
-- **इमेज**: दोनों डाइमेंशन में ≤384 पिक्सल वाली इमेज को 258 टोकन के तौर पर गिना जाता है. बड़ी इमेज को 768x768 पिक्सल के टाइल में बांटा जाता है. हर टाइल को 258 टोकन के तौर पर गिना जाता है.
-- **वीडियो**: हर सेकंड के लिए 263 टोकन
-- **ऑडियो**: हर सेकंड के लिए 32 टोकन
+- **الصور**: يتم احتساب 258 رمزًا مميّزًا للصور التي يبلغ حجمها ‎384 × 384 بكسل أو أقل في كلا البُعدَين. ويتم تقسيم الصور الأكبر حجمًا إلى مربّعات بحجم ‎768 × 768 بكسل، ويتم احتساب 258 رمزًا مميّزًا لكل مربّع.
+- **الفيديوهات**: 263 رمزًا مميّزًا في الثانية
+- **المحتوى الصوتي**: 32 رمزًا مميّزًا في الثانية
 
-#### इमेज टोकन
+#### الرموز المميّزة للصور
 
 ### Python
 
@@ -203,7 +204,7 @@ const countResponse = await client.models.countTokens({
 console.log(countResponse.totalTokens);
 ```
 
-**इनलाइन डेटा का उदाहरण:**
+**مثال على البيانات المضمّنة:**
 
 ### Python
 
@@ -228,7 +229,7 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### वीडियो टोकन
+#### الرموز المميّزة للفيديوهات
 
 ### Python
 
@@ -261,7 +262,7 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### ऑडियो टोकन
+#### الرموز المميّزة للمحتوى الصوتي
 
 ### Python
 
@@ -287,9 +288,9 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-### सिस्टम के निर्देशों वाले टोकन की संख्या गिनना
+### عدّ الرموز المميّزة لتعليمات النظام
 
-सिस्टम के निर्देशों को, इनपुट टोकन के तौर पर गिना जाता है:
+يتم عدّ تعليمات النظام كجزء من الرموز المميّزة للإدخال:
 
 ### Python
 
@@ -305,9 +306,9 @@ interaction = client.interactions.create(
 print(f"Input tokens: {interaction.usage.total_input_tokens}")
 ```
 
-### टूल वाले टोकन की संख्या गिनना
+### عدّ الرموز المميّزة للأدوات
 
-टूल (फ़ंक्शन, कोड एक्ज़ीक्यूशन, Google Search) को भी गिना जाता है:
+يتم أيضًا عدّ الأدوات (الدوال وتنفيذ التعليمات البرمجية و"بحث Google"):
 
 ### Python
 
@@ -337,11 +338,11 @@ print(f"Input tokens: {interaction.usage.total_input_tokens}")
 print(f"Tool use tokens: {interaction.usage.total_tool_use_tokens}")
 ```
 
-## कॉन्टेक्स्ट विंडो
+## قدرة الاستيعاب
 
-हर Gemini मॉडल, टोकन की एक तय संख्या को ही प्रोसेस कर सकता है. कॉन्टेक्स्ट विंडो, इनपुट और आउटपुट टोकन की कुल सीमा तय करती है.
+لكل نموذج من نماذج Gemini عدد أقصى من الرموز المميّزة التي يمكنه معالجتها. وتحدّد قدرة الاستيعاب الحدّ المجمّع للرموز المميّزة للإدخال والإخراج.
 
-### प्रोग्राम के ज़रिए, कॉन्टेक्स्ट विंडो का साइज़ पाना
+### الحصول على حجم قدرة الاستيعاب آليًا
 
 ### Python
 
@@ -361,20 +362,20 @@ console.log(`Input token limit: ${modelInfo.inputTokenLimit}`);
 console.log(`Output token limit: ${modelInfo.outputTokenLimit}`);
 ```
 
-[मॉडल वाले पेज पर, कॉन्टेक्स्ट विंडो के साइज़ देखें.](https://ai.google.dev/gemini-api/docs/models?hl=hi)
+يمكنك الاطّلاع على أحجام قدرة الاستيعاب في صفحة [النماذج](https://ai.google.dev/gemini-api/docs/models?hl=ar).
 
-## आगे क्या करना है
+## الخطوات التالية
 
-- [टेक्स्ट जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=hi): जनरेट करने की बुनियादी बातें
-- [कैश मेमोरी में सेव करना](https://ai.google.dev/gemini-api/docs/interactions/caching?hl=hi): कैश मेमोरी में सेव करके लागत कम करना
-- [कीमत](https://ai.google.dev/gemini-api/docs/pricing?hl=hi): लागत के बारे में जानकारी
+- [إنشاء النص](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=ar): أساسيات الإنشاء
+- [التخزين المؤقت](https://ai.google.dev/gemini-api/docs/interactions/caching?hl=ar): خفض التكاليف باستخدام التخزين المؤقت
+- [التسعير](https://ai.google.dev/gemini-api/docs/pricing?hl=ar): التعرّف على التكاليف
 
-सुझाव भेजें
+إرسال ملاحظات
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-आखिरी बार 2026-05-28 (UTC) को अपडेट किया गया.
+تاريخ التعديل الأخير: 2026-06-01 (حسب التوقيت العالمي المتفَّق عليه)
 
-क्या आपको हमें और कुछ बताना है?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-05-28 (UTC) को अपडेट किया गया."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-01 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

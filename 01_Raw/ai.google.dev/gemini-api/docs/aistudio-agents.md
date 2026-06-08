@@ -1,139 +1,139 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=es-419
-fetched_at: 2026-06-01T06:05:56.335582+00:00
-title: "Agentes en AI Studio Playground \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=hi
+fetched_at: 2026-06-08T05:28:40.131109+00:00
+title: "AI Studio Playground \u092e\u0947\u0902 \u090f\u091c\u0947\u0902\u091f \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
+[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Enviar comentarios
+सुझाव भेजें
 
-# Agentes en AI Studio Playground
+# AI Studio Playground में एजेंट
 
-Google AI Studio Playground proporciona una interfaz visual para crear prototipos y aprender a compilar agentes administrados sin tener que crear ni escribir llamadas a la API.
+Google AI Studio Playground, प्रोटोटाइप बनाने और यह जानने के लिए विज़ुअल इंटरफ़ेस उपलब्ध कराता है कि एपीआई कॉल बनाए और लिखे बिना मैनेज किए गए एजेंट कैसे बनाए जाते हैं.
 
-Para comenzar, navega a la pestaña **Playground** en el panel de navegación de Google AI Studio y cambia el botón de activación a **Agentes**.
+इसे इस्तेमाल करने के लिए, Google AI Studio के नेविगेशन पैनल में मौजूद **Playground** टैब पर जाएं. इसके बाद, टॉगल को **Agents** पर स्विच करें.
 
-## Plantillas prediseñadas
+## पहले से बने टेंप्लेट
 
-La pestaña **Agentes** tiene una serie de plantillas que preconfiguran el agente base de Antigravity estableciendo configuraciones de herramientas y entorno. Todas las plantillas son de código abierto y se publican en el repositorio [google-gemini/gemini-managed-agents-templates](https://github.com/google-gemini/gemini-managed-agents-templates/). Explorar estas plantillas es una excelente manera de aprender a crear y estructurar tu propio agente administrado.
+**एजेंट** टैब में टेंप्लेट की एक सीरीज़ होती है. ये टूल और एनवायरमेंट कॉन्फ़िगरेशन सेट करके, Antigravity एजेंट को पहले से कॉन्फ़िगर करते हैं. सभी टेंप्लेट ओपन-सोर्स हैं और इन्हें [google-gemini/gemini-managed-agents-templates](https://github.com/google-gemini/gemini-managed-agents-templates/) रिपॉज़िटरी में पब्लिश किया गया है. इन टेंप्लेट को एक्सप्लोर करके, मैनेज किए जाने वाले एजेंट को बनाने और उसे स्ट्रक्चर करने का तरीका आसानी से सीखा जा सकता है.
 
-Por ejemplo, cuando eliges la plantilla de IA Radio, se habilitan todas las herramientas permitidas y se vinculan un archivo `AGENTS.md` especializado y habilidades para la producción de programas de radio. Puedes ver estos parámetros de configuración en la IU de Playground en la sección **Environment**. Para ello, haz clic en el botón **Sources**.
+उदाहरण के लिए, एआई रेडियो टेंप्लेट चुनने पर, यह उन सभी टूल को चालू कर देता है जिनके इस्तेमाल की अनुमति है. साथ ही, यह रेडियो शो के प्रोडक्शन के लिए, खास `AGENTS.md` फ़ाइल और स्किल को लिंक करता है. **सोर्स** बटन पर क्लिक करके, **एनवायरमेंट** सेक्शन में जाकर, Playground के यूज़र इंटरफ़ेस (यूआई) पर इन सेटिंग को देखा जा सकता है.
 
-## Configuración de herramientas
+## टूल कॉन्फ़िगरेशन
 
-En la configuración del agente en Playground, puedes activar o desactivar el acceso a las siguientes herramientas integradas:
+Playground में एजेंट की सेटिंग में जाकर, इन बिल्ट-इन टूल के ऐक्सेस को टॉगल किया जा सकता है:
 
-- **Búsqueda de Google:** Accede a la Web abierta para fundamentar la información en tiempo real.
-- **Contexto de URL:** Recupera y analiza el contenido de texto de URLs de páginas web específicas.
-- **Ejecución de código:** Ejecuta comandos de Bash y Python directamente en el entorno aislado de zona de pruebas.
-- **Herramientas del sistema de archivos:** Lee, escribe, enumera y borra archivos dentro del espacio de trabajo.
+- **Google Search:** रीयल-टाइम में जानकारी पाने के लिए, ओपन वेब को ऐक्सेस करें.
+- **यूआरएल का कॉन्टेक्स्ट:** किसी वेब पेज के यूआरएल के टेक्स्ट कॉन्टेंट को फ़ेच और पार्स करता है.
+- **कोड एक्ज़ीक्यूट करना:** अलग किए गए सैंडबॉक्स एनवायरमेंट में, सीधे तौर पर बैश और Python कमांड चलाएं.
+- **फ़ाइल सिस्टम टूल:** इससे वर्कस्पेस में मौजूद फ़ाइलों को पढ़ने, लिखने, सूची बनाने, और मिटाने का ऐक्सेस मिलता है.
 
-## Configuración del entorno
+## परिवेश का कॉन्फ़िगरेशन
 
-Los agentes administrados se ejecutan en una zona de pruebas de Linux efímera y segura (el entorno) que proporciona el espacio de trabajo y las herramientas que necesitan para operar. Para obtener más información, consulta la guía del [entorno de agente administrado](https://ai.google.dev/gemini-api/docs/agent-environment?hl=es-419).
+मैनेज किए गए एजेंट, सुरक्षित और कुछ समय के लिए उपलब्ध Linux सैंडबॉक्स (एनवायरमेंट) में काम करते हैं. यह सैंडबॉक्स, उन्हें काम करने के लिए ज़रूरी वर्कस्पेस और टूल उपलब्ध कराता है. ज़्यादा जानने के लिए, [मैनेज किए गए एजेंट एनवायरमेंट](https://ai.google.dev/gemini-api/docs/agent-environment?hl=hi) गाइड देखें.
 
-### Cómo controlar el comportamiento del agente
+### एजेंट के व्यवहार को कंट्रोल करना
 
-El comportamiento, la personalidad y las capacidades del agente se determinan principalmente por los archivos presentes en su entorno. El agente detecta y carga automáticamente la configuración desde una carpeta `.agents` especial:
+एजेंट का व्यवहार, पर्सोना, और क्षमताएं मुख्य रूप से उसके एनवायरमेंट में मौजूद फ़ाइलों से तय होती हैं. एजेंट, `.agents` फ़ोल्डर से कॉन्फ़िगरेशन का अपने-आप पता लगाता है और उन्हें लोड करता है:
 
-- **`AGENTS.md`**: Se carga previamente en el contexto del agente para definir las instrucciones y la personalidad del sistema.
-- **`SKILL.md`**: Se encuentra en las carpetas de habilidades respectivas (p.ej., `.agents/skills/my-skill/SKILL.md`) para definir capacidades y flujos de trabajo específicos.
+- **`AGENTS.md`**: सिस्टम के निर्देशों और पर्सोना को तय करने के लिए, एजेंट के कॉन्टेक्स्ट में पहले से लोड किया गया.
+- **`SKILL.md`**: ये अलग-अलग स्किल फ़ोल्डर (जैसे, `.agents/skills/my-skill/SKILL.md`) में मौजूद होते हैं. इनका इस्तेमाल, खास क्षमताओं और वर्कफ़्लो को तय करने के लिए किया जाता है.
 
-### Aprovisiona el entorno
+### एनवायरमेंट को चालू करना
 
-Puedes configurar el entorno que usará el agente. Para ello, debes activar archivos en el entorno antes de iniciar una sesión. Puedes compilar un entorno nuevo con la incorporación de fuentes o restablecer uno anterior:
+सेशन शुरू करने से पहले, एनवायरमेंट में फ़ाइलें माउंट करके, एजेंट के इस्तेमाल के लिए एनवायरमेंट को कॉन्फ़िगर किया जा सकता है. सोर्स माउंट करके नया एनवायरमेंट बनाया जा सकता है या पिछले एनवायरमेंट को वापस लाया जा सकता है:
 
-- **Para crear un entorno nuevo**, haz clic en **Agregar fuentes** en el panel Configuración del entorno y elige entre los siguientes tipos de fuentes:
+- **नया एनवायरमेंट बनाने के लिए**, एनवायरमेंट की सेटिंग वाले पैनल में जाकर **सोर्स जोड़ें** पर क्लिक करें. इसके बाद, इनमें से कोई सोर्स टाइप चुनें:
 
-| Tipo de fuente | Descripción | Ruta de montaje |
+| स्रोत प्रकार | ब्यौरा | माउंट करने का पाथ |
 | --- | --- | --- |
-| **Archivos intercalados** | Escribe o pega archivos de configuración, conjuntos de datos simulados o secuencias de comandos de utilidad (hasta 100 KB) directamente en la IU de Playground. | Ruta de destino definida por el usuario (p. ej., `/workspace/scripts/parser.py`) |
-| **Google Cloud Storage** | Activar un bucket público o privado de Cloud Storage.  Los buckets privados requieren un token del portador OAuth 2.0 estándar. Para obtener más información, consulta [Fuentes privadas](https://ai.google.dev/gemini-api/docs/agent-environment?hl=es-419#private-sources). | Asigna una ruta de acceso a un bucket de GCS (p.ej., `gs://your-bucket-name/data/`) a un directorio de espacio de trabajo (p.ej., `/workspace/data/`). |
-| **Repositorios de GitHub** | Clona bases de código públicas o privadas.  Los repositorios privados requieren autenticación básica con tu token de acceso personal (PAT) de GitHub. Para obtener más información, consulta [Fuentes privadas](https://ai.google.dev/gemini-api/docs/agent-environment?hl=es-419#private-sources). | Se clonó directamente en `/workspace/` (por lo general, en `/workspace/<repo-name>`). |
+| **इनलाइन फ़ाइलें** | कॉन्फ़िगरेशन फ़ाइलें, मॉक डेटासेट या यूटिलिटी स्क्रिप्ट (100 केबी तक) सीधे तौर पर Playground के यूज़र इंटरफ़ेस (यूआई) में लिखें या चिपकाएं. | उपयोगकर्ता के तय किए गए डेस्टिनेशन का पाथ (उदाहरण के लिए, `/workspace/scripts/parser.py`). |
+| **Google Cloud Storage** | सार्वजनिक या निजी Cloud Storage बकेट को माउंट करें.  निजी बकेट के लिए, स्टैंडर्ड OAuth 2.0 Bearer टोकन की ज़रूरत होती है. ज़्यादा जानकारी के लिए, [निजी सोर्स](https://ai.google.dev/gemini-api/docs/agent-environment?hl=hi#private-sources) देखें. | यह GCS बकेट के पाथ (जैसे, `gs://your-bucket-name/data/`) को वर्कस्पेस डायरेक्ट्री (जैसे, `/workspace/data/`) से मैप करता है. |
+| **GitHub रिपॉज़िटरी** | सार्वजनिक या निजी कोडबेस क्लोन करें.  निजी रिपॉज़िटरी के लिए, GitHub Personal Access Token (PAT) के साथ बुनियादी पुष्टि की ज़रूरत होती है. ज़्यादा जानकारी के लिए, [निजी सोर्स](https://ai.google.dev/gemini-api/docs/agent-environment?hl=hi#private-sources) देखें. | सीधे `/workspace/` में क्लोन किया गया (आम तौर पर `/workspace/<repo-name>` से कम). |
 
-- **Para restablecer un entorno anterior**, puedes [reutilizar un ID de entorno existente](#reusing-an-existing-environment-id) para clonar y bifurcar su estado exacto.
+- **पिछले एनवायरमेंट को वापस लाने के लिए**, [किसी मौजूदा एनवायरमेंट आईडी का फिर से इस्तेमाल किया जा सकता है](#reusing-an-existing-environment-id). इससे, एनवायरमेंट की मौजूदा स्थिति को क्लोन और फ़ोर्क किया जा सकता है.
 
-### Cómo reutilizar un ID de entorno existente
+### किसी मौजूदा एनवायरमेंट आईडी का फिर से इस्तेमाल करना
 
-Si ya dedicaste tiempo a configurar un entorno de zona de pruebas, no tienes que comenzar desde cero. Para usar un entorno existente, haz lo siguiente:
+अगर आपने सैंडबॉक्स एनवायरमेंट को सेट अप करने में पहले ही समय लगा दिया है, तो आपको इसे फिर से सेट अप करने की ज़रूरत नहीं है. किसी मौजूदा एनवायरमेंट का इस्तेमाल करने के लिए:
 
-1. Ve al panel Environments en AI Studio y cambia **Type** a **Existing**.
-2. Ingresa el **ID del entorno** (p. ej., `env_abc123`).
+1. AI Studio में एनवायरमेंट पैनल पर जाएं और **टाइप** को टॉगल करके **मौजूदा** पर सेट करें
+2. **एनवायरमेंट आईडी** डालें (जैसे, `env_abc123`)
 
-Para obtener más información, consulta [Cómo configurar un entorno](https://ai.google.dev/gemini-api/docs/agent-environment?hl=es-419#configure-an-environment). También puedes recuperar el ID del entorno de la sesión actual en la pestaña Environment de la IU.
+ज़्यादा जानकारी के लिए, [एनवायरमेंट कॉन्फ़िगर करना](https://ai.google.dev/gemini-api/docs/agent-environment?hl=hi#configure-an-environment) लेख पढ़ें. यूज़र इंटरफ़ेस (यूआई) में मौजूद एनवायरमेंट टैब से, मौजूदा सेशन का एनवायरमेंट आईडी भी वापस पाया जा सकता है.
 
-Una vez que envíes tu primer mensaje al agente, la configuración del entorno se fijará para esa sesión. No puedes activar fuentes nuevas ni modificar la lista de entidades permitidas de la red mientras la interacción se esté ejecutando de forma activa.
+एजेंट को पहला मैसेज भेजने के बाद, उस सेशन के लिए एनवायरमेंट कॉन्फ़िगरेशन तय हो जाता है. इंटरैक्शन के चालू होने पर, नए सोर्स माउंट नहीं किए जा सकते. साथ ही, नेटवर्क की अनुमति वाली सूची में बदलाव नहीं किया जा सकता.
 
-## Descarga el entorno
+## एनवायरमेंट डाउनलोड करना
 
-Una vez que se crea un entorno, puedes descargar la instantánea del entorno en cualquier momento con el botón **Descargar** en la configuración del entorno de AI Studio Playground para recuperar los archivos del entorno como un archivo tar.
+एनवायरमेंट बनाने के बाद, AI Studio Playground की एनवायरमेंट सेटिंग में जाकर, **डाउनलोड करें** बटन का इस्तेमाल करके, एनवायरमेंट का स्नैपशॉट किसी भी समय डाउनलोड किया जा सकता है. इससे एनवायरमेंट की फ़ाइलों को टारबॉल के तौर पर वापस पाया जा सकता है.
 
-## Seguridad y administración de costos
+## सुरक्षा और लागत मैनेजमेंट
 
-### Administra el consumo de tokens
+### टोकन के इस्तेमाल को मैनेज करना
 
-A diferencia de una solicitud de chat estándar que produce un solo resultado, el agente de Antigravity ejecuta un flujo de trabajo autónomo. Planifica, ejecuta código, observa los resultados y realiza iteraciones. Esto significa que una sola instrucción puede generar un consumo ilimitado de tokens.
+स्टैंडर्ड चैट के अनुरोध में सिर्फ़ एक आउटपुट मिलता है. हालांकि, Antigravity Agent में अपने-आप काम करने वाला वर्कफ़्लो होता है. यह प्लान बनाता है, कोड चलाता है, नतीजों को देखता है, और दोहराता है. इसका मतलब है कि एक प्रॉम्प्ट से, टोकन का इस्तेमाल असीमित तौर पर किया जा सकता है.
 
-Para administrar los costos, **proporciona criterios de finalización claros en tus instrucciones y delimita las tareas del agente**. Un buen ejemplo podría ser una instrucción como
-*Revisa la solicitud de extracción y detente una vez que hayas generado el resumen en Markdown.
-No intentes escribir la corrección por tu cuenta*.
+लागत को मैनेज करने के लिए, **अपने प्रॉम्प्ट में टास्क खत्म करने की शर्तों के बारे में साफ़ तौर पर बताएं. साथ ही, एजेंट के लिए टास्क का दायरा सीमित रखें**. एक अच्छा उदाहरण इस तरह के प्रॉम्प्ट का हो सकता है
+*पुल के अनुरोध की समीक्षा करें और मार्कडाउन की खास जानकारी जनरेट करने के बाद रुक जाएं.
+खुद से ठीक करने की कोशिश न करें*.
 
-### Costos adicionales
+### अतिरिक्त लागत
 
-De forma predeterminada, todas las plantillas de agentes en Playground tienen acceso al servicio de la API de Gemini y pueden realizar llamadas a la API desde el entorno para satisfacer las solicitudes. Es posible que se generen costos adicionales que no se reflejarán en el consumo de tokens.
+डिफ़ॉल्ट रूप से, Playground पर मौजूद सभी एजेंट टेंप्लेट के पास Gemini API सेवा का ऐक्सेस होता है. साथ ही, वे अनुरोधों को पूरा करने के लिए, एनवायरमेंट से एपीआई कॉल कर सकते हैं. इनसे अतिरिक्त लागत लग सकती है, जो टोकन के इस्तेमाल में नहीं दिखेगी.
 
-Del mismo modo, si agregas otros servicios externos, es posible que el agente incurra en costos adicionales por llamar a estos servicios en tu nombre.
+इसी तरह, अगर आपने अन्य बाहरी सेवाएं जोड़ी हैं, तो एजेंट आपकी ओर से इन सेवाओं को कॉल करके अतिरिक्त शुल्क ले सकता है.
 
-### Lista de entidades permitidas de la red
+### नेटवर्क की अनुमति वाली सूची
 
-De forma predeterminada, en AI Studio, todas las solicitudes de red salientes desde el entorno de zona de pruebas de tu agente se controlan y restringen estrictamente para garantizar la seguridad. Para otorgarle a tu agente la capacidad de acceder a APIs externas, servicios web o administradores de paquetes, debes declararlos de forma explícita:
+डिफ़ॉल्ट रूप से, AI Studio में आपके एजेंट के सैंडबॉक्स एनवायरमेंट से किए जाने वाले सभी आउटबाउंड नेटवर्क अनुरोधों को पूरी तरह से कंट्रोल किया जाता है. साथ ही, सुरक्षा को पक्का करने के लिए इन पर पाबंदी लगाई जाती है. अपने एजेंट को बाहरी एपीआई, वेब सेवाओं या पैकेज मैनेजर तक पहुंचने की अनुमति देने के लिए, आपको उन्हें साफ़ तौर पर यह जानकारी देनी होगी:
 
-1. Ve al panel Entornos en AI Studio.
-2. Selecciona el botón **rules** junto a **Network**.
-3. En el panel **Configuración de red**, haz clic en **Agregar a la lista de entidades permitidas** y completa los detalles pertinentes:
-   - **Restricción de dominio:** Solo se puede acceder a los dominios específicos o los patrones de comodín que se agregaron a la lista desde la máquina virtual del agente. Por ejemplo, puedes ingresar dominios exactos, como `api.github.com`, o patrones amplios, como `*.googleapis.com`.
-   - **Agrega encabezados HTTP y la inserción de tokens:** Usa la opción **Agregar encabezado HTTP** para insertar de forma segura las credenciales requeridas (como un token de API) para un dominio específico. Estas credenciales pasan de forma segura a través de un proxy de salida y nunca se exponen directamente como texto sin formato dentro de la zona de pruebas del agente.
+1. AI Studio में, Environments पैनल पर जाएं.
+2. **नेटवर्क** के बगल में मौजूद, **नियम** बटन को चुनें.
+3. **नेटवर्क कॉन्फ़िगरेशन** पैनल में, **अनुमति वाली सूची में जोड़ें** पर क्लिक करें और ज़रूरी जानकारी भरें:
+   - **डोमेन से जुड़ी पाबंदी:** सूची में जोड़े गए सिर्फ़ कुछ डोमेन या वाइल्डकार्ड पैटर्न को एजेंट की वर्चुअल मशीन से ऐक्सेस किया जा सकता है. उदाहरण के लिए, `api.github.com` जैसे सटीक डोमेन या `*.googleapis.com` जैसे ब्रॉड पैटर्न डाले जा सकते हैं.
+   - **एचटीटीपी हेडर और टोकन इंजेक्ट करना:** किसी खास डोमेन के लिए ज़रूरी क्रेडेंशियल (जैसे, एपीआई टोकन) को सुरक्षित तरीके से इंजेक्ट करने के लिए, **एचटीटीपी हेडर जोड़ें** विकल्प का इस्तेमाल करें. ये क्रेडेंशियल, इग्रेस प्रॉक्सी के ज़रिए सुरक्षित तरीके से पास किए जाते हैं. साथ ही, इन्हें एजेंट सैंडबॉक्स में कभी भी सीधे तौर पर रॉ टेक्स्ट के तौर पर नहीं दिखाया जाता.
 
-Siempre ten cuidado cuando agregues dominios a tu lista de entidades permitidas. Si le otorgas acceso a servicios autenticados, el agente podrá actuar en tu nombre, lo que podría generar acciones no deseadas si no se supervisa con cuidado.
+अनुमति वाली सूची में डोमेन जोड़ते समय, हमेशा सावधानी बरतें. एजेंट को पुष्टि की गई सेवाओं का ऐक्सेस देने का मतलब है कि वह आपकी ओर से कार्रवाई कर सकता है. अगर इस पर ध्यान नहीं दिया जाता है, तो इससे ऐसी कार्रवाइयां हो सकती हैं जो आपके हिसाब से न हों.
 
-### Prácticas recomendadas para las credenciales
+### क्रेडेंशियल से जुड़े सबसे सही तरीके
 
-Si tu flujo de trabajo requiere que el agente se autentique con servicios externos, eres responsable de aprovisionar y definir el alcance de esas credenciales. Sigue estos lineamientos para reducir el riesgo:
+अगर आपके वर्कफ़्लो में एजेंट को बाहरी सेवाओं के साथ पुष्टि करने की ज़रूरत होती है, तो उन क्रेडेंशियल को उपलब्ध कराने और उनका दायरा तय करने की ज़िम्मेदारी आपकी होती है. जोखिम कम करने के लिए, इन दिशा-निर्देशों का पालन करें:
 
-- **Usa credenciales con privilegios mínimos:** Crea cuentas de servicio o claves de API con solo los permisos que necesita tu agente. Evita pasar credenciales con acceso amplio o administrativo.
-- **Prefiere los tokens de corta duración:** Cuando sea posible, usa credenciales o tokens con límite de tiempo que vencen en lugar de claves de API de larga duración.
-- **Asume acceso completo:** El agente puede usar cualquier credencial a la que tenga acceso para completar la tarea que le asignaste. Solo proporciona credenciales cuyo alcance completo de acceso estés dispuesto a otorgar.
-- **Rota las credenciales con regularidad:** Trata las credenciales compartidas con el agente de la misma manera en que tratarías cualquier credencial programática; rótalas de forma regular.
+- **कम से कम विशेषाधिकार वाले क्रेडेंशियल का इस्तेमाल करें:** ऐसे सेवा खाते या एपीआई कुंजियां बनाएं जिनमें सिर्फ़ वे अनुमतियां हों जिनकी आपके एजेंट को ज़रूरत है. ऐसे क्रेडेंशियल पास न करें जिनमें एडमिन या ब्रॉड ऐक्सेस हो.
+- **कम समय के लिए मान्य टोकन का इस्तेमाल करें:** जहां भी मुमकिन हो, वहां समयसीमा वाले क्रेडेंशियल या ऐसे टोकन का इस्तेमाल करें जो लंबे समय तक मान्य रहने वाले एपीआई पासकोड के बजाय खत्म हो जाते हैं.
+- **पूरा ऐक्सेस मान लें:** एजेंट, आपको दिए गए टास्क को पूरा करने के लिए, उन सभी क्रेडेंशियल का इस्तेमाल कर सकता है जिनका ऐक्सेस उसके पास है. सिर्फ़ उन क्रेडेंशियल को शेयर करें जिनका पूरा ऐक्सेस आपको देना है.
+- **क्रेडेंशियल को नियमित तौर पर बदलें:** एजेंट के साथ शेयर किए गए क्रेडेंशियल को उसी तरह से मैनेज करें जिस तरह से प्रोग्राम के हिसाब से मैनेज किए जाने वाले क्रेडेंशियल को मैनेज किया जाता है. साथ ही, उन्हें नियमित तौर पर बदलें.
 
-### Conexión de APIs y herramientas externas
+### बाहरी टूल और एपीआई कनेक्ट करना
 
-Puedes conectar herramientas y APIs externas (como los servidores del Protocolo de contexto del modelo o MCP) para ampliar las capacidades del agente. Cuando lo hagas, ten en cuenta lo siguiente:
+एजेंट की क्षमताओं को बढ़ाने के लिए, बाहरी टूल और एपीआई (जैसे, मॉडल कॉन्टेक्स्ट प्रोटोकॉल / एमसीपी सर्वर) कनेक्ट किए जा सकते हैं. ऐसा करते समय:
 
-- Solo conecta herramientas de fuentes confiables. Una herramienta maliciosa o mal escrita podría exponer datos o realizar acciones no deseadas.
-- Configura las herramientas con los permisos mínimos necesarios para tu caso de uso. Si una herramienta admite el modo de solo lectura, úsalo, a menos que las escrituras sean estrictamente necesarias.
-- Antes de conectar una herramienta a una fuente de datos de producción, pruébala con datos de muestra o sintéticos para verificar que el agente la use según lo previsto.
+- सिर्फ़ भरोसेमंद सोर्स से मिलने वाले टूल कनेक्ट करें. बुरे मकसद से बनाया गया या खराब तरीके से लिखा गया टूल, डेटा को सार्वजनिक कर सकता है या अनचाहे काम कर सकता है.
+- अपने इस्तेमाल के उदाहरण के हिसाब से, ज़रूरी अनुमतियों वाले टूल कॉन्फ़िगर करें. अगर कोई टूल सिर्फ़ पढ़ने के लिए मोड को सपोर्ट करता है, तो उसका इस्तेमाल करें. ऐसा तब तक करें, जब तक कि लिखना बहुत ज़रूरी न हो.
+- किसी टूल को प्रोडक्शन डेटा सोर्स से कनेक्ट करने से पहले, उसे सैंपल या सिंथेटिक डेटा के साथ टेस्ट करें. इससे यह पुष्टि की जा सकेगी कि एजेंट इसका इस्तेमाल उम्मीद के मुताबिक कर रहा है.
 
-### Supervisión humana
+### इंसानों की निगरानी
 
-Los agentes pueden razonar, planificar y ejecutar flujos de trabajo de varios pasos con un alto grado de autonomía. Si bien esto es potente, también significa que debes aplicar una supervisión adecuada, en especial para las tareas que modifican datos o interactúan con sistemas externos.
+एजेंट, कई चरणों वाले वर्कफ़्लो के बारे में सोच सकते हैं, प्लान बना सकते हैं, और उन्हें लागू कर सकते हैं. इसके लिए, उन्हें किसी और की मदद की ज़रूरत नहीं होती. यह सुविधा बहुत काम की है. हालांकि, इसका मतलब यह भी है कि आपको इस पर नज़र रखनी चाहिए. खास तौर पर, उन टास्क के लिए जो डेटा में बदलाव करते हैं या बाहरी सिस्टम के साथ इंटरैक्ट करते हैं.
 
-Siempre verifica los resultados críticos, como el código generado, las transformaciones de datos o los cambios de configuración, antes de implementarlos.
+जनरेट किए गए कोड, डेटा ट्रांसफ़ॉर्मेशन या कॉन्फ़िगरेशन में किए गए बदलाव जैसे अहम आउटपुट को डिप्लॉय करने से पहले, हमेशा उनकी पुष्टि करें.
 
-Enviar comentarios
+सुझाव भेजें
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Última actualización: 2026-05-20 (UTC)
+आखिरी बार 2026-05-20 (UTC) को अपडेट किया गया.
 
-¿Quieres brindar más información?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-05-20 (UTC)"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-05-20 (UTC) को अपडेट किया गया."],[],[]]

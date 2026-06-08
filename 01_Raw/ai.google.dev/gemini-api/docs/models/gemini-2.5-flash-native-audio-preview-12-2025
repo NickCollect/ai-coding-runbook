@@ -1,49 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=pl
-fetched_at: 2026-06-01T06:04:20.544338+00:00
-title: "Podgl\u0105d na \u017cywo Gemini\u00a02.5 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=ja
+fetched_at: 2026-06-08T05:35:18.007137+00:00
+title: "Gemini 2.5 Flash \u30e9\u30a4\u30d6 \u30d7\u30ec\u30d3\u30e5\u30fc \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Prześlij opinię
+フィードバックを送信
 
-# Podgląd na żywo Gemini 2.5 Flash
+# Gemini 2.5 Flash ライブ プレビュー
 
-Interfejs Live API umożliwia interakcje głosowe i wideo w czasie rzeczywistym z niewielkimi opóźnieniami dzięki Gemini 2.5 Flash. Przetwarza on ciągłe strumienie audio, wideo lub tekstu, aby dostarczać natychmiastowe odpowiedzi głosowe przypominające ludzką mowę, co zapewnia użytkownikom naturalny tryb konwersacyjny.
+Live API を使用すると、Gemini 2.5 Flash と音声と動画によるやり取りを低レイテンシかつリアルタイムで行うことができます。音声、動画、テキストの連続ストリームを処理して、人間のような音声による応答を即座に提供し、ユーザーに自然な会話機能を提供します。
 
-[Wypróbuj w Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-native-audio-preview-12-2025&hl=pl)
+[Google AI Studio で試す](https://aistudio.google.com?model=gemini-2.5-flash-native-audio-preview-12-2025&hl=ja)
 
-## Dokumentacja
+## ドキュメント
 
-Więcej informacji o funkcjach i możliwościach znajdziesz w przewodniku po interfejsie [Live API](https://ai.google.dev/gemini-api/docs/live?hl=pl).
+機能の詳細については、[Live API](https://ai.google.dev/gemini-api/docs/live?hl=ja) ガイドをご覧ください。
 
 ## gemini-2.5-flash-native-audio-preview-12-2025
 
-| Właściwość | Opis |
+| プロパティ | 説明 |
 | --- | --- |
-| id\_cardKod modelu | `gemini-2.5-flash-native-audio-preview-12-2025` |
-| saveObsługiwane typy danych | **Dane wejściowe**  Audio, wideo, tekst  **Dane wyjściowe**  Audio i tekst |
-| token\_autoLimity tokenów[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | **Limit tokenów wejściowych**  131 072  **Limit tokenów wyjściowych**  8192 |
-| handymanMożliwości | **Generowanie dźwięku**  Obsługiwane  **Interfejs Batch API**  Nieobsługiwane  **Zapisywanie w pamięci podręcznej**  Nieobsługiwane  **Wykonywanie kodu**  Nieobsługiwane  **Wyszukiwanie plików**  Nieobsługiwane  **Wywoływanie funkcji**  Obsługiwane  **Powiązanie ze źródłem informacji przy użyciu Map Google**  Nieobsługiwane  **Generowanie obrazów**  Nieobsługiwane  **Interfejs Live API**  Obsługiwane  **Szukaj groundingu**  Obsługiwane  **Ustrukturyzowane dane wyjściowe**  Nieobsługiwane  **Myślę**  Obsługiwane  **Kontekst adresu URL**  Nieobsługiwane |
-| 123Wersje | Więcej informacji znajdziesz w artykule [Wzorce wersji modelu](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#model-versions).  - Wersja testowa: `gemini-2.5-flash-native-audio-preview-12-2025` |
-| calendar\_monthNajnowsza aktualizacja | Wrzesień 2025 r. |
-| cognition\_2Granica wiedzy | Styczeń 2025 r. |
+| id\_cardモデルコード | `gemini-2.5-flash-native-audio-preview-12-2025` |
+| saveサポートされているデータ型 | **入力**  音声、動画、テキスト  **出力**  音声とテキスト |
+| token\_autoトークン上限[[\*](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)] | **入力トークンの上限**  131,072  **出力トークンの上限**  8,192 |
+| handyman機能 | **音声生成**  サポート対象  **Batch API**  サポート対象外  **キャッシュ保存**  サポート対象外  **コードの実行**  サポート対象外  **ファイル検索**  サポート対象外  **関数呼び出し**  サポート対象  **Google マップによるグラウンディング**  サポート対象外  **画像生成**  サポート対象外  **Live API**  サポート対象  **検索によるグラウンディング**  サポート対象  **構造化出力**  サポート対象外  **思考モード**  サポート対象  **URL コンテキスト**  サポート対象外 |
+| 123バージョン | 詳細については、[モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja#model-versions)をご覧ください。  - プレビュー: `gemini-2.5-flash-native-audio-preview-12-2025` |
+| calendar\_month最新の更新 | 2025 年 9 月 |
+| cognition\_2ナレッジ カットオフ | 2025 年 1 月 |
 
-Prześlij opinię
+フィードバックを送信
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Ostatnia aktualizacja: 2026-04-29 UTC.
+最終更新日 2026-04-29 UTC。
 
-Chcesz przekazać coś jeszcze?
+ご意見をお聞かせください
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]

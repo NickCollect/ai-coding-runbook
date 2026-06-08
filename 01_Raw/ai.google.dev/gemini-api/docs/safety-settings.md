@@ -1,107 +1,112 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/safety-settings?hl=he
-fetched_at: 2026-06-01T05:59:59.888125+00:00
-title: "\u05d4\u05d2\u05d3\u05e8\u05d5\u05ea \u05d1\u05d8\u05d9\u05d7\u05d5\u05ea \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/safety-settings?hl=es-419
+fetched_at: 2026-06-08T05:33:52.987322+00:00
+title: "Configuraci\u00f3n de seguridad \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-שליחת משוב
+Enviar comentarios
 
-# הגדרות בטיחות
+# Configuración de seguridad
 
-ממשק Gemini API מספק הגדרות בטיחות שאפשר לשנות בשלב יצירת אב טיפוס, כדי לקבוע אם האפליקציה דורשת הגדרת בטיחות מגבילה יותר או פחות. אתם יכולים לשנות את ההגדרות האלה בארבע קטגוריות של מסננים כדי להגביל סוגים מסוימים של תוכן או לאפשר אותם.
+La API de Gemini proporciona parámetros de seguridad que puedes ajustar durante la fase de creación de prototipos para determinar si tu aplicación requiere una configuración de seguridad más o menos restrictiva. Puedes ajustar estos parámetros en cuatro categorías de filtros para restringir o permitir ciertos tipos de contenido.
 
-במדריך הזה מוסבר איך Gemini API מטפל בהגדרות בטיחות ובסינון, ואיך אפשר לשנות את הגדרות הבטיחות של האפליקציה.
+En esta guía, se explica cómo la API de Gemini controla los parámetros de seguridad y el filtrado, y cómo puedes cambiar los parámetros de seguridad de tu aplicación.
 
-## מסנני בטיחות
+## Filtros de seguridad
 
-מסנני הבטיחות המתכווננים של Gemini API מכסים את הקטגוריות הבאות:
+Los filtros de seguridad ajustables de la API de Gemini abarcan las siguientes categorías:
 
-| קטגוריה | תיאור |
+| Categoría | Descripción |
 | --- | --- |
-| הטרדה | תגובות שליליות או פוגעניות שמכוונות לזהות ו/או למאפיינים מוגנים. |
-| דברי שטנה | תוכן גס, לא מכבד או חילול קודש. |
-| תוכן מיני בוטה | מכיל התייחסויות למעשים מיניים או לתוכן מגונה אחר. |
-| תוכן מסוכן | מקדם גרימת נזק, מעודד גרימת נזק או עוזר לבצע פעולות מזיקות. |
+| Hostigamiento | Comentarios negativos o dañinos dirigidos a la identidad o a los atributos protegidos |
+| Incitación al odio o a la violencia | Contenido obsceno, grosero o irrespetuoso. |
+| Contenido sexualmente explícito | Referencias a actos sexuales o a otro contenido obsceno. |
+| Peligroso | Contenido que promueve, facilita o incita actos dañinos. |
 
-הקטגוריות האלה מוגדרות ב[`HarmCategory`](https://ai.google.dev/api/rest/v1/HarmCategory?hl=he). אפשר להשתמש במסננים האלה כדי להתאים את התוצאות למקרה השימוש שלכם. לדוגמה, אם אתם יוצרים דיאלוג למשחק וידאו, יכול להיות שתחליטו לאפשר יותר תוכן שסווג כ*מסוכן* בגלל אופי המשחק.
+Estas categorías se definen en [`HarmCategory`](https://ai.google.dev/api/rest/v1/HarmCategory?hl=es-419). Puedes usar estos filtros para ajustar lo que sea apropiado para tu caso de uso. Por ejemplo, si estás creando diálogos de videojuegos, puedes considerar aceptable permitir más contenido clasificado como *peligroso* debido a la naturaleza del juego.
 
-בנוסף למסנני הבטיחות שניתנים להתאמה, ל-Gemini API יש אמצעי הגנה מובנים מפני נזקים מהותיים, כמו תוכן שמסכן את בטיחות הילדים.
-סוגי הנזק האלה תמיד נחסמים ואי אפשר לשנות את זה.
+Además de los filtros de seguridad ajustables, la API de Gemini tiene protecciones integradas contra daños fundamentales, como el contenido que pone en peligro la seguridad de los niños.
+Estos tipos de daño siempre se bloquean y no se pueden ajustar.
 
-### רמת הסינון של בטיחות התוכן
+### Nivel de filtrado de seguridad del contenido
 
-‫Gemini API מסווג את רמת ההסתברות לכך שהתוכן לא בטוח כ-`HIGH`, `MEDIUM`, `LOW` או `NEGLIGIBLE`.
+La API de Gemini categoriza el nivel de probabilidad de que el contenido sea inseguro como `HIGH`, `MEDIUM`, `LOW` o `NEGLIGIBLE`.
 
-‫Gemini API חוסם תוכן על סמך הסבירות שהתוכן לא בטוח, ולא על סמך חומרת הבעיה. חשוב לקחת את זה בחשבון כי יש תכנים שהסיכוי שהם לא בטוחים הוא נמוך, אבל חומרת הנזק שעלולה להיגרם מהם עדיין גבוהה. לדוגמה, אם משווים בין המשפטים:
+La API de Gemini bloquea el contenido en función de la probabilidad de que el contenido sea inseguro y no la gravedad. Es importante saber esto porque algunos contenidos pueden tener una baja probabilidad de ser inseguros, aunque la gravedad del daño pueda seguir siendo alta. Por ejemplo, comparemos las siguientes oraciones:
 
-1. הרובוט נתן לי אגרוף.
-2. הרובוט חתך אותי.
+1. El robot me golpeó.
+2. El robot me acuchilló.
 
-המשפט הראשון עלול להוביל לסבירות גבוהה יותר של תוצאה לא בטוחה, אבל יכול להיות שהמשפט השני ייחשב לחמור יותר מבחינת אלימות.
-לכן, חשוב לבדוק בקפידה ולשקול מהי רמת החסימה המתאימה שנדרשת כדי לתמוך בתרחישי השימוש העיקריים שלכם, תוך מזעור הפגיעה במשתמשי הקצה.
+La primera oración puede tener una mayor probabilidad de que sea contenido no seguro, pero podrías considerar que la segunda oración es de mayor gravedad en términos de violencia.
+Ahora que entendemos esto, es importante que pruebes y consideres con cuidado cuál es el nivel adecuado de bloqueo necesario para apoyar tus casos de uso clave, para así minimizar al mismo tiempo el daño a los usuarios finales.
 
-### סינון בטיחות לכל בקשה
+### Filtrado de seguridad por solicitud
 
-אתם יכולים לשנות את הגדרות הבטיחות לכל בקשה שאתם שולחים ל-API. כששולחים בקשה, התוכן נותח ומוקצה לו סיווג בטיחות. דירוג הבטיחות כולל את הקטגוריה ואת הסיווג של הסבירות לפגיעה. לדוגמה, אם התוכן נחסם כי הסבירות שהוא משתייך לקטגוריית ההטרדה גבוהה, דירוג הבטיחות שיוחזר יהיה עם קטגוריה ששווה ל-`HARASSMENT` וסבירות לפגיעה שמוגדרת כ-`HIGH`.
+Puedes ajustar los parámetros de seguridad para cada solicitud que realices a la API. Cuando haces una solicitud, el contenido se analiza y se le asigna una calificación de seguridad. La calificación de seguridad incluye la categoría y la probabilidad de la clasificación del daño. Por ejemplo, si el contenido se bloqueó debido a que la categoría de hostigamiento tenía una alta probabilidad, la calificación de seguridad que se muestra tendría una categoría igual a `HARASSMENT` y la probabilidad de daño establecida en `HIGH`.
 
-בגלל הבטיחות המובנית של המודל, מסננים נוספים **מושבתים** כברירת מחדל.
-אם תבחרו להפעיל אותן, תוכלו להגדיר את המערכת לחסימת תוכן על סמך הסבירות שהוא לא בטוח. התנהגות ברירת המחדל של המודל מתאימה לרוב תרחישי השימוש, ולכן כדאי לשנות את ההגדרות האלה רק אם נדרשת עקביות באפליקציה.
+Debido a la seguridad inherente del modelo, los filtros adicionales están **desactivados** de forma predeterminada.
+Si eliges habilitarlos, puedes configurar el sistema para que bloquee el contenido en función de su probabilidad de ser inseguro. El comportamiento predeterminado del modelo abarca la mayoría de los casos de uso, por lo que solo debes ajustar estos parámetros si es necesario para tu aplicación.
 
-בטבלה הבאה מתוארות הגדרות החסימה שאפשר לשנות לכל קטגוריה. לדוגמה, אם מגדירים את הגדרת החסימה ל**חסימה של חלק מהתוכן** בקטגוריה **דברי שטנה**, כל מה שיש לו סיכוי גבוה להיות תוכן של דברי שטנה ייחסם. אבל מותר להשתמש בכל ערך עם הסתברות נמוכה יותר.
+En la siguiente tabla, se describe la configuración de bloqueo que puedes ajustar para cada categoría. Por ejemplo, si estableces la configuración de bloqueo en **Bloquear poco** para la categoría de **incitación al odio o a la violencia**, se bloqueará todo lo que tenga una alta probabilidad de ser contenido de incitación al odio o a la violencia. Pero se permite cualquier cosa con una probabilidad menor.
 
-| סף (Google AI Studio) | סף (API) | תיאור |
+| Umbral (Google AI Studio) | Umbral (API) | Descripción |
 | --- | --- | --- |
-| מושבת | `OFF` | השבתת מסנן הבטיחות |
-| לא לחסום אף אחד | `BLOCK_NONE` | הצגה תמיד, ללא קשר להסתברות של תוכן לא בטוח |
-| חסימה של כמה אנשים | `BLOCK_ONLY_HIGH` | חסימה כשיש סבירות גבוהה לתוכן לא בטוח |
-| חסימת חלק מהמשתמשים | `BLOCK_MEDIUM_AND_ABOVE` | חסימה כשיש הסתברות בינונית או גבוהה לתוכן לא בטוח |
-| חסימה של רוב האנשים | `BLOCK_LOW_AND_ABOVE` | חסימה כשההסתברות לתוכן לא בטוח נמוכה, בינונית או גבוהה |
-| לא רלוונטי | `HARM_BLOCK_THRESHOLD_UNSPECIFIED` | לא צוין סף, חסימה באמצעות סף ברירת המחדל |
+| Desactivado | `OFF` | Desactiva el filtro de seguridad. |
+| No bloquear | `BLOCK_NONE` | Mostrar siempre sin importar la probabilidad de que sea contenido no seguro. |
+| Bloquear poco | `BLOCK_ONLY_HIGH` | Bloquear cuando haya una alta probabilidad de que sea contenido no seguro. |
+| Bloquear algunos | `BLOCK_MEDIUM_AND_ABOVE` | Bloquear cuando haya una probabilidad media o alta de que sea contenido no seguro. |
+| Bloquear la mayoría | `BLOCK_LOW_AND_ABOVE` | Bloquear cuando haya una probabilidad baja, media o alta de que sea contenido no seguro. |
+| N/A | `HARM_BLOCK_THRESHOLD_UNSPECIFIED` | No se especifica el umbral; se bloquea con el umbral predeterminado. |
 
-אם לא מגדירים את הסף, ברירת המחדל של סף החסימה היא **מושבת** למודלים של Gemini 2.5 ו-3.
+Si no se establece el umbral, el umbral de bloqueo predeterminado es **Desactivado** para los modelos Gemini 2.5 y 3.
 
-אפשר להגדיר את ההגדרות האלה לכל בקשה ששולחים לשירות הגנרטיבי.
-פרטים נוספים זמינים במאמר בנושא [`HarmBlockThreshold`](https://ai.google.dev/api/generate-content?hl=he#harmblockthreshold) API.
+Puedes establecer estos parámetros para cada solicitud que realices al servicio generativo.
+Consulta la referencia de la API de [`HarmBlockThreshold`](https://ai.google.dev/api/generate-content?hl=es-419#harmblockthreshold)
+para obtener más detalles.
 
-### משוב בנושא בטיחות
+### Comentarios de seguridad
 
-‫[`generateContent`](https://ai.google.dev/api/generate-content?hl=he#method:-models.generatecontent)
-מחזירה את
-‫[`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=he#generatecontentresponse) שכוללת משוב בנושא בטיחות.
+[`generateContent`](https://ai.google.dev/api/generate-content?hl=es-419#method:-models.generatecontent)
+muestra una
+[`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=es-419#generatecontentresponse) que
+incluye comentarios de seguridad.
 
-המשוב על ההנחיות כלול ב-[`promptFeedback`](https://ai.google.dev/api/generate-content?hl=he#promptfeedback). אם הערך של `promptFeedback.blockReason` מוגדר, סימן שהתוכן של ההנחיה נחסם.
+Los comentarios de los mensajes se incluyen en
+[`promptFeedback`](https://ai.google.dev/api/generate-content?hl=es-419#promptfeedback). Si se establece `promptFeedback.blockReason`, se bloqueó el contenido del mensaje.
 
-המשוב על המועמדים לתשובה נכלל ב-[`Candidate.finishReason`](https://ai.google.dev/api/generate-content?hl=he#candidate) וב-[`Candidate.safetyRatings`](https://ai.google.dev/api/generate-content?hl=he#candidate). אם תוכן התשובה נחסם והערך של `finishReason` היה `SAFETY`, אפשר לבדוק את `safetyRatings` כדי לקבל פרטים נוספים. התוכן שנחסם לא יוחזר.
+Los comentarios de los candidatos de respuesta se incluyen en
+[`Candidate.finishReason`](https://ai.google.dev/api/generate-content?hl=es-419#candidate) y
+[`Candidate.safetyRatings`](https://ai.google.dev/api/generate-content?hl=es-419#candidate). Si se bloqueó el contenido de la respuesta y el `finishReason` fue `SAFETY`, puedes inspeccionar `safetyRatings` para obtener más detalles. No se muestra el contenido que se bloqueó.
 
-## שינוי הגדרות הבטיחות
+## Ajusta la configuración de seguridad
 
-בקטע הזה מוסבר איך לשנות את הגדרות הבטיחות ב-Google AI Studio ובקוד.
+En esta sección, se explica cómo ajustar la configuración de seguridad en Google AI Studio y en tu código.
 
 ### Google AI Studio
 
-אתם יכולים לשנות את הגדרות הבטיחות ב-Google AI Studio.
+Puedes ajustar la configuración de seguridad en Google AI Studio.
 
-לוחצים על **הגדרות בטיחות** בקטע **הגדרות מתקדמות** בחלונית **הגדרות ההרצה** כדי לפתוח את תיבת הדו-שיח **הגדרות בטיחות של ההרצה**. בחלון הקופץ, אפשר להשתמש בפסי ההזזה כדי לשנות את רמת סינון התוכן לפי קטגוריית בטיחות:
+Haz clic en **Configuración de seguridad** en **Configuración avanzada** en el panel **Configuración de la ejecución** para abrir el modal **Ejecutar configuración de seguridad**. En el modal, puedes usar los controles deslizantes para ajustar el nivel de filtrado de contenido por categoría de seguridad:
 
-![](https://ai.google.dev/static/gemini-api/docs/images/safety_settings_ui.png?hl=he)
+![](https://ai.google.dev/static/gemini-api/docs/images/safety_settings_ui.png?hl=es-419)
 
-כששולחים בקשה (למשל, שואלים את המודל שאלה), מופיעה ההודעה warning
-**התוכן חסום** אם התוכן של הבקשה חסום. כדי לראות פרטים נוספים, מעבירים את מצביע העכבר מעל הטקסט **התוכן נחסם** כדי לראות את הקטגוריה ואת הסבירות לסיווג הנזק.
+Cuando envías una solicitud (por ejemplo, cuando le haces una pregunta al modelo), aparece un mensaje warning
+**Contenido bloqueado** si se bloquea el contenido de la solicitud. Para ver más detalles, mantén el puntero sobre el texto **Contenido bloqueado** para ver la categoría y la probabilidad de la clasificación del daño.
 
-### דוגמאות לקוד
+### Ejemplos de código
 
-בקטע הקוד הבא מוצג איך מגדירים הגדרות בטיחות בקריאה ל-`GenerateContent`. הפעולה הזו מגדירה את ערך הסף לקטגוריה 'דברי שטנה' (`HARM_CATEGORY_HATE_SPEECH`). אם מגדירים את הקטגוריה הזו לערך
-`BLOCK_LOW_AND_ABOVE`, כל תוכן שיש לו סבירות נמוכה או גבוהה יותר להיות דברי שטנה ייחסם. כדי להבין את הגדרות הסף, אפשר לעיין במאמר [סינון בטיחותי לכל בקשה](#safety-filtering-per-request).
+En el siguiente fragmento de código, se muestra cómo establecer la configuración de seguridad en tu llamada a `GenerateContent`. Esto establece el umbral para la categoría de incitación al odio o a la violencia (`HARM_CATEGORY_HATE_SPEECH`). Si estableces esta categoría en `BLOCK_LOW_AND_ABOVE`, se bloqueará cualquier contenido que tenga una probabilidad baja o superior de ser incitación al odio o a la violencia. Para comprender la configuración del umbral, consulta [Filtrado de seguridad
+por solicitud](#safety-filtering-per-request).
 
 ### Python
 
@@ -231,20 +236,26 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 }'
 ```
 
-## השלבים הבאים
+## Próximos pasos
 
-- מידע נוסף על ה-API המלא מופיע ב[הפניית ה-API](https://ai.google.dev/api?hl=he).
-- כדאי לעיין ב[הנחיות הבטיחות](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=he) כדי לקבל סקירה כללית של שיקולי הבטיחות כשמפתחים באמצעות מודלים של שפה גדולה (LLM).
-- מידע נוסף על הערכת ההסתברות לעומת חומרת הבעיה זמין ב[צוות Jigsaw](https://developers.perspectiveapi.com/s/about-the-api-score)
-- מידע נוסף על המוצרים שמשמשים לפתרונות בטיחות כמו [Perspective API](https://medium.com/jigsaw/reducing-toxicity-in-large-language-models-with-perspective-api-c31c39b7a4d7).
-  \* אפשר להשתמש בהגדרות הבטיחות האלה כדי ליצור מסווג רעילות. כדי להתחיל, אפשר לעיין [בדוגמה של סיווג](https://ai.google.dev/examples/train_text_classifier_embeddings?hl=he).
+- Consulta la [referencia de la API](https://ai.google.dev/api?hl=es-419) para obtener más información sobre la API completa.
+- Revisa la [guía de seguridad](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=es-419) para obtener una descripción general de las consideraciones de seguridad
+  cuando desarrollas con LLMs.
+- Obtén más información sobre la evaluación de la probabilidad en comparación con la gravedad del equipo de [Jigsaw
+  team](https://developers.perspectiveapi.com/s/about-the-api-score).
+- Obtén más información sobre los productos que contribuyen a las soluciones de seguridad, como la
+  [API
+  de Perspective](https://medium.com/jigsaw/reducing-toxicity-in-large-language-models-with-perspective-api-c31c39b7a4d7).
+  \* Puedes usar estos parámetros de seguridad para crear un clasificador de toxicidad. Consulta el [ejemplo
+  de clasificación](https://ai.google.dev/examples/train_text_classifier_embeddings?hl=es-419) para
+  comenzar.
 
-שליחת משוב
+Enviar comentarios
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-עדכון אחרון: 2026-05-19 (שעון UTC).
+Última actualización: 2026-06-01 (UTC)
 
-רוצה לתת לנו משוב?
+¿Quieres brindar más información?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-05-19 (שעון UTC)."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-01 (UTC)"],[],[]]

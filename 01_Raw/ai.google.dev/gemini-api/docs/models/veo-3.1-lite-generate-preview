@@ -1,48 +1,51 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=vi
-fetched_at: 2026-06-01T05:58:00.189587+00:00
-title: "B\u1ea3n xem tr\u01b0\u1edbc Veo 3.1 Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=ja
+fetched_at: 2026-06-08T05:31:59.448342+00:00
+title: "Veo 3.1 Lite \u30d7\u30ec\u30d3\u30e5\u30fc\u7248 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
-# Bản xem trước Veo 3.1 Lite
+# Veo 3.1 Lite プレビュー版
 
-Veo 3.1 Lite Preview là một mô hình video có hiệu suất cao, ưu tiên cho nhà phát triển, cung cấp khả năng tạo, chỉnh sửa video có độ trung thực cao và kiểm soát chất lượng điện ảnh. Công cụ này tận dụng mô hình Veo 3.1 tiên tiến để phổ biến AI tạo video chuyên nghiệp bằng cách cung cấp một giao diện có thể mở rộng và lập trình cho nhà sáng tạo và doanh nghiệp.
+Veo 3.1 Lite Preview は、高効率でデベロッパー ファーストの動画モデルであり、高忠実度の動画生成、編集、シネマティック制御を実現します。最先端の Veo 3.1 モデルを活用して、クリエイターや企業向けにスケーラブルでプログラマブルなインターフェースを提供することで、プロ品質の動画 AI を民主化します。
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=veo-3.1-lite-generate-preview&hl=vi)
+[Google AI Studio で試す](https://aistudio.google.com?model=veo-3.1-lite-generate-preview&hl=ja)
 
-## Tài liệu
+## ドキュメント
 
-Veo 3.1 Lite mang đến mức giá tốt nhất cho các nhà phát triển và doanh nghiệp xây dựng các ứng dụng và quy trình làm việc có số lượng lớn video ở quy mô lớn. Hãy truy cập vào trang [Mức giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#veo-3.1) để biết thông tin chi tiết và so sánh với các mô hình Veo 3.1 khác.
+Veo 3.1 Lite は、大量の動画アプリケーションやワークフローを大規模に構築するデベロッパーや企業に最適な価格を提供します。詳細と他の
+Veo 3.1 モデルとの比較については、[料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#veo-3.1)のページをご覧ください。
 
-Truy cập trang [Tạo video](https://ai.google.dev/gemini-api/docs/video?hl=vi) để xem thông tin đầy đủ về các tính năng và khả năng. Xin lưu ý rằng Veo 3.1 Lite Preview không hỗ trợ [đầu ra 4K](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=vi#resolution) hoặc [Tiện ích](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=vi#extending_veo_videos).
+機能と機能の全容については、[動画生成](https://ai.google.dev/gemini-api/docs/video?hl=ja)のページをご覧ください。Veo 3.1 Lite Preview は、
+[4K 出力](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=ja#resolution)または
+[拡張機能](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=ja#extending_veo_videos)をサポートしていません。
 
 ## veo-3.1-lite-generate-preview
 
-| Thuộc tính | Mô tả |
+| プロパティ | 説明 |
 | --- | --- |
-| id\_cardMã kiểu máy | **Gemini API**  `veo-3.1-lite-generate-preview` |
-| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, hình ảnh  **Đầu ra**  Video có âm thanh |
-| Giới hạn token\_auto | **Nhập văn bản**  1.024 mã thông báo  **Video đầu ra**  1 |
-| calendar\_monthThông tin cập nhật mới nhất | Tháng 3 năm 2026 |
+| id\_cardモデルコード | **Gemini API**  `veo-3.1-lite-generate-preview` |
+| saveサポートされるデータタイプ | **入力**  テキスト、画像  **出力**  音声付きの動画 |
+| token\_auto上限 | **テキスト入力**  1,024 トークン  **出力動画**  1 |
+| calendar\_month最終更新日 | 2026 年 3 月 |
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+最終更新日 2026-04-29 UTC。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+ご意見をお聞かせください
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]

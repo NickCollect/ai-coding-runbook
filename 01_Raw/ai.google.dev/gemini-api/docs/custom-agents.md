@@ -1,34 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/custom-agents?hl=tr
-fetched_at: 2026-06-01T06:09:09.759636+00:00
-title: "Y\u00f6netilen Ajanlar Olu\u015fturma \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/custom-agents?hl=zh-CN
+fetched_at: 2026-06-08T05:30:17.088046+00:00
+title: "\u6784\u5efa\u53d7\u7ba1\u4ee3\u7406 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Geri bildirim gönderin
+发送反馈
 
-# Yönetilen Ajanlar Oluşturma
+# 构建受管代理
 
-Gemini API'deki yönetilen ajanlar, Antigravity ajanını kendi talimatlarınız, becerileriniz ve verilerinizle genişletmenize olanak tanır. Etkileşim sırasında [aracıyı satır içinde özelleştirebilir](#customize-inline) veya [yapılandırmayı kaydedebilirsiniz](#save-agent). Bu durumda, aracıyı kimliğe göre çağırarak yönetebilirsiniz.
+借助 Gemini API 上的受管智能体，您可以使用自己的指令、技能和数据来扩展 Antigravity 智能体。您可以在 [互动时内嵌自定义智能体](#customize-inline)，也可以将 [配置保存](#save-agent)为受管智能体，并通过 ID 调用该智能体。
 
-## Antigravity aracısını özelleştirme
+## 自定义 Antigravity 智能体
 
-Özel bir aracı oluşturmanın en hızlı yolu, yeni bir etkileşim oluştururken yapılandırmanızı satır içi olarak iletmektir. Kayıt adımı gerekmez. Aracıyı üç şekilde genişletebilirsiniz:
+构建自定义智能体的最快方法是在创建新互动时内嵌传递配置，而无需执行注册步骤。您可以通过以下三种方式扩展智能体：
 
-- **Sistem talimatları**: Davranışı şekillendirmek için satır içi metni `system_instruction` ile iletin.
-- **Araçlar**: Varsayılan araçları (Kod Yürütme, Arama, URL Bağlamı) geçersiz kılın.
-- **Dosyalar ve beceriler**: `AGENTS.md` ve `SKILL.md` gibi dosyaları ortama yerleştirin.
+- **系统指令**：通过 `system_instruction` 内嵌传递文本，以塑造行为。
+- **工具**：替换默认工具（代码执行、搜索、网址上下文）。
+- **文件和技能**：将 `AGENTS.md` 和 `SKILL.md` 等文件装载到环境中。
 
-Üçünün de satır içi olarak iletilmesine ilişkin bir örneği aşağıda bulabilirsiniz:
+以下示例展示了如何内嵌传递所有这三项：
 
 ### Python
 
@@ -121,22 +121,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Her şey etkileşim sırasında tanımlanır. Önceden herhangi bir kayıt işlemi yapmanız gerekmez. Antigravity aracı donanımı, çalışma zamanını (kod yürütme, dosya yönetimi, web erişimi) sağlar ve yapılandırma katmanlarınız bu donanımın üzerinde yer alır.
+所有内容都在互动时定义。无需先注册任何内容。Antigravity 智能体框架提供运行时（代码执行、文件管理、网络访问），以及您在运行时之上配置的层。
 
-### Araçlar ve sistem talimatları
+### 工具和系统指令
 
-`system_instruction` ve `tools` parametrelerini kullanarak aracının davranışını ve özelliklerini belirli bir etkileşim için özelleştirebilirsiniz.
+您可以使用 `system_instruction` 和 `tools` 参数自定义智能体针对特定互动的行为和功能。
 
-- **Sistem talimatları**: Aracının davranışını şekillendiren satır içi metni iletmek için `system_instruction` parametresini kullanın. Bu özellik, her görüşmede değiştirmek istediğiniz hızlı düzenlemeler için idealdir. `system_instruction` ve `AGENTS.md` toplamsaldır. Her ikisi de mevcut olduğunda geçerlidir.
-- **Araçlar**: Antigravity aracısı varsayılan olarak `code_execution`, `google_search` ve `url_context`'e erişebilir. Etkileşim sırasında `tools` parametresini ileterek bu listeyi geçersiz kılabilirsiniz. Kullanılabilir araçlar ve bunların nasıl kullanılacağıyla ilgili tüm ayrıntılar için [Antigravity Agent: Desteklenen araçlar](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=tr#supported-tools) başlıklı makaleyi inceleyin.
+- **系统指令**：使用 `system_instruction` 参数传递内嵌文本，以塑造智能体的行为。如果您想针对每次调用进行快速调整，此方法非常理想。`system_instruction` 和 `AGENTS.md` 是累加的；如果两者都存在，则两者都会应用。
+- **工具**：默认情况下，Antigravity 智能体可以访问 `code_execution`、`google_search` 和 `url_context`。您可以在互动时传递 `tools` 参数来替换此列表。如需详细了解可用工具以及如何使用这些工具，请参阅 [Antigravity 智能体：支持的工具](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=zh-cn#supported-tools)。
 
-### Dosyaya dayalı özelleştirme
+### 基于文件的自定义
 
-#### Aracı dizin yapısı
+#### 智能体目录结构
 
-Yapılandırmayı satır içi olarak iletebilirsiniz ancak aracınızın dosyalarını yapılandırılmış bir dizinde düzenlemenizi öneririz. Bu sayede yönetmek, sürüm denetimi yapmak ve aracının ortamına monte etmek daha kolay olur.
+虽然您可以内嵌传递配置，但我们建议您在结构化目录中整理智能体的文件。这样可以更轻松地管理、进行版本控制以及装载到智能体的环境中。
 
-Tipik bir aracı projesi dizini şu şekilde görünür:
+典型的智能体项目目录如下所示：
 
 ```
 my-agent/
@@ -147,13 +147,13 @@ my-agent/
 └── workspace/       # Initial data files and knowledge
 ```
 
-Antigravity çalışma zamanı, bu dosyalar için `.agents/` (ve ortamın kökünü) tarar.
+Antigravity 运行时会扫描 `.agents/`（以及环境的根目录）以查找这些文件。
 
 #### AGENTS.md
 
-Aracı, başlatıldığında ortamdan `.agents/AGENTS.md` (veya `/.agents/AGENTS.md`) öğesini sistem talimatları olarak otomatik olarak yükler. Uzun persona tanımları, ayrıntılı yönergeler ve kodunuzla birlikte sürüm denetimi yapmak istediğiniz talimatlar için `AGENTS.md` kullanın.
+智能体会在启动时自动从环境中加载 `.agents/AGENTS.md`（或 `/.agents/AGENTS.md`）作为系统指令。对于您想要与代码一起进行版本控制的长篇角色定义、详细指南和指令，请使用 `AGENTS.md`。
 
-Satır içi kaynak kullanarak `AGENTS.md` bağlama:
+使用内嵌来源装载 `AGENTS.md`：
 
 ### Python
 
@@ -231,9 +231,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-#### Beceriler: SKILL.md
+#### 技能：SKILL.md
 
-Beceriler, aracının yeteneklerini genişleten dosyalardır. Bunları `.agents/skills/<skill-name>/SKILL.md` altına yerleştirin. Böylece, koşum otomatik olarak keşfedip kaydeder.
+技能是扩展智能体功能的文件。将它们放在 `.agents/skills/<skill-name>/SKILL.md` 下，框架会自动发现并注册它们。
 
 ```
 .agents/
@@ -243,7 +243,7 @@ Beceriler, aracının yeteneklerini genişleten dosyalardır. Bunları `.agents/
         └── SKILL.md
 ```
 
-Satır içi kaynak kullanarak beceri bağlama:
+使用内嵌来源装载技能：
 
 ### Python
 
@@ -321,15 +321,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-`.agents/skills/` ve `/.agents/skills/` kaynaklarından yüklenen beceriler otomatik olarak keşfedilir.
+从 `.agents/skills/` 和 `/.agents/skills/` 加载的技能都会自动被发现。
 
-## Yönetilen aracı oluşturma
+## 创建受管智能体
 
-Yapılandırmanızı yineledikten sonra `agents.create` ile yönetilen bir aracı olarak oluşturabilirsiniz. Bu sayede, yapılandırmayı her seferinde tekrarlamadan aracıyı kimliğe göre çağırabilirsiniz.
+对配置进行迭代后，您可以使用 `agents.create` 将其创建为受管智能体。这样，您就可以通过 ID 调用智能体，而无需每次都重复配置。
 
-### Kaynaklardan
+### 从来源配置
 
-Kaynaklarla birlikte `base_agent`, `id`, `system_instruction` ve `base_environment` değerlerini belirtin. Platform, her çağırmada dosyalarınızla yeni bir sanal alan sağlar. Kullanılabilir kaynak türleri (Git, GCS, satır içi) için [Ortamlar](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr) bölümüne bakın.
+使用来源指定 `base_agent`、`id`、`system_instruction` 和 `base_environment`。平台会在每次调用时使用您的文件预配新的沙盒。如需了解可用的来源类型（Git、GCS、内嵌），请参阅[环境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-cn)。
 
 ### Python
 
@@ -437,9 +437,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 }'
 ```
 
-### Mevcut bir ortamdan (fork)
+### 从现有环境（派生）
 
-Ortam doğru olana kadar (paketler yüklendi, dosyalar yerinde) temel Antigravity aracısıyla yineleme yapın, ardından bunu yönetilen bir aracıya çatallayın.
+使用基本 Antigravity 智能体进行迭代，直到环境正确（软件包已安装，文件已就位），然后将其派生为受管智能体。
 
 ### Python
 
@@ -504,11 +504,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Ağ kurallarıyla
+### 使用网络规则
 
-Yönetilen bir aracı kaydederken giden erişimi kilitleyebilir veya kimlik bilgilerini ekleyebilirsiniz. İzin verilenler listesi şemasının, kimlik bilgisi kalıplarının ve joker karakterlerin tam listesi için [Ortamlar: Ağ yapılandırması](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr#network-configuration) başlıklı makaleyi inceleyin.
+您可以在保存受管智能体时锁定出站访问权限或注入凭据。如需了解完整的许可名单架构、凭据模式和通配符，请参阅[环境：网络配置](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-cn#network-configuration)。
 
-Aşağıdaki örnekte, GitHub ve PyPI'ye erişebilen ve GitHub için kimlik bilgilerinin yerleştirildiği bir `issue-resolver` aracısı oluşturuluyor:
+以下示例创建了一个只能访问 GitHub 和 PyPI 的 `issue-resolver` 智能体，并为 GitHub 注入了凭据：
 
 ### Python
 
@@ -619,9 +619,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
   }'
 ```
 
-## Temsilciyi çağırma
+## 调用智能体
 
-Yeni bir etkileşim oluşturarak yönetilen aracınızı arayın. Her çağırma işlemi temel ortamı çatalladığından her çalıştırma temiz bir şekilde başlar.
+通过创建新互动，使用智能体 ID 调用受管智能体。每次调用都会派生基本环境，因此每次运行都是从干净的状态开始。
 
 ### Python
 
@@ -661,11 +661,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Çok adımlı görüşmeler ve yayın için [Hızlı Başlangıç](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=tr) bölümüne bakın. Aynı `previous_interaction_id` ve `environment` kalıpları, yönetilen temsilciler için de geçerlidir.
+如需了解多轮对话和流式传输，请参阅[快速入门](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=zh-cn)。相同的 `previous_interaction_id` 和 `environment` 模式适用于受管智能体。
 
-## Çağırma sırasında yapılandırmayı geçersiz kılma
+## 在调用时替换配置
 
-Etkileşim oluştururken aracının varsayılan `system_instruction` ve `tools` değerlerini geçersiz kılabilirsiniz. Bu sayede, depolanan aracı tanımını değiştirmeden belirli bir çalıştırma için aracının davranışını veya özelliklerini değiştirebilirsiniz.
+您可以在创建互动时替换智能体的默认 `system_instruction` 和 `tools`。这样，您就可以针对特定运行修改智能体的行为或功能，而无需更改存储的智能体定义。
 
 ### Python
 
@@ -710,11 +710,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Aracıları yönet
+## 管理智能体
 
-Aracıları listeleyebilir, alabilir ve silebilirsiniz.
+您可以列出、获取和删除智能体。
 
-### Aracıları listeleyin
+### 列出智能体
 
 ### Python
 
@@ -742,7 +742,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/agents" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Müşteri temsilcisine bağlanma
+### 获取智能体
 
 ### Python
 
@@ -765,9 +765,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/agents/data-analys
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Temsilci silme
+### 删除智能体
 
-Silme işlemi, yapılandırmayı kaldırır. Mevcut ortamlar ve aracının oluşturduğu etkileşimler etkilenmez.
+删除操作会移除配置。现有环境和智能体创建的互动不受影响。
 
 ### Python
 
@@ -788,45 +788,45 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/agents/data-ana
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Aracı tanımı referansı
+## 智能体定义参考
 
-| Alan | Tür | Zorunlu | Açıklama |
+| 字段 | 类型 | 是否必需 | 说明 |
 | --- | --- | --- | --- |
-| `id` | dize | Evet | Benzersiz aracı tanımlayıcısı. Ajanı çağırmak için kullanılır. |
-| `description` | dize | Hayır | Temsilcinin, kullanıcılar tarafından okunabilir açıklaması. |
-| `base_agent` | dize | Evet | Temel temsilci kimliği (ör. `antigravity-preview-05-2026`). |
-| `system_instruction` | dize | Hayır | Davranışı ve kullanıcı profilini tanımlayan sistem istemi. |
-| `tools` | dize veya nesne | Hayır | Temsilcinin kullanabileceği araçlar. Bu araçlar `code_execution`, `google_search` ve `url_context` erişimine sahip olacak. |
-| `base_environment` | dize veya nesne | Hayır | `"remote"`, `environment_id` veya `sources` ve `network` içeren bir yapılandırma nesnesi. Ortamlar bölümüne bakın. |
+| `id` | 字符串 | 是 | 智能体的唯一标识符。用于调用智能体。 |
+| `description` | 字符串 | 否 | 智能体的人类可读说明。 |
+| `base_agent` | 字符串 | 是 | 基本智能体 ID（例如 `antigravity-preview-05-2026`）。 |
+| `system_instruction` | 字符串 | 否 | 定义行为和角色的系统提示。 |
+| `tools` | 字符串或对象 | 否 | 智能体可以使用的工具，如果省略，则可以访问 `code_execution`、`google_search` 和 `url_context`。 |
+| `base_environment` | 字符串或对象 | 否 | `"remote"`、`environment_id` 或包含 `sources` 和 `network` 的配置对象。请参阅环境。 |
 
-## Yineleme iş akışı
+## 迭代工作流
 
-1. Temel Antigravity temsilcisiyle **prototip oluşturun**. Sistem talimatını ve ortam kaynaklarını satır içi olarak iletin. Talimatları, becerileri ve ortam kurulumunu etkileşimli olarak test edin.
-2. Ortamı **dengeleyin**. Paketleri yükleyin, kaynakları bağlayın ve her şeyin çalıştığını doğrulayın.
-3. Kaynaklardan veya ortamı çatallayarak yeni bir aracı oluşturup yönetilen aracı olarak **kalıcı hale getirin**.
-4. Temsilci tanımını **güncelleyin**. Sistem talimatını değiştirme, becerileri değiştirme veya kaynak ekleme Bir sonraki çağırma işleminde yeni yapılandırma kullanılır.
+1. 使用基本 Antigravity 智能体进行**原型设计** 。内嵌传递系统指令和环境来源。以交互方式测试指令、技能和环境设置。
+2. **稳定** 环境。安装软件包、装载来源、验证一切正常。
+3. 通过创建新智能体（从来源配置或派生环境）**持久保留** 为受管智能体。
+4. **更新** 智能体定义。更改系统指令、交换技能或添加来源。下一次调用会采用新配置。
 
-## Sınırlamalar
+## 限制
 
-- **Önizleme durumu**: Yönetilen aracılar önizleme aşamasındadır. Özellikler ve şemalar değişebilir.
-- **Temel aracı**: `base_agent` olarak yalnızca `antigravity-preview-05-2026` desteklenir.
-- **Sürüm oluşturma yok**: Temsilci sürüm oluşturma ve geri alma henüz kullanılamıyor.
-- **Alt temsilci iç içe yerleştirme yok**: Alt temsilci yetkilendirme henüz desteklenmemektedir.
-- En fazla 1.000 yönetilen aracınız olabilir.
+- **预览版状态**：受管智能体处于预览版状态。功能和架构可能会发生变化。
+- **基本智能体**：只有 `antigravity-preview-05-2026` 受支持作为 `base_agent`。
+- **无版本控制**：智能体版本控制和回滚尚不可用。
+- **无子智能体嵌套**：尚不支持子智能体委托。
+- 您最多可以拥有 1000 个受管智能体。
 
-## Sırada ne var?
+## 后续步骤
 
-- [Temsilcilere Genel Bakış](https://ai.google.dev/gemini-api/docs/agents?hl=tr): Yönetilen temsilcilerin temel kavramları hakkında bilgi edinin.
-- [Hızlı başlangıç](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=tr): Çok adımlı görüşmeler ve akışla geliştirmeye başlayın.
-- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=tr): Varsayılan temsilcinin özelliklerini, araçlarını ve fiyatlandırmasını keşfedin.
-- [Aracı Ortamları](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr): Sanal alanları, kaynakları ve ağı yapılandırın.
+- [智能体概览](https://ai.google.dev/gemini-api/docs/agents?hl=zh-cn)：了解受管智能体的核心概念。
+- [快速入门](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=zh-cn)：开始构建多轮对话和流式传输。
+- [Antigravity 智能体](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=zh-cn)：探索默认智能体的功能、工具和定价。
+- [智能体环境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-cn)：配置沙盒、来源和网络。
 
-Geri bildirim gönderin
+发送反馈
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Son güncelleme tarihi: 2026-05-20 UTC.
+最后更新时间 (UTC)：2026-06-01。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+需要向我们提供更多信息？
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-05-20 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-01。"],[],[]]

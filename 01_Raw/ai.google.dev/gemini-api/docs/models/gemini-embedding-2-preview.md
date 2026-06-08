@@ -1,45 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2-preview?hl=pt-BR
-fetched_at: 2026-06-01T05:57:52.729971+00:00
-title: "Modelo de pr\u00e9-lan\u00e7amento do Gemini Embedding 2 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2-preview?hl=zh-CN
+fetched_at: 2026-06-08T05:29:16.124238+00:00
+title: "Gemini Embedding 2 \u9884\u89c8\u7248\u6a21\u578b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
 
-Envie comentários
+发送反馈
 
-# Modelo de pré-lançamento do Gemini Embedding 2
+# Gemini Embedding 2 预览版模型
 
-Nosso primeiro modelo de embeddings multimodais, que oferece um mapeamento numérico eficiente de texto, imagens, vídeo, áudio e PDFs em um único espaço de embeddings unificado. O modelo Gemini Embedding 2 é ideal para pesquisa semântica entre modalidades, recuperação de documentos e sistemas de recomendação que exigem cálculos de similaridade rápidos e escalonáveis em grandes conjuntos de dados multimodais.
+我们的首个多模态嵌入模型，可将文本、图片、视频、音频和 PDF 高效地映射到单个统一的嵌入空间。Gemini Embedding 2 模型最适合跨模态语义搜索、文档检索和推荐系统，这些应用需要在大型多模态数据集中快速进行可扩缩的相似度计算。
 
-## Documentação
+## 文档
 
-Acesse a página [Embeddings](https://ai.google.dev/gemini-api/docs/embeddings?hl=pt-br) para conferir a cobertura completa
-de recursos e funcionalidades.
+如需全面了解功能和功能，请访问[嵌入](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-cn)页面。
 
 ## gemini-embedding-2-preview
 
-| Propriedade | Descrição |
+| 属性 | 说明 |
 | --- | --- |
-| id\_cardCódigo do modelo | **API Gemini**  `gemini-embedding-2-preview` |
-| saveTipos de dados com suporte | **Entrada**  Texto, imagem, vídeo, áudio, PDF  **Saída**  Embeddings de textos |
-| token\_autoLimites de tokens[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de tokens de entrada**  8.192  **Tamanho da dimensão de saída**  Flexível, com suporte a: 128 a 3072. Recomendado: 768, 1536, 3072 |
-| 123Versões | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Visualização: `gemini-embedding-2-preview` |
-| calendar\_monthAtualização mais recente | Março de 2026 |
+| id\_card 模型代码 | **Gemini API**  `gemini-embedding-2-preview` |
+| 保存支持的数据类型 | **输入**  文本、图片、视频、音频、PDF  **输出**  文本嵌入 |
+| token\_auto令牌限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入 token 限制**  8192  **输出维度大小**  灵活，支持：128 - 3072，推荐：768、1536、3072 |
+| 123 版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 预览：`gemini-embedding-2-preview` |
+| calendar\_month最新更新 | 2026 年 3 月 |
 
-Envie comentários
+发送反馈
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Última atualização 2026-04-29 UTC.
+最后更新时间 (UTC)：2026-04-29。
 
-Quer enviar seu feedback?
+需要向我们提供更多信息？
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]

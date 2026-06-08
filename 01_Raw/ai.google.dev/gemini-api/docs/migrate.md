@@ -1,35 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate?hl=pl
-fetched_at: 2026-06-01T06:00:16.248723+00:00
-title: "Migracja do pakietu Google GenAI SDK \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate?hl=th
+fetched_at: 2026-06-08T05:39:21.889405+00:00
+title: "\u0e22\u0e49\u0e32\u0e22\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e44\u0e1b\u0e22\u0e31\u0e07 Google GenAI SDK \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Prześlij opinię
+ส่งความคิดเห็น
 
-# Migracja do pakietu Google GenAI SDK
+# ย้ายข้อมูลไปยัง Google GenAI SDK
 
-Pod koniec 2024 r. wraz z wydaniem Gemini 2.0 wprowadziliśmy nowy zestaw
-bibliotek o nazwie [Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=pl). Dzięki [zaktualizowanej architekturze klienta](https://ai.google.dev/gemini-api/docs/migrate?hl=pl#client) zapewnia on lepsze wrażenia deweloperom i [upraszcza przejście](https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=pl) między przepływami pracy deweloperów a przepływami pracy w przedsiębiorstwie.
+เราได้เปิดตัวชุดไลบรารีใหม่ที่เรียกว่า [Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=th) ตั้งแต่การเปิดตัว Gemini 2.0 ในช่วงปลายปี 2024
+ซึ่งมีประสบการณ์การใช้งานที่ดียิ่งขึ้นสำหรับนักพัฒนาแอปผ่าน
+สถาปัตยกรรมไคลเอ็นต์ที่[อัปเดต](https://ai.google.dev/gemini-api/docs/migrate?hl=th#client) และ
+[ช่วยลดความซับซ้อนในการเปลี่ยนผ่าน](https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=th)ระหว่างเวิร์กโฟลว์ของนักพัฒนาแอป
+และองค์กร
 
-Google GenAI SDK jest teraz w [ogólnej dostępności (GA)](https://ai.google.dev/gemini-api/docs/libraries?hl=pl#new-libraries) na wszystkich obsługiwanych
-platformach. Jeśli używasz jednej z naszych [starszych bibliotek](https://ai.google.dev/gemini-api/docs/libraries?hl=pl#previous-sdks), zdecydowanie zalecamy
-migrację.
+[ตอนนี้ Google GenAI SDK พร้อมให้บริการแก่ผู้ใช้ทั่วไป (GA) ในทุกแพลตฟอร์มที่รองรับ](https://ai.google.dev/gemini-api/docs/libraries?hl=th#new-libraries) หากคุณใช้[ไลบรารีเดิม](https://ai.google.dev/gemini-api/docs/libraries?hl=th#previous-sdks)ของเรา เราขอแนะนำอย่างยิ่งให้
+ย้ายข้อมูล
 
-W tym przewodniku znajdziesz przykłady kodu przed i po migracji, które pomogą Ci zacząć.
+คู่มือนี้มีตัวอย่างโค้ดที่ย้ายข้อมูลแล้วทั้งก่อนและหลังเพื่อช่วยให้คุณเริ่มต้นใช้งานได้
 
-## Instalacja
+## การติดตั้ง
 
-**Przed**
+**ก่อน**
 
 ### Python
 
@@ -49,7 +51,7 @@ npm install @google/generative-ai
 go get github.com/google/generative-ai-go
 ```
 
-**Po**
+**หลัง**
 
 ### Python
 
@@ -69,29 +71,29 @@ npm install @google/genai
 go get google.golang.org/genai
 ```
 
-## Dostęp API
+## การเข้าถึง API
 
-Stary pakiet SDK niejawnie obsługiwał klienta API w tle za pomocą różnych metod ad hoc. Utrudniało to zarządzanie klientem i danymi logowania.
-Teraz możesz wchodzić w interakcje za pomocą centralnego obiektu `Client`. Ten obiekt `Client` działa jako pojedynczy punkt wejścia dla różnych usług API (np. `models`, `chats`, `files`, `tunings`), co zwiększa spójność i upraszcza zarządzanie danymi logowania i konfiguracją w różnych wywołaniach API.
+SDK เก่าจะจัดการไคลเอ็นต์ API เบื้องหลังโดยปริยายโดยใช้วิธีการเฉพาะกิจต่างๆ ซึ่งทำให้จัดการไคลเอ็นต์และข้อมูลเข้าสู่ระบบได้ยาก
+ตอนนี้คุณโต้ตอบผ่านออบเจ็กต์ `Client` ส่วนกลาง ออบเจ็กต์ `Client` นี้ทำหน้าที่เป็นจุดแรกเข้าเดียวสำหรับบริการ API ต่างๆ (เช่น `models`, `chats`, `files`, `tunings`) ซึ่งส่งเสริมความสอดคล้องและลดความซับซ้อนในการจัดการข้อมูลเข้าสู่ระบบและการกำหนดค่าในการเรียก API ต่างๆ
 
-**Przed (mniej scentralizowany dostęp do interfejsu API)**
+**ก่อน (การเข้าถึง API ที่รวมศูนย์น้อยกว่า)**
 
 ### Python
 
-Stary pakiet SDK nie używał jawnie obiektu klienta najwyższego poziomu w przypadku większości wywołań API. Bezpośrednio tworzyłeś instancje obiektów `GenerativeModel` i wchodziłeś z nimi w interakcje.
+SDK เก่าไม่ได้ใช้ออบเจ็กต์ไคลเอ็นต์ระดับบนสุดอย่างชัดเจนสำหรับการเรียก API ส่วนใหญ่ คุณจะต้องสร้างอินสแตนซ์และโต้ตอบกับออบเจ็กต์ `GenerativeModel` โดยตรง
 
 ```
 import google.generativeai as genai
 
 # Directly create and use model objects
-model = genai.GenerativeModel('gemini-2.0-flash')
+model = genai.GenerativeModel('gemini-3.5-flash')
 response = model.generate_content(...)
 chat = model.start_chat(...)
 ```
 
 ### JavaScript
 
-Chociaż `GoogleGenerativeAI` był centralnym punktem dla modeli i czatu, inne funkcje, takie jak zarządzanie plikami i pamięcią podręczną, często wymagały importowania i tworzenia instancji całkowicie oddzielnych klas klientów.
+แม้ว่า `GoogleGenerativeAI` จะเป็นจุดศูนย์กลางสำหรับโมเดลและการแชท แต่ฟังก์ชันการทำงานอื่นๆ เช่น การจัดการไฟล์และการจัดการแคช มักจะต้องนำเข้าและสร้างอินสแตนซ์ของคลาสไคลเอ็นต์ที่แยกกันโดยสิ้นเชิง
 
 ```
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -102,7 +104,7 @@ const fileManager = new GoogleAIFileManager("GEMINI_API_KEY");
 const cacheManager = new GoogleAICacheManager("GEMINI_API_KEY");
 
 // Get a model instance, then call methods on it
-const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
 const result = await model.generateContent(...);
 const chat = model.startChat(...);
 
@@ -113,7 +115,7 @@ const cache = await cacheManager.create(...);
 
 ### Go
 
-Funkcja `genai.NewClient` tworzyła klienta, ale operacje na modelu generatywnym były zwykle wywoływane w oddzielnej instancji `GenerativeModel` uzyskanej od tego klienta. Dostęp do innych usług mógł być uzyskiwany za pomocą odrębnych pakietów lub wzorców.
+ฟังก์ชัน `genai.NewClient` สร้างไคลเอ็นต์ แต่โดยทั่วไปแล้วการดำเนินการกับโมเดล Generative จะเรียกใช้ในอินสแตนซ์ `GenerativeModel` ที่แยกกันซึ่งได้จากไคลเอ็นต์นี้ คุณอาจเข้าถึงบริการอื่นๆ ผ่านแพ็กเกจหรือรูปแบบที่แตกต่างกัน
 
 ```
 import (
@@ -126,7 +128,7 @@ client, err := genai.NewClient(ctx, option.WithAPIKey("GEMINI_API_KEY"))
 fileClient, err := fileman.NewClient(ctx, option.WithAPIKey("GEMINI_API_KEY"))
 
 // Get a model instance, then call methods on it
-model := client.GenerativeModel("gemini-2.0-flash")
+model := client.GenerativeModel("gemini-3.5-flash")
 resp, err := model.GenerateContent(...)
 cs := model.StartChat()
 
@@ -134,7 +136,7 @@ cs := model.StartChat()
 uploadedFile, err := fileClient.UploadFile(...)
 ```
 
-**Po (scentralizowany obiekt klienta)**
+**หลัง (ออบเจ็กต์ไคลเอ็นต์ที่รวมศูนย์)**
 
 ### Python
 
@@ -181,17 +183,17 @@ uploadedFile, err := client.Files.Upload(...)
 tuningJob, err := client.Tunings.Tune(...)
 ```
 
-## Uwierzytelnianie
+## การตรวจสอบสิทธิ์
 
-Zarówno starsze, jak i nowe biblioteki uwierzytelniają się za pomocą kluczy API. Klucz API możesz
-[utworzyć](https://aistudio.google.com/app/apikey?hl=pl) w Google AI
-Studio.
+ทั้งไลบรารีเดิมและไลบรารีใหม่จะตรวจสอบสิทธิ์โดยใช้คีย์ API คุณสามารถ
+[สร้าง](https://aistudio.google.com/app/apikey?hl=th)คีย์ API ใน Google AI
+Studio ได้
 
-**Przed**
+**ก่อน**
 
 ### Python
 
-Stary pakiet SDK niejawnie obsługiwał obiekt klienta API.
+SDK เก่าจะจัดการออบเจ็กต์ไคลเอ็นต์ API โดยปริยาย
 
 ```
 import google.generativeai as genai
@@ -209,7 +211,7 @@ const genAI = new GoogleGenerativeAI("GEMINI_API_KEY");
 
 ### Go
 
-Zaimportuj biblioteki Google:
+นำเข้าไลบรารีของ Google ดังนี้
 
 ```
 import (
@@ -218,18 +220,18 @@ import (
 )
 ```
 
-Utwórz klienta:
+สร้างไคลเอ็นต์ดังนี้
 
 ```
 client, err := genai.NewClient(ctx, option.WithAPIKey("GEMINI_API_KEY"))
 ```
 
-**Po**
+**หลัง**
 
 ### Python
 
-W Google GenAI SDK najpierw tworzysz klienta API, który jest używany do wywoływania interfejsu API.
-Jeśli nie przekażesz klucza API do klienta, nowy pakiet SDK pobierze go ze zmiennych środowiskowych `GEMINI_API_KEY`.
+เมื่อใช้ Google GenAI SDK คุณจะต้องสร้างไคลเอ็นต์ API ก่อน ซึ่งจะใช้ในการเรียก API
+SDK ใหม่จะดึงคีย์ API จากตัวแปรสภาพแวดล้อม `GEMINI_API_KEY` หากคุณไม่ได้ส่งคีย์ไปยังไคลเอ็นต์
 
 ```
 export GEMINI_API_KEY="YOUR_API_KEY"
@@ -253,13 +255,13 @@ const ai = new GoogleGenAI({apiKey: "GEMINI_API_KEY"});
 
 ### Go
 
-Zaimportuj bibliotekę GenAI:
+นำเข้าไลบรารี GenAI ดังนี้
 
 ```
 import "google.golang.org/genai"
 ```
 
-Utwórz klienta:
+สร้างไคลเอ็นต์ดังนี้
 
 ```
 client, err := genai.NewClient(ctx, &genai.ClientConfig{
@@ -267,20 +269,20 @@ client, err := genai.NewClient(ctx, &genai.ClientConfig{
 })
 ```
 
-## Generuj treści
+## สร้างเนื้อหา
 
-### Tekst
+### ข้อความ
 
-**Przed**
+**ก่อน**
 
 ### Python
 
-Wcześniej nie było obiektów klienta. Dostęp do interfejsów API uzyskiwano bezpośrednio za pomocą obiektów `GenerativeModel`.
+ก่อนหน้านี้ไม่มีออบเจ็กต์ไคลเอ็นต์ คุณเข้าถึง API ผ่านออบเจ็กต์ `GenerativeModel` โดยตรง
 
 ```
 import google.generativeai as genai
 
-model = genai.GenerativeModel('gemini-2.0-flash')
+model = genai.GenerativeModel('gemini-3.5-flash')
 response = model.generate_content(
     'Tell me a story in 300 words'
 )
@@ -293,7 +295,7 @@ print(response.text)
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
 const prompt = "Tell me a story in 300 words";
 
 const result = await model.generateContent(prompt);
@@ -310,7 +312,7 @@ if err != nil {
 }
 defer client.Close()
 
-model := client.GenerativeModel("gemini-2.0-flash")
+model := client.GenerativeModel("gemini-3.5-flash")
 resp, err := model.GenerateContent(ctx, genai.Text("Tell me a story in 300 words."))
 if err != nil {
     log.Fatal(err)
@@ -319,19 +321,18 @@ if err != nil {
 printResponse(resp) // utility for printing response parts
 ```
 
-**Po**
+**หลัง**
 
 ### Python
 
-Nowy Google GenAI SDK zapewnia dostęp do wszystkich metod API za pomocą obiektu `Client`. Z wyjątkiem kilku przypadków specjalnych ze stanem (`chat` i
-sesje live-api `session`s) są to funkcje bezstanowe. Dla wygody i spójności zwracane obiekty są klasami `pydantic`.
+Google GenAI SDK ใหม่ให้สิทธิ์เข้าถึงเมธอด API ทั้งหมดผ่านออบเจ็กต์ `Client` ยกเว้นกรณีพิเศษที่เก็บสถานะ (`chat` และ `session` ของ Live API) ฟังก์ชันเหล่านี้ทั้งหมดเป็นฟังก์ชันที่ไม่เก็บสถานะ ออบเจ็กต์ที่แสดงผลจะเป็นคลาส `pydantic` เพื่อความสะดวกและสม่ำเสมอ
 
 ```
 from google import genai
 client = genai.Client()
 
 response = client.models.generate_content(
-    model='gemini-2.0-flash',
+    model='gemini-3.5-flash',
     contents='Tell me a story in 300 words.'
 )
 print(response.text)
@@ -348,7 +349,7 @@ import { GoogleGenAI } from "@google/genai";
 const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
 
 const response = await ai.models.generateContent({
-  model: "gemini-2.0-flash",
+  model: "gemini-3.5-flash",
   contents: "Tell me a story in 300 words.",
 });
 console.log(response.text);
@@ -363,23 +364,23 @@ if err != nil {
     log.Fatal(err)
 }
 
-result, err := client.Models.GenerateContent(ctx, "gemini-2.0-flash", genai.Text("Tell me a story in 300 words."), nil)
+result, err := client.Models.GenerateContent(ctx, "gemini-3.5-flash", genai.Text("Tell me a story in 300 words."), nil)
 if err != nil {
     log.Fatal(err)
 }
 debugPrint(result) // utility for printing result
 ```
 
-### Obraz
+### รูปภาพ
 
-**Przed**
+**ก่อน**
 
 ### Python
 
 ```
 import google.generativeai as genai
 
-model = genai.GenerativeModel('gemini-2.0-flash')
+model = genai.GenerativeModel('gemini-3.5-flash')
 response = model.generate_content([
     'Tell me a story based on this image',
     Image.open(image_path)
@@ -393,7 +394,7 @@ print(response.text)
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI("GEMINI_API_KEY");
-const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
 
 function fileToGenerativePart(path, mimeType) {
   return {
@@ -425,7 +426,7 @@ if err != nil {
 }
 defer client.Close()
 
-model := client.GenerativeModel("gemini-2.0-flash")
+model := client.GenerativeModel("gemini-3.5-flash")
 
 imgData, err := os.ReadFile("path/to/organ.jpg")
 if err != nil {
@@ -442,11 +443,11 @@ if err != nil {
 printResponse(resp) // utility for printing response
 ```
 
-**Po**
+**หลัง**
 
 ### Python
 
-W nowym pakiecie SDK dostępnych jest wiele tych samych funkcji ułatwiających pracę. Na przykład obiekty `PIL.Image` są automatycznie konwertowane.
+SDK ใหม่มีฟีเจอร์อำนวยความสะดวกมากมายเช่นเดียวกับ SDK เดิม เช่น ระบบจะแปลงออบเจ็กต์ `PIL.Image` โดยอัตโนมัติ
 
 ```
 from google import genai
@@ -455,7 +456,7 @@ from PIL import Image
 client = genai.Client()
 
 response = client.models.generate_content(
-    model='gemini-2.0-flash',
+    model='gemini-3.5-flash',
     contents=[
         'Tell me a story based on this image',
         Image.open(image_path)
@@ -476,7 +477,7 @@ const organ = await ai.files.upload({
 });
 
 const response = await ai.models.generateContent({
-  model: "gemini-2.0-flash",
+  model: "gemini-3.5-flash",
   contents: [
     createUserContent([
       "Tell me a story based on this image",
@@ -509,16 +510,16 @@ contents := []*genai.Content{
     {Parts: parts},
 }
 
-result, err := client.Models.GenerateContent(ctx, "gemini-2.0-flash", contents, nil)
+result, err := client.Models.GenerateContent(ctx, "gemini-3.5-flash", contents, nil)
 if err != nil {
     log.Fatal(err)
 }
 debugPrint(result) // utility for printing result
 ```
 
-### Streaming
+### สตรีมมิง
 
-**Przed**
+**ก่อน**
 
 ### Python
 
@@ -538,7 +539,7 @@ for chunk in response:
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI("GEMINI_API_KEY");
-const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
 
 const prompt = "Write a story about a magic backpack.";
 
@@ -561,7 +562,7 @@ if err != nil {
 }
 defer client.Close()
 
-model := client.GenerativeModel("gemini-2.0-flash")
+model := client.GenerativeModel("gemini-3.5-flash")
 iter := model.GenerateContentStream(ctx, genai.Text("Write a story about a magic backpack."))
 for {
     resp, err := iter.Next()
@@ -575,7 +576,7 @@ for {
 }
 ```
 
-**Po**
+**หลัง**
 
 ### Python
 
@@ -585,7 +586,7 @@ from google import genai
 client = genai.Client()
 
 for chunk in client.models.generate_content_stream(
-  model='gemini-2.0-flash',
+  model='gemini-3.5-flash',
   contents='Tell me a story in 300 words.'
 ):
     print(chunk.text)
@@ -599,7 +600,7 @@ import {GoogleGenAI} from '@google/genai';
 const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
 
 const response = await ai.models.generateContentStream({
-  model: "gemini-2.0-flash",
+  model: "gemini-3.5-flash",
   contents: "Write a story about a magic backpack.",
 });
 let text = "";
@@ -620,7 +621,7 @@ if err != nil {
 
 for result, err := range client.Models.GenerateContentStream(
     ctx,
-    "gemini-2.0-flash",
+    "gemini-3.5-flash",
     genai.Text("Write a story about a magic backpack."),
     nil,
 ) {
@@ -631,9 +632,9 @@ for result, err := range client.Models.GenerateContentStream(
 }
 ```
 
-## Konfiguracja
+## การกำหนดค่า
 
-**Przed**
+**ก่อน**
 
 ### Python
 
@@ -641,7 +642,7 @@ for result, err := range client.Models.GenerateContentStream(
 import google.generativeai as genai
 
 model = genai.GenerativeModel(
-  'gemini-2.0-flash',
+  'gemini-3.5-flash',
     system_instruction='you are a story teller for kids under 5 years old',
     generation_config=genai.GenerationConfig(
       max_output_tokens=400,
@@ -662,7 +663,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI("GEMINI_API_KEY");
 const model = genAI.getGenerativeModel({
-  model: "gemini-2.0-flash",
+  model: "gemini-3.5-flash",
   generationConfig: {
     candidateCount: 1,
     stopSequences: ["x"],
@@ -687,7 +688,7 @@ if err != nil {
 }
 defer client.Close()
 
-model := client.GenerativeModel("gemini-2.0-flash")
+model := client.GenerativeModel("gemini-3.5-flash")
 model.SetTemperature(0.5)
 model.SetTopP(0.5)
 model.SetTopK(2.0)
@@ -700,11 +701,11 @@ if err != nil {
 printResponse(resp) // utility for printing response
 ```
 
-**Po**
+**หลัง**
 
 ### Python
 
-W przypadku wszystkich metod w nowym pakiecie SDK wymagane argumenty są podawane jako argumenty słów kluczowych. Wszystkie opcjonalne dane wejściowe są podawane w argumencie `config`. Argumenty konfiguracji można określić jako słowniki Pythona lub klasy `Config` w przestrzeni nazw `google.genai.types`. Dla wygody i spójności wszystkie definicje w module `types` są klasami `pydantic`.
+สำหรับเมธอดทั้งหมดใน SDK ใหม่ ระบบจะระบุอาร์กิวเมนต์ที่จำเป็นเป็นอาร์กิวเมนต์คีย์เวิร์ด และระบุอินพุตที่ไม่บังคับทั้งหมดในอาร์กิวเมนต์ `config` คุณระบุอาร์กิวเมนต์การกำหนดค่าเป็นพจนานุกรม Python หรือคลาส `Config` ในเนมสเปซ `google.genai.types` ก็ได้ คำจำกัดความทั้งหมดในโมดูล `types` จะเป็นคลาส `pydantic` เพื่อความสะดวกและสม่ำเสมอ
 
 ```
 from google import genai
@@ -713,7 +714,7 @@ from google.genai import types
 client = genai.Client()
 
 response = client.models.generate_content(
-  model='gemini-2.0-flash',
+  model='gemini-3.5-flash',
   contents='Tell me a story in 100 words.',
   config=types.GenerateContentConfig(
       system_instruction='you are a story teller for kids under 5 years old',
@@ -736,7 +737,7 @@ import {GoogleGenAI} from '@google/genai';
 const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
 
 const response = await ai.models.generateContent({
-  model: "gemini-2.0-flash",
+  model: "gemini-3.5-flash",
   contents: "Tell me a story about a magic backpack.",
   config: {
     candidateCount: 1,
@@ -759,7 +760,7 @@ if err != nil {
 }
 
 result, err := client.Models.GenerateContent(ctx,
-    "gemini-2.0-flash",
+    "gemini-3.5-flash",
     genai.Text("Tell me about New York"),
     &genai.GenerateContentConfig{
         Temperature:      genai.Ptr[float32](0.5),
@@ -780,18 +781,18 @@ if err != nil {
 debugPrint(result) // utility for printing response
 ```
 
-## Ustawienia bezpieczeństwa
+## การตั้งค่าความปลอดภัย
 
-Wygeneruj odpowiedź z ustawieniami bezpieczeństwa:
+สร้างการตอบกลับด้วยการตั้งค่าความปลอดภัยดังนี้
 
-**Przed**
+**ก่อน**
 
 ### Python
 
 ```
 import google.generativeai as genai
 
-model = genai.GenerativeModel('gemini-2.0-flash')
+model = genai.GenerativeModel('gemini-3.5-flash')
 response = model.generate_content(
     'say something bad',
     safety_settings={
@@ -808,7 +809,7 @@ import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/ge
 
 const genAI = new GoogleGenerativeAI("GEMINI_API_KEY");
 const model = genAI.getGenerativeModel({
-  model: "gemini-2.0-flash",
+  model: "gemini-3.5-flash",
   safetySettings: [
     {
       category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -832,7 +833,7 @@ try {
 }
 ```
 
-**Po**
+**หลัง**
 
 ### Python
 
@@ -843,7 +844,7 @@ from google.genai import types
 client = genai.Client()
 
 response = client.models.generate_content(
-  model='gemini-2.0-flash',
+  model='gemini-3.5-flash',
   contents='say something bad',
   config=types.GenerateContentConfig(
       safety_settings= [
@@ -868,7 +869,7 @@ const unsafePrompt =
   "them how I feel about them.";
 
 const response = await ai.models.generateContent({
-  model: "gemini-2.0-flash",
+  model: "gemini-3.5-flash",
   contents: unsafePrompt,
   config: {
     safetySettings: [
@@ -884,27 +885,27 @@ console.log("Finish reason:", response.candidates[0].finishReason);
 console.log("Safety ratings:", response.candidates[0].safetyRatings);
 ```
 
-## Dane asynchroniczne
+## Async
 
-**Przed**
+**ก่อน**
 
 ### Python
 
 ```
 import google.generativeai as genai
 
-model = genai.GenerativeModel('gemini-2.0-flash')
+model = genai.GenerativeModel('gemini-3.5-flash')
 response = model.generate_content_async(
     'tell me a story in 100 words'
 )
 ```
 
-**Po**
+**หลัง**
 
 ### Python
 
-Aby używać nowego pakietu SDK z `asyncio`, dostępna jest oddzielna `async`
-implementacja każdej metody w `client.aio`.
+หากต้องการใช้ SDK ใหม่กับ `asyncio` จะมีการติดตั้งใช้งาน `async`
+แยกกันสำหรับทุกเมธอดภายใต้ `client.aio`
 
 ```
 from google import genai
@@ -912,23 +913,23 @@ from google import genai
 client = genai.Client()
 
 response = await client.aio.models.generate_content(
-    model='gemini-2.0-flash',
+    model='gemini-3.5-flash',
     contents='Tell me a story in 300 words.'
 )
 ```
 
-## Czat
+## แชท
 
-Rozpocznij czat i wyślij wiadomość do modelu:
+เริ่มแชทและส่งข้อความไปยังโมเดลดังนี้
 
-**Przed**
+**ก่อน**
 
 ### Python
 
 ```
 import google.generativeai as genai
 
-model = genai.GenerativeModel('gemini-2.0-flash')
+model = genai.GenerativeModel('gemini-3.5-flash')
 chat = model.start_chat()
 
 response = chat.send_message(
@@ -943,7 +944,7 @@ response = chat.send_message(
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI("GEMINI_API_KEY");
-const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
 const chat = model.startChat({
   history: [
     {
@@ -972,7 +973,7 @@ if err != nil {
 }
 defer client.Close()
 
-model := client.GenerativeModel("gemini-2.0-flash")
+model := client.GenerativeModel("gemini-3.5-flash")
 cs := model.StartChat()
 
 cs.History = []*genai.Content{
@@ -997,7 +998,7 @@ if err != nil {
 printResponse(res) // utility for printing the response
 ```
 
-**Po**
+**หลัง**
 
 ### Python
 
@@ -1006,7 +1007,7 @@ from google import genai
 
 client = genai.Client()
 
-chat = client.chats.create(model='gemini-2.0-flash')
+chat = client.chats.create(model='gemini-3.5-flash')
 
 response = chat.send_message(
     message='Tell me a story in 100 words')
@@ -1021,7 +1022,7 @@ import {GoogleGenAI} from '@google/genai';
 
 const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
 const chat = ai.chats.create({
-  model: "gemini-2.0-flash",
+  model: "gemini-3.5-flash",
   history: [
     {
       role: "user",
@@ -1054,7 +1055,7 @@ if err != nil {
     log.Fatal(err)
 }
 
-chat, err := client.Chats.Create(ctx, "gemini-2.0-flash", nil, nil)
+chat, err := client.Chats.Create(ctx, "gemini-3.5-flash", nil, nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -1072,9 +1073,9 @@ if err != nil {
 debugPrint(result) // utility for printing result
 ```
 
-## Wywoływanie funkcji
+## การเรียกใช้ฟังก์ชัน
 
-**Przed**
+**ก่อน**
 
 ### Python
 
@@ -1093,7 +1094,7 @@ def get_current_weather(location: str) -> str:
     return "23C"
 
 model = genai.GenerativeModel(
-    model_name="gemini-2.0-flash",
+    model_name="gemini-3.5-flash",
     tools=[get_current_weather]
 )
 
@@ -1101,11 +1102,11 @@ response = model.generate_content("What is the weather in San Francisco?")
 function_call = response.candidates[0].parts[0].function_call
 ```
 
-**Po**
+**หลัง**
 
 ### Python
 
-W nowym pakiecie SDK domyślnie włączone jest automatyczne wywoływanie funkcji. Tutaj je wyłączasz.
+ใน SDK ใหม่ การเรียกใช้ฟังก์ชันอัตโนมัติจะเป็นค่าเริ่มต้น ซึ่งคุณจะปิดใช้ได้ดังนี้
 
 ```
 from google import genai
@@ -1124,7 +1125,7 @@ def get_current_weather(location: str) -> str:
     return "23C"
 
 response = client.models.generate_content(
-  model='gemini-2.0-flash',
+  model='gemini-3.5-flash',
   contents="What is the weather like in Boston?",
   config=types.GenerateContentConfig(
       tools=[get_current_weather],
@@ -1135,13 +1136,13 @@ response = client.models.generate_content(
 function_call = response.candidates[0].content.parts[0].function_call
 ```
 
-### Automatyczne wywoływanie funkcji
+### การเรียกใช้ฟังก์ชันอัตโนมัติ
 
-**Przed**
+**ก่อน**
 
 ### Python
 
-Stary pakiet SDK obsługuje automatyczne wywoływanie funkcji tylko na czacie. W nowym pakiecie SDK jest to domyślne działanie w `generate_content`.
+SDK เก่ารองรับการเรียกใช้ฟังก์ชันอัตโนมัติในการแชทเท่านั้น ใน SDK ใหม่ ลักษณะการทำงานนี้จะเป็นค่าเริ่มต้นใน `generate_content`
 
 ```
 import google.generativeai as genai
@@ -1150,7 +1151,7 @@ def get_current_weather(city: str) -> str:
     return "23C"
 
 model = genai.GenerativeModel(
-    model_name="gemini-2.0-flash",
+    model_name="gemini-3.5-flash",
     tools=[get_current_weather]
 )
 
@@ -1159,7 +1160,7 @@ chat = model.start_chat(
 result = chat.send_message("What is the weather in San Francisco?")
 ```
 
-**Po**
+**หลัง**
 
 ### Python
 
@@ -1172,7 +1173,7 @@ def get_current_weather(city: str) -> str:
     return "23C"
 
 response = client.models.generate_content(
-  model='gemini-2.0-flash',
+  model='gemini-3.5-flash',
   contents="What is the weather like in Boston?",
   config=types.GenerateContentConfig(
       tools=[get_current_weather]
@@ -1180,11 +1181,11 @@ response = client.models.generate_content(
 )
 ```
 
-## Wykonanie kodu
+## การดำเนินการกับโค้ด
 
-Wykonanie kodu to narzędzie, które umożliwia modelowi generowanie kodu Pythona, uruchamianie go i zwracanie wyniku.
+การดำเนินการกับโค้ดเป็นเครื่องมือที่ช่วยให้โมเดลสร้างโค้ด Python เรียกใช้โค้ด และแสดงผลลัพธ์
 
-**Przed**
+**ก่อน**
 
 ### Python
 
@@ -1192,7 +1193,7 @@ Wykonanie kodu to narzędzie, które umożliwia modelowi generowanie kodu Python
 import google.generativeai as genai
 
 model = genai.GenerativeModel(
-    model_name="gemini-2.0-flash",
+    model_name="gemini-3.5-flash",
     tools="code_execution"
 )
 
@@ -1208,7 +1209,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI("GEMINI_API_KEY");
 const model = genAI.getGenerativeModel({
-  model: "gemini-2.0-flash",
+  model: "gemini-3.5-flash",
   tools: [{ codeExecution: {} }],
 });
 
@@ -1221,7 +1222,7 @@ const result = await model.generateContent(
 console.log(result.response.text());
 ```
 
-**Po**
+**หลัง**
 
 ### Python
 
@@ -1232,7 +1233,7 @@ from google.genai import types
 client = genai.Client()
 
 response = client.models.generate_content(
-    model='gemini-2.0-flash',
+    model='gemini-3.5-flash',
     contents='What is the sum of the first 50 prime numbers? Generate and run '
             'code for the calculation, and make sure you get all 50.',
     config=types.GenerateContentConfig(
@@ -1249,7 +1250,7 @@ import {GoogleGenAI} from '@google/genai';
 const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
 
 const response = await ai.models.generateContent({
-  model: "gemini-2.0-flash",
+  model: "gemini-3.5-flash",
   contents: `Write and execute code that calculates the sum of the first 50 prime numbers.
             Ensure that only the executable code and its resulting output are generated.`,
 });
@@ -1265,27 +1266,27 @@ console.log("-".repeat(80));
 console.log("\n", response.text);
 ```
 
-## Szukaj groundingu
+## การเชื่อมต่อแหล่งข้อมูลของ Search
 
-`GoogleSearch` (Gemini>=2.0) i `GoogleSearchRetrieval` (Gemini < 2.0) to
-narzędzia, które umożliwiają modelowi pobieranie publicznych danych internetowych na potrzeby groundingu, obsługiwane przez
-Google.
+`GoogleSearch` (Gemini>=2.0) และ `GoogleSearchRetrieval` (Gemini < 2.0) เป็น
+เครื่องมือที่ช่วยให้โมเดลดึงข้อมูลเว็บสาธารณะเพื่อเชื่อมต่อแหล่งข้อมูล ซึ่งขับเคลื่อนโดย
+Google
 
-**Przed**
+**ก่อน**
 
 ### Python
 
 ```
 import google.generativeai as genai
 
-model = genai.GenerativeModel('gemini-2.0-flash')
+model = genai.GenerativeModel('gemini-3.5-flash')
 response = model.generate_content(
     contents="what is the Google stock price?",
     tools='google_search_retrieval'
 )
 ```
 
-**Po**
+**หลัง**
 
 ### Python
 
@@ -1296,7 +1297,7 @@ from google.genai import types
 client = genai.Client()
 
 response = client.models.generate_content(
-    model='gemini-2.0-flash',
+    model='gemini-3.5-flash',
     contents='What is the Google stock price?',
     config=types.GenerateContentConfig(
         tools=[
@@ -1308,17 +1309,17 @@ response = client.models.generate_content(
 )
 ```
 
-## Odpowiedź JSON
+## การตอบสนองของ JSON
 
-Generuj odpowiedzi w formacie JSON.
+สร้างคำตอบในรูปแบบ JSON ดังนี้
 
-**Przed**
+**ก่อน**
 
 ### Python
 
-Określając `response_schema` i ustawiając
-`response_mime_type="application/json"`, użytkownicy mogą ograniczyć model do
-generowania odpowiedzi `JSON` zgodnie z daną strukturą.
+เมื่อระบุ `response_schema` และตั้งค่า
+`response_mime_type="application/json"` ผู้ใช้จะจำกัดให้โมเดล
+สร้างการตอบกลับ `JSON` ตามโครงสร้างที่กำหนดได้
 
 ```
 import google.generativeai as genai
@@ -1334,7 +1335,7 @@ class CountryInfo(typing.TypedDict):
     official_language: str
     total_area_sq_mi: int
 
-model = genai.GenerativeModel(model_name="gemini-2.0-flash")
+model = genai.GenerativeModel(model_name="gemini-3.5-flash")
 result = model.generate_content(
     "Give me information of the United States",
     generation_config=genai.GenerationConfig(
@@ -1368,7 +1369,7 @@ const schema = {
 };
 
 const model = genAI.getGenerativeModel({
-  model: "gemini-2.0-flash",
+  model: "gemini-3.5-flash",
   generationConfig: {
     responseMimeType: "application/json",
     responseSchema: schema,
@@ -1381,11 +1382,11 @@ const result = await model.generateContent(
 console.log(result.response.text());
 ```
 
-**Po**
+**หลัง**
 
 ### Python
 
-Nowy pakiet SDK używa klas `pydantic` do udostępniania schematu (możesz jednak przekazać `genai.types.Schema` lub równoważny `dict`). Jeśli to możliwe, pakiet SDK przeanalizuje zwrócony kod JSON i zwróci wynik w `response.parsed`. Jeśli jako schemat podasz klasę `pydantic`, pakiet SDK przekonwertuje ten kod `JSON` na instancję klasy.
+SDK ใหม่ใช้คลาส `pydantic` เพื่อระบุสคีมา (แม้ว่าคุณจะส่ง `genai.types.Schema` หรือ `dict` ที่เทียบเท่ากันได้) SDK จะแยกวิเคราะห์ JSON ที่แสดงผลและแสดงผลลัพธ์ใน `response.parsed` หากทำได้ หากคุณระบุคลาส `pydantic` เป็นสคีมา SDK จะแปลง `JSON` นั้นเป็นอินสแตนซ์ของคลาส
 
 ```
 from google import genai
@@ -1404,7 +1405,7 @@ class CountryInfo(BaseModel):
     total_area_sq_mi: int
 
 response = client.models.generate_content(
-    model='gemini-2.0-flash',
+    model='gemini-3.5-flash',
     contents='Give me information of the United States.',
     config={
         'response_mime_type': 'application/json',
@@ -1422,7 +1423,7 @@ import {GoogleGenAI} from '@google/genai';
 
 const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
 const response = await ai.models.generateContent({
-  model: "gemini-2.0-flash",
+  model: "gemini-3.5-flash",
   contents: "List a few popular cookie recipes.",
   config: {
     responseMimeType: "application/json",
@@ -1442,13 +1443,13 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-## Pliki
+## ไฟล์
 
-### Prześlij
+### อัปโหลด
 
-Prześlij plik:
+อัปโหลดไฟล์ดังนี้
 
-**Przed**
+**ก่อน**
 
 ### Python
 
@@ -1464,7 +1465,7 @@ pathlib.Path('a11.txt').write_text(response.text)
 
 file = genai.upload_file(path='a11.txt')
 
-model = genai.GenerativeModel('gemini-2.0-flash')
+model = genai.GenerativeModel('gemini-3.5-flash')
 response = model.generate_content([
     'Can you summarize this file:',
     my_file
@@ -1472,7 +1473,7 @@ response = model.generate_content([
 print(response.text)
 ```
 
-**Po**
+**หลัง**
 
 ### Python
 
@@ -1491,7 +1492,7 @@ pathlib.Path('a11.txt').write_text(response.text)
 my_file = client.files.upload(file='a11.txt')
 
 response = client.models.generate_content(
-    model='gemini-2.0-flash',
+    model='gemini-3.5-flash',
     contents=[
         'Can you summarize this file:',
         my_file
@@ -1500,11 +1501,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### Wyświetl listę i pobierz
+### แสดงรายการและรับ
 
-Wyświetl listę przesłanych plików i pobierz przesłany plik o danej nazwie:
+แสดงรายการไฟล์ที่อัปโหลดและรับไฟล์ที่อัปโหลดด้วยชื่อไฟล์ดังนี้
 
-**Przed**
+**ก่อน**
 
 ### Python
 
@@ -1517,7 +1518,7 @@ for file in genai.list_files():
 file = genai.get_file(name=file.name)
 ```
 
-**Po**
+**หลัง**
 
 ### Python
 
@@ -1531,11 +1532,11 @@ for file in client.files.list():
 file = client.files.get(name=file.name)
 ```
 
-### Usuń
+### ลบ
 
-Usuń plik:
+ลบไฟล์ดังนี้
 
-**Przed**
+**ก่อน**
 
 ### Python
 
@@ -1549,7 +1550,7 @@ dummy_file = genai.upload_file(path='dummy.txt')
 file = genai.delete_file(name=dummy_file.name)
 ```
 
-**Po**
+**หลัง**
 
 ### Python
 
@@ -1565,11 +1566,11 @@ dummy_file = client.files.upload(file='dummy.txt')
 response = client.files.delete(name=dummy_file.name)
 ```
 
-## Buforowanie kontekstu
+## การแคชบริบท
 
-Buforowanie kontekstu umożliwia użytkownikowi jednorazowe przekazanie treści do modelu, zapisanie tokenów wejściowych w pamięci podręcznej, a następnie odwoływanie się do tokenów w pamięci podręcznej w kolejnych wywołaniach, aby obniżyć koszty.
+การแคชบริบทช่วยให้ผู้ใช้ส่งเนื้อหาไปยังโมเดลได้ครั้งเดียว แคชโทเค็นอินพุต แล้วอ้างอิงโทเค็นที่แคชไว้ในการเรียกครั้งต่อๆ ไปเพื่อลดค่าใช้จ่าย
 
-**Przed**
+**ก่อน**
 
 ### Python
 
@@ -1589,7 +1590,7 @@ document = genai.upload_file(path="a11.txt")
 
 # Create cache
 apollo_cache = caching.CachedContent.create(
-    model="gemini-2.0-flash-001",
+    model="gemini-3.5-flash",
     system_instruction="You are an expert at analyzing transcripts.",
     contents=[document],
 )
@@ -1615,7 +1616,7 @@ const uploadResult = await fileManager.uploadFile("path/to/a11.txt", {
 });
 
 const cacheResult = await cacheManager.create({
-  model: "models/gemini-2.0-flash",
+  model: "models/gemini-3.5-flash",
   contents: [
     {
       role: "user",
@@ -1641,7 +1642,7 @@ const result = await model.generateContent(
 console.log(result.response.text());
 ```
 
-**Po**
+**หลัง**
 
 ### Python
 
@@ -1669,7 +1670,7 @@ pathlib.Path('a11.txt').write_text(response.text)
 document = client.files.upload(file='a11.txt')
 
 # Create cache
-model='gemini-2.0-flash-001'
+model='gemini-3.5-flash'
 apollo_cache = client.caches.create(
       model=model,
       config={
@@ -1700,7 +1701,7 @@ const document = await ai.files.upload({
   config: { mimeType: "text/plain" },
 });
 console.log("Uploaded file name:", document.name);
-const modelName = "gemini-2.0-flash";
+const modelName = "gemini-3.5-flash";
 
 const contents = [
   createUserContent(createPartFromUri(document.uri, document.mimeType)),
@@ -1723,18 +1724,18 @@ const response = await ai.models.generateContent({
 console.log("Response text:", response.text);
 ```
 
-## Zliczaj tokeny
+## นับโทเค็น
 
-Zlicz liczbę tokenów w żądaniu.
+นับจำนวนโทเค็นในคำขอดังนี้
 
-**Przed**
+**ก่อน**
 
 ### Python
 
 ```
 import google.generativeai as genai
 
-model = genai.GenerativeModel('gemini-2.0-flash')
+model = genai.GenerativeModel('gemini-3.5-flash')
 response = model.count_tokens(
     'The quick brown fox jumps over the lazy dog.')
 ```
@@ -1746,7 +1747,7 @@ response = model.count_tokens(
 
  const genAI = new GoogleGenerativeAI("GEMINI_API_KEY");
  const model = genAI.getGenerativeModel({
-   model: "gemini-2.0-flash",
+   model: "gemini-3.5-flash",
  });
 
  // Count tokens in a prompt without calling text generation.
@@ -1769,7 +1770,7 @@ response = model.count_tokens(
  // { promptTokenCount: 11, candidatesTokenCount: 124, totalTokenCount: 135 }
 ```
 
-**Po**
+**หลัง**
 
 ### Python
 
@@ -1779,7 +1780,7 @@ from google import genai
 client = genai.Client()
 
 response = client.models.count_tokens(
-    model='gemini-2.0-flash',
+    model='gemini-3.5-flash',
     contents='The quick brown fox jumps over the lazy dog.',
 )
 ```
@@ -1792,23 +1793,23 @@ import {GoogleGenAI} from '@google/genai';
 const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
 const prompt = "The quick brown fox jumps over the lazy dog.";
 const countTokensResponse = await ai.models.countTokens({
-  model: "gemini-2.0-flash",
+  model: "gemini-3.5-flash",
   contents: prompt,
 });
 console.log(countTokensResponse.totalTokens);
 
 const generateResponse = await ai.models.generateContent({
-  model: "gemini-2.0-flash",
+  model: "gemini-3.5-flash",
   contents: prompt,
 });
 console.log(generateResponse.usageMetadata);
 ```
 
-## Generuj obrazy
+## สร้างรูปภาพ
 
-Generuj obrazy:
+สร้างรูปภาพดังนี้
 
-**Przed**
+**ก่อน**
 
 ### Python
 
@@ -1827,7 +1828,7 @@ gen_images = imagen.generate_images(
 )
 ```
 
-**Po**
+**หลัง**
 
 ### Python
 
@@ -1852,11 +1853,11 @@ for n, image in enumerate(gen_images.generated_images):
         image.image.image_bytes)
 ```
 
-## Osadzaj treści
+## ฝังเนื้อหา
 
-Generuj osadzenia treści.
+สร้างการฝังเนื้อหาดังนี้
 
-**Przed**
+**ก่อน**
 
 ### Python
 
@@ -1884,7 +1885,7 @@ const result = await model.embedContent("Hello world!");
 console.log(result.embedding);
 ```
 
-**Po**
+**หลัง**
 
 ### Python
 
@@ -1914,12 +1915,12 @@ const result = await ai.models.embedContent({
 console.log(result.embeddings);
 ```
 
-Prześlij opinię
+ส่งความคิดเห็น
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Ostatnia aktualizacja: 2026-05-13 UTC.
+อัปเดตล่าสุด 2026-06-01 UTC
 
-Chcesz przekazać coś jeszcze?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-05-13 UTC."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-01 UTC"],[],[]]
