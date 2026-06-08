@@ -105,6 +105,46 @@ The `headers`, `timeout`, `sse_read_timeout`, and `auth` parameters have been re
 
 Note: `sse_client` retains its `headers`, `timeout`, `sse_read_timeout`, and `auth` parameters — only the streamable HTTP transport changed.
 
+### `terminate_windows_process` removed
+
+The deprecated `mcp.os.win32.utilities.terminate_windows_process` function has been
+removed. Process termination is handled internally by the `stdio_client` context
+manager; there is no replacement API. The Windows tree-termination helper
+`terminate_windows_process_tree` no longer accepts a `timeout_seconds` argument —
+the value was never used (Job Object termination is immediate).
+
+### `stdio_client` no longer kills children of a gracefully-exited server on POSIX
+
+When a server exits on its own after `stdio_client` closes its stdin, background
+child processes the server leaves behind are no longer killed on POSIX — their
+lifetime is the server's business. The old behavior was a side effect of a shutdown
+wait gated on the stdio pipes closing rather than on process exit: a child holding
+an inherited pipe made a well-behaved server look hung, so its whole process tree
+was killed. (That gating is an asyncio behavior specific to Python 3.11+ — on
+Python 3.10 and the trio backend the old wait already resolved on process exit, so
+the spurious kill never fired there.) A server that does not exit within the grace
+period is still terminated
+along with its entire process group. On Windows, children stay in the server's Job
+Object and are still killed at shutdown — now deterministically when the job handle
+is closed, rather than whenever the handle happened to be garbage-collected.
+
+If you relied on `stdio_client` killing everything the server spawned, make the
+server terminate its own children on shutdown (its stdin reaching EOF is the
+shutdown signal), or clean up the process tree from the host application after
+`stdio_client` exits.
+
+Two related shutdown refinements: `stdio_client` now closes its end of the pipes
+deterministically at shutdown, so a surviving child that keeps writing to an
+inherited stdout receives `EPIPE`/`SIGPIPE` once the client is gone (previously the
+pipe lingered until garbage collection); and a failed write to a server that is
+still running now surfaces as a closed connection (`CONNECTION_CLOSED`) on the read
+side instead of leaving requests waiting indefinitely.
+
+`terminate_posix_process_tree` now requires the process to lead its own process
+group (spawned with `start_new_session=True`); the `getpgid()` lookup and the
+per-process terminate/kill fallback are gone. The win32 utilities logger is now
+named `mcp.os.win32.utilities` (was `client.stdio.win32`).
+
 ### Removed type aliases and classes
 
 The following deprecated type aliases and classes have been removed from `mcp.types`:
@@ -595,7 +635,7 @@ The `RequestContext` class has been split to separate shared fields from server-
 **`RequestContext` changes:**
 
 - Type parameters reduced from `RequestContext[SessionT, LifespanContextT, RequestT]` to `RequestContext[SessionT]`
-- Server-specific fields (`lifespan_context`, `experimental`, `request`, `close_sse_stream`, `close_standalone_sse_stream`) moved to new `ServerRequestContext` class in `mcp.server.context`
+- Server-specific fields (`lifespan_context`, `request`, `close_sse_stream`, `close_standalone_sse_stream`) moved to new `ServerRequestContext` class in `mcp.server.context`
 
 **Before (v1):**
 
@@ -861,7 +901,7 @@ server = Server("my-server", on_list_tools=handle_list_tools, on_call_tool=handl
 
 **Key differences:**
 
-- Handlers receive `(ctx, params)` instead of the full request object or unpacked arguments. `ctx` is a `ServerRequestContext` with `session`, `lifespan_context`, and `experimental` fields (plus `request_id`, `meta`, etc. for request handlers). `params` is the typed request params object.
+- Handlers receive `(ctx, params)` instead of the full request object or unpacked arguments. `ctx` is a `ServerRequestContext` with `session` and `lifespan_context` fields (plus `request_id`, `meta`, etc. for request handlers). `params` is the typed request params object.
 - Handlers return the full result type (e.g. `ListToolsResult`) rather than unwrapped values (e.g. `list[Tool]`).
 - The automatic `jsonschema` input/output validation that the old `call_tool()` decorator performed has been removed. There is no built-in replacement — if you relied on schema validation in the lowlevel server, you will need to validate inputs yourself in your handler.
 
@@ -872,7 +912,7 @@ All handlers receive `ctx: ServerRequestContext` as the first argument. The seco
 | v1 decorator | v2 constructor kwarg | `params` type | return type |
 |---|---|---|---|
 | `@server.list_tools()` | `on_list_tools` | `PaginatedRequestParams \| None` | `ListToolsResult` |
-| `@server.call_tool()` | `on_call_tool` | `CallToolRequestParams` | `CallToolResult \| CreateTaskResult` |
+| `@server.call_tool()` | `on_call_tool` | `CallToolRequestParams` | `CallToolResult` |
 | `@server.list_resources()` | `on_list_resources` | `PaginatedRequestParams \| None` | `ListResourcesResult` |
 | `@server.list_resource_templates()` | `on_list_resource_templates` | `PaginatedRequestParams \| None` | `ListResourceTemplatesResult` |
 | `@server.read_resource()` | `on_read_resource` | `ReadResourceRequestParams` | `ReadResourceResult` |
@@ -1039,37 +1079,11 @@ from mcp.server import ServerRequestContext
 # but None in notification handlers
 ```
 
-### Experimental: task handler decorators removed
+### Experimental Tasks support removed
 
-The experimental decorator methods on `ExperimentalHandlers` (`@server.experimental.list_tasks()`, `@server.experimental.get_task()`, etc.) have been removed.
+Tasks (SEP-1686) have been removed from the MCP specification and are no longer part of this SDK. The `mcp.client.experimental`, `mcp.server.experimental`, `mcp.shared.experimental`, and `mcp.server.lowlevel.experimental` modules have been removed, along with all `Task*` types, the `tasks` capability fields, `Tool.execution`, and the `experimental` properties on `ClientSession`, `ServerSession`, `Server`, and `ServerRequestContext`.
 
-Default task handlers are still registered automatically via `server.experimental.enable_tasks()`. Custom handlers can be passed as `on_*` kwargs to override specific defaults.
-
-**Before (v1):**
-
-```python
-server = Server("my-server")
-server.experimental.enable_tasks()
-
-@server.experimental.get_task()
-async def custom_get_task(request: GetTaskRequest) -> GetTaskResult:
-    ...
-```
-
-**After (v2):**
-
-```python
-from mcp.server import Server, ServerRequestContext
-from mcp.types import GetTaskRequestParams, GetTaskResult
-
-
-async def custom_get_task(ctx: ServerRequestContext, params: GetTaskRequestParams) -> GetTaskResult:
-    ...
-
-
-server = Server("my-server")
-server.experimental.enable_tasks(on_get_task=custom_get_task)
-```
+Tasks are expected to return as a separate MCP extension in a future release.
 
 ## Deprecations
 
