@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/admin-api
-fetched_at: 2026-05-25T05:15:49.964060+00:00
+fetched_at: 2026-06-08T05:24:57.611193+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,6 +10,8 @@ The Admin API lets you programmatically access your team's data, including membe
 
 - The Admin API uses [Basic Authentication](https://cursor.com/docs/api.md#basic-authentication) with your API key as the username.
 - For details on creating API keys, authentication methods, rate limits, and best practices, see the [API Overview](https://cursor.com/docs/api.md).
+
+For org-wide actions across your teams, see [Organizations](https://cursor.com/docs/enterprise/organizations.md) and the [Organization Admin API](https://cursor.com/docs/account/organizations/organization-admin-api.md).
 
 ## Endpoints
 
@@ -77,7 +79,7 @@ End time (defaults to now). See [Date Formats](https://cursor.com/docs/account/t
 
 `eventTypes` string
 
-Comma-separated event types to filter by. Possible values: `login`, `logout`, `add_user`, `remove_user`, `update_user_role`, `team_settings`, `team_api_key`, `user_api_key`, `privacy_mode`, `user_spend_limit`, `team_rule`, `team_repo`, `team_hook`, `team_command`, `create_directory_group`, `delete_directory_group`, `update_directory_group`, `update_directory_group_permissions`, `add_user_to_directory_group`, `remove_user_from_directory_group`, `bugbot_installation`, `bugbot_installation_settings`, `bugbot_repo_settings`, `bugbot_team_rule`, `bugbot_team_settings`, `bugbot_bulk_repo_update`
+Comma-separated event types to filter by. Possible values: `login`, `logout`, `add_user`, `remove_user`, `update_user_role`, `team_settings`, `mcp_server_config`, `team_api_key`, `user_api_key`, `privacy_mode`, `user_spend_limit`, `team_rule`, `team_repo`, `team_hook`, `team_command`, `create_directory_group`, `delete_directory_group`, `update_directory_group`, `update_directory_group_permissions`, `add_user_to_directory_group`, `remove_user_from_directory_group`, `bugbot_installation`, `bugbot_installation_settings`, `bugbot_repo_settings`, `bugbot_team_rule`, `bugbot_team_settings`, `bugbot_bulk_repo_update`
 
 `search` string
 
@@ -418,6 +420,8 @@ Each object in `teamMemberSpend` contains:
 - `hardLimitOverrideDollars` number - Custom hard spending limit override in dollars for this user (0 means no override)
 - `monthlyLimitDollars` number | null - Monthly spending limit in dollars set for this user, or `null` if no limit is set
 
+On June 4th, 2026 we added additional precision to the spendCents and overallSpendCents fields to avoid rounding errors when comparing results to invoice amounts.
+
 ```bash
 curl -X POST https://api.cursor.com/teams/spend \
   -u YOUR_API_KEY: \
@@ -436,8 +440,8 @@ curl -X POST https://api.cursor.com/teams/spend \
   "teamMemberSpend": [
     {
       "userId": 12345,
-      "spendCents": 2450,
-      "overallSpendCents": 2450,
+      "spendCents": 2450.125487,
+      "overallSpendCents": 2450.125487,
       "fastPremiumRequests": 1250,
       "name": "Alex",
       "email": "developer@company.com",
@@ -447,8 +451,8 @@ curl -X POST https://api.cursor.com/teams/spend \
     },
     {
       "userId": 12346,
-      "spendCents": 1875,
-      "overallSpendCents": 3200,
+      "spendCents": 1875.500123,
+      "overallSpendCents": 3200.750456,
       "fastPremiumRequests": 980,
       "name": "Sam",
       "email": "admin@company.com",

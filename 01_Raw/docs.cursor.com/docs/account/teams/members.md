@@ -1,12 +1,12 @@
 ---
 source_url: https://cursor.com/docs/account/teams/members
-fetched_at: 2026-05-05T19:55:35.497035+00:00
+fetched_at: 2026-06-08T05:24:57.736282+00:00
 fetch_method: mintlify_md
 ---
 
-# Members & Roles
+# Members, Roles, and Seat Types
 
-Cursor teams have three roles:
+Cursor Teams use roles for permissions and seat types for usage limits.
 
 ## Roles
 
@@ -14,13 +14,13 @@ Cursor teams have three roles:
 
 - Full access to Cursor's Pro features
 - No access to billing settings or admin dashboard
-- Can see their own usage and remaining usage-based budget
+- Can see their own usage and remaining included usage
 
 **Admins** control team management and security settings.
 
 - Full access to Pro features
-- Add/remove members, modify roles, setup SSO
-- Configure usage-based pricing and spending limits
+- Add/remove members, modify roles, set up SSO
+- Configure on-demand usage and spending limits
 - Access to team analytics
 
 **Unpaid Admins** manage teams without using a paid seat - ideal for IT or finance staff who don't need Cursor access.
@@ -29,6 +29,34 @@ Cursor teams have three roles:
 - Same administrative capabilities as Admins
 
 Unpaid Admins require at least one paid user on the team.
+
+## Seat Types
+
+Teams offers two paid seat types, plus a free admin-only seat type:
+
+**Standard seats** are for light coding agent users.
+
+- $40/user/mo
+- Includes the standard Teams usage allowance
+- Can be assigned to Members or Admins
+
+**Premium seats** are for coding agent power users who need more included usage.
+
+- $120/user/mo
+- Includes 5x the usage of a Standard seat
+- Can be assigned to Members or Admins
+
+**Unpaid Admin seats** are for IT, security, or finance admins who manage Cursor without using it.
+
+- Free
+- No Cursor product access or included usage
+- Can only be assigned to Unpaid Admins
+
+### Change a seat type
+
+Admins can upgrade a paid user from Standard to Premium from the member context menu. The upgrade takes effect immediately, and billing is adjusted for the rest of the billing cycle.
+
+Admins can downgrade a paid user from Premium to Standard from the member context menu. The user keeps Premium through the end of the current billing cycle, then moves to Standard at the next renewal.
 
 ## Role Comparison
 
@@ -128,8 +156,7 @@ Domain verification is required to enable SSO.
 
 Access usage settings to:
 
-- Enable usage-based pricing
-- Enable for premium models
+- Enable on-demand usage
 - Set admin-only modifications
 - Set monthly spending limits
 - Monitor team-wide usage
@@ -142,7 +169,7 @@ When adding team members:
 - New members are charged pro-rata for their remaining time in the billing period
 - Unpaid admin seats aren't counted
 
-Mid-month additions charge only for days used. When removing members who have used credits, their seat remains occupied until the end of the billing cycle - no pro-rated refunds are given.
+Mid-month additions charge only for days used. The seat price depends on whether the user has a Standard or Premium seat. When removing members who have used credits, their seat remains occupied until the end of the billing cycle.
 
 Role changes (e.g., Admin to Unpaid Admin) adjust billing from the change date. Choose monthly or yearly billing.
 

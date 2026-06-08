@@ -1,10 +1,10 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/setup
-fetched_at: 2026-05-25T05:15:50.829275+00:00
+fetched_at: 2026-06-08T05:24:58.245094+00:00
 fetch_method: mintlify_md
 ---
 
-# Setup
+# Cloud Environment Setup
 
 Cloud agents run on isolated Ubuntu machines. Configure the environment so the agent has the same repos, tools, dependencies, secrets, and network access a developer would use.
 

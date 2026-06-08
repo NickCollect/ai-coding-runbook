@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/security-network
-fetched_at: 2026-06-01T05:54:48.639517+00:00
+fetched_at: 2026-06-08T05:24:58.166339+00:00
 fetch_method: mintlify_md
 ---
 
@@ -61,9 +61,9 @@ Cloud Agents store two types of data for every run:
 - **Conversation history.** The prompts, model responses, tool calls, and demo artifacts that make up the agent's transcript. This is the data you see when you open an agent on the web or from a desktop client.
 - **Environment snapshots.** Encrypted point-in-time copies of the virtual machine disk. Snapshots let you customize VM environments and allow agents to start or resume without recloning the repository or running the setup again.
 
-Conversation history is kept indefinitely by default so you can revisit and resume past runs. Environment snapshots are stored for a maximum of **90 days** and are deleted automatically after, regardless of plan or policy. Any code Cursor stores for a Cloud Agent lives inside these two artifacts and follows the same retention windows.
+Conversation history is kept indefinitely by default so you can revisit and resume past runs. Environment snapshots are stored for a maximum of **90 days** of inactivity. Each time an agent starts or resumes from a snapshot, its expiry extends for another 90 days. Once a snapshot goes unused for 90 days, it's deleted automatically, regardless of plan or policy.
 
-You can use the [Delete Agent API](https://cursor.com/docs/cloud-agent/api/endpoints.md#delete-an-agent-permanently) to explicitly delete a cloud agent's conversation history.
+You can use the [Delete Agent API](https://cursor.com/docs/cloud-agent/api/endpoints.md#delete-an-agent-permanently) to explicitly delete a cloud agent's conversation history. This endpoint removes the conversation transcript and its artifacts. It doesn't delete environment snapshots, which can't be deleted on demand and instead follow the retention window above.
 
 ### Cloud agent retention policies
 
@@ -74,7 +74,7 @@ Enterprise team admins can cap how long the team's Cloud Agent data is kept from
 When you set the policy to **90 days**:
 
 - A background job deletes conversations older than the retention policy window.
-- Environment snapshots continue to follow the 90-day platform cap.
+- Environment snapshots continue to follow the rolling 90-day inactivity window described above.
 - The policy applies to every agent run the team owns, including runs from saved environments and the [API](https://cursor.com/docs/cloud-agent/api/v0.md).
 
 Switching back to **Indefinite** stops further conversation deletions but doesn't restore data that's already been removed.
@@ -223,6 +223,8 @@ If you need to add the proxy IPs directly to an allowlist, use these addresses:
 
 These IP addresses are stable. If the list ever changes, teams using IP allow
 lists will get advance notice before any address is added or removed.
+
+Enterprise customers with private GitHub Enterprise Server or GitLab Enterprise deployments can use [private connectivity options](https://cursor.com/docs/enterprise/private-connectivity.md), so Cloud Agents and Bugbot can access private source control systems.
 
 
 ---

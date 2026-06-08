@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/claude-opus-4-7
-fetched_at: 2026-06-01T05:54:49.235561+00:00
+fetched_at: 2026-06-08T05:24:58.639025+00:00
 fetch_method: mintlify_md
 ---
 
@@ -30,7 +30,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Opus 4.7 draws from the **API** pool, which charges at the rates below. Individual plans include at least $20 of API usage each month (more on higher tiers). All prices are per million tokens.
 
-All Opus 4.7 prompts bill at the base per-token rates in the table above, including when you use Max Mode and context goes above 200k. There is no separate long-context multiplier for Opus 4.7; up to 1M tokens at the same rates.
+All Opus 4.7 prompts bill at the base per-token rates in the table above, including when you use Max Mode and context goes above 300k. There is no separate long-context multiplier for Opus 4.7; up to 1M tokens at the same rates.
 
 Opus 4.7 supports a thinking variant for deeper reasoning. We recommend using the high thinking variant for the strongest results.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/identity-and-access-management
-fetched_at: 2026-05-18T05:02:44.179747+00:00
+fetched_at: 2026-06-08T05:24:58.351268+00:00
 fetch_method: mintlify_md
 ---
 
@@ -21,6 +21,8 @@ SSO lets your users authenticate to Cursor using your existing identity provider
 
 Cursor supports SAML 2.0 integration with providers like Okta, Azure AD, Google Workspace, and OneLogin. When you enable SSO, you can require it for all team members, preventing password-based authentication entirely.
 
+If your company has multiple linked teams, we recommend a shared org-level SSO model through [Organizations](https://cursor.com/docs/enterprise/organizations.md). Team-level SSO setups are still supported for team-specific identity requirements.
+
 See [SSO and SAML setup](https://cursor.com/docs/account/teams/sso.md) for detailed configuration instructions.
 
 ## SCIM provisioning
@@ -39,7 +41,7 @@ See [SCIM provisioning](https://cursor.com/docs/account/teams/scim.md) for setup
 
 Cursor teams have three roles: Members, Admins, and Unpaid Admins.
 
-See [Members & Roles](https://cursor.com/docs/account/teams/members.md) for more information.
+See [Members, Roles, and Seat Types](https://cursor.com/docs/account/teams/members.md) for more information.
 
 ## MDM policies
 

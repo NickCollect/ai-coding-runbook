@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/sdk/python
-fetched_at: 2026-06-01T05:54:49.971584+00:00
+fetched_at: 2026-06-08T05:24:59.301772+00:00
 fetch_method: mintlify_md
 ---
 
@@ -820,6 +820,20 @@ agent = Agent.resume(
 )
 ```
 
+### Local persistence
+
+Local agents persist conversation state and run metadata through the bridge, so follow-ups and `Agent.resume()` survive a process restart. The bridge keeps this under a per-workspace state root on disk by default. Cloud agents persist server-side, so resuming a cloud agent from anywhere returns the same conversation.
+
+Local persistence is workspace-scoped. When the bridge runs as a long-lived sidecar or subprocess, give it the same workspace as the agent so local list, get, and resume calls resolve the right agents. Set it once on the client and pass `cwd` to the local list and get calls:
+
+```python
+from cursor_sdk import CursorClient
+
+with CursorClient.launch_bridge(workspace="/path/to/repo") as client:
+    agents = client.agents.list(runtime="local", cwd="/path/to/repo")
+    info = client.agents.get(agents.items[0].agent_id, cwd="/path/to/repo")
+```
+
 ## Inspecting agents and runs
 
 Use `CursorClient` for list, get, and pagination APIs.
@@ -1069,6 +1083,10 @@ agent = Agent.create(
 ```
 
 Subagents committed to the repo at `.cursor/agents/*.md` (with `name`, `description`, and optional `model` frontmatter) are also picked up. Inline definitions override file-based ones with the same name.
+
+### Nested subagents
+
+Subagents can spawn their own subagents. When a subagent uses the `Agent` tool, it reaches the same subagent executor the parent has, so a parent can delegate to a subagent that delegates further. Each level sees the same set of named subagents. Nesting works out of the box; you don't configure anything to turn it on.
 
 ## Hooks
 

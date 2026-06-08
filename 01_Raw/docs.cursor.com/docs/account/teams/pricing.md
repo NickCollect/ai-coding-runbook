@@ -1,42 +1,60 @@
 ---
 source_url: https://cursor.com/docs/account/teams/pricing
-fetched_at: 2026-06-01T05:54:48.012950+00:00
+fetched_at: 2026-06-08T05:24:57.759745+00:00
 fetch_method: mintlify_md
 ---
 
 # Team Pricing
 
-There are two teams plans: Teams ($40/user/mo) and Enterprise (Custom).
+There are two business plans: Teams and Enterprise (Custom). Teams offers two types of seats: Standard ($40/user/mo) and Premium (5x usage at $120/user/mo).
 
 Team plans provide additional features like:
 
-- Privacy Mode enforcement
-- Admin Dashboard with usage stats (also accessible via [Admin API](https://cursor.com/docs/account/teams/admin-api.md))
-- Centralized team billing
+- Centralized team billing and administration, with usage stats also available via the [Admin API](https://cursor.com/docs/account/teams/admin-api.md)
+- Team marketplace for internal rules, skills, and plugins
+- Agentic code reviews with Bugbot
+- Cloud agents and automations with shared team context
+- Usage analytics to understand team behavior
+- Team-wide privacy mode enforcement
 - SAML/OIDC SSO
 
 We recommend Teams for any customer that is happy self-serving. We recommend [Enterprise](https://cursor.com/docs/enterprise.md) for customers that need priority support, pooled usage, invoicing, SCIM, or advanced security controls. [Contact sales](https://cursor.com/contact-sales?source=docs-teams-pricing) to get started.
 
 ## How pricing works
 
-Teams pricing is usage-based. Each seat includes monthly usage, and you can continue using Cursor beyond that with on-demand usage.
+Teams pricing is based on paid seats and usage. Each paid seat includes monthly usage, and you can continue using Cursor beyond that with on-demand usage.
+
+### Seat types
+
+Teams has two paid seat types and one free admin-only seat type:
+
+- **Standard**: $40/user/mo with the standard Teams usage allowance
+- **Premium**: $120/user/mo with 5x the usage of a Standard seat
+- **Free**: $0/user/mo for Unpaid Admins who manage the team without Cursor access
+
+Seat type is separate from role. Members and Admins can have either a Standard or Premium seat. Unpaid Admins don't use a paid seat.
 
 ### Included usage
 
-Each team seat ($40/mo) comes with **$20/mo of included usage**. This usage:
+Each paid seat comes with included usage across two pools:
 
-- Is allocated per user (each user gets their own $20)
-- Does not transfer between team members
-- Resets at the start of each billing cycle
-- Covers all agent requests at public list API prices + Cursor Token Rate
+- Composer and Auto
+- Third-party API models
+
+Usage is allocated per user based on seat type, does not transfer between team members, and resets at the start of each billing cycle. Third-party API model usage is charged at public list API prices + Cursor Token Rate.
+
+The [usage dashboard](https://cursor.com/dashboard/usage) tracks included usage separately for:
+
+- Composer and Auto
+- Third-party API models
 
 Our [Enterprise plan](https://cursor.com/docs/enterprise.md) offers pooled usage shared between all users in a team. [Get in touch](https://cursor.com/contact-sales?source=docs-teams-pricing) with our team to learn more.
 
 ### On-demand usage
 
-On-demand usage allows you to continue using models after your included amount is consumed, billed in arrears.
+On-demand usage allows you to continue using models after included usage is consumed, billed in arrears.
 
-When exceeding the $20 of included usage, team members automatically continue with **on-demand usage**:
+When a team member consumes all of their included third-party API model usage, Cursor switches them to Composer and Auto. If they continue using third-party API models, or if they fully consume their Composer and Auto included usage, they continue with **on-demand usage** if it is enabled:
 
 - Billed monthly at the same rates (API prices + Cursor Token Rate)
 - No interruption in service or quality
@@ -57,7 +75,7 @@ The Cursor Token Rate applies to all tokens: input, output, and cached tokens. T
 
 ## Active seats
 
-Cursor bills per active user, not pre-allocated seats. Add or remove users anytime and billing will adjust immediately.
+Cursor bills per active paid seat, not pre-allocated seats. Add, remove, upgrade, or downgrade users anytime and billing will adjust based on seat type.
 
 Refunds appear as account credit on your next invoice. Your renewal date stays the same.
 

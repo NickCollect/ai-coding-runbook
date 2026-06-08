@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/github
-fetched_at: 2026-06-01T05:54:48.978348+00:00
+fetched_at: 2026-06-08T05:24:58.464404+00:00
 fetch_method: mintlify_md
 ---
 
@@ -53,6 +53,12 @@ Add these IP addresses to your allowlist:
 
 For other connection options beyond IP whitelisting, see [Advanced networking](https://cursor.com/docs/integrations/github.md#advanced-networking).
 
+#### Proxy requirements
+
+If you run a proxy in front of GHES, make sure it allows Cursor's GitHub App integration to use authenticated GitHub REST and GraphQL APIs. Cursor uses these APIs during app setup and after webhook delivery to resolve repository identity, inspect pull request state, read checks and reviews, and update prior Bugbot output.
+
+The proxy should allow authenticated GitHub API requests from Cursor without blocking or rewriting them.
+
 ### Register the Cursor Enterprise App
 
 1. Go to [Integrations in the dashboard](https://cursor.com/dashboard/integrations) → **Advanced** → **GitHub Enterprise Server**
@@ -91,27 +97,27 @@ If your organization uses IdP-defined allowlists in GitHub or otherwise cannot u
 
 ## Advanced networking
 
-Self-hosted instances support multiple connection methods beyond IP whitelisting.
+Self-hosted instances support multiple connection methods beyond IP whitelisting. For setup details and supported private networking options, see [Private Connectivity](https://cursor.com/docs/enterprise/private-connectivity.md).
 
-### PrivateLink (AWS) or Private Service Connect (GCP)
+### AWS PrivateLink
 
-Available for Enterprise customers. Allow Cursor to access your instance over a private network connection. [Contact your Cursor representative](https://cursor.com/contact-sales?source=docs-bugbot-private-network) for setup.
+Available for Enterprise customers. Use AWS PrivateLink when your GitHub Enterprise Server is in AWS or can sit behind an AWS Network Load Balancer. PrivateLink can cover Cursor accessing GHES and, when needed, GHES sending webhooks back to Cursor without public internet egress.
 
-**Best for:** Instances behind a firewall on a private network in AWS, Azure, or GCP
+**Best for:** AWS-hosted GHES instances and teams that want private VPC endpoint connectivity
 
-**Security:** HTTPS encryption with optional mTLS, PrivateLink/Service Connect, VPC allowlisting, service account access tokens
+**Security:** HTTPS encryption, AWS PrivateLink, VPC endpoint policies, service account access tokens
 
-**Drawbacks:** Only supports public clouds with private networking connections between VPCs
+**Drawbacks:** Requires coordination with Cursor and AWS endpoint service setup.
 
-### Reverse Proxy Tunnel
+### Cloudflare Tunnel
 
-Available for Enterprise customers. Run a reverse proxy tunnel on-premises that establishes a long-lived websocket connection to Cursor's servers. Network requests are forwarded through to your instance. Requires no inbound network access. [Contact your Cursor representative](https://cursor.com/contact-sales?source=docs-bugbot-on-prem-proxy) for setup.
+Available for Enterprise customers. Use Cloudflare Tunnel when AWS PrivateLink is not practical or when you need an outbound-only deployment model. Your network runs `cloudflared`, and Cursor provides the tunnel hostname and token.
 
 **Best for:** Environments without inbound network access
 
-**Security:** HTTPS encryption, service account access tokens
+**Security:** HTTPS encryption, Cloudflare Tunnel, service account access tokens
 
-**Drawbacks:** Introduces additional complexity, maintenance requirements, and potential security considerations compared to more direct connection methods
+**Drawbacks:** Requires running and maintaining `cloudflared` in your environment.
 
 ## Permissions
 

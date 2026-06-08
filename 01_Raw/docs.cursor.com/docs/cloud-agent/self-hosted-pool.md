@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted-pool
-fetched_at: 2026-05-25T05:15:50.762447+00:00
+fetched_at: 2026-06-08T05:24:58.246411+00:00
 fetch_method: mintlify_md
 ---
 
@@ -70,7 +70,7 @@ export CURSOR_API_KEY="your-service-account-api-key"
 You can also pass the key directly:
 
 ```bash
-agent worker start --api-key "your-service-account-api-key"
+agent worker --api-key "your-service-account-api-key" start
 ```
 
 ## Start a pool worker
@@ -79,16 +79,83 @@ Run the worker from the git repo it should serve:
 
 ```bash
 cd /path/to/repo
-agent worker start --pool
+agent worker --pool start
 ```
 
 `--pool` registers the worker for pool assignment. Each Cloud Agent session claims one worker at a time. For orchestrated environments, combine it with `--idle-release-timeout` so the process exits cleanly after work completes:
 
 ```bash
-agent worker start --pool --idle-release-timeout 600
+agent worker --pool --idle-release-timeout 600 start
 ```
 
 `--idle-release-timeout` keeps the worker alive for a window (in seconds) after a session ends to handle follow-up messages. If a follow-up arrives, the timer resets. Once the timeout fires, the CLI exits with code 0.
+
+## Register multiple repo roots
+
+Self-hosted multi-repo support is configured at worker startup by registering multiple workspace roots. Pass `--worker-dir` once for each local repo root. The first root is the primary repository for assignment identity and dashboard display. All roots are exposed to the agent runtime, and roots with valid git origins register repository routing metadata.
+
+`--worker-dir` is repeatable up to 20 paths. Each path must already exist and be a directory. If you don't pass `--worker-dir`, the CLI uses the current working directory.
+
+Before you start, enable self-hosted workers in **Dashboard** > **Cloud Agents** > **Self-Hosted**. Use writable paths under `$HOME` unless your own machine image guarantees another writable location.
+
+Example setup:
+
+```bash
+export WORKER_ROOT="$HOME/cursor-repos/my-org"
+mkdir -p "$WORKER_ROOT"
+
+git clone git@github.com:my-org/app.git "$WORKER_ROOT/app"
+git clone git@github.com:my-org/infra.git "$WORKER_ROOT/infra"
+
+export CURSOR_API_KEY="<key>"
+```
+
+Run a preflight check before starting the worker:
+
+```bash
+agent worker \
+  --pool \
+  --pool-name app-infra \
+  --name app-infra-worker \
+  --worker-dir "$WORKER_ROOT/app" \
+  --worker-dir "$WORKER_ROOT/infra" \
+  debug --json
+```
+
+Start the worker with the same roots:
+
+```bash
+agent worker \
+  --pool \
+  --pool-name app-infra \
+  --name app-infra-worker \
+  --worker-dir "$WORKER_ROOT/app" \
+  --worker-dir "$WORKER_ROOT/infra" \
+  start --verbose
+```
+
+Place worker options before `start` or `debug`. Leave the process running under a supervisor like `systemd`, `tmux`, `launchd`, Kubernetes, or your own process manager.
+
+Verbose startup logs are the source of truth for registered roots. A successful multi-repo worker shows each derived repo label, the workspace paths, and the repository URLs:
+
+```text
+repo=my-org/app
+repo=my-org/infra
+workspacePaths: [app, infra]
+x-repository-urls: ["git@github.com:my-org/app.git","git@github.com:my-org/infra.git"]
+```
+
+The dashboard currently displays a self-hosted worker under its primary repo.
+There is no named self-hosted multi-repo environment object in the portal yet.
+This can look like only the first repo is registered. Check `workspacePaths`
+and `x-repository-urls` in verbose logs to confirm all roots. To make another
+repo primary, put its `--worker-dir` first.
+
+Use `--name` and `--pool-name` to make multi-repo workers recognizable in the dashboard and triggers.
+
+In pool mode, one Cloud Agent claims the worker at a time. Without `--pool`, shared assignment is allowed. Add `--management-addr 0.0.0.0:8080` before `start` when you need `/healthz`, `/readyz`, and `/metrics` for an orchestrator.
+
+Non-git directories can be execution roots, but they don't contribute repo routing metadata. All repos needed by the agent must already be cloned and accessible to the worker before the process starts. The worker process also needs filesystem and SCM access to each root.
 
 ## Pool names
 
@@ -97,7 +164,7 @@ Group pool workers under a name when you want sessions to route to a specific su
 The `--pool-name` flag tags the worker with a `pool=<name>` label the backend uses for routing:
 
 ```bash
-agent worker start --pool --pool-name gpu
+agent worker --pool --pool-name gpu start
 ```
 
 When `--pool-name` is omitted, the worker joins the `default` pool. Workers from CLI versions that predate the flag also match the default pool, so you can roll out pool names gradually without disrupting existing fleets.
@@ -106,7 +173,7 @@ Set the pool name from the environment when an orchestrator injects config:
 
 ```bash
 export CURSOR_WORKER_POOL_NAME=gpu
-agent worker start --pool
+agent worker --pool start
 ```
 
 `--pool-name` requires `--pool` (or the legacy `--single-use` alias). Multi-use workers don't belong to a pool.
@@ -163,9 +230,11 @@ Labels are key-value pairs that describe a worker. They control how Cloud Agent 
 Good for quick testing or small pools:
 
 ```bash
-agent worker start --pool \
+agent worker \
+  --pool \
   --label team=backend \
-  --label env=production
+  --label env=production \
+  start
 ```
 
 ### JSON file
@@ -181,7 +250,7 @@ Better for production where labels are managed as config:
 ```
 
 ```bash
-agent worker start --pool --labels-file labels.json
+agent worker --pool --labels-file labels.json start
 ```
 
 ### TOML file
@@ -195,7 +264,7 @@ capabilities = ["docker", "gpu"]
 ```
 
 ```bash
-agent worker start --pool --labels-file labels.toml
+agent worker --pool --labels-file labels.toml start
 ```
 
 ### Environment variable
@@ -204,7 +273,7 @@ Useful when the path is injected by your orchestrator:
 
 ```bash
 export CURSOR_WORKER_LABELS_FILE=/path/to/labels.json
-agent worker start --pool
+agent worker --pool start
 ```
 
 The `repo` and `pool` labels are reserved. `repo` comes from the worker directory's git remote. `pool` is set by [`--pool-name`](https://cursor.com/docs/cloud-agent/self-hosted-pool.md#pool-names). Don't set either manually.
@@ -317,7 +386,7 @@ curl --request GET \
 The management server exposes `GET /metrics`, `GET /healthz`, and `GET /readyz` when you start a worker with `--management-addr`:
 
 ```bash
-agent worker start --pool --management-addr ":8080"
+agent worker --pool --management-addr ":8080" start
 ```
 
 Scrape metrics from your worker:
@@ -374,12 +443,12 @@ The `cursor_self_hosted_worker_session_ends_total` counter includes a `reason` l
 ## CLI reference
 
 ```bash
-agent worker start [options]
+agent worker [options] start
 ```
 
 | Flag                           | Env var                              | Description                                                                                                                                                                                     |
 | ------------------------------ | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--worker-dir <path>`          |                                      | Working directory. Must be a git repo. Default: current directory.                                                                                                                              |
+| `--worker-dir <path>`          |                                      | Working directory. Repeatable up to 20 paths. Each path must exist and be a directory. Default: current directory.                                                                              |
 | `--management-addr <addr>`     |                                      | Address for `/healthz`, `/readyz`, and `/metrics` endpoints, for example `:8080`.                                                                                                               |
 | `--label <key=value>`          |                                      | Add a label. Repeatable. Mutually exclusive with `--labels-file`.                                                                                                                               |
 | `--labels-file <path>`         | `CURSOR_WORKER_LABELS_FILE`          | Path to JSON or TOML labels file. Mutually exclusive with `--label`.                                                                                                                            |

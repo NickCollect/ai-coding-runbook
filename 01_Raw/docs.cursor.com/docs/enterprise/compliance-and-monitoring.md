@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/compliance-and-monitoring
-fetched_at: 2026-05-18T05:02:44.119988+00:00
+fetched_at: 2026-06-08T05:24:58.324458+00:00
 fetch_method: mintlify_md
 ---
 
@@ -61,7 +61,7 @@ Audit logs are delivered as JSON and include metadata and event-specific fields:
 }
 ```
 
-The event types include:
+The `event_type` values include:
 
 - `login` - User login events (web or app)
 - `logout` - User logout events
@@ -84,6 +84,7 @@ The event types include:
 - `slack_share_summary` - Slack summary sharing settings
 - `slack_share_summary_in_external_channel` - External channel sharing
 - `slack_channel_repo_mappings` - Slack channel to repository mappings
+- `mcp_server_config` - MCP server configuration changes
 - `team_repo` - Repository actions (create, delete, update\_settings)
 - `create_directory_group` - Directory group creation
 - `update_directory_group` - Directory group updates
@@ -93,7 +94,13 @@ The event types include:
 - `remove_user_from_directory_group` - Removing users from directory groups
 - `privacy_mode` - Privacy Mode changes (scope: "user" or "team")
 - `team_rule` - Team rule management (create, update, delete)
+- `team_hook` - Team hooks management (create, update, delete)
+- `bugbot_installation` - Bugbot installation events
+- `bugbot_installation_settings` - Bugbot installation settings changes
+- `bugbot_repo_settings` - Bugbot repository settings changes
 - `bugbot_team_rule` - Bugbot-specific rule management (create, update, delete)
+- `bugbot_team_settings` - Bugbot team settings changes
+- `bugbot_bulk_repo_update` - Bugbot bulk repository update events
 - `team_command` - Custom team command management (create, update, delete)
 
 ### Searching and filtering

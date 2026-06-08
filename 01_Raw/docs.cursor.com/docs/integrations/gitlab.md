@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/gitlab
-fetched_at: 2026-05-05T19:55:40.217714+00:00
+fetched_at: 2026-06-08T05:24:58.469157+00:00
 fetch_method: mintlify_md
 ---
 
@@ -74,15 +74,15 @@ For other connection options beyond IP whitelisting, see [Advanced networking](h
 
 Self-hosted instances support multiple connection methods beyond IP whitelisting.
 
-### PrivateLink (AWS) or Private Service Connect (GCP)
+### AWS PrivateLink or Cloudflare Tunnel
 
-Available for Enterprise customers. Allow Cursor to access your instance over a private network connection. [Contact your Cursor representative](https://cursor.com/contact-sales?source=docs-bugbot-private-network) for setup.
+Available for Enterprise customers. Allow Cursor to access your instance over a private network connection. See [Private Connectivity](https://cursor.com/docs/enterprise/private-connectivity.md) or [contact your Cursor representative](https://cursor.com/contact-sales?source=docs-bugbot-private-network) for setup.
 
-**Best for:** Instances behind a firewall on a private network in AWS, Azure, or GCP
+**Best for:** Instances behind a firewall on a private network, including AWS-hosted instances and environments that can run `cloudflared`
 
-**Security:** HTTPS encryption with optional mTLS, PrivateLink/Service Connect, VPC allowlisting, service account access tokens
+**Security:** HTTPS encryption, AWS PrivateLink, Cloudflare Tunnel, VPC allowlisting, service account access tokens
 
-**Drawbacks:** Only supports public clouds with private networking connections between VPCs
+**Drawbacks:** Requires coordination with Cursor. Google Private Service Connect is not currently supported.
 
 ### Reverse Proxy Tunnel
 

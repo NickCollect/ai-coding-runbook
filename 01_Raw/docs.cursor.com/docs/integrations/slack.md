@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/slack
-fetched_at: 2026-05-05T19:55:40.361627+00:00
+fetched_at: 2026-06-08T05:24:58.508168+00:00
 fetch_method: mintlify_md
 ---
 
@@ -176,28 +176,32 @@ by mentioning a specific repo in your message.
 
 ### Routing Rules
 
-Routing rules let you define keywords that automatically map to specific repositories. When your message contains specific keywords, Cursor routes the agent to the associated repo.
+Routing rules let you define keywords that automatically map to a target. When your message contains a keyword, Cursor routes the agent to the associated repository or [cloud agent environment](https://cursor.com/docs/cloud-agent/setup.md). Environments can bundle multiple repositories, so one keyword can start an agent with every repo it needs already configured.
 
 #### Setting up routing rules
 
 1. Go to [Dashboard → Cloud Agents](https://www.cursor.com/dashboard/cloud-agents)
 2. Find the **Routing Rules** section
-3. Add keyword-to-repository mappings
+3. Add keyword-to-target mappings, pointing each keyword at a repository or an environment
 
 #### Example rules
 
-| Keyword    | Repository              |
+| Keyword    | Target                  |
 | :--------- | :---------------------- |
 | `frontend` | `acme/web-app`          |
 | `mobile`   | `acme/mobile-app`       |
 | `api`      | `acme/backend-services` |
-| `docs`     | `acme/documentation`    |
+| `platform` | `Platform` environment  |
 
 With these rules configured:
 
 - `@Cursor fix the frontend nav bug` → routes to `acme/web-app`
 - `@Cursor update the mobile onboarding flow` → routes to `acme/mobile-app`
-- `@Cursor add rate limiting to the api` → routes to `acme/backend-services`
+- `@Cursor add a migration across the platform` → starts in the `Platform` environment, with all its repos ready
+
+Targeting an environment is useful for multi-repo environments. Learn how to
+configure one in the [cloud agent docs](https://cursor.com/docs/cloud-agent/setup.md), including
+[multi-repo environments](https://cursor.com/docs/cloud-agent/setup.md#multi-repo-environments).
 
 #### How routing works
 
@@ -205,7 +209,7 @@ Cursor evaluates your message in this order:
 
 1. **Your message content** — Repository names or keywords in your prompt
 2. **Recent agent activity** — Repositories you've used recently
-3. **Routing rules** — Custom keyword-to-repo mappings
+3. **Routing rules** — Custom keyword-to-target mappings (repository or environment)
 4. **Channel default** — The repository set for this channel
 5. **Default repository** — Fallback when no match is found
 

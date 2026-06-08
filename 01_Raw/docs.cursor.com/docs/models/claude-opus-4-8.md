@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/claude-opus-4-8
-fetched_at: 2026-06-01T05:54:49.278084+00:00
+fetched_at: 2026-06-08T05:24:58.708183+00:00
 fetch_method: mintlify_md
 ---
 
@@ -30,7 +30,7 @@ Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage 
 
 A **Fast mode** tier (`claude-opus-4-8-fast`) is available for roughly 2.5x faster output. It requires Max Mode and bills at $10/M input and $50/M output tokens, 3x lower than Opus 4.7 fast mode. Use it selectively for time-sensitive or critical work.
 
-All Opus 4.8 prompts bill at the base per-token rates in the table above, including when you use Max Mode and context goes above 200k. There is no separate long-context multiplier for Opus 4.8; up to 1M tokens at the same rates.
+All Opus 4.8 prompts bill at the base per-token rates in the table above, including when you use Max Mode and context goes above 300k. There is no separate long-context multiplier for Opus 4.8; up to 1M tokens at the same rates.
 
 Opus 4.8 supports a thinking variant for deeper reasoning. We recommend using the high thinking variant for the strongest results.
 

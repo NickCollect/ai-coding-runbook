@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/network-configuration
-fetched_at: 2026-05-25T05:15:51.021701+00:00
+fetched_at: 2026-06-08T05:24:58.406289+00:00
 fetch_method: mintlify_md
 ---
 
@@ -87,11 +87,34 @@ Rather than maintaining IP address lists (which can change), configure your fire
 - `*.cursor-cdn.com`
 - `*.cursorapi.com`
 
-## VPC peering
+We generally recommend allowlisting with the domain patterns above. However, if your firewall mandates granular subdomain allowlists without wildcards, use the following list:
 
-Cursor doesn't currently offer VPC peering or private connectivity options.
+- `api2.cursor.sh`: Used for most API requests.
+- `api5.cursor.sh`: Used for Cursor's agent requests.
+- `api3.cursor.sh`: Used for Cursor Tab requests (HTTP/2 only).
+- `repo42.cursor.sh`: Used for codebase indexing (HTTP/2 only).
+- `api4.cursor.sh`, `us-asia.gcpp.cursor.sh`, `us-eu.gcpp.cursor.sh`, `us-only.gcpp.cursor.sh`: Used for Cursor Tab requests depending on your location (HTTP/2 only).
+- `adminportal42.cursor.sh`: Used to configure SSO and domain verification.
+- `marketplace.cursorapi.com`, `cursor-cdn.com`, `downloads.cursor.com`, `anysphere-binaries.s3.us-east-1.amazonaws.com`: Used for client updates and downloading extensions from the extension marketplace.
+- `api5.cursor.sh`: Used for network access layer (NAL) requests. These subdomains are also used:
+  - `agent.api5.cursor.sh`
+  - `agentn.api5.cursor.sh`
+  - `agent.us.api5.cursor.sh`
+  - `agentn.us.api5.cursor.sh`
+  - `agent.global.api5.cursor.sh`
+  - `agentn.global.api5.cursor.sh`
+- `authenticate.cursor.sh`: Authorization endpoint.
+- `authenticator.cursor.sh`: Auth UI and login webview.
+- `prod.authentication.cursor.sh`: Production token issuer.
+- `authentication.cursor.sh`: JWT issuer (backend).
 
-However, when you run Cursor agents (either in the editor or via the CLI), they inherit your existing network configuration. If you run Cursor on a machine within your VPC, agent operations inherit:
+## Private connectivity
+
+Cursor supports [private connectivity](https://cursor.com/docs/enterprise/private-connectivity.md) for Enterprise teams that need Cloud Agents, Bugbot, or Cursor backend services to access private source control systems. Supported options include AWS PrivateLink and Cloudflare Tunnel.
+
+Cursor does not currently offer VPC peering or customer-facing Google Private Service Connect.
+
+When you run Cursor agents in the editor or via the CLI, they inherit your existing network configuration. If you run Cursor on a machine within your VPC, agent operations inherit:
 
 - Your network security groups
 - Your firewall rules
