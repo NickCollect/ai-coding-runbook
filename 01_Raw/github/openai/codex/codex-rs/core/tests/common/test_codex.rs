@@ -12,7 +12,7 @@ use std::time::Duration;
 use anyhow::Context;
 use anyhow::Result;
 use anyhow::anyhow;
-use codex_config::CloudRequirementsLoader;
+use codex_config::CloudConfigBundleLoader;
 use codex_core::CodexThread;
 use codex_core::ThreadManager;
 use codex_core::config::Config;
@@ -23,12 +23,14 @@ use codex_core::thread_store_from_config;
 use codex_exec_server::CreateDirectoryOptions;
 use codex_exec_server::ExecutorFileSystem;
 use codex_exec_server::RemoveOptions;
+use codex_extension_api::ExtensionRegistry;
 use codex_extension_api::empty_extension_registry;
 use codex_login::CodexAuth;
 use codex_model_provider_info::ModelProviderInfo;
 use codex_model_provider_info::built_in_model_providers;
 use codex_models_manager::bundled_models_response;
 use codex_protocol::models::PermissionProfile;
+use codex_protocol::openai_models::ModelInfo;
 use codex_protocol::openai_models::ModelsResponse;
 use codex_protocol::protocol::AskForApproval;
 use codex_protocol::protocol::EventMsg;
@@ -49,7 +51,7 @@ use crate::PathBufExt;
 use crate::TempDirExt;
 use crate::get_remote_test_env;
 use crate::load_default_config_for_test;
-use crate::load_default_config_for_test_with_cloud_requirements;
+use crate::load_default_config_for_test_with_cloud_config_bundle;
 use crate::responses::WebSocketTestServer;
 use crate::responses::output_value_to_text;
 use crate::responses::start_mock_server;
@@ -213,9 +215,10 @@ pub struct TestCodexBuilder {
     pre_build_hooks: Vec<Box<PreBuildHook>>,
     workspace_setups: Vec<Box<WorkspaceSetup>>,
     home: Option<Arc<TempDir>>,
-    cloud_requirements: Option<CloudRequirementsLoader>,
+    cloud_config_bundle: Option<CloudConfigBundleLoader>,
     user_shell_override: Option<Shell>,
     exec_server_url: Option<String>,
+    extensions: Arc<ExtensionRegistry<Config>>,
 }
 
 impl TestCodexBuilder {
@@ -236,6 +239,26 @@ impl TestCodexBuilder {
         let new_model = model.to_string();
         self.with_config(move |config| {
             config.model = Some(new_model);
+        })
+    }
+
+    pub fn with_model_info_override<T>(self, model: &str, override_model_info: T) -> Self
+    where
+        T: FnOnce(&mut ModelInfo) + Send + 'static,
+    {
+        let model = model.to_string();
+        self.with_config(move |config| {
+            let model_catalog = config.model_catalog.get_or_insert_with(|| {
+                bundled_models_response()
+                    .unwrap_or_else(|err| panic!("bundled models.json should parse: {err}"))
+            });
+            let model_info = model_catalog
+                .models
+                .iter_mut()
+                .find(|model_info| model_info.slug == model)
+                .unwrap_or_else(|| panic!("{model} should exist in the configured model catalog"));
+            override_model_info(model_info);
+            config.model = Some(model);
         })
     }
 
@@ -262,8 +285,11 @@ impl TestCodexBuilder {
         self
     }
 
-    pub fn with_cloud_requirements(mut self, cloud_requirements: CloudRequirementsLoader) -> Self {
-        self.cloud_requirements = Some(cloud_requirements);
+    pub fn with_cloud_config_bundle(
+        mut self,
+        cloud_config_bundle: CloudConfigBundleLoader,
+    ) -> Self {
+        self.cloud_config_bundle = Some(cloud_config_bundle);
         self
     }
 
@@ -274,6 +300,11 @@ impl TestCodexBuilder {
 
     pub fn with_exec_server_url(mut self, exec_server_url: impl Into<String>) -> Self {
         self.exec_server_url = Some(exec_server_url.into());
+        self
+    }
+
+    pub fn with_extensions(mut self, extensions: Arc<ExtensionRegistry<Config>>) -> Self {
+        self.extensions = extensions;
         self
     }
 
@@ -470,7 +501,7 @@ impl TestCodexBuilder {
             codex_core::test_support::auth_manager_from_auth(auth.clone()),
             SessionSource::Exec,
             Arc::clone(&environment_manager),
-            empty_extension_registry(),
+            Arc::clone(&self.extensions),
             /*analytics_events_client*/ None,
             thread_store,
             state_db.clone(),
@@ -545,8 +576,8 @@ impl TestCodexBuilder {
         for hook in self.pre_build_hooks.drain(..) {
             hook(home.path());
         }
-        let mut config = if let Some(cloud_requirements) = self.cloud_requirements.take() {
-            load_default_config_for_test_with_cloud_requirements(home, cloud_requirements).await
+        let mut config = if let Some(cloud_config_bundle) = self.cloud_config_bundle.take() {
+            load_default_config_for_test_with_cloud_config_bundle(home, cloud_config_bundle).await
         } else {
             load_default_config_for_test(home).await
         };
@@ -769,7 +800,7 @@ impl TestCodex {
                 responsesapi_client_metadata: None,
                 additional_context: Default::default(),
                 thread_settings: codex_protocol::protocol::ThreadSettingsOverrides {
-                    cwd: Some(self.config.cwd.to_path_buf()),
+                    cwd: Some(self.config.cwd.clone()),
                     approval_policy: Some(approval_policy),
                     sandbox_policy: Some(sandbox_policy),
                     permission_profile,
@@ -841,6 +872,10 @@ impl TestCodexHarness {
 
     pub fn cwd(&self) -> &Path {
         self.test.config.cwd.as_path()
+    }
+
+    pub fn cwd_abs(&self) -> AbsolutePathBuf {
+        self.test.config.cwd.clone()
     }
 
     pub fn path(&self, rel: impl AsRef<Path>) -> PathBuf {
@@ -1031,9 +1066,10 @@ pub fn test_codex() -> TestCodexBuilder {
         pre_build_hooks: vec![],
         workspace_setups: vec![],
         home: None,
-        cloud_requirements: None,
+        cloud_config_bundle: None,
         user_shell_override: None,
         exec_server_url: None,
+        extensions: empty_extension_registry(),
     }
 }
 
