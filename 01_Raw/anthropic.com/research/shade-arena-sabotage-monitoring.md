@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/shade-arena-sabotage-monitoring
-fetched_at: 2026-06-01T05:55:52.593568+00:00
+fetched_at: 2026-06-08T05:26:55.239130+00:00
 title: "SHADE-Arena: Evaluating Sabotage and Monitoring in LLM Agents \\ Anthropic"
 ---
 
@@ -112,6 +112,10 @@ If you’re interested in working on these or related questions of Alignment Sci
 
 ## Related content
 
+### Making Claude a chemist
+
+[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
+
 ### Coding agents in the social sciences
 
 Results from a survey of 1,260 social scientists about AI and coding agent use.
@@ -123,9 +127,3 @@ Results from a survey of 1,260 social scientists about AI and coding agent use.
 An early update on what we've learned from Project Glasswing.
 
 [Read more](https://www.anthropic.com/research/glasswing-initial-update)
-
-### 2028: Two scenarios for global AI leadership
-
-Our views on the AI competition between the US and China.
-
-[Read more](https://www.anthropic.com/research/2028-ai-leadership)

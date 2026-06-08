@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench
-fetched_at: 2026-06-01T05:55:28.471181+00:00
+fetched_at: 2026-06-08T05:26:09.657289+00:00
 title: "Evaluating Claude\u2019s bioinformatics research capabilities with BioMysteryBench \\ Anthropic"
 ---
 
@@ -180,6 +180,10 @@ If you are interested in understanding how models perform on difficult verifiabl
 
 ## Related content
 
+### Making Claude a chemist
+
+[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
+
 ### Coding agents in the social sciences
 
 Results from a survey of 1,260 social scientists about AI and coding agent use.
@@ -191,12 +195,6 @@ Results from a survey of 1,260 social scientists about AI and coding agent use.
 An early update on what we've learned from Project Glasswing.
 
 [Read more](https://www.anthropic.com/research/glasswing-initial-update)
-
-### 2028: Two scenarios for global AI leadership
-
-Our views on the AI competition between the US and China.
-
-[Read more](https://www.anthropic.com/research/2028-ai-leadership)
 
 ## Subscribe to Anthropic Science
 

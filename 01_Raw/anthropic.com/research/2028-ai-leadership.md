@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/2028-ai-leadership
-fetched_at: 2026-06-01T05:54:57.530748+00:00
+fetched_at: 2026-06-08T05:25:10.876394+00:00
 title: "2028: Two scenarios for global AI leadership \\ Anthropic"
 ---
 
@@ -191,6 +191,10 @@ America and its allies have developed both the world’s most capable frontier A
 
 ## Related content
 
+### Making Claude a chemist
+
+[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
+
 ### Coding agents in the social sciences
 
 Results from a survey of 1,260 social scientists about AI and coding agent use.
@@ -202,9 +206,3 @@ Results from a survey of 1,260 social scientists about AI and coding agent use.
 An early update on what we've learned from Project Glasswing.
 
 [Read more](https://www.anthropic.com/research/glasswing-initial-update)
-
-### Teaching Claude why
-
-New research on how we've reduced agentic misalignment.
-
-[Read more](https://www.anthropic.com/research/teaching-claude-why)

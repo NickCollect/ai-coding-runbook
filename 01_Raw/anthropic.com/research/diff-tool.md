@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/diff-tool
-fetched_at: 2026-06-01T05:55:22.793577+00:00
+fetched_at: 2026-06-08T05:25:51.084296+00:00
 title: "A \u201cdiff\u201d tool for AI: Finding behavioral differences in new models \\ Anthropic"
 ---
 
@@ -114,6 +114,10 @@ This post was authored by Thomas Jiralerspong (Anthropic Fellows Program) and Tr
 
 ## Related content
 
+### Making Claude a chemist
+
+[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
+
 ### Coding agents in the social sciences
 
 Results from a survey of 1,260 social scientists about AI and coding agent use.
@@ -125,9 +129,3 @@ Results from a survey of 1,260 social scientists about AI and coding agent use.
 An early update on what we've learned from Project Glasswing.
 
 [Read more](https://www.anthropic.com/research/glasswing-initial-update)
-
-### 2028: Two scenarios for global AI leadership
-
-Our views on the AI competition between the US and China.
-
-[Read more](https://www.anthropic.com/research/2028-ai-leadership)

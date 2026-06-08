@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/donating-open-source-petri
-fetched_at: 2026-06-01T05:55:20.751977+00:00
+fetched_at: 2026-06-08T05:25:54.288596+00:00
 title: "Donating our open-source alignment tool \\ Anthropic"
 ---
 
@@ -34,6 +34,10 @@ Instructions to install and use Petri can be found on the [Petri website](https:
 
 ## Related content
 
+### Making Claude a chemist
+
+[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
+
 ### Coding agents in the social sciences
 
 Results from a survey of 1,260 social scientists about AI and coding agent use.
@@ -45,9 +49,3 @@ Results from a survey of 1,260 social scientists about AI and coding agent use.
 An early update on what we've learned from Project Glasswing.
 
 [Read more](https://www.anthropic.com/research/glasswing-initial-update)
-
-### 2028: Two scenarios for global AI leadership
-
-Our views on the AI competition between the US and China.
-
-[Read more](https://www.anthropic.com/research/2028-ai-leadership)

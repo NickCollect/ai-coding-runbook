@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/project-fetch-robot-dog
-fetched_at: 2026-06-01T05:55:51.495982+00:00
+fetched_at: 2026-06-08T05:26:48.059030+00:00
 title: "Project Fetch: Can Claude train a robot dog? \\ Anthropic"
 ---
 
@@ -181,6 +181,10 @@ The dogs are in their kennels at the moment. But we’ll let them out again soon
 
 ## Related content
 
+### Making Claude a chemist
+
+[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
+
 ### Coding agents in the social sciences
 
 Results from a survey of 1,260 social scientists about AI and coding agent use.
@@ -192,12 +196,6 @@ Results from a survey of 1,260 social scientists about AI and coding agent use.
 An early update on what we've learned from Project Glasswing.
 
 [Read more](https://www.anthropic.com/research/glasswing-initial-update)
-
-### 2028: Two scenarios for global AI leadership
-
-Our views on the AI competition between the US and China.
-
-[Read more](https://www.anthropic.com/research/2028-ai-leadership)
 
 ## Subscribe to the Frontier Red Team newsletter
 

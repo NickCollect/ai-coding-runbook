@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/next-generation-constitutional-classifiers
-fetched_at: 2026-06-01T05:55:44.996516+00:00
+fetched_at: 2026-06-08T05:26:40.246341+00:00
 title: "Next-generation Constitutional Classifiers: More efficient protection against universal jailbreaks \\ Anthropic"
 ---
 
@@ -12,7 +12,7 @@ Jan 9, 2026
 
 [Read the paper](https://arxiv.org/abs/2601.04603)
 
-![Next-generation Constitutional Classifiers: More efficient protection against universal jailbreaks](https://www-cdn.anthropic.com/images/4zrzovbb/website/43abe7e54b56a891e74a8542944dfbd33f07f49c-1000x1000.svg)
+![Next-generation Constitutional Classifiers: More efficient protection against universal jailbreaks](https://www-cdn.anthropic.com/images/4zrzovbb/website/45fcb3d623c6983e268d91f0803f86f231044127-2000x1125.png)
 
 Large language models remain vulnerable to jailbreaks—techniques that can circumvent safety guardrails and elicit harmful information. Over time, we’ve implemented a variety of protections that have made our models much less likely to assist with dangerous user queries—in particular relating to the production of chemical, biological, radiological, or nuclear weapons (CBRN). Nevertheless, no AI systems currently on the market have perfectly robust defenses.
 
@@ -67,6 +67,10 @@ For more details about the Constitutional Classifiers++ method, see the [full pa
 
 ## Related content
 
+### Making Claude a chemist
+
+[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
+
 ### Coding agents in the social sciences
 
 Results from a survey of 1,260 social scientists about AI and coding agent use.
@@ -78,9 +82,3 @@ Results from a survey of 1,260 social scientists about AI and coding agent use.
 An early update on what we've learned from Project Glasswing.
 
 [Read more](https://www.anthropic.com/research/glasswing-initial-update)
-
-### 2028: Two scenarios for global AI leadership
-
-Our views on the AI competition between the US and China.
-
-[Read more](https://www.anthropic.com/research/2028-ai-leadership)

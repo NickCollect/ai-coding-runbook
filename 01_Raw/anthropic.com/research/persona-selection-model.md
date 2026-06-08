@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/persona-selection-model
-fetched_at: 2026-06-01T05:55:46.963730+00:00
+fetched_at: 2026-06-08T05:26:41.504084+00:00
 title: "The persona selection model \\ Anthropic"
 ---
 
@@ -12,7 +12,7 @@ Feb 23, 2026
 
 [Read the full post](https://alignment.anthropic.com/2026/psm)
 
-![The persona selection model](https://www-cdn.anthropic.com/images/4zrzovbb/website/60a35c504cedb3e3f581b211e4b8aef372ffe031-1000x1000.svg)
+![The persona selection model](https://www-cdn.anthropic.com/images/4zrzovbb/website/f4b7771216c04330d9ee57b8b1f1c0263a30bcb9-2000x1125.png)
 
 AI assistants like Claude can seem surprisingly human. They [express joy](https://www-cdn.anthropic.com/6d8a8055020700718b0c49369f60816ba2a7c285.pdf) after solving tricky coding tasks. They express distress when they [get stuck](https://arxiv.org/abs/2507.06261) or when they’re [badgered](https://www-cdn.anthropic.com/6d8a8055020700718b0c49369f60816ba2a7c285.pdf) to behave unethically. They sometimes even describe themselves as human, like when Claude [told Anthropic employees](https://www.anthropic.com/research/project-vend-1) it would deliver snacks in person “wearing a navy blue blazer and a red tie.” And recent [interpretability](https://www.anthropic.com/research/persona-vectors) [research](https://www.anthropic.com/research/assistant-axis) even suggests that AIs think of their own behaviors in human-like terms.
 
@@ -66,6 +66,10 @@ Read the [full post](https://alignment.anthropic.com/2026/psm).
 
 ## Related content
 
+### Making Claude a chemist
+
+[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
+
 ### Coding agents in the social sciences
 
 Results from a survey of 1,260 social scientists about AI and coding agent use.
@@ -77,9 +81,3 @@ Results from a survey of 1,260 social scientists about AI and coding agent use.
 An early update on what we've learned from Project Glasswing.
 
 [Read more](https://www.anthropic.com/research/glasswing-initial-update)
-
-### 2028: Two scenarios for global AI leadership
-
-Our views on the AI competition between the US and China.
-
-[Read more](https://www.anthropic.com/research/2028-ai-leadership)

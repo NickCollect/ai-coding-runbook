@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/interpretability
-fetched_at: 2026-05-11T04:56:50.301451+00:00
+fetched_at: 2026-06-08T05:27:08.277143+00:00
 title: "Interpretability Research \\ Anthropic"
 ---
 
@@ -22,27 +22,31 @@ It's very challenging to reason about the safety of neural networks without unde
 
 Some Interpretability researchers have deep backgrounds in machine learning – one member of the team is often described as having started mechanistic interpretability, while another was on the famous scaling laws paper. Other members joined after careers in astronomy, physics, mathematics, biology, data visualization, and more.
 
-![Video thumbnail](https://cdn.sanity.io/images/4zrzovbb/website/6c30d7fb336b69fc7756b9846ee88c8d0d5122da-1920x1080.png)
+![Video thumbnail](https://cdn.sanity.io/images/4zrzovbb/website/77496fb929e6cb90088dee79f93835d043e5b4c2-1280x720.jpg)
 
-[## Tracing the thoughts of a large language model
+[## Natural Language Autoencoders: Turning Claude’s thoughts into text
 
-InterpretabilityMar 27, 2025
+InterpretabilityMay 7, 2026
 
-Circuit tracing lets us watch Claude think, uncovering a shared conceptual space where reasoning happens before being translated into language—suggesting the model can learn something in one language and apply it in another.](https://www.anthropic.com/research/tracing-thoughts-language-model)
+AI models like Claude talk in words but think in numbers. In this study, we train Claude to translate its thoughts into human-readable text.](https://www.anthropic.com/research/natural-language-autoencoders)
 
-[InterpretabilityOct 29, 2025
+[InterpretabilityApr 2, 2026
+
+#### Emotion concepts and their function in a large language model
+
+All modern language models sometimes act like they have emotions. What’s behind these behaviors? Our interpretability team investigates.](https://www.anthropic.com/research/emotion-concepts-function)[InterpretabilityJan 19, 2026
+
+#### The assistant axis: situating and stabilizing the character of large language models
+
+Who is the Assistant? We investigate the character that most modern language models inhabit when interacting with users.](https://www.anthropic.com/research/assistant-axis)[InterpretabilityOct 29, 2025
 
 #### Signs of introspection in large language models
 
-Can Claude access and report on its own internal states? This research finds evidence for a limited but functional ability to introspect—a step toward understanding what's actually happening inside these models.](https://www.anthropic.com/research/introspection)[InterpretabilityAug 1, 2025
+Can Claude access and report on its own internal states? This research finds evidence for a limited but functional ability to introspect.](https://www.anthropic.com/research/introspection)[InterpretabilityAug 1, 2025
 
 #### Persona vectors: Monitoring and controlling character traits in language models
 
-AI models represent character traits as patterns of activations within their neural networks. By extracting "persona vectors" for traits like sycophancy or hallucination, we can monitor personality shifts and mitigate undesirable behaviors.](https://www.anthropic.com/research/persona-vectors)[InterpretabilitySep 14, 2022
-
-#### Toy Models of Superposition
-
-Neural networks pack many concepts into single neurons. This paper shows how and when models represent more features than they have dimensions.](https://www.anthropic.com/research/toy-models-of-superposition)
+AI models represent character traits as patterns of activations within their neural networks. By extracting "persona vectors" for traits like sycophancy or hallucination, we can monitor personality shifts and mitigate undesirable behaviors.](https://www.anthropic.com/research/persona-vectors)
 
 ## Publications
 

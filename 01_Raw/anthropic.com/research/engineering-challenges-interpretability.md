@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/engineering-challenges-interpretability
-fetched_at: 2026-06-01T05:55:27.379440+00:00
+fetched_at: 2026-06-08T05:26:01.220124+00:00
 title: "The engineering challenges of scaling interpretability \\ Anthropic"
 ---
 
@@ -72,6 +72,10 @@ If you’re an engineer who fits this bill, and who is passionate about AI safet
 
 ## Related content
 
+### Making Claude a chemist
+
+[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
+
 ### Coding agents in the social sciences
 
 Results from a survey of 1,260 social scientists about AI and coding agent use.
@@ -83,9 +87,3 @@ Results from a survey of 1,260 social scientists about AI and coding agent use.
 An early update on what we've learned from Project Glasswing.
 
 [Read more](https://www.anthropic.com/research/glasswing-initial-update)
-
-### 2028: Two scenarios for global AI leadership
-
-Our views on the AI competition between the US and China.
-
-[Read more](https://www.anthropic.com/research/2028-ai-leadership)

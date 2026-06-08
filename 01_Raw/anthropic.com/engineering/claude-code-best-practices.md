@@ -1,14 +1,8 @@
 ---
 source_url: https://www.anthropic.com/engineering/claude-code-best-practices
-fetched_at: 2026-06-01T05:54:47.620227+00:00
+fetched_at: 2026-06-08T05:24:56.642372+00:00
 title: "Best practices for Claude Code - Claude Code Docs"
 ---
-
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
 
 Claude Code is an agentic coding environment. Unlike a chatbot that answers questions and waits, Claude Code can read your files, run commands, make changes, and autonomously work through problems while you watch, redirect, or step away entirely.
 This changes how you work. Instead of writing code yourself and asking Claude to review it, you describe what you want and Claude figures out how to build it. Claude explores, plans, and implements.

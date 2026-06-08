@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/societal-impacts
-fetched_at: 2026-05-05T19:42:11.168606+00:00
+fetched_at: 2026-06-08T05:27:09.151220+00:00
 title: "Societal Impacts Research \\ Anthropic"
 ---
 
@@ -30,23 +30,23 @@ Though the Societal Impacts team is technical, they often pick research question
 
 We invited Claude.ai users to share how they use AI, what they dream it could make possible, and what they fear it might do. Nearly 81,000 people participated—the largest and most multilingual qualitative study of its kind. Here's what we found.](https://www.anthropic.com/81k-interviews)](https://www.anthropic.com/81k-interviews)
 
-[Societal ImpactsDec 2, 2025
+[Societal ImpactsFeb 18, 2026
 
-#### How AI is transforming work at Anthropic
+#### Measuring AI agent autonomy in practice
 
-We surveyed Anthropic engineers and researchers, conducted in-depth qualitative interviews, and studied internal Claude Code usage data to find out how AI use is changing how we do our jobs. We found that AI use is radically changing the nature of work for software developers.](https://www.anthropic.com/research/how-ai-is-transforming-work-at-anthropic)[Societal ImpactsDec 4, 2025
+How much autonomy do people grant agents? How does that change as people gain experience? We analyzed millions of human-agent interactions to answer these and other questions.](https://www.anthropic.com/research/measuring-agent-autonomy)[Societal ImpactsDec 4, 2025
 
 #### Introducing Anthropic Interviewer: What 1,250 professionals told us about working with AI
 
-We built an interview tool called Anthropic Interviewer. Powered by Claude, Anthropic Interviewer runs detailed interviews automatically and at unprecedented scale.](https://www.anthropic.com/research/anthropic-interviewer)[Societal ImpactsApr 21, 2025
+We built an interview tool called Anthropic Interviewer. Powered by Claude, Anthropic Interviewer runs detailed interviews automatically and at unprecedented scale.](https://www.anthropic.com/research/anthropic-interviewer)[Societal ImpactsDec 2, 2025
+
+#### How AI is transforming work at Anthropic
+
+We surveyed Anthropic engineers and researchers, conducted in-depth qualitative interviews, and studied internal Claude Code usage data to find out how AI use is changing how we do our jobs.](https://www.anthropic.com/research/how-ai-is-transforming-work-at-anthropic)[Societal ImpactsApr 21, 2025
 
 #### Values in the wild: Discovering and analyzing values in real-world language model interactions
 
-What values does Claude actually express during real conversations? Analyzing 700,000 interactions, this paper creates the first large-scale empirical taxonomy of AI values and finds that Claude adapts its expressed values to context—mirroring users in most cases, but resisting when core principles are at stake.](https://www.anthropic.com/research/values-wild)[Societal ImpactsFeb 15, 2022
-
-#### Predictability and Surprise in Large Generative Models
-
-Large models have predictable loss via scaling laws but unpredictable capabilities. This tension has significant policy implications.](https://www.anthropic.com/research/predictability-and-surprise-in-large-generative-models)
+What values does Claude actually express during real conversations? Analyzing 700,000 interactions, this paper creates the first large-scale empirical taxonomy of AI values.](https://www.anthropic.com/research/values-wild)
 
 ## Publications
 

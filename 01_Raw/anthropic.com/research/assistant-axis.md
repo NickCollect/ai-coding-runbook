@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/assistant-axis
-fetched_at: 2026-06-01T05:55:07.456210+00:00
+fetched_at: 2026-06-08T05:25:23.943213+00:00
 title: "The assistant axis: situating and stabilizing the character of large language models \\ Anthropic"
 ---
 
@@ -12,7 +12,7 @@ Jan 19, 2026
 
 [Read the full paper](https://arxiv.org/abs/2601.10387)
 
-![Graphs showing the Assistant Axis and an open-source model's projection on this axis during a long conversation.](https://www-cdn.anthropic.com/images/4zrzovbb/website/021f5a89f9b3ba1755f9a2315bc63be855259532-3840x1762.png)
+![Graphs showing the Assistant Axis and an open-source model's projection on this axis during a long conversation.](https://www-cdn.anthropic.com/images/4zrzovbb/website/536fa0ea001f4c0dcfaf3e63218f784bff8f3312-2000x1125.png)
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/021f5a89f9b3ba1755f9a2315bc63be855259532-3840x1762.png)
 
@@ -226,6 +226,10 @@ In collaboration with Neuronpedia, our researchers are also providing a [researc
 
 ## Related content
 
+### Making Claude a chemist
+
+[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
+
 ### Coding agents in the social sciences
 
 Results from a survey of 1,260 social scientists about AI and coding agent use.
@@ -237,9 +241,3 @@ Results from a survey of 1,260 social scientists about AI and coding agent use.
 An early update on what we've learned from Project Glasswing.
 
 [Read more](https://www.anthropic.com/research/glasswing-initial-update)
-
-### 2028: Two scenarios for global AI leadership
-
-Our views on the AI competition between the US and China.
-
-[Read more](https://www.anthropic.com/research/2028-ai-leadership)

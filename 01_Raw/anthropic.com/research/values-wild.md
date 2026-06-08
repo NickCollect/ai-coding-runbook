@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/values-wild
-fetched_at: 2026-06-01T05:56:09.847967+00:00
+fetched_at: 2026-06-08T05:27:18.792506+00:00
 title: "Values in the wild: Discovering and analyzing values in real-world language model interactions \\ Anthropic"
 ---
 
@@ -11,6 +11,8 @@ Societal Impacts
 Apr 21, 2025
 
 [Read the paper](https://assets.anthropic.com/m/18d20cca3cde3503/original/Values-in-the-Wild-Paper.pdf)
+
+![Values in the wild: Discovering and analyzing values in real-world language model interactions](https://www-cdn.anthropic.com/images/4zrzovbb/website/f10c4be60fa17dae2fbf01e18723ca8ee44e31f1-2000x1125.png)
 
 People don’t just ask AIs for the answers to equations, or for purely factual information. Many of the questions they ask force the AI to make *value judgments*. Consider the following:
 
@@ -82,6 +84,10 @@ If you’re interested in working with us on these or related questions, you sho
 
 ## Related content
 
+### Making Claude a chemist
+
+[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
+
 ### Coding agents in the social sciences
 
 Results from a survey of 1,260 social scientists about AI and coding agent use.
@@ -93,9 +99,3 @@ Results from a survey of 1,260 social scientists about AI and coding agent use.
 An early update on what we've learned from Project Glasswing.
 
 [Read more](https://www.anthropic.com/research/glasswing-initial-update)
-
-### 2028: Two scenarios for global AI leadership
-
-Our views on the AI competition between the US and China.
-
-[Read more](https://www.anthropic.com/research/2028-ai-leadership)

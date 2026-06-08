@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/reward-tampering
-fetched_at: 2026-06-01T05:55:55.002944+00:00
+fetched_at: 2026-06-08T05:26:55.593796+00:00
 title: "Sycophancy to subterfuge: Investigating reward tampering in language models  \\ Anthropic"
 ---
 
@@ -84,6 +84,10 @@ If you’d like to help us address these questions, or questions of AI Alignment
 
 ## Related content
 
+### Making Claude a chemist
+
+[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
+
 ### Coding agents in the social sciences
 
 Results from a survey of 1,260 social scientists about AI and coding agent use.
@@ -95,9 +99,3 @@ Results from a survey of 1,260 social scientists about AI and coding agent use.
 An early update on what we've learned from Project Glasswing.
 
 [Read more](https://www.anthropic.com/research/glasswing-initial-update)
-
-### 2028: Two scenarios for global AI leadership
-
-Our views on the AI competition between the US and China.
-
-[Read more](https://www.anthropic.com/research/2028-ai-leadership)
