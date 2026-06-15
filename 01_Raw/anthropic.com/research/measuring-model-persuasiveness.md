@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/measuring-model-persuasiveness
-fetched_at: 2026-06-08T05:26:34.336775+00:00
+fetched_at: 2026-06-15T06:18:49.021862+00:00
 title: "Measuring the Persuasiveness of Language Models \\ Anthropic"
 ---
 
@@ -167,6 +167,10 @@ Table 2: Pairwise t-test p values between each model/source. We applied the Fals
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -176,9 +180,3 @@ Table 2: Pairwise t-test p values between each model/source. We applied the Fals
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

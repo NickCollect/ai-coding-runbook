@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/how-australia-uses-claude
-fetched_at: 2026-06-08T05:26:16.216462+00:00
+fetched_at: 2026-06-15T06:18:35.719811+00:00
 title: "How Australia Uses Claude: Findings from the Anthropic Economic Index \\ Anthropic"
 ---
 
@@ -112,6 +112,10 @@ Keir Bradwell, Ria Strasser Galvis, Ryan Heller, Eva Lyubich, Jennifer Marintez,
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -121,9 +125,3 @@ Keir Bradwell, Ria Strasser Galvis, Ryan Heller, Eva Lyubich, Jennifer Marintez,
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/vibe-physics
-fetched_at: 2026-06-08T05:27:24.184784+00:00
+fetched_at: 2026-06-15T06:19:20.171511+00:00
 title: "Vibe physics: The AI grad student \\ Anthropic"
 ---
 
@@ -55,7 +55,7 @@ and out would pop the paper. We are not there yet, of course. I tried giving thi
 
 To go about this scientifically, I encapsulated all the work. The rules were strict:
 
-- Only give text prompts to [Claude Code](https://claude.ai/redirect/website.v1.5561e94a-5abc-4cd2-824b-2557f283a367/code). No editing files directly.
+- Only give text prompts to [Claude Code](https://claude.ai/redirect/website.v1.97eecff1-f7af-4339-b944-4925a6cf3900/code). No editing files directly.
 - Don’t cut and paste my own calculations into the chat.
 - But pasting Gemini or GPT calculations was OK, as long as they were only text-prompted.
 
@@ -65,7 +65,7 @@ My question was: is there a set of prompts, like instructions to a talented G2, 
 
 I knew from experience that LLMs struggle with context and organization over long projects. So I started by asking Claude to come up with a plan of attack: what tasks needed to be done in what order. I also asked GPT 5.2 and Gemini 3.0. Then, I had all three LLMs merge the best ideas from each, using web interfaces and copying one to another. Next, I gave those merges to Claude, asking it to break the outline into detailed subsections. The result is [here](https://www-cdn.anthropic.com/2595299ccf7f8b9a9c74823c24faaa5d9b216804.pdf). There were 102 separate tasks across seven stages.
 
-From there, I turned to [Claude Code](https://claude.ai/redirect/website.v1.5561e94a-5abc-4cd2-824b-2557f283a367/code), using the extension in VS Code.
+From there, I turned to [Claude Code](https://claude.ai/redirect/website.v1.97eecff1-f7af-4339-b944-4925a6cf3900/code), using the extension in VS Code.
 
 ![A screen grab of Claude code](https://www-cdn.anthropic.com/images/4zrzovbb/website/2277f287d82a9a6087bc70c6d16cfd6648634d7e-1600x967.jpg)
 
@@ -254,6 +254,10 @@ In addition to the growth in interest, the tools themselves have been steadily i
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -263,12 +267,6 @@ In addition to the growth in interest, the tools themselves have been steadily i
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)
 
 ## Subscribe to Anthropic Science
 

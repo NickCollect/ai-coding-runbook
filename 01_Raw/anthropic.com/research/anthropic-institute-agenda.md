@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/anthropic-institute-agenda
-fetched_at: 2026-06-08T05:25:21.689663+00:00
+fetched_at: 2026-06-15T06:18:07.119375+00:00
 title: "Focus areas for The Anthropic Institute \\ Anthropic"
 ---
 
@@ -142,6 +142,10 @@ AI-driven AI R&D holds within itself the potential for significant danger. As po
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -151,9 +155,3 @@ AI-driven AI R&D holds within itself the potential for significant danger. As po
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

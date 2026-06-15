@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/confidential-inference-trusted-vms
-fetched_at: 2026-06-08T05:25:40.805650+00:00
+fetched_at: 2026-06-15T06:18:23.241096+00:00
 title: "Confidential Inference via Trusted Virtual Machines \\ Anthropic"
 ---
 
@@ -86,6 +86,10 @@ If this discussion of Confidential Inference has inspired you to want to work wi
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -95,9 +99,3 @@ If this discussion of Confidential Inference has inspired you to want to work wi
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

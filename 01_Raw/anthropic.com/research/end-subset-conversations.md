@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/end-subset-conversations
-fetched_at: 2026-06-08T05:26:04.066224+00:00
+fetched_at: 2026-06-15T06:18:30.555129+00:00
 title: "Claude Opus 4 and 4.1 can now end a rare subset of conversations \\ Anthropic"
 ---
 
@@ -38,6 +38,10 @@ We’re treating this feature as an ongoing experiment and will continue refinin
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -47,9 +51,3 @@ We’re treating this feature as an ongoing experiment and will continue refinin
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

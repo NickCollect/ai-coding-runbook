@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/sleeper-agents-training-deceptive-llms-that-persist-through-safety-training
-fetched_at: 2026-06-08T05:26:57.028500+00:00
+fetched_at: 2026-06-15T06:19:07.559276+00:00
 title: "Sleeper Agents: Training Deceptive LLMs that Persist Through Safety Training \\ Anthropic"
 ---
 
@@ -16,6 +16,10 @@ Humans are capable of strategically deceptive behavior: behaving helpfully in mo
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -25,9 +29,3 @@ Humans are capable of strategically deceptive behavior: behaving helpfully in mo
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

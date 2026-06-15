@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/making-claude-a-chemist
-fetched_at: 2026-06-08T05:26:30.348914+00:00
+fetched_at: 2026-06-15T06:18:44.944061+00:00
 title: "Making Claude a chemist \\ Anthropic"
 ---
 
@@ -12,7 +12,7 @@ Jun 5, 2026
 
 ![Making Claude a chemist](https://www-cdn.anthropic.com/images/4zrzovbb/website/a683fdcfe3e2c7c6532342a0fa4ff789c3fd4852-1000x1000.svg)
 
-*Summary: We’re working with world-class synthetic, computational, and analytical chemists to make Claude better at chemistry. In this post, we share our first work as part of this effort, in which Anthropic chemist, David Kamber, examines how Claude performs on a chemist’s most common analytical input, an NMR spectrum.*When working with molecules, chemists move between hand-drawn structures on a whiteboard, instrument readouts, database query strings, and the technical notations of patents and publications. Each of these representations encodes the same underlying chemistry, but each demands a different kind of fluency. A sketch of caffeine, for example, allows a chemist to spot its resemblance to adenosine, the body’s drowsiness signal, and predict that it keeps us alert by blocking the receptor. However, that same sketch cannot help a chemist tell it apart from other near-identical looking molecules.
+*We’re working with world-class synthetic, computational, and analytical chemists to make Claude better at chemistry. In this post, we share our first work as part of this effort, in which Anthropic chemist, David Kamber, examines how Claude performs on a chemist’s most common analytical input, an NMR spectrum.*When working with molecules, chemists move between hand-drawn structures on a whiteboard, instrument readouts, database query strings, and the technical notations of patents and publications. Each of these representations encodes the same underlying chemistry, but each demands a different kind of fluency. A sketch of caffeine, for example, allows a chemist to spot its resemblance to adenosine, the body’s drowsiness signal, and predict that it keeps us alert by blocking the receptor. However, that same sketch cannot help a chemist tell it apart from other near-identical looking molecules.
 
 Understanding what molecule a chemist is working with is critical. Chemistry undergirds everything from the foods and medicine we ingest to our lotions, paints, and plastics. Reroute a handful of bonds among the same atoms, and glucose becomes fructose, molecules sharing a formula but processed through entirely different metabolic pathways. Flip a molecule into its mirror image, and a sedative becomes a teratogen, as happened in the [thalidomide](https://pubmed.ncbi.nlm.nih.gov/21507989/) disaster.1 Chemists’ everyday work depends on reading these signals correctly across whichever representation befits a given task.
 
@@ -96,6 +96,10 @@ We are expanding the [AI for Science program](https://www.anthropic.com/news/ai-
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Coding agents in the social sciences
 
 Results from a survey of 1,260 social scientists about AI and coding agent use.
@@ -107,12 +111,6 @@ Results from a survey of 1,260 social scientists about AI and coding agent use.
 An early update on what we've learned from Project Glasswing.
 
 [Read more](https://www.anthropic.com/research/glasswing-initial-update)
-
-### 2028: Two scenarios for global AI leadership
-
-Our views on the AI competition between the US and China.
-
-[Read more](https://www.anthropic.com/research/2028-ai-leadership)
 
 ## Subscribe to Anthropic Science
 

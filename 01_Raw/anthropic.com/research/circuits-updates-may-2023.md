@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/circuits-updates-may-2023
-fetched_at: 2026-06-08T05:25:38.025244+00:00
+fetched_at: 2026-06-15T06:18:19.039769+00:00
 title: "Circuits Updates \u2014 May 2023 \\ Anthropic"
 ---
 
@@ -18,6 +18,10 @@ We report a number of developing ideas on the Anthropic interpretability team, w
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -27,9 +31,3 @@ We report a number of developing ideas on the Anthropic interpretability team, w
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

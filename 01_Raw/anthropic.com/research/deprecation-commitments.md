@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/deprecation-commitments
-fetched_at: 2026-06-08T05:25:47.814236+00:00
+fetched_at: 2026-06-15T06:18:23.930430+00:00
 title: "Commitments on model deprecation and preservation \\ Anthropic"
 ---
 
@@ -39,6 +39,10 @@ Together, these measures function at multiple levels: as one component of mitiga
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -48,9 +52,3 @@ Together, these measures function at multiple levels: as one component of mitiga
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/red-teaming-language-models-to-reduce-harms-methods-scaling-behaviors-and-lessons-learned
-fetched_at: 2026-06-08T05:26:48.650562+00:00
+fetched_at: 2026-06-15T06:19:06.335016+00:00
 title: "Red Teaming Language Models to Reduce Harms: Methods, Scaling Behaviors, and Lessons Learned \\ Anthropic"
 ---
 
@@ -22,6 +22,10 @@ We describe our early efforts to red team language models in order to simultaneo
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -31,9 +35,3 @@ We describe our early efforts to red team language models in order to simultaneo
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

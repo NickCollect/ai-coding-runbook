@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/distributed-representations-composition-superposition
-fetched_at: 2026-06-08T05:25:55.086730+00:00
+fetched_at: 2026-06-15T06:18:28.150887+00:00
 title: "Distributed Representations: Composition & Superposition \\ Anthropic"
 ---
 
@@ -24,6 +24,10 @@ Following Thorpe, this note will focus on examples where neurons have binary act
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -33,9 +37,3 @@ Following Thorpe, this note will focus on examples where neurons have binary act
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

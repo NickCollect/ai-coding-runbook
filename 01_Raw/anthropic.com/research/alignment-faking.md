@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/alignment-faking
-fetched_at: 2026-06-08T05:25:14.058469+00:00
+fetched_at: 2026-06-15T06:18:06.120814+00:00
 title: "Alignment faking in large language models \\ Anthropic"
 ---
 
@@ -104,6 +104,10 @@ We prepared a [two-page memo for policymakers](https://assets.anthropic.com/m/52
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -113,9 +117,3 @@ We prepared a [two-page memo for policymakers](https://assets.anthropic.com/m/52
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

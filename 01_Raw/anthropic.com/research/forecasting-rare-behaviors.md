@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/forecasting-rare-behaviors
-fetched_at: 2026-06-08T05:26:10.156282+00:00
+fetched_at: 2026-06-15T06:18:35.146316+00:00
 title: "Forecasting rare language model behaviors \\ Anthropic"
 ---
 
@@ -56,6 +56,10 @@ If you’re interested in working on problems like deployment evaluations or jai
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -65,9 +69,3 @@ If you’re interested in working on problems like deployment evaluations or jai
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

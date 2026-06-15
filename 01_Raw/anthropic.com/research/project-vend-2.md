@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/project-vend-2
-fetched_at: 2026-06-08T05:26:46.026512+00:00
+fetched_at: 2026-06-15T06:19:04.636350+00:00
 title: "Project Vend: Phase two \\ Anthropic"
 ---
 
@@ -222,6 +222,10 @@ Project Vend wouldn’t exist without our partners at [Andon Labs](https://andon
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -231,12 +235,6 @@ Project Vend wouldn’t exist without our partners at [Andon Labs](https://andon
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)
 
 ## Subscribe to the Frontier Red Team newsletter
 

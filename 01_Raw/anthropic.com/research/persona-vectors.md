@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/persona-vectors
-fetched_at: 2026-06-08T05:26:41.276175+00:00
+fetched_at: 2026-06-15T06:18:57.714353+00:00
 title: "Persona vectors: Monitoring and controlling character traits in language models \\ Anthropic"
 ---
 
@@ -108,6 +108,10 @@ This research was led by participants in our [Anthropic Fellows](https://alignme
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -117,9 +121,3 @@ This research was led by participants in our [Anthropic Fellows](https://alignme
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

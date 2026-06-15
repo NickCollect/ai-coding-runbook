@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/india-brief-economic-index
-fetched_at: 2026-06-08T05:26:22.671763+00:00
+fetched_at: 2026-06-15T06:18:44.450563+00:00
 title: "India Country Brief: The Anthropic Economic Index \\ Anthropic"
 ---
 
@@ -110,6 +110,10 @@ Sally Aldous, Jake Eaton, Ria Strasser Galvis, Hanah Ho, Maxim Massenkoff, Peter
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -119,9 +123,3 @@ Sally Aldous, Jake Eaton, Ria Strasser Galvis, Hanah Ho, Maxim Massenkoff, Peter
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

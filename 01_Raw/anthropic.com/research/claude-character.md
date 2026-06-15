@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/claude-character
-fetched_at: 2026-06-08T05:25:40.564931+00:00
+fetched_at: 2026-06-15T06:18:18.058076+00:00
 title: "Claude\u2019s Character \\ Anthropic"
 ---
 
@@ -70,6 +70,10 @@ If character training has indeed made Claude 3 more interesting to talk to, this
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -79,9 +83,3 @@ If character training has indeed made Claude 3 more interesting to talk to, this
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

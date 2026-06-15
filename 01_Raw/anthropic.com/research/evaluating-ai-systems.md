@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/evaluating-ai-systems
-fetched_at: 2026-06-08T05:26:09.194149+00:00
+fetched_at: 2026-06-15T06:18:38.493601+00:00
 title: "Challenges in evaluating AI systems \\ Anthropic"
 ---
 
@@ -171,6 +171,10 @@ url = {[https://www.anthropic.com/index/evaluating-ai-systems](https://www.anthr
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -180,9 +184,3 @@ url = {[https://www.anthropic.com/index/evaluating-ai-systems](https://www.anthr
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/collective-constitutional-ai-aligning-a-language-model-with-public-input
-fetched_at: 2026-06-08T05:25:47.320537+00:00
+fetched_at: 2026-06-15T06:18:20.985781+00:00
 title: "Collective Constitutional AI: Aligning a Language Model with Public Input \\ Anthropic"
 ---
 
@@ -132,6 +132,10 @@ We believe that our work may be one of the first instances in which members of t
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -141,9 +145,3 @@ We believe that our work may be one of the first instances in which members of t
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/glasswing-initial-update
-fetched_at: 2026-06-08T05:26:15.508743+00:00
+fetched_at: 2026-06-15T06:18:39.521495+00:00
 title: "Project Glasswing: An initial update \\ Anthropic"
 ---
 
@@ -114,6 +114,10 @@ On the far side of these risks, there’s an encouraging world available to us: 
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -123,9 +127,3 @@ On the far side of these risks, there’s an encouraging world available to us: 
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### 2028: Two scenarios for global AI leadership
-
-Our views on the AI competition between the US and China.
-
-[Read more](https://www.anthropic.com/research/2028-ai-leadership)

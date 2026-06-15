@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/many-shot-jailbreaking
-fetched_at: 2026-06-08T05:26:30.329711+00:00
+fetched_at: 2026-06-15T06:18:49.036940+00:00
 title: "Many-shot jailbreaking \\ Anthropic"
 ---
 
@@ -96,6 +96,10 @@ All the technical details of our many-shot jailbreaking study are reported in ou
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -105,9 +109,3 @@ All the technical details of our many-shot jailbreaking study are reported in ou
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

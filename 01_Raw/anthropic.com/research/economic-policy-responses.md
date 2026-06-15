@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/economic-policy-responses
-fetched_at: 2026-06-08T05:26:02.233785+00:00
+fetched_at: 2026-06-15T06:18:31.930545+00:00
 title: "Preparing for AI\u2019s economic impact: exploring policy responses \\ Anthropic"
 ---
 
@@ -126,6 +126,10 @@ What's clear, though, is that proactive engagement between researchers, policyma
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -135,9 +139,3 @@ What's clear, though, is that proactive engagement between researchers, policyma
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

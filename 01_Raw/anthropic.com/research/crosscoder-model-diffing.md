@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/crosscoder-model-diffing
-fetched_at: 2026-06-08T05:25:45.749984+00:00
+fetched_at: 2026-06-15T06:18:21.247650+00:00
 title: "Insights on Crosscoder Model Diffing \\ Anthropic"
 ---
 
@@ -18,6 +18,10 @@ As ever, we'd ask readers to treat these results like those of a colleague shari
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -27,9 +31,3 @@ As ever, we'd ask readers to treat these results like those of a colleague shari
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/measuring-progress-on-scalable-oversight-for-large-language-models
-fetched_at: 2026-06-08T05:26:35.953855+00:00
+fetched_at: 2026-06-15T06:18:49.163967+00:00
 title: "Measuring Progress on Scalable Oversight for Large Language Models \\ Anthropic"
 ---
 
@@ -18,6 +18,10 @@ Developing safe and useful general-purpose AI systems will require us to make pr
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -27,9 +31,3 @@ Developing safe and useful general-purpose AI systems will require us to make pr
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

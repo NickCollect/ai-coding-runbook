@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/petri-open-source-auditing
-fetched_at: 2026-06-08T05:26:41.927061+00:00
+fetched_at: 2026-06-15T06:18:53.491013+00:00
 title: "Petri: An open-source auditing tool to accelerate AI safety research \\ Anthropic"
 ---
 
@@ -97,6 +97,10 @@ Helpful comments, discussions, and other assistance: Julius Steen, Chloe Loughri
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -106,9 +110,3 @@ Helpful comments, discussions, and other assistance: Julius Steen, Chloe Loughri
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/introducing-anthropic-science
-fetched_at: 2026-06-08T05:26:19.940619+00:00
+fetched_at: 2026-06-15T06:18:41.834821+00:00
 title: "Introducing our Science Blog \\ Anthropic"
 ---
 
@@ -44,6 +44,10 @@ If you have something you want to see covered here, please reach out to us at sc
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -53,12 +57,6 @@ If you have something you want to see covered here, please reach out to us at sc
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)
 
 ## Subscribe to Anthropic Science
 

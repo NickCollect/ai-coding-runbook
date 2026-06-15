@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/81k-economics
-fetched_at: 2026-06-08T05:25:08.141582+00:00
+fetched_at: 2026-06-15T06:18:00.937183+00:00
 title: "What 81,000 people told us about the economics of AI \\ Anthropic"
 ---
 
@@ -126,6 +126,10 @@ Additionally, we thank Miriam Chaum, Ankur Rathi, Santi Ruiz, and David Saunders
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -135,9 +139,3 @@ Additionally, we thank Miriam Chaum, Ankur Rathi, Santi Ruiz, and David Saunders
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

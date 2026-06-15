@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/influence-functions
-fetched_at: 2026-06-08T05:26:20.436508+00:00
+fetched_at: 2026-06-15T06:18:41.223289+00:00
 title: "Tracing Model Outputs to the Training Data \\ Anthropic"
 ---
 
@@ -60,6 +60,10 @@ The focus of this investigation was on pretrained models. We’re even more exci
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -69,9 +73,3 @@ The focus of this investigation was on pretrained models. We’re even more exci
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/labor-market-impacts
-fetched_at: 2026-06-08T05:26:30.000564+00:00
+fetched_at: 2026-06-15T06:18:46.303606+00:00
 title: "Labor market impacts of AI: A new measure and early evidence \\ Anthropic"
 ---
 
@@ -243,6 +243,10 @@ Tomlinson, K., Jaffe, S., Wang, W., Counts, S., & Suri, S. (2025). Working with 
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -252,9 +256,3 @@ Tomlinson, K., Jaffe, S., Wang, W., Counts, S., & Suri, S. (2025). Working with 
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

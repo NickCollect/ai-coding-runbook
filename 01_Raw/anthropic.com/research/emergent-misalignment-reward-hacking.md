@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/emergent-misalignment-reward-hacking
-fetched_at: 2026-06-08T05:26:02.687876+00:00
+fetched_at: 2026-06-15T06:18:32.897151+00:00
 title: "From shortcuts to sabotage: natural emergent misalignment from reward hacking \\ Anthropic"
 ---
 
@@ -97,6 +97,10 @@ Read [the full paper](https://assets.anthropic.com/m/74342f2c96095771/original/N
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -106,9 +110,3 @@ Read [the full paper](https://assets.anthropic.com/m/74342f2c96095771/original/N
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/tracing-thoughts-language-model
-fetched_at: 2026-06-08T05:27:17.796183+00:00
+fetched_at: 2026-06-15T06:19:16.182148+00:00
 title: "Tracing the thoughts of a large language model \\ Anthropic"
 ---
 
@@ -153,6 +153,10 @@ If you are interested in working with us to help interpret and improve AI models
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -162,9 +166,3 @@ If you are interested in working with us to help interpret and improve AI models
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)

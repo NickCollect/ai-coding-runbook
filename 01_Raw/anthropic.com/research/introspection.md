@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/introspection
-fetched_at: 2026-06-08T05:26:23.269824+00:00
+fetched_at: 2026-06-15T06:18:43.016813+00:00
 title: "Emergent introspective awareness in large language models \\ Anthropic"
 ---
 
@@ -152,6 +152,10 @@ We see several important directions. First, we need better evaluation methods—
 
 ## Related content
 
+### Paving the way for agents in biology
+
+[Read more](https://www.anthropic.com/research/agents-in-biology)
+
 ### Making Claude a chemist
 
 [Read more](https://www.anthropic.com/research/making-claude-a-chemist)
@@ -161,9 +165,3 @@ We see several important directions. First, we need better evaluation methods—
 Results from a survey of 1,260 social scientists about AI and coding agent use.
 
 [Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
-
-### Project Glasswing: An initial update
-
-An early update on what we've learned from Project Glasswing.
-
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)
