@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.109.1 (2026-06-09)
+
+Full Changelog: [v0.109.0...v0.109.1](https://github.com/anthropics/anthropic-sdk-python/compare/v0.109.0...v0.109.1)
+
+### Bug Fixes
+
+* **api:** add `frontier_llm` refusal category ([d3a806b](https://github.com/anthropics/anthropic-sdk-python/commit/d3a806b454d8aaf5806db11c651deebe61836131))
+
+## 0.109.0 (2026-06-09)
+
+Full Changelog: [v0.108.0...v0.109.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.108.0...v0.109.0)
+
+### Features
+
+* **api:** add support for Managed Agents deployments and environment variable credentials ([47633bf](https://github.com/anthropics/anthropic-sdk-python/commit/47633bff658d4aaced3cd920ef6782c48cf31a9a))
+
+## 0.108.0 (2026-06-09)
+
+Full Changelog: [v0.107.1...v0.108.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.107.1...v0.108.0)
+
+### Features
+
+* **api:** add support for claude-mythos-5 and claude-fable-5, with support for server-side fallbacks on refusal ([6b76649](https://github.com/anthropics/anthropic-sdk-python/commit/6b76649f99bd782d2300f2a6aa3f4a3f040af324))
+* **client:** adds client-side fallbacks middleware for API providers that do not support server-side fallbacks ([6b76649](https://github.com/anthropics/anthropic-sdk-python/commit/6b76649f99bd782d2300f2a6aa3f4a3f040af324))
+
 ## 0.107.1 (2026-06-07)
 
 Full Changelog: [v0.107.0...v0.107.1](https://github.com/anthropics/anthropic-sdk-python/compare/v0.107.0...v0.107.1)

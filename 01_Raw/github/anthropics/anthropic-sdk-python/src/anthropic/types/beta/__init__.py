@@ -27,6 +27,7 @@ from .skill_list_params import SkillListParams as SkillListParams
 from .vault_list_params import VaultListParams as VaultListParams
 from .beta_content_block import BetaContentBlock as BetaContentBlock
 from .beta_direct_caller import BetaDirectCaller as BetaDirectCaller
+from .beta_fallback_info import BetaFallbackInfo as BetaFallbackInfo
 from .beta_message_param import BetaMessageParam as BetaMessageParam
 from .beta_text_citation import BetaTextCitation as BetaTextCitation
 from .file_upload_params import FileUploadParams as FileUploadParams
@@ -34,6 +35,8 @@ from .agent_create_params import AgentCreateParams as AgentCreateParams
 from .agent_update_params import AgentUpdateParams as AgentUpdateParams
 from .beta_cache_creation import BetaCacheCreation as BetaCacheCreation
 from .beta_document_block import BetaDocumentBlock as BetaDocumentBlock
+from .beta_fallback_block import BetaFallbackBlock as BetaFallbackBlock
+from .beta_fallback_param import BetaFallbackParam as BetaFallbackParam
 from .beta_metadata_param import BetaMetadataParam as BetaMetadataParam
 from .beta_thinking_block import BetaThinkingBlock as BetaThinkingBlock
 from .beta_thinking_delta import BetaThinkingDelta as BetaThinkingDelta
@@ -71,6 +74,7 @@ from .beta_mcp_toolset_param import BetaMCPToolsetParam as BetaMCPToolsetParam
 from .beta_plain_text_source import BetaPlainTextSource as BetaPlainTextSource
 from .beta_server_tool_usage import BetaServerToolUsage as BetaServerToolUsage
 from .beta_tool_choice_param import BetaToolChoiceParam as BetaToolChoiceParam
+from .deployment_list_params import DeploymentListParams as DeploymentListParams
 from .beta_capability_support import BetaCapabilitySupport as BetaCapabilitySupport
 from .beta_mcp_tool_use_block import BetaMCPToolUseBlock as BetaMCPToolUseBlock
 from .beta_model_capabilities import BetaModelCapabilities as BetaModelCapabilities
@@ -82,14 +86,18 @@ from .skill_retrieve_response import SkillRetrieveResponse as SkillRetrieveRespo
 from .beta_cloud_config_params import BetaCloudConfigParams as BetaCloudConfigParams
 from .beta_content_block_param import BetaContentBlockParam as BetaContentBlockParam
 from .beta_direct_caller_param import BetaDirectCallerParam as BetaDirectCallerParam
+from .beta_fallback_info_param import BetaFallbackInfoParam as BetaFallbackInfoParam
 from .beta_message_delta_usage import BetaMessageDeltaUsage as BetaMessageDeltaUsage
 from .beta_output_config_param import BetaOutputConfigParam as BetaOutputConfigParam
 from .beta_text_citation_param import BetaTextCitationParam as BetaTextCitationParam
 from .beta_thinking_capability import BetaThinkingCapability as BetaThinkingCapability
 from .beta_user_location_param import BetaUserLocationParam as BetaUserLocationParam
+from .deployment_create_params import DeploymentCreateParams as DeploymentCreateParams
+from .deployment_update_params import DeploymentUpdateParams as DeploymentUpdateParams
 from .memory_store_list_params import MemoryStoreListParams as MemoryStoreListParams
 from .user_profile_list_params import UserProfileListParams as UserProfileListParams
 from .beta_advisor_result_block import BetaAdvisorResultBlock as BetaAdvisorResultBlock
+from .beta_fallback_block_param import BetaFallbackBlockParam as BetaFallbackBlockParam
 from .beta_managed_agents_agent import BetaManagedAgentsAgent as BetaManagedAgentsAgent
 from .beta_managed_agents_model import BetaManagedAgentsModel as BetaManagedAgentsModel
 from .beta_managed_agents_vault import BetaManagedAgentsVault as BetaManagedAgentsVault
@@ -111,6 +119,7 @@ from .beta_server_tool_use_block import BetaServerToolUseBlock as BetaServerTool
 from .beta_thinking_config_param import BetaThinkingConfigParam as BetaThinkingConfigParam
 from .beta_tool_choice_any_param import BetaToolChoiceAnyParam as BetaToolChoiceAnyParam
 from .beta_web_fetch_block_param import BetaWebFetchBlockParam as BetaWebFetchBlockParam
+from .deployment_run_list_params import DeploymentRunListParams as DeploymentRunListParams
 from .memory_store_create_params import MemoryStoreCreateParams as MemoryStoreCreateParams
 from .memory_store_update_params import MemoryStoreUpdateParams as MemoryStoreUpdateParams
 from .user_profile_create_params import UserProfileCreateParams as UserProfileCreateParams
@@ -132,6 +141,7 @@ from .beta_url_image_source_param import BetaURLImageSourceParam as BetaURLImage
 from .message_count_tokens_params import MessageCountTokensParams as MessageCountTokensParams
 from .beta_base64_pdf_source_param import BetaBase64PDFSourceParam as BetaBase64PDFSourceParam
 from .beta_file_image_source_param import BetaFileImageSourceParam as BetaFileImageSourceParam
+from .beta_managed_agents_schedule import BetaManagedAgentsSchedule as BetaManagedAgentsSchedule
 from .beta_message_iteration_usage import BetaMessageIterationUsage as BetaMessageIterationUsage
 from .beta_plain_text_source_param import BetaPlainTextSourceParam as BetaPlainTextSourceParam
 from .beta_raw_content_block_delta import BetaRawContentBlockDelta as BetaRawContentBlockDelta
@@ -156,6 +166,7 @@ from .beta_advisor_tool_result_block import BetaAdvisorToolResultBlock as BetaAd
 from .beta_advisor_tool_result_error import BetaAdvisorToolResultError as BetaAdvisorToolResultError
 from .beta_base64_image_source_param import BetaBase64ImageSourceParam as BetaBase64ImageSourceParam
 from .beta_cache_miss_system_changed import BetaCacheMissSystemChanged as BetaCacheMissSystemChanged
+from .beta_managed_agents_deployment import BetaManagedAgentsDeployment as BetaManagedAgentsDeployment
 from .beta_managed_agents_multiagent import BetaManagedAgentsMultiagent as BetaManagedAgentsMultiagent
 from .beta_search_result_block_param import BetaSearchResultBlockParam as BetaSearchResultBlockParam
 from .beta_self_hosted_config_params import BetaSelfHostedConfigParams as BetaSelfHostedConfigParams
@@ -182,6 +193,7 @@ from .beta_managed_agents_custom_skill import BetaManagedAgentsCustomSkill as Be
 from .beta_managed_agents_memory_store import BetaManagedAgentsMemoryStore as BetaManagedAgentsMemoryStore
 from .beta_managed_agents_model_config import BetaManagedAgentsModelConfig as BetaManagedAgentsModelConfig
 from .beta_managed_agents_skill_params import BetaManagedAgentsSkillParams as BetaManagedAgentsSkillParams
+from .beta_managed_agents_trigger_type import BetaManagedAgentsTriggerType as BetaManagedAgentsTriggerType
 from .beta_server_tool_caller_20260120 import BetaServerToolCaller20260120 as BetaServerToolCaller20260120
 from .beta_server_tool_use_block_param import BetaServerToolUseBlockParam as BetaServerToolUseBlockParam
 from .beta_user_profile_enrollment_url import BetaUserProfileEnrollmentURL as BetaUserProfileEnrollmentURL
@@ -201,6 +213,7 @@ from .beta_web_search_tool_result_error import BetaWebSearchToolResultError as B
 from .beta_advisor_redacted_result_block import BetaAdvisorRedactedResultBlock as BetaAdvisorRedactedResultBlock
 from .beta_cache_control_ephemeral_param import BetaCacheControlEphemeralParam as BetaCacheControlEphemeralParam
 from .beta_context_management_capability import BetaContextManagementCapability as BetaContextManagementCapability
+from .beta_managed_agents_deployment_run import BetaManagedAgentsDeploymentRun as BetaManagedAgentsDeploymentRun
 from .beta_mcp_tool_default_config_param import BetaMCPToolDefaultConfigParam as BetaMCPToolDefaultConfigParam
 from .beta_raw_content_block_delta_event import BetaRawContentBlockDeltaEvent as BetaRawContentBlockDeltaEvent
 from .beta_raw_content_block_start_event import BetaRawContentBlockStartEvent as BetaRawContentBlockStartEvent
@@ -219,6 +232,8 @@ from .beta_managed_agents_branch_checkout import BetaManagedAgentsBranchCheckout
 from .beta_managed_agents_commit_checkout import BetaManagedAgentsCommitCheckout as BetaManagedAgentsCommitCheckout
 from .beta_managed_agents_deleted_session import BetaManagedAgentsDeletedSession as BetaManagedAgentsDeletedSession
 from .beta_managed_agents_mcp_tool_config import BetaManagedAgentsMCPToolConfig as BetaManagedAgentsMCPToolConfig
+from .beta_managed_agents_schedule_params import BetaManagedAgentsScheduleParams as BetaManagedAgentsScheduleParams
+from .beta_managed_agents_trigger_context import BetaManagedAgentsTriggerContext as BetaManagedAgentsTriggerContext
 from .beta_thinking_config_adaptive_param import BetaThinkingConfigAdaptiveParam as BetaThinkingConfigAdaptiveParam
 from .beta_thinking_config_disabled_param import BetaThinkingConfigDisabledParam as BetaThinkingConfigDisabledParam
 from .beta_web_search_tool_20250305_param import BetaWebSearchTool20250305Param as BetaWebSearchTool20250305Param
@@ -237,11 +252,18 @@ from .beta_bash_code_execution_output_block import BetaBashCodeExecutionOutputBl
 from .beta_bash_code_execution_result_block import BetaBashCodeExecutionResultBlock as BetaBashCodeExecutionResultBlock
 from .beta_code_execution_tool_result_block import BetaCodeExecutionToolResultBlock as BetaCodeExecutionToolResultBlock
 from .beta_code_execution_tool_result_error import BetaCodeExecutionToolResultError as BetaCodeExecutionToolResultError
+from .beta_fallback_message_iteration_usage import (
+    BetaFallbackMessageIterationUsage as BetaFallbackMessageIterationUsage,
+)
 from .beta_managed_agents_agent_tool_config import BetaManagedAgentsAgentToolConfig as BetaManagedAgentsAgentToolConfig
 from .beta_managed_agents_always_ask_policy import BetaManagedAgentsAlwaysAskPolicy as BetaManagedAgentsAlwaysAskPolicy
+from .beta_managed_agents_deployment_status import (
+    BetaManagedAgentsDeploymentStatus as BetaManagedAgentsDeploymentStatus,
+)
 from .beta_managed_agents_multiagent_params import (
     BetaManagedAgentsMultiagentParams as BetaManagedAgentsMultiagentParams,
 )
+from .beta_managed_agents_unknown_run_error import BetaManagedAgentsUnknownRunError as BetaManagedAgentsUnknownRunError
 from .beta_tool_computer_use_20241022_param import BetaToolComputerUse20241022Param as BetaToolComputerUse20241022Param
 from .beta_tool_computer_use_20250124_param import BetaToolComputerUse20250124Param as BetaToolComputerUse20250124Param
 from .beta_tool_computer_use_20251124_param import BetaToolComputerUse20251124Param as BetaToolComputerUse20251124Param
@@ -325,11 +347,20 @@ from .beta_managed_agents_cache_creation_usage import (
 from .beta_managed_agents_deleted_memory_store import (
     BetaManagedAgentsDeletedMemoryStore as BetaManagedAgentsDeletedMemoryStore,
 )
+from .beta_managed_agents_file_resource_config import (
+    BetaManagedAgentsFileResourceConfig as BetaManagedAgentsFileResourceConfig,
+)
 from .beta_managed_agents_file_resource_params import (
     BetaManagedAgentsFileResourceParams as BetaManagedAgentsFileResourceParams,
 )
 from .beta_managed_agents_session_thread_agent import (
     BetaManagedAgentsSessionThreadAgent as BetaManagedAgentsSessionThreadAgent,
+)
+from .beta_managed_agents_system_content_block import (
+    BetaManagedAgentsSystemContentBlock as BetaManagedAgentsSystemContentBlock,
+)
+from .beta_managed_agents_system_message_event import (
+    BetaManagedAgentsSystemMessageEvent as BetaManagedAgentsSystemMessageEvent,
 )
 from .beta_memory_tool_20250818_create_command import (
     BetaMemoryTool20250818CreateCommand as BetaMemoryTool20250818CreateCommand,
@@ -415,6 +446,9 @@ from .beta_encrypted_code_execution_result_block import (
 from .beta_managed_agents_anthropic_skill_params import (
     BetaManagedAgentsAnthropicSkillParams as BetaManagedAgentsAnthropicSkillParams,
 )
+from .beta_managed_agents_manual_trigger_context import (
+    BetaManagedAgentsManualTriggerContext as BetaManagedAgentsManualTriggerContext,
+)
 from .beta_managed_agents_mcp_tool_config_params import (
     BetaManagedAgentsMCPToolConfigParams as BetaManagedAgentsMCPToolConfigParams,
 )
@@ -445,11 +479,32 @@ from .beta_code_execution_tool_result_error_param import (
 from .beta_managed_agents_always_ask_policy_param import (
     BetaManagedAgentsAlwaysAskPolicyParam as BetaManagedAgentsAlwaysAskPolicyParam,
 )
+from .beta_managed_agents_session_resource_config import (
+    BetaManagedAgentsSessionResourceConfig as BetaManagedAgentsSessionResourceConfig,
+)
+from .beta_managed_agents_agent_archived_run_error import (
+    BetaManagedAgentsAgentArchivedRunError as BetaManagedAgentsAgentArchivedRunError,
+)
 from .beta_managed_agents_agent_tool_config_params import (
     BetaManagedAgentsAgentToolConfigParams as BetaManagedAgentsAgentToolConfigParams,
 )
 from .beta_managed_agents_custom_tool_input_schema import (
     BetaManagedAgentsCustomToolInputSchema as BetaManagedAgentsCustomToolInputSchema,
+)
+from .beta_managed_agents_deployment_initial_event import (
+    BetaManagedAgentsDeploymentInitialEvent as BetaManagedAgentsDeploymentInitialEvent,
+)
+from .beta_managed_agents_deployment_paused_reason import (
+    BetaManagedAgentsDeploymentPausedReason as BetaManagedAgentsDeploymentPausedReason,
+)
+from .beta_managed_agents_file_not_found_run_error import (
+    BetaManagedAgentsFileNotFoundRunError as BetaManagedAgentsFileNotFoundRunError,
+)
+from .beta_managed_agents_schedule_trigger_context import (
+    BetaManagedAgentsScheduleTriggerContext as BetaManagedAgentsScheduleTriggerContext,
+)
+from .beta_managed_agents_vault_archived_run_error import (
+    BetaManagedAgentsVaultArchivedRunError as BetaManagedAgentsVaultArchivedRunError,
 )
 from .beta_request_mcp_server_url_definition_param import (
     BetaRequestMCPServerURLDefinitionParam as BetaRequestMCPServerURLDefinitionParam,
@@ -475,6 +530,12 @@ from .beta_managed_agents_always_allow_policy_param import (
 from .beta_managed_agents_mcp_server_url_definition import (
     BetaManagedAgentsMCPServerURLDefinition as BetaManagedAgentsMCPServerURLDefinition,
 )
+from .beta_managed_agents_skill_not_found_run_error import (
+    BetaManagedAgentsSkillNotFoundRunError as BetaManagedAgentsSkillNotFoundRunError,
+)
+from .beta_managed_agents_vault_not_found_run_error import (
+    BetaManagedAgentsVaultNotFoundRunError as BetaManagedAgentsVaultNotFoundRunError,
+)
 from .beta_memory_tool_20250818_str_replace_command import (
     BetaMemoryTool20250818StrReplaceCommand as BetaMemoryTool20250818StrReplaceCommand,
 )
@@ -486,6 +547,9 @@ from .beta_managed_agents_mcp_toolset_default_config import (
 )
 from .beta_managed_agents_session_agent_update_param import (
     BetaManagedAgentsSessionAgentUpdateParam as BetaManagedAgentsSessionAgentUpdateParam,
+)
+from .beta_managed_agents_system_content_block_param import (
+    BetaManagedAgentsSystemContentBlockParam as BetaManagedAgentsSystemContentBlockParam,
 )
 from .beta_webhook_session_thread_created_event_data import (
     BetaWebhookSessionThreadCreatedEventData as BetaWebhookSessionThreadCreatedEventData,
@@ -517,6 +581,15 @@ from .beta_managed_agents_agent_toolset20260401_params import (
 from .beta_managed_agents_agent_toolset_default_config import (
     BetaManagedAgentsAgentToolsetDefaultConfig as BetaManagedAgentsAgentToolsetDefaultConfig,
 )
+from .beta_managed_agents_mcp_egress_blocked_run_error import (
+    BetaManagedAgentsMCPEgressBlockedRunError as BetaManagedAgentsMCPEgressBlockedRunError,
+)
+from .beta_managed_agents_memory_store_resource_config import (
+    BetaManagedAgentsMemoryStoreResourceConfig as BetaManagedAgentsMemoryStoreResourceConfig,
+)
+from .beta_managed_agents_workspace_archived_run_error import (
+    BetaManagedAgentsWorkspaceArchivedRunError as BetaManagedAgentsWorkspaceArchivedRunError,
+)
 from .beta_request_mcp_server_tool_configuration_param import (
     BetaRequestMCPServerToolConfigurationParam as BetaRequestMCPServerToolConfigurationParam,
 )
@@ -525,6 +598,9 @@ from .beta_webhook_vault_credential_created_event_data import (
 )
 from .beta_webhook_vault_credential_deleted_event_data import (
     BetaWebhookVaultCredentialDeletedEventData as BetaWebhookVaultCredentialDeletedEventData,
+)
+from .beta_managed_agents_deployment_user_message_event import (
+    BetaManagedAgentsDeploymentUserMessageEvent as BetaManagedAgentsDeploymentUserMessageEvent,
 )
 from .beta_text_editor_code_execution_tool_result_block import (
     BetaTextEditorCodeExecutionToolResultBlock as BetaTextEditorCodeExecutionToolResultBlock,
@@ -547,17 +623,47 @@ from .beta_webhook_vault_credential_archived_event_data import (
 from .beta_managed_agents_custom_tool_input_schema_param import (
     BetaManagedAgentsCustomToolInputSchemaParam as BetaManagedAgentsCustomToolInputSchemaParam,
 )
+from .beta_managed_agents_deployment_paused_reason_error import (
+    BetaManagedAgentsDeploymentPausedReasonError as BetaManagedAgentsDeploymentPausedReasonError,
+)
+from .beta_managed_agents_environment_archived_run_error import (
+    BetaManagedAgentsEnvironmentArchivedRunError as BetaManagedAgentsEnvironmentArchivedRunError,
+)
+from .beta_managed_agents_error_deployment_paused_reason import (
+    BetaManagedAgentsErrorDeploymentPausedReason as BetaManagedAgentsErrorDeploymentPausedReason,
+)
 from .beta_managed_agents_multiagent_roster_entry_params import (
     BetaManagedAgentsMultiagentRosterEntryParams as BetaManagedAgentsMultiagentRosterEntryParams,
 )
 from .beta_managed_agents_session_multiagent_coordinator import (
     BetaManagedAgentsSessionMultiagentCoordinator as BetaManagedAgentsSessionMultiagentCoordinator,
 )
+from .beta_managed_agents_session_rate_limited_run_error import (
+    BetaManagedAgentsSessionRateLimitedRunError as BetaManagedAgentsSessionRateLimitedRunError,
+)
 from .beta_webhook_session_status_rescheduled_event_data import (
     BetaWebhookSessionStatusRescheduledEventData as BetaWebhookSessionStatusRescheduledEventData,
 )
 from .beta_webhook_session_status_run_started_event_data import (
     BetaWebhookSessionStatusRunStartedEventData as BetaWebhookSessionStatusRunStartedEventData,
+)
+from .beta_managed_agents_deployment_initial_event_params import (
+    BetaManagedAgentsDeploymentInitialEventParams as BetaManagedAgentsDeploymentInitialEventParams,
+)
+from .beta_managed_agents_deployment_system_message_event import (
+    BetaManagedAgentsDeploymentSystemMessageEvent as BetaManagedAgentsDeploymentSystemMessageEvent,
+)
+from .beta_managed_agents_environment_not_found_run_error import (
+    BetaManagedAgentsEnvironmentNotFoundRunError as BetaManagedAgentsEnvironmentNotFoundRunError,
+)
+from .beta_managed_agents_manual_deployment_paused_reason import (
+    BetaManagedAgentsManualDeploymentPausedReason as BetaManagedAgentsManualDeploymentPausedReason,
+)
+from .beta_managed_agents_memory_store_archived_run_error import (
+    BetaManagedAgentsMemoryStoreArchivedRunError as BetaManagedAgentsMemoryStoreArchivedRunError,
+)
+from .beta_managed_agents_organization_disabled_run_error import (
+    BetaManagedAgentsOrganizationDisabledRunError as BetaManagedAgentsOrganizationDisabledRunError,
 )
 from .beta_text_editor_code_execution_create_result_block import (
     BetaTextEditorCodeExecutionCreateResultBlock as BetaTextEditorCodeExecutionCreateResultBlock,
@@ -580,6 +686,9 @@ from .beta_managed_agents_agent_toolset20260401_read_input import (
 from .beta_managed_agents_agent_toolset20260401_write_input import (
     BetaManagedAgentsAgentToolset20260401WriteInput as BetaManagedAgentsAgentToolset20260401WriteInput,
 )
+from .beta_managed_agents_github_repository_resource_config import (
+    BetaManagedAgentsGitHubRepositoryResourceConfig as BetaManagedAgentsGitHubRepositoryResourceConfig,
+)
 from .beta_managed_agents_github_repository_resource_params import (
     BetaManagedAgentsGitHubRepositoryResourceParams as BetaManagedAgentsGitHubRepositoryResourceParams,
 )
@@ -591,6 +700,9 @@ from .beta_web_search_tool_result_block_param_content_param import (
 )
 from .beta_managed_agents_agent_toolset_default_config_params import (
     BetaManagedAgentsAgentToolsetDefaultConfigParams as BetaManagedAgentsAgentToolsetDefaultConfigParams,
+)
+from .beta_managed_agents_session_creation_rejected_run_error import (
+    BetaManagedAgentsSessionCreationRejectedRunError as BetaManagedAgentsSessionCreationRejectedRunError,
 )
 from .beta_text_editor_code_execution_tool_result_block_param import (
     BetaTextEditorCodeExecutionToolResultBlockParam as BetaTextEditorCodeExecutionToolResultBlockParam,
@@ -604,6 +716,12 @@ from .beta_text_editor_code_execution_view_result_block_param import (
 from .beta_webhook_vault_credential_refresh_failed_event_data import (
     BetaWebhookVaultCredentialRefreshFailedEventData as BetaWebhookVaultCredentialRefreshFailedEventData,
 )
+from .beta_managed_agents_deployment_user_define_outcome_event import (
+    BetaManagedAgentsDeploymentUserDefineOutcomeEvent as BetaManagedAgentsDeploymentUserDefineOutcomeEvent,
+)
+from .beta_managed_agents_session_resource_not_found_run_error import (
+    BetaManagedAgentsSessionResourceNotFoundRunError as BetaManagedAgentsSessionResourceNotFoundRunError,
+)
 from .beta_text_editor_code_execution_str_replace_result_block import (
     BetaTextEditorCodeExecutionStrReplaceResultBlock as BetaTextEditorCodeExecutionStrReplaceResultBlock,
 )
@@ -616,6 +734,51 @@ from .beta_code_execution_tool_result_block_param_content_param import (
 from .beta_text_editor_code_execution_create_result_block_param import (
     BetaTextEditorCodeExecutionCreateResultBlockParam as BetaTextEditorCodeExecutionCreateResultBlockParam,
 )
+from .beta_managed_agents_unknown_deployment_paused_reason_error import (
+    BetaManagedAgentsUnknownDeploymentPausedReasonError as BetaManagedAgentsUnknownDeploymentPausedReasonError,
+)
 from .beta_text_editor_code_execution_str_replace_result_block_param import (
     BetaTextEditorCodeExecutionStrReplaceResultBlockParam as BetaTextEditorCodeExecutionStrReplaceResultBlockParam,
+)
+from .beta_managed_agents_self_hosted_resources_unsupported_run_error import (
+    BetaManagedAgentsSelfHostedResourcesUnsupportedRunError as BetaManagedAgentsSelfHostedResourcesUnsupportedRunError,
+)
+from .beta_managed_agents_agent_archived_deployment_paused_reason_error import (
+    BetaManagedAgentsAgentArchivedDeploymentPausedReasonError as BetaManagedAgentsAgentArchivedDeploymentPausedReasonError,
+)
+from .beta_managed_agents_file_not_found_deployment_paused_reason_error import (
+    BetaManagedAgentsFileNotFoundDeploymentPausedReasonError as BetaManagedAgentsFileNotFoundDeploymentPausedReasonError,
+)
+from .beta_managed_agents_vault_archived_deployment_paused_reason_error import (
+    BetaManagedAgentsVaultArchivedDeploymentPausedReasonError as BetaManagedAgentsVaultArchivedDeploymentPausedReasonError,
+)
+from .beta_managed_agents_skill_not_found_deployment_paused_reason_error import (
+    BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError as BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError,
+)
+from .beta_managed_agents_vault_not_found_deployment_paused_reason_error import (
+    BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError as BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError,
+)
+from .beta_managed_agents_mcp_egress_blocked_deployment_paused_reason_error import (
+    BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError as BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError,
+)
+from .beta_managed_agents_workspace_archived_deployment_paused_reason_error import (
+    BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError as BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError,
+)
+from .beta_managed_agents_environment_archived_deployment_paused_reason_error import (
+    BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError as BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError,
+)
+from .beta_managed_agents_environment_not_found_deployment_paused_reason_error import (
+    BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError as BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError,
+)
+from .beta_managed_agents_memory_store_archived_deployment_paused_reason_error import (
+    BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError as BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError,
+)
+from .beta_managed_agents_organization_disabled_deployment_paused_reason_error import (
+    BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError as BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError,
+)
+from .beta_managed_agents_session_resource_not_found_deployment_paused_reason_error import (
+    BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError as BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError,
+)
+from .beta_managed_agents_self_hosted_resources_unsupported_deployment_paused_reason_error import (
+    BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError as BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError,
 )
